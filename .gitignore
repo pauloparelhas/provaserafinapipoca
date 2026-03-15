@@ -1,0 +1,14 @@
+# Claude local settings
+.claude/
+
+# Planejamento interno (não precisa no site)
+planejamento/
+00_COORDENACAO/
+
+# Materiais escola (imagens pesadas, já commitadas)
+# Não ignorar para manter histórico
+
+# Sistema
+Thumbs.db
+.DS_Store
+*.tmp
