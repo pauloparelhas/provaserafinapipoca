@@ -15,7 +15,9 @@
       "Bash(find \"C:\\\\Users\\\\P_8489\\\\OneDrive\\\\td junto outlook hotmail\\\\MAPLE BEAR\\\\provas\" -type f | grep -c \"\\\\\\\\.jpg$\")",
       "Bash(ls -lh \"/c/Users/paulo/OneDrive/td junto outlook hotmail/MAPLE BEAR/provas/02_ELA_INGLES/materiais_escola/\" | grep -E \"\\\\.\\(jpg|jpeg|png|pdf\\)$\")",
       "Bash(git:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(ls:*)",
+      "Bash(cd:*)"
     ]
   }
 }
