@@ -65,17 +65,46 @@ body.light .pt-label{color:#5b21b6;background:rgba(124,58,237,.06);border-color:
 body.light .kw-hl{color:#d97706;}
 
 /* KARAOKE BAR */
-.karaoke-bar{display:none;position:fixed;bottom:50px;left:50%;transform:translateX(-50%);
-  background:rgba(13,11,30,.92);backdrop-filter:blur(12px);border:2px solid rgba(167,139,250,.5);border-radius:18px;
-  padding:12px 22px;z-index:200;font-size:1.15rem;font-weight:700;color:rgba(255,255,255,.35);
-  flex-wrap:wrap;gap:6px 8px;justify-content:center;max-width:92%;box-shadow:0 8px 40px rgba(0,0,0,.5);}
-body.light .karaoke-bar{background:rgba(255,255,255,.96);color:rgba(0,0,0,.2);border-color:#c4b5fd;box-shadow:0 8px 40px rgba(124,58,237,.15);}
-.karaoke-bar .kw{display:inline-block;padding:2px 5px;border-radius:6px;transition:all .15s;}
-.karaoke-bar .kw.kw-active{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;transform:scale(1.18);
-  text-shadow:0 0 8px rgba(167,139,250,.6);box-shadow:0 2px 12px rgba(167,139,250,.4);}
-.karaoke-bar .kw.kw-done{color:rgba(255,255,255,.7);background:rgba(167,139,250,.12);border-bottom:2px solid rgba(167,139,250,.35);}
-body.light .karaoke-bar .kw.kw-active{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;}
-body.light .karaoke-bar .kw.kw-done{color:rgba(0,0,0,.55);background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.25);}
+.karaoke-bar{display:none;position:fixed;bottom:8px;left:50%;transform:translateX(-50%);
+  background:rgba(13,11,30,.93);backdrop-filter:blur(14px);border:2px solid rgba(167,139,250,.55);border-radius:20px;
+  padding:10px 18px 12px;z-index:200;max-width:92%;box-shadow:0 8px 40px rgba(0,0,0,.6);
+  flex-direction:column;gap:6px;align-items:center;}
+body.light .karaoke-bar{background:rgba(255,255,255,.97);border-color:#c4b5fd;}
+.karaoke-words{display:flex;flex-wrap:wrap;gap:4px 6px;justify-content:center;
+  font-size:1.1rem;font-weight:700;color:rgba(255,255,255,.4);}
+body.light .karaoke-words{color:rgba(0,0,0,.3);}
+.karaoke-words .kw{display:inline-block;padding:2px 5px;border-radius:6px;transition:all .15s;}
+.karaoke-words .kw.kw-active{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;transform:scale(1.18);text-shadow:0 0 8px rgba(167,139,250,.6);}
+.karaoke-words .kw.kw-done{color:rgba(255,255,255,.7);background:rgba(167,139,250,.12);border-bottom:2px solid rgba(167,139,250,.35);}
+body.light .karaoke-words .kw.kw-active{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;}
+body.light .karaoke-words .kw.kw-done{color:rgba(0,0,0,.55);}
+.karaoke-speed{display:flex;gap:8px;align-items:center;}
+.ks-btn{background:rgba(255,255,255,.07);border:2px solid transparent;border-radius:8px;font-size:.95rem;
+  cursor:pointer;padding:2px 9px;line-height:1;opacity:.55;transition:.15s;}
+.ks-btn:hover{opacity:.9;}
+.ks-btn.active{border-color:#a78bfa;background:rgba(167,139,250,.22);opacity:1;}
+body.light .ks-btn{background:rgba(0,0,0,.05);}
+body.light .ks-btn.active{border-color:#7c3aed;background:rgba(124,58,237,.15);}
+/* PRODUCT TOUR */
+.tour-bg{position:fixed;inset:0;z-index:9001;background:transparent;cursor:pointer;}
+.tour-spotlight{position:fixed;border-radius:12px;z-index:9002;pointer-events:none;
+  box-shadow:0 0 0 4000px rgba(0,0,0,.78),0 0 0 4px #a78bfa,0 0 28px 6px rgba(167,139,250,.65);
+  transition:left .3s,top .3s,width .3s,height .3s;}
+.tour-bubble{position:fixed;z-index:9003;background:linear-gradient(145deg,#1e1b4b,#312e81);
+  border:2px solid #a78bfa;border-radius:20px;padding:18px 22px;max-width:290px;
+  box-shadow:0 12px 40px rgba(0,0,0,.6);color:#fff;}
+body.light .tour-bubble{background:linear-gradient(145deg,#f5f3ff,#ede9fe);color:#1e1b4b;border-color:#7c3aed;}
+.tour-bubble-title{font-size:.78rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#a78bfa;margin-bottom:6px;}
+.tour-bubble-text{font-size:.97rem;font-weight:700;line-height:1.5;margin-bottom:14px;white-space:pre-line;}
+.tour-bubble-nav{display:flex;align-items:center;gap:8px;}
+.tour-btn{border:none;border-radius:10px;padding:7px 14px;font-size:.85rem;font-weight:800;cursor:pointer;transition:.15s;}
+.tour-btn-prev{background:rgba(167,139,250,.15);color:#c4b5fd;}
+.tour-btn-next{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;}
+.tour-btn-skip{margin-left:auto;background:none;color:rgba(255,255,255,.4);font-size:.78rem;font-weight:700;cursor:pointer;border:none;}
+body.light .tour-btn-skip{color:rgba(0,0,0,.4);}
+.tour-step-dots{display:flex;gap:5px;align-items:center;margin-right:4px;}
+.tour-dot{width:7px;height:7px;border-radius:50%;background:rgba(167,139,250,.3);}
+.tour-dot.active{background:#a78bfa;}
 
 /* SPEAKER ICON */
 .speak-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
@@ -350,12 +379,12 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="nav-logo">Serafina &bull; ELA-03</div>
+  <div class="nav-logo" id="navLogo">Serafina &bull; ELA-03</div>
   <div class="nav-score" id="scoreDisplay">&#11088; 0 XP</div>
-  <button class="nb" onclick="confirmGoHome()" title="Home">&#127968;</button>
-  <button class="nb" onclick="confirmRestart()" title="Restart">&#128260;</button>
-  <button class="nb" onclick="changeFontSize(-1)" title="Smaller"><span class="nb-text">A-</span></button>
-  <button class="nb" onclick="changeFontSize(1)" title="Bigger"><span class="nb-text">A+</span></button>
+  <button class="nb" id="btnHome" onclick="confirmGoHome()" title="Home">&#127968;</button>
+  <button class="nb" id="btnRestart" onclick="confirmRestart()" title="Restart">&#128260;</button>
+  <button class="nb" id="btnFontDown" onclick="changeFontSize(-1)" title="Smaller"><span class="nb-text">A-</span></button>
+  <button class="nb" id="btnFontUp" onclick="changeFontSize(1)" title="Bigger"><span class="nb-text">A+</span></button>
   <button class="nb" id="themeBtn" onclick="toggleTheme()" title="Theme">&#9728;&#65039;</button>
   <button class="nb" id="soundBtn" onclick="toggleSound()" title="Sound On/Off">&#128264;</button>
   <button class="nb" id="lockBtn" onclick="toggleLock()" title="Lock Screen">&#128275;</button>
@@ -500,7 +529,30 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
 </div>
 
 <!-- KARAOKE BAR -->
-<div id="karaokeBar" class="karaoke-bar"></div>
+<div id="karaokeBar" class="karaoke-bar">
+  <div class="karaoke-speed">
+    <button class="ks-btn" data-rate="0.6"  onclick="setKSpeed(0.6)"  title="Bem devagar">🐌</button>
+    <button class="ks-btn active" data-rate="0.75" onclick="setKSpeed(0.75)" title="Devagar">🐢</button>
+    <button class="ks-btn" data-rate="0.9"  onclick="setKSpeed(0.9)"  title="Normal">🐇</button>
+    <button class="ks-btn" data-rate="1.1"  onclick="setKSpeed(1.1)"  title="Rapido">🚀</button>
+  </div>
+  <div id="karaokeWords" class="karaoke-words"></div>
+</div>
+<!-- PRODUCT TOUR -->
+<div id="tourOverlay" style="display:none;">
+  <div class="tour-bg" id="tourBg" onclick="tourStep(1)"></div>
+  <div class="tour-spotlight" id="tourSpotlight"></div>
+  <div class="tour-bubble" id="tourBubble">
+    <div class="tour-bubble-title" id="tourTitle"></div>
+    <div class="tour-bubble-text" id="tourText"></div>
+    <div class="tour-bubble-nav">
+      <div class="tour-step-dots" id="tourDots"></div>
+      <button class="tour-btn tour-btn-prev" id="tourPrev" onclick="tourStep(-1)">&#9664; Voltar</button>
+      <button class="tour-btn tour-btn-next" id="tourNext" onclick="tourStep(1)">Pr&#243;ximo &#9654;</button>
+      <button class="tour-btn-skip" onclick="skipTour()">Pular</button>
+    </div>
+  </div>
+</div>
 <div class="confetti-container" id="confettiBox"></div>
 
 <script>
@@ -666,54 +718,48 @@ function hlKw(text, keyword) {
   return text.replace(new RegExp('('+keyword.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','i'), '<strong class="kw-hl">$1</strong>');
 }
 
-// ===== TTS WITH KARAOKE =====
+// ===== TTS / KARAOKE (boundary events) =====
+var karaokeRate = 0.75;
 var karaokeActive = false;
-function speakWithKaraoke(textEN, onEnd) {
-  if (!soundEnabled || !('speechSynthesis' in window)) { if (onEnd) onEnd(); return; }
+function speakWithKaraoke(textEN, onEnd){
+  if(!soundEnabled||!('speechSynthesis' in window)){if(onEnd)onEnd();return;}
   window.speechSynthesis.cancel();
-  karaokeActive = true;
-  var bar = document.getElementById('karaokeBar');
-  var words = textEN.split(/\s+/);
-  bar.innerHTML = words.map(function(w,i){ return '<span class="kw" data-i="'+i+'">'+w+'</span>'; }).join(' ');
-  bar.style.display = 'flex';
-
-  var voices = speechSynthesis.getVoices();
-  var voice = voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})
-    || voices.find(function(x){return x.lang.startsWith('en');});
-
-  var idx = 0;
-
-  function speakNextWord() {
-    if (!karaokeActive) { bar.style.display = 'none'; if (onEnd) onEnd(); return; }
-    if (idx >= words.length) {
-      bar.querySelectorAll('.kw').forEach(function(s){ s.classList.remove('kw-active'); s.classList.add('kw-done'); });
-      setTimeout(function() { bar.style.display = 'none'; karaokeActive = false; if (onEnd) onEnd(); }, 600);
-      return;
+  karaokeActive=true;
+  var bar=document.getElementById('karaokeBar');
+  var wordsDiv=document.getElementById('karaokeWords');
+  var words=textEN.split(/\s+/);
+  wordsDiv.innerHTML=words.map(function(w,i){return '<span class="kw" data-i="'+i+'">'+w+'</span>';}).join(' ');
+  bar.style.display='flex';
+  var spans=wordsDiv.querySelectorAll('.kw');
+  var idx=0;
+  var u=new SpeechSynthesisUtterance(textEN);
+  u.lang='en-US'; u.rate=karaokeRate; u.pitch=1.1;
+  if(typeof voice!=='undefined'&&voice) u.voice=voice;
+  u.onboundary=function(e){
+    if(e.name==='word'&&idx<spans.length){
+      if(idx>0){spans[idx-1].classList.remove('kw-active');spans[idx-1].classList.add('kw-done');}
+      spans[idx].classList.add('kw-active');
+      idx++;
     }
-    bar.querySelectorAll('.kw').forEach(function(s) {
-      var i = parseInt(s.getAttribute('data-i'));
-      s.classList.remove('kw-active');
-      if (i < idx) s.classList.add('kw-done');
-    });
-    var el = bar.querySelector('[data-i="'+idx+'"]');
-    if (el) { el.classList.remove('kw-done'); el.classList.add('kw-active'); }
-
-    var u = new SpeechSynthesisUtterance(words[idx]);
-    u.lang = 'en-US'; u.rate = 0.55; u.pitch = 1.1;
-    if (voice) u.voice = voice;
-    u.onend = function() { idx++; setTimeout(speakNextWord, 80); };
-    u.onerror = function() { idx++; setTimeout(speakNextWord, 80); };
-    speechSynthesis.speak(u);
-  }
-
-  speakNextWord();
+  };
+  u.onend=function(){
+    if(!karaokeActive)return;
+    spans.forEach(function(s){s.classList.remove('kw-active');s.classList.add('kw-done');});
+    setTimeout(function(){bar.style.display='none';karaokeActive=false;if(onEnd)onEnd();},500);
+  };
+  u.onerror=function(){bar.style.display='none';karaokeActive=false;if(onEnd)onEnd();};
+  window.speechSynthesis.speak(u);
 }
-
-function stopKaraoke() {
-  karaokeActive = false;
-  window.speechSynthesis.cancel();
-  var bar = document.getElementById('karaokeBar');
-  if (bar) bar.style.display = 'none';
+function stopKaraoke(){
+  karaokeActive=false;window.speechSynthesis.cancel();
+  var bar=document.getElementById('karaokeBar');
+  if(bar)bar.style.display='none';
+}
+function setKSpeed(rate){
+  karaokeRate=rate;
+  document.querySelectorAll('.ks-btn').forEach(function(b){
+    b.classList.toggle('active',parseFloat(b.dataset.rate)===rate);
+  });
 }
 
 function speakSimple(text, onEnd) {
@@ -1576,6 +1622,65 @@ function showResult(correct, total){
 
 // ===== INIT =====
 initFlags();
+setTimeout(startTour, 800);
+
+// ===== PRODUCT TOUR =====
+var tourSteps=[
+  {selector:'#navLogo',     title:'Projeto Serafina',       text:'Este é o nome da ferramenta! Toque para ir ao menu principal.'},
+  {selector:'#scoreDisplay',title:'Sua pontuação XP',      text:'Aqui aparecem os seus pontos XP! Acerte as atividades para ganhar mais!'},
+  {selector:'#btnHome',     title:'Home 🏠',               text:'Volta para o menu principal. Vai perguntar antes de sair!'},
+  {selector:'#btnRestart',  title:'Reiniciar 🔄',          text:'Recomeça a atividade do zero. Ótimo para treinar mais!'},
+  {selector:'#btnFontDown', title:'Letra menor A−',        text:'Diminui o tamanho do texto na tela.'},
+  {selector:'#btnFontUp',   title:'Letra maior A+',        text:'Aumenta o tamanho do texto. Mais fácil de ler!'},
+  {selector:'#themeBtn',    title:'Modo claro / escuro',   text:'Muda entre o tema escuro (noite) e claro (dia).'},
+  {selector:'#lockBtn',     title:'Cadeado 🔒',            text:'Trava a tela para jogar sem sair por acidente. Toque de novo para destrancar!'},
+  {selector:null,           title:'Velocidade da fala 🔊', text:'Quando o texto aparecer embaixo, use:\n🐌 Bem devagar • 🐢 Devagar • 🐇 Normal • 🚀 Rápido'}
+];
+var tourIdx=0;
+function startTour(){
+  if(localStorage.getItem('ela03_tour_done')) return;
+  tourIdx=0; showTourStep();
+  document.getElementById('tourOverlay').style.display='block';
+}
+function showTourStep(){
+  var step=tourSteps[tourIdx];
+  var el=step.selector?document.querySelector(step.selector):null;
+  var bubble=document.getElementById('tourBubble');
+  var spot=document.getElementById('tourSpotlight');
+  document.getElementById('tourTitle').textContent=step.title;
+  document.getElementById('tourText').textContent=step.text;
+  var dotsEl=document.getElementById('tourDots'); dotsEl.innerHTML='';
+  tourSteps.forEach(function(_,i){
+    var d=document.createElement('div'); d.className='tour-dot'+(i===tourIdx?' active':'');
+    dotsEl.appendChild(d);
+  });
+  document.getElementById('tourPrev').style.display=tourIdx===0?'none':'';
+  document.getElementById('tourNext').textContent=(tourIdx===tourSteps.length-1)?'Concluír ✔':'Próximo ►';
+  if(el){
+    var r=el.getBoundingClientRect(), pad=10;
+    spot.style.display='block';
+    spot.style.left=(r.left-pad)+'px'; spot.style.top=(r.top-pad)+'px';
+    spot.style.width=(r.width+pad*2)+'px'; spot.style.height=(r.height+pad*2)+'px';
+    var bw=290,bh=180,bl=r.left,bt=r.bottom+14;
+    if(bt+bh>window.innerHeight) bt=r.top-bh-14;
+    if(bl+bw>window.innerWidth) bl=window.innerWidth-bw-12;
+    if(bl<8) bl=8;
+    bubble.style.top=bt+'px'; bubble.style.left=bl+'px'; bubble.style.transform='none';
+  } else {
+    spot.style.display='none';
+    bubble.style.top='50%'; bubble.style.left='50%'; bubble.style.transform='translate(-50%,-50%)';
+  }
+}
+function tourStep(dir){
+  tourIdx+=dir;
+  if(tourIdx>=tourSteps.length){skipTour();return;}
+  if(tourIdx<0) tourIdx=0;
+  showTourStep();
+}
+function skipTour(){
+  document.getElementById('tourOverlay').style.display='none';
+  localStorage.setItem('ela03_tour_done','1');
+}
 
 // ===== STARFIELD =====
 (function(){

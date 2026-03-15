@@ -178,10 +178,16 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
       Ferramentas criadas especialmente para o 1o Trimestre 2026 &mdash; Maple Bear Y2 Elementary<br>
       Clique em qualquer ferramenta verde para abrir no navegador
     </div>
+    <button onclick="hardRefresh()" style="margin-top:16px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);border-radius:20px;padding:8px 20px;color:#a78bfa;font-size:12px;font-weight:800;cursor:pointer;letter-spacing:1px;">&#x21BA; Atualizar site</button>
   </div>
 
 </div>
 
+<script>
+function hardRefresh(){
+  window.location.href=window.location.pathname+'?v='+Date.now();
+}
+</script>
 <script>
 (function(){
   var c=document.getElementById('starfield'),ctx=c.getContext('2d'),stars=[];

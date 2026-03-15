@@ -50,11 +50,24 @@ NAO usar prompts vagos como "verifique se o CSS esta correto".
 - [ ] A+/A- funcionais via --fs CSS variable
 - [ ] Tema sol/lua funcional (body.light)
 - [ ] goToIndex() aponta para `index.html`
-- [ ] TTS em ingles funcional em todas as interacoes (ELA)
+- [ ] TTS: speakWithKaraoke usa u.onboundary (NAO palavra-por-palavra)
+- [ ] karaokeRate = 0.75 como default, 4 velocidades (0.6/0.75/0.9/1.1) em ks-btn dentro do karaokeBar
+- [ ] #karaokeWords dentro de #karaokeBar, .karaoke-bar flex-direction:column
 - [ ] Speak-btn em cada card/opcao clicavel (ELA)
+- [ ] Tour guiado: #tourOverlay presente, usa tour-bg (nao tour-backdrop), startTour() no init
+- [ ] localStorage key unica: ela01_tour_done / ela02_tour_done etc.
+- [ ] Todos botoes navbar com id= (navLogo, btnHome, btnRestart, btnFontDown, btnFontUp, themeBtn, soundBtn, lockBtn)
+- [ ] Todo texto EN visivel com data-pt para flag BR
 - [ ] Layout simetrico, alturas uniformes
 - [ ] Nada sobrepoe texto em tela 360px
 - [ ] Lock: 1o clique trava (fullscreen + bloqueia nav), 2o clique mostra unlock overlay
+
+## REGRA DE DOCUMENTACAO (OBRIGATORIA)
+Ao final de cada sessao em que um padrao foi corrigido ou descoberto:
+1. Atualizar memory/ELA_PADRAO.md com o anti-padrao e o padrao correto
+2. Atualizar este CLAUDE.md com novos checkpoints
+3. Atualizar MEMORY.md se o estado do projeto mudou
+Agentes recebem instrucoes BASEADAS nestes arquivos — docs desatualizados = agentes errados.
 
 ## REGRAS DE DESIGN
 - Fundo: `#0d0b1e` com starfield canvas
