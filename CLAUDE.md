@@ -75,10 +75,21 @@ NAO usar prompts vagos como "verifique se o CSS esta correto".
 2. Este `CLAUDE.md` — novos itens no checklist pre-entrega
 3. `memory/MEMORY.md` — status atual do projeto (ELA concluidas, proxima tarefa)
 
-**COMO fazer (sem o usuario pedir):**
-- Claude deve identificar sozinho se algo novo foi aprendido na interacao
-- Se sim: atualizar os docs como parte da entrega, nao como tarefa separada
-- Confirmar para o usuario: "Docs atualizados: adicionei [X] ao ELA_PADRAO.md"
+**COMO fazer (sem o usuario pedir) — PROTOCOLO EXATO:**
+
+Ao identificar padrao novo ou anti-padrao corrigido, Claude DEVE:
+
+1. Pausar a tarefa atual e dizer:
+   ---
+   📋 **Padrao identificado — atualizar docs?**
+   - **O que mudou:** [descrever em 1 linha o que foi corrigido ou descoberto]
+   - **Arquivo afetado:** memory/ELA_PADRAO.md [e/ou CLAUDE.md]
+   - Confirma que eu atualizo agora antes de continuar? (sim / pular)
+   ---
+
+2. Se usuario confirmar: atualizar o(s) arquivo(s) e informar "✅ Docs atualizados."
+3. Se usuario disser pular: continuar sem atualizar (mas registrar pendencia)
+4. Nunca acumular mais de 1 padrao sem perguntar
 
 **POR QUE isso importa:**
 Agentes recebem instrucoes baseadas nestes arquivos. Docs desatualizados = agentes repetem erros.
