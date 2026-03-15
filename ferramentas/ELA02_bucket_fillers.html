@@ -789,7 +789,7 @@ function speakKaraoke(text, cb){
     }
   };
   u.onend=function(){
-    setTimeout(function(){bar.style.display='none';wordsDiv.innerHTML='';if(cb)cb();},500);
+    setTimeout(function(){bar.style.display='none';wordsDiv.innerHTML='';if(cb)cb();},2500);
   };
   u.onerror=function(){bar.style.display='none';};
   speechSynthesis.speak(u);
