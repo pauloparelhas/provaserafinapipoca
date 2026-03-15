@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Toddle Explorer - Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--fs:16px;--bg:#0d0b1e;--card-bg:rgba(255,255,255,.06);--card-border:rgba(255,255,255,.12);--text:#fff;--text-soft:rgba(255,255,255,.55);--text-dim:rgba(255,255,255,.3);}
+*{box-sizing:border-box;margin:0;padding:0;}html{font-size:var(--fs);}
+body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color:var(--text);overflow-x:hidden;}
+body.light{--bg:#f3f1ff;--card-bg:rgba(124,58,237,.06);--card-border:rgba(124,58,237,.15);--text:#1a1535;--text-soft:rgba(26,21,53,.5);--text-dim:rgba(26,21,53,.3);background:var(--bg);color:var(--text);}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+body.light #starfield{opacity:.08;}
+#app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh;}
+.navbar{width:100%;display:flex;align-items:center;gap:6px;padding:8px 12px;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;z-index:100;}
+body.light .navbar{background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.1);}
+.nav-logo{font-size:.9rem;font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:auto;}
+.nav-score{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:20px;padding:3px 10px;font-size:.7rem;font-weight:800;color:#fff;white-space:nowrap;}
+.nb{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:.2s;flex-shrink:0;}
+.nb:hover{background:rgba(167,139,250,.2);border-color:#a78bfa;}
+body.light .nb{border-color:rgba(124,58,237,.2);background:rgba(124,58,237,.06);}
+.nb-text{font-size:.65rem;font-weight:900;}
+.main{flex:1;overflow-y:auto;padding:16px 14px 70px;}
+.screen{display:none;}.screen.active{display:block;}
+/* INTRO */
+.intro-hero{text-align:center;padding:14px 0 6px;}
+.intro-badge{display:inline-block;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);border-radius:20px;padding:3px 14px;font-size:.7rem;font-weight:800;color:#a78bfa;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.intro-emoji{font-size:3.2rem;display:inline-block;animation:mfloat 3s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(167,139,250,.5));}
+@keyframes mfloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.intro-title{font-size:clamp(1.3rem,5vw,1.9rem);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;margin-bottom:5px;}
+.intro-sub{font-size:.85rem;font-weight:700;color:var(--text-soft);text-align:center;margin-bottom:14px;}
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:580px;margin:0 auto 16px;}
+@media(max-width:380px){.module-grid{grid-template-columns:1fr;}}
+.module-card{background:var(--card-bg);border:2px solid var(--card-border);border-radius:20px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;transition:.25s;position:relative;overflow:hidden;}
+.module-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(244,114,182,.05));opacity:0;transition:.25s;border-radius:18px;}
+.module-card:hover::before{opacity:1;}.module-card:hover{border-color:rgba(167,139,250,.5);transform:translateY(-4px);box-shadow:0 8px 30px rgba(167,139,250,.2);}
+.module-icon{font-size:2rem;position:relative;z-index:1;}
+.module-name{font-size:.82rem;font-weight:900;color:#a78bfa;text-align:center;position:relative;z-index:1;}
+.module-desc{font-size:.62rem;color:var(--text-dim);font-weight:700;text-align:center;line-height:1.3;position:relative;z-index:1;}
+/* BUTTONS */
+.btn{border:none;border-radius:12px;padding:10px 18px;font-size:.82rem;font-weight:800;cursor:pointer;transition:.2s;font-family:'Nunito',sans-serif;}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;}
+.btn-back{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:#a78bfa;}
+.btn-next{background:linear-gradient(135deg,#f472b6,#fb923c);color:#fff;}
+.btn-check{background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);color:#34d399;}
+.btn-replay{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:var(--text-soft);}
+.phase-nav{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap;}
+.phase-title{font-size:clamp(1rem,3vw,1.35rem);font-weight:900;text-align:center;margin-bottom:4px;background:linear-gradient(135deg,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.phase-inst{font-size:.82rem;font-weight:700;color:var(--text-soft);text-align:center;margin-bottom:10px;}
+.speak-btn{width:30px;height:30px;border-radius:50%;border:none;background:rgba(96,165,250,.18);color:#60a5fa;font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0;}
+.speak-btn:hover{background:rgba(96,165,250,.35);}
+/* FLASHCARDS */
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;max-width:680px;margin:0 auto 10px;}
+.fc-card{perspective:700px;cursor:pointer;}
+.fc-inner{width:100%;height:152px;position:relative;transform-style:preserve-3d;transition:transform .5s;border-radius:16px;}
+.fc-card.flipped .fc-inner{transform:rotateY(180deg);}
+.fc-front,.fc-back{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center;gap:5px;}
+.fc-front{background:linear-gradient(145deg,#1e1b4b,#2d1b69);border:2px solid rgba(167,139,250,.35);}
+body.light .fc-front{background:linear-gradient(145deg,#ede9fe,#f5f3ff);border-color:#c4b5fd;}
+.fc-back{transform:rotateY(180deg);border:2px solid;}
+.fc-emoji{font-size:2rem;}.fc-name{font-size:.9rem;font-weight:900;}
+.fc-counter{text-align:center;font-size:.72rem;color:var(--text-dim);font-weight:700;margin-bottom:8px;}
+/* SORT */
+.sort-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:680px;margin:0 auto 10px;}
+.sort-col{border:2px dashed rgba(255,255,255,.2);border-radius:14px;padding:8px 5px;min-height:140px;display:flex;flex-direction:column;gap:5px;align-items:center;transition:.2s;}
+.sort-col.drag-over{border-color:#a78bfa;background:rgba(167,139,250,.1);}
+.sort-col-title{font-size:.7rem;font-weight:900;text-align:center;padding:4px 6px;border-radius:8px;white-space:nowrap;}
+.sort-pool{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:680px;margin:0 auto 10px;}
+.sort-card{background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:11px;padding:7px 10px;display:flex;align-items:center;gap:5px;cursor:grab;font-size:.8rem;font-weight:800;transition:.2s;user-select:none;}
+.sort-card:hover{transform:translateY(-2px);}
+.sort-card.correct{border-color:#34d399;background:rgba(16,185,129,.1);}
+.sort-card.wrong{border-color:#f87171;background:rgba(248,113,113,.1);}
+.sort-feedback{text-align:center;font-size:.88rem;font-weight:800;min-height:22px;margin-bottom:6px;}
+.score-dots{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-bottom:8px;}
+.score-dot{width:13px;height:13px;border-radius:50%;}
+/* QUIZ */
+.quiz-prog{text-align:center;font-size:.72rem;font-weight:800;color:var(--text-dim);margin-bottom:7px;}
+.quiz-q{text-align:center;font-size:clamp(2.8rem,8vw,4.5rem);margin-bottom:3px;}
+.quiz-qname{font-size:clamp(.85rem,2.5vw,1rem);font-weight:900;text-align:center;margin-bottom:10px;}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;max-width:480px;margin:0 auto 10px;}
+.quiz-opt{background:var(--card-bg);border:2px solid var(--card-border);border-radius:14px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:.2s;text-align:center;}
+.quiz-opt:hover:not(.disabled){background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.5);}
+.quiz-opt.correct{border-color:#34d399;background:rgba(16,185,129,.12);}
+.quiz-opt.wrong{border-color:#f87171;background:rgba(248,113,113,.1);}
+.quiz-opt.disabled{opacity:.55;cursor:default;}
+.quiz-opt-emoji{font-size:1.7rem;}.quiz-opt-text{font-size:.76rem;font-weight:800;}
+.quiz-fb{text-align:center;font-size:.88rem;font-weight:800;min-height:26px;margin-bottom:7px;padding:5px;}
+/* PYRAMID */
+.pyr-rows{max-width:440px;margin:0 auto 10px;}
+.pyr-row{display:flex;justify-content:center;margin-bottom:5px;}
+.pyr-slot{min-height:48px;border:2px dashed rgba(255,255,255,.25);border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;color:var(--text-dim);transition:.2s;padding:5px 8px;text-align:center;}
+.pyr-slot.drag-over{border-color:#a78bfa;background:rgba(167,139,250,.12);}
+.pyr-slot.filled{border-style:solid;color:var(--text);}
+.pyr-pool{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:460px;margin:0 auto 10px;}
+.pyr-card{background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:11px;padding:7px 12px;display:flex;align-items:center;gap:5px;cursor:grab;font-size:.82rem;font-weight:800;transition:.2s;user-select:none;}
+.pyr-card:hover{transform:translateY(-2px);}
+/* PATTERNS */
+.pat-seq{font-size:clamp(1.5rem,4.5vw,2.3rem);text-align:center;letter-spacing:3px;padding:10px;background:var(--card-bg);border:1.5px solid var(--card-border);border-radius:14px;max-width:460px;margin:0 auto 10px;}
+.pat-q{font-size:.85rem;font-weight:800;text-align:center;color:var(--text-soft);margin-bottom:10px;}
+.pat-opts{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;}
+.pat-opt{background:var(--card-bg);border:2px solid var(--card-border);border-radius:13px;padding:9px 16px;font-size:1.4rem;cursor:pointer;transition:.2s;min-width:65px;text-align:center;}
+.pat-opt:hover:not(.disabled){border-color:#a78bfa;background:rgba(167,139,250,.12);}
+.pat-opt.correct{border-color:#34d399;background:rgba(16,185,129,.12);}
+.pat-opt.wrong{border-color:#f87171;background:rgba(248,113,113,.1);}
+.pat-opt.disabled{cursor:default;opacity:.6;}
+/* COMMUNITY */
+.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:680px;margin:0 auto 10px;}
+@media(max-width:380px){.cat-grid{grid-template-columns:1fr;}}
+.cat-panel{border-radius:16px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;overflow:hidden;}
+.cat-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;border-radius:16px 16px 0 0;}
+.cat-panel-icon{font-size:1.5rem;margin-top:3px;}
+.cat-panel-title{font-size:.9rem;font-weight:900;text-transform:uppercase;letter-spacing:.5px;}
+.cat-panel-items{display:flex;flex-direction:column;gap:3px;align-items:flex-start;width:100%;}
+.cat-panel-item{font-size:.82rem;font-weight:700;color:var(--text-soft);display:flex;align-items:center;gap:4px;}
+.cat-flash-wrap{display:flex;justify-content:center;margin:10px 0;}
+.cat-flash-card{width:220px;height:250px;perspective:700px;cursor:pointer;}
+.cat-flash-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s;border-radius:18px;}
+.cat-flash-card.flipped .cat-flash-inner{transform:rotateY(180deg);}
+.cat-flash-front,.cat-flash-back{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;text-align:center;gap:6px;}
+.cat-flash-front{background:linear-gradient(145deg,#2d1b69,#1a1145);border:2px solid rgba(167,139,250,.4);}
+body.light .cat-flash-front{background:linear-gradient(145deg,#ede9fe,#f5f3ff);border-color:#c4b5fd;}
+.cat-flash-back{transform:rotateY(180deg);border:3px solid;}
+.cat-flash-counter{text-align:center;font-size:.72rem;color:var(--text-dim);font-weight:700;margin-bottom:6px;}
+/* RESULT */
+.result-wrap{text-align:center;padding:18px 0;}
+.result-hero{font-size:4.5rem;margin-bottom:8px;animation:mfloat 2s ease-in-out infinite;}
+.result-title{font-size:clamp(1.1rem,4vw,1.7rem);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+.result-sub{font-size:.88rem;color:var(--text-soft);font-weight:700;margin-bottom:12px;}
+.result-stars{display:flex;gap:8px;justify-content:center;margin-bottom:12px;}
+.result-star{font-size:2rem;opacity:.3;transition:all .4s;}.result-star.lit{opacity:1;filter:drop-shadow(0 0 8px #fbbf24);}
+.result-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+/* KARAOKE */
+.karaoke-bar{display:none;position:fixed;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(13,11,30,.93);backdrop-filter:blur(14px);border:2px solid rgba(167,139,250,.55);border-radius:20px;padding:10px 18px 12px;z-index:200;max-width:92%;box-shadow:0 8px 40px rgba(0,0,0,.6);flex-direction:column;gap:6px;align-items:center;}
+body.light .karaoke-bar{background:rgba(255,255,255,.97);border-color:#c4b5fd;}
+.karaoke-words{display:flex;flex-wrap:wrap;gap:4px 6px;justify-content:center;font-size:1rem;font-weight:700;color:rgba(255,255,255,.4);}
+body.light .karaoke-words{color:rgba(0,0,0,.3);}
+.kw{display:inline-block;padding:2px 5px;border-radius:6px;transition:all .15s;}
+.kw.kw-active{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;transform:scale(1.18);}
+.kw.kw-done{color:rgba(255,255,255,.7);background:rgba(167,139,250,.12);}
+body.light .kw.kw-done{color:rgba(0,0,0,.55);}
+.karaoke-speed{display:flex;gap:8px;align-items:center;}
+.ks-btn{background:rgba(255,255,255,.07);border:2px solid transparent;border-radius:8px;font-size:.92rem;cursor:pointer;padding:2px 8px;line-height:1;opacity:.55;transition:.15s;}
+.ks-btn:hover{opacity:.9;}.ks-btn.active{border-color:#a78bfa;background:rgba(167,139,250,.22);opacity:1;}
+/* TOUR */
+.tour-bg{position:fixed;inset:0;z-index:9001;background:transparent;cursor:pointer;}
+.tour-spotlight{position:fixed;border-radius:12px;z-index:9002;pointer-events:none;box-shadow:0 0 0 4000px rgba(0,0,0,.78),0 0 0 4px #a78bfa,0 0 28px 6px rgba(167,139,250,.65);transition:left .3s,top .3s,width .3s,height .3s;}
+.tour-bubble{position:fixed;z-index:9003;background:linear-gradient(145deg,#1e1b4b,#312e81);border:2px solid #a78bfa;border-radius:20px;padding:18px 22px;max-width:290px;box-shadow:0 12px 40px rgba(0,0,0,.6);color:#fff;}
+body.light .tour-bubble{background:linear-gradient(145deg,#f5f3ff,#ede9fe);color:#1e1b4b;border-color:#7c3aed;}
+.tour-bubble-title{font-size:.76rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#a78bfa;margin-bottom:6px;}
+.tour-bubble-text{font-size:.94rem;font-weight:700;line-height:1.5;margin-bottom:14px;white-space:pre-line;}
+.tour-bubble-nav{display:flex;align-items:center;gap:8px;}
+.tour-btn{border:none;border-radius:10px;padding:7px 14px;font-size:.82rem;font-weight:800;cursor:pointer;}
+.tour-btn-prev{background:rgba(167,139,250,.15);color:#c4b5fd;}
+.tour-btn-next{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;}
+.tour-btn-skip{margin-left:auto;background:none;color:rgba(255,255,255,.4);font-size:.76rem;font-weight:700;cursor:pointer;border:none;}
+body.light .tour-btn-skip{color:rgba(0,0,0,.4);}
+.tour-step-dots{display:flex;gap:5px;align-items:center;margin-right:4px;}
+.tour-dot{width:7px;height:7px;border-radius:50%;background:rgba(167,139,250,.3);}
+.tour-dot.active{background:#a78bfa;}
+/* MODALS + LOCK */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:linear-gradient(145deg,#1e1b4b,#2d1b69);border:2px solid rgba(167,139,250,.4);border-radius:24px;padding:26px 22px;max-width:300px;width:90%;text-align:center;}
+body.light .modal-box{background:linear-gradient(145deg,#f5f3ff,#ede9fe);border-color:#c4b5fd;}
+.modal-title{font-size:1rem;font-weight:900;margin-bottom:9px;}
+.modal-text{font-size:.85rem;color:var(--text-soft);margin-bottom:18px;}
+.modal-btns{display:flex;gap:10px;justify-content:center;}
+.lock-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:2000;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+.lock-overlay.active{display:flex;}
+.lock-icon{font-size:4rem;}.lock-text{font-size:.95rem;font-weight:700;color:rgba(255,255,255,.6);}
+.lock-btn{background:linear-gradient(135deg,#a78bfa,#f472b6);border:none;border-radius:14px;padding:12px 26px;color:#fff;font-size:.95rem;font-weight:800;cursor:pointer;}
+/* FLAGS */
+[data-pt]{position:relative;}
+.flag-pt{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(0,156,59,.15);border:1px solid rgba(0,156,59,.3);cursor:pointer;margin-left:4px;vertical-align:middle;flex-shrink:0;transition:.2s;position:relative;z-index:5;}
+.flag-pt:hover{background:rgba(0,156,59,.25);transform:scale(1.1);}
+.pt-label{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#065f46;color:#fff;font-size:.72rem;font-weight:700;padding:4px 9px;border-radius:8px;white-space:nowrap;z-index:10;pointer-events:none;max-width:200px;text-align:center;}
+.pt-label.visible{display:block;}
+/* CONFETTI */
+.confetti-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;}
+.confetti-piece{position:absolute;width:10px;height:10px;top:-10px;animation:cffall linear forwards;}
+@keyframes cffall{to{top:110vh;transform:rotate(720deg);}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+  <div class="navbar">
+    <div class="nav-logo" id="navLogo">Serafina &bull; ELA-06</div>
+    <div class="nav-score" id="scoreDisplay">&#11088; 0 XP</div>
+    <button class="nb" id="btnHome" onclick="confirmGoHome()" title="Home">&#127968;</button>
+    <button class="nb" id="btnRestart" onclick="confirmRestart()" title="Restart">&#128260;</button>
+    <button class="nb" id="btnFontDown" onclick="changeFontSize(-1)"><span class="nb-text">A-</span></button>
+    <button class="nb" id="btnFontUp" onclick="changeFontSize(1)"><span class="nb-text">A+</span></button>
+    <button class="nb" id="themeBtn" onclick="toggleTheme()" title="Theme">&#9728;&#65039;</button>
+    <button class="nb" id="soundBtn" onclick="toggleSound()" title="Sound">&#128266;</button>
+    <button class="nb" id="lockBtn" onclick="toggleLock()" title="Lock">&#128275;</button>
+  </div>
+  <div class="main" id="mainScroll">
+
+    <div id="karaokeBar" class="karaoke-bar">
+      <div class="karaoke-speed">
+        <button class="ks-btn" data-rate="0.6" onclick="setKSpeed(0.6)" title="Very slow">&#128012;</button>
+        <button class="ks-btn active" data-rate="0.75" onclick="setKSpeed(0.75)" title="Slow">&#128034;</button>
+        <button class="ks-btn" data-rate="0.9" onclick="setKSpeed(0.9)" title="Normal">&#128007;</button>
+        <button class="ks-btn" data-rate="1.1" onclick="setKSpeed(1.1)" title="Fast">&#128640;</button>
+      </div>
+      <div id="karaokeWords" class="karaoke-words"></div>
+    </div>
+
+    <div id="tourOverlay" style="display:none;">
+      <div class="tour-bg" id="tourBg" onclick="tourStep(1)"></div>
+      <div class="tour-spotlight" id="tourSpotlight"></div>
+      <div class="tour-bubble" id="tourBubble">
+        <div class="tour-bubble-title" id="tourTitle"></div>
+        <div class="tour-bubble-text" id="tourText"></div>
+        <div class="tour-bubble-nav">
+          <div class="tour-step-dots" id="tourDots"></div>
+          <button class="tour-btn tour-btn-prev" id="tourPrev" onclick="tourStep(-1)">&#9664; Back</button>
+          <button class="tour-btn tour-btn-next" id="tourNext" onclick="tourStep(1)">Next &#9654;</button>
+          <button class="tour-btn-skip" onclick="skipTour()">Skip</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <div class="screen active" id="screen-intro">
+      <div class="intro-hero">
+        <div class="intro-badge">ELA &bull; TODDLE OPTIONAL</div>
+        <div class="intro-emoji">&#127758;</div>
+      </div>
+      <div class="intro-title" data-pt="Explorador Toddle">Toddle Explorer</div>
+      <div class="intro-sub" data-pt="Escolha um topico para explorar!">Choose a topic to explore and play!</div>
+      <div class="module-grid">
+        <div class="module-card" onclick="startModule(1)">
+          <div class="module-icon">&#129408;</div>
+          <div class="module-name" data-pt="Tipos de Animais">Types of Animals</div>
+          <div class="module-desc" data-pt="Herbivoros, Carnivoros e Onivoros">Herbivores, Carnivores &amp; Omnivores</div>
+        </div>
+        <div class="module-card" onclick="startModule(2)">
+          <div class="module-icon">&#127859;</div>
+          <div class="module-name" data-pt="Piramide Alimentar">Food Pyramid</div>
+          <div class="module-desc" data-pt="Grupos alimentares e porcoes">Food groups &amp; servings</div>
+        </div>
+        <div class="module-card" onclick="startModule(3)">
+          <div class="module-icon">&#128308;&#128309;</div>
+          <div class="module-name" data-pt="Padroes e Atributos">Patterns &amp; Attributes</div>
+          <div class="module-desc" data-pt="Encontre o nucleo e complete o padrao">Find the core &amp; complete the pattern</div>
+        </div>
+        <div class="module-card" onclick="startModule(4)">
+          <div class="module-icon">&#127968;</div>
+          <div class="module-name" data-pt="Categorias da Comunidade">Community Categories</div>
+          <div class="module-desc" data-pt="Needs, Wants, Goods e Services">Needs, Wants, Goods &amp; Services</div>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <button class="btn btn-primary" onclick="startModule(1)" data-pt="Comecar!">Let&#39;s Go! &#127775;</button>
+      </div>
+    </div>
+
+    <!-- MODULE 1: ANIMALS -->
+    <div class="screen" id="screen-animals">
+      <div id="animals-ph1">
+        <div class="phase-title" data-pt="Conheca os Animais!">Meet the Animals!</div>
+        <div class="phase-inst" data-pt="Toque nos cards para descobrir o tipo de dieta">&#128073; Tap each card to discover the diet!</div>
+        <div class="fc-grid" id="animalFlashGrid"></div>
+        <div class="fc-counter" id="animalFlashCounter"></div>
+        <div class="phase-nav">
+          <button class="btn btn-back" onclick="startModule(0)" data-pt="Topicos">&#9664; Topics</button>
+          <button class="btn btn-next" onclick="startAnimalSort()" data-pt="Sort Game">Sort Game &#9654;</button>
+        </div>
+      </div>
+      <div id="animals-ph2" style="display:none;">
+        <div class="phase-title" data-pt="Classifique os Animais!">Sort the Animals!</div>
+        <div class="phase-inst" data-pt="Arraste cada animal para o grupo correto">&#128073; Drag each animal to the right group!</div>
+        <div class="sort-cols" id="animalSortCols"></div>
+        <div class="sort-pool" id="animalSortPool"></div>
+        <div class="sort-feedback" id="animalSortFb"></div>
+        <div class="score-dots" id="animalSortDots"></div>
+        <div style="text-align:center;margin-bottom:8px;">
+          <button class="btn btn-check" id="animalCheckBtn" onclick="checkAnimalSort()" style="display:none;" data-pt="Verificar">Check &#9989;</button>
+          <button class="btn btn-replay" id="animalRetryBtn" onclick="startAnimalSort()" style="display:none;" data-pt="Jogar de novo">Play Again &#128260;</button>
+        </div>
+        <div class="phase-nav">
+          <button class="btn btn-back" onclick="showAnimalPh(1)" data-pt="Fase 1">&#9664; Phase 1</button>
+          <button class="btn btn-next" onclick="startModule(0)" data-pt="Topicos">Topics &#9654;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 2: FOOD -->
+    <div class="screen" id="screen-food">
+      <div id="food-ph1">
+        <div class="phase-title" data-pt="Quiz de Alimentos!">Food Group Quiz!</div>
+        <div class="phase-inst" data-pt="Qual grupo alimentar e esse?">&#128073; Which food group is this?</div>
+        <div class="quiz-prog" id="foodQProg"></div>
+        <div class="quiz-q" id="foodQEmoji"></div>
+        <div class="quiz-qname" id="foodQName"></div>
+        <div class="quiz-opts" id="foodQOpts"></div>
+        <div class="quiz-fb" id="foodQFb"></div>
+        <div style="text-align:center;margin-bottom:8px;" id="foodQNext"></div>
+        <div class="phase-nav">
+          <button class="btn btn-back" onclick="startModule(0)" data-pt="Topicos">&#9664; Topics</button>
+          <button class="btn btn-next" onclick="startPyramid()" data-pt="Construir Piramide">Build Pyramid &#9654;</button>
+        </div>
+      </div>
+      <div id="food-ph2" style="display:none;">
+        <div class="phase-title" data-pt="Monte a Piramide!">Build the Pyramid!</div>
+        <div class="phase-inst" data-pt="Arraste cada grupo para o andar correto">&#128073; Drag each group to the right floor!</div>
+        <div class="pyr-rows" id="pyramidSlots"></div>
+        <div class="pyr-pool" id="pyramidPool"></div>
+        <div class="quiz-fb" id="pyrFb"></div>
+        <div class="phase-nav">
+          <button class="btn btn-back" onclick="showFoodPh(1)" data-pt="Fase 1">&#9664; Phase 1</button>
+          <button class="btn btn-next" onclick="startModule(0)" data-pt="Topicos">Topics &#9654;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 3: PATTERNS -->
+    <div class="screen" id="screen-patterns">
+      <div id="pat-ph1">
+        <div class="phase-title" data-pt="Qual e o Nucleo?">What is the Core?</div>
+        <div class="phase-inst" data-pt="Encontre a parte que se repete">&#128073; Find the part that repeats!</div>
+        <div class="quiz-prog" id="coreQProg"></div>
+        <div class="pat-seq" id="coreQSeq"></div>
+        <div class="pat-q" id="coreQText"></div>
+        <div class="pat-opts" id="coreQOpts"></div>
+        <div class="quiz-fb" id="coreQFb"></div>
+        <div style="text-align:center;margin-bottom:8px;" id="coreQNext"></div>
+        <div class="phase-nav">
+          <button class="btn btn-back" onclick="startModule(0)" data-pt="Topicos">&#9664; Topics</button>
+          <button class="btn btn-next" onclick="startNextQuiz()" data-pt="O que vem depois?">What&#39;s Next? &#9654;</button>
+        </div>
+      </div>
+      <div id="pat-ph2" style="display:none;">
+        <div class="phase-title" data-pt="O Que Vem Depois?">What Comes Next?</div>
+        <div class="phase-inst" data-pt="Complete o padrao — o que vem no lugar do ?">&#128073; Complete the pattern!</div>
+        <div class="quiz-prog" id="nextQProg"></div>
+        <div class="pat-seq" id="nextQSeq"></div>
+        <div class="pat-q" id="nextQText"></div>
+        <div class="pat-opts" id="nextQOpts"></div>
+        <div class="quiz-fb" id="nextQFb"></div>
+        <div style="text-align:center;margin-bottom:8px;" id="nextQNext"></div>
+        <div class="phase-nav">
+          <button class="btn btn-back" onclick="showPatPh(1)" data-pt="Fase 1">&#9664; Phase 1</button>
+          <button class="btn btn-next" onclick="startModule(0)" data-pt="Topicos">Topics &#9654;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 4: COMMUNITY -->
+    <div class="screen" id="screen-community">
+      <div id="comm-ph1">
+        <div class="phase-title" data-pt="Categorias da Comunidade">&#127968; Community Categories</div>
+        <div class="phase-inst" data-pt="Aprenda o que uma comunidade precisa e oferece">&#128214; Learn what a community needs and offers!</div>
+        <div class="cat-grid" id="catGrid"></div>
+        <div style="text-align:center;margin:10px 0;">
+          <button class="btn btn-primary" onclick="startCatFlash()" data-pt="Estudar com Flashcards">&#127183; Flashcard Study</button>
+        </div>
+        <div class="phase-nav">
+          <button class="btn btn-back" onclick="startModule(0)" data-pt="Topicos">&#9664; Topics</button>
+          <button class="btn btn-next" onclick="startCatFlash()" data-pt="Flashcards">Flashcards &#9654;</button>
+        </div>
+      </div>
+      <div id="comm-ph2" style="display:none;">
+        <div class="phase-title" data-pt="Flashcards da Comunidade">Community Flashcards</div>
+        <div class="phase-inst" data-pt="Toque no card para revelar a categoria">&#128073; Tap the card to reveal the category!</div>
+        <div class="cat-flash-wrap">
+          <div class="cat-flash-card" id="catFlashCard" onclick="flipCatFlash()">
+            <div class="cat-flash-inner" id="catFlashInner">
+              <div class="cat-flash-front" id="catFlashFront"></div>
+              <div class="cat-flash-back" id="catFlashBack"></div>
+            </div>
+          </div>
+        </div>
+        <div class="cat-flash-counter" id="catFlashCounter"></div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-bottom:8px;">
+          <button class="btn btn-back" onclick="prevCatFlash()">&#9664;</button>
+          <button class="btn btn-replay" onclick="shuffleCatFlash()">&#128256; Shuffle</button>
+          <button class="btn btn-next" onclick="nextCatFlash()">&#9654;</button>
+        </div>
+        <div class="phase-nav">
+          <button class="btn btn-back" onclick="showCommPh(1)" data-pt="Categorias">&#9664; Categories</button>
+          <button class="btn btn-next" onclick="startModule(0)" data-pt="Topicos">Topics &#9654;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="screen" id="screen-result">
+      <div class="result-wrap">
+        <div class="result-hero" id="resultEmoji">&#127881;</div>
+        <div class="result-title" id="resultTitle">Amazing Explorer!</div>
+        <div class="result-sub" id="resultSub"></div>
+        <div class="result-stars" id="resultStars">
+          <div class="result-star" id="star0">&#11088;</div>
+          <div class="result-star" id="star1">&#11088;</div>
+          <div class="result-star" id="star2">&#11088;</div>
+        </div>
+        <div class="result-btns">
+          <button class="btn btn-primary" onclick="startModule(lastModule)">&#128260; Play Again</button>
+          <button class="btn btn-back" onclick="startModule(0)">&#127968; Topics</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modalHome">
+  <div class="modal-box">
+    <div class="modal-title">&#127968; Go to Menu?</div>
+    <div class="modal-text" data-pt="Tem certeza que quer sair?">Are you sure you want to leave?</div>
+    <div class="modal-btns">
+      <button class="btn btn-back" onclick="closeModal('modalHome')">Cancel</button>
+      <button class="btn btn-primary" onclick="goToIndex()">Yes, go!</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modalRestart">
+  <div class="modal-box">
+    <div class="modal-title">&#128260; Restart?</div>
+    <div class="modal-text" data-pt="Quer recomecar?">Start from the beginning?</div>
+    <div class="modal-btns">
+      <button class="btn btn-back" onclick="closeModal('modalRestart')">Cancel</button>
+      <button class="btn btn-primary" onclick="doRestart()">Yes!</button>
+    </div>
+  </div>
+</div>
+<div class="lock-overlay" id="lockOverlay">
+  <div class="lock-icon">&#128274;</div>
+  <div class="lock-text" data-pt="Peca a um adulto para desbloquear">Ask a grown-up to unlock</div>
+  <button class="lock-btn" onclick="unlockScreen()">Unlock &#128275;</button>
+</div>
+<div class="confetti-container" id="confettiContainer"></div>
+
+<script>
+// ===== DATA =====
+var ANIMALS=[
+  {name:'Cow',namePT:'Vaca',emoji:'\uD83D\uDC04',diet:'Herbivore',dietPT:'Herb\u00EDvoro',eats:'grass and hay'},
+  {name:'Horse',namePT:'Cavalo',emoji:'\uD83D\uDC0E',diet:'Herbivore',dietPT:'Herb\u00EDvoro',eats:'grass and apples'},
+  {name:'Rabbit',namePT:'Coelho',emoji:'\uD83D\uDC30',diet:'Herbivore',dietPT:'Herb\u00EDvoro',eats:'carrots and lettuce'},
+  {name:'Deer',namePT:'Cervo',emoji:'\uD83E\uDD8C',diet:'Herbivore',dietPT:'Herb\u00EDvoro',eats:'leaves and plants'},
+  {name:'Elephant',namePT:'Elefante',emoji:'\uD83D\uDC18',diet:'Herbivore',dietPT:'Herb\u00EDvoro',eats:'fruits and plants'},
+  {name:'Lion',namePT:'Le\u00E3o',emoji:'\uD83E\uDD81',diet:'Carnivore',dietPT:'Carn\u00EDvoro',eats:'meat and other animals'},
+  {name:'Wolf',namePT:'Lobo',emoji:'\uD83D\uDC3A',diet:'Carnivore',dietPT:'Carn\u00EDvoro',eats:'deer and rabbits'},
+  {name:'Shark',namePT:'Tubar\u00E3o',emoji:'\uD83E\uDD88',diet:'Carnivore',dietPT:'Carn\u00EDvoro',eats:'fish and seals'},
+  {name:'Eagle',namePT:'\u00C1guia',emoji:'\uD83E\uDD85',diet:'Carnivore',dietPT:'Carn\u00EDvoro',eats:'small animals and fish'},
+  {name:'Snake',namePT:'Cobra',emoji:'\uD83D\uDC0D',diet:'Carnivore',dietPT:'Carn\u00EDvoro',eats:'mice and frogs'},
+  {name:'Bear',namePT:'Urso',emoji:'\uD83D\uDC3B',diet:'Omnivore',dietPT:'On\u00EDvoro',eats:'fish, berries and honey'},
+  {name:'Pig',namePT:'Porco',emoji:'\uD83D\uDC37',diet:'Omnivore',dietPT:'On\u00EDvoro',eats:'plants, roots and insects'},
+  {name:'Raccoon',namePT:'Guaxinim',emoji:'\uD83E\uDD9D',diet:'Omnivore',dietPT:'On\u00EDvoro',eats:'fruits, frogs and trash'},
+  {name:'Crow',namePT:'Corvo',emoji:'\uD83D\uDC26',diet:'Omnivore',dietPT:'On\u00EDvoro',eats:'seeds, insects and meat'},
+  {name:'Human',namePT:'Humano',emoji:'\uD83E\uDDD1',diet:'Omnivore',dietPT:'On\u00EDvoro',eats:'plants and animals'}
+];
+var DIET_COLORS={Herbivore:'#34d399',Carnivore:'#f87171',Omnivore:'#fb923c'};
+var DIET_EMOJIS={Herbivore:'\uD83C\uDF3F',Carnivore:'\uD83E\uDD69',Omnivore:'\uD83C\uDF7D\uFE0F'};
+
+var FOODS=[
+  {name:'Bread',namePT:'P\u00E3o',emoji:'\uD83C\uDF5E',group:'Grains',groupPT:'Cereais',servings:'6 a day',floor:1},
+  {name:'Rice',namePT:'Arroz',emoji:'\uD83C\uDF5A',group:'Grains',groupPT:'Cereais',servings:'6 a day',floor:1},
+  {name:'Pasta',namePT:'Macarr\u00E3o',emoji:'\uD83C\uDF5D',group:'Grains',groupPT:'Cereais',servings:'6 a day',floor:1},
+  {name:'Apple',namePT:'Ma\u00E7\u00E3',emoji:'\uD83C\uDF4E',group:'Fruits',groupPT:'Frutas',servings:'4 a day',floor:2},
+  {name:'Banana',namePT:'Banana',emoji:'\uD83C\uDF4C',group:'Fruits',groupPT:'Frutas',servings:'4 a day',floor:2},
+  {name:'Orange',namePT:'Laranja',emoji:'\uD83C\uDF4A',group:'Fruits',groupPT:'Frutas',servings:'4 a day',floor:2},
+  {name:'Carrot',namePT:'Cenoura',emoji:'\uD83E\uDD55',group:'Vegetables',groupPT:'Vegetais',servings:'5 a day',floor:3},
+  {name:'Broccoli',namePT:'Br\u00F3colis',emoji:'\uD83E\uDD66',group:'Vegetables',groupPT:'Vegetais',servings:'5 a day',floor:3},
+  {name:'Milk',namePT:'Leite',emoji:'\uD83E\uDD5B',group:'Dairy',groupPT:'Latic\u00EDnios',servings:'3 a day',floor:4},
+  {name:'Cheese',namePT:'Queijo',emoji:'\uD83E\uDDC0',group:'Dairy',groupPT:'Latic\u00EDnios',servings:'3 a day',floor:4},
+  {name:'Chicken',namePT:'Frango',emoji:'\uD83C\uDF57',group:'Protein',groupPT:'Prote\u00EDna',servings:'2-3 a day',floor:5},
+  {name:'Egg',namePT:'Ovo',emoji:'\uD83E\uDD5A',group:'Protein',groupPT:'Prote\u00EDna',servings:'2-3 a day',floor:5},
+  {name:'Fish',namePT:'Peixe',emoji:'\uD83D\uDC1F',group:'Protein',groupPT:'Prote\u00EDna',servings:'2-3 a day',floor:5},
+  {name:'Beans',namePT:'Feij\u00E3o',emoji:'\uD83E\uDED8',group:'Protein',groupPT:'Prote\u00EDna',servings:'2-3 a day',floor:5},
+  {name:'Butter',namePT:'Manteiga',emoji:'\uD83E\uDDC8',group:'Fats',groupPT:'Gorduras',servings:'use sparingly',floor:6}
+];
+var PYR_GROUPS=[
+  {group:'Grains',groupPT:'Cereais',emoji:'\uD83C\uDF5E',floor:1,color:'#fb923c'},
+  {group:'Fruits',groupPT:'Frutas',emoji:'\uD83C\uDF4E',floor:2,color:'#fbbf24'},
+  {group:'Vegetables',groupPT:'Vegetais',emoji:'\uD83E\uDD66',floor:3,color:'#34d399'},
+  {group:'Dairy',groupPT:'Latic\u00EDnios',emoji:'\uD83E\uDD5B',floor:4,color:'#60a5fa'},
+  {group:'Protein',groupPT:'Prote\u00EDna',emoji:'\uD83C\uDF57',floor:5,color:'#a78bfa'},
+  {group:'Fats',groupPT:'Gorduras',emoji:'\uD83E\uDDC8',floor:6,color:'rgba(255,255,255,.4)'}
+];
+
+var PATTERNS=[
+  {seq:['\uD83D\uDD34','\uD83D\uDD35','\uD83D\uDD34','\uD83D\uDD35','\uD83D\uDD34'],core:'\uD83D\uDD34\uD83D\uDD35',coreDesc:'Red Blue',next:'\uD83D\uDD35',opts:['\uD83D\uDD35','\uD83D\uDFE1','\uD83D\uDFE2'],attr:'Color'},
+  {seq:['\u2B1B','\uD83D\uDD37','\u2B1B','\uD83D\uDD37','\u2B1B'],core:'\u2B1B\uD83D\uDD37',coreDesc:'Black Blue Diamond',next:'\uD83D\uDD37',opts:['\uD83D\uDD37','\u2B1B','\uD83D\uDD36'],attr:'Shape'},
+  {seq:['\uD83D\uDC18','\uD83D\uDC31','\uD83D\uDC18','\uD83D\uDC31','\uD83D\uDC18'],core:'\uD83D\uDC18\uD83D\uDC31',coreDesc:'Elephant Cat',next:'\uD83D\uDC31',opts:['\uD83D\uDC31','\uD83D\uDC36','\uD83D\uDC3B'],attr:'Animal'},
+  {seq:['\uD83D\uDFE2','\uD83D\uDD35','\u26AB','\uD83D\uDFE2','\uD83D\uDD35'],core:'\uD83D\uDFE2\uD83D\uDD35\u26AB',coreDesc:'Green Blue Black',next:'\u26AB',opts:['\u26AB','\uD83D\uDFE2','\uD83D\uDD34'],attr:'Color'},
+  {seq:['\u2600\uFE0F','\uD83C\uDF19','\u2600\uFE0F','\uD83C\uDF19','\u2600\uFE0F'],core:'\u2600\uFE0F\uD83C\uDF19',coreDesc:'Sun Moon',next:'\uD83C\uDF19',opts:['\uD83C\uDF19','\u2B50','\uD83C\uDF1F'],attr:'Symbol'},
+  {seq:['\uD83C\uDF4E','\uD83C\uDF4A','\uD83C\uDF4C','\uD83C\uDF4E','\uD83C\uDF4A'],core:'\uD83C\uDF4E\uD83C\uDF4A\uD83C\uDF4C',coreDesc:'Apple Orange Banana',next:'\uD83C\uDF4C',opts:['\uD83C\uDF4C','\uD83C\uDF4E','\uD83C\uDF47'],attr:'Fruit'},
+  {seq:['\uD83D\uDD3A','\uD83D\uDD3A','\uD83D\uDD35','\uD83D\uDD3A','\uD83D\uDD3A'],core:'\uD83D\uDD3A\uD83D\uDD3A\uD83D\uDD35',coreDesc:'Triangle Triangle Circle',next:'\uD83D\uDD35',opts:['\uD83D\uDD35','\uD83D\uDD3A','\uD83D\uDFE1'],attr:'Shape'},
+  {seq:['\uD83C\uDF38','\uD83C\uDF3F','\uD83C\uDF38','\uD83C\uDF3F','\uD83C\uDF38'],core:'\uD83C\uDF38\uD83C\uDF3F',coreDesc:'Flower Leaf',next:'\uD83C\uDF3F',opts:['\uD83C\uDF3F','\uD83C\uDF3B','\uD83C\uDF3E'],attr:'Nature'},
+  {seq:['\uD83D\uDD34','\uD83D\uDD34','\uD83D\uDD35','\uD83D\uDD34','\uD83D\uDD34'],core:'\uD83D\uDD34\uD83D\uDD34\uD83D\uDD35',coreDesc:'Red Red Blue',next:'\uD83D\uDD35',opts:['\uD83D\uDD35','\uD83D\uDD34','\uD83D\uDFE1'],attr:'Color'},
+  {seq:['\uD83D\uDC36','\uD83D\uDC31','\uD83D\uDC39','\uD83D\uDC36','\uD83D\uDC31'],core:'\uD83D\uDC36\uD83D\uDC31\uD83D\uDC39',coreDesc:'Dog Cat Hamster',next:'\uD83D\uDC39',opts:['\uD83D\uDC39','\uD83D\uDC36','\uD83D\uDC3A'],attr:'Animal'},
+  {seq:['\u2B50','\uD83D\uDCAB','\u2B50','\uD83D\uDCAB','\u2B50'],core:'\u2B50\uD83D\uDCAB',coreDesc:'Star Sparkle',next:'\uD83D\uDCAB',opts:['\uD83D\uDCAB','\uD83C\uDF1F','\u2728'],attr:'Symbol'},
+  {seq:['\uD83C\uDFB5','\uD83C\uDFB6','\uD83C\uDFB5','\uD83C\uDFB6','\uD83C\uDFB5'],core:'\uD83C\uDFB5\uD83C\uDFB6',coreDesc:'Note Notes',next:'\uD83C\uDFB6',opts:['\uD83C\uDFB6','\uD83C\uDFB5','\uD83C\uDFB7'],attr:'Music'}
+];
+
+var COMMUNITY={
+  needs:[
+    {name:'Shelter',namePT:'Moradia',emoji:'\uD83C\uDFE0',cat:'needs'},
+    {name:'Water',namePT:'\u00C1gua',emoji:'\uD83D\uDCA7',cat:'needs'},
+    {name:'Healthy Food',namePT:'Comida saud\u00E1vel',emoji:'\uD83E\uDD57',cat:'needs'},
+    {name:'Clothing',namePT:'Roupas',emoji:'\uD83D\uDC55',cat:'needs'},
+    {name:'Clean Air',namePT:'Ar limpo',emoji:'\uD83D\uDCA8',cat:'needs'}
+  ],
+  wants:[
+    {name:'Restaurants',namePT:'Restaurantes',emoji:'\uD83C\uDF7D\uFE0F',cat:'wants'},
+    {name:'Parks',namePT:'Parques',emoji:'\uD83C\uDF33',cat:'wants'},
+    {name:'Stores',namePT:'Lojas',emoji:'\uD83C\uDFEA',cat:'wants'},
+    {name:'Library',namePT:'Biblioteca',emoji:'\uD83D\uDCDA',cat:'wants'},
+    {name:'Pets',namePT:'Animais de Estima\u00E7\u00E3o',emoji:'\uD83D\uDC31',cat:'wants'}
+  ],
+  goods:[
+    {name:'Internet',namePT:'Internet',emoji:'\uD83C\uDF10',cat:'goods'},
+    {name:'Toys',namePT:'Brinquedos',emoji:'\uD83E\uDDF8',cat:'goods'},
+    {name:'Food',namePT:'Alimentos',emoji:'\uD83C\uDF4E',cat:'goods'},
+    {name:'Clothes',namePT:'Roupas',emoji:'\uD83D\uDC57',cat:'goods'},
+    {name:'Books',namePT:'Livros',emoji:'\uD83D\uDCD6',cat:'goods'}
+  ],
+  services:[
+    {name:'Police',namePT:'Pol\u00EDcia',emoji:'\uD83D\uDC6E',cat:'services'},
+    {name:'Fire Department',namePT:'Bombeiros',emoji:'\uD83D\uDE92',cat:'services'},
+    {name:'Schools',namePT:'Escolas',emoji:'\uD83C\uDFEB',cat:'services'},
+    {name:'Hospitals',namePT:'Hospitais',emoji:'\uD83C\uDFE5',cat:'services'},
+    {name:'Trash Collection',namePT:'Coleta de Lixo',emoji:'\uD83D\uDDD1\uFE0F',cat:'services'}
+  ]
+};
+var CAT_META={
+  needs:{label:'NEEDS',labelPT:'NECESSIDADES',icon:'\uD83D\uDD34',color:'#f87171',bg:'linear-gradient(145deg,rgba(248,113,113,.2),rgba(248,113,113,.06))',border:'rgba(248,113,113,.5)'},
+  wants:{label:'WANTS',labelPT:'DESEJOS',icon:'\uD83D\uDFE0',color:'#fb923c',bg:'linear-gradient(145deg,rgba(251,146,60,.2),rgba(251,146,60,.06))',border:'rgba(251,146,60,.5)'},
+  goods:{label:'GOODS',labelPT:'BENS',icon:'\uD83D\uDFE2',color:'#34d399',bg:'linear-gradient(145deg,rgba(52,211,153,.2),rgba(52,211,153,.06))',border:'rgba(52,211,153,.5)'},
+  services:{label:'SERVICES',labelPT:'SERVI\u00C7OS',icon:'\uD83D\uDD35',color:'#60a5fa',bg:'linear-gradient(145deg,rgba(96,165,250,.2),rgba(96,165,250,.06))',border:'rgba(96,165,250,.5)'}
+};
+var ALL_COMMUNITY=COMMUNITY.needs.concat(COMMUNITY.wants,COMMUNITY.goods,COMMUNITY.services);
+
+// ===== GLOBALS =====
+var totalXP=0,soundEnabled=true,isLocked=false,currentTheme='dark',currentFontSize=16;
+var karaokeRate=0.75,karaokeActive=false;
+var lastModule=1;
+var animalSortItems=[];
+var foodQuizItems=[],foodQIdx=0,foodQAnswered=false,foodQScore=0;
+var pyrFilled={};
+var coreQuizItems=[],coreQIdx=0,coreQAnswered=false,coreQScore=0;
+var nextQuizItems=[],nextQIdx=0,nextQAnswered=false,nextQScore=0;
+var catFlashOrder=[],catFlashIdx=0;
+var touchDragEl=null,touchOffX=0,touchOffY=0;
+var BR_FLAG='<svg viewBox="0 0 20 14" width="14" height="10"><rect fill="#009c3b" width="20" height="14" rx="2"/><polygon fill="#ffdf00" points="10,1.5 18,7 10,12.5 2,7"/><circle fill="#002776" cx="10" cy="7" r="3"/></svg>';
+
+// ===== UTILS =====
+function $(id){return document.getElementById(id);}
+function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
+function addXP(n){totalXP+=n;$('scoreDisplay').textContent='\u2B50 '+totalXP+' XP';}
+function shakeEl(el){el.style.animation='none';el.offsetWidth;el.style.animation='shake .4s ease';setTimeout(function(){el.style.animation='';},400);}
+function escH(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// ===== SCREEN =====
+function showScreen(id){
+  stopKaraoke();
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  $(id).classList.add('active');
+  $('mainScroll').scrollTop=0;
+}
+
+// ===== TTS =====
+function speakWithKaraoke(textEN,onEnd){
+  if(!soundEnabled||!('speechSynthesis' in window)){if(onEnd)onEnd();return;}
+  window.speechSynthesis.cancel();
+  karaokeActive=true;
+  var bar=$('karaokeBar'),wordsDiv=$('karaokeWords');
+  var words=textEN.split(/\s+/);
+  wordsDiv.innerHTML=words.map(function(w,i){return '<span class="kw" data-i="'+i+'">'+escH(w)+'</span>';}).join(' ');
+  bar.style.display='flex';
+  var spans=wordsDiv.querySelectorAll('.kw'),idx=0;
+  var u=new SpeechSynthesisUtterance(textEN);
+  u.lang='en-US';u.rate=karaokeRate;u.pitch=1.1;
+  var voices=window.speechSynthesis.getVoices();
+  var v=voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})||voices.find(function(x){return x.lang.startsWith('en');});
+  if(v)u.voice=v;
+  u.onboundary=function(e){
+    if(e.name==='word'&&idx<spans.length){
+      if(idx>0){spans[idx-1].classList.remove('kw-active');spans[idx-1].classList.add('kw-done');}
+      spans[idx].classList.add('kw-active');idx++;
+    }
+  };
+  u.onend=function(){
+    if(!karaokeActive)return;
+    spans.forEach(function(s){s.classList.remove('kw-active');s.classList.add('kw-done');});
+    setTimeout(function(){bar.style.display='none';wordsDiv.innerHTML='';karaokeActive=false;if(onEnd)onEnd();},2500);
+  };
+  u.onerror=function(){bar.style.display='none';karaokeActive=false;if(onEnd)onEnd();};
+  window.speechSynthesis.speak(u);
+}
+function speakSimple(text){
+  if(!soundEnabled||!('speechSynthesis' in window))return;
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US';u.rate=0.85;u.pitch=1.1;
+  var voices=window.speechSynthesis.getVoices();
+  var v=voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})||voices.find(function(x){return x.lang.startsWith('en');});
+  if(v)u.voice=v;
+  window.speechSynthesis.speak(u);
+}
+function stopKaraoke(){karaokeActive=false;window.speechSynthesis.cancel();var b=$('karaokeBar');if(b)b.style.display='none';}
+function setKSpeed(r){
+  karaokeRate=r;
+  document.querySelectorAll('.ks-btn').forEach(function(b){
+    b.classList.toggle('active',parseFloat(b.getAttribute('data-rate'))===r);
+  });
+}
+
+// ===== FLAGS =====
+function initFlags(){
+  document.querySelectorAll('[data-pt]').forEach(function(el){
+    if(el.querySelector('.flag-pt'))return;
+    var pt=el.getAttribute('data-pt');
+    var flag=document.createElement('button');
+    flag.className='flag-pt';flag.innerHTML=BR_FLAG;flag.title=pt;
+    var label=document.createElement('div');label.className='pt-label';label.textContent=pt;
+    flag.addEventListener('click',function(e){e.stopPropagation();e.preventDefault();label.classList.toggle('visible');});
+    el.style.position='relative';
+    el.appendChild(flag);el.appendChild(label);
+  });
+}
+
+// ===== FONT / THEME / SOUND / LOCK =====
+function changeFontSize(d){currentFontSize=Math.max(13,Math.min(32,currentFontSize+d*2));document.documentElement.style.setProperty('--fs',currentFontSize+'px');}
+function toggleTheme(){currentTheme=currentTheme==='dark'?'light':'dark';document.body.classList.toggle('light',currentTheme==='light');$('themeBtn').textContent=currentTheme==='dark'?'\u2600\uFE0F':'\uD83C\uDF19';}
+function toggleSound(){soundEnabled=!soundEnabled;$('soundBtn').textContent=soundEnabled?'\uD83D\uDD0A':'\uD83D\uDD07';if(!soundEnabled)stopKaraoke();}
+function toggleLock(){
+  if(!isLocked){isLocked=true;$('lockBtn').textContent='\uD83D\uDD12';try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}catch(e){}window.addEventListener('beforeunload',preventLeave);speakSimple('The screen is locked!');}
+  else{$('lockOverlay').classList.add('active');}
+}
+function unlockScreen(){isLocked=false;$('lockBtn').textContent='\uD83D\uDD13';$('lockOverlay').classList.remove('active');window.removeEventListener('beforeunload',preventLeave);try{document.fullscreenElement&&document.exitFullscreen();}catch(e){}}
+function preventLeave(e){e.preventDefault();e.returnValue='';}
+function goToIndex(){window.location.href='../index.html';}
+function confirmGoHome(){if(isLocked)return;openModal('modalHome');}
+function confirmRestart(){if(isLocked)return;openModal('modalRestart');}
+function doRestart(){closeModal('modalRestart');startModule(lastModule);}
+function openModal(id){$(id).classList.add('active');}
+function closeModal(id){$(id).classList.remove('active');}
+
+// ===== MODULE ROUTER =====
+function startModule(n){
+  if(n===0){showScreen('screen-intro');setTimeout(function(){speakWithKaraoke('Choose a topic to explore!');},300);initFlags();return;}
+  lastModule=n;
+  if(n===1)initAnimals();
+  else if(n===2)initFood();
+  else if(n===3)initPatterns();
+  else if(n===4)initCommunity();
+}
+
+// ===== MODULE 1: ANIMALS =====
+function showAnimalPh(ph){$('animals-ph1').style.display=ph===1?'':'none';$('animals-ph2').style.display=ph===2?'':'none';}
+function initAnimals(){
+  showScreen('screen-animals');showAnimalPh(1);
+  var cards=shuffle(ANIMALS).slice(0,6);
+  var grid=$('animalFlashGrid');grid.innerHTML='';
+  cards.forEach(function(a){
+    var card=document.createElement('div');card.className='fc-card';
+    var inner=document.createElement('div');inner.className='fc-inner';
+    var front=document.createElement('div');front.className='fc-front';
+    front.innerHTML='<div class="fc-emoji">'+a.emoji+'</div><div class="fc-name" data-pt="'+a.namePT+'">'+escH(a.name)+'</div>';
+    var bk=document.createElement('div');bk.className='fc-back';
+    bk.style.cssText='background:linear-gradient(145deg,'+DIET_COLORS[a.diet]+'33,'+DIET_COLORS[a.diet]+'11);border-color:'+DIET_COLORS[a.diet]+';color:'+DIET_COLORS[a.diet]+';';
+    bk.innerHTML='<div style="font-size:1.6rem">'+DIET_EMOJIS[a.diet]+'</div><div style="font-size:.85rem;font-weight:900" data-pt="'+a.dietPT+'">'+a.diet+'</div><div style="font-size:.7rem;color:var(--text-soft);font-weight:700">Eats: '+a.eats+'</div><button class="speak-btn" onclick="event.stopPropagation();speakSimple(\''+a.name.replace(/'/g,"\\'")+'  is a '+a.diet+'\')" style="margin-top:4px">\uD83D\uDD0A</button>';
+    inner.appendChild(front);inner.appendChild(bk);card.appendChild(inner);
+    card.addEventListener('click',function(){
+      inner.parentElement.classList.toggle('flipped');
+      if(inner.parentElement.classList.contains('flipped')){speakSimple(a.name+' is a '+a.diet+'. It eats '+a.eats);addXP(2);}
+    });
+    grid.appendChild(card);
+  });
+  $('animalFlashCounter').textContent='Showing 6 of '+ANIMALS.length+' animals';
+  setTimeout(function(){speakWithKaraoke('Meet the Animals! Tap each card to flip it and discover the diet!');},400);
+  initFlags();
+}
+function startAnimalSort(){
+  showAnimalPh(2);
+  $('animalCheckBtn').style.display='none';$('animalRetryBtn').style.display='none';
+  $('animalSortFb').textContent='';$('animalSortDots').innerHTML='';
+  animalSortItems=shuffle(ANIMALS).slice(0,9);
+  var cols=$('animalSortCols');cols.innerHTML='';
+  ['Herbivore','Carnivore','Omnivore'].forEach(function(diet){
+    var col=document.createElement('div');col.className='sort-col';col.dataset.diet=diet;
+    col.innerHTML='<div class="sort-col-title" style="color:'+DIET_COLORS[diet]+';background:'+DIET_COLORS[diet]+'22">'+DIET_EMOJIS[diet]+' '+diet+'</div>';
+    col.addEventListener('dragover',function(e){e.preventDefault();col.classList.add('drag-over');});
+    col.addEventListener('dragleave',function(e){if(!col.contains(e.relatedTarget))col.classList.remove('drag-over');});
+    col.addEventListener('drop',function(e){e.preventDefault();col.classList.remove('drag-over');var id=e.dataTransfer.getData('text');var el=$(id);if(el){col.appendChild(el);checkAnimalSortBtn();}});
+    cols.appendChild(col);
+  });
+  var pool=$('animalSortPool');pool.innerHTML='';
+  animalSortItems.forEach(function(a,i){
+    var card=document.createElement('div');card.className='sort-card';card.id='asc'+i;card.dataset.diet=a.diet;
+    card.innerHTML='<span style="font-size:1.1rem">'+a.emoji+'</span><span data-pt="'+a.namePT+'">'+escH(a.name)+'</span>';
+    card.setAttribute('draggable','true');
+    card.addEventListener('dragstart',function(e){e.dataTransfer.setData('text',card.id);});
+    makeTouchDrag(card,function(zone){
+      if(zone&&zone.classList.contains('sort-col')){zone.appendChild(card);checkAnimalSortBtn();}
+      else{shakeEl(card);}
+    });
+    pool.appendChild(card);
+  });
+  setTimeout(function(){speakWithKaraoke('Sort the Animals! Drag each animal to the right group!');},400);
+  initFlags();
+}
+function checkAnimalSortBtn(){
+  var allPlaced=$('animalSortPool').querySelectorAll('.sort-card').length===0;
+  $('animalCheckBtn').style.display=allPlaced?'':'none';
+}
+function checkAnimalSort(){
+  var correct=0,total=animalSortItems.length;
+  $('animalSortCols').querySelectorAll('.sort-col').forEach(function(col){
+    col.querySelectorAll('.sort-card').forEach(function(card){
+      var ok=card.dataset.diet===col.dataset.diet;
+      card.classList.toggle('correct',ok);card.classList.toggle('wrong',!ok);
+      if(ok){correct++;addXP(3);}
+    });
+  });
+  var dots=$('animalSortDots');dots.innerHTML='';
+  $('animalSortCols').querySelectorAll('.sort-card').forEach(function(card){
+    var dot=document.createElement('div');dot.className='score-dot';
+    dot.style.background=card.classList.contains('correct')?'#34d399':'#f87171';
+    dots.appendChild(dot);
+  });
+  $('animalSortFb').textContent=correct+' of '+total+' correct!';
+  $('animalSortFb').style.color=correct===total?'#34d399':'#fbbf24';
+  $('animalCheckBtn').style.display='none';$('animalRetryBtn').style.display='';
+  if(correct>=Math.ceil(total/2))launchConfetti();
+  speakSimple(correct+' out of '+total+' correct!');
+}
+
+// ===== MODULE 2: FOOD =====
+function showFoodPh(ph){$('food-ph1').style.display=ph===1?'':'none';$('food-ph2').style.display=ph===2?'':'none';}
+function initFood(){showScreen('screen-food');showFoodPh(1);foodQIdx=0;foodQScore=0;foodQuizItems=shuffle(FOODS).slice(0,8);renderFoodQ();setTimeout(function(){speakWithKaraoke('Food Group Quiz! Which food group is this?');},400);}
+function renderFoodQ(){
+  foodQAnswered=false;
+  var q=foodQuizItems[foodQIdx];
+  $('foodQProg').textContent='Question '+(foodQIdx+1)+' of '+foodQuizItems.length;
+  $('foodQEmoji').textContent=q.emoji;
+  $('foodQName').textContent=q.name;$('foodQName').setAttribute('data-pt',q.namePT);
+  $('foodQFb').textContent='';$('foodQNext').innerHTML='';
+  var allGroups=['Grains','Fruits','Vegetables','Dairy','Protein','Fats'];
+  var wrongs=shuffle(allGroups.filter(function(g){return g!==q.group;})).slice(0,3);
+  var opts=shuffle([q.group].concat(wrongs));
+  var og=$('foodQOpts');og.innerHTML='';
+  opts.forEach(function(g){
+    var pg=PYR_GROUPS.find(function(p){return p.group===g;})||{emoji:'',groupPT:g};
+    var div=document.createElement('div');div.className='quiz-opt';div.setAttribute('data-pt',pg.groupPT);
+    div.innerHTML='<div class="quiz-opt-emoji">'+pg.emoji+'</div><div class="quiz-opt-text">'+escH(g)+'</div>';
+    div.addEventListener('click',function(){handleFoodQ(g,q,div);});
+    og.appendChild(div);
+  });
+  setTimeout(function(){speakWithKaraoke('Which food group is '+q.name+'?');},500);
+  initFlags();
+}
+function handleFoodQ(guess,q,div){
+  if(foodQAnswered)return;foodQAnswered=true;
+  $('foodQOpts').querySelectorAll('.quiz-opt').forEach(function(o){o.classList.add('disabled');});
+  var ok=guess===q.group;
+  div.classList.add(ok?'correct':'wrong');
+  if(!ok){$('foodQOpts').querySelectorAll('.quiz-opt').forEach(function(o){if(o.querySelector('.quiz-opt-text').textContent===q.group)o.classList.add('correct');});}
+  if(ok){foodQScore++;addXP(5);$('foodQFb').textContent='\u2705 Yes! '+q.name+' is '+q.group+'! Eat '+q.servings+'.';$('foodQFb').style.color='#34d399';speakSimple('Yes! '+q.name+' is a '+q.group);}
+  else{$('foodQFb').textContent='\uD83D\uDD0D The answer is '+q.group+'!';$('foodQFb').style.color='#f87171';speakSimple('The answer is '+q.group);}
+  var nb=$('foodQNext');
+  var btn=document.createElement('button');btn.className='btn btn-primary';
+  if(foodQIdx+1<foodQuizItems.length){
+    btn.textContent='Next \u27A1\uFE0F';btn.setAttribute('data-pt','Pr\u00F3xima');
+    btn.onclick=function(){foodQIdx++;renderFoodQ();};
+  } else {
+    btn.textContent='\uD83C\uDF89 Done!';btn.setAttribute('data-pt','Feito!');
+    btn.onclick=function(){if(foodQScore>=Math.ceil(foodQuizItems.length/2))launchConfetti();speakSimple(foodQScore+' out of '+foodQuizItems.length+'! Now let us build the pyramid!');showFoodPh(2);startPyramid();};
+  }
+  nb.appendChild(btn);initFlags();
+}
+function startPyramid(){
+  showFoodPh(2);pyrFilled={};
+  var wrap=$('pyramidSlots');wrap.innerHTML='';
+  for(var f=6;f>=1;f--){
+    var row=document.createElement('div');row.className='pyr-row';
+    var pg=PYR_GROUPS.find(function(p){return p.floor===f;});
+    var slot=document.createElement('div');slot.className='pyr-slot';slot.id='pslot'+f;slot.dataset.floor=f;
+    // Floor 1=base=widest, floor 6=top=narrowest
+    slot.style.minWidth=Math.round(80+(7-f)*22)+'px';
+    slot.textContent='Floor '+f+' — ?';
+    slot.addEventListener('dragover',function(e){e.preventDefault();this.classList.add('drag-over');});
+    slot.addEventListener('dragleave',function(){this.classList.remove('drag-over');});
+    (function(sl,floor){
+      sl.addEventListener('drop',function(e){e.preventDefault();sl.classList.remove('drag-over');var id=e.dataTransfer.getData('text');var el=$(id);if(el)handlePyrDrop(sl,el,floor);});
+    })(slot,f);
+    row.appendChild(slot);wrap.appendChild(row);
+  }
+  var pool=$('pyramidPool');pool.innerHTML='';
+  shuffle(PYR_GROUPS).forEach(function(pg){
+    var card=document.createElement('div');card.className='pyr-card';card.id='pcard'+pg.floor;card.dataset.floor=pg.floor;
+    card.style.borderColor=pg.color;
+    card.innerHTML='<span style="font-size:1.3rem">'+pg.emoji+'</span><span data-pt="'+pg.groupPT+'">'+escH(pg.group)+'</span>';
+    card.setAttribute('draggable','true');
+    card.addEventListener('dragstart',function(e){e.dataTransfer.setData('text',card.id);});
+    makeTouchDrag(card,function(zone){
+      if(zone&&zone.classList.contains('pyr-slot'))handlePyrDrop(zone,card,parseInt(zone.dataset.floor));
+      else shakeEl(card);
+    });
+    pool.appendChild(card);
+  });
+  $('pyrFb').textContent='';
+  setTimeout(function(){speakWithKaraoke('Build the Food Pyramid! Drag each group to the right floor! Floor 1 is the base!');},400);
+  initFlags();
+}
+function handlePyrDrop(slot,card,floor){
+  var cardFloor=parseInt(card.dataset.floor);
+  if(cardFloor===floor){
+    var pg=PYR_GROUPS.find(function(p){return p.floor===floor;});
+    slot.style.background=pg.color+'22';slot.style.borderColor=pg.color;slot.style.borderStyle='solid';
+    slot.innerHTML='<span style="font-size:1.3rem">'+pg.emoji+'</span> <span style="color:'+pg.color+';font-weight:900">'+pg.group+'</span>';
+    slot.classList.add('filled');card.remove();pyrFilled[floor]=true;addXP(8);
+    speakSimple('Yes! '+pg.group+' goes on floor '+floor+'!');
+    if(Object.keys(pyrFilled).length===6){
+      $('pyrFb').textContent='\uD83C\uDF89 Amazing! You built the Food Pyramid!';$('pyrFb').style.color='#34d399';
+      speakSimple('Amazing! You built the entire Food Pyramid! Great job!');launchConfetti();addXP(20);
+    }
+  } else {
+    shakeEl(card);speakSimple('Try again!');
+    $('pyrFb').textContent='\uD83D\uDCA1 Try again!';$('pyrFb').style.color='#fbbf24';
+  }
+}
+
+// ===== MODULE 3: PATTERNS =====
+function showPatPh(ph){$('pat-ph1').style.display=ph===1?'':'none';$('pat-ph2').style.display=ph===2?'':'none';}
+function initPatterns(){showScreen('screen-patterns');showPatPh(1);coreQIdx=0;coreQScore=0;coreQuizItems=shuffle(PATTERNS).slice(0,8);renderCoreQ();setTimeout(function(){speakWithKaraoke('Patterns! Find the core — the part that repeats!');},400);}
+function renderCoreQ(){
+  coreQAnswered=false;
+  var p=coreQuizItems[coreQIdx];
+  $('coreQProg').textContent='Question '+(coreQIdx+1)+' of '+coreQuizItems.length;
+  $('coreQSeq').textContent=p.seq.join('  ');
+  $('coreQText').textContent='What is the CORE? ('+p.attr+')';
+  $('coreQFb').textContent='';$('coreQNext').innerHTML='';
+  var og=$('coreQOpts');og.innerHTML='';
+  // Correct = p.core (combined emojis), distractors = individual items from opts
+  var choices=shuffle([
+    {label:p.core,correct:true},
+    {label:p.opts[0],correct:false},
+    {label:p.opts[1]||p.opts[0],correct:false}
+  ]);
+  choices.forEach(function(c){
+    var btn=document.createElement('div');btn.className='pat-opt';
+    btn.textContent=c.label;
+    btn.addEventListener('click',function(){handlePatQ(c.correct,btn,p,'core');});
+    og.appendChild(btn);
+  });
+  setTimeout(function(){speakSimple('What is the core of this pattern?');},500);
+}
+function startNextQuiz(){showPatPh(2);nextQIdx=0;nextQScore=0;nextQuizItems=shuffle(PATTERNS).slice(0,8);renderNextQ();setTimeout(function(){speakWithKaraoke('What Comes Next? Complete the pattern!');},400);}
+function renderNextQ(){
+  nextQAnswered=false;
+  var p=nextQuizItems[nextQIdx];
+  $('nextQProg').textContent='Question '+(nextQIdx+1)+' of '+nextQuizItems.length;
+  $('nextQSeq').textContent=p.seq.join('  ')+' ?';
+  $('nextQText').textContent='What comes next?';
+  $('nextQFb').textContent='';$('nextQNext').innerHTML='';
+  var og=$('nextQOpts');og.innerHTML='';
+  shuffle(p.opts).forEach(function(o){
+    var btn=document.createElement('div');btn.className='pat-opt';btn.textContent=o;
+    btn.addEventListener('click',function(){handlePatQ(o===p.next,btn,p,'next');});
+    og.appendChild(btn);
+  });
+  setTimeout(function(){speakSimple('What comes next?');},500);
+}
+function handlePatQ(correct,btn,p,phase){
+  var answered=phase==='core'?coreQAnswered:nextQAnswered;
+  if(answered)return;
+  if(phase==='core')coreQAnswered=true;else nextQAnswered=true;
+  var optsId=phase==='core'?'coreQOpts':'nextQOpts';
+  document.querySelectorAll('#'+optsId+' .pat-opt').forEach(function(o){o.classList.add('disabled');});
+  btn.classList.add(correct?'correct':'wrong');
+  var fbId=phase==='core'?'coreQFb':'nextQFb';
+  var nbId=phase==='core'?'coreQNext':'nextQNext';
+  var fb=$(fbId),nb=$(nbId);
+  if(correct){
+    if(phase==='core')coreQScore++;else nextQScore++;
+    addXP(5);
+    fb.textContent='\u2705 Correct! The '+(phase==='core'?'core is: '+p.coreDesc:'answer is '+p.next);
+    fb.style.color='#34d399';speakSimple('Correct!');
+  } else {
+    fb.textContent='\uD83D\uDD0D Look again! '+(phase==='core'?'The core is: '+p.coreDesc:'The answer is '+p.next);
+    fb.style.color='#f87171';speakSimple(phase==='core'?'The core is '+p.coreDesc:'The answer is '+p.next);
+  }
+  var items=phase==='core'?coreQuizItems:nextQuizItems;
+  var idx=phase==='core'?coreQIdx:nextQIdx;
+  var btnNext=document.createElement('button');btnNext.className='btn btn-primary';
+  if(idx+1<items.length){
+    btnNext.textContent='Next \u27A1\uFE0F';btnNext.setAttribute('data-pt','Pr\u00F3xima');
+    btnNext.onclick=function(){if(phase==='core'){coreQIdx++;renderCoreQ();}else{nextQIdx++;renderNextQ();}};
+  } else {
+    var score=phase==='core'?coreQScore:nextQScore;
+    btnNext.textContent='\uD83C\uDF89 Done! '+score+'/'+items.length;
+    btnNext.onclick=function(){if(score>=Math.ceil(items.length/2))launchConfetti();speakSimple(score+' out of '+items.length+' correct! Great job!');};
+  }
+  nb.appendChild(btnNext);initFlags();
+}
+
+// ===== MODULE 4: COMMUNITY =====
+function showCommPh(ph){$('comm-ph1').style.display=ph===1?'':'none';$('comm-ph2').style.display=ph===2?'':'none';}
+function initCommunity(){
+  showScreen('screen-community');showCommPh(1);
+  var grid=$('catGrid');grid.innerHTML='';
+  ['needs','wants','goods','services'].forEach(function(cat){
+    var m=CAT_META[cat];
+    var panel=document.createElement('div');panel.className='cat-panel';
+    panel.style.cssText='background:'+m.bg+';border:2px solid '+m.border+';';
+    var topBar=document.createElement('div');
+    topBar.style.cssText='position:absolute;top:0;left:0;right:0;height:5px;border-radius:16px 16px 0 0;background:'+m.color+';';
+    panel.appendChild(topBar);
+    var html='<div class="cat-panel-icon">'+m.icon+'</div>';
+    html+='<div class="cat-panel-title" style="color:'+m.color+'">'+m.label+' <span style="font-size:.58rem;opacity:.65;font-weight:700">('+m.labelPT+')</span></div>';
+    html+='<div class="cat-panel-items">';
+    COMMUNITY[cat].forEach(function(item){
+      html+='<div class="cat-panel-item"><span>'+item.emoji+'</span><span data-pt="'+item.namePT+'">'+escH(item.name)+'</span></div>';
+    });
+    html+='</div>';
+    panel.innerHTML+=html;
+    grid.appendChild(panel);
+  });
+  setTimeout(function(){speakWithKaraoke('Community Categories! Needs, Wants, Goods and Services!');},400);
+  addXP(5);initFlags();
+}
+function startCatFlash(){
+  showCommPh(2);catFlashOrder=shuffle(ALL_COMMUNITY);catFlashIdx=0;renderCatFlash();
+}
+function shuffleCatFlash(){catFlashOrder=shuffle(ALL_COMMUNITY);catFlashIdx=0;renderCatFlash();}
+function renderCatFlash(){
+  var card=$('catFlashCard');card.classList.remove('flipped');
+  var item=catFlashOrder[catFlashIdx];var m=CAT_META[item.cat];
+  $('catFlashFront').innerHTML='<div style="font-size:2.8rem">'+item.emoji+'</div><div style="font-size:.95rem;font-weight:900;color:#c4b5fd" data-pt="'+item.namePT+'">'+escH(item.name)+'</div><button class="speak-btn" onclick="event.stopPropagation();speakSimple(\''+item.name.replace(/'/g,"\\'")+'\')" style="margin-top:8px">\uD83D\uDD0A</button>';
+  var bk=$('catFlashBack');bk.style.background=m.bg;bk.style.borderColor=m.color;
+  bk.innerHTML='<div style="font-size:1.8rem">'+item.emoji+' '+m.icon+'</div><div style="font-size:1.05rem;font-weight:900;color:'+m.color+'" data-pt="'+m.labelPT+'">'+m.label+'</div><div style="font-size:.8rem;color:var(--text-soft);font-weight:700">'+escH(item.name)+'</div>';
+  $('catFlashCounter').textContent=(catFlashIdx+1)+' of '+catFlashOrder.length;
+  initFlags();
+}
+function flipCatFlash(){
+  var card=$('catFlashCard');
+  if(!card.classList.contains('flipped')){card.classList.add('flipped');var item=catFlashOrder[catFlashIdx];speakSimple(item.name+' is a community '+CAT_META[item.cat].label.toLowerCase());addXP(2);}
+}
+function nextCatFlash(){catFlashIdx=(catFlashIdx+1)%catFlashOrder.length;renderCatFlash();}
+function prevCatFlash(){catFlashIdx=(catFlashIdx-1+catFlashOrder.length)%catFlashOrder.length;renderCatFlash();}
+
+// ===== TOUCH DRAG =====
+function makeTouchDrag(el,onDrop){
+  el.addEventListener('touchstart',function(e){
+    touchDragEl=el;var t=e.touches[0];var r=el.getBoundingClientRect();
+    touchOffX=t.clientX-r.left;touchOffY=t.clientY-r.top;
+    el.style.opacity='.55';el.style.zIndex='999';
+  },{passive:true});
+  el.addEventListener('touchmove',function(e){
+    e.preventDefault();var t=e.touches[0];
+    el.style.position='fixed';el.style.left=(t.clientX-touchOffX)+'px';el.style.top=(t.clientY-touchOffY)+'px';
+  },{passive:false});
+  el.addEventListener('touchend',function(e){
+    el.style.opacity='';el.style.zIndex='';el.style.position='';el.style.left='';el.style.top='';
+    var t=e.changedTouches[0];
+    var target=document.elementFromPoint(t.clientX,t.clientY);
+    var zone=target&&(target.classList.contains('sort-col')||target.classList.contains('pyr-slot'))?target:target&&target.closest('.sort-col,.pyr-slot');
+    onDrop(zone);touchDragEl=null;
+  });
+}
+
+// ===== CONFETTI =====
+function launchConfetti(){
+  var c=$('confettiContainer');c.innerHTML='';
+  var colors=['#a78bfa','#f472b6','#fb923c','#34d399','#60a5fa','#fbbf24'];
+  for(var i=0;i<60;i++){
+    var p=document.createElement('div');p.className='confetti-piece';
+    p.style.cssText='left:'+Math.random()*100+'%;background:'+colors[i%colors.length]+';animation-duration:'+(.8+Math.random()*1.4)+'s;animation-delay:'+Math.random()*.5+'s;border-radius:'+Math.round(Math.random()*5)+'px;';
+    c.appendChild(p);
+  }
+  setTimeout(function(){c.innerHTML='';},3000);
+}
+
+// ===== TOUR =====
+var tourSteps=[
+  {selector:'#navLogo',title:'Serafina ELA-06',text:'Toddle Explorer! Four topics: Animals, Food Pyramid, Patterns and Community!'},
+  {selector:'#scoreDisplay',title:'Your XP \u2B50',text:'Earn points by exploring and playing! Every correct answer gives you XP!'},
+  {selector:'#btnHome',title:'Home \uD83C\uDFE0',text:'Go back to the main menu. It will ask before leaving!'},
+  {selector:'#lockBtn',title:'Lock \uD83D\uDD12',text:'Lock the screen to play without leaving by accident. Tap again to unlock!'},
+  {selector:null,title:'Reading Speed \uD83D\uDD0A',text:'When words appear at the bottom:\n\uD83D\uDC0C Very slow \u2022 \uD83D\uDC22 Slow \u2022 \uD83D\uDC07 Normal \u2022 \uD83D\uDE80 Fast'}
+];
+var tourIdx=0;
+function startTour(){if(localStorage.getItem('ela06_tour_done'))return;tourIdx=0;showTourStep();$('tourOverlay').style.display='block';}
+function showTourStep(){
+  var step=tourSteps[tourIdx];
+  var el=step.selector?document.querySelector(step.selector):null;
+  var bubble=$('tourBubble'),spot=$('tourSpotlight');
+  $('tourTitle').textContent=step.title;$('tourText').textContent=step.text;
+  var dotsEl=$('tourDots');dotsEl.innerHTML='';
+  tourSteps.forEach(function(_,i){var d=document.createElement('div');d.className='tour-dot'+(i===tourIdx?' active':'');dotsEl.appendChild(d);});
+  $('tourPrev').style.display=tourIdx===0?'none':'';
+  $('tourNext').textContent=tourIdx===tourSteps.length-1?'Done \u2714':'Next \u25BA';
+  if(el){
+    var r=el.getBoundingClientRect(),pad=10;
+    spot.style.display='block';spot.style.left=(r.left-pad)+'px';spot.style.top=(r.top-pad)+'px';spot.style.width=(r.width+pad*2)+'px';spot.style.height=(r.height+pad*2)+'px';
+    var bw=290,bh=180,bl=r.left,bt=r.bottom+14;
+    if(bt+bh>window.innerHeight)bt=r.top-bh-14;if(bl+bw>window.innerWidth)bl=window.innerWidth-bw-12;if(bl<8)bl=8;
+    bubble.style.top=bt+'px';bubble.style.left=bl+'px';bubble.style.transform='none';
+  } else {
+    spot.style.display='none';bubble.style.top='50%';bubble.style.left='50%';bubble.style.transform='translate(-50%,-50%)';
+  }
+}
+function tourStep(dir){tourIdx+=dir;if(tourIdx>=tourSteps.length){skipTour();return;}if(tourIdx<0)tourIdx=0;showTourStep();}
+function skipTour(){$('tourOverlay').style.display='none';localStorage.setItem('ela06_tour_done','1');}
+
+// ===== STARFIELD =====
+(function(){
+  var c=$('starfield'),ctx=c.getContext('2d'),stars=[];
+  function resize(){c.width=innerWidth;c.height=innerHeight;stars=[];for(var i=0;i<180;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.1+.02});}
+  function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.y-=s.sp;if(s.y<-5)s.y=c.height+5;s.a+=s.da;if(s.a>1||s.a<.1)s.da*=-1;ctx.save();ctx.globalAlpha=s.a;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();ctx.restore();});requestAnimationFrame(draw);}
+  resize();window.addEventListener('resize',resize);draw();
+})();
+
+// ===== INIT =====
+window.addEventListener('load',function(){
+  initFlags();
+  setTimeout(startTour,800);
+  setTimeout(function(){speakWithKaraoke('Welcome to Toddle Explorer! Choose a topic to start!');},600);
+});
+</script>
+</body>
+</html>

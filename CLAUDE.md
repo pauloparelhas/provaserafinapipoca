@@ -129,8 +129,29 @@ Documentar e parte do trabalho, nao bonus opcional.
 - Emojis: drop-shadow, animacoes float/pulse
 - Mobile-first: testar em 360px mentalmente
 
+## REGRA CRITICA — ARQUIVOS GRANDES E AGENTES
+
+**NUNCA delegar a escrita de um arquivo HTML/JS completo para um unico agente.**
+
+Agentes tem limite de ~32000 tokens de OUTPUT. Arquivos ELA tipicamente tem 800-1400 linhas. Um unico agente NUNCA consegue escrever um arquivo completo — ele truncara silenciosamente e o arquivo nao sera criado ou estara incompleto. Isso e uma falha critica.
+
+**REGRA INVIOLAVEL:**
+- Arquivos com mais de 500 linhas: escrever diretamente do contexto principal (Write tool), em partes se necessario
+- Agentes so podem REVER/VALIDAR arquivos existentes — NUNCA escreve-los
+- Nunca acumular mais de 1 arquivo por etapa de implementacao
+- Commit apos cada mudanca funcional — nunca acumular 3+ arquivos sem commit
+
+**GRANULARIDADE OBRIGATORIA:**
+- Dividir implementacao em passos menores: estrutura HTML -> CSS -> JS fase 1 -> JS fase 2 -> etc.
+- Salvar (Write/Edit) apos cada parte completada, nao no final
+- Perguntar ao usuario apos cada parte entregue antes de continuar
+
+**POR QUE:** Na sessao 5/6, um agente falhou ao tentar escrever ELA-06 (~1400 linhas) e o arquivo simplesmente nao foi criado. O erro foi silencioso — Claude declarou "feito" sem verificar se o arquivo existia. Isso atrasou o projeto e frustrou o usuario.
+
 ## O QUE NAO FAZER
 - NAO entregar rapido e errado — melhor demorar e acertar
 - NAO tratar sintoma CSS sem investigar causa raiz no JS/DOM
 - NAO copiar codigo entre arquivos sem verificar contexto
 - NAO usar agente de revisao com prompt vago
+- NAO delegar escrita de arquivo >500 linhas para agente — escrever direto com Write tool
+- NAO declarar arquivo "criado" sem verificar que o arquivo existe e tem o tamanho esperado
