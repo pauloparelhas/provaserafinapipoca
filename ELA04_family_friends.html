@@ -58,7 +58,7 @@ body.light .pt-label{color:#5b21b6;background:rgba(124,58,237,.06);border-color:
 .fc-front .pt-label,.fc-back .pt-label{position:absolute;bottom:2px;left:2px;right:2px;width:auto;text-align:center;font-size:.5rem;}
 
 /* KARAOKE BAR */
-.karaoke-bar{display:none;position:fixed;bottom:50px;left:50%;transform:translateX(-50%);
+.karaoke-bar{display:none;position:fixed;bottom:52px;left:50%;transform:translateX(-50%);
   background:rgba(13,11,30,.92);backdrop-filter:blur(12px);border:2px solid rgba(167,139,250,.5);border-radius:18px;
   padding:12px 22px;z-index:200;font-size:1.15rem;font-weight:700;color:rgba(255,255,255,.35);
   flex-wrap:wrap;gap:6px 8px;justify-content:center;max-width:92%;box-shadow:0 8px 40px rgba(0,0,0,.5);}
@@ -68,6 +68,37 @@ body.light .karaoke-bar{background:rgba(255,255,255,.96);color:rgba(0,0,0,.2);bo
 .karaoke-bar .kw.kw-done{color:rgba(255,255,255,.7);background:rgba(167,139,250,.12);border-bottom:2px solid rgba(167,139,250,.35);}
 body.light .karaoke-bar .kw.kw-active{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;}
 body.light .karaoke-bar .kw.kw-done{color:rgba(0,0,0,.55);}
+/* SPEED BAR */
+.speed-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:201;
+  display:flex;align-items:center;gap:4px;padding:4px 14px 6px;
+  background:rgba(13,11,30,.85);backdrop-filter:blur(8px);
+  border-top:1px solid rgba(167,139,250,.2);border-radius:16px 16px 0 0;}
+body.light .speed-bar{background:rgba(240,238,255,.95);border-color:#c4b5fd;}
+.speed-btn{background:none;border:2px solid transparent;border-radius:10px;font-size:1.3rem;
+  cursor:pointer;padding:2px 6px;transition:.15s;line-height:1;opacity:.55;}
+.speed-btn:hover{opacity:.85;}
+.speed-btn.active{border-color:#a78bfa;background:rgba(167,139,250,.18);opacity:1;}
+/* PRODUCT TOUR */
+.tour-overlay{position:fixed;inset:0;z-index:9000;pointer-events:none;}
+.tour-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9001;}
+.tour-spotlight{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(0,0,0,.72);
+  border:3px solid #a78bfa;z-index:9002;transition:all .35s ease;pointer-events:none;}
+.tour-bubble{position:fixed;z-index:9003;background:linear-gradient(145deg,#1e1b4b,#312e81);
+  border:2px solid #a78bfa;border-radius:20px;padding:18px 22px;max-width:280px;
+  box-shadow:0 12px 40px rgba(0,0,0,.6);color:#fff;}
+body.light .tour-bubble{background:linear-gradient(145deg,#f5f3ff,#ede9fe);color:#1e1b4b;border-color:#7c3aed;}
+.tour-bubble-title{font-size:.8rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:#a78bfa;margin-bottom:6px;}
+.tour-bubble-text{font-size:1rem;font-weight:700;line-height:1.45;margin-bottom:14px;}
+.tour-bubble-nav{display:flex;align-items:center;gap:8px;}
+.tour-btn{border:none;border-radius:10px;padding:7px 14px;font-size:.85rem;font-weight:800;cursor:pointer;transition:.15s;}
+.tour-btn-prev{background:rgba(167,139,250,.15);color:#c4b5fd;}
+.tour-btn-next{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;}
+.tour-btn-skip{margin-left:auto;background:none;color:rgba(255,255,255,.4);font-size:.78rem;font-weight:700;cursor:pointer;border:none;}
+body.light .tour-btn-skip{color:rgba(0,0,0,.4);}
+.tour-step-dots{display:flex;gap:5px;align-items:center;margin-right:4px;}
+.tour-dot{width:7px;height:7px;border-radius:50%;background:rgba(167,139,250,.3);}
+.tour-dot.active{background:#a78bfa;}
 
 /* SPEAKER BUTTON */
 .speak-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
@@ -316,12 +347,12 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="nav-logo">Serafina &bull; ELA-04</div>
+  <div class="nav-logo" id="navLogo">Serafina &bull; ELA-04</div>
   <div class="nav-score" id="scoreDisplay">&#11088; 0 XP</div>
-  <button class="nb" onclick="confirmGoHome()" title="Home">&#127968;</button>
-  <button class="nb" onclick="confirmRestart()" title="Restart">&#128260;</button>
-  <button class="nb" onclick="changeFontSize(-1)" title="Smaller"><span class="nb-text">A-</span></button>
-  <button class="nb" onclick="changeFontSize(1)" title="Bigger"><span class="nb-text">A+</span></button>
+  <button class="nb" id="btnHome" onclick="confirmGoHome()" title="Home">&#127968;</button>
+  <button class="nb" id="btnRestart" onclick="confirmRestart()" title="Restart">&#128260;</button>
+  <button class="nb" id="btnFontDown" onclick="changeFontSize(-1)" title="Smaller"><span class="nb-text">A-</span></button>
+  <button class="nb" id="btnFontUp" onclick="changeFontSize(1)" title="Bigger"><span class="nb-text">A+</span></button>
   <button class="nb" id="themeBtn" onclick="toggleTheme()" title="Theme">&#9728;&#65039;</button>
   <button class="nb" id="soundBtn" onclick="toggleSound()" title="Sound">&#128264;</button>
   <button class="nb" id="lockBtn" onclick="toggleLock()" title="Lock">&#128275;</button>
@@ -465,6 +496,31 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
 
 <!-- KARAOKE BAR -->
 <div id="karaokeBar" class="karaoke-bar"></div>
+
+<!-- SPEED BAR -->
+<div class="speed-bar" id="speedBar">
+  <button class="speed-btn" data-rate="0.3"  title="Very slow" onclick="setSpeed(0.3)">🐌</button>
+  <button class="speed-btn active" data-rate="0.55" title="Slow" onclick="setSpeed(0.55)">🐢</button>
+  <button class="speed-btn" data-rate="0.85" title="Normal" onclick="setSpeed(0.85)">🐇</button>
+  <button class="speed-btn" data-rate="1.25" title="Fast" onclick="setSpeed(1.25)">🚀</button>
+</div>
+
+<!-- TOUR OVERLAY -->
+<div id="tourOverlay" style="display:none;">
+  <div class="tour-backdrop" id="tourBackdrop" onclick="skipTour()"></div>
+  <div class="tour-spotlight" id="tourSpotlight"></div>
+  <div class="tour-bubble" id="tourBubble">
+    <div class="tour-bubble-title" id="tourTitle"></div>
+    <div class="tour-bubble-text" id="tourText"></div>
+    <div class="tour-bubble-nav">
+      <div class="tour-step-dots" id="tourDots"></div>
+      <button class="tour-btn tour-btn-prev" id="tourPrev" onclick="tourStep(-1)">&#9664; Voltar</button>
+      <button class="tour-btn tour-btn-next" id="tourNext" onclick="tourStep(1)">Pr&#243;ximo &#9654;</button>
+      <button class="tour-btn-skip" onclick="skipTour()">Pular</button>
+    </div>
+  </div>
+</div>
+
 <div class="confetti-container" id="confettiBox"></div>
 
 <script>
@@ -484,18 +540,18 @@ var FAMILY_MEMBERS = [
 ];
 
 var QUIZ_BANK = [
-  {clue:'My mom\u2019s mom is my ___',             emoji:'\u{1F475}', answer:'Grandma',     wrongs:['Aunt','Sister','Mom']},
-  {clue:'My dad\u2019s brother is my ___',         emoji:'\u{1F468}\u200D\u{1F9B1}', answer:'Uncle', wrongs:['Dad','Cousin','Grandpa']},
-  {clue:'My aunt\u2019s daughter is my ___',       emoji:'\u{1F9D2}', answer:'Cousin',      wrongs:['Sister','Baby','Best Friend']},
-  {clue:'My mom\u2019s dad is my ___',             emoji:'\u{1F474}', answer:'Grandpa',     wrongs:['Dad','Uncle','Grandma']},
-  {clue:'My dad\u2019s sister is my ___',          emoji:'\u{1F469}\u200D\u{1F9B0}', answer:'Aunt', wrongs:['Mom','Sister','Grandma']},
-  {clue:'She is my sibling and my first best friend', emoji:'\u{1F467}', answer:'Sister',  wrongs:['Cousin','Mom','Best Friend']},
-  {clue:'The newest and smallest in the family \u{1F338}', emoji:'\u{1F476}', answer:'Baby', wrongs:['Cousin','Brother','Sister']},
-  {clue:'Not family, but always there for you \u{1F49B}', emoji:'\u{1F91D}', answer:'Best Friend', wrongs:['Cousin','Sister','Uncle']},
-  {clue:'My grandma\u2019s son is my ___',         emoji:'\u{1F468}', answer:'Dad',         wrongs:['Uncle','Brother','Grandpa']},
-  {clue:'He is my sibling. We play and grow together.', emoji:'\u{1F466}', answer:'Brother', wrongs:['Cousin','Dad','Uncle']},
-  {clue:'My mom\u2019s or dad\u2019s sister is my ___', emoji:'\u{1F469}\u200D\u{1F9B0}', answer:'Aunt', wrongs:['Sister','Cousin','Grandma']},
-  {clue:'She loves and cares for me every day \u2764\uFE0F', emoji:'\u{1F469}', answer:'Mom', wrongs:['Grandma','Aunt','Sister']}
+  {clue:'My mom\u2019s mom is my ___',             cluePT:'A m\u00e3e da minha m\u00e3e \u00e9 minha ___',  emoji:'\u{1F475}', answer:'Grandma',     wrongs:['Aunt','Sister','Mom']},
+  {clue:'My dad\u2019s brother is my ___',         cluePT:'O irm\u00e3o do meu pai \u00e9 meu ___',         emoji:'\u{1F468}\u200D\u{1F9B1}', answer:'Uncle', wrongs:['Dad','Cousin','Grandpa']},
+  {clue:'My aunt\u2019s daughter is my ___',       cluePT:'A filha da minha tia \u00e9 minha ___',          emoji:'\u{1F9D2}', answer:'Cousin',      wrongs:['Sister','Baby','Best Friend']},
+  {clue:'My mom\u2019s dad is my ___',             cluePT:'O pai da minha m\u00e3e \u00e9 meu ___',         emoji:'\u{1F474}', answer:'Grandpa',     wrongs:['Dad','Uncle','Grandma']},
+  {clue:'My dad\u2019s sister is my ___',          cluePT:'A irm\u00e3 do meu pai \u00e9 minha ___',        emoji:'\u{1F469}\u200D\u{1F9B0}', answer:'Aunt', wrongs:['Mom','Sister','Grandma']},
+  {clue:'She is my sibling. We share the same parents.', cluePT:'Ela \u00e9 minha irm\u00e3. Temos os mesmos pais.', emoji:'\u{1F467}', answer:'Sister', wrongs:['Cousin','Mom','Best Friend']},
+  {clue:'The newest and smallest in the family \u{1F338}', cluePT:'O mais novo e menor da fam\u00edlia',    emoji:'\u{1F476}', answer:'Baby', wrongs:['Cousin','Brother','Sister']},
+  {clue:'We are not family, but we play and laugh together every day.', cluePT:'N\u00e3o somos fam\u00edlia, mas brincamos e rimos juntos todo dia.', emoji:'\u{1F91D}', answer:'Best Friend', wrongs:['Cousin','Sister','Uncle']},
+  {clue:'My grandma\u2019s son is my ___',         cluePT:'O filho da minha av\u00f3 \u00e9 meu ___',       emoji:'\u{1F468}', answer:'Dad',         wrongs:['Uncle','Brother','Grandpa']},
+  {clue:'He is my sibling. We share the same mom and dad.', cluePT:'Ele \u00e9 meu irm\u00e3o. Temos a mesma m\u00e3e e pai.', emoji:'\u{1F466}', answer:'Brother', wrongs:['Cousin','Dad','Uncle']},
+  {clue:'My uncle\u2019s wife is my ___',          cluePT:'A esposa do meu tio \u00e9 minha ___',           emoji:'\u{1F469}\u200D\u{1F9B0}', answer:'Aunt', wrongs:['Sister','Cousin','Grandma']},
+  {clue:'My grandma\u2019s daughter is my ___',    cluePT:'A filha da minha av\u00f3 \u00e9 minha ___',     emoji:'\u{1F469}', answer:'Mom', wrongs:['Grandma','Aunt','Sister']}
 ];
 
 var BUILDER_ADJECTIVES = [
@@ -516,6 +572,7 @@ var BUILDER_ADJECTIVES = [
 // ===== GLOBALS =====
 var totalXP = 0, currentFS = 16, isLight = false;
 var soundEnabled = true, lockActive = false;
+var karaokeRate = 0.55;
 var isTouchDevice = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
 // Phase 2 state
@@ -553,7 +610,7 @@ function speakWithKaraoke(textEN, onEnd) {
     var el = bar.querySelector('[data-i="'+idx+'"]');
     if(el){el.classList.remove('kw-done');el.classList.add('kw-active');}
     var u = new SpeechSynthesisUtterance(words[idx]);
-    u.lang='en-US'; u.rate=0.55; u.pitch=1.1;
+    u.lang='en-US'; u.rate=karaokeRate; u.pitch=1.1;
     if(voice) u.voice=voice;
     u.onend=function(){idx++;setTimeout(speakNextWord,80);};
     u.onerror=function(){idx++;setTimeout(speakNextWord,80);};
@@ -565,6 +622,78 @@ function stopKaraoke(){
   karaokeActive=false; window.speechSynthesis.cancel();
   var bar=document.getElementById('karaokeBar');
   if(bar) bar.style.display='none';
+}
+// ===== SPEED CONTROL =====
+function setSpeed(rate){
+  karaokeRate=rate;
+  document.querySelectorAll('.speed-btn').forEach(function(b){
+    b.classList.toggle('active', parseFloat(b.dataset.rate)===rate);
+  });
+}
+// ===== PRODUCT TOUR =====
+var tourSteps=[
+  {selector:'#navLogo',     title:'Projeto Serafina',            text:'Este \u00e9 o nome da ferramenta! Toque para ir ao menu principal.'},
+  {selector:'#scoreDisplay',title:'Sua pontua\u00e7\u00e3o XP', text:'Aqui aparecem os seus pontos XP! Acerte as atividades para ganhar mais!'},
+  {selector:'#btnHome',     title:'Home \u{1F3E0}',              text:'Volta para o menu principal. Vai perguntar antes de sair!'},
+  {selector:'#btnRestart',  title:'Reiniciar \u{1F504}',         text:'Recome\u00e7a a atividade do zero. \u00d3timo para treinar mais!'},
+  {selector:'#btnFontDown', title:'Letra menor A\u2212',         text:'Diminui o tamanho do texto na tela.'},
+  {selector:'#btnFontUp',   title:'Letra maior A+',              text:'Aumenta o tamanho do texto. Mais f\u00e1cil de ler!'},
+  {selector:'#themeBtn',    title:'Modo claro / escuro',         text:'Muda entre o tema escuro (noite) e claro (dia).'},
+  {selector:'#lockBtn',     title:'Cadeado \u{1F512}',           text:'Trava a tela para jogar sem sair por acidente. Toque de novo para destrancar!'},
+  {selector:'.speed-bar',   title:'Velocidade da fala \u{1F50A}',text:'\u{1F40C} Bem devagar \u2022 \u{1F422} Devagar \u2022 \u{1F407} Normal \u2022 \u{1F680} R\u00e1pido. Escolha como prefere ouvir!'}
+];
+var tourIdx=0;
+function startTour(){
+  if(localStorage.getItem('ela04_tour_done')) return;
+  tourIdx=0; showTourStep();
+  document.getElementById('tourOverlay').style.display='block';
+}
+function showTourStep(){
+  var step=tourSteps[tourIdx];
+  var el=document.querySelector(step.selector);
+  var bubble=document.getElementById('tourBubble');
+  var spot=document.getElementById('tourSpotlight');
+  document.getElementById('tourTitle').textContent=step.title;
+  document.getElementById('tourText').textContent=step.text;
+  // dots
+  var dotsEl=document.getElementById('tourDots'); dotsEl.innerHTML='';
+  tourSteps.forEach(function(_,i){
+    var d=document.createElement('div'); d.className='tour-dot'+(i===tourIdx?' active':'');
+    dotsEl.appendChild(d);
+  });
+  // prev btn
+  document.getElementById('tourPrev').style.display=tourIdx===0?'none':'';
+  // next btn
+  document.getElementById('tourNext').textContent=(tourIdx===tourSteps.length-1)?'Conclu\u00edr \u2714':'Pr\u00f3ximo \u25ba';
+  // spotlight
+  if(el){
+    var r=el.getBoundingClientRect();
+    var pad=8;
+    spot.style.left=(r.left-pad)+'px'; spot.style.top=(r.top-pad)+'px';
+    spot.style.width=(r.width+pad*2)+'px'; spot.style.height=(r.height+pad*2)+'px';
+    spot.style.display='block';
+    // position bubble
+    var bh=200, bw=280;
+    var bt=r.bottom+12; var bl=r.left;
+    if(bt+bh>window.innerHeight) bt=r.top-bh-12;
+    if(bl+bw>window.innerWidth) bl=window.innerWidth-bw-12;
+    if(bl<8) bl=8;
+    bubble.style.top=bt+'px'; bubble.style.left=bl+'px';
+  } else {
+    spot.style.display='none';
+    bubble.style.top='50%'; bubble.style.left='50%';
+    bubble.style.transform='translate(-50%,-50%)';
+  }
+}
+function tourStep(dir){
+  tourIdx+=dir;
+  if(tourIdx>=tourSteps.length){ skipTour(); return; }
+  if(tourIdx<0) tourIdx=0;
+  showTourStep();
+}
+function skipTour(){
+  document.getElementById('tourOverlay').style.display='none';
+  localStorage.setItem('ela04_tour_done','1');
 }
 function speakSimple(text, onEnd){
   if(!soundEnabled||!('speechSynthesis' in window)){if(onEnd)onEnd();return;}
@@ -710,6 +839,7 @@ function renderQuizQuestion(){
   var clueEmoji=document.createElement('span'); clueEmoji.className='quiz-clue-emoji'; clueEmoji.textContent=q.emoji;
   var clueText=document.createElement('div'); clueText.className='quiz-clue-text';
   clueText.innerHTML=q.clue.replace('___','<span class="blank">___</span>');
+  if(q.cluePT) clueText.setAttribute('data-pt', q.cluePT);
   var clueSpk=makeSpeakBtn(q.clue.replace('___','blank'),'28px');
   clueCard.appendChild(clueEmoji); clueCard.appendChild(clueText); clueCard.appendChild(clueSpk);
   area.appendChild(clueCard);
@@ -941,6 +1071,7 @@ function showResult(correct,total,xp){
 
 // ===== INIT =====
 initFlags();
+setTimeout(startTour, 800);
 
 // ===== STARFIELD =====
 (function(){
