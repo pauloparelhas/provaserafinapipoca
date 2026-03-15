@@ -1,5 +1,27 @@
 # Projeto Serafina — Instrucoes para o Claude
 
+## PROTOCOLO DE TRABALHO — INVIOLAVEL
+
+**ANTES de implementar qualquer coisa: analisar → propor → aguardar aprovacao do usuario → so entao executar.**
+
+O usuario decide. Claude propoe e executa quando autorizado. Nunca assumir aprovacao implicita.
+
+## AGENTES OBRIGATORIOS — INVOCAR SEMPRE
+
+Os agentes estao em `.claude/agents/`. Sao invocados com `Agent(subagent_type="nome")`.
+
+| Momento | Agente | Como invocar |
+|---|---|---|
+| Antes de desenhar/codificar nova ferramenta | `pedagogico` | `Agent(subagent_type="pedagogico")` |
+| Antes de declarar ferramenta concluida | `ti` | `Agent(subagent_type="ti")` |
+| Apos entregar ferramenta | `arquivista` | `Agent(subagent_type="arquivista")` |
+| Para retomar sessao ou checar prioridades | `gerente` | `Agent(subagent_type="gerente")` |
+
+**NUNCA declarar ferramenta como "pronta" sem ter rodado o agente `ti` antes.**
+**NUNCA comecar a codar sem ter rodado o agente `pedagogico` antes.**
+
+Os agentes leeem os arquivos do projeto diretamente. Passar sempre o caminho do arquivo como contexto no prompt.
+
 ## Contexto
 Ferramentas HTML gamificadas para crianca de 7 anos (Y2 Maple Bear). Ingles como L2.
 Publico: crianca jogando em celular. CADA detalhe visual importa.
@@ -33,6 +55,8 @@ Antes de entregar, listar mentalmente:
 Percorrer 3-5 passos que o usuario real faria:
 - Ex: "Crianca clica card -> card vira -> flag aparece onde? -> cobre texto? -> NAO, esta no canto superior esquerdo"
 - Ex: "Pai clica lock -> tela cheia -> crianca consegue jogar? -> SIM -> pai clica lock de novo -> overlay aparece -> pai clica unlock"
+- SEMPRE verificar: "Crianca esta no meio do exercicio (sem responder ainda) -> consegue navegar para fase anterior/proxima? -> SIM, botoes sempre visiveis"
+- SEMPRE verificar: "TTS termina -> karaoke bar some imediatamente? -> NAO, deve ficar 2500ms para dar tempo de ler a ultima palavra, AI entao some"
 
 ### Passo 5: AGENTE DE REVISAO
 Quando usar agente Explore para revisar, o prompt DEVE incluir:
@@ -61,6 +85,8 @@ NAO usar prompts vagos como "verifique se o CSS esta correto".
 - [ ] Layout simetrico, alturas uniformes
 - [ ] Nada sobrepoe texto em tela 360px
 - [ ] Lock: 1o clique trava (fullscreen + bloqueia nav), 2o clique mostra unlock overlay
+- [ ] Karaoke bar: sumir 2500ms APOS leitura acabar (nao imediatamente) — dar tempo de ler a ultima palavra
+- [ ] Nav prev/next: botoes de fase/historia presentes e VISIVEIS em TODAS as telas, inclusive durante exercicio antes de responder — nada impede a crianca de navegar
 
 ## REGRA DE DOCUMENTACAO — AUTOMATICA E OBRIGATORIA
 

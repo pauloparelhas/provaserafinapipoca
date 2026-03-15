@@ -348,6 +348,11 @@ body.light #karaokeWords .kw.kw-active{background:linear-gradient(135deg,#7c3aed
         <div class="q-feedback" id="qFeedback"></div>
         <div class="q-next-row" id="qNextRow"></div>
       </div>
+      <!-- Story-level navigation — always visible -->
+      <div class="phase-nav" id="storyPhaseNav" style="margin-top:6px;padding-bottom:10px;">
+        <button class="btn btn-back" id="storyPrevBtn" onclick="prevStory()" style="display:none;">&#9664; Hist&#243;ria Anterior</button>
+        <button class="btn btn-next" id="storyNextBtn" onclick="nextStory()">Pr&#243;xima Hist&#243;ria &#9654;</button>
+      </div>
     </div>
   </div>
 </div>
@@ -570,9 +575,7 @@ function speakWithKaraoke(textEN, onEnd){
     }
   };
   u.onend=function(){
-    bar.style.display='none';
-    wordsDiv.innerHTML='';
-    if(onEnd)onEnd();
+    setTimeout(function(){bar.style.display='none';wordsDiv.innerHTML='';if(onEnd)onEnd();},2500);
   };
   speechSynthesis.speak(u);
 }
@@ -637,6 +640,14 @@ function buildLineHTML(text, hintWords){
 function escapeHTML(str){return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 // ===== STORY RENDERING =====
+function updateStoryNav(){
+  var prevBtn=$('storyPrevBtn'), nextBtn=$('storyNextBtn');
+  prevBtn.style.display=currentStoryIdx>0?'':'none';
+  nextBtn.style.display=currentStoryIdx<STORY_DATA.length-1?'':'none';
+}
+function prevStory(){if(currentStoryIdx>0)startStory(currentStoryIdx-1);}
+function nextStory(){if(currentStoryIdx<STORY_DATA.length-1)startStory(currentStoryIdx+1);}
+
 function startStory(idx){
   currentStoryIdx=idx;
   currentQIdx=0;
@@ -644,6 +655,7 @@ function startStory(idx){
   showScreen('screen-text');
   renderStoryLines(idx, null);
   renderQuestion(idx, 0);
+  updateStoryNav();
   // Auto-read intro
   setTimeout(function(){speakWithKaraoke(STORY_DATA[idx].title+'. Tap each line to hear it!');},300);
   // Start phase B tour on first story only
