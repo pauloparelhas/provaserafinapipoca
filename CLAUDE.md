@@ -62,12 +62,27 @@ NAO usar prompts vagos como "verifique se o CSS esta correto".
 - [ ] Nada sobrepoe texto em tela 360px
 - [ ] Lock: 1o clique trava (fullscreen + bloqueia nav), 2o clique mostra unlock overlay
 
-## REGRA DE DOCUMENTACAO (OBRIGATORIA)
-Ao final de cada sessao em que um padrao foi corrigido ou descoberto:
-1. Atualizar memory/ELA_PADRAO.md com o anti-padrao e o padrao correto
-2. Atualizar este CLAUDE.md com novos checkpoints
-3. Atualizar MEMORY.md se o estado do projeto mudou
-Agentes recebem instrucoes BASEADAS nestes arquivos — docs desatualizados = agentes errados.
+## REGRA DE DOCUMENTACAO — AUTOMATICA E OBRIGATORIA
+
+**QUANDO atualizar (nao esperar fim de sessao):**
+- Imediatamente apos corrigir um bug causado por padrao errado
+- Imediatamente apos implementar feature nova que vira padrao
+- Imediatamente apos agente pedagogico ou QA identificar problema estrutural
+- Antes de passar para a proxima tarefa — nunca acumular
+
+**O QUE atualizar:**
+1. `memory/ELA_PADRAO.md` — anti-padrao que causou o problema + padrao correto que substituiu
+2. Este `CLAUDE.md` — novos itens no checklist pre-entrega
+3. `memory/MEMORY.md` — status atual do projeto (ELA concluidas, proxima tarefa)
+
+**COMO fazer (sem o usuario pedir):**
+- Claude deve identificar sozinho se algo novo foi aprendido na interacao
+- Se sim: atualizar os docs como parte da entrega, nao como tarefa separada
+- Confirmar para o usuario: "Docs atualizados: adicionei [X] ao ELA_PADRAO.md"
+
+**POR QUE isso importa:**
+Agentes recebem instrucoes baseadas nestes arquivos. Docs desatualizados = agentes repetem erros.
+Documentar e parte do trabalho, nao bonus opcional.
 
 ## REGRAS DE DESIGN
 - Fundo: `#0d0b1e` com starfield canvas
