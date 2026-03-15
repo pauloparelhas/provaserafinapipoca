@@ -33,7 +33,9 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
 .disc-date{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-left:auto;}
 
 /* TOOL CARDS */
-.tools-grid{display:flex;flex-direction:column;gap:10px;}
+.tools-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+@media(min-width:540px){.tools-grid{grid-template-columns:1fr 1fr;}}
+@media(min-width:820px){.tools-grid{grid-template-columns:1fr 1fr 1fr;}}
 .tool-card{border-radius:18px;padding:16px 20px;display:flex;align-items:center;gap:16px;text-decoration:none;transition:all .2s;border:1px solid transparent;cursor:pointer;}
 .tool-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.35);}
 .tool-card.ready{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.09);}
@@ -75,84 +77,8 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
     <div class="title">Projeto Serafina</div>
     <div class="subtitle">Ferramentas de estudo para as Avaliacoes Formais</div>
     <div class="exam-bar">
-      <div class="exam-chip" style="background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:#34d399;">&#x2705; LP &mdash; 10/03</div>
       <div class="exam-chip urgent">&#x1F534; Ingles &mdash; 18/03</div>
       <div class="exam-chip waiting">&#x26AA; Historia &mdash; 26/03</div>
-    </div>
-  </div>
-
-  <!-- LINGUA PORTUGUESA (colapsavel - prova ja realizada) -->
-  <div class="discipline">
-    <div class="disc-header disc-toggle" id="lpToggle" onclick="toggleLP()">
-      <div class="disc-icon">&#x1F4D6;</div>
-      <div class="disc-name" style="color:#a78bfa;">Lingua Portuguesa <span class="disc-arrow">&#x25B6;</span></div>
-      <div class="disc-date" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:#34d399;">&#x2705; Concluida</div>
-    </div>
-    <div class="disc-summary"><span class="dot"></span> Prova realizada em 10/03 &mdash; 6 ferramentas disponiveis &mdash; clique para expandir</div>
-    <div class="disc-collapse" id="lpCollapse">
-      <div class="tools-grid">
-
-        <a class="tool-card ready" href="LP08_meu_esconderijo.html">
-          <div class="tool-icon" style="background:rgba(52,211,153,.15);">&#x1F3DA;&#xFE0F;</div>
-          <div class="tool-body">
-            <div class="tool-code">LP-08</div>
-            <div class="tool-name">Meu Esconderijo</div>
-            <div class="tool-desc">Texto descritivo: identifique, complete e escreva</div>
-          </div>
-          <div class="tool-status status-done">&#x2705;</div>
-        </a>
-
-        <a class="tool-card ready" href="LP01_genero_textual_diario.html">
-          <div class="tool-icon" style="background:rgba(167,139,250,.15);">&#x1F4D3;</div>
-          <div class="tool-body">
-            <div class="tool-code">LP-01</div>
-            <div class="tool-name">Genero Textual: Diario</div>
-            <div class="tool-desc">As 5 partes do diario, exemplos e pratica</div>
-          </div>
-          <div class="tool-status status-done">&#x2705;</div>
-        </a>
-
-        <a class="tool-card ready" href="LP04-07_maiuscula_minuscula.html">
-          <div class="tool-icon" style="background:rgba(251,146,60,.15);">&#x1F524;</div>
-          <div class="tool-body">
-            <div class="tool-code">LP-04/07</div>
-            <div class="tool-name">Maiuscula e Minuscula</div>
-            <div class="tool-desc">Alfabeto e regras de uso de maiuscula</div>
-          </div>
-          <div class="tool-status status-done">&#x2705;</div>
-        </a>
-
-        <a class="tool-card ready" href="LP05_ordem_alfabetica.html">
-          <div class="tool-icon" style="background:rgba(244,114,182,.15);">&#x1F524;</div>
-          <div class="tool-body">
-            <div class="tool-code">LP-05</div>
-            <div class="tool-name">Ordem Alfabetica</div>
-            <div class="tool-desc">Arraste e ordene palavras em ordem alfabetica</div>
-          </div>
-          <div class="tool-status status-done">&#x2705;</div>
-        </a>
-
-        <a class="tool-card ready" href="LP06_separacao_silabica.html">
-          <div class="tool-icon" style="background:rgba(108,63,197,.15);">&#x2702;&#xFE0F;</div>
-          <div class="tool-body">
-            <div class="tool-code">LP-06</div>
-            <div class="tool-name">Separacao Silabica</div>
-            <div class="tool-desc">266 palavras, flashcards e teoria</div>
-          </div>
-          <div class="tool-status status-done">&#x2705;</div>
-        </a>
-
-        <a class="tool-card ready" href="LP02-03_personagem_serafina.html">
-          <div class="tool-icon" style="background:rgba(244,114,182,.15);">&#x1F467;</div>
-          <div class="tool-body">
-            <div class="tool-code">LP-02/03</div>
-            <div class="tool-name">Personagem Serafina</div>
-            <div class="tool-desc">Perfil, flashcards e perguntas do livro</div>
-          </div>
-          <div class="tool-status status-done">&#x2705;</div>
-        </a>
-
-      </div>
     </div>
   </div>
 
@@ -189,7 +115,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
         <div class="tool-body">
           <div class="tool-code">ELA-03</div>
           <div class="tool-name">Adjectives &amp; Acrostic</div>
-          <div class="tool-desc">Adjetivos descritivos e poemas acrosticos com KIND e FRIEND</div>
+          <div class="tool-desc">Adjetivos descritivos e poemas acrosticos (KIND, BRAVE, SMART, NICE, CALM)</div>
         </div>
         <div class="tool-status status-ok">&#x2705; Pronto</div>
       </a>
@@ -263,12 +189,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
   function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.y-=s.sp;if(s.y<-5)s.y=c.height+5;s.a+=s.da;if(s.a>1||s.a<.1)s.da*=-1;ctx.save();ctx.globalAlpha=s.a;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();ctx.restore();});requestAnimationFrame(draw);}
   resize();window.addEventListener('resize',resize);draw();
 })();
-function toggleLP(){
-  var t=document.getElementById('lpToggle');
-  var c=document.getElementById('lpCollapse');
-  t.classList.toggle('open');
-  c.classList.toggle('open');
-}
+
 </script>
 </body>
 </html>
