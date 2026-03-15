@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mundo das Sílabas — LP-06</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:#FAF7FF;min-height:100vh;font-size:16px;}
+
+/* NAVBAR */
+.navbar{width:100%;display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:2px solid rgba(108,63,197,.12);position:sticky;top:0;z-index:200;gap:8px;}
+.nav-logo{font-family:'Fredoka One',cursive;font-size:clamp(13px,2.5vw,16px);color:#6C3FC5;white-space:nowrap;}
+.nav-right{display:flex;gap:5px;align-items:center;flex-wrap:wrap;}
+.nav-btn{background:#6C3FC5;border:none;border-radius:8px;padding:5px 11px;font-family:inherit;font-size:11px;font-weight:800;color:#fff;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.nav-btn:hover{background:#5a30b0;transform:translateY(-1px);}
+.nav-btn.nb-index{background:#059669;}
+.nav-btn.nb-index:hover{background:#047857;}
+.nav-a11y{display:flex;gap:4px;}
+.nav-a11y-btn{background:#6b7280;border:none;border-radius:8px;padding:5px 9px;font-family:inherit;font-size:13px;font-weight:800;color:#fff;cursor:pointer;transition:all .18s;line-height:1;}
+.nav-a11y-btn:hover{background:#4b5563;transform:translateY(-1px);}
+.nav-a11y-btn.nb-help{background:#d97706;}
+
+/* CONFIRM MODAL */
+.confirm-overlay{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.5);align-items:center;justify-content:center;}
+.confirm-overlay.active{display:flex;}
+.confirm-box{background:#fff;border:2px solid #a78bfa;border-radius:20px;padding:28px 24px;max-width:340px;width:90%;text-align:center;font-family:inherit;box-shadow:0 8px 40px rgba(124,58,237,.25);}
+.confirm-icon{font-size:40px;margin-bottom:10px;}
+.confirm-title{font-size:17px;font-weight:900;color:#7c3aed;margin-bottom:8px;}
+.confirm-text{font-size:14px;font-weight:700;color:#1a1535;margin-bottom:20px;line-height:1.5;}
+.confirm-btns{display:flex;gap:10px;justify-content:center;}
+.cbtn-yes{background:#7c3aed;color:#fff;border:none;border-radius:12px;padding:11px 24px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;}
+.cbtn-yes:hover{background:#6d28d9;}
+.cbtn-no{background:#e5e7eb;color:#374151;border:none;border-radius:12px;padding:11px 24px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;}
+.cbtn-no:hover{background:#d1d5db;}
+
+/* HELP DIALOG */
+dialog{background:#fff;color:#1a1535;border:2px solid #a78bfa;border-radius:18px;padding:24px;max-width:360px;width:90%;font-family:inherit;}
+dialog::backdrop{background:rgba(0,0,0,.55);}
+dialog h3{color:#7c3aed;font-size:16px;margin-bottom:10px;}
+dialog ul{padding-left:16px;}
+dialog li{font-size:13px;font-weight:700;line-height:1.7;color:#1a1535;}
+dialog .dbtn{margin-top:14px;background:#7c3aed;color:#fff;border:none;border-radius:12px;padding:10px 22px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;}
+
+/* HEADER */
+.app-header{background:linear-gradient(160deg,#2C1654 0%,#6C3FC5 50%,#A855F7 100%);padding:24px 20px 40px;text-align:center;position:relative;overflow:hidden;}
+.header-hero{font-size:clamp(44px,9vw,64px);animation:float 4s ease-in-out infinite;display:inline-block;}
+.header-title{font-size:clamp(24px,5.5vw,38px);font-weight:400;color:#fff;margin:8px 0 4px;font-family:'Fredoka One',cursive;text-shadow:0 4px 20px rgba(0,0,0,.3);}
+.header-sub{color:rgba(255,255,255,.75);font-size:14px;font-weight:700;}
+.header-wave{position:absolute;bottom:-2px;left:0;right:0;height:36px;background:#FAF7FF;clip-path:ellipse(60% 100% at 50% 100%);}
+.header-circle1{position:absolute;top:-60px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.05);}
+.header-circle2{position:absolute;bottom:-80px;left:-50px;width:250px;height:250px;border-radius:50%;background:rgba(255,255,255,.04);}
+
+/* XP BAR */
+.xp-bar-wrap{max-width:420px;margin:14px auto 0;background:rgba(255,255,255,.18);border-radius:18px;padding:10px 16px;}
+.xp-bar-top{display:flex;justify-content:space-between;color:#fff;font-weight:800;font-size:13px;margin-bottom:6px;}
+.xp-bar-level{font-family:'Fredoka One',cursive;font-size:15px;}
+.xp-bar-bg{background:rgba(255,255,255,.3);border-radius:99px;height:14px;overflow:hidden;}
+.xp-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#FFD93D,#FF6B35);transition:width .6s ease;box-shadow:0 0 10px #FFD93D88;}
+
+/* GROUPS */
+.groups{max-width:760px;margin:0 auto;padding:20px 14px 30px;}
+.group-wrap{margin-bottom:32px;animation:slideIn .5s both;}
+.group-header{background:linear-gradient(135deg,#667EEA,#764BA2);border-radius:20px;padding:14px 20px;margin-bottom:14px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 28px rgba(0,0,0,.12);position:relative;overflow:hidden;}
+.group-header.coral{background:linear-gradient(135deg,#FF6B35,#F7C59F);}
+.group-header-circle{position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.08);}
+.group-emoji{font-size:32px;flex-shrink:0;}
+.group-label{font-family:'Fredoka One',cursive;color:#fff;font-size:20px;line-height:1;}
+.group-tagline{color:rgba(255,255,255,.8);font-size:12px;margin-top:3px;}
+.group-hot{margin-left:auto;background:rgba(255,255,255,.22);border-radius:12px;padding:4px 14px;color:#fff;font-family:'Fredoka One',cursive;font-size:14px;white-space:nowrap;}
+
+.cards-grid{display:grid;gap:12px;}
+.cards-grid.cols3{grid-template-columns:repeat(3,1fr);}
+.cards-grid.cols2{grid-template-columns:1fr 1fr;}
+@media(max-width:480px){.cards-grid.cols3{grid-template-columns:repeat(2,1fr);}.cards-grid.cols2{grid-template-columns:1fr 1fr;}}
+
+.mod-card{background:#fff;border:2.5px solid transparent;border-radius:22px;padding:20px 12px;cursor:pointer;text-align:center;transition:transform .15s,box-shadow .2s;position:relative;overflow:hidden;font-family:inherit;}
+.mod-card:hover{transform:translateY(-4px) scale(1.02);}
+.mod-card.big{padding:26px 16px;}
+.mod-card-bar{position:absolute;top:0;left:0;right:0;height:4px;border-radius:22px 22px 0 0;}
+.mod-card-done-badge{position:absolute;top:8px;right:10px;background:rgba(255,255,255,.85);border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;}
+.mod-card-emoji{font-size:30px;margin-bottom:8px;}
+.mod-card.big .mod-card-emoji{font-size:42px;}
+.mod-card-title{font-family:'Fredoka One',cursive;font-size:13px;color:#2C1654;line-height:1.3;}
+.mod-card.big .mod-card-title{font-size:16px;}
+.mod-card-xp{margin-top:6px;font-size:11px;font-weight:800;}
+.mod-card-play{margin-top:10px;display:inline-block;border-radius:20px;padding:4px 16px;font-size:12px;font-weight:900;font-family:'Fredoka One',cursive;color:#fff;letter-spacing:.5px;}
+.mod-card-shimmer{position:absolute;inset:0;border-radius:22px;background-size:200% 100%;animation:shimmer 2.5s linear infinite;pointer-events:none;}
+
+/* MODULE MODAL */
+.mod-overlay{display:none;position:fixed;inset:0;background:rgba(44,22,84,.6);z-index:300;align-items:flex-end;justify-content:center;padding:0 8px;}
+.mod-overlay.active{display:flex;}
+.mod-sheet{background:#fff;border-radius:28px 28px 0 0;width:100%;max-width:660px;max-height:91vh;overflow-y:auto;padding:24px 18px 52px;animation:popUp .3s ease;}
+.mod-sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.mod-sheet-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.mod-sheet-info{margin-left:12px;flex:1;}
+.mod-sheet-title{font-weight:900;font-size:19px;color:#2C1654;font-family:'Fredoka One',cursive;}
+.mod-sheet-sub{font-size:11px;color:#999;}
+.mod-close{background:#F5F0FF;border:none;border-radius:50%;width:38px;height:38px;font-size:18px;cursor:pointer;color:#9B59B6;flex-shrink:0;}
+
+/* PRATICA */
+.instr-bar{background:linear-gradient(135deg,#FF6B35,#FF9A3C);border-radius:18px;padding:14px 18px;margin-bottom:18px;display:flex;gap:12px;align-items:center;}
+.instr-emoji{font-size:32px;flex-shrink:0;}
+.instr-title{color:#fff;font-weight:900;font-size:15px;font-family:'Fredoka One',cursive;}
+.instr-sub{color:rgba(255,255,255,.85);font-size:11px;}
+.instr-count{margin-left:auto;background:rgba(255,255,255,.25);border-radius:12px;padding:4px 12px;color:#fff;font-weight:900;font-size:14px;white-space:nowrap;font-family:'Fredoka One',cursive;}
+
+.word-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.word-card{background:#FAFAFA;border-radius:14px;padding:12px 10px;border:2px solid #EEE;box-shadow:0 2px 12px rgba(0,0,0,.04);display:flex;align-items:center;justify-content:center;min-height:60px;overflow:hidden;transition:border-color .15s,background .15s;}
+.word-card.has-split{background:#FFF8F5;border-color:#FF8A70;}
+
+.pratica-prog{margin-bottom:14px;}
+.pratica-prog-bar{background:#eee;border-radius:99px;height:8px;overflow:hidden;}
+.pratica-prog-fill{height:100%;background:linear-gradient(90deg,#FF6B35,#FF9A3C);border-radius:99px;transition:width .3s;}
+.pratica-prog-label{text-align:center;font-size:11px;color:#bbb;margin-top:4px;}
+
+.btn-check{width:100%;padding:16px;background:linear-gradient(135deg,#FF6B35,#FF9A3C);color:#fff;border:none;border-radius:16px;font-size:18px;font-weight:900;cursor:pointer;font-family:'Fredoka One',cursive;box-shadow:0 6px 24px #FF6B3540;transition:all .25s;letter-spacing:.5px;animation:pulseBtn 1.6s ease-in-out infinite;}
+.btn-check:disabled{background:#E0E0E0;color:#aaa;cursor:not-allowed;box-shadow:none;animation:none;}
+.btn-next-batch{width:100%;padding:18px;background:linear-gradient(135deg,#FF6B35,#FF9A3C);color:#fff;border:none;border-radius:18px;font-size:20px;font-weight:900;cursor:pointer;font-family:'Fredoka One',cursive;box-shadow:0 8px 30px #FF6B3555;letter-spacing:1px;animation:pulseBtn 1.6s ease-in-out infinite;}
+
+/* RESULTS */
+.score-card{background:linear-gradient(135deg,#FF6B35 0%,#F7C59F 100%);border-radius:24px;padding:24px 20px 20px;text-align:center;margin-bottom:20px;box-shadow:0 12px 40px #FF6B3545;position:relative;overflow:hidden;}
+.score-card-bg{position:absolute;top:-20px;right:-20px;font-size:80px;opacity:.08;}
+.score-medal{font-size:56px;margin-bottom:4px;}
+.score-num{color:#fff;font-weight:900;font-size:30px;font-family:'Fredoka One',cursive;}
+.score-msg{color:rgba(255,255,255,.9);font-size:14px;margin-top:4px;}
+.score-stats{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
+.score-stat{background:rgba(255,255,255,.22);border-radius:14px;padding:8px 16px;min-width:64px;text-align:center;}
+.score-stat-icon{font-size:18px;}
+.score-stat-val{color:#fff;font-weight:900;font-size:20px;font-family:'Fredoka One',cursive;}
+.score-stat-label{color:rgba(255,255,255,.8);font-size:10px;}
+
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;}
+.result-item{border-radius:14px;padding:10px 12px;}
+.result-item.ok{background:#E8FFF4;border:2px solid #4CAF85;}
+.result-item.err{background:#FFF0EE;border:2px solid #FF8A70;}
+.result-item-head{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+.result-word{font-weight:900;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Fredoka One',cursive;}
+.result-correct{font-size:11px;color:#2A9D8F;font-weight:700;}
+.result-given{font-size:11px;color:#E76F51;font-weight:700;}
+
+/* FLASHCARDS */
+.fc-header{text-align:center;margin-bottom:16px;}
+.fc-group-badge{display:inline-flex;gap:8px;align-items:center;background:linear-gradient(135deg,#A29BFE,#6C5CE7);border-radius:20px;padding:6px 18px;}
+.fc-group-text{color:#fff;font-weight:900;font-size:13px;font-family:'Fredoka One',cursive;}
+.fc-hint{font-size:12px;color:#aaa;margin-top:8px;}
+.fc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+@media(max-width:380px){.fc-grid{grid-template-columns:repeat(2,1fr);}}
+.fc-card{cursor:pointer;height:80px;border-radius:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;padding:6px 8px;position:relative;overflow:hidden;}
+.fc-card-word{font-weight:900;color:#2C1654;font-family:'Fredoka One',cursive;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;text-align:center;}
+.fc-card-syl{font-weight:900;color:#fff;font-family:'Fredoka One',cursive;letter-spacing:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,.2);}
+.fc-card-tap{position:absolute;bottom:4px;right:6px;font-size:10px;font-weight:700;opacity:.5;}
+.btn-fc-next{width:100%;padding:15px;background:linear-gradient(135deg,#A29BFE,#6C5CE7);color:#fff;border:none;border-radius:16px;font-size:17px;font-weight:900;cursor:pointer;font-family:'Fredoka One',cursive;box-shadow:0 6px 22px #6C5CE755;letter-spacing:.5px;}
+
+/* TEORIA */
+.teoria-card{border-radius:20px;padding:18px 16px;margin-bottom:12px;}
+.teoria-title{font-family:'Fredoka One',cursive;font-size:18px;color:#fff;margin-bottom:8px;}
+.teoria-text{font-size:14px;font-weight:700;color:rgba(255,255,255,.92);line-height:1.65;}
+.teoria-examples{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px;}
+.teoria-examples-title{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:8px;}
+.teoria-example{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;}
+.teoria-ex-word{font-family:'Fredoka One',cursive;font-size:16px;color:#2C1654;}
+.teoria-ex-arrow{color:#999;font-size:14px;}
+.teoria-ex-syl{font-family:'Fredoka One',cursive;font-size:16px;color:#FF6B35;}
+.teoria-ex-note{font-size:11px;color:#888;font-weight:700;}
+.teoria-tip{background:linear-gradient(135deg,#FFF8E1,#FFF3CD);border:2px solid #FFD93D;border-radius:16px;padding:14px;margin-top:4px;display:flex;gap:10px;align-items:flex-start;}
+.teoria-tip-text{font-size:13px;font-weight:700;color:#8B6914;line-height:1.55;}
+.teoria-xp-banner{background:linear-gradient(135deg,#10b981,#34d399);border-radius:14px;padding:12px 18px;text-align:center;margin-bottom:14px;color:#fff;font-weight:900;font-size:14px;}
+
+/* CELEBRATION */
+.celebration{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;}
+.celebration.active{display:flex;}
+.celebration-box{background:#fff;border-radius:32px;padding:44px 56px;text-align:center;animation:popUp .4s ease;max-width:340px;}
+.celebration-emoji{font-size:72px;}
+.celebration-title{font-size:28px;font-weight:900;color:#2C1654;font-family:'Fredoka One',cursive;}
+.celebration-text{font-size:15px;color:#666;margin-top:8px;line-height:1.5;}
+.celebration-btn{margin-top:20px;padding:12px 32px;background:linear-gradient(135deg,#FF6B35,#FF9A3C);color:#fff;border:none;border-radius:16px;font-size:17px;font-weight:900;cursor:pointer;font-family:'Fredoka One',cursive;}
+
+/* ANIMATIONS */
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-14px) rotate(2deg);}}
+@keyframes slideIn{0%{transform:translateY(60px);opacity:0;}100%{transform:translateY(0);opacity:1;}}
+@keyframes popUp{0%{transform:scale(.82) translateY(40px);opacity:0;}100%{transform:scale(1) translateY(0);opacity:1;}}
+@keyframes pulseBtn{0%,100%{box-shadow:0 8px 30px #FF6B3560;}50%{box-shadow:0 14px 44px #FF6B3599,0 0 0 8px #FF6B3520;}}
+@keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
+@keyframes confetti{0%{transform:translateY(-30px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(900deg);opacity:0;}}
+</style>
+</head>
+<body>
+
+<!-- CONFIRM HOME MODAL -->
+<div class="confirm-overlay" id="confirm-modal">
+  <div class="confirm-box">
+    <div class="confirm-icon">🏠</div>
+    <div class="confirm-title">Ir para o início?</div>
+    <div class="confirm-text">Tem certeza que quer ir para a tela de escolher o jogo?</div>
+    <div class="confirm-btns">
+      <button class="cbtn-yes" onclick="goToIndex()">Sim, ir!</button>
+      <button class="cbtn-no" onclick="closeHomeModal()">Não, ficar</button>
+    </div>
+  </div>
+</div>
+
+<!-- HELP DIALOG -->
+<dialog id="help-dlg">
+  <h3>💡 Como usar?</h3>
+  <ul>
+    <li><strong>✂️ Separar Sílabas:</strong> Clique nos espaços entre as letras para colocar a barra de divisão. Clique de novo para tirar. Marque todas as 12 e clique Corrigir!</li>
+    <li><strong>🃏 Flashcards:</strong> Clique no cartão para ver a separação silábica. Clique de novo para voltar.</li>
+    <li><strong>📖 Aprender:</strong> Leia os cards de teoria sobre sílabas, vogais, hiato, ditongo e mais.</li>
+    <li><strong>🏠 Home:</strong> Volta para a tela de escolher o jogo.</li>
+    <li><strong>A- / A+:</strong> Ajusta o tamanho da letra.</li>
+  </ul>
+  <button class="dbtn" onclick="document.getElementById('help-dlg').close()">Entendi! 😊</button>
+</dialog>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <span class="nav-logo">🦋 Mundo das Sílabas</span>
+  <div class="nav-right">
+    <button class="nav-btn nb-index" onclick="showHomeModal()">🏠 Home</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" onclick="changeFontSize(-1)">A-</button>
+      <button class="nav-a11y-btn" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn nb-help" onclick="document.getElementById('help-dlg').showModal()">?</button>
+    </div>
+  </div>
+</nav>
+
+<!-- APP HEADER -->
+<div class="app-header">
+  <div class="header-circle1"></div>
+  <div class="header-circle2"></div>
+  <div class="header-hero">🦋</div>
+  <h1 class="header-title">Mundo das Sílabas</h1>
+  <p class="header-sub">Aprenda a separar sílabas de um jeito mágico! ✨</p>
+  <div class="xp-bar-wrap">
+    <div class="xp-bar-top">
+      <span id="xp-label">⭐ 0 XP</span>
+      <span class="xp-bar-level" id="level-label">Nível 1</span>
+      <span id="xp-pct">0%</span>
+    </div>
+    <div class="xp-bar-bg">
+      <div class="xp-bar-fill" id="xp-fill" style="width:0%"></div>
+    </div>
+  </div>
+  <div class="header-wave"></div>
+</div>
+
+<!-- GROUPS (HOME SCREEN) -->
+<div class="groups" id="groups-container"></div>
+
+<!-- MODULE MODAL -->
+<div class="mod-overlay" id="mod-overlay">
+  <div class="mod-sheet" id="mod-sheet">
+    <div class="mod-sheet-head">
+      <div class="mod-sheet-icon" id="mod-icon"></div>
+      <div class="mod-sheet-info">
+        <div class="mod-sheet-title" id="mod-title"></div>
+        <div class="mod-sheet-sub" id="mod-sub"></div>
+      </div>
+      <button class="mod-close" onclick="closeModule()">✕</button>
+    </div>
+    <div id="mod-content"></div>
+  </div>
+</div>
+
+<!-- CELEBRATION -->
+<div class="celebration" id="celebration">
+  <div id="confetti-wrap" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;"></div>
+  <div class="celebration-box">
+    <div class="celebration-emoji">🏆</div>
+    <div class="celebration-title">Incrível!</div>
+    <div class="celebration-text">Você completou todos os desafios do Mundo das Sílabas!</div>
+    <button class="celebration-btn" onclick="closeCelebration()">Eba! 🎊</button>
+  </div>
+</div>
+
+<script>
+// ── WORDS BANK ────────────────────────────────────────────────
+const WORDS = [
+  ["GATO","GA-TO"],["GATA","GA-TA"],["PATO","PA-TO"],["RATO","RA-TO"],
+  ["SAPO","SA-PO"],["LOBO","LO-BO"],["URSO","UR-SO"],["ONÇA","ON-ÇA"],
+  ["PUMA","PU-MA"],["COBRA","CO-BRA"],["TIGRE","TI-GRE"],["ZEBRA","ZE-BRA"],
+  ["POMBO","POM-BO"],["PORCO","POR-CO"],["VACA","VA-CA"],["BODE","BO-DE"],
+  ["MOSCA","MOS-CA"],["GRILO","GRI-LO"],["VESPA","VES-PA"],["GANSO","GAN-SO"],
+  ["BURRO","BUR-RO"],["CABRA","CA-BRA"],["ORCA","OR-CA"],["CARPA","CAR-PA"],
+  ["LONTRA","LON-TRA"],["PEIXE","PEI-XE"],["LEÃO","LE-ÃO"],["GARÇA","GAR-ÇA"],
+  ["CAPIM","CA-PIM"],["MACACO","MA-CA-CO"],["GIRAFA","GI-RA-FA"],["CAVALO","CA-VA-LO"],
+  ["GALINHA","GA-LI-NHA"],["CACHORRO","CA-CHOR-RO"],["COELHO","CO-E-LHO"],["LAGARTO","LA-GAR-TO"],
+  ["TUCANO","TU-CA-NO"],["ARARA","A-RA-RA"],["URUBU","U-RU-BU"],["FORMIGA","FOR-MI-GA"],
+  ["CIGARRA","CI-GAR-RA"],["RAPOSA","RA-PO-SA"],["CORUJA","CO-RU-JA"],["ABELHA","A-BE-LHA"],
+  ["BALEIA","BA-LEI-A"],["CAMELO","CA-ME-LO"],["GORILA","GO-RI-LA"],["PANTERA","PAN-TE-RA"],
+  ["BORBOLETA","BOR-BO-LE-TA"],["TARTARUGA","TAR-TA-RU-GA"],["LAGARTIXA","LA-GAR-TI-XA"],["ELEFANTE","E-LE-FAN-TE"],
+  ["PELICANO","PE-LI-CA-NO"],["DENTE","DEN-TE"],["NARIZ","NA-RIZ"],["OLHO","O-LHO"],
+  ["BOCA","BO-CA"],["PERNA","PER-NA"],["BRAÇO","BRA-ÇO"],["DEDO","DE-DO"],
+  ["TESTA","TES-TA"],["OMBRO","OM-BRO"],["OSSO","OS-SO"],["ROSTO","ROS-TO"],
+  ["COURO","COU-RO"],["OUVIDO","OU-VI-DO"],["PESCOÇO","PES-CO-ÇO"],["BARRIGA","BAR-RI-GA"],
+  ["CABEÇA","CA-BE-ÇA"],["JOELHO","JO-E-LHO"],["COSTELA","COS-TE-LA"],["COTOVELO","CO-TO-VE-LO"],
+  ["TORNOZELO","TOR-NO-ZE-LO"],["BEBÊ","BE-BÊ"],["FILHA","FI-LHA"],["FILHO","FI-LHO"],
+  ["IRMÃO","IR-MÃO"],["IRMÃ","IR-MÃ"],["AVÓ","A-VÓ"],["AVÔ","A-VÔ"],
+  ["MAMÃE","MA-MÃE"],["VOVÓ","VO-VÓ"],["VOVÔ","VO-VÔ"],["TIA","TI-A"],
+  ["TIO","TI-O"],["PRIMO","PRI-MO"],["PRIMA","PRI-MA"],["MESA","ME-SA"],
+  ["CAMA","CA-MA"],["CASA","CA-SA"],["PORTA","POR-TA"],["SOFÁ","SO-FÁ"],
+  ["COPO","CO-PO"],["GARFO","GAR-FO"],["FACA","FA-CA"],["PRATO","PRA-TO"],
+  ["BALDE","BAL-DE"],["FORNO","FOR-NO"],["LENÇOL","LEN-ÇOL"],["SALA","SA-LA"],
+  ["TETO","TE-TO"],["CHAVE","CHA-VE"],["TELHA","TE-LHA"],["MURO","MU-RO"],
+  ["GRADE","GRA-DE"],["TOALHA","TO-A-LHA"],["CADEIRA","CA-DEI-RA"],["JANELA","JA-NE-LA"],
+  ["TRAVESSA","TRA-VES-SA"],["COLCHÃO","COL-CHÃO"],["CORTINA","COR-TI-NA"],["GELADEIRA","GE-LA-DEI-RA"],
+  ["LÁPIS","LÁ-PIS"],["LIVRO","LI-VRO"],["FOLHA","FO-LHA"],["PROVA","PRO-VA"],
+  ["TURMA","TUR-MA"],["BANCO","BAN-CO"],["QUADRO","QUA-DRO"],["PINCEL","PIN-CEL"],
+  ["CARTAZ","CAR-TAZ"],["CADERNO","CA-DER-NO"],["MOCHILA","MO-CHI-LA"],["ESTOJO","ES-TO-JO"],
+  ["BORRACHA","BOR-RA-CHA"],["TESOURA","TE-SOU-RA"],["CANETA","CA-NE-TA"],["APAGADOR","A-PA-GA-DOR"],
+  ["MANGA","MAN-GA"],["MELÃO","ME-LÃO"],["LIMÃO","LI-MÃO"],["MAÇÃ","MA-ÇÃ"],
+  ["PÊRA","PÊ-RA"],["UVA","U-VA"],["ARROZ","AR-ROZ"],["OVOS","O-VOS"],
+  ["BOLO","BO-LO"],["TORTA","TOR-TA"],["SUCO","SU-CO"],["LEITE","LEI-TE"],
+  ["CALDO","CAL-DO"],["FEIJÃO","FEI-JÃO"],["MAMÃO","MA-MÃO"],["CAJU","CA-JU"],
+  ["QUIABO","QUI-A-BO"],["FRANGO","FRAN-GO"],["BATATA","BA-TA-TA"],["SALADA","SA-LA-DA"],
+  ["TOMATE","TO-MA-TE"],["CEBOLA","CE-BO-LA"],["BANANA","BA-NA-NA"],["PIPOCA","PI-PO-CA"],
+  ["SORVETE","SOR-VE-TE"],["BISCOITO","BIS-COI-TO"],["CEREJA","CE-RE-JA"],["PITANGA","PI-TAN-GA"],
+  ["MORANGO","MO-RAN-GO"],["LARANJA","LA-RAN-JA"],["CENOURA","CE-NOU-RA"],["GOIABA","GOI-A-BA"],
+  ["MACARRÃO","MA-CAR-RÃO"],["ABACAXI","A-BA-CA-XI"],["CHOCOLATE","CHO-CO-LA-TE"],["BOLA","BO-LA"],
+  ["PIPA","PI-PA"],["DADO","DA-DO"],["PIÃO","PI-ÃO"],["CIRCO","CIR-CO"],
+  ["PALCO","PAL-CO"],["BONECA","BO-NE-CA"],["BALANÇO","BA-LAN-ÇO"],["BRINQUEDO","BRIN-QUE-DO"],
+  ["FUTEBOL","FU-TE-BOL"],["NATAÇÃO","NA-TA-ÇÃO"],["CORRIDA","COR-RI-DA"],["DESENHO","DE-SE-NHO"],
+  ["PINTURA","PIN-TU-RA"],["MÚSICA","MÚ-SI-CA"],["BICICLETA","BI-CI-CLE-TA"],["FANTOCHE","FAN-TO-CHE"],
+  ["FLOR","FLOR"],["PEDRA","PE-DRA"],["TERRA","TER-RA"],["NUVEM","NU-VEM"],
+  ["CHUVA","CHU-VA"],["VENTO","VEN-TO"],["GALHO","GA-LHO"],["FRUTA","FRU-TA"],
+  ["CAMPO","CAM-PO"],["LAGO","LA-GO"],["MATO","MA-TO"],["AREIA","A-REI-A"],
+  ["TROVOADA","TRO-VOA-DA"],["FLORESTA","FLO-RES-TA"],["MONTANHA","MON-TA-NHA"],["CASCATA","CAS-CA-TA"],
+  ["FURACÃO","FU-RA-CÃO"],["CARRO","CAR-RO"],["TREM","TREM"],["BARCO","BAR-CO"],
+  ["AVIÃO","A-VI-ÃO"],["RUA","RU-A"],["ÔNIBUS","Ô-NI-BUS"],["AULA","AU-LA"],
+  ["BAIRRO","BAI-RRO"],["CAMINHO","CA-MI-NHO"],["AMIGO","A-MI-GO"],["AMIGA","A-MI-GA"],
+  ["MENINO","ME-NI-NO"],["MENINA","ME-NI-NA"],["CRIANÇA","CRI-AN-ÇA"],["ESCOLA","ES-CO-LA"],
+  ["SAPATO","SA-PA-TO"],["CABELO","CA-BE-LO"],["PRESENTE","PRE-SEN-TE"],["SURPRESA","SUR-PRE-SA"],
+  ["BARULHO","BA-RU-LHO"],["SORRISO","SOR-RI-SO"],["VERDE","VER-DE"],["AZUL","A-ZUL"],
+  ["ROXO","RO-XO"],["PRETO","PRE-TO"],["BRANCO","BRAN-CO"],["CINZA","CIN-ZA"],
+  ["JOGAR","JO-GAR"],["PULAR","PU-LAR"],["CORRER","COR-RER"],["COMER","CO-MER"],
+  ["BEBER","BE-BER"],["DORMIR","DOR-MIR"],["CANTAR","CAN-TAR"],["DANÇAR","DAN-ÇAR"],
+  ["NADAR","NA-DAR"],["SUBIR","SU-BIR"],["DEITAR","DEI-TAR"],["VOAR","VO-AR"],
+  ["SORRIR","SOR-RIR"],["BRINCAR","BRIN-CAR"],["PINTAR","PIN-TAR"],["ANDAR","AN-DAR"],
+  ["SENTAR","SEN-TAR"],["DRAGÃO","DRA-GÃO"],["CASTELO","CAS-TE-LO"],["ESPADA","ES-PA-DA"],
+  ["ESCUDO","ES-CU-DO"],["FEITIÇO","FEI-TI-ÇO"],["ESTRELA","ES-TRE-LA"],["PLANETA","PLA-NE-TA"],
+  ["FOGUETE","FO-GUE-TE"],["DINOSSAURO","DI-NOS-SAU-RO"],["BONITO","BO-NI-TO"],["BONITA","BO-NI-TA"],
+  ["FELIZ","FE-LIZ"],["TRISTE","TRIS-TE"],["FORTE","FOR-TE"],["FRACO","FRA-CO"],
+  ["GRANDE","GRAN-DE"],["GORDO","GOR-DO"],["MAGRO","MA-GRO"],["RÁPIDO","RÁ-PI-DO"],
+  ["PEQUENO","PE-QUE-NO"],["ALEGRE","A-LE-GRE"],["PANELA","PA-NE-LA"],["COLHER","CO-LHER"],
+  ["FIVELA","FI-VE-LA"],["TAPETE","TA-PE-TE"],
+];
+
+const CARD_COLORS = [
+  ["#FF6B6B","#FF8E8E"],["#4ECDC4","#7EDDD7"],["#FFE66D","#FFD93D"],
+  ["#A29BFE","#C5B8FE"],["#FD79A8","#FFA3C2"],["#55EFC4","#81ECC9"],
+  ["#FDCB6E","#FDE18E"],["#6C5CE7","#9B90F0"],["#00B894","#48CBA8"],
+  ["#E17055","#F0927C"],["#0984E3","#5AB3EF"],["#D63031","#E67E7E"],
+];
+
+const GROUPS = [
+  {
+    id:"teoria", label:"📖 Aprender", tagline:"Entenda as regras passo a passo",
+    headerClass:"", emoji:"📖",
+    modules:[
+      {id:"intro",    emoji:"🔤", title:"O que é Sílaba?",      color:"#667EEA", g:"linear-gradient(135deg,#667EEA,#764BA2)"},
+      {id:"vogais",   emoji:"🎵", title:"Vogais e Consoantes",   color:"#43B89C", g:"linear-gradient(135deg,#43B89C,#1A9980)"},
+      {id:"hiato",    emoji:"🌉", title:"Hiato",                 color:"#48C774", g:"linear-gradient(135deg,#48C774,#27AE60)"},
+      {id:"ditongo",  emoji:"🎭", title:"Ditongo",               color:"#F39C12", g:"linear-gradient(135deg,#F7DC6F,#F39C12)"},
+      {id:"tritongo", emoji:"🌟", title:"Tritongo",              color:"#9B59B6", g:"linear-gradient(135deg,#C39BD3,#9B59B6)"},
+      {id:"encontro", emoji:"🤝", title:"Encontro Consonantal",  color:"#E84393", g:"linear-gradient(135deg,#FD79A8,#E84393)"},
+    ]
+  },
+  {
+    id:"exercicios", label:"🚀 Praticar", tagline:"Exercícios com 266 palavras!",
+    headerClass:"coral", emoji:"🚀",
+    modules:[
+      {id:"flashcard", emoji:"🃏", title:"Flashcards",       color:"#6C5CE7", g:"linear-gradient(135deg,#A29BFE,#6C5CE7)", big:true},
+      {id:"pratica",   emoji:"✂️", title:"Separar Sílabas",  color:"#FF6B35", g:"linear-gradient(135deg,#FF6B35,#FF9A3C)", big:true},
+    ]
+  }
+];
+const ALL_MODULES = GROUPS.flatMap(g => g.modules);
+
+// ── STATE ─────────────────────────────────────────────────────
+const S = {
+  xp:0, done:new Set(), fontSize:16,
+  // pratica
+  batch:[], splits:[], praticaPhase:'answering', praticaXP:0,
+  wordCardEls:[], gapElsMap:{},
+  // flashcards
+  fcOrder:[], fcPage:0, fcFlipped:{}, fcXpDone:false,
+};
+const MAX_XP = 300;
+
+// ── UTILS ─────────────────────────────────────────────────────
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function pickBatch(n=12){return shuffle([...Array(WORDS.length).keys()]).slice(0,n).map(i=>WORDS[i]);}
+function scaleFontWord(len){if(len<=5)return 22;if(len<=7)return 18;if(len<=10)return 14;if(len<=13)return 12;return 10;}
+function scaleFontSyl(len){if(len<=7)return 18;if(len<=11)return 14;if(len<=15)return 12;return 10;}
+function splitsToString(word,splits){let r="";for(let i=0;i<word.length;i++){r+=word[i];if(i<word.length-1&&splits[i])r+="-";}return r;}
+function hasSplit(splits){return splits.some(Boolean);}
+
+// ── NAVIGATION ────────────────────────────────────────────────
+function showHomeModal(){document.getElementById('confirm-modal').classList.add('active');}
+function closeHomeModal(){document.getElementById('confirm-modal').classList.remove('active');}
+function goToIndex(){window.location.href='index.html';}
+document.getElementById('confirm-modal').addEventListener('click',function(e){if(e.target===this)closeHomeModal();});
+
+document.getElementById('mod-overlay').addEventListener('click',function(e){if(e.target===this)closeModule();});
+
+function closeModule(){document.getElementById('mod-overlay').classList.remove('active');}
+
+function openModule(moduleId){
+  const m = ALL_MODULES.find(x=>x.id===moduleId);
+  if(!m) return;
+  S.done.add(moduleId);
+  renderHome(); // update done badges
+
+  const iconEl = document.getElementById('mod-icon');
+  iconEl.textContent = m.emoji;
+  iconEl.style.background = m.g;
+  iconEl.style.boxShadow = `0 6px 20px ${m.color}44`;
+
+  document.getElementById('mod-title').textContent = m.title;
+  document.getElementById('mod-sub').textContent = m.big ? 'Banco com 266 palavras 🎮' : '+10 XP ao aprender ⭐';
+
+  const content = document.getElementById('mod-content');
+  content.innerHTML = '';
+
+  if(moduleId === 'pratica') renderPratica(content);
+  else if(moduleId === 'flashcard') renderFlashcards(content);
+  else renderTeoria(content, moduleId);
+
+  document.getElementById('mod-sheet').scrollTop = 0;
+  document.getElementById('mod-overlay').classList.add('active');
+}
+
+// ── A11Y ─────────────────────────────────────────────────────
+function changeFontSize(d){S.fontSize=Math.max(13,Math.min(22,S.fontSize+d));document.body.style.fontSize=S.fontSize+'px';}
+
+// ── XP ────────────────────────────────────────────────────────
+function addXP(n){
+  const prev = S.xp;
+  S.xp = Math.min(S.xp + n, MAX_XP);
+  updateXPBar();
+  if(S.xp >= MAX_XP && prev < MAX_XP) triggerCelebration();
+}
+function updateXPBar(){
+  const pct = Math.min(100, Math.round((S.xp/MAX_XP)*100));
+  const level = Math.floor(S.xp/60)+1;
+  document.getElementById('xp-label').textContent = `⭐ ${S.xp} XP`;
+  document.getElementById('level-label').textContent = `Nível ${level}`;
+  document.getElementById('xp-pct').textContent = `${pct}%`;
+  document.getElementById('xp-fill').style.width = pct+'%';
+}
+
+// ── CELEBRATION ───────────────────────────────────────────────
+function triggerCelebration(){
+  const wrap = document.getElementById('confetti-wrap');
+  wrap.innerHTML = '';
+  for(let i=0;i<35;i++){
+    const d = document.createElement('div');
+    d.style.cssText=`position:absolute;left:${Math.random()*100}%;top:0;width:14px;height:14px;background:hsl(${Math.random()*360},85%,65%);border-radius:${Math.random()>.4?'50%':'2px'};animation:confetti ${1+Math.random()*2.5}s ${Math.random()*.8}s forwards;`;
+    wrap.appendChild(d);
+  }
+  document.getElementById('celebration').classList.add('active');
+}
+function closeCelebration(){document.getElementById('celebration').classList.remove('active');}
+
+// ── HOME SCREEN ───────────────────────────────────────────────
+function renderHome(){
+  const container = document.getElementById('groups-container');
+  container.innerHTML = '';
+
+  GROUPS.forEach((grp, gi) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'group-wrap';
+    wrap.style.animationDelay = (gi*0.15)+'s';
+
+    // Group header
+    const hdr = document.createElement('div');
+    hdr.className = 'group-header' + (grp.headerClass ? ' '+grp.headerClass : '');
+    hdr.innerHTML = `
+      <div class="group-header-circle"></div>
+      <div class="group-emoji">${grp.label.split(' ')[0]}</div>
+      <div>
+        <div class="group-label">${grp.label.slice(2)}</div>
+        <div class="group-tagline">${grp.tagline}</div>
+      </div>
+      ${grp.id==='exercicios'?'<div class="group-hot">🔥 Hot!</div>':''}
+    `;
+    wrap.appendChild(hdr);
+
+    // Cards grid
+    const grid = document.createElement('div');
+    grid.className = 'cards-grid ' + (grp.id==='exercicios'?'cols2':'cols3');
+
+    grp.modules.forEach(m => {
+      const isDone = S.done.has(m.id);
+      const btn = document.createElement('button');
+      btn.className = 'mod-card' + (m.big?' big':'');
+      btn.style.cssText = isDone
+        ? `background:${m.g};border-color:transparent;box-shadow:0 10px 30px ${m.color}44;color:#fff;`
+        : `background:#fff;border-color:${m.color}30;box-shadow:${m.big?`0 6px 22px ${m.color}22`:'0 3px 14px rgba(0,0,0,.06)'};`;
+      btn.onclick = () => openModule(m.id);
+
+      let inner = '';
+      if(!isDone) inner += `<div class="mod-card-bar" style="background:${m.g};"></div>`;
+      if(isDone) inner += `<div class="mod-card-done-badge">✓</div>`;
+      if(m.big && !isDone) inner += `<div class="mod-card-shimmer" style="background:linear-gradient(90deg,transparent,${m.color}15,transparent);background-size:200% 100%;"></div>`;
+      inner += `<div class="mod-card-emoji">${m.emoji}</div>`;
+      inner += `<div class="mod-card-title" style="color:${isDone?'#fff':'#2C1654'};">${m.title}</div>`;
+      if(m.big && !isDone) inner += `<div class="mod-card-play" style="background:${m.g};">JOGAR!</div>`;
+      if(!m.big && !isDone) inner += `<div class="mod-card-xp" style="color:${m.color};">+10 XP</div>`;
+      btn.innerHTML = inner;
+
+      // hover effects
+      btn.addEventListener('mouseenter', () => { btn.style.transform='translateY(-4px) scale(1.02)'; btn.style.boxShadow=`0 16px 40px ${m.color}55`; });
+      btn.addEventListener('mouseleave', () => { btn.style.transform=''; btn.style.boxShadow = isDone?`0 10px 30px ${m.color}44`:m.big?`0 6px 22px ${m.color}22`:'0 3px 14px rgba(0,0,0,.06)'; });
+
+      grid.appendChild(btn);
+    });
+
+    wrap.appendChild(grid);
+    container.appendChild(wrap);
+  });
+}
+
+// ── PRATICA ───────────────────────────────────────────────────
+function renderPratica(container){
+  S.batch = pickBatch(12);
+  S.splits = S.batch.map(([word]) => Array(word.length-1).fill(false));
+  S.praticaPhase = 'answering';
+  S.praticaXP = 0;
+  S.gapElsMap = {};
+  drawPraticaAnswering(container);
+}
+
+function drawPraticaAnswering(container){
+  container.innerHTML = '';
+
+  // Instruction bar
+  const instr = document.createElement('div');
+  instr.className = 'instr-bar';
+  instr.innerHTML = `<div class="instr-emoji">✂️</div><div><div class="instr-title">Clique entre as letras para separar!</div><div class="instr-sub">Toque no espaço entre as letras para colocar uma barra. Toque de novo para tirar.</div></div><div class="instr-count" id="fill-count">0/12</div>`;
+  container.appendChild(instr);
+
+  // Word grid
+  const grid = document.createElement('div');
+  grid.className = 'word-grid';
+  S.wordCardEls = [];
+  S.gapElsMap = {};
+
+  S.batch.forEach(([word], wi) => {
+    const card = document.createElement('div');
+    card.className = 'word-card';
+    card.id = 'wcard-'+wi;
+    card.appendChild(buildSplitWordEl(word, wi, false, false));
+    grid.appendChild(card);
+    S.wordCardEls.push(card);
+  });
+  container.appendChild(grid);
+
+  // Progress bar
+  const progWrap = document.createElement('div');
+  progWrap.className = 'pratica-prog';
+  progWrap.innerHTML = `<div class="pratica-prog-bar"><div class="pratica-prog-fill" id="prog-fill" style="width:0%"></div></div><div class="pratica-prog-label" id="prog-label">0 de 12 marcadas</div>`;
+  container.appendChild(progWrap);
+
+  // Check button
+  const btn = document.createElement('button');
+  btn.className = 'btn-check';
+  btn.id = 'btn-check';
+  btn.disabled = true;
+  btn.textContent = 'Marque todas as 12 palavras';
+  btn.onclick = () => checkPratica(container);
+  container.appendChild(btn);
+}
+
+function buildSplitWordEl(word, wordIdx, locked, isCorrect){
+  const wrapper = document.createElement('div');
+  wrapper.style.cssText = 'display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;';
+  const letterColor = locked ? (isCorrect?'#1A7A4A':'#C0392B') : '#2C1654';
+  const fsize = scaleFontWord(word.length);
+
+  word.split('').forEach((ch, i) => {
+    const lEl = document.createElement('span');
+    lEl.textContent = ch;
+    lEl.style.cssText = `font-size:${fsize}px;font-weight:900;color:${letterColor};font-family:'Fredoka One',cursive;letter-spacing:1px;line-height:1;`;
+    wrapper.appendChild(lEl);
+
+    if(i < word.length-1){
+      const gap = document.createElement('span');
+      gap.dataset.wi = wordIdx;
+      gap.dataset.gi = i;
+      if(!S.gapElsMap[wordIdx]) S.gapElsMap[wordIdx] = [];
+      S.gapElsMap[wordIdx][i] = gap;
+      updateGapVisual(gap, S.splits[wordIdx][i], locked, isCorrect);
+      if(!locked) gap.addEventListener('click', onGapClick);
+      wrapper.appendChild(gap);
+    }
+  });
+  return wrapper;
+}
+
+function updateGapVisual(gap, active, locked, isCorrect){
+  const color = locked ? (isCorrect?'#1A7A4A':'#C0392B') : '#FF6B35';
+  gap.style.cssText = `display:inline-flex;align-items:center;justify-content:center;width:${active?18:10}px;height:28px;cursor:${locked?'default':'pointer'};border-radius:4px;background:${active?color:'transparent'};transition:all .15s;margin:${active?'0 1px':'0'};user-select:none;flex-shrink:0;`;
+  gap.innerHTML = '';
+  if(active){
+    const inner = document.createElement('span');
+    inner.style.cssText = 'color:#fff;font-weight:900;font-size:14px;font-family:monospace;line-height:1;';
+    inner.textContent = '|';
+    gap.appendChild(inner);
+  } else if(!locked){
+    const dot = document.createElement('span');
+    dot.style.cssText = 'color:#DDD;font-size:10px;opacity:.4;';
+    dot.textContent = '·';
+    gap.appendChild(dot);
+  }
+}
+
+function onGapClick(e){
+  const wi = parseInt(e.currentTarget.dataset.wi);
+  const gi = parseInt(e.currentTarget.dataset.gi);
+  S.splits[wi][gi] = !S.splits[wi][gi];
+  updateGapVisual(e.currentTarget, S.splits[wi][gi], false, false);
+
+  // update card border
+  const card = document.getElementById('wcard-'+wi);
+  if(card){
+    const anyActive = S.splits[wi].some(Boolean);
+    card.classList.toggle('has-split', anyActive);
+  }
+  updatePraticaProgress();
+}
+
+function updatePraticaProgress(){
+  const filled = S.splits.filter(hasSplit).length;
+  const pct = (filled/12)*100;
+  const fillEl = document.getElementById('prog-fill');
+  const labelEl = document.getElementById('prog-label');
+  const countEl = document.getElementById('fill-count');
+  const btnEl = document.getElementById('btn-check');
+  if(fillEl) fillEl.style.width = pct+'%';
+  if(labelEl) labelEl.textContent = `${filled} de 12 marcadas`;
+  if(countEl) countEl.textContent = `${filled}/12`;
+  if(btnEl){
+    const allDone = filled === 12;
+    btnEl.disabled = !allDone;
+    btnEl.textContent = allDone ? '✅ CORRIGIR TUDO!' : `Marque todas as 12 palavras`;
+  }
+}
+
+function checkPratica(container){
+  const results = S.batch.map(([word, correct], i) => {
+    const given = splitsToString(word, S.splits[i]);
+    return {word, correct, given, ok: given===correct};
+  });
+  const okCount = results.filter(r=>r.ok).length;
+  const xp = okCount * 8;
+  S.praticaXP = xp;
+  addXP(xp);
+  drawPraticaResults(container, results, okCount, xp);
+}
+
+function drawPraticaResults(container, results, okCount, xp){
+  container.innerHTML = '';
+  const pct = Math.round((okCount/12)*100);
+  const medal = pct===100?'🏆':pct>=75?'🥇':pct>=50?'🥈':pct>=25?'🥉':'💪';
+  const msg = pct===100?'Perfeito absoluto! Você é demais! 🌟':pct>=75?'Quase perfeito, continue assim! ⭐':pct>=50?'Bom trabalho! Vamos praticar mais! 😊':'Continue tentando, você vai conseguir! 💪';
+
+  // Score card
+  const sc = document.createElement('div');
+  sc.className = 'score-card';
+  sc.innerHTML = `
+    <div class="score-card-bg">✂️</div>
+    <div class="score-medal">${medal}</div>
+    <div class="score-num">${okCount} de 12!</div>
+    <div class="score-msg">${msg}</div>
+    <div class="score-stats">
+      ${[['✅',okCount,'acertos'],['❌',12-okCount,'erros'],['📊',pct+'%','aproveit.'],['⭐','+'+xp,'XP']].map(([icon,val,label])=>`
+        <div class="score-stat"><div class="score-stat-icon">${icon}</div><div class="score-stat-val">${val}</div><div class="score-stat-label">${label}</div></div>
+      `).join('')}
+    </div>`;
+  container.appendChild(sc);
+
+  // Result grid
+  const rg = document.createElement('div');
+  rg.className = 'result-grid';
+  results.forEach(({word,correct,given,ok}) => {
+    const item = document.createElement('div');
+    item.className = 'result-item '+(ok?'ok':'err');
+    item.innerHTML = `
+      <div class="result-item-head">
+        <span>${ok?'✅':'❌'}</span>
+        <span class="result-word" style="font-size:${scaleFontWord(word.length)-2}px;">${word}</span>
+      </div>
+      <div class="result-correct">✔ ${correct}</div>
+      ${!ok?`<div class="result-given">✗ ${given}</div>`:''}`;
+    rg.appendChild(item);
+  });
+  container.appendChild(rg);
+
+  // Next batch button
+  const btn = document.createElement('button');
+  btn.className = 'btn-next-batch';
+  btn.textContent = '🔥 PRÓXIMAS 12 PALAVRAS!';
+  btn.onclick = () => renderPratica(container);
+  container.appendChild(btn);
+}
+
+// ── FLASHCARDS ────────────────────────────────────────────────
+function renderFlashcards(container){
+  if(!S.fcOrder.length) S.fcOrder = shuffle([...Array(WORDS.length).keys()]);
+  S.fcPage = 0;
+  S.fcFlipped = {};
+  drawFlashcardsPage(container);
+}
+
+function drawFlashcardsPage(container){
+  container.innerHTML = '';
+  const PER = 12;
+  const total = Math.ceil(WORDS.length/PER);
+  const cards = S.fcOrder.slice(S.fcPage*PER, S.fcPage*PER+PER).map(i=>WORDS[i]);
+
+  const hdr = document.createElement('div');
+  hdr.className = 'fc-header';
+  hdr.innerHTML = `<div class="fc-group-badge"><span class="fc-group-text">Grupo ${S.fcPage+1} de ${total}</span></div><div class="fc-hint">👆 Toque no cartão para ver a separação!</div>`;
+  container.appendChild(hdr);
+
+  const grid = document.createElement('div');
+  grid.className = 'fc-grid';
+
+  cards.forEach(([word, syl], i) => {
+    const [c1,c2] = CARD_COLORS[i%CARD_COLORS.length];
+    const card = document.createElement('div');
+    card.className = 'fc-card';
+    card.dataset.idx = i;
+    card.style.cssText = `background:#fff;border:2.5px solid ${c1};box-shadow:0 2px 10px ${c1}25;`;
+    updateFcCard(card, word, syl, false, c1, c2);
+    card.onclick = () => {
+      S.fcFlipped[i] = !S.fcFlipped[i];
+      updateFcCard(card, word, syl, S.fcFlipped[i], c1, c2);
+    };
+    grid.appendChild(card);
+  });
+  container.appendChild(grid);
+
+  const btn = document.createElement('button');
+  btn.className = 'btn-fc-next';
+  btn.textContent = S.fcPage < total-1 ? `✨ Próximos 12 cartões →` : '🔀 Embaralhar tudo de novo!';
+  btn.onclick = () => {
+    if(S.fcPage < total-1){ S.fcPage++; } else { S.fcOrder=shuffle([...Array(WORDS.length).keys()]); S.fcPage=0; }
+    S.fcFlipped = {};
+    if(!S.fcXpDone){ addXP(5); S.fcXpDone=true; }
+    drawFlashcardsPage(container);
+  };
+  container.appendChild(btn);
+}
+
+function updateFcCard(card, word, syl, flipped, c1, c2){
+  card.innerHTML = '';
+  if(flipped){
+    card.style.background = `linear-gradient(135deg,${c1},${c2})`;
+    card.style.border = 'none';
+    card.style.boxShadow = `0 8px 24px ${c1}55`;
+    const t = document.createElement('div');
+    t.className = 'fc-card-syl';
+    t.style.fontSize = scaleFontSyl(syl.length)+'px';
+    t.textContent = syl;
+    card.appendChild(t);
+  } else {
+    card.style.background = '#fff';
+    card.style.border = `2.5px solid ${c1}`;
+    card.style.boxShadow = `0 2px 10px ${c1}25`;
+    const t = document.createElement('div');
+    t.className = 'fc-card-word';
+    t.style.fontSize = scaleFontWord(word.length)+'px';
+    t.textContent = word;
+    card.appendChild(t);
+    const hint = document.createElement('div');
+    hint.className = 'fc-card-tap';
+    hint.style.color = c1;
+    hint.textContent = 'toque';
+    card.appendChild(hint);
+  }
+}
+
+// ── TEORIA (STATIC) ───────────────────────────────────────────
+const TEORIA_CONTENT = {
+  intro: {
+    bg:'linear-gradient(135deg,#667EEA,#764BA2)',
+    heading:'🔤 O que é Sílaba?',
+    body:'Uma <strong>sílaba</strong> é cada "batida" quando falamos uma palavra! 🎵<br>Dica mágica: <strong>bata palmas</strong> enquanto fala a palavra — cada palma é uma sílaba!',
+    examples:[
+      {word:'SOL', syl:'SOL', note:'1 palma = 1 sílaba'},
+      {word:'BO-LA', syl:'BO-LA', note:'2 palmas = 2 sílabas'},
+      {word:'CA-SA', syl:'CA-SA', note:'2 palmas = 2 sílabas'},
+      {word:'BA-NA-NA', syl:'BA-NA-NA', note:'3 palmas = 3 sílabas'},
+      {word:'BI-CI-CLE-TA', syl:'BI-CI-CLE-TA', note:'4 palmas = 4 sílabas'},
+    ],
+    tip:'💡 Bata palmas enquanto fala: BA·NA·NA = 3 palmas = 3 sílabas! Funciona sempre!',
+  },
+  vogais: {
+    bg:'linear-gradient(135deg,#43B89C,#1A9980)',
+    heading:'🎵 Vogais e Consoantes',
+    body:'As <strong>VOGAIS</strong> são: <strong style="font-size:1.15em;color:#FFD93D;">A E I O U</strong> — elas têm som próprio! ⭐<br>Toda sílaba tem exatamente <strong>1 vogal forte</strong> (tônica ou átona) — ela é o "coração" da sílaba!<br>Mas a sílaba pode ter <strong>mais de uma vogal</strong> se as outras forem <em>vogais fracas</em> (semivogais), como nos ditongos: <strong>PAI</strong>, <strong>REI</strong>, <strong>QUATRO</strong>.',
+    examples:[
+      {word:'BA', syl:'B+A', note:'consoante + vogal forte = sílaba ✅'},
+      {word:'MA-CA-CO', syl:'3 sílabas', note:'cada uma com 1 vogal forte: A, A, O'},
+      {word:'PAI', syl:'PAI (1 sílaba!)', note:'A é forte, I é semivogal — juntas na mesma sílaba'},
+      {word:'TREM', syl:'TREM', note:'1 sílaba — E é a única vogal forte'},
+    ],
+    tip:'💡 O segredo: conte as VOGAIS FORTES para saber quantas sílabas tem! Semivogal (vogal fraca) não conta — ela fica junto com a vogal forte na mesma sílaba.',
+  },
+  hiato: {
+    bg:'linear-gradient(135deg,#48C774,#27AE60)',
+    heading:'🌉 Hiato',
+    body:'<strong>Hiato</strong> é quando duas vogais ficam em sílabas <strong>SEPARADAS</strong>! 🌉<br>Acontece quando o <strong>I</strong> ou <strong>U</strong> têm acento ou são a "estrelinha" da sílaba — eles ficam sozinhos!',
+    examples:[
+      {word:'SA-Í-DA', syl:'SA-Í-DA', note:'o Í tem acento = fica sozinho'},
+      {word:'CO-E-LHO', syl:'CO-E-LHO', note:'O e E ficam em sílabas separadas'},
+      {word:'JO-E-LHO', syl:'JO-E-LHO', note:'O e E separados'},
+      {word:'VI-Ú-VA', syl:'VI-Ú-VA', note:'Ú com acento = fica sozinho'},
+      {word:'RA-I-NHA', syl:'RA-I-NHA', note:'I tônico = sílaba separada'},
+    ],
+    tip:'💡 Se o I ou U tiverem acento (Í, Ú) ou forem "fortes" na pronúncia, eles ficam SOZINHOS em sua própria sílaba — isso é hiato!',
+  },
+  ditongo: {
+    bg:'linear-gradient(135deg,#F7DC6F,#F39C12)',
+    heading:'🎭 Ditongo',
+    body:'<strong>Ditongo</strong> é quando duas vogais ficam na <strong>MESMA sílaba</strong>! 🎭<br>São vogais <strong>"amigas"</strong> que não querem se separar — formam sílaba juntas!',
+    examples:[
+      {word:'PAI', syl:'PAI (1 sílaba!)', note:'AI juntos = ditongo'},
+      {word:'REI', syl:'REI (1 sílaba!)', note:'EI juntos = ditongo'},
+      {word:'MA-MÃE', syl:'MA-MÃE', note:'ÃE juntos = ditongo nasal'},
+      {word:'CEU', syl:'CEU (1 sílaba!)', note:'EU juntos = ditongo'},
+      {word:'QUA-DRO', syl:'QUA-DRO', note:'UA juntos = ditongo crescente'},
+    ],
+    tip:'💡 Ditongo decrescente: acento na 1ª vogal (PAI, REI, MEU). Ditongo crescente: acento na 2ª vogal (QUA-dro, sé-RIE). Os dois ficam na mesma sílaba!',
+  },
+  tritongo: {
+    bg:'linear-gradient(135deg,#C39BD3,#9B59B6)',
+    heading:'🌟 Tritongo',
+    body:'<strong>Tritongo</strong> é quando <strong>três vogais</strong> ficam na mesma sílaba! 🌟<br>São três vogazinhas <em>super amigas</em> que não se separam nunca! É raro, mas existe!',
+    examples:[
+      {word:'U-RU-GUAI', syl:'GUAI = 3 vogais!', note:'U-A-I na mesma sílaba'},
+      {word:'PA-RA-GUAI', syl:'GUAI = 3 vogais!', note:'U-A-I juntos'},
+      {word:'QUAIS', syl:'QUAIS (1 sílaba!)', note:'U-A-I juntos'},
+      {word:'I-GUAIS', syl:'I-GUAIS', note:'GUAIS = tritongo'},
+    ],
+    tip:'💡 Tritongo aparece quase sempre em palavras com GUAI (PARAGUAI, URUGUAI) e QUAIS. São raras, mas são legais de conhecer!',
+  },
+  encontro: {
+    bg:'linear-gradient(135deg,#FD79A8,#E84393)',
+    heading:'🤝 Encontro Consonantal',
+    body:'<strong>Encontro consonantal</strong> é quando duas consoantes aparecem juntas! 🤝<br>Podem ficar na <strong>mesma sílaba</strong> (inseparáveis) ou em <strong>sílabas diferentes</strong> (separáveis).',
+    examples:[
+      {word:'BRA-ÇO', syl:'BR juntos', note:'inseparável — ficam na mesma sílaba'},
+      {word:'TRE-VO', syl:'TR juntos', note:'inseparável — TR não se separa'},
+      {word:'FLO-RES-TA', syl:'FL juntos', note:'inseparável — FL junto'},
+      {word:'BOR-BO-LE-TA', syl:'R+B separados', note:'separável — cada consoante em sua sílaba'},
+      {word:'CAS-TE-LO', syl:'S+T separados', note:'separável — S fica com CA'},
+    ],
+    tip:'💡 Inseparáveis: BR, CR, DR, FR, GL, GR, PL, PR, TR, VR, FL (sempre na mesma sílaba). Separáveis: as outras combinações ficam em sílabas diferentes!',
+  },
+};
+
+function renderTeoria(container, moduleId){
+  const t = TEORIA_CONTENT[moduleId];
+  if(!t){ container.innerHTML = '<p>Conteúdo em breve!</p>'; return; }
+
+  // XP banner
+  const banner = document.createElement('div');
+  banner.className = 'teoria-xp-banner';
+  banner.textContent = '⭐ +10 XP por aprender este conteúdo!';
+  container.appendChild(banner);
+
+  // Main card
+  const card = document.createElement('div');
+  card.className = 'teoria-card';
+  card.style.background = t.bg;
+  card.innerHTML = `<div class="teoria-title">${t.heading}</div><div class="teoria-text">${t.body}</div>`;
+  container.appendChild(card);
+
+  // Examples
+  const ex = document.createElement('div');
+  ex.className = 'teoria-examples';
+  ex.innerHTML = `<div class="teoria-examples-title">Exemplos</div>`;
+  t.examples.forEach(e => {
+    const row = document.createElement('div');
+    row.className = 'teoria-example';
+    row.innerHTML = `<span class="teoria-ex-word">${e.word}</span><span class="teoria-ex-arrow">→</span><span class="teoria-ex-syl">${e.syl}</span><span class="teoria-ex-note">(${e.note})</span>`;
+    ex.appendChild(row);
+  });
+  container.appendChild(ex);
+
+  // Tip
+  const tip = document.createElement('div');
+  tip.className = 'teoria-tip';
+  tip.innerHTML = `<span style="font-size:24px;flex-shrink:0;">💡</span><div class="teoria-tip-text">${t.tip.replace('💡 ','')}</div>`;
+  container.appendChild(tip);
+
+  // Award XP once
+  setTimeout(() => addXP(10), 1200);
+}
+
+// ── FOOTER ────────────────────────────────────────────────────
+function renderFooter(){
+  const g = document.getElementById('groups-container');
+  const footer = document.createElement('div');
+  footer.style.cssText = 'text-align:center;padding:0 16px 30px;color:#B39DDB;font-size:13px;font-weight:700;';
+  footer.textContent = '💡 Bata palmas: BA·NA·NA = 3 palmas = 3 sílabas!';
+  g.parentElement.appendChild(footer);
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+renderHome();
+renderFooter();
+</script>
+</body>
+</html>

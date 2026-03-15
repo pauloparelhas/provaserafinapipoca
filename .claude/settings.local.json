@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(powershell:*)",
+      "Bash(pip install:*)",
+      "Bash(du:*)",
+      "Bash(cd \"C:\\\\Users\\\\paulo\\\\OneDrive\\\\td junto outlook hotmail\\\\MAPLE BEAR\\\\provas\" && start ELA01_community_helpers.html)",
+      "Bash(npm i:*)",
+      "Bash(find \"C:\\\\Users\\\\P_8489\\\\OneDrive\\\\td junto outlook hotmail\\\\MAPLE BEAR\\\\provas\" -type f | grep -E \"\\\\.\\(py|md|docx|pdf\\)$\" | head -30)",
+      "Bash(find \"C:\\\\Users\\\\P_8489\\\\OneDrive\\\\td junto outlook hotmail\\\\MAPLE BEAR\\\\provas\" -type f | grep -c \"\\\\\\\\.png$\")",
+      "Bash(find \"C:\\\\Users\\\\P_8489\\\\OneDrive\\\\td junto outlook hotmail\\\\MAPLE BEAR\\\\provas\" -type f | grep -c \"\\\\\\\\.jpg$\")",
+      "Bash(ls -lh \"/c/Users/paulo/OneDrive/td junto outlook hotmail/MAPLE BEAR/provas/02_ELA_INGLES/materiais_escola/\" | grep -E \"\\\\.\\(jpg|jpeg|png|pdf\\)$\")",
+      "Bash(git:*)",
+      "Bash(curl:*)"
+    ]
+  }
+}
