@@ -350,8 +350,8 @@ body.light #karaokeWords .kw.kw-active{background:linear-gradient(135deg,#7c3aed
       </div>
       <!-- Story-level navigation — always visible -->
       <div class="phase-nav" id="storyPhaseNav" style="margin-top:6px;padding-bottom:10px;">
-        <button class="btn btn-back" id="storyPrevBtn" onclick="prevStory()" style="display:none;">&#9664; Hist&#243;ria Anterior</button>
-        <button class="btn btn-next" id="storyNextBtn" onclick="nextStory()">Pr&#243;xima Hist&#243;ria &#9654;</button>
+        <button class="btn btn-back" id="storyPrevBtn" onclick="prevStory()" style="display:none;" data-pt="&#9664; Hist&#243;ria Anterior">&#9664; Previous Story</button>
+        <button class="btn btn-next" id="storyNextBtn" onclick="nextStory()" data-pt="Pr&#243;xima Hist&#243;ria &#9654;">Next Story &#9654;</button>
       </div>
     </div>
   </div>
@@ -857,7 +857,8 @@ function handleAnswer(opt, div, q){
     var retryBtn=document.createElement('button');
     retryBtn.className='btn';
     retryBtn.style.cssText='background:rgba(251,191,36,.18);border:2px solid rgba(251,191,36,.5);color:#fbbf24;';
-    retryBtn.textContent='\uD83D\uDD04 Tentar de Novo';
+    retryBtn.textContent='\uD83D\uDD04 Try Again';
+    retryBtn.setAttribute('data-pt','\uD83D\uDD04 Tentar de Novo');
     retryBtn.onclick=function(){renderQuestion(currentStoryIdx, currentQIdx);};
     nr.appendChild(retryBtn);
   }
@@ -867,7 +868,8 @@ function handleAnswer(opt, div, q){
     var backBtn=document.createElement('button');
     backBtn.className='btn';
     backBtn.style.cssText='background:var(--card-bg);border:1.5px solid var(--card-border);color:var(--text-soft);';
-    backBtn.textContent='\u2B05\uFE0F Anterior';
+    backBtn.textContent='\u2B05\uFE0F Previous';
+    backBtn.setAttribute('data-pt','\u2B05\uFE0F Anterior');
     backBtn.onclick=function(){
       currentQIdx--;
       renderQuestion(currentStoryIdx, currentQIdx);
@@ -879,19 +881,23 @@ function handleAnswer(opt, div, q){
   var btn=document.createElement('button');
   btn.className='btn btn-primary';
   if(isLastQ&&isLastStory){
-    btn.textContent='\uD83C\uDF89 Ver Resultado!';
+    btn.textContent='\uD83C\uDF89 See Results!';
+    btn.setAttribute('data-pt','\uD83C\uDF89 Ver Resultado!');
     btn.onclick=function(){showResult();};
   } else if(isLastQ){
-    btn.textContent='Próxima História \u27A1\uFE0F';
+    btn.textContent='Next Story \u27A1\uFE0F';
+    btn.setAttribute('data-pt','Pr\u00f3xima Hist\u00f3ria \u27A1\uFE0F');
     btn.onclick=function(){startStory(currentStoryIdx+1);};
   } else {
-    btn.textContent='Próxima \u27A1\uFE0F';
+    btn.textContent='Next \u27A1\uFE0F';
+    btn.setAttribute('data-pt','Pr\u00f3xima \u27A1\uFE0F');
     btn.onclick=function(){
       currentQIdx++;
       renderQuestion(currentStoryIdx, currentQIdx);
     };
   }
   nr.appendChild(btn);
+  initFlags();
 }
 
 // ===== INTRO LANGUAGE TOGGLE =====
