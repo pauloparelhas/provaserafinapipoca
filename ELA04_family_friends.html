@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Family &amp; Friends - Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--fs:16px;--bg:#0d0b1e;--card-bg:rgba(255,255,255,.06);--card-border:rgba(255,255,255,.12);--text:#fff;--text-soft:rgba(255,255,255,.55);--text-dim:rgba(255,255,255,.3);}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:var(--fs);}
+body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color:var(--text);overflow-x:hidden;}
+body.light{--bg:#f3f1ff;--card-bg:rgba(124,58,237,.06);--card-border:rgba(124,58,237,.15);--text:#1a1535;--text-soft:rgba(26,21,53,.5);--text-dim:rgba(26,21,53,.3);background:var(--bg);color:var(--text);}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+body.light #starfield{opacity:.08;}
+#app{position:relative;z-index:1;height:100vh;height:100dvh;display:flex;flex-direction:column;}
+
+/* NAVBAR */
+.navbar{width:100%;display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;z-index:100;}
+body.light .navbar{background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.1);}
+.nav-logo{font-size:1rem;font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:auto;}
+.nav-score{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:800;color:#fff;white-space:nowrap;}
+.nb{width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:1.1rem;line-height:1;padding:0;}
+.nb:hover{transform:translateY(-2px);background:rgba(255,255,255,.18);}
+body.light .nb{border-color:rgba(124,58,237,.2);background:rgba(124,58,237,.06);}
+.nb-text{font-size:.7rem;font-weight:900;color:var(--text);}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;background:rgba(0,0,0,.55);align-items:center;justify-content:center;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:#fff;border:2px solid #a78bfa;border-radius:20px;padding:24px 20px;max-width:320px;width:90%;text-align:center;font-family:inherit;box-shadow:0 8px 40px rgba(124,58,237,.25);color:#1a1535;}
+.modal-icon{font-size:36px;margin-bottom:8px;}
+.modal-title{font-size:1rem;font-weight:900;color:#7c3aed;margin-bottom:6px;}
+.modal-text{font-size:.85rem;font-weight:700;color:#555;margin-bottom:16px;line-height:1.5;}
+.modal-btns{display:flex;gap:10px;justify-content:center;}
+.mbtn-yes{background:#7c3aed;color:#fff;border:none;border-radius:12px;padding:10px 22px;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;}
+.mbtn-yes:hover{background:#6d28d9;}
+.mbtn-no{background:#e5e7eb;color:#374151;border:none;border-radius:12px;padding:10px 22px;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;}
+.mbtn-no:hover{background:#d1d5db;}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px;}
+.screen{display:none;width:100%;max-width:900px;}
+.screen.active{display:flex;flex-direction:column;align-items:center;}
+
+/* data-pt / flag */
+[data-pt]{position:relative;cursor:default;}
+.flag-pt{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;
+  background:rgba(0,156,59,.15);border:1px solid rgba(0,156,59,.3);cursor:pointer;font-size:10px;
+  margin-left:4px;vertical-align:middle;flex-shrink:0;transition:.2s;position:relative;z-index:5;}
+.flag-pt:hover{background:rgba(0,156,59,.25);transform:scale(1.1);}
+.pt-label{display:none;font-size:.68rem;font-weight:700;color:#a78bfa;background:rgba(167,139,250,.1);
+  border:1px solid rgba(167,139,250,.25);border-radius:8px;padding:2px 8px;margin-top:2px;
+  line-height:1.3;white-space:normal;width:100%;}
+body.light .pt-label{color:#5b21b6;background:rgba(124,58,237,.06);border-color:rgba(124,58,237,.15);}
+.pt-label.visible{display:block;}
+.fc-front .flag-pt,.fc-back .flag-pt{position:absolute;top:3px;left:3px;}
+.fc-front .pt-label,.fc-back .pt-label{position:absolute;bottom:2px;left:2px;right:2px;width:auto;text-align:center;font-size:.5rem;}
+
+/* KARAOKE BAR */
+.karaoke-bar{display:none;position:fixed;bottom:50px;left:50%;transform:translateX(-50%);
+  background:rgba(13,11,30,.92);backdrop-filter:blur(12px);border:2px solid rgba(167,139,250,.5);border-radius:18px;
+  padding:12px 22px;z-index:200;font-size:1.15rem;font-weight:700;color:rgba(255,255,255,.35);
+  flex-wrap:wrap;gap:6px 8px;justify-content:center;max-width:92%;box-shadow:0 8px 40px rgba(0,0,0,.5);}
+body.light .karaoke-bar{background:rgba(255,255,255,.96);color:rgba(0,0,0,.2);border-color:#c4b5fd;}
+.karaoke-bar .kw{display:inline-block;padding:2px 5px;border-radius:6px;transition:all .15s;}
+.karaoke-bar .kw.kw-active{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;transform:scale(1.18);text-shadow:0 0 8px rgba(167,139,250,.6);}
+.karaoke-bar .kw.kw-done{color:rgba(255,255,255,.7);background:rgba(167,139,250,.12);border-bottom:2px solid rgba(167,139,250,.35);}
+body.light .karaoke-bar .kw.kw-active{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;}
+body.light .karaoke-bar .kw.kw-done{color:rgba(0,0,0,.55);}
+
+/* SPEAKER BUTTON */
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);border:none;cursor:pointer;transition:.2s;flex-shrink:0;font-size:1rem;color:#fff;box-shadow:0 2px 10px rgba(59,130,246,.4);}
+.speak-btn:hover{transform:scale(1.15);box-shadow:0 3px 16px rgba(59,130,246,.6);}
+.speak-btn.speaking{animation:speakPulse .6s ease infinite;}
+@keyframes speakPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.5);}50%{box-shadow:0 0 0 10px rgba(59,130,246,0);}}
+
+/* KEYWORD HIGHLIGHT */
+.kw-hl{color:#fbbf24;font-weight:900;text-decoration:underline wavy #fbbf2480;text-underline-offset:3px;}
+body.light .kw-hl{color:#d97706;}
+
+/* INTRO */
+.intro-hero{position:relative;width:100%;max-width:480px;text-align:center;padding:10px 0 0;}
+.intro-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.3),transparent 70%);filter:blur(40px);pointer-events:none;}
+.intro-emoji{font-size:clamp(56px,12vw,80px);display:block;animation:mfloat 3s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(167,139,250,.5));position:relative;z-index:1;}
+@keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-12px) rotate(3deg);}}
+.intro-badge{display:inline-block;background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(244,114,182,.1));border:1px solid rgba(167,139,250,.35);border-radius:30px;padding:4px 16px;font-size:.65rem;font-weight:700;color:#a78bfa;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.intro-title{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;text-align:center;line-height:1.2;}
+.intro-sub{font-size:clamp(.8rem,2.2vw,.95rem);color:var(--text-soft);font-weight:700;margin-bottom:18px;text-align:center;}
+.phase-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:16px;width:100%;}
+.phase-card{background:var(--card-bg);border:2px solid var(--card-border);border-radius:20px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:150px;flex:1;max-width:220px;cursor:pointer;transition:.25s;position:relative;overflow:hidden;}
+.phase-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(244,114,182,.05));opacity:0;transition:.25s;border-radius:18px;}
+.phase-card:hover::before{opacity:1;}
+.phase-card:hover{border-color:rgba(167,139,250,.5);transform:translateY(-4px);box-shadow:0 8px 30px rgba(167,139,250,.2);}
+.phase-icon{font-size:2rem;position:relative;z-index:1;}
+.phase-num{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#f472b6);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;color:#fff;position:relative;z-index:1;}
+.phase-name{font-size:.8rem;font-weight:900;color:#a78bfa;text-align:center;position:relative;z-index:1;}
+.phase-desc{font-size:.65rem;color:var(--text-dim);font-weight:700;text-align:center;line-height:1.3;position:relative;z-index:1;}
+
+/* BUTTONS */
+.btn{border:none;border-radius:14px;font-family:inherit;font-weight:800;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.btn:active{transform:scale(.96)!important;}
+.btn-start{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:clamp(.9rem,2.5vw,1.05rem);padding:14px 40px;border-radius:50px;box-shadow:0 4px 30px rgba(167,139,250,.5);animation:pulse 2.2s ease infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 4px 30px rgba(167,139,250,.5),0 0 0 0 rgba(167,139,250,.3);}50%{box-shadow:0 4px 30px rgba(167,139,250,.6),0 0 0 14px rgba(167,139,250,0);}}
+.btn-start:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.btn-primary{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:.85rem;padding:11px 24px;border-radius:12px;}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-2px);}
+.btn-check{background:linear-gradient(135deg,#10b981,#34d399);color:#fff;font-size:.85rem;padding:11px 22px;border-radius:12px;}
+.btn-check:hover{transform:translateY(-2px);}
+.btn-replay{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;font-size:.85rem;padding:11px 20px;border-radius:12px;}
+.btn-replay:hover{filter:brightness(1.12);transform:translateY(-2px);}
+.btn-next{background:linear-gradient(135deg,#f472b6,#fb923c);color:#fff;font-size:.9rem;padding:11px 28px;border-radius:12px;}
+.btn-next:hover{transform:translateY(-2px);}
+.btn-back{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:#a78bfa;font-size:.8rem;padding:10px 18px;border-radius:12px;}
+.btn-back:hover{background:rgba(167,139,250,.25);transform:translateY(-2px);}
+.btn-home-lg{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:#a78bfa;font-size:.8rem;padding:10px 18px;border-radius:12px;}
+.btn-home-lg:hover{background:rgba(167,139,250,.25);transform:translateY(-2px);}
+.btn-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.phase-nav{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap;}
+
+/* ===== FLASHCARDS (Phase 1) ===== */
+.fc-title{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;text-align:center;margin-bottom:2px;
+  background:linear-gradient(135deg,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.fc-instruction{font-size:1rem;font-weight:700;color:var(--text-soft);text-align:center;margin-bottom:12px;}
+.fc-container{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:600px;}
+@media(max-width:700px){.fc-container{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:400px){.fc-container{grid-template-columns:repeat(3,1fr);gap:6px;}}
+.fc-card{aspect-ratio:3/3.5;perspective:800px;cursor:pointer;position:relative;}
+.fc-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s;border-radius:18px;}
+.fc-card.flipped .fc-inner{transform:rotateY(180deg);}
+.fc-front,.fc-back{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;overflow:hidden;}
+.fc-front{background:linear-gradient(145deg,#2d1b69,#1a1145);border:2px solid rgba(167,139,250,.4);}
+body.light .fc-front{background:linear-gradient(145deg,#ede9fe,#f5f3ff);border-color:#c4b5fd;}
+.fc-front-emoji{font-size:clamp(1.8rem,4.5vw,2.6rem);margin-bottom:4px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3));}
+.fc-front-name{font-size:clamp(.65rem,1.6vw,.88rem);font-weight:900;color:#c4b5fd;line-height:1.3;}
+body.light .fc-front-name{color:#5b21b6;}
+.fc-front .speak-btn{position:absolute;top:6px;right:6px;width:24px;height:24px;font-size:.65rem;}
+.fc-back{background:linear-gradient(145deg,#064e3b,#065f46);border:2px solid rgba(52,211,153,.5);transform:rotateY(180deg);}
+body.light .fc-back{background:linear-gradient(145deg,#d1fae5,#ecfdf5);border-color:#34d399;}
+.fc-back-emoji{font-size:1.1rem;margin-bottom:2px;}
+.fc-back-role{font-size:clamp(.55rem,1.4vw,.75rem);font-weight:800;color:#6ee7b7;line-height:1.3;}
+body.light .fc-back-role{color:#047857;}
+.fc-back .speak-btn{position:absolute;bottom:3px;right:3px;width:20px;height:20px;font-size:.55rem;}
+.fc-counter{font-size:.75rem;font-weight:700;color:var(--text-dim);margin-top:10px;text-align:center;}
+
+/* ===== QUIZ GAME (Phase 2) ===== */
+.quiz-title{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;text-align:center;margin-bottom:2px;
+  background:linear-gradient(135deg,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.quiz-instruction{font-size:1rem;font-weight:700;color:var(--text-soft);text-align:center;margin-bottom:12px;}
+.quiz-progress-bar{display:flex;gap:5px;justify-content:center;margin-bottom:12px;}
+.qpb-dot{width:28px;height:7px;border-radius:4px;background:rgba(255,255,255,.08);transition:.3s;}
+body.light .qpb-dot{background:rgba(0,0,0,.06);}
+.qpb-dot.done{background:#34d399;}.qpb-dot.fail{background:#f87171;}.qpb-dot.current{background:#a78bfa;animation:dotPulse 1s ease infinite;}
+@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.quiz-clue-card{background:linear-gradient(145deg,rgba(244,114,182,.12),rgba(251,146,60,.08));border:2px solid rgba(244,114,182,.35);
+  border-radius:22px;padding:20px 18px;width:100%;max-width:480px;text-align:center;margin-bottom:16px;position:relative;}
+body.light .quiz-clue-card{background:linear-gradient(145deg,#fdf4ff,#fff7ed);border-color:#f9a8d4;}
+.quiz-clue-emoji{font-size:clamp(2.5rem,8vw,3.5rem);display:block;margin-bottom:8px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.2));}
+.quiz-clue-text{font-size:clamp(.95rem,2.5vw,1.2rem);font-weight:800;color:var(--text);line-height:1.4;padding:0 8px;}
+.quiz-clue-text .blank{display:inline-block;min-width:80px;border-bottom:3px solid #f472b6;color:#f472b6;font-weight:900;}
+.quiz-clue-card .speak-btn{position:absolute;top:10px;right:10px;width:28px;height:28px;font-size:.7rem;}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:480px;margin-bottom:10px;}
+.quiz-opt{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:2px solid var(--card-border);
+  border-radius:16px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:.25s;min-height:72px;position:relative;}
+.quiz-opt:hover{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4);transform:translateY(-2px);}
+.quiz-opt-emoji{font-size:1.6rem;filter:drop-shadow(0 1px 4px rgba(0,0,0,.2));}
+.quiz-opt-name{font-size:clamp(.75rem,2vw,.9rem);font-weight:900;color:var(--text);text-align:center;line-height:1.2;}
+.quiz-opt .speak-btn{position:absolute;top:5px;right:5px;width:20px;height:20px;font-size:.45rem;}
+.quiz-opt.correct{background:linear-gradient(145deg,rgba(16,185,129,.25),rgba(52,211,153,.15))!important;border-color:#34d399!important;pointer-events:none;}
+.quiz-opt.correct .quiz-opt-name{color:#34d399!important;}
+.quiz-opt.wrong{background:linear-gradient(145deg,rgba(239,68,68,.2),rgba(239,68,68,.1))!important;border-color:#f87171!important;pointer-events:none;opacity:.6;}
+.quiz-opt.wrong .quiz-opt-name{color:#f87171!important;}
+.quiz-opt.disabled{pointer-events:none;opacity:.35;}
+.quiz-feedback{text-align:center;font-size:1rem;font-weight:800;min-height:28px;margin-bottom:6px;}
+.quiz-next-row{display:flex;justify-content:center;margin-top:4px;}
+
+/* ===== BUILDER (Phase 3) ===== */
+.builder-title{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;text-align:center;margin-bottom:2px;
+  background:linear-gradient(135deg,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.builder-instruction{font-size:.95rem;font-weight:700;color:var(--text-soft);text-align:center;margin-bottom:14px;}
+.builder-template{font-size:clamp(1.2rem,4vw,1.7rem);font-weight:900;text-align:center;margin-bottom:16px;color:var(--text);line-height:1.5;}
+.builder-slot{display:inline-block;min-width:90px;padding:4px 12px;border-radius:10px;border-bottom:3px solid rgba(167,139,250,.5);color:var(--text-dim);transition:.3s;vertical-align:middle;}
+.builder-slot.filled{background:linear-gradient(135deg,rgba(167,139,250,.2),rgba(244,114,182,.15));border-color:#a78bfa;color:var(--text);box-shadow:0 2px 10px rgba(167,139,250,.25);}
+.builder-sentence-display{background:linear-gradient(145deg,rgba(167,139,250,.12),rgba(244,114,182,.08));border:2px solid rgba(167,139,250,.35);
+  border-radius:18px;padding:16px 20px;width:100%;max-width:480px;text-align:center;margin-bottom:14px;
+  display:none;animation:fadeUp .4s ease both;}
+.builder-sentence-display.show{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.builder-sentence-text{font-size:clamp(1.1rem,3.5vw,1.5rem);font-weight:900;color:var(--text);margin-bottom:8px;}
+.builder-sentence-text .built-member{color:#60a5fa;}
+.builder-sentence-text .built-adj{color:#34d399;}
+.picker-section{width:100%;max-width:500px;margin-bottom:12px;}
+.picker-label{font-size:.8rem;font-weight:800;color:var(--text-soft);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.picker-grid{display:flex;flex-wrap:wrap;gap:7px;}
+.picker-chip{background:var(--card-bg);border:2px solid var(--card-border);border-radius:12px;padding:8px 12px;
+  font-size:.85rem;font-weight:800;cursor:pointer;transition:.25s;display:flex;align-items:center;gap:5px;color:var(--text);}
+.picker-chip:hover{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.1);transform:translateY(-1px);}
+.picker-chip.selected{border-color:#a78bfa!important;background:linear-gradient(135deg,rgba(167,139,250,.25),rgba(244,114,182,.15))!important;
+  box-shadow:0 0 12px rgba(167,139,250,.3);transform:scale(1.04);}
+body.light .picker-chip{background:rgba(124,58,237,.05);border-color:rgba(124,58,237,.15);color:#1a1535;}
+.built-counter{font-size:.8rem;font-weight:800;color:#fbbf24;text-align:center;margin-bottom:6px;}
+.built-list{width:100%;max-width:480px;display:flex;flex-direction:column;gap:6px;margin-top:8px;}
+.built-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;
+  padding:8px 12px;display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;color:var(--text-soft);animation:fadeUp .35s ease both;}
+body.light .built-item{background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.1);}
+.built-item .speak-btn{width:22px;height:22px;font-size:.5rem;flex-shrink:0;}
+
+/* RESULT */
+.result-emoji{font-size:clamp(3.5rem,10vw,5rem);animation:mfloat 3s ease-in-out infinite;margin-bottom:8px;}
+.result-title{font-size:clamp(1.3rem,4.5vw,2rem);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;margin-bottom:6px;}
+.result-stars{display:flex;gap:8px;justify-content:center;margin-bottom:8px;}
+.result-star{font-size:clamp(2rem,5vw,2.8rem);opacity:.15;transition:.5s;transform:scale(.5);}
+.result-star.lit{opacity:1;transform:scale(1);filter:drop-shadow(0 0 10px rgba(251,191,60,.7));}
+.result-xp{font-size:clamp(.9rem,2.5vw,1.2rem);font-weight:800;color:#fbbf24;text-align:center;margin-bottom:6px;}
+.result-detail{font-size:.8rem;font-weight:700;color:var(--text-dim);text-align:center;margin-bottom:14px;}
+
+/* LOCK */
+.nb.sound-off{background:rgba(239,68,68,.2)!important;border-color:rgba(239,68,68,.5)!important;}
+.nb.lock-active{background:rgba(239,68,68,.2)!important;border-color:rgba(239,68,68,.5)!important;animation:lockPulse 2s ease infinite;}
+@keyframes lockPulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.3);}50%{box-shadow:0 0 0 8px rgba(239,68,68,0);}}
+.lock-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,.7);align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.lock-overlay.active{display:flex;}
+.lock-box{background:#1a1145;border:3px solid #a78bfa;border-radius:24px;padding:28px 24px;max-width:300px;width:90%;text-align:center;}
+body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
+.lock-icon{font-size:48px;margin-bottom:8px;}
+.lock-title{font-size:1.1rem;font-weight:900;color:#a78bfa;margin-bottom:8px;}
+
+/* CONFETTI */
+.confetti-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:250;overflow:hidden;}
+.confetti-piece{position:absolute;width:10px;height:10px;top:-10px;border-radius:2px;animation:confettiFall linear forwards;}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+
+/* TABLET */
+@media(min-width:501px) and (max-width:900px){
+  .screen{max-width:95vw!important;}
+  .fc-container{max-width:85vw!important;}
+  .quiz-clue-card{max-width:90vw;}
+  .quiz-options{max-width:90vw;}
+  .picker-section{max-width:90vw;}
+  .builder-sentence-display{max-width:90vw;}
+}
+
+/* MOBILE COMPACT */
+@media(max-width:500px){
+  .karaoke-bar{font-size:.9rem;padding:8px 12px;bottom:20px;gap:3px 5px;border-radius:12px;}
+  .navbar{gap:3px;padding:5px 8px;}
+  .nav-logo{font-size:.75rem;}
+  .nav-score{font-size:.6rem;padding:2px 7px;}
+  .nb{width:28px;height:28px;font-size:.85rem;}
+  .nb-text{font-size:.55rem;}
+  .phase-nav{gap:6px;margin-top:8px;}
+  .phase-nav .btn{font-size:.7rem;padding:7px 12px;}
+  .intro-hero{padding:4px 0 0;}
+  .intro-emoji{font-size:48px;}
+  .intro-title{font-size:1.3rem;margin-bottom:2px;}
+  .intro-sub{font-size:.72rem;margin-bottom:10px;}
+  .intro-badge{font-size:.55rem;padding:3px 10px;margin-bottom:4px;}
+  .phase-grid{gap:6px;margin-bottom:10px;}
+  .phase-card{padding:10px 8px;min-width:95px;gap:3px;border-radius:14px;}
+  .phase-icon{font-size:1.4rem;}
+  .phase-num{width:18px;height:18px;font-size:.55rem;}
+  .phase-name{font-size:.65rem;}
+  .phase-desc{font-size:.55rem;}
+  .btn-start{font-size:.85rem;padding:10px 28px;}
+  /* Flashcards */
+  .fc-title{font-size:1rem;margin-bottom:0;}
+  .fc-instruction{font-size:.82rem;margin-bottom:6px;}
+  .fc-container{gap:6px;}
+  .fc-front-emoji{font-size:1.5rem;margin-bottom:2px;}
+  .fc-front-name{font-size:.55rem;}
+  .fc-front .speak-btn{width:18px;height:18px;font-size:.45rem;top:3px;right:3px;}
+  .fc-front .flag-pt{top:2px;left:2px;width:14px;height:14px;}
+  .fc-back-emoji{font-size:.9rem;}
+  .fc-back-role{font-size:.48rem;}
+  .fc-back .speak-btn{width:16px;height:16px;font-size:.4rem;}
+  .fc-back .flag-pt{top:2px;left:2px;width:14px;height:14px;}
+  .fc-counter{font-size:.65rem;margin-top:4px;}
+  /* Quiz */
+  .quiz-title{font-size:1rem;margin-bottom:0;}
+  .quiz-instruction{font-size:.82rem;margin-bottom:6px;}
+  .quiz-clue-card{padding:14px 12px;margin-bottom:10px;}
+  .quiz-clue-emoji{font-size:2rem;margin-bottom:6px;}
+  .quiz-clue-text{font-size:.88rem;}
+  .quiz-options{gap:7px;}
+  .quiz-opt{padding:10px 6px;min-height:60px;border-radius:12px;}
+  .quiz-opt-emoji{font-size:1.3rem;}
+  .quiz-opt-name{font-size:.72rem;}
+  .quiz-opt .speak-btn{width:16px;height:16px;font-size:.38rem;top:3px;right:3px;}
+  .quiz-feedback{font-size:.88rem;}
+  /* Builder */
+  .builder-title{font-size:1rem;margin-bottom:0;}
+  .builder-instruction{font-size:.8rem;margin-bottom:10px;}
+  .builder-template{font-size:1.1rem;margin-bottom:10px;}
+  .builder-slot{min-width:70px;padding:3px 8px;font-size:.9rem;}
+  .builder-sentence-display{padding:12px 14px;}
+  .builder-sentence-text{font-size:1rem;}
+  .picker-label{font-size:.72rem;}
+  .picker-chip{padding:6px 9px;font-size:.78rem;border-radius:10px;}
+  .built-counter{font-size:.72rem;}
+  .built-item{font-size:.75rem;padding:6px 10px;}
+  .built-item .speak-btn{width:18px;height:18px;font-size:.4rem;}
+  /* Result */
+  .result-emoji{font-size:3rem;}
+  .result-title{font-size:1.3rem;}
+  .result-xp{font-size:.85rem;}
+  .result-detail{font-size:.7rem;margin-bottom:8px;}
+  .flag-pt{width:16px;height:16px;font-size:8px;margin-left:2px;}
+  .pt-label{font-size:.58rem;padding:1px 5px;}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="nav-logo">Serafina &bull; ELA-04</div>
+  <div class="nav-score" id="scoreDisplay">&#11088; 0 XP</div>
+  <button class="nb" onclick="confirmGoHome()" title="Home">&#127968;</button>
+  <button class="nb" onclick="confirmRestart()" title="Restart">&#128260;</button>
+  <button class="nb" onclick="changeFontSize(-1)" title="Smaller"><span class="nb-text">A-</span></button>
+  <button class="nb" onclick="changeFontSize(1)" title="Bigger"><span class="nb-text">A+</span></button>
+  <button class="nb" id="themeBtn" onclick="toggleTheme()" title="Theme">&#9728;&#65039;</button>
+  <button class="nb" id="soundBtn" onclick="toggleSound()" title="Sound">&#128264;</button>
+  <button class="nb" id="lockBtn" onclick="toggleLock()" title="Lock">&#128275;</button>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modalHome">
+  <div class="modal-box">
+    <div class="modal-icon">&#127968;</div>
+    <div class="modal-title">Go back home?</div>
+    <div class="modal-text" data-pt="Tem certeza que quer voltar para a tela inicial?">Are you sure you want to go back to the main screen?</div>
+    <div class="modal-btns">
+      <button class="mbtn-yes" onclick="goToIndex()">Yes!</button>
+      <button class="mbtn-no" onclick="closeModal('modalHome')">No, stay</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modalRestart">
+  <div class="modal-box">
+    <div class="modal-icon">&#128260;</div>
+    <div class="modal-title">Start over?</div>
+    <div class="modal-text" data-pt="Seu progresso vai zerar. Quer recomecar mesmo?">Your progress will reset. Are you sure?</div>
+    <div class="modal-btns">
+      <button class="mbtn-yes" onclick="location.reload()">Yes!</button>
+      <button class="mbtn-no" onclick="closeModal('modalRestart')">No</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- INTRO -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-hero">
+    <div class="intro-glow"></div>
+    <div class="intro-badge">PROJETO SERAFINA</div>
+    <div class="intro-emoji">&#128106;</div>
+  </div>
+  <div class="intro-title" data-pt="Familia e Amigos">Family &amp; Friends</div>
+  <div class="intro-sub" data-pt="Aprenda o vocabulario de familia e crie frases!">Learn family vocabulary and build sentences!</div>
+  <div class="phase-grid">
+    <div class="phase-card" onclick="startPhase(1)">
+      <div class="phase-icon">&#127183;</div>
+      <div class="phase-num">1</div>
+      <div class="phase-name" data-pt="Flashcards de Familia">Family Flashcards</div>
+      <div class="phase-desc" data-pt="Conhea cada membro da familia">Meet each family member!</div>
+    </div>
+    <div class="phase-card" onclick="startPhase(2)">
+      <div class="phase-icon">&#10067;</div>
+      <div class="phase-num">2</div>
+      <div class="phase-name" data-pt="Quem e quem?">Who Is It?</div>
+      <div class="phase-desc" data-pt="Descubra o membro da familia pela dica">Guess the family member from the clue!</div>
+    </div>
+    <div class="phase-card" onclick="startPhase(3)">
+      <div class="phase-icon">&#9997;&#65039;</div>
+      <div class="phase-num">3</div>
+      <div class="phase-name" data-pt="Construtor de Frases">Sentence Builder</div>
+      <div class="phase-desc" data-pt="Monte frases sobre sua familia!">Build sentences about your family!</div>
+    </div>
+  </div>
+  <button class="btn btn-start" onclick="startPhase(1)" data-pt="Comecar!">Let's Go! &#127775;</button>
+</div>
+
+<!-- PHASE 1: FLASHCARDS -->
+<div class="screen" id="screen-flash">
+  <div class="fc-title" data-pt="Membros da Familia!">Family Members!</div>
+  <div class="fc-instruction" data-pt="Toque nos cards para virar! Clique no alto-falante para ouvir.">&#128073; Tap the cards to flip! Click &#128264; to listen.</div>
+  <div class="fc-container" id="fcContainer"></div>
+  <div class="fc-counter" id="fcCounter"></div>
+  <div class="phase-nav">
+    <button class="btn btn-back" onclick="showScreen('screen-intro')" data-pt="Menu">&#9664; Menu</button>
+    <button class="btn btn-next" onclick="startPhase(2)" data-pt="Fase 2">Phase 2 &#9654;</button>
+  </div>
+</div>
+
+<!-- PHASE 2: QUIZ -->
+<div class="screen" id="screen-quiz">
+  <div class="quiz-title" data-pt="Quem e quem?">Who Is It?</div>
+  <div class="quiz-instruction" data-pt="Leia a dica e escolha o membro da familia correto!">&#128073; Read the clue and pick the right family member!</div>
+  <div class="quiz-progress-bar" id="quizProgressBar"></div>
+  <div id="quizArea"></div>
+  <div class="quiz-feedback" id="quizFeedback"></div>
+  <div class="quiz-next-row" id="quizNextRow"></div>
+  <div class="btn-row" id="quizBtnRow"></div>
+  <div class="phase-nav">
+    <button class="btn btn-back" onclick="startPhase(1)" data-pt="Fase 1">&#9664; Phase 1</button>
+    <button class="btn btn-next" onclick="startPhase(3)" data-pt="Fase 3">Phase 3 &#9654;</button>
+  </div>
+</div>
+
+<!-- PHASE 3: BUILDER -->
+<div class="screen" id="screen-builder">
+  <div class="builder-title" data-pt="Construtor de Frases">Sentence Builder</div>
+  <div class="builder-instruction" data-pt="Escolha um membro da familia e um adjetivo para montar sua frase!">&#128073; Pick a family member and an adjective to build your sentence!</div>
+  <div class="builder-template" id="builderTemplate">
+    My <span class="builder-slot" id="slotMember" data-pt="membro da familia">who?</span> is <span class="builder-slot" id="slotAdj" data-pt="adjetivo">how?</span>.
+  </div>
+  <div class="builder-sentence-display" id="builderSentenceDisplay">
+    <div class="builder-sentence-text" id="builderSentenceText"></div>
+    <button class="speak-btn" id="builderSpeakBtn" style="margin:0 auto;display:flex;" title="Read aloud">&#128266;</button>
+  </div>
+  <div id="builderActionRow" class="btn-row" style="margin-bottom:14px;"></div>
+  <div class="picker-section" id="memberPickerSection">
+    <div class="picker-label">&#128100; Pick a family member:</div>
+    <div class="picker-grid" id="memberPicker"></div>
+  </div>
+  <div class="picker-section" id="adjPickerSection">
+    <div class="picker-label">&#127775; Pick an adjective:</div>
+    <div class="picker-grid" id="adjPicker"></div>
+  </div>
+  <div class="built-counter" id="builtCounter"></div>
+  <div class="built-list" id="builtList"></div>
+  <div class="phase-nav">
+    <button class="btn btn-back" onclick="startPhase(2)" data-pt="Fase 2">&#9664; Phase 2</button>
+    <button class="btn btn-next" id="builderToResult" onclick="showFinalResult()" style="display:none;" data-pt="Ver Resultado">See Results &#11088;</button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="screen" id="screen-result">
+  <div class="result-emoji" id="resultEmoji">&#127881;</div>
+  <div class="result-title" id="resultTitle"></div>
+  <div class="result-stars" id="resultStars"></div>
+  <div class="result-xp" id="resultXP"></div>
+  <div class="result-detail" id="resultDetail"></div>
+  <div class="btn-row" id="resultBtns"></div>
+</div>
+
+</div><!-- /main -->
+</div><!-- /app -->
+
+<!-- LOCK OVERLAY -->
+<div class="lock-overlay" id="lockOverlay">
+  <div class="lock-box">
+    <div class="lock-icon">&#128275;</div>
+    <div class="lock-title">Tap to unlock!</div>
+    <button class="mbtn-yes" onclick="unlockScreen()" style="margin-top:12px;font-size:1.1rem;padding:14px 36px;">&#128275; Unlock</button>
+  </div>
+</div>
+
+<!-- KARAOKE BAR -->
+<div id="karaokeBar" class="karaoke-bar"></div>
+<div class="confetti-container" id="confettiBox"></div>
+
+<script>
+// ===== DATA =====
+var FAMILY_MEMBERS = [
+  {name:'Mom',        emoji:'\u{1F469}', pt:'M\u00e3e',            desc:'She is my parent. She loves and cares for me.',      keyword:'loves',  descPT:'Ela \u00e9 minha m\u00e3e. Ela me ama e cuida de mim.'},
+  {name:'Dad',        emoji:'\u{1F468}', pt:'Pai',                  desc:'He is my parent. He is strong and caring.',           keyword:'caring', descPT:'Ele \u00e9 meu pai. Ele \u00e9 forte e carinhoso.'},
+  {name:'Brother',    emoji:'\u{1F466}', pt:'Irm\u00e3o',           desc:'He is my sibling. We play and grow together.',        keyword:'sibling',descPT:'Ele \u00e9 meu irm\u00e3o. N\u00f3s brincamos juntos.'},
+  {name:'Sister',     emoji:'\u{1F467}', pt:'Irm\u00e3',            desc:'She is my sibling. She is my first best friend.',     keyword:'sibling',descPT:'Ela \u00e9 minha irm\u00e3. Ela \u00e9 minha primeira melhor amiga.'},
+  {name:'Grandma',    emoji:'\u{1F475}', pt:'Av\u00f3',             desc:'She is my mom\u2019s or dad\u2019s mom. She gives the best hugs.',  keyword:'hugs',   descPT:'Ela \u00e9 a m\u00e3e da minha m\u00e3e ou do meu pai.'},
+  {name:'Grandpa',    emoji:'\u{1F474}', pt:'Av\u00f4',             desc:'He is my mom\u2019s or dad\u2019s dad. He tells great stories.',    keyword:'stories',descPT:'Ele \u00e9 o pai da minha m\u00e3e ou do meu pai.'},
+  {name:'Aunt',       emoji:'\u{1F469}\u200D\u{1F9B0}', pt:'Tia',  desc:'She is my mom\u2019s or dad\u2019s sister. She is always fun!',     keyword:'sister', descPT:'Ela \u00e9 irm\u00e3 da minha m\u00e3e ou do meu pai.'},
+  {name:'Uncle',      emoji:'\u{1F468}\u200D\u{1F9B1}', pt:'Tio',  desc:'He is my mom\u2019s or dad\u2019s brother. He makes us laugh.',     keyword:'brother',descPT:'Ele \u00e9 irm\u00e3o da minha m\u00e3e ou do meu pai.'},
+  {name:'Cousin',     emoji:'\u{1F9D2}', pt:'Primo(a)',             desc:'My aunt\u2019s or uncle\u2019s child is my cousin. We love to play!',keyword:'child',  descPT:'Filho(a) da minha tia ou do meu tio.'},
+  {name:'Baby',       emoji:'\u{1F476}', pt:'Beb\u00ea',            desc:'The youngest in the family. So tiny and cute!',       keyword:'youngest',descPT:'O(a) mais novo(a) da fam\u00edlia. T\u00e3o pequenino e fofo!'},
+  {name:'Best Friend',emoji:'\u{1F91D}', pt:'Melhor Amigo(a)',      desc:'Not family, but feels like family! Always there for you.',keyword:'feels', descPT:'N\u00e3o \u00e9 fam\u00edlia, mas parece! Sempre ao seu lado.'}
+];
+
+var QUIZ_BANK = [
+  {clue:'My mom\u2019s mom is my ___',             emoji:'\u{1F475}', answer:'Grandma',     wrongs:['Aunt','Sister','Mom']},
+  {clue:'My dad\u2019s brother is my ___',         emoji:'\u{1F468}\u200D\u{1F9B1}', answer:'Uncle', wrongs:['Dad','Cousin','Grandpa']},
+  {clue:'My aunt\u2019s daughter is my ___',       emoji:'\u{1F9D2}', answer:'Cousin',      wrongs:['Sister','Baby','Best Friend']},
+  {clue:'My mom\u2019s dad is my ___',             emoji:'\u{1F474}', answer:'Grandpa',     wrongs:['Dad','Uncle','Grandma']},
+  {clue:'My dad\u2019s sister is my ___',          emoji:'\u{1F469}\u200D\u{1F9B0}', answer:'Aunt', wrongs:['Mom','Sister','Grandma']},
+  {clue:'She is my sibling and my first best friend', emoji:'\u{1F467}', answer:'Sister',  wrongs:['Cousin','Mom','Best Friend']},
+  {clue:'The newest and smallest in the family \u{1F338}', emoji:'\u{1F476}', answer:'Baby', wrongs:['Cousin','Brother','Sister']},
+  {clue:'Not family, but always there for you \u{1F49B}', emoji:'\u{1F91D}', answer:'Best Friend', wrongs:['Cousin','Sister','Uncle']},
+  {clue:'My grandma\u2019s son is my ___',         emoji:'\u{1F468}', answer:'Dad',         wrongs:['Uncle','Brother','Grandpa']},
+  {clue:'He is my sibling. We play and grow together.', emoji:'\u{1F466}', answer:'Brother', wrongs:['Cousin','Dad','Uncle']},
+  {clue:'My mom\u2019s or dad\u2019s sister is my ___', emoji:'\u{1F469}\u200D\u{1F9B0}', answer:'Aunt', wrongs:['Sister','Cousin','Grandma']},
+  {clue:'She loves and cares for me every day \u2764\uFE0F', emoji:'\u{1F469}', answer:'Mom', wrongs:['Grandma','Aunt','Sister']}
+];
+
+var BUILDER_ADJECTIVES = [
+  {word:'Kind',     emoji:'\u{1F49B}', pt:'Gentil'},
+  {word:'Funny',    emoji:'\u{1F604}', pt:'Entra\u00e7ado(a)'},
+  {word:'Brave',    emoji:'\u{1F981}', pt:'Corajoso(a)'},
+  {word:'Happy',    emoji:'\u{1F60A}', pt:'Feliz'},
+  {word:'Caring',   emoji:'\u2764\uFE0F', pt:'Carinhoso(a)'},
+  {word:'Strong',   emoji:'\u{1F4AA}', pt:'Forte'},
+  {word:'Clever',   emoji:'\u{1F9E0}', pt:'Esperto(a)'},
+  {word:'Gentle',   emoji:'\u{1F54A}\uFE0F', pt:'Delicado(a)'},
+  {word:'Silly',    emoji:'\u{1F92A}', pt:'Bobo(a)'},
+  {word:'Friendly', emoji:'\u{1F91D}', pt:'Amig\u00e1vel'},
+  {word:'Polite',   emoji:'\u{1F3A9}', pt:'Educado(a)'},
+  {word:'Cheerful', emoji:'\u{1F31F}', pt:'Alegre'}
+];
+
+// ===== GLOBALS =====
+var totalXP = 0, currentFS = 16, isLight = false;
+var soundEnabled = true, lockActive = false;
+var isTouchDevice = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
+// Phase 2 state
+var quizItems = [], quizIdx = 0, quizCorrect = 0, quizAnswered = false;
+
+// Phase 3 state
+var builderMember = null, builderAdj = null;
+var builtSentences = [];
+
+// ===== TTS / KARAOKE =====
+var karaokeActive = false;
+function speakWithKaraoke(textEN, onEnd) {
+  if (!soundEnabled || !('speechSynthesis' in window)) { if (onEnd) onEnd(); return; }
+  window.speechSynthesis.cancel();
+  karaokeActive = true;
+  var bar = document.getElementById('karaokeBar');
+  var words = textEN.split(/\s+/);
+  bar.innerHTML = words.map(function(w,i){ return '<span class="kw" data-i="'+i+'">'+w+'</span>'; }).join(' ');
+  bar.style.display = 'flex';
+  var voices = speechSynthesis.getVoices();
+  var voice = voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})
+    || voices.find(function(x){return x.lang.startsWith('en');});
+  var idx = 0;
+  function speakNextWord() {
+    if (!karaokeActive) { bar.style.display='none'; if(onEnd) onEnd(); return; }
+    if (idx >= words.length) {
+      bar.querySelectorAll('.kw').forEach(function(s){s.classList.remove('kw-active');s.classList.add('kw-done');});
+      setTimeout(function(){ bar.style.display='none'; karaokeActive=false; if(onEnd) onEnd(); }, 600);
+      return;
+    }
+    bar.querySelectorAll('.kw').forEach(function(s){
+      var i=parseInt(s.getAttribute('data-i')); s.classList.remove('kw-active');
+      if(i<idx) s.classList.add('kw-done');
+    });
+    var el = bar.querySelector('[data-i="'+idx+'"]');
+    if(el){el.classList.remove('kw-done');el.classList.add('kw-active');}
+    var u = new SpeechSynthesisUtterance(words[idx]);
+    u.lang='en-US'; u.rate=0.55; u.pitch=1.1;
+    if(voice) u.voice=voice;
+    u.onend=function(){idx++;setTimeout(speakNextWord,80);};
+    u.onerror=function(){idx++;setTimeout(speakNextWord,80);};
+    speechSynthesis.speak(u);
+  }
+  speakNextWord();
+}
+function stopKaraoke(){
+  karaokeActive=false; window.speechSynthesis.cancel();
+  var bar=document.getElementById('karaokeBar');
+  if(bar) bar.style.display='none';
+}
+function speakSimple(text, onEnd){
+  if(!soundEnabled||!('speechSynthesis' in window)){if(onEnd)onEnd();return;}
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.85; u.pitch=1.1;
+  var voices=speechSynthesis.getVoices();
+  var v=voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})||voices.find(function(x){return x.lang.startsWith('en');});
+  if(v) u.voice=v;
+  if(onEnd) u.onend=onEnd;
+  speechSynthesis.speak(u);
+}
+if('speechSynthesis' in window){
+  speechSynthesis.getVoices();
+  speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices();};
+}
+function makeSpeakBtn(text, size){
+  var btn=document.createElement('button');
+  btn.className='speak-btn'; btn.innerHTML='\u{1F50A}';
+  if(size){btn.style.width=size;btn.style.height=size;btn.style.fontSize=(parseInt(size)/2.5)+'px';}
+  btn.onclick=function(e){e.stopPropagation();btn.classList.add('speaking');speakWithKaraoke(text,function(){btn.classList.remove('speaking');});};
+  return btn;
+}
+
+// ===== UTILS =====
+function $(id){return document.getElementById(id);}
+function shuffle(a){var arr=a.slice();for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
+function showScreen(id){stopKaraoke();document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});$(id).classList.add('active');document.querySelector('.main').scrollTop=0;}
+function addXP(n){totalXP+=n;$('scoreDisplay').innerHTML='\u2B50 '+totalXP+' XP';}
+function closeModal(id){$(id).classList.remove('active');}
+function confirmGoHome(){if(lockActive){speakSimple('The screen is locked!');return;}$('modalHome').classList.add('active');}
+function confirmRestart(){if(lockActive){speakSimple('The screen is locked!');return;}$('modalRestart').classList.add('active');}
+function goToIndex(){window.location.href='index.html';}
+function changeFontSize(d){currentFS=Math.max(12,Math.min(32,currentFS+d*2));document.documentElement.style.setProperty('--fs',currentFS+'px');}
+function toggleTheme(){isLight=!isLight;document.body.classList.toggle('light',isLight);$('themeBtn').innerHTML=isLight?'\u{1F319}':'\u2600\uFE0F';}
+function toggleSound(){soundEnabled=!soundEnabled;var btn=$('soundBtn');if(soundEnabled){btn.innerHTML='\u{1F50A}';btn.classList.remove('sound-off');}else{stopKaraoke();btn.innerHTML='\u{1F507}';btn.classList.add('sound-off');}}
+function toggleLock(){if(!lockActive){lockActive=true;document.body.classList.add('locked');var btn=$('lockBtn');btn.innerHTML='\u{1F512}';btn.classList.add('lock-active');try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}catch(e){}window.addEventListener('beforeunload',preventLeave);}else{$('lockOverlay').classList.add('active');}}
+function preventLeave(e){e.preventDefault();e.returnValue='';}
+function unlockScreen(){lockActive=false;document.body.classList.remove('locked');var btn=$('lockBtn');btn.innerHTML='\u{1F513}';btn.classList.remove('lock-active');$('lockOverlay').classList.remove('active');window.removeEventListener('beforeunload',preventLeave);try{document.fullscreenElement&&document.exitFullscreen();}catch(e){}}
+function fireConfetti(){var box=$('confettiBox');var colors=['#a78bfa','#f472b6','#fb923c','#34d399','#fbbf24','#60a5fa'];for(var i=0;i<50;i++){var p=document.createElement('div');p.className='confetti-piece';p.style.left=Math.random()*100+'%';p.style.background=colors[Math.floor(Math.random()*colors.length)];p.style.width=(6+Math.random()*10)+'px';p.style.height=(6+Math.random()*10)+'px';p.style.animationDuration=(1.5+Math.random()*2)+'s';p.style.animationDelay=(Math.random()*.6)+'s';box.appendChild(p);}setTimeout(function(){box.innerHTML='';},4500);}
+
+// ===== FLAGS =====
+function initFlags(){
+  document.querySelectorAll('[data-pt]').forEach(function(el){
+    var pt=el.getAttribute('data-pt'); if(!pt) return;
+    var fcFace=el.closest('.fc-front')||el.closest('.fc-back');
+    var target=fcFace||el;
+    if(target.querySelector('.flag-pt')) return;
+    var flag=document.createElement('span');
+    flag.className='flag-pt';
+    flag.innerHTML='<svg viewBox="0 0 20 14" width="14" height="10" style="display:block"><rect fill="#009c3b" width="20" height="14" rx="2"/><polygon fill="#ffdf00" points="10,1.5 18,7 10,12.5 2,7"/><circle fill="#002776" cx="10" cy="7" r="3"/></svg>';
+    flag.title='Tradu\u00e7\u00e3o';
+    var label=document.createElement('div');
+    label.className='pt-label'; label.textContent=pt;
+    flag.addEventListener('click',function(e){e.stopPropagation();e.preventDefault();label.classList.toggle('visible');});
+    target.appendChild(flag); target.appendChild(label);
+  });
+}
+
+// ===== PHASE ROUTER =====
+function startPhase(n){if(n===1)initFlashcards();else if(n===2)initQuiz();else if(n===3)initBuilder();}
+
+// ============================================================
+// PHASE 1: FLASHCARDS
+// ============================================================
+var fcFlipped=0, fcFlippedSet={};
+function hlKw(text,keyword){if(!keyword)return text;return text.replace(new RegExp('('+keyword.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','i'),'<strong class="kw-hl">$1</strong>');}
+
+function initFlashcards(){
+  showScreen('screen-flash');
+  fcFlipped=0; fcFlippedSet={};
+  var container=$('fcContainer');
+  container.innerHTML='';
+  setTimeout(function(){speakWithKaraoke('Family Members! Tap the cards to learn about each one.');},400);
+  shuffle(FAMILY_MEMBERS).forEach(function(mem,idx){
+    var card=document.createElement('div');
+    card.className='fc-card'; card.dataset.idx=idx;
+    var inner=document.createElement('div'); inner.className='fc-inner';
+    // Front
+    var front=document.createElement('div'); front.className='fc-front';
+    front.innerHTML='<div class="fc-front-emoji">'+mem.emoji+'</div><div class="fc-front-name" data-pt="'+mem.pt+'">'+mem.name+'</div>';
+    var fSpk=makeSpeakBtn(mem.name,'24px'); front.appendChild(fSpk);
+    // Back
+    var back=document.createElement('div'); back.className='fc-back';
+    back.innerHTML='<div class="fc-back-emoji">'+mem.emoji+'</div><div class="fc-back-role" data-pt="'+mem.descPT+'">'+hlKw(mem.desc,mem.keyword)+'</div>';
+    var bSpk=makeSpeakBtn(mem.name+'. '+mem.desc,'20px'); back.appendChild(bSpk);
+    inner.appendChild(front); inner.appendChild(back); card.appendChild(inner);
+    card.onclick=function(e){
+      if(e.target.closest('.speak-btn')) return;
+      if(!card.classList.contains('flipped')){
+        card.classList.add('flipped');
+        if(!fcFlippedSet[mem.name]){fcFlippedSet[mem.name]=true;fcFlipped++;addXP(5);}
+        speakWithKaraoke(mem.name+'. '+mem.desc); updateFcCounter();
+      } else { card.classList.remove('flipped'); }
+    };
+    container.appendChild(card);
+  });
+  updateFcCounter(); initFlags();
+}
+function updateFcCounter(){
+  var el=$('fcCounter');
+  if(fcFlipped>=11){el.innerHTML='\u2728 All 11 discovered! +55 XP';}
+  else{el.textContent=fcFlipped+' of 11 discovered';}
+}
+
+// ============================================================
+// PHASE 2: QUIZ
+// ============================================================
+function initQuiz(){
+  showScreen('screen-quiz');
+  quizItems=shuffle(QUIZ_BANK).slice(0,6);
+  quizIdx=0; quizCorrect=0; quizAnswered=false;
+  $('quizFeedback').innerHTML='';
+  $('quizNextRow').innerHTML='';
+  $('quizBtnRow').innerHTML='';
+  setTimeout(function(){speakWithKaraoke('Who Is It? Read the clue and pick the right family member!');},400);
+  renderQuizQuestion();
+}
+
+function renderQuizProgressBar(){
+  var bar=$('quizProgressBar'); bar.innerHTML='';
+  for(var i=0;i<quizItems.length;i++){
+    var dot=document.createElement('div'); dot.className='qpb-dot';
+    if(i<quizIdx){
+      var prev=quizItems[i];
+      dot.classList.add(prev._answered===true?'done':'fail');
+    } else if(i===quizIdx){ dot.classList.add('current'); }
+    bar.appendChild(dot);
+  }
+}
+
+function renderQuizQuestion(){
+  if(quizIdx>=quizItems.length){showQuizResult();return;}
+  quizAnswered=false;
+  var q=quizItems[quizIdx];
+  $('quizFeedback').innerHTML='';
+  $('quizNextRow').innerHTML='';
+  var area=$('quizArea'); area.innerHTML='';
+  renderQuizProgressBar();
+
+  // Clue card
+  var clueCard=document.createElement('div'); clueCard.className='quiz-clue-card';
+  var clueEmoji=document.createElement('span'); clueEmoji.className='quiz-clue-emoji'; clueEmoji.textContent=q.emoji;
+  var clueText=document.createElement('div'); clueText.className='quiz-clue-text';
+  clueText.innerHTML=q.clue.replace('___','<span class="blank">___</span>');
+  var clueSpk=makeSpeakBtn(q.clue.replace('___','blank'),'28px');
+  clueCard.appendChild(clueEmoji); clueCard.appendChild(clueText); clueCard.appendChild(clueSpk);
+  area.appendChild(clueCard);
+
+  // Options: shuffle answer + 3 wrongs
+  var opts=shuffle([q.answer].concat(q.wrongs));
+  var optsGrid=document.createElement('div'); optsGrid.className='quiz-options';
+
+  opts.forEach(function(optName){
+    var mem=FAMILY_MEMBERS.find(function(m){return m.name===optName;})||{emoji:'\u{1F464}',name:optName,pt:optName};
+    var optDiv=document.createElement('div'); optDiv.className='quiz-opt';
+    optDiv.setAttribute('data-pt', mem.pt);
+    var emojiEl=document.createElement('div'); emojiEl.className='quiz-opt-emoji'; emojiEl.textContent=mem.emoji;
+    var nameEl=document.createElement('div'); nameEl.className='quiz-opt-name'; nameEl.textContent=mem.name;
+    var spk=makeSpeakBtn(mem.name,'20px');
+    optDiv.appendChild(emojiEl); optDiv.appendChild(nameEl); optDiv.appendChild(spk);
+    optDiv.addEventListener('click',function(e){
+      if(e.target.closest('.speak-btn')) return;
+      if(quizAnswered) return;
+      handleQuizAnswer(optName===q.answer, optDiv, optName, q);
+    });
+    optsGrid.appendChild(optDiv);
+  });
+  area.appendChild(optsGrid);
+  initFlags();
+
+  // Auto-speak clue after short delay
+  setTimeout(function(){speakWithKaraoke(q.clue.replace('___','blank'));},350);
+}
+
+function handleQuizAnswer(isCorrect, el, chosen, q){
+  quizAnswered=true;
+  q._answered=isCorrect;
+  var fb=$('quizFeedback');
+  document.querySelectorAll('.quiz-opt').forEach(function(o){
+    var oName=o.querySelector('.quiz-opt-name').textContent;
+    if(oName===q.answer) o.classList.add('correct');
+    else if(oName===chosen&&!isCorrect) o.classList.add('wrong');
+    else o.classList.add('disabled');
+  });
+  if(isCorrect){
+    quizCorrect++; addXP(15);
+    fb.innerHTML='<span style="color:#34d399">\u2705 Correct! That\u2019s the '+q.answer+'! \u{1F389}</span>';
+    speakSimple('Correct! That is the '+q.answer+'!');
+  } else {
+    fb.innerHTML='<span style="color:#f87171">\u274C Not this one! The answer is <strong>'+q.answer+'</strong>.</span>';
+    speakSimple('Not this one. The answer is '+q.answer+'.');
+  }
+  renderQuizProgressBar();
+  var nextRow=$('quizNextRow');
+  var isLast=(quizIdx>=quizItems.length-1);
+  var nb=document.createElement('button');
+  nb.className='btn btn-next';
+  nb.textContent=isLast?'See Score \u{1F4CA}':'Next \u27A1';
+  nb.onclick=function(){quizIdx++;renderQuizQuestion();};
+  nextRow.appendChild(nb);
+}
+
+function showQuizResult(){
+  var area=$('quizArea'); area.innerHTML='';
+  $('quizFeedback').innerHTML='';
+  $('quizNextRow').innerHTML='';
+  renderQuizProgressBar();
+  var pct=quizCorrect/quizItems.length;
+  var msg, color;
+  if(pct>=0.833){msg='\u{1F31F} Perfect! '+quizCorrect+'/'+quizItems.length+' correct! +90 XP';color='#34d399';fireConfetti();}
+  else if(pct>=0.5){msg='\u{1F44D} Good job! '+quizCorrect+'/'+quizItems.length+' correct!';color='#fbbf24';}
+  else{msg='\u{1F4AA} Keep going! '+quizCorrect+'/'+quizItems.length+' correct.';color='rgba(255,255,255,.6)';}
+  area.innerHTML='<div style="text-align:center;font-size:1.1rem;font-weight:800;color:'+color+';margin:12px 0 16px;">'+msg+'</div>';
+  speakWithKaraoke('You got '+quizCorrect+' out of '+quizItems.length+' correct!');
+  var btnRow=$('quizBtnRow');
+  btnRow.innerHTML='';
+  var newRound=document.createElement('button');
+  newRound.className='btn btn-replay';
+  newRound.innerHTML='\u{1F504} New Round';
+  newRound.onclick=initQuiz;
+  btnRow.appendChild(newRound);
+}
+
+// ============================================================
+// PHASE 3: SENTENCE BUILDER
+// ============================================================
+function initBuilder(){
+  showScreen('screen-builder');
+  builderMember=null; builderAdj=null;
+  builtSentences=[];
+  $('slotMember').textContent='who?'; $('slotMember').classList.remove('filled');
+  $('slotAdj').textContent='how?'; $('slotAdj').classList.remove('filled');
+  $('builderSentenceDisplay').classList.remove('show');
+  $('builderActionRow').innerHTML='';
+  $('builtCounter').textContent='';
+  $('builtList').innerHTML='';
+  $('builderToResult').style.display='none';
+
+  setTimeout(function(){speakWithKaraoke('Sentence Builder! Pick a family member and an adjective to build your sentence!');},400);
+
+  // Render member picker
+  var memberGrid=$('memberPicker'); memberGrid.innerHTML='';
+  FAMILY_MEMBERS.forEach(function(mem){
+    var chip=document.createElement('div'); chip.className='picker-chip';
+    chip.setAttribute('data-pt', mem.pt);
+    chip.innerHTML=mem.emoji+' '+mem.name;
+    chip.addEventListener('click',function(e){
+      if(e.target.closest('.flag-pt')) return;
+      document.querySelectorAll('#memberPicker .picker-chip').forEach(function(c){c.classList.remove('selected');});
+      chip.classList.add('selected');
+      builderMember=mem;
+      $('slotMember').textContent=mem.emoji+' '+mem.name; $('slotMember').classList.add('filled');
+      checkBuilderReady();
+    });
+    memberGrid.appendChild(chip);
+  });
+
+  // Render adjective picker
+  var adjGrid=$('adjPicker'); adjGrid.innerHTML='';
+  BUILDER_ADJECTIVES.forEach(function(adj){
+    var chip=document.createElement('div'); chip.className='picker-chip';
+    chip.setAttribute('data-pt', adj.pt);
+    chip.innerHTML=adj.emoji+' '+adj.word;
+    chip.addEventListener('click',function(e){
+      if(e.target.closest('.flag-pt')) return;
+      document.querySelectorAll('#adjPicker .picker-chip').forEach(function(c){c.classList.remove('selected');});
+      chip.classList.add('selected');
+      builderAdj=adj;
+      $('slotAdj').textContent=adj.emoji+' '+adj.word; $('slotAdj').classList.add('filled');
+      checkBuilderReady();
+    });
+    adjGrid.appendChild(chip);
+  });
+
+  initFlags();
+}
+
+function checkBuilderReady(){
+  if(!builderMember||!builderAdj) return;
+  // Show sentence
+  var sentenceEN='My '+builderMember.name+' is '+builderAdj.word+'!';
+  var display=$('builderSentenceDisplay');
+  $('builderSentenceText').innerHTML='My <span class="built-member">'+builderMember.emoji+' '+builderMember.name+'</span> is <span class="built-adj">'+builderAdj.emoji+' '+builderAdj.word+'</span>! ';
+  display.classList.add('show');
+
+  var spkBtn=$('builderSpeakBtn');
+  spkBtn.onclick=function(e){e.stopPropagation();spkBtn.classList.add('speaking');speakWithKaraoke(sentenceEN,function(){spkBtn.classList.remove('speaking');});};
+
+  // Auto speak
+  setTimeout(function(){speakWithKaraoke(sentenceEN);},300);
+
+  // Action row
+  var row=$('builderActionRow'); row.innerHTML='';
+  var saveBtn=document.createElement('button'); saveBtn.className='btn btn-check'; saveBtn.innerHTML='\u2728 Build Another!';
+  saveBtn.onclick=function(){
+    saveSentence(builderMember, builderAdj, sentenceEN);
+  };
+  row.appendChild(saveBtn);
+}
+
+function saveSentence(mem, adj, text){
+  // Check duplicate
+  var key=mem.name+'|'+adj.word;
+  var exists=builtSentences.some(function(s){return s.key===key;});
+  if(!exists){
+    builtSentences.push({key:key, mem:mem, adj:adj, text:text});
+    addXP(10);
+    if(builtSentences.length===3){addXP(20);fireConfetti();}
+    if(builtSentences.length===5){addXP(30);fireConfetti();}
+    renderBuiltList();
+  }
+  // Reset selections
+  builderMember=null; builderAdj=null;
+  document.querySelectorAll('#memberPicker .picker-chip,#adjPicker .picker-chip').forEach(function(c){c.classList.remove('selected');});
+  $('slotMember').textContent='who?'; $('slotMember').classList.remove('filled');
+  $('slotAdj').textContent='how?'; $('slotAdj').classList.remove('filled');
+  $('builderSentenceDisplay').classList.remove('show');
+  $('builderActionRow').innerHTML='';
+  if(builtSentences.length>=1) $('builderToResult').style.display='';
+}
+
+function renderBuiltList(){
+  var count=builtSentences.length;
+  var stars='';
+  for(var i=0;i<Math.min(count,5);i++) stars+='\u2B50';
+  $('builtCounter').textContent=stars+' Sentences built: '+count;
+  var list=$('builtList'); list.innerHTML='';
+  builtSentences.slice().reverse().forEach(function(s){
+    var item=document.createElement('div'); item.className='built-item';
+    var spk=makeSpeakBtn(s.text,'22px');
+    var txt=document.createElement('span');
+    txt.innerHTML=s.mem.emoji+' <strong>'+s.text+'</strong>';
+    item.appendChild(spk); item.appendChild(txt);
+    list.appendChild(item);
+  });
+}
+
+// ============================================================
+// RESULT
+// ============================================================
+function showFinalResult(){
+  var built=builtSentences.length;
+  var pct=Math.min(built/5,1);
+  showResult(built,5,totalXP);
+}
+
+function showResult(correct,total,xp){
+  showScreen('screen-result');
+  var pct=correct/total;
+  var emoji,title;
+  if(pct>=1){emoji='\u{1F31F}';title='Amazing! A+ Family Expert!';}
+  else if(pct>=0.6){emoji='\u{1F389}';title='Great job!';}
+  else if(pct>=0.4){emoji='\u{1F4AA}';title='Good effort!';}
+  else{emoji='\u{1F60A}';title='Keep practicing!';}
+  $('resultEmoji').textContent=emoji;
+  $('resultTitle').textContent=title;
+  speakWithKaraoke(title+' You built '+correct+' sentences!');
+  var starsDiv=$('resultStars'); starsDiv.innerHTML='';
+  var starCount=pct>=1?3:pct>=0.6?2:pct>=0.4?1:0;
+  for(var i=0;i<3;i++){
+    var s=document.createElement('div'); s.className='result-star'; s.textContent='\u2B50';
+    starsDiv.appendChild(s);
+    if(i<starCount){(function(el,delay){setTimeout(function(){el.classList.add('lit');},delay);})(s,300+i*350);}
+  }
+  $('resultXP').textContent='\u2B50 Total XP: '+totalXP;
+  $('resultDetail').textContent='Sentences built: '+correct+' | Quiz score: '+quizCorrect+'/'+quizItems.length;
+  $('resultBtns').innerHTML=
+    '<button class="btn btn-replay" onclick="startPhase(3)">Build More \u2728</button>'+
+    '<button class="btn btn-primary" onclick="startPhase(1)">Phase 1 \u{1F0CF}</button>'+
+    '<button class="btn btn-home-lg" onclick="showScreen(\'screen-intro\')">Menu</button>';
+  if(pct>=0.6) fireConfetti();
+}
+
+// ===== INIT =====
+initFlags();
+
+// ===== STARFIELD =====
+(function(){
+  var c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  var stars=[];
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;stars=[];for(var i=0;i<100;i++){stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.8+.3,a:Math.random(),da:(.004+Math.random()*.008)*(Math.random()>.5?1:-1)});}}
+  function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.a+=s.da;if(s.a>1||s.a<0)s.da*=-1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle='rgba(167,139,250,'+Math.abs(s.a)+')';ctx.fill();});requestAnimationFrame(draw);}
+  window.addEventListener('resize',resize);resize();draw();
+})();
+</script>
+</body>
+</html>
