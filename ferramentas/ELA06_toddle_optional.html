@@ -981,11 +981,11 @@ function launchConfetti(){
 
 // ===== TOUR =====
 var tourSteps=[
-  {selector:'#navLogo',title:'Serafina ELA-06',text:'Toddle Explorer! Four topics: Animals, Food Pyramid, Patterns and Community!'},
-  {selector:'#scoreDisplay',title:'Your XP \u2B50',text:'Earn points by exploring and playing! Every correct answer gives you XP!'},
-  {selector:'#btnHome',title:'Home \uD83C\uDFE0',text:'Go back to the main menu. It will ask before leaving!'},
-  {selector:'#lockBtn',title:'Lock \uD83D\uDD12',text:'Lock the screen to play without leaving by accident. Tap again to unlock!'},
-  {selector:null,title:'Reading Speed \uD83D\uDD0A',text:'When words appear at the bottom:\n\uD83D\uDC0C Very slow \u2022 \uD83D\uDC22 Slow \u2022 \uD83D\uDC07 Normal \u2022 \uD83D\uDE80 Fast'}
+  {selector:'#navLogo',title:'Serafina ELA-06',text:'Toddle Explorer! Quatro temas: Animais, Pir\u00e2mide Alimentar, Padr\u00f5es e Comunidade!'},
+  {selector:'#scoreDisplay',title:'Seus Pontos XP \u2B50',text:'Ganhe pontos explorando e jogando! Cada resposta certa d\u00e1 XP!'},
+  {selector:'#btnHome',title:'Home \uD83C\uDFE0',text:'Volta para o menu principal. Vai perguntar antes de sair!'},
+  {selector:'#lockBtn',title:'Cadeado \uD83D\uDD12',text:'Trava a tela para jogar sem sair por acidente. Toque de novo para destrancar!'},
+  {selector:null,title:'Velocidade da Fala \uD83D\uDD0A',text:'Quando as palavras aparecerem embaixo:\n\uD83D\uDC0C Bem devagar \u2022 \uD83D\uDC22 Devagar \u2022 \uD83D\uDC07 Normal \u2022 \uD83D\uDE80 R\u00e1pido'}
 ];
 var tourIdx=0;
 function startTour(){if(localStorage.getItem('ela06_tour_done'))return;tourIdx=0;showTourStep();$('tourOverlay').style.display='block';}
