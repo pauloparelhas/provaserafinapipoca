@@ -335,7 +335,7 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
   .navbar{gap:3px;padding:5px 8px;}
   .nav-logo{font-size:.75rem;}
   .nav-score{font-size:.6rem;padding:2px 7px;}
-  .nb{width:28px;height:28px;font-size:.85rem;}
+  .nb{width:36px;height:36px;font-size:.85rem;}
   .nb-text{font-size:.55rem;}
   .phase-nav{gap:6px;margin-top:8px;}
   .phase-nav .btn{font-size:.7rem;padding:7px 12px;}
@@ -452,7 +452,7 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
 <div class="screen active" id="screen-intro">
   <div class="intro-hero">
     <div class="intro-glow"></div>
-    <div class="intro-badge">ELA &bull; UNIT 2</div>
+    <div class="intro-badge">ELA &bull; UNIT 1</div>
     <div class="intro-emoji">&#129717;</div>
   </div>
   <div class="intro-title" data-pt="Enchendo Baldes e Comunidade">Bucket Fillers &amp; Community</div>
@@ -653,11 +653,11 @@ var DIPPERS = [
   {action:'Making fun of others',actionPT:'Zombar dos outros',emoji:'\u{1F608}',keyword:'fun of',type:'dipper'},
   {action:'Saying mean words',actionPT:'Dizer palavras maldosas',emoji:'\u{1F5E3}\uFE0F',keyword:'mean',type:'dipper'},
   {action:'Pushing someone',actionPT:'Empurrar alguem',emoji:'\u{1F624}',keyword:'pushing',type:'dipper'},
-  {action:'Not sharing',actionPT:'Nao compartilhar',emoji:'\u{1F6AB}',keyword:'not sharing',type:'dipper'},
+  {action:'Taking without asking',actionPT:'Pegar sem pedir',emoji:'\u{1F620}',keyword:'taking',type:'dipper'},
   {action:'Ignoring a friend',actionPT:'Ignorar um amigo',emoji:'\u{1F636}',keyword:'ignoring',type:'dipper'},
   {action:'Breaking things',actionPT:'Quebrar coisas',emoji:'\u{1F494}',keyword:'breaking',type:'dipper'},
   {action:'Cutting in line',actionPT:'Furar a fila',emoji:'\u{1F620}',keyword:'cutting',type:'dipper'},
-  {action:'Laughing at mistakes',actionPT:'Rir dos erros dos outros',emoji:'\u{1F923}',keyword:'laughing',type:'dipper'}
+  {action:'Yelling at a friend',actionPT:'Gritar com um amigo',emoji:'\u{1F621}',keyword:'yelling',type:'dipper'}
 ];
 
 var ALL_ACTIONS = FILLERS.concat(DIPPERS);
@@ -726,6 +726,7 @@ var currentFontSize = 16;
 function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function $(id){return document.getElementById(id);}
 function showScreen(id){
+  speechSynthesis.cancel();
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
   $(id).classList.add('active');
   initFlags();
@@ -735,21 +736,29 @@ function addXP(n){totalXP+=n;$('scoreDisplay').innerHTML='&#11088; '+totalXP+' X
 // ===== FLAGS =====
 function initFlags(){
   document.querySelectorAll('[data-pt]').forEach(function(el){
-    if(el.querySelector('.flag-pt')) return;
     var pt = el.getAttribute('data-pt');
     if(!pt) return;
+
+    // For flashcard faces: append flag+label to the face container (.fc-front/.fc-back), not the text element
+    var fcFace = el.closest('.fc-front') || el.closest('.fc-back');
+    var target = fcFace || el;
+
+    // Skip if already processed
+    if(target.querySelector('.flag-pt')) return;
+
     var flag = document.createElement('span');
     flag.className = 'flag-pt';
     flag.innerHTML = '<svg viewBox="0 0 20 14" width="14" height="10" style="display:block"><rect fill="#009c3b" width="20" height="14" rx="2"/><polygon fill="#ffdf00" points="10,1.5 18,7 10,12.5 2,7"/><circle fill="#002776" cx="10" cy="7" r="3"/></svg>';
     var label = document.createElement('div');
     label.className = 'pt-label';
     label.textContent = pt;
+    flag.title = 'Tradução';
     flag.addEventListener('click', function(e){
       e.stopPropagation(); e.preventDefault();
       label.classList.toggle('visible');
     });
-    el.appendChild(flag);
-    el.appendChild(label);
+    target.appendChild(flag);
+    target.appendChild(label);
   });
 }
 
@@ -1301,7 +1310,9 @@ function generateQuizQuestions(){
     qPT:'Bullying e esvaziar...',
     options:[
       {text:'Filling \u2728',textPT:'Encher',emoji:'\u{1FAA3}',correct:false},
-      {text:'Dipping \u{1F622}',textPT:'Esvaziar',emoji:'\u{1F4A7}',correct:true}
+      {text:'Dipping \u{1F622}',textPT:'Esvaziar',emoji:'\u{1F4A7}',correct:true},
+      {text:'Both \u{1F914}',textPT:'Os dois',emoji:'\u{1F914}',correct:false},
+      {text:'Neither \u{1F937}',textPT:'Nenhum',emoji:'\u{1F937}',correct:false}
     ]
   });
 
@@ -1347,8 +1358,9 @@ function renderQuizQ(){
   shuffledOpts.forEach(function(opt, oi){
     var div = document.createElement('div');
     div.className = 'quiz-opt';
+    var speakBtnHtml = '<button class="speak-btn" style="position:absolute;top:4px;right:4px;" onclick="event.stopPropagation();speakSimple(\''+opt.text.replace(/'/g,"\\'")+'\')" title="Listen">&#128264;</button>';
     div.innerHTML = '<div class="qo-emoji">'+opt.emoji+'</div>' +
-      '<div class="qo-name" data-pt="'+opt.textPT+'">'+opt.text+'</div>';
+      '<div class="qo-name" data-pt="'+opt.textPT+'">'+opt.text+'</div>' + speakBtnHtml;
     div.addEventListener('click', function(){
       if(quizAnswered) return;
       quizAnswered = true;

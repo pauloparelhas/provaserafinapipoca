@@ -278,7 +278,7 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
   .navbar{gap:3px;padding:5px 8px;}
   .nav-logo{font-size:.75rem;}
   .nav-score{font-size:.6rem;padding:2px 7px;}
-  .nb{width:28px;height:28px;font-size:.85rem;}
+  .nb{width:36px;height:36px;font-size:.85rem;}
   .nb-text{font-size:.55rem;}
   .phase-nav{gap:6px;margin-top:8px;}
   .phase-nav .btn{font-size:.7rem;padding:7px 12px;}
@@ -528,14 +528,14 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
 var FAMILY_MEMBERS = [
   {name:'Mom',        emoji:'\u{1F469}', pt:'M\u00e3e',            desc:'She is my parent. She loves and cares for me.',      keyword:'loves',  descPT:'Ela \u00e9 minha m\u00e3e. Ela me ama e cuida de mim.'},
   {name:'Dad',        emoji:'\u{1F468}', pt:'Pai',                  desc:'He is my parent. He is strong and caring.',           keyword:'caring', descPT:'Ele \u00e9 meu pai. Ele \u00e9 forte e carinhoso.'},
-  {name:'Brother',    emoji:'\u{1F466}', pt:'Irm\u00e3o',           desc:'He is my sibling. We play and grow together.',        keyword:'sibling',descPT:'Ele \u00e9 meu irm\u00e3o. N\u00f3s brincamos juntos.'},
-  {name:'Sister',     emoji:'\u{1F467}', pt:'Irm\u00e3',            desc:'She is my sibling. She is my first best friend.',     keyword:'sibling',descPT:'Ela \u00e9 minha irm\u00e3. Ela \u00e9 minha primeira melhor amiga.'},
+  {name:'Brother',    emoji:'\u{1F466}', pt:'Irm\u00e3o',           desc:'He is my sibling. We play and grow together.',        keyword:'brother',descPT:'Ele \u00e9 meu irm\u00e3o. N\u00f3s brincamos juntos.'},
+  {name:'Sister',     emoji:'\u{1F467}', pt:'Irm\u00e3',            desc:'She is my sibling. She is my first best friend.',     keyword:'sister', descPT:'Ela \u00e9 minha irm\u00e3. Ela \u00e9 minha primeira melhor amiga.'},
   {name:'Grandma',    emoji:'\u{1F475}', pt:'Av\u00f3',             desc:'She is my mom\u2019s or dad\u2019s mom. She gives the best hugs.',  keyword:'hugs',   descPT:'Ela \u00e9 a m\u00e3e da minha m\u00e3e ou do meu pai.'},
   {name:'Grandpa',    emoji:'\u{1F474}', pt:'Av\u00f4',             desc:'He is my mom\u2019s or dad\u2019s dad. He tells great stories.',    keyword:'stories',descPT:'Ele \u00e9 o pai da minha m\u00e3e ou do meu pai.'},
   {name:'Aunt',       emoji:'\u{1F469}\u200D\u{1F9B0}', pt:'Tia',  desc:'She is my mom\u2019s or dad\u2019s sister. She is always fun!',     keyword:'sister', descPT:'Ela \u00e9 irm\u00e3 da minha m\u00e3e ou do meu pai.'},
   {name:'Uncle',      emoji:'\u{1F468}\u200D\u{1F9B1}', pt:'Tio',  desc:'He is my mom\u2019s or dad\u2019s brother. He makes us laugh.',     keyword:'brother',descPT:'Ele \u00e9 irm\u00e3o da minha m\u00e3e ou do meu pai.'},
   {name:'Cousin',     emoji:'\u{1F9D2}', pt:'Primo(a)',             desc:'My aunt\u2019s or uncle\u2019s child is my cousin. We love to play!',keyword:'child',  descPT:'Filho(a) da minha tia ou do meu tio.'},
-  {name:'Baby',       emoji:'\u{1F476}', pt:'Beb\u00ea',            desc:'The youngest in the family. So tiny and cute!',       keyword:'youngest',descPT:'O(a) mais novo(a) da fam\u00edlia. T\u00e3o pequenino e fofo!'},
+  {name:'Baby',       emoji:'\u{1F476}', pt:'Beb\u00ea',            desc:'The youngest in the family. So tiny and cute! Could be a baby brother or sister!', keyword:'youngest',descPT:'O(a) mais novo(a) da fam\u00edlia. T\u00e3o pequenino e fofo! Pode ser um irm\u00e3ozinho ou irm\u00e3zinha!'},
   {name:'Best Friend',emoji:'\u{1F91D}', pt:'Melhor Amigo(a)',      desc:'Not family, but feels like family! Always there for you.',keyword:'feels', descPT:'N\u00e3o \u00e9 fam\u00edlia, mas parece! Sempre ao seu lado.'}
 ];
 
@@ -548,10 +548,10 @@ var QUIZ_BANK = [
   {clue:'She is my sibling. We share the same parents.', cluePT:'Ela \u00e9 minha irm\u00e3. Temos os mesmos pais.', emoji:'\u{1F467}', answer:'Sister', wrongs:['Cousin','Mom','Best Friend']},
   {clue:'The newest and smallest in the family \u{1F338}', cluePT:'O mais novo e menor da fam\u00edlia',    emoji:'\u{1F476}', answer:'Baby', wrongs:['Cousin','Brother','Sister']},
   {clue:'We are not family, but we play and laugh together every day.', cluePT:'N\u00e3o somos fam\u00edlia, mas brincamos e rimos juntos todo dia.', emoji:'\u{1F91D}', answer:'Best Friend', wrongs:['Cousin','Sister','Uncle']},
-  {clue:'My grandma\u2019s son is my ___',         cluePT:'O filho da minha av\u00f3 \u00e9 meu ___',       emoji:'\u{1F468}', answer:'Dad',         wrongs:['Uncle','Brother','Grandpa']},
-  {clue:'He is my sibling. We share the same mom and dad.', cluePT:'Ele \u00e9 meu irm\u00e3o. Temos a mesma m\u00e3e e pai.', emoji:'\u{1F466}', answer:'Brother', wrongs:['Cousin','Dad','Uncle']},
+  {clue:'My dad\u2019s mom\u2019s son is my ___',  cluePT:'O filho da m\u00e3e do meu pai \u00e9 meu ___',  emoji:'\u{1F468}', answer:'Dad',         wrongs:['Uncle','Brother','Grandpa']},
+  {clue:'We grew up in the same house. He is older than me and teaches me things.', cluePT:'Crescemos na mesma casa. Ele \u00e9 mais velho e me ensina coisas.', emoji:'\u{1F466}', answer:'Brother', wrongs:['Cousin','Dad','Uncle']},
   {clue:'My uncle\u2019s wife is my ___',          cluePT:'A esposa do meu tio \u00e9 minha ___',           emoji:'\u{1F469}\u200D\u{1F9B0}', answer:'Aunt', wrongs:['Sister','Cousin','Grandma']},
-  {clue:'My grandma\u2019s daughter is my ___',    cluePT:'A filha da minha av\u00f3 \u00e9 minha ___',     emoji:'\u{1F469}', answer:'Mom', wrongs:['Grandma','Aunt','Sister']}
+  {clue:'My mom\u2019s mom\u2019s daughter is my ___', cluePT:'A filha da m\u00e3e da minha m\u00e3e \u00e9 minha ___', emoji:'\u{1F469}', answer:'Mom', wrongs:['Grandma','Aunt','Sister']}
 ];
 
 var BUILDER_ADJECTIVES = [
@@ -597,7 +597,9 @@ function speakWithKaraoke(textEN, onEnd){
   var idx=0;
   var u=new SpeechSynthesisUtterance(textEN);
   u.lang='en-US'; u.rate=karaokeRate; u.pitch=1.1;
-  if(voice) u.voice=voice;
+  var voices=speechSynthesis.getVoices();
+  var v=voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})||voices.find(function(x){return x.lang.startsWith('en');});
+  if(v) u.voice=v;
   u.onboundary=function(e){
     if(e.name==='word'&&idx<spans.length){
       if(idx>0){spans[idx-1].classList.remove('kw-active');spans[idx-1].classList.add('kw-done');}
