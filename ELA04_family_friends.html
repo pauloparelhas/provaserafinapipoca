@@ -58,38 +58,38 @@ body.light .pt-label{color:#5b21b6;background:rgba(124,58,237,.06);border-color:
 .fc-front .pt-label,.fc-back .pt-label{position:absolute;bottom:2px;left:2px;right:2px;width:auto;text-align:center;font-size:.5rem;}
 
 /* KARAOKE BAR */
-.karaoke-bar{display:none;position:fixed;bottom:52px;left:50%;transform:translateX(-50%);
-  background:rgba(13,11,30,.92);backdrop-filter:blur(12px);border:2px solid rgba(167,139,250,.5);border-radius:18px;
-  padding:12px 22px;z-index:200;font-size:1.15rem;font-weight:700;color:rgba(255,255,255,.35);
-  flex-wrap:wrap;gap:6px 8px;justify-content:center;max-width:92%;box-shadow:0 8px 40px rgba(0,0,0,.5);}
-body.light .karaoke-bar{background:rgba(255,255,255,.96);color:rgba(0,0,0,.2);border-color:#c4b5fd;}
-.karaoke-bar .kw{display:inline-block;padding:2px 5px;border-radius:6px;transition:all .15s;}
-.karaoke-bar .kw.kw-active{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;transform:scale(1.18);text-shadow:0 0 8px rgba(167,139,250,.6);}
-.karaoke-bar .kw.kw-done{color:rgba(255,255,255,.7);background:rgba(167,139,250,.12);border-bottom:2px solid rgba(167,139,250,.35);}
-body.light .karaoke-bar .kw.kw-active{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;}
-body.light .karaoke-bar .kw.kw-done{color:rgba(0,0,0,.55);}
-/* SPEED BAR */
-.speed-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:201;
-  display:flex;align-items:center;gap:4px;padding:4px 14px 6px;
-  background:rgba(13,11,30,.85);backdrop-filter:blur(8px);
-  border-top:1px solid rgba(167,139,250,.2);border-radius:16px 16px 0 0;}
-body.light .speed-bar{background:rgba(240,238,255,.95);border-color:#c4b5fd;}
-.speed-btn{background:none;border:2px solid transparent;border-radius:10px;font-size:1.3rem;
-  cursor:pointer;padding:2px 6px;transition:.15s;line-height:1;opacity:.55;}
-.speed-btn:hover{opacity:.85;}
-.speed-btn.active{border-color:#a78bfa;background:rgba(167,139,250,.18);opacity:1;}
+.karaoke-bar{display:none;position:fixed;bottom:8px;left:50%;transform:translateX(-50%);
+  background:rgba(13,11,30,.93);backdrop-filter:blur(14px);border:2px solid rgba(167,139,250,.55);border-radius:20px;
+  padding:10px 18px 12px;z-index:200;max-width:92%;box-shadow:0 8px 40px rgba(0,0,0,.6);
+  flex-direction:column;gap:6px;align-items:center;}
+body.light .karaoke-bar{background:rgba(255,255,255,.97);border-color:#c4b5fd;}
+.karaoke-words{display:flex;flex-wrap:wrap;gap:4px 6px;justify-content:center;
+  font-size:1.1rem;font-weight:700;color:rgba(255,255,255,.4);}
+body.light .karaoke-words{color:rgba(0,0,0,.3);}
+.karaoke-words .kw{display:inline-block;padding:2px 5px;border-radius:6px;transition:all .15s;}
+.karaoke-words .kw.kw-active{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;transform:scale(1.18);text-shadow:0 0 8px rgba(167,139,250,.6);}
+.karaoke-words .kw.kw-done{color:rgba(255,255,255,.7);background:rgba(167,139,250,.12);border-bottom:2px solid rgba(167,139,250,.35);}
+body.light .karaoke-words .kw.kw-active{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;}
+body.light .karaoke-words .kw.kw-done{color:rgba(0,0,0,.55);}
+.karaoke-speed{display:flex;gap:8px;align-items:center;}
+.ks-btn{background:rgba(255,255,255,.07);border:2px solid transparent;border-radius:8px;font-size:.95rem;
+  cursor:pointer;padding:2px 9px;line-height:1;opacity:.55;transition:.15s;}
+.ks-btn:hover{opacity:.9;}
+.ks-btn.active{border-color:#a78bfa;background:rgba(167,139,250,.22);opacity:1;}
+body.light .ks-btn{background:rgba(0,0,0,.05);}
+body.light .ks-btn.active{border-color:#7c3aed;background:rgba(124,58,237,.15);}
 /* PRODUCT TOUR */
-.tour-overlay{position:fixed;inset:0;z-index:9000;pointer-events:none;}
-.tour-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9001;}
-.tour-spotlight{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(0,0,0,.72);
-  border:3px solid #a78bfa;z-index:9002;transition:all .35s ease;pointer-events:none;}
+.tour-bg{position:fixed;inset:0;z-index:9001;background:transparent;cursor:pointer;}
+.tour-spotlight{position:fixed;border-radius:12px;z-index:9002;pointer-events:none;
+  box-shadow:0 0 0 4000px rgba(0,0,0,.78),0 0 0 4px #a78bfa,0 0 28px 6px rgba(167,139,250,.65);
+  transition:left .3s,top .3s,width .3s,height .3s;}
 .tour-bubble{position:fixed;z-index:9003;background:linear-gradient(145deg,#1e1b4b,#312e81);
-  border:2px solid #a78bfa;border-radius:20px;padding:18px 22px;max-width:280px;
+  border:2px solid #a78bfa;border-radius:20px;padding:18px 22px;max-width:290px;
   box-shadow:0 12px 40px rgba(0,0,0,.6);color:#fff;}
 body.light .tour-bubble{background:linear-gradient(145deg,#f5f3ff,#ede9fe);color:#1e1b4b;border-color:#7c3aed;}
-.tour-bubble-title{font-size:.8rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+.tour-bubble-title{font-size:.78rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
   color:#a78bfa;margin-bottom:6px;}
-.tour-bubble-text{font-size:1rem;font-weight:700;line-height:1.45;margin-bottom:14px;}
+.tour-bubble-text{font-size:.97rem;font-weight:700;line-height:1.5;margin-bottom:14px;white-space:pre-line;}
 .tour-bubble-nav{display:flex;align-items:center;gap:8px;}
 .tour-btn{border:none;border-radius:10px;padding:7px 14px;font-size:.85rem;font-weight:800;cursor:pointer;transition:.15s;}
 .tour-btn-prev{background:rgba(167,139,250,.15);color:#c4b5fd;}
@@ -494,20 +494,20 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
   </div>
 </div>
 
-<!-- KARAOKE BAR -->
-<div id="karaokeBar" class="karaoke-bar"></div>
-
-<!-- SPEED BAR -->
-<div class="speed-bar" id="speedBar">
-  <button class="speed-btn" data-rate="0.3"  title="Very slow" onclick="setSpeed(0.3)">🐌</button>
-  <button class="speed-btn active" data-rate="0.55" title="Slow" onclick="setSpeed(0.55)">🐢</button>
-  <button class="speed-btn" data-rate="0.85" title="Normal" onclick="setSpeed(0.85)">🐇</button>
-  <button class="speed-btn" data-rate="1.25" title="Fast" onclick="setSpeed(1.25)">🚀</button>
+<!-- KARAOKE BAR (speed controls inside) -->
+<div id="karaokeBar" class="karaoke-bar">
+  <div class="karaoke-speed">
+    <button class="ks-btn" data-rate="0.6"  onclick="setSpeed(0.6)" title="Bem devagar">🐌</button>
+    <button class="ks-btn active" data-rate="0.75" onclick="setSpeed(0.75)" title="Devagar">🐢</button>
+    <button class="ks-btn" data-rate="0.9"  onclick="setSpeed(0.9)"  title="Normal">🐇</button>
+    <button class="ks-btn" data-rate="1.1"  onclick="setSpeed(1.1)"  title="Rapido">🚀</button>
+  </div>
+  <div id="karaokeWords" class="karaoke-words"></div>
 </div>
 
 <!-- TOUR OVERLAY -->
 <div id="tourOverlay" style="display:none;">
-  <div class="tour-backdrop" id="tourBackdrop" onclick="skipTour()"></div>
+  <div class="tour-bg" id="tourBg" onclick="tourStep(1)"></div>
   <div class="tour-spotlight" id="tourSpotlight"></div>
   <div class="tour-bubble" id="tourBubble">
     <div class="tour-bubble-title" id="tourTitle"></div>
@@ -572,7 +572,7 @@ var BUILDER_ADJECTIVES = [
 // ===== GLOBALS =====
 var totalXP = 0, currentFS = 16, isLight = false;
 var soundEnabled = true, lockActive = false;
-var karaokeRate = 0.55;
+var karaokeRate = 0.75;
 var isTouchDevice = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
 // Phase 2 state
@@ -582,41 +582,36 @@ var quizItems = [], quizIdx = 0, quizCorrect = 0, quizAnswered = false;
 var builderMember = null, builderAdj = null;
 var builtSentences = [];
 
-// ===== TTS / KARAOKE =====
+// ===== TTS / KARAOKE (boundary events — natural cadence) =====
 var karaokeActive = false;
-function speakWithKaraoke(textEN, onEnd) {
-  if (!soundEnabled || !('speechSynthesis' in window)) { if (onEnd) onEnd(); return; }
+function speakWithKaraoke(textEN, onEnd){
+  if(!soundEnabled||!('speechSynthesis' in window)){if(onEnd)onEnd();return;}
   window.speechSynthesis.cancel();
-  karaokeActive = true;
-  var bar = document.getElementById('karaokeBar');
-  var words = textEN.split(/\s+/);
-  bar.innerHTML = words.map(function(w,i){ return '<span class="kw" data-i="'+i+'">'+w+'</span>'; }).join(' ');
-  bar.style.display = 'flex';
-  var voices = speechSynthesis.getVoices();
-  var voice = voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})
-    || voices.find(function(x){return x.lang.startsWith('en');});
-  var idx = 0;
-  function speakNextWord() {
-    if (!karaokeActive) { bar.style.display='none'; if(onEnd) onEnd(); return; }
-    if (idx >= words.length) {
-      bar.querySelectorAll('.kw').forEach(function(s){s.classList.remove('kw-active');s.classList.add('kw-done');});
-      setTimeout(function(){ bar.style.display='none'; karaokeActive=false; if(onEnd) onEnd(); }, 600);
-      return;
+  karaokeActive=true;
+  var bar=document.getElementById('karaokeBar');
+  var wordsDiv=document.getElementById('karaokeWords');
+  var words=textEN.split(/\s+/);
+  wordsDiv.innerHTML=words.map(function(w,i){return '<span class="kw" data-i="'+i+'">'+w+'</span>';}).join(' ');
+  bar.style.display='flex';
+  var spans=wordsDiv.querySelectorAll('.kw');
+  var idx=0;
+  var u=new SpeechSynthesisUtterance(textEN);
+  u.lang='en-US'; u.rate=karaokeRate; u.pitch=1.1;
+  if(voice) u.voice=voice;
+  u.onboundary=function(e){
+    if(e.name==='word'&&idx<spans.length){
+      if(idx>0){spans[idx-1].classList.remove('kw-active');spans[idx-1].classList.add('kw-done');}
+      spans[idx].classList.add('kw-active');
+      idx++;
     }
-    bar.querySelectorAll('.kw').forEach(function(s){
-      var i=parseInt(s.getAttribute('data-i')); s.classList.remove('kw-active');
-      if(i<idx) s.classList.add('kw-done');
-    });
-    var el = bar.querySelector('[data-i="'+idx+'"]');
-    if(el){el.classList.remove('kw-done');el.classList.add('kw-active');}
-    var u = new SpeechSynthesisUtterance(words[idx]);
-    u.lang='en-US'; u.rate=karaokeRate; u.pitch=1.1;
-    if(voice) u.voice=voice;
-    u.onend=function(){idx++;setTimeout(speakNextWord,80);};
-    u.onerror=function(){idx++;setTimeout(speakNextWord,80);};
-    speechSynthesis.speak(u);
-  }
-  speakNextWord();
+  };
+  u.onend=function(){
+    if(!karaokeActive)return;
+    spans.forEach(function(s){s.classList.remove('kw-active');s.classList.add('kw-done');});
+    setTimeout(function(){bar.style.display='none';karaokeActive=false;if(onEnd)onEnd();},500);
+  };
+  u.onerror=function(){bar.style.display='none';karaokeActive=false;if(onEnd)onEnd();};
+  window.speechSynthesis.speak(u);
 }
 function stopKaraoke(){
   karaokeActive=false; window.speechSynthesis.cancel();
@@ -626,8 +621,8 @@ function stopKaraoke(){
 // ===== SPEED CONTROL =====
 function setSpeed(rate){
   karaokeRate=rate;
-  document.querySelectorAll('.speed-btn').forEach(function(b){
-    b.classList.toggle('active', parseFloat(b.dataset.rate)===rate);
+  document.querySelectorAll('.ks-btn').forEach(function(b){
+    b.classList.toggle('active',parseFloat(b.dataset.rate)===rate);
   });
 }
 // ===== PRODUCT TOUR =====
@@ -640,7 +635,7 @@ var tourSteps=[
   {selector:'#btnFontUp',   title:'Letra maior A+',              text:'Aumenta o tamanho do texto. Mais f\u00e1cil de ler!'},
   {selector:'#themeBtn',    title:'Modo claro / escuro',         text:'Muda entre o tema escuro (noite) e claro (dia).'},
   {selector:'#lockBtn',     title:'Cadeado \u{1F512}',           text:'Trava a tela para jogar sem sair por acidente. Toque de novo para destrancar!'},
-  {selector:'.speed-bar',   title:'Velocidade da fala \u{1F50A}',text:'\u{1F40C} Bem devagar \u2022 \u{1F422} Devagar \u2022 \u{1F407} Normal \u2022 \u{1F680} R\u00e1pido. Escolha como prefere ouvir!'}
+  {selector:null, title:'Velocidade da fala \u{1F50A}', text:'Quando o texto aparece em baixo, use:\n\u{1F40C} Bem devagar \u2022 \u{1F422} Devagar \u2022 \u{1F407} Normal \u2022 \u{1F680} R\u00e1pido'}
 ];
 var tourIdx=0;
 function startTour(){
@@ -655,30 +650,25 @@ function showTourStep(){
   var spot=document.getElementById('tourSpotlight');
   document.getElementById('tourTitle').textContent=step.title;
   document.getElementById('tourText').textContent=step.text;
-  // dots
   var dotsEl=document.getElementById('tourDots'); dotsEl.innerHTML='';
   tourSteps.forEach(function(_,i){
     var d=document.createElement('div'); d.className='tour-dot'+(i===tourIdx?' active':'');
     dotsEl.appendChild(d);
   });
-  // prev btn
   document.getElementById('tourPrev').style.display=tourIdx===0?'none':'';
-  // next btn
   document.getElementById('tourNext').textContent=(tourIdx===tourSteps.length-1)?'Conclu\u00edr \u2714':'Pr\u00f3ximo \u25ba';
-  // spotlight
   if(el){
     var r=el.getBoundingClientRect();
-    var pad=8;
+    var pad=10;
+    spot.style.display='block';
     spot.style.left=(r.left-pad)+'px'; spot.style.top=(r.top-pad)+'px';
     spot.style.width=(r.width+pad*2)+'px'; spot.style.height=(r.height+pad*2)+'px';
-    spot.style.display='block';
-    // position bubble
-    var bh=200, bw=280;
-    var bt=r.bottom+12; var bl=r.left;
-    if(bt+bh>window.innerHeight) bt=r.top-bh-12;
+    var bw=290, bh=180, bl=r.left, bt=r.bottom+14;
+    if(bt+bh>window.innerHeight) bt=r.top-bh-14;
     if(bl+bw>window.innerWidth) bl=window.innerWidth-bw-12;
     if(bl<8) bl=8;
     bubble.style.top=bt+'px'; bubble.style.left=bl+'px';
+    bubble.style.transform='none';
   } else {
     spot.style.display='none';
     bubble.style.top='50%'; bubble.style.left='50%';
