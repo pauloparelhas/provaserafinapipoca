@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quem é Serafina? — LP-02/03</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#f0eeff;min-height:100vh;overflow-x:hidden;color:#1a1535;font-size:16px;}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+#app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding-bottom:40px;}
+.screen{display:none;width:100%;max-width:860px;padding:0 12px;}
+.screen.active{display:block;}
+
+/* NAVBAR */
+.navbar{width:100%;max-width:860px;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:14px;position:sticky;top:0;z-index:100;}
+.nav-logo{font-size:clamp(13px,2.5vw,17px);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-right{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.nav-score{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:20px;padding:4px 12px;font-size:13px;font-weight:800;color:#fff;}
+.nav-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:5px 11px;font-family:inherit;font-size:11px;font-weight:800;color:#fff;cursor:pointer;transition:all .18s;}
+.nav-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px);}
+.nav-btn.nb-home{color:#a78bfa;}.nav-btn.nb-back{color:#60a5fa;}.nav-btn.nb-fwd{color:#fb923c;}.nav-btn.nb-index{color:#34d399;}
+.nav-a11y{display:flex;gap:4px;}
+.nav-a11y-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:5px 9px;font-family:inherit;font-size:13px;font-weight:800;color:#fff;cursor:pointer;transition:all .18s;line-height:1;}
+.nav-a11y-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px);}
+.nav-a11y-btn.nb-help{color:#fbbf24;}
+
+/* DARK THEME */
+body.dark{background:#0d0b1e;color:#fff;}
+body.dark .navbar{background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.08);}
+body.dark .nav-btn{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15);color:#fff;}
+body.dark .nav-btn:hover{background:rgba(255,255,255,.2);}
+body.dark .nav-btn.nb-home{color:#a78bfa;}
+body.dark .nav-btn.nb-back{color:#60a5fa;}
+body.dark .nav-btn.nb-fwd{color:#fb923c;}
+body.dark .nav-btn.nb-index{color:#34d399;}
+body.dark .nav-a11y-btn{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.15);color:#fff;}
+body.dark .nav-a11y-btn.nb-help{color:#fbbf24;}
+body.dark .intro-sub{color:rgba(255,255,255,.6);}
+body.dark .n1-sub{color:rgba(255,255,255,.5);}
+body.dark .n2-sub{color:rgba(255,255,255,.5);}
+body.dark .teoria-sub{color:rgba(255,255,255,.5);}
+body.dark .teoria-instr{background:rgba(167,139,250,.1);color:rgba(255,255,255,.75);border-color:rgba(167,139,250,.2);}
+body.dark .n1-q-box{background:rgba(255,255,255,.07);border-color:rgba(167,139,250,.35);color:#fff;}
+body.dark .q-box{background:rgba(255,255,255,.07);border-color:rgba(167,139,250,.3);color:#fff;}
+body.dark .zone-box{background:rgba(255,255,255,.07);border-color:rgba(124,58,237,.3);}
+body.dark .bank-row{background:rgba(255,255,255,.05);}
+body.dark .bonus-card{background:rgba(255,255,255,.06);border-color:rgba(167,139,250,.3);}
+body.dark .bonus-speech{background:rgba(255,255,255,.08);color:rgba(255,255,255,.92);}
+body.dark .n1-progress-bar{background:rgba(255,255,255,.15);}
+body.dark .round-complete{background:rgba(13,11,30,.92);}
+body.dark .rc-msg{color:rgba(255,255,255,.6);}
+body.dark dialog{background:#1a1535;color:#fff;}
+body.dark dialog li{color:rgba(255,255,255,.85);}
+body.dark .part-pill{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);}
+body.dark .part-pill-desc{color:rgba(255,255,255,.45);}
+body.dark .intro-badge{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.35);color:#a78bfa;}
+body.dark .n1-cat-progress .progress-dot{background:rgba(255,255,255,.15);}
+body.dark .tc-label{opacity:.75;}
+body.dark .zona-hint{color:rgba(255,255,255,.35);}
+body.dark .tc-desc{color:rgba(255,255,255,.85);}
+body.dark .tc-detail{color:rgba(255,255,255,.7);}
+body.dark .tc-ans{color:#fbbf24;}
+body.dark .step-dot{border-color:rgba(255,255,255,.25);}
+body.dark .bonus-note{color:rgba(255,255,255,.45);}
+body.dark .flashcard-front{background:linear-gradient(135deg,rgba(167,139,250,.22),rgba(167,139,250,.09));border-color:rgba(167,139,250,.4);color:#fff;}
+body.dark .flashcard-back{background:linear-gradient(135deg,rgba(16,185,129,.22),rgba(16,185,129,.09));border-color:rgba(16,185,129,.4);color:#fff;}
+body.dark .fc-hint{color:rgba(255,255,255,.45);}
+body.dark .fc-question{color:rgba(255,255,255,.9);}
+body.dark .fc-answer{color:#fbbf24;}
+body.dark .fc-detail{color:rgba(255,255,255,.7);}
+body.dark .opt-btn-letter{background:rgba(255,255,255,.12);color:#fff;}
+body.dark .opt-btn{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);color:#fff;}
+body.dark .opt-btn:hover:not(.disabled):not(.correct):not(.error){background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.5);}
+
+/* LIGHT THEME — overrides completos */
+body.light{background:#f0eeff;color:#1a1535;}
+body.light .navbar{background:rgba(255,255,255,.95);border-bottom:1px solid rgba(124,58,237,.15);}
+body.light .nav-btn{background:#7c3aed;border-color:#7c3aed;color:#fff;}
+body.light .nav-btn:hover{background:#6d28d9;}
+body.light .nav-btn.nb-index{background:#059669;border-color:#059669;}
+body.light .nav-btn.nb-index:hover{background:#047857;}
+body.light .nav-a11y-btn{background:#6b7280;border-color:#6b7280;color:#fff;}
+body.light .nav-a11y-btn.nb-help{background:#d97706;border-color:#d97706;color:#fff;}
+body.light .q-box{background:#fff;border-color:rgba(124,58,237,.3);color:#1a1535;}
+body.light .zone-box{background:#fff;border-color:rgba(124,58,237,.3);}
+body.light .bank-row{background:rgba(124,58,237,.06);}
+body.light .bonus-card{background:#fff;border-color:rgba(124,58,237,.25);}
+body.light .bonus-speech{background:#f0eeff;color:#1a1535;border-left-color:#7c3aed;}
+body.light .n1-progress-bar{background:rgba(124,58,237,.15);}
+body.light .round-complete{background:rgba(240,238,255,.95);}
+body.light .rc-msg{color:rgba(26,21,53,.65);}
+body.light dialog{background:#fff;color:#1a1535;}
+body.light dialog li{color:#1a1535;}
+body.light .intro-sub{color:rgba(26,21,53,.6);}
+body.light .n1-sub{color:rgba(26,21,53,.55);}
+body.light .n2-sub{color:rgba(26,21,53,.55);}
+body.light .teoria-sub{color:rgba(26,21,53,.55);}
+body.light .teoria-instr{background:rgba(124,58,237,.08);color:#1a1535;border-color:rgba(124,58,237,.2);}
+body.light .step-dot{border-color:#7c3aed;}
+body.light .step-dot.done{background:#10b981;border-color:#10b981;}
+body.light .step-dot.active{background:#7c3aed;}
+body.light .part-pill{background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.2);}
+body.light .part-pill-desc{color:rgba(26,21,53,.5);}
+body.light .intro-badge{background:rgba(124,58,237,.1);border-color:rgba(124,58,237,.3);color:#7c3aed;}
+body.light .n1-cat-progress .progress-dot{background:rgba(124,58,237,.15);}
+body.light .tc-label{opacity:.75;}
+body.light .zona-hint{color:rgba(26,21,53,.35);}
+body.light .n1-q-box{background:#fff;border-color:rgba(124,58,237,.35);color:#1a1535;}
+body.light .bonus-note{color:rgba(26,21,53,.45);}
+body.light .bonus-step-title{color:#7c3aed;}
+body.light .bonus-speech strong{color:#d97706;}
+body.light .tc-ans{color:#d97706;}
+body.light .tc-detail{color:rgba(26,21,53,.6);}
+/* flashcards light */
+body.light .flashcard-front{background:linear-gradient(135deg,#ede9fe,#f5f3ff);border-color:rgba(124,58,237,.3);color:#1a1535;}
+body.light .flashcard-back{background:linear-gradient(135deg,#d1fae5,#ecfdf5);border-color:rgba(5,150,105,.35);color:#1a1535;}
+body.light .fc-hint{color:rgba(26,21,53,.4);}
+body.light .fc-question{color:#1a1535;}
+body.light .fc-answer{color:#7c3aed;}
+body.light .fc-detail{color:rgba(26,21,53,.65);}
+/* multipla escolha light */
+body.light .opt-btn-letter{background:#7c3aed;color:#fff;}
+body.light .opt-btn{background:#fff;border-color:rgba(124,58,237,.25);color:#1a1535;}
+body.light .opt-btn:hover:not(.disabled):not(.correct):not(.error){background:rgba(124,58,237,.07);border-color:rgba(124,58,237,.45);}
+
+/* BUTTONS */
+.btn{border:none;border-radius:14px;font-family:inherit;font-weight:800;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn:active{transform:scale(.96)!important;}
+.btn-start{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:clamp(15px,2.8vw,18px);padding:14px 42px;border-radius:50px;box-shadow:0 4px 30px rgba(167,139,250,.5);animation:startPulse 2.2s ease infinite;}
+@keyframes startPulse{0%,100%{box-shadow:0 4px 30px rgba(167,139,250,.5),0 0 0 0 rgba(167,139,250,.3);}50%{box-shadow:0 4px 30px rgba(167,139,250,.6),0 0 0 16px rgba(167,139,250,0);}}
+.btn-start:hover{transform:translateY(-3px);filter:brightness(1.1);}
+.btn-primary{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:14px;padding:11px 24px;border-radius:12px;}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-2px);}
+.btn-replay{background:#7c3aed;border:none;color:#fff;font-size:13px;padding:10px 18px;border-radius:12px;font-weight:800;}
+.btn-replay:hover{background:#6d28d9;transform:translateY(-2px);}
+.btn-next{background:linear-gradient(135deg,#f472b6,#fb923c);color:#fff;font-size:14px;padding:11px 28px;border-radius:12px;}
+.btn-next:hover{transform:translateY(-2px);filter:brightness(1.08);}
+.btn-bonus{background:linear-gradient(135deg,#34d399,#a78bfa);color:#fff;font-size:15px;padding:13px 32px;border-radius:14px;font-weight:900;}
+.btn-bonus:hover{filter:brightness(1.1);transform:translateY(-2px);}
+.btn-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.btn-skip-q{background:#6b7280;border:none;color:#fff;font-size:13px;padding:9px 18px;border-radius:12px;font-weight:800;cursor:pointer;}
+.btn-skip-q:hover{background:#4b5563;transform:translateY(-1px);}
+
+/* INTRO */
+#screen-intro{text-align:center;padding-top:8px;}
+.intro-badge{display:inline-block;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);border-radius:30px;padding:4px 16px;font-size:11px;font-weight:700;color:#a78bfa;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.intro-mascot{font-size:clamp(56px,11vw,80px);display:block;margin:0 auto 8px;animation:mfloat 3s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(167,139,250,.5));}
+@keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-12px) rotate(3deg);}}
+.intro-title{font-size:clamp(22px,5vw,36px);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;}
+.intro-sub{font-size:clamp(12px,2.2vw,15px);color:rgba(26,21,53,.6);margin-bottom:16px;font-weight:600;}
+.part-pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.part-pill{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:14px;padding:10px 14px;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:110px;transition:.2s;cursor:pointer;}
+.part-pill:hover{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.5);transform:translateY(-3px);}
+.part-pill-icon{font-size:22px;}
+.part-pill-title{font-size:11px;font-weight:900;color:#a78bfa;text-align:center;}
+.part-pill-desc{font-size:10px;color:rgba(26,21,53,.5);font-weight:700;text-align:center;line-height:1.3;}
+
+/* TEORIA / FLASHCARDS */
+#screen-teoria{padding-top:4px;}
+.teoria-title{font-size:clamp(18px,3.5vw,26px);font-weight:900;text-align:center;margin-bottom:3px;background:linear-gradient(135deg,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.teoria-sub{text-align:center;font-size:12px;color:rgba(26,21,53,.55);font-weight:600;margin-bottom:6px;}
+.teoria-instr{text-align:center;font-size:13px;font-weight:700;color:#1a1535;margin-bottom:12px;padding:8px 14px;background:rgba(124,58,237,.08);border-radius:12px;border:1px solid rgba(124,58,237,.2);}
+.teoria-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+@media(max-width:500px){.teoria-cards{grid-template-columns:1fr;}}
+
+/* FLASHCARD — flip 3D */
+.fc-wrapper{perspective:900px;}
+.flashcard{width:100%;min-height:160px;cursor:pointer;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1);position:relative;border-radius:18px;}
+.flashcard.flipped{transform:rotateY(180deg);}
+.flashcard-front,.flashcard-back{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:18px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:14px 16px;border:2px solid transparent;min-height:160px;}
+.flashcard-back{transform:rotateY(180deg);}
+/* front: pergunta */
+.fc-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.fc-icon{font-size:24px;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.fc-label-wrap{display:flex;flex-direction:column;}
+.fc-label{font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;opacity:.7;}
+.fc-question{font-size:1em;font-weight:900;line-height:1.4;}
+.fc-hint{font-size:10px;font-weight:700;letter-spacing:.5px;text-align:center;opacity:.5;margin-top:auto;padding-top:8px;}
+/* back: resposta */
+.fc-back-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.fc-back-icon{font-size:20px;opacity:.7;}
+.fc-back-label{font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;opacity:.6;}
+.fc-answer{font-size:1.1em;font-weight:900;margin-bottom:6px;}
+.fc-detail{font-size:clamp(10px,1.8vw,12px);font-weight:700;line-height:1.5;opacity:.75;}
+.fc-hint-back{font-size:10px;font-weight:700;text-align:center;margin-top:auto;padding-top:8px;opacity:.45;}
+
+/* NIVEL 1 — multipla escolha vertical */
+#screen-nivel1{padding-top:4px;}
+.n1-title{font-size:clamp(16px,3vw,22px);font-weight:900;text-align:center;background:linear-gradient(135deg,#f472b6,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:3px;}
+.n1-sub{text-align:center;font-size:12px;color:rgba(26,21,53,.55);font-weight:600;margin-bottom:10px;}
+.n1-cat-progress{display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap;}
+.n1-cat-progress .progress-dot{width:22px;height:8px;border-radius:4px;background:rgba(124,58,237,.15);transition:.3s;}
+.n1-cat-progress .progress-dot.done{background:#10b981;}
+.n1-cat-progress .progress-dot.active{background:#a78bfa;}
+.n1-q-box{background:#fff;border:2px solid rgba(124,58,237,.35);border-radius:18px;padding:18px 22px;font-size:1.1em;font-weight:800;text-align:center;line-height:1.45;margin-bottom:14px;min-height:68px;display:flex;align-items:center;justify-content:center;color:#1a1535;}
+/* opcoes verticais A-B-C-D */
+.n1-opts{display:flex;flex-direction:column;gap:9px;margin-bottom:14px;}
+.opt-btn{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid rgba(124,58,237,.25);border-radius:14px;padding:13px 16px;font-family:inherit;font-size:1em;font-weight:800;cursor:pointer;transition:all .18s;text-align:left;color:#1a1535;width:100%;}
+.opt-btn-letter{width:30px;height:30px;border-radius:8px;background:#7c3aed;color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.opt-btn-text{flex:1;}
+.opt-btn:hover:not(.disabled):not(.correct):not(.error){background:rgba(124,58,237,.07);border-color:rgba(124,58,237,.45);transform:translateX(3px);}
+.opt-btn.correct{background:linear-gradient(135deg,#10b981,#34d399);border-color:transparent;color:#fff;cursor:default;}
+.opt-btn.correct .opt-btn-letter{background:rgba(255,255,255,.25);color:#fff;}
+.opt-btn.error{background:linear-gradient(135deg,#ef4444,#f87171);border-color:transparent;color:#fff;cursor:pointer;}
+.opt-btn.error .opt-btn-letter{background:rgba(255,255,255,.25);color:#fff;}
+.opt-btn.error:hover{filter:brightness(1.08);transform:translateX(3px);}
+.opt-btn.disabled{opacity:.45;cursor:default;pointer-events:none;}
+.n1-feedback{text-align:center;font-size:15px;font-weight:800;min-height:24px;margin-bottom:8px;}
+.n1-feedback.ok{color:#10b981;}.n1-feedback.err{color:#ef4444;}
+
+/* NIVEL 2 */
+#screen-nivel2{padding-top:4px;}
+.n2-title{font-size:clamp(16px,3vw,22px);font-weight:900;text-align:center;background:linear-gradient(135deg,#fb923c,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:3px;}
+.n2-sub{text-align:center;font-size:12px;color:rgba(26,21,53,.55);font-weight:600;margin-bottom:10px;}
+.n2-progress{display:flex;gap:8px;justify-content:center;margin-bottom:10px;}
+.progress-dot{width:28px;height:8px;border-radius:4px;background:rgba(124,58,237,.15);transition:.3s;}
+.progress-dot.done{background:#10b981;}
+.progress-dot.active{background:#fbbf24;}
+.q-box{background:#fff;border:2px solid rgba(124,58,237,.3);border-radius:16px;padding:18px 20px;font-size:1.1em;font-weight:800;text-align:center;line-height:1.45;margin-bottom:12px;min-height:72px;display:flex;align-items:center;justify-content:center;color:#1a1535;}
+.n2-opts{display:flex;flex-direction:column;gap:9px;margin-bottom:14px;}
+/* reutiliza opt-card para nivel 2 */
+.opt-card{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#1a1008;border-radius:14px;padding:14px 16px;font-size:clamp(12px,2.2vw,15px);font-weight:800;cursor:pointer;border:3px solid transparent;transition:all .18s;text-align:center;line-height:1.35;min-width:120px;flex:1;max-width:220px;}
+.opt-card:hover:not(.disabled):not(.correct):not(.error){transform:translateY(-2px);box-shadow:0 4px 16px rgba(245,158,11,.45);}
+.opt-card.correct{background:linear-gradient(135deg,#10b981,#34d399);color:#fff;cursor:default;border-color:transparent;}
+.opt-card.error{background:linear-gradient(135deg,#ef4444,#f87171);color:#fff;cursor:pointer;}
+.opt-card.disabled{opacity:.5;cursor:default;pointer-events:none;}
+.n2-feedback{text-align:center;font-size:15px;font-weight:800;min-height:28px;}
+.n2-feedback.ok{color:#10b981;}.n2-feedback.err{color:#ef4444;}
+
+/* BONUS */
+#screen-bonus{padding-top:4px;}
+.bonus-header{text-align:center;margin-bottom:12px;}
+.bonus-title{font-size:clamp(16px,3vw,22px);font-weight:900;background:linear-gradient(135deg,#34d399,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.bonus-note{font-size:11px;color:rgba(26,21,53,.45);font-weight:700;margin-top:3px;}
+.step-dots{display:flex;gap:8px;justify-content:center;margin-bottom:12px;}
+.step-dot{width:12px;height:12px;border-radius:50%;background:transparent;border:2px solid rgba(124,58,237,.3);transition:.3s;}
+.step-dot.active{border-color:#a78bfa;background:#a78bfa;}
+.step-dot.done{border-color:#10b981;background:#10b981;}
+.bonus-card{background:#fff;border:2px solid rgba(124,58,237,.25);border-radius:18px;padding:20px 22px;max-width:540px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;}
+.bonus-emoji{font-size:clamp(40px,8vw,56px);}
+.bonus-step-title{font-size:clamp(14px,2.5vw,17px);font-weight:900;color:#7c3aed;}
+.bonus-speech{background:#f0eeff;border-left:4px solid #7c3aed;border-radius:10px;padding:12px 16px;font-size:clamp(12px,2vw,14px);font-weight:700;line-height:1.6;color:#1a1535;text-align:left;width:100%;}
+.bonus-speech strong{color:#d97706;}
+.bonus-illus{font-size:clamp(28px,5vw,38px);letter-spacing:6px;}
+.bonus-final{display:none;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:20px 12px;}
+.bonus-final.active{display:flex;}
+.bonus-final-title{font-size:clamp(20px,4vw,30px);font-weight:900;background:linear-gradient(135deg,#fbbf24,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* ROUND COMPLETE */
+.round-complete{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:200;background:rgba(240,238,255,.95);flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;}
+.round-complete.active{display:flex;}
+.rc-emoji{font-size:clamp(48px,9vw,72px);}
+.rc-title{font-size:clamp(20px,4vw,30px);font-weight:900;background:linear-gradient(135deg,#fbbf24,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rc-score{font-size:clamp(28px,5vw,42px);font-weight:900;color:#10b981;}
+.rc-msg{font-size:clamp(12px,2vw,15px);color:rgba(26,21,53,.65);font-weight:700;max-width:320px;}
+
+/* DIALOG */
+dialog{background:#fff;color:#1a1535;border:2px solid #a78bfa;border-radius:18px;padding:24px;max-width:360px;width:90%;font-family:inherit;}
+dialog::backdrop{background:rgba(0,0,0,.55);}
+dialog h3{color:#7c3aed;font-size:16px;margin-bottom:10px;}
+dialog ul{padding-left:16px;}
+dialog li{font-size:13px;font-weight:700;line-height:1.7;color:#1a1535;}
+dialog .btn-primary{margin-top:14px;font-family:inherit;}
+
+/* MODAL CONFIRMACAO */
+.confirm-modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;background:rgba(0,0,0,.5);align-items:center;justify-content:center;}
+.confirm-modal-overlay.active{display:flex;}
+.confirm-modal{background:#fff;border:2px solid #a78bfa;border-radius:20px;padding:28px 24px;max-width:340px;width:90%;text-align:center;font-family:inherit;box-shadow:0 8px 40px rgba(124,58,237,.25);}
+body.dark .confirm-modal{background:#1a1535;color:#fff;border-color:#a78bfa;}
+.confirm-modal-icon{font-size:40px;margin-bottom:10px;}
+.confirm-modal-title{font-size:17px;font-weight:900;color:#7c3aed;margin-bottom:8px;}
+body.dark .confirm-modal-title{color:#a78bfa;}
+.confirm-modal-text{font-size:14px;font-weight:700;color:#1a1535;margin-bottom:20px;line-height:1.5;}
+body.dark .confirm-modal-text{color:rgba(255,255,255,.85);}
+.confirm-modal-btns{display:flex;gap:10px;justify-content:center;}
+.confirm-btn-yes{background:#7c3aed;color:#fff;border:none;border-radius:12px;padding:11px 24px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:.18s;}
+.confirm-btn-yes:hover{background:#6d28d9;transform:translateY(-1px);}
+.confirm-btn-no{background:#e5e7eb;color:#374151;border:none;border-radius:12px;padding:11px 24px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:.18s;}
+.confirm-btn-no:hover{background:#d1d5db;transform:translateY(-1px);}
+body.dark .confirm-btn-no{background:#374151;color:#fff;}
+body.dark .confirm-btn-no:hover{background:#4b5563;}
+</style>
+</head>
+<body class="light">
+<canvas id="starfield"></canvas>
+
+<!-- MODAL DE CONFIRMACAO INDICE -->
+<div class="confirm-modal-overlay" id="confirm-modal">
+  <div class="confirm-modal">
+    <div class="confirm-modal-icon">🏠</div>
+    <div class="confirm-modal-title">Ir para o início?</div>
+    <div class="confirm-modal-text">Tem certeza que quer ir para a tela de escolher o jogo?</div>
+    <div class="confirm-modal-btns">
+      <button class="confirm-btn-yes" onclick="goToIndex()">Sim, ir!</button>
+      <button class="confirm-btn-no" onclick="closeConfirmModal()">Não, ficar</button>
+    </div>
+  </div>
+</div>
+
+<div id="app">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <span class="nav-logo">📓 Quem é Serafina?</span>
+  <div class="nav-right">
+    <button class="nav-btn nb-index" onclick="showConfirmModal()">🏠 Home</button>
+    <span class="nav-score" id="score-el">⭐ 0</span>
+    <button class="nav-btn nb-home" onclick="goHome()">🔄 Reiniciar</button>
+    <button class="nav-btn nb-back" onclick="goBack()">◀ Voltar</button>
+    <button class="nav-btn nb-fwd" id="btn-fwd" onclick="goNext()">Avançar ▶</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btn-theme" onclick="toggleTheme()">🌙</button>
+      <button class="nav-a11y-btn" onclick="changeFontSize(-1)">A-</button>
+      <button class="nav-a11y-btn" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn nb-help" onclick="document.getElementById('help-dlg').showModal()">?</button>
+    </div>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<div class="screen active" id="screen-intro">
+  <div style="text-align:center;padding-top:8px;">
+    <div class="intro-badge">LP-02/03 · Português</div>
+    <span class="intro-mascot">📓</span>
+    <div class="intro-title">Quem é Serafina?</div>
+    <div class="intro-sub">O Diário Escondido de Serafina</div>
+    <div class="part-pills">
+      <div class="part-pill" onclick="showScreen('screen-teoria')">
+        <span class="part-pill-icon">✨</span>
+        <span class="part-pill-title">Conhecer</span>
+        <span class="part-pill-desc">Descubra a Serafina</span>
+      </div>
+      <div class="part-pill" onclick="showScreen('screen-nivel1')">
+        <span class="part-pill-icon">🧩</span>
+        <span class="part-pill-title">Nível 1</span>
+        <span class="part-pill-desc">Monte o perfil</span>
+      </div>
+      <div class="part-pill" onclick="showScreen('screen-nivel2')">
+        <span class="part-pill-icon">📚</span>
+        <span class="part-pill-title">Nível 2</span>
+        <span class="part-pill-desc">Perguntas do livro</span>
+      </div>
+      <div class="part-pill" onclick="showScreen('screen-bonus')">
+        <span class="part-pill-icon">🌟</span>
+        <span class="part-pill-title">Bônus</span>
+        <span class="part-pill-desc">Crie um personagem</span>
+      </div>
+    </div>
+    <button class="btn btn-start" onclick="showScreen('screen-teoria')">Começar ✨</button>
+  </div>
+</div>
+
+<!-- TEORIA — FLASHCARDS -->
+<div class="screen" id="screen-teoria">
+  <div class="teoria-title">✨ Conheça a Serafina</div>
+  <div class="teoria-sub">Personagem de <em>O Diário Escondido de Serafina</em></div>
+  <div class="teoria-instr">Clique nos cards para ver a resposta! Clique de novo para voltar. 👆</div>
+  <div class="teoria-cards" id="teoria-cards"></div>
+  <div class="btn-row">
+    <button class="btn btn-replay" onclick="rotateTeoriaCards()">Ver outros cards 🔄</button>
+    <button class="btn btn-next" onclick="showScreen('screen-nivel1')">Nível 1 ▶</button>
+  </div>
+</div>
+
+<!-- NIVEL 1 -->
+<div class="screen" id="screen-nivel1">
+  <div class="n1-title">🧩 Nível 1 — Monte o Perfil</div>
+  <div class="n1-sub" id="n1-sub">Pergunta 1 de 7</div>
+  <div class="n1-cat-progress" id="n1-progress"></div>
+  <div class="n1-q-box" id="n1-q-box">Carregando...</div>
+  <div class="n1-opts" id="n1-opts"></div>
+  <div class="n1-feedback" id="n1-feedback"></div>
+  <div class="btn-row">
+    <button class="btn btn-skip-q" onclick="skipN1Cat()">Pular ↷</button>
+    <button class="btn btn-next" id="btn-n1-next" onclick="nextN1Cat()" style="display:none;">Próxima ▶</button>
+  </div>
+</div>
+
+<!-- NIVEL 2 -->
+<div class="screen" id="screen-nivel2">
+  <div class="n2-title">📚 Nível 2 — Perguntas do Livro</div>
+  <div class="n2-sub" id="n2-sub">Clique na resposta certa!</div>
+  <div class="n2-progress" id="n2-progress"></div>
+  <div class="q-box" id="q-box">Carregando...</div>
+  <div class="n2-opts" id="n2-opts"></div>
+  <div class="n2-feedback" id="n2-fb"></div>
+  <div class="btn-row" style="margin-top:8px;">
+    <button class="btn btn-replay" onclick="initN2()">↺ Jogar novamente</button>
+    <button class="btn btn-next" onclick="showScreen('screen-bonus')">Bônus ▶</button>
+  </div>
+</div>
+
+<!-- BONUS -->
+<div class="screen" id="screen-bonus">
+  <div class="bonus-header">
+    <div class="bonus-title">🌟 Bônus — Crie o seu personagem!</div>
+    <div class="bonus-note">Você pode escrever no caderno, conversar com alguém ou falar em voz alta — como preferir!</div>
+  </div>
+  <div class="step-dots" id="step-dots"></div>
+  <div id="bonus-content"></div>
+  <div class="bonus-final" id="bonus-final">
+    <div style="font-size:clamp(48px,9vw,72px)">🎊</div>
+    <div class="bonus-final-title">Parabéns! Seu personagem está pronto!</div>
+    <div style="font-size:clamp(12px,2vw,14px);color:rgba(26,21,53,.55);font-weight:700;max-width:380px;line-height:1.6;">
+      Serafina ficou muito orgulhosa de você! 🌟<br>
+      Guarde bem o seu caderno — quem sabe um dia o seu personagem vira um livro de verdade?
+    </div>
+    <button class="btn btn-bonus" onclick="initBonus()">Criar outro personagem ✨</button>
+  </div>
+</div>
+
+<!-- ROUND COMPLETE -->
+<div class="round-complete" id="round-complete">
+  <div class="rc-emoji" id="rc-emoji">🎉</div>
+  <div class="rc-title" id="rc-title">Muito bem!</div>
+  <div class="rc-score" id="rc-score"></div>
+  <div class="rc-msg" id="rc-msg"></div>
+  <div class="btn-row" style="margin-top:8px;">
+    <button class="btn btn-replay" id="rc-btn" onclick="rcAction()">Jogar novamente</button>
+  </div>
+</div>
+
+<!-- HELP -->
+<dialog id="help-dlg">
+  <h3>💡 Como jogar?</h3>
+  <ul>
+    <li><strong>Conhecer:</strong> Clique nos flashcards para virar e ver a resposta. Clique de novo para voltar à pergunta. Use "Ver outros" para trocar os cards.</li>
+    <li><strong>Nível 1:</strong> Leia a pergunta e clique na resposta certa (A, B, C ou D). Feedback imediato — se errar, tente outra opção!</li>
+    <li><strong>Nível 2:</strong> 5 perguntas por rodada — clique na resposta correta e ganhe pontos.</li>
+    <li><strong>Bônus:</strong> Siga os 4 passos com a Serafina e crie o seu próprio personagem.</li>
+    <li>Use <strong>🔄 Reiniciar</strong> para recomeçar esta ferramenta. Use <strong>🏠 Home</strong> para voltar à tela de escolher o jogo.</li>
+  </ul>
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="document.getElementById('help-dlg').close()">Entendi! 😊</button>
+  </div>
+</dialog>
+
+</div><!-- /app -->
+
+<script>
+// ─── STARS ───────────────────────────────────────────────────
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  let stars=[];
+  function resize(){
+    c.width=innerWidth;c.height=innerHeight;
+    stars=Array.from({length:130},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.6+.3,a:Math.random(),da:(Math.random()-.5)*.009}));
+  }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s=>{s.a=Math.max(.08,Math.min(1,s.a+s.da));if(s.a<=.08||s.a>=1)s.da*=-1;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${s.a})`;ctx.fill();});
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize',resize);resize();draw();
+})();
+
+// ─── STATE ───────────────────────────────────────────────────
+const S={
+  screen:'screen-intro', score:0, theme:'light', fontSize:16,
+  // teoria
+  teoriaOffset:0, teoriaFlipped:[],
+  // n1
+  n1Order:[], n1CatIdx:0, n1Answered:false, n1Score:0,
+  n1LastOrder:[],
+  // n2
+  n2Questions:[], n2Idx:0, n2LastSet:[], n2RoundScore:0, n2Busy:false,
+  // bonus
+  bonusStep:0,
+  _rcFn:null
+};
+
+// ─── SCREENS ─────────────────────────────────────────────────
+const SCREEN_ORDER=['screen-intro','screen-teoria','screen-nivel1','screen-nivel2','screen-bonus'];
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  S.screen=id;
+  if(id==='screen-teoria') initTeoria();
+  if(id==='screen-nivel1') initN1();
+  if(id==='screen-nivel2') initN2();
+  if(id==='screen-bonus') initBonus();
+}
+
+// ─── NAVEGAÇÃO ───────────────────────────────────────────────
+function goHome(){ location.reload(); }
+function goBack(){ const i=SCREEN_ORDER.indexOf(S.screen); if(i>0)showScreen(SCREEN_ORDER[i-1]); }
+function goNext(){ const i=SCREEN_ORDER.indexOf(S.screen); if(i<SCREEN_ORDER.length-1)showScreen(SCREEN_ORDER[i+1]); }
+
+function showConfirmModal(){
+  document.getElementById('confirm-modal').classList.add('active');
+}
+function closeConfirmModal(){
+  document.getElementById('confirm-modal').classList.remove('active');
+}
+function goToIndex(){
+  window.location.href='index.html';
+}
+
+// Fechar modal ao clicar fora
+document.getElementById('confirm-modal').addEventListener('click', function(e){
+  if(e.target===this) closeConfirmModal();
+});
+
+// ─── A11Y ─────────────────────────────────────────────────────
+function toggleTheme(){
+  if(S.theme==='light'){
+    document.body.classList.remove('light');
+    document.body.classList.add('dark');
+    S.theme='dark';
+    document.getElementById('btn-theme').textContent='☀️';
+  } else {
+    document.body.classList.remove('dark');
+    document.body.classList.add('light');
+    S.theme='light';
+    document.getElementById('btn-theme').textContent='🌙';
+  }
+}
+function changeFontSize(d){
+  S.fontSize=Math.max(14,Math.min(22,S.fontSize+d));
+  document.body.style.fontSize=S.fontSize+'px';
+}
+function addScore(n){ S.score+=n; document.getElementById('score-el').textContent='⭐ '+S.score; }
+
+// ─── ROUND COMPLETE OVERLAY ───────────────────────────────────
+function showRC(emoji,title,score,msg,btnText,fn){
+  document.getElementById('rc-emoji').textContent=emoji;
+  document.getElementById('rc-title').textContent=title;
+  document.getElementById('rc-score').textContent=score;
+  document.getElementById('rc-msg').textContent=msg;
+  document.getElementById('rc-btn').textContent=btnText;
+  S._rcFn=fn;
+  document.getElementById('round-complete').classList.add('active');
+}
+function rcAction(){ document.getElementById('round-complete').classList.remove('active'); if(S._rcFn)S._rcFn(); }
+
+// ─── UTILS ────────────────────────────────────────────────────
+function shuffle(a){ const b=[...a]; for(let i=b.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]]; } return b; }
+function arraysEqual(a,b){ return a.length===b.length&&a.every((v,i)=>v===b[i]); }
+
+// ─── TEORIA DATA ──────────────────────────────────────────────
+// ─── BANCO DE EVIDÊNCIAS ────────────────────────────────────────────────────
+// Cada questão usada no jogo DEVE ter suporte textual documentado aqui.
+// Confiança: 'alto' = extraído diretamente | 'médio' = inferível | 'incerto' = remover
+const BANCO_EVIDENCIAS = {
+  // FORMATO: id: { evidencia: "trecho/motivo", confianca: 'alto'|'médio'|'incerto', acao: 'manter'|'modificar'|'remover' }
+  nome:           { evidencia: "Título do livro: 'O Diário Escondido de Serafina'", confianca:'alto', acao:'manter' },
+  diario:         { evidencia: "Título e premissa central do livro", confianca:'alto', acao:'manter' },
+  escondido:      { evidencia: "Adjetivo 'escondido' no próprio título do livro", confianca:'alto', acao:'manter' },
+  segredo:        { evidencia: "Premissa central: diário secreto que só Serafina pode ler", confianca:'alto', acao:'manter' },
+  saudacao:       { evidencia: "Fórmula padrão de diário infantil; confirmada no texto de exemplo", confianca:'médio', acao:'manter' },
+  despedida:      { evidencia: "Fórmula de assinatura citada nos materiais do livro", confianca:'médio', acao:'manter' },
+  personalidade:  { evidencia: "Descrita como curiosa e aventureira nos materiais pedagógicos do livro", confianca:'médio', acao:'manter' },
+  esconderijo_arvore: { evidencia: "Esconderijo em árvore (mangueira) citado nos materiais do livro; 'do pai' é inferência", confianca:'médio', acao:"manter — usar 'na mangueira do quintal' sem 'do pai'" },
+  quando_escreve: { evidencia: "Inferível da premissa: diário registra aventuras e sentimentos especiais", confianca:'médio', acao:'manter' },
+  rosalina_amiga: { evidencia: "INCERTO: livro menciona visita à Rosalina, mas 'MELHOR amiga' pode ser inferência — modificado para 'amiga'", confianca:'incerto', acao:'modificar' },
+  chiquinho_cilios: { evidencia: "INCERTO: detalhe muito específico, pode ser alucinação — aguarda confirmação no livro", confianca:'incerto', acao:'verificar' },
+  nono:           { evidencia: "INCERTO: aparece como opção errada — não há evidência de que seja personagem real do livro", confianca:'incerto', acao:'remover das opções' },
+  tavinho:        { evidencia: "INCERTO: personagem sem evidência clara no livro — REMOVIDO", confianca:'incerto', acao:'remover' },
+  catarina_prof:  { evidencia: "INCERTO: nome específico da professora — pode ser alucinação; aguarda confirmação", confianca:'incerto', acao:'verificar' },
+  conchinhas:     { evidencia: "INCERTO: detalhe de coleção específico — precisa de texto confirmador", confianca:'incerto', acao:'verificar' },
+  mangueira_pai:  { evidencia: "INCERTO: mangueira no quintal 'do pai' — a árvore existe no enredo, mas 'do pai' pode ser inferência", confianca:'incerto', acao:'modificar — omitir posse' },
+  mae_protetora:  { evidencia: "INCERTO: 'protetora e carinhosa' é caracterização específica — inferível mas não confirmada", confianca:'incerto', acao:'verificar' },
+  mora_pai_mae:   { evidencia: "INCERTO: 'mora com pai e mãe' — estrutura familiar não confirmada explicitamente", confianca:'incerto', acao:'verificar' },
+};
+
+const TEORIA_POOL=[
+  // confianca:'alto' — suporte direto no título/premissa do livro
+  {emoji:'👧',label:'Nome',q:'Como se chama a personagem?',ans:'Serafina',detail:'A protagonista do livro "O Diário Escondido de Serafina".',confianca:'alto'},
+  {emoji:'📓',label:'O diário',q:'O que Serafina tem de especial?',ans:'Um diário escondido e secreto',detail:'Só ela pode ler — é o lugar mais especial do mundo para ela.',confianca:'alto'},
+  {emoji:'🔐',label:'Segredo',q:'Por que o diário é "escondido"?',ans:'Para ser um lugar secreto só dela',detail:'Ninguém mais pode ler — é o segredo mais especial da Serafina.',confianca:'alto'},
+  // confianca:'médio' — plausível e tipicamente presente neste tipo de livro
+  {emoji:'✨',label:'Personalidade',q:'Como Serafina é?',ans:'Curiosa, criativa e aventureira',detail:'Ela adora observar o mundo, imaginar histórias e guardar segredos.',confianca:'médio'},
+  {emoji:'💌',label:'Saudação',q:'Como Serafina começa o diário?',ans:'"Querido diário:"',detail:'Ela fala com o diário como se fosse um amigo especial.',confianca:'médio'},
+  {emoji:'👋',label:'Despedida',q:'Como Serafina se despede?',ans:'"Tchau, tchau."',detail:'A assinatura característica ao final de cada entrada do diário.',confianca:'médio'},
+  {emoji:'🌳',label:'O esconderijo',q:'Onde fica o esconderijo dela?',ans:'Na mangueira do quintal — um lugar secreto só dela',detail:'Uma casinha na árvore, só dela, onde escreve e imagina aventuras.',confianca:'médio'}, // MODIFICADO: removido "do pai" — posse não confirmada
+  {emoji:'🗓️',label:'Quando escreve',q:'Quando Serafina escreve no diário?',ans:'Quando tem algo especial para contar',detail:'Cada entrada é sobre uma aventura, sentimento ou descoberta.',confianca:'médio'},
+  {emoji:'🌟',label:'Esconderijo especial',q:'Como Serafina chama o esconderijo no diário?',ans:'"Querido esconderijo"',detail:'Ela trata o esconderijo como um amigo fiel — um lugar só dela.',confianca:'médio'},
+  // REMOVIDOS POR EVIDÊNCIA INCERTA — ver BANCO_EVIDENCIAS
+  // {emoji:'🐚',label:'Coleção', ...}           INCERTO: conchinhas — aguarda confirmação no livro
+  // {emoji:'👩',label:'A mãe', ...}             INCERTO: "protetora e carinhosa" — aguarda confirmação
+  // {emoji:'🌲',label:'O pai', ...}             INCERTO: "quintal do pai" — posse não confirmada
+  // {emoji:'👭',label:'Melhor amiga', ...}      INCERTO: "melhor amiga" é inferência — removido
+  // {emoji:'🏫',label:'Colega novo/Chiquinho'} INCERTO: cílios longos — detalhe muito específico
+  // {emoji:'📖',label:'Professora Catarina'}    INCERTO: nome da professora — aguarda confirmação
+];
+
+const CARD_SCHEMES=[
+  {icon:'rgba(167,139,250,.25)',label:'#7c3aed',frontBg:'linear-gradient(135deg,#ede9fe,#f5f3ff)',frontBorder:'rgba(124,58,237,.3)'},
+  {icon:'rgba(244,114,182,.25)',label:'#db2777',frontBg:'linear-gradient(135deg,#fce7f3,#fdf2f8)',frontBorder:'rgba(219,39,119,.3)'},
+  {icon:'rgba(52,211,153,.25)',label:'#059669',frontBg:'linear-gradient(135deg,#d1fae5,#ecfdf5)',frontBorder:'rgba(5,150,105,.3)'},
+  {icon:'rgba(251,146,60,.25)',label:'#d97706',frontBg:'linear-gradient(135deg,#fef3c7,#fffbeb)',frontBorder:'rgba(217,119,6,.3)'},
+];
+const CARD_SCHEMES_DARK=[
+  {icon:'rgba(167,139,250,.25)',label:'#a78bfa',frontBg:'linear-gradient(135deg,rgba(167,139,250,.22),rgba(167,139,250,.09))',frontBorder:'rgba(167,139,250,.4)'},
+  {icon:'rgba(244,114,182,.25)',label:'#f472b6',frontBg:'linear-gradient(135deg,rgba(244,114,182,.22),rgba(244,114,182,.09))',frontBorder:'rgba(244,114,182,.4)'},
+  {icon:'rgba(52,211,153,.25)',label:'#34d399',frontBg:'linear-gradient(135deg,rgba(52,211,153,.22),rgba(52,211,153,.09))',frontBorder:'rgba(52,211,153,.4)'},
+  {icon:'rgba(251,146,60,.25)',label:'#fb923c',frontBg:'linear-gradient(135deg,rgba(251,146,60,.22),rgba(251,146,60,.09))',frontBorder:'rgba(251,146,60,.4)'},
+];
+
+function getScheme(i){
+  return S.theme==='dark' ? CARD_SCHEMES_DARK[i%4] : CARD_SCHEMES[i%4];
+}
+
+function initTeoria(){
+  S.teoriaOffset=0;
+  S.teoriaFlipped=TEORIA_POOL.map(()=>false);
+  renderTeoriaCards();
+}
+
+function rotateTeoriaCards(){
+  let next=(S.teoriaOffset+4)%TEORIA_POOL.length;
+  if(next===S.teoriaOffset) next=(next+4)%TEORIA_POOL.length;
+  S.teoriaOffset=next;
+  renderTeoriaCards();
+}
+
+function renderTeoriaCards(){
+  const container=document.getElementById('teoria-cards');
+  container.innerHTML='';
+  for(let i=0;i<4;i++){
+    const idx=(S.teoriaOffset+i)%TEORIA_POOL.length;
+    const card=TEORIA_POOL[idx];
+    const scheme=getScheme(i);
+    const flipped=S.teoriaFlipped[idx];
+
+    const wrapper=document.createElement('div');
+    wrapper.className='fc-wrapper';
+
+    const fc=document.createElement('div');
+    fc.className='flashcard'+(flipped?' flipped':'');
+    fc.dataset.idx=idx;
+    fc.addEventListener('click',()=>flipCard(idx,fc));
+
+    // FRENTE — pergunta
+    const front=document.createElement('div');
+    front.className='flashcard-front';
+    front.style.cssText=`background:${scheme.frontBg};border-color:${scheme.frontBorder};`;
+    front.innerHTML=`
+      <div class="fc-top">
+        <div class="fc-icon" style="background:${scheme.icon};">${card.emoji}</div>
+        <div class="fc-label-wrap">
+          <span class="fc-label" style="color:${scheme.label};">${card.label}</span>
+          <span class="fc-question">${card.q}</span>
+        </div>
+      </div>
+      <div class="fc-hint">👆 Clique para ver a resposta</div>`;
+
+    // VERSO — resposta
+    const back=document.createElement('div');
+    back.className='flashcard-back';
+    back.style.cssText=S.theme==='dark'
+      ? 'background:linear-gradient(135deg,rgba(16,185,129,.22),rgba(16,185,129,.09));border-color:rgba(16,185,129,.4);'
+      : 'background:linear-gradient(135deg,#d1fae5,#ecfdf5);border-color:rgba(5,150,105,.35);';
+    back.innerHTML=`
+      <div>
+        <div class="fc-back-top">
+          <span class="fc-back-icon">${card.emoji}</span>
+          <span class="fc-back-label" style="color:${scheme.label};">${card.label}</span>
+        </div>
+        <div class="fc-answer">${card.ans}</div>
+        <div class="fc-detail">${card.detail}</div>
+      </div>
+      <div class="fc-hint-back">👆 Clique para voltar à pergunta</div>`;
+
+    fc.appendChild(front);
+    fc.appendChild(back);
+    wrapper.appendChild(fc);
+    container.appendChild(wrapper);
+  }
+}
+
+function flipCard(poolIdx, fcEl){
+  S.teoriaFlipped[poolIdx]=!S.teoriaFlipped[poolIdx];
+  fcEl.classList.toggle('flipped');
+}
+
+// ─── NIVEL 1 DATA ─────────────────────────────────────────────
+const N1_CATS=[
+  // confianca:'alto' — suporte direto no título/premissa do livro
+  {id:'nome',   q:'Como se chama a personagem do livro?',          opts:['Serafina','Rosalina','Julinha','Catarina'],a:0,
+   evidencia:'Título do livro: "O Diário Escondido de Serafina"', confianca:'alto'},
+  {id:'segredo',q:'Por que o diário de Serafina é "escondido"?',   opts:['Para guardar segredos só dela','A professora mandou','A mãe pediu','Para mostrar aos amigos'],a:0,
+   evidencia:'Adjetivo "escondido" no título — premissa central do livro', confianca:'alto'},
+  // confianca:'médio' — plausível, tipicamente presente neste tipo de livro
+  {id:'jeito',  q:'Como Serafina é descrita no livro?',            opts:['Curiosa e aventureira','Brava e preguiçosa','Tímida e quieta','Distraída e esquecida'],a:0,
+   evidencia:'Descrita como curiosa e aventureira nos materiais pedagógicos do livro', confianca:'médio'},
+  {id:'esc',    q:'Onde fica o esconderijo de Serafina?',          opts:['Numa árvore no quintal','No quarto dela','Na escola','Na casa da amiga'],a:0,
+   evidencia:'Esconderijo em árvore (mangueira) citado no livro; "do pai" omitido por não ser confirmado', confianca:'médio'}, // MODIFICADO: opção "Na mangueira do quintal do pai" → "Numa árvore no quintal"
+  {id:'sauda',  q:'Como Serafina começa cada entrada do diário?',  opts:['"Querido diário:"','"Oi, caderno!"','"Prezado diário,"','"Olá diário!"'],a:0,
+   evidencia:'Fórmula de diário infantil confirmada no texto de exemplo do livro', confianca:'médio'},
+  {id:'desp',   q:'Como Serafina se despede do diário?',           opts:['"Tchau, tchau."','"Até amanhã."','"Adeus!"','"Beijos!"'],a:0,
+   evidencia:'Assinatura característica citada nos materiais do livro', confianca:'médio'},
+  // confianca:'médio/incerto' — com modificação para reduzir especificidade
+  {id:'amiga',  q:'Com quem Serafina foi brincar no livro?',       opts:['Rosalina','Julinha','Marquinho','Catarina'],a:0,
+   evidencia:'O livro menciona que Serafina foi brincar com Rosalina; "melhor amiga" removido por ser inferência', confianca:'médio'}, // MODIFICADO: "Quem é a MELHOR amiga?" → "Com quem foi brincar?"; removido Nonô/Chiquinho das opções
+  {id:'colega', q:'Como se chama o colega novo da escola?',        opts:['Chiquinho','Marquinho','Leandro','Eduardo'],a:0,
+   evidencia:'VERIFICAR COM TEXTO — Chiquinho aparece como colega novo; Nonô removido (sem evidência de ser personagem do livro)', confianca:'incerto'}, // MODIFICADO: removido Tavinho e Nonô das opções
+  // REMOVIDOS — ver N1_REMOVIDAS abaixo
+  // {id:'colec'} INCERTO: conchinhas — aguarda confirmação no livro
+  // {id:'cilios'} INCERTO: cílios longos do Chiquinho — detalhe muito específico, pode ser alucinação
+  // {id:'mae'} INCERTO: "protetora" — caracterização específica não confirmada
+  // {id:'pai'} INCERTO: "mangueira do pai" — posse não confirmada
+];
+
+const LETTERS=['A','B','C','D'];
+
+// ─── NIVEL 1 LOGIC ────────────────────────────────────────────
+function initN1(){
+  let order;
+  do{ order=shuffle(N1_CATS.map((_,i)=>i)); }
+  while(S.n1LastOrder.length&&arraysEqual(order,S.n1LastOrder));
+  S.n1LastOrder=[...order];
+  S.n1Order=order;
+  S.n1CatIdx=0;
+  S.n1Answered=false;
+  S.n1Score=0;
+  renderN1Cat();
+}
+
+function renderN1Cat(){
+  const catIdx=S.n1Order[S.n1CatIdx];
+  const cat=N1_CATS[catIdx];
+  const total=N1_CATS.length;
+
+  // progress dots
+  document.getElementById('n1-sub').textContent=`Pergunta ${S.n1CatIdx+1} de ${total}`;
+  const prog=document.getElementById('n1-progress');
+  prog.innerHTML='';
+  for(let i=0;i<total;i++){
+    const d=document.createElement('div');
+    d.className='progress-dot'+(i<S.n1CatIdx?' done':i===S.n1CatIdx?' active':'');
+    prog.appendChild(d);
+  }
+
+  // question
+  document.getElementById('n1-q-box').textContent=cat.q;
+  document.getElementById('n1-feedback').textContent='';
+  document.getElementById('n1-feedback').className='n1-feedback';
+
+  // options — shuffle, manter resposta correta por valor
+  const correctText=cat.opts[cat.a];
+  const shuffledOpts=shuffle([...cat.opts]);
+  const optsEl=document.getElementById('n1-opts');
+  optsEl.innerHTML='';
+  shuffledOpts.forEach((txt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt-btn';
+    btn.dataset.correct=(txt===correctText)?'1':'0';
+    btn.innerHTML=`<span class="opt-btn-letter">${LETTERS[i]}</span><span class="opt-btn-text">${txt}</span>`;
+    btn.addEventListener('click',()=>answerN1(btn));
+    optsEl.appendChild(btn);
+  });
+
+  S.n1Answered=false;
+  document.getElementById('btn-n1-next').style.display='none';
+}
+
+function answerN1(btn){
+  if(btn.classList.contains('disabled')) return;
+  if(btn.classList.contains('correct')) return;
+
+  const correct=btn.dataset.correct==='1';
+  const fb=document.getElementById('n1-feedback');
+
+  if(correct){
+    // Marcar certa, desabilitar todas
+    btn.classList.add('correct');
+    document.querySelectorAll('#n1-opts .opt-btn').forEach(b=>{
+      if(!b.classList.contains('correct')) b.classList.add('disabled');
+    });
+    fb.textContent='🎉 Correto! Muito bem!';
+    fb.className='n1-feedback ok';
+    addScore(1);
+    S.n1Score++;
+    S.n1Answered=true;
+    setTimeout(()=>{
+      document.getElementById('btn-n1-next').style.display='inline-flex';
+    },1500);
+  } else {
+    // Remove erro anterior, marca nova tentativa errada em vermelho
+    document.querySelectorAll('#n1-opts .opt-btn.error').forEach(b=>b.classList.remove('error'));
+    btn.classList.add('error');
+    fb.textContent='🤔 Tente novamente! 💪';
+    fb.className='n1-feedback err';
+    // Vermelho permanece até o aluno clicar outra opção
+  }
+}
+
+function nextN1Cat(){
+  S.n1CatIdx++;
+  if(S.n1CatIdx>=N1_CATS.length){
+    const s=S.n1Score;
+    const total=N1_CATS.length;
+    const e=s>=total?'🌟':s>=(Math.ceil(total*0.7))?'👏':'💪';
+    const t=s>=total?'Especialista em Serafina!':s>=(Math.ceil(total*0.7))?'Muito bem!':'Continue praticando!';
+    setTimeout(()=>{
+      showRC(e,t,`${s} de ${total}`,
+        s>=total?'Você conhece tudo sobre a Serafina!':
+        s>=(Math.ceil(total*0.7))?'Boa parte acertada! Tente de novo para melhorar.':
+        'Releia os cards e tente novamente!',
+        'Jogar novamente',initN1);
+    },2400);
+  } else {
+    renderN1Cat();
+  }
+}
+
+function skipN1Cat(){
+  S.n1CatIdx++;
+  if(S.n1CatIdx>=N1_CATS.length){
+    initN1();
+  } else {
+    renderN1Cat();
+  }
+}
+
+// ─── NIVEL 2 DATA — QUESTÕES ATIVAS ───────────────────────────
+// Cada questão tem campo ev (evidência) e confianca para rastreabilidade.
+// Questões removidas estão em QS_REMOVIDAS (bloco comentado abaixo).
+const QS=[
+  // QUEM É SERAFINA — confianca:'médio' (personalidade inferível da premissa)
+  {q:'Como Serafina é descrita no livro?',o:['Curiosa','Entediada','Brava'],a:0,
+   ev:'Descrita como curiosa e aventureira nos materiais pedagógicos', confianca:'médio'},
+  {q:'Serafina é uma menina...',o:['Aventureira','Preguiçosa','Tímida'],a:0,
+   ev:'Aventureira — inferível da premissa (diário, esconderijo, segredos)', confianca:'médio'},
+  {q:'O que Serafina faz no esconderijo dela?',o:['Escreve no diário','Dorme','Canta'],a:0,
+   ev:'Premissa central: Serafina escreve no diário escondido no esconderijo', confianca:'alto'},
+  {q:'Como Serafina se sente no esconderijo?',o:['Feliz e segura','Com medo','Entediada'],a:0,
+   ev:'Inferível da premissa: esconderijo é "o lugar mais especial do mundo"', confianca:'médio'},
+  {q:'Serafina gosta de...',o:['Observar o mundo','Assistir TV','Jogar videogame'],a:0,
+   ev:'Curiosidade e observação — inferível do caráter da personagem', confianca:'médio'},
+  {q:'Serafina é criativa?',o:['Sim, muito!','Não, ela copia ideias','Às vezes'],a:0,
+   ev:'Criatividade inferível: tem diário, esconderijo, imagina aventuras', confianca:'médio'},
+  {q:'O que Serafina imagina no esconderijo?',o:['Aventuras incríveis','Pesadelos','Nada'],a:0,
+   ev:'Inferível da premissa e do caráter aventureiro da personagem', confianca:'médio'},
+  // ESCONDERIJO — confianca:'médio'
+  {q:'Como Serafina chama o esconderijo no diário?',o:['"Querido esconderijo"','"Meu palácio"','"Minha casinha"'],a:0,
+   ev:'Fórmula citada nos materiais pedagógicos do livro', confianca:'médio'},
+  {q:'O esconderijo de Serafina fica...',o:['Em cima de uma árvore','Embaixo da cama','No porão'],a:0,
+   ev:'Esconderijo em árvore (mangueira) citado no livro', confianca:'médio'},
+  {q:'Por que o esconderijo é especial para Serafina?',o:['É um lugar só dela','É grande e bonito','Tem muito brinquedo'],a:0,
+   ev:'Premissa: lugar secreto, só dela', confianca:'alto'},
+  {q:'O que Serafina faz quando quer ficar sozinha?',o:['Vai ao esconderijo','Fica no quarto','Liga para a amiga'],a:0,
+   ev:'Inferível da premissa: esconderijo é refúgio pessoal', confianca:'médio'},
+  {q:'O que Serafina leva para o esconderijo?',o:['O diário','A mochila da escola','Os cadernos'],a:0,
+   ev:'Premissa: diário fica no esconderijo', confianca:'alto'},
+  {q:'O esconderijo da Serafina é uma...',o:['Casinha na árvore','Tenda no quarto','Cabana no parque'],a:0,
+   ev:'Casinha na árvore — citado nos materiais do livro', confianca:'médio'},
+  {q:'Quem conhecia o esconderijo de Serafina?',o:['Quase ninguém','Toda a escola','Só a professora'],a:0,
+   ev:'Premissa: esconderijo secreto — "escondido" no título', confianca:'alto'},
+  // O DIÁRIO — confianca:'alto'/'médio'
+  {q:'Como se chama o livro que estamos estudando?',o:['"O Diário Escondido de Serafina"','"O Caderno da Serafina"','"Serafina e o Segredo"'],a:0,
+   ev:'Título oficial do livro', confianca:'alto'},
+  {q:'Como Serafina começa as entradas do diário?',o:['"Querido diário:"','"Oi, diário!"','"Prezado diário,"'],a:0,
+   ev:'Fórmula de diário infantil confirmada no texto de exemplo', confianca:'médio'},
+  {q:'Como Serafina se despede do diário?',o:['"Tchau, tchau."','"Até amanhã."','"Adeus!"'],a:0,
+   ev:'Assinatura característica citada nos materiais do livro', confianca:'médio'},
+  {q:'Como se chama a personagem principal?',o:['Serafina','Rosalina','Catarina'],a:0,
+   ev:'Título do livro: "O Diário Escondido de SERAFINA"', confianca:'alto'},
+  {q:'O diário de Serafina é...',o:['Escondido','Da escola','Da biblioteca'],a:0,
+   ev:'Adjetivo "escondido" no título do livro', confianca:'alto'},
+  {q:'Por que Serafina tem um diário?',o:['Para guardar seus segredos','A professora mandou','Para a mãe ler'],a:0,
+   ev:'Premissa central: diário secreto para guardar pensamentos e aventuras', confianca:'alto'},
+  {q:'O que tem no diário de Serafina?',o:['Pensamentos e aventuras','Lição de casa','Receitas'],a:0,
+   ev:'Premissa: Serafina registra aventuras, sentimentos e descobertas', confianca:'alto'},
+  {q:'O diário fica...',o:['No esconderijo','Na mochila','Na estante'],a:0,
+   ev:'Premissa: diário e esconderijo são inseparáveis na história', confianca:'médio'},
+  {q:'Quem pode ler o diário de Serafina?',o:['Só ela!','Ela e a amiga','Toda a família'],a:0,
+   ev:'"Escondido" no título = secreto; só Serafina pode ler', confianca:'alto'},
+  {q:'Quando Serafina escreve no diário?',o:['Quando tem algo especial para contar','Todo dia às 8h em ponto','Só quando está triste'],a:0,
+   ev:'Inferível: cada entrada é sobre aventura, sentimento ou descoberta', confianca:'médio'},
+  // AMIGOS — somente o que tem suporte (sem Tavinho, sem "melhor amiga" como fato)
+  {q:'Com quem Serafina foi brincar no livro?',o:['Rosalina','Julinha','Marquinho','Catarina'],a:0,
+   ev:'O livro menciona que Serafina foi brincar com Rosalina; sem afirmar "melhor amiga"', confianca:'médio'}, // MODIFICADO: era "Quem é a MELHOR amiga?" — reformulado
+  {q:'Como se chama o colega novo da escola de Serafina?',o:['Chiquinho','Marquinho','Leandro','Eduardo'],a:0,
+   ev:'VERIFICAR COM TEXTO — Chiquinho aparece como colega novo; Tavinho e Nonô removidos', confianca:'incerto'}, // VERIFICAR
+];
+
+// ─── QS_LIVRO — QUESTÕES DE ESTRUTURA (só evidência direta) ───────────────
+// Estas questões têm suporte inequívoco no texto ou na premissa do livro.
+// Cada uma documenta a evidência textual que a justifica.
+const QS_LIVRO = [
+  {
+    q: "Como se chama o livro que a Serafina escreve?",
+    o: ["Diário", "Caderno de desenho", "Livro de receitas"],
+    a: 0,
+    ev: "Título do livro: 'O Diário Escondido de Serafina' — premissa central",
+    confianca: 'alto'
+  },
+  {
+    q: "Por que o diário de Serafina é chamado de 'escondido'?",
+    o: ["É um lugar secreto só dela", "A professora escondeu", "Ela perdeu"],
+    a: 0,
+    ev: "Adjetivo 'escondido' no título = diário que guarda segredos pessoais",
+    confianca: 'alto'
+  },
+  {
+    q: "Como Serafina começa cada entrada do diário?",
+    o: ['"Querido diário:"', '"Oi, caderno!"', '"Prezado diário,"'],
+    a: 0,
+    ev: "Fórmula de diário infantil padrão confirmada no texto do livro",
+    confianca: 'médio'
+  },
+  {
+    q: "Como Serafina se despede ao final de cada entrada?",
+    o: ['"Tchau, tchau."', '"Até amanhã."', '"Adeus!"'],
+    a: 0,
+    ev: "Assinatura característica citada no texto do livro",
+    confianca: 'médio'
+  },
+  {
+    q: "O diário de Serafina pode ser lido por qualquer pessoa?",
+    o: ["Não, é segredo!", "Sim, ela mostra para todos", "Sim, a professora lê"],
+    a: 0,
+    ev: "'Escondido' no título indica que é secreto — premissa do livro",
+    confianca: 'alto'
+  },
+  {
+    q: "Como se chama a personagem principal do livro?",
+    o: ["Serafina", "Rosalina", "Catarina"],
+    a: 0,
+    ev: "Título do livro: 'O Diário Escondido de SERAFINA'",
+    confianca: 'alto'
+  },
+  {
+    q: "Onde Serafina escreve os seus pensamentos e aventuras?",
+    o: ["No diário escondido", "No caderno da escola", "Numa carta para a amiga"],
+    a: 0,
+    ev: "Premissa central do livro: Serafina tem um diário onde registra tudo",
+    confianca: 'alto'
+  },
+  {
+    q: "O livro que estudamos se chama...",
+    o: ['"O Diário Escondido de Serafina"', '"O Caderno da Serafina"', '"Serafina e o Segredo"'],
+    a: 0,
+    ev: "Título oficial do livro",
+    confianca: 'alto'
+  },
+];
+
+/*
+ * ═══════════════════════════════════════════════════════════════════════════
+ * QUESTÕES REMOVIDAS / EM VERIFICAÇÃO — NÃO USAR NO JOGO
+ * Motivo: não há suporte textual inequívoco no livro.
+ * Para reativar: obter o trecho exato do livro e mover
+ * de volta para QS ou N1_CATS com o campo ev preenchido.
+ * ═══════════════════════════════════════════════════════════════════════════
+ *
+ * [REMOVIDA] N1: "O que Serafina adora colecionar?" → "Conchinhas"
+ *   Motivo: detalhe específico sem confirmação — aguarda leitura do livro
+ *
+ * [REMOVIDA] N1: "O que chamou a atenção de Serafina no Chiquinho?" → "Os cílios longos"
+ *   Motivo: detalhe muito específico — pode ser alucinação; aguarda confirmação
+ *
+ * [REMOVIDA] N1: "Como é a mãe de Serafina?" → "Protetora"
+ *   Motivo: caracterização específica não confirmada textualmente
+ *
+ * [REMOVIDA] N1: "O que o pai de Serafina tem no quintal?" → "Uma mangueira"
+ *   Motivo: "do pai" como posse não confirmada; mangueira pode existir mas sem atribuição ao pai
+ *
+ * [REMOVIDA] QS: "Quem é a MELHOR amiga de Serafina?" → "Rosalina"
+ *   Motivo: "melhor amiga" pode ser inferência — livro cita Rosalina mas sem esse label
+ *   Substituída por: "Com quem Serafina foi brincar?" → "Rosalina"
+ *
+ * [REMOVIDA] QS: "Quem é Tavinho?" → "Amigo de Serafina"
+ *   Motivo: personagem sem evidência direta confirmada no livro
+ *
+ * [REMOVIDA] QS: "O que o pai de Serafina tem no quintal?" → "Uma mangueira"
+ *   Motivo: posse ("do pai") não confirmada; mangueira reformulada para "no quintal"
+ *
+ * [REMOVIDA] QS: "De quem é a mangueira do esconderijo?" → "Do pai da Serafina"
+ *   Motivo: posse não confirmada — questão remove possibilidade de resposta certa
+ *
+ * [REMOVIDA] QS: "Como é a mãe de Serafina?" → "Protetora"
+ *   Motivo: caracterização específica não confirmada
+ *
+ * [REMOVIDA] QS: "A mãe de Serafina sabe do esconderijo?" → "Não, é segredo!"
+ *   Motivo: detalhe específico do enredo não confirmado inequivocamente
+ *
+ * [REMOVIDA] QS: "Serafina mora com..." → "Pai e mãe"
+ *   Motivo: estrutura familiar não confirmada explicitamente no livro
+ *
+ * [REMOVIDA] QS: "Como se chama a professora nova de Serafina?" → "Catarina"
+ *   Motivo: nome específico da professora — pode ser alucinação; aguarda confirmação
+ *
+ * [REMOVIDA] QS: "O que chamou a atenção de Serafina no Chiquinho?" → "Os cílios longos"
+ *   Motivo: detalhe muito específico — pode ser alucinação; aguarda confirmação
+ *
+ * [REMOVIDA] QS: "Como Serafina assina o diário?" → "Serafina"
+ *   Motivo: assinatura específica não confirmada (pode ser apelido/nome completo)
+ *
+ * [REMOVIDA] QS: "Serafina tem..." → "Muitos amigos"
+ *   Motivo: julgamento quantitativo sobre personagem sem suporte direto
+ *
+ * [VERIFICAR] Chiquinho como colega novo da escola
+ *   Motivo: personagem pode existir, mas aguarda confirmação no texto; Nonô removido das opções
+ *
+ * [VERIFICAR] "O esconderijo de Serafina fica no Quintal do pai"
+ *   Motivo: "quintal do pai" — a árvore existe, mas posse requer confirmação
+ *   Modificado para: "Numa árvore no quintal" (sem atribuir ao pai)
+ *
+ * ─── N1_CATS REMOVIDAS ────────────────────────────────────────────────────
+ * const N1_REMOVIDAS = [
+ *   {id:'colec', q:'O que Serafina adora colecionar?',
+ *    opts:['Conchinhas','Figurinhas','Pedras','Tampinhas'],a:0},  // INCERTO
+ *   {id:'cilios', q:'O que chamou a atenção de Serafina no Chiquinho?',
+ *    opts:['Os cílios longos','O cabelo colorido','A voz','O sorriso'],a:0},  // INCERTO
+ *   {id:'mae', q:'Como é a mãe de Serafina?',
+ *    opts:['Protetora','Brava','Distante','Indiferente'],a:0},  // INCERTO
+ *   {id:'pai', q:'O que o pai de Serafina tem no quintal?',
+ *    opts:['Uma mangueira','Uma piscina','Um jardim de flores','Um galinheiro'],a:0},  // INCERTO
+ * ];
+ */
+
+// ─── NIVEL 2 LOGIC ────────────────────────────────────────────
+function pickN2Set(){
+  let set,attempts=0;
+  do{
+    const idx=Array.from({length:QS.length},(_,i)=>i);
+    const sh=shuffle(idx);set=sh.slice(0,5);attempts++;
+  }while(attempts<20&&setsOverlap(set,S.n2LastSet,3));
+  return set;
+}
+function setsOverlap(a,b,t){ return b.length&&a.filter(x=>b.includes(x)).length>=t; }
+
+function initN2(){
+  const set=pickN2Set();
+  S.n2LastSet=set;
+  S.n2Questions=set.map(i=>QS[i]);
+  S.n2Idx=0;S.n2RoundScore=0;
+  renderN2();
+}
+
+function renderN2(){
+  S.n2Busy=false;
+  const q=S.n2Questions[S.n2Idx];
+  const pd=document.getElementById('n2-progress');
+  pd.innerHTML='';
+  for(let i=0;i<5;i++){
+    const dot=document.createElement('div');
+    dot.className='progress-dot'+(i<S.n2Idx?' done':i===S.n2Idx?' active':'');
+    pd.appendChild(dot);
+  }
+  document.getElementById('n2-sub').textContent=`Pergunta ${S.n2Idx+1} de 5 — Clique na resposta certa!`;
+  document.getElementById('q-box').textContent=q.q;
+  document.getElementById('n2-fb').textContent='';
+  document.getElementById('n2-fb').className='n2-feedback';
+
+  const opts=q.o.map((text,i)=>({text,correct:i===q.a}));
+  const shOpts=shuffle(opts);
+  const optsEl=document.getElementById('n2-opts');
+  optsEl.innerHTML='';
+  shOpts.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt-btn';
+    btn.dataset.correct=opt.correct?'1':'0';
+    btn.innerHTML=`<span class="opt-btn-letter">${LETTERS[i]}</span><span class="opt-btn-text">${opt.text}</span>`;
+    btn.addEventListener('click',()=>answerN2(btn,optsEl));
+    optsEl.appendChild(btn);
+  });
+}
+
+function answerN2(btn,optsEl){
+  if(S.n2Busy)return;
+  if(btn.classList.contains('disabled'))return;
+  if(btn.classList.contains('correct'))return;
+  const correct=btn.dataset.correct==='1';
+  const fb=document.getElementById('n2-fb');
+  // Remove erro anterior
+  optsEl.querySelectorAll('.opt-btn.error').forEach(b=>b.classList.remove('error'));
+  if(correct){
+    S.n2Busy=true;
+    btn.classList.add('correct');
+    optsEl.querySelectorAll('.opt-btn').forEach(b=>{
+      if(!b.classList.contains('correct')) b.classList.add('disabled');
+    });
+    fb.textContent='🎉 Correto! Muito bem!';fb.className='n2-feedback ok';
+    addScore(1);S.n2RoundScore++;
+    setTimeout(()=>{
+      S.n2Idx++;
+      if(S.n2Idx<5){renderN2();}
+      else{
+        const s=S.n2RoundScore;
+        const e=s>=4?'🌟':s>=2?'👏':'💪';
+        const t=s>=4?'Arrasou!':s>=2?'Bem feito!':'Continue praticando!';
+        showRC(e,t,`${s} de 5`,
+          s>=4?'Você conhece o livro de cor!':
+          s>=2?'Muito bem! Pratique mais para dominar.':
+          'Releia o livro e tente novamente!',
+          'Jogar novamente',initN2);
+      }
+    },2400);
+  } else {
+    btn.classList.add('error');
+    fb.textContent='🤔 Tente novamente! 💪';
+    fb.className='n2-feedback err';
+    // Vermelho permanece até clicar outra opção
+  }
+}
+
+// ─── BONUS DATA ───────────────────────────────────────────────
+const BONUS=[
+  {emoji:'✏️',title:'Passo 1 — O Nome',illus:'📓🖊️',
+   speech:'Olá! Sou a Serafina! Vamos criar juntos um personagem incrível! <strong>Todo personagem começa com um nome especial.</strong> Pense em um nome para o seu personagem e anote, fale ou conte para alguém!',
+   btn:'Já escolhi o nome! ✏️'},
+  {emoji:'🌟',title:'Passo 2 — Como ele é?',illus:'🤔💭',
+   speech:'Ótimo! Agora pense: <strong>o seu personagem é corajoso? Engraçado? Tímido? Gentil?</strong> Escolha 3 palavras que descrevem ele. Pode perguntar para um amigo ou adulto para ajudar!',
+   btn:'Já escolhi as 3 palavras! ✏️'},
+  {emoji:'🎮',title:'Passo 3 — O que ele adora?',illus:'🛹🌱',
+   speech:'Incrível! Agora pense em <strong>2 coisas que o seu personagem ama fazer.</strong> Pode ser colecionar pedras, voar de skate, cuidar de plantas — qualquer coisa! Sem limite de imaginação!',
+   btn:'Já escolhi o que ele adora! ✏️'},
+  {emoji:'🌳',title:'Passo 4 — O Esconderijo Secreto',illus:'🏡🔐',
+   speech:'Quase lá! <strong>Todo personagem incrível tem um lugar só dele.</strong> Onde fica o esconderijo do SEU personagem? Pode ser uma árvore, um sofá, um cantinho especial... Descreva, desenhe ou fale em voz alta!',
+   btn:'Meu personagem está pronto! 🌟'},
+];
+
+// ─── BONUS LOGIC ──────────────────────────────────────────────
+function initBonus(){
+  S.bonusStep=0;
+  document.getElementById('bonus-final').classList.remove('active');
+  document.getElementById('bonus-content').style.display='block';
+  renderBonusStep();
+}
+
+function renderBonusStep(){
+  const dotsEl=document.getElementById('step-dots');
+  dotsEl.innerHTML='';
+  BONUS.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='step-dot'+(i<S.bonusStep?' done':i===S.bonusStep?' active':'');
+    dotsEl.appendChild(d);
+  });
+  if(S.bonusStep>=BONUS.length){bonusFinal();return;}
+  const step=BONUS[S.bonusStep];
+  document.getElementById('bonus-content').innerHTML=`
+    <div class="bonus-card">
+      <div class="bonus-emoji">${step.emoji}</div>
+      <div class="bonus-step-title">${step.title}</div>
+      <div class="bonus-speech"><strong>Serafina diz:</strong> ${step.speech}</div>
+      <div class="bonus-illus">${step.illus}</div>
+      <button class="btn btn-bonus" onclick="advanceBonus()">${step.btn}</button>
+    </div>`;
+}
+
+function advanceBonus(){ S.bonusStep++; renderBonusStep(); }
+
+function bonusFinal(){
+  document.getElementById('bonus-content').style.display='none';
+  document.getElementById('bonus-final').classList.add('active');
+  addScore(4);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────
+initN2();
+</script>
+</body>
+</html>

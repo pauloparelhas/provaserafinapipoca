@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genero Textual: Diario - Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0d0b1e;min-height:100vh;overflow-x:hidden;color:#fff;}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+#app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding-bottom:40px;}
+.screen{display:none;width:100%;max-width:860px;padding:0 12px;}
+.screen.active{display:block;}
+
+/* NAVBAR */
+.navbar{width:100%;max-width:860px;display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:16px;position:sticky;top:0;z-index:100;}
+.nav-logo{font-size:clamp(13px,2.5vw,17px);font-weight:900;
+  background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-right{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.nav-score{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:20px;padding:4px 12px;font-size:13px;font-weight:800;color:#fff;}
+.nav-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;
+  padding:5px 11px;font-family:inherit;font-size:11px;font-weight:800;color:#fff;cursor:pointer;transition:all .18s;}
+.nav-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px);}
+.nav-btn.nb-home{color:#a78bfa;}.nav-btn.nb-back{color:#60a5fa;}.nav-btn.nb-skip{color:#fb923c;}
+.nav-btn.nb-index{color:#34d399;}
+.confirm-modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;background:rgba(0,0,0,.5);align-items:center;justify-content:center;}
+.confirm-modal-overlay.active{display:flex;}
+.confirm-modal{background:#fff;border:2px solid #a78bfa;border-radius:20px;padding:28px 24px;max-width:340px;width:90%;text-align:center;font-family:inherit;box-shadow:0 8px 40px rgba(124,58,237,.25);}
+body.theme-light .confirm-modal{background:#fff;color:#1a1535;}
+body.theme-dark .confirm-modal{background:#1a1535;color:#fff;border-color:#a78bfa;}
+.confirm-modal-icon{font-size:40px;margin-bottom:10px;}
+.confirm-modal-title{font-size:17px;font-weight:900;color:#7c3aed;margin-bottom:8px;}
+.confirm-modal-text{font-size:14px;font-weight:700;color:#1a1535;margin-bottom:20px;line-height:1.5;}
+body.theme-dark .confirm-modal-text{color:rgba(255,255,255,.85);}
+.confirm-modal-btns{display:flex;gap:10px;justify-content:center;}
+.confirm-btn-yes{background:#7c3aed;color:#fff;border:none;border-radius:12px;padding:11px 24px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:.18s;}
+.confirm-btn-yes:hover{background:#6d28d9;transform:translateY(-1px);}
+.confirm-btn-no{background:#e5e7eb;color:#374151;border:none;border-radius:12px;padding:11px 24px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:.18s;}
+.confirm-btn-no:hover{background:#d1d5db;transform:translateY(-1px);}
+body.theme-dark .confirm-btn-no{background:#374151;color:#fff;}
+.nav-a11y{display:flex;gap:4px;}
+.nav-a11y-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;
+  padding:5px 9px;font-family:inherit;font-size:13px;font-weight:800;color:#fff;cursor:pointer;transition:all .18s;line-height:1;}
+.nav-a11y-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px);}
+.nav-a11y-btn.nb-help{color:#fbbf24;}
+
+/* BUTTONS */
+.btn{border:none;border-radius:14px;font-family:inherit;font-weight:800;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn:active{transform:scale(.96)!important;}
+.btn-start{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:clamp(15px,2.8vw,19px);padding:15px 44px;border-radius:50px;box-shadow:0 4px 30px rgba(167,139,250,.5);animation:startPulse 2.2s ease infinite;}
+@keyframes startPulse{0%,100%{box-shadow:0 4px 30px rgba(167,139,250,.5),0 0 0 0 rgba(167,139,250,.3);}50%{box-shadow:0 4px 30px rgba(167,139,250,.6),0 0 0 16px rgba(167,139,250,0);}}
+.btn-start:hover{transform:translateY(-3px);filter:brightness(1.1);}
+.btn-primary{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:14px;padding:12px 26px;border-radius:12px;}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-2px);}
+.btn-check{background:linear-gradient(135deg,#10b981,#34d399);color:#fff;font-size:14px;padding:11px 22px;border-radius:12px;}
+.btn-check:hover{transform:translateY(-2px);}
+.btn-hint{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#fff;font-size:14px;padding:11px 22px;border-radius:12px;}
+.btn-hint:hover{transform:translateY(-2px);}
+.btn-replay{background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;color:#fff;font-size:13px;padding:10px 18px;border-radius:12px;font-weight:800;}
+.btn-replay:hover{filter:brightness(1.12);transform:translateY(-2px);}
+.btn-next{background:linear-gradient(135deg,#f472b6,#fb923c);color:#fff;font-size:15px;padding:12px 30px;border-radius:12px;}
+.btn-next:hover{transform:translateY(-2px);}
+.btn-home-lg{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:#a78bfa;font-size:13px;padding:10px 20px;border-radius:12px;}
+.btn-home-lg:hover{background:rgba(167,139,250,.25);transform:translateY(-2px);}
+.btn-print{background:linear-gradient(135deg,#0ea5e9,#38bdf8);color:#fff;font-size:14px;padding:12px 26px;border-radius:12px;font-weight:800;}
+.btn-print:hover{filter:brightness(1.1);transform:translateY(-2px);}
+.btn-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+
+/* INTRO */
+#screen-intro{text-align:center;padding-top:8px;}
+.intro-badge{display:inline-block;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);border-radius:30px;padding:4px 16px;font-size:11px;font-weight:700;color:#a78bfa;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+.intro-mascot{font-size:clamp(60px,12vw,88px);display:block;margin:0 auto 10px;animation:mfloat 3s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(167,139,250,.5));}
+@keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+.intro-title{font-size:clamp(22px,5vw,40px);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+.intro-sub{font-size:clamp(13px,2.5vw,16px);color:rgba(255,255,255,.6);margin-bottom:20px;font-weight:600;}
+.part-pills{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;}
+.part-pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:13px 18px;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:130px;transition:.2s;cursor:pointer;}
+.part-pill:hover{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.5);transform:translateY(-3px);box-shadow:0 6px 20px rgba(167,139,250,.25);}
+.part-pill-icon{font-size:26px;}
+.part-pill-num{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#f472b6);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;}
+.part-pill-title{font-size:12px;font-weight:900;color:#a78bfa;text-align:center;}
+.part-pill-desc{font-size:10px;color:rgba(255,255,255,.45);font-weight:700;text-align:center;line-height:1.3;}
+.intro-tip{color:rgba(255,255,255,.38);font-size:11px;font-weight:600;margin-bottom:22px;}
+
+/* TEORIA */
+#screen-teoria{padding-top:8px;}
+.teoria-title{font-size:clamp(20px,4vw,32px);font-weight:900;text-align:center;margin-bottom:6px;
+  background:linear-gradient(135deg,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.teoria-sub{text-align:center;font-size:13px;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:20px;}
+.teoria-cards{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
+.teoria-card{border-radius:20px;padding:18px 20px;display:flex;align-items:flex-start;gap:16px;
+  opacity:0;transform:translateY(20px);transition:opacity .45s ease,transform .45s ease;}
+.teoria-card.revealed{opacity:1;transform:translateY(0);}
+.tc-icon{font-size:36px;flex-shrink:0;width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;}
+.tc-body{}
+.tc-label{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.tc-title{font-size:clamp(16px,3vw,20px);font-weight:900;margin-bottom:5px;}
+.tc-desc{font-size:clamp(12px,2.2vw,14px);font-weight:700;color:rgba(255,255,255,.75);line-height:1.55;}
+.tc-example{font-size:13px;font-weight:800;font-style:italic;margin-top:6px;padding:6px 12px;border-radius:10px;display:inline-block;}
+
+/* EXEMPLOS */
+#screen-exemplos{padding-top:8px;}
+.ex-header{text-align:center;margin-bottom:14px;}
+.ex-title{font-size:clamp(18px,4vw,28px);font-weight:900;background:linear-gradient(135deg,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ex-sub{font-size:13px;color:rgba(255,255,255,.5);font-weight:600;margin-top:4px;}
+.ex-layout{display:grid;grid-template-columns:1fr 220px;gap:14px;align-items:start;}
+@media(max-width:600px){.ex-layout{grid-template-columns:1fr;}}
+.notebook{background:rgba(255,255,255,.96);border-radius:20px;padding:28px 24px;color:#1a1a2e;position:relative;box-shadow:0 8px 40px rgba(0,0,0,.4);}
+.notebook::before{content:'';position:absolute;left:48px;top:0;bottom:0;width:2px;background:rgba(251,146,60,.25);border-radius:2px;}
+.notebook-lines{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:20px;}
+.diary-part{padding:6px 0;border-radius:8px;cursor:pointer;transition:all .2s;line-height:1.6;font-weight:700;}
+.diary-part:hover{filter:brightness(1.08);}
+.diary-part.dp-active{padding:6px 10px;margin:0 -10px;}
+.dp-date{font-size:13px;color:#92400e;}
+.dp-greeting{font-size:15px;color:#831843;}
+.dp-body{font-size:14px;color:#1e1b4b;margin:6px 0;}
+.dp-farewell{font-size:13px;color:#064e3b;}
+.dp-signature{font-size:15px;font-weight:900;color:#713f12;}
+.ex-legend{display:flex;flex-direction:column;gap:8px;}
+.legend-item{border-radius:14px;padding:10px 14px;cursor:pointer;transition:all .2s;border:2px solid transparent;}
+.legend-item.leg-active{transform:translateX(4px);border-color:rgba(255,255,255,.4);}
+.leg-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.leg-label{font-size:12px;font-weight:900;}
+.leg-desc{font-size:10px;font-weight:700;color:rgba(255,255,255,.6);margin-top:1px;}
+.ex-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;}
+.ex-count{font-size:12px;font-weight:700;color:rgba(255,255,255,.4);}
+
+/* GAME */
+.game-body{display:flex;flex-direction:column;gap:12px;}
+.level-bar{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.level-steps{display:flex;gap:7px;}
+.step{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;transition:.3s;cursor:pointer;}
+.step.done{background:linear-gradient(135deg,#10b981,#34d399);}
+.step.active{background:linear-gradient(135deg,#a78bfa,#f472b6);box-shadow:0 2px 14px rgba(167,139,250,.5);transform:scale(1.1);}
+.step.pending{background:rgba(255,255,255,.07);color:rgba(255,255,255,.25);cursor:default;}
+.li-title{font-size:14px;font-weight:900;color:#a78bfa;}
+.li-desc{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;}
+.sera-bubble{display:flex;align-items:flex-start;gap:12px;background:rgba(167,139,250,.09);border:1px solid rgba(167,139,250,.22);border-radius:18px;padding:13px 15px;transition:.3s;}
+.sera-bubble.success{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);}
+.sera-bubble.error{background:rgba(239,68,68,.09);border-color:rgba(239,68,68,.25);}
+.sera-bubble.hint-mode{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.28);}
+.sera-icon{font-size:36px;flex-shrink:0;}
+.sera-main{font-size:clamp(13px,2.5vw,15px);font-weight:700;color:rgba(255,255,255,.9);line-height:1.45;}
+.sera-sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;font-weight:600;}
+
+/* LEVEL 1 - IDENTIFICAR */
+.id-layout{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:flex-start;}
+.id-source{order:2;}.id-boxes{order:1;}
+.ord-layout{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:flex-start;}
+#screen-game .game-body{max-width:680px;margin:0 auto;}
+.id-source{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:14px;}
+.id-source-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.id-cards-row{display:flex;flex-direction:column;gap:8px;}
+.id-card{border-radius:14px;padding:10px 16px;font-size:clamp(12px,2.2vw,14px);font-weight:800;cursor:grab;user-select:none;background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#1a0a00;box-shadow:0 4px 14px rgba(0,0,0,.3);transition:transform .18s,box-shadow .18s;border:2px solid transparent;touch-action:manipulation;line-height:1.5;word-break:break-word;white-space:normal;}
+.id-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.4);}
+.id-card.ic-sel{transform:translateY(-6px) scale(1.04)!important;box-shadow:0 0 0 3px #fff,0 8px 24px rgba(0,0,0,.5)!important;}
+.id-card.ic-dragging{opacity:.3;transform:scale(.88);}
+.id-card.ic-ok{background:linear-gradient(135deg,#16a34a,#4ade80)!important;color:#fff!important;cursor:default!important;}
+.id-card.ic-err{background:linear-gradient(135deg,#dc2626,#f87171)!important;color:#fff!important;}
+.id-boxes{display:flex;flex-direction:column;gap:8px;}
+.id-box{border-radius:16px;padding:10px 14px;border:2px dashed;display:flex;flex-direction:column;gap:5px;transition:.2s;}
+.id-box.drag-over{transform:scale(1.01);}
+.id-box-label{font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;width:100%;}
+.id-box-content{width:100%;font-size:13px;font-weight:800;line-height:1.5;word-break:break-word;}
+.id-box-empty{font-size:11px;font-weight:700;opacity:.35;font-style:italic;}
+.id-box .id-card{margin:0;cursor:pointer;width:100%;}
+
+/* LEVEL 2 - ORDENAR (LP-05 style) */
+.ord-dz{background:rgba(255,255,255,.04);border:2px dashed rgba(167,139,250,.35);border-radius:18px;padding:14px;min-height:80px;display:flex;flex-direction:column;gap:8px;position:relative;}
+.ord-dz-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(167,139,250,.7);margin-bottom:6px;}
+.ord-card{border-radius:14px;padding:10px 16px;font-size:clamp(12px,2.2vw,14px);font-weight:800;cursor:grab;user-select:none;box-shadow:0 4px 14px rgba(0,0,0,.3);transition:transform .18s;border:2px solid transparent;touch-action:manipulation;line-height:1.5;word-break:break-word;white-space:normal;}
+.ord-card:hover{transform:translateY(-2px);}
+.ord-card.oc-dragging{opacity:.3;}
+.ord-card.oc-ok{cursor:default!important;}
+.ord-card.oc-err{cursor:pointer;}
+.ord-insert-line{height:3px;background:#a78bfa;border-radius:3px;margin:0 8px;transition:opacity .15s;opacity:0;}
+.ord-insert-line.visible{opacity:1;}
+.ord-src{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:14px;}
+.ord-src-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.ord-src-row{display:flex;flex-wrap:wrap;gap:8px;min-height:58px;align-items:center;}
+
+/* LEVEL COMPLETE */
+#screen-levelcomplete{text-align:center;padding-top:12px;}
+.lc-mascot{font-size:76px;display:inline-block;animation:mfloat 3s ease-in-out infinite;}
+.lc-title{font-size:clamp(22px,5vw,36px);font-weight:900;background:linear-gradient(135deg,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:10px 0 6px;}
+.lc-msg{font-size:15px;color:rgba(255,255,255,.65);margin-bottom:22px;font-weight:600;}
+.stars-row{display:flex;justify-content:center;gap:12px;margin:14px 0;}
+.star{font-size:52px;animation:starPop .4s ease backwards;filter:grayscale(1) opacity(.3);transition:filter .3s;}
+.star.lit{filter:grayscale(0) opacity(1);}
+@keyframes starPop{0%{transform:scale(0) rotate(-30deg);opacity:0}60%{transform:scale(1.3) rotate(10deg);}100%{transform:scale(1);opacity:1}}
+
+/* BONUS */
+#screen-bonus{padding-top:8px;}
+.bonus-title{font-size:clamp(20px,4vw,32px);font-weight:900;text-align:center;background:linear-gradient(135deg,#34d399,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+.bonus-sub{text-align:center;font-size:13px;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:18px;}
+.bonus-layout{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:600px){.bonus-layout{grid-template-columns:1fr;}}
+.bonus-form{display:flex;flex-direction:column;gap:10px;}
+.form-field{display:flex;flex-direction:column;gap:4px;}
+.form-label{font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:3px 0;}
+.form-input,.form-textarea{border:none;border-radius:12px;font-family:inherit;font-size:14px;font-weight:700;padding:10px 14px;outline:none;width:100%;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12);transition:.2s;}
+.form-input:focus,.form-textarea:focus{border-color:rgba(167,139,250,.6);background:rgba(167,139,250,.08);}
+.form-textarea{resize:vertical;min-height:80px;line-height:1.5;}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,.25);}
+.bonus-checklist{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:16px;}
+.cl-title{font-size:13px;font-weight:900;color:rgba(255,255,255,.6);margin-bottom:12px;letter-spacing:1px;text-transform:uppercase;}
+.cl-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.cl-item:last-child{border:none;}
+.cl-check{width:24px;height:24px;border-radius:8px;border:2px solid rgba(255,255,255,.2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.3s;}
+.cl-check.done{background:linear-gradient(135deg,#10b981,#34d399);border-color:transparent;}
+.cl-text{font-size:13px;font-weight:700;color:rgba(255,255,255,.7);}
+
+/* PRINT SCREEN */
+#screen-print{padding-top:8px;text-align:center;}
+.print-notice{background:rgba(251,146,60,.1);border:2px solid rgba(251,146,60,.4);border-radius:20px;padding:16px 20px;margin-bottom:18px;display:inline-flex;align-items:center;gap:12px;max-width:480px;}
+.print-notice-icon{font-size:32px;flex-shrink:0;}
+.print-notice-text{font-size:14px;font-weight:800;color:#fb923c;text-align:left;line-height:1.5;}
+.print-preview{background:#fff;border-radius:20px;padding:32px 28px;color:#1a1a2e;text-align:left;box-shadow:0 8px 40px rgba(0,0,0,.4);max-width:500px;margin:0 auto 18px;position:relative;}
+.print-preview::before{content:'';position:absolute;left:52px;top:0;bottom:0;width:2px;background:rgba(251,146,60,.2);}
+.pp-date{font-size:13px;font-weight:800;color:#92400e;margin-bottom:8px;}
+.pp-greeting{font-size:16px;font-weight:900;color:#831843;margin-bottom:10px;}
+.pp-body{font-size:14px;font-weight:700;color:#1e1b4b;line-height:1.7;margin-bottom:10px;}
+.pp-farewell{font-size:13px;font-weight:800;color:#064e3b;margin-bottom:4px;}
+.pp-signature{font-size:17px;font-weight:900;color:#713f12;}
+
+/* VICTORY */
+#screen-victory{text-align:center;padding-top:12px;}
+.vic-mascot{font-size:90px;display:inline-block;animation:vbounce .7s ease infinite alternate;}
+@keyframes vbounce{from{transform:scale(1) rotate(-6deg)}to{transform:scale(1.1) rotate(6deg)}}
+.vic-title{font-size:clamp(24px,5vw,42px);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:10px 0;}
+.vic-msg{font-size:clamp(14px,2.5vw,17px);font-weight:700;color:rgba(255,255,255,.85);line-height:1.5;background:rgba(167,139,250,.09);border:1px solid rgba(167,139,250,.22);border-radius:14px;padding:14px 18px;margin:0 auto 14px;max-width:480px;}
+.vic-score{font-size:clamp(18px,3.5vw,24px);font-weight:900;background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;}
+#fw-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:999;}
+
+/* HELP MODAL */
+#help-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+#help-overlay.open{display:flex;}
+.help-box{background:#1e1347;border:2px solid rgba(167,139,250,.5);border-radius:24px;max-width:440px;width:90%;padding:28px 24px 24px;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.6);}
+.help-close{position:absolute;top:12px;right:16px;background:none;border:none;color:rgba(255,255,255,.45);font-size:22px;cursor:pointer;font-weight:900;}
+.help-icon{font-size:54px;display:block;margin-bottom:10px;}
+.help-title{font-size:21px;font-weight:900;color:#a78bfa;margin-bottom:10px;font-family:inherit;}
+.help-text{font-size:15px;font-weight:700;color:rgba(255,255,255,.85);line-height:1.65;font-family:inherit;white-space:pre-line;}
+.help-btn-ok{margin-top:20px;background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;border:none;border-radius:14px;padding:12px 36px;font-size:15px;font-weight:900;cursor:pointer;font-family:inherit;}
+
+/* LIGHT THEME */
+body.theme-light{background:#e8edf8;color:#1a1a2e;}
+body.theme-light #starfield{opacity:.07;}
+body.theme-light .navbar{background:rgba(255,255,255,.85);border-color:rgba(0,0,0,.1);}
+body.theme-light .nav-btn{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.12);color:#1a1a2e;}
+body.theme-light .nav-btn.nb-home{color:#6d28d9;}
+body.theme-light .nav-a11y-btn{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.12);color:#1a1a2e;}
+body.theme-light .nav-a11y-btn.nb-help{color:#d97706;}
+body.theme-light .level-bar{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);}
+body.theme-light .li-title{color:#6d28d9;}
+body.theme-light .li-desc{color:rgba(26,26,46,.45);}
+body.theme-light .step.pending{background:rgba(0,0,0,.08);color:rgba(26,26,46,.25);}
+body.theme-light .sera-bubble{background:rgba(109,40,217,.08);border-color:rgba(109,40,217,.2);}
+body.theme-light .sera-main{color:rgba(26,26,46,.9);}
+body.theme-light .sera-sub{color:rgba(26,26,46,.5);}
+/* teoria */
+body.theme-light .tc-desc{color:rgba(26,26,46,.75);}
+body.theme-light .teoria-sub{color:rgba(26,26,46,.5);}
+/* exemplos */
+body.theme-light .ex-sub{color:rgba(26,26,46,.5);}
+body.theme-light .ex-count{color:rgba(26,26,46,.5);}
+body.theme-light .leg-desc{color:rgba(26,26,46,.55);}
+/* game area labels */
+body.theme-light .id-source{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);}
+body.theme-light .ord-src{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);}
+body.theme-light .ord-dz{background:rgba(0,0,0,.03);border-color:rgba(109,40,217,.35);}
+body.theme-light .id-source-label{color:rgba(26,26,46,.45);}
+body.theme-light .ord-src-label{color:rgba(26,26,46,.45);}
+body.theme-light .ord-dz-label{color:#6d28d9;}
+body.theme-light .id-box-empty{color:rgba(26,26,46,.3);}
+/* help */
+body.theme-light .help-box{background:#fff;border-color:rgba(109,40,217,.4);}
+body.theme-light .help-title{color:#6d28d9;}
+body.theme-light .help-text{color:rgba(26,26,46,.85);}
+/* level complete / victory */
+body.theme-light .lc-msg{color:rgba(26,26,46,.6);}
+body.theme-light .vic-msg{color:rgba(26,26,46,.85);background:rgba(109,40,217,.07);border-color:rgba(109,40,217,.2);}
+/* bonus */
+body.theme-light .bonus-sub{color:rgba(26,26,46,.5);}
+body.theme-light .bonus-checklist{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.1);}
+body.theme-light .cl-title{color:rgba(26,26,46,.55);}
+body.theme-light .cl-text{color:rgba(26,26,46,.7);}
+body.theme-light .cl-check{border-color:rgba(26,26,46,.2);}
+body.theme-light .form-input,body.theme-light .form-textarea{background:rgba(0,0,0,.05);color:#1a1a2e;border-color:rgba(0,0,0,.15);}
+body.theme-light .form-input::placeholder,body.theme-light .form-textarea::placeholder{color:rgba(26,26,46,.3);}
+/* intro */
+body.theme-light .part-pill{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);}
+body.theme-light .part-pill-desc{color:rgba(26,26,46,.5);}
+body.theme-light .intro-tip{color:rgba(26,26,46,.45);}
+body.theme-light .intro-sub{color:rgba(26,26,46,.5);}
+
+/* FONT SIZE */
+html[data-fs="lg"] .id-card,html[data-fs="lg"] .ord-card{font-size:clamp(14px,2.8vw,17px)!important;}
+html[data-fs="xl"] .id-card,html[data-fs="xl"] .ord-card{font-size:clamp(16px,3.2vw,20px)!important;}
+html[data-fs="lg"] .sera-main{font-size:clamp(15px,3vw,18px)!important;}
+html[data-fs="xl"] .sera-main{font-size:clamp(17px,3.5vw,22px)!important;}
+
+/* PRINT */
+@media print{
+  body{background:#fff!important;color:#000!important;}
+  #app>*:not(#screen-print){display:none!important;}
+  #screen-print{display:block!important;}
+  .navbar,.btn-row,.print-notice,.no-print{display:none!important;}
+  .print-preview{box-shadow:none;border:1px solid #ccc;max-width:100%;}
+  .print-preview::before{display:none;}
+}
+@media(max-width:600px){
+  .id-layout{grid-template-columns:1fr;}
+  .id-source{order:1;}.id-boxes{order:2;}
+  .ord-layout{grid-template-columns:1fr;}
+}
+@media(max-width:520px){
+  .ex-layout{grid-template-columns:1fr;}
+  .id-card,.ord-card{font-size:12px;}
+}
+</style>
+</head>
+<body>
+<canvas id="fw-canvas"></canvas>
+<!-- MODAL HOME -->
+<div class="confirm-modal-overlay" id="confirm-home-modal">
+  <div class="confirm-modal">
+    <div class="confirm-modal-icon">🏠</div>
+    <div class="confirm-modal-title">Ir para o início?</div>
+    <div class="confirm-modal-text">Tem certeza que quer ir para a tela de escolher o jogo?</div>
+    <div class="confirm-modal-btns">
+      <button class="confirm-btn-yes" onclick="goToIndex()">Sim, ir!</button>
+      <button class="confirm-btn-no" onclick="closeHomeModal()">Não, ficar</button>
+    </div>
+  </div>
+</div>
+<canvas id="starfield"></canvas>
+
+<div id="app">
+<nav class="navbar">
+  <div class="nav-logo">&#x1F4D6; Projeto Serafina</div>
+  <div class="nav-right">
+    <button class="nav-btn nb-index" onclick="showHomeModal()">🏠 Home</button>
+    <div class="nav-score">&#x2B50; <span id="score-val">0</span> pts</div>
+    <button class="nav-btn nb-home" onclick="goHome()">&#x1F3E0; Inicio</button>
+    <button class="nav-btn nb-back" id="btn-back" onclick="backLevel()" style="display:none">&#x23EE; Voltar</button>
+    <button class="nav-btn nb-skip" id="btn-skip" onclick="skipLevel()" style="display:none">&#x23ED; Avan&ccedil;ar</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btn-theme" onclick="toggleTheme()">&#x1F31D;</button>
+      <button class="nav-a11y-btn" onclick="changeFontSize(-1)">A&#x2212;</button>
+      <button class="nav-a11y-btn" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn nb-help" onclick="showHelp()">&#x2753;</button>
+    </div>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<div id="screen-intro" class="screen active">
+  <div style="text-align:center;padding-top:8px;">
+    <div class="intro-badge">&#x1F4D3; Projeto Serafina</div>
+    <span class="intro-mascot">&#x1F4D3;</span>
+    <div class="intro-title">O G&ecirc;nero Textual Di&aacute;rio!</div>
+    <div class="intro-sub">Aprenda as partes do di&aacute;rio e escreva o seu!</div>
+    <div class="part-pills">
+      <div class="part-pill" onclick="goToTeo()">
+        <div class="part-pill-icon">&#x1F4DA;</div>
+        <div class="part-pill-num">1</div>
+        <div class="part-pill-title">As partes do Diario</div>
+        <div class="part-pill-desc">Aprenda cada<br>parte do diario</div>
+      </div>
+      <div class="part-pill" onclick="goToEx()">
+        <div class="part-pill-icon">&#x1F50D;</div>
+        <div class="part-pill-num">2</div>
+        <div class="part-pill-title">Ver exemplos</div>
+        <div class="part-pill-desc">Leia diarios<br>da Serafina</div>
+      </div>
+      <div class="part-pill" onclick="goToLevel(0)">
+        <div class="part-pill-icon">&#x1F3AF;</div>
+        <div class="part-pill-num">3</div>
+        <div class="part-pill-title">Identifique as partes</div>
+        <div class="part-pill-desc">Arraste cada parte<br>para o lugar certo</div>
+      </div>
+      <div class="part-pill" onclick="goToLevel(1)">
+        <div class="part-pill-icon">&#x1F522;</div>
+        <div class="part-pill-num">4</div>
+        <div class="part-pill-title">Monte o diario</div>
+        <div class="part-pill-desc">Ordene as partes<br>na sequencia certa</div>
+      </div>
+      <div class="part-pill" onclick="goToBonus()">
+        <div class="part-pill-icon">&#x270D;&#xFE0F;</div>
+        <div class="part-pill-num">&#x2605;</div>
+        <div class="part-pill-title">Meu proprio diario</div>
+        <div class="part-pill-desc">Escreva e imprima<br>seu diario!</div>
+      </div>
+    </div>
+    <div class="intro-tip">&#x1F4F1; Celular: toque nos itens &nbsp;&#x1F4BB; Computador: clique ou arraste</div>
+    <button class="btn btn-start" onclick="goToTeo()">&#x1F680; Comecar Aventura!</button>
+  </div>
+</div>
+
+<!-- TEORIA -->
+<div id="screen-teoria" class="screen">
+  <div class="teoria-title">&#x1F4D3; As 5 Partes do Diario</div>
+  <div class="teoria-sub">O diario tem sempre a mesma estrutura. Veja cada parte!</div>
+  <div class="teoria-cards" id="teoria-cards"></div>
+  <div class="btn-row">
+    <button class="btn btn-next" onclick="goToEx()">&#x1F50D; Ver exemplos &#x27A1;</button>
+    <button class="btn btn-home-lg" onclick="goHome()">&#x1F3E0; Inicio</button>
+  </div>
+</div>
+
+<!-- EXEMPLOS -->
+<div id="screen-exemplos" class="screen">
+  <div class="ex-header">
+    <div class="ex-title">&#x1F4D3; Diario da Serafina</div>
+    <div class="ex-sub">Clique em cada parte do diario para entender o que e!</div>
+  </div>
+  <div class="ex-layout">
+    <div class="notebook" id="notebook"></div>
+    <div class="ex-legend" id="ex-legend"></div>
+  </div>
+  <div class="ex-nav">
+    <button class="btn btn-replay" onclick="prevEx()">&#x2190; Anterior</button>
+    <span class="ex-count" id="ex-count">1 / 6</span>
+    <button class="btn btn-replay" onclick="nextEx()">Proximo &#x2192;</button>
+  </div>
+  <div class="btn-row" style="margin-top:14px;">
+    <button class="btn btn-next" onclick="goToLevel(0)">&#x1F3AE; Ir para os exercicios &#x27A1;</button>
+    <button class="btn btn-home-lg" onclick="goHome()">&#x1F3E0; Inicio</button>
+  </div>
+</div>
+
+<!-- GAME -->
+<div id="screen-game" class="screen">
+  <div class="game-body">
+    <div class="level-bar">
+      <div class="level-steps" id="level-steps"></div>
+      <div style="text-align:right;">
+        <div class="li-title" id="li-title">Nivel 1</div>
+        <div class="li-desc" id="li-desc"></div>
+      </div>
+    </div>
+    <div class="sera-bubble" id="sera-bubble">
+      <div class="sera-icon">&#x1F467;</div>
+      <div>
+        <div class="sera-main" id="sera-main">Vamos comecar!</div>
+        <div class="sera-sub" id="sera-sub"></div>
+      </div>
+    </div>
+    <div id="game-content"></div>
+    <div class="btn-row" id="btn-row">
+      <button class="btn btn-check" onclick="checkAnswer()">&#x2714;&#xFE0F; Verificar</button>
+      <button class="btn btn-hint" onclick="showHint()">&#x1F4A1; Dica</button>
+      <button class="btn btn-replay" onclick="replayLevel()">&#x1F504; Mudar hist&oacute;ria</button>
+    </div>
+  </div>
+</div>
+
+<!-- LEVEL COMPLETE -->
+<div id="screen-levelcomplete" class="screen">
+  <div style="text-align:center;padding-top:14px;">
+    <div class="lc-mascot">&#x1F389;</div>
+    <div class="lc-title" id="lc-title">Nivel Completo!</div>
+    <div class="stars-row">
+      <span class="star" id="star1">&#x2B50;</span>
+      <span class="star" id="star2">&#x2B50;</span>
+      <span class="star" id="star3">&#x2B50;</span>
+    </div>
+    <div class="lc-msg" id="lc-msg"></div>
+    <div class="btn-row">
+      <button class="btn btn-next" id="btn-lc-next" onclick="nextLevel()">Proximo &#x27A1;</button>
+      <button class="btn btn-home-lg" onclick="goHome()">&#x1F3E0; Inicio</button>
+    </div>
+  </div>
+</div>
+
+<!-- BONUS -->
+<div id="screen-bonus" class="screen">
+  <div class="bonus-title">&#x270D;&#xFE0F; Meu Proprio Diario!</div>
+  <div class="bonus-sub">Escreva seu diario e veja ele ficar lindo!</div>
+  <div class="bonus-layout">
+    <div class="bonus-form">
+      <div class="form-field">
+        <div class="form-label" style="color:#fb923c;">&#x1F4CD; Local e Data</div>
+        <input class="form-input" id="f-date" type="text" placeholder="Ex: Sao Paulo, 7 de marco de 2026" oninput="updatePreview()">
+      </div>
+      <div class="form-field">
+        <div class="form-label" style="color:#f472b6;">&#x1F48C; Saudacao</div>
+        <input class="form-input" id="f-greeting" type="text" placeholder="Ex: Querido Diario," oninput="updatePreview()">
+      </div>
+      <div class="form-field">
+        <div class="form-label" style="color:#a78bfa;">&#x1F4DD; O que aconteceu</div>
+        <textarea class="form-textarea" id="f-body" placeholder="Conta tudo o que aconteceu hoje! Como voce se sentiu?" oninput="updatePreview()"></textarea>
+        <div style="background:rgba(167,139,250,.09);border:1px solid rgba(167,139,250,.25);border-radius:10px;padding:8px 12px;font-size:11px;font-weight:700;color:rgba(167,139,250,.85);line-height:1.7;margin-top:4px;">
+          &#x1F4A1; <strong>Dica de escrita:</strong> tente contar
+          <span style="color:#f472b6;">quem</span> estava l&aacute;,
+          <span style="color:#fb923c;">onde</span> aconteceu,
+          <span style="color:#34d399;">o que aconteceu</span>
+          e <span style="color:#fbbf24;">como terminou</span>!
+        </div>
+      </div>
+      <div class="form-field">
+        <div class="form-label" style="color:#34d399;">&#x1F44B; Despedida</div>
+        <input class="form-input" id="f-farewell" type="text" placeholder="Ex: Com carinho," oninput="updatePreview()">
+      </div>
+      <div class="form-field">
+        <div class="form-label" style="color:#fbbf24;">&#x270D;&#xFE0F; Assinatura</div>
+        <input class="form-input" id="f-signature" type="text" placeholder="Seu nome" oninput="updatePreview()">
+      </div>
+      <div class="btn-row" style="justify-content:flex-start;">
+        <button class="btn btn-primary" onclick="viewDiary()">&#x1F4C4; Ver meu diario!</button>
+        <button class="btn btn-home-lg" onclick="goHome()">&#x1F3E0; Inicio</button>
+      </div>
+    </div>
+    <div class="bonus-checklist">
+      <div class="cl-title">&#x2705; Checklist</div>
+      <div class="cl-item">
+        <div class="cl-check" id="cl-date"></div>
+        <div class="cl-text" style="color:#fb923c;">Local e data escritos</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check" id="cl-greeting"></div>
+        <div class="cl-text" style="color:#f472b6;">Saudacao escrita</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check" id="cl-body"></div>
+        <div class="cl-text" style="color:#a78bfa;">Contou o que aconteceu</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check" id="cl-farewell"></div>
+        <div class="cl-text" style="color:#34d399;">Despedida escrita</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check" id="cl-signature"></div>
+        <div class="cl-text" style="color:#fbbf24;">Assinatura colocada</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRINT -->
+<div id="screen-print" class="screen">
+  <div style="text-align:center;padding-top:8px;">
+    <div class="print-notice">
+      <div class="print-notice-icon">&#x1F4DE;</div>
+      <div class="print-notice-text">Chame um adulto para salvar!<br>Clique em <strong>Imprimir</strong> e escolha <strong>"Salvar como PDF"</strong>.</div>
+    </div>
+    <div class="print-preview" id="print-preview">
+      <div class="pp-date" id="pp-date"></div>
+      <div class="pp-greeting" id="pp-greeting"></div>
+      <div class="pp-body" id="pp-body"></div>
+      <div class="pp-farewell" id="pp-farewell"></div>
+      <div class="pp-signature" id="pp-signature"></div>
+    </div>
+    <div class="btn-row no-print">
+      <button class="btn btn-print" onclick="window.print()">&#x1F5A8;&#xFE0F; Imprimir / Salvar PDF</button>
+      <button class="btn btn-replay" onclick="showScreen('screen-bonus')">&#x270F;&#xFE0F; Editar</button>
+      <button class="btn btn-home-lg" onclick="goHome()">&#x1F3E0; Inicio</button>
+    </div>
+  </div>
+</div>
+
+<!-- VICTORY -->
+<div id="screen-victory" class="screen">
+  <div style="text-align:center;padding-top:14px;">
+    <div class="vic-mascot">&#x1F3C6;</div>
+    <div class="vic-title">Expert em Diarios!</div>
+    <div class="vic-stars" id="vic-stars"></div>
+    <div class="vic-msg" id="vic-msg"></div>
+    <div class="vic-score" id="vic-score"></div>
+    <div class="btn-row">
+      <button class="btn btn-start" onclick="restartGame()">&#x1F504; Jogar Novamente</button>
+      <button class="btn btn-primary" onclick="goToBonus()">&#x270D;&#xFE0F; Escrever meu diario</button>
+      <button class="btn btn-home-lg" onclick="goHome()">&#x1F3E0; Inicio</button>
+    </div>
+  </div>
+</div>
+</div><!-- /app -->
+
+<div id="help-overlay" onclick="closeHelp(event)">
+  <div class="help-box">
+    <button class="help-close" onclick="closeHelp()">&#x2715;</button>
+    <span class="help-icon" id="help-icon">&#x1F4D3;</span>
+    <div class="help-title" id="help-title">Como jogar?</div>
+    <div class="help-text" id="help-text"></div>
+    <button class="help-btn-ok" onclick="closeHelp()">Entendi! &#x1F60A;</button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  PARTES DO DIARIO (constante, com cores)
+// ============================================================
+var PARTS=[
+  {id:'date',    label:'Local e Data',        icon:'&#x1F4CD;', color:'#fb923c', bgAlpha:'rgba(251,146,60,.12)',  bdAlpha:'rgba(251,146,60,.4)',  desc:'Onde e quando o diario foi escrito'},
+  {id:'greeting',label:'Saudacao',            icon:'&#x1F48C;', color:'#f472b6', bgAlpha:'rgba(244,114,182,.12)', bdAlpha:'rgba(244,114,182,.4)', desc:'Como começa — ex: Querido Diario,'},
+  {id:'body',    label:'O que aconteceu',     icon:'&#x1F4DD;', color:'#a78bfa', bgAlpha:'rgba(167,139,250,.12)', bdAlpha:'rgba(167,139,250,.4)', desc:'A historia do dia, sentimentos'},
+  {id:'farewell',label:'Despedida',           icon:'&#x1F44B;', color:'#34d399', bgAlpha:'rgba(52,211,153,.12)',  bdAlpha:'rgba(52,211,153,.4)',  desc:'Como termina — ex: Com carinho,'},
+  {id:'signature',label:'Assinatura',         icon:'&#x270D;&#xFE0F;',  color:'#fbbf24', bgAlpha:'rgba(251,191,36,.12)',  bdAlpha:'rgba(251,191,36,.4)',  desc:'Quem escreveu o diario'},
+];
+
+// ============================================================
+//  BANCO DE DIARIOS DA SERAFINA (6 exemplos — teoria e exemplos)
+// ============================================================
+var SERAFINA_DIARIES=[
+  {
+    date:'Sao Paulo, 3 de marco de 2025',
+    greeting:'Querido Diario,',
+    body:'Hoje eu encontrei um lugar secreto no jardim da escola! Por tras do pé de manga grande tem um espacinho com pedras e folhas secas. Eu sentei la um tempinho e parecia que era so meu. Fiquei tao feliz que quase contei para todo mundo, mas resolvi guardar o segredo.',
+    farewell:'Com muito amor,',
+    signature:'Serafina'
+  },
+  {
+    date:'Rio de Janeiro, 10 de fevereiro de 2025',
+    greeting:'Meu querido Diario,',
+    body:'Hoje foi dia de pular corda na hora do recreio! Eu e minha amiga Bianca ficamos tentando bater o recorde de puladas sem parar. Eu cheguei ate 37! Meu coracao ficou acelerado e eu ri muito. A Bianca disse que sou a melhor puladora da turma. Fiquei com as bochechas vermelhas de tanto sorrir.',
+    farewell:'Ate amanha,',
+    signature:'Serafina'
+  },
+  {
+    date:'Curitiba, 18 de janeiro de 2025',
+    greeting:'Oi, Diario!',
+    body:'Choveu o dia todo e eu nao pude brincar la fora. Mas a mamae me ensinou a fazer origami de sapo! Dobramos o papel muitas vezes e no final o sapinho pulava de verdade quando a gente apertava ele. Fiz seis sapinhos e coloquei na janela para ver a chuva.',
+    farewell:'Com carinho,',
+    signature:'Serafina'
+  },
+  {
+    date:'Salvador, 25 de abril de 2025',
+    greeting:'Querido Diario,',
+    body:'Hoje fui visitar a vovo Dora. Ela me contou historias de quando era crianca e brincava de cabra-cega na rua. Parecia tao diferente! Depois comemos bolo de laranja quentinho. O cheiro da casa da vovo e o melhor do mundo. Queria que todos os dias fossem assim.',
+    farewell:'Saudades da vovo,',
+    signature:'Serafina'
+  },
+  {
+    date:'Belo Horizonte, 7 de maio de 2025',
+    greeting:'Diario, voce nao vai acreditar!',
+    body:'Hoje na biblioteca achei um livro com fotos de borboletas de todo o Brasil. Tinha uma azul brilhante chamada Morpho que parecia de outro planeta. A bibliotecaria deixou eu ficar olhando por um tempo extra. Quero ser cientista de borboletas quando crescer. Ou escritora. Ou as duas coisas!',
+    farewell:'Com muita curiosidade,',
+    signature:'Serafina'
+  },
+  {
+    date:'Fortaleza, 14 de junho de 2025',
+    greeting:'Querido Diario,',
+    body:'Hoje tive um dia dificil. Eu esqueci meu estojo em casa e tive que pedir emprestado para a Luisa. Ela me emprestou sem reclamar, mas eu fiquei com vergonha. No intervalo eu dei para ela metade do meu biscoito para agradecer. Ela ficou feliz e eu me senti melhor. As vezes ajudar o outro faz a gente se sentir bem tambem.',
+    farewell:'Com licao aprendida,',
+    signature:'Serafina'
+  },
+];
+
+// ============================================================
+//  CONTEXTOS DO JOGO (20 situacoes universais — crianca de 7 anos)
+// ============================================================
+var GAME_CONTEXTS=[
+  {
+    date:'Sao Paulo, 3 de marco de 2026',
+    greeting:'Querido Diario,',
+    body:'Primeiro dia na escola nova — fiquei nervosa quando cheguei. Mas a Ana me mostrou tudo e a gente almocou juntas. Depois voltei para casa bem mais feliz do que imaginava!',
+    farewell:'Ate amanha,',
+    signature:'Ana Clara Souza'
+  },
+  {
+    date:'Rio de Janeiro, 15 de fevereiro de 2026',
+    greeting:'Meu querido Diario,',
+    body:'Fiz sete anos hoje e a mamae fez bolo de chocolate com morango! Depois vieram meus amigos brincar de cabra-cega no quintal. Ganhei um livro e uma caixa de lapis de cor com 48 cores!',
+    farewell:'Com muito amor,',
+    signature:'Pedro Lima'
+  },
+  {
+    date:'Curitiba, 20 de janeiro de 2026',
+    greeting:'Oi, Diario!',
+    body:'Fui visitar o vovo e a vova me ensinou a fazer bolo de fuba. Mexi a massa com a colher de pau e o cheiro do forno aquecia a cozinha toda. Por isso quero ir la toda semana!',
+    farewell:'Com carinho,',
+    signature:'Julia Santos'
+  },
+  {
+    date:'Belo Horizonte, 8 de abril de 2026',
+    greeting:'Querido Diario,',
+    body:'Tinha prova de matematica hoje e fiquei nervosa desde ontem. Mas estudei com o papai, respirei fundo e fui fazendo devagar. Acho que acertei quase tudo — nao vejo a hora de saber!',
+    farewell:'Ate amanha,',
+    signature:'Mariana Costa'
+  },
+  {
+    date:'Salvador, 5 de maio de 2026',
+    greeting:'Querido Diario,',
+    body:'Fui ao parque com a familia e deitamos na grama para ver as nuvens. Eu e meu irmao corremos tanto que ficamos tontos de girar. De repente vimos uma iguana numa pedra e so eu nao tive medo!',
+    farewell:'Ate logo,',
+    signature:'Lucas Pereira'
+  },
+  {
+    date:'Fortaleza, 12 de junho de 2026',
+    greeting:'Meu Diario,',
+    body:'A mamae trouxe um filhotinho de coelho de surpresa! Ele e branco, com orelhas cor de rosa e o narizinho tremendo. Fiquei horas olhando e ainda nao sei que nome dar.',
+    farewell:'Com amor,',
+    signature:'Sofia Alves'
+  },
+  {
+    date:'Manaus, 22 de agosto de 2026',
+    greeting:'Querido Diario,',
+    body:'Eu e meu amigo brigamos por causa de um brinquedo e ele ficou triste. Entao fui la pedir desculpa e a gente brincou junto o resto do recreio. Aprendi que compartilhar e melhor do que ficar de briga!',
+    farewell:'Com carinho,',
+    signature:'Gabriel Mendes'
+  },
+  {
+    date:'Porto Alegre, 10 de julho de 2026',
+    greeting:'Oi, Diario!',
+    body:'Fui ao cinema ver o filme dos pinguins espaciais e foi emocionante demais! Comi pipoca com manteiga e no final todo mundo aplaudiu. Quero ver de novo ja na semana que vem!',
+    farewell:'Beijos,',
+    signature:'Beatriz Rocha'
+  },
+  {
+    date:'Recife, 3 de setembro de 2026',
+    greeting:'Querido Diario,',
+    body:'Aprendi a andar de bicicleta sem rodinha! O papai soltou o selim e eu fui ate o fundo do quintal sozinho, sem cair. Ralei o joelho numa tentativa mas nao chorei — sou ciclista de verdade!',
+    farewell:'Ate amanha,',
+    signature:'Rafael Cardoso'
+  },
+  {
+    date:'Florianopolis, 18 de outubro de 2026',
+    greeting:'Meu querido Diario,',
+    body:'Choveu o dia todo e eu nao podia sair. Entao aprendi origami de sapo e coloquei uma fileira na janela para ver a chuva. Depois tomamos chocolate quente e assisti a um filme.',
+    farewell:'Com carinho,',
+    signature:'Camila Teixeira'
+  },
+  {
+    date:'Goiania, 24 de junho de 2026',
+    greeting:'Meu Diario,',
+    body:'Festa junina na escola com roupa de caipira e chapeu de palha! Dancei quadrilha e quase derrubei meu par na hora de girar. Depois comi canjica, pe de moleque e ganhei um pato na pescaria!',
+    farewell:'Ate logo,',
+    signature:'Enzo Ferreira'
+  },
+  {
+    date:'Vitoria, 9 de novembro de 2026',
+    greeting:'Oi, Diario!',
+    body:'Fui a um restaurante japones pela primeira vez e escolhi sashimi. Comi com hashis — foi dificil no comeco, mas logo aprendi o jeito. Depois veio sorvete de cha verde, estranho e gostoso ao mesmo tempo!',
+    farewell:'Ate amanha,',
+    signature:'Larissa Gomes'
+  },
+  {
+    date:'Natal, 14 de agosto de 2026',
+    greeting:'Querido Diario,',
+    body:'Fui a biblioteca e podia escolher qualquer livro para levar para casa. Fiquei cheirando as prateleiras um tempao ate achar um com uma girafa astronauta na capa. Mal posso esperar para ler hoje a noite!',
+    farewell:'Com carinho,',
+    signature:'Thiago Barbosa'
+  },
+  {
+    date:'Campo Grande, 5 de janeiro de 2026',
+    greeting:'Meu Diario,',
+    body:'Fui a praia pela primeira vez e a areia estava tao quente que eu corria ate a agua! As ondas chegavam geladas e eu tentei pegar uma, mas cai e engoli agua salgada. Mesmo assim foi divertido demais!',
+    farewell:'Com amor,',
+    signature:'Isabela Cruz'
+  },
+  {
+    date:'Maceio, 11 de setembro de 2026',
+    greeting:'Querido Diario,',
+    body:'Fiquei com febre em casa e nao fui a escola. A vovo veio me ver, trouxe sopa quentinha e assistimos um desenho antigo juntas. Depois dormi muito e amanha espero estar melhor.',
+    farewell:'Beijos,',
+    signature:'Leticia Freitas'
+  },
+  {
+    date:'Belem, 27 de julho de 2026',
+    greeting:'Oi, Diario!',
+    body:'Fui ao zoologico e vi animais que so conhecia em foto! O leao dormia perto do vidro e tive medo da cobra enorme. Mas meu favorito foi o flamingo cor de rosa que fica em pe numa perna so.',
+    farewell:'Ate amanha,',
+    signature:'Felipe Rodrigues'
+  },
+  {
+    date:'Teresina, 19 de dezembro de 2025',
+    greeting:'Meu querido Diario,',
+    body:'O papai chegou com uma caixa embrulhada sem motivo nenhum — era um kit de vulcao! Fizemos a experiencia na varanda e a espuma escorreu por tudo. A mamae nao ficou feliz com a sujeira, mas a gente riu muito!',
+    farewell:'Ate logo,',
+    signature:'Victor Nascimento'
+  },
+  {
+    date:'Joao Pessoa, 16 de maio de 2026',
+    greeting:'Oi, Diario!',
+    body:'Ajudei a mamae a varrer e lavar a louça depois do almoco. No final ela me deu um abraco apertado e disse que eu ja estou grande. Por isso esse abraco ficou quentinho no peito o dia todo!',
+    farewell:'Com carinho,',
+    signature:'Alice Martins'
+  },
+  {
+    date:'Aracaju, 30 de outubro de 2026',
+    greeting:'Oi, Diario!',
+    body:'A turma inteira brincou de pique-esconde e eu me escondi atras dos bambus. Ficaram me procurando cinco minutos inteiros — ninguem encontrava! Depois o sino tocou tao rapido que a gente mal acreditou.',
+    farewell:'Ate amanha,',
+    signature:'Diego Lopes'
+  },
+  {
+    date:'Macapa, 7 de abril de 2026',
+    greeting:'Querido Diario,',
+    body:'Depois da chuva apareceu um arco-iris enorme no ceu e eu chamei a familia correndo. Ficamos olhando juntos ate ele sumir devagar. Tentei pintar no caderno mas nunca fica tao bonito quanto o de verdade.',
+    farewell:'Com carinho,',
+    signature:'Clara Ribeiro'
+  },
+];
+
+// ============================================================
+//  TEORIA - descricoes de cada parte
+// ============================================================
+var TEORIA_EXTRA=[
+  'Escreve-se o lugar onde voce esta e o dia de hoje. Ex: "Sao Paulo, 7 de marco de 2026". Assim saberemos sempre quando esse dia aconteceu!',
+  'E como voce fala com o diario, como se ele fosse um amigo. Geralmente comeca com "Querido Diario," ou "Meu Diario,".',
+  'Aqui voce conta tudo o que aconteceu no seu dia: onde foi, com quem brincou, como se sentiu, o que aprendeu. E a parte mais longa!',
+  'E como voce se despede antes de assinar. Pode ser "Com carinho,", "Ate amanha," ou "Com amor,". Sempre tem uma virgula no final!',
+  'E o seu nome, que vai no final de tudo. Assim fica claro quem escreveu esse diario tao especial!',
+];
+
+// ============================================================
+//  STATE
+// ============================================================
+var G={
+  lvl:0, score:0, stars:0, hintsUsed:0, attempts:0, msgIdx:0,
+  exIdx:0, activeLeg:null,
+  // level 1 - identify
+  setIdx:0,
+  items:[],    // {partId, text, placed:null|partId, feedback:null|bool}
+  selCard:null, dragCard:null, feedback:null,
+  // level 2 - order
+  dz:[], src:[], dzFeedback:null, ordDrag:null, srcDrag:null,
+};
+
+var LVL=[
+  {id:1,title:'Nivel 1 de 2',desc:'Identifique cada parte do diario'},
+  {id:2,title:'Nivel 2 de 2',desc:'Monte o diario na ordem certa'},
+];
+
+var MSG=[
+  'Uau! Voce ja conhece todas as partes do diario! \uD83C\uDF1F',
+  'Incrivel! Seu cerebro e brilhante! \u2728',
+  'Parabens! Voce mandou muito bem! \uD83D\uDE04',
+  'Fantastico! Voce e expert em diarios! \uD83C\uDFC6',
+  'Que talento! Cada parte no lugar certinho! \uD83C\uDF08',
+  'Mandou bem! Aprender e a melhor aventura! \u2B50',
+];
+
+// ============================================================
+//  STARFIELD
+// ============================================================
+(function(){
+  var c=document.getElementById('starfield'),ctx=c.getContext('2d'),stars=[];
+  function resize(){c.width=innerWidth;c.height=innerHeight;stars=[];for(var i=0;i<180;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5+.2,a:Math.random(),da:(Math.random()-.5)*.005,sp:Math.random()*.15+.04});}
+  function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.y-=s.sp;if(s.y<-5)s.y=c.height+5;s.a+=s.da;if(s.a>1||s.a<.1)s.da*=-1;ctx.save();ctx.globalAlpha=s.a;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();ctx.restore();});requestAnimationFrame(draw);}
+  resize();window.addEventListener('resize',resize);draw();
+})();
+
+function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=~~(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
+function nextMsg(){var m=MSG[G.msgIdx%MSG.length];G.msgIdx++;return m;}
+function setMsg(txt,type){var b=document.getElementById('sera-bubble');b.className='sera-bubble'+(type?' '+type:'');document.getElementById('sera-main').textContent=txt;document.getElementById('sera-sub').textContent='';}
+
+// ============================================================
+//  SCREENS
+// ============================================================
+var _currentScreen='screen-intro';
+function showScreen(id){
+  _currentScreen=id;
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  var isGame=id==='screen-game';
+  var isTeo=id==='screen-teoria';
+  var isEx=id==='screen-exemplos';
+  document.getElementById('btn-skip').style.display=(isGame||isTeo||isEx)?'flex':'none';
+  document.getElementById('btn-back').style.display=((isGame&&G.lvl>0)||isTeo||isEx)?'flex':'none';
+}
+function goHome(){showScreen('screen-intro');}
+function goToTeo(){showScreen('screen-teoria');revealTeoria();}
+function goToEx(){G.exIdx=0;showScreen('screen-exemplos');renderExample();}
+function goToBonus(){showScreen('screen-bonus');}
+function goToLevel(idx){
+  G.score=0;G.stars=0;G.msgIdx=0;G.hintsUsed=0;G.attempts=0;
+  document.getElementById('score-val').textContent='0';
+  G.lvl=idx;showScreen('screen-game');loadLevel();
+}
+function restartGame(){goToLevel(0);}
+function skipLevel(){
+  if(_currentScreen==='screen-teoria'){goToEx();return;}
+  if(_currentScreen==='screen-exemplos'){goToLevel(0);return;}
+  if(!confirm('Pular este nivel?'))return;
+  G.lvl++;
+  if(G.lvl>=LVL.length){showVictory();return;}
+  showScreen('screen-game');loadLevel();
+}
+function backLevel(){
+  if(_currentScreen==='screen-teoria'){goHome();return;}
+  if(_currentScreen==='screen-exemplos'){goToTeo();return;}
+  if(G.lvl<=0){goToEx();return;}
+  G.lvl--;showScreen('screen-game');loadLevel();
+}
+function nextLevel(){
+  G.lvl++;
+  if(G.lvl>=LVL.length){showVictory();return;}
+  showScreen('screen-game');loadLevel();
+}
+
+// ============================================================
+//  TEORIA
+// ============================================================
+function revealTeoria(){
+  var cont=document.getElementById('teoria-cards');cont.innerHTML='';
+  PARTS.forEach(function(p,i){
+    var card=document.createElement('div');
+    card.className='teoria-card';
+    card.style.background=p.bgAlpha;
+    card.style.border='1px solid '+p.bdAlpha;
+    card.innerHTML='<div class="tc-icon" style="background:'+p.bgAlpha+';color:'+p.color+';">'+p.icon+'</div>'
+      +'<div class="tc-body"><div class="tc-label" style="color:'+p.color+';">Parte '+(i+1)+' de 5</div>'
+      +'<div class="tc-title" style="color:'+p.color+';">'+p.label+'</div>'
+      +'<div class="tc-desc">'+TEORIA_EXTRA[i]+'</div>'
+      +'<div class="tc-example" style="background:'+p.bgAlpha+';color:'+p.color+';">'
+      +getExampleText(p.id,0)+'</div></div>';
+    cont.appendChild(card);
+    setTimeout(function(c){return function(){c.classList.add('revealed');};}(card), 120*i+80);
+  });
+}
+function getExampleText(partId,dIdx){
+  var d=SERAFINA_DIARIES[dIdx];
+  if(partId==='date')return d.date;
+  if(partId==='greeting')return d.greeting;
+  if(partId==='body')return d.body;
+  if(partId==='farewell')return d.farewell;
+  if(partId==='signature')return d.signature;
+  return '';
+}
+
+// ============================================================
+//  EXEMPLOS
+// ============================================================
+function renderExample(){
+  var d=SERAFINA_DIARIES[G.exIdx];
+  var nb=document.getElementById('notebook');
+  nb.innerHTML='';
+  var parts=[
+    {id:'date',text:d.date},{id:'greeting',text:d.greeting},
+    {id:'body',text:d.body},{id:'farewell',text:d.farewell},{id:'signature',text:d.signature}
+  ];
+  parts.forEach(function(p){
+    var pi=getPart(p.id);
+    var el=document.createElement('div');
+    el.className='diary-part dp-'+p.id;
+    el.dataset.pid=p.id;
+    el.textContent=p.text;
+    el.style.color=pi.color.replace('rgba','').replace(/,.+\)/,''); // keep hex
+    el.addEventListener('click',function(){activateLeg(p.id);});
+    nb.appendChild(el);
+  });
+
+  var leg=document.getElementById('ex-legend');leg.innerHTML='';
+  PARTS.forEach(function(pi){
+    var item=document.createElement('div');
+    item.className='legend-item';
+    item.style.background=pi.bgAlpha;
+    item.style.borderColor=G.activeLeg===pi.id?pi.color:'transparent';
+    item.dataset.pid=pi.id;
+    item.innerHTML='<div style="display:flex;align-items:center;gap:8px;">'
+      +'<div class="leg-dot" style="background:'+pi.color+';"></div>'
+      +'<div><div class="leg-label" style="color:'+pi.color+';">'+pi.label+'</div>'
+      +'<div class="leg-desc">'+pi.desc+'</div></div></div>';
+    item.addEventListener('click',function(){activateLeg(pi.id);});
+    leg.appendChild(item);
+  });
+
+  document.getElementById('ex-count').textContent=(G.exIdx+1)+' / '+SERAFINA_DIARIES.length;
+  if(G.activeLeg)highlightActive(G.activeLeg);
+}
+function activateLeg(pid){
+  G.activeLeg=pid;
+  document.querySelectorAll('.legend-item').forEach(function(el){
+    var pi=getPart(el.dataset.pid);
+    el.style.borderColor=el.dataset.pid===pid?pi.color:'transparent';
+    el.classList.toggle('leg-active',el.dataset.pid===pid);
+  });
+  highlightActive(pid);
+}
+function highlightActive(pid){
+  document.querySelectorAll('.diary-part').forEach(function(el){
+    el.classList.remove('dp-active');
+    if(el.dataset.pid===pid){
+      var pi=getPart(pid);
+      el.classList.add('dp-active');
+      el.style.background=pi.bgAlpha;
+    } else {
+      el.style.background='';
+    }
+  });
+}
+function nextEx(){G.exIdx=(G.exIdx+1)%SERAFINA_DIARIES.length;renderExample();}
+function prevEx(){G.exIdx=(G.exIdx+SERAFINA_DIARIES.length-1)%SERAFINA_DIARIES.length;renderExample();}
+function getPart(id){return PARTS.filter(function(p){return p.id===id;})[0];}
+
+// ============================================================
+//  LOAD LEVEL
+// ============================================================
+function loadLevel(){
+  G.hintsUsed=0;G.attempts=0;G.feedback=null;G.selCard=null;G.dragCard=null;
+  G.dzFeedback=null;G.ordDrag=null;G.srcDrag=null;
+  // Pick a random context different from last
+  var prev=G.setIdx;
+  do{G.setIdx=~~(Math.random()*GAME_CONTEXTS.length);}while(G.setIdx===prev&&GAME_CONTEXTS.length>1);
+  var d=GAME_CONTEXTS[G.setIdx];
+  if(G.lvl===0){
+    // Level 1: identify — shuffle 5 part blocks
+    var arr=[
+      {partId:'date',    text:d.date},
+      {partId:'greeting',text:d.greeting},
+      {partId:'body',    text:d.body},
+      {partId:'farewell',text:d.farewell},
+      {partId:'signature',text:d.signature},
+    ];
+    G.items=shuffle(arr).map(function(x){return {partId:x.partId,text:x.text,placed:null};});
+    G.feedback=null;
+  } else {
+    // Level 2: order
+    var arr2=[
+      {partId:'date',    text:d.date},
+      {partId:'greeting',text:d.greeting},
+      {partId:'body',    text:d.body},
+      {partId:'farewell',text:d.farewell},
+      {partId:'signature',text:d.signature},
+    ];
+    G.src=shuffle(arr2);
+    G.dz=[];
+    G.dzFeedback=null;
+  }
+  renderLevel();
+}
+
+// ============================================================
+//  RENDER LEVEL
+// ============================================================
+function renderLevel(){
+  var cfg=LVL[G.lvl];
+  var stEl=document.getElementById('level-steps');stEl.innerHTML='';
+  for(var i=0;i<LVL.length;i++){
+    var d=document.createElement('div');
+    d.className='step '+(i<G.lvl?'done':i===G.lvl?'active':'pending');
+    d.textContent=i<G.lvl?'\u2713':(i+1);
+    if(i<G.lvl)(function(ii){d.addEventListener('click',function(){G.lvl=ii;showScreen('screen-game');loadLevel();});})(i);
+    stEl.appendChild(d);
+  }
+  document.getElementById('li-title').textContent=cfg.title;
+  document.getElementById('li-desc').textContent=cfg.desc;
+  document.getElementById('score-val').textContent=G.score;
+  document.getElementById('btn-back').style.display=G.lvl>0?'flex':'none';
+  if(G.lvl===0)renderIdentify();else renderOrder();
+  updateInstruction();
+}
+
+// ============================================================
+//  RENDER LEVEL 1 — IDENTIFY
+// ============================================================
+function renderIdentify(){
+  var gc=document.getElementById('game-content');gc.innerHTML='';
+  var layout=document.createElement('div');layout.className='id-layout';
+
+  // Source area
+  var src=document.createElement('div');src.className='id-source';
+  var sl=document.createElement('div');sl.className='id-source-label';
+  sl.textContent='\uD83D\uDCDA Arraste cada parte para a caixa certa (ou clique para selecionar):';
+  src.appendChild(sl);
+  var row=document.createElement('div');row.className='id-cards-row';row.id='id-src-row';
+  G.items.forEach(function(item,i){
+    if(item.placed!==null)return;
+    row.appendChild(makeIdCard(item,i,false));
+  });
+  if(!row.children.length){
+    var e=document.createElement('div');e.className='id-source-label';
+    e.textContent='Todas as partes foram colocadas!';row.appendChild(e);
+  }
+  src.appendChild(row);
+
+  // Drag back to source
+  src.addEventListener('dragover',function(e){if(G.dragCard!==null&&G.items[G.dragCard]&&G.items[G.dragCard].placed!==null)e.preventDefault();});
+  src.addEventListener('drop',function(e){e.preventDefault();if(G.dragCard!==null&&G.items[G.dragCard]){G.items[G.dragCard].placed=null;G.feedback=null;G.selCard=null;G.dragCard=null;renderIdentify();updateInstruction();}});
+  layout.appendChild(src);
+
+  // Drop boxes
+  var boxes=document.createElement('div');boxes.className='id-boxes';
+  PARTS.forEach(function(pi){
+    var box=document.createElement('div');
+    box.className='id-box';
+    box.style.background=pi.bgAlpha;
+    box.style.borderColor=pi.color.replace('#','rgba(').replace(/$/,', .4)').replace('rgba(','rgba(').replace('rgba(#','#');
+    // fix border color
+    box.style.borderColor=pi.bdAlpha;
+    var lbl=document.createElement('div');lbl.className='id-box-label';
+    lbl.style.color=pi.color;lbl.innerHTML=pi.icon+' '+pi.label;
+    box.appendChild(lbl);
+    var content=document.createElement('div');content.className='id-box-content';
+    // Find placed item
+    var placed=null;
+    G.items.forEach(function(item,i){if(item.placed===pi.id){placed={item:item,i:i};}});
+    if(placed){
+      var c=makeIdCard(placed.item,placed.i,true);
+      if(G.feedback&&G.feedback[placed.i]!==undefined)c.classList.add(G.feedback[placed.i]?'ic-ok':'ic-err');
+      content.appendChild(c);
+    } else {
+      var e=document.createElement('div');e.className='id-box-empty';e.textContent='Arraste ou clique aqui';content.appendChild(e);
+    }
+    box.appendChild(content);
+    // Drop handler
+    (function(pid){
+      box.addEventListener('dragover',function(e){e.preventDefault();box.classList.add('drag-over');});
+      box.addEventListener('dragleave',function(){box.classList.remove('drag-over');});
+      box.addEventListener('drop',function(e){e.preventDefault();box.classList.remove('drag-over');placeItem(G.dragCard,pid);});
+      box.addEventListener('click',function(e){if(e.target===box||e.target===content||e.target.className==='id-box-empty'){if(G.selCard!==null)placeItem(G.selCard,pid);}});
+    })(pi.id);
+    boxes.appendChild(box);
+  });
+  layout.appendChild(boxes);
+  gc.appendChild(layout);
+}
+
+function makeIdCard(item,idx,placed){
+  var pi=getPart(item.partId);
+  var card=document.createElement('div');
+  card.className='id-card';
+  card.textContent=item.text;
+  if(!placed){
+    card.draggable=true;
+    card.addEventListener('dragstart',function(){G.dragCard=idx;card.classList.add('ic-dragging');});
+    card.addEventListener('dragend',function(){G.dragCard=null;card.classList.remove('ic-dragging');});
+    card.addEventListener('click',function(e){e.stopPropagation();G.selCard=(G.selCard===idx)?null:idx;renderIdentify();updateInstruction();});
+    if(G.selCard===idx)card.classList.add('ic-sel');
+  } else {
+    var isCorrect=G.feedback&&G.feedback[idx]===true;
+    if(!isCorrect){
+      card.style.cursor='pointer';
+      card.draggable=true;
+      (function(ii){
+        card.addEventListener('click',function(e){e.stopPropagation();G.items[ii].placed=null;G.feedback=null;G.selCard=null;renderIdentify();updateInstruction();});
+        card.addEventListener('dragstart',function(){G.dragCard=ii;card.classList.add('ic-dragging');});
+        card.addEventListener('dragend',function(){G.dragCard=null;card.classList.remove('ic-dragging');});
+      })(idx);
+    }
+  }
+  return card;
+}
+
+function placeItem(idx,pid){
+  if(idx===null||idx===undefined)return;
+  // Displace existing card in target box back to unplaced
+  G.items.forEach(function(item,i){if(item.placed===pid&&i!==idx)item.placed=null;});
+  G.items[idx].placed=pid;
+  G.feedback=null;G.selCard=null;G.dragCard=null;
+  renderIdentify();updateInstruction();
+}
+
+// ============================================================
+//  RENDER LEVEL 2 — ORDER (LP-05 style)
+// ============================================================
+function renderOrder(){
+  var gc=document.getElementById('game-content');gc.innerHTML='';
+
+  // Drop zone
+  var dz=document.createElement('div');dz.className='ord-dz';dz.id='ord-dz';
+  var dl=document.createElement('div');dl.className='ord-dz-label';dl.textContent='Monte o diario na ordem certa \u2192 arraste as partes aqui:';
+  dz.appendChild(dl);
+
+  G.dz.forEach(function(item,i){
+    // Insert line before
+    var line=document.createElement('div');line.className='ord-insert-line';line.dataset.pos=i;dz.appendChild(line);
+    var pi=getPart(item.partId);
+    var card=document.createElement('div');
+    card.className='ord-card';
+    card.style.background=pi.bgAlpha;
+    card.style.borderColor=pi.bdAlpha;
+    card.style.color=pi.color;
+    if(G.dzFeedback&&G.dzFeedback[i]!==undefined){
+      card.classList.add(G.dzFeedback[i]?'oc-ok':'oc-err');
+      if(G.dzFeedback[i])card.style.background='linear-gradient(135deg,#16a34a,#4ade80)';
+      else card.style.background='linear-gradient(135deg,#dc2626,#f87171)';
+      card.style.color='#fff';
+    }
+    card.textContent=item.text;
+    var isOk=G.dzFeedback&&G.dzFeedback[i]===true;
+    if(!isOk){
+      card.draggable=true;
+      (function(ii){
+        card.addEventListener('click',function(){returnOrdToBankByIdx(ii);});
+        card.addEventListener('dragstart',function(){G.ordDrag={from:'dz',idx:ii};card.classList.add('oc-dragging');});
+        card.addEventListener('dragend',function(){G.ordDrag=null;card.classList.remove('oc-dragging');clearInsertLines();});
+      })(i);
+    }
+    dz.appendChild(card);
+  });
+  // Final insert line
+  var lastLine=document.createElement('div');lastLine.className='ord-insert-line';lastLine.dataset.pos=G.dz.length;dz.appendChild(lastLine);
+
+  // Drag over dz
+  dz.addEventListener('dragover',function(e){
+    e.preventDefault();
+    var lines=dz.querySelectorAll('.ord-insert-line');
+    clearInsertLines();
+    var closest=null,minD=Infinity;
+    lines.forEach(function(ln){var r=ln.getBoundingClientRect();var d=Math.abs(e.clientY-r.top);if(d<minD){minD=d;closest=ln;}});
+    if(closest)closest.classList.add('visible');
+  });
+  dz.addEventListener('dragleave',function(e){if(!dz.contains(e.relatedTarget))clearInsertLines();});
+  dz.addEventListener('drop',function(e){
+    e.preventDefault();
+    var lines=dz.querySelectorAll('.ord-insert-line');
+    var pos=G.dz.length;
+    lines.forEach(function(ln){if(ln.classList.contains('visible'))pos=parseInt(ln.dataset.pos);});
+    clearInsertLines();
+    dropOrdToDz(pos);
+  });
+  // Click dz to place selected src card
+  dz.addEventListener('click',function(e){
+    if(G.srcDrag!==null){dropOrdToDz(G.dz.length);}
+  });
+
+  var wrap=document.createElement('div');wrap.className='ord-layout';
+  wrap.appendChild(dz);
+
+  // Source area
+  var src=document.createElement('div');src.className='ord-src';
+  var sl=document.createElement('div');sl.className='ord-src-label';
+  sl.textContent='\uD83D\uDCDA Partes do diario \u2014 clique para selecionar ou arraste:';
+  src.appendChild(sl);
+  var row=document.createElement('div');row.className='ord-src-row';row.id='ord-src-row';
+  G.src.forEach(function(item,i){
+    var pi=getPart(item.partId);
+    var card=document.createElement('div');
+    card.className='ord-card'+(G.srcDrag===i?' oc-dragging':'');
+    card.style.background=pi.bgAlpha;
+    card.style.borderColor=pi.bdAlpha;
+    card.style.color=pi.color;
+    if(G.srcDrag===i)card.style.background='linear-gradient(135deg,#f59e0b,#fbbf24)';
+    card.textContent=item.text;
+    card.draggable=true;
+    (function(ii){
+      card.addEventListener('click',function(){G.srcDrag=(G.srcDrag===ii)?null:ii;renderOrder();updateInstruction();});
+      card.addEventListener('dragstart',function(){G.ordDrag={from:'src',idx:ii};G.srcDrag=ii;card.classList.add('oc-dragging');});
+      card.addEventListener('dragend',function(){G.ordDrag=null;clearInsertLines();});
+    })(i);
+    row.appendChild(card);
+  });
+  if(!row.children.length){
+    var e=document.createElement('div');e.className='ord-src-label';e.textContent='Todas as partes foram colocadas!';row.appendChild(e);
+  }
+  // Drag src card back from dz
+  src.addEventListener('dragover',function(e){if(G.ordDrag&&G.ordDrag.from==='dz')e.preventDefault();});
+  src.addEventListener('drop',function(e){e.preventDefault();if(G.ordDrag&&G.ordDrag.from==='dz'){returnOrdToBankByIdx(G.ordDrag.idx);}});
+  src.appendChild(row);
+  wrap.appendChild(src);
+  gc.appendChild(wrap);
+}
+
+function clearInsertLines(){document.querySelectorAll('.ord-insert-line').forEach(function(l){l.classList.remove('visible');});}
+
+function dropOrdToDz(pos){
+  var drag=G.ordDrag;
+  if(!drag){if(G.srcDrag!==null){drag={from:'src',idx:G.srcDrag};}else return;}
+  if(drag.from==='src'){
+    var item=G.src.splice(drag.idx,1)[0];
+    G.dz.splice(pos,0,item);
+  } else {
+    // reorder within dz
+    var item=G.dz.splice(drag.idx,1)[0];
+    var newPos=pos>drag.idx?pos-1:pos;
+    G.dz.splice(newPos,0,item);
+  }
+  G.dzFeedback=null;G.ordDrag=null;G.srcDrag=null;
+  renderOrder();updateInstruction();
+}
+
+function returnOrdToBankByIdx(dzIdx){
+  var item=G.dz.splice(dzIdx,1)[0];
+  G.src.push(item);
+  G.dzFeedback=null;G.ordDrag=null;G.srcDrag=null;
+  renderOrder();updateInstruction();
+}
+
+// ============================================================
+//  INSTRUCTION
+// ============================================================
+function updateInstruction(){
+  var bub=document.getElementById('sera-bubble');bub.className='sera-bubble';
+  var main,sub='';
+  if(G.lvl===0){
+    var placed=G.items.filter(function(i){return i.placed!==null;}).length;
+    var total=G.items.length;
+    if(placed===0){main='Arraste cada parte do diario para a caixinha certa!';sub='Ou clique na parte e depois na caixa.';}
+    else if(placed<total){main='Isso! Continue colocando as partes!';sub=(total-placed)+' parte'+(total-placed>1?'s':'')+' faltando!';}
+    else{main='Todas as partes colocadas! Clique em Verificar!';sub='Clique numa parte para remove-la e trocar.';}
+  } else {
+    var placed=G.dz.length;
+    var total=5;
+    if(placed===0){main='Arraste as partes do diario na ordem certa!';sub='Primeiro vai o local e a data, depois a saudacao...'}
+    else if(placed<total){main='Otimo! Continue montando o diario!';sub=(total-placed)+' parte'+(total-placed>1?'s':'')+' faltando!';}
+    else{main='Diario montado! Clique em Verificar!';sub='Clique numa parte para remove-la.';}
+  }
+  document.getElementById('sera-main').textContent=main;
+  document.getElementById('sera-sub').textContent=sub;
+}
+
+// ============================================================
+//  CHECK ANSWER
+// ============================================================
+var PART_ORDER=['date','greeting','body','farewell','signature'];
+
+function checkAnswer(){
+  G.attempts++;
+  if(G.lvl===0){
+    var unplaced=G.items.filter(function(i){return i.placed===null;}).length;
+    if(unplaced>0){setMsg('Ainda faltam '+unplaced+' parte'+(unplaced>1?'s':'')+' para colocar!','hint-mode');G.attempts--;return;}
+    var results={};var ok=true;
+    G.items.forEach(function(item,i){var c=item.placed===item.partId;results[i]=c;if(!c)ok=false;});
+    G.feedback=ok?null:results;
+    renderIdentify();
+    if(ok){var st=calcStars();addScore(st);setMsg('Perfeito! Voce conhece todas as partes! \uD83C\uDF89','success');setTimeout(function(){showLevelComplete(st);},2400);}
+    else{var w=0;for(var k in results)if(!results[k])w++;setMsg(w+' parte'+(w>1?'s':'')+' no lugar errado. Veja as vermelhas!','error');}
+  } else {
+    if(G.dz.length<5){setMsg('Coloque todas as 5 partes antes de verificar!','hint-mode');G.attempts--;return;}
+    var results2=[];var ok2=true;
+    G.dz.forEach(function(item,i){var c=item.partId===PART_ORDER[i];results2.push(c);if(!c)ok2=false;});
+    G.dzFeedback=ok2?null:results2;
+    renderOrder();
+    if(ok2){var st=calcStars();addScore(st);setMsg('Incrivel! Diario montado na ordem perfeita! \uD83C\uDF89','success');setTimeout(function(){showLevelComplete(st);},2400);}
+    else{var w2=results2.filter(function(r){return !r;}).length;setMsg(w2+' parte'+(w2>1?'s':'')+' fora de ordem. Clique nas vermelhas para ajustar!','error');}
+  }
+}
+
+function calcStars(){return(G.hintsUsed===0&&G.attempts===1)?3:(G.hintsUsed<=1&&G.attempts<=2)?2:1;}
+function addScore(st){G.score+=st*10;G.stars+=st;document.getElementById('score-val').textContent=G.score;}
+
+// ============================================================
+//  HINT
+// ============================================================
+function showHint(){
+  G.hintsUsed++;
+  if(G.lvl===0){
+    for(var i=0;i<G.items.length;i++){
+      var item=G.items[i];
+      if(item.placed===null||item.placed!==item.partId){
+        var pi=getPart(item.partId);
+        setMsg('Dica: este texto e a "'+pi.label+'" do diario!','hint-mode');
+        // highlight first wrong card
+        return;
+      }
+    }
+  } else {
+    var wrong=-1;
+    G.dz.forEach(function(item,i){if(item.partId!==PART_ORDER[i]&&wrong<0)wrong=i;});
+    if(wrong>=0){
+      var pi=getPart(PART_ORDER[wrong]);
+      setMsg('Dica: a posicao '+(wrong+1)+' deveria ser a "'+pi.label+'"!','hint-mode');
+      return;
+    }
+  }
+  setMsg('Tudo parece certo! Clique em Verificar!','success');
+}
+
+// ============================================================
+//  REPLAY
+// ============================================================
+function replayLevel(){
+  G.feedback=null;G.selCard=null;G.dragCard=null;G.dzFeedback=null;G.ordDrag=null;G.srcDrag=null;
+  G.hintsUsed=0;G.attempts=0;
+  // Force different context
+  var prev=G.setIdx;
+  do{G.setIdx=~~(Math.random()*GAME_CONTEXTS.length);}while(G.setIdx===prev&&GAME_CONTEXTS.length>1);
+  loadLevel();
+}
+
+// ============================================================
+//  LEVEL COMPLETE
+// ============================================================
+function showLevelComplete(st){
+  showScreen('screen-levelcomplete');
+  var msgs=['Incrivel! Voce manda bem! \uD83D\uDE80','Continue assim, voce e expert! \uD83C\uDF1F','Que inteligente! Arrasou! \uD83D\uDE04'];
+  document.getElementById('lc-title').textContent=G.lvl>=LVL.length-1?'Expert em Diarios! \uD83C\uDFC6':'Nivel Completo! \uD83C\uDF8A';
+  document.getElementById('lc-msg').textContent=msgs[G.lvl%msgs.length];
+  ['star1','star2','star3'].forEach(function(id,i){var el=document.getElementById(id);el.classList.toggle('lit',i<st);el.style.animation='none';setTimeout(function(){el.style.animation='';},50);});
+  document.getElementById('btn-lc-next').textContent=G.lvl>=LVL.length-1?'Ver resultado! \uD83C\uDFC6':'Proximo Nivel \u27A1';
+}
+
+// ============================================================
+//  VICTORY
+// ============================================================
+function showVictory(){
+  showScreen('screen-victory');startFireworks();
+  document.getElementById('vic-stars').textContent='\u2B50'.repeat(Math.min(~~(G.stars/1.5),9));
+  document.getElementById('vic-msg').textContent=nextMsg();
+  document.getElementById('vic-score').textContent='\uD83C\uDFC6 Pontuacao final: '+G.score+' pontos!';
+}
+
+// ============================================================
+//  FIREWORKS
+// ============================================================
+function startFireworks(){
+  var cv=document.getElementById('fw-canvas'),ctx=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;
+  var COLS=['#f472b6','#fbbf24','#34d399','#60a5fa','#fb923c','#a78bfa'];
+  var parts=[],animId,launches=0;
+  function explode(x,y){var col=COLS[~~(Math.random()*COLS.length)];for(var i=0;i<70;i++){var a=(Math.PI*2/70)*i,sp=3+Math.random()*6;parts.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,a:1,c:col,r:3+Math.random()*4,d:.012+Math.random()*.01});}}
+  function launch(){if(launches>=16)return;launches++;explode(80+Math.random()*(cv.width-160),60+Math.random()*(cv.height*.55));setTimeout(launch,280+~~(Math.random()*420));}
+  function frame(){ctx.clearRect(0,0,cv.width,cv.height);for(var i=parts.length-1;i>=0;i--){var p=parts[i];if(p.a<=.02){parts.splice(i,1);continue;}ctx.save();ctx.globalAlpha=p.a;ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore();p.x+=p.vx;p.y+=p.vy;p.vy+=.09;p.a-=p.d;p.r*=.99;}if(parts.length>0||launches<16)animId=requestAnimationFrame(frame);else ctx.clearRect(0,0,cv.width,cv.height);}
+  launch();frame();setTimeout(function(){cancelAnimationFrame(animId);ctx.clearRect(0,0,cv.width,cv.height);},9000);
+}
+window.addEventListener('resize',function(){var c=document.getElementById('fw-canvas');c.width=innerWidth;c.height=innerHeight;});
+
+// ============================================================
+//  BONUS — MINHA ENTRADA DE DIARIO
+// ============================================================
+function updatePreview(){
+  var flds=['date','greeting','body','farewell','signature'];
+  flds.forEach(function(f){
+    var val=document.getElementById('f-'+f).value.trim();
+    var cl=document.getElementById('cl-'+f);
+    if(cl){cl.textContent=val?'\u2714':'';cl.classList.toggle('done',!!val);}
+  });
+}
+function viewDiary(){
+  var date=document.getElementById('f-date').value.trim();
+  var greeting=document.getElementById('f-greeting').value.trim();
+  var body=document.getElementById('f-body').value.trim();
+  var farewell=document.getElementById('f-farewell').value.trim();
+  var signature=document.getElementById('f-signature').value.trim();
+  if(!date&&!greeting&&!body&&!farewell&&!signature){
+    alert('Escreva pelo menos uma parte do seu diario antes de visualizar!');return;
+  }
+  document.getElementById('pp-date').textContent=date||'(sem data)';
+  document.getElementById('pp-greeting').textContent=greeting||'Querido Diario,';
+  document.getElementById('pp-body').textContent=body||'(conte o que aconteceu aqui)';
+  document.getElementById('pp-farewell').textContent=farewell||'Com carinho,';
+  document.getElementById('pp-signature').textContent=signature||'Meu nome';
+  showScreen('screen-print');
+}
+
+// ============================================================
+//  ACCESSIBILITY
+// ============================================================
+var _theme=localStorage.getItem('serafina-theme')||'dark';
+(function(){_applyTheme(_theme);})();
+function _applyTheme(t){_theme=t;document.body.classList.toggle('theme-light',t==='light');document.getElementById('btn-theme').textContent=t==='light'?'\uD83C\uDF1A':'\uD83C\uDF1D';localStorage.setItem('serafina-theme',t);}
+function toggleTheme(){_applyTheme(_theme==='dark'?'light':'dark');}
+
+var FS=['','lg','xl'];var _fs=parseInt(localStorage.getItem('serafina-fs')||'0');
+(function(){_applyFS(_fs);})();
+function _applyFS(i){_fs=Math.max(0,Math.min(2,i));document.documentElement.setAttribute('data-fs',FS[_fs]);localStorage.setItem('serafina-fs',_fs);}
+function changeFontSize(d){_applyFS(_fs+d);}
+
+// ============================================================
+//  HELP
+// ============================================================
+var HELP={
+  'screen-intro':{icon:'\uD83D\uDCD3',title:'O que e um Diario?',text:'O diario e um tipo de texto que a gente escreve para si mesmo.\n\nCada dia voce conta o que aconteceu, como se sentiu e o que pensou.\n\nAqui voce vai aprender as 5 partes do diario:\n\uD83D\uDCCD Local e Data\n\uD83D\uDC8C Saudacao\n\uD83D\uDCDD O que aconteceu\n\uD83D\uDC4B Despedida\n\u270D Assinatura\n\nClique em qualquer tarefa para comecar!'},
+  'screen-teoria':{icon:'\uD83D\uDCDA',title:'Aprendendo as partes!',text:'Cada cartao mostra uma parte diferente do diario.\n\nLeia com calma e veja o exemplo da Serafina em cada parte.\n\nDepois clique em "Ver um exemplo" para ver um diario completo!'},
+  'screen-exemplos':{icon:'\uD83D\uDD0D',title:'Como usar os exemplos?',text:'Clique em qualquer parte do diario (data, texto...) para ver o nome daquela parte acender na legenda!\n\nClique tambem nos itens da legenda para destacar a parte no diario.\n\nUse as setas para ver mais diarios da Serafina.'},
+  'screen-game':{icon:'\uD83C\uDFAE',title:'Como jogar?',text:'Nivel 1 \u2014 Identificar:\n1) Clique numa parte do diario para seleciona-la.\n2) Clique na caixinha com o nome certo.\nOu ARRASTE diretamente!\n\nNivel 2 \u2014 Ordenar:\n1) Arraste as partes para a area de cima na ordem certa.\n2) A ordem e: Data \u2192 Saudacao \u2192 O que aconteceu \u2192 Despedida \u2192 Assinatura.\n\nClique em Verificar quando terminar!'},
+  'screen-bonus':{icon:'\u270D\uFE0F',title:'Escreva seu diario!',text:'Preencha cada campo com as partes do seu proprio diario!\n\nVeja o checklist ao lado acender conforme voce escreve.\n\nQuando terminar, clique em "Ver meu diario!" para ver como ficou bonito!\n\nDepois chame um adulto para salvar em PDF.'},
+  'screen-print':{icon:'\uD83D\uDDA8\uFE0F',title:'Salvar meu diario!',text:'Voce pode salvar seu diario como PDF!\n\n1) Clique no botao "Imprimir / Salvar PDF"\n2) Na janela que abrir, escolha "Salvar como PDF"\n3) Escolha a pasta e clique em Salvar!\n\nChame um adulto para te ajudar com isso.'},
+  'screen-levelcomplete':{icon:'\uD83C\uDF1F',title:'Nivel completo!',text:'Parabens! Voce acertou!\n\nOlha as estrelinhas que voce ganhou!\n\nClique em Proximo Nivel para continuar!'},
+  'screen-victory':{icon:'\uD83C\uDFC6',title:'Expert em Diarios!',text:'UAU! Voce completou os dois niveis!\n\nAgora voce conhece todas as partes do diario.\n\nQue tal escrever o seu proprio diario? Clique em "Escrever meu diario"!'},
+};
+function showHelp(){var a=document.querySelector('.screen.active');var id=a?a.id:'screen-intro';var h=HELP[id]||HELP['screen-intro'];document.getElementById('help-icon').textContent=h.icon;document.getElementById('help-title').textContent=h.title;document.getElementById('help-text').textContent=h.text;document.getElementById('help-overlay').classList.add('open');}
+function closeHelp(e){if(e&&e.target!==document.getElementById('help-overlay'))return;document.getElementById('help-overlay').classList.remove('open');}
+function showHomeModal(){ document.getElementById('confirm-home-modal').classList.add('active'); }
+function closeHomeModal(){ document.getElementById('confirm-home-modal').classList.remove('active'); }
+function goToIndex(){ window.location.href='index.html'; }
+document.getElementById('confirm-home-modal').addEventListener('click',function(e){ if(e.target===this)closeHomeModal(); });
+</script>
+</body>
+</html>

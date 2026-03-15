@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Bucket Fillers &amp; Community - Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--fs:16px;--bg:#0d0b1e;--card-bg:rgba(255,255,255,.06);--card-border:rgba(255,255,255,.12);--text:#fff;--text-soft:rgba(255,255,255,.55);--text-dim:rgba(255,255,255,.3);}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:var(--fs);}
+body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color:var(--text);overflow-x:hidden;}
+body.light{--bg:#f3f1ff;--card-bg:rgba(124,58,237,.06);--card-border:rgba(124,58,237,.15);--text:#1a1535;--text-soft:rgba(26,21,53,.5);--text-dim:rgba(26,21,53,.3);background:var(--bg);color:var(--text);}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+body.light #starfield{opacity:.08;}
+#app{position:relative;z-index:1;height:100vh;height:100dvh;display:flex;flex-direction:column;}
+
+/* NAVBAR */
+.navbar{width:100%;display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;z-index:100;}
+body.light .navbar{background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.1);}
+.nav-logo{font-size:1rem;font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:auto;}
+.nav-score{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:800;color:#fff;white-space:nowrap;}
+.nb{width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:1.1rem;line-height:1;padding:0;}
+.nb:hover{transform:translateY(-2px);background:rgba(255,255,255,.18);}
+body.light .nb{border-color:rgba(124,58,237,.2);background:rgba(124,58,237,.06);}
+.nb-text{font-size:.7rem;font-weight:900;color:var(--text);}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;background:rgba(0,0,0,.55);align-items:center;justify-content:center;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:#fff;border:2px solid #a78bfa;border-radius:20px;padding:24px 20px;max-width:320px;width:90%;text-align:center;font-family:inherit;box-shadow:0 8px 40px rgba(124,58,237,.25);color:#1a1535;}
+.modal-icon{font-size:36px;margin-bottom:8px;}
+.modal-title{font-size:1rem;font-weight:900;color:#7c3aed;margin-bottom:6px;}
+.modal-text{font-size:.85rem;font-weight:700;color:#555;margin-bottom:16px;line-height:1.5;}
+.modal-btns{display:flex;gap:10px;justify-content:center;}
+.mbtn-yes{background:#7c3aed;color:#fff;border:none;border-radius:12px;padding:10px 22px;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;}
+.mbtn-yes:hover{background:#6d28d9;}
+.mbtn-no{background:#e5e7eb;color:#374151;border:none;border-radius:12px;padding:10px 22px;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;}
+.mbtn-no:hover{background:#d1d5db;}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px;}
+.screen{display:none;width:100%;max-width:900px;}
+.screen.active{display:flex;flex-direction:column;align-items:center;}
+
+/* data-pt base */
+[data-pt]{position:relative;cursor:default;}
+.flag-pt{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;
+  background:rgba(0,156,59,.15);border:1px solid rgba(0,156,59,.3);cursor:pointer;font-size:10px;
+  margin-left:4px;vertical-align:middle;flex-shrink:0;transition:.2s;position:relative;z-index:5;}
+.flag-pt:hover{background:rgba(0,156,59,.25);transform:scale(1.1);}
+.pt-label{display:none;font-size:.68rem;font-weight:700;color:#a78bfa;background:rgba(167,139,250,.1);
+  border:1px solid rgba(167,139,250,.25);border-radius:8px;padding:2px 8px;margin-top:2px;
+  line-height:1.3;white-space:normal;width:100%;}
+body.light .pt-label{color:#5b21b6;background:rgba(124,58,237,.06);border-color:rgba(124,58,237,.15);}
+.pt-label.visible{display:block;}
+
+/* KEYWORD HIGHLIGHT */
+.kw-hl{color:#fbbf24;font-weight:900;text-decoration:underline wavy #fbbf2480;text-underline-offset:3px;}
+body.light .kw-hl{color:#d97706;}
+
+/* KARAOKE BAR */
+.karaoke-bar{display:none;position:fixed;bottom:50px;left:50%;transform:translateX(-50%);
+  background:rgba(13,11,30,.92);backdrop-filter:blur(12px);border:2px solid rgba(167,139,250,.5);border-radius:18px;
+  padding:12px 22px;z-index:200;font-size:1.15rem;font-weight:700;color:rgba(255,255,255,.35);
+  flex-wrap:wrap;gap:6px 8px;justify-content:center;max-width:92%;box-shadow:0 8px 40px rgba(0,0,0,.5);}
+body.light .karaoke-bar{background:rgba(255,255,255,.96);color:rgba(0,0,0,.2);border-color:#c4b5fd;box-shadow:0 8px 40px rgba(124,58,237,.15);}
+.karaoke-bar .kw{display:inline-block;padding:2px 5px;border-radius:6px;transition:all .15s;}
+.karaoke-bar .kw.kw-active{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;transform:scale(1.18);
+  text-shadow:0 0 8px rgba(167,139,250,.6);box-shadow:0 2px 12px rgba(167,139,250,.4);}
+.karaoke-bar .kw.kw-done{color:rgba(255,255,255,.7);background:rgba(167,139,250,.12);border-bottom:2px solid rgba(167,139,250,.35);}
+body.light .karaoke-bar .kw.kw-active{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;}
+body.light .karaoke-bar .kw.kw-done{color:rgba(0,0,0,.55);background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.25);}
+
+/* SPEAKER ICON */
+.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);border:none;cursor:pointer;transition:.2s;flex-shrink:0;font-size:1rem;color:#fff;box-shadow:0 2px 10px rgba(59,130,246,.4);}
+.speak-btn:hover{transform:scale(1.15);box-shadow:0 3px 16px rgba(59,130,246,.6);}
+.speak-btn.speaking{animation:speakPulse .6s ease infinite;}
+@keyframes speakPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.5);}50%{box-shadow:0 0 0 10px rgba(59,130,246,0);}}
+
+/* INTRO */
+.intro-hero{position:relative;width:100%;max-width:480px;text-align:center;padding:10px 0 0;}
+.intro-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.3),transparent 70%);filter:blur(40px);pointer-events:none;}
+.intro-emoji{font-size:clamp(56px,12vw,80px);display:block;animation:mfloat 3s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(167,139,250,.5));position:relative;z-index:1;}
+@keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-12px) rotate(3deg);}}
+.intro-badge{display:inline-block;background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(244,114,182,.1));border:1px solid rgba(167,139,250,.35);border-radius:30px;padding:4px 16px;font-size:.65rem;font-weight:700;color:#a78bfa;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.intro-title{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;text-align:center;line-height:1.2;}
+.intro-sub{font-size:clamp(.8rem,2.2vw,.95rem);color:var(--text-soft);font-weight:700;margin-bottom:18px;text-align:center;}
+.phase-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:16px;width:100%;}
+.phase-card{background:var(--card-bg);border:2px solid var(--card-border);border-radius:20px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:150px;flex:1;max-width:220px;cursor:pointer;transition:.25s;position:relative;overflow:hidden;}
+.phase-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(244,114,182,.05));opacity:0;transition:.25s;border-radius:18px;}
+.phase-card:hover::before{opacity:1;}
+.phase-card:hover{border-color:rgba(167,139,250,.5);transform:translateY(-4px);box-shadow:0 8px 30px rgba(167,139,250,.2);}
+.phase-icon{font-size:2rem;position:relative;z-index:1;}
+.phase-num{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#f472b6);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;color:#fff;position:relative;z-index:1;}
+.phase-name{font-size:.8rem;font-weight:900;color:#a78bfa;text-align:center;position:relative;z-index:1;}
+.phase-desc{font-size:.65rem;color:var(--text-dim);font-weight:700;text-align:center;line-height:1.3;position:relative;z-index:1;}
+
+.btn{border:none;border-radius:14px;font-family:inherit;font-weight:800;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.btn:active{transform:scale(.96)!important;}
+.btn-start{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:clamp(.9rem,2.5vw,1.05rem);padding:14px 40px;border-radius:50px;box-shadow:0 4px 30px rgba(167,139,250,.5);animation:pulse 2.2s ease infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 4px 30px rgba(167,139,250,.5),0 0 0 0 rgba(167,139,250,.3);}50%{box-shadow:0 4px 30px rgba(167,139,250,.6),0 0 0 14px rgba(167,139,250,0);}}
+.btn-start:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.btn-primary{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:.85rem;padding:11px 24px;border-radius:12px;}
+.btn-primary:hover{filter:brightness(1.1);transform:translateY(-2px);}
+.btn-check{background:linear-gradient(135deg,#10b981,#34d399);color:#fff;font-size:.85rem;padding:11px 22px;border-radius:12px;}
+.btn-check:hover{transform:translateY(-2px);}
+.btn-replay{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;font-size:.85rem;padding:11px 20px;border-radius:12px;}
+.btn-replay:hover{filter:brightness(1.12);transform:translateY(-2px);}
+.btn-next{background:linear-gradient(135deg,#f472b6,#fb923c);color:#fff;font-size:.9rem;padding:11px 28px;border-radius:12px;}
+.btn-next:hover{transform:translateY(-2px);}
+.btn-back{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:#a78bfa;font-size:.8rem;padding:10px 18px;border-radius:12px;}
+.btn-back:hover{background:rgba(167,139,250,.25);transform:translateY(-2px);}
+.btn-home-lg{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:#a78bfa;font-size:.8rem;padding:10px 18px;border-radius:12px;}
+.btn-home-lg:hover{background:rgba(167,139,250,.25);transform:translateY(-2px);}
+.btn-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.phase-nav{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap;}
+
+/* ===== FLASHCARDS ===== */
+.fc-title{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;text-align:center;margin-bottom:2px;
+  background:linear-gradient(135deg,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.fc-instruction{font-size:1rem;font-weight:700;color:var(--text-soft);text-align:center;margin-bottom:12px;}
+.fc-container{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:750px;}
+@media(max-width:700px){.fc-container{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:400px){.fc-container{grid-template-columns:repeat(2,1fr);}}
+.fc-card{aspect-ratio:3/3.5;perspective:800px;cursor:pointer;position:relative;}
+.fc-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s;border-radius:18px;}
+.fc-card.flipped .fc-inner{transform:rotateY(180deg);}
+.fc-front,.fc-back{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;overflow:hidden;}
+.fc-front{background:linear-gradient(145deg,#2d1b69,#1a1145);border:2px solid rgba(167,139,250,.4);box-shadow:inset 0 0 30px rgba(167,139,250,.1);}
+body.light .fc-front{background:linear-gradient(145deg,#ede9fe,#f5f3ff);border-color:#c4b5fd;box-shadow:0 2px 12px rgba(124,58,237,.1);}
+.fc-front-emoji{font-size:clamp(1.8rem,4.5vw,2.6rem);margin-bottom:4px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3));}
+.fc-front-name{font-size:clamp(.65rem,1.6vw,.88rem);font-weight:900;color:#c4b5fd;line-height:1.3;}
+body.light .fc-front-name{color:#5b21b6;}
+.fc-front .speak-btn{position:absolute;top:6px;right:6px;width:24px;height:24px;font-size:.65rem;}
+.fc-back-filler{background:linear-gradient(145deg,#064e3b,#065f46);border:2px solid rgba(52,211,153,.5);transform:rotateY(180deg);box-shadow:inset 0 0 30px rgba(16,185,129,.1);}
+body.light .fc-back-filler{background:linear-gradient(145deg,#d1fae5,#ecfdf5);border-color:#34d399;box-shadow:0 2px 12px rgba(16,185,129,.15);}
+.fc-back-dipper{background:linear-gradient(145deg,#4c0519,#6b0723);border:2px solid rgba(248,113,113,.5);transform:rotateY(180deg);box-shadow:inset 0 0 30px rgba(239,68,68,.1);}
+body.light .fc-back-dipper{background:linear-gradient(145deg,#fee2e2,#fef2f2);border-color:#f87171;box-shadow:0 2px 12px rgba(239,68,68,.15);}
+.fc-back-action{font-size:clamp(1rem,2.2vw,1.1rem);font-weight:800;opacity:1;margin-bottom:6px;color:rgba(255,255,255,.95);}
+body.light .fc-back-action{color:rgba(0,0,0,.85);}
+.fc-back-label{font-size:clamp(.6rem,1.5vw,.8rem);font-weight:900;line-height:1.4;}
+.fc-back-filler .fc-back-label{color:#6ee7b7;}
+body.light .fc-back-filler .fc-back-label{color:#047857;}
+.fc-back-dipper .fc-back-label{color:#fca5a5;}
+body.light .fc-back-dipper .fc-back-label{color:#dc2626;}
+.fc-back .speak-btn{position:absolute;bottom:6px;right:6px;width:24px;height:24px;font-size:.65rem;}
+.fc-counter{font-size:.75rem;font-weight:700;color:var(--text-dim);margin-top:10px;text-align:center;}
+
+/* Summary split */
+.summary-split{display:flex;gap:12px;width:100%;max-width:800px;margin-top:16px;animation:fadeUp .5s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.summary-col{flex:1;border-radius:18px;padding:14px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.summary-filler{background:linear-gradient(145deg,rgba(16,185,129,.15),rgba(52,211,153,.08));border:2px solid rgba(52,211,153,.4);}
+.summary-dipper{background:linear-gradient(145deg,rgba(239,68,68,.12),rgba(248,113,113,.06));border:2px solid rgba(248,113,113,.4);}
+.summary-icon{font-size:2rem;}
+.summary-label{font-size:1.05rem;font-weight:900;}
+.summary-filler .summary-label{color:#34d399;}
+.summary-dipper .summary-label{color:#f87171;}
+.summary-item{font-size:.85rem;font-weight:700;color:var(--text-soft);text-align:center;line-height:1.3;}
+@media(max-width:500px){.summary-split{flex-direction:column;gap:8px;}.summary-col{padding:10px 8px;}}
+
+/* ===== SORT GAME ===== */
+.sort-title{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;text-align:center;margin-bottom:2px;
+  background:linear-gradient(135deg,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sort-instruction{font-size:1rem;font-weight:700;color:var(--text-soft);text-align:center;margin-bottom:10px;}
+.bucket-row{display:flex;gap:16px;width:100%;max-width:700px;justify-content:center;margin-bottom:14px;}
+.bucket-zone{flex:1;min-height:120px;border-radius:20px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;transition:.3s;max-width:340px;}
+.bucket-happy{background:linear-gradient(145deg,rgba(16,185,129,.12),rgba(52,211,153,.06));border:3px solid rgba(52,211,153,.4);box-shadow:0 0 20px rgba(16,185,129,.1);}
+.bucket-happy.drag-over{border-color:#34d399;box-shadow:0 0 30px rgba(16,185,129,.3);transform:scale(1.02);}
+.bucket-sad{background:linear-gradient(145deg,rgba(239,68,68,.1),rgba(248,113,113,.05));border:3px solid rgba(248,113,113,.4);box-shadow:0 0 20px rgba(239,68,68,.1);}
+.bucket-sad.drag-over{border-color:#f87171;box-shadow:0 0 30px rgba(239,68,68,.3);transform:scale(1.02);}
+.bucket-label{font-size:1.05rem;font-weight:900;display:flex;align-items:center;gap:4px;}
+.bucket-happy .bucket-label{color:#34d399;}
+.bucket-sad .bucket-label{color:#f87171;}
+.bucket-items{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;min-height:20px;}
+.bucket-tag{font-size:.78rem;font-weight:700;padding:3px 8px;border-radius:8px;white-space:nowrap;}
+.bucket-tag.filler-tag{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.3);}
+.bucket-tag.dipper-tag{background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.3);}
+.bucket-tag.correct-bg{background:rgba(16,185,129,.3)!important;border-color:#34d399!important;}
+.bucket-tag.wrong-bg{background:rgba(239,68,68,.3)!important;border-color:#f87171!important;text-decoration:line-through;}
+
+.action-cards{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;width:100%;max-width:700px;}
+.action-card{background:linear-gradient(135deg,rgba(251,191,60,.12),rgba(251,146,60,.08));border:2px solid rgba(251,191,60,.35);border-radius:14px;
+  padding:10px 14px;font-size:1rem;font-weight:800;color:#fbbf24;cursor:grab;transition:.25s;touch-action:none;user-select:none;
+  display:flex;align-items:center;gap:8px;min-width:120px;}
+body.light .action-card{background:linear-gradient(135deg,#fef3c7,#fffbeb);border-color:#f59e0b;color:#92400e;}
+.action-card:active{cursor:grabbing;transform:scale(1.04);box-shadow:0 4px 16px rgba(251,191,60,.3);}
+.action-card.selected{border-color:#a78bfa!important;background:rgba(167,139,250,.18)!important;box-shadow:0 0 18px rgba(167,139,250,.35);transform:scale(1.03);}
+.action-card.placed{opacity:.25;pointer-events:none;border-style:dashed;}
+.action-card.correct-bg{background:rgba(16,185,129,.2)!important;border-color:#34d399!important;color:#34d399!important;opacity:1!important;}
+.action-card.wrong-bg{background:rgba(239,68,68,.15)!important;border-color:#f87171!important;color:#f87171!important;opacity:1!important;}
+.action-card .speak-btn{width:22px;height:22px;font-size:.5rem;}
+.sort-feedback{text-align:center;margin-top:8px;font-size:1rem;font-weight:800;min-height:24px;}
+
+/* ===== COMMUNITY CATEGORIES (PHASE 3) - INFORMATIONAL ===== */
+.cats-title{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;text-align:center;margin-bottom:2px;
+  background:linear-gradient(135deg,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cats-instruction{font-size:.85rem;font-weight:700;color:var(--text-soft);text-align:center;margin-bottom:12px;}
+.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:100%;max-width:700px;}
+@media(max-width:400px){.cat-grid{grid-template-columns:1fr;}}
+.cat-panel{border-radius:20px;padding:16px 14px;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;overflow:hidden;}
+.cat-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;border-radius:20px 20px 0 0;}
+.cat-panel-needs{background:linear-gradient(180deg,rgba(248,113,113,.18),rgba(248,113,113,.04));border:2px solid rgba(248,113,113,.5);}
+.cat-panel-needs::before{background:#f87171;}
+.cat-panel-wants{background:linear-gradient(180deg,rgba(251,146,60,.18),rgba(251,146,60,.04));border:2px solid rgba(251,146,60,.5);}
+.cat-panel-wants::before{background:#fb923c;}
+.cat-panel-goods{background:linear-gradient(180deg,rgba(52,211,153,.18),rgba(52,211,153,.04));border:2px solid rgba(52,211,153,.5);}
+.cat-panel-goods::before{background:#34d399;}
+.cat-panel-services{background:linear-gradient(180deg,rgba(96,165,250,.18),rgba(96,165,250,.04));border:2px solid rgba(96,165,250,.5);}
+.cat-panel-services::before{background:#60a5fa;}
+.cat-panel-icon{font-size:1.8rem;margin-top:4px;}
+.cat-panel-title{font-size:1.05rem;font-weight:900;text-transform:uppercase;letter-spacing:1px;}
+.cat-panel-needs .cat-panel-title{color:#f87171;}
+.cat-panel-wants .cat-panel-title{color:#fb923c;}
+.cat-panel-goods .cat-panel-title{color:#34d399;}
+.cat-panel-services .cat-panel-title{color:#60a5fa;}
+.cat-panel-items{display:flex;flex-direction:column;gap:3px;align-items:center;}
+.cat-panel-item{font-size:1rem;font-weight:700;color:var(--text-soft);display:flex;align-items:center;gap:4px;}
+.cat-panel-item .speak-btn{width:18px;height:18px;font-size:.4rem;}
+/* Category flashcards */
+.cat-flash-container{display:flex;justify-content:center;margin:12px 0;}
+.cat-flash-card{width:240px;height:280px;perspective:800px;cursor:pointer;}
+@media(max-width:500px){.cat-flash-card{width:200px;height:240px;}}
+.cat-flash-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s;border-radius:20px;}
+.cat-flash-card.flipped .cat-flash-inner{transform:rotateY(180deg);}
+.cat-flash-front,.cat-flash-back{position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center;}
+.cat-flash-front{background:linear-gradient(145deg,#2d1b69,#1a1145);border:2px solid rgba(167,139,250,.4);}
+body.light .cat-flash-front{background:linear-gradient(145deg,#ede9fe,#f5f3ff);border-color:#c4b5fd;}
+.cat-flash-front-emoji{font-size:3rem;margin-bottom:8px;}
+.cat-flash-front-name{font-size:1.1rem;font-weight:900;color:#c4b5fd;}
+body.light .cat-flash-front-name{color:#5b21b6;}
+.cat-flash-back{transform:rotateY(180deg);border:3px solid;}
+.cat-flash-back-item{font-size:.9rem;font-weight:800;color:rgba(255,255,255,.85);margin-bottom:8px;}
+body.light .cat-flash-back-item{color:rgba(0,0,0,.7);}
+.cat-flash-back-icon{font-size:2.5rem;margin-bottom:6px;}
+.cat-flash-back-cat{font-size:1.2rem;font-weight:900;}
+.cat-flash-counter{font-size:.75rem;font-weight:700;color:var(--text-dim);text-align:center;margin-top:6px;}
+
+/* ===== QUIZ ===== */
+.quiz-title{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;text-align:center;margin-bottom:4px;
+  background:linear-gradient(135deg,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.quiz-instruction{font-size:1rem;font-weight:700;color:var(--text-soft);text-align:center;margin-bottom:8px;}
+.quiz-progress{display:flex;gap:5px;justify-content:center;margin-bottom:12px;}
+.qp-dot{width:32px;height:8px;border-radius:4px;background:rgba(255,255,255,.08);transition:.3s;}
+body.light .qp-dot{background:rgba(0,0,0,.06);}
+.qp-dot.done{background:#34d399;}.qp-dot.wrong{background:#f87171;}.qp-dot.current{background:#a78bfa;animation:dotPulse 1s ease infinite;}
+@keyframes dotPulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.quiz-q-box{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px;}
+.quiz-question{font-size:clamp(1rem,3vw,1.4rem);font-weight:900;text-align:center;
+  background:linear-gradient(135deg,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:540px;}
+.quiz-opt{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:2px solid var(--card-border);border-radius:18px;
+  padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:.25s;position:relative;}
+.quiz-opt:hover{background:linear-gradient(145deg,rgba(167,139,250,.12),rgba(167,139,250,.06));border-color:rgba(167,139,250,.4);transform:translateY(-3px);box-shadow:0 6px 20px rgba(167,139,250,.15);}
+.quiz-opt.correct{background:linear-gradient(145deg,rgba(16,185,129,.2),rgba(52,211,153,.1))!important;border-color:#34d399!important;transform:scale(1.04);box-shadow:0 4px 20px rgba(16,185,129,.3)!important;}
+.quiz-opt.wrong{background:linear-gradient(145deg,rgba(239,68,68,.15),rgba(239,68,68,.05))!important;border-color:#f87171!important;animation:shake .4s;}
+.quiz-opt.disabled{pointer-events:none;opacity:.4;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+.qo-emoji{font-size:clamp(1.8rem,5vw,2.4rem);filter:drop-shadow(0 2px 6px rgba(0,0,0,.2));}
+.qo-name{font-size:clamp(.85rem,2.2vw,1rem);font-weight:800;text-align:center;}
+.quiz-feedback{text-align:center;margin-top:10px;font-size:1rem;font-weight:800;min-height:28px;}
+.quiz-next-row{display:flex;gap:8px;justify-content:center;margin-top:8px;}
+
+/* RESULT */
+.result-emoji{font-size:clamp(3.5rem,10vw,5rem);animation:mfloat 3s ease-in-out infinite;margin-bottom:8px;}
+.result-title{font-size:clamp(1.3rem,4.5vw,2rem);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;margin-bottom:6px;}
+.result-stars{display:flex;gap:8px;justify-content:center;margin-bottom:8px;}
+.result-star{font-size:clamp(2rem,5vw,2.8rem);opacity:.15;transition:.5s;transform:scale(.5);}
+.result-star.lit{opacity:1;transform:scale(1);filter:drop-shadow(0 0 10px rgba(251,191,60,.7));}
+.result-xp{font-size:clamp(.9rem,2.5vw,1.2rem);font-weight:800;color:#fbbf24;text-align:center;margin-bottom:6px;}
+.result-detail{font-size:.8rem;font-weight:700;color:var(--text-dim);text-align:center;margin-bottom:14px;}
+
+/* SOUND OFF indicator */
+.nb.sound-off{background:rgba(239,68,68,.2)!important;border-color:rgba(239,68,68,.5)!important;}
+/* LOCK MODE - only blocks leaving the page, not game functionality */
+.nb.lock-active{background:rgba(239,68,68,.2)!important;border-color:rgba(239,68,68,.5)!important;animation:lockPulse 2s ease infinite;}
+@keyframes lockPulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.3);}50%{box-shadow:0 0 0 8px rgba(239,68,68,0);}}
+.lock-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,.7);align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.lock-overlay.active{display:flex;}
+.lock-box{background:#1a1145;border:3px solid #a78bfa;border-radius:24px;padding:28px 24px;max-width:300px;width:90%;text-align:center;}
+.lock-icon{font-size:48px;margin-bottom:8px;}
+.lock-title{font-size:1.1rem;font-weight:900;color:#a78bfa;margin-bottom:8px;}
+body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
+/* CONFETTI */
+.confetti-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:250;overflow:hidden;}
+.confetti-piece{position:absolute;width:10px;height:10px;top:-10px;border-radius:2px;animation:confettiFall linear forwards;}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+
+/* ===== TABLET ===== */
+@media(min-width:501px) and (max-width:900px){
+  .screen{max-width:95vw!important;}
+  .fc-container{max-width:85vw!important;}
+  .bucket-row{max-width:90vw;}
+  .action-cards{max-width:90vw;}
+  .cat-grid{max-width:90vw;}
+  .quiz-options{max-width:80vw;}
+  .intro-hero{max-width:90vw;}
+  .summary-grid{max-width:90vw;}
+}
+
+/* ===== MOBILE COMPACT ===== */
+@media(max-width:500px){
+  .karaoke-bar{font-size:.9rem;padding:8px 12px;bottom:20px;gap:3px 5px;border-radius:12px;}
+  .navbar{gap:3px;padding:5px 8px;}
+  .nav-logo{font-size:.75rem;}
+  .nav-score{font-size:.6rem;padding:2px 7px;}
+  .nb{width:28px;height:28px;font-size:.85rem;}
+  .nb-text{font-size:.55rem;}
+  .phase-nav{gap:6px;margin-top:8px;}
+  .phase-nav .btn{font-size:.7rem;padding:7px 12px;}
+  .intro-hero{padding:4px 0 0;}
+  .intro-emoji{font-size:48px;}
+  .intro-title{font-size:1.3rem;margin-bottom:2px;}
+  .intro-sub{font-size:.72rem;margin-bottom:10px;}
+  .intro-badge{font-size:.55rem;padding:3px 10px;margin-bottom:4px;}
+  .phase-grid{gap:6px;margin-bottom:10px;}
+  .phase-card{padding:10px 8px;min-width:95px;gap:3px;border-radius:14px;}
+  .phase-icon{font-size:1.4rem;}
+  .phase-num{width:18px;height:18px;font-size:.55rem;}
+  .phase-name{font-size:.65rem;}
+  .phase-desc{font-size:.55rem;}
+  .btn-start{font-size:.85rem;padding:10px 28px;}
+  /* Flashcards compact */
+  .fc-title{font-size:1rem;margin-bottom:0;}
+  .fc-instruction{font-size:.82rem;margin-bottom:6px;}
+  .fc-container{gap:6px;max-width:320px;}
+  .fc-card{aspect-ratio:3/3.2;}
+  .fc-front-emoji{font-size:1.5rem;margin-bottom:2px;}
+  .fc-front-name{font-size:.48rem;}
+  .fc-front .speak-btn{width:18px;height:18px;font-size:.45rem;top:3px;right:3px;}
+  .fc-back .speak-btn{width:18px;height:18px;font-size:.45rem;bottom:3px;right:3px;}
+  .fc-back-action{font-size:.75rem;}
+  .fc-back-label{font-size:.48rem;}
+  .fc-counter{font-size:.65rem;margin-top:4px;}
+  /* Sort compact */
+  .sort-title{font-size:1rem;margin-bottom:0;}
+  .sort-instruction{font-size:.82rem;margin-bottom:6px;}
+  .bucket-row{gap:8px;}
+  .bucket-zone{min-height:80px;padding:8px;}
+  .bucket-label{font-size:.85rem;}
+  .bucket-tag{font-size:.65rem;padding:2px 5px;}
+  .action-card{padding:7px 10px;font-size:.82rem;min-width:90px;gap:5px;}
+  .action-card .speak-btn{width:18px;height:18px;font-size:.4rem;}
+  /* Bins compact */
+  .bins-title{font-size:1rem;margin-bottom:0;}
+  .bins-instruction{font-size:.68rem;margin-bottom:6px;}
+  .bins-row{gap:8px;}
+  .bin-zone{min-height:90px;padding:8px 6px 6px;}
+  .bin-icon{font-size:1.3rem;margin-bottom:0;}
+  .bin-label{font-size:.6rem;}
+  .bin-item{font-size:.52rem;padding:2px 5px;}
+  .comm-card{padding:6px 8px;font-size:.62rem;gap:4px;}
+  .comm-card .speak-btn{width:16px;height:16px;font-size:.38rem;}
+  .fix-bin-title{font-size:.65rem;}
+  .fix-item{font-size:.6rem;}
+  /* Quiz compact */
+  .quiz-title{font-size:1rem;margin-bottom:2px;}
+  .quiz-instruction{font-size:.82rem;margin-bottom:4px;}
+  .quiz-progress{margin-bottom:6px;}
+  .qp-dot{width:24px;height:6px;}
+  .quiz-q-box{margin-bottom:8px;}
+  .quiz-question{font-size:1rem;}
+  .quiz-options{grid-template-columns:1fr 1fr;gap:8px;max-width:340px;}
+  .quiz-opt{padding:10px 6px;gap:3px;border-radius:14px;}
+  .qo-emoji{font-size:1.8rem;}
+  .qo-name{font-size:.68rem;}
+  .quiz-feedback{font-size:.75rem;margin-top:6px;}
+  /* Result compact */
+  .result-emoji{font-size:3rem;}
+  .result-title{font-size:1.3rem;}
+  .result-xp{font-size:.85rem;}
+  .result-detail{font-size:.7rem;margin-bottom:8px;}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="nav-logo">Serafina &bull; ELA-02</div>
+  <div class="nav-score" id="scoreDisplay">&#11088; 0 XP</div>
+  <button class="nb" onclick="confirmGoHome()" title="Home">&#127968;</button>
+  <button class="nb" onclick="confirmRestart()" title="Restart">&#128260;</button>
+  <button class="nb" onclick="changeFontSize(-1)" title="Smaller"><span class="nb-text">A-</span></button>
+  <button class="nb" onclick="changeFontSize(1)" title="Bigger"><span class="nb-text">A+</span></button>
+  <button class="nb" id="themeBtn" onclick="toggleTheme()" title="Theme">&#9728;&#65039;</button>
+  <button class="nb" id="soundBtn" onclick="toggleSound()" title="Sound On/Off">&#128264;</button>
+  <button class="nb" id="lockBtn" onclick="toggleLock()" title="Lock Screen">&#128275;</button>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modalHome">
+  <div class="modal-box">
+    <div class="modal-icon">&#127968;</div>
+    <div class="modal-title">Go back home?</div>
+    <div class="modal-text" data-pt="Tem certeza que quer voltar para a tela inicial?">Are you sure you want to go back to the main screen?</div>
+    <div class="modal-btns">
+      <button class="mbtn-yes" onclick="goToIndex()">Yes!</button>
+      <button class="mbtn-no" onclick="closeModal('modalHome')">No, stay</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modalRestart">
+  <div class="modal-box">
+    <div class="modal-icon">&#128260;</div>
+    <div class="modal-title">Start over?</div>
+    <div class="modal-text" data-pt="Seu progresso vai zerar. Quer recomecar mesmo?">Your progress will reset. Are you sure?</div>
+    <div class="modal-btns">
+      <button class="mbtn-yes" onclick="location.reload()">Yes!</button>
+      <button class="mbtn-no" onclick="closeModal('modalRestart')">No</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- INTRO -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-hero">
+    <div class="intro-glow"></div>
+    <div class="intro-badge">ELA &bull; UNIT 2</div>
+    <div class="intro-emoji">&#129717;</div>
+  </div>
+  <div class="intro-title" data-pt="Enchendo Baldes e Comunidade">Bucket Fillers &amp; Community</div>
+  <div class="intro-sub" data-pt="Aprenda sobre acoes positivas e o que faz uma boa comunidade!">Learn about positive actions and what makes a good community!</div>
+  <div class="phase-grid">
+    <div class="phase-card" onclick="startPhase(1)">
+      <div class="phase-icon">&#127183;</div>
+      <div class="phase-num">1</div>
+      <div class="phase-name" data-pt="Flashcards">Flashcards</div>
+      <div class="phase-desc" data-pt="Descubra se a acao enche ou esvazia o balde">Filler or Dipper? Flip to find out!</div>
+    </div>
+    <div class="phase-card" onclick="startPhase(2)">
+      <div class="phase-icon">&#129513;</div>
+      <div class="phase-num">2</div>
+      <div class="phase-name" data-pt="Jogo de Classificacao">Sort Game</div>
+      <div class="phase-desc" data-pt="Arraste cada acao para o balde correto">Drag actions to the right bucket!</div>
+    </div>
+    <div class="phase-card" onclick="startPhase(3)">
+      <div class="phase-icon">&#127968;</div>
+      <div class="phase-num">3</div>
+      <div class="phase-name" data-pt="Categorias da Comunidade">Community Categories</div>
+      <div class="phase-desc" data-pt="Aprenda sobre needs, wants, goods e services!">Learn about needs, wants, goods &amp; services!</div>
+    </div>
+    <div class="phase-card" onclick="startPhase(4)">
+      <div class="phase-icon">&#127942;</div>
+      <div class="phase-num">4</div>
+      <div class="phase-name" data-pt="Quiz">Quiz</div>
+      <div class="phase-desc" data-pt="Teste seus conhecimentos!">Test what you learned!</div>
+    </div>
+  </div>
+  <button class="btn btn-start" onclick="startPhase(1)" data-pt="Comecar!">Let's Go! &#127775;</button>
+</div>
+
+<!-- PHASE 1: FLASHCARDS -->
+<div class="screen" id="screen-flash">
+  <div class="fc-title" data-pt="Enchedor ou Esvaziador?">Filler or Dipper?</div>
+  <div class="fc-instruction" data-pt="Toque nos cards para virar! Clique no alto-falante para ouvir.">&#128073; Tap the cards to flip! Click &#128264; to listen.</div>
+  <div class="btn-row" style="margin-bottom:8px;">
+    <button class="btn btn-primary" onclick="shuffleAndRestart()">&#128256; Shuffle &amp; Restart</button>
+  </div>
+  <div class="fc-container" id="fcContainer"></div>
+  <div class="fc-counter" id="fcCounter"></div>
+  <div id="fcSummary"></div>
+  <div class="phase-nav">
+    <button class="btn btn-back" onclick="showScreen('screen-intro')" data-pt="Menu">&#9664; Menu</button>
+    <button class="btn btn-next" onclick="startPhase(2)" data-pt="Fase 2">Phase 2 &#9654;</button>
+  </div>
+</div>
+
+<!-- PHASE 2: SORT GAME -->
+<div class="screen" id="screen-sort">
+  <div class="sort-title" data-pt="Classifique as Acoes!">Sort the Actions!</div>
+  <div class="sort-instruction" data-pt="Arraste cada acao para o balde correto!">&#128073; Drag each action to the correct bucket!</div>
+  <div class="bucket-row" id="bucketRow">
+    <div class="bucket-zone bucket-happy" id="bucketFiller" data-type="filler">
+      <div class="bucket-label">&#129717; Bucket Filler &#10024;</div>
+      <div class="bucket-items" id="fillerItems"></div>
+    </div>
+    <div class="bucket-zone bucket-sad" id="bucketDipper" data-type="dipper">
+      <div class="bucket-label">&#128546; Bucket Dipper &#128162;</div>
+      <div class="bucket-items" id="dipperItems"></div>
+    </div>
+  </div>
+  <div class="action-cards" id="sortCards"></div>
+  <div class="sort-feedback" id="sortFeedback"></div>
+  <div class="btn-row" id="sortBtnRow">
+    <button class="btn btn-check" id="sortCheckBtn" onclick="checkSort()" style="display:none;">&#9989; Check</button>
+    <button class="btn btn-primary" onclick="shuffleSort()">&#128256; Shuffle</button>
+    <button class="btn btn-replay" id="sortRedoBtn" onclick="redoSort()" style="display:none;">&#128260; Refazer os Erros</button>
+  </div>
+  <div class="phase-nav">
+    <button class="btn btn-back" onclick="startPhase(1)" data-pt="Fase 1">&#9664; Phase 1</button>
+    <button class="btn btn-next" onclick="startPhase(3)" data-pt="Fase 3">Phase 3 &#9654;</button>
+  </div>
+</div>
+
+<!-- PHASE 3: COMMUNITY CATEGORIES (INFORMATIONAL) -->
+<div class="screen" id="screen-bins">
+  <div class="cats-title" data-pt="Categorias da Comunidade">&#127968; Community Categories</div>
+  <div class="cats-instruction" data-pt="Aprenda sobre o que uma comunidade precisa e oferece!">&#128214; Learn what a community needs and offers!</div>
+
+  <div id="catsStudyView">
+    <div class="cat-grid" id="catGrid"></div>
+    <div class="btn-row" style="margin-top:12px;">
+      <button class="btn btn-primary" onclick="startCatFlash()" data-pt="Estudar com Flashcards">&#127183; Flashcard Study</button>
+    </div>
+  </div>
+
+  <div id="catsFlashView" style="display:none;">
+    <div class="cat-flash-container">
+      <div class="cat-flash-card" id="catFlashCard" onclick="flipCatFlash()">
+        <div class="cat-flash-inner" id="catFlashInner">
+          <div class="cat-flash-front" id="catFlashFront"></div>
+          <div class="cat-flash-back" id="catFlashBack"></div>
+        </div>
+      </div>
+    </div>
+    <div class="cat-flash-counter" id="catFlashCounter"></div>
+    <div class="btn-row">
+      <button class="btn btn-back" onclick="prevCatFlash()">&#9664;</button>
+      <button class="btn btn-primary" onclick="shuffleCatFlash()">&#128256; Shuffle</button>
+      <button class="btn btn-next" onclick="nextCatFlash()">&#9654;</button>
+    </div>
+    <div class="btn-row" style="margin-top:6px;">
+      <button class="btn btn-home-lg" onclick="showStudyView()" data-pt="Voltar para categorias">&#128214; Back to Categories</button>
+    </div>
+  </div>
+
+  <div class="phase-nav">
+    <button class="btn btn-back" onclick="startPhase(2)" data-pt="Fase 2">&#9664; Phase 2</button>
+    <button class="btn btn-next" onclick="startPhase(4)" data-pt="Fase 4">Phase 4 &#9654;</button>
+  </div>
+</div>
+
+<!-- PHASE 4: QUIZ -->
+<div class="screen" id="screen-quiz">
+  <div class="quiz-title" data-pt="Hora do Quiz!">Quiz Time!</div>
+  <div class="quiz-instruction" data-pt="Responda 5 perguntas!">&#128073; Answer 5 questions!</div>
+  <div class="quiz-progress" id="quizProgress"></div>
+  <div class="quiz-q-box">
+    <div class="quiz-question" id="quizQuestion"></div>
+    <button class="speak-btn" id="quizSpeak" onclick="speakQuizQ()" title="Listen">&#128264;</button>
+  </div>
+  <div class="quiz-options" id="quizOptions"></div>
+  <div class="quiz-feedback" id="quizFeedback"></div>
+  <div class="quiz-next-row" id="quizNextRow" style="display:none;"></div>
+  <div class="phase-nav">
+    <button class="btn btn-back" onclick="startPhase(3)" data-pt="Fase 3">&#9664; Phase 3</button>
+    <button class="btn btn-next" onclick="showScreen('screen-intro')" data-pt="Menu">Menu &#9654;</button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="screen" id="screen-result">
+  <div class="result-emoji" id="resultEmoji">&#127881;</div>
+  <div class="result-title" id="resultTitle"></div>
+  <div class="result-stars" id="resultStars"></div>
+  <div class="result-xp" id="resultXP"></div>
+  <div class="result-detail" id="resultDetail"></div>
+  <div class="btn-row" id="resultBtns"></div>
+</div>
+
+</div>
+</div>
+
+<!-- LOCK OVERLAY -->
+<div class="lock-overlay" id="lockOverlay">
+  <div class="lock-box">
+    <div class="lock-icon">&#128275;</div>
+    <div class="lock-title">Tap to unlock!</div>
+    <button class="mbtn-yes" onclick="unlockScreen()" style="margin-top:12px;font-size:1.1rem;padding:14px 36px;">&#128275; Unlock</button>
+  </div>
+</div>
+
+<!-- KARAOKE BAR -->
+<div id="karaokeBar" class="karaoke-bar"></div>
+<div class="confetti-container" id="confettiBox"></div>
+
+<script>
+// ===== DATA =====
+var FILLERS = [
+  {action:'Saying thank you',actionPT:'Dizer obrigado',emoji:'\u{1F64F}',keyword:'thank',type:'filler'},
+  {action:'Helping a friend',actionPT:'Ajudar um amigo',emoji:'\u{1F91D}',keyword:'helping',type:'filler'},
+  {action:'Sharing your toys',actionPT:'Compartilhar brinquedos',emoji:'\u{1F9F8}',keyword:'sharing',type:'filler'},
+  {action:'Giving a compliment',actionPT:'Fazer um elogio',emoji:'\u2B50',keyword:'compliment',type:'filler'},
+  {action:'Listening to others',actionPT:'Ouvir os outros',emoji:'\u{1F442}',keyword:'listening',type:'filler'},
+  {action:'Being kind and gentle',actionPT:'Ser gentil e delicado',emoji:'\u{1F49B}',keyword:'kind',type:'filler'},
+  {action:'Including everyone',actionPT:'Incluir todos',emoji:'\u{1FAC2}',keyword:'including',type:'filler'},
+  {action:'Smiling at someone',actionPT:'Sorrir para alguem',emoji:'\u{1F60A}',keyword:'smiling',type:'filler'},
+  {action:'Showing respect',actionPT:'Mostrar respeito',emoji:'\u{1F3A9}',keyword:'respect',type:'filler'},
+  {action:'Encouraging a friend',actionPT:'Encorajar um amigo',emoji:'\u{1F4AA}',keyword:'encouraging',type:'filler'}
+];
+
+var DIPPERS = [
+  {action:'Making fun of others',actionPT:'Zombar dos outros',emoji:'\u{1F608}',keyword:'fun of',type:'dipper'},
+  {action:'Saying mean words',actionPT:'Dizer palavras maldosas',emoji:'\u{1F5E3}\uFE0F',keyword:'mean',type:'dipper'},
+  {action:'Pushing someone',actionPT:'Empurrar alguem',emoji:'\u{1F624}',keyword:'pushing',type:'dipper'},
+  {action:'Not sharing',actionPT:'Nao compartilhar',emoji:'\u{1F6AB}',keyword:'not sharing',type:'dipper'},
+  {action:'Ignoring a friend',actionPT:'Ignorar um amigo',emoji:'\u{1F636}',keyword:'ignoring',type:'dipper'},
+  {action:'Breaking things',actionPT:'Quebrar coisas',emoji:'\u{1F494}',keyword:'breaking',type:'dipper'},
+  {action:'Cutting in line',actionPT:'Furar a fila',emoji:'\u{1F620}',keyword:'cutting',type:'dipper'},
+  {action:'Laughing at mistakes',actionPT:'Rir dos erros dos outros',emoji:'\u{1F923}',keyword:'laughing',type:'dipper'}
+];
+
+var ALL_ACTIONS = FILLERS.concat(DIPPERS);
+
+var COMMUNITY = {
+  needs:[
+    {name:'Shelter',namePT:'Moradia',emoji:'\u{1F3E0}',cat:'needs'},
+    {name:'Water',namePT:'Agua',emoji:'\u{1F4A7}',cat:'needs'},
+    {name:'Healthy Food',namePT:'Comida saudavel',emoji:'\u{1F957}',cat:'needs'},
+    {name:'Clothing',namePT:'Roupas',emoji:'\u{1F455}',cat:'needs'},
+    {name:'Clean Air',namePT:'Ar limpo',emoji:'\u{1F32C}\uFE0F',cat:'needs'}
+  ],
+  wants:[
+    {name:'Restaurants',namePT:'Restaurantes',emoji:'\u{1F37D}\uFE0F',cat:'wants'},
+    {name:'Parks',namePT:'Parques',emoji:'\u{1F333}',cat:'wants'},
+    {name:'Stores',namePT:'Lojas',emoji:'\u{1F3EA}',cat:'wants'},
+    {name:'Library',namePT:'Biblioteca',emoji:'\u{1F4DA}',cat:'wants'},
+    {name:'Pets',namePT:'Animais',emoji:'\u{1F431}',cat:'wants'}
+  ],
+  goods:[
+    {name:'Internet',namePT:'Internet',emoji:'\u{1F310}',cat:'goods'},
+    {name:'Toys',namePT:'Brinquedos',emoji:'\u{1F9F8}',cat:'goods'},
+    {name:'Food',namePT:'Alimentos',emoji:'\u{1F34E}',cat:'goods'},
+    {name:'Flowers',namePT:'Flores',emoji:'\u{1F338}',cat:'goods'},
+    {name:'Bicycles',namePT:'Bicicletas',emoji:'\u{1F6B2}',cat:'goods'}
+  ],
+  services:[
+    {name:'Police',namePT:'Policia',emoji:'\u{1F46E}',cat:'services'},
+    {name:'Fire Department',namePT:'Bombeiros',emoji:'\u{1F692}',cat:'services'},
+    {name:'Mail',namePT:'Correio',emoji:'\u{1F4EC}',cat:'services'},
+    {name:'Health Care',namePT:'Saude',emoji:'\u{1F3E5}',cat:'services'},
+    {name:'Schools',namePT:'Escolas',emoji:'\u{1F3EB}',cat:'services'}
+  ]
+};
+
+var ALL_COMMUNITY = COMMUNITY.needs.concat(COMMUNITY.wants, COMMUNITY.goods, COMMUNITY.services);
+
+// ===== GLOBALS =====
+var totalXP = 0;
+var soundEnabled = true;
+var isLocked = false;
+var currentTheme = 'dark';
+var currentFontSize = 16;
+
+// ===== STARFIELD =====
+(function(){
+  var c = document.getElementById('starfield');
+  var ctx = c.getContext('2d');
+  var stars = [];
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  for(var i=0;i<120;i++) stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5+.3,s:Math.random()*.5+.1,o:Math.random()});
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(function(s){
+      s.o += s.s*0.01;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(167,139,250,'+(Math.abs(Math.sin(s.o))*.6+.1)+')';ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ===== UTILITY =====
+function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function $(id){return document.getElementById(id);}
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  $(id).classList.add('active');
+  initFlags();
+}
+function addXP(n){totalXP+=n;$('scoreDisplay').innerHTML='&#11088; '+totalXP+' XP';}
+
+// ===== FLAGS =====
+function initFlags(){
+  document.querySelectorAll('[data-pt]').forEach(function(el){
+    if(el.querySelector('.flag-pt')) return;
+    var pt = el.getAttribute('data-pt');
+    if(!pt) return;
+    var flag = document.createElement('span');
+    flag.className = 'flag-pt';
+    flag.innerHTML = '<svg viewBox="0 0 20 14" width="14" height="10" style="display:block"><rect fill="#009c3b" width="20" height="14" rx="2"/><polygon fill="#ffdf00" points="10,1.5 18,7 10,12.5 2,7"/><circle fill="#002776" cx="10" cy="7" r="3"/></svg>';
+    var label = document.createElement('div');
+    label.className = 'pt-label';
+    label.textContent = pt;
+    flag.addEventListener('click', function(e){
+      e.stopPropagation(); e.preventDefault();
+      label.classList.toggle('visible');
+    });
+    el.appendChild(flag);
+    el.appendChild(label);
+  });
+}
+
+// ===== TTS KARAOKE =====
+function speakKaraoke(text, cb){
+  if(!soundEnabled) return;
+  window.speechSynthesis.cancel();
+  var bar = $('karaokeBar');
+  var words = text.split(/\s+/);
+  bar.innerHTML = '';
+  bar.style.display = 'flex';
+  words.forEach(function(w){
+    var span = document.createElement('span');
+    span.className = 'kw';
+    span.textContent = w;
+    bar.appendChild(span);
+  });
+  var spans = bar.querySelectorAll('.kw');
+  var u = new SpeechSynthesisUtterance(text);
+  u.rate = 0.55; u.pitch = 1.1; u.lang = 'en-US';
+  var idx = 0;
+  u.onboundary = function(e){
+    if(e.name === 'word' && idx < spans.length){
+      if(idx > 0) { spans[idx-1].classList.remove('kw-active'); spans[idx-1].classList.add('kw-done'); }
+      spans[idx].classList.add('kw-active');
+      idx++;
+    }
+  };
+  u.onend = function(){
+    setTimeout(function(){ bar.style.display='none'; bar.innerHTML=''; if(cb) cb(); }, 600);
+  };
+  u.onerror = function(){ bar.style.display='none'; };
+  speechSynthesis.speak(u);
+}
+
+function speakSimple(text){
+  if(!soundEnabled) return;
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(text);
+  u.rate=0.55;u.pitch=1.1;u.lang='en-US';
+  speechSynthesis.speak(u);
+}
+
+// ===== NAVBAR FUNCTIONS =====
+function confirmGoHome(){
+  if(isLocked){ speakSimple('The screen is locked!'); return; }
+  $('modalHome').classList.add('active');
+}
+function confirmRestart(){
+  if(isLocked){ speakSimple('The screen is locked!'); return; }
+  $('modalRestart').classList.add('active');
+}
+function closeModal(id){$(id).classList.remove('active');}
+function goToIndex(){window.location.href='index.html';}
+
+function changeFontSize(d){
+  currentFontSize = Math.max(12, Math.min(32, currentFontSize+d*2));
+  document.documentElement.style.setProperty('--fs', currentFontSize+'px');
+}
+
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  currentTheme = document.body.classList.contains('light') ? 'light' : 'dark';
+  $('themeBtn').textContent = currentTheme==='light' ? '\u{1F319}' : '\u2600\uFE0F';
+}
+
+function toggleSound(){
+  soundEnabled = !soundEnabled;
+  var btn = $('soundBtn');
+  btn.textContent = soundEnabled ? '\u{1F50A}' : '\u{1F507}';
+  if(soundEnabled) btn.classList.remove('sound-off'); else btn.classList.add('sound-off');
+  if(!soundEnabled) speechSynthesis.cancel();
+}
+
+// ===== LOCK =====
+function preventLeave(e){ e.preventDefault(); e.returnValue = ''; }
+function toggleLock(){
+  if(!isLocked){
+    // Lock: fullscreen + block nav, child plays normally
+    isLocked = true;
+    document.body.classList.add('locked');
+    $('lockBtn').classList.add('lock-active');
+    $('lockBtn').textContent = '\u{1F512}';
+    try{document.documentElement.requestFullscreen();}catch(e){}
+    window.addEventListener('beforeunload', preventLeave);
+  } else {
+    // Already locked: show unlock overlay for parent
+    $('lockOverlay').classList.add('active');
+  }
+}
+function unlockScreen(){
+  isLocked = false;
+  document.body.classList.remove('locked');
+  $('lockBtn').classList.remove('lock-active');
+  $('lockBtn').textContent = '\u{1F513}';
+  $('lockOverlay').classList.remove('active');
+  window.removeEventListener('beforeunload', preventLeave);
+  try{ document.fullscreenElement && document.exitFullscreen(); }catch(e){}
+}
+
+// ===== CONFETTI =====
+function launchConfetti(){
+  var box=$('confettiBox');box.innerHTML='';
+  var colors=['#a78bfa','#f472b6','#fb923c','#34d399','#60a5fa','#fbbf24'];
+  for(var i=0;i<60;i++){
+    var p=document.createElement('div');p.className='confetti-piece';
+    p.style.left=Math.random()*100+'%';
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDuration=(Math.random()*2+1.5)+'s';
+    p.style.animationDelay=(Math.random()*.5)+'s';
+    p.style.width=(Math.random()*8+6)+'px';
+    p.style.height=(Math.random()*8+6)+'px';
+    box.appendChild(p);
+  }
+  setTimeout(function(){box.innerHTML='';},4000);
+}
+
+// ===== HIGHLIGHT KEYWORD =====
+function highlightKW(text, keyword){
+  if(!keyword) return text;
+  var re = new RegExp('('+keyword.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return text.replace(re,'<span class="kw-hl">$1</span>');
+}
+
+// ===== START PHASE =====
+function startPhase(n){
+  if(n===1) initFlashcards();
+  else if(n===2) initSort();
+  else if(n===3) initBins();
+  else if(n===4) initQuiz();
+}
+
+// ============================================================
+// PHASE 1: FLASHCARDS
+// ============================================================
+var fcFlipped = 0;
+var fcTotal = ALL_ACTIONS.length;
+var fcOrder = [];
+var fcFlippedSet = new Set();
+
+function initFlashcards(){
+  showScreen('screen-flash');
+  fcFlipped = 0;
+  fcFlippedSet = new Set();
+  $('fcSummary').innerHTML = '';
+  shuffleFlashcards();
+}
+
+function shuffleFlashcards(){
+  fcOrder = shuffle(ALL_ACTIONS);
+  renderFlashcards();
+}
+
+function shuffleAndRestart(){
+  fcFlipped = 0;
+  fcFlippedSet = new Set();
+  $('fcSummary').innerHTML = '';
+  fcOrder = shuffle(ALL_ACTIONS);
+  renderFlashcards();
+}
+
+function renderFlashcards(){
+  var c = $('fcContainer');
+  c.innerHTML = '';
+  fcOrder.forEach(function(item, i){
+    var isFiller = item.type === 'filler';
+    var backClass = isFiller ? 'fc-back fc-back-filler' : 'fc-back fc-back-dipper';
+    var classLabel = isFiller ? '\u2728 Bucket Filler!' : '\u{1F622} Bucket Dipper!';
+
+    var card = document.createElement('div');
+    card.className = 'fc-card' + (fcFlippedSet.has(item.action) ? ' flipped' : '');
+    card.setAttribute('data-idx', i);
+    card.innerHTML =
+      '<div class="fc-inner">' +
+        '<div class="fc-front">' +
+          '<button class="speak-btn" onclick="event.stopPropagation();speakSimple(\''+item.action.replace(/'/g,"\\'")+'\')" title="Listen">\u{1F50A}</button>' +
+          '<div class="fc-front-emoji">'+item.emoji+'</div>' +
+          '<div class="fc-front-name" data-pt="'+item.actionPT+'">'+highlightKW(item.action, item.keyword)+'</div>' +
+        '</div>' +
+        '<div class="'+backClass+'">' +
+          '<button class="speak-btn" onclick="event.stopPropagation();speakSimple(\''+item.action+' is '+( isFiller ? 'bucket filling' : 'bucket dipping' )+'\')" title="Listen">\u{1F50A}</button>' +
+          '<div class="fc-back-action">'+item.emoji+' '+item.action+'</div>' +
+          '<div class="fc-back-label">'+classLabel+'</div>' +
+        '</div>' +
+      '</div>';
+    card.addEventListener('click', function(e){
+      if(e.target.closest('.speak-btn') || e.target.closest('.flag-pt')) return;
+      if(!card.classList.contains('flipped')){
+        card.classList.add('flipped');
+        if(!fcFlippedSet.has(item.action)){
+          fcFlippedSet.add(item.action);
+          fcFlipped++;
+          updateFcCounter();
+          addXP(2);
+          if(soundEnabled) speakKaraoke(item.action + ' is ' + (isFiller ? 'bucket filling' : 'bucket dipping'));
+          if(fcFlipped === fcTotal) setTimeout(showFcSummary, 800);
+        }
+      } else {
+        card.classList.remove('flipped');
+      }
+    });
+    c.appendChild(card);
+  });
+  updateFcCounter();
+  initFlags();
+}
+
+function updateFcCounter(){
+  $('fcCounter').textContent = fcFlipped + ' of ' + fcTotal + ' discovered';
+}
+
+function showFcSummary(){
+  var s = $('fcSummary');
+  var html = '<div class="summary-split">';
+  html += '<div class="summary-col summary-filler"><div class="summary-icon">\u{1FAA3}\u2728</div><div class="summary-label">Bucket Fillers</div>';
+  FILLERS.forEach(function(f){ html += '<div class="summary-item">'+f.emoji+' '+f.action+'</div>'; });
+  html += '</div>';
+  html += '<div class="summary-col summary-dipper"><div class="summary-icon">\u{1FAA3}\u{1F622}</div><div class="summary-label">Bucket Dippers</div>';
+  DIPPERS.forEach(function(d){ html += '<div class="summary-item">'+d.emoji+' '+d.action+'</div>'; });
+  html += '</div></div>';
+  html += '<div class="btn-row" style="margin-top:12px;"><button class="btn btn-primary" onclick="shuffleAndRestart()">\u{1F500} Shuffle &amp; Restart</button></div>';
+  s.innerHTML = html;
+  initFlags();
+}
+
+// ============================================================
+// PHASE 2: SORT GAME
+// ============================================================
+var sortItems = [];
+var sortPlacements = {}; // cardIdx -> 'filler'|'dipper'
+var sortSelected = null;
+var sortVerified = false;
+var sortWrongItems = [];
+
+function initSort(){
+  showScreen('screen-sort');
+  shuffleSort();
+}
+
+function shuffleSort(){
+  sortVerified = false;
+  sortSelected = null;
+  sortWrongItems = [];
+  sortPlacements = {};
+  $('fillerItems').innerHTML = '';
+  $('dipperItems').innerHTML = '';
+  $('sortFeedback').innerHTML = '';
+  $('sortCheckBtn').style.display = 'none';
+  $('sortRedoBtn').style.display = 'none';
+
+  // Pick 3 fillers and 3 dippers randomly
+  var f = shuffle(FILLERS).slice(0,3);
+  var d = shuffle(DIPPERS).slice(0,3);
+  sortItems = shuffle(f.concat(d));
+  renderSortCards();
+}
+
+function renderSortCards(){
+  var c = $('sortCards');
+  c.innerHTML = '';
+  sortItems.forEach(function(item, i){
+    var card = document.createElement('div');
+    card.className = 'action-card';
+    card.setAttribute('data-idx', i);
+    card.setAttribute('draggable', 'true');
+    card.innerHTML = item.emoji + ' <span data-pt="'+item.actionPT+'">'+highlightKW(item.action,item.keyword)+'</span> ' +
+      '<button class="speak-btn" onclick="event.stopPropagation();speakSimple(\''+item.action.replace(/'/g,"\\'")+'\')" title="Listen">\u{1F50A}</button>';
+
+    // Desktop drag
+    card.addEventListener('dragstart', function(e){
+      e.dataTransfer.setData('text/plain', i);
+      card.style.opacity = '.5';
+    });
+    card.addEventListener('dragend', function(e){
+      card.style.opacity = '';
+    });
+
+    // Mobile tap
+    card.addEventListener('click', function(e){
+      if(e.target.closest('.speak-btn') || e.target.closest('.flag-pt')) return;
+      if(card.classList.contains('placed')) return;
+      document.querySelectorAll('.action-card.selected').forEach(function(ac){ac.classList.remove('selected');});
+      card.classList.add('selected');
+      sortSelected = i;
+    });
+
+    c.appendChild(card);
+  });
+  initFlags();
+  setupBucketDrop();
+}
+
+function setupBucketDrop(){
+  ['bucketFiller','bucketDipper'].forEach(function(id){
+    var bucket = $(id);
+    var type = bucket.getAttribute('data-type');
+
+    bucket.addEventListener('dragover', function(e){e.preventDefault();bucket.classList.add('drag-over');});
+    bucket.addEventListener('dragleave', function(e){bucket.classList.remove('drag-over');});
+    bucket.addEventListener('drop', function(e){
+      e.preventDefault();bucket.classList.remove('drag-over');
+      var idx = parseInt(e.dataTransfer.getData('text/plain'));
+      placeSortCard(idx, type);
+    });
+
+    // Mobile tap on bucket
+    bucket.addEventListener('click', function(){
+      if(sortSelected !== null){
+        placeSortCard(sortSelected, type);
+        sortSelected = null;
+      }
+    });
+  });
+}
+
+function placeSortCard(idx, bucketType){
+  if(sortPlacements[idx] !== undefined) return; // already placed
+  sortPlacements[idx] = bucketType;
+
+  var item = sortItems[idx];
+  var card = document.querySelector('.action-card[data-idx="'+idx+'"]');
+  if(card) card.classList.add('placed');
+  card && card.classList.remove('selected');
+
+  var tagClass = bucketType === 'filler' ? 'filler-tag' : 'dipper-tag';
+  var container = bucketType === 'filler' ? $('fillerItems') : $('dipperItems');
+  var tag = document.createElement('span');
+  tag.className = 'bucket-tag ' + tagClass;
+  tag.setAttribute('data-idx', idx);
+  tag.textContent = item.emoji + ' ' + item.action;
+  container.appendChild(tag);
+
+  // Check if all placed
+  var placedCount = Object.keys(sortPlacements).length;
+  if(placedCount === sortItems.length){
+    $('sortCheckBtn').style.display = '';
+  }
+}
+
+function checkSort(){
+  sortVerified = true;
+  var correct = 0;
+  sortItems.forEach(function(item, i){
+    var placed = sortPlacements[i];
+    var isCorrect = (item.type === placed);
+    if(isCorrect) correct++;
+    var tag = document.querySelector('.bucket-tag[data-idx="'+i+'"]');
+    if(tag){
+      tag.classList.add(isCorrect ? 'correct-bg' : 'wrong-bg');
+    }
+    var card = document.querySelector('.action-card[data-idx="'+i+'"]');
+    if(card){
+      card.classList.add(isCorrect ? 'correct-bg' : 'wrong-bg');
+    }
+    if(!isCorrect) sortWrongItems.push(i);
+  });
+
+  $('sortFeedback').innerHTML = '<span style="color:'+(correct===sortItems.length?'#34d399':'#f87171')+'">'+correct+' of '+sortItems.length+' correct!</span>';
+  $('sortCheckBtn').style.display = 'none';
+
+  if(correct === sortItems.length){
+    addXP(15);
+    launchConfetti();
+  } else {
+    $('sortRedoBtn').style.display = '';
+  }
+  addXP(correct * 2);
+}
+
+function redoSort(){
+  $('sortRedoBtn').style.display = 'none';
+  $('sortFeedback').innerHTML = '';
+  sortVerified = false;
+
+  // Remove wrong items from buckets
+  sortWrongItems.forEach(function(idx){
+    var tag = document.querySelector('.bucket-tag[data-idx="'+idx+'"]');
+    if(tag) tag.remove();
+    var card = document.querySelector('.action-card[data-idx="'+idx+'"]');
+    if(card){
+      card.classList.remove('placed','wrong-bg','correct-bg','selected');
+    }
+    delete sortPlacements[idx];
+  });
+  sortWrongItems = [];
+}
+
+// ============================================================
+// PHASE 3: COMMUNITY CATEGORIES (INFORMATIONAL)
+// ============================================================
+var catFlashOrder = [];
+var catFlashIdx = 0;
+
+var CAT_META = {
+  needs:{label:'NEEDS',labelPT:'NECESSIDADES',icon:'\u{1F534}',color:'#f87171',bg:'linear-gradient(145deg,rgba(248,113,113,.2),rgba(248,113,113,.06))',border:'rgba(248,113,113,.5)'},
+  wants:{label:'WANTS',labelPT:'DESEJOS',icon:'\u{1F7E0}',color:'#fb923c',bg:'linear-gradient(145deg,rgba(251,146,60,.2),rgba(251,146,60,.06))',border:'rgba(251,146,60,.5)'},
+  goods:{label:'GOODS',labelPT:'BENS',icon:'\u{1F7E2}',color:'#34d399',bg:'linear-gradient(145deg,rgba(52,211,153,.2),rgba(52,211,153,.06))',border:'rgba(52,211,153,.5)'},
+  services:{label:'SERVICES',labelPT:'SERVICOS',icon:'\u{1F535}',color:'#60a5fa',bg:'linear-gradient(145deg,rgba(96,165,250,.2),rgba(96,165,250,.06))',border:'rgba(96,165,250,.5)'}
+};
+
+function initBins(){
+  showScreen('screen-bins');
+  showStudyView();
+}
+
+function showStudyView(){
+  $('catsStudyView').style.display = '';
+  $('catsFlashView').style.display = 'none';
+  renderCatGrid();
+}
+
+function renderCatGrid(){
+  var grid = $('catGrid');
+  grid.innerHTML = '';
+  ['needs','wants','goods','services'].forEach(function(cat){
+    var m = CAT_META[cat];
+    var items = COMMUNITY[cat];
+    var panel = document.createElement('div');
+    panel.className = 'cat-panel cat-panel-'+cat;
+    var html = '<div class="cat-panel-icon">'+m.icon+'</div>';
+    html += '<div class="cat-panel-title">'+m.label+' <span style="font-size:.65rem;opacity:.6;font-weight:700;">('+m.labelPT+')</span></div>';
+    html += '<div class="cat-panel-items">';
+    items.forEach(function(item){
+      html += '<div class="cat-panel-item">';
+      html += '<span style="font-size:1rem;">'+item.emoji+'</span> ';
+      html += '<span>'+item.name+' <span style="font-size:.65rem;color:var(--text-dim);font-weight:600;">('+item.namePT+')</span></span> ';
+      html += '<button class="speak-btn" onclick="event.stopPropagation();speakSimple(\''+item.name.replace(/'/g,"\\'")+'\')" title="Listen">\u{1F50A}</button>';
+      html += '</div>';
+    });
+    html += '</div>';
+    panel.innerHTML = html;
+    grid.appendChild(panel);
+  });
+  addXP(5);
+  initFlags();
+}
+
+function startCatFlash(){
+  $('catsStudyView').style.display = 'none';
+  $('catsFlashView').style.display = '';
+  catFlashOrder = shuffle(ALL_COMMUNITY);
+  catFlashIdx = 0;
+  renderCatFlash();
+}
+
+function shuffleCatFlash(){
+  catFlashOrder = shuffle(ALL_COMMUNITY);
+  catFlashIdx = 0;
+  renderCatFlash();
+}
+
+function renderCatFlash(){
+  var card = $('catFlashCard');
+  card.classList.remove('flipped');
+  var item = catFlashOrder[catFlashIdx];
+  var m = CAT_META[item.cat];
+
+  $('catFlashFront').innerHTML =
+    '<div class="cat-flash-front-emoji">'+item.emoji+'</div>' +
+    '<div class="cat-flash-front-name" data-pt="'+item.namePT+'">'+item.name+'</div>' +
+    '<button class="speak-btn" onclick="event.stopPropagation();speakSimple(\''+item.name.replace(/'/g,"\\'")+'\')" title="Listen" style="margin-top:10px;">\u{1F50A}</button>';
+
+  var back = $('catFlashBack');
+  back.style.background = m.bg;
+  back.style.borderColor = m.color;
+  back.innerHTML =
+    '<div class="cat-flash-back-item">'+item.emoji+' '+item.name+'</div>' +
+    '<div class="cat-flash-back-icon">'+m.icon+'</div>' +
+    '<div class="cat-flash-back-cat" style="color:'+m.color+'" data-pt="'+m.labelPT+'">'+m.label+'</div>';
+
+  $('catFlashCounter').textContent = (catFlashIdx+1) + ' of ' + catFlashOrder.length;
+  initFlags();
+}
+
+function flipCatFlash(){
+  var card = $('catFlashCard');
+  if(!card.classList.contains('flipped')){
+    card.classList.add('flipped');
+    var item = catFlashOrder[catFlashIdx];
+    if(soundEnabled) speakKaraoke(item.name + ' is a community ' + CAT_META[item.cat].label.toLowerCase());
+    addXP(1);
+  }
+}
+
+function nextCatFlash(){
+  catFlashIdx = (catFlashIdx + 1) % catFlashOrder.length;
+  renderCatFlash();
+}
+
+function prevCatFlash(){
+  catFlashIdx = (catFlashIdx - 1 + catFlashOrder.length) % catFlashOrder.length;
+  renderCatFlash();
+}
+
+// Old bins functions removed - Phase 3 is now informational only
+
+// ============================================================
+// PHASE 4: QUIZ
+// ============================================================
+var quizQs = [];
+var quizIdx = 0;
+var quizScore = 0;
+var quizAnswered = false;
+
+function initQuiz(){
+  showScreen('screen-quiz');
+  quizIdx = 0;
+  quizScore = 0;
+  quizQs = generateQuizQuestions();
+  renderQuizQ();
+}
+
+function generateQuizQuestions(){
+  var pool = [];
+
+  // Type 1: Is [action] filler or dipper?
+  ALL_ACTIONS.forEach(function(a){
+    pool.push({
+      q: 'Is "'+a.action+'" bucket filling or bucket dipping?',
+      qPT: '"'+a.actionPT+'" enche ou esvazia o balde?',
+      options: [
+        {text:'Bucket Filler \u2728',textPT:'Enchedor de balde',emoji:'\u{1FAA3}',correct:a.type==='filler'},
+        {text:'Bucket Dipper \u{1F622}',textPT:'Esvaziador de balde',emoji:'\u{1F4A7}',correct:a.type==='dipper'}
+      ]
+    });
+  });
+
+  // Type 2: definition
+  pool.push({
+    q:'A bucket filler is someone who...',
+    qPT:'Um enchedor de balde e alguem que...',
+    options:[
+      {text:'Says kind words',textPT:'Diz palavras gentis',emoji:'\u{1F49B}',correct:true},
+      {text:'Makes fun of others',textPT:'Zomba dos outros',emoji:'\u{1F608}',correct:false},
+      {text:'Pushes people',textPT:'Empurra pessoas',emoji:'\u{1F624}',correct:false},
+      {text:'Ignores friends',textPT:'Ignora amigos',emoji:'\u{1F636}',correct:false}
+    ]
+  });
+
+  pool.push({
+    q:'Bullying is bucket...',
+    qPT:'Bullying e esvaziar...',
+    options:[
+      {text:'Filling \u2728',textPT:'Encher',emoji:'\u{1FAA3}',correct:false},
+      {text:'Dipping \u{1F622}',textPT:'Esvaziar',emoji:'\u{1F4A7}',correct:true}
+    ]
+  });
+
+  pool.push({
+    q:'A good community helper shows...',
+    qPT:'Um bom ajudante da comunidade mostra...',
+    options:[
+      {text:'Respect and kindness',textPT:'Respeito e gentileza',emoji:'\u{1F49B}',correct:true},
+      {text:'Anger and fighting',textPT:'Raiva e briga',emoji:'\u{1F624}',correct:false},
+      {text:'Selfishness',textPT:'Egoismo',emoji:'\u{1F6AB}',correct:false},
+      {text:'Ignoring everyone',textPT:'Ignorar todos',emoji:'\u{1F636}',correct:false}
+    ]
+  });
+
+  // Pick 5 random
+  return shuffle(pool).slice(0,5);
+}
+
+function renderQuizQ(){
+  if(quizIdx >= quizQs.length){
+    showQuizResult();
+    return;
+  }
+  quizAnswered = false;
+  var q = quizQs[quizIdx];
+
+  // Progress dots
+  var prog = $('quizProgress');
+  prog.innerHTML = '';
+  for(var i=0;i<quizQs.length;i++){
+    var dot = document.createElement('div');
+    dot.className = 'qp-dot' + (i<quizIdx ? (quizQs[i]._correct ? ' done' : ' wrong') : (i===quizIdx ? ' current' : ''));
+    prog.appendChild(dot);
+  }
+
+  $('quizQuestion').setAttribute('data-pt', q.qPT);
+  $('quizQuestion').textContent = q.q;
+
+  var opts = $('quizOptions');
+  opts.innerHTML = '';
+  var shuffledOpts = shuffle(q.options);
+
+  shuffledOpts.forEach(function(opt, oi){
+    var div = document.createElement('div');
+    div.className = 'quiz-opt';
+    div.innerHTML = '<div class="qo-emoji">'+opt.emoji+'</div>' +
+      '<div class="qo-name" data-pt="'+opt.textPT+'">'+opt.text+'</div>';
+    div.addEventListener('click', function(){
+      if(quizAnswered) return;
+      quizAnswered = true;
+      if(opt.correct){
+        div.classList.add('correct');
+        quizScore++;
+        quizQs[quizIdx]._correct = true;
+        addXP(5);
+        $('quizFeedback').innerHTML = '<span style="color:#34d399">\u2705 Correct!</span>';
+      } else {
+        div.classList.add('wrong');
+        quizQs[quizIdx]._correct = false;
+        $('quizFeedback').innerHTML = '<span style="color:#f87171">\u274C Not quite!</span>';
+        // highlight correct
+        opts.querySelectorAll('.quiz-opt').forEach(function(o,j){
+          if(shuffledOpts[j].correct) o.classList.add('correct');
+          else if(!o.classList.contains('wrong')) o.classList.add('disabled');
+        });
+      }
+      opts.querySelectorAll('.quiz-opt').forEach(function(o){if(!o.classList.contains('correct')&&!o.classList.contains('wrong'))o.classList.add('disabled');});
+
+      if(soundEnabled) speakSimple(opt.correct ? 'Correct!' : 'Not quite!');
+
+      var nr = $('quizNextRow');
+      nr.style.display = 'flex';
+      nr.innerHTML = '';
+      if(quizIdx < quizQs.length - 1){
+        var nb = document.createElement('button');
+        nb.className = 'btn btn-next';
+        nb.textContent = 'Next \u25B6';
+        nb.onclick = function(){
+          quizIdx++;
+          $('quizFeedback').innerHTML='';
+          nr.style.display='none';
+          renderQuizQ();
+        };
+        nr.appendChild(nb);
+      } else {
+        var fb = document.createElement('button');
+        fb.className = 'btn btn-next';
+        fb.textContent = 'See Results \u{1F3C6}';
+        fb.onclick = function(){
+          quizIdx++;
+          $('quizFeedback').innerHTML='';
+          nr.style.display='none';
+          showQuizResult();
+        };
+        nr.appendChild(fb);
+      }
+    });
+    opts.appendChild(div);
+  });
+
+  if(soundEnabled) speakKaraoke(q.q);
+  initFlags();
+}
+
+function speakQuizQ(){
+  if(quizIdx < quizQs.length) speakKaraoke(quizQs[quizIdx].q);
+}
+
+function showQuizResult(){
+  showScreen('screen-result');
+  var total = quizQs.length;
+  var starCount = quizScore >= total ? 3 : quizScore >= total-1 ? 2 : quizScore >= total-2 ? 1 : 0;
+  var emoji = starCount === 3 ? '\u{1F389}' : starCount >= 2 ? '\u{1F31F}' : starCount >= 1 ? '\u{1F44D}' : '\u{1F4AA}';
+  var title = starCount === 3 ? 'Perfect Score!' : starCount >= 2 ? 'Great Job!' : starCount >= 1 ? 'Good Try!' : 'Keep Practicing!';
+
+  $('resultEmoji').textContent = emoji;
+  $('resultTitle').textContent = title;
+  $('resultXP').textContent = '\u2B50 You earned ' + (quizScore*5) + ' XP!';
+  $('resultDetail').textContent = quizScore + ' of ' + total + ' correct';
+
+  var stars = $('resultStars');
+  stars.innerHTML = '';
+  for(var i=0;i<3;i++){
+    var s = document.createElement('div');
+    s.className = 'result-star';
+    s.textContent = '\u2B50';
+    if(i < starCount){
+      setTimeout((function(el){return function(){el.classList.add('lit');};})(s), 300*(i+1));
+    }
+    stars.appendChild(s);
+  }
+
+  if(starCount === 3) setTimeout(launchConfetti, 500);
+
+  var btns = $('resultBtns');
+  btns.innerHTML = '';
+  var b1 = document.createElement('button');
+  b1.className = 'btn btn-replay';
+  b1.innerHTML = '\u{1F504} Play Again';
+  b1.onclick = function(){ startPhase(4); };
+  btns.appendChild(b1);
+
+  var b2 = document.createElement('button');
+  b2.className = 'btn btn-home-lg';
+  b2.innerHTML = '\u{1F3E0} Menu';
+  b2.onclick = function(){ showScreen('screen-intro'); };
+  btns.appendChild(b2);
+
+  if(soundEnabled) speakKaraoke(title);
+}
+
+// ===== INIT =====
+initFlags();
+</script>
+</body>
+</html>

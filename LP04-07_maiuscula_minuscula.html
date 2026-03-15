@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maiuscula e Minuscula - Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0d0b1e;min-height:100vh;overflow-x:hidden;color:#fff;}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+#app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding-bottom:32px;}
+.screen{display:none;width:100%;max-width:920px;padding:0 12px;}
+.screen.active{display:block;}
+
+/* NAVBAR */
+.navbar{width:100%;max-width:920px;display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:16px;position:sticky;top:0;z-index:100;}
+.nav-logo{font-size:clamp(13px,2.5vw,17px);font-weight:900;
+  background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-right{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.nav-score{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:20px;padding:4px 12px;font-size:13px;font-weight:800;color:#fff;}
+.nav-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;
+  padding:5px 11px;font-family:inherit;font-size:11px;font-weight:800;color:#fff;cursor:pointer;transition:all .18s;}
+.nav-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px);}
+.nav-btn.nb-home{color:#a78bfa;} .nav-btn.nb-back{color:#60a5fa;} .nav-btn.nb-skip{color:#fb923c;}
+.nav-btn.nb-index{color:#34d399;}
+.confirm-modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;background:rgba(0,0,0,.5);align-items:center;justify-content:center;}
+.confirm-modal-overlay.active{display:flex;}
+.confirm-modal{background:#fff;border:2px solid #a78bfa;border-radius:20px;padding:28px 24px;max-width:340px;width:90%;text-align:center;font-family:inherit;box-shadow:0 8px 40px rgba(124,58,237,.25);}
+body.theme-light .confirm-modal{background:#fff;color:#1a1535;}
+body.theme-dark .confirm-modal{background:#1a1535;color:#fff;border-color:#a78bfa;}
+.confirm-modal-icon{font-size:40px;margin-bottom:10px;}
+.confirm-modal-title{font-size:17px;font-weight:900;color:#7c3aed;margin-bottom:8px;}
+.confirm-modal-text{font-size:14px;font-weight:700;color:#1a1535;margin-bottom:20px;line-height:1.5;}
+body.theme-dark .confirm-modal-text{color:rgba(255,255,255,.85);}
+.confirm-modal-btns{display:flex;gap:10px;justify-content:center;}
+.confirm-btn-yes{background:#7c3aed;color:#fff;border:none;border-radius:12px;padding:11px 24px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:.18s;}
+.confirm-btn-yes:hover{background:#6d28d9;transform:translateY(-1px);}
+.confirm-btn-no{background:#e5e7eb;color:#374151;border:none;border-radius:12px;padding:11px 24px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:.18s;}
+.confirm-btn-no:hover{background:#d1d5db;transform:translateY(-1px);}
+body.theme-dark .confirm-btn-no{background:#374151;color:#fff;}
+.nav-a11y{display:flex;gap:4px;}
+.nav-a11y-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;
+  padding:5px 9px;font-family:inherit;font-size:13px;font-weight:800;color:#fff;cursor:pointer;transition:all .18s;line-height:1;}
+.nav-a11y-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px);}
+.nav-a11y-btn.nb-help{color:#fbbf24;}
+
+/* BUTTONS */
+.btn{border:none;border-radius:14px;font-family:inherit;font-weight:800;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn:active{transform:scale(.96)!important;}
+.btn-start{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:clamp(15px,2.8vw,19px);padding:15px 44px;border-radius:50px;box-shadow:0 4px 30px rgba(167,139,250,.5);animation:startPulse 2.2s ease infinite;}
+@keyframes startPulse{0%,100%{box-shadow:0 4px 30px rgba(167,139,250,.5),0 0 0 0 rgba(167,139,250,.3);}50%{box-shadow:0 4px 30px rgba(167,139,250,.6),0 0 0 16px rgba(167,139,250,0);}}
+.btn-start:hover{transform:translateY(-3px);filter:brightness(1.1);}
+.btn-check{background:linear-gradient(135deg,#10b981,#34d399);color:#fff;font-size:14px;padding:11px 22px;border-radius:12px;}
+.btn-check:hover{transform:translateY(-2px);}
+.btn-hint{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#fff;font-size:14px;padding:11px 22px;border-radius:12px;}
+.btn-hint:hover{transform:translateY(-2px);}
+.btn-replay{background:linear-gradient(135deg,#7c3aed,#a855f7);border:none;color:#fff;font-size:13px;padding:10px 18px;border-radius:12px;font-weight:800;}
+.btn-replay:hover{filter:brightness(1.12);transform:translateY(-2px);}
+.btn-next{background:linear-gradient(135deg,#f472b6,#fb923c);color:#fff;font-size:15px;padding:12px 30px;border-radius:12px;}
+.btn-next:hover{transform:translateY(-2px);}
+.btn-home-lg{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:#a78bfa;font-size:13px;padding:10px 20px;border-radius:12px;}
+.btn-home-lg:hover{background:rgba(167,139,250,.25);transform:translateY(-2px);}
+.btn-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+
+/* INTRO */
+#screen-intro{text-align:center;padding-top:8px;}
+.intro-badge{display:inline-block;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);border-radius:30px;padding:4px 16px;font-size:11px;font-weight:700;color:#a78bfa;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+.intro-mascot{font-size:clamp(60px,12vw,88px);display:block;margin:0 auto 10px;animation:mfloat 3s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(167,139,250,.5));}
+@keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-14px) rotate(3deg);}}
+.intro-title{font-size:clamp(24px,5vw,44px);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+.intro-sub{font-size:clamp(13px,2.5vw,16px);color:rgba(255,255,255,.6);margin-bottom:20px;font-weight:600;}
+.part-pills{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:20px;}
+.part-pill{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px 20px;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:148px;transition:.2s;cursor:pointer;}
+.part-pill:hover{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.5);transform:translateY(-3px);box-shadow:0 6px 20px rgba(167,139,250,.25);}
+.part-pill-icon{font-size:30px;}
+.part-pill-num{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#f472b6);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;}
+.part-pill-title{font-size:13px;font-weight:900;color:#a78bfa;}
+.part-pill-desc{font-size:11px;color:rgba(255,255,255,.5);font-weight:700;text-align:center;line-height:1.4;}
+.intro-tip{color:rgba(255,255,255,.38);font-size:11px;font-weight:600;margin-bottom:22px;line-height:1.7;}
+
+/* GAME */
+.game-body{display:flex;flex-direction:column;gap:12px;}
+.level-bar{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+.level-steps{display:flex;gap:7px;}
+.step{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;transition:.3s;}
+.step.done{background:linear-gradient(135deg,#10b981,#34d399);}
+.step.active{background:linear-gradient(135deg,#a78bfa,#f472b6);box-shadow:0 2px 14px rgba(167,139,250,.5);transform:scale(1.1);}
+.step.pending{background:rgba(255,255,255,.07);color:rgba(255,255,255,.25);}
+.li-title{font-size:14px;font-weight:900;color:#a78bfa;}
+.li-desc{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;}
+.sera-bubble{display:flex;align-items:flex-start;gap:12px;background:rgba(167,139,250,.09);border:1px solid rgba(167,139,250,.22);border-radius:18px;padding:13px 15px;transition:.3s;}
+.sera-bubble.success{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);}
+.sera-bubble.error{background:rgba(239,68,68,.09);border-color:rgba(239,68,68,.25);}
+.sera-bubble.hint-mode{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.28);}
+.sera-icon{font-size:36px;flex-shrink:0;line-height:1;}
+.sera-main{font-size:clamp(13px,2.5vw,15px);font-weight:700;color:rgba(255,255,255,.9);line-height:1.45;}
+.sera-sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;font-weight:600;}
+
+/* ALPHA GRID */
+.alpha-section-label{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(167,139,250,.8);margin-bottom:8px;}
+.alpha-grid{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:16px 10px;}
+.alpha-slot{width:48px;height:54px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:clamp(17px,3vw,22px);font-weight:900;transition:all .2s;flex-shrink:0;position:relative;}
+.alpha-slot.fixed{background:rgba(167,139,250,.15);border:2px solid rgba(167,139,250,.28);color:#e2d9f3;}
+.alpha-slot.empty{background:rgba(255,255,255,.04);border:2px dashed rgba(255,255,255,.2);color:rgba(255,255,255,.12);cursor:pointer;}
+.alpha-slot.empty:hover{border-color:rgba(167,139,250,.55);background:rgba(167,139,250,.09);}
+/* FOCUSED slot: large pulsing animation */
+.alpha-slot.empty.focused{
+  border:3px solid #a78bfa !important;
+  background:rgba(167,139,250,.22) !important;
+  color:rgba(167,139,250,.6) !important;
+  animation:focusPulse 0.7s ease-in-out infinite alternate;
+  box-shadow:0 0 0 4px rgba(167,139,250,.35), 0 0 24px rgba(167,139,250,.5);
+  transform:scale(1.15);
+  z-index:2;
+}
+@keyframes focusPulse{
+  from{box-shadow:0 0 0 4px rgba(167,139,250,.35),0 0 18px rgba(167,139,250,.4);transform:scale(1.13);}
+  to{box-shadow:0 0 0 8px rgba(167,139,250,.15),0 0 32px rgba(167,139,250,.7);transform:scale(1.18);}
+}
+.alpha-slot.placed{background:linear-gradient(135deg,#f59e0b,#fbbf24);border:2px solid transparent;color:#1a0a00;cursor:grab;}
+.alpha-slot.placed:hover{transform:translateY(-3px) scale(1.06);}
+.alpha-slot.placed.dragging-src{opacity:.35;transform:scale(.88);}
+.alpha-slot.drag-over-slot{border:3px solid #a78bfa !important;box-shadow:0 0 0 4px rgba(167,139,250,.3) !important;transform:scale(1.08);}
+.alpha-slot.ok{background:linear-gradient(135deg,#16a34a,#4ade80)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 4px 14px rgba(22,163,74,.5)!important;cursor:default!important;}
+.alpha-slot.err{background:linear-gradient(135deg,#dc2626,#f87171)!important;color:#fff!important;border-color:transparent!important;cursor:pointer;animation:wshake .45s ease;}
+@keyframes wshake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+/* BANK */
+.bank-wrapper{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:14px;}
+.bank-label{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.bank-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:56px;align-items:center;}
+.letter-card{border-radius:12px;font-size:clamp(18px,3.5vw,24px);font-weight:900;cursor:grab;user-select:none;border:none;background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#1a0a00;box-shadow:0 4px 14px rgba(0,0,0,.3);transition:transform .18s,box-shadow .18s;min-width:52px;height:54px;display:flex;align-items:center;justify-content:center;touch-action:manipulation;}
+.letter-card:hover{transform:translateY(-4px) scale(1.07);box-shadow:0 8px 22px rgba(0,0,0,.4);}
+.letter-card.lc-sel{transform:translateY(-7px) scale(1.12)!important;box-shadow:0 0 0 3px #fff,0 8px 26px rgba(0,0,0,.5)!important;}
+.letter-card.dragging-src{opacity:.3;transform:scale(.88);}
+@keyframes hglow{0%,100%{box-shadow:0 4px 14px rgba(0,0,0,.3);}50%{box-shadow:0 0 0 5px #fbbf24,0 8px 24px rgba(245,158,11,.7);}}
+.letter-card.hint-glow{animation:hglow 1s ease infinite;}
+.classify-card.dragging-src{opacity:.3;transform:scale(.88);}
+
+/* CLASSIFY */
+.classify-notice{background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.4);border-radius:14px;padding:10px 16px;font-size:13px;font-weight:700;color:#fb923c;text-align:center;margin-bottom:4px;}
+.classify-arena{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.classify-col{border-radius:20px;padding:14px;min-height:160px;transition:.3s;cursor:pointer;}
+.classify-col.upper-col{background:rgba(167,139,250,.08);border:2px dashed rgba(167,139,250,.4);}
+.classify-col.lower-col{background:rgba(251,146,60,.07);border:2px dashed rgba(251,146,60,.35);}
+.classify-col.drag-over{border-style:solid;transform:scale(1.01);}
+.upper-col.drag-over{background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.8);}
+.lower-col.drag-over{background:rgba(251,146,60,.16);border-color:rgba(251,146,60,.8);}
+.col-header{text-align:center;margin-bottom:10px;pointer-events:none;}
+.col-icon{font-size:26px;display:block;margin-bottom:3px;}
+.upper-col .col-title{font-size:clamp(17px,4vw,26px);font-weight:900;color:#a78bfa;letter-spacing:1px;}
+.lower-col .col-title{font-size:clamp(15px,3.5vw,21px);font-weight:900;color:#fb923c;}
+.col-rule{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);margin-top:3px;line-height:1.4;}
+.col-cards{display:flex;flex-wrap:wrap;gap:6px;min-height:40px;align-items:flex-start;}
+.classify-card{border-radius:12px;font-size:clamp(13px,2.5vw,16px);font-weight:900;cursor:pointer;user-select:none;background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#1a0a00;box-shadow:0 3px 10px rgba(0,0,0,.25);transition:transform .18s,box-shadow .18s;padding:7px 13px;display:flex;flex-direction:column;align-items:center;gap:2px;touch-action:manipulation;text-align:center;}
+.classify-card:hover{transform:translateY(-3px) scale(1.04);}
+.classify-card.cc-sel{transform:translateY(-6px) scale(1.08)!important;box-shadow:0 0 0 3px #fff,0 8px 24px rgba(0,0,0,.45)!important;}
+.classify-card .c-ctx{font-size:9px;font-weight:700;opacity:.6;line-height:1.3;margin-top:1px;}
+.classify-card.card-ok{background:linear-gradient(135deg,#16a34a,#4ade80)!important;color:#fff!important;box-shadow:0 4px 18px rgba(22,163,74,.5)!important;cursor:default!important;}
+.classify-card.card-err{background:linear-gradient(135deg,#dc2626,#f87171)!important;color:#fff!important;box-shadow:0 4px 18px rgba(220,38,38,.5)!important;}
+.classify-bank{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:14px;}
+.classify-bank-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:56px;align-items:center;}
+
+/* LEVEL COMPLETE */
+#screen-levelcomplete{text-align:center;padding-top:12px;}
+.lc-mascot{font-size:76px;display:inline-block;animation:mfloat 3s ease-in-out infinite;}
+.lc-title{font-size:clamp(24px,5vw,38px);font-weight:900;background:linear-gradient(135deg,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:10px 0 6px;}
+.lc-msg{font-size:15px;color:rgba(255,255,255,.65);margin-bottom:22px;font-weight:600;}
+.stars-row{display:flex;justify-content:center;gap:12px;margin:14px 0;}
+.star{font-size:52px;animation:starPop .4s ease backwards;filter:grayscale(1) opacity(.3);transition:filter .3s;}
+.star.lit{filter:grayscale(0) opacity(1);}
+.star:nth-child(1){animation-delay:.1s}.star:nth-child(2){animation-delay:.3s}.star:nth-child(3){animation-delay:.5s}
+@keyframes starPop{0%{transform:scale(0) rotate(-30deg);opacity:0}60%{transform:scale(1.3) rotate(10deg);}100%{transform:scale(1);opacity:1}}
+
+/* PART BREAK */
+#screen-partbreak{text-align:center;padding-top:20px;}
+.pb-icon{font-size:70px;display:inline-block;animation:mfloat 3s ease-in-out infinite;}
+.pb-title{font-size:clamp(22px,4.5vw,36px);font-weight:900;background:linear-gradient(135deg,#fb923c,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:12px 0 8px;}
+.pb-msg{font-size:15px;color:rgba(255,255,255,.65);font-weight:600;max-width:480px;margin:0 auto 18px;line-height:1.65;}
+.pb-examples{display:flex;flex-direction:column;gap:8px;max-width:440px;margin:0 auto 20px;text-align:left;}
+.pb-ex{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:9px 16px;font-size:13px;font-weight:700;color:rgba(255,255,255,.8);line-height:1.5;}
+.pb-ex .hl{color:#a78bfa;font-size:17px;font-weight:900;}
+.pb-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(251,146,60,.12);border:1px solid rgba(251,146,60,.35);border-radius:20px;padding:8px 20px;font-size:13px;font-weight:800;color:#fb923c;margin-bottom:22px;}
+
+/* VICTORY */
+#screen-victory{text-align:center;padding-top:12px;}
+.vic-mascot{font-size:90px;display:inline-block;animation:vbounce .7s ease infinite alternate;}
+@keyframes vbounce{from{transform:scale(1) rotate(-6deg)}to{transform:scale(1.1) rotate(6deg)}}
+.vic-title{font-size:clamp(26px,5vw,44px);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:10px 0;}
+.vic-msg{font-size:clamp(14px,2.5vw,17px);font-weight:700;color:rgba(255,255,255,.85);line-height:1.5;background:rgba(167,139,250,.09);border:1px solid rgba(167,139,250,.22);border-radius:14px;padding:14px 18px;margin:0 auto 14px;max-width:480px;}
+.vic-score{font-size:clamp(18px,3.5vw,24px);font-weight:900;background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;}
+.vic-stars{font-size:34px;letter-spacing:4px;margin-bottom:22px;}
+#fw-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:999;}
+
+/* HELP MODAL */
+#help-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+#help-overlay.open{display:flex;}
+.help-box{background:#1e1347;border:2px solid rgba(167,139,250,.5);border-radius:24px;max-width:440px;width:90%;padding:28px 24px 24px;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.6);}
+.help-close{position:absolute;top:12px;right:16px;background:none;border:none;color:rgba(255,255,255,.45);font-size:22px;cursor:pointer;font-weight:900;}
+.help-close:hover{color:#fff;}
+.help-icon{font-size:54px;display:block;margin-bottom:10px;}
+.help-title{font-size:21px;font-weight:900;color:#a78bfa;margin-bottom:10px;font-family:inherit;}
+.help-text{font-size:15px;font-weight:700;color:rgba(255,255,255,.85);line-height:1.65;font-family:inherit;white-space:pre-line;}
+.help-btn-ok{margin-top:20px;background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;border:none;border-radius:14px;padding:12px 36px;font-size:15px;font-weight:900;cursor:pointer;font-family:inherit;transition:all .2s;}
+.help-btn-ok:hover{filter:brightness(1.1);transform:translateY(-2px);}
+
+/* LIGHT THEME */
+body.theme-light{background:#e8edf8;color:#1a1a2e;}
+body.theme-light #starfield{opacity:.07;}
+body.theme-light .navbar{background:rgba(255,255,255,.85);border-color:rgba(0,0,0,.1);}
+body.theme-light .nav-btn{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.12);color:#1a1a2e;}
+body.theme-light .nav-btn.nb-home{color:#6d28d9;}
+body.theme-light .nav-a11y-btn{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.12);color:#1a1a2e;}
+body.theme-light .nav-a11y-btn.nb-help{color:#d97706;}
+body.theme-light .level-bar{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);}
+body.theme-light .li-title{color:#6d28d9;}
+body.theme-light .li-desc{color:rgba(26,26,46,.45);}
+body.theme-light .step.pending{background:rgba(0,0,0,.08);color:rgba(26,26,46,.25);}
+body.theme-light .sera-bubble{background:rgba(109,40,217,.08);border-color:rgba(109,40,217,.2);}
+body.theme-light .sera-main{color:rgba(26,26,46,.9);}
+body.theme-light .sera-sub{color:rgba(26,26,46,.5);}
+body.theme-light .alpha-grid,.body.theme-light .bank-wrapper,.body.theme-light .classify-bank{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.07);}
+body.theme-light .alpha-slot.fixed{background:rgba(109,40,217,.1);border-color:rgba(109,40,217,.25);color:#3b0764;}
+body.theme-light .alpha-slot.empty{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.18);color:rgba(26,26,46,.15);}
+body.theme-light .bank-label{color:rgba(26,26,46,.35);}
+body.theme-light .classify-col.upper-col{background:rgba(109,40,217,.06);border-color:rgba(109,40,217,.35);}
+body.theme-light .classify-col.lower-col{background:rgba(234,88,12,.06);border-color:rgba(234,88,12,.3);}
+body.theme-light .col-rule{color:rgba(26,26,46,.4);}
+body.theme-light .lc-msg{color:rgba(26,26,46,.6);}
+body.theme-light .pb-msg{color:rgba(26,26,46,.65);}
+body.theme-light .pb-ex{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);color:rgba(26,26,46,.8);}
+body.theme-light .vic-msg{color:rgba(26,26,46,.85);background:rgba(109,40,217,.07);border-color:rgba(109,40,217,.2);}
+body.theme-light .help-box{background:#fff;border-color:rgba(109,40,217,.4);}
+body.theme-light .help-title{color:#6d28d9;}
+body.theme-light .help-text{color:rgba(26,26,46,.85);}
+body.theme-light .intro-sub,.body.theme-light .intro-tip{color:rgba(26,26,46,.5);}
+body.theme-light .part-pill{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);}
+body.theme-light .part-pill-desc{color:rgba(26,26,46,.5);}
+body.theme-light .classify-notice{background:rgba(234,88,12,.08);border-color:rgba(234,88,12,.35);color:#c2410c;}
+
+/* FONT SIZE */
+html[data-fs="lg"] .letter-card,.html[data-fs="lg"] .alpha-slot{font-size:clamp(20px,4vw,28px)!important;}
+html[data-fs="xl"] .letter-card,.html[data-fs="xl"] .alpha-slot{font-size:clamp(25px,5vw,33px)!important;}
+html[data-fs="lg"] .alpha-slot{width:54px!important;height:60px!important;}
+html[data-fs="xl"] .alpha-slot{width:62px!important;height:68px!important;}
+html[data-fs="lg"] .classify-card{font-size:clamp(15px,3vw,19px)!important;}
+html[data-fs="xl"] .classify-card{font-size:clamp(18px,3.5vw,23px)!important;}
+html[data-fs="lg"] .sera-main{font-size:clamp(15px,3vw,18px)!important;}
+html[data-fs="xl"] .sera-main{font-size:clamp(17px,3.5vw,22px)!important;}
+
+@media(max-width:520px){
+  .classify-arena{gap:7px;}
+  .classify-card{font-size:12px;padding:6px 9px;}
+  .alpha-slot{width:36px!important;height:42px!important;font-size:14px!important;}
+  .col-rule{display:none;}
+}
+</style>
+</head>
+<body>
+<canvas id="fw-canvas"></canvas>
+<!-- MODAL HOME -->
+<div class="confirm-modal-overlay" id="confirm-home-modal">
+  <div class="confirm-modal">
+    <div class="confirm-modal-icon">🏠</div>
+    <div class="confirm-modal-title">Ir para o início?</div>
+    <div class="confirm-modal-text">Tem certeza que quer ir para a tela de escolher o jogo?</div>
+    <div class="confirm-modal-btns">
+      <button class="confirm-btn-yes" onclick="goToIndex()">Sim, ir!</button>
+      <button class="confirm-btn-no" onclick="closeHomeModal()">Não, ficar</button>
+    </div>
+  </div>
+</div>
+<canvas id="starfield"></canvas>
+<div id="app">
+
+<nav class="navbar">
+  <div class="nav-logo">&#x1F4D6; Projeto Serafina</div>
+  <div class="nav-right">
+    <button class="nav-btn nb-index" onclick="showHomeModal()">🏠 Home</button>
+    <div class="nav-score">&#x2B50; <span id="score-val">0</span> pts</div>
+    <button class="nav-btn nb-home" onclick="goHome()">&#x1F3E0; Inicio</button>
+    <button class="nav-btn nb-back" id="btn-back" onclick="backLevel()" style="display:none">&#x23EE; Voltar</button>
+    <button class="nav-btn nb-skip" id="btn-skip" onclick="skipLevel()" style="display:none">&#x23ED; Avan&ccedil;ar</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btn-theme" onclick="toggleTheme()" title="Claro/Escuro">&#x1F31D;</button>
+      <button class="nav-a11y-btn" onclick="changeFontSize(-1)">A&#x2212;</button>
+      <button class="nav-a11y-btn" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn nb-help" onclick="showHelp()">&#x2753;</button>
+    </div>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<div id="screen-intro" class="screen active">
+  <div style="text-align:center;padding-top:8px;">
+    <div class="intro-badge">&#x1F4D6; Projeto Serafina</div>
+    <span class="intro-mascot">&#x1F4D3;</span>
+    <div class="intro-title">Maiuscula e Minuscula!</div>
+    <div class="intro-sub">O diario da Serafina precisa da sua ajuda!</div>
+    <div class="part-pills">
+      <div class="part-pill" onclick="goToLevel(0)">
+        <div class="part-pill-icon">&#x1F524;</div>
+        <div class="part-pill-num">1</div>
+        <div class="part-pill-title">Alfabeto MAIUSCULO</div>
+        <div class="part-pill-desc">Complete as letras<br>maiusculas que faltam</div>
+      </div>
+      <div class="part-pill" onclick="goToLevel(1)">
+        <div class="part-pill-icon">&#x270F;&#xFE0F;</div>
+        <div class="part-pill-num">2</div>
+        <div class="part-pill-title">Alfabeto minusculo</div>
+        <div class="part-pill-desc">Complete as letras<br>minusculas que faltam</div>
+      </div>
+      <div class="part-pill" onclick="goToLevel(2)">
+        <div class="part-pill-icon">&#x1F4DD;</div>
+        <div class="part-pill-num">3</div>
+        <div class="part-pill-title">Nome proprio ou comum?</div>
+        <div class="part-pill-desc">Classifique cada<br>palavra no lugar certo</div>
+      </div>
+      <div class="part-pill" onclick="goToLevel(3)">
+        <div class="part-pill-icon">&#x1F4C4;</div>
+        <div class="part-pill-num">4</div>
+        <div class="part-pill-title">Inicio de frase</div>
+        <div class="part-pill-desc">Quando usar maiuscula<br>em frases?</div>
+      </div>
+    </div>
+    <div class="intro-tip">&#x1F4F1; Celular: toque nas letras &#x1F4BB; Computador: clique ou arraste</div>
+    <button class="btn btn-start" onclick="startGame()">&#x1F680; Comecar Aventura!</button>
+  </div>
+</div>
+
+<!-- GAME -->
+<div id="screen-game" class="screen">
+  <div class="game-body">
+    <div class="level-bar">
+      <div class="level-steps" id="level-steps"></div>
+      <div style="text-align:right;">
+        <div class="li-title" id="li-title">Nivel 1</div>
+        <div class="li-desc"  id="li-desc"></div>
+      </div>
+    </div>
+    <div class="sera-bubble" id="sera-bubble">
+      <div class="sera-icon">&#x1F467;</div>
+      <div>
+        <div class="sera-main" id="sera-main">Vamos comecar!</div>
+        <div class="sera-sub"  id="sera-sub"></div>
+      </div>
+    </div>
+    <div id="game-content"></div>
+    <div class="btn-row" id="btn-row">
+      <button class="btn btn-check"  onclick="checkAnswer()">&#x2714;&#xFE0F; Verificar</button>
+      <button class="btn btn-hint"   onclick="showHint()">&#x1F4A1; Dica</button>
+      <button class="btn btn-replay" onclick="replayLevel()">&#x1F504; Nova rodada</button>
+    </div>
+  </div>
+</div>
+
+<!-- LEVEL COMPLETE -->
+<div id="screen-levelcomplete" class="screen">
+  <div style="text-align:center;padding-top:14px;">
+    <div class="lc-mascot">&#x1F389;</div>
+    <div class="lc-title" id="lc-title">Nivel Completo!</div>
+    <div class="stars-row">
+      <span class="star" id="star1">&#x2B50;</span>
+      <span class="star" id="star2">&#x2B50;</span>
+      <span class="star" id="star3">&#x2B50;</span>
+    </div>
+    <div class="lc-msg" id="lc-msg"></div>
+    <div class="btn-row" style="justify-content:center;gap:12px;">
+      <button class="btn btn-next" id="btn-lc-next" onclick="nextLevel()">Proximo &#x27A1;</button>
+      <button class="btn btn-home-lg" onclick="goHome()">&#x1F3E0; Inicio</button>
+    </div>
+  </div>
+</div>
+
+<!-- PART BREAK -->
+<div id="screen-partbreak" class="screen">
+  <div style="text-align:center;padding-top:14px;">
+    <div class="pb-icon">&#x270F;&#xFE0F;</div>
+    <div class="pb-title">Parte 1 concluida!</div>
+    <div class="pb-msg">Voce completou o alfabeto! Agora o segundo desafio:<br>decidir quando usar <strong>MAIUSCULA</strong> ou <strong>minuscula</strong>.</div>
+    <div class="pb-examples">
+      <div class="pb-ex"><span class="hl">S</span>erafina &rarr; nome de uma menina = começa com <span class="hl">MAIUSCULA</span></div>
+      <div class="pb-ex"><span class="hl">B</span>rasil &rarr; nome de um pais = começa com <span class="hl">MAIUSCULA</span></div>
+      <div class="pb-ex">borboleta &rarr; nome comum = fica com <strong>minuscula</strong></div>
+      <div class="pb-ex"><span class="hl">A</span> Serafina foi ao parque. &rarr; inicio de frase = <span class="hl">MAIUSCULA</span></div>
+    </div>
+    <div class="pb-badge">&#x270F;&#xFE0F; Parte 2 &mdash; Quando usar Maiuscula?</div>
+    <div class="btn-row" style="justify-content:center;gap:12px;">
+      <button class="btn btn-next" onclick="startPart2()">Vamos la! &#x27A1;</button>
+      <button class="btn btn-home-lg" onclick="goHome()">&#x1F3E0; Inicio</button>
+    </div>
+  </div>
+</div>
+
+<!-- VICTORY -->
+<div id="screen-victory" class="screen">
+  <div style="text-align:center;padding-top:14px;">
+    <div class="vic-mascot">&#x1F3C6;</div>
+    <div class="vic-title">Expert em Maiusculas!</div>
+    <div class="vic-stars" id="vic-stars"></div>
+    <div class="vic-msg"   id="vic-msg"></div>
+    <div class="vic-score" id="vic-score"></div>
+    <div class="btn-row" style="justify-content:center;gap:12px;">
+      <button class="btn btn-start"   onclick="startGame()">&#x1F504; Jogar Novamente</button>
+      <button class="btn btn-home-lg" onclick="goHome()">&#x1F3E0; Inicio</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<div id="help-overlay" onclick="closeHelp(event)">
+  <div class="help-box">
+    <button class="help-close" onclick="closeHelp()">&#x2715;</button>
+    <span class="help-icon" id="help-icon">&#x1F4D3;</span>
+    <div class="help-title" id="help-title">Como jogar?</div>
+    <div class="help-text"  id="help-text"></div>
+    <button class="help-btn-ok" onclick="closeHelp()">Entendi! &#x1F60A;</button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  WORD BANKS
+// ============================================================
+
+// Uppercase (proper nouns): people names, countries, cities
+var UPPER_POOL = [
+  // pessoas
+  {w:'serafina',ctx:'nome de uma menina'},{w:'pedro',ctx:'nome de um menino'},
+  {w:'ana',ctx:'nome de uma menina'},{w:'lucas',ctx:'nome de um menino'},
+  {w:'maria',ctx:'nome de uma menina'},{w:'joao',ctx:'nome de um menino'},
+  {w:'sofia',ctx:'nome de uma menina'},{w:'mateus',ctx:'nome de um menino'},
+  {w:'isabela',ctx:'nome de uma menina'},{w:'gabriel',ctx:'nome de um menino'},
+  {w:'valentina',ctx:'nome de uma menina'},{w:'arthur',ctx:'nome de um menino'},
+  {w:'beatriz',ctx:'nome de uma menina'},{w:'heitor',ctx:'nome de um menino'},
+  {w:'cecilia',ctx:'nome de uma menina'},{w:'davi',ctx:'nome de um menino'},
+  {w:'alice',ctx:'nome de uma menina'},{w:'felipe',ctx:'nome de um menino'},
+  {w:'laura',ctx:'nome de uma menina'},{w:'rafael',ctx:'nome de um menino'},
+  {w:'clara',ctx:'nome de uma menina'},{w:'bruno',ctx:'nome de um menino'},
+  {w:'mariana',ctx:'nome de uma menina'},{w:'rodrigo',ctx:'nome de um menino'},
+  {w:'leticia',ctx:'nome de uma menina'},{w:'eduardo',ctx:'nome de um menino'},
+  {w:'julia',ctx:'nome de uma menina'},{w:'thiago',ctx:'nome de um menino'},
+  {w:'natalia',ctx:'nome de uma menina'},{w:'diego',ctx:'nome de um menino'},
+  {w:'camila',ctx:'nome de uma menina'},{w:'henrique',ctx:'nome de um menino'},
+  {w:'amanda',ctx:'nome de uma menina'},{w:'vitor',ctx:'nome de um menino'},
+  {w:'patricia',ctx:'nome de uma menina'},{w:'carlos',ctx:'nome de um menino'},
+  {w:'fernanda',ctx:'nome de uma menina'},{w:'marcos',ctx:'nome de um menino'},
+  {w:'paulo',ctx:'nome de um menino'},{w:'claudia',ctx:'nome de uma menina'},
+  {w:'antonio',ctx:'nome de um menino'},{w:'helena',ctx:'nome de uma menina'},
+  {w:'jose',ctx:'nome de um menino'},{w:'rosa',ctx:'nome de uma menina'},
+  {w:'francisco',ctx:'nome de um menino'},{w:'vera',ctx:'nome de uma menina'},
+  {w:'nelson',ctx:'nome de um menino'},{w:'luzia',ctx:'nome de uma menina'},
+  {w:'roberto',ctx:'nome de um menino'},{w:'silvia',ctx:'nome de uma menina'},
+  {w:'jorge',ctx:'nome de um menino'},{w:'angela',ctx:'nome de uma menina'},
+  {w:'sergio',ctx:'nome de um menino'},{w:'monica',ctx:'nome de uma menina'},
+  {w:'fabio',ctx:'nome de um menino'},{w:'denise',ctx:'nome de uma menina'},
+  {w:'guilherme',ctx:'nome de um menino'},{w:'viviane',ctx:'nome de uma menina'},
+  {w:'leandro',ctx:'nome de um menino'},{w:'renata',ctx:'nome de uma menina'},
+  {w:'mauricio',ctx:'nome de um menino'},{w:'adriana',ctx:'nome de uma menina'},
+  {w:'alexandre',ctx:'nome de um menino'},{w:'cristina',ctx:'nome de uma menina'},
+  {w:'caio',ctx:'nome de um menino'},{w:'bruna',ctx:'nome de uma menina'},
+  {w:'tiago',ctx:'nome de um menino'},{w:'elisa',ctx:'nome de uma menina'},
+  {w:'gustavo',ctx:'nome de um menino'},{w:'rebeca',ctx:'nome de uma menina'},
+  {w:'samuel',ctx:'nome de um menino'},{w:'enzo',ctx:'nome de um menino'},
+  {w:'lorena',ctx:'nome de uma menina'},{w:'yasmin',ctx:'nome de uma menina'},
+  {w:'bento',ctx:'nome de um menino'},{w:'miguel',ctx:'nome de um menino'},
+  {w:'mario',ctx:'nome de um menino'},{w:'nadia',ctx:'nome de uma menina'},
+  {w:'olga',ctx:'nome de uma menina'},{w:'raul',ctx:'nome de um menino'},
+  {w:'simone',ctx:'nome de uma menina'},{w:'igor',ctx:'nome de um menino'},
+  {w:'bianca',ctx:'nome de uma menina'},{w:'jade',ctx:'nome de uma menina'},
+  {w:'diana',ctx:'nome de uma menina'},{w:'tatiana',ctx:'nome de uma menina'},
+  {w:'aline',ctx:'nome de uma menina'},{w:'ricardo',ctx:'nome de um menino'},
+  {w:'daniel',ctx:'nome de um menino'},{w:'juliana',ctx:'nome de uma menina'},
+  {w:'renan',ctx:'nome de um menino'},{w:'marcela',ctx:'nome de uma menina'},
+  {w:'vinicius',ctx:'nome de um menino'},{w:'giovanna',ctx:'nome de uma menina'},
+  {w:'bernardo',ctx:'nome de um menino'},{w:'manuela',ctx:'nome de uma menina'},
+  {w:'nicolas',ctx:'nome de um menino'},{w:'livia',ctx:'nome de uma menina'},
+  {w:'otavio',ctx:'nome de um menino'},{w:'sabrina',ctx:'nome de uma menina'},
+  {w:'ruan',ctx:'nome de um menino'},{w:'pietra',ctx:'nome de uma menina'},
+  {w:'ian',ctx:'nome de um menino'},{w:'augusto',ctx:'nome de um menino'},
+  {w:'melissa',ctx:'nome de uma menina'},{w:'murilo',ctx:'nome de um menino'},
+  {w:'kaique',ctx:'nome de um menino'},{w:'isadora',ctx:'nome de uma menina'},
+  {w:'heloisa',ctx:'nome de uma menina'},{w:'catarina',ctx:'nome de uma menina'},
+  {w:'luan',ctx:'nome de um menino'},{w:'mirella',ctx:'nome de uma menina'},
+  {w:'yuri',ctx:'nome de um menino'},{w:'layla',ctx:'nome de uma menina'},
+  {w:'ryan',ctx:'nome de um menino'},{w:'antonela',ctx:'nome de uma menina'},
+  // paises
+  {w:'brasil',ctx:'nome de um pais'},{w:'portugal',ctx:'nome de um pais'},
+  {w:'franca',ctx:'nome de um pais'},{w:'italia',ctx:'nome de um pais'},
+  {w:'alemanha',ctx:'nome de um pais'},{w:'espanha',ctx:'nome de um pais'},
+  {w:'argentina',ctx:'nome de um pais'},{w:'chile',ctx:'nome de um pais'},
+  {w:'peru',ctx:'nome de um pais'},{w:'colombia',ctx:'nome de um pais'},
+  {w:'mexico',ctx:'nome de um pais'},{w:'india',ctx:'nome de um pais'},
+  {w:'china',ctx:'nome de um pais'},{w:'japao',ctx:'nome de um pais'},
+  {w:'russia',ctx:'nome de um pais'},{w:'canada',ctx:'nome de um pais'},
+  {w:'australia',ctx:'nome de um pais'},{w:'egito',ctx:'nome de um pais'},
+  {w:'grecia',ctx:'nome de um pais'},{w:'turquia',ctx:'nome de um pais'},
+  {w:'nigeria',ctx:'nome de um pais'},{w:'angola',ctx:'nome de um pais'},
+  {w:'cuba',ctx:'nome de um pais'},{w:'suecia',ctx:'nome de um pais'},
+  {w:'noruega',ctx:'nome de um pais'},{w:'irlanda',ctx:'nome de um pais'},
+  {w:'holanda',ctx:'nome de um pais'},{w:'austria',ctx:'nome de um pais'},
+  {w:'bolivia',ctx:'nome de um pais'},{w:'equador',ctx:'nome de um pais'},
+  {w:'mocambique',ctx:'nome de um pais'},{w:'coreia',ctx:'nome de um pais'},
+  {w:'tailandia',ctx:'nome de um pais'},{w:'indonesia',ctx:'nome de um pais'},
+  // cidades
+  {w:'brasilia',ctx:'nome de uma cidade'},{w:'curitiba',ctx:'nome de uma cidade'},
+  {w:'fortaleza',ctx:'nome de uma cidade'},{w:'salvador',ctx:'nome de uma cidade'},
+  {w:'manaus',ctx:'nome de uma cidade'},{w:'recife',ctx:'nome de uma cidade'},
+  {w:'natal',ctx:'nome de uma cidade'},{w:'maceio',ctx:'nome de uma cidade'},
+  {w:'goiania',ctx:'nome de uma cidade'},{w:'vitoria',ctx:'nome de uma cidade'},
+  {w:'palmas',ctx:'nome de uma cidade'},{w:'teresina',ctx:'nome de uma cidade'},
+  {w:'cuiaba',ctx:'nome de uma cidade'},{w:'macapa',ctx:'nome de uma cidade'},
+  {w:'aracaju',ctx:'nome de uma cidade'},{w:'campinas',ctx:'nome de uma cidade'},
+  {w:'londrina',ctx:'nome de uma cidade'},{w:'niteroi',ctx:'nome de uma cidade'},
+  {w:'blumenau',ctx:'nome de uma cidade'},{w:'lima',ctx:'nome de uma cidade'},
+  {w:'paris',ctx:'nome de uma cidade'},{w:'roma',ctx:'nome de uma cidade'},
+  {w:'berlim',ctx:'nome de uma cidade'},{w:'toquio',ctx:'nome de uma cidade'},
+  {w:'cairo',ctx:'nome de uma cidade'},{w:'moscou',ctx:'nome de uma cidade'},
+  {w:'toronto',ctx:'nome de uma cidade'},{w:'sydney',ctx:'nome de uma cidade'},
+  {w:'oslo',ctx:'nome de uma cidade'},{w:'lisboa',ctx:'nome de uma cidade'},
+];
+
+// Lowercase (common nouns)
+var LOWER_POOL = [
+  // animais
+  {w:'gato',ctx:'animal de estimacao'},{w:'cachorro',ctx:'animal de estimacao'},
+  {w:'elefante',ctx:'animal enorme'},{w:'leao',ctx:'animal feroz'},
+  {w:'urso',ctx:'animal forte'},{w:'macaco',ctx:'animal esperto'},
+  {w:'girafa',ctx:'pescoco comprido'},{w:'zebra',ctx:'animal listrado'},
+  {w:'pinguim',ctx:'ave que nao voa'},{w:'golfinho',ctx:'animal marinho'},
+  {w:'baleia',ctx:'maior animal do mar'},{w:'tubarao',ctx:'peixe grande'},
+  {w:'formiga',ctx:'inseto pequeno'},{w:'abelha',ctx:'inseto que faz mel'},
+  {w:'borboleta',ctx:'inseto colorido'},{w:'lagarta',ctx:'vira borboleta'},
+  {w:'joaninha',ctx:'inseto com pintinhas'},{w:'passaro',ctx:'animal que voa'},
+  {w:'papagaio',ctx:'ave que fala'},{w:'tucano',ctx:'bico colorido'},
+  {w:'sapo',ctx:'anfibio verde'},{w:'jabuti',ctx:'reptil de casco'},
+  {w:'cobra',ctx:'reptil rastejante'},{w:'lagarto',ctx:'reptil com patas'},
+  {w:'capivara',ctx:'maior roedor'},{w:'veado',ctx:'animal com chifres'},
+  {w:'raposa',ctx:'animal esperto'},{w:'lobo',ctx:'animal uivante'},
+  {w:'tigre',ctx:'felino listrado'},{w:'puma',ctx:'felino americano'},
+  {w:'gorila',ctx:'macaco enorme'},{w:'panda',ctx:'urso preto e branco'},
+  {w:'canguru',ctx:'animal australiano'},{w:'pavao',ctx:'cauda colorida'},
+  {w:'flamingo',ctx:'ave cor-de-rosa'},{w:'morcego',ctx:'mamifero voador'},
+  {w:'coruja',ctx:'ave noturna'},{w:'gaviao',ctx:'ave de rapina'},
+  {w:'pomba',ctx:'ave branca'},{w:'periquito',ctx:'ave colorida'},
+  {w:'rinoceronte',ctx:'chifre no nariz'},{w:'hipopotamo',ctx:'animal de rio'},
+  // objetos
+  {w:'livro',ctx:'objeto para ler'},{w:'mesa',ctx:'movel para trabalhar'},
+  {w:'cadeira',ctx:'movel para sentar'},{w:'janela',ctx:'abertura na parede'},
+  {w:'porta',ctx:'entrada de um comodo'},{w:'cama',ctx:'movel para dormir'},
+  {w:'fogao',ctx:'eletrodomestico'},{w:'geladeira',ctx:'conserva alimentos'},
+  {w:'panela',ctx:'utensilio de cozinha'},{w:'colher',ctx:'utensilio para comer'},
+  {w:'garfo',ctx:'utensilio para comer'},{w:'faca',ctx:'utensilio de cozinha'},
+  {w:'prato',ctx:'utensilio para comida'},{w:'copo',ctx:'utensilio para beber'},
+  {w:'caneta',ctx:'objeto para escrever'},{w:'lapis',ctx:'objeto para desenhar'},
+  {w:'borracha',ctx:'objeto de papelaria'},{w:'mochila',ctx:'bolsa das costas'},
+  {w:'lampada',ctx:'objeto que ilumina'},{w:'televisao',ctx:'eletrodomestico'},
+  {w:'computador',ctx:'maquina digital'},{w:'celular',ctx:'telefone portatil'},
+  {w:'relogio',ctx:'marca o tempo'},{w:'oculos',ctx:'objeto para enxergar'},
+  {w:'chapeu',ctx:'acessorio para cabeca'},{w:'sapato',ctx:'calcado'},
+  {w:'tenis',ctx:'calcado esportivo'},{w:'bota',ctx:'calcado alto'},
+  {w:'camisa',ctx:'peca de roupa'},{w:'vestido',ctx:'roupa feminina'},
+  {w:'casaco',ctx:'roupa de frio'},{w:'pijama',ctx:'roupa de dormir'},
+  {w:'toalha',ctx:'para se secar'},{w:'travesseiro',ctx:'para dormir'},
+  {w:'cobertor',ctx:'para se aquecer'},{w:'espelho',ctx:'para se ver'},
+  {w:'quadro',ctx:'decoracao de parede'},{w:'vaso',ctx:'objeto para flores'},
+  {w:'tesoura',ctx:'objeto para cortar'},{w:'cola',ctx:'para grudar'},
+  {w:'tinta',ctx:'liquido colorido'},{w:'pincel',ctx:'para pintar'},
+  {w:'papel',ctx:'material para escrever'},{w:'caderno',ctx:'objeto escolar'},
+  {w:'regua',ctx:'para medir'},
+  // alimentos
+  {w:'pao',ctx:'alimento do cafe'},{w:'bolo',ctx:'doce de aniversario'},
+  {w:'sorvete',ctx:'doce gelado'},{w:'pizza',ctx:'comida italiana'},
+  {w:'macarrao',ctx:'massa italiana'},{w:'arroz',ctx:'alimento basico'},
+  {w:'feijao',ctx:'alimento basico'},{w:'carne',ctx:'proteina animal'},
+  {w:'frango',ctx:'carne de ave'},{w:'ovo',ctx:'alimento proteico'},
+  {w:'leite',ctx:'bebida nutritiva'},{w:'queijo',ctx:'derivado do leite'},
+  {w:'iogurte',ctx:'derivado do leite'},{w:'suco',ctx:'bebida de fruta'},
+  {w:'cafe',ctx:'bebida quente'},{w:'cha',ctx:'bebida de ervas'},
+  {w:'mel',ctx:'doce das abelhas'},{w:'acucar',ctx:'ingrediente doce'},
+  {w:'farinha',ctx:'ingrediente de bolo'},{w:'manteiga',ctx:'gordura do leite'},
+  {w:'tomate',ctx:'fruta vermelha'},{w:'cenoura',ctx:'legume laranja'},
+  {w:'batata',ctx:'legume amilaceo'},{w:'alface',ctx:'verdura de salada'},
+  {w:'milho',ctx:'cereal amarelo'},{w:'banana',ctx:'fruta amarela'},
+  {w:'maca',ctx:'fruta vermelha'},{w:'laranja',ctx:'fruta citrica'},
+  {w:'uva',ctx:'fruta de cacho'},{w:'morango',ctx:'fruta vermelha'},
+  {w:'manga',ctx:'fruta tropical'},{w:'coco',ctx:'fruta tropical'},
+  {w:'abacaxi',ctx:'fruta amarela'},{w:'melancia',ctx:'fruta com sementes'},
+  {w:'mamao',ctx:'fruta laranja'},{w:'goiaba',ctx:'fruta rosada'},
+  {w:'kiwi',ctx:'fruta verde por dentro'},{w:'pera',ctx:'fruta em sino'},
+  {w:'abacate',ctx:'fruta verde'},{w:'limao',ctx:'fruta acida'},
+  // natureza e lugares comuns
+  {w:'arvore',ctx:'planta grande'},{w:'flor',ctx:'planta bonita'},
+  {w:'semente',ctx:'origem de uma planta'},{w:'folha',ctx:'parte das plantas'},
+  {w:'pedra',ctx:'material da natureza'},{w:'areia',ctx:'material da praia'},
+  {w:'rio',ctx:'curso de agua'},{w:'lago',ctx:'agua parada'},
+  {w:'mar',ctx:'grande extensao de agua'},{w:'montanha',ctx:'elevacao do terreno'},
+  {w:'floresta',ctx:'area arborizada'},{w:'campo',ctx:'area plana'},
+  {w:'jardim',ctx:'area com plantas'},{w:'parque',ctx:'area de lazer'},
+  {w:'praia',ctx:'beira do mar'},{w:'caverna',ctx:'buraco na rocha'},
+  {w:'deserto',ctx:'area seca e quente'},{w:'pasto',ctx:'area com grama'},
+  {w:'fazenda',ctx:'propriedade rural'},{w:'rua',ctx:'via de circulacao'},
+  {w:'praca',ctx:'espaco publico'},{w:'hospital',ctx:'lugar de saude'},
+  {w:'mercado',ctx:'lugar de compras'},{w:'cinema',ctx:'lugar de filmes'},
+  {w:'teatro',ctx:'lugar de pecas'},{w:'museu',ctx:'lugar de historia'},
+  {w:'biblioteca',ctx:'lugar de livros'},{w:'escola',ctx:'lugar de aprender'},
+  // outros
+  {w:'bola',ctx:'objeto esportivo'},{w:'boneca',ctx:'brinquedo'},
+  {w:'carrinho',ctx:'brinquedo'},{w:'pipa',ctx:'brinquedo de vento'},
+  {w:'estrela',ctx:'astro do ceu'},{w:'lua',ctx:'satelite da terra'},
+  {w:'sol',ctx:'estrela do sistema solar'},{w:'nuvem',ctx:'vapor de agua'},
+  {w:'chuva',ctx:'agua que cai do ceu'},{w:'trovao',ctx:'som da tempestade'},
+  {w:'vento',ctx:'movimento do ar'},{w:'fogo',ctx:'chama quente'},
+  {w:'agua',ctx:'liquido essencial'},{w:'terra',ctx:'solo onde plantamos'},
+  {w:'musica',ctx:'arte dos sons'},{w:'danca',ctx:'arte do movimento'},
+  {w:'historia',ctx:'narrativa do passado'},{w:'poesia',ctx:'texto rimado'},
+  {w:'diario',ctx:'caderno de anotacoes'},{w:'carta',ctx:'mensagem escrita'},
+  {w:'trem',ctx:'veiculo sobre trilhos'},{w:'aviao',ctx:'veiculo aereo'},
+  {w:'navio',ctx:'veiculo aquatico'},{w:'onibus',ctx:'transporte coletivo'},
+  {w:'bicicleta',ctx:'veiculo de pedal'},{w:'carro',ctx:'veiculo automotivo'},
+  {w:'barco',ctx:'embarcacao pequena'},{w:'foguete',ctx:'veiculo espacial'},
+];
+
+// Level 4 sentence context pools
+var SENT_UPPER_POOL = [
+  {w:'a',ctx:'"___ Serafina abriu o diario."'},
+  {w:'era',ctx:'"___ uma vez uma menina..."'},
+  {w:'o',ctx:'"___ diario estava escondido."'},
+  {w:'hoje',ctx:'"___ acordei muito feliz!"'},
+  {w:'meu',ctx:'"___ esconderijo e secreto!"'},
+  {w:'ontem',ctx:'"___ foi um dia especial."'},
+  {w:'amanha',ctx:'"___ vou para a escola."'},
+  {w:'quando',ctx:'"___ ela chegou, sorriu."'},
+  {w:'entao',ctx:'"___ ela escreveu tudo."'},
+  {w:'depois',ctx:'"___ veio a melhor parte!"'},
+  {w:'serafina',ctx:'"___ adorava escrever."'},
+  {w:'pedro',ctx:'"___ era o melhor amigo."'},
+  {w:'ana',ctx:'"___ encontrou o caderno."'},
+  {w:'brasil',ctx:'"___ e um pais incrivel!"'},
+  {w:'lucas',ctx:'"___ correu pelo parque."'},
+  {w:'maria',ctx:'"___ escreveu uma carta."'},
+  {w:'sofia',ctx:'"___ adora ler livros."'},
+  {w:'gabriel',ctx:'"___ trouxe uma surpresa."'},
+  {w:'joao',ctx:'"___ e o melhor jogador."'},
+  {w:'curitiba',ctx:'"___ e uma cidade linda."'},
+];
+var SENT_LOWER_POOL = [
+  {w:'diario',ctx:'"Ela abriu o ___."'},
+  {w:'no',ctx:'"Serafina escreveu ___ caderno."'},
+  {w:'estava',ctx:'"O diario ___ escondido."'},
+  {w:'com',ctx:'"Brinquei ___ minhas amigas."'},
+  {w:'secreto',ctx:'"E um lugar muito ___."'},
+  {w:'bonita',ctx:'"A flor era muito ___."'},
+  {w:'grande',ctx:'"A arvore ficou bem ___."'},
+  {w:'feliz',ctx:'"Serafina ficou muito ___."'},
+  {w:'amiga',ctx:'"Era sua melhor ___."'},
+  {w:'colorida',ctx:'"A borboleta era ___."'},
+  {w:'na',ctx:'"Ficou guardado ___ gaveta."'},
+  {w:'um',ctx:'"Era ___ dia de sol."'},
+  {w:'para',ctx:'"O diario era so ___ ela."'},
+  {w:'seu',ctx:'"Serafina abriu ___ caderno."'},
+  {w:'uma',ctx:'"Era ___ tarde chuvosa."'},
+  {w:'bem',ctx:'"Ela escreveu muito ___."'},
+  {w:'tinha',ctx:'"O lugar ___ flores."'},
+  {w:'lindo',ctx:'"O esconderijo era ___."'},
+  {w:'de',ctx:'"Ela gostava ___ escrever."'},
+  {w:'gostou',ctx:'"Ela ___ do presente."'},
+];
+
+var MSG = [
+  "Uau! Voce arrasou! Aprender e a melhor aventura! \uD83C\uDF1F",
+  "Incrivel! Seu cerebro esta brilhando de talento! \u2728",
+  "Parabens! Voce e expert em maiusculas! \uD83C\uDFC6",
+  "Fantastico! Igual a Serafina, cheia de sabedoria! \uD83D\uDE80",
+  "Que demais! O diario da Serafina ficaria orgulhoso! \uD83C\uDF3A",
+  "Mandou bem! O conhecimento e o melhor superpoder! \u2B50",
+  "Top! Voce provou que aprender e uma aventura! \uD83E\uDD8B",
+  "Sensacional! Cada letra no lugarzinho certinho! \uD83C\uDF08",
+];
+
+var ALPHA_UPPER = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+var ALPHA_LOWER = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+var LVL = [
+  {id:1,part:1,type:'alpha',alpha:ALPHA_UPPER,title:'Nivel 1 de 4',desc:'Complete o alfabeto MAIUSCULO'},
+  {id:2,part:1,type:'alpha',alpha:ALPHA_LOWER,title:'Nivel 2 de 4',desc:'Complete o alfabeto minusculo'},
+  {id:3,part:2,type:'classify',title:'Nivel 3 de 4',desc:'Nome proprio ou nome comum?'},
+  {id:4,part:2,type:'classify',title:'Nivel 4 de 4',desc:'Inicio de frase ou meio de frase?'},
+];
+
+// ============================================================
+//  STATE
+// ============================================================
+var G = {
+  lvl:0,score:0,stars:0,hintsUsed:0,attempts:0,msgIdx:0,
+  // alpha
+  slots:[],          // {letter,blank,filled,state:'idle'|'ok'|'err'}
+  bank:[],           // {letter,slotIdx,used}
+  selBank:null,
+  focusSlot:null,
+  alphaDrag:null,    // {type:'bank'|'slot', idx}
+  currentBlanks:[],  // current blank positions
+  // classify
+  items:[],          // {w,ctx,correct,placed:null|'upper'|'lower'}
+  selCard:null,
+  feedback:null,     // {idx:bool}
+  classifyDrag:null,
+};
+
+// ============================================================
+//  STARFIELD
+// ============================================================
+(function(){
+  var c=document.getElementById('starfield'),ctx=c.getContext('2d'),stars=[];
+  function resize(){c.width=innerWidth;c.height=innerHeight;stars=[];for(var i=0;i<180;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5+.2,a:Math.random(),da:(Math.random()-.5)*.005,sp:Math.random()*.15+.04});}
+  function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.y-=s.sp;if(s.y<-5)s.y=c.height+5;s.a+=s.da;if(s.a>1||s.a<.1)s.da*=-1;ctx.save();ctx.globalAlpha=s.a;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();ctx.restore();});requestAnimationFrame(draw);}
+  resize();window.addEventListener('resize',resize);draw();
+})();
+
+function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=~~(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
+function nextMsg(){var m=MSG[G.msgIdx%MSG.length];G.msgIdx++;return m;}
+function setMsg(txt,type){var b=document.getElementById('sera-bubble');b.className='sera-bubble'+(type?' '+type:'');document.getElementById('sera-main').textContent=txt;document.getElementById('sera-sub').textContent='';}
+
+// ============================================================
+//  SCREENS
+// ============================================================
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  var isGame=id==='screen-game';
+  document.getElementById('btn-skip').style.display=isGame?'flex':'none';
+  document.getElementById('btn-back').style.display=(isGame&&G.lvl>0)?'flex':'none';
+}
+function goHome(){showScreen('screen-intro');}
+
+function skipLevel(){
+  if(!confirm('Pular este nivel?')) return;
+  G.lvl++;
+  if(G.lvl>=LVL.length){showVictory();return;}
+  if(LVL[G.lvl].part===2&&LVL[G.lvl-1].part===1){showScreen('screen-partbreak');}
+  else{showScreen('screen-game');loadLevel();}
+}
+
+function startGame(){G.lvl=0;G.score=0;G.stars=0;G.msgIdx=0;document.getElementById('score-val').textContent='0';showScreen('screen-game');loadLevel();}
+function startPart2(){G.lvl=2;showScreen('screen-game');loadLevel();}
+function goToLevel(idx){G.score=0;G.stars=0;G.msgIdx=0;G.hintsUsed=0;G.attempts=0;document.getElementById('score-val').textContent='0';G.lvl=idx;G.currentBlanks=[];showScreen('screen-game');loadLevel();}
+function backLevel(){if(G.lvl<=0)return;G.lvl--;G.currentBlanks=[];showScreen('screen-game');loadLevel();}
+function nextLevel(){advLevel();}
+function advLevel(){
+  G.lvl++;
+  if(G.lvl>=LVL.length){showVictory();return;}
+  if(LVL[G.lvl].part===2&&LVL[G.lvl-1].part===1){showScreen('screen-partbreak');}
+  else{showScreen('screen-game');loadLevel();}
+}
+
+function replayLevel(){
+  G.feedback=null;G.selBank=null;G.selCard=null;G.focusSlot=null;
+  var cfg=LVL[G.lvl];
+  if(cfg.type==='alpha'){
+    // Pick new random 10 blanks
+    var all=[];for(var i=0;i<26;i++)all.push(i);
+    G.currentBlanks=shuffle(all).slice(0,10).sort(function(a,b){return a-b;});
+  }
+  loadLevel();
+}
+
+// ============================================================
+//  LOAD LEVEL
+// ============================================================
+function loadLevel(){
+  var cfg=LVL[G.lvl];
+  G.hintsUsed=0;G.attempts=0;G.feedback=null;G.selBank=null;G.selCard=null;G.focusSlot=null;G.alphaDrag=null;G.classifyDrag=null;
+
+  if(cfg.type==='alpha'){
+    // If no currentBlanks set (first load), use default
+    if(!G.currentBlanks||G.currentBlanks.length===0){
+      var all=[];for(var i=0;i<26;i++)all.push(i);
+      G.currentBlanks=shuffle(all).slice(0,10).sort(function(a,b){return a-b;});
+    }
+    G.slots=[];
+    for(var i=0;i<cfg.alpha.length;i++){
+      var isBlank=G.currentBlanks.indexOf(i)>=0;
+      G.slots.push({letter:cfg.alpha[i],blank:isBlank,filled:'',state:'idle'});
+    }
+    G.bank=shuffle(G.currentBlanks.map(function(i){return {letter:cfg.alpha[i],slotIdx:i,used:false};}));
+    G.focusSlot=G.currentBlanks[0];
+  } else {
+    // Pick 5 upper + 5 lower = 10 items
+    var upper=shuffle(UPPER_POOL.slice()).slice(0,5).map(function(d){return {w:d.w,ctx:d.ctx,correct:'upper',placed:null};});
+    var lower=shuffle(LOWER_POOL.slice()).slice(0,5).map(function(d){return {w:d.w,ctx:d.ctx,correct:'lower',placed:null};});
+    if(cfg.id===4){
+      var su=shuffle(SENT_UPPER_POOL.slice()).slice(0,5).map(function(d){return {w:d.w,ctx:d.ctx,correct:'upper',placed:null};});
+      var sl=shuffle(SENT_LOWER_POOL.slice()).slice(0,5).map(function(d){return {w:d.w,ctx:d.ctx,correct:'lower',placed:null};});
+      G.items=shuffle(su.concat(sl));
+    } else {
+      G.items=shuffle(upper.concat(lower));
+    }
+  }
+  renderLevel();
+}
+
+// ============================================================
+//  RENDER LEVEL
+// ============================================================
+function renderLevel(){
+  var cfg=LVL[G.lvl];
+  var stEl=document.getElementById('level-steps');stEl.innerHTML='';
+  for(var i=0;i<LVL.length;i++){var d=document.createElement('div');d.className='step '+(i<G.lvl?'done':i===G.lvl?'active':'pending');d.textContent=i<G.lvl?'\u2713':(i+1);stEl.appendChild(d);}
+  document.getElementById('li-title').textContent=cfg.title;
+  document.getElementById('li-desc').textContent=cfg.desc;
+  document.getElementById('score-val').textContent=G.score;
+  if(cfg.type==='alpha')renderAlpha();
+  else renderClassify();
+  updateInstruction();
+}
+
+// ============================================================
+//  RENDER ALPHA
+// ============================================================
+function renderAlpha(){
+  var gc=document.getElementById('game-content');gc.innerHTML='';
+  var cfg=LVL[G.lvl];
+
+  var lbl=document.createElement('div');lbl.className='alpha-section-label';
+  lbl.textContent=(cfg.id===1)?'Alfabeto MAIUSCULO \u2014 clique em uma letra amarela, depois clique na lacuna':'Alfabeto minusculo \u2014 clique em uma letra amarela, depois clique na lacuna';
+  gc.appendChild(lbl);
+
+  // Grid
+  var grid=document.createElement('div');grid.className='alpha-grid';
+  G.slots.forEach(function(slot,i){
+    var el=document.createElement('div');
+    el.dataset.idx=i;
+
+    if(!slot.blank){
+      el.className='alpha-slot fixed';
+      el.textContent=slot.letter;
+    } else if(!slot.filled){
+      var cls='alpha-slot empty'+(G.focusSlot===i?' focused':'');
+      el.className=cls;
+      el.textContent='?';
+      // Click: if bank letter selected, fill; else focus this slot
+      (function(ii){
+        el.addEventListener('click',function(){clickSlot(ii);});
+        el.addEventListener('dragover',function(e){
+          if(G.alphaDrag&&slot.state!=='ok'){e.preventDefault();el.classList.add('drag-over-slot');}
+        });
+        el.addEventListener('dragleave',function(){el.classList.remove('drag-over-slot');});
+        el.addEventListener('drop',function(e){
+          e.preventDefault();el.classList.remove('drag-over-slot');
+          dropOnSlot(ii);
+        });
+      })(i);
+    } else {
+      // Filled slot
+      var cls='alpha-slot ';
+      if(slot.state==='ok') cls+='ok';
+      else if(slot.state==='err') cls+='err';
+      else cls+='placed';
+      el.className=cls;
+      el.textContent=slot.filled;
+
+      if(slot.state!=='ok'){
+        el.draggable=true;
+        (function(ii){
+          el.addEventListener('click',function(){clickFilledSlot(ii);});
+          el.addEventListener('dragstart',function(e){
+            G.alphaDrag={type:'slot',idx:ii};
+            el.classList.add('dragging-src');
+          });
+          el.addEventListener('dragend',function(){el.classList.remove('dragging-src');});
+          // Drop on filled slot = swap
+          el.addEventListener('dragover',function(e){
+            if(G.alphaDrag&&G.alphaDrag.idx!==ii&&slot.state!=='ok'){e.preventDefault();el.classList.add('drag-over-slot');}
+          });
+          el.addEventListener('dragleave',function(){el.classList.remove('drag-over-slot');});
+          el.addEventListener('drop',function(e){
+            e.preventDefault();el.classList.remove('drag-over-slot');
+            dropOnSlot(ii);
+          });
+        })(i);
+      }
+    }
+    grid.appendChild(el);
+  });
+  gc.appendChild(grid);
+
+  // Bank
+  var bank=document.createElement('div');bank.className='bank-wrapper';
+  var bl=document.createElement('div');bl.className='bank-label';
+  bl.textContent='\uD83D\uDCDA 1) Clique numa letra amarela  2) Clique na lacuna \u2753  (ou arraste)';
+  bank.appendChild(bl);
+  var br=document.createElement('div');br.className='bank-row';br.id='bank-row';
+  var any=false;
+  G.bank.forEach(function(item,bi){
+    if(item.used)return;
+    any=true;
+    var card=document.createElement('div');
+    card.className='letter-card'+(G.selBank===bi?' lc-sel':'');
+    card.textContent=item.letter;
+    card.draggable=true;
+    (function(b){
+      card.addEventListener('click',function(){clickBankLetter(b);});
+      card.addEventListener('dragstart',function(){G.alphaDrag={type:'bank',idx:b};card.classList.add('dragging-src');});
+      card.addEventListener('dragend',function(){card.classList.remove('dragging-src');});
+    })(bi);
+    br.appendChild(card);
+  });
+  if(!any){var d=document.createElement('div');d.style.cssText='color:rgba(255,255,255,.3);font-size:13px;font-weight:700;';d.textContent='Todas as letras foram colocadas!';br.appendChild(d);}
+  bank.appendChild(br);
+  gc.appendChild(bank);
+}
+
+function clickBankLetter(bi){
+  if(G.bank[bi].used)return;
+  if(G.focusSlot!==null){fillSlot(G.focusSlot,bi);return;}
+  G.selBank=(G.selBank===bi)?null:bi;
+  renderAlpha();updateInstruction();
+}
+
+function clickSlot(slotIdx){
+  if(G.selBank!==null){fillSlot(slotIdx,G.selBank);return;}
+  G.focusSlot=slotIdx;
+  renderAlpha();updateInstruction();
+}
+
+function clickFilledSlot(slotIdx){
+  // Return to bank (works for both idle and err state)
+  returnToBank(slotIdx);
+}
+
+function fillSlot(slotIdx,bankIdx){
+  G.slots[slotIdx].filled=G.bank[bankIdx].letter;
+  G.slots[slotIdx].state='idle';
+  G.bank[bankIdx].used=true;
+  G.selBank=null;G.feedback=null;
+  // Advance focus
+  G.focusSlot=null;
+  for(var i=slotIdx+1;i<G.slots.length;i++){if(G.slots[i].blank&&!G.slots[i].filled){G.focusSlot=i;break;}}
+  if(G.focusSlot===null)for(var i=0;i<G.slots.length;i++){if(G.slots[i].blank&&!G.slots[i].filled){G.focusSlot=i;break;}}
+  renderAlpha();updateInstruction();
+}
+
+function returnToBank(slotIdx){
+  var letter=G.slots[slotIdx].filled;
+  for(var i=0;i<G.bank.length;i++){if(G.bank[i].letter===letter&&G.bank[i].used){G.bank[i].used=false;break;}}
+  G.slots[slotIdx].filled='';G.slots[slotIdx].state='idle';
+  G.feedback=null;
+  if(!G.focusSlot)G.focusSlot=slotIdx;
+  renderAlpha();updateInstruction();
+}
+
+function dropOnSlot(targetIdx){
+  var drag=G.alphaDrag;if(!drag){return;}
+  G.alphaDrag=null;
+  var targetSlot=G.slots[targetIdx];
+  if(targetSlot.state==='ok')return;
+
+  if(drag.type==='bank'){
+    var bankLetter=G.bank[drag.idx].letter;
+    if(!targetSlot.filled){
+      // Fill empty
+      G.bank[drag.idx].used=true;
+      targetSlot.filled=bankLetter;targetSlot.state='idle';
+    } else {
+      // Replace: displaced letter back to bank
+      var displaced=targetSlot.filled;
+      for(var i=0;i<G.bank.length;i++){if(G.bank[i].letter===displaced&&G.bank[i].used){G.bank[i].used=false;break;}}
+      G.bank[drag.idx].used=true;
+      targetSlot.filled=bankLetter;targetSlot.state='idle';
+    }
+    // Advance focus away from this slot
+    if(G.focusSlot===targetIdx){G.focusSlot=null;for(var i=0;i<G.slots.length;i++){if(G.slots[i].blank&&!G.slots[i].filled){G.focusSlot=i;break;}}}
+  } else {
+    // slot to slot: swap
+    var srcSlot=G.slots[drag.idx];
+    if(drag.idx===targetIdx)return;
+    var tmp=targetSlot.filled;
+    targetSlot.filled=srcSlot.filled;targetSlot.state='idle';
+    srcSlot.filled=tmp;srcSlot.state='idle';
+    if(!srcSlot.filled)G.focusSlot=drag.idx;
+  }
+  G.feedback=null;
+  renderAlpha();updateInstruction();
+}
+
+// ============================================================
+//  RENDER CLASSIFY
+// ============================================================
+function renderClassify(){
+  var gc=document.getElementById('game-content');gc.innerHTML='';
+  var cfg=LVL[G.lvl];
+
+  // Notice banner
+  var notice=document.createElement('div');notice.className='classify-notice';
+  notice.innerHTML='&#x26A0;&#xFE0F; Todas as palavras aparecem em <strong>minusculo</strong>. Voce decide quais precisam de <strong>MAIUSCULA</strong>!';
+  gc.appendChild(notice);
+
+  // Two columns
+  var arena=document.createElement('div');arena.className='classify-arena';
+  arena.appendChild(buildCol('upper',cfg));
+  arena.appendChild(buildCol('lower',cfg));
+  gc.appendChild(arena);
+
+  // Bank
+  var bank=document.createElement('div');bank.className='classify-bank';
+  var bl=document.createElement('div');bl.className='bank-label';
+  bl.textContent='\uD83C\uDFAE Clique numa palavra para selecionar, depois clique na coluna certa (ou arraste)';
+  bank.appendChild(bl);
+  var br=document.createElement('div');br.className='classify-bank-row';
+  var any=false;
+  G.items.forEach(function(item,i){
+    if(item.placed!==null)return;
+    any=true;br.appendChild(makeClassCard(item,i,false));
+  });
+  if(!any){var d=document.createElement('div');d.style.cssText='color:rgba(255,255,255,.3);font-size:13px;font-weight:700;';d.textContent='Todas as palavras foram classificadas!';br.appendChild(d);}
+  bank.appendChild(br);
+  // Allow dragging a placed card back to bank
+  bank.addEventListener('dragover',function(e){if(G.classifyDrag!==null&&G.items[G.classifyDrag]&&G.items[G.classifyDrag].placed!==null){e.preventDefault();bank.style.borderColor='rgba(251,146,60,.7)';}});
+  bank.addEventListener('dragleave',function(){bank.style.borderColor='';});
+  bank.addEventListener('drop',function(e){e.preventDefault();bank.style.borderColor='';if(G.classifyDrag!==null&&G.items[G.classifyDrag]){G.items[G.classifyDrag].placed=null;G.feedback=null;G.selCard=null;var t=G.classifyDrag;G.classifyDrag=null;renderClassify();updateInstruction();}});
+  gc.appendChild(bank);
+}
+
+function buildCol(type){
+  var col=document.createElement('div');
+  col.className='classify-col '+(type==='upper'?'upper-col':'lower-col');
+  var hdr=document.createElement('div');hdr.className='col-header';
+  if(type==='upper'){
+    hdr.innerHTML='<span class="col-icon">\uD83D\uDCDD</span><div class="col-title">MAIUSCULA</div><div class="col-rule">Nomes de pessoas, paises e cidades<br>e inicio de frase</div>';
+  } else {
+    hdr.innerHTML='<span class="col-icon">\u270F\uFE0F</span><div class="col-title">minuscula</div><div class="col-rule">Nomes comuns: objetos, animais<br>e palavras do meio da frase</div>';
+  }
+  col.appendChild(hdr);
+  var cards=document.createElement('div');cards.className='col-cards';
+  G.items.forEach(function(item,i){if(item.placed===type)cards.appendChild(makeClassCard(item,i,true));});
+  col.appendChild(cards);
+
+  col.addEventListener('click',function(e){
+    if(e.target===col||e.target===cards||e.target===hdr||e.target.tagName==='DIV'){
+      if(G.selCard!==null)placeCard(G.selCard,type);
+    }
+  });
+  col.addEventListener('dragover',function(e){e.preventDefault();col.classList.add('drag-over');});
+  col.addEventListener('dragleave',function(e){if(!col.contains(e.relatedTarget))col.classList.remove('drag-over');});
+  col.addEventListener('drop',function(e){e.preventDefault();col.classList.remove('drag-over');if(G.classifyDrag!==null)placeCard(G.classifyDrag,type);});
+  return col;
+}
+
+function makeClassCard(item,idx,placed){
+  var card=document.createElement('div');
+  card.className='classify-card';
+  if(placed&&G.feedback&&G.feedback[idx]!==undefined)card.classList.add(G.feedback[idx]?'card-ok':'card-err');
+  if(!placed&&G.selCard===idx)card.classList.add('cc-sel');
+
+  var wd=document.createElement('div');
+  wd.textContent=item.w.toLowerCase(); // always display lowercase
+  card.appendChild(wd);
+  if(item.ctx){var cx=document.createElement('div');cx.className='c-ctx';cx.textContent=item.ctx;card.appendChild(cx);}
+
+  if(!placed){
+    card.draggable=true;
+    card.addEventListener('dragstart',function(){G.classifyDrag=idx;});
+    card.addEventListener('dragend',function(){G.classifyDrag=null;});
+    card.addEventListener('click',function(e){e.stopPropagation();G.selCard=(G.selCard===idx)?null:idx;renderClassify();updateInstruction();});
+  } else {
+    // Placed card: allow interaction unless it was confirmed correct
+    var isCorrect=G.feedback&&G.feedback[idx]===true;
+    if(!isCorrect){
+      card.style.cursor='pointer';
+      card.draggable=true;
+      (function(ii){
+        card.addEventListener('click',function(e){
+          e.stopPropagation();
+          G.items[ii].placed=null;G.feedback=null;G.selCard=null;
+          renderClassify();updateInstruction();
+        });
+        card.addEventListener('dragstart',function(){G.classifyDrag=ii;card.classList.add('dragging-src');});
+        card.addEventListener('dragend',function(){G.classifyDrag=null;card.classList.remove('dragging-src');});
+      })(idx);
+    }
+  }
+  return card;
+}
+
+function placeCard(idx,col){
+  G.items[idx].placed=col;G.feedback=null;G.selCard=null;G.classifyDrag=null;
+  renderClassify();updateInstruction();
+}
+
+// ============================================================
+//  INSTRUCTION
+// ============================================================
+function updateInstruction(){
+  var cfg=LVL[G.lvl];
+  var bub=document.getElementById('sera-bubble');bub.className='sera-bubble';
+  var main,sub;
+  if(cfg.type==='alpha'){
+    var filled=G.slots.filter(function(s){return s.blank&&s.filled;}).length;
+    var total=G.currentBlanks.length;
+    if(filled===0){main='Clique numa letra amarela, depois clique no \'?\' para preencher!';sub='A lacuna que vai receber a letra esta piscando!';}
+    else if(filled<total){main='Otimo! Continue completando o alfabeto!';sub=(total-filled)+' letra'+(total-filled>1?'s':'')+' faltando!';}
+    else{main='Todas as letras colocadas! Clique em Verificar!';sub='Clique numa letra para retira-la e trocar.';}
+  } else {
+    var placed=G.items.filter(function(i){return i.placed!==null;}).length;
+    var total=G.items.length;
+    if(placed===0){main='As palavras estao em minusculo. Voce decide quais precisam de MAIUSCULA!';sub='Clique na palavra e depois na coluna certa.';}
+    else if(placed<total){main='Isso! Continue classificando as palavras!';sub=(total-placed)+' palavra'+(total-placed>1?'s':'')+' faltando!';}
+    else{main='Todas classificadas! Clique em Verificar!';sub='Clique numa palavra ja colocada para muda-la.';}
+  }
+  document.getElementById('sera-main').textContent=main;
+  document.getElementById('sera-sub').textContent=sub;
+}
+
+// ============================================================
+//  CHECK ANSWER
+// ============================================================
+function checkAnswer(){
+  var cfg=LVL[G.lvl];G.attempts++;
+  if(cfg.type==='alpha'){
+    var unfilled=G.slots.filter(function(s){return s.blank&&!s.filled;}).length;
+    if(unfilled>0){setMsg('Ainda faltam '+unfilled+' letra'+(unfilled>1?'s':'')+' para completar!','hint-mode');G.attempts--;return;}
+    var ok=true;
+    G.slots.forEach(function(s){if(!s.blank)return;var c=(s.filled===s.letter);s.state=c?'ok':'err';if(!c)ok=false;});
+    renderAlpha();
+    if(ok){
+      var st=calcStars();addScore(st);
+      setMsg('Incrivel! Alfabeto completinho! \uD83C\uDF89','success');
+      setTimeout(function(){showLevelComplete(st);},2400);
+    } else {
+      var wrong=G.slots.filter(function(s){return s.blank&&s.state==='err';}).length;
+      setMsg(wrong+' letra'+(wrong>1?'s':'')+' errada'+(wrong>1?'s':'')+'. Clique nas vermelhas para troca-las!','error');
+    }
+  } else {
+    var unplaced=G.items.filter(function(i){return i.placed===null;}).length;
+    if(unplaced>0){setMsg('Classifique todas as '+G.items.length+' palavras primeiro!','hint-mode');G.attempts--;return;}
+    var results={};var ok=true;
+    G.items.forEach(function(item,i){var c=(item.placed===item.correct);results[i]=c;if(!c)ok=false;});
+    G.feedback=ok?null:results;
+    renderClassify();
+    if(ok){
+      var st=calcStars();addScore(st);
+      setMsg('Perfeito! Voce sabe tudo sobre maiusculas! \uD83C\uDF89','success');
+      setTimeout(function(){showLevelComplete(st);},2400);
+    } else {
+      var wrong=0;for(var k in results)if(!results[k])wrong++;
+      setMsg(wrong+' palavra'+(wrong>1?'s':'')+' no lugar errado. Veja as vermelhas!','error');
+    }
+  }
+}
+
+function calcStars(){return (G.hintsUsed===0&&G.attempts===1)?3:(G.hintsUsed<=1&&G.attempts<=2)?2:1;}
+function addScore(st){G.score+=st*10;G.stars+=st;document.getElementById('score-val').textContent=G.score;}
+
+// ============================================================
+//  HINT
+// ============================================================
+function showHint(){
+  G.hintsUsed++;
+  var cfg=LVL[G.lvl];
+  if(cfg.type==='alpha'){
+    for(var i=0;i<G.slots.length;i++){
+      var s=G.slots[i];
+      if(s.blank&&(!s.filled||s.filled!==s.letter)){
+        setMsg('Dica: a letra "'+s.letter+'" esta faltando! Ela e a '+(i+1)+'a letra do alfabeto.','hint-mode');
+        var br=document.getElementById('bank-row');
+        if(br)br.querySelectorAll('.letter-card').forEach(function(c){c.className='letter-card'+(c.textContent.trim()===s.letter?' hint-glow':'');});
+        return;
+      }
+    }
+  } else {
+    for(var i=0;i<G.items.length;i++){
+      var item=G.items[i];
+      if(item.placed===null||item.placed!==item.correct){
+        var tip=(item.correct==='upper')?'"'+item.w+'" usa MAIUSCULA \u2014 '+item.ctx+'!':'"'+item.w+'" usa minuscula \u2014 '+item.ctx+'!';
+        setMsg('Dica: '+tip,'hint-mode');return;
+      }
+    }
+  }
+  setMsg('Tudo parece certo! Clique em Verificar!','success');
+}
+
+// ============================================================
+//  LEVEL COMPLETE
+// ============================================================
+function showLevelComplete(st){
+  showScreen('screen-levelcomplete');
+  var msgs=['Continue assim, voce e incrivel! \uD83D\uDE80','Mais um nivel conquistado! \uD83C\uDF1F','Aprendendo igual a Serafina! \uD83D\uDE04','Ultimo nivel chegando! \uD83C\uDFC6'];
+  document.getElementById('lc-title').textContent=G.lvl>=LVL.length-1?'Ultimo Nivel! \uD83C\uDFC6':'Nivel Completo! \uD83C\uDF8A';
+  document.getElementById('lc-msg').textContent=msgs[G.lvl%msgs.length];
+  ['star1','star2','star3'].forEach(function(id,i){var el=document.getElementById(id);el.classList.toggle('lit',i<st);el.style.animation='none';setTimeout(function(){el.style.animation='';},50);});
+  document.getElementById('btn-lc-next').textContent=G.lvl>=LVL.length-1?'Ver resultado! \uD83C\uDFC6':'Proximo Nivel \u27A1';
+}
+
+// ============================================================
+//  VICTORY
+// ============================================================
+function showVictory(){
+  showScreen('screen-victory');startFireworks();
+  document.getElementById('vic-stars').textContent='\u2B50'.repeat(Math.min(~~(G.stars/1.5),9));
+  document.getElementById('vic-msg').textContent=nextMsg();
+  document.getElementById('vic-score').textContent='\uD83C\uDFC6 Pontuacao final: '+G.score+' pontos!';
+}
+
+// ============================================================
+//  FIREWORKS
+// ============================================================
+function startFireworks(){
+  var cv=document.getElementById('fw-canvas'),ctx=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;
+  var COLS=['#f472b6','#fbbf24','#34d399','#60a5fa','#fb923c','#a78bfa','#f87171'];
+  var parts=[],animId,launches=0;
+  function explode(x,y){var col=COLS[~~(Math.random()*COLS.length)];for(var i=0;i<70;i++){var a=(Math.PI*2/70)*i,sp=3+Math.random()*6;parts.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,a:1,c:col,r:3+Math.random()*4,d:.012+Math.random()*.01});}}
+  function launch(){if(launches>=16)return;launches++;explode(80+Math.random()*(cv.width-160),60+Math.random()*(cv.height*.55));setTimeout(launch,280+~~(Math.random()*420));}
+  function frame(){ctx.clearRect(0,0,cv.width,cv.height);for(var i=parts.length-1;i>=0;i--){var p=parts[i];if(p.a<=.02){parts.splice(i,1);continue;}ctx.save();ctx.globalAlpha=p.a;ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();ctx.restore();p.x+=p.vx;p.y+=p.vy;p.vy+=.09;p.a-=p.d;p.r*=.99;}if(parts.length>0||launches<16)animId=requestAnimationFrame(frame);else ctx.clearRect(0,0,cv.width,cv.height);}
+  launch();frame();setTimeout(function(){cancelAnimationFrame(animId);ctx.clearRect(0,0,cv.width,cv.height);},9000);
+}
+window.addEventListener('resize',function(){var c=document.getElementById('fw-canvas');c.width=innerWidth;c.height=innerHeight;});
+
+// ============================================================
+//  ACCESSIBILITY
+// ============================================================
+var _theme=localStorage.getItem('serafina-theme')||'dark';
+(function(){_applyTheme(_theme);})();
+function _applyTheme(t){_theme=t;document.body.classList.toggle('theme-light',t==='light');document.getElementById('btn-theme').textContent=t==='light'?'\uD83C\uDF1A':'\uD83C\uDF1D';localStorage.setItem('serafina-theme',t);}
+function toggleTheme(){_applyTheme(_theme==='dark'?'light':'dark');}
+
+var FS=['','lg','xl'];var _fs=parseInt(localStorage.getItem('serafina-fs')||'0');
+(function(){_applyFS(_fs);})();
+function _applyFS(i){_fs=Math.max(0,Math.min(2,i));document.documentElement.setAttribute('data-fs',FS[_fs]);localStorage.setItem('serafina-fs',_fs);}
+function changeFontSize(d){_applyFS(_fs+d);}
+
+// ============================================================
+//  HELP
+// ============================================================
+var HELP_DATA={
+  'screen-intro':{icon:'\uD83D\uDCD3',title:'O que fazer aqui?',text:'Voce vai ajudar a Serafina com dois desafios!\n\n\uD83D\uDD24 Parte 1: Complete o alfabeto.\nClique na letra amarela, depois na lacuna \'?\'.\n\n\u270F\uFE0F Parte 2: Classifique as palavras.\nDecida se cada palavra precisa de MAIUSCULA ou minuscula.\n\nClique no botao roxo para comecar!'},
+  'screen-game':{icon:'\uD83C\uDFAE',title:'Como jogar?',text:'Parte 1 \u2014 Alfabeto:\n1) Clique numa letra amarela para seleciona-la.\n2) Clique na lacuna ? (que fica piscando) para preencher.\nVoce tambem pode ARRASTAR as letras!\n\nParte 2 \u2014 Classificar:\n1) Clique numa palavra (ela fica destacada).\n2) Clique na coluna MAIUSCULA ou minuscula.\n\nClique em \u2714\uFE0F Verificar quando terminar!'},
+  'screen-levelcomplete':{icon:'\uD83C\uDF1F',title:'Nivel completo!',text:'Parabens! Voce acertou!\n\nOlha quantas estrelinhas voce ganhou!\n\nClique em Proximo Nivel para continuar!'},
+  'screen-partbreak':{icon:'\u270F\uFE0F',title:'Proximo desafio!',text:'Voce completou o alfabeto!\n\nAgora: decidir quando usar MAIUSCULA.\n\nLembre:\n\u2022 Nomes de pessoas = MAIUSCULA (Serafina, Pedro)\n\u2022 Nomes de paises e cidades = MAIUSCULA (Brasil)\n\u2022 Inicio de frase = MAIUSCULA\n\u2022 Nomes comuns = minuscula (gato, livro, escola)'},
+  'screen-victory':{icon:'\uD83C\uDFC6',title:'Voce e expert!',text:'UAU! Voce completou os 4 niveis!\n\nAgora voce sabe tudo sobre maiusculas e minusculas!\n\nA Serafina ficou muito orgulhosa de voce!'},
+};
+function showHelp(){var a=document.querySelector('.screen.active');var id=a?a.id:'screen-intro';var h=HELP_DATA[id]||HELP_DATA['screen-intro'];document.getElementById('help-icon').textContent=h.icon;document.getElementById('help-title').textContent=h.title;document.getElementById('help-text').textContent=h.text;document.getElementById('help-overlay').classList.add('open');}
+function closeHelp(e){if(e&&e.target!==document.getElementById('help-overlay'))return;document.getElementById('help-overlay').classList.remove('open');}
+function showHomeModal(){ document.getElementById('confirm-home-modal').classList.add('active'); }
+function closeHomeModal(){ document.getElementById('confirm-home-modal').classList.remove('active'); }
+function goToIndex(){ window.location.href='index.html'; }
+document.getElementById('confirm-home-modal').addEventListener('click',function(e){ if(e.target===this)closeHomeModal(); });
+</script>
+</body>
+</html>
