@@ -310,7 +310,7 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
   .navbar{gap:3px;padding:5px 8px;}
   .nav-logo{font-size:.75rem;}
   .nav-score{font-size:.6rem;padding:2px 7px;}
-  .nb{width:28px;height:28px;font-size:.85rem;}
+  .nb{width:36px;height:36px;font-size:.85rem;}
   .nb-text{font-size:.55rem;}
   .phase-nav{gap:6px;margin-top:8px;}
   .phase-nav .btn{font-size:.7rem;padding:7px 12px;}
@@ -583,8 +583,7 @@ var SORT_LISTS = [
     {action:'Polite', bucket:'people', emoji:'\u{1F3A9}', pt:'Educado(a)'},
     {action:'Shiny', bucket:'things', emoji:'\u2728', pt:'Brilhante'},
     {action:'Helpful', bucket:'people', emoji:'\u{1F64C}', pt:'Prestativo(a)'},
-    {action:'Soft', bucket:'things', emoji:'\u{1F9F8}', pt:'Macio(a)'},
-    {action:'Caring', bucket:'people', emoji:'\u2764\uFE0F', pt:'Carinhoso(a)'}
+    {action:'Soft', bucket:'things', emoji:'\u{1F9F8}', pt:'Macio(a)'}
   ],
   // List 1
   [
@@ -600,13 +599,13 @@ var SORT_LISTS = [
   // List 2
   [
     {action:'Gentle', bucket:'people', emoji:'\u{1F54A}\uFE0F', pt:'Delicado(a)'},
-    {action:'Quiet', bucket:'people', emoji:'\u{1F92B}', pt:'Quieto(a)'},
+    {action:'Silly', bucket:'people', emoji:'\u{1F92A}', pt:'Bobo(a)/Engraçado(a)'},
     {action:'Cheerful', bucket:'people', emoji:'\u{1F604}', pt:'Alegre'},
     {action:'Patient', bucket:'people', emoji:'\u23F3', pt:'Paciente'},
     {action:'Heavy', bucket:'things', emoji:'\u{1FAA8}', pt:'Pesado(a)'},
     {action:'Smooth', bucket:'things', emoji:'\u{1FA9E}', pt:'Liso(a)'},
     {action:'Colorful', bucket:'things', emoji:'\u{1F308}', pt:'Colorido(a)'},
-    {action:'Bright', bucket:'things', emoji:'\u{1F4A1}', pt:'Luminoso(a)'}
+    {action:'Rough', bucket:'things', emoji:'\u{1FAA8}', pt:'Áspero(a)'}
   ],
   // List 3
   [
@@ -639,6 +638,34 @@ var ACROSTIC_BANK = [
     ]
   },
   {
+    word: 'NICE',
+    lines: [
+      {letter:'N', phrase:'Notices when someone needs a smile \u{1F60A}'},
+      {letter:'I', phrase:'Includes everyone in games and fun \u{1F3AE}'},
+      {letter:'C', phrase:'Cheers up friends when they are sad \u{1F60A}'},
+      {letter:'E', phrase:'Every day shows kindness and love \u2764\uFE0F'}
+    ],
+    distractors: [
+      'Swims in the pool on sunny days \u{1F3CA}',
+      'Hops like a bunny all around \u{1F430}',
+      'Bounces very high \u{1F3C0}'
+    ]
+  },
+  {
+    word: 'CALM',
+    lines: [
+      {letter:'C', phrase:'Controls feelings when things get hard \u{1F60C}'},
+      {letter:'A', phrase:'Always listens quietly and carefully \u{1F442}'},
+      {letter:'L', phrase:'Loves peaceful moments with friends \u{1F54A}\uFE0F'},
+      {letter:'M', phrase:'Makes others feel safe and relaxed \u{1F31F}'}
+    ],
+    distractors: [
+      'Runs in the hallway \u{1F3C3}',
+      'Tells very loud jokes \u{1F602}',
+      'Bounces on the bed \u{1F6CF}\uFE0F'
+    ]
+  },
+  {
     word: 'BRAVE',
     lines: [
       {letter:'B', phrase:'Believes in doing what is right \u{1F4AA}'},
@@ -666,34 +693,6 @@ var ACROSTIC_BANK = [
       'Paints colorful pictures \u{1F3A8}',
       'Drinks lots of juice \u{1F9C3}',
       'Plays in the garden \u{1F337}'
-    ]
-  },
-  {
-    word: 'NICE',
-    lines: [
-      {letter:'N', phrase:'Never makes anyone feel left out \u{1F308}'},
-      {letter:'I', phrase:'Includes everyone in games and fun \u{1F3AE}'},
-      {letter:'C', phrase:'Cheers up friends when they are sad \u{1F60A}'},
-      {letter:'E', phrase:'Every day shows kindness and love \u2764\uFE0F'}
-    ],
-    distractors: [
-      'Swims in the pool on sunny days \u{1F3CA}',
-      'Hops like a bunny all around \u{1F430}',
-      'Bounces very high \u{1F3C0}'
-    ]
-  },
-  {
-    word: 'CALM',
-    lines: [
-      {letter:'C', phrase:'Controls feelings when things get hard \u{1F60C}'},
-      {letter:'A', phrase:'Always listens quietly and carefully \u{1F442}'},
-      {letter:'L', phrase:'Loves peaceful moments with friends \u{1F54A}\uFE0F'},
-      {letter:'M', phrase:'Makes others feel safe and relaxed \u{1F31F}'}
-    ],
-    distractors: [
-      'Runs in the hallway \u{1F3C3}',
-      'Tells very loud jokes \u{1F602}',
-      'Bounces on the bed \u{1F6CF}\uFE0F'
     ]
   }
 ];

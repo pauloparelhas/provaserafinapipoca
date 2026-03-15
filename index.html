@@ -130,14 +130,14 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
         <div class="tool-status status-ok">&#x2705; Pronto</div>
       </a>
 
-      <a class="tool-card pending" href="#">
-        <div class="tool-icon" style="background:rgba(255,255,255,.05);">&#x1F4D6;</div>
+      <a class="tool-card ready" href="ferramentas/ELA05_reading.html">
+        <div class="tool-icon" style="background:rgba(96,165,250,.15);">&#x1F575;&#xFE0F;</div>
         <div class="tool-body">
           <div class="tool-code">ELA-05</div>
-          <div class="tool-name">Reading &amp; Interpreting</div>
-          <div class="tool-desc">Leitura e interpretacao de textos em ingles</div>
+          <div class="tool-name">Reading Detective &#x1F575;&#xFE0F;</div>
+          <div class="tool-desc">Reading &amp; Interpreting Texts</div>
         </div>
-        <div class="tool-status status-pending">Em breve</div>
+        <div class="tool-status status-ok">&#x2705; Pronto</div>
       </a>
 
       <a class="tool-card pending" href="#">
@@ -196,6 +196,22 @@ function hardRefresh(){
   resize();window.addEventListener('resize',resize);draw();
 })();
 
+// ===== SERVICE WORKER =====
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(reg) {
+    // A cada visita, verifica se há nova versão do SW
+    reg.update();
+    // Quando nova versão é instalada e ativada, recarrega a página automaticamente
+    reg.addEventListener('updatefound', function() {
+      var sw = reg.installing;
+      sw.addEventListener('statechange', function() {
+        if (sw.state === 'activated' && navigator.serviceWorker.controller) {
+          window.location.reload();
+        }
+      });
+    });
+  });
+}
 </script>
 </body>
 </html>

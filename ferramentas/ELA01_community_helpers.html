@@ -129,7 +129,7 @@ body.light .tour-btn-skip{color:rgba(0,0,0,.4);}
   .navbar{gap:3px;padding:5px 8px;}
   .nav-logo{font-size:.75rem;}
   .nav-score{font-size:.6rem;padding:2px 7px;}
-  .nb{width:28px;height:28px;font-size:.85rem;}
+  .nb{width:36px;height:36px;font-size:.85rem;}
   .nb-text{font-size:.55rem;}
   .phase-nav{gap:6px;margin-top:8px;}
   .phase-nav .btn{font-size:.7rem;padding:7px 12px;}
@@ -354,16 +354,7 @@ body.light .qp-dot{background:rgba(0,0,0,.06);}
 .lock-box{background:#1a1145;border:3px solid #a78bfa;border-radius:24px;padding:28px 24px;max-width:300px;width:90%;text-align:center;}
 .lock-icon{font-size:48px;margin-bottom:8px;}
 .lock-title{font-size:1.1rem;font-weight:900;color:#a78bfa;margin-bottom:8px;}
-.lock-code{display:flex;gap:8px;justify-content:center;margin-bottom:16px;}
-.lock-dot{width:16px;height:16px;border-radius:50%;border:2px solid #a78bfa;background:transparent;transition:.2s;}
-.lock-dot.filled{background:#a78bfa;}
-.lock-numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:200px;margin:0 auto;}
-.lock-num{width:52px;height:52px;border-radius:50%;border:2px solid rgba(167,139,250,.4);background:rgba(167,139,250,.08);color:#c4b5fd;font-family:inherit;font-size:1.2rem;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;}
-.lock-num:hover{background:rgba(167,139,250,.2);border-color:#a78bfa;}
-.lock-num:active{transform:scale(.9);}
 body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
-body.light .lock-dot{border-color:#7c3aed;}body.light .lock-dot.filled{background:#7c3aed;}
-body.light .lock-num{border-color:rgba(124,58,237,.3);background:rgba(124,58,237,.06);color:#5b21b6;}
 /* CONFETTI */
 .confetti-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:250;overflow:hidden;}
 .confetti-piece{position:absolute;width:10px;height:10px;top:-10px;border-radius:2px;animation:confettiFall linear forwards;}
@@ -554,12 +545,12 @@ body.light .lock-num{border-color:rgba(124,58,237,.3);background:rgba(124,58,237
 // ===== DATA =====
 const HELPERS = [
   { name:'Policeman', namePT:'Policial', emoji:'\u{1F46E}', role:'Keeps us safe.', rolePT:'Nos mant\u00e9m seguros.', keyword:'safe', keywordPT:'seguros' },
-  { name:'Nurse', namePT:'Enfermeira', emoji:'\u{1F469}\u200D\u2695\uFE0F', role:'Helps us feel better.', rolePT:'Nos ajuda a melhorar.', keyword:'better', keywordPT:'melhorar' },
+  { name:'Nurse', namePT:'Enfermeira', emoji:'\u{1F469}\u200D\u2695\uFE0F', role:'Helps us feel better.', rolePT:'Nos ajuda a melhorar.', keyword:'better', keywordPT:'melhorar', quizClue:'Who helps us feel better in the hospital?' },
   { name:'Teacher', namePT:'Professora', emoji:'\u{1F469}\u200D\u{1F3EB}', role:'Helps us learn.', rolePT:'Nos ajuda a aprender.', keyword:'learn', keywordPT:'aprender' },
   { name:'Doctor', namePT:'M\u00e9dico', emoji:'\u{1FA7A}', role:'Heals our bodies.', rolePT:'Cuida do nosso corpo.', keyword:'heals', keywordPT:'corpo' },
   { name:'Farmer', namePT:'Fazendeiro', emoji:'\u{1F9D1}\u200D\u{1F33E}', role:'Grows our food.', rolePT:'Cultiva nossos alimentos.', keyword:'food', keywordPT:'alimentos' },
   { name:'Construction Worker', namePT:'Pedreiro', emoji:'\u{1F477}', role:'Builds houses and buildings.', rolePT:'Constr\u00f3i casas e pr\u00e9dios.', keyword:'builds', keywordPT:'constr\u00f3i' },
-  { name:'Veterinarian', namePT:'Veterin\u00e1rio', emoji:'\u{1F43E}', role:'Heals our pets.', rolePT:'Cuida dos nossos bichinhos.', keyword:'pets', keywordPT:'bichinhos' },
+  { name:'Veterinarian', namePT:'Veterin\u00e1rio', emoji:'\u{1F43E}', role:'Heals our pets.', rolePT:'Cuida dos nossos bichinhos.', keyword:'pets', keywordPT:'bichinhos', quizClue:'Who heals our pets in an animal clinic?' },
   { name:'Firefighter', namePT:'Bombeiro', emoji:'\u{1F9D1}\u200D\u{1F692}', role:'Protects us from danger.', rolePT:'Nos protege do perigo.', keyword:'danger', keywordPT:'perigo' },
   { name:'Dentist', namePT:'Dentista', emoji:'\u{1F9B7}', role:'Keeps our teeth healthy.', rolePT:'Cuida dos nossos dentes.', keyword:'teeth', keywordPT:'dentes' },
   { name:'Crossing Guard', namePT:'Guarda de tr\u00e2nsito', emoji:'\u{1F6D1}', role:'Helps kids cross the street.', rolePT:'Ajuda crian\u00e7as a atravessar.', keyword:'cross', keywordPT:'atravessar' },
@@ -654,11 +645,11 @@ function showScreen(id){ stopKaraoke(); document.querySelectorAll('.screen').for
 function addXP(n){ totalXP+=n; document.getElementById('scoreDisplay').innerHTML='\u2B50 '+totalXP+' XP'; }
 function closeModal(id){ document.getElementById(id).classList.remove('active'); }
 function confirmGoHome(){
-  if(lockActive){ if(typeof speakSimple==='function') speakSimple('The screen is locked!'); return; }
+  if(lockActive){ var u=new SpeechSynthesisUtterance('The screen is locked!');u.lang='en-US';speechSynthesis.speak(u); return; }
   document.getElementById('modalHome').classList.add('active');
 }
 function confirmRestart(){
-  if(lockActive){ if(typeof speakSimple==='function') speakSimple('The screen is locked!'); return; }
+  if(lockActive){ var u=new SpeechSynthesisUtterance('The screen is locked!');u.lang='en-US';speechSynthesis.speak(u); return; }
   document.getElementById('modalRestart').classList.add('active');
 }
 function goToIndex(){ window.location.href='../index.html'; }
@@ -951,8 +942,7 @@ function initQuiz(){
   showScreen('screen-quiz');
   quizIdx=0; quizCorrect=0;
   quizQuestions = shuffle(HELPERS).slice(0,QUIZ_COUNT).map(h=>{
-    let roleClean = h.role.replace('.','');
-    let qEN = 'Who '+roleClean.charAt(0).toLowerCase()+roleClean.slice(1)+'?';
+    let qEN = h.quizClue || ('Who '+h.role.replace('.','').charAt(0).toLowerCase()+h.role.replace('.','').slice(1)+'?');
     let rolePTclean = h.rolePT.replace('.','');
     let qPT = 'Quem '+rolePTclean.charAt(0).toLowerCase()+rolePTclean.slice(1)+'?';
     return { questionEN:qEN, questionPT:qPT, answer:h.name, answerPT:h.namePT, answerEmoji:h.emoji, role:h.role, rolePT:h.rolePT, keyword:h.keyword };
