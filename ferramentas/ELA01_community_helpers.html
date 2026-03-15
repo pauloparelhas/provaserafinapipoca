@@ -661,7 +661,7 @@ function confirmRestart(){
   if(lockActive){ if(typeof speakSimple==='function') speakSimple('The screen is locked!'); return; }
   document.getElementById('modalRestart').classList.add('active');
 }
-function goToIndex(){ window.location.href='index.html'; }
+function goToIndex(){ window.location.href='../index.html'; }
 
 function changeFontSize(d){
   currentFS = Math.max(12, Math.min(32, currentFS + d*2));

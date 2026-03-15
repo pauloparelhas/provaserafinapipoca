@@ -1248,7 +1248,7 @@ function showHelp(){var a=document.querySelector('.screen.active');var id=a?a.id
 function closeHelp(e){if(e&&e.target!==document.getElementById('help-overlay'))return;document.getElementById('help-overlay').classList.remove('open');}
 function showHomeModal(){ document.getElementById('confirm-home-modal').classList.add('active'); }
 function closeHomeModal(){ document.getElementById('confirm-home-modal').classList.remove('active'); }
-function goToIndex(){ window.location.href='index.html'; }
+function goToIndex(){ window.location.href='../index.html'; }
 document.getElementById('confirm-home-modal').addEventListener('click',function(e){ if(e.target===this)closeHomeModal(); });
 </script>
 </body>
