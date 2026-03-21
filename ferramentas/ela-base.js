@@ -240,17 +240,17 @@ function ensureKaraokeBar(){
 function ensureTourOverlay(){
   if(document.getElementById('tourOverlay')) return;
   var ov=document.createElement('div');
-  ov.id='tourOverlay';ov.style.display='none';
-  ov.innerHTML='<div class="tour-bg" onclick="skipTour()"></div>'
+  ov.id='tourOverlay';
+  ov.innerHTML='<div class="tour-bg" id="tourBg" onclick="tourStep(1)"></div>'
     +'<div class="tour-spotlight" id="tourSpotlight"></div>'
     +'<div class="tour-bubble" id="tourBubble">'
     +'<div class="tour-bubble-title" id="tourTitle"></div>'
     +'<div class="tour-bubble-text" id="tourText"></div>'
     +'<div class="tour-bubble-nav">'
     +'<div class="tour-step-dots" id="tourDots"></div>'
-    +'<button class="tour-btn" id="tourPrev" onclick="tourStep(-1)">\u25C0 Anterior</button>'
-    +'<button class="tour-btn" id="tourNext" onclick="tourStep(1)">Pr\u00f3ximo \u25B6</button>'
-    +'<button class="tour-btn-skip" onclick="skipTour()">Pular tour</button>'
+    +'<button class="tour-btn tour-btn-prev" id="tourPrev" onclick="tourStep(-1)">\u25C0 Voltar</button>'
+    +'<button class="tour-btn tour-btn-next" id="tourNext" onclick="tourStep(1)">Pr\u00f3ximo \u25B6</button>'
+    +'<button class="tour-btn-skip" onclick="skipTour()">Pular</button>'
     +'</div></div>';
   document.body.appendChild(ov);
 }
@@ -261,10 +261,9 @@ function ensureLockOverlay(){
   var ov=document.createElement('div');
   ov.className='lock-overlay';ov.id='lockOverlay';
   ov.innerHTML='<div class="lock-box">'
-    +'<div class="lock-icon">\u{1F512}</div>'
-    +'<div class="lock-title">Screen Locked</div>'
-    +'<p style="margin:10px 0;font-weight:700;font-size:14px;color:var(--text-soft,rgba(255,255,255,.7))">Tap the button below to unlock</p>'
-    +'<button class="btn-start" onclick="unlockScreen()" style="font-size:14px;padding:12px 28px">\u{1F513} Unlock</button>'
+    +'<div class="lock-icon">\u{1F513}</div>'
+    +'<div class="lock-title">Tap to unlock!</div>'
+    +'<button class="mbtn-yes" onclick="unlockScreen()" style="margin-top:12px;font-size:1.1rem;padding:14px 36px">\u{1F513} Unlock</button>'
     +'</div>';
   document.body.appendChild(ov);
 }
