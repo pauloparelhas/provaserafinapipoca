@@ -1,6 +1,6 @@
 /* ============================================================
    SERAFINA ELA-BASE.CSS — Estilos Compartilhados ELA (Ingles)
-   Importar APOS base.css em todas as ferramentas ELA.
+   Importar em todas as ferramentas ELA (inline <style> vem DEPOIS).
    Contem: karaoke bar, speak-btn, tour overlay, flag BR, lock.
    ============================================================ */
 
@@ -11,7 +11,7 @@
   box-shadow:0 8px 40px rgba(0,0,0,.6);flex-direction:column;gap:6px;align-items:center;}
 body.light .karaoke-bar{background:rgba(255,255,255,.97);border-color:#c4b5fd;}
 
-.karaoke-speed{display:flex;gap:4px;justify-content:center;}
+.karaoke-speed{display:flex;gap:8px;align-items:center;}
 .karaoke-words{display:flex;flex-wrap:wrap;gap:4px 6px;justify-content:center;
   font-size:1.1rem;font-weight:700;color:rgba(255,255,255,.4);}
 body.light .karaoke-words{color:rgba(0,0,0,.3);}
@@ -40,17 +40,18 @@ body.light .ks-btn.active{border-color:#7c3aed;background:rgba(124,58,237,.15);}
 @keyframes speakPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.5);}50%{box-shadow:0 0 0 10px rgba(59,130,246,0);}}
 
 /* === TOUR OVERLAY === */
-#tourOverlay{position:fixed;inset:0;z-index:500;}
-.tour-bg{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:501;cursor:pointer;}
-.tour-spotlight{position:fixed;z-index:502;border-radius:12px;
-  box-shadow:0 0 0 9999px rgba(0,0,0,.65);pointer-events:none;transition:all .4s ease;}
-.tour-bubble{position:fixed;z-index:503;background:#1a1535;border:2px solid rgba(167,139,250,.5);
-  border-radius:18px;padding:18px 20px 14px;max-width:340px;width:90%;
-  box-shadow:0 12px 40px rgba(0,0,0,.5);color:#fff;font-family:inherit;animation:fadeSlide .3s ease;}
-body.light .tour-bubble{background:#fff;color:#1a1535;border-color:#c4b5fd;}
-.tour-bubble-title{font-size:16px;font-weight:900;color:#a78bfa;margin-bottom:6px;}
+#tourOverlay{position:fixed;inset:0;z-index:9000;display:none;}
+.tour-bg{position:fixed;inset:0;z-index:9001;background:transparent;cursor:pointer;}
+.tour-spotlight{position:fixed;border-radius:12px;z-index:9002;pointer-events:none;
+  box-shadow:0 0 0 4000px rgba(0,0,0,.78),0 0 0 4px #a78bfa,0 0 28px 6px rgba(167,139,250,.65);
+  transition:left .3s,top .3s,width .3s,height .3s;}
+.tour-bubble{position:fixed;z-index:9003;background:linear-gradient(145deg,#1e1b4b,#312e81);
+  border:2px solid #a78bfa;border-radius:20px;padding:18px 22px;max-width:290px;
+  box-shadow:0 12px 40px rgba(0,0,0,.6);color:#fff;font-family:inherit;}
+body.light .tour-bubble{background:linear-gradient(145deg,#f5f3ff,#ede9fe);color:#1e1b4b;border-color:#7c3aed;}
+.tour-bubble-title{font-size:.78rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#a78bfa;margin-bottom:6px;}
 body.light .tour-bubble-title{color:#7c3aed;}
-.tour-bubble-text{font-size:13px;font-weight:600;line-height:1.5;color:rgba(255,255,255,.85);}
+.tour-bubble-text{font-size:.97rem;font-weight:700;line-height:1.5;margin-bottom:14px;white-space:pre-line;}
 body.light .tour-bubble-text{color:rgba(26,21,53,.75);}
 .tour-bubble-nav{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
 .tour-step-dots{display:flex;gap:4px;}
@@ -59,12 +60,13 @@ body.light .tour-bubble-text{color:rgba(26,21,53,.75);}
 .tour-dot.done{background:rgba(167,139,250,.5);}
 body.light .tour-dot{background:rgba(0,0,0,.15);}
 body.light .tour-dot.active{background:#7c3aed;}
-.tour-btn{background:rgba(167,139,250,.2);border:1px solid rgba(167,139,250,.4);border-radius:10px;
-  padding:6px 14px;font-size:12px;font-weight:800;color:#a78bfa;cursor:pointer;transition:.2s;font-family:inherit;}
-.tour-btn:hover{background:rgba(167,139,250,.35);transform:translateY(-1px);}
-body.light .tour-btn{color:#7c3aed;background:rgba(124,58,237,.1);border-color:rgba(124,58,237,.3);}
-.tour-btn-skip{background:none;border:none;color:rgba(255,255,255,.4);font-size:11px;font-weight:700;
-  cursor:pointer;margin-left:auto;font-family:inherit;}
+.tour-btn{border:none;border-radius:10px;padding:7px 14px;font-size:.85rem;font-weight:800;
+  cursor:pointer;transition:.15s;font-family:inherit;}
+.tour-btn-prev{background:rgba(167,139,250,.15);color:#c4b5fd;}
+.tour-btn-next{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;}
+body.light .tour-btn-prev{background:rgba(124,58,237,.1);color:#7c3aed;}
+.tour-btn-skip{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.4);font-size:.78rem;
+  font-weight:700;cursor:pointer;font-family:inherit;}
 .tour-btn-skip:hover{color:rgba(255,255,255,.7);}
 body.light .tour-btn-skip{color:rgba(0,0,0,.35);}
 
@@ -80,17 +82,18 @@ body.light .tour-btn-skip{color:rgba(0,0,0,.35);}
 body.light .pt-label{color:#5b21b6;background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.2);}
 
 /* === LOCK OVERLAY === */
-.lock-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.85);
-  align-items:center;justify-content:center;}
+.lock-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.7);
+  align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 .lock-overlay.active{display:flex;}
-.lock-box{background:#1a1535;border:2px solid rgba(167,139,250,.5);border-radius:24px;
-  padding:32px 28px;text-align:center;max-width:320px;width:90%;color:#fff;font-family:inherit;}
-body.light .lock-box{background:#fff;color:#1a1535;border-color:#c4b5fd;}
-.lock-icon{font-size:48px;margin-bottom:10px;}
-.lock-title{font-size:18px;font-weight:900;color:#a78bfa;margin-bottom:6px;}
+.lock-box{background:#1a1145;border:3px solid #a78bfa;border-radius:24px;
+  padding:28px 24px;text-align:center;max-width:300px;width:90%;color:#fff;font-family:inherit;}
+body.light .lock-box{background:#f5f3ff;color:#1a1535;border-color:#7c3aed;}
+.lock-icon{font-size:48px;margin-bottom:8px;}
+.lock-title{font-size:1.1rem;font-weight:900;color:#a78bfa;margin-bottom:8px;}
 body.light .lock-title{color:#7c3aed;}
 
 /* Nav button states for sound/lock */
-.nav-btn.sound-off{opacity:.5;}
-.nav-btn.lock-active{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4);}
-body.light .nav-btn.lock-active{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);}
+.nb.sound-off{background:rgba(239,68,68,.2)!important;border-color:rgba(239,68,68,.5)!important;}
+.nb.lock-active{background:rgba(239,68,68,.2)!important;border-color:rgba(239,68,68,.5)!important;
+  animation:lockPulse 2s ease infinite;}
+@keyframes lockPulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.3);}50%{box-shadow:0 0 0 8px rgba(239,68,68,0);}}
