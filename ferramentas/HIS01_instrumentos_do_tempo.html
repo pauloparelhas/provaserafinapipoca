@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instrumentos do Tempo - Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;
+  background:var(--bg);min-height:100vh;overflow-x:hidden;color:var(--text);}
+:root{--fs:1;--bg:#0d0b1e;--card-bg:rgba(255,255,255,.07);--card-border:rgba(255,255,255,.13);
+  --text:#fff;--text-soft:rgba(255,255,255,.75);--text-dim:rgba(255,255,255,.4);
+  --surface:rgba(255,255,255,.05);}
+
+/* STARFIELD */
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+
+/* APP */
+#app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;padding-bottom:32px;}
+
+/* SCREENS */
+.screen{display:none;width:100%;max-width:880px;padding:0 12px;}
+.screen.active{display:block;}
+
+/* NAVBAR */
+.navbar{width:100%;max-width:880px;display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--surface);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--card-border);margin-bottom:16px;
+  position:sticky;top:0;z-index:100;}
+.nav-logo{font-size:clamp(13px,2.5vw,17px);font-weight:900;
+  background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.nav-score{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:20px;
+  padding:4px 12px;font-size:13px;font-weight:800;color:#fff;
+  box-shadow:0 2px 8px rgba(245,158,11,.4);}
+.nav-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);
+  border-radius:8px;padding:10px 11px;font-family:inherit;font-size:11px;font-weight:800;
+  color:#fff;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:4px;
+  min-height:44px;}
+.nav-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px);}
+.nav-btn.nb-home{color:#a78bfa;}
+.nav-a11y{display:flex;gap:4px;align-items:center;}
+.nav-a11y-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  border-radius:8px;padding:10px 9px;font-family:inherit;font-size:13px;font-weight:800;
+  color:#fff;cursor:pointer;transition:all .18s;line-height:1;min-height:44px;}
+.nav-a11y-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-1px);}
+.nav-a11y-btn.nb-theme{font-size:15px;}
+
+/* MODAL HOME */
+.confirm-modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;
+  background:rgba(0,0,0,.5);align-items:center;justify-content:center;}
+.confirm-modal-overlay.active{display:flex;}
+.confirm-modal{background:#1a1535;border:2px solid #a78bfa;border-radius:20px;padding:28px 24px;
+  max-width:340px;width:90%;text-align:center;font-family:inherit;
+  box-shadow:0 8px 40px rgba(124,58,237,.25);color:#fff;}
+.confirm-modal-icon{font-size:40px;margin-bottom:10px;}
+.confirm-modal-title{font-size:17px;font-weight:900;color:#7c3aed;margin-bottom:8px;}
+.confirm-modal-text{font-size:14px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:20px;line-height:1.5;}
+.confirm-modal-btns{display:flex;gap:10px;justify-content:center;}
+.confirm-btn-yes{background:#7c3aed;color:#fff;border:none;border-radius:12px;padding:11px 24px;
+  font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:.18s;}
+.confirm-btn-yes:hover{background:#6d28d9;transform:translateY(-1px);}
+.confirm-btn-no{background:#374151;color:#fff;border:none;border-radius:12px;padding:11px 24px;
+  font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:.18s;}
+.confirm-btn-no:hover{background:#4b5563;transform:translateY(-1px);}
+
+/* BUTTONS */
+.btn{border:none;border-radius:14px;font-family:inherit;font-weight:800;
+  cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn:active{transform:scale(.96)!important;}
+.btn-start{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;
+  font-size:clamp(15px,2.8vw,19px);padding:15px 44px;border-radius:50px;
+  box-shadow:0 4px 30px rgba(167,139,250,.5);animation:startPulse 2.2s ease infinite;}
+@keyframes startPulse{
+  0%,100%{box-shadow:0 4px 30px rgba(167,139,250,.5),0 0 0 0 rgba(167,139,250,.3);}
+  50%{box-shadow:0 4px 30px rgba(167,139,250,.6),0 0 0 16px rgba(167,139,250,0);}}
+.btn-start:hover{transform:translateY(-3px);filter:brightness(1.1);}
+.btn-next{background:linear-gradient(135deg,#f472b6,#fb923c);color:#fff;
+  font-size:15px;padding:12px 30px;border-radius:12px;
+  box-shadow:0 4px 18px rgba(244,114,182,.4);}
+.btn-next:hover{transform:translateY(-2px);}
+.btn-check{background:linear-gradient(135deg,#10b981,#34d399);color:#fff;
+  font-size:14px;padding:11px 22px;border-radius:12px;
+  box-shadow:0 4px 14px rgba(16,185,129,.4);}
+.btn-check:hover{transform:translateY(-2px);}
+.btn-replay{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:#fff;font-size:13px;padding:10px 18px;border-radius:12px;}
+.btn-replay:hover{background:rgba(255,255,255,.18);transform:translateY(-2px);}
+.btn-home-lg{background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);
+  color:#a78bfa;font-size:13px;padding:10px 20px;border-radius:12px;}
+.btn-home-lg:hover{background:rgba(167,139,250,.25);transform:translateY(-2px);}
+.btn-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+
+/* INTRO */
+#screen-intro{text-align:center;padding-top:8px;}
+.intro-badge{display:inline-block;background:rgba(167,139,250,.12);
+  border:1px solid rgba(167,139,250,.35);border-radius:30px;padding:4px 16px;
+  font-size:11px;font-weight:700;color:#a78bfa;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:14px;}
+.intro-mascot{font-size:clamp(64px,12vw,92px);display:block;margin:0 auto 10px;
+  animation:mfloat 3s ease-in-out infinite;
+  filter:drop-shadow(0 0 24px rgba(167,139,250,.5));}
+@keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}
+  50%{transform:translateY(-14px) rotate(3deg);}}
+.intro-title{font-size:clamp(26px,5.5vw,48px);font-weight:900;
+  background:linear-gradient(135deg,#a78bfa 0%,#f472b6 50%,#fb923c 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 28px rgba(167,139,250,.3));margin-bottom:6px;}
+.intro-sub{font-size:clamp(13px,2.5vw,17px);color:var(--text-soft);margin-bottom:24px;font-weight:600;}
+.lv-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
+.lv-pill{background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:12px;padding:10px 14px;display:flex;flex-direction:column;
+  align-items:center;gap:4px;min-width:88px;transition:.2s;}
+.lv-pill:hover{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.5);}
+.lv-icon{font-size:24px;}
+.lv-lbl{font-size:11px;font-weight:700;color:var(--text-dim);}
+
+/* TEORIA CARDS */
+.teoria-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:16px 0;}
+.teoria-card{background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:18px;padding:20px 16px;text-align:center;transition:all .3s;cursor:default;}
+.teoria-card:hover{transform:translateY(-4px);border-color:rgba(167,139,250,.5);
+  box-shadow:0 8px 30px rgba(167,139,250,.15);}
+.tc-emoji{font-size:52px;display:block;margin-bottom:8px;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.3));}
+.tc-name{font-size:calc(17px * var(--fs));font-weight:900;color:#a78bfa;margin-bottom:6px;}
+.tc-desc{font-size:calc(13px * var(--fs));font-weight:600;color:var(--text-soft);line-height:1.5;}
+.tc-tag{display:inline-block;margin-top:8px;font-size:10px;font-weight:800;
+  padding:3px 10px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;}
+.tc-tag.antigo{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.3);}
+.tc-tag.moderno{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.3);}
+.tc-tag.natureza{background:rgba(96,165,250,.15);color:#60a5fa;border:1px solid rgba(96,165,250,.3);}
+.section-title{font-size:calc(20px * var(--fs));font-weight:900;color:#a78bfa;
+  margin-bottom:8px;text-align:center;}
+.section-sub{font-size:calc(13px * var(--fs));color:var(--text-dim);text-align:center;margin-bottom:16px;font-weight:600;}
+
+/* QUIZ */
+.quiz-question{font-size:calc(17px * var(--fs));font-weight:800;color:var(--text);
+  text-align:center;padding:16px;background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:16px;margin-bottom:16px;line-height:1.5;}
+.quiz-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:520px;margin:0 auto;}
+.quiz-opt{background:var(--card-bg);border:2px solid var(--card-border);border-radius:14px;
+  padding:16px 12px;text-align:center;cursor:pointer;transition:all .2s;
+  font-family:inherit;font-weight:700;font-size:calc(14px * var(--fs));color:var(--text);}
+.quiz-opt:hover{border-color:rgba(167,139,250,.6);background:rgba(167,139,250,.1);
+  transform:translateY(-2px);}
+.quiz-opt.selected{border-color:#a78bfa;background:rgba(167,139,250,.18);
+  box-shadow:0 0 0 3px rgba(167,139,250,.3);}
+.quiz-opt.correct{border-color:#34d399;background:rgba(16,185,129,.15);
+  box-shadow:0 0 0 3px rgba(16,185,129,.3);}
+.quiz-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.12);
+  box-shadow:0 0 0 3px rgba(239,68,68,.3);}
+.quiz-opt.correct-reveal{border-color:#34d399;background:rgba(16,185,129,.2);}
+.quiz-opt-emoji{font-size:32px;display:block;margin-bottom:6px;}
+.quiz-progress{display:flex;gap:6px;justify-content:center;margin-bottom:14px;}
+.qp-dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.15);transition:.3s;}
+.qp-dot.done-ok{background:#34d399;}.qp-dot.done-err{background:#ef4444;}
+.qp-dot.current{background:#a78bfa;box-shadow:0 0 8px rgba(167,139,250,.6);}
+.quiz-feedback{text-align:center;font-size:calc(14px * var(--fs));font-weight:700;
+  padding:12px;border-radius:12px;margin-top:12px;display:none;}
+.quiz-feedback.correct{display:block;background:rgba(16,185,129,.12);color:#34d399;
+  border:1px solid rgba(16,185,129,.3);}
+.quiz-feedback.wrong{display:block;background:rgba(239,68,68,.1);color:#f87171;
+  border:1px solid rgba(239,68,68,.25);}
+
+/* MATCHING */
+.match-instruction{font-size:calc(14px * var(--fs));font-weight:700;color:var(--text-soft);
+  text-align:center;margin-bottom:16px;line-height:1.5;}
+.match-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+.match-col{background:var(--card-bg);border:2px solid var(--card-border);border-radius:18px;
+  padding:14px;min-height:200px;transition:all .3s;}
+.match-col.drop-hover{border-color:rgba(167,139,250,.7);background:rgba(167,139,250,.1);
+  box-shadow:0 0 0 4px rgba(167,139,250,.15);}
+.match-col-title{font-size:calc(14px * var(--fs));font-weight:900;text-align:center;
+  margin-bottom:10px;padding:6px;border-radius:10px;}
+.match-col-title.col-passado{background:rgba(245,158,11,.15);color:#fbbf24;}
+.match-col-title.col-diadia{background:rgba(16,185,129,.15);color:#34d399;}
+.match-items{display:flex;flex-direction:column;gap:8px;min-height:100px;}
+.match-source{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:16px;}
+.match-item{background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(244,114,182,.1));
+  border:2px solid rgba(167,139,250,.3);border-radius:12px;padding:10px 16px;
+  cursor:pointer;transition:all .2s;font-family:inherit;font-size:calc(13px * var(--fs));
+  font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;
+  user-select:none;}
+.match-item:hover{transform:translateY(-2px);border-color:rgba(167,139,250,.6);}
+.match-item.selected{border-color:#a78bfa;background:rgba(167,139,250,.25);
+  box-shadow:0 0 0 3px rgba(167,139,250,.2);}
+.match-item.placed{opacity:.85;cursor:default;}
+.match-item.correct-item{border-color:#34d399;background:rgba(16,185,129,.15);}
+.match-item.wrong-item{border-color:#ef4444;background:rgba(239,68,68,.12);
+  text-decoration:line-through;opacity:.5;}
+.match-item.moved-correct{border:2px dashed #34d399;background:rgba(16,185,129,.1);
+  animation:fadeSlide .4s ease;}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+.match-item .mi-emoji{font-size:22px;}
+.match-feedback{text-align:center;font-size:calc(14px * var(--fs));font-weight:700;
+  padding:12px;border-radius:12px;margin-top:8px;display:none;}
+.match-feedback.show{display:block;}
+.match-feedback.all-ok{background:rgba(16,185,129,.12);color:#34d399;
+  border:1px solid rgba(16,185,129,.3);}
+.match-feedback.has-errors{background:rgba(239,68,68,.1);color:#f87171;
+  border:1px solid rgba(239,68,68,.25);}
+
+/* RESULTADO */
+#screen-resultado{text-align:center;padding-top:12px;}
+.res-mascot{font-size:90px;display:inline-block;animation:mfloat 3s ease-in-out infinite;
+  filter:drop-shadow(0 0 28px rgba(167,139,250,.6));}
+.res-title{font-size:clamp(26px,5vw,44px);font-weight:900;
+  background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:10px 0;}
+.res-msg{font-size:clamp(14px,2.5vw,17px);font-weight:700;color:var(--text-soft);
+  line-height:1.5;background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:14px;padding:14px 18px;margin:0 auto 14px;max-width:480px;}
+.res-score{font-size:clamp(18px,3.5vw,24px);font-weight:900;
+  background:linear-gradient(135deg,#f59e0b,#ef4444);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;}
+.stars-row{display:flex;justify-content:center;gap:12px;margin:14px 0;}
+.star{font-size:52px;animation:starPop .4s ease backwards;
+  filter:grayscale(1) opacity(.3);transition:filter .3s;}
+.star.lit{filter:grayscale(0) opacity(1);}
+.star:nth-child(1){animation-delay:.1s}.star:nth-child(2){animation-delay:.3s}.star:nth-child(3){animation-delay:.5s}
+@keyframes starPop{0%{transform:scale(0) rotate(-30deg);opacity:0}
+  60%{transform:scale(1.3) rotate(10deg);opacity:1}100%{transform:scale(1);opacity:1}}
+#fw-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:999;}
+
+/* TEMA CLARO */
+body.theme-light{--bg:#e8edf8;--card-bg:rgba(0,0,0,.04);--card-border:rgba(0,0,0,.1);
+  --text:#1a1a2e;--text-soft:rgba(26,26,46,.7);--text-dim:rgba(26,26,46,.4);
+  --surface:rgba(255,255,255,.82);}
+body.theme-light #starfield{opacity:.07;}
+body.theme-light .navbar{border-color:rgba(0,0,0,.1);}
+body.theme-light .nav-btn{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.12);color:#1a1a2e;}
+body.theme-light .nav-btn.nb-home{color:#6d28d9;}
+body.theme-light .nav-a11y-btn{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.12);color:#1a1a2e;}
+body.theme-light .nav-score{box-shadow:0 2px 8px rgba(245,158,11,.3);}
+body.theme-light .confirm-modal{background:#fff;color:#1a1535;border-color:#a78bfa;}
+body.theme-light .confirm-modal-text{color:#1a1535;}
+body.theme-light .confirm-btn-no{background:#e5e7eb;color:#374151;}
+body.theme-light .btn-replay{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.14);color:#1a1a2e;}
+body.theme-light .btn-home-lg{background:rgba(109,40,217,.1);border-color:rgba(109,40,217,.4);color:#6d28d9;}
+body.theme-light .quiz-opt{color:#1a1a2e;}
+body.theme-light .match-item{color:#1a1a2e;}
+
+/* FONT SIZE */
+@media(max-width:500px){
+  .teoria-grid{grid-template-columns:1fr;}
+  .quiz-grid{grid-template-columns:1fr 1fr;gap:8px;}
+  .match-cols{grid-template-columns:1fr;gap:10px;}
+  .match-col{min-height:120px;}
+  .tc-emoji{font-size:40px;}
+}
+</style>
+</head>
+<body>
+<canvas id="fw-canvas"></canvas>
+
+<!-- MODAL HOME -->
+<div class="confirm-modal-overlay" id="confirm-home-modal">
+  <div class="confirm-modal">
+    <div class="confirm-modal-icon">&#x1F3E0;</div>
+    <div class="confirm-modal-title">Ir para o inicio?</div>
+    <div class="confirm-modal-text">Tem certeza que quer voltar para a tela principal?</div>
+    <div class="confirm-modal-btns">
+      <button class="confirm-btn-yes" onclick="goToIndex()">Sim, ir!</button>
+      <button class="confirm-btn-no" onclick="closeHomeModal()">Nao, ficar</button>
+    </div>
+  </div>
+</div>
+
+<canvas id="starfield"></canvas>
+
+<div id="app">
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo" id="navLogo">&#x1F31F; Projeto Serafina</div>
+  <div class="nav-right">
+    <div class="nav-score">&#x2B50; <span id="score-val">0</span> pts</div>
+    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0; Inicio</button>
+    <button class="nav-btn" id="btnRestart" onclick="restartGame()">&#x1F504; Reiniciar</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A&#x2212;</button>
+      <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn nb-theme" id="themeBtn" onclick="toggleTheme()">&#x1F31D;</button>
+    </div>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<div id="screen-intro" class="screen active">
+  <div class="intro-badge">&#x1F4DA; Historia</div>
+  <span class="intro-mascot">&#x23F3;</span>
+  <div class="intro-title">Instrumentos do Tempo</div>
+  <div class="intro-sub">Como as pessoas medem o tempo? Vamos descobrir!</div>
+  <div class="lv-pills">
+    <div class="lv-pill"><div class="lv-icon">&#x1F4D6;</div><div class="lv-lbl">Teoria</div></div>
+    <div class="lv-pill"><div class="lv-icon">&#x2753;</div><div class="lv-lbl">Quiz</div></div>
+    <div class="lv-pill"><div class="lv-icon">&#x1F3AF;</div><div class="lv-lbl">Classificar</div></div>
+  </div>
+  <button class="btn btn-start" onclick="startGame()">&#x1F680; Comecar!</button>
+</div>
+
+<!-- TEORIA -->
+<div id="screen-teoria" class="screen">
+  <div class="section-title">&#x23F0; Marcadores do Tempo</div>
+  <div class="section-sub">Leia cada card para conhecer os marcadores do tempo!</div>
+  <div class="teoria-grid" id="teoria-grid"></div>
+  <div class="btn-row">
+    <button class="btn btn-next" onclick="goToQuiz()">Vamos ao Quiz! &#x27A1;</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="screen-quiz" class="screen">
+  <div class="section-title">&#x2753; Quiz: Qual marcador do tempo?</div>
+  <div class="quiz-progress" id="quiz-progress"></div>
+  <div class="quiz-question" id="quiz-question"></div>
+  <div class="quiz-grid" id="quiz-grid"></div>
+  <div class="quiz-feedback" id="quiz-feedback"></div>
+  <div class="btn-row">
+    <button class="btn btn-next" id="quiz-next-btn" onclick="nextQuizQuestion()" style="display:none">Proxima &#x27A1;</button>
+  </div>
+</div>
+
+<!-- MATCHING -->
+<div id="screen-matching" class="screen">
+  <div class="section-title">&#x1F3AF; Classifique: Passado ou Dia a Dia?</div>
+  <div class="match-instruction">Toque no instrumento e depois na coluna certa para classifica-lo!</div>
+  <div class="match-source" id="match-source"></div>
+  <div class="match-cols">
+    <div class="match-col" id="col-passado" onclick="placeInColumn('passado')">
+      <div class="match-col-title col-passado">&#x1F3DB; Do Passado</div>
+      <div class="match-items" id="items-passado"></div>
+    </div>
+    <div class="match-col" id="col-diadia" onclick="placeInColumn('diadia')">
+      <div class="match-col-title col-diadia">&#x2705; Do Dia a Dia</div>
+      <div class="match-items" id="items-diadia"></div>
+    </div>
+  </div>
+  <div class="match-feedback" id="match-feedback"></div>
+  <div class="btn-row">
+    <button class="btn btn-check" id="match-check-btn" onclick="checkMatching()">&#x2714;&#xFE0F; Verificar</button>
+    <button class="btn btn-next" id="match-next-btn" onclick="goToResultado()" style="display:none">Ver Resultado &#x27A1;</button>
+  </div>
+</div>
+
+<!-- RESULTADO -->
+<div id="screen-resultado" class="screen">
+  <div class="res-mascot" id="res-mascot">&#x1F389;</div>
+  <div class="res-title" id="res-title">Parabens!</div>
+  <div class="stars-row">
+    <span class="star" id="star1">&#x2B50;</span>
+    <span class="star" id="star2">&#x2B50;</span>
+    <span class="star" id="star3">&#x2B50;</span>
+  </div>
+  <div class="res-score" id="res-score"></div>
+  <div class="res-msg" id="res-msg"></div>
+  <div class="btn-row">
+    <button class="btn btn-start" onclick="restartGame()">&#x1F504; Jogar Novamente</button>
+    <button class="btn btn-home-lg" onclick="showHomeModal()">&#x1F3E0; Inicio</button>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+// ============================================================
+//  DADOS
+// ============================================================
+var INSTRUMENTOS = [
+  {id:'relogio_sol', nome:'Relogio de Sol', emoji:'\u2600\uFE0F', tipo:'passado',
+   desc:'Usa a sombra do sol para mostrar as horas. Era colocado ao ar livre e a sombra ia mudando de posicao.'},
+  {id:'ampulheta', nome:'Ampulheta', emoji:'\u23F3', tipo:'passado',
+   desc:'Usa areia que cai de um lado para o outro. Quando toda areia passa, um tempo marcado acabou.'},
+  {id:'clepsidra', nome:'Clepsidra (Relogio de Agua)', emoji:'\uD83D\uDCA7', tipo:'passado',
+   desc:'Usava agua escorrendo para marcar o tempo. Foi inventada no Egito Antigo, muito antes dos relogios!'},
+  {id:'relogio_ponteiro', nome:'Relogio de Ponteiro', emoji:'\uD83D\uDD70\uFE0F', tipo:'diadia',
+   desc:'Tem ponteiros que giram para mostrar as horas, minutos e segundos. Faz tic-tac!'},
+  {id:'relogio_digital', nome:'Relogio Digital', emoji:'\u23F0', tipo:'diadia',
+   desc:'Mostra as horas com numeros na tela, sem ponteiros. Esta no celular, no micro-ondas e em muitos lugares!'},
+  {id:'calendario', nome:'Calendario', emoji:'\uD83D\uDCC5', tipo:'diadia',
+   desc:'Mostra os dias, semanas e meses do ano. Usamos para saber que dia e hoje e planejar o futuro!'},
+  {id:'dia_noite', nome:'Dia e Noite', emoji:'\uD83C\uDF05', tipo:'natureza',
+   desc:'O sol nasce e se poe todo dia. Observando o dia e a noite, as pessoas sabem que o tempo esta passando.'},
+  {id:'estacoes', nome:'Estacoes do Ano', emoji:'\uD83C\uDF38', tipo:'natureza',
+   desc:'Primavera, verao, outono e inverno se repetem todo ano. A natureza muda e mostra que o tempo passou!'}
+];
+
+var QUIZ_BANK = [
+  {q:'O que usava a sombra do sol para mostrar as horas?', a:'relogio_sol',
+   fb:'O Relogio de Sol usava a sombra para marcar o tempo!'},
+  {q:'O que usa areia que cai devagar para marcar o tempo?', a:'ampulheta',
+   fb:'A Ampulheta usa areia que escorre de um lado para o outro!'},
+  {q:'Qual marcador do tempo usava agua escorrendo?', a:'clepsidra',
+   fb:'A Clepsidra (Relogio de Agua) foi inventada no Egito Antigo!'},
+  {q:'O que tem ponteiros que giram e faz tic-tac?', a:'relogio_ponteiro',
+   fb:'O Relogio de Ponteiro tem ponteiros de horas, minutos e segundos!'},
+  {q:'O que mostra as horas com numeros na tela, sem ponteiros?', a:'relogio_digital',
+   fb:'O Relogio Digital mostra numeros na tela!'},
+  {q:'O que mostra os dias, semanas e meses do ano?', a:'calendario',
+   fb:'O Calendario nos ajuda a saber que dia e hoje!'},
+  {q:'Voce pode encontrar um dentro do seu celular ou no micro-ondas.', a:'relogio_digital',
+   fb:'O Relogio Digital esta em muitos aparelhos do dia a dia!'},
+  {q:'Qual instrumento antigo era colocado no chao, ao ar livre?', a:'relogio_sol',
+   fb:'O Relogio de Sol ficava ao ar livre para pegar a sombra!'},
+  {q:'Os graos caem de um lado para o outro em dois bulbos de vidro.', a:'ampulheta',
+   fb:'A Ampulheta tem dois bulbos de vidro com areia dentro!'},
+  {q:'Era usado no Egito Antigo e funcionava com agua escorrendo.', a:'clepsidra',
+   fb:'A Clepsidra e um dos instrumentos mais antigos do mundo!'},
+  {q:'Penduramos um na parede para saber que dia e hoje.', a:'calendario',
+   fb:'O Calendario na parede nos ajuda a organizar os dias!'},
+  {q:'Tem um pendulo que balanca e faz tic-tac na parede.', a:'relogio_ponteiro',
+   fb:'O Relogio de Ponteiro com pendulo e um classico!'},
+  {q:'Quando o sol nasce e se poe, sabemos que mais um dia passou.', a:'dia_noite',
+   fb:'O Dia e a Noite sao marcadores naturais do tempo!'},
+  {q:'Primavera, verao, outono e inverno se repetem todo ano.', a:'estacoes',
+   fb:'As Estacoes do Ano mostram a passagem do tempo na natureza!'}
+];
+
+// ============================================================
+//  ESTADO
+// ============================================================
+var score = 0;
+var quizQuestions = [];
+var quizIndex = 0;
+var quizCorrect = 0;
+var quizTotal = 8;
+var quizAnswered = false;
+var matchItems = [];
+var matchSelected = null;
+var matchPlaced = {passado:[], diadia:[]};
+var matchChecked = false;
+
+// ============================================================
+//  UTILIDADES
+// ============================================================
+function $(id){return document.getElementById(id);}
+function shuffle(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
+function showScreen(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});$(id).classList.add('active');window.scrollTo(0,0);}
+function getInstr(id){return INSTRUMENTOS.find(function(x){return x.id===id;});}
+
+// ============================================================
+//  NAVBAR: TEMA, FONTE, HOME
+// ============================================================
+function toggleTheme(){
+  var b=document.body;
+  if(b.classList.contains('theme-light')){b.classList.remove('theme-light');$('themeBtn').innerHTML='\u{1F31D}';localStorage.setItem('serafina_theme','dark');}
+  else{b.classList.add('theme-light');$('themeBtn').innerHTML='\u{1F31A}';localStorage.setItem('serafina_theme','light');}
+}
+function changeFontSize(dir){
+  var r=document.documentElement;var fs=parseFloat(getComputedStyle(r).getPropertyValue('--fs'))||1;
+  fs=Math.max(0.8,Math.min(1.4,fs+dir*0.1));r.style.setProperty('--fs',fs);
+  localStorage.setItem('serafina_fs',fs);
+}
+function showHomeModal(){$('confirm-home-modal').classList.add('active');}
+function closeHomeModal(){$('confirm-home-modal').classList.remove('active');}
+function goToIndex(){window.location.href='../index.html';}
+function updateScore(pts){score+=pts;$('score-val').textContent=score;}
+
+// ============================================================
+//  INIT
+// ============================================================
+function initApp(){
+  // Restore theme
+  if(localStorage.getItem('serafina_theme')==='light'){document.body.classList.add('theme-light');$('themeBtn').innerHTML='\u{1F31A}';}
+  // Restore font
+  var fs=localStorage.getItem('serafina_fs');if(fs){document.documentElement.style.setProperty('--fs',fs);}
+  // Starfield
+  initStarfield();
+}
+
+function startGame(){
+  score=0;updateScore(0);
+  buildTeoria();
+  showScreen('screen-teoria');
+}
+function restartGame(){
+  score=0;$('score-val').textContent='0';
+  showScreen('screen-intro');
+}
+
+// ============================================================
+//  FASE 1: TEORIA
+// ============================================================
+function buildTeoria(){
+  var grid=$('teoria-grid');grid.innerHTML='';
+  INSTRUMENTOS.forEach(function(inst){
+    var tagClass=inst.tipo==='passado'?'antigo':inst.tipo==='diadia'?'moderno':'natureza';
+    var tagLabel=inst.tipo==='passado'?'Do passado':inst.tipo==='diadia'?'Dia a dia':'Natureza';
+    var card=document.createElement('div');card.className='teoria-card';
+    card.innerHTML='<span class="tc-emoji">'+inst.emoji+'</span>'+
+      '<div class="tc-name">'+inst.nome+'</div>'+
+      '<div class="tc-desc">'+inst.desc+'</div>'+
+      '<span class="tc-tag '+tagClass+'">'+tagLabel+'</span>';
+    grid.appendChild(card);
+  });
+}
+
+// ============================================================
+//  FASE 2: QUIZ
+// ============================================================
+function goToQuiz(){
+  quizIndex=0;quizCorrect=0;quizAnswered=false;
+  // Pick random questions
+  quizQuestions=shuffle(QUIZ_BANK.slice()).slice(0,quizTotal);
+  showScreen('screen-quiz');
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion(){
+  if(quizIndex>=quizQuestions.length){goToMatching();return;}
+  quizAnswered=false;
+  var qq=quizQuestions[quizIndex];
+  $('quiz-question').textContent=qq.q;
+  $('quiz-feedback').className='quiz-feedback';$('quiz-feedback').style.display='none';
+  $('quiz-next-btn').style.display='none';
+  // Progress dots
+  var prog='';for(var i=0;i<quizQuestions.length;i++){
+    var cls='qp-dot';
+    if(i<quizIndex)cls+=' '+(quizQuestions[i]._ok?'done-ok':'done-err');
+    else if(i===quizIndex)cls+=' current';
+    prog+='<div class="'+cls+'"></div>';
+  }
+  $('quiz-progress').innerHTML=prog;
+  // Options: correct + 3 random wrong
+  var correctInst=getInstr(qq.a);
+  var wrongPool=INSTRUMENTOS.filter(function(x){return x.id!==qq.a;});
+  var wrongs=shuffle(wrongPool).slice(0,3);
+  var opts=shuffle([correctInst].concat(wrongs));
+  var grid=$('quiz-grid');grid.innerHTML='';
+  opts.forEach(function(opt){
+    var btn=document.createElement('button');btn.className='quiz-opt';
+    btn.innerHTML='<span class="quiz-opt-emoji">'+opt.emoji+'</span>'+opt.nome;
+    btn.onclick=function(){selectQuizAnswer(opt.id,qq.a,qq.fb,btn);};
+    grid.appendChild(btn);
+  });
+}
+
+function selectQuizAnswer(chosen,correct,fb,btnEl){
+  if(quizAnswered)return;quizAnswered=true;
+  var allBtns=document.querySelectorAll('.quiz-opt');
+  allBtns.forEach(function(b){b.style.pointerEvents='none';});
+  if(chosen===correct){
+    btnEl.classList.add('correct');
+    quizQuestions[quizIndex]._ok=true;quizCorrect++;
+    updateScore(10);
+    $('quiz-feedback').className='quiz-feedback correct';
+    $('quiz-feedback').innerHTML='\u2705 Certo! '+fb;
+  }else{
+    btnEl.classList.add('wrong');
+    quizQuestions[quizIndex]._ok=false;
+    // Highlight correct
+    allBtns.forEach(function(b){
+      if(b.textContent.indexOf(getInstr(correct).nome)!==-1)b.classList.add('correct-reveal');
+    });
+    $('quiz-feedback').className='quiz-feedback wrong';
+    $('quiz-feedback').innerHTML='\u274C '+fb;
+  }
+  $('quiz-feedback').style.display='block';
+  $('quiz-next-btn').style.display='inline-flex';
+  // Update progress dot
+  var dots=$('quiz-progress').children;
+  if(dots[quizIndex])dots[quizIndex].className='qp-dot '+(quizQuestions[quizIndex]._ok?'done-ok':'done-err');
+}
+
+function nextQuizQuestion(){
+  quizIndex++;
+  if(quizIndex>=quizQuestions.length){goToMatching();}
+  else{renderQuizQuestion();}
+}
+
+// ============================================================
+//  FASE 3: MATCHING
+// ============================================================
+function goToMatching(){
+  matchSelected=null;matchChecked=false;
+  matchPlaced={passado:[],diadia:[]};
+  // Only human-made instruments (not natureza)
+  matchItems=shuffle(INSTRUMENTOS.filter(function(x){return x.tipo!=='natureza';}).slice());
+  showScreen('screen-matching');
+  renderMatchSource();
+  $('items-passado').innerHTML='';$('items-diadia').innerHTML='';
+  $('match-check-btn').style.display='inline-flex';
+  $('match-next-btn').style.display='none';
+}
+
+function renderMatchSource(){
+  var src=$('match-source');src.innerHTML='';
+  matchItems.forEach(function(inst){
+    if(matchPlaced.passado.indexOf(inst.id)!==-1||matchPlaced.diadia.indexOf(inst.id)!==-1)return;
+    var el=document.createElement('div');el.className='match-item';el.dataset.id=inst.id;
+    el.innerHTML='<span class="mi-emoji">'+inst.emoji+'</span>'+inst.nome;
+    el.onclick=function(){selectMatchItem(inst.id,el);};
+    src.appendChild(el);
+  });
+}
+
+function selectMatchItem(id,el){
+  if(matchChecked)return;
+  document.querySelectorAll('.match-item.selected').forEach(function(x){x.classList.remove('selected');});
+  el.classList.add('selected');matchSelected=id;
+  // Visual hint on columns
+  $('col-passado').classList.add('drop-hover');$('col-diadia').classList.add('drop-hover');
+}
+
+function placeInColumn(col){
+  if(!matchSelected||matchChecked)return;
+  matchPlaced[col].push(matchSelected);
+  var inst=getInstr(matchSelected);
+  var container=$(col==='passado'?'items-passado':'items-diadia');
+  var el=document.createElement('div');el.className='match-item placed';el.dataset.id=inst.id;
+  el.innerHTML='<span class="mi-emoji">'+inst.emoji+'</span>'+inst.nome;
+  el.onclick=function(){removeFromColumn(inst.id,col,el);};
+  container.appendChild(el);
+  matchSelected=null;
+  $('col-passado').classList.remove('drop-hover');$('col-diadia').classList.remove('drop-hover');
+  renderMatchSource();
+}
+
+function removeFromColumn(id,col,el){
+  if(matchChecked)return;
+  matchPlaced[col]=matchPlaced[col].filter(function(x){return x!==id;});
+  el.remove();renderMatchSource();
+}
+
+function checkMatching(){
+  var fb=$('match-feedback');
+  if(matchPlaced.passado.length+matchPlaced.diadia.length<matchItems.length){
+    fb.className='match-feedback show has-errors';
+    fb.textContent='Classifique todos os instrumentos antes de verificar!';return;
+  }
+  matchChecked=true;var matchCorrect=0;var matchTotal=matchItems.length;
+  var wrongItems=[];
+  // Check passado column
+  matchPlaced.passado.forEach(function(id){
+    var inst=getInstr(id);var el=document.querySelector('#items-passado [data-id="'+id+'"]');
+    if(inst.tipo==='passado'){el.classList.add('correct-item');matchCorrect++;}
+    else{el.classList.add('wrong-item');wrongItems.push({id:id,shouldBe:'diadia'});}
+  });
+  // Check diadia column
+  matchPlaced.diadia.forEach(function(id){
+    var inst=getInstr(id);var el=document.querySelector('#items-diadia [data-id="'+id+'"]');
+    if(inst.tipo==='diadia'){el.classList.add('correct-item');matchCorrect++;}
+    else{el.classList.add('wrong-item');wrongItems.push({id:id,shouldBe:'passado'});}
+  });
+  // Move wrong items to correct column with visual indication
+  setTimeout(function(){
+    wrongItems.forEach(function(w){
+      var inst=getInstr(w.id);
+      var container=$(w.shouldBe==='passado'?'items-passado':'items-diadia');
+      var el=document.createElement('div');el.className='match-item moved-correct';
+      el.innerHTML='<span class="mi-emoji">'+inst.emoji+'</span>'+inst.nome;
+      container.appendChild(el);
+    });
+  },800);
+  // Feedback message
+  if(matchCorrect===matchTotal){
+    fb.className='match-feedback show all-ok';
+    fb.innerHTML='\u2705 Perfeito! Voce classificou todos corretamente!';
+  }else{
+    fb.className='match-feedback show has-errors';
+    fb.innerHTML='\u274C Voce acertou '+matchCorrect+' de '+matchTotal+'. Os itens errados foram movidos para a coluna certa!';
+  }
+  updateScore(matchCorrect*10);
+  $('match-check-btn').style.display='none';
+  $('match-next-btn').style.display='inline-flex';
+}
+
+// ============================================================
+//  RESULTADO
+// ============================================================
+function goToResultado(){
+  var total=quizTotal+matchItems.length;
+  var correct=quizCorrect;
+  // Count match correct
+  matchPlaced.passado.forEach(function(id){if(getInstr(id).tipo==='passado')correct++;});
+  matchPlaced.diadia.forEach(function(id){if(getInstr(id).tipo==='diadia')correct++;});
+  var pct=Math.round(correct/total*100);
+  showScreen('screen-resultado');
+  $('res-score').textContent=correct+' de '+total+' ('+pct+'%)';
+  // Stars
+  var stars=pct>=90?3:pct>=60?2:pct>=30?1:0;
+  for(var i=1;i<=3;i++){$(('star'+i)).classList.toggle('lit',i<=stars);}
+  // Message
+  if(pct>=90){$('res-title').textContent='Incrivel!';$('res-mascot').textContent='\uD83C\uDF89';
+    $('res-msg').textContent='Voce e uma expert em marcadores do tempo! Parabens!';}
+  else if(pct>=60){$('res-title').textContent='Muito bem!';$('res-mascot').textContent='\uD83C\uDF1F';
+    $('res-msg').textContent='Voce conhece bem os marcadores do tempo! Continue assim!';}
+  else if(pct>=30){$('res-title').textContent='Bom comeco!';$('res-mascot').textContent='\uD83D\uDCAA';
+    $('res-msg').textContent='Voce esta aprendendo! Que tal tentar de novo para acertar mais?';}
+  else{$('res-title').textContent='Vamos tentar de novo?';$('res-mascot').textContent='\uD83E\uDD17';
+    $('res-msg').textContent='Nao desista! Leia os cards com calma e tente novamente!';}
+  // Confetti if >= 50%
+  if(pct>=50)launchFireworks();
+}
+
+// ============================================================
+//  STARFIELD
+// ============================================================
+function initStarfield(){
+  var c=$('starfield');if(!c)return;var ctx=c.getContext('2d');
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  var stars=[];for(var i=0;i<120;i++){stars.push({x:Math.random()*c.width,y:Math.random()*c.height,
+    r:Math.random()*1.8+.3,a:Math.random(),da:Math.random()*.02+.005});}
+  function draw(){ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(function(s){s.a+=s.da;if(s.a>1||s.a<0)s.da*=-1;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,255,255,'+s.a+')';ctx.fill();});
+    requestAnimationFrame(draw);}
+  draw();
+}
+
+// ============================================================
+//  FIREWORKS / CONFETTI
+// ============================================================
+function launchFireworks(){
+  var c=$('fw-canvas');if(!c)return;var ctx=c.getContext('2d');
+  c.width=window.innerWidth;c.height=window.innerHeight;
+  var particles=[];var colors=['#a78bfa','#f472b6','#fb923c','#34d399','#fbbf24','#60a5fa'];
+  for(var i=0;i<150;i++){particles.push({x:c.width/2+Math.random()*200-100,y:c.height/2,
+    vx:Math.random()*8-4,vy:Math.random()*-10-3,r:Math.random()*4+2,
+    color:colors[Math.floor(Math.random()*colors.length)],life:1,decay:Math.random()*.015+.008});}
+  var raf;function draw(){ctx.clearRect(0,0,c.width,c.height);var alive=false;
+    particles.forEach(function(p){if(p.life<=0)return;alive=true;p.x+=p.vx;p.y+=p.vy;p.vy+=.15;
+      p.life-=p.decay;ctx.globalAlpha=p.life;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.color;ctx.fill();});ctx.globalAlpha=1;
+    if(alive){raf=requestAnimationFrame(draw);}else{ctx.clearRect(0,0,c.width,c.height);}}
+  draw();
+}
+
+// ============================================================
+//  BOOT
+// ============================================================
+initApp();
+</script>
+</body>
+</html>
