@@ -1,6 +1,6 @@
 # PROJETO SERAFINA - MAPA DE TAXONOMIA
 **Responsavel:** Agente Coordenador Pedagogico
-**Atualizado em:** 07/03/2026
+**Atualizado em:** 21/03/2026
 
 ---
 
@@ -17,48 +17,22 @@ provas/
 |   |-- taxonomia/
 |       |-- MAPA_TAXONOMIA.md                [Este arquivo]
 |
-|-- 01_LINGUA_PORTUGUESA/              <- AF: 10/03/2026 | PRIORIDADE MAXIMA
+|-- 01_LINGUA_PORTUGUESA/              <- AF: 10/03/2026 | CONCLUIDA
 |   |-- materiais_escola/
-|   |   |-- LP_informativo_geral.png   (image8)
-|   |   |-- LP_ordem_alfabetica_instrucoes.png  (image4)
-|   |   |-- LP_ordem_alfabetica_exercicio.png   (image5)
-|   |   |-- LP_alfabeto_e_serafina_instrucoes.png (image3)
-|   |   |-- LP_perfil_serafina_exercicio.png    (image6)
-|   |   |-- LP_escrita_meu_esconderijo.png      (image7)
-|   |   |-- LP_instrucoes_escrita_1.png         (image1)
-|   |   |-- LP_instrucoes_escrita_2.png         (image2)
-|   |-- ferramentas/
-|       |-- LP-05_ordem_alfabetica.html         [A GERAR]
-|       |-- LP-04_maiusculo_minusculo.html       [A GERAR]
-|       |-- LP-07_uso_maiuscula.html             [A GERAR]
-|       |-- LP-01_genero_diario.html             [A GERAR]
-|       |-- LP-08_meu_esconderijo.html           [A GERAR]
-|       |-- LP-02-03_personagem_serafina.html    [AGUARDA LIVRO]
 |
-|-- 02_ELA_INGLES/                     <- AF: 18/03/2026
-|   |-- materiais_escola/              [Aguardando material - Collection Folder/workbook]
-|   |-- ferramentas/
-|       |-- ELA-01_acrostic_poem.html           [A GERAR]
-|       |-- ELA-02_bucket_filler.html           [A GERAR]
-|       |-- ELA-03_community_helpers.html       [A GERAR]
-|       |-- ELA-04_sense_of_community.html      [A GERAR]
-|       |-- ELA-05_family_vocabulary.html       [A GERAR]
-|       |-- ELA-06_reading_texts.html           [A GERAR]
+|-- 02_ELA_INGLES/                     <- AF: 18/03/2026 | CONCLUIDA
+|   |-- materiais_escola/              <- fotos caderno + slides Toddle
 |
-|-- 03_HISTORIA/                       <- AF: 26/03/2026
-|   |-- materiais_escola/              [Aguardando material]
-|   |-- ferramentas/                   [A PLANEJAR]
+|-- 03_HISTORIA/                       <- AF: 26/03/2026 | CONCLUIDA
+|   |-- assets/                        <- audio/video NotebookLM (git-ignored, ~130MB)
+|   |-- notebooklm/                    <- prompts para geracao de audio/video
 |
-|-- 04_LIVRO_SERAFINA/                 <- AGUARDANDO LIVRO
-|   |-- [O Diario Escondido de Serafina - a inserir]
+|-- ferramentas/                       <- TODOS os HTMLs aqui (desde sessao 7)
+|   |-- LP01..LP08*.html               <- 6 ferramentas LP
+|   |-- ELA01..ELA06*.html             <- 6 ferramentas ELA
+|   |-- HIS01..HIS03*.html             <- 3 ferramentas HIS
 |
-|-- 05_LINKS_FERRAMENTAS/
-|   |-- links de ferramentas.docx      [Arquivo oficial de links - atualizar apos cada tool]
-|
-|-- planejamento/
-    |-- PROJETO_SERAFINA_Planejamento.docx  [copia - master em 00_COORDENACAO]
-    |-- gerar_planejamento.py
-    |-- gerar_transcricao.py
+|-- planejamento/                      <- git-ignored
 ```
 
 ---
@@ -83,20 +57,26 @@ provas/
 
 ## CODIGOS DE CONTEUDO
 
-| Codigo    | Conteudo                         | Disciplina | Data AF   | Status          |
-|-----------|----------------------------------|------------|-----------|-----------------|
-| LP-01     | Genero Textual - Diario          | Portugues  | 10/03     | A GERAR         |
-| LP-02     | Livro: Diario Escondido Serafina  | Portugues  | 10/03     | AGUARDA LIVRO   |
-| LP-03     | Perfil da Personagem Serafina    | Portugues  | 10/03     | AGUARDA LIVRO   |
-| LP-04     | Alfabeto Maiusculo e Minusculo   | Portugues  | 10/03     | A GERAR         |
-| LP-05     | Ordem Alfabetica                 | Portugues  | 10/03     | A GERAR         |
-| LP-06     | Separacao Silabica               | Portugues  | 10/03     | CONCLUIDA       |
-| LP-07     | Uso da Letra Maiuscula           | Portugues  | 10/03     | A GERAR         |
-| LP-08     | Escrita: Meu Esconderijo         | Portugues  | 10/03     | A GERAR         |
-| ELA-01    | Acrostic Poem                    | Ingles     | 18/03     | A PLANEJAR      |
-| ELA-02    | Bucket Filler vs Dipper          | Ingles     | 18/03     | A PLANEJAR      |
-| ELA-03    | Community Helpers                | Ingles     | 18/03     | A PLANEJAR      |
-| ELA-04    | Sense of Community               | Ingles     | 18/03     | A PLANEJAR      |
-| ELA-05    | Family Vocabulary                | Ingles     | 18/03     | A PLANEJAR      |
-| ELA-06    | Reading & Interpreting           | Ingles     | 18/03     | A PLANEJAR      |
-| HIS-01    | Quanto o tempo o tempo tem?      | Historia   | 26/03     | A PLANEJAR      |
+| Codigo    | Conteudo                         | Disciplina | Data AF   | Status    | Arquivo                          |
+|-----------|----------------------------------|------------|-----------|-----------|----------------------------------|
+| LP-01     | Genero Textual - Diario          | Portugues  | 10/03     | CONCLUIDA | LP01_genero_textual_diario.html  |
+| LP-02/03  | Personagem Serafina              | Portugues  | 10/03     | CONCLUIDA | LP02-03_personagem_serafina.html |
+| LP-04/07  | Maiuscula e Minuscula            | Portugues  | 10/03     | CONCLUIDA | LP04-07_maiuscula_minuscula.html |
+| LP-05     | Ordem Alfabetica                 | Portugues  | 10/03     | CONCLUIDA | LP05_ordem_alfabetica.html       |
+| LP-06     | Separacao Silabica               | Portugues  | 10/03     | CONCLUIDA | LP06_separacao_silabica.html     |
+| LP-08     | Escrita: Meu Esconderijo         | Portugues  | 10/03     | CONCLUIDA | LP08_meu_esconderijo.html        |
+| ELA-01    | Community Helpers                | Ingles     | 18/03     | CONCLUIDA | ELA01_community_helpers.html     |
+| ELA-02    | Bucket Fillers & Community       | Ingles     | 18/03     | CONCLUIDA | ELA02_bucket_fillers.html        |
+| ELA-03    | Adjectives & Acrostic Poem       | Ingles     | 18/03     | CONCLUIDA | ELA03_acrostic_adjectives.html   |
+| ELA-04    | Family & Friends                 | Ingles     | 18/03     | CONCLUIDA | ELA04_family_friends.html        |
+| ELA-05    | Reading & Interpreting           | Ingles     | 18/03     | CONCLUIDA | ELA05_reading.html               |
+| ELA-06    | Toddle Dashboard (opcional)      | Ingles     | 18/03     | CONCLUIDA | ELA06_toddle_optional.html       |
+| HIS-01    | Instrumentos do Tempo            | Historia   | 26/03     | CONCLUIDA | HIS01_instrumentos_do_tempo.html |
+| HIS-02    | Linha do Tempo                   | Historia   | 26/03     | CONCLUIDA | HIS02_linha_do_tempo.html        |
+| HIS-03    | Tempo e Memorias                 | Historia   | 26/03     | CONCLUIDA | HIS03_tempo_e_memorias.html      |
+
+### Complementos (nao sao ferramentas HTML)
+| Tipo      | Conteudo                         | Disciplina | Status    | Local                            |
+|-----------|----------------------------------|------------|-----------|----------------------------------|
+| Audio     | Podcast Historia U1 (v2, 6min)   | Historia   | GERADO    | 03_HISTORIA/assets/audio_*_v2.mp3|
+| Video     | Video Historia U1 (v2)           | Historia   | GERADO    | 03_HISTORIA/assets/video_*_v2.mp4|

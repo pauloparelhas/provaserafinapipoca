@@ -8,6 +8,9 @@ planejamento/
 # Materiais escola (imagens pesadas, já commitadas)
 # Não ignorar para manter histórico
 
+# Assets pesados (audio/video NotebookLM — nao deployar via GitHub Pages)
+03_HISTORIA/assets/
+
 # Sistema
 Thumbs.db
 .DS_Store
