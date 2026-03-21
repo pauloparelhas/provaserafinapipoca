@@ -101,16 +101,16 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;
   filter:drop-shadow(0 0 24px rgba(167,139,250,.5));}
 @keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}
   50%{transform:translateY(-14px) rotate(3deg);}}
-.intro-title{font-size:clamp(26px,5.5vw,48px);font-weight:900;
+.intro-title{font-size:calc(clamp(26px,5.5vw,48px) * var(--fs));font-weight:900;
   background:linear-gradient(135deg,#a78bfa 0%,#f472b6 50%,#fb923c 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   filter:drop-shadow(0 0 28px rgba(167,139,250,.3));margin-bottom:6px;}
-.intro-sub{font-size:clamp(13px,2.5vw,17px);color:var(--text-soft);margin-bottom:24px;font-weight:600;}
+.intro-sub{font-size:calc(clamp(13px,2.5vw,17px) * var(--fs));color:var(--text-soft);margin-bottom:24px;font-weight:600;}
 .lv-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
 .lv-pill{background:var(--card-bg);border:1px solid var(--card-border);
   border-radius:12px;padding:10px 14px;display:flex;flex-direction:column;
   align-items:center;gap:4px;min-width:88px;}
-.lv-icon{font-size:24px;}.lv-lbl{font-size:11px;font-weight:700;color:var(--text-dim);}
+.lv-icon{font-size:calc(24px * var(--fs));}.lv-lbl{font-size:calc(11px * var(--fs));font-weight:700;color:var(--text-dim);}
 
 /* SECTION */
 .section-title{font-size:calc(20px * var(--fs));font-weight:900;color:#a78bfa;
@@ -245,10 +245,33 @@ body.theme-light .confirm-modal-text{color:#1a1535;}
 body.theme-light .confirm-btn-no{background:#e5e7eb;color:#374151;}
 body.theme-light .btn-replay{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.14);color:#1a1a2e;}
 body.theme-light .btn-home-lg{background:rgba(109,40,217,.1);border-color:rgba(109,40,217,.4);color:#6d28d9;}
-body.theme-light .sort-item{color:#1a1a2e;}
-body.theme-light .sort-placed{color:#1a1a2e;}
-body.theme-light .match-item{color:#1a1a2e;}
-body.theme-light .mz-placed{color:#1a1a2e;}
+body.theme-light .sort-item{color:#1a1a2e;border-color:rgba(0,0,0,.15);background:rgba(109,40,217,.08);}
+body.theme-light .sort-item.selected{background:rgba(109,40,217,.2);border-color:#6d28d9;}
+body.theme-light .sort-item.correct-item{background:rgba(5,150,105,.15);border-color:#059669;color:#065f46;}
+body.theme-light .sort-item.wrong-item{background:rgba(239,68,68,.12);border-color:#ef4444;color:#991b1b;}
+body.theme-light .match-item{color:#1a1a2e;border-color:rgba(0,0,0,.15);background:rgba(109,40,217,.08);}
+body.theme-light .match-item.selected{background:rgba(109,40,217,.2);border-color:#6d28d9;}
+body.theme-light .match-item.correct-item{background:rgba(5,150,105,.15);border-color:#059669;color:#065f46;}
+body.theme-light .match-item.wrong-item{background:rgba(239,68,68,.12);border-color:#ef4444;color:#991b1b;}
+body.theme-light .section-title{color:#6d28d9;}
+body.theme-light .section-sub{color:rgba(26,26,46,.5);}
+body.theme-light .sort-feedback{color:#1a1a2e;}
+body.theme-light .match-feedback{color:#1a1a2e;}
+
+/* PHASE NAV */
+.phase-nav{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:0 auto 16px;
+  max-width:520px;padding:8px 0;}
+.phase-btn{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;
+  padding:6px 14px;font-family:inherit;font-size:calc(11px * var(--fs));font-weight:700;
+  color:var(--text-dim);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px;
+  min-height:36px;}
+.phase-btn:hover{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4);color:var(--text);}
+.phase-btn.active{background:rgba(167,139,250,.2);border-color:#a78bfa;color:#a78bfa;font-weight:800;}
+.phase-btn.completed{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:#34d399;}
+body.theme-light .phase-btn{color:rgba(26,26,46,.4);}
+body.theme-light .phase-btn:hover{color:#1a1a2e;}
+body.theme-light .phase-btn.active{color:#6d28d9;border-color:#6d28d9;background:rgba(109,40,217,.1);}
+body.theme-light .phase-btn.completed{color:#059669;border-color:rgba(5,150,105,.3);background:rgba(5,150,105,.1);}
 
 @media(max-width:500px){
   .teoria-grid{grid-template-columns:1fr;}
@@ -290,6 +313,7 @@ body.theme-light .mz-placed{color:#1a1a2e;}
 
 <!-- INTRO -->
 <div id="screen-intro" class="screen active">
+  <div class="phase-nav"></div>
   <div class="intro-badge">&#x1F4DA; Historia</div>
   <span class="intro-mascot">&#x1F4F8;</span>
   <div class="intro-title">Tempo e Memorias</div>
@@ -304,6 +328,7 @@ body.theme-light .mz-placed{color:#1a1a2e;}
 
 <!-- TEORIA -->
 <div id="screen-teoria" class="screen">
+  <div class="phase-nav"></div>
   <div class="section-title">&#x23F3; Como Sentimos o Tempo</div>
   <div class="section-sub">Leia cada card para entender como o tempo funciona!</div>
   <div class="teoria-grid" id="teoria-grid"></div>
@@ -312,65 +337,37 @@ body.theme-light .mz-placed{color:#1a1a2e;}
   </div>
 </div>
 
-<!-- SORTING -->
+<!-- SORTING (multi-select por categoria) -->
 <div id="screen-sorting" class="screen">
-  <div class="section-title">&#x1F3AF; Passa Rapido ou Devagar?</div>
-  <div class="sort-instruction">Toque no cenario e depois na coluna certa!</div>
-  <div class="sort-source" id="sort-source"></div>
-  <div class="sort-cols">
-    <div class="sort-col" id="col-rapido" onclick="placeInSortCol('rapido')">
-      <div class="sort-col-title col-rapido">&#x1F3C3; Passa Rapido!</div>
-      <div class="sort-col-items" id="items-rapido"></div>
-    </div>
-    <div class="sort-col" id="col-devagar" onclick="placeInSortCol('devagar')">
-      <div class="sort-col-title col-devagar">&#x1F422; Passa Devagar...</div>
-      <div class="sort-col-items" id="items-devagar"></div>
-    </div>
-  </div>
+  <div class="phase-nav"></div>
+  <div class="section-title" id="sort-title">&#x1F3AF; Passa Rapido ou Devagar?</div>
+  <div class="sort-instruction" id="sort-instruction">Toque em todos os cenarios que se encaixam:</div>
+  <div class="sort-category" id="sort-category" style="text-align:center;font-size:calc(18px * var(--fs));font-weight:900;margin-bottom:16px;"></div>
+  <div class="sort-source" id="sort-source" style="min-height:180px;"></div>
   <div class="sort-feedback" id="sort-feedback"></div>
   <div class="btn-row">
     <button class="btn btn-check" id="sort-check-btn" onclick="checkSorting()">&#x2714;&#xFE0F; Verificar</button>
-    <button class="btn btn-next" id="sort-next-btn" onclick="goToMatching()" style="display:none">Proxima Fase &#x27A1;</button>
+    <button class="btn btn-next" id="sort-next-btn" onclick="nextSortCategory()" style="display:none">Proxima Categoria &#x27A1;</button>
   </div>
 </div>
 
-<!-- MATCHING -->
+<!-- MATCHING (multi-select por categoria) -->
 <div id="screen-matching" class="screen">
-  <div class="section-title">&#x1F476; De Qual Fase da Vida?</div>
-  <div class="match-instruction">Toque no objeto e depois na fase certa!</div>
-  <div class="match-source" id="match-source"></div>
-  <div class="match-zones" id="match-zones">
-    <div class="match-zone mz-bebe" id="zone-bebe" onclick="placeInZone('bebe')">
-      <div class="match-zone-header">
-        <span class="match-zone-emoji">&#x1F476;</span>
-        <span class="match-zone-title">Bebe</span>
-      </div>
-      <div class="match-zone-items" id="zone-items-bebe"></div>
-    </div>
-    <div class="match-zone mz-crianca" id="zone-crianca" onclick="placeInZone('crianca')">
-      <div class="match-zone-header">
-        <span class="match-zone-emoji">&#x1F9D2;</span>
-        <span class="match-zone-title">Crianca</span>
-      </div>
-      <div class="match-zone-items" id="zone-items-crianca"></div>
-    </div>
-    <div class="match-zone mz-adulto" id="zone-adulto" onclick="placeInZone('adulto')">
-      <div class="match-zone-header">
-        <span class="match-zone-emoji">&#x1F469;</span>
-        <span class="match-zone-title">Adulto</span>
-      </div>
-      <div class="match-zone-items" id="zone-items-adulto"></div>
-    </div>
-  </div>
+  <div class="phase-nav"></div>
+  <div class="section-title" id="match-title">&#x1F476; De Qual Fase da Vida?</div>
+  <div class="match-instruction" id="match-instruction">Toque em todos os objetos desta fase:</div>
+  <div class="match-category" id="match-category" style="text-align:center;font-size:calc(18px * var(--fs));font-weight:900;margin-bottom:16px;"></div>
+  <div class="match-source" id="match-source" style="min-height:180px;"></div>
   <div class="match-feedback" id="match-feedback"></div>
   <div class="btn-row">
     <button class="btn btn-check" id="match-check-btn" onclick="checkMatching()">&#x2714;&#xFE0F; Verificar</button>
-    <button class="btn btn-next" id="match-next-btn" onclick="goToResultado()" style="display:none">Ver Resultado &#x27A1;</button>
+    <button class="btn btn-next" id="match-next-btn" onclick="nextMatchCategory()" style="display:none">Proxima Fase &#x27A1;</button>
   </div>
 </div>
 
 <!-- RESULTADO -->
 <div id="screen-resultado" class="screen">
+  <div class="phase-nav"></div>
   <div class="res-mascot" id="res-mascot">&#x1F389;</div>
   <div class="res-title" id="res-title">Parabens!</div>
   <div class="stars-row">
@@ -438,7 +435,39 @@ var sortCorrectCount=0,matchCorrectCount=0;
 // ============================================================
 function $(id){return document.getElementById(id);}
 function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function showScreen(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});$(id).classList.add('active');window.scrollTo(0,0);}
+var PHASES=[
+  {id:'screen-intro',label:'\u{1F3E0} Inicio'},
+  {id:'screen-teoria',label:'\u{1F4D6} Teoria'},
+  {id:'screen-sorting',label:'\u{1F3AF} Classificar'},
+  {id:'screen-matching',label:'\u{1F476} Memorias'},
+  {id:'screen-resultado',label:'\u2B50 Resultado'}
+];
+var visitedPhases={};
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  $(id).classList.add('active');window.scrollTo(0,0);
+  visitedPhases[id]=true;
+  updatePhaseNavs(id);
+}
+function updatePhaseNavs(activeId){
+  document.querySelectorAll('.phase-nav').forEach(function(nav){
+    nav.innerHTML='';
+    PHASES.forEach(function(p){
+      var btn=document.createElement('button');btn.className='phase-btn';
+      if(p.id===activeId)btn.classList.add('active');
+      else if(visitedPhases[p.id])btn.classList.add('completed');
+      btn.innerHTML=p.label;
+      btn.onclick=function(){navigateToPhase(p.id);};
+      nav.appendChild(btn);
+    });
+  });
+}
+function navigateToPhase(id){
+  if(id==='screen-teoria'&&!visitedPhases['screen-teoria']){startGame();}
+  else if(id==='screen-sorting'&&!visitedPhases['screen-sorting']){goToSorting();}
+  else if(id==='screen-matching'&&!visitedPhases['screen-matching']){goToMatching();}
+  else{showScreen(id);}
+}
 function updateScore(pts){score+=pts;$('score-val').textContent=score;}
 function getItem(bank,id){return bank.find(function(x){return x.texto===id;});}
 
@@ -466,6 +495,8 @@ function initApp(){
   if(localStorage.getItem('serafina_theme')==='light'){document.body.classList.add('theme-light');$('themeBtn').innerHTML='\u{1F31A}';}
   var fs=localStorage.getItem('serafina_fs');if(fs){document.documentElement.style.setProperty('--fs',fs);}
   initStarfield();
+  visitedPhases['screen-intro']=true;
+  updatePhaseNavs('screen-intro');
 }
 function startGame(){
   score=0;$('score-val').textContent='0';
@@ -491,192 +522,168 @@ function buildTeoria(){
 //  FASE 2: SORTING (Rapido vs Devagar)
 // ============================================================
 function goToSorting(){
-  sortSelected=null;sortChecked=false;sortCorrectCount=0;
-  sortPlaced={rapido:[],devagar:[]};
+  sortChecked=false;sortCorrectCount=0;sortCatIndex=0;
   sortItems=shuffle(SORT_BANK.slice()).slice(0,8);
   showScreen('screen-sorting');
-  renderSortSource();
-  $('items-rapido').innerHTML='';$('items-devagar').innerHTML='';
+  renderSortCategory();
+}
+
+// ============================================================
+//  FASE 2: SORTING (multi-select por categoria)
+// ============================================================
+var SORT_CATEGORIES=[
+  {tipo:'rapido', label:'\u{1F3C3} Passa Rapido!', color:'#f472b6'},
+  {tipo:'devagar', label:'\u{1F422} Passa Devagar...', color:'#60a5fa'}
+];
+var sortCatIndex=0,sortSelectedTextos=[];
+
+function renderSortCategory(){
+  sortSelectedTextos=[];sortChecked=false;
+  var cat=SORT_CATEGORIES[sortCatIndex];
+  $('sort-category').textContent=cat.label;
+  $('sort-category').style.color=cat.color;
+  $('sort-instruction').textContent='Toque em todos os cenarios que passam '+cat.label.replace(/[\u{1F3C3}\u{1F422}]/gu,'').trim()+':';
   $('sort-feedback').className='sort-feedback';$('sort-feedback').style.display='none';
   $('sort-check-btn').style.display='inline-flex';
   $('sort-next-btn').style.display='none';
-}
-
-function renderSortSource(){
+  $('sort-next-btn').textContent=sortCatIndex<SORT_CATEGORIES.length-1?'Proxima Categoria \u27A1':'Proxima Fase \u27A1';
   var src=$('sort-source');src.innerHTML='';
   sortItems.forEach(function(it){
-    if(isPlaced(it.texto,'sort'))return;
     var el=document.createElement('div');el.className='sort-item';el.dataset.texto=it.texto;
     el.innerHTML='<span class="si-emoji">'+it.emoji+'</span>'+it.texto;
-    el.onclick=function(){selectSortItem(it.texto,el);};
+    el.onclick=function(){toggleSortItem(it.texto,el);};
     src.appendChild(el);
   });
 }
-function isPlaced(texto,type){
-  if(type==='sort')return sortPlaced.rapido.indexOf(texto)!==-1||sortPlaced.devagar.indexOf(texto)!==-1;
-  return matchPlaced.bebe.indexOf(texto)!==-1||matchPlaced.crianca.indexOf(texto)!==-1||matchPlaced.adulto.indexOf(texto)!==-1;
-}
 
-function selectSortItem(texto,el){
+function toggleSortItem(texto,el){
   if(sortChecked)return;
-  document.querySelectorAll('.sort-item.selected').forEach(function(x){x.classList.remove('selected');});
-  el.classList.add('selected');sortSelected=texto;
-  $('col-rapido').classList.add('drop-hover');$('col-devagar').classList.add('drop-hover');
-}
-
-function placeInSortCol(col){
-  if(!sortSelected||sortChecked)return;
-  sortPlaced[col].push(sortSelected);
-  var it=getItem(SORT_BANK,sortSelected);
-  var container=$('items-'+col);
-  var el=document.createElement('div');el.className='sort-placed';el.dataset.texto=it.texto;
-  el.innerHTML='<span style="font-size:16px">'+it.emoji+'</span>'+it.texto;
-  el.onclick=function(){removeSortItem(it.texto,col,el);};
-  container.appendChild(el);
-  sortSelected=null;
-  $('col-rapido').classList.remove('drop-hover');$('col-devagar').classList.remove('drop-hover');
-  renderSortSource();
-}
-
-function removeSortItem(texto,col,el){
-  if(sortChecked)return;
-  sortPlaced[col]=sortPlaced[col].filter(function(x){return x!==texto;});
-  el.remove();renderSortSource();
+  var idx=sortSelectedTextos.indexOf(texto);
+  if(idx===-1){sortSelectedTextos.push(texto);el.classList.add('selected');}
+  else{sortSelectedTextos.splice(idx,1);el.classList.remove('selected');}
 }
 
 function checkSorting(){
-  var fb=$('sort-feedback');
-  var totalPlaced=sortPlaced.rapido.length+sortPlaced.devagar.length;
-  if(totalPlaced<sortItems.length){
+  if(sortSelectedTextos.length===0){
+    var fb=$('sort-feedback');
     fb.className='sort-feedback show wrong';
-    fb.textContent='Classifique todos os cenarios antes de verificar!';return;
+    fb.textContent='Selecione pelo menos um cenario!';return;
   }
-  sortChecked=true;sortCorrectCount=0;
-  var wrongItems=[];
-  // Check rapido
-  sortPlaced.rapido.forEach(function(texto){
-    var it=getItem(SORT_BANK,texto);var el=document.querySelector('#items-rapido [data-texto="'+CSS.escape(texto)+'"]');
-    if(it.tipo==='rapido'){el.classList.add('correct-item');sortCorrectCount++;}
-    else{el.classList.add('wrong-item');wrongItems.push({texto:texto,shouldBe:'devagar'});}
+  sortChecked=true;
+  var cat=SORT_CATEGORIES[sortCatIndex];
+  var correctCount=0;
+  var allEls=document.querySelectorAll('#sort-source .sort-item');
+  allEls.forEach(function(el){
+    var texto=el.dataset.texto;var it=getItem(SORT_BANK,texto);
+    var wasSelected=sortSelectedTextos.indexOf(texto)!==-1;
+    var shouldBeSelected=it.tipo===cat.tipo;
+    if(wasSelected&&shouldBeSelected){el.classList.add('correct-item');correctCount++;}
+    else if(wasSelected&&!shouldBeSelected){el.classList.add('wrong-item');}
+    else if(!wasSelected&&shouldBeSelected){el.classList.add('correct-item');el.style.opacity='.5';}
+    el.style.pointerEvents='none';
   });
-  // Check devagar
-  sortPlaced.devagar.forEach(function(texto){
-    var it=getItem(SORT_BANK,texto);var el=document.querySelector('#items-devagar [data-texto="'+CSS.escape(texto)+'"]');
-    if(it.tipo==='devagar'){el.classList.add('correct-item');sortCorrectCount++;}
-    else{el.classList.add('wrong-item');wrongItems.push({texto:texto,shouldBe:'rapido'});}
-  });
-  // Move wrong items
-  setTimeout(function(){
-    wrongItems.forEach(function(w){
-      var it=getItem(SORT_BANK,w.texto);
-      var container=$('items-'+w.shouldBe);
-      var el=document.createElement('div');el.className='sort-moved';
-      el.innerHTML='<span style="font-size:16px">'+it.emoji+'</span>'+it.texto;
-      container.appendChild(el);
-    });
-  },800);
-  updateScore(sortCorrectCount*10);
-  if(sortCorrectCount===sortItems.length){
+  sortCorrectCount+=correctCount;
+  updateScore(correctCount*10);
+  var fb=$('sort-feedback');
+  var expected=sortItems.filter(function(x){return x.tipo===cat.tipo;}).length;
+  if(correctCount===expected&&sortSelectedTextos.length===expected){
     fb.className='sort-feedback show correct';
-    fb.innerHTML='\u2705 Perfeito! Voce classificou todos corretamente!';
+    fb.innerHTML='\u2705 Perfeito! Todos certos!';
   }else{
     fb.className='sort-feedback show wrong';
-    fb.innerHTML='\u274C Voce acertou '+sortCorrectCount+' de '+sortItems.length+'. Os errados foram movidos!';
+    fb.innerHTML='\u274C Voce acertou '+correctCount+' de '+expected+'. Os corretos estao em verde!';
   }
   $('sort-check-btn').style.display='none';
   $('sort-next-btn').style.display='inline-flex';
 }
 
+function nextSortCategory(){
+  sortCatIndex++;
+  if(sortCatIndex>=SORT_CATEGORIES.length){goToMatching();}
+  else{renderSortCategory();}
+}
+
 // ============================================================
-//  FASE 3: MATCHING (Fases da Vida)
+//  FASE 3: MATCHING (multi-select por categoria)
 // ============================================================
+var MATCH_CATEGORIES=[
+  {fase:'bebe', label:'\u{1F476} Bebe', color:'#f472b6'},
+  {fase:'crianca', label:'\u{1F9D2} Crianca', color:'#a78bfa'},
+  {fase:'adulto', label:'\u{1F469} Adulto', color:'#fb923c'}
+];
+var matchCatIndex=0,matchSelectedTextos=[];
+
 function goToMatching(){
-  matchSelected=null;matchChecked=false;matchCorrectCount=0;
-  matchPlaced={bebe:[],crianca:[],adulto:[]};
+  matchChecked=false;matchCatIndex=0;matchCorrectCount=0;
   matchItems=shuffle(MATCH_BANK.slice());
   showScreen('screen-matching');
-  renderMatchSource();
-  $('zone-items-bebe').innerHTML='';$('zone-items-crianca').innerHTML='';$('zone-items-adulto').innerHTML='';
+  renderMatchCategory();
+}
+
+function renderMatchCategory(){
+  matchSelectedTextos=[];matchChecked=false;
+  var cat=MATCH_CATEGORIES[matchCatIndex];
+  $('match-category').textContent=cat.label;
+  $('match-category').style.color=cat.color;
+  $('match-instruction').textContent='Toque em todos os objetos de '+cat.label.replace(/[\u{1F476}\u{1F9D2}\u{1F469}]/gu,'').trim()+':';
   $('match-feedback').className='match-feedback';$('match-feedback').style.display='none';
   $('match-check-btn').style.display='inline-flex';
   $('match-next-btn').style.display='none';
-}
-
-function renderMatchSource(){
+  $('match-next-btn').textContent=matchCatIndex<MATCH_CATEGORIES.length-1?'Proxima Fase \u27A1':'Ver Resultado \u27A1';
   var src=$('match-source');src.innerHTML='';
   matchItems.forEach(function(it){
-    if(isPlaced(it.texto,'match'))return;
     var el=document.createElement('div');el.className='match-item';el.dataset.texto=it.texto;
     el.innerHTML='<span class="mi-emoji">'+it.emoji+'</span>'+it.texto;
-    el.onclick=function(){selectMatchItem(it.texto,el);};
+    el.onclick=function(){toggleMatchItem(it.texto,el);};
     src.appendChild(el);
   });
 }
 
-function selectMatchItem(texto,el){
+function toggleMatchItem(texto,el){
   if(matchChecked)return;
-  document.querySelectorAll('.match-item.selected').forEach(function(x){x.classList.remove('selected');});
-  el.classList.add('selected');matchSelected=texto;
-  document.querySelectorAll('.match-zone').forEach(function(z){z.classList.add('drop-hover');});
-}
-
-function placeInZone(zone){
-  if(!matchSelected||matchChecked)return;
-  matchPlaced[zone].push(matchSelected);
-  var it=getItem(MATCH_BANK,matchSelected);
-  var container=$('zone-items-'+zone);
-  var el=document.createElement('div');el.className='mz-placed';el.dataset.texto=it.texto;
-  el.innerHTML='<span style="font-size:16px">'+it.emoji+'</span>'+it.texto;
-  el.onclick=function(){removeMatchItem(it.texto,zone,el);};
-  container.appendChild(el);
-  matchSelected=null;
-  document.querySelectorAll('.match-zone').forEach(function(z){z.classList.remove('drop-hover');});
-  renderMatchSource();
-}
-
-function removeMatchItem(texto,zone,el){
-  if(matchChecked)return;
-  matchPlaced[zone]=matchPlaced[zone].filter(function(x){return x!==texto;});
-  el.remove();renderMatchSource();
+  var idx=matchSelectedTextos.indexOf(texto);
+  if(idx===-1){matchSelectedTextos.push(texto);el.classList.add('selected');}
+  else{matchSelectedTextos.splice(idx,1);el.classList.remove('selected');}
 }
 
 function checkMatching(){
-  var fb=$('match-feedback');
-  var totalPlaced=matchPlaced.bebe.length+matchPlaced.crianca.length+matchPlaced.adulto.length;
-  if(totalPlaced<matchItems.length){
+  if(matchSelectedTextos.length===0){
+    var fb=$('match-feedback');
     fb.className='match-feedback show wrong';
-    fb.textContent='Classifique todos os objetos antes de verificar!';return;
+    fb.textContent='Selecione pelo menos um objeto!';return;
   }
-  matchChecked=true;matchCorrectCount=0;
-  var wrongItems=[];
-  ['bebe','crianca','adulto'].forEach(function(zone){
-    matchPlaced[zone].forEach(function(texto){
-      var it=getItem(MATCH_BANK,texto);
-      var el=document.querySelector('#zone-items-'+zone+' [data-texto="'+CSS.escape(texto)+'"]');
-      if(it.fase===zone){el.classList.add('correct-item');matchCorrectCount++;}
-      else{el.classList.add('wrong-item');wrongItems.push({texto:texto,shouldBe:it.fase});}
-    });
+  matchChecked=true;
+  var cat=MATCH_CATEGORIES[matchCatIndex];
+  var correctCount=0;
+  var allEls=document.querySelectorAll('#match-source .match-item');
+  allEls.forEach(function(el){
+    var texto=el.dataset.texto;var it=getItem(MATCH_BANK,texto);
+    var wasSelected=matchSelectedTextos.indexOf(texto)!==-1;
+    var shouldBeSelected=it.fase===cat.fase;
+    if(wasSelected&&shouldBeSelected){el.classList.add('correct-item');correctCount++;}
+    else if(wasSelected&&!shouldBeSelected){el.classList.add('wrong-item');}
+    else if(!wasSelected&&shouldBeSelected){el.classList.add('correct-item');el.style.opacity='.5';}
+    el.style.pointerEvents='none';
   });
-  // Move wrong items
-  setTimeout(function(){
-    wrongItems.forEach(function(w){
-      var it=getItem(MATCH_BANK,w.texto);
-      var container=$('zone-items-'+w.shouldBe);
-      var el=document.createElement('div');el.className='mz-moved';
-      el.innerHTML='<span style="font-size:16px">'+it.emoji+'</span>'+it.texto;
-      container.appendChild(el);
-    });
-  },800);
-  updateScore(matchCorrectCount*10);
-  if(matchCorrectCount===matchItems.length){
+  matchCorrectCount+=correctCount;
+  updateScore(correctCount*10);
+  var fb=$('match-feedback');
+  var expected=matchItems.filter(function(x){return x.fase===cat.fase;}).length;
+  if(correctCount===expected&&matchSelectedTextos.length===expected){
     fb.className='match-feedback show correct';
-    fb.innerHTML='\u2705 Perfeito! Todos os objetos na fase certa!';
+    fb.innerHTML='\u2705 Perfeito! Todos certos!';
   }else{
     fb.className='match-feedback show wrong';
-    fb.innerHTML='\u274C Voce acertou '+matchCorrectCount+' de '+matchItems.length+'. Os errados foram movidos!';
+    fb.innerHTML='\u274C Voce acertou '+correctCount+' de '+expected+'. Os corretos estao em verde!';
   }
   $('match-check-btn').style.display='none';
   $('match-next-btn').style.display='inline-flex';
+}
+
+function nextMatchCategory(){
+  matchCatIndex++;
+  if(matchCatIndex>=MATCH_CATEGORIES.length){goToResultado();}
+  else{renderMatchCategory();}
 }
 
 // ============================================================

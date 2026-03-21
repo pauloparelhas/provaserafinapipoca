@@ -148,6 +148,52 @@ Agentes tem limite de ~32000 tokens de OUTPUT. Arquivos ELA tipicamente tem 800-
 
 **POR QUE:** Na sessao 5/6, um agente falhou ao tentar escrever ELA-06 (~1400 linhas) e o arquivo simplesmente nao foi criado. O erro foi silencioso — Claude declarou "feito" sem verificar se o arquivo existia. Isso atrasou o projeto e frustrou o usuario.
 
+## PROTOCOLO DE TRATAMENTO DE INSUMOS — OBRIGATORIO
+
+**QUANDO:** Antes de criar qualquer ferramenta ou produto (joguinho, prompt NLM, flashcards).
+**OBJETIVO:** Transformar materiais-fonte brutos num roteiro estruturado que serve de base para TODOS os produtos.
+
+### Passo 1: Receber e catalogar insumos
+- Identificar todos os materiais fornecidos: PDFs, fotos de caderno, slides Toddle, apostilas, anotacoes
+- Listar cada insumo com: tipo, origem, idioma, conteudo resumido
+
+### Passo 2: Decodificar e estruturar
+- Extrair TODO o conteudo relevante de cada insumo
+- Traduzir se necessario (ingles -> portugues ou vice-versa)
+- Organizar por topicos/unidades/habilidades (BNCC quando aplicavel)
+- Identificar conceitos-chave, vocabulario, exemplos do material original
+
+### Passo 3: Gerar roteiro unico
+- Criar documento estruturado (MD ou JSON) com:
+  - Topicos cobertos (com referencia ao insumo de origem)
+  - Conceitos-chave por topico
+  - Exemplos concretos do material
+  - Vocabulario obrigatorio
+  - Habilidades BNCC relacionadas
+- Salvar em `{materia}/roteiro_{unidade}.md`
+
+### Passo 4: Validar com agente pedagogico
+- Chamar `Agent(subagent_type="pedagogico")` passando o roteiro
+- Agente verifica: adequacao para 7 anos, coerencia, cobertura, ambiguidades
+- Corrigir roteiro com base no feedback
+
+### Passo 5: Derivar produtos do roteiro
+O roteiro validado serve de base para:
+- **Joguinhos HTML:** banco de questoes, dados de fases, rotinas, classificacoes
+- **Prompt NLM (video/audio):** extrair pontos-chave e frases do roteiro
+- **Flashcards:** gerar cards a partir dos conceitos-chave
+- **REGRA:** Nenhum dado de joguinho pode ser inventado — tudo deve vir do roteiro (e portanto dos insumos originais)
+
+### Passo 6: Revisar ambiguidades no banco de questoes
+Antes de implementar, verificar CADA item do banco de dados:
+- A resposta e INEQUIVOCA para uma crianca de 7 anos?
+- A sequencia/classificacao depende de contexto nao especificado? (turno escolar, regiao, cultura)
+- Se houver ambiguidade: substituir por item universal ou adicionar contexto explicito
+
+**POR QUE:** Na sessao 13, rotinas como "escovar os dentes" (pode ser manha ou noite) e "ir para a escola" (depende do turno) causaram ambiguidade nos joguinhos HIS-02. Insumos mal processados geram erros pedagogicos nos produtos.
+
+---
+
 ## O QUE NAO FAZER
 - NAO entregar rapido e errado — melhor demorar e acertar
 - NAO tratar sintoma CSS sem investigar causa raiz no JS/DOM

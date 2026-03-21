@@ -101,16 +101,16 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;
   filter:drop-shadow(0 0 24px rgba(167,139,250,.5));}
 @keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}
   50%{transform:translateY(-14px) rotate(3deg);}}
-.intro-title{font-size:clamp(26px,5.5vw,48px);font-weight:900;
+.intro-title{font-size:calc(clamp(26px,5.5vw,48px) * var(--fs));font-weight:900;
   background:linear-gradient(135deg,#a78bfa 0%,#f472b6 50%,#fb923c 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   filter:drop-shadow(0 0 28px rgba(167,139,250,.3));margin-bottom:6px;}
-.intro-sub{font-size:clamp(13px,2.5vw,17px);color:var(--text-soft);margin-bottom:24px;font-weight:600;}
+.intro-sub{font-size:calc(clamp(13px,2.5vw,17px) * var(--fs));color:var(--text-soft);margin-bottom:24px;font-weight:600;}
 .lv-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
 .lv-pill{background:var(--card-bg);border:1px solid var(--card-border);
   border-radius:12px;padding:10px 14px;display:flex;flex-direction:column;
   align-items:center;gap:4px;min-width:88px;}
-.lv-icon{font-size:24px;}.lv-lbl{font-size:11px;font-weight:700;color:var(--text-dim);}
+.lv-icon{font-size:calc(24px * var(--fs));}.lv-lbl{font-size:calc(11px * var(--fs));font-weight:700;color:var(--text-dim);}
 
 /* SECTION */
 .section-title{font-size:calc(20px * var(--fs));font-weight:900;color:#a78bfa;
@@ -238,10 +238,32 @@ body.theme-light .confirm-modal-text{color:#1a1535;}
 body.theme-light .confirm-btn-no{background:#e5e7eb;color:#374151;}
 body.theme-light .btn-replay{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.14);color:#1a1a2e;}
 body.theme-light .btn-home-lg{background:rgba(109,40,217,.1);border-color:rgba(109,40,217,.4);color:#6d28d9;}
-body.theme-light .quiz-opt{color:#1a1a2e;}
-body.theme-light .pool-item{color:#1a1a2e;}
-body.theme-light .tl-content{color:#1a1a2e;}
+body.theme-light .quiz-opt{color:#1a1a2e;border-color:rgba(0,0,0,.15);}
+body.theme-light .pool-item{color:#1a1a2e;border-color:rgba(0,0,0,.15);background:rgba(109,40,217,.08);}
+body.theme-light .pool-item.selected{background:rgba(109,40,217,.2);border-color:#6d28d9;}
+body.theme-light .tl-content{color:#1a1a2e;border-color:rgba(0,0,0,.15);}
+body.theme-light .tl-content.empty{background:rgba(109,40,217,.05);}
 body.theme-light .timeline-zone::before{background:linear-gradient(180deg,rgba(109,40,217,.3),rgba(244,114,182,.3));}
+body.theme-light .section-title{color:#6d28d9;}
+body.theme-light .section-sub{color:rgba(26,26,46,.5);}
+body.theme-light .order-routine-name{color:#be185d;}
+body.theme-light .quiz-feedback{color:#1a1a2e;}
+body.theme-light .order-feedback{color:#1a1a2e;}
+
+/* PHASE NAV */
+.phase-nav{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:0 auto 16px;
+  max-width:520px;padding:8px 0;}
+.phase-btn{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;
+  padding:6px 14px;font-family:inherit;font-size:calc(11px * var(--fs));font-weight:700;
+  color:var(--text-dim);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:4px;
+  min-height:36px;}
+.phase-btn:hover{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4);color:var(--text);}
+.phase-btn.active{background:rgba(167,139,250,.2);border-color:#a78bfa;color:#a78bfa;font-weight:800;}
+.phase-btn.completed{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);color:#34d399;}
+body.theme-light .phase-btn{color:rgba(26,26,46,.4);}
+body.theme-light .phase-btn:hover{color:#1a1a2e;}
+body.theme-light .phase-btn.active{color:#6d28d9;border-color:#6d28d9;background:rgba(109,40,217,.1);}
+body.theme-light .phase-btn.completed{color:#059669;border-color:rgba(5,150,105,.3);background:rgba(5,150,105,.1);}
 
 @media(max-width:500px){
   .teoria-grid{grid-template-columns:1fr;}
@@ -283,6 +305,7 @@ body.theme-light .timeline-zone::before{background:linear-gradient(180deg,rgba(1
 
 <!-- INTRO -->
 <div id="screen-intro" class="screen active">
+  <div class="phase-nav"></div>
   <div class="intro-badge">&#x1F4DA; Historia</div>
   <span class="intro-mascot">&#x1F4C5;</span>
   <div class="intro-title">Linha do Tempo</div>
@@ -297,6 +320,7 @@ body.theme-light .timeline-zone::before{background:linear-gradient(180deg,rgba(1
 
 <!-- TEORIA -->
 <div id="screen-teoria" class="screen">
+  <div class="phase-nav"></div>
   <div class="section-title">&#x1F552; Antes, Depois e Ao Mesmo Tempo</div>
   <div class="section-sub">Entenda como organizamos os acontecimentos no tempo!</div>
   <div class="teoria-grid" id="teoria-grid"></div>
@@ -307,6 +331,7 @@ body.theme-light .timeline-zone::before{background:linear-gradient(180deg,rgba(1
 
 <!-- ORDENAR -->
 <div id="screen-ordenar" class="screen">
+  <div class="phase-nav"></div>
   <div class="section-title">&#x1F522; Coloque na Ordem Certa!</div>
   <div class="order-round" id="order-round">Rodada 1 de 3</div>
   <div class="order-routine-name" id="order-routine-name"></div>
@@ -324,6 +349,7 @@ body.theme-light .timeline-zone::before{background:linear-gradient(180deg,rgba(1
 
 <!-- QUIZ -->
 <div id="screen-quiz" class="screen">
+  <div class="phase-nav"></div>
   <div class="section-title">&#x2753; Quiz: Antes ou Depois?</div>
   <div class="quiz-progress" id="quiz-progress"></div>
   <div class="quiz-question" id="quiz-question"></div>
@@ -336,6 +362,7 @@ body.theme-light .timeline-zone::before{background:linear-gradient(180deg,rgba(1
 
 <!-- RESULTADO -->
 <div id="screen-resultado" class="screen">
+  <div class="phase-nav"></div>
   <div class="res-mascot" id="res-mascot">&#x1F389;</div>
   <div class="res-title" id="res-title">Parabens!</div>
   <div class="stars-row">
@@ -367,22 +394,22 @@ var TEORIA = [
 ];
 
 var ROTINAS = [
-  {nome:'Dia de Escola', itens:[
+  {nome:'Manha de Sabado', itens:[
     {emoji:'\u{1F6CF}\uFE0F', texto:'Acordar'},
     {emoji:'\u{1F95E}', texto:'Tomar cafe da manha'},
-    {emoji:'\u{1F3EB}', texto:'Ir para a escola'},
-    {emoji:'\u{1F3E0}', texto:'Voltar para casa'}
+    {emoji:'\u{1F4FA}', texto:'Assistir desenho'},
+    {emoji:'\u26BD', texto:'Brincar no quintal'}
   ]},
-  {nome:'Tarde de Diversao', itens:[
-    {emoji:'\u{1F3E0}', texto:'Chegar da escola'},
+  {nome:'Tarde no Parque', itens:[
     {emoji:'\u{1F354}', texto:'Almocar'},
-    {emoji:'\u26BD', texto:'Brincar com amigos'},
-    {emoji:'\u{1F6C1}', texto:'Tomar banho'}
+    {emoji:'\u{1F45F}', texto:'Colocar o tenis'},
+    {emoji:'\u{1F3DE}\uFE0F', texto:'Ir ao parque'},
+    {emoji:'\u{1F366}', texto:'Tomar sorvete'}
   ]},
   {nome:'Fases da Vida', itens:[
     {emoji:'\u{1F476}', texto:'Ser bebe'},
     {emoji:'\u{1F6B6}', texto:'Aprender a andar'},
-    {emoji:'\u{1F392}', texto:'Ir para a escola'},
+    {emoji:'\u{1F9D2}', texto:'Ser crianca'},
     {emoji:'\u{1F469}', texto:'Ser adulto'}
   ]},
   {nome:'Natureza e o Dia', itens:[
@@ -393,25 +420,25 @@ var ROTINAS = [
   ]},
   {nome:'Hora de Dormir', itens:[
     {emoji:'\u{1F37D}\uFE0F', texto:'Jantar'},
-    {emoji:'\u{1FA78}', texto:'Escovar os dentes'},
+    {emoji:'\u{1F97C}', texto:'Colocar o pijama'},
     {emoji:'\u{1F4D6}', texto:'Ler uma historia'},
     {emoji:'\u{1F634}', texto:'Dormir'}
   ]}
 ];
 
 var QUIZ_BANK = [
-  {q:'O que voce faz PRIMEIRO: tomar cafe ou ir para a escola?',
-   opts:['Tomar cafe','Ir para a escola','Dormir'],correct:0,
-   fb:'Primeiro tomamos cafe, depois vamos para a escola!'},
+  {q:'O que voce faz PRIMEIRO quando acorda: tomar cafe ou brincar?',
+   opts:['Tomar cafe','Brincar','Dormir'],correct:0,
+   fb:'Primeiro tomamos cafe da manha, depois podemos brincar!'},
   {q:'O que acontece DEPOIS que o sol se poe?',
    opts:['Noite','Manha','Meio-dia'],correct:0,
    fb:'Depois que o sol se poe, vem a noite!'},
   {q:'O que vem ANTES do almoco?',
    opts:['A manha','A noite','A hora de dormir'],correct:0,
    fb:'A manha vem antes do almoco!'},
-  {q:'Enquanto voce esta na escola, o que seu pet faz em casa?',
-   opts:['Dorme ou brinca','Vai para a escola tambem','Cozinha o almoco'],correct:0,
-   fb:'Enquanto voce estuda, seu pet fica em casa. Isso acontece AO MESMO TEMPO!'},
+  {q:'Enquanto voce brinca no parque, o que seu pet faz em casa?',
+   opts:['Dorme ou brinca','Vai ao parque tambem','Cozinha o almoco'],correct:0,
+   fb:'Enquanto voce brinca, seu pet fica em casa. Isso acontece AO MESMO TEMPO!'},
   {q:'Hoje e quarta-feira. Que dia foi ONTEM?',
    opts:['Terca-feira','Quinta-feira','Sabado'],correct:0,
    fb:'Se hoje e quarta, ontem foi terca-feira!'},
@@ -419,7 +446,7 @@ var QUIZ_BANK = [
    opts:['Domingo','Sexta-feira','Segunda-feira'],correct:0,
    fb:'Depois do sabado vem o domingo!'},
   {q:'O que acontece PRIMEIRO: nascer ou aprender a andar?',
-   opts:['Nascer','Aprender a andar','Ir para a escola'],correct:0,
+   opts:['Nascer','Aprender a andar','Ser crianca'],correct:0,
    fb:'Primeiro a gente nasce, depois aprende a andar!'},
   {q:'Voce pode andar e conversar AO MESMO TEMPO?',
    opts:['Sim, as duas juntas!','Nao, so uma de cada vez','So se for devagar'],correct:0,
@@ -427,9 +454,9 @@ var QUIZ_BANK = [
   {q:'O que vem DEPOIS da primavera?',
    opts:['Verao','Inverno','Outono'],correct:0,
    fb:'Depois da primavera vem o verao!'},
-  {q:'O que aconteceu ANTES: voce ser bebe ou ir para a escola?',
-   opts:['Ser bebe','Ir para a escola','Aprender a ler'],correct:0,
-   fb:'Primeiro voce foi bebe, depois cresceu e foi para a escola!'},
+  {q:'O que aconteceu ANTES: voce ser bebe ou ser crianca?',
+   opts:['Ser bebe','Ser crianca','Aprender a ler'],correct:0,
+   fb:'Primeiro voce foi bebe, depois cresceu e virou crianca!'},
   {q:'A festa de aniversario e AMANHA. Quando e a festa?',
    opts:['No proximo dia','Hoje','Ja passou'],correct:0,
    fb:'Amanha e o dia que vem depois de hoje!'},
@@ -440,8 +467,8 @@ var QUIZ_BANK = [
    opts:['Do outro lado do mundo','No ceu brilhando','Dentro de casa'],correct:0,
    fb:'Enquanto voce dorme a noite, o sol esta iluminando o outro lado do mundo!'},
   {q:'O que vem ANTES de dormir a noite?',
-   opts:['Jantar e escovar os dentes','Acordar','Ir para a escola'],correct:0,
-   fb:'Antes de dormir, jantamos e escovamos os dentes!'},
+   opts:['Colocar o pijama','Acordar','Almocar'],correct:0,
+   fb:'Antes de dormir, colocamos o pijama!'},
   {q:'Ontem voce foi ao parque. QUANDO voce foi?',
    opts:['No dia anterior a hoje','Hoje','Amanha'],correct:0,
    fb:'Ontem e o dia que ja passou, antes de hoje!'}
@@ -460,7 +487,39 @@ var usedRoutineIndices=[];
 // ============================================================
 function $(id){return document.getElementById(id);}
 function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function showScreen(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});$(id).classList.add('active');window.scrollTo(0,0);}
+var PHASES=[
+  {id:'screen-intro',label:'\u{1F3E0} Inicio'},
+  {id:'screen-teoria',label:'\u{1F4D6} Teoria'},
+  {id:'screen-ordenar',label:'\u{1F522} Ordenar'},
+  {id:'screen-quiz',label:'\u2753 Quiz'},
+  {id:'screen-resultado',label:'\u2B50 Resultado'}
+];
+var visitedPhases={};
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  $(id).classList.add('active');window.scrollTo(0,0);
+  visitedPhases[id]=true;
+  updatePhaseNavs(id);
+}
+function updatePhaseNavs(activeId){
+  document.querySelectorAll('.phase-nav').forEach(function(nav){
+    nav.innerHTML='';
+    PHASES.forEach(function(p){
+      var btn=document.createElement('button');btn.className='phase-btn';
+      if(p.id===activeId)btn.classList.add('active');
+      else if(visitedPhases[p.id])btn.classList.add('completed');
+      btn.innerHTML=p.label;
+      btn.onclick=function(){navigateToPhase(p.id);};
+      nav.appendChild(btn);
+    });
+  });
+}
+function navigateToPhase(id){
+  if(id==='screen-teoria'&&!visitedPhases['screen-teoria']){startGame();}
+  else if(id==='screen-ordenar'&&!visitedPhases['screen-ordenar']){goToOrdenar();}
+  else if(id==='screen-quiz'&&!visitedPhases['screen-quiz']){goToQuiz();}
+  else{showScreen(id);}
+}
 function updateScore(pts){score+=pts;$('score-val').textContent=score;}
 
 // ============================================================
@@ -487,6 +546,8 @@ function initApp(){
   if(localStorage.getItem('serafina_theme')==='light'){document.body.classList.add('theme-light');$('themeBtn').innerHTML='\u{1F31A}';}
   var fs=localStorage.getItem('serafina_fs');if(fs){document.documentElement.style.setProperty('--fs',fs);}
   initStarfield();
+  visitedPhases['screen-intro']=true;
+  updatePhaseNavs('screen-intro');
 }
 function startGame(){
   score=0;$('score-val').textContent='0';
