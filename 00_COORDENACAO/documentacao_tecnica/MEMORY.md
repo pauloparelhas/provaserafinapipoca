@@ -182,3 +182,94 @@ Apos devolutiva: reativar questoes confirmadas, remover definitivamente as rejei
 Depois da devolutiva LP02-03: iniciar ELA (AF 18/03) — 4 ferramentas ja planejadas.
 
 Perguntar: "Tem a devolutiva das questoes da Serafina? Se sim, me passe por numero. Se nao, partimos para o ELA?"
+
+---
+
+## ATUALIZACOES — SESSOES 4 a 7 (10/03 a 15/03/2026)
+
+> Secao adicionada em 15/03/2026. Conteudo anterior (sessoes 1-3) preservado acima.
+
+### Mudancas de estrutura de pastas (sessao 7)
+- HTMLs movidos de raiz `provas/` para `provas/ferramentas/`
+- `goToIndex()` → `'../index.html'` (era `'index.html'`)
+- index.html: hrefs atualizados para `ferramentas/ELA0*.html`
+- LP ferramentas: todas em `ferramentas/LP*.html`
+
+### Hospedagem — mudanca de autenticacao (sessao 6)
+- Token PAT revogado (foi exposto no chat)
+- SSH configurado: `ssh-keygen -t ed25519`, chave publica adicionada ao GitHub
+- Remote: `git@github.com:pauloparelhas/provaserafinapipoca.git`
+- Sem expiracao de token, sem necessidade de reautenticar
+
+### ELA — Status final sessoes 4-7
+| Cod    | Ferramenta                     | Status    |
+|--------|--------------------------------|-----------|
+| ELA-01 | Community Helpers              | CONCLUIDA |
+| ELA-02 | Bucket Fillers & Community     | CONCLUIDA |
+| ELA-03 | Adjectives & Acrostic Poem     | CONCLUIDA |
+| ELA-04 | Family & Friends               | CONCLUIDA |
+| ELA-05 | Reading & Interpreting         | PENDENTE  |
+| ELA-06 | Toddle Dashboard (opcional)    | PENDENTE  |
+
+### Padroes ELA estabelecidos nas sessoes 4-7
+- **TTS:** boundary events (nao word-by-word) — uma utterance + `u.onboundary`
+- **Karaoke rate:** `var karaokeRate = 0.75`; 4 velocidades: 🐌0.6 🐢0.75 🐇0.9 🚀1.1
+- **Speed buttons:** dentro do `#karaokeBar` (flex-direction:column), so visiveis quando karaoke ativo
+- **Product tour:** `.tour-bg` (transparente) + `.tour-spotlight` (box-shadow para escuridao)
+- **Anti-padrao tour:** NAO usar `.tour-backdrop` solido (cobre elemento spotlightado)
+- **BR flag no quiz:** `clueText.setAttribute('data-pt', q.cluePT)` + campo `cluePT` em cada quiz entry
+- **Navbar IDs:** `navLogo`, `btnHome`, `btnRestart`, `btnFontDown`, `btnFontUp`
+- **Lock:** 1o clique = fullscreen + bloqueia nav; 2o clique = overlay unlock
+
+### LP — Estado final
+- 6 ferramentas: LP01, LP02-03, LP04-07, LP05, LP06, LP08 — TODAS CONCLUIDAS
+- LP colapsada no index.html (secao recolhida, nao deletada)
+- AF LP (10/03/2026): REALIZADA
+
+### Documentacao
+- `memory/ELA_PADRAO.md`: reescrito completamente em 15/03 com todos os padroes ELA 01-04
+- `memory/MEMORY.md` (Claude memory): atualizado em 15/03 (sessao 7)
+- `CLAUDE.md` (raiz): protocolo QA + checklist atualizado com padroes ELA
+- Este arquivo (`00_COORDENACAO/MEMORY.md`): appendado em 15/03 preservando historico
+
+### Proximo passo
+- ELA-05: Reading & Interpreting (3 textos curtos, literal + inferencia + V/F)
+- ELA-06: Toddle Dashboard (opcional, teoria de animals/food pyramid/patterns)
+
+---
+
+## ATUALIZACOES — SESSOES 8 a 11 (15/03 a 21/03/2026)
+
+> Secao adicionada em 21/03/2026. Conteudo anterior preservado acima.
+
+### ELA — Concluida (sessoes 8-9)
+| Cod    | Ferramenta                     | Status    |
+|--------|--------------------------------|-----------|
+| ELA-05 | Reading & Interpreting         | CONCLUIDA |
+| ELA-06 | Toddle Dashboard (opcional)    | CONCLUIDA |
+
+### HIS — Concluida (sessao 10, 20/03)
+| Cod    | Ferramenta                     | Status    | Arquivo                          |
+|--------|--------------------------------|-----------|----------------------------------|
+| HIS-01 | Instrumentos do Tempo          | CONCLUIDA | HIS01_instrumentos_do_tempo.html |
+| HIS-02 | Linha do Tempo                 | CONCLUIDA | HIS02_linha_do_tempo.html        |
+| HIS-03 | Tempo e Memorias               | CONCLUIDA | HIS03_tempo_e_memorias.html      |
+
+### NotebookLM — Audio/Video complementar (sessao 11, 21/03)
+- **Ferramenta:** `notebooklm-py` (pip) — CLI automacao NotebookLM via Playwright
+- **Notebook:** "Serafina - Historia U1" (ID: f98b7889-2b64-4e9c-85b5-7eed42e64156)
+- **Fontes:** 2 PDFs escola (planner + slides Toddle)
+- **Assets gerados em 03_HISTORIA/assets/ (git-ignored, ~130MB):**
+  - audio v1 (49MB, 26min) e v2 (11MB, ~6min — versao aprovada)
+  - video v1 (36MB) e v2 (34MB)
+- **Prompt v2 aprovado:** Miss/Mister apresentadores, max 8min, sem cobranca, revisao no final
+- **Prompts salvos em:** 03_HISTORIA/notebooklm/prompt_video_historia_u1.md
+- **Scripts login Desktop:** notebooklm_login.bat / .py (para re-login quando sessao expirar)
+
+### Deploy
+- GitHub Pages ativo — commit 6e63cd0 (20/03)
+- Todas as 15 ferramentas online (LP 6 + ELA 6 + HIS 3)
+
+### Proximo passo (sessao 11)
+- Aguardando feedback usuario sobre audio/video NotebookLM
+- Possivel integracao de player HTML5 nas ferramentas HIS
