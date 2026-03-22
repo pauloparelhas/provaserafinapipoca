@@ -3,6 +3,7 @@
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Toddle Explorer - Projeto Serafina</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ela-base.css">
 <style>
 :root{--fs:16px;--bg:#0d0b1e;--card-bg:rgba(255,255,255,.06);--card-border:rgba(255,255,255,.12);--text:#fff;--text-soft:rgba(255,255,255,.55);--text-dim:rgba(255,255,255,.3);}
 *{box-sizing:border-box;margin:0;padding:0;}html{font-size:var(--fs);}
@@ -129,35 +130,8 @@ body.light .cat-flash-front{background:linear-gradient(145deg,#ede9fe,#f5f3ff);b
 .result-stars{display:flex;gap:8px;justify-content:center;margin-bottom:12px;}
 .result-star{font-size:2rem;opacity:.3;transition:all .4s;}.result-star.lit{opacity:1;filter:drop-shadow(0 0 8px #fbbf24);}
 .result-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-/* KARAOKE */
-.karaoke-bar{display:none;position:fixed;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(13,11,30,.93);backdrop-filter:blur(14px);border:2px solid rgba(167,139,250,.55);border-radius:20px;padding:10px 18px 12px;z-index:200;max-width:92%;box-shadow:0 8px 40px rgba(0,0,0,.6);flex-direction:column;gap:6px;align-items:center;}
-body.light .karaoke-bar{background:rgba(255,255,255,.97);border-color:#c4b5fd;}
-.karaoke-words{display:flex;flex-wrap:wrap;gap:4px 6px;justify-content:center;font-size:1rem;font-weight:700;color:rgba(255,255,255,.4);}
-body.light .karaoke-words{color:rgba(0,0,0,.3);}
-.kw{display:inline-block;padding:2px 5px;border-radius:6px;transition:all .15s;}
-.kw.kw-active{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;transform:scale(1.18);}
-.kw.kw-done{color:rgba(255,255,255,.7);background:rgba(167,139,250,.12);}
-body.light .kw.kw-done{color:rgba(0,0,0,.55);}
-.karaoke-speed{display:flex;gap:8px;align-items:center;}
-.ks-btn{background:rgba(255,255,255,.07);border:2px solid transparent;border-radius:8px;font-size:.92rem;cursor:pointer;padding:2px 8px;line-height:1;opacity:.55;transition:.15s;}
-.ks-btn:hover{opacity:.9;}.ks-btn.active{border-color:#a78bfa;background:rgba(167,139,250,.22);opacity:1;}
-/* TOUR */
-.tour-bg{position:fixed;inset:0;z-index:9001;background:transparent;cursor:pointer;}
-.tour-spotlight{position:fixed;border-radius:12px;z-index:9002;pointer-events:none;box-shadow:0 0 0 4000px rgba(0,0,0,.78),0 0 0 4px #a78bfa,0 0 28px 6px rgba(167,139,250,.65);transition:left .3s,top .3s,width .3s,height .3s;}
-.tour-bubble{position:fixed;z-index:9003;background:linear-gradient(145deg,#1e1b4b,#312e81);border:2px solid #a78bfa;border-radius:20px;padding:18px 22px;max-width:290px;box-shadow:0 12px 40px rgba(0,0,0,.6);color:#fff;}
-body.light .tour-bubble{background:linear-gradient(145deg,#f5f3ff,#ede9fe);color:#1e1b4b;border-color:#7c3aed;}
-.tour-bubble-title{font-size:.76rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#a78bfa;margin-bottom:6px;}
-.tour-bubble-text{font-size:.94rem;font-weight:700;line-height:1.5;margin-bottom:14px;white-space:pre-line;}
-.tour-bubble-nav{display:flex;align-items:center;gap:8px;}
-.tour-btn{border:none;border-radius:10px;padding:7px 14px;font-size:.82rem;font-weight:800;cursor:pointer;}
-.tour-btn-prev{background:rgba(167,139,250,.15);color:#c4b5fd;}
-.tour-btn-next{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;}
-.tour-btn-skip{margin-left:auto;background:none;color:rgba(255,255,255,.4);font-size:.76rem;font-weight:700;cursor:pointer;border:none;}
-body.light .tour-btn-skip{color:rgba(0,0,0,.4);}
-.tour-step-dots{display:flex;gap:5px;align-items:center;margin-right:4px;}
-.tour-dot{width:7px;height:7px;border-radius:50%;background:rgba(167,139,250,.3);}
-.tour-dot.active{background:#a78bfa;}
-/* MODALS + LOCK */
+/* Karaoke, tour, lock, flags base — in ela-base.css */
+/* MODALS */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;}
 .modal-overlay.active{display:flex;}
 .modal-box{background:linear-gradient(145deg,#1e1b4b,#2d1b69);border:2px solid rgba(167,139,250,.4);border-radius:24px;padding:26px 22px;max-width:300px;width:90%;text-align:center;}
@@ -165,16 +139,8 @@ body.light .modal-box{background:linear-gradient(145deg,#f5f3ff,#ede9fe);border-
 .modal-title{font-size:1rem;font-weight:900;margin-bottom:9px;}
 .modal-text{font-size:.85rem;color:var(--text-soft);margin-bottom:18px;}
 .modal-btns{display:flex;gap:10px;justify-content:center;}
-.lock-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:2000;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
-.lock-overlay.active{display:flex;}
-.lock-icon{font-size:4rem;}.lock-text{font-size:.95rem;font-weight:700;color:rgba(255,255,255,.6);}
-.lock-btn{background:linear-gradient(135deg,#a78bfa,#f472b6);border:none;border-radius:14px;padding:12px 26px;color:#fff;font-size:.95rem;font-weight:800;cursor:pointer;}
-/* FLAGS */
-[data-pt]{position:relative;}
-.flag-pt{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:rgba(0,156,59,.15);border:1px solid rgba(0,156,59,.3);cursor:pointer;margin-left:4px;vertical-align:middle;flex-shrink:0;transition:.2s;position:relative;z-index:5;}
-.flag-pt:hover{background:rgba(0,156,59,.25);transform:scale(1.1);}
-.pt-label{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#065f46;color:#fff;font-size:.72rem;font-weight:700;padding:4px 9px;border-radius:8px;white-space:nowrap;z-index:10;pointer-events:none;max-width:200px;text-align:center;}
-.pt-label.visible{display:block;}
+/* Tool-specific flag overrides */
+.pt-label{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#065f46;color:#fff;font-size:.72rem;font-weight:700;padding:4px 9px;border-radius:8px;white-space:nowrap;z-index:10;pointer-events:none;max-width:200px;text-align:center;}
 /* CONFETTI */
 .confetti-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;}
 .confetti-piece{position:absolute;width:10px;height:10px;top:-10px;animation:cffall linear forwards;}
@@ -198,30 +164,7 @@ body.light .modal-box{background:linear-gradient(145deg,#f5f3ff,#ede9fe);border-
   </div>
   <div class="main" id="mainScroll">
 
-    <div id="karaokeBar" class="karaoke-bar">
-      <div class="karaoke-speed">
-        <button class="ks-btn" data-rate="0.6" onclick="setKSpeed(0.6)" title="Very slow">&#128012;</button>
-        <button class="ks-btn active" data-rate="0.75" onclick="setKSpeed(0.75)" title="Slow">&#128034;</button>
-        <button class="ks-btn" data-rate="0.9" onclick="setKSpeed(0.9)" title="Normal">&#128007;</button>
-        <button class="ks-btn" data-rate="1.1" onclick="setKSpeed(1.1)" title="Fast">&#128640;</button>
-      </div>
-      <div id="karaokeWords" class="karaoke-words"></div>
-    </div>
-
-    <div id="tourOverlay" style="display:none;">
-      <div class="tour-bg" id="tourBg" onclick="tourStep(1)"></div>
-      <div class="tour-spotlight" id="tourSpotlight"></div>
-      <div class="tour-bubble" id="tourBubble">
-        <div class="tour-bubble-title" id="tourTitle"></div>
-        <div class="tour-bubble-text" id="tourText"></div>
-        <div class="tour-bubble-nav">
-          <div class="tour-step-dots" id="tourDots"></div>
-          <button class="tour-btn tour-btn-prev" id="tourPrev" onclick="tourStep(-1)">&#9664; Back</button>
-          <button class="tour-btn tour-btn-next" id="tourNext" onclick="tourStep(1)">Next &#9654;</button>
-          <button class="tour-btn-skip" onclick="skipTour()">Skip</button>
-        </div>
-      </div>
-    </div>
+    <!-- Karaoke bar + tour overlay generated by ela-base.js -->
 
     <!-- INTRO -->
     <div class="screen active" id="screen-intro">
@@ -429,13 +372,10 @@ body.light .modal-box{background:linear-gradient(145deg,#f5f3ff,#ede9fe);border-
     </div>
   </div>
 </div>
-<div class="lock-overlay" id="lockOverlay">
-  <div class="lock-icon">&#128274;</div>
-  <div class="lock-text" data-pt="Peca a um adulto para desbloquear">Ask a grown-up to unlock</div>
-  <button class="lock-btn" onclick="unlockScreen()">Unlock &#128275;</button>
-</div>
+<!-- Lock overlay generated by ela-base.js -->
 <div class="confetti-container" id="confettiContainer"></div>
 
+<script src="ela-base.js"></script>
 <script>
 // ===== DATA =====
 var ANIMALS=[
@@ -538,8 +478,7 @@ var CAT_META={
 var ALL_COMMUNITY=COMMUNITY.needs.concat(COMMUNITY.wants,COMMUNITY.goods,COMMUNITY.services);
 
 // ===== GLOBALS =====
-var totalXP=0,soundEnabled=true,isLocked=false,currentTheme='dark',currentFontSize=16;
-var karaokeRate=0.75,karaokeActive=false;
+var totalXP=0,currentTheme='dark',currentFontSize=16;
 var lastModule=1;
 var animalSortItems=[];
 var foodQuizItems=[],foodQIdx=0,foodQAnswered=false,foodQScore=0;
@@ -548,8 +487,6 @@ var coreQuizItems=[],coreQIdx=0,coreQAnswered=false,coreQScore=0;
 var nextQuizItems=[],nextQIdx=0,nextQAnswered=false,nextQScore=0;
 var catFlashOrder=[],catFlashIdx=0;
 var touchDragEl=null,touchOffX=0,touchOffY=0;
-var BR_FLAG='<svg viewBox="0 0 20 14" width="14" height="10"><rect fill="#009c3b" width="20" height="14" rx="2"/><polygon fill="#ffdf00" points="10,1.5 18,7 10,12.5 2,7"/><circle fill="#002776" cx="10" cy="7" r="3"/></svg>';
-
 // ===== UTILS =====
 function $(id){return document.getElementById(id);}
 function shuffle(a){var b=a.slice();for(var i=b.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=b[i];b[i]=b[j];b[j]=t;}return b;}
@@ -565,80 +502,14 @@ function showScreen(id){
   $('mainScroll').scrollTop=0;
 }
 
-// ===== TTS =====
-function speakWithKaraoke(textEN,onEnd){
-  if(!soundEnabled||!('speechSynthesis' in window)){if(onEnd)onEnd();return;}
-  window.speechSynthesis.cancel();
-  karaokeActive=true;
-  var bar=$('karaokeBar'),wordsDiv=$('karaokeWords');
-  var words=textEN.split(/\s+/);
-  wordsDiv.innerHTML=words.map(function(w,i){return '<span class="kw" data-i="'+i+'">'+escH(w)+'</span>';}).join(' ');
-  bar.style.display='flex';
-  var spans=wordsDiv.querySelectorAll('.kw'),idx=0;
-  var u=new SpeechSynthesisUtterance(textEN);
-  u.lang='en-US';u.rate=karaokeRate;u.pitch=1.1;
-  var voices=window.speechSynthesis.getVoices();
-  var v=voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})||voices.find(function(x){return x.lang.startsWith('en');});
-  if(v)u.voice=v;
-  u.onboundary=function(e){
-    if(e.name==='word'&&idx<spans.length){
-      if(idx>0){spans[idx-1].classList.remove('kw-active');spans[idx-1].classList.add('kw-done');}
-      spans[idx].classList.add('kw-active');idx++;
-    }
-  };
-  u.onend=function(){
-    if(!karaokeActive)return;
-    spans.forEach(function(s){s.classList.remove('kw-active');s.classList.add('kw-done');});
-    setTimeout(function(){bar.style.display='none';wordsDiv.innerHTML='';karaokeActive=false;if(onEnd)onEnd();},2500);
-  };
-  u.onerror=function(){bar.style.display='none';karaokeActive=false;if(onEnd)onEnd();};
-  window.speechSynthesis.speak(u);
-}
-function speakSimple(text){
-  if(!soundEnabled||!('speechSynthesis' in window))return;
-  window.speechSynthesis.cancel();
-  var u=new SpeechSynthesisUtterance(text);
-  u.lang='en-US';u.rate=0.85;u.pitch=1.1;
-  var voices=window.speechSynthesis.getVoices();
-  var v=voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})||voices.find(function(x){return x.lang.startsWith('en');});
-  if(v)u.voice=v;
-  window.speechSynthesis.speak(u);
-}
-function stopKaraoke(){karaokeActive=false;window.speechSynthesis.cancel();var b=$('karaokeBar');if(b)b.style.display='none';}
-function setKSpeed(r){
-  karaokeRate=r;
-  document.querySelectorAll('.ks-btn').forEach(function(b){
-    b.classList.toggle('active',parseFloat(b.getAttribute('data-rate'))===r);
-  });
-}
+// TTS, karaoke, flags, sound, lock — in ela-base.js
 
-// ===== FLAGS =====
-function initFlags(){
-  document.querySelectorAll('[data-pt]').forEach(function(el){
-    if(el.querySelector('.flag-pt'))return;
-    var pt=el.getAttribute('data-pt');
-    var flag=document.createElement('button');
-    flag.className='flag-pt';flag.innerHTML=BR_FLAG;flag.title=pt;
-    var label=document.createElement('div');label.className='pt-label';label.textContent=pt;
-    flag.addEventListener('click',function(e){e.stopPropagation();e.preventDefault();label.classList.toggle('visible');});
-    el.style.position='relative';
-    el.appendChild(flag);el.appendChild(label);
-  });
-}
-
-// ===== FONT / THEME / SOUND / LOCK =====
+// ===== FONT / THEME =====
 function changeFontSize(d){currentFontSize=Math.max(13,Math.min(32,currentFontSize+d*2));document.documentElement.style.setProperty('--fs',currentFontSize+'px');}
 function toggleTheme(){currentTheme=currentTheme==='dark'?'light':'dark';document.body.classList.toggle('light',currentTheme==='light');$('themeBtn').textContent=currentTheme==='dark'?'\u2600\uFE0F':'\uD83C\uDF19';}
-function toggleSound(){soundEnabled=!soundEnabled;$('soundBtn').textContent=soundEnabled?'\uD83D\uDD0A':'\uD83D\uDD07';if(!soundEnabled)stopKaraoke();}
-function toggleLock(){
-  if(!isLocked){isLocked=true;$('lockBtn').textContent='\uD83D\uDD12';try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}catch(e){}window.addEventListener('beforeunload',preventLeave);speakSimple('The screen is locked!');}
-  else{$('lockOverlay').classList.add('active');}
-}
-function unlockScreen(){isLocked=false;$('lockBtn').textContent='\uD83D\uDD13';$('lockOverlay').classList.remove('active');window.removeEventListener('beforeunload',preventLeave);try{document.fullscreenElement&&document.exitFullscreen();}catch(e){}}
-function preventLeave(e){e.preventDefault();e.returnValue='';}
 function goToIndex(){window.location.href='../index.html';}
-function confirmGoHome(){if(isLocked)return;openModal('modalHome');}
-function confirmRestart(){if(isLocked)return;openModal('modalRestart');}
+function confirmGoHome(){if(lockActive)return;openModal('modalHome');}
+function confirmRestart(){if(lockActive)return;openModal('modalRestart');}
 function doRestart(){closeModal('modalRestart');startModule(lastModule);}
 function openModal(id){$(id).classList.add('active');}
 function closeModal(id){$(id).classList.remove('active');}
@@ -666,11 +537,11 @@ function initAnimals(){
     front.innerHTML='<div class="fc-emoji">'+a.emoji+'</div><div class="fc-name" data-pt="'+a.namePT+'">'+escH(a.name)+'</div>';
     var bk=document.createElement('div');bk.className='fc-back';
     bk.style.cssText='background:linear-gradient(145deg,'+DIET_COLORS[a.diet]+'33,'+DIET_COLORS[a.diet]+'11);border-color:'+DIET_COLORS[a.diet]+';color:'+DIET_COLORS[a.diet]+';';
-    bk.innerHTML='<div style="font-size:1.6rem">'+DIET_EMOJIS[a.diet]+'</div><div style="font-size:.85rem;font-weight:900" data-pt="'+a.dietPT+'">'+a.diet+'</div><div style="font-size:.7rem;color:var(--text-soft);font-weight:700">Eats: '+a.eats+'</div><button class="speak-btn" onclick="event.stopPropagation();speakSimple(\''+a.name.replace(/'/g,"\\'")+'  is a '+a.diet+'\')" style="margin-top:4px">\uD83D\uDD0A</button>';
+    bk.innerHTML='<div style="font-size:1.6rem">'+DIET_EMOJIS[a.diet]+'</div><div style="font-size:.85rem;font-weight:900" data-pt="'+a.dietPT+'">'+a.diet+'</div><div style="font-size:.7rem;color:var(--text-soft);font-weight:700">Eats: '+a.eats+'</div><button class="speak-btn" onclick="event.stopPropagation();speak(\''+a.name.replace(/'/g,"\\'")+'  is a '+a.diet+'\')" style="margin-top:4px">\uD83D\uDD0A</button>';
     inner.appendChild(front);inner.appendChild(bk);card.appendChild(inner);
     card.addEventListener('click',function(){
       inner.parentElement.classList.toggle('flipped');
-      if(inner.parentElement.classList.contains('flipped')){speakSimple(a.name+' is a '+a.diet+'. It eats '+a.eats);addXP(2);}
+      if(inner.parentElement.classList.contains('flipped')){speak(a.name+' is a '+a.diet+'. It eats '+a.eats);addXP(2);}
     });
     grid.appendChild(card);
   });
@@ -730,7 +601,7 @@ function checkAnimalSort(){
   $('animalSortFb').style.color=correct===total?'#34d399':'#fbbf24';
   $('animalCheckBtn').style.display='none';$('animalRetryBtn').style.display='';
   if(correct>=Math.ceil(total/2))launchConfetti();
-  speakSimple(correct+' out of '+total+' correct!');
+  speak(correct+' out of '+total+' correct!');
 }
 
 // ===== MODULE 2: FOOD =====
@@ -763,8 +634,8 @@ function handleFoodQ(guess,q,div){
   var ok=guess===q.group;
   div.classList.add(ok?'correct':'wrong');
   if(!ok){$('foodQOpts').querySelectorAll('.quiz-opt').forEach(function(o){if(o.querySelector('.quiz-opt-text').textContent===q.group)o.classList.add('correct');});}
-  if(ok){foodQScore++;addXP(5);$('foodQFb').textContent='\u2705 Yes! '+q.name+' is '+q.group+'! Eat '+q.servings+'.';$('foodQFb').style.color='#34d399';speakSimple('Yes! '+q.name+' is a '+q.group);}
-  else{$('foodQFb').textContent='\uD83D\uDD0D The answer is '+q.group+'!';$('foodQFb').style.color='#f87171';speakSimple('The answer is '+q.group);}
+  if(ok){foodQScore++;addXP(5);$('foodQFb').textContent='\u2705 Yes! '+q.name+' is '+q.group+'! Eat '+q.servings+'.';$('foodQFb').style.color='#34d399';speak('Yes! '+q.name+' is a '+q.group);}
+  else{$('foodQFb').textContent='\uD83D\uDD0D The answer is '+q.group+'!';$('foodQFb').style.color='#f87171';speak('The answer is '+q.group);}
   var nb=$('foodQNext');
   var btn=document.createElement('button');btn.className='btn btn-primary';
   if(foodQIdx+1<foodQuizItems.length){
@@ -772,7 +643,7 @@ function handleFoodQ(guess,q,div){
     btn.onclick=function(){foodQIdx++;renderFoodQ();};
   } else {
     btn.textContent='\uD83C\uDF89 Done!';btn.setAttribute('data-pt','Feito!');
-    btn.onclick=function(){if(foodQScore>=Math.ceil(foodQuizItems.length/2))launchConfetti();speakSimple(foodQScore+' out of '+foodQuizItems.length+'! Now let us build the pyramid!');showFoodPh(2);startPyramid();};
+    btn.onclick=function(){if(foodQScore>=Math.ceil(foodQuizItems.length/2))launchConfetti();speak(foodQScore+' out of '+foodQuizItems.length+'! Now let us build the pyramid!');showFoodPh(2);startPyramid();};
   }
   nb.appendChild(btn);initFlags();
 }
@@ -817,13 +688,13 @@ function handlePyrDrop(slot,card,floor){
     slot.style.background=pg.color+'22';slot.style.borderColor=pg.color;slot.style.borderStyle='solid';
     slot.innerHTML='<span style="font-size:1.3rem">'+pg.emoji+'</span> <span style="color:'+pg.color+';font-weight:900">'+pg.group+'</span>';
     slot.classList.add('filled');card.remove();pyrFilled[floor]=true;addXP(8);
-    speakSimple('Yes! '+pg.group+' goes on floor '+floor+'!');
+    speak('Yes! '+pg.group+' goes on floor '+floor+'!');
     if(Object.keys(pyrFilled).length===6){
       $('pyrFb').textContent='\uD83C\uDF89 Amazing! You built the Food Pyramid!';$('pyrFb').style.color='#34d399';
-      speakSimple('Amazing! You built the entire Food Pyramid! Great job!');launchConfetti();addXP(20);
+      speak('Amazing! You built the entire Food Pyramid! Great job!');launchConfetti();addXP(20);
     }
   } else {
-    shakeEl(card);speakSimple('Try again!');
+    shakeEl(card);speak('Try again!');
     $('pyrFb').textContent='\uD83D\uDCA1 Try again!';$('pyrFb').style.color='#fbbf24';
   }
 }
@@ -851,7 +722,7 @@ function renderCoreQ(){
     btn.addEventListener('click',function(){handlePatQ(c.correct,btn,p,'core');});
     og.appendChild(btn);
   });
-  setTimeout(function(){speakSimple('What is the core of this pattern?');},500);
+  setTimeout(function(){speak('What is the core of this pattern?');},500);
 }
 function startNextQuiz(){showPatPh(2);nextQIdx=0;nextQScore=0;nextQuizItems=shuffle(PATTERNS).slice(0,8);renderNextQ();setTimeout(function(){speakWithKaraoke('What Comes Next? Complete the pattern!');},400);}
 function renderNextQ(){
@@ -867,7 +738,7 @@ function renderNextQ(){
     btn.addEventListener('click',function(){handlePatQ(o===p.next,btn,p,'next');});
     og.appendChild(btn);
   });
-  setTimeout(function(){speakSimple('What comes next?');},500);
+  setTimeout(function(){speak('What comes next?');},500);
 }
 function handlePatQ(correct,btn,p,phase){
   var answered=phase==='core'?coreQAnswered:nextQAnswered;
@@ -883,10 +754,10 @@ function handlePatQ(correct,btn,p,phase){
     if(phase==='core')coreQScore++;else nextQScore++;
     addXP(5);
     fb.textContent='\u2705 Correct! The '+(phase==='core'?'core is: '+p.coreDesc:'answer is '+p.next);
-    fb.style.color='#34d399';speakSimple('Correct!');
+    fb.style.color='#34d399';speak('Correct!');
   } else {
     fb.textContent='\uD83D\uDD0D Look again! '+(phase==='core'?'The core is: '+p.coreDesc:'The answer is '+p.next);
-    fb.style.color='#f87171';speakSimple(phase==='core'?'The core is '+p.coreDesc:'The answer is '+p.next);
+    fb.style.color='#f87171';speak(phase==='core'?'The core is '+p.coreDesc:'The answer is '+p.next);
   }
   var items=phase==='core'?coreQuizItems:nextQuizItems;
   var idx=phase==='core'?coreQIdx:nextQIdx;
@@ -897,7 +768,7 @@ function handlePatQ(correct,btn,p,phase){
   } else {
     var score=phase==='core'?coreQScore:nextQScore;
     btnNext.textContent='\uD83C\uDF89 Done! '+score+'/'+items.length;
-    btnNext.onclick=function(){if(score>=Math.ceil(items.length/2))launchConfetti();speakSimple(score+' out of '+items.length+' correct! Great job!');};
+    btnNext.onclick=function(){if(score>=Math.ceil(items.length/2))launchConfetti();speak(score+' out of '+items.length+' correct! Great job!');};
   }
   nb.appendChild(btnNext);initFlags();
 }
@@ -934,7 +805,7 @@ function shuffleCatFlash(){catFlashOrder=shuffle(ALL_COMMUNITY);catFlashIdx=0;re
 function renderCatFlash(){
   var card=$('catFlashCard');card.classList.remove('flipped');
   var item=catFlashOrder[catFlashIdx];var m=CAT_META[item.cat];
-  $('catFlashFront').innerHTML='<div style="font-size:2.8rem">'+item.emoji+'</div><div style="font-size:.95rem;font-weight:900;color:#c4b5fd" data-pt="'+item.namePT+'">'+escH(item.name)+'</div><button class="speak-btn" onclick="event.stopPropagation();speakSimple(\''+item.name.replace(/'/g,"\\'")+'\')" style="margin-top:8px">\uD83D\uDD0A</button>';
+  $('catFlashFront').innerHTML='<div style="font-size:2.8rem">'+item.emoji+'</div><div style="font-size:.95rem;font-weight:900;color:#c4b5fd" data-pt="'+item.namePT+'">'+escH(item.name)+'</div><button class="speak-btn" onclick="event.stopPropagation();speak(\''+item.name.replace(/'/g,"\\'")+'\')" style="margin-top:8px">\uD83D\uDD0A</button>';
   var bk=$('catFlashBack');bk.style.background=m.bg;bk.style.borderColor=m.color;
   bk.innerHTML='<div style="font-size:1.8rem">'+item.emoji+' '+m.icon+'</div><div style="font-size:1.05rem;font-weight:900;color:'+m.color+'" data-pt="'+m.labelPT+'">'+m.label+'</div><div style="font-size:.8rem;color:var(--text-soft);font-weight:700">'+escH(item.name)+'</div>';
   $('catFlashCounter').textContent=(catFlashIdx+1)+' of '+catFlashOrder.length;
@@ -942,7 +813,7 @@ function renderCatFlash(){
 }
 function flipCatFlash(){
   var card=$('catFlashCard');
-  if(!card.classList.contains('flipped')){card.classList.add('flipped');var item=catFlashOrder[catFlashIdx];speakSimple(item.name+' is a community '+CAT_META[item.cat].label.toLowerCase());addXP(2);}
+  if(!card.classList.contains('flipped')){card.classList.add('flipped');var item=catFlashOrder[catFlashIdx];speak(item.name+' is a community '+CAT_META[item.cat].label.toLowerCase());addXP(2);}
 }
 function nextCatFlash(){catFlashIdx=(catFlashIdx+1)%catFlashOrder.length;renderCatFlash();}
 function prevCatFlash(){catFlashIdx=(catFlashIdx-1+catFlashOrder.length)%catFlashOrder.length;renderCatFlash();}
@@ -979,7 +850,8 @@ function launchConfetti(){
   setTimeout(function(){c.innerHTML='';},3000);
 }
 
-// ===== TOUR =====
+// ===== TOUR (ela-base.js handles startTour/showTourStep/tourStep/skipTour) =====
+var TOUR_KEY='ela06_tour_done';
 var tourSteps=[
   {selector:'#navLogo',title:'Serafina ELA-06',text:'Toddle Explorer! Quatro temas: Animais, Pir\u00e2mide Alimentar, Padr\u00f5es e Comunidade!'},
   {selector:'#scoreDisplay',title:'Seus Pontos XP \u2B50',text:'Ganhe pontos explorando e jogando! Cada resposta certa d\u00e1 XP!'},
@@ -987,29 +859,6 @@ var tourSteps=[
   {selector:'#lockBtn',title:'Cadeado \uD83D\uDD12',text:'Trava a tela para jogar sem sair por acidente. Toque de novo para destrancar!'},
   {selector:null,title:'Velocidade da Fala \uD83D\uDD0A',text:'Quando as palavras aparecerem embaixo:\n\uD83D\uDC0C Bem devagar \u2022 \uD83D\uDC22 Devagar \u2022 \uD83D\uDC07 Normal \u2022 \uD83D\uDE80 R\u00e1pido'}
 ];
-var tourIdx=0;
-function startTour(){if(localStorage.getItem('ela06_tour_done'))return;tourIdx=0;showTourStep();$('tourOverlay').style.display='block';}
-function showTourStep(){
-  var step=tourSteps[tourIdx];
-  var el=step.selector?document.querySelector(step.selector):null;
-  var bubble=$('tourBubble'),spot=$('tourSpotlight');
-  $('tourTitle').textContent=step.title;$('tourText').textContent=step.text;
-  var dotsEl=$('tourDots');dotsEl.innerHTML='';
-  tourSteps.forEach(function(_,i){var d=document.createElement('div');d.className='tour-dot'+(i===tourIdx?' active':'');dotsEl.appendChild(d);});
-  $('tourPrev').style.display=tourIdx===0?'none':'';
-  $('tourNext').textContent=tourIdx===tourSteps.length-1?'Done \u2714':'Next \u25BA';
-  if(el){
-    var r=el.getBoundingClientRect(),pad=10;
-    spot.style.display='block';spot.style.left=(r.left-pad)+'px';spot.style.top=(r.top-pad)+'px';spot.style.width=(r.width+pad*2)+'px';spot.style.height=(r.height+pad*2)+'px';
-    var bw=290,bh=180,bl=r.left,bt=r.bottom+14;
-    if(bt+bh>window.innerHeight)bt=r.top-bh-14;if(bl+bw>window.innerWidth)bl=window.innerWidth-bw-12;if(bl<8)bl=8;
-    bubble.style.top=bt+'px';bubble.style.left=bl+'px';bubble.style.transform='none';
-  } else {
-    spot.style.display='none';bubble.style.top='50%';bubble.style.left='50%';bubble.style.transform='translate(-50%,-50%)';
-  }
-}
-function tourStep(dir){tourIdx+=dir;if(tourIdx>=tourSteps.length){skipTour();return;}if(tourIdx<0)tourIdx=0;showTourStep();}
-function skipTour(){$('tourOverlay').style.display='none';localStorage.setItem('ela06_tour_done','1');}
 
 // ===== STARFIELD =====
 (function(){
@@ -1021,8 +870,7 @@ function skipTour(){$('tourOverlay').style.display='none';localStorage.setItem('
 
 // ===== INIT =====
 window.addEventListener('load',function(){
-  initFlags();
-  setTimeout(startTour,800);
+  initEla();
   setTimeout(function(){speakWithKaraoke('Welcome to Toddle Explorer! Choose a topic to start!');},600);
 });
 </script>
