@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>{{TITLE}} - Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ela-base.css">
+<style>
+:root{--fs:16px;--bg:#0d0b1e;--card-bg:rgba(255,255,255,.06);--card-border:rgba(255,255,255,.12);--text:#fff;--text-soft:rgba(255,255,255,.55);--text-dim:rgba(255,255,255,.3);}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:var(--fs);}
+body{font-family:'Nunito',sans-serif;background:var(--bg);min-height:100vh;color:var(--text);overflow-x:hidden;}
+body.light{--bg:#f3f1ff;--card-bg:rgba(124,58,237,.06);--card-border:rgba(124,58,237,.15);--text:#1a1535;--text-soft:rgba(26,21,53,.5);--text-dim:rgba(26,21,53,.3);background:var(--bg);color:var(--text);}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+body.light #starfield{opacity:.08;}
+#app{position:relative;z-index:1;height:100vh;height:100dvh;display:flex;flex-direction:column;}
+
+/* NAVBAR */
+.navbar{width:100%;display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0;z-index:100;}
+body.light .navbar{background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.1);}
+.nav-logo{font-size:1rem;font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-right:auto;}
+.nav-score{background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:800;color:#fff;white-space:nowrap;}
+.nb{width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:1.1rem;line-height:1;padding:0;}
+.nb:hover{transform:translateY(-2px);background:rgba(255,255,255,.18);}
+body.light .nb{border-color:rgba(124,58,237,.2);background:rgba(124,58,237,.06);}
+.nb-text{font-size:.7rem;font-weight:900;color:var(--text);}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;background:rgba(0,0,0,.55);align-items:center;justify-content:center;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:#fff;border:2px solid #a78bfa;border-radius:20px;padding:24px 20px;max-width:320px;width:90%;text-align:center;font-family:inherit;box-shadow:0 8px 40px rgba(124,58,237,.25);color:#1a1535;}
+.modal-icon{font-size:36px;margin-bottom:8px;}
+.modal-title{font-size:1rem;font-weight:900;color:#7c3aed;margin-bottom:6px;}
+.modal-text{font-size:.85rem;font-weight:700;color:#555;margin-bottom:16px;line-height:1.5;}
+.modal-btns{display:flex;gap:10px;justify-content:center;}
+.mbtn-yes{background:#7c3aed;color:#fff;border:none;border-radius:12px;padding:10px 22px;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;}
+.mbtn-yes:hover{background:#6d28d9;}
+.mbtn-no{background:#e5e7eb;color:#374151;border:none;border-radius:12px;padding:10px 22px;font-family:inherit;font-size:.85rem;font-weight:800;cursor:pointer;}
+.mbtn-no:hover{background:#d1d5db;}
+
+/* MAIN */
+.main{flex:1;overflow-y:auto;display:flex;flex-direction:column;align-items:center;padding:10px 12px 30px;}
+.screen{display:none;width:100%;max-width:680px;}
+.screen.active{display:flex;flex-direction:column;align-items:center;}
+
+/* === CSS ESPECIFICO: {{COD}} === */
+/* Adicionar CSS tool-specific aqui */
+/* Flag position overrides (base in ela-base.css) */
+/* .fc-front .flag-pt{position:absolute;top:3px;left:3px;} */
+
+@media(max-width:500px){
+  .navbar{gap:4px;padding:6px 10px;}
+  .nav-logo{font-size:.85rem;}
+  .nb{width:36px;height:36px;font-size:.9rem;}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="nav-logo" id="navLogo">Serafina &bull; {{COD}}</div>
+  <div class="nav-score" id="scoreDisplay">&#11088; 0 XP</div>
+  <button class="nb" id="btnHome" onclick="confirmGoHome()" title="Home">&#127968;</button>
+  <button class="nb" id="btnRestart" onclick="confirmRestart()" title="Restart">&#128260;</button>
+  <button class="nb" id="btnFontDown" onclick="changeFontSize(-1)" title="Smaller"><span class="nb-text">A-</span></button>
+  <button class="nb" id="btnFontUp" onclick="changeFontSize(1)" title="Bigger"><span class="nb-text">A+</span></button>
+  <button class="nb" id="themeBtn" onclick="toggleTheme()" title="Theme">&#9728;&#65039;</button>
+  <button class="nb" id="soundBtn" onclick="toggleSound()" title="Sound">&#128264;</button>
+  <button class="nb" id="lockBtn" onclick="toggleLock()" title="Lock">&#128275;</button>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modalHome">
+  <div class="modal-box">
+    <div class="modal-icon">&#127968;</div>
+    <div class="modal-title">Go back home?</div>
+    <div class="modal-text" data-pt="Tem certeza que quer voltar para o menu?">Are you sure you want to go back to the main screen?</div>
+    <div class="modal-btns">
+      <button class="mbtn-yes" onclick="goToIndex()">Yes!</button>
+      <button class="mbtn-no" onclick="closeModal('modalHome')">No, stay</button>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modalRestart">
+  <div class="modal-box">
+    <div class="modal-icon">&#128260;</div>
+    <div class="modal-title">Start over?</div>
+    <div class="modal-text" data-pt="Quer comecar do inicio?">Start from the beginning?</div>
+    <div class="modal-btns">
+      <button class="mbtn-yes" onclick="doRestart()">Yes!</button>
+      <button class="mbtn-no" onclick="closeModal('modalRestart')">No</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lock/karaoke/tour overlays generated by ela-base.js -->
+
+<div class="main" id="mainArea">
+
+<!-- ===== INTRO SCREEN ===== -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-badge">ELA &bull; {{UNIT}}</div>
+  <div class="intro-emoji">{{MASCOT_EMOJI}}</div>
+  <div class="intro-title" data-pt="{{TITULO_PT}}">{{TITLE}}</div>
+  <div class="intro-sub" data-pt="{{SUBTITULO_PT}}">{{SUBTITLE}}</div>
+  <button class="btn-start" id="startBtn" onclick="startGame()"><span id="startBtnText">Let's Start!</span></button>
+</div>
+
+<!-- ===== GAME SCREENS ===== -->
+<!-- Adicionar telas do jogo aqui -->
+
+<!-- ===== RESULT SCREEN ===== -->
+<div class="screen" id="screen-result">
+  <!-- Preencher resultado -->
+</div>
+
+</div><!-- /main -->
+</div><!-- /app -->
+
+<div class="confetti-container" id="confettiContainer"></div>
+
+<script src="ela-base.js"></script>
+<script>
+// ===== {{COD}}: {{TITLE}} =====
+
+// Tour config (ela-base.js hooks)
+var TOUR_KEY = '{{tour_key}}_tour_done';
+var tourSteps = [
+  {selector:'#navLogo', title:'{{TOUR_TITLE}}', text:'{{TOUR_TEXT}}'},
+  {selector:'#scoreDisplay', title:'Seus Pontos XP', text:'Ganhe pontos respondendo certo!'},
+  {selector:'#lockBtn', title:'Cadeado', text:'Trava a tela para jogar sem sair por acidente!'},
+  {selector:null, title:'Velocidade da Fala', text:'Controle a velocidade das palavras faladas!'}
+];
+
+// ===== GAME DATA =====
+var GAME_DATA = [
+  // Dados do jogo aqui
+];
+
+// ===== STATE =====
+var totalXP = 0;
+
+// ===== UTILITY =====
+function $(id){return document.getElementById(id);}
+function addXP(n){totalXP+=n;$('scoreDisplay').innerHTML='&#11088; '+totalXP+' XP';}
+function closeModal(id){$(id).classList.remove('active');}
+function goToIndex(){window.location.href='../index.html';}
+
+function showScreen(id){
+  speechSynthesis.cancel();
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  $(id).classList.add('active');
+  initFlags();
+}
+
+function confirmGoHome(){
+  if(lockActive)return;
+  $('modalHome').classList.add('active');
+}
+function confirmRestart(){
+  if(lockActive)return;
+  $('modalRestart').classList.add('active');
+}
+function doRestart(){
+  closeModal('modalRestart');
+  totalXP=0;
+  $('scoreDisplay').innerHTML='&#11088; 0 XP';
+  showScreen('screen-intro');
+}
+
+// ===== FONT SIZE =====
+function changeFontSize(d){
+  var cur=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fs'))||16;
+  var next=Math.min(Math.max(cur+d,12),24);
+  document.documentElement.style.setProperty('--fs',next+'px');
+}
+
+// ===== THEME =====
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  $('themeBtn').innerHTML=document.body.classList.contains('light')?'\uD83C\uDF19':'\u2600\uFE0F';
+}
+
+// ===== STARFIELD =====
+(function(){
+  var canvas=document.getElementById('starfield');
+  var ctx=canvas.getContext('2d');var stars=[];
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  function initStars(){stars=[];for(var i=0;i<120;i++)stars.push({x:Math.random(),y:Math.random(),r:.5+Math.random()*1.5,a:Math.random(),s:.0002+Math.random()*.0005});}
+  function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(function(s){s.a+=s.s;if(s.a>1)s.a=0;ctx.globalAlpha=s.a*0.7;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(s.x*canvas.width,s.y*canvas.height,s.r,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;requestAnimationFrame(draw);}
+  window.addEventListener('resize',resize);resize();initStars();draw();
+})();
+
+// ===== GAME LOGIC =====
+function startGame(){
+  showScreen('screen-game');
+  // Iniciar jogo
+  speakWithKaraoke('Let\'s start!');
+}
+
+// ===== CONFETTI =====
+function confetti(){
+  var c=$('confettiContainer');c.innerHTML='';
+  var colors=['#a78bfa','#f472b6','#fbbf24','#34d399','#60a5fa'];
+  for(var i=0;i<40;i++){
+    var p=document.createElement('div');p.className='confetti-piece';
+    p.style.left=Math.random()*100+'vw';
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDuration=(1.5+Math.random()*2)+'s';
+    p.style.animationDelay=Math.random()*1+'s';
+    c.appendChild(p);
+  }
+}
+
+// ===== INIT =====
+initEla();
+</script>
+</body>
+</html>
