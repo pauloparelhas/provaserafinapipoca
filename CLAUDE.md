@@ -121,6 +121,39 @@ Ao identificar padrao novo ou anti-padrao corrigido, Claude DEVE:
 Agentes recebem instrucoes baseadas nestes arquivos. Docs desatualizados = agentes repetem erros.
 Documentar e parte do trabalho, nao bonus opcional.
 
+## ARQUITETURA DE ARQUIVOS COMPARTILHADOS
+
+```
+ferramentas/
+  base.css          <- CSS compartilhado HIS/LP (vars, starfield, navbar, modal, quiz, resultado, tema claro, responsivo)
+  base.js           <- JS compartilhado HIS/LP (showScreen, toggleTheme, changeFontSize, showHomeModal, updateScore, initStarfield, launchFireworks, updatePhaseNavs, initApp)
+  ela-base.css      <- CSS compartilhado ELA (karaoke, speak-btn, tour overlay, flag BR, lock, sound states)
+  ela-base.js       <- JS compartilhado ELA (speakWithKaraoke, stopKaraoke, setKSpeed, speak, makeSpeakBtn, toggleSound, toggleLock, unlockScreen, initFlags, startTour, initEla)
+  TEMPLATE_PT.html  <- Esqueleto para ferramentas PT (HIS/LP): copiar + preencher placeholders
+  TEMPLATE_EN.html  <- Esqueleto para ferramentas EN (ELA): copiar + preencher placeholders
+```
+
+**Regras de importacao:**
+- Ferramentas PT (HIS/LP): `<link rel="stylesheet" href="base.css">` + `<script src="base.js"></script>`
+- Ferramentas EN (ELA): `<link rel="stylesheet" href="ela-base.css">` + `<script src="ela-base.js"></script>`
+- ELA NAO importa base.css/base.js (padroes incompativeis: `.nb` vs `.nav-btn`, `body.light` vs `body.theme-light`, `--fs:16px` vs `--fs:1`)
+
+**Hooks ELA (definir ANTES de `initEla()`):**
+- `var TOUR_KEY = 'elaXX_tour_done'` — localStorage key para tour
+- `var tourSteps = [{selector, title, text}, ...]` — passos do tour guiado
+
+**Hooks HIS/LP (definir ANTES de `initApp()`):**
+- `var PHASES = [{id, label}, ...]` — fases para barra de navegacao
+- `function onInit(){}` — setup especifico apos base init
+- `function onRestart(){}` — reset especifico
+
+**Para criar nova ferramenta:**
+1. Copiar o template apropriado (PT ou EN)
+2. Buscar/substituir os placeholders `{{...}}`
+3. Adicionar CSS tool-specific no `<style>`
+4. Preencher dados do jogo e logica no `<script>`
+5. NAO duplicar codigo que ja esta nos arquivos base
+
 ## REGRAS DE DESIGN
 - Fundo: `#0d0b1e` com starfield canvas
 - Cards: gradientes, NUNCA cor chapada

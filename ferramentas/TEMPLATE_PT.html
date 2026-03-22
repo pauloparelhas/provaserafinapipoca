@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITULO}} - Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+/* === CSS ESPECIFICO: {{COD}} === */
+/* Adicionar CSS tool-specific aqui */
+</style>
+</head>
+<body>
+<canvas id="fw-canvas"></canvas>
+<canvas id="starfield"></canvas>
+
+<div id="app">
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo" id="navLogo">&#x1F31F; Projeto Serafina</div>
+  <div class="nav-right">
+    <div class="nav-score">&#x2B50; <span id="score-val">0</span> pts</div>
+    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0; Inicio</button>
+    <button class="nav-btn" id="btnRestart" onclick="restartGame()">&#x1F504; Reiniciar</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A&#x2212;</button>
+      <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn nb-theme" id="themeBtn" onclick="toggleTheme()">&#x1F31D;</button>
+    </div>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<div id="screen-intro" class="screen active">
+  <div class="phase-nav"></div>
+  <div class="intro-badge">{{BADGE_EMOJI}} {{DISCIPLINA}}</div>
+  <span class="intro-mascot">{{MASCOT_EMOJI}}</span>
+  <div class="intro-title">{{TITULO}}</div>
+  <div class="intro-sub">{{SUBTITULO}}</div>
+  <div class="lv-pills">
+    <!-- Adicionar lv-pill para cada fase -->
+    <div class="lv-pill"><div class="lv-icon">&#x1F4D6;</div><div class="lv-lbl">Teoria</div></div>
+    <div class="lv-pill"><div class="lv-icon">&#x2753;</div><div class="lv-lbl">Quiz</div></div>
+    <div class="lv-pill"><div class="lv-icon">&#x1F3AF;</div><div class="lv-lbl">Desafio</div></div>
+  </div>
+  <button class="btn btn-start" onclick="startGame()">&#x1F680; Comecar!</button>
+</div>
+
+<!-- FASE 1: TEORIA -->
+<div id="screen-teoria" class="screen">
+  <div class="phase-nav"></div>
+  <div class="section-title">{{EMOJI}} {{TITULO_FASE1}}</div>
+  <div class="section-sub">{{INSTRUCAO_FASE1}}</div>
+  <div class="teoria-grid" id="teoria-grid"></div>
+  <div class="btn-row">
+    <button class="btn btn-next" onclick="goToPhase2()">Proximo! &#x27A1;</button>
+  </div>
+</div>
+
+<!-- FASE 2: QUIZ -->
+<div id="screen-quiz" class="screen">
+  <div class="phase-nav"></div>
+  <div class="section-title">&#x2753; {{TITULO_QUIZ}}</div>
+  <div class="quiz-progress" id="quiz-progress"></div>
+  <div class="quiz-question" id="quiz-question"></div>
+  <div class="quiz-grid" id="quiz-grid"></div>
+  <div class="quiz-feedback" id="quiz-feedback"></div>
+  <div class="btn-row">
+    <button class="btn btn-next" id="quiz-next-btn" style="display:none">Proxima &#x27A1;</button>
+  </div>
+</div>
+
+<!-- RESULTADO -->
+<div id="screen-resultado" class="screen">
+  <div class="res-hero" id="res-hero">&#x1F389;</div>
+  <div class="res-title" id="res-title">Parabens!</div>
+  <div class="res-sub" id="res-sub"></div>
+  <div class="stars-row" id="stars-row"></div>
+  <div class="btn-row">
+    <button class="btn btn-replay" onclick="restartGame()">&#x1F504; Jogar Novamente</button>
+    <button class="btn btn-home-lg" onclick="goToIndex()">&#x1F3E0; Inicio</button>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<script src="base.js"></script>
+<script>
+// ===== DADOS DO JOGO =====
+// {{COD}}: {{TITULO}}
+
+// Fases para a barra de navegacao
+var PHASES = [
+  {id:'screen-intro',   label:'Inicio'},
+  {id:'screen-teoria',  label:'Teoria'},
+  {id:'screen-quiz',    label:'Quiz'},
+  {id:'screen-resultado', label:'Resultado'}
+];
+
+// Dados da teoria (array de objetos)
+var TEORIA_DATA = [
+  // {emoji:'...', title:'...', text:'...', tags:['...']}
+];
+
+// Dados do quiz (array de objetos)
+var QUIZ_DATA = [
+  // {question:'...', options:[{text:'...', correct:true/false}, ...], feedback:'...'}
+];
+
+// ===== STATE =====
+var score = 0;
+var quizIdx = 0;
+
+// ===== GAME LOGIC =====
+function startGame(){
+  showScreen('screen-teoria');
+  buildTeoria();
+}
+
+function buildTeoria(){
+  var grid = document.getElementById('teoria-grid');
+  grid.innerHTML = '';
+  TEORIA_DATA.forEach(function(item){
+    // Criar teoria cards
+  });
+}
+
+function goToPhase2(){
+  showScreen('screen-quiz');
+  quizIdx = 0;
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion(){
+  // Renderizar pergunta do quiz
+}
+
+function showResultado(){
+  showScreen('screen-resultado');
+  var pct = score / QUIZ_DATA.length;
+  var stars = pct >= .9 ? 3 : pct >= .6 ? 2 : pct >= .3 ? 1 : 0;
+  updateScore(score);
+  // Preencher resultado
+  if(stars >= 2) launchFireworks();
+}
+
+// ===== HOOKS PARA BASE.JS =====
+function onInit(){
+  // Chamado por initApp() — setup especifico
+}
+
+function onRestart(){
+  score = 0;
+  quizIdx = 0;
+  updateScore(0);
+}
+
+// ===== INIT =====
+initApp();
+</script>
+</body>
+</html>

@@ -1,9 +1,22 @@
 // Service Worker — Projeto Serafina
-// Estratégia: network-first para HTML, garante versão sempre atualizada
-var CACHE = 'serafina-v2';
+// Estratégia: network-first para HTML, cache-first para base CSS/JS
+var CACHE = 'serafina-v3';
+
+// Arquivos base compartilhados — pre-cache no install
+var BASE_FILES = [
+  '/ferramentas/base.css',
+  '/ferramentas/base.js',
+  '/ferramentas/ela-base.css',
+  '/ferramentas/ela-base.js'
+];
 
 self.addEventListener('install', function(e) {
-  self.skipWaiting(); // Assume controle imediatamente, sem esperar
+  e.waitUntil(
+    caches.open(CACHE).then(function(cache) {
+      return cache.addAll(BASE_FILES);
+    })
+  );
+  self.skipWaiting();
 });
 
 self.addEventListener('activate', function(e) {
@@ -43,5 +56,21 @@ self.addEventListener('fetch', function(e) {
         })
     );
   }
-  // Outros recursos (CSS, fontes, imagens): comportamento padrão do browser
+  // Base CSS/JS: stale-while-revalidate (serve do cache, atualiza em background)
+  var isBase = BASE_FILES.some(function(f) { return url.indexOf(f) !== -1; });
+  if (isBase) {
+    e.respondWith(
+      caches.open(CACHE).then(function(cache) {
+        return cache.match(e.request).then(function(cached) {
+          var fetched = fetch(e.request).then(function(response) {
+            cache.put(e.request, response.clone());
+            return response;
+          });
+          return cached || fetched;
+        });
+      })
+    );
+    return;
+  }
+  // Outros recursos (fontes, imagens): comportamento padrão do browser
 });
