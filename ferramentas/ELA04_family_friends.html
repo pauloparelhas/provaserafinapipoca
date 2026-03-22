@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Family &amp; Friends - Projeto Serafina</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ela-base.css">
 <style>
 :root{--fs:16px;--bg:#0d0b1e;--card-bg:rgba(255,255,255,.06);--card-border:rgba(255,255,255,.12);--text:#fff;--text-soft:rgba(255,255,255,.55);--text-dim:rgba(255,255,255,.3);}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -43,69 +44,15 @@ body.light .nb{border-color:rgba(124,58,237,.2);background:rgba(124,58,237,.06);
 .screen{display:none;width:100%;max-width:900px;}
 .screen.active{display:flex;flex-direction:column;align-items:center;}
 
-/* data-pt / flag */
-[data-pt]{position:relative;cursor:default;}
-.flag-pt{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;
-  background:rgba(0,156,59,.15);border:1px solid rgba(0,156,59,.3);cursor:pointer;font-size:10px;
-  margin-left:4px;vertical-align:middle;flex-shrink:0;transition:.2s;position:relative;z-index:5;}
-.flag-pt:hover{background:rgba(0,156,59,.25);transform:scale(1.1);}
-.pt-label{display:none;font-size:.68rem;font-weight:700;color:#a78bfa;background:rgba(167,139,250,.1);
-  border:1px solid rgba(167,139,250,.25);border-radius:8px;padding:2px 8px;margin-top:2px;
-  line-height:1.3;white-space:normal;width:100%;}
-body.light .pt-label{color:#5b21b6;background:rgba(124,58,237,.06);border-color:rgba(124,58,237,.15);}
-.pt-label.visible{display:block;}
+/* data-pt / flag — base in ela-base.css */
+.pt-label{line-height:1.3;white-space:normal;width:100%;}
 .fc-front .flag-pt,.fc-back .flag-pt{position:absolute;top:3px;left:3px;}
 .fc-front .pt-label,.fc-back .pt-label{position:absolute;bottom:2px;left:2px;right:2px;width:auto;text-align:center;font-size:.5rem;}
 
-/* KARAOKE BAR */
-.karaoke-bar{display:none;position:fixed;bottom:8px;left:50%;transform:translateX(-50%);
-  background:rgba(13,11,30,.93);backdrop-filter:blur(14px);border:2px solid rgba(167,139,250,.55);border-radius:20px;
-  padding:10px 18px 12px;z-index:200;max-width:92%;box-shadow:0 8px 40px rgba(0,0,0,.6);
-  flex-direction:column;gap:6px;align-items:center;}
-body.light .karaoke-bar{background:rgba(255,255,255,.97);border-color:#c4b5fd;}
-.karaoke-words{display:flex;flex-wrap:wrap;gap:4px 6px;justify-content:center;
-  font-size:1.1rem;font-weight:700;color:rgba(255,255,255,.4);}
-body.light .karaoke-words{color:rgba(0,0,0,.3);}
-.karaoke-words .kw{display:inline-block;padding:2px 5px;border-radius:6px;transition:all .15s;}
-.karaoke-words .kw.kw-active{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;transform:scale(1.18);text-shadow:0 0 8px rgba(167,139,250,.6);}
-.karaoke-words .kw.kw-done{color:rgba(255,255,255,.7);background:rgba(167,139,250,.12);border-bottom:2px solid rgba(167,139,250,.35);}
-body.light .karaoke-words .kw.kw-active{background:linear-gradient(135deg,#7c3aed,#db2777);color:#fff;}
-body.light .karaoke-words .kw.kw-done{color:rgba(0,0,0,.55);}
-.karaoke-speed{display:flex;gap:8px;align-items:center;}
-.ks-btn{background:rgba(255,255,255,.07);border:2px solid transparent;border-radius:8px;font-size:.95rem;
-  cursor:pointer;padding:2px 9px;line-height:1;opacity:.55;transition:.15s;}
-.ks-btn:hover{opacity:.9;}
-.ks-btn.active{border-color:#a78bfa;background:rgba(167,139,250,.22);opacity:1;}
-body.light .ks-btn{background:rgba(0,0,0,.05);}
-body.light .ks-btn.active{border-color:#7c3aed;background:rgba(124,58,237,.15);}
-/* PRODUCT TOUR */
-.tour-bg{position:fixed;inset:0;z-index:9001;background:transparent;cursor:pointer;}
-.tour-spotlight{position:fixed;border-radius:12px;z-index:9002;pointer-events:none;
-  box-shadow:0 0 0 4000px rgba(0,0,0,.78),0 0 0 4px #a78bfa,0 0 28px 6px rgba(167,139,250,.65);
-  transition:left .3s,top .3s,width .3s,height .3s;}
-.tour-bubble{position:fixed;z-index:9003;background:linear-gradient(145deg,#1e1b4b,#312e81);
-  border:2px solid #a78bfa;border-radius:20px;padding:18px 22px;max-width:290px;
-  box-shadow:0 12px 40px rgba(0,0,0,.6);color:#fff;}
-body.light .tour-bubble{background:linear-gradient(145deg,#f5f3ff,#ede9fe);color:#1e1b4b;border-color:#7c3aed;}
-.tour-bubble-title{font-size:.78rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
-  color:#a78bfa;margin-bottom:6px;}
-.tour-bubble-text{font-size:.97rem;font-weight:700;line-height:1.5;margin-bottom:14px;white-space:pre-line;}
-.tour-bubble-nav{display:flex;align-items:center;gap:8px;}
-.tour-btn{border:none;border-radius:10px;padding:7px 14px;font-size:.85rem;font-weight:800;cursor:pointer;transition:.15s;}
-.tour-btn-prev{background:rgba(167,139,250,.15);color:#c4b5fd;}
-.tour-btn-next{background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;}
-.tour-btn-skip{margin-left:auto;background:none;color:rgba(255,255,255,.4);font-size:.78rem;font-weight:700;cursor:pointer;border:none;}
-body.light .tour-btn-skip{color:rgba(0,0,0,.4);}
-.tour-step-dots{display:flex;gap:5px;align-items:center;margin-right:4px;}
-.tour-dot{width:7px;height:7px;border-radius:50%;background:rgba(167,139,250,.3);}
-.tour-dot.active{background:#a78bfa;}
+/* karaoke — in ela-base.css */
+/* tour — in ela-base.css */
 
-/* SPEAKER BUTTON */
-.speak-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;
-  background:linear-gradient(135deg,#3b82f6,#60a5fa);border:none;cursor:pointer;transition:.2s;flex-shrink:0;font-size:1rem;color:#fff;box-shadow:0 2px 10px rgba(59,130,246,.4);}
-.speak-btn:hover{transform:scale(1.15);box-shadow:0 3px 16px rgba(59,130,246,.6);}
-.speak-btn.speaking{animation:speakPulse .6s ease infinite;}
-@keyframes speakPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.5);}50%{box-shadow:0 0 0 10px rgba(59,130,246,0);}}
+/* speak-btn — in ela-base.css */
 
 /* KEYWORD HIGHLIGHT */
 .kw-hl{color:#fbbf24;font-weight:900;text-decoration:underline wavy #fbbf2480;text-underline-offset:3px;}
@@ -246,16 +193,7 @@ body.light .built-item{background:rgba(124,58,237,.04);border-color:rgba(124,58,
 .result-xp{font-size:clamp(.9rem,2.5vw,1.2rem);font-weight:800;color:#fbbf24;text-align:center;margin-bottom:6px;}
 .result-detail{font-size:.8rem;font-weight:700;color:var(--text-dim);text-align:center;margin-bottom:14px;}
 
-/* LOCK */
-.nb.sound-off{background:rgba(239,68,68,.2)!important;border-color:rgba(239,68,68,.5)!important;}
-.nb.lock-active{background:rgba(239,68,68,.2)!important;border-color:rgba(239,68,68,.5)!important;animation:lockPulse 2s ease infinite;}
-@keyframes lockPulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.3);}50%{box-shadow:0 0 0 8px rgba(239,68,68,0);}}
-.lock-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,.7);align-items:center;justify-content:center;backdrop-filter:blur(4px);}
-.lock-overlay.active{display:flex;}
-.lock-box{background:#1a1145;border:3px solid #a78bfa;border-radius:24px;padding:28px 24px;max-width:300px;width:90%;text-align:center;}
-body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
-.lock-icon{font-size:48px;margin-bottom:8px;}
-.lock-title{font-size:1.1rem;font-weight:900;color:#a78bfa;margin-bottom:8px;}
+/* lock/sound — in ela-base.css */
 
 /* CONFETTI */
 .confetti-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:250;overflow:hidden;}
@@ -485,44 +423,11 @@ body.light .lock-box{background:#f5f3ff;border-color:#7c3aed;}
 </div><!-- /main -->
 </div><!-- /app -->
 
-<!-- LOCK OVERLAY -->
-<div class="lock-overlay" id="lockOverlay">
-  <div class="lock-box">
-    <div class="lock-icon">&#128275;</div>
-    <div class="lock-title">Tap to unlock!</div>
-    <button class="mbtn-yes" onclick="unlockScreen()" style="margin-top:12px;font-size:1.1rem;padding:14px 36px;">&#128275; Unlock</button>
-  </div>
-</div>
-
-<!-- KARAOKE BAR (speed controls inside) -->
-<div id="karaokeBar" class="karaoke-bar">
-  <div class="karaoke-speed">
-    <button class="ks-btn" data-rate="0.6"  onclick="setSpeed(0.6)" title="Bem devagar">🐌</button>
-    <button class="ks-btn active" data-rate="0.75" onclick="setSpeed(0.75)" title="Devagar">🐢</button>
-    <button class="ks-btn" data-rate="0.9"  onclick="setSpeed(0.9)"  title="Normal">🐇</button>
-    <button class="ks-btn" data-rate="1.1"  onclick="setSpeed(1.1)"  title="Rapido">🚀</button>
-  </div>
-  <div id="karaokeWords" class="karaoke-words"></div>
-</div>
-
-<!-- TOUR OVERLAY -->
-<div id="tourOverlay" style="display:none;">
-  <div class="tour-bg" id="tourBg" onclick="tourStep(1)"></div>
-  <div class="tour-spotlight" id="tourSpotlight"></div>
-  <div class="tour-bubble" id="tourBubble">
-    <div class="tour-bubble-title" id="tourTitle"></div>
-    <div class="tour-bubble-text" id="tourText"></div>
-    <div class="tour-bubble-nav">
-      <div class="tour-step-dots" id="tourDots"></div>
-      <button class="tour-btn tour-btn-prev" id="tourPrev" onclick="tourStep(-1)">&#9664; Voltar</button>
-      <button class="tour-btn tour-btn-next" id="tourNext" onclick="tourStep(1)">Pr&#243;ximo &#9654;</button>
-      <button class="tour-btn-skip" onclick="skipTour()">Pular</button>
-    </div>
-  </div>
-</div>
+<!-- Lock overlay, karaoke bar, tour overlay generated by ela-base.js -->
 
 <div class="confetti-container" id="confettiBox"></div>
 
+<script src="ela-base.js"></script>
 <script>
 // ===== DATA =====
 var FAMILY_MEMBERS = [
@@ -571,8 +476,6 @@ var BUILDER_ADJECTIVES = [
 
 // ===== GLOBALS =====
 var totalXP = 0, currentFS = 16, isLight = false;
-var soundEnabled = true, lockActive = false;
-var karaokeRate = 0.75;
 var isTouchDevice = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
 // Phase 2 state
@@ -582,52 +485,9 @@ var quizItems = [], quizIdx = 0, quizCorrect = 0, quizAnswered = false;
 var builderMember = null, builderAdj = null;
 var builtSentences = [];
 
-// ===== TTS / KARAOKE (boundary events — natural cadence) =====
-var karaokeActive = false;
-function speakWithKaraoke(textEN, onEnd){
-  if(!soundEnabled||!('speechSynthesis' in window)){if(onEnd)onEnd();return;}
-  window.speechSynthesis.cancel();
-  karaokeActive=true;
-  var bar=document.getElementById('karaokeBar');
-  var wordsDiv=document.getElementById('karaokeWords');
-  var words=textEN.split(/\s+/);
-  wordsDiv.innerHTML=words.map(function(w,i){return '<span class="kw" data-i="'+i+'">'+w+'</span>';}).join(' ');
-  bar.style.display='flex';
-  var spans=wordsDiv.querySelectorAll('.kw');
-  var idx=0;
-  var u=new SpeechSynthesisUtterance(textEN);
-  u.lang='en-US'; u.rate=karaokeRate; u.pitch=1.1;
-  var voices=speechSynthesis.getVoices();
-  var v=voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})||voices.find(function(x){return x.lang.startsWith('en');});
-  if(v) u.voice=v;
-  u.onboundary=function(e){
-    if(e.name==='word'&&idx<spans.length){
-      if(idx>0){spans[idx-1].classList.remove('kw-active');spans[idx-1].classList.add('kw-done');}
-      spans[idx].classList.add('kw-active');
-      idx++;
-    }
-  };
-  u.onend=function(){
-    if(!karaokeActive)return;
-    spans.forEach(function(s){s.classList.remove('kw-active');s.classList.add('kw-done');});
-    setTimeout(function(){bar.style.display='none';karaokeActive=false;if(onEnd)onEnd();},2500);
-  };
-  u.onerror=function(){bar.style.display='none';karaokeActive=false;if(onEnd)onEnd();};
-  window.speechSynthesis.speak(u);
-}
-function stopKaraoke(){
-  karaokeActive=false; window.speechSynthesis.cancel();
-  var bar=document.getElementById('karaokeBar');
-  if(bar) bar.style.display='none';
-}
-// ===== SPEED CONTROL =====
-function setSpeed(rate){
-  karaokeRate=rate;
-  document.querySelectorAll('.ks-btn').forEach(function(b){
-    b.classList.toggle('active',parseFloat(b.dataset.rate)===rate);
-  });
-}
-// ===== PRODUCT TOUR =====
+// TTS / karaoke / speed — in ela-base.js
+// ===== PRODUCT TOUR (steps defined here, logic in ela-base.js) =====
+var TOUR_KEY = 'ela04_tour_done';
 var tourSteps=[
   {selector:'#navLogo',     title:'Projeto Serafina',            text:'Este \u00e9 o nome da ferramenta! Toque para ir ao menu principal.'},
   {selector:'#scoreDisplay',title:'Sua pontua\u00e7\u00e3o XP', text:'Aqui aparecem os seus pontos XP! Acerte as atividades para ganhar mais!'},
@@ -639,76 +499,7 @@ var tourSteps=[
   {selector:'#lockBtn',     title:'Cadeado \u{1F512}',           text:'Trava a tela para jogar sem sair por acidente. Toque de novo para destrancar!'},
   {selector:null, title:'Velocidade da fala \u{1F50A}', text:'Quando o texto aparece em baixo, use:\n\u{1F40C} Bem devagar \u2022 \u{1F422} Devagar \u2022 \u{1F407} Normal \u2022 \u{1F680} R\u00e1pido'}
 ];
-var tourIdx=0;
-function startTour(){
-  if(localStorage.getItem('ela04_tour_done')) return;
-  tourIdx=0; showTourStep();
-  document.getElementById('tourOverlay').style.display='block';
-}
-function showTourStep(){
-  var step=tourSteps[tourIdx];
-  var el=document.querySelector(step.selector);
-  var bubble=document.getElementById('tourBubble');
-  var spot=document.getElementById('tourSpotlight');
-  document.getElementById('tourTitle').textContent=step.title;
-  document.getElementById('tourText').textContent=step.text;
-  var dotsEl=document.getElementById('tourDots'); dotsEl.innerHTML='';
-  tourSteps.forEach(function(_,i){
-    var d=document.createElement('div'); d.className='tour-dot'+(i===tourIdx?' active':'');
-    dotsEl.appendChild(d);
-  });
-  document.getElementById('tourPrev').style.display=tourIdx===0?'none':'';
-  document.getElementById('tourNext').textContent=(tourIdx===tourSteps.length-1)?'Conclu\u00edr \u2714':'Pr\u00f3ximo \u25ba';
-  if(el){
-    var r=el.getBoundingClientRect();
-    var pad=10;
-    spot.style.display='block';
-    spot.style.left=(r.left-pad)+'px'; spot.style.top=(r.top-pad)+'px';
-    spot.style.width=(r.width+pad*2)+'px'; spot.style.height=(r.height+pad*2)+'px';
-    var bw=290, bh=180, bl=r.left, bt=r.bottom+14;
-    if(bt+bh>window.innerHeight) bt=r.top-bh-14;
-    if(bl+bw>window.innerWidth) bl=window.innerWidth-bw-12;
-    if(bl<8) bl=8;
-    bubble.style.top=bt+'px'; bubble.style.left=bl+'px';
-    bubble.style.transform='none';
-  } else {
-    spot.style.display='none';
-    bubble.style.top='50%'; bubble.style.left='50%';
-    bubble.style.transform='translate(-50%,-50%)';
-  }
-}
-function tourStep(dir){
-  tourIdx+=dir;
-  if(tourIdx>=tourSteps.length){ skipTour(); return; }
-  if(tourIdx<0) tourIdx=0;
-  showTourStep();
-}
-function skipTour(){
-  document.getElementById('tourOverlay').style.display='none';
-  localStorage.setItem('ela04_tour_done','1');
-}
-function speakSimple(text, onEnd){
-  if(!soundEnabled||!('speechSynthesis' in window)){if(onEnd)onEnd();return;}
-  window.speechSynthesis.cancel();
-  var u=new SpeechSynthesisUtterance(text);
-  u.lang='en-US'; u.rate=0.85; u.pitch=1.1;
-  var voices=speechSynthesis.getVoices();
-  var v=voices.find(function(x){return x.lang.startsWith('en')&&x.name.includes('Female');})||voices.find(function(x){return x.lang.startsWith('en');});
-  if(v) u.voice=v;
-  if(onEnd) u.onend=onEnd;
-  speechSynthesis.speak(u);
-}
-if('speechSynthesis' in window){
-  speechSynthesis.getVoices();
-  speechSynthesis.onvoiceschanged=function(){speechSynthesis.getVoices();};
-}
-function makeSpeakBtn(text, size){
-  var btn=document.createElement('button');
-  btn.className='speak-btn'; btn.innerHTML='\u{1F50A}';
-  if(size){btn.style.width=size;btn.style.height=size;btn.style.fontSize=(parseInt(size)/2.5)+'px';}
-  btn.onclick=function(e){e.stopPropagation();btn.classList.add('speaking');speakWithKaraoke(text,function(){btn.classList.remove('speaking');});};
-  return btn;
-}
+// speak, makeSpeakBtn, voice preload — in ela-base.js
 
 // ===== UTILS =====
 function $(id){return document.getElementById(id);}
@@ -716,34 +507,15 @@ function shuffle(a){var arr=a.slice();for(var i=arr.length-1;i>0;i--){var j=Math
 function showScreen(id){stopKaraoke();document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});$(id).classList.add('active');document.querySelector('.main').scrollTop=0;}
 function addXP(n){totalXP+=n;$('scoreDisplay').innerHTML='\u2B50 '+totalXP+' XP';}
 function closeModal(id){$(id).classList.remove('active');}
-function confirmGoHome(){if(lockActive){speakSimple('The screen is locked!');return;}$('modalHome').classList.add('active');}
-function confirmRestart(){if(lockActive){speakSimple('The screen is locked!');return;}$('modalRestart').classList.add('active');}
+function confirmGoHome(){if(lockActive){speak('The screen is locked!');return;}$('modalHome').classList.add('active');}
+function confirmRestart(){if(lockActive){speak('The screen is locked!');return;}$('modalRestart').classList.add('active');}
 function goToIndex(){window.location.href='../index.html';}
 function changeFontSize(d){currentFS=Math.max(12,Math.min(32,currentFS+d*2));document.documentElement.style.setProperty('--fs',currentFS+'px');}
 function toggleTheme(){isLight=!isLight;document.body.classList.toggle('light',isLight);$('themeBtn').innerHTML=isLight?'\u{1F319}':'\u2600\uFE0F';}
-function toggleSound(){soundEnabled=!soundEnabled;var btn=$('soundBtn');if(soundEnabled){btn.innerHTML='\u{1F50A}';btn.classList.remove('sound-off');}else{stopKaraoke();btn.innerHTML='\u{1F507}';btn.classList.add('sound-off');}}
-function toggleLock(){if(!lockActive){lockActive=true;document.body.classList.add('locked');var btn=$('lockBtn');btn.innerHTML='\u{1F512}';btn.classList.add('lock-active');try{document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();}catch(e){}window.addEventListener('beforeunload',preventLeave);}else{$('lockOverlay').classList.add('active');}}
-function preventLeave(e){e.preventDefault();e.returnValue='';}
-function unlockScreen(){lockActive=false;document.body.classList.remove('locked');var btn=$('lockBtn');btn.innerHTML='\u{1F513}';btn.classList.remove('lock-active');$('lockOverlay').classList.remove('active');window.removeEventListener('beforeunload',preventLeave);try{document.fullscreenElement&&document.exitFullscreen();}catch(e){}}
+// toggleSound, toggleLock, preventLeave, unlockScreen — in ela-base.js
 function fireConfetti(){var box=$('confettiBox');var colors=['#a78bfa','#f472b6','#fb923c','#34d399','#fbbf24','#60a5fa'];for(var i=0;i<50;i++){var p=document.createElement('div');p.className='confetti-piece';p.style.left=Math.random()*100+'%';p.style.background=colors[Math.floor(Math.random()*colors.length)];p.style.width=(6+Math.random()*10)+'px';p.style.height=(6+Math.random()*10)+'px';p.style.animationDuration=(1.5+Math.random()*2)+'s';p.style.animationDelay=(Math.random()*.6)+'s';box.appendChild(p);}setTimeout(function(){box.innerHTML='';},4500);}
 
-// ===== FLAGS =====
-function initFlags(){
-  document.querySelectorAll('[data-pt]').forEach(function(el){
-    var pt=el.getAttribute('data-pt'); if(!pt) return;
-    var fcFace=el.closest('.fc-front')||el.closest('.fc-back');
-    var target=fcFace||el;
-    if(target.querySelector('.flag-pt')) return;
-    var flag=document.createElement('span');
-    flag.className='flag-pt';
-    flag.innerHTML='<svg viewBox="0 0 20 14" width="14" height="10" style="display:block"><rect fill="#009c3b" width="20" height="14" rx="2"/><polygon fill="#ffdf00" points="10,1.5 18,7 10,12.5 2,7"/><circle fill="#002776" cx="10" cy="7" r="3"/></svg>';
-    flag.title='Tradu\u00e7\u00e3o';
-    var label=document.createElement('div');
-    label.className='pt-label'; label.textContent=pt;
-    flag.addEventListener('click',function(e){e.stopPropagation();e.preventDefault();label.classList.toggle('visible');});
-    target.appendChild(flag); target.appendChild(label);
-  });
-}
+// initFlags — in ela-base.js
 
 // ===== PHASE ROUTER =====
 function startPhase(n){if(n===1)initFlashcards();else if(n===2)initQuiz();else if(n===3)initBuilder();}
@@ -875,10 +647,10 @@ function handleQuizAnswer(isCorrect, el, chosen, q){
   if(isCorrect){
     quizCorrect++; addXP(15);
     fb.innerHTML='<span style="color:#34d399">\u2705 Correct! That\u2019s the '+q.answer+'! \u{1F389}</span>';
-    speakSimple('Correct! That is the '+q.answer+'!');
+    speak('Correct! That is the '+q.answer+'!');
   } else {
     fb.innerHTML='<span style="color:#f87171">\u274C Not this one! The answer is <strong>'+q.answer+'</strong>.</span>';
-    speakSimple('Not this one. The answer is '+q.answer+'.');
+    speak('Not this one. The answer is '+q.answer+'.');
   }
   renderQuizProgressBar();
   var nextRow=$('quizNextRow');
@@ -1062,8 +834,7 @@ function showResult(correct,total,xp){
 }
 
 // ===== INIT =====
-initFlags();
-setTimeout(startTour, 800);
+initEla();
 
 // ===== STARFIELD =====
 (function(){
