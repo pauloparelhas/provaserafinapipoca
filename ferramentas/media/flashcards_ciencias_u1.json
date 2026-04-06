@@ -1,0 +1,185 @@
+{
+  "title": "Science Cards — Y2",
+  "cards": [
+    {
+      "front": "What body covering does a LION have?",
+      "back": "Fur / Hair"
+    },
+    {
+      "front": "What body covering does a PENGUIN have?",
+      "back": "Feathers"
+    },
+    {
+      "front": "What body covering does a SNAKE have?",
+      "back": "Scales"
+    },
+    {
+      "front": "What body covering does a FROG have?",
+      "back": "Smooth / Moist Skin"
+    },
+    {
+      "front": "What body covering does a TURTLE have?",
+      "back": "Shell"
+    },
+    {
+      "front": "What body covering does an ANT have?",
+      "back": "Exoskeleton"
+    },
+    {
+      "front": "What body covering does a SHARK have?",
+      "back": "Scales"
+    },
+    {
+      "front": "What body covering does a FLAMINGO have?",
+      "back": "Feathers"
+    },
+    {
+      "front": "What body covering does a DOLPHIN have?",
+      "back": "Smooth / Moist Skin"
+    },
+    {
+      "front": "What body covering does a SNAIL have?",
+      "back": "Shell"
+    },
+    {
+      "front": "What body covering does a GRASSHOPPER have?",
+      "back": "Exoskeleton"
+    },
+    {
+      "front": "What body covering does a PANDA have?",
+      "back": "Fur / Hair"
+    },
+    {
+      "front": "Name the 6 types of animal body coverings.",
+      "back": "1. Fur / Hair\n2. Feathers\n3. Scales\n4. Smooth / Moist Skin\n5. Shell\n6. Exoskeleton"
+    },
+    {
+      "front": "What are the 4 stages of a BUTTERFLY'S life cycle?",
+      "back": "1. Eggs\n2. Caterpillar (Larva)\n3. Pupa (Chrysalis)\n4. Butterfly (Adult)"
+    },
+    {
+      "front": "What are the 4 stages of a FROG'S life cycle?",
+      "back": "1. Eggs\n2. Tadpole\n3. Froglet\n4. Frog (Adult)"
+    },
+    {
+      "front": "What is metamorphosis?",
+      "back": "When an animal changes its body form A LOT as it grows — it looks very different from when it was born."
+    },
+    {
+      "front": "Name 4 animals that go through metamorphosis.",
+      "back": "Butterfly, Frog, Bee, Ant\n(also: Ladybug, Mosquito, Starfish, Newt)"
+    },
+    {
+      "front": "What is a TADPOLE?",
+      "back": "A baby frog — it lives in water and has a tail."
+    },
+    {
+      "front": "What is a CHRYSALIS (PUPA)?",
+      "back": "The hard case a caterpillar forms around itself during metamorphosis — the butterfly grows inside."
+    },
+    {
+      "front": "What is a HERBIVORE?",
+      "back": "An animal that eats ONLY plants (grass, leaves, fruits, roots).\nExamples: Sheep, Zebra, Rabbit, Cow, Giraffe"
+    },
+    {
+      "front": "What is a CARNIVORE?",
+      "back": "An animal that eats MEAT (other animals).\nExamples: Lion, Wolf, Tiger, Shark"
+    },
+    {
+      "front": "What is an OMNIVORE?",
+      "back": "An animal that eats BOTH plants AND meat.\nExamples: Human, Pig, Bear, Crow"
+    },
+    {
+      "front": "Is a HUMAN a herbivore, carnivore or omnivore?",
+      "back": "OMNIVORE — humans eat plants AND meat."
+    },
+    {
+      "front": "Is a LION a herbivore, carnivore or omnivore?",
+      "back": "CARNIVORE — lions eat only meat."
+    },
+    {
+      "front": "Is a RABBIT a herbivore, carnivore or omnivore?",
+      "back": "HERBIVORE — rabbits eat only plants."
+    },
+    {
+      "front": "What is at the BASE (bottom) of the food pyramid?",
+      "back": "Bread, Cereal, Rice and Pasta — we eat the MOST of these!"
+    },
+    {
+      "front": "What is at the TOP of the food pyramid?",
+      "back": "Fats, Oils and Sweets — we eat the LEAST of these!"
+    },
+    {
+      "front": "What is the daddy horse called?",
+      "back": "STALLION"
+    },
+    {
+      "front": "What is the mommy horse called?",
+      "back": "MARE"
+    },
+    {
+      "front": "What is the baby horse called?",
+      "back": "FOAL"
+    },
+    {
+      "front": "What is the daddy cow called?",
+      "back": "BULL"
+    },
+    {
+      "front": "What is the baby cow called?",
+      "back": "CALF"
+    },
+    {
+      "front": "What is the mommy lion called?",
+      "back": "LIONESS"
+    },
+    {
+      "front": "What is the baby lion OR baby tiger called?",
+      "back": "CUB"
+    },
+    {
+      "front": "What is the daddy chicken called?",
+      "back": "ROOSTER"
+    },
+    {
+      "front": "What is the baby chicken called?",
+      "back": "CHICK"
+    },
+    {
+      "front": "What is the mommy tiger called?",
+      "back": "TIGRESS"
+    },
+    {
+      "front": "What is the daddy duck called?",
+      "back": "DRAKE"
+    },
+    {
+      "front": "What is the baby duck called?",
+      "back": "DUCKLING"
+    },
+    {
+      "front": "Stallion + Mare = ?",
+      "back": "FOAL (baby horse) 🐴"
+    },
+    {
+      "front": "Bull + Cow = ?",
+      "back": "CALF (baby cattle) 🐄"
+    },
+    {
+      "front": "Lion + Lioness = ?",
+      "back": "CUB (baby lion) 🦁"
+    },
+    {
+      "front": "Rooster + Hen = ?",
+      "back": "CHICK (baby chicken) 🐥"
+    },
+    {
+      "front": "Tiger + Tigress = ?",
+      "back": "CUB (baby tiger) 🐯"
+    },
+    {
+      "front": "Drake + Duck = ?",
+      "back": "DUCKLING (baby duck) 🦆"
+    }
+  ]
+}

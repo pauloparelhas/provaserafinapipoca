@@ -5,8 +5,12 @@
 planejamento/
 00_COORDENACAO/
 
-# Materiais escola (imagens pesadas, já commitadas)
-# Não ignorar para manter histórico
+# Materiais brutos escola (PDFs/PPTX/fotos — ficam locais, nao no GitHub publico)
+04_CIENCIAS/*.pdf
+04_CIENCIAS/*.pptx
+04_CIENCIAS/*.jpeg
+04_CIENCIAS/*.jpg
+04_CIENCIAS/*.png
 
 # Assets pesados (audio/video NotebookLM — nao deployar via GitHub Pages)
 03_HISTORIA/assets/
