@@ -1,52 +1,103 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mapa Mental — Ciências Y2</title>
+<title>Science Mind Map — Y2</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="base.css">
 <style>
-.mm-tabs{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
-.mm-tab{padding:10px 20px;border-radius:20px;font-size:13px;font-weight:800;cursor:pointer;border:2px solid transparent;transition:all .2s;background:rgba(255,255,255,.05);color:rgba(255,255,255,.5);}
-.mm-tab.active{background:rgba(167,139,250,.18);border-color:rgba(167,139,250,.5);color:#c4b5fd;}
+/* TABS */
+.mm-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.mm-tab{padding:12px 18px;border-radius:20px;font-size:13px;font-weight:800;cursor:pointer;
+  border:2px solid rgba(255,255,255,.1);transition:all .2s;background:rgba(255,255,255,.04);
+  color:rgba(255,255,255,.45);-webkit-tap-highlight-color:transparent;}
+.mm-tab.active{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.15);color:#c4b5fd;}
 
-.mm-root{font-size:calc(18px * var(--fs));font-weight:900;text-align:center;padding:14px 24px;border-radius:20px;
-  background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;display:inline-block;margin:0 auto 28px;
-  box-shadow:0 0 28px rgba(167,139,250,.4);}
-.mm-center{text-align:center;margin-bottom:28px;}
+/* ROOT LABEL */
+.mm-root-label{text-align:center;margin-bottom:20px;}
+.mm-root-pill{display:inline-block;padding:12px 28px;border-radius:20px;font-size:calc(15px * var(--fs));
+  font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;
+  box-shadow:0 0 24px rgba(167,139,250,.35);}
 
-.mm-branches{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;}
-.mm-branch{border-radius:18px;padding:16px;flex:1 1 260px;max-width:340px;border:2px solid;}
-.mm-branch-title{font-size:calc(15px * var(--fs));font-weight:900;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid;}
-.mm-leaf{margin:6px 0 6px 12px;padding:8px 12px;border-radius:12px;font-size:calc(13px * var(--fs));font-weight:700;line-height:1.4;}
-.mm-leaf-title{font-size:calc(13px * var(--fs));font-weight:900;color:#fff;margin:10px 0 4px 8px;}
-.mm-sub{margin:3px 0 3px 20px;padding:5px 10px;border-radius:8px;font-size:calc(11px * var(--fs));font-weight:700;opacity:.85;}
+/* BRANCH (level-2 collapsible) */
+.mm-branch{border-radius:18px;border:2px solid;margin-bottom:12px;overflow:hidden;}
+.mm-branch-hd{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;min-height:52px;}
+.mm-branch-hd:active{opacity:.8;}
+.mm-branch-icon{font-size:22px;flex-shrink:0;}
+.mm-branch-text{flex:1;}
+.mm-branch-en{font-size:calc(15px * var(--fs));font-weight:900;color:#fff;line-height:1.2;}
+.mm-branch-pt{font-size:calc(11px * var(--fs));font-weight:700;opacity:.45;margin-top:2px;}
+.mm-branch-arrow{font-size:12px;color:rgba(255,255,255,.35);transition:transform .25s;flex-shrink:0;}
+.mm-branch.open .mm-branch-arrow{transform:rotate(90deg);}
+.mm-branch-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.mm-branch.open .mm-branch-body{max-height:2000px;}
+.mm-branch-inner{padding:4px 12px 12px;}
 
-/* Branch colors */
-.bc-1{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.3);}
-.bc-1 .mm-branch-title{color:#34d399;border-color:rgba(52,211,153,.2);}
-.bc-1 .mm-leaf{background:rgba(52,211,153,.1);color:#a7f3d0;}
-.bc-1 .mm-sub{background:rgba(52,211,153,.06);color:#6ee7b7;}
+/* LEAF (level-3 collapsible) */
+.mm-leaf{border-radius:12px;margin-bottom:8px;overflow:hidden;}
+.mm-leaf-hd{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;min-height:44px;}
+.mm-leaf-hd:active{opacity:.8;}
+.mm-leaf-icon{font-size:18px;flex-shrink:0;}
+.mm-leaf-text{flex:1;}
+.mm-leaf-en{font-size:calc(13px * var(--fs));font-weight:900;color:#fff;line-height:1.2;}
+.mm-leaf-pt{font-size:calc(10px * var(--fs));font-weight:700;opacity:.4;margin-top:1px;}
+.mm-leaf-arrow{font-size:10px;color:rgba(255,255,255,.3);transition:transform .2s;flex-shrink:0;}
+.mm-leaf.open .mm-leaf-arrow{transform:rotate(90deg);}
+.mm-leaf-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+.mm-leaf.open .mm-leaf-body{max-height:400px;}
 
-.bc-2{background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.3);}
-.bc-2 .mm-branch-title{color:#60a5fa;border-color:rgba(96,165,250,.2);}
-.bc-2 .mm-leaf{background:rgba(96,165,250,.1);color:#bfdbfe;}
-.bc-2 .mm-sub{background:rgba(96,165,250,.06);color:#93c5fd;}
+/* DETAILS (level-4, always visible when leaf is open) */
+.mm-detail{padding:3px 12px 3px 16px;font-size:calc(12px * var(--fs));font-weight:700;
+  line-height:1.5;display:flex;gap:6px;align-items:baseline;}
+.mm-detail-en{color:#fff;opacity:.9;}
+.mm-detail-pt{font-size:calc(10px * var(--fs));opacity:.45;font-weight:700;}
+.mm-detail-sep{opacity:.25;font-size:10px;}
+.mm-detail-last{padding-bottom:8px;}
 
-.bc-3{background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.3);}
-.bc-3 .mm-branch-title{color:#fb923c;border-color:rgba(251,146,60,.2);}
-.bc-3 .mm-leaf{background:rgba(251,146,60,.1);color:#fed7aa;}
-.bc-3 .mm-sub{background:rgba(251,146,60,.06);color:#fdba74;}
+/* BRANCH COLOR THEMES */
+.bc-green{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.25);}
+.bc-green .mm-branch-hd{background:rgba(52,211,153,.08);}
+.bc-green .mm-branch-pt{color:#34d399;}
+.bc-green .mm-leaf-hd{background:rgba(52,211,153,.08);}
+.bc-green .mm-leaf-pt{color:#6ee7b7;}
+.bc-green .mm-detail{border-left:2px solid rgba(52,211,153,.3);}
 
-.bc-4{background:rgba(244,114,182,.08);border-color:rgba(244,114,182,.3);}
-.bc-4 .mm-branch-title{color:#f472b6;border-color:rgba(244,114,182,.2);}
-.bc-4 .mm-leaf{background:rgba(244,114,182,.1);color:#fbcfe8;}
-.bc-4 .mm-sub{background:rgba(244,114,182,.06);color:#f9a8d4;}
+.bc-blue{background:rgba(96,165,250,.06);border-color:rgba(96,165,250,.25);}
+.bc-blue .mm-branch-hd{background:rgba(96,165,250,.08);}
+.bc-blue .mm-branch-pt{color:#60a5fa;}
+.bc-blue .mm-leaf-hd{background:rgba(96,165,250,.08);}
+.bc-blue .mm-leaf-pt{color:#93c5fd;}
+.bc-blue .mm-detail{border-left:2px solid rgba(96,165,250,.3);}
+
+.bc-orange{background:rgba(251,146,60,.06);border-color:rgba(251,146,60,.25);}
+.bc-orange .mm-branch-hd{background:rgba(251,146,60,.08);}
+.bc-orange .mm-branch-pt{color:#fb923c;}
+.bc-orange .mm-leaf-hd{background:rgba(251,146,60,.08);}
+.bc-orange .mm-leaf-pt{color:#fdba74;}
+.bc-orange .mm-detail{border-left:2px solid rgba(251,146,60,.3);}
+
+.bc-pink{background:rgba(244,114,182,.06);border-color:rgba(244,114,182,.25);}
+.bc-pink .mm-branch-hd{background:rgba(244,114,182,.08);}
+.bc-pink .mm-branch-pt{color:#f472b6;}
+.bc-pink .mm-leaf-hd{background:rgba(244,114,182,.08);}
+.bc-pink .mm-leaf-pt{color:#f9a8d4;}
+.bc-pink .mm-detail{border-left:2px solid rgba(244,114,182,.3);}
+
+.bc-purple{background:rgba(167,139,250,.06);border-color:rgba(167,139,250,.25);}
+.bc-purple .mm-branch-hd{background:rgba(167,139,250,.08);}
+.bc-purple .mm-branch-pt{color:#a78bfa;}
+.bc-purple .mm-leaf-hd{background:rgba(167,139,250,.08);}
+.bc-purple .mm-leaf-pt{color:#c4b5fd;}
+.bc-purple .mm-detail{border-left:2px solid rgba(167,139,250,.3);}
 
 .mm-hidden{display:none;}
-.intro-emoji{font-size:64px;text-align:center;display:block;margin-bottom:16px;
+.intro-emoji{font-size:56px;text-align:center;display:block;margin-bottom:12px;
   filter:drop-shadow(0 0 20px rgba(167,139,250,.5));animation:mfloat 3s ease-in-out infinite;}
+.mm-hint{text-align:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.3);
+  margin-bottom:20px;}
 </style>
 </head>
 <body>
@@ -65,176 +116,597 @@
   </div>
 </div>
 
-<div class="screen active" id="screen-main" style="max-width:820px;">
+<div class="screen active" id="screen-main" style="max-width:600px;">
   <div class="intro-emoji">&#x1F9E0;</div>
-  <div class="intro-title">Mapa Mental — Ci&ecirc;ncias</div>
-  <div class="intro-sub" style="margin-bottom:24px;">Visualize todo o conte&uacute;do organizado</div>
+  <div class="intro-title">Science Mind Map</div>
+  <div class="mm-hint">&#x1F449; Tap a topic to open &bull; Tap again to close</div>
 
   <div class="mm-tabs">
-    <div class="mm-tab active" onclick="showMap(1,this)">&#x1F985; Coberturas &amp; Ciclos de Vida</div>
-    <div class="mm-tab" onclick="showMap(2,this)">&#x1F96C; Alimenta&ccedil;&atilde;o &amp; Fam&iacute;lias</div>
+    <div class="mm-tab active" onclick="showMap(1,this)">&#x1F52C; Body &amp; Life Cycles</div>
+    <div class="mm-tab" onclick="showMap(2,this)">&#x1F96C; Food &amp; Families</div>
   </div>
 
-  <!-- MAP 1: Body Coverings + Life Cycles + Metamorphosis -->
+  <!-- ═══════════════════════════════════════════════════
+       MAP 1: Body Coverings + Life Cycles + Metamorphosis
+       ═══════════════════════════════════════════════════ -->
   <div id="map1">
-    <div class="mm-center">
-      <div class="mm-root">&#x1F52C; Ci&ecirc;ncia: Coberturas e Ciclos de Vida</div>
+    <div class="mm-root-label">
+      <div class="mm-root-pill">&#x1F52C; Body Coverings &amp; Life Cycles</div>
     </div>
-    <div class="mm-branches">
 
-      <div class="mm-branch bc-1">
-        <div class="mm-branch-title">&#x1F9B4; Coberturas Corporais</div>
-
-        <div class="mm-leaf">&#x1F9B1; <strong>Pelo / Cabelo — Fur/Hair</strong></div>
-        <div class="mm-sub">Mam&iacute;feros &bull; Mant&eacute;m o calor</div>
-        <div class="mm-sub">Ex: Le&atilde;o, Panda, Humano, Porco</div>
-
-        <div class="mm-leaf">&#x1FAB6; <strong>Penas — Feathers</strong></div>
-        <div class="mm-sub">Aves &bull; Voo e calor</div>
-        <div class="mm-sub">Ex: Pinguim, Flamingo, Periquito, Corvo</div>
-
-        <div class="mm-leaf">&#x1F422; <strong>Escamas — Scales</strong></div>
-        <div class="mm-sub">R&eacute;pteis e Peixes &bull; Prote&ccedil;&atilde;o r&iacute;gida</div>
-        <div class="mm-sub">Ex: Cobra, Cama le&atilde;o, Lagarto, Tubar&atilde;o</div>
-
-        <div class="mm-leaf">&#x1F438; <strong>Pele Lisa — Smooth/Moist Skin</strong></div>
-        <div class="mm-sub">Anf&iacute;bios e outros &bull; Respira&ccedil;&atilde;o cut&acirc;nea</div>
-        <div class="mm-sub">Ex: Sapo, Salamandra, Golfinho, Minhoca</div>
-
-        <div class="mm-leaf">&#x1F40C; <strong>Concha / Casco — Shell</strong></div>
-        <div class="mm-sub">Prote&ccedil;&atilde;o do corpo mole</div>
-        <div class="mm-sub">Ex: Tartaruga, Caracol, Caranguejo</div>
-
-        <div class="mm-leaf">&#x1F41C; <strong>Exoesqueleto — Exoskeleton</strong></div>
-        <div class="mm-sub">Insetos e Crust&aacute;ceos &bull; Armadura externa</div>
-        <div class="mm-sub">Ex: Formiga, Gafanhoto, Escorpi&atilde;o, Lagosta</div>
+    <!-- BRANCH 1: Animal Body Coverings -->
+    <div class="mm-branch bc-green open" onclick="toggleBranch(this)">
+      <div class="mm-branch-hd">
+        <div class="mm-branch-icon">&#x1F9B4;</div>
+        <div class="mm-branch-text">
+          <div class="mm-branch-en">Animal Body Coverings</div>
+          <div class="mm-branch-pt">Revestimentos do corpo</div>
+        </div>
+        <div class="mm-branch-arrow">&#x25B6;</div>
       </div>
+      <div class="mm-branch-body">
+        <div class="mm-branch-inner">
 
-      <div class="mm-branch bc-2">
-        <div class="mm-branch-title">&#x1F997; Ciclos de Vida — Life Cycles</div>
+          <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F9B1;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Fur / Hair</div>
+                <div class="mm-leaf-pt">Pelo / Cabelo</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Mammals</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Mamíferos</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Keeps the animal warm</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">mantém o calor</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ex: Lion &#x1F981;, Panda &#x1F43C;, Pig &#x1F416;, Human &#x1F9D1;</span></div>
+            </div>
+          </div>
 
-        <div class="mm-leaf">&#x1F98B; <strong>Borboleta — Butterfly</strong></div>
-        <div class="mm-sub">1. Ovo (Egg)</div>
-        <div class="mm-sub">2. Lagarta — Caterpillar</div>
-        <div class="mm-sub">3. Pupa — Chrysalis</div>
-        <div class="mm-sub">4. Borboleta — Butterfly</div>
+          <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1FAB6;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Feathers</div>
+                <div class="mm-leaf-pt">Penas</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Birds only</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">apenas aves</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Help fly and stay warm</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">voar e aquecer</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ex: Penguin &#x1F427;, Flamingo &#x1F9A9;, Parakeet &#x1F99C;, Raven &#x1FAB6;</span></div>
+            </div>
+          </div>
 
-        <div class="mm-leaf">&#x1F438; <strong>Sapo — Frog</strong></div>
-        <div class="mm-sub">1. Ovo (Egg)</div>
-        <div class="mm-sub">2. Girino — Tadpole</div>
-        <div class="mm-sub">3. Sapo jovem — Froglet</div>
-        <div class="mm-sub">4. Sapo — Adult Frog</div>
+          <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F422;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Scales</div>
+                <div class="mm-leaf-pt">Escamas</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Reptiles and fish</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">répteis e peixes</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Hard overlapping protection</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">proteção rígida</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ex: Snake &#x1F40D;, Chameleon &#x1F98E;, Lizard, Shark &#x1F988;</span></div>
+            </div>
+          </div>
 
-        <div class="mm-leaf">&#x1F415; <strong>Cachorro — Dog</strong></div>
-        <div class="mm-sub">Filhote &rarr; Jovem &rarr; Adulto &rarr; Idoso</div>
+          <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F438;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Smooth / Moist Skin</div>
+                <div class="mm-leaf-pt">Pele lisa / úmida</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Amphibians &amp; some others</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">anfíbios e outros</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Breathe through their skin!</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">respiram pela pele</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ex: Frog &#x1F438;, Salamander, Dolphin &#x1F42C;, Earthworm</span></div>
+            </div>
+          </div>
 
-        <div class="mm-leaf">&#x1F9D1; <strong>Humano — Human</strong></div>
-        <div class="mm-sub">Beb&ecirc; &rarr; Crian&ccedil;a &rarr; Adulto &rarr; Idoso</div>
+          <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F40C;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Shell</div>
+                <div class="mm-leaf-pt">Concha / Casco</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Hard outer protection</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">proteção externa dura</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Ex: Turtle &#x1F422;, Snail &#x1F40C;, Crab &#x1F980;</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-pt">A tartaruga carrega a shell em todo lugar!</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F41C;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Exoskeleton</div>
+                <div class="mm-leaf-pt">Exoesqueleto</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Skeleton on the OUTSIDE</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">esqueleto por fora</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Insects and crustaceans</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">insetos e crustáceos</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ex: Scorpion, Lobster, Ant &#x1F41C;, Grasshopper, Dragonfly &#x1F991;</span></div>
+            </div>
+          </div>
+
+        </div>
       </div>
-
-      <div class="mm-branch bc-3">
-        <div class="mm-branch-title">&#x2728; Metamorfose — Metamorphosis</div>
-
-        <div class="mm-leaf">&#x1F4D6; <strong>Defini&ccedil;&atilde;o</strong></div>
-        <div class="mm-sub">Mudan&ccedil;a dram&aacute;tica de forma do corpo ao crescer</div>
-
-        <div class="mm-leaf">&#x2705; <strong>4 Fases</strong></div>
-        <div class="mm-sub">1. Eggs (Ovos)</div>
-        <div class="mm-sub">2. Larva (Lagarta)</div>
-        <div class="mm-sub">3. Pupa (Casulo)</div>
-        <div class="mm-sub">4. Adult (Adulto)</div>
-
-        <div class="mm-leaf">&#x1F98B; <strong>Com Metamorfose</strong></div>
-        <div class="mm-sub">Borboleta, Sapo, Abelha, Formiga</div>
-        <div class="mm-sub">Joaninha, Mosquito, Estrela-do-mar</div>
-
-        <div class="mm-leaf">&#x274C; <strong>Sem Metamorfose</strong></div>
-        <div class="mm-sub">Filhote parece vers&atilde;o menor do adulto</div>
-        <div class="mm-sub">Ex: Cachorro, Humano, Cobra</div>
-      </div>
-
     </div>
-  </div>
 
-  <!-- MAP 2: Food Groups + Animal Families -->
+    <!-- BRANCH 2: Life Cycles -->
+    <div class="mm-branch bc-blue" onclick="toggleBranch(this)">
+      <div class="mm-branch-hd">
+        <div class="mm-branch-icon">&#x1F997;</div>
+        <div class="mm-branch-text">
+          <div class="mm-branch-en">Life Cycles</div>
+          <div class="mm-branch-pt">Ciclos de vida</div>
+        </div>
+        <div class="mm-branch-arrow">&#x25B6;</div>
+      </div>
+      <div class="mm-branch-body">
+        <div class="mm-branch-inner">
+
+          <div class="mm-leaf bc-blue" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F98B;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Butterfly</div>
+                <div class="mm-leaf-pt">Borboleta</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">1. Eggs</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Ovos</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">2. Caterpillar (Larva)</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Lagarta</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">3. Pupa / Chrysalis</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Casulo</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">4. Butterfly &#x1F98B;</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Borboleta adulta</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-blue" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F438;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Frog</div>
+                <div class="mm-leaf-pt">Sapo</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">1. Eggs</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Ovos</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">2. Tadpole</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Girino (vive na água)</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">3. Froglet</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Sapo jovem</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">4. Adult Frog &#x1F438;</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Sapo adulto</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-blue" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F40D;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Snake</div>
+                <div class="mm-leaf-pt">Cobra</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">1. Egg</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Ovo</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">2. Young snake</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Cobra jovem</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">3. Adult snake</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Cobra adulta</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">4. Death</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Morte (fim do ciclo)</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-blue" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F415;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Dog</div>
+                <div class="mm-leaf-pt">Cachorro</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Puppy &#x2192; Young dog &#x2192; Adult &#x2192; Old dog</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-pt">Filhote → Jovem → Adulto → Idoso</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-blue" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F9D1;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Human</div>
+                <div class="mm-leaf-pt">Humano</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Baby &#x2192; Child &#x2192; Adult &#x2192; Elderly</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-pt">Bebê → Criança → Adulto → Idoso</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- BRANCH 3: Metamorphosis -->
+    <div class="mm-branch bc-purple" onclick="toggleBranch(this)">
+      <div class="mm-branch-hd">
+        <div class="mm-branch-icon">&#x2728;</div>
+        <div class="mm-branch-text">
+          <div class="mm-branch-en">Metamorphosis</div>
+          <div class="mm-branch-pt">Metamorfose</div>
+        </div>
+        <div class="mm-branch-arrow">&#x25B6;</div>
+      </div>
+      <div class="mm-branch-body">
+        <div class="mm-branch-inner">
+
+          <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F4D6;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">What is it?</div>
+                <div class="mm-leaf-pt">O que é?</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">When an animal changes its body form A LOT as it grows</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-pt">quando um animal muda muito de forma enquanto cresce</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F4CC;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">4 Stages</div>
+                <div class="mm-leaf-pt">4 Fases</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">1. Eggs</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Ovos</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">2. Larva</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Larva / Lagarta</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">3. Pupa</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Pupa / Casulo</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">4. Adult</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Adulto</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x2705;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">WITH Metamorphosis</div>
+                <div class="mm-leaf-pt">COM metamorfose</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Butterfly &#x1F98B;, Frog &#x1F438;, Bee &#x1F41D;, Ant &#x1F41C;</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ladybug &#x1F41E;, Mosquito, Starfish, Newt</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x274C;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">WITHOUT Metamorphosis</div>
+                <div class="mm-leaf-pt">SEM metamorfose</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Baby looks like a small version of the adult</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ex: Dog &#x1F415;, Human &#x1F9D1;, Snake &#x1F40D;</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end map1 -->
+
+  <!-- ═══════════════════════════════════════════════════
+       MAP 2: Food Groups + Animal Families
+       ═══════════════════════════════════════════════════ -->
   <div id="map2" class="mm-hidden">
-    <div class="mm-center">
-      <div class="mm-root">&#x1F96C; Ci&ecirc;ncias: Alimenta&ccedil;&atilde;o &amp; Fam&iacute;lias</div>
+    <div class="mm-root-label">
+      <div class="mm-root-pill">&#x1F96C; Food Groups &amp; Animal Families</div>
     </div>
-    <div class="mm-branches">
 
-      <div class="mm-branch bc-1">
-        <div class="mm-branch-title">&#x1F37D;&#xFE0F; O que os Animais Comem</div>
-
-        <div class="mm-leaf">&#x1F331; <strong>Herb&iacute;voro — Herbivore</strong></div>
-        <div class="mm-sub">Come APENAS plantas</div>
-        <div class="mm-sub">Dentes planos, est&ocirc;mago forte</div>
-        <div class="mm-sub">Ex: Ovelha, Zebra, Coelho, Vaca, Girafa, Cervo</div>
-
-        <div class="mm-leaf">&#x1F969; <strong>Carn&iacute;voro — Carnivore</strong></div>
-        <div class="mm-sub">Come APENAS carne</div>
-        <div class="mm-sub">Dentes afiados e garras</div>
-        <div class="mm-sub">Ex: Le&atilde;o, Lobo, Tigre, Tubar&atilde;o</div>
-
-        <div class="mm-leaf">&#x1F37F; <strong>On&iacute;voro — Omnivore</strong></div>
-        <div class="mm-sub">Come plantas E carne</div>
-        <div class="mm-sub">Ex: Humanos, Porco, Urso, Corvo, Gamb&aacute;</div>
+    <!-- BRANCH 1: What Animals Eat -->
+    <div class="mm-branch bc-orange open" onclick="toggleBranch(this)">
+      <div class="mm-branch-hd">
+        <div class="mm-branch-icon">&#x1F37D;&#xFE0F;</div>
+        <div class="mm-branch-text">
+          <div class="mm-branch-en">What Animals Eat</div>
+          <div class="mm-branch-pt">O que os animais comem</div>
+        </div>
+        <div class="mm-branch-arrow">&#x25B6;</div>
       </div>
+      <div class="mm-branch-body">
+        <div class="mm-branch-inner">
 
-      <div class="mm-branch bc-2">
-        <div class="mm-branch-title">&#x1F4CA; Pir&acirc;mide Alimentar</div>
+          <div class="mm-leaf bc-orange" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F331;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Herbivore</div>
+                <div class="mm-leaf-pt">Herbívoro</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Eats ONLY plants, grass, leaves, fruits</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Strong flat teeth for chewing plants</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">dentes planos, estômago forte</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ex: Sheep &#x1F411;, Zebra &#x1F993;, Rabbit &#x1F430;, Turtle &#x1F422;</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">do material da escola</span></div>
+            </div>
+          </div>
 
-        <div class="mm-leaf">&#x1F35E; <strong>Base — Gr&atilde;os (Carboidratos)</strong></div>
-        <div class="mm-sub">P&atilde;o, Cereal, Arroz, Macarr&atilde;o &bull; MAIOR quantidade</div>
+          <div class="mm-leaf bc-orange" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F969;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Carnivore</div>
+                <div class="mm-leaf-pt">Carnívoro</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Eats ONLY meat (other animals)</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Sharp teeth and claws for hunting</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">dentes afiados e garras</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ex: Lion &#x1F981;, Bear &#x1F43B;, Wolf &#x1F43A;, Red Panda &#x1F43C;</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">do material da escola</span></div>
+            </div>
+          </div>
 
-        <div class="mm-leaf">&#x1F955; <strong>2&ordm; N&iacute;vel — Vegetais + Frutas</strong></div>
-        <div class="mm-sub">Comer muito tamb&eacute;m!</div>
+          <div class="mm-leaf bc-orange" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F37F;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Omnivore</div>
+                <div class="mm-leaf-pt">Onívoro</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Eats BOTH plants AND meat</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Can eat a wide variety of foods</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ex: Opossum, Crow &#x1F426;, Pig &#x1F416;, Humans &#x1F9D1;</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">do material da escola</span></div>
+            </div>
+          </div>
 
-        <div class="mm-leaf">&#x1F969; <strong>3&ordm; N&iacute;vel — Latic&iacute;nios + Prote&iacute;nas</strong></div>
-        <div class="mm-sub">Leite, Queijo, Carne, Peixe, Ovos, Feij&atilde;o</div>
-
-        <div class="mm-leaf">&#x1F36C; <strong>Topo — Gorduras e Doces</strong></div>
-        <div class="mm-sub">Comer POUCO!</div>
-
-        <div class="mm-leaf">&#x1F4A7; <strong>Essencial — &Aacute;gua</strong></div>
-        <div class="mm-sub">8 copos por dia!</div>
+        </div>
       </div>
-
-      <div class="mm-branch bc-3">
-        <div class="mm-branch-title">&#x1F434; Fam&iacute;lias de Animais</div>
-
-        <div class="mm-leaf">&#x1F434; <strong>Cavalo — Horse</strong></div>
-        <div class="mm-sub">Pai: Stallion &bull; M&atilde;e: Mare &bull; Filhote: Foal</div>
-
-        <div class="mm-leaf">&#x1F404; <strong>Gado — Cattle</strong></div>
-        <div class="mm-sub">Pai: Bull &bull; M&atilde;e: Cow &bull; Filhote: Calf</div>
-
-        <div class="mm-leaf">&#x1F981; <strong>Le&atilde;o — Lion</strong></div>
-        <div class="mm-sub">Pai: Lion &bull; M&atilde;e: Lioness &bull; Filhote: Cub</div>
-
-        <div class="mm-leaf">&#x1F413; <strong>Galinha — Chicken</strong></div>
-        <div class="mm-sub">Pai: Rooster &bull; M&atilde;e: Hen &bull; Filhote: Chick</div>
-
-        <div class="mm-leaf">&#x1F42F; <strong>Tigre — Tiger</strong></div>
-        <div class="mm-sub">Pai: Tiger &bull; M&atilde;e: Tigress &bull; Filhote: Cub</div>
-
-        <div class="mm-leaf">&#x1F986; <strong>Pato — Duck</strong></div>
-        <div class="mm-sub">Pai: Drake &bull; M&atilde;e: Duck &bull; Filhote: Duckling</div>
-      </div>
-
     </div>
-  </div>
 
-</div>
+    <!-- BRANCH 2: Food Pyramid -->
+    <div class="mm-branch bc-green" onclick="toggleBranch(this)">
+      <div class="mm-branch-hd">
+        <div class="mm-branch-icon">&#x1F4CA;</div>
+        <div class="mm-branch-text">
+          <div class="mm-branch-en">Food Pyramid</div>
+          <div class="mm-branch-pt">Pirâmide alimentar</div>
+        </div>
+        <div class="mm-branch-arrow">&#x25B6;</div>
+      </div>
+      <div class="mm-branch-body">
+        <div class="mm-branch-inner">
+
+          <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F35E;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Base — Grains (eat the MOST)</div>
+                <div class="mm-leaf-pt">Base — Grãos (comer mais)</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Bread, Cereal, Rice, Pasta — give us energy!</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F955;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">2nd — Vegetables + Fruits</div>
+                <div class="mm-leaf-pt">2º — Vegetais + Frutas</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Lots of vitamins! Eat plenty every day.</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F969;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">3rd — Dairy + Protein</div>
+                <div class="mm-leaf-pt">3º — Laticínios + Proteínas</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Milk, Cheese, Yogurt + Meat, Fish, Eggs, Beans</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F36C;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Top — Fats &amp; Sweets (eat the LEAST)</div>
+                <div class="mm-leaf-pt">Topo — Gorduras e doces (pouco)</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Only a little! + Water &#x1F4A7; — 8 glasses a day!</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- BRANCH 3: Animal Families -->
+    <div class="mm-branch bc-pink" onclick="toggleBranch(this)">
+      <div class="mm-branch-hd">
+        <div class="mm-branch-icon">&#x1F434;</div>
+        <div class="mm-branch-text">
+          <div class="mm-branch-en">Animal Families</div>
+          <div class="mm-branch-pt">Famílias de animais</div>
+        </div>
+        <div class="mm-branch-arrow">&#x25B6;</div>
+      </div>
+      <div class="mm-branch-body">
+        <div class="mm-branch-inner">
+
+          <div class="mm-leaf bc-pink" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F434;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Horse</div>
+                <div class="mm-leaf-pt">Cavalo</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Dad: Stallion</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Garanhão</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Mom: Mare</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Égua</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Baby: Foal</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Potro</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-pink" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F404;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Cattle (Cow)</div>
+                <div class="mm-leaf-pt">Gado / Vaca</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Dad: Bull</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Touro</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Mom: Cow</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Vaca</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Baby: Calf</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Bezerro</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-pink" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F981;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Lion</div>
+                <div class="mm-leaf-pt">Leão</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Dad: Lion</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Leão</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Mom: Lioness</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Leoa</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Baby: Cub</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Filhote</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-pink" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F413;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Chicken</div>
+                <div class="mm-leaf-pt">Galinha</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Dad: Rooster</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Galo</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Mom: Hen</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Galinha</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Baby: Chick &#x1F425;</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Pintinho</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-pink" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F42F;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Tiger</div>
+                <div class="mm-leaf-pt">Tigre</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Dad: Tiger</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Tigre</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Mom: Tigress</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Tigresa</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Baby: Cub</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Filhote</span></div>
+            </div>
+          </div>
+
+          <div class="mm-leaf bc-pink" onclick="toggleLeaf(event,this)">
+            <div class="mm-leaf-hd">
+              <div class="mm-leaf-icon">&#x1F986;</div>
+              <div class="mm-leaf-text">
+                <div class="mm-leaf-en">Duck</div>
+                <div class="mm-leaf-pt">Pato</div>
+              </div>
+              <div class="mm-leaf-arrow">&#x25B6;</div>
+            </div>
+            <div class="mm-leaf-body">
+              <div class="mm-detail"><span class="mm-detail-en">Dad: Drake</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Pato macho</span></div>
+              <div class="mm-detail"><span class="mm-detail-en">Mom: Duck</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Pata</span></div>
+              <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Baby: Duckling &#x1F986;</span><span class="mm-detail-sep">·</span><span class="mm-detail-pt">Patinho</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end map2 -->
+
+</div><!-- end screen-main -->
 
 <script src="base.js"></script>
 <script>
+function toggleBranch(el) {
+  el.classList.toggle('open');
+}
+
+function toggleLeaf(e, el) {
+  e.stopPropagation();
+  el.classList.toggle('open');
+}
+
 function showMap(n, tab) {
   document.getElementById('map1').classList.toggle('mm-hidden', n !== 1);
   document.getElementById('map2').classList.toggle('mm-hidden', n !== 2);
   document.querySelectorAll('.mm-tab').forEach(function(t){ t.classList.remove('active'); });
   tab.classList.add('active');
 }
+
 initApp();
 </script>
 </body>
