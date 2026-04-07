@@ -11,6 +11,11 @@ planejamento/
 04_CIENCIAS/*.jpeg
 04_CIENCIAS/*.jpg
 04_CIENCIAS/*.png
+05_GEOGRAFIA/*.pdf
+05_GEOGRAFIA/*.pptx
+05_GEOGRAFIA/*.jpeg
+05_GEOGRAFIA/*.jpg
+05_GEOGRAFIA/*.png
 
 # Assets pesados (audio/video NotebookLM — nao deployar via GitHub Pages)
 03_HISTORIA/assets/
