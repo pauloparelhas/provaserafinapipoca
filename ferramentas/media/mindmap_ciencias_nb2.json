@@ -1,0 +1,129 @@
+{
+  "name": "Ciências: Grupos Alimentares e Famílias de Animais",
+  "children": [
+    {
+      "name": "O que os Animais Comem",
+      "children": [
+        {
+          "name": "Herbívoros",
+          "children": [
+            {
+              "name": "Definição: Comem apenas plantas"
+            },
+            {
+              "name": "Características: Dentes planos e estômagos fortes"
+            },
+            {
+              "name": "Exemplos: Ovelha, Zebra, Coelho, Tartaruga, Vaca, Cavalo, Cervo, Girafa"
+            }
+          ]
+        },
+        {
+          "name": "Carnívoros",
+          "children": [
+            {
+              "name": "Definição: Comem carne de outros animais"
+            },
+            {
+              "name": "Características: Dentes afiados e garras"
+            },
+            {
+              "name": "Exemplos: Leão, Lobo, Tigre, Tubarão, Panda Vermelho"
+            }
+          ]
+        },
+        {
+          "name": "Onívoros",
+          "children": [
+            {
+              "name": "Definição: Comem plantas e carne"
+            },
+            {
+              "name": "Exemplos: Humanos, Porco, Corvo, Gambá, Urso"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Alimentação Humana",
+      "children": [
+        {
+          "name": "Pirâmide Alimentar",
+          "children": [
+            {
+              "name": "Base: Grãos (Energia)"
+            },
+            {
+              "name": "2º Nível: Vegetais e Frutas"
+            },
+            {
+              "name": "3º Nível: Laticínios e Proteínas"
+            },
+            {
+              "name": "Topo: Gorduras e Doces (Pouco)"
+            },
+            {
+              "name": "Essencial: Água (8 copos/dia)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Famílias de Animais",
+      "children": [
+        {
+          "name": "Cavalos",
+          "children": [
+            {
+              "name": "Pai: Garanhão (Stallion)"
+            },
+            {
+              "name": "Mãe: Égua (Mare)"
+            },
+            {
+              "name": "Bebê: Potro (Foal)"
+            }
+          ]
+        },
+        {
+          "name": "Gado",
+          "children": [
+            {
+              "name": "Pai: Touro (Bull)"
+            },
+            {
+              "name": "Mãe: Vaca (Cow)"
+            },
+            {
+              "name": "Bebê: Bezerro (Calf)"
+            }
+          ]
+        },
+        {
+          "name": "Grandes Felinos",
+          "children": [
+            {
+              "name": "Leão: Leão, Leoa, Filhote (Cub)"
+            },
+            {
+              "name": "Tigre: Tigre, Tigresa, Filhote (Cub)"
+            }
+          ]
+        },
+        {
+          "name": "Aves",
+          "children": [
+            {
+              "name": "Galinha: Galo, Galinha, Pintinho"
+            },
+            {
+              "name": "Pato: Pato macho (Drake), Pata, Patinho"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

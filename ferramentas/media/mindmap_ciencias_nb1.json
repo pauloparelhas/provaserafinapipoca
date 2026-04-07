@@ -1,0 +1,208 @@
+{
+  "name": "Ciência: Coberturas Corporais e Ciclos de Vida",
+  "children": [
+    {
+      "name": "Coberturas Corporais",
+      "children": [
+        {
+          "name": "Pelo / Cabelo",
+          "children": [
+            {
+              "name": "Mamíferos"
+            },
+            {
+              "name": "Mantém o calor"
+            },
+            {
+              "name": "Ex: Leão, Panda, Humano"
+            }
+          ]
+        },
+        {
+          "name": "Penas",
+          "children": [
+            {
+              "name": "Aves"
+            },
+            {
+              "name": "Voo e calor"
+            },
+            {
+              "name": "Ex: Pinguim, Flamengo, Arara"
+            }
+          ]
+        },
+        {
+          "name": "Escamas",
+          "children": [
+            {
+              "name": "Répteis e Peixes"
+            },
+            {
+              "name": "Proteção rígida"
+            },
+            {
+              "name": "Ex: Cobra, Lagarto, Tubarão"
+            }
+          ]
+        },
+        {
+          "name": "Pele Lisa / Úmida",
+          "children": [
+            {
+              "name": "Anfíbios e outros"
+            },
+            {
+              "name": "Respiração cutânea"
+            },
+            {
+              "name": "Ex: Sapo, Golfinho, Minhoca"
+            }
+          ]
+        },
+        {
+          "name": "Concha / Casco",
+          "children": [
+            {
+              "name": "Proteção de corpo mole"
+            },
+            {
+              "name": "Ex: Tartaruga, Caracol, Caranguejo"
+            }
+          ]
+        },
+        {
+          "name": "Exoesqueleto",
+          "children": [
+            {
+              "name": "Esqueleto externo"
+            },
+            {
+              "name": "Insetos e Crustáceos"
+            },
+            {
+              "name": "Ex: Escorpião, Formiga, Lagosta"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ciclos de Vida",
+      "children": [
+        {
+          "name": "Borboleta",
+          "children": [
+            {
+              "name": "Ovo"
+            },
+            {
+              "name": "Lagarta (Larva)"
+            },
+            {
+              "name": "Pupa (Casulo)"
+            },
+            {
+              "name": "Adulto"
+            }
+          ]
+        },
+        {
+          "name": "Sapo",
+          "children": [
+            {
+              "name": "Ovo"
+            },
+            {
+              "name": "Girino"
+            },
+            {
+              "name": "Cobra-verde (Froglet)"
+            },
+            {
+              "name": "Sapo Adulto"
+            }
+          ]
+        },
+        {
+          "name": "Cachorro",
+          "children": [
+            {
+              "name": "Filhote"
+            },
+            {
+              "name": "Jovem"
+            },
+            {
+              "name": "Adulto"
+            },
+            {
+              "name": "Idoso"
+            }
+          ]
+        },
+        {
+          "name": "Humano",
+          "children": [
+            {
+              "name": "Bebê"
+            },
+            {
+              "name": "Criança"
+            },
+            {
+              "name": "Adulto"
+            },
+            {
+              "name": "Idoso"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Metamorfose",
+      "children": [
+        {
+          "name": "Definição",
+          "children": [
+            {
+              "name": "Mudança dramática de forma"
+            }
+          ]
+        },
+        {
+          "name": "Com Metamorfose",
+          "children": [
+            {
+              "name": "Borboleta"
+            },
+            {
+              "name": "Sapo"
+            },
+            {
+              "name": "Abelha / Joaninha"
+            }
+          ]
+        },
+        {
+          "name": "Sem Metamorfose",
+          "children": [
+            {
+              "name": "Filhote parece o adulto"
+            },
+            {
+              "name": "Cachorro"
+            },
+            {
+              "name": "Humano"
+            },
+            {
+              "name": "Cobra"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
