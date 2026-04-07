@@ -61,6 +61,25 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
 .disc-summary{font-size:12px;font-weight:700;color:rgba(255,255,255,.3);padding:6px 0 2px;display:flex;align-items:center;gap:6px;}
 .disc-summary .dot{width:8px;height:8px;border-radius:50%;background:#34d399;display:inline-block;}
 
+/* COMPACT CARDS (CIE section) */
+.tools-grid-sm{display:grid;grid-template-columns:1fr;gap:7px;margin-bottom:10px;}
+@media(min-width:480px){.tools-grid-sm{grid-template-columns:1fr 1fr;}}
+.tool-card-sm{border-radius:13px;padding:9px 13px;display:flex;align-items:center;gap:11px;text-decoration:none;transition:all .2s;border:1px solid transparent;}
+.tool-card-sm:hover{transform:translateY(-2px);box-shadow:0 5px 18px rgba(0,0,0,.3);}
+.tool-card-sm.ready{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.09);}
+.tool-card-sm.ready:hover{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4);}
+.tool-icon-sm{font-size:20px;flex-shrink:0;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;}
+.tool-name-sm{font-size:13px;font-weight:900;color:#fff;margin-bottom:2px;line-height:1.2;}
+.tool-desc-sm{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);line-height:1.3;}
+.tool-card-hero{border-radius:15px;padding:12px 16px;display:flex;align-items:center;gap:13px;text-decoration:none;transition:all .2s;border:2px solid rgba(167,139,250,.3);background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(244,114,182,.07));margin-bottom:10px;}
+.tool-card-hero:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(167,139,250,.18);border-color:rgba(167,139,250,.5);}
+.cie-sublabel{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(244,114,182,.45);margin:10px 0 7px;}
+.cie-outros-toggle{display:flex;align-items:center;gap:8px;padding:9px 13px;border-radius:13px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);cursor:pointer;font-size:12px;font-weight:800;color:rgba(255,255,255,.4);margin-top:6px;user-select:none;-webkit-tap-highlight-color:transparent;}
+.cie-outros-arrow{font-size:10px;transition:transform .25s;margin-left:auto;}
+.cie-outros-toggle.open .cie-outros-arrow{transform:rotate(90deg);}
+.cie-outros-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.cie-outros-body.open{max-height:1200px;}
+
 /* FOOTER */
 .footer{text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);}
 .footer-logo{font-size:15px;font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
@@ -90,116 +109,119 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
       <div class="disc-date" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.35);color:#f87171;">&#x1F534; 07/04/2026</div>
     </div>
 
-    <!-- MATERIAL DE REVISAO -->
-    <div style="margin-bottom:14px;">
-      <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(244,114,182,.5);margin-bottom:10px;">&#x1F4DA; Revisao para Prova</div>
-      <div class="tools-grid" style="margin-bottom:10px;">
-        <a class="tool-card ready" href="ferramentas/CIE_flashcards.html">
-          <div class="tool-icon" style="background:linear-gradient(135deg,rgba(244,114,182,.15),rgba(251,146,60,.15));">&#x1F0CF;</div>
-          <div class="tool-body">
-            <div class="tool-code">FLASHCARDS</div>
-            <div class="tool-name">Science Cards</div>
-            <div class="tool-desc">45 cards: body coverings, life cycles, metamorphosis, food &amp; families</div>
-          </div>
-          <div class="tool-status status-ok">&#x1F3B4; Play</div>
-        </a>
-        <a class="tool-card ready" href="ferramentas/media/video_ciencias_nb1_en.mp4" target="_blank">
-          <div class="tool-icon" style="background:linear-gradient(135deg,rgba(96,165,250,.15),rgba(52,211,153,.15));">&#x1F3AC;</div>
-          <div class="tool-body">
-            <div class="tool-code">VIDEO 1 &mdash; EN</div>
-            <div class="tool-name">The Animal Kingdom Adventure</div>
-            <div class="tool-desc">Body coverings, life cycles &amp; metamorphosis &mdash; English</div>
-          </div>
-          <div class="tool-status status-ok">&#x25B6;&#xFE0F; Play</div>
-        </a>
-        <a class="tool-card ready" href="ferramentas/media/video_ciencias_nb1_pt.mp4" target="_blank">
-          <div class="tool-icon" style="background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(244,114,182,.15));">&#x1F3AC;</div>
-          <div class="tool-body">
-            <div class="tool-code">VIDEO 1 &mdash; PT</div>
-            <div class="tool-name">A Grande Aventura da Ci&ecirc;ncia Animal!</div>
-            <div class="tool-desc">Revestimentos, ciclo de vida &amp; metamorfose &mdash; Portugu&ecirc;s</div>
-          </div>
-          <div class="tool-status status-ok">&#x25B6;&#xFE0F; Play</div>
-        </a>
-        <a class="tool-card ready" href="ferramentas/media/video_ciencias_nb2_en.mp4" target="_blank">
-          <div class="tool-icon" style="background:linear-gradient(135deg,rgba(251,146,60,.15),rgba(96,165,250,.15));">&#x1F3AC;</div>
-          <div class="tool-body">
-            <div class="tool-code">VIDEO 2 &mdash; EN</div>
-            <div class="tool-name">Science: Food &amp; Families</div>
-            <div class="tool-desc">Food groups, herbivores/carnivores &amp; animal families &mdash; English</div>
-          </div>
-          <div class="tool-status status-ok">&#x25B6;&#xFE0F; Play</div>
-        </a>
-        <a class="tool-card ready" href="ferramentas/media/video_ciencias_nb2_pt.mp4" target="_blank">
-          <div class="tool-icon" style="background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(251,146,60,.15));">&#x1F3AC;</div>
-          <div class="tool-body">
-            <div class="tool-code">VIDEO 2 &mdash; PT</div>
-            <div class="tool-name">A Grande Aventura Animal</div>
-            <div class="tool-desc">Grupos alimentares &amp; fam&iacute;lias de animais &mdash; Portugu&ecirc;s</div>
-          </div>
-          <div class="tool-status status-ok">&#x25B6;&#xFE0F; Play</div>
-        </a>
-        <a class="tool-card ready" href="ferramentas/media/video_ciencias_nb2_pt_extra.mp4" target="_blank">
-          <div class="tool-icon" style="background:linear-gradient(135deg,rgba(244,114,182,.15),rgba(52,211,153,.15));">&#x1F3AC;</div>
-          <div class="tool-body">
-            <div class="tool-code">VIDEO 2 &mdash; PT EXTRA</div>
-            <div class="tool-name">Super Revis&atilde;o de Ci&ecirc;ncias!</div>
-            <div class="tool-desc">Revis&atilde;o completa alimenta&ccedil;&atilde;o &amp; fam&iacute;lias &mdash; Portugu&ecirc;s</div>
-          </div>
-          <div class="tool-status status-ok">&#x25B6;&#xFE0F; Play</div>
-        </a>
+    <!-- 1. MAPA MENTAL -->
+    <a class="tool-card-hero" href="ferramentas/CIE_mindmap.html">
+      <div class="tool-icon-sm" style="font-size:26px;width:44px;height:44px;background:linear-gradient(135deg,rgba(167,139,250,.2),rgba(244,114,182,.2));">&#x1F9E0;</div>
+      <div class="tool-body">
+        <div class="tool-name-sm" style="font-size:15px;">Mapa Mental de Ci&ecirc;ncias</div>
+        <div class="tool-desc-sm">Todo o conte&uacute;do organizado &mdash; clique para expandir cada t&oacute;pico</div>
       </div>
+      <div class="tool-status status-ok" style="flex-shrink:0;">&#x1F5FA;&#xFE0F; Ver</div>
+    </a>
+
+    <!-- 2. APRESENTAÇÕES -->
+    <div class="cie-sublabel">&#x1F4CA; Apresenta&ccedil;&otilde;es</div>
+    <div class="tools-grid-sm">
+      <a class="tool-card-sm ready" href="ferramentas/media/apresentacao_ciencias_nb1.pdf" target="_blank">
+        <div class="tool-icon-sm" style="background:rgba(96,165,250,.12);">&#x1F4CA;</div>
+        <div class="tool-body">
+          <div class="tool-name-sm">Nature Visual Guide</div>
+          <div class="tool-desc-sm">Body coverings, life cycles &amp; metamorphosis</div>
+        </div>
+      </a>
+      <a class="tool-card-sm ready" href="ferramentas/media/apresentacao_ciencias_nb2.pdf" target="_blank">
+        <div class="tool-icon-sm" style="background:rgba(52,211,153,.12);">&#x1F4CA;</div>
+        <div class="tool-body">
+          <div class="tool-name-sm">Animal World Field Journal</div>
+          <div class="tool-desc-sm">Food groups, herbivores/carnivores &amp; animal families</div>
+        </div>
+      </a>
     </div>
 
-    <!-- ATIVIDADES INTERATIVAS -->
-    <div style="padding-top:14px;border-top:1px solid rgba(244,114,182,.12);">
-      <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(244,114,182,.5);margin-bottom:10px;">&#x1F9E0; Atividades &amp; Visualizacao</div>
-      <div class="tools-grid">
-        <a class="tool-card ready" href="ferramentas/media/quiz_ciencias_nb1.html" target="_blank">
-          <div class="tool-icon" style="background:rgba(96,165,250,.1);">&#x2753;</div>
-          <div class="tool-body">
-            <div class="tool-code">QUIZ 1</div>
-            <div class="tool-name">Animais Quiz</div>
-            <div class="tool-desc">Coberturas corporais, ciclos de vida &amp; metamorfose</div>
-          </div>
-          <div class="tool-status status-ok">&#x1F3AE; Jogar</div>
-        </a>
-        <a class="tool-card ready" href="ferramentas/media/quiz_ciencias_nb2.html" target="_blank">
-          <div class="tool-icon" style="background:rgba(251,146,60,.1);">&#x2753;</div>
-          <div class="tool-body">
-            <div class="tool-code">QUIZ 2</div>
-            <div class="tool-name">Ci&ecirc;ncias Quiz</div>
-            <div class="tool-desc">Alimenta&ccedil;&atilde;o &amp; fam&iacute;lias de animais</div>
-          </div>
-          <div class="tool-status status-ok">&#x1F3AE; Jogar</div>
-        </a>
-        <a class="tool-card ready" href="ferramentas/media/flashcards_nlm_nb1.html" target="_blank">
-          <div class="tool-icon" style="background:rgba(52,211,153,.1);">&#x1F4DD;</div>
-          <div class="tool-body">
-            <div class="tool-code">CARDS NLM 1</div>
-            <div class="tool-name">Animais Flashcards</div>
-            <div class="tool-desc">Cards gerados pelo NotebookLM &mdash; coberturas &amp; ciclos</div>
-          </div>
-          <div class="tool-status status-ok">&#x1F3B4; Revisar</div>
-        </a>
-        <a class="tool-card ready" href="ferramentas/media/flashcards_nlm_nb2.html" target="_blank">
-          <div class="tool-icon" style="background:rgba(167,139,250,.1);">&#x1F4DD;</div>
-          <div class="tool-body">
-            <div class="tool-code">CARDS NLM 2</div>
-            <div class="tool-name">Ci&ecirc;ncias Flashcards</div>
-            <div class="tool-desc">Cards gerados pelo NotebookLM &mdash; alimenta&ccedil;&atilde;o &amp; fam&iacute;lias</div>
-          </div>
-          <div class="tool-status status-ok">&#x1F3B4; Revisar</div>
-        </a>
-        <a class="tool-card ready" href="ferramentas/CIE_mindmap.html">
-          <div class="tool-icon" style="background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(244,114,182,.15));">&#x1F9E0;</div>
-          <div class="tool-body">
-            <div class="tool-code">MAPA MENTAL</div>
-            <div class="tool-name">Mapa Mental de Ci&ecirc;ncias</div>
-            <div class="tool-desc">Todo o conte&uacute;do organizado visualmente em 2 mapas</div>
-          </div>
-          <div class="tool-status status-ok">&#x1F5FA;&#xFE0F; Ver</div>
-        </a>
+    <!-- 3. VÍDEOS EM PORTUGUÊS -->
+    <div class="cie-sublabel">&#x1F3AC; V&iacute;deos em Portugu&ecirc;s</div>
+    <div class="tools-grid-sm">
+      <a class="tool-card-sm ready" href="ferramentas/media/video_ciencias_nb1_pt.mp4" target="_blank">
+        <div class="tool-icon-sm" style="background:rgba(167,139,250,.12);">&#x1F3AC;</div>
+        <div class="tool-body">
+          <div class="tool-name-sm">A Grande Aventura da Ci&ecirc;ncia Animal!</div>
+          <div class="tool-desc-sm">Revestimentos, ciclos de vida &amp; metamorfose</div>
+        </div>
+      </a>
+      <a class="tool-card-sm ready" href="ferramentas/media/video_ciencias_nb2_pt.mp4" target="_blank">
+        <div class="tool-icon-sm" style="background:rgba(251,146,60,.12);">&#x1F3AC;</div>
+        <div class="tool-body">
+          <div class="tool-name-sm">A Grande Aventura Animal</div>
+          <div class="tool-desc-sm">Grupos alimentares &amp; fam&iacute;lias de animais</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- 4. OUTROS MATERIAIS (colapsável) -->
+    <div class="cie-outros-toggle" onclick="toggleOutros(this)">
+      &#x1F4E6; Outros materiais &mdash; flashcards, v&iacute;deos EN, quizzes, cards NLM
+      <span class="cie-outros-arrow">&#x25B6;</span>
+    </div>
+    <div class="cie-outros-body">
+      <div style="padding-top:8px;">
+        <div class="tools-grid-sm">
+          <a class="tool-card-sm ready" href="ferramentas/CIE_flashcards.html">
+            <div class="tool-icon-sm" style="background:rgba(244,114,182,.12);">&#x1F0CF;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Science Cards</div>
+              <div class="tool-desc-sm">45 flashcards: coberturas, ciclos, alimentos, fam&iacute;lias</div>
+            </div>
+          </a>
+          <a class="tool-card-sm ready" href="ferramentas/media/video_ciencias_nb1_en.mp4" target="_blank">
+            <div class="tool-icon-sm" style="background:rgba(96,165,250,.12);">&#x1F3AC;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">The Animal Kingdom Adventure</div>
+              <div class="tool-desc-sm">Body coverings, life cycles &amp; metamorphosis &mdash; EN</div>
+            </div>
+          </a>
+          <a class="tool-card-sm ready" href="ferramentas/media/video_ciencias_nb2_en.mp4" target="_blank">
+            <div class="tool-icon-sm" style="background:rgba(52,211,153,.12);">&#x1F3AC;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Science: Food &amp; Families</div>
+              <div class="tool-desc-sm">Food groups, herbivores/carnivores &amp; families &mdash; EN</div>
+            </div>
+          </a>
+          <a class="tool-card-sm ready" href="ferramentas/media/video_ciencias_nb2_pt_extra.mp4" target="_blank">
+            <div class="tool-icon-sm" style="background:rgba(244,114,182,.12);">&#x1F3AC;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Super Revis&atilde;o de Ci&ecirc;ncias!</div>
+              <div class="tool-desc-sm">Revis&atilde;o completa alimenta&ccedil;&atilde;o &amp; fam&iacute;lias &mdash; PT extra</div>
+            </div>
+          </a>
+          <a class="tool-card-sm ready" href="ferramentas/media/quiz_ciencias_nb1.html" target="_blank">
+            <div class="tool-icon-sm" style="background:rgba(96,165,250,.1);">&#x2753;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Quiz: Animais</div>
+              <div class="tool-desc-sm">Coberturas corporais, ciclos &amp; metamorfose</div>
+            </div>
+          </a>
+          <a class="tool-card-sm ready" href="ferramentas/media/quiz_ciencias_nb2.html" target="_blank">
+            <div class="tool-icon-sm" style="background:rgba(251,146,60,.1);">&#x2753;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Quiz: Ci&ecirc;ncias</div>
+              <div class="tool-desc-sm">Alimenta&ccedil;&atilde;o &amp; fam&iacute;lias de animais</div>
+            </div>
+          </a>
+          <a class="tool-card-sm ready" href="ferramentas/media/flashcards_nlm_nb1.html" target="_blank">
+            <div class="tool-icon-sm" style="background:rgba(52,211,153,.1);">&#x1F4DD;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Flashcards NLM &mdash; Animais</div>
+              <div class="tool-desc-sm">Cards NotebookLM: coberturas &amp; ciclos</div>
+            </div>
+          </a>
+          <a class="tool-card-sm ready" href="ferramentas/media/flashcards_nlm_nb2.html" target="_blank">
+            <div class="tool-icon-sm" style="background:rgba(167,139,250,.1);">&#x1F4DD;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Flashcards NLM &mdash; Ci&ecirc;ncias</div>
+              <div class="tool-desc-sm">Cards NotebookLM: alimenta&ccedil;&atilde;o &amp; fam&iacute;lias</div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -298,6 +320,11 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
 <script>
 function hardRefresh(){
   window.location.href=window.location.pathname+'?v='+Date.now();
+}
+function toggleOutros(toggle){
+  toggle.classList.toggle('open');
+  var body=toggle.nextElementSibling;
+  body.classList.toggle('open');
 }
 function toggleDisc(header){
   header.classList.toggle('open');
