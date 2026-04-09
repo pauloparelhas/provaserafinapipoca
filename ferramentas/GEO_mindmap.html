@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Mental de Geografia — Y2</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+/* ROOT LABEL */
+.mm-root-label{text-align:center;margin-bottom:20px;}
+.mm-root-pill{display:inline-block;padding:12px 28px;border-radius:20px;font-size:calc(15px * var(--fs));
+  font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;
+  box-shadow:0 0 24px rgba(167,139,250,.35);}
+
+/* BRANCH (level-2 collapsible) */
+.mm-branch{border-radius:18px;border:2px solid;margin-bottom:12px;overflow:hidden;}
+.mm-branch-hd{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;min-height:52px;}
+.mm-branch-hd:active{opacity:.8;}
+.mm-branch-icon{font-size:22px;flex-shrink:0;}
+.mm-branch-text{flex:1;}
+.mm-branch-en{font-size:calc(15px * var(--fs));font-weight:900;color:#fff;line-height:1.2;}
+.mm-branch-pt{font-size:calc(11px * var(--fs));font-weight:700;opacity:.45;margin-top:2px;}
+.mm-branch-arrow{font-size:12px;color:rgba(255,255,255,.35);transition:transform .25s;flex-shrink:0;}
+.mm-branch.open .mm-branch-arrow{transform:rotate(90deg);}
+.mm-branch-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.mm-branch.open .mm-branch-body{max-height:3000px;}
+.mm-branch-inner{padding:4px 12px 12px;}
+
+/* LEAF (level-3 collapsible) */
+.mm-leaf{border-radius:12px;margin-bottom:8px;overflow:hidden;}
+.mm-leaf-hd{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;min-height:44px;}
+.mm-leaf-hd:active{opacity:.8;}
+.mm-leaf-icon{font-size:18px;flex-shrink:0;}
+.mm-leaf-text{flex:1;}
+.mm-leaf-en{font-size:calc(13px * var(--fs));font-weight:900;color:#fff;line-height:1.2;}
+.mm-leaf-pt{font-size:calc(10px * var(--fs));font-weight:700;opacity:.4;margin-top:1px;}
+.mm-leaf-arrow{font-size:10px;color:rgba(255,255,255,.3);transition:transform .2s;flex-shrink:0;}
+.mm-leaf.open .mm-leaf-arrow{transform:rotate(90deg);}
+.mm-leaf-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+.mm-leaf.open .mm-leaf-body{max-height:600px;}
+
+/* DETAILS (level-4) */
+.mm-detail{padding:3px 12px 3px 16px;font-size:calc(12px * var(--fs));font-weight:700;
+  line-height:1.5;display:flex;gap:6px;align-items:baseline;}
+.mm-detail-en{color:#fff;opacity:.9;}
+.mm-detail-sep{opacity:.25;font-size:10px;}
+.mm-detail-last{padding-bottom:8px;}
+
+/* BRANCH COLOR THEMES */
+.bc-blue{background:rgba(96,165,250,.06);border-color:rgba(96,165,250,.25);}
+.bc-blue .mm-branch-hd{background:rgba(96,165,250,.08);}
+.bc-blue .mm-branch-pt{color:#60a5fa;}
+.bc-blue .mm-leaf-hd{background:rgba(96,165,250,.08);}
+.bc-blue .mm-leaf-pt{color:#93c5fd;}
+.bc-blue .mm-detail{border-left:2px solid rgba(96,165,250,.3);}
+
+.bc-orange{background:rgba(251,146,60,.06);border-color:rgba(251,146,60,.25);}
+.bc-orange .mm-branch-hd{background:rgba(251,146,60,.08);}
+.bc-orange .mm-branch-pt{color:#fb923c;}
+.bc-orange .mm-leaf-hd{background:rgba(251,146,60,.08);}
+.bc-orange .mm-leaf-pt{color:#fdba74;}
+.bc-orange .mm-detail{border-left:2px solid rgba(251,146,60,.3);}
+
+.bc-green{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.25);}
+.bc-green .mm-branch-hd{background:rgba(52,211,153,.08);}
+.bc-green .mm-branch-pt{color:#34d399;}
+.bc-green .mm-leaf-hd{background:rgba(52,211,153,.08);}
+.bc-green .mm-leaf-pt{color:#6ee7b7;}
+.bc-green .mm-detail{border-left:2px solid rgba(52,211,153,.3);}
+
+.bc-purple{background:rgba(167,139,250,.06);border-color:rgba(167,139,250,.25);}
+.bc-purple .mm-branch-hd{background:rgba(167,139,250,.08);}
+.bc-purple .mm-branch-pt{color:#a78bfa;}
+.bc-purple .mm-leaf-hd{background:rgba(167,139,250,.08);}
+.bc-purple .mm-leaf-pt{color:#c4b5fd;}
+.bc-purple .mm-detail{border-left:2px solid rgba(167,139,250,.3);}
+
+.intro-emoji{font-size:56px;text-align:center;display:block;margin-bottom:12px;
+  filter:drop-shadow(0 0 20px rgba(167,139,250,.5));animation:mfloat 3s ease-in-out infinite;}
+.mm-hint{text-align:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.3);margin-bottom:20px;}
+
+/* LIGHT THEME OVERRIDES */
+body.theme-light .mm-branch-en{color:#1a1030;}
+body.theme-light .mm-branch-pt{opacity:1;color:#5b4b8a;}
+body.theme-light .mm-branch-arrow{color:rgba(0,0,0,.45);}
+body.theme-light .mm-leaf-en{color:#1a1030;}
+body.theme-light .mm-leaf-pt{opacity:1;color:#6b5a9a;}
+body.theme-light .mm-leaf-arrow{color:rgba(0,0,0,.4);}
+body.theme-light .mm-detail-en{color:#1a1030;opacity:1;}
+body.theme-light .mm-detail-sep{opacity:.4;}
+body.theme-light .mm-hint{color:rgba(0,0,0,.35);}
+body.theme-light .bc-blue{background:rgba(59,130,246,.07);border-color:rgba(59,130,246,.3);}
+body.theme-light .bc-blue .mm-branch-hd{background:rgba(59,130,246,.15);}
+body.theme-light .bc-blue .mm-leaf-hd{background:rgba(59,130,246,.1);}
+body.theme-light .bc-orange{background:rgba(234,88,12,.07);border-color:rgba(234,88,12,.3);}
+body.theme-light .bc-orange .mm-branch-hd{background:rgba(234,88,12,.12);}
+body.theme-light .bc-orange .mm-leaf-hd{background:rgba(234,88,12,.08);}
+body.theme-light .bc-green{background:rgba(16,185,129,.07);border-color:rgba(16,185,129,.3);}
+body.theme-light .bc-green .mm-branch-hd{background:rgba(16,185,129,.15);}
+body.theme-light .bc-green .mm-leaf-hd{background:rgba(16,185,129,.1);}
+body.theme-light .bc-purple{background:rgba(124,58,237,.07);border-color:rgba(124,58,237,.3);}
+body.theme-light .bc-purple .mm-branch-hd{background:rgba(124,58,237,.12);}
+body.theme-light .bc-purple .mm-leaf-hd{background:rgba(124,58,237,.08);}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+
+<div class="navbar">
+  <div class="nav-logo" id="navLogo">Serafina</div>
+  <div class="nav-right">
+    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0;</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A-</button>
+      <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen active" id="screen-main" style="max-width:600px;">
+  <div class="intro-emoji">&#x1F30E;</div>
+  <div class="intro-title">Mapa Mental de Geografia</div>
+  <div class="mm-hint">&#x1F449; Toque num tópico para abrir &bull; Toque de novo para fechar</div>
+
+  <div class="mm-root-label">
+    <div class="mm-root-pill">&#x1F4CD; Pontos de Vista e Atividades do Dia a Dia</div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       BRANCH 1: PERÍODOS DO DIA
+       ══════════════════════════════════════ -->
+  <div class="mm-branch bc-blue open" onclick="toggleBranch(this)">
+    <div class="mm-branch-hd">
+      <div class="mm-branch-icon">&#x1F551;</div>
+      <div class="mm-branch-text">
+        <div class="mm-branch-en">Períodos do Dia</div>
+        <div class="mm-branch-pt">manhã · tarde · noite</div>
+      </div>
+      <div class="mm-branch-arrow">&#x25B6;</div>
+    </div>
+    <div class="mm-branch-body">
+      <div class="mm-branch-inner">
+
+        <div class="mm-leaf bc-blue" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F305;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Manhã</div>
+              <div class="mm-leaf-pt">início do dia, sol nasce</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Acordar</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Tomar café da manhã</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Ir para a escola</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Início do trabalho</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-blue" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x2600;&#xFE0F;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Tarde</div>
+              <div class="mm-leaf-pt">sol alto → pôr do sol</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Almoçar</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Brincar no parque</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Fazer esportes</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Fazer compras</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-blue" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F319;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Noite</div>
+              <div class="mm-leaf-pt">céu escuro, estrelas, luzes da cidade</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Jantar</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Descansar</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Dormir</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-blue" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F3EB;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Espaços Públicos e Horários</div>
+              <div class="mm-leaf-pt">quando cada lugar funciona</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Escola &#x1F3EB; → manhã e tarde</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Lojas &#x1F6CD;&#xFE0F; → manhã até noite</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Hospital &#x1F3E5; → 24 horas (dia e noite)</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       BRANCH 2: ESTAÇÕES DO ANO
+       ══════════════════════════════════════ -->
+  <div class="mm-branch bc-orange" onclick="toggleBranch(this)">
+    <div class="mm-branch-hd">
+      <div class="mm-branch-icon">&#x1F341;</div>
+      <div class="mm-branch-text">
+        <div class="mm-branch-en">Estações do Ano</div>
+        <div class="mm-branch-pt">verão · outono · inverno · primavera</div>
+      </div>
+      <div class="mm-branch-arrow">&#x25B6;</div>
+    </div>
+    <div class="mm-branch-body">
+      <div class="mm-branch-inner">
+
+        <div class="mm-leaf bc-orange" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x2600;&#xFE0F;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Verão</div>
+              <div class="mm-leaf-pt">quente · dias longos</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Temperatura alta &#x1F321;&#xFE0F;</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Praia &#x1F3D6;&#xFE0F;, parque, atividades ao ar livre</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Roupas leves: camiseta, shorts</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Frutas frescas &#x1F349;, bebidas geladas</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Protetor solar &#x1F9F4;</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-orange" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F342;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Outono</div>
+              <div class="mm-leaf-pt">folhas caem · temperatura cai</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Folhas mudam de cor e caem &#x1F341;</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Temperatura começa a cair</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Preparação para o inverno</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-orange" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x2744;&#xFE0F;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Inverno</div>
+              <div class="mm-leaf-pt">frio · noites longas</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Temperatura baixa &#x2744;&#xFE0F;</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Dias curtos, noites longas</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Mais tempo em casa</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Roupas pesadas: casaco, cachecol, luvas</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Comidas quentes: sopas, chás &#x2615;</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-orange" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F338;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Primavera</div>
+              <div class="mm-leaf-pt">flores brotam · animais nascem</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Flores voltam a brotar &#x1F33A;</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Animais nascem &#x1F423;</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Clima agradável, temperatura sobe</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-orange" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F9E5;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Clima Influencia a Vida</div>
+              <div class="mm-leaf-pt">temperatura muda roupa, atividade e comida</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Calor → roupas leves, praia, frutas geladas</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Frio → roupas pesadas, casa, sopas quentes</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       BRANCH 3: POVOS E CULTURAS
+       ══════════════════════════════════════ -->
+  <div class="mm-branch bc-green" onclick="toggleBranch(this)">
+    <div class="mm-branch-hd">
+      <div class="mm-branch-icon">&#x1F30D;</div>
+      <div class="mm-branch-text">
+        <div class="mm-branch-en">Povos e Culturas</div>
+        <div class="mm-branch-pt">Brasil · Austrália · Rússia · transporte</div>
+      </div>
+      <div class="mm-branch-arrow">&#x25B6;</div>
+    </div>
+    <div class="mm-branch-body">
+      <div class="mm-branch-inner">
+
+        <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F4D6;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Povo · Cultura · Tradição</div>
+              <div class="mm-leaf-pt">os três conceitos-chave</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F465; Povo: grupo com história e costumes parecidos</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F3A8; Cultura: roupas, comida, música, idioma</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">&#x1F483; Tradição: o que avós ensinam para filhos e netos</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F1E7;&#x1F1F7;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Povos Indígenas do Brasil</div>
+              <div class="mm-leaf-pt">floresta · rio · canoa · pesca</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F333; Onde: próximos a rios e lagos, em florestas</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F6F6; Transporte: canoa (navegam nos rios)</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F41F; Atividade: pesca durante o dia</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">&#x1F343; Respeitam os ciclos da natureza</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F1E6;&#x1F1FA;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Aborígines da Austrália</div>
+              <div class="mm-leaf-pt">Oceania · caçadores-coletores</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F30F; Onde: Oceania (Austrália)</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F3F9; Caçam animais e coletam frutas da natureza</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F33F; Vivem em contato direto com a natureza</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">&#x1F46A; Muitos grupos — cada um com idioma e cultura próprios</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F1F7;&#x1F1FA;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Povo Nenets da Rússia</div>
+              <div class="mm-leaf-pt">neve · nômades · trenó · renas</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">&#x2744;&#xFE0F; Onde: Sibéria, Rússia — neve e frio intenso</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F98C; Transporte: trenó puxado por renas</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F3D5;&#xFE0F; Nômades: mudam de lugar no outono/inverno</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">&#x1FAD9; Tenda chamada chum — monta e desmonta para se mudar</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F6A2;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Transporte e Comunicação</div>
+              <div class="mm-leaf-pt">conectam lugares e pessoas</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F6F6; Canoa → indígenas navegam nos rios</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F98C; Trenó de renas → Nenets cruzam a neve</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F68C; Ônibus, carro, trem → cidades</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Comunicação conecta pessoas à distância &#x1F4DE;</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       BRANCH 4: ESPAÇO E ORIENTAÇÃO
+       ══════════════════════════════════════ -->
+  <div class="mm-branch bc-purple" onclick="toggleBranch(this)">
+    <div class="mm-branch-hd">
+      <div class="mm-branch-icon">&#x1F9ED;</div>
+      <div class="mm-branch-text">
+        <div class="mm-branch-en">Espaço e Orientação</div>
+        <div class="mm-branch-pt">referências espaciais · ponto de vista</div>
+      </div>
+      <div class="mm-branch-arrow">&#x25B6;</div>
+    </div>
+    <div class="mm-branch-body">
+      <div class="mm-branch-inner">
+
+        <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x2194;&#xFE0F;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Referências Espaciais</div>
+              <div class="mm-leaf-pt">pares de opostos de posição</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Frente ↔ Atrás</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Esquerda ↔ Direita (direita = mão do lápis)</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Acima / Em cima ↔ Abaixo / Embaixo</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Dentro ↔ Fora</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Perto ↔ Longe</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F441;&#xFE0F;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Ponto de Vista</div>
+              <div class="mm-leaf-pt">o que vejo depende de onde estou</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">Cada pessoa vê diferente — depende da sua posição</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Ex: quem está na frente vê o rosto; quem está atrás vê as costas</span></div>
+          </div>
+        </div>
+
+        <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F5FA;&#xFE0F;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Representações de Lugares</div>
+              <div class="mm-leaf-pt">como mostrar como um lugar é</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">&#x270F;&#xFE0F; Desenho — mostra elementos do lugar</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F9E0; Mapa mental — os lugares mais importantes</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">&#x1F3D7;&#xFE0F; Maquete — modelo em 3D</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">&#x1F5FA;&#xFE0F; Mapa — visão de cima (aérea) com símbolos</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div><!-- screen-main -->
+</div><!-- app -->
+
+<script src="base.js"></script>
+<script>
+function toggleBranch(el){
+  el.classList.toggle('open');
+}
+function toggleLeaf(e,el){
+  e.stopPropagation();
+  el.classList.toggle('open');
+}
+initApp();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "cards": [
+    {"front": "Qual período do dia é esse?\n☀️ Acordar, tomar café da manhã, ir para a escola", "back": "Manhã ☀️\n(início do dia, sol nasce)"},
+    {"front": "Qual período do dia é esse?\n🌤️ Almoçar, brincar no parque, fazer esportes", "back": "Tarde 🌤️\n(sol alto, depois pôr do sol)"},
+    {"front": "Qual período do dia é esse?\n🌙 Jantar, descansar, dormir", "back": "Noite 🌙\n(céu escuro, estrelas, luzes da cidade)"},
+    {"front": "A escola funciona durante a manhã e a tarde.\nE o hospital?", "back": "O hospital funciona 24 horas 🏥\n(de dia E de noite)"},
+    {"front": "Por que o dia e a noite organizam a vida das pessoas?", "back": "Porque as atividades mudam conforme o período:\nde manhã: escola e trabalho\nde tarde: lazer e compras\nde noite: descanso e sono"},
+
+    {"front": "Qual estação do ano tem:\n☀️ calor, praia, dias longos, roupas leves?", "back": "Verão ☀️🏖️\n(temperatura alta, frutas frescas, protetor solar)"},
+    {"front": "Qual estação do ano tem:\n❄️ frio, noites longas, roupas pesadas, comidas quentes?", "back": "Inverno ❄️\n(casaco, cachecol, sopas, mais tempo em casa)"},
+    {"front": "Qual estação vem depois do inverno?\nFlores brotam, animais nascem, clima agradável", "back": "Primavera 🌸\n(temperaturas sobem, tudo renova)"},
+    {"front": "Qual estação vem depois do verão?\nFolhas caem, temperatura cai", "back": "Outono 🍂\n(preparação para o inverno)"},
+    {"front": "No verão, que tipo de roupa as pessoas usam?\nE no inverno?", "back": "Verão: roupas leves (camiseta, shorts) ☀️\nInverno: roupas pesadas (casaco, cachecol, luvas) ❄️"},
+    {"front": "No verão, que tipo de comida as pessoas preferem?\nE no inverno?", "back": "Verão: frutas frescas e bebidas geladas 🍉\nInverno: sopas, chás e comidas quentes 🍲"},
+    {"front": "Como o clima influencia a vida das pessoas?", "back": "O clima muda:\n• as roupas que usamos\n• as atividades que fazemos\n• a comida que comemos"},
+
+    {"front": "O que é um POVO?", "back": "Um grupo de pessoas que vivem no mesmo lugar e têm história e costumes parecidos\n\nEx: o povo indígena do Brasil tem a pesca como tradição 🐟"},
+    {"front": "O que é CULTURA?", "back": "Tudo que faz parte do modo de vida de um povo:\nroupas, comida, música, idioma e costumes\n\nEx: a cultura dos Nenets inclui trenós puxados por renas 🦌"},
+    {"front": "O que é TRADIÇÃO?", "back": "Algo que os avós ensinam para os pais e os pais ensinam para os filhos\n\nEx: danças, festas e rituais passados de geração em geração 💃"},
+
+    {"front": "Povo Indígena do Brasil:\n• onde vive?\n• como se locomove?\n• o que faz?", "back": "🌳 Onde: florestas e rios do Brasil\n🛶 Transporte: canoa\n🎣 Atividade: pesca\n\nRespeita os ciclos da natureza"},
+    {"front": "Qual é o meio de transporte dos povos indígenas do Brasil?", "back": "A canoa 🛶\n\nUsam para navegar nos rios e ir pescar"},
+    {"front": "O que os povos indígenas do Brasil fazem para se alimentar?", "back": "Pescam 🎣\n\nPescam durante o dia, nos rios e lagos perto de onde vivem, e respeitam os ciclos de reprodução dos peixes"},
+
+    {"front": "Povo Aborígine da Austrália:\n• onde vive?\n• como se alimenta?\n• como é sua vida?", "back": "🌏 Onde: Oceania (Austrália)\n🏹 Como: caçam animais e coletam frutas da natureza\n🌿 Tipo: caçadores-coletores, perto da natureza"},
+    {"front": "O que são caçadores-coletores?", "back": "Pessoas que caçam animais e coletam frutas e plantas da natureza para se alimentar 🏹🍓\n\nEx: os Aborígines da Austrália"},
+    {"front": "Em qual continente vivem os aborígines?", "back": "Na Oceania 🌏\n(Austrália — do outro lado do mundo)"},
+
+    {"front": "Povo Nenets da Rússia:\n• onde vive?\n• como se locomove?\n• por que se muda de lugar?", "back": "❄️ Onde: Sibéria, Rússia (neve e frio)\n🦌 Transporte: trenó puxado por renas\n🏕️ Por quê: são nômades — seguem as renas em busca de pasto"},
+    {"front": "O que significa ser um povo NÔMADE?", "back": "Nômade é quem muda de lugar para viver 🏕️➡️🏕️\n\nOs Nenets se mudam quando as pastagens congelam no inverno e as renas precisam de novo pasto"},
+    {"front": "Qual é o meio de transporte dos Nenets?", "back": "O trenó puxado por renas 🦌\n\nUsam para se deslocar pela neve e pelo gelo da Sibéria"},
+
+    {"front": "Por que os meios de transporte e comunicação são importantes?", "back": "Porque conectam lugares e pessoas 🌐\n\n• Transporte: leva pessoas de um lugar a outro\n• Comunicação: permite trocar informações à distância"},
+    {"front": "Associe o transporte ao povo:\n• Canoa 🛶\n• Trenó de renas 🦌\n• Ônibus/carro 🚌", "back": "🛶 Canoa → Povos Indígenas do Brasil\n🦌 Trenó de renas → Povo Nenets (Rússia)\n🚌 Ônibus/carro → pessoas das cidades"},
+
+    {"front": "Quais são os cinco pares de referências espaciais?", "back": "1. Frente ↔ Atrás\n2. Esquerda ↔ Direita\n3. Acima ↔ Abaixo\n4. Dentro ↔ Fora\n5. Perto ↔ Longe"},
+    {"front": "O que é ponto de vista em Geografia?", "back": "É o que cada pessoa vê a partir do lugar onde está 👁️\n\nDuas pessoas olhando o mesmo objeto de posições diferentes veem coisas diferentes"},
+    {"front": "O que é um mapa?", "back": "Uma representação de um lugar vista de cima 🗺️\n\nÉ o ponto de vista de quem olha de cima para baixo (visão aérea)"}
+  ]
+}

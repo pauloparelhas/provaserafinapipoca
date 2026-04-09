@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz: Povos, Culturas e Conexões — Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+.qz-progress{text-align:center;font-size:13px;font-weight:800;color:var(--text-dim);margin:10px 0 18px;}
+.qz-question{font-size:calc(16px * var(--fs));font-weight:800;color:var(--text);line-height:1.5;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;
+  padding:20px 18px;margin-bottom:12px;}
+.qz-hint{font-size:12px;font-weight:700;color:var(--text-dim);text-align:center;margin-bottom:14px;font-style:italic;}
+.qz-options{display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
+.qz-opt{border-radius:14px;padding:14px 16px;font-size:calc(14px * var(--fs));font-weight:700;
+  color:var(--text);background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.09);
+  cursor:pointer;transition:all .18s;text-align:left;font-family:inherit;min-height:44px;line-height:1.4;width:100%;}
+.qz-opt:hover:not([disabled]){background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4);}
+.qz-opt.correct{background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.5);color:#34d399;}
+.qz-opt.wrong{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.4);color:#f87171;}
+.qz-opt[disabled]{cursor:default;}
+.qz-rationale{font-size:11px;font-weight:700;color:var(--text-soft);background:rgba(255,255,255,.04);
+  border-radius:8px;padding:8px 12px;margin-top:6px;line-height:1.5;display:none;}
+.qz-rationale.show{display:block;}
+.qz-score-bar{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:8px 0 16px;}
+.qz-dot{width:10px;height:10px;border-radius:50%;background:var(--card-border);}
+.qz-dot.correct{background:#34d399;}
+.qz-dot.wrong{background:#ef4444;}
+.qz-dot.current{background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,.5);}
+.qz-nav{display:flex;gap:10px;justify-content:center;}
+.qz-nav-btn{background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));
+  border:1px solid var(--card-border);border-radius:14px;padding:12px 24px;
+  font-family:inherit;font-size:14px;font-weight:800;color:var(--text);cursor:pointer;
+  transition:all .2s;min-height:44px;}
+.qz-nav-btn:hover{background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.4);transform:translateY(-2px);}
+.qz-nav-btn:disabled{opacity:.3;cursor:default;transform:none;}
+.end-emoji{font-size:64px;text-align:center;display:block;margin:20px 0;
+  filter:drop-shadow(0 0 20px rgba(52,211,153,.5));}
+.end-title{font-size:clamp(20px,4vw,26px);font-weight:900;text-align:center;
+  background:linear-gradient(135deg,#34d399,#60a5fa);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
+.end-score{text-align:center;font-size:18px;font-weight:900;color:var(--text);margin-bottom:18px;}
+.btn-restart{background:linear-gradient(135deg,#34d399,#60a5fa);color:#fff;border:none;
+  font-family:inherit;font-size:16px;font-weight:800;padding:14px 36px;border-radius:50px;
+  cursor:pointer;display:block;margin:0 auto;}
+.intro-emoji{font-size:56px;text-align:center;display:block;margin-bottom:14px;
+  filter:drop-shadow(0 0 20px rgba(167,139,250,.5));animation:mfloat 3s ease-in-out infinite;}
+.screen{max-width:600px;}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+<div class="navbar">
+  <div class="nav-logo" id="navLogo">Serafina</div>
+  <div class="nav-right">
+    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0;</button>
+    <button class="nav-btn" id="btnRestart" onclick="startQuiz()">&#x21BA;</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A-</button>
+      <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </div>
+  </div>
+</div>
+<div class="screen active" id="screen-intro">
+  <div class="intro-emoji">&#x2753;</div>
+  <div class="intro-title">Quiz: Povos, Culturas e Conexões</div>
+  <div class="intro-sub">10 perguntas de múltipla escolha</div>
+  <button class="btn-start" onclick="startQuiz()">&#x1F3AE; Começar!</button>
+</div>
+<div class="screen" id="screen-quiz">
+  <div class="qz-progress" id="qzProgress">1 / 10</div>
+  <div class="qz-score-bar" id="qzDots"></div>
+  <div class="qz-question" id="qzQuestion"></div>
+  <div class="qz-hint" id="qzHint"></div>
+  <div class="qz-options" id="qzOptions"></div>
+  <div class="qz-nav">
+    <button class="qz-nav-btn" id="btnPrev" onclick="prevQ()" disabled>&#x2B05; Anterior</button>
+    <button class="qz-nav-btn" id="btnNext" onclick="nextQ()">Próximo &#x27A1;</button>
+  </div>
+</div>
+<div class="screen" id="screen-end">
+  <div class="end-emoji">&#x1F3C6;</div>
+  <div class="end-title">Quiz completo!</div>
+  <div class="end-score" id="endScore"></div>
+  <button class="btn-restart" onclick="startQuiz()">&#x1F500; Tentar de novo</button>
+  <div style="text-align:center;margin-top:16px;">
+    <button class="nav-btn" onclick="showHomeModal()" style="margin:0 auto;font-size:13px;padding:10px 20px;">&#x1F3E0; Início</button>
+  </div>
+</div>
+</div>
+<script src="../base.js"></script>
+<script>
+var QUESTIONS = [{"question": "Qual termo descreve o conjunto de h\u00e1bitos, roupas, m\u00fasicas, comidas e a l\u00edngua falada por um grupo de pessoas?", "answerOptions": [{"text": "Cultura", "isCorrect": true, "rationale": "A cultura engloba todas as manifesta\u00e7\u00f5es e o modo de vida que caracterizam um grupo social."}, {"text": "Tradi\u00e7\u00e3o", "isCorrect": false, "rationale": "Embora relacionada, a tradi\u00e7\u00e3o refere-se especificamente ao que \u00e9 passado de gera\u00e7\u00e3o em gera\u00e7\u00e3o, e n\u00e3o ao conjunto completo de h\u00e1bitos atuais."}, {"text": "Povo", "isCorrect": false, "rationale": "Um povo \u00e9 o grupo de pessoas em si, enquanto o termo solicitado refere-se ao seu 'jeito de viver'."}, {"text": "Clima", "isCorrect": false, "rationale": "O clima influencia o modo de vida, mas refere-se \u00e0s condi\u00e7\u00f5es atmosf\u00e9ricas de um lugar."}], "hint": "Pense no conceito que define o 'jeito de viver' \u00fanico de cada sociedade."}, {"question": "Como o povo Nenets, que vive na regi\u00e3o gelada da R\u00fassia, costuma se transportar durante suas migra\u00e7\u00f5es?", "answerOptions": [{"text": "Canoas em rios congelados", "isCorrect": false, "rationale": "Canoas s\u00e3o utilizadas por povos em regi\u00f5es de florestas tropicais e rios naveg\u00e1veis, n\u00e3o na neve da Sib\u00e9ria."}, {"text": "Tren\u00f3s puxados por renas", "isCorrect": true, "rationale": "Os Nenets utilizam as renas tanto para transporte quanto para subsist\u00eancia em terrenos cobertos de neve."}, {"text": "Caminh\u00f5es de carga", "isCorrect": false, "rationale": "Embora caminh\u00f5es existam na R\u00fassia, o modo de vida tradicional e n\u00f4made dos Nenets baseia-se na cria\u00e7\u00e3o de animais."}, {"text": "Caminhadas a p\u00e9 sem aux\u00edlio", "isCorrect": false, "rationale": "As longas dist\u00e2ncias e o transporte de pertences e tendas tornam o uso de tren\u00f3s essencial para a sobreviv\u00eancia."}], "hint": "Eles utilizam a for\u00e7a de animais que criam e que est\u00e3o adaptados ao frio intenso."}, {"question": "Por que a canoa \u00e9 considerada o principal meio de transporte para muitas comunidades ind\u00edgenas no Brasil?", "answerOptions": [{"text": "Porque eles vivem em desertos onde n\u00e3o h\u00e1 estradas.", "isCorrect": false, "rationale": "As comunidades ind\u00edgenas brasileiras mencionadas vivem em florestas e pr\u00f3ximas a corpos d'\u00e1gua, n\u00e3o em desertos."}, {"text": "Pela proximidade de suas aldeias com rios e lagos.", "isCorrect": true, "rationale": "A localiza\u00e7\u00e3o geogr\u00e1fica junto \u00e0s \u00e1guas torna a navega\u00e7\u00e3o a forma mais eficiente de deslocamento e pesca."}, {"text": "Porque \u00e9 o \u00fanico meio de transporte que permite o uso de internet.", "isCorrect": false, "rationale": "A canoa \u00e9 um meio de transporte f\u00edsico; a internet est\u00e1 ligada a meios de comunica\u00e7\u00e3o digital."}, {"text": "Por ser mais r\u00e1pida do que o metr\u00f4 nas cidades.", "isCorrect": false, "rationale": "A canoa \u00e9 adequada ao ambiente de rios, mas a compara\u00e7\u00e3o com o metr\u00f4 ignora os contextos geogr\u00e1ficos diferentes."}], "hint": "Considere o ambiente natural onde essas comunidades constroem suas moradias."}, {"question": "O que caracteriza o modo de vida 'n\u00f4made', como o praticado pelo povo Nenets?", "answerOptions": [{"text": "Viver sempre no mesmo lugar por gera\u00e7\u00f5es.", "isCorrect": false, "rationale": "Este seria um modo de vida fixo ou sedent\u00e1rio, oposto ao nomadismo."}, {"text": "Mudar de lugar constantemente em busca de recursos ou pastos.", "isCorrect": true, "rationale": "N\u00f4mades se deslocam conforme as necessidades de seus animais ou a disponibilidade de alimento na natureza."}, {"text": "Utilizar apenas meios de transporte eletr\u00f4nicos.", "isCorrect": false, "rationale": "O nomadismo define a fixa\u00e7\u00e3o espacial, n\u00e3o a tecnologia espec\u00edfica dos transportes."}, {"text": "Pescar apenas durante a noite para evitar o sol.", "isCorrect": false, "rationale": "O nomadismo refere-se \u00e0 mudan\u00e7a de resid\u00eancia, e n\u00e3o especificamente ao hor\u00e1rio de uma atividade econ\u00f4mica."}], "hint": "Pense no que acontece quando os recursos de um lugar acabam para esse povo."}, {"question": "Qual \u00e9 a principal fun\u00e7\u00e3o dos meios de transporte e de comunica\u00e7\u00e3o na vida cotidiana das pessoas?", "answerOptions": [{"text": "Substituir a necessidade de aprender novas l\u00ednguas.", "isCorrect": false, "rationale": "A comunica\u00e7\u00e3o facilita o contato, mas n\u00e3o elimina a import\u00e2ncia da diversidade lingu\u00edstica."}, {"text": "Conectar lugares e pessoas em diferentes aspectos.", "isCorrect": true, "rationale": "Eles s\u00e3o fundamentais para o acesso ao trabalho, escola, informa\u00e7\u00e3o e manuten\u00e7\u00e3o de la\u00e7os sociais."}, {"text": "Garantir que o clima permane\u00e7a igual em todo o mundo.", "isCorrect": false, "rationale": "Os transportes e comunica\u00e7\u00f5es n\u00e3o t\u00eam o poder de controlar ou padronizar os climas globais."}, {"text": "Impedir que as pessoas conhe\u00e7am outras culturas.", "isCorrect": false, "rationale": "Pelo contr\u00e1rio, esses meios facilitam o interc\u00e2mbio e o conhecimento entre culturas distintas."}], "hint": "Considere como as pessoas conseguem trabalhar, estudar ou falar com quem mora longe."}, {"question": "Como os povos abor\u00edgines da Austr\u00e1lia s\u00e3o tradicionalmente classificados em rela\u00e7\u00e3o \u00e0 obten\u00e7\u00e3o de alimentos?", "answerOptions": [{"text": "Grandes agricultores industriais", "isCorrect": false, "rationale": "O material descreve um modo de viver pr\u00f3ximo \u00e0 natureza, n\u00e3o baseado em ind\u00fastria ou agricultura extensiva."}, {"text": "Ca\u00e7adores-coletores", "isCorrect": true, "rationale": "Eles dependem da ca\u00e7a de animais e da coleta de frutos e plantas silvestres para subsist\u00eancia."}, {"text": "Criadores exclusivos de renas", "isCorrect": false, "rationale": "A cria\u00e7\u00e3o de renas \u00e9 uma caracter\u00edstica do povo Nenets da R\u00fassia, n\u00e3o dos abor\u00edgines australianos."}, {"text": "Comerciantes de produtos eletr\u00f4nicos", "isCorrect": false, "rationale": "Sua tradi\u00e7\u00e3o est\u00e1 ligada ao uso direto de recursos naturais ancestrais."}], "hint": "Eles buscam o que a natureza oferece diretamente, sem plantar em grandes fazendas."}, {"question": "Sobre as esta\u00e7\u00f5es do ano no Brasil, o que geralmente acontece durante o inverno em grande parte do pa\u00eds?", "answerOptions": [{"text": "O tempo fica muito chuvoso e as noites s\u00e3o curtas.", "isCorrect": false, "rationale": "Em grande parte do Brasil, o inverno \u00e9 caracterizado por tempo seco e noites mais longas."}, {"text": "O tempo \u00e9 mais frio e seco, com noites mais longas.", "isCorrect": true, "rationale": "Nesse per\u00edodo, a redu\u00e7\u00e3o da luminosidade solar torna os dias mais curtos e as noites maiores, al\u00e9m da queda de temperatura."}, {"text": "Ocorre neve em todos os estados brasileiros.", "isCorrect": false, "rationale": "A neve \u00e9 um fen\u00f4meno raro e restrito a \u00e1reas espec\u00edficas da regi\u00e3o sul do pa\u00eds."}, {"text": "As pessoas preferem ir \u00e0 praia por causa do calor intenso.", "isCorrect": false, "rationale": "Ir \u00e0 praia \u00e9 uma atividade t\u00edpica do ver\u00e3o, quando os dias s\u00e3o quentes e longos."}], "hint": "Pense no equil\u00edbrio entre a dura\u00e7\u00e3o da luz do sol e da escurid\u00e3o durante essa esta\u00e7\u00e3o."}, {"question": "O que define uma 'tradi\u00e7\u00e3o' de acordo com os conceitos estudados?", "answerOptions": [{"text": "Algo novo que foi inventado ontem por uma crian\u00e7a.", "isCorrect": false, "rationale": "Tradi\u00e7\u00f5es requerem o passar do tempo e a repeti\u00e7\u00e3o por gera\u00e7\u00f5es para serem consolidadas."}, {"text": "Pr\u00e1ticas passadas de gera\u00e7\u00e3o em gera\u00e7\u00e3o, como festas e dan\u00e7as.", "isCorrect": true, "rationale": "A tradi\u00e7\u00e3o \u00e9 o elo cultural entre av\u00f3s, pais e filhos, preservando a hist\u00f3ria de um grupo."}, {"text": "O uso obrigat\u00f3rio de tren\u00f3s por todas as pessoas do mundo.", "isCorrect": false, "rationale": "O tren\u00f3 \u00e9 uma ferramenta espec\u00edfica de um povo e clima, n\u00e3o uma defini\u00e7\u00e3o geral de tradi\u00e7\u00e3o."}, {"text": "Qualquer atividade realizada apenas durante o per\u00edodo da manh\u00e3.", "isCorrect": false, "rationale": "Tradi\u00e7\u00f5es podem ocorrer em qualquer per\u00edodo do dia ou ano."}], "hint": "Refere-se ao conhecimento e costumes que os mais velhos ensinam aos mais novos."}, {"question": "Por que as atividades de pesca dos povos ind\u00edgenas costumam respeitar os ciclos da natureza?", "answerOptions": [{"text": "Para garantir que os peixes tenham tempo de se reproduzir.", "isCorrect": true, "rationale": "O respeito aos ciclos naturais evita a escassez de recursos e mant\u00e9m o equil\u00edbrio do ecossistema."}, {"text": "Porque \u00e9 proibido pescar quando o sol est\u00e1 brilhando.", "isCorrect": false, "rationale": "A pesca \u00e9 uma atividade tipicamente realizada durante o dia por ser mais segura."}, {"text": "Para que eles possam usar tren\u00f3s nos rios durante o ver\u00e3o.", "isCorrect": false, "rationale": "Tren\u00f3s n\u00e3o s\u00e3o usados em rios no ver\u00e3o, nem fazem parte da cultura ind\u00edgena brasileira."}, {"text": "Porque eles preferem comer apenas frutas no inverno.", "isCorrect": false, "rationale": "A dieta varia, mas a pesca continua sendo uma atividade central, apenas ajustada aos ciclos dos peixes."}], "hint": "Considere a import\u00e2ncia de manter a natureza viva para as futuras gera\u00e7\u00f5es."}, {"question": "Como se chama a tenda tradicional do povo Nenets que pode ser montada e desmontada facilmente?", "answerOptions": [{"text": "Canoa", "isCorrect": false, "rationale": "Canoa \u00e9 um meio de transporte aqu\u00e1tico, n\u00e3o uma moradia."}, {"text": "Chum", "isCorrect": true, "rationale": "O chum \u00e9 uma tenda c\u00f4nica ideal para o estilo de vida n\u00f4made, facilitando a mudan\u00e7a r\u00e1pida de local."}, {"text": "Apartamento", "isCorrect": false, "rationale": "Apartamentos s\u00e3o moradias fixas urbanas, inadequadas para quem precisa se deslocar com rebanhos."}, {"text": "Oca", "isCorrect": false, "rationale": "Oca \u00e9 a denomina\u00e7\u00e3o comum para habita\u00e7\u00f5es de diversos povos ind\u00edgenas brasileiros."}], "hint": "\u00c9 uma estrutura essencial para quem precisa seguir o caminho das renas pela Sib\u00e9ria."}];
+var current=0,answers=[],shuffled=[];
+function startQuiz(){
+  shuffled=shuffle(QUESTIONS.slice());
+  current=0;answers=new Array(shuffled.length).fill(null);
+  showScreen('screen-quiz');renderQ();renderDots();
+}
+function renderQ(){
+  var q=shuffled[current];
+  $('qzProgress').textContent=(current+1)+' / '+shuffled.length;
+  $('qzQuestion').textContent=q.question;
+  $('qzHint').textContent=q.hint?'?? '+q.hint:'';
+  var opts=$('qzOptions');opts.innerHTML='';
+  var answered=answers[current]!==null;
+  q.answerOptions.forEach(function(opt,i){
+    var btn=document.createElement('button');
+    btn.className='qz-opt';btn.textContent=opt.text;
+    if(answered){
+      btn.disabled=true;
+      if(opt.isCorrect)btn.classList.add('correct');
+      else if(i===answers[current])btn.classList.add('wrong');
+      var rat=document.createElement('div');
+      rat.className='qz-rationale show';rat.textContent=opt.rationale;
+      btn.appendChild(rat);
+    }else{btn.onclick=function(){selectAnswer(i);};}
+    opts.appendChild(btn);
+  });
+  $('btnPrev').disabled=current===0;
+  $('btnNext').textContent=current===shuffled.length-1?'Ver resultado ✅':'Próximo ➡️';
+}
+function selectAnswer(i){
+  if(answers[current]!==null)return;
+  answers[current]=i;renderQ();renderDots();
+}
+function renderDots(){
+  var html='';
+  for(var i=0;i<shuffled.length;i++){
+    var cls='qz-dot';
+    if(i===current)cls+=' current';
+    else if(answers[i]!==null)cls+=shuffled[i].answerOptions[answers[i]].isCorrect?' correct':' wrong';
+    html+='<div class="'+cls+'"></div>';
+  }
+  $('qzDots').innerHTML=html;
+}
+function nextQ(){
+  if(current<shuffled.length-1){current++;renderQ();renderDots();}
+  else{
+    var score=answers.filter(function(a,i){return a!==null&&shuffled[i].answerOptions[a].isCorrect;}).length;
+    var pct=Math.round(score/shuffled.length*100);
+    var em=pct>=80?'??':pct>=60?'??':'??';
+    $('endScore').textContent=em+' '+score+' de '+shuffled.length+' corretas ('+pct+'%)';
+    showScreen('screen-end');
+  }
+}
+function prevQ(){if(current>0){current--;renderQ();renderDots();}}
+initApp();
+</script>
+</body>
+</html>
