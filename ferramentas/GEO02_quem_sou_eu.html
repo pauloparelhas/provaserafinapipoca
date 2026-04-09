@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEO-02: Quem Sou Eu? — Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+/* ── RIDDLE CARD ── */
+.riddle-wrap{max-width:480px;margin:0 auto 20px;}
+.riddle-label{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-dim);text-align:center;margin-bottom:8px;}
+.riddle-card{background:linear-gradient(135deg,rgba(96,165,250,.12),rgba(167,139,250,.1));
+  border:2px solid rgba(96,165,250,.3);border-radius:20px;padding:24px 20px;
+  text-align:center;margin-bottom:16px;}
+.riddle-emoji{font-size:48px;display:block;margin-bottom:12px;
+  filter:drop-shadow(0 0 12px rgba(96,165,250,.4));}
+.riddle-text{font-size:calc(15px * var(--fs));font-weight:700;color:var(--text);
+  line-height:1.6;white-space:pre-line;}
+
+/* ── PROGRESS ── */
+.q-progress{text-align:center;font-size:13px;font-weight:800;color:var(--text-dim);
+  margin:10px 0 14px;}
+.q-dots{display:flex;gap:6px;justify-content:center;margin-bottom:16px;}
+.q-dot{width:10px;height:10px;border-radius:50%;background:var(--card-border);}
+.q-dot.done{background:#34d399;}
+.q-dot.current{background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,.5);}
+.q-dot.wrong{background:#ef4444;}
+
+/* ── OPTIONS ── */
+.options{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.opt-btn{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:16px;
+  border:2px solid rgba(255,255,255,.1);
+  background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+  cursor:pointer;font-family:inherit;font-size:calc(14px * var(--fs));font-weight:800;
+  color:var(--text);text-align:left;transition:all .18s;min-height:54px;
+  -webkit-tap-highlight-color:transparent;}
+.opt-btn:hover{border-color:rgba(96,165,250,.45);background:rgba(96,165,250,.08);
+  transform:translateY(-2px);}
+.opt-btn .opt-emoji{font-size:24px;flex-shrink:0;}
+.opt-btn.correct{border-color:#34d399;background:rgba(52,211,153,.12);
+  color:#34d399;cursor:default;}
+.opt-btn.wrong{border-color:#ef4444;background:rgba(239,68,68,.1);
+  color:#f87171;cursor:default;}
+.opt-btn.disabled{cursor:default;opacity:.6;}
+
+/* ── FEEDBACK ── */
+.fb-box{border-radius:14px;padding:12px 16px;margin-bottom:14px;
+  font-size:calc(13px * var(--fs));font-weight:700;line-height:1.5;
+  display:none;}
+.fb-box.show{display:block;}
+.fb-box.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.3);
+  color:var(--text);}
+.fb-box.wrong{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);
+  color:var(--text);}
+.fb-title{font-size:16px;font-weight:900;margin-bottom:4px;}
+.fb-title.ok{color:#34d399;}
+.fb-title.no{color:#f87171;}
+
+/* ── SCORE / NEXT ── */
+.btn-next-q{background:linear-gradient(135deg,#34d399,#60a5fa);color:#fff;border:none;
+  font-family:inherit;font-size:15px;font-weight:800;padding:14px 36px;
+  border-radius:50px;cursor:pointer;display:block;margin:0 auto 10px;min-height:44px;
+  transition:all .2s;}
+.btn-next-q:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(52,211,153,.3);}
+
+/* ── END ── */
+.end-emoji{font-size:72px;text-align:center;display:block;margin:16px 0;
+  filter:drop-shadow(0 0 20px rgba(52,211,153,.5));}
+.end-title{font-size:clamp(20px,4vw,28px);font-weight:900;text-align:center;
+  background:linear-gradient(135deg,#34d399,#60a5fa);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
+.end-score{text-align:center;font-size:calc(18px * var(--fs));font-weight:900;
+  color:var(--text);margin-bottom:8px;}
+.end-sub{text-align:center;font-size:14px;font-weight:700;color:var(--text-soft);
+  margin-bottom:24px;line-height:1.6;}
+.btn-restart{background:linear-gradient(135deg,#34d399,#60a5fa);color:#fff;border:none;
+  font-family:inherit;font-size:16px;font-weight:800;padding:14px 36px;
+  border-radius:50px;cursor:pointer;display:block;margin:0 auto;}
+
+/* ── INTRO ── */
+.intro-emoji{font-size:64px;text-align:center;display:block;margin-bottom:16px;
+  filter:drop-shadow(0 0 20px rgba(96,165,250,.5));animation:mfloat 3s ease-in-out infinite;}
+.screen{max-width:540px;}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+
+<div class="navbar">
+  <div class="nav-logo" id="navLogo">Serafina</div>
+  <div class="nav-right">
+    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0;</button>
+    <button class="nav-btn" id="btnRestart" onclick="startGame()">&#x21BA;</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A-</button>
+      <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-emoji">&#x1F914;</div>
+  <div class="intro-title">Quem Sou Eu?</div>
+  <div class="intro-sub">Leia as pistas e descubra qual povo est&aacute; falando!</div>
+  <div style="text-align:center;font-size:13px;font-weight:700;color:var(--text-dim);margin:12px 0 24px;line-height:1.6;">
+    8 enigmas &bull; Ind&iacute;genas &bull; Aborígines &bull; Nenets
+  </div>
+  <button class="btn-start" onclick="startGame()">&#x1F9E9; Come&ccedil;ar!</button>
+</div>
+
+<!-- GAME -->
+<div class="screen" id="screen-game">
+  <div class="q-progress" id="qProgress">1 / 8</div>
+  <div class="q-dots" id="qDots"></div>
+
+  <div class="riddle-wrap">
+    <div class="riddle-label">&#x1F50E; Leia as pistas</div>
+    <div class="riddle-card">
+      <span class="riddle-emoji" id="riddleEmoji"></span>
+      <div class="riddle-text" id="riddleText"></div>
+    </div>
+
+    <div class="options" id="optionsEl"></div>
+
+    <div class="fb-box" id="fbBox">
+      <div class="fb-title" id="fbTitle"></div>
+      <div id="fbDetail"></div>
+    </div>
+
+    <button class="btn-next-q" id="btnNext" style="display:none;" onclick="nextQuestion()">
+      Pr&oacute;xima pista &#x27A1;
+    </button>
+  </div>
+</div>
+
+<!-- END -->
+<div class="screen" id="screen-end">
+  <span class="end-emoji" id="endEmoji">&#x1F389;</span>
+  <div class="end-title" id="endTitle">Muito bem!</div>
+  <div class="end-score" id="endScore"></div>
+  <div class="end-sub" id="endSub"></div>
+  <button class="btn-restart" onclick="startGame()">&#x1F500; Jogar de novo</button>
+  <div style="text-align:center;margin-top:14px;">
+    <button class="nav-btn" onclick="showHomeModal()" style="margin:0 auto;font-size:13px;padding:10px 20px;">
+      &#x1F3E0; In&iacute;cio
+    </button>
+  </div>
+</div>
+
+</div>
+
+<script src="base.js"></script>
+<script>
+/* ═══════════════════════════════════════════════
+   DADOS
+═══════════════════════════════════════════════ */
+var ALL_QUESTIONS = [
+  {
+    emoji: '🛶',
+    riddle: 'Eu uso uma canoa para me locomover.\nVivo perto de rios e lagos, em meio à floresta.\nPesco para me alimentar e respeito os ciclos da natureza.\nQuem sou eu?',
+    answer: 'indigenas',
+    detail: 'Os Povos Indígenas do Brasil vivem perto de rios e usam canoas para pescar. 🌳🛶'
+  },
+  {
+    emoji: '❄️',
+    riddle: 'Eu vivo em uma região com muita neve e gelo.\nNão fico parado em um só lugar — me movo seguindo as renas.\nMinha tenda pode ser montada e desmontada.\nQuem sou eu?',
+    answer: 'nenets',
+    detail: 'O Povo Nenets da Rússia é nômade e vive na Sibéria, seguindo as renas pela neve. ❄️🦌'
+  },
+  {
+    emoji: '🌏',
+    riddle: 'Eu vivo na Austrália, do outro lado do mundo.\nCaço animais e coleto frutas da natureza para me alimentar.\nSou chamado de caçador-coletor.\nQuem sou eu?',
+    answer: 'aborigines',
+    detail: 'Os Aborígines da Austrália vivem na Oceania e são caçadores-coletores. 🌏🏹'
+  },
+  {
+    emoji: '🦌',
+    riddle: 'As renas são tudo para mim: me dão transporte, comida e material para roupas.\nMeu trenó desliza pela neve.\nNo outono, quando os pastos congelam, eu mudo de lugar.\nQuem sou eu?',
+    answer: 'nenets',
+    detail: 'O Povo Nenets usa trenó puxado por renas e migra entre o outono e o inverno. 🦌❄️'
+  },
+  {
+    emoji: '🎣',
+    riddle: 'Minha atividade principal acontece nos rios.\nEu sei quando é a época certa para pescar, respeitando a natureza.\nMinhas danças e rituais são passados de geração em geração.\nQuem sou eu?',
+    answer: 'indigenas',
+    detail: 'Os Povos Indígenas do Brasil pescam nos rios e têm tradições ricas passadas entre gerações. 🎣🌳'
+  },
+  {
+    emoji: '🏕️',
+    riddle: 'Eu tenho muitos grupos diferentes, cada um com seu próprio idioma.\nMinhas pinturas em rochas contam histórias antigas.\nVivo no continente Oceania.\nQuem sou eu?',
+    answer: 'aborigines',
+    detail: 'Os Aborígines da Austrália são diversos, com muitos grupos e línguas, e têm arte rupestre. 🪨🌏'
+  },
+  {
+    emoji: '🌳',
+    riddle: 'A floresta e os rios são meu lar.\nMinha canoa é meu meio de transporte.\nVivo num lugar fixo, próximo à água, no Brasil.\nQuem sou eu?',
+    answer: 'indigenas',
+    detail: 'Os Povos Indígenas do Brasil vivem de forma fixa ou semi-fixa perto de rios e florestas. 🌳🛶'
+  },
+  {
+    emoji: '🏹',
+    riddle: 'Não planto nem cultivo — busco meu alimento diretamente na natureza.\nCaço animais e coleto frutas e plantas.\nVivo em contato direto com a terra.\nQuem sou eu?',
+    answer: 'aborigines',
+    detail: 'Os Aborígines da Austrália são caçadores-coletores: vivem da caça e coleta na natureza. 🏹🌿'
+  }
+];
+
+var OPTIONS = [
+  {id:'indigenas', label:'Povos Indígenas do Brasil',    emoji:'🇧🇷'},
+  {id:'aborigines',label:'Aborígines da Austrália',      emoji:'🇦🇺'},
+  {id:'nenets',    label:'Povo Nenets da Rússia',        emoji:'🇷🇺'}
+];
+
+/* ═══════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════ */
+var questions = [];
+var currentQ = 0;
+var answered = false;
+var dotStates = []; // 'pending'|'correct'|'wrong'
+var scoreCorrect = 0;
+
+/* ═══════════════════════════════════════════════
+   GAME
+═══════════════════════════════════════════════ */
+function startGame(){
+  questions = shuffle(ALL_QUESTIONS.slice());
+  currentQ = 0;
+  scoreCorrect = 0;
+  dotStates = questions.map(function(){ return 'pending'; });
+  showScreen('screen-game');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  var q = questions[currentQ];
+  answered = false;
+
+  $('qProgress').textContent = (currentQ+1) + ' / ' + questions.length;
+  $('riddleEmoji').textContent = q.emoji;
+  $('riddleText').textContent = q.riddle;
+
+  // Options (shuffle each time)
+  var opts = shuffle(OPTIONS.slice());
+  var el = $('optionsEl');
+  el.innerHTML = '';
+  opts.forEach(function(opt){
+    var btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.setAttribute('data-id', opt.id);
+    btn.innerHTML = '<span class="opt-emoji">'+opt.emoji+'</span><span>'+opt.label+'</span>';
+    btn.addEventListener('click', function(){ pickAnswer(opt.id); });
+    el.appendChild(btn);
+  });
+
+  // Feedback + next
+  var fb = $('fbBox');
+  fb.className = 'fb-box';
+  fb.style.display = 'none';
+  $('btnNext').style.display = 'none';
+  $('btnNext').textContent = currentQ < questions.length - 1
+    ? 'Próxima pista ➡️'
+    : '🏁 Ver resultado';
+
+  renderDots();
+}
+
+function pickAnswer(chosenId){
+  if(answered) return;
+  answered = true;
+
+  var q = questions[currentQ];
+  var correct = chosenId === q.answer;
+  if(correct) scoreCorrect++;
+
+  dotStates[currentQ] = correct ? 'correct' : 'wrong';
+
+  // Style buttons
+  var btns = $('optionsEl').querySelectorAll('.opt-btn');
+  btns.forEach(function(btn){
+    var id = btn.getAttribute('data-id');
+    if(id === q.answer){
+      btn.classList.add('correct');
+    } else if(id === chosenId && !correct){
+      btn.classList.add('wrong');
+    } else {
+      btn.classList.add('disabled');
+    }
+  });
+
+  // Feedback
+  var fb = $('fbBox');
+  fb.style.display = 'block';
+  if(correct){
+    fb.className = 'fb-box show correct';
+    $('fbTitle').className = 'fb-title ok';
+    $('fbTitle').textContent = '✅ Certo!';
+  } else {
+    fb.className = 'fb-box show wrong';
+    $('fbTitle').className = 'fb-title no';
+    $('fbTitle').textContent = '❌ Quase!';
+  }
+  $('fbDetail').textContent = q.detail;
+
+  $('btnNext').style.display = 'block';
+  renderDots();
+}
+
+function nextQuestion(){
+  currentQ++;
+  if(currentQ >= questions.length){
+    showEndScreen();
+  } else {
+    renderQuestion();
+  }
+}
+
+function renderDots(){
+  var html = '';
+  for(var i=0; i<questions.length; i++){
+    var cls = 'q-dot';
+    if(dotStates[i]==='correct') cls += ' done';
+    else if(dotStates[i]==='wrong') cls += ' wrong';
+    else if(i===currentQ) cls += ' current';
+    html += '<div class="'+cls+'"></div>';
+  }
+  $('qDots').innerHTML = html;
+}
+
+function showEndScreen(){
+  var pct = Math.round(scoreCorrect / questions.length * 100);
+  var emoji = pct === 100 ? '🌟' : pct >= 75 ? '🏆' : pct >= 50 ? '👍' : '💪';
+  var title = pct === 100 ? 'Perfeito!' : pct >= 75 ? 'Muito bem!' : pct >= 50 ? 'Bom trabalho!' : 'Continue praticando!';
+  var sub = pct === 100
+    ? 'Você conhece todos os povos do mundo!\nQuer tentar de novo com as pistas embaralhadas?'
+    : 'Você acertou ' + scoreCorrect + ' de ' + questions.length + ' pistas.\nQuer tentar de novo?';
+
+  $('endEmoji').textContent = emoji;
+  $('endTitle').textContent = title;
+  $('endScore').textContent = scoreCorrect + ' / ' + questions.length + ' (' + pct + '%)';
+  $('endSub').textContent = sub;
+  showScreen('screen-end');
+}
+
+initApp();
+</script>
+</body>
+</html>
