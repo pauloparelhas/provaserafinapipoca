@@ -227,6 +227,64 @@ Antes de implementar, verificar CADA item do banco de dados:
 
 ---
 
+## WORKFLOW NOTEBOOKLM — PROTOCOLO DEFINITIVO
+
+**Claude executa TODO o workflow NLM diretamente via Bash tool.** O usuario nao precisa sair do Claude Code.
+
+### Login (unica excecao — requer acao do usuario)
+
+O login exige stdin interativo que o Bash tool nao suporta. Solucao definitiva:
+
+1. Usuario clica duplo em `notebooklm_login.bat` (ja existe na raiz do projeto)
+2. Browser abre → faz login na conta Google
+3. Volta na janela cmd preta → pressiona ENTER
+4. Janela mostra "Login salvo!" → pode fechar
+5. Avisa o Claude que pode continuar
+
+**NUNCA tentar `notebooklm login` via Bash tool — nao funciona (sem stdin).**
+**NUNCA pedir para o usuario rodar comandos NLM manualmente — Claude faz tudo.**
+
+### Sequencia completa (Claude executa apos login)
+
+```bash
+# 1. Criar notebooks
+notebooklm create "Serafina - MATERIA: Topico1 & Topico2"
+# anota ID retornado
+
+# 2. Upload de fontes (PDF + MD)
+notebooklm source add --notebook ID --file "pasta/arquivo.pdf"
+notebooklm source add --notebook ID --file "pasta/notebooklm/conteudo_nb1.md"
+
+# 3. Gerar artefatos
+notebooklm generate video --notebook ID --language pt_BR --style kawaii
+notebooklm generate slide-deck --notebook ID  # apresentacao PPT/PDF
+notebooklm generate quiz --notebook ID
+notebooklm generate flashcards --notebook ID
+
+# 4. Aguardar (verificar status)
+notebooklm artifact list --notebook ID
+notebooklm artifact wait --notebook ID ARTIFACT_ID
+
+# 5. Download (usar -a ID se nome tem acento)
+notebooklm download video --notebook ID -a ARTIFACT_ID
+notebooklm download slide-deck --notebook ID -a ARTIFACT_ID
+notebooklm download quiz --notebook ID
+notebooklm download flashcards --notebook ID
+
+# 6. Mover para ferramentas/media/ e renomear
+mv arquivo_baixado.mp4 "ferramentas/media/video_MATERIA_nb1_pt.mp4"
+```
+
+### Criticos:
+- Idioma PT: `pt_BR` (nao `pt` — invalido)
+- Download com acento no nome: usar `-a ARTIFACT_ID`
+- Materias PT (LP/HIS/GEO): apenas `pt_BR`, sem versao EN
+- Materias EN (ELA/CIE): `pt_BR` + `en`
+- Apos downloads: atualizar index.html com caminhos reais, fazer git commit + push
+- Verificar com `notebooklm artifact list` antes de tentar download
+
+---
+
 ## O QUE NAO FAZER
 - NAO entregar rapido e errado — melhor demorar e acertar
 - NAO tratar sintoma CSS sem investigar causa raiz no JS/DOM

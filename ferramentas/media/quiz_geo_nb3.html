@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz: Espaço e Orientação — Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+.qz-progress{text-align:center;font-size:13px;font-weight:800;color:var(--text-dim);margin:10px 0 18px;}
+.qz-question{font-size:calc(16px * var(--fs));font-weight:800;color:var(--text);line-height:1.5;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;
+  padding:20px 18px;margin-bottom:12px;}
+.qz-hint{font-size:12px;font-weight:700;color:var(--text-dim);text-align:center;margin-bottom:14px;font-style:italic;}
+.qz-options{display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
+.qz-opt{border-radius:14px;padding:14px 16px;font-size:calc(14px * var(--fs));font-weight:700;
+  color:var(--text);background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.09);
+  cursor:pointer;transition:all .18s;text-align:left;font-family:inherit;min-height:44px;line-height:1.4;width:100%;}
+.qz-opt:hover:not([disabled]){background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4);}
+.qz-opt.correct{background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.5);color:#34d399;}
+.qz-opt.wrong{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.4);color:#f87171;}
+.qz-opt[disabled]{cursor:default;}
+.qz-rationale{font-size:11px;font-weight:700;color:var(--text-soft);background:rgba(255,255,255,.04);
+  border-radius:8px;padding:8px 12px;margin-top:6px;line-height:1.5;display:none;}
+.qz-rationale.show{display:block;}
+.qz-score-bar{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:8px 0 16px;}
+.qz-dot{width:10px;height:10px;border-radius:50%;background:var(--card-border);}
+.qz-dot.correct{background:#34d399;}
+.qz-dot.wrong{background:#ef4444;}
+.qz-dot.current{background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,.5);}
+.qz-nav{display:flex;gap:10px;justify-content:center;}
+.qz-nav-btn{background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));
+  border:1px solid var(--card-border);border-radius:14px;padding:12px 24px;
+  font-family:inherit;font-size:14px;font-weight:800;color:var(--text);cursor:pointer;
+  transition:all .2s;min-height:44px;}
+.qz-nav-btn:hover{background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.4);transform:translateY(-2px);}
+.qz-nav-btn:disabled{opacity:.3;cursor:default;transform:none;}
+.end-emoji{font-size:64px;text-align:center;display:block;margin:20px 0;
+  filter:drop-shadow(0 0 20px rgba(52,211,153,.5));}
+.end-title{font-size:clamp(20px,4vw,26px);font-weight:900;text-align:center;
+  background:linear-gradient(135deg,#34d399,#60a5fa);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
+.end-score{text-align:center;font-size:18px;font-weight:900;color:var(--text);margin-bottom:18px;}
+.btn-restart{background:linear-gradient(135deg,#34d399,#60a5fa);color:#fff;border:none;
+  font-family:inherit;font-size:16px;font-weight:800;padding:14px 36px;border-radius:50px;
+  cursor:pointer;display:block;margin:0 auto;}
+.intro-emoji{font-size:56px;text-align:center;display:block;margin-bottom:14px;
+  filter:drop-shadow(0 0 20px rgba(167,139,250,.5));animation:mfloat 3s ease-in-out infinite;}
+.screen{max-width:600px;}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+<div class="navbar">
+  <div class="nav-logo" id="navLogo">Serafina</div>
+  <div class="nav-right">
+    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0;</button>
+    <button class="nav-btn" id="btnRestart" onclick="startQuiz()">&#x21BA;</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A-</button>
+      <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </div>
+  </div>
+</div>
+<div class="screen active" id="screen-intro">
+  <div class="intro-emoji">&#x2753;</div>
+  <div class="intro-title">Quiz: Espaço e Orientação</div>
+  <div class="intro-sub">10 perguntas de múltipla escolha</div>
+  <button class="btn-start" onclick="startQuiz()">&#x1F3AE; Começar!</button>
+</div>
+<div class="screen" id="screen-quiz">
+  <div class="qz-progress" id="qzProgress">1 / 10</div>
+  <div class="qz-score-bar" id="qzDots"></div>
+  <div class="qz-question" id="qzQuestion"></div>
+  <div class="qz-hint" id="qzHint"></div>
+  <div class="qz-options" id="qzOptions"></div>
+  <div class="qz-nav">
+    <button class="qz-nav-btn" id="btnPrev" onclick="prevQ()" disabled>&#x2B05; Anterior</button>
+    <button class="qz-nav-btn" id="btnNext" onclick="nextQ()">Próximo &#x27A1;</button>
+  </div>
+</div>
+<div class="screen" id="screen-end">
+  <div class="end-emoji">&#x1F3C6;</div>
+  <div class="end-title">Quiz completo!</div>
+  <div class="end-score" id="endScore"></div>
+  <button class="btn-restart" onclick="startQuiz()">&#x1F500; Tentar de novo</button>
+  <div style="text-align:center;margin-top:16px;">
+    <button class="nav-btn" onclick="showHomeModal()" style="margin:0 auto;font-size:13px;padding:10px 20px;">&#x1F3E0; Início</button>
+  </div>
+</div>
+</div>
+<script src="../base.js"></script>
+<script>
+var QUESTIONS = [{"question": "De acordo com o material, por que as manh\u00e3s costumam ser momentos produtivos e de muita energia para as crian\u00e7as?", "answerOptions": [{"text": "Porque o Sol nasce e traz energia para aprender e brincar.", "isCorrect": true, "rationale": "O material descreve que o nascimento do Sol marca o in\u00edcio das atividades agitadas e produtivas do dia."}, {"text": "Porque \u00e9 o per\u00edodo em que as pessoas costumam desacelerar.", "isCorrect": false, "rationale": "O momento de desacelera\u00e7\u00e3o ocorre geralmente ao fim da tarde, e n\u00e3o pela manh\u00e3."}, {"text": "Porque as noites s\u00e3o curtas e n\u00e3o permitem o descanso total.", "isCorrect": false, "rationale": "Embora a dura\u00e7\u00e3o das noites mude com as esta\u00e7\u00f5es, a energia matinal \u00e9 associada ao ciclo de despertar com o Sol."}, {"text": "Porque as crian\u00e7as n\u00e3o precisam ir \u00e0 escola nesse per\u00edodo.", "isCorrect": false, "rationale": "O material menciona que \u00e9 justamente de manh\u00e3 que muitas tarefas e o aprendizado come\u00e7am."}], "hint": "Pense na rela\u00e7\u00e3o entre o despertar da natureza e o in\u00edcio da rotina di\u00e1ria."}, {"question": "Qual \u00e9 a principal raz\u00e3o para o povo Nenets, da R\u00fassia, mudar-se constantemente de lugar?", "answerOptions": [{"text": "Eles buscam fugir do calor intenso do ver\u00e3o russo.", "isCorrect": false, "rationale": "O deslocamento ocorre quando o frio congela os pastos, e n\u00e3o por causa do calor."}, {"text": "Eles s\u00e3o turistas que viajam para conhecer novas cidades.", "isCorrect": false, "rationale": "O modo de vida n\u00f4made dos Nenets \u00e9 por subsist\u00eancia e tradi\u00e7\u00e3o, n\u00e3o por turismo."}, {"text": "Eles precisam encontrar novos pastos para seus rebanhos quando o ch\u00e3o congela.", "isCorrect": true, "rationale": "Como n\u00f4mades pastoreios, a busca por recursos naturais dita o deslocamento conforme o clima muda."}, {"text": "Eles viajam apenas para praticar esportes de inverno com huskies.", "isCorrect": false, "rationale": "O uso de tren\u00f3s e animais \u00e9 um meio de transporte para a mudan\u00e7a de local, n\u00e3o apenas esporte."}], "hint": "Lembre-se da rela\u00e7\u00e3o entre o frio intenso e a alimenta\u00e7\u00e3o dos animais desse povo."}, {"question": "Como podemos definir o conceito de 'ponto de vista' em geografia?", "answerOptions": [{"text": "\u00c9 o que cada pessoa v\u00ea a partir do lugar onde est\u00e1 posicionada.", "isCorrect": true, "rationale": "A posi\u00e7\u00e3o f\u00edsica de quem observa determina quais partes de um objeto ou cen\u00e1rio s\u00e3o vis\u00edveis."}, {"text": "\u00c9 a capacidade de desenhar mapas mentais sem usar papel.", "isCorrect": false, "rationale": "Mapas mentais s\u00e3o representa\u00e7\u00f5es, enquanto ponto de vista \u00e9 a perspectiva da observa\u00e7\u00e3o."}, {"text": "\u00c9 a regra que obriga todos a olharem para o mesmo lado.", "isCorrect": false, "rationale": "Pelo contr\u00e1rio, o material explica que pessoas em posi\u00e7\u00f5es diferentes veem coisas diferentes."}, {"text": "\u00c9 o nome dado exclusivamente \u00e0 vis\u00e3o de cima para baixo.", "isCorrect": false, "rationale": "A vis\u00e3o de cima (a\u00e9rea) \u00e9 apenas um tipo espec\u00edfico de ponto de vista, usado em mapas."}], "hint": "Imagine duas pessoas sentadas uma de frente para a outra em uma mesa."}, {"question": "Sobre as representa\u00e7\u00f5es de lugares, qual a diferen\u00e7a fundamental entre uma maquete e um desenho?", "answerOptions": [{"text": "O desenho \u00e9 sempre feito de cima e a maquete \u00e9 vista de frente.", "isCorrect": false, "rationale": "Ambos podem ter perspectivas diferentes; a diferen\u00e7a real est\u00e1 na dimensionalidade."}, {"text": "A maquete \u00e9 uma representa\u00e7\u00e3o em tr\u00eas dimens\u00f5es, enquanto o desenho \u00e9 plano.", "isCorrect": true, "rationale": "Maquetes s\u00e3o modelos f\u00edsicos que possuem altura, largura e profundidade, ao contr\u00e1rio dos desenhos bidimensionais."}, {"text": "A maquete serve apenas para cidades e o desenho para salas de aula.", "isCorrect": false, "rationale": "Qualquer lugar pode ser representado por maquetes ou desenhos, dependendo do objetivo."}, {"text": "Desenhos s\u00e3o representa\u00e7\u00f5es reais e maquetes s\u00e3o imagin\u00e1rias.", "isCorrect": false, "rationale": "Ambas s\u00e3o formas de representar a realidade ou projetos, usando materiais diferentes."}], "hint": "Pense no formato f\u00edsico de um modelo que voc\u00ea pode tocar em todos os lados."}, {"question": "Nas refer\u00eancias espaciais, qual par de palavras \u00e9 usado para indicar dist\u00e2ncia?", "answerOptions": [{"text": "Dentro e fora.", "isCorrect": false, "rationale": "Estes termos indicam a posi\u00e7\u00e3o em rela\u00e7\u00e3o ao interior ou exterior de algo."}, {"text": "Frente e atr\u00e1s.", "isCorrect": false, "rationale": "Estes indicam a posi\u00e7\u00e3o em rela\u00e7\u00e3o ao lado que o observador est\u00e1 enfrentando."}, {"text": "Perto e longe.", "isCorrect": true, "rationale": "Estes termos descrevem se a dist\u00e2ncia entre dois pontos \u00e9 pequena ou grande."}, {"text": "Esquerda e direita.", "isCorrect": false, "rationale": "Estes indicam lateralidade em rela\u00e7\u00e3o ao corpo do observador."}], "hint": "Escolha as palavras que voc\u00ea usaria para falar sobre a dist\u00e2ncia da sua casa at\u00e9 a escola."}, {"question": "No Brasil, a grande riqueza cultural e as diversas manifesta\u00e7\u00f5es s\u00e3o resultado de quais influ\u00eancias principais?", "answerOptions": [{"text": "Apenas de imigrantes vindos recentemente de outros pa\u00edses da Am\u00e9rica.", "isCorrect": false, "rationale": "A forma\u00e7\u00e3o cultural brasileira \u00e9 muito mais antiga e diversa do que apenas migra\u00e7\u00f5es recentes."}, {"text": "Povos ind\u00edgenas, africanos, portugueses e imigrantes de v\u00e1rios pa\u00edses.", "isCorrect": true, "rationale": "O material destaca que a diversidade brasileira vem da mistura de povos nativos com colonizadores e migrantes."}, {"text": "Exclusivamente das tradi\u00e7\u00f5es trazidas pelos povos n\u00f4mades da R\u00fassia.", "isCorrect": false, "rationale": "Os Nenets s\u00e3o citados como exemplo de diversidade mundial, mas n\u00e3o s\u00e3o a base da cultura brasileira."}, {"text": "Apenas da cultura dos povos abor\u00edgenes da Austr\u00e1lia.", "isCorrect": false, "rationale": "Os abor\u00edgenes s\u00e3o o povo tradicional da Austr\u00e1lia, n\u00e3o do Brasil."}], "hint": "Considere a hist\u00f3ria da forma\u00e7\u00e3o do povo brasileiro mencionada na Unidade 1."}, {"question": "Durante o inverno em lugares muito frios, qual atividade \u00e9 mencionada como uma forma de se aquecer em casa?", "answerOptions": [{"text": "Tomar sorvete com a fam\u00edlia na varanda.", "isCorrect": false, "rationale": "Sorvete \u00e9 associado ao ver\u00e3o e dias quentes para refrescar."}, {"text": "Ir \u00e0 praia para aproveitar o sol fraco.", "isCorrect": false, "rationale": "No inverno rigoroso, as atividades ao ar livre diminuem e o foco \u00e9 o aquecimento interno."}, {"text": "Ficar perto de uma lareira ou ambiente aquecido.", "isCorrect": true, "rationale": "O material ilustra que, no inverno, as pessoas preferem atividades em locais fechados e aquecidos."}, {"text": "Andar de canoa nos rios congelados.", "isCorrect": false, "rationale": "Canoas s\u00e3o usadas em \u00e1guas l\u00edquidas; em rios congelados seriam necess\u00e1rios tren\u00f3s."}], "hint": "Pense em como as pessoas se protegem das baixas temperaturas dentro de seus lares."}, {"question": "Um mapa \u00e9 uma representa\u00e7\u00e3o que utiliza qual ponto de vista espec\u00edfico?", "answerOptions": [{"text": "Vis\u00e3o obl\u00edqua (de lado e de cima).", "isCorrect": false, "rationale": "Embora \u00fatil, o mapa convencional foca na vis\u00e3o vertical direta."}, {"text": "Vis\u00e3o a\u00e9rea (totalmente de cima para baixo).", "isCorrect": true, "rationale": "Mapas representam a superf\u00edcie como se estiv\u00e9ssemos olhando diretamente do alto."}, {"text": "Vis\u00e3o frontal (de frente).", "isCorrect": false, "rationale": "A vis\u00e3o de frente \u00e9 comum em desenhos e fotos, mas n\u00e3o em mapas que mostram ruas e rios."}, {"text": "Vis\u00e3o de baixo para cima.", "isCorrect": false, "rationale": "Esta perspectiva n\u00e3o seria \u00fatil para mostrar a organiza\u00e7\u00e3o de um territ\u00f3rio ou cidade."}], "hint": "Como o ch\u00e3o parece quando voc\u00ea olha para baixo de um lugar muito alto?"}, {"question": "O que caracteriza a esta\u00e7\u00e3o do Outono segundo as atividades propostas no material?", "answerOptions": [{"text": "O aparecimento de jardins muito floridos.", "isCorrect": false, "rationale": "Flores e jardins coloridos s\u00e3o caracter\u00edsticas t\u00edpicas da primavera."}, {"text": "A presen\u00e7a de neve e a necessidade de tomar sopa quente.", "isCorrect": false, "rationale": "Neve e sopas quentes s\u00e3o elementos associados ao inverno no material."}, {"text": "A observa\u00e7\u00e3o de muitas folhas de \u00e1rvores ca\u00eddas no ch\u00e3o.", "isCorrect": true, "rationale": "A queda das folhas \u00e9 um sinal cl\u00e1ssico da mudan\u00e7a de temperatura no outono."}, {"text": "O calor excessivo que obriga a ir para a praia.", "isCorrect": false, "rationale": "Calor intenso e idas \u00e0 praia s\u00e3o atividades descritas para o ver\u00e3o."}], "hint": "Pense no que acontece com a vegeta\u00e7\u00e3o quando o tempo come\u00e7a a esfriar ap\u00f3s o ver\u00e3o."}, {"question": "Qual \u00e9 a fun\u00e7\u00e3o dos meios de transporte e comunica\u00e7\u00e3o no cotidiano, segundo as 'Grandes Ideias' da unidade?", "answerOptions": [{"text": "Apenas servir para o lazer nos finais de semana.", "isCorrect": false, "rationale": "Sua import\u00e2ncia vai al\u00e9m do lazer, conectando a vida e as tarefas di\u00e1rias."}, {"text": "Substituir a necessidade de conhecer outras culturas.", "isCorrect": false, "rationale": "Eles facilitam o contato, mas o respeito \u00e0 diversidade continua sendo fundamental."}, {"text": "Conectar lugares e pessoas para a realiza\u00e7\u00e3o de tarefas e da vida social.", "isCorrect": true, "rationale": "Eles s\u00e3o ferramentas essenciais para integrar diferentes espa\u00e7os e facilitar as atividades do dia a dia."}, {"text": "Fazer com que todas as pessoas vivam do mesmo jeito.", "isCorrect": false, "rationale": "Os meios de transporte n\u00e3o eliminam a diversidade cultural e os modos de vida \u00fanicos."}], "hint": "Reflita sobre como as pessoas se movem e trocam informa\u00e7\u00f5es entre diferentes locais."}];
+var current=0,answers=[],shuffled=[];
+function startQuiz(){
+  shuffled=shuffle(QUESTIONS.slice());
+  current=0;answers=new Array(shuffled.length).fill(null);
+  showScreen('screen-quiz');renderQ();renderDots();
+}
+function renderQ(){
+  var q=shuffled[current];
+  $('qzProgress').textContent=(current+1)+' / '+shuffled.length;
+  $('qzQuestion').textContent=q.question;
+  $('qzHint').textContent=q.hint?'?? '+q.hint:'';
+  var opts=$('qzOptions');opts.innerHTML='';
+  var answered=answers[current]!==null;
+  q.answerOptions.forEach(function(opt,i){
+    var btn=document.createElement('button');
+    btn.className='qz-opt';btn.textContent=opt.text;
+    if(answered){
+      btn.disabled=true;
+      if(opt.isCorrect)btn.classList.add('correct');
+      else if(i===answers[current])btn.classList.add('wrong');
+      var rat=document.createElement('div');
+      rat.className='qz-rationale show';rat.textContent=opt.rationale;
+      btn.appendChild(rat);
+    }else{btn.onclick=function(){selectAnswer(i);};}
+    opts.appendChild(btn);
+  });
+  $('btnPrev').disabled=current===0;
+  $('btnNext').textContent=current===shuffled.length-1?'Ver resultado ✅':'Próximo ➡️';
+}
+function selectAnswer(i){
+  if(answers[current]!==null)return;
+  answers[current]=i;renderQ();renderDots();
+}
+function renderDots(){
+  var html='';
+  for(var i=0;i<shuffled.length;i++){
+    var cls='qz-dot';
+    if(i===current)cls+=' current';
+    else if(answers[i]!==null)cls+=shuffled[i].answerOptions[answers[i]].isCorrect?' correct':' wrong';
+    html+='<div class="'+cls+'"></div>';
+  }
+  $('qzDots').innerHTML=html;
+}
+function nextQ(){
+  if(current<shuffled.length-1){current++;renderQ();renderDots();}
+  else{
+    var score=answers.filter(function(a,i){return a!==null&&shuffled[i].answerOptions[a].isCorrect;}).length;
+    var pct=Math.round(score/shuffled.length*100);
+    var em=pct>=80?'??':pct>=60?'??':'??';
+    $('endScore').textContent=em+' '+score+' de '+shuffled.length+' corretas ('+pct+'%)';
+    showScreen('screen-end');
+  }
+}
+function prevQ(){if(current>0){current--;renderQ();renderDots();}}
+initApp();
+</script>
+</body>
+</html>

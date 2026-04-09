@@ -96,18 +96,132 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
     <div class="title">Projeto Serafina</div>
     <div class="subtitle">Ferramentas de estudo para as Avaliacoes Formais</div>
     <div class="exam-bar">
-      <div class="exam-chip urgent">&#x1F534; Ciencias &mdash; 07/04</div>
-      <div class="exam-chip planned">&#x1F7E2; Historia &mdash; 26/03</div>
+      <div class="exam-chip urgent">&#x1F534; Geografia &mdash; ~14/04</div>
+      <div class="exam-chip planned">&#x2705; Ci&ecirc;ncias &mdash; 07/04</div>
+      <div class="exam-chip planned">&#x2705; Hist&oacute;ria &mdash; 26/03</div>
     </div>
   </div>
 
-  <!-- CIENCIAS (topo, prova amanha) -->
+  <!-- GEOGRAFIA (topo, prova ~14/04) -->
   <div class="discipline">
     <div class="disc-header">
-      <div class="disc-icon">&#x1F52C;</div>
-      <div class="disc-name" style="color:#f472b6;">Ciencias</div>
-      <div class="disc-date" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.35);color:#f87171;">&#x1F534; 07/04/2026</div>
+      <div class="disc-icon">&#x1F30E;</div>
+      <div class="disc-name" style="color:#a78bfa;">Geografia</div>
+      <div class="disc-date" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.35);color:#f87171;">&#x1F534; ~14/04/2026</div>
     </div>
+
+    <!-- 1. MAPA MENTAL -->
+    <a class="tool-card-hero" href="ferramentas/GEO_mindmap.html">
+      <div class="tool-icon-sm" style="font-size:26px;width:44px;height:44px;background:linear-gradient(135deg,rgba(167,139,250,.2),rgba(96,165,250,.2));">&#x1F9ED;</div>
+      <div class="tool-body">
+        <div class="tool-name-sm" style="font-size:15px;">Mapa Mental de Geografia</div>
+        <div class="tool-desc-sm">Per&iacute;odos do dia, esta&ccedil;&otilde;es, povos e culturas, espa&ccedil;o &mdash; clique para expandir</div>
+      </div>
+      <div class="tool-status status-ok" style="flex-shrink:0;">&#x1F5FA;&#xFE0F; Ver</div>
+    </a>
+
+    <!-- 2. APRESENTAÇÕES -->
+    <div class="cie-sublabel">&#x1F4CA; Apresenta&ccedil;&otilde;es</div>
+    <div class="tools-grid-sm">
+      <a class="tool-card-sm ready" href="ferramentas/media/apresentacao_geo_nb1.pdf" target="_blank">
+        <div class="tool-icon-sm" style="background:rgba(96,165,250,.12);">&#x1F4CA;</div>
+        <div class="tool-body">
+          <div class="tool-name-sm">Rhythms of Life and Culture</div>
+          <div class="tool-desc-sm">Per&iacute;odos do dia &bull; esta&ccedil;&otilde;es do ano</div>
+        </div>
+      </a>
+      <a class="tool-card-sm ready" href="ferramentas/media/apresentacao_geo_nb2.pdf" target="_blank">
+        <div class="tool-icon-sm" style="background:rgba(52,211,153,.12);">&#x1F4CA;</div>
+        <div class="tool-body">
+          <div class="tool-name-sm">The Adaptation Engine</div>
+          <div class="tool-desc-sm">Povos, culturas e conex&otilde;es</div>
+        </div>
+      </a>
+      <a class="tool-card-sm ready" href="ferramentas/media/apresentacao_geo_nb3.pdf" target="_blank">
+        <div class="tool-icon-sm" style="background:rgba(251,146,60,.12);">&#x1F4CA;</div>
+        <div class="tool-body">
+          <div class="tool-name-sm">Explorer Journal</div>
+          <div class="tool-desc-sm">Espa&ccedil;o, orienta&ccedil;&atilde;o e revis&atilde;o geral</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- 3. VÍDEOS EM PORTUGUÊS -->
+    <div class="cie-sublabel">&#x1F3AC; V&iacute;deos em Portugu&ecirc;s</div>
+    <div class="tools-grid-sm">
+      <a class="tool-card-sm ready" href="ferramentas/media/video_geo_nb1_pt.mp4" target="_blank">
+        <div class="tool-icon-sm" style="background:rgba(167,139,250,.12);">&#x1F3AC;</div>
+        <div class="tool-body">
+          <div class="tool-name-sm">O Ritmo do Seu Mundo</div>
+          <div class="tool-desc-sm">Per&iacute;odos do dia e esta&ccedil;&otilde;es do ano</div>
+        </div>
+      </a>
+      <a class="tool-card-sm ready" href="ferramentas/media/video_geo_nb2_pt.mp4" target="_blank">
+        <div class="tool-icon-sm" style="background:rgba(52,211,153,.12);">&#x1F3AC;</div>
+        <div class="tool-body">
+          <div class="tool-name-sm">Como Seu Dia Explica o Mundo</div>
+          <div class="tool-desc-sm">Povos, culturas e conex&otilde;es</div>
+        </div>
+      </a>
+      <a class="tool-card-sm ready" href="ferramentas/media/video_geo_nb3_pt.mp4" target="_blank">
+        <div class="tool-icon-sm" style="background:rgba(96,165,250,.12);">&#x1F3AC;</div>
+        <div class="tool-body">
+          <div class="tool-name-sm">Como o Seu Dia &eacute; Moldado</div>
+          <div class="tool-desc-sm">Espa&ccedil;o, orienta&ccedil;&atilde;o e revis&atilde;o geral</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- 4. OUTROS MATERIAIS (colapsável) -->
+    <div class="cie-outros-toggle" onclick="toggleOutros(this)">
+      &#x1F4E6; Outros materiais &mdash; flashcards, quizzes NLM, cards NLM
+      <span class="cie-outros-arrow">&#x25B6;</span>
+    </div>
+    <div class="cie-outros-body">
+      <div style="padding-top:8px;">
+        <div class="tools-grid-sm">
+          <a class="tool-card-sm ready" href="ferramentas/GEO_flashcards.html">
+            <div class="tool-icon-sm" style="background:rgba(167,139,250,.12);">&#x1F0CF;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Cartas de Geografia</div>
+              <div class="tool-desc-sm">29 flashcards: per&iacute;odos, esta&ccedil;&otilde;es, povos, espa&ccedil;o</div>
+            </div>
+          </a>
+          <a class="tool-card-sm ready" href="ferramentas/media/quiz_geo_nb1.html" target="_blank">
+            <div class="tool-icon-sm" style="background:rgba(96,165,250,.1);">&#x2753;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Quiz: Per&iacute;odos e Esta&ccedil;&otilde;es</div>
+              <div class="tool-desc-sm">Quiz NLM &mdash; NB1</div>
+            </div>
+          </a>
+          <a class="tool-card-sm ready" href="ferramentas/media/quiz_geo_nb2.html" target="_blank">
+            <div class="tool-icon-sm" style="background:rgba(52,211,153,.1);">&#x2753;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Quiz: Povos e Culturas</div>
+              <div class="tool-desc-sm">Quiz NLM &mdash; NB2</div>
+            </div>
+          </a>
+          <a class="tool-card-sm ready" href="ferramentas/media/quiz_geo_nb3.html" target="_blank">
+            <div class="tool-icon-sm" style="background:rgba(251,146,60,.1);">&#x2753;</div>
+            <div class="tool-body">
+              <div class="tool-name-sm">Quiz: Espa&ccedil;o e Orienta&ccedil;&atilde;o</div>
+              <div class="tool-desc-sm">Quiz NLM &mdash; NB3</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CIENCIAS (colapsado) -->
+  <div class="discipline">
+    <div class="disc-header disc-toggle" onclick="toggleDisc(this)">
+      <div class="disc-icon">&#x1F52C;</div>
+      <div class="disc-name" style="color:#f472b6;">Ci&ecirc;ncias <span class="disc-arrow">&#x25B6;</span></div>
+      <div class="disc-date" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:rgba(52,211,153,.6);">&#x2705; 07/04</div>
+    </div>
+    <div class="disc-summary"><span class="dot"></span> AF conclu&iacute;da &mdash; mindmap, flashcards, 4 v&iacute;deos + apresenta&ccedil;&otilde;es (toque para expandir)</div>
+    <div class="disc-collapse">
 
     <!-- 1. MAPA MENTAL -->
     <a class="tool-card-hero" href="ferramentas/CIE_mindmap.html">
@@ -224,6 +338,7 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0
         </div>
       </div>
     </div>
+    </div><!-- disc-collapse CIE -->
   </div>
 
   <!-- HISTORIA (colapsado) -->

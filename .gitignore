@@ -20,6 +20,12 @@ planejamento/
 # Assets pesados (audio/video NotebookLM — nao deployar via GitHub Pages)
 03_HISTORIA/assets/
 
+# Scripts de geração (temporários)
+gen_quiz.py
+
+# JSONs brutos NLM (raw, processados para HTML)
+ferramentas/media/*_raw.json
+
 # Sistema
 Thumbs.db
 .DS_Store
