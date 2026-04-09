@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEO-01: Arraste e Classifique — Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+/* ── PHASE HEADER ── */
+.phase-header{text-align:center;margin-bottom:18px;}
+.phase-label{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:6px;}
+.phase-title{font-size:calc(18px * var(--fs));font-weight:900;color:var(--text);line-height:1.2;margin-bottom:6px;}
+.phase-sub{font-size:12px;font-weight:700;color:var(--text-dim);}
+
+/* ── ITEMS POOL ── */
+.pool-label{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:8px;text-align:center;}
+.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  min-height:44px;padding:10px 8px;
+  background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.12);
+  border-radius:14px;margin-bottom:16px;}
+.pool.empty{opacity:.4;}
+
+/* ── ITEMS ── */
+.item{display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(96,165,250,.1));
+  border:2px solid rgba(167,139,250,.35);border-radius:50px;
+  padding:9px 16px;font-size:calc(13px * var(--fs));font-weight:800;color:var(--text);
+  cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;
+  transition:all .18s;min-height:44px;touch-action:none;}
+.item:hover{transform:translateY(-2px);border-color:rgba(167,139,250,.6);}
+.item.selected{border-color:#f59e0b;background:rgba(245,158,11,.15);
+  box-shadow:0 0 14px rgba(245,158,11,.4);transform:scale(1.04);}
+.item.dragging{opacity:.4;}
+.item.correct{border-color:#34d399;background:rgba(52,211,153,.15);color:#34d399;cursor:default;}
+.item.wrong{border-color:#ef4444;background:rgba(239,68,68,.12);color:#f87171;}
+.item.locked{cursor:default;}
+
+/* ── ZONES ── */
+.zones-wrap{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.zones-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.zone{border-radius:16px;border:2px dashed rgba(255,255,255,.15);
+  background:rgba(255,255,255,.03);padding:10px 12px;min-height:80px;
+  transition:all .18s;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.zone.drag-over{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.08);}
+.zone.targeted{border-color:#f59e0b;background:rgba(245,158,11,.08);
+  box-shadow:0 0 12px rgba(245,158,11,.25);}
+.zone.all-correct{border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.06);}
+.zone-label{font-size:calc(12px * var(--fs));font-weight:900;color:var(--text-soft);
+  margin-bottom:7px;display:flex;align-items:center;gap:6px;}
+.zone-emoji{font-size:18px;}
+.zone-items{display:flex;flex-wrap:wrap;gap:6px;min-height:32px;}
+
+/* ── FEEDBACK ── */
+.feedback-area{display:none;margin-bottom:14px;}
+.feedback-area.show{display:block;}
+.fb-row{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:12px;
+  margin-bottom:6px;font-size:calc(12px * var(--fs));font-weight:700;line-height:1.4;}
+.fb-row.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);}
+.fb-row.wrong{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);}
+.fb-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.fb-text{color:var(--text);}
+.fb-text .correct-label{color:#34d399;font-weight:900;}
+.fb-text .wrong-label{color:#f87171;font-weight:900;}
+
+/* ── PHASE SCORE ── */
+.phase-score{text-align:center;font-size:calc(20px * var(--fs));font-weight:900;
+  color:var(--text);margin:10px 0 16px;line-height:1.3;}
+
+/* ── BUTTONS ── */
+.btn-check{background:linear-gradient(135deg,#a78bfa,#60a5fa);color:#fff;border:none;
+  font-family:inherit;font-size:15px;font-weight:800;padding:14px 32px;border-radius:50px;
+  cursor:pointer;display:block;margin:0 auto 10px;min-height:44px;
+  transition:all .2s;opacity:.5;pointer-events:none;}
+.btn-check.active{opacity:1;pointer-events:all;}
+.btn-check.active:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(167,139,250,.35);}
+.btn-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.btn-sm{font-family:inherit;font-size:13px;font-weight:800;padding:11px 20px;border-radius:50px;
+  cursor:pointer;min-height:44px;transition:all .2s;border:2px solid;}
+.btn-retry{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.4);color:#fbbf24;}
+.btn-retry:hover{background:rgba(245,158,11,.2);}
+.btn-gabarito{background:rgba(96,165,250,.1);border-color:rgba(96,165,250,.35);color:#93c5fd;}
+.btn-gabarito:hover{background:rgba(96,165,250,.18);}
+.btn-next{background:linear-gradient(135deg,#34d399,#60a5fa);color:#fff;border:none;
+  font-size:14px;font-weight:800;padding:12px 26px;border-radius:50px;cursor:pointer;min-height:44px;}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 5px 16px rgba(52,211,153,.3);}
+
+/* ── END SCREEN ── */
+.end-phase-row{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);margin-bottom:8px;
+  font-size:calc(13px * var(--fs));font-weight:800;color:var(--text);}
+.end-phase-score{font-weight:900;color:#34d399;}
+
+/* ── MISC ── */
+.intro-emoji{font-size:60px;text-align:center;display:block;margin-bottom:14px;
+  filter:drop-shadow(0 0 20px rgba(167,139,250,.5));animation:mfloat 3s ease-in-out infinite;}
+.screen{max-width:560px;}
+.hint-tap{text-align:center;font-size:11px;font-weight:700;color:var(--text-dim);margin-bottom:12px;}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+
+<div class="navbar">
+  <div class="nav-logo" id="navLogo">Serafina</div>
+  <div class="nav-right">
+    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0;</button>
+    <button class="nav-btn" id="btnRestart" onclick="restartGame()">&#x21BA;</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A-</button>
+      <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-emoji">&#x1F30E;</div>
+  <div class="intro-title">Arraste e Classifique</div>
+  <div class="intro-sub">3 fases &bull; Per&iacute;odos do dia, Esta&ccedil;&otilde;es do ano e Povos do mundo</div>
+  <div style="text-align:center;font-size:13px;font-weight:700;color:var(--text-dim);margin:12px 0 24px;line-height:1.6;">
+    Toque num item para selecionar<br>depois toque na coluna certa para colocar
+  </div>
+  <button class="btn-start" onclick="startGame()">&#x1F3AE; Come&ccedil;ar!</button>
+</div>
+
+<!-- PHASE -->
+<div class="screen" id="screen-phase">
+  <div class="phase-header">
+    <div class="phase-label" id="phaseLabel">Fase 1 de 3</div>
+    <div class="phase-title" id="phaseTitle"></div>
+    <div class="phase-sub" id="phaseSub"></div>
+  </div>
+
+  <div class="pool-label">Itens para classificar</div>
+  <div class="pool" id="itemPool"></div>
+
+  <div class="hint-tap" id="hintTap">&#x1F447; Toque numa coluna para colocar o item selecionado</div>
+
+  <div id="zonesContainer"></div>
+
+  <button class="btn-check" id="btnCheck" onclick="checkAnswers()">&#x2705; Verificar</button>
+
+  <div class="feedback-area" id="feedbackArea"></div>
+
+  <div class="btn-row" id="actionRow" style="display:none;"></div>
+</div>
+
+<!-- END -->
+<div class="screen" id="screen-end">
+  <div style="font-size:60px;text-align:center;margin:16px 0;filter:drop-shadow(0 0 20px rgba(52,211,153,.5));">&#x1F3C6;</div>
+  <div class="end-title">Muito bem!</div>
+  <div style="text-align:center;font-size:calc(14px * var(--fs));font-weight:700;color:var(--text-soft);margin-bottom:20px;">Resultado por fase:</div>
+  <div id="endSummary"></div>
+  <button class="btn-restart" style="margin-top:16px;" onclick="restartGame()">&#x1F500; Jogar de novo</button>
+  <div style="text-align:center;margin-top:14px;">
+    <button class="nav-btn" onclick="showHomeModal()" style="margin:0 auto;font-size:13px;padding:10px 20px;">&#x1F3E0; In&iacute;cio</button>
+  </div>
+</div>
+
+</div><!-- app -->
+
+<script src="base.js"></script>
+<script>
+/* ═══════════════════════════════════════════════
+   GAME DATA
+═══════════════════════════════════════════════ */
+var PHASES = [
+  {
+    title: 'Períodos do Dia',
+    sub: 'Onde cada atividade acontece?',
+    emoji: '🕐',
+    layout: 'list', // 'list' or 'grid2'
+    categories: [
+      {id:'manha',  label:'Manhã',  emoji:'🌅'},
+      {id:'tarde',  label:'Tarde',  emoji:'☀️'},
+      {id:'noite',  label:'Noite',  emoji:'🌙'}
+    ],
+    items: [
+      {id:'p1a', text:'Acordar',              emoji:'😴', cat:'manha'},
+      {id:'p1b', text:'Tomar café da manhã',  emoji:'☕', cat:'manha'},
+      {id:'p1c', text:'Ir para a escola (manhã)',emoji:'🎒', cat:'manha'},
+      {id:'p1d', text:'Almoçar',              emoji:'🍽️', cat:'tarde'},
+      {id:'p1e', text:'Brincar no parque',    emoji:'⚽', cat:'tarde'},
+      {id:'p1f', text:'Jantar',               emoji:'🍴', cat:'noite'},
+      {id:'p1g', text:'Dormir',               emoji:'🛌', cat:'noite'}
+    ]
+  },
+  {
+    title: 'Estações do Ano',
+    sub: 'A qual estação pertence cada item?',
+    emoji: '🍂',
+    layout: 'grid2',
+    categories: [
+      {id:'verao',    label:'Verão',     emoji:'☀️'},
+      {id:'outono',   label:'Outono',    emoji:'🍂'},
+      {id:'inverno',  label:'Inverno',   emoji:'❄️'},
+      {id:'primavera',label:'Primavera', emoji:'🌸'}
+    ],
+    items: [
+      {id:'p2a', text:'Praia e protetor solar',  emoji:'🏖️', cat:'verao'},
+      {id:'p2b', text:'Roupas leves',            emoji:'👕', cat:'verao'},
+      {id:'p2c', text:'Folhas caem das árvores', emoji:'🍂', cat:'outono'},
+      {id:'p2d', text:'Tempo fica mais fresco',  emoji:'🌬️', cat:'outono'},
+      {id:'p2e', text:'Casaco e cachecol',       emoji:'🧣', cat:'inverno'},
+      {id:'p2f', text:'Sopas e chás quentes',    emoji:'🍲', cat:'inverno'},
+      {id:'p2g', text:'Flores brotam',           emoji:'🌸', cat:'primavera'},
+      {id:'p2h', text:'Animais nascem',          emoji:'🐣', cat:'primavera'}
+    ]
+  },
+  {
+    title: 'Povos do Mundo',
+    sub: 'Cada característica pertence a qual povo?',
+    emoji: '🌍',
+    layout: 'list',
+    categories: [
+      {id:'indigenas', label:'Indígenas do Brasil',    emoji:'🇧🇷'},
+      {id:'aborigines',label:'Aborígines da Austrália',emoji:'🇦🇺'},
+      {id:'nenets',    label:'Nenets da Rússia',       emoji:'🇷🇺'}
+    ],
+    items: [
+      {id:'p3a', text:'Usa canoa',                    emoji:'🛶', cat:'indigenas'},
+      {id:'p3b', text:'Pesca nos rios',               emoji:'🎣', cat:'indigenas'},
+      {id:'p3c', text:'Vive perto de rios e florestas',emoji:'🌳', cat:'indigenas'},
+      {id:'p3d', text:'Arte rupestre: pinturas em rochas', emoji:'🪨', cat:'aborigines'},
+      {id:'p3e', text:'Vive na Oceania (Austrália)',  emoji:'🌏', cat:'aborigines'},
+      {id:'p3f', text:'Trenó puxado por renas',       emoji:'🦌', cat:'nenets'},
+      {id:'p3g', text:'Muda de lugar seguindo as renas',emoji:'🏕️',cat:'nenets'}
+    ]
+  }
+];
+
+/* ═══════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════ */
+var currentPhase = 0;
+var placed = {};        // itemId -> categoryId
+var checked = false;
+var results = {};       // itemId -> 'correct'|'wrong'
+var phaseScores = [];   // [{correct, total}]
+var selectedItem = null;
+var retryMode = false;
+var retryItems = [];    // ids of wrong items in retry
+
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
+function startGame(){
+  currentPhase = 0;
+  phaseScores = [];
+  loadPhase();
+  showScreen('screen-phase');
+}
+
+function restartGame(){
+  currentPhase = 0;
+  phaseScores = [];
+  showScreen('screen-intro');
+}
+
+function loadPhase(){
+  var ph = PHASES[currentPhase];
+  placed = {};
+  checked = false;
+  results = {};
+  selectedItem = null;
+  retryMode = false;
+  retryItems = [];
+
+  $('phaseLabel').textContent = 'Fase ' + (currentPhase+1) + ' de ' + PHASES.length;
+  $('phaseTitle').textContent = ph.emoji + ' ' + ph.title;
+  $('phaseSub').textContent = ph.sub;
+
+  renderPool(ph.items);
+  renderZones(ph);
+  updateCheckBtn();
+  $('feedbackArea').classList.remove('show');
+  $('feedbackArea').innerHTML = '';
+  $('actionRow').style.display = 'none';
+  $('hintTap').style.display = 'block';
+}
+
+/* ═══════════════════════════════════════════════
+   POOL
+═══════════════════════════════════════════════ */
+function renderPool(items){
+  var pool = $('itemPool');
+  pool.innerHTML = '';
+  var activeItems = retryMode ? retryItems : items.map(function(i){return i.id;});
+  activeItems.forEach(function(id){
+    if(placed[id]) return; // already in a zone
+    var item = getItem(id);
+    if(!item) return;
+    var el = makeItemEl(item, false);
+    pool.appendChild(el);
+  });
+  pool.classList.toggle('empty', pool.children.length === 0);
+}
+
+function makeItemEl(item, inZone){
+  var el = document.createElement('div');
+  el.className = 'item';
+  el.id = 'item-' + item.id;
+  el.setAttribute('data-id', item.id);
+  el.innerHTML = '<span>' + item.emoji + '</span><span>' + item.text + '</span>';
+
+  if(checked){
+    if(results[item.id] === 'correct') el.classList.add('correct','locked');
+    else if(results[item.id] === 'wrong') el.classList.add('wrong');
+  }
+
+  // TAP: items in zone return to pool; items in pool select/deselect
+  el.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(checked && results[item.id] === 'correct') return;
+    if(inZone){
+      delete placed[item.id];
+      if(selectedItem === item.id) selectedItem = null;
+      var ph = PHASES[currentPhase];
+      refreshZones();
+      renderPool(ph.items);
+      updateCheckBtn();
+    } else {
+      selectItem(item.id);
+    }
+  });
+
+  // DRAG (desktop)
+  el.setAttribute('draggable','true');
+  el.addEventListener('dragstart', function(e){
+    e.dataTransfer.setData('text/plain', item.id);
+    el.classList.add('dragging');
+    selectedItem = item.id;
+  });
+  el.addEventListener('dragend', function(){
+    el.classList.remove('dragging');
+  });
+
+  return el;
+}
+
+function selectItem(id){
+  // Deselect previous
+  if(selectedItem){
+    var prev = document.getElementById('item-'+selectedItem);
+    if(prev) prev.classList.remove('selected');
+  }
+  if(selectedItem === id){
+    selectedItem = null;
+    highlightTargetedZones();
+    return;
+  }
+  selectedItem = id;
+  var el = document.getElementById('item-'+id);
+  if(el) el.classList.add('selected');
+  highlightTargetedZones();
+}
+
+/* ═══════════════════════════════════════════════
+   ZONES
+═══════════════════════════════════════════════ */
+function renderZones(ph){
+  var container = $('zonesContainer');
+  container.innerHTML = '';
+  var wrap = document.createElement('div');
+  wrap.className = ph.layout === 'grid2' ? 'zones-grid2' : 'zones-wrap';
+
+  ph.categories.forEach(function(cat){
+    var zone = document.createElement('div');
+    zone.className = 'zone';
+    zone.id = 'zone-' + cat.id;
+    zone.setAttribute('data-cat', cat.id);
+
+    var labelEl = document.createElement('div');
+    labelEl.className = 'zone-label';
+    labelEl.innerHTML = '<span class="zone-emoji">'+cat.emoji+'</span><span>'+cat.label+'</span>';
+    zone.appendChild(labelEl);
+
+    var itemsEl = document.createElement('div');
+    itemsEl.className = 'zone-items';
+    itemsEl.id = 'zone-items-' + cat.id;
+    zone.appendChild(itemsEl);
+
+    // TAP zone to place selected item
+    zone.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(selectedItem) placeItem(selectedItem, cat.id);
+    });
+
+    // DRAG events
+    zone.addEventListener('dragover', function(e){
+      e.preventDefault();
+      zone.classList.add('drag-over');
+    });
+    zone.addEventListener('dragleave', function(){
+      zone.classList.remove('drag-over');
+    });
+    zone.addEventListener('drop', function(e){
+      e.preventDefault();
+      zone.classList.remove('drag-over');
+      var id = e.dataTransfer.getData('text/plain');
+      if(id) placeItem(id, cat.id);
+    });
+
+    wrap.appendChild(zone);
+  });
+
+  container.appendChild(wrap);
+  refreshZones();
+}
+
+function highlightTargetedZones(){
+  PHASES[currentPhase].categories.forEach(function(cat){
+    var zone = document.getElementById('zone-'+cat.id);
+    if(zone) zone.classList.toggle('targeted', !!selectedItem);
+  });
+}
+
+function placeItem(itemId, catId){
+  // Remove from previous zone if placed elsewhere
+  var prev = placed[itemId];
+  if(prev) {
+    var prevEl = document.getElementById('item-'+itemId);
+    if(prevEl) prevEl.remove();
+  }
+  // Remove from pool if there
+  var poolEl = document.getElementById('item-'+itemId);
+  if(poolEl) poolEl.remove();
+
+  placed[itemId] = catId;
+
+  // Deselect
+  selectedItem = null;
+  highlightTargetedZones();
+
+  refreshZones();
+  updateCheckBtn();
+}
+
+function refreshZones(){
+  var ph = PHASES[currentPhase];
+  ph.categories.forEach(function(cat){
+    var itemsEl = document.getElementById('zone-items-'+cat.id);
+    if(!itemsEl) return;
+    itemsEl.innerHTML = '';
+    ph.items.forEach(function(item){
+      if(placed[item.id] === cat.id){
+        var el = makeItemEl(item, true);
+        itemsEl.appendChild(el);
+      }
+    });
+    // Mark zone as all-correct after check
+    if(checked){
+      var allItems = ph.items.filter(function(i){ return getCorrectCat(i.id)===cat.id; });
+      var allCorrect = allItems.every(function(i){ return placed[i.id]===cat.id; });
+      document.getElementById('zone-'+cat.id).classList.toggle('all-correct', allCorrect);
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   CHECK
+═══════════════════════════════════════════════ */
+function updateCheckBtn(){
+  var ph = PHASES[currentPhase];
+  var activeItems = retryMode ? retryItems : ph.items.map(function(i){return i.id;});
+  var allPlaced = activeItems.every(function(id){
+    return !!placed[id] || (checked && results[id]==='correct');
+  });
+  var btn = $('btnCheck');
+  if(allPlaced){ btn.classList.add('active'); }
+  else { btn.classList.remove('active'); }
+}
+
+function checkAnswers(){
+  if(!$('btnCheck').classList.contains('active')) return;
+  checked = true;
+  var ph = PHASES[currentPhase];
+  var activeItems = retryMode ? retryItems : ph.items.map(function(i){return i.id;});
+  var correct = 0;
+  activeItems.forEach(function(id){
+    var correctCat = getCorrectCat(id);
+    if(placed[id] === correctCat){
+      results[id] = 'correct';
+      correct++;
+    } else {
+      results[id] = 'wrong';
+    }
+  });
+
+  if(!retryMode){
+    phaseScores[currentPhase] = {correct: correct, total: activeItems.length};
+  } else {
+    // Update score: add new corrects
+    phaseScores[currentPhase].correct += correct;
+  }
+
+  refreshZones();
+  renderPool(ph.items);
+  showFeedback(ph, activeItems);
+  showActionRow(correct, activeItems.length);
+  $('btnCheck').classList.remove('active');
+  $('hintTap').style.display = 'none';
+}
+
+function showFeedback(ph, activeItems){
+  var area = $('feedbackArea');
+  area.innerHTML = '';
+  var correctCnt = 0;
+
+  activeItems.forEach(function(id){
+    var item = getItem(id);
+    var row = document.createElement('div');
+    if(results[id]==='correct'){
+      correctCnt++;
+      row.className = 'fb-row correct';
+      row.innerHTML = '<div class="fb-icon">✅</div><div class="fb-text"><span class="correct-label">Certo!</span> ' + item.emoji + ' ' + item.text + '</div>';
+    } else {
+      var correctCat = getCatLabel(ph, getCorrectCat(id));
+      row.className = 'fb-row wrong';
+      row.innerHTML = '<div class="fb-icon">❌</div><div class="fb-text"><span class="wrong-label">Errou.</span> ' + item.emoji + ' <strong>' + item.text + '</strong> pertence a: <span class="correct-label">' + correctCat + '</span></div>';
+    }
+    area.appendChild(row);
+  });
+
+  area.classList.add('show');
+}
+
+function showActionRow(correct, total){
+  var row = $('actionRow');
+  row.innerHTML = '';
+  row.style.display = 'flex';
+
+  // Score line
+  var score = document.createElement('div');
+  score.className = 'phase-score';
+  score.style.width = '100%';
+  score.style.textAlign = 'center';
+  var pct = Math.round(correct/total*100);
+  var em = pct===100 ? '🌟' : pct>=60 ? '👍' : '💪';
+  score.textContent = em + ' ' + correct + ' de ' + total + ' certas';
+  row.appendChild(score);
+
+  var wrongItems = Object.keys(results).filter(function(id){ return results[id]==='wrong'; });
+
+  // Retry wrong button
+  if(wrongItems.length > 0){
+    var btnRetry = document.createElement('button');
+    btnRetry.className = 'btn-sm btn-retry';
+    btnRetry.innerHTML = '🔄 Refazer os ' + wrongItems.length + ' erros';
+    btnRetry.onclick = function(){ startRetry(wrongItems); };
+    row.appendChild(btnRetry);
+  }
+
+  // Gabarito button
+  var btnGab = document.createElement('button');
+  btnGab.className = 'btn-sm btn-gabarito';
+  btnGab.innerHTML = '📋 Ver gabarito';
+  btnGab.onclick = function(){ showGabarito(); btnGab.style.display='none'; };
+  row.appendChild(btnGab);
+
+  // Next / Finish
+  var btnAdv = document.createElement('button');
+  btnAdv.className = 'btn-next';
+  if(currentPhase < PHASES.length - 1){
+    btnAdv.innerHTML = 'Próxima fase ➡️';
+    btnAdv.onclick = function(){ currentPhase++; loadPhase(); };
+  } else {
+    btnAdv.innerHTML = '🏁 Ver resultado';
+    btnAdv.onclick = function(){ showEndScreen(); };
+  }
+  row.appendChild(btnAdv);
+}
+
+function startRetry(wrongIds){
+  retryMode = true;
+  retryItems = wrongIds;
+  checked = false;
+  // Clear placements of wrong items
+  wrongIds.forEach(function(id){ delete placed[id]; delete results[id]; });
+  selectedItem = null;
+  $('feedbackArea').classList.remove('show');
+  $('feedbackArea').innerHTML = '';
+  $('actionRow').style.display = 'none';
+  $('hintTap').style.display = 'block';
+  refreshZones();
+  renderPool(PHASES[currentPhase].items);
+  updateCheckBtn();
+}
+
+function showGabarito(){
+  var ph = PHASES[currentPhase];
+  // Place all items in their correct zones
+  ph.items.forEach(function(item){
+    placed[item.id] = getCorrectCat(item.id);
+    results[item.id] = 'correct';
+  });
+  checked = true;
+  refreshZones();
+  renderPool(ph.items);
+}
+
+/* ═══════════════════════════════════════════════
+   END SCREEN
+═══════════════════════════════════════════════ */
+function showEndScreen(){
+  var summary = $('endSummary');
+  summary.innerHTML = '';
+  var total = 0, correct = 0;
+  PHASES.forEach(function(ph, i){
+    var sc = phaseScores[i] || {correct:0,total:ph.items.length};
+    correct += sc.correct; total += sc.total;
+    var row = document.createElement('div');
+    row.className = 'end-phase-row';
+    row.innerHTML = '<span>' + ph.emoji + ' ' + ph.title + '</span>'
+      + '<span class="end-phase-score">' + sc.correct + '/' + sc.total + '</span>';
+    summary.appendChild(row);
+  });
+  var totalRow = document.createElement('div');
+  totalRow.className = 'end-phase-row';
+  totalRow.style.cssText = 'background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);margin-top:6px;';
+  var pct = Math.round(correct/total*100);
+  totalRow.innerHTML = '<span style="font-weight:900;">Total</span>'
+    + '<span class="end-phase-score">' + correct + '/' + total + ' (' + pct + '%)</span>';
+  summary.appendChild(totalRow);
+  showScreen('screen-end');
+}
+
+/* ═══════════════════════════════════════════════
+   HELPERS
+═══════════════════════════════════════════════ */
+function getItem(id){
+  for(var i=0;i<PHASES.length;i++){
+    for(var j=0;j<PHASES[i].items.length;j++){
+      if(PHASES[i].items[j].id===id) return PHASES[i].items[j];
+    }
+  }
+  return null;
+}
+
+function getCorrectCat(itemId){
+  var item = getItem(itemId);
+  return item ? item.cat : null;
+}
+
+function getCatLabel(ph, catId){
+  for(var i=0;i<ph.categories.length;i++){
+    if(ph.categories[i].id===catId) return ph.categories[i].emoji + ' ' + ph.categories[i].label;
+  }
+  return catId;
+}
+
+// Deselect item when tapping blank space
+document.addEventListener('click', function(){
+  if(selectedItem){
+    var el = document.getElementById('item-'+selectedItem);
+    if(el) el.classList.remove('selected');
+    selectedItem = null;
+    highlightTargetedZones();
+  }
+});
+
+initApp();
+</script>
+</body>
+</html>
