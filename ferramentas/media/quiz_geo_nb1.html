@@ -3,50 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz: Períodos do Dia e Estações — Projeto Serafina</title>
+<title>Quiz: Periodos e Estacoes &mdash; Serafina</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../base.css">
 <style>
-.qz-progress{text-align:center;font-size:13px;font-weight:800;color:var(--text-dim);margin:10px 0 18px;}
-.qz-question{font-size:calc(16px * var(--fs));font-weight:800;color:var(--text);line-height:1.5;
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;
-  padding:20px 18px;margin-bottom:12px;}
-.qz-hint{font-size:12px;font-weight:700;color:var(--text-dim);text-align:center;margin-bottom:14px;font-style:italic;}
-.qz-options{display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
-.qz-opt{border-radius:14px;padding:14px 16px;font-size:calc(14px * var(--fs));font-weight:700;
-  color:var(--text);background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.09);
-  cursor:pointer;transition:all .18s;text-align:left;font-family:inherit;min-height:44px;line-height:1.4;width:100%;}
-.qz-opt:hover:not([disabled]){background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4);}
-.qz-opt.correct{background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.5);color:#34d399;}
-.qz-opt.wrong{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.4);color:#f87171;}
-.qz-opt[disabled]{cursor:default;}
-.qz-rationale{font-size:11px;font-weight:700;color:var(--text-soft);background:rgba(255,255,255,.04);
-  border-radius:8px;padding:8px 12px;margin-top:6px;line-height:1.5;display:none;}
-.qz-rationale.show{display:block;}
-.qz-score-bar{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:8px 0 16px;}
-.qz-dot{width:10px;height:10px;border-radius:50%;background:var(--card-border);}
-.qz-dot.correct{background:#34d399;}
-.qz-dot.wrong{background:#ef4444;}
-.qz-dot.current{background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,.5);}
-.qz-nav{display:flex;gap:10px;justify-content:center;}
-.qz-nav-btn{background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));
-  border:1px solid var(--card-border);border-radius:14px;padding:12px 24px;
-  font-family:inherit;font-size:14px;font-weight:800;color:var(--text);cursor:pointer;
-  transition:all .2s;min-height:44px;}
-.qz-nav-btn:hover{background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.4);transform:translateY(-2px);}
-.qz-nav-btn:disabled{opacity:.3;cursor:default;transform:none;}
-.end-emoji{font-size:64px;text-align:center;display:block;margin:20px 0;
-  filter:drop-shadow(0 0 20px rgba(52,211,153,.5));}
-.end-title{font-size:clamp(20px,4vw,26px);font-weight:900;text-align:center;
-  background:linear-gradient(135deg,#34d399,#60a5fa);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
-.end-score{text-align:center;font-size:18px;font-weight:900;color:var(--text);margin-bottom:18px;}
-.btn-restart{background:linear-gradient(135deg,#34d399,#60a5fa);color:#fff;border:none;
-  font-family:inherit;font-size:16px;font-weight:800;padding:14px 36px;border-radius:50px;
-  cursor:pointer;display:block;margin:0 auto;}
-.intro-emoji{font-size:56px;text-align:center;display:block;margin-bottom:14px;
-  filter:drop-shadow(0 0 20px rgba(167,139,250,.5));animation:mfloat 3s ease-in-out infinite;}
-.screen{max-width:600px;}
+.q-wrap{max-width:520px;margin:0 auto;}
+.q-num{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;text-align:center;}
+.q-text{font-size:calc(15px * var(--fs));font-weight:800;color:var(--text);line-height:1.5;margin-bottom:18px;text-align:center;padding:16px 12px;background:rgba(255,255,255,.04);border-radius:16px;border:1px solid rgba(255,255,255,.08);}
+.opts{display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+.opt{padding:13px 16px;border-radius:14px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;font-family:inherit;font-size:calc(14px * var(--fs));font-weight:700;color:var(--text);text-align:left;transition:all .18s;min-height:48px;-webkit-tap-highlight-color:transparent;}
+.opt:hover{border-color:rgba(96,165,250,.4);background:rgba(96,165,250,.08);transform:translateY(-1px);}
+.opt.correct{border-color:#34d399;background:rgba(52,211,153,.12);color:#34d399;cursor:default;}
+.opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.1);color:#f87171;cursor:default;}
+.opt.disabled{cursor:default;opacity:.55;}
+.hint-box{border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:calc(12px * var(--fs));font-weight:700;display:none;}
+.hint-box.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);color:var(--text);display:block;}
+.hint-box.wrong{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:var(--text);display:block;}
+.hint-label{font-weight:900;margin-bottom:3px;}
+.hint-label.ok{color:#34d399;}
+.hint-label.no{color:#f87171;}
+.progress-bar{background:rgba(255,255,255,.07);border-radius:50px;height:6px;margin-bottom:16px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#34d399,#60a5fa);border-radius:50px;transition:width .4s;}
+.btn-next{background:linear-gradient(135deg,#34d399,#60a5fa);color:#fff;border:none;font-family:inherit;font-size:15px;font-weight:800;padding:13px 32px;border-radius:50px;cursor:pointer;display:block;margin:0 auto;min-height:44px;transition:all .2s;}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 5px 16px rgba(52,211,153,.3);}
+.q-dots{display:flex;gap:5px;justify-content:center;margin-bottom:14px;flex-wrap:wrap;}
+.q-dot{width:9px;height:9px;border-radius:50%;background:var(--card-border);}
+.q-dot.done{background:#34d399;}
+.q-dot.fail{background:#ef4444;}
+.q-dot.cur{background:#f59e0b;box-shadow:0 0 7px rgba(245,158,11,.5);}
+.end-emoji{font-size:64px;text-align:center;display:block;margin:16px 0;filter:drop-shadow(0 0 16px rgba(52,211,153,.5));}
+.end-score{text-align:center;font-size:calc(22px * var(--fs));font-weight:900;color:var(--text);margin-bottom:8px;}
+.end-sub{text-align:center;font-size:14px;font-weight:700;color:var(--text-soft);margin-bottom:24px;}
+.intro-emoji{font-size:64px;text-align:center;display:block;margin-bottom:14px;filter:drop-shadow(0 0 20px rgba(96,165,250,.5));animation:mfloat 3s ease-in-out infinite;}
+.screen{max-width:540px;}
 </style>
 </head>
 <body>
@@ -56,7 +45,7 @@
   <div class="nav-logo" id="navLogo">Serafina</div>
   <div class="nav-right">
     <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0;</button>
-    <button class="nav-btn" id="btnRestart" onclick="startQuiz()">&#x21BA;</button>
+    <button class="nav-btn" id="btnRestart" onclick="startGame()">&#x21BA;</button>
     <div class="nav-a11y">
       <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A-</button>
       <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
@@ -64,90 +53,127 @@
     </div>
   </div>
 </div>
+
 <div class="screen active" id="screen-intro">
   <div class="intro-emoji">&#x2753;</div>
-  <div class="intro-title">Quiz: Períodos do Dia e Estações</div>
-  <div class="intro-sub">10 perguntas de múltipla escolha</div>
-  <button class="btn-start" onclick="startQuiz()">&#x1F3AE; Começar!</button>
+  <div class="intro-title">Quiz: Periodos e Estacoes</div>
+  <div class="intro-sub">GEO NB1 &bull; 10 perguntas</div>
+  <div style="text-align:center;font-size:13px;font-weight:700;color:var(--text-dim);margin:12px 0 24px;">Gerado pelo NotebookLM com base nos insumos da aula</div>
+  <button class="btn-start" onclick="startGame()">&#x1F4DA; Come&ccedil;ar!</button>
 </div>
-<div class="screen" id="screen-quiz">
-  <div class="qz-progress" id="qzProgress">1 / 10</div>
-  <div class="qz-score-bar" id="qzDots"></div>
-  <div class="qz-question" id="qzQuestion"></div>
-  <div class="qz-hint" id="qzHint"></div>
-  <div class="qz-options" id="qzOptions"></div>
-  <div class="qz-nav">
-    <button class="qz-nav-btn" id="btnPrev" onclick="prevQ()" disabled>&#x2B05; Anterior</button>
-    <button class="qz-nav-btn" id="btnNext" onclick="nextQ()">Próximo &#x27A1;</button>
+
+<div class="screen" id="screen-game">
+  <div class="q-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+    <div class="q-dots" id="qDots"></div>
+    <div class="q-num" id="qNum">1 / 10</div>
+    <div class="q-text" id="qText"></div>
+    <div class="opts" id="optsEl"></div>
+    <div class="hint-box" id="hintBox">
+      <div class="hint-label" id="hintLabel"></div>
+      <div id="hintDetail"></div>
+    </div>
+    <button class="btn-next" id="btnNext" style="display:none" onclick="nextQ()">Pr&oacute;xima &#x27A1;</button>
   </div>
 </div>
+
 <div class="screen" id="screen-end">
-  <div class="end-emoji">&#x1F3C6;</div>
-  <div class="end-title">Quiz completo!</div>
+  <span class="end-emoji" id="endEmoji"></span>
+  <div class="end-title" id="endTitle"></div>
   <div class="end-score" id="endScore"></div>
-  <button class="btn-restart" onclick="startQuiz()">&#x1F500; Tentar de novo</button>
-  <div style="text-align:center;margin-top:16px;">
-    <button class="nav-btn" onclick="showHomeModal()" style="margin:0 auto;font-size:13px;padding:10px 20px;">&#x1F3E0; Início</button>
+  <div class="end-sub" id="endSub"></div>
+  <button class="btn-restart" onclick="startGame()">&#x1F500; Jogar de novo</button>
+  <div style="text-align:center;margin-top:14px;">
+    <button class="nav-btn" onclick="showHomeModal()" style="margin:0 auto;font-size:13px;padding:10px 20px;">&#x1F3E0; In&iacute;cio</button>
   </div>
 </div>
 </div>
+
 <script src="../base.js"></script>
 <script>
-var QUESTIONS = [{"question": "De acordo com os per\u00edodos do dia, o que geralmente caracteriza a manh\u00e3 nas cidades?", "answerOptions": [{"text": "O sol nasce, as ruas ficam movimentadas e as crian\u00e7as v\u00e3o para a escola.", "isCorrect": true, "rationale": "Este per\u00edodo marca o in\u00edcio das atividades cotidianas, com a ilumina\u00e7\u00e3o natural retornando e o deslocamento para compromissos."}, {"text": "O sol est\u00e1 no ponto mais alto do c\u00e9u e as pessoas fazem o almo\u00e7o.", "isCorrect": false, "rationale": "Esta descri\u00e7\u00e3o refere-se ao per\u00edodo da tarde, quando a luz solar \u00e9 mais intensa e direta."}, {"text": "As luzes da cidade se acendem e as ruas ficam mais calmas.", "isCorrect": false, "rationale": "Essas caracter\u00edsticas s\u00e3o t\u00edpicas da noite, quando as atividades externas diminuem e o descanso come\u00e7a."}, {"text": "O sol come\u00e7a a se p\u00f4r e as pessoas praticam esportes ao ar livre.", "isCorrect": false, "rationale": "O p\u00f4r do sol acontece no final da tarde, preparando a transi\u00e7\u00e3o para o per\u00edodo noturno."}], "hint": "Pense no momento em que o despertador toca e o dia come\u00e7a."}, {"question": "Qual dos seguintes espa\u00e7os p\u00fablicos precisa funcionar 24 horas por dia, independentemente de ser dia ou noite?", "answerOptions": [{"text": "Escola", "isCorrect": false, "rationale": "Escolas funcionam geralmente em turnos espec\u00edficos de manh\u00e3 e tarde, n\u00e3o sendo servi\u00e7os de emerg\u00eancia cont\u00ednua."}, {"text": "Hospital", "isCorrect": true, "rationale": "Hospitais oferecem servi\u00e7os essenciais de sa\u00fade que n\u00e3o podem ser interrompidos, operando ininterruptamente."}, {"text": "Lojas e com\u00e9rcio", "isCorrect": false, "rationale": "O com\u00e9rcio costuma seguir hor\u00e1rios comerciais padr\u00e3o, fechando durante a madrugada na maioria das vezes."}, {"text": "Parques p\u00fablicos", "isCorrect": false, "rationale": "Muitos parques possuem hor\u00e1rios de abertura e fechamento por quest\u00f5es de seguran\u00e7a e manuten\u00e7\u00e3o."}], "hint": "Considere qual servi\u00e7o lida com emerg\u00eancias que podem acontecer a qualquer momento."}, {"question": "No ver\u00e3o, como costuma ser a rela\u00e7\u00e3o entre a dura\u00e7\u00e3o dos dias e das noites?", "answerOptions": [{"text": "Os dias s\u00e3o curtos e as noites s\u00e3o longas.", "isCorrect": false, "rationale": "Esta \u00e9 uma caracter\u00edstica do inverno, onde h\u00e1 menos horas de luz solar."}, {"text": "Os dias e as noites possuem exatamente a mesma dura\u00e7\u00e3o.", "isCorrect": false, "rationale": "Embora existam momentos espec\u00edficos do ano assim, no ver\u00e3o a luz solar predomina por mais tempo."}, {"text": "Os dias s\u00e3o longos e as noites s\u00e3o curtas.", "isCorrect": true, "rationale": "A inclina\u00e7\u00e3o da Terra permite que, durante o ver\u00e3o, uma regi\u00e3o receba luz solar por um per\u00edodo maior do dia."}, {"text": "O sol nunca se p\u00f5e durante todo o ver\u00e3o.", "isCorrect": false, "rationale": "Embora isso ocorra em polos extremos, na maior parte do mundo o ciclo de dia e noite continua existindo."}], "hint": "Lembre-se de qual esta\u00e7\u00e3o permite brincar l\u00e1 fora por mais tempo antes de escurecer."}, {"question": "Qual caracter\u00edstica natural marca a transi\u00e7\u00e3o do outono nas \u00e1rvores de clima temperado?", "answerOptions": [{"text": "As flores voltam a brotar nos jardins.", "isCorrect": false, "rationale": "O florescimento \u00e9 o marco principal da primavera, ap\u00f3s o per\u00edodo de frio."}, {"text": "As folhas mudam de cor e caem no ch\u00e3o.", "isCorrect": true, "rationale": "A queda das folhas \u00e9 uma estrat\u00e9gia das plantas para poupar energia antes da chegada do inverno."}, {"text": "As \u00e1rvores crescem rapidamente devido ao calor intenso.", "isCorrect": false, "rationale": "O crescimento acelerado e o calor s\u00e3o mais associados ao ver\u00e3o."}, {"text": "Os animais nascem em grande quantidade nas florestas.", "isCorrect": false, "rationale": "O nascimento de filhotes costuma ser mais comum na primavera, quando h\u00e1 fartura de alimento."}], "hint": "Pense no que as crian\u00e7as observam no ch\u00e3o ao passear com o cachorro nessa esta\u00e7\u00e3o."}, {"question": "Por que as comunidades ind\u00edgenas do Brasil costumam viver perto de rios e \u00e1guas?", "answerOptions": [{"text": "Para facilitar o uso de tren\u00f3s puxados por animais.", "isCorrect": false, "rationale": "Tren\u00f3s s\u00e3o meios de transporte para regi\u00f5es de neve, o que n\u00e3o reflete a realidade da maioria das comunidades ind\u00edgenas brasileiras."}, {"text": "Como forma de subsist\u00eancia, usando a canoa para pesca e transporte.", "isCorrect": true, "rationale": "A proximidade com a \u00e1gua garante acesso a alimento e uma via natural de deslocamento essencial ao seu modo de vida."}, {"text": "Para evitar o contato com a natureza da floresta.", "isCorrect": false, "rationale": "Os povos ind\u00edgenas mant\u00eam uma rela\u00e7\u00e3o de harmonia e depend\u00eancia direta com a floresta e seus recursos."}, {"text": "Porque a \u00e1gua dos rios permanece congelada o ano inteiro.", "isCorrect": false, "rationale": "Os rios brasileiros s\u00e3o tropicais e n\u00e3o congelam, permitindo a navega\u00e7\u00e3o constante."}], "hint": "Considere como o rio serve tanto como 'estrada' quanto como 'supermercado'."}, {"question": "O povo Nenets, da R\u00fassia, \u00e9 conhecido por ser n\u00f4made. O que motiva o deslocamento desse grupo entre o outono e o inverno?", "answerOptions": [{"text": "A busca por praias mais quentes durante as f\u00e9rias.", "isCorrect": false, "rationale": "O estilo de vida n\u00f4made deste povo \u00e9 baseado na sobreviv\u00eancia e recursos, n\u00e3o em turismo de lazer."}, {"text": "A necessidade de buscar novos pastos, pois os atuais congelam.", "isCorrect": true, "rationale": "Como criadores de renas, eles precisam se mover para locais onde os animais ainda consigam encontrar alimento."}, {"text": "O desejo de construir casas permanentes em cidades grandes.", "isCorrect": false, "rationale": "Ser n\u00f4made significa justamente n\u00e3o ter uma resid\u00eancia fixa, movendo-se conforme os ciclos naturais."}, {"text": "A falta de meios de transporte como tren\u00f3s e huskies.", "isCorrect": false, "rationale": "Na verdade, eles utilizam justamente esses meios para conseguir realizar suas migra\u00e7\u00f5es no gelo."}], "hint": "Reflita sobre o que acontece com a comida dos animais quando o frio intenso chega."}, {"question": "Sobre os povos abor\u00edgenes da Austr\u00e1lia, qual afirma\u00e7\u00e3o descreve corretamente seu modo de vida tradicional?", "answerOptions": [{"text": "S\u00e3o povos que vivem exclusivamente em \u00e1reas rurais modernas.", "isCorrect": false, "rationale": "Embora vivam em diversos contextos hoje, seu modo tradicional \u00e9 profundamente ligado \u00e0 natureza original."}, {"text": "S\u00e3o ca\u00e7adores e coletores com um modo de viver pr\u00f3ximo \u00e0 natureza.", "isCorrect": true, "rationale": "Eles mant\u00eam uma conex\u00e3o espiritual e pr\u00e1tica com a terra, retirando dela o que precisam para viver."}, {"text": "Utilizam grandes navios para pescar em alto mar no inverno.", "isCorrect": false, "rationale": "Sua tradi\u00e7\u00e3o envolve t\u00e9cnicas de pesca e coleta locais, n\u00e3o o uso de frotas industriais mar\u00edtimas."}, {"text": "S\u00e3o n\u00f4mades que vivem em desertos de gelo na Oceania.", "isCorrect": false, "rationale": "A Austr\u00e1lia \u00e9 um pa\u00eds de clima predominantemente quente e seco, sem desertos de gelo."}], "hint": "Pense em como os povos nativos obt\u00eam alimento sem usar agricultura comercial."}, {"question": "Como a temperatura do inverno influencia os h\u00e1bitos alimentares das pessoas?", "answerOptions": [{"text": "As pessoas preferem tomar sorvetes e bebidas geladas.", "isCorrect": false, "rationale": "Alimentos gelados ajudam a baixar a temperatura corporal, o que \u00e9 desejado no ver\u00e3o, n\u00e3o no inverno."}, {"text": "O consumo de frutas frescas e sucos naturais aumenta.", "isCorrect": false, "rationale": "Esses itens s\u00e3o mais procurados no calor para hidrata\u00e7\u00e3o e refresc\u00e2ncia."}, {"text": "As pessoas costumam comer sopas, ch\u00e1s e comidas quentes.", "isCorrect": true, "rationale": "Alimentos quentes auxiliam na manuten\u00e7\u00e3o do calor corporal em per\u00edodos de baixa temperatura externa."}, {"text": "A alimenta\u00e7\u00e3o n\u00e3o muda, independente da esta\u00e7\u00e3o do ano.", "isCorrect": false, "rationale": "A dieta humana costuma se adaptar \u00e0s necessidades t\u00e9rmicas e \u00e0 disponibilidade de alimentos de cada esta\u00e7\u00e3o."}], "hint": "Imagine o que seria mais confort\u00e1vel comer em um dia de neve ou muito vento frio."}, {"question": "Qual \u00e9 a principal raz\u00e3o cient\u00edfica para a exist\u00eancia das diferentes esta\u00e7\u00f5es do ano?", "answerOptions": [{"text": "A Terra se afasta e se aproxima do Sol em linha reta.", "isCorrect": false, "rationale": "A dist\u00e2ncia varia pouco; o fator principal \u00e9 o \u00e2ngulo com que a luz atinge a superf\u00edcie."}, {"text": "A Lua bloqueia a luz do Sol em per\u00edodos espec\u00edficos.", "isCorrect": false, "rationale": "Isso descreve um eclipse, um evento moment\u00e2neo que n\u00e3o causa as esta\u00e7\u00f5es do ano."}, {"text": "A Terra se inclina enquanto gira ao redor do Sol.", "isCorrect": true, "rationale": "Essa inclina\u00e7\u00e3o faz com que diferentes partes do planeta recebam mais ou menos luz solar ao longo do ano."}, {"text": "As luzes das cidades aquecem o planeta de forma desigual.", "isCorrect": false, "rationale": "As esta\u00e7\u00f5es s\u00e3o fen\u00f4menos naturais de escala global e n\u00e3o causadas pela ilumina\u00e7\u00e3o artificial humana."}], "hint": "Pense na posi\u00e7\u00e3o do nosso planeta em rela\u00e7\u00e3o ao astro rei durante sua viagem pelo espa\u00e7o."}, {"question": "No per\u00edodo da noite, o que costuma mudar na rotina das pessoas em compara\u00e7\u00e3o com o dia?", "answerOptions": [{"text": "As pessoas saem para trabalhar e as escolas abrem.", "isCorrect": false, "rationale": "A maioria dos empregos e institui\u00e7\u00f5es de ensino operam sob a luz do dia."}, {"text": "As fam\u00edlias se re\u00fanem para jantar, descansar e dormir.", "isCorrect": true, "rationale": "A noite \u00e9 o per\u00edodo biol\u00f3gico voltado para a recupera\u00e7\u00e3o de energias e conv\u00edvio dom\u00e9stico."}, {"text": "O sol atinge seu ponto mais alto e ilumina tudo.", "isCorrect": false, "rationale": "Isso descreve o meio-dia, o oposto do per\u00edodo noturno."}, {"text": "As pessoas usam protetor solar para se proteger das estrelas.", "isCorrect": false, "rationale": "O protetor solar \u00e9 usado para bloquear raios UV do Sol, que n\u00e3o est\u00e3o presentes \u00e0 noite."}], "hint": "Considere o que voc\u00ea faz depois que o c\u00e9u fica escuro e as estrelas aparecem."}];
-var current=0,answers=[],shuffled=[];
-function startQuiz(){
-  shuffled=shuffle(QUESTIONS.slice());
-  current=0;answers=new Array(shuffled.length).fill(null);
-  showScreen('screen-quiz');renderQ();renderDots();
+var RAW_QUESTIONS = [{"question": "De acordo com o material, quais s\u00e3o os tr\u00eas per\u00edodos em que o dia \u00e9 dividido para organizar a rotina?", "answerOptions": [{"text": "Manh\u00e3, tarde e noite", "isCorrect": true, "rationale": "Esses s\u00e3o os tr\u00eas intervalos de tempo citados como fundamentais para a organiza\u00e7\u00e3o das atividades e hor\u00e1rios das pessoas."}, {"text": "Nascer do sol, meio-dia e p\u00f4r do sol", "isCorrect": false, "rationale": "Embora marquem momentos espec\u00edficos, estes representam pontos de transi\u00e7\u00e3o e n\u00e3o os per\u00edodos completos de dura\u00e7\u00e3o das atividades."}, {"text": "Caf\u00e9 da manh\u00e3, almo\u00e7o e jantar", "isCorrect": false, "rationale": "Estes s\u00e3o nomes de refei\u00e7\u00f5es que ocorrem durante o dia, e n\u00e3o a divis\u00e3o dos per\u00edodos temporais em si."}, {"text": "Madrugada, manh\u00e3 e tarde", "isCorrect": false, "rationale": "A madrugada n\u00e3o \u00e9 destacada como um dos tr\u00eas per\u00edodos principais de atividades rotineiras descritos no texto base."}], "hint": "Pense nas tr\u00eas partes principais do dia que come\u00e7am quando acordamos e terminam quando vamos dormir."}, {"question": "Qual \u00e9 a principal caracter\u00edstica do per\u00edodo da manh\u00e3 descrita no texto?", "answerOptions": [{"text": "O sol nasce, ilumina a cidade e as pessoas acordam", "isCorrect": true, "rationale": "A manh\u00e3 \u00e9 marcada pelo in\u00edcio da claridade e pelo despertar das pessoas para suas tarefas iniciais."}, {"text": "O sol est\u00e1 no ponto mais alto do c\u00e9u e as ruas ficam calmas", "isCorrect": false, "rationale": "O sol alto caracteriza a tarde, e as ruas costumam ficar mais movimentadas, n\u00e3o calmas, na manh\u00e3."}, {"text": "O c\u00e9u fica escuro e as luzes da cidade se acendem", "isCorrect": false, "rationale": "Esta descri\u00e7\u00e3o refere-se ao per\u00edodo da noite, quando a ilumina\u00e7\u00e3o natural desaparece."}, {"text": "As pessoas come\u00e7am a se preparar para dormir e descansar", "isCorrect": false, "rationale": "O descanso e o sono s\u00e3o atividades t\u00edpicas do fim do dia, no per\u00edodo noturno."}], "hint": "Lembre-se do que acontece logo que o dia come\u00e7a a ficar claro."}, {"question": "Sobre o funcionamento dos espa\u00e7os p\u00fablicos, qual local funciona ininterruptamente (24 horas)?", "answerOptions": [{"text": "Hospital", "isCorrect": true, "rationale": "Hospitais precisam atender emerg\u00eancias a qualquer momento, funcionando tanto de dia quanto de noite."}, {"text": "Escola", "isCorrect": false, "rationale": "As escolas geralmente seguem hor\u00e1rios fixos nos per\u00edodos da manh\u00e3 e/ou tarde, fechando \u00e0 noite."}, {"text": "Com\u00e9rcio e lojas", "isCorrect": false, "rationale": "A maioria dos com\u00e9rcios encerra suas atividades ao final da tarde ou durante a noite, n\u00e3o operando 24 horas."}, {"text": "Parque de divers\u00f5es", "isCorrect": false, "rationale": "Parques costumam ter hor\u00e1rios de funcionamento restritos, baseados na luz do dia ou seguran\u00e7a noturna."}], "hint": "Pense em qual servi\u00e7o de sa\u00fade \u00e9 essencial estar sempre dispon\u00edvel para a popula\u00e7\u00e3o."}, {"question": "Como os dias e as noites se comportam durante a esta\u00e7\u00e3o do ver\u00e3o?", "answerOptions": [{"text": "Os dias s\u00e3o longos e as noites s\u00e3o curtas", "isCorrect": true, "rationale": "No ver\u00e3o, a inclina\u00e7\u00e3o da Terra permite mais tempo de exposi\u00e7\u00e3o solar, resultando em dias com maior dura\u00e7\u00e3o de claridade."}, {"text": "Os dias s\u00e3o curtos e as noites s\u00e3o longas", "isCorrect": false, "rationale": "Esta \u00e9 uma caracter\u00edstica do inverno, quando o per\u00edodo de luz solar \u00e9 reduzido."}, {"text": "Tanto o dia quanto a noite t\u00eam a mesma dura\u00e7\u00e3o exata", "isCorrect": false, "rationale": "A dura\u00e7\u00e3o varia conforme a esta\u00e7\u00e3o do ano devido \u00e0 inclina\u00e7\u00e3o do eixo terrestre."}, {"text": "N\u00e3o h\u00e1 luz solar e o c\u00e9u fica sempre nublado", "isCorrect": false, "rationale": "O ver\u00e3o \u00e9 conhecido justamente pelo excesso de sol e calor, n\u00e3o pela aus\u00eancia de luz."}], "hint": "Lembre-se de qual esta\u00e7\u00e3o tem mais tempo de sol para brincar ao ar livre."}, {"question": "Quais s\u00e3o os h\u00e1bitos alimentares e de vestu\u00e1rio comuns no inverno, segundo o material?", "answerOptions": [{"text": "Roupas pesadas e comidas quentes como sopas e ch\u00e1s", "isCorrect": true, "rationale": "O frio do inverno exige prote\u00e7\u00e3o corporal com casacos e alimentos que ajudem a manter a temperatura interna do corpo."}, {"text": "Roupas leves e bebidas muito geladas", "isCorrect": false, "rationale": "Roupas leves e gelados s\u00e3o adequados para o calor do ver\u00e3o, n\u00e3o para o frio intenso."}, {"text": "Apenas roupas de banho e frutas frescas", "isCorrect": false, "rationale": "Este conjunto de h\u00e1bitos est\u00e1 ligado a atividades de praia e calor extremo."}, {"text": "Roupas floridas e piqueniques ao ar livre", "isCorrect": false, "rationale": "Estas atividades s\u00e3o mais associadas \u00e0 primavera, quando o clima \u00e9 mais agrad\u00e1vel para estar fora de casa."}], "hint": "Considere o que fazemos para nos aquecer quando a temperatura est\u00e1 muito baixa."}, {"question": "O que acontece com a natureza durante a primavera?", "answerOptions": [{"text": "As flores voltam a brotar e os animais nascem", "isCorrect": true, "rationale": "A primavera \u00e9 o per\u00edodo de renascimento da flora e fauna ap\u00f3s o rigor do inverno."}, {"text": "As folhas das \u00e1rvores mudam de cor e caem no ch\u00e3o", "isCorrect": false, "rationale": "A queda das folhas \u00e9 a caracter\u00edstica marcante do outono, preparando a planta para o frio."}, {"text": "Toda a vegeta\u00e7\u00e3o seca por causa do calor forte", "isCorrect": false, "rationale": "O calor extremo pode ocorrer no ver\u00e3o, enquanto a primavera tem temperaturas que come\u00e7am a subir suavemente."}, {"text": "Aparece neve em quase todos os lugares do mundo", "isCorrect": false, "rationale": "A neve \u00e9 um fen\u00f4meno t\u00edpico de invernos rigorosos em certas regi\u00f5es, n\u00e3o da primavera."}], "hint": "Pense em qual esta\u00e7\u00e3o \u00e9 conhecida como a 'esta\u00e7\u00e3o das flores'."}, {"question": "Qual \u00e9 o principal motivo cient\u00edfico para a exist\u00eancia das quatro esta\u00e7\u00f5es do ano?", "answerOptions": [{"text": "A inclina\u00e7\u00e3o da Terra enquanto ela gira ao redor do Sol", "isCorrect": true, "rationale": "A inclina\u00e7\u00e3o do eixo terrestre faz com que diferentes partes do planeta recebam luz solar de forma desigual ao longo do ano."}, {"text": "A dist\u00e2ncia da Lua em rela\u00e7\u00e3o \u00e0 Terra", "isCorrect": false, "rationale": "A Lua influencia principalmente as mar\u00e9s e o per\u00edodo noturno, mas n\u00e3o as mudan\u00e7as clim\u00e1ticas sazonais."}, {"text": "A velocidade com que as nuvens se movem no c\u00e9u", "isCorrect": false, "rationale": "O movimento das nuvens afeta o tempo meteorol\u00f3gico di\u00e1rio, mas n\u00e3o define as esta\u00e7\u00f5es anuais."}, {"text": "O fato de o Sol girar em torno da Terra", "isCorrect": false, "rationale": "Este \u00e9 um conceito astron\u00f4mico incorreto; \u00e9 a Terra que orbita o Sol."}], "hint": "Reflita sobre como a posi\u00e7\u00e3o do nosso planeta em rela\u00e7\u00e3o \u00e0 sua estrela muda a recep\u00e7\u00e3o de luz."}, {"question": "No outono, como as pessoas geralmente se preparam para a chegada da pr\u00f3xima esta\u00e7\u00e3o?", "answerOptions": [{"text": "Come\u00e7am a usar roupas mais pesadas porque a temperatura diminui", "isCorrect": true, "rationale": "O outono \u00e9 uma transi\u00e7\u00e3o onde o calor diminui, exigindo roupas mais quentes em prepara\u00e7\u00e3o para o inverno."}, {"text": "Guardam todos os casacos e compram roupas de banho", "isCorrect": false, "rationale": "Isso ocorreria na transi\u00e7\u00e3o para o ver\u00e3o, e n\u00e3o quando a temperatura est\u00e1 caindo."}, {"text": "Passam a usar protetor solar constantemente para o frio", "isCorrect": false, "rationale": "O protetor solar \u00e9 mais enfatizado no ver\u00e3o devido ao sol forte, embora o frio do outono exija outros cuidados."}, {"text": "Ficam apenas dentro de casa sem realizar atividades", "isCorrect": false, "rationale": "As pessoas continuam ativas, mas mudam o tipo de roupa e se adaptam \u00e0 mudan\u00e7a na paisagem (folhas ca\u00eddas)."}], "hint": "Pense no que acontece com a temperatura logo ap\u00f3s o fim do ver\u00e3o."}, {"question": "Qual atividade \u00e9 citada como comum no per\u00edodo da noite para a maioria das pessoas?", "answerOptions": [{"text": "Jantar, descansar e dormir", "isCorrect": true, "rationale": "O per\u00edodo noturno \u00e9 o momento em que o corpo recupera as energias ap\u00f3s as atividades do dia."}, {"text": "Ir para a escola e praticar esportes ao ar livre", "isCorrect": false, "rationale": "Estudos e esportes ao ar livre s\u00e3o atividades predominantemente diurnas (manh\u00e3 e tarde)."}, {"text": "Tomar o caf\u00e9 da manh\u00e3 e ver o sol nascer", "isCorrect": false, "rationale": "Estas s\u00e3o a\u00e7\u00f5es que marcam o in\u00edcio da manh\u00e3, o oposto do per\u00edodo noturno."}, {"text": "Ir \u00e0 praia e tomar sorvete no sol", "isCorrect": false, "rationale": "Estas atividades dependem do sol e do calor, sendo t\u00edpicas de tardes de ver\u00e3o."}], "hint": "Pense no que sua fam\u00edlia faz quando o c\u00e9u fica escuro e as luzes da rua se acendem."}, {"question": "Por que o hor\u00e1rio e as atividades mudam em diferentes lugares do mundo ao mesmo tempo?", "answerOptions": [{"text": "Porque lugares diferentes vivem esta\u00e7\u00f5es e per\u00edodos diferentes simultaneamente", "isCorrect": true, "rationale": "Devido \u00e0 inclina\u00e7\u00e3o e rota\u00e7\u00e3o da Terra, enquanto \u00e9 dia em um lugar, pode ser noite em outro, ou ver\u00e3o em um hemisf\u00e9rio e inverno no outro."}, {"text": "Porque cada cidade escolhe sua pr\u00f3pria esta\u00e7\u00e3o do ano", "isCorrect": false, "rationale": "As esta\u00e7\u00f5es s\u00e3o fen\u00f4menos naturais globais e n\u00e3o uma escolha administrativa das cidades."}, {"text": "Porque o Sol nasce ao mesmo tempo em todos os pa\u00edses", "isCorrect": false, "rationale": "O Sol nasce em hor\u00e1rios diferentes ao redor do globo devido ao formato esf\u00e9rico e rota\u00e7\u00e3o da Terra."}, {"text": "Porque as pessoas preferem trabalhar apenas no ver\u00e3o", "isCorrect": false, "rationale": "O trabalho e os servi\u00e7os ocorrem o ano todo, adaptando-se \u00e0s condi\u00e7\u00f5es clim\u00e1ticas de cada esta\u00e7\u00e3o."}], "hint": "Considere como a Terra se posiciona no espa\u00e7o em rela\u00e7\u00e3o ao Sol."}];
+var questions = [], cur = 0, answered = false, dots = [], scoreOk = 0;
+
+function startGame(){
+  questions = shuffle(RAW_QUESTIONS.slice());
+  cur = 0; answered = false; scoreOk = 0;
+  dots = questions.map(function(){ return 'pending'; });
+  showScreen('screen-game');
+  renderQ();
 }
+
 function renderQ(){
-  var q=shuffled[current];
-  $('qzProgress').textContent=(current+1)+' / '+shuffled.length;
-  $('qzQuestion').textContent=q.question;
-  $('qzHint').textContent=q.hint?'?? '+q.hint:'';
-  var opts=$('qzOptions');opts.innerHTML='';
-  var answered=answers[current]!==null;
-  q.answerOptions.forEach(function(opt,i){
-    var btn=document.createElement('button');
-    btn.className='qz-opt';btn.textContent=opt.text;
-    if(answered){
-      btn.disabled=true;
-      if(opt.isCorrect)btn.classList.add('correct');
-      else if(i===answers[current])btn.classList.add('wrong');
-      var rat=document.createElement('div');
-      rat.className='qz-rationale show';rat.textContent=opt.rationale;
-      btn.appendChild(rat);
-    }else{btn.onclick=function(){selectAnswer(i);};}
-    opts.appendChild(btn);
+  var q = questions[cur];
+  answered = false;
+  $('progFill').style.width = Math.round(cur/questions.length*100) + '%';
+  $('qNum').textContent = (cur+1) + ' / ' + questions.length;
+  $('qText').textContent = q.question;
+  var el = $('optsEl'); el.innerHTML = '';
+  var opts = shuffle(q.answerOptions.slice());
+  opts.forEach(function(o){
+    var b = document.createElement('button');
+    b.className = 'opt';
+    b.textContent = o.text;
+    b.addEventListener('click', function(){ pick(o); });
+    el.appendChild(b);
   });
-  $('btnPrev').disabled=current===0;
-  $('btnNext').textContent=current===shuffled.length-1?'Ver resultado ✅':'Próximo ➡️';
+  $('hintBox').className = 'hint-box';
+  $('btnNext').style.display = 'none';
+  $('btnNext').textContent = cur < questions.length - 1 ? 'Pr\u00f3xima \u27a1' : '\ud83c\udfc1 Ver resultado';
+  renderDots();
 }
-function selectAnswer(i){
-  if(answers[current]!==null)return;
-  answers[current]=i;renderQ();renderDots();
+
+function pick(chosen){
+  if(answered) return;
+  answered = true;
+  var q = questions[cur];
+  var ok = chosen.isCorrect;
+  if(ok) scoreOk++;
+  dots[cur] = ok ? 'done' : 'fail';
+  $('optsEl').querySelectorAll('.opt').forEach(function(b){
+    var isCorrect = q.answerOptions.some(function(o){ return o.text === b.textContent && o.isCorrect; });
+    if(isCorrect) b.classList.add('correct');
+    else if(b.textContent === chosen.text && !ok) b.classList.add('wrong');
+    else b.classList.add('disabled');
+  });
+  var hb = $('hintBox');
+  if(ok){ hb.className = 'hint-box correct'; $('hintLabel').className = 'hint-label ok'; $('hintLabel').textContent = '\u2705 Certo!'; }
+  else{ hb.className = 'hint-box wrong'; $('hintLabel').className = 'hint-label no'; $('hintLabel').textContent = '\u274c Quase!'; }
+  var correctOpt = q.answerOptions.find(function(o){ return o.isCorrect; }) || {};
+  $('hintDetail').textContent = chosen.rationale || correctOpt.rationale || '';
+  $('btnNext').style.display = 'block';
+  renderDots();
 }
-function renderDots(){
-  var html='';
-  for(var i=0;i<shuffled.length;i++){
-    var cls='qz-dot';
-    if(i===current)cls+=' current';
-    else if(answers[i]!==null)cls+=shuffled[i].answerOptions[answers[i]].isCorrect?' correct':' wrong';
-    html+='<div class="'+cls+'"></div>';
-  }
-  $('qzDots').innerHTML=html;
-}
+
 function nextQ(){
-  if(current<shuffled.length-1){current++;renderQ();renderDots();}
-  else{
-    var score=answers.filter(function(a,i){return a!==null&&shuffled[i].answerOptions[a].isCorrect;}).length;
-    var pct=Math.round(score/shuffled.length*100);
-    var em=pct>=80?'??':pct>=60?'??':'??';
-    $('endScore').textContent=em+' '+score+' de '+shuffled.length+' corretas ('+pct+'%)';
-    showScreen('screen-end');
-  }
+  cur++;
+  if(cur >= questions.length) endScreen();
+  else renderQ();
 }
-function prevQ(){if(current>0){current--;renderQ();renderDots();}}
+
+function renderDots(){
+  var h = '';
+  for(var i = 0; i < questions.length; i++){
+    var c = 'q-dot';
+    if(dots[i]==='done') c += ' done';
+    else if(dots[i]==='fail') c += ' fail';
+    else if(i===cur) c += ' cur';
+    h += '<div class="' + c + '"></div>';
+  }
+  $('qDots').innerHTML = h;
+}
+
+function endScreen(){
+  var pct = Math.round(scoreOk/questions.length*100);
+  var em = pct===100 ? '\ud83c\udf1f' : pct>=70 ? '\ud83c\udfc6' : pct>=50 ? '\ud83d\udc4d' : '\ud83d\udcaa';
+  var tit = pct===100 ? 'Perfeito!' : pct>=70 ? 'Muito bem!' : pct>=50 ? 'Bom trabalho!' : 'Continue praticando!';
+  $('endEmoji').textContent = em;
+  $('endTitle').textContent = tit;
+  $('endScore').textContent = scoreOk + ' / ' + questions.length + ' (' + pct + '%)';
+  $('endSub').textContent = 'Quer tentar de novo?';
+  showScreen('screen-end');
+}
+
 initApp();
 </script>
 </body>
