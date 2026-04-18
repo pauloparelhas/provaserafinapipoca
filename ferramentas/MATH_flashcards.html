@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matemática Cards — Y2 — Projeto Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+.fc-progress{text-align:center;font-size:14px;font-weight:800;color:var(--text-dim);margin:12px 0 16px;}
+.fc-container{perspective:800px;width:100%;max-width:460px;margin:0 auto 20px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;}
+.fc-inner{position:relative;width:100%;min-height:240px;transition:transform .5s;transform-style:preserve-3d;}
+.fc-inner.flipped{transform:rotateY(180deg);}
+.fc-face{position:absolute;top:0;left:0;width:100%;min-height:240px;backface-visibility:hidden;
+  border-radius:20px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;}
+.fc-front{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(239,68,68,.15));
+  border:2px solid rgba(245,158,11,.35);}
+.fc-back{background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(96,165,250,.15));
+  border:2px solid rgba(52,211,153,.3);transform:rotateY(180deg);}
+.fc-label{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-dim);margin-bottom:12px;}
+.fc-text{font-size:calc(16px * var(--fs));font-weight:700;color:var(--text);line-height:1.5;white-space:pre-line;}
+.fc-hint{font-size:12px;font-weight:700;color:var(--text-dim);margin-top:16px;}
+
+.fc-nav{display:flex;gap:12px;justify-content:center;margin:8px 0 20px;flex-wrap:wrap;}
+.fc-nav-btn{background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.04));
+  border:1px solid var(--card-border);border-radius:14px;padding:12px 28px;
+  font-family:inherit;font-size:14px;font-weight:800;color:var(--text);cursor:pointer;
+  transition:all .2s;min-height:44px;}
+.fc-nav-btn:hover{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);transform:translateY(-2px);}
+.fc-nav-btn:disabled{opacity:.3;cursor:default;transform:none;}
+.fc-nav-btn.shuffle{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(239,68,68,.1));
+  border-color:rgba(245,158,11,.3);}
+
+.fc-score{text-align:center;margin:16px 0;}
+.fc-dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+.fc-dot{width:10px;height:10px;border-radius:50%;background:var(--card-border);}
+.fc-dot.seen{background:#34d399;}
+.fc-dot.current{background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,.5);}
+
+.end-emoji{font-size:72px;text-align:center;display:block;margin:20px 0;
+  filter:drop-shadow(0 0 20px rgba(245,158,11,.5));}
+.end-title{font-size:clamp(20px,4vw,28px);font-weight:900;text-align:center;
+  background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;}
+.end-text{text-align:center;font-size:15px;font-weight:700;color:var(--text-soft);margin-bottom:24px;line-height:1.6;}
+.btn-restart{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;border:none;
+  font-family:inherit;font-size:16px;font-weight:800;padding:14px 36px;border-radius:50px;
+  cursor:pointer;display:block;margin:0 auto;}
+
+.intro-emoji{font-size:64px;text-align:center;display:block;margin-bottom:16px;
+  filter:drop-shadow(0 0 20px rgba(245,158,11,.5));animation:mfloat 3s ease-in-out infinite;}
+.screen{max-width:600px;}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+
+<div class="navbar">
+  <div class="nav-logo" id="navLogo">Serafina</div>
+  <div class="nav-right">
+    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0;</button>
+    <button class="nav-btn" id="btnRestart" onclick="startGame()">&#x21BA;</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A-</button>
+      <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen active" id="screen-intro">
+  <div class="intro-emoji">&#x1F9EE;</div>
+  <div class="intro-title">Cartas de Matemática</div>
+  <div class="intro-sub">Inglês na frente &bull; Português no verso!</div>
+  <div style="text-align:center;font-size:13px;font-weight:700;color:var(--text-dim);margin-bottom:24px;">
+    55 cards: patterns, attributes, core, even/odd, tally marks, ten-frame, making groups
+  </div>
+  <button class="btn-start" onclick="startGame()">&#x1F9EE; Come&ccedil;ar!</button>
+</div>
+
+<div class="screen" id="screen-game">
+  <div class="fc-progress" id="fcProgress">1 / 55</div>
+  <div class="fc-score">
+    <div class="fc-dots" id="fcDots"></div>
+  </div>
+  <div class="fc-container" id="fcContainer" onclick="flipCard()">
+    <div class="fc-inner" id="fcInner">
+      <div class="fc-face fc-front">
+        <div class="fc-label">&#x1F1FA;&#x1F1F8; English</div>
+        <div class="fc-text" id="fcFront"></div>
+        <div class="fc-hint">&#x1F449; Toque para ver em portugu&ecirc;s</div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-label">&#x1F1E7;&#x1F1F7; Portugu&ecirc;s</div>
+        <div class="fc-text" id="fcBack"></div>
+        <div class="fc-hint">&#x1F449; Toque para voltar</div>
+      </div>
+    </div>
+  </div>
+  <div class="fc-nav">
+    <button class="fc-nav-btn" id="btnPrev" onclick="prevCard()">&#x2B05; Anterior</button>
+    <button class="fc-nav-btn shuffle" id="btnShuffle" onclick="shuffleCards()">&#x1F500; Embaralhar</button>
+    <button class="fc-nav-btn" id="btnNext" onclick="nextCard()">Pr&oacute;ximo &#x27A1;</button>
+  </div>
+</div>
+
+<div class="screen" id="screen-end">
+  <div class="end-emoji">&#x1F31F;</div>
+  <div class="end-title">Arrasou nos cards!</div>
+  <div class="end-text">Você revisou todos os 55 cards de Matemática!<br>Quer embaralhar e revisar de novo?</div>
+  <button class="btn-restart" onclick="startGame()">&#x1F500; Embaralhar e Revisar</button>
+  <div style="text-align:center;margin-top:16px;">
+    <button class="nav-btn" onclick="showHomeModal()" style="margin:0 auto;font-size:13px;padding:10px 20px;">
+      &#x1F3E0; In&iacute;cio
+    </button>
+  </div>
+</div>
+
+</div>
+
+<script src="base.js"></script>
+<script>
+var CARDS = [];
+var currentIdx = 0;
+var isFlipped = false;
+
+fetch('media/flashcards_math.json')
+  .then(function(r){return r.json();})
+  .then(function(data){
+    CARDS = Array.isArray(data) ? data : (data.cards || []);
+  })
+  .catch(function(){
+    CARDS = [{front:'Erro ao carregar os cards',back:'Por favor, recarregue a página'}];
+  });
+
+function startGame(){
+  shuffle(CARDS);
+  currentIdx = 0;
+  isFlipped = false;
+  showScreen('screen-game');
+  renderCard();
+  renderDots();
+}
+
+function renderCard(){
+  var card = CARDS[currentIdx];
+  $('fcFront').textContent = card.front;
+  $('fcBack').textContent = card.back;
+  $('fcProgress').textContent = (currentIdx+1)+' / '+CARDS.length;
+  $('fcInner').classList.remove('flipped');
+  isFlipped = false;
+  $('btnPrev').disabled = currentIdx === 0;
+  renderDots();
+}
+
+function renderDots(){
+  var html = '';
+  for(var i=0;i<CARDS.length;i++){
+    var cls = 'fc-dot';
+    if(i < currentIdx) cls += ' seen';
+    if(i === currentIdx) cls += ' current';
+    html += '<div class="'+cls+'"></div>';
+  }
+  $('fcDots').innerHTML = html;
+}
+
+function flipCard(){
+  isFlipped = !isFlipped;
+  $('fcInner').classList.toggle('flipped', isFlipped);
+}
+
+function nextCard(){
+  if(currentIdx < CARDS.length - 1){
+    currentIdx++;
+    renderCard();
+  } else {
+    showScreen('screen-end');
+  }
+}
+
+function prevCard(){
+  if(currentIdx > 0){
+    currentIdx--;
+    renderCard();
+  }
+}
+
+function shuffleCards(){
+  shuffle(CARDS);
+  currentIdx = 0;
+  renderCard();
+}
+
+initApp();
+</script>
+</body>
+</html>

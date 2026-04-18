@@ -1,0 +1,222 @@
+[
+  {
+    "front": "Even number (Ex: $2, 4, 6, 8$)",
+    "back": "É um número par, que termina em $0, 2, 4, 6$ ou $8$."
+  },
+  {
+    "front": "Odd number (Ex: $1, 3, 5, 7, 9$)",
+    "back": "É um número ímpar, que termina em $1, 3, 5, 7$ ou $9$."
+  },
+  {
+    "front": "Tally marks (Ex: $IIII$ e um traço atravessado)",
+    "back": "São marcas ou risquinhos usados para contar objetos, geralmente em grupos de $5$."
+  },
+  {
+    "front": "Cubes (Ex: $\\square \\square \\square$)",
+    "back": "São cubos usados como objetos físicos para ajudar a contar e somar."
+  },
+  {
+    "front": "Objects (Ex: $\\bigcirc \\bigcirc \\bigcirc$)",
+    "back": "São objetos (como bolinhas ou peões) usados para representar quantidades."
+  },
+  {
+    "front": "Ten-frame (Ex: Um quadro com $2$ linhas e $5$ colunas)",
+    "back": "É o quadro de dez, usado para visualizar números e ver quanto falta para completar $10$."
+  },
+  {
+    "front": "Groups (Ex: Conjuntos de itens circulados)",
+    "back": "São grupos de objetos organizados com o mesmo tamanho."
+  },
+  {
+    "front": "Left over (Ex: $11$ dividido em grupos de $5$ e sobra $1$)",
+    "back": "É o que sobrou ou o restante de uma contagem em grupos."
+  },
+  {
+    "front": "Equal groups (Ex: Dois grupos com $3$ bolinhas cada)",
+    "back": "São grupos iguais, ou seja, todos têm a mesma quantidade de objetos."
+  },
+  {
+    "front": "Count (Ex: $1, 2, 3, 4...$)",
+    "back": "Significa contar a quantidade de objetos ou números."
+  },
+  {
+    "front": "Add (Ex: $3 + 2 = 5$)",
+    "back": "Significa somar, juntar ou adicionar quantidades para achar o total."
+  },
+  {
+    "front": "Total (Ex: O resultado final de uma soma)",
+    "back": "É o valor final de uma contagem ou de uma soma."
+  },
+  {
+    "front": "How many? (Ex: $?$)",
+    "back": "Significa \"Quantos?\" e é usado para perguntar a quantidade de algo."
+  },
+  {
+    "front": "Is it even or odd? (Ex: $12$ é par ou ímpar?)",
+    "back": "É a pergunta usada para saber se o número é par ou ímpar."
+  },
+  {
+    "front": "Pattern (Ex: $\\bigcirc \\triangle \\bigcirc \\triangle \\bigcirc \\triangle$)",
+    "back": "É um padrão, uma sequência de coisas que se repetem seguindo uma regra."
+  },
+  {
+    "front": "Attribute (Ex: Cor, Forma ou Tamanho)",
+    "back": "É um atributo ou característica, ou seja, como um objeto se parece."
+  },
+  {
+    "front": "Core (Ex: Em $AB AB AB$, o núcleo é $AB$)",
+    "back": "É o núcleo do padrão, a menor parte que se repete na sequência."
+  },
+  {
+    "front": "Color (Ex: Vermelho, Azul, Verde)",
+    "back": "É o atributo da cor usado para criar padrões coloridos."
+  },
+  {
+    "front": "Shape (Ex: Círculo, Quadrado, Triângulo)",
+    "back": "É o atributo da forma geométrica de um objeto."
+  },
+  {
+    "front": "Size (Ex: Grande e Pequeno)",
+    "back": "É o atributo do tamanho de um objeto."
+  },
+  {
+    "front": "Position (Ex: $\\uparrow \\downarrow \\uparrow \\downarrow$)",
+    "back": "É o atributo da posição ou direção (para cima, para baixo, etc)."
+  },
+  {
+    "front": "Number (Ex: $4, 6, 6, 4, 6, 6$)",
+    "back": "É o atributo numérico usado para criar uma sequência que se repete."
+  },
+  {
+    "front": "Letters (Ex: $P, Q, P, Q$)",
+    "back": "É o uso de letras para formar e identificar padrões."
+  },
+  {
+    "front": "Repeat (Ex: Fazer a mesma coisa de novo)",
+    "back": "Significa repetir algo várias vezes seguindo a mesma ordem."
+  },
+  {
+    "front": "Identify (Ex: Apontar qual é o núcleo)",
+    "back": "Significa identificar ou reconhecer uma característica ou parte do padrão."
+  },
+  {
+    "front": "What comes next? (Ex: $\\bigcirc \\triangle \\bigcirc$ ___?)",
+    "back": "Significa \"O que vem a seguir?\", usado para completar a sequência do padrão."
+  },
+  {
+    "front": "Um número par pode ser dividido em _____ grupos iguais.",
+    "back": "dois"
+  },
+  {
+    "front": "Para saber se um número grande é par ou ímpar, você só precisa olhar o _____ dígito.",
+    "back": "último"
+  },
+  {
+    "front": "Os números pares sempre terminam em: $0, 2, 4, 6$ ou _____.",
+    "back": "8"
+  },
+  {
+    "front": "Os números ímpares sempre terminam em: $1, 3, 5, 7$ ou _____.",
+    "back": "9"
+  },
+  {
+    "front": "Se você divide um número ímpar em dois grupos, sempre sobra _____.",
+    "back": "1"
+  },
+  {
+    "front": "Como se representa o número $5$ em tally marks?",
+    "back": "Quatro traços verticais e um quinto traço na diagonal cruzando todos."
+  },
+  {
+    "front": "O número $7$ em tally marks é um grupo de $5$ mais _____ traços.",
+    "back": "2"
+  },
+  {
+    "front": "No ten-frame, os espaços são preenchidos da esquerda para a _____.",
+    "back": "direita"
+  },
+  {
+    "front": "Quantos espaços no total existem em um ten-frame?",
+    "back": "$10$ espaços."
+  },
+  {
+    "front": "Se você tem $6$ espaços pintados em um ten-frame, quantos faltam para chegar a $10$?",
+    "back": "Faltam $4$."
+  },
+  {
+    "front": "Qual estratégia de contagem ajuda a entender o que significa somar juntando grupos?",
+    "back": "Uso de cubos ou objetos (Cubes or objects)."
+  },
+  {
+    "front": "A frase \"$4$ groups of $5$ and $2$ left over\" resulta em qual número total?",
+    "back": "$22$"
+  },
+  {
+    "front": "A estratégia de \"Making groups\" prepara o aluno para aprender quais operações no futuro?",
+    "back": "Multiplicação e Divisão."
+  },
+  {
+    "front": "Podemos encontrar padrões em animais, como nas listras da _____.",
+    "back": "zebra"
+  },
+  {
+    "front": "Um padrão feito de \"grande, pequeno, grande, pequeno\" usa qual atributo?",
+    "back": "Size (Tamanho)."
+  },
+  {
+    "front": "Um padrão feito de $\\uparrow \\downarrow \\uparrow \\downarrow$ usa qual atributo?",
+    "back": "Position (Posição)."
+  },
+  {
+    "front": "Um padrão feito de \"vermelho, azul, vermelho, azul\" usa qual atributo?",
+    "back": "Color (Cor)."
+  },
+  {
+    "front": "Qual é o Core da sequência: $\\square \\bigcirc \\triangle \\square \\bigcirc \\triangle$?",
+    "back": "$\\square \\bigcirc \\triangle$ (quadrado, círculo, triângulo)."
+  },
+  {
+    "front": "Qual é o Core da sequência: $4, 6, 6, 4, 6, 6$?",
+    "back": "$4, 6, 6$"
+  },
+  {
+    "front": "Complete: Padrão é uma sequência que se _____ seguindo uma regra.",
+    "back": "repete"
+  },
+  {
+    "front": "Identify the attribute: $\\bigcirc \\square \\bigcirc \\square$.",
+    "back": "Shape (Forma)."
+  },
+  {
+    "front": "O número $125$ termina em $5$. Ele é par ou ímpar?",
+    "back": "Ímpar (Odd)."
+  },
+  {
+    "front": "O número $1170$ termina em $0$. Ele é par ou ímpar?",
+    "back": "Par (Even)."
+  },
+  {
+    "front": "Na frase \"$8$ groups of $5$ and $2$ left over = $42$\", o que o número $2$ representa?",
+    "back": "O que sobrou (left over)."
+  },
+  {
+    "front": "Como chamamos a parte que se repete em um padrão em inglês?",
+    "back": "Core."
+  },
+  {
+    "front": "Dê um exemplo de lugar onde encontramos padrões no supermercado.",
+    "back": "Frutas organizadas por cor ou tipo."
+  },
+  {
+    "front": "Dê um exemplo de lugar onde encontramos padrões no futebol.",
+    "back": "Nas posições dos jogadores no campo."
+  },
+  {
+    "front": "Na sequência $\\bigcirc \\bigcirc \\triangle \\bigcirc \\bigcirc \\triangle$, qual o próximo símbolo?",
+    "back": "$\\bigcirc$ (círculo)."
+  },
+  {
+    "front": "Se um número termina em $2$, ele é _____.",
+    "back": "Even (par)."
+  }
+]
