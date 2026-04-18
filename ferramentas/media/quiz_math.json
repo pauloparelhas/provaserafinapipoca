@@ -1,0 +1,255 @@
+{
+  "title": "Matemática Y2 — Quiz",
+  "questions": [
+    {
+      "question": "Which of the following numbers is an 'odd number'?",
+      "hint": "Lembre-se da 'Regra de Ouro': você só precisa olhar para o último dígito do número.",
+      "options": [
+        {
+          "text": "$45$",
+          "correct": true,
+          "rationale": "Este número termina em $5$, e conforme a regra, números que terminam em $1, 3, 5, 7$ ou $9$ são ímpares."
+        },
+        {
+          "text": "$22$",
+          "correct": false,
+          "rationale": "Embora comece com um dígito ímpar se lido isoladamente, o número termina em $2$, o que o define como par."
+        },
+        {
+          "text": "$110$",
+          "correct": false,
+          "rationale": "Qualquer número que termine em $0$ é considerado par, pois pode ser dividido em dois grupos iguais."
+        },
+        {
+          "text": "$8$",
+          "correct": false,
+          "rationale": "O número $8$ está na lista de terminações para números pares."
+        }
+      ]
+    },
+    {
+      "question": "Look at this pattern: $\\triangle \\bigcirc \\square \\triangle \\bigcirc \\square$. What is the 'core'?",
+      "hint": "Tente identificar qual é o menor grupo de formas que aparece de novo e de novo.",
+      "options": [
+        {
+          "text": "$\\triangle \\bigcirc \\square$",
+          "correct": true,
+          "rationale": "O núcleo (core) é a menor parte da sequência que se repete para formar o padrão completo."
+        },
+        {
+          "text": "$\\triangle \\bigcirc$",
+          "correct": false,
+          "rationale": "Esta opção está incompleta, pois ignora o quadrado que faz parte da sequência repetida."
+        },
+        {
+          "text": "$\\square \\triangle \\bigcirc$",
+          "correct": false,
+          "rationale": "Embora contenha as mesmas formas, o núcleo deve seguir a ordem exata em que a repetição começa."
+        },
+        {
+          "text": "$\\triangle \\triangle$",
+          "correct": false,
+          "rationale": "Isso sugeriria que o padrão é feito apenas de triângulos, o que não corresponde à sequência apresentada."
+        }
+      ]
+    },
+    {
+      "question": "How many 'tally marks' are represented by a group of four vertical lines and one diagonal line crossing them?",
+      "hint": "O traço diagonal serve para facilitar a contagem de grupos específicos de objetos.",
+      "options": [
+        {
+          "text": "$5$",
+          "correct": true,
+          "rationale": "Nas marcas de contagem, o quinto traço é sempre desenhado na diagonal para fechar um grupo de cinco."
+        },
+        {
+          "text": "$4$",
+          "correct": false,
+          "rationale": "Quatro traços representam o número quatro, mas a linha diagonal indica que mais um objeto foi contado."
+        },
+        {
+          "text": "$10$",
+          "correct": false,
+          "rationale": "Para representar dez, seriam necessários dois grupos completos com traços diagonais."
+        },
+        {
+          "text": "$6$",
+          "correct": false,
+          "rationale": "O número seis seria representado por um grupo completo de cinco mais um traço individual ao lado."
+        }
+      ]
+    },
+    {
+      "question": "If you are using a 'ten-frame' and you have $6$ blue dots, how many more dots do you need to fill the frame?",
+      "hint": "Um 'ten-frame' sempre tem um total de dez espaços organizados em duas linhas.",
+      "options": [
+        {
+          "text": "$4$",
+          "correct": true,
+          "rationale": "Como um quadro de dez tem exatamente $10$ espaços, se $6$ estão ocupados, restam $4$ vazios ($10 - 6 = 4$)."
+        },
+        {
+          "text": "$5$",
+          "correct": false,
+          "rationale": "O preenchimento de $5$ espaços deixaria exatamente metade do quadro vazio, o que não é o caso aqui."
+        },
+        {
+          "text": "$10$",
+          "correct": false,
+          "rationale": "Este é o total de espaços do quadro, não a quantidade que falta para completá-lo."
+        },
+        {
+          "text": "$3$",
+          "correct": false,
+          "rationale": "Se faltassem apenas $3$, o total de pontos no quadro seria apenas $9$."
+        }
+      ]
+    },
+    {
+      "question": "In the pattern: 'big circle, small circle, big circle, small circle', what is the 'attribute' used?",
+      "hint": "Pense em qual característica física (como algo parece) está mudando entre os círculos.",
+      "options": [
+        {
+          "text": "size",
+          "correct": true,
+          "rationale": "O padrão muda apenas o tamanho (grande e pequeno) das formas, mantendo a cor e o formato iguais."
+        },
+        {
+          "text": "color",
+          "correct": false,
+          "rationale": "O atributo cor não é mencionado como o elemento que se altera para criar a repetição."
+        },
+        {
+          "text": "position",
+          "correct": false,
+          "rationale": "A posição (como para cima ou para baixo) não está sendo alterada, apenas a escala dos objetos."
+        },
+        {
+          "text": "number",
+          "correct": false,
+          "rationale": "Embora existam objetos, o que define a regra do padrão é como eles se parecem fisicamente."
+        }
+      ]
+    },
+    {
+      "question": "You have $13$ objects and you want to 'make groups of $5$'. How many 'left over' objects will you have?",
+      "hint": "Tente contar de cinco em cinco e veja quanto falta para chegar ao número treze.",
+      "options": [
+        {
+          "text": "$3$",
+          "correct": true,
+          "rationale": "Ao formar dois grupos de $5$ ($10$ no total), sobram $3$ objetos que não conseguem formar um novo grupo completo."
+        },
+        {
+          "text": "$2$",
+          "correct": false,
+          "rationale": "Se sobrassem apenas dois, o total de objetos seria $12$ ($2$ grupos de $5$ mais $2$ de sobra)."
+        },
+        {
+          "text": "$5$",
+          "correct": false,
+          "rationale": "Se sobrassem cinco, você conseguiria formar mais um grupo completo, não restando nada."
+        },
+        {
+          "text": "$8$",
+          "correct": false,
+          "rationale": "O resto (left over) deve ser sempre menor do que o tamanho do grupo que você está formando."
+        }
+      ]
+    },
+    {
+      "question": "Is the number $572$ even or odd?",
+      "hint": "Não se deixe confundir pelo $5$ ou pelo $7$; foque apenas no dígito final.",
+      "options": [
+        {
+          "text": "even",
+          "correct": true,
+          "rationale": "O número termina em $2$, e de acordo com as regras de aula, números que terminam em $0, 2, 4, 6$ ou $8$ são pares."
+        },
+        {
+          "text": "odd",
+          "correct": false,
+          "rationale": "Para ser ímpar, o último dígito deveria ser $1, 3, 5, 7$ ou $9$."
+        }
+      ]
+    },
+    {
+      "question": "What 'attribute' is changed in this pattern: $\\uparrow \\downarrow \\uparrow \\downarrow \\uparrow \\downarrow$?",
+      "hint": "Observe se os objetos estão virados para direções diferentes.",
+      "options": [
+        {
+          "text": "position",
+          "correct": true,
+          "rationale": "As setas mudam de direção (para cima e para baixo), o que caracteriza o atributo de posição."
+        },
+        {
+          "text": "shape",
+          "correct": false,
+          "rationale": "O formato de seta é o mesmo em toda a sequência, então a forma não é o que está mudando."
+        },
+        {
+          "text": "size",
+          "correct": false,
+          "rationale": "Todas as setas possuem o mesmo tamanho aparente na sequência apresentada."
+        },
+        {
+          "text": "letters",
+          "correct": false,
+          "rationale": "Este padrão utiliza símbolos de direção (setas) e não caracteres do alfabeto."
+        }
+      ]
+    },
+    {
+      "question": "Using the 'tally marks' strategy, how do you write the number $7$?",
+      "hint": "Pense no número sete como 'cinco e dois'.",
+      "options": [
+        {
+          "text": "A group of $5$ (with diagonal) and $2$ vertical lines",
+          "correct": true,
+          "rationale": "Para representar sete, completamos um grupo de cinco e adicionamos dois traços individuais extras."
+        },
+        {
+          "text": "Seven vertical lines in a row",
+          "correct": false,
+          "rationale": "Embora some sete, as marcas de contagem exigem o agrupamento a cada cinco para facilitar a leitura rápida."
+        },
+        {
+          "text": "A group of $5$ (with diagonal) and $5$ vertical lines",
+          "correct": false,
+          "rationale": "Essa representação resultaria no número dez, não no número sete."
+        },
+        {
+          "text": "Two groups of $5$ (with diagonal)",
+          "correct": false,
+          "rationale": "Dois grupos fechados de cinco representariam o número dez."
+        }
+      ]
+    },
+    {
+      "question": "What is the result of $3$ red cubes plus $9$ blue dots?",
+      "hint": "Conte todos os objetos juntos para encontrar o valor total.",
+      "options": [
+        {
+          "text": "$12$",
+          "correct": true,
+          "rationale": "Ao juntar os dois grupos de objetos ($3 + 9$), o total contado é doze unidades."
+        },
+        {
+          "text": "$11$",
+          "correct": false,
+          "rationale": "Este resultado seria obtido se tivéssemos apenas $2$ cubos vermelhos ou $8$ bolinhas azuis."
+        },
+        {
+          "text": "$13$",
+          "correct": false,
+          "rationale": "Este valor ultrapassa a contagem total dos objetos físicos apresentados no exemplo."
+        },
+        {
+          "text": "$9$",
+          "correct": false,
+          "rationale": "Este é apenas o número de bolinhas azuis, sem incluir os cubos vermelhos na soma."
+        }
+      ]
+    }
+  ]
+}
