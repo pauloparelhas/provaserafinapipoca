@@ -74,6 +74,19 @@
 .bc-green .mm-leaf-pt{color:#6ee7b7;}
 .bc-green .mm-detail{border-left:2px solid rgba(52,211,153,.3);}
 
+.bc-purple{background:rgba(167,139,250,.06);border-color:rgba(167,139,250,.25);}
+.bc-purple .mm-branch-hd{background:rgba(167,139,250,.10);}
+.bc-purple .mm-branch-pt{color:#a78bfa;}
+.bc-purple .mm-leaf-hd{background:rgba(167,139,250,.08);}
+.bc-purple .mm-leaf-pt{color:#c4b5fd;}
+.bc-purple .mm-detail{border-left:2px solid rgba(167,139,250,.3);}
+body.theme-light .bc-purple{background:rgba(139,92,246,.07);border-color:rgba(139,92,246,.3);}
+body.theme-light .bc-purple .mm-branch-hd{background:rgba(139,92,246,.14);}
+body.theme-light .bc-purple .mm-leaf-hd{background:rgba(139,92,246,.09);}
+.kw-add{color:#34d399;font-weight:900;}
+.kw-sub{color:#f87171;font-weight:900;}
+.kw-rule{color:#fbbf24;font-weight:900;}
+
 .intro-emoji{font-size:56px;text-align:center;display:block;margin-bottom:12px;
   filter:drop-shadow(0 0 20px rgba(245,158,11,.5));animation:mfloat 3s ease-in-out infinite;}
 .mm-hint{text-align:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.3);margin-bottom:20px;}
@@ -406,6 +419,148 @@ body.theme-light .bc-green .mm-leaf-hd{background:rgba(16,185,129,.1);}
           <div class="mm-leaf-body">
             <div class="mm-detail"><span class="mm-detail-en">Tally marks agrupam de 5 em 5 (igual making groups)</span></div>
             <div class="mm-detail mm-detail-last"><span class="mm-detail-en">As duas estratégias treinam pensar em grupos</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       BRANCH 5: WORD PROBLEMS
+       ══════════════════════════════════════ -->
+  <div class="mm-branch bc-purple" onclick="toggleBranch(this)">
+    <div class="mm-branch-hd">
+      <div class="mm-branch-icon">&#x1F50D;</div>
+      <div class="mm-branch-text">
+        <div class="mm-branch-en">Word Problems</div>
+        <div class="mm-branch-pt">problemas de texto — adição e subtração</div>
+      </div>
+      <div class="mm-branch-arrow">&#x25B6;</div>
+    </div>
+    <div class="mm-branch-body">
+      <div class="mm-branch-inner">
+
+        <!-- ESTRATÉGIA -->
+        <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F9E0;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Detective Strategy — 3 Questions</div>
+              <div class="mm-leaf-pt">estratégia da detetive — 3 perguntas</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-rule">1.</span> O que existe no começo? <em>(What do we start with?)</em></span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-rule">2.</span> A quantidade CRESCEU ou DIMINUIU? <em>(Did it grow or shrink?)</em></span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">CRESCEU</span> → adição (+) &nbsp;|&nbsp; <span class="kw-sub">DIMINUIU</span> → subtração (−)</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en"><span class="kw-rule">3.</span> Qual número mudou tudo? → escrevo a conta!</span></div>
+          </div>
+        </div>
+
+        <!-- ADIÇÃO -->
+        <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">➕</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Addition Keywords <em style="font-size:10px;opacity:.5;">(palavras de adição)</em></div>
+              <div class="mm-leaf-pt">quando vejo essas palavras → SOMO!</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">in total</span> (no total) → 34 + 18 = ?</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">altogether</span> (ao todo) → soma tudo!</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">gave more</span> (deu mais) → quantidade CRESCEU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">saved more</span> (salvou mais) → quantidade CRESCEU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">bought more</span> (comprou mais) → quantidade CRESCEU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">received</span> (recebeu) → quantidade CRESCEU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">joined</span> (se juntou) → quantidade CRESCEU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">added</span> (adicionou) → quantidade CRESCEU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">how many now?</span> (após ganhar) → soma!</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en"><span class="kw-rule">Regra:</span> "Se CRESCEU → SOMO!" (If it GREW → I ADD!)</span></div>
+          </div>
+        </div>
+
+        <!-- EXEMPLO ADIÇÃO -->
+        <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F4DA;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Addition Example from Test</div>
+              <div class="mm-leaf-pt">exemplo real de prova</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">"Ms. Joice has 27 books and her students <span class="kw-add">gave more</span> 17."</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">"<span class="kw-add">How many</span> books does she have now?"</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Sinal: <span class="kw-add">gave more</span> → CRESCEU → ADIÇÃO</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Conta: 27 + 17 = <span class="kw-rule">44</span> (com reagrupamento)</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">"Spider-Man saved 34 + <span class="kw-add">more</span> 18 = <span class="kw-rule">52</span> <span class="kw-add">in total</span>"</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Sinal: <span class="kw-add">more</span> + <span class="kw-add">in total</span> → SOMA!</span></div>
+          </div>
+        </div>
+
+        <!-- SUBTRAÇÃO -->
+        <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">➖</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Subtraction Keywords <em style="font-size:10px;opacity:.5;">(palavras de subtração)</em></div>
+              <div class="mm-leaf-pt">quando vejo essas palavras → SUBTRAIO!</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-sub">left</span> / <span class="kw-sub">are left</span> (sobraram) → DIMINUIU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-sub">lost</span> (perdeu) → quantidade DIMINUIU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-sub">ate</span> (comeu) → quantidade DIMINUIU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-sub">used</span> (usou/gastou) → quantidade DIMINUIU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-sub">gave away</span> (deu para alguém) → quantidade DIMINUIU</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-sub">only caught</span> (só conseguiu) → faltou!</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-sub">how many more does she need?</span> → faltou → subtração!</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-sub">how many does she have now?</span> (após perder) → DIMINUIU</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en"><span class="kw-rule">Regra:</span> "Se DIMINUIU → SUBTRAIO!" (If it SHRANK → I SUBTRACT!)</span></div>
+          </div>
+        </div>
+
+        <!-- EXEMPLO SUBTRAÇÃO -->
+        <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x1F4CF;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Subtraction Example from Test</div>
+              <div class="mm-leaf-pt">exemplo real de prova</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en">"Ms. Joice has 42 pencils and she <span class="kw-sub">lost</span> 16."</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">"<span class="kw-sub">How many does she have now?</span>"</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Sinal: <span class="kw-sub">lost</span> → DIMINUIU → SUBTRAÇÃO</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Conta: 42 − 16 = <span class="kw-rule">26</span> (com trading/troca)</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">"Wanted 31 Pokémons, <span class="kw-sub">only caught</span> 20. How many <span class="kw-sub">left</span>?"</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Conta: 31 − 20 = <span class="kw-rule">11</span></span></div>
+          </div>
+        </div>
+
+        <!-- RESUMO RÁPIDO -->
+        <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+          <div class="mm-leaf-hd">
+            <div class="mm-leaf-icon">&#x26A1;</div>
+            <div class="mm-leaf-text">
+              <div class="mm-leaf-en">Quick Review — Palavras Mágicas</div>
+              <div class="mm-leaf-pt">resumo das palavras que indicam cada operação</div>
+            </div>
+            <div class="mm-leaf-arrow">&#x25B6;</div>
+          </div>
+          <div class="mm-leaf-body">
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-add">ADIÇÃO (+):</span> more, total, altogether, gave, added, received, joined, saved more</span></div>
+            <div class="mm-detail"><span class="mm-detail-en"><span class="kw-sub">SUBTRAÇÃO (−):</span> left, lost, ate, used, gave away, only, fewer, need</span></div>
+            <div class="mm-detail"><span class="mm-detail-en">Regrouping (reagrupamento) → adição passa de 10 na coluna das unidades</span></div>
+            <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Trading (troca) → subtração pega emprestado da dezena para a unidade</span></div>
           </div>
         </div>
 

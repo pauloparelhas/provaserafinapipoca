@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiro para os Pais — Matemática Y2</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0f0e1a;color:#e2e0f0;min-height:100vh;padding:0 0 60px;}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(251,146,60,.08));border-bottom:1px solid rgba(245,158,11,.2);padding:28px 20px 24px;text-align:center;}
+.badge{display:inline-block;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);border-radius:20px;padding:4px 16px;font-size:10px;font-weight:800;color:#fbbf24;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.title{font-size:clamp(20px,5vw,30px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:6px;}
+.subtitle{font-size:14px;color:rgba(255,255,255,.5);font-weight:700;}
+.how-to{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:14px 16px;margin:16px 20px 0;font-size:13px;color:rgba(255,255,255,.7);line-height:1.6;text-align:left;}
+.how-to strong{color:#fbbf24;}
+
+/* PROGRESS NAV */
+.progress-nav{display:flex;gap:8px;padding:16px 20px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;}
+.progress-nav::-webkit-scrollbar{display:none;}
+.pnav-btn{flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:800;color:rgba(255,255,255,.4);cursor:pointer;white-space:nowrap;transition:all .2s;font-family:inherit;}
+.pnav-btn:hover,.pnav-btn.active{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.4);color:#fbbf24;}
+
+/* MAIN CONTENT */
+.content{padding:0 16px;}
+
+/* SECTION */
+.section{margin-top:24px;}
+.sec-header{display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px 14px 0 0;cursor:pointer;user-select:none;}
+.sec-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;}
+.sec-title{font-size:clamp(15px,3vw,18px);font-weight:900;flex:1;}
+.sec-arrow{font-size:12px;color:rgba(255,255,255,.3);transition:transform .25s;}
+.sec-header.open .sec-arrow{transform:rotate(90deg);}
+.sec-body{border:1px solid rgba(255,255,255,.06);border-top:none;border-radius:0 0 14px 14px;overflow:hidden;max-height:0;transition:max-height .4s ease;}
+.sec-body.open{max-height:4000px;}
+.sec-inner{padding:16px;}
+
+/* SUBSECTION */
+.subsec{margin-bottom:20px;}
+.subsec-title{font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.05);}
+
+/* CONCEPT BOX */
+.concept{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.2);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.7);}
+.concept strong{color:#c4b5fd;font-weight:800;}
+
+/* QUESTION CARD */
+.q-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:12px 14px;margin-bottom:8px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.75);}
+.q-card em{font-style:italic;color:rgba(255,255,255,.45);}
+.q-card .en{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);border-radius:6px;padding:2px 8px;font-weight:800;color:#fbbf24;font-style:normal;white-space:nowrap;}
+.q-card .arrow{color:rgba(255,255,255,.3);margin:0 4px;}
+.q-card .ans{color:#34d399;font-weight:800;}
+.prompt{background:rgba(16,185,129,.06);border-left:3px solid rgba(16,185,129,.4);padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:8px;font-size:13px;line-height:1.6;color:rgba(255,255,255,.8);}
+.prompt .speak{color:#34d399;font-weight:800;}
+
+/* ACTIVITY */
+.activity{background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.2);border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+.activity-title{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#60a5fa;margin-bottom:8px;}
+.activity p{font-size:13px;line-height:1.6;color:rgba(255,255,255,.75);}
+.activity .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.act-item{background:rgba(255,255,255,.04);border-radius:8px;padding:8px 10px;font-size:12px;text-align:center;}
+.act-item .label{font-weight:900;font-size:14px;margin-bottom:3px;}
+.act-item .pt{font-size:10px;color:rgba(255,255,255,.35);}
+
+/* EXAM STYLE */
+.exam-q{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+.exam-q-label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#f87171;margin-bottom:6px;}
+.exam-q p{font-size:13px;line-height:1.6;color:rgba(255,255,255,.8);font-style:italic;}
+.exam-q .expected{font-style:normal;margin-top:6px;color:rgba(255,255,255,.5);font-size:12px;}
+.exam-q .expected strong{color:#34d399;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px;}
+th{background:rgba(255,255,255,.05);color:rgba(255,255,255,.5);font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:8px;text-align:left;}
+td{padding:8px;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.7);}
+td:first-child{color:#fbbf24;font-weight:800;}
+td:last-child{color:#a78bfa;}
+
+/* VOCAB FINAL */
+.vocab-grid{display:grid;grid-template-columns:1fr;gap:6px;}
+@media(min-width:400px){.vocab-grid{grid-template-columns:1fr 1fr;}}
+.vocab-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.vocab-en{font-weight:900;color:#fbbf24;font-size:13px;}
+.vocab-pt{font-size:12px;color:rgba(255,255,255,.45);}
+
+/* SIMULADO */
+.sim-q{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:14px;margin-bottom:10px;}
+.sim-num{font-size:11px;font-weight:900;color:#fbbf24;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.sim-text{font-size:13px;color:rgba(255,255,255,.8);font-style:italic;margin-bottom:8px;line-height:1.6;}
+.sim-ans{font-size:12px;color:#34d399;font-weight:800;}
+
+/* FOOTER */
+.footer{text-align:center;padding:24px 20px;margin-top:24px;border-top:1px solid rgba(255,255,255,.05);}
+.footer p{font-size:12px;color:rgba(255,255,255,.25);font-weight:600;}
+.back-btn{display:inline-block;margin-top:16px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);border-radius:20px;padding:10px 24px;color:#fbbf24;font-size:13px;font-weight:800;text-decoration:none;cursor:pointer;}
+
+/* COLORS PER SECTION */
+.c1{background:rgba(245,158,11,.15);color:#fbbf24;}
+.c2{background:rgba(239,68,68,.15);color:#f87171;}
+.c3{background:rgba(96,165,250,.15);color:#60a5fa;}
+.c4{background:rgba(167,139,250,.15);color:#a78bfa;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">Para os Pais &mdash; Matemática Y2</div>
+  <div class="title">Roteiro de Estudo: Matemática</div>
+  <div class="subtitle">Conversa guiada com a Mariana</div>
+  <div class="how-to">
+    <strong>Como usar:</strong> Sente com a Mariana num momento tranquilo. Leia as perguntas em voz alta, deixe ela responder, brinque juntos. Não é prova — é conversa. Se ela travar, dê a dica e siga em frente. O objetivo é que ela <em>ouça e repita</em> os termos em inglês com confiança.
+  </div>
+</div>
+
+<div class="progress-nav">
+  <button class="pnav-btn active" onclick="goTo('s1')">1. Patterns</button>
+  <button class="pnav-btn" onclick="goTo('s2')">2. Even &amp; Odd</button>
+  <button class="pnav-btn" onclick="goTo('s3')">3. Counting</button>
+  <button class="pnav-btn" onclick="goTo('s4')">Vocabulário</button>
+  <button class="pnav-btn" onclick="goTo('s5')">Simulado</button>
+</div>
+
+<div class="content">
+
+<!-- PARTE 1 -->
+<div class="section" id="s1">
+  <div class="sec-header open" onclick="toggleSec(this)">
+    <div class="sec-num c1">1</div>
+    <div class="sec-title">PATTERNS — Padrões</div>
+    <span class="sec-arrow">&#x25B6;</span>
+  </div>
+  <div class="sec-body open">
+    <div class="sec-inner">
+
+      <div class="subsec">
+        <div class="subsec-title">Aquecimento</div>
+        <div class="prompt"><span class="speak">"Mariana, você consegue achar um padrão aqui no nosso quarto/sala?"</span><br><em style="font-size:11px;color:rgba(255,255,255,.4);">(listras no tapete, estampa da roupa, azulejos, etc.)</em></div>
+        <div class="prompt"><span class="speak">"Por que isso é um padrão? O que se repete?"</span></div>
+        <div class="prompt"><span class="speak">"Em inglês, a palavra 'padrão' é <span class='en'>pattern</span>. Fala comigo: <span class='en'>pattern</span>!"</span></div>
+      </div>
+
+      <div class="subsec">
+        <div class="subsec-title">Attribute — o atributo</div>
+        <div class="concept"><strong>Conceito:</strong> Um atributo é a <em>característica</em> que define o padrão. Em inglês: <strong>attribute</strong>.</div>
+        <div class="prompt"><span class="speak">"Quais são os atributos que a gente pode usar num padrão matemático?"</span><br><em style="font-size:11px;color:rgba(255,255,255,.4);">Ajude com dicas: "E a <span class='en'>color</span>?" / "E o <span class='en'>shape</span>?" / "E o <span class='en'>size</span>?"</em></div>
+        <div class="activity">
+          <div class="activity-title">Atividade rápida — desenhe juntos</div>
+          <div class="grid">
+            <div class="act-item"><div class="label">&#x1F534; &#x1F535; &#x1F534; &#x1F535;</div><div class="pt"><span class="en" style="font-size:11px;">attribute?</span> → color</div></div>
+            <div class="act-item"><div class="label">▲ ▭ ○ ▲ ▭ ○</div><div class="pt"><span class="en" style="font-size:11px;">attribute?</span> → shape</div></div>
+            <div class="act-item"><div class="label">⬆️ ⬇️ ⬆️ ⬇️</div><div class="pt"><span class="en" style="font-size:11px;">attribute?</span> → position</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsec">
+        <div class="subsec-title">Core — o núcleo que se repete</div>
+        <div class="concept"><strong>Conceito:</strong> O <strong>core</strong> é a menor parte que se repete para formar o padrão.</div>
+        <div class="prompt"><span class="speak">"Mariana, olha esse padrão: 🟣 🟣 🔺 🟣 🟣 🔺. Qual parte se repete?"</span></div>
+        <div class="q-card">🟣 🟣 🔺 — esse é o <span class="en">core</span>. Fala: <span class="en">core</span>!<br><br><span class="speak">"Agora você: qual é o core? P Q P Q P Q"</span><br><span class="arrow">→</span> <span class="ans">P Q</span></div>
+        <div class="exam-q">
+          <div class="exam-q-label">Estilo Prova</div>
+          <p>"What is the <strong>core</strong> of this pattern?" (aponte para um padrão)</p>
+          <p class="expected">Esperado: ela identifica e indica o menor bloco que se repete</p>
+        </div>
+        <div class="prompt"><span class="speak">"Agora, Mariana, você é a professora! Me ensina o que é <span class='en'>core</span> como se eu fosse uma aluna de 7 anos."</span></div>
+      </div>
+
+      <div class="subsec">
+        <div class="subsec-title">Perguntas estilo prova — Patterns</div>
+        <div class="q-card"><span class="en">What comes next?</span> <span class="arrow">→</span> O que vem a seguir? <em>(complete a sequência)</em></div>
+        <div class="q-card"><span class="en">What is the attribute?</span> <span class="arrow">→</span> Qual é o atributo?</div>
+        <div class="q-card"><span class="en">What is the core?</span> <span class="arrow">→</span> Qual é o núcleo?</div>
+        <div class="q-card"><span class="en">Circle the core.</span> <span class="arrow">→</span> Circule o núcleo.</div>
+        <div class="q-card"><span class="en">Create your own pattern using shapes.</span> <span class="arrow">→</span> Crie seu próprio padrão com formas.</div>
+        <div class="concept" style="margin-top:10px;">Para cada uma: leia em inglês, peça que ela traduza, depois responda.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PARTE 2 -->
+<div class="section" id="s2">
+  <div class="sec-header" onclick="toggleSec(this)">
+    <div class="sec-num c2">2</div>
+    <div class="sec-title">EVEN &amp; ODD — Pares e Ímpares</div>
+    <span class="sec-arrow">&#x25B6;</span>
+  </div>
+  <div class="sec-body">
+    <div class="sec-inner">
+
+      <div class="subsec">
+        <div class="subsec-title">Aquecimento</div>
+        <div class="prompt"><span class="speak">"Mariana, você sabe o que é número par? Me dá um exemplo."</span></div>
+        <div class="q-card">Número par = <span class="en">even number</span> &nbsp;|&nbsp; Número ímpar = <span class="en">odd number</span><br><span class="speak">"Fala comigo: <span class='en'>even</span>... <span class='en'>odd</span>... <span class='en'>even number</span>... <span class='en'>odd number</span>!"</span></div>
+      </div>
+
+      <div class="subsec">
+        <div class="subsec-title">A regra de ouro — só o último dígito!</div>
+        <div class="concept"><strong>Se termina em 0, 2, 4, 6 ou 8</strong> → é <strong>even</strong> (par)<br><strong>Se termina em 1, 3, 5, 7 ou 9</strong> → é <strong>odd</strong> (ímpar)<br><br><em>Nos números grandes, só olhar o último dígito!</em></div>
+        <div class="activity">
+          <div class="activity-title">Jogo — eu falo o número, você fala even ou odd</div>
+          <table>
+            <tr><th>Número</th><th>Resposta</th></tr>
+            <tr><td>14</td><td>even (termina em 4)</td></tr>
+            <tr><td>27</td><td>odd (termina em 7)</td></tr>
+            <tr><td>100</td><td>even (termina em 0)</td></tr>
+            <tr><td>333</td><td>odd (termina em 3)</td></tr>
+            <tr><td>8.441</td><td>odd (termina em 1)</td></tr>
+            <tr><td>572</td><td>even (termina em 2)</td></tr>
+            <tr><td>999.998</td><td>even (termina em 8)</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsec">
+        <div class="subsec-title">Divisão em dois grupos iguais</div>
+        <div class="prompt"><span class="speak">"Pega 6 moedas/bolinhas. Divide em dois grupos iguais. Conseguiu? Então 6 é <span class='en'>even</span>!"</span></div>
+        <div class="prompt"><span class="speak">"Pega 7. Divide em dois grupos iguais. Sobrou 1? Então 7 é <span class='en'>odd</span>!"</span></div>
+        <div class="exam-q">
+          <div class="exam-q-label">Estilo Prova</div>
+          <p>"Is the number 25 even or odd? How do you know?"</p>
+          <p class="expected">Esperado: <strong>"It is odd because it ends in 5."</strong></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PARTE 3 -->
+<div class="section" id="s3">
+  <div class="sec-header" onclick="toggleSec(this)">
+    <div class="sec-num c3">3</div>
+    <div class="sec-title">COUNTING STRATEGIES — Estratégias</div>
+    <span class="sec-arrow">&#x25B6;</span>
+  </div>
+  <div class="sec-body">
+    <div class="sec-inner">
+
+      <div class="subsec">
+        <div class="subsec-title">Tally Marks</div>
+        <div class="concept"><strong>Conceito:</strong> Risquinhos para contar — a cada 5, um traço diagonal cruza os 4 anteriores. Em inglês: <strong>tally marks</strong>.</div>
+        <div class="prompt"><span class="speak">"Mariana, faz 7 tally marks pra mim."</span><br><em style="font-size:11px;color:rgba(255,255,255,.4);">Esperado: 5 riscos com diagonal + 2 soltos</em></div>
+        <div class="exam-q">
+          <div class="exam-q-label">Estilo Prova</div>
+          <p>"Draw tally marks to show the number 12."</p>
+          <p>"How many tally marks are shown here?" (mostre um desenho)</p>
+        </div>
+      </div>
+
+      <div class="subsec">
+        <div class="subsec-title">Ten-Frame Strategy</div>
+        <div class="concept"><strong>Conceito:</strong> Uma grade 2×5 com 10 espaços. Preenchemos da esquerda para a direita. Em inglês: <strong>ten-frame</strong>.</div>
+        <div class="activity">
+          <div class="activity-title">Desenhe juntos</div>
+          <p style="font-size:14px;font-family:monospace;text-align:center;padding:8px;background:rgba(255,255,255,.04);border-radius:8px;">[ ][ ][ ][ ][ ]<br>[ ][ ][ ][ ][ ]</p>
+          <p style="font-size:13px;margin-top:10px;color:rgba(255,255,255,.7);">"Agora vamos mostrar 6 + 3. Pinta 6 de azul e 3 de laranja. Quantos espaços ficaram em branco?" → <strong style="color:#34d399;">1</strong></p>
+        </div>
+        <div class="exam-q">
+          <div class="exam-q-label">Estilo Prova</div>
+          <p>"Use a ten-frame to show 7 + 2."</p>
+          <p>"How many more to make 10?"</p>
+        </div>
+      </div>
+
+      <div class="subsec">
+        <div class="subsec-title">Making Groups — Formando Grupos</div>
+        <div class="concept"><strong>Conceito:</strong> Separar objetos em grupos de mesmo tamanho e contar grupos e sobras. <strong>Left over</strong> = o que sobrou.</div>
+        <div class="prompt"><span class="speak">"Pega 17 objetos. Forma grupos de 5. Quantos grupos? Sobraram objetos?"</span><br><span style="font-size:12px;color:rgba(255,255,255,.4);">→ 3 grupos, 2 left over</span></div>
+        <div class="exam-q">
+          <div class="exam-q-label">Estilo Prova</div>
+          <p>"Make groups of 5. How many groups? How many left over?"</p>
+          <p>"Write the answer: ___ groups of 5 and ___ left over."</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- VOCABULÁRIO -->
+<div class="section" id="s4">
+  <div class="sec-header" onclick="toggleSec(this)">
+    <div class="sec-num c4">V</div>
+    <div class="sec-title">VOCABULÁRIO COMPLETO</div>
+    <span class="sec-arrow">&#x25B6;</span>
+  </div>
+  <div class="sec-body">
+    <div class="sec-inner">
+      <p style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:12px;">Leia cada linha, peça que ela fale o significado em português:</p>
+      <div class="vocab-grid">
+        <div class="vocab-item"><span class="vocab-en">pattern</span><span class="vocab-pt">padrão</span></div>
+        <div class="vocab-item"><span class="vocab-en">attribute</span><span class="vocab-pt">atributo, característica</span></div>
+        <div class="vocab-item"><span class="vocab-en">core</span><span class="vocab-pt">núcleo, parte que se repete</span></div>
+        <div class="vocab-item"><span class="vocab-en">even number</span><span class="vocab-pt">número par</span></div>
+        <div class="vocab-item"><span class="vocab-en">odd number</span><span class="vocab-pt">número ímpar</span></div>
+        <div class="vocab-item"><span class="vocab-en">tally marks</span><span class="vocab-pt">marcas de contagem</span></div>
+        <div class="vocab-item"><span class="vocab-en">ten-frame</span><span class="vocab-pt">quadro de dez</span></div>
+        <div class="vocab-item"><span class="vocab-en">cubes / objects</span><span class="vocab-pt">cubos / objetos</span></div>
+        <div class="vocab-item"><span class="vocab-en">groups of</span><span class="vocab-pt">grupos de</span></div>
+        <div class="vocab-item"><span class="vocab-en">left over</span><span class="vocab-pt">que sobrou</span></div>
+        <div class="vocab-item"><span class="vocab-en">equal groups</span><span class="vocab-pt">grupos iguais</span></div>
+        <div class="vocab-item"><span class="vocab-en">What comes next?</span><span class="vocab-pt">O que vem a seguir?</span></div>
+        <div class="vocab-item"><span class="vocab-en">How many?</span><span class="vocab-pt">Quantos?</span></div>
+        <div class="vocab-item"><span class="vocab-en">Is it even or odd?</span><span class="vocab-pt">É par ou ímpar?</span></div>
+        <div class="vocab-item"><span class="vocab-en">Circle the core.</span><span class="vocab-pt">Circule o núcleo.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIMULADO -->
+<div class="section" id="s5">
+  <div class="sec-header" onclick="toggleSec(this)">
+    <div class="sec-num" style="background:rgba(16,185,129,.2);color:#34d399;">5</div>
+    <div class="sec-title">SIMULADO FINAL — 5 Perguntas</div>
+    <span class="sec-arrow">&#x25B6;</span>
+  </div>
+  <div class="sec-body">
+    <div class="sec-inner">
+      <p style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:14px;">Leia em voz alta e peça que Mariana responda oralmente ou por escrito:</p>
+
+      <div class="sim-q">
+        <div class="sim-num">Pergunta 1</div>
+        <p class="sim-text">"Look at this pattern: 🔴🔵🔵🔴🔵🔵🔴🔵🔵 — What is the core?"</p>
+        <p class="sim-ans">🔴🔵🔵 (red, blue, blue)</p>
+      </div>
+
+      <div class="sim-q">
+        <div class="sim-num">Pergunta 2</div>
+        <p class="sim-text">"Is 347 even or odd? How do you know?"</p>
+        <p class="sim-ans">Odd — it ends in 7.</p>
+      </div>
+
+      <div class="sim-q">
+        <div class="sim-num">Pergunta 3</div>
+        <p class="sim-text">"Draw tally marks to show 13."</p>
+        <p class="sim-ans">Dois grupos de 5 + 3 traços soltos</p>
+      </div>
+
+      <div class="sim-q">
+        <div class="sim-num">Pergunta 4</div>
+        <p class="sim-text">"I have 22 objects. I make groups of 5. How many groups? How many left over?"</p>
+        <p class="sim-ans">4 groups, 2 left over</p>
+      </div>
+
+      <div class="sim-q">
+        <div class="sim-num">Pergunta 5</div>
+        <p class="sim-text">"Use a ten-frame to show 8 + 1. How many more to make 10?"</p>
+        <p class="sim-ans">9 filled → 1 more to make 10</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<div class="footer">
+  <a class="back-btn" href="../index.html">&#x2190; Voltar ao início</a>
+  <p style="margin-top:16px;">Matemática Y2 &mdash; Maple Bear 2026 &mdash; Projeto Serafina</p>
+</div>
+
+<script>
+function toggleSec(header){
+  header.classList.toggle('open');
+  var body=header.nextElementSibling;
+  body.classList.toggle('open');
+}
+function goTo(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+  var header=el.querySelector('.sec-header');
+  var body=el.querySelector('.sec-body');
+  if(header&&!header.classList.contains('open')){
+    header.classList.add('open');
+    body.classList.add('open');
+  }
+  document.querySelectorAll('.pnav-btn').forEach(function(b){b.classList.remove('active');});
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
