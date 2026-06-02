@@ -273,3 +273,59 @@ Perguntar: "Tem a devolutiva das questoes da Serafina? Se sim, me passe por nume
 ### Proximo passo (sessao 11)
 - Aguardando feedback usuario sobre audio/video NotebookLM
 - Possivel integracao de player HTML5 nas ferramentas HIS
+
+---
+
+## ATUALIZACOES — SESSAO GEOGRAFIA (09/04/2026)
+
+> Secao adicionada em 09/04/2026. Conteudo anterior preservado acima.
+
+### CIE — Concluida
+- CIE_mindmap.html, CIE_flashcards.html, 4 videos NLM, 2 apresentacoes, quizzes NLM
+- AF 07/04/2026: REALIZADA
+
+### GEO — CONCLUIDA (~14/04/2026)
+| Cod    | Ferramenta                            | Status    | Arquivo                      | Commit    |
+|--------|---------------------------------------|-----------|------------------------------|-----------|
+| GEO    | Mapa Mental Interativo                | CONCLUIDA | GEO_mindmap.html             | c158b35   |
+| GEO    | Flashcards PT (29 cards)              | CONCLUIDA | GEO_flashcards.html          | c158b35   |
+| GEO-01 | Classifique! (tap-to-select, 3 fases) | CONCLUIDA | GEO01_classifique.html       | d5cc76b   |
+| GEO-02 | Quem Sou Eu? (8 enigmas, 3 povos)     | CONCLUIDA | GEO02_quem_sou_eu.html       | 955818a   |
+
+#### GEO02_quem_sou_eu.html — detalhes
+- 8 enigmas sobre os 3 povos do mundo: Indigenas BR, Aborígenes AU, Nenets RU
+- Baseado diretamente na atividade da pagina 22 do PDF do Toddle
+- Usa base.css / base.js (ferramenta PT)
+
+#### NLM — Reestruturacao 3→2 notebooks
+- Problema original: 3 notebooks receberam o mesmo PDF completo → videos 2 e 3 identicos
+- Solucao: dividir PDF com pypdf por paginas relevantes
+  - geo_nb1_source.pdf = paginas 1-15 (periodos + estacoes)
+  - geo_nb2_source.pdf = paginas 16-21 (povos + culturas)
+- NB3 excluido; conteudo de orientacao espacial fundido no NB2
+- MD criado: 05_GEOGRAFIA/notebooklm/conteudo_nb2_povos_espaco.md
+
+#### Produtos NLM gerados
+| Tipo  | Nome                                              | Tamanho | Arquivo                             |
+|-------|---------------------------------------------------|---------|-------------------------------------|
+| Video | "Uma Jornada Pelo Seu Dia e Ano" (NB1 PT)         | 36MB    | media/video_geo_nb1_pt.mp4          |
+| Video | "Um Mundo de Culturas" (NB2 PT)                   | 38MB    | media/video_geo_nb2_pt.mp4          |
+| PDF   | "A Tela dos Ciclos" (NB1)                         | 13MB    | media/apresentacao_geo_nb1.pdf      |
+| PDF   | "Atlas Cultural do Mundo" (NB2)                   | 18MB    | media/apresentacao_geo_nb2.pdf      |
+| Quiz  | Quiz NB1 — periodos + estacoes (10 perguntas)     | —       | media/quiz_geo_nb1.html             |
+| Quiz  | Quiz NB2 — povos + culturas + espaco (10 per.)    | —       | media/quiz_geo_nb2.html             |
+| Quiz  | Quiz NB3 — orientacao espacial                    | —       | media/quiz_geo_nb3.html             |
+
+#### Layout index.html — secao GEO (estado final)
+hero (mapa mental) → apresentacoes (2 PDFs) → videos PT (2) → outros colapsado (GEO02 + GEO01 + flashcards + Quiz NB1 + Quiz NB2)
+
+#### Licao aprendida — anti-padrao NLM
+NUNCA enviar o mesmo PDF completo para multiplos notebooks. O algoritmo gera videos sobrepostos.
+SEMPRE segmentar os PDFs por paginas relevantes para cada notebook usando pypdf.
+NUNCA incluir secao "REVISAO GERAL" no MD de um notebook (resume outros notebooks → vídeo fica generico).
+Ver playbook_nlm_novamateria.md para protocolo atualizado.
+
+#### Commits finais desta sessao
+- d5cc76b — GEO01 classification game + TI fixes
+- 955818a — GEO 2 notebooks + GEO02 Quem Sou Eu + quiz regen
+- 91d1b44 — new NLM videos + slides with isolated sources

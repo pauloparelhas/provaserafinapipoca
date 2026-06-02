@@ -1,6 +1,6 @@
 # PROJETO SERAFINA - MAPA DE TAXONOMIA
 **Responsavel:** Agente Coordenador Pedagogico
-**Atualizado em:** 21/03/2026
+**Atualizado em:** 09/04/2026 (GEO concluida — sessao completa)
 
 ---
 
@@ -27,10 +27,22 @@ provas/
 |   |-- assets/                        <- audio/video NotebookLM (git-ignored, ~130MB)
 |   |-- notebooklm/                    <- prompts para geracao de audio/video
 |
+|-- 04_CIENCIAS/                        <- AF: 07/04/2026 | CONCLUIDA
+|   |-- notebooklm/                    <- fontes NLM (PDFs + MDs)
+|
+|-- 05_GEOGRAFIA/                      <- AF: ~14/04/2026 | CONCLUIDA
+|   |-- notebooklm/                    <- fontes NLM (PDFs + MDs + INSTRUCOES_EXECUCAO.md)
+|
 |-- ferramentas/                       <- TODOS os HTMLs aqui (desde sessao 7)
 |   |-- LP01..LP08*.html               <- 6 ferramentas LP
 |   |-- ELA01..ELA06*.html             <- 6 ferramentas ELA
 |   |-- HIS01..HIS03*.html             <- 3 ferramentas HIS
+|   |-- CIE_mindmap.html               <- mapa mental CIE
+|   |-- CIE_flashcards.html            <- flashcards CIE
+|   |-- GEO_mindmap.html               <- mapa mental GEO
+|   |-- GEO_flashcards.html            <- flashcards GEO (29 cards)
+|   |-- GEO01_classifique.html         <- jogo classificacao tap-to-select (3 fases)
+|   |-- media/                         <- videos MP4, PDFs NLM, JSONs de dados
 |
 |-- planejamento/                      <- git-ignored
 ```
@@ -74,9 +86,27 @@ provas/
 | HIS-01    | Instrumentos do Tempo            | Historia   | 26/03     | CONCLUIDA | HIS01_instrumentos_do_tempo.html |
 | HIS-02    | Linha do Tempo                   | Historia   | 26/03     | CONCLUIDA | HIS02_linha_do_tempo.html        |
 | HIS-03    | Tempo e Memorias                 | Historia   | 26/03     | CONCLUIDA | HIS03_tempo_e_memorias.html      |
+| CIE    | Mapa Mental Ciencias             | Ciencias   | 07/04     | CONCLUIDA | CIE_mindmap.html                 |
+| CIE    | Flashcards Ciencias (45 cards)   | Ciencias   | 07/04     | CONCLUIDA | CIE_flashcards.html              |
+| GEO    | Mapa Mental Geografia            | Geografia  | ~14/04    | CONCLUIDA | GEO_mindmap.html                 |
+| GEO    | Flashcards Geografia (29 cards)  | Geografia  | ~14/04    | CONCLUIDA | GEO_flashcards.html              |
+| GEO-01 | Classifique! (3 fases)           | Geografia  | ~14/04    | CONCLUIDA | GEO01_classifique.html           |
+| GEO-02 | Quem Sou Eu? (8 enigmas)         | Geografia  | ~14/04    | CONCLUIDA | GEO02_quem_sou_eu.html           |
+
+---
 
 ### Complementos (nao sao ferramentas HTML)
 | Tipo      | Conteudo                         | Disciplina | Status    | Local                            |
 |-----------|----------------------------------|------------|-----------|----------------------------------|
 | Audio     | Podcast Historia U1 (v2, 6min)   | Historia   | GERADO    | 03_HISTORIA/assets/audio_*_v2.mp3|
 | Video     | Video Historia U1 (v2)           | Historia   | GERADO    | 03_HISTORIA/assets/video_*_v2.mp4|
+| Video     | Video Ciencias NB1 PT+EN         | Ciencias   | GERADO    | ferramentas/media/video_ciencias_nb1_*.mp4|
+| Video     | Video Ciencias NB2 PT+EN         | Ciencias   | GERADO    | ferramentas/media/video_ciencias_nb2_*.mp4|
+| PDF       | Apresentacao Ciencias NB1/NB2    | Ciencias   | GERADO    | ferramentas/media/apresentacao_ciencias_nb*.pdf|
+| Video     | Video GEO NB1 PT — "Uma Jornada Pelo Seu Dia e Ano" (36MB) | Geografia  | GERADO    | ferramentas/media/video_geo_nb1_pt.mp4|
+| Video     | Video GEO NB2 PT — "Um Mundo de Culturas" (38MB)          | Geografia  | GERADO    | ferramentas/media/video_geo_nb2_pt.mp4|
+| PDF       | Apresentacao GEO NB1 — "A Tela dos Ciclos" (13MB)         | Geografia  | GERADO    | ferramentas/media/apresentacao_geo_nb1.pdf|
+| PDF       | Apresentacao GEO NB2 — "Atlas Cultural do Mundo" (18MB)   | Geografia  | GERADO    | ferramentas/media/apresentacao_geo_nb2.pdf|
+| Quiz      | Quiz GEO NB1 (10 perguntas — periodos + estacoes)          | Geografia  | GERADO    | ferramentas/media/quiz_geo_nb1.html|
+| Quiz      | Quiz GEO NB2 (10 perguntas — povos + culturas + espaco)    | Geografia  | GERADO    | ferramentas/media/quiz_geo_nb2.html|
+| Quiz      | Quiz GEO NB3 (orientacao espacial)                         | Geografia  | GERADO    | ferramentas/media/quiz_geo_nb3.html|

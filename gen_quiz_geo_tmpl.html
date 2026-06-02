@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}} &mdash; Serafina</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base.css">
+<style>
+.q-wrap{max-width:520px;margin:0 auto;}
+.q-num{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;text-align:center;}
+.q-text{font-size:calc(15px * var(--fs));font-weight:800;color:var(--text);line-height:1.5;margin-bottom:18px;text-align:center;padding:16px 12px;background:rgba(255,255,255,.04);border-radius:16px;border:1px solid rgba(255,255,255,.08);}
+.opts{display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+.opt{padding:13px 16px;border-radius:14px;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);cursor:pointer;font-family:inherit;font-size:calc(14px * var(--fs));font-weight:700;color:var(--text);text-align:left;transition:all .18s;min-height:48px;-webkit-tap-highlight-color:transparent;}
+.opt:hover{border-color:rgba(96,165,250,.4);background:rgba(96,165,250,.08);transform:translateY(-1px);}
+.opt.correct{border-color:#34d399;background:rgba(52,211,153,.12);color:#34d399;cursor:default;}
+.opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.1);color:#f87171;cursor:default;}
+.opt.disabled{cursor:default;opacity:.55;}
+.hint-box{border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:calc(12px * var(--fs));font-weight:700;display:none;}
+.hint-box.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);color:var(--text);display:block;}
+.hint-box.wrong{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:var(--text);display:block;}
+.hint-label{font-weight:900;margin-bottom:3px;}
+.hint-label.ok{color:#34d399;}
+.hint-label.no{color:#f87171;}
+.progress-bar{background:rgba(255,255,255,.07);border-radius:50px;height:6px;margin-bottom:16px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#34d399,#60a5fa);border-radius:50px;transition:width .4s;}
+.btn-next{background:linear-gradient(135deg,#34d399,#60a5fa);color:#fff;border:none;font-family:inherit;font-size:15px;font-weight:800;padding:13px 32px;border-radius:50px;cursor:pointer;display:block;margin:0 auto;min-height:44px;transition:all .2s;}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 5px 16px rgba(52,211,153,.3);}
+.q-dots{display:flex;gap:5px;justify-content:center;margin-bottom:14px;flex-wrap:wrap;}
+.q-dot{width:9px;height:9px;border-radius:50%;background:var(--card-border);}
+.q-dot.done{background:#34d399;}
+.q-dot.fail{background:#ef4444;}
+.q-dot.cur{background:#f59e0b;box-shadow:0 0 7px rgba(245,158,11,.5);}
+.end-emoji{font-size:64px;text-align:center;display:block;margin:16px 0;filter:drop-shadow(0 0 16px rgba(52,211,153,.5));}
+.end-score{text-align:center;font-size:calc(22px * var(--fs));font-weight:900;color:var(--text);margin-bottom:8px;}
+.end-sub{text-align:center;font-size:14px;font-weight:700;color:var(--text-soft);margin-bottom:24px;}
+.intro-emoji{font-size:64px;text-align:center;display:block;margin-bottom:14px;filter:drop-shadow(0 0 20px rgba(96,165,250,.5));animation:mfloat 3s ease-in-out infinite;}
+.screen{max-width:540px;}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+<div class="navbar">
+  <div class="nav-logo" id="navLogo">Serafina</div>
+  <div class="nav-right">
+    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0;</button>
+    <button class="nav-btn" id="btnRestart" onclick="startGame()">&#x21BA;</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A-</button>
+      <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen active" id="screen-intro">
+  <div class="intro-emoji">&#x2753;</div>
+  <div class="intro-title">{{TITLE}}</div>
+  <div class="intro-sub">{{LABEL}} &bull; 10 perguntas</div>
+  <div style="text-align:center;font-size:13px;font-weight:700;color:var(--text-dim);margin:12px 0 24px;">Gerado pelo NotebookLM com base nos insumos da aula</div>
+  <button class="btn-start" onclick="startGame()">&#x1F4DA; Come&ccedil;ar!</button>
+</div>
+
+<div class="screen" id="screen-game">
+  <div class="q-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+    <div class="q-dots" id="qDots"></div>
+    <div class="q-num" id="qNum">1 / 10</div>
+    <div class="q-text" id="qText"></div>
+    <div class="opts" id="optsEl"></div>
+    <div class="hint-box" id="hintBox">
+      <div class="hint-label" id="hintLabel"></div>
+      <div id="hintDetail"></div>
+    </div>
+    <button class="btn-next" id="btnNext" style="display:none" onclick="nextQ()">Pr&oacute;xima &#x27A1;</button>
+  </div>
+</div>
+
+<div class="screen" id="screen-end">
+  <span class="end-emoji" id="endEmoji"></span>
+  <div class="end-title" id="endTitle"></div>
+  <div class="end-score" id="endScore"></div>
+  <div class="end-sub" id="endSub"></div>
+  <button class="btn-restart" onclick="startGame()">&#x1F500; Jogar de novo</button>
+  <div style="text-align:center;margin-top:14px;">
+    <button class="nav-btn" onclick="showHomeModal()" style="margin:0 auto;font-size:13px;padding:10px 20px;">&#x1F3E0; In&iacute;cio</button>
+  </div>
+</div>
+</div>
+
+<script src="../base.js"></script>
+<script>
+var RAW_QUESTIONS = {{QUESTIONS_JSON}};
+var questions = [], cur = 0, answered = false, dots = [], scoreOk = 0;
+
+function startGame(){
+  questions = shuffle(RAW_QUESTIONS.slice());
+  cur = 0; answered = false; scoreOk = 0;
+  dots = questions.map(function(){ return 'pending'; });
+  showScreen('screen-game');
+  renderQ();
+}
+
+function renderQ(){
+  var q = questions[cur];
+  answered = false;
+  $('progFill').style.width = Math.round(cur/questions.length*100) + '%';
+  $('qNum').textContent = (cur+1) + ' / ' + questions.length;
+  $('qText').textContent = q.question;
+  var el = $('optsEl'); el.innerHTML = '';
+  var opts = shuffle(q.answerOptions.slice());
+  opts.forEach(function(o){
+    var b = document.createElement('button');
+    b.className = 'opt';
+    b.textContent = o.text;
+    b.addEventListener('click', function(){ pick(o); });
+    el.appendChild(b);
+  });
+  $('hintBox').className = 'hint-box';
+  $('btnNext').style.display = 'none';
+  $('btnNext').textContent = cur < questions.length - 1 ? 'Pr\u00f3xima \u27a1' : '\ud83c\udfc1 Ver resultado';
+  renderDots();
+}
+
+function pick(chosen){
+  if(answered) return;
+  answered = true;
+  var q = questions[cur];
+  var ok = chosen.isCorrect;
+  if(ok) scoreOk++;
+  dots[cur] = ok ? 'done' : 'fail';
+  $('optsEl').querySelectorAll('.opt').forEach(function(b){
+    var isCorrect = q.answerOptions.some(function(o){ return o.text === b.textContent && o.isCorrect; });
+    if(isCorrect) b.classList.add('correct');
+    else if(b.textContent === chosen.text && !ok) b.classList.add('wrong');
+    else b.classList.add('disabled');
+  });
+  var hb = $('hintBox');
+  if(ok){ hb.className = 'hint-box correct'; $('hintLabel').className = 'hint-label ok'; $('hintLabel').textContent = '\u2705 Certo!'; }
+  else{ hb.className = 'hint-box wrong'; $('hintLabel').className = 'hint-label no'; $('hintLabel').textContent = '\u274c Quase!'; }
+  var correctOpt = q.answerOptions.find(function(o){ return o.isCorrect; }) || {};
+  $('hintDetail').textContent = chosen.rationale || correctOpt.rationale || '';
+  $('btnNext').style.display = 'block';
+  renderDots();
+}
+
+function nextQ(){
+  cur++;
+  if(cur >= questions.length) endScreen();
+  else renderQ();
+}
+
+function renderDots(){
+  var h = '';
+  for(var i = 0; i < questions.length; i++){
+    var c = 'q-dot';
+    if(dots[i]==='done') c += ' done';
+    else if(dots[i]==='fail') c += ' fail';
+    else if(i===cur) c += ' cur';
+    h += '<div class="' + c + '"></div>';
+  }
+  $('qDots').innerHTML = h;
+}
+
+function endScreen(){
+  var pct = Math.round(scoreOk/questions.length*100);
+  var em = pct===100 ? '\ud83c\udf1f' : pct>=70 ? '\ud83c\udfc6' : pct>=50 ? '\ud83d\udc4d' : '\ud83d\udcaa';
+  var tit = pct===100 ? 'Perfeito!' : pct>=70 ? 'Muito bem!' : pct>=50 ? 'Bom trabalho!' : 'Continue praticando!';
+  $('endEmoji').textContent = em;
+  $('endTitle').textContent = tit;
+  $('endScore').textContent = scoreOk + ' / ' + questions.length + ' (' + pct + '%)';
+  $('endSub').textContent = 'Quer tentar de novo?';
+  showScreen('screen-end');
+}
+
+initApp();
+</script>
+</body>
+</html>

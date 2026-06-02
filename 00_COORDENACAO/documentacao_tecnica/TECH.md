@@ -386,3 +386,105 @@ Botao "PT BR" na navbar: quando ativo, hover em qualquer card/zona exibe tooltip
 | 08/03/2026 | GitHub Pages ativado (main, root)                      | URL publica permanente; atualizavel pela interface do GitHub |
 | 08/03/2026 | Bug BANCO_EVIDENCIAS: aspas simples nao escapadas      | Strings com aspas internas: usar aspas duplas ou escapar |
 | 08/03/2026 | LP06 vogais: vogal forte vs semivogal documentado      | Correcao pedagogica — silaba pode ter mais de uma vogal |
+
+---
+
+## ATUALIZAÇÕES — SESSÕES 4 a 7 (12/03 a 15/03/2026)
+
+### DECISÕES REVISADAS
+
+| Data       | Decisão anterior (sessão 3)                        | Nova decisão (sessões 4-7)                              | Razão |
+|------------|----------------------------------------------------|---------------------------------------------------------|-------|
+| 15/03/2026 | HTMLs na raiz de provas/                           | HTMLs em `ferramentas/` (subpasta)                      | Raiz mais limpa; goToIndex() usa `'../index.html'` |
+| 15/03/2026 | TTS palavra-por-palavra (utterance por palavra)    | TTS com boundary events (1 utterance + u.onboundary)    | Cadência humana natural, sem pausas artificiais |
+| 15/03/2026 | Sem controle de velocidade                         | Speed bar 🐌🐢🐇🚀 (0.6/0.75/0.9/1.1) dentro do karaokeBar | Criança e pai podem ajustar ritmo |
+| 15/03/2026 | Sem tour guiado                                    | Product tour (9 passos) na 1ª visita de cada ferramenta | Onboarding do menu sem depender do pai |
+| 15/03/2026 | Tour com tour-backdrop (cobre elemento)            | Tour com tour-bg transparente + spotlight por box-shadow | Elemento spotlightado visível |
+| 15/03/2026 | GitHub via interface web ou PAT token              | GitHub via SSH (chave ed25519)                          | Sem token expirando, sem expor credenciais no chat |
+| 15/03/2026 | LP colapsada no index, ELA em destaque             | LP removida do index; só ELA visível (AF passou)        | Foco na prova vigente |
+| 15/03/2026 | index.html links diretos (ex: href="ELA01.html")  | index.html links com subpasta (href="ferramentas/ELA01.html") | Mudança de estrutura de pastas |
+
+### ESTRUTURA DE PASTAS ATUAL (sessão 7)
+
+```
+provas/
+  index.html                        ← hub central (raiz — GitHub Pages exige)
+  CLAUDE.md                         ← protocolo QA + regras de documentação
+  ACESSIBILIDADE_PLUS.md
+  .gitignore                        ← exclui: .claude/, planejamento/, 00_COORDENACAO/
+  ferramentas/                      ← TODOS os HTMLs aqui (ELA + LP)
+    ELA01_community_helpers.html    ← CONCLUÍDA
+    ELA02_bucket_fillers.html       ← CONCLUÍDA
+    ELA03_acrostic_adjectives.html  ← CONCLUÍDA
+    ELA04_family_friends.html       ← CONCLUÍDA
+    LP01_genero_textual_diario.html
+    LP02-03_personagem_serafina.html
+    LP04-07_maiuscula_minuscula.html
+    LP05_ordem_alfabetica.html
+    LP06_separacao_silabica.html
+    LP08_meu_esconderijo.html
+  00_COORDENACAO/                   ← git-ignored
+  01_LINGUA_PORTUGUESA/materiais_escola/
+  02_ELA_INGLES/materiais_escola/
+  03_HISTORIA/
+  planejamento/                     ← git-ignored
+```
+
+### FERRAMENTAS ELA CONCLUÍDAS (sessões 4-7)
+
+| Código | Ferramenta             | Fases                                          | Novidades vs LP |
+|--------|------------------------|------------------------------------------------|-----------------|
+| ELA-01 | Community Helpers      | Flashcards + Matching + Quiz                  | TTS, karaokê, flag BR |
+| ELA-02 | Bucket Fillers         | Teoria + Sort + Quiz situacional              | TTS, karaokê, flag BR |
+| ELA-03 | Adjectives & Acrostic  | Flashcards + Sort people/things + Acrostic poem | Drag-to-slot, 5 palavras sem letra repetida |
+| ELA-04 | Family & Friends       | Flashcards + Quiz relacional + Sentence builder | Quiz validado por agente pedagógico |
+
+### PADRÃO TTS/KARAOKÊ ATUAL
+
+```javascript
+// ANTI-PADRÃO (sessões anteriores) — pausas artificiais:
+var u = new SpeechSynthesisUtterance(words[idx]); // 1 utterance por palavra
+
+// PADRÃO CORRETO (sessão 7) — cadência humana:
+var u = new SpeechSynthesisUtterance(textoCompleto);
+u.rate = karaokeRate; // var global, default 0.75
+u.onboundary = function(e) {
+  if (e.name === 'word') { /* highlight palavra idx */ }
+};
+```
+
+### PADRÃO TOUR GUIADO
+
+```css
+/* ANTI-PADRÃO — backdrop cobre o elemento spotlightado: */
+.tour-backdrop { background: rgba(0,0,0,.7); z-index: 9001; } /* elemento fica oculto */
+
+/* PADRÃO CORRETO — escuridão só pelo box-shadow do spotlight: */
+.tour-bg { position:fixed; inset:0; z-index:9001; background:transparent; }
+.tour-spotlight { box-shadow: 0 0 0 4000px rgba(0,0,0,.78), 0 0 0 4px #a78bfa; pointer-events:none; }
+/* elemento real fica visível porque nada sólido o cobre */
+```
+
+### ANTI-PADRÕES ELA IDENTIFICADOS (sessões 4-7)
+
+| Anti-padrão | Problema | Solução |
+|-------------|---------|---------|
+| Quiz com dica emocional genérica ("she loves me") | Avó também amaria — ambíguo | Usar relação familiar objetiva ("My grandma's daughter") |
+| Quiz menciona na dica palavra que aparece como opção errada | Vaza a resposta | Remover o termo da dica |
+| Duas perguntas com mesmo caminho relacional | Redundância pedagógica | Usar ângulo diferente ("My uncle's wife") |
+| "Beautiful" classificado como "things only" | Pessoas também podem ser belas | Remover itens com classificação ambígua |
+| Speed bar separada do karaokeBar | Aparece sempre, ocupa espaço, conflita com outros elementos | Embutir dentro do karaokeBar |
+| tour-backdrop sólido sobre o elemento | Elemento spotlightado fica escuro/invisível | Usar apenas box-shadow no spotlight |
+
+### PROCESSO DE QUALIDADE (QA) — EVOLUÇÕES
+
+- **Agente pedagógico:** invocado para validar QUIZ_BANK antes de publicar (ELA-04: 5 perguntas corrigidas)
+- **Protocolo de documentação automática:** ao identificar padrão novo, pausar e perguntar antes de continuar
+- **Regra de atualização de docs:** parte da entrega de cada tarefa, não passo opcional
+
+### HOSPEDAGEM — MUDANÇA (sessão 6)
+
+- **Antes:** PAT token (classic) via credential.helper store — expira em 90 dias, foi exposto no chat
+- **Agora:** SSH (chave ed25519) — `git@github.com:pauloparelhas/provaserafinapipoca.git`
+- Chave pública registrada em GitHub → Settings → SSH keys
+- Push: `git push origin main` sem token, sem senha, sem expiração
