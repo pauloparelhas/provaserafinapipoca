@@ -9,10 +9,13 @@
 - [x] 2 · Template (wal-kids-base, congelado)
 - [x] 3 · Apostila Mágica → `ferramentas/LP_apostila.html` (16 telas) ✅ validada (pedagógico + ti 28/28)
 - [x] 4 · Quiz lúdico → `ferramentas/LP2_quiz.html` (10 perguntas) ✅
-- [ ] 4 · Flashcards → `ferramentas/LP2_flashcards.html` (pendente)
-- [ ] 4 · Mapa mental → `ferramentas/LP2_mindmap.html` (pendente)
-- [ ] 5 · NotebookLM (vídeo) — requer login do usuário; provável só após a prova
-- [x] 6 · Index atualizado (apostila hero + quiz) + commit
+- [~] 4 · Flashcards → DESCONTINUADO neste projeto (decisão do usuário)
+- [x] 4 · Mapa mental → `ferramentas/LP2_mindmap.html` (5 ramos colapsáveis) ✅
+- [x] 5 · NotebookLM vídeo → `ferramentas/media/video_lp2_pt.mp4` (pt_BR, kawaii, 32MB) ✅
+      notebook NLM id a304fa7c; fonte: Revisão PDF + nlm_source_lp2.md
+- [x] 6 · Index com apostila (hero) + quiz + mapa + vídeo; commits + push ✅
+
+**TODOS OS PRODUTOS NO AR.** Prova 03/06. Pós-prova: vídeo (32MB) pode ser removido + history clean.
 
 ## Decisões pedagógicas aplicadas (do agente pedagogico)
 - M/N: lista limpa (M: campo, tampa, lâmpada, tambor, bombom, pomba; N: pente, pantera, ponte, dente). Banido "e__pada" (espada/empada — ambíguo).

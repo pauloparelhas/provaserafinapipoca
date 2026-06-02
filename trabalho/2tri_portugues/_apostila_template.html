@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fff7ed">
+<title>Revisao de Portugues — Serafina</title>
+<style>
+:root{--fs:1;--bg:#fff7ed;--bg2:#ffe7cf;--ink:#3b2f2f;--ink2:#6b5d52;--card:#fff;--accent:#fb923c;--soft:#fde9c8;--ok:#16a34a;--no:#ef4444;--rad:22px;--shadow:0 10px 28px rgba(180,120,30,.16)}
+body.dark{--bg:#171428;--bg2:#221d3a;--ink:#f5f3ff;--ink2:#c7bfe6;--card:#2a2548;--soft:#3a3160;--shadow:0 10px 28px rgba(0,0,0,.45)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Comic Sans MS','Trebuchet MS','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{min-height:100dvh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--card);box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.topbar .ttl{font-weight:800;font-size:calc(1rem*var(--fs));color:var(--accent);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ic{width:44px;height:44px;min-width:44px;border:none;border-radius:13px;background:var(--soft);color:var(--ink);font-size:1.15rem;cursor:pointer;display:grid;place-items:center}
+.ic:active{transform:scale(.9)}
+.ic.sm{width:40px;min-width:40px;font-size:.95rem;font-weight:800}
+.voicesel{max-width:124px;height:40px;border:none;border-radius:11px;background:var(--soft);color:var(--ink);font-family:inherit;font-weight:700;font-size:.8rem;padding:0 6px;cursor:pointer}
+
+.wrap{flex:1;width:100%;max-width:560px;margin:0 auto;padding:16px 14px 30px}
+
+/* ---- DASHBOARD ---- */
+.hero{text-align:center;margin:6px 0 16px}
+.hero .mas{font-size:3.2rem;animation:fl 3s ease-in-out infinite;display:inline-block}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-size:calc(1.5rem*var(--fs));color:var(--accent);margin-top:4px}
+.hero p{font-size:calc(.95rem*var(--fs));color:var(--ink2);margin-top:4px}
+.prog{margin:12px auto 0;max-width:260px;background:var(--soft);height:12px;border-radius:99px;overflow:hidden}
+.prog span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#f472b6);width:0;transition:width .4s}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.tcard{background:var(--card);border-radius:var(--rad);box-shadow:var(--shadow);overflow:hidden;cursor:pointer;border:3px solid transparent;transition:transform .15s;position:relative;text-align:left}
+.tcard:active{transform:scale(.97)}
+.tcard .thumb{height:96px;background:var(--soft) center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:2.6rem}
+.tcard .meta{padding:10px 12px 14px}
+.tcard .nm{font-weight:800;font-size:calc(1rem*var(--fs));line-height:1.15}
+.tcard .sb{font-size:calc(.78rem*var(--fs));color:var(--ink2);margin-top:3px}
+.tcard .done{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;background:var(--ok);color:#fff;display:none;align-items:center;justify-content:center;font-weight:900;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.tcard.complete .done{display:flex}
+.tcard.complete{border-color:var(--ok)}
+
+/* ---- LESSON ---- */
+.lesson{display:none}
+.lesson.on{display:block;animation:pop .3s ease}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.crumbs{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.back{border:none;background:var(--soft);color:var(--ink);border-radius:11px;height:40px;padding:0 14px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.9rem}
+.dots{display:flex;gap:5px;flex:1;justify-content:center;flex-wrap:wrap}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--soft)}
+.dot.on{background:var(--accent);transform:scale(1.35)}
+.scard{background:var(--card);border-radius:var(--rad);box-shadow:var(--shadow);padding:18px 16px 20px;text-align:center}
+.scard h2{font-size:calc(1.3rem*var(--fs));color:var(--accent);margin-bottom:10px;line-height:1.15}
+.scard .pic{max-width:100%;max-height:200px;border-radius:14px;margin:0 auto 12px;display:block;box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.scard .emoji{font-size:3.4rem;margin:2px 0 10px}
+.scard .txt{font-size:calc(1.08rem*var(--fs));line-height:1.5;color:var(--ink);max-width:34ch;margin:0 auto 10px}
+.scard .txt b{color:var(--accent);background:var(--soft);padding:0 .25em;border-radius:6px}
+.spk{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;border:none;border-radius:99px;padding:9px 16px;font-family:inherit;font-weight:800;font-size:calc(.95rem*var(--fs));cursor:pointer;margin-bottom:6px}
+.spk:active{transform:scale(.94)}
+.spk.playing{animation:pls .8s infinite}
+@keyframes pls{0%,100%{opacity:1}50%{opacity:.55}}
+
+/* ---- ACTIVITY ---- */
+.act{margin-top:14px;border-top:2px dashed var(--soft);padding-top:14px}
+.act .q{font-size:calc(1.08rem*var(--fs));font-weight:800;margin-bottom:12px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{padding:13px 14px;border:2px solid var(--soft);border-radius:14px;background:transparent;color:var(--ink);font-family:inherit;font-size:calc(1.05rem*var(--fs));font-weight:700;cursor:pointer}
+.opt:active{transform:scale(.97)}
+.opt.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.no{background:var(--no);color:#fff;border-color:var(--no)}
+.mnrow{font-size:calc(1.8rem*var(--fs));font-weight:900;letter-spacing:1px;margin:6px 0 14px}
+.mnrow .gap{color:var(--accent);background:var(--soft);border-radius:8px;padding:0 .25em}
+.mnbtns{display:flex;gap:12px;justify-content:center}
+.mnbtn{width:84px;height:64px;border:3px solid var(--accent);border-radius:16px;background:transparent;color:var(--accent);font-size:1.8rem;font-weight:900;font-family:inherit;cursor:pointer}
+.mnbtn:active{transform:scale(.93)}
+.mnbtn.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.mnbtn.no{background:var(--no);color:#fff;border-color:var(--no)}
+.reveal{background:var(--accent);color:#fff;border:none;border-radius:13px;padding:11px 18px;font-family:inherit;font-weight:800;font-size:calc(1rem*var(--fs));cursor:pointer}
+.ans{display:none;margin-top:12px;font-size:calc(1.1rem*var(--fs));font-weight:800;color:var(--ok)}
+.ans.show{display:block}
+.fb{min-height:1.3em;margin-top:10px;font-weight:800;font-size:calc(1rem*var(--fs))}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
+.navbtns{display:flex;gap:10px;margin-top:16px}
+.nb{flex:1;height:52px;border:none;border-radius:15px;background:var(--accent);color:#fff;font-family:inherit;font-size:1.05rem;font-weight:800;cursor:pointer}
+.nb:disabled{opacity:.35}
+.nb.ghost{background:var(--soft);color:var(--ink)}
+
+/* ---- WIN ---- */
+.win{text-align:center;padding:30px 10px}
+.win .big{font-size:4rem;animation:fl 2s ease-in-out infinite}
+.win h2{color:var(--accent);font-size:1.6rem;margin:8px 0}
+@media(max-width:360px){.grid{gap:9px}.tcard .thumb{height:82px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <button class="ic" title="Inicio do site" onclick="goSite()">&#127968;</button>
+    <span class="ttl" id="ttl">Revisao de Portugues</span>
+    <select class="voicesel" id="voicesel" title="Voz" onchange="setVoice(this.value)"></select>
+    <button class="ic sm" onclick="font(-1)">A-</button>
+    <button class="ic sm" onclick="font(1)">A+</button>
+    <button class="ic" id="thBtn" onclick="theme()">&#127769;</button>
+  </div>
+
+  <div class="wrap">
+    <!-- DASHBOARD -->
+    <div id="dash">
+      <div class="hero">
+        <div class="mas">&#129418;</div>
+        <h1>Vamos revisar Portugues!</h1>
+        <p>Escolha uma trilha. Ouca, aprenda e brinque. \u{1F340}</p>
+        <div class="prog"><span id="progbar"></span></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+
+    <!-- LESSON -->
+    <div id="lesson" class="lesson">
+      <div class="crumbs">
+        <button class="back" onclick="goDash()">&#8592; Trilhas</button>
+        <div class="dots" id="dots"></div>
+      </div>
+      <div class="scard" id="scard"></div>
+      <div class="navbtns">
+        <button class="nb ghost" id="prev" onclick="step(-1)">&#8592; Voltar</button>
+        <button class="nb" id="next" onclick="step(1)">Proximo &#8594;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* IMAGES (data-URIs injetados) */
+/*__IMG__*/
+
+const TOPICS = [
+  { id:'arte', nm:'O Mundo da Arte', emoji:'\u{1F3A8}', sb:'tipos, leitura de imagem, rupestre', cor:'#a78bfa', thumb:IMG.arte_cover,
+    steps:[
+      { img:IMG.arte_cover, h:'O que e Arte?', txt:'Arte e mostrar o que a gente <b>pensa e sente</b> — com imagem, som ou movimento.',
+        act:{tipo:'mc', q:'Qual destes e um tipo de ARTE?', op:[['Musica',1],['Correr',0],['Dormir',0]]} },
+      { emoji:'\u{1F5BC}\u{FE0F}', h:'Tipos de arte', txt:'\u{1F3B5} Musica · \u{1F3A8} Pintura · \u{1F5FF} Escultura · \u{1F4F7} Fotografia · \u{1F3AD} Teatro · \u{1F3DB}\u{FE0F} Arquitetura · \u{1F4DA} Literatura · \u{1F483} Danca',
+        act:{tipo:'mc', q:'Escultura e uma arte feita com...', op:[['formas em pedra ou barro',1],['sons',0],['perguntas',0]]} },
+      { img:IMG.rupestre, h:'Arte rupestre', txt:'As pinturas <b>mais antigas</b> do mundo, feitas pelos homens das cavernas. Eles desenhavam <b>animais</b> nas paredes.',
+        act:{tipo:'mc', q:'O que os homens das cavernas mais desenhavam?', op:[['Animais',1],['Carros',0],['Celulares',0]]} },
+      { img:IMG.rupestre, h:'Leitura de imagem', txt:'E olhar bem uma figura e <b>entender o que ela conta</b> — como um detetive!',
+        act:{tipo:'rev', q:'Olhe a pintura da caverna. O que voce ve?', a:'Pessoas e animais — eles contavam a vida deles desenhando! \u{1F405}'} }
+    ]},
+  { id:'sitio', nm:'Sitio do Picapau Amarelo', emoji:'\u{1F33D}', sb:'Monteiro Lobato + personagens', cor:'#fb923c', thumb:IMG.sitio,
+    steps:[
+      { img:IMG.lobato, h:'Monteiro Lobato', txt:'O escritor brasileiro que criou o Sitio. <b>18 de abril</b> e o Dia do Livro Infantil.',
+        act:{tipo:'mc', q:'Quem criou o Sitio do Picapau Amarelo?', op:[['Monteiro Lobato',1],['Tia Nastacia',0],['O Saci',0]]} },
+      { img:IMG.sitio, h:'Os personagens', txt:'<b>Emilia</b>: boneca falante · <b>Narizinho</b>: curiosa · <b>Pedrinho</b>: corajoso · <b>Dona Benta</b>: a vovo.',
+        act:{tipo:'mc', q:'Quem e a boneca de pano falante?', op:[['Emilia',1],['Narizinho',0],['Cuca',0]]} },
+      { img:IMG.sitio, h:'Mais personagens', txt:'<b>Visconde</b>: sabugo sabio · <b>Tia Nastacia</b>: cozinha · <b>Saci</b>: uma perna so · <b>Cuca</b>: a vila.',
+        act:{tipo:'mc', q:'Quem tem uma perna so e gorro vermelho?', op:[['O Saci',1],['Pedrinho',0],['Visconde',0]]} }
+    ]},
+  { id:'pont', nm:'Sinais de Pontuacao', emoji:'\u{270D}\u{FE0F}', sb:'cai na prova!', cor:'#34d399', thumb:IMG.pontuacao,
+    steps:[
+      { img:IMG.pontuacao, h:'Os sinais', txt:'Cada sinal tem um trabalho: <b>.</b> termina · <b>?</b> pergunta · <b>!</b> alegria · <b>,</b> pausa · <b>:</b> anuncia.',
+        act:{tipo:'mc', q:'Qual sinal usamos para fazer uma PERGUNTA?', op:[['?',1],['.',0],['!',0]]} },
+      { emoji:'\u{2757}', h:'Fim de frase', txt:'<b>.</b> ponto final · <b>?</b> interrogacao · <b>!</b> exclamacao.',
+        act:{tipo:'mc', q:'Qual sinal mostra alegria ou susto?', op:[['!',1],['.',0],[',',0]]} },
+      { img:IMG.pontuacao, h:'Pausa e fala', txt:'<b>,</b> virgula faz uma pausa pequena. <b>:</b> dois pontos anuncia uma fala ou uma lista.',
+        act:{tipo:'mc', q:'Para anunciar uma fala ou uma lista, usamos...', op:[['dois pontos ( : )',1],['virgula ( , )',0],['til ( ~ )',0]]} }
+    ]},
+  { id:'dial', nm:'Dialogo', emoji:'\u{1F4AC}', sb:'dois pontos + travessao', cor:'#60a5fa', thumb:IMG.dialogo,
+    steps:[
+      { img:IMG.dialogo, h:'O que e dialogo?', txt:'Uma <b>conversa</b> entre duas ou mais pessoas. Os <b>dois pontos</b> anunciam, e o <b>travessao</b> vem antes de cada fala.',
+        act:{tipo:'mc', q:'No dialogo, o que vem antes da fala de cada pessoa?', op:[['o travessao ( — )',1],['a virgula ( , )',0],['o til ( ~ )',0]]} },
+      { img:IMG.dialogo_ex, h:'Veja um dialogo', txt:'Leia: o Nuno e a Teresa conversam. Repare nos <b>dois pontos</b> e nos <b>travessoes</b> antes de cada fala.',
+        act:{tipo:'rev', q:'Quantas pessoas estao conversando nesse dialogo?', a:'Duas: o Nuno e a Teresa! \u{1F465}'} }
+    ]},
+  { id:'mn', nm:'Som Nasal — M ou N', emoji:'\u{1F445}', sb:'M antes de P e B', cor:'#f472b6', thumb:IMG.nasal,
+    steps:[
+      { img:IMG.nasal, h:'A regra de ouro', txt:'Usamos <b>M antes de P e de B</b>. Nos outros casos, <b>N</b>.',
+        act:{tipo:'mn', pre:'ca', pos:'po', r:'M', word:'campo'} },
+      { emoji:'\u{1F445}', h:'Treine!', txt:'Pense no som e escolha a letra certa.',
+        act:{tipo:'mn', pre:'pe', pos:'te', r:'N', word:'pente'} },
+      { emoji:'\u{1F4A3}', h:'Mais um!', txt:'Lembre: antes de <b>P</b> e <b>B</b> vem o <b>M</b>.',
+        act:{tipo:'mn', pre:'bo', pos:'ba', r:'M', word:'bomba'} },
+      { emoji:'\u{1F443}', h:'Som nasal com til (~)', txt:'O <b>til (~)</b> tambem faz som de nariz: pão, mão, balão.',
+        act:{tipo:'mc', q:'Qual palavra tem som nasal com til?', op:[['pão',1],['pato',0],['bola',0]]} }
+    ]}
+];
+
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+let done = JSON.parse(localStorage.getItem('lp2_done')||'{}');
+let curT=null, curS=0;
+
+/* ---------- TTS / voz ---------- */
+let VOICES=[], voice=null;
+function loadVoices(){
+  const all=speechSynthesis.getVoices();
+  let pt=all.filter(v=>/pt[-_]?br/i.test(v.lang)||/portug/i.test(v.name));
+  if(!pt.length) pt=all.filter(v=>/^pt/i.test(v.lang));
+  VOICES = pt.length?pt:all;
+  const saved=localStorage.getItem('lp2_voicename');
+  voice = (saved&&VOICES.find(v=>v.name===saved))
+        || VOICES.find(v=>/thalita/i.test(v.name))
+        || VOICES.find(v=>/ant[oô]nio/i.test(v.name))
+        || VOICES.find(v=>/pt[-_]?br/i.test(v.lang)) || VOICES[0] || null;
+  buildVoiceMenu();
+}
+function buildVoiceMenu(){
+  const sel=$('#voicesel'); if(!sel) return;
+  if(!VOICES.length){ sel.innerHTML='<option>voz padrao</option>'; return; }
+  sel.innerHTML=VOICES.map(v=>{
+    let n=v.name.replace(/Microsoft|Online|\(Natural\)|- Portuguese.*|\(.*?\)/gi,'').trim()||v.name;
+    return `<option value="${v.name}" ${voice&&v.name===voice.name?'selected':''}>${n}</option>`;
+  }).join('');
+}
+function setVoice(name){ voice=VOICES.find(v=>v.name===name)||voice; if(voice) localStorage.setItem('lp2_voicename',voice.name); }
+if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged=loadVoices; loadVoices(); }
+let utter=null;
+function speak(text,btn){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  utter=new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g,''));
+  utter.lang='pt-BR'; utter.rate=.9; utter.pitch=1.05;
+  if(voice) utter.voice=voice;
+  if(btn){ btn.classList.add('playing'); utter.onend=()=>btn.classList.remove('playing'); }
+  speechSynthesis.speak(utter);
+}
+function stopSpeak(){ if('speechSynthesis' in window) speechSynthesis.cancel(); $$('.spk.playing').forEach(b=>b.classList.remove('playing')); }
+
+/* ---------- Dashboard ---------- */
+function renderDash(){
+  const g=$('#grid');
+  g.innerHTML=TOPICS.map((t,i)=>`
+    <div class="tcard ${done[t.id]?'complete':''}" onclick="openT(${i})">
+      <div class="thumb" style="${t.thumb?`background-image:url(${t.thumb})`:''}">${t.thumb?'':t.emoji}</div>
+      <div class="meta"><div class="nm">${t.emoji} ${t.nm}</div><div class="sb">${t.sb}</div></div>
+      <div class="done">&#10003;</div>
+    </div>`).join('');
+  const c=Object.keys(done).filter(k=>done[k]).length;
+  $('#progbar').style.width=(c/TOPICS.length*100)+'%';
+}
+function openT(i){ curT=i; curS=0; $('#dash').style.display='none'; $('#lesson').classList.add('on'); renderStep(); }
+function goDash(){ stopSpeak(); $('#lesson').classList.remove('on'); $('#dash').style.display='block'; renderDash(); }
+function goSite(){ if(confirm('Voltar para o inicio do site?')) location.href='../index.html'; }
+
+/* ---------- Lesson step ---------- */
+function renderStep(){
+  stopSpeak();
+  const t=TOPICS[curT], s=t.steps[curS];
+  $('#ttl').textContent=t.nm;
+  $('#dots').innerHTML=t.steps.map((_,i)=>`<span class="dot ${i===curS?'on':''}"></span>`).join('');
+  const visual = s.img ? `<img class="pic" src="${s.img}" alt="">` : `<div class="emoji">${s.emoji||t.emoji}</div>`;
+  $('#scard').innerHTML=`
+    ${visual}
+    <h2>${s.h}</h2>
+    <p class="txt">${s.txt}</p>
+    <button class="spk" onclick="speak(this.dataset.t,this)" data-t="${s.txt.replace(/"/g,'&quot;')}">\u{1F50A} Ouvir</button>
+    <div class="act">${actHtml(s.act)}</div>`;
+  $('#prev').disabled = curS===0;
+  $('#next').textContent = curS===t.steps.length-1 ? 'Concluir trilha ✓' : 'Proximo →';
+  $('#scard').scrollIntoView({block:'nearest'});
+}
+function actHtml(a){
+  if(a.tipo==='mc'){
+    return `<div class="q">${a.q}</div><div class="opts">${
+      a.op.map((o,i)=>`<button class="opt" onclick="ansMC(this,${o[1]})">${o[0]}</button>`).join('')
+    }</div><div class="fb" id="fb"></div>`;
+  }
+  if(a.tipo==='mn'){
+    return `<div class="q">Complete a palavra:</div>
+      <div class="mnrow">${a.pre}<span class="gap">_</span>${a.pos}</div>
+      <div class="mnbtns">
+        <button class="mnbtn" onclick="ansMN(this,'M','${a.r}','${a.word}')">M</button>
+        <button class="mnbtn" onclick="ansMN(this,'N','${a.r}','${a.word}')">N</button>
+      </div><div class="fb" id="fb"></div>`;
+  }
+  if(a.tipo==='rev'){
+    return `<div class="q">${a.q}</div>
+      <button class="reveal" onclick="this.nextElementSibling.classList.add('show');this.style.display='none'">Ver resposta</button>
+      <div class="ans">${a.a}</div>`;
+  }
+  return '';
+}
+function ansMC(btn,ok){
+  const opts=btn.parentElement.querySelectorAll('.opt'); opts.forEach(o=>o.disabled=true);
+  const fb=$('#fb');
+  if(ok){ btn.classList.add('ok'); fb.textContent='Acertou! \u{1F31F}'; fb.className='fb ok'; }
+  else{ btn.classList.add('no'); opts.forEach((o,i)=>{ if(TOPICS[curT].steps[curS].act.op[i][1]) o.classList.add('ok'); });
+        fb.textContent='Quase! A verde e a certa. \u{1F60A}'; fb.className='fb no'; }
+}
+function ansMN(btn,choice,right,word){
+  const btns=btn.parentElement.querySelectorAll('.mnbtn'); btns.forEach(b=>b.disabled=true);
+  const fb=$('#fb');
+  if(choice===right){ btn.classList.add('ok'); fb.textContent='Isso! → '+word+' \u{1F389}'; fb.className='fb ok'; }
+  else{ btn.classList.add('no'); btns.forEach(b=>{ if(b.textContent===right) b.classList.add('ok'); });
+        fb.textContent='A certa e '+right+' → '+word; fb.className='fb no'; }
+}
+function step(d){
+  const t=TOPICS[curT];
+  if(d>0 && curS===t.steps.length-1){ // concluir
+    done[t.id]=true; localStorage.setItem('lp2_done',JSON.stringify(done));
+    if(Object.keys(done).filter(k=>done[k]).length===TOPICS.length) return winAll();
+    return goDash();
+  }
+  curS=Math.max(0,Math.min(t.steps.length-1,curS+d)); renderStep();
+}
+function winAll(){
+  stopSpeak();
+  $('#lesson').classList.remove('on'); $('#dash').style.display='block';
+  renderDash(); $('#dash').scrollIntoView();
+  setTimeout(()=>alert('\u{1F3C6} Voce completou TODAS as trilhas! Boa sorte na prova! \u{1F340}'),200);
+}
+
+/* ---------- controles ---------- */
+function theme(){ document.body.classList.toggle('dark'); localStorage.setItem('lp2_theme',document.body.classList.contains('dark')?'d':'l'); $('#thBtn').textContent=document.body.classList.contains('dark')?'☀️':'\u{1F319}'; }
+function font(d){ let f=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fs'))||1; f=Math.max(.8,Math.min(1.5,f+d*0.1)); document.documentElement.style.setProperty('--fs',f); localStorage.setItem('lp2_fs',f); }
+(function init(){
+  if(localStorage.getItem('lp2_theme')==='d'){ document.body.classList.add('dark'); $('#thBtn').textContent='☀️'; }
+  const f=localStorage.getItem('lp2_fs'); if(f) document.documentElement.style.setProperty('--fs',f);
+  renderDash();
+})();
+</script>
+</body>
+</html>
