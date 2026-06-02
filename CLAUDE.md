@@ -22,6 +22,29 @@ Os agentes estao em `.claude/agents/`. Sao invocados com `Agent(subagent_type="n
 
 Os agentes leeem os arquivos do projeto diretamente. Passar sempre o caminho do arquivo como contexto no prompt.
 
+## ESTRUTURA DE PASTAS (v2 — trimestral, abr/2026)
+
+```
+_processo/        COMO trabalhamos (imutavel): PIPELINE.md, RUNBOOK_MATERIA.md,
+                  GOVERNANCA.md, ACESSIBILIDADE.md, geracao/ (scripts), LINKS
+ferramentas/      SITE / deploy (vai pro GitHub Pages)
+  base.* ela-base.*   design system compartilhado (NAO duplicar)
+  templates/          TEMPLATE_PT, TEMPLATE_EN, wal-kids-base.html (CONGELADOS)
+  media/              PDFs/JSON/quizzes leves (SEM video)
+fontes/<tri>/<MAT>/   material bruto da escola (LOCAL, gitignored)
+trabalho/<tri>_<mat>/ producao: _outline_pedagogico.md, conteudo/, figuras/, _materia.md
+_arquivo_1tri/        backup leve + APRENDIZADOS_1TRI.md (fora do site)
+```
+
+Quatro camadas: **processo** (imutavel) · **fontes** (insumo) · **trabalho** (producao) · **ferramentas** (deploy). Para produzir matéria nova, seguir `_processo/RUNBOOK_MATERIA.md`.
+
+## CICLO DE VIDA DOS PRODUTOS — POLITICA
+
+**Produto serve ate a prova. Depois da prova, os arquivos pesados (video, audio,
+apresentacao PDF) podem ser apagados — preserva-se APENAS o aprendizado de
+formulacao/desenvolvimento** (docs em `_processo/` + `_arquivo_1tri/APRENDIZADOS_1TRI.md`
++ os HTML leves como modelo). Vídeos NLM nao versionar pesado no git sem necessidade.
+
 ## Contexto
 Ferramentas HTML gamificadas para crianca de 7 anos (Y2 Maple Bear). Ingles como L2.
 Publico: crianca jogando em celular. CADA detalhe visual importa.
@@ -129,8 +152,10 @@ ferramentas/
   base.js           <- JS compartilhado HIS/LP (showScreen, toggleTheme, changeFontSize, showHomeModal, updateScore, initStarfield, launchFireworks, updatePhaseNavs, initApp)
   ela-base.css      <- CSS compartilhado ELA (karaoke, speak-btn, tour overlay, flag BR, lock, sound states)
   ela-base.js       <- JS compartilhado ELA (speakWithKaraoke, stopKaraoke, setKSpeed, speak, makeSpeakBtn, toggleSound, toggleLock, unlockScreen, initFlags, startTour, initEla)
-  TEMPLATE_PT.html  <- Esqueleto para ferramentas PT (HIS/LP): copiar + preencher placeholders
-  TEMPLATE_EN.html  <- Esqueleto para ferramentas EN (ELA): copiar + preencher placeholders
+  templates/
+    TEMPLATE_PT.html      <- Esqueleto ferramentas PT (HIS/LP/GEO): copiar + preencher (importa ../base.*)
+    TEMPLATE_EN.html      <- Esqueleto ferramentas EN (ELA/CIE): copiar + preencher (importa ../ela-base.*)
+    wal-kids-base.html    <- "Apostila Magica" WAL kids (CONGELADO): copiar + preencher META + PAGES[]
 ```
 
 **Regras de importacao:**

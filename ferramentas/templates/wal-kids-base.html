@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- ===================================================================
+  WAL KIDS BASE — "Apostila Magica" (template CONGELADO)
+  Projeto Serafina · crianca de 7 anos · WebApp Light, offline, 1 arquivo.
+
+  COMO USAR (montar uma materia nova):
+    1. Copie este arquivo para ferramentas/<MATERIA>_apostila.html
+    2. Preencha META (titulo, materia, cor) e o array PAGES[] (uma tela por ideia)
+    3. Embuta figuras como data-URI base64 (campo "img") — NUNCA caminho externo
+    4. NAO reescreva CSS/JS base — so o conteudo. Este template e imutavel.
+
+  PRINCIPIO: curto (1-2 frases/tela) · visual (1 figura grande) · divertido
+  (mascote + caixas + jogo). Texto e legenda do desenho, nao o contrario.
+==================================================================== -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fef3c7">
+<title>Apostila Magica</title>
+<style>
+:root{
+  --fs:1;                      /* escala de fonte (A- / A+) */
+  --bg:#fff7ed;               /* fundo claro quente */
+  --bg2:#ffedd5;
+  --ink:#3b2f2f;              /* texto principal */
+  --ink-soft:#6b5d52;
+  --card:#ffffff;
+  --accent:#f59e0b;           /* cor da materia (sobrescrita por META.cor) */
+  --accent-soft:#fde68a;
+  --shadow:0 10px 30px rgba(180,120,30,.18);
+  --rad:26px;
+}
+body.dark{
+  --bg:#1a1730; --bg2:#241f3d; --ink:#f5f3ff; --ink-soft:#c7bfe6;
+  --card:#2a2548; --accent-soft:#4c3f7a; --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:'Comic Sans MS','Trebuchet MS','Segoe UI',system-ui,sans-serif;
+  background:linear-gradient(160deg,var(--bg),var(--bg2));
+  color:var(--ink); overflow:hidden; touch-action:manipulation;
+}
+.app{display:flex;flex-direction:column;height:100dvh}
+
+/* ---- Barra de cima ---- */
+.topbar{
+  display:flex;align-items:center;gap:8px;padding:10px 12px;
+  background:var(--card);box-shadow:0 2px 10px rgba(0,0,0,.08);z-index:20;
+}
+.topbar .title{
+  font-weight:800;font-size:calc(1.05rem*var(--fs));color:var(--accent);
+  flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.iconbtn{
+  width:46px;height:46px;min-width:46px;border:none;border-radius:14px;
+  background:var(--accent-soft);color:var(--ink);font-size:1.3rem;cursor:pointer;
+  display:grid;place-items:center;transition:transform .12s;
+}
+.iconbtn:active{transform:scale(.9)}
+.iconbtn.small{width:40px;height:40px;min-width:40px;font-size:1rem;font-weight:800}
+
+/* ---- Palco / pagina ---- */
+.stage{flex:1;display:flex;align-items:center;justify-content:center;padding:14px;overflow:hidden}
+.page{
+  width:100%;max-width:520px;max-height:100%;overflow-y:auto;
+  background:var(--card);border-radius:var(--rad);box-shadow:var(--shadow);
+  padding:22px 20px 26px;text-align:center;
+  animation:pop .3s ease;
+}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.page h2{
+  font-size:calc(1.5rem*var(--fs));color:var(--accent);margin-bottom:14px;line-height:1.15;
+}
+.figura{
+  font-size:calc(4.6rem*var(--fs));line-height:1;margin:6px 0 14px;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,.18));animation:float 3s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.figura img{max-width:100%;max-height:38vh;border-radius:18px;display:block;margin:0 auto}
+.frase{
+  font-size:calc(1.25rem*var(--fs));line-height:1.5;color:var(--ink);
+  max-width:32ch;margin:0 auto 12px;
+}
+.frase b{color:var(--accent);background:var(--accent-soft);padding:0 .25em;border-radius:6px}
+
+/* ---- Caixas tematicas ---- */
+.box{border-radius:18px;padding:12px 14px;margin:14px auto 0;max-width:34ch;
+  font-size:calc(1.05rem*var(--fs));line-height:1.4;text-align:left;display:flex;gap:10px}
+.box .bi{font-size:1.5rem;flex-shrink:0}
+.box-dica{background:#dbeafe;color:#1e3a8a}
+.box-importante{background:#fef9c3;color:#854d0e}
+.box-jogo{background:#dcfce7;color:#166534}
+.box-pergunta{background:#fae8ff;color:#86198f}
+body.dark .box-dica{background:#1e3a5f;color:#bfdbfe}
+body.dark .box-importante{background:#5c4a12;color:#fde68a}
+body.dark .box-jogo{background:#14432a;color:#bbf7d0}
+body.dark .box-pergunta{background:#4a1d4f;color:#f5d0fe}
+.box-pergunta .resp{display:none;margin-top:8px;font-weight:800}
+.box-pergunta.show .resp{display:block}
+.box-pergunta .reveal{margin-top:8px;background:#86198f;color:#fff;border:none;
+  border-radius:10px;padding:6px 12px;font-size:.95rem;cursor:pointer;font-weight:700}
+
+/* ---- Botao de audio (le a frase) ---- */
+.speak{margin:8px auto 0;display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:#fff;border:none;border-radius:999px;
+  padding:10px 18px;font-size:calc(1rem*var(--fs));font-weight:800;cursor:pointer}
+.speak:active{transform:scale(.94)}
+.speak.playing{animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+
+/* ---- Mascote ---- */
+.mascote{position:fixed;bottom:84px;right:10px;font-size:2.6rem;z-index:15;
+  animation:float 2.4s ease-in-out infinite;pointer-events:none;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+
+/* ---- Navegacao ---- */
+.nav{display:flex;align-items:center;gap:10px;padding:12px;background:var(--card);
+  box-shadow:0 -2px 10px rgba(0,0,0,.08);z-index:20}
+.navbtn{flex:1;height:54px;border:none;border-radius:16px;background:var(--accent);
+  color:#fff;font-size:1.1rem;font-weight:800;cursor:pointer;display:flex;
+  align-items:center;justify-content:center;gap:8px}
+.navbtn:disabled{opacity:.35;cursor:default}
+.navbtn:active:not(:disabled){transform:scale(.96)}
+.dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;max-width:40%}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--accent-soft);transition:.2s}
+.dot.on{background:var(--accent);transform:scale(1.4)}
+
+/* ---- Tela final de festa ---- */
+.fim{text-align:center}
+.fim .big{font-size:calc(3.4rem*var(--fs));animation:float 2s ease-in-out infinite}
+
+@media(max-width:380px){
+  .page{padding:18px 14px 22px}
+  .mascote{font-size:2.1rem;bottom:78px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn" id="btnHome" title="Inicio" onclick="goHome()">&#127968;</button>
+    <span class="title" id="appTitle">Apostila Magica</span>
+    <button class="iconbtn small" title="Diminuir letra" onclick="setFont(-1)">A-</button>
+    <button class="iconbtn small" title="Aumentar letra" onclick="setFont(1)">A+</button>
+    <button class="iconbtn" id="btnTheme" title="Tema" onclick="toggleTheme()">&#127769;</button>
+  </div>
+
+  <div class="stage"><div class="page" id="page"></div></div>
+  <div class="mascote" id="mascote">&#129418;</div>
+
+  <div class="nav">
+    <button class="navbtn" id="prev" onclick="go(-1)">&#8592; Voltar</button>
+    <div class="dots" id="dots"></div>
+    <button class="navbtn" id="next" onclick="go(1)">Proximo &#8594;</button>
+  </div>
+</div>
+
+<script>
+/* ===================================================================
+   META + PAGES — UNICA parte que o autor preenche por materia.
+   Tipos de pagina: 'capa' | 'conceito' | 'fim'
+   Em 'conceito': titulo, fig (emoji) OU img (data-URI base64), frase,
+   e (opcional) caixa {tipo:'dica'|'importante'|'jogo'|'pergunta', texto, resposta}
+=================================================================== */
+const META = {
+  titulo: "Apostila Magica (exemplo)",
+  cor: "#f59e0b",            // cor da materia
+  mascote: "\u{1F992}",      // emoji do bichinho-guia
+  storeKey: "wal_exemplo"    // chave unica de progresso no localStorage
+};
+
+const PAGES = [
+  { tipo:'capa', titulo:"Vamos aprender!", fig:"\u{1F4DA}",
+    frase:"Toque em <b>Proximo</b> para comecar a aventura." },
+
+  { tipo:'conceito', titulo:"Isto e um conceito", fig:"\u{1F431}",
+    frase:"Uma frase curtinha explica o desenho. <b>So uma ideia</b> por tela.",
+    caixa:{ tipo:'dica', texto:"Use palavras do dia a dia: gato, bola, comida." } },
+
+  { tipo:'conceito', titulo:"Caixa importante", fig:"⭐",
+    frase:"O que a crianca <b>nao pode esquecer</b> vai numa caixa amarela.",
+    caixa:{ tipo:'importante', texto:"Isto cai na prova!" } },
+
+  { tipo:'conceito', titulo:"Hora de brincar", fig:"\u{1F3AE}",
+    frase:"Cada topico fecha com uma <b>brincadeira</b> rapida.",
+    caixa:{ tipo:'jogo', texto:"Aponte 3 coisas vermelhas perto de voce!" } },
+
+  { tipo:'conceito', titulo:"Pergunta esperta", fig:"❓",
+    frase:"Pergunte e deixe a crianca pensar antes de ver a resposta.",
+    caixa:{ tipo:'pergunta', texto:"Quanto e 2 + 1 ?", resposta:"Tres! \u{1F389}" } },
+
+  { tipo:'fim', titulo:"Voce conseguiu!", fig:"\u{1F31F}",
+    frase:"Parabens! Voce terminou a apostila." }
+];
+
+/* ===================== MOTOR (nao mexer) ===================== */
+let idx = 0;
+const $ = id => document.getElementById(id);
+
+function boot(){
+  document.documentElement.style.setProperty('--accent', META.cor);
+  $('appTitle').textContent = META.titulo;
+  $('mascote').textContent = META.mascote;
+  document.title = META.titulo;
+  // tema + fonte persistidos
+  if(localStorage.getItem('serafina-theme')==='dark') document.body.classList.add('dark');
+  const f = parseFloat(localStorage.getItem('serafina-font')||'1');
+  document.documentElement.style.setProperty('--fs', f);
+  // retoma na ultima pagina vista
+  idx = parseInt(localStorage.getItem(META.storeKey)||'0',10);
+  if(isNaN(idx) || idx<0 || idx>=PAGES.length) idx=0;
+  buildDots(); render();
+}
+
+function buildDots(){
+  $('dots').innerHTML = PAGES.map((_,i)=>`<span class="dot" data-i="${i}"></span>`).join('');
+}
+
+function render(){
+  const p = PAGES[idx];
+  let html = '';
+  const figHtml = p.img ? `<div class="figura"><img src="${p.img}" alt=""></div>`
+                        : (p.fig ? `<div class="figura">${p.fig}</div>` : '');
+  if(p.tipo==='fim'){
+    html = `<div class="fim"><div class="big">${p.fig||'\u{1F31F}'}</div>
+            <h2>${p.titulo}</h2><p class="frase">${p.frase||''}</p></div>`;
+  } else {
+    html = `<h2>${p.titulo}</h2>${figHtml}`;
+    if(p.frase){
+      html += `<p class="frase">${p.frase}</p>
+               <button class="speak" onclick="speakPage(this)">\u{1F50A} Ouvir</button>`;
+    }
+    if(p.caixa) html += boxHtml(p.caixa);
+  }
+  $('page').innerHTML = html;
+  $('page').scrollTop = 0;
+  $('prev').disabled = idx===0;
+  $('next').textContent = idx===PAGES.length-1 ? 'Recomecar ↻' : 'Proximo →';
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on', i===idx));
+  localStorage.setItem(META.storeKey, idx);
+  stopSpeak();
+}
+
+function boxHtml(c){
+  const map={dica:['box-dica','\u{1F4A1}'],importante:['box-importante','⭐'],
+             jogo:['box-jogo','\u{1F3AE}'],pergunta:['box-pergunta','❓']};
+  const [cls,ic]=map[c.tipo]||map.dica;
+  if(c.tipo==='pergunta'){
+    return `<div class="box ${cls}"><span class="bi">${ic}</span><div>${c.texto}
+      <button class="reveal" onclick="this.parentElement.parentElement.classList.add('show');this.remove()">Ver resposta</button>
+      <div class="resp">${c.resposta||''}</div></div></div>`;
+  }
+  return `<div class="box ${cls}"><span class="bi">${ic}</span><div>${c.texto}</div></div>`;
+}
+
+function go(dir){
+  if(dir>0 && idx===PAGES.length-1){ idx=0; render(); return; } // recomeca
+  idx = Math.max(0, Math.min(PAGES.length-1, idx+dir));
+  render();
+}
+
+/* ---- TTS: le a frase em portugues (sem tags) ---- */
+let utter=null;
+function speakPage(btn){
+  stopSpeak();
+  const txt = (PAGES[idx].frase||'').replace(/<[^>]+>/g,'');
+  if(!txt || !window.speechSynthesis) return;
+  utter = new SpeechSynthesisUtterance(txt);
+  utter.lang='pt-BR'; utter.rate=.85; utter.pitch=1.15;
+  btn.classList.add('playing');
+  utter.onend = ()=>btn.classList.remove('playing');
+  speechSynthesis.speak(utter);
+}
+function stopSpeak(){ if(window.speechSynthesis){ speechSynthesis.cancel(); }
+  document.querySelectorAll('.speak.playing').forEach(b=>b.classList.remove('playing')); }
+
+/* ---- Controles globais ---- */
+function toggleTheme(){
+  document.body.classList.toggle('dark');
+  const dark=document.body.classList.contains('dark');
+  localStorage.setItem('serafina-theme', dark?'dark':'light');
+  $('btnTheme').innerHTML = dark ? '☀️' : '\u{1F319}';
+}
+function setFont(d){
+  let f=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fs'))||1;
+  f=Math.max(.8, Math.min(1.6, f + d*0.1));
+  document.documentElement.style.setProperty('--fs', f);
+  localStorage.setItem('serafina-font', f);
+}
+function goHome(){
+  if(confirm('Voltar para o inicio?')) location.href='../index.html';
+}
+
+boot();
+</script>
+</body>
+</html>
