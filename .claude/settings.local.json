@@ -77,7 +77,14 @@
       "Bash(mv \"Global Cultural Atlas.pdf\" \"ferramentas/media/apresentacao_geo_nb2.pdf\")",
       "Bash(rm -f \"ferramentas/media/apresentacao_geo_nb3.pdf\")",
       "Bash(rm -rf 03_HISTORIA/assets)",
-      "Bash(rm -rf \"C:tmp\" \"C:tmpnb1art.json\" quiz.json quiz_nb1_raw.json quiz_nb2_raw.json)"
+      "Bash(rm -rf \"C:tmp\" \"C:tmpnb1art.json\" quiz.json quiz_nb1_raw.json quiz_nb2_raw.json)",
+      "Bash(mkdir -p _processo/geracao ferramentas/templates fontes/1tri fontes/2tri trabalho/2tri_portugues/conteudo trabalho/2tri_portugues/figuras _arquivo_1tri)",
+      "Bash(mv PROMPT_PIPELINE_MARIANA.md _processo/PIPELINE.md)",
+      "Bash(mv aperfeicoamento_de_governanca.md _processo/GOVERNANCA.md)",
+      "Bash(mv ACESSIBILIDADE_PLUS.md _processo/ACESSIBILIDADE.md)",
+      "Bash(mv gen_quiz_geo.py _processo/geracao/gen_quiz_geo.py)",
+      "Bash(sed -i 's#href=\"base.css\"#href=\"../base.css\"#; s#src=\"base.js\"#src=\"../base.js\"#' ferramentas/templates/TEMPLATE_PT.html)",
+      "Bash(sed -i 's#href=\"ela-base.css\"#href=\"../ela-base.css\"#; s#src=\"ela-base.js\"#src=\"../ela-base.js\"#' ferramentas/templates/TEMPLATE_EN.html)"
     ]
   }
 }

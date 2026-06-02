@@ -1,32 +1,29 @@
-# Claude local settings
+# ============================================================
+# .gitignore — Projeto Serafina (estudo para provas)
+# Regra: o repositorio publico (GitHub Pages) carrega APENAS
+# o site (index.html + ferramentas/). Materiais brutos da
+# escola e arquivos de trabalho ficam locais.
+# ============================================================
+
+# --- Config local do Claude ---
 .claude/
 
-# Planejamento interno (não precisa no site)
-planejamento/
+# --- Coordenacao e planejamento interno (nao vao para o site) ---
 00_COORDENACAO/
+planejamento/
 
-# Materiais brutos escola (PDFs/PPTX/fotos — ficam locais, nao no GitHub publico)
-04_CIENCIAS/*.pdf
-04_CIENCIAS/*.pptx
-04_CIENCIAS/*.jpeg
-04_CIENCIAS/*.jpg
-04_CIENCIAS/*.png
-05_GEOGRAFIA/*.pdf
-05_GEOGRAFIA/*.pptx
-05_GEOGRAFIA/*.jpeg
-05_GEOGRAFIA/*.jpg
-05_GEOGRAFIA/*.png
+# --- Materiais-fonte brutos (PDF/PPTX/fotos da escola) ---
+# Ficam locais como insumo; nunca no GitHub publico.
+fontes/
 
-# Assets pesados (audio/video NotebookLM — nao deployar via GitHub Pages)
-03_HISTORIA/assets/
+# --- Area de producao: imagens intermediarias extraidas ---
+# Figuras entram embutidas (base64) nos produtos finais em ferramentas/.
+trabalho/**/figuras/
 
-# Scripts de geração (temporários)
-gen_quiz.py
-
-# JSONs brutos NLM (raw, processados para HTML)
+# --- JSONs brutos do NotebookLM (processados para HTML) ---
 ferramentas/media/*_raw.json
 
-# Sistema
+# --- Sistema ---
 Thumbs.db
 .DS_Store
 *.tmp
