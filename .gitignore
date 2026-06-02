@@ -20,6 +20,14 @@ fontes/
 # Figuras entram embutidas (base64) nos produtos finais em ferramentas/.
 trabalho/**/figuras/
 
+# --- Area de producao: material bruto colado em conteudo/ (local-only) ---
+# O conteudo processado mora em _outline_pedagogico.md (esse fica versionado).
+trabalho/**/conteudo/*.jpg
+trabalho/**/conteudo/*.jpeg
+trabalho/**/conteudo/*.png
+trabalho/**/conteudo/*.pdf
+trabalho/**/conteudo/*.pptx
+
 # --- JSONs brutos do NotebookLM (processados para HTML) ---
 ferramentas/media/*_raw.json
 

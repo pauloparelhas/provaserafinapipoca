@@ -165,34 +165,83 @@ body.dark .box-pergunta{background:#4a1d4f;color:#f5d0fe}
    e (opcional) caixa {tipo:'dica'|'importante'|'jogo'|'pergunta', texto, resposta}
 =================================================================== */
 const META = {
-  titulo: "Apostila Magica (exemplo)",
-  cor: "#f59e0b",            // cor da materia
-  mascote: "\u{1F992}",      // emoji do bichinho-guia
-  storeKey: "wal_exemplo"    // chave unica de progresso no localStorage
+  titulo: "Apostila Magica de Portugues",
+  cor: "#fb923c",
+  mascote: "\u{1F9F8}",       // boneca (Emilia)
+  storeKey: "lp2_apostila"
 };
 
 const PAGES = [
-  { tipo:'capa', titulo:"Vamos aprender!", fig:"\u{1F4DA}",
-    frase:"Toque em <b>Proximo</b> para comecar a aventura." },
+  { tipo:'capa', titulo:"Revisao de Portugues!", fig:"\u{1F4D6}",
+    frase:"Vamos relembrar tudo para a prova. Toque em <b>Proximo</b>!" },
 
-  { tipo:'conceito', titulo:"Isto e um conceito", fig:"\u{1F431}",
-    frase:"Uma frase curtinha explica o desenho. <b>So uma ideia</b> por tela.",
-    caixa:{ tipo:'dica', texto:"Use palavras do dia a dia: gato, bola, comida." } },
+  // ===== 1. O MUNDO DA ARTE =====
+  { tipo:'conceito', titulo:"O que e Arte?", fig:"\u{1F3A8}",
+    frase:"Arte e um jeito de mostrar o que a gente <b>pensa e sente</b> — com imagem, som ou movimento.",
+    caixa:{ tipo:'dica', texto:"Desenhar, cantar e dancar tambem e arte!" } },
 
-  { tipo:'conceito', titulo:"Caixa importante", fig:"⭐",
-    frase:"O que a crianca <b>nao pode esquecer</b> vai numa caixa amarela.",
-    caixa:{ tipo:'importante', texto:"Isto cai na prova!" } },
+  { tipo:'conceito', titulo:"Artes que a gente ve", fig:"\u{1F5BC}\u{FE0F}",
+    frase:"\u{1F3A8} Pintura &nbsp; \u{1F5FF} Escultura &nbsp; \u{1F4F7} Fotografia &nbsp; \u{1F3DB}\u{FE0F} Arquitetura",
+    caixa:{ tipo:'jogo', texto:"Olhe ao redor: voce ve alguma pintura ou foto na parede?" } },
 
-  { tipo:'conceito', titulo:"Hora de brincar", fig:"\u{1F3AE}",
-    frase:"Cada topico fecha com uma <b>brincadeira</b> rapida.",
-    caixa:{ tipo:'jogo', texto:"Aponte 3 coisas vermelhas perto de voce!" } },
+  { tipo:'conceito', titulo:"Artes de som e corpo", fig:"\u{1F3B5}",
+    frase:"\u{1F3B5} Musica &nbsp; \u{1F483} Danca &nbsp; \u{1F3AD} Teatro e Cinema &nbsp; \u{1F4DA} Literatura (livros!)",
+    caixa:{ tipo:'pergunta', texto:"Qual arte voce mais gosta?", resposta:"Toda resposta vale — e a sua opiniao! \u{1F60A}" } },
 
-  { tipo:'conceito', titulo:"Pergunta esperta", fig:"❓",
-    frase:"Pergunte e deixe a crianca pensar antes de ver a resposta.",
-    caixa:{ tipo:'pergunta', texto:"Quanto e 2 + 1 ?", resposta:"Tres! \u{1F389}" } },
+  { tipo:'conceito', titulo:"Leitura de imagem", fig:"\u{1F50D}",
+    frase:"E olhar bem uma figura e <b>tentar entender o que ela conta</b> — como um detetive!",
+    caixa:{ tipo:'dica', texto:"Pergunte: o que tem na imagem? O que esta acontecendo?" } },
 
-  { tipo:'fim', titulo:"Voce conseguiu!", fig:"\u{1F31F}",
-    frase:"Parabens! Voce terminou a apostila." }
+  { tipo:'conceito', titulo:"Arte rupestre", fig:"\u{1F407}",
+    frase:"Sao as pinturas <b>mais antigas</b> do mundo, feitas pelos homens das cavernas, ha muitos anos. Eles desenhavam <b>animais</b> nas paredes.",
+    caixa:{ tipo:'importante', texto:"As pinturas contam Historia! Feitas em cavernas, no Paleolitico." } },
+
+  // ===== 2. SITIO DO PICAPAU AMARELO =====
+  { tipo:'conceito', titulo:"O Sitio do Picapau Amarelo", fig:"\u{1F33D}",
+    frase:"Historias criadas por <b>Monteiro Lobato</b>, um grande escritor brasileiro de livros para criancas.",
+    caixa:{ tipo:'dica', texto:"18 de abril e o Dia de Monteiro Lobato e do Livro Infantil." } },
+
+  { tipo:'conceito', titulo:"Personagens (parte 1)", fig:"\u{1F9F8}",
+    frase:"\u{1F9F8} <b>Emilia</b>: boneca de pano falante e atrevida.<br>\u{1F467} <b>Narizinho</b>: menina curiosa.<br>\u{1F466} <b>Pedrinho</b>: menino corajoso.<br>\u{1F475} <b>Dona Benta</b>: a vovo que conta historias.",
+    caixa:{ tipo:'pergunta', texto:"Quem e a boneca de pano falante?", resposta:"A Emilia! \u{1F9F8}" } },
+
+  { tipo:'conceito', titulo:"Personagens (parte 2)", fig:"\u{1F33D}",
+    frase:"\u{1F33D} <b>Visconde de Sabugosa</b>: sabugo de milho muito sabio.<br>\u{1F373} <b>Tia Nastacia</b>: faz quitutes deliciosos.<br>\u{1F9B5} <b>Saci</b>: travesso, tem <b>uma perna so</b> e gorro vermelho.<br>\u{1F9D9}\u{200D}♀\u{FE0F} <b>Cuca</b>: a vila, a bruxa malvada.",
+    caixa:{ tipo:'jogo', texto:"Voce consegue dizer 8 personagens com uma caracteristica de cada?" } },
+
+  // ===== 3. SINAIS DE PONTUACAO (fatiado) =====
+  { tipo:'conceito', titulo:"Pontuacao: fim de frase", fig:"✍\u{FE0F}",
+    frase:"<b>.</b> ponto final: termina a frase.<br><b>?</b> pergunta.<br><b>!</b> alegria ou susto.",
+    caixa:{ tipo:'importante', texto:"Isto CAI NA PROVA! Eu gosto de sorvete. / Voce quer brincar? / Que legal!" } },
+
+  { tipo:'conceito', titulo:"Pontuacao: pausa e fala", fig:"✍\u{FE0F}",
+    frase:"<b>,</b> virgula: uma pausa pequena.<br><b>:</b> dois pontos: anuncia uma lista ou uma fala.",
+    caixa:{ tipo:'dica', texto:"Comprei tres frutas: maca, banana e uva." } },
+
+  { tipo:'conceito', titulo:"Mais sinais", fig:"✍\u{FE0F}",
+    frase:"<b>—</b> travessao: mostra que alguem vai falar.<br><b>“ ”</b> aspas: a fala de alguem no texto.<br><b>…</b> reticencias: pensamento no ar.",
+    caixa:{ tipo:'jogo', texto:"Qual sinal usamos para fazer uma pergunta? (resposta: o ?)" } },
+
+  // ===== 4. DIALOGO =====
+  { tipo:'conceito', titulo:"Dialogo", fig:"\u{1F4AC}",
+    frase:"Dialogo e uma <b>conversa entre duas ou mais pessoas</b>. Usamos <b>dois pontos (:)</b> para anunciar a fala e <b>travessao (—)</b> antes de cada fala.",
+    caixa:{ tipo:'importante', texto:"O Nuno perguntou:<br>— Ja foste ao circo?<br>A Teresa respondeu:<br>— Claro que ja fui!" } },
+
+  // ===== 5. SOM NASAL / M ou N =====
+  { tipo:'conceito', titulo:"M ou N?", fig:"\u{1F445}",
+    frase:"Regra de ouro: usa-se <b>M antes de P e de B</b>. Nos outros casos, <b>N</b>.",
+    caixa:{ tipo:'pergunta', texto:"bo__ba: e M ou N?", resposta:"M! bo<b>m</b>ba (antes de B) \u{1F4A3}" } },
+
+  { tipo:'conceito', titulo:"Treino M antes de P e B", fig:"\u{1F4A1}",
+    frase:"Com <b>M</b>: ca<b>m</b>po, ta<b>m</b>pa, la<b>m</b>pada, ta<b>m</b>bor, bo<b>m</b>bom, po<b>m</b>ba.<br>Com <b>N</b>: pe<b>n</b>te, pa<b>n</b>tera, po<b>n</b>te, de<b>n</b>te.",
+    caixa:{ tipo:'jogo', texto:"ca__po? (M, antes de P) &nbsp; pe__te? (N)" } },
+
+  { tipo:'conceito', titulo:"Som nasal com til (~)", fig:"\u{1F443}",
+    frase:"O <b>til (~)</b> tambem faz som de nariz: pão, mão, balão, cão.",
+    caixa:{ tipo:'dica', texto:"Diga 'pao' segurando o nariz: sai pelo nariz! Isso e som nasal." } },
+
+  { tipo:'fim', titulo:"Voce arrasou!", fig:"\u{1F31F}",
+    frase:"Parabens! Voce revisou tudo para a prova de Portugues. Boa sorte! \u{1F340}" }
 ];
 
 /* ===================== MOTOR (nao mexer) ===================== */
