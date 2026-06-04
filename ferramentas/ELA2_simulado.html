@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Test Practice — The Animal Inquiry</title>
+<style>
+:root{--fs:1;--bg:#0d0b1e;--bg2:#171334;--ink:#f5f3ff;--soft:rgba(255,255,255,.55);--card:#221c44;--line:rgba(255,255,255,.12);--accent:#34d399;--accent2:#60a5fa;--ok:#34d399;--no:#f87171;--mid:#fbbf24;--tr:#fcd34d;--rad:22px}
+body.light{--bg:#eef2ff;--bg2:#e0e7ff;--ink:#1a1030;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+#starfield{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{display:flex;align-items:center;gap:7px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.1rem;font-weight:800;cursor:pointer;padding:0 9px}
+.iconbtn:active{transform:scale(.9)}
+.flagbtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.4;filter:grayscale(1)}
+.flagbtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .flagbtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
+.bar{height:9px;background:var(--line)}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .35s}
+.stage{flex:1;display:flex;align-items:center;justify-content:center;padding:16px}
+.card{width:100%;max-width:540px;background:var(--card);border-radius:var(--rad);box-shadow:0 14px 40px rgba(0,0,0,.35);padding:22px 20px 24px;text-align:center;border:1px solid var(--line)}
+.qhead{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px}
+.qnum{font-size:.78rem;font-weight:900;color:var(--soft);letter-spacing:1px;text-transform:uppercase}
+.badge{font-size:.66rem;font-weight:900;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.badge.mc{background:rgba(96,165,250,.18);color:#93c5fd}
+.badge.vf{background:rgba(251,191,36,.18);color:#fbbf24}
+.badge.open{background:rgba(167,139,250,.2);color:#c4b5fd}
+.qfig{font-size:calc(3.1rem*var(--fs));margin:10px 0 4px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
+.q{font-size:calc(1.22rem*var(--fs));font-weight:900;line-height:1.35;margin:4px 0 2px}
+/* TRANSLATION (toggled by BR flag) */
+.tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:calc(.92rem*var(--fs));line-height:1.3}
+body.show-tr .tr{display:block}
+.qtr{margin:2px 0 4px}
+.speak{margin:8px auto 16px;display:inline-flex;align-items:center;gap:7px;border:2px solid var(--accent2);background:transparent;color:var(--accent2);
+  font-weight:800;font-size:.85rem;border-radius:20px;padding:6px 14px;cursor:pointer;font-family:inherit}
+.speak:active{transform:scale(.95)}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{padding:13px 16px;border:2px solid var(--line);border-radius:16px;background:transparent;color:var(--ink);font-size:calc(1.05rem*var(--fs));font-weight:800;cursor:pointer;font-family:inherit;transition:.15s;display:flex;flex-direction:column;gap:1px}
+.opt .otr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.78rem}
+body.show-tr .opt .otr{display:block}
+.opt:active{transform:scale(.97)}
+.opt.ok{background:var(--ok);color:#06251a;border-color:var(--ok)}.opt.ok .otr{color:#06251a}
+.opt.no{background:var(--no);color:#3a0a0a;border-color:var(--no)}.opt.no .otr{color:#3a0a0a}
+.opt:disabled{cursor:default;opacity:1}
+.vfwrap{display:flex;gap:12px;justify-content:center}
+.vfbtn{flex:1;max-width:200px;padding:18px 10px;border:2px solid var(--line);border-radius:18px;background:transparent;color:var(--ink);
+  font-size:calc(1.15rem*var(--fs));font-weight:900;cursor:pointer;font-family:inherit;transition:.15s}
+.vfbtn .big{display:block;font-size:1.9rem;margin-bottom:2px}
+.vfbtn .vtr{display:none;font-size:.7rem;font-style:italic;font-weight:700;color:var(--tr);margin-top:2px}
+body.show-tr .vfbtn .vtr{display:block}
+.vfbtn:active{transform:scale(.96)}
+.vfbtn.ok{background:var(--ok);color:#06251a;border-color:var(--ok)}
+.vfbtn.no{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+.writeline{height:46px;border-bottom:3px dashed var(--line);margin:10px 4px 14px;display:flex;align-items:flex-end;justify-content:center;color:var(--soft);font-weight:700;font-size:.82rem;padding-bottom:4px}
+.hint{font-size:.9rem;font-weight:800;color:var(--soft);margin-bottom:10px}
+.reveal{display:none;margin:8px 0 4px;padding:13px 14px;border-radius:14px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.4);
+  font-weight:800;font-size:calc(1.02rem*var(--fs));line-height:1.4;color:var(--ink)}
+.reveal.show{display:block}
+.reveal .lab{display:block;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.selfwrap{display:none;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.selfwrap.show{display:flex}
+.selfbtn{flex:1;min-width:96px;padding:12px 8px;border:2px solid var(--line);border-radius:14px;background:transparent;color:var(--ink);font-weight:900;font-size:.86rem;cursor:pointer;font-family:inherit;transition:.15s}
+.selfbtn .big{display:block;font-size:1.5rem;margin-bottom:2px}
+.selfbtn:active{transform:scale(.95)}
+.selfbtn.acertei.sel{background:var(--ok);color:#06251a;border-color:var(--ok)}
+.selfbtn.parcial.sel{background:var(--mid);color:#3a2c00;border-color:var(--mid)}
+.selfbtn.errei.sel{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+.fb{margin-top:14px;font-size:calc(1.02rem*var(--fs));font-weight:900;min-height:1.3em}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}.fb.mid{color:var(--mid)}
+.next{margin-top:16px;width:100%;height:54px;border:none;border-radius:16px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#06251a;font-size:1.08rem;font-weight:900;cursor:pointer;display:none;font-family:inherit}
+.next.show{display:block}
+.next:active{transform:scale(.97)}
+.fim .big{font-size:4rem}
+.fim .score{font-size:1.7rem;font-weight:900;color:var(--accent);margin:8px 0 2px}
+.fim .sub{font-weight:800;color:var(--soft);font-size:.95rem;margin-bottom:6px}
+.again{margin-top:16px;background:var(--line);border:none;border-radius:14px;padding:13px 22px;font-size:1rem;font-weight:900;cursor:pointer;color:var(--ink);font-family:inherit}
+.intro .q .tr{display:none}
+.intro p{font-size:calc(1rem*var(--fs));font-weight:700;line-height:1.5;color:var(--soft);margin:10px 0}
+.startbtn{margin-top:8px;width:100%;height:56px;border:none;border-radius:16px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#06251a;font-size:1.15rem;font-weight:900;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn" title="Home" onclick="if(confirm('Voltar ao início?'))location.href='../index.html'">&#127968;</button>
+    <span class="title">Test Practice &mdash; Animal Inquiry</span>
+    <button class="iconbtn flagbtn" id="flag" title="Mostrar tradução" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+  </div>
+  <div class="bar"><span id="bar"></span></div>
+  <div class="stage"><div class="card" id="card"></div></div>
+</div>
+<script>
+/* ===== QUESTION BANK — English first, PT translation toggled by BR flag =====
+   (validated by the pedagogical agent) ===== */
+const MC = [
+ {fig:"\u{1F43B}",en:"Which animal group has <b>fur</b>?",pt:"Qual grupo de animal tem pelo?",say:"Which animal group has fur?",opts:[["Mammal",1,"mamífero"],["Fish",0,"peixe"],["Reptile",0,"réptil"],["Bird",0,"ave"]]},
+ {fig:"\u{1F98E}",en:"What covers a <b>reptile's</b> body?",pt:"O que cobre o corpo do réptil?",say:"What covers a reptile's body?",opts:[["Scales",1,"escamas"],["Feathers",0,"penas"],["Fur",0,"pelo"],["Moist skin",0,"pele molhada"]]},
+ {fig:"\u{1F95A}",en:"A <b>reptile</b> is born from a...?",pt:"O réptil nasce de...?",say:"A reptile is born from a what?",opts:[["Egg",1,"ovo"],["Milk",0,"leite"],["Plant",0,"planta"]]},
+ {fig:"\u{1FAB8}",en:"Which animal is an <b>invertebrate</b>?",pt:"Qual animal é invertebrado (sem espinha)?",say:"Which animal is an invertebrate?",opts:[["Jellyfish",1,"água-viva"],["Dog",0,"cachorro"],["Snake",0,"cobra"],["Bird",0,"pássaro"]]},
+ {fig:"\u{1F96C}",en:"Which animal eats <b>only plants</b>?",pt:"Quem come só plantas?",say:"Which animal eats only plants?",opts:[["Herbivore",1,"herbívoro"],["Carnivore",0,"carnívoro"],["Omnivore",0,"onívoro"]]},
+ {fig:"\u{1F356}",en:"Which animal eats <b>only meat</b>?",pt:"Quem come só carne?",say:"Which animal eats only meat?",opts:[["Carnivore",1,"carnívoro"],["Herbivore",0,"herbívoro"],["Omnivore",0,"onívoro"]]},
+ {fig:"\u{1F46A}",en:"How many <b>groups of reptiles</b> are there?",pt:"Em quantas famílias se dividem os répteis?",say:"How many groups of reptiles are there?",opts:[["4",1,""],["2",0,""],["3",0,""],["5",0,""]]},
+ {fig:"\u{1F438}",en:"Which one is <b>NOT a reptile</b>?",pt:"Qual destes NÃO é réptil? (é anfíbio)",say:"Which one is not a reptile?",opts:[["Frog",1,"rã"],["Turtle",0,"tartaruga"],["Snake",0,"cobra"],["Crocodile",0,"crocodilo"]]},
+ {fig:"\u{1F426}",en:"A <b>bird's</b> body is covered with...?",pt:"O corpo do pássaro é coberto de...?",say:"A bird's body is covered with what?",opts:[["Feathers",1,"penas"],["Scales",0,"escamas"],["Fur",0,"pelo"]]},
+ {fig:"\u{1F409}",en:"Which one is <b>make-believe</b>?",pt:"Qual é de faz de conta?",say:"Which one is make-believe?",opts:[["Dragon",1,"dragão"],["Dog",0,"cachorro"],["Tree",0,"árvore"],["School",0,"escola"]]},
+ {fig:"\u{1FAC1}",en:"A <b>reptile</b> breathes with...?",pt:"O réptil respira com...?",say:"A reptile breathes with what?",opts:[["Lungs",1,"pulmões"],["Gills",0,"guelras"],["Skin",0,"pele"]]},
+ {fig:"\u{1F9CA}",en:"Reptiles live everywhere <b>except</b>...?",pt:"Répteis vivem em todo lugar, menos...?",say:"Reptiles live everywhere except where?",opts:[["Antarctica",1,"Antártica"],["Africa",0,"África"],["Brazil",0,"Brasil"]]},
+ {fig:"\u{1F37D}️",en:"Which animal eats <b>both plants and meat</b>?",pt:"Quem come plantas E carne?",say:"Which animal eats both plants and meat?",opts:[["Omnivore",1,"onívoro"],["Herbivore",0,"herbívoro"],["Carnivore",0,"carnívoro"]]},
+ {fig:"\u{1F98E}",en:"A <b>chameleon</b> hides using...?",pt:"O camaleão se esconde usando...?",say:"A chameleon hides using what?",opts:[["Camouflage",1,"camuflagem"],["Venom",0,"veneno"],["Regeneration",0,"regeneração"]]}
+];
+const VF = [
+ {fig:"\u{1F438}",en:"Frogs and toads are <b>reptiles</b>.",pt:"Rãs e sapos são répteis.",say:"Frogs and toads are reptiles.",ans:false},
+ {fig:"\u{1F98E}",en:"A reptile's skin is <b>dry</b>, never wet.",pt:"A pele do réptil é seca, nunca molhada.",say:"A reptile's skin is dry, never wet.",ans:true},
+ {fig:"❄️",en:"Reptiles are <b>cold-blooded</b>.",pt:"Répteis são de sangue frio.",say:"Reptiles are cold-blooded.",ans:true},
+ {fig:"\u{1F436}",en:"A <b>dog</b> is real.",pt:"Um cachorro é real.",say:"A dog is real.",ans:true},
+ {fig:"\u{1F409}",en:"A <b>dragon</b> is real.",pt:"Um dragão é real.",say:"A dragon is real.",ans:false},
+ {fig:"\u{1F41F}",en:"<b>Fish</b> live in the water.",pt:"Peixes vivem na água.",say:"Fish live in the water.",ans:true},
+ {fig:"\u{1F37C}",en:"A <b>mammal</b> drinks milk from its mother.",pt:"O mamífero mama o leite da mãe.",say:"A mammal drinks milk from its mother.",ans:true},
+ {fig:"\u{1F422}",en:"A <b>turtle</b> is a reptile.",pt:"A tartaruga é um réptil.",say:"A turtle is a reptile.",ans:true},
+ {fig:"\u{1F41C}",en:"An <b>insect</b> has <b>six legs</b>.",pt:"O inseto tem seis patas.",say:"An insect has six legs.",ans:true},
+ {fig:"\u{1F426}",en:"A <b>bird</b> has <b>fur</b>.",pt:"O pássaro tem pelo.",say:"A bird has fur.",ans:false},
+ {fig:"\u{1F9B4}",en:"A reptile is a <b>vertebrate</b>.",pt:"O réptil é vertebrado (tem espinha).",say:"A reptile is a vertebrate.",ans:true}
+];
+const OPEN = [
+ {fig:"\u{1F98E}",en:"Name <b>one group</b> of reptiles.",pt:"Diga uma família de réptil.",say:"Name one group of reptiles.",men:"Turtles, Snakes, Lizards or Crocodilians.",mpt:"Tartarugas, Cobras, Lagartos ou Crocodilianos."},
+ {fig:"\u{1F98E}",en:"What covers a reptile's body?",pt:"O que cobre o corpo do réptil?",say:"What covers a reptile's body?",men:"Scales (dry skin).",mpt:"Escamas (pele seca)."},
+ {fig:"\u{1F43B}",en:"Say <b>one mammal</b>.",pt:"Diga um mamífero.",say:"Say one mammal.",men:"Dog, cat, bear... we are mammals too!",mpt:"Cachorro, gato, urso... a gente também!"},
+ {fig:"\u{1F438}",en:"Is a frog a <b>reptile</b> or an <b>amphibian</b>?",pt:"A rã é réptil ou anfíbio?",say:"Is a frog a reptile or an amphibian?",men:"An amphibian.",mpt:"Anfíbio."},
+ {fig:"\u{1F96C}",en:"What does a <b>herbivore</b> eat?",pt:"O que o herbívoro come?",say:"What does a herbivore eat?",men:"Plants.",mpt:"Plantas."},
+ {fig:"✅",en:"Say one thing that is <b>real</b>.",pt:"Diga uma coisa que é real.",say:"Say one thing that is real.",men:"A dog, a tree, the school, the sun...",mpt:"Um cachorro, uma árvore, a escola, o sol..."},
+ {fig:"\u{1F95A}",en:"<b>Where</b> does a reptile lay its eggs?",pt:"Onde o réptil bota os ovos?",say:"Where does a reptile lay its eggs?",men:"On land.",mpt:"Na terra (no chão)."},
+ {fig:"\u{1F3C3}",en:"Say one way an animal can <b>move</b>.",pt:"Diga um jeito de um animal se mover.",say:"Say one way an animal can move.",men:"climb, crawl, slither, walk, run, fly or swim.",mpt:"subir, rastejar, deslizar, andar, correr, voar ou nadar."},
+ {fig:"\u{1F3C6}",en:"How do you say <b>“the biggest”</b> (big + EST)?",pt:"Como se diz “o maior”?",say:"How do you say the biggest?",men:"biggest.",mpt:"big → biggest (o maior)."}
+];
+/* ===== round ===== */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pick(arr,n){return shuffle(arr.slice()).slice(0,n);}
+let deck=[], cur=0, score=0, total=0, fontStep=0;
+function buildDeck(){
+  const mc=pick(MC,7).map(o=>({type:'mc',...o,opts:shuffle(o.opts.map(p=>({t:p[0],ok:!!p[1],pt:p[2]})))}));
+  const vf=pick(VF,4).map(o=>({type:'vf',...o}));
+  const op=pick(OPEN,4).map(o=>({type:'open',...o}));
+  deck=shuffle(mc.concat(vf,op));
+  total=deck.length; cur=0; score=0;
+}
+const $=id=>document.getElementById(id);
+function fs(d){fontStep=Math.max(-2,Math.min(3,fontStep+d));document.documentElement.style.setProperty('--fs',1+fontStep*0.12);}
+function toggleTr(){const on=document.body.classList.toggle('show-tr');try{localStorage.setItem('ela2_tr',on?'1':'0');}catch(e){}}
+function esc(s){return s.replace(/"/g,'&quot;');}
+/* TTS English */
+function say(txt){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='en-US';u.rate=.85;
+  const v=speechSynthesis.getVoices().find(v=>/en-US|en_US|English \(United States\)/i.test(v.lang+v.name));if(v)u.voice=v;
+  speechSynthesis.speak(u);}catch(e){}}
+/* screens */
+function intro(){
+  $('bar').style.width='0%';
+  $('card').innerHTML=`<div class="intro">
+    <div class="qfig">\u{1F98E}</div>
+    <div class="q">Let's practice for the test!</div>
+    <p>15 questions: <b>multiple choice</b>, <b>true or false</b>, and <b>open answer</b>.</p>
+    <p>The whole test is in <b>English</b>. Tap the &#127463;&#127479; flag to turn the <b>Portuguese translation</b> on or off.</p>
+    <p>Tap &#128266; to <b>hear it in English</b>. In the <b>open answer</b> questions, think the answer in your head, tap <b>See answer</b>, then say if you got it right.</p>
+    <button class="startbtn" onclick="start()">Start &#128075;</button>
+  </div>`;
+}
+function start(){buildDeck();render();}
+function render(){
+  $('bar').style.width=(cur/total*100)+'%';
+  const it=deck[cur];
+  if(it.type==='mc') renderMC(it);
+  else if(it.type==='vf') renderVF(it);
+  else renderOpen(it);
+}
+function head(it,label,cls){return `<div class="qhead"><span class="qnum">Question ${cur+1} of ${total}</span><span class="badge ${cls}">${label}</span></div>
+  <div class="qfig">${it.fig}</div><div class="q">${it.en}</div><div class="tr qtr">${it.pt}</div>
+  <button class="speak" onclick="say('${esc(it.say)}')">&#128266; Listen</button>`;}
+function nextBtn(hidden){return `<button class="next${hidden?'':''}" id="next" ${hidden?'style="display:none"':''} onclick="next()">${cur===total-1?'See results \u{1F389}':'Next →'}</button>`;}
+/* MC */
+function renderMC(it){
+  $('card').innerHTML=head(it,'Multiple choice','mc')+
+   `<div class="opts">${it.opts.map((o,i)=>`<button class="opt" onclick="ansMC(${i})"><span>${o.t}</span>${o.pt?`<span class="otr">${o.pt}</span>`:''}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>`+nextBtn(false);
+}
+function ansMC(i){
+  const it=deck[cur], b=document.querySelectorAll('.opt');
+  b.forEach(x=>x.disabled=true);
+  if(it.opts[i].ok){b[i].classList.add('ok');$('fb').textContent='Correct! \u{1F31F}';$('fb').className='fb ok';score++;}
+  else{b[i].classList.add('no');it.opts.forEach((o,k)=>{if(o.ok)b[k].classList.add('ok');});
+    $('fb').textContent='The green one is right \u{1F60A}';$('fb').className='fb no';}
+  $('next').classList.add('show');
+}
+/* V/F */
+function renderVF(it){
+  $('card').innerHTML=head(it,'True or False','vf')+
+   `<div class="vfwrap">
+      <button class="vfbtn" id="vT" onclick="ansVF(true)"><span class="big">✅</span>True<span class="vtr">verdadeiro</span></button>
+      <button class="vfbtn" id="vF" onclick="ansVF(false)"><span class="big">❌</span>False<span class="vtr">falso</span></button>
+    </div><div class="fb" id="fb"></div>`+nextBtn(false);
+}
+function ansVF(val){
+  const it=deck[cur], T=$('vT'),F=$('vF');
+  T.disabled=F.disabled=true;
+  const right=it.ans;
+  const rightBtn=right?T:F;
+  if(val===right){rightBtn.classList.add('ok');$('fb').textContent='Correct! \u{1F31F}';$('fb').className='fb ok';score++;}
+  else{(val?T:F).classList.add('no');rightBtn.classList.add('ok');
+    $('fb').textContent='The green one is right \u{1F60A}';$('fb').className='fb no';}
+  $('next').classList.add('show');
+}
+/* OPEN */
+function renderOpen(it){
+  $('card').innerHTML=head(it,'Open answer','open')+
+   `<div class="writeline">&#9999;&#65039; answer in your head</div>
+    <button class="next show" id="seebtn" onclick="reveal()">See answer &#128065;&#65039;</button>
+    <div class="reveal" id="rev"><span class="lab">Answer</span>${it.men}<div class="tr">${it.mpt}</div></div>
+    <div class="hint" id="selfhint" style="display:none">Did you get it right?</div>
+    <div class="selfwrap" id="self">
+      <button class="selfbtn acertei" onclick="self('ok')"><span class="big">\u{1F604}</span>Right<span class="tr">acertei</span></button>
+      <button class="selfbtn parcial" onclick="self('mid')"><span class="big">\u{1F610}</span>Almost<span class="tr">mais ou menos</span></button>
+      <button class="selfbtn errei" onclick="self('no')"><span class="big">\u{1F605}</span>Wrong<span class="tr">errei</span></button>
+    </div>
+    <div class="fb" id="fb"></div>`+nextBtn(true);
+}
+function reveal(){
+  $('rev').classList.add('show');
+  $('seebtn').style.display='none';
+  $('selfhint').style.display='block';
+  $('self').classList.add('show');
+}
+function self(v){
+  document.querySelectorAll('.selfbtn').forEach(b=>b.disabled=true);
+  if(v==='ok'){document.querySelector('.selfbtn.acertei').classList.add('sel');$('fb').textContent='Great! \u{1F31F}';$('fb').className='fb ok';score++;}
+  else if(v==='mid'){document.querySelector('.selfbtn.parcial').classList.add('sel');$('fb').textContent='Almost there! \u{1F44D}';$('fb').className='fb mid';score+=0.5;}
+  else{document.querySelector('.selfbtn.errei').classList.add('sel');$('fb').textContent='Now you know it! \u{1F4AA}';$('fb').className='fb no';}
+  $('next').style.display='block';$('next').classList.add('show');
+}
+function next(){cur++;if(cur<total)render();else fim();}
+function fim(){
+  $('bar').style.width='100%';
+  const s=Math.round(score*10)/10, pct=score/total;
+  const msg=pct>=.9?'You rock! \u{1F3C6}':pct>=.6?'Well done! Keep practicing.':'Good practice — try again to learn more!';
+  $('card').innerHTML=`<div class="fim"><div class="big">\u{1F3C6}</div>
+    <div class="score">${s} / ${total}</div>
+    <div class="sub">${msg}</div>
+    <button class="again" onclick="intro()">↺ New practice</button></div>`;
+}
+/* starfield */
+(function(){var c=document.getElementById('starfield'),x=c.getContext('2d'),s=[];
+function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<140;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.1+.02});}
+function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}
+rz();addEventListener('resize',rz);d();})();
+try{if(localStorage.getItem('ela2_tr')==='1')document.body.classList.add('show-tr');}catch(e){}
+if('speechSynthesis' in window){speechSynthesis.getVoices();}
+intro();
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Memory Palace — The Animal Inquiry</title>
+<style>
+:root{--fs:1;--bg:#0d0b1e;--bg2:#171334;--ink:#f5f3ff;--soft:rgba(255,255,255,.55);--card:#221c44;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#f472b6;--tr:#fcd34d;--rad:20px}
+body.light{--bg:#f5f0ff;--bg2:#e9e0ff;--ink:#1a1030;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);min-height:100vh}
+#starfield{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 0 50px}
+.topbar{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25);position:sticky;top:0;z-index:5}
+.topbar .title{font-weight:900;font-size:calc(.98rem*var(--fs));color:var(--accent);flex:1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.1rem;font-weight:800;cursor:pointer}
+.iconbtn:active{transform:scale(.9)}
+.head{text-align:center;padding:24px 18px 4px}
+.head .em{font-size:54px;filter:drop-shadow(0 0 18px rgba(167,139,250,.55));animation:fl 3s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.head h1{font-size:calc(1.5rem*var(--fs));font-weight:900;margin-top:6px}
+.head p{color:var(--soft);font-weight:700;font-size:.9rem;margin-top:8px;line-height:1.5}
+.head .tr{color:var(--tr);font-style:italic}
+.rooms{padding:14px}
+.room{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);margin-bottom:12px;overflow:hidden}
+.room-hd{display:flex;align-items:center;gap:13px;padding:14px 16px;cursor:pointer;min-height:56px}
+.room-hd:active{opacity:.85}
+.room-num{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
+.room-em{font-size:26px;flex-shrink:0}
+.room-tt{flex:1}
+.room-en{font-weight:900;font-size:calc(1.02rem*var(--fs));line-height:1.2}
+.room-pt{font-weight:800;font-size:.78rem;color:var(--tr);font-style:italic;margin-top:1px}
+.room-ar{color:var(--soft);font-weight:900;transition:transform .25s;flex-shrink:0}
+.room.open .room-ar{transform:rotate(90deg)}
+.room-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.room.open .room-body{max-height:1400px}
+.room-in{padding:2px 16px 18px}
+.story{font-weight:700;font-size:calc(.98rem*var(--fs));line-height:1.55}
+.story .tr{color:var(--tr);font-style:italic;font-weight:700}
+.key{margin-top:14px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.32);border-radius:14px;padding:12px 14px}
+.key .lab{font-size:.72rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.key ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.key li{font-weight:800;font-size:.92rem;line-height:1.35;padding-left:20px;position:relative}
+.key li:before{content:"\1F511";position:absolute;left:0;font-size:.8rem}
+.key li .tr{color:var(--tr);font-style:italic;font-weight:700}
+.hint{text-align:center;color:var(--soft);font-weight:700;font-size:.8rem;margin:2px 16px 14px}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="wrap">
+  <div class="topbar">
+    <button class="iconbtn" title="Home" onclick="if(confirm('Voltar ao início?'))location.href='../index.html'">&#127968;</button>
+    <span class="title">Memory Palace &mdash; Animal Inquiry</span>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+  </div>
+
+  <div class="head">
+    <div class="em">&#x1F3F0;</div>
+    <h1>The Memory Palace</h1>
+    <p>Walk through the magic house. Each room keeps one big idea inside a little story — that's how we remember it!<br>
+    <span class="tr">caminhe pela casa mágica: cada cômodo guarda uma ideia dentro de uma historinha</span></p>
+  </div>
+  <div class="hint">&#x1F449; Toque numa porta para entrar</div>
+
+  <div class="rooms" id="rooms"></div>
+</div>
+
+<script>
+var ROOMS=[
+ {em:"\u{1F6AA}",en:"The Front Door — 7 Animal Friends",pt:"a porta — 7 amigos animais",
+  story:"Imagine 7 friends ringing your doorbell, each wearing what covers its body. <b>Fish</b> wears a shiny <b>scales</b> raincoat. <b>Mammal</b> wears a cozy <b>fur</b> coat. <b>Bird</b> wears a <b>feather</b> dress. <b>Insect</b> dances on <b>6 legs</b>. <b>Reptile</b> wears dry <b>scale</b> armor. <b>Amphibian</b> has wet, shiny skin. And <b>Invertebrate</b> is the wobbly jelly friend with <b>no bones</b>! <span class='tr'>(7 amigos na porta, cada um vestido com a cobertura do seu corpo)</span>",
+  keys:["7 groups: fish, mammal, insect, reptile, bird, amphibian, invertebrate <span class='tr'>(os 7 grupos)</span>","The clue is the body covering <span class='tr'>(a pista é a cobertura do corpo)</span>","Invertebrate = no backbone <span class='tr'>(sem espinha)</span>"]},
+ {em:"\u{1F373}",en:"The Kitchen — 3 Plates",pt:"a cozinha — 3 pratos",
+  story:"On the table there are 3 plates. The <b>Carnivore</b> plate is full of <b>meat</b>. The <b>Herbivore</b> plate is full of <b>plants</b> and salad. The <b>Omnivore</b> plate has <b>both</b> — a little meat and a little salad, just like us! <span class='tr'>(3 pratos: carne, salada, e os dois juntos)</span>",
+  keys:["Carnivore = meat <span class='tr'>(carnívoro = carne)</span>","Herbivore = plants <span class='tr'>(herbívoro = plantas)</span>","Omnivore = both <span class='tr'>(onívoro = os dois)</span>"]},
+ {em:"\u{1F6CB}\u{FE0F}",en:"The Living Room — The Reptile King",pt:"a sala — o rei réptil",
+  story:"A <b>reptile</b> king lies by the warm window, because he is <b>cold-blooded</b> and loves the sun. His suit is made of dry <b>scales</b> — never wet! He keeps his <b>eggs</b> in a sandbox <b>on land</b>, and he breathes with his <b>lungs</b>. He never visits the freezer — that's <b>Antarctica</b>, the only place with no reptiles! His 4 cousins visit: <b>Turtle</b> with a shell backpack, <b>Snake</b> with no legs, <b>Lizard</b> with 4 legs, and big toothy <b>Crocodilian</b>. They have magic: the <b>chameleon</b> vanishes (<b>camouflage</b>), the coral snake has a <b>venom</b> bite, and the iguana grows its tail back (<b>regeneration</b>). <span class='tr'>(o rei réptil toma sol porque é de sangue frio; pele seca, ovos na terra, pulmões; 4 primos e 3 poderes)</span>",
+  keys:["Cold-blooded, dry scales, lungs, eggs on land <span class='tr'>(sangue frio, escamas secas, pulmões, ovos na terra)</span>","Everywhere except Antarctica <span class='tr'>(menos a Antártica)</span>","4 groups: Turtles, Snakes, Lizards, Crocodilians <span class='tr'>(as 4 famílias)</span>","Powers: camouflage, venom, regeneration <span class='tr'>(camuflagem, veneno, regeneração)</span>"]},
+ {em:"\u{1F6C1}",en:"The Bathroom — Dry Towel vs Wet Tub",pt:"o banheiro — toalha seca x banheira molhada",
+  story:"The <b>reptile</b> stays on the <b>dry towel</b>, because its skin must be dry. But splash! The <b>frog</b> and the <b>toad</b> jump into the <b>wet tub</b> — they have <b>moist skin</b>, so they are <b>amphibians</b>, NOT reptiles! <span class='tr'>(réptil na toalha seca; rã e sapo na banheira molhada = anfíbios)</span>",
+  keys:["Reptile = dry scales <span class='tr'>(pele seca)</span>","Frog & toad = amphibians (wet skin) <span class='tr'>(rã e sapo = anfíbios, pele molhada)</span>"]},
+ {em:"\u{1F9F8}",en:"The Toy Attic — Real Box vs Dream Box",pt:"o sótão — caixa real x caixa de sonho",
+  story:"Up in the attic there are 2 boxes. The <b>Real</b> box has things you can see and touch: a <b>dog</b>, a <b>tree</b>, the <b>sun</b>. The <b>Make-believe</b> box has things someone imagined: a <b>dragon</b>, a <b>superhero</b>, a <b>fairy tale</b>. You cannot touch what is inside the dream box! <span class='tr'>(caixa real: dá pra tocar; caixa de faz de conta: foi inventado)</span>",
+  keys:["Real = exists, you can touch it <span class='tr'>(de verdade, dá pra tocar)</span>","Make-believe = imagined (dragons!) <span class='tr'>(faz de conta — dragões!)</span>"]},
+ {em:"\u{1F33F}",en:"The Garden Path — Move & the -EST",pt:"o jardim — mover-se e o -EST",
+  story:"On the garden path the animals show how they <b>move</b>: <b>climb</b>, <b>crawl</b>, <b>slither</b>, <b>walk</b>, <b>run</b>, <b>fly</b> and <b>swim</b>. At the end stands the <b>biggEST</b> tree, next to the <b>strongEST</b> and the <b>fastEST</b> animal. Add <b>-EST</b> to say \"the most\"! <span class='tr'>(no jardim os animais se movem; e o -EST quer dizer 'o mais')</span>",
+  keys:["Move: climb, crawl, slither, walk, run, fly, swim <span class='tr'>(jeitos de se mover)</span>","big→biggest, strong→strongest, fast→fastest <span class='tr'>(-EST = o mais)</span>"]}
+];
+var r=document.getElementById('rooms');
+r.innerHTML=ROOMS.map(function(rm,i){return '<div class="room'+(i===0?' open':'')+'" onclick="toggleRoom(this)">'+
+ '<div class="room-hd"><div class="room-num">'+(i+1)+'</div><div class="room-em">'+rm.em+'</div>'+
+ '<div class="room-tt"><div class="room-en">'+rm.en+'</div><div class="room-pt">'+rm.pt+'</div></div>'+
+ '<div class="room-ar">&#x25B6;</div></div>'+
+ '<div class="room-body"><div class="room-in"><div class="story">'+rm.story+'</div>'+
+ '<div class="key"><div class="lab">&#x1F511; Remember</div><ul>'+rm.keys.map(function(k){return '<li>'+k+'</li>';}).join('')+'</ul></div>'+
+ '</div></div></div>';}).join('');
+function toggleRoom(el){el.classList.toggle('open');}
+(function(){var c=document.getElementById('starfield'),x=c.getContext('2d'),s=[];
+function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.1+.02});}
+function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}
+rz();addEventListener('resize',rz);d();})();
+</script>
+</body>
+</html>
