@@ -102,20 +102,52 @@ body.show-tr .vfbtn .vtr{display:block}
 /* ===== QUESTION BANK — English first, PT translation toggled by BR flag =====
    (validated by the pedagogical agent) ===== */
 const MC = [
+ /* ---- Body coverings & animal classes ---- */
  {fig:"\u{1F43B}",en:"Which animal group has <b>fur</b>?",pt:"Qual grupo de animal tem pelo?",say:"Which animal group has fur?",opts:[["Mammal",1,"mamífero"],["Fish",0,"peixe"],["Reptile",0,"réptil"],["Bird",0,"ave"]]},
  {fig:"\u{1F98E}",en:"What covers a <b>reptile's</b> body?",pt:"O que cobre o corpo do réptil?",say:"What covers a reptile's body?",opts:[["Scales",1,"escamas"],["Feathers",0,"penas"],["Fur",0,"pelo"],["Moist skin",0,"pele molhada"]]},
- {fig:"\u{1F95A}",en:"A <b>reptile</b> is born from a...?",pt:"O réptil nasce de...?",say:"A reptile is born from a what?",opts:[["Egg",1,"ovo"],["Milk",0,"leite"],["Plant",0,"planta"]]},
- {fig:"\u{1FAB8}",en:"Which animal is an <b>invertebrate</b>?",pt:"Qual animal é invertebrado (sem espinha)?",say:"Which animal is an invertebrate?",opts:[["Jellyfish",1,"água-viva"],["Dog",0,"cachorro"],["Snake",0,"cobra"],["Bird",0,"pássaro"]]},
+ {fig:"\u{1F426}",en:"What covers a <b>bird's</b> body?",pt:"O que cobre o corpo do pássaro?",say:"What covers a bird's body?",opts:[["Feathers",1,"penas"],["Scales",0,"escamas"],["Fur",0,"pelo"]]},
+ {fig:"\u{1F41F}",en:"What covers a <b>fish's</b> body?",pt:"O que cobre o corpo do peixe?",say:"What covers a fish's body?",opts:[["Scales",1,"escamas"],["Feathers",0,"penas"],["Fur",0,"pelo"]]},
+ {fig:"\u{1F438}",en:"An <b>amphibian's</b> skin feels...?",pt:"A pele do anfíbio é...?",say:"An amphibian's skin feels how?",opts:[["Moist (wet)",1,"molhada"],["Dry",0,"seca"],["Furry",0,"peluda"]]},
+ {fig:"\u{1F41C}",en:"How many <b>legs</b> does an insect have?",pt:"Quantas patas tem o inseto?",say:"How many legs does an insect have?",opts:[["6",1,"seis"],["4",0,"quatro"],["8",0,"oito"],["2",0,"duas"]]},
+ {fig:"\u{1F37C}",en:"Which animal <b>drinks milk</b> from its mother?",pt:"Qual animal mama o leite da mãe?",say:"Which animal drinks milk from its mother?",opts:[["Mammal",1,"mamífero"],["Fish",0,"peixe"],["Bird",0,"ave"],["Reptile",0,"réptil"]]},
+ {fig:"\u{1F41F}",en:"Which group breathes with <b>gills</b> in the water?",pt:"Qual grupo respira com guelras na água?",say:"Which group breathes with gills in the water?",opts:[["Fish",1,"peixe"],["Mammal",0,"mamífero"],["Bird",0,"ave"]]},
+ {fig:"\u{1F99C}",en:"Which animal has a <b>beak</b> and two <b>wings</b>?",pt:"Qual animal tem bico e duas asas?",say:"Which animal has a beak and two wings?",opts:[["Bird",1,"ave"],["Fish",0,"peixe"],["Mammal",0,"mamífero"]]},
+ {fig:"\u{1F41C}",en:"Which animal has <b>6 legs</b> and two antennae?",pt:"Qual animal tem 6 patas e duas antenas?",say:"Which animal has six legs and two antennae?",opts:[["Insect",1,"inseto"],["Reptile",0,"réptil"],["Bird",0,"ave"]]},
+ {fig:"\u{1FAB8}",en:"Which animal is an <b>invertebrate</b> (no backbone)?",pt:"Qual animal é invertebrado (sem espinha)?",say:"Which animal is an invertebrate?",opts:[["Jellyfish",1,"água-viva"],["Dog",0,"cachorro"],["Snake",0,"cobra"],["Bird",0,"pássaro"]]},
+ {fig:"\u{1F9B4}",en:"An animal <b>with a backbone</b> is a...?",pt:"Um animal COM espinha na coluna é...?",say:"An animal with a backbone is a what?",opts:[["Vertebrate",1,"vertebrado"],["Invertebrate",0,"invertebrado"]]},
+ /* ---- Diet ---- */
  {fig:"\u{1F96C}",en:"Which animal eats <b>only plants</b>?",pt:"Quem come só plantas?",say:"Which animal eats only plants?",opts:[["Herbivore",1,"herbívoro"],["Carnivore",0,"carnívoro"],["Omnivore",0,"onívoro"]]},
  {fig:"\u{1F356}",en:"Which animal eats <b>only meat</b>?",pt:"Quem come só carne?",say:"Which animal eats only meat?",opts:[["Carnivore",1,"carnívoro"],["Herbivore",0,"herbívoro"],["Omnivore",0,"onívoro"]]},
- {fig:"\u{1F46A}",en:"How many <b>groups of reptiles</b> are there?",pt:"Em quantas famílias se dividem os répteis?",say:"How many groups of reptiles are there?",opts:[["4",1,""],["2",0,""],["3",0,""],["5",0,""]]},
- {fig:"\u{1F438}",en:"Which one is <b>NOT a reptile</b>?",pt:"Qual destes NÃO é réptil? (é anfíbio)",say:"Which one is not a reptile?",opts:[["Frog",1,"rã"],["Turtle",0,"tartaruga"],["Snake",0,"cobra"],["Crocodile",0,"crocodilo"]]},
- {fig:"\u{1F426}",en:"A <b>bird's</b> body is covered with...?",pt:"O corpo do pássaro é coberto de...?",say:"A bird's body is covered with what?",opts:[["Feathers",1,"penas"],["Scales",0,"escamas"],["Fur",0,"pelo"]]},
- {fig:"\u{1F409}",en:"Which one is <b>make-believe</b>?",pt:"Qual é de faz de conta?",say:"Which one is make-believe?",opts:[["Dragon",1,"dragão"],["Dog",0,"cachorro"],["Tree",0,"árvore"],["School",0,"escola"]]},
+ {fig:"\u{1F37D}️",en:"Which animal eats <b>both plants and meat</b>?",pt:"Quem come plantas E carne?",say:"Which animal eats both plants and meat?",opts:[["Omnivore",1,"onívoro"],["Herbivore",0,"herbívoro"],["Carnivore",0,"carnívoro"]]},
+ {fig:"\u{1F40D}",en:"A <b>snake</b> eats other animals. It is a...?",pt:"A cobra come outros animais. Ela é...?",say:"A snake eats other animals. It is a what?",opts:[["Carnivore",1,"carnívoro"],["Herbivore",0,"herbívoro"],["Omnivore",0,"onívoro"]]},
+ {fig:"\u{1F422}",en:"A <b>turtle</b> eats plants. It is a...?",pt:"A tartaruga come plantas. Ela é...?",say:"A turtle eats plants. It is a what?",opts:[["Herbivore",1,"herbívoro"],["Carnivore",0,"carnívoro"],["Omnivore",0,"onívoro"]]},
+ /* ---- Reptiles ---- */
+ {fig:"\u{1F95A}",en:"A <b>reptile</b> is born from a...?",pt:"O réptil nasce de...?",say:"A reptile is born from a what?",opts:[["Egg",1,"ovo"],["Milk",0,"leite"],["Plant",0,"planta"]]},
+ {fig:"\u{1F95A}",en:"<b>Where</b> does a reptile lay its eggs?",pt:"Onde o réptil bota os ovos?",say:"Where does a reptile lay its eggs?",opts:[["On land",1,"na terra"],["In the water",0,"na água"],["In the sky",0,"no céu"]]},
+ {fig:"\u{1F46A}",en:"How many <b>groups (families) of reptiles</b> are there?",pt:"Em quantas famílias se dividem os répteis?",say:"How many groups of reptiles are there?",opts:[["4",1,"quatro"],["2",0,"duas"],["3",0,"três"],["5",0,"cinco"]]},
  {fig:"\u{1FAC1}",en:"A <b>reptile</b> breathes with...?",pt:"O réptil respira com...?",say:"A reptile breathes with what?",opts:[["Lungs",1,"pulmões"],["Gills",0,"guelras"],["Skin",0,"pele"]]},
  {fig:"\u{1F9CA}",en:"Reptiles live everywhere <b>except</b>...?",pt:"Répteis vivem em todo lugar, menos...?",say:"Reptiles live everywhere except where?",opts:[["Antarctica",1,"Antártica"],["Africa",0,"África"],["Brazil",0,"Brasil"]]},
- {fig:"\u{1F37D}️",en:"Which animal eats <b>both plants and meat</b>?",pt:"Quem come plantas E carne?",say:"Which animal eats both plants and meat?",opts:[["Omnivore",1,"onívoro"],["Herbivore",0,"herbívoro"],["Carnivore",0,"carnívoro"]]},
- {fig:"\u{1F98E}",en:"A <b>chameleon</b> hides using...?",pt:"O camaleão se esconde usando...?",say:"A chameleon hides using what?",opts:[["Camouflage",1,"camuflagem"],["Venom",0,"veneno"],["Regeneration",0,"regeneração"]]}
+ {fig:"❄️",en:"A reptile is <b>warm</b> or <b>cold-blooded</b>?",pt:"O réptil é de sangue quente ou frio?",say:"Is a reptile warm or cold-blooded?",opts:[["Cold-blooded",1,"sangue frio"],["Warm-blooded",0,"sangue quente"]]},
+ {fig:"☀️",en:"What <b>warms</b> a reptile's body?",pt:"O que esquenta o corpo do réptil?",say:"What warms a reptile's body?",opts:[["The sun",1,"o sol"],["Milk",0,"o leite"],["Water",0,"a água"]]},
+ {fig:"\u{1F438}",en:"Which one is <b>NOT a reptile</b>?",pt:"Qual destes NÃO é réptil? (é anfíbio)",say:"Which one is not a reptile?",opts:[["Frog",1,"rã"],["Turtle",0,"tartaruga"],["Snake",0,"cobra"],["Crocodile",0,"crocodilo"]]},
+ {fig:"\u{1F422}",en:"Which reptile family has a <b>shell</b>?",pt:"Qual família de réptil tem casco?",say:"Which reptile family has a shell?",opts:[["Turtles",1,"tartarugas"],["Snakes",0,"cobras"],["Lizards",0,"lagartos"]]},
+ {fig:"\u{1F40D}",en:"Which reptile family has <b>no legs</b> and slithers?",pt:"Qual família de réptil não tem patas e desliza?",say:"Which reptile family has no legs and slithers?",opts:[["Snakes",1,"cobras"],["Turtles",0,"tartarugas"],["Lizards",0,"lagartos"]]},
+ {fig:"\u{1F98E}",en:"Which reptile family has <b>4 legs</b> (like an iguana)?",pt:"Qual família de réptil tem 4 patas (como a iguana)?",say:"Which reptile family has four legs like an iguana?",opts:[["Lizards",1,"lagartos"],["Snakes",0,"cobras"],["Turtles",0,"tartarugas"]]},
+ {fig:"\u{1F40A}",en:"Crocodiles and alligators are...?",pt:"Crocodilos e jacarés são...?",say:"Crocodiles and alligators are what?",opts:[["Crocodilians",1,"crocodilianos"],["Turtles",0,"tartarugas"],["Snakes",0,"cobras"]]},
+ {fig:"\u{1F98E}",en:"A <b>chameleon</b> hides using...?",pt:"O camaleão se esconde usando...?",say:"A chameleon hides using what?",opts:[["Camouflage",1,"camuflagem"],["Venom",0,"veneno"],["Regeneration",0,"regeneração"]]},
+ {fig:"\u{1F40D}",en:"A <b>coral snake</b> protects itself with...?",pt:"A cobra-coral se protege com...?",say:"A coral snake protects itself with what?",opts:[["Venom",1,"veneno"],["Camouflage",0,"camuflagem"],["Regeneration",0,"regeneração"]]},
+ {fig:"\u{1F98E}",en:"An <b>iguana</b> can grow its tail back. This power is...?",pt:"A iguana faz o rabo crescer de novo. Esse poder é...?",say:"An iguana can grow its tail back. This power is what?",opts:[["Regeneration",1,"regeneração"],["Camouflage",0,"camuflagem"],["Venom",0,"veneno"]]},
+ /* ---- Reptile vs amphibian ---- */
+ {fig:"\u{1F438}",en:"A <b>frog</b> is a...?",pt:"A rã é um...?",say:"A frog is a what?",opts:[["Amphibian",1,"anfíbio"],["Reptile",0,"réptil"],["Mammal",0,"mamífero"]]},
+ {fig:"\u{1F4A7}",en:"If the skin is <b>moist (wet)</b>, the animal is a...?",pt:"Se a pele é molhadinha, o animal é um...?",say:"If the skin is moist, the animal is a what?",opts:[["Amphibian",1,"anfíbio"],["Reptile",0,"réptil"]]},
+ /* ---- Real vs make-believe ---- */
+ {fig:"\u{1F409}",en:"Which one is <b>make-believe</b>?",pt:"Qual é de faz de conta?",say:"Which one is make-believe?",opts:[["Dragon",1,"dragão"],["Dog",0,"cachorro"],["Tree",0,"árvore"],["School",0,"escola"]]},
+ {fig:"\u{1F436}",en:"Which one is <b>real</b>?",pt:"Qual é de verdade (real)?",say:"Which one is real?",opts:[["Dog",1,"cachorro"],["Dragon",0,"dragão"],["Fairy",0,"fada"]]},
+ {fig:"\u{1F5E3}️",en:"A <b>talking animal</b> in a story is...?",pt:"Um animal que fala numa história é...?",say:"A talking animal in a story is what?",opts:[["Make-believe",1,"faz de conta"],["Real",0,"de verdade"]]},
+ /* ---- Movement & superlatives ---- */
+ {fig:"\u{1F40D}",en:"Which word means to move <b>like a snake</b>?",pt:"Qual palavra é mover-se como cobra?",say:"Which word means to move like a snake?",opts:[["Slither",1,"deslizar"],["Climb",0,"subir"],["Fly",0,"voar"]]},
+ {fig:"\u{1F3C6}",en:"How do you say <b>“the biggest”</b> (big + EST)?",pt:"Como se diz “o maior”? (big + EST)",say:"How do you say the biggest?",opts:[["Biggest",1,"o maior"],["Bigger",0,"maior que"],["Big",0,"grande"]]},
+ {fig:"\u{1F3C3}",en:"How do you say <b>“the fastest”</b> (fast + EST)?",pt:"Como se diz “o mais rápido”? (fast + EST)",say:"How do you say the fastest?",opts:[["Fastest",1,"o mais rápido"],["Faster",0,"mais rápido que"],["Fast",0,"rápido"]]}
 ];
 const VF = [
  {fig:"\u{1F438}",en:"Frogs and toads are <b>reptiles</b>.",pt:"Rãs e sapos são répteis.",say:"Frogs and toads are reptiles.",ans:false},
@@ -128,7 +160,18 @@ const VF = [
  {fig:"\u{1F422}",en:"A <b>turtle</b> is a reptile.",pt:"A tartaruga é um réptil.",say:"A turtle is a reptile.",ans:true},
  {fig:"\u{1F41C}",en:"An <b>insect</b> has <b>six legs</b>.",pt:"O inseto tem seis patas.",say:"An insect has six legs.",ans:true},
  {fig:"\u{1F426}",en:"A <b>bird</b> has <b>fur</b>.",pt:"O pássaro tem pelo.",say:"A bird has fur.",ans:false},
- {fig:"\u{1F9B4}",en:"A reptile is a <b>vertebrate</b>.",pt:"O réptil é vertebrado (tem espinha).",say:"A reptile is a vertebrate.",ans:true}
+ {fig:"\u{1F9B4}",en:"A reptile is a <b>vertebrate</b>.",pt:"O réptil é vertebrado (tem espinha).",say:"A reptile is a vertebrate.",ans:true},
+ {fig:"\u{1FAB8}",en:"A <b>jellyfish</b> has a backbone.",pt:"A água-viva tem espinha na coluna.",say:"A jellyfish has a backbone.",ans:false},
+ {fig:"\u{1F95A}",en:"Reptiles lay their eggs <b>in the water</b>.",pt:"Os répteis botam os ovos na água.",say:"Reptiles lay their eggs in the water.",ans:false},
+ {fig:"\u{1F427}",en:"There are reptiles in <b>Antarctica</b>.",pt:"Existem répteis na Antártica.",say:"There are reptiles in Antarctica.",ans:false},
+ {fig:"\u{1F40D}",en:"A <b>snake</b> is a carnivore.",pt:"A cobra é carnívora.",say:"A snake is a carnivore.",ans:true},
+ {fig:"\u{1F98E}",en:"A <b>chameleon</b> can change color to hide.",pt:"O camaleão muda de cor para se esconder.",say:"A chameleon can change color to hide.",ans:true},
+ {fig:"\u{1F4A7}",en:"An <b>amphibian</b> has moist (wet) skin.",pt:"O anfíbio tem a pele molhadinha.",say:"An amphibian has moist skin.",ans:true},
+ {fig:"\u{1F9D2}",en:"<b>We</b> (people) are mammals.",pt:"A gente (as pessoas) é mamífero.",say:"We are mammals.",ans:true},
+ {fig:"\u{1F426}",en:"A <b>bird</b> has feathers and a beak.",pt:"O pássaro tem penas e bico.",say:"A bird has feathers and a beak.",ans:true},
+ {fig:"\u{1FAC1}",en:"A <b>reptile</b> breathes with gills.",pt:"O réptil respira com guelras.",say:"A reptile breathes with gills.",ans:false},
+ {fig:"\u{1F422}",en:"A <b>turtle</b> has a shell.",pt:"A tartaruga tem casco.",say:"A turtle has a shell.",ans:true},
+ {fig:"\u{1F409}",en:"A <b>dragon</b> is make-believe.",pt:"O dragão é de faz de conta.",say:"A dragon is make-believe.",ans:true}
 ];
 const OPEN = [
  {fig:"\u{1F98E}",en:"Name <b>one group</b> of reptiles.",pt:"Diga uma família de réptil.",say:"Name one group of reptiles.",men:"Turtles, Snakes, Lizards or Crocodilians.",mpt:"Tartarugas, Cobras, Lagartos ou Crocodilianos."},
@@ -139,16 +182,25 @@ const OPEN = [
  {fig:"✅",en:"Say one thing that is <b>real</b>.",pt:"Diga uma coisa que é real.",say:"Say one thing that is real.",men:"A dog, a tree, the school, the sun...",mpt:"Um cachorro, uma árvore, a escola, o sol..."},
  {fig:"\u{1F95A}",en:"<b>Where</b> does a reptile lay its eggs?",pt:"Onde o réptil bota os ovos?",say:"Where does a reptile lay its eggs?",men:"On land.",mpt:"Na terra (no chão)."},
  {fig:"\u{1F3C3}",en:"Say one way an animal can <b>move</b>.",pt:"Diga um jeito de um animal se mover.",say:"Say one way an animal can move.",men:"climb, crawl, slither, walk, run, fly or swim.",mpt:"subir, rastejar, deslizar, andar, correr, voar ou nadar."},
- {fig:"\u{1F3C6}",en:"How do you say <b>“the biggest”</b> (big + EST)?",pt:"Como se diz “o maior”?",say:"How do you say the biggest?",men:"biggest.",mpt:"big → biggest (o maior)."}
+ {fig:"\u{1F3C6}",en:"How do you say <b>“the biggest”</b> (big + EST)?",pt:"Como se diz “o maior”?",say:"How do you say the biggest?",men:"biggest.",mpt:"big → biggest (o maior)."},
+ {fig:"\u{1F356}",en:"What does a <b>carnivore</b> eat?",pt:"O que o carnívoro come?",say:"What does a carnivore eat?",men:"Meat (other animals).",mpt:"Carne (outros animais)."},
+ {fig:"\u{1F37D}️",en:"What does an <b>omnivore</b> eat?",pt:"O que o onívoro come?",say:"What does an omnivore eat?",men:"Both plants and animals.",mpt:"Plantas E animais (os dois)."},
+ {fig:"\u{1F98E}",en:"Name <b>one</b> reptile special power.",pt:"Diga um poder especial de réptil.",say:"Name one reptile special power.",men:"Camouflage, venom or regeneration.",mpt:"Camuflagem, veneno ou regeneração."},
+ {fig:"\u{1F409}",en:"Say one <b>make-believe</b> creature.",pt:"Diga uma criatura de faz de conta.",say:"Say one make-believe creature.",men:"A dragon, a fairy, a superhero...",mpt:"Um dragão, uma fada, um super-herói..."},
+ {fig:"\u{1F41C}",en:"How many <b>legs</b> does an insect have?",pt:"Quantas patas tem o inseto?",say:"How many legs does an insect have?",men:"Six (6).",mpt:"Seis (6)."},
+ {fig:"\u{1F426}",en:"What covers a <b>bird's</b> body?",pt:"O que cobre o corpo do pássaro?",say:"What covers a bird's body?",men:"Feathers.",mpt:"Penas."},
+ {fig:"☀️",en:"What <b>warms</b> a reptile's body?",pt:"O que esquenta o corpo do réptil?",say:"What warms a reptile's body?",men:"The sun.",mpt:"O sol."}
 ];
 /* ===== round ===== */
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function pick(arr,n){return shuffle(arr.slice()).slice(0,n);}
 let deck=[], cur=0, score=0, total=0, fontStep=0;
 function buildDeck(){
-  const mc=pick(MC,7).map(o=>({type:'mc',...o,opts:shuffle(o.opts.map(p=>({t:p[0],ok:!!p[1],pt:p[2]})))}));
-  const vf=pick(VF,4).map(o=>({type:'vf',...o}));
-  const op=pick(OPEN,4).map(o=>({type:'open',...o}));
+  /* 60-question practice: 30 multiple choice + 16 true/false + 14 open answer,
+     sampled from a 78-item bank so each round is a different combination. */
+  const mc=pick(MC,30).map(o=>({type:'mc',...o,opts:shuffle(o.opts.map(p=>({t:p[0],ok:!!p[1],pt:p[2]})))}));
+  const vf=pick(VF,16).map(o=>({type:'vf',...o}));
+  const op=pick(OPEN,14).map(o=>({type:'open',...o}));
   deck=shuffle(mc.concat(vf,op));
   total=deck.length; cur=0; score=0;
 }
@@ -166,7 +218,7 @@ function intro(){
   $('card').innerHTML=`<div class="intro">
     <div class="qfig">\u{1F98E}</div>
     <div class="q">Let's practice for the test!</div>
-    <p>15 questions: <b>multiple choice</b>, <b>true or false</b>, and <b>open answer</b>.</p>
+    <p>60 questions: <b>multiple choice</b>, <b>true or false</b>, and <b>open answer</b>.</p>
     <p>The whole test is in <b>English</b>. Tap the &#127463;&#127479; flag to turn the <b>Portuguese translation</b> on or off.</p>
     <p>Tap &#128266; to <b>hear it in English</b>. In the <b>open answer</b> questions, think the answer in your head, tap <b>See answer</b>, then say if you got it right.</p>
     <button class="startbtn" onclick="start()">Start &#128075;</button>
