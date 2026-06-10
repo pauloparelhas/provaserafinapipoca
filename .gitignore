@@ -31,6 +31,10 @@ trabalho/**/conteudo/*.pptx
 # --- JSONs brutos do NotebookLM (processados para HTML) ---
 ferramentas/media/*_raw.json
 
+# --- Quarentena: lixo/descontinuado aguardando revisao do usuario ---
+# Movido para ca em vez de apagar direto. Fora do site (GitHub Pages).
+excluir/
+
 # --- Sistema ---
 Thumbs.db
 .DS_Store
