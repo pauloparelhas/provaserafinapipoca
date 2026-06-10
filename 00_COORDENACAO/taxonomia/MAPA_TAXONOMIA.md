@@ -1,6 +1,11 @@
 # PROJETO SERAFINA - MAPA DE TAXONOMIA
 **Responsavel:** Agente Coordenador Pedagogico
-**Atualizado em:** 09/04/2026 (GEO concluida — sessao completa)
+**Atualizado em:** 04/06/2026 (ELA 2tri "The Animal Inquiry" entregue — ver secao 2tri no fim)
+
+> NOTA v2 (a partir de 02/06/2026): a estrutura de pastas evoluiu para o modelo de
+> 4 camadas descrito em `CLAUDE.md` (_processo / fontes / trabalho / ferramentas).
+> O bloco "ESTRUTURA DE PASTAS" abaixo descreve o layout 1tri (historico, preservado).
+> As secoes 2tri no fim deste arquivo refletem o estado real atual.
 
 ---
 
@@ -110,3 +115,44 @@ provas/
 | Quiz      | Quiz GEO NB1 (10 perguntas — periodos + estacoes)          | Geografia  | GERADO    | ferramentas/media/quiz_geo_nb1.html|
 | Quiz      | Quiz GEO NB2 (10 perguntas — povos + culturas + espaco)    | Geografia  | GERADO    | ferramentas/media/quiz_geo_nb2.html|
 | Quiz      | Quiz GEO NB3 (orientacao espacial)                         | Geografia  | GERADO    | ferramentas/media/quiz_geo_nb3.html|
+
+---
+
+## 2o TRIMESTRE 2026 — EM ANDAMENTO
+
+**Calendario AF 2tri:** Portugues 03/06 (passou) · ELA 11/06 · Historia 16/06 · Science 25/06 · Geografia 11/08 · Math 19/08.
+
+**Politica de ciclo de vida (v2):** produto serve ate a prova; pos-prova apaga-se o pesado
+(video/audio/PDF), preserva-se o aprendizado. Ex: `video_lp2_pt.mp4` foi APAGADO apos a prova de PT (03/06).
+
+### PORTUGUES 2tri (prova 03/06 — PASSOU)
+Produtos retirados do ar / arquivados conforme politica. HTMLs leves permanecem em `ferramentas/`
+(LP_apostila.html, LP2_quiz.html, LP2_mindmap.html, player_aula.html) mas NAO estao mais
+linkados no index.html (bloco PT removido). Video `video_lp2_pt.mp4` apagado.
+
+### INGLES — ELA 2tri "The Animal Inquiry" (Unit 4, prova 11/06) — CONCLUIDA
+Materia EN bilingue (ingles principal + traducao PT). Padrao documentado em `memory/padrao_en_bilingue.md`.
+
+| Codigo    | Conteudo                              | Disciplina | Data AF | Status    | Arquivo                  |
+|-----------|---------------------------------------|------------|---------|-----------|--------------------------|
+| ELA2-SIM  | Simulado — 162 questoes, 6 tipos, seletor de temas + quantidade (5/10/25/50/100, default 25), foco Grupos de Animais, refazer erradas/novo/menu. EN + flag BR p/ PT | Ingles | 11/06 | CONCLUIDA | ELA2_simulado.html |
+| ELA2-RES  | Resumo + Dicas (folha de estudo bilingue, secoes colapsaveis) | Ingles | 11/06 | CONCLUIDA | ELA2_resumo.html |
+| ELA2-MM   | Mapa Mental (6 topicos, EN+PT)        | Ingles     | 11/06   | CONCLUIDA | ELA2_mindmap.html        |
+| ~~ELA2-PAL~~ | ~~Palacio das Memorias~~ — DESCONTINUADO (metafora dificil p/ 7 anos), apagado (commit 36a2d87) | Ingles | — | REMOVIDO | — |
+| ELA2-GAL  | Galeria — Imagens e Insumos da turma  | Ingles     | 11/06   | CONCLUIDA | ELA2_galeria.html        |
+
+**Complementos ELA 2tri:**
+| Tipo   | Conteudo                                            | Status  | Local                                  |
+|--------|-----------------------------------------------------|---------|----------------------------------------|
+| Video  | Video Revisao "The Animal Inquiry" (NLM, 47MB)      | GERADO  | ferramentas/media/video_ela2_animals.mp4|
+| Insumos| 7 JPGs (posteres) + 5 PDFs (worksheets) da turma    | NO AR   | ferramentas/media/ela_insumos/ (linkados via ELA2_galeria.html)|
+
+**index.html (estado 04/06/2026):** titulo renomeado "Projeto Serafina" -> "Revisao"; bloco PT
+removido; bloco ELA no topo (video hero + 4 ferramentas) + link "Arquivo do 1o Trimestre".
+`sw.js` cache atualizado v4 -> v5.
+
+**Fontes versionadas:** `trabalho/2tri_ingles/` (_outline_pedagogico.md, nlm_source_ela_unit4.md,
+_simulado_banco.md na raiz; materiais brutos em conteudo/ — gitignored).
+
+**Commit da entrega:** `06ff844`. Navegacao validada: todos os Home -> `../index.html`
+(via location.href ou goToIndex/showHomeModal de base.js); galeria referencia os 12 insumos (0 orfaos).
