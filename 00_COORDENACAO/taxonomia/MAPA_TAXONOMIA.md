@@ -1,6 +1,7 @@
 # PROJETO SERAFINA - MAPA DE TAXONOMIA
 **Responsavel:** Agente Coordenador Pedagogico
-**Atualizado em:** 04/06/2026 (ELA 2tri "The Animal Inquiry" entregue — ver secao 2tri no fim)
+**Atualizado em:** 12/06/2026 (HISTORIA 2tri "Memoria e Historia" entregue — ver secao no fim)
+**Historico:** 04/06/2026 (ELA 2tri "The Animal Inquiry" entregue)
 
 > NOTA v2 (a partir de 02/06/2026): a estrutura de pastas evoluiu para o modelo de
 > 4 camadas descrito em `CLAUDE.md` (_processo / fontes / trabalho / ferramentas).
@@ -156,3 +157,38 @@ _simulado_banco.md na raiz; materiais brutos em conteudo/ — gitignored).
 
 **Commit da entrega:** `06ff844`. Navegacao validada: todos os Home -> `../index.html`
 (via location.href ou goToIndex/showHomeModal de base.js); galeria referencia os 12 insumos (0 orfaos).
+
+---
+
+### HISTORIA — HIS 2tri "Memoria e Historia" (Unidade 2, prova 16/06) — CONCLUIDA
+Materia PT puro (sem traducao — historia/geografia/portugues seguem PT). Temas da prova:
+evolucao dos registros (jornal -> redes), documentos pessoais, festas/tradicoes do Brasil,
+linha do tempo e memoria. Padrao de produtos espelha o de ELA 2tri (simulado + resumo +
+mindmap + galeria), porem em portugues.
+
+| Codigo    | Conteudo                              | Disciplina | Data AF | Status    | Arquivo                  |
+|-----------|---------------------------------------|------------|---------|-----------|--------------------------|
+| HIS2-SIM  | Simulado — 125 questoes, 6 tipos (incl. tipo novo "Ordenar"/linha do tempo), seletor de temas + quantidade (5 a 100). PT puro | Historia | 16/06 | CONCLUIDA | HIS2_simulado.html |
+| HIS2-RES  | Resumo + Dicas (folha de estudo, secoes colapsaveis, TTS ouvir) | Historia | 16/06 | CONCLUIDA | HIS2_resumo.html |
+| HIS2-MM   | Mapa Mental (5 ramos colapsaveis, importa base.css/base.js) | Historia | 16/06 | CONCLUIDA | HIS2_mindmap.html |
+| HIS2-GAL  | Galeria — Imagens e Insumos da turma (registros, documentos, festas) | Historia | 16/06 | CONCLUIDA | HIS2_galeria.html |
+
+**Complementos HIS 2tri:**
+| Tipo   | Conteudo                                            | Status        | Local                                  |
+|--------|-----------------------------------------------------|---------------|----------------------------------------|
+| Video  | Video Revisao "Memoria e Historia" (NLM, PT)        | PENDENTE/GERANDO | ferramentas/media/video_his2_memoria.mp4 (notebook 5f43f615, artifact 8d7a889d) |
+| Insumos| 16 JPGs (registros_*, doc_*, festa_*)               | NO AR         | ferramentas/media/his_insumos/ (linkados via HIS2_galeria.html) |
+
+**index.html (estado 12/06/2026):** bloco Historia no TOPO (acima de ELA). Card de video
+hero presente porem em estado "Em breve" (opacity .6, sem href) ate o NLM concluir — quando
+o MP4 baixar, trocar o card por link real para `ferramentas/media/video_his2_memoria.mp4`.
+`sw.js` cache atualizado v6 -> v7.
+
+**Fontes versionadas:** `trabalho/2tri_historia/` — `_roteiro.md` (validado pelo pedagogico)
+e `nlm_source_his2.md` (fonte de narracao do video) estao versionados. Materiais brutos
+(3 PDFs Toddle + 1 JPEG WhatsApp) estao na RAIZ de `trabalho/2tri_historia/` e NAO estao
+gitignored (ver recomendacao abaixo).
+
+**Navegacao validada:** simulado/resumo/galeria usam `location.href='../index.html'`;
+mindmap usa `showHomeModal()` de base.js -> goToIndex -> index.html. Galeria referencia
+os 16 insumos via `DIR="media/his_insumos/"` (0 orfaos). Todos os 16 JPGs tracked no git.
