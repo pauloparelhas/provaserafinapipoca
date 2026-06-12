@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Resumo — Memória e História</title>
+<style>
+:root{--fs:1;--bg:#0d0b1e;--bg2:#171334;--ink:#f5f3ff;--soft:rgba(255,255,255,.55);--card:#221c44;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fb923c;--rad:20px}
+body.light{--bg:#eef2ff;--bg2:#e0e7ff;--ink:#1a1030;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+#starfield{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:7px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.1rem;font-weight:800;cursor:pointer;padding:0 9px}
+.iconbtn:active{transform:scale(.9)}
+.wrap{flex:1;width:100%;max-width:600px;margin:0 auto;padding:16px 14px 40px}
+.hint{text-align:center;font-size:.84rem;font-weight:800;color:var(--soft);margin:2px 0 14px;line-height:1.4}
+.toolrow{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
+.toolbtn{border:2px solid var(--line);background:transparent;color:var(--soft);font-weight:800;font-size:.78rem;border-radius:16px;padding:7px 14px;cursor:pointer;font-family:inherit;min-height:44px}
+.toolbtn:active{transform:scale(.95)}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);box-shadow:0 10px 30px rgba(0,0,0,.28);margin-bottom:16px;overflow:hidden}
+.sechead{display:flex;align-items:center;gap:10px;padding:15px 16px;cursor:pointer;user-select:none}
+.sechead .si{font-size:1.7rem;filter:drop-shadow(0 4px 7px rgba(0,0,0,.3))}
+.sechead .st{flex:1;font-weight:900;font-size:calc(1.08rem*var(--fs));line-height:1.2}
+.sechead .chev{font-size:1rem;color:var(--soft);transition:transform .25s}
+.sec.open .chev{transform:rotate(180deg)}
+.secbody{display:none;padding:0 16px 16px}
+.sec.open .secbody{display:block}
+.listen{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border:2px solid var(--accent);background:transparent;color:var(--accent);font-weight:800;font-size:.85rem;border-radius:18px;padding:6px 16px;cursor:pointer;font-family:inherit;margin:2px 0 10px}
+.listen:active{transform:scale(.95)}
+.grp{border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin:8px 0;background:rgba(255,255,255,.03)}
+.grp .gname{font-weight:900;font-size:calc(1rem*var(--fs));display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.line{margin:6px 0 0;font-weight:700;font-size:calc(.96rem*var(--fs));line-height:1.35;display:flex;gap:8px}
+.line .lk{flex-shrink:0}
+.cols{display:flex;gap:10px;flex-wrap:wrap}
+.col{flex:1;min-width:140px;border:1px solid var(--line);border-radius:14px;padding:11px 13px}
+.col.antigo{background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.4)}
+.col.moderno{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.35)}
+.col h4{font-size:.92rem;font-weight:900;margin-bottom:7px}
+.col .ci{font-weight:800;font-size:calc(.95rem*var(--fs));margin:4px 0}
+.tip{display:flex;gap:9px;align-items:flex-start;margin:7px 0;font-weight:800;font-size:calc(.97rem*var(--fs));line-height:1.35}
+.tip .tk{flex-shrink:0}
+.qa{border-left:3px solid var(--accent2);padding:6px 0 6px 12px;margin:11px 0}
+.qa .qq{font-weight:900;font-size:calc(.98rem*var(--fs));line-height:1.3}
+.qa .aa{font-weight:900;color:var(--accent);font-size:calc(1rem*var(--fs));margin-top:4px}
+.qa .aa::before{content:"→ "}
+.foot{text-align:center;color:var(--soft);font-weight:800;font-size:.82rem;margin-top:8px}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn" title="Início" onclick="if(confirm('Voltar ao início?'))location.href='../index.html'">&#127968;</button>
+    <span class="title">Resumo &mdash; Mem&oacute;ria e Hist&oacute;ria</span>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+  </div>
+  <div class="wrap">
+    <div class="hint">Sua folha de estudo! Toque num t&iacute;tulo para abrir/fechar e no &#128266; para ouvir.</div>
+    <div class="toolrow">
+      <button class="toolbtn" onclick="allSec(true)">&#11015;&#65039; Abrir tudo</button>
+      <button class="toolbtn" onclick="allSec(false)">&#11014;&#65039; Fechar tudo</button>
+    </div>
+    <div id="content"></div>
+    <div class="foot">&#127808; Boa sorte na prova de Hist&oacute;ria!</div>
+  </div>
+</div>
+<script>
+/* ===== Resumo — História Y2 · Unidade 2 "Memória e História" =====
+   PT puro. Conteúdo de trabalho/2tri_historia/_roteiro.md. */
+
+const B1=[
+ ["\u{1F9E0}","Memória","A memória guarda as histórias que contamos, o que vivemos e os momentos importantes."],
+ ["\u{1F50E}","Fonte = pista do passado","Uma foto antiga, uma carta ou um objeto antigo são pistas que contam o passado."],
+ ["\u{1F3DB}️","Museu e arquivo","Guardam memórias e documentos para as próximas gerações aprenderem."],
+ ["\u{1F475}","História contada","Quando a vovó ou o vovô conta histórias da família, a gente guarda a memória."],
+ ["\u{1F4DC}","Por que preservar?","Para conhecer nossa história e manter as raízes da família vivas."]
+];
+const B1_say="A memória guarda as histórias que contamos e os momentos importantes. Uma foto antiga, uma carta ou um objeto antigo são pistas do passado. Museus e arquivos guardam memórias para as próximas gerações.";
+
+const B2=[
+ ["De quem é o objeto e quem fez a pesquisa."],
+ ["Para que serve ou servia o objeto."],
+ ["Por que é importante para o dono."],
+ ["Há quanto tempo a pessoa tem o objeto."],
+ ["Onde fica guardado e se é usado em data especial."]
+];
+const B2_say="A ficha do objeto descreve um objeto de memória: de quem é, para que serve, por que é importante e há quanto tempo a pessoa tem.";
+
+const B3_ORDER=[
+ ["\u{1F4F0}","Jornal","registra notícias — de muito tempo atrás."],
+ ["\u{2709}️","Carta","mensagem pessoal escrita — de muito tempo atrás."],
+ ["\u{1F4D4}","Diário","registro só seu, bem pessoal."],
+ ["\u{1F4F7}","Álbum de fotos","fotos no papel — do tempo dos bisavós/avós."],
+ ["\u{1F4F1}","Foto digital","foto no celular — de quando os pais eram crianças."],
+ ["\u{1F4BB}","Redes sociais","compartilhar na hora — hoje em dia."]
+];
+const B3_ANTIGO=["\u{1F4F0} Jornal","\u{2709}️ Carta","\u{1F4D4} Diário","\u{1F4F7} Álbum de fotos"];
+const B3_MODERNO=["\u{1F4F1} Foto digital","\u{1F4BB} Redes sociais"];
+const B3_say="As formas de registrar memórias mudaram com a tecnologia. Do mais antigo ao mais novo: jornal, carta, diário, álbum de fotos, foto digital e redes sociais. Antigos no papel; modernos no celular e na internet.";
+
+const B4=[
+ ["\u{1F476}","Certidão de nascimento","mostra que você nasceu: nome, data e local. É o primeiro documento."],
+ ["\u{1FAAA}","Identidade (RG)","tem sua foto e identifica você."],
+ ["\u{1F5F3}️","Título eleitoral","serve para votar."],
+ ["\u{1F697}","CNH","autoriza dirigir carro ou moto."],
+ ["\u{1F489}","Carteira de vacinação","mostra as vacinas que você tomou."]
+];
+const B4_say="Documentos pessoais guardam informações importantes. A certidão de nascimento é o primeiro. A identidade tem sua foto. O título eleitoral serve para votar. A CNH para dirigir. E a carteira de vacinação mostra suas vacinas.";
+
+const B5=[
+ ["\u{1F402}","Festival de Parintins","No Amazonas (Norte). Disputa dos bois Garantido e Caprichoso."],
+ ["\u{1F40E}","Cavalhada","Batalha de mouros e cristãos a cavalo, com trajes coloridos."],
+ ["\u{1F404}","Bumba-meu-boi","Norte e Nordeste. Conta a morte e a ressurreição de um boi."],
+ ["\u{1F347}","Festa da Uva","No Sul. Celebra a colheita da uva e os imigrantes italianos."],
+ ["\u{1F3AD}","Carnaval","Em todo o Brasil. Desfiles, fantasias, música e alegria."],
+ ["\u{1F525}","Festa Junina","Em todo o Brasil. Bandeirinhas, quadrilha, fogueira e comidas de milho."],
+ ["\u{1F941}","Maracatu","Em Pernambuco. Cortejo real e herança afro-brasileira."]
+];
+const B5_say="As festas guardam a memória e a cultura. Parintins, no Amazonas, tem os bois Garantido e Caprichoso. A Cavalhada tem mouros e cristãos a cavalo. O Bumba-meu-boi conta a história de um boi. A Festa da Uva, no Sul, celebra os italianos.";
+
+const TIPS=[
+ ["\u{1F50E}","Pista do passado = foto antiga, carta, objeto antigo ou documento."],
+ ["\u{23F3}","Antigo: jornal, carta, diário, álbum de fotos. Moderno: foto digital, redes sociais."],
+ ["\u{1F4C4}","Lembre o que cada documento faz: nascer, votar, dirigir, vacinas, identidade."],
+ ["\u{1F402}","Parintins = bois Garantido e Caprichoso. Bumba-meu-boi = morte e ressurreição do boi."],
+ ["\u{1F347}","Festa da Uva = Sul e italianos. Maracatu = Pernambuco."],
+ ["\u{1F389}","Festas guardam a memória e a cultura — nem toda família comemora igual."]
+];
+const FAQ=[
+ ["Qual registro é o mais moderno?","Redes sociais."],
+ ["Onde ficavam as fotos no tempo dos bisavós?","No álbum de fotos."],
+ ["Qual documento serve para votar?","O título eleitoral."],
+ ["Qual é o primeiro documento da pessoa?","A certidão de nascimento."],
+ ["Em qual festa disputam os bois Garantido e Caprichoso?","No Festival de Parintins."],
+ ["Onde acontece a Festa da Uva?","Na região Sul."]
+];
+
+/* ===== render ===== */
+const $=id=>document.getElementById(id);
+function esc(s){return String(s).replace(/<[^>]*>/g,'').replace(/"/g,'&quot;').replace(/'/g,"\\'");}
+function say(txt){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='pt-BR';u.rate=.9;
+  const v=speechSynthesis.getVoices().find(v=>/Thalita|Antonio|Maria|pt-BR|pt_BR|Portuguese \(Brazil\)/i.test(v.lang+' '+v.name));if(v)u.voice=v;
+  speechSynthesis.speak(u);}catch(e){}}
+function row(ic,name,desc){return `<div class="line"><span class="lk">${ic}</span><span><b>${name}</b> — ${desc}</span></div>`;}
+
+function build(){
+  const b1Body=`<button class="listen" onclick="say('${esc(B1_say)}')">&#128266; Ouvir</button>`+
+    B1.map(r=>row(r[0],r[1],r[2])).join('');
+  const b2Body=`<button class="listen" onclick="say('${esc(B2_say)}')">&#128266; Ouvir</button>
+    <div class="grp"><div class="gname">\u{1F4CB} A ficha do objeto pergunta:</div>
+    ${B2.map(r=>`<div class="line"><span class="lk">\u{2022}</span><span>${r[0]}</span></div>`).join('')}</div>`;
+  const b3Body=`<button class="listen" onclick="say('${esc(B3_say)}')">&#128266; Ouvir</button>
+    <div class="grp"><div class="gname">\u{23F3} Do mais antigo ao mais novo</div>
+    ${B3_ORDER.map((r,i)=>`<div class="line"><span class="lk">${i+1}. ${r[0]}</span><span><b>${r[1]}</b> — ${r[2]}</span></div>`).join('')}</div>
+    <div class="cols">
+      <div class="col antigo"><h4>\u{1F4DC} Antigos</h4>${B3_ANTIGO.map(x=>`<div class="ci">${x}</div>`).join('')}</div>
+      <div class="col moderno"><h4>\u{1F4F1} Modernos / digitais</h4>${B3_MODERNO.map(x=>`<div class="ci">${x}</div>`).join('')}</div>
+    </div>`;
+  const b4Body=`<button class="listen" onclick="say('${esc(B4_say)}')">&#128266; Ouvir</button>`+
+    B4.map(r=>row(r[0],r[1],r[2])).join('');
+  const b5Body=`<button class="listen" onclick="say('${esc(B5_say)}')">&#128266; Ouvir</button>`+
+    B5.map(r=>row(r[0],r[1],r[2])).join('');
+  const tipsBody=TIPS.map(t=>`<div class="tip"><span class="tk">${t[0]}</span><span>${t[1]}</span></div>`).join('');
+  const faqBody=FAQ.map(q=>`<div class="qa"><div class="qq">${q[0]}</div><div class="aa">${q[1]}</div></div>`).join('');
+
+  const sections=[
+   {ic:"\u{1F9E0}",t:"Memória e registros",body:b1Body,open:true},
+   {ic:"\u{1F4CB}",t:"A ficha do objeto",body:b2Body,open:false},
+   {ic:"\u{23F3}",t:"Linha do tempo dos registros",body:b3Body,open:true},
+   {ic:"\u{1F4C4}",t:"Documentos pessoais",body:b4Body,open:false},
+   {ic:"\u{1F389}",t:"Festas do Brasil",body:b5Body,open:true},
+   {ic:"⭐",t:"Dicas para a prova",body:tipsBody,open:true},
+   {ic:"❓",t:"Perguntas que costumam cair",body:faqBody,open:false}
+  ];
+  $('content').innerHTML=sections.map((s,i)=>`<div class="sec${s.open?' open':''}" id="sec${i}">
+     <div class="sechead" onclick="toggleSec(${i})">
+       <span class="si">${s.ic}</span>
+       <span class="st">${s.t}</span>
+       <span class="chev">▼</span></div>
+     <div class="secbody">${s.body}</div></div>`).join('');
+}
+function toggleSec(i){$('sec'+i).classList.toggle('open');}
+function allSec(open){document.querySelectorAll('.sec').forEach(s=>s.classList.toggle('open',open));}
+function fs(d){window._fsStep=Math.max(-2,Math.min(3,(window._fsStep||0)+d));document.documentElement.style.setProperty('--fs',1+window._fsStep*0.12);}
+
+/* starfield */
+(function(){var c=document.getElementById('starfield'),x=c.getContext('2d'),s=[];
+function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.1+.02});}
+function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}
+rz();addEventListener('resize',rz);d();})();
+build();
+if('speechSynthesis' in window){speechSynthesis.getVoices();}
+</script>
+</body>
+</html>

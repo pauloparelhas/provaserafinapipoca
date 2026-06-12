@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Mental — Memória e História (História)</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+.mm-root-label{text-align:center;margin-bottom:8px;}
+.mm-root-pill{display:inline-block;padding:12px 28px;border-radius:20px;font-size:calc(15px * var(--fs));
+  font-weight:900;background:linear-gradient(135deg,#a78bfa,#fb923c);color:#fff;
+  box-shadow:0 0 24px rgba(167,139,250,.35);}
+.mm-root-tr{font-size:calc(11px*var(--fs));font-weight:800;color:#fbbf24;font-style:italic;margin-top:8px;}
+.mm-branch{border-radius:18px;border:2px solid;margin-bottom:12px;overflow:hidden;}
+.mm-branch-hd{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;min-height:52px;}
+.mm-branch-hd:active{opacity:.8;}
+.mm-branch-icon{font-size:22px;flex-shrink:0;}
+.mm-branch-text{flex:1;}
+.mm-branch-en{font-size:calc(15px * var(--fs));font-weight:900;color:#fff;line-height:1.2;}
+.mm-branch-pt{font-size:calc(11px * var(--fs));font-weight:800;color:#fbbf24;font-style:italic;margin-top:2px;}
+.mm-branch-arrow{font-size:12px;color:rgba(255,255,255,.35);transition:transform .25s;flex-shrink:0;}
+.mm-branch.open .mm-branch-arrow{transform:rotate(90deg);}
+.mm-branch-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.mm-branch.open .mm-branch-body{max-height:6000px;}
+.mm-branch-inner{padding:4px 12px 12px;}
+.mm-leaf{border-radius:12px;margin-bottom:8px;overflow:hidden;}
+.mm-leaf-hd{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;min-height:44px;}
+.mm-leaf-hd:active{opacity:.8;}
+.mm-leaf-icon{font-size:18px;flex-shrink:0;}
+.mm-leaf-text{flex:1;}
+.mm-leaf-en{font-size:calc(13px * var(--fs));font-weight:900;color:#fff;line-height:1.2;}
+.mm-leaf-pt{font-size:calc(10px * var(--fs));font-weight:800;color:#fbbf24;font-style:italic;margin-top:1px;}
+.mm-leaf-arrow{font-size:10px;color:rgba(255,255,255,.3);transition:transform .2s;flex-shrink:0;}
+.mm-leaf.open .mm-leaf-arrow{transform:rotate(90deg);}
+.mm-leaf-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+.mm-leaf.open .mm-leaf-body{max-height:1400px;}
+.mm-detail{padding:4px 12px 4px 16px;font-size:calc(12px * var(--fs));font-weight:700;line-height:1.45;}
+.mm-detail-en{color:#fff;opacity:.92;}
+.mm-detail-last{padding-bottom:8px;}
+.mm-tag{display:inline-block;font-size:calc(9px * var(--fs));font-weight:800;padding:1px 7px;border-radius:10px;margin-left:6px;
+  background:rgba(251,146,60,.22);color:#fdba74;vertical-align:middle;}
+.bc-blue{background:rgba(96,165,250,.06);border-color:rgba(96,165,250,.25);}
+.bc-blue .mm-branch-hd,.bc-blue .mm-leaf-hd{background:rgba(96,165,250,.08);}
+.bc-blue .mm-detail{border-left:2px solid rgba(96,165,250,.3);}
+.bc-orange{background:rgba(251,146,60,.06);border-color:rgba(251,146,60,.25);}
+.bc-orange .mm-branch-hd,.bc-orange .mm-leaf-hd{background:rgba(251,146,60,.08);}
+.bc-orange .mm-detail{border-left:2px solid rgba(251,146,60,.3);}
+.bc-green{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.25);}
+.bc-green .mm-branch-hd,.bc-green .mm-leaf-hd{background:rgba(52,211,153,.08);}
+.bc-green .mm-detail{border-left:2px solid rgba(52,211,153,.3);}
+.bc-purple{background:rgba(167,139,250,.06);border-color:rgba(167,139,250,.25);}
+.bc-purple .mm-branch-hd,.bc-purple .mm-leaf-hd{background:rgba(167,139,250,.08);}
+.bc-purple .mm-detail{border-left:2px solid rgba(167,139,250,.3);}
+.bc-pink{background:rgba(244,114,182,.06);border-color:rgba(244,114,182,.25);}
+.bc-pink .mm-branch-hd,.bc-pink .mm-leaf-hd{background:rgba(244,114,182,.08);}
+.bc-pink .mm-detail{border-left:2px solid rgba(244,114,182,.3);}
+.intro-emoji{font-size:56px;text-align:center;display:block;margin-bottom:12px;
+  filter:drop-shadow(0 0 20px rgba(167,139,250,.5));animation:mfloat 3s ease-in-out infinite;}
+.mm-hint{text-align:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.3);margin-bottom:18px;}
+body.theme-light .mm-branch-en,body.theme-light .mm-leaf-en,body.theme-light .mm-detail-en{color:#1a1030;opacity:1;}
+body.theme-light .mm-branch-pt,body.theme-light .mm-leaf-pt,body.theme-light .mm-root-tr{color:#b45309;}
+body.theme-light .mm-hint{color:rgba(0,0,0,.4);}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div id="app">
+
+<div class="navbar">
+  <div class="nav-logo" id="navLogo">Revisão</div>
+  <div class="nav-right">
+    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0;</button>
+    <div class="nav-a11y">
+      <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A-</button>
+      <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
+      <button class="nav-a11y-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen active" id="screen-main" style="max-width:600px;">
+  <div class="intro-emoji">&#x1F4DC;</div>
+  <div class="intro-title">Memória e História</div>
+  <div class="mm-hint">&#x1F449; Toque num tópico para abrir &bull; toque de novo para fechar</div>
+
+  <div class="mm-root-label">
+    <div class="mm-root-pill">&#x1F3DB;&#xFE0F; Unidade 2 — Memória e História</div>
+    <div class="mm-root-tr">Revisão de História — Year 2</div>
+  </div>
+
+  <!-- 1. MEMÓRIA E REGISTROS -->
+  <div class="mm-branch bc-purple open" onclick="toggleBranch(this)">
+    <div class="mm-branch-hd">
+      <div class="mm-branch-icon">&#x1F9E0;</div>
+      <div class="mm-branch-text">
+        <div class="mm-branch-en">Memória e registros</div>
+        <div class="mm-branch-pt">o que é memória e por que guardar</div>
+      </div>
+      <div class="mm-branch-arrow">&#x25B6;</div>
+    </div>
+    <div class="mm-branch-body"><div class="mm-branch-inner">
+      <div class="mm-leaf bc-purple open" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x1F9E0;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">O que é memória</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail"><span class="mm-detail-en">Guarda as histórias que contamos e os momentos importantes.</span></div>
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">A História também é feita de muitas histórias da nossa família.</span></div>
+        </div>
+      </div>
+      <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x1F50E;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">Pista do passado (fonte)</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Uma foto antiga, uma carta ou um objeto antigo são pistas que contam o passado.</span></div>
+        </div>
+      </div>
+      <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x1F3DB;&#xFE0F;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">Museu e arquivo</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Guardam memórias e documentos para as próximas gerações aprenderem.</span></div>
+        </div>
+      </div>
+      <div class="mm-leaf bc-purple" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x1F475;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">História contada</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Quando a vovó ou o vovô conta histórias da família, a gente guarda a memória.</span></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 2. FICHA DO OBJETO -->
+  <div class="mm-branch bc-green" onclick="toggleBranch(this)">
+    <div class="mm-branch-hd">
+      <div class="mm-branch-icon">&#x1F4CB;</div>
+      <div class="mm-branch-text">
+        <div class="mm-branch-en">A ficha do objeto</div>
+        <div class="mm-branch-pt">como transformamos um objeto em registro</div>
+      </div>
+      <div class="mm-branch-arrow">&#x25B6;</div>
+    </div>
+    <div class="mm-branch-body"><div class="mm-branch-inner">
+      <div class="mm-leaf bc-green" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x1F4DD;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">O que a ficha pergunta</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail"><span class="mm-detail-en">De quem é o objeto e para que serve.</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">Por que é importante para o dono.</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">Há quanto tempo a pessoa tem o objeto.</span></div>
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">Onde fica guardado e se é usado em data especial.</span></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 3. LINHA DO TEMPO -->
+  <div class="mm-branch bc-orange" onclick="toggleBranch(this)">
+    <div class="mm-branch-hd">
+      <div class="mm-branch-icon">&#x23F3;</div>
+      <div class="mm-branch-text">
+        <div class="mm-branch-en">Linha do tempo dos registros<span class="mm-tag">cai na prova</span></div>
+        <div class="mm-branch-pt">do mais antigo ao mais moderno</div>
+      </div>
+      <div class="mm-branch-arrow">&#x25B6;</div>
+    </div>
+    <div class="mm-branch-body"><div class="mm-branch-inner">
+      <div class="mm-leaf bc-orange open" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x2B50;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">Do antigo ao moderno</div><div class="mm-leaf-pt">decore esta ordem!</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail"><span class="mm-detail-en">1. &#x1F4F0; Jornal — registra notícias (de muito tempo atrás).</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">2. &#x2709;&#xFE0F; Carta — mensagem pessoal escrita.</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">3. &#x1F4D4; Diário — registro só seu.</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">4. &#x1F4F7; Álbum de fotos — fotos no papel (bisavós).</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">5. &#x1F4F1; Foto digital — foto no celular (pais).</span></div>
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">6. &#x1F4BB; Redes sociais — compartilhar na hora (hoje).</span></div>
+        </div>
+      </div>
+      <div class="mm-leaf bc-orange" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x1F501;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">Antigo x Moderno</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail"><span class="mm-detail-en">&#x1F4DC; Antigos: jornal, carta, diário, álbum de fotos.</span></div>
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">&#x1F4F1; Modernos/digitais: foto digital, redes sociais.</span></div>
+        </div>
+      </div>
+      <div class="mm-leaf bc-orange" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x1F4A1;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">O que mudou?</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">As formas de registrar memórias mudaram com a tecnologia (as invenções).</span></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 4. DOCUMENTOS PESSOAIS -->
+  <div class="mm-branch bc-blue" onclick="toggleBranch(this)">
+    <div class="mm-branch-hd">
+      <div class="mm-branch-icon">&#x1F4C4;</div>
+      <div class="mm-branch-text">
+        <div class="mm-branch-en">Documentos pessoais</div>
+        <div class="mm-branch-pt">cada um guarda parte da sua história</div>
+      </div>
+      <div class="mm-branch-arrow">&#x25B6;</div>
+    </div>
+    <div class="mm-branch-body"><div class="mm-branch-inner">
+      <div class="mm-leaf bc-blue open" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x1F4C4;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">Os 5 documentos</div><div class="mm-leaf-pt">para que cada um serve</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail"><span class="mm-detail-en">&#x1F476; Certidão de nascimento — mostra que você nasceu (o primeiro!).</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">&#x1FAAA; Identidade (RG) — tem sua foto e identifica você.</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">&#x1F5F3;&#xFE0F; Título eleitoral — serve para votar.</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">&#x1F697; CNH — autoriza dirigir.</span></div>
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">&#x1F489; Carteira de vacinação — mostra as vacinas tomadas.</span></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 5. FESTAS DO BRASIL -->
+  <div class="mm-branch bc-pink" onclick="toggleBranch(this)">
+    <div class="mm-branch-hd">
+      <div class="mm-branch-icon">&#x1F389;</div>
+      <div class="mm-branch-text">
+        <div class="mm-branch-en">Festas do Brasil<span class="mm-tag">cai na prova</span></div>
+        <div class="mm-branch-pt">memórias que celebramos</div>
+      </div>
+      <div class="mm-branch-arrow">&#x25B6;</div>
+    </div>
+    <div class="mm-branch-body"><div class="mm-branch-inner">
+      <div class="mm-leaf bc-pink open" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x2B50;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">As 4 festas da prova</div><div class="mm-leaf-pt">decore estas!</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail"><span class="mm-detail-en">&#x1F402; Festival de Parintins — Amazonas; bois Garantido e Caprichoso.</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">&#x1F40E; Cavalhada — mouros e cristãos a cavalo.</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">&#x1F404; Bumba-meu-boi — Norte e Nordeste; morte e ressurreição do boi.</span></div>
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">&#x1F347; Festa da Uva — Sul; colheita da uva e imigrantes italianos.</span></div>
+        </div>
+      </div>
+      <div class="mm-leaf bc-pink" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x1F3AD;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">Outras festas</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail"><span class="mm-detail-en">&#x1F3AD; Carnaval — em todo o Brasil; desfiles e fantasias.</span></div>
+          <div class="mm-detail"><span class="mm-detail-en">&#x1F525; Festa Junina — em todo o Brasil; bandeirinhas, quadrilha e fogueira.</span></div>
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">&#x1F941; Maracatu — Pernambuco; cortejo real e herança afro-brasileira.</span></div>
+        </div>
+      </div>
+      <div class="mm-leaf bc-pink" onclick="toggleLeaf(event,this)">
+        <div class="mm-leaf-hd"><div class="mm-leaf-icon">&#x2764;&#xFE0F;</div>
+          <div class="mm-leaf-text"><div class="mm-leaf-en">Por que importam</div></div>
+          <div class="mm-leaf-arrow">&#x25B6;</div></div>
+        <div class="mm-leaf-body">
+          <div class="mm-detail mm-detail-last"><span class="mm-detail-en">As festas guardam a memória e a cultura. Nem toda família comemora do mesmo jeito.</span></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+</div><!-- screen-main -->
+</div><!-- app -->
+
+<script src="base.js"></script>
+<script>
+function toggleBranch(el){ el.classList.toggle('open'); }
+function toggleLeaf(e,el){ e.stopPropagation(); el.classList.toggle('open'); }
+initApp();
+</script>
+</body>
+</html>
