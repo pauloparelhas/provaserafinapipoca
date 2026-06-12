@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Simulado — Memória e História</title>
+<style>
+:root{--fs:1;--bg:#0d0b1e;--bg2:#171334;--ink:#f5f3ff;--soft:rgba(255,255,255,.55);--card:#221c44;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fb923c;--ok:#34d399;--no:#f87171;--mid:#fbbf24;--rad:22px}
+body.light{--bg:#eef2ff;--bg2:#e0e7ff;--ink:#1a1030;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+#starfield{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{display:flex;align-items:center;gap:7px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.1rem;font-weight:800;cursor:pointer;padding:0 9px}
+.iconbtn:active{transform:scale(.9)}
+.bar{height:9px;background:var(--line)}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .35s}
+.stage{flex:1;display:flex;align-items:center;justify-content:center;padding:16px}
+.card{width:100%;max-width:540px;background:var(--card);border-radius:var(--rad);box-shadow:0 14px 40px rgba(0,0,0,.35);padding:22px 20px 24px;text-align:center;border:1px solid var(--line)}
+.qhead{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+.qnum{font-size:.78rem;font-weight:900;color:var(--soft);letter-spacing:1px;text-transform:uppercase}
+.badge{font-size:.66rem;font-weight:900;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.badge.mc{background:rgba(167,139,250,.2);color:#c4b5fd}
+.badge.vf{background:rgba(251,191,36,.18);color:#fbbf24}
+.badge.open{background:rgba(244,114,182,.2);color:#f9a8d4}
+.badge.fill{background:rgba(52,211,153,.18);color:#6ee7b7}
+.badge.match{background:rgba(96,165,250,.2);color:#93c5fd}
+.badge.order{background:rgba(251,146,60,.2);color:#fdba74}
+.qfig{font-size:calc(3.1rem*var(--fs));margin:10px 0 4px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
+.q{font-size:calc(1.22rem*var(--fs));font-weight:900;line-height:1.35;margin:8px 0 4px}
+.speak{margin:8px auto 16px;display:inline-flex;align-items:center;gap:7px;border:2px solid var(--accent);background:transparent;color:var(--accent);
+  font-weight:800;font-size:.85rem;border-radius:20px;padding:6px 14px;cursor:pointer;font-family:inherit}
+.speak:active{transform:scale(.95)}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{padding:13px 16px;border:2px solid var(--line);border-radius:16px;background:transparent;color:var(--ink);font-size:calc(1.05rem*var(--fs));font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+.opt:active{transform:scale(.97)}
+.opt.ok{background:var(--ok);color:#06251a;border-color:var(--ok)}
+.opt.no{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+.opt:disabled{cursor:default;opacity:1}
+.vfwrap{display:flex;gap:12px;justify-content:center}
+.vfbtn{flex:1;max-width:200px;padding:18px 10px;border:2px solid var(--line);border-radius:18px;background:transparent;color:var(--ink);
+  font-size:calc(1.15rem*var(--fs));font-weight:900;cursor:pointer;font-family:inherit;transition:.15s}
+.vfbtn .big{display:block;font-size:1.9rem;margin-bottom:2px}
+.vfbtn:active{transform:scale(.96)}
+.vfbtn.ok{background:var(--ok);color:#06251a;border-color:var(--ok)}
+.vfbtn.no{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+/* FILL */
+.fillsent{font-size:calc(1.22rem*var(--fs));font-weight:900;line-height:1.6;margin:6px 4px 4px}
+.blank{display:inline-block;min-width:78px;border-bottom:3px solid var(--accent);margin:0 4px;padding:0 6px;color:var(--accent)}
+.blank.ok{color:#34d399}.blank.no{color:var(--no);border-color:var(--no)}
+.wbank{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:14px 0 4px}
+.wchip{padding:11px 16px;border:2px solid var(--line);border-radius:14px;background:transparent;color:var(--ink);font-size:calc(1.02rem*var(--fs));font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+.wchip:active{transform:scale(.95)}
+.wchip.ok{background:var(--ok);color:#06251a;border-color:var(--ok)}
+.wchip.no{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+/* MATCH */
+.mboard{display:flex;flex-direction:column;gap:8px;margin:4px 0}
+.mitem{display:flex;align-items:center;gap:8px;min-height:48px;padding:9px 11px;border:2px solid var(--line);border-radius:14px;background:transparent;color:var(--ink);font-weight:800;font-size:calc(.98rem*var(--fs));cursor:pointer;font-family:inherit;text-align:left;transition:.15s}
+.mitem .mlbl{flex:1}
+.mitem.active{border-color:var(--accent2);box-shadow:0 0 0 2px rgba(251,146,60,.4) inset}
+.mslot{min-width:74px;text-align:center;font-size:.74rem;font-weight:900;padding:5px 7px;border-radius:10px;background:var(--line);color:var(--soft)}
+.mslot.set{background:rgba(167,139,250,.25);color:#ddd6fe}
+.mitem.ok{background:rgba(52,211,153,.16);border-color:var(--ok)}.mitem.ok .mslot{background:var(--ok);color:#06251a}
+.mitem.no{background:rgba(248,113,113,.14);border-color:var(--no)}.mitem.no .mslot{background:var(--no);color:#3a0a0a}
+.mcats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 2px}
+.mcat{min-height:44px;padding:9px 13px;border:2px solid var(--line);border-radius:13px;background:transparent;color:var(--ink);font-weight:900;font-size:calc(.92rem*var(--fs));cursor:pointer;font-family:inherit;transition:.15s}
+.mcat:active{transform:scale(.95)}
+.mintro{font-size:.82rem;font-weight:800;color:var(--soft);margin:2px 0 10px}
+/* ORDER (linha do tempo) */
+.oseq{display:flex;flex-direction:column;gap:8px;margin:6px 0 4px;min-height:40px}
+.oslot{display:flex;align-items:center;gap:9px;min-height:46px;padding:8px 11px;border:2px dashed var(--line);border-radius:14px;color:var(--soft);font-weight:800;font-size:calc(.96rem*var(--fs));font-family:inherit;background:transparent;cursor:pointer;text-align:left;width:100%}
+.oslot.filled{border-style:solid;color:var(--ink);background:rgba(167,139,250,.1)}
+.oslot.ok{border-color:var(--ok);background:rgba(52,211,153,.14)}
+.oslot.no{border-color:var(--no);background:rgba(248,113,113,.12)}
+.onum{min-width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem;background:var(--accent2);color:#3a1a00}
+.opool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 2px}
+.opiece{padding:11px 14px;border:2px solid var(--accent);border-radius:13px;background:transparent;color:var(--ink);font-weight:800;font-size:calc(.98rem*var(--fs));cursor:pointer;font-family:inherit;transition:.15s}
+.opiece:active{transform:scale(.95)}
+.opiece.used{opacity:.25;pointer-events:none}
+.ocorrect{font-size:.85rem;font-weight:800;color:var(--soft);margin-top:8px;line-height:1.4}
+/* OPEN */
+.writeline{height:46px;border-bottom:3px dashed var(--line);margin:10px 4px 14px;display:flex;align-items:flex-end;justify-content:center;color:var(--soft);font-weight:700;font-size:.82rem;padding-bottom:4px}
+.hint{font-size:.9rem;font-weight:800;color:var(--soft);margin-bottom:10px}
+.reveal{display:none;margin:8px 0 4px;padding:13px 14px;border-radius:14px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.4);
+  font-weight:800;font-size:calc(1.02rem*var(--fs));line-height:1.4;color:var(--ink)}
+.reveal.show{display:block}
+.reveal .lab{display:block;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.selfwrap{display:none;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.selfwrap.show{display:flex}
+.selfbtn{flex:1;min-width:96px;padding:12px 8px;border:2px solid var(--line);border-radius:14px;background:transparent;color:var(--ink);font-weight:900;font-size:.86rem;cursor:pointer;font-family:inherit;transition:.15s}
+.selfbtn .big{display:block;font-size:1.5rem;margin-bottom:2px}
+.selfbtn:active{transform:scale(.95)}
+.selfbtn.acertei.sel{background:var(--ok);color:#06251a;border-color:var(--ok)}
+.selfbtn.parcial.sel{background:var(--mid);color:#3a2c00;border-color:var(--mid)}
+.selfbtn.errei.sel{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+.fb{margin-top:14px;font-size:calc(1.02rem*var(--fs));font-weight:900;min-height:1.3em}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}.fb.mid{color:var(--mid)}
+.next{margin-top:16px;width:100%;height:54px;border:none;border-radius:16px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#1a1030;font-size:1.08rem;font-weight:900;cursor:pointer;display:none;font-family:inherit}
+.next.show{display:block}
+.next:active{transform:scale(.97)}
+.fim .big{font-size:4rem}
+.fim .score{font-size:1.7rem;font-weight:900;color:var(--accent);margin:8px 0 2px}
+.fim .sub{font-weight:800;color:var(--soft);font-size:.95rem;margin-bottom:6px}
+.intro p{font-size:calc(1rem*var(--fs));font-weight:700;line-height:1.5;color:var(--soft);margin:10px 0}
+.themewrap{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:8px 0 4px}
+.themechip{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:96px;flex:1 1 96px;max-width:150px;padding:11px 10px;border:2px solid var(--line);border-radius:15px;background:transparent;color:var(--soft);font-weight:800;font-size:.8rem;cursor:pointer;font-family:inherit;transition:.15s;opacity:.5}
+.themechip .tem{font-size:1.5rem}
+.themechip.on{opacity:1;color:var(--ink);border-color:var(--accent);background:linear-gradient(135deg,rgba(167,139,250,.22),rgba(251,146,60,.15))}
+.themechip:active{transform:scale(.95)}
+.themehint{color:var(--no)!important;font-weight:900;font-size:.85rem;min-height:1em;margin:4px 0!important}
+.startnote{font-size:.8rem;margin-top:8px}
+.sizewrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0 4px}
+.sizebtn{min-width:64px;padding:16px 10px;border:2px solid var(--accent2);border-radius:16px;background:transparent;color:var(--ink);font-size:1.3rem;font-weight:900;cursor:pointer;font-family:inherit;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:2px}
+.sizebtn .sl{font-size:.6rem;font-weight:800;color:var(--soft);text-transform:uppercase;letter-spacing:.5px}
+.sizebtn:active{transform:scale(.95)}
+.sizebtn.sel{background:linear-gradient(135deg,rgba(167,139,250,.25),rgba(251,146,60,.18));border-color:var(--accent)}
+.endbtns{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.endbtn{width:100%;padding:14px 16px;border:2px solid var(--line);border-radius:15px;background:transparent;color:var(--ink);font-size:1rem;font-weight:900;cursor:pointer;font-family:inherit;transition:.15s}
+.endbtn.redo{border-color:var(--accent);background:linear-gradient(90deg,rgba(167,139,250,.22),rgba(251,146,60,.15))}
+.endbtn:active{transform:scale(.97)}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Simulado &mdash; Mem&oacute;ria e Hist&oacute;ria</span>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+  </div>
+  <div class="bar"><span id="bar"></span></div>
+  <div class="stage"><div class="card" id="card"></div></div>
+</div>
+<script>
+/* ============================================================
+   BANCO DE QUESTÕES — História Y2 · Unidade 2 "Memória e História"
+   PT puro. Tudo ancorado em trabalho/2tri_historia/_roteiro.md.
+   Temas (th): b1 memória | b2 ficha | b3 linha do tempo | b4 documentos | b5 festas
+   ============================================================ */
+
+/* ---- MÚLTIPLA ESCOLHA ---- */
+const MC = [
+ /* B1 — memória e registros */
+ {th:'b1',fig:"\u{1F9E0}",q:"O que a <b>memória</b> guarda?",opts:[["Histórias e momentos importantes",1],["O preço do mercado",0],["O que vai acontecer amanhã",0]]},
+ {th:'b1',fig:"\u{1F4F8}",q:"Qual destes é uma <b>pista do passado</b> (uma fonte)?",opts:[["Uma foto antiga",1],["Um foguete novo",0],["Um robô do futuro",0]]},
+ {th:'b1',fig:"\u{1F3DB}️",q:"Onde guardamos memórias para todos verem e <b>aprenderem</b>?",opts:[["No museu",1],["No mercado",0],["No parque de diversões",0]]},
+ {th:'b1',fig:"\u{1F4DA}",q:"Onde ficam guardados documentos e papéis <b>antigos</b>?",opts:[["No arquivo",1],["Na padaria",0],["No cinema",0]]},
+ {th:'b1',fig:"\u{1F475}",q:"Quando a vovó conta <b>histórias da família</b>, isso é...",opts:[["Guardar a memória",1],["Esquecer tudo",0],["Inventar mentira",0]]},
+ {th:'b1',fig:"\u{1F4DC}",q:"Por que é importante <b>preservar memórias</b>?",opts:[["Para conhecer nossa história",1],["Para perder o passado",0],["Para não lembrar de nada",0]]},
+ {th:'b1',fig:"\u{2709}️",q:"Cartas e fotos antigas servem para...",opts:[["Contar a história da família",1],["Cozinhar o jantar",0],["Dirigir um carro",0]]},
+ /* B2 — ficha do objeto */
+ {th:'b2',fig:"\u{1F4CB}",q:"A <b>ficha do objeto</b> serve para...",opts:[["Descrever um objeto",1],["Cozinhar uma receita",0],["Desenhar o céu",0]]},
+ {th:'b2',fig:"\u{1F4DD}",q:"O que a <b>ficha do objeto</b> pergunta?",opts:[["Para que serve o objeto",1],["O preço no mercado",0],["A cor do céu",0]]},
+ {th:'b2',fig:"\u{1F9F8}",q:"Quem é o <b>dono do objeto</b> na ficha?",opts:[["A pessoa de quem é o objeto",1],["O vendedor da loja",0],["O motorista do ônibus",0]]},
+ {th:'b2',fig:"\u{1F50D}",q:"Transformar um objeto em <b>registro</b> é...",opts:[["Observar e descrever ele",1],["Jogar ele fora",0],["Esconder ele",0]]},
+ /* B3 — linha do tempo */
+ {th:'b3',fig:"\u{1F4F1}",q:"Qual registro é o <b>mais moderno</b> (de hoje)?",opts:[["Redes sociais",1],["Carta",0],["Jornal",0]]},
+ {th:'b3',fig:"\u{2709}️",q:"Qual destes é um registro <b>antigo</b>?",opts:[["Carta",1],["Foto digital",0],["Redes sociais",0]]},
+ {th:'b3',fig:"\u{1F4F7}",q:"No tempo dos <b>bisavós</b>, as fotos ficavam guardadas...",opts:[["No álbum de fotos",1],["No celular",0],["Na internet",0]]},
+ {th:'b3',fig:"\u{1F4F1}",q:"Hoje tiramos foto e guardamos no...",opts:[["Celular (foto digital)",1],["Álbum de papel só",0],["Jornal",0]]},
+ {th:'b3',fig:"\u{1F4AC}",q:"As <b>redes sociais</b> servem para...",opts:[["Compartilhar memórias na hora",1],["Votar",0],["Dirigir",0]]},
+ {th:'b3',fig:"\u{1F4F0}",q:"O <b>jornal</b> serve para...",opts:[["Registrar notícias",1],["Guardar vacina",0],["Dirigir",0]]},
+ {th:'b3',fig:"\u{2709}️",q:"A <b>carta</b> era usada para...",opts:[["Mandar mensagem pessoal escrita",1],["Tirar foto",0],["Votar",0]]},
+ {th:'b3',fig:"\u{1F4D4}",q:"O <b>diário</b> é um jeito de...",opts:[["Registrar memórias só suas",1],["Vender coisas",0],["Cozinhar",0]]},
+ {th:'b3',fig:"\u{1F4A1}",q:"O que <b>mudou</b> as formas de registrar memórias ao longo do tempo?",opts:[["A tecnologia (as invenções)",1],["A comida",0],["A cor das casas",0]]},
+ {th:'b3',fig:"\u{23F3}",q:"Qual veio <b>depois</b>: álbum de fotos ou foto digital?",opts:[["Foto digital",1],["Álbum de fotos",0]]},
+ {th:'b3',fig:"\u{23F3}",q:"Qual veio <b>antes</b>: foto digital ou redes sociais?",opts:[["Foto digital",1],["Redes sociais",0]]},
+ {th:'b3',fig:"\u{1F4F1}",q:"A <b>foto digital</b> começou de quando...",opts:[["O papai e a mamãe eram crianças",1],["Os dinossauros viviam",0],["Ontem à noite",0]]},
+ {th:'b3',fig:"\u{1F310}",q:"Qual usamos para falar com amigos na <b>internet</b> hoje?",opts:[["Redes sociais",1],["Carta",0],["Diário",0]]},
+ /* B4 — documentos pessoais */
+ {th:'b4',fig:"\u{1F476}",q:"Qual é o <b>primeiro documento</b>, de quando a pessoa nasce?",opts:[["Certidão de nascimento",1],["CNH",0],["Título eleitoral",0]]},
+ {th:'b4',fig:"\u{1F5F3}️",q:"Qual documento serve para <b>votar</b>?",opts:[["Título eleitoral",1],["Certidão de nascimento",0],["Carteira de vacinação",0]]},
+ {th:'b4',fig:"\u{1F697}",q:"Qual documento autoriza a <b>dirigir</b>?",opts:[["CNH",1],["Identidade (RG)",0],["Certidão de nascimento",0]]},
+ {th:'b4',fig:"\u{1F489}",q:"Qual documento mostra as <b>vacinas</b> que você tomou?",opts:[["Carteira de vacinação",1],["Título eleitoral",0],["CNH",0]]},
+ {th:'b4',fig:"\u{1FAAA}",q:"Qual documento tem sua <b>foto</b> e identifica você?",opts:[["Identidade (RG)",1],["Certidão de nascimento",0],["Carteira de vacinação",0]]},
+ {th:'b4',fig:"\u{1F4C4}",q:"O que os <b>documentos pessoais</b> guardam?",opts:[["Informações importantes sobre você",1],["Receitas de bolo",0],["Piadas",0]]},
+ {th:'b4',fig:"\u{1F4DC}",q:"A <b>certidão de nascimento</b> mostra...",opts:[["Onde e quando você nasceu",1],["Sua nota na prova",0],["Sua comida favorita",0]]},
+ {th:'b4',fig:"\u{1F3CD}️",q:"Quem vai <b>dirigir</b> um carro precisa de...",opts:[["CNH",1],["Título eleitoral",0],["Carteira de vacinação",0]]},
+ /* B5 — festas do Brasil */
+ {th:'b5',fig:"\u{1F402}",q:"Em qual festa os bois <b>Garantido e Caprichoso</b> disputam?",opts:[["Festival de Parintins",1],["Festa da Uva",0],["Maracatu",0]]},
+ {th:'b5',fig:"\u{1F30E}",q:"Onde acontece o <b>Festival de Parintins</b>?",opts:[["No Amazonas (Norte)",1],["No Sul",0],["Em São Paulo",0]]},
+ {th:'b5',fig:"\u{1F347}",q:"Qual festa celebra a <b>colheita da uva</b> e os imigrantes italianos?",opts:[["Festa da Uva",1],["Festival de Parintins",0],["Maracatu",0]]},
+ {th:'b5',fig:"\u{1F3D4}️",q:"Onde acontece a <b>Festa da Uva</b>?",opts:[["Na região Sul",1],["No Norte",0],["No Nordeste",0]]},
+ {th:'b5',fig:"\u{1F404}",q:"Qual festa conta a história da <b>morte e ressurreição de um boi</b>?",opts:[["Bumba-meu-boi",1],["Cavalhada",0],["Festa da Uva",0]]},
+ {th:'b5',fig:"\u{1F40E}",q:"Qual festa tem batalha de <b>mouros e cristãos a cavalo</b>?",opts:[["Cavalhada",1],["Festival de Parintins",0],["Festa Junina",0]]},
+ {th:'b5',fig:"\u{1F525}",q:"Qual festa tem <b>bandeirinhas, quadrilha e fogueira</b>?",opts:[["Festa Junina",1],["Carnaval",0],["Maracatu",0]]},
+ {th:'b5',fig:"\u{1F3AD}",q:"Qual festa tem <b>desfiles, fantasias e blocos</b> no Brasil todo?",opts:[["Carnaval",1],["Festa da Uva",0],["Cavalhada",0]]},
+ {th:'b5',fig:"\u{1F941}",q:"O <b>Maracatu</b>, de Pernambuco, celebra a herança...",opts:[["Afro-brasileira",1],["Italiana",0],["Japonesa",0]]},
+ {th:'b5',fig:"\u{1F389}",q:"As festas e tradições ajudam a guardar a...",opts:[["Memória e a cultura",1],["Lição de casa",0],["Lista do mercado",0]]},
+ {th:'b5',fig:"\u{1F46A}",q:"Todas as famílias comemoram do <b>mesmo jeito</b>?",opts:[["Não, cada uma de um jeito",1],["Sim, tudo igual",0]]},
+ {th:'b5',fig:"\u{1F33D}",q:"Em que mês é a <b>Festa Junina</b>?",opts:[["Junho",1],["Dezembro",0],["Março",0]]},
+ {th:'b5',fig:"\u{1F1EE}\u{1F1F9}",q:"A <b>Festa da Uva</b> celebra a cultura de quais imigrantes?",opts:[["Italianos",1],["Japoneses",0],["Egípcios",0]]},
+ {th:'b3',fig:"\u{1F4BB}",q:"Onde a <b>foto digital</b> fica guardada?",opts:[["No celular ou computador",1],["Só no álbum de papel",0],["No jornal",0]]},
+ {th:'b4',fig:"\u{1F4C5}",q:"Onde está escrito <b>quando você nasceu</b>?",opts:[["Na certidão de nascimento",1],["Na CNH",0],["No título eleitoral",0]]},
+ {th:'b5',fig:"\u{1F404}",q:"O <b>Bumba-meu-boi</b> acontece em quais regiões?",opts:[["Norte e Nordeste",1],["Só no Sul",0],["Só em São Paulo",0]]},
+ {th:'b1',fig:"\u{1F333}",q:"O que ajuda a manter as <b>raízes da família</b> vivas?",opts:[["Guardar as memórias",1],["Esquecer tudo",0],["Jogar as fotos fora",0]]}
+];
+
+/* ---- VERDADEIRO / FALSO ---- */
+const VF = [
+ /* B1 */
+ {th:'b1',fig:"\u{1F9E0}",q:"A memória guarda <b>momentos importantes</b>.",ans:true},
+ {th:'b1',fig:"\u{1F3DB}️",q:"O <b>museu</b> guarda memórias para as pessoas aprenderem.",ans:true},
+ {th:'b1',fig:"\u{1F4F8}",q:"Uma <b>foto antiga</b> é uma pista do passado.",ans:true},
+ {th:'b1',fig:"\u{1F475}",q:"Quando a vovó conta histórias, ela guarda a <b>memória da família</b>.",ans:true},
+ {th:'b1',fig:"\u{1F52E}",q:"O <b>futuro</b> é uma pista do passado.",ans:false},
+ {th:'b1',fig:"\u{2709}️",q:"Cartas e fotos ajudam a contar a <b>história da família</b>.",ans:true},
+ /* B2 */
+ {th:'b2',fig:"\u{1F4CB}",q:"A <b>ficha do objeto</b> descreve um objeto.",ans:true},
+ {th:'b2',fig:"\u{1F4B0}",q:"Na ficha do objeto a gente escreve o <b>preço do mercado</b>.",ans:false},
+ {th:'b2',fig:"\u{2753}",q:"A ficha do objeto pergunta <b>por que ele é importante</b>.",ans:true},
+ /* B3 */
+ {th:'b3',fig:"\u{1F4F1}",q:"As <b>redes sociais</b> são um registro moderno.",ans:true},
+ {th:'b3',fig:"\u{2709}️",q:"A <b>carta</b> é um registro moderno de hoje.",ans:false},
+ {th:'b3',fig:"\u{1F4F7}",q:"Antigamente as fotos ficavam em <b>álbuns de papel</b>.",ans:true},
+ {th:'b3',fig:"\u{1F4F1}",q:"Hoje guardamos fotos no <b>celular</b>.",ans:true},
+ {th:'b3',fig:"\u{1F4F0}",q:"O <b>jornal</b> serve para dirigir.",ans:false},
+ {th:'b3',fig:"\u{1F4A1}",q:"As formas de registrar memórias mudaram com a <b>tecnologia</b>.",ans:true},
+ {th:'b3',fig:"\u{1F4D4}",q:"O <b>diário</b> é um registro pessoal.",ans:true},
+ {th:'b3',fig:"\u{23F3}",q:"A <b>foto digital</b> veio antes da carta.",ans:false},
+ {th:'b3',fig:"\u{1F4F0}",q:"O <b>jornal</b> registra notícias e eventos importantes.",ans:true},
+ /* B4 */
+ {th:'b4',fig:"\u{1F476}",q:"A <b>certidão de nascimento</b> é o primeiro documento.",ans:true},
+ {th:'b4',fig:"\u{1F697}",q:"A <b>CNH</b> serve para votar.",ans:false},
+ {th:'b4',fig:"\u{1F5F3}️",q:"O <b>título eleitoral</b> serve para votar.",ans:true},
+ {th:'b4',fig:"\u{1F489}",q:"A <b>carteira de vacinação</b> mostra as vacinas.",ans:true},
+ {th:'b4',fig:"\u{1FAAA}",q:"A <b>identidade (RG)</b> tem foto e identifica a pessoa.",ans:true},
+ {th:'b4',fig:"\u{1F4C4}",q:"Documentos pessoais guardam <b>informações importantes</b>.",ans:true},
+ /* B5 */
+ {th:'b5',fig:"\u{1F402}",q:"No <b>Parintins</b> disputam os bois Garantido e Caprichoso.",ans:true},
+ {th:'b5',fig:"\u{1F347}",q:"A <b>Festa da Uva</b> acontece no Sul.",ans:true},
+ {th:'b5',fig:"\u{1F3AD}",q:"O <b>Carnaval</b> acontece em todo o Brasil.",ans:true},
+ {th:'b5',fig:"\u{1F525}",q:"A <b>Festa Junina</b> tem fogueira e quadrilha.",ans:true},
+ {th:'b5',fig:"\u{1F404}",q:"O <b>Bumba-meu-boi</b> conta a história de um boi.",ans:true},
+ {th:'b5',fig:"\u{1F40E}",q:"A <b>Cavalhada</b> tem cavaleiros (mouros e cristãos).",ans:true},
+ {th:'b5',fig:"\u{1F941}",q:"O <b>Maracatu</b> é uma festa do Japão.",ans:false},
+ {th:'b5',fig:"\u{1F46A}",q:"Toda família comemora as festas do <b>mesmo jeito</b>.",ans:false},
+ {th:'b3',fig:"\u{1F4F7}",q:"O <b>álbum de fotos</b> é mais antigo que as redes sociais.",ans:true},
+ {th:'b4',fig:"\u{1F697}",q:"Para dirigir um carro a pessoa precisa da <b>CNH</b>.",ans:true},
+ {th:'b5',fig:"\u{1F30E}",q:"O <b>Festival de Parintins</b> acontece no Amazonas.",ans:true},
+ {th:'b1',fig:"\u{1F9F8}",q:"Objetos antigos podem contar <b>histórias da família</b>.",ans:true}
+];
+
+/* ---- COMPLETAR ---- */
+const FILL = [
+ {th:'b1',pre:"Guardamos memórias no",post:".",ans:"museu",bank:["mercado","parque"]},
+ {th:'b1',pre:"Uma foto antiga é uma",post:"do passado.",ans:"pista",bank:["festa","comida"]},
+ {th:'b2',pre:"A ficha do objeto serve para",post:"o objeto.",ans:"descrever",bank:["comer","jogar fora"]},
+ {th:'b3',pre:"As redes sociais são um registro",post:".",ans:"moderno",bank:["antigo"]},
+ {th:'b3',pre:"A carta é um registro",post:".",ans:"antigo",bank:["moderno","digital"]},
+ {th:'b3',pre:"Antigamente as fotos ficavam no",post:"de fotos.",ans:"álbum",bank:["celular","jornal"]},
+ {th:'b3',pre:"Hoje guardamos as fotos no",post:".",ans:"celular",bank:["álbum","papel"]},
+ {th:'b3',pre:"O",post:"registra as notícias.",ans:"jornal",bank:["diário","carta"]},
+ {th:'b3',pre:"O",post:"é um registro só seu, bem pessoal.",ans:"diário",bank:["jornal","museu"]},
+ {th:'b4',pre:"Para votar usamos o título",post:".",ans:"eleitoral",bank:["de motorista"]},
+ {th:'b4',pre:"Para dirigir precisamos da",post:".",ans:"CNH",bank:["certidão","identidade"]},
+ {th:'b4',pre:"O primeiro documento é a",post:"de nascimento.",ans:"certidão",bank:["CNH","identidade"]},
+ {th:'b4',pre:"A carteira de",post:"mostra as vacinas.",ans:"vacinação",bank:["motorista","identidade"]},
+ {th:'b5',pre:"No Parintins disputam os bois Garantido e",post:".",ans:"Caprichoso",bank:["Maracatu","Cavalhada"]},
+ {th:'b5',pre:"A Festa da",post:"celebra a colheita e os italianos.",ans:"Uva",bank:["Junina","Carnaval"]},
+ {th:'b5',pre:"A Festa Junina tem",post:", quadrilha e fogueira.",ans:"bandeirinhas",bank:["neve","gelo"]},
+ {th:'b5',pre:"As festas guardam a memória e a",post:".",ans:"cultura",bank:["lição","lista"]},
+ {th:'b5',pre:"O Bumba-meu-boi conta a história de um",post:".",ans:"boi",bank:["cavalo","peixe"]}
+];
+
+/* ---- ASSOCIAR ---- */
+const MATCH = [
+ {th:'b3',t:"Coloque cada registro no grupo certo.",mintro:"Toque no registro, depois no grupo.",
+  cats:["Antigo","Moderno / digital"],
+  items:[["\u{1F4F0} Jornal",0],["\u{2709}️ Carta",0],["\u{1F4D4} Diário",0],["\u{1F4F7} Álbum de fotos",0],["\u{1F4F1} Foto digital",1],["\u{1F4BB} Redes sociais",1]]},
+ {th:'b3',t:"Antigo ou moderno? Coloque cada um no grupo.",mintro:"Toque no registro, depois no grupo.",
+  cats:["Antigo","Moderno / digital"],
+  items:[["\u{2709}️ Carta",0],["\u{1F4F1} Foto digital",1],["\u{1F4F0} Jornal",0],["\u{1F4BB} Redes sociais",1]]},
+ {th:'b5',t:"Ligue cada festa à sua região.",mintro:"Toque na festa, depois na região.",
+  cats:["Norte (Amazonas)","Sul","Pernambuco (Nordeste)"],
+  items:[["Festival de Parintins",0],["Festa da Uva",1],["Maracatu",2]]},
+ {th:'b5',t:"Ligue cada festa à sua característica.",mintro:"Toque na festa, depois na característica.",
+  cats:["Parintins","Festa da Uva","Bumba-meu-boi","Cavalhada"],
+  items:[["Bois Garantido e Caprichoso",0],["Colheita da uva e italianos",1],["Morte e ressurreição do boi",2],["Mouros e cristãos a cavalo",3]]},
+ {th:'b5',t:"Ligue cada festa à sua característica.",mintro:"Toque na festa, depois na característica.",
+  cats:["Carnaval","Festa Junina","Maracatu"],
+  items:[["Desfiles, fantasias e blocos",0],["Bandeirinhas, quadrilha e fogueira",1],["Cortejo real e herança afro-brasileira",2]]},
+ {th:'b4',t:"Ligue cada documento ao que ele serve.",mintro:"Toque no documento, depois na função.",
+  cats:["Certidão de nascimento","Identidade (RG)","Título eleitoral","CNH","Carteira de vacinação"],
+  items:[["Mostra que a pessoa nasceu",0],["Identifica a pessoa, com foto",1],["Serve para votar",2],["Autoriza dirigir",3],["Mostra as vacinas tomadas",4]]},
+ {th:'b4',t:"Ligue cada documento ao que ele serve.",mintro:"Toque no documento, depois na função.",
+  cats:["Certidão de nascimento","Título eleitoral","CNH"],
+  items:[["De quando a pessoa nasceu",0],["Para votar",1],["Para dirigir",2]]},
+ {th:'b1',t:"Ligue cada pista do passado ao que ela é.",mintro:"Toque na pista, depois no tipo.",
+  cats:["Foto","Carta","Documento"],
+  items:[["Uma imagem de um momento",0],["Uma mensagem escrita à mão",1],["Papel oficial com seus dados",2]]}
+];
+
+/* ---- ORDENAR (linha do tempo) — items já na ordem CERTA ---- */
+const ORDER = [
+ {th:'b3',t:"Coloque os registros do mais ANTIGO ao mais MODERNO.",
+  items:["\u{1F4F0} Jornal","\u{2709}️ Carta","\u{1F4D4} Diário","\u{1F4F7} Álbum de fotos","\u{1F4F1} Foto digital","\u{1F4BB} Redes sociais"]},
+ {th:'b3',t:"Do mais antigo ao mais novo: coloque em ordem.",
+  items:["\u{1F4F7} Álbum de fotos","\u{1F4F1} Foto digital","\u{1F4BB} Redes sociais"]},
+ {th:'b3',t:"Do mais antigo ao mais novo: coloque em ordem.",
+  items:["\u{2709}️ Carta","\u{1F4F7} Álbum de fotos","\u{1F4F1} Foto digital","\u{1F4BB} Redes sociais"]},
+ {th:'b3',t:"Do mais antigo ao mais novo: coloque em ordem.",
+  items:["\u{1F4D4} Diário","\u{1F4F1} Foto digital","\u{1F4BB} Redes sociais"]},
+ {th:'b3',t:"Coloque em ordem: dos bisavós até hoje.",
+  items:["\u{1F4F7} Álbum de fotos (bisavós)","\u{1F4F1} Foto digital (seus pais)","\u{1F4BB} Redes sociais (hoje)"]},
+ {th:'b3',t:"Coloque os registros do mais ANTIGO ao mais MODERNO.",
+  items:["\u{1F4F0} Jornal","\u{1F4D4} Diário","\u{1F4F7} Álbum de fotos","\u{1F4BB} Redes sociais"]}
+];
+
+/* ---- RESPOSTA ABERTA (pensar, revelar, autoavaliar) ---- */
+const OPEN = [
+ {th:'b1',fig:"\u{1F4F8}",q:"Diga uma <b>pista do passado</b> (uma fonte).",men:"Uma foto antiga, uma carta, um objeto antigo ou um documento."},
+ {th:'b1',fig:"\u{1F3DB}️",q:"Onde guardamos memórias para as pessoas <b>aprenderem</b>?",men:"No museu (e no arquivo)."},
+ {th:'b2',fig:"\u{1F4CB}",q:"Para que serve a <b>ficha do objeto</b>?",men:"Para descrever um objeto: de quem é, para que serve e por que é importante."},
+ {th:'b3',fig:"\u{1F4F1}",q:"Diga um registro <b>moderno</b> (de hoje).",men:"Foto digital ou redes sociais."},
+ {th:'b3',fig:"\u{2709}️",q:"Diga um registro <b>antigo</b>.",men:"Jornal, carta, diário ou álbum de fotos."},
+ {th:'b4',fig:"\u{1F4C4}",q:"Diga um <b>documento pessoal</b>.",men:"Certidão de nascimento, identidade, título eleitoral, CNH ou carteira de vacinação."},
+ {th:'b5',fig:"\u{1F389}",q:"Diga uma <b>festa do Brasil</b>.",men:"Parintins, Festa da Uva, Bumba-meu-boi, Cavalhada, Carnaval, Festa Junina ou Maracatu."},
+ {th:'b5',fig:"\u{2764}️",q:"Qual é a sua <b>festa preferida</b> e por quê?",men:"Resposta livre — pense numa festa que sua família curte e por que ela é especial."}
+];
+
+/* ================= TEMAS ================= */
+const THEMES=[
+ {k:'b1',pt:'Memória e registros',emo:'\u{1F9E0}'},
+ {k:'b2',pt:'Ficha do objeto',emo:'\u{1F4CB}'},
+ {k:'b3',pt:'Linha do tempo',emo:'\u{23F3}'},
+ {k:'b4',pt:'Documentos',emo:'\u{1F4C4}'},
+ {k:'b5',pt:'Festas do Brasil',emo:'\u{1F389}'}
+];
+/* peso relativo por tema — Linha do tempo e Festas dominam (calibração pedagogico) */
+const TH_WEIGHT={b1:16,b2:10,b3:28,b4:18,b5:28};
+
+/* ================= MOTOR ================= */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const $=id=>document.getElementById(id);
+let deck=[], cur=0, score=0, total=0, fontStep=0, roundSize=25, wrong=[];
+let selThemes=new Set(THEMES.map(t=>t.k));
+
+function makeItem(type,src){
+  const it={_type:type,_src:src,type:type,...src};
+  if(type==='mc') it.opts=shuffle(src.opts.map(p=>({t:p[0],ok:!!p[1]})));
+  if(type==='fill') it.chips=shuffle([{w:src.ans,ok:true},...src.bank.map(w=>({w,ok:false}))]);
+  if(type==='match'){it.cho=new Array(src.items.length).fill(-1);it.active=0;it.locked=false;}
+  if(type==='order'){it.order=shuffle(src.items.map((t,i)=>({t,rank:i})));it.seq=[];it.locked=false;}
+  return it;
+}
+
+function pickTheme(tag,count){
+  const byType={mc:[],fill:[],vf:[],open:[],order:[],match:[]};
+  const add=(arr,type)=>arr.forEach(o=>{if(o.th===tag)byType[type].push({type,src:o});});
+  add(MC,'mc');add(FILL,'fill');add(VF,'vf');add(OPEN,'open');add(ORDER,'order');add(MATCH,'match');
+  Object.keys(byType).forEach(k=>shuffle(byType[k]));
+  const order=['mc','vf','fill','order','open','match'];
+  const out=[]; let guard=0;
+  while(out.length<count && guard<2000){
+    let any=false;
+    for(const t of order){ if(out.length>=count)break; if(byType[t].length){out.push(byType[t].shift());any=true;} }
+    if(!any)break; guard++;
+  }
+  return out;
+}
+
+function buildDeck(n){
+  const tags=[...selThemes];
+  const sumW=tags.reduce((s,t)=>s+(TH_WEIGHT[t]||1),0)||1;
+  let picks=[];
+  tags.forEach(t=>{ picks=picks.concat(pickTheme(t,Math.round(n*(TH_WEIGHT[t]||1)/sumW))); });
+  picks=shuffle(picks);
+  if(picks.length>n) picks=picks.slice(0,n);
+  if(picks.length<n){
+    const used=new Set(picks.map(p=>p.src)); const rest=[];
+    const addAll=(arr,type)=>arr.forEach(o=>{if(selThemes.has(o.th)&&!used.has(o))rest.push({type,src:o});});
+    addAll(MC,'mc');addAll(VF,'vf');addAll(FILL,'fill');addAll(ORDER,'order');addAll(OPEN,'open');addAll(MATCH,'match');
+    shuffle(rest);
+    while(picks.length<n && rest.length) picks.push(rest.shift());
+  }
+  deck=shuffle(picks).map(p=>makeItem(p.type,p.src));
+  total=deck.length; cur=0; score=0; wrong=[];
+}
+
+function pushWrong(){const it=deck[cur];wrong.push({type:it._type,src:it._src});}
+function fs(d){fontStep=Math.max(-2,Math.min(3,fontStep+d));document.documentElement.style.setProperty('--fs',1+fontStep*0.12);}
+function esc(s){return String(s).replace(/<[^>]*>/g,'').replace(/"/g,'&quot;').replace(/'/g,"\\'");}
+function goHome(){if(confirm('Voltar ao menu do site?'))location.href='../index.html';}
+function say(txt){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='pt-BR';u.rate=.9;
+  const v=speechSynthesis.getVoices().find(v=>/Thalita|Antonio|Maria|pt-BR|pt_BR|Portuguese \(Brazil\)/i.test(v.lang+' '+v.name));if(v)u.voice=v;
+  speechSynthesis.speak(u);}catch(e){}}
+
+/* ---- telas ---- */
+function intro(){
+  $('bar').style.width='0%';
+  $('card').innerHTML=`<div class="intro">
+    <div class="qfig">\u{1F4DC}</div>
+    <div class="q">Vamos treinar para a prova!</div>
+    <p>Escolha os <b>temas</b> e quantas <b>perguntas</b> você quer.</p>
+    <div class="themewrap">
+      ${THEMES.map(t=>`<button class="themechip${selThemes.has(t.k)?' on':''}" onclick="toggleTheme('${t.k}')">
+        <span class="tem">${t.emo}</span><span>${t.pt}</span></button>`).join('')}
+    </div>
+    <p class="themehint" id="themehint"></p>
+    <p><b>Quantas perguntas?</b></p>
+    <div class="sizewrap">
+      ${[5,10,25,50,100].map(n=>`<button class="sizebtn${n===roundSize?' sel':''}" onclick="start(${n})">${n}<span class="sl">perguntas</span></button>`).join('')}
+    </div>
+    <p class="startnote">Toque na quantidade para começar.</p>
+  </div>`;
+}
+function toggleTheme(k){
+  if(selThemes.has(k)){ if(selThemes.size>1) selThemes.delete(k); }
+  else selThemes.add(k);
+  intro();
+}
+function start(n){
+  if(selThemes.size===0)return;
+  roundSize=n; buildDeck(n);
+  if(total===0){ const h=$('themehint'); if(h)h.textContent='Escolha ao menos um tema.'; return; }
+  render();
+}
+function render(){
+  $('bar').style.width=(cur/total*100)+'%';
+  const it=deck[cur];
+  ({mc:renderMC,vf:renderVF,open:renderOpen,fill:renderFill,match:renderMatch,order:renderOrder}[it.type])(it);
+}
+function head(it,label,cls){return `<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge ${cls}">${label}</span></div>
+  ${it.fig?`<div class="qfig">${it.fig}</div>`:''}${it.q?`<div class="q">${it.q}</div>`:''}
+  ${it.q?`<button class="speak" onclick="say('${esc(it.q)}')">&#128266; Ouvir</button>`:''}`;}
+function nextBtn(hidden){return `<button class="next" id="next" ${hidden?'style="display:none"':''} onclick="next()">${cur===total-1?'Ver resultado \u{1F389}':'Próxima →'}</button>`;}
+
+/* MC */
+function renderMC(it){
+  $('card').innerHTML=head(it,'Escolha','mc')+
+   `<div class="opts">${it.opts.map((o,i)=>`<button class="opt" onclick="ansMC(${i})">${o.t}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>`+nextBtn(false);
+}
+function ansMC(i){
+  const it=deck[cur], b=document.querySelectorAll('.opt');
+  b.forEach(x=>x.disabled=true);
+  if(it.opts[i].ok){b[i].classList.add('ok');$('fb').textContent='Acertou! \u{1F31F}';$('fb').className='fb ok';score++;}
+  else{b[i].classList.add('no');it.opts.forEach((o,k)=>{if(o.ok)b[k].classList.add('ok');});
+    $('fb').textContent='A resposta certa é a verde \u{1F60A}';$('fb').className='fb no';pushWrong();}
+  $('next').classList.add('show');
+}
+
+/* V/F */
+function renderVF(it){
+  $('card').innerHTML=head(it,'Verdadeiro ou Falso','vf')+
+   `<div class="vfwrap">
+      <button class="vfbtn" id="vT" onclick="ansVF(true)"><span class="big">✅</span>Verdadeiro</button>
+      <button class="vfbtn" id="vF" onclick="ansVF(false)"><span class="big">❌</span>Falso</button>
+    </div><div class="fb" id="fb"></div>`+nextBtn(false);
+}
+function ansVF(val){
+  const it=deck[cur], T=$('vT'),F=$('vF');
+  T.disabled=F.disabled=true;
+  const rightBtn=it.ans?T:F;
+  if(val===it.ans){rightBtn.classList.add('ok');$('fb').textContent='Acertou! \u{1F31F}';$('fb').className='fb ok';score++;}
+  else{(val?T:F).classList.add('no');rightBtn.classList.add('ok');
+    $('fb').textContent='A resposta certa é a verde \u{1F60A}';$('fb').className='fb no';pushWrong();}
+  $('next').classList.add('show');
+}
+
+/* COMPLETAR */
+function renderFill(it){
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge fill">Completar</span></div>
+   <div class="fillsent">${it.pre} <span class="blank" id="blank">_____</span> ${it.post}</div>
+   <button class="speak" onclick="say('${esc(it.pre+' '+it.ans+' '+it.post)}')">&#128266; Ouvir</button>
+   <div class="wbank">${it.chips.map((c,i)=>`<button class="wchip" onclick="ansFill(${i})">${c.w}</button>`).join('')}</div>
+   <div class="fb" id="fb"></div>`+nextBtn(false);
+}
+function ansFill(i){
+  const it=deck[cur], chips=document.querySelectorAll('.wchip');
+  chips.forEach(c=>c.disabled=true);
+  const chosen=it.chips[i];
+  $('blank').textContent=chosen.w;
+  if(chosen.ok){chips[i].classList.add('ok');$('blank').classList.add('ok');$('fb').textContent='Acertou! \u{1F31F}';$('fb').className='fb ok';score++;}
+  else{chips[i].classList.add('no');$('blank').classList.add('no');
+    it.chips.forEach((c,k)=>{if(c.ok)chips[k].classList.add('ok');});
+    $('blank').textContent=it.ans;$('blank').classList.remove('no');$('blank').classList.add('ok');
+    $('fb').textContent='A palavra certa é "'+it.ans+'" \u{1F60A}';$('fb').className='fb no';pushWrong();}
+  $('next').classList.add('show');
+}
+
+/* ASSOCIAR */
+function renderMatch(it){
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge match">Associar</span></div>
+   <div class="q">${it.t}</div>
+   <button class="speak" onclick="say('${esc(it.t)}')">&#128266; Ouvir</button>
+   <div class="mintro">${it.mintro||'Toque no item, depois na categoria.'}</div>
+   <div class="mboard" id="mboard"></div>
+   <div class="mcats" id="mcats">${it.cats.map((c,ci)=>`<button class="mcat" onclick="pickCat(${ci})">${c}</button>`).join('')}</div>
+   <div class="fb" id="fb"></div>
+   <button class="next" id="mcheck" style="display:none" onclick="checkMatch()">Verificar &#9989;</button>`+nextBtn(true);
+  drawMatch();
+}
+function drawMatch(){
+  const it=deck[cur];
+  $('mboard').innerHTML=it.items.map((m,mi)=>{
+    const cho=it.cho[mi];
+    const slot=cho>=0?`<span class="mslot set">${it.cats[cho]}</span>`:`<span class="mslot">?</span>`;
+    return `<button class="mitem${mi===it.active?' active':''}" id="mi${mi}" onclick="pickItem(${mi})">
+      <span class="mlbl">${m[0]}</span>${slot}</button>`;
+  }).join('');
+  const done=it.cho.every(c=>c>=0);
+  $('mcheck').style.display=done?'block':'none';
+}
+function pickItem(mi){const it=deck[cur];if(it.locked)return;it.active=mi;drawMatch();}
+function pickCat(ci){
+  const it=deck[cur];if(it.locked)return;
+  it.cho[it.active]=ci;
+  let nxt=it.cho.findIndex(c=>c<0); it.active=nxt<0?it.active:nxt;
+  drawMatch();
+}
+function checkMatch(){
+  const it=deck[cur];it.locked=true;
+  let right=0;
+  it.items.forEach((m,mi)=>{
+    const el=$('mi'+mi);el.disabled=true;
+    if(it.cho[mi]===m[1]){el.classList.add('ok');right++;}
+    else{el.classList.add('no');el.querySelector('.mslot').textContent=it.cats[m[1]];}
+  });
+  document.querySelectorAll('.mcat').forEach(c=>c.disabled=true);
+  $('mcheck').style.display='none';
+  const all=it.items.length;
+  score+=right/all;
+  if(right===all){$('fb').textContent='Tudo certo! \u{1F31F}';$('fb').className='fb ok';}
+  else{$('fb').textContent=right+' de '+all+' certos — o verde mostra a resposta \u{1F60A}';$('fb').className='fb mid';pushWrong();}
+  $('next').style.display='block';$('next').classList.add('show');
+}
+
+/* ORDENAR (linha do tempo) */
+function renderOrder(it){
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge order">Ordenar</span></div>
+   <div class="q">${it.t}</div>
+   <button class="speak" onclick="say('${esc(it.t)}')">&#128266; Ouvir</button>
+   <div class="mintro">Toque na ordem certa, do mais antigo ao mais novo. Toque de novo para tirar.</div>
+   <div class="oseq" id="oseq"></div>
+   <div class="opool" id="opool"></div>
+   <div class="fb" id="fb"></div>
+   <button class="next" id="ocheck" style="display:none" onclick="checkOrder()">Verificar &#9989;</button>`+nextBtn(true);
+  drawOrder();
+}
+function drawOrder(){
+  const it=deck[cur], n=it.order.length;
+  let seqHtml='';
+  for(let p=0;p<n;p++){
+    const chip=it.seq[p];
+    seqHtml+=chip!=null
+      ? `<button class="oslot filled" onclick="orderRemove(${p})"><span class="onum">${p+1}</span><span>${it.order[chip].t}</span></button>`
+      : `<div class="oslot"><span class="onum">${p+1}</span><span>...</span></div>`;
+  }
+  $('oseq').innerHTML=seqHtml;
+  $('opool').innerHTML=it.order.map((o,i)=>`<button class="opiece${it.seq.includes(i)?' used':''}" onclick="orderPlace(${i})">${o.t}</button>`).join('');
+  $('ocheck').style.display=it.seq.length===n?'block':'none';
+}
+function orderPlace(i){const it=deck[cur];if(it.locked)return;if(it.seq.includes(i))return;it.seq.push(i);drawOrder();}
+function orderRemove(p){const it=deck[cur];if(it.locked)return;it.seq.splice(p,1);drawOrder();}
+function checkOrder(){
+  const it=deck[cur];it.locked=true;
+  let right=0;
+  const slots=document.querySelectorAll('#oseq .oslot');
+  it.seq.forEach((chip,p)=>{
+    const ok=it.order[chip].rank===p;
+    if(ok){slots[p].classList.add('ok');right++;}else slots[p].classList.add('no');
+  });
+  document.querySelectorAll('.opiece').forEach(c=>c.classList.add('used'));
+  $('ocheck').style.display='none';
+  const all=it.order.length;
+  score+=right/all;
+  if(right===all){$('fb').innerHTML='Ordem certinha! \u{1F31F}';$('fb').className='fb ok';}
+  else{
+    const correct=it._src.items.join('  →  ');
+    $('fb').innerHTML=right+' de '+all+' no lugar certo \u{1F60A}<div class="ocorrect">Ordem certa: '+correct+'</div>';
+    $('fb').className='fb mid';pushWrong();
+  }
+  $('next').style.display='block';$('next').classList.add('show');
+}
+
+/* ABERTA */
+function renderOpen(it){
+  $('card').innerHTML=head(it,'Resposta aberta','open')+
+   `<div class="writeline">&#9999;&#65039; responda na sua cabeça</div>
+    <button class="next show" id="seebtn" onclick="reveal()">Ver resposta &#128065;&#65039;</button>
+    <div class="reveal" id="rev"><span class="lab">Resposta</span>${it.men}</div>
+    <div class="hint" id="selfhint" style="display:none">Você acertou?</div>
+    <div class="selfwrap" id="self">
+      <button class="selfbtn acertei" onclick="self('ok')"><span class="big">\u{1F604}</span>Acertei</button>
+      <button class="selfbtn parcial" onclick="self('mid')"><span class="big">\u{1F610}</span>Mais ou menos</button>
+      <button class="selfbtn errei" onclick="self('no')"><span class="big">\u{1F605}</span>Errei</button>
+    </div>
+    <div class="fb" id="fb"></div>`+nextBtn(true);
+}
+function reveal(){$('rev').classList.add('show');$('seebtn').style.display='none';$('selfhint').style.display='block';$('self').classList.add('show');}
+function self(v){
+  document.querySelectorAll('.selfbtn').forEach(b=>b.disabled=true);
+  if(v==='ok'){document.querySelector('.selfbtn.acertei').classList.add('sel');$('fb').textContent='Muito bem! \u{1F31F}';$('fb').className='fb ok';score++;}
+  else if(v==='mid'){document.querySelector('.selfbtn.parcial').classList.add('sel');$('fb').textContent='Quase lá! \u{1F44D}';$('fb').className='fb mid';score+=0.5;pushWrong();}
+  else{document.querySelector('.selfbtn.errei').classList.add('sel');$('fb').textContent='Agora você já sabe! \u{1F4AA}';$('fb').className='fb no';pushWrong();}
+  $('next').style.display='block';$('next').classList.add('show');
+}
+
+function next(){cur++;if(cur<total)render();else fim();}
+function redoWrong(){
+  const w=wrong.slice();
+  deck=shuffle(w).map(x=>makeItem(x.type,x.src));
+  total=deck.length;cur=0;score=0;wrong=[];
+  render();
+}
+function fim(){
+  $('bar').style.width='100%';
+  const s=Math.round(score*10)/10, pct=total?score/total:0;
+  const msg=pct>=.9?'Você arrasou! \u{1F3C6}':pct>=.6?'Muito bem! Continue treinando.':'Bom treino — tente de novo para aprender mais!';
+  const redoBtn=wrong.length?`<button class="endbtn redo" onclick="redoWrong()">↺ Refazer as erradas (${wrong.length})</button>`:'';
+  $('card').innerHTML=`<div class="fim"><div class="big">\u{1F3C6}</div>
+    <div class="score">${s} / ${total}</div>
+    <div class="sub">${msg}</div>
+    <div class="endbtns">
+      ${redoBtn}
+      <button class="endbtn" onclick="intro()">\u{1F3B2} Novo simulado</button>
+      <button class="endbtn" onclick="goHome()">\u{1F3E0} Menu do site</button>
+    </div></div>`;
+}
+
+/* starfield */
+(function(){var c=document.getElementById('starfield'),x=c.getContext('2d'),s=[];
+function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<140;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.1+.02});}
+function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}
+rz();addEventListener('resize',rz);d();})();
+if('speechSynthesis' in window){speechSynthesis.getVoices();}
+intro();
+</script>
+</body>
+</html>
