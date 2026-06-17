@@ -39,3 +39,6 @@ excluir/
 Thumbs.db
 .DS_Store
 *.tmp
+
+# brutos pesados Toddle (mantem MDs do trabalho versionados)
+trabalho/**/Toddle-*

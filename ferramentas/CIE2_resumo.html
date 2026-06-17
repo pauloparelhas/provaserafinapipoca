@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Study sheet — States of Matter</title>
+<style>
+:root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#38bdf8;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
+body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+#starfield{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.05rem;font-weight:800;cursor:pointer;padding:0 8px}
+.iconbtn:active{transform:scale(.9)}
+.flagbtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.4;filter:grayscale(1)}
+.flagbtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .flagbtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
+.wrap{flex:1;width:100%;max-width:600px;margin:0 auto;padding:16px 14px 40px}
+.hint{text-align:center;font-size:.84rem;font-weight:800;color:var(--soft);margin:2px 0 14px;line-height:1.4}
+.toolrow{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
+.toolbtn{border:2px solid var(--line);background:transparent;color:var(--soft);font-weight:800;font-size:.78rem;border-radius:16px;padding:7px 14px;cursor:pointer;font-family:inherit;min-height:44px}
+.toolbtn:active{transform:scale(.95)}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);box-shadow:0 10px 30px rgba(0,0,0,.28);margin-bottom:16px;overflow:hidden}
+.sechead{display:flex;align-items:center;gap:10px;padding:15px 16px;cursor:pointer;user-select:none}
+.sechead .si{font-size:1.7rem;filter:drop-shadow(0 4px 7px rgba(0,0,0,.3))}
+.sechead .st{flex:1;font-weight:900;font-size:calc(1.06rem*var(--fs));line-height:1.2}
+.sechead .st .str{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.78rem}
+body.show-tr .sechead .st .str{display:block}
+.sechead .chev{font-size:1rem;color:var(--soft);transition:transform .25s}
+.sec.open .chev{transform:rotate(180deg)}
+.secbody{display:none;padding:0 16px 16px}
+.sec.open .secbody{display:block}
+.listen{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border:2px solid var(--accent);background:transparent;color:var(--accent);font-weight:800;font-size:.85rem;border-radius:18px;padding:6px 16px;cursor:pointer;font-family:inherit;margin:2px 0 10px}
+.listen:active{transform:scale(.95)}
+.grp{border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin:8px 0;background:rgba(255,255,255,.03)}
+.grp .gname{font-weight:900;font-size:calc(1rem*var(--fs));display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.line{margin:8px 0 0;font-weight:700;font-size:calc(.96rem*var(--fs));line-height:1.35;display:flex;gap:8px}
+.line .lk{flex-shrink:0}
+.line .tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.84rem}
+body.show-tr .line .tr{display:block}
+.cols{display:flex;gap:10px;flex-wrap:wrap}
+.col{flex:1;min-width:140px;border:1px solid var(--line);border-radius:14px;padding:11px 13px}
+.col.solid{background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.4)}
+.col.liquid{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.35)}
+.col.gas{background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.4)}
+.col h4{font-size:.92rem;font-weight:900;margin-bottom:7px}
+.col .ci{font-weight:800;font-size:calc(.92rem*var(--fs));margin:5px 0;line-height:1.25}
+.col .ci .tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.78rem}
+body.show-tr .col .ci .tr{display:block}
+.tip{display:flex;gap:9px;align-items:flex-start;margin:9px 0;font-weight:800;font-size:calc(.97rem*var(--fs));line-height:1.35}
+.tip .tk{flex-shrink:0}
+.tip .tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.84rem}
+body.show-tr .tip .tr{display:block}
+.qa{border-left:3px solid var(--accent2);padding:6px 0 6px 12px;margin:11px 0}
+.qa .qq{font-weight:900;font-size:calc(.98rem*var(--fs));line-height:1.3}
+.qa .qq .tr,.qa .aa .tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.8rem}
+body.show-tr .qa .qq .tr,body.show-tr .qa .aa .tr{display:block}
+.qa .aa{font-weight:900;color:var(--accent);font-size:calc(1rem*var(--fs));margin-top:4px}
+.qa .aa .ar::before{content:"→ "}
+.foot{text-align:center;color:var(--soft);font-weight:800;font-size:.82rem;margin-top:8px}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn" title="Home" onclick="if(confirm('Back to the menu? / Voltar ao início?'))location.href='../index.html'">&#127968;</button>
+    <span class="title">Study sheet &mdash; States of Matter</span>
+    <button class="iconbtn flagbtn" id="flag" title="Mostrar tradução" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger" onclick="fs(1)">A+</button>
+    <button class="iconbtn" title="Theme" onclick="document.body.classList.toggle('light')">&#127769;</button>
+  </div>
+  <div class="wrap">
+    <div class="hint">Your study sheet! Tap a title to open/close, the &#128266; to listen, and the &#127463;&#127479; flag for Portuguese.</div>
+    <div class="toolrow">
+      <button class="toolbtn" onclick="allSec(true)">&#11015;&#65039; Open all</button>
+      <button class="toolbtn" onclick="allSec(false)">&#11014;&#65039; Close all</button>
+    </div>
+    <div id="content"></div>
+    <div class="foot">&#127808; Good luck on your Science test!</div>
+  </div>
+</div>
+<script>
+/* ===== Study sheet — Science Y2 · Properties of Matter =====
+   English first; PT translation via the BR flag.
+   Content from trabalho/2tri_ciencias/_roteiro.md. */
+/* lines: [emoji, name_en, desc_en, name_pt, desc_pt] */
+const STATES=[
+ ["\u{1FAA8}","Solid","keeps its own fixed shape and volume; you cannot pour it.","Sólido","mantém forma e volume fixos; não dá para derramar."],
+ ["\u{1F964}","Liquid","has a fixed volume but takes the shape of its container; it can flow and be poured.","Líquido","tem volume fixo, mas toma a forma do recipiente; flui e pode ser derramado."],
+ ["\u{1F4A8}","Gas","has no fixed shape or volume; it spreads out and can be squeezed (compressed).","Gás","não tem forma nem volume fixos; se espalha e pode ser comprimido."],
+ ["\u{2696}\u{FE0F}","All three","take up space and have mass.","Os três","ocupam espaço e têm massa."]
+];
+const STATES_say="A solid keeps its fixed shape and volume. A liquid takes the shape of its container and can be poured. A gas has no fixed shape or volume and can be squeezed. All three take up space and have mass.";
+
+const PARTS=[
+ ["\u{1F7E6}","Solid particles","are packed tightly in a fixed arrangement; they can vibrate but cannot leave their place.","Partículas do sólido","ficam bem juntinhas e fixas; vibram mas não saem do lugar."],
+ ["\u{1F4A7}","Liquid particles","are close together but slide around each other.","Partículas do líquido","ficam juntas, mas escorregam umas nas outras."],
+ ["\u{1F300}","Gas particles","are far apart, free to move and collide.","Partículas do gás","ficam afastadas, livres para se mover e colidir."],
+ ["\u{1F4A1}","Remember","the closer the particles, the firmer the matter.","Lembre","quanto mais juntas as partículas, mais firme é a matéria."]
+];
+const PARTS_say="In a solid, particles are packed tightly and only vibrate. In a liquid, particles are close together but slide around. In a gas, particles are far apart and move freely. The closer the particles, the firmer the matter.";
+
+const CHANGE=[
+ ["\u{1F525}","Heat the ice","it melts into water, then the water turns into steam (a gas).","Aqueça o gelo","ele derrete e vira água; depois a água vira vapor (gás)."],
+ ["\u{2744}\u{FE0F}","Cool it down","steam becomes water again, and water freezes into ice.","Esfrie","o vapor vira água de novo, e a água congela virando gelo."],
+ ["\u{1F9CA}","Same water","ice, water and steam are all the same water in different states.","Mesma água","gelo, água e vapor são a mesma água em estados diferentes."]
+];
+const CHANGE_say="When you heat ice, it melts into water. Heat the water more and it turns into steam, a gas. Cool it down and it goes back: steam to water, water to ice. Ice, water and steam are the same water in different states.";
+
+const LIGHT=[
+ ["\u{1F4A7}","Transparent","lets all the light through — we see clearly. Example: water, a window.","Transparente","deixa passar toda a luz — vemos com clareza. Ex.: água, janela."],
+ ["\u{1F9C3}","Translucent","lets only some light through — we see only a little. Example: apple juice.","Translúcido","deixa passar só um pouco de luz — vemos pouco. Ex.: suco de maçã."],
+ ["\u{1F95B}","Opaque","lets no light through — we cannot see through it. Example: milk.","Opaco","não deixa passar luz — não dá para ver através. Ex.: leite."]
+];
+const LIGHT_say="Transparent lets all the light through, like water. Translucent lets only some light through, like apple juice. Opaque lets no light through, like milk.";
+
+const WATER=[
+ ["\u{1F4A7}","Absorbs","soaks up the liquid and gets wet. Examples: blanket, soil, stuffed animal, baseball hat, paper.","Absorve","suga o líquido e fica molhado. Ex.: cobertor, terra, pelúcia, boné, papel."],
+ ["\u{1F6E1}\u{FE0F}","Repels","the liquid rolls off and stays out. Examples: rain jacket, duck feather, tire, window, marble.","Repele","o líquido escorre e não entra. Ex.: capa de chuva, pena de pato, pneu, janela, bolinha de gude."]
+];
+const WATER_say="Some materials absorb water: they soak it up and get wet, like a blanket or soil. Others repel water: the liquid rolls off, like a rain jacket or a duck feather.";
+
+const TIPS=[
+ ["\u{1FAA8}","Solid = fixed shape. Liquid = takes the container's shape. Gas = no fixed shape, spreads out.","Sólido = forma fixa. Líquido = toma a forma do copo. Gás = sem forma fixa, se espalha."],
+ ["\u{1F50D}","If they ask WHY, talk about the particles (tight / close / far apart).","Se perguntarem POR QUÊ, fale das partículas (juntas / próximas / afastadas)."],
+ ["\u{1F9CA}","Ice is solid, water is liquid, steam is gas — all the same water.","Gelo é sólido, água é líquido, vapor é gás — tudo a mesma água."],
+ ["\u{1F526}","Transparent = see all · Translucent = see a little · Opaque = see nothing.","Transparente = vejo tudo · Translúcido = vejo pouco · Opaco = não vejo."],
+ ["\u{1F4A7}","Absorb = soaks up (gets wet). Repel = rolls off (stays dry).","Absorve = suga (molha). Repele = escorre (seco)."]
+];
+const FAQ=[
+ ["Which state takes the shape of its container?","Liquid.","Qual estado toma a forma do recipiente?","Líquido."],
+ ["Why does a solid keep its shape?","Its particles are packed tightly together.","Por que o sólido mantém a forma?","As partículas estão bem juntinhas."],
+ ["What happens to ice when you heat it?","It melts into water.","O que acontece com o gelo quando esquenta?","Ele derrete e vira água."],
+ ["Milk is opaque, translucent or transparent?","Opaque.","O leite é opaco, translúcido ou transparente?","Opaco."],
+ ["Does a rain jacket absorb or repel water?","It repels water.","A capa de chuva absorve ou repele água?","Ela repele a água."],
+ ["Name the three states of matter.","Solid, liquid and gas.","Diga os três estados da matéria.","Sólido, líquido e gás."]
+];
+
+/* ===== render ===== */
+const $=id=>document.getElementById(id);
+function esc(s){return String(s).replace(/<[^>]*>/g,'').replace(/"/g,'&quot;').replace(/'/g,"\\'");}
+function toggleTr(){const on=document.body.classList.toggle('show-tr');try{localStorage.setItem('cie2_tr',on?'1':'0');}catch(e){}}
+function say(txt){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='en-US';u.rate=.85;
+  const v=speechSynthesis.getVoices().find(v=>/en-US|en_US|English \(United States\)/i.test(v.lang+v.name));if(v)u.voice=v;
+  speechSynthesis.speak(u);}catch(e){}}
+function row(r){return `<div class="line"><span class="lk">${r[0]}</span><span><b>${r[1]}</b> — ${r[2]}<span class="tr">${r[3]} — ${r[4]}</span></span></div>`;}
+
+function build(){
+  const mkBody=(arr,say)=>`<button class="listen" onclick="say('${esc(say)}')">&#128266; Listen</button>`+arr.map(row).join('');
+  const statesBody=mkBody(STATES,STATES_say)+
+    `<div class="cols" style="margin-top:10px">
+      <div class="col solid"><h4>\u{1FAA8} Solid</h4><div class="ci">Fixed shape<span class="tr">forma fixa</span></div><div class="ci">Fixed volume<span class="tr">volume fixo</span></div></div>
+      <div class="col liquid"><h4>\u{1F964} Liquid</h4><div class="ci">Takes container's shape<span class="tr">forma do copo</span></div><div class="ci">Can be poured<span class="tr">pode derramar</span></div></div>
+      <div class="col gas"><h4>\u{1F4A8} Gas</h4><div class="ci">No fixed shape<span class="tr">sem forma fixa</span></div><div class="ci">Can be squeezed<span class="tr">pode comprimir</span></div></div>
+    </div>`;
+  const partsBody=mkBody(PARTS,PARTS_say);
+  const changeBody=mkBody(CHANGE,CHANGE_say)+
+    `<div class="grp" style="margin-top:10px"><div class="gname">\u{1F525} Order: heat it up</div>
+      <div class="line"><span class="lk">\u{1F9CA}\u{2192}\u{1F4A7}\u{2192}\u{2668}\u{FE0F}</span><span><b>Ice → Water → Steam</b><span class="tr">Gelo → Água → Vapor</span></span></div></div>`;
+  const lightBody=mkBody(LIGHT,LIGHT_say);
+  const waterBody=mkBody(WATER,WATER_say);
+  const tipsBody=TIPS.map(t=>`<div class="tip"><span class="tk">${t[0]}</span><span>${t[1]}<span class="tr">${t[2]}</span></span></div>`).join('');
+  const faqBody=FAQ.map(q=>`<div class="qa"><div class="qq">${q[0]}<span class="tr">${q[2]}</span></div><div class="aa"><span class="ar">${q[1]}</span><span class="tr">${q[3]}</span></div></div>`).join('');
+
+  const sections=[
+   {ic:"\u{1F9CA}",t:"States &amp; properties",tpt:"Estados e propriedades",body:statesBody,open:true},
+   {ic:"\u{1F52C}",t:"Particles — the why",tpt:"Partículas — o porquê",body:partsBody,open:true},
+   {ic:"\u{2668}\u{FE0F}",t:"Change of state",tpt:"Mudança de estado",body:changeBody,open:false},
+   {ic:"\u{1F526}",t:"See-through (light)",tpt:"Passa luz?",body:lightBody,open:true},
+   {ic:"\u{1F4A7}",t:"Absorb or repel",tpt:"Absorve ou repele",body:waterBody,open:false},
+   {ic:"⭐",t:"Tips for the test",tpt:"Dicas para a prova",body:tipsBody,open:true},
+   {ic:"❓",t:"Questions that often come up",tpt:"Perguntas que costumam cair",body:faqBody,open:false}
+  ];
+  $('content').innerHTML=sections.map((s,i)=>`<div class="sec${s.open?' open':''}" id="sec${i}">
+     <div class="sechead" onclick="toggleSec(${i})">
+       <span class="si">${s.ic}</span>
+       <span class="st">${s.t}<span class="str">${s.tpt}</span></span>
+       <span class="chev">▼</span></div>
+     <div class="secbody">${s.body}</div></div>`).join('');
+}
+function toggleSec(i){$('sec'+i).classList.toggle('open');}
+function allSec(open){document.querySelectorAll('.sec').forEach(s=>s.classList.toggle('open',open));}
+function fs(d){window._fsStep=Math.max(-2,Math.min(3,(window._fsStep||0)+d));document.documentElement.style.setProperty('--fs',1+window._fsStep*0.12);}
+
+/* starfield */
+(function(){var c=document.getElementById('starfield'),x=c.getContext('2d'),s=[];
+function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.1+.02});}
+function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}
+rz();addEventListener('resize',rz);d();})();
+build();
+try{if(localStorage.getItem('cie2_tr')==='1')document.body.classList.add('show-tr');}catch(e){}
+if('speechSynthesis' in window){speechSynthesis.getVoices();}
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Study materials — States of Matter</title>
+<style>
+:root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#38bdf8;--accent2:#fbbf24;--rad:20px}
+body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);min-height:100vh}
+#starfield{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:0 0 50px}
+.topbar{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25);position:sticky;top:0;z-index:5}
+.topbar .title{font-weight:900;font-size:calc(.98rem*var(--fs));color:var(--accent);flex:1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.1rem;font-weight:800;cursor:pointer}
+.iconbtn:active{transform:scale(.9)}
+.head{text-align:center;padding:24px 16px 6px}
+.head .em{font-size:54px;filter:drop-shadow(0 0 18px rgba(56,189,248,.5))}
+.head h1{font-size:calc(1.5rem*var(--fs));font-weight:900;margin-top:6px}
+.head p{color:var(--soft);font-weight:700;font-size:.92rem;margin-top:6px;line-height:1.4}
+.sec{font-size:.74rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin:24px 16px 10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 14px}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+.imgcard{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);overflow:hidden;cursor:pointer;transition:.18s}
+.imgcard:active{transform:scale(.98)}
+.imgcard img{width:100%;height:150px;object-fit:contain;display:block;background:#0a0818;padding:4px}
+.imgcard .cap{padding:10px 12px}
+.imgcard .cen{font-weight:900;font-size:.92rem;line-height:1.2}
+.imgcard .ctr{font-weight:700;font-size:.78rem;color:var(--soft);margin-top:2px}
+.pdfcard{display:flex;align-items:center;gap:12px;margin:0 14px;background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:14px 16px;text-decoration:none;color:var(--ink)}
+.pdfcard .pe{font-size:2rem}
+.pdfcard .pt{font-weight:900;font-size:.96rem}
+.pdfcard .ps{font-weight:700;font-size:.78rem;color:var(--soft)}
+.note{text-align:center;color:var(--soft);font-weight:700;font-size:.82rem;margin:18px 16px 0;line-height:1.5}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(5,4,15,.94);display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column;gap:14px}
+.lb.show{display:flex}
+.lb img{max-width:100%;max-height:78vh;border-radius:14px;box-shadow:0 16px 50px rgba(0,0,0,.6)}
+.lb .cap{color:#fff;font-weight:800;text-align:center;max-width:600px}
+.lb .cap .tr{color:var(--accent2);font-weight:700;display:block;margin-top:3px;font-size:.88rem}
+.lb .x{position:absolute;top:14px;right:16px;width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.5rem;font-weight:900;cursor:pointer}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="wrap">
+  <div class="topbar">
+    <button class="iconbtn" title="Home" onclick="if(confirm('Back to the menu? / Voltar ao início?'))location.href='../index.html'">&#127968;</button>
+    <span class="title">Study materials &mdash; States of Matter</span>
+    <button class="iconbtn" title="Theme" onclick="document.body.classList.toggle('light')">&#127769;</button>
+  </div>
+
+  <div class="head">
+    <div class="em">&#x1F52C;</div>
+    <h1>Our class materials</h1>
+    <p>The real slides from the unit &mdash; tap any picture to see it bigger.<br>Os slides reais da turma &mdash; toque para ampliar.</p>
+  </div>
+
+  <div class="sec">&#x1F9CA; States &amp; particles</div>
+  <div class="grid" id="grid-states"></div>
+
+  <div class="sec">&#x1F526; See-through: opaque / translucent / transparent</div>
+  <div class="grid" id="grid-light"></div>
+
+  <div class="sec">&#x1F4A7; Absorb or repel liquids</div>
+  <div class="grid" id="grid-water"></div>
+
+  <div class="sec">&#x1F4C4; Notebook (PDF)</div>
+  <a class="pdfcard" href="media/cie_insumos/08_notebook.pdf" target="_blank" rel="noopener">
+    <span class="pe">&#x1F4D6;</span>
+    <span><span class="pt">Properties of solids, liquids and gases</span><br><span class="ps">Open the class notebook / abrir o caderno da turma</span></span>
+  </a>
+
+  <div class="note">These are here to look at and remember while you study. &#x1F60A;<br>São para olhar e lembrar durante o estudo.</div>
+</div>
+
+<div class="lb" id="lb" onclick="closeLb(event)">
+  <button class="x" onclick="closeLb(event,true)">&times;</button>
+  <img id="lbimg" src="" alt="">
+  <div class="cap" id="lbcap"></div>
+</div>
+
+<script>
+var DIR="media/cie_insumos/";
+var STATES=[
+ ["01_three_states.png","The three states","solid, liquid &amp; gas — their properties"],
+ ["02_particle_arrangement.png","Particle arrangement","how particles sit in each state"],
+ ["03_particles.png","Particles diagram","packed → close → far apart"],
+ ["04_states_poster.jpeg","States poster","ice, water, steam and more"]
+];
+var LIGHT=[
+ ["05_opaque_translucent_transparent.png","Transparent · Translucent · Opaque","how much light passes through"],
+ ["06_otp_liquids.png","See-through liquids","milk opaque, juice translucent, water transparent"]
+];
+var WATER=[
+ ["07_absorb_repel.png","Absorbs or repels?","which materials soak up or shed water"]
+];
+var CAPPT={
+ "01_three_states.png":"Os três estados — sólido, líquido e gás",
+ "02_particle_arrangement.png":"Como as partículas se arrumam em cada estado",
+ "03_particles.png":"Diagrama de partículas: juntas → próximas → afastadas",
+ "04_states_poster.jpeg":"Pôster dos estados: gelo, água, vapor e mais",
+ "05_opaque_translucent_transparent.png":"Quanta luz passa por cada objeto",
+ "06_otp_liquids.png":"Leite opaco, suco translúcido, água transparente",
+ "07_absorb_repel.png":"Quais materiais absorvem ou repelem água"
+};
+var ALL=STATES.concat(LIGHT).concat(WATER);
+function cards(list,offset){return list.map(function(it,i){var gi=offset+i;return '<div class="imgcard" onclick="openLb('+gi+')">'+
+ '<img src="'+DIR+it[0]+'" alt="'+it[1]+'" loading="lazy">'+
+ '<div class="cap"><div class="cen">'+it[1]+'</div><div class="ctr">'+it[2]+'</div></div></div>';}).join('');}
+document.getElementById('grid-states').innerHTML=cards(STATES,0);
+document.getElementById('grid-light').innerHTML=cards(LIGHT,STATES.length);
+document.getElementById('grid-water').innerHTML=cards(WATER,STATES.length+LIGHT.length);
+function openLb(i){var it=ALL[i];document.getElementById('lbimg').src=DIR+it[0];
+ document.getElementById('lbcap').innerHTML=it[1]+'<span class="tr">'+(CAPPT[it[0]]||it[2])+'</span>';
+ document.getElementById('lb').classList.add('show');}
+function closeLb(e,force){if(force||e.target.id==='lb'||e.target.classList.contains('x'))document.getElementById('lb').classList.remove('show');}
+(function(){var c=document.getElementById('starfield'),x=c.getContext('2d'),s=[];
+function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.1+.02});}
+function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}
+rz();addEventListener('resize',rz);d();})();
+</script>
+</body>
+</html>
