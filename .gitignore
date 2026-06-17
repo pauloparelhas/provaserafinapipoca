@@ -42,3 +42,4 @@ Thumbs.db
 
 # brutos pesados Toddle (mantem MDs do trabalho versionados)
 trabalho/**/Toddle-*
+_nlm_wait*.log
