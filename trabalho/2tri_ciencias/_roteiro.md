@@ -154,6 +154,8 @@ Exemplo ruim (proibido): distrator "because it is made of chocolate" / "because 
 3. **Distrator nunca pode ser uma segunda verdade** — só pode ser falso à luz do material.
 4. **Garantir questão visual/descritiva de arranjo de partículas** (descrição→estado), não só texto.
 5. Variar os 6 TIPOS sempre — nunca só múltipla escolha. Blocos 1+2 = 55% do peso.
+6. **PROIBIDO síntese transversal entre estados.** O material *contrasta* os três estados → cobrar **diferenças** (forma/volume/partículas). NUNCA gerar pergunta sobre o que é *comum* aos três (ex.: "what is true about all three states", "solids, liquids and gases all take up space / have mass"). Cada fragmento ("takes up space, has mass") existe sob cada estado, mas a generalização = definição de matéria: abstrata demais p/ 7 anos, NÃO enquadrada como pergunta no material, e DÚBIA p/ o gás (que "não tem volume fixo / é ar invisível"). Banir "take up space" e "have mass" como propriedade transversal. [removidos na sessão 22/06: 2 itens — 1 MC + 1 V/F]
+7. **Checagem de COMPOSIÇÃO no QA (não só de fragmentos).** Validar a pergunta INTEIRA (premissa + resposta como um todo) contra o material — não basta cada pedaço existir. `ti`/`pedagogico` validam fragmentos; o erro mora na montagem. Pergunta só vale se o material a enquadra OU ela é claramente inferível como unidade. Princípio do usuário: **perguntas e respostas ÓBVIAS** — sem inferência além do material, sem ambiguidade.
 
 ### PESOS FINAIS (pedagógico)
 | Bloco | Peso | % |
