@@ -64,6 +64,22 @@
 body.theme-light .mm-branch-en,body.theme-light .mm-leaf-en,body.theme-light .mm-detail-en{color:#1a1030;opacity:1;}
 body.theme-light .mm-branch-pt,body.theme-light .mm-leaf-pt,body.theme-light .mm-root-tr,body.theme-light .mm-detail-pt{color:#b45309;}
 body.theme-light .mm-hint{color:rgba(0,0,0,.4);}
+/* --- PT translation toggle (BR flag) — hidden until show-tr --- */
+.mm-root-tr,.mm-branch-pt,.mm-leaf-pt,.mm-detail-pt{display:none;}
+body.show-tr .mm-root-tr,body.show-tr .mm-branch-pt,body.show-tr .mm-leaf-pt,body.show-tr .mm-detail-pt{display:block;}
+.flagbtn{opacity:.45;filter:grayscale(1);}
+body.show-tr .flagbtn{opacity:1;filter:none;background:rgba(252,211,77,.25);}
+/* --- lock / fullscreen --- */
+.lockbtn.on{background:rgba(248,113,113,.3);}
+body.locked #btnHome{opacity:.3;pointer-events:none;}
+.unlockov{position:fixed;inset:0;z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;background:rgba(8,10,22,.93);}
+.unlockov.show{display:flex;}
+.unlockov .ulk-emo{font-size:54px;}
+.unlockov h2{color:#fff;font-size:1.15rem;font-weight:900;line-height:1.3;}
+.unlockov h2 small{display:block;font-weight:600;opacity:.8;font-size:.8rem;margin-top:5px;}
+.unlockov button{height:54px;padding:0 26px;border:none;border-radius:16px;font-size:1.02rem;font-weight:900;cursor:pointer;font-family:inherit;width:100%;max-width:300px;}
+.unlockov .ulk-yes{background:linear-gradient(90deg,#34d399,#10b981);color:#04261c;}
+.unlockov .ulk-no{background:rgba(255,255,255,.14);color:#fff;}
 </style>
 </head>
 <body>
@@ -73,11 +89,13 @@ body.theme-light .mm-hint{color:rgba(0,0,0,.4);}
 <div class="navbar">
   <div class="nav-logo" id="navLogo">Revisão</div>
   <div class="nav-right">
-    <button class="nav-btn nb-home" id="btnHome" onclick="showHomeModal()">&#x1F3E0;</button>
+    <button class="nav-btn nb-home" id="btnHome" onclick="goHomeMM()">&#x1F3E0;</button>
     <div class="nav-a11y">
+      <button class="nav-a11y-btn flagbtn" id="btnFlag" title="Mostrar/ocultar tradução" onclick="toggleTr()">&#127463;&#127479;</button>
       <button class="nav-a11y-btn" id="btnFontDown" onclick="changeFontSize(-1)">A-</button>
       <button class="nav-a11y-btn" id="btnFontUp" onclick="changeFontSize(1)">A+</button>
       <button class="nav-a11y-btn" id="themeBtn" onclick="toggleTheme()">&#x2600;&#xFE0F;</button>
+      <button class="nav-a11y-btn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
     </div>
   </div>
 </div>
@@ -85,7 +103,7 @@ body.theme-light .mm-hint{color:rgba(0,0,0,.4);}
 <div class="screen active" id="screen-main" style="max-width:600px;">
   <div class="intro-emoji">&#x1F9EA;</div>
   <div class="intro-title">States of Matter</div>
-  <div class="mm-hint">&#x1F449; Tap a topic to open &bull; tap again to close &bull; PT in amber</div>
+  <div class="mm-hint">&#x1F449; Tap a topic to open &bull; tap again to close &bull; tap the &#127463;&#127479; flag for Portuguese</div>
 
   <div class="mm-root-label">
     <div class="mm-root-pill">&#x1F52C; Properties of Matter</div>
@@ -257,10 +275,42 @@ body.theme-light .mm-hint{color:rgba(0,0,0,.4);}
 </div><!-- screen-main -->
 </div><!-- app -->
 
+<div class="unlockov" id="unlockov">
+  <div class="ulk-emo">&#128274;</div>
+  <h2>Desbloquear a tela?<small>Unlock the screen? &middot; ask a grown-up</small></h2>
+  <button class="ulk-yes" onclick="doUnlock()">&#128275; Desbloquear / Unlock</button>
+  <button class="ulk-no" onclick="cancelUnlock()">&#8617;&#65039; Continuar / Keep reading</button>
+</div>
+
 <script src="base.js"></script>
 <script>
 function toggleBranch(el){ el.classList.toggle('open'); }
 function toggleLeaf(e,el){ e.stopPropagation(); el.classList.toggle('open'); }
+var $id=function(i){return document.getElementById(i);};
+
+/* PT translation toggle — shared key with simulado/resumo */
+function toggleTr(){var on=document.body.classList.toggle('show-tr');try{localStorage.setItem('cie2_tr',on?'1':'0');}catch(e){}}
+try{if(localStorage.getItem('cie2_tr')==='1')document.body.classList.add('show-tr');}catch(e){}
+
+/* lock / fullscreen (anti accidental exit) */
+var screenLocked=false;
+function goHomeMM(){ if(screenLocked)return; showHomeModal(); }
+function toggleLock(){ if(!screenLocked) doLock(); else $id('unlockov').classList.add('show'); }
+function doLock(){
+  screenLocked=true;
+  var el=document.documentElement;
+  if(el.requestFullscreen){try{el.requestFullscreen().catch(function(){});}catch(e){}}
+  $id('lockbtn').classList.add('on'); document.body.classList.add('locked');
+  try{history.pushState({lock:1},'');}catch(e){}
+}
+function doUnlock(){
+  screenLocked=false;
+  $id('unlockov').classList.remove('show'); $id('lockbtn').classList.remove('on'); document.body.classList.remove('locked');
+  if(document.fullscreenElement&&document.exitFullscreen){try{document.exitFullscreen().catch(function(){});}catch(e){}}
+}
+function cancelUnlock(){ $id('unlockov').classList.remove('show'); }
+addEventListener('popstate',function(){ if(screenLocked){try{history.pushState({lock:1},'');}catch(e){}} });
+
 initApp();
 </script>
 </body>
