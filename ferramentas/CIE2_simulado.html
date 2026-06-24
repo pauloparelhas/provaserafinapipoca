@@ -155,6 +155,8 @@ body.show-tr .endbtn .etr{display:block}
 .qnav-btn .ql{font-size:.78rem;font-weight:900;letter-spacing:.5px}
 .qnav-btn:disabled{opacity:.32;cursor:default;box-shadow:none}
 .qnav-btn:active:not(:disabled){transform:scale(.96)}
+.qnav-btn.jump{max-width:130px;font-size:1.15rem;border-color:var(--accent2);color:var(--accent2);background:rgba(251,191,36,.12)}
+.qnav-btn.jump:disabled{border-color:var(--line);color:var(--ink)}
 /* --- lock / fullscreen --- */
 .lockbtn.on{background:rgba(248,113,113,.28);color:#fecaca}
 body.locked .iconbtn[onclick*="goHome"]{opacity:.3;pointer-events:none}
@@ -185,6 +187,7 @@ body.locked .iconbtn[onclick*="goHome"]{opacity:.3;pointer-events:none}
 </div>
 <div class="qnav" id="qnav">
   <button class="qnav-btn" id="navPrev" onclick="prevQ()" title="Voltar / Back">&#8249;<span class="ql">Voltar</span></button>
+  <button class="qnav-btn jump" id="navJump" onclick="jumpUnanswered()" title="Próxima sem resposta / Next unanswered">&#9193;<span class="ql">Sem resposta</span></button>
   <button class="qnav-btn" id="navNext" onclick="nextQ()" title="Avançar / Next">&#8250;<span class="ql">Avançar</span></button>
 </div>
 <div class="unlockov" id="unlockov">
@@ -442,10 +445,19 @@ addEventListener('popstate',function(){ if(screenLocked){try{history.pushState({
 /* ---- question navigation arrows ---- */
 function prevQ(){ if(cur>0){cur--;render();} }
 function nextQ(){ if(cur<total-1){cur++;render();} }
+/* index of the next UNANSWERED question (search forward, wrap around); -1 if none */
+function nextUnansweredIdx(){
+  if(!deck||!total)return -1;
+  for(var k=1;k<=total;k++){ var idx=(cur+k)%total; if(!deck[idx].done) return idx; }
+  return -1;
+}
+function jumpUnanswered(){ var idx=nextUnansweredIdx(); if(idx>=0){ cur=idx; render(); } }
 function updateArrows(){
   $('qnav').classList.add('show');
   $('navPrev').disabled = cur<=0;
   $('navNext').disabled = cur>=total-1;
+  var ji=nextUnansweredIdx();
+  $('navJump').disabled = ji<0 || ji===cur;   /* só habilita se houver OUTRA questão sem resposta */
 }
 function say(txt){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='en-US';u.rate=.85;
   const v=speechSynthesis.getVoices().find(v=>/en-US|en_US|English \(United States\)/i.test(v.lang+v.name));if(v)u.voice=v;

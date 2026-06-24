@@ -1,6 +1,6 @@
 // Service Worker — Projeto Serafina
 // Estratégia: network-first para HTML, cache-first para base CSS/JS
-var CACHE = 'serafina-v16';
+var CACHE = 'serafina-v17';
 
 // Arquivos base compartilhados — pre-cache no install
 var BASE_FILES = [
