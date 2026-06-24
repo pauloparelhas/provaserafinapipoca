@@ -40,15 +40,27 @@ body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-grad
 .lb .cap{color:#fff;font-weight:800;text-align:center;max-width:600px}
 .lb .cap .tr{color:var(--accent2);font-weight:700;display:block;margin-top:3px;font-size:.88rem}
 .lb .x{position:absolute;top:14px;right:16px;width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:1.5rem;font-weight:900;cursor:pointer}
+/* lock / fullscreen */
+.lockbtn.on{background:rgba(248,113,113,.28);color:#fecaca}
+body.locked #homebtn{opacity:.3;pointer-events:none}
+.unlockov{position:fixed;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;background:rgba(8,10,22,.93);backdrop-filter:blur(4px)}
+.unlockov.show{display:flex}
+.unlockov .ulk-emo{font-size:54px}
+.unlockov h2{color:#fff;font-size:1.15rem;font-weight:900;line-height:1.3}
+.unlockov h2 small{display:block;font-weight:600;opacity:.8;font-size:.8rem;margin-top:5px}
+.unlockov button{height:54px;padding:0 26px;border:none;border-radius:16px;font-size:1.02rem;font-weight:900;cursor:pointer;font-family:inherit;width:100%;max-width:300px}
+.unlockov .ulk-yes{background:linear-gradient(90deg,#34d399,#10b981);color:#04261c}
+.unlockov .ulk-no{background:rgba(255,255,255,.14);color:#fff}
 </style>
 </head>
 <body>
 <canvas id="starfield"></canvas>
 <div class="wrap">
   <div class="topbar">
-    <button class="iconbtn" title="Home" onclick="if(confirm('Back to the menu? / Voltar ao início?'))location.href='../index.html'">&#127968;</button>
+    <button class="iconbtn" id="homebtn" title="Home" onclick="goHome()">&#127968;</button>
     <span class="title">Study materials &mdash; States of Matter</span>
     <button class="iconbtn" title="Theme" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar / Fullscreen &amp; lock" onclick="toggleLock()">&#128274;</button>
   </div>
 
   <div class="head">
@@ -79,6 +91,13 @@ body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-grad
   <button class="x" onclick="closeLb(event,true)">&times;</button>
   <img id="lbimg" src="" alt="">
   <div class="cap" id="lbcap"></div>
+</div>
+
+<div class="unlockov" id="unlockov">
+  <div class="ulk-emo">&#128274;</div>
+  <h2>Desbloquear a tela?<small>Unlock the screen? &middot; ask a grown-up</small></h2>
+  <button class="ulk-yes" onclick="doUnlock()">&#128275; Desbloquear / Unlock</button>
+  <button class="ulk-no" onclick="cancelUnlock()">&#8617;&#65039; Continuar / Keep looking</button>
 </div>
 
 <script>
@@ -116,6 +135,25 @@ function openLb(i){var it=ALL[i];document.getElementById('lbimg').src=DIR+it[0];
  document.getElementById('lbcap').innerHTML=it[1]+'<span class="tr">'+(CAPPT[it[0]]||it[2])+'</span>';
  document.getElementById('lb').classList.add('show');}
 function closeLb(e,force){if(force||e.target.id==='lb'||e.target.classList.contains('x'))document.getElementById('lb').classList.remove('show');}
+/* ---- home + lock / fullscreen (same as the other guides) ---- */
+function $id(i){return document.getElementById(i);}
+function goHome(){if(screenLocked)return;if(confirm('Back to the menu? / Voltar ao início?'))location.href='../index.html';}
+var screenLocked=false;
+function toggleLock(){ if(!screenLocked) doLock(); else $id('unlockov').classList.add('show'); }
+function doLock(){
+  screenLocked=true;
+  var el=document.documentElement;
+  if(el.requestFullscreen){try{el.requestFullscreen().catch(function(){});}catch(e){}}
+  $id('lockbtn').classList.add('on'); document.body.classList.add('locked');
+  try{history.pushState({lock:1},'');}catch(e){}
+}
+function doUnlock(){
+  screenLocked=false;
+  $id('unlockov').classList.remove('show'); $id('lockbtn').classList.remove('on'); document.body.classList.remove('locked');
+  if(document.fullscreenElement&&document.exitFullscreen){try{document.exitFullscreen().catch(function(){});}catch(e){}}
+}
+function cancelUnlock(){ $id('unlockov').classList.remove('show'); }
+addEventListener('popstate',function(){ if(screenLocked){try{history.pushState({lock:1},'');}catch(e){}} });
 (function(){var c=document.getElementById('starfield'),x=c.getContext('2d'),s=[];
 function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.1+.02});}
 function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}

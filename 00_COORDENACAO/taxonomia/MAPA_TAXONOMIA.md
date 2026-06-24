@@ -1,7 +1,7 @@
 # PROJETO SERAFINA - MAPA DE TAXONOMIA
 **Responsavel:** Agente Coordenador Pedagogico
-**Atualizado em:** 12/06/2026 (HISTORIA 2tri "Memoria e Historia" entregue — ver secao no fim)
-**Historico:** 04/06/2026 (ELA 2tri "The Animal Inquiry" entregue)
+**Atualizado em:** 23/06/2026 (SCIENCE 2tri ganhou nova ferramenta CIE2-DRAG "Sort it! — Drag & Drop")
+**Historico:** 17/06/2026 (SCIENCE 2tri "Properties of Matter" entregue) · 12/06/2026 (HISTORIA 2tri "Memoria e Historia") · 04/06/2026 (ELA 2tri "The Animal Inquiry")
 
 > NOTA v2 (a partir de 02/06/2026): a estrutura de pastas evoluiu para o modelo de
 > 4 camadas descrito em `CLAUDE.md` (_processo / fontes / trabalho / ferramentas).
@@ -192,3 +192,46 @@ gitignored (ver recomendacao abaixo).
 **Navegacao validada:** simulado/resumo/galeria usam `location.href='../index.html'`;
 mindmap usa `showHomeModal()` de base.js -> goToIndex -> index.html. Galeria referencia
 os 16 insumos via `DIR="media/his_insumos/"` (0 orfaos). Todos os 16 JPGs tracked no git.
+
+---
+
+### SCIENCE — CIE 2tri "Properties of Matter" (prova 25/06) — CONCLUIDA (17/06/2026)
+Materia EN bilingue (ingles principal + bandeira BR liga traducao PT). Temas da prova:
+tres estados da materia (solido/liquido/gas) e suas propriedades, arranjo de particulas,
+opaco/translucido/transparente (see-through), absorver/repelir liquidos. Padrao de produtos
+espelha ELA 2tri / HIS 2tri (simulado + resumo + mindmap + galeria), em ingles com traducao PT.
+
+| Codigo    | Conteudo                              | Disciplina | Data AF | Status    | Arquivo                  |
+|-----------|---------------------------------------|------------|---------|-----------|--------------------------|
+| CIE2-SIM  | Simulado — banco de questoes multi-tipo, seletor de temas + quantidade. EN + flag BR p/ PT | Science | 25/06 | CONCLUIDA | CIE2_simulado.html |
+| CIE2-RES  | Resumo + Dicas (folha de estudo bilingue, secoes colapsaveis, TTS) | Science | 25/06 | CONCLUIDA | CIE2_resumo.html |
+| CIE2-MM   | Mapa Mental (ramos colapsaveis, EN+PT, importa base.css/base.js) | Science | 25/06 | CONCLUIDA | CIE2_mindmap.html |
+| CIE2-GAL  | Galeria — Imagens e Insumos da turma (estados, particulas, see-through, absorb/repel) | Science | 25/06 | CONCLUIDA | CIE2_galeria.html |
+| CIE2-DRAG | Sort it! — Drag & Drop: 6 jogos de classificacao em sequencia (1 States–Properties, 2 Particles–Arrangement, 3 Light see-through transparent/translucent/opaque, 4 Absorb/Repel, 5 Examples–which state, 6 Heating/Cooling mudanca de estado). Arrastar/tocar cartas para a coluna certa, "Check answers" verde/vermelho, "Redo wrong" devolve so as erradas. EN + flag BR p/ PT. Espelha padrao do CIE2_simulado (navbar inline, tema, A+/A- via --fs, lock, starfield, TTS en-US). Dados do _roteiro.md, validado por pedagogico (3 correcoes) e ti (41/41 PASS) | Science | 25/06 | CONCLUIDA | CIE2_dragdrop.html |
+
+**Complementos CIE 2tri:**
+| Tipo   | Conteudo                                            | Status        | Local                                  |
+|--------|-----------------------------------------------------|---------------|----------------------------------------|
+| Video  | Video Revisao "States of Matter" (NLM, PT + palavras-chave EN) | PENDENTE/GERANDO (notebook 10bbe556, regenerando apos 1a falha) | ferramentas/media/video_cie2_*.mp4 (a definir) |
+| Insumos| 7 imagens (PNG/JPEG) + 1 PDF (notebook), reais da turma | NO AR      | ferramentas/media/cie_insumos/ (linkados via CIE2_galeria.html) |
+
+**Pasta de trabalho:** renomeada `trabalho/2_tri sciencias` -> `trabalho/2tri_ciencias`
+(padrao `<tri>_<mat>` do CLAUDE.md). Versionados: `_roteiro.md` (validado pelo pedagogico)
+e `nlm_source_cie2.md`. Brutos Toddle (7 PNG/JPEG + 1 PDF) na raiz da pasta, gitignored via
+regra `trabalho/**/Toddle-*`.
+
+**index.html (estado 17/06/2026):** bloco Science no TOPO (chip "prova 25/06"). Card de video
+hero `#cie-video-card` em estado "Em breve" (opacity .6, sem href) ate o NLM concluir — quando
+o MP4 baixar, trocar por link real. `sw.js` cache atualizado v9 -> v10.
+
+**Navegacao/galeria validada:** os 4 produtos linkados em `index.html` com href
+`ferramentas/CIE2_*.html` (0 quebrados). Galeria referencia os 8 insumos via
+`DIR="media/cie_insumos/"` — mapeamento 1:1 com os arquivos em disco (0 orfaos);
+todos os 8 insumos tracked no git. Commit da entrega: `ecb93ea` (push ok em main).
+
+**Adendo 23/06/2026 — nova ferramenta CIE2-DRAG (no ar):** entregue `CIE2_dragdrop.html`
+(commit `04e8437`), jogo de drag & drop de classificacao com 6 jogos em sequencia (ver tabela
+acima). Validado por pedagogico (3 correcoes aplicadas) e ti (41/41 PASS). Adicionada ao
+`index.html` como card no grupo "Study & practise" (href `ferramentas/CIE2_dragdrop.html`,
+class `tool-card-sm ready`), preservando os demais cards. `sw.js` cache bumpado v14 -> v15.
+Science 2tri agora tem 5 produtos HTML (SIM/RES/MM/GAL/DRAG).

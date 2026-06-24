@@ -54,34 +54,38 @@ body.show-tr .tr{display:block}
 .ginfo .tr{font-size:.84rem}
 .listen{flex-shrink:0;display:inline-flex;align-items:center;gap:5px;border:2px solid var(--accent);background:transparent;color:var(--accent);font-weight:800;font-size:.74rem;border-radius:18px;padding:5px 11px;cursor:pointer;font-family:inherit}
 .listen:active{transform:scale(.95)}
-/* ---- BOARD (drop columns) ---- */
-.board{display:flex;gap:7px;margin:12px 0 4px;align-items:stretch}
-.col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:6px;border:2px dashed var(--line);border-radius:16px;padding:7px 5px;min-height:130px;transition:.12s}
-.col.over{border-color:var(--accent);border-style:solid;background:rgba(56,189,248,.12);box-shadow:0 0 0 2px rgba(56,189,248,.3) inset}
-.col.canput{border-color:rgba(251,191,36,.7)}
-.col-head{text-align:center;font-weight:900;line-height:1.05;padding:3px 2px 5px;border-bottom:1px solid var(--line);margin-bottom:2px}
-.col-head .che{font-size:1.35rem;display:block}
-.col-head .cnm{font-size:calc(.82rem*var(--fs))}
-.col-head .ctr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.64rem}
+/* ---- BOARD (colour-coded drop columns) ---- */
+.board{display:flex;gap:8px;margin:14px 0 4px;align-items:stretch}
+.col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:6px;border:3px solid var(--line);border-radius:16px;padding:6px 5px 9px;min-height:152px;transition:.12s;background:rgba(255,255,255,.04)}
+.col.over{box-shadow:0 0 0 3px var(--cc,#38bdf8) inset,0 0 18px var(--cc,#38bdf8);transform:translateY(-2px)}
+.col-head{text-align:center;font-weight:900;line-height:1.05;padding:6px 2px 7px;margin-bottom:2px;border-radius:11px}
+.col-head .che{font-size:1.5rem;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.col-head .cnm{font-size:calc(.86rem*var(--fs))}
+.col-head .ctr{display:none;font-style:italic;font-weight:700;font-size:.66rem;opacity:.9}
 body.show-tr .col-head .ctr{display:block}
 .col-cards{display:flex;flex-direction:column;gap:6px;flex:1}
-/* ---- DRAGGABLE CARDS ---- */
-.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0 2px;min-height:30px}
-.poolwrap{margin-top:8px}
-.poolhint{text-align:center;font-size:.74rem;font-weight:800;color:var(--soft);text-transform:uppercase;letter-spacing:.5px}
-.dcard{position:relative;padding:9px 11px;border:2px solid var(--accent);border-radius:13px;background:var(--card);color:var(--ink);font-size:calc(.92rem*var(--fs));font-weight:800;cursor:grab;font-family:inherit;line-height:1.2;touch-action:none;transition:transform .1s,box-shadow .12s;box-shadow:0 3px 9px rgba(0,0,0,.25);user-select:none;text-align:center}
+.col-empty{flex:1;display:flex;align-items:center;justify-content:center;color:var(--soft);font-size:1.5rem;opacity:.22;min-height:46px}
+/* ---- POOL ("bag" of cards to sort) ---- */
+.poolwrap{margin-top:14px;border-top:1px dashed var(--line);padding-top:11px}
+.pool{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:8px 0 2px;min-height:30px}
+.poolhint{text-align:center;font-size:.78rem;font-weight:800;color:var(--soft);letter-spacing:.3px;line-height:1.4}
+/* ---- DRAGGABLE CARDS (high contrast tiles) ---- */
+.dcard{position:relative;padding:11px 13px;border:2.5px solid #5ab0e0;border-radius:14px;background:linear-gradient(135deg,#eaf4ff,#c7e2fb);color:#0c1e33;font-size:calc(.95rem*var(--fs));font-weight:800;cursor:grab;font-family:inherit;line-height:1.2;touch-action:none;transition:transform .1s,box-shadow .12s;box-shadow:0 4px 12px rgba(0,0,0,.42);user-select:none;text-align:center}
+body.light .dcard{background:#fff;border-color:#1d6fa5;box-shadow:0 3px 9px rgba(0,0,0,.18)}
 .dcard:active{cursor:grabbing}
-.dcard.incol{border-color:var(--line);font-size:calc(.82rem*var(--fs));padding:9px 8px;min-height:38px;display:flex;flex-direction:column;justify-content:center;box-shadow:none}
-.dcard.sel{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(251,191,36,.45);transform:scale(1.04)}
-.dcard.ok{background:var(--ok);color:#06251a;border-color:var(--ok)}
-.dcard.no{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+.dcard.incol{border-color:var(--cc,#5ab0e0);background:#fff;font-size:calc(.85rem*var(--fs));padding:10px 24px 10px 11px;min-height:44px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 2px 7px rgba(0,0,0,.32)}
+.dcard.sel{border-color:#f59e0b;box-shadow:0 0 0 4px rgba(245,158,11,.5);transform:scale(1.05)}
+.dcard.ok{background:var(--ok)!important;color:#06251a!important;border-color:#059669!important}
+.dcard.no{background:var(--no)!important;color:#3a0a0a!important;border-color:#b91c1c!important}
 .dcard.locked{cursor:default}
-.dcard .dtr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.68rem;margin-top:2px}
+.dcard .dtr{display:none;color:#1d6fa5;font-style:italic;font-weight:700;font-size:.72rem;margin-top:2px}
 body.show-tr .dcard .dtr{display:block}
-.dcard.ok .dtr,.dcard.no .dtr{color:inherit;opacity:.8}
-.dcard .fix{display:none;font-size:.62rem;font-weight:900;margin-top:3px;color:#3a0a0a;text-transform:uppercase;letter-spacing:.3px}
+.dcard.ok .dtr,.dcard.no .dtr{color:inherit;opacity:.85}
+.dcard .rm{display:none;position:absolute;top:50%;right:5px;transform:translateY(-50%);width:19px;height:19px;border-radius:50%;background:rgba(0,0,0,.16);color:#0c1e33;font-size:.82rem;font-weight:900;line-height:19px;text-align:center}
+.dcard.incol:not(.locked) .rm{display:block}
+.dcard .fix{display:none;font-size:.64rem;font-weight:900;margin-top:3px;color:#3a0a0a;text-transform:uppercase;letter-spacing:.3px}
 .dcard.no .fix{display:block}
-.dclone{position:fixed;z-index:999;pointer-events:none;box-shadow:0 12px 28px rgba(0,0,0,.5);transform:scale(1.06) rotate(-2deg);opacity:.95}
+.dclone{position:fixed;z-index:999;pointer-events:none;box-shadow:0 14px 30px rgba(0,0,0,.55);transform:scale(1.08) rotate(-2deg);opacity:.97}
 /* ---- FEEDBACK / BUTTONS ---- */
 .fb{margin-top:14px;text-align:center;font-size:calc(1.02rem*var(--fs));font-weight:900;min-height:1.3em}
 .fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
@@ -95,6 +99,8 @@ body.show-tr .tip .tptr{display:block}
 .btn:active{transform:scale(.97)}
 .btn.primary{border:none;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#08263a}
 .btn.redo{border-color:var(--no);background:rgba(248,113,113,.14);color:var(--ink)}
+.btn.show{border-color:var(--accent2);background:rgba(251,191,36,.14);color:var(--ink)}
+.btn.ghost{opacity:.85;font-size:.92rem;padding:11px 12px}
 .btn:disabled{opacity:.4;cursor:default}
 .btn .etr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem}
 body.show-tr .btn .etr{display:block}
@@ -167,7 +173,7 @@ const GAMES = [
    info:"Drag each clue to the right state.", infopt:"Arraste cada pista para o estado certo.",
    tip:"Solid keeps its shape · Liquid takes the shape of its cup · Gas spreads out everywhere.",
    tippt:"Sólido mantém a forma · Líquido toma a forma do copo · Gás se espalha por tudo.",
-   cols:[{id:'solid',en:'Solid',pt:'Sólido',emo:"\u{1F9CA}"},{id:'liquid',en:'Liquid',pt:'Líquido',emo:"\u{1F4A7}"},{id:'gas',en:'Gas',pt:'Gás',emo:"\u{1F4A8}"}],
+   cols:[{id:'solid',en:'Solid',pt:'Sólido',emo:"\u{1F9CA}",co:'#38bdf8'},{id:'liquid',en:'Liquid',pt:'Líquido',emo:"\u{1F4A7}",co:'#34d399'},{id:'gas',en:'Gas',pt:'Gás',emo:"\u{1F4A8}",co:'#c084fc'}],
    cards:[
      {en:"Keeps its shape",pt:"Mantém a forma",col:'solid'},
      {en:"Particles packed tightly together",pt:"Partículas bem juntinhas",col:'solid'},
@@ -184,7 +190,7 @@ const GAMES = [
    info:"How do the tiny particles sit and move?", infopt:"Como as partículas ficam e se movem?",
    tip:"The more 'stuck' the particles, the firmer the matter. Solid = packed & still · Liquid = together but sliding · Gas = far apart & flying.",
    tippt:"Quanto mais 'presas' as partículas, mais firme a matéria. Sólido = juntas e paradas · Líquido = juntas escorregando · Gás = soltas e voando.",
-   cols:[{id:'solid',en:'Solid',pt:'Sólido',emo:"\u{1F9CA}"},{id:'liquid',en:'Liquid',pt:'Líquido',emo:"\u{1F4A7}"},{id:'gas',en:'Gas',pt:'Gás',emo:"\u{1F4A8}"}],
+   cols:[{id:'solid',en:'Solid',pt:'Sólido',emo:"\u{1F9CA}",co:'#38bdf8'},{id:'liquid',en:'Liquid',pt:'Líquido',emo:"\u{1F4A7}",co:'#34d399'},{id:'gas',en:'Gas',pt:'Gás',emo:"\u{1F4A8}",co:'#c084fc'}],
    cards:[
      {en:"Packed tightly in a fixed arrangement",pt:"Bem juntas e fixas no lugar",col:'solid'},
      {en:"Vibrate but cannot leave their place",pt:"Vibram mas não saem do lugar",col:'solid'},
@@ -198,7 +204,7 @@ const GAMES = [
    info:"How much light passes through?", infopt:"Quanta luz passa através?",
    tip:"Transparent = you see ALL · Translucent = you see a LITTLE · Opaque = you see NOTHING.",
    tippt:"Transparente = vejo TUDO · Translúcido = vejo um POUCO · Opaco = vejo NADA.",
-   cols:[{id:'transparent',en:'Transparent',pt:'Transparente',emo:"\u{1F50D}"},{id:'translucent',en:'Translucent',pt:'Translúcido',emo:"\u{1F327}️"},{id:'opaque',en:'Opaque',pt:'Opaco',emo:"\u{1F9F1}"}],
+   cols:[{id:'transparent',en:'Transparent',pt:'Transparente',emo:"\u{1F50D}",co:'#22d3ee'},{id:'translucent',en:'Translucent',pt:'Translúcido',emo:"\u{1F327}️",co:'#fbbf24'},{id:'opaque',en:'Opaque',pt:'Opaco',emo:"\u{1F9F1}",co:'#94a3b8'}],
    cards:[
      {en:"Lets all light pass through",pt:"Deixa passar toda a luz",col:'transparent'},
      {en:"Water",pt:"Água",col:'transparent'},
@@ -214,7 +220,7 @@ const GAMES = [
    info:"Does it drink the water in, or does water roll off?", infopt:"Puxa a água para dentro, ou a água escorre?",
    tip:"Absorbs = drinks the water in (gets wet) · Repels = water rolls off (stays dry).",
    tippt:"Absorve = puxa a água para dentro (fica molhado) · Repele = a água escorre (fica seco).",
-   cols:[{id:'absorbs',en:'Absorbs',pt:'Absorve',emo:"\u{1F4A6}"},{id:'repels',en:'Repels',pt:'Repele',emo:"\u{1F6E1}️"}],
+   cols:[{id:'absorbs',en:'Absorbs',pt:'Absorve',emo:"\u{1F4A6}",co:'#38bdf8'},{id:'repels',en:'Repels',pt:'Repele',emo:"\u{1F6E1}️",co:'#fb923c'}],
    cards:[
      {en:"Paper",pt:"Papel",col:'absorbs'},
      {en:"Blanket",pt:"Cobertor",col:'absorbs'},
@@ -230,7 +236,7 @@ const GAMES = [
    info:"Sort each real thing into solid, liquid or gas.", infopt:"Classifique cada coisa real em sólido, líquido ou gás.",
    tip:"The same water can be ice (solid), water (liquid) or steam (gas)!",
    tippt:"A mesma água pode ser gelo (sólido), água (líquido) ou vapor (gás)!",
-   cols:[{id:'solid',en:'Solid',pt:'Sólido',emo:"\u{1F9CA}"},{id:'liquid',en:'Liquid',pt:'Líquido',emo:"\u{1F4A7}"},{id:'gas',en:'Gas',pt:'Gás',emo:"\u{1F4A8}"}],
+   cols:[{id:'solid',en:'Solid',pt:'Sólido',emo:"\u{1F9CA}",co:'#38bdf8'},{id:'liquid',en:'Liquid',pt:'Líquido',emo:"\u{1F4A7}",co:'#34d399'},{id:'gas',en:'Gas',pt:'Gás',emo:"\u{1F4A8}",co:'#c084fc'}],
    cards:[
      {en:"Ice cube",pt:"Cubo de gelo",col:'solid'},
      {en:"Pencil",pt:"Lápis",col:'solid'},
@@ -247,7 +253,7 @@ const GAMES = [
    info:"Does it need heat (warmer) or cold (cooler)?", infopt:"Precisa de calor (mais quente) ou frio (mais frio)?",
    tip:"Heat melts and boils · Cold freezes. Ice → water → steam when heated; back to ice when cooled.",
    tippt:"O calor derrete e ferve · O frio congela. Gelo → água → vapor com calor; volta a gelo com frio.",
-   cols:[{id:'heat',en:'When you HEAT it',pt:'Quando AQUECE',emo:"\u{1F525}"},{id:'cool',en:'When you COOL it',pt:'Quando ESFRIA',emo:"❄️"}],
+   cols:[{id:'heat',en:'When you HEAT it',pt:'Quando AQUECE',emo:"\u{1F525}",co:'#fb7185'},{id:'cool',en:'When you COOL it',pt:'Quando ESFRIA',emo:"❄️",co:'#60a5fa'}],
    cards:[
      {en:"Ice melts into water",pt:"O gelo derrete e vira água",col:'heat'},
      {en:"Water boils into steam",pt:"A água ferve e vira vapor",col:'heat'},
@@ -296,7 +302,7 @@ function intro(){
         +'<span class="gn">'+(doneGames[i]?'✔':(i+1))+'</span></button>').join('')
     +'</div>'
     +'<button class="startbtn" onclick="openGame(0)">▶ Start game 1<span class="tr" style="display:inline;color:#08263a"></span></button>'
-    +'<p style="font-size:.78rem;margin-top:10px">Tip: you can also <b>tap</b> a card, then tap a box. <span class="tr">Dica: também dá para tocar numa carta e depois na caixa.</span></p>'
+    +'<p style="font-size:.78rem;margin-top:10px">Tip: <b>tap</b> a card then a box to place it · tap a card <b>inside a box</b> to take it back out.<span class="tr">Dica: toque numa carta e depois numa caixa para colocar · toque numa carta <b>dentro da caixa</b> para tirar.</span></p>'
     +'</div>';
 }
 function openGame(i){ gi=i; place={}; locked={}; sel=null; checked=false; _poolCache=poolOrder(); render(); }
@@ -319,9 +325,12 @@ function render(){
     +'<button class="listen" onclick="say(\''+esc(g.info)+'\')">\u{1F50A} Listen</button></div>'
     +'<div class="board">';
   g.cols.forEach(c=>{
-    html+='<div class="col" data-col="'+c.id+'"><div class="col-head"><span class="che">'+c.emo+'</span>'
+    var placed=g.cards.map((card,i)=>i).filter(i=>place[cardId(i)]===c.id);
+    html+='<div class="col" data-col="'+c.id+'" style="--cc:'+c.co+';border-color:'+c.co+';background:'+rgba(c.co,.10)+'">'
+      +'<div class="col-head" style="color:'+c.co+';background:'+rgba(c.co,.18)+'"><span class="che">'+c.emo+'</span>'
       +'<span class="cnm">'+c.en+'</span><span class="ctr">'+c.pt+'</span></div><div class="col-cards" data-col="'+c.id+'">';
-    g.cards.forEach((card,i)=>{ if(place[cardId(i)]===c.id) html+=dcardHTML(i,true); });
+    placed.forEach(i=>{ html+=dcardHTML(i,true,c.co); });
+    if(!placed.length) html+='<div class="col-empty">⬇</div>';
     html+='</div></div>';
   });
   html+='</div>';
@@ -342,13 +351,16 @@ function render(){
   if(checked) paintCheck();
   showNav();
 }
-function dcardHTML(i,incol){
+function dcardHTML(i,incol,co){
   var c=G().cards[i];var id=cardId(i);
   var cls='dcard'+(incol?' incol':'')+(sel===id?' sel':'')+(locked[id]?' locked ok':'');
-  return '<div class="'+cls+'" data-id="'+id+'">'+c.en
+  var st=(incol&&co)?' style="border-color:'+co+'"':'';
+  return '<div class="'+cls+'" data-id="'+id+'"'+st+'>'
+    +(incol?'<span class="rm">✕</span>':'')+c.en
     +'<div class="dtr">'+c.pt+'</div>'
     +'<div class="fix"></div></div>';
 }
+function rgba(hex,a){var n=parseInt(hex.slice(1),16);return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')';}
 function updatePoolHint(){
   var n=_poolCache.length, tot=G().cards.length;
   var h=$('poolhint'); if(!h)return;
@@ -410,11 +422,22 @@ function onUp(e){
     el.style.opacity='';
     clearHighlight();
     var d=drag; drag=null;
-    if(col) placeCard(d.id,col); else render();
+    if(col) placeCard(d.id,col);
+    else if(place[d.id]) removeFromCol(d.id);   // dragged a placed card out → back to bag
+    else render();
   }else{
-    drag=null;
-    selectCard(el.dataset.id);
+    var id2=el.dataset.id; drag=null;
+    if(place[id2]) removeFromCol(id2);           // tap a placed card → take it out
+    else selectCard(id2);                        // tap a bag card → select it
   }
+}
+function removeFromCol(id){
+  if(locked[id])return;
+  delete place[id];
+  if(checked)checked=false;
+  sel=null;
+  if(_poolCache.indexOf(id)<0)_poolCache.push(id);
+  render();
 }
 function colUnder(e){
   var el=document.elementFromPoint(e.clientX,e.clientY);
@@ -456,8 +479,11 @@ function bindBoard(){
    ============================================================ */
 function buildActions(){
   var a=$('actions'); if(!a)return;
+  var reveal='<button class="btn show" onclick="revealAnswers()">\u{1F5C2}️ Show the answers<span class="etr">Ver as respostas</span></button>';
+  var reset='<button class="btn ghost" onclick="resetGame()">↺ Reset this game<span class="etr">Recomeçar este jogo</span></button>';
   if(!checked){
-    a.innerHTML='<button class="btn primary" id="checkBtn" onclick="check()">✅ Check answers<span class="etr">Ver resposta</span></button>';
+    a.innerHTML='<button class="btn primary" id="checkBtn" onclick="check()">✅ Check my answers<span class="etr">Conferir minhas respostas</span></button>'
+      +reveal+reset;
   }else{
     var wrong=wrongIds();
     var allRight=wrong.length===0;
@@ -465,9 +491,21 @@ function buildActions(){
     var nextLbl = gi<GAMES.length-1 ? '▶ Next game<span class="etr">Próximo jogo</span>' : '\u{1F3C6} Finish<span class="etr">Terminar</span>';
     a.innerHTML=redo
       +(allRight?'<button class="btn primary" onclick="afterGame()">'+nextLbl+'</button>'
-                :'<button class="btn" onclick="afterGame()">'+(gi<GAMES.length-1?'Skip to next game':'Finish')+'<span class="etr">Pular para o próximo</span></button>')
+                :'<button class="btn" onclick="afterGame()">'+(gi<GAMES.length-1?'Skip to next game →':'Finish')+'<span class="etr">Pular para o próximo</span></button>')
+      +(allRight?'':reveal)
+      +reset
       +'<button class="btn" onclick="intro()">\u{1F3AE} Game menu<span class="etr">Menu dos jogos</span></button>';
   }
+}
+/* reset only the current game (phase) — back to a shuffled bag */
+function resetGame(){ place={}; locked={}; sel=null; checked=false; _poolCache=poolOrder(); render(); }
+/* SHOW THE ANSWERS — organise every card into its correct box (study mode) */
+function revealAnswers(){
+  G().cards.forEach((c,i)=>{ place[cardId(i)]=c.col; locked[cardId(i)]=true; });
+  checked=true; _poolCache=[]; sel=null;
+  render();
+  if($('tip'))$('tip').classList.add('show');
+  var fb=$('fb'); if(fb){fb.className='fb ok';fb.innerHTML='\u{1F5C2}️ Here are the answers — read each box!<div class="tr" style="font-size:.85rem">Aqui estão as respostas — leia cada caixa!</div>';}
 }
 function wrongIds(){
   return G().cards.map((c,i)=>cardId(i)).filter(id=>{var i=+id.slice(1);return place[id] && place[id]!==G().cards[i].col;});
@@ -547,7 +585,8 @@ function finish(){
    NAVBAR / TTS / LOCK / THEME / FONT  (matches CIE2_simulado)
    ============================================================ */
 function goHome(){if(screenLocked)return;if(confirm('Voltar ao menu do site? / Back to the menu?'))location.href='../index.html';}
-function toggleTr(){const on=document.body.classList.toggle('show-tr');try{localStorage.setItem('cie2_tr',on?'1':'0');}catch(e){}}
+/* English is ALWAYS the default; the BR flag adds PT on demand (per session, not persisted) */
+function toggleTr(){document.body.classList.toggle('show-tr');}
 var fsLevel=1;
 function fs(d){fsLevel=Math.max(.8,Math.min(1.5,fsLevel+d*0.1));document.documentElement.style.setProperty('--fs',fsLevel);}
 function say(txt){try{if(!txt)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='en-US';u.rate=.85;
@@ -591,7 +630,7 @@ function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<140;i++
 function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}
 rz();addEventListener('resize',rz);d();})();
 if('speechSynthesis' in window){speechSynthesis.getVoices();}
-try{if(localStorage.getItem('cie2_tr')==='1')document.body.classList.add('show-tr');}catch(e){}
+/* start in English by default — translation only when the BR flag is tapped */
 intro();
 </script>
 </body>
