@@ -480,10 +480,11 @@ function bindBoard(){
 function buildActions(){
   var a=$('actions'); if(!a)return;
   var reveal='<button class="btn show" onclick="revealAnswers()">\u{1F5C2}️ Show the answers<span class="etr">Ver as respostas</span></button>';
+  var summary='<button class="btn" onclick="cieSummary.show(G())">\u{1F4CB} See the summary<span class="etr">Ver o resumo</span></button>';
   var reset='<button class="btn ghost" onclick="resetGame()">↺ Reset this game<span class="etr">Recomeçar este jogo</span></button>';
   if(!checked){
     a.innerHTML='<button class="btn primary" id="checkBtn" onclick="check()">✅ Check my answers<span class="etr">Conferir minhas respostas</span></button>'
-      +reveal+reset;
+      +summary+reveal+reset;
   }else{
     var wrong=wrongIds();
     var allRight=wrong.length===0;
@@ -493,6 +494,7 @@ function buildActions(){
       +(allRight?'<button class="btn primary" onclick="afterGame()">'+nextLbl+'</button>'
                 :'<button class="btn" onclick="afterGame()">'+(gi<GAMES.length-1?'Skip to next game →':'Finish')+'<span class="etr">Pular para o próximo</span></button>')
       +(allRight?'':reveal)
+      +summary
       +reset
       +'<button class="btn" onclick="intro()">\u{1F3AE} Game menu<span class="etr">Menu dos jogos</span></button>';
   }
@@ -633,6 +635,7 @@ if('speechSynthesis' in window){speechSynthesis.getVoices();}
 /* start in English by default — translation only when the BR flag is tapped */
 intro();
 </script>
+<script src="cie2_summary.js"></script>
 <script src="cie2_theme.js"></script>
 </body>
 </html>
