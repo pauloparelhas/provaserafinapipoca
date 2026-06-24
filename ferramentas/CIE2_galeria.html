@@ -159,5 +159,6 @@ function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<120;i++
 function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}
 rz();addEventListener('resize',rz);d();})();
 </script>
+<script src="cie2_theme.js"></script>
 </body>
 </html>
