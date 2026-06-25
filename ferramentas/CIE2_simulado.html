@@ -157,6 +157,7 @@ body.show-tr .endbtn .etr{display:block}
 .qnav-btn:active:not(:disabled){transform:scale(.96)}
 .qnav-btn.jump{max-width:130px;font-size:1.15rem;border-color:var(--accent2);color:var(--accent2);background:rgba(251,191,36,.12)}
 .qnav-btn.jump:disabled{border-color:var(--line);color:var(--ink)}
+.qnav-btn.results{max-width:160px;font-size:1.3rem;border-color:var(--accent);color:#08263a;background:var(--accent)}
 /* --- lock / fullscreen --- */
 .lockbtn.on{background:rgba(248,113,113,.28);color:#fecaca}
 body.locked .iconbtn[onclick*="goHome"]{opacity:.3;pointer-events:none}
@@ -452,12 +453,26 @@ function nextUnansweredIdx(){
   return -1;
 }
 function jumpUnanswered(){ var idx=nextUnansweredIdx(); if(idx>=0){ cur=idx; render(); } }
+/* all questions answered? then the result screen must be reachable from anywhere */
+function allAnswered(){ return deck && total>0 && deck.every(function(it){return it.done;}); }
 function updateArrows(){
   $('qnav').classList.add('show');
   $('navPrev').disabled = cur<=0;
   $('navNext').disabled = cur>=total-1;
-  var ji=nextUnansweredIdx();
-  $('navJump').disabled = ji<0 || ji===cur;   /* só habilita se houver OUTRA questão sem resposta */
+  var jb=$('navJump');
+  if(allAnswered()){
+    /* every question answered → turn the jump button into "See results" so the
+       child always reaches the grade, even when answering out of order */
+    jb.disabled=false; jb.classList.add('results');
+    jb.onclick=fim; jb.title='Ver resultado / See results';
+    jb.innerHTML='\u{1F389}<span class="ql">Resultado</span>';
+  }else{
+    jb.classList.remove('results');
+    jb.onclick=jumpUnanswered; jb.title='Próxima sem resposta / Next unanswered';
+    jb.innerHTML='⏩<span class="ql">Sem resposta</span>';
+    var ji=nextUnansweredIdx();
+    jb.disabled = ji<0 || ji===cur;   /* só habilita se houver OUTRA questão sem resposta */
+  }
 }
 function say(txt){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='en-US';u.rate=.85;
   const v=speechSynthesis.getVoices().find(v=>/en-US|en_US|English \(United States\)/i.test(v.lang+v.name));if(v)u.voice=v;
@@ -519,7 +534,7 @@ function redoQ(){
 function head(it,label,cls){return `<div class="qhead"><span class="qnum">Question ${cur+1} of ${total}</span><span class="badge ${cls}">${label}</span></div>
   ${it.fig?`<div class="qfig">${it.fig}</div>`:''}${it.en?`<div class="q">${it.en}</div><div class="tr qtr">${it.pt}</div>`:''}
   ${it.en?`<button class="speak" onclick="say('${esc(it.en)}')">&#128266; Listen</button>`:''}`;}
-function nextBtn(hidden){return `<button class="next" id="next" ${hidden?'style="display:none"':''} onclick="next()">${cur===total-1?'See results \u{1F389}':'Next →'}</button>`;}
+function nextBtn(hidden){return `<button class="next" id="next" ${hidden?'style="display:none"':''} onclick="next()">${(cur===total-1||allAnswered())?'See results \u{1F389}':'Next →'}</button>`;}
 
 /* MC */
 function renderMC(it){
@@ -737,7 +752,7 @@ function paintSelf(it){
   $('next').style.display='block';$('next').classList.add('show');
 }
 
-function next(){cur++;if(cur<total)render();else fim();}
+function next(){ if(allAnswered()){fim();return;} cur++; if(cur<total)render(); else fim(); }
 function redoWrong(){
   const w=wrongItems().map(it=>({type:it._type,src:it._src}));
   deck=shuffle(w).map(x=>makeItem(x.type,x.src));

@@ -311,6 +311,8 @@ function openGame(i){ gi=i; place={}; locked={}; sel=null; checked=false; _poolC
    RENDER a game board
    ============================================================ */
 function render(){
+  /* clear any clone left floating from a drag that got interrupted by this render */
+  if(!drag){ var _cl=document.querySelectorAll('.dclone'); for(var _i=0;_i<_cl.length;_i++)_cl[_i].remove(); }
   var g=G();
   $('bar').style.width=((gi+(checked?1:0.5))/GAMES.length*100)+'%';
   // keep pool order stable across re-renders, but add any cards sent back to pool
@@ -378,20 +380,43 @@ function bindCards(){
   });
 }
 var drag=null;
+/* remove ANY floating clone + reset the dragged card's opacity.
+   Belt-and-suspenders against a clone getting orphaned on the screen. */
+function killClones(){
+  var cl=document.querySelectorAll('.dclone');
+  for(var i=0;i<cl.length;i++) cl[i].remove();
+  if(drag && drag.el) drag.el.style.opacity='';
+  clearHighlight();
+}
+function endDrag(){
+  if(drag){
+    try{drag.el.releasePointerCapture(drag.pid);}catch(_){}
+    if(drag.el) drag.el.style.opacity='';
+  }
+  window.removeEventListener('pointermove',onMove);
+  window.removeEventListener('pointerup',onUp);
+  window.removeEventListener('pointercancel',onUp);
+  killClones();
+  drag=null;
+}
 function onDown(e){
   if(checked && drag===null && !canMove(e.currentTarget.dataset.id))return;
   var el=e.currentTarget;
   if(locked[el.dataset.id])return;
+  if(drag) endDrag();                 // never start a 2nd drag with one still live
   e.preventDefault();
   drag={el:el,id:el.dataset.id,sx:e.clientX,sy:e.clientY,moved:false,clone:null,pid:e.pointerId};
   try{el.setPointerCapture(e.pointerId);}catch(_){}
-  el.addEventListener('pointermove',onMove);
-  el.addEventListener('pointerup',onUp);
-  el.addEventListener('pointercancel',onUp);
+  /* listen on window, not the card: survives a re-render that would wipe the
+     card's own listeners and otherwise strand the clone mid-screen */
+  window.addEventListener('pointermove',onMove);
+  window.addEventListener('pointerup',onUp);
+  window.addEventListener('pointercancel',onUp);
 }
 function canMove(id){ return !locked[id]; }
 function onMove(e){
   if(!drag)return;
+  if(e.pointerId!==drag.pid)return;   // ignore a second finger
   var dx=e.clientX-drag.sx, dy=e.clientY-drag.sy;
   if(!drag.moved && Math.hypot(dx,dy)>8){
     drag.moved=true;
@@ -403,7 +428,7 @@ function onMove(e){
     drag.clone=cl;drag.ox=e.clientX-r.left;drag.oy=e.clientY-r.top;
     drag.el.style.opacity='.25';
   }
-  if(drag.moved){
+  if(drag.moved && drag.clone){
     drag.clone.style.left=(e.clientX-drag.ox)+'px';
     drag.clone.style.top=(e.clientY-drag.oy)+'px';
     highlight(colUnder(e));
@@ -411,26 +436,21 @@ function onMove(e){
 }
 function onUp(e){
   if(!drag)return;
-  var el=drag.el;
-  el.removeEventListener('pointermove',onMove);
-  el.removeEventListener('pointerup',onUp);
-  el.removeEventListener('pointercancel',onUp);
-  try{el.releasePointerCapture(drag.pid);}catch(_){}
-  if(drag.moved){
-    var col=colUnder(e);
-    if(drag.clone)drag.clone.remove();
-    el.style.opacity='';
-    clearHighlight();
-    var d=drag; drag=null;
+  if(e.pointerId!==drag.pid && e.type!=='pointercancel')return;
+  var d=drag, col=d.moved?colUnder(e):null;
+  endDrag();                          // tears down listeners + clone FIRST, always
+  if(d.moved){
     if(col) placeCard(d.id,col);
     else if(place[d.id]) removeFromCol(d.id);   // dragged a placed card out → back to bag
     else render();
   }else{
-    var id2=el.dataset.id; drag=null;
-    if(place[id2]) removeFromCol(id2);           // tap a placed card → take it out
-    else selectCard(id2);                        // tap a bag card → select it
+    if(place[d.id]) removeFromCol(d.id);         // tap a placed card → take it out
+    else selectCard(d.id);                       // tap a bag card → select it
   }
 }
+/* if the tab loses focus mid-drag (notification, app switch), clean up */
+window.addEventListener('blur',function(){ if(drag) endDrag(); });
+document.addEventListener('visibilitychange',function(){ if(document.hidden && drag) endDrag(); });
 function removeFromCol(id){
   if(locked[id])return;
   delete place[id];
