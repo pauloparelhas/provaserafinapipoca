@@ -21,7 +21,7 @@ Legenda: **TREINA** (criança age sobre o átomo) · **MENCIONA** (só texto pas
 | Change of state (melt/freeze/boil, heat/cool) | mudança | causal | ✅ TREINA | simulado (ordenar), popit |
 | Opaque / translucent / transparent | óptica | por objeto | ✅ TREINA | simulado, dragdrop, superrevisão |
 | Absorb / repel liquids | absorção | por objeto | ✅ TREINA (nos **7** produtos) | todos |
-| **Viscosity (resistência a fluir; mel>óleo>água)** | fluidez | — | 🔴 **AUSENTE** | nenhum produto **e** nenhum insumo que tenho |
+| Viscosity (Q6) | fluidez | — | ⚪ FORA DO INSUMO | não está em insumo nenhum → imponderável, NÃO entra no material (conta de chegada) |
 | exerts pressure / affected by altitude (gas) | gás | excl. gas | ⚪ cortado de propósito (não caiu) | — |
 
 ## 2. Falhas priorizadas
@@ -33,10 +33,10 @@ Legenda: **TREINA** (criança age sobre o átomo) · **MENCIONA** (só texto pas
   esta propriedade? (pode ser +de1)"**. A **Regra de Ouro #6 do roteiro proibiu explicitamente**
   esse conteúdo, chamando-o de "síntese transversal abstrata" — **avaliação incorreta**: o insumo
   o enuncia literalmente. → Caiu na **Q5 (peso 1.8, a maior da prova)**; a filha marcou só um estado.
-- 🔴 **#2 — Viscosidade ausente de tudo.** Caiu na **Q6** (ordenar mel/óleo/água). Não está em
-  produto nem em nenhum dos 8 insumos que tenho. **Insumo possivelmente ausente** — confirmar se
-  houve slide de viscosidade. Independentemente, é extensão natural de "flow/can be poured" e
-  deveria ter sido antecipada.
+- ⚪ **#2 — Viscosidade: IMPONDERÁVEL, fora do insumo (NÃO é buraco).** Caiu na **Q6**, mas não está
+  em nenhum insumo da escola. **Não se adiciona ao material** só porque caiu — isso seria *conta de
+  chegada* (retrofit de prova já vista; ver `CLAUDE.md`). O processo se julga por derivar do INSUMO,
+  não por adivinhar a prova. Item exclusivo da prova é imponderável e aceitamos não garanti-lo.
 - 🟡 **#3 — Armadilha de L2 não treinada:** *take up space* (ocupar) × *take the shape* (tomar a
   forma) — ambos "take". Provável causa do erro da Q5. Nunca contrastados.
 - ✅ **#4 — Redundância NÃO é problema (correção de doutrina):** absorb/repel estar nos 7 produtos
@@ -55,20 +55,22 @@ Legenda: **TREINA** (criança age sobre o átomo) · **MENCIONA** (só texto pas
 | 3 | Classificar 15 objetos reais | sort | ✅ |
 | 4 | Desenhar arranjo de partículas | desenhar | ✅ |
 | **5** | **Qual(is) estado(s) tem a propriedade (líq×sól, incl. massa/ocupa espaço)** | **circular multi** | 🔴🟡 **NÃO** |
-| **6** | **Viscosidade — ordenar mel/óleo/água** | **ordenar** | 🔴 **NÃO** |
+| 6 | Viscosidade — ordenar mel/óleo/água | ordenar | ⚪ fora do insumo (imponderável — não entra) |
 | 7 | Mudança de estado (o que acontece depois) | escrever | ✅ |
 | 8 | Opaco/translúcido/transparente (11 itens) | escrever | ✅ |
 | 9 | Por que o gelo espera (mudança de estado) | raciocinar | ✅ |
 
 ## 4. Veredito
 
-**PODE declarar pronto? NÃO** — 2 buracos concretos impediam gabaritar só com o nosso material:
+**PODE declarar pronto? NÃO (havia 1 buraco REAL)** — 1 lacuna concreta, derivável do insumo,
+impedia gabaritar só com o nosso material:
 
 1. **Propriedade compartilhada como multi-resposta "qual(is) estado(s)?"** + treino explícito do
-   par L2 *take up space × take the shape*. (fecha Q5 — maior peso)
-2. **Bloco de viscosidade** (mel > óleo > água, "resistência a fluir"). (fecha Q6 — pendente confirmar insumo)
+   par L2 *take up space × take the shape*. (fecha Q5 — maior peso). ESTAVA no insumo → é buraco real.
 
-Secundário: reduzir domínio de absorb/repel e adicionar **uso cotidiano do gás** (Q2).
+**Viscosidade (Q6) NÃO é buraco:** fora do insumo, imponderável. Adicioná-la seria *conta de chegada*
+— o processo se julga por derivar do insumo, não por retrofit da prova. Fica FORA do material.
+Secundário (derivável): **uso cotidiano do gás** (Q2), fraco.
 
-Estes são exatamente os alvos dos ajustes da Fase 1 e do novo produto SESILAB (predict/classify
-multi-resposta para #1; `sim` de corrida de viscosidade para #2).
+Alvo da Fase 1 e do SESILAB: **só o #1** — predict/classify multi-resposta (m3). Absorb/repel mantido
+(está no insumo). Nada de viscosidade.

@@ -113,19 +113,14 @@ Mesma substância, estados diferentes, mudando com calor/frio:
 
 ---
 
-## BLOCO 3c — Viscosity (viscosidade) — EXTENSÃO rotulada (add 01/07 — fecha a Q6)
+## BLOCO 3c — Viscosity (Q6) — NÃO INCLUÍDA de propósito (nota metodológica, 01/07)
 
-> ⚠️ **Insumo possivelmente ausente:** não há slide de viscosidade nos insumos que temos. A prova (Q6)
-> cobrou mesmo assim, como extensão de "flow / can be poured". Entra como **extensão inferível**, não
-> como conteúdo-base — mas é barato cobrir e blinda a próxima prova.
-
-- **Viscosity** = a **liquid's resistance to flow** (resistência do líquido a fluir).
-- **Low viscosity** (baixa) → flui rápido → chega antes: **water** (água).
-- **High viscosity** (alta) → flui devagar → chega por último: **honey** (mel).
-- Meio-termo: **oil** (óleo).
-- **Ordem de chegada ao fundo:** water (1º) → oil (2º) → honey (3º).
-- Ancorar em experiência concreta: "pour honey and water — which reaches the bottom first?".
-- Tipo de questão: **ORDENAR** (1/2/3) — igual à Q6 da prova.
+> ❌ **Não entra no material.** A prova (Q6) cobrou viscosidade (ordenar mel/óleo/água), mas
+> **não há viscosidade em nenhum insumo da escola**. Adicioná-la ao material só porque caiu na prova
+> física seria **conta de chegada** — retrofit de uma prova já vista, que faz o processo *parecer*
+> completo sem ser reproduzível (não dava para adivinhar a partir dos insumos). Item exclusivo da prova
+> é **imponderável** e fica FORA do material. Se um dia aparecer um insumo de viscosidade, entra
+> legitimamente. Ver `CLAUDE.md > PROTOCOLO ANTI-REDUÇÃO` (regra da conta de chegada).
 
 ---
 
@@ -160,7 +155,6 @@ vibrate (vibrar) · flow (fluir) · pour (derramar) · compress (comprimir) · p
 heat / heated (calor / aquecido) · cool / cooled (esfriar / resfriado) ·
 transparent (transparente) · translucent (translúcido) · opaque (opaco) ·
 absorb (absorver) · repel (repelir) · light (luz) · container (recipiente) ·
-viscosity (viscosidade) · resistance (resistência) · low/high viscosity (baixa/alta) ·
 **take up space (ocupar espaço) ≠ take the shape (tomar a forma)** — par L2 a treinar
 
 ## HABILIDADES (referência BNCC Ciências EF02CI/EF01CI — propriedades dos materiais)
@@ -205,9 +199,8 @@ Exemplo ruim (proibido): distrator "because it is made of chocolate" / "because 
 | 2 — Arranjo de partículas (o porquê) | alto | 22% |
 | 4 — Opaque/translucent/transparent | médio | 18% |
 | 3 + 3b — Examples + mudança de estado | médio | 12% |
-| 5 — Absorb/repel (no insumo → mantido, não caiu na prova) | médio-baixo | 10% |
-| **3c — Viscosidade (extensão inferível, Q6)** | baixo | 8% |
+| 5 — Absorb/repel (no insumo → mantido, não caiu na prova) | médio | 15% |
 
-> Nota: isto é ADIÇÃO, não corte nem "rebalanceamento". Absorb/repel continua treinado em todos os
-> produtos (está no insumo — redundância entre modalidades é desejável). Só ACRESCENTAMOS o central
-> (1c) e a extensão (3c) que faltavam. KPI = completude do insumo, não distribuição de peso.
+> Nota: a ÚNICA adição legítima foi o central **1c** (propriedade compartilhada — estava no insumo e
+> caiu na Q5). Viscosidade (Q6) foi REMOVIDA — fora do insumo, adicionar = conta de chegada (ver 3c).
+> Absorb/repel continua treinado em todos os produtos (está no insumo). KPI = completude do insumo.

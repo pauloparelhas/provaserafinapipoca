@@ -35,8 +35,9 @@ body.show-tr .tr{ display:inline; }
 /* ============================================================
    Serafina Lab — Ciencias 2tri · Properties of Matter
    Motor SESILAB (cie2). Bilingue EN + PT(bandeira). TTS en-US.
-   Fecha os 2 buracos da prova: m3 (Q5 propriedade compartilhada)
-   e m5 (Q6 viscosidade). Conteudo do roteiro corrigido 01/07.
+   Fecha o buraco REAL da prova: m3 (Q5 propriedade compartilhada, que
+   ESTAVA no insumo). Viscosidade (Q6) NAO entra — nao estava no insumo;
+   adicionar por ter caido = conta de chegada. Conteudo do roteiro 01/07.
    ============================================================ */
 const FIGS=[];
 const say=(t)=>'<button class="say" data-say="'+t.replace(/"/g,'&quot;')+'" title="Listen">🔊</button>';
@@ -77,9 +78,8 @@ M.push({ id:'home', nav:'Start', icon:'🏠', crumb:'Serafina Lab', title:'Prope
     {kicker:'2', icon:'🔬', title:'Particles', text:'Why? Heat the particles!', to:'m2'},
     {kicker:'3', icon:'⚖️', title:'Which state(s)?', text:'Some properties belong to BOTH.', to:'m3'},
     {kicker:'4', icon:'🔥❄️', title:'Change of state', text:'Ice ↔ water ↔ steam.', to:'m4'},
-    {kicker:'5', icon:'🍯', title:'Viscosity race', text:'Who reaches the bottom first?', to:'m5'},
-    {kicker:'6', icon:'👓', title:'Light through it', text:'Opaque / translucent / transparent.', to:'m6'},
-    {kicker:'7', icon:'💧🧽', title:'Absorb or repel', text:'Does it soak or stay dry?', to:'m7'},
+    {kicker:'5', icon:'👓', title:'Light through it', text:'Opaque / translucent / transparent.', to:'m6'},
+    {kicker:'6', icon:'💧🧽', title:'Absorb or repel', text:'Does it soak or stay dry?', to:'m7'},
     {kicker:'★', icon:'🏆', title:'Review', text:'Test yourself!', to:'review'},
   ]},
 ]});
@@ -181,37 +181,13 @@ M.push({ id:'m4', nav:'4 · Change of state', icon:'🔥', crumb:'Module 4', tit
    reveal:'Ice must <b>melt</b> and become a liquid first! '+pt('O gelo precisa derreter e virar líquido.')},
 ]});
 
-/* ===== m5 · VISCOSITY RACE — FECHA A Q6 ===== */
-M.push({ id:'m5', nav:'5 · Viscosity', icon:'🍯', crumb:'Module 5 · exam Q6', title:'Viscosity race', blocks:[
-  {type:'callout', tone:'blue', icon:'🍯', label:'Viscosity '+say('Viscosity is a liquid resistance to flow'),
-   html:'<b>Viscosity</b> is a liquid’s <b>resistance to flow</b>. Thick liquids (high viscosity) flow <b>slowly</b>. Thin liquids (low viscosity) flow <b>fast</b>. '+pt('Viscosidade é a resistência do líquido a fluir.')},
-  {type:'predict', title:'Predict the winner', icon:'🏁',
-   prompt:'We pour water, oil and honey. Which reaches the bottom <b>first</b>? '+pt('Qual chega ao fundo primeiro?'),
-   options:[{label:'Water 💧 (thin)',correct:true},{label:'Oil 🛢️',correct:false},{label:'Honey 🍯 (thick)',correct:false}],
-   reveal:'Water is thinnest → it wins! Order: <b>1º water, 2º oil, 3º honey</b>. '+pt('Ordem: 1º água, 2º óleo, 3º mel.')},
-  {type:'sim', title:'Watch the race', icon:'🏁', tag:'press restart', height:320, animate:true, w:640,
-   controls:[],
-   draw:(ctx,cv,P)=>{
-     const w=cv.width,h=cv.height;ctx.clearRect(0,0,w,h);ctx.fillStyle='#0d1830';ctx.fillRect(0,0,w,h);
-     const lanes=[{n:'Water',c:'#4fd1ff',s:0.9},{n:'Oil',c:'#ffce5a',s:0.5},{n:'Honey',c:'#ff9a5b',s:0.28}];
-     const top=h*0.16,bot=h*0.86,t=P._t||0;
-     lanes.forEach((L,i)=>{
-       const x=w*(0.26+i*0.24);
-       ctx.strokeStyle='rgba(127,224,255,.25)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,bot);ctx.stroke();
-       ctx.fillStyle='#cfe0f5';ctx.font='bold 13px Nunito,sans-serif';ctx.textAlign='center';ctx.fillText(L.n,x,top-8);
-       const prog=Math.min(1,t*L.s*0.4);
-       const y=top+prog*(bot-top);
-       ctx.fillStyle=L.c;ctx.beginPath();ctx.moveTo(x,y-9);ctx.quadraticCurveTo(x+9,y+3,x,y+9);ctx.quadraticCurveTo(x-9,y+3,x,y-9);ctx.fill();
-       if(prog>=1){ctx.fillStyle=L.c;ctx.font='16px Nunito';ctx.fillText('✓',x,bot+16);}
-     });
-     ctx.textAlign='left';ctx.fillStyle='#5fe39b';ctx.font='12px Nunito,sans-serif';ctx.fillText('bottom '+String.fromCharCode(8595),w*0.02,bot);
-   },
-   readout:()=>'Water reaches first, then oil, then honey. '+pt('Água primeiro, depois óleo, depois mel.'),
-   insight:()=>'Thin = low viscosity = fast. Thick = high viscosity = slow. '+pt('Fino=rápido, grosso=devagar.')},
-]});
+/* NOTA (01/07): viscosidade (Q6 da prova) foi REMOVIDA de proposito. Nao estava em
+   nenhum insumo da escola — adiciona-la so porque caiu na prova seria "conta de chegada"
+   (retrofit de prova ja vista), que faz o processo parecer completo sem ser reproduzivel.
+   Item que so existe na prova e imponderavel e NAO entra no material. Ver CLAUDE.md. */
 
 /* ===== m6 · LIGHT: opaque/translucent/transparent ===== */
-M.push({ id:'m6', nav:'6 · Light', icon:'👓', crumb:'Module 6', title:'Opaque, translucent, transparent', blocks:[
+M.push({ id:'m6', nav:'5 · Light', icon:'👓', crumb:'Module 5', title:'Opaque, translucent, transparent', blocks:[
   {type:'compare', cols:[
     {title:'Transparent '+say('Transparent'), icon:'🔎', color:'#4fd1ff', items:['ALL light passes '+pt('passa toda a luz'),'we see through clearly '+pt('vemos através'),'e.g. water, glass '+pt('água, vidro')]},
     {title:'Translucent '+say('Translucent'), icon:'🌫️', color:'#ffce5a', items:['SOME light passes '+pt('passa um pouco de luz'),'we see a little '+pt('vemos só um pouco'),'e.g. apple juice, butter paper '+pt('suco, papel manteiga')]},
@@ -228,7 +204,7 @@ M.push({ id:'m6', nav:'6 · Light', icon:'👓', crumb:'Module 6', title:'Opaque
 ]});
 
 /* ===== m7 · ABSORB / REPEL (mantido — esta no insumo) ===== */
-M.push({ id:'m7', nav:'7 · Absorb / repel', icon:'💧', crumb:'Module 7', title:'Absorb or repel liquids', blocks:[
+M.push({ id:'m7', nav:'6 · Absorb / repel', icon:'💧', crumb:'Module 6', title:'Absorb or repel liquids', blocks:[
   {type:'compare', cols:[
     {title:'Absorbs '+say('Absorbs'), icon:'🧽', color:'#5fe39b', items:['soaks the liquid in '+pt('puxa o líquido para dentro'),'gets wet '+pt('fica molhado'),'e.g. sponge, cloth, paper '+pt('esponja, pano, papel')]},
     {title:'Repels '+say('Repels'), icon:'☔', color:'#4fd1ff', items:['liquid rolls off '+pt('o líquido escorre'),'stays dry '+pt('fica seco'),'e.g. raincoat, glass, metal '+pt('capa de chuva, vidro, metal')]},
@@ -249,7 +225,7 @@ M.push({ id:'review', nav:'★ Review', icon:'🏆', crumb:'Review', title:'Test
     {front:'Which have mass?',hint:'tap',back:'ALL of them! '+pt('Todos.')},
     {front:'Only the liquid…',hint:'tap',back:'flows and takes the shape of the container. '+pt('flui e toma a forma.')},
     {front:'Only the solid…',hint:'tap',back:'keeps its shape and does not flow. '+pt('mantém a forma.')},
-    {front:'Fastest to flow?',hint:'tap',back:'water (low viscosity). Honey is slowest. '+pt('água; mel é o mais lento.')},
+    {front:'Only the gas…',hint:'tap',back:'has no fixed shape and spreads out. '+pt('não tem forma fixa e se espalha.')},
     {front:'Heat ice →',hint:'tap',back:'it melts into water. '+pt('derrete em água.')},
   ]},
   {type:'predict', title:'Final check', icon:'🎯',
@@ -259,7 +235,7 @@ M.push({ id:'review', nav:'★ Review', icon:'🏆', crumb:'Review', title:'Test
   {type:'checklist', title:'I can…', icon:'✅', items:[
     'Name the three states of matter '+pt('nomear os 3 estados'),
     'Say which properties belong to BOTH solid and liquid '+pt('dizer o que é dos DOIS'),
-    'Explain viscosity (water fast, honey slow) '+pt('explicar viscosidade'),
+    'Draw how the particles sit in a solid, liquid and gas '+pt('desenhar as partículas'),
     'Tell opaque / translucent / transparent apart '+pt('distinguir opaco/translúcido/transparente'),
     'Say what happens when you heat or cool water '+pt('dizer o que acontece com calor/frio'),
   ]},

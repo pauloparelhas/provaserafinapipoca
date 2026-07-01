@@ -288,9 +288,13 @@ produto. Faltou conferencia insumo→produto.
    NAO existe "inflar o secundario": se esta no insumo, aparecer em todos os produtos e correto.
 5b. **Imponderabilidade — NUNCA deletar por "nao caiu":** qual item do insumo a prova escolhe e
    imponderavel/azar. Se esta no insumo, TEM de estar no nosso material e permanece treinado mesmo
-   que nao tenha caido. Reduzir escopo com base numa prova so e o MESMO erro ao contrario. Item FORA
-   do insumo (ex.: viscosidade) entra como extensao opcional rotulada — nao e falha se faltar, mas
-   cobrir barato quando plausivel.
+   que nao tenha caido. Reduzir escopo com base numa prova so e o MESMO erro ao contrario.
+5c. **Proibido "conta de chegada" (retrofit de prova ja vista):** item que caiu na prova mas NAO esta
+   em nenhum insumo (ex.: viscosidade na Ciencias 2tri) NAO entra no material. Adiciona-lo so porque
+   apareceu na prova fisica e conta de chegada: faz o processo *parecer* completo sem ser reproduzivel
+   (nao dava para adivinhar a partir do insumo) e falseia a avaliacao do processo. O processo se julga
+   por derivar do INSUMO, jamais por retrofit da prova. Item exclusivo da prova e imponderavel e fica
+   FORA do material — aceita-se nao garanti-lo. So entra se/quando aparecer um insumo que o sustente.
 6. **Armadilhas de L2:** listar pares EN que confundem (take up space × take the shape; steam=gas
    × water=liquid) e treina-los explicitamente.
 
