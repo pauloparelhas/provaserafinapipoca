@@ -281,13 +281,16 @@ produto. Faltou conferencia insumo→produto.
 4. **Prova-espelho antes de fechar:** gerar do insumo o blueprint do que o professor cobraria
    (por formato, incluindo multi-resposta e comparacao) e conferir produto a produto. Perguntar
    sempre: "como a prova pode cobrar isto de um jeito que nao estamos preparando?"
-5. **Peso proporcional ao insumo:** distribuir produtos conforme a enfase do material, nao conforme
-   o que e facil de gamificar. Nao inflar o secundario nem deixar o central a descoberto.
+5. **KPI = COMPLETUDE, nao equilibrio.** A metrica e "nenhum atomo do insumo AUSENTE", nao
+   "distribuir peso" nem "evitar repeticao". Cada produto e uma MODALIDADE diferente de ensinar
+   o MESMO escopo — e normal e DESEJAVEL que um atomo apareca em varios produtos (simulado, drag,
+   pop it, resumo, sesilab sao formas distintas do mesmo conteudo). O erro e AUSENCIA, nunca redundancia.
+   NAO existe "inflar o secundario": se esta no insumo, aparecer em todos os produtos e correto.
 5b. **Imponderabilidade — NUNCA deletar por "nao caiu":** qual item do insumo a prova escolhe e
-   imponderavel. Se esta no insumo, PERMANECE treinado mesmo que nao tenha caido na ultima prova.
-   Reduzir escopo com base numa prova so e o MESMO erro ao contrario. "Rebalancear" = treinar tambem
-   o central, jamais apagar o secundario. Item FORA do insumo (ex.: viscosidade) entra como extensao
-   opcional rotulada — nao e falha se faltar, mas cobrir barato quando plausivel.
+   imponderavel/azar. Se esta no insumo, TEM de estar no nosso material e permanece treinado mesmo
+   que nao tenha caido. Reduzir escopo com base numa prova so e o MESMO erro ao contrario. Item FORA
+   do insumo (ex.: viscosidade) entra como extensao opcional rotulada — nao e falha se faltar, mas
+   cobrir barato quando plausivel.
 6. **Armadilhas de L2:** listar pares EN que confundem (take up space × take the shape; steam=gas
    × water=liquid) e treina-los explicitamente.
 

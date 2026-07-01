@@ -208,5 +208,6 @@ Exemplo ruim (proibido): distrator "because it is made of chocolate" / "because 
 | 5 — Absorb/repel (no insumo → mantido, não caiu na prova) | médio-baixo | 10% |
 | **3c — Viscosidade (extensão inferível, Q6)** | baixo | 8% |
 
-> Nota: rebalanceamento, NÃO corte. Absorb/repel continua treinado (está no insumo). O ajuste só
-> abriu espaço para o central (1c) e a extensão (3c) que a prova mostrou faltarem.
+> Nota: isto é ADIÇÃO, não corte nem "rebalanceamento". Absorb/repel continua treinado em todos os
+> produtos (está no insumo — redundância entre modalidades é desejável). Só ACRESCENTAMOS o central
+> (1c) e a extensão (3c) que faltavam. KPI = completude do insumo, não distribuição de peso.
