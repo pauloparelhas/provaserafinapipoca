@@ -25,6 +25,9 @@ body.show-tr .tr{ display:inline; }
 #flagBtn.on{ outline:2px solid var(--gold); }
 #flagBtn svg{ width:22px; height:16px; display:block; }
 .kidhint{ font-size:13px; color:var(--txt-dim); }
+/* compare: 3 colunas apertam a 360px (7 anos, celular) -> empilha no telefone.
+   O motor poe grid-template-columns inline; !important pagescoped vence sem tocar o engine. */
+@media(max-width:560px){ .cmp{ grid-template-columns:1fr !important; } }
 </style>
 </head><body>
 <script src="assets/sesilab.js?v=cie2a"></script>
