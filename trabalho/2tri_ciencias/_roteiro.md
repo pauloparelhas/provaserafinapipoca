@@ -55,6 +55,29 @@ Brutos (PDF + 7 PNG/JPEG) — gitignored. Datado: aula de 14/05/2026.
 
 ---
 
+## BLOCO 1c — Propriedades COMPARTILHADAS e COMPARAÇÃO entre estados (add 01/07 — fecha a Q5)
+
+**Do próprio slide de propriedades da escola** (cada estado lista isto):
+
+| Propriedade | Solid | Liquid | Gas | Como cobrar |
+|---|---|---|---|---|
+| **Takes up space** (ocupa espaço) | ✅ | ✅ | ✅ | "Which state(s) take up space?" → **solid E liquid** (comparar só sól×líq) |
+| **Has mass / weight** | ✅ | ✅ | ✅ | "Which state(s) has mass?" → **solid E liquid** |
+| **Keeps its shape** | ✅ | ❌ | ❌ | só solid |
+| **Flows** | ❌ | ✅ | — | só liquid |
+| **Does not flow** | ✅ | ❌ | — | só solid |
+| **Takes the shape of the container** | ❌ | ✅ | — | só liquid |
+| **Has a definite (fixed) shape** | ✅ | ❌ | — | só solid |
+
+**Formato-alvo (espelha a Q5 da prova):** dada uma propriedade, a criança marca **QUAL(IS)** estado(s)
+a têm — a resposta pode ser **UM ou DOIS**. Treinar respostas duplas (mass, takes up space) junto com
+respostas únicas (flows, keeps shape), para quebrar o modelo mental "cada propriedade = um estado".
+
+> ⚠️ **Armadilha de L2 (treinar de propósito):** *take up space* (ocupar volume) ≠ *take the shape*
+> (amoldar-se ao recipiente). Ambos começam com "take". Foi a provável causa do erro na prova.
+
+---
+
 ## BLOCO 2 — Particle Arrangement (arranjo das partículas) — o "porquê"
 
 | Estado | Arranjo das partículas | Movimento |
@@ -90,6 +113,22 @@ Mesma substância, estados diferentes, mudando com calor/frio:
 
 ---
 
+## BLOCO 3c — Viscosity (viscosidade) — EXTENSÃO rotulada (add 01/07 — fecha a Q6)
+
+> ⚠️ **Insumo possivelmente ausente:** não há slide de viscosidade nos insumos que temos. A prova (Q6)
+> cobrou mesmo assim, como extensão de "flow / can be poured". Entra como **extensão inferível**, não
+> como conteúdo-base — mas é barato cobrir e blinda a próxima prova.
+
+- **Viscosity** = a **liquid's resistance to flow** (resistência do líquido a fluir).
+- **Low viscosity** (baixa) → flui rápido → chega antes: **water** (água).
+- **High viscosity** (alta) → flui devagar → chega por último: **honey** (mel).
+- Meio-termo: **oil** (óleo).
+- **Ordem de chegada ao fundo:** water (1º) → oil (2º) → honey (3º).
+- Ancorar em experiência concreta: "pour honey and water — which reaches the bottom first?".
+- Tipo de questão: **ORDENAR** (1/2/3) — igual à Q6 da prova.
+
+---
+
 ## BLOCO 4 — Opaque · Translucent · Transparent (passagem de luz)
 
 | Termo | Definição (EN) | PT | Exemplo do material |
@@ -120,7 +159,9 @@ shape (forma) · volume (volume) · mass (massa) · particle (partícula) · arr
 vibrate (vibrar) · flow (fluir) · pour (derramar) · compress (comprimir) · pressure (pressão) ·
 heat / heated (calor / aquecido) · cool / cooled (esfriar / resfriado) ·
 transparent (transparente) · translucent (translúcido) · opaque (opaco) ·
-absorb (absorver) · repel (repelir) · light (luz) · container (recipiente)
+absorb (absorver) · repel (repelir) · light (luz) · container (recipiente) ·
+viscosity (viscosidade) · resistance (resistência) · low/high viscosity (baixa/alta) ·
+**take up space (ocupar espaço) ≠ take the shape (tomar a forma)** — par L2 a treinar
 
 ## HABILIDADES (referência BNCC Ciências EF02CI/EF01CI — propriedades dos materiais)
 - Identificar e nomear os três estados físicos da matéria e suas propriedades.
@@ -154,14 +195,18 @@ Exemplo ruim (proibido): distrator "because it is made of chocolate" / "because 
 3. **Distrator nunca pode ser uma segunda verdade** — só pode ser falso à luz do material.
 4. **Garantir questão visual/descritiva de arranjo de partículas** (descrição→estado), não só texto.
 5. Variar os 6 TIPOS sempre — nunca só múltipla escolha. Blocos 1+2 = 55% do peso.
-6. **PROIBIDO síntese transversal entre estados.** O material *contrasta* os três estados → cobrar **diferenças** (forma/volume/partículas). NUNCA gerar pergunta sobre o que é *comum* aos três (ex.: "what is true about all three states", "solids, liquids and gases all take up space / have mass"). Cada fragmento ("takes up space, has mass") existe sob cada estado, mas a generalização = definição de matéria: abstrata demais p/ 7 anos, NÃO enquadrada como pergunta no material, e DÚBIA p/ o gás (que "não tem volume fixo / é ar invisível"). Banir "take up space" e "have mass" como propriedade transversal. [removidos na sessão 22/06: 2 itens — 1 MC + 1 V/F]
+6. **Propriedade COMPARTILHADA é conteúdo LEGÍTIMO — CORRIGIDO em 01/07 (erro que custou a Q5).** ~~Proibido síntese transversal~~ estava ERRADO: o slide de propriedades da escola lista "take up space" e "have mass" sob CADA estado — está explícito no insumo. Cobrar SIM, no formato **"qual(is) estado(s) tem esta propriedade? (pode ser mais de uma)"** — resposta múltipla. **Restrição:** quando o gás gera dúvida (volume), restringir a comparação a **solid × liquid** (como fez a prova real na Q5), onde é inequívoco que AMBOS ocupam espaço e têm massa. Só permanece proibida a **generalização abstrata que o insumo NÃO enuncia** (ex.: inferir volume fixo do gás; "defina matéria"). Treinar explicitamente o par L2 que confunde: **take up space (ocupar) × take the shape (tomar a forma)** — ambos "take", causa provável do erro na prova.
 7. **Checagem de COMPOSIÇÃO no QA (não só de fragmentos).** Validar a pergunta INTEIRA (premissa + resposta como um todo) contra o material — não basta cada pedaço existir. `ti`/`pedagogico` validam fragmentos; o erro mora na montagem. Pergunta só vale se o material a enquadra OU ela é claramente inferível como unidade. Princípio do usuário: **perguntas e respostas ÓBVIAS** — sem inferência além do material, sem ambiguidade.
 
-### PESOS FINAIS (pedagógico)
+### PESOS FINAIS (pedagógico — revisto 01/07 pós-prova; absorb/repel mantido, só rebalanceado)
 | Bloco | Peso | % |
 |---|---|---|
-| 1 — Três estados + propriedades | alto | 30% |
-| 2 — Arranjo de partículas (o porquê) | alto | 25% |
-| 4 — Opaque/translucent/transparent | médio | 20% |
-| 5 — Absorb/repel | médio | 15% |
-| 3 + 3b — Examples + mudança de estado | baixo-médio | 10% |
+| 1 + **1c** — Três estados + propriedades + **compartilhadas/comparação (Q5)** | alto | 30% |
+| 2 — Arranjo de partículas (o porquê) | alto | 22% |
+| 4 — Opaque/translucent/transparent | médio | 18% |
+| 3 + 3b — Examples + mudança de estado | médio | 12% |
+| 5 — Absorb/repel (no insumo → mantido, não caiu na prova) | médio-baixo | 10% |
+| **3c — Viscosidade (extensão inferível, Q6)** | baixo | 8% |
+
+> Nota: rebalanceamento, NÃO corte. Absorb/repel continua treinado (está no insumo). O ajuste só
+> abriu espaço para o central (1c) e a extensão (3c) que a prova mostrou faltarem.

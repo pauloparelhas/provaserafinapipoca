@@ -283,6 +283,11 @@ produto. Faltou conferencia insumo→produto.
    sempre: "como a prova pode cobrar isto de um jeito que nao estamos preparando?"
 5. **Peso proporcional ao insumo:** distribuir produtos conforme a enfase do material, nao conforme
    o que e facil de gamificar. Nao inflar o secundario nem deixar o central a descoberto.
+5b. **Imponderabilidade — NUNCA deletar por "nao caiu":** qual item do insumo a prova escolhe e
+   imponderavel. Se esta no insumo, PERMANECE treinado mesmo que nao tenha caido na ultima prova.
+   Reduzir escopo com base numa prova so e o MESMO erro ao contrario. "Rebalancear" = treinar tambem
+   o central, jamais apagar o secundario. Item FORA do insumo (ex.: viscosidade) entra como extensao
+   opcional rotulada — nao e falha se faltar, mas cobrir barato quando plausivel.
 6. **Armadilhas de L2:** listar pares EN que confundem (take up space × take the shape; steam=gas
    × water=liquid) e treina-los explicitamente.
 

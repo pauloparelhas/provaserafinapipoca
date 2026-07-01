@@ -39,8 +39,10 @@ Legenda: **TREINA** (criança age sobre o átomo) · **MENCIONA** (só texto pas
   deveria ter sido antecipada.
 - 🟡 **#3 — Armadilha de L2 não treinada:** *take up space* (ocupar) × *take the shape* (tomar a
   forma) — ambos "take". Provável causa do erro da Q5. Nunca contrastados.
-- 🟠 **#4 — Peso mal alocado:** absorb/repel está nos **7** produtos e **não caiu**; viscosidade e
-  propriedade-compartilhada (as duas maiores questões) em zero produtos de prática.
+- 🟠 **#4 — Peso mal alocado (NÃO é para deletar nada):** absorb/repel está nos **7** produtos e
+  não caiu, mas ESTAVA no insumo → **permanece treinado** (o que a prova escolhe é imponderável;
+  tudo do insumo tem de continuar coberto). O ajuste é só de *equilíbrio*: garantir que o central
+  (propriedade compartilhada) também seja treinado — nunca reduzir escopo com base numa prova só.
 - 🟠 **#5 — "Uso cotidiano" de cada estado** (Q2) treinado fraco, sobretudo GÁS ("I can cloud" saiu
   mal). Temos exemplos, não o framing de USO.
 
