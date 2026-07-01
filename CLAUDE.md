@@ -14,11 +14,13 @@ Os agentes estao em `.claude/agents/`. Sao invocados com `Agent(subagent_type="n
 |---|---|---|
 | Antes de desenhar/codificar nova ferramenta | `pedagogico` | `Agent(subagent_type="pedagogico")` |
 | Antes de declarar ferramenta concluida | `ti` | `Agent(subagent_type="ti")` |
+| Antes de declarar a MATERIA pronta + a cada insumo novo | `auditor-cobertura` | `Agent(subagent_type="auditor-cobertura")` |
 | Apos entregar ferramenta | `arquivista` | `Agent(subagent_type="arquivista")` |
 | Para retomar sessao ou checar prioridades | `gerente` | `Agent(subagent_type="gerente")` |
 
 **NUNCA declarar ferramenta como "pronta" sem ter rodado o agente `ti` antes.**
 **NUNCA comecar a codar sem ter rodado o agente `pedagogico` antes.**
+**NUNCA declarar a MATERIA pronta sem `auditor-cobertura` com veredito SIM (zero buracos de escopo).**
 
 Os agentes leeem os arquivos do projeto diretamente. Passar sempre o caminho do arquivo como contexto no prompt.
 
@@ -249,6 +251,40 @@ Antes de implementar, verificar CADA item do banco de dados:
 - Se houver ambiguidade: substituir por item universal ou adicionar contexto explicito
 
 **POR QUE:** Na sessao 13, rotinas como "escovar os dentes" (pode ser manha ou noite) e "ir para a escola" (depende do turno) causaram ambiguidade nos joguinhos HIS-02. Insumos mal processados geram erros pedagogicos nos produtos.
+
+---
+
+## PROTOCOLO ANTI-REDUCAO DE ESCOPO — OBRIGATORIO (licao Ciencias 2tri)
+
+**PRINCIPIO-MESTRE:** Simplificacao pedagogica reduz AMBIGUIDADE e DIFICULDADE — **NUNCA reduz ESCOPO.**
+Se o insumo da escola ensina, um produto tem de **TREINAR** (nao basta mencionar num resumo passivo).
+
+**O ERRO QUE ORIGINOU ISTO (Ciencias 2tri, prova 25/06):** as "regras de ouro" do roteiro
+proibiram cobrar propriedades COMPARTILHADAS entre estados ("take up space", "have mass"),
+chamando-as de "sintese transversal abstrata". Mas elas estavam **explicitas nas listas do
+proprio material da escola** (cada estado listava "take up space / have mass"). A prova cobrou
+exatamente isso (Q5: "qual(is) estado(s) ocupa espaco?" = liquido E solido) e a crianca errou,
+confundindo *take up space* (ocupar) com *take the shape* (tomar a forma) — armadilha de L2 que
+nunca treinamos. Alem disso: absorb/repel apareceu nos 7 produtos e **nao caiu na prova**;
+viscosidade (Q6) e propriedade-compartilhada (Q5, a maior questao) nao foram treinadas em NENHUM
+produto. Faltou conferencia insumo→produto.
+
+**REGRAS (todas as materias):**
+1. **Rastreabilidade total:** todo atomo de conteudo do insumo (cada bullet/propriedade/vocabulo/
+   exemplo/relacao) tem de ser rastreavel a >=1 produto que o TREINA. Rodar `auditor-cobertura`.
+2. **Propriedade compartilhada e conteudo legitimo:** quando o material lista a mesma propriedade
+   sob +de1 categoria, TREINAR o formato **"qual(is)? (pode ser mais de uma)"** — resposta multipla.
+   So e "sintese proibida" a generalizacao que o insumo NAO enuncia (ex.: inferir volume do gas).
+3. **Cortar so o que o insumo tambem nao tem:** so e legitimo remover um item do banco por
+   "abstrato/ambiguo" se ele TAMBEM estiver ausente do material da escola. Se esta no insumo,
+   nao se corta — reformula-se para ficar inequivoco.
+4. **Prova-espelho antes de fechar:** gerar do insumo o blueprint do que o professor cobraria
+   (por formato, incluindo multi-resposta e comparacao) e conferir produto a produto. Perguntar
+   sempre: "como a prova pode cobrar isto de um jeito que nao estamos preparando?"
+5. **Peso proporcional ao insumo:** distribuir produtos conforme a enfase do material, nao conforme
+   o que e facil de gamificar. Nao inflar o secundario nem deixar o central a descoberto.
+6. **Armadilhas de L2:** listar pares EN que confundem (take up space × take the shape; steam=gas
+   × water=liquid) e treina-los explicitamente.
 
 ---
 
