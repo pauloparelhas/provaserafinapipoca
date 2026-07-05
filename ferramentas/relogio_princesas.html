@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>👑 O Relógio das Princesas</title>
+<style>
+:root{
+  --fs:16px;
+  --rosa:#ff7eb9;
+  --rosa-claro:#ffd6ec;
+  --lavanda:#b794f6;
+  --roxo:#7c3aed;
+  --ouro:#ffd166;
+  --ouro-escuro:#e0a800;
+  --azul:#7ec8ff;
+  --verde:#7be0a0;
+  --card:#fff5fb;
+  --texto:#5b2a6b;
+  --texto-soft:#8a5a9e;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  font-family:'Comic Sans MS','Segoe UI',system-ui,sans-serif;
+  font-size:var(--fs);
+  color:var(--texto);
+  background:
+    radial-gradient(circle at 15% 10%, #ffe3f3 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, #e9ddff 0%, transparent 45%),
+    radial-gradient(circle at 50% 100%, #ffeaf6 0%, transparent 55%),
+    linear-gradient(160deg,#fff0f8 0%,#f3e8ff 55%,#ffe9f4 100%);
+  min-height:100%;
+  overflow-x:hidden;
+  position:relative;
+}
+/* estrelinhas/glitter de fundo */
+#glitter{position:fixed;inset:0;pointer-events:none;z-index:0;}
+.wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:10px 12px 40px;}
+
+/* ===== Cabeçalho ===== */
+header{text-align:center;padding:6px 0 4px;}
+h1{
+  font-size:1.7em;line-height:1.15;
+  background:linear-gradient(90deg,#ff5fa2,#a855f7,#ffb703);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 2px 0 rgba(255,255,255,.6);
+  filter:drop-shadow(0 2px 4px rgba(168,85,247,.25));
+}
+.sub{font-size:.9em;color:var(--texto-soft);margin-top:2px;}
+.princesa-hora{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:6px;padding:4px 14px;border-radius:999px;
+  background:rgba(255,255,255,.65);box-shadow:0 2px 8px rgba(124,58,237,.18);
+  font-size:.85em;font-weight:bold;
+}
+
+/* ===== Abas de modo ===== */
+.tabs{display:flex;gap:6px;justify-content:center;margin:12px 0;flex-wrap:wrap;}
+.tab{
+  border:none;cursor:pointer;font-family:inherit;font-size:.95em;font-weight:bold;
+  padding:9px 14px;border-radius:999px;color:#fff;
+  background:linear-gradient(135deg,#c79be8,#9a6fd1);
+  box-shadow:0 3px 0 #7c52b0;transition:transform .1s,filter .1s;
+}
+.tab:active{transform:translateY(2px);box-shadow:0 1px 0 #7c52b0;}
+.tab.active{
+  background:linear-gradient(135deg,#ff8fc4,#ff5fa2);
+  box-shadow:0 3px 0 #d23e7e;transform:scale(1.04);
+}
+
+/* ===== Relógio ===== */
+.palco{
+  background:var(--card);
+  border:3px solid #ffc8e6;
+  border-radius:28px;
+  padding:14px 12px 16px;
+  box-shadow:0 10px 30px rgba(168,85,247,.18), inset 0 0 0 4px #fff;
+  text-align:center;
+}
+.clock-box{position:relative;width:min(78vw,300px);margin:4px auto 0;aspect-ratio:1;}
+svg{width:100%;height:100%;display:block;touch-action:none;}
+.hand{cursor:grab;}
+.hand:active{cursor:grabbing;}
+.draggable .grab-zone{cursor:grab;}
+.locked .grab-zone{cursor:default;}
+
+/* Mostrador digital */
+.digital{
+  margin:12px auto 4px;display:inline-flex;align-items:baseline;gap:2px;
+  background:linear-gradient(160deg,#3a1d4d,#5b2a6b);
+  color:#ffe9a8;font-family:'Courier New',monospace;font-weight:bold;
+  padding:8px 18px;border-radius:16px;font-size:2.1em;letter-spacing:2px;
+  box-shadow:0 4px 14px rgba(91,42,107,.4), inset 0 2px 6px rgba(0,0,0,.35);
+  text-shadow:0 0 10px rgba(255,209,102,.6);
+}
+.digital .colon{animation:blink 1.1s steps(1) infinite;}
+@keyframes blink{50%{opacity:.25;}}
+.digital .seg{font-size:.6em;color:#ffc1e8;}
+.ampm{font-size:.42em;color:#c9a9ff;align-self:flex-end;margin-left:4px;}
+
+/* Steppers digitais */
+.steppers{display:flex;justify-content:center;gap:14px;margin:10px 0 2px;flex-wrap:wrap;}
+.stepper{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.stepper .lbl{font-size:.72em;color:var(--texto-soft);font-weight:bold;}
+.stepper .row{display:flex;align-items:center;gap:6px;}
+.step-btn{
+  width:40px;height:40px;border:none;border-radius:50%;cursor:pointer;
+  font-size:1.3em;font-weight:bold;color:#fff;
+  background:linear-gradient(135deg,#ffb0d6,#ff7eb9);box-shadow:0 3px 0 #d94f93;
+}
+.step-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #d94f93;}
+.step-val{min-width:42px;font-size:1.5em;font-weight:bold;color:var(--roxo);}
+
+/* Botões gerais */
+.btn{
+  border:none;cursor:pointer;font-family:inherit;font-weight:bold;font-size:1em;
+  padding:11px 18px;border-radius:16px;color:#fff;margin:4px;
+  background:linear-gradient(135deg,#8fd4ff,#5bb6f0);box-shadow:0 4px 0 #3a8fcf;
+  transition:transform .1s;
+}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #3a8fcf;}
+.btn.ouro{background:linear-gradient(135deg,#ffe08a,#ffc23d);box-shadow:0 4px 0 #d99b00;color:#6b4a00;}
+.btn.verde{background:linear-gradient(135deg,#a4f0c0,#5fd58c);box-shadow:0 4px 0 #2fa862;color:#0d5a32;}
+.btn.rosa{background:linear-gradient(135deg,#ff9ecb,#ff5fa2);box-shadow:0 4px 0 #d23e7e;}
+.btn.lil{padding:7px 12px;font-size:.85em;border-radius:12px;}
+
+/* Painel de configurações */
+.config{
+  background:rgba(255,255,255,.7);border:2px dashed #d9b8f0;border-radius:18px;
+  padding:10px 12px;margin:10px 0;
+}
+.config h3{font-size:.95em;margin-bottom:6px;color:var(--roxo);}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:5px 2px;gap:10px;}
+.toggle-row span{font-size:.92em;}
+.switch{position:relative;width:54px;height:30px;flex:0 0 auto;}
+.switch input{display:none;}
+.slider{position:absolute;inset:0;background:#d7c2e8;border-radius:999px;transition:.2s;cursor:pointer;}
+.slider::before{content:"";position:absolute;width:24px;height:24px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.3);}
+.switch input:checked + .slider{background:linear-gradient(135deg,#ff8fc4,#ff5fa2);}
+.switch input:checked + .slider::before{transform:translateX(24px);}
+
+/* Níveis */
+.levels{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0;}
+.lvl{
+  border:none;cursor:pointer;font-family:inherit;font-size:.8em;font-weight:bold;
+  padding:7px 11px;border-radius:12px;color:var(--texto);
+  background:#f0e2fb;box-shadow:0 2px 0 #cdb0e8;
+}
+.lvl.active{background:linear-gradient(135deg,#ffd166,#ffb703);box-shadow:0 2px 0 #d99b00;color:#6b4a00;transform:scale(1.05);}
+
+/* Mensagens / painel de desafio */
+.painel{margin-top:8px;}
+.pergunta{
+  font-size:1.1em;font-weight:bold;color:var(--roxo);
+  background:rgba(255,255,255,.7);border-radius:14px;padding:10px;margin:8px 0;
+}
+.pergunta .alvo{display:block;font-size:1.4em;color:var(--rosa);margin-top:4px;}
+.opcoes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;}
+.opc{
+  border:none;cursor:pointer;font-family:'Courier New',monospace;font-weight:bold;font-size:1.4em;
+  padding:12px;border-radius:14px;color:var(--texto);
+  background:linear-gradient(160deg,#fff,#f3e8ff);box-shadow:0 3px 0 #d9b8f0;
+}
+.opc:active{transform:translateY(2px);box-shadow:0 1px 0 #d9b8f0;}
+.opc.certa{background:linear-gradient(135deg,#a4f0c0,#5fd58c);box-shadow:0 3px 0 #2fa862;color:#0d5a32;}
+.opc.errada{background:linear-gradient(135deg,#ffb3b3,#ff7a7a);box-shadow:0 3px 0 #d94f4f;color:#7a0d0d;}
+.feedback{font-size:1.15em;font-weight:bold;min-height:1.4em;margin:8px 0;transition:.2s;}
+.feedback.ok{color:#2fa862;}
+.feedback.no{color:#e0457a;}
+.placar{display:flex;justify-content:center;gap:16px;font-size:.95em;font-weight:bold;color:var(--texto-soft);margin:6px 0;}
+.placar b{color:var(--roxo);font-size:1.1em;}
+
+/* Lições */
+.licao{background:rgba(255,255,255,.72);border-radius:16px;padding:12px;text-align:left;line-height:1.45;}
+.licao h2{font-size:1.15em;color:var(--rosa);margin-bottom:6px;text-align:center;}
+.licao p{margin:6px 0;font-size:.98em;}
+.licao .destaque{background:#fff0a8;border-radius:8px;padding:2px 6px;font-weight:bold;}
+.licao .nav{display:flex;justify-content:space-between;margin-top:10px;}
+.passos{text-align:center;font-size:.82em;color:var(--texto-soft);margin-top:6px;}
+
+.hint{font-size:.85em;color:var(--texto-soft);margin-top:6px;line-height:1.4;}
+.hidden{display:none!important;}
+
+/* explosão de estrelas */
+.estrela-pop{position:fixed;font-size:1.6em;pointer-events:none;z-index:50;animation:pop 1s ease-out forwards;}
+@keyframes pop{0%{opacity:1;transform:translate(0,0) scale(.4) rotate(0);}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.4) rotate(180deg);}}
+
+footer{text-align:center;font-size:.72em;color:var(--texto-soft);margin-top:16px;}
+</style>
+</head>
+<body>
+<canvas id="glitter"></canvas>
+<div class="wrap">
+
+  <header>
+    <h1>👑 O Relógio das Princesas 👑</h1>
+    <div class="sub">✨ Aprender as horas brincando ✨</div>
+    <div class="princesa-hora" id="princesaHora">🌸 Princesa do horário</div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" data-mode="brincar">🎀 Brincar</button>
+    <button class="tab" data-mode="aprender">📖 Aprender</button>
+    <button class="tab" data-mode="desafio">⭐ Desafio</button>
+  </div>
+
+  <div class="palco">
+    <!-- RELÓGIO ANALÓGICO (SVG) -->
+    <div class="clock-box draggable" id="clockBox">
+      <svg viewBox="0 0 300 300" id="clockSvg" aria-label="Relógio analógico">
+        <defs>
+          <radialGradient id="faceGrad" cx="50%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="#fffdf9"/>
+            <stop offset="100%" stop-color="#ffe9f6"/>
+          </radialGradient>
+          <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffd166"/>
+            <stop offset="50%" stop-color="#ff8fc4"/>
+            <stop offset="100%" stop-color="#b794f6"/>
+          </linearGradient>
+        </defs>
+        <!-- aro dourado -->
+        <circle cx="150" cy="150" r="146" fill="url(#ringGrad)"/>
+        <circle cx="150" cy="150" r="134" fill="url(#faceGrad)" stroke="#fff" stroke-width="3"/>
+        <!-- tiquinhos e números desenhados por JS -->
+        <g id="ticks"></g>
+        <g id="numbers"></g>
+        <!-- ponteiros -->
+        <line id="handHour"  class="hand" x1="150" y1="150" x2="150" y2="92"  stroke="#7c3aed" stroke-width="11" stroke-linecap="round"/>
+        <line id="handMin"   class="hand" x1="150" y1="150" x2="150" y2="58"  stroke="#ff5fa2" stroke-width="8"  stroke-linecap="round"/>
+        <line id="handSec"   class="hand" x1="150" y1="150" x2="150" y2="46"  stroke="#ff3b6b" stroke-width="3"  stroke-linecap="round"/>
+        <!-- coroa central -->
+        <circle cx="150" cy="150" r="13" fill="#ffd166" stroke="#fff" stroke-width="3"/>
+        <text x="150" y="156" text-anchor="middle" font-size="16">👑</text>
+        <!-- zonas de toque invisíveis (maiores) para arrastar fácil -->
+        <circle id="zoneHour" class="grab-zone" cx="150" cy="92" r="26" fill="transparent"/>
+        <circle id="zoneMin"  class="grab-zone" cx="150" cy="58" r="26" fill="transparent"/>
+        <circle id="zoneSec"  class="grab-zone" cx="150" cy="46" r="22" fill="transparent"/>
+      </svg>
+    </div>
+
+    <!-- MOSTRADOR DIGITAL -->
+    <div class="digital" id="digital">
+      <span id="dH">3</span><span class="colon">:</span><span id="dM">00</span><span class="seg hidden" id="dSwrap"><span class="colon">:</span><span id="dS">00</span></span>
+      <span class="ampm" id="dAmPm">manhã</span>
+    </div>
+
+    <!-- ===== PAINEL: BRINCAR ===== -->
+    <div class="painel" id="painelBrincar">
+      <div class="steppers" id="steppers">
+        <div class="stepper">
+          <div class="lbl">Horas</div>
+          <div class="row">
+            <button class="step-btn" data-unit="h" data-d="-1">−</button>
+            <div class="step-val" id="stH">3</div>
+            <button class="step-btn" data-unit="h" data-d="1">+</button>
+          </div>
+        </div>
+        <div class="stepper">
+          <div class="lbl">Minutos</div>
+          <div class="row">
+            <button class="step-btn" data-unit="m" data-d="-1">−</button>
+            <div class="step-val" id="stM">00</div>
+            <button class="step-btn" data-unit="m" data-d="1">+</button>
+          </div>
+        </div>
+        <div class="stepper hidden" id="stepperSec">
+          <div class="lbl">Segundos</div>
+          <div class="row">
+            <button class="step-btn" data-unit="s" data-d="-1">−</button>
+            <div class="step-val" id="stS">00</div>
+            <button class="step-btn" data-unit="s" data-d="1">+</button>
+          </div>
+        </div>
+      </div>
+      <button class="btn rosa" id="btnFalar">🔊 Que horas são?</button>
+      <button class="btn ouro lil" id="btnAgora">⏰ Hora de agora</button>
+      <div class="hint">🎀 Arraste os ponteiros do relógio com o dedo, ou use os botões <b>+</b> e <b>−</b>. O relógio e os números mudam juntinhos!</div>
+    </div>
+
+    <!-- ===== PAINEL: APRENDER ===== -->
+    <div class="painel hidden" id="painelAprender">
+      <div class="licao" id="licaoBox"></div>
+      <div class="passos" id="licaoPassos"></div>
+      <button class="btn rosa lil" id="btnFalarLicao">🔊 Ouvir esta hora</button>
+    </div>
+
+    <!-- ===== PAINEL: DESAFIO ===== -->
+    <div class="painel hidden" id="painelDesafio">
+      <div class="levels" id="levels"></div>
+      <div class="placar">
+        <span>⭐ Acertos: <b id="scAcertos">0</b></span>
+        <span>🔥 Sequência: <b id="scSeq">0</b></span>
+      </div>
+      <div class="pergunta" id="pergunta"></div>
+      <div class="opcoes hidden" id="opcoes"></div>
+      <div id="confArea" class="hidden">
+        <button class="btn verde" id="btnConferir">✅ Conferir</button>
+      </div>
+      <div class="feedback" id="feedback"></div>
+      <button class="btn lil" id="btnMostrar">👀 Mostrar resposta</button>
+      <button class="btn rosa lil" id="btnProxima">➡️ Próxima</button>
+    </div>
+  </div>
+
+  <!-- ===== CONFIGURAÇÕES ===== -->
+  <div class="config">
+    <h3>⚙️ Ajustes</h3>
+    <div class="toggle-row">
+      <span>⏱️ Mostrar segundos</span>
+      <label class="switch"><input type="checkbox" id="cfgSec"><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <span>🧲 Ponteiros “grudam” na marca certa</span>
+      <label class="switch"><input type="checkbox" id="cfgSnap" checked><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <span>🌗 Mostrar manhã / tarde / noite</span>
+      <label class="switch"><input type="checkbox" id="cfgAmpm" checked><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <span>🔊 Falar as horas (voz)</span>
+      <label class="switch"><input type="checkbox" id="cfgVoz" checked><span class="slider"></span></label>
+    </div>
+    <div style="text-align:center;margin-top:6px;">
+      <button class="btn lil" id="btnFontMinus">A−</button>
+      <button class="btn lil" id="btnFontPlus">A+</button>
+    </div>
+  </div>
+
+  <footer>Feito com 💖 para a princesa Serafina • brinque à vontade</footer>
+</div>
+
+<script>
+/* ====================================================================
+   ESTADO GLOBAL
+   ==================================================================== */
+var state = { h:3, m:0, s:0, period:0 }; // h:1..12, m:0..59, s:0..59, period: 0=AM,1=PM(24h conceitual interno só p/ texto)
+var cfg = { sec:false, snap:true, ampm:true, voz:true };
+var mode = 'brincar';
+
+// princesas (cores genéricas estilo conto de fadas, sem marca)
+var PRINCESAS = [
+  {h:12,nome:'Princesa da Meia-Noite',emoji:'🌙'},
+  {h:1, nome:'Princesa Aurora',  emoji:'🌅'},
+  {h:2, nome:'Princesa Pérola',  emoji:'🐚'},
+  {h:3, nome:'Princesa Rosa',    emoji:'🌹'},
+  {h:4, nome:'Princesa Jardim',  emoji:'🌷'},
+  {h:5, nome:'Princesa Sereia',  emoji:'🧜‍♀️'},
+  {h:6, nome:'Princesa do Sol',  emoji:'☀️'},
+  {h:7, nome:'Princesa Floresta',emoji:'🌿'},
+  {h:8, nome:'Princesa Estrela', emoji:'⭐'},
+  {h:9, nome:'Princesa Cristal', emoji:'💎'},
+  {h:10,nome:'Princesa Lua',     emoji:'🌝'},
+  {h:11,nome:'Princesa Dourada', emoji:'👑'}
+];
+
+/* ====================================================================
+   DESENHAR MARCAS E NÚMEROS DO RELÓGIO
+   ==================================================================== */
+(function drawFace(){
+  var ticks = document.getElementById('ticks');
+  var nums  = document.getElementById('numbers');
+  for(var i=0;i<60;i++){
+    var ang = i*6 * Math.PI/180;
+    var big = (i%5===0);
+    var r1 = big?118:122, r2=128;
+    var x1 = 150 + r1*Math.sin(ang), y1 = 150 - r1*Math.cos(ang);
+    var x2 = 150 + r2*Math.sin(ang), y2 = 150 - r2*Math.cos(ang);
+    var ln = document.createElementNS('http://www.w3.org/2000/svg','line');
+    ln.setAttribute('x1',x1.toFixed(1));ln.setAttribute('y1',y1.toFixed(1));
+    ln.setAttribute('x2',x2.toFixed(1));ln.setAttribute('y2',y2.toFixed(1));
+    ln.setAttribute('stroke', big?'#b794f6':'#ffc8e6');
+    ln.setAttribute('stroke-width', big?3:1.5);
+    ln.setAttribute('stroke-linecap','round');
+    ticks.appendChild(ln);
+  }
+  for(var n=1;n<=12;n++){
+    var a = n*30*Math.PI/180, R=100;
+    var x = 150 + R*Math.sin(a), y = 150 - R*Math.cos(a);
+    var t = document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x',x.toFixed(1));t.setAttribute('y',(y+7).toFixed(1));
+    t.setAttribute('text-anchor','middle');
+    t.setAttribute('font-size','22');t.setAttribute('font-weight','bold');
+    t.setAttribute('fill','#7c3aed');t.setAttribute('font-family','Comic Sans MS, sans-serif');
+    t.textContent = n;
+    nums.appendChild(t);
+  }
+})();
+
+/* ====================================================================
+   RENDER — atualiza ponteiros, digital, princesa
+   ==================================================================== */
+function pad(n){ return (n<10?'0':'')+n; }
+
+function setHand(id, angleDeg, len){
+  var el = document.getElementById(id);
+  var a = (angleDeg-90)*Math.PI/180; // -90 pois 0° aponta p/ direita
+  var x = 150 + len*Math.cos(a), y = 150 + len*Math.sin(a);
+  el.setAttribute('x2', x.toFixed(1));
+  el.setAttribute('y2', y.toFixed(1));
+}
+function setZone(id, angleDeg, len){
+  var el = document.getElementById(id);
+  var a = (angleDeg-90)*Math.PI/180;
+  el.setAttribute('cx', (150+len*Math.cos(a)).toFixed(1));
+  el.setAttribute('cy', (150+len*Math.sin(a)).toFixed(1));
+}
+
+function render(){
+  var h = state.h % 12; // 0..11
+  var hourAngle = h*30 + state.m*0.5;
+  var minAngle  = state.m*6 + (cfg.sec? state.s*0.1 : 0);
+  var secAngle  = state.s*6;
+
+  setHand('handHour', hourAngle, 58);
+  setHand('handMin',  minAngle, 92);
+  setZone('zoneHour', hourAngle, 88);
+  setZone('zoneMin',  minAngle, 132);
+
+  var secEl = document.getElementById('handSec');
+  var zSec  = document.getElementById('zoneSec');
+  if(cfg.sec){ secEl.classList.remove('hidden'); zSec.style.display='';
+    setHand('handSec', secAngle, 104); setZone('zoneSec', secAngle, 142);
+    secEl.style.display='';
+  } else { secEl.style.display='none'; zSec.style.display='none'; }
+
+  // digital
+  document.getElementById('dH').textContent = state.h;
+  document.getElementById('dM').textContent = pad(state.m);
+  document.getElementById('dS').textContent = pad(state.s);
+  document.getElementById('dSwrap').classList.toggle('hidden', !cfg.sec);
+  var ampmEl = document.getElementById('dAmPm');
+  ampmEl.classList.toggle('hidden', !cfg.ampm);
+  ampmEl.textContent = periodoTexto();
+
+  // steppers
+  document.getElementById('stH').textContent = state.h;
+  document.getElementById('stM').textContent = pad(state.m);
+  document.getElementById('stS').textContent = pad(state.s);
+  document.getElementById('stepperSec').classList.toggle('hidden', !cfg.sec);
+
+  // princesa da hora
+  var pr = PRINCESAS.find(function(p){return p.h===state.h;}) || PRINCESAS[3];
+  document.getElementById('princesaHora').innerHTML = pr.emoji+' '+pr.nome;
+}
+
+function periodoTexto(){
+  // heurística simples e amigável p/ criança, baseada na "história" do brincar
+  if(state.period===1){ return state.h<6 ? 'noite' : 'tarde'; }
+  return state.h<6 ? (state.h===12?'noite':'madrugada') : 'manhã';
+}
+
+/* ====================================================================
+   FALAR AS HORAS (voz pt-BR)
+   ==================================================================== */
+function numHora(h){ return h===1?'uma':String(h); }
+function timePhrase(){
+  var h=state.h, m=state.m, s=state.s;
+  var txt = numHora(h)+' '+(h===1?'hora':'horas');
+  if(m===0) txt += ' em ponto';
+  else if(m===15) txt += ' e quinze';
+  else if(m===30) txt += ' e meia';
+  else if(m===45) txt += ' e quarenta e cinco';
+  else txt += ' e '+m+' '+(m===1?'minuto':'minutos');
+  if(cfg.sec && s>0) txt += ' e '+s+' '+(s===1?'segundo':'segundos');
+  return txt;
+}
+function falar(txt){
+  if(!cfg.voz || !window.speechSynthesis) return;
+  try{
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(txt);
+    u.lang='pt-BR'; u.rate=0.92; u.pitch=1.15;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ====================================================================
+   ARRASTAR OS PONTEIROS
+   ==================================================================== */
+var svg = document.getElementById('clockSvg');
+var dragging = null;
+
+function snapMinNow(){ // granularidade do snap conforme contexto
+  if(mode==='desafio') return cfg.snap ? currentLevel.snap : 1;
+  return cfg.snap ? 5 : 1; // brincar/aprender: gruda de 5 em 5 quando ligado
+}
+function pointFromEvent(ev){
+  var pt = svg.createSVGPoint();
+  var src = ev.touches? ev.touches[0] : ev;
+  pt.x = src.clientX; pt.y = src.clientY;
+  return pt.matrixTransform(svg.getScreenCTM().inverse());
+}
+function angleAt(p){
+  var dx = p.x-150, dy = p.y-150;
+  var a = Math.atan2(dx, -dy)*180/Math.PI; // 0 = topo (12), horário positivo
+  return (a+360)%360;
+}
+function startDrag(which){
+  return function(ev){
+    if(document.getElementById('clockBox').classList.contains('locked')) return;
+    ev.preventDefault();
+    dragging = which;
+  };
+}
+function moveDrag(ev){
+  if(!dragging) return;
+  ev.preventDefault();
+  var a = angleAt(pointFromEvent(ev));
+  if(dragging==='hour'){
+    var hr = Math.round(a/30)%12; if(hr===0) hr=12; state.h=hr;
+  } else if(dragging==='min'){
+    var sn = snapMinNow();
+    var m = Math.round(a/6/sn)*sn % 60;
+    state.m = m;
+  } else if(dragging==='sec'){
+    state.s = Math.round(a/6)%60;
+  }
+  render();
+}
+function endDrag(){
+  if(dragging){ dragging=null; if(mode!=='desafio') falar(timePhrase()); }
+}
+// liga zonas + ponteiros
+['zoneHour','handHour'].forEach(function(id){var e=document.getElementById(id);e.addEventListener('mousedown',startDrag('hour'));e.addEventListener('touchstart',startDrag('hour'),{passive:false});});
+['zoneMin','handMin'].forEach(function(id){var e=document.getElementById(id);e.addEventListener('mousedown',startDrag('min'));e.addEventListener('touchstart',startDrag('min'),{passive:false});});
+['zoneSec','handSec'].forEach(function(id){var e=document.getElementById(id);e.addEventListener('mousedown',startDrag('sec'));e.addEventListener('touchstart',startDrag('sec'),{passive:false});});
+window.addEventListener('mousemove',moveDrag);
+window.addEventListener('touchmove',moveDrag,{passive:false});
+window.addEventListener('mouseup',endDrag);
+window.addEventListener('touchend',endDrag);
+
+/* ====================================================================
+   STEPPERS (+/-)
+   ==================================================================== */
+document.getElementById('steppers').addEventListener('click',function(e){
+  var b = e.target.closest('.step-btn'); if(!b) return;
+  var u=b.dataset.unit, d=parseInt(b.dataset.d,10);
+  if(u==='h'){ state.h = ((state.h-1+d)%12+12)%12 + 1; if(d>0 && state.h===12){state.period=state.period?0:1;} }
+  if(u==='m'){ state.m = (state.m + d*(cfg.snap?5:1) + 60)%60; }
+  if(u==='s'){ state.s = (state.s + d + 60)%60; }
+  render();
+});
+document.getElementById('btnFalar').addEventListener('click',function(){ falar(timePhrase()); });
+document.getElementById('btnAgora').addEventListener('click',function(){
+  var d=new Date(); var hh=d.getHours();
+  state.period = hh>=12?1:0;
+  state.h = hh%12; if(state.h===0) state.h=12;
+  state.m = d.getMinutes(); state.s=d.getSeconds();
+  render(); falar(timePhrase());
+});
+
+/* ====================================================================
+   MODOS / ABAS
+   ==================================================================== */
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+    t.classList.add('active');
+    mode = t.dataset.mode;
+    document.getElementById('painelBrincar').classList.toggle('hidden', mode!=='brincar');
+    document.getElementById('painelAprender').classList.toggle('hidden', mode!=='aprender');
+    document.getElementById('painelDesafio').classList.toggle('hidden', mode!=='desafio');
+    document.getElementById('clockBox').classList.toggle('draggable', mode!=='desafio' || currentDesafio.tipo==='montar');
+    document.getElementById('clockBox').classList.toggle('locked', mode==='desafio' && currentDesafio.tipo==='ler');
+    if(mode==='aprender') mostrarLicao();
+    if(mode==='desafio') novaPergunta();
+    render();
+  });
+});
+
+/* ====================================================================
+   APRENDER — lições progressivas
+   ==================================================================== */
+var LICOES = [
+  {h:7,m:0,s:0,sec:false,titulo:'1) Os dois ponteiros',
+   html:'O relógio de ponteiros tem dois ajudantes:<br>• O <span class="destaque">ponteiro pequeno e gordinho</span> mostra as <b>HORAS</b>.<br>• O <span class="destaque">ponteiro grande e fininho</span> mostra os <b>MINUTOS</b>.<br><br>Aqui o pequeno aponta o <b>7</b> e o grande está no <b>12</b>. São <b>7 horas em ponto</b>!'},
+  {h:3,m:0,s:0,sec:false,titulo:'2) Hora em ponto',
+   html:'Quando o ponteiro grande aponta direto pro <span class="destaque">12</span>, dizemos “<b>em ponto</b>”.<br><br>O pequeno está no <b>3</b> → são <b>3 horas em ponto</b> (3:00).<br><br>👉 Tente arrastar o ponteiro pequeno na aba <b>Brincar</b> e veja a hora mudar!'},
+  {h:6,m:30,s:0,sec:false,titulo:'3) Meia hora',
+   html:'Quando o ponteiro grande aponta pro <span class="destaque">6</span>, passou <b>meia hora</b> (30 minutos).<br><br>Repare: o pequeno fica <b>no meio</b> entre o 6 e o 7. Dizemos <b>6 e meia</b> (6:30).'},
+  {h:9,m:15,s:0,sec:false,titulo:'4) Um quartinho (15 min)',
+   html:'O ponteiro grande no <span class="destaque">3</span> = <b>15 minutos</b>, “um quarto de hora”.<br><br>Aqui: <b>9 e quinze</b> (9:15). E no <b>9</b>? São 45 minutos!'},
+  {h:4,m:20,s:0,sec:false,titulo:'5) Contando de 5 em 5',
+   html:'Cada número grande vale <b>5 minutinhos</b>: 12→0, 1→5, 2→10, 3→15...<br><br>O grande no <span class="destaque">4</span> = <b>20 minutos</b>. Aqui são <b>4:20</b>. Conte de 5 em 5 com o dedo!'},
+  {h:10,m:48,s:25,sec:true,titulo:'6) O ponteiro veloz (segundos)',
+   html:'O ponteiro <span class="destaque">mais fino e rápido</span> conta os <b>SEGUNDOS</b>. Ele dá uma volta inteira em 1 minutinho!<br><br>Agora você lê tudo: horas, minutos e segundos. Você é uma princesa do tempo! 👑'}
+];
+var licaoIdx = 0;
+function mostrarLicao(){
+  var L = LICOES[licaoIdx];
+  cfg.sec = L.sec; document.getElementById('cfgSec').checked = L.sec;
+  state.h=L.h; state.m=L.m; state.s=L.s; render();
+  document.getElementById('licaoBox').innerHTML =
+    '<h2>'+L.titulo+'</h2><p>'+L.html+'</p>'+
+    '<div class="nav">'+
+      '<button class="btn lil" id="licPrev">⬅️ Voltar</button>'+
+      '<button class="btn rosa lil" id="licNext">Próxima ➡️</button>'+
+    '</div>';
+  document.getElementById('licaoPassos').textContent = 'Lição '+(licaoIdx+1)+' de '+LICOES.length;
+  document.getElementById('licPrev').onclick=function(){ licaoIdx=(licaoIdx-1+LICOES.length)%LICOES.length; mostrarLicao(); };
+  document.getElementById('licNext').onclick=function(){ licaoIdx=(licaoIdx+1)%LICOES.length; mostrarLicao(); };
+  falar(timePhrase());
+}
+document.getElementById('btnFalarLicao').addEventListener('click',function(){ falar(timePhrase()); });
+
+/* ====================================================================
+   DESAFIO — níveis + perguntas (ler relógio / montar relógio)
+   ==================================================================== */
+var LEVELS = [
+  {id:1,nome:'⭐ Horas em ponto', mset:[0], snap:60, sec:false},
+  {id:2,nome:'⭐⭐ Meia hora',     mset:[0,30], snap:30, sec:false},
+  {id:3,nome:'⭐⭐⭐ Quartos',      mset:[0,15,30,45], snap:15, sec:false},
+  {id:4,nome:'⭐⭐⭐⭐ De 5 em 5',  mset:[0,5,10,15,20,25,30,35,40,45,50,55], snap:5, sec:false},
+  {id:5,nome:'💎 Minuto exato',   mset:null, snap:1, sec:false},
+  {id:6,nome:'👑 Com segundos',   mset:null, snap:1, sec:true}
+];
+var currentLevel = LEVELS[0];
+var currentDesafio = { tipo:'ler', alvo:{h:3,m:0,s:0}, respondido:false };
+
+function buildLevels(){
+  var box=document.getElementById('levels'); box.innerHTML='';
+  LEVELS.forEach(function(L){
+    var b=document.createElement('button');
+    b.className='lvl'+(L.id===currentLevel.id?' active':'');
+    b.textContent=L.nome;
+    b.onclick=function(){ currentLevel=L; buildLevels(); novaPergunta(); };
+    box.appendChild(b);
+  });
+}
+function randTime(){
+  var L=currentLevel;
+  var h=1+Math.floor(Math.random()*12);
+  var m = L.mset ? L.mset[Math.floor(Math.random()*L.mset.length)] : Math.floor(Math.random()*60);
+  var s = L.sec ? Math.floor(Math.random()*60) : 0;
+  return {h:h,m:m,s:s};
+}
+function sameTime(a,b){ return a.h===b.h && a.m===b.m && (!currentLevel.sec || a.s===b.s); }
+function fmt(t){ return t.h+':'+pad(t.m)+(currentLevel.sec?':'+pad(t.s):''); }
+
+function novaPergunta(){
+  cfg.sec = currentLevel.sec; document.getElementById('cfgSec').checked = cfg.sec;
+  currentDesafio.respondido=false;
+  document.getElementById('feedback').textContent='';
+  document.getElementById('feedback').className='feedback';
+  // alterna tipo: ler (mostra relógio, escolhe digital) / montar (mostra hora, arrasta)
+  currentDesafio.tipo = Math.random()<0.5 ? 'ler' : 'montar';
+  currentDesafio.alvo = randTime();
+
+  var box=document.getElementById('clockBox');
+  var opc=document.getElementById('opcoes');
+  var conf=document.getElementById('confArea');
+  var perg=document.getElementById('pergunta');
+
+  if(currentDesafio.tipo==='ler'){
+    // relógio travado mostra o alvo, criança escolhe digital
+    box.classList.add('locked'); box.classList.remove('draggable');
+    state.h=currentDesafio.alvo.h; state.m=currentDesafio.alvo.m; state.s=currentDesafio.alvo.s;
+    render();
+    perg.innerHTML='👀 Que horas o relógio está mostrando?';
+    opc.classList.remove('hidden'); conf.classList.add('hidden');
+    montarOpcoes();
+  } else {
+    // criança arrasta os ponteiros até bater o alvo
+    box.classList.remove('locked'); box.classList.add('draggable');
+    // embaralha relógio
+    state.h=1+Math.floor(Math.random()*12);
+    state.m=currentLevel.mset?currentLevel.mset[0]:0; state.s=0;
+    render();
+    perg.innerHTML='🎀 Arraste os ponteiros para mostrar:<span class="alvo">'+fmt(currentDesafio.alvo)+'</span>';
+    opc.classList.add('hidden'); conf.classList.remove('hidden');
+  }
+}
+
+function montarOpcoes(){
+  var opc=document.getElementById('opcoes'); opc.innerHTML='';
+  var alvo=currentDesafio.alvo;
+  var set=[fmt(alvo)];
+  var guard=0;
+  while(set.length<4 && guard<50){
+    guard++;
+    var t=randTime();
+    var f=fmt(t);
+    if(set.indexOf(f)===-1) set.push(f);
+  }
+  // embaralha
+  set.sort(function(){return Math.random()-0.5;});
+  set.forEach(function(f){
+    var b=document.createElement('button');
+    b.className='opc'; b.textContent=f;
+    b.onclick=function(){
+      if(currentDesafio.respondido) return;
+      currentDesafio.respondido=true;
+      if(f===fmt(alvo)){ b.classList.add('certa'); acertou(); }
+      else{
+        b.classList.add('errada'); errou();
+        // mostra a certa
+        Array.prototype.forEach.call(opc.children,function(c){ if(c.textContent===fmt(alvo)) c.classList.add('certa'); });
+      }
+    };
+    opc.appendChild(b);
+  });
+}
+
+document.getElementById('btnConferir').addEventListener('click',function(){
+  if(currentDesafio.respondido) return;
+  if(sameTime(state,currentDesafio.alvo)){ currentDesafio.respondido=true; acertou(); }
+  else { errou(); }
+});
+
+var acertos=0, seq=0;
+function acertou(){
+  acertos++; seq++;
+  document.getElementById('scAcertos').textContent=acertos;
+  document.getElementById('scSeq').textContent=seq;
+  var fb=document.getElementById('feedback');
+  var elogios=['Perfeito, princesa! 👑','Muito bem! ✨','Você acertou! 🌟','Maravilhoso! 🦄','Brilhante! 💎'];
+  fb.textContent=elogios[Math.floor(Math.random()*elogios.length)];
+  fb.className='feedback ok';
+  falar(timePhrase());
+  estrelas();
+}
+function errou(){
+  seq=0; document.getElementById('scSeq').textContent=0;
+  var fb=document.getElementById('feedback');
+  fb.textContent='Quase! Tente de novo 💕 (toque em “Mostrar resposta” se quiser ajuda)';
+  fb.className='feedback no';
+}
+document.getElementById('btnMostrar').addEventListener('click',function(){
+  var alvo=currentDesafio.alvo;
+  var fb=document.getElementById('feedback');
+  fb.textContent='A resposta é: '+fmt(alvo);
+  fb.className='feedback';
+  if(currentDesafio.tipo==='montar'){
+    state.h=alvo.h; state.m=alvo.m; state.s=alvo.s; render(); falar(timePhrase());
+  } else {
+    var opc=document.getElementById('opcoes');
+    Array.prototype.forEach.call(opc.children,function(c){ if(c.textContent===fmt(alvo)) c.classList.add('certa'); });
+    falar(timePhrase());
+  }
+});
+document.getElementById('btnProxima').addEventListener('click', novaPergunta);
+
+/* ====================================================================
+   CONFIGURAÇÕES
+   ==================================================================== */
+document.getElementById('cfgSec').addEventListener('change',function(){ cfg.sec=this.checked; render(); });
+document.getElementById('cfgSnap').addEventListener('change',function(){ cfg.snap=this.checked; });
+document.getElementById('cfgAmpm').addEventListener('change',function(){ cfg.ampm=this.checked; render(); });
+document.getElementById('cfgVoz').addEventListener('change',function(){ cfg.voz=this.checked; });
+var fsBase=16;
+document.getElementById('btnFontPlus').addEventListener('click',function(){ fsBase=Math.min(22,fsBase+1); document.documentElement.style.setProperty('--fs',fsBase+'px'); });
+document.getElementById('btnFontMinus').addEventListener('click',function(){ fsBase=Math.max(13,fsBase-1); document.documentElement.style.setProperty('--fs',fsBase+'px'); });
+
+/* ====================================================================
+   GLITTER de fundo + estrelas de acerto
+   ==================================================================== */
+(function(){
+  var c=document.getElementById('glitter'), x=c.getContext('2d'), parts=[];
+  function resize(){ c.width=innerWidth; c.height=innerHeight; }
+  resize(); window.addEventListener('resize',resize);
+  for(var i=0;i<40;i++) parts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*2+0.6,v:Math.random()*0.3+0.1,o:Math.random()});
+  function loop(){
+    x.clearRect(0,0,c.width,c.height);
+    parts.forEach(function(p){
+      p.y-=p.v; p.o+=0.01; if(p.y<0){p.y=c.height;p.x=Math.random()*c.width;}
+      x.globalAlpha=0.4+0.4*Math.abs(Math.sin(p.o));
+      x.fillStyle=['#ffd166','#ff8fc4','#b794f6'][Math.floor(p.r)%3];
+      x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill();
+    });
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+function estrelas(){
+  var emojis=['⭐','✨','👑','💖','🌟','🦄'];
+  for(var i=0;i<10;i++){
+    var s=document.createElement('div'); s.className='estrela-pop';
+    s.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+    s.style.left=(innerWidth/2)+'px'; s.style.top=(innerHeight*0.4)+'px';
+    s.style.setProperty('--dx',(Math.random()*300-150)+'px');
+    s.style.setProperty('--dy',(Math.random()*-260-40)+'px');
+    document.body.appendChild(s);
+    setTimeout(function(el){return function(){el.remove();};}(s),1000);
+  }
+}
+
+/* ====================================================================
+   INÍCIO
+   ==================================================================== */
+buildLevels();
+render();
+</script>
+</body>
+</html>
