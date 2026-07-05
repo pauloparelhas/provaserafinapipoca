@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Super review — key words</title>
+<link rel="stylesheet" href="serafina-core.css">
 <style>
 :root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#38bdf8;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
 body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
-#starfield{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
 .topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
 .topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
@@ -42,23 +42,13 @@ body:not(.show-tr) .klabel .ltr{display:none}
 body.show-tr .kchip .pt{display:block}
 .foot{text-align:center;color:var(--soft);font-weight:800;font-size:.82rem;margin-top:8px}
 /* ---- lock / fullscreen ---- */
-.lockbtn.on{background:rgba(248,113,113,.28);color:#fecaca}
-body.locked .iconbtn[onclick*="goHomeR"]{opacity:.3;pointer-events:none}
-.unlockov{position:fixed;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;background:rgba(8,10,22,.93);backdrop-filter:blur(4px)}
-.unlockov.show{display:flex}
-.unlockov .ulk-emo{font-size:54px}
-.unlockov h2{color:#fff;font-size:1.15rem;font-weight:900;line-height:1.3}
-.unlockov h2 small{display:block;font-weight:600;opacity:.8;font-size:.8rem;margin-top:5px}
-.unlockov button{height:54px;padding:0 26px;border:none;border-radius:16px;font-size:1.02rem;font-weight:900;cursor:pointer;font-family:inherit;width:100%;max-width:300px}
-.unlockov .ulk-yes{background:linear-gradient(90deg,#34d399,#10b981);color:#04261c}
-.unlockov .ulk-no{background:rgba(255,255,255,.14);color:#fff}
 </style>
 </head>
 <body>
 <canvas id="starfield"></canvas>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn" title="Home" onclick="goHomeR()">&#127968;</button>
+    <button class="iconbtn sera-home" title="Home" onclick="goHome()">&#127968;</button>
     <span class="title">Super review &mdash; key words</span>
     <button class="iconbtn flagbtn" id="flag" title="Mostrar tradução" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
     <button class="iconbtn" title="Smaller" onclick="fs(-1)">A-</button>
@@ -71,12 +61,6 @@ body.locked .iconbtn[onclick*="goHomeR"]{opacity:.3;pointer-events:none}
     <div id="content"></div>
     <div class="foot">&#11088; You know it! Good luck on your Science test!</div>
   </div>
-</div>
-<div class="unlockov" id="unlockov">
-  <div class="ulk-emo">&#128274;</div>
-  <h2>Desbloquear a tela?<small>Unlock the screen? &middot; ask a grown-up</small></h2>
-  <button class="ulk-yes" onclick="doUnlock()">&#128275; Desbloquear / Unlock</button>
-  <button class="ulk-no" onclick="cancelUnlock()">&#8617;&#65039; Continuar / Keep reading</button>
 </div>
 <script>
 /* ===== SUPER REVIEW — key words only · Science Y2 · "Properties of Matter"
@@ -153,23 +137,7 @@ function textOn(hex){var h=hex.replace('#','');var r=parseInt(h.substr(0,2),16)/
   var L=.2126*r+.7152*g+.0722*b;return L>0.6?'#0c2238':'#ffffff';}
 function rgba(hex,a){var h=hex.replace('#','');return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+','+a+')';}
 
-function toggleTr(){var on=document.body.classList.toggle('show-tr');try{localStorage.setItem('cie2_tr',on?'1':'0');}catch(e){}}
-function goHomeR(){if(screenLocked)return;if(confirm('Back to the menu? / Voltar ao início?'))location.href='../index.html';}
-function fs(d){window._fsStep=Math.max(-2,Math.min(3,(window._fsStep||0)+d));document.documentElement.style.setProperty('--fs',1+window._fsStep*0.12);}
-function say(txt){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(txt);u.lang='en-US';u.rate=.8;
-  var v=speechSynthesis.getVoices().find(function(v){return /en-US|en_US|English \(United States\)/i.test(v.lang+v.name);});if(v)u.voice=v;
-  speechSynthesis.speak(u);}catch(e){}}
 
-/* ---- lock / fullscreen (anti accidental exit) ---- */
-var screenLocked=false;
-function toggleLock(){ if(!screenLocked) doLock(); else $('unlockov').classList.add('show'); }
-function doLock(){screenLocked=true;var el=document.documentElement;
-  if(el.requestFullscreen){try{el.requestFullscreen().catch(function(){});}catch(e){}}
-  $('lockbtn').classList.add('on');document.body.classList.add('locked');try{history.pushState({lock:1},'');}catch(e){}}
-function doUnlock(){screenLocked=false;$('unlockov').classList.remove('show');$('lockbtn').classList.remove('on');document.body.classList.remove('locked');
-  if(document.fullscreenElement&&document.exitFullscreen){try{document.exitFullscreen().catch(function(){});}catch(e){}}}
-function cancelUnlock(){ $('unlockov').classList.remove('show'); }
-addEventListener('popstate',function(){ if(screenLocked){try{history.pushState({lock:1},'');}catch(e){}} });
 
 /* ---- render the wall of key words ---- */
 function build(){
@@ -196,15 +164,10 @@ function build(){
   $('content').innerHTML=html;
 }
 
-/* starfield */
-(function(){var c=document.getElementById('starfield'),x=c.getContext('2d'),s=[];
-function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.1+.02});}
-function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}
-rz();addEventListener('resize',rz);d();})();
 build();
-try{if(localStorage.getItem('cie2_tr')==='1')document.body.classList.add('show-tr');}catch(e){}
-if('speechSynthesis' in window){speechSynthesis.getVoices();}
 </script>
+<script>window.SERA_CFG={trKey:'cie2_tr',rate:.8};</script>
+<script src="serafina-core.js"></script>
 <script src="cie2_theme.js"></script>
 </body>
 </html>

@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Pop it! — Balloon Pop · States of Matter</title>
+<link rel="stylesheet" href="serafina-core.css">
 <style>
 :root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#38bdf8;--accent2:#fbbf24;--tr:#fcd34d;--ok:#34d399;--no:#f87171;--rad:22px}
 body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
-#starfield{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
 .topbar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
 .topbar .title{font-weight:900;font-size:calc(.92rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
@@ -129,16 +129,6 @@ body.show-tr .btn .etr{display:block}
 .qnav-btn:disabled{opacity:.32;cursor:default;box-shadow:none}
 .qnav-btn:active:not(:disabled){transform:scale(.96)}
 /* lock / fullscreen */
-.lockbtn.on{background:rgba(248,113,113,.28);color:#fecaca}
-body.locked .iconbtn[onclick*="goHome"]{opacity:.3;pointer-events:none}
-.unlockov{position:fixed;inset:0;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;background:rgba(8,10,22,.93);backdrop-filter:blur(4px)}
-.unlockov.show{display:flex}
-.unlockov .ulk-emo{font-size:54px}
-.unlockov h2{color:#fff;font-size:1.15rem;font-weight:900;line-height:1.3}
-.unlockov h2 small{display:block;font-weight:600;opacity:.8;font-size:.8rem;margin-top:5px}
-.unlockov button{height:54px;padding:0 26px;border:none;border-radius:16px;font-size:1.02rem;font-weight:900;cursor:pointer;font-family:inherit;width:100%;max-width:300px}
-.unlockov .ulk-yes{background:linear-gradient(90deg,#34d399,#10b981);color:#04261c}
-.unlockov .ulk-no{background:rgba(255,255,255,.14);color:#fff}
 /* confetti */
 .confetti{position:fixed;top:-12px;width:11px;height:14px;z-index:80;pointer-events:none;border-radius:2px}
 @media(max-width:380px){.balloon{width:106px;min-height:88px;font-size:calc(.74rem*var(--fs))}}
@@ -148,7 +138,7 @@ body.locked .iconbtn[onclick*="goHome"]{opacity:.3;pointer-events:none}
 <canvas id="starfield"></canvas>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn" title="Início" onclick="goHome()">&#127968;</button>
+    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
     <span class="title">Pop it! &mdash; Balloon Pop</span>
     <button class="iconbtn flagbtn" id="flag" title="Mostrar tradução" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
     <button class="iconbtn" title="Smaller" onclick="fs(-1)">A-</button>
@@ -165,12 +155,7 @@ body.locked .iconbtn[onclick*="goHome"]{opacity:.3;pointer-events:none}
   <button class="qnav-btn" id="navPrev" onclick="prevGame()" title="Jogo anterior / Previous game">&#8249;<span class="ql">Back</span></button>
   <button class="qnav-btn" id="navNext" onclick="nextGame()" title="Próximo jogo / Next game">&#8250;<span class="ql">Next game</span></button>
 </div>
-<div class="unlockov" id="unlockov">
-  <div class="ulk-emo">&#128274;</div>
-  <h2>Desbloquear a tela?<small>Unlock the screen? &middot; ask a grown-up</small></h2>
-  <button class="ulk-yes" onclick="doUnlock()">&#128275; Desbloquear / Unlock</button>
-  <button class="ulk-no" onclick="cancelUnlock()">&#8617;&#65039; Continuar / Keep playing</button>
-</div>
+<script src="CIE2_data.js"></script>
 <script>
 /* ============================================================
    POP IT! — Balloon Pop · Science Y2 · "Properties of Matter"
@@ -185,94 +170,6 @@ body.locked .iconbtn[onclick*="goHome"]{opacity:.3;pointer-events:none}
    4. Wrong tap: no pop, no punishment, but reveals the real column.
    5. Long phrases stay readable (wide balloon, slow bob).
    ============================================================ */
-const GAMES = [
- { key:'props', emo:"\u{1F9CA}",
-   en:"States — Properties", pt:"Estados — Propriedades",
-   tip:"Solid keeps its shape · Liquid takes the shape of its cup · Gas spreads out everywhere.",
-   tippt:"Sólido mantém a forma · Líquido toma a forma do copo · Gás se espalha por tudo.",
-   cols:[{id:'solid',en:'Solid',pt:'Sólido',emo:"\u{1F9CA}",co:'#38bdf8'},{id:'liquid',en:'Liquid',pt:'Líquido',emo:"\u{1F4A7}",co:'#34d399'},{id:'gas',en:'Gas',pt:'Gás',emo:"\u{1F4A8}",co:'#c084fc'}],
-   cards:[
-     {en:"Keeps its shape",pt:"Mantém a forma",col:'solid'},
-     {en:"Particles packed tightly together",pt:"Partículas bem juntinhas",col:'solid'},
-     {en:"Particles only vibrate in place",pt:"Partículas só vibram no lugar",col:'solid'},
-     {en:"Takes the shape of its container",pt:"Toma a forma do recipiente",col:'liquid'},
-     {en:"Can flow and be poured",pt:"Flui e pode ser derramado",col:'liquid'},
-     {en:"Particles slide around each other",pt:"Partículas escorregam umas nas outras",col:'liquid'},
-     {en:"Spreads out to fill the space",pt:"Espalha-se para encher o espaço",col:'gas'},
-     {en:"Can be squeezed (compressed)",pt:"Pode ser comprimido (apertado)",col:'gas'},
-     {en:"Particles are far apart and move freely",pt:"Partículas afastadas e livres",col:'gas'}
-   ] },
- { key:'particles', emo:"\u{1F7E6}",
-   en:"Particles — Arrangement", pt:"Partículas — Arranjo",
-   tip:"Solid = packed & still · Liquid = together but sliding · Gas = far apart & flying.",
-   tippt:"Sólido = juntas e paradas · Líquido = juntas escorregando · Gás = soltas e voando.",
-   cols:[{id:'solid',en:'Solid',pt:'Sólido',emo:"\u{1F9CA}",co:'#38bdf8'},{id:'liquid',en:'Liquid',pt:'Líquido',emo:"\u{1F4A7}",co:'#34d399'},{id:'gas',en:'Gas',pt:'Gás',emo:"\u{1F4A8}",co:'#c084fc'}],
-   cards:[
-     {en:"Packed tightly in a fixed arrangement",pt:"Bem juntas e fixas no lugar",col:'solid'},
-     {en:"Vibrate but cannot leave their place",pt:"Vibram mas não saem do lugar",col:'solid'},
-     {en:"Slide past each other freely",pt:"Escorregam livremente umas pelas outras",col:'liquid'},
-     {en:"Move and slide, with no fixed arrangement",pt:"Movem e deslizam, sem arranjo fixo",col:'liquid'},
-     {en:"Far apart and free-floating",pt:"Afastadas e flutuando soltas",col:'gas'},
-     {en:"Move fast and collide",pt:"Movem rápido e colidem",col:'gas'}
-   ] },
- { key:'light', emo:"\u{1F4A1}",
-   en:"Light — See-through?", pt:"Luz — Dá para ver?",
-   tip:"Transparent = you see ALL · Translucent = you see a LITTLE · Opaque = you see NOTHING.",
-   tippt:"Transparente = vejo TUDO · Translúcido = vejo um POUCO · Opaco = vejo NADA.",
-   cols:[{id:'transparent',en:'Transparent',pt:'Transparente',emo:"\u{1F50D}",co:'#22d3ee'},{id:'translucent',en:'Translucent',pt:'Translúcido',emo:"\u{1F327}️",co:'#fbbf24'},{id:'opaque',en:'Opaque',pt:'Opaco',emo:"\u{1F9F1}",co:'#94a3b8'}],
-   cards:[
-     {en:"Lets all light pass through",pt:"Deixa passar toda a luz",col:'transparent'},
-     {en:"Water",pt:"Água",col:'transparent'},
-     {en:"Window glass",pt:"Vidro da janela",col:'transparent'},
-     {en:"Lets some light pass through",pt:"Deixa passar um pouco de luz",col:'translucent'},
-     {en:"Apple juice",pt:"Suco de maçã",col:'translucent'},
-     {en:"Lets no light pass through",pt:"Não deixa passar luz",col:'opaque'},
-     {en:"Milk",pt:"Leite",col:'opaque'},
-     {en:"A wooden door",pt:"Uma porta de madeira",col:'opaque'}
-   ] },
- { key:'absorb', emo:"\u{1F9FD}",
-   en:"Absorb or Repel?", pt:"Absorve ou Repele?",
-   tip:"Absorbs = drinks the water in (gets wet) · Repels = water rolls off (stays dry).",
-   tippt:"Absorve = puxa a água para dentro (fica molhado) · Repele = a água escorre (fica seco).",
-   cols:[{id:'absorbs',en:'Absorbs',pt:'Absorve',emo:"\u{1F4A6}",co:'#38bdf8'},{id:'repels',en:'Repels',pt:'Repele',emo:"\u{1F6E1}️",co:'#fb923c'}],
-   cards:[
-     {en:"Paper",pt:"Papel",col:'absorbs'},
-     {en:"Blanket",pt:"Cobertor",col:'absorbs'},
-     {en:"Sponge",pt:"Esponja",col:'absorbs'},
-     {en:"Soil",pt:"Terra",col:'absorbs'},
-     {en:"Rain jacket",pt:"Capa de chuva",col:'repels'},
-     {en:"Glass window",pt:"Vidro da janela",col:'repels'},
-     {en:"Marble",pt:"Bolinha de gude",col:'repels'},
-     {en:"Duck feather",pt:"Pena de pato",col:'repels'}
-   ] },
- { key:'examples', emo:"\u{1F3AF}",
-   en:"Examples — Which state?", pt:"Exemplos — Qual estado?",
-   tip:"The same water can be ice (solid), water (liquid) or steam (gas)!",
-   tippt:"A mesma água pode ser gelo (sólido), água (líquido) ou vapor (gás)!",
-   cols:[{id:'solid',en:'Solid',pt:'Sólido',emo:"\u{1F9CA}",co:'#38bdf8'},{id:'liquid',en:'Liquid',pt:'Líquido',emo:"\u{1F4A7}",co:'#34d399'},{id:'gas',en:'Gas',pt:'Gás',emo:"\u{1F4A8}",co:'#c084fc'}],
-   cards:[
-     {en:"Ice cube",pt:"Cubo de gelo",col:'solid'},
-     {en:"Pencil",pt:"Lápis",col:'solid'},
-     {en:"Rock",pt:"Pedra",col:'solid'},
-     {en:"Rain",pt:"Chuva",col:'liquid'},
-     {en:"Tea",pt:"Chá",col:'liquid'},
-     {en:"Milk",pt:"Leite",col:'liquid'},
-     {en:"Steam",pt:"Vapor",col:'gas'},
-     {en:"Water vapour",pt:"Vapor d'água",col:'gas'},
-     {en:"The air around us",pt:"O ar à nossa volta",col:'gas'}
-   ] },
- { key:'change', emo:"\u{1F321}️",
-   en:"Heating or Cooling?", pt:"Aquecer ou Esfriar?",
-   tip:"Heat melts and boils · Cold freezes. Ice → water → steam when heated; back to ice when cooled.",
-   tippt:"O calor derrete e ferve · O frio congela. Gelo → água → vapor com calor; volta a gelo com frio.",
-   cols:[{id:'heat',en:'When you HEAT it',pt:'Quando AQUECE',emo:"\u{1F525}",co:'#fb7185'},{id:'cool',en:'When you COOL it',pt:'Quando ESFRIA',emo:"❄️",co:'#60a5fa'}],
-   cards:[
-     {en:"Ice melts into water",pt:"O gelo derrete e vira água",col:'heat'},
-     {en:"Water boils into steam",pt:"A água ferve e vira vapor",col:'heat'},
-     {en:"Steam cools back into water",pt:"O vapor esfria e vira água",col:'cool'},
-     {en:"Water freezes into ice",pt:"A água congela e vira gelo",col:'cool'}
-   ] }
-];
 /* light pastel balloon colours (LOCK 5: light, soft) */
 const PASTEL=['#cdeffd','#d6f5e3','#fde6ef','#fdf3cf','#e7defb','#ffe6d2','#d8f0fb','#e9f7d4'];
 const MAXB=6;
@@ -554,33 +451,6 @@ function sparkle(x,y){
   addEventListener('pointerup',function(){ if(matchMedia('(pointer:coarse)').matches) pen.style.display='none'; },{passive:true});
 })();
 
-/* ============================================================
-   NAVBAR / TTS / LOCK / THEME / FONT
-   ============================================================ */
-function goHome(){if(screenLocked)return;if(confirm('Voltar ao menu do site? / Back to the menu?'))location.href='../index.html';}
-function toggleTr(){document.body.classList.toggle('show-tr');}
-var fsLevel=1;
-function fs(d){fsLevel=Math.max(.8,Math.min(1.5,fsLevel+d*0.1));document.documentElement.style.setProperty('--fs',fsLevel);}
-function say(txt){try{if(!txt)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='en-US';u.rate=.85;
-  const v=speechSynthesis.getVoices().find(v=>/en-US|en_US|English \(United States\)/i.test(v.lang+v.name));if(v)u.voice=v;
-  speechSynthesis.speak(u);}catch(e){}}
-
-var screenLocked=false;
-function toggleLock(){ if(!screenLocked) doLock(); else $('unlockov').classList.add('show'); }
-function doLock(){
-  screenLocked=true;
-  var el=document.documentElement;
-  if(el.requestFullscreen){try{el.requestFullscreen().catch(function(){});}catch(e){}}
-  $('lockbtn').classList.add('on'); document.body.classList.add('locked');
-  try{history.pushState({lock:1},'');}catch(e){}
-}
-function doUnlock(){
-  screenLocked=false;
-  $('unlockov').classList.remove('show'); $('lockbtn').classList.remove('on'); document.body.classList.remove('locked');
-  if(document.fullscreenElement&&document.exitFullscreen){try{document.exitFullscreen().catch(function(){});}catch(e){}}
-}
-function cancelUnlock(){ $('unlockov').classList.remove('show'); }
-addEventListener('popstate',function(){ if(screenLocked){try{history.pushState({lock:1},'');}catch(e){}} });
 
 /* ---- confetti ---- */
 function celebrate(n){
@@ -596,15 +466,11 @@ function celebrate(n){
   })(i);}
 }
 
-/* starfield */
-(function(){var c=document.getElementById('starfield'),x=c.getContext('2d'),s=[];
-function rz(){c.width=innerWidth;c.height=innerHeight;s=[];for(var i=0;i<140;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.1+.02});}
-function d(){x.clearRect(0,0,c.width,c.height);s.forEach(function(t){t.y-=t.sp;if(t.y<-5)t.y=c.height+5;t.a+=t.da;if(t.a>1||t.a<.1)t.da*=-1;x.save();x.globalAlpha=t.a;x.fillStyle='#fff';x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fill();x.restore();});requestAnimationFrame(d);}
-rz();addEventListener('resize',rz);d();})();
-if('speechSynthesis' in window){speechSynthesis.getVoices();}
 intro();
 </script>
 <script src="cie2_summary.js"></script>
+<script>window.SERA_CFG={trKey:'cie2_tr',stars:140};</script>
+<script src="serafina-core.js"></script>
 <script src="cie2_theme.js"></script>
 </body>
 </html>
