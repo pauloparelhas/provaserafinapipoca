@@ -150,10 +150,18 @@ Documentar e parte do trabalho, nao bonus opcional.
 
 ```
 ferramentas/
-  base.css          <- CSS compartilhado HIS/LP (vars, starfield, navbar, modal, quiz, resultado, tema claro, responsivo)
-  base.js           <- JS compartilhado HIS/LP (showScreen, toggleTheme, changeFontSize, showHomeModal, updateScore, initStarfield, launchFireworks, updatePhaseNavs, initApp)
-  ela-base.css      <- CSS compartilhado ELA (karaoke, speak-btn, tour overlay, flag BR, lock, sound states)
-  ela-base.js       <- JS compartilhado ELA (speakWithKaraoke, stopKaraoke, setKSpeed, speak, makeSpeakBtn, toggleSound, toggleLock, unlockScreen, initFlags, startTour, initEla)
+  serafina-core.css/.js   <- INFRA KID CANONICA (refatoracao 05/07): starfield, lock/fullscreen,
+                             TTS say(), bandeira toggleTr, A+/A- fs(), goHome, overlay #unlockov
+                             (injetado). Config por produto: window.SERA_CFG={trKey,lang,rate,home,
+                             stars,starfield,unlock} ANTES do <script src>. Todo produto standalone
+                             novo (padrao CIE2) IMPORTA o core — NUNCA duplicar essa infra inline.
+  serafina-adventure.js   <- Motor generico de JOGO DE FASES (mastery loop). Le window.ADVENTURE
+                             (dados 100% do _roteiro.md da materia) — o motor nao conhece a materia.
+                             Replicar p/ Geografia (lang pt-BR, sem bandeira) e Math (en-bi).
+  <MAT>_data.js           <- banco de dados UNICO por materia compartilhado entre produtos
+                             (ex.: CIE2_data.js = GAMES de dragdrop+popit). Nunca copy-paste de banco.
+  base.css / base.js      <- legado compartilhado HIS/LP (showScreen, toggleTheme, initApp...)
+  ela-base.css / ela-base.js <- legado compartilhado ELA (speakWithKaraoke, tour, initEla...)
   templates/
     TEMPLATE_PT.html      <- Esqueleto ferramentas PT (HIS/LP/GEO): copiar + preencher (importa ../base.*)
     TEMPLATE_EN.html      <- Esqueleto ferramentas EN (ELA/CIE): copiar + preencher (importa ../ela-base.*)
@@ -161,9 +169,11 @@ ferramentas/
 ```
 
 **Regras de importacao:**
-- Ferramentas PT (HIS/LP): `<link rel="stylesheet" href="base.css">` + `<script src="base.js"></script>`
-- Ferramentas EN (ELA): `<link rel="stylesheet" href="ela-base.css">` + `<script src="ela-base.js"></script>`
+- Produtos standalone novos (padrao CIE2, todas as materias): `<link rel="stylesheet" href="serafina-core.css">` no head + `<script>window.SERA_CFG={...}</script><script src="serafina-core.js"></script>` no fim do body (ANTES do cie2_theme.js/seletor de tema). Contrato de DOM: `#starfield`, `#lockbtn.lockbtn`, botao casa com `class="sera-home"` e `onclick="goHome()"`, `body.show-tr` p/ traducao.
+- Ferramentas PT legado (HIS/LP): `base.css` + `base.js`
+- Ferramentas EN legado (ELA): `ela-base.css` + `ela-base.js`
 - ELA NAO importa base.css/base.js (padroes incompativeis: `.nb` vs `.nav-btn`, `body.light` vs `body.theme-light`, `--fs:16px` vs `--fs:1`)
+- **sw.js:** BASE_FILES sao caminhos RELATIVOS ao escopo do SW (sem `/` inicial) — com barra inicial da 404 no subpath do GitHub Pages e o install do SW inteiro falha (bug corrigido em 05/07, sw v21).
 
 **Hooks ELA (definir ANTES de `initEla()`):**
 - `var TOUR_KEY = 'elaXX_tour_done'` — localStorage key para tour
