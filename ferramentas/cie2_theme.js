@@ -46,13 +46,23 @@
     +'<path d="M10.1 9.2 A6 6 0 0 1 17.9 9.0" stroke="#fff" stroke-width="1.1" fill="none"/>'
     +'</svg>';
 
+  /* Cor de destaque por MATERIA (aditivo, 2026-08-09).
+     Cada tema traz um --accent proprio (azul de Ciencias no tema Noite).
+     Materia com identidade propria (Geografia = verde) define
+     window.SERA_ACCENT={accent:'#34d399'} ANTES de carregar este script:
+     o tom da materia vence em TODOS os temas, e o resto da paleta continua
+     vindo do tema. Sem SERA_ACCENT, o comportamento e o de sempre. */
+  var OV=(window.SERA_ACCENT||{});
+  function ac(v){ return OV.accent||v; }
+  function ac2(v){ return OV.accent2||v; }
+
   function apply(k){
     var t=find(k); var p=t.p; var b=document.body, st=b.style;
     /* convencao ela */
     st.setProperty('--bg',p.bg); st.setProperty('--bg2',p.bg2);
     st.setProperty('--ink',p.ink); st.setProperty('--soft',p.soft);
     st.setProperty('--card',p.card); st.setProperty('--line',p.line);
-    st.setProperty('--accent',p.accent); st.setProperty('--accent2',p.accent2);
+    st.setProperty('--accent',ac(p.accent)); st.setProperty('--accent2',ac2(p.accent2));
     st.setProperty('--tr',p.tr); st.setProperty('--ok',p.ok); st.setProperty('--no',p.no);
     st.setProperty('--mid',p.accent2);
     /* convencao base.css (mindmap) */

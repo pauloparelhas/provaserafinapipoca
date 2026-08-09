@@ -62,7 +62,15 @@ var UI=Object.assign({
   badges1:'Show my badges!', badges1Pt:'Mostrar emblemas!',
   badgesN:'Next badge',      badgesNPt:'Pr\u00f3ximo emblema',
   backMap:'\ud83d\uddfa\ufe0f Back to the map<span class="tr">Voltar ao mapa</span>',
-  listenTitle:'Listen'
+  listenTitle:'Listen',
+  yes:'\ud83c\udf89 Yes! <span class="tr">Isso!</span>',
+  next:'\u27a1\ufe0f Next<span class="tr">Pr\u00f3ximo</span>',
+  notYet:'\ud83d\udca1 Not yet\u2026 the answer is:<span class="tr">Ainda n\u00e3o\u2026 a resposta \u00e9:</span>',
+  remember:'Remember: <span class="tr">Lembre:</span>',
+  keepGoing:'\u27a1\ufe0f Keep going!<span class="tr">Seguir em frente!</span>',
+  goesIn:' goes in\u2026', goesInPt:' vai em\u2026',
+  phaseDone:'Phase complete!<span class="tr">Fase conclu\u00edda!</span>',
+  nextPhase:'\u27a1\ufe0f Next phase<span class="tr">Pr\u00f3xima fase</span>'
 }, (window.SERA_CFG||{}).advUI||{});
 
 var A=null, S=null;            // ADVENTURE, estado salvo
@@ -183,8 +191,8 @@ function correct(){
   if(ent.tries===0)cur.perfect++;
   /* nunca avança sozinho — sempre botão (checklist Serafina) */
   var f=$id('advFeed'); if(!f)return;
-  f.innerHTML='<div class="adv-good">🎉 Yes! <span class="tr">Isso!</span></div>'
-    +'<button class="adv-go" onclick="SERA_ADV.nextChallenge()">➡️ Next<span class="tr">Próximo</span></button>';
+  f.innerHTML='<div class="adv-good">'+UI.yes+'</div>'
+    +'<button class="adv-go" onclick="SERA_ADV.nextChallenge()">'+UI.next+'</button>';
   f.scrollIntoView({behavior:'smooth',block:'end'});
 }
 function wrong(revealHtml){
@@ -199,18 +207,18 @@ function wrong(revealHtml){
 }
 function feed(ok,revealHtml,teach){
   var f=$id('advFeed'); if(!f)return;
-  if(ok){ f.innerHTML='<div class="adv-good">🎉 Yes! <span class="tr">Isso!</span></div>'; return; }
+  if(ok){ f.innerHTML='<div class="adv-good">'+UI.yes+'</div>'; return; }
   var ph=cur.ph;
-  var h='<div class="adv-bad"><div class="adv-badt">💡 Not yet… the answer is:<span class="tr">Ainda não… a resposta é:</span></div>'
+  var h='<div class="adv-bad"><div class="adv-badt">'+UI.notYet+'</div>'
     +'<div class="adv-truth">'+revealHtml+'</div>';
   if(teach){
     /* boss não tem lesson — guard obrigatório (QA ti: crash travava a criança) */
     if(ph.lesson){
-      h+='<div class="adv-reteach"><div class="adv-rtt">'+ph.icon+' Remember: <span class="tr">Lembre:</span></div>';
+      h+='<div class="adv-reteach"><div class="adv-rtt">'+ph.icon+' '+UI.remember+'</div>';
       ph.lesson.lines.forEach(function(ln){h+='<div class="adv-lline small"><span>'+ln[0]+'</span><span>'+tr(ln[1],ln[2])+'</span></div>';});
       h+='</div>';
     }
-    h+='<button class="adv-go" onclick="SERA_ADV.nextChallenge()">➡️ Keep going!<span class="tr">Seguir em frente!</span></button>';
+    h+='<button class="adv-go" onclick="SERA_ADV.nextChallenge()">'+UI.keepGoing+'</button>';
   }else{
     h+='<button class="adv-go" onclick="SERA_ADV.retry()">'+UI.retry+'</button>';
   }
@@ -264,7 +272,7 @@ function tapBucket(bid){
     btns.forEach(function(b){if(b.getAttribute('data-b')===bid)b.classList.add('good');b.onclick=null;});
     ent.sub++;
     if(ent.sub>=ent.subs.length){ correct(); }
-    else{ $id('advFeed').innerHTML='<div class="adv-good">🎉 Yes! <span class="tr">Isso!</span></div>'; advTimer=setTimeout(renderChallenge,650); }
+    else{ $id('advFeed').innerHTML='<div class="adv-good">'+UI.yes+'</div>'; advTimer=setTimeout(renderChallenge,650); }
   }else{
     btns.forEach(function(b){
       if(b.getAttribute('data-b')===bid)b.classList.add('bad');
@@ -277,9 +285,9 @@ function tapBucket(bid){
     var entRef=ent;
     var again=function(){ ended?finishSortAfterMiss(entRef):renderChallenge(); };
     var f=$id('advFeed');
-    f.innerHTML='<div class="adv-bad"><div class="adv-badt">💡 '+esc(s.en)+' goes in…<span class="tr">'+esc(s.pt||s.en)+' vai em…</span></div>'
+    f.innerHTML='<div class="adv-bad"><div class="adv-badt">💡 '+esc(s.en)+UI.goesIn+'<span class="tr">'+esc(s.pt||s.en)+UI.goesInPt+'</span></div>'
       +'<div class="adv-truth">'+tr(right.en,right.pt)+'</div>'
-      +'<button class="adv-go" id="advSortGo">➡️ Next<span class="tr">Próximo</span></button></div>';
+      +'<button class="adv-go" id="advSortGo">'+UI.next+'</button></div>';
     $id('advSortGo').onclick=again;
     entRef.tries++; cur.misses++;
     if(entRef.tries>=2)queueForBoss(entRef.src);
@@ -305,11 +313,11 @@ function phaseComplete(){
   var i=phaseIndex(ph.id), nxt=A.phases[i+1];
   var h='<div class="adv-done" style="--pc:'+(ph.color||'#38bdf8')+'">'
    +'<div class="adv-bigicon">'+ph.icon+'</div>'
-   +'<div class="adv-donet">Phase complete!<span class="tr">Fase concluída!</span></div>'
+   +'<div class="adv-donet">'+UI.phaseDone+'</div>'
    +'<div class="adv-starrow">'+'⭐'.repeat(got)+'☆'.repeat(Math.max(0,tot-got))+'</div>'
    +(ph.anchor?'<button class="adv-anchor" onclick="say(\''+escJs(ph.anchor)+'\')">🔊 '+tr(ph.anchor,ph.anchorPt)+'</button>':'')
    +'<div class="adv-donebtns">'
-   +(nxt?'<button class="adv-go" onclick="SERA_ADV.enter(\''+nxt.id+'\')">➡️ Next phase<span class="tr">Próxima fase</span></button>':'')
+   +(nxt?'<button class="adv-go" onclick="SERA_ADV.enter(\''+nxt.id+'\')">'+UI.nextPhase+'</button>':'')
    +'<button class="adv-go ghost" onclick="SERA_ADV.showMap()">'+UI.map+'</button>'
    +'</div></div>';
   $id('stage').innerHTML=h;

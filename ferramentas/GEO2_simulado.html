@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Simulado — Geografia · Comunidades e lugares</title>
-<link rel="stylesheet" href="serafina-core.css">
+<link rel="stylesheet" href="serafina-core.css?v=20260809a">
 <style>
 :root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#34d399;--accent2:#fbbf24;--tr:#fcd34d;--ok:#34d399;--no:#f87171;--mid:#fbbf24;--rad:22px}
 body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
@@ -166,7 +166,7 @@ body.show-tr .endbtn .etr{display:block}
 <div class="app">
   <div class="topbar">
     <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
-    <span class="title">Quiz &mdash; States of Matter</span>
+    <span class="title">Simulado &mdash; Comunidades e lugares</span>
     <button class="iconbtn dicabtn" id="dica" title="Mostrar dica" onclick="toggleTr()">&#128161;<span class="ft">Dica</span></button>
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
@@ -511,7 +511,7 @@ function intro(){
   $('bar').style.width='0%';
   $('qnav').classList.remove('show');
   $('card').innerHTML=`<div class="intro">
-    <div class="qfig">\u{1F9EA}</div>
+    <div class="qfig">\u{1F30E}</div>
     <div class="q">Vamos treinar para a prova!</div>
     <div class="tr qtr">Vamos estudar para a prova!</div>
     <p>Escolha os <b>temas</b> e quantas <b>perguntas</b> você quer.
@@ -525,7 +525,7 @@ function intro(){
     <div class="sizewrap">
       ${[5,10,25,50,100].map(n=>`<button class="sizebtn${n===roundSize?' sel':''}" onclick="start(${n})">${n}<span class="sl">perguntas</span></button>`).join('')}
     </div>
-    <p class="startnote">Tap a number to start. <span class="tr">Toque na quantidade para começar.</span></p>
+    <p class="startnote">Toque num número para começar. <span class="tr">Comece com 10 e depois aumente.</span></p>
   </div>`;
 }
 function toggleTheme(k){
@@ -550,7 +550,7 @@ function render(){
 function addRedoBtn(){
   const b=document.createElement('button');
   b.className='redoq';b.id='redoq';b.title='Refazer esta pergunta';
-  b.innerHTML='↺<span class="rl">redo</span>';
+  b.innerHTML='↺<span class="rl">refazer</span>';
   b.onclick=redoQ;
   $('card').appendChild(b);
 }
@@ -807,7 +807,8 @@ function fim(){
 intro();
 </script>
 <script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9,stars:140};</script>
-<script src="serafina-core.js"></script>
-<script src="cie2_theme.js"></script>
+<script src="serafina-core.js?v=20260809a"></script>
+<script>window.SERA_ACCENT={accent:'#34d399'};</script>
+<script src="cie2_theme.js?v=20260809a"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Materiais da turma — Geografia · Comunidades e lugares</title>
-<link rel="stylesheet" href="serafina-core.css">
+<link rel="stylesheet" href="serafina-core.css?v=20260809a">
 <style>
 :root{--fs:1;--bg:#0d0b1e;--bg2:#10322a;--ink:#f0fdf4;--soft:rgba(255,255,255,.55);--card:#13303a;--line:rgba(255,255,255,.12);--accent:#34d399;--accent2:#fbbf24;--rad:20px}
 body.light{--bg:#eafaf1;--bg2:#dcf5e8;--ink:#0c2a1e;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1)}
@@ -50,15 +50,15 @@ body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-grad
 </head>
 <body>
 <canvas id="starfield"></canvas>
-<div class="wrap">
-  <div class="topbar">
+<div class="topbar">
     <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
     <span class="title">Materiais da turma</span>
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
     <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
-  </div>
+</div>
+<div class="wrap">
 
   <div class="head">
     <div class="em">&#x1F5BC;&#xFE0F;</div>
@@ -139,7 +139,8 @@ function closeLb(e,force){if(force||e.target.id==='lb'||e.target.classList.conta
 addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lb').classList.remove('show');});
 </script>
 <script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9};</script>
-<script src="serafina-core.js"></script>
-<script src="cie2_theme.js"></script>
+<script src="serafina-core.js?v=20260809a"></script>
+<script>window.SERA_ACCENT={accent:'#34d399'};</script>
+<script src="cie2_theme.js?v=20260809a"></script>
 </body>
 </html>

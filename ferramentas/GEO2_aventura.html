@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Expedição Brasil — Geografia · Comunidades e lugares</title>
-<link rel="stylesheet" href="serafina-core.css">
+<link rel="stylesheet" href="serafina-core.css?v=20260809a">
 <style>
-:root{--fs:1;--bg:#0d0b1e;--bg2:#1b1440;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#161233;--line:rgba(255,255,255,.12);--accent:#38bdf8;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
+:root{--fs:1;--bg:#0d0b1e;--bg2:#1b1440;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#161233;--line:rgba(255,255,255,.12);--accent:#34d399;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
 body.light{--bg:#e0f2fe;--bg2:#ede9fe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
@@ -168,10 +168,18 @@ body.show-tr .tr{display:block}
     badges1:'Mostrar meus emblemas!', badges1Pt:'',
     badgesN:'Próximo emblema',    badgesNPt:'',
     backMap:'🗺️ Voltar ao mapa<span class="tr"></span>',
-    listenTitle:'Ouvir'
+    listenTitle:'Ouvir',
+    yes:'🎉 Isso! <span class="tr"></span>',
+    next:'➡️ Próximo<span class="tr"></span>',
+    notYet:'💡 Ainda não… a resposta é:<span class="tr"></span>',
+    remember:'Lembre: <span class="tr"></span>',
+    keepGoing:'➡️ Seguir em frente!<span class="tr"></span>',
+    goesIn:' vai em…', goesInPt:'',
+    phaseDone:'Fase concluída!<span class="tr"></span>',
+    nextPhase:'➡️ Próxima fase<span class="tr"></span>'
   }};</script>
-<script src="serafina-core.js"></script>
-<script src="serafina-adventure.js"></script>
+<script src="serafina-core.js?v=20260809a"></script>
+<script src="serafina-adventure.js?v=20260809a"></script>
 <script>
 /* ============================================================
    EXPEDIÇÃO BRASIL — dados da aventura (Geografia 2tri)
@@ -526,6 +534,7 @@ var ADVENTURE={
 
 SERA_ADV.boot(ADVENTURE);
 </script>
-<script src="cie2_theme.js"></script>
+<script>window.SERA_ACCENT={accent:'#34d399'};</script>
+<script src="cie2_theme.js?v=20260809a"></script>
 </body>
 </html>
