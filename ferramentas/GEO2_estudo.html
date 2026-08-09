@@ -30,7 +30,8 @@ body.show-tr .dicabtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
 .foot{text-align:center;color:var(--soft);font-weight:800;font-size:.82rem;margin-top:10px}
 
 /* ---- abas ---- */
-.tabbar{display:flex;gap:8px;margin-bottom:14px}
+/* as 3 abas acompanham a rolagem: em texto longo a crianca nao perde a troca de modo */
+.tabbar{position:sticky;top:64px;z-index:4;display:flex;gap:8px;margin:0 -12px 14px;padding:8px 12px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .tabbtn{flex:1;min-height:52px;border-radius:16px;border:2px solid var(--line);background:transparent;color:var(--soft);font-family:inherit;font-weight:900;font-size:calc(.85rem*var(--fs));cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.1}
 .tabbtn .te{font-size:1.2rem}
 .tabbtn.on{border-color:var(--accent);background:rgba(52,211,153,.14);color:var(--ink)}
@@ -62,9 +63,6 @@ body.show-tr .sechead .st .str{display:block}
 .line .lk{flex-shrink:0}
 .cols{display:flex;gap:10px;flex-wrap:wrap}
 .col{flex:1;min-width:140px;border:2px solid var(--line);border-radius:14px;padding:11px 13px}
-.col.solid{background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.4)}
-.col.liquid{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.35)}
-.col.gas{background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.4)}
 .col h4{font-size:.92rem;font-weight:900;margin-bottom:7px}
 .col .ci{font-weight:800;font-size:calc(.92rem*var(--fs));margin:5px 0;line-height:1.25}
 .tip{display:flex;gap:9px;align-items:flex-start;margin:9px 0;font-weight:800;font-size:calc(.97rem*var(--fs));line-height:1.35}
@@ -146,6 +144,39 @@ body.light .mm-tag{background:rgba(180,83,9,.15);color:#b45309}
 
 .sombtn{transition:opacity .15s}
 .sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
+
+/* ---------- mouse (notebook) ---------- */
+@media (hover:hover){
+  .tabbtn:hover,.toolbtn:hover,.kchip:hover{border-color:var(--accent)}
+  .sechead:hover .st,.mm-branch-hd:hover .mm-branch-en{color:var(--accent)}
+}
+/* ---------- telas largas (notebook): a folha em 2 colunas ---------- */
+@media (min-width:1000px){
+  .wrap{max-width:860px;padding:16px 20px 48px}
+  /* so o mural de palavras vira 2 colunas: folha e mapa abrem/fecham,
+     e em multicoluna um clique reflui a coluna vizinha */
+  #wordsContent{columns:2;column-gap:18px}
+  .kblock{break-inside:avoid}
+  .tabbar{margin:0 -20px 16px;padding:8px 20px}
+}
+/* ---------- celular em PAISAGEM ---------- */
+@media (orientation:landscape) and (max-height:520px){
+  .topbar{padding:5px 8px}
+  .wrap{max-width:none;padding:10px 14px 30px}
+  .tabbar{top:54px;margin:0 -14px 10px;padding:6px 14px}
+  .tabbtn{min-height:44px;flex-direction:row;gap:6px;font-size:calc(.8rem*var(--fs))}
+  .tabbtn .te{font-size:1rem}
+  .hint{margin:2px 0 8px}
+  #wordsContent{columns:2;column-gap:14px}
+  .kblock{break-inside:avoid}
+  .sechead{padding:11px 13px}
+  .sechead .si{font-size:1.3rem}
+  .secbody{padding:0 13px 13px}
+  .mm-root-pill{padding:8px 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
 </style>
 </head>
 <body>
