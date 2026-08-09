@@ -1,0 +1,6564 @@
+[
+  {
+    "id": "E001",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Acarajé\"?",
+    "alvo": "Acarajé",
+    "correta": [
+      "Culinária"
+    ],
+    "distratores": [
+      "Dança e música",
+      "Festa e celebração"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E002",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Pão de queijo\"?",
+    "alvo": "Pão de queijo",
+    "correta": [
+      "Culinária"
+    ],
+    "distratores": [
+      "Dança e música",
+      "Festa e celebração"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E003",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Chimarrão\"?",
+    "alvo": "Chimarrão",
+    "correta": [
+      "Culinária"
+    ],
+    "distratores": [
+      "Dança e música",
+      "Festa e celebração"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E004",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Farinha de mandioca\"?",
+    "alvo": "Farinha de mandioca",
+    "correta": [
+      "Culinária"
+    ],
+    "distratores": [
+      "Dança e música",
+      "Festa e celebração"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E005",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Carimbó\"?",
+    "alvo": "Carimbó",
+    "correta": [
+      "Dança e música"
+    ],
+    "distratores": [
+      "Culinária",
+      "Festa e celebração"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E006",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Maracatu\"?",
+    "alvo": "Maracatu",
+    "correta": [
+      "Dança e música"
+    ],
+    "distratores": [
+      "Culinária",
+      "Festa e celebração"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E007",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Samba\"?",
+    "alvo": "Samba",
+    "correta": [
+      "Dança e música"
+    ],
+    "distratores": [
+      "Culinária",
+      "Festa e celebração"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E008",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Jongo\"?",
+    "alvo": "Jongo",
+    "correta": [
+      "Dança e música"
+    ],
+    "distratores": [
+      "Culinária",
+      "Festa e celebração"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E009",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Oktoberfest de Blumenau\"?",
+    "alvo": "Oktoberfest de Blumenau",
+    "correta": [
+      "Festa e celebração"
+    ],
+    "distratores": [
+      "Culinária",
+      "Dança e música"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E010",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Festival de Parintins\"?",
+    "alvo": "Festival de Parintins",
+    "correta": [
+      "Festa e celebração"
+    ],
+    "distratores": [
+      "Culinária",
+      "Dança e música"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E011",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Semana Farroupilha\"?",
+    "alvo": "Semana Farroupilha",
+    "correta": [
+      "Festa e celebração"
+    ],
+    "distratores": [
+      "Culinária",
+      "Dança e música"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E012",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"manifest\"",
+    "tipo": "classificar",
+    "enunciado": "Onde a cultura aparece — onde entra \"Festa do peão de Barretos\"?",
+    "alvo": "Festa do peão de Barretos",
+    "correta": [
+      "Festa e celebração"
+    ],
+    "distratores": [
+      "Culinária",
+      "Dança e música"
+    ],
+    "categorias": [
+      "Culinária",
+      "Dança e música",
+      "Festa e celebração"
+    ]
+  },
+  {
+    "id": "E013",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Tacacá\"?",
+    "alvo": "Tacacá",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E014",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Açaí\"?",
+    "alvo": "Açaí",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E015",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Acarajé\"?",
+    "alvo": "Acarajé",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E016",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Baião de dois\"?",
+    "alvo": "Baião de dois",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E017",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Vatapá\"?",
+    "alvo": "Vatapá",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E018",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Cuscuz nordestino\"?",
+    "alvo": "Cuscuz nordestino",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E019",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Arroz com pequi\"?",
+    "alvo": "Arroz com pequi",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E020",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Pamonha\"?",
+    "alvo": "Pamonha",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E021",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Feijoada\"?",
+    "alvo": "Feijoada",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E022",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Pão de queijo\"?",
+    "alvo": "Pão de queijo",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E023",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Tutu de feijão\"?",
+    "alvo": "Tutu de feijão",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E024",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Moqueca capixaba\"?",
+    "alvo": "Moqueca capixaba",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E025",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Cuscuz paulista\"?",
+    "alvo": "Cuscuz paulista",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E026",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Churrasco gaúcho\"?",
+    "alvo": "Churrasco gaúcho",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E027",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"comidas\"",
+    "tipo": "classificar",
+    "enunciado": "Comidas típicas — qual região? — onde entra \"Arroz carreteiro\"?",
+    "alvo": "Arroz carreteiro",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E028",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festival de Parintins (boi-bumbá)\"?",
+    "alvo": "Festival de Parintins (boi-bumbá)",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E029",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Carnaval de Salvador\"?",
+    "alvo": "Carnaval de Salvador",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E030",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festa de São João\"?",
+    "alvo": "Festa de São João",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E031",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Bumba meu boi\"?",
+    "alvo": "Bumba meu boi",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E032",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festa do Senhor do Bonfim\"?",
+    "alvo": "Festa do Senhor do Bonfim",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E033",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festa de Iemanjá\"?",
+    "alvo": "Festa de Iemanjá",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E034",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Desfile dos Bonecos Gigantes de Olinda\"?",
+    "alvo": "Desfile dos Bonecos Gigantes de Olinda",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E035",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festa do Divino Espírito Santo\"?",
+    "alvo": "Festa do Divino Espírito Santo",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E036",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festa de São Benedito\"?",
+    "alvo": "Festa de São Benedito",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E037",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Romaria do Divino Pai Eterno\"?",
+    "alvo": "Romaria do Divino Pai Eterno",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E038",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festa do peão de Barretos\"?",
+    "alvo": "Festa do peão de Barretos",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E039",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Carnaval do Rio\"?",
+    "alvo": "Carnaval do Rio",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E040",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festa da uva de Jundiaí\"?",
+    "alvo": "Festa da uva de Jundiaí",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E041",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festa de Nossa Senhora Aparecida\"?",
+    "alvo": "Festa de Nossa Senhora Aparecida",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E042",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festa da congada\"?",
+    "alvo": "Festa da congada",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E043",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Oktoberfest de Blumenau\"?",
+    "alvo": "Oktoberfest de Blumenau",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E044",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Festa nacional do pinhão\"?",
+    "alvo": "Festa nacional do pinhão",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E045",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"festas\"",
+    "tipo": "classificar",
+    "enunciado": "Festas e comemorações — qual região? — onde entra \"Semana Farroupilha\"?",
+    "alvo": "Semana Farroupilha",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E046",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Carimbó\"?",
+    "alvo": "Carimbó",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E047",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Toada\"?",
+    "alvo": "Toada",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E048",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Frevo\"?",
+    "alvo": "Frevo",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E049",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Forró\"?",
+    "alvo": "Forró",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E050",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Baião\"?",
+    "alvo": "Baião",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E051",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Maracatu\"?",
+    "alvo": "Maracatu",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E052",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Axé\"?",
+    "alvo": "Axé",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E053",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Siriri\"?",
+    "alvo": "Siriri",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E054",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Cururu\"?",
+    "alvo": "Cururu",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E055",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Moda de viola\"?",
+    "alvo": "Moda de viola",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E056",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Samba\"?",
+    "alvo": "Samba",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E057",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Pagode\"?",
+    "alvo": "Pagode",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E058",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Funk\"?",
+    "alvo": "Funk",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E059",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"MPB\"?",
+    "alvo": "MPB",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E060",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Xote gaúcho\"?",
+    "alvo": "Xote gaúcho",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E061",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Pau de fita\"?",
+    "alvo": "Pau de fita",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E062",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"ritmos\"",
+    "tipo": "classificar",
+    "enunciado": "Danças e músicas — qual região? — onde entra \"Sertanejo universitário\"?",
+    "alvo": "Sertanejo universitário",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E063",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"tradicoes\"",
+    "tipo": "classificar",
+    "enunciado": "Tradições e costumes — de onde são? — onde entra \"Produção artesanal de farinha de mandioca\"?",
+    "alvo": "Produção artesanal de farinha de mandioca",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E064",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"tradicoes\"",
+    "tipo": "classificar",
+    "enunciado": "Tradições e costumes — de onde são? — onde entra \"Celebração do Santo Daime\"?",
+    "alvo": "Celebração do Santo Daime",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E065",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"tradicoes\"",
+    "tipo": "classificar",
+    "enunciado": "Tradições e costumes — de onde são? — onde entra \"Bonecos Gigantes de Olinda\"?",
+    "alvo": "Bonecos Gigantes de Olinda",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E066",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"tradicoes\"",
+    "tipo": "classificar",
+    "enunciado": "Tradições e costumes — de onde são? — onde entra \"Xilogravura da literatura de cordel\"?",
+    "alvo": "Xilogravura da literatura de cordel",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E067",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"tradicoes\"",
+    "tipo": "classificar",
+    "enunciado": "Tradições e costumes — de onde são? — onde entra \"Cuscuz nordestino\"?",
+    "alvo": "Cuscuz nordestino",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E068",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"tradicoes\"",
+    "tipo": "classificar",
+    "enunciado": "Tradições e costumes — de onde são? — onde entra \"Cuscuz paulista\"?",
+    "alvo": "Cuscuz paulista",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E069",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"tradicoes\"",
+    "tipo": "classificar",
+    "enunciado": "Tradições e costumes — de onde são? — onde entra \"Oktoberfest de Blumenau\"?",
+    "alvo": "Oktoberfest de Blumenau",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E070",
+    "produto": "Sort it! / Pop it!",
+    "origem": "GEO2_data.js · jogo \"tradicoes\"",
+    "tipo": "classificar",
+    "enunciado": "Tradições e costumes — de onde são? — onde entra \"Chimarrão\"?",
+    "alvo": "Chimarrão",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E071",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f1",
+    "tipo": "mc",
+    "enunciado": "O que é uma TRADIÇÃO?",
+    "correta": [
+      "Um costume que passa de geração em geração"
+    ],
+    "distratores": [
+      "Uma novidade que apareceu esta semana",
+      "Uma viagem de férias"
+    ],
+    "categorias": [
+      "Um costume que passa de geração em geração",
+      "Uma novidade que apareceu esta semana",
+      "Uma viagem de férias"
+    ]
+  },
+  {
+    "id": "E072",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f1",
+    "tipo": "mc",
+    "enunciado": "A tradição passa de quem para quem?",
+    "correta": [
+      "De pais para filhos"
+    ],
+    "distratores": [
+      "De vizinho para vizinho, uma vez só",
+      "Da televisão para a escola"
+    ],
+    "categorias": [
+      "De pais para filhos",
+      "De vizinho para vizinho, uma vez só",
+      "Da televisão para a escola"
+    ]
+  },
+  {
+    "id": "E073",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f1",
+    "tipo": "mc",
+    "enunciado": "O que é IDENTIDADE CULTURAL?",
+    "correta": [
+      "O conjunto de costumes que diz quem nós somos"
+    ],
+    "distratores": [
+      "O documento com a nossa foto",
+      "O nome da rua onde moramos"
+    ],
+    "categorias": [
+      "O conjunto de costumes que diz quem nós somos",
+      "O documento com a nossa foto",
+      "O nome da rua onde moramos"
+    ]
+  },
+  {
+    "id": "E074",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f1",
+    "tipo": "mc",
+    "enunciado": "A comunidade onde vivemos é formada por…",
+    "correta": [
+      "Diferentes pessoas, histórias e costumes"
+    ],
+    "distratores": [
+      "Pessoas todas iguais",
+      "Só pela nossa família"
+    ],
+    "categorias": [
+      "Diferentes pessoas, histórias e costumes",
+      "Pessoas todas iguais",
+      "Só pela nossa família"
+    ]
+  },
+  {
+    "id": "E075",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f1",
+    "tipo": "mc",
+    "enunciado": "\"Está há muito tempo na família\" descreve…",
+    "correta": [
+      "Uma tradição"
+    ],
+    "distratores": [
+      "Uma migração",
+      "Uma comunidade"
+    ],
+    "categorias": [
+      "Uma tradição",
+      "Uma migração",
+      "Uma comunidade"
+    ]
+  },
+  {
+    "id": "E076",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f1",
+    "tipo": "mc",
+    "enunciado": "Conhecer a origem da nossa família ajuda a entender…",
+    "correta": [
+      "A história dos nossos ancestrais"
+    ],
+    "distratores": [
+      "O tempo que vai fazer amanhã",
+      "A tabuada do 7"
+    ],
+    "categorias": [
+      "A história dos nossos ancestrais",
+      "O tempo que vai fazer amanhã",
+      "A tabuada do 7"
+    ]
+  },
+  {
+    "id": "E077",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f1",
+    "tipo": "mc",
+    "enunciado": "Qual destas frases explica o que é uma TRADIÇÃO?",
+    "correta": [
+      "Passa de geração em geração, de pais para filhos"
+    ],
+    "distratores": [
+      "Mudar de um lugar para outro para morar",
+      "O lugar onde vivemos, com muitas pessoas diferentes"
+    ],
+    "categorias": [
+      "Passa de geração em geração, de pais para filhos",
+      "Mudar de um lugar para outro para morar",
+      "O lugar onde vivemos, com muitas pessoas diferentes"
+    ]
+  },
+  {
+    "id": "E078",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f1",
+    "tipo": "mc",
+    "enunciado": "Qual destas frases explica o que é MIGRAÇÃO?",
+    "correta": [
+      "Quando pessoas mudam de um lugar para outro"
+    ],
+    "distratores": [
+      "Um costume que passa de pais para filhos",
+      "Uma festa que acontece só uma vez"
+    ],
+    "categorias": [
+      "Quando pessoas mudam de um lugar para outro",
+      "Um costume que passa de pais para filhos",
+      "Uma festa que acontece só uma vez"
+    ]
+  },
+  {
+    "id": "E079",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f2",
+    "tipo": "mc",
+    "enunciado": "O que é MIGRAÇÃO?",
+    "correta": [
+      "Quando pessoas mudam de um lugar para outro"
+    ],
+    "distratores": [
+      "Quando uma família vai à praia no domingo",
+      "Quando alguém troca de escola de sala"
+    ],
+    "categorias": [
+      "Quando pessoas mudam de um lugar para outro",
+      "Quando uma família vai à praia no domingo",
+      "Quando alguém troca de escola de sala"
+    ]
+  },
+  {
+    "id": "E080",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f2",
+    "tipo": "mc",
+    "enunciado": "Quem migra leva consigo…",
+    "correta": [
+      "Hábitos, crenças e modos de viver"
+    ],
+    "distratores": [
+      "Só as roupas na mala",
+      "Nada — deixa tudo para trás"
+    ],
+    "categorias": [
+      "Hábitos, crenças e modos de viver",
+      "Só as roupas na mala",
+      "Nada — deixa tudo para trás"
+    ]
+  },
+  {
+    "id": "E081",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f2",
+    "tipo": "multipla",
+    "enunciado": "Onde a cultura de quem migrou aparece? (pode ser mais de uma)",
+    "correta": [
+      "Na culinária 🍲",
+      "Nas vestimentas 👗",
+      "Na religião 🙏",
+      "Nas festas 🎉",
+      "Na arquitetura 🏛️"
+    ],
+    "distratores": [
+      "No tamanho do sapato 👟"
+    ],
+    "categorias": [
+      "Na culinária 🍲",
+      "Nas vestimentas 👗",
+      "Na religião 🙏",
+      "Nas festas 🎉",
+      "Na arquitetura 🏛️",
+      "No tamanho do sapato 👟"
+    ]
+  },
+  {
+    "id": "E082",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f2",
+    "tipo": "mc",
+    "enunciado": "O que quer dizer MULTICULTURAL?",
+    "correta": [
+      "Feito de muitas culturas juntas"
+    ],
+    "distratores": [
+      "Feito de uma cultura só",
+      "Que fala muitas línguas na escola"
+    ],
+    "categorias": [
+      "Feito de muitas culturas juntas",
+      "Feito de uma cultura só",
+      "Que fala muitas línguas na escola"
+    ]
+  },
+  {
+    "id": "E083",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f2",
+    "tipo": "mc",
+    "enunciado": "A Oktoberfest de Blumenau veio de qual país?",
+    "correta": [
+      "Da Alemanha 🇩🇪"
+    ],
+    "distratores": [
+      "Do Japão 🇯🇵",
+      "De Portugal 🇵🇹"
+    ],
+    "categorias": [
+      "Da Alemanha 🇩🇪",
+      "Do Japão 🇯🇵",
+      "De Portugal 🇵🇹"
+    ]
+  },
+  {
+    "id": "E084",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f2",
+    "tipo": "mc",
+    "enunciado": "O jiu-jitsu brasileiro nasceu a partir de qual arte marcial?",
+    "correta": [
+      "Do judô e do jiu-jitsu japonês"
+    ],
+    "distratores": [
+      "Do futebol",
+      "Da capoeira alemã"
+    ],
+    "categorias": [
+      "Do judô e do jiu-jitsu japonês",
+      "Do futebol",
+      "Da capoeira alemã"
+    ]
+  },
+  {
+    "id": "E085",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f2",
+    "tipo": "mc",
+    "enunciado": "O Santo Daime, ritual amazônico dos anos 1930, mistura tradições…",
+    "correta": [
+      "Indígenas e cristãs"
+    ],
+    "distratores": [
+      "Alemãs e japonesas",
+      "Só indígenas"
+    ],
+    "categorias": [
+      "Indígenas e cristãs",
+      "Alemãs e japonesas",
+      "Só indígenas"
+    ]
+  },
+  {
+    "id": "E086",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f3",
+    "tipo": "mc",
+    "enunciado": "A produção artesanal de farinha de mandioca é tradição de quem?",
+    "correta": [
+      "Dos povos indígenas da Amazônia"
+    ],
+    "distratores": [
+      "Dos imigrantes alemães do Sul",
+      "Dos gaúchos do Rio Grande do Sul"
+    ],
+    "categorias": [
+      "Dos povos indígenas da Amazônia",
+      "Dos imigrantes alemães do Sul",
+      "Dos gaúchos do Rio Grande do Sul"
+    ]
+  },
+  {
+    "id": "E087",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f3",
+    "tipo": "mc",
+    "enunciado": "Os Bonecos Gigantes desfilam no carnaval de qual cidade?",
+    "correta": [
+      "Olinda, em Pernambuco"
+    ],
+    "distratores": [
+      "Blumenau, em Santa Catarina",
+      "Parintins, no Amazonas"
+    ],
+    "categorias": [
+      "Olinda, em Pernambuco",
+      "Blumenau, em Santa Catarina",
+      "Parintins, no Amazonas"
+    ]
+  },
+  {
+    "id": "E088",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f3",
+    "tipo": "mc",
+    "enunciado": "A xilogravura é usada para ilustrar…",
+    "correta": [
+      "Os folhetos da literatura de cordel"
+    ],
+    "distratores": [
+      "As camisas do time de futebol",
+      "Os livros de matemática"
+    ],
+    "categorias": [
+      "Os folhetos da literatura de cordel",
+      "As camisas do time de futebol",
+      "Os livros de matemática"
+    ]
+  },
+  {
+    "id": "E089",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f3",
+    "tipo": "mc",
+    "enunciado": "O jongo é uma manifestação cultural de qual matriz?",
+    "correta": [
+      "De matriz africana"
+    ],
+    "distratores": [
+      "De matriz alemã",
+      "De matriz japonesa"
+    ],
+    "categorias": [
+      "De matriz africana",
+      "De matriz alemã",
+      "De matriz japonesa"
+    ]
+  },
+  {
+    "id": "E090",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f3",
+    "tipo": "mc",
+    "enunciado": "O cuscuz PAULISTA é de qual região?",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E091",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f3",
+    "tipo": "mc",
+    "enunciado": "O cuscuz NORDESTINO é de qual região?",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E092",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f3",
+    "tipo": "mc",
+    "enunciado": "O chimarrão é bebida tradicional de qual região?",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E093",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f3",
+    "tipo": "mc",
+    "enunciado": "O Santo Daime é um ritual religioso de qual região?",
+    "correta": [
+      "Norte 🌳"
+    ],
+    "distratores": [
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E094",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f3",
+    "tipo": "mc",
+    "enunciado": "O jiu-jitsu brasileiro foi desenvolvido em qual país?",
+    "correta": [
+      "No Brasil 🇧🇷"
+    ],
+    "distratores": [
+      "No Japão 🇯🇵",
+      "Na Alemanha 🇩🇪"
+    ],
+    "categorias": [
+      "No Brasil 🇧🇷",
+      "No Japão 🇯🇵",
+      "Na Alemanha 🇩🇪"
+    ]
+  },
+  {
+    "id": "E095",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4",
+    "tipo": "mc",
+    "enunciado": "Tacacá e açaí são comidas típicas de qual região?",
+    "correta": [
+      "Norte 🌳"
+    ],
+    "distratores": [
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E096",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4",
+    "tipo": "mc",
+    "enunciado": "Acarajé e vatapá são comidas típicas de qual região?",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E097",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4",
+    "tipo": "mc",
+    "enunciado": "Baião de dois é comida típica de qual região?",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E098",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4",
+    "tipo": "mc",
+    "enunciado": "Arroz com pequi e pamonha são de qual região?",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E099",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4",
+    "tipo": "mc",
+    "enunciado": "Feijoada, pão de queijo e tutu de feijão são de qual região?",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E100",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4",
+    "tipo": "mc",
+    "enunciado": "Moqueca capixaba é de qual região?",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E101",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4",
+    "tipo": "mc",
+    "enunciado": "Churrasco gaúcho e arroz carreteiro são de qual região?",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E102",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Tacacá\"?",
+    "alvo": "Tacacá",
+    "correta": [
+      "Norte 🌳"
+    ],
+    "distratores": [
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E103",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Açaí\"?",
+    "alvo": "Açaí",
+    "correta": [
+      "Norte 🌳"
+    ],
+    "distratores": [
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E104",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Acarajé\"?",
+    "alvo": "Acarajé",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E105",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Vatapá\"?",
+    "alvo": "Vatapá",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E106",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Baião de dois\"?",
+    "alvo": "Baião de dois",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E107",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Arroz com pequi\"?",
+    "alvo": "Arroz com pequi",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E108",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Pamonha\"?",
+    "alvo": "Pamonha",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E109",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Feijoada\"?",
+    "alvo": "Feijoada",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E110",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Pão de queijo\"?",
+    "alvo": "Pão de queijo",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E111",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Moqueca capixaba\"?",
+    "alvo": "Moqueca capixaba",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E112",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Churrasco gaúcho\"?",
+    "alvo": "Churrasco gaúcho",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E113",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f4 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada comida na sua região! Toque na caixa certa. — onde entra \"Arroz carreteiro\"?",
+    "alvo": "Arroz carreteiro",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E114",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5",
+    "tipo": "mc",
+    "enunciado": "O festival de Parintins (boi-bumbá) acontece em qual região?",
+    "correta": [
+      "Norte 🌳"
+    ],
+    "distratores": [
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E115",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5",
+    "tipo": "mc",
+    "enunciado": "O bumba meu boi é festa de qual região?",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E116",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5",
+    "tipo": "mc",
+    "enunciado": "O carnaval de Salvador é de qual região?",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E117",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5",
+    "tipo": "mc",
+    "enunciado": "A festa de São João e a festa de Iemanjá são de qual região?",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E118",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5",
+    "tipo": "mc",
+    "enunciado": "A festa do peão de Barretos e o carnaval do Rio são de qual região?",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E119",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5",
+    "tipo": "mc",
+    "enunciado": "A festa da uva de Jundiaí é de qual região?",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E120",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5",
+    "tipo": "mc",
+    "enunciado": "A Romaria do Divino Pai Eterno e a festa de São Benedito são de qual região?",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E121",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5",
+    "tipo": "mc",
+    "enunciado": "A Oktoberfest e a festa nacional do pinhão são de qual região?",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E122",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5",
+    "tipo": "mc",
+    "enunciado": "A Semana Farroupilha é de qual região?",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E123",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Festival de Parintins (boi-bumbá)\"?",
+    "alvo": "Festival de Parintins (boi-bumbá)",
+    "correta": [
+      "Norte 🌳"
+    ],
+    "distratores": [
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E124",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Bumba meu boi\"?",
+    "alvo": "Bumba meu boi",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E125",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Carnaval de Salvador\"?",
+    "alvo": "Carnaval de Salvador",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E126",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Festa do Senhor do Bonfim\"?",
+    "alvo": "Festa do Senhor do Bonfim",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E127",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Festa do Divino Espírito Santo\"?",
+    "alvo": "Festa do Divino Espírito Santo",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E128",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Festa de São Benedito\"?",
+    "alvo": "Festa de São Benedito",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E129",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Carnaval do Rio\"?",
+    "alvo": "Carnaval do Rio",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E130",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Festa do peão de Barretos\"?",
+    "alvo": "Festa do peão de Barretos",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E131",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Festa da congada\"?",
+    "alvo": "Festa da congada",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E132",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Oktoberfest\"?",
+    "alvo": "Oktoberfest",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E133",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Semana Farroupilha\"?",
+    "alvo": "Semana Farroupilha",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E134",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f5 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Boi-bumbá ou bumba meu boi? E as outras festas? — onde entra \"Festa nacional do pinhão\"?",
+    "alvo": "Festa nacional do pinhão",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E135",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6",
+    "tipo": "mc",
+    "enunciado": "O carimbó é dança de qual região?",
+    "correta": [
+      "Norte 🌳"
+    ],
+    "distratores": [
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E136",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6",
+    "tipo": "mc",
+    "enunciado": "Frevo, forró, baião e maracatu são de qual região?",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E137",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6",
+    "tipo": "mc",
+    "enunciado": "O axé é música de qual região?",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E138",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6",
+    "tipo": "mc",
+    "enunciado": "Siriri e cururu são danças de qual região?",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E139",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6",
+    "tipo": "mc",
+    "enunciado": "A moda de viola é música de qual região?",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E140",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6",
+    "tipo": "mc",
+    "enunciado": "Samba, pagode, funk e MPB são músicas de qual região?",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E141",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6",
+    "tipo": "mc",
+    "enunciado": "O xote gaúcho e o pau de fita são danças de qual região?",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E142",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6",
+    "tipo": "mc",
+    "enunciado": "O sertanejo universitário é música de qual região?",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E143",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6",
+    "tipo": "mc",
+    "enunciado": "A toada é música de qual região?",
+    "correta": [
+      "Norte 🌳"
+    ],
+    "distratores": [
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E144",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Carimbó\"?",
+    "alvo": "Carimbó",
+    "correta": [
+      "Norte 🌳"
+    ],
+    "distratores": [
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E145",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Toada\"?",
+    "alvo": "Toada",
+    "correta": [
+      "Norte 🌳"
+    ],
+    "distratores": [
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E146",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Frevo\"?",
+    "alvo": "Frevo",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E147",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Maracatu\"?",
+    "alvo": "Maracatu",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E148",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Axé\"?",
+    "alvo": "Axé",
+    "correta": [
+      "Nordeste ☀️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E149",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Siriri\"?",
+    "alvo": "Siriri",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E150",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Cururu\"?",
+    "alvo": "Cururu",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E151",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Moda de viola\"?",
+    "alvo": "Moda de viola",
+    "correta": [
+      "Centro-Oeste 🦜"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E152",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Samba\"?",
+    "alvo": "Samba",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E153",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Pagode\"?",
+    "alvo": "Pagode",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E154",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"MPB\"?",
+    "alvo": "MPB",
+    "correta": [
+      "Sudeste 🏙️"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sul 🌲"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E155",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Xote gaúcho\"?",
+    "alvo": "Xote gaúcho",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E156",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Pau de fita\"?",
+    "alvo": "Pau de fita",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E157",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f6 (sort)",
+    "tipo": "classificar",
+    "enunciado": "Cada dança e música na sua região! — onde entra \"Sertanejo universitário\"?",
+    "alvo": "Sertanejo universitário",
+    "correta": [
+      "Sul 🌲"
+    ],
+    "distratores": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️"
+    ],
+    "categorias": [
+      "Norte 🌳",
+      "Nordeste ☀️",
+      "Centro-Oeste 🦜",
+      "Sudeste 🏙️",
+      "Sul 🌲"
+    ]
+  },
+  {
+    "id": "E158",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f7",
+    "tipo": "mc",
+    "enunciado": "Por que as pessoas de lugares diferentes vivem de modos diferentes?",
+    "correta": [
+      "Porque têm relações distintas com o meio ambiente onde vivem"
+    ],
+    "distratores": [
+      "Porque uma cultura é melhor que a outra",
+      "Porque só existe um jeito certo de viver"
+    ],
+    "categorias": [
+      "Porque têm relações distintas com o meio ambiente onde vivem",
+      "Porque uma cultura é melhor que a outra",
+      "Porque só existe um jeito certo de viver"
+    ]
+  },
+  {
+    "id": "E159",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f7",
+    "tipo": "mc",
+    "enunciado": "Entender que cada lugar tem seu modo de viver nos ajuda a…",
+    "correta": [
+      "Respeitar a diversidade"
+    ],
+    "distratores": [
+      "Escolher a melhor região",
+      "Achar graça dos costumes dos outros"
+    ],
+    "categorias": [
+      "Respeitar a diversidade",
+      "Escolher a melhor região",
+      "Achar graça dos costumes dos outros"
+    ]
+  },
+  {
+    "id": "E160",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f7",
+    "tipo": "mc",
+    "enunciado": "As diferenças entre as regiões aparecem principalmente em…",
+    "correta": [
+      "Nos hábitos e nas manifestações culturais"
+    ],
+    "distratores": [
+      "Só no jeito de falar",
+      "Só na cor das casas"
+    ],
+    "categorias": [
+      "Nos hábitos e nas manifestações culturais",
+      "Só no jeito de falar",
+      "Só na cor das casas"
+    ]
+  },
+  {
+    "id": "E161",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f7",
+    "tipo": "mc",
+    "enunciado": "O Brasil é um país…",
+    "correta": [
+      "Multicultural — feito de muitas culturas"
+    ],
+    "distratores": [
+      "De uma cultura só",
+      "Sem tradições"
+    ],
+    "categorias": [
+      "Multicultural — feito de muitas culturas",
+      "De uma cultura só",
+      "Sem tradições"
+    ]
+  },
+  {
+    "id": "E162",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f7",
+    "tipo": "multipla",
+    "enunciado": "O que ajuda a construir a identidade cultural de uma comunidade? (pode ser mais de uma)",
+    "correta": [
+      "As tradições 🤝",
+      "Os costumes 🎭",
+      "As histórias que se entrelaçam ao longo do tempo 🕰️"
+    ],
+    "distratores": [
+      "A cor do tênis novo 👟"
+    ],
+    "categorias": [
+      "As tradições 🤝",
+      "Os costumes 🎭",
+      "As histórias que se entrelaçam ao longo do tempo 🕰️",
+      "A cor do tênis novo 👟"
+    ]
+  },
+  {
+    "id": "E163",
+    "produto": "Expedição Brasil",
+    "origem": "GEO2_aventura.html · fase f7",
+    "tipo": "mc",
+    "enunciado": "Uma tradição pode mudar com o tempo?",
+    "correta": [
+      "Pode: uma brincadeira antiga pode ter se transformado ao longo dos anos"
+    ],
+    "distratores": [
+      "Nunca muda nada",
+      "Só muda se a gente mudar de país"
+    ],
+    "categorias": [
+      "Pode: uma brincadeira antiga pode ter se transformado ao longo dos anos",
+      "Nunca muda nada",
+      "Só muda se a gente mudar de país"
+    ]
+  },
+  {
+    "id": "E164",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (conceitos)",
+    "tipo": "mc",
+    "enunciado": "O que é uma tradição?",
+    "correta": [
+      "Um costume que passa de geração em geração"
+    ],
+    "distratores": [
+      "Uma novidade que apareceu esta semana",
+      "Uma viagem de férias em família"
+    ],
+    "categorias": [
+      "Um costume que passa de geração em geração",
+      "Uma novidade que apareceu esta semana",
+      "Uma viagem de férias em família"
+    ]
+  },
+  {
+    "id": "E165",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (conceitos)",
+    "tipo": "mc",
+    "enunciado": "O que é migração?",
+    "correta": [
+      "Quando pessoas mudam de um lugar para outro"
+    ],
+    "distratores": [
+      "Quando a família passeia no fim de semana",
+      "Quando alguém troca de sala na escola"
+    ],
+    "categorias": [
+      "Quando pessoas mudam de um lugar para outro",
+      "Quando a família passeia no fim de semana",
+      "Quando alguém troca de sala na escola"
+    ]
+  },
+  {
+    "id": "E166",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (conceitos)",
+    "tipo": "mc",
+    "enunciado": "O que é identidade cultural?",
+    "correta": [
+      "O conjunto de costumes que diz quem nós somos"
+    ],
+    "distratores": [
+      "O documento com foto e número",
+      "O nome da cidade onde a escola fica"
+    ],
+    "categorias": [
+      "O conjunto de costumes que diz quem nós somos",
+      "O documento com foto e número",
+      "O nome da cidade onde a escola fica"
+    ]
+  },
+  {
+    "id": "E167",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (conceitos)",
+    "tipo": "mc",
+    "enunciado": "A comunidade onde vivemos é formada por…",
+    "correta": [
+      "Diferentes pessoas, histórias e costumes"
+    ],
+    "distratores": [
+      "Pessoas todas iguais, com os mesmos costumes",
+      "Somente pela nossa própria família"
+    ],
+    "categorias": [
+      "Diferentes pessoas, histórias e costumes",
+      "Pessoas todas iguais, com os mesmos costumes",
+      "Somente pela nossa própria família"
+    ]
+  },
+  {
+    "id": "E168",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (conceitos)",
+    "tipo": "mc",
+    "enunciado": "Dizer que o Brasil é multicultural quer dizer que ele é…",
+    "correta": [
+      "Feito de muitas culturas juntas"
+    ],
+    "distratores": [
+      "Feito de uma cultura só",
+      "Um país sem tradições"
+    ],
+    "categorias": [
+      "Feito de muitas culturas juntas",
+      "Feito de uma cultura só",
+      "Um país sem tradições"
+    ]
+  },
+  {
+    "id": "E169",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (conceitos)",
+    "tipo": "mc",
+    "enunciado": "Nossos ancestrais são…",
+    "correta": [
+      "As pessoas da família que viveram antes de nós"
+    ],
+    "distratores": [
+      "Os amigos da nossa turma",
+      "Os vizinhos que moram na mesma rua"
+    ],
+    "categorias": [
+      "As pessoas da família que viveram antes de nós",
+      "Os amigos da nossa turma",
+      "Os vizinhos que moram na mesma rua"
+    ]
+  },
+  {
+    "id": "E170",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (conceitos)",
+    "tipo": "mc",
+    "enunciado": "Quem migra leva consigo…",
+    "correta": [
+      "Hábitos, crenças e modos de viver"
+    ],
+    "distratores": [
+      "Apenas as roupas dentro da mala",
+      "Nada: deixa toda a cultura para trás"
+    ],
+    "categorias": [
+      "Hábitos, crenças e modos de viver",
+      "Apenas as roupas dentro da mala",
+      "Nada: deixa toda a cultura para trás"
+    ]
+  },
+  {
+    "id": "E171",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (conceitos)",
+    "tipo": "mc",
+    "enunciado": "Segundo o material, a identidade cultural é construída por…",
+    "correta": [
+      "Muitas histórias que se entrelaçam ao longo do tempo"
+    ],
+    "distratores": [
+      "Uma única história, contada uma vez só",
+      "Uma lei que o governo escreveu"
+    ],
+    "categorias": [
+      "Muitas histórias que se entrelaçam ao longo do tempo",
+      "Uma única história, contada uma vez só",
+      "Uma lei que o governo escreveu"
+    ]
+  },
+  {
+    "id": "E172",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (conceitos)",
+    "tipo": "mc",
+    "enunciado": "As tradições de uma família surgiram do nada?",
+    "correta": [
+      "Não: muitas vieram com pessoas que migraram de outros lugares"
+    ],
+    "distratores": [
+      "Sim: apareceram sozinhas, sem vir de lugar nenhum",
+      "Sim: foram inventadas pela escola"
+    ],
+    "categorias": [
+      "Não: muitas vieram com pessoas que migraram de outros lugares",
+      "Sim: apareceram sozinhas, sem vir de lugar nenhum",
+      "Sim: foram inventadas pela escola"
+    ]
+  },
+  {
+    "id": "E173",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "A produção artesanal de farinha de mandioca é prática tradicional de quem?",
+    "correta": [
+      "Dos povos indígenas da Amazônia"
+    ],
+    "distratores": [
+      "Dos imigrantes alemães de Blumenau",
+      "Dos gaúchos do Rio Grande do Sul"
+    ],
+    "categorias": [
+      "Dos povos indígenas da Amazônia",
+      "Dos imigrantes alemães de Blumenau",
+      "Dos gaúchos do Rio Grande do Sul"
+    ]
+  },
+  {
+    "id": "E174",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "Os Bonecos Gigantes desfilam no carnaval de qual cidade?",
+    "correta": [
+      "Olinda, em Pernambuco"
+    ],
+    "distratores": [
+      "Blumenau, em Santa Catarina",
+      "Parintins, no Amazonas"
+    ],
+    "categorias": [
+      "Olinda, em Pernambuco",
+      "Blumenau, em Santa Catarina",
+      "Parintins, no Amazonas"
+    ]
+  },
+  {
+    "id": "E175",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "A xilogravura é usada para ilustrar…",
+    "correta": [
+      "Os folhetos da literatura de cordel"
+    ],
+    "distratores": [
+      "As camisas dos times de futebol",
+      "Os livros de matemática da escola"
+    ],
+    "categorias": [
+      "Os folhetos da literatura de cordel",
+      "As camisas dos times de futebol",
+      "Os livros de matemática da escola"
+    ]
+  },
+  {
+    "id": "E176",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "O jongo é uma manifestação cultural de qual matriz?",
+    "correta": [
+      "De matriz africana"
+    ],
+    "distratores": [
+      "De matriz alemã",
+      "De matriz japonesa"
+    ],
+    "categorias": [
+      "De matriz africana",
+      "De matriz alemã",
+      "De matriz japonesa"
+    ]
+  },
+  {
+    "id": "E177",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "Como é o jongo?",
+    "correta": [
+      "Dança, percussão e cantos em roda"
+    ],
+    "distratores": [
+      "Uma comida feita com farinha de milho",
+      "Uma festa de rua com bonecos gigantes"
+    ],
+    "categorias": [
+      "Dança, percussão e cantos em roda",
+      "Uma comida feita com farinha de milho",
+      "Uma festa de rua com bonecos gigantes"
+    ]
+  },
+  {
+    "id": "E178",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "O jiu-jitsu brasileiro foi desenvolvido em qual país?",
+    "correta": [
+      "No Brasil"
+    ],
+    "distratores": [
+      "No Japão",
+      "Na Alemanha"
+    ],
+    "categorias": [
+      "No Brasil",
+      "No Japão",
+      "Na Alemanha"
+    ]
+  },
+  {
+    "id": "E179",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "A Oktoberfest de Blumenau tem origem em qual país?",
+    "correta": [
+      "Alemanha"
+    ],
+    "distratores": [
+      "Portugal",
+      "Japão"
+    ],
+    "categorias": [
+      "Alemanha",
+      "Portugal",
+      "Japão"
+    ]
+  },
+  {
+    "id": "E180",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "A Oktoberfest de Blumenau reúne música, danças folclóricas, gastronomia típica e…",
+    "correta": [
+      "Trajes tradicionais"
+    ],
+    "distratores": [
+      "Bonecos gigantes",
+      "Cantos em roda"
+    ],
+    "categorias": [
+      "Trajes tradicionais",
+      "Bonecos gigantes",
+      "Cantos em roda"
+    ]
+  },
+  {
+    "id": "E181",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "O cuscuz nordestino é feito com…",
+    "correta": [
+      "Flocos de milho cozidos no vapor"
+    ],
+    "distratores": [
+      "Farinha de trigo assada no forno",
+      "Arroz cozido com carne"
+    ],
+    "categorias": [
+      "Flocos de milho cozidos no vapor",
+      "Farinha de trigo assada no forno",
+      "Arroz cozido com carne"
+    ]
+  },
+  {
+    "id": "E182",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "O cuscuz paulista leva farinha de milho e ainda…",
+    "correta": [
+      "Peixe, ovos e legumes"
+    ],
+    "distratores": [
+      "Só açúcar e canela",
+      "Pinhão e churrasco"
+    ],
+    "categorias": [
+      "Peixe, ovos e legumes",
+      "Só açúcar e canela",
+      "Pinhão e churrasco"
+    ]
+  },
+  {
+    "id": "E183",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "O chimarrão é bebida tradicional de qual cultura?",
+    "correta": [
+      "Da cultura gaúcha, do Rio Grande do Sul"
+    ],
+    "distratores": [
+      "Da cultura indígena da Amazônia",
+      "Da cultura alemã de Santa Catarina"
+    ],
+    "categorias": [
+      "Da cultura gaúcha, do Rio Grande do Sul",
+      "Da cultura indígena da Amazônia",
+      "Da cultura alemã de Santa Catarina"
+    ]
+  },
+  {
+    "id": "E184",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (tradicoes)",
+    "tipo": "mc",
+    "enunciado": "O Santo Daime é um ritual religioso amazônico que mistura tradições…",
+    "correta": [
+      "Indígenas e cristãs"
+    ],
+    "distratores": [
+      "Alemãs e japonesas",
+      "Gaúchas e paulistas"
+    ],
+    "categorias": [
+      "Indígenas e cristãs",
+      "Alemãs e japonesas",
+      "Gaúchas e paulistas"
+    ]
+  },
+  {
+    "id": "E185",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (comidas)",
+    "tipo": "mc",
+    "enunciado": "Tacacá e açaí são comidas típicas de qual região?",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Sul",
+      "Centro-Oeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Sul",
+      "Centro-Oeste"
+    ]
+  },
+  {
+    "id": "E186",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (comidas)",
+    "tipo": "mc",
+    "enunciado": "Acarajé, baião de dois e vatapá são de qual região?",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Norte"
+    ],
+    "categorias": [
+      "Nordeste",
+      "Sudeste",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E187",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (comidas)",
+    "tipo": "mc",
+    "enunciado": "Arroz com pequi e pamonha são comidas típicas de qual região?",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Nordeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E188",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (comidas)",
+    "tipo": "mc",
+    "enunciado": "Feijoada, pão de queijo e tutu de feijão são de qual região?",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Sul",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Sul",
+      "Nordeste"
+    ]
+  },
+  {
+    "id": "E189",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (comidas)",
+    "tipo": "mc",
+    "enunciado": "Churrasco gaúcho e arroz carreteiro são de qual região?",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Sul",
+      "Centro-Oeste",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E190",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (comidas)",
+    "tipo": "mc",
+    "enunciado": "A moqueca capixaba é comida típica de qual região?",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Norte"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Nordeste",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E191",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (comidas)",
+    "tipo": "mc",
+    "enunciado": "O cuscuz paulista é de qual região?",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Centro-Oeste"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Nordeste",
+      "Centro-Oeste"
+    ]
+  },
+  {
+    "id": "E192",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (comidas)",
+    "tipo": "mc",
+    "enunciado": "O cuscuz nordestino é de qual região?",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E193",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (comidas)",
+    "tipo": "mc",
+    "enunciado": "Qual destas comidas é típica do Norte?",
+    "correta": [
+      "Tacacá"
+    ],
+    "distratores": [
+      "Pão de queijo",
+      "Arroz carreteiro"
+    ],
+    "categorias": [
+      "Tacacá",
+      "Pão de queijo",
+      "Arroz carreteiro"
+    ]
+  },
+  {
+    "id": "E194",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (comidas)",
+    "tipo": "mc",
+    "enunciado": "Qual destas comidas é típica do Nordeste?",
+    "correta": [
+      "Vatapá"
+    ],
+    "distratores": [
+      "Pamonha",
+      "Feijoada"
+    ],
+    "categorias": [
+      "Vatapá",
+      "Pamonha",
+      "Feijoada"
+    ]
+  },
+  {
+    "id": "E195",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "O festival de Parintins (boi-bumbá) acontece em qual região?",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Centro-Oeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste"
+    ]
+  },
+  {
+    "id": "E196",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "O bumba meu boi é festa cultural de qual região?",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Nordeste",
+      "Norte",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E197",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "O carnaval de Salvador é de qual região?",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E198",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "A festa de São João é festa cultural de qual região?",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Centro-Oeste",
+      "Norte"
+    ],
+    "categorias": [
+      "Nordeste",
+      "Centro-Oeste",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E199",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "A festa de Iemanjá é comemoração cultural de qual região?",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Nordeste",
+      "Sudeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E200",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "A festa do Divino Espírito Santo e a Festa de São Benedito são de qual região?",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Norte",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E201",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "A Romaria do Divino Pai Eterno é comemoração de qual região?",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Nordeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E202",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "A festa do peão de Barretos é de qual região?",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Centro-Oeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E203",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "O carnaval do Rio é festa cultural de qual região?",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Nordeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E204",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "A festa da uva de Jundiaí é de qual região?",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Sul",
+      "Centro-Oeste"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Sul",
+      "Centro-Oeste"
+    ]
+  },
+  {
+    "id": "E205",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "A festa de Nossa Senhora Aparecida e a festa da congada são de qual região?",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Norte"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Nordeste",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E206",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "A Oktoberfest e a festa nacional do pinhão são de qual região?",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Centro-Oeste"
+    ],
+    "categorias": [
+      "Sul",
+      "Sudeste",
+      "Centro-Oeste"
+    ]
+  },
+  {
+    "id": "E207",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "A Semana Farroupilha é comemoração cultural de qual região?",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Centro-Oeste",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Sul",
+      "Centro-Oeste",
+      "Nordeste"
+    ]
+  },
+  {
+    "id": "E208",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "A festa do Senhor do Bonfim é comemoração de qual região?",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Norte"
+    ],
+    "categorias": [
+      "Nordeste",
+      "Sudeste",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E209",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (festas)",
+    "tipo": "mc",
+    "enunciado": "Qual é a festa do Norte que aparece no material?",
+    "correta": [
+      "Festival de Parintins (boi-bumbá)"
+    ],
+    "distratores": [
+      "Bumba meu boi",
+      "Semana Farroupilha"
+    ],
+    "categorias": [
+      "Festival de Parintins (boi-bumbá)",
+      "Bumba meu boi",
+      "Semana Farroupilha"
+    ]
+  },
+  {
+    "id": "E210",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "O carimbó é dança típica de qual região?",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E211",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "A toada é tipo de música de qual região?",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Centro-Oeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Sudeste",
+      "Centro-Oeste"
+    ]
+  },
+  {
+    "id": "E212",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "Frevo, forró, baião e maracatu são de qual região?",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Nordeste",
+      "Norte",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E213",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "O axé é tipo de música de qual região?",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Sul",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Nordeste",
+      "Sul",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E214",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "Siriri e cururu são danças de qual região?",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Sul"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Norte",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E215",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "A moda de viola é tipo de música de qual região?",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Sul",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Sul",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E216",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "Samba, pagode, funk e MPB são músicas de qual região?",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Nordeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E217",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "O samba é a dança típica de qual região?",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Norte"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Nordeste",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E218",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "Xote gaúcho e pau de fita são danças de qual região?",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Centro-Oeste",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Sul",
+      "Centro-Oeste",
+      "Nordeste"
+    ]
+  },
+  {
+    "id": "E219",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "O sertanejo universitário é música de qual região?",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Sul",
+      "Centro-Oeste",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E220",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (ritmos)",
+    "tipo": "mc",
+    "enunciado": "O boi-bumbá também é tipo de música de qual região?",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E221",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (diversidade)",
+    "tipo": "mc",
+    "enunciado": "Por que pessoas de lugares diferentes vivem de modos diferentes?",
+    "correta": [
+      "Porque têm relações distintas com o meio ambiente onde vivem"
+    ],
+    "distratores": [
+      "Porque uma cultura é melhor do que a outra",
+      "Porque só existe um jeito certo de viver"
+    ],
+    "categorias": [
+      "Porque têm relações distintas com o meio ambiente onde vivem",
+      "Porque uma cultura é melhor do que a outra",
+      "Porque só existe um jeito certo de viver"
+    ]
+  },
+  {
+    "id": "E222",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (diversidade)",
+    "tipo": "mc",
+    "enunciado": "Entender que cada lugar tem seu modo de viver nos ajuda a…",
+    "correta": [
+      "Respeitar a diversidade"
+    ],
+    "distratores": [
+      "Escolher qual é a melhor região",
+      "Achar graça dos costumes dos outros"
+    ],
+    "categorias": [
+      "Respeitar a diversidade",
+      "Escolher qual é a melhor região",
+      "Achar graça dos costumes dos outros"
+    ]
+  },
+  {
+    "id": "E223",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (diversidade)",
+    "tipo": "mc",
+    "enunciado": "As diferenças entre as pessoas de cada lugar aparecem principalmente…",
+    "correta": [
+      "Nos hábitos e nas manifestações culturais"
+    ],
+    "distratores": [
+      "Só no jeito de falar",
+      "Só na cor das casas"
+    ],
+    "categorias": [
+      "Nos hábitos e nas manifestações culturais",
+      "Só no jeito de falar",
+      "Só na cor das casas"
+    ]
+  },
+  {
+    "id": "E224",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · MC (diversidade)",
+    "tipo": "mc",
+    "enunciado": "Uma tradição pode se transformar ao longo dos anos?",
+    "correta": [
+      "Pode: uma brincadeira antiga pode ter mudado com o tempo"
+    ],
+    "distratores": [
+      "Nunca muda: fica sempre igual",
+      "Só muda se a família mudar de país"
+    ],
+    "categorias": [
+      "Pode: uma brincadeira antiga pode ter mudado com o tempo",
+      "Nunca muda: fica sempre igual",
+      "Só muda se a família mudar de país"
+    ]
+  },
+  {
+    "id": "E225",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (conceitos)",
+    "tipo": "vf",
+    "enunciado": "Uma tradição passa de geração em geração.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E226",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (conceitos)",
+    "tipo": "vf",
+    "enunciado": "Migrar é a mesma coisa que passear no fim de semana.",
+    "correta": [
+      "Falso"
+    ],
+    "distratores": [
+      "Verdadeiro"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E227",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (conceitos)",
+    "tipo": "vf",
+    "enunciado": "O Brasil é um país multicultural.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E228",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (conceitos)",
+    "tipo": "vf",
+    "enunciado": "A identidade cultural é o conjunto de costumes que diz quem somos.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E229",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (conceitos)",
+    "tipo": "vf",
+    "enunciado": "Numa comunidade, todas as pessoas têm exatamente os mesmos costumes.",
+    "correta": [
+      "Falso"
+    ],
+    "distratores": [
+      "Verdadeiro"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E230",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (conceitos)",
+    "tipo": "vf",
+    "enunciado": "Quem migra leva consigo hábitos, crenças e modos de viver.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E231",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (conceitos)",
+    "tipo": "vf",
+    "enunciado": "A cultura de quem migrou aparece na culinária, nas vestimentas, na religião, nas festas e na arquitetura.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E232",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (tradicoes)",
+    "tipo": "vf",
+    "enunciado": "O jiu-jitsu brasileiro foi criado no Japão.",
+    "correta": [
+      "Falso"
+    ],
+    "distratores": [
+      "Verdadeiro"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E233",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (tradicoes)",
+    "tipo": "vf",
+    "enunciado": "A Oktoberfest de Blumenau tem origem alemã.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E234",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (tradicoes)",
+    "tipo": "vf",
+    "enunciado": "O jongo é uma manifestação de matriz africana.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E235",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (tradicoes)",
+    "tipo": "vf",
+    "enunciado": "A xilogravura ilustra os folhetos da literatura de cordel.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E236",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (tradicoes)",
+    "tipo": "vf",
+    "enunciado": "A farinha de mandioca artesanal é tradição dos povos indígenas da Amazônia.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E237",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (tradicoes)",
+    "tipo": "vf",
+    "enunciado": "O chimarrão é bebida tradicional do Nordeste.",
+    "correta": [
+      "Falso"
+    ],
+    "distratores": [
+      "Verdadeiro"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E238",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (tradicoes)",
+    "tipo": "vf",
+    "enunciado": "Os Bonecos Gigantes desfilam no carnaval de Olinda, em Pernambuco.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E239",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (tradicoes)",
+    "tipo": "vf",
+    "enunciado": "O Santo Daime foi fundado na década de 1930 e mistura tradições indígenas e cristãs.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E240",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (comidas)",
+    "tipo": "vf",
+    "enunciado": "O açaí é comida típica do Norte.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E241",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (comidas)",
+    "tipo": "vf",
+    "enunciado": "O pão de queijo é comida típica do Sul.",
+    "correta": [
+      "Falso"
+    ],
+    "distratores": [
+      "Verdadeiro"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E242",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (comidas)",
+    "tipo": "vf",
+    "enunciado": "O acarajé é comida típica do Nordeste.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E243",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (comidas)",
+    "tipo": "vf",
+    "enunciado": "O arroz com pequi é comida típica do Centro-Oeste.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E244",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (comidas)",
+    "tipo": "vf",
+    "enunciado": "O churrasco gaúcho é comida típica do Sudeste.",
+    "correta": [
+      "Falso"
+    ],
+    "distratores": [
+      "Verdadeiro"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E245",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (festas)",
+    "tipo": "vf",
+    "enunciado": "O boi-bumbá do festival de Parintins é do Norte.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E246",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (festas)",
+    "tipo": "vf",
+    "enunciado": "O bumba meu boi é do Norte.",
+    "correta": [
+      "Falso"
+    ],
+    "distratores": [
+      "Verdadeiro"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E247",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (festas)",
+    "tipo": "vf",
+    "enunciado": "A Oktoberfest é festa cultural do Sul.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E248",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (festas)",
+    "tipo": "vf",
+    "enunciado": "A festa do peão de Barretos é do Sudeste.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E249",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (festas)",
+    "tipo": "vf",
+    "enunciado": "A Semana Farroupilha é comemoração do Nordeste.",
+    "correta": [
+      "Falso"
+    ],
+    "distratores": [
+      "Verdadeiro"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E250",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (festas)",
+    "tipo": "vf",
+    "enunciado": "A festa de Iemanjá é comemoração cultural do Nordeste.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E251",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (ritmos)",
+    "tipo": "vf",
+    "enunciado": "O carimbó é dança do Norte.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E252",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (ritmos)",
+    "tipo": "vf",
+    "enunciado": "O samba é a dança típica do Sudeste.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E253",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (ritmos)",
+    "tipo": "vf",
+    "enunciado": "O siriri é dança do Sul.",
+    "correta": [
+      "Falso"
+    ],
+    "distratores": [
+      "Verdadeiro"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E254",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (ritmos)",
+    "tipo": "vf",
+    "enunciado": "O pau de fita é dança do Sul.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E255",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (ritmos)",
+    "tipo": "vf",
+    "enunciado": "O frevo é do Nordeste.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E256",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (diversidade)",
+    "tipo": "vf",
+    "enunciado": "Pessoas em lugares diferentes têm relações distintas com o meio ambiente.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E257",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (diversidade)",
+    "tipo": "vf",
+    "enunciado": "Entender as diferenças nos ajuda a respeitar a diversidade.",
+    "correta": [
+      "Verdadeiro"
+    ],
+    "distratores": [
+      "Falso"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E258",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · V/F (diversidade)",
+    "tipo": "vf",
+    "enunciado": "Existe uma cultura brasileira melhor do que as outras.",
+    "correta": [
+      "Falso"
+    ],
+    "distratores": [
+      "Verdadeiro"
+    ],
+    "categorias": [
+      "Verdadeiro",
+      "Falso"
+    ]
+  },
+  {
+    "id": "E259",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (conceitos)",
+    "tipo": "completar",
+    "enunciado": "Uma tradição passa de _____ em geração.",
+    "correta": [
+      "geração"
+    ],
+    "distratores": [
+      "semana"
+    ],
+    "categorias": [
+      "geração",
+      "semana"
+    ]
+  },
+  {
+    "id": "E260",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (conceitos)",
+    "tipo": "completar",
+    "enunciado": "Migrar é mudar de um _____ para outro.",
+    "correta": [
+      "lugar"
+    ],
+    "distratores": [
+      "assunto",
+      "horário"
+    ],
+    "categorias": [
+      "lugar",
+      "assunto",
+      "horário"
+    ]
+  },
+  {
+    "id": "E261",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (conceitos)",
+    "tipo": "completar",
+    "enunciado": "O Brasil é um país _____ , feito de muitas culturas.",
+    "correta": [
+      "multicultural"
+    ],
+    "distratores": [
+      "pequeno",
+      "silencioso"
+    ],
+    "categorias": [
+      "multicultural",
+      "pequeno",
+      "silencioso"
+    ]
+  },
+  {
+    "id": "E262",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (conceitos)",
+    "tipo": "completar",
+    "enunciado": "A _____ cultural diz quem nós somos.",
+    "correta": [
+      "identidade"
+    ],
+    "distratores": [
+      "distância",
+      "altura"
+    ],
+    "categorias": [
+      "identidade",
+      "distância",
+      "altura"
+    ]
+  },
+  {
+    "id": "E263",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (conceitos)",
+    "tipo": "completar",
+    "enunciado": "A cultura de quem migrou aparece na _____ , nas vestimentas, na religião, nas festas e na arquitetura.",
+    "correta": [
+      "culinária"
+    ],
+    "distratores": [
+      "matemática",
+      "velocidade"
+    ],
+    "categorias": [
+      "culinária",
+      "matemática",
+      "velocidade"
+    ]
+  },
+  {
+    "id": "E264",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (tradicoes)",
+    "tipo": "completar",
+    "enunciado": "A xilogravura ilustra os folhetos da literatura de _____ .",
+    "correta": [
+      "cordel"
+    ],
+    "distratores": [
+      "escola",
+      "vento"
+    ],
+    "categorias": [
+      "cordel",
+      "escola",
+      "vento"
+    ]
+  },
+  {
+    "id": "E265",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (tradicoes)",
+    "tipo": "completar",
+    "enunciado": "O jongo é uma manifestação de matriz _____ , com dança e percussão em roda.",
+    "correta": [
+      "africana"
+    ],
+    "distratores": [
+      "alemã",
+      "japonesa"
+    ],
+    "categorias": [
+      "africana",
+      "alemã",
+      "japonesa"
+    ]
+  },
+  {
+    "id": "E266",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (tradicoes)",
+    "tipo": "completar",
+    "enunciado": "O jiu-jitsu brasileiro veio da adaptação do judô e do jiu-jitsu _____ .",
+    "correta": [
+      "japonês"
+    ],
+    "distratores": [
+      "alemão",
+      "gaúcho"
+    ],
+    "categorias": [
+      "japonês",
+      "alemão",
+      "gaúcho"
+    ]
+  },
+  {
+    "id": "E267",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (tradicoes)",
+    "tipo": "completar",
+    "enunciado": "O chimarrão é bebida da cultura _____ , do Rio Grande do Sul.",
+    "correta": [
+      "gaúcha"
+    ],
+    "distratores": [
+      "capixaba",
+      "paulista"
+    ],
+    "categorias": [
+      "gaúcha",
+      "capixaba",
+      "paulista"
+    ]
+  },
+  {
+    "id": "E268",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (comidas)",
+    "tipo": "completar",
+    "enunciado": "Tacacá e açaí são comidas típicas do _____ .",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Sul",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Sul",
+      "Nordeste"
+    ]
+  },
+  {
+    "id": "E269",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (comidas)",
+    "tipo": "completar",
+    "enunciado": "Feijoada e pão de queijo são comidas típicas do _____ .",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Sul",
+      "Norte"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Sul",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E270",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (comidas)",
+    "tipo": "completar",
+    "enunciado": "Arroz com pequi e pamonha são do _____ .",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Nordeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E271",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (festas)",
+    "tipo": "completar",
+    "enunciado": "O festival de Parintins é conhecido pelo _____ .",
+    "correta": [
+      "boi-bumbá"
+    ],
+    "distratores": [
+      "frevo",
+      "chimarrão"
+    ],
+    "categorias": [
+      "boi-bumbá",
+      "frevo",
+      "chimarrão"
+    ]
+  },
+  {
+    "id": "E272",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (festas)",
+    "tipo": "completar",
+    "enunciado": "O bumba meu boi é festa cultural do _____ .",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Sul"
+    ],
+    "categorias": [
+      "Nordeste",
+      "Norte",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E273",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (festas)",
+    "tipo": "completar",
+    "enunciado": "A Semana Farroupilha é comemoração do _____ .",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Norte"
+    ],
+    "categorias": [
+      "Sul",
+      "Sudeste",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E274",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (ritmos)",
+    "tipo": "completar",
+    "enunciado": "O carimbó é dança do _____ .",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Sul",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Sul",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E275",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (ritmos)",
+    "tipo": "completar",
+    "enunciado": "Siriri e cururu são danças do _____ .",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Nordeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E276",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (ritmos)",
+    "tipo": "completar",
+    "enunciado": "O xote _____ e o pau de fita são danças do Sul.",
+    "correta": [
+      "gaúcho"
+    ],
+    "distratores": [
+      "nordestino",
+      "paulista"
+    ],
+    "categorias": [
+      "gaúcho",
+      "nordestino",
+      "paulista"
+    ]
+  },
+  {
+    "id": "E277",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (diversidade)",
+    "tipo": "completar",
+    "enunciado": "Entender os diferentes modos de viver nos ajuda a respeitar a _____ .",
+    "correta": [
+      "diversidade"
+    ],
+    "distratores": [
+      "pressa",
+      "distância"
+    ],
+    "categorias": [
+      "diversidade",
+      "pressa",
+      "distância"
+    ]
+  },
+  {
+    "id": "E278",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · completar (diversidade)",
+    "tipo": "completar",
+    "enunciado": "Pessoas de lugares diferentes têm relações distintas com o meio _____ .",
+    "correta": [
+      "ambiente"
+    ],
+    "distratores": [
+      "do campo",
+      "de transporte"
+    ],
+    "categorias": [
+      "ambiente",
+      "do campo",
+      "de transporte"
+    ]
+  },
+  {
+    "id": "E279",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (conceitos)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada frase à palavra que ela explica. — onde entra \"Passa de pais para filhos\"?",
+    "alvo": "Passa de pais para filhos",
+    "correta": [
+      "Tradição"
+    ],
+    "distratores": [
+      "Migração",
+      "Identidade cultural"
+    ],
+    "categorias": [
+      "Tradição",
+      "Migração",
+      "Identidade cultural"
+    ]
+  },
+  {
+    "id": "E280",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (conceitos)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada frase à palavra que ela explica. — onde entra \"Pessoas mudam de um lugar para outro\"?",
+    "alvo": "Pessoas mudam de um lugar para outro",
+    "correta": [
+      "Migração"
+    ],
+    "distratores": [
+      "Tradição",
+      "Identidade cultural"
+    ],
+    "categorias": [
+      "Tradição",
+      "Migração",
+      "Identidade cultural"
+    ]
+  },
+  {
+    "id": "E281",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (conceitos)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada frase à palavra que ela explica. — onde entra \"É construída por histórias que se entrelaçam ao longo do tempo\"?",
+    "alvo": "É construída por histórias que se entrelaçam ao longo do tempo",
+    "correta": [
+      "Identidade cultural"
+    ],
+    "distratores": [
+      "Tradição",
+      "Migração"
+    ],
+    "categorias": [
+      "Tradição",
+      "Migração",
+      "Identidade cultural"
+    ]
+  },
+  {
+    "id": "E282",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (comidas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada comida à sua região. — onde entra \"🫐 Tacacá\"?",
+    "alvo": "🫐 Tacacá",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Centro-Oeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste"
+    ]
+  },
+  {
+    "id": "E283",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (comidas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada comida à sua região. — onde entra \"🥘 Acarajé\"?",
+    "alvo": "🥘 Acarajé",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Centro-Oeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste"
+    ]
+  },
+  {
+    "id": "E284",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (comidas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada comida à sua região. — onde entra \"🌽 Arroz com pequi\"?",
+    "alvo": "🌽 Arroz com pequi",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Centro-Oeste"
+    ]
+  },
+  {
+    "id": "E285",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (comidas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada comida à sua região. — onde entra \"🧀 Pão de queijo\"?",
+    "alvo": "🧀 Pão de queijo",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Sul",
+      "Norte"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Sul",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E286",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (comidas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada comida à sua região. — onde entra \"🥩 Churrasco gaúcho\"?",
+    "alvo": "🥩 Churrasco gaúcho",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Norte"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Sul",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E287",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (comidas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada comida à sua região. — onde entra \"🍇 Açaí\"?",
+    "alvo": "🍇 Açaí",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Sudeste",
+      "Sul",
+      "Norte"
+    ]
+  },
+  {
+    "id": "E288",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (festas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada festa à sua região. — onde entra \"🐂 Festival de Parintins\"?",
+    "alvo": "🐂 Festival de Parintins",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E289",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (festas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada festa à sua região. — onde entra \"🐮 Bumba meu boi\"?",
+    "alvo": "🐮 Bumba meu boi",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Sul"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E290",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (festas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada festa à sua região. — onde entra \"🍺 Oktoberfest\"?",
+    "alvo": "🍺 Oktoberfest",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sul"
+    ]
+  },
+  {
+    "id": "E291",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (festas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada comemoração à sua região. — onde entra \"🚶 Romaria do Divino Pai Eterno\"?",
+    "alvo": "🚶 Romaria do Divino Pai Eterno",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Sudeste",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Sudeste",
+      "Nordeste"
+    ]
+  },
+  {
+    "id": "E292",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (festas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada comemoração à sua região. — onde entra \"🙏 Festa de Nossa Senhora Aparecida\"?",
+    "alvo": "🙏 Festa de Nossa Senhora Aparecida",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Centro-Oeste",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Sudeste",
+      "Nordeste"
+    ]
+  },
+  {
+    "id": "E293",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (festas)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada comemoração à sua região. — onde entra \"⛪ Festa do Senhor do Bonfim\"?",
+    "alvo": "⛪ Festa do Senhor do Bonfim",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Centro-Oeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Sudeste",
+      "Nordeste"
+    ]
+  },
+  {
+    "id": "E294",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (ritmos)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada dança à sua região. — onde entra \"💃 Carimbó\"?",
+    "alvo": "💃 Carimbó",
+    "correta": [
+      "Norte"
+    ],
+    "distratores": [
+      "Nordeste",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E295",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (ritmos)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada dança à sua região. — onde entra \"🎺 Frevo\"?",
+    "alvo": "🎺 Frevo",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Sudeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E296",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (ritmos)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada dança à sua região. — onde entra \"🕺 Samba\"?",
+    "alvo": "🕺 Samba",
+    "correta": [
+      "Sudeste"
+    ],
+    "distratores": [
+      "Norte",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Norte",
+      "Nordeste",
+      "Sudeste"
+    ]
+  },
+  {
+    "id": "E297",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (ritmos)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada música à sua região. — onde entra \"🪕 Moda de viola\"?",
+    "alvo": "🪕 Moda de viola",
+    "correta": [
+      "Centro-Oeste"
+    ],
+    "distratores": [
+      "Sul",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Sul",
+      "Nordeste"
+    ]
+  },
+  {
+    "id": "E298",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (ritmos)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada música à sua região. — onde entra \"🎤 Sertanejo universitário\"?",
+    "alvo": "🎤 Sertanejo universitário",
+    "correta": [
+      "Sul"
+    ],
+    "distratores": [
+      "Centro-Oeste",
+      "Nordeste"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Sul",
+      "Nordeste"
+    ]
+  },
+  {
+    "id": "E299",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (ritmos)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada música à sua região. — onde entra \"🥁 Axé\"?",
+    "alvo": "🥁 Axé",
+    "correta": [
+      "Nordeste"
+    ],
+    "distratores": [
+      "Centro-Oeste",
+      "Sul"
+    ],
+    "categorias": [
+      "Centro-Oeste",
+      "Sul",
+      "Nordeste"
+    ]
+  },
+  {
+    "id": "E300",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (tradicoes)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada tradição à sua origem. — onde entra \"🥣 Farinha de mandioca\"?",
+    "alvo": "🥣 Farinha de mandioca",
+    "correta": [
+      "Povos indígenas da Amazônia"
+    ],
+    "distratores": [
+      "Matriz africana",
+      "Alemanha"
+    ],
+    "categorias": [
+      "Povos indígenas da Amazônia",
+      "Matriz africana",
+      "Alemanha"
+    ]
+  },
+  {
+    "id": "E301",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (tradicoes)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada tradição à sua origem. — onde entra \"🥁 Jongo\"?",
+    "alvo": "🥁 Jongo",
+    "correta": [
+      "Matriz africana"
+    ],
+    "distratores": [
+      "Povos indígenas da Amazônia",
+      "Alemanha"
+    ],
+    "categorias": [
+      "Povos indígenas da Amazônia",
+      "Matriz africana",
+      "Alemanha"
+    ]
+  },
+  {
+    "id": "E302",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (tradicoes)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada tradição à sua origem. — onde entra \"🍺 Oktoberfest de Blumenau\"?",
+    "alvo": "🍺 Oktoberfest de Blumenau",
+    "correta": [
+      "Alemanha"
+    ],
+    "distratores": [
+      "Povos indígenas da Amazônia",
+      "Matriz africana"
+    ],
+    "categorias": [
+      "Povos indígenas da Amazônia",
+      "Matriz africana",
+      "Alemanha"
+    ]
+  },
+  {
+    "id": "E303",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (tradicoes)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada tradição ao lugar onde ela acontece. — onde entra \"🎭 Bonecos Gigantes\"?",
+    "alvo": "🎭 Bonecos Gigantes",
+    "correta": [
+      "Olinda (PE)"
+    ],
+    "distratores": [
+      "Blumenau (SC)",
+      "Rio Grande do Sul"
+    ],
+    "categorias": [
+      "Olinda (PE)",
+      "Blumenau (SC)",
+      "Rio Grande do Sul"
+    ]
+  },
+  {
+    "id": "E304",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (tradicoes)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada tradição ao lugar onde ela acontece. — onde entra \"🍺 Oktoberfest\"?",
+    "alvo": "🍺 Oktoberfest",
+    "correta": [
+      "Blumenau (SC)"
+    ],
+    "distratores": [
+      "Olinda (PE)",
+      "Rio Grande do Sul"
+    ],
+    "categorias": [
+      "Olinda (PE)",
+      "Blumenau (SC)",
+      "Rio Grande do Sul"
+    ]
+  },
+  {
+    "id": "E305",
+    "produto": "Simulado",
+    "origem": "GEO2_simulado.html · ligar (tradicoes)",
+    "tipo": "classificar",
+    "enunciado": "Ligue cada tradição ao lugar onde ela acontece. — onde entra \"🧉 Chimarrão\"?",
+    "alvo": "🧉 Chimarrão",
+    "correta": [
+      "Rio Grande do Sul"
+    ],
+    "distratores": [
+      "Olinda (PE)",
+      "Blumenau (SC)"
+    ],
+    "categorias": [
+      "Olinda (PE)",
+      "Blumenau (SC)",
+      "Rio Grande do Sul"
+    ]
+  },
+  {
+    "id": "E306",
+    "produto": "Quiz explicado (NLM)",
+    "origem": "media/quiz_geo2_nlm.json",
+    "tipo": "mc",
+    "enunciado": "Como chamamos um costume que passa de geração em geração, como uma receita que o bisavô ensinou para o neto?",
+    "correta": [
+      "Tradição"
+    ],
+    "distratores": [
+      "Migração",
+      "Arquitetura",
+      "Comunidade"
+    ],
+    "categorias": [
+      "Tradição",
+      "Migração",
+      "Arquitetura",
+      "Comunidade"
+    ]
+  },
+  {
+    "id": "E307",
+    "produto": "Quiz explicado (NLM)",
+    "origem": "media/quiz_geo2_nlm.json",
+    "tipo": "mc",
+    "enunciado": "O que acontece quando as pessoas mudam de um lugar para outro e levam seus hábitos e crenças na mala?",
+    "correta": [
+      "Migração"
+    ],
+    "distratores": [
+      "Ancestralidade",
+      "Identidade Cultural",
+      "Sertanejo universitário"
+    ],
+    "categorias": [
+      "Migração",
+      "Ancestralidade",
+      "Identidade Cultural",
+      "Sertanejo universitário"
+    ]
+  },
+  {
+    "id": "E308",
+    "produto": "Quiz explicado (NLM)",
+    "origem": "media/quiz_geo2_nlm.json",
+    "tipo": "mc",
+    "enunciado": "O Brasil é chamado de país multicultural. O que isso significa?",
+    "correta": [
+      "Que é feito de muitas culturas juntas"
+    ],
+    "distratores": [
+      "Que todo mundo tem os mesmos hábitos",
+      "Que só existe uma tradição no país",
+      "Que as pessoas não se relacionam"
+    ],
+    "categorias": [
+      "Que é feito de muitas culturas juntas",
+      "Que todo mundo tem os mesmos hábitos",
+      "Que só existe uma tradição no país",
+      "Que as pessoas não se relacionam"
+    ]
+  },
+  {
+    "id": "E309",
+    "produto": "Quiz explicado (NLM)",
+    "origem": "media/quiz_geo2_nlm.json",
+    "tipo": "mc",
+    "enunciado": "Na Região Norte, qual é o festival famoso que apresenta o boi-bumbá?",
+    "correta": [
+      "Festival de Parintins"
+    ],
+    "distratores": [
+      "Bumba meu boi",
+      "Oktoberfest",
+      "Carnaval de Salvador"
+    ],
+    "categorias": [
+      "Festival de Parintins",
+      "Bumba meu boi",
+      "Oktoberfest",
+      "Carnaval de Salvador"
+    ]
+  },
+  {
+    "id": "E310",
+    "produto": "Quiz explicado (NLM)",
+    "origem": "media/quiz_geo2_nlm.json",
+    "tipo": "mc",
+    "enunciado": "Qual dessas comidas é típica da Região Nordeste e tem influência indígena no uso do milho?",
+    "correta": [
+      "Cuscuz nordestino"
+    ],
+    "distratores": [
+      "Cuscuz paulista",
+      "Arroz com pequi",
+      "Churrasco gaúcho"
+    ],
+    "categorias": [
+      "Cuscuz nordestino",
+      "Cuscuz paulista",
+      "Arroz com pequi",
+      "Churrasco gaúcho"
+    ]
+  },
+  {
+    "id": "E311",
+    "produto": "Quiz explicado (NLM)",
+    "origem": "media/quiz_geo2_nlm.json",
+    "tipo": "mc",
+    "enunciado": "Se você estiver na Região Sudeste, qual dessas opções de comida e dança você provavelmente encontrará?",
+    "correta": [
+      "Pão de queijo e Samba"
+    ],
+    "distratores": [
+      "Tacacá e Carimbó",
+      "Acarajé e Frevo",
+      "Chimarrão e Pau de fita"
+    ],
+    "categorias": [
+      "Pão de queijo e Samba",
+      "Tacacá e Carimbó",
+      "Acarajé e Frevo",
+      "Chimarrão e Pau de fita"
+    ]
+  },
+  {
+    "id": "E312",
+    "produto": "Quiz explicado (NLM)",
+    "origem": "media/quiz_geo2_nlm.json",
+    "tipo": "mc",
+    "enunciado": "A Oktoberfest é uma festa de origem alemã. Em qual estado e região do Brasil ela acontece?",
+    "correta": [
+      "Santa Catarina, na Região Sul"
+    ],
+    "distratores": [
+      "Pernambuco, na Região Nordeste",
+      "Goiás, na Região Centro-Oeste",
+      "Amazonas, na Região Norte"
+    ],
+    "categorias": [
+      "Santa Catarina, na Região Sul",
+      "Pernambuco, na Região Nordeste",
+      "Goiás, na Região Centro-Oeste",
+      "Amazonas, na Região Norte"
+    ]
+  },
+  {
+    "id": "E313",
+    "produto": "Quiz explicado (NLM)",
+    "origem": "media/quiz_geo2_nlm.json",
+    "tipo": "mc",
+    "enunciado": "Na Região Centro-Oeste, quais são as danças típicas mencionadas no material?",
+    "correta": [
+      "Siriri e Cururu"
+    ],
+    "distratores": [
+      "Xote e Maracatu",
+      "Samba e Pagode",
+      "Xote gaúcho e Pau de fita"
+    ],
+    "categorias": [
+      "Siriri e Cururu",
+      "Xote e Maracatu",
+      "Samba e Pagode",
+      "Xote gaúcho e Pau de fita"
+    ]
+  },
+  {
+    "id": "E314",
+    "produto": "Quiz explicado (NLM)",
+    "origem": "media/quiz_geo2_nlm.json",
+    "tipo": "mc",
+    "enunciado": "Qual é a diferença entre a música do Centro-Oeste e a música da Região Sul, segundo a lista de 'pares que confundem'?",
+    "correta": [
+      "O Centro-Oeste tem a moda de viola e o Sul tem o sertanejo universitário"
+    ],
+    "distratores": [
+      "O Sul tem o funk e o Centro-Oeste tem o axé",
+      "Ambas as regiões só ouvem música clássica",
+      "Não há diferença, as músicas são iguais"
+    ],
+    "categorias": [
+      "O Centro-Oeste tem a moda de viola e o Sul tem o sertanejo universitário",
+      "O Sul tem o funk e o Centro-Oeste tem o axé",
+      "Ambas as regiões só ouvem música clássica",
+      "Não há diferença, as músicas são iguais"
+    ]
+  },
+  {
+    "id": "E315",
+    "produto": "Quiz explicado (NLM)",
+    "origem": "media/quiz_geo2_nlm.json",
+    "tipo": "mc",
+    "enunciado": "O conjunto de tradições e costumes que diz quem nós somos se chama:",
+    "correta": [
+      "Identidade cultural"
+    ],
+    "distratores": [
+      "Culinária regional",
+      "Transporte de migração",
+      "Glossário"
+    ],
+    "categorias": [
+      "Identidade cultural",
+      "Culinária regional",
+      "Transporte de migração",
+      "Glossário"
+    ]
+  }
+]

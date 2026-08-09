@@ -1,0 +1,106 @@
+{
+  "_meta": {
+    "materia": "Geografia 2tri — Unidade 2",
+    "insumo": "PDF Toddle da Unidade 2 (26 slides) — via figuras/ e _roteiro.md",
+    "para_que_serve": "Base de prova do auditor de escolhas. Cada evidência é uma AFIRMAÇÃO do material, com a frase o mais literal possível. Um item de escolha só é legítimo se (a) a correta tiver evidência que a SUSTENTA e (b) cada distrator tiver evidência que o EXCLUI.",
+    "regra_de_ouro": "Se duas categorias compartilham a MESMA frase de origem, elas NÃO podem ser opostas como alternativas — é a frase que funde os conceitos, não a criança que errou."
+  },
+
+  "escopo_cobravel": {
+    "_regra": "Decidido pelo Paulo em 09/08/2026: o material só pode TREINAR o que a prova tem potencial de cobrar. Item fora deste escopo treina falso — cria frustração e sugere incapacidade na criança por errar algo que nunca cairia. Fora do escopo = EXCLUIR, não 'deixar por garantia'.",
+    "dentro": [
+      {"eixo": "definicoes", "o_que": "o que significa comunidade, tradição, identidade cultural, migração, ancestrais, multicultural"},
+      {"eixo": "onde_a_cultura_aparece", "o_que": "culinária, vestimentas, religião, festas, arquitetura"},
+      {"eixo": "tradicoes_costumes", "o_que": "as 10 tradições das fotos: o que cada uma é e de onde vem"},
+      {"eixo": "regioes", "o_que": "painel das 5 regiões: festa / comida / comemoração / dança / música → qual região"},
+      {"eixo": "pares_armadilha", "o_que": "boi-bumbá × bumba meu boi; cuscuz paulista × nordestino; Oktoberfest alemã mas do Sul; moda de viola × sertanejo universitário"},
+      {"eixo": "diversidade", "o_que": "lugares diferentes → modos de viver diferentes → respeitar a diversidade"}
+    ],
+    "fora": [
+      {"eixo": "metodologia_da_aula", "o_que": "nome das atividades da apostila, o que ia colado na capa do Álbum das nossas origens, quais eram as perguntas do quadro de entrevista, qual é a 'pergunta essencial' da unidade, o que é um 'mapa mental'", "por_que": "é o COMO a turma estudou, não o conteúdo de Geografia. Nenhuma prova de Y2 pergunta o enunciado da atividade que a própria criança fez."},
+      {"eixo": "escolhas_entre_conceitos_encaixados", "o_que": "'isto é tradição ou migração?', 'isto é dança ou música?'", "por_que": "o material funde os dois lados na mesma frase — ver fusoes_proibidas"}
+    ],
+    "marcadores_fora": ["album das nossas origens", "album", "entrevista", "mapa mental", "pergunta principal", "pergunta essencial", "questao essencial", "roda de conversa", "ferramenta visual", "atividade para casa", "colagem", "criam vinculos"]
+  },
+
+  "fusoes_proibidas": [
+    {
+      "id": "F1",
+      "categorias": ["Tradição", "Migração"],
+      "frase_fonte": "Mas essas tradições não surgiram do nada. Muitas delas vieram com as pessoas que migraram de outros lugares, trazendo consigo hábitos, crenças e modos de viver que influenciaram os lugares onde chegaram.",
+      "por_que": "A frase encadeia tradição E migração no mesmo período: são as TRADIÇÕES que vieram, foram as PESSOAS que migraram, e o que 'influenciou os lugares' foram os hábitos/crenças/modos — ou seja, a cultura. Qualquer item que peça 'isto é tradição ou migração?' usando pedaços desta frase tem duas respostas defensáveis.",
+      "consequencia": "PROIBIDO opor Tradição × Migração como alternativas de um mesmo item. Cobrar cada palavra pela sua DEFINIÇÃO literal, separadamente."
+    },
+    {
+      "id": "F2",
+      "categorias": ["Tradição", "Identidade cultural"],
+      "frase_fonte": "Cada família tem suas próprias tradições, que passam de geração em geração e ajudam a construir uma identidade.",
+      "por_que": "A identidade é construída PELAS tradições — são encaixadas, não paralelas. 'Um conjunto de costumes' pode ser lido como as tradições.",
+      "consequencia": "Só opor as duas quando a alternativa correta reproduzir a DEFINIÇÃO literal e exclusiva de cada uma ('passa de geração em geração' = tradição; 'diz quem nós somos' = identidade)."
+    },
+    {
+      "id": "F3",
+      "categorias": ["dança", "música"],
+      "frase_fonte": "Nordeste — Tipos de dança: frevo, forró, baião, maracatu. Tipos de música: forró, frevo, axé, maracatu, xote.",
+      "por_que": "No Nordeste, frevo/forró/baião/maracatu estão listados nas DUAS categorias.",
+      "consequencia": "PROIBIDO perguntar 'é dança ou é música?' para esses quatro. A região é a resposta legítima."
+    }
+  ],
+
+  "definicoes": [
+    {"id": "D1", "categoria": "Comunidade", "literal": "As comunidades onde vivemos são formadas por diferentes pessoas, histórias e costumes.", "exclusivo": ["pessoas, histórias e costumes", "o lugar onde vivemos"]},
+    {"id": "D2", "categoria": "Tradição", "literal": "Cada família tem suas próprias tradições, que passam de geração em geração.", "exclusivo": ["passa de geração em geração", "de pais para filhos", "há muito tempo na família"]},
+    {"id": "D3", "categoria": "Identidade cultural", "literal": "As tradições, os costumes e a identidade cultural de uma comunidade são construídos a partir de diversas histórias que se entrelaçam ao longo do tempo.", "exclusivo": ["diz quem nós somos", "histórias que se entrelaçam ao longo do tempo"]},
+    {"id": "D4", "categoria": "Migração", "literal": "Muitas delas vieram com as pessoas que migraram de outros lugares.", "exclusivo": ["pessoas mudam de um lugar para outro", "migrar"]},
+    {"id": "D5", "categoria": "Ancestrais", "literal": "Conhecer a origem de nossas famílias nos ajuda a entender mais sobre a história dos nossos ancestrais.", "exclusivo": ["quem viveu antes de nós", "avós, bisavós"]},
+    {"id": "D6", "categoria": "Multicultural", "literal": "Brasil: país multicultural.", "exclusivo": ["muitas culturas juntas"]},
+    {"id": "D7", "categoria": "Onde a cultura aparece", "literal": "cada população leva consigo sua cultura, sendo possível observá-la nos lugares que vivemos, por meio da culinária, das vestimentas, da religião, das festas, da arquitetura e de outras manifestações.", "exclusivo": ["culinária", "vestimentas", "religião", "festas", "arquitetura"]},
+    {"id": "D8", "categoria": "Diversidade", "literal": "Pessoas em diferentes lugares têm relações distintas com o meio ambiente em que estão inseridas, seja pelos seus hábitos ou pelas suas manifestações culturais. Entender isso nos ajuda a respeitar a diversidade.", "exclusivo": ["respeitar a diversidade", "relações distintas com o meio ambiente"]}
+  ],
+
+  "regioes": {
+    "_formato": "categoria -> { festas, comidas, comemoracoes, dancas, musicas } — LISTA FECHADA do painel das 5 regiões (Fig. 13). O que não está aqui NÃO existe para efeito de gabarito.",
+    "Norte":        {"festas": ["festival de Parintins", "boi-bumbá"], "comidas": ["tacacá", "açaí"], "comemoracoes": ["Festa do Divino"], "dancas": ["carimbó"], "musicas": ["toada", "carimbó", "boi-bumbá"]},
+    "Nordeste":     {"festas": ["carnaval de Salvador", "festa de São João", "bumba meu boi"], "comidas": ["acarajé", "baião de dois", "vatapá"], "comemoracoes": ["festa do Senhor do Bonfim", "festa de Iemanjá"], "dancas": ["frevo", "forró", "baião", "maracatu"], "musicas": ["forró", "frevo", "axé", "maracatu", "xote"]},
+    "Centro-Oeste": {"festas": ["festa do Divino Espírito Santo", "Festa de São Benedito"], "comidas": ["arroz com pequi", "pamonha"], "comemoracoes": ["festa de São Sebastião", "Romaria do Divino Pai Eterno"], "dancas": ["siriri", "cururu"], "musicas": ["sertanejo", "moda de viola"]},
+    "Sudeste":      {"festas": ["festa do peão de Barretos", "carnaval do Rio", "festa da uva de Jundiaí"], "comidas": ["feijoada", "pão de queijo", "tutu de feijão", "moqueca capixaba"], "comemoracoes": ["festa de Nossa Senhora Aparecida", "festa da congada"], "dancas": ["samba"], "musicas": ["samba", "funk", "pagode", "MPB"]},
+    "Sul":          {"festas": ["Oktoberfest", "festa nacional do pinhão", "festa do vinho"], "comidas": ["churrasco gaúcho", "arroz carreteiro"], "comemoracoes": ["Semana Farroupilha", "festa da uva"], "dancas": ["xote gaúcho", "pau de fita"], "musicas": ["sertanejo universitário"]}
+  },
+
+  "tradicoes_costumes": [
+    {"nome": "produção artesanal de farinha de mandioca", "regiao": "Norte", "literal": "prática tradicional dos povos indígenas da Amazônia"},
+    {"nome": "desfile dos Bonecos Gigantes", "regiao": "Nordeste", "literal": "manifestação cultural tradicional do carnaval de Olinda, em Pernambuco"},
+    {"nome": "xilogravura", "regiao": "Nordeste", "literal": "expressão artística tradicional do Nordeste brasileiro, utilizada na ilustração de folhetos da literatura de cordel"},
+    {"nome": "jongo", "regiao": null, "literal": "manifestação cultural de matriz africana, caracterizada por dança, percussão e cantos em roda"},
+    {"nome": "jiu-jitsu brasileiro", "regiao": null, "literal": "arte marcial e expressão cultural esportiva desenvolvida no Brasil a partir da adaptação do judô e do jiu-jitsu japonês"},
+    {"nome": "Oktoberfest de Blumenau", "regiao": "Sul", "literal": "manifestação cultural de origem alemã, incorporada às tradições do estado de Santa Catarina. A festa reúne música, danças folclóricas, gastronomia típica e trajes tradicionais"},
+    {"nome": "cuscuz paulista", "regiao": "Sudeste", "literal": "prato típico do Sudeste brasileiro, preparado com farinha de milho e ingredientes variados, como peixe, ovos e legumes, com influência africana e europeia"},
+    {"nome": "cuscuz nordestino", "regiao": "Nordeste", "literal": "preparado com flocos de milho cozidos no vapor, traço cultural associado à alimentação popular do Nordeste brasileiro, com influência indígena na utilização do milho"},
+    {"nome": "chimarrão", "regiao": "Sul", "literal": "bebida tradicional da cultura gaúcha, consumida no Sul do Brasil, especialmente no Rio Grande do Sul"},
+    {"nome": "celebração do Santo Daime", "regiao": "Norte", "literal": "ritual religioso amazônico fundado na década de 1930, que mistura tradições indígenas e cristãs, usando a bebida sacramental à base de ayahuasca"}
+  ],
+
+  "termos_de_duas_categorias": [
+    {"termo": "Festa do Divino", "categorias": ["Norte (comemorações)", "Centro-Oeste (festa do Divino Espírito Santo)"]},
+    {"termo": "festa da uva", "categorias": ["Sudeste (de Jundiaí)", "Sul (comemorações)"]},
+    {"termo": "sertanejo", "categorias": ["Centro-Oeste (sertanejo)", "Sul (sertanejo universitário)"]},
+    {"termo": "carnaval", "categorias": ["Nordeste (Salvador, Olinda)", "Sudeste (Rio)"]},
+    {"termo": "xote", "categorias": ["Nordeste (música)", "Sul (xote gaúcho, dança)"]},
+    {"termo": "boi-bumbá", "categorias": ["Norte (festa)", "Norte (música)"]},
+    {"termo": "frevo", "categorias": ["Nordeste (dança)", "Nordeste (música)"]},
+    {"termo": "forró", "categorias": ["Nordeste (dança)", "Nordeste (música)"]},
+    {"termo": "baião", "categorias": ["Nordeste (dança)", "Nordeste (música)"]},
+    {"termo": "maracatu", "categorias": ["Nordeste (dança)", "Nordeste (música)"]},
+    {"termo": "carimbó", "categorias": ["Norte (dança)", "Norte (música)"]},
+    {"termo": "samba", "categorias": ["Sudeste (dança)", "Sudeste (música)"]}
+  ],
+
+  "atividades": [
+    {"nome": "Eu e minha família", "literal": "Qual o seu nome e sobrenome? Como você se identifica culturalmente? Como é sua família? Você nasceu em qual cidade?"},
+    {"nome": "Tradições em minha casa", "literal": "Qual comida especial sua família costuma preparar? Existe alguma história ou música que seus familiares sempre contam ou cantam? Há alguma festa ou celebração importante em sua casa? Seu sobrenome tem alguma história ou origem especial?"},
+    {"nome": "Álbum das nossas origens", "literal": "faça uma colagem que represente as tradições e os costumes da sua família. Construa a imagem com bandeiras, mapas, comidas, festas, datas comemorativas e qualquer aspecto que você ache importante"},
+    {"nome": "Brasil: país multicultural", "literal": "observe o modelo e faça abaixo um mapa mental que retrate aspectos culturais do Brasil que você conhece, que viu em aula e os que fazem parte do seu dia a dia"},
+    {"nome": "Entrevista sobre a migração", "literal": "Quem você entrevistou? Quem da sua família migrou para o Brasil? Por que essa pessoa veio para o Brasil? Como foi essa viagem? Que transporte usou? Foi uma chegada tranquila? Como foi a adaptação ao Brasil?"},
+    {"nome": "Roda de conversa", "literal": "De onde vieram minhas tradições? — passadas de geração em geração, de pais para filhos, há muito tempo na família. Esses trajes sempre existiram ou vieram de algum outro lugar? Talvez sua avó tenha aprendido um prato típico em outro lugar, ou uma brincadeira antiga tenha se transformada ao longo dos anos."}
+  ]
+}

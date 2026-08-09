@@ -275,17 +275,19 @@ var ADVENTURE={
       {en:'A história dos nossos ancestrais',pt:'ancestrais = quem veio antes de nós',ok:true},
       {en:'O tempo que vai fazer amanhã',pt:'',ok:false},
       {en:'A tabuada do 7',pt:'',ok:false}]},
-    {t:'sort',q:'É tradição ou é migração? Toque na caixa certa!',qpt:'',
-     buckets:[{id:'t',en:'Tradição 🤝',pt:'',color:'#fb923c'},{id:'m',en:'Migração ✈️',pt:'',color:'#38bdf8'}],
-     pick:4,
-     items:[
-      {en:'Passa de geração em geração',pt:'',b:'t'},
-      {en:'A receita da bisavó',pt:'',b:'t'},
-      {en:'A festa que a família faz todo ano',pt:'',b:'t'},
-      {en:'Está há muito tempo na família',pt:'',b:'t'},
-      {en:'Pessoas mudam de um lugar para outro',pt:'',b:'m'},
-      {en:'Levam consigo hábitos e crenças',pt:'',b:'m'},
-      {en:'Influencia os lugares onde chegam',pt:'',b:'m'}]}
+    /* O sort "É tradição ou é migração?" foi REMOVIDO em 09/08 (auditoria de
+       escolhas, R1+R2). Metade dos itens saía da frase que FUNDE os dois
+       conceitos no material, e dois deles ("a receita da bisavó", "a festa que
+       a família faz todo ano") nem existiam no insumo. As duas palavras
+       continuam cobradas acima, em MC, com alternativas que não têm defesa. */
+    {t:'mc',q:'Qual destas frases explica o que é uma TRADIÇÃO?',qpt:'',opts:[
+      {en:'Passa de geração em geração, de pais para filhos',pt:'',ok:true},
+      {en:'Mudar de um lugar para outro para morar',pt:'',ok:false},
+      {en:'O lugar onde vivemos, com muitas pessoas diferentes',pt:'',ok:false}]},
+    {t:'mc',q:'Qual destas frases explica o que é MIGRAÇÃO?',qpt:'',opts:[
+      {en:'Quando pessoas mudam de um lugar para outro',pt:'',ok:true},
+      {en:'Um costume que passa de pais para filhos',pt:'',ok:false},
+      {en:'Uma festa que acontece só uma vez',pt:'',ok:false}]}
    ]},
 
  /* ===== FASE 2 — migração ===== */

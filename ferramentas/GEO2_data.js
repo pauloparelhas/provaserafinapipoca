@@ -24,30 +24,16 @@ const CINCO = [REG.n, REG.ne, REG.co, REG.se, REG.s];
 
 const GAMES = [
 
- /* ---------- 1. conceitos da unidade ---------- */
- { key:'conceitos', emo:"\u{1F4AC}",
-   en:"Palavras da Unidade", pt:"tradição · migração · identidade cultural",
-   info:"Arraste cada frase para a palavra que ela explica.",
-   infopt:"São as 3 palavras do glossário da Unidade 2.",
-   tip:"Tradição = passa de pais para filhos · Migração = mudar de um lugar para outro · Identidade cultural = o conjunto de costumes que diz quem somos.",
-   tippt:"Dica de ouro: quem migra leva a cultura na mala — e a tradição chega junto.",
-   cols:[
-     {id:'tradicao', en:'Tradição',            pt:'passa de geração em geração', emo:"\u{1F91D}", co:'#fb923c'},
-     {id:'migracao', en:'Migração',            pt:'mudar de lugar',              emo:"\u{2708}\u{FE0F}", co:'#38bdf8'},
-     {id:'identid',  en:'Identidade cultural', pt:'quem nós somos',              emo:"\u{1F464}", co:'#a78bfa'}
-   ],
-   cards:[
-     {en:"Passa de geração em geração",                       pt:"de avó para mãe, de mãe para filha", col:'tradicao'},
-     {en:"Passa de pais para filhos",                          pt:"", col:'tradicao'},
-     {en:"Está há muito tempo na família",                     pt:"", col:'tradicao'},
-     {en:"Pessoas mudam de um lugar para outro",               pt:"não é passeio: é ir morar em outro lugar", col:'migracao'},
-     {en:"Levam consigo hábitos, crenças e modos de viver",    pt:"", col:'migracao'},
-     {en:"Influencia os lugares onde as pessoas chegam",       pt:"", col:'migracao'},
-     {en:"O conjunto de costumes que diz quem somos",          pt:"", col:'identid'},
-     {en:"É construída por muitas histórias que se entrelaçam",pt:"", col:'identid'}
-   ] },
-
- /* ---------- 2. em que a cultura aparece ---------- */
+ /* ---------- 1. em que a cultura aparece ----------
+    O jogo "Palavras da Unidade" (tradição × migração × identidade cultural)
+    FOI REMOVIDO em 09/08. Motivo (auditoria de escolhas, regra R1): o material
+    define os três conceitos ENCADEADOS na mesma frase — "essas tradições…
+    vieram com as pessoas que migraram… trazendo consigo hábitos, crenças e
+    modos de viver que influenciaram os lugares onde chegaram". Opor os três
+    como caixas mutuamente exclusivas produzia itens em que a criança que
+    marcasse a outra caixa TINHA argumento. O significado de cada palavra
+    continua treinado — mas em formato de pergunta com alternativas
+    inequivocamente erradas (simulado e Expedição Brasil), não em caixa.       */
  { key:'manifest', emo:"\u{1F3AD}",
    en:"Onde a cultura aparece", pt:"comida · dança e música · festa",
    info:"A cultura aparece na comida, na roupa, na religião, nas festas e na arquitetura. Classifique cada exemplo.",
