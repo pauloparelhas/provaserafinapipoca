@@ -13,9 +13,9 @@
 | 1 | Extrair conteúdo + figuras | `_roteiro.md` + `figuras/` (15 figuras, `_figmap.json` + `_manifest.json`) | ✅ |
 | 2 | Template | motor CIE2 reaproveitado (`serafina-core` + `serafina-adventure`) | ✅ |
 | 3 | Produto-âncora | `GEO2_aventura.html` — 7 fases + 2 chefes, 57 perguntas | ✅ |
-| 4 | Derivados | `GEO2_dragdrop`, `GEO2_popit`, `GEO2_simulado` (141 q.), `GEO2_estudo` (3 modos), `GEO2_flashcards` (46 cartas), `GEO2_galeria` (15 figuras + PDF) | ✅ |
+| 4 | Derivados | `GEO2_dragdrop`, `GEO2_popit`, `GEO2_simulado` (141 q.), `GEO2_estudo` (3 modos), `GEO2_flashcards` (46 cartas), `GEO2_nlm` (quiz explicado + 65 cartas), `GEO2_galeria` (15 figuras + PDF) | ✅ |
 | 4b | Roteiro de vídeo | `notebooklm/roteiro_video.md` (<3 min) | ✅ |
-| 5 | NotebookLM | `notebooklm/nlm_source_geo2.md` + runner `_processo/geracao/nlm_geo2.py` | ⏳ **bloqueado no login** |
+| 5 | NotebookLM | caderno `f7acb1fc` (3 fontes) → quiz + flashcards → `GEO2_nlm.html` | ✅ (vídeo ⏳ renderizando) |
 | 6 | Entrega + commit | `index.html` (Geografia no topo) + sw v23 + push | ✅ |
 
 ## Gates rodados
@@ -40,14 +40,34 @@ do Sort it! usa 4 regiões em vez de 5 por causa disso.
 no material. Nenhum deles é gabarito de resposta única em produto nenhum — só entram com o nome
 completo. O `validate_geo_sim.js` **reprova o build** se algum voltar isolado.
 
-## Pendência
+## NotebookLM — o que rodou
 
-**NotebookLM.** A sessão está expirada (`CAUSA: SESSAO-MORTA`). O login exige stdin interativo,
-então tem de ser o humano:
+Caderno **`f7acb1fc-ccfa-46b0-a471-1ec71a43f295`** — "Serafina - GEO2: Comunidades e lugares (Y2)".
+Fontes: PDF da professora + `nlm_source_geo2.md` + `roteiro_video.md`.
 
+| Artefato | Estado | Onde foi parar |
+|---|---|---|
+| Quiz (10 questões, com o porquê de cada alternativa) | ✅ | `media/quiz_geo2_nlm.json` → `GEO2_nlm.html` |
+| Flashcards (65 cartas) | ✅ | `media/flashcards_geo2_nlm.json` → aba "Revisão rápida" |
+| Vídeo (kawaii, `pt_BR`, <3 min) | ⏳ renderizando | `media/video_geo2_nb1_pt.mp4` quando sair |
+
+**Conferência antes de publicar:** as 10 questões e as 65 cartas foram lidas uma a uma. Todas
+fiéis às fontes, incluindo os dois pares-armadilha (boi-bumbá × bumba meu boi; cuscuz paulista ×
+nordestino) e a ambiguidade da Festa do Divino (carta 65). Nada inventado — nada foi cortado.
+
+## Armadilhas do CLI `notebooklm` 0.7.3 (o `CLAUDE.md` do projeto está desatualizado)
+
+| O que o CLAUDE.md diz | O que a 0.7.3 faz |
+|---|---|
+| `source add --file <caminho>` | **não existe `--file`** — o caminho é argumento **posicional** |
+| `generate quiz --language pt_BR` | **quiz/flashcards não aceitam `--language`** — o idioma vem do prompt + env `NOTEBOOKLM_HL` |
+| `--language pt_BR` | certo, mas **só em `generate video`**, e com **underscore**: `pt-BR` dá `Unknown language code` |
+
+O runner `_processo/geracao/nlm_geo2.py` já está corrigido para a 0.7.3.
+
+## Como retomar o vídeo
+
+```bash
+notebooklm artifact list --notebook f7acb1fc-ccfa-46b0-a471-1ec71a43f295
+python _processo/geracao/nlm_geo2.py --etapa baixar
 ```
-! bash "C:/Users/paulo/OneDrive/td junto outlook hotmail/Prático/_ecossistema/skills/nlm-auth/scripts/nlm_login.sh"
-```
-
-Depois: `python _processo/geracao/nlm_geo2.py` — cria o caderno, sobe as 3 fontes, gera vídeo
-(`pt_BR`, kawaii), quiz e flashcards, espera e baixa para `ferramentas/media/`. É idempotente.
