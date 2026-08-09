@@ -13,9 +13,9 @@
 | 1 | Extrair conteúdo + figuras | `_roteiro.md` + `figuras/` (15 figuras, `_figmap.json` + `_manifest.json`) | ✅ |
 | 2 | Template | motor CIE2 reaproveitado (`serafina-core` + `serafina-adventure`) | ✅ |
 | 3 | Produto-âncora | `GEO2_aventura.html` — 7 fases + 2 chefes, 57 perguntas | ✅ |
-| 4 | Derivados | `GEO2_dragdrop`, `GEO2_popit`, `GEO2_simulado` (141 q.), `GEO2_estudo` (3 modos), `GEO2_flashcards` (46 cartas), `GEO2_nlm` (quiz explicado + 65 cartas), `GEO2_galeria` (15 figuras + PDF) | ✅ |
+| 4 | Derivados | `GEO2_dragdrop`, `GEO2_popit`, `GEO2_simulado` (141 q.), `GEO2_estudo` (3 modos), `GEO2_flashcards` (46 cartas), `GEO2_nlm` (quiz explicado + 65 cartas), `GEO2_video` (vídeo 4 min), `GEO2_galeria` (15 figuras + PDF) | ✅ |
 | 4b | Roteiro de vídeo | `notebooklm/roteiro_video.md` (<3 min) | ✅ |
-| 5 | NotebookLM | caderno `f7acb1fc` (3 fontes) → quiz + flashcards → `GEO2_nlm.html` | ✅ (vídeo ⏳ renderizando) |
+| 5 | NotebookLM | caderno `f7acb1fc` (3 fontes) → quiz + flashcards + **vídeo 4 min** | ✅ |
 | 6 | Entrega + commit | `index.html` (Geografia no topo) + sw v23 + push | ✅ |
 
 ## Gates rodados
@@ -49,7 +49,7 @@ Fontes: PDF da professora + `nlm_source_geo2.md` + `roteiro_video.md`.
 |---|---|---|
 | Quiz (10 questões, com o porquê de cada alternativa) | ✅ | `media/quiz_geo2_nlm.json` → `GEO2_nlm.html` |
 | Flashcards (65 cartas) | ✅ | `media/flashcards_geo2_nlm.json` → aba "Revisão rápida" |
-| Vídeo (kawaii, `pt_BR`, <3 min) | ⏳ renderizando | `media/video_geo2_nb1_pt.mp4` quando sair |
+| Vídeo (kawaii, `pt_BR`) | ✅ **4 min 22 s**, 23 MB | `media/video_geo2_nb1_pt.mp4` → `GEO2_video.html` |
 
 **Conferência antes de publicar:** as 10 questões e as 65 cartas foram lidas uma a uma. Todas
 fiéis às fontes, incluindo os dois pares-armadilha (boi-bumbá × bumba meu boi; cuscuz paulista ×
@@ -65,9 +65,25 @@ nordestino) e a ambiguidade da Festa do Divino (carta 65). Nada inventado — na
 
 O runner `_processo/geracao/nlm_geo2.py` já está corrigido para a 0.7.3.
 
-## Como retomar o vídeo
+## O que ficou NÃO VERIFICADO
+
+**A reprodução do vídeo.** No Chrome automatizado o `<video>` fica em `readyState 0` — sem
+metadata, sem duração — tanto no servidor local quanto no GitHub Pages, e mesmo abrindo o
+`.mp4` direto. O arquivo, porém, está **íntegro**: `ftyp` + `moov` + `mdat` somam exatamente
+os 24.340.644 bytes, o `moov` está **na frente** (bom para streaming), os codecs são
+**H.264 (`avc1`) + AAC (`mp4a`)** e o `mvhd` diz `timescale 1000 / duration 262711` = 4 min 22 s.
+Ou seja: nada aponta para defeito no arquivo — parece limitação do navegador sob automação.
+**Abrir num navegador normal para confirmar.**
+
+Por causa disso, a página do vídeo **não promete o que não foi conferido**: o sumário é
+numerado, sem carimbo de minuto, e a navegação é por −10 s / +10 s.
+
+## Como reprocessar o vídeo, se precisar
 
 ```bash
-notebooklm artifact list --notebook f7acb1fc-ccfa-46b0-a471-1ec71a43f295
+notebooklm artifact list --notebook f7acb1fc-ccfa-46b0-a471-1ec71a43f295 --json
 python _processo/geracao/nlm_geo2.py --etapa baixar
 ```
+
+O runner só baixa o que estiver `completed` e lê o status pelo `--json` (o parse da tabela
+dava falso positivo: `grep Video -A4` alcançava o `completed` do artefato seguinte).
