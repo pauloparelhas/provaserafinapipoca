@@ -68,24 +68,26 @@ video{width:100%;display:block;background:#000;aspect-ratio:16/9}
     </div>
 
     <div class="ctrl">
+      <button class="cb" onclick="pula(-10)">&#9194; 10s</button>
       <button class="cb" id="sp075" onclick="vel(0.75)">&#128034; Mais devagar</button>
       <button class="cb on" id="sp1" onclick="vel(1)">&#9654;&#65039; Normal</button>
       <button class="cb" id="sp125" onclick="vel(1.25)">&#128007; Mais r&aacute;pido</button>
+      <button class="cb" onclick="pula(10)">10s &#9193;</button>
       <button class="cb" onclick="reinicia()">&#8634; Do come&ccedil;o</button>
     </div>
 
     <div class="aviso" id="aviso">
-      &#128533; N&atilde;o consegui carregar o v&iacute;deo aqui.
-      Tente <a href="media/video_geo2_nb1_pt.mp4" target="_blank" rel="noopener">abrir o arquivo direto</a>,
-      ou use o <a href="GEO2_estudo.html">Estudar</a> e o <a href="GEO2_nlm.html">Quiz explicado</a> &mdash;
-      eles t&ecirc;m o mesmo conte&uacute;do.
+      &#128274; O v&iacute;deo est&aacute; demorando para carregar (s&atilde;o 23 MB &mdash; numa internet lenta pode levar um tempo).<br><br>
+      Voc&ecirc; pode <a href="media/video_geo2_nb1_pt.mp4" target="_blank" rel="noopener">abrir o v&iacute;deo direto</a>,
+      ou estudar o <b>mesmo conte&uacute;do</b> sem v&iacute;deo no
+      <a href="GEO2_estudo.html">Estudar</a> e no <a href="GEO2_nlm.html">Quiz explicado</a>.
     </div>
 
-    <div class="sec">&#128220; O que o v&iacute;deo conta</div>
+    <div class="sec">&#128220; O que o v&iacute;deo conta, na ordem</div>
     <div class="rot" id="rot"></div>
 
     <div class="nota">O v&iacute;deo foi feito pelo <b>NotebookLM</b> a partir dos slides da professora.<br>
-      Toque em qualquer linha do roteiro para pular direto para aquela parte. &#128071;</div>
+      Use os bot&otilde;es <b>&#9194; 10s</b> e <b>10s &#9193;</b> para voltar no que voc&ecirc; n&atilde;o pegou. &#128071;</div>
   </div>
 </div>
 
@@ -100,34 +102,34 @@ video{width:100%;display:block;background:#000;aspect-ratio:16/9}
 var $=function(id){return document.getElementById(id);};
 var v=$('v');
 
-/* [segundo, texto] — marcações do roteiro_video.md */
+/* Sumario NA ORDEM, sem carimbo de tempo.
+   Os minutos exatos de cada trecho nao foram conferidos contra o video
+   gerado — anunciar "SUL aos 2:30" e mandar a crianca para o lugar errado
+   e pior do que nao anunciar nada. Para voltar, os botoes de 10s. */
 var ROTEIRO=[
- [0,   'Abertura: de onde vêm as nossas tradições?'],
- [12,  'O que é comunidade — pessoas, histórias e costumes diferentes'],
- [25,  'O que é tradição — passa de geração em geração, de pais para filhos'],
- [42,  'Identidade cultural — o que diz quem a gente é'],
- [52,  'Migração — quem migra leva a cultura na mala'],
- [70,  'Onde a cultura aparece: comida, roupa, religião, festa e arquitetura'],
- [85,  'O Brasil é multicultural — vamos às 5 regiões'],
- [95,  'NORTE — Parintins e o boi-bumbá, tacacá, açaí, carimbó'],
- [108, 'NORDESTE — Salvador, São João e o bumba meu boi (cuidado com o par!)'],
- [125, 'CENTRO-OESTE — Divino Espírito Santo, arroz com pequi, siriri e cururu'],
- [138, 'SUDESTE — Barretos, carnaval do Rio, feijoada, pão de queijo e samba'],
- [150, 'SUL — Oktoberfest, churrasco gaúcho, chimarrão e pau de fita'],
- [165, 'Fechamento: cada lugar tem seu jeito — respeitar a diversidade']
+ 'Abertura: de onde vêm as nossas tradições?',
+ 'O que é comunidade — pessoas, histórias e costumes diferentes',
+ 'O que é tradição — passa de geração em geração, de pais para filhos',
+ 'Identidade cultural — o que diz quem a gente é',
+ 'Migração — quem migra leva a cultura na mala',
+ 'Onde a cultura aparece: comida, roupa, religião, festa e arquitetura',
+ 'O Brasil é multicultural — vamos às 5 regiões',
+ 'NORTE — Parintins e o boi-bumbá, tacacá, açaí, carimbó',
+ 'NORDESTE — Salvador, São João e o bumba meu boi (cuidado com o par!)',
+ 'CENTRO-OESTE — Divino Espírito Santo, arroz com pequi, siriri e cururu',
+ 'SUDESTE — Barretos, carnaval do Rio, feijoada, pão de queijo e samba',
+ 'SUL — Oktoberfest, churrasco gaúcho, chimarrão e pau de fita',
+ 'Fechamento: cada lugar tem seu jeito — respeitar a diversidade'
 ];
 
 function mmss(s){var m=Math.floor(s/60),r=Math.round(s%60);return m+':'+(r<10?'0':'')+r;}
-$('rot').innerHTML=ROTEIRO.map(function(r,i){
-  return '<div class="rl" onclick="pula('+r[0]+')">'
-   +'<span class="rt">'+mmss(r[0])+'</span>'
-   +'<span class="rx">'+r[1]+'</span></div>';
+$('rot').innerHTML=ROTEIRO.map(function(txt,i){
+  return '<div class="rl"><span class="rt">'+(i+1)+'</span><span class="rx">'+txt+'</span></div>';
 }).join('');
 
-function pula(s){
+function pula(seg){
   if(!v)return;
-  try{ v.currentTime=s; v.play(); }catch(e){}
-  v.scrollIntoView({behavior:'smooth',block:'center'});
+  try{ v.currentTime=Math.max(0,Math.min((v.duration||1e9), v.currentTime+seg)); }catch(e){}
 }
 function vel(x){
   if(!v)return;
@@ -137,17 +139,22 @@ function vel(x){
 }
 function reinicia(){ if(v){v.currentTime=0;v.play();} }
 
-/* se o arquivo nao carregar, a crianca precisa saber para onde ir */
-v.addEventListener('error',function(){ $('aviso').classList.add('on'); });
+/* Se o arquivo nao carregar, a crianca precisa saber para onde ir.
+   'error' sozinho nao basta: quando o download so ENGASGA (23 MB em 4G ruim),
+   o elemento fica em readyState 0 para sempre e nenhum evento dispara.
+   Por isso tambem um relogio: 15 s sem metadata -> mostra a saida. */
+var avisou=false;
+function mostraAviso(){ if(!avisou){avisou=true;$('aviso').classList.add('on');} }
+v.addEventListener('error', mostraAviso);
+v.addEventListener('stalled', mostraAviso);
+setTimeout(function(){ if(v.readyState===0) mostraAviso(); }, 15000);
+
 v.addEventListener('loadedmetadata',function(){
+  avisou=true; $('aviso').classList.remove('on');   /* carregou: some o aviso */
   var d=v.duration;
   if(isFinite(d)&&d>0){
     var h=document.querySelector('.head p');
     h.innerHTML=h.innerHTML+'<br><b>Dura&ccedil;&atilde;o: '+mmss(d)+'</b>';
-    /* esconde marcacoes alem do fim do video (o roteiro e uma estimativa) */
-    document.querySelectorAll('.rl').forEach(function(el,i){
-      if(ROTEIRO[i][0]>d) el.style.display='none';
-    });
   }
 });
 </script>
