@@ -43,6 +43,28 @@
    ============================================================ */
 window.SERA_ADV=(function(){
 'use strict';
+/* --- i18n da CASCA (aditivo, 2026-08-09) -------------------------------
+   Os defaults abaixo sao exatamente as strings historicas (EN + .tr PT),
+   entao produto que NAO define window.SERA_CFG.advUI renderiza igual ao
+   que sempre renderizou. Produto PT (Geografia) passa advUI e a casca
+   inteira fala portugues, sem duplicar o motor. */
+var UI=Object.assign({
+  again:'\u21bb play again',
+  listen:'\ud83d\udd0a Listen to the lesson<span class="tr">Ouvir a li\u00e7\u00e3o</span>',
+  ready:'\u2694\ufe0f I\u2019m ready!<span class="tr">Estou pronta!</span>',
+  mapShort:'\ud83d\uddfa\ufe0f Map',
+  map:'\ud83d\uddfa\ufe0f Map<span class="tr">Mapa</span>',
+  retry:'\ud83d\udd01 Try again!<span class="tr">Tentar de novo!</span>',
+  battle:'\u2694\ufe0f Battle!<span class="tr">Batalhar!</span>',
+  bossIntro:'Answer the questions to win!',
+  bossIntroPt:'Responda para vencer!',
+  win:'\ud83c\udfc6 You did it!<span class="tr">Voc\u00ea conseguiu!</span>',
+  badges1:'Show my badges!', badges1Pt:'Mostrar emblemas!',
+  badgesN:'Next badge',      badgesNPt:'Pr\u00f3ximo emblema',
+  backMap:'\ud83d\uddfa\ufe0f Back to the map<span class="tr">Voltar ao mapa</span>',
+  listenTitle:'Listen'
+}, (window.SERA_CFG||{}).advUI||{});
+
 var A=null, S=null;            // ADVENTURE, estado salvo
 var cur={ph:null,items:[],idx:0,misses:0,perfect:0};
 
@@ -52,7 +74,7 @@ function escJs(s){return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").rep
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function tr(en,pt){return esc(en)+(pt?'<span class="tr">'+esc(pt)+'</span>':'');}
 /* say como <span role=button>: button-dentro-de-button é HTML inválido (QA ti 05/07) */
-function sayBtn(t){return '<span class="adv-say" role="button" tabindex="0" onclick="say(\''+escJs(t)+'\');event.stopPropagation()" title="Listen">🔊</span>';}
+function sayBtn(t){return '<span class="adv-say" role="button" tabindex="0" onclick="say(\''+escJs(t)+'\');event.stopPropagation()" title="'+UI.listenTitle+'">🔊</span>';}
 var advTimer=null;
 function clearAdvTimer(){if(advTimer){clearTimeout(advTimer);advTimer=null;}}
 function itemKey(it){return it.__origQ||it.q||'';}
@@ -83,7 +105,7 @@ function showMap(){
       +'<span class="adv-nicon">'+(un?ph.icon:'🔒')+'</span>'
       +'<span class="adv-nname">'+tr(ph.name,ph.namePt)+'</span>'
       +(done?'<span class="adv-nstars">'+'⭐'.repeat(st)+(st<tot?'<span class="adv-starghost">'+'☆'.repeat(tot-st)+'</span>':'')+'</span>':'')
-      +(done?'<span class="adv-redo">↻ play again</span>':'')
+      +(done?'<span class="adv-redo">'+UI.again+'</span>':'')
       +'</button></div>';
   });
   h+='</div></div>';
@@ -103,9 +125,9 @@ function enter(id){
     h+='<div class="adv-lline"><span class="adv-lemo">'+ln[0]+'</span><span class="adv-ltxt">'+tr(ln[1],ln[2])+'</span>'+sayBtn(ln[1])+'</div>';
   });
   h+='<div id="advCustom"></div>'
-   +'<button class="adv-listen" onclick="say(\''+escJs(L.lines.map(function(l){return l[1];}).join(' '))+'\')">🔊 Listen to the lesson<span class="tr">Ouvir a lição</span></button>'
+   +'<button class="adv-listen" onclick="say(\''+escJs(L.lines.map(function(l){return l[1];}).join(' '))+'\')">'+UI.listen+'</button>'
    +'</div>'
-   +'<button class="adv-go" onclick="SERA_ADV.startChallenges()">⚔️ I’m ready!<span class="tr">Estou pronta!</span></button>'
+   +'<button class="adv-go" onclick="SERA_ADV.startChallenges()">'+UI.ready+'</button>'
    +'</div>';
   $id('stage').innerHTML=h;
   if(L.custom){try{L.custom($id('advCustom'));}catch(e){}}
@@ -119,7 +141,7 @@ function startChallenges(){
   cur.idx=0; cur.perfect=0;
   renderChallenge();
 }
-function mapBtn(){return '<button class="adv-mapbtn" onclick="SERA_ADV.showMap()">🗺️ Map</button>';}
+function mapBtn(){return '<button class="adv-mapbtn" onclick="SERA_ADV.showMap()">'+UI.mapShort+'</button>';}
 
 function renderChallenge(){
   clearAdvTimer();
@@ -190,7 +212,7 @@ function feed(ok,revealHtml,teach){
     }
     h+='<button class="adv-go" onclick="SERA_ADV.nextChallenge()">➡️ Keep going!<span class="tr">Seguir em frente!</span></button>';
   }else{
-    h+='<button class="adv-go" onclick="SERA_ADV.retry()">🔁 Try again!<span class="tr">Tentar de novo!</span></button>';
+    h+='<button class="adv-go" onclick="SERA_ADV.retry()">'+UI.retry+'</button>';
   }
   f.innerHTML=h+'</div>';
   f.scrollIntoView({behavior:'smooth',block:'end'});
@@ -288,7 +310,7 @@ function phaseComplete(){
    +(ph.anchor?'<button class="adv-anchor" onclick="say(\''+escJs(ph.anchor)+'\')">🔊 '+tr(ph.anchor,ph.anchorPt)+'</button>':'')
    +'<div class="adv-donebtns">'
    +(nxt?'<button class="adv-go" onclick="SERA_ADV.enter(\''+nxt.id+'\')">➡️ Next phase<span class="tr">Próxima fase</span></button>':'')
-   +'<button class="adv-go ghost" onclick="SERA_ADV.showMap()">🗺️ Map<span class="tr">Mapa</span></button>'
+   +'<button class="adv-go ghost" onclick="SERA_ADV.showMap()">'+UI.map+'</button>'
    +'</div></div>';
   $id('stage').innerHTML=h;
 }
@@ -328,8 +350,8 @@ function bossIntro(ph){
    +mapBtn()
    +'<div class="adv-bigicon">'+ph.icon+'</div>'
    +'<div class="adv-ltitle center">'+tr(ph.name,ph.namePt)+'</div>'
-   +'<div class="adv-lline center"><span class="adv-ltxt">'+tr(ph.intro||'Answer the questions to win!',ph.introPt||'Responda para vencer!')+'</span></div>'
-   +'<button class="adv-go" onclick="SERA_ADV.startBoss()">⚔️ Battle!<span class="tr">Batalhar!</span></button>'
+   +'<div class="adv-lline center"><span class="adv-ltxt">'+tr(ph.intro||UI.bossIntro,ph.introPt||UI.bossIntroPt)+'</span></div>'
+   +'<button class="adv-go" onclick="SERA_ADV.startBoss()">'+UI.battle+'</button>'
    +'</div>';
   $id('stage').innerHTML=h;
 }
@@ -363,7 +385,7 @@ function celebration(){
 function renderCeleb(){
   var badges=A.phases.filter(function(p){return !p.boss&&p.anchor;});
   var h='<div class="adv-celeb">'
-   +'<div class="adv-celebtitle">🏆 You did it!<span class="tr">Você conseguiu!</span></div>'
+   +'<div class="adv-celebtitle">'+UI.win+'</div>'
    +'<div class="adv-badges">';
   badges.forEach(function(p,i){
     h+='<div class="adv-badge'+(i<celebIdx?' in':i===celebIdx?' now':'')+'" style="--pc:'+(p.color||'#38bdf8')+'" '
@@ -373,8 +395,8 @@ function renderCeleb(){
   h+='</div><div class="adv-karaoke" id="advKar"></div>'
    +'<div class="adv-donebtns">'
    +(celebIdx<badges.length
-      ?'<button class="adv-go" onclick="SERA_ADV.celebNext()">✨ '+(celebIdx===0?'Show my badges!':'Next badge')+'<span class="tr">'+(celebIdx===0?'Mostrar emblemas!':'Próximo emblema')+'</span></button>'
-      :'<button class="adv-go" onclick="SERA_ADV.showMap()">🗺️ Back to the map<span class="tr">Voltar ao mapa</span></button>')
+      ?'<button class="adv-go" onclick="SERA_ADV.celebNext()">✨ '+(celebIdx===0?UI.badges1:UI.badgesN)+'<span class="tr">'+(celebIdx===0?UI.badges1Pt:UI.badgesNPt)+'</span></button>'
+      :'<button class="adv-go" onclick="SERA_ADV.showMap()">'+UI.backMap+'</button>')
    +'</div></div>';
   $id('stage').innerHTML=h;
 }
