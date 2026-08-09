@@ -24,7 +24,42 @@
 |---|---|---|
 | `_processo/geracao/validate_geo.js` | GAMES + ADVENTURE: integridade referencial, gabarito único em MC, coluna sem carta, duplicatas | **PASSOU** (0 erros) |
 | `_processo/geracao/validate_geo_sim.js` | banco do simulado: gabarito único, distrator repetido, tema órfão, cobertura ≥8 por tema, **ambiguidade §7** | **PASSOU** (0 erros, 0 avisos) |
+| `_processo/geracao/audita_escolhas.js` | legitimidade de toda escolha entre alternativas (R1 fusão · R2 sem lastro · R3 dois donos · R4 gabarito · R5 não cobrável) | **PASSOU** (315 itens, 0 falhas) |
 | QA no navegador (Chrome) | os 7 produtos abertos e jogados; PT completo; board das 5 regiões em tela estreita | **PASSOU** (6 defeitos achados e corrigidos) |
+| QA de layout medido (Playwright) | 24 telas × 360×640 · 740×360 · 1280×800: rolagem horizontal, alvo <44px, texto cortado, sobreposição, erro de console | **PASSOU** (72 medições, 0 achados) |
+| Agente `ti` | DOM trace das grades, classe órfã nas duas direções, checklist do CLAUDE.md | **PASSOU** após 5 correções |
+
+> **Regra do QA automatizado:** o navegador de teste roda **mudo**. `speechSynthesis` e
+> `AudioContext` são neutralizados por `add_init_script` antes de a página carregar — em
+> 09/08 um QA abriu o lightbox da galeria, que chama `say()`, e a máquina falou sozinha.
+> Nunca mais sem autorização expressa.
+
+## Rediagramação (09/08) — a queixa e o que mudou
+
+> "as telas em geral são boxes mal diagramados e mal editorados… tem que ser intuitivo de
+> entender o que se espera, a pergunta, as alternativas, o comportamento esperado da criança."
+
+Tudo tinha o mesmo peso visual: caixa dentro de caixa, pergunta e alternativa com a mesma cara.
+Os **9 produtos + o index** passaram pela mesma régua:
+
+1. **Cada tela diz o que fazer** — linha `.task` ("Toque na resposta certa", "Toque no item,
+   depois no grupo certo", "Responda de cabeça e depois confira") nos 6 tipos do simulado, no
+   quiz explicado e na instrução do Sort it!, que era cinza de rodapé.
+2. **Hierarquia** — a pergunta domina (até 1.5rem, máx. 32ch); só as alternativas são cards, com
+   alvo ≥52px e relevo de tecla.
+3. **Paisagem de celular** (`orientation:landscape` + `max-height:520px`) — a altura é o recurso
+   escasso: pergunta à esquerda e alternativas à direita no simulado, quiz e aventura; tabuleiro ×
+   sacola no Sort it!; alvo × balões no Pop it; carta × julgamento nos flashcards; vídeo × sumário.
+4. **Notebook** (`min-width:1000px`) e **hover** — afordance de mouse nos 9.
+5. **`prefers-reduced-motion`** nos 9 (o Pop it desliga o balanço dos balões).
+6. **PT completo** — restos do Ciências traduzidos ("I got it/Almost/Not yet", "Place every card
+   first", "Perfect! n/n correct", "Target cleared", "Great job, scientist!", "Year 2").
+7. **Dois bugs de usabilidade** que a rediagramação expôs: o Pop it tinha **dois** botões de som
+   (voz e efeitos, ícones idênticos lado a lado) — agora é um só, o `#sombtn` do core; e o sumário
+   do vídeo tinha cursor de mão mas **não** pulava para o trecho (os minutos nunca foram
+   conferidos) — virou lista de leitura.
+8. **Galeria** — a figura ampliada ganhou ‹ / › + setas do teclado + "N de 15": dá para passar as
+   15 figuras sem fechar e reabrir.
 
 ## Cobertura insumo → produto
 

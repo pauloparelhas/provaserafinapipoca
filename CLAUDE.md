@@ -55,6 +55,25 @@ Publico: crianca jogando em celular. CADA detalhe visual importa.
 
 **NUNCA declarar uma mudanca como "pronta" sem completar TODOS os passos abaixo.**
 
+### REGRA ZERO — QA AUTOMATIZADO RODA MUDO (09/08/2026)
+
+Nenhum teste automatizado (Playwright, extensao do Chrome, script) pode fazer o computador
+**falar ou tocar som**. As telas Serafina chamam `say()` em quase toda interacao; um QA de
+layout abriu o lightbox da galeria e a maquina comecou a falar sozinha. O Paulo: "nao autorizo
+NUNCA que voce emita falas automaticas no computador nesses testes sem minha autorizacao
+expressa". Silenciar ANTES de a pagina carregar (`add_init_script` / equivalente):
+
+```js
+try{ speechSynthesis.speak=function(){}; speechSynthesis.cancel=function(){};
+     speechSynthesis.getVoices=function(){return [];}; }catch(e){}
+window.SpeechSynthesisUtterance=function(){};
+window.AudioContext=window.webkitAudioContext=function(){ throw new Error('audio off'); };
+```
+
+Script de referencia pronto: QA de layout com Playwright que mede 24 telas x 3 viewports
+(360x640 retrato, 740x360 paisagem, 1280x800 notebook) e reprova rolagem horizontal, alvo de
+toque <44px, texto cortado, sobreposicao entre irmaos e erro de console.
+
 ### Passo 1: INTENT (Intencao)
 Antes de implementar, responder:
 - QUEM vai usar isso? (crianca? pai?)
