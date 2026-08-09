@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Estudar — Geografia · Comunidades e lugares</title>
+<link rel="stylesheet" href="serafina-core.css">
+<style>
+/* ============================================================
+   ESTUDAR (Geografia 2tri) — folha + palavras-chave + mapa mental numa casca
+   única com 3 modos. Casca herdada do Study Hub de Ciências; o
+   conteúdo e o mapa sao gerados de dados (roteiro de Geografia).
+   ============================================================ */
+:root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#34d399;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
+body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.05rem;font-weight:800;cursor:pointer;padding:0 8px}
+.iconbtn:active{transform:scale(.9)}
+.dicabtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.4;filter:grayscale(1)}
+.dicabtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .dicabtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
+.wrap{flex:1;width:100%;max-width:640px;margin:0 auto;padding:14px 12px 44px}
+.hint{text-align:center;font-size:.82rem;font-weight:800;color:var(--soft);margin:2px 0 12px;line-height:1.4}
+.foot{text-align:center;color:var(--soft);font-weight:800;font-size:.82rem;margin-top:10px}
+
+/* ---- abas ---- */
+.tabbar{display:flex;gap:8px;margin-bottom:14px}
+.tabbtn{flex:1;min-height:52px;border-radius:16px;border:2px solid var(--line);background:transparent;color:var(--soft);font-family:inherit;font-weight:900;font-size:calc(.85rem*var(--fs));cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.1}
+.tabbtn .te{font-size:1.2rem}
+.tabbtn.on{border-color:var(--accent);background:rgba(52,211,153,.14);color:var(--ink)}
+.tabbtn:active{transform:scale(.96)}
+.pane{display:none}
+.pane.on{display:block}
+.tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.82em}
+body.show-tr .tr{display:block}
+
+/* ---- MODO 1: folha de estudo (do CIE2_resumo) ---- */
+.toolrow{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
+.toolbtn{border:2px solid var(--line);background:transparent;color:var(--soft);font-weight:800;font-size:.78rem;border-radius:16px;padding:7px 14px;cursor:pointer;font-family:inherit;min-height:44px}
+.toolbtn:active{transform:scale(.95)}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);box-shadow:0 10px 30px rgba(0,0,0,.28);margin-bottom:16px;overflow:hidden}
+.sechead{display:flex;align-items:center;gap:10px;padding:15px 16px;cursor:pointer;user-select:none}
+.sechead .si{font-size:1.7rem;filter:drop-shadow(0 4px 7px rgba(0,0,0,.3))}
+.sechead .st{flex:1;font-weight:900;font-size:calc(1.06rem*var(--fs));line-height:1.2}
+.sechead .st .str{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.78rem}
+body.show-tr .sechead .st .str{display:block}
+.sechead .chev{font-size:1rem;color:var(--soft);transition:transform .25s}
+.sec.open .chev{transform:rotate(180deg)}
+.secbody{display:none;padding:0 16px 16px}
+.sec.open .secbody{display:block}
+.listen{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border:2px solid var(--accent);background:transparent;color:var(--accent);font-weight:800;font-size:.85rem;border-radius:18px;padding:6px 16px;cursor:pointer;font-family:inherit;margin:2px 0 10px}
+.listen:active{transform:scale(.95)}
+.grp{border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin:8px 0;background:rgba(255,255,255,.03)}
+.grp .gname{font-weight:900;font-size:calc(1rem*var(--fs));display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.line{margin:8px 0 0;font-weight:700;font-size:calc(.96rem*var(--fs));line-height:1.35;display:flex;gap:8px}
+.line .lk{flex-shrink:0}
+.cols{display:flex;gap:10px;flex-wrap:wrap}
+.col{flex:1;min-width:140px;border:2px solid var(--line);border-radius:14px;padding:11px 13px}
+.col.solid{background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.4)}
+.col.liquid{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.35)}
+.col.gas{background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.4)}
+.col h4{font-size:.92rem;font-weight:900;margin-bottom:7px}
+.col .ci{font-weight:800;font-size:calc(.92rem*var(--fs));margin:5px 0;line-height:1.25}
+.tip{display:flex;gap:9px;align-items:flex-start;margin:9px 0;font-weight:800;font-size:calc(.97rem*var(--fs));line-height:1.35}
+.tip .tk{flex-shrink:0}
+.qa{border-left:3px solid var(--accent2);padding:6px 0 6px 12px;margin:11px 0}
+.qa .qq{font-weight:900;font-size:calc(.98rem*var(--fs));line-height:1.3}
+.qa .aa{font-weight:900;color:var(--accent);font-size:calc(1rem*var(--fs));margin-top:4px}
+.qa .aa .ar::before{content:"→ "}
+
+/* ---- MODO 2: palavras-chave (do CIE2_superrevisao) ---- */
+.kblock{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--bc,var(--accent));border-radius:var(--rad);box-shadow:0 10px 26px rgba(0,0,0,.26);margin-bottom:14px;padding:13px 14px 15px}
+.kbhead{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:4px}
+.kbhead .ke{font-size:1.5rem;filter:drop-shadow(0 4px 7px rgba(0,0,0,.3))}
+.kbhead .kt{flex:1;min-width:0;font-weight:900;font-size:calc(1.05rem*var(--fs));line-height:1.15}
+.kbhead .kt .ktr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem}
+body.show-tr .kbhead .kt .ktr{display:block}
+.kaxis{font-size:.66rem;font-weight:900;letter-spacing:.4px;text-transform:uppercase;color:var(--soft);background:var(--line);border-radius:8px;padding:3px 8px;margin-left:auto;white-space:nowrap}
+.kgroup{margin-top:10px}
+.klabel{display:inline-flex;align-items:center;gap:6px;font-weight:900;font-size:calc(.9rem*var(--fs));border-radius:999px;padding:5px 13px;min-height:44px;cursor:pointer;border:none;font-family:inherit}
+.klabel .ltr{font-weight:800;font-style:italic;font-size:.74rem;opacity:.85}
+body:not(.show-tr) .klabel .ltr{display:none}
+.kchips{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}
+.kchip{display:flex;flex-direction:column;justify-content:center;gap:1px;min-height:44px;border-radius:13px;padding:6px 12px;cursor:pointer;font-family:inherit;text-align:left;border:1.5px solid var(--cc,var(--line));background:var(--cb,rgba(255,255,255,.05));color:var(--ink)}
+.kchip:active{transform:scale(.95)}
+.kchip .en{font-weight:900;font-size:calc(.92rem*var(--fs));line-height:1.1}
+.kchip .pt{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem;line-height:1.1}
+body.show-tr .kchip .pt{display:block}
+
+/* ---- MODO 3: mapa mental (do CIE2_mindmap) ---- */
+.mm-root-label{text-align:center;margin-bottom:10px}
+.mm-root-pill{display:inline-block;padding:12px 28px;border-radius:20px;font-size:calc(15px*var(--fs));font-weight:900;background:linear-gradient(135deg,#38bdf8,#fbbf24);color:#fff;box-shadow:0 0 24px rgba(56,189,248,.35)}
+.mm-root-tr{display:none;font-size:calc(11px*var(--fs));font-weight:800;color:var(--tr);font-style:italic;margin-top:8px}
+body.show-tr .mm-root-tr{display:block}
+.mm-branch{border-radius:18px;border:2px solid;margin-bottom:12px;overflow:hidden}
+.mm-branch-hd{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;min-height:52px}
+.mm-branch-hd:active{opacity:.8}
+.mm-branch-icon{font-size:22px;flex-shrink:0}
+.mm-branch-text{flex:1}
+.mm-branch-en{font-size:calc(15px*var(--fs));font-weight:900;color:var(--ink);line-height:1.2}
+.mm-branch-pt{display:none;font-size:calc(11px*var(--fs));font-weight:800;color:var(--tr);font-style:italic;margin-top:2px}
+.mm-branch-arrow{font-size:12px;color:var(--soft);transition:transform .25s;flex-shrink:0}
+.mm-branch.open .mm-branch-arrow{transform:rotate(90deg)}
+.mm-branch-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.mm-branch.open .mm-branch-body{max-height:6000px}
+.mm-branch-inner{padding:4px 12px 12px}
+.mm-leaf{border-radius:12px;margin-bottom:8px;overflow:hidden}
+.mm-leaf-hd{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;min-height:44px}
+.mm-leaf-hd:active{opacity:.8}
+.mm-leaf-icon{font-size:18px;flex-shrink:0}
+.mm-leaf-text{flex:1}
+.mm-leaf-en{font-size:calc(13px*var(--fs));font-weight:900;color:var(--ink);line-height:1.2}
+.mm-leaf-pt{display:none;font-size:calc(10px*var(--fs));font-weight:800;color:var(--tr);font-style:italic;margin-top:1px}
+.mm-leaf-arrow{font-size:10px;color:var(--soft);transition:transform .2s;flex-shrink:0}
+.mm-leaf.open .mm-leaf-arrow{transform:rotate(90deg)}
+.mm-leaf-body{max-height:0;overflow:hidden;transition:max-height .25s ease}
+.mm-leaf.open .mm-leaf-body{max-height:1400px}
+.mm-detail{padding:4px 12px 4px 16px;font-size:calc(12px*var(--fs));font-weight:700;line-height:1.45}
+.mm-detail-en{color:var(--ink);opacity:.92}
+.mm-detail-pt{display:none;color:var(--tr);font-style:italic;margin-top:1px}
+body.show-tr .mm-branch-pt,body.show-tr .mm-leaf-pt,body.show-tr .mm-detail-pt{display:block}
+.mm-detail-last{padding-bottom:8px}
+.mm-tag{display:inline-block;font-size:calc(9px*var(--fs));font-weight:800;padding:1px 7px;border-radius:10px;margin-left:6px;background:rgba(251,146,60,.22);color:#fdba74;vertical-align:middle}
+body.light .mm-tag{background:rgba(180,83,9,.15);color:#b45309}
+.bc-blue{background:rgba(96,165,250,.06);border-color:rgba(96,165,250,.25)}
+.bc-blue .mm-branch-hd,.bc-blue .mm-leaf-hd{background:rgba(96,165,250,.08)}
+.bc-blue .mm-detail{border-left:2px solid rgba(96,165,250,.3)}
+.bc-orange{background:rgba(251,146,60,.06);border-color:rgba(251,146,60,.25)}
+.bc-orange .mm-branch-hd,.bc-orange .mm-leaf-hd{background:rgba(251,146,60,.08)}
+.bc-orange .mm-detail{border-left:2px solid rgba(251,146,60,.3)}
+.bc-green{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.25)}
+.bc-green .mm-branch-hd,.bc-green .mm-leaf-hd{background:rgba(52,211,153,.08)}
+.bc-green .mm-detail{border-left:2px solid rgba(52,211,153,.3)}
+.bc-purple{background:rgba(167,139,250,.06);border-color:rgba(167,139,250,.25)}
+.bc-purple .mm-branch-hd,.bc-purple .mm-leaf-hd{background:rgba(167,139,250,.08)}
+.bc-purple .mm-detail{border-left:2px solid rgba(167,139,250,.3)}
+.bc-pink{background:rgba(244,114,182,.06);border-color:rgba(244,114,182,.25)}
+.bc-pink .mm-branch-hd,.bc-pink .mm-leaf-hd{background:rgba(244,114,182,.08)}
+.bc-pink .mm-detail{border-left:2px solid rgba(244,114,182,.3)}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Estudar &mdash; Comunidades e lugares</span>
+    <button class="iconbtn dicabtn" id="dica" title="Mostrar dica" onclick="toggleTr()">&#128161;<span class="ft">Dica</span></button>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="wrap">
+    <div class="tabbar">
+      <button class="tabbtn on" id="tab-sheet" onclick="showTab('sheet')"><span class="te">&#128214;</span>Folha de estudo</button>
+      <button class="tabbtn" id="tab-words" onclick="showTab('words')"><span class="te">&#10024;</span>Palavras-chave</button>
+      <button class="tabbtn" id="tab-map" onclick="showTab('map')"><span class="te">&#129517;</span>Mapa mental</button>
+    </div>
+
+    <!-- ===== MODO 1: FOLHA DE ESTUDO ===== -->
+    <div class="pane on" id="pane-sheet">
+      <div class="hint">Sua folha de estudo! Toque no t&iacute;tulo para abrir/fechar, no &#128266; para ouvir e no &#128161; para ver as dicas.</div>
+      <div class="toolrow">
+        <button class="toolbtn" onclick="allSec(true)">&#11015;&#65039; Abrir tudo</button>
+        <button class="toolbtn" onclick="allSec(false)">&#11014;&#65039; Fechar tudo</button>
+      </div>
+      <div id="sheetContent"></div>
+    </div>
+
+    <!-- ===== MODO 2: PALAVRAS-CHAVE ===== -->
+    <div class="pane" id="pane-words">
+      <div class="hint">S&oacute; as palavras m&aacute;gicas! &#128064; Toque numa palavra para ouvir &#128266;.</div>
+      <div id="wordsContent"></div>
+    </div>
+
+    <!-- ===== MODO 3: MAPA MENTAL ===== -->
+    <div class="pane" id="pane-map">
+      <div class="hint">&#128073; Toque num t&oacute;pico para abrir &bull; toque de novo para fechar</div>
+      <div class="mm-root-label">
+        <div class="mm-root-pill">&#x1F9ED; Diferentes comunidades e sua rela&ccedil;&atilde;o com os lugares</div>
+        <div class="mm-root-tr">Geografia &mdash; Year 2 &middot; Unidade 2</div>
+      </div>
+      <div id="mapContent"></div>
+    </div>
+
+    <div class="foot">Tudo aqui saiu do material da Unidade 2. &#128218;</div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   ESTUDAR — Geografia 2tri · 3 modos sobre o MESMO conteúdo.
+   Conteúdo 100% derivado de trabalho/2tri_geografia/_roteiro.md.
+   Modo 1 (folha), 2 (palavras) e 3 (mapa) renderizam de arrays —
+   o mapa deixou de ser markup estático (refator: 1 dado, 3 vistas).
+   Matéria PT: texto principal em PT, campo extra = DICA (botão 💡).
+   ============================================================ */
+var $=function(id){return document.getElementById(id);};
+function esc(s){return String(s).replace(/<[^>]*>/g,'').replace(/"/g,'&quot;').replace(/'/g,"\\'");}
+
+/* ---- abas ---- */
+function showTab(k){
+  ['sheet','words','map'].forEach(function(t){
+    $('tab-'+t).classList.toggle('on',t===k);
+    $('pane-'+t).classList.toggle('on',t===k);
+  });
+  try{localStorage.setItem('geo2_estudo_tab',k);}catch(e){}
+}
+
+/* ================= CORES DAS REGIÕES (uma só paleta em todo o produto) ==== */
+var C_N='#34d399', C_NE='#fb923c', C_CO='#fbbf24', C_SE='#a78bfa', C_S='#38bdf8';
+
+/* ============ MODO 1: folha de estudo ============ */
+const CONCEITOS=[
+ ["\u{1F3D8}\u{FE0F}","Comunidade","o lugar onde vivemos, formado por diferentes pessoas, histórias e costumes.","é onde tudo começa"],
+ ["\u{1F91D}","Tradição","um costume que passa de geração em geração, de pais para filhos, e está há muito tempo na família.","a palavra mais cobrada"],
+ ["\u{1F464}","Identidade cultural","o conjunto de tradições e costumes que diz quem nós somos; é construída por muitas histórias que se entrelaçam ao longo do tempo.",""],
+ ["\u{2708}\u{FE0F}","Migração","quando pessoas mudam de um lugar para outro levando consigo hábitos, crenças e modos de viver.","não é passeio: é ir morar em outro lugar"],
+ ["\u{1F475}","Ancestrais","as pessoas da nossa família que viveram antes de nós: avós, bisavós…",""],
+ ["\u{1F1E7}\u{1F1F7}","Multicultural","feito de muitas culturas juntas — é assim o Brasil.",""]
+];
+const CONCEITOS_say="Comunidade é o lugar onde vivemos, formado por diferentes pessoas, histórias e costumes. Tradição é um costume que passa de geração em geração, de pais para filhos. Identidade cultural é o conjunto de costumes que diz quem nós somos. Migração é quando pessoas mudam de um lugar para outro levando seus hábitos e modos de viver. O Brasil é multicultural: muitas culturas em um só país.";
+
+const MIGRACAO=[
+ ["\u{1F30D}","As tradições não surgiram do nada","muitas vieram com pessoas que migraram de outros lugares.",""],
+ ["\u{1F9F3}","Quem migra leva a cultura junto","hábitos, crenças e modos de viver vão na bagagem.",""],
+ ["\u{1F3D8}\u{FE0F}","E transforma o lugar onde chega","essas histórias criam vínculos e transformam os espaços onde as pessoas vivem.",""],
+ ["\u{1F374}","Onde a cultura aparece","na culinária, nas vestimentas, na religião, nas festas e na arquitetura.","são os 5 do material — decore"]
+];
+const MIGRACAO_say="As tradições não surgiram do nada: muitas vieram com pessoas que migraram de outros lugares, trazendo hábitos, crenças e modos de viver. Essa cultura aparece na culinária, nas vestimentas, na religião, nas festas e na arquitetura.";
+
+const TRADICOES=[
+ ["\u{1F963}","Farinha de mandioca","produção artesanal, prática tradicional dos povos indígenas da Amazônia (Norte).",""],
+ ["\u{1F3AD}","Bonecos Gigantes de Olinda","desfile do carnaval de Olinda, em Pernambuco (Nordeste).",""],
+ ["\u{1FAB5}","Xilogravura","expressão artística do Nordeste, usada para ilustrar os folhetos da literatura de cordel.",""],
+ ["\u{1F941}","Jongo","manifestação cultural de matriz africana: dança, percussão e cantos em roda.",""],
+ ["\u{1F94B}","Jiu-jitsu brasileiro","arte marcial desenvolvida no Brasil a partir da adaptação do judô e do jiu-jitsu japonês.","é brasileiro, não japonês"],
+ ["\u{1F37A}","Oktoberfest de Blumenau","de origem alemã, incorporada às tradições de Santa Catarina (Sul): música, danças folclóricas, gastronomia típica e trajes tradicionais.",""],
+ ["\u{1F958}","Cuscuz paulista","do Sudeste: farinha de milho com peixe, ovos e legumes; influência africana e europeia.",""],
+ ["\u{1F33D}","Cuscuz nordestino","flocos de milho cozidos no vapor; influência indígena no uso do milho.","mesmo nome, prato diferente"],
+ ["\u{1F9C9}","Chimarrão","bebida tradicional da cultura gaúcha, do Rio Grande do Sul (Sul).",""],
+ ["\u{1F332}","Santo Daime","ritual religioso amazônico fundado na década de 1930, que mistura tradições indígenas e cristãs.",""]
+];
+const TRADICOES_say="A farinha de mandioca é dos povos indígenas da Amazônia. Os Bonecos Gigantes desfilam no carnaval de Olinda. A xilogravura ilustra o cordel do Nordeste. O jongo é de matriz africana. O jiu-jitsu brasileiro nasceu no Brasil, adaptado do judô japonês. A Oktoberfest de Blumenau veio da Alemanha. O cuscuz paulista é do Sudeste e o nordestino é do Nordeste. O chimarrão é do Sul e o Santo Daime é da Amazônia.";
+
+const DIVERSIDADE=[
+ ["\u{1F30E}","Lugares diferentes, modos de viver diferentes","pessoas em diferentes lugares têm relações distintas com o meio ambiente em que estão inseridas.",""],
+ ["\u{1F33F}","Isso aparece onde?","nos hábitos e nas manifestações culturais de cada lugar.",""],
+ ["\u{2764}\u{FE0F}","Para que serve entender isso?","para respeitar a diversidade.","é a resposta que a professora espera"],
+ ["\u{1F504}","Tradição pode mudar","uma brincadeira antiga pode ter se transformado ao longo dos anos; a avó pode ter aprendido um prato típico em outro lugar.",""]
+];
+const DIVERSIDADE_say="Pessoas em lugares diferentes têm relações distintas com o meio ambiente, e isso aparece nos hábitos e nas manifestações culturais. Entender isso nos ajuda a respeitar a diversidade.";
+
+const REGIOES=[
+ {k:'Norte',       co:C_N,  emo:"\u{1F333}", festas:"festival de Parintins (boi-bumbá)", comidas:"tacacá, açaí", comem:"Festa do Divino", danca:"carimbó", musica:"toada, carimbó, boi-bumbá"},
+ {k:'Nordeste',    co:C_NE, emo:"\u{2600}\u{FE0F}", festas:"carnaval de Salvador, festa de São João, bumba meu boi", comidas:"acarajé, baião de dois, vatapá", comem:"festa do Senhor do Bonfim, festa de Iemanjá", danca:"frevo, forró, baião, maracatu", musica:"forró, frevo, axé, maracatu, xote"},
+ {k:'Centro-Oeste',co:C_CO, emo:"\u{1F99C}", festas:"festa do Divino Espírito Santo, Festa de São Benedito", comidas:"arroz com pequi, pamonha", comem:"festa de São Sebastião, Romaria do Divino Pai Eterno", danca:"siriri, cururu", musica:"sertanejo, moda de viola"},
+ {k:'Sudeste',     co:C_SE, emo:"\u{1F3D9}\u{FE0F}", festas:"festa do peão de Barretos, carnaval do Rio, festa da uva de Jundiaí", comidas:"feijoada, pão de queijo, tutu de feijão, moqueca capixaba", comem:"festa de Nossa Senhora Aparecida, festa da congada", danca:"samba", musica:"samba, funk, pagode, MPB"},
+ {k:'Sul',         co:C_S,  emo:"\u{1F332}", festas:"Oktoberfest, festa nacional do pinhão, festa do vinho", comidas:"churrasco gaúcho, arroz carreteiro", comem:"Semana Farroupilha, festa da uva", danca:"xote gaúcho, pau de fita", musica:"sertanejo universitário"}
+];
+const REGIOES_say="No Norte: festival de Parintins, tacacá e açaí, carimbó. No Nordeste: carnaval de Salvador, São João, acarajé, frevo e forró. No Centro-Oeste: festa do Divino Espírito Santo, arroz com pequi, siriri e cururu. No Sudeste: peão de Barretos, feijoada, pão de queijo e samba. No Sul: Oktoberfest, churrasco gaúcho e pau de fita.";
+
+const DICAS=[
+ ["\u{1F402}","<b>Boi-bumbá</b> é o festival de <b>Parintins</b>, do <b>Norte</b>. <b>Bumba meu boi</b> é do <b>Nordeste</b>.","a pegadinha número 1 da prova"],
+ ["\u{1F35A}","<b>Cuscuz paulista</b> = Sudeste. <b>Cuscuz nordestino</b> = Nordeste. O nome já entrega a região.",""],
+ ["\u{1F37A}","A <b>Oktoberfest</b> tem <b>origem alemã</b>, mas a festa é do <b>Sul do Brasil</b> (Blumenau, SC).",""],
+ ["\u{1F94B}","O <b>jiu-jitsu brasileiro</b> é <b>brasileiro</b>: foi adaptado do judô e do jiu-jitsu japonês.",""],
+ ["\u{1FA95}","<b>Moda de viola</b> = Centro-Oeste. <b>Sertanejo universitário</b> = Sul. <b>Xote gaúcho</b> = Sul.","leia o nome inteiro"],
+ ["\u{1F91D}","Se perguntarem o que é <b>tradição</b>, responda: “passa de geração em geração, de pais para filhos”.",""],
+ ["\u{2708}\u{FE0F}","Se perguntarem o que é <b>migração</b>, responda: “mudar de um lugar para outro levando a cultura junto”.",""]
+];
+
+const FAQ=[
+ ["O que é uma tradição?","Um costume que passa de geração em geração, de pais para filhos."],
+ ["O que é migração?","Quando pessoas mudam de um lugar para outro levando hábitos, crenças e modos de viver."],
+ ["Em que a cultura de quem migrou aparece?","Na culinária, nas vestimentas, na religião, nas festas e na arquitetura."],
+ ["O festival de Parintins é de qual região?","Do Norte — é o boi-bumbá."],
+ ["E o bumba meu boi?","Do Nordeste."],
+ ["Acarajé, baião de dois e vatapá são de onde?","Do Nordeste."],
+ ["Tacacá e açaí são de onde?","Do Norte."],
+ ["Arroz com pequi e pamonha são de onde?","Do Centro-Oeste."],
+ ["Feijoada e pão de queijo são de onde?","Do Sudeste."],
+ ["Churrasco gaúcho e arroz carreteiro são de onde?","Do Sul."],
+ ["O carimbó é dança de qual região?","Do Norte."],
+ ["Siriri e cururu são de qual região?","Do Centro-Oeste."],
+ ["Por que devemos respeitar a diversidade?","Porque pessoas de lugares diferentes têm relações distintas com o meio ambiente e modos de viver diferentes."]
+];
+
+function row(r){return '<div class="line"><span class="lk">'+r[0]+'</span><span><b>'+r[1]+'</b> — '+r[2]+
+  (r[3]?'<span class="tr">\u{1F4A1} '+r[3]+'</span>':'')+'</span></div>';}
+function regRow(r){
+  return '<div class="col" style="flex:1 1 100%;border-color:'+r.co+';background:'+rgba(r.co,.09)+'">'
+   +'<h4 style="color:'+r.co+'">'+r.emo+' '+r.k+'</h4>'
+   +'<div class="ci"><b>Festas:</b> '+r.festas+'</div>'
+   +'<div class="ci"><b>Comidas:</b> '+r.comidas+'</div>'
+   +'<div class="ci"><b>Comemorações:</b> '+r.comem+'</div>'
+   +'<div class="ci"><b>Danças:</b> '+r.danca+'</div>'
+   +'<div class="ci"><b>Músicas:</b> '+r.musica+'</div>'
+   +'<button class="listen" style="border-color:'+r.co+';color:'+r.co+';margin-top:8px" onclick="say(\''
+   +esc(r.k+'. Festas: '+r.festas+'. Comidas: '+r.comidas+'. Comemorações: '+r.comem+'. Danças: '+r.danca+'. Músicas: '+r.musica)+'\')">&#128266; Ouvir o '+r.k+'</button>'
+   +'</div>';
+}
+function buildSheet(){
+  var mkBody=function(arr,sayTxt){return '<button class="listen" onclick="say(\''+esc(sayTxt)+'\')">&#128266; Ouvir</button>'+arr.map(row).join('');};
+  var regBody='<button class="listen" onclick="say(\''+esc(REGIOES_say)+'\')">&#128266; Ouvir</button>'
+    +'<div class="cols">'+REGIOES.map(regRow).join('')+'</div>';
+  var dicasBody=DICAS.map(function(t){return '<div class="tip"><span class="tk">'+t[0]+'</span><span>'+t[1]
+    +(t[2]?'<span class="tr">\u{1F4A1} '+t[2]+'</span>':'')+'</span></div>';}).join('');
+  var faqBody=FAQ.map(function(q){return '<div class="qa"><div class="qq">'+q[0]+'</div>'
+    +'<div class="aa"><span class="ar">'+q[1]+'</span></div></div>';}).join('');
+  var sections=[
+   {ic:"\u{1F4AC}",t:"As palavras da unidade",body:mkBody(CONCEITOS,CONCEITOS_say),open:true},
+   {ic:"\u{2708}\u{FE0F}",t:"De onde vieram as tradições",body:mkBody(MIGRACAO,MIGRACAO_say),open:true},
+   {ic:"\u{1F1E7}\u{1F1F7}",t:"O Brasil e suas 5 regiões",body:regBody,open:true},
+   {ic:"\u{1F5BC}\u{FE0F}",t:"Tradições e costumes do Brasil",body:mkBody(TRADICOES,TRADICOES_say),open:false},
+   {ic:"\u{1F30E}",t:"Diversidade e meio ambiente",body:mkBody(DIVERSIDADE,DIVERSIDADE_say),open:false},
+   {ic:"⭐",t:"Dicas para a prova",body:dicasBody,open:true},
+   {ic:"❓",t:"Perguntas que costumam cair",body:faqBody,open:false}
+  ];
+  $('sheetContent').innerHTML=sections.map(function(s,i){return '<div class="sec'+(s.open?' open':'')+'" id="sec'+i+'">'
+     +'<div class="sechead" onclick="toggleSec('+i+')">'
+     +'<span class="si">'+s.ic+'</span>'
+     +'<span class="st">'+s.t+'</span>'
+     +'<span class="chev">&#9660;</span></div>'
+     +'<div class="secbody">'+s.body+'</div></div>';}).join('');
+}
+function toggleSec(i){$('sec'+i).classList.toggle('open');}
+function allSec(open){document.querySelectorAll('#pane-sheet .sec').forEach(function(s){s.classList.toggle('open',open);});}
+
+/* ============ MODO 2: palavras-chave ============ */
+var BLOCKS=[
+ { key:'conceitos', emo:"\u{1F4AC}", en:"Palavras da unidade", axis:"o que cada uma quer dizer",
+   groups:[
+    {name:'Tradição', pt:'passa de pais para filhos', emo:"\u{1F91D}", co:C_NE, chips:[
+      ["de geração em geração",""],["de pais para filhos",""],["há muito tempo na família",""]]},
+    {name:'Migração', pt:'mudar de lugar', emo:"\u{2708}\u{FE0F}", co:C_S, chips:[
+      ["mudar de um lugar para outro",""],["levar hábitos e crenças",""],["influenciar o lugar onde chega",""]]},
+    {name:'Identidade cultural', pt:'quem nós somos', emo:"\u{1F464}", co:C_SE, chips:[
+      ["costumes que dizem quem somos",""],["histórias que se entrelaçam",""],["Brasil multicultural",""]]}
+   ]},
+ { key:'onde', emo:"\u{1F374}", en:"Onde a cultura aparece", axis:"os 5 do material",
+   groups:[
+    {name:'As 5 formas', pt:'decore esta lista', emo:"\u{1F3AD}", co:C_CO, chips:[
+      ["culinária",""],["vestimentas",""],["religião",""],["festas",""],["arquitetura",""]]}
+   ]},
+ { key:'norte', emo:"\u{1F333}", en:"Norte", axis:"floresta e rios",
+   groups:[
+    {name:'Comidas', pt:'', emo:"\u{1F372}", co:C_N, chips:[["tacacá",""],["açaí",""]]},
+    {name:'Festas', pt:'', emo:"\u{1F389}", co:C_N, chips:[["festival de Parintins (boi-bumbá)",""],["Festa do Divino",""]]},
+    {name:'Dança e música', pt:'', emo:"\u{1F3B5}", co:C_N, chips:[["carimbó",""],["toada",""],["boi-bumbá",""]]}
+   ]},
+ { key:'nordeste', emo:"\u{2600}\u{FE0F}", en:"Nordeste", axis:"sol e praia",
+   groups:[
+    {name:'Comidas', pt:'', emo:"\u{1F372}", co:C_NE, chips:[["acarajé",""],["baião de dois",""],["vatapá",""]]},
+    {name:'Festas', pt:'', emo:"\u{1F389}", co:C_NE, chips:[["carnaval de Salvador",""],["festa de São João",""],["bumba meu boi",""],["Senhor do Bonfim",""],["festa de Iemanjá",""]]},
+    {name:'Dança e música', pt:'', emo:"\u{1F3B5}", co:C_NE, chips:[["frevo",""],["forró",""],["baião",""],["maracatu",""],["axé",""],["xote",""]]}
+   ]},
+ { key:'centrooeste', emo:"\u{1F99C}", en:"Centro-Oeste", axis:"cerrado e pantanal",
+   groups:[
+    {name:'Comidas', pt:'', emo:"\u{1F372}", co:C_CO, chips:[["arroz com pequi",""],["pamonha",""]]},
+    {name:'Festas', pt:'', emo:"\u{1F389}", co:C_CO, chips:[["Divino Espírito Santo",""],["São Benedito",""],["São Sebastião",""],["Romaria do Divino Pai Eterno",""]]},
+    {name:'Dança e música', pt:'', emo:"\u{1F3B5}", co:C_CO, chips:[["siriri",""],["cururu",""],["moda de viola",""]]}
+   ]},
+ { key:'sudeste', emo:"\u{1F3D9}\u{FE0F}", en:"Sudeste", axis:"cidades grandes",
+   groups:[
+    {name:'Comidas', pt:'', emo:"\u{1F372}", co:C_SE, chips:[["feijoada",""],["pão de queijo",""],["tutu de feijão",""],["moqueca capixaba",""]]},
+    {name:'Festas', pt:'', emo:"\u{1F389}", co:C_SE, chips:[["peão de Barretos",""],["carnaval do Rio",""],["festa da uva de Jundiaí",""],["Nossa Senhora Aparecida",""],["congada",""]]},
+    {name:'Dança e música', pt:'', emo:"\u{1F3B5}", co:C_SE, chips:[["samba",""],["funk",""],["pagode",""],["MPB",""]]}
+   ]},
+ { key:'sul', emo:"\u{1F332}", en:"Sul", axis:"a região mais fria",
+   groups:[
+    {name:'Comidas', pt:'', emo:"\u{1F372}", co:C_S, chips:[["churrasco gaúcho",""],["arroz carreteiro",""]]},
+    {name:'Festas', pt:'', emo:"\u{1F389}", co:C_S, chips:[["Oktoberfest",""],["festa nacional do pinhão",""],["festa do vinho",""],["Semana Farroupilha",""]]},
+    {name:'Dança e música', pt:'', emo:"\u{1F3B5}", co:C_S, chips:[["xote gaúcho",""],["pau de fita",""],["sertanejo universitário",""]]}
+   ]},
+ { key:'pares', emo:"⚠\u{FE0F}", en:"Pares que confundem", axis:"leia o nome inteiro",
+   groups:[
+    {name:'Norte', pt:'', emo:"\u{1F333}", co:C_N, chips:[["boi-bumbá (Parintins)",""],["cuscuz? não — é o nordestino",""]]},
+    {name:'Nordeste', pt:'', emo:"\u{2600}\u{FE0F}", co:C_NE, chips:[["bumba meu boi",""],["cuscuz nordestino",""]]},
+    {name:'Sudeste', pt:'', emo:"\u{1F3D9}\u{FE0F}", co:C_SE, chips:[["cuscuz paulista",""],["festa da uva de Jundiaí",""]]},
+    {name:'Sul', pt:'', emo:"\u{1F332}", co:C_S, chips:[["xote gaúcho",""],["sertanejo universitário",""],["Oktoberfest (origem alemã)",""]]}
+   ]}
+];
+function textOn(hex){var h=hex.replace('#','');var r=parseInt(h.substr(0,2),16)/255,g=parseInt(h.substr(2,2),16)/255,b=parseInt(h.substr(4,2),16)/255;
+  var L=.2126*r+.7152*g+.0722*b;return L>0.6?'#0c2238':'#ffffff';}
+function rgba(hex,a){var h=hex.replace('#','');return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+','+a+')';}
+function buildWords(){
+  var html='';
+  BLOCKS.forEach(function(b){
+    html+='<div class="kblock" style="--bc:'+b.groups[0].co+'">'
+        +'<div class="kbhead"><span class="ke">'+b.emo+'</span>'
+        +'<span class="kt">'+b.en+'</span>'
+        +'<span class="kaxis">'+b.axis+'</span></div>';
+    b.groups.forEach(function(g){
+      var allWords=g.chips.map(function(c){return c[0];}).join(', ');
+      html+='<div class="kgroup">'
+          +'<button class="klabel" style="background:'+g.co+';color:'+textOn(g.co)+'" onclick="say(\''+esc(g.name+'. '+allWords)+'\')">'
+          +'<span>'+g.emo+'</span><span>'+g.name+'</span>'+(g.pt?'<span class="ltr">'+g.pt+'</span>':'')+'</button>'
+          +'<div class="kchips">';
+      g.chips.forEach(function(c){
+        html+='<button class="kchip" style="--cc:'+rgba(g.co,.55)+';--cb:'+rgba(g.co,.14)+'" onclick="say(\''+esc(c[0])+'\')">'
+            +'<span class="en">'+c[0]+'</span>'+(c[1]?'<span class="pt">'+c[1]+'</span>':'')+'</button>';
+      });
+      html+='</div></div>';
+    });
+    html+='</div>';
+  });
+  $('wordsContent').innerHTML=html;
+}
+
+/* ============ MODO 3: mapa mental (gerado dos MESMOS dados) ============ */
+var MAP=[
+ {c:'bc-orange', ic:"\u{1F4AC}", t:'As palavras da unidade', tr:'tradição · migração · identidade cultural', open:true,
+  leaves:[
+   {ic:"\u{1F3D8}\u{FE0F}", t:'Comunidade', d:['O lugar onde vivemos, formado por diferentes pessoas, histórias e costumes.']},
+   {ic:"\u{1F91D}", t:'Tradição', d:['Costume que passa de geração em geração, de pais para filhos.','Está há muito tempo na família e ajuda a construir a identidade.']},
+   {ic:"\u{1F464}", t:'Identidade cultural', d:['O conjunto de tradições e costumes que diz quem nós somos.','É construída por muitas histórias que se entrelaçam ao longo do tempo.']},
+   {ic:"\u{2708}\u{FE0F}", t:'Migração', d:['Mudar de um lugar para outro levando hábitos, crenças e modos de viver.','Quem migra influencia o lugar onde chega.']},
+   {ic:"\u{1F1E7}\u{1F1F7}", t:'Multicultural', d:['Feito de muitas culturas juntas — é assim o Brasil.']}
+  ]},
+ {c:'bc-blue', ic:"\u{1F374}", t:'Onde a cultura aparece', tr:'a lista fechada do material', open:true,
+  leaves:[
+   {ic:"\u{1F372}", t:'Culinária', d:['Comidas típicas de cada povo e de cada região.']},
+   {ic:"\u{1F457}", t:'Vestimentas', d:['Trajes tradicionais — como os da Oktoberfest de Blumenau.']},
+   {ic:"\u{1F64F}", t:'Religião', d:['Festas e rituais — como o Santo Daime, a festa de Iemanjá e o Senhor do Bonfim.']},
+   {ic:"\u{1F389}", t:'Festas', d:['Carnavais, festas juninas, romarias e festivais.']},
+   {ic:"\u{1F3DB}\u{FE0F}", t:'Arquitetura', d:['O jeito de construir as casas e os prédios de cada lugar.']}
+  ]},
+ {c:'bc-green', ic:"\u{1F1E7}\u{1F1F7}", t:'As 5 regiões do Brasil', tr:'festas · comidas · comemorações · danças · músicas', open:true,
+  leaves:[
+   {ic:"\u{1F333}", t:'Norte', d:['Festas: festival de Parintins (boi-bumbá).','Comidas: tacacá, açaí.','Comemorações: Festa do Divino.','Danças: carimbó.','Músicas: toada, carimbó, boi-bumbá.']},
+   {ic:"\u{2600}\u{FE0F}", t:'Nordeste', d:['Festas: carnaval de Salvador, festa de São João, bumba meu boi.','Comidas: acarajé, baião de dois, vatapá.','Comemorações: festa do Senhor do Bonfim, festa de Iemanjá.','Danças: frevo, forró, baião, maracatu.','Músicas: forró, frevo, axé, maracatu, xote.']},
+   {ic:"\u{1F99C}", t:'Centro-Oeste', d:['Festas: festa do Divino Espírito Santo, Festa de São Benedito.','Comidas: arroz com pequi, pamonha.','Comemorações: festa de São Sebastião, Romaria do Divino Pai Eterno.','Danças: siriri, cururu.','Músicas: sertanejo, moda de viola.']},
+   {ic:"\u{1F3D9}\u{FE0F}", t:'Sudeste', d:['Festas: festa do peão de Barretos, carnaval do Rio, festa da uva de Jundiaí.','Comidas: feijoada, pão de queijo, tutu de feijão, moqueca capixaba.','Comemorações: festa de Nossa Senhora Aparecida, festa da congada.','Danças: samba.','Músicas: samba, funk, pagode, MPB.']},
+   {ic:"\u{1F332}", t:'Sul', d:['Festas: Oktoberfest, festa nacional do pinhão, festa do vinho.','Comidas: churrasco gaúcho, arroz carreteiro.','Comemorações: Semana Farroupilha, festa da uva.','Danças: xote gaúcho, pau de fita.','Músicas: sertanejo universitário.']}
+  ]},
+ {c:'bc-pink', ic:"\u{1F5BC}\u{FE0F}", t:'Tradições e costumes do Brasil', tr:'as 10 fotos da Aula 4', open:false,
+  leaves:[
+   {ic:"\u{1F963}", t:'Farinha de mandioca', d:['Produção artesanal, prática tradicional dos povos indígenas da Amazônia.']},
+   {ic:"\u{1F3AD}", t:'Bonecos Gigantes de Olinda', d:['Desfile do carnaval de Olinda, em Pernambuco.']},
+   {ic:"\u{1FAB5}", t:'Xilogravura', d:['Expressão artística do Nordeste, usada na ilustração de folhetos da literatura de cordel.']},
+   {ic:"\u{1F941}", t:'Jongo', d:['Manifestação de matriz africana: dança, percussão e cantos em roda.']},
+   {ic:"\u{1F94B}", t:'Jiu-jitsu brasileiro', d:['Arte marcial desenvolvida no Brasil a partir da adaptação do judô e do jiu-jitsu japonês.']},
+   {ic:"\u{1F37A}", t:'Oktoberfest de Blumenau', d:['De origem alemã, incorporada às tradições de Santa Catarina.','Reúne música, danças folclóricas, gastronomia típica e trajes tradicionais.']},
+   {ic:"\u{1F958}", t:'Cuscuz paulista', d:['Prato típico do Sudeste, com farinha de milho, peixe, ovos e legumes.','Tem influência africana e europeia.']},
+   {ic:"\u{1F33D}", t:'Cuscuz nordestino', d:['Flocos de milho cozidos no vapor.','Influência indígena na utilização do milho.']},
+   {ic:"\u{1F9C9}", t:'Chimarrão', d:['Bebida tradicional da cultura gaúcha, do Rio Grande do Sul.']},
+   {ic:"\u{1F332}", t:'Santo Daime', d:['Ritual religioso amazônico fundado na década de 1930.','Mistura tradições indígenas e cristãs.']}
+  ]},
+ {c:'bc-purple', ic:"\u{1F30E}", t:'Diversidade e meio ambiente', tr:'respeitar o diferente', open:false,
+  leaves:[
+   {ic:"\u{1F30D}", t:'Lugares diferentes', d:['Pessoas em diferentes lugares têm relações distintas com o meio ambiente em que estão inseridas.']},
+   {ic:"\u{1F33F}", t:'Onde isso aparece', d:['Nos hábitos e nas manifestações culturais de cada lugar.']},
+   {ic:"\u{2764}\u{FE0F}", t:'Para que serve', d:['Entender isso nos ajuda a respeitar a diversidade.']}
+  ]},
+ {c:'bc-orange', ic:"⚠\u{FE0F}", t:'Cuidado com estes pares!', tr:'as pegadinhas mais prováveis', open:true,
+  leaves:[
+   {ic:"\u{1F402}", t:'boi-bumbá × bumba meu boi', d:['Boi-bumbá = festival de Parintins, NORTE.','Bumba meu boi = NORDESTE.']},
+   {ic:"\u{1F35A}", t:'cuscuz paulista × cuscuz nordestino', d:['Paulista = SUDESTE (farinha de milho com peixe, ovos e legumes).','Nordestino = NORDESTE (flocos de milho no vapor).']},
+   {ic:"\u{1FA95}", t:'sertanejo × sertanejo universitário', d:['Sertanejo e moda de viola = CENTRO-OESTE.','Sertanejo universitário = SUL.']},
+   {ic:"\u{1F396}\u{FE0F}", t:'xote × xote gaúcho', d:['Xote (música) = NORDESTE.','Xote gaúcho (dança) = SUL.']},
+   {ic:"\u{1F37A}", t:'Oktoberfest', d:['A ORIGEM é alemã, mas a FESTA é do Sul do Brasil, em Blumenau (SC).']}
+  ]}
+];
+function buildMap(){
+  $('mapContent').innerHTML=MAP.map(function(b){
+    return '<div class="mm-branch '+b.c+(b.open?' open':'')+'" onclick="toggleBranch(this)">'
+     +'<div class="mm-branch-hd"><div class="mm-branch-icon">'+b.ic+'</div>'
+     +'<div class="mm-branch-text"><div class="mm-branch-en">'+b.t+'</div>'
+     +'<div class="mm-branch-pt">'+b.tr+'</div></div>'
+     +'<div class="mm-branch-arrow">&#9654;</div></div>'
+     +'<div class="mm-branch-body"><div class="mm-branch-inner">'
+     +b.leaves.map(function(l,i){
+        return '<div class="mm-leaf '+b.c+(i===0?' open':'')+'" onclick="toggleLeaf(event,this)">'
+         +'<div class="mm-leaf-hd"><div class="mm-leaf-icon">'+l.ic+'</div>'
+         +'<div class="mm-leaf-text"><div class="mm-leaf-en">'+l.t+'</div></div>'
+         +'<div class="mm-leaf-arrow">&#9654;</div></div>'
+         +'<div class="mm-leaf-body">'
+         +l.d.map(function(d,k){return '<div class="mm-detail'+(k===l.d.length-1?' mm-detail-last':'')+'">'
+             +'<span class="mm-detail-en">'+d+'</span></div>';}).join('')
+         +'</div></div>';
+      }).join('')
+     +'</div></div></div>';
+  }).join('');
+}
+function toggleBranch(el){ el.classList.toggle('open'); }
+function toggleLeaf(e,el){ e.stopPropagation(); el.classList.toggle('open'); }
+
+/* ---- init ---- */
+buildSheet();
+buildWords();
+buildMap();
+try{var t0=localStorage.getItem('geo2_estudo_tab');if(t0==='words'||t0==='map')showTab(t0);}catch(e){}
+</script>
+<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.85};</script>
+<script src="serafina-core.js"></script>
+<script src="cie2_theme.js"></script>
+</body>
+</html>

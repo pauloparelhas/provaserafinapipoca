@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Simulado — Geografia · Comunidades e lugares</title>
+<link rel="stylesheet" href="serafina-core.css">
+<style>
+:root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#34d399;--accent2:#fbbf24;--tr:#fcd34d;--ok:#34d399;--no:#f87171;--mid:#fbbf24;--rad:22px}
+body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.92rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.05rem;font-weight:800;cursor:pointer;padding:0 8px}
+.iconbtn:active{transform:scale(.9)}
+.dicabtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.4;filter:grayscale(1)}
+.dicabtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .dicabtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
+.bar{height:9px;background:var(--line)}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .35s}
+.stage{flex:1;display:flex;align-items:center;justify-content:center;padding:16px 16px 92px}
+.card{position:relative;width:100%;max-width:540px;background:var(--card);border-radius:var(--rad);box-shadow:0 14px 40px rgba(0,0,0,.35);padding:22px 20px 24px;text-align:center;border:1px solid var(--line)}
+.qhead{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;padding:0 44px}
+.qnum{font-size:.78rem;font-weight:900;color:var(--soft);letter-spacing:1px;text-transform:uppercase}
+.badge{font-size:.66rem;font-weight:900;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.badge.mc{background:rgba(56,189,248,.2);color:#7dd3fc}
+.badge.vf{background:rgba(251,191,36,.18);color:#fbbf24}
+.badge.open{background:rgba(244,114,182,.2);color:#f9a8d4}
+.badge.fill{background:rgba(52,211,153,.18);color:#6ee7b7}
+.badge.match{background:rgba(167,139,250,.2);color:#c4b5fd}
+.badge.order{background:rgba(251,146,60,.2);color:#fdba74}
+/* tradução PT (bandeira BR) */
+.tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:calc(.9rem*var(--fs));line-height:1.3}
+body.show-tr .tr{display:block}
+.qtr{margin:2px 0 4px}
+.qfig{font-size:calc(3.1rem*var(--fs));margin:10px 0 4px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
+.q{font-size:calc(1.22rem*var(--fs));font-weight:900;line-height:1.35;margin:8px 0 2px}
+.speak{margin:8px auto 16px;display:inline-flex;align-items:center;gap:7px;border:2px solid var(--accent);background:transparent;color:var(--accent);
+  font-weight:800;font-size:.85rem;border-radius:20px;padding:6px 14px;cursor:pointer;font-family:inherit}
+.speak:active{transform:scale(.95)}
+/* botão refazer a questão (cliques acidentais) */
+.redoq{position:absolute;top:10px;right:10px;width:44px;height:44px;border:2px solid var(--line);border-radius:50%;background:var(--card);color:var(--soft);font-size:1.2rem;font-weight:900;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.redoq:active{transform:scale(.88) rotate(-90deg)}
+.redoq .rl{position:absolute;bottom:-13px;font-size:.5rem;font-weight:900;letter-spacing:.3px;color:var(--soft);text-transform:uppercase}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{padding:13px 16px;border:2px solid var(--line);border-radius:16px;background:transparent;color:var(--ink);font-size:calc(1.05rem*var(--fs));font-weight:800;cursor:pointer;font-family:inherit;transition:.15s;display:flex;flex-direction:column;gap:1px}
+.opt:active{transform:scale(.97)}
+.opt.ok{background:var(--ok);color:#06251a;border-color:var(--ok)}.opt.ok .otr{color:#06251a}
+.opt.no{background:var(--no);color:#3a0a0a;border-color:var(--no)}.opt.no .otr{color:#3a0a0a}
+.opt:disabled{cursor:default;opacity:1}
+.opt .otr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.78rem}
+body.show-tr .opt .otr{display:block}
+.vfwrap{display:flex;gap:12px;justify-content:center}
+.vfbtn{flex:1;max-width:200px;padding:18px 10px;border:2px solid var(--line);border-radius:18px;background:transparent;color:var(--ink);
+  font-size:calc(1.15rem*var(--fs));font-weight:900;cursor:pointer;font-family:inherit;transition:.15s}
+.vfbtn .big{display:block;font-size:1.9rem;margin-bottom:2px}
+.vfbtn .vtr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.72rem}
+body.show-tr .vfbtn .vtr{display:block}
+.vfbtn:active{transform:scale(.96)}
+.vfbtn.ok{background:var(--ok);color:#06251a;border-color:var(--ok)}
+.vfbtn.no{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+/* FILL */
+.fillsent{font-size:calc(1.2rem*var(--fs));font-weight:900;line-height:1.6;margin:6px 4px 2px}
+.blank{display:inline-block;min-width:78px;border-bottom:3px solid var(--accent);margin:0 4px;padding:0 6px;color:var(--accent)}
+.blank.ok{color:#34d399}.blank.no{color:var(--no);border-color:var(--no)}
+.wbank{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:14px 0 4px}
+.wchip{padding:11px 16px;border:2px solid var(--line);border-radius:14px;background:transparent;color:var(--ink);font-size:calc(1.02rem*var(--fs));font-weight:800;cursor:pointer;font-family:inherit;transition:.15s;display:flex;flex-direction:column;gap:1px}
+.wchip:active{transform:scale(.95)}
+.wchip.ok{background:var(--ok);color:#06251a;border-color:var(--ok)}
+.wchip.no{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+.wchip .otr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.72rem}
+body.show-tr .wchip .otr{display:block}
+/* MATCH */
+.mboard{display:flex;flex-direction:column;gap:8px;margin:4px 0}
+.mitem{display:flex;align-items:center;gap:8px;min-height:48px;padding:9px 11px;border:2px solid var(--line);border-radius:14px;background:transparent;color:var(--ink);font-weight:800;font-size:calc(.96rem*var(--fs));cursor:pointer;font-family:inherit;text-align:left;transition:.15s}
+.mitem .mlbl{flex:1;display:flex;flex-direction:column;gap:1px}
+.mitem .mtr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem}
+body.show-tr .mitem .mtr{display:block}
+.mitem.active{border-color:var(--accent2);box-shadow:0 0 0 2px rgba(251,146,60,.4) inset}
+.mslot{min-width:74px;text-align:center;font-size:.74rem;font-weight:900;padding:5px 7px;border-radius:10px;background:var(--line);color:var(--soft)}
+.mslot.set{background:rgba(56,189,248,.25);color:#bae6fd}
+.mitem.ok{background:rgba(52,211,153,.16);border-color:var(--ok)}.mitem.ok .mslot{background:var(--ok);color:#06251a}
+.mitem.no{background:rgba(248,113,113,.14);border-color:var(--no)}.mitem.no .mslot{background:var(--no);color:#3a0a0a}
+.mcats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 2px}
+.mcat{min-height:44px;padding:9px 13px;border:2px solid var(--line);border-radius:13px;background:transparent;color:var(--ink);font-weight:900;font-size:calc(.9rem*var(--fs));cursor:pointer;font-family:inherit;transition:.15s;display:flex;flex-direction:column;gap:1px}
+.mcat:active{transform:scale(.95)}
+.mcat .otr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.66rem}
+body.show-tr .mcat .otr{display:block}
+.mintro{font-size:.82rem;font-weight:800;color:var(--soft);margin:2px 0 10px}
+/* ORDER */
+.oseq{display:flex;flex-direction:column;gap:8px;margin:6px 0 4px;min-height:40px}
+.oslot{display:flex;align-items:center;gap:9px;min-height:46px;padding:8px 11px;border:2px dashed var(--line);border-radius:14px;color:var(--soft);font-weight:800;font-size:calc(.96rem*var(--fs));font-family:inherit;background:transparent;cursor:pointer;text-align:left;width:100%}
+.oslot.filled{border-style:solid;color:var(--ink);background:rgba(56,189,248,.1)}
+.oslot.ok{border-color:var(--ok);background:rgba(52,211,153,.14)}
+.oslot.no{border-color:var(--no);background:rgba(248,113,113,.12)}
+.onum{min-width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem;background:var(--accent2);color:#3a1a00}
+.opool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 2px}
+.opiece{padding:11px 14px;border:2px solid var(--accent);border-radius:13px;background:transparent;color:var(--ink);font-weight:800;font-size:calc(.98rem*var(--fs));cursor:pointer;font-family:inherit;transition:.15s}
+.opiece:active{transform:scale(.95)}
+.opiece.used{opacity:.25;pointer-events:none}
+.ocorrect{font-size:.85rem;font-weight:800;color:var(--soft);margin-top:8px;line-height:1.4}
+/* OPEN */
+.writeline{height:46px;border-bottom:3px dashed var(--line);margin:10px 4px 14px;display:flex;align-items:flex-end;justify-content:center;color:var(--soft);font-weight:700;font-size:.82rem;padding-bottom:4px}
+.hint{font-size:.9rem;font-weight:800;color:var(--soft);margin-bottom:10px}
+.reveal{display:none;margin:8px 0 4px;padding:13px 14px;border-radius:14px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.4);
+  font-weight:800;font-size:calc(1.02rem*var(--fs));line-height:1.4;color:var(--ink)}
+.reveal.show{display:block}
+.reveal .lab{display:block;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.selfwrap{display:none;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.selfwrap.show{display:flex}
+.selfbtn{flex:1;min-width:96px;padding:12px 8px;border:2px solid var(--line);border-radius:14px;background:transparent;color:var(--ink);font-weight:900;font-size:.86rem;cursor:pointer;font-family:inherit;transition:.15s}
+.selfbtn .big{display:block;font-size:1.5rem;margin-bottom:2px}
+.selfbtn .str{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.66rem}
+body.show-tr .selfbtn .str{display:block}
+.selfbtn:active{transform:scale(.95)}
+.selfbtn.acertei.sel{background:var(--ok);color:#06251a;border-color:var(--ok)}
+.selfbtn.parcial.sel{background:var(--mid);color:#3a2c00;border-color:var(--mid)}
+.selfbtn.errei.sel{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+.fb{margin-top:14px;font-size:calc(1.02rem*var(--fs));font-weight:900;min-height:1.3em}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}.fb.mid{color:var(--mid)}
+.next{margin-top:16px;width:100%;height:54px;border:none;border-radius:16px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#08263a;font-size:1.08rem;font-weight:900;cursor:pointer;display:none;font-family:inherit}
+.next.show{display:block}
+.next:active{transform:scale(.97)}
+.fim .big{font-size:4rem}
+.fim .score{font-size:1.7rem;font-weight:900;color:var(--accent);margin:8px 0 2px}
+.fim .sub{font-weight:800;color:var(--soft);font-size:.95rem;margin-bottom:6px}
+.intro p{font-size:calc(1rem*var(--fs));font-weight:700;line-height:1.5;color:var(--soft);margin:10px 0}
+.themewrap{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:8px 0 4px}
+.themechip{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:96px;flex:1 1 96px;max-width:150px;padding:11px 10px;border:2px solid var(--line);border-radius:15px;background:transparent;color:var(--soft);font-weight:800;font-size:.8rem;cursor:pointer;font-family:inherit;transition:.15s;opacity:.5}
+.themechip .tem{font-size:1.5rem}
+.themechip .ttr{font-size:.62rem;font-weight:700}
+.themechip.on{opacity:1;color:var(--ink);border-color:var(--accent);background:linear-gradient(135deg,rgba(56,189,248,.22),rgba(251,146,60,.15))}
+.themechip:active{transform:scale(.95)}
+.themehint{color:var(--no)!important;font-weight:900;font-size:.85rem;min-height:1em;margin:4px 0!important}
+.startnote{font-size:.8rem;margin-top:8px}
+.sizewrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0 4px}
+.sizebtn{min-width:64px;padding:16px 10px;border:2px solid var(--accent2);border-radius:16px;background:transparent;color:var(--ink);font-size:1.3rem;font-weight:900;cursor:pointer;font-family:inherit;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:2px}
+.sizebtn .sl{font-size:.6rem;font-weight:800;color:var(--soft);text-transform:uppercase;letter-spacing:.5px}
+.sizebtn:active{transform:scale(.95)}
+.sizebtn.sel{background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(251,146,60,.18));border-color:var(--accent)}
+.endbtns{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.endbtn{width:100%;padding:14px 16px;border:2px solid var(--line);border-radius:15px;background:transparent;color:var(--ink);font-size:1rem;font-weight:900;cursor:pointer;font-family:inherit;transition:.15s}
+.endbtn.redo{border-color:var(--accent);background:linear-gradient(90deg,rgba(56,189,248,.22),rgba(251,146,60,.15))}
+.endbtn .etr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem}
+body.show-tr .endbtn .etr{display:block}
+.endbtn:active{transform:scale(.97)}
+/* --- question nav arrows (always visible during quiz) --- */
+.qnav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:none;justify-content:center;gap:14px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--card) 55%,rgba(0,0,0,0))}
+.qnav.show{display:flex}
+.qnav-btn{flex:1;max-width:160px;height:50px;border:1px solid var(--line);border-radius:15px;background:var(--card);color:var(--ink);font-size:1.5rem;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.qnav-btn .ql{font-size:.78rem;font-weight:900;letter-spacing:.5px}
+.qnav-btn:disabled{opacity:.32;cursor:default;box-shadow:none}
+.qnav-btn:active:not(:disabled){transform:scale(.96)}
+.qnav-btn.jump{max-width:130px;font-size:1.15rem;border-color:var(--accent2);color:var(--accent2);background:rgba(251,191,36,.12)}
+.qnav-btn.jump:disabled{border-color:var(--line);color:var(--ink)}
+.qnav-btn.results{max-width:160px;font-size:1.3rem;border-color:var(--accent);color:#08263a;background:var(--accent)}
+/* --- lock / fullscreen --- */
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Quiz &mdash; States of Matter</span>
+    <button class="iconbtn dicabtn" id="dica" title="Mostrar dica" onclick="toggleTr()">&#128161;<span class="ft">Dica</span></button>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="bar"><span id="bar"></span></div>
+  <div class="stage"><div class="card" id="card"></div></div>
+</div>
+<div class="qnav" id="qnav">
+  <button class="qnav-btn" id="navPrev" onclick="prevQ()" title="Voltar">&#8249;<span class="ql">Voltar</span></button>
+  <button class="qnav-btn jump" id="navJump" onclick="jumpUnanswered()" title="Próxima sem resposta">&#9193;<span class="ql">Sem resposta</span></button>
+  <button class="qnav-btn" id="navNext" onclick="nextQ()" title="Avançar">&#8250;<span class="ql">Avançar</span></button>
+</div>
+
+<script>
+/* ============================================================
+   BANCO DE QUESTOES — Geografia Y2 · Unidade 2
+   "Diferentes comunidades e sua relacao com os lugares"
+
+   Tudo ancorado em trabalho/2tri_geografia/_roteiro.md.
+   Temas (th): conceitos | tradicoes | comidas | festas | ritmos | diversidade
+
+   REGRA DOS DISTRATORES: toda opcao errada e um termo que EXISTE no
+   material (outra regiao, outra festa, outra comida) e e tematicamente
+   vizinha — mas INEQUIVOCAMENTE errada. Nada de "segunda verdade".
+
+   AMBIGUIDADES BLOQUEADAS (roteiro §7): "Festa do Divino", "festa da uva"
+   e "sertanejo" sozinhos NUNCA sao gabarito de resposta unica; so entram
+   com o nome completo (Divino Espirito Santo / da uva de Jundiai /
+   sertanejo universitario / moda de viola).
+
+   Materia PT: o campo `en` e o texto principal; `pt` e a DICA (botao 💡).
+   ============================================================ */
+
+/* ---- MULTIPLA ESCOLHA ---- opts:[texto, correta?1:0, dica] ---- */
+const MC = [
+ /* ===== CONCEITOS ===== */
+ {th:'conceitos',fig:"\u{1F91D}",en:"O que é uma <b>tradição</b>?",pt:"a palavra mais importante da unidade",opts:[["Um costume que passa de geração em geração",1,"de pais para filhos"],["Uma novidade que apareceu esta semana",0,""],["Uma viagem de férias em família",0,""]]},
+ {th:'conceitos',fig:"\u{2708}\u{FE0F}",en:"O que é <b>migração</b>?",pt:"",opts:[["Quando pessoas mudam de um lugar para outro",1,"levando hábitos, crenças e modos de viver"],["Quando a família passeia no fim de semana",0,""],["Quando alguém troca de sala na escola",0,""]]},
+ {th:'conceitos',fig:"\u{1F464}",en:"O que é <b>identidade cultural</b>?",pt:"",opts:[["O conjunto de costumes que diz quem nós somos",1,""],["O documento com foto e número",0,""],["O nome da cidade onde a escola fica",0,""]]},
+ {th:'conceitos',fig:"\u{1F3D8}\u{FE0F}",en:"A <b>comunidade</b> onde vivemos é formada por…",pt:"",opts:[["Diferentes pessoas, histórias e costumes",1,""],["Pessoas todas iguais, com os mesmos costumes",0,""],["Somente pela nossa própria família",0,""]]},
+ {th:'conceitos',fig:"\u{1F1E7}\u{1F1F7}",en:"Dizer que o Brasil é <b>multicultural</b> quer dizer que ele é…",pt:"",opts:[["Feito de muitas culturas juntas",1,""],["Feito de uma cultura só",0,""],["Um país sem tradições",0,""]]},
+ {th:'conceitos',fig:"\u{1F475}",en:"Nossos <b>ancestrais</b> são…",pt:"",opts:[["As pessoas da família que viveram antes de nós",1,"avós, bisavós…"],["Os amigos da nossa turma",0,""],["Os vizinhos que moram na mesma rua",0,""]]},
+ {th:'conceitos',fig:"\u{1F9F3}",en:"Quem migra leva consigo…",pt:"",opts:[["Hábitos, crenças e modos de viver",1,""],["Apenas as roupas dentro da mala",0,""],["Nada: deixa toda a cultura para trás",0,""]]},
+ {th:'conceitos',fig:"\u{1F553}",en:"Segundo o material, a identidade cultural é construída por…",pt:"",opts:[["Muitas histórias que se entrelaçam ao longo do tempo",1,""],["Uma única história, contada uma vez só",0,""],["Uma lei que o governo escreveu",0,""]]},
+ {th:'conceitos',fig:"\u{1F9F5}",en:"As tradições de uma família <b>surgiram do nada</b>?",pt:"",opts:[["Não: muitas vieram com pessoas que migraram de outros lugares",1,""],["Sim: apareceram sozinhas, sem vir de lugar nenhum",0,""],["Sim: foram inventadas pela escola",0,""]]},
+ {th:'conceitos',fig:"\u{1F5E3}\u{FE0F}",en:"Na roda de conversa, o que respondemos a “de onde vieram minhas tradições?”",pt:"",opts:[["Que foram passadas de geração em geração, de pais para filhos",1,""],["Que foram compradas numa loja",0,""],["Que vieram da televisão",0,""]]},
+
+ /* ===== TRADICOES E COSTUMES (fotos da Aula 4) ===== */
+ {th:'tradicoes',fig:"\u{1F963}",en:"A produção artesanal de <b>farinha de mandioca</b> é prática tradicional de quem?",pt:"",opts:[["Dos povos indígenas da Amazônia",1,""],["Dos imigrantes alemães de Blumenau",0,""],["Dos gaúchos do Rio Grande do Sul",0,""]]},
+ {th:'tradicoes',fig:"\u{1F3AD}",en:"Os <b>Bonecos Gigantes</b> desfilam no carnaval de qual cidade?",pt:"",opts:[["Olinda, em Pernambuco",1,""],["Blumenau, em Santa Catarina",0,""],["Parintins, no Amazonas",0,""]]},
+ {th:'tradicoes',fig:"\u{1FAB5}",en:"A <b>xilogravura</b> é usada para ilustrar…",pt:"",opts:[["Os folhetos da literatura de cordel",1,"arte tradicional do Nordeste"],["As camisas dos times de futebol",0,""],["Os livros de matemática da escola",0,""]]},
+ {th:'tradicoes',fig:"\u{1F941}",en:"O <b>jongo</b> é uma manifestação cultural de qual matriz?",pt:"",opts:[["De matriz africana",1,"dança, percussão e cantos em roda"],["De matriz alemã",0,""],["De matriz japonesa",0,""]]},
+ {th:'tradicoes',fig:"\u{1F941}",en:"Como é o <b>jongo</b>?",pt:"",opts:[["Dança, percussão e cantos em roda",1,""],["Uma comida feita com farinha de milho",0,""],["Uma festa de rua com bonecos gigantes",0,""]]},
+ {th:'tradicoes',fig:"\u{1F94B}",en:"O <b>jiu-jitsu brasileiro</b> foi desenvolvido em qual país?",pt:"",opts:[["No Brasil",1,"adaptado do judô e do jiu-jitsu japonês"],["No Japão",0,""],["Na Alemanha",0,""]]},
+ {th:'tradicoes',fig:"\u{1F37A}",en:"A <b>Oktoberfest de Blumenau</b> tem origem em qual país?",pt:"",opts:[["Alemanha",1,"e hoje é tradição de Santa Catarina"],["Portugal",0,""],["Japão",0,""]]},
+ {th:'tradicoes',fig:"\u{1F37A}",en:"A Oktoberfest de Blumenau reúne música, danças folclóricas, gastronomia típica e…",pt:"",opts:[["Trajes tradicionais",1,""],["Bonecos gigantes",0,""],["Cantos em roda",0,""]]},
+ {th:'tradicoes',fig:"\u{1F35A}",en:"O <b>cuscuz nordestino</b> é feito com…",pt:"",opts:[["Flocos de milho cozidos no vapor",1,"influência indígena no uso do milho"],["Farinha de trigo assada no forno",0,""],["Arroz cozido com carne",0,""]]},
+ {th:'tradicoes',fig:"\u{1F958}",en:"O <b>cuscuz paulista</b> leva farinha de milho e ainda…",pt:"",opts:[["Peixe, ovos e legumes",1,"com influência africana e europeia"],["Só açúcar e canela",0,""],["Pinhão e churrasco",0,""]]},
+ {th:'tradicoes',fig:"\u{1F9C9}",en:"O <b>chimarrão</b> é bebida tradicional de qual cultura?",pt:"",opts:[["Da cultura gaúcha, do Rio Grande do Sul",1,""],["Da cultura indígena da Amazônia",0,""],["Da cultura alemã de Santa Catarina",0,""]]},
+ {th:'tradicoes',fig:"\u{1F332}",en:"O <b>Santo Daime</b> é um ritual religioso amazônico que mistura tradições…",pt:"",opts:[["Indígenas e cristãs",1,"fundado na década de 1930"],["Alemãs e japonesas",0,""],["Gaúchas e paulistas",0,""]]},
+
+ /* ===== COMIDAS POR REGIAO ===== */
+ {th:'comidas',fig:"\u{1FAD0}",en:"<b>Tacacá</b> e <b>açaí</b> são comidas típicas de qual região?",pt:"",opts:[["Norte",1,"a região da floresta amazônica"],["Sul",0,""],["Centro-Oeste",0,""]]},
+ {th:'comidas',fig:"\u{1F958}",en:"<b>Acarajé</b>, <b>baião de dois</b> e <b>vatapá</b> são de qual região?",pt:"",opts:[["Nordeste",1,""],["Sudeste",0,""],["Norte",0,""]]},
+ {th:'comidas',fig:"\u{1F33D}",en:"<b>Arroz com pequi</b> e <b>pamonha</b> são comidas típicas de qual região?",pt:"",opts:[["Centro-Oeste",1,""],["Nordeste",0,""],["Sul",0,""]]},
+ {th:'comidas',fig:"\u{1F35B}",en:"<b>Feijoada</b>, <b>pão de queijo</b> e <b>tutu de feijão</b> são de qual região?",pt:"",opts:[["Sudeste",1,""],["Sul",0,""],["Nordeste",0,""]]},
+ {th:'comidas',fig:"\u{1F969}",en:"<b>Churrasco gaúcho</b> e <b>arroz carreteiro</b> são de qual região?",pt:"",opts:[["Sul",1,""],["Centro-Oeste",0,""],["Sudeste",0,""]]},
+ {th:'comidas',fig:"\u{1F41F}",en:"A <b>moqueca capixaba</b> é comida típica de qual região?",pt:"capixaba é quem nasce no Espírito Santo",opts:[["Sudeste",1,""],["Nordeste",0,""],["Norte",0,""]]},
+ {th:'comidas',fig:"\u{1F35A}",en:"O <b>cuscuz paulista</b> é de qual região?",pt:"o nome já diz o estado",opts:[["Sudeste",1,""],["Nordeste",0,""],["Centro-Oeste",0,""]]},
+ {th:'comidas',fig:"\u{1F33D}",en:"O <b>cuscuz nordestino</b> é de qual região?",pt:"",opts:[["Nordeste",1,""],["Sudeste",0,""],["Sul",0,""]]},
+ {th:'comidas',fig:"\u{1F347}",en:"Qual destas comidas é típica do <b>Norte</b>?",pt:"",opts:[["Tacacá",1,""],["Pão de queijo",0,""],["Arroz carreteiro",0,""]]},
+ {th:'comidas',fig:"\u{1F372}",en:"Qual destas comidas é típica do <b>Nordeste</b>?",pt:"",opts:[["Vatapá",1,""],["Pamonha",0,""],["Feijoada",0,""]]},
+
+ /* ===== FESTAS E COMEMORACOES ===== */
+ {th:'festas',fig:"\u{1F402}",en:"O <b>festival de Parintins (boi-bumbá)</b> acontece em qual região?",pt:"Parintins fica no Amazonas",opts:[["Norte",1,""],["Nordeste",0,""],["Centro-Oeste",0,""]]},
+ {th:'festas',fig:"\u{1F42E}",en:"O <b>bumba meu boi</b> é festa cultural de qual região?",pt:"não confunda com o boi-bumbá de Parintins",opts:[["Nordeste",1,""],["Norte",0,""],["Sudeste",0,""]]},
+ {th:'festas',fig:"\u{1F3AD}",en:"O <b>carnaval de Salvador</b> é de qual região?",pt:"",opts:[["Nordeste",1,""],["Sudeste",0,""],["Sul",0,""]]},
+ {th:'festas',fig:"\u{1F525}",en:"A <b>festa de São João</b> é festa cultural de qual região?",pt:"",opts:[["Nordeste",1,""],["Centro-Oeste",0,""],["Norte",0,""]]},
+ {th:'festas',fig:"\u{1F30A}",en:"A <b>festa de Iemanjá</b> é comemoração cultural de qual região?",pt:"",opts:[["Nordeste",1,""],["Sudeste",0,""],["Sul",0,""]]},
+ {th:'festas',fig:"\u{1F54A}\u{FE0F}",en:"A <b>festa do Divino Espírito Santo</b> e a <b>Festa de São Benedito</b> são de qual região?",pt:"o nome completo é a pista",opts:[["Centro-Oeste",1,""],["Norte",0,""],["Sudeste",0,""]]},
+ {th:'festas',fig:"\u{1F6B6}",en:"A <b>Romaria do Divino Pai Eterno</b> é comemoração de qual região?",pt:"",opts:[["Centro-Oeste",1,""],["Nordeste",0,""],["Sul",0,""]]},
+ {th:'festas',fig:"\u{1F920}",en:"A <b>festa do peão de Barretos</b> é de qual região?",pt:"Barretos fica em São Paulo",opts:[["Sudeste",1,""],["Centro-Oeste",0,""],["Sul",0,""]]},
+ {th:'festas',fig:"\u{1F3B7}",en:"O <b>carnaval do Rio</b> é festa cultural de qual região?",pt:"",opts:[["Sudeste",1,""],["Nordeste",0,""],["Sul",0,""]]},
+ {th:'festas',fig:"\u{1F347}",en:"A <b>festa da uva de Jundiaí</b> é de qual região?",pt:"Jundiaí fica em São Paulo",opts:[["Sudeste",1,""],["Sul",0,""],["Centro-Oeste",0,""]]},
+ {th:'festas',fig:"\u{1F64F}",en:"A <b>festa de Nossa Senhora Aparecida</b> e a <b>festa da congada</b> são de qual região?",pt:"",opts:[["Sudeste",1,""],["Nordeste",0,""],["Norte",0,""]]},
+ {th:'festas',fig:"\u{1F37A}",en:"A <b>Oktoberfest</b> e a <b>festa nacional do pinhão</b> são de qual região?",pt:"",opts:[["Sul",1,""],["Sudeste",0,""],["Centro-Oeste",0,""]]},
+ {th:'festas',fig:"\u{1F40E}",en:"A <b>Semana Farroupilha</b> é comemoração cultural de qual região?",pt:"",opts:[["Sul",1,""],["Centro-Oeste",0,""],["Nordeste",0,""]]},
+ {th:'festas',fig:"\u{26EA}",en:"A <b>festa do Senhor do Bonfim</b> é comemoração de qual região?",pt:"",opts:[["Nordeste",1,""],["Sudeste",0,""],["Norte",0,""]]},
+ {th:'festas',fig:"\u{1F402}",en:"Qual é a festa do Norte que aparece no material?",pt:"",opts:[["Festival de Parintins (boi-bumbá)",1,""],["Bumba meu boi",0,""],["Semana Farroupilha",0,""]]},
+
+ /* ===== DANCAS E MUSICAS ===== */
+ {th:'ritmos',fig:"\u{1F483}",en:"O <b>carimbó</b> é dança típica de qual região?",pt:"",opts:[["Norte",1,""],["Nordeste",0,""],["Sul",0,""]]},
+ {th:'ritmos',fig:"\u{1F3B6}",en:"A <b>toada</b> é tipo de música de qual região?",pt:"",opts:[["Norte",1,""],["Sudeste",0,""],["Centro-Oeste",0,""]]},
+ {th:'ritmos',fig:"\u{1F3BA}",en:"<b>Frevo</b>, <b>forró</b>, <b>baião</b> e <b>maracatu</b> são de qual região?",pt:"lá eles são dança E música",opts:[["Nordeste",1,""],["Norte",0,""],["Sudeste",0,""]]},
+ {th:'ritmos',fig:"\u{1F941}",en:"O <b>axé</b> é tipo de música de qual região?",pt:"",opts:[["Nordeste",1,""],["Sul",0,""],["Sudeste",0,""]]},
+ {th:'ritmos',fig:"\u{1F45F}",en:"<b>Siriri</b> e <b>cururu</b> são danças de qual região?",pt:"",opts:[["Centro-Oeste",1,""],["Norte",0,""],["Sul",0,""]]},
+ {th:'ritmos',fig:"\u{1FA95}",en:"A <b>moda de viola</b> é tipo de música de qual região?",pt:"vem junto com o sertanejo",opts:[["Centro-Oeste",1,""],["Sul",0,""],["Sudeste",0,""]]},
+ {th:'ritmos',fig:"\u{1F3B7}",en:"<b>Samba</b>, <b>pagode</b>, <b>funk</b> e <b>MPB</b> são músicas de qual região?",pt:"",opts:[["Sudeste",1,""],["Nordeste",0,""],["Sul",0,""]]},
+ {th:'ritmos',fig:"\u{1F57A}",en:"O <b>samba</b> é a dança típica de qual região?",pt:"",opts:[["Sudeste",1,""],["Nordeste",0,""],["Norte",0,""]]},
+ {th:'ritmos',fig:"\u{1F396}\u{FE0F}",en:"<b>Xote gaúcho</b> e <b>pau de fita</b> são danças de qual região?",pt:"gaúcho = do Rio Grande do Sul",opts:[["Sul",1,""],["Centro-Oeste",0,""],["Nordeste",0,""]]},
+ {th:'ritmos',fig:"\u{1F3A4}",en:"O <b>sertanejo universitário</b> é música de qual região?",pt:"",opts:[["Sul",1,""],["Centro-Oeste",0,""],["Sudeste",0,""]]},
+ {th:'ritmos',fig:"\u{1F42E}",en:"O <b>boi-bumbá</b> também é tipo de música de qual região?",pt:"",opts:[["Norte",1,""],["Nordeste",0,""],["Sudeste",0,""]]},
+
+ /* ===== DIVERSIDADE E MEIO AMBIENTE ===== */
+ {th:'diversidade',fig:"\u{1F30E}",en:"Por que pessoas de lugares diferentes vivem de modos diferentes?",pt:"",opts:[["Porque têm relações distintas com o meio ambiente onde vivem",1,""],["Porque uma cultura é melhor do que a outra",0,""],["Porque só existe um jeito certo de viver",0,""]]},
+ {th:'diversidade',fig:"\u{2764}\u{FE0F}",en:"Entender que cada lugar tem seu modo de viver nos ajuda a…",pt:"",opts:[["Respeitar a diversidade",1,""],["Escolher qual é a melhor região",0,""],["Achar graça dos costumes dos outros",0,""]]},
+ {th:'diversidade',fig:"\u{1F33F}",en:"As diferenças entre as pessoas de cada lugar aparecem principalmente…",pt:"",opts:[["Nos hábitos e nas manifestações culturais",1,""],["Só no jeito de falar",0,""],["Só na cor das casas",0,""]]},
+ {th:'diversidade',fig:"\u{1F504}",en:"Uma tradição pode se transformar ao longo dos anos?",pt:"a professora falou disso na roda de conversa",opts:[["Pode: uma brincadeira antiga pode ter mudado com o tempo",1,""],["Nunca muda: fica sempre igual",0,""],["Só muda se a família mudar de país",0,""]]},
+ {th:'diversidade',fig:"\u{1F4D6}",en:"Na atividade <b>Álbum das nossas origens</b>, a capa é uma colagem com…",pt:"",opts:[["Bandeiras, mapas, comidas, festas e datas comemorativas",1,""],["Somente fotos da escola",0,""],["Somente desenhos de animais",0,""]]},
+ {th:'diversidade',fig:"\u{1F5E3}\u{FE0F}",en:"Na <b>entrevista</b> da apostila, perguntamos à família…",pt:"",opts:[["Quem migrou para o Brasil e por que essa pessoa veio",1,""],["Qual é o time de futebol preferido",0,""],["Qual é a matéria preferida na escola",0,""]]},
+ {th:'diversidade',fig:"\u{1F9E0}",en:"No <b>mapa mental</b> da atividade, o que a criança precisa retratar?",pt:"",opts:[["Aspectos culturais do Brasil que ela conhece e vê no dia a dia",1,""],["A tabuada do 5",0,""],["O caminho de casa até a escola",0,""]]}
+];
+
+/* ---- VERDADEIRO OU FALSO ---- */
+const VF = [
+ {th:'conceitos',fig:"\u{1F91D}",en:"Uma <b>tradição</b> passa de geração em geração.",pt:"de pais para filhos",ans:true},
+ {th:'conceitos',fig:"\u{2708}\u{FE0F}",en:"<b>Migrar</b> é a mesma coisa que passear no fim de semana.",pt:"",ans:false},
+ {th:'conceitos',fig:"\u{1F1E7}\u{1F1F7}",en:"O Brasil é um país <b>multicultural</b>.",pt:"",ans:true},
+ {th:'conceitos',fig:"\u{1F464}",en:"A <b>identidade cultural</b> é o conjunto de costumes que diz quem somos.",pt:"",ans:true},
+ {th:'conceitos',fig:"\u{1F3D8}\u{FE0F}",en:"Numa <b>comunidade</b>, todas as pessoas têm exatamente os mesmos costumes.",pt:"",ans:false},
+ {th:'conceitos',fig:"\u{1F9F3}",en:"Quem migra leva consigo hábitos, crenças e modos de viver.",pt:"",ans:true},
+ {th:'conceitos',fig:"\u{1F374}",en:"A cultura de quem migrou aparece na culinária, nas vestimentas, na religião, nas festas e na arquitetura.",pt:"são os 5 do material",ans:true},
+
+ {th:'tradicoes',fig:"\u{1F94B}",en:"O <b>jiu-jitsu brasileiro</b> foi criado no Japão.",pt:"",ans:false},
+ {th:'tradicoes',fig:"\u{1F37A}",en:"A <b>Oktoberfest de Blumenau</b> tem origem alemã.",pt:"",ans:true},
+ {th:'tradicoes',fig:"\u{1F941}",en:"O <b>jongo</b> é uma manifestação de matriz africana.",pt:"",ans:true},
+ {th:'tradicoes',fig:"\u{1FAB5}",en:"A <b>xilogravura</b> ilustra os folhetos da literatura de cordel.",pt:"",ans:true},
+ {th:'tradicoes',fig:"\u{1F963}",en:"A <b>farinha de mandioca</b> artesanal é tradição dos povos indígenas da Amazônia.",pt:"",ans:true},
+ {th:'tradicoes',fig:"\u{1F9C9}",en:"O <b>chimarrão</b> é bebida tradicional do Nordeste.",pt:"",ans:false},
+ {th:'tradicoes',fig:"\u{1F3AD}",en:"Os <b>Bonecos Gigantes</b> desfilam no carnaval de Olinda, em Pernambuco.",pt:"",ans:true},
+ {th:'tradicoes',fig:"\u{1F332}",en:"O <b>Santo Daime</b> foi fundado na década de 1930 e mistura tradições indígenas e cristãs.",pt:"",ans:true},
+
+ {th:'comidas',fig:"\u{1F347}",en:"O <b>açaí</b> é comida típica do Norte.",pt:"",ans:true},
+ {th:'comidas',fig:"\u{1F9C0}",en:"O <b>pão de queijo</b> é comida típica do Sul.",pt:"",ans:false},
+ {th:'comidas',fig:"\u{1F958}",en:"O <b>acarajé</b> é comida típica do Nordeste.",pt:"",ans:true},
+ {th:'comidas',fig:"\u{1F33D}",en:"O <b>arroz com pequi</b> é comida típica do Centro-Oeste.",pt:"",ans:true},
+ {th:'comidas',fig:"\u{1F969}",en:"O <b>churrasco gaúcho</b> é comida típica do Sudeste.",pt:"",ans:false},
+
+ {th:'festas',fig:"\u{1F402}",en:"O <b>boi-bumbá</b> do festival de Parintins é do Norte.",pt:"",ans:true},
+ {th:'festas',fig:"\u{1F42E}",en:"O <b>bumba meu boi</b> é do Norte.",pt:"cuidado com o nome!",ans:false},
+ {th:'festas',fig:"\u{1F37A}",en:"A <b>Oktoberfest</b> é festa cultural do Sul.",pt:"",ans:true},
+ {th:'festas',fig:"\u{1F920}",en:"A <b>festa do peão de Barretos</b> é do Sudeste.",pt:"",ans:true},
+ {th:'festas',fig:"\u{1F40E}",en:"A <b>Semana Farroupilha</b> é comemoração do Nordeste.",pt:"",ans:false},
+ {th:'festas',fig:"\u{1F30A}",en:"A <b>festa de Iemanjá</b> é comemoração cultural do Nordeste.",pt:"",ans:true},
+
+ {th:'ritmos',fig:"\u{1F483}",en:"O <b>carimbó</b> é dança do Norte.",pt:"",ans:true},
+ {th:'ritmos',fig:"\u{1F3B7}",en:"O <b>samba</b> é a dança típica do Sudeste.",pt:"",ans:true},
+ {th:'ritmos',fig:"\u{1F45F}",en:"O <b>siriri</b> é dança do Sul.",pt:"",ans:false},
+ {th:'ritmos',fig:"\u{1F396}\u{FE0F}",en:"O <b>pau de fita</b> é dança do Sul.",pt:"",ans:true},
+ {th:'ritmos',fig:"\u{1F3BA}",en:"O <b>frevo</b> é do Nordeste.",pt:"",ans:true},
+
+ {th:'diversidade',fig:"\u{1F30E}",en:"Pessoas em lugares diferentes têm relações distintas com o meio ambiente.",pt:"",ans:true},
+ {th:'diversidade',fig:"\u{2764}\u{FE0F}",en:"Entender as diferenças nos ajuda a respeitar a diversidade.",pt:"",ans:true},
+ {th:'diversidade',fig:"\u{1F6AB}",en:"Existe uma cultura brasileira melhor do que as outras.",pt:"",ans:false}
+];
+
+/* ---- COMPLETAR ---- */
+const FILL = [
+ {th:'conceitos',pre:"Uma tradição passa de",post:"em geração.",ans:"geração",bank:["semana"],pt:"É a definição do glossário."},
+ {th:'conceitos',pre:"Migrar é mudar de um",post:"para outro.",ans:"lugar",bank:["assunto","horário"],pt:"Não é passeio: é ir morar em outro lugar."},
+ {th:'conceitos',pre:"O Brasil é um país",post:", feito de muitas culturas.",ans:"multicultural",bank:["pequeno","silencioso"],pt:"Multicultural = muitas culturas juntas."},
+ {th:'conceitos',pre:"A",post:"cultural diz quem nós somos.",ans:"identidade",bank:["distância","altura"],pt:""},
+ {th:'conceitos',pre:"A cultura de quem migrou aparece na",post:", nas vestimentas, na religião, nas festas e na arquitetura.",ans:"culinária",bank:["matemática","velocidade"],pt:"São os 5 lugares que o material lista."},
+ {th:'tradicoes',pre:"A xilogravura ilustra os folhetos da literatura de",post:".",ans:"cordel",bank:["escola","vento"],pt:""},
+ {th:'tradicoes',pre:"O jongo é uma manifestação de matriz",post:", com dança e percussão em roda.",ans:"africana",bank:["alemã","japonesa"],pt:""},
+ {th:'tradicoes',pre:"O jiu-jitsu brasileiro veio da adaptação do judô e do jiu-jitsu",post:".",ans:"japonês",bank:["alemão","gaúcho"],pt:""},
+ {th:'tradicoes',pre:"O chimarrão é bebida da cultura",post:", do Rio Grande do Sul.",ans:"gaúcha",bank:["capixaba","paulista"],pt:""},
+ {th:'comidas',pre:"Tacacá e açaí são comidas típicas do",post:".",ans:"Norte",bank:["Sul","Nordeste"],pt:""},
+ {th:'comidas',pre:"Feijoada e pão de queijo são comidas típicas do",post:".",ans:"Sudeste",bank:["Sul","Norte"],pt:""},
+ {th:'comidas',pre:"Arroz com pequi e pamonha são do",post:".",ans:"Centro-Oeste",bank:["Nordeste","Sul"],pt:""},
+ {th:'festas',pre:"O festival de Parintins é conhecido pelo",post:".",ans:"boi-bumbá",bank:["frevo","chimarrão"],pt:"É a pegadinha do bumba meu boi."},
+ {th:'festas',pre:"O bumba meu boi é festa cultural do",post:".",ans:"Nordeste",bank:["Norte","Sul"],pt:""},
+ {th:'festas',pre:"A Semana Farroupilha é comemoração do",post:".",ans:"Sul",bank:["Sudeste","Norte"],pt:""},
+ {th:'ritmos',pre:"O carimbó é dança do",post:".",ans:"Norte",bank:["Sul","Sudeste"],pt:""},
+ {th:'ritmos',pre:"Siriri e cururu são danças do",post:".",ans:"Centro-Oeste",bank:["Nordeste","Sul"],pt:""},
+ {th:'ritmos',pre:"O xote",post:"e o pau de fita são danças do Sul.",ans:"gaúcho",bank:["nordestino","paulista"],pt:"Gaúcho = do Rio Grande do Sul."},
+ {th:'diversidade',pre:"Entender os diferentes modos de viver nos ajuda a respeitar a",post:".",ans:"diversidade",bank:["pressa","distância"],pt:""},
+ {th:'diversidade',pre:"Pessoas de lugares diferentes têm relações distintas com o meio",post:".",ans:"ambiente",bank:["do campo","de transporte"],pt:""}
+];
+/* dicas dos chips de palavra (opcional) */
+const WPT={};
+
+/* ---- LIGAR ---- cats:[[texto,dica]], items:[[texto,dica,catIdx]] ---- */
+const MATCH = [
+ {th:'conceitos',t:"Ligue cada frase à palavra que ela explica.",tpt:"tradição · migração · identidade cultural",
+  cats:[["Tradição","passa de geração em geração"],["Migração","mudar de lugar"],["Identidade cultural","quem nós somos"]],
+  items:[["Passa de pais para filhos","",0],["Pessoas mudam de um lugar para outro","",1],["O conjunto de costumes que diz quem somos","",2]]},
+ {th:'comidas',t:"Ligue cada comida à sua região.",tpt:"",
+  cats:[["Norte",""],["Nordeste",""],["Centro-Oeste",""]],
+  items:[["\u{1FAD0} Tacacá","",0],["\u{1F958} Acarajé","",1],["\u{1F33D} Arroz com pequi","",2]]},
+ {th:'comidas',t:"Ligue cada comida à sua região.",tpt:"",
+  cats:[["Sudeste",""],["Sul",""],["Norte",""]],
+  items:[["\u{1F9C0} Pão de queijo","",0],["\u{1F969} Churrasco gaúcho","",1],["\u{1F347} Açaí","",2]]},
+ {th:'festas',t:"Ligue cada festa à sua região.",tpt:"",
+  cats:[["Norte",""],["Nordeste",""],["Sul",""]],
+  items:[["\u{1F402} Festival de Parintins","",0],["\u{1F42E} Bumba meu boi","",1],["\u{1F37A} Oktoberfest","",2]]},
+ {th:'festas',t:"Ligue cada comemoração à sua região.",tpt:"",
+  cats:[["Centro-Oeste",""],["Sudeste",""],["Nordeste",""]],
+  items:[["\u{1F6B6} Romaria do Divino Pai Eterno","",0],["\u{1F64F} Festa de Nossa Senhora Aparecida","",1],["\u{26EA} Festa do Senhor do Bonfim","",2]]},
+ {th:'ritmos',t:"Ligue cada dança à sua região.",tpt:"",
+  cats:[["Norte",""],["Nordeste",""],["Sudeste",""]],
+  items:[["\u{1F483} Carimbó","",0],["\u{1F3BA} Frevo","",1],["\u{1F57A} Samba","",2]]},
+ {th:'ritmos',t:"Ligue cada música à sua região.",tpt:"",
+  cats:[["Centro-Oeste",""],["Sul",""],["Nordeste",""]],
+  items:[["\u{1FA95} Moda de viola","",0],["\u{1F3A4} Sertanejo universitário","",1],["\u{1F941} Axé","",2]]},
+ {th:'tradicoes',t:"Ligue cada tradição à sua origem.",tpt:"",
+  cats:[["Povos indígenas da Amazônia",""],["Matriz africana",""],["Alemanha",""]],
+  items:[["\u{1F963} Farinha de mandioca","",0],["\u{1F941} Jongo","",1],["\u{1F37A} Oktoberfest de Blumenau","",2]]},
+ {th:'tradicoes',t:"Ligue cada tradição ao lugar onde ela acontece.",tpt:"",
+  cats:[["Olinda (PE)",""],["Blumenau (SC)",""],["Rio Grande do Sul",""]],
+  items:[["\u{1F3AD} Bonecos Gigantes","",0],["\u{1F37A} Oktoberfest","",1],["\u{1F9C9} Chimarrão","",2]]}
+];
+
+/* ---- ORDENAR ---- itens ja na ordem CORRETA ---- */
+const ORDER = [
+ {th:'conceitos',t:"Coloque em ordem: como uma tradição chega até você.",tpt:"de geração em geração",
+  items:["\u{1F475} Bisavós","\u{1F469}\u{200D}\u{1F9B3} Avós","\u{1F468} Pais","\u{1F9D2} Você"]},
+ {th:'conceitos',t:"Coloque em ordem a história do material: como as tradições chegaram aos lugares.",tpt:"",
+  items:["\u{2708}\u{FE0F} Pessoas migraram de outros lugares","\u{1F9F3} Trouxeram hábitos, crenças e modos de viver","\u{1F3D8}\u{FE0F} Influenciaram os lugares onde chegaram","\u{1F91D} As tradições se entrelaçaram ao longo do tempo"]},
+ {th:'diversidade',t:"Coloque em ordem as perguntas da entrevista da apostila.",tpt:"",
+  items:["\u{1F5E3}\u{FE0F} Quem você entrevistou?","\u{2708}\u{FE0F} Quem da sua família migrou para o Brasil?","\u{2753} Por que essa pessoa veio para o Brasil?","\u{1F6A2} Como foi essa viagem? Que transporte usou?","\u{1F3E0} Como foi a adaptação ao Brasil?"]}
+];
+
+/* ---- RESPOSTA ABERTA ---- */
+const OPEN = [
+ {th:'conceitos',fig:"\u{1F91D}",en:"Explique com suas palavras o que é uma <b>tradição</b>.",pt:"",men:"É um costume que passa de geração em geração, de pais para filhos, e está há muito tempo na família.",menpt:""},
+ {th:'conceitos',fig:"\u{2708}\u{FE0F}",en:"Explique o que é <b>migração</b>.",pt:"",men:"É quando pessoas mudam de um lugar para outro levando consigo hábitos, crenças e modos de viver.",menpt:""},
+ {th:'conceitos',fig:"\u{1F374}",en:"Diga <b>três lugares</b> onde a cultura de quem migrou aparece.",pt:"",men:"Na culinária, nas vestimentas, na religião, nas festas e na arquitetura (bastam três).",menpt:""},
+ {th:'comidas',fig:"\u{1F35B}",en:"Diga <b>uma comida típica</b> do Nordeste.",pt:"",men:"Acarajé, baião de dois ou vatapá.",menpt:""},
+ {th:'comidas',fig:"\u{1F969}",en:"Diga <b>uma comida típica</b> do Sul.",pt:"",men:"Churrasco gaúcho ou arroz carreteiro.",menpt:""},
+ {th:'festas',fig:"\u{1F402}",en:"Qual é a diferença entre <b>boi-bumbá</b> e <b>bumba meu boi</b>?",pt:"a pegadinha número 1",men:"O boi-bumbá é o festival de Parintins, no Norte. O bumba meu boi é festa do Nordeste.",menpt:""},
+ {th:'ritmos',fig:"\u{1F483}",en:"Diga <b>uma dança</b> do Centro-Oeste.",pt:"",men:"Siriri ou cururu.",menpt:""},
+ {th:'tradicoes',fig:"\u{1F35A}",en:"Qual a diferença entre o <b>cuscuz paulista</b> e o <b>cuscuz nordestino</b>?",pt:"",men:"O paulista é do Sudeste, feito com farinha de milho e peixe, ovos e legumes. O nordestino é feito com flocos de milho cozidos no vapor.",menpt:""},
+ {th:'diversidade',fig:"\u{2764}\u{FE0F}",en:"Por que é importante <b>respeitar a diversidade</b>?",pt:"",men:"Porque pessoas de lugares diferentes têm hábitos e manifestações culturais diferentes, e todas essas formas de viver têm valor.",menpt:""},
+ {th:'diversidade',fig:"\u{1F1E7}\u{1F1F7}",en:"Por que dizemos que o Brasil é <b>multicultural</b>?",pt:"",men:"Porque é feito de muitas culturas juntas, trazidas por pessoas que migraram e por quem já vivia aqui.",menpt:""}
+];
+
+/* ================= TEMAS ================= */
+const THEMES=[
+ {k:'conceitos',   en:'Palavras da unidade',    pt:'tradição · migração · identidade', emo:'\u{1F4AC}'},
+ {k:'tradicoes',   en:'Tradições e costumes',   pt:'as fotos da Aula 4',               emo:'\u{1F5BC}\u{FE0F}'},
+ {k:'comidas',     en:'Comidas das regiões',    pt:'o que se come em cada lugar',      emo:'\u{1F35B}'},
+ {k:'festas',      en:'Festas das regiões',     pt:'festas e comemorações',            emo:'\u{1F386}'},
+ {k:'ritmos',      en:'Danças e músicas',       pt:'o que se dança e se canta',        emo:'\u{1F483}'},
+ {k:'diversidade', en:'Diversidade e lugares',  pt:'respeitar o diferente',            emo:'\u{1F30E}'}
+];
+/* pesos — o painel das 5 regiões é o material mais rico da unidade */
+const TH_WEIGHT={conceitos:20,tradicoes:18,comidas:17,festas:19,ritmos:16,diversidade:10};
+
+/* ================= ENGINE ================= */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const $=id=>document.getElementById(id);
+let deck=[], cur=0, total=0, roundSize=25;
+let selThemes=new Set(THEMES.map(t=>t.k));
+
+/* score is derived from the items, so free navigation never double-counts */
+function curScore(){return deck.reduce((s,it)=>s+(it.pts||0),0);}
+function wrongItems(){return deck.filter(it=>it.done&&it.wrong);}
+
+function makeItem(type,src){
+  const it={_type:type,_src:src,type:type,...src};
+  if(type==='mc') it.opts=shuffle(src.opts.map(p=>({t:p[0],ok:!!p[1],pt:p[2]})));
+  if(type==='fill') it.chips=shuffle([{w:src.ans,ok:true},...src.bank.map(w=>({w,ok:false}))]);
+  if(type==='match'){it.cho=new Array(src.items.length).fill(-1);it.active=0;it.locked=false;}
+  if(type==='order'){it.order=shuffle(src.items.map((t,i)=>({t,rank:i})));it.seq=[];it.locked=false;}
+  it.done=false; it.pts=0; it.wrong=false;
+  return it;
+}
+
+function pickTheme(tag,count){
+  const byType={mc:[],fill:[],vf:[],open:[],order:[],match:[]};
+  const add=(arr,type)=>arr.forEach(o=>{if(o.th===tag)byType[type].push({type,src:o});});
+  add(MC,'mc');add(FILL,'fill');add(VF,'vf');add(OPEN,'open');add(ORDER,'order');add(MATCH,'match');
+  Object.keys(byType).forEach(k=>shuffle(byType[k]));
+  const order=['mc','vf','fill','order','match','open'];
+  const out=[]; let guard=0;
+  while(out.length<count && guard<2000){
+    let any=false;
+    for(const t of order){ if(out.length>=count)break; if(byType[t].length){out.push(byType[t].shift());any=true;} }
+    if(!any)break; guard++;
+  }
+  return out;
+}
+
+function buildDeck(n){
+  const tags=[...selThemes];
+  const sumW=tags.reduce((s,t)=>s+(TH_WEIGHT[t]||1),0)||1;
+  let picks=[];
+  tags.forEach(t=>{ picks=picks.concat(pickTheme(t,Math.round(n*(TH_WEIGHT[t]||1)/sumW))); });
+  picks=shuffle(picks);
+  if(picks.length>n) picks=picks.slice(0,n);
+  if(picks.length<n){
+    const used=new Set(picks.map(p=>p.src)); const rest=[];
+    const addAll=(arr,type)=>arr.forEach(o=>{if(selThemes.has(o.th)&&!used.has(o))rest.push({type,src:o});});
+    addAll(MC,'mc');addAll(VF,'vf');addAll(FILL,'fill');addAll(ORDER,'order');addAll(MATCH,'match');addAll(OPEN,'open');
+    shuffle(rest);
+    while(picks.length<n && rest.length) picks.push(rest.shift());
+  }
+  deck=shuffle(picks).map(p=>makeItem(p.type,p.src));
+  total=deck.length; cur=0;
+}
+
+function esc(s){return String(s).replace(/<[^>]*>/g,'').replace(/"/g,'&quot;').replace(/'/g,"\\'");}
+
+
+/* ---- question navigation arrows ---- */
+function prevQ(){ if(cur>0){cur--;render();} }
+function nextQ(){ if(cur<total-1){cur++;render();} }
+/* index of the next UNANSWERED question (search forward, wrap around); -1 if none */
+function nextUnansweredIdx(){
+  if(!deck||!total)return -1;
+  for(var k=1;k<=total;k++){ var idx=(cur+k)%total; if(!deck[idx].done) return idx; }
+  return -1;
+}
+function jumpUnanswered(){ var idx=nextUnansweredIdx(); if(idx>=0){ cur=idx; render(); } }
+/* all questions answered? then the result screen must be reachable from anywhere */
+function allAnswered(){ return deck && total>0 && deck.every(function(it){return it.done;}); }
+function updateArrows(){
+  $('qnav').classList.add('show');
+  $('navPrev').disabled = cur<=0;
+  $('navNext').disabled = cur>=total-1;
+  var jb=$('navJump');
+  if(allAnswered()){
+    /* every question answered → turn the jump button into "See results" so the
+       child always reaches the grade, even when answering out of order */
+    jb.disabled=false; jb.classList.add('results');
+    jb.onclick=fim; jb.title='Ver o resultado';
+    jb.innerHTML='\u{1F389}<span class="ql">Resultado</span>';
+  }else{
+    jb.classList.remove('results');
+    jb.onclick=jumpUnanswered; jb.title='Próxima sem resposta';
+    jb.innerHTML='⏩<span class="ql">Sem resposta</span>';
+    var ji=nextUnansweredIdx();
+    jb.disabled = ji<0 || ji===cur;   /* só habilita se houver OUTRA questão sem resposta */
+  }
+}
+
+/* ---- screens ---- */
+function intro(){
+  $('bar').style.width='0%';
+  $('qnav').classList.remove('show');
+  $('card').innerHTML=`<div class="intro">
+    <div class="qfig">\u{1F9EA}</div>
+    <div class="q">Vamos treinar para a prova!</div>
+    <div class="tr qtr">Vamos estudar para a prova!</div>
+    <p>Escolha os <b>temas</b> e quantas <b>perguntas</b> você quer.
+       <span class="tr">Escolha os temas e quantas perguntas você quer.</span></p>
+    <div class="themewrap">
+      ${THEMES.map(t=>`<button class="themechip${selThemes.has(t.k)?' on':''}" onclick="toggleTheme('${t.k}')">
+        <span class="tem">${t.emo}</span><span>${t.en}</span><span class="ttr tr">${t.pt}</span></button>`).join('')}
+    </div>
+    <p class="themehint" id="themehint"></p>
+    <p><b>Quantas perguntas?</b> <span class="tr">Comece com 10 e vá aumentando.</span></p>
+    <div class="sizewrap">
+      ${[5,10,25,50,100].map(n=>`<button class="sizebtn${n===roundSize?' sel':''}" onclick="start(${n})">${n}<span class="sl">perguntas</span></button>`).join('')}
+    </div>
+    <p class="startnote">Tap a number to start. <span class="tr">Toque na quantidade para começar.</span></p>
+  </div>`;
+}
+function toggleTheme(k){
+  if(selThemes.has(k)){ if(selThemes.size>1) selThemes.delete(k); }
+  else selThemes.add(k);
+  intro();
+}
+function start(n){
+  if(selThemes.size===0)return;
+  roundSize=n; buildDeck(n);
+  if(total===0){ const h=$('themehint'); if(h)h.textContent='Escolha ao menos um tema.'; return; }
+  render();
+}
+function render(){
+  $('bar').style.width=(cur/total*100)+'%';
+  const it=deck[cur];
+  ({mc:renderMC,vf:renderVF,open:renderOpen,fill:renderFill,match:renderMatch,order:renderOrder}[it.type])(it);
+  addRedoBtn();
+  updateArrows();
+}
+/* redo THIS question — clears the answer, no score effect (accidental taps) */
+function addRedoBtn(){
+  const b=document.createElement('button');
+  b.className='redoq';b.id='redoq';b.title='Refazer esta pergunta';
+  b.innerHTML='↺<span class="rl">redo</span>';
+  b.onclick=redoQ;
+  $('card').appendChild(b);
+}
+function redoQ(){
+  try{speechSynthesis.cancel();}catch(e){}
+  deck[cur]=makeItem(deck[cur]._type,deck[cur]._src);
+  render();
+}
+function head(it,label,cls){return `<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge ${cls}">${label}</span></div>
+  ${it.fig?`<div class="qfig">${it.fig}</div>`:''}${it.en?`<div class="q">${it.en}</div><div class="tr qtr">${it.pt}</div>`:''}
+  ${it.en?`<button class="speak" onclick="say('${esc(it.en)}')">&#128266; Ouvir</button>`:''}`;}
+function nextBtn(hidden){return `<button class="next" id="next" ${hidden?'style="display:none"':''} onclick="next()">${(cur===total-1||allAnswered())?'Ver o resultado \u{1F389}':'Avançar →'}</button>`;}
+
+/* MC */
+function renderMC(it){
+  $('card').innerHTML=head(it,'Circle','mc')+
+   `<div class="opts">${it.opts.map((o,i)=>`<button class="opt" onclick="ansMC(${i})"><span>${o.t}</span>${o.pt?`<span class="otr">${o.pt}</span>`:''}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>`+nextBtn(!it.done);
+  if(it.done) paintMC(it);
+}
+function ansMC(i){
+  const it=deck[cur]; if(it.done)return;
+  it.done=true; it.pick=i;
+  it.pts=it.opts[i].ok?1:0; it.wrong=!it.opts[i].ok;
+  paintMC(it);
+}
+function paintMC(it){
+  const b=document.querySelectorAll('.opt'), i=it.pick;
+  b.forEach(x=>x.disabled=true);
+  if(it.opts[i].ok){b[i].classList.add('ok');$('fb').textContent='Isso mesmo! \u{1F31F}';$('fb').className='fb ok';}
+  else{b[i].classList.add('no');it.opts.forEach((o,k)=>{if(o.ok)b[k].classList.add('ok');});
+    $('fb').textContent='A verde é a certa \u{1F60A}';$('fb').className='fb no';}
+  $('next').classList.add('show');
+}
+
+/* V/F */
+function renderVF(it){
+  $('card').innerHTML=head(it,'Verdadeiro ou falso','vf')+
+   `<div class="vfwrap">
+      <button class="vfbtn" id="vT" onclick="ansVF(true)"><span class="big">✅</span>Verdadeiro<span class="vtr"></span></button>
+      <button class="vfbtn" id="vF" onclick="ansVF(false)"><span class="big">❌</span>Falso<span class="vtr"></span></button>
+    </div><div class="fb" id="fb"></div>`+nextBtn(!it.done);
+  if(it.done) paintVF(it);
+}
+function ansVF(val){
+  const it=deck[cur]; if(it.done)return;
+  it.done=true; it.pick=val;
+  it.pts=(val===it.ans)?1:0; it.wrong=(val!==it.ans);
+  paintVF(it);
+}
+function paintVF(it){
+  const T=$('vT'),F=$('vF'); T.disabled=F.disabled=true;
+  const rightBtn=it.ans?T:F;
+  if(it.pick===it.ans){rightBtn.classList.add('ok');$('fb').textContent='Isso mesmo! \u{1F31F}';$('fb').className='fb ok';}
+  else{(it.pick?T:F).classList.add('no');rightBtn.classList.add('ok');
+    $('fb').textContent='A verde é a certa \u{1F60A}';$('fb').className='fb no';}
+  $('next').classList.add('show');
+}
+
+/* COMPLETE */
+function renderFill(it){
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge fill">Complete a frase</span></div>
+   <button class="speak" onclick="say('${esc(it.pre+' '+it.ans+' '+it.post)}')">&#128266; Ouvir</button>
+   <div class="fillsent">${it.pre} <span class="blank" id="blank">_____</span> ${it.post}</div>
+   <div class="tr qtr">${it.pt}</div>
+   <div class="wbank">${it.chips.map((c,i)=>`<button class="wchip" onclick="ansFill(${i})"><span>${c.w}</span>${WPT[c.w]?`<span class="otr">${WPT[c.w]}</span>`:''}</button>`).join('')}</div>
+   <div class="fb" id="fb"></div>`+nextBtn(!it.done);
+  if(it.done) paintFill(it);
+}
+function ansFill(i){
+  const it=deck[cur]; if(it.done)return;
+  it.done=true; it.pick=i;
+  it.pts=it.chips[i].ok?1:0; it.wrong=!it.chips[i].ok;
+  paintFill(it);
+}
+function paintFill(it){
+  const chips=document.querySelectorAll('.wchip'), i=it.pick, chosen=it.chips[i];
+  chips.forEach(c=>c.disabled=true);
+  $('blank').textContent=chosen.w;
+  if(chosen.ok){chips[i].classList.add('ok');$('blank').classList.add('ok');$('fb').textContent='Isso mesmo! \u{1F31F}';$('fb').className='fb ok';}
+  else{chips[i].classList.add('no');$('blank').classList.add('no');
+    it.chips.forEach((c,k)=>{if(c.ok)chips[k].classList.add('ok');});
+    $('blank').textContent=it.ans;$('blank').classList.remove('no');$('blank').classList.add('ok');
+    $('fb').textContent='A palavra certa é "'+it.ans+'" \u{1F60A}';$('fb').className='fb no';}
+  $('next').classList.add('show');
+}
+
+/* MATCH */
+function renderMatch(it){
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge match">Ligue</span></div>
+   <div class="q">${it.t}</div>
+   <div class="tr qtr">${it.tpt}</div>
+   <button class="speak" onclick="say('${esc(it.t)}')">&#128266; Ouvir</button>
+   <div class="mintro">Toque no item e depois no grupo certo.</div>
+   <div class="mboard" id="mboard"></div>
+   <div class="mcats" id="mcats">${it.cats.map((c,ci)=>`<button class="mcat" onclick="pickCat(${ci})"><span>${c[0]}</span>${c[1]?`<span class="otr">${c[1]}</span>`:''}</button>`).join('')}</div>
+   <div class="fb" id="fb"></div>
+   <button class="next" id="mcheck" style="display:none" onclick="checkMatch()">Conferir &#9989;</button>`+nextBtn(true);
+  drawMatch();
+  if(it.done) paintMatch(it);
+}
+function drawMatch(){
+  const it=deck[cur];
+  $('mboard').innerHTML=it.items.map((m,mi)=>{
+    const cho=it.cho[mi];
+    const slot=cho>=0?`<span class="mslot set">${it.cats[cho][0]}</span>`:`<span class="mslot">?</span>`;
+    return `<button class="mitem${mi===it.active?' active':''}" id="mi${mi}" onclick="pickItem(${mi})">
+      <span class="mlbl"><span>${m[0]}</span><span class="mtr">${m[1]}</span></span>${slot}</button>`;
+  }).join('');
+  const done=it.cho.every(c=>c>=0);
+  $('mcheck').style.display=done?'block':'none';
+}
+function pickItem(mi){const it=deck[cur];if(it.locked)return;it.active=mi;drawMatch();}
+function pickCat(ci){
+  const it=deck[cur];if(it.locked)return;
+  it.cho[it.active]=ci;
+  let nxt=it.cho.findIndex(c=>c<0); it.active=nxt<0?it.active:nxt;
+  drawMatch();
+}
+function checkMatch(){
+  const it=deck[cur]; if(it.done)return;
+  it.locked=true; it.done=true;
+  let right=0; it.items.forEach((m,mi)=>{ if(it.cho[mi]===m[2]) right++; });
+  const all=it.items.length;
+  it.pts=right/all; it.wrong=(right<all);
+  paintMatch(it);
+}
+function paintMatch(it){
+  let right=0;
+  it.items.forEach((m,mi)=>{
+    const el=$('mi'+mi); if(!el)return; el.disabled=true;
+    if(it.cho[mi]===m[2]){el.classList.add('ok');right++;}
+    else{el.classList.add('no');const sl=el.querySelector('.mslot');if(sl)sl.textContent=it.cats[m[2]][0];}
+  });
+  document.querySelectorAll('.mcat').forEach(c=>c.disabled=true);
+  $('mcheck').style.display='none';
+  const all=it.items.length;
+  if(right===all){$('fb').textContent='Tudo certo! \u{1F31F}';$('fb').className='fb ok';}
+  else{$('fb').textContent=right+' de '+all+' certas — o verde mostra a resposta \u{1F60A}';$('fb').className='fb mid';}
+  $('next').style.display='block';$('next').classList.add('show');
+}
+
+/* ORDER */
+function renderOrder(it){
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge order">Coloque em ordem</span></div>
+   <div class="q">${it.t}</div>
+   <div class="tr qtr">${it.tpt}</div>
+   <button class="speak" onclick="say('${esc(it.t)}')">&#128266; Ouvir</button>
+   <div class="mintro">Tap them in order. Tap again to remove. / Toque na ordem. Toque de novo para tirar.</div>
+   <div class="oseq" id="oseq"></div>
+   <div class="opool" id="opool"></div>
+   <div class="fb" id="fb"></div>
+   <button class="next" id="ocheck" style="display:none" onclick="checkOrder()">Conferir &#9989;</button>`+nextBtn(true);
+  drawOrder();
+  if(it.done) paintOrder(it);
+}
+function drawOrder(){
+  const it=deck[cur], n=it.order.length;
+  let seqHtml='';
+  for(let p=0;p<n;p++){
+    const chip=it.seq[p];
+    seqHtml+=chip!=null
+      ? `<button class="oslot filled" onclick="orderRemove(${p})"><span class="onum">${p+1}</span><span>${it.order[chip].t}</span></button>`
+      : `<div class="oslot"><span class="onum">${p+1}</span><span>...</span></div>`;
+  }
+  $('oseq').innerHTML=seqHtml;
+  $('opool').innerHTML=it.order.map((o,i)=>`<button class="opiece${it.seq.includes(i)?' used':''}" onclick="orderPlace(${i})">${o.t}</button>`).join('');
+  $('ocheck').style.display=it.seq.length===n?'block':'none';
+}
+function orderPlace(i){const it=deck[cur];if(it.locked)return;if(it.seq.includes(i))return;it.seq.push(i);drawOrder();}
+function orderRemove(p){const it=deck[cur];if(it.locked)return;it.seq.splice(p,1);drawOrder();}
+function checkOrder(){
+  const it=deck[cur]; if(it.done)return;
+  it.locked=true; it.done=true;
+  let right=0; it.seq.forEach((chip,p)=>{ if(it.order[chip].rank===p) right++; });
+  const all=it.order.length;
+  it.pts=right/all; it.wrong=(right<all);
+  paintOrder(it);
+}
+function paintOrder(it){
+  let right=0;
+  const slots=document.querySelectorAll('#oseq .oslot');
+  it.seq.forEach((chip,p)=>{
+    const ok=it.order[chip].rank===p;
+    if(slots[p]){if(ok){slots[p].classList.add('ok');right++;}else slots[p].classList.add('no');}else if(ok)right++;
+  });
+  document.querySelectorAll('.opiece').forEach(c=>c.classList.add('used'));
+  $('ocheck').style.display='none';
+  const all=it.order.length;
+  if(right===all){$('fb').innerHTML='Ordem certa! \u{1F31F}';$('fb').className='fb ok';}
+  else{
+    const correct=it._src.items.join('  →  ');
+    $('fb').innerHTML=right+' de '+all+' no lugar certo \u{1F60A}<div class="ocorrect">Ordem certa: '+correct+'</div>';
+    $('fb').className='fb mid';
+  }
+  $('next').style.display='block';$('next').classList.add('show');
+}
+
+/* OPEN */
+function renderOpen(it){
+  $('card').innerHTML=head(it,'Responda você','open')+
+   `<div class="writeline">&#9999;&#65039; responda de cabeça, em voz alta</div>
+    <button class="next show" id="seebtn" onclick="reveal()">Ver a resposta &#128065;&#65039;</button>
+    <div class="reveal" id="rev"><span class="lab">Resposta</span>${it.men}<div class="tr">${it.menpt||''}</div></div>
+    <div class="hint" id="selfhint" style="display:none">Você acertou?</div>
+    <div class="selfwrap" id="self">
+      <button class="selfbtn acertei" onclick="self('ok')"><span class="big">\u{1F604}</span>I got it<span class="str">acertei</span></button>
+      <button class="selfbtn parcial" onclick="self('mid')"><span class="big">\u{1F610}</span>Almost<span class="str">mais ou menos</span></button>
+      <button class="selfbtn errei" onclick="self('no')"><span class="big">\u{1F605}</span>Not yet<span class="str">errei</span></button>
+    </div>
+    <div class="fb" id="fb"></div>`+nextBtn(true);
+  if(it.revealed||it.done){$('rev').classList.add('show');$('seebtn').style.display='none';$('selfhint').style.display='block';$('self').classList.add('show');}
+  if(it.done) paintSelf(it);
+}
+function reveal(){const it=deck[cur];it.revealed=true;$('rev').classList.add('show');$('seebtn').style.display='none';$('selfhint').style.display='block';$('self').classList.add('show');}
+function self(v){
+  const it=deck[cur]; if(it.done)return;
+  it.done=true; it.selfv=v;
+  if(v==='ok'){it.pts=1;it.wrong=false;}else if(v==='mid'){it.pts=0.5;it.wrong=true;}else{it.pts=0;it.wrong=true;}
+  paintSelf(it);
+}
+function paintSelf(it){
+  document.querySelectorAll('.selfbtn').forEach(b=>b.disabled=true);
+  if(it.selfv==='ok'){document.querySelector('.selfbtn.acertei').classList.add('sel');$('fb').textContent='Muito bem! \u{1F31F}';$('fb').className='fb ok';}
+  else if(it.selfv==='mid'){document.querySelector('.selfbtn.parcial').classList.add('sel');$('fb').textContent='Almost there! \u{1F44D}';$('fb').className='fb mid';}
+  else{document.querySelector('.selfbtn.errei').classList.add('sel');$('fb').textContent='Agora você sabe! \u{1F4AA}';$('fb').className='fb no';}
+  $('next').style.display='block';$('next').classList.add('show');
+}
+
+function next(){ if(allAnswered()){fim();return;} cur++; if(cur<total)render(); else fim(); }
+function redoWrong(){
+  const w=wrongItems().map(it=>({type:it._type,src:it._src}));
+  deck=shuffle(w).map(x=>makeItem(x.type,x.src));
+  total=deck.length;cur=0;
+  render();
+}
+function fim(){
+  $('bar').style.width='100%';
+  $('qnav').classList.remove('show');
+  const score=curScore(), s=Math.round(score*10)/10, pct=total?score/total:0;
+  const msg=pct>=.9?'Você arrasou! \u{1F3C6}':pct>=.6?'Muito bem! Continue treinando.':'Bom treino — jogue de novo para aprender mais!';
+  const nWrong=wrongItems().length;
+  const redoBtn=nWrong?`<button class="endbtn redo" onclick="redoWrong()">↺ Refazer as que errei (${nWrong})<span class="etr"></span></button>`:'';
+  $('card').innerHTML=`<div class="fim"><div class="big">\u{1F3C6}</div>
+    <div class="score">${s} / ${total}</div>
+    <div class="sub">${msg}</div>
+    <div class="endbtns">
+      ${redoBtn}
+      <button class="endbtn" onclick="intro()">\u{1F3B2} Novo simulado<span class="etr"></span></button>
+      <button class="endbtn" onclick="goHome()">\u{1F3E0} Menu do site<span class="etr"></span></button>
+    </div></div>`;
+}
+
+intro();
+</script>
+<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9,stars:140};</script>
+<script src="serafina-core.js"></script>
+<script src="cie2_theme.js"></script>
+</body>
+</html>

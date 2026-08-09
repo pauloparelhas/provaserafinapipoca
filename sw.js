@@ -1,6 +1,6 @@
 // Service Worker — Projeto Serafina
 // Estratégia: network-first para HTML, cache-first para base CSS/JS
-var CACHE = 'serafina-v22';
+var CACHE = 'serafina-v23';
 
 // Arquivos base compartilhados — pre-cache no install.
 // Caminhos RELATIVOS ao escopo do SW: com barra inicial eles apontavam
@@ -13,7 +13,8 @@ var BASE_FILES = [
   'ferramentas/ela-base.js',
   'ferramentas/serafina-core.css',
   'ferramentas/serafina-core.js',
-  'ferramentas/serafina-adventure.js'
+  'ferramentas/serafina-adventure.js',
+  'ferramentas/GEO2_data.js'
 ];
 
 self.addEventListener('install', function(e) {
