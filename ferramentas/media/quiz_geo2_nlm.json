@@ -1,0 +1,265 @@
+{
+  "title": "Cultura Quiz",
+  "questions": [
+    {
+      "question": "Como chamamos um costume que passa de gera\u00e7\u00e3o em gera\u00e7\u00e3o, como uma receita que o bisav\u00f4 ensinou para o neto?",
+      "answerOptions": [
+        {
+          "text": "Tradi\u00e7\u00e3o",
+          "isCorrect": true,
+          "rationale": "A tradi\u00e7\u00e3o \u00e9 definida como um costume que permanece na fam\u00edlia por muito tempo, passado de pais para filhos."
+        },
+        {
+          "text": "Migra\u00e7\u00e3o",
+          "isCorrect": false,
+          "rationale": "A migra\u00e7\u00e3o refere-se ao ato de mudar de um lugar para outro, n\u00e3o ao ato de passar costumes entre gera\u00e7\u00f5es."
+        },
+        {
+          "text": "Arquitetura",
+          "isCorrect": false,
+          "rationale": "Arquitetura \u00e9 o jeito de construir casas e pr\u00e9dios, sendo apenas uma das formas onde a cultura pode ser vista."
+        },
+        {
+          "text": "Comunidade",
+          "isCorrect": false,
+          "rationale": "A comunidade \u00e9 o lugar onde vivemos com diferentes pessoas, enquanto a pergunta foca no costume familiar espec\u00edfico."
+        }
+      ],
+      "hint": "Pense em algo que sua fam\u00edlia faz h\u00e1 muito tempo e continua ensinando para os mais novos."
+    },
+    {
+      "question": "O que acontece quando as pessoas mudam de um lugar para outro e levam seus h\u00e1bitos e cren\u00e7as na mala?",
+      "answerOptions": [
+        {
+          "text": "Migra\u00e7\u00e3o",
+          "isCorrect": true,
+          "rationale": "Migrar significa deslocar-se para um novo lugar, influenciando o destino com a cultura que a pessoa carrega."
+        },
+        {
+          "text": "Ancestralidade",
+          "isCorrect": false,
+          "rationale": "Ancestrais s\u00e3o as pessoas que viveram antes de n\u00f3s, como av\u00f3s e bisav\u00f3s, n\u00e3o o ato de mudar de cidade."
+        },
+        {
+          "text": "Identidade Cultural",
+          "isCorrect": false,
+          "rationale": "A identidade cultural \u00e9 o conjunto de tradi\u00e7\u00f5es que dizem quem somos, formada a partir das hist\u00f3rias que vivemos."
+        },
+        {
+          "text": "Sertanejo universit\u00e1rio",
+          "isCorrect": false,
+          "rationale": "Este \u00e9 um estilo de m\u00fasica espec\u00edfico da Regi\u00e3o Sul e n\u00e3o o nome do processo de mudan\u00e7a de pessoas."
+        }
+      ],
+      "hint": "Lembre-se da palavra que descreve o movimento de pessoas entre diferentes regi\u00f5es ou pa\u00edses."
+    },
+    {
+      "question": "O Brasil \u00e9 chamado de pa\u00eds multicultural. O que isso significa?",
+      "answerOptions": [
+        {
+          "text": "Que \u00e9 feito de muitas culturas juntas",
+          "isCorrect": true,
+          "rationale": "O termo multicultural indica a uni\u00e3o de diversas hist\u00f3rias, tradi\u00e7\u00f5es e costumes em um mesmo lugar."
+        },
+        {
+          "text": "Que todo mundo tem os mesmos h\u00e1bitos",
+          "isCorrect": false,
+          "rationale": "Dizer que todos s\u00e3o iguais nega a diversidade que define o conceito de multiculturalismo."
+        },
+        {
+          "text": "Que s\u00f3 existe uma tradi\u00e7\u00e3o no pa\u00eds",
+          "isCorrect": false,
+          "rationale": "O prefixo 'multi' indica muitas coisas, contradizendo a ideia de uma tradi\u00e7\u00e3o \u00fanica."
+        },
+        {
+          "text": "Que as pessoas n\u00e3o se relacionam",
+          "isCorrect": false,
+          "rationale": "As hist\u00f3rias das pessoas se entrela\u00e7am para formar a cultura do pa\u00eds, exigindo conviv\u00eancia e rela\u00e7\u00e3o."
+        }
+      ],
+      "hint": "Pense no significado do pedacinho 'multi' no come\u00e7o da palavra."
+    },
+    {
+      "question": "Na Regi\u00e3o Norte, qual \u00e9 o festival famoso que apresenta o boi-bumb\u00e1?",
+      "answerOptions": [
+        {
+          "text": "Festival de Parintins",
+          "isCorrect": true,
+          "rationale": "O festival de Parintins \u00e9 a celebra\u00e7\u00e3o cultural onde ocorre a famosa disputa do boi-bumb\u00e1 no Norte."
+        },
+        {
+          "text": "Bumba meu boi",
+          "isCorrect": false,
+          "rationale": "Embora o nome seja parecido, o bumba meu boi \u00e9 uma festa tradicional da Regi\u00e3o Nordeste."
+        },
+        {
+          "text": "Oktoberfest",
+          "isCorrect": false,
+          "rationale": "A Oktoberfest acontece no Sul do Brasil e tem origem alem\u00e3, n\u00e3o sendo ligada ao Norte."
+        },
+        {
+          "text": "Carnaval de Salvador",
+          "isCorrect": false,
+          "rationale": "O carnaval de Salvador \u00e9 um evento muito conhecido da Regi\u00e3o Nordeste."
+        }
+      ],
+      "hint": "O nome desse festival come\u00e7a com a letra P e acontece no estado do Amazonas."
+    },
+    {
+      "question": "Qual dessas comidas \u00e9 t\u00edpica da Regi\u00e3o Nordeste e tem influ\u00eancia ind\u00edgena no uso do milho?",
+      "answerOptions": [
+        {
+          "text": "Cuscuz nordestino",
+          "isCorrect": true,
+          "rationale": "O cuscuz nordestino \u00e9 feito com flocos de milho cozidos no vapor e \u00e9 um tra\u00e7o cultural forte do Nordeste."
+        },
+        {
+          "text": "Cuscuz paulista",
+          "isCorrect": false,
+          "rationale": "O cuscuz paulista pertence \u00e0 Regi\u00e3o Sudeste e leva ingredientes como peixe e ovos."
+        },
+        {
+          "text": "Arroz com pequi",
+          "isCorrect": false,
+          "rationale": "Este prato \u00e9 caracter\u00edstico da Regi\u00e3o Centro-Oeste do Brasil."
+        },
+        {
+          "text": "Churrasco ga\u00facho",
+          "isCorrect": false,
+          "rationale": "O churrasco ga\u00facho \u00e9 a comida t\u00edpica mais famosa da Regi\u00e3o Sul."
+        }
+      ],
+      "hint": "\u00c9 um prato feito no vapor e o nome j\u00e1 diz de qual regi\u00e3o ele vem."
+    },
+    {
+      "question": "Se voc\u00ea estiver na Regi\u00e3o Sudeste, qual dessas op\u00e7\u00f5es de comida e dan\u00e7a voc\u00ea provavelmente encontrar\u00e1?",
+      "answerOptions": [
+        {
+          "text": "P\u00e3o de queijo e Samba",
+          "isCorrect": true,
+          "rationale": "O p\u00e3o de queijo \u00e9 uma comida t\u00edpica e o samba \u00e9 a dan\u00e7a e m\u00fasica tradicional do Sudeste."
+        },
+        {
+          "text": "Tacac\u00e1 e Carimb\u00f3",
+          "isCorrect": false,
+          "rationale": "Essas manifesta\u00e7\u00f5es culturais pertencem \u00e0 Regi\u00e3o Norte do Brasil."
+        },
+        {
+          "text": "Acaraj\u00e9 e Frevo",
+          "isCorrect": false,
+          "rationale": "O acaraj\u00e9 e o frevo s\u00e3o tra\u00e7os culturais marcantes da Regi\u00e3o Nordeste."
+        },
+        {
+          "text": "Chimarr\u00e3o e Pau de fita",
+          "isCorrect": false,
+          "rationale": "O chimarr\u00e3o e a dan\u00e7a do pau de fita s\u00e3o t\u00edpicos da cultura ga\u00facha, no Sul."
+        }
+      ],
+      "hint": "Pense em um lanche mineiro muito famoso e no ritmo do Carnaval do Rio de Janeiro."
+    },
+    {
+      "question": "A Oktoberfest \u00e9 uma festa de origem alem\u00e3. Em qual estado e regi\u00e3o do Brasil ela acontece?",
+      "answerOptions": [
+        {
+          "text": "Santa Catarina, na Regi\u00e3o Sul",
+          "isCorrect": true,
+          "rationale": "A Oktoberfest de Blumenau foi incorporada \u00e0s tradi\u00e7\u00f5es catarinenses na Regi\u00e3o Sul."
+        },
+        {
+          "text": "Pernambuco, na Regi\u00e3o Nordeste",
+          "isCorrect": false,
+          "rationale": "Pernambuco \u00e9 conhecido pelos bonecos gigantes e pelo frevo, n\u00e3o pela Oktoberfest."
+        },
+        {
+          "text": "Goi\u00e1s, na Regi\u00e3o Centro-Oeste",
+          "isCorrect": false,
+          "rationale": "A cultura de Goi\u00e1s no Centro-Oeste \u00e9 marcada por festas como a do Divino Esp\u00edrito Santo."
+        },
+        {
+          "text": "Amazonas, na Regi\u00e3o Norte",
+          "isCorrect": false,
+          "rationale": "O Amazonas \u00e9 o lar do festival de Parintins, que tem caracter\u00edsticas bem diferentes da Oktoberfest."
+        }
+      ],
+      "hint": "Esta regi\u00e3o \u00e9 conhecida pelo clima mais frio e por receber muitos migrantes da Alemanha."
+    },
+    {
+      "question": "Na Regi\u00e3o Centro-Oeste, quais s\u00e3o as dan\u00e7as t\u00edpicas mencionadas no material?",
+      "answerOptions": [
+        {
+          "text": "Siriri e Cururu",
+          "isCorrect": true,
+          "rationale": "O siriri e o cururu s\u00e3o as dan\u00e7as tradicionais listadas especificamente para o Centro-Oeste."
+        },
+        {
+          "text": "Xote e Maracatu",
+          "isCorrect": false,
+          "rationale": "O maracatu e o xote s\u00e3o ritmos e dan\u00e7as associados \u00e0 Regi\u00e3o Nordeste."
+        },
+        {
+          "text": "Samba e Pagode",
+          "isCorrect": false,
+          "rationale": "O samba e o pagode s\u00e3o tipos de m\u00fasica e dan\u00e7a mais comuns na Regi\u00e3o Sudeste."
+        },
+        {
+          "text": "Xote ga\u00facho e Pau de fita",
+          "isCorrect": false,
+          "rationale": "Essas dan\u00e7as s\u00e3o t\u00edpicas da cultura do Sul do Brasil."
+        }
+      ],
+      "hint": "Os nomes dessas duas dan\u00e7as rimam e come\u00e7am com as mesmas letras iniciais."
+    },
+    {
+      "question": "Qual \u00e9 a diferen\u00e7a entre a m\u00fasica do Centro-Oeste e a m\u00fasica da Regi\u00e3o Sul, segundo a lista de 'pares que confundem'?",
+      "answerOptions": [
+        {
+          "text": "O Centro-Oeste tem a moda de viola e o Sul tem o sertanejo universit\u00e1rio",
+          "isCorrect": true,
+          "rationale": "O material destaca que, embora parecidas, a moda de viola \u00e9 do Centro-Oeste e o sertanejo universit\u00e1rio \u00e9 do Sul."
+        },
+        {
+          "text": "O Sul tem o funk e o Centro-Oeste tem o ax\u00e9",
+          "isCorrect": false,
+          "rationale": "O funk \u00e9 do Sudeste e o ax\u00e9 \u00e9 do Nordeste, de acordo com as divis\u00f5es regionais do material."
+        },
+        {
+          "text": "Ambas as regi\u00f5es s\u00f3 ouvem m\u00fasica cl\u00e1ssica",
+          "isCorrect": false,
+          "rationale": "A m\u00fasica cl\u00e1ssica n\u00e3o \u00e9 mencionada como m\u00fasica t\u00edpica regional nas fontes fornecidas."
+        },
+        {
+          "text": "N\u00e3o h\u00e1 diferen\u00e7a, as m\u00fasicas s\u00e3o iguais",
+          "isCorrect": false,
+          "rationale": "O material faz quest\u00e3o de separar os estilos musicais para evitar confus\u00f5es entre as regi\u00f5es."
+        }
+      ],
+      "hint": "Uma usa um instrumento muito tradicional e a outra \u00e9 um estilo de sertanejo mais moderno."
+    },
+    {
+      "question": "O conjunto de tradi\u00e7\u00f5es e costumes que diz quem n\u00f3s somos se chama:",
+      "answerOptions": [
+        {
+          "text": "Identidade cultural",
+          "isCorrect": true,
+          "rationale": "A identidade cultural \u00e9 constru\u00edda a partir das hist\u00f3rias e costumes que definem um grupo ou pessoa."
+        },
+        {
+          "text": "Culin\u00e1ria regional",
+          "isCorrect": false,
+          "rationale": "A culin\u00e1ria \u00e9 apenas uma parte da identidade cultural, focada especificamente na alimenta\u00e7\u00e3o."
+        },
+        {
+          "text": "Transporte de migra\u00e7\u00e3o",
+          "isCorrect": false,
+          "rationale": "O transporte \u00e9 o meio usado para migrar, mas n\u00e3o define quem a pessoa \u00e9 culturalmente."
+        },
+        {
+          "text": "Gloss\u00e1rio",
+          "isCorrect": false,
+          "rationale": "O gloss\u00e1rio \u00e9 uma lista de palavras e significados, n\u00e3o o conjunto de costumes de um povo."
+        }
+      ],
+      "hint": "\u00c9 como se fosse o seu 'RG cultural', mostrando de onde v\u00eam seus h\u00e1bitos."
+    }
+  ]
+}

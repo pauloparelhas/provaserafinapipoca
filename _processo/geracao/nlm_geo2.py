@@ -39,16 +39,49 @@ MEDIA = RAIZ / "ferramentas" / "media"
 ESTADO = NLMDIR / "_estado_nlm.json"
 NOME_CADERNO = "Serafina - GEO2: Comunidades e lugares (Y2)"
 
+# (chave, caminho, titulo mostrado no caderno)
 FONTES = [
-    ("pdf", TRAB / "Toddle-226a5c4b-861a-4a12-82a8-10daf9693fc9-Unidade 2 – Diferentes comunidades e sua relação com os lugares Y2.pdf"),
-    ("md", NLMDIR / "nlm_source_geo2.md"),
-    ("roteiro", NLMDIR / "roteiro_video.md"),
+    ("pdf", TRAB / "Toddle-226a5c4b-861a-4a12-82a8-10daf9693fc9-Unidade 2 – Diferentes comunidades e sua relação com os lugares Y2.pdf",
+     "Slides da professora — Unidade 2"),
+    ("md", NLMDIR / "nlm_source_geo2.md", "Conteúdo consolidado da Unidade 2"),
+    ("roteiro", NLMDIR / "roteiro_video.md", "Roteiro do vídeo (<3 min)"),
 ]
-# tipo de artefato -> (comando de geracao, extensao esperada, nome final em media/)
+
+# O prompt do video vive no roteiro; aqui vai a versao curta que o CLI aceita
+# como DESCRIPTION posicional (o texto longo entra pela fonte "roteiro").
+PROMPT_VIDEO = (
+    "Vídeo curto (menos de 3 minutos) em português do Brasil para uma criança de 7 anos "
+    "revisar antes da prova de Geografia. Cubra, nesta ordem: comunidade; tradição (passa "
+    "de geração em geração, de pais para filhos); identidade cultural; migração; os cinco "
+    "lugares onde a cultura aparece (culinária, vestimentas, religião, festas, arquitetura); "
+    "as cinco regiões do Brasil com festas, comidas, danças e músicas; e o fechamento sobre "
+    "respeitar a diversidade. DESTAQUE a diferença entre boi-bumbá (Parintins, Norte) e bumba "
+    "meu boi (Nordeste), e entre cuscuz paulista (Sudeste) e cuscuz nordestino (Nordeste). "
+    "Frases curtas, tom alegre. Não acrescente nada que não esteja nas fontes."
+)
+PROMPT_QUIZ = (
+    "Quiz em português do Brasil para criança de 7 anos, sobre as cinco regiões do Brasil "
+    "(festas, comidas, danças, músicas) e sobre as palavras tradição, migração e identidade "
+    "cultural. Só use o que está nas fontes."
+)
+PROMPT_FC = (
+    "Flashcards em português do Brasil para criança de 7 anos: as palavras da unidade, as "
+    "tradições e costumes, e o que é típico de cada uma das cinco regiões. Só use as fontes."
+)
+
+# tipo -> (args de geracao, extensao esperada, nome final em media/)
+# CLI 0.7.3: so `generate video` aceita --language, e o codigo e pt_BR (com
+# UNDERSCORE - "pt-BR" e "pt" sao recusados). Em quiz/flashcards o idioma
+# vem do PROPRIO PROMPT (por isso os prompts comecam dizendo "em portugues do
+# Brasil") e do env NOTEBOOKLM_HL, setado no main().
 ARTEFATOS = {
-    "video":      (["generate", "video", "--language", "pt_BR", "--style", "kawaii"], "mp4",  "video_geo2_nb1_pt.mp4"),
-    "quiz":       (["generate", "quiz"], "json", "quiz_geo2_raw.json"),
-    "flashcards": (["generate", "flashcards"], "json", "flashcards_geo2_raw.json"),
+    "video":      (["generate", "video", PROMPT_VIDEO, "--language", "pt_BR",
+                    "--style", "kawaii", "--format", "explainer"],
+                   "mp4", "video_geo2_nb1_pt.mp4"),
+    "quiz":       (["generate", "quiz", PROMPT_QUIZ, "--quantity", "more", "--difficulty", "easy"],
+                   "json", "quiz_geo2_raw.json"),
+    "flashcards": (["generate", "flashcards", PROMPT_FC, "--quantity", "more"],
+                   "json", "flashcards_geo2_nlm.json"),
 }
 
 
@@ -68,10 +101,12 @@ def st_save(s):
 
 def nlm(*args, timeout=600):
     """Roda o CLI e devolve (rc, saida). Nunca levanta: quem decide e o chamador."""
+    import os
     cmd = ["notebooklm", *args]
     print("   $ " + " ".join(str(a) for a in cmd)[:160])
+    env = dict(os.environ, NOTEBOOKLM_HL="pt_BR")   # idioma p/ quiz e flashcards
     try:
-        p = subprocess.run(cmd, capture_output=True, text=True,
+        p = subprocess.run(cmd, capture_output=True, text=True, env=env,
                            encoding="utf-8", errors="replace", timeout=timeout)
         return p.returncode, (p.stdout or "") + (p.stderr or "")
     except subprocess.TimeoutExpired:
@@ -113,12 +148,15 @@ def etapa_caderno(s, listagem):
 
 
 def etapa_fontes(s, nb):
-    for chave, caminho in FONTES:
+    """CLI 0.7.3: `source add [OPTIONS] CONTENT` — o caminho e POSICIONAL e o tipo
+    e auto-detectado; nao existe --file (foi o erro do primeiro passe)."""
+    for chave, caminho, titulo in FONTES:
         if s["fontes"].get(chave):
             print(f"[fonte] {chave}: ja subida"); continue
         if not caminho.exists():
             print(f"!! [fonte] {chave}: arquivo nao existe -> {caminho}"); continue
-        rc, out = nlm("source", "add", "--notebook", nb, "--file", str(caminho))
+        rc, out = nlm("source", "add", str(caminho), "--notebook", nb,
+                      "--type", "file", "--title", titulo, "--timeout", "300")
         if rc == 0:
             s["fontes"][chave] = True; st_save(s)
             print(f"[fonte] {chave}: OK ({caminho.name[:60]})")

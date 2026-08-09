@@ -1,0 +1,14 @@
+{
+  "notebook": "f7acb1fc-ccfa-46b0-a471-1ec71a43f295",
+  "fontes": {
+    "pdf": true,
+    "md": true,
+    "roteiro": true
+  },
+  "artefatos": {
+    "quiz": true,
+    "flashcards": true,
+    "video": true
+  },
+  "baixados": {}
+}
