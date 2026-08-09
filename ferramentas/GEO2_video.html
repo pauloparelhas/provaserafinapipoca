@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Vídeo da unidade — Geografia · Comunidades e lugares</title>
-<link rel="stylesheet" href="serafina-core.css?v=20260809a">
+<link rel="stylesheet" href="serafina-core.css?v=20260809b">
 <style>
 :root{--fs:1;--bg:#0d0b1e;--bg2:#10322a;--ink:#f0fdf4;--soft:rgba(255,255,255,.58);--card:#13303a;--line:rgba(255,255,255,.13);--accent:#34d399;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
 body.light{--bg:#eafaf1;--bg2:#dcf5e8;--ink:#0c2a1e;--soft:rgba(0,0,0,.52);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
@@ -40,6 +40,9 @@ video{width:100%;display:block;background:#000;aspect-ratio:16/9}
 .rl .rt{flex-shrink:0;font-weight:900;font-size:.8rem;color:var(--accent);background:rgba(52,211,153,.12);border-radius:10px;padding:4px 9px;min-width:52px;text-align:center}
 .rl .rx{font-weight:800;font-size:calc(.95rem*var(--fs));line-height:1.4}
 .nota{text-align:center;color:var(--soft);font-weight:700;font-size:.8rem;margin-top:20px;line-height:1.55;opacity:.85}
+
+.sombtn{transition:opacity .15s}
+.sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
 </style>
 </head>
 <body>
@@ -50,6 +53,7 @@ video{width:100%;display:block;background:#000;aspect-ratio:16/9}
     <span class="title">V&iacute;deo da unidade</span>
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
     <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
   </div>
@@ -158,9 +162,9 @@ v.addEventListener('loadedmetadata',function(){
   }
 });
 </script>
-<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9,stars:100};</script>
-<script src="serafina-core.js?v=20260809a"></script>
+<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9,stars:100,somKey:'geo2_som',voicePrefs:['Thalita','Antonio','Antônio','Google portugu','Maria','Daniel']};</script>
+<script src="serafina-core.js?v=20260809b"></script>
 <script>window.SERA_ACCENT={accent:'#34d399'};</script>
-<script src="cie2_theme.js?v=20260809a"></script>
+<script src="cie2_theme.js?v=20260809b"></script>
 </body>
 </html>

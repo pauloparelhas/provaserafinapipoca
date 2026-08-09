@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Arrasta e classifica — Geografia · Comunidades e lugares</title>
-<link rel="stylesheet" href="serafina-core.css?v=20260809a">
+<link rel="stylesheet" href="serafina-core.css?v=20260809b">
 <style>
 :root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#34d399;--accent2:#fbbf24;--tr:#fcd34d;--ok:#34d399;--no:#f87171;--mid:#fbbf24;--rad:22px}
 body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
@@ -125,6 +125,9 @@ body.show-tr .btn .etr{display:block}
 .board .col{flex:1 1 30%;min-width:96px}
 @media(max-width:520px){.board .col{flex:1 1 30%;min-width:88px;min-height:118px}.col-head{flex-direction:column;gap:0;padding:4px 2px}.col-head .cnm{font-size:.7rem;line-height:1.05;text-align:center}.col-head .ctr{font-size:.6rem;text-align:center}}
 
+
+.sombtn{transition:opacity .15s}
+.sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
 </style>
 </head>
 <body>
@@ -136,6 +139,7 @@ body.show-tr .btn .etr{display:block}
     <button class="iconbtn dicabtn" id="dica" title="Mostrar dica" onclick="toggleTr()">&#128161;<span class="ft">Dica</span></button>
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
     <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
   </div>
@@ -146,7 +150,7 @@ body.show-tr .btn .etr{display:block}
   <button class="qnav-btn" id="navPrev" onclick="prevGame()" title="Jogo anterior">&#8249;<span class="ql">Voltar</span></button>
   <button class="qnav-btn" id="navNext" onclick="nextGame()" title="Próximo jogo">&#8250;<span class="ql">Próximo</span></button>
 </div>
-<script src="GEO2_data.js?v=20260809a"></script>
+<script src="GEO2_data.js?v=20260809b"></script>
 <script>
 /* ============================================================
    ARRASTA E CLASSIFICA · Geografia Y2 · Unidade 2
@@ -517,10 +521,10 @@ function celebrate(){
 /* GEO: tudo em portugues; o botao da lampada revela as dicas (body.show-tr) */
 intro();
 </script>
-<script src="cie2_summary.js?v=20260809a"></script>
-<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9,stars:140};</script>
-<script src="serafina-core.js?v=20260809a"></script>
+<script src="cie2_summary.js?v=20260809b"></script>
+<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9,stars:140,somKey:'geo2_som',voicePrefs:['Thalita','Antonio','Antônio','Google portugu','Maria','Daniel']};</script>
+<script src="serafina-core.js?v=20260809b"></script>
 <script>window.SERA_ACCENT={accent:'#34d399'};</script>
-<script src="cie2_theme.js?v=20260809a"></script>
+<script src="cie2_theme.js?v=20260809b"></script>
 </body>
 </html>

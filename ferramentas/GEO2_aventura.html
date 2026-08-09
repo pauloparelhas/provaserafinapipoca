@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Expedição Brasil — Geografia · Comunidades e lugares</title>
-<link rel="stylesheet" href="serafina-core.css?v=20260809a">
+<link rel="stylesheet" href="serafina-core.css?v=20260809b">
 <style>
 :root{--fs:1;--bg:#0d0b1e;--bg2:#1b1440;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#161233;--line:rgba(255,255,255,.12);--accent:#34d399;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
 body.light{--bg:#e0f2fe;--bg2:#ede9fe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
@@ -136,6 +136,9 @@ body.show-tr .tr{display:block}
 .mrbtn .mre{font-size:1.5rem;line-height:1}
 .mrbtn .mrn{font-size:.74rem;line-height:1.05;text-align:center}
 .mrinfo{margin-top:10px;border:2px dashed var(--line);border-radius:14px;padding:11px 13px;font-weight:800;font-size:calc(.9rem*var(--fs));line-height:1.4;color:var(--ink);text-align:left;min-height:56px}
+
+.sombtn{transition:opacity .15s}
+.sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
 </style>
 </head>
 <body>
@@ -147,6 +150,7 @@ body.show-tr .tr{display:block}
     <button class="iconbtn dicabtn" id="dica" title="Mostrar dica" onclick="toggleTr()">&#128161;<span class="ft">Dica</span></button>
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
     <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
   </div>
@@ -176,10 +180,9 @@ body.show-tr .tr{display:block}
     keepGoing:'➡️ Seguir em frente!<span class="tr"></span>',
     goesIn:' vai em…', goesInPt:'',
     phaseDone:'Fase concluída!<span class="tr"></span>',
-    nextPhase:'➡️ Próxima fase<span class="tr"></span>'
-  }};</script>
-<script src="serafina-core.js?v=20260809a"></script>
-<script src="serafina-adventure.js?v=20260809a"></script>
+    nextPhase:'➡️ Próxima fase<span class="tr"></span>',somKey:'geo2_som',voicePrefs:['Thalita','Antonio','Antônio','Google portugu','Maria','Daniel']}};</script>
+<script src="serafina-core.js?v=20260809b"></script>
+<script src="serafina-adventure.js?v=20260809b"></script>
 <script>
 /* ============================================================
    EXPEDIÇÃO BRASIL — dados da aventura (Geografia 2tri)
@@ -537,6 +540,6 @@ var ADVENTURE={
 SERA_ADV.boot(ADVENTURE);
 </script>
 <script>window.SERA_ACCENT={accent:'#34d399'};</script>
-<script src="cie2_theme.js?v=20260809a"></script>
+<script src="cie2_theme.js?v=20260809b"></script>
 </body>
 </html>

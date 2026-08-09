@@ -32,20 +32,70 @@ var CFG=Object.assign({
   trKey:null, lang:'en-US', rate:.85,
   home:'../index.html',
   homeMsg:'Voltar ao menu do site? / Back to the menu?',
-  stars:120, starfield:true, unlock:true
+  stars:120, starfield:true, unlock:true,
+  voicePrefs:null,          /* nomes de voz em ordem de preferencia (ver abaixo) */
+  somKey:null               /* chave localStorage do mudo; null = nao persiste  */
 }, window.SERA_CFG||{});
 
 function $id(i){return document.getElementById(i);}
 
+/* ============================================================
+   VOZ — preferencia por NOME, nao "a primeira que aparecer".
+   O bug: `voices.filter(pt-BR)[0]` pegava a "Microsoft Daniel",
+   que e SAPI antiga e soa robotica — era ela que deixava a
+   leitura chata. As vozes boas em pt-BR sao, em ordem:
+     1. Thalita / Antonio  — neurais, mas SO existem no EDGE
+     2. Google portugues do Brasil — natural, existe no CHROME
+     3. Maria / Daniel — SAPI local, ultimo recurso
+   Produto pt-BR herda essa lista sem configurar nada. Produto
+   en-US (Ciencias) nao passa `voicePrefs` e cai no ramo antigo,
+   byte-a-byte igual ao de antes.
+   ============================================================ */
+var VOZ_PT=['Thalita','Antonio','Antônio','Google portugu','Maria','Daniel'];
+function escolheVoz(){
+  var vs=[]; try{vs=speechSynthesis.getVoices()||[];}catch(e){return null;}
+  if(!vs.length)return null;
+  var ehPt=/^pt/i.test(CFG.lang);
+  var prefs=CFG.voicePrefs||(ehPt?VOZ_PT:null);
+  if(prefs){
+    var doIdioma=vs.filter(function(v){return /pt[-_]BR/i.test(v.lang);});
+    for(var i=0;i<prefs.length;i++){
+      var achou=doIdioma.filter(function(v){
+        return v.name.toLowerCase().indexOf(prefs[i].toLowerCase())>-1;})[0];
+      if(achou)return achou;
+    }
+    if(doIdioma[0])return doIdioma[0];
+  }
+  var re=ehPt?/pt[-_]BR/i:/en[-_]US|English \(United States\)/i;
+  return vs.filter(function(v){return re.test(v.lang+' '+v.name);})[0]||null;
+}
+window.vozAtual=function(){var v=escolheVoz();return v?v.name:'(nenhuma)';};
+
+/* ---- mudo (o botao fica no produto; aqui so a mecanica) ---- */
+window.somLigado=true;
+try{ if(CFG.somKey&&localStorage.getItem(CFG.somKey)==='0') window.somLigado=false; }catch(e){}
+function pintaBotaoSom(){
+  var b=$id('sombtn'); if(!b)return;
+  b.innerHTML=window.somLigado?'\uD83D\uDD0A':'\uD83D\uDD07';
+  b.classList.toggle('off',!window.somLigado);
+  b.setAttribute('aria-pressed',String(!window.somLigado));
+  b.title=window.somLigado?'Desligar a voz':'Ligar a voz';
+}
+window.toggleSom=function(){
+  window.somLigado=!window.somLigado;
+  if(!window.somLigado){try{speechSynthesis.cancel();}catch(e){}}
+  if(CFG.somKey){try{localStorage.setItem(CFG.somKey,window.somLigado?'1':'0');}catch(e){}}
+  pintaBotaoSom();
+};
+
 /* ---- TTS ---- */
 window.say=function(txt){
-  if(!txt||!('speechSynthesis' in window))return;
+  if(!txt||!window.somLigado||!('speechSynthesis' in window))return;
   try{
     speechSynthesis.cancel();
     var u=new SpeechSynthesisUtterance(String(txt));
     u.lang=CFG.lang; u.rate=CFG.rate;
-    var re=/^pt/i.test(CFG.lang)?/pt[-_]BR/i:/en[-_]US|English \(United States\)/i;
-    var v=speechSynthesis.getVoices().filter(function(v){return re.test(v.lang+' '+v.name);})[0];
+    var v=escolheVoz();
     if(v)u.voice=v;
     speechSynthesis.speak(u);
   }catch(e){}
@@ -113,5 +163,14 @@ if(CFG.starfield){(function(){
 
 /* ---- restaura tradução persistida + aquece vozes TTS ---- */
 if(CFG.trKey){try{if(localStorage.getItem(CFG.trKey)==='1')document.body.classList.add('show-tr');}catch(e){}}
-if('speechSynthesis' in window){try{speechSynthesis.getVoices();}catch(e){}}
+if('speechSynthesis' in window){
+  try{
+    speechSynthesis.getVoices();
+    /* a lista de vozes chega ASSINCRONA no Chrome: sem este listener a
+       primeira fala da sessao sai com a voz errada (a robotica) */
+    speechSynthesis.addEventListener('voiceschanged',function(){escolheVoz();});
+  }catch(e){}
+}
+pintaBotaoSom();
+document.addEventListener('DOMContentLoaded',pintaBotaoSom);
 })();

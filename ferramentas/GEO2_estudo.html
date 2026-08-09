@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Estudar — Geografia · Comunidades e lugares</title>
-<link rel="stylesheet" href="serafina-core.css?v=20260809a">
+<link rel="stylesheet" href="serafina-core.css?v=20260809b">
 <style>
 /* ============================================================
    ESTUDAR (Geografia 2tri) — folha + palavras-chave + mapa mental numa casca
@@ -143,6 +143,9 @@ body.light .mm-tag{background:rgba(180,83,9,.15);color:#b45309}
 .bc-pink{background:rgba(244,114,182,.06);border-color:rgba(244,114,182,.25)}
 .bc-pink .mm-branch-hd,.bc-pink .mm-leaf-hd{background:rgba(244,114,182,.08)}
 .bc-pink .mm-detail{border-left:2px solid rgba(244,114,182,.3)}
+
+.sombtn{transition:opacity .15s}
+.sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
 </style>
 </head>
 <body>
@@ -154,6 +157,7 @@ body.light .mm-tag{background:rgba(180,83,9,.15);color:#b45309}
     <button class="iconbtn dicabtn" id="dica" title="Mostrar dica" onclick="toggleTr()">&#128161;<span class="ft">Dica</span></button>
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
     <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
   </div>
@@ -499,9 +503,9 @@ buildWords();
 buildMap();
 try{var t0=localStorage.getItem('geo2_estudo_tab');if(t0==='words'||t0==='map')showTab(t0);}catch(e){}
 </script>
-<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.85};</script>
-<script src="serafina-core.js?v=20260809a"></script>
+<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.85,somKey:'geo2_som',voicePrefs:['Thalita','Antonio','Antônio','Google portugu','Maria','Daniel']};</script>
+<script src="serafina-core.js?v=20260809b"></script>
 <script>window.SERA_ACCENT={accent:'#34d399'};</script>
-<script src="cie2_theme.js?v=20260809a"></script>
+<script src="cie2_theme.js?v=20260809b"></script>
 </body>
 </html>

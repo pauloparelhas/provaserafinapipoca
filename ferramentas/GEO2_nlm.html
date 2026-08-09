@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Quiz explicado — Geografia · Comunidades e lugares</title>
-<link rel="stylesheet" href="serafina-core.css?v=20260809a">
+<link rel="stylesheet" href="serafina-core.css?v=20260809b">
 <style>
 :root{--fs:1;--bg:#0d0b1e;--bg2:#10322a;--ink:#f0fdf4;--soft:rgba(255,255,255,.58);--card:#13303a;--line:rgba(255,255,255,.13);--accent:#34d399;--accent2:#fbbf24;--tr:#fcd34d;--ok:#34d399;--no:#f87171;--rad:20px}
 body.light{--bg:#eafaf1;--bg2:#dcf5e8;--ink:#0c2a1e;--soft:rgba(0,0,0,.52);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
@@ -81,6 +81,9 @@ body.show-tr .tr{display:block}
 .fim .sub{font-weight:800;color:var(--soft);font-size:.95rem;margin-bottom:16px;line-height:1.4}
 .fimbtns{display:flex;flex-direction:column;gap:10px}
 .origem{text-align:center;color:var(--soft);font-weight:700;font-size:.76rem;margin-top:22px;line-height:1.5;opacity:.75}
+
+.sombtn{transition:opacity .15s}
+.sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
 </style>
 </head>
 <body>
@@ -92,6 +95,7 @@ body.show-tr .tr{display:block}
     <button class="iconbtn dicabtn" id="dica" title="Mostrar dica" onclick="toggleTr()">&#128161;<span class="ft">Dica</span></button>
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
     <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
   </div>
@@ -138,8 +142,8 @@ function showTab(k){
 }
 
 Promise.all([
-  fetch('media/quiz_geo2_nlm.json?v=20260809a').then(function(r){return r.json();}),
-  fetch('media/flashcards_geo2_nlm.json?v=20260809a').then(function(r){return r.json();})
+  fetch('media/quiz_geo2_nlm.json?v=20260809b').then(function(r){return r.json();}),
+  fetch('media/flashcards_geo2_nlm.json?v=20260809b').then(function(r){return r.json();})
 ]).then(function(j){
   QZ=j[0]; RV=j[1];
   comecar(); montarRev();
@@ -225,9 +229,9 @@ function todas(abrir){
   document.querySelectorAll('#revStage .rc').forEach(function(e){e.classList.toggle('on',abrir);});
 }
 </script>
-<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9,stars:110};</script>
-<script src="serafina-core.js?v=20260809a"></script>
+<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9,stars:110,somKey:'geo2_som',voicePrefs:['Thalita','Antonio','Antônio','Google portugu','Maria','Daniel']};</script>
+<script src="serafina-core.js?v=20260809b"></script>
 <script>window.SERA_ACCENT={accent:'#34d399'};</script>
-<script src="cie2_theme.js?v=20260809a"></script>
+<script src="cie2_theme.js?v=20260809b"></script>
 </body>
 </html>
