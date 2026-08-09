@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Vídeo da unidade — Geografia · Comunidades e lugares</title>
+<link rel="stylesheet" href="serafina-core.css?v=20260809a">
+<style>
+:root{--fs:1;--bg:#0d0b1e;--bg2:#10322a;--ink:#f0fdf4;--soft:rgba(255,255,255,.58);--card:#13303a;--line:rgba(255,255,255,.13);--accent:#34d399;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
+body.light{--bg:#eafaf1;--bg2:#dcf5e8;--ink:#0c2a1e;--soft:rgba(0,0,0,.52);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.05rem;font-weight:800;cursor:pointer;padding:0 8px}
+.iconbtn:active{transform:scale(.9)}
+.wrap{flex:1;width:100%;max-width:820px;margin:0 auto;padding:16px 12px 60px}
+.head{text-align:center;margin-bottom:14px}
+.head .em{font-size:calc(2.8rem*var(--fs));filter:drop-shadow(0 6px 12px rgba(0,0,0,.35))}
+.head h1{font-size:calc(1.3rem*var(--fs));font-weight:900;line-height:1.25;margin-top:4px}
+.head p{color:var(--soft);font-weight:700;font-size:calc(.93rem*var(--fs));line-height:1.5;margin-top:8px}
+.player{background:#000;border:2px solid var(--line);border-radius:var(--rad);overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.4)}
+video{width:100%;display:block;background:#000;aspect-ratio:16/9}
+.ctrl{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.cb{min-height:48px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-family:inherit;font-weight:900;font-size:.92rem;border-radius:16px;padding:8px 16px;cursor:pointer}
+.cb.on{border-color:var(--accent);background:rgba(52,211,153,.16);color:var(--ink)}
+.cb:active{transform:scale(.96)}
+.aviso{display:none;margin-top:14px;border:2px dashed var(--accent2);border-radius:16px;padding:14px 15px;font-weight:800;font-size:calc(.93rem*var(--fs));line-height:1.5;color:var(--ink)}
+.aviso.on{display:block}
+.aviso a{color:var(--accent)}
+.sec{font-size:.74rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin:28px 2px 10px;display:flex;align-items:center;gap:8px}
+.sec::after{content:"";flex:1;height:1px;background:var(--line)}
+.rot{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);padding:6px 4px 10px}
+.rl{display:flex;gap:11px;align-items:flex-start;padding:10px 13px;border-bottom:1px solid var(--line);cursor:pointer}
+.rl:last-child{border-bottom:none}
+.rl:active{background:rgba(255,255,255,.04)}
+.rl .rt{flex-shrink:0;font-weight:900;font-size:.8rem;color:var(--accent);background:rgba(52,211,153,.12);border-radius:10px;padding:4px 9px;min-width:52px;text-align:center}
+.rl .rx{font-weight:800;font-size:calc(.95rem*var(--fs));line-height:1.4}
+.nota{text-align:center;color:var(--soft);font-weight:700;font-size:.8rem;margin-top:20px;line-height:1.55;opacity:.85}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">V&iacute;deo da unidade</span>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="wrap">
+    <div class="head">
+      <div class="em">&#127916;</div>
+      <h1>Revis&atilde;o de Geografia em v&iacute;deo</h1>
+      <p>Diferentes comunidades e sua rela&ccedil;&atilde;o com os lugares.<br>Assista uma vez inteiro e depois volte nas partes que voc&ecirc; achar mais dif&iacute;ceis.</p>
+    </div>
+
+    <div class="player">
+      <video id="v" controls playsinline preload="metadata" poster="media/geo_insumos/13_painel_regioes.jpg">
+        <source src="media/video_geo2_nb1_pt.mp4" type="video/mp4">
+        O seu navegador n&atilde;o consegue tocar v&iacute;deo.
+      </video>
+    </div>
+
+    <div class="ctrl">
+      <button class="cb" id="sp075" onclick="vel(0.75)">&#128034; Mais devagar</button>
+      <button class="cb on" id="sp1" onclick="vel(1)">&#9654;&#65039; Normal</button>
+      <button class="cb" id="sp125" onclick="vel(1.25)">&#128007; Mais r&aacute;pido</button>
+      <button class="cb" onclick="reinicia()">&#8634; Do come&ccedil;o</button>
+    </div>
+
+    <div class="aviso" id="aviso">
+      &#128533; N&atilde;o consegui carregar o v&iacute;deo aqui.
+      Tente <a href="media/video_geo2_nb1_pt.mp4" target="_blank" rel="noopener">abrir o arquivo direto</a>,
+      ou use o <a href="GEO2_estudo.html">Estudar</a> e o <a href="GEO2_nlm.html">Quiz explicado</a> &mdash;
+      eles t&ecirc;m o mesmo conte&uacute;do.
+    </div>
+
+    <div class="sec">&#128220; O que o v&iacute;deo conta</div>
+    <div class="rot" id="rot"></div>
+
+    <div class="nota">O v&iacute;deo foi feito pelo <b>NotebookLM</b> a partir dos slides da professora.<br>
+      Toque em qualquer linha do roteiro para pular direto para aquela parte. &#128071;</div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   VÍDEO DA UNIDADE — Geografia 2tri
+   Player do vídeo gerado pelo NotebookLM (pt_BR, kawaii) a partir
+   das mesmas fontes da unidade. O roteiro ao lado é clicável e
+   pula para o trecho — a criança volta direto no que não pegou.
+   Os tempos vêm do roteiro_video.md (marcações do próprio texto).
+   ============================================================ */
+var $=function(id){return document.getElementById(id);};
+var v=$('v');
+
+/* [segundo, texto] — marcações do roteiro_video.md */
+var ROTEIRO=[
+ [0,   'Abertura: de onde vêm as nossas tradições?'],
+ [12,  'O que é comunidade — pessoas, histórias e costumes diferentes'],
+ [25,  'O que é tradição — passa de geração em geração, de pais para filhos'],
+ [42,  'Identidade cultural — o que diz quem a gente é'],
+ [52,  'Migração — quem migra leva a cultura na mala'],
+ [70,  'Onde a cultura aparece: comida, roupa, religião, festa e arquitetura'],
+ [85,  'O Brasil é multicultural — vamos às 5 regiões'],
+ [95,  'NORTE — Parintins e o boi-bumbá, tacacá, açaí, carimbó'],
+ [108, 'NORDESTE — Salvador, São João e o bumba meu boi (cuidado com o par!)'],
+ [125, 'CENTRO-OESTE — Divino Espírito Santo, arroz com pequi, siriri e cururu'],
+ [138, 'SUDESTE — Barretos, carnaval do Rio, feijoada, pão de queijo e samba'],
+ [150, 'SUL — Oktoberfest, churrasco gaúcho, chimarrão e pau de fita'],
+ [165, 'Fechamento: cada lugar tem seu jeito — respeitar a diversidade']
+];
+
+function mmss(s){var m=Math.floor(s/60),r=Math.round(s%60);return m+':'+(r<10?'0':'')+r;}
+$('rot').innerHTML=ROTEIRO.map(function(r,i){
+  return '<div class="rl" onclick="pula('+r[0]+')">'
+   +'<span class="rt">'+mmss(r[0])+'</span>'
+   +'<span class="rx">'+r[1]+'</span></div>';
+}).join('');
+
+function pula(s){
+  if(!v)return;
+  try{ v.currentTime=s; v.play(); }catch(e){}
+  v.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function vel(x){
+  if(!v)return;
+  v.playbackRate=x;
+  ['sp075','sp1','sp125'].forEach(function(id){$(id).classList.remove('on');});
+  $(x===0.75?'sp075':x===1.25?'sp125':'sp1').classList.add('on');
+}
+function reinicia(){ if(v){v.currentTime=0;v.play();} }
+
+/* se o arquivo nao carregar, a crianca precisa saber para onde ir */
+v.addEventListener('error',function(){ $('aviso').classList.add('on'); });
+v.addEventListener('loadedmetadata',function(){
+  var d=v.duration;
+  if(isFinite(d)&&d>0){
+    var h=document.querySelector('.head p');
+    h.innerHTML=h.innerHTML+'<br><b>Dura&ccedil;&atilde;o: '+mmss(d)+'</b>';
+    /* esconde marcacoes alem do fim do video (o roteiro e uma estimativa) */
+    document.querySelectorAll('.rl').forEach(function(el,i){
+      if(ROTEIRO[i][0]>d) el.style.display='none';
+    });
+  }
+});
+</script>
+<script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9,stars:100};</script>
+<script src="serafina-core.js?v=20260809a"></script>
+<script>window.SERA_ACCENT={accent:'#34d399'};</script>
+<script src="cie2_theme.js?v=20260809a"></script>
+</body>
+</html>

@@ -12,6 +12,7 @@
   },
   "baixados": {
     "quiz": "ferramentas/media/quiz_geo2_nlm.json",
-    "flashcards": "ferramentas/media/flashcards_geo2_nlm.json"
+    "flashcards": "ferramentas/media/flashcards_geo2_nlm.json",
+    "video": "ferramentas\\media\\video_geo2_nb1_pt.mp4"
   }
 }
