@@ -135,6 +135,59 @@ body.show-tr .btn .etr{display:block}
 
 .sombtn{transition:opacity .15s}
 .sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
+
+/* ---------- mouse (notebook) ---------- */
+@media (hover:hover){
+  .btn:not(:disabled):hover{border-color:var(--accent)}
+  .btn.primary:hover,.startbtn:hover{opacity:.93}
+}
+/* ---------- telas largas (notebook) ---------- */
+@media (min-width:1000px){
+  .card{max-width:900px;padding:20px 22px 24px}
+  .playarea{min-height:min(46vh,340px);gap:44px 18px}
+  .balloon{width:136px;min-height:114px;font-size:calc(.86rem*var(--fs))}
+  .actions{flex-direction:row;flex-wrap:wrap}
+  .actions .btn{flex:1 1 42%;width:auto}
+}
+/* ---------- celular em PAISAGEM: alvo e botoes a esquerda, baloes a direita ---------- */
+@media (orientation:landscape) and (max-height:520px){
+  .topbar{padding:5px 8px}
+  .bar{height:6px}
+  .stage{padding:8px 10px 62px}
+  .card{max-width:min(97vw,940px);padding:12px 14px 14px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr);column-gap:14px;align-content:start}
+  .card>.intro,.card>.fim{grid-column:1/-1}
+  .ghead{grid-column:1;grid-row:1;padding-right:0;margin-bottom:0}
+  .ghead .gemo{font-size:1.3rem}
+  .target{grid-column:1;grid-row:2;margin:6px 0 0;padding:9px 40px 9px 12px}
+  .target .te{font-size:1.7rem}
+  .target .tt .tname{font-size:calc(1.25rem*var(--fs))}
+  .target .listen{top:6px;right:6px;width:34px;height:34px}
+  .subhint{grid-column:1;grid-row:3;margin:6px 0 0}
+  .popcount{grid-column:1;grid-row:4;margin:6px 0 0}
+  .fb{grid-column:1;grid-row:5;margin-top:6px}
+  .clear{grid-column:1;grid-row:6;margin-top:6px;padding:8px}
+  .clear .cbig{font-size:1.5rem}
+  .actions{grid-column:1;grid-row:7;gap:6px;margin-top:8px}
+  .btn{padding:9px 10px;font-size:.88rem;border-radius:13px}
+  .btn.ghost{padding:7px 10px;font-size:.8rem}
+  .tip{grid-column:1;grid-row:8;margin:8px 0 0;padding:8px 10px}
+  .playwrap{grid-column:2;grid-row:1/span 8;margin-top:0}
+  .playarea{min-height:62dvh;gap:34px 10px;padding:8px 2px 20px}
+  .balloon{width:104px;min-height:88px;font-size:calc(.74rem*var(--fs));padding:10px 9px 12px}
+  .qnav{padding:4px 10px calc(4px + env(safe-area-inset-bottom))}
+  .qnav-btn{height:44px}
+  .gamelist{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 4px}
+  .gamechip{padding:8px 12px}
+  .gamechip .ge{width:38px;height:38px;font-size:1.3rem}
+  .qfig{font-size:calc(1.8rem*var(--fs));margin:0}
+  .startbtn{height:48px}
+  .fim .big{font-size:2.4rem}
+}
+/* quem pediu menos movimento nao ve os baloes balancando */
+@media (prefers-reduced-motion:reduce){
+  .balloon.float{animation:none}
+  *{transition:none!important}
+}
 </style>
 </head>
 <body>
@@ -146,7 +199,6 @@ body.show-tr .btn .etr{display:block}
     <button class="iconbtn dicabtn" id="dica" title="Mostrar dica" onclick="toggleTr()">&#128161;<span class="ft">Dica</span></button>
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn soundbtn" id="soundbtn" title="Som / Sound" onclick="toggleSound()">&#128266;</button>
     <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
     <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
@@ -188,7 +240,8 @@ var correctTotal=0;  // correct balloons this round
 var roundDone=false;
 var doneTargets={};  // "gi:ti" -> true
 var doneGames={};    // game index -> true (all targets cleared)
-var soundOn=true;
+/* um unico botao de som na barra (o do core, #sombtn): manda na voz E nos efeitos */
+function soundOn(){ return window.somLigado!==false; }
 const $=id=>document.getElementById(id);
 function esc(s){return String(s).replace(/<[^>]*>/g,'').replace(/"/g,'&quot;').replace(/'/g,"\\'");}
 function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
@@ -310,7 +363,7 @@ function pop(i){
     var realCol=G().cols.find(c=>c.id===b.card.col);
     var tag=el.querySelector('.realtag'); if(tag&&realCol)tag.innerHTML='→ '+realCol.emo+' '+realCol.en;
     wrongHit[i]=true;
-    var fb=$('fb'); if(fb){fb.className='fb no';fb.innerHTML='Not this one — it is <b>'+(realCol?realCol.en:'')+'</b>.<span class="tr" style="font-size:.82rem"> Esse não — ele é '+(realCol?realCol.pt:'')+'.</span>';}
+    var fb=$('fb'); if(fb){fb.className='fb no';fb.innerHTML='Esse não — ele é <b>'+(realCol?realCol.en:'')+'</b>.<span class="tr" style="font-size:.82rem"> '+(realCol&&realCol.pt?realCol.pt:'')+'</span>';}
     setTimeout(function(){ if(el){el.classList.remove('wrong','showtag');} },1700);
   }
 }
@@ -322,7 +375,7 @@ function clearRound(){
   if($('tip'))$('tip').classList.add('show');
   if(c){
     c.classList.add('show');
-    $('clearmsg').innerHTML='Target cleared! \u{1F44F}<div class="tr" style="font-size:.82rem">Alvo concluído!</div>';
+    $('clearmsg').innerHTML='Alvo concluído! \u{1F44F}';
     $('clearsub').textContent=last?'Nível '+(gi+1)+' concluído!':'Agora o próximo alvo…';
   }
   var fb=$('fb'); if(fb)fb.innerHTML='';
@@ -341,7 +394,7 @@ function buildActions(){
   var reset='<button class="btn ghost" onclick="startRound()">↺ Refazer este alvo<span class="etr"></span></button>';
   var menu='<button class="btn ghost" onclick="intro()">\u{1F3AE} Menu dos níveis<span class="etr"></span></button>';
   if(!roundDone){
-    a.innerHTML='<button class="btn primary" onclick="checkRound()">\u{2705} I popped them all!<span class="etr">Estourei todos!</span></button>'+summary+reset+menu;
+    a.innerHTML='<button class="btn primary" onclick="checkRound()">\u{2705} Estourei todos!<span class="etr"></span></button>'+summary+reset+menu;
   }else{
     var last=ti>=g.cols.length-1;
     if(!last){
@@ -358,7 +411,7 @@ function checkRound(){
   if(roundDone)return;
   if(Object.keys(popped).length>=correctTotal){ clearRound(); }
   else{
-    var fb=$('fb'); if(fb){fb.className='fb no';fb.innerHTML='Look again — there may be more to pop! \u{1F50E}<span class="tr" style="font-size:.82rem"> Olhe de novo — pode haver mais para estourar!</span>';}
+    var fb=$('fb'); if(fb){fb.className='fb no';fb.innerHTML='Olhe de novo — ainda tem balão para estourar! \u{1F50E}';}
   }
 }
 function nextTarget(){ if(ti<G().cols.length-1){ ti++; startRound(); } }
@@ -385,8 +438,8 @@ function finish(){
   $('qnav').classList.remove('show');
   var n=Object.keys(doneGames).length;
   $('card').innerHTML='<div class="fim"><div class="big">\u{1F3C6}</div>'
-    +'<div class="score">'+n+' / '+GAMES.length+' levels cleared</div>'
-    +'<div class="sub">Great popping, scientist! <span class="tr">Mandou bem, cientista!</span></div>'
+    +'<div class="score">'+n+' / '+GAMES.length+' níveis concluídos</div>'
+    +'<div class="sub">Mandou bem, explorador do Brasil! \u{1F5FA}\u{FE0F}</div>'
     +'<div class="actions">'
     +'<button class="btn primary" onclick="intro()">\u{1F3AE} Jogar de novo<span class="etr"></span></button>'
     +'<button class="btn" onclick="goHome()">\u{1F3E0} Menu<span class="etr">Menu do site</span></button>'
@@ -400,7 +453,7 @@ function finish(){
 var actx=null;
 function ac(){ if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){actx=null;}} return actx; }
 function playPlim(){
-  if(!soundOn)return; var a=ac(); if(!a)return;
+  if(!soundOn())return; var a=ac(); if(!a)return;
   try{var o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(880,a.currentTime);
     o.frequency.exponentialRampToValueAtTime(1500,a.currentTime+.12);
     g.gain.setValueAtTime(.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(.25,a.currentTime+.02);
@@ -408,14 +461,13 @@ function playPlim(){
     o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.3);}catch(e){}
 }
 function playErr(){
-  if(!soundOn)return; var a=ac(); if(!a)return;
+  if(!soundOn())return; var a=ac(); if(!a)return;
   try{var o=a.createOscillator(),g=a.createGain();o.type='square';o.frequency.setValueAtTime(220,a.currentTime);
     o.frequency.exponentialRampToValueAtTime(90,a.currentTime+.18);
     g.gain.setValueAtTime(.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(.18,a.currentTime+.02);
     g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+.22);
     o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.24);}catch(e){}
 }
-function toggleSound(){ soundOn=!soundOn; $('soundbtn').classList.toggle('off',!soundOn); $('soundbtn').innerHTML=soundOn?'\u{1F50A}':'\u{1F507}'; if(soundOn){ac();} }
 
 /* ---- sparkle on correct pop (discreet) ---- */
 function sparkle(x,y){
