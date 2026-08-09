@@ -215,6 +215,20 @@ body.show-tr .tr{display:block}
 
 .sombtn{transition:opacity .15s}
 .sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
+
+/* ---------- mouse (notebook): mesma afordance dos outros 8 produtos ---------- */
+@media (hover:hover){
+  .adv-node:not(.locked):hover,.adv-opt:hover,.adv-bucket:hover,.adv-mapbtn:hover{border-color:var(--accent)}
+  .adv-go:hover,.adv-check:hover{opacity:.93}
+}
+/* ---------- telas largas (notebook): mesmo breakpoint do resto do site ------- */
+@media (min-width:1000px){
+  .wrap{max-width:760px}
+}
+/* quem pediu menos movimento nao ve pulso, flutuacao nem tremor */
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
 </style>
 </head>
 <body>

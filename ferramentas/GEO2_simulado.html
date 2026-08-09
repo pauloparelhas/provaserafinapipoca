@@ -65,8 +65,6 @@ body.show-tr .opt .otr{display:block}
 .vfbtn{flex:1;max-width:200px;min-height:96px;padding:14px 10px;border:2px solid var(--line);border-radius:18px;background:var(--surf);color:var(--ink);text-align:center;box-shadow:var(--press);
   font-size:calc(1.12rem*var(--fs));font-weight:900;cursor:pointer;font-family:inherit;transition:.15s}
 .vfbtn .big{display:block;font-size:1.8rem;margin-bottom:2px}
-.vfbtn .vtr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.72rem}
-body.show-tr .vfbtn .vtr{display:block}
 .vfbtn:active{transform:scale(.96)}
 .vfbtn.ok{background:var(--ok);color:#06251a;border-color:var(--ok);box-shadow:none}
 .vfbtn.no{background:var(--no);color:#3a0a0a;border-color:var(--no);box-shadow:none}
@@ -691,8 +689,8 @@ function renderVF(it){
   $('card').innerHTML=head(it,'Verdadeiro ou falso','vf')+
    `<div class="task">Toque em Verdadeiro ou em Falso</div>
     <div class="vfwrap">
-      <button class="vfbtn" id="vT" onclick="ansVF(true)"><span class="big">✅</span>Verdadeiro<span class="vtr"></span></button>
-      <button class="vfbtn" id="vF" onclick="ansVF(false)"><span class="big">❌</span>Falso<span class="vtr"></span></button>
+      <button class="vfbtn" id="vT" onclick="ansVF(true)"><span class="big">✅</span>Verdadeiro</button>
+      <button class="vfbtn" id="vF" onclick="ansVF(false)"><span class="big">❌</span>Falso</button>
     </div><div class="fb" id="fb"></div>`+nextBtn(!it.done);
   if(it.done) paintVF(it);
 }
