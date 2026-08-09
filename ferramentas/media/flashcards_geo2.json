@@ -1,0 +1,94 @@
+{
+  "materia": "Geografia",
+  "unidade": "Unidade 2 — Diferentes comunidades e sua relação com os lugares",
+  "ano": "Year 2",
+  "fonte": "trabalho/2tri_geografia/_roteiro.md (derivado do PDF Toddle da Unidade 2)",
+  "baralhos": [
+    {
+      "key": "conceitos",
+      "nome": "Palavras da unidade",
+      "emo": "💬",
+      "cor": "#fb923c",
+      "cards": [
+        {"f": "O que é uma TRADIÇÃO?", "v": "Um costume que passa de geração em geração, de pais para filhos.", "d": "está há muito tempo na família"},
+        {"f": "O que é MIGRAÇÃO?", "v": "Quando pessoas mudam de um lugar para outro levando consigo hábitos, crenças e modos de viver.", "d": "não é passeio: é ir morar em outro lugar"},
+        {"f": "O que é IDENTIDADE CULTURAL?", "v": "O conjunto de tradições e costumes que diz quem nós somos.", "d": "construída por histórias que se entrelaçam ao longo do tempo"},
+        {"f": "O que é uma COMUNIDADE?", "v": "O lugar onde vivemos, formado por diferentes pessoas, histórias e costumes.", "d": ""},
+        {"f": "Quem são os ANCESTRAIS?", "v": "As pessoas da nossa família que viveram antes de nós: avós, bisavós…", "d": ""},
+        {"f": "O que quer dizer MULTICULTURAL?", "v": "Feito de muitas culturas juntas — é assim o Brasil.", "d": ""},
+        {"f": "Em quais 5 coisas a cultura de quem migrou aparece?", "v": "Na culinária, nas vestimentas, na religião, nas festas e na arquitetura.", "d": "a lista fechada do material"},
+        {"f": "As tradições surgiram do nada?", "v": "Não. Muitas vieram com pessoas que migraram de outros lugares e influenciaram os lugares onde chegaram.", "d": ""}
+      ]
+    },
+    {
+      "key": "tradicoes",
+      "nome": "Tradições e costumes",
+      "emo": "🖼️",
+      "cor": "#f472b6",
+      "cards": [
+        {"f": "Farinha de mandioca artesanal — tradição de quem?", "v": "Dos povos indígenas da Amazônia (Região Norte).", "d": ""},
+        {"f": "Bonecos Gigantes — carnaval de qual cidade?", "v": "Olinda, em Pernambuco.", "d": ""},
+        {"f": "Xilogravura — para que serve?", "v": "É arte tradicional do Nordeste, usada para ilustrar os folhetos da literatura de cordel.", "d": ""},
+        {"f": "Jongo — de qual matriz?", "v": "De matriz africana: dança, percussão e cantos em roda.", "d": ""},
+        {"f": "Jiu-jitsu brasileiro — de onde é?", "v": "Do Brasil. Foi desenvolvido aqui a partir da adaptação do judô e do jiu-jitsu japonês.", "d": "é brasileiro, não japonês"},
+        {"f": "Oktoberfest de Blumenau — origem e lugar?", "v": "Origem alemã, incorporada às tradições de Santa Catarina (Sul).", "d": "música, danças folclóricas, gastronomia e trajes típicos"},
+        {"f": "Cuscuz paulista × cuscuz nordestino", "v": "Paulista: Sudeste, farinha de milho com peixe, ovos e legumes. Nordestino: flocos de milho cozidos no vapor.", "d": "mesmo nome, pratos e regiões diferentes"},
+        {"f": "Chimarrão — de qual cultura?", "v": "Da cultura gaúcha, do Rio Grande do Sul (Sul).", "d": ""},
+        {"f": "Santo Daime — o que é?", "v": "Ritual religioso amazônico fundado na década de 1930, que mistura tradições indígenas e cristãs.", "d": ""}
+      ]
+    },
+    {
+      "key": "regioes",
+      "nome": "As 5 regiões",
+      "emo": "🇧🇷",
+      "cor": "#34d399",
+      "cards": [
+        {"f": "NORTE — festas, comidas, danças e músicas", "v": "Festas: festival de Parintins (boi-bumbá). Comidas: tacacá, açaí. Comemoração: Festa do Divino. Dança: carimbó. Músicas: toada, carimbó, boi-bumbá.", "d": ""},
+        {"f": "NORDESTE — festas, comidas, danças e músicas", "v": "Festas: carnaval de Salvador, festa de São João, bumba meu boi. Comidas: acarajé, baião de dois, vatapá. Comemorações: Senhor do Bonfim, Iemanjá. Danças: frevo, forró, baião, maracatu. Músicas: forró, frevo, axé, maracatu, xote.", "d": ""},
+        {"f": "CENTRO-OESTE — festas, comidas, danças e músicas", "v": "Festas: Divino Espírito Santo, São Benedito. Comidas: arroz com pequi, pamonha. Comemorações: São Sebastião, Romaria do Divino Pai Eterno. Danças: siriri, cururu. Músicas: sertanejo, moda de viola.", "d": ""},
+        {"f": "SUDESTE — festas, comidas, danças e músicas", "v": "Festas: peão de Barretos, carnaval do Rio, festa da uva de Jundiaí. Comidas: feijoada, pão de queijo, tutu de feijão, moqueca capixaba. Comemorações: Nossa Senhora Aparecida, congada. Dança: samba. Músicas: samba, funk, pagode, MPB.", "d": ""},
+        {"f": "SUL — festas, comidas, danças e músicas", "v": "Festas: Oktoberfest, festa nacional do pinhão, festa do vinho. Comidas: churrasco gaúcho, arroz carreteiro. Comemorações: Semana Farroupilha, festa da uva. Danças: xote gaúcho, pau de fita. Música: sertanejo universitário.", "d": ""},
+        {"f": "Tacacá e açaí — de qual região?", "v": "Norte.", "d": ""},
+        {"f": "Acarajé, baião de dois e vatapá — de qual região?", "v": "Nordeste.", "d": ""},
+        {"f": "Arroz com pequi e pamonha — de qual região?", "v": "Centro-Oeste.", "d": ""},
+        {"f": "Feijoada, pão de queijo e tutu de feijão — de qual região?", "v": "Sudeste.", "d": ""},
+        {"f": "Churrasco gaúcho e arroz carreteiro — de qual região?", "v": "Sul.", "d": ""},
+        {"f": "Carimbó — dança de qual região?", "v": "Norte.", "d": ""},
+        {"f": "Frevo, forró, baião e maracatu — de qual região?", "v": "Nordeste.", "d": "lá são dança E música"},
+        {"f": "Siriri e cururu — de qual região?", "v": "Centro-Oeste.", "d": ""},
+        {"f": "Samba — dança de qual região?", "v": "Sudeste.", "d": ""},
+        {"f": "Xote gaúcho e pau de fita — de qual região?", "v": "Sul.", "d": ""}
+      ]
+    },
+    {
+      "key": "pegadinhas",
+      "nome": "Cuidado com estes!",
+      "emo": "⚠️",
+      "cor": "#fbbf24",
+      "cards": [
+        {"f": "Boi-bumbá é de qual região?", "v": "Norte — é o festival de Parintins, no Amazonas.", "d": ""},
+        {"f": "E o bumba meu boi?", "v": "Nordeste.", "d": "os nomes se parecem, as regiões não"},
+        {"f": "Moda de viola é de qual região?", "v": "Centro-Oeste (junto com o sertanejo).", "d": ""},
+        {"f": "Sertanejo universitário é de qual região?", "v": "Sul.", "d": ""},
+        {"f": "Xote gaúcho é dança de qual região?", "v": "Sul. (O xote sozinho aparece como música do Nordeste.)", "d": ""},
+        {"f": "A Oktoberfest é da Alemanha ou do Brasil?", "v": "A origem é alemã, mas a festa é do Sul do Brasil, em Blumenau (SC).", "d": ""},
+        {"f": "Festa da uva de Jundiaí — qual região?", "v": "Sudeste. (Jundiaí fica em São Paulo.)", "d": ""},
+        {"f": "Por que não dá para responder só 'Festa do Divino'?", "v": "Porque ela aparece no Norte e também como festa do Divino Espírito Santo no Centro-Oeste. É preciso o nome completo.", "d": ""}
+      ]
+    },
+    {
+      "key": "diversidade",
+      "nome": "Diversidade e lugares",
+      "emo": "🌎",
+      "cor": "#22d3ee",
+      "cards": [
+        {"f": "Por que pessoas de lugares diferentes vivem de modos diferentes?", "v": "Porque têm relações distintas com o meio ambiente em que estão inseridas.", "d": ""},
+        {"f": "Onde essas diferenças aparecem?", "v": "Nos hábitos e nas manifestações culturais de cada lugar.", "d": ""},
+        {"f": "Para que serve entender isso?", "v": "Para respeitar a diversidade.", "d": ""},
+        {"f": "Uma tradição pode mudar com o tempo?", "v": "Pode. Uma brincadeira antiga pode ter se transformado ao longo dos anos, e a avó pode ter aprendido um prato típico em outro lugar.", "d": ""},
+        {"f": "O que vai na capa do Álbum das nossas origens?", "v": "Uma colagem com bandeiras, mapas, comidas, festas, datas comemorativas — tudo o que representa as tradições da família.", "d": ""},
+        {"f": "O que a entrevista da apostila pergunta?", "v": "Quem você entrevistou, quem da família migrou para o Brasil, por que veio, como foi a viagem e o transporte, e como foi a adaptação.", "d": ""}
+      ]
+    }
+  ]
+}
