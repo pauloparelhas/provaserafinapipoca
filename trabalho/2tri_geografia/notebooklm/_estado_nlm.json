@@ -10,5 +10,8 @@
     "flashcards": true,
     "video": true
   },
-  "baixados": {}
+  "baixados": {
+    "quiz": "ferramentas/media/quiz_geo2_nlm.json",
+    "flashcards": "ferramentas/media/flashcards_geo2_nlm.json"
+  }
 }

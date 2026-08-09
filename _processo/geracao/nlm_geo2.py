@@ -79,7 +79,7 @@ ARTEFATOS = {
                     "--style", "kawaii", "--format", "explainer"],
                    "mp4", "video_geo2_nb1_pt.mp4"),
     "quiz":       (["generate", "quiz", PROMPT_QUIZ, "--quantity", "more", "--difficulty", "easy"],
-                   "json", "quiz_geo2_raw.json"),
+                   "json", "quiz_geo2_nlm.json"),
     "flashcards": (["generate", "flashcards", PROMPT_FC, "--quantity", "more"],
                    "json", "flashcards_geo2_nlm.json"),
 }
@@ -176,31 +176,48 @@ def etapa_gerar(s, nb):
             print(f"!! [gerar] {tipo} falhou:\n{out[:500]}")
 
 
-def etapa_esperar(s, nb, minutos=25):
-    """Poll do artifact list. O video demora; quiz/flashcards saem rapido."""
+def status_artefatos(nb):
+    """{type_id: status} lido do --json.
+
+    NAO parsear a tabela: ela quebra os titulos em varias linhas, entao
+    `grep Video -A4` captura o "completed" do artefato SEGUINTE e o video
+    aparece pronto quando ainda esta pending (erro real, 09/08).
+    """
+    rc, out = nlm("artifact", "list", "--notebook", nb, "--json", timeout=180)
+    try:
+        d = json.loads(out[out.index("{"):out.rindex("}") + 1])
+        return {a.get("type_id"): a.get("status") for a in d.get("artifacts", [])}
+    except Exception:
+        return {}
+
+
+def etapa_esperar(s, nb, minutos=40):
+    """Poll do artifact list. O video demora ~20-40 min; quiz/flashcards saem em ~1 min."""
     fim = time.time() + minutos * 60
+    pendentes = {"pending", "processing", "generating"}
     while time.time() < fim:
-        rc, out = nlm("artifact", "list", "--notebook", nb, timeout=180)
-        print(f"   [{time.strftime('%H:%M:%S')}] artefatos:")
-        for linha in out.splitlines():
-            if linha.strip():
-                print("     " + linha[:150])
-        baixo = out.lower()
-        if "pending" not in baixo and "processing" not in baixo and "generating" not in baixo:
+        st = status_artefatos(nb)
+        print(f"   [{time.strftime('%H:%M:%S')}] " +
+              (" · ".join(f"{k}={v}" for k, v in st.items()) if st else "sem leitura"))
+        se_faltam = [k for k, v in st.items() if v in pendentes]
+        if st and not se_faltam:
             print("[esperar] nada mais pendente")
-            return out
+            return st
         time.sleep(60)
     print("[esperar] estourou o tempo — rode --etapa baixar depois")
-    return out
+    return status_artefatos(nb)
 
 
 def etapa_baixar(s, nb):
     MEDIA.mkdir(parents=True, exist_ok=True)
     tmp = NLMDIR / "_download"
     tmp.mkdir(exist_ok=True)
+    st = status_artefatos(nb)
     for tipo, (_cmd, ext, final) in ARTEFATOS.items():
         if s["baixados"].get(tipo):
             print(f"[baixar] {tipo}: ja baixado -> {s['baixados'][tipo]}"); continue
+        if st.get(tipo) and st[tipo] != "completed":
+            print(f"[baixar] {tipo}: ainda '{st[tipo]}' — pulando"); continue
         antes = {p.name for p in tmp.iterdir()}
         rc, out = nlm("download", tipo, "--notebook", nb, timeout=900)
         novos = [p for p in tmp.iterdir() if p.name not in antes]
