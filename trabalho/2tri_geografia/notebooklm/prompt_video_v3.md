@@ -10,7 +10,7 @@ CONTEÚDO: diga tudo o que está nas fontes, item por item, sem pular nenhum e s
 
 A PARTE DAS CINCO REGIÕES:
 
-Use as imagens do PDF "Painel das 5 regiões — um recorte por página". Cada página desse PDF traz o quadro de UMA região, recortado do painel original da aula e ampliado. No trecho de cada região, mostre na tela o recorte daquela região ocupando o slide inteiro, grande e legível — a página do Norte no trecho do Norte, a do Nordeste no trecho do Nordeste, e assim por diante. Não invente ilustração nova para as regiões e não mostre o painel inteiro com as cinco juntas.
+Use as cinco imagens que estão nas fontes: painel_regiao_norte.jpg, painel_regiao_nordeste.jpg, painel_regiao_centro_oeste.jpg, painel_regiao_sudeste.jpg e painel_regiao_sul.jpg. Cada uma é o quadro de UMA região, recortado do painel original da aula e ampliado. No trecho de cada região, mostre a imagem daquela região ocupando o slide inteiro, grande e legível. Não invente ilustração nova para as regiões e não mostre o painel inteiro com as cinco juntas.
 
 Fale a região UMA VEZ, no começo do trecho dela, e depois só liste. Diga o nome da região, e daí em diante vá direto pelas cinco categorias, na ordem: festas culturais, comidas típicas, comemorações culturais, tipos de dança, tipos de música — dizendo todos os itens de cada uma. Não repita "na região Norte temos", "no Norte encontramos", "aqui no Norte" a cada categoria e a cada item. Depois de nomear a região uma vez, as frases são só do tipo "as festas culturais são o festival de Parintins, com o boi-bumbá", "as comidas típicas são o tacacá e o açaí". Quando trocar de região, aí sim diga o nome da nova região, uma vez.
 
