@@ -43,3 +43,8 @@ Thumbs.db
 # brutos pesados Toddle (mantem MDs do trabalho versionados)
 trabalho/**/Toddle-*
 _nlm_wait*.log
+
+# Video da unidade — versao anterior guardada so no disco.
+# O v1 (4:22) continua recuperavel pelo historico do git no caminho canonico;
+# versionar uma copia de 23 MB de novo so incharia o repo.
+ferramentas/media/*_v1.mp4

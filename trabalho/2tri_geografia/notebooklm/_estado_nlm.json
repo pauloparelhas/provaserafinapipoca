@@ -8,11 +8,20 @@
   "artefatos": {
     "quiz": true,
     "flashcards": true,
-    "video": true
+    "video": true,
+    "video_v2": true
   },
   "baixados": {
     "quiz": "ferramentas/media/quiz_geo2_nlm.json",
     "flashcards": "ferramentas/media/flashcards_geo2_nlm.json",
-    "video": "ferramentas\\media\\video_geo2_nb1_pt.mp4"
+    "video": "ferramentas/media/video_geo2_nb1_pt.mp4"
+  },
+  "video": {
+    "titulo": "Revisão: Geografia U2",
+    "duracao": "9:10",
+    "gerado": "2026-08-10",
+    "via": "UI do NotebookLM pelo Chrome (CLI com sessao expirada)",
+    "prompt": "trabalho/2tri_geografia/notebooklm/prompt_video_v2.md",
+    "anterior": "ferramentas/media/video_geo2_nb1_pt_v1.mp4 (4:22)"
   }
 }
