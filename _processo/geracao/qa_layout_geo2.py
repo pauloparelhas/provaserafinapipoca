@@ -72,6 +72,15 @@ PROBE = r"""
 
 # [arquivo, rotulo da tela, script de setup (async) rodado antes da medicao]
 SCREENS = [
+    ("../index.html", "home-escuro", "try{localStorage.setItem('cie2_theme','night')}catch(e){}; pintaTema()"),
+    ("../index.html", "home-claro", "try{localStorage.setItem('cie2_theme','day')}catch(e){}; pintaTema()"),
+    ("../index.html", "home-mais", "document.querySelector('details.more').open=true"),
+    ("GEO2_estudo.html", "folha-fechada", None),
+    ("GEO2_estudo.html", "folha-aberta", "allSec(true)"),
+    ("GEO2_estudo.html", "palavras-fechadas", "showTab('words')"),
+    ("GEO2_estudo.html", "palavras-abertas", "showTab('words'); allWords(true)"),
+    ("GEO2_estudo.html", "mapa-fechado", "showTab('map')"),
+    ("GEO2_estudo.html", "mapa-aberto", "showTab('map'); allMap(true)"),
     ("GEO2_simulado.html", "intro", None),
     ("GEO2_simulado.html", "mc", "start(10); for(let i=0;i<40&&deck[cur].type!=='mc';i++){cur=(cur+1)%total;render();}"),
     ("GEO2_simulado.html", "vf", "start(50); for(let i=0;i<200&&deck[cur].type!=='vf';i++){cur=(cur+1)%total;render();}"),

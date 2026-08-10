@@ -47,18 +47,18 @@ FONTES = [
     ("roteiro", NLMDIR / "roteiro_video.md", "Roteiro do vídeo (<3 min)"),
 ]
 
-# O prompt do video vive no roteiro; aqui vai a versao curta que o CLI aceita
-# como DESCRIPTION posicional (o texto longo entra pela fonte "roteiro").
-PROMPT_VIDEO = (
-    "Vídeo curto (menos de 3 minutos) em português do Brasil para uma criança de 7 anos "
-    "revisar antes da prova de Geografia. Cubra, nesta ordem: comunidade; tradição (passa "
-    "de geração em geração, de pais para filhos); identidade cultural; migração; os cinco "
-    "lugares onde a cultura aparece (culinária, vestimentas, religião, festas, arquitetura); "
-    "as cinco regiões do Brasil com festas, comidas, danças e músicas; e o fechamento sobre "
-    "respeitar a diversidade. DESTAQUE a diferença entre boi-bumbá (Parintins, Norte) e bumba "
-    "meu boi (Nordeste), e entre cuscuz paulista (Sudeste) e cuscuz nordestino (Nordeste). "
-    "Frases curtas, tom alegre. Não acrescente nada que não esteja nas fontes."
-)
+# ---------------------------------------------------------------------------
+# PROMPT DO VIDEO — v2 (10/08/2026)
+# O v1 era um paragrafo curto e o video saiu passando por cima do conteudo:
+# no trecho das regioes citava so alguns itens de cada uma. O v2 e um briefing
+# longo, exaustivo, que vive em arquivo proprio e entra pelo --prompt-file do
+# CLI (o positional DESCRIPTION nao aguenta esse tamanho na linha de comando).
+# Regras que o v2 acrescenta: zero firula (nada de saudacao/abertura/
+# fechamento), cobertura item a item, e as 5 categorias completas em CADA uma
+# das 5 regioes.
+# ---------------------------------------------------------------------------
+PROMPT_VIDEO_FILE = NLMDIR / "prompt_video_v2.md"
+
 PROMPT_QUIZ = (
     "Quiz em português do Brasil para criança de 7 anos, sobre as cinco regiões do Brasil "
     "(festas, comidas, danças, músicas) e sobre as palavras tradição, migração e identidade "
@@ -75,8 +75,8 @@ PROMPT_FC = (
 # vem do PROPRIO PROMPT (por isso os prompts comecam dizendo "em portugues do
 # Brasil") e do env NOTEBOOKLM_HL, setado no main().
 ARTEFATOS = {
-    "video":      (["generate", "video", PROMPT_VIDEO, "--language", "pt_BR",
-                    "--style", "kawaii", "--format", "explainer"],
+    "video":      (["generate", "video", "--prompt-file", str(PROMPT_VIDEO_FILE),
+                    "--language", "pt_BR", "--style", "kawaii", "--format", "explainer"],
                    "mp4", "video_geo2_nb1_pt.mp4"),
     "quiz":       (["generate", "quiz", PROMPT_QUIZ, "--quantity", "more", "--difficulty", "easy"],
                    "json", "quiz_geo2_nlm.json"),
@@ -239,9 +239,25 @@ def main():
     ap.add_argument("--etapa", choices=["caderno", "fontes", "gerar", "esperar", "baixar"],
                     help="roda so uma etapa")
     ap.add_argument("--espera-min", type=int, default=25)
+    ap.add_argument("--refazer", choices=["video", "quiz", "flashcards"], action="append",
+                    help="regera o artefato do zero: apaga o estado dele e arquiva o arquivo "
+                         "antigo em media/ com sufixo _v1 (nao apaga nada — so renomeia)")
     args = ap.parse_args()
 
     s = st_load()
+    for tipo in (args.refazer or []):
+        s["artefatos"].pop(tipo, None)
+        antigo = s["baixados"].pop(tipo, None)
+        if antigo:
+            velho = RAIZ / antigo
+            if velho.exists():
+                arq = velho.with_name(velho.stem + "_v1" + velho.suffix)
+                if arq.exists():
+                    arq.unlink()
+                velho.rename(arq)
+                print(f"[refazer] {tipo}: arquivo antigo guardado como {arq.name}")
+        st_save(s)
+        print(f"[refazer] {tipo}: estado limpo — vai gerar de novo")
     if args.status:
         print(json.dumps(s, ensure_ascii=False, indent=2)); return
 

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Estudar — Geografia · Comunidades e lugares</title>
-<link rel="stylesheet" href="serafina-core.css?v=20260809b">
+<link rel="stylesheet" href="serafina-core.css?v=20260810">
 <style>
 /* ============================================================
    ESTUDAR (Geografia 2tri) — folha + palavras-chave + mapa mental numa casca
@@ -73,8 +73,17 @@ body.show-tr .sechead .st .str{display:block}
 .qa .aa .ar::before{content:"→ "}
 
 /* ---- MODO 2: palavras-chave (do CIE2_superrevisao) ---- */
-.kblock{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--bc,var(--accent));border-radius:var(--rad);box-shadow:0 10px 26px rgba(0,0,0,.26);margin-bottom:14px;padding:13px 14px 15px}
-.kbhead{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:4px}
+/* Cada bloco abre e fecha (10/08/2026): o mural inteiro aberto eram 9 blocos e
+   ~70 palavras numa parede so. Fechado, a crianca le 9 titulos e escolhe. */
+.kblock{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--bc,var(--accent));border-radius:var(--rad);box-shadow:0 10px 26px rgba(0,0,0,.26);margin-bottom:14px;padding:13px 14px;overflow:hidden}
+.kblock.open{padding-bottom:15px}
+/* min-height 48: virou area clicavel, entao vale a regra de alvo de toque
+   (o QA reprovou com 32px de altura). */
+.kbhead{display:flex;align-items:center;flex-wrap:wrap;gap:9px;cursor:pointer;user-select:none;min-height:48px}
+.kbchev{font-size:.9rem;color:var(--soft);transition:transform .25s;flex-shrink:0}
+.kblock.open .kbchev{transform:rotate(180deg)}
+.kbbody{display:none}
+.kblock.open .kbbody{display:block}
 .kbhead .ke{font-size:1.5rem;filter:drop-shadow(0 4px 7px rgba(0,0,0,.3))}
 .kbhead .kt{flex:1;min-width:0;font-weight:900;font-size:calc(1.05rem*var(--fs));line-height:1.15}
 .kbhead .kt .ktr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem}
@@ -152,10 +161,9 @@ body.light .mm-tag{background:rgba(180,83,9,.15);color:#b45309}
 /* ---------- telas largas (notebook): a folha em 2 colunas ---------- */
 @media (min-width:1000px){
   .wrap{max-width:860px;padding:16px 20px 48px}
-  /* so o mural de palavras vira 2 colunas: folha e mapa abrem/fecham,
-     e em multicoluna um clique reflui a coluna vizinha */
-  #wordsContent{columns:2;column-gap:18px}
-  .kblock{break-inside:avoid}
+  /* GRID, nao `columns`: agora que os blocos abrem/fecham, o multicoluna do CSS
+     refluiria a coluna vizinha a cada clique (o bloco saltaria de coluna). */
+  #wordsContent{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;align-items:start}
   .tabbar{margin:0 -20px 16px;padding:8px 20px}
 }
 /* ---------- celular em PAISAGEM ---------- */
@@ -166,8 +174,7 @@ body.light .mm-tag{background:rgba(180,83,9,.15);color:#b45309}
   .tabbtn{min-height:44px;flex-direction:row;gap:6px;font-size:calc(.8rem*var(--fs))}
   .tabbtn .te{font-size:1rem}
   .hint{margin:2px 0 8px}
-  #wordsContent{columns:2;column-gap:14px}
-  .kblock{break-inside:avoid}
+  #wordsContent{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;align-items:start}
   .sechead{padding:11px 13px}
   .sechead .si{font-size:1.3rem}
   .secbody{padding:0 13px 13px}
@@ -210,13 +217,21 @@ body.light .mm-tag{background:rgba(180,83,9,.15);color:#b45309}
 
     <!-- ===== MODO 2: PALAVRAS-CHAVE ===== -->
     <div class="pane" id="pane-words">
-      <div class="hint">S&oacute; as palavras m&aacute;gicas! &#128064; Toque numa palavra para ouvir &#128266;.</div>
+      <div class="hint">S&oacute; as palavras m&aacute;gicas! &#128073; Toque num t&iacute;tulo para abrir &bull; toque numa palavra para ouvir &#128266;.</div>
+      <div class="toolrow">
+        <button class="toolbtn" onclick="allWords(true)">&#11015;&#65039; Abrir tudo</button>
+        <button class="toolbtn" onclick="allWords(false)">&#11014;&#65039; Fechar tudo</button>
+      </div>
       <div id="wordsContent"></div>
     </div>
 
     <!-- ===== MODO 3: MAPA MENTAL ===== -->
     <div class="pane" id="pane-map">
       <div class="hint">&#128073; Toque num t&oacute;pico para abrir &bull; toque de novo para fechar</div>
+      <div class="toolrow">
+        <button class="toolbtn" onclick="allMap(true)">&#11015;&#65039; Abrir tudo</button>
+        <button class="toolbtn" onclick="allMap(false)">&#11014;&#65039; Fechar tudo</button>
+      </div>
       <div class="mm-root-label">
         <div class="mm-root-pill">&#x1F9ED; Diferentes comunidades e sua rela&ccedil;&atilde;o com os lugares</div>
         <div class="mm-root-tr">Geografia &mdash; 2&ordm; ano &middot; Unidade 2</div>
@@ -349,13 +364,16 @@ function buildSheet(){
     +(t[2]?'<span class="tr">\u{1F4A1} '+t[2]+'</span>':'')+'</span></div>';}).join('');
   var faqBody=FAQ.map(function(q){return '<div class="qa"><div class="qq">'+q[0]+'</div>'
     +'<div class="aa"><span class="ar">'+q[1]+'</span></div></div>';}).join('');
+  /* TUDO FECHADO por padrao (10/08/2026): a tela abre como um indice — a crianca
+     ve os 7 titulos de uma vez e escolhe onde entrar. Antes, 4 secoes ja vinham
+     abertas e a folha nascia com metros de rolagem. */
   var sections=[
-   {ic:"\u{1F4AC}",t:"As palavras da unidade",body:mkBody(CONCEITOS,CONCEITOS_say),open:true},
-   {ic:"\u{2708}\u{FE0F}",t:"De onde vieram as tradições",body:mkBody(MIGRACAO,MIGRACAO_say),open:true},
-   {ic:"\u{1F1E7}\u{1F1F7}",t:"O Brasil e suas 5 regiões",body:regBody,open:true},
+   {ic:"\u{1F4AC}",t:"As palavras da unidade",body:mkBody(CONCEITOS,CONCEITOS_say),open:false},
+   {ic:"\u{2708}\u{FE0F}",t:"De onde vieram as tradições",body:mkBody(MIGRACAO,MIGRACAO_say),open:false},
+   {ic:"\u{1F1E7}\u{1F1F7}",t:"O Brasil e suas 5 regiões",body:regBody,open:false},
    {ic:"\u{1F5BC}\u{FE0F}",t:"Tradições e costumes do Brasil",body:mkBody(TRADICOES,TRADICOES_say),open:false},
    {ic:"\u{1F30E}",t:"Diversidade e meio ambiente",body:mkBody(DIVERSIDADE,DIVERSIDADE_say),open:false},
-   {ic:"⭐",t:"Dicas para a prova",body:dicasBody,open:true},
+   {ic:"⭐",t:"Dicas para a prova",body:dicasBody,open:false},
    {ic:"❓",t:"Perguntas que costumam cair",body:faqBody,open:false}
   ];
   $('sheetContent').innerHTML=sections.map(function(s,i){return '<div class="sec'+(s.open?' open':'')+'" id="sec'+i+'">'
@@ -427,11 +445,15 @@ function textOn(hex){var h=hex.replace('#','');var r=parseInt(h.substr(0,2),16)/
 function rgba(hex,a){var h=hex.replace('#','');return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+','+a+')';}
 function buildWords(){
   var html='';
-  BLOCKS.forEach(function(b){
-    html+='<div class="kblock" style="--bc:'+b.groups[0].co+'">'
-        +'<div class="kbhead"><span class="ke">'+b.emo+'</span>'
+  BLOCKS.forEach(function(b,bi){
+    /* fechado por padrao — o clique no cabecalho abre. O corpo fica num
+       .kbbody proprio para o toggle nao esconder tambem o cabecalho. */
+    html+='<div class="kblock" id="kb'+bi+'" style="--bc:'+b.groups[0].co+'">'
+        +'<div class="kbhead" onclick="toggleWordBlock('+bi+')"><span class="ke">'+b.emo+'</span>'
         +'<span class="kt">'+b.en+'</span>'
-        +'<span class="kaxis">'+b.axis+'</span></div>';
+        +'<span class="kaxis">'+b.axis+'</span>'
+        +'<span class="kbchev">&#9660;</span></div>'
+        +'<div class="kbbody">';
     b.groups.forEach(function(g){
       var allWords=g.chips.map(function(c){return c[0];}).join(', ');
       html+='<div class="kgroup">'
@@ -444,14 +466,16 @@ function buildWords(){
       });
       html+='</div></div>';
     });
-    html+='</div>';
+    html+='</div></div>';
   });
   $('wordsContent').innerHTML=html;
 }
+function toggleWordBlock(i){$('kb'+i).classList.toggle('open');}
+function allWords(open){document.querySelectorAll('#pane-words .kblock').forEach(function(k){k.classList.toggle('open',open);});}
 
 /* ============ MODO 3: mapa mental (gerado dos MESMOS dados) ============ */
 var MAP=[
- {c:'bc-orange', ic:"\u{1F4AC}", t:'As palavras da unidade', tr:'tradição · migração · identidade cultural', open:true,
+ {c:'bc-orange', ic:"\u{1F4AC}", t:'As palavras da unidade', tr:'tradição · migração · identidade cultural', open:false,
   leaves:[
    {ic:"\u{1F3D8}\u{FE0F}", t:'Comunidade', d:['O lugar onde vivemos, formado por diferentes pessoas, histórias e costumes.']},
    {ic:"\u{1F91D}", t:'Tradição', d:['Costume que passa de geração em geração, de pais para filhos.','Está há muito tempo na família e ajuda a construir a identidade.']},
@@ -459,7 +483,7 @@ var MAP=[
    {ic:"\u{2708}\u{FE0F}", t:'Migração', d:['Mudar de um lugar para outro levando hábitos, crenças e modos de viver.','Quem migra influencia o lugar onde chega.']},
    {ic:"\u{1F1E7}\u{1F1F7}", t:'Multicultural', d:['Feito de muitas culturas juntas — é assim o Brasil.']}
   ]},
- {c:'bc-blue', ic:"\u{1F374}", t:'Onde a cultura aparece', tr:'a lista fechada do material', open:true,
+ {c:'bc-blue', ic:"\u{1F374}", t:'Onde a cultura aparece', tr:'a lista fechada do material', open:false,
   leaves:[
    {ic:"\u{1F372}", t:'Culinária', d:['Comidas típicas de cada povo e de cada região.']},
    {ic:"\u{1F457}", t:'Vestimentas', d:['Trajes tradicionais — como os da Oktoberfest de Blumenau.']},
@@ -467,7 +491,7 @@ var MAP=[
    {ic:"\u{1F389}", t:'Festas', d:['Carnavais, festas juninas, romarias e festivais.']},
    {ic:"\u{1F3DB}\u{FE0F}", t:'Arquitetura', d:['O jeito de construir as casas e os prédios de cada lugar.']}
   ]},
- {c:'bc-green', ic:"\u{1F1E7}\u{1F1F7}", t:'As 5 regiões do Brasil', tr:'festas · comidas · comemorações · danças · músicas', open:true,
+ {c:'bc-green', ic:"\u{1F1E7}\u{1F1F7}", t:'As 5 regiões do Brasil', tr:'festas · comidas · comemorações · danças · músicas', open:false,
   leaves:[
    {ic:"\u{1F333}", t:'Norte', d:['Festas: festival de Parintins (boi-bumbá).','Comidas: tacacá, açaí.','Comemorações: Festa do Divino.','Danças: carimbó.','Músicas: toada, carimbó, boi-bumbá.']},
    {ic:"\u{2600}\u{FE0F}", t:'Nordeste', d:['Festas: carnaval de Salvador, festa de São João, bumba meu boi.','Comidas: acarajé, baião de dois, vatapá.','Comemorações: festa do Senhor do Bonfim, festa de Iemanjá.','Danças: frevo, forró, baião, maracatu.','Músicas: forró, frevo, axé, maracatu, xote.']},
@@ -494,7 +518,7 @@ var MAP=[
    {ic:"\u{1F33F}", t:'Onde isso aparece', d:['Nos hábitos e nas manifestações culturais de cada lugar.']},
    {ic:"\u{2764}\u{FE0F}", t:'Para que serve', d:['Entender isso nos ajuda a respeitar a diversidade.']}
   ]},
- {c:'bc-orange', ic:"⚠\u{FE0F}", t:'Cuidado com estes pares!', tr:'as pegadinhas mais prováveis', open:true,
+ {c:'bc-orange', ic:"⚠\u{FE0F}", t:'Cuidado com estes pares!', tr:'as pegadinhas mais prováveis', open:false,
   leaves:[
    {ic:"\u{1F402}", t:'boi-bumbá × bumba meu boi', d:['Boi-bumbá = festival de Parintins, NORTE.','Bumba meu boi = NORDESTE.']},
    {ic:"\u{1F35A}", t:'cuscuz paulista × cuscuz nordestino', d:['Paulista = SUDESTE (farinha de milho com peixe, ovos e legumes).','Nordestino = NORDESTE (flocos de milho no vapor).']},
@@ -512,7 +536,7 @@ function buildMap(){
      +'<div class="mm-branch-arrow">&#9654;</div></div>'
      +'<div class="mm-branch-body"><div class="mm-branch-inner">'
      +b.leaves.map(function(l,i){
-        return '<div class="mm-leaf '+b.c+(i===0?' open':'')+'" onclick="toggleLeaf(event,this)">'
+        return '<div class="mm-leaf '+b.c+'" onclick="toggleLeaf(event,this)">'
          +'<div class="mm-leaf-hd"><div class="mm-leaf-icon">'+l.ic+'</div>'
          +'<div class="mm-leaf-text"><div class="mm-leaf-en">'+l.t+'</div></div>'
          +'<div class="mm-leaf-arrow">&#9654;</div></div>'
@@ -526,16 +550,37 @@ function buildMap(){
 }
 function toggleBranch(el){ el.classList.toggle('open'); }
 function toggleLeaf(e,el){ e.stopPropagation(); el.classList.toggle('open'); }
+/* "abrir tudo" abre ramo E folha; "fechar tudo" fecha os dois — senao o ramo
+   fecharia com folhas abertas por dentro e a proxima abertura viria cheia. */
+function allMap(open){
+  document.querySelectorAll('#pane-map .mm-branch').forEach(function(b){b.classList.toggle('open',open);});
+  document.querySelectorAll('#pane-map .mm-leaf').forEach(function(l){l.classList.toggle('open',open);});
+}
 
 /* ---- init ---- */
 buildSheet();
 buildWords();
 buildMap();
-try{var t0=localStorage.getItem('geo2_estudo_tab');if(t0==='words'||t0==='map')showTab(t0);}catch(e){}
+/* A home entra direto num modo pelo hash (#map, #sheet, #words) — assim o
+   card "Mapa mental" da home abre o mapa, nao a folha. Sem hash, vale a
+   ultima aba usada. O hash VENCE o localStorage: quem clicou "mapa mental"
+   pediu o mapa, mesmo tendo saido da folha na visita anterior. */
+function abaDoHash(){
+  var h=(location.hash||'').replace('#','');
+  return (h==='map'||h==='words'||h==='sheet')?h:null;
+}
+(function(){
+  var h=abaDoHash();
+  if(h){ showTab(h); }
+  else { try{var t0=localStorage.getItem('geo2_estudo_tab');if(t0==='words'||t0==='map')showTab(t0);}catch(e){} }
+  /* trocar so o fragmento (#map -> #sheet) NAO recarrega a pagina: sem este
+     listener, voltar pelo historico deixaria a aba antiga na tela. */
+  addEventListener('hashchange',function(){ var k=abaDoHash(); if(k)showTab(k); });
+})();
 </script>
 <script>window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.85,somKey:'geo2_som',voicePrefs:['Thalita','Antonio','Antônio','Google portugu','Maria','Daniel']};</script>
-<script src="serafina-core.js?v=20260809b"></script>
+<script src="serafina-core.js?v=20260810"></script>
 <script>window.SERA_ACCENT={accent:'#34d399'};</script>
-<script src="cie2_theme.js?v=20260809b"></script>
+<script src="cie2_theme.js?v=20260810"></script>
 </body>
 </html>

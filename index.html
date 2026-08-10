@@ -2,147 +2,187 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revisão para as Provas — Y2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Revisão para a prova — Geografia · Y2</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
+/* ============================================================
+   HOME — Revisão Y2 (2o trimestre)
+   Uma prova por vez: a home mostra SO a materia da prova atual
+   (Geografia 11/08). O que ja foi provado sai do site — nao vira
+   "arquivo morto" que a crianca abre por engano (pedido 10/08).
+
+   HIERARQUIA (pedido 10/08): 1 destaque grande (REVISAO, com o mapa
+   mental como porta principal) + 3 destaques medios (VIDEO, MATERIAIS
+   DA TURMA, SIMULADO). Todo o resto vive recolhido em "mais jeitos".
+
+   TEMA: claro/escuro na propria home, na mesma chave de localStorage
+   das ferramentas ('cie2_theme'), para a escolha atravessar as telas.
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;}
-body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;background:#0d0b1e;min-height:100vh;color:#fff;overflow-x:hidden;}
-#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
-#app{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:clamp(16px,4vh,36px) clamp(12px,3vw,24px) 56px;}
 
 :root{
-  --geo:#34d399; --geo-soft:#6ee7b7;
-  --sci:#38bdf8; --sci-soft:#7dd3fc;
-  --ink-dim:rgba(255,255,255,.45);
-  --card:rgba(255,255,255,.05);
-  --card-line:rgba(255,255,255,.09);
+  /* --- tema ESCURO (padrao) --- */
+  --bg:#0d0b1e; --bg2:#141033;
+  --ink:#ffffff; --soft:rgba(255,255,255,.62); --dim:rgba(255,255,255,.42);
+  --card:rgba(255,255,255,.055); --line:rgba(255,255,255,.10);
+  --geo:#34d399; --geo-soft:#6ee7b7; --geo-ink:#0b2c22;
+  --hot:#f87171; --hot-bg:rgba(239,68,68,.12); --hot-line:rgba(239,68,68,.4);
+  --warm:#fde68a; --warm-bg:rgba(250,204,21,.07); --warm-line:rgba(250,204,21,.3);
+  --sh:0 14px 34px rgba(0,0,0,.34);
+  --grad:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);
 }
+body.light{
+  --bg:#eef5ff; --bg2:#e2f3ea;
+  --ink:#0c2033; --soft:rgba(12,32,51,.68); --dim:rgba(12,32,51,.5);
+  --card:#ffffff; --line:rgba(12,32,51,.14);
+  --geo:#0d8f66; --geo-soft:#0a7d59; --geo-ink:#ffffff;
+  --hot:#c0392b; --hot-bg:rgba(220,38,38,.09); --hot-line:rgba(220,38,38,.35);
+  --warm:#8a5a12; --warm-bg:rgba(250,204,21,.16); --warm-line:rgba(180,120,10,.35);
+  --sh:0 12px 28px rgba(12,32,51,.12);
+  --grad:linear-gradient(135deg,#7c3aed,#db2777,#ea580c);
+}
+
+body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;
+  background:linear-gradient(165deg,var(--bg),var(--bg2));color:var(--ink);
+  min-height:100vh;overflow-x:hidden;transition:background .35s,color .25s;}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+#app{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:clamp(12px,3vh,26px) clamp(12px,3vw,24px) 56px;}
+
+/* ============ BARRA DE CONTROLES ============ */
+.ctrls{display:flex;justify-content:flex-end;gap:8px;margin-bottom:6px;}
+.cbtn{min-height:44px;min-width:44px;border-radius:14px;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);font-family:inherit;font-weight:900;font-size:.82rem;
+  padding:0 14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;box-shadow:var(--sh);}
+.cbtn:active{transform:scale(.95);}
+.cbtn .ce{font-size:1.1rem;}
 
 /* ============ HEADER ============ */
-.header{text-align:center;margin-bottom:clamp(18px,4vh,36px);}
-.mascot{font-size:clamp(44px,8vh,68px);display:inline-block;animation:mfloat 3s ease-in-out infinite;filter:drop-shadow(0 0 28px rgba(167,139,250,.6));margin-bottom:6px;}
-@keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-12px) rotate(3deg);}}
-.badge{display:inline-block;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);border-radius:30px;padding:4px 16px;font-size:11px;font-weight:700;color:#a78bfa;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
-.title{font-size:clamp(28px,6vw,46px);font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:6px;}
-.subtitle{font-size:clamp(13px,2.5vw,15px);color:rgba(255,255,255,.5);font-weight:600;}
+.header{text-align:center;margin-bottom:clamp(16px,3.5vh,30px);}
+.mascot{font-size:clamp(40px,7.5vh,64px);display:inline-block;animation:mfloat 3s ease-in-out infinite;filter:drop-shadow(0 0 26px rgba(52,211,153,.45));margin-bottom:4px;}
+@keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-11px) rotate(3deg);}}
+/* block + width:fit-content: como inline-block, o selo e o mascote cabiam na
+   MESMA linha em tela larga e o globo aparecia colado ao lado do selo. */
+.badge{display:block;width:fit-content;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:5px 16px;font-size:11px;font-weight:900;color:var(--soft);letter-spacing:2px;text-transform:uppercase;margin:0 auto 8px;}
+.title{font-size:clamp(30px,6.5vw,50px);font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.08;margin-bottom:6px;}
+.subtitle{font-size:clamp(13px,2.5vw,15.5px);color:var(--soft);font-weight:800;}
 
-/* ============ SEÇÃO GEOGRAFIA ============ */
-.geo-panel{border:1px solid rgba(52,211,153,.22);border-radius:24px;background:linear-gradient(180deg,rgba(52,211,153,.06),rgba(52,211,153,.015));padding:clamp(14px,3vw,26px);margin-bottom:26px;}
+/* ============ PAINEL DA MATÉRIA ============ */
+.geo-panel{border:1px solid color-mix(in srgb,var(--geo) 26%,transparent);border-radius:26px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--geo) 8%,transparent),transparent);
+  padding:clamp(14px,3vw,26px);margin-bottom:22px;}
 .geo-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;margin-bottom:6px;}
 .geo-top .ic{font-size:clamp(24px,4vw,32px);}
-.geo-top .nm{font-size:clamp(19px,4vw,26px);font-weight:900;color:var(--geo);}
-.geo-top .dt{margin-left:auto;font-size:12px;font-weight:800;padding:5px 14px;border-radius:20px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#f87171;white-space:nowrap;}
-.geo-unit{font-size:clamp(12px,2.3vw,14px);font-weight:700;color:var(--ink-dim);margin-bottom:14px;}
-.geo-unit b{color:var(--geo-soft);font-weight:800;}
+.geo-top .nm{font-size:clamp(20px,4vw,27px);font-weight:900;color:var(--geo);}
+.geo-top .dt{margin-left:auto;font-size:12px;font-weight:900;padding:6px 14px;border-radius:20px;background:var(--hot-bg);border:1px solid var(--hot-line);color:var(--hot);white-space:nowrap;}
+.geo-unit{font-size:clamp(12px,2.3vw,14px);font-weight:800;color:var(--dim);margin-bottom:14px;}
+.geo-unit b{color:var(--geo-soft);font-weight:900;}
 
-/* recado anti-ansiedade */
-.calm{display:flex;align-items:center;gap:10px;background:rgba(250,204,21,.07);border:1px dashed rgba(250,204,21,.3);border-radius:14px;padding:10px 14px;margin-bottom:16px;font-size:clamp(12px,2.4vw,14px);font-weight:800;color:#fde68a;line-height:1.45;}
+.calm{display:flex;align-items:center;gap:10px;background:var(--warm-bg);border:1px dashed var(--warm-line);border-radius:14px;padding:10px 14px;margin-bottom:18px;font-size:clamp(12px,2.4vw,14px);font-weight:800;color:var(--warm);line-height:1.45;}
 .calm .em{font-size:20px;flex-shrink:0;}
 
-/* HERO — comece por aqui */
-.kicker{font-size:10px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;color:rgba(52,211,153,.75);margin:0 0 8px 2px;}
-.hero{display:flex;align-items:center;gap:clamp(12px,2.5vw,20px);text-decoration:none;border-radius:20px;padding:clamp(14px,2.5vw,22px);min-height:64px;border:2px solid rgba(52,211,153,.45);background:linear-gradient(135deg,rgba(52,211,153,.16),rgba(251,146,60,.09));transition:transform .2s,box-shadow .2s,border-color .2s;margin-bottom:20px;}
-.hero:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(52,211,153,.2);border-color:rgba(52,211,153,.7);}
-.hero .em{font-size:clamp(34px,6vw,48px);flex-shrink:0;filter:drop-shadow(0 0 14px rgba(52,211,153,.5));}
-.hero .tt{font-size:clamp(17px,3.5vw,22px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:3px;}
-.hero .dd{font-size:clamp(12px,2.4vw,14px);font-weight:700;color:rgba(255,255,255,.55);line-height:1.4;}
-.hero .go{flex-shrink:0;font-size:clamp(12px,2.4vw,14px);font-weight:900;padding:10px 16px;min-height:44px;display:flex;align-items:center;border-radius:24px;background:rgba(52,211,153,.18);border:1px solid rgba(52,211,153,.45);color:var(--geo);white-space:nowrap;}
+.kicker{font-size:10px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;color:color-mix(in srgb,var(--geo) 80%,var(--soft));margin:0 0 9px 2px;}
 
-/* CAMINHOS — 3 opções por intenção */
-.paths{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:16px;}
-.path{display:flex;align-items:center;gap:12px;text-decoration:none;border-radius:16px;padding:12px 14px;min-height:64px;background:var(--card);border:1px solid var(--card-line);transition:transform .2s,background .2s,border-color .2s;}
-.path:hover{transform:translateY(-2px);background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.4);}
-.path .em{font-size:26px;flex-shrink:0;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;}
-.path .tt{font-size:clamp(14px,2.6vw,16px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:2px;}
-.path .dd{font-size:clamp(11px,2.2vw,12.5px);font-weight:700;color:var(--ink-dim);line-height:1.35;}
+/* ---------- DESTAQUE 1: REVISÃO ---------- */
+.hero{display:flex;align-items:center;gap:clamp(12px,2.5vw,20px);text-decoration:none;color:inherit;
+  border-radius:22px 22px 6px 6px;padding:clamp(15px,2.6vw,22px);min-height:72px;
+  border:2px solid color-mix(in srgb,var(--geo) 52%,transparent);border-bottom:none;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--geo) 18%,transparent),color-mix(in srgb,#fb923c 10%,transparent));
+  transition:transform .2s,box-shadow .2s;}
+.hero:hover{transform:translateY(-3px);box-shadow:0 12px 34px color-mix(in srgb,var(--geo) 22%,transparent);}
+.hero .em{font-size:clamp(36px,6.5vw,52px);flex-shrink:0;filter:drop-shadow(0 0 14px color-mix(in srgb,var(--geo) 50%,transparent));}
+.hero .tt{font-size:clamp(19px,4vw,25px);font-weight:900;line-height:1.12;margin-bottom:3px;display:block;}
+.hero .dd{font-size:clamp(12px,2.4vw,14.5px);font-weight:800;color:var(--soft);line-height:1.4;display:block;}
+.hero .go{flex-shrink:0;font-size:clamp(12px,2.4vw,14px);font-weight:900;padding:11px 17px;min-height:46px;display:flex;align-items:center;border-radius:24px;background:var(--geo);border:none;color:var(--geo-ink);white-space:nowrap;}
 
-/* MAIS OPÇÕES — recolhido */
-details.more{border-radius:16px;border:1px dashed rgba(255,255,255,.16);background:rgba(255,255,255,.02);overflow:hidden;}
-details.more summary{list-style:none;display:flex;align-items:center;gap:10px;padding:12px 16px;min-height:48px;cursor:pointer;font-size:clamp(13px,2.5vw,14px);font-weight:900;color:rgba(255,255,255,.6);-webkit-tap-highlight-color:transparent;}
+/* as 3 portas da revisão — o mapa mental vem marcado como o melhor caminho */
+.hero-doors{display:grid;grid-template-columns:1fr;gap:8px;padding:12px;border:2px solid color-mix(in srgb,var(--geo) 52%,transparent);border-top:none;border-radius:0 0 22px 22px;background:color-mix(in srgb,var(--geo) 7%,transparent);margin-bottom:20px;}
+.door{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;border-radius:15px;padding:10px 13px;min-height:56px;background:var(--card);border:1px solid var(--line);transition:transform .18s,border-color .18s;}
+.door:hover{transform:translateY(-2px);border-color:var(--geo);}
+.door .de{font-size:23px;flex-shrink:0;}
+.door .dt2{font-size:14px;font-weight:900;line-height:1.15;}
+.door .ds{font-size:11.5px;font-weight:800;color:var(--dim);line-height:1.25;display:block;margin-top:1px;}
+.door.best{border-color:var(--geo);background:color-mix(in srgb,var(--geo) 14%,var(--card));}
+.door .star{margin-left:auto;flex-shrink:0;font-size:9.5px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:var(--geo-ink);background:var(--geo);border-radius:20px;padding:4px 9px;white-space:nowrap;}
+
+/* ---------- DESTAQUES 2-4: vídeo · materiais · simulado ---------- */
+.picks{display:grid;grid-template-columns:1fr;gap:11px;margin-bottom:20px;}
+.pick{display:flex;align-items:center;gap:13px;text-decoration:none;color:inherit;border-radius:19px;
+  padding:14px 15px;min-height:76px;background:var(--card);border:2px solid var(--line);box-shadow:var(--sh);
+  transition:transform .2s,border-color .2s,box-shadow .2s;}
+.pick:hover{transform:translateY(-3px);}
+.pick .em{font-size:29px;flex-shrink:0;width:52px;height:52px;border-radius:15px;display:flex;align-items:center;justify-content:center;}
+.pick .tt{font-size:clamp(15px,2.8vw,17px);font-weight:900;line-height:1.15;display:block;margin-bottom:2px;}
+.pick .dd{font-size:clamp(11.5px,2.2vw,13px);font-weight:800;color:var(--dim);line-height:1.32;display:block;}
+.pick .tag{flex-shrink:0;font-size:10px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;border-radius:20px;padding:6px 11px;white-space:nowrap;}
+.pick.video{border-color:rgba(96,165,250,.45);} .pick.video:hover{box-shadow:0 12px 30px rgba(96,165,250,.2);}
+.pick.video .em{background:rgba(96,165,250,.14);} .pick.video .tag{background:rgba(96,165,250,.16);color:#60a5fa;}
+.pick.mat{border-color:rgba(167,139,250,.45);} .pick.mat:hover{box-shadow:0 12px 30px rgba(167,139,250,.2);}
+.pick.mat .em{background:rgba(167,139,250,.14);} .pick.mat .tag{background:rgba(167,139,250,.16);color:#a78bfa;}
+.pick.quiz{border-color:rgba(239,68,68,.42);} .pick.quiz:hover{box-shadow:0 12px 30px rgba(239,68,68,.18);}
+.pick.quiz .em{background:rgba(239,68,68,.12);} .pick.quiz .tag{background:rgba(239,68,68,.14);color:var(--hot);}
+body.light .pick.video .tag{color:#1d4ed8;} body.light .pick.mat .tag{color:#6d28d9;}
+
+/* ---------- MAIS JEITOS (recolhido) ---------- */
+details.more{border-radius:18px;border:1px dashed var(--line);background:var(--card);overflow:hidden;}
+details.more summary{list-style:none;display:flex;align-items:center;gap:10px;padding:14px 16px;min-height:52px;cursor:pointer;font-size:clamp(13px,2.5vw,14.5px);font-weight:900;color:var(--soft);}
 details.more summary::-webkit-details-marker{display:none;}
-details.more summary .chev{margin-left:auto;font-size:13px;transition:transform .25s;color:rgba(255,255,255,.4);}
+details.more summary .chev{margin-left:auto;font-size:13px;transition:transform .25s;color:var(--dim);}
 details.more[open] summary .chev{transform:rotate(180deg);}
-details.more summary:hover{color:rgba(255,255,255,.85);}
 .more-grid{display:grid;grid-template-columns:1fr;gap:8px;padding:2px 12px 14px;}
-.mini{display:flex;align-items:center;gap:10px;text-decoration:none;border-radius:13px;padding:9px 12px;min-height:52px;background:var(--card);border:1px solid var(--card-line);transition:transform .2s,background .2s,border-color .2s;}
-.mini:hover{transform:translateY(-2px);background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.4);}
-.mini .em{font-size:20px;flex-shrink:0;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;}
-.mini .tt{font-size:13px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:2px;}
-.mini .dd{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);line-height:1.3;}
-
-/* ============ SCIENCE (prova feita) — recolhida ============ */
-details.sci{border:1px solid rgba(56,189,248,.18);border-radius:22px;background:linear-gradient(180deg,rgba(56,189,248,.05),rgba(56,189,248,.01));overflow:hidden;margin-bottom:26px;}
-details.sci summary{list-style:none;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:clamp(12px,2.5vw,18px) clamp(14px,3vw,24px);min-height:56px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
-details.sci summary::-webkit-details-marker{display:none;}
-details.sci summary .ic{font-size:clamp(22px,4vw,28px);}
-details.sci summary .nm{font-size:clamp(16px,3.2vw,21px);font-weight:900;color:var(--sci);}
-details.sci summary .dt{margin-left:auto;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.35);color:#34d399;white-space:nowrap;}
-details.sci summary .chev{font-size:13px;color:rgba(255,255,255,.35);transition:transform .25s;}
-details.sci[open] summary .chev{transform:rotate(180deg);}
-.sci-body{padding:0 clamp(14px,3vw,24px) clamp(14px,3vw,20px);}
-.sci-note{font-size:12px;font-weight:700;color:rgba(255,255,255,.4);margin-bottom:12px;}
-.sci-note b{color:var(--sci-soft);font-weight:800;}
-.sublabel{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin:12px 0 7px;}
-.tools-grid-sm{display:grid;grid-template-columns:1fr;gap:7px;margin-bottom:10px;}
-.tool-card-sm{border-radius:13px;padding:9px 13px;min-height:52px;display:flex;align-items:center;gap:11px;text-decoration:none;transition:transform .2s,background .2s,border-color .2s;border:1px solid transparent;}
-.tool-card-sm:hover{transform:translateY(-2px);box-shadow:0 5px 18px rgba(0,0,0,.3);}
-.tool-card-sm.ready{background:var(--card);border-color:var(--card-line);}
-.tool-card-sm.ready:hover{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.4);}
-.tool-icon-sm{font-size:20px;flex-shrink:0;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;}
-.tool-name-sm{font-size:13px;font-weight:900;color:#fff;margin-bottom:2px;line-height:1.2;}
-.tool-desc-sm{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);line-height:1.3;}
-.tool-body{flex:1;min-width:0;}
-.tool-card-hero{border-radius:15px;padding:14px 18px;min-height:60px;display:flex;align-items:center;gap:13px;text-decoration:none;transition:transform .2s,box-shadow .2s;border:2px solid rgba(95,227,155,.4);background:linear-gradient(135deg,rgba(95,227,155,.12),rgba(168,85,247,.08));margin-bottom:6px;}
-.tool-card-hero:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(95,227,155,.15);}
-.tool-status{flex-shrink:0;font-size:11px;font-weight:800;padding:8px 12px;border-radius:20px;}
+.mini{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;border-radius:14px;padding:10px 12px;min-height:58px;background:transparent;border:1px solid var(--line);transition:transform .18s,border-color .18s;}
+.mini:hover{transform:translateY(-2px);border-color:var(--geo);}
+.mini .em{font-size:21px;flex-shrink:0;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;}
+.mini .tt{font-size:13.5px;font-weight:900;line-height:1.15;display:block;margin-bottom:1px;}
+.mini .dd{font-size:11.5px;font-weight:800;color:var(--dim);line-height:1.3;display:block;}
 
 /* ============ FOOTER ============ */
-.footer{text-align:center;margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.06);}
-.footer-logo{font-size:15px;font-weight:900;background:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
-.footer-note{font-size:11px;color:rgba(255,255,255,.25);font-weight:600;line-height:1.6;}
-.refresh-btn{margin-top:16px;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);border-radius:22px;padding:11px 22px;min-height:44px;color:#a78bfa;font-size:12px;font-weight:800;cursor:pointer;letter-spacing:1px;font-family:inherit;}
-.refresh-btn:hover{background:rgba(167,139,250,.2);}
+.footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid var(--line);}
+.footer-logo{font-size:15px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+.footer-note{font-size:11.5px;color:var(--dim);font-weight:700;line-height:1.65;}
+.refresh-btn{margin-top:15px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:12px 22px;min-height:44px;color:var(--soft);font-size:12px;font-weight:900;cursor:pointer;letter-spacing:1px;font-family:inherit;}
+.refresh-btn:active{transform:scale(.96);}
 
 /* ============ RESPONSIVO ============ */
-/* Telas >= 560px: caminhos lado a lado, mais opções em 2 colunas */
-@media(min-width:560px){
-  .paths{grid-template-columns:repeat(3,1fr);}
-  .path{flex-direction:column;text-align:center;align-items:center;gap:8px;padding:16px 12px;}
-  .path .em{width:52px;height:52px;font-size:30px;background:rgba(255,255,255,.05);}
+@media(min-width:620px){
+  .hero-doors{grid-template-columns:repeat(3,1fr);}
+  .door{flex-direction:column;text-align:center;align-items:center;gap:6px;padding:13px 10px;min-height:104px;}
+  .door .star{margin-left:0;}
+  .picks{grid-template-columns:repeat(3,1fr);}
+  .pick{flex-direction:column;text-align:center;align-items:center;gap:9px;padding:16px 12px;min-height:170px;}
+  .pick .tag{margin-top:auto;}
   .more-grid{grid-template-columns:1fr 1fr;}
-  .tools-grid-sm{grid-template-columns:1fr 1fr;}
 }
-/* Notebook / tablet paisagem: mais opções em 3 colunas */
 @media(min-width:900px){
   .more-grid{grid-template-columns:repeat(3,1fr);}
-  .tools-grid-sm{grid-template-columns:repeat(3,1fr);}
 }
-/* Celular PAISAGEM (altura escassa): comprimir verticalmente */
-@media(orientation:landscape) and (max-height:480px){
-  #app{padding-top:10px;padding-bottom:32px;}
-  .header{margin-bottom:12px;}
-  .mascot{display:none;}
-  .badge{display:none;}
-  .title{font-size:24px;margin-bottom:2px;}
+/* Celular PAISAGEM (altura escassa): comprime tudo na vertical */
+@media(orientation:landscape) and (max-height:500px){
+  #app{padding-top:8px;padding-bottom:30px;}
+  .header{margin-bottom:10px;}
+  .mascot,.badge{display:none;}
+  .title{font-size:23px;margin-bottom:2px;}
   .subtitle{font-size:12px;}
-  .geo-panel{padding:12px 16px;}
+  .geo-panel{padding:12px 15px;}
   .geo-unit{margin-bottom:8px;}
   .calm{padding:7px 12px;margin-bottom:10px;}
-  .hero{padding:10px 14px;margin-bottom:12px;min-height:56px;}
+  .hero{padding:10px 14px;min-height:58px;}
   .hero .em{font-size:30px;}
   .hero .dd{display:none;}
-  .paths{grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
-  .path{flex-direction:row;text-align:left;padding:8px 10px;min-height:52px;gap:8px;}
-  .path .em{width:38px;height:38px;font-size:22px;}
-  .path .dd{display:none;}
-  .footer{margin-top:18px;padding-top:12px;}
+  .hero-doors{grid-template-columns:repeat(3,1fr);padding:8px;gap:7px;margin-bottom:12px;}
+  .door{flex-direction:row;text-align:left;min-height:48px;padding:7px 10px;}
+  .door .ds,.door .star{display:none;}
+  .picks{grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+  .pick{flex-direction:row;text-align:left;min-height:56px;padding:8px 10px;gap:9px;}
+  .pick .em{width:40px;height:40px;font-size:22px;}
+  .pick .dd,.pick .tag{display:none;}
+  .footer{margin-top:16px;padding-top:12px;}
 }
-/* Movimento reduzido */
 @media(prefers-reduced-motion:reduce){
   .mascot{animation:none;}
-  .hero,.path,.mini,.tool-card-sm,.tool-card-hero{transition:none;}
+  *{transition:none!important;}
 }
 </style>
 </head>
@@ -150,11 +190,17 @@ details.sci[open] summary .chev{transform:rotate(180deg);}
 <canvas id="starfield"></canvas>
 <div id="app">
 
+  <div class="ctrls">
+    <button class="cbtn" id="themeBtn" onclick="toggleTema()" aria-pressed="false" title="Trocar entre claro e escuro">
+      <span class="ce" id="themeEmo">&#9728;&#65039;</span><span id="themeTxt">Modo claro</span>
+    </button>
+  </div>
+
   <div class="header">
-    <div class="badge">&#x1F4DA; 2o Trimestre 2026</div>
-    <div class="mascot">&#x1F9E0;</div>
-    <div class="title">Revisão</div>
-    <div class="subtitle">Maple Bear Y2 &mdash; Geografia: prova 11/08 &#x1F525;</div>
+    <div class="badge">&#x1F4DA; 2&ordm; Trimestre 2026</div>
+    <div class="mascot">&#x1F30E;</div>
+    <div class="title">Revis&atilde;o</div>
+    <div class="subtitle">Maple Bear Y2 &mdash; Geografia &middot; prova 11/08 &#x1F525;</div>
   </div>
 
   <!-- ================= GEOGRAFIA (prova 11/08) ================= -->
@@ -171,142 +217,118 @@ details.sci[open] summary .chev{transform:rotate(180deg);}
       <span>Escolha <u>um</u> jeito de revisar por vez. N&atilde;o precisa fazer tudo &mdash; um pouquinho por dia j&aacute; deixa voc&ecirc; pronta!</span>
     </div>
 
+    <!-- ===== DESTAQUE 1: REVISÃO ===== -->
     <div class="kicker">&#x1F449; Comece por aqui</div>
-    <a class="hero" href="ferramentas/GEO2_aventura.html">
+    <a class="hero" href="ferramentas/GEO2_estudo.html#map">
       <span class="em">&#x1F9ED;</span>
-      <span class="tool-body">
-        <span class="tt" style="display:block;">Expedi&ccedil;&atilde;o Brasil</span>
-        <span class="dd" style="display:block;">Jogo de fases: aprende, vence os desafios e ganha emblemas &mdash; a revis&atilde;o inteira brincando</span>
+      <span>
+        <span class="tt">Revis&atilde;o</span>
+        <span class="dd">Todo o conte&uacute;do da prova em um lugar s&oacute; &mdash; e agora tudo fechadinho: voc&ecirc; abre s&oacute; o que quer ler.</span>
       </span>
-      <span class="go">&#x2694;&#xFE0F; Jogar</span>
+      <span class="go">&#x1F5FA;&#xFE0F; Abrir</span>
     </a>
-
-    <div class="kicker" style="color:rgba(255,255,255,.4);">Ou, se preferir hoje&hellip;</div>
-    <div class="paths">
-      <a class="path" href="ferramentas/GEO2_simulado.html">
-        <span class="em" style="background:rgba(239,68,68,.12);">&#x1F4DD;</span>
-        <span class="tool-body">
-          <span class="tt" style="display:block;">Treinar a prova</span>
-          <span class="dd" style="display:block;">Simulado &mdash; voc&ecirc; escolhe quantas quest&otilde;es</span>
+    <div class="hero-doors">
+      <a class="door best" href="ferramentas/GEO2_estudo.html#map">
+        <span class="de">&#x1F9E9;</span>
+        <span>
+          <span class="dt2">Mapa mental</span>
+          <span class="ds">o conte&uacute;do todo em galhinhos que abrem</span>
+        </span>
+        <span class="star">&#x2B50; melhor</span>
+      </a>
+      <a class="door" href="ferramentas/GEO2_estudo.html#sheet">
+        <span class="de">&#x1F4D6;</span>
+        <span>
+          <span class="dt2">Folha de estudo</span>
+          <span class="ds">explicado com dicas e bot&atilde;o de ouvir</span>
         </span>
       </a>
-      <a class="path" href="ferramentas/GEO2_estudo.html">
-        <span class="em" style="background:rgba(250,204,21,.12);">&#x1F4D6;</span>
-        <span class="tool-body">
-          <span class="tt" style="display:block;">Ler e revisar</span>
-          <span class="dd" style="display:block;">Folha de estudo, palavras-chave e mapa mental</span>
-        </span>
-      </a>
-      <a class="path" href="ferramentas/GEO2_video.html">
-        <span class="em" style="background:rgba(96,165,250,.12);">&#x1F3AC;</span>
-        <span class="tool-body">
-          <span class="tt" style="display:block;">Assistir 4 min</span>
-          <span class="dd" style="display:block;">O v&iacute;deo da unidade &mdash; revis&atilde;o em desenho</span>
+      <a class="door" href="ferramentas/GEO2_estudo.html#words">
+        <span class="de">&#x2728;</span>
+        <span>
+          <span class="dt2">Palavras-chave</span>
+          <span class="ds">s&oacute; as palavras que caem na prova</span>
         </span>
       </a>
     </div>
 
+    <!-- ===== DESTAQUES 2-4 ===== -->
+    <div class="kicker" style="color:var(--soft);">Depois de revisar</div>
+    <div class="picks">
+      <a class="pick video" href="ferramentas/GEO2_video.html">
+        <span class="em">&#x1F3AC;</span>
+        <span>
+          <span class="tt">V&iacute;deo da unidade</span>
+          <span class="dd">a mat&eacute;ria inteira em desenho, passo a passo</span>
+        </span>
+        <span class="tag">&#x25B6;&#xFE0F; Assistir</span>
+      </a>
+      <a class="pick mat" href="ferramentas/GEO2_galeria.html">
+        <span class="em">&#x1F5BC;&#xFE0F;</span>
+        <span>
+          <span class="tt">Materiais da turma</span>
+          <span class="dd">as figuras reais da aula + o PDF da professora</span>
+        </span>
+        <span class="tag">&#x1F50D; Ver</span>
+      </a>
+      <a class="pick quiz" href="ferramentas/GEO2_simulado.html">
+        <span class="em">&#x1F4DD;</span>
+        <span>
+          <span class="tt">Simulado</span>
+          <span class="dd">treine a prova: voc&ecirc; escolhe quantas quest&otilde;es</span>
+        </span>
+        <span class="tag">&#x270F;&#xFE0F; Treinar</span>
+      </a>
+    </div>
+
+    <!-- ===== MAIS JEITOS (recolhido) ===== -->
     <details class="more">
       <summary><span>&#x1F381;</span> Mais jeitos de revisar (quando quiser variar) <span class="chev">&#x25BC;</span></summary>
       <div class="more-grid">
+        <a class="mini" href="ferramentas/GEO2_aventura.html">
+          <span class="em" style="background:color-mix(in srgb,var(--geo) 16%,transparent);">&#x2694;&#xFE0F;</span>
+          <span>
+            <span class="tt">Expedi&ccedil;&atilde;o Brasil</span>
+            <span class="dd">jogo de fases com emblemas</span>
+          </span>
+        </a>
         <a class="mini" href="ferramentas/GEO2_flashcards.html">
-          <span class="em" style="background:rgba(167,139,250,.14);">&#x1F0CF;</span>
-          <span class="tool-body">
-            <span class="tt" style="display:block;">Flashcards</span>
-            <span class="dd" style="display:block;">46 cartas: vira e responde</span>
+          <span class="em" style="background:rgba(167,139,250,.16);">&#x1F0CF;</span>
+          <span>
+            <span class="tt">Flashcards</span>
+            <span class="dd">46 cartas: vira e responde</span>
           </span>
         </a>
         <a class="mini" href="ferramentas/GEO2_nlm.html">
-          <span class="em" style="background:rgba(52,211,153,.14);">&#x1F914;</span>
-          <span class="tool-body">
-            <span class="tt" style="display:block;">Quiz explicado</span>
-            <span class="dd" style="display:block;">10 perguntas com o porqu&ecirc; de cada resposta</span>
+          <span class="em" style="background:color-mix(in srgb,var(--geo) 16%,transparent);">&#x1F914;</span>
+          <span>
+            <span class="tt">Quiz explicado</span>
+            <span class="dd">10 perguntas com o porqu&ecirc; da resposta</span>
           </span>
         </a>
         <a class="mini" href="ferramentas/GEO2_dragdrop.html">
-          <span class="em" style="background:rgba(52,211,153,.14);">&#x1F9F2;</span>
-          <span class="tool-body">
-            <span class="tt" style="display:block;">Arrasta e classifica</span>
-            <span class="dd" style="display:block;">cada coisa na sua regi&atilde;o</span>
+          <span class="em" style="background:rgba(96,165,250,.16);">&#x1F9F2;</span>
+          <span>
+            <span class="tt">Arrasta e classifica</span>
+            <span class="dd">cada coisa na sua regi&atilde;o</span>
           </span>
         </a>
         <a class="mini" href="ferramentas/GEO2_popit.html">
-          <span class="em" style="background:rgba(244,114,182,.14);">&#x1F388;</span>
-          <span class="tool-body">
-            <span class="tt" style="display:block;">Estoura o bal&atilde;o</span>
-            <span class="dd" style="display:block;">s&oacute; os bal&otilde;es da regi&atilde;o certa</span>
-          </span>
-        </a>
-        <a class="mini" href="ferramentas/GEO2_galeria.html">
-          <span class="em" style="background:rgba(96,165,250,.12);">&#x1F5BC;&#xFE0F;</span>
-          <span class="tool-body">
-            <span class="tt" style="display:block;">Materiais da turma</span>
-            <span class="dd" style="display:block;">as figuras reais + PDF da professora</span>
+          <span class="em" style="background:rgba(244,114,182,.16);">&#x1F388;</span>
+          <span>
+            <span class="tt">Estoura o bal&atilde;o</span>
+            <span class="dd">s&oacute; os bal&otilde;es da regi&atilde;o certa</span>
           </span>
         </a>
       </div>
     </details>
   </section>
 
-  <!-- ================= SCIENCE (prova 25/06 — feita) ================= -->
-  <details class="sci">
-    <summary>
-      <span class="ic">&#x1F9EA;</span>
-      <span class="nm">Science</span>
-      <span class="dt">&#x2705; prova feita 25/06</span>
-      <span class="chev">&#x25BC;</span>
-    </summary>
-    <div class="sci-body">
-      <div class="sci-note">Properties of Matter &mdash; <b>states of matter, particles, see-through &amp; absorb/repel</b> &middot; EN com bandeira &#x1F1E7;&#x1F1F7; PT &mdash; toque para revisar quando quiser</div>
-
-      <a class="tool-card-hero" href="ferramentas/CIE2_aventura.html">
-        <div class="tool-icon-sm" style="font-size:26px;width:44px;height:44px;background:linear-gradient(135deg,rgba(95,227,155,.2),rgba(168,85,247,.2));">&#x1F5FA;&#xFE0F;</div>
-        <div class="tool-body">
-          <div class="tool-name-sm" style="font-size:15px;">Matter Quest &mdash; Adventure</div>
-          <div class="tool-desc-sm">6 fases + 2 chef&otilde;es: aprende, vence o desafio e avan&ccedil;a &mdash; emblemas no final</div>
-        </div>
-        <div class="tool-status" style="background:rgba(95,227,155,.12);border:1px solid rgba(95,227,155,.3);color:#5fe39b;">&#x2694;&#xFE0F; Play</div>
-      </a>
-
-      <div class="sublabel" style="color:rgba(52,211,153,.6);">&#x1F3AE; Jogar</div>
-      <div class="tools-grid-sm">
-        <a class="tool-card-sm ready" href="ferramentas/CIE2_popit.html">
-          <div class="tool-icon-sm" style="background:rgba(244,114,182,.14);">&#x1F388;</div>
-          <div class="tool-body"><div class="tool-name-sm">Pop it! &mdash; Balloon Pop</div><div class="tool-desc-sm">pop the balloons that match the target &mdash; pen, sounds, BR flag</div></div>
-        </a>
-        <a class="tool-card-sm ready" href="ferramentas/CIE2_dragdrop.html">
-          <div class="tool-icon-sm" style="background:rgba(52,211,153,.14);">&#x1F9F2;</div>
-          <div class="tool-body"><div class="tool-name-sm">Sort it! &mdash; Drag &amp; Drop</div><div class="tool-desc-sm">6 games: drag clues to the right box &mdash; check &amp; redo, BR flag</div></div>
-        </a>
-      </div>
-
-      <div class="sublabel" style="color:rgba(239,68,68,.55);">&#x1F4DD; Testar</div>
-      <div class="tools-grid-sm">
-        <a class="tool-card-sm ready" href="ferramentas/CIE2_simulado.html">
-          <div class="tool-icon-sm" style="background:rgba(239,68,68,.1);">&#x2753;</div>
-          <div class="tool-body"><div class="tool-name-sm">Simulado / Quiz</div><div class="tool-desc-sm">5 to 100 questions, pick topics &mdash; 6 types, BR flag for PT</div></div>
-        </a>
-      </div>
-
-      <div class="sublabel" style="color:rgba(250,204,21,.55);">&#x1F4D6; Estudar</div>
-      <div class="tools-grid-sm">
-        <a class="tool-card-sm ready" href="ferramentas/CIE2_estudo.html">
-          <div class="tool-icon-sm" style="background:rgba(250,204,21,.12);">&#x1F4DA;</div>
-          <div class="tool-body"><div class="tool-name-sm">Study Hub</div><div class="tool-desc-sm">3 modos: folha de estudo &middot; palavras-chave &middot; mapa mental</div></div>
-        </a>
-        <a class="tool-card-sm ready" href="ferramentas/CIE2_galeria.html">
-          <div class="tool-icon-sm" style="background:rgba(96,165,250,.12);">&#x1F5BC;&#xFE0F;</div>
-          <div class="tool-body"><div class="tool-name-sm">Pictures &amp; Materials</div><div class="tool-desc-sm">the real class slides &mdash; states, light, absorb/repel</div></div>
-        </a>
-      </div>
-    </div>
-  </details>
-
   <div class="footer">
-    <div class="footer-logo">&#x1F9E0; Revisão</div>
+    <div class="footer-logo">&#x1F30E; Revis&atilde;o</div>
     <div class="footer-note">
-      2o Trimestre 2026 &mdash; Maple Bear Y2 Elementary<br>
-      Math 19/08 chega em breve &middot; Clique em qualquer ferramenta para abrir
+      2&ordm; Trimestre 2026 &mdash; Maple Bear Y2 Elementary<br>
+      Clique em qualquer ferramenta para abrir &middot; tudo funciona no celular
     </div>
     <button class="refresh-btn" onclick="hardRefresh()">&#x21BA; Atualizar site</button>
   </div>
@@ -314,14 +336,60 @@ details.sci[open] summary .chev{transform:rotate(180deg);}
 </div>
 
 <script>
+/* ============================================================
+   TEMA claro/escuro — mesma chave das ferramentas ('cie2_theme'),
+   entao trocar aqui e entrar num jogo mantem a escolha. As ferramentas
+   tem 5 temas; a home so alterna os dois principais (night/day), mas
+   RESPEITA os outros: castelo/praia/natureza tambem sao claros ou
+   escuros, e a home se pinta de acordo em vez de "voltar" para escuro.
+   ============================================================ */
+var TEMA_KEY='cie2_theme';
+var CLAROS={day:1,beach:1,nature:1};
+function temaAtual(){ try{return localStorage.getItem(TEMA_KEY)||'night';}catch(e){return 'night';} }
+function ehClaro(){ return !!CLAROS[temaAtual()]; }
+function pintaTema(){
+  var claro=ehClaro();
+  document.body.classList.toggle('light',claro);
+  document.getElementById('themeEmo').innerHTML=claro?'🌙':'☀️';
+  document.getElementById('themeTxt').textContent=claro?'Modo escuro':'Modo claro';
+  document.getElementById('themeBtn').setAttribute('aria-pressed',String(claro));
+  var m=document.querySelector('meta[name=theme-color]');
+  if(m) m.setAttribute('content',claro?'#eef5ff':'#0d0b1e');
+}
+function toggleTema(){
+  try{ localStorage.setItem(TEMA_KEY, ehClaro()?'night':'day'); }catch(e){}
+  pintaTema();
+}
+pintaTema();
+
 function hardRefresh(){ window.location.href=window.location.pathname+'?v='+Date.now(); }
 </script>
 <script>
+/* Fundo animado. No escuro sao estrelas brancas; no claro, bolinhas
+   azul-esverdeadas subindo (estrela branca em fundo claro some). */
 (function(){
   var c=document.getElementById('starfield'),ctx=c.getContext('2d'),stars=[];
-  function resize(){c.width=innerWidth;c.height=innerHeight;stars=[];for(var i=0;i<200;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.12+.03});}
-  function draw(){ctx.clearRect(0,0,c.width,c.height);stars.forEach(function(s){s.y-=s.sp;if(s.y<-5)s.y=c.height+5;s.a+=s.da;if(s.a>1||s.a<.1)s.da*=-1;ctx.save();ctx.globalAlpha=s.a;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();ctx.restore();});requestAnimationFrame(draw);}
-  resize();window.addEventListener('resize',resize);draw();
+  function resize(){
+    c.width=innerWidth;c.height=innerHeight;stars=[];
+    var n=innerWidth<600?110:200;
+    for(var i=0;i<n;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,
+      r:Math.random()*1.5+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.12+.03});
+  }
+  function draw(){
+    var claro=document.body.classList.contains('light');
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(function(s){
+      s.y-=s.sp; if(s.y<-5)s.y=c.height+5;
+      s.a+=s.da; if(s.a>1||s.a<.1)s.da*=-1;
+      ctx.save();
+      ctx.globalAlpha=claro?s.a*.32:s.a;
+      ctx.fillStyle=claro?'#0d8f66':'#fff';
+      ctx.beginPath();ctx.arc(s.x,s.y,claro?s.r*1.5:s.r,0,Math.PI*2);ctx.fill();
+      ctx.restore();
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();addEventListener('resize',resize);draw();
 })();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(function(reg) {

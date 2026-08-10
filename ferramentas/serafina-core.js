@@ -114,10 +114,15 @@ window.fs=function(d){
   document.documentElement.style.setProperty('--fs',1+fsStep*0.12);
 };
 
-/* ---- voltar ao menu ---- */
+/* ---- voltar ao menu ----
+   SEM caixa de confirmacao (pedido do Paulo, 10/08/2026): a crianca clica na
+   casinha e vai. O confirm() nativo era um dialogo em texto de adulto no meio
+   de uma tela infantil, e quem quer sair tinha de responder duas vezes.
+   A protecao contra saida acidental continua existindo, mas no lugar certo:
+   o cadeado (toggleLock) — que ja bloqueia goHome enquanto esta travado. */
 window.goHome=function(){
   if(window.screenLocked)return;
-  if(confirm(CFG.homeMsg))location.href=CFG.home;
+  location.href=CFG.home;
 };
 
 /* ---- lock / fullscreen (anti saída acidental) ---- */
