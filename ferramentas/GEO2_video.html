@@ -148,22 +148,22 @@ var v=$('v');
    Os minutos exatos de cada trecho nao foram conferidos contra o video
    gerado — anunciar "SUL aos 2:30" e mandar a crianca para o lugar errado
    e pior do que nao anunciar nada. Para voltar, os botoes de 10s. */
-/* Ordem CONFERIDA quadro a quadro no video v2 (10/08/2026): extrai um quadro
-   a cada 20 s e li os slides. Nao e o roteiro que pedimos — e o que o video
-   realmente mostra. */
+/* Ordem CONFERIDA no video v5 (10/08/2026) de dois jeitos: quadro a quadro
+   (1 quadro a cada 12 s) e pela TRANSCRICAO do audio. Nao e o roteiro que
+   pedimos — e o que o video realmente diz, na ordem em que diz. */
 var ROTEIRO=[
  'As palavras da unidade: comunidade, tradição, identidade cultural, migração, ancestrais e multicultural',
  'As três grandes ideias da unidade, uma por uma',
- 'De onde vêm as tradições — as migrações trazem a cultura junto',
+ 'De onde vêm as tradições — quem migra leva a cultura junto',
  'Onde a cultura aparece: culinária, vestimentas, religião, festas e arquitetura',
- 'As 10 tradições e costumes do Brasil, uma a uma (com as figuras da aula)',
- 'NORTE — a tabela inteira: festas, comidas, comemorações, danças e músicas',
- 'NORDESTE — a tabela inteira das 5 categorias',
- 'CENTRO-OESTE — a tabela inteira das 5 categorias',
- 'SUDESTE — a tabela inteira das 5 categorias',
- 'SUL — a tabela inteira das 5 categorias',
- 'Os pares que confundem — cada um com a sua região',
- 'Diversidade e meio ambiente: ambientes diferentes criam hábitos diferentes'
+ 'Os 10 costumes e tradições do Brasil, um a um',
+ 'NORTE — festas, comidas, comemorações, danças e músicas',
+ 'NORDESTE — as mesmas 5 categorias',
+ 'CENTRO-OESTE — as mesmas 5 categorias',
+ 'SUDESTE — as mesmas 5 categorias',
+ 'SUL — as mesmas 5 categorias',
+ 'Nomes parecidos que confundem — cada um com a sua região',
+ 'Diversidade e meio ambiente: lugares diferentes, hábitos diferentes'
 ];
 
 function mmss(s){var m=Math.floor(s/60),r=Math.round(s%60);return m+':'+(r<10?'0':'')+r;}

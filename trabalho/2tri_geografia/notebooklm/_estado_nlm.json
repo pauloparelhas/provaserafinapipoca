@@ -17,11 +17,16 @@
     "video": "ferramentas/media/video_geo2_nb1_pt.mp4"
   },
   "video": {
-    "titulo": "Revisão: Geografia U2",
-    "duracao": "9:10",
+    "titulo": "Comunidades e Lugares (v5)",
+    "duracao": "7:22",
     "gerado": "2026-08-10",
-    "via": "UI do NotebookLM pelo Chrome (CLI com sessao expirada)",
-    "prompt": "trabalho/2tri_geografia/notebooklm/prompt_video_v2.md",
-    "anterior": "ferramentas/media/video_geo2_nb1_pt_v1.mp4 (4:22)"
+    "prompt": "trabalho/2tri_geografia/notebooklm/prompt_video_v5.md",
+    "fontes_usadas": "so as 2 de texto (md consolidado + PDF da professora); recortes e roteiro_video.md desmarcados",
+    "anteriores": {
+      "v1": "4:22 (arquivado)",
+      "v2": "9:10 (arquivado como _v2)",
+      "v3": "6:07 (descartado)",
+      "v4": "6:48 (descartado)"
+    }
   }
 }
