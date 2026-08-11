@@ -129,6 +129,11 @@ body.show-tr .selfbtn .str{display:block}
 .fb.ok{color:var(--ok)}.fb.no{color:var(--no)}.fb.mid{color:var(--mid)}
 .next{margin-top:14px;width:100%;min-height:54px;border:none;border-radius:16px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#08263a;font-size:1.08rem;font-weight:900;cursor:pointer;display:none;font-family:inherit;box-shadow:0 8px 20px rgba(0,0,0,.28)}
 .next.show{display:block}
+/* quando o botao leva ao RESULTADO ele muda de cara: verde, maior e pulsa
+   uma vez — nao pode parecer um 'avancar' qualquer */
+.next.result{background:linear-gradient(90deg,#34d399,#fbbf24);min-height:60px;font-size:1.15rem;animation:pulsaFim .9s ease-out 1}
+@keyframes pulsaFim{0%{transform:scale(.96)}55%{transform:scale(1.04)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.next.result{animation:none}}
 .next:active{transform:scale(.98)}
 .fim .big{font-size:4rem}
 .fim .score{font-size:1.7rem;font-weight:900;color:var(--accent);margin:8px 0 2px}
@@ -659,6 +664,33 @@ function redoQ(){
 function head(it,label,cls){return `<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge ${cls}">${label}</span></div>
   ${it.fig?`<div class="qfig">${it.fig}</div>`:''}${it.en?`<div class="q">${it.en}</div><div class="tr qtr">${it.pt}</div>`:''}
   ${it.en?`<button class="speak" onclick="say('${esc(it.en)}')">&#128266; Ouvir</button>`:''}`;}
+/* ============================================================
+   REVELAR O BOTAO DEPOIS DE RESPONDER — e o caminho para o resultado.
+
+   BUG QUE ISTO CORRIGE (10/08/2026): nextBtn() nasce com o atributo
+   style="display:none" enquanto a pergunta nao foi respondida. Tres dos seis
+   tipos (MC, V/F e completar) so faziam classList.add('show') ao responder — e
+   estilo INLINE vence regra de classe, entao o botao continuava invisivel. Na
+   ultima pergunta isso deixava a crianca sem saida: respondia e nao aparecia
+   como ver o resultado.
+
+   Alem de mostrar, aqui se REESCREVE o rotulo: a resposta que acabou de ser
+   dada pode ter sido a ultima que faltava, e ai o botao deixa de ser "Avancar"
+   e passa a ser "Ver o resultado". O rotulo tinha sido calculado no render,
+   antes dessa resposta existir.
+   ============================================================ */
+function mostraNext(){
+  const b=$('next'); if(!b)return;
+  const acabou=(cur===total-1)||allAnswered();
+  b.style.display='block'; b.classList.add('show');
+  b.classList.toggle('result',acabou);
+  b.innerHTML=acabou?'Ver o resultado \u{1F389}':'Avan\u00e7ar \u2192';
+  updateArrows();                       /* a seta de cima tambem vira Resultado */
+  if(acabou){
+    /* em tela pequena o botao pode nascer abaixo da dobra: traz para a vista */
+    try{ b.scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){}
+  }
+}
 function nextBtn(hidden){return `<button class="next" id="next" ${hidden?'style="display:none"':''} onclick="next()">${(cur===total-1||allAnswered())?'Ver o resultado \u{1F389}':'Avançar →'}</button>`;}
 
 /* MC */
@@ -681,7 +713,7 @@ function paintMC(it){
   if(it.opts[i].ok){b[i].classList.add('ok');$('fb').textContent='Isso mesmo! \u{1F31F}';$('fb').className='fb ok';}
   else{b[i].classList.add('no');it.opts.forEach((o,k)=>{if(o.ok)b[k].classList.add('ok');});
     $('fb').textContent='A verde é a certa \u{1F60A}';$('fb').className='fb no';}
-  $('next').classList.add('show');
+  mostraNext();
 }
 
 /* V/F */
@@ -706,7 +738,7 @@ function paintVF(it){
   if(it.pick===it.ans){rightBtn.classList.add('ok');$('fb').textContent='Isso mesmo! \u{1F31F}';$('fb').className='fb ok';}
   else{(it.pick?T:F).classList.add('no');rightBtn.classList.add('ok');
     $('fb').textContent='A verde é a certa \u{1F60A}';$('fb').className='fb no';}
-  $('next').classList.add('show');
+  mostraNext();
 }
 
 /* COMPLETE */
@@ -735,7 +767,7 @@ function paintFill(it){
     it.chips.forEach((c,k)=>{if(c.ok)chips[k].classList.add('ok');});
     $('blank').textContent=it.ans;$('blank').classList.remove('no');$('blank').classList.add('ok');
     $('fb').textContent='A palavra certa é "'+it.ans+'" \u{1F60A}';$('fb').className='fb no';}
-  $('next').classList.add('show');
+  mostraNext();
 }
 
 /* MATCH */
@@ -790,7 +822,7 @@ function paintMatch(it){
   const all=it.items.length;
   if(right===all){$('fb').textContent='Tudo certo! \u{1F31F}';$('fb').className='fb ok';}
   else{$('fb').textContent=right+' de '+all+' certas — o verde mostra a resposta \u{1F60A}';$('fb').className='fb mid';}
-  $('next').style.display='block';$('next').classList.add('show');
+  mostraNext();
 }
 
 /* ORDER */
@@ -846,7 +878,7 @@ function paintOrder(it){
     $('fb').innerHTML=right+' de '+all+' no lugar certo \u{1F60A}<div class="ocorrect">Ordem certa: '+correct+'</div>';
     $('fb').className='fb mid';
   }
-  $('next').style.display='block';$('next').classList.add('show');
+  mostraNext();
 }
 
 /* OPEN */
@@ -878,7 +910,7 @@ function paintSelf(it){
   if(it.selfv==='ok'){document.querySelector('.selfbtn.acertei').classList.add('sel');$('fb').textContent='Muito bem! \u{1F31F}';$('fb').className='fb ok';}
   else if(it.selfv==='mid'){document.querySelector('.selfbtn.parcial').classList.add('sel');$('fb').textContent='Quase lá! \u{1F44D}';$('fb').className='fb mid';}
   else{document.querySelector('.selfbtn.errei').classList.add('sel');$('fb').textContent='Agora você sabe! \u{1F4AA}';$('fb').className='fb no';}
-  $('next').style.display='block';$('next').classList.add('show');
+  mostraNext();
 }
 
 function next(){ if(allAnswered()){fim();return;} cur++; if(cur<total)render(); else fim(); }
