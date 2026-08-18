@@ -89,15 +89,22 @@ body.show-tr .sechead .st .str{display:block}
 .kbhead .kt .ktr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem}
 body.show-tr .kbhead .kt .ktr{display:block}
 .kaxis{font-size:.66rem;font-weight:900;letter-spacing:.4px;text-transform:uppercase;color:var(--soft);background:var(--line);border-radius:8px;padding:3px 8px;margin-left:auto;white-space:nowrap}
-.kgroup{margin-top:10px}
-.klabel{display:inline-flex;align-items:center;gap:6px;font-weight:900;font-size:calc(.9rem*var(--fs));border-radius:999px;padding:5px 13px;min-height:44px;cursor:pointer;border:none;font-family:inherit}
-.klabel .ltr{font-weight:800;font-style:italic;font-size:.74rem;opacity:.85}
+/* 18/08: era supercolorido — cada um dos ~24 grupos tinha sua PROPRIA cor
+   solida (pilula + borda dos chips), 4 tons diferentes num so bloco. Agora
+   so o BLOCO tem cor (a mesma borda esquerda do kblock); grupo e chip sao
+   neutros — menos e mais. */
+.kgroup{margin-top:14px;padding-left:10px;border-left:3px solid var(--bc,var(--line))}
+.kgroup:first-child{margin-top:4px}
+.klabel{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;width:100%;font-weight:900;font-size:calc(.86rem*var(--fs));letter-spacing:.2px;padding:6px 2px;min-height:32px;cursor:pointer;border:none;background:transparent;font-family:inherit;color:var(--soft);text-align:left}
+.klabel .ke{font-size:1rem}
+.klabel .ltr{font-weight:700;font-style:italic;font-size:.76rem;opacity:.8;color:var(--tr)}
 body:not(.show-tr) .klabel .ltr{display:none}
-.kchips{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}
-.kchip{display:flex;flex-direction:column;justify-content:center;gap:1px;min-height:44px;border-radius:13px;padding:6px 12px;cursor:pointer;font-family:inherit;text-align:left;border:1.5px solid var(--cc,var(--line));background:var(--cb,rgba(255,255,255,.05));color:var(--ink)}
-.kchip:active{transform:scale(.95)}
-.kchip .en{font-weight:900;font-size:calc(.92rem*var(--fs));line-height:1.1}
-.kchip .pt{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem;line-height:1.1}
+.kchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+.kchip{display:flex;flex-direction:column;justify-content:center;gap:1px;min-height:40px;border-radius:11px;padding:5px 11px;cursor:pointer;font-family:inherit;text-align:left;border:1.5px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink)}
+body.light .kchip{background:rgba(0,0,0,.025)}
+.kchip:active{transform:scale(.95);border-color:var(--bc,var(--accent))}
+.kchip .en{font-weight:800;font-size:calc(.86rem*var(--fs));line-height:1.1}
+.kchip .pt{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.72rem;line-height:1.1}
 body.show-tr .kchip .pt{display:block}
 
 /* ---- MODO 3: mapa mental (do CIE2_mindmap) ---- */
@@ -203,7 +210,7 @@ body.light .mm-tag{background:rgba(180,83,9,.15);color:#b45309}
   <div class="topbar">
     <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
     <span class="title">Study sheet &mdash; 2-D Figures</span>
-    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()"><svg class="flagicon" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false"><rect width="20" height="14" rx="2" fill="#009C3B"/><polygon points="10,2 18,7 10,12 2,7" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/></svg><span class="ft">PT</span></button>
     <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
     <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
@@ -219,7 +226,7 @@ body.light .mm-tag{background:rgba(180,83,9,.15);color:#b45309}
 
     <!-- ===== MODO 1: FOLHA DE ESTUDO ===== -->
     <div class="pane on" id="pane-sheet">
-      <div class="hint">Your study sheet! Tap a title to open or close it, tap &#128266; to listen, and tap &#127463;&#127479; for the Portuguese.
+      <div class="hint">Your study sheet! Tap a title to open or close it, tap &#128266; to listen, and tap the flag<svg class="flagicon" width="16" height="11" viewBox="0 0 20 14" aria-hidden="true" focusable="false" style="vertical-align:-1px;margin-left:3px"><rect width="20" height="14" rx="2" fill="#009C3B"/><polygon points="10,2 18,7 10,12 2,7" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/></svg> for the Portuguese.
         <span class="tr">Toque no t&iacute;tulo para abrir/fechar, no &#128266; para ouvir em ingl&ecirc;s e na bandeira para ver a tradu&ccedil;&atilde;o.</span></div>
       <div class="toolrow">
         <button class="toolbtn" onclick="allSec(true)">&#11015;&#65039; Open all</button>
@@ -413,7 +420,7 @@ function allSec(open){document.querySelectorAll('#pane-sheet .sec').forEach(func
 
 /* ============ MODO 2: palavras-chave ============ */
 var BLOCKS=[
- { key:'figuras', emo:"\u{1F53A}", en:"The 7 figures", axis:"name · sides · vertices",
+ { key:'figuras', emo:"\u{1F53A}", en:"The 7 figures", pt:'as 7 figuras', axis:"name · sides · vertices",
    groups:[
     {name:'0 vertices', pt:'sem cantinho', emo:"\u{2B55}", co:C_OBJ, chips:[
       ["circle","círculo — redondo, 0 lados retos"]]},
@@ -424,7 +431,7 @@ var BLOCKS=[
     {name:'5, 6 and 8 sides', pt:'penta · hexa · octo', emo:"\u{2B50}", co:C_FIG, chips:[
       ["pentagon","pentágono — 5"],["hexagon","hexágono — 6"],["octagon","octógono — 8"]]}
    ]},
- { key:'partes', emo:"\u{1F4CD}", en:"Sides and vertices", axis:"the words the test uses",
+ { key:'partes', emo:"\u{1F4CD}", en:"Sides and vertices", pt:'lados e vértices', axis:"the words the test uses",
    groups:[
     {name:'Side / edge', pt:'o lado', emo:"\u{1F4CF}", co:C_LAD, chips:[
       ["side","lado — cada linha reta"],["edge","lado (outra palavra)"],["straight","reto"],["curved","curvo"]]},
@@ -433,7 +440,7 @@ var BLOCKS=[
     {name:'The golden rule', pt:'lados = vértices', emo:"\u{1F511}", co:C_PAD, chips:[
       ["3 sides = 3 vertices",""],["4 sides = 4 vertices",""],["6 sides = 6 vertices",""],["circle = 0 vertices","a exceção"]]}
    ]},
- { key:'objetos', emo:"\u{1F441}\u{FE0F}", en:"Figures around us", axis:"the object and its figure",
+ { key:'objetos', emo:"\u{1F441}\u{FE0F}", en:"Figures around us", pt:'as figuras ao nosso redor', axis:"the object and its figure",
    groups:[
     {name:'Rectangle', pt:'retângulo', emo:"\u{1F7E6}", co:'#60a5fa', chips:[
       ["book cover","capa de livro"],["door","porta"]]},
@@ -444,7 +451,7 @@ var BLOCKS=[
     {name:'Octagon · Hexagon · Pentagon', pt:'8 · 6 · 5', emo:"\u{1F6D1}", co:C_FIG, chips:[
       ["stop sign","placa de PARE — octagon"],["honeycomb cell","favo de mel — hexagon"],["black patch on a ball","gomo preto da bola — pentagon"]]}
    ]},
- { key:'simetria', emo:"\u{1FA9E}", en:"Symmetry", axis:"the mirror line",
+ { key:'simetria', emo:"\u{1FA9E}", en:"Symmetry", pt:'simetria', axis:"the mirror line",
    groups:[
     {name:'The words', pt:'as palavras', emo:"\u{1F4AC}", co:C_SIM, chips:[
       ["symmetry","simetria"],["line of symmetry","linha de simetria"],["fold","dobrar"],["match","combinar"],["matching part","a metade que combina"],["mirror image","imagem no espelho"],["half","metade"],["Mira","o espelhinho"]]},
@@ -455,7 +462,7 @@ var BLOCKS=[
     {name:'Words with symmetry', pt:'palavras simétricas', emo:"\u{1F469}", co:C_PAD, chips:[
       ["MOM","a Mira vai no meio do O"],["WOW",""],["MUM",""],["TOT",""]]}
    ]},
- { key:'padroes', emo:"\u{1F504}", en:"Slide, flip, turn", axis:"the three moves",
+ { key:'padroes', emo:"\u{1F504}", en:"Slide, flip, turn", pt:'deslizar, virar, girar', axis:"the three moves",
    groups:[
     {name:'Slide', pt:'deslizar', emo:"\u{27A1}\u{FE0F}", co:'#60a5fa', chips:[
       ["it walks to the next spot","anda para o lugar de perto"],["no spinning, no mirror","não roda nem espelha"]]},
@@ -466,7 +473,7 @@ var BLOCKS=[
     {name:'Always the same', pt:'nunca muda', emo:"\u{1F512}", co:C_LAD, chips:[
       ["the number of sides","o número de lados"],["the number of vertices","o número de vértices"],["the size","o tamanho"],["the name of the figure","o nome da figura"]]}
    ]},
- { key:'pares', emo:"\u{26A0}\u{FE0F}", en:"Pairs that trick you", axis:"read to the end",
+ { key:'pares', emo:"\u{26A0}\u{FE0F}", en:"Pairs that trick you", pt:'pares que confundem', axis:"read to the end",
    groups:[
     {name:'side × vertex', pt:'lado × vértice', emo:"\u{1F4CD}", co:'#fb7185', chips:[
       ["side = a straight line","o lado"],["vertex = a corner","o cantinho"]]},
@@ -488,18 +495,18 @@ function buildWords(){
        .kbbody proprio para o toggle nao esconder tambem o cabecalho. */
     html+='<div class="kblock" id="kb'+bi+'" style="--bc:'+b.groups[0].co+'">'
         +'<div class="kbhead" onclick="toggleWordBlock('+bi+')"><span class="ke">'+b.emo+'</span>'
-        +'<span class="kt">'+b.en+'</span>'
+        +'<span class="kt">'+b.en+(b.pt?'<span class="ktr">'+b.pt+'</span>':'')+'</span>'
         +'<span class="kaxis">'+b.axis+'</span>'
         +'<span class="kbchev">&#9660;</span></div>'
         +'<div class="kbbody">';
     b.groups.forEach(function(g){
       var allWords=g.chips.map(function(c){return c[0];}).join(', ');
-      html+='<div class="kgroup">'
-          +'<button class="klabel" style="background:'+g.co+';color:'+textOn(g.co)+'" onclick="say(\''+esc(g.name+'. '+allWords)+'\')">'
-          +'<span>'+g.emo+'</span><span>'+g.name+'</span>'+(g.pt?'<span class="ltr">'+g.pt+'</span>':'')+'</button>'
+      html+='<div class="kgroup" style="--bc:'+g.co+'">'
+          +'<button class="klabel" onclick="say(\''+esc(g.name+'. '+allWords)+'\')">'
+          +'<span class="ke">'+g.emo+'</span><span>'+g.name+'</span>'+(g.pt?'<span class="ltr">'+g.pt+'</span>':'')+'</button>'
           +'<div class="kchips">';
       g.chips.forEach(function(c){
-        html+='<button class="kchip" style="--cc:'+rgba(g.co,.55)+';--cb:'+rgba(g.co,.14)+'" onclick="say(\''+esc(c[0])+'\')">'
+        html+='<button class="kchip" onclick="say(\''+esc(c[0])+'\')">'
             +'<span class="en">'+c[0]+'</span>'+(c[1]?'<span class="pt">'+c[1]+'</span>':'')+'</button>';
       });
       html+='</div></div>';
@@ -515,64 +522,104 @@ function allWords(open){document.querySelectorAll('#pane-words .kblock').forEach
 var MAP=[
  {c:'bc-orange', ic:"\u{1F53A}", t:'The 7 figures', tr:'as sete figuras da unidade', open:false,
   leaves:[
-   {ic:"\u{2B55}", t:'Circle', pt:'círculo', d:['Round, with no corners.','No straight sides · 0 vertices.']},
-   {ic:"\u{1F53A}", t:'Triangle', pt:'triângulo', d:['3 straight sides · 3 vertices.']},
-   {ic:"\u{1F7E9}", t:'Square', pt:'quadrado', d:['4 sides, all the same length · 4 vertices.']},
-   {ic:"\u{1F7E6}", t:'Rectangle', pt:'retângulo', d:['4 sides: 2 long and 2 short · 4 vertices.']},
-   {ic:"\u{2B50}", t:'Pentagon', pt:'pentágono', d:['5 sides · 5 vertices.','penta = 5.']},
-   {ic:"\u{1F41D}", t:'Hexagon', pt:'hexágono', d:['6 sides · 6 vertices.','hexa = 6.']},
-   {ic:"\u{1F6D1}", t:'Octagon', pt:'octógono', d:['8 sides · 8 vertices.','octo = 8, like an octopus.']}
+   {ic:"\u{2B55}", t:'Circle', pt:'círculo', d:['Round, with no corners.','No straight sides · 0 vertices.'],
+    dpt:['Redondo, sem cantinho nenhum.','Nenhum lado reto · 0 vértices.']},
+   {ic:"\u{1F53A}", t:'Triangle', pt:'triângulo', d:['3 straight sides · 3 vertices.'],
+    dpt:['3 lados retos · 3 vértices.']},
+   {ic:"\u{1F7E9}", t:'Square', pt:'quadrado', d:['4 sides, all the same length · 4 vertices.'],
+    dpt:['4 lados, todos do mesmo tamanho · 4 vértices.']},
+   {ic:"\u{1F7E6}", t:'Rectangle', pt:'retângulo', d:['4 sides: 2 long and 2 short · 4 vertices.'],
+    dpt:['4 lados: 2 compridos e 2 curtos · 4 vértices.']},
+   {ic:"\u{2B50}", t:'Pentagon', pt:'pentágono', d:['5 sides · 5 vertices.','penta = 5.'],
+    dpt:['5 lados · 5 vértices.','penta = 5.']},
+   {ic:"\u{1F41D}", t:'Hexagon', pt:'hexágono', d:['6 sides · 6 vertices.','hexa = 6.'],
+    dpt:['6 lados · 6 vértices.','hexa = 6.']},
+   {ic:"\u{1F6D1}", t:'Octagon', pt:'octógono', d:['8 sides · 8 vertices.','octo = 8, like an octopus.'],
+    dpt:['8 lados · 8 vértices.','octo = 8, como o polvo (octopus).']}
   ]},
  {c:'bc-blue', ic:"\u{1F4CD}", t:'Sides and vertices', tr:'o que a prova mais cobra', open:false,
   leaves:[
-   {ic:"\u{1F4CF}", t:'Side', pt:'lado', d:['One straight line of the figure.','Edge means the same thing.']},
-   {ic:"\u{1F4CD}", t:'Vertex', pt:'vértice', d:['The corner where two sides meet.','More than one: vertices.']},
-   {ic:"\u{1F511}", t:'The golden rule', d:['In a figure with straight sides, the number of vertices is the same as the number of sides.']},
-   {ic:"\u{2B55}", t:'The exception', d:['The circle has 0 vertices — it has no corners at all.']},
-   {ic:"\u{1F45C}", t:'What is in the bag?', d:['3 figures with 13 sides: triangle + square + hexagon (3+4+6).','3 figures with 12 vertices: square + square + square (4+4+4).','There is more than one right answer.']}
+   {ic:"\u{1F4CF}", t:'Side', pt:'lado', d:['One straight line of the figure.','Edge means the same thing.'],
+    dpt:['Cada linha reta da figura.','Edge quer dizer a mesma coisa.']},
+   {ic:"\u{1F4CD}", t:'Vertex', pt:'vértice', d:['The corner where two sides meet.','More than one: vertices.'],
+    dpt:['O cantinho onde dois lados se encontram.','Mais de um: vertices.']},
+   {ic:"\u{1F511}", t:'The golden rule', d:['In a figure with straight sides, the number of vertices is the same as the number of sides.'],
+    dpt:['Numa figura de lados retos, o número de vértices é igual ao de lados.']},
+   {ic:"\u{2B55}", t:'The exception', d:['The circle has 0 vertices — it has no corners at all.'],
+    dpt:['O círculo tem 0 vértices — não tem cantinho nenhum.']},
+   {ic:"\u{1F45C}", t:'What is in the bag?', d:['3 figures with 13 sides: triangle + square + hexagon (3+4+6).','3 figures with 12 vertices: square + square + square (4+4+4).','There is more than one right answer.'],
+    dpt:['3 figuras com 13 lados: triângulo + quadrado + hexágono (3+4+6).','3 figuras com 12 vértices: quadrado + quadrado + quadrado (4+4+4).','Tem mais de uma resposta certa.']}
   ]},
  {c:'bc-green', ic:"\u{1F441}\u{FE0F}", t:'Figures around us', tr:'as figuras nos objetos do dia a dia', open:false,
   leaves:[
-   {ic:"\u{1F7E6}", t:'Rectangle', d:['A book cover.','A door.']},
-   {ic:"\u{2B55}", t:'Circle', d:['A coin, a plate, a wheel, a clock face.']},
-   {ic:"\u{1F53A}", t:'Triangle', d:['A slice of pizza.','A party hat.']},
-   {ic:"\u{1F6D1}", t:'Octagon', d:['A stop sign.']},
-   {ic:"\u{1F36F}", t:'Hexagon', d:['A honeycomb cell.']},
-   {ic:"\u{26BD}", t:'Pentagon', d:['The black patch on a soccer ball.']}
+   {ic:"\u{1F7E6}", t:'Rectangle', d:['A book cover.','A door.'],
+    dpt:['A capa de um livro.','Uma porta.']},
+   {ic:"\u{2B55}", t:'Circle', d:['A coin, a plate, a wheel, a clock face.'],
+    dpt:['Uma moeda, um prato, uma roda, um relógio de parede.']},
+   {ic:"\u{1F53A}", t:'Triangle', d:['A slice of pizza.','A party hat.'],
+    dpt:['Uma fatia de pizza.','Um chapéu de festa.']},
+   {ic:"\u{1F6D1}", t:'Octagon', d:['A stop sign.'],
+    dpt:['Uma placa de PARE.']},
+   {ic:"\u{1F36F}", t:'Hexagon', d:['A honeycomb cell.'],
+    dpt:['Um favo de mel.']},
+   {ic:"\u{26BD}", t:'Pentagon', d:['The black patch on a soccer ball.'],
+    dpt:['O gomo preto de uma bola de futebol.']}
   ]},
  {c:'bc-pink', ic:"\u{1FA9E}", t:'Symmetry', tr:'a linha do espelho', open:false,
   leaves:[
-   {ic:"\u{1FA9E}", t:'What symmetry is', d:['A figure has symmetry when you can fold it and the two halves match.']},
-   {ic:"\u{2702}\u{FE0F}", t:'Line of symmetry', d:['The fold line.','It can be standing up OR lying down.','A figure can have more than one.']},
-   {ic:"\u{1F5BC}\u{FE0F}", t:'Matching part', d:['The half that is missing.','It is the mirror image of the other half.']},
-   {ic:"\u{1F534}", t:'Mira', d:['The little red mirror we use to check.','Put it on the line and look.']},
-   {ic:"\u{2705}", t:'Letters with symmetry', d:['O and X — standing up AND lying down.','A, M and V — standing up.','C and B — lying down.']},
-   {ic:"\u{274C}", t:'Letters without symmetry', d:['G, P, J and R.']},
-   {ic:"\u{1F469}", t:'MOM', d:['The word has symmetry: the Mira goes standing up, in the middle of the O.','Other words: WOW, MUM, TOT.']}
+   {ic:"\u{1FA9E}", t:'What symmetry is', d:['A figure has symmetry when you can fold it and the two halves match.'],
+    dpt:['Uma figura tem simetria quando dá para dobrá-la e as duas metades combinam.']},
+   {ic:"\u{2702}\u{FE0F}", t:'Line of symmetry', d:['The fold line.','It can be standing up OR lying down.','A figure can have more than one.'],
+    dpt:['A linha da dobra.','Pode ser em pé OU deitada.','Uma figura pode ter mais de uma.']},
+   {ic:"\u{1F5BC}\u{FE0F}", t:'Matching part', d:['The half that is missing.','It is the mirror image of the other half.'],
+    dpt:['A metade que falta.','É a imagem no espelho da outra metade.']},
+   {ic:"\u{1F534}", t:'Mira', d:['The little red mirror we use to check.','Put it on the line and look.'],
+    dpt:['O espelhinho vermelho que usamos para conferir.','Põe em cima da linha e olha.']},
+   {ic:"\u{2705}", t:'Letters with symmetry', d:['O and X — standing up AND lying down.','A, M and V — standing up.','C and B — lying down.'],
+    dpt:['O e X — em pé E deitada.','A, M e V — em pé.','C e B — deitada.']},
+   {ic:"\u{274C}", t:'Letters without symmetry', d:['G, P, J and R.'],
+    dpt:['G, P, J e R.']},
+   {ic:"\u{1F469}", t:'MOM', d:['The word has symmetry: the Mira goes standing up, in the middle of the O.','Other words: WOW, MUM, TOT.'],
+    dpt:['A palavra tem simetria: a Mira vai em pé, no meio do O.','Outras palavras: WOW, MUM, TOT.']}
   ]},
  {c:'bc-purple', ic:"\u{1F504}", t:'Slide, flip and turn', tr:'os padrões que se repetem', open:false,
   leaves:[
-   {ic:"\u{27A1}\u{FE0F}", t:'Slide', pt:'deslizar', d:['The figure walks to the next spot.','It does not spin and it does not mirror.']},
-   {ic:"\u{1FA9E}", t:'Flip', pt:'virar', d:['The figure shows its mirror image.']},
-   {ic:"\u{1F503}", t:'Turn', pt:'girar', d:['The figure spins around a point, like a clock hand.']},
-   {ic:"\u{1F9F5}", t:'Repeating pattern', d:['A little piece that comes again and again, always in the same order.','You can make one with just one figure.']},
-   {ic:"\u{1F512}", t:'What never changes', d:['The number of sides, the number of vertices, the size and the name of the figure.']},
-   {ic:"\u{2728}", t:'What can change', d:['Where the figure is.','Which way it faces.']}
+   {ic:"\u{27A1}\u{FE0F}", t:'Slide', pt:'deslizar', d:['The figure walks to the next spot.','It does not spin and it does not mirror.'],
+    dpt:['A figura anda para o lugar de perto.','Ela não gira nem espelha.']},
+   {ic:"\u{1FA9E}", t:'Flip', pt:'virar', d:['The figure shows its mirror image.'],
+    dpt:['A figura mostra a imagem dela no espelho.']},
+   {ic:"\u{1F503}", t:'Turn', pt:'girar', d:['The figure spins around a point, like a clock hand.'],
+    dpt:['A figura gira em volta de um ponto, como o ponteiro do relógio.']},
+   {ic:"\u{1F9F5}", t:'Repeating pattern', d:['A little piece that comes again and again, always in the same order.','You can make one with just one figure.'],
+    dpt:['Um pedacinho que se repete sempre na mesma ordem.','Dá para fazer um só com uma figura.']},
+   {ic:"\u{1F512}", t:'What never changes', d:['The number of sides, the number of vertices, the size and the name of the figure.'],
+    dpt:['O número de lados, o de vértices, o tamanho e o nome da figura.']},
+   {ic:"\u{2728}", t:'What can change', d:['Where the figure is.','Which way it faces.'],
+    dpt:['Onde a figura está.','Para que lado ela aponta.']}
   ]},
  {c:'bc-green', ic:"\u{1F9E9}", t:'The quilt', tr:'a colcha da última lição', open:false,
   leaves:[
-   {ic:"\u{1F522}", t:'The grid', d:['3 by 3 blocks, numbered 1 to 9.']},
-   {ic:"\u{2B50}", t:'Block 3', d:['The only block with just a pentagon.','A triangle on each edge makes a star.']},
-   {ic:"\u{1F46F}", t:'Same design', d:['Blocks 1 and 9.','Blocks 2 and 6.','Blocks 4 and 8.','Only the colours change.']},
-   {ic:"\u{2B07}\u{FE0F}", t:'Following directions', d:['Start in block 1 · down two blocks → 7 · one to the right → 8 · up one → 5 · one to the left → block 4.']}
+   {ic:"\u{1F522}", t:'The grid', d:['3 by 3 blocks, numbered 1 to 9.'],
+    dpt:['Uma grade 3 por 3, numerada de 1 a 9.']},
+   {ic:"\u{2B50}", t:'Block 3', d:['The only block with just a pentagon.','A triangle on each edge makes a star.'],
+    dpt:['O único bloco com só um pentágono.','Um triângulo em cada lado forma uma estrela.']},
+   {ic:"\u{1F46F}", t:'Same design', d:['Blocks 1 and 9.','Blocks 2 and 6.','Blocks 4 and 8.','Only the colours change.'],
+    dpt:['Blocos 1 e 9.','Blocos 2 e 6.','Blocos 4 e 8.','Só as cores mudam.']},
+   {ic:"\u{2B07}\u{FE0F}", t:'Following directions', d:['Start in block 1 · down two blocks → 7 · one to the right → 8 · up one → 5 · one to the left → block 4.'],
+    dpt:['Começa no bloco 1 · desce dois blocos → 7 · um à direita → 8 · sobe um → 5 · um à esquerda → bloco 4.']}
   ]},
  {c:'bc-orange', ic:"\u{26A0}\u{FE0F}", t:'Careful with these pairs!', tr:'as pegadinhas mais prováveis', open:false,
   leaves:[
-   {ic:"\u{1F4CD}", t:'side × vertex', d:['Side = one straight line.','Vertex = the corner where two sides meet.','Read the question to the end!']},
-   {ic:"\u{1F4CF}", t:'standing up × lying down', d:['A line of symmetry can be lying down.','C and B only work with the line lying down.']},
-   {ic:"\u{1F504}", t:'flip × turn', d:['Flip = mirror image.','Turn = spins around a point.','In Portuguese we say “virar” for both — in English we do not.']},
-   {ic:"\u{1F41D}", t:'hexagon × octagon', d:['Hexagon = 6 sides.','Octagon = 8 sides, like an octopus.']},
-   {ic:"\u{1F7E9}", t:'square × rectangle', d:['Both have 4 sides and 4 vertices.','In the square all four sides are the same length.']}
+   {ic:"\u{1F4CD}", t:'side × vertex', d:['Side = one straight line.','Vertex = the corner where two sides meet.','Read the question to the end!'],
+    dpt:['Side = uma linha reta.','Vertex = o cantinho onde dois lados se encontram.','Leia a pergunta até o fim!']},
+   {ic:"\u{1F4CF}", t:'standing up × lying down', d:['A line of symmetry can be lying down.','C and B only work with the line lying down.'],
+    dpt:['Uma linha de simetria pode ser deitada.','C e B só funcionam com a linha deitada.']},
+   {ic:"\u{1F504}", t:'flip × turn', d:['Flip = mirror image.','Turn = spins around a point.','In Portuguese we say “virar” for both — in English we do not.'],
+    dpt:['Flip = imagem no espelho.','Turn = gira em volta de um ponto.','Em português a gente diz “virar” para os dois — em inglês não.']},
+   {ic:"\u{1F41D}", t:'hexagon × octagon', d:['Hexagon = 6 sides.','Octagon = 8 sides, like an octopus.'],
+    dpt:['Hexagon = 6 lados.','Octagon = 8 lados, como o polvo.']},
+   {ic:"\u{1F7E9}", t:'square × rectangle', d:['Both have 4 sides and 4 vertices.','In the square all four sides are the same length.'],
+    dpt:['Os dois têm 4 lados e 4 vértices.','No quadrado os quatro lados são do mesmo tamanho.']}
   ]}
 ];
 function buildMap(){
@@ -591,7 +638,8 @@ function buildMap(){
          +'<div class="mm-leaf-arrow">&#9654;</div></div>'
          +'<div class="mm-leaf-body">'
          +l.d.map(function(d,k){return '<div class="mm-detail'+(k===l.d.length-1?' mm-detail-last':'')+'">'
-             +'<span class="mm-detail-en">'+d+'</span></div>';}).join('')
+             +'<span class="mm-detail-en">'+d+'</span>'
+             +(l.dpt&&l.dpt[k]?'<span class="mm-detail-pt">'+l.dpt[k]+'</span>':'')+'</div>';}).join('')
          +'</div></div>';
       }).join('')
      +'</div></div></div>';

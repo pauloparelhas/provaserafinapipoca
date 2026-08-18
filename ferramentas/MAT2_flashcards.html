@@ -154,7 +154,7 @@ body.show-tr .tr{display:block}
   <div class="topbar">
     <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
     <span class="title">Flashcards &mdash; 2-D Figures</span>
-    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()"><svg class="flagicon" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false"><rect width="20" height="14" rx="2" fill="#009C3B"/><polygon points="10,2 18,7 10,12 2,7" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/></svg><span class="ft">PT</span></button>
     <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
     <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
@@ -233,7 +233,7 @@ function carta(){
      +'<div class="face front">'
        +'<span class="lab">Question</span>'
        +'<span class="txt">'+c.f+'</span>'
-       +(c.d?'<span class="dica tr">&#127463;&#127479; '+c.d+'</span>':'')
+       +(c.d?'<span class="dica tr"><svg class="flagicon" width="16" height="11" viewBox="0 0 20 14" aria-hidden="true" focusable="false" style="vertical-align:-1px;margin-right:3px"><rect width="20" height="14" rx="2" fill="#009C3B"/><polygon points="10,2 18,7 10,12 2,7" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/></svg>'+c.d+'</span>':'')
        +'<span class="tap">&#128072; tap the card to see the answer</span>'
      +'</div>'
      +'<div class="face back">'
