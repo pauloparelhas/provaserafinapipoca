@@ -31,11 +31,12 @@ O pipeline é **file-driven** (cada etapa lê/escreve arquivos; o estado vive em
             │
    1. EXTRAIR conteúdo + FIGURAS  → conteudo/  + figuras/_figmap.json   (extrai do material; identifica/nomeia cada figura)
             │
-   2. TEMPLATE base (1 vez só)    → templates/wal-kids-base.html   (imutável; replicado em toda matéria)
+   2. BASE (não é template)       → os HTML da matéria ANTERIOR   (motor idêntico; ver nota abaixo)
             │
-   3. MONTAR a "Apostila Mágica"  → WA/<materia>-kids.html   (WAL kids: páginas curtas, muita figura)
+   3. DERIVAR a casca             → script de substituições EXATAS que imprime o que não achou
             │
-   4. PRODUTOS derivados (fan-out) → mapa mental · roteiro de vídeo · quiz lúdico · flashcards ilustrados
+   4. PRODUTOS derivados (fan-out) → revisão · simulado · aventura · flashcards · classificar ·
+                                     galeria · laboratório 3D · roteiro de vídeo
             │
    5. NotebookLM                   → sobe o consolidado como fonte p/ conversar/estudar
             │
@@ -102,9 +103,20 @@ Diferença em relação ao Prático: lá as figuras já vinham extraídas; **aqu
 
 ---
 
-## 4 · Etapa 2 — Template base (definir UMA vez, com capricho)
+## 4 · Etapa 2 — A base (definir UMA vez, com capricho)
 
-O coração da qualidade está aqui. Crie **um** `templates/wal-kids-base.html` caprichado e **congele-o**. Toda matéria nova só preenche os espaços; ninguém reescreve o template no dia a dia.
+> **Correção de 17/08/2026 — o que realmente aconteceu.** Esta etapa dizia: crie um
+> `templates/wal-kids-base.html` e congele-o. Na prática, a "Apostila Mágica" nunca foi
+> feita, e **duas matérias seguidas (Geografia e Matemática) nasceram de outro jeito, que
+> funcionou**: copiar os HTML da matéria anterior — motor idêntico, já testado — e trocar
+> só a casca e o bloco de dados. Os `templates/` foram apagados junto com o resto do
+> material antigo (estão no histórico do git). **A base hoje é `ferramentas/MAT2_*.html`.**
+>
+> O parágrafo abaixo continua valendo como *critério de qualidade da base* — só troque
+> "template" por "a matéria anterior", e "congelar" por "não reescrever o motor".
+
+O coração da qualidade está aqui. A base é **uma só**, caprichada e estável. Matéria nova
+preenche os espaços; ninguém reescreve o motor no dia a dia.
 
 **O que o template kids precisa ter:**
 - **Páginas curtas** ("uma ideia por tela"), navegação por setas grandes ou rolagem com seções bem separadas.

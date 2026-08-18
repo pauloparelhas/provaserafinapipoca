@@ -12,9 +12,17 @@ apenas a usava para "dica" (materia em portugues). Aqui:
   - a bandeira volta a ser bandeira (era lampada de dica);
   - SERA_CFG.lang volta para en-US (TTS le o conteudo em ingles);
   - trKey/somKey passam a mat2_*;
-  - o acento da materia vira roxo (senao o cie2_theme.js pinta de azul de Ciencias).
+  - o acento da materia vira roxo (senao o sera_theme.js pinta de azul de Ciencias).
 A casca de botoes continua em PORTUGUES: quem le e uma crianca brasileira de 7 anos;
 o que a prova cobra e o conteudo, e e o conteudo que esta em ingles.
+
+ATENCAO (17/08/2026): os HTML do GEO2 foram APAGADOS do repositorio quando a
+Geografia saiu do ar. Este script fica como REGISTRO de como a derivacao foi
+feita — para rodar de novo, ou se recupera a base do git
+(`git show 7cd0285:ferramentas/GEO2_dragdrop.html`), ou, o que faz sentido de
+verdade, se troca a BASE para MAT2 (que e o motor mais novo) com --base:
+
+    python _processo/geracao/gen_mat2.py --base MAT2 --novo XXX2
 
 Uso:
     python _processo/geracao/gen_mat2.py            # converte a casca de todos
@@ -38,9 +46,9 @@ COMUNS = [
     (False, "GEO2_data.js?v=20260810", f"MAT2_data.js?v={V}"),
     (False, "serafina-core.css?v=20260810", f"serafina-core.css?v={V}"),
     (False, "serafina-core.js?v=20260810", f"serafina-core.js?v={V}"),
-    (False, "cie2_theme.js?v=20260810", f"cie2_theme.js?v={V}"),
+    (False, "sera_theme.js?v=20260817", f"sera_theme.js?v={V}"),
     (False, "serafina-adventure.js?v=20260810", f"serafina-adventure.js?v={V}"),
-    (False, "cie2_summary.js?v=20260810", f"cie2_summary.js?v={V}"),
+    (False, "sera_summary.js?v=20260817", f"sera_summary.js?v={V}"),
     # --- casca ---
     (True, "<html lang=\"pt-BR\">", "<html lang=\"pt-BR\">"),   # fica PT: a casca e PT
     (False, "window.SERA_ACCENT={accent:'#34d399'}", "window.SERA_ACCENT={accent:'#a78bfa'}"),
@@ -58,9 +66,12 @@ CFG_DE = ("window.SERA_CFG={trKey:'geo2_dica',lang:'pt-BR',rate:.9,%s"
           "'Google portugu','Maria','Daniel']};")
 
 
+BASE, NOVO = "GEO2", "MAT2"
+
+
 def converte(nome: str) -> None:
-    src = FER / f"GEO2_{nome}.html"
-    dst = FER / f"MAT2_{nome}.html"
+    src = FER / f"{BASE}_{nome}.html"
+    dst = FER / f"{NOVO}_{nome}.html"
     if not src.exists():
         print(f"!! {src.name} nao existe"); return
     t = src.read_text(encoding="utf-8")
@@ -90,6 +101,13 @@ def converte(nome: str) -> None:
 
 
 if __name__ == "__main__":
-    alvos = sys.argv[1:] or PRODUTOS
-    for a in alvos:
+    args = sys.argv[1:]
+    if "--base" in args:
+        i = args.index("--base"); BASE = args[i + 1]; del args[i:i + 2]
+    if "--novo" in args:
+        i = args.index("--novo"); NOVO = args[i + 1]; del args[i:i + 2]
+    if not (FER / f"{BASE}_dragdrop.html").exists():
+        sys.exit(f"!! nao existe {BASE}_dragdrop.html em {FER}. "
+                 f"A base do GEO2 saiu do repo em 17/08 — use --base MAT2.")
+    for a in (args or PRODUTOS):
         converte(a)

@@ -4,6 +4,10 @@
 Roda DEPOIS de gen_mat2.py. Cada substituicao e EXATA e o script imprime o que
 nao encontrou (o erro que mata este tipo de derivacao e a troca silenciosa que
 nao aconteceu).
+
+A tabela SUBS e, por natureza, de UMA materia: sao as strings de casca do GEO2
+trocadas pelas da Matematica. Fica como MODELO do formato — a materia seguinte
+escreve a sua, partindo das strings do MAT2.
 """
 import sys
 from pathlib import Path

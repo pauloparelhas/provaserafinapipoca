@@ -1,19 +1,17 @@
 // Service Worker — Projeto Serafina
 // Estratégia: network-first para HTML, cache-first para base CSS/JS
-var CACHE = 'serafina-v26';
+var CACHE = 'serafina-v27';
 
 // Arquivos base compartilhados — pre-cache no install.
 // Caminhos RELATIVOS ao escopo do SW: com barra inicial eles apontavam
 // para a raiz do dominio e davam 404 no subpath do GitHub Pages
 // (/provaserafinapipoca/), derrubando o install inteiro (addAll).
 var BASE_FILES = [
-  'ferramentas/base.css',
-  'ferramentas/base.js',
-  'ferramentas/ela-base.css',
-  'ferramentas/ela-base.js',
   'ferramentas/serafina-core.css',
   'ferramentas/serafina-core.js',
   'ferramentas/serafina-adventure.js',
+  'ferramentas/sera_theme.js',
+  'ferramentas/sera_summary.js',
   'ferramentas/MAT2_data.js'
 ];
 

@@ -30,9 +30,10 @@ Os agentes leeem os arquivos do projeto diretamente. Passar sempre o caminho do 
 _processo/        COMO trabalhamos (imutavel): PIPELINE.md, RUNBOOK_MATERIA.md,
                   GOVERNANCA.md, ACESSIBILIDADE.md, geracao/ (scripts), LINKS
 ferramentas/      SITE / deploy (vai pro GitHub Pages)
-  base.* ela-base.*   design system compartilhado (NAO duplicar)
-  templates/          TEMPLATE_PT, TEMPLATE_EN, wal-kids-base.html (CONGELADOS)
-  media/              PDFs/JSON/quizzes leves (SEM video)
+  serafina-*.css/js   design system compartilhado (NAO duplicar)
+  sera_theme.js       5 temas · sera_summary.js  modal de resumo
+  assets/             three.module.js (r160, local)
+  media/              video, JSON do NLM, insumos em JPEG, PDF
 fontes/<tri>/<MAT>/   material bruto da escola (LOCAL, gitignored)
 trabalho/<tri>_<mat>/ producao: _outline_pedagogico.md, conteudo/, figuras/, _materia.md
 _arquivo_1tri/        backup leve + APRENDIZADOS_1TRI.md (fora do site)
@@ -167,48 +168,59 @@ Documentar e parte do trabalho, nao bonus opcional.
 
 ## ARQUITETURA DE ARQUIVOS COMPARTILHADOS
 
+> **Limpeza de 17/08/2026.** Com a Matematica no ar, o Paulo mandou apagar do repo tudo
+> das materias antigas. Sairam: os 7 produtos CIE2, os 10 GEO2, os insumos e o video de
+> Geografia, o motor legado (`base.*`, `ela-base.*`), a pasta `templates/` e o
+> `notebooklm_login.bat`. **Nada se perdeu:** tudo esta no historico do git
+> (ex.: `git show 7cd0285:ferramentas/GEO2_simulado.html`). Sobrou so infra viva.
+
 ```
 ferramentas/
-  serafina-core.css/.js   <- INFRA KID CANONICA (refatoracao 05/07): starfield, lock/fullscreen,
-                             TTS say(), bandeira toggleTr, A+/A- fs(), goHome, overlay #unlockov
-                             (injetado). Config por produto: window.SERA_CFG={trKey,lang,rate,home,
-                             stars,starfield,unlock} ANTES do <script src>. Todo produto standalone
-                             novo (padrao CIE2) IMPORTA o core — NUNCA duplicar essa infra inline.
-  serafina-adventure.js   <- Motor generico de JOGO DE FASES (mastery loop). Le window.ADVENTURE
-                             (dados 100% do _roteiro.md da materia) — o motor nao conhece a materia.
-                             Replicar p/ Geografia (lang pt-BR, sem bandeira) e Math (en-bi).
-  <MAT>_data.js           <- banco de dados UNICO por materia compartilhado entre produtos
-                             (ex.: CIE2_data.js = GAMES de dragdrop+popit). Nunca copy-paste de banco.
-  base.css / base.js      <- legado compartilhado HIS/LP (showScreen, toggleTheme, initApp...)
-  ela-base.css / ela-base.js <- legado compartilhado ELA (speakWithKaraoke, tour, initEla...)
-  templates/
-    TEMPLATE_PT.html      <- Esqueleto ferramentas PT (HIS/LP/GEO): copiar + preencher (importa ../base.*)
-    TEMPLATE_EN.html      <- Esqueleto ferramentas EN (ELA/CIE): copiar + preencher (importa ../ela-base.*)
-    wal-kids-base.html    <- "Apostila Magica" WAL kids (CONGELADO): copiar + preencher META + PAGES[]
+  serafina-core.css/.js   <- INFRA KID CANONICA: starfield, lock/fullscreen, TTS say(),
+                             bandeira toggleTr, A+/A- fs(), goHome, overlay #unlockov.
+                             Config por produto: window.SERA_CFG={trKey,lang,rate,home,
+                             stars,starfield,unlock,somKey,voicePrefs} ANTES do <script src>.
+  serafina-adventure.js   <- Motor generico de JOGO DE FASES (mastery loop). Le
+                             window.ADVENTURE (dados 100% do _roteiro.md da materia).
+                             Tipos de item: mc | multi | sort. `lesson.custom` recebe uma
+                             funcao(container) para a licao interativa da fase.
+  sera_theme.js           <- Seletor dos 5 temas (Noite/Dia/Castelo/Praia/Natureza).
+                             Chamava-se cie2_theme.js ate 17/08; a CHAVE de localStorage
+                             continua 'cie2_theme' DE PROPOSITO (renomear zeraria o tema
+                             que a crianca ja escolheu). Cor da materia:
+                             window.SERA_ACCENT={accent:'#xxxxxx'} ANTES deste script.
+  sera_summary.js         <- Modal "Ver o resumo" do dragdrop (ex-cie2_summary.js).
+  <MAT>_data.js           <- banco de classificacao UNICO da materia, compartilhado por
+                             dragdrop e popit. Nunca copy-paste de banco.
+  assets/three.module.js  <- three.js r160 (MIT), LOCAL. Usado pelo MAT2_lab.
+                             Nunca CDN: os produtos abrem offline e no GitHub Pages.
+  media/                  <- video, JSON do NLM, insumos em JPEG, PDF das paginas
 ```
 
-**Regras de importacao:**
-- Produtos standalone novos (padrao CIE2, todas as materias): `<link rel="stylesheet" href="serafina-core.css">` no head + `<script>window.SERA_CFG={...}</script><script src="serafina-core.js"></script>` no fim do body (ANTES do cie2_theme.js/seletor de tema). Contrato de DOM: `#starfield`, `#lockbtn.lockbtn`, botao casa com `class="sera-home"` e `onclick="goHome()"`, `body.show-tr` p/ traducao.
-- Ferramentas PT legado (HIS/LP): `base.css` + `base.js`
-- Ferramentas EN legado (ELA): `ela-base.css` + `ela-base.js`
-- ELA NAO importa base.css/base.js (padroes incompativeis: `.nb` vs `.nav-btn`, `body.light` vs `body.theme-light`, `--fs:16px` vs `--fs:1`)
-- **sw.js:** BASE_FILES sao caminhos RELATIVOS ao escopo do SW (sem `/` inicial) — com barra inicial da 404 no subpath do GitHub Pages e o install do SW inteiro falha (bug corrigido em 05/07, sw v21).
+**Contrato de DOM (igual em todos os produtos):** `#starfield`, `#lockbtn.lockbtn`, botao
+casa com `class="sera-home"` e `onclick="goHome()"`, `body.show-tr` liga a traducao.
+Ordem no fim do `<body>`: `SERA_CFG` -> `serafina-core.js` -> [motor do produto] ->
+`SERA_ACCENT` -> `sera_theme.js`.
 
-**Hooks ELA (definir ANTES de `initEla()`):**
-- `var TOUR_KEY = 'elaXX_tour_done'` — localStorage key para tour
-- `var tourSteps = [{selector, title, text}, ...]` — passos do tour guiado
+**COMO NASCE UMA MATERIA NOVA (o que funcionou duas vezes seguidas):** nao existe mais
+"template" — a base e **a materia anterior**, que e o motor mais novo e ja testado.
+Copiar os `MAT2_*.html`, trocar so a casca e o bloco de dados com um script de
+substituicoes **exatas que imprime o que nao encontrou**, e rodar o gate. Referencia:
+`_processo/geracao/gen_mat2.py` (aceita `--base MAT2 --novo XXX2`), `gen_mat2_textos.py`
+(modelo da tabela de strings) e `qa_mat2.py` (o gate). **Nunca reescrever o motor.**
 
-**Hooks HIS/LP (definir ANTES de `initApp()`):**
-- `var PHASES = [{id, label}, ...]` — fases para barra de navegacao
-- `function onInit(){}` — setup especifico apos base init
-- `function onRestart(){}` — reset especifico
+**sw.js:** `BASE_FILES` sao caminhos RELATIVOS ao escopo do SW (sem `/` inicial) — com
+barra inicial da 404 no subpath do GitHub Pages e o install do SW inteiro falha.
+**E um 404 em QUALQUER item do BASE_FILES derruba o `addAll` inteiro**: ao apagar um
+arquivo compartilhado, tirar do BASE_FILES na MESMA mudanca e subir a versao do cache.
 
-**Para criar nova ferramenta:**
-1. Copiar o template apropriado (PT ou EN)
-2. Buscar/substituir os placeholders `{{...}}`
-3. Adicionar CSS tool-specific no `<style>`
-4. Preencher dados do jogo e logica no `<script>`
-5. NAO duplicar codigo que ja esta nos arquivos base
+**Prova em INGLES (ELA/CIE/MATH):** o conteudo em EN e o texto principal e a traducao PT
+vive num `<span class="tr">`, revelada pelo botao da bandeira (`toggleTr()` liga
+`body.show-tr`). `SERA_CFG.lang='en-US'` para o TTS ler o conteudo em ingles. **A casca de
+botoes fica em PORTUGUES** — quem le e uma crianca brasileira de 7 anos, e o que a prova
+cobra e o conteudo.
+**Prova em PORTUGUES (HIS/LP/GEO):** mesma maquinaria, mas o `.tr` carrega a DICA em vez da
+traducao, e `lang='pt-BR'` com `voicePrefs` (senao o TTS pega a voz robotica do SAPI).
 
 ## REGRAS DE DESIGN
 - Fundo: `#0d0b1e` com starfield canvas
