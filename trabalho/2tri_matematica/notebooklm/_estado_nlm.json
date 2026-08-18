@@ -10,8 +10,9 @@
     "flashcards": true
   },
   "baixados": {
-    "video": "ferramentas\\media\\video_mat2_nb1_pt.mp4",
+    "video": "ferramentas/media/video_mat2_nb1_pt.mp4",
     "quiz": "ferramentas\\media\\quiz_mat2_nlm.json",
     "flashcards": "ferramentas\\media\\flashcards_mat2_nlm.json"
-  }
+  },
+  "video_artifact": "3aaf9258-ec0a-4a69-a807-9eccae030189"
 }

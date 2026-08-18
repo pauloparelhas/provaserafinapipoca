@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="serafina-core.css?v=20260817">
 <style>
 /* ============================================================
-   ESTUDAR (Geografia 2tri) — folha + palavras-chave + mapa mental numa casca
+   ESTUDAR (Matematica 2tri) — folha + palavras-chave + mapa mental numa casca
    única com 3 modos. Casca herdada do Study Hub de Ciências; o
-   conteúdo e o mapa sao gerados de dados (roteiro de Geografia).
+   conteúdo e o mapa sao gerados de dados (roteiro da Unit 9).
    ============================================================ */
 :root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
 body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
@@ -271,7 +271,7 @@ function showTab(k){
     $('tab-'+t).classList.toggle('on',t===k);
     $('pane-'+t).classList.toggle('on',t===k);
   });
-  try{localStorage.setItem('geo2_estudo_tab',k);}catch(e){}
+  try{localStorage.setItem('mat2_estudo_tab',k);}catch(e){}
 }
 
 /* ================= CORES DA UNIDADE (uma só paleta em todo o produto) ==== */
@@ -612,7 +612,7 @@ function abaDoHash(){
 (function(){
   var h=abaDoHash();
   if(h){ showTab(h); }
-  else { try{var t0=localStorage.getItem('geo2_estudo_tab');if(t0==='words'||t0==='map')showTab(t0);}catch(e){} }
+  else { try{var t0=localStorage.getItem('mat2_estudo_tab');if(t0==='words'||t0==='map')showTab(t0);}catch(e){} }
   /* trocar so o fragmento (#map -> #sheet) NAO recarrega a pagina: sem este
      listener, voltar pelo historico deixaria a aba antiga na tela. */
   addEventListener('hashchange',function(){ var k=abaDoHash(); if(k)showTab(k); });

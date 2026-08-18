@@ -333,18 +333,42 @@ produto. Faltou conferencia insumo→produto.
 
 **Claude executa TODO o workflow NLM diretamente via Bash tool.** O usuario nao precisa sair do Claude Code.
 
-### Login (unica excecao — requer acao do usuario)
+### Login — AUTOMATICO. NUNCA pedir ao usuario. (17/08/2026)
 
-O login exige stdin interativo que o Bash tool nao suporta. Solucao definitiva:
+Ordem do Paulo: *"login do nlm e automatico, nao precisa de mim, ja tem auth automatica
+na pasta pratico e na pasta rardp"*. O `notebooklm_login.bat` da raiz esta **OBSOLETO**.
 
-1. Usuario clica duplo em `notebooklm_login.bat` (ja existe na raiz do projeto)
-2. Browser abre → faz login na conta Google
-3. Volta na janela cmd preta → pressiona ENTER
-4. Janela mostra "Login salvo!" → pode fechar
-5. Avisa o Claude que pode continuar
+Um comando, de qualquer projeto (a sessao do CLI e global, `~/.notebooklm/`):
 
-**NUNCA tentar `notebooklm login` via Bash tool — nao funciona (sem stdin).**
+```bash
+python "C:/Users/paulo/OneDrive/td junto outlook hotmail/Prático/_ecossistema/scripts/nlm_auth_garantir.py"
+```
+
+Ele roda a escada de 3 degraus e so devolve depois de ter sessao valida:
+1. `nlm_auth_doctor.py` — a sessao vale? Se sim, acabou (segundos).
+2. `nlm_sessao_do_perfil.py` — colhe os cookies do perfil do Chromium (segundos).
+3. `nlm_login.sh` — abre o Chromium com o **perfil persistente**, o que RENOVA a sessao
+   no servidor, e so entao colhe. **E o degrau que quase sempre resolve** e o que se
+   esquece. O `Login not detected within 5 minutes` no meio do log e ruido esperado do
+   detector quebrado do CLI 0.7.3 — o que vale e a ultima linha.
+
+O runner `_processo/geracao/nlm_mat2.py` ja chama a escada sozinho, antes de qualquer
+chamada (funcao `garante_sessao()`). Copiar dele em materia nova.
+
+**NUNCA declarar bloqueio de auth sem ter rodado os tres degraus.**
 **NUNCA pedir para o usuario rodar comandos NLM manualmente — Claude faz tudo.**
+
+### CLI 0.7.3 — as flags que o resto deste arquivo erra
+
+| O texto abaixo diz | 0.7.3 faz |
+|---|---|
+| `source add --notebook ID --file <caminho>` | o caminho e **POSICIONAL**: `source add <caminho> --notebook ID` |
+| `generate quiz --language pt_BR` | quiz/flashcards **nao aceitam** `--language`: o idioma vem do prompt e do env `NOTEBOOKLM_HL` |
+| `--language pt_BR` | certo, mas **so em `generate video`** (`pt-BR` com hifen e recusado) |
+
+Status: ler sempre `artifact list --json` e filtrar por `type_id`. A tabela quebra os
+titulos em varias linhas e um `grep -A4` alcanca o `completed` do artefato SEGUINTE.
+Com dois videos no mesmo caderno, baixar por id: `download video -a <artifact_id>`.
 
 ### Sequencia completa (Claude executa apos login)
 

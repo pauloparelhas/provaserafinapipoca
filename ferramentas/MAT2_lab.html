@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Shape Lab — Math · 2-D Figures</title>
+<link rel="stylesheet" href="serafina-core.css?v=20260817">
+<style>
+/* ============================================================
+   SHAPE LAB — o produto que MOSTRA em vez de contar (three.js).
+   Tres bancadas, cada uma resolvendo uma coisa que texto nao resolve:
+     1. Count it!  — o lado acende UM a UM e o vertice PULA um a um.
+                     Contar em cima da figura e o que a AP1 pede.
+     2. Fold it!   — a dobra acontece em 3D, em volta da linha de
+                     simetria. E aqui que a crianca ve, e nao decora,
+                     que a linha do C e do B e DEITADA.
+     3. Move it!   — slide, flip e turn com um FANTASMA da figura
+                     original parado atras: da para ver o que mudou
+                     (o lugar) e o que nao mudou (lados e vertices).
+   Conteudo 100% de trabalho/2tri_matematica/_roteiro.md.
+   Materia EM INGLES: texto principal EN, traducao PT na bandeira.
+   ============================================================ */
+:root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fbbf24;--tr:#fcd34d;--ok:#34d399;--no:#f87171;--rad:20px}
+body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.05rem;font-weight:800;cursor:pointer;padding:0 8px}
+.iconbtn:active{transform:scale(.9)}
+.dicabtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.4;filter:grayscale(1)}
+.dicabtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .dicabtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
+.wrap{flex:1;width:100%;max-width:660px;margin:0 auto;padding:12px 12px 40px}
+
+.tabbar{display:flex;gap:8px;margin-bottom:12px}
+.tabbtn{flex:1;min-height:56px;border-radius:16px;border:2px solid var(--line);background:transparent;color:var(--soft);font-family:inherit;font-weight:900;font-size:calc(.82rem*var(--fs));cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.1}
+.tabbtn .te{font-size:1.25rem}
+.tabbtn.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--ink)}
+.tabbtn:active{transform:scale(.96)}
+.pane{display:none}
+.pane.on{display:block}
+.tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.86em;line-height:1.3}
+body.show-tr .tr{display:block}
+
+.stagebox{position:relative;border:1px solid var(--line);border-radius:var(--rad);background:var(--card);box-shadow:0 12px 32px rgba(0,0,0,.3);overflow:hidden;margin-bottom:12px}
+.cv{display:block;width:100%;height:320px;touch-action:manipulation}
+.readout{position:absolute;left:10px;right:10px;bottom:10px;background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--line);border-radius:14px;padding:9px 12px;font-weight:900;font-size:calc(.95rem*var(--fs));line-height:1.3;pointer-events:none}
+.readout .rs{display:block;font-weight:800;font-size:.8em;color:var(--soft);margin-top:2px}
+.readout.ok{border-color:var(--ok);color:var(--ok)}
+.readout.no{border-color:var(--no);color:var(--no)}
+
+.pickrow{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.pick{min-height:46px;padding:6px 12px;border-radius:14px;border:2px solid var(--line);background:transparent;color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.86rem*var(--fs));cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.pick.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 16%,transparent)}
+.pick:active{transform:scale(.95)}
+.pick .lt{font-size:1.15rem;font-weight:900}
+
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.act{flex:1 1 44%;min-height:52px;border-radius:16px;border:none;background:var(--accent);color:#0a1020;font-family:inherit;font-weight:900;font-size:calc(.92rem*var(--fs));cursor:pointer;padding:8px 10px;line-height:1.15}
+.act.ghost{background:transparent;border:2px solid var(--line);color:var(--ink)}
+.act:active{transform:scale(.96)}
+.act .atr{display:none;font-weight:800;font-style:italic;font-size:.76rem;opacity:.85}
+body.show-tr .act .atr{display:block}
+
+.expl{border:1px dashed var(--line);border-radius:16px;padding:11px 13px;font-weight:800;font-size:calc(.93rem*var(--fs));line-height:1.4;color:var(--soft);margin-bottom:12px}
+.expl b{color:var(--ink)}
+.foot{text-align:center;color:var(--soft);font-weight:800;font-size:.8rem;margin-top:6px;line-height:1.5}
+.nowebgl{display:none;padding:16px;font-weight:800;line-height:1.45}
+body.nogl .nowebgl{display:block}
+body.nogl .cv{display:none}
+
+/* ---- 360px: a barra de cima nao cabia numa linha ---- */
+@media(max-width:420px){
+  .topbar{flex-wrap:wrap;gap:4px}
+  .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px}
+  .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
+  .cv{height:260px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Shape Lab</span>
+    <button class="iconbtn dicabtn" id="dica" title="Ver em português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+  </div>
+
+  <div class="wrap">
+    <div class="tabbar">
+      <button class="tabbtn on" id="tab-count" onclick="showTab('count')"><span class="te">&#128290;</span>Count it!</button>
+      <button class="tabbtn" id="tab-fold" onclick="showTab('fold')"><span class="te">&#129694;</span>Fold it!</button>
+      <button class="tabbtn" id="tab-move" onclick="showTab('move')"><span class="te">&#128260;</span>Move it!</button>
+    </div>
+
+    <!-- ============ 1. COUNT IT ============ -->
+    <div class="pane on" id="pane-count">
+      <div class="stagebox">
+        <canvas class="cv" id="cv1"></canvas>
+        <div class="nowebgl" id="nogl1">&#128533; Este aparelho não conseguiu abrir o laboratório 3D.
+          <span class="tr">Você pode ver o mesmo conteúdo em Estudar e no Simulado.</span></div>
+        <div class="readout" id="ro1">Pick a figure and count.<span class="rs">Escolha uma figura e conte.</span></div>
+      </div>
+      <div class="pickrow" id="pick1"></div>
+      <div class="actions">
+        <button class="act" onclick="LAB.countSides()">&#128207; Count the sides<span class="atr">contar os lados</span></button>
+        <button class="act" onclick="LAB.countVertices()">&#128205; Count the vertices<span class="atr">contar os vértices</span></button>
+      </div>
+      <div class="expl">Every <b>side</b> is one straight line. Every <b>vertex</b> is a corner where two sides meet.
+        In a figure with straight sides they are <b>the same number</b> — only the <b>circle</b> is different.
+        <span class="tr">Cada lado é uma linha reta. Cada vértice é um cantinho onde dois lados se encontram. Numa figura de lados retos o número é o mesmo — só o círculo é diferente.</span></div>
+    </div>
+
+    <!-- ============ 2. FOLD IT ============ -->
+    <div class="pane" id="pane-fold">
+      <div class="stagebox">
+        <canvas class="cv" id="cv2"></canvas>
+        <div class="nowebgl">&#128533; Este aparelho não conseguiu abrir o laboratório 3D.</div>
+        <div class="readout" id="ro2">Pick a letter, choose the line, then fold.<span class="rs">Escolha a letra, escolha a linha e dobre.</span></div>
+      </div>
+      <div class="pickrow" id="pick2"></div>
+      <div class="actions">
+        <button class="act ghost" id="axV" onclick="LAB.setAxis('v')">&#8597;&#65039; Line standing up<span class="atr">linha em pé</span></button>
+        <button class="act ghost" id="axH" onclick="LAB.setAxis('h')">&#8596;&#65039; Line lying down<span class="atr">linha deitada</span></button>
+        <button class="act" onclick="LAB.fold()">&#129694; Fold it!<span class="atr">dobrar</span></button>
+        <button class="act ghost" onclick="LAB.unfold()">&#8634; Open again<span class="atr">abrir de novo</span></button>
+      </div>
+      <div class="expl">The fold line is the <b>line of symmetry</b>. If the folded half lands exactly on the other half, the letter <b>has symmetry</b>.
+        Try the letter <b>C</b> with the line <b>lying down</b> — that is the one everybody misses.
+        <span class="tr">A linha da dobra é a linha de simetria. Se a metade dobrada cair exatamente em cima da outra, a letra tem simetria. Teste o C com a linha deitada — é a que todo mundo erra.</span></div>
+    </div>
+
+    <!-- ============ 3. MOVE IT ============ -->
+    <div class="pane" id="pane-move">
+      <div class="stagebox">
+        <canvas class="cv" id="cv3"></canvas>
+        <div class="nowebgl">&#128533; Este aparelho não conseguiu abrir o laboratório 3D.</div>
+        <div class="readout" id="ro3">Slide, flip or turn — and watch the ghost.<span class="rs">Deslize, vire ou gire — e olhe o fantasma.</span></div>
+      </div>
+      <div class="pickrow" id="pick3"></div>
+      <div class="actions">
+        <button class="act" onclick="LAB.mv('slide')">&#10145;&#65039; Slide<span class="atr">deslizar</span></button>
+        <button class="act" onclick="LAB.mv('flip')">&#129694; Flip<span class="atr">virar</span></button>
+        <button class="act" onclick="LAB.mv('turn')">&#128259; Turn<span class="atr">girar</span></button>
+        <button class="act ghost" onclick="LAB.mv('reset')">&#8634; Back to start<span class="atr">voltar ao começo</span></button>
+      </div>
+      <div class="expl">The pale figure behind is the <b>ghost</b>: it shows where the figure started.
+        After a slide, a flip or a turn the figure keeps <b>the same number of sides, the same vertices, the same size and the same name</b> — only <b>where it is</b> and <b>which way it faces</b> change.
+        <span class="tr">A figura clarinha atrás é o fantasma: mostra onde a figura começou. Depois de deslizar, virar ou girar, ela continua com os mesmos lados, os mesmos vértices, o mesmo tamanho e o mesmo nome — só o lugar e o lado para onde aponta mudam.</span></div>
+    </div>
+
+    <div class="foot">Tudo aqui saiu do caderno da Unit 9. &#128218;</div>
+  </div>
+</div>
+
+<script>window.SERA_CFG={trKey:'mat2_tr',lang:'en-US',rate:.85,starfield:false,somKey:'mat2_som'};</script>
+<script src="serafina-core.js?v=20260817"></script>
+<script>
+var $=function(i){return document.getElementById(i);};
+function showTab(k){
+  ['count','fold','move'].forEach(function(t){
+    $('tab-'+t).classList.toggle('on',t===k);
+    $('pane-'+t).classList.toggle('on',t===k);
+  });
+  try{localStorage.setItem('mat2_lab_tab',k);}catch(e){}
+  if(window.LAB&&LAB.resize)LAB.resize();
+}
+</script>
+
+<script type="module">
+import * as THREE from './assets/three.module.js?v=20260817';
+
+/* ============================================================
+   DADOS — as 7 figuras e as 11 letras, direto do roteiro.
+   `sym` diz em que direcao a letra tem linha de simetria:
+   'v' em pe, 'h' deitada, 'vh' as duas, '' nenhuma.
+   ============================================================ */
+const FIGS=[
+ {k:'circle',   n:'Circle',   pt:'Círculo',   co:0xfbbf24, s:0},
+ {k:'triangle', n:'Triangle', pt:'Triângulo', co:0xfb923c, s:3},
+ {k:'square',   n:'Square',   pt:'Quadrado',  co:0x34d399, s:4},
+ {k:'rectangle',n:'Rectangle',pt:'Retângulo', co:0x60a5fa, s:4, rect:true},
+ {k:'pentagon', n:'Pentagon', pt:'Pentágono', co:0xf472b6, s:5},
+ {k:'hexagon',  n:'Hexagon',  pt:'Hexágono',  co:0xa78bfa, s:6},
+ {k:'octagon',  n:'Octagon',  pt:'Octógono',  co:0x38bdf8, s:8}
+];
+const LETRAS=[
+ {c:'O',sym:'vh'},{c:'X',sym:'vh'},{c:'A',sym:'v'},{c:'M',sym:'v'},{c:'V',sym:'v'},
+ {c:'C',sym:'h'},{c:'B',sym:'h'},{c:'G',sym:''},{c:'P',sym:''},{c:'J',sym:''},{c:'R',sym:''}
+];
+
+const R=1.5;                       /* raio das figuras */
+function pontos(f){
+  if(f.rect) return [[-1.9,-1.05],[1.9,-1.05],[1.9,1.05],[-1.9,1.05]];
+  const n=f.s, gira=(n%2? Math.PI/2 : (n===4? Math.PI/4 : 0)), p=[];
+  for(let i=0;i<n;i++){
+    const a=gira+i*2*Math.PI/n;
+    p.push([R*Math.cos(a), R*Math.sin(a)]);
+  }
+  return p;
+}
+
+/* rotulo flutuante feito num canvas 2D (nao precisa carregar fonte) */
+function rotulo(txt, cor){
+  const c=document.createElement('canvas'); c.width=c.height=128;
+  const x=c.getContext('2d');
+  x.fillStyle='#'+cor.toString(16).padStart(6,'0');
+  x.beginPath(); x.arc(64,64,54,0,Math.PI*2); x.fill();
+  x.fillStyle='#0a1020'; x.font='bold 78px Nunito, Arial'; x.textAlign='center'; x.textBaseline='middle';
+  x.fillText(txt,64,70);
+  const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace;
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:t,transparent:true,depthTest:false}));
+  sp.scale.set(.62,.62,1);
+  return sp;
+}
+function letraTextura(ch, cor){
+  /* fundo TRANSPARENTE e uma cor por metade: quando a metade que dobra
+     (magenta) cai exatamente em cima da parada (branca), a crianca VE a
+     coincidencia. Se sobrar magenta para fora, nao houve simetria. */
+  const c=document.createElement('canvas'); c.width=c.height=256;
+  const x=c.getContext('2d');
+  x.clearRect(0,0,256,256);
+  x.fillStyle=cor; x.font='bold 210px Arial, Helvetica, sans-serif';
+  x.textAlign='center'; x.textBaseline='middle';
+  x.fillText(ch,128,132);
+  const t=new THREE.CanvasTexture(c); t.colorSpace=THREE.SRGBColorSpace;
+  return t;
+}
+
+/* ------------------------------------------------------------------
+   Uma cena por bancada. Camera ortografica: figura plana nao pode ter
+   perspectiva deformando o numero de lados que a crianca conta.
+   ------------------------------------------------------------------ */
+function cena(canvas){
+  let rend;
+  try{ rend=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); }
+  catch(e){ document.body.classList.add('nogl'); return null; }
+  rend.setPixelRatio(Math.min(devicePixelRatio||1,2));
+  const sc=new THREE.Scene();
+  const cam=new THREE.OrthographicCamera(-3,3,3,-3,.1,100);
+  cam.position.set(0,0,10); cam.lookAt(0,0,0);
+  sc.add(new THREE.AmbientLight(0xffffff,.95));
+  const luz=new THREE.DirectionalLight(0xffffff,.55); luz.position.set(2,4,6); sc.add(luz);
+  function resize(){
+    const w=canvas.clientWidth||320, h=canvas.clientHeight||280;
+    rend.setSize(w,h,false);
+    const a=w/h, alt=3;
+    cam.left=-alt*a; cam.right=alt*a; cam.top=alt; cam.bottom=-alt;
+    cam.updateProjectionMatrix();
+  }
+  resize();
+  return {rend,sc,cam,resize};
+}
+
+/* ==================================================================
+   BANCADA 1 — COUNT IT
+   ================================================================== */
+const c1=cena(document.getElementById('cv1'));
+let figAtual=FIGS[1], grupo1=null, lados=[], vert=[], marcas=[];
+function limpa(g){ if(!g)return; g.traverse(o=>{ if(o.geometry)o.geometry.dispose(); }); c1.sc.remove(g); }
+
+function montaFig(f){
+  limpa(grupo1);
+  lados=[]; vert=[]; marcas=[];
+  grupo1=new THREE.Group(); grupo1.position.y=.62; c1.sc.add(grupo1);
+  const corA=new THREE.Color(f.co);
+  if(f.s===0){
+    const anel=new THREE.Mesh(new THREE.RingGeometry(R-0.12,R+0.12,72),
+      new THREE.MeshBasicMaterial({color:corA,side:THREE.DoubleSide}));
+    grupo1.add(anel);
+    const dentro=new THREE.Mesh(new THREE.CircleGeometry(R-0.12,72),
+      new THREE.MeshBasicMaterial({color:corA,transparent:true,opacity:.18}));
+    grupo1.add(dentro);
+    lados=[anel];
+    return;
+  }
+  const p=pontos(f);
+  /* miolo translucido */
+  const forma=new THREE.Shape(p.map(q=>new THREE.Vector2(q[0],q[1])));
+  grupo1.add(new THREE.Mesh(new THREE.ShapeGeometry(forma),
+    new THREE.MeshBasicMaterial({color:corA,transparent:true,opacity:.18})));
+  /* cada LADO e um objeto proprio: e o que permite acender um a um */
+  for(let i=0;i<p.length;i++){
+    const a=new THREE.Vector3(p[i][0],p[i][1],0), b=new THREE.Vector3(p[(i+1)%p.length][0],p[(i+1)%p.length][1],0);
+    const meio=a.clone().add(b).multiplyScalar(.5), comp=a.distanceTo(b);
+    const g=new THREE.Mesh(new THREE.BoxGeometry(comp,.16,.16),
+      new THREE.MeshBasicMaterial({color:corA}));
+    g.position.copy(meio);
+    g.rotation.z=Math.atan2(b.y-a.y,b.x-a.x);
+    g.userData.base=corA.clone();
+    g.userData.meio=meio.clone();
+    grupo1.add(g); lados.push(g);
+  }
+  /* cada VERTICE e uma bolinha propria */
+  for(let i=0;i<p.length;i++){
+    const v=new THREE.Mesh(new THREE.SphereGeometry(.17,20,16),
+      new THREE.MeshBasicMaterial({color:0xffffff}));
+    v.position.set(p[i][0],p[i][1],.05);
+    v.userData.pos=v.position.clone();
+    grupo1.add(v); vert.push(v);
+  }
+}
+
+function limpaMarcas(){ marcas.forEach(m=>grupo1.remove(m)); marcas=[]; }
+let anim=null;
+function conta(alvos, cor, fala, fim){
+  if(anim)clearInterval(anim);
+  limpaMarcas();
+  alvos.forEach(o=>{ o.material.color.set(o.userData.base||0xffffff); o.scale.set(1,1,1); });
+  let i=0;
+  if(!alvos.length){ fim(0); return; }
+  anim=setInterval(()=>{
+    if(i>=alvos.length){ clearInterval(anim); anim=null; fim(alvos.length); return; }
+    const o=alvos[i];
+    o.material.color.set(cor);
+    /* engorda SO na espessura: escalar tambem no comprimento fazia a
+       barra passar do vertice e a figura parecia ter lado a mais */
+    if(o.geometry&&o.geometry.type==='BoxGeometry') o.scale.set(1,1.9,1.9); else o.scale.set(1.3,1.3,1.3);
+    const m=rotulo(String(i+1), cor);
+    const p=(o.userData.meio||o.userData.pos||o.position).clone().multiplyScalar(1.3);
+    m.position.set(p.x,p.y,.4);
+    grupo1.add(m); marcas.push(m);
+    if(window.say) say(String(i+1));
+    i++;
+  },620);
+}
+
+function ro1(txt,sub,cls){
+  const e=document.getElementById('ro1');
+  e.className='readout'+(cls?' '+cls:'');
+  e.innerHTML=txt+(sub?'<span class="rs">'+sub+'</span>':'');
+}
+
+/* botoes das 7 figuras */
+const pick1=document.getElementById('pick1');
+pick1.innerHTML=FIGS.map((f,i)=>'<button class="pick'+(i===1?' on':'')+'" data-i="'+i+'">'+f.n+'</button>').join('');
+pick1.addEventListener('click',ev=>{
+  const b=ev.target.closest('.pick'); if(!b)return;
+  pick1.querySelectorAll('.pick').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  figAtual=FIGS[+b.dataset.i];
+  montaFig(figAtual);
+  ro1(figAtual.n+' — '+(figAtual.s?figAtual.s+' sides, '+figAtual.s+' vertices':'no straight sides, 0 vertices'),
+      figAtual.pt);
+  if(window.say)say(figAtual.n);
+});
+
+/* ==================================================================
+   BANCADA 2 — FOLD IT
+   ================================================================== */
+const c2=cena(document.getElementById('cv2'));
+let letra=LETRAS[0], eixo='v', metadeA=null, metadeB=null, linha=null, g2=null, dobrado=false;
+
+function montaLetra(){
+  if(g2){ c2.sc.remove(g2); }
+  g2=new THREE.Group(); c2.sc.add(g2);
+  const texA=letraTextura(letra.c,'#f8fafc'), texB=letraTextura(letra.c,'#f472b6');
+  const S=3.6, meia=S/2;
+  function metade(qual){
+    const t=(qual?texB:texA).clone(); t.needsUpdate=true;
+    t.repeat.set(eixo==='v'?.5:1, eixo==='v'?1:.5);
+    t.offset.set(eixo==='v'?(qual? .5:0):0, eixo==='v'?0:(qual? .5:0));
+    const geo=new THREE.PlaneGeometry(eixo==='v'?meia:S, eixo==='v'?S:meia);
+    const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({map:t,side:THREE.DoubleSide,transparent:true,opacity:qual?.9:1}));
+    return m;
+  }
+  /* A = metade que fica parada · B = metade que dobra */
+  metadeA=metade(0); metadeB=metade(1);
+  const piv=new THREE.Group();
+  if(eixo==='v'){
+    metadeA.position.set(-meia/2,0,0);
+    metadeB.position.set(meia/2,0,0);
+    piv.position.set(0,0,0);
+    metadeB.position.set(meia/2,0,0);
+  }else{
+    metadeA.position.set(0,meia/2,0);       /* metade de CIMA (offset .5 = topo) */
+    metadeB.position.set(0,-meia/2,0);
+  }
+  /* o pivo fica EM CIMA da linha de dobra: e em volta dela que a metade gira */
+  piv.add(metadeB);
+  g2.add(metadeA); g2.add(piv);
+  g2.userData.piv=piv;
+  /* a linha de simetria, tracejada */
+  const pts=[];
+  if(eixo==='v'){ for(let y=-S/2;y<=S/2;y+=.001) pts.push(new THREE.Vector3(0,y,.05)); }
+  else{ for(let x=-S/2;x<=S/2;x+=.001) pts.push(new THREE.Vector3(x,0,.05)); }
+  const lg=new THREE.BufferGeometry().setFromPoints(
+    eixo==='v'? [new THREE.Vector3(0,-S/2,.06),new THREE.Vector3(0,S/2,.06)]
+              : [new THREE.Vector3(-S/2,0,.06),new THREE.Vector3(S/2,0,.06)]);
+  linha=new THREE.Line(lg,new THREE.LineDashedMaterial({color:0xf43f5e,dashSize:.18,gapSize:.12,linewidth:2}));
+  linha.computeLineDistances();
+  g2.add(linha);
+  dobrado=false;
+}
+function ro2(txt,sub,cls){
+  const e=document.getElementById('ro2');
+  e.className='readout'+(cls?' '+cls:'');
+  e.innerHTML=txt+(sub?'<span class="rs">'+sub+'</span>':'');
+}
+const pick2=document.getElementById('pick2');
+pick2.innerHTML=LETRAS.map((l,i)=>'<button class="pick'+(i===0?' on':'')+'" data-i="'+i+'"><span class="lt">'+l.c+'</span></button>').join('');
+pick2.addEventListener('click',ev=>{
+  const b=ev.target.closest('.pick'); if(!b)return;
+  pick2.querySelectorAll('.pick').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  letra=LETRAS[+b.dataset.i];
+  montaLetra();
+  ro2('Letter '+letra.c+' — now fold it.','Letra '+letra.c+' — agora dobre.');
+});
+function pintaEixo(){
+  document.getElementById('axV').classList.toggle('on',eixo==='v');
+  document.getElementById('axH').classList.toggle('on',eixo==='h');
+  document.getElementById('axV').style.borderColor = eixo==='v' ? 'var(--accent)' : '';
+  document.getElementById('axH').style.borderColor = eixo==='h' ? 'var(--accent)' : '';
+}
+
+/* ==================================================================
+   BANCADA 3 — MOVE IT
+   ================================================================== */
+const c3=cena(document.getElementById('cv3'));
+let figMv=FIGS[1], solido=null, fantasma=null;
+function corpo(f,fantasmaFlag){
+  const g=new THREE.Group();
+  const cor=new THREE.Color(f.co);
+  if(f.s===0){
+    g.add(new THREE.Mesh(new THREE.CircleGeometry(R,64),
+      new THREE.MeshBasicMaterial({color:cor,transparent:true,opacity:fantasmaFlag?.16:.85})));
+    const mc=new THREE.Mesh(new THREE.SphereGeometry(.2,18,14),
+      new THREE.MeshBasicMaterial({color:fantasmaFlag?0x94a3b8:0xffffff,transparent:true,opacity:fantasmaFlag?.4:1}));
+    mc.position.set(R*.55,R*.42,.06); g.add(mc);
+  }else{
+    const p=pontos(f);
+    const forma=new THREE.Shape(p.map(q=>new THREE.Vector2(q[0],q[1])));
+    g.add(new THREE.Mesh(new THREE.ShapeGeometry(forma),
+      new THREE.MeshBasicMaterial({color:cor,transparent:true,opacity:fantasmaFlag?.16:.85,side:THREE.DoubleSide})));
+    /* uma pintinha FORA do eixo de simetria: no vertice, o flip de um
+       triangulo equilatero ficava invisivel (a figura simetrica cai em cima
+       de si mesma e a crianca nao via movimento nenhum). */
+    const mx=(p[0][0]+p[1][0])/2*.62, my=(p[0][1]+p[1][1])/2*.62;
+    const marca=new THREE.Mesh(new THREE.SphereGeometry(.2,18,14),
+      new THREE.MeshBasicMaterial({color:fantasmaFlag?0x94a3b8:0xffffff,transparent:true,opacity:fantasmaFlag?.4:1}));
+    marca.position.set(mx,my,.06);
+    g.add(marca);
+  }
+  return g;
+}
+function montaMove(){
+  if(solido)c3.sc.remove(solido);
+  if(fantasma)c3.sc.remove(fantasma);
+  fantasma=corpo(figMv,true); fantasma.position.set(-1.7,.55,0); c3.sc.add(fantasma);
+  solido=corpo(figMv,false); solido.position.set(-1.7,.55,0); c3.sc.add(solido);
+}
+function ro3(txt,sub,cls){
+  const e=document.getElementById('ro3');
+  e.className='readout'+(cls?' '+cls:'');
+  e.innerHTML=txt+(sub?'<span class="rs">'+sub+'</span>':'');
+}
+const pick3=document.getElementById('pick3');
+pick3.innerHTML=FIGS.map((f,i)=>'<button class="pick'+(i===1?' on':'')+'" data-i="'+i+'">'+f.n+'</button>').join('');
+pick3.addEventListener('click',ev=>{
+  const b=ev.target.closest('.pick'); if(!b)return;
+  pick3.querySelectorAll('.pick').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  figMv=FIGS[+b.dataset.i]; montaMove();
+  ro3('Ready. Now slide, flip or turn.','Pronto. Agora deslize, vire ou gire.');
+});
+
+/* animacao simples por interpolacao */
+const tweens=[];
+function tween(obj,prop,de,para,ms,fim){
+  tweens.push({obj,prop,de,para,ms,t:0,fim});
+}
+function passo(dt){
+  for(let i=tweens.length-1;i>=0;i--){
+    const w=tweens[i]; w.t+=dt;
+    const k=Math.min(1,w.t/w.ms), e=k<.5? 2*k*k : 1-Math.pow(-2*k+2,2)/2;
+    const [a,b]=w.prop.split('.');
+    w.obj[a][b]=w.de+(w.para-w.de)*e;
+    if(k>=1){ if(w.fim)w.fim(); tweens.splice(i,1); }
+  }
+}
+
+/* ==================================================================
+   API publica (os botoes do HTML chamam por aqui)
+   ================================================================== */
+window.LAB={
+  countSides(){
+    if(figAtual.s===0){
+      ro1('The circle has NO straight sides.','O círculo não tem nenhum lado reto.','ok');
+      if(window.say)say('The circle has no straight sides.');
+      return;
+    }
+    ro1('Counting the sides…','Contando os lados…');
+    conta(lados,0xfbbf24,true,n=>{
+      ro1(figAtual.n+' has '+n+' sides.', figAtual.pt+' tem '+n+' lados.','ok');
+      if(window.say)say(figAtual.n+' has '+n+' sides.');
+    });
+  },
+  countVertices(){
+    if(figAtual.s===0){
+      ro1('The circle has 0 vertices — no corners at all.','O círculo tem 0 vértices: nenhum cantinho.','ok');
+      if(window.say)say('The circle has zero vertices.');
+      return;
+    }
+    ro1('Counting the vertices…','Contando os vértices…');
+    conta(vert,0xf43f5e,true,n=>{
+      ro1(figAtual.n+' has '+n+' vertices.', figAtual.pt+' tem '+n+' vértices.','ok');
+      if(window.say)say(figAtual.n+' has '+n+' vertices.');
+    });
+  },
+  setAxis(a){ eixo=a; pintaEixo(); montaLetra();
+    ro2(a==='v'?'Line standing up. Now fold.':'Line lying down. Now fold.',
+        a==='v'?'Linha em pé. Agora dobre.':'Linha deitada. Agora dobre.'); },
+  fold(){
+    if(!g2||dobrado)return;
+    dobrado=true;
+    const piv=g2.userData.piv;
+    const eixoRot = eixo==='v' ? 'y' : 'x';
+    const alvo = eixo==='v' ? Math.PI : -Math.PI;
+    tween(piv,'rotation.'+eixoRot,0,alvo,900,()=>{
+      const bate = letra.sym.indexOf(eixo)>=0;
+      if(bate){
+        ro2('It matches! '+letra.c+' has symmetry with this line.',
+            'Combinou! O '+letra.c+' tem simetria com esta linha.','ok');
+        if(window.say)say('It matches. The letter '+letra.c+' has symmetry.');
+      }else{
+        ro2('It does not match. Try the other line, or another letter.',
+            'Não combinou. Tente a outra linha, ou outra letra.','no');
+        if(window.say)say('It does not match.');
+      }
+    });
+  },
+  unfold(){
+    if(!g2)return;
+    const piv=g2.userData.piv;
+    const eixoRot = eixo==='v' ? 'y' : 'x';
+    tween(piv,'rotation.'+eixoRot,piv.rotation[eixoRot],0,600,()=>{ dobrado=false; });
+    ro2('Open again.','Aberto de novo.');
+  },
+  mv(qual){
+    if(!solido)return;
+    if(qual==='reset'){
+      solido.position.set(-1.7,.55,0); solido.rotation.set(0,0,0);
+      ro3('Back to the start.','De volta ao começo.');
+      return;
+    }
+    if(qual==='slide'){
+      tween(solido,'position.x',solido.position.x,1.7,800,()=>{
+        ro3('SLIDE: it walked to the next spot. Same sides, same vertices.',
+            'SLIDE: andou para o lugar de perto. Mesmos lados, mesmos vértices.','ok');
+      });
+      if(window.say)say('Slide. It walks to the next spot.');
+    }else if(qual==='flip'){
+      tween(solido,'rotation.y',solido.rotation.y,solido.rotation.y+Math.PI,800,()=>{
+        ro3('FLIP: you are seeing its mirror image. Same sides, same vertices.',
+            'FLIP: você está vendo a imagem no espelho. Mesmos lados, mesmos vértices.','ok');
+      });
+      if(window.say)say('Flip. You see the mirror image.');
+    }else{
+      tween(solido,'rotation.z',solido.rotation.z,solido.rotation.z-Math.PI/2,800,()=>{
+        ro3('TURN: it spun around a point. Same sides, same vertices.',
+            'TURN: girou em volta de um pontinho. Mesmos lados, mesmos vértices.','ok');
+      });
+      if(window.say)say('Turn. It spins around a point.');
+    }
+  },
+  resize(){ [c1,c2,c3].forEach(c=>{ if(c)c.resize(); }); }
+};
+
+/* ---- start ---- */
+if(c1&&c2&&c3){
+  montaFig(figAtual);
+  ro1('Triangle — 3 sides, 3 vertices.','Triângulo — 3 lados, 3 vértices.');
+  montaLetra(); pintaEixo();
+  montaMove();
+  let ant=performance.now();
+  (function laco(t){
+    const dt=t-ant; ant=t;
+    passo(dt);
+    c1.rend.render(c1.sc,c1.cam);
+    c2.rend.render(c2.sc,c2.cam);
+    c3.rend.render(c3.sc,c3.cam);
+    requestAnimationFrame(laco);
+  })(performance.now());
+  addEventListener('resize',()=>LAB.resize());
+  try{const t=localStorage.getItem('mat2_lab_tab'); if(t&&t!=='count')showTab(t);}catch(e){}
+}
+</script>
+<script>window.SERA_ACCENT={accent:'#a78bfa'};</script>
+<script src="cie2_theme.js?v=20260817"></script>
+</body>
+</html>
