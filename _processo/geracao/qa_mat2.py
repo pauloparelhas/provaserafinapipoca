@@ -6,6 +6,10 @@ Abre cada HTML num Chromium headless em 3 viewports e reprova:
   · rolagem horizontal
   · alvo de toque < 40px
   · sobreposicao grosseira entre irmaos visiveis
+  · vazamento de traducao: qualquer elemento controlado por uma regra
+    'body.show-tr X{...}' que aparece visivel ANTES de ligar a bandeira
+    (achado em 18/08: um <span class="tr" style="display:inline"> no
+    Sort it! furava o toggle porque style inline vence a classe)
 
 REGRA ZERO do projeto (CLAUDE.md): o QA roda MUDO. A fala e o audio sao
 desligados por add_init_script ANTES de a pagina carregar — um QA que abriu
@@ -15,6 +19,7 @@ Uso:
     python _processo/geracao/qa_mat2.py
     python _processo/geracao/qa_mat2.py MAT2_simulado.html
 """
+import re
 import sys
 from pathlib import Path
 
@@ -31,8 +36,25 @@ window.AudioContext=window.webkitAudioContext=function(){ throw new Error('audio
 
 VIEWPORTS = [("retrato", 360, 640), ("paisagem", 740, 360), ("notebook", 1280, 800)]
 
+SELETOR_TR = re.compile(r"body\.show-tr\s+([^{,]+?)\s*\{")
+REGRA_BASE = re.compile(r"(?<![.\w-])([.][\w.\- ]+?)\s*\{([^}]*)\}")
 
-def testa(page, arquivo, vp):
+
+def seletores_tr(caminho_html):
+    """Seletores 'X' com uma regra 'body.show-tr X{...}' — so entram os que
+    tambem tem uma regra base 'X{display:none...}': e o padrao de
+    esconder-ate-a-bandeira. Fica de fora a .dicabtn (so troca opacidade),
+    que e visivel o tempo todo por design."""
+    texto = Path(caminho_html).read_text(encoding="utf-8", errors="replace")
+    candidatos = sorted(set(m.strip() for m in SELETOR_TR.findall(texto)))
+    ocultos_por_padrao = set()
+    for sel, corpo in REGRA_BASE.findall(texto):
+        if "display" in corpo and "none" in corpo:
+            ocultos_por_padrao.add(sel.strip())
+    return [s for s in candidatos if s in ocultos_por_padrao]
+
+
+def testa(page, arquivo, vp, seletores):
     erros = []
     logs = []
     page.on("console", lambda m: logs.append((m.type, m.text)))
@@ -58,6 +80,21 @@ def testa(page, arquivo, vp):
     }""")
     for p in pequenos:
         erros.append(f"[{vp}] alvo de toque pequeno: {p}")
+    if seletores:
+        vazados = page.evaluate("""(sels)=>{
+          const out=[];
+          sels.forEach(sel=>{
+            let els; try{ els=document.querySelectorAll(sel); }catch(e){ return; }
+            els.forEach(el=>{
+              const cs=getComputedStyle(el);
+              if(cs.display!=='none' && cs.visibility!=='hidden' && (el.offsetWidth||el.offsetHeight))
+                out.push(sel+' -> "'+el.textContent.trim().slice(0,40)+'"');
+            });
+          });
+          return out.slice(0,6);
+        }""", seletores)
+        for v in vazados:
+            erros.append(f"[{vp}] traducao vazando sem a bandeira: {v}")
     return erros
 
 
@@ -83,13 +120,14 @@ def main():
         nav = pw.chromium.launch()
         for nome in alvos:
             arq = base + nome
+            seletores = seletores_tr(RAIZ / nome)
             achados = []
             for vp, w, h in VIEWPORTS:
                 ctx = nav.new_context(viewport={"width": w, "height": h})
                 ctx.add_init_script(MUDO)
                 pg = ctx.new_page()
                 try:
-                    achados += testa(pg, arq, vp)
+                    achados += testa(pg, arq, vp, seletores)
                 except Exception as e:
                     achados.append(f"[{vp}] FALHA AO ABRIR: {e}")
                 ctx.close()
