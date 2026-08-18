@@ -195,21 +195,21 @@ body.show-tr .btn .etr{display:block}
 <canvas id="starfield"></canvas>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
-    <span class="title">Arrasta e classifica</span>
-    <button class="iconbtn dicabtn" id="dica" title="Ver em português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
-    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
-    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Sort it!</span>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
   <div class="bar"><span id="bar"></span></div>
   <div class="stage"><div class="card" id="card"></div></div>
 </div>
 <div class="qnav" id="qnav">
-  <button class="qnav-btn" id="navPrev" onclick="prevGame()" title="Jogo anterior">&#8249;<span class="ql">Voltar</span></button>
-  <button class="qnav-btn" id="navNext" onclick="nextGame()" title="Próximo jogo">&#8250;<span class="ql">Próximo</span></button>
+  <button class="qnav-btn" id="navPrev" onclick="prevGame()" title="Previous game · Jogo anterior">&#8249;<span class="ql">Back</span></button>
+  <button class="qnav-btn" id="navNext" onclick="nextGame()" title="Next game · Próximo jogo">&#8250;<span class="ql">Next</span></button>
 </div>
 <script src="MAT2_data.js?v=20260817"></script>
 <script>
@@ -252,18 +252,19 @@ function intro(){
   checked=false;sel=null;
   $('card').innerHTML='<div class="intro">'
     +'<div class="qfig">\u{1F9F2}</div>'
-    +'<div class="q">Arrasta e classifica</div>'
-    +'<div class="tr" style="font-size:1rem;margin-top:2px">Toque na 🇧🇷 para ler em português.</div>'
-    +'<p>Arraste cada carta para a caixa certa. Depois toque em <b>Conferir</b> para ver o que acertou — e refaça as que errar.'
-    +'<span class="tr">Leia a carta em voz alta em inglês antes de arrastar. Se não entender, toque na 🇧🇷.</span></p>'
+    +'<div class="q">Sort it!</div>'
+    +'<div class="tr" style="font-size:1rem;margin-top:2px">Arrasta e classifica \u2014 toque na 🇧🇷 sempre que quiser o português.</div>'
+    +'<p>Drag each card to the right box. Then tap <b>Check</b> to see what you got right — and do the wrong ones again.'
+    +'<span class="tr">Arraste cada carta para a caixa certa. Depois toque em <b>Conferir</b> para ver o que acertou — e refaça as que errar.</span></p>'
     +'<div class="gamelist">'
     +GAMES.map((g,i)=>'<button class="gamechip'+(doneGames[i]?' done':'')+'" onclick="openGame('+i+')">'
         +'<span class="ge">'+g.emo+'</span>'
         +'<span class="gt"><b>'+g.en+'</b><span class="gtr tr">'+g.pt+'</span></span>'
         +'<span class="gn">'+(doneGames[i]?'✔':(i+1))+'</span></button>').join('')
     +'</div>'
-    +'<button class="startbtn" onclick="openGame(0)">▶ Começar pelo jogo 1<span class="tr" style="display:inline;color:#08263a"></span></button>'
-    +'<p style="font-size:.78rem;margin-top:10px">Como jogar: <b>toque</b> numa carta e depois numa caixa para colocar · toque numa carta <b>dentro da caixa</b> para tirá-la.</p>'
+    +'<button class="startbtn" onclick="openGame(0)">▶ Start with game 1<span class="tr" style="display:inline;color:#08263a"> · começar pelo jogo 1</span></button>'
+    +'<p style="font-size:.78rem;margin-top:10px">How to play: <b>tap</b> a card and then a box to put it there · tap a card <b>inside a box</b> to take it out.'
+    +'<span class="tr">Toque numa carta e depois numa caixa para colocar · toque numa carta dentro da caixa para tirá-la.</span></p>'
     +'</div>';
 }
 function openGame(i){ gi=i; place={}; locked={}; sel=null; checked=false; _poolCache=poolOrder(); render(); }
@@ -285,7 +286,7 @@ function render(){
     +'<span class="gname">'+g.en+'<div class="tr" style="font-size:.82rem">'+g.pt+'</div></span>'
     +'<span class="gnum">'+(gi+1)+'/'+GAMES.length+'</span></div>'
     +'<div class="ginfo"><span>'+g.info+'<span class="tr">'+g.infopt+'</span></span>'
-    +'<button class="listen" onclick="say(\''+esc(g.info)+'\')">\u{1F50A} Ouvir</button></div>'
+    +'<button class="listen" onclick="say(\''+esc(g.info)+'\')">\u{1F50A} Listen</button></div>'
     +'<div class="board">';
   g.cols.forEach(c=>{
     var placed=g.cards.map((card,i)=>i).filter(i=>place[cardId(i)]===c.id);
@@ -327,7 +328,7 @@ function rgba(hex,a){var n=parseInt(hex.slice(1),16);return 'rgba('+((n>>16)&255
 function updatePoolHint(){
   var n=_poolCache.length, tot=G().cards.length;
   var h=$('poolhint'); if(!h)return;
-  if(n===0) h.innerHTML='Tudo colocado! Toque em <b>Conferir</b>.';
+  if(n===0) h.innerHTML='All done! Tap <b>Check</b>.<span class="tr">Tudo colocado! Toque em Conferir.</span>';
   else h.innerHTML='Arraste estas &darr; · <b>'+(tot-n)+' / '+tot+'</b> colocadas';
 }
 
@@ -460,24 +461,24 @@ function bindBoard(){
    ============================================================ */
 function buildActions(){
   var a=$('actions'); if(!a)return;
-  var reveal='<button class="btn show" onclick="revealAnswers()">\u{1F5C2}️ Ver as respostas<span class="etr"></span></button>';
-  var summary='<button class="btn" onclick="cieSummary.show(G())">\u{1F4CB} Ver o resumo<span class="etr"></span></button>';
-  var reset='<button class="btn ghost" onclick="resetGame()">↺ Recomeçar este jogo<span class="etr"></span></button>';
+  var reveal='<button class="btn show" onclick="revealAnswers()">\u{1F5C2}️ Show the answers<span class="etr">ver as respostas</span></button>';
+  var summary='<button class="btn" onclick="cieSummary.show(G())">\u{1F4CB} Show the summary<span class="etr">ver o resumo</span></button>';
+  var reset='<button class="btn ghost" onclick="resetGame()">↺ Start this game again<span class="etr">recomeçar este jogo</span></button>';
   if(!checked){
-    a.innerHTML='<button class="btn primary" id="checkBtn" onclick="check()">✅ Conferir minhas respostas<span class="etr"></span></button>'
+    a.innerHTML='<button class="btn primary" id="checkBtn" onclick="check()">✅ Check my answers<span class="etr">conferir minhas respostas</span></button>'
       +summary+reveal+reset;
   }else{
     var wrong=wrongIds();
     var allRight=wrong.length===0;
-    var redo = wrong.length? '<button class="btn redo" onclick="redoWrong()">↺ Refazer as que errei ('+wrong.length+')<span class="etr"></span></button>':'';
-    var nextLbl = gi<GAMES.length-1 ? '▶ Próximo jogo<span class="etr"></span>' : '\u{1F3C6} Terminar<span class="etr"></span>';
+    var redo = wrong.length? '<button class="btn redo" onclick="redoWrong()">↺ Try again the '+wrong.length+' I missed<span class="etr">refazer as que errei</span></button>':'';
+    var nextLbl = gi<GAMES.length-1 ? '▶ Next game<span class="etr">próximo jogo</span>' : '\u{1F3C6} Finish<span class="etr">terminar</span>';
     a.innerHTML=redo
       +(allRight?'<button class="btn primary" onclick="afterGame()">'+nextLbl+'</button>'
-                :'<button class="btn" onclick="afterGame()">'+(gi<GAMES.length-1?'Pular para o próximo jogo →':'Terminar')+'<span class="etr"></span></button>')
+                :'<button class="btn" onclick="afterGame()">'+(gi<GAMES.length-1?'Skip to the next game →':'Finish')+'<span class="etr">'+(gi<GAMES.length-1?'pular para o próximo jogo':'terminar')+'</span></button>')
       +(allRight?'':reveal)
       +summary
       +reset
-      +'<button class="btn" onclick="intro()">\u{1F3AE} Menu dos jogos<span class="etr"></span></button>';
+      +'<button class="btn" onclick="intro()">\u{1F3AE} Game menu<span class="etr">menu dos jogos</span></button>';
   }
 }
 /* reset only the current game (phase) — back to a shuffled bag */
@@ -488,7 +489,7 @@ function revealAnswers(){
   checked=true; _poolCache=[]; sel=null;
   render();
   if($('tip'))$('tip').classList.add('show');
-  var fb=$('fb'); if(fb){fb.className='fb ok';fb.innerHTML='\u{1F5C2}️ Aqui estão as respostas — leia cada caixa com calma!';}
+  var fb=$('fb'); if(fb){fb.className='fb ok';fb.innerHTML='\u{1F5C2}️ Here are the answers — read each box slowly!<span class="tr">Aqui estão as respostas — leia cada caixa com calma!</span>';}
 }
 function wrongIds(){
   return G().cards.map((c,i)=>cardId(i)).filter(id=>{var i=+id.slice(1);return place[id] && place[id]!==G().cards[i].col;});
@@ -556,10 +557,10 @@ function finish(){
   var n=Object.keys(doneGames).length;
   $('card').innerHTML='<div class="fim"><div class="big">\u{1F3C6}</div>'
     +'<div class="score">'+n+' / '+GAMES.length+' jogos sem erro</div>'
-    +'<div class="sub">Muito bem, explorador do Brasil! \u{1F5FA}\u{FE0F}</div>'
+    +'<div class="sub">Well done, shape explorer! \u{1F4D0}<span class="tr">Muito bem, explorador das figuras!</span></div>'
     +'<div class="actions">'
     +'<button class="btn primary" onclick="intro()">\u{1F3AE} Jogar de novo<span class="etr"></span></button>'
-    +'<button class="btn" onclick="goHome()">\u{1F3E0} Menu<span class="etr">Menu do site</span></button>'
+    +'<button class="btn" onclick="goHome()">\u{1F3E0} Menu<span class="etr">menu do site</span></button>'
     +'</div></div>';
   celebrate();
 }

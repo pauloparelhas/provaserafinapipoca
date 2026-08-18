@@ -152,14 +152,14 @@ body.show-tr .tr{display:block}
 <canvas id="starfield"></canvas>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
-    <span class="title">Flashcards &mdash; Comunidades e lugares</span>
-    <button class="iconbtn dicabtn" id="dica" title="Ver em português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
-    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
-    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Flashcards &mdash; 2-D Figures</span>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
   <div class="bar"><span id="bar"></span></div>
   <div class="wrap" id="stage"></div>
@@ -185,8 +185,8 @@ try{feitos=JSON.parse(localStorage.getItem('mat2_fc_feitos')||'{}');}catch(e){fe
 fetch('media/flashcards_mat2.json?v=20260817').then(function(r){return r.json();})
  .then(function(j){DB=j;intro();})
  .catch(function(){ $('stage').innerHTML='<div class="intro"><div class="em">&#128533;</div>'
-   +'<h1>Não consegui abrir os flashcards</h1><p>Se você abriu o arquivo direto do computador, '
-   +'abra pelo site — o navegador bloqueia a leitura do banco em <i>file://</i>.</p></div>'; });
+   +'<h1>I could not open the flashcards</h1><p>If you opened the file straight from the computer, '
+   +'open it from the website instead — the browser blocks reading the deck in <i>file://</i>.</p></div>'; });
 
 function intro(){
   revisao=false;
@@ -194,8 +194,9 @@ function intro(){
   var total=DB.baralhos.reduce(function(n,b){return n+b.cards.length;},0);
   var h='<div class="intro"><div class="em">&#127183;</div>'
    +'<h1>Flashcards</h1>'
-   +'<p>Leia a pergunta <b>em inglês</b>, responda de cabeça e só depois vire a carta. Se travar, toque na 🇧🇷 da barra de cima. '
-   +'O que você marcar como <b>ainda não</b> volta no fim para você treinar de novo.</p>'
+   +'<p>Read the question, answer it <b>in your head</b>, and only then turn the card over. '
+   +'Whatever you mark as <b>not yet</b> comes back at the end for you to practise again.'
+   +'<span class="tr">Leia a pergunta em inglês, responda de cabeça e só depois vire a carta. Se travar, toque na 🇧🇷 da barra de cima. O que você marcar como “ainda não” volta no fim.</span></p>'
    +'<div class="decks">';
   DB.baralhos.forEach(function(b,i){
     h+='<button class="deck'+(feitos[b.key]?' feito':'')+'" style="--dc:'+b.cor+'" onclick="abrir('+i+')">'
@@ -204,7 +205,7 @@ function intro(){
      +'<span class="dn">'+(feitos[b.key]?'&#10003; '+b.cards.length:b.cards.length+' cartas')+'</span></button>';
   });
   h+='</div><button class="allbtn" onclick="abrirTudo()">&#127922; Embaralhar tudo ('+total+' cartas)</button>'
-   +'<div class="hintline">Dica: 10 minutos por dia valem mais que 1 hora na véspera. &#128522;</div></div>';
+   +'<div class="hintline">Ten minutes a day beat one hour the night before. &#128522;<span class="tr">10 minutos por dia valem mais que 1 hora na véspera.</span></div></div>';
   $('stage').innerHTML=h;
 }
 
@@ -226,19 +227,19 @@ function carta(){
   var c=atual.c;
   $('bar').style.width=(idx/deck.length*100)+'%';
   $('stage').innerHTML='<div class="chead"><span class="ce">'+atual.emo+'</span>'
-   +'<span class="ct">'+atual.nome+(revisao?' &middot; revisão':'')+'</span>'
+   +'<span class="ct">'+atual.nome+(revisao?' &middot; practice again':'')+'</span>'
    +'<span class="cn">'+(idx+1)+' / '+deck.length+'</span></div>'
    +'<div class="flip"><div class="fc" id="fc" style="--dc:'+atual.cor+'" onclick="virar()">'
      +'<div class="face front">'
-       +'<span class="lab">Pergunta</span>'
+       +'<span class="lab">Question</span>'
        +'<span class="txt">'+c.f+'</span>'
        +(c.d?'<span class="dica tr">&#127463;&#127479; '+c.d+'</span>':'')
-       +'<span class="tap">&#128072; toque na carta para ver a resposta</span>'
+       +'<span class="tap">&#128072; tap the card to see the answer</span>'
      +'</div>'
      +'<div class="face back">'
-       +'<span class="lab">Resposta</span>'
+       +'<span class="lab">Answer</span>'
        +'<span class="txt">'+c.v+'</span>'
-       +'<button class="speak" onclick="say(\''+esc(c.v)+'\');event.stopPropagation()">&#128266; Ouvir</button>'
+       +'<button class="speak" onclick="say(\''+esc(c.v)+'\');event.stopPropagation()">&#128266; Listen</button>'
      +'</div>'
    +'</div></div>'
    +'<div id="judge"></div>'
@@ -253,8 +254,8 @@ function virar(){
   var aberta=fc.classList.toggle('on');
   $('judge').innerHTML = aberta
     ? '<div class="judge">'
-      +'<button class="jb sim" onclick="julgar(true)"><span class="je">&#128522;</span>Acertei!</button>'
-      +'<button class="jb nao" onclick="julgar(false)"><span class="je">&#129300;</span>Ainda não</button>'
+      +'<button class="jb sim" onclick="julgar(true)"><span class="je">&#128522;</span>I got it!</button>'
+      +'<button class="jb nao" onclick="julgar(false)"><span class="je">&#129300;</span>Not yet</button>'
       +'</div>'
     : '';
 }
@@ -271,17 +272,17 @@ function fim(){
   if(!revisao && atual && atual.key){ feitos[atual.key]=true;
     try{localStorage.setItem('mat2_fc_feitos',JSON.stringify(feitos));}catch(e){} }
   var pct=total?acertos/total:0;
-  var msg=pct>=.9?'Você mandou muito bem! &#127942;'
-        :pct>=.6?'Muito bem! Treine as que faltaram.'
-        :'Bom treino — repita as difíceis e você pega.';
+  var msg=pct>=.9?'You did really well! &#127942;<span class="tr">Você mandou muito bem!</span>'
+        :pct>=.6?'Well done! Practise the ones you missed.<span class="tr">Muito bem! Treine as que faltaram.</span>'
+        :'Good practice — do the hard ones again and you will get them.<span class="tr">Bom treino: repita as difíceis e você pega.</span>';
   var h='<div class="fim"><div class="big">&#127942;</div>'
    +'<div class="score">'+acertos+' / '+total+'</div>'
    +'<div class="sub">'+msg+'</div><div class="fimbtns">';
   if(errados.length)
-    h+='<button class="fimbtn redo" onclick="treinarErradas()">&#8635; Treinar as '+errados.length+' que faltaram</button>';
+    h+='<button class="fimbtn redo" onclick="treinarErradas()">&#8635; Practise the '+errados.length+' I missed</button>';
   h+='<button class="fimbtn primary" onclick="abrirTudo()">&#127922; Embaralhar tudo de novo</button>'
    +'<button class="fimbtn" onclick="intro()">&#127183; Escolher outro baralho</button>'
-   +'<button class="fimbtn" onclick="goHome()">&#127968; Menu do site</button>'
+   +'<button class="fimbtn" onclick="goHome()">&#127968; Site menu</button>'
    +'</div></div>';
   $('stage').innerHTML=h;
 }

@@ -145,31 +145,33 @@ body.show-tr .tr{display:block}
 <canvas id="starfield"></canvas>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
-    <span class="title">Quiz explicado &mdash; Comunidades e lugares</span>
-    <button class="iconbtn dicabtn" id="dica" title="Ver em português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
-    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
-    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Explained quiz &mdash; 2-D Figures</span>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
   <div class="bar"><span id="bar"></span></div>
   <div class="wrap">
     <div class="tabbar">
       <button class="tabbtn on" id="tab-quiz" onclick="showTab('quiz')"><span class="te">&#129300;</span>Quiz explicado</button>
-      <button class="tabbtn" id="tab-rev" onclick="showTab('rev')"><span class="te">&#9889;</span>Revisão rápida</button>
+      <button class="tabbtn" id="tab-rev" onclick="showTab('rev')"><span class="te">&#9889;</span>Quick review</button>
     </div>
     <div class="pane on" id="pane-quiz"><div id="quizStage"></div></div>
     <div class="pane" id="pane-rev">
-      <div class="hint">Toque na pergunta para ver a resposta. São perguntas curtas para revisar rápido.</div>
+      <div class="hint">Tap a question to see the answer. They are short questions, for a quick review.
+        <span class="tr">Toque na pergunta para ver a resposta. São perguntas curtas para revisar rápido.</span></div>
       <div class="toolrow">
-        <button class="toolbtn" onclick="todas(true)">&#11015;&#65039; Abrir tudo</button>
-        <button class="toolbtn" onclick="todas(false)">&#11014;&#65039; Fechar tudo</button>
+        <button class="toolbtn" onclick="todas(true)">&#11015;&#65039; Open all</button>
+        <button class="toolbtn" onclick="todas(false)">&#11014;&#65039; Close all</button>
       </div>
       <div id="revStage"></div>
     </div>
-    <div class="origem">Estas perguntas foram geradas pelo <b>NotebookLM</b> a partir do caderno da<br>Unit 9 e conferidas uma a uma antes de entrar no site. &#128064;</div>
+    <div class="origem">These questions were made by <b>NotebookLM</b> from the Unit 9 book pages,<br>and checked one by one before going on the site. &#128064;
+      <span class="tr">Geradas pelo NotebookLM a partir do caderno da Unit 9 e conferidas uma a uma.</span></div>
   </div>
 </div>
 
@@ -204,9 +206,9 @@ Promise.all([
   comecar(); montarRev();
   try{var t=localStorage.getItem('mat2_nlm_tab');if(t==='rev')showTab('rev');}catch(e){}
 }).catch(function(){
-  $('quizStage').innerHTML='<div class="qcard"><div class="q">&#128533; Não consegui abrir as perguntas</div>'
-   +'<p style="margin-top:10px;font-weight:700;color:var(--soft);line-height:1.45">Se você abriu o arquivo '
-   +'direto do computador, abra pelo site — o navegador bloqueia a leitura em <i>file://</i>.</p></div>';
+  $('quizStage').innerHTML='<div class="qcard"><div class="q">&#128533; I could not open the questions</div>'
+   +'<p style="margin-top:10px;font-weight:700;color:var(--soft);line-height:1.45">If you opened the file '
+   +'straight from the computer, open it from the website instead — the browser blocks reading in <i>file://</i>.</p></div>';
 });
 
 function comecar(){
@@ -218,14 +220,14 @@ function pergunta(){
   var q=deck[idx];
   $('bar').style.width=(idx/deck.length*100)+'%';
   var opts=shuffle(q.answerOptions);
-  var h='<div class="qhead"><span class="qn">Pergunta '+(idx+1)+' de '+deck.length+'</span></div>'
+  var h='<div class="qhead"><span class="qn">Question '+(idx+1)+' of '+deck.length+'</span></div>'
    +'<div class="qcard"><div class="q">'+q.question+'</div>'
    +'<div class="qtools">'
-     +'<button class="tbtn" onclick="say(\''+esc(q.question)+'\')">&#128266; Ouvir</button>'
-     +(q.hint?'<button class="tbtn amarelo" onclick="verDica()">&#128161; Ver a dica</button>':'')
+     +'<button class="tbtn" onclick="say(\''+esc(q.question)+'\')">&#128266; Listen</button>'
+     +(q.hint?'<button class="tbtn amarelo" onclick="verDica()">&#128161; Show the hint</button>':'')
    +'</div>'
    +(q.hint?'<div class="dicabox" id="dicabox">&#128161; '+q.hint+'</div>':'')
-   +'<div class="task">Toque na resposta certa</div>'
+   +'<div class="task">Tap the right answer<span class="tr">toque na resposta certa</span></div>'
    +'<div class="opts" id="opts">';
   opts.forEach(function(o,i){
     h+='<button class="opt" id="op'+i+'" onclick="responder('+i+','+(o.isCorrect?1:0)+')">'
@@ -235,9 +237,9 @@ function pergunta(){
   });
   h+='</div><div class="fb" id="fb"></div></div>'
    +'<div class="navrow">'
-     +'<button class="nb" onclick="pular()">Pular &#8250;</button>'
+     +'<button class="nb" onclick="pular()">Skip &#8250;</button>'
      +'<button class="nb primary" id="prox" onclick="proxima()" disabled>'
-     +(idx===deck.length-1?'Ver o resultado &#127881;':'Próxima &#8250;')+'</button>'
+     +(idx===deck.length-1?'See my score &#127881;':'Next &#8250;')+'</button>'
    +'</div>';
   $('quizStage').innerHTML=h;
   window.__opts=opts;
@@ -253,7 +255,7 @@ function responder(i,ok){
     el.onclick=null;
   });
   if(ok){acertos++;$('fb').textContent='Isso mesmo! 🌟';$('fb').className='fb ok';}
-  else{$('fb').textContent='Ainda não — leia o porquê de cada uma. 💡';$('fb').className='fb no';}
+  else{$('fb').innerHTML='Not yet — read why each one is right or wrong. 💡<span class="tr">Ainda não: leia o porquê de cada uma.</span>';$('fb').className='fb no';}
   var d=$('dicabox'); if(d)d.classList.add('on');
   $('prox').disabled=false;
 }
@@ -262,15 +264,15 @@ function pular(){ idx++; pergunta(); }
 function fim(){
   $('bar').style.width='100%';
   var pct=deck.length?acertos/deck.length:0;
-  var msg=pct>=.9?'Você mandou muito bem! 🏆'
-        :pct>=.6?'Muito bem! Releia os porquês das que faltaram.'
-        :'Bom treino — jogue de novo lendo cada explicação.';
+  var msg=pct>=.9?'You did really well! 🏆<span class="tr">Você mandou muito bem!</span>'
+        :pct>=.6?'Well done! Read again why you missed those.<span class="tr">Muito bem! Releia os porquês das que faltaram.</span>'
+        :'Good practice — play again and read every explanation.<span class="tr">Bom treino: jogue de novo lendo cada explicação.</span>';
   $('quizStage').innerHTML='<div class="fim"><div class="big">&#127881;</div>'
    +'<div class="score">'+acertos+' / '+deck.length+'</div>'
    +'<div class="sub">'+msg+'</div><div class="fimbtns">'
-   +'<button class="nb primary" onclick="comecar()">&#127922; Jogar de novo</button>'
-   +'<button class="nb" onclick="showTab(\'rev\')">&#9889; Ir para a revisão rápida</button>'
-   +'<button class="nb" onclick="goHome()">&#127968; Menu do site</button>'
+   +'<button class="nb primary" onclick="comecar()">&#127922; Play again</button>'
+   +'<button class="nb" onclick="showTab(\'rev\')">&#9889; Go to the quick review</button>'
+   +'<button class="nb" onclick="goHome()">&#127968; Site menu</button>'
    +'</div></div>';
 }
 

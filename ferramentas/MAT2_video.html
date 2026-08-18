@@ -92,55 +92,64 @@ video{width:100%;display:block;background:#000;aspect-ratio:16/9}
   .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px}
   .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
 }
+.dicabtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.4;filter:grayscale(1)}
+.dicabtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .dicabtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
+/* traducao: o texto em ingles e o principal; o .tr so aparece na bandeira */
+.tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.86em;line-height:1.35}
+body.show-tr .tr{display:block}
 </style>
 </head>
 <body>
 <canvas id="starfield"></canvas>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
-    <span class="title">V&iacute;deo da unidade</span>
-    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
-    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Unit video</span>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
   <div class="wrap">
     <div class="head">
       <div class="em">&#127916;</div>
-      <h1>A mat&eacute;ria inteira em v&iacute;deo</h1>
-      <p>Unit 9 &mdash; as 7 figuras, lados e v&eacute;rtices, simetria e os padr&otilde;es, do come&ccedil;o ao fim.<br>Assista uma vez inteiro e depois volte nas partes mais dif&iacute;ceis com o &#9194; 10s.</p>
+      <h1>The whole unit in a video</h1>
+      <p>Unit 9 &mdash; the 7 figures, sides and vertices, symmetry and the patterns, from start to finish.<br>Watch it once all the way through, then go back to the hard parts with &#9194; 10s.
+        <span class="tr">O v&iacute;deo &eacute; falado em portugu&ecirc;s e escreve cada palavra em ingl&ecirc;s na tela.</span></p>
     </div>
 
     <div class="player">
       <video id="v" controls playsinline preload="metadata" poster="media/mat_insumos/poster_video.jpg">
         <source src="media/video_mat2_nb1_pt.mp4" type="video/mp4">
-        O seu navegador n&atilde;o consegue tocar v&iacute;deo.
+        Your browser cannot play video.
       </video>
     </div>
 
     <div class="ctrl">
       <button class="cb" onclick="pula(-10)">&#9194; 10s</button>
-      <button class="cb" id="sp075" onclick="vel(0.75)">&#128034; Mais devagar</button>
+      <button class="cb" id="sp075" onclick="vel(0.75)">&#128034; Slower</button>
       <button class="cb on" id="sp1" onclick="vel(1)">&#9654;&#65039; Normal</button>
-      <button class="cb" id="sp125" onclick="vel(1.25)">&#128007; Mais r&aacute;pido</button>
+      <button class="cb" id="sp125" onclick="vel(1.25)">&#128007; Faster</button>
       <button class="cb" onclick="pula(10)">10s &#9193;</button>
-      <button class="cb" onclick="reinicia()">&#8634; Do come&ccedil;o</button>
+      <button class="cb" onclick="reinicia()">&#8634; From the start</button>
     </div>
 
     <div class="aviso" id="aviso">
-      &#128274; O v&iacute;deo est&aacute; demorando para carregar (o arquivo &eacute; grande &mdash; numa internet lenta pode levar um tempo).<br><br>
-      Voc&ecirc; pode <a href="media/video_mat2_nb1_pt.mp4" target="_blank" rel="noopener">abrir o v&iacute;deo direto</a>,
-      ou estudar o <b>mesmo conte&uacute;do</b> sem v&iacute;deo no
-      <a href="MAT2_estudo.html">Estudar</a> e no <a href="MAT2_nlm.html">Quiz explicado</a>.
+      &#128274; The video is taking a while to load (the file is big &mdash; on a slow connection it can take some time).<br><br>
+      You can <a href="media/video_mat2_nb1_pt.mp4" target="_blank" rel="noopener">open the video directly</a>,
+      or study the <b>same content</b> without video in
+      <a href="MAT2_estudo.html">Study sheet</a> and in the <a href="MAT2_nlm.html">Explained quiz</a>.
     </div>
 
-    <div class="sec">&#128220; O que o v&iacute;deo conta, na ordem</div>
+    <div class="sec">&#128220; What the video shows, in order<span class="tr">o que o v&iacute;deo conta, na ordem</span></div>
     <div class="rot" id="rot"></div>
 
-    <div class="nota">O v&iacute;deo foi feito pelo <b>NotebookLM</b> a partir das p&aacute;ginas do caderno da Unit 9.<br>
-      Use os bot&otilde;es <b>&#9194; 10s</b> e <b>10s &#9193;</b> para voltar no que voc&ecirc; n&atilde;o pegou. &#128071;</div>
+    <div class="nota">The video was made by <b>NotebookLM</b> from the Unit 9 book pages.<br>
+      Use <b>&#9194; 10s</b> and <b>10s &#9193;</b> to go back over anything you missed. &#128071;
+      <span class="tr">Use os bot&otilde;es de 10s para voltar no que voc&ecirc; n&atilde;o pegou.</span></div>
   </div>
 </div>
 
@@ -163,28 +172,39 @@ var v=$('v');
    20 s, mais checagens em 10 s e 50 s). Nao e o roteiro que pedimos — e o
    que o video realmente mostra, na ordem em que mostra. Duracao: 6min33. */
 var ROTEIRO=[
- 'O que é uma 2-D figure: uma figura plana, que dá para desenhar no papel',
- 'circle (círculo) — redonda, 0 lados retos e 0 vértices',
- 'triangle (triângulo) — 3 lados e 3 vértices',
- 'square (quadrado) — 4 lados do mesmo tamanho e 4 vértices',
- 'rectangle (retângulo) — 4 lados: 2 compridos e 2 curtos',
- 'pentagon (pentágono) — 5 lados e 5 vértices',
- 'octagon (octógono) — 8 lados e 8 vértices',
- 'Side (lado ou edge) × Vertex (vértice): a diferença, com a régua e o esquadro',
- 'Dicas de memória: o octopus, a placa de PARE e o favo de mel',
- 'Figuras nos objetos 1: capa de livro, porta, moedas, rodas, pizza e chapéu de festa',
- 'Figuras nos objetos 2: a placa de STOP, o favo de mel e a bola de futebol',
- 'O saquinho com 13 lados no total',
- 'O saquinho com 12 vértices no total',
- 'Symmetry (simetria): dobrar e ver se as duas metades combinam',
- 'Symmetry in Letters: O G V C M P A J B R X — e a Mira em pé no meio do O de MOM',
- 'Padrão que se repete: slide, flip e turn',
- 'A colcha (quilt): o bloco 3 com o pentágono e os pares 1 e 9, 2 e 6, 4 e 8'
+ ['What a 2-D figure is: a flat figure you can draw on paper',
+  'O que é uma 2-D figure: uma figura plana, que dá para desenhar no papel'],
+ ['circle — round, no straight sides and 0 vertices',
+  'circle (círculo) — redonda, 0 lados retos e 0 vértices'],
+ ['triangle — 3 sides and 3 vertices', 'triangle (triângulo) — 3 lados e 3 vértices'],
+ ['square — 4 sides the same length and 4 vertices',
+  'square (quadrado) — 4 lados do mesmo tamanho e 4 vértices'],
+ ['rectangle — 4 sides: 2 long and 2 short', 'rectangle (retângulo) — 4 lados: 2 compridos e 2 curtos'],
+ ['pentagon — 5 sides and 5 vertices', 'pentagon (pentágono) — 5 lados e 5 vértices'],
+ ['octagon — 8 sides and 8 vertices', 'octagon (octógono) — 8 lados e 8 vértices'],
+ ['Side (or edge) × Vertex: the difference, with the ruler and the set square',
+  'Side (lado ou edge) × Vertex (vértice): a diferença, com a régua e o esquadro'],
+ ['Memory tips: the octopus, the STOP sign and the honeycomb',
+  'Dicas de memória: o octopus, a placa de PARE e o favo de mel'],
+ ['Figures in objects 1: book cover, door, coins, wheels, pizza and party hat',
+  'Figuras nos objetos 1: capa de livro, porta, moedas, rodas, pizza e chapéu de festa'],
+ ['Figures in objects 2: the STOP sign, the honeycomb and the soccer ball',
+  'Figuras nos objetos 2: a placa de STOP, o favo de mel e a bola de futebol'],
+ ['The bag with 13 sides in total', 'O saquinho com 13 lados no total'],
+ ['The bag with 12 vertices in total', 'O saquinho com 12 vértices no total'],
+ ['Symmetry: fold it and see if the two halves match',
+  'Symmetry (simetria): dobrar e ver se as duas metades combinam'],
+ ['Symmetry in Letters: O G V C M P A J B R X — and the Mira standing up in the middle of the O in MOM',
+  'Symmetry in Letters: O G V C M P A J B R X — e a Mira em pé no meio do O de MOM'],
+ ['Repeating pattern: slide, flip and turn', 'Padrão que se repete: slide, flip e turn'],
+ ['The quilt: block 3 with the pentagon, and the pairs 1 and 9, 2 and 6, 4 and 8',
+  'A colcha (quilt): o bloco 3 com o pentágono e os pares 1 e 9, 2 e 6, 4 e 8']
 ];
 
 function mmss(s){var m=Math.floor(s/60),r=Math.round(s%60);return m+':'+(r<10?'0':'')+r;}
-$('rot').innerHTML=ROTEIRO.map(function(txt,i){
-  return '<div class="rl"><span class="rt">'+(i+1)+'</span><span class="rx">'+txt+'</span></div>';
+$('rot').innerHTML=ROTEIRO.map(function(par,i){
+  return '<div class="rl"><span class="rt">'+(i+1)+'</span><span class="rx">'+par[0]
+   +'<span class="tr">'+par[1]+'</span></span></div>';
 }).join('');
 
 function pula(seg){

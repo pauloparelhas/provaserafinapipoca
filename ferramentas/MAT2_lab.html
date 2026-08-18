@@ -85,14 +85,14 @@ body.nogl .cv{display:none}
 <body>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
     <span class="title">Shape Lab</span>
-    <button class="iconbtn dicabtn" id="dica" title="Ver em português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
-    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
-    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
 
   <div class="wrap">
@@ -106,8 +106,8 @@ body.nogl .cv{display:none}
     <div class="pane on" id="pane-count">
       <div class="stagebox">
         <canvas class="cv" id="cv1"></canvas>
-        <div class="nowebgl" id="nogl1">&#128533; Este aparelho não conseguiu abrir o laboratório 3D.
-          <span class="tr">Você pode ver o mesmo conteúdo em Estudar e no Simulado.</span></div>
+        <div class="nowebgl" id="nogl1">&#128533; This device could not open the 3D lab.
+          <span class="tr">Este aparelho não conseguiu abrir o laboratório 3D. Você vê o mesmo conteúdo na Revisão e no Simulado.</span></div>
         <div class="readout" id="ro1">Pick a figure and count.<span class="rs">Escolha uma figura e conte.</span></div>
       </div>
       <div class="pickrow" id="pick1"></div>
@@ -124,7 +124,7 @@ body.nogl .cv{display:none}
     <div class="pane" id="pane-fold">
       <div class="stagebox">
         <canvas class="cv" id="cv2"></canvas>
-        <div class="nowebgl">&#128533; Este aparelho não conseguiu abrir o laboratório 3D.</div>
+        <div class="nowebgl">&#128533; This device could not open the 3D lab.<span class="tr">Este aparelho não conseguiu abrir o laboratório 3D.</span></div>
         <div class="readout" id="ro2">Pick a letter, choose the line, then fold.<span class="rs">Escolha a letra, escolha a linha e dobre.</span></div>
       </div>
       <div class="pickrow" id="pick2"></div>
@@ -143,7 +143,7 @@ body.nogl .cv{display:none}
     <div class="pane" id="pane-move">
       <div class="stagebox">
         <canvas class="cv" id="cv3"></canvas>
-        <div class="nowebgl">&#128533; Este aparelho não conseguiu abrir o laboratório 3D.</div>
+        <div class="nowebgl">&#128533; This device could not open the 3D lab.<span class="tr">Este aparelho não conseguiu abrir o laboratório 3D.</span></div>
         <div class="readout" id="ro3">Slide, flip or turn — and watch the ghost.<span class="rs">Deslize, vire ou gire — e olhe o fantasma.</span></div>
       </div>
       <div class="pickrow" id="pick3"></div>
@@ -158,7 +158,7 @@ body.nogl .cv{display:none}
         <span class="tr">A figura clarinha atrás é o fantasma: mostra onde a figura começou. Depois de deslizar, virar ou girar, ela continua com os mesmos lados, os mesmos vértices, o mesmo tamanho e o mesmo nome — só o lugar e o lado para onde aponta mudam.</span></div>
     </div>
 
-    <div class="foot">Tudo aqui saiu do caderno da Unit 9. &#128218;</div>
+    <div class="foot">Everything here comes from the Unit 9 book. &#128218;<span class="tr">Tudo aqui saiu do caderno da Unit 9.</span></div>
   </div>
 </div>
 

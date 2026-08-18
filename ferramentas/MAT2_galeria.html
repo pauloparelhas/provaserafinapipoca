@@ -7,7 +7,7 @@
 <title>Class materials — Math · 2-D Figures</title>
 <link rel="stylesheet" href="serafina-core.css?v=20260817">
 <style>
-:root{--fs:1;--bg:#0d0b1e;--bg2:#10322a;--ink:#f0fdf4;--soft:rgba(255,255,255,.55);--card:#13303a;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fbbf24;--rad:20px}
+:root{--tr:#fcd34d;--fs:1;--bg:#0d0b1e;--bg2:#10322a;--ink:#f0fdf4;--soft:rgba(255,255,255,.55);--card:#13303a;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fbbf24;--rad:20px}
 body.light{--bg:#eafaf1;--bg2:#dcf5e8;--ink:#0c2a1e;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);min-height:100vh}
@@ -98,53 +98,62 @@ body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-grad
   .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px}
   .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
 }
+.dicabtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.4;filter:grayscale(1)}
+.dicabtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .dicabtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
+/* traducao: o texto em ingles e o principal; o .tr so aparece na bandeira */
+.tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.86em;line-height:1.35}
+body.show-tr .tr{display:block}
 </style>
 </head>
 <body>
 <canvas id="starfield"></canvas>
 <div class="topbar">
-    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
-    <span class="title">Materiais da turma</span>
-    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
-    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Class materials</span>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
 </div>
 <div class="wrap">
 
   <div class="head">
     <div class="em">&#x1F5BC;&#xFE0F;</div>
-    <h1>As páginas reais da Unit 9</h1>
-    <p>2-D Geometry — as folhas do caderno que a professora postou.<br>Toque em qualquer imagem para ver grande.</p>
+    <h1>The real Unit 9 pages</h1>
+    <p>2-D Geometry — the book pages your teacher posted.<br>Tap any picture to see it big.
+      <span class="tr">As folhas do caderno que a professora postou. Toque em qualquer imagem para ver grande.</span></p>
   </div>
 
-  <div class="sec">&#x1F53A; A página das 7 figuras</div>
+  <div class="sec">&#x1F53A; The page with the 7 figures<span class="tr">a página das 7 figuras</span></div>
   <div class="grid wide" id="g-regioes"></div>
 
-  <div class="sec">&#x1F4D0; Lados, vértices e simetria</div>
+  <div class="sec">&#x1F4D0; Sides, vertices and symmetry<span class="tr">lados, vértices e simetria</span></div>
   <div class="grid" id="g-tradicoes"></div>
 
-  <div class="sec">&#x1F9E9; Desenhar, a colcha e o diário</div>
+  <div class="sec">&#x1F9E9; Drawing, the quilt and the journal<span class="tr">desenhar, a colcha e o diário</span></div>
   <div class="grid" id="g-apostila"></div>
 
-    <div class="sec">&#x1F4C4; Material completo</div>
+    <div class="sec">&#x1F4C4; Everything together<span class="tr">material completo</span></div>
   <a class="pdfcard" href="media/mat_insumos/unit9_2d_geometry.pdf" target="_blank" rel="noopener">
     <span class="pe">&#x1F4D6;</span>
-    <span><span class="pt">Unit 9 &mdash; as 9 páginas do caderno</span><br><span class="ps">abrir o PDF com tudo junto</span></span>
+    <span><span class="pt">Unit 9 &mdash; all 9 book pages</span><br><span class="ps">open the PDF with everything</span></span>
   </a>
 
-  <div class="note">Estas páginas são a <b>fonte</b> de tudo o que está nos jogos e no simulado. &#x1F60A;<br>Olhar de novo antes da prova ajuda a lembrar.</div>
+  <div class="note">These pages are the <b>source</b> of everything in the games and in the practice test. &#x1F60A;<br>Looking at them again helps you remember.
+    <span class="tr">Estas páginas são a fonte de tudo o que está nos jogos e no simulado. Olhar de novo ajuda a lembrar.</span></div>
 </div>
 
 <div class="lb" id="lb" onclick="closeLb(event)">
   <button class="x" onclick="closeLb(event,true)">&times;</button>
-  <button class="arrow prev" title="Figura anterior" onclick="stepLb(event,-1)">&#8249;</button>
-  <button class="arrow next" title="Próxima figura" onclick="stepLb(event,1)">&#8250;</button>
+  <button class="arrow prev" title="Previous picture · Figura anterior" onclick="stepLb(event,-1)">&#8249;</button>
+  <button class="arrow next" title="Next picture · Próxima figura" onclick="stepLb(event,1)">&#8250;</button>
   <img id="lbimg" src="" alt="">
   <div class="cap" id="lbcap"></div>
   <div class="lbnum" id="lbnum"></div>
-  <div class="zoomtip">toque fora da imagem para fechar</div>
+  <div class="zoomtip">tap outside the picture to close</div>
 </div>
 
 <script>
@@ -152,18 +161,18 @@ var DIR="media/mat_insumos/";
 /* [arquivo, titulo, subtitulo] — as 9 paginas do caderno da Unit 9 postadas
    pela professora no Toddle. Sao as MESMAS que alimentam o roteiro. */
 var REGIOES=[
- ["02_p216_describing_figures.jpg","The 7 figures — p.216","rectangle, square, triangle, hexagon, octagon, pentagon, circle: a página que nomeia todas"]
+ ["02_p216_describing_figures.jpg","The 7 figures — p.216","rectangle, square, triangle, hexagon, octagon, pentagon, circle: the page that names them all"]
 ];
 var TRADICOES=[
- ["06_p227_symmetry_letters.jpg","Symmetry in letters — p.227","circle the letters that show symmetry · onde pôr a Mira em MOM"],
- ["05_p224_matching_parts.jpg","Draw matching parts — p.224","completar a figura pela linha de simetria: a metade que combina"],
- ["03_p220_13_sides.jpg","What is in the bag? — p.220","3 figuras, 13 lados no total: que figuras podem ser?"],
- ["04_p221_12_vertices.jpg","Another 3 in the bag — p.221","3 figuras, 12 vértices no total · a caça ao vértice em casa"]
+ ["06_p227_symmetry_letters.jpg","Symmetry in letters — p.227","circle the letters that show symmetry · where to put the Mira on MOM"],
+ ["05_p224_matching_parts.jpg","Draw matching parts — p.224","finish the figure along the line of symmetry: the matching part"],
+ ["03_p220_13_sides.jpg","What is in the bag? — p.220","3 figures, 13 sides in total: what could the figures be?"],
+ ["04_p221_12_vertices.jpg","Another 3 in the bag — p.221","3 figures, 12 vertices in total · the vertex hunt at home"]
 ];
 var APOSTILA=[
- ["01_p215_my_picture.jpg","My Picture — p.215","fazer um desenho só com quadrado, círculo, retângulo e triângulo"],
- ["07_p232_quilt.jpg","A Quilt — p.232","os 9 blocos da colcha, numerados de 1 a 9"],
- ["08_p233_finish_quilt.jpg","Finish the Quilt! — p.233","o bloco só com pentágono · o padrão da borda · o caminho na grade"],
+ ["01_p215_my_picture.jpg","My Picture — p.215","make a picture using only square, circle, rectangle and triangle"],
+ ["07_p232_quilt.jpg","A Quilt — p.232","the 9 quilt blocks, numbered 1 to 9"],
+ ["08_p233_finish_quilt.jpg","Finish the Quilt! — p.233","the block with only a pentagon · the border pattern · the path in the grid"],
  ["09_p234_my_journal.jpg","My Journal — p.234","tell what you learned about figures"]
 ];
 var VIDEO=[];

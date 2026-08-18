@@ -246,42 +246,23 @@ body.show-tr .tr{display:block}
 <canvas id="starfield"></canvas>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
-    <span class="title">Expedição Brasil &#129517;</span>
-    <button class="iconbtn dicabtn" id="dica" title="Ver em português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
-    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
-    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Shape Quest &#128208;</span>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
   <div class="wrap"><div id="stage"></div></div>
 </div>
 
+<!-- Sem advUI: os rotulos padrao do serafina-adventure.js ja sao
+     ingles com a traducao no <span class="tr"> da bandeira. O GEO
+     precisava sobrescrever porque a materia dele era em portugues. -->
 <script>window.SERA_CFG={trKey:'mat2_tr',lang:'en-US',rate:.85,stars:140,
-  home:'../index.html', homeMsg:'Voltar ao menu do site?',
-  advUI:{
-    again:'↻ jogar de novo',
-    listen:'🔊 Ouvir a lição<span class="tr">a 🇧🇷 mostra a tradução</span>',
-    ready:'⚔️ Estou pronta!<span class="tr"></span>',
-    mapShort:'🗺️ Mapa',
-    map:'🗺️ Mapa<span class="tr"></span>',
-    retry:'🔁 Tentar de novo!<span class="tr"></span>',
-    battle:'⚔️ Encarar o desafio!<span class="tr"></span>',
-    bossIntro:'Responda as perguntas para vencer!', bossIntroPt:'',
-    win:'🏆 Você conseguiu!<span class="tr"></span>',
-    badges1:'Mostrar meus emblemas!', badges1Pt:'',
-    badgesN:'Próximo emblema',    badgesNPt:'',
-    backMap:'🗺️ Voltar ao mapa<span class="tr"></span>',
-    listenTitle:'Ouvir',
-    yes:'🎉 Isso! <span class="tr"></span>',
-    next:'➡️ Próximo<span class="tr"></span>',
-    notYet:'🇧🇷 Ainda não… a resposta é:<span class="tr"></span>',
-    remember:'Lembre: <span class="tr"></span>',
-    keepGoing:'➡️ Seguir em frente!<span class="tr"></span>',
-    goesIn:' vai em…', goesInPt:'',
-    phaseDone:'Fase concluída!<span class="tr"></span>',
-    nextPhase:'➡️ Próxima fase<span class="tr"></span>'},somKey:'mat2_som'};</script>
+  home:'../index.html', somKey:'mat2_som'};</script>
 <script src="serafina-core.js?v=20260817"></script>
 <script src="serafina-adventure.js?v=20260817"></script>
 <script>
@@ -329,7 +310,8 @@ function galeriaFiguras(box){
   box.innerHTML='<div class="mapreg">'
    +F.map(function(f,i){return '<button class="mrbtn" data-i="'+i+'" style="--rc:'+f.co+'">'
      +'<span class="mre">'+svg(f)+'</span><span class="mrn">'+f.n+'</span></button>';}).join('')
-   +'</div><div class="mrinfo" id="mrinfo">Toque numa figura para contar os lados. 👆</div>';
+   +'</div><div class="mrinfo" id="mrinfo">Tap a figure to count its sides. 👆'
+   +'<span class="tr">Toque numa figura para contar os lados.</span></div>';
   var info=box.querySelector('#mrinfo');
   Array.prototype.forEach.call(box.querySelectorAll('.mrbtn'),function(b){
     b.addEventListener('click',function(){
@@ -337,7 +319,7 @@ function galeriaFiguras(box){
       Array.prototype.forEach.call(box.querySelectorAll('.mrbtn'),function(x){x.classList.remove('on');});
       b.classList.add('on');
       info.style.borderColor=f.co;
-      info.innerHTML='<b style="color:'+f.co+'">'+f.n+' · '+f.pt+'</b><br>'+f.s+' &middot; '+f.v;
+      info.innerHTML='<b style="color:'+f.co+'">'+f.n+'</b><span class="tr">'+f.pt+'</span><br>'+f.s+' &middot; '+f.v;
       if(window.say)say(f.n+'. '+f.s+'. '+f.v);
     });
   });
@@ -470,7 +452,7 @@ var ADVENTURE={
 
  /* ===== MINI CHEFE 1 ===== */
  { id:'boss1', boss:true, icon:'👑', color:'#fbbf24',
-   name:'Mini chefe!', namePt:'revisão das fases 1, 2 e 3',
+   name:'Mini boss!', namePt:'revisão das fases 1, 2 e 3',
    intro:'4 questions from phases 1, 2 and 3!',
    introPt:'4 perguntas das fases 1, 2 e 3!',
    from:['f1','f2','f3'], count:4 },

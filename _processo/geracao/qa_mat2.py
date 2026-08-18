@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""qa_mat2.py — gate automatico dos produtos MAT2.
+"""qa_mat2.py — gate automatico da home e dos produtos MAT2.
 
 Abre cada HTML num Chromium headless em 3 viewports e reprova:
   · erro de console / excecao de pagina (JS quebrado)
@@ -66,7 +66,7 @@ def servidor():
     em file:// (o navegador bloqueia). O QA tem de ver a mesma coisa que o
     GitHub Pages serve."""
     import functools, http.server, socketserver, threading
-    h = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(FER))
+    h = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(RAIZ))
     socketserver.TCPServer.allow_reuse_address = True
     srv = socketserver.TCPServer(("127.0.0.1", 0), h)
     threading.Thread(target=srv.serve_forever, daemon=True).start()
@@ -75,7 +75,8 @@ def servidor():
 
 def main():
     from playwright.sync_api import sync_playwright
-    alvos = sys.argv[1:] or sorted(x.name for x in FER.glob("MAT2_*.html"))
+    alvos = sys.argv[1:] or (["index.html"] +
+             sorted("ferramentas/" + x.name for x in FER.glob("MAT2_*.html")))
     total = 0
     srv, base = servidor()
     with sync_playwright() as pw:

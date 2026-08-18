@@ -280,22 +280,22 @@ body.show-tr .endbtn .etr{display:block}
 <canvas id="starfield"></canvas>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
-    <span class="title">Simulado &mdash; Comunidades e lugares</span>
-    <button class="iconbtn dicabtn" id="dica" title="Ver em português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
-    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
-    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Practice test &mdash; 2-D Figures</span>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
   <div class="bar"><span id="bar"></span></div>
   <div class="stage"><div class="card" id="card"></div></div>
 </div>
 <div class="qnav" id="qnav">
-  <button class="qnav-btn" id="navPrev" onclick="prevQ()" title="Voltar">&#8249;<span class="ql">Voltar</span></button>
-  <button class="qnav-btn jump" id="navJump" onclick="jumpUnanswered()" title="Próxima sem resposta">&#9193;<span class="ql">Sem resposta</span></button>
-  <button class="qnav-btn" id="navNext" onclick="nextQ()" title="Avançar">&#8250;<span class="ql">Avançar</span></button>
+  <button class="qnav-btn" id="navPrev" onclick="prevQ()" title="Back · Voltar">&#8249;<span class="ql">Back</span></button>
+  <button class="qnav-btn jump" id="navJump" onclick="jumpUnanswered()" title="Next unanswered · Próxima sem resposta">&#9193;<span class="ql">Unanswered</span></button>
+  <button class="qnav-btn" id="navNext" onclick="nextQ()" title="Next · Avançar">&#8250;<span class="ql">Next</span></button>
 </div>
 
 <script>
@@ -614,12 +614,12 @@ function updateArrows(){
     /* every question answered → turn the jump button into "See results" so the
        child always reaches the grade, even when answering out of order */
     jb.disabled=false; jb.classList.add('results');
-    jb.onclick=fim; jb.title='Ver o resultado';
+    jb.onclick=fim; jb.title='See my score';
     jb.innerHTML='\u{1F389}<span class="ql">Resultado</span>';
   }else{
     jb.classList.remove('results');
-    jb.onclick=jumpUnanswered; jb.title='Próxima sem resposta';
-    jb.innerHTML='⏩<span class="ql">Sem resposta</span>';
+    jb.onclick=jumpUnanswered; jb.title='Next unanswered';
+    jb.innerHTML='⏩<span class="ql">Unanswered</span>';
     var ji=nextUnansweredIdx();
     jb.disabled = ji<0 || ji===cur;   /* só habilita se houver OUTRA questão sem resposta */
   }
@@ -631,8 +631,8 @@ function intro(){
   $('qnav').classList.remove('show');
   $('card').innerHTML=`<div class="intro">
     <div class="qfig">\u{1F30E}</div>
-    <div class="q">Vamos treinar para a prova!</div>
-    <div class="tr qtr">Vamos estudar para a prova!</div>
+    <div class="q">Let's practise for the test!</div>
+    <div class="tr qtr">Vamos treinar para a prova!</div>
     <p>Você escolhe o assunto e o tamanho do treino.
        <span class="tr">Você escolhe o assunto e o tamanho do treino.</span></p>
     <div class="task">1 · Escolha os temas</div>
@@ -641,9 +641,9 @@ function intro(){
         <span class="tem">${t.emo}</span><span>${t.en}</span><span class="ttr tr">${t.pt}</span></button>`).join('')}
     </div>
     <p class="themehint" id="themehint"></p>
-    <div class="task">2 · Toque num número para começar</div>
+    <div class="task">2 · Tap a number to start<span class="tr">toque num número para começar</span></div>
     <div class="sizewrap">
-      ${[5,10,25,50,100].map(n=>`<button class="sizebtn${n===roundSize?' sel':''}" onclick="start(${n})">${n}<span class="sl">perguntas</span></button>`).join('')}
+      ${[5,10,25,50,100].map(n=>`<button class="sizebtn${n===roundSize?' sel':''}" onclick="start(${n})">${n}<span class="sl">questions</span></button>`).join('')}
     </div>
     <p class="startnote">Comece com 10 e vá aumentando. <span class="tr">Comece com 10 e depois aumente.</span></p>
   </div>`;
@@ -656,7 +656,7 @@ function toggleTheme(k){
 function start(n){
   if(selThemes.size===0)return;
   roundSize=n; buildDeck(n);
-  if(total===0){ const h=$('themehint'); if(h)h.textContent='Escolha ao menos um tema.'; return; }
+  if(total===0){ const h=$('themehint'); if(h)h.innerHTML='Pick at least one topic.<span class="tr">escolha ao menos um tema</span>'; return; }
   render();
 }
 function render(){
@@ -669,8 +669,8 @@ function render(){
 /* redo THIS question — clears the answer, no score effect (accidental taps) */
 function addRedoBtn(){
   const b=document.createElement('button');
-  b.className='redoq';b.id='redoq';b.title='Refazer esta pergunta';
-  b.innerHTML='↺<span class="rl">refazer</span>';
+  b.className='redoq';b.id='redoq';b.title='Do this question again';
+  b.innerHTML='↺<span class="rl">again</span>';
   b.onclick=redoQ;
   $('card').appendChild(b);
 }
@@ -679,9 +679,9 @@ function redoQ(){
   deck[cur]=makeItem(deck[cur]._type,deck[cur]._src);
   render();
 }
-function head(it,label,cls){return `<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge ${cls}">${label}</span></div>
+function head(it,label,cls){return `<div class="qhead"><span class="qnum">Question ${cur+1} of ${total}</span><span class="badge ${cls}">${label}</span></div>
   ${it.fig?`<div class="qfig">${it.fig}</div>`:''}${it.en?`<div class="q">${it.en}</div><div class="tr qtr">${it.pt}</div>`:''}
-  ${it.en?`<button class="speak" onclick="say('${esc(it.en)}')">&#128266; Ouvir</button>`:''}`;}
+  ${it.en?`<button class="speak" onclick="say('${esc(it.en)}')">&#128266; Listen</button>`:''}`;}
 /* ============================================================
    REVELAR O BOTAO DEPOIS DE RESPONDER — e o caminho para o resultado.
 
@@ -693,8 +693,8 @@ function head(it,label,cls){return `<div class="qhead"><span class="qnum">Pergun
    como ver o resultado.
 
    Alem de mostrar, aqui se REESCREVE o rotulo: a resposta que acabou de ser
-   dada pode ter sido a ultima que faltava, e ai o botao deixa de ser "Avancar"
-   e passa a ser "Ver o resultado". O rotulo tinha sido calculado no render,
+   dada pode ter sido a ultima que faltava, e ai o botao deixa de ser "Next"
+   e passa a ser "See my score". O rotulo tinha sido calculado no render,
    antes dessa resposta existir.
    ============================================================ */
 function mostraNext(){
@@ -702,19 +702,19 @@ function mostraNext(){
   const acabou=(cur===total-1)||allAnswered();
   b.style.display='block'; b.classList.add('show');
   b.classList.toggle('result',acabou);
-  b.innerHTML=acabou?'Ver o resultado \u{1F389}':'Avan\u00e7ar \u2192';
+  b.innerHTML=acabou?'See my score \u{1F389}':'Next \u2192';
   updateArrows();                       /* a seta de cima tambem vira Resultado */
   if(acabou){
     /* em tela pequena o botao pode nascer abaixo da dobra: traz para a vista */
     try{ b.scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){}
   }
 }
-function nextBtn(hidden){return `<button class="next" id="next" ${hidden?'style="display:none"':''} onclick="next()">${(cur===total-1||allAnswered())?'Ver o resultado \u{1F389}':'Avançar →'}</button>`;}
+function nextBtn(hidden){return `<button class="next" id="next" ${hidden?'style="display:none"':''} onclick="next()">${(cur===total-1||allAnswered())?'See my score \u{1F389}':'Next →'}</button>`;}
 
 /* MC */
 function renderMC(it){
-  $('card').innerHTML=head(it,'Escolha uma','mc')+
-   `<div class="task">Toque na resposta certa</div>
+  $('card').innerHTML=head(it,'Pick one','mc')+
+   `<div class="task">Tap the right answer<span class="tr">toque na resposta certa</span></div>
     <div class="opts">${it.opts.map((o,i)=>`<button class="opt" onclick="ansMC(${i})"><span>${o.t}</span>${o.pt?`<span class="otr">${o.pt}</span>`:''}</button>`).join('')}</div>
     <div class="fb" id="fb"></div>`+nextBtn(!it.done);
   if(it.done) paintMC(it);
@@ -730,14 +730,14 @@ function paintMC(it){
   b.forEach(x=>x.disabled=true);
   if(it.opts[i].ok){b[i].classList.add('ok');$('fb').textContent='Isso mesmo! \u{1F31F}';$('fb').className='fb ok';}
   else{b[i].classList.add('no');it.opts.forEach((o,k)=>{if(o.ok)b[k].classList.add('ok');});
-    $('fb').textContent='A verde é a certa \u{1F60A}';$('fb').className='fb no';}
+    $('fb').innerHTML='The green one is right \u{1F60A}<span class="tr">a verde é a certa</span>';$('fb').className='fb no';}
   mostraNext();
 }
 
 /* V/F */
 function renderVF(it){
   $('card').innerHTML=head(it,'Verdadeiro ou falso','vf')+
-   `<div class="task">Toque em Verdadeiro ou em Falso</div>
+   `<div class="task">Tap True or False<span class="tr">toque em Verdadeiro ou Falso</span></div>
     <div class="vfwrap">
       <button class="vfbtn" id="vT" onclick="ansVF(true)"><span class="big">✅</span>Verdadeiro</button>
       <button class="vfbtn" id="vF" onclick="ansVF(false)"><span class="big">❌</span>Falso</button>
@@ -755,17 +755,17 @@ function paintVF(it){
   const rightBtn=it.ans?T:F;
   if(it.pick===it.ans){rightBtn.classList.add('ok');$('fb').textContent='Isso mesmo! \u{1F31F}';$('fb').className='fb ok';}
   else{(it.pick?T:F).classList.add('no');rightBtn.classList.add('ok');
-    $('fb').textContent='A verde é a certa \u{1F60A}';$('fb').className='fb no';}
+    $('fb').innerHTML='The green one is right \u{1F60A}<span class="tr">a verde é a certa</span>';$('fb').className='fb no';}
   mostraNext();
 }
 
 /* COMPLETE */
 function renderFill(it){
-  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge fill">Complete a frase</span></div>
-   <button class="speak" onclick="say('${esc(it.pre+' '+it.ans+' '+it.post)}')">&#128266; Ouvir</button>
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Question ${cur+1} of ${total}</span><span class="badge fill">Finish the sentence</span></div>
+   <button class="speak" onclick="say('${esc(it.pre+' '+it.ans+' '+it.post)}')">&#128266; Listen</button>
    <div class="fillsent">${it.pre} <span class="blank" id="blank">_____</span> ${it.post}</div>
    <div class="tr qtr">${it.pt}</div>
-   <div class="task">Toque na palavra que completa</div>
+   <div class="task">Tap the word that fits<span class="tr">toque na palavra que completa</span></div>
    <div class="wbank">${it.chips.map((c,i)=>`<button class="wchip" onclick="ansFill(${i})"><span>${c.w}</span>${WPT[c.w]?`<span class="otr">${WPT[c.w]}</span>`:''}</button>`).join('')}</div>
    <div class="fb" id="fb"></div>`+nextBtn(!it.done);
   if(it.done) paintFill(it);
@@ -784,21 +784,21 @@ function paintFill(it){
   else{chips[i].classList.add('no');$('blank').classList.add('no');
     it.chips.forEach((c,k)=>{if(c.ok)chips[k].classList.add('ok');});
     $('blank').textContent=it.ans;$('blank').classList.remove('no');$('blank').classList.add('ok');
-    $('fb').textContent='A palavra certa é "'+it.ans+'" \u{1F60A}';$('fb').className='fb no';}
+    $('fb').innerHTML='The right word is "'+it.ans+'" \u{1F60A}<span class="tr">a palavra certa</span>';$('fb').className='fb no';}
   mostraNext();
 }
 
 /* MATCH */
 function renderMatch(it){
-  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge match">Ligue</span></div>
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Question ${cur+1} of ${total}</span><span class="badge match">Match</span></div>
    <div class="q">${it.t}</div>
    <div class="tr qtr">${it.tpt}</div>
-   <button class="speak" onclick="say('${esc(it.t)}')">&#128266; Ouvir</button>
-   <div class="task">Toque no item, depois no grupo certo</div>
+   <button class="speak" onclick="say('${esc(it.t)}')">&#128266; Listen</button>
+   <div class="task">Tap the item, then the right group<span class="tr">toque no item, depois no grupo certo</span></div>
    <div class="mboard" id="mboard"></div>
    <div class="mcats" id="mcats">${it.cats.map((c,ci)=>`<button class="mcat" onclick="pickCat(${ci})"><span>${c[0]}</span>${c[1]?`<span class="otr">${c[1]}</span>`:''}</button>`).join('')}</div>
    <div class="fb" id="fb"></div>
-   <button class="next" id="mcheck" style="display:none" onclick="checkMatch()">Conferir &#9989;</button>`+nextBtn(true);
+   <button class="next" id="mcheck" style="display:none" onclick="checkMatch()">Check &#9989;</button>`+nextBtn(true);
   drawMatch();
   if(it.done) paintMatch(it);
 }
@@ -839,21 +839,21 @@ function paintMatch(it){
   $('mcheck').style.display='none';
   const all=it.items.length;
   if(right===all){$('fb').textContent='Tudo certo! \u{1F31F}';$('fb').className='fb ok';}
-  else{$('fb').textContent=right+' de '+all+' certas — o verde mostra a resposta \u{1F60A}';$('fb').className='fb mid';}
+  else{$('fb').innerHTML=right+' of '+all+' right — the green shows the answer \u{1F60A}<span class="tr">o verde mostra a resposta</span>';$('fb').className='fb mid';}
   mostraNext();
 }
 
 /* ORDER */
 function renderOrder(it){
-  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge order">Coloque em ordem</span></div>
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Question ${cur+1} of ${total}</span><span class="badge order">Put in order</span></div>
    <div class="q">${it.t}</div>
    <div class="tr qtr">${it.tpt}</div>
-   <button class="speak" onclick="say('${esc(it.t)}')">&#128266; Ouvir</button>
-   <div class="task">Toque na ordem certa — toque de novo para tirar</div>
+   <button class="speak" onclick="say('${esc(it.t)}')">&#128266; Listen</button>
+   <div class="task">Tap them in the right order — tap again to take one out<span class="tr">toque na ordem certa; toque de novo para tirar</span></div>
    <div class="oseq" id="oseq"></div>
    <div class="opool" id="opool"></div>
    <div class="fb" id="fb"></div>
-   <button class="next" id="ocheck" style="display:none" onclick="checkOrder()">Conferir &#9989;</button>`+nextBtn(true);
+   <button class="next" id="ocheck" style="display:none" onclick="checkOrder()">Check &#9989;</button>`+nextBtn(true);
   drawOrder();
   if(it.done) paintOrder(it);
 }
@@ -901,16 +901,16 @@ function paintOrder(it){
 
 /* OPEN */
 function renderOpen(it){
-  $('card').innerHTML=head(it,'Responda você','open')+
-   `<div class="task">Responda de cabeça e depois confira</div>
+  $('card').innerHTML=head(it,'Your answer','open')+
+   `<div class="task">Answer in your head, then check<span class="tr">responda de cabeça e depois confira</span></div>
     <div class="writeline">&#9999;&#65039; responda em voz alta</div>
-    <button class="next show" id="seebtn" onclick="reveal()">Ver a resposta &#128065;&#65039;</button>
+    <button class="next show" id="seebtn" onclick="reveal()">Show the answer &#128065;&#65039;</button>
     <div class="reveal" id="rev"><span class="lab">Resposta</span>${it.men}<div class="tr">${it.menpt||''}</div></div>
-    <div class="hint" id="selfhint" style="display:none">Você acertou?</div>
+    <div class="hint" id="selfhint" style="display:none">Did you get it?<span class="tr">você acertou?</span></div>
     <div class="selfwrap" id="self">
-      <button class="selfbtn acertei" onclick="self('ok')"><span class="big">\u{1F604}</span>Acertei</button>
-      <button class="selfbtn parcial" onclick="self('mid')"><span class="big">\u{1F610}</span>Mais ou menos</button>
-      <button class="selfbtn errei" onclick="self('no')"><span class="big">\u{1F605}</span>Ainda não</button>
+      <button class="selfbtn acertei" onclick="self('ok')"><span class="big">\u{1F604}</span>I got it</button>
+      <button class="selfbtn parcial" onclick="self('mid')"><span class="big">\u{1F610}</span>Almost</button>
+      <button class="selfbtn errei" onclick="self('no')"><span class="big">\u{1F605}</span>Not yet</button>
     </div>
     <div class="fb" id="fb"></div>`+nextBtn(true);
   if(it.revealed||it.done){$('rev').classList.add('show');$('seebtn').style.display='none';$('selfhint').style.display='block';$('self').classList.add('show');}
@@ -925,9 +925,9 @@ function self(v){
 }
 function paintSelf(it){
   document.querySelectorAll('.selfbtn').forEach(b=>b.disabled=true);
-  if(it.selfv==='ok'){document.querySelector('.selfbtn.acertei').classList.add('sel');$('fb').textContent='Muito bem! \u{1F31F}';$('fb').className='fb ok';}
-  else if(it.selfv==='mid'){document.querySelector('.selfbtn.parcial').classList.add('sel');$('fb').textContent='Quase lá! \u{1F44D}';$('fb').className='fb mid';}
-  else{document.querySelector('.selfbtn.errei').classList.add('sel');$('fb').textContent='Agora você sabe! \u{1F4AA}';$('fb').className='fb no';}
+  if(it.selfv==='ok'){document.querySelector('.selfbtn.acertei').classList.add('sel');$('fb').innerHTML='Well done! \u{1F31F}<span class="tr">muito bem!</span>';$('fb').className='fb ok';}
+  else if(it.selfv==='mid'){document.querySelector('.selfbtn.parcial').classList.add('sel');$('fb').innerHTML='Almost there! \u{1F44D}<span class="tr">quase lá!</span>';$('fb').className='fb mid';}
+  else{document.querySelector('.selfbtn.errei').classList.add('sel');$('fb').innerHTML='Now you know! \u{1F4AA}<span class="tr">agora você sabe!</span>';$('fb').className='fb no';}
   mostraNext();
 }
 
@@ -942,7 +942,7 @@ function fim(){
   $('bar').style.width='100%';
   $('qnav').classList.remove('show');
   const score=curScore(), s=Math.round(score*10)/10, pct=total?score/total:0;
-  const msg=pct>=.9?'Você arrasou! \u{1F3C6}':pct>=.6?'Muito bem! Continue treinando.':'Bom treino — jogue de novo para aprender mais!';
+  const msg=pct>=.9?'You nailed it! \u{1F3C6}<span class="tr">você arrasou!</span>':pct>=.6?'Well done! Keep practising.<span class="tr">muito bem! continue treinando.</span>':'Good practice — play again to learn more!<span class="tr">bom treino: jogue de novo.</span>';
   const nWrong=wrongItems().length;
   const redoBtn=nWrong?`<button class="endbtn redo" onclick="redoWrong()">↺ Refazer as que errei (${nWrong})<span class="etr"></span></button>`:'';
   $('card').innerHTML=`<div class="fim"><div class="big">\u{1F3C6}</div>

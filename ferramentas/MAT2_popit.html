@@ -204,22 +204,22 @@ body.show-tr .btn .etr{display:block}
 <canvas id="starfield"></canvas>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
-    <span class="title">Estoura o balão</span>
-    <button class="iconbtn dicabtn" id="dica" title="Ver em português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
-    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
-    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Pop it!</span>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
   <div class="bar"><span id="bar"></span></div>
   <div class="stage"><div class="card" id="card"></div></div>
 </div>
 <div class="pen" id="pen">&#128394;&#65039;</div>
 <div class="qnav" id="qnav">
-  <button class="qnav-btn" id="navPrev" onclick="prevGame()" title="Jogo anterior">&#8249;<span class="ql">Voltar</span></button>
-  <button class="qnav-btn" id="navNext" onclick="nextGame()" title="Próximo jogo">&#8250;<span class="ql">Próximo</span></button>
+  <button class="qnav-btn" id="navPrev" onclick="prevGame()" title="Previous game · Jogo anterior">&#8249;<span class="ql">Back</span></button>
+  <button class="qnav-btn" id="navNext" onclick="nextGame()" title="Next game · Próximo jogo">&#8250;<span class="ql">Next</span></button>
 </div>
 <script src="MAT2_data.js?v=20260817"></script>
 <script>
@@ -266,18 +266,18 @@ function intro(){
   $('qnav').classList.remove('show');
   $('card').innerHTML='<div class="intro">'
     +'<div class="qfig">\u{1F388}</div>'
-    +'<div class="q">Estoura o balão \u{1F58A}️</div>'
-    +'<div class="tr" style="font-size:1rem;margin-top:2px">Toque na \u{1F1E7}\u{1F1F7} para ler em português.</div>'
-    +'<p>Você recebe um <b>alvo</b> (por exemplo <b>Nordeste</b>). Use a caneta para <b>estourar só os balões</b> que combinam com ele. '
-    +'Se estourar um errado, ele só balança — e mostra a que grupo ele pertence de verdade.'
-    +'<span class="tr">Leia o balão em voz alta em inglês antes de estourar. Errar não tira ponto — é assim que se aprende.</span></p>'
+    +'<div class="q">Pop it! \u{1F58A}️</div>'
+    +'<div class="tr" style="font-size:1rem;margin-top:2px">Estoura o balão \u2014 toque na \u{1F1E7}\u{1F1F7} sempre que quiser o português.</div>'
+    +'<p>You get a <b>target</b> (for example <b>4 sides</b>). Use the pen to <b>pop only the balloons</b> that match it. '
+    +'If you pop a wrong one it just wobbles — and shows you which group it really belongs to.'
+    +'<span class="tr">Você recebe um alvo (por exemplo 4 lados) e estoura só os balões que combinam. Errar não tira ponto — é assim que se aprende.</span></p>'
     +'<div class="gamelist">'
     +GAMES.map((g,i)=>'<button class="gamechip'+(doneGames[i]?' done':'')+'" onclick="openGame('+i+')">'
         +'<span class="ge">'+g.emo+'</span>'
         +'<span class="gt"><b>'+g.en+'</b><span class="gtr tr">'+g.pt+'</span></span>'
         +'<span class="gn">'+(doneGames[i]?'✔':(i+1))+'</span></button>').join('')
     +'</div>'
-    +'<button class="startbtn" onclick="openGame(0)">▶ Começar pelo nível 1</button>'
+    +'<button class="startbtn" onclick="openGame(0)">▶ Start with level 1</button>'
     +'</div>';
 }
 function openGame(i){ gi=i; ti=0; startRound(); }
@@ -316,7 +316,7 @@ function render(){
     +'<span class="tt"><span class="tlab">Estoure todos de…</span>'
     +'<span class="tname">'+col.en+'</span><span class="ttr tr">'+col.pt+'</span></span>'
     +'<button class="listen" onclick="say(\'Estoure todos de '+esc(col.en)+'\')">\u{1F50A}</button></div>';
-  html+='<div class="subhint">Toque nos balões que são <b>'+col.en+'</b>.<span class="tr">'+(col.pt?col.pt:'')+'</span></div>';
+  html+='<div class="subhint">Pop the balloons that are <b>'+col.en+'</b>.<span class="tr">Estoure os balões que são '+(col.pt?col.pt:col.en)+'.</span></div>';
   /* play area */
   html+='<div class="popcount" id="popcount"></div>';
   html+='<div class="playwrap"><div class="playarea" id="playarea">';
@@ -347,7 +347,7 @@ function textOn(hex){var n=parseInt(hex.slice(1),16);var l=(0.299*((n>>16)&255)+
 function updateCount(){
   var n=Object.keys(popped).length;
   /* nao revela o total: a crianca e quem decide quando achou todos */
-  var c=$('popcount'); if(c)c.innerHTML=n?('Estourados: <b>'+n+'</b> \u{1F388}'):'Estoure os que combinam!';
+  var c=$('popcount'); if(c)c.innerHTML=n?('Popped: <b>'+n+'</b> \u{1F388}'):'Pop the ones that match!';
 }
 
 /* ============================================================
@@ -373,7 +373,7 @@ function pop(i){
     var realCol=G().cols.find(c=>c.id===b.card.col);
     var tag=el.querySelector('.realtag'); if(tag&&realCol)tag.innerHTML='→ '+realCol.emo+' '+realCol.en;
     wrongHit[i]=true;
-    var fb=$('fb'); if(fb){fb.className='fb no';fb.innerHTML='Esse não — ele é <b>'+(realCol?realCol.en:'')+'</b>.<span class="tr" style="font-size:.82rem"> '+(realCol&&realCol.pt?realCol.pt:'')+'</span>';}
+    var fb=$('fb'); if(fb){fb.className='fb no';fb.innerHTML='Not that one — it is <b>'+(realCol?realCol.en:'')+'</b>.<span class="tr" style="font-size:.82rem"> Esse não: ele é '+(realCol&&realCol.pt?realCol.pt:'')+'</span>';}
     setTimeout(function(){ if(el){el.classList.remove('wrong','showtag');} },1700);
   }
 }
@@ -385,8 +385,8 @@ function clearRound(){
   if($('tip'))$('tip').classList.add('show');
   if(c){
     c.classList.add('show');
-    $('clearmsg').innerHTML='Alvo concluído! \u{1F44F}';
-    $('clearsub').textContent=last?'Nível '+(gi+1)+' concluído!':'Agora o próximo alvo…';
+    $('clearmsg').innerHTML='Target done! \u{1F44F}';
+    $('clearsub').textContent=last?'Level '+(gi+1)+' complete!':'Now the next target…';
   }
   var fb=$('fb'); if(fb)fb.innerHTML='';
   buildActions();
@@ -400,18 +400,18 @@ function clearRound(){
 function buildActions(){
   var a=$('actions'); if(!a)return;
   var g=G();
-  var summary='<button class="btn" onclick="cieSummary.show(G())">\u{1F4CB} Ver o resumo<span class="etr"></span></button>';
-  var reset='<button class="btn ghost" onclick="startRound()">↺ Refazer este alvo<span class="etr"></span></button>';
-  var menu='<button class="btn ghost" onclick="intro()">\u{1F3AE} Menu dos níveis<span class="etr"></span></button>';
+  var summary='<button class="btn" onclick="cieSummary.show(G())">\u{1F4CB} Show the summary<span class="etr">ver o resumo</span></button>';
+  var reset='<button class="btn ghost" onclick="startRound()">↺ Do this target again<span class="etr">refazer este alvo</span></button>';
+  var menu='<button class="btn ghost" onclick="intro()">\u{1F3AE} Level menu<span class="etr">menu dos níveis</span></button>';
   if(!roundDone){
-    a.innerHTML='<button class="btn primary" onclick="checkRound()">\u{2705} Estourei todos!<span class="etr"></span></button>'+summary+reset+menu;
+    a.innerHTML='<button class="btn primary" onclick="checkRound()">\u{2705} I popped them all!<span class="etr">estourei todos</span></button>'+summary+reset+menu;
   }else{
     var last=ti>=g.cols.length-1;
     if(!last){
-      a.innerHTML='<button class="btn primary" onclick="nextTarget()">▶ Próximo alvo<span class="etr"></span></button>'+summary+reset+menu;
+      a.innerHTML='<button class="btn primary" onclick="nextTarget()">▶ Next target<span class="etr">próximo alvo</span></button>'+summary+reset+menu;
     }else{
       var lastGame=gi>=GAMES.length-1;
-      var lbl=lastGame?'\u{1F3C6} Terminar<span class="etr"></span>':'▶ Próximo nível<span class="etr"></span>';
+      var lbl=lastGame?'\u{1F3C6} Finish<span class="etr">terminar</span>':'▶ Next level<span class="etr">próximo nível</span>';
       a.innerHTML='<button class="btn primary" onclick="afterLevel()">'+lbl+'</button>'+summary+reset+menu;
     }
   }
@@ -421,7 +421,7 @@ function checkRound(){
   if(roundDone)return;
   if(Object.keys(popped).length>=correctTotal){ clearRound(); }
   else{
-    var fb=$('fb'); if(fb){fb.className='fb no';fb.innerHTML='Olhe de novo — ainda tem balão para estourar! \u{1F50E}';}
+    var fb=$('fb'); if(fb){fb.className='fb no';fb.innerHTML='Look again — there are still balloons to pop! \u{1F50E}<span class="tr">Olhe de novo: ainda tem balão para estourar.</span>';}
   }
 }
 function nextTarget(){ if(ti<G().cols.length-1){ ti++; startRound(); } }
@@ -448,11 +448,11 @@ function finish(){
   $('qnav').classList.remove('show');
   var n=Object.keys(doneGames).length;
   $('card').innerHTML='<div class="fim"><div class="big">\u{1F3C6}</div>'
-    +'<div class="score">'+n+' / '+GAMES.length+' níveis concluídos</div>'
-    +'<div class="sub">Mandou bem, explorador do Brasil! \u{1F5FA}\u{FE0F}</div>'
+    +'<div class="score">'+n+' / '+GAMES.length+' levels complete</div>'
+    +'<div class="sub">Nice work, shape explorer! \u{1F4D0}<span class="tr">Mandou bem, explorador das figuras!</span></div>'
     +'<div class="actions">'
     +'<button class="btn primary" onclick="intro()">\u{1F3AE} Jogar de novo<span class="etr"></span></button>'
-    +'<button class="btn" onclick="goHome()">\u{1F3E0} Menu<span class="etr">Menu do site</span></button>'
+    +'<button class="btn" onclick="goHome()">\u{1F3E0} Menu<span class="etr">menu do site</span></button>'
     +'</div></div>';
   celebrate(60);
 }
