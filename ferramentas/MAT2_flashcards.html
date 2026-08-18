@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
-<title>Flashcards — Geografia · Comunidades e lugares</title>
+<title>Flashcards — Math · 2-D Figures</title>
 <link rel="stylesheet" href="serafina-core.css?v=20260817">
 <style>
 :root{--fs:1;--bg:#0d0b1e;--bg2:#10322a;--ink:#f0fdf4;--soft:rgba(255,255,255,.58);--card:#13303a;--line:rgba(255,255,255,.13);--accent:#a78bfa;--accent2:#fbbf24;--tr:#fcd34d;--ok:#34d399;--no:#f87171;--rad:22px}
@@ -167,8 +167,9 @@ body.show-tr .tr{display:block}
 
 <script>
 /* ============================================================
-   FLASHCARDS — Geografia 2tri · Unidade 2
-   Banco em media/flashcards_geo2.json (mesma fonte do roteiro).
+   FLASHCARDS — Matematica 2tri · Unit 9 (2-D Geometry)
+   Banco em media/flashcards_mat2.json (mesma fonte do roteiro).
+   Materia EM INGLES: 'f' e 'v' em EN, 'd' e a traducao PT da bandeira.
    Ciclo: pergunta -> vira a carta -> "acertei / ainda não".
    O que a criança marcou como "ainda não" volta na rodada de
    revisão — é o único jeito de flashcard ensinar alguma coisa.
@@ -179,9 +180,9 @@ function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(M
 
 var DB=null, deck=[], idx=0, errados=[], acertos=0, atual=null, revisao=false;
 var feitos={};
-try{feitos=JSON.parse(localStorage.getItem('geo2_fc_feitos')||'{}');}catch(e){feitos={};}
+try{feitos=JSON.parse(localStorage.getItem('mat2_fc_feitos')||'{}');}catch(e){feitos={};}
 
-fetch('media/flashcards_geo2.json?v=20260810').then(function(r){return r.json();})
+fetch('media/flashcards_mat2.json?v=20260817').then(function(r){return r.json();})
  .then(function(j){DB=j;intro();})
  .catch(function(){ $('stage').innerHTML='<div class="intro"><div class="em">&#128533;</div>'
    +'<h1>Não consegui abrir os flashcards</h1><p>Se você abriu o arquivo direto do computador, '
@@ -193,7 +194,7 @@ function intro(){
   var total=DB.baralhos.reduce(function(n,b){return n+b.cards.length;},0);
   var h='<div class="intro"><div class="em">&#127183;</div>'
    +'<h1>Flashcards</h1>'
-   +'<p>Leia a pergunta, responda <b>de cabeça</b> e só depois vire a carta. '
+   +'<p>Leia a pergunta <b>em inglês</b>, responda de cabeça e só depois vire a carta. Se travar, toque na 🇧🇷 da barra de cima. '
    +'O que você marcar como <b>ainda não</b> volta no fim para você treinar de novo.</p>'
    +'<div class="decks">';
   DB.baralhos.forEach(function(b,i){
@@ -231,7 +232,7 @@ function carta(){
      +'<div class="face front">'
        +'<span class="lab">Pergunta</span>'
        +'<span class="txt">'+c.f+'</span>'
-       +(c.d?'<span class="dica tr">&#128161; '+c.d+'</span>':'')
+       +(c.d?'<span class="dica tr">&#127463;&#127479; '+c.d+'</span>':'')
        +'<span class="tap">&#128072; toque na carta para ver a resposta</span>'
      +'</div>'
      +'<div class="face back">'
@@ -268,7 +269,7 @@ function fim(){
   $('bar').style.width='100%';
   var total=deck.length;
   if(!revisao && atual && atual.key){ feitos[atual.key]=true;
-    try{localStorage.setItem('geo2_fc_feitos',JSON.stringify(feitos));}catch(e){} }
+    try{localStorage.setItem('mat2_fc_feitos',JSON.stringify(feitos));}catch(e){} }
   var pct=total?acertos/total:0;
   var msg=pct>=.9?'Você mandou muito bem! &#127942;'
         :pct>=.6?'Muito bem! Treine as que faltaram.'

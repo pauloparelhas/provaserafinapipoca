@@ -9,5 +9,9 @@
     "quiz": true,
     "flashcards": true
   },
-  "baixados": {}
+  "baixados": {
+    "video": "ferramentas\\media\\video_mat2_nb1_pt.mp4",
+    "quiz": "ferramentas\\media\\quiz_mat2_nlm.json",
+    "flashcards": "ferramentas\\media\\flashcards_mat2_nlm.json"
+  }
 }

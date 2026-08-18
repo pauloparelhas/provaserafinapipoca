@@ -1,0 +1,265 @@
+{
+ "title": "Geometria Questionário",
+ "questions": [
+  {
+   "question": "Qual figura possui exatamente 5 sides (lados) e 5 vertices (vértices)?",
+   "answerOptions": [
+    {
+     "text": "triangle (triângulo)",
+     "isCorrect": false,
+     "rationale": "Triângulos possuem apenas três lados e três vértices."
+    },
+    {
+     "text": "square (quadrado)",
+     "isCorrect": false,
+     "rationale": "Quadrados são figuras de quatro lados e quatro vértices."
+    },
+    {
+     "text": "pentagon (pentágono)",
+     "isCorrect": true,
+     "rationale": "O pentágono é definido por ter cinco linhas retas e cinco cantos onde elas se encontram."
+    },
+    {
+     "text": "hexagon (hexágono)",
+     "isCorrect": false,
+     "rationale": "Hexágonos possuem seis lados, um a mais do que o solicitado."
+    }
+   ],
+   "hint": "O nome desta figura começa com o prefixo 'penta', que significa cinco."
+  },
+  {
+   "question": "Qual destas figuras geométricas você encontraria no formato de um stop sign (placa de PARE)?",
+   "answerOptions": [
+    {
+     "text": "octagon (octógono)",
+     "isCorrect": true,
+     "rationale": "A placa de pare é um exemplo clássico de uma figura com oito lados iguais."
+    },
+    {
+     "text": "circle (círculo)",
+     "isCorrect": false,
+     "rationale": "Círculos são redondos, enquanto a placa de pare possui várias bordas retas."
+    },
+    {
+     "text": "rectangle (retângulo)",
+     "isCorrect": false,
+     "rationale": "Retângulos possuem apenas quatro lados, mas a placa de pare tem oito."
+    },
+    {
+     "text": "hexagon (hexágono)",
+     "isCorrect": false,
+     "rationale": "Hexágonos têm seis lados, o que é insuficiente para formar uma placa de pare padrão."
+    }
+   ],
+   "hint": "Pense em um animal marinho chamado 'octopus' e conte quantos braços ele tem."
+  },
+  {
+   "question": "O que é um vertex (vértice) em uma figura plana?",
+   "answerOptions": [
+    {
+     "text": "Cada uma das linhas retas da figura",
+     "isCorrect": false,
+     "rationale": "As linhas retas são chamadas de lados ou edges, não vértices."
+    },
+    {
+     "text": "O cantinho onde dois sides (lados) se encontram",
+     "isCorrect": true,
+     "rationale": "Vértices são os pontos de junção onde as extremidades de dois lados retos se tocam."
+    },
+    {
+     "text": "A parte de dentro da figura",
+     "isCorrect": false,
+     "rationale": "O interior é a área da figura, enquanto o vértice é um ponto específico na borda."
+    },
+    {
+     "text": "Uma linha curva que fecha um círculo",
+     "isCorrect": false,
+     "rationale": "Linhas curvas não formam vértices, pois não possuem cantos pontiagudos."
+    }
+   ],
+   "hint": "Em inglês, essa parte da figura também pode ser chamada de 'corner'."
+  },
+  {
+   "question": "Se você tem 3 figuras dentro de uma sacola e o total de sides (lados) é 13, quais figuras poderiam ser?",
+   "answerOptions": [
+    {
+     "text": "triangle (triângulo) + square (quadrado) + hexagon (hexágono)",
+     "isCorrect": true,
+     "rationale": "Somando os lados dessas figuras (3 + 4 + 6), chegamos ao total exato de 13."
+    },
+    {
+     "text": "3 triangles (triângulos)",
+     "isCorrect": false,
+     "rationale": "Três triângulos teriam um total de apenas 9 lados."
+    },
+    {
+     "text": "octagon (octógono) + triangle (triângulo) + square (quadrado)",
+     "isCorrect": false,
+     "rationale": "Essa combinação daria 15 lados (8 + 3 + 4), passando do total de 13."
+    },
+    {
+     "text": "pentagon (pentágono) + pentagon (pentágono) + square (quadrado)",
+     "isCorrect": false,
+     "rationale": "Dois pentágonos e um quadrado somariam 14 lados (5 + 5 + 4)."
+    }
+   ],
+   "hint": "Tente somar o número de lados de cada figura para ver qual grupo totaliza 13."
+  },
+  {
+   "question": "Quantos vertices (vértices) possui um circle (círculo)?",
+   "answerOptions": [
+    {
+     "text": "1",
+     "isCorrect": false,
+     "rationale": "Círculos não possuem pontos de encontro de linhas retas."
+    },
+    {
+     "text": "0",
+     "isCorrect": true,
+     "rationale": "Como o círculo é totalmente redondo e não tem lados retos, ele não possui nenhum cantinho."
+    },
+    {
+     "text": "3",
+     "isCorrect": false,
+     "rationale": "Três vértices pertencem ao triângulo, que possui lados retos."
+    },
+    {
+     "text": "Incontáveis",
+     "isCorrect": false,
+     "rationale": "Embora pareça complexo, na geometria básica, o círculo é definido por ter zero vértices."
+    }
+   ],
+   "hint": "Pense se você consegue encontrar algum 'corner' (cantinho) em uma moeda ou em um anel."
+  },
+  {
+   "question": "Qual destas letras maiúsculas possui uma line of symmetry (linha de simetria) deitada (horizontal)?",
+   "answerOptions": [
+    {
+     "text": "A",
+     "isCorrect": false,
+     "rationale": "A letra A só pode ser dividida de forma igual com uma linha em pé (vertical)."
+    },
+    {
+     "text": "M",
+     "isCorrect": false,
+     "rationale": "A letra M é simétrica apenas se cortada ao meio verticalmente."
+    },
+    {
+     "text": "C",
+     "isCorrect": true,
+     "rationale": "Se você traçar uma linha horizontal no meio da letra C, a parte de cima será o reflexo da parte de baixo."
+    },
+    {
+     "text": "V",
+     "isCorrect": false,
+     "rationale": "A letra V possui simetria vertical, não horizontal."
+    }
+   ],
+   "hint": "Imagine dobrar a letra de baixo para cima para ver se as pontas se encontram perfeitamente."
+  },
+  {
+   "question": "Quando você faz o movimento de flip (virar) em uma figura, o que acontece?",
+   "answerOptions": [
+    {
+     "text": "A figura anda para o lado sem girar",
+     "isCorrect": false,
+     "rationale": "Esse movimento de apenas deslizar é chamado de slide."
+    },
+    {
+     "text": "A figura vira como se estivesse refletida em um espelho",
+     "isCorrect": true,
+     "rationale": "O flip cria uma imagem espelhada (mirror image) da figura original."
+    },
+    {
+     "text": "A figura roda como os ponteiros de um relógio",
+     "isCorrect": false,
+     "rationale": "O movimento de rotação em volta de um ponto é chamado de turn."
+    },
+    {
+     "text": "A figura muda o seu número de lados",
+     "isCorrect": false,
+     "rationale": "Nenhum dos movimentos de padrão altera as características básicas da figura."
+    }
+   ],
+   "hint": "Pense no que você vê quando olha para um espelho ou vira uma página de um livro."
+  },
+  {
+   "question": "Onde você deve colocar a Mira (espelhinho vermelho) na palavra MOM para mostrar simetria?",
+   "answerOptions": [
+    {
+     "text": "Em pé, no meio da letra O",
+     "isCorrect": true,
+     "rationale": "Ao colocar a Mira no meio do O, o M de um lado é refletido para completar a palavra do outro lado."
+    },
+    {
+     "text": "Deitada, cruzando as três letras",
+     "isCorrect": false,
+     "rationale": "As letras M e O não possuem simetria horizontal que permita ler a palavra completa no reflexo."
+    },
+    {
+     "text": "Em pé, antes da primeira letra M",
+     "isCorrect": false,
+     "rationale": "Colocar a Mira antes da palavra não refletiria nada que completasse a escrita corretamente."
+    },
+    {
+     "text": "A palavra MOM não possui simetria",
+     "isCorrect": false,
+     "rationale": "MOM é um exemplo clássico de palavra simétrica devido à posição de suas letras."
+    }
+   ],
+   "hint": "A Mira deve dividir a palavra ao meio para que um lado 'espelhe' o outro."
+  },
+  {
+   "question": "Um hexagon (hexágono) pode ser encontrado em qual objeto do dia a dia?",
+   "answerOptions": [
+    {
+     "text": "Slice of pizza (fatia de pizza)",
+     "isCorrect": false,
+     "rationale": "Fatias de pizza geralmente lembram o formato de um triângulo."
+    },
+    {
+     "text": "Honeycomb cell (favo de mel)",
+     "isCorrect": true,
+     "rationale": "As abelhas constroem suas colmeias usando células de seis lados perfeitamente encaixadas."
+    },
+    {
+     "text": "Book cover (capa de livro)",
+     "isCorrect": false,
+     "rationale": "Capas de livros são tipicamente retangulares."
+    },
+    {
+     "text": "Clock face (relógio de parede)",
+     "isCorrect": false,
+     "rationale": "A maioria dos relógios de parede comuns tem o formato de um círculo."
+    }
+   ],
+   "hint": "Pense no formato das 'casinhas' dentro de uma colmeia de abelhas."
+  },
+  {
+   "question": "Se você girar uma figura (movimento turn), o que permanece igual?",
+   "answerOptions": [
+    {
+     "text": "O lugar onde ela está",
+     "isCorrect": false,
+     "rationale": "Ao girar, a figura muda sua orientação e muitas vezes sua posição exata no espaço."
+    },
+    {
+     "text": "O lado para onde ela aponta",
+     "isCorrect": false,
+     "rationale": "O objetivo do giro é justamente mudar a direção para a qual a figura está voltada."
+    },
+    {
+     "text": "O número de sides (lados) e vertices (vértices)",
+     "isCorrect": true,
+     "rationale": "Embora a posição mude, a figura continua sendo a mesma, mantendo todas as suas propriedades geométricas."
+    },
+    {
+     "text": "Nada permanece igual",
+     "isCorrect": false,
+     "rationale": "A forma e o tamanho da figura são preservados durante um movimento de padrão."
+    }
+   ],
+   "hint": "Pense se um triângulo deixa de ser um triângulo só porque você o rodou na mesa."
+  }
+ ]
+}

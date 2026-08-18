@@ -37,7 +37,7 @@ def testa(page, arquivo, vp):
     logs = []
     page.on("console", lambda m: logs.append((m.type, m.text)))
     page.on("pageerror", lambda e: logs.append(("pageerror", str(e))))
-    page.goto(arquivo.as_uri(), wait_until="load")
+    page.goto(arquivo, wait_until="load")
     page.wait_for_timeout(700)
     for tipo, txt in logs:
         if tipo in ("error", "pageerror"):
@@ -61,14 +61,27 @@ def testa(page, arquivo, vp):
     return erros
 
 
+def servidor():
+    """Servidor HTTP local: os produtos que leem JSON por fetch() NAO funcionam
+    em file:// (o navegador bloqueia). O QA tem de ver a mesma coisa que o
+    GitHub Pages serve."""
+    import functools, http.server, socketserver, threading
+    h = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(FER))
+    socketserver.TCPServer.allow_reuse_address = True
+    srv = socketserver.TCPServer(("127.0.0.1", 0), h)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    return srv, f"http://127.0.0.1:{srv.server_address[1]}/"
+
+
 def main():
     from playwright.sync_api import sync_playwright
     alvos = sys.argv[1:] or sorted(x.name for x in FER.glob("MAT2_*.html"))
     total = 0
+    srv, base = servidor()
     with sync_playwright() as pw:
         nav = pw.chromium.launch()
         for nome in alvos:
-            arq = FER / nome
+            arq = base + nome
             achados = []
             for vp, w, h in VIEWPORTS:
                 ctx = nav.new_context(viewport={"width": w, "height": h})
@@ -83,6 +96,7 @@ def main():
             print(f"{'FALHA' if achados else '  ok '} {nome}" +
                   ("" if not achados else "\n    " + "\n    ".join(achados[:12])))
         nav.close()
+    srv.shutdown()
     print(f"\n{'REPROVADO' if total else 'APROVADO'} — {total} achado(s)")
     return 1 if total else 0
 

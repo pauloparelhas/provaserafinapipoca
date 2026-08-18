@@ -1,0 +1,127 @@
+{
+  "materia": "Math",
+  "unidade": "Unit 9 — 2-D Geometry and Patterning (Exploring 2-D Figures)",
+  "ano": "Year 2",
+  "fonte": "trabalho/2tri_matematica/_roteiro.md (9 páginas do caderno da Unit 9 + instruções da AP1)",
+  "nota": "A prova é em inglês: 'f' e 'v' vêm em inglês e 'd' é a tradução, que aparece na bandeira 🇧🇷.",
+  "baralhos": [
+    {
+      "key": "figuras",
+      "nome": "The 7 figures",
+      "emo": "🔺",
+      "cor": "#a78bfa",
+      "cards": [
+        {"f": "How many sides does a TRIANGLE have?", "v": "3 sides — and 3 vertices.", "d": "O triângulo tem 3 lados e 3 vértices."},
+        {"f": "How many sides does a SQUARE have?", "v": "4 sides, all the same length — and 4 vertices.", "d": "O quadrado tem 4 lados iguais e 4 vértices."},
+        {"f": "How is a RECTANGLE different from a square?", "v": "It has 4 sides too, but 2 are long and 2 are short.", "d": "O retângulo também tem 4 lados, mas 2 compridos e 2 curtinhos."},
+        {"f": "How many sides does a PENTAGON have?", "v": "5 sides — and 5 vertices. Penta means five.", "d": "O pentágono tem 5 lados e 5 vértices. Penta quer dizer cinco."},
+        {"f": "How many sides does a HEXAGON have?", "v": "6 sides — and 6 vertices. Hexa means six.", "d": "O hexágono tem 6 lados e 6 vértices. Hexa quer dizer seis."},
+        {"f": "How many sides does an OCTAGON have?", "v": "8 sides — and 8 vertices. Octo means eight, like an octopus.", "d": "O octógono tem 8 lados e 8 vértices. Octo quer dizer oito, como o polvo."},
+        {"f": "What is special about the CIRCLE?", "v": "It is round: no straight sides and 0 vertices.", "d": "O círculo é redondo: nenhum lado reto e 0 vértices."},
+        {"f": "What is a 2-D figure?", "v": "A flat figure — you can draw it on paper.", "d": "Uma figura plana: dá para desenhar no papel."}
+      ]
+    },
+    {
+      "key": "lados",
+      "nome": "Sides & vertices",
+      "emo": "📍",
+      "cor": "#34d399",
+      "cards": [
+        {"f": "What is a SIDE?", "v": "One straight line of the figure.", "d": "O lado: cada linha reta da figura."},
+        {"f": "What is a VERTEX?", "v": "The corner where two sides meet.", "d": "O vértice: o cantinho onde dois lados se encontram."},
+        {"f": "What is the plural of VERTEX?", "v": "Vertices.", "d": "Vértices. Não existe 'vertexes'."},
+        {"f": "What does EDGE mean?", "v": "The same as side.", "d": "Edge quer dizer lado — a mesma coisa que side."},
+        {"f": "The golden rule: in a figure with straight sides…", "v": "…the number of vertices is the SAME as the number of sides.", "d": "A regra de ouro: o número de vértices é igual ao de lados."},
+        {"f": "How many vertices does a circle have?", "v": "Zero. It has no corners at all.", "d": "Nenhum. Ele não tem cantinho."},
+        {"f": "3 figures have 13 sides in total. Name one group.", "v": "Triangle + square + hexagon (3 + 4 + 6 = 13).", "d": "Triângulo + quadrado + hexágono."},
+        {"f": "3 figures have 12 vertices in total. Name one group.", "v": "Square + square + square (4 + 4 + 4 = 12).", "d": "Quadrado + quadrado + quadrado."},
+        {"f": "A triangle and a square together: how many sides?", "v": "7 sides (3 + 4).", "d": "7 lados."}
+      ]
+    },
+    {
+      "key": "objetos",
+      "nome": "Figures around us",
+      "emo": "👁️",
+      "cor": "#38bdf8",
+      "cards": [
+        {"f": "A book cover looks like a…", "v": "Rectangle.", "d": "A capa de um livro parece um retângulo."},
+        {"f": "A door looks like a…", "v": "Rectangle.", "d": "Uma porta parece um retângulo."},
+        {"f": "A coin, a plate, a wheel and a clock face look like a…", "v": "Circle.", "d": "Moeda, prato, roda e relógio parecem um círculo."},
+        {"f": "A slice of pizza looks like a…", "v": "Triangle.", "d": "Uma fatia de pizza parece um triângulo."},
+        {"f": "A party hat looks like a…", "v": "Triangle.", "d": "Um chapéu de festa parece um triângulo."},
+        {"f": "A stop sign looks like an…", "v": "Octagon — 8 sides.", "d": "Uma placa de PARE parece um octógono, de 8 lados."},
+        {"f": "A honeycomb cell looks like a…", "v": "Hexagon — 6 sides.", "d": "Um favo de mel parece um hexágono, de 6 lados."},
+        {"f": "The black patch on a soccer ball looks like a…", "v": "Pentagon — 5 sides.", "d": "O gomo preto da bola parece um pentágono, de 5 lados."}
+      ]
+    },
+    {
+      "key": "simetria",
+      "nome": "Symmetry",
+      "emo": "🪞",
+      "cor": "#f472b6",
+      "cards": [
+        {"f": "When does a figure have SYMMETRY?", "v": "When you can fold it and the two halves match.", "d": "Quando dá para dobrar e as duas metades combinam."},
+        {"f": "What is the LINE OF SYMMETRY?", "v": "The fold line. It can be standing up or lying down.", "d": "A linha da dobra. Pode ser em pé ou deitada."},
+        {"f": "What is the MATCHING PART?", "v": "The half that is missing — the mirror image of the other half.", "d": "A metade que falta: a imagem no espelho da outra metade."},
+        {"f": "What is a MIRA?", "v": "The little red mirror we use to check symmetry.", "d": "O espelhinho vermelho que usamos para conferir a simetria."},
+        {"f": "Can a figure have more than one line of symmetry?", "v": "Yes. The letter O has one standing up AND one lying down.", "d": "Pode. A letra O tem uma em pé e outra deitada."},
+        {"f": "Which letters have symmetry?", "v": "O, X, A, M, V, C and B.", "d": "O, X, A, M, V, C e B."},
+        {"f": "Which letters have NO symmetry?", "v": "G, P, J and R.", "d": "G, P, J e R."},
+        {"f": "The letters C and B: where is their line of symmetry?", "v": "Lying down (horizontal) — not standing up!", "d": "Deitada! Quem só procura a linha em pé erra essas duas."},
+        {"f": "Where do you put the Mira on the word MOM?", "v": "Standing up, in the middle of the O.", "d": "Em pé, no meio do O."},
+        {"f": "Name another word with symmetry.", "v": "WOW, MUM, TOT or TOOT.", "d": "WOW, MUM, TOT ou TOOT."}
+      ]
+    },
+    {
+      "key": "padroes",
+      "nome": "Slide, flip, turn",
+      "emo": "🔄",
+      "cor": "#fbbf24",
+      "cards": [
+        {"f": "What happens in a SLIDE?", "v": "The figure walks to the next spot. It does not spin and it does not mirror.", "d": "A figura anda para o lugar de perto, sem girar e sem espelhar."},
+        {"f": "What happens in a FLIP?", "v": "The figure shows its mirror image.", "d": "A figura vira e mostra a imagem no espelho."},
+        {"f": "What happens in a TURN?", "v": "The figure spins around a point, like a clock hand.", "d": "A figura roda em volta de um pontinho, como o ponteiro do relógio."},
+        {"f": "What is a REPEATING PATTERN?", "v": "A little piece that comes again and again, always in the same order.", "d": "Um pedacinho que se repete, sempre na mesma ordem."},
+        {"f": "How many different figures do you need for the quilt border pattern?", "v": "Just one — you slide it, flip it or turn it.", "d": "Uma só: é ela que desliza, vira ou gira."},
+        {"f": "After a slide, a flip or a turn, what STAYS THE SAME?", "v": "The number of sides, the number of vertices, the size and the name of the figure.", "d": "O número de lados, o de vértices, o tamanho e o nome da figura."},
+        {"f": "After a slide, a flip or a turn, what CAN CHANGE?", "v": "Where the figure is, and which way it faces.", "d": "Onde a figura está e para que lado ela aponta."},
+        {"f": "A triangle turns. Is it still a triangle?", "v": "Yes — still 3 sides and 3 vertices.", "d": "Continua sendo: ainda 3 lados e 3 vértices."}
+      ]
+    },
+    {
+      "key": "quilt",
+      "nome": "The quilt",
+      "emo": "🧩",
+      "cor": "#60a5fa",
+      "cards": [
+        {"f": "How big is the quilt grid?", "v": "3 by 3 — nine blocks, numbered 1 to 9.", "d": "3 por 3: nove blocos, numerados de 1 a 9."},
+        {"f": "Which block has only a pentagon?", "v": "Block 3.", "d": "O bloco 3."},
+        {"f": "You draw a triangle on each edge of the pentagon. What does it look like?", "v": "A star.", "d": "Uma estrela."},
+        {"f": "Which blocks have the same design?", "v": "Blocks 1 and 9 · blocks 2 and 6 · blocks 4 and 8. Only the colours change.", "d": "1 e 9 · 2 e 6 · 4 e 8. Só as cores mudam."},
+        {"f": "Start in block 1: down two, one right, up one, one left. Where are you?", "v": "Block 4.", "d": "No bloco 4."}
+      ]
+    },
+    {
+      "key": "palavras",
+      "nome": "The English words",
+      "emo": "📖",
+      "cor": "#fb923c",
+      "cards": [
+        {"f": "side", "v": "lado — one straight line of the figure", "d": "lado"},
+        {"f": "vertex / vertices", "v": "vértice / vértices — the corner where two sides meet", "d": "vértice / vértices"},
+        {"f": "edge", "v": "lado — another word for side", "d": "lado (outra palavra para side)"},
+        {"f": "flat", "v": "plana — you can draw it on paper", "d": "plana"},
+        {"f": "symmetry", "v": "simetria", "d": "simetria"},
+        {"f": "line of symmetry", "v": "linha de simetria — the fold line", "d": "linha de simetria"},
+        {"f": "mirror image", "v": "imagem no espelho", "d": "imagem no espelho"},
+        {"f": "to fold", "v": "dobrar", "d": "dobrar"},
+        {"f": "to match", "v": "combinar — the two halves are the same", "d": "combinar"},
+        {"f": "slide · flip · turn", "v": "deslizar · virar · girar", "d": "deslizar · virar · girar"},
+        {"f": "repeating pattern", "v": "padrão que se repete", "d": "padrão que se repete"},
+        {"f": "to sort the figures", "v": "separar as figuras em grupos", "d": "classificar / separar em grupos"},
+        {"f": "How many sides?", "v": "Quantos lados?", "d": "Quantos lados?"},
+        {"f": "How many vertices?", "v": "Quantos vértices?", "d": "Quantos vértices?"}
+      ]
+    }
+  ]
+}

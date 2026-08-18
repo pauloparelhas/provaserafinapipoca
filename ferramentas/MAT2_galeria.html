@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
-<title>Materiais da turma — Geografia · Comunidades e lugares</title>
+<title>Class materials — Math · 2-D Figures</title>
 <link rel="stylesheet" href="serafina-core.css?v=20260817">
 <style>
 :root{--fs:1;--bg:#0d0b1e;--bg2:#10322a;--ink:#f0fdf4;--soft:rgba(255,255,255,.55);--card:#13303a;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fbbf24;--rad:20px}
@@ -115,29 +115,26 @@ body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-grad
 
   <div class="head">
     <div class="em">&#x1F5BC;&#xFE0F;</div>
-    <h1>Os materiais reais da Unidade 2</h1>
-    <p>Diferentes comunidades e sua relação com os lugares.<br>Toque em qualquer imagem para ver grande.</p>
+    <h1>As páginas reais da Unit 9</h1>
+    <p>2-D Geometry — as folhas do caderno que a professora postou.<br>Toque em qualquer imagem para ver grande.</p>
   </div>
 
-  <div class="sec">&#x1F1E7;&#x1F1F7; O painel das 5 regiões</div>
+  <div class="sec">&#x1F53A; A página das 7 figuras</div>
   <div class="grid wide" id="g-regioes"></div>
 
-  <div class="sec">&#x1F4F8; Tradições e costumes do Brasil</div>
+  <div class="sec">&#x1F4D0; Lados, vértices e simetria</div>
   <div class="grid" id="g-tradicoes"></div>
 
-  <div class="sec">&#x1F4D8; Páginas da apostila</div>
+  <div class="sec">&#x1F9E9; Desenhar, a colcha e o diário</div>
   <div class="grid" id="g-apostila"></div>
 
-  <div class="sec">&#x1F4FA; Vídeos vistos na aula</div>
-  <div class="grid" id="g-video"></div>
-
-  <div class="sec">&#x1F4C4; Material completo</div>
-  <a class="pdfcard" href="media/geo_insumos/unidade2_geografia.pdf" target="_blank" rel="noopener">
+    <div class="sec">&#x1F4C4; Material completo</div>
+  <a class="pdfcard" href="media/mat_insumos/unit9_2d_geometry.pdf" target="_blank" rel="noopener">
     <span class="pe">&#x1F4D6;</span>
-    <span><span class="pt">Unidade 2 &mdash; slides completos da professora</span><br><span class="ps">abrir o PDF original (26 páginas)</span></span>
+    <span><span class="pt">Unit 9 &mdash; as 9 páginas do caderno</span><br><span class="ps">abrir o PDF com tudo junto</span></span>
   </a>
 
-  <div class="note">Estas figuras são as <b>mesmas</b> usadas nos jogos e no simulado. &#x1F60A;<br>Olhar de novo antes da prova ajuda a lembrar.</div>
+  <div class="note">Estas páginas são a <b>fonte</b> de tudo o que está nos jogos e no simulado. &#x1F60A;<br>Olhar de novo antes da prova ajuda a lembrar.</div>
 </div>
 
 <div class="lb" id="lb" onclick="closeLb(event)">
@@ -151,31 +148,25 @@ body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-grad
 </div>
 
 <script>
-var DIR="media/geo_insumos/";
-/* [arquivo, titulo, subtitulo] — derivado de figuras/_manifest.json (roteiro §5, §6, §9) */
+var DIR="media/mat_insumos/";
+/* [arquivo, titulo, subtitulo] — as 9 paginas do caderno da Unit 9 postadas
+   pela professora no Toddle. Sao as MESMAS que alimentam o roteiro. */
 var REGIOES=[
- ["13_painel_regioes.jpg","O Brasil e suas 5 regiões","festas · comidas · comemorações · danças · músicas — o quadro mais importante da unidade"]
+ ["02_p216_describing_figures.jpg","The 7 figures — p.216","rectangle, square, triangle, hexagon, octagon, pentagon, circle: a página que nomeia todas"]
 ];
 var TRADICOES=[
- ["06_farinha_bonecos.jpg","Farinha de mandioca &middot; Bonecos de Olinda","povos indígenas da Amazônia (Norte) e carnaval de Olinda, em Pernambuco"],
- ["07_xilogravura_jongo.jpg","Xilogravura &middot; Jongo","arte dos folhetos de cordel (Nordeste) e dança de matriz africana em roda"],
- ["08_jiujitsu_oktoberfest.jpg","Jiu-jitsu brasileiro &middot; Oktoberfest","arte marcial criada no Brasil e a festa alemã de Blumenau (SC)"],
- ["09_cuscuz.jpg","Cuscuz paulista &middot; Cuscuz nordestino","o mesmo nome, dois pratos: Sudeste e Nordeste"],
- ["10_chimarrao_daime.jpg","Chimarrão &middot; Santo Daime","bebida gaúcha do Sul e ritual religioso amazônico dos anos 1930"]
+ ["06_p227_symmetry_letters.jpg","Symmetry in letters — p.227","circle the letters that show symmetry · onde pôr a Mira em MOM"],
+ ["05_p224_matching_parts.jpg","Draw matching parts — p.224","completar a figura pela linha de simetria: a metade que combina"],
+ ["03_p220_13_sides.jpg","What is in the bag? — p.220","3 figuras, 13 lados no total: que figuras podem ser?"],
+ ["04_p221_12_vertices.jpg","Another 3 in the bag — p.221","3 figuras, 12 vértices no total · a caça ao vértice em casa"]
 ];
 var APOSTILA=[
- ["01_introducao.jpg","Introdução","comunidades, tradições, migrações e identidade cultural"],
- ["02_eu_e_minha_familia.jpg","Eu e minha família","nome, identidade cultural, família e cidade onde nasci"],
- ["03_tradicoes_em_casa.jpg","Tradições em minha casa","comida, história, música, festa e a origem do sobrenome"],
- ["04_album_origens.jpg","Álbum das nossas origens","a colagem com bandeiras, mapas, comidas e festas da família"],
- ["05_album_moldura.jpg","Moldura do álbum","a página de capa para desenhar"],
- ["11_brasil_multicultural.jpg","Brasil: país multicultural","o mapa mental dos aspectos culturais do Brasil"],
- ["12_entrevista_migracao.jpg","Entrevista sobre a migração","quem migrou, por que veio, como foi a viagem e a adaptação"]
+ ["01_p215_my_picture.jpg","My Picture — p.215","fazer um desenho só com quadrado, círculo, retângulo e triângulo"],
+ ["07_p232_quilt.jpg","A Quilt — p.232","os 9 blocos da colcha, numerados de 1 a 9"],
+ ["08_p233_finish_quilt.jpg","Finish the Quilt! — p.233","o bloco só com pentágono · o padrão da borda · o caminho na grade"],
+ ["09_p234_my_journal.jpg","My Journal — p.234","tell what you learned about figures"]
 ];
-var VIDEO=[
- ["14_video_diversidade.jpg","A diversidade cultural brasileira","o vídeo da Aula 3"],
- ["15_video_aula4.jpg","Aula 4 &mdash; festival de Parintins","o boi-bumbá do Norte, na Amazônia"]
-];
+var VIDEO=[];
 var ALL=REGIOES.concat(TRADICOES).concat(APOSTILA).concat(VIDEO);
 function cards(list,offset){return list.map(function(it,i){var gi=offset+i;
  return '<div class="imgcard" onclick="openLb('+gi+')">'
@@ -185,7 +176,7 @@ var o=0;
 document.getElementById('g-regioes').innerHTML=cards(REGIOES,o); o+=REGIOES.length;
 document.getElementById('g-tradicoes').innerHTML=cards(TRADICOES,o); o+=TRADICOES.length;
 document.getElementById('g-apostila').innerHTML=cards(APOSTILA,o); o+=APOSTILA.length;
-document.getElementById('g-video').innerHTML=cards(VIDEO,o);
+if(document.getElementById('g-video'))document.getElementById('g-video').innerHTML=cards(VIDEO,o);
 var lbIdx=0;
 function openLb(i){var it=ALL[i]; lbIdx=i;
  document.getElementById('lbimg').src=DIR+it[0];

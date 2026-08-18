@@ -276,7 +276,7 @@ body.show-tr .tr{display:block}
     listenTitle:'Ouvir',
     yes:'🎉 Isso! <span class="tr"></span>',
     next:'➡️ Próximo<span class="tr"></span>',
-    notYet:'💡 Ainda não… a resposta é:<span class="tr"></span>',
+    notYet:'🇧🇷 Ainda não… a resposta é:<span class="tr"></span>',
     remember:'Lembre: <span class="tr"></span>',
     keepGoing:'➡️ Seguir em frente!<span class="tr"></span>',
     goesIn:' vai em…', goesInPt:'',
@@ -287,353 +287,353 @@ body.show-tr .tr{display:block}
 <script>
 /* ============================================================
    SHAPE QUEST — dados da aventura (Matematica 2tri)
-   Unidade 2 "Diferentes comunidades e sua relação com os lugares".
-   Conteúdo 100% derivado de trabalho/2tri_geografia/_roteiro.md
-   (§3 glossário, §4 texto-base, §5 tradições, §6 painel das regiões,
-   §7 ambiguidades, §8 pegadinhas). Nada inventado.
+   Unit 9 "2-D Geometry and Patterning" — o topico da AP1.
+   Conteúdo 100% derivado de trabalho/2tri_matematica/_roteiro.md
+   (BLOCO 1 figuras, 2 objetos, 3 contagem, 4 simetria, 5 padrões,
+   6 a colcha, 7 vocabulário). Nada inventado.
 
-   Materia PT: o campo `en` carrega o texto principal e o campo `pt`
-   carrega a DICA (botão 💡 da barra superior).
+   Materia EM INGLES: o campo `en` carrega o texto principal e o campo
+   `pt` a TRADUÇÃO, que aparece na bandeira 🇧🇷 da barra superior.
    ============================================================ */
 
-/* --- mapa clicável das 5 regiões (lição da fase 4) --- */
-function mapaRegioes(box){
-  var R=[
-    {k:'norte',n:'Norte',co:'#34d399',e:'🌳',d:'Floresta amazônica, rios enormes. Parintins, açaí, tacacá, carimbó.'},
-    {k:'nordeste',n:'Nordeste',co:'#fb923c',e:'☀️',d:'Sol e praia. Carnaval de Salvador, São João, acarajé, frevo e forró.'},
-    {k:'centrooeste',n:'Centro-Oeste',co:'#fbbf24',e:'🦜',d:'Cerrado e Pantanal. Arroz com pequi, pamonha, siriri e cururu.'},
-    {k:'sudeste',n:'Sudeste',co:'#a78bfa',e:'🏙️',d:'Cidades grandes. Feijoada, pão de queijo, samba, carnaval do Rio.'},
-    {k:'sul',n:'Sul',co:'#38bdf8',e:'🌲',d:'A região mais fria. Churrasco gaúcho, chimarrão, Oktoberfest, pinhão.'}
+/* --- galeria clicável das 7 figuras (lição da fase 1) ---
+   As figuras são desenhadas em SVG, não são emoji: a criança precisa VER o
+   polígono para contar os lados. Toque numa figura -> nome EN/PT, lados e
+   vértices, e o motor lê em voz alta em inglês. */
+function galeriaFiguras(box){
+  var F=[
+   {k:'circle',   n:'Circle',   pt:'Círculo',   co:'#fbbf24', s:'no straight sides', v:'0 vertices', pts:null},
+   {k:'triangle', n:'Triangle', pt:'Triângulo', co:'#fb923c', s:'3 sides', v:'3 vertices', pts:3},
+   {k:'square',   n:'Square',   pt:'Quadrado',  co:'#34d399', s:'4 equal sides', v:'4 vertices', pts:4},
+   {k:'rect',     n:'Rectangle',pt:'Retângulo', co:'#60a5fa', s:'4 sides: 2 long, 2 short', v:'4 vertices', pts:'rect'},
+   {k:'pentagon', n:'Pentagon', pt:'Pentágono', co:'#f472b6', s:'5 sides', v:'5 vertices', pts:5},
+   {k:'hexagon',  n:'Hexagon',  pt:'Hexágono',  co:'#a78bfa', s:'6 sides', v:'6 vertices', pts:6},
+   {k:'octagon',  n:'Octagon',  pt:'Octógono',  co:'#38bdf8', s:'8 sides', v:'8 vertices', pts:8}
   ];
+  function svg(f){
+    var d='';
+    if(f.pts===null){
+      d='<circle cx="30" cy="30" r="22" fill="'+f.co+'33" stroke="'+f.co+'" stroke-width="3"/>';
+    }else if(f.pts==='rect'){
+      d='<rect x="6" y="15" width="48" height="30" fill="'+f.co+'33" stroke="'+f.co+'" stroke-width="3"/>';
+    }else{
+      var n=f.pts, p=[], gira=(n%2? -90 : (n===4? -45 : 0));
+      for(var i=0;i<n;i++){
+        var a=(gira+i*360/n)*Math.PI/180;
+        p.push((30+22*Math.cos(a)).toFixed(1)+','+(30+22*Math.sin(a)).toFixed(1));
+      }
+      d='<polygon points="'+p.join(' ')+'" fill="'+f.co+'33" stroke="'+f.co+'" stroke-width="3" stroke-linejoin="round"/>';
+    }
+    return '<svg viewBox="0 0 60 60" width="46" height="46" aria-hidden="true">'+d+'</svg>';
+  }
   box.innerHTML='<div class="mapreg">'
-   +R.map(function(r,i){return '<button class="mrbtn" data-i="'+i+'" style="--rc:'+r.co+'">'
-     +'<span class="mre">'+r.e+'</span><span class="mrn">'+r.n+'</span></button>';}).join('')
-   +'</div><div class="mrinfo" id="mrinfo">Toque numa região para ver o que ela tem. 👆</div>';
+   +F.map(function(f,i){return '<button class="mrbtn" data-i="'+i+'" style="--rc:'+f.co+'">'
+     +'<span class="mre">'+svg(f)+'</span><span class="mrn">'+f.n+'</span></button>';}).join('')
+   +'</div><div class="mrinfo" id="mrinfo">Toque numa figura para contar os lados. 👆</div>';
   var info=box.querySelector('#mrinfo');
   Array.prototype.forEach.call(box.querySelectorAll('.mrbtn'),function(b){
     b.addEventListener('click',function(){
-      var r=R[+b.dataset.i];
+      var f=F[+b.dataset.i];
       Array.prototype.forEach.call(box.querySelectorAll('.mrbtn'),function(x){x.classList.remove('on');});
       b.classList.add('on');
-      info.style.borderColor=r.co;
-      info.innerHTML='<b style="color:'+r.co+'">'+r.e+' '+r.n+'</b><br>'+r.d;
-      if(window.say)say(r.n+'. '+r.d);
+      info.style.borderColor=f.co;
+      info.innerHTML='<b style="color:'+f.co+'">'+f.n+' · '+f.pt+'</b><br>'+f.s+' &middot; '+f.v;
+      if(window.say)say(f.n+'. '+f.s+'. '+f.v);
     });
   });
 }
 
-/* --- opções-região reutilizadas (ordem embaralhada pelo motor) --- */
-function RG(ok){return [
-  {en:'Norte 🌳',        pt:'floresta e rios',    ok:ok==='n'},
-  {en:'Nordeste ☀️',     pt:'sol e praia',        ok:ok==='ne'},
-  {en:'Centro-Oeste 🦜', pt:'cerrado e pantanal', ok:ok==='co'},
-  {en:'Sudeste 🏙️',      pt:'cidades grandes',    ok:ok==='se'},
-  {en:'Sul 🌲',          pt:'a mais fria',        ok:ok==='s'}];}
+/* --- opções reutilizadas: as 7 figuras (o motor embaralha) --- */
+function FG(ok){return [
+  {en:'Circle',    pt:'círculo',    ok:ok==='ci'},
+  {en:'Triangle',  pt:'triângulo',  ok:ok==='tr'},
+  {en:'Square',    pt:'quadrado',   ok:ok==='sq'},
+  {en:'Rectangle', pt:'retângulo',  ok:ok==='re'},
+  {en:'Pentagon',  pt:'pentágono',  ok:ok==='pe'},
+  {en:'Hexagon',   pt:'hexágono',   ok:ok==='he'},
+  {en:'Octagon',   pt:'octógono',   ok:ok==='oc'}];}
 
-var BUCKETS5=[
-  {id:'n', en:'Norte 🌳',        pt:'', color:'#34d399'},
-  {id:'ne',en:'Nordeste ☀️',     pt:'', color:'#fb923c'},
-  {id:'co',en:'Centro-Oeste 🦜', pt:'', color:'#fbbf24'},
-  {id:'se',en:'Sudeste 🏙️',      pt:'', color:'#a78bfa'},
-  {id:'s', en:'Sul 🌲',          pt:'', color:'#38bdf8'}];
+/* --- opções de contagem --- */
+function NUM(ok,lista){return lista.map(function(n){
+  return {en:String(n), pt:'', ok:n===ok};});}
 
 var ADVENTURE={
  storageKey:'mat2_adv',
- title:'Expedição Brasil', titlePt:'Unidade 2 — comunidades e lugares', hero:'🧭',
+ title:'Shape Quest', titlePt:'Unit 9 — 2-D Geometry', hero:'📐',
  phases:[
 
- /* ===== FASE 1 — família, tradição e identidade ===== */
- { id:'f1', icon:'🏠', color:'#fb923c',
-   name:'Minha família, minhas tradições', namePt:'a palavra TRADIÇÃO',
-   anchor:'Tradição é o costume que passa de geração em geração, de pais para filhos.',
-   anchorPt:'É a primeira palavra da Unidade 2.',
+ /* ===== FASE 1 — conhecer as 7 figuras ===== */
+ { id:'f1', icon:'🔺', color:'#fb923c',
+   name:'Meet the figures', namePt:'as 7 figuras da unidade',
+   anchor:'We name a figure by how many sides it has.',
+   anchorPt:'O nome da figura vem do número de lados dela.',
    lesson:{lines:[
-    ['🏘️','A comunidade onde vivemos é formada por diferentes pessoas, histórias e costumes.','tudo começa pelo lugar onde a gente mora'],
-    ['🤝','Cada família tem suas próprias TRADIÇÕES: costumes que passam de geração em geração, de pais para filhos.','de avó para mãe, de mãe para filha'],
-    ['👤','Cada tradição ajuda a construir a nossa IDENTIDADE CULTURAL — o conjunto de costumes que diz quem nós somos.',''],
-    ['🕰️','A identidade cultural é construída por muitas histórias que se entrelaçam ao longo do tempo.','']
+    ['📄','A <b>2-D figure</b> is flat: you can draw it on paper.','figura plana — dá para desenhar no papel'],
+    ['🔢','We give it a name by counting its <b>sides</b>.','o nome vem do número de lados'],
+    ['🐙','<b>penta</b> means 5 · <b>hexa</b> means 6 · <b>octo</b> means 8, like an <b>octopus</b>.','penta 5 · hexa 6 · octo 8'],
+    ['⭕','The <b>circle</b> is the round one: it has no straight sides at all.','o círculo é o redondo, sem lado reto']
+   ], custom:galeriaFiguras},
+   pick:3,
+   bank:[
+    {t:'mc',q:'Which figure has 3 straight sides?',qpt:'Que figura tem 3 lados retos?',opts:FG('tr')},
+    {t:'mc',q:'Which figure has 4 sides, all the same length?',qpt:'Que figura tem 4 lados, todos do mesmo tamanho?',opts:FG('sq')},
+    {t:'mc',q:'Which figure has 2 long sides and 2 short sides?',qpt:'Que figura tem 2 lados compridos e 2 curtinhos?',opts:FG('re')},
+    {t:'mc',q:'Which figure has 5 sides?',qpt:'Que figura tem 5 lados?',opts:FG('pe')},
+    {t:'mc',q:'Which figure has 6 sides?',qpt:'Que figura tem 6 lados?',opts:FG('he')},
+    {t:'mc',q:'Which figure has 8 sides?',qpt:'Que figura tem 8 lados?',opts:FG('oc')},
+    {t:'mc',q:'Which figure is round, with no corners?',qpt:'Que figura é redonda, sem cantinhos?',opts:FG('ci')},
+    {t:'mc',q:'A 2-D figure is a figure that is…',qpt:'Uma figura 2-D é uma figura que é…',opts:[
+      {en:'Flat — you can draw it on paper',pt:'plana',ok:true},
+      {en:'Round like a ball',pt:'redonda como uma bola',ok:false},
+      {en:'Made of wood',pt:'feita de madeira',ok:false}]},
+    {t:'sort',q:'How many sides does it have?',qpt:'Quantos lados ela tem?',
+     buckets:[{id:'b3',en:'3 sides',pt:'3 lados',color:'#fb923c'},
+              {id:'b4',en:'4 sides',pt:'4 lados',color:'#34d399'},
+              {id:'b6',en:'6 sides',pt:'6 lados',color:'#a78bfa'},
+              {id:'b8',en:'8 sides',pt:'8 lados',color:'#38bdf8'}],
+     items:[{en:'Triangle',pt:'triângulo',b:'b3'},{en:'Square',pt:'quadrado',b:'b4'},
+            {en:'Rectangle',pt:'retângulo',b:'b4'},{en:'Hexagon',pt:'hexágono',b:'b6'},
+            {en:'Octagon',pt:'octógono',b:'b8'}],pick:4}
+   ]},
+
+ /* ===== FASE 2 — sides e vertices ===== */
+ { id:'f2', icon:'📍', color:'#34d399',
+   name:'Sides and vertices', namePt:'lado e vértice: a diferença',
+   anchor:'A side is a straight line. A vertex is the corner where two sides meet.',
+   anchorPt:'Side é o lado (a linha reta). Vertex é o vértice (o cantinho).',
+   lesson:{lines:[
+    ['📏','A <b>side</b> is one straight line of the figure.','o lado: cada linha reta'],
+    ['📍','A <b>vertex</b> is the corner where two sides meet. More than one: <b>vertices</b>.','o vértice: o cantinho onde dois lados se encontram'],
+    ['🔗','<b>Edge</b> means the same as side.','edge = lado'],
+    ['🔑','Golden rule: in a figure with straight sides, the number of vertices is the SAME as the number of sides.','lados = vértices'],
+    ['⭕','Only the <b>circle</b> is different: it has <b>0 vertices</b>.','só o círculo tem 0 vértices']
    ]},
    pick:3,
    bank:[
-    {t:'mc',q:'O que é uma TRADIÇÃO?',qpt:'',opts:[
-      {en:'Um costume que passa de geração em geração',pt:'de pais para filhos',ok:true},
-      {en:'Uma novidade que apareceu esta semana',pt:'',ok:false},
-      {en:'Uma viagem de férias',pt:'',ok:false}]},
-    {t:'mc',q:'A tradição passa de quem para quem?',qpt:'',opts:[
-      {en:'De pais para filhos',pt:'',ok:true},
-      {en:'De vizinho para vizinho, uma vez só',pt:'',ok:false},
-      {en:'Da televisão para a escola',pt:'',ok:false}]},
-    {t:'mc',q:'O que é IDENTIDADE CULTURAL?',qpt:'',opts:[
-      {en:'O conjunto de costumes que diz quem nós somos',pt:'',ok:true},
-      {en:'O documento com a nossa foto',pt:'',ok:false},
-      {en:'O nome da rua onde moramos',pt:'',ok:false}]},
-    {t:'mc',q:'A comunidade onde vivemos é formada por…',qpt:'',opts:[
-      {en:'Diferentes pessoas, histórias e costumes',pt:'',ok:true},
-      {en:'Pessoas todas iguais',pt:'',ok:false},
-      {en:'Só pela nossa família',pt:'',ok:false}]},
-    {t:'mc',q:'"Está há muito tempo na família" descreve…',qpt:'',opts:[
-      {en:'Uma tradição',pt:'',ok:true},
-      {en:'Uma migração',pt:'',ok:false},
-      {en:'Uma comunidade',pt:'',ok:false}]},
-    {t:'mc',q:'Conhecer a origem da nossa família ajuda a entender…',qpt:'',opts:[
-      {en:'A história dos nossos ancestrais',pt:'ancestrais = quem veio antes de nós',ok:true},
-      {en:'O tempo que vai fazer amanhã',pt:'',ok:false},
-      {en:'A tabuada do 7',pt:'',ok:false}]},
-    /* O sort "É tradição ou é migração?" foi REMOVIDO em 09/08 (auditoria de
-       escolhas, R1+R2). Metade dos itens saía da frase que FUNDE os dois
-       conceitos no material, e dois deles ("a receita da bisavó", "a festa que
-       a família faz todo ano") nem existiam no insumo. As duas palavras
-       continuam cobradas acima, em MC, com alternativas que não têm defesa. */
-    {t:'mc',q:'Qual destas frases explica o que é uma TRADIÇÃO?',qpt:'',opts:[
-      {en:'Passa de geração em geração, de pais para filhos',pt:'',ok:true},
-      {en:'Mudar de um lugar para outro para morar',pt:'',ok:false},
-      {en:'O lugar onde vivemos, com muitas pessoas diferentes',pt:'',ok:false}]},
-    {t:'mc',q:'Qual destas frases explica o que é MIGRAÇÃO?',qpt:'',opts:[
-      {en:'Quando pessoas mudam de um lugar para outro',pt:'',ok:true},
-      {en:'Um costume que passa de pais para filhos',pt:'',ok:false},
-      {en:'Uma festa que acontece só uma vez',pt:'',ok:false}]}
+    {t:'mc',q:'What is a SIDE?',qpt:'O que é um side (lado)?',opts:[
+      {en:'One straight line of the figure',pt:'cada linha reta da figura',ok:true},
+      {en:'The corner where two lines meet',pt:'isso é o vértice',ok:false},
+      {en:'The colour of the figure',pt:'',ok:false}]},
+    {t:'mc',q:'What is a VERTEX?',qpt:'O que é um vertex (vértice)?',opts:[
+      {en:'The corner where two sides meet',pt:'o cantinho',ok:true},
+      {en:'One straight line of the figure',pt:'isso é o lado',ok:false},
+      {en:'The middle of the figure',pt:'',ok:false}]},
+    {t:'mc',q:'What is the plural of VERTEX?',qpt:'Qual é o plural de vertex?',opts:[
+      {en:'Vertices',pt:'vértices',ok:true},
+      {en:'Vertexes',pt:'não existe',ok:false},
+      {en:'Verticals',pt:'',ok:false}]},
+    {t:'mc',q:'How many vertices does a TRIANGLE have?',qpt:'Quantos vértices tem um triângulo?',opts:NUM(3,[3,4,0])},
+    {t:'mc',q:'How many vertices does a CIRCLE have?',qpt:'Quantos vértices tem um círculo?',opts:NUM(0,[0,1,4])},
+    {t:'mc',q:'How many vertices does a HEXAGON have?',qpt:'Quantos vértices tem um hexágono?',opts:NUM(6,[6,5,8])},
+    {t:'mc',q:'How many sides does an OCTAGON have?',qpt:'Quantos lados tem um octógono?',opts:NUM(8,[8,6,5])},
+    {t:'mc',q:'EDGE means the same as…',qpt:'Edge quer dizer o mesmo que…',opts:[
+      {en:'Side',pt:'lado',ok:true},{en:'Vertex',pt:'vértice',ok:false},{en:'Colour',pt:'cor',ok:false}]},
+    {t:'sort',q:'How many vertices?',qpt:'Quantos vértices?',
+     buckets:[{id:'v0',en:'0 vertices',pt:'nenhum',color:'#fbbf24'},
+              {id:'v3',en:'3 vertices',pt:'',color:'#fb923c'},
+              {id:'v4',en:'4 vertices',pt:'',color:'#34d399'},
+              {id:'v6',en:'6 vertices',pt:'',color:'#a78bfa'}],
+     items:[{en:'Circle',pt:'círculo',b:'v0'},{en:'Triangle',pt:'triângulo',b:'v3'},
+            {en:'Square',pt:'quadrado',b:'v4'},{en:'Rectangle',pt:'retângulo',b:'v4'},
+            {en:'Hexagon',pt:'hexágono',b:'v6'}],pick:4}
    ]},
 
- /* ===== FASE 2 — migração ===== */
- { id:'f2', icon:'✈️', color:'#38bdf8',
-   name:'De onde vieram as tradições', namePt:'a palavra MIGRAÇÃO',
-   anchor:'Quem migra leva a cultura na mala: comida, roupa, religião, festa e arquitetura.',
-   anchorPt:'É a lista que o material dá — decore os cinco.',
+ /* ===== FASE 3 — as figuras nos objetos ===== */
+ { id:'f3', icon:'👁️', color:'#38bdf8',
+   name:'Figures around us', namePt:'achar as figuras no dia a dia',
+   anchor:'A book cover is a rectangle. A stop sign is an octagon. A honeycomb cell is a hexagon.',
+   anchorPt:'Capa de livro = retângulo. Placa de PARE = octógono. Favo de mel = hexágono.',
    lesson:{lines:[
-    ['🌍','As tradições NÃO surgiram do nada. Muitas vieram com pessoas que MIGRARAM de outros lugares.',''],
-    ['🎒','MIGRAR é mudar de um lugar para outro levando consigo hábitos, crenças e modos de viver.','não é passeio: é ir morar em outro lugar'],
-    ['🍲','A cultura de quem migra aparece na CULINÁRIA, nas VESTIMENTAS, na RELIGIÃO, nas FESTAS e na ARQUITETURA.','5 lugares onde a cultura aparece'],
-    ['🇧🇷','Por isso o Brasil é MULTICULTURAL: muitas culturas dentro de um só país.','']
+    ['📕','A <b>book cover</b> and a <b>door</b> look like a <b>rectangle</b>.','capa de livro e porta'],
+    ['🪙','A <b>coin</b>, a <b>plate</b>, a <b>wheel</b> and a <b>clock face</b> look like a <b>circle</b>.','moeda, prato, roda, relógio'],
+    ['🍕','A <b>slice of pizza</b> and a <b>party hat</b> look like a <b>triangle</b>.','fatia de pizza e chapéu de festa'],
+    ['🛑','A <b>stop sign</b> is an <b>octagon</b> — 8 sides.','a placa de PARE'],
+    ['🍯','A <b>honeycomb cell</b> is a <b>hexagon</b> — 6 sides.','o favo de mel']
    ]},
    pick:3,
    bank:[
-    {t:'mc',q:'O que é MIGRAÇÃO?',qpt:'',opts:[
-      {en:'Quando pessoas mudam de um lugar para outro',pt:'',ok:true},
-      {en:'Quando uma família vai à praia no domingo',pt:'',ok:false},
-      {en:'Quando alguém troca de escola de sala',pt:'',ok:false}]},
-    {t:'mc',q:'Quem migra leva consigo…',qpt:'',opts:[
-      {en:'Hábitos, crenças e modos de viver',pt:'',ok:true},
-      {en:'Só as roupas na mala',pt:'',ok:false},
-      {en:'Nada — deixa tudo para trás',pt:'',ok:false}]},
-    {t:'multi',q:'Onde a cultura de quem migrou aparece? (pode ser mais de uma)',qpt:'são 5 no material',opts:[
-      {en:'Na culinária 🍲',pt:'',ok:true},
-      {en:'Nas vestimentas 👗',pt:'',ok:true},
-      {en:'Na religião 🙏',pt:'',ok:true},
-      {en:'Nas festas 🎉',pt:'',ok:true},
-      {en:'Na arquitetura 🏛️',pt:'',ok:true},
-      {en:'No tamanho do sapato 👟',pt:'',ok:false}]},
-    {t:'mc',q:'O que quer dizer MULTICULTURAL?',qpt:'',opts:[
-      {en:'Feito de muitas culturas juntas',pt:'como o Brasil',ok:true},
-      {en:'Feito de uma cultura só',pt:'',ok:false},
-      {en:'Que fala muitas línguas na escola',pt:'',ok:false}]},
-    {t:'mc',q:'A Oktoberfest de Blumenau veio de qual país?',qpt:'',opts:[
-      {en:'Da Alemanha 🇩🇪',pt:'e hoje acontece em Santa Catarina',ok:true},
-      {en:'Do Japão 🇯🇵',pt:'',ok:false},
-      {en:'De Portugal 🇵🇹',pt:'',ok:false}]},
-    {t:'mc',q:'O jiu-jitsu brasileiro nasceu a partir de qual arte marcial?',qpt:'',opts:[
-      {en:'Do judô e do jiu-jitsu japonês',pt:'foi adaptado aqui e virou brasileiro',ok:true},
-      {en:'Do futebol',pt:'',ok:false},
-      {en:'Da capoeira alemã',pt:'',ok:false}]},
-    {t:'mc',q:'O Santo Daime, ritual amazônico dos anos 1930, mistura tradições…',qpt:'',opts:[
-      {en:'Indígenas e cristãs',pt:'',ok:true},
-      {en:'Alemãs e japonesas',pt:'',ok:false},
-      {en:'Só indígenas',pt:'',ok:false}]}
+    {t:'mc',q:'A book cover looks like a…',qpt:'A capa de um livro parece um…',opts:FG('re')},
+    {t:'mc',q:'A coin looks like a…',qpt:'Uma moeda parece um…',opts:FG('ci')},
+    {t:'mc',q:'A slice of pizza looks like a…',qpt:'Uma fatia de pizza parece um…',opts:FG('tr')},
+    {t:'mc',q:'A stop sign looks like an…',qpt:'Uma placa de PARE parece um…',opts:FG('oc')},
+    {t:'mc',q:'A honeycomb cell looks like a…',qpt:'Um favo de mel parece um…',opts:FG('he')},
+    {t:'mc',q:'A door looks like a…',qpt:'Uma porta parece um…',opts:FG('re')},
+    {t:'mc',q:'A party hat looks like a…',qpt:'Um chapéu de festa parece um…',opts:FG('tr')},
+    {t:'sort',q:'Which figure is it?',qpt:'Que figura é?',
+     buckets:[{id:'re',en:'Rectangle',pt:'retângulo',color:'#60a5fa'},
+              {id:'ci',en:'Circle',pt:'círculo',color:'#fbbf24'},
+              {id:'tr',en:'Triangle',pt:'triângulo',color:'#fb923c'}],
+     items:[{en:'A book cover',pt:'capa de livro',b:'re'},{en:'A door',pt:'porta',b:'re'},
+            {en:'A plate',pt:'prato',b:'ci'},{en:'A wheel',pt:'roda',b:'ci'},
+            {en:'A slice of pizza',pt:'fatia de pizza',b:'tr'},{en:'A party hat',pt:'chapéu de festa',b:'tr'}],pick:4}
    ]},
 
- /* ===== FASE 3 — tradições e costumes do Brasil ===== */
- { id:'f3', icon:'🖼️', color:'#f472b6',
-   name:'Tradições e costumes do Brasil', namePt:'as fotos da Aula 4',
-   anchor:'Farinha de mandioca no Norte, bonecos de Olinda no Nordeste, chimarrão no Sul.',
-   anchorPt:'',
-   lesson:{lines:[
-    ['🥣','A farinha de mandioca é feita pelos povos INDÍGENAS DA AMAZÔNIA — Região Norte.',''],
-    ['🎭','Os BONECOS GIGANTES desfilam no carnaval de Olinda, em Pernambuco — Nordeste.',''],
-    ['🪵','A XILOGRAVURA é a arte que ilustra os folhetos da literatura de cordel — Nordeste.',''],
-    ['🥁','O JONGO é uma manifestação de matriz africana: dança, percussão e cantos em roda.',''],
-    ['🥋','O JIU-JITSU BRASILEIRO foi criado no Brasil, adaptado do judô e do jiu-jitsu japonês.',''],
-    ['🍺','A OKTOBERFEST DE BLUMENAU veio da Alemanha para Santa Catarina — Sul.',''],
-    ['🍚','O CUSCUZ PAULISTA é do Sudeste; o CUSCUZ NORDESTINO, do Nordeste. Mesmo nome, pratos diferentes!','a pegadinha favorita das provas'],
-    ['🧉','O CHIMARRÃO é da cultura gaúcha, do Rio Grande do Sul — Sul.','']
-   ]},
-   pick:4,
-   bank:[
-    {t:'mc',q:'A produção artesanal de farinha de mandioca é tradição de quem?',qpt:'',opts:[
-      {en:'Dos povos indígenas da Amazônia',pt:'',ok:true},
-      {en:'Dos imigrantes alemães do Sul',pt:'',ok:false},
-      {en:'Dos gaúchos do Rio Grande do Sul',pt:'',ok:false}]},
-    {t:'mc',q:'Os Bonecos Gigantes desfilam no carnaval de qual cidade?',qpt:'',opts:[
-      {en:'Olinda, em Pernambuco',pt:'',ok:true},
-      {en:'Blumenau, em Santa Catarina',pt:'',ok:false},
-      {en:'Parintins, no Amazonas',pt:'',ok:false}]},
-    {t:'mc',q:'A xilogravura é usada para ilustrar…',qpt:'',opts:[
-      {en:'Os folhetos da literatura de cordel',pt:'',ok:true},
-      {en:'As camisas do time de futebol',pt:'',ok:false},
-      {en:'Os livros de matemática',pt:'',ok:false}]},
-    {t:'mc',q:'O jongo é uma manifestação cultural de qual matriz?',qpt:'',opts:[
-      {en:'De matriz africana',pt:'dança, percussão e cantos em roda',ok:true},
-      {en:'De matriz alemã',pt:'',ok:false},
-      {en:'De matriz japonesa',pt:'',ok:false}]},
-    {t:'mc',q:'O cuscuz PAULISTA é de qual região?',qpt:'',opts:RG('se')},
-    {t:'mc',q:'O cuscuz NORDESTINO é de qual região?',qpt:'',opts:RG('ne')},
-    {t:'mc',q:'O chimarrão é bebida tradicional de qual região?',qpt:'',opts:RG('s')},
-    {t:'mc',q:'O Santo Daime é um ritual religioso de qual região?',qpt:'a floresta é a pista',opts:RG('n')},
-    {t:'mc',q:'O jiu-jitsu brasileiro foi desenvolvido em qual país?',qpt:'',opts:[
-      {en:'No Brasil 🇧🇷',pt:'a partir do judô e do jiu-jitsu japonês',ok:true},
-      {en:'No Japão 🇯🇵',pt:'',ok:false},
-      {en:'Na Alemanha 🇩🇪',pt:'',ok:false}]}
-   ]},
-
- /* ===== MINI CHEFE (revisa 1–3) ===== */
+ /* ===== MINI CHEFE 1 ===== */
  { id:'boss1', boss:true, icon:'👑', color:'#fbbf24',
    name:'Mini chefe!', namePt:'revisão das fases 1, 2 e 3',
-   intro:'O Curupira faz 4 perguntas das fases 1, 2 e 3!',
-   introPt:'',
+   intro:'4 questions from phases 1, 2 and 3!',
+   introPt:'4 perguntas das fases 1, 2 e 3!',
    from:['f1','f2','f3'], count:4 },
 
- /* ===== FASE 4 — as 5 regiões: comidas ===== */
- { id:'f4', icon:'🍲', color:'#34d399',
-   name:'As 5 regiões e suas comidas', namePt:'o mapa da comida',
-   anchor:'Norte: tacacá e açaí. Nordeste: acarajé, baião de dois e vatapá. Centro-Oeste: arroz com pequi e pamonha. Sudeste: feijoada e pão de queijo. Sul: churrasco gaúcho e arroz carreteiro.',
-   anchorPt:'',
+ /* ===== FASE 4 — somar lados e vértices ===== */
+ { id:'f4', icon:'👜', color:'#c084fc',
+   name:'What is in the bag?', namePt:'somar os lados de um grupo',
+   anchor:'Triangle + square + hexagon = 3 + 4 + 6 = 13 sides.',
+   anchorPt:'Triângulo + quadrado + hexágono = 3 + 4 + 6 = 13 lados.',
    lesson:{lines:[
-    ['🗺️','O Brasil tem CINCO regiões: Norte, Nordeste, Centro-Oeste, Sudeste e Sul.','toque em cada uma no mapa abaixo'],
-    ['🌳','NORTE: tacacá e açaí.',''],
-    ['☀️','NORDESTE: acarajé, baião de dois e vatapá.',''],
-    ['🦜','CENTRO-OESTE: arroz com pequi e pamonha.',''],
-    ['🏙️','SUDESTE: feijoada, pão de queijo, tutu de feijão e moqueca capixaba.',''],
-    ['🌲','SUL: churrasco gaúcho e arroz carreteiro.','']
-   ], custom:mapaRegioes},
-   pick:4,
-   bank:[
-    {t:'mc',q:'Tacacá e açaí são comidas típicas de qual região?',qpt:'',opts:RG('n')},
-    {t:'mc',q:'Acarajé e vatapá são comidas típicas de qual região?',qpt:'',opts:RG('ne')},
-    {t:'mc',q:'Baião de dois é comida típica de qual região?',qpt:'',opts:RG('ne')},
-    {t:'mc',q:'Arroz com pequi e pamonha são de qual região?',qpt:'',opts:RG('co')},
-    {t:'mc',q:'Feijoada, pão de queijo e tutu de feijão são de qual região?',qpt:'',opts:RG('se')},
-    {t:'mc',q:'Moqueca capixaba é de qual região?',qpt:'capixaba é quem nasce no Espírito Santo',opts:RG('se')},
-    {t:'mc',q:'Churrasco gaúcho e arroz carreteiro são de qual região?',qpt:'',opts:RG('s')},
-    {t:'sort',q:'Cada comida na sua região! Toque na caixa certa.',qpt:'',
-     buckets:BUCKETS5, pick:5,
-     items:[
-      {en:'Tacacá',pt:'',b:'n'},{en:'Açaí',pt:'',b:'n'},
-      {en:'Acarajé',pt:'',b:'ne'},{en:'Vatapá',pt:'',b:'ne'},{en:'Baião de dois',pt:'',b:'ne'},
-      {en:'Arroz com pequi',pt:'',b:'co'},{en:'Pamonha',pt:'',b:'co'},
-      {en:'Feijoada',pt:'',b:'se'},{en:'Pão de queijo',pt:'',b:'se'},{en:'Moqueca capixaba',pt:'',b:'se'},
-      {en:'Churrasco gaúcho',pt:'',b:'s'},{en:'Arroz carreteiro',pt:'',b:'s'}]}
-   ]},
-
- /* ===== FASE 5 — festas das regiões ===== */
- { id:'f5', icon:'🎉', color:'#fbbf24',
-   name:'As festas de cada região', namePt:'boi-bumbá × bumba meu boi',
-   anchor:'Boi-bumbá é o festival de Parintins, no Norte. Bumba meu boi é do Nordeste.',
-   anchorPt:'a pegadinha número 1 da prova',
-   lesson:{lines:[
-    ['🐂','NORTE: festival de Parintins, o BOI-BUMBÁ. E a Festa do Divino.',''],
-    ['🎊','NORDESTE: carnaval de Salvador, festa de São João, BUMBA MEU BOI, festa do Senhor do Bonfim e festa de Iemanjá.',''],
-    ['⛪','CENTRO-OESTE: festa do Divino Espírito Santo, Festa de São Benedito, festa de São Sebastião e Romaria do Divino Pai Eterno.',''],
-    ['🤠','SUDESTE: festa do peão de Barretos, carnaval do Rio, festa da uva de Jundiaí, festa de Nossa Senhora Aparecida e festa da congada.',''],
-    ['🍺','SUL: Oktoberfest, festa nacional do pinhão, festa do vinho e Semana Farroupilha.',''],
-    ['⚠️','CUIDADO: BOI-BUMBÁ é do Norte (Parintins). BUMBA MEU BOI é do Nordeste. Parecem iguais, mas não são!','leia o nome inteiro antes de responder']
-   ]},
-   pick:4,
-   bank:[
-    {t:'mc',q:'O festival de Parintins (boi-bumbá) acontece em qual região?',qpt:'Parintins fica no Amazonas',opts:RG('n')},
-    {t:'mc',q:'O bumba meu boi é festa de qual região?',qpt:'não confunda com o boi-bumbá de Parintins',opts:RG('ne')},
-    {t:'mc',q:'O carnaval de Salvador é de qual região?',qpt:'',opts:RG('ne')},
-    {t:'mc',q:'A festa de São João e a festa de Iemanjá são de qual região?',qpt:'',opts:RG('ne')},
-    {t:'mc',q:'A festa do peão de Barretos e o carnaval do Rio são de qual região?',qpt:'',opts:RG('se')},
-    {t:'mc',q:'A festa da uva de Jundiaí é de qual região?',qpt:'Jundiaí fica em São Paulo',opts:RG('se')},
-    {t:'mc',q:'A Romaria do Divino Pai Eterno e a festa de São Benedito são de qual região?',qpt:'',opts:RG('co')},
-    {t:'mc',q:'A Oktoberfest e a festa nacional do pinhão são de qual região?',qpt:'',opts:RG('s')},
-    {t:'mc',q:'A Semana Farroupilha é de qual região?',qpt:'',opts:RG('s')},
-    {t:'sort',q:'Boi-bumbá ou bumba meu boi? E as outras festas?',qpt:'',
-     buckets:BUCKETS5, pick:5,
-     items:[
-      {en:'Festival de Parintins (boi-bumbá)',pt:'',b:'n'},
-      {en:'Bumba meu boi',pt:'',b:'ne'},{en:'Carnaval de Salvador',pt:'',b:'ne'},{en:'Festa do Senhor do Bonfim',pt:'',b:'ne'},
-      {en:'Festa do Divino Espírito Santo',pt:'',b:'co'},{en:'Festa de São Benedito',pt:'',b:'co'},
-      {en:'Carnaval do Rio',pt:'',b:'se'},{en:'Festa do peão de Barretos',pt:'',b:'se'},{en:'Festa da congada',pt:'',b:'se'},
-      {en:'Oktoberfest',pt:'',b:'s'},{en:'Semana Farroupilha',pt:'',b:'s'},{en:'Festa nacional do pinhão',pt:'',b:'s'}]}
-   ]},
-
- /* ===== FASE 6 — danças e músicas ===== */
- { id:'f6', icon:'💃', color:'#a78bfa',
-   name:'Danças e músicas do Brasil', namePt:'carimbó, frevo, siriri, samba, xote',
-   anchor:'Carimbó no Norte, frevo no Nordeste, siriri no Centro-Oeste, samba no Sudeste, pau de fita no Sul.',
-   anchorPt:'',
-   lesson:{lines:[
-    ['🌳','NORTE: carimbó (dança) · toada, carimbó e boi-bumbá (música).',''],
-    ['☀️','NORDESTE: frevo, forró, baião e maracatu — que são dança E música — mais axé e xote.','no Nordeste, a mesma palavra é dança e música'],
-    ['🦜','CENTRO-OESTE: siriri e cururu (dança) · sertanejo e moda de viola (música).',''],
-    ['🏙️','SUDESTE: samba (dança) · samba, funk, pagode e MPB (música).',''],
-    ['🌲','SUL: xote gaúcho e pau de fita (dança) · sertanejo universitário (música).','xote gaúcho é do Sul; xote sozinho é do Nordeste']
-   ]},
-   pick:4,
-   bank:[
-    {t:'mc',q:'O carimbó é dança de qual região?',qpt:'',opts:RG('n')},
-    {t:'mc',q:'Frevo, forró, baião e maracatu são de qual região?',qpt:'',opts:RG('ne')},
-    {t:'mc',q:'O axé é música de qual região?',qpt:'',opts:RG('ne')},
-    {t:'mc',q:'Siriri e cururu são danças de qual região?',qpt:'',opts:RG('co')},
-    {t:'mc',q:'A moda de viola é música de qual região?',qpt:'vem junto com o sertanejo',opts:RG('co')},
-    {t:'mc',q:'Samba, pagode, funk e MPB são músicas de qual região?',qpt:'',opts:RG('se')},
-    {t:'mc',q:'O xote gaúcho e o pau de fita são danças de qual região?',qpt:'gaúcho = do Rio Grande do Sul',opts:RG('s')},
-    {t:'mc',q:'O sertanejo universitário é música de qual região?',qpt:'',opts:RG('s')},
-    {t:'mc',q:'A toada é música de qual região?',qpt:'',opts:RG('n')},
-    {t:'sort',q:'Cada dança e música na sua região!',qpt:'',
-     buckets:BUCKETS5, pick:5,
-     items:[
-      {en:'Carimbó',pt:'',b:'n'},{en:'Toada',pt:'',b:'n'},
-      {en:'Frevo',pt:'',b:'ne'},{en:'Maracatu',pt:'',b:'ne'},{en:'Axé',pt:'',b:'ne'},
-      {en:'Siriri',pt:'',b:'co'},{en:'Cururu',pt:'',b:'co'},{en:'Moda de viola',pt:'',b:'co'},
-      {en:'Samba',pt:'',b:'se'},{en:'Pagode',pt:'',b:'se'},{en:'MPB',pt:'',b:'se'},
-      {en:'Xote gaúcho',pt:'',b:'s'},{en:'Pau de fita',pt:'',b:'s'},{en:'Sertanejo universitário',pt:'',b:'s'}]}
-   ]},
-
- /* ===== FASE 7 — diversidade e meio ambiente ===== */
- { id:'f7', icon:'🌎', color:'#22d3ee',
-   name:'Lugares diferentes, modos de viver diferentes', namePt:'respeitar a diversidade',
-   anchor:'Pessoas em lugares diferentes têm relações diferentes com o meio ambiente — por isso respeitamos a diversidade.',
-   anchorPt:'',
-   lesson:{lines:[
-    ['🌎','Pessoas em DIFERENTES LUGARES têm relações DISTINTAS com o meio ambiente onde vivem.',''],
-    ['🍃','Isso aparece nos HÁBITOS e nas MANIFESTAÇÕES CULTURAIS de cada lugar.','por isso o açaí é do Norte e o pinhão é do Sul'],
-    ['❤️','Entender isso nos ajuda a RESPEITAR A DIVERSIDADE.',''],
-    ['🇧🇷','O Brasil é multicultural: muitas culturas, muitas comidas, muitas festas — e todas valem.','']
+    ['👜','There are <b>3 figures</b> in a bag. You know the <b>total</b> of sides or vertices.','sabe-se só o total'],
+    ['➕','Add the sides of each one and see if the total fits.','some os lados de cada uma e confira o total'],
+    ['1️⃣','13 sides: <b>triangle + square + hexagon</b> (3 + 4 + 6).',''],
+    ['2️⃣','12 vertices: <b>square + square + square</b> (4 + 4 + 4).',''],
+    ['✨','There is <b>more than one</b> right answer — that is the fun of it!','existe mais de uma resposta certa']
    ]},
    pick:3,
    bank:[
-    {t:'mc',q:'Por que as pessoas de lugares diferentes vivem de modos diferentes?',qpt:'',opts:[
-      {en:'Porque têm relações distintas com o meio ambiente onde vivem',pt:'',ok:true},
-      {en:'Porque uma cultura é melhor que a outra',pt:'',ok:false},
-      {en:'Porque só existe um jeito certo de viver',pt:'',ok:false}]},
-    {t:'mc',q:'Entender que cada lugar tem seu modo de viver nos ajuda a…',qpt:'',opts:[
-      {en:'Respeitar a diversidade',pt:'',ok:true},
-      {en:'Escolher a melhor região',pt:'',ok:false},
-      {en:'Achar graça dos costumes dos outros',pt:'',ok:false}]},
-    {t:'mc',q:'As diferenças entre as regiões aparecem principalmente em…',qpt:'',opts:[
-      {en:'Nos hábitos e nas manifestações culturais',pt:'',ok:true},
-      {en:'Só no jeito de falar',pt:'',ok:false},
-      {en:'Só na cor das casas',pt:'',ok:false}]},
-    {t:'mc',q:'O Brasil é um país…',qpt:'',opts:[
-      {en:'Multicultural — feito de muitas culturas',pt:'',ok:true},
-      {en:'De uma cultura só',pt:'',ok:false},
-      {en:'Sem tradições',pt:'',ok:false}]},
-    {t:'multi',q:'O que ajuda a construir a identidade cultural de uma comunidade? (pode ser mais de uma)',qpt:'',opts:[
-      {en:'As tradições 🤝',pt:'',ok:true},
-      {en:'Os costumes 🎭',pt:'',ok:true},
-      {en:'As histórias que se entrelaçam ao longo do tempo 🕰️',pt:'',ok:true},
-      {en:'A cor do tênis novo 👟',pt:'',ok:false}]},
-    {t:'mc',q:'Uma tradição pode mudar com o tempo?',qpt:'a professora falou disso na roda de conversa',opts:[
-      {en:'Pode: uma brincadeira antiga pode ter se transformado ao longo dos anos',pt:'',ok:true},
-      {en:'Nunca muda nada',pt:'',ok:false},
-      {en:'Só muda se a gente mudar de país',pt:'',ok:false}]}
+    {t:'mc',q:'Which group has 13 sides in total?',qpt:'Qual grupo tem 13 lados no total?',opts:[
+      {en:'Triangle + square + hexagon',pt:'3 + 4 + 6 = 13',ok:true},
+      {en:'Triangle + square + square',pt:'3 + 4 + 4 = 11',ok:false},
+      {en:'Square + square + square',pt:'4 + 4 + 4 = 12',ok:false}]},
+    {t:'mc',q:'Which group has 12 vertices in total?',qpt:'Qual grupo tem 12 vértices no total?',opts:[
+      {en:'Square + square + square',pt:'4 + 4 + 4 = 12',ok:true},
+      {en:'Triangle + triangle + triangle',pt:'3 + 3 + 3 = 9',ok:false},
+      {en:'Pentagon + pentagon + pentagon',pt:'5 + 5 + 5 = 15',ok:false}]},
+    {t:'mc',q:'Which group has 12 vertices in total?',qpt:'Qual grupo tem 12 vértices no total?',opts:[
+      {en:'Triangle + triangle + hexagon',pt:'3 + 3 + 6 = 12',ok:true},
+      {en:'Triangle + square + square',pt:'3 + 4 + 4 = 11',ok:false},
+      {en:'Square + hexagon + hexagon',pt:'4 + 6 + 6 = 16',ok:false}]},
+    {t:'mc',q:'A triangle and a square together have how many sides?',qpt:'Um triângulo e um quadrado juntos têm quantos lados?',opts:NUM(7,[7,6,8])},
+    {t:'mc',q:'Two triangles together have how many vertices?',qpt:'Dois triângulos juntos têm quantos vértices?',opts:NUM(6,[6,3,9])},
+    {t:'mc',q:'A pentagon and a hexagon together have how many sides?',qpt:'Um pentágono e um hexágono juntos têm quantos lados?',opts:NUM(11,[11,10,12])},
+    {t:'mc',q:'Two squares together have how many vertices?',qpt:'Dois quadrados juntos têm quantos vértices?',opts:NUM(8,[8,4,6])}
+   ]},
+
+ /* ===== FASE 5 — simetria ===== */
+ { id:'f5', icon:'🪞', color:'#f472b6',
+   name:'Symmetry', namePt:'dobrar e ver se combina',
+   anchor:'A figure has symmetry when you fold it and the two halves match.',
+   anchorPt:'Tem simetria quando dá para dobrar e as duas metades combinam.',
+   lesson:{lines:[
+    ['🪞','A figure has <b>symmetry</b> when you can <b>fold</b> it and the two halves <b>match</b>.','dobrar e as metades combinam'],
+    ['✂️','The fold line is the <b>line of symmetry</b>.','a linha da dobra'],
+    ['🖼️','The half that is missing is the <b>matching part</b> — the <b>mirror image</b>.','a metade que falta é a imagem no espelho'],
+    ['🔴','We check with a <b>Mira</b>: a little red mirror.','a Mira é o espelhinho'],
+    ['📏','The line can be <b>standing up</b> OR <b>lying down</b> — and a figure can have more than one!','em pé OU deitada']
+   ]},
+   pick:3,
+   bank:[
+    {t:'mc',q:'A figure has symmetry when…',qpt:'Uma figura tem simetria quando…',opts:[
+      {en:'You fold it and the two halves match',pt:'dobra e as metades combinam',ok:true},
+      {en:'It has a lot of colours',pt:'tem muitas cores',ok:false},
+      {en:'It is very big',pt:'é bem grande',ok:false}]},
+    {t:'mc',q:'What is the fold line called?',qpt:'Como se chama a linha da dobra?',opts:[
+      {en:'Line of symmetry',pt:'linha de simetria',ok:true},
+      {en:'Side',pt:'lado',ok:false},{en:'Vertex',pt:'vértice',ok:false}]},
+    {t:'mc',q:'What is the MATCHING PART?',qpt:'O que é a matching part?',opts:[
+      {en:'The mirror image — the half that is missing',pt:'a imagem no espelho, a metade que falta',ok:true},
+      {en:'The longest side',pt:'o lado mais comprido',ok:false},
+      {en:'The number of vertices',pt:'o número de vértices',ok:false}]},
+    {t:'mc',q:'What do we use a MIRA for?',qpt:'Para que serve a Mira?',opts:[
+      {en:'To check if a figure has symmetry',pt:'conferir a simetria',ok:true},
+      {en:'To measure the sides',pt:'medir os lados',ok:false},
+      {en:'To colour the figure',pt:'pintar a figura',ok:false}]},
+    {t:'mc',q:'A line of symmetry can be…',qpt:'A linha de simetria pode ser…',opts:[
+      {en:'Standing up OR lying down',pt:'em pé OU deitada',ok:true},
+      {en:'Only standing up',pt:'só em pé',ok:false},
+      {en:'Only lying down',pt:'só deitada',ok:false}]},
+    {t:'mc',q:'You drew half of a figure. To finish it with symmetry you draw…',qpt:'Desenhou metade da figura. Para terminar com simetria você desenha…',opts:[
+      {en:'The matching part, like a mirror',pt:'a metade que combina, como num espelho',ok:true},
+      {en:'Any figure you like',pt:'qualquer figura',ok:false},
+      {en:'A bigger half',pt:'uma metade maior',ok:false}]}
+   ]},
+
+ /* ===== FASE 6 — simetria nas letras ===== */
+ { id:'f6', icon:'🔠', color:'#fbbf24',
+   name:'Symmetry in letters', namePt:'as letras que se dobram',
+   anchor:'O, X, A, M, V, C and B have symmetry. G, P, J and R do not.',
+   anchorPt:'Têm simetria: O, X, A, M, V, C e B. Não têm: G, P, J e R.',
+   lesson:{lines:[
+    ['⭕','<b>O</b> and <b>X</b> have TWO lines: standing up and lying down.','O e X têm as duas linhas'],
+    ['🅰️','<b>A</b>, <b>M</b> and <b>V</b> have a line <b>standing up</b>.','A, M e V: linha em pé'],
+    ['🅱️','<b>C</b> and <b>B</b> have a line <b>LYING DOWN</b>. Careful — this is the trap!','C e B: linha DEITADA — a pegadinha'],
+    ['❌','<b>G</b>, <b>P</b>, <b>J</b> and <b>R</b> have no line of symmetry.','G, P, J e R não têm'],
+    ['👩','The word <b>MOM</b> has symmetry: the Mira goes standing up, in the middle of the O.','MOM: a Mira no meio do O']
+   ]},
+   pick:3,
+   bank:[
+    {t:'mc',q:'Which letter has a line of symmetry?',qpt:'Que letra tem linha de simetria?',opts:[
+      {en:'X',pt:'em pé e deitada',ok:true},{en:'J',pt:'não tem',ok:false},{en:'P',pt:'não tem',ok:false}]},
+    {t:'mc',q:'Which letter has NO line of symmetry?',qpt:'Que letra NÃO tem linha de simetria?',opts:[
+      {en:'R',pt:'não tem',ok:true},{en:'A',pt:'tem, em pé',ok:false},{en:'M',pt:'tem, em pé',ok:false}]},
+    {t:'mc',q:'The letter C has a line of symmetry that is…',qpt:'A letra C tem a linha de simetria…',opts:[
+      {en:'Lying down',pt:'deitada',ok:true},{en:'Standing up',pt:'em pé',ok:false},{en:'It has none',pt:'não tem nenhuma',ok:false}]},
+    {t:'mc',q:'The letter O has…',qpt:'A letra O tem…',opts:[
+      {en:'More than one line of symmetry',pt:'mais de uma linha',ok:true},
+      {en:'No line of symmetry',pt:'nenhuma',ok:false},
+      {en:'Only a lying-down line',pt:'só a deitada',ok:false}]},
+    {t:'mc',q:'Where do you put the Mira on MOM?',qpt:'Onde se põe a Mira em MOM?',opts:[
+      {en:'Standing up, in the middle of the O',pt:'em pé, no meio do O',ok:true},
+      {en:'Lying down, under the word',pt:'deitada, embaixo',ok:false},
+      {en:'After the last M',pt:'depois do último M',ok:false}]},
+    {t:'mc',q:'Which word shows symmetry?',qpt:'Que palavra tem simetria?',opts:[
+      {en:'WOW',pt:'como MOM',ok:true},{en:'CAT',pt:'',ok:false},{en:'DOG',pt:'',ok:false}]},
+    {t:'sort',q:'Does this letter have symmetry?',qpt:'Esta letra tem simetria?',
+     buckets:[{id:'sim',en:'Has symmetry',pt:'tem simetria',color:'#34d399'},
+              {id:'nao',en:'No symmetry',pt:'não tem',color:'#fb7185'}],
+     items:[{en:'The letter O',pt:'a letra O',b:'sim'},{en:'The letter X',pt:'a letra X',b:'sim'},
+            {en:'The letter A',pt:'a letra A',b:'sim'},{en:'The letter M',pt:'a letra M',b:'sim'},
+            {en:'The letter C',pt:'a letra C — linha deitada',b:'sim'},{en:'The letter B',pt:'a letra B — linha deitada',b:'sim'},
+            {en:'The letter G',pt:'a letra G',b:'nao'},{en:'The letter P',pt:'a letra P',b:'nao'},
+            {en:'The letter J',pt:'a letra J',b:'nao'},{en:'The letter R',pt:'a letra R',b:'nao'}],pick:5}
+   ]},
+
+ /* ===== FASE 7 — slide, flip, turn e a colcha ===== */
+ { id:'f7', icon:'🔄', color:'#60a5fa',
+   name:'Slide, flip and turn', namePt:'os padrões e a colcha',
+   anchor:'Slide = it walks · Flip = mirror · Turn = it spins.',
+   anchorPt:'Slide = anda · Flip = espelho · Turn = gira.',
+   lesson:{lines:[
+    ['➡️','<b>Slide</b>: the figure walks to the next spot. No spinning, no mirror.','deslizar'],
+    ['🪞','<b>Flip</b>: the figure shows its <b>mirror image</b>.','virar'],
+    ['🔃','<b>Turn</b>: the figure spins around a point, like a clock hand.','girar'],
+    ['🧵','A <b>repeating pattern</b> is a little piece that comes again and again. You can make one with <b>just one figure</b>.','com uma figura só'],
+    ['🔒','What never changes: the number of sides, the number of vertices, the size and the name.','a figura continua a mesma'],
+    ['🧩','The <b>quilt</b> is a 3 by 3 grid, blocks 1 to 9. From block 1: down two, one right, up one, one left → block <b>4</b>.','a colcha']
+   ]},
+   pick:3,
+   bank:[
+    {t:'mc',q:'Which move makes the figure walk to the next spot without spinning?',qpt:'Que movimento faz a figura andar sem rodar?',opts:[
+      {en:'Slide',pt:'deslizar',ok:true},{en:'Flip',pt:'virar',ok:false},{en:'Turn',pt:'girar',ok:false}]},
+    {t:'mc',q:'Which move shows the mirror image?',qpt:'Que movimento mostra a imagem no espelho?',opts:[
+      {en:'Flip',pt:'virar',ok:true},{en:'Slide',pt:'deslizar',ok:false},{en:'Turn',pt:'girar',ok:false}]},
+    {t:'mc',q:'Which move spins the figure around a point?',qpt:'Que movimento faz a figura rodar em volta de um ponto?',opts:[
+      {en:'Turn',pt:'girar',ok:true},{en:'Slide',pt:'deslizar',ok:false},{en:'Flip',pt:'virar',ok:false}]},
+    {t:'mc',q:'A triangle turns. How many sides does it have now?',qpt:'Um triângulo gira. Quantos lados ele tem agora?',opts:[
+      {en:'Still 3',pt:'ainda 3',ok:true},{en:'Now 4',pt:'',ok:false},{en:'Now 0',pt:'',ok:false}]},
+    {t:'mc',q:'When a figure slides, flips or turns, what changes?',qpt:'Quando a figura desliza, vira ou gira, o que muda?',opts:[
+      {en:'Where it is and which way it faces',pt:'o lugar e o lado para onde aponta',ok:true},
+      {en:'The number of sides',pt:'o número de lados',ok:false},
+      {en:'The name of the figure',pt:'o nome da figura',ok:false}]},
+    {t:'mc',q:'To draw the quilt border pattern, how many different figures do you need?',qpt:'Para o padrão da borda da colcha, quantas figuras diferentes?',opts:[
+      {en:'Just one',pt:'uma só',ok:true},{en:'Three',pt:'três',ok:false},{en:'One for each block',pt:'uma por bloco',ok:false}]},
+    {t:'mc',q:'Start in block 1. Go straight down two blocks. Which block are you in?',qpt:'Comece no bloco 1 e desça dois. Em que bloco você está?',opts:[
+      {en:'Block 7',pt:'1 → 4 → 7',ok:true},{en:'Block 3',pt:'',ok:false},{en:'Block 2',pt:'',ok:false}]},
+    {t:'sort',q:'Slide, flip or turn?',qpt:'Deslizar, virar ou girar?',
+     buckets:[{id:'sl',en:'Slide',pt:'deslizar',color:'#60a5fa'},
+              {id:'fl',en:'Flip',pt:'virar',color:'#f472b6'},
+              {id:'tu',en:'Turn',pt:'girar',color:'#fbbf24'}],
+     items:[{en:'It walks to the next spot',pt:'anda para o lugar de perto',b:'sl'},
+            {en:'It moves without spinning',pt:'move sem rodar',b:'sl'},
+            {en:'You see its mirror image',pt:'vê-se a imagem no espelho',b:'fl'},
+            {en:'It flips over, like a pancake',pt:'vira do avesso',b:'fl'},
+            {en:'It spins around a point',pt:'roda em volta de um pontinho',b:'tu'},
+            {en:'It goes round like a clock hand',pt:'roda como o ponteiro do relógio',b:'tu'}],pick:4}
    ]},
 
  /* ===== CHEFE FINAL ===== */
  { id:'bossF', boss:true, final:true, icon:'🐉', color:'#f43f5e',
-   name:'O Grande Desafio do Brasil', namePt:'tudo o que você aprendeu',
-   intro:'Vença 6 perguntas da expedição INTEIRA para ganhar todos os emblemas!',
-   introPt:'',
+   name:'The Great Shape Challenge', namePt:'tudo o que você aprendeu',
+   intro:'Win 6 questions from the WHOLE quest to get every badge!',
+   introPt:'Vença 6 perguntas da aventura inteira para ganhar todos os emblemas!',
    from:['f1','f2','f3','f4','f5','f6','f7'], count:6 }
  ]
 };
