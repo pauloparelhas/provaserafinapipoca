@@ -52,12 +52,6 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;
 #app{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:clamp(12px,3vh,26px) clamp(12px,3vw,24px) 56px;}
 
 /* ============ BARRA DE CONTROLES ============ */
-.maint-banner{display:flex;align-items:center;gap:10px;background:var(--hot-bg);border:2px solid var(--hot-line);border-radius:16px;padding:12px 14px;margin-bottom:14px;box-shadow:var(--sh);}
-.maint-banner .me{font-size:22px;flex-shrink:0;animation:maintPulse 1.6s ease-in-out infinite;}
-.maint-banner .mt{font-size:clamp(12px,2.6vw,14px);font-weight:800;color:var(--ink);line-height:1.42;}
-.maint-banner .mt b{color:var(--hot);}
-@keyframes maintPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.75}}
-@media (prefers-reduced-motion:reduce){.maint-banner .me{animation:none}}
 .ctrls{display:flex;justify-content:flex-end;gap:8px;margin-bottom:6px;}
 .cbtn{min-height:44px;min-width:44px;border-radius:14px;border:1px solid var(--line);
   background:var(--card);color:var(--ink);font-family:inherit;font-weight:900;font-size:.82rem;
@@ -214,12 +208,6 @@ body.show-tr .cbtn.flag{opacity:1;filter:none;background:var(--warm-bg);border-c
 <body>
 <canvas id="starfield"></canvas>
 <div id="app">
-
-  <div class="maint-banner">
-    <span class="me">&#x1F527;</span>
-    <span class="mt"><b>Under update:</b> we're checking every page for mistakes right now — some parts may be wrong until we're done.
-      <span class="tr">Em atualização: estamos revisando cada página agora — algumas partes ainda podem estar erradas até terminarmos.</span></span>
-  </div>
 
   <div class="ctrls">
     <button class="cbtn flag" id="flagBtn" onclick="toggleTr()" aria-pressed="false" title="Português">
