@@ -1,265 +1,366 @@
 {
- "title": "Geometria Questionário",
+ "title": "Geometry Quiz",
+ "titlePt": "Quiz de Geometria",
  "questions": [
   {
-   "question": "Qual figura possui exatamente 5 sides (lados) e 5 vertices (vértices)?",
+   "question": "Which figure has exactly 5 sides and 5 vertices?",
+   "questionPt": "Qual figura tem exatamente 5 lados e 5 vértices?",
    "answerOptions": [
     {
-     "text": "triangle (triângulo)",
+     "text": "Triangle",
+     "textPt": "Triângulo",
      "isCorrect": false,
-     "rationale": "Triângulos possuem apenas três lados e três vértices."
+     "rationale": "Triangles only have three sides and three vertices.",
+     "rationalePt": "Triângulos têm apenas três lados e três vértices."
     },
     {
-     "text": "square (quadrado)",
+     "text": "Square",
+     "textPt": "Quadrado",
      "isCorrect": false,
-     "rationale": "Quadrados são figuras de quatro lados e quatro vértices."
+     "rationale": "Squares are four-sided figures with four vertices.",
+     "rationalePt": "Quadrados são figuras de quatro lados e quatro vértices."
     },
     {
-     "text": "pentagon (pentágono)",
+     "text": "Pentagon",
+     "textPt": "Pentágono",
      "isCorrect": true,
-     "rationale": "O pentágono é definido por ter cinco linhas retas e cinco cantos onde elas se encontram."
+     "rationale": "A pentagon is defined by five straight sides and five corners where they meet.",
+     "rationalePt": "O pentágono é definido por ter cinco lados retos e cinco cantos onde eles se encontram."
     },
     {
-     "text": "hexagon (hexágono)",
+     "text": "Hexagon",
+     "textPt": "Hexágono",
      "isCorrect": false,
-     "rationale": "Hexágonos possuem seis lados, um a mais do que o solicitado."
+     "rationale": "Hexagons have six sides — one more than what's asked.",
+     "rationalePt": "Hexágonos têm seis lados, um a mais do que o pedido."
     }
    ],
-   "hint": "O nome desta figura começa com o prefixo 'penta', que significa cinco."
+   "hint": "This figure's name starts with the prefix 'penta', which means five.",
+   "hintPt": "O nome desta figura começa com o prefixo 'penta', que significa cinco."
   },
   {
-   "question": "Qual destas figuras geométricas você encontraria no formato de um stop sign (placa de PARE)?",
+   "question": "Which of these figures would you find in the shape of a stop sign?",
+   "questionPt": "Qual destas figuras você encontraria no formato de uma placa de PARE?",
    "answerOptions": [
     {
-     "text": "octagon (octógono)",
+     "text": "Octagon",
+     "textPt": "Octógono",
      "isCorrect": true,
-     "rationale": "A placa de pare é um exemplo clássico de uma figura com oito lados iguais."
+     "rationale": "A stop sign is a classic example of a figure with eight equal sides.",
+     "rationalePt": "A placa de pare é um exemplo clássico de uma figura com oito lados iguais."
     },
     {
-     "text": "circle (círculo)",
+     "text": "Circle",
+     "textPt": "Círculo",
      "isCorrect": false,
-     "rationale": "Círculos são redondos, enquanto a placa de pare possui várias bordas retas."
+     "rationale": "Circles are round, while a stop sign has several straight edges.",
+     "rationalePt": "Círculos são redondos, enquanto a placa de pare tem várias bordas retas."
     },
     {
-     "text": "rectangle (retângulo)",
+     "text": "Rectangle",
+     "textPt": "Retângulo",
      "isCorrect": false,
-     "rationale": "Retângulos possuem apenas quatro lados, mas a placa de pare tem oito."
+     "rationale": "Rectangles only have four sides, but a stop sign has eight.",
+     "rationalePt": "Retângulos têm apenas quatro lados, mas a placa de pare tem oito."
     },
     {
-     "text": "hexagon (hexágono)",
+     "text": "Hexagon",
+     "textPt": "Hexágono",
      "isCorrect": false,
-     "rationale": "Hexágonos têm seis lados, o que é insuficiente para formar uma placa de pare padrão."
+     "rationale": "Hexagons have six sides, which isn't enough to make a standard stop sign.",
+     "rationalePt": "Hexágonos têm seis lados, o que não é suficiente para formar uma placa de pare padrão."
     }
    ],
-   "hint": "Pense em um animal marinho chamado 'octopus' e conte quantos braços ele tem."
+   "hint": "Think of a sea animal called an 'octopus' and count how many arms it has.",
+   "hintPt": "Pense num animal marinho chamado 'octopus' (polvo) e conte quantos braços ele tem."
   },
   {
-   "question": "O que é um vertex (vértice) em uma figura plana?",
+   "question": "What is a vertex in a flat figure?",
+   "questionPt": "O que é um vértice numa figura plana?",
    "answerOptions": [
     {
-     "text": "Cada uma das linhas retas da figura",
+     "text": "Each of the figure's straight lines",
+     "textPt": "Cada uma das linhas retas da figura",
      "isCorrect": false,
-     "rationale": "As linhas retas são chamadas de lados ou edges, não vértices."
+     "rationale": "Straight lines are called sides or edges, not vertices.",
+     "rationalePt": "As linhas retas são chamadas de lados ou edges, não vértices."
     },
     {
-     "text": "O cantinho onde dois sides (lados) se encontram",
+     "text": "The corner where two sides meet",
+     "textPt": "O cantinho onde dois lados se encontram",
      "isCorrect": true,
-     "rationale": "Vértices são os pontos de junção onde as extremidades de dois lados retos se tocam."
+     "rationale": "Vertices are the joining points where the ends of two straight sides touch.",
+     "rationalePt": "Vértices são os pontos de junção onde as pontas de dois lados retos se tocam."
     },
     {
-     "text": "A parte de dentro da figura",
+     "text": "The inside of the figure",
+     "textPt": "A parte de dentro da figura",
      "isCorrect": false,
-     "rationale": "O interior é a área da figura, enquanto o vértice é um ponto específico na borda."
+     "rationale": "The interior is the figure's area, while the vertex is a specific point on the edge.",
+     "rationalePt": "O interior é a área da figura, enquanto o vértice é um ponto específico na borda."
     },
     {
-     "text": "Uma linha curva que fecha um círculo",
+     "text": "A curved line that closes a circle",
+     "textPt": "Uma linha curva que fecha um círculo",
      "isCorrect": false,
-     "rationale": "Linhas curvas não formam vértices, pois não possuem cantos pontiagudos."
+     "rationale": "Curved lines don't form vertices, because they have no sharp corners.",
+     "rationalePt": "Linhas curvas não formam vértices, pois não têm cantos pontiagudos."
     }
    ],
-   "hint": "Em inglês, essa parte da figura também pode ser chamada de 'corner'."
+   "hint": "In English, this part of the figure can also be called a 'corner'.",
+   "hintPt": "Em inglês, essa parte da figura também pode ser chamada de 'corner' (cantinho)."
   },
   {
-   "question": "Se você tem 3 figuras dentro de uma sacola e o total de sides (lados) é 13, quais figuras poderiam ser?",
+   "question": "If you have 3 figures in a bag and the total number of sides is 13, which figures could they be?",
+   "questionPt": "Se você tem 3 figuras dentro de uma sacola e o total de lados é 13, quais figuras poderiam ser?",
    "answerOptions": [
     {
-     "text": "triangle (triângulo) + square (quadrado) + hexagon (hexágono)",
+     "text": "Triangle + square + hexagon",
+     "textPt": "Triângulo + quadrado + hexágono",
      "isCorrect": true,
-     "rationale": "Somando os lados dessas figuras (3 + 4 + 6), chegamos ao total exato de 13."
+     "rationale": "Adding up the sides of these figures (3 + 4 + 6) gives exactly 13.",
+     "rationalePt": "Somando os lados dessas figuras (3 + 4 + 6), chegamos ao total exato de 13."
     },
     {
-     "text": "3 triangles (triângulos)",
+     "text": "3 triangles",
+     "textPt": "3 triângulos",
      "isCorrect": false,
-     "rationale": "Três triângulos teriam um total de apenas 9 lados."
+     "rationale": "Three triangles would give a total of only 9 sides.",
+     "rationalePt": "Três triângulos dariam um total de apenas 9 lados."
     },
     {
-     "text": "octagon (octógono) + triangle (triângulo) + square (quadrado)",
+     "text": "Octagon + triangle + square",
+     "textPt": "Octógono + triângulo + quadrado",
      "isCorrect": false,
-     "rationale": "Essa combinação daria 15 lados (8 + 3 + 4), passando do total de 13."
+     "rationale": "This combination gives 15 sides (8 + 3 + 4), more than the total of 13.",
+     "rationalePt": "Essa combinação dá 15 lados (8 + 3 + 4), passando do total de 13."
     },
     {
-     "text": "pentagon (pentágono) + pentagon (pentágono) + square (quadrado)",
+     "text": "Pentagon + pentagon + square",
+     "textPt": "Pentágono + pentágono + quadrado",
      "isCorrect": false,
-     "rationale": "Dois pentágonos e um quadrado somariam 14 lados (5 + 5 + 4)."
+     "rationale": "Two pentagons and a square would add up to 14 sides (5 + 5 + 4).",
+     "rationalePt": "Dois pentágonos e um quadrado somariam 14 lados (5 + 5 + 4)."
     }
    ],
-   "hint": "Tente somar o número de lados de cada figura para ver qual grupo totaliza 13."
+   "hint": "Try adding up the number of sides of each figure to see which group totals 13.",
+   "hintPt": "Tente somar o número de lados de cada figura para ver qual grupo totaliza 13."
   },
   {
-   "question": "Quantos vertices (vértices) possui um circle (círculo)?",
+   "question": "How many vertices does a circle have?",
+   "questionPt": "Quantos vértices tem um círculo?",
    "answerOptions": [
     {
      "text": "1",
+     "textPt": "1",
      "isCorrect": false,
-     "rationale": "Círculos não possuem pontos de encontro de linhas retas."
+     "rationale": "Circles have no meeting points of straight lines.",
+     "rationalePt": "Círculos não têm pontos de encontro de linhas retas."
     },
     {
      "text": "0",
+     "textPt": "0",
      "isCorrect": true,
-     "rationale": "Como o círculo é totalmente redondo e não tem lados retos, ele não possui nenhum cantinho."
+     "rationale": "Since the circle is completely round and has no straight sides, it has no corners at all.",
+     "rationalePt": "Como o círculo é totalmente redondo e não tem lados retos, ele não tem nenhum cantinho."
     },
     {
      "text": "3",
+     "textPt": "3",
      "isCorrect": false,
-     "rationale": "Três vértices pertencem ao triângulo, que possui lados retos."
+     "rationale": "Three vertices belong to the triangle, which has straight sides.",
+     "rationalePt": "Três vértices pertencem ao triângulo, que tem lados retos."
     },
     {
-     "text": "Incontáveis",
+     "text": "Countless",
+     "textPt": "Incontáveis",
      "isCorrect": false,
-     "rationale": "Embora pareça complexo, na geometria básica, o círculo é definido por ter zero vértices."
+     "rationale": "Even though it might seem tricky, in basic geometry the circle is defined as having zero vertices.",
+     "rationalePt": "Apesar de parecer complicado, na geometria básica o círculo é definido por ter zero vértices."
     }
    ],
-   "hint": "Pense se você consegue encontrar algum 'corner' (cantinho) em uma moeda ou em um anel."
+   "hint": "Think about whether you can find any 'corner' on a coin or a ring.",
+   "hintPt": "Pense se você consegue encontrar algum 'corner' (cantinho) numa moeda ou num anel."
   },
   {
-   "question": "Qual destas letras maiúsculas possui uma line of symmetry (linha de simetria) deitada (horizontal)?",
+   "question": "Which of these capital letters has a horizontal line of symmetry?",
+   "questionPt": "Qual destas letras maiúsculas tem uma linha de simetria deitada (horizontal)?",
    "answerOptions": [
     {
      "text": "A",
+     "textPt": "A",
      "isCorrect": false,
-     "rationale": "A letra A só pode ser dividida de forma igual com uma linha em pé (vertical)."
+     "rationale": "The letter A can only be split evenly with a standing (vertical) line.",
+     "rationalePt": "A letra A só pode ser dividida igualmente com uma linha em pé (vertical)."
     },
     {
      "text": "M",
+     "textPt": "M",
      "isCorrect": false,
-     "rationale": "A letra M é simétrica apenas se cortada ao meio verticalmente."
+     "rationale": "The letter M is only symmetric if cut in half vertically.",
+     "rationalePt": "A letra M só é simétrica se cortada ao meio na vertical."
     },
     {
      "text": "C",
+     "textPt": "C",
      "isCorrect": true,
-     "rationale": "Se você traçar uma linha horizontal no meio da letra C, a parte de cima será o reflexo da parte de baixo."
+     "rationale": "If you draw a horizontal line through the middle of the letter C, the top half is the mirror of the bottom half.",
+     "rationalePt": "Se você traçar uma linha horizontal no meio da letra C, a metade de cima é o reflexo da metade de baixo."
     },
     {
      "text": "V",
+     "textPt": "V",
      "isCorrect": false,
-     "rationale": "A letra V possui simetria vertical, não horizontal."
+     "rationale": "The letter V has vertical symmetry, not horizontal.",
+     "rationalePt": "A letra V tem simetria vertical, não horizontal."
     }
    ],
-   "hint": "Imagine dobrar a letra de baixo para cima para ver se as pontas se encontram perfeitamente."
+   "hint": "Imagine folding the letter from bottom to top to see if the ends meet perfectly.",
+   "hintPt": "Imagine dobrar a letra de baixo para cima para ver se as pontas se encontram direitinho."
   },
   {
-   "question": "Quando você faz o movimento de flip (virar) em uma figura, o que acontece?",
+   "question": "When you flip a figure, what happens?",
+   "questionPt": "Quando você faz o movimento de virar (flip) numa figura, o que acontece?",
    "answerOptions": [
     {
-     "text": "A figura anda para o lado sem girar",
+     "text": "The figure walks sideways without spinning",
+     "textPt": "A figura anda para o lado sem girar",
      "isCorrect": false,
-     "rationale": "Esse movimento de apenas deslizar é chamado de slide."
+     "rationale": "That sliding-only movement is called a slide.",
+     "rationalePt": "Esse movimento de só deslizar é chamado de slide."
     },
     {
-     "text": "A figura vira como se estivesse refletida em um espelho",
+     "text": "The figure turns as if reflected in a mirror",
+     "textPt": "A figura vira como se estivesse refletida num espelho",
      "isCorrect": true,
-     "rationale": "O flip cria uma imagem espelhada (mirror image) da figura original."
+     "rationale": "A flip creates a mirror image of the original figure.",
+     "rationalePt": "O flip cria uma imagem espelhada da figura original."
     },
     {
-     "text": "A figura roda como os ponteiros de um relógio",
+     "text": "The figure spins like the hands of a clock",
+     "textPt": "A figura roda como os ponteiros de um relógio",
      "isCorrect": false,
-     "rationale": "O movimento de rotação em volta de um ponto é chamado de turn."
+     "rationale": "The rotating movement around a point is called a turn.",
+     "rationalePt": "O movimento de girar em volta de um ponto é chamado de turn."
     },
     {
-     "text": "A figura muda o seu número de lados",
+     "text": "The figure changes its number of sides",
+     "textPt": "A figura muda o seu número de lados",
      "isCorrect": false,
-     "rationale": "Nenhum dos movimentos de padrão altera as características básicas da figura."
+     "rationale": "None of the pattern movements change the figure's basic properties.",
+     "rationalePt": "Nenhum dos movimentos de padrão muda as características básicas da figura."
     }
    ],
-   "hint": "Pense no que você vê quando olha para um espelho ou vira uma página de um livro."
+   "hint": "Think about what you see when you look in a mirror or turn a book page.",
+   "hintPt": "Pense no que você vê quando olha num espelho ou vira a página de um livro."
   },
   {
-   "question": "Onde você deve colocar a Mira (espelhinho vermelho) na palavra MOM para mostrar simetria?",
+   "question": "Where should you place the Mira (the little red mirror) on the word MOM to show symmetry?",
+   "questionPt": "Onde você deve colocar a Mira (espelhinho vermelho) na palavra MOM para mostrar simetria?",
    "answerOptions": [
     {
-     "text": "Em pé, no meio da letra O",
+     "text": "Standing up, in the middle of the letter O",
+     "textPt": "Em pé, no meio da letra O",
      "isCorrect": true,
-     "rationale": "Ao colocar a Mira no meio do O, o M de um lado é refletido para completar a palavra do outro lado."
+     "rationale": "Placing the Mira in the middle of the O reflects the M on one side to complete the word on the other.",
+     "rationalePt": "Ao colocar a Mira no meio do O, o M de um lado é refletido para completar a palavra do outro lado."
     },
     {
-     "text": "Deitada, cruzando as três letras",
+     "text": "Lying down, crossing all three letters",
+     "textPt": "Deitada, cruzando as três letras",
      "isCorrect": false,
-     "rationale": "As letras M e O não possuem simetria horizontal que permita ler a palavra completa no reflexo."
+     "rationale": "The letters M and O don't have the horizontal symmetry needed to read the whole word in the reflection.",
+     "rationalePt": "As letras M e O não têm simetria horizontal que permita ler a palavra completa no reflexo."
     },
     {
-     "text": "Em pé, antes da primeira letra M",
+     "text": "Standing up, before the first letter M",
+     "textPt": "Em pé, antes da primeira letra M",
      "isCorrect": false,
-     "rationale": "Colocar a Mira antes da palavra não refletiria nada que completasse a escrita corretamente."
+     "rationale": "Placing the Mira before the word wouldn't reflect anything that completes the writing correctly.",
+     "rationalePt": "Colocar a Mira antes da palavra não refletiria nada que completasse a escrita corretamente."
     },
     {
-     "text": "A palavra MOM não possui simetria",
+     "text": "The word MOM has no symmetry",
+     "textPt": "A palavra MOM não tem simetria",
      "isCorrect": false,
-     "rationale": "MOM é um exemplo clássico de palavra simétrica devido à posição de suas letras."
+     "rationale": "MOM is a classic example of a symmetric word, because of how its letters are arranged.",
+     "rationalePt": "MOM é um exemplo clássico de palavra simétrica, por causa da posição das suas letras."
     }
    ],
-   "hint": "A Mira deve dividir a palavra ao meio para que um lado 'espelhe' o outro."
+   "hint": "The Mira should split the word in half so that one side mirrors the other.",
+   "hintPt": "A Mira deve dividir a palavra ao meio para que um lado espelhe o outro."
   },
   {
-   "question": "Um hexagon (hexágono) pode ser encontrado em qual objeto do dia a dia?",
+   "question": "A hexagon can be found in which everyday object?",
+   "questionPt": "Um hexágono pode ser encontrado em qual objeto do dia a dia?",
    "answerOptions": [
     {
-     "text": "Slice of pizza (fatia de pizza)",
+     "text": "Slice of pizza",
+     "textPt": "Fatia de pizza",
      "isCorrect": false,
-     "rationale": "Fatias de pizza geralmente lembram o formato de um triângulo."
+     "rationale": "Slices of pizza usually look like a triangle.",
+     "rationalePt": "Fatias de pizza geralmente lembram o formato de um triângulo."
     },
     {
-     "text": "Honeycomb cell (favo de mel)",
+     "text": "Honeycomb cell",
+     "textPt": "Favo de mel",
      "isCorrect": true,
-     "rationale": "As abelhas constroem suas colmeias usando células de seis lados perfeitamente encaixadas."
+     "rationale": "Bees build their hives using six-sided cells that fit together perfectly.",
+     "rationalePt": "As abelhas constroem suas colmeias usando células de seis lados perfeitamente encaixadas."
     },
     {
-     "text": "Book cover (capa de livro)",
+     "text": "Book cover",
+     "textPt": "Capa de livro",
      "isCorrect": false,
-     "rationale": "Capas de livros são tipicamente retangulares."
+     "rationale": "Book covers are typically rectangular.",
+     "rationalePt": "Capas de livro são tipicamente retangulares."
     },
     {
-     "text": "Clock face (relógio de parede)",
+     "text": "Clock face",
+     "textPt": "Relógio de parede",
      "isCorrect": false,
-     "rationale": "A maioria dos relógios de parede comuns tem o formato de um círculo."
+     "rationale": "Most ordinary wall clocks are shaped like a circle.",
+     "rationalePt": "A maioria dos relógios de parede comuns tem o formato de um círculo."
     }
    ],
-   "hint": "Pense no formato das 'casinhas' dentro de uma colmeia de abelhas."
+   "hint": "Think about the shape of the little 'rooms' inside a beehive.",
+   "hintPt": "Pense no formato das 'casinhas' dentro de uma colmeia de abelhas."
   },
   {
-   "question": "Se você girar uma figura (movimento turn), o que permanece igual?",
+   "question": "If you turn a figure, what stays the same?",
+   "questionPt": "Se você girar uma figura (movimento turn), o que continua igual?",
    "answerOptions": [
     {
-     "text": "O lugar onde ela está",
+     "text": "The place where it is",
+     "textPt": "O lugar onde ela está",
      "isCorrect": false,
-     "rationale": "Ao girar, a figura muda sua orientação e muitas vezes sua posição exata no espaço."
+     "rationale": "When it turns, the figure changes its orientation and often its exact position in space.",
+     "rationalePt": "Ao girar, a figura muda sua orientação e muitas vezes sua posição exata no espaço."
     },
     {
-     "text": "O lado para onde ela aponta",
+     "text": "The way it faces",
+     "textPt": "O lado para onde ela aponta",
      "isCorrect": false,
-     "rationale": "O objetivo do giro é justamente mudar a direção para a qual a figura está voltada."
+     "rationale": "The whole point of turning is exactly to change the direction the figure faces.",
+     "rationalePt": "O objetivo de girar é justamente mudar a direção para a qual a figura aponta."
     },
     {
-     "text": "O número de sides (lados) e vertices (vértices)",
+     "text": "The number of sides and vertices",
+     "textPt": "O número de sides (lados) e vertices (vértices)",
      "isCorrect": true,
-     "rationale": "Embora a posição mude, a figura continua sendo a mesma, mantendo todas as suas propriedades geométricas."
+     "rationale": "Even though the position changes, the figure is still the same, keeping all of its geometric properties.",
+     "rationalePt": "Mesmo com a mudança de posição, a figura continua sendo a mesma, mantendo todas as suas propriedades geométricas."
     },
     {
-     "text": "Nada permanece igual",
+     "text": "Nothing stays the same",
+     "textPt": "Nada permanece igual",
      "isCorrect": false,
-     "rationale": "A forma e o tamanho da figura são preservados durante um movimento de padrão."
+     "rationale": "The figure's shape and size are preserved during a pattern movement.",
+     "rationalePt": "A forma e o tamanho da figura são preservados durante um movimento de padrão."
     }
    ],
-   "hint": "Pense se um triângulo deixa de ser um triângulo só porque você o rodou na mesa."
+   "hint": "Think about whether a triangle stops being a triangle just because you spun it on the table.",
+   "hintPt": "Pense se um triângulo deixa de ser um triângulo só porque você o girou na mesa."
   }
  ]
 }

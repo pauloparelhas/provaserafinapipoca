@@ -10,6 +10,13 @@ Abre cada HTML num Chromium headless em 3 viewports e reprova:
     'body.show-tr X{...}' que aparece visivel ANTES de ligar a bandeira
     (achado em 18/08: um <span class="tr" style="display:inline"> no
     Sort it! furava o toggle porque style inline vence a classe)
+  · portugues visivel sem bandeira, mesmo fora de um seletor .tr conhecido
+    (achado em 18/08: quiz_mat2_nlm.json e flashcards_mat2_nlm.json vieram
+    do NotebookLM 100% em portugues e o render nunca envolveu em .tr; e o
+    .readout .rs do MAT2_lab nunca teve display:none — nenhum dos dois e
+    'vazamento por override', sao textos que NUNCA entraram no mecanismo
+    do toggle. Esta checagem le o texto RENDERIZADO da pagina, entao pega
+    os dois tipos de bug de uma vez.)
 
 REGRA ZERO do projeto (CLAUDE.md): o QA roda MUDO. A fala e o audio sao
 desligados por add_init_script ANTES de a pagina carregar — um QA que abriu
@@ -35,6 +42,15 @@ window.AudioContext=window.webkitAudioContext=function(){ throw new Error('audio
 """
 
 VIEWPORTS = [("retrato", 360, 640), ("paisagem", 740, 360), ("notebook", 1280, 800)]
+
+PT_ACENTO = re.compile(r"[ãõçÃÕÇáéíóúÁÉÍÓÚâêôÂÊÔ]")
+# Palavras PT que aparecem DE PROPOSITO como conteudo (nao como traducao da
+# casca): a resposta certa de um card tipo "qual e a palavra em portugues
+# para X" e o proprio nome em portugues, e o botao da bandeira se chama
+# 'Português'. Uma linha so e reprovada se sobrar acento PT depois de tirar
+# essas palavras.
+PT_OK = ["Português", "Círculo", "Triângulo", "Quadrado", "Retângulo",
+         "Pentágono", "Hexágono", "Octógono"]
 
 SELETOR_TR = re.compile(r"body\.show-tr\s+([^{,]+?)\s*\{")
 REGRA_BASE = re.compile(r"(?<![.\w-])([.][\w.\- ]+?)\s*\{([^}]*)\}")
@@ -95,6 +111,13 @@ def testa(page, arquivo, vp, seletores):
         }""", seletores)
         for v in vazados:
             erros.append(f"[{vp}] traducao vazando sem a bandeira: {v}")
+    texto = page.evaluate("()=>document.body.innerText")
+    for linha in texto.split("\n"):
+        limpa = linha
+        for ok in PT_OK:
+            limpa = limpa.replace(ok, "")
+        if PT_ACENTO.search(limpa):
+            erros.append(f"[{vp}] portugues visivel sem bandeira: {linha.strip()[:100]!r}")
     return erros
 
 

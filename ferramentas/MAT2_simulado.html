@@ -633,9 +633,9 @@ function intro(){
     <div class="qfig">\u{1F30E}</div>
     <div class="q">Let's practise for the test!</div>
     <div class="tr qtr">Vamos treinar para a prova!</div>
-    <p>Você escolhe o assunto e o tamanho do treino.
+    <p>You choose the subject and the size of your practice.
        <span class="tr">Você escolhe o assunto e o tamanho do treino.</span></p>
-    <div class="task">1 · Escolha os temas</div>
+    <div class="task">1 · Choose the topics<span class="tr">escolha os temas</span></div>
     <div class="themewrap">
       ${THEMES.map(t=>`<button class="themechip${selThemes.has(t.k)?' on':''}" onclick="toggleTheme('${t.k}')">
         <span class="tem">${t.emo}</span><span>${t.en}</span><span class="ttr tr">${t.pt}</span></button>`).join('')}
@@ -645,7 +645,7 @@ function intro(){
     <div class="sizewrap">
       ${[5,10,25,50,100].map(n=>`<button class="sizebtn${n===roundSize?' sel':''}" onclick="start(${n})">${n}<span class="sl">questions</span></button>`).join('')}
     </div>
-    <p class="startnote">Comece com 10 e vá aumentando. <span class="tr">Comece com 10 e depois aumente.</span></p>
+    <p class="startnote">Start with 10 and build up from there. <span class="tr">Comece com 10 e depois aumente.</span></p>
   </div>`;
 }
 function toggleTheme(k){

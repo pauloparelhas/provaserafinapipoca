@@ -199,8 +199,8 @@ function showTab(k){
 }
 
 Promise.all([
-  fetch('media/quiz_mat2_nlm.json?v=20260817').then(function(r){return r.json();}),
-  fetch('media/flashcards_mat2_nlm.json?v=20260817').then(function(r){return r.json();})
+  fetch('media/quiz_mat2_nlm.json?v=20260818b').then(function(r){return r.json();}),
+  fetch('media/flashcards_mat2_nlm.json?v=20260818b').then(function(r){return r.json();})
 ]).then(function(j){
   QZ=j[0]; RV=j[1];
   comecar(); montarRev();
@@ -221,19 +221,19 @@ function pergunta(){
   $('bar').style.width=(idx/deck.length*100)+'%';
   var opts=shuffle(q.answerOptions);
   var h='<div class="qhead"><span class="qn">Question '+(idx+1)+' of '+deck.length+'</span></div>'
-   +'<div class="qcard"><div class="q">'+q.question+'</div>'
+   +'<div class="qcard"><div class="q">'+q.question+(q.questionPt?'<span class="tr">'+q.questionPt+'</span>':'')+'</div>'
    +'<div class="qtools">'
      +'<button class="tbtn" onclick="say(\''+esc(q.question)+'\')">&#128266; Listen</button>'
      +(q.hint?'<button class="tbtn amarelo" onclick="verDica()">&#128161; Show the hint</button>':'')
    +'</div>'
-   +(q.hint?'<div class="dicabox" id="dicabox">&#128161; '+q.hint+'</div>':'')
+   +(q.hint?'<div class="dicabox" id="dicabox">&#128161; '+q.hint+(q.hintPt?'<span class="tr">'+q.hintPt+'</span>':'')+'</div>':'')
    +'<div class="task">Tap the right answer<span class="tr">toque na resposta certa</span></div>'
    +'<div class="opts" id="opts">';
   opts.forEach(function(o,i){
     h+='<button class="opt" id="op'+i+'" onclick="responder('+i+','+(o.isCorrect?1:0)+')">'
       +'<span class="ot"><span class="om" id="om'+i+'">'+String.fromCharCode(65+i)+'</span>'
-      +'<span>'+o.text+'</span></span>'
-      +'<span class="why">'+(o.isCorrect?'&#9989; ':'&#10060; ')+o.rationale+'</span></button>';
+      +'<span>'+o.text+(o.textPt?'<span class="tr">'+o.textPt+'</span>':'')+'</span></span>'
+      +'<span class="why">'+(o.isCorrect?'&#9989; ':'&#10060; ')+o.rationale+(o.rationalePt?'<span class="tr">'+o.rationalePt+'</span>':'')+'</span></button>';
   });
   h+='</div><div class="fb" id="fb"></div></div>'
    +'<div class="navrow">'
@@ -279,8 +279,8 @@ function fim(){
 function montarRev(){
   $('revStage').innerHTML=RV.cards.map(function(c,i){
     return '<div class="rc" id="rc'+i+'" onclick="this.classList.toggle(\'on\')">'
-     +'<div class="rf"><span>'+(i+1)+'.</span><span>'+c.front+'</span><span class="chev">&#9654;</span></div>'
-     +'<div class="rb">'+c.back+'</div></div>';
+     +'<div class="rf"><span>'+(i+1)+'.</span><span>'+c.front+(c.frontPt?'<span class="tr">'+c.frontPt+'</span>':'')+'</span><span class="chev">&#9654;</span></div>'
+     +'<div class="rb">'+c.back+(c.backPt?'<span class="tr">'+c.backPt+'</span>':'')+'</div></div>';
   }).join('');
 }
 function todas(abrir){

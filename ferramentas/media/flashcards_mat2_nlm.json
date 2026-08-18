@@ -1,233 +1,120 @@
 {
- "title": "Geometria Flashcards",
+ "title": "Geometry Flashcards",
+ "titlePt": "Flashcards de Geometria",
  "cards": [
-  {
-   "front": "O que define uma \"2-D figure\" (figura de duas dimensões)?",
-   "back": "É uma figura plana (flat) que pode ser desenhada no papel."
-  },
-  {
-   "front": "Como é o nome em português da figura \"circle\" e quantos vértices ela tem?",
-   "back": "Círculo; possui 0 vértices."
-  },
-  {
-   "front": "Qual a principal característica visual de um \"circle\" (círculo)?",
-   "back": "Ele é redondo e não possui nenhum lado reto."
-  },
-  {
-   "front": "Como é o nome em português da figura \"triangle\" e quantos lados ela tem?",
-   "back": "Triângulo; possui 3 lados."
-  },
-  {
-   "front": "Quantos \"vertices\" (vértices) possui um \"triangle\" (triângulo)?",
-   "back": "Possui 3 vértices."
-  },
-  {
-   "front": "Como é o nome em português da figura \"square\" e quantos vértices ela tem?",
-   "back": "Quadrado; possui 4 vértices."
-  },
-  {
-   "front": "Qual é a característica obrigatória dos 4 lados de um \"square\" (quadrado)?",
-   "back": "Todos os lados devem ter exatamente o mesmo tamanho."
-  },
-  {
-   "front": "Como é o nome em português da figura \"rectangle\" e quantos lados ela tem?",
-   "back": "Retângulo; possui 4 lados."
-  },
-  {
-   "front": "Como são organizados os tamanhos dos lados de um \"rectangle\" (retângulo)?",
-   "back": "Ele possui 2 lados compridos e 2 lados curtinhos."
-  },
-  {
-   "front": "Como é o nome em português da figura \"pentagon\" e quantos lados ela tem?",
-   "back": "Pentágono; possui 5 lados."
-  },
-  {
-   "front": "Quantos \"vertices\" (vértices) possui um \"pentagon\" (pentágono)?",
-   "back": "Possui 5 vértices."
-  },
-  {
-   "front": "Como é o nome em português da figura \"hexagon\" e quantos lados ela tem?",
-   "back": "Hexágono; possui 6 lados."
-  },
-  {
-   "front": "Quantos \"vertices\" (vértices) possui um \"hexagon\" (hexágono)?",
-   "back": "Possui 6 vértices."
-  },
-  {
-   "front": "Como é o nome em português da figura \"octagon\" e quantos lados ela tem?",
-   "back": "Octógono; possui 8 lados."
-  },
-  {
-   "front": "Quantos \"vertices\" (vértices) possui um \"octagon\" (octógono)?",
-   "back": "Possui 8 vértices."
-  },
-  {
-   "front": "Dica de memória: qual animal ajuda a lembrar o nome do \"octagon\"?",
-   "back": "O \"octopus\" (polvo), porque ele tem 8 braços."
-  },
-  {
-   "front": "Termo: Side",
-   "back": "Definição: É cada linha reta que forma uma figura geométrica."
-  },
-  {
-   "front": "Termo: Vertex",
-   "back": "Definição: É o cantinho ou o ponto onde dois lados de uma figura se encontram."
-  },
-  {
-   "front": "Qual é o plural da palavra \"vertex\" em inglês?",
-   "back": "Vertices."
-  },
-  {
-   "front": "Qual outra palavra em inglês é usada como sinônimo para \"side\" (lado)?",
-   "back": "Edge."
-  },
-  {
-   "front": "Qual é a \"regra de ouro\" sobre a quantidade de lados e vértices em figuras retas?",
-   "back": "O número de \"vertices\" é sempre igual ao número de \"sides\"."
-  },
-  {
-   "front": "Qual figura geométrica a \"book cover\" (capa de livro) geralmente lembra?",
-   "back": "Rectangle (retângulo)."
-  },
-  {
-   "front": "No dia a dia, qual figura geométrica uma \"door\" (porta) representa?",
-   "back": "Rectangle (retângulo)."
-  },
-  {
-   "front": "Cite dois objetos circulares comuns citados na unidade.",
-   "back": "\"Clock face\" (relógio) e \"coin\" (moeda)."
-  },
-  {
-   "front": "Qual figura geométrica uma \"slice of pizza\" (fatia de pizza) lembra?",
-   "back": "Triangle (triângulo)."
-  },
-  {
-   "front": "O \"party hat\" (chapéu de festa) tem o formato de qual figura 2-D?",
-   "back": "Triangle (triângulo)."
-  },
-  {
-   "front": "Qual é a forma geométrica de uma placa de PARE (\"stop sign\")?",
-   "back": "Octagon (octógono)."
-  },
-  {
-   "front": "As células de um \"honeycomb\" (favo de mel) possuem qual formato?",
-   "back": "Hexagon (hexágono)."
-  },
-  {
-   "front": "Qual figura geométrica forma o gomo preto de uma bola de futebol?",
-   "back": "Pentagon (pentágono)."
-  },
-  {
-   "front": "O que é necessário acontecer ao dobrar uma figura para que ela tenha \"symmetry\" (simetria)?",
-   "back": "As duas metades devem combinar perfeitamente (match)."
-  },
-  {
-   "front": "Como se chama a linha exata onde dobramos uma figura para testar a simetria?",
-   "back": "Line of symmetry (linha de simetria)."
-  },
-  {
-   "front": "Termo: Mirror image",
-   "back": "Definição: É a imagem refletida (como no espelho) que completa a outra metade da figura."
-  },
-  {
-   "front": "Qual instrumento físico é usado em sala para conferir a simetria das figuras?",
-   "back": "A Mira (um espelhinho vermelho)."
-  },
-  {
-   "front": "Quais são as duas direções possíveis para uma \"line of symmetry\"?",
-   "back": "Em pé (vertical) ou deitada (horizontal)."
-  },
-  {
-   "front": "A letra \"O\" possui simetria vertical, horizontal ou ambas?",
-   "back": "Ambas."
-  },
-  {
-   "front": "A letra \"X\" possui simetria vertical, horizontal ou ambas?",
-   "back": "Ambas."
-  },
-  {
-   "front": "Em qual direção está a linha de simetria da letra \"A\"?",
-   "back": "Na vertical (em pé)."
-  },
-  {
-   "front": "A letra \"M\" possui uma linha de simetria vertical ou horizontal?",
-   "back": "Vertical (em pé)."
-  },
-  {
-   "front": "Em qual direção está a linha de simetria da letra \"C\"?",
-   "back": "Na horizontal (deitada)."
-  },
-  {
-   "front": "A letra \"B\" possui simetria vertical ou horizontal?",
-   "back": "Horizontal (deitada)."
-  },
-  {
-   "front": "Cite quatro letras maiúsculas da unidade que NÃO possuem simetria.",
-   "back": "G, P, J e R."
-  },
-  {
-   "front": "Onde deve ser colocada a Mira na palavra \"MOM\" para mostrar sua simetria?",
-   "back": "Na vertical, exatamente no meio da letra O."
-  },
-  {
-   "front": "Cite um exemplo de palavra simétrica além de MOM.",
-   "back": "WOW (também aceita-se MUM, TOT ou TOOT)."
-  },
-  {
-   "front": "No movimento de \"slide\" (deslizar), o que acontece com a figura?",
-   "back": "Ela apenas anda para o lado, sem virar e sem girar."
-  },
-  {
-   "front": "Como a figura se comporta em um movimento de \"flip\" (virar)?",
-   "back": "Ela vira para o lado oposto, como uma imagem no espelho."
-  },
-  {
-   "front": "O que define o movimento de \"turn\" (girar) em um padrão?",
-   "back": "A figura roda em volta de um ponto fixo, como o ponteiro de um relógio."
-  },
-  {
-   "front": "O que permanece igual em uma figura após um slide, flip ou turn?",
-   "back": "O número de lados, de vértices, o tamanho e o nome da figura."
-  },
-  {
-   "front": "Em um \"repeating pattern\" (padrão que se repete), quais são as únicas coisas que mudam na figura?",
-   "back": "O lugar onde ela está e o lado para onde ela aponta."
-  },
-  {
-   "front": "No problema do saquinho, se o total de \"sides\" é 13, quais podem ser as 3 figuras?",
-   "back": "Triangle + square + hexagon (3+4+6=13)."
-  },
-  {
-   "front": "Se o total de \"sides\" em um grupo de 3 figuras é 13, qual outra combinação é possível?",
-   "back": "Square + rectangle + pentagon (4+4+5=13)."
-  },
-  {
-   "front": "No problema do saquinho, se o total de \"vertices\" é 12, quais podem ser as 3 figuras?",
-   "back": "Square + square + square (4+4+4=12)."
-  },
-  {
-   "front": "Se o total de \"vertices\" em um grupo de 3 figuras é 12, cite uma combinação com um hexagon.",
-   "back": "Triangle + triangle + hexagon (3+3+6=12)."
-  },
-  {
-   "front": "O que acontece ao desenhar um \"triangle\" em cada lado de um \"pentagon\"?",
-   "back": "O desenho ganha o formato de uma estrela."
-  },
-  {
-   "front": "Na colcha (quilt), quais blocos possuem o mesmo desenho da estrela de 6 pontas?",
-   "back": "Blocos 1 e 9."
-  },
-  {
-   "front": "Na colcha (quilt), quais blocos possuem o desenho da estrela de 8 pontas com um quadrado?",
-   "back": "Blocos 2 e 6."
-  },
-  {
-   "front": "Na colcha (quilt), quais blocos mostram um anel de peças em volta de um hexágono?",
-   "back": "Blocos 4 e 8."
-  },
-  {
-   "front": "Seguindo o caminho: comece no Block 1, desça 2, vá 1 para a direita, suba 1 e vá 1 para a esquerda. Onde você chega?",
-   "back": "No Block 4."
-  }
+  {"front":"What defines a \"2-D figure\"?","frontPt":"O que define uma \"figura 2-D\"?",
+   "back":"It's a flat figure you can draw on paper.","backPt":"É uma figura plana que dá para desenhar no papel."},
+  {"front":"What's the Portuguese word for \"circle\", and how many vertices does it have?","frontPt":"Qual é a palavra em português para \"circle\", e quantos vértices ela tem?",
+   "back":"Círculo — it has 0 vertices.","backPt":"Círculo — tem 0 vértices."},
+  {"front":"What's the main visual feature of a \"circle\"?","frontPt":"Qual é a principal característica visual de um \"circle\" (círculo)?",
+   "back":"It's round and has no straight sides at all.","backPt":"Ele é redondo e não tem nenhum lado reto."},
+  {"front":"What's the Portuguese word for \"triangle\", and how many sides does it have?","frontPt":"Qual é a palavra em português para \"triangle\", e quantos lados ela tem?",
+   "back":"Triângulo — it has 3 sides.","backPt":"Triângulo — tem 3 lados."},
+  {"front":"How many vertices does a \"triangle\" have?","frontPt":"Quantos vertices (vértices) tem um \"triangle\" (triângulo)?",
+   "back":"It has 3 vertices.","backPt":"Tem 3 vértices."},
+  {"front":"What's the Portuguese word for \"square\", and how many vertices does it have?","frontPt":"Qual é a palavra em português para \"square\", e quantos vértices ela tem?",
+   "back":"Quadrado — it has 4 vertices.","backPt":"Quadrado — tem 4 vértices."},
+  {"front":"What's the required feature of the 4 sides of a \"square\"?","frontPt":"Qual é a característica obrigatória dos 4 lados de um \"square\" (quadrado)?",
+   "back":"All the sides must be exactly the same length.","backPt":"Todos os lados devem ter exatamente o mesmo tamanho."},
+  {"front":"What's the Portuguese word for \"rectangle\", and how many sides does it have?","frontPt":"Qual é a palavra em português para \"rectangle\", e quantos lados ela tem?",
+   "back":"Retângulo — it has 4 sides.","backPt":"Retângulo — tem 4 lados."},
+  {"front":"How are the side lengths of a \"rectangle\" arranged?","frontPt":"Como são organizados os tamanhos dos lados de um \"rectangle\" (retângulo)?",
+   "back":"It has 2 long sides and 2 short sides.","backPt":"Ele tem 2 lados compridos e 2 lados curtinhos."},
+  {"front":"What's the Portuguese word for \"pentagon\", and how many sides does it have?","frontPt":"Qual é a palavra em português para \"pentagon\", e quantos lados ela tem?",
+   "back":"Pentágono — it has 5 sides.","backPt":"Pentágono — tem 5 lados."},
+  {"front":"How many vertices does a \"pentagon\" have?","frontPt":"Quantos vertices (vértices) tem um \"pentagon\" (pentágono)?",
+   "back":"It has 5 vertices.","backPt":"Tem 5 vértices."},
+  {"front":"What's the Portuguese word for \"hexagon\", and how many sides does it have?","frontPt":"Qual é a palavra em português para \"hexagon\", e quantos lados ela tem?",
+   "back":"Hexágono — it has 6 sides.","backPt":"Hexágono — tem 6 lados."},
+  {"front":"How many vertices does a \"hexagon\" have?","frontPt":"Quantos vertices (vértices) tem um \"hexagon\" (hexágono)?",
+   "back":"It has 6 vertices.","backPt":"Tem 6 vértices."},
+  {"front":"What's the Portuguese word for \"octagon\", and how many sides does it have?","frontPt":"Qual é a palavra em português para \"octagon\", e quantos lados ela tem?",
+   "back":"Octógono — it has 8 sides.","backPt":"Octógono — tem 8 lados."},
+  {"front":"How many vertices does an \"octagon\" have?","frontPt":"Quantos vertices (vértices) tem um \"octagon\" (octógono)?",
+   "back":"It has 8 vertices.","backPt":"Tem 8 vértices."},
+  {"front":"Memory trick: which animal helps you remember the name \"octagon\"?","frontPt":"Dica de memória: qual animal ajuda a lembrar o nome do \"octagon\"?",
+   "back":"The \"octopus\", because it has 8 arms.","backPt":"O \"octopus\" (polvo), porque ele tem 8 braços."},
+  {"front":"Term: Side","frontPt":"Termo: Side",
+   "back":"Definition: each straight line that forms a geometric figure.","backPt":"Definição: é cada linha reta que forma uma figura geométrica."},
+  {"front":"Term: Vertex","frontPt":"Termo: Vertex",
+   "back":"Definition: the corner, or the point where two sides of a figure meet.","backPt":"Definição: é o cantinho, o ponto onde dois lados de uma figura se encontram."},
+  {"front":"What's the plural of the word \"vertex\"?","frontPt":"Qual é o plural da palavra \"vertex\" em inglês?",
+   "back":"Vertices.","backPt":"Vertices."},
+  {"front":"What other English word is used as a synonym for \"side\"?","frontPt":"Qual outra palavra em inglês é usada como sinônimo de \"side\" (lado)?",
+   "back":"Edge.","backPt":"Edge."},
+  {"front":"What's the \"golden rule\" about the number of sides and vertices in straight-sided figures?","frontPt":"Qual é a \"regra de ouro\" sobre a quantidade de lados e vértices em figuras retas?",
+   "back":"The number of vertices is always equal to the number of sides.","backPt":"O número de vertices é sempre igual ao número de sides."},
+  {"front":"Which figure does a \"book cover\" usually look like?","frontPt":"Qual figura geométrica a \"book cover\" (capa de livro) geralmente lembra?",
+   "back":"Rectangle.","backPt":"Retângulo."},
+  {"front":"In everyday life, which figure does a \"door\" represent?","frontPt":"No dia a dia, qual figura geométrica uma \"door\" (porta) representa?",
+   "back":"Rectangle.","backPt":"Retângulo."},
+  {"front":"Name two common circular objects mentioned in the unit.","frontPt":"Cite dois objetos circulares comuns citados na unidade.",
+   "back":"\"Clock face\" and \"coin\".","backPt":"\"Clock face\" (relógio) e \"coin\" (moeda)."},
+  {"front":"Which figure does a \"slice of pizza\" look like?","frontPt":"Qual figura geométrica uma \"slice of pizza\" (fatia de pizza) lembra?",
+   "back":"Triangle.","backPt":"Triângulo."},
+  {"front":"What 2-D figure does a \"party hat\" look like?","frontPt":"O \"party hat\" (chapéu de festa) tem o formato de qual figura 2-D?",
+   "back":"Triangle.","backPt":"Triângulo."},
+  {"front":"What figure is a \"stop sign\" shaped like?","frontPt":"Qual é a forma geométrica de uma placa de PARE (\"stop sign\")?",
+   "back":"Octagon.","backPt":"Octógono."},
+  {"front":"What shape are the cells of a \"honeycomb\"?","frontPt":"As células de um \"honeycomb\" (favo de mel) têm qual formato?",
+   "back":"Hexagon.","backPt":"Hexágono."},
+  {"front":"What figure forms the black patch on a soccer ball?","frontPt":"Qual figura geométrica forma o gomo preto de uma bola de futebol?",
+   "back":"Pentagon.","backPt":"Pentágono."},
+  {"front":"What has to happen when you fold a figure for it to have \"symmetry\"?","frontPt":"O que precisa acontecer ao dobrar uma figura para que ela tenha \"symmetry\" (simetria)?",
+   "back":"The two halves must match perfectly.","backPt":"As duas metades precisam combinar perfeitamente."},
+  {"front":"What's the name of the exact line where we fold a figure to test its symmetry?","frontPt":"Como se chama a linha exata onde dobramos uma figura para testar a simetria?",
+   "back":"The line of symmetry.","backPt":"A linha de simetria."},
+  {"front":"Term: Mirror image","frontPt":"Termo: Mirror image",
+   "back":"Definition: the reflected image that completes the other half of the figure, like in a mirror.","backPt":"Definição: é a imagem refletida, como no espelho, que completa a outra metade da figura."},
+  {"front":"What physical tool is used in class to check the symmetry of figures?","frontPt":"Qual instrumento físico é usado em sala para conferir a simetria das figuras?",
+   "back":"The Mira (a little red mirror).","backPt":"A Mira (um espelhinho vermelho)."},
+  {"front":"What are the two possible directions for a \"line of symmetry\"?","frontPt":"Quais são as duas direções possíveis para uma \"line of symmetry\"?",
+   "back":"Standing up (vertical) or lying down (horizontal).","backPt":"Em pé (vertical) ou deitada (horizontal)."},
+  {"front":"Does the letter \"O\" have vertical symmetry, horizontal symmetry, or both?","frontPt":"A letra \"O\" tem simetria vertical, horizontal ou as duas?",
+   "back":"Both.","backPt":"As duas."},
+  {"front":"Does the letter \"X\" have vertical symmetry, horizontal symmetry, or both?","frontPt":"A letra \"X\" tem simetria vertical, horizontal ou as duas?",
+   "back":"Both.","backPt":"As duas."},
+  {"front":"Which direction is the letter \"A\"'s line of symmetry?","frontPt":"Em qual direção está a linha de simetria da letra \"A\"?",
+   "back":"Vertical (standing up).","backPt":"Na vertical (em pé)."},
+  {"front":"Does the letter \"M\" have a vertical or horizontal line of symmetry?","frontPt":"A letra \"M\" tem uma linha de simetria vertical ou horizontal?",
+   "back":"Vertical (standing up).","backPt":"Vertical (em pé)."},
+  {"front":"Which direction is the letter \"C\"'s line of symmetry?","frontPt":"Em qual direção está a linha de simetria da letra \"C\"?",
+   "back":"Horizontal (lying down).","backPt":"Na horizontal (deitada)."},
+  {"front":"Does the letter \"B\" have vertical or horizontal symmetry?","frontPt":"A letra \"B\" tem simetria vertical ou horizontal?",
+   "back":"Horizontal (lying down).","backPt":"Horizontal (deitada)."},
+  {"front":"Name four capital letters from the unit that do NOT have symmetry.","frontPt":"Cite quatro letras maiúsculas da unidade que NÃO têm simetria.",
+   "back":"G, P, J and R.","backPt":"G, P, J e R."},
+  {"front":"Where should the Mira go on the word \"MOM\" to show its symmetry?","frontPt":"Onde deve ser colocada a Mira na palavra \"MOM\" para mostrar sua simetria?",
+   "back":"Standing up, right in the middle of the letter O.","backPt":"Na vertical, exatamente no meio da letra O."},
+  {"front":"Name one symmetric word besides MOM.","frontPt":"Cite um exemplo de palavra simétrica além de MOM.",
+   "back":"WOW (MUM, TOT or TOOT are also accepted).","backPt":"WOW (também aceita-se MUM, TOT ou TOOT)."},
+  {"front":"In a \"slide\" movement, what happens to the figure?","frontPt":"No movimento de \"slide\" (deslizar), o que acontece com a figura?",
+   "back":"It just walks sideways, without flipping and without turning.","backPt":"Ela apenas anda para o lado, sem virar e sem girar."},
+  {"front":"How does the figure behave in a \"flip\" movement?","frontPt":"Como a figura se comporta em um movimento de \"flip\" (virar)?",
+   "back":"It turns to the opposite side, like a mirror image.","backPt":"Ela vira para o lado oposto, como uma imagem no espelho."},
+  {"front":"What defines the \"turn\" movement in a pattern?","frontPt":"O que define o movimento de \"turn\" (girar) em um padrão?",
+   "back":"The figure spins around a fixed point, like the hand of a clock.","backPt":"A figura roda em volta de um ponto fixo, como o ponteiro de um relógio."},
+  {"front":"What stays the same in a figure after a slide, flip or turn?","frontPt":"O que continua igual numa figura depois de um slide, flip ou turn?",
+   "back":"The number of sides, the number of vertices, the size and the name of the figure.","backPt":"O número de lados, de vértices, o tamanho e o nome da figura."},
+  {"front":"In a \"repeating pattern\", what are the only things that change in the figure?","frontPt":"Num \"repeating pattern\" (padrão que se repete), quais são as únicas coisas que mudam na figura?",
+   "back":"Where it is, and which way it points.","backPt":"O lugar onde ela está e o lado para onde ela aponta."},
+  {"front":"In the bag problem, if the total number of \"sides\" is 13, which 3 figures could they be?","frontPt":"No problema do saquinho, se o total de \"sides\" é 13, quais podem ser as 3 figuras?",
+   "back":"Triangle + square + hexagon (3+4+6=13).","backPt":"Triangle + square + hexagon (3+4+6=13)."},
+  {"front":"If the total number of \"sides\" in a group of 3 figures is 13, what's another possible combination?","frontPt":"Se o total de \"sides\" num grupo de 3 figuras é 13, qual outra combinação é possível?",
+   "back":"Square + rectangle + pentagon (4+4+5=13).","backPt":"Square + rectangle + pentagon (4+4+5=13)."},
+  {"front":"In the bag problem, if the total number of \"vertices\" is 12, which 3 figures could they be?","frontPt":"No problema do saquinho, se o total de \"vertices\" é 12, quais podem ser as 3 figuras?",
+   "back":"Square + square + square (4+4+4=12).","backPt":"Square + square + square (4+4+4=12)."},
+  {"front":"If the total number of \"vertices\" in a group of 3 figures is 12, name a combination that includes a hexagon.","frontPt":"Se o total de \"vertices\" num grupo de 3 figuras é 12, cite uma combinação com um hexagon.",
+   "back":"Triangle + triangle + hexagon (3+3+6=12).","backPt":"Triangle + triangle + hexagon (3+3+6=12)."},
+  {"front":"What happens when you draw a \"triangle\" on each side of a \"pentagon\"?","frontPt":"O que acontece ao desenhar um \"triangle\" em cada lado de um \"pentagon\"?",
+   "back":"The drawing takes the shape of a star.","backPt":"O desenho ganha o formato de uma estrela."},
+  {"front":"In the quilt, which blocks have the same 6-point star design?","frontPt":"Na colcha (quilt), quais blocos têm o mesmo desenho da estrela de 6 pontas?",
+   "back":"Blocks 1 and 9.","backPt":"Blocos 1 e 9."},
+  {"front":"In the quilt, which blocks have the 8-point star design with a square?","frontPt":"Na colcha (quilt), quais blocos têm o desenho da estrela de 8 pontas com um quadrado?",
+   "back":"Blocks 2 and 6.","backPt":"Blocos 2 e 6."},
+  {"front":"In the quilt, which blocks show a ring of pieces around a hexagon?","frontPt":"Na colcha (quilt), quais blocos mostram um anel de peças em volta de um hexágono?",
+   "back":"Blocks 4 and 8.","backPt":"Blocos 4 e 8."},
+  {"front":"Follow the path: start at Block 1, go down 2, go right 1, go up 1, and go left 1. Where do you end up?","frontPt":"Seguindo o caminho: comece no Block 1, desça 2, vá 1 para a direita, suba 1 e vá 1 para a esquerda. Onde você chega?",
+   "back":"At Block 4.","backPt":"No Block 4."}
  ]
 }

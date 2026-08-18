@@ -234,7 +234,7 @@ v.addEventListener('loadedmetadata',function(){
   var d=v.duration;
   if(isFinite(d)&&d>0){
     var h=document.querySelector('.head p');
-    h.innerHTML=h.innerHTML+'<br><b>Dura&ccedil;&atilde;o: '+mmss(d)+'</b>';
+    h.innerHTML=h.innerHTML+'<br><b>Duration: '+mmss(d)+'</b><span class="tr"> &middot; dura&ccedil;&atilde;o: '+mmss(d)+'</span>';
   }
 });
 </script>
