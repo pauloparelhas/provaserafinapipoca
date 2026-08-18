@@ -216,11 +216,10 @@ body.show-tr .btn .etr{display:block}
 /* ============================================================
    ARRASTA E CLASSIFICA · Matematica Y2 · Unit 9 (2-D Geometry)
    English first; PT translation toggled by the BR flag.
-   ALL data anchored to trabalho/2tri_ciencias/_roteiro.md and
-   validated by the `pedagogico` agent (3 fixes applied).
-   Each card belongs to EXACTLY ONE column. No mixed axes
-   (state vs optical never on the same board). No cross-state
-   synthesis (never a property common to all three states).
+   ALL data anchored to trabalho/2tri_matematica/_roteiro.md and
+   validated by the `pedagogico` agent. Each card belongs to
+   EXACTLY ONE column (banco compartilhado com MAT2_popit.html
+   via MAT2_data.js).
    ============================================================ */
 
 /* ---- state ---- */
@@ -262,7 +261,7 @@ function intro(){
         +'<span class="gt"><b>'+g.en+'</b><span class="gtr tr">'+g.pt+'</span></span>'
         +'<span class="gn">'+(doneGames[i]?'✔':(i+1))+'</span></button>').join('')
     +'</div>'
-    +'<button class="startbtn" onclick="openGame(0)">▶ Start with game 1<span class="tr" style="display:inline;color:#08263a"> · começar pelo jogo 1</span></button>'
+    +'<button class="startbtn" onclick="openGame(0)">▶ Start with game 1<span class="tr" style="color:#08263a"> · começar pelo jogo 1</span></button>'
     +'<p style="font-size:.78rem;margin-top:10px">How to play: <b>tap</b> a card and then a box to put it there · tap a card <b>inside a box</b> to take it out.'
     +'<span class="tr">Toque numa carta e depois numa caixa para colocar · toque numa carta dentro da caixa para tirá-la.</span></p>'
     +'</div>';
