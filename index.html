@@ -105,6 +105,17 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;
 
 /* as 3 portas da revisão — o mapa mental vem marcado como o melhor caminho */
 .hero-doors{display:grid;grid-template-columns:1fr;gap:8px;padding:12px;border:2px solid color-mix(in srgb,var(--geo) 52%,transparent);border-top:none;border-radius:0 0 22px 22px;background:color-mix(in srgb,var(--geo) 7%,transparent);margin-bottom:20px;}
+/* ---------- DESTAQUE 2: SIMULADO (logo apos o hero, incentivando o uso) ---------- */
+.hero2{display:flex;align-items:center;gap:clamp(12px,2.5vw,20px);text-decoration:none;color:inherit;
+  border-radius:22px;padding:clamp(15px,2.6vw,22px);min-height:72px;margin-bottom:20px;
+  border:2px solid color-mix(in srgb,var(--hot) 55%,transparent);
+  background:linear-gradient(135deg,color-mix(in srgb,var(--hot) 16%,transparent),color-mix(in srgb,#fbbf24 12%,transparent));
+  transition:transform .2s,box-shadow .2s;}
+.hero2:hover{transform:translateY(-3px);box-shadow:0 12px 34px color-mix(in srgb,var(--hot) 22%,transparent);}
+.hero2 .em{font-size:clamp(36px,6.5vw,52px);flex-shrink:0;filter:drop-shadow(0 0 14px color-mix(in srgb,var(--hot) 50%,transparent));}
+.hero2 .tt{font-size:clamp(19px,4vw,25px);font-weight:900;line-height:1.12;margin-bottom:3px;display:block;}
+.hero2 .dd{font-size:clamp(12px,2.4vw,14.5px);font-weight:800;color:var(--soft);line-height:1.4;display:block;}
+.hero2 .go{flex-shrink:0;font-size:clamp(12px,2.4vw,14px);font-weight:900;padding:11px 17px;min-height:46px;display:flex;align-items:center;border-radius:24px;background:var(--hot);border:none;color:#fff;white-space:nowrap;}
 .door{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;border-radius:15px;padding:10px 13px;min-height:56px;background:var(--card);border:1px solid var(--line);transition:transform .18s,border-color .18s;}
 .door:hover{transform:translateY(-2px);border-color:var(--geo);}
 .door .de{font-size:23px;flex-shrink:0;}
@@ -196,7 +207,7 @@ details.more[open] summary .chev{transform:rotate(180deg);}
    aqui e entrar num produto ja entra com a traducao ligada. */
 .tr{display:none;color:var(--warm);font-style:italic;font-weight:700;font-size:.86em;line-height:1.3;margin-top:2px}
 body.show-tr .tr{display:block}
-.cbtn.flag{opacity:.45;filter:grayscale(1)}
+.cbtn.flag{opacity:.65}
 body.show-tr .cbtn.flag{opacity:1;filter:none;background:var(--warm-bg);border-color:var(--warm-line)}
 </style>
 </head>
@@ -279,7 +290,18 @@ body.show-tr .cbtn.flag{opacity:1;filter:none;background:var(--warm-bg);border-c
       </a>
     </div>
 
-    <!-- ===== DESTAQUES 2-4 ===== -->
+    <!-- ===== DESTAQUE 2: SIMULADO — logo no inicio, incentivando o uso ===== -->
+    <a class="hero2" href="ferramentas/MAT2_simulado.html">
+      <span class="em">&#x1F4DD;</span>
+      <span>
+        <span class="tt">Practice test</span>
+        <span class="dd">The best way to get ready: practise like it's the real thing. You choose how many questions.
+          <span class="tr">O melhor jeito de treinar: pratique como se fosse a prova de verdade.</span></span>
+      </span>
+      <span class="go">&#x270F;&#xFE0F; Practise now</span>
+    </a>
+
+    <!-- ===== DESTAQUES 3-4 ===== -->
     <div class="kicker" style="color:var(--soft);">After you study</div>
     <div class="picks">
       <a class="pick video" href="ferramentas/MAT2_video.html">
@@ -297,14 +319,6 @@ body.show-tr .cbtn.flag{opacity:1;filter:none;background:var(--warm-bg);border-c
           <span class="dd">count the sides, fold the letter and turn the figure in 3D</span>
         </span>
         <span class="tag">&#x1F9EA; Play</span>
-      </a>
-      <a class="pick quiz" href="ferramentas/MAT2_simulado.html">
-        <span class="em">&#x1F4DD;</span>
-        <span>
-          <span class="tt">Practice test</span>
-          <span class="dd">practise the test: you choose how many questions</span>
-        </span>
-        <span class="tag">&#x270F;&#xFE0F; Practise</span>
       </a>
     </div>
 

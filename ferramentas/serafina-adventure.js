@@ -77,7 +77,10 @@ var A=null, S=null;            // ADVENTURE, estado salvo
 var cur={ph:null,items:[],idx:0,misses:0,perfect:0};
 
 function $id(i){return document.getElementById(i);}
-function esc(s){return String(s).replace(/</g,'&lt;').replace(/"/g,'&quot;');}
+/* NAO escapa '<': o conteudo das fases usa <b> de proposito para destacar
+   palavras (e' dado de autor, nao entrada de usuario). So aspas, por
+   seguranca dentro de atributos. */
+function esc(s){return String(s).replace(/"/g,'&quot;');}
 function escJs(s){return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function tr(en,pt){return esc(en)+(pt?'<span class="tr">'+esc(pt)+'</span>':'');}
