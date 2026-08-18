@@ -49,3 +49,6 @@ _nlm_wait*.log
 # versionar uma copia de 23 MB de novo so incharia o repo.
 ferramentas/media/*_v1.mp4
 ferramentas/media/*_v2.mp4
+
+# --- Cache do Python dos scripts de geracao ---
+__pycache__/

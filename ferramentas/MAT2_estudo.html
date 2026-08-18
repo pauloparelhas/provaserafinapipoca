@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Study sheet — Math · 2-D Figures</title>
+<link rel="stylesheet" href="serafina-core.css?v=20260817">
+<style>
+/* ============================================================
+   ESTUDAR (Geografia 2tri) — folha + palavras-chave + mapa mental numa casca
+   única com 3 modos. Casca herdada do Study Hub de Ciências; o
+   conteúdo e o mapa sao gerados de dados (roteiro de Geografia).
+   ============================================================ */
+:root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
+body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.05rem;font-weight:800;cursor:pointer;padding:0 8px}
+.iconbtn:active{transform:scale(.9)}
+.dicabtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.4;filter:grayscale(1)}
+.dicabtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .dicabtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
+.wrap{flex:1;width:100%;max-width:640px;margin:0 auto;padding:14px 12px 44px}
+.hint{text-align:center;font-size:.82rem;font-weight:800;color:var(--soft);margin:2px 0 12px;line-height:1.4}
+.foot{text-align:center;color:var(--soft);font-weight:800;font-size:.82rem;margin-top:10px}
+
+/* ---- abas ---- */
+/* as 3 abas acompanham a rolagem: em texto longo a crianca nao perde a troca de modo */
+.tabbar{position:sticky;top:64px;z-index:4;display:flex;gap:8px;margin:0 -12px 14px;padding:8px 12px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.tabbtn{flex:1;min-height:52px;border-radius:16px;border:2px solid var(--line);background:transparent;color:var(--soft);font-family:inherit;font-weight:900;font-size:calc(.85rem*var(--fs));cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.1}
+.tabbtn .te{font-size:1.2rem}
+.tabbtn.on{border-color:var(--accent);background:rgba(52,211,153,.14);color:var(--ink)}
+.tabbtn:active{transform:scale(.96)}
+.pane{display:none}
+.pane.on{display:block}
+.tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.82em}
+body.show-tr .tr{display:block}
+
+/* ---- MODO 1: folha de estudo (do CIE2_resumo) ---- */
+.toolrow{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
+.toolbtn{border:2px solid var(--line);background:transparent;color:var(--soft);font-weight:800;font-size:.78rem;border-radius:16px;padding:7px 14px;cursor:pointer;font-family:inherit;min-height:44px}
+.toolbtn:active{transform:scale(.95)}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);box-shadow:0 10px 30px rgba(0,0,0,.28);margin-bottom:16px;overflow:hidden}
+.sechead{display:flex;align-items:center;gap:10px;padding:15px 16px;cursor:pointer;user-select:none}
+.sechead .si{font-size:1.7rem;filter:drop-shadow(0 4px 7px rgba(0,0,0,.3))}
+.sechead .st{flex:1;font-weight:900;font-size:calc(1.06rem*var(--fs));line-height:1.2}
+.sechead .st .str{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.78rem}
+body.show-tr .sechead .st .str{display:block}
+.sechead .chev{font-size:1rem;color:var(--soft);transition:transform .25s}
+.sec.open .chev{transform:rotate(180deg)}
+.secbody{display:none;padding:0 16px 16px}
+.sec.open .secbody{display:block}
+.listen{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border:2px solid var(--accent);background:transparent;color:var(--accent);font-weight:800;font-size:.85rem;border-radius:18px;padding:6px 16px;cursor:pointer;font-family:inherit;margin:2px 0 10px}
+.listen:active{transform:scale(.95)}
+.grp{border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin:8px 0;background:rgba(255,255,255,.03)}
+.grp .gname{font-weight:900;font-size:calc(1rem*var(--fs));display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.line{margin:8px 0 0;font-weight:700;font-size:calc(.96rem*var(--fs));line-height:1.35;display:flex;gap:8px}
+.line .lk{flex-shrink:0}
+.cols{display:flex;gap:10px;flex-wrap:wrap}
+.col{flex:1;min-width:140px;border:2px solid var(--line);border-radius:14px;padding:11px 13px}
+.col h4{font-size:.92rem;font-weight:900;margin-bottom:7px}
+.col .ci{font-weight:800;font-size:calc(.92rem*var(--fs));margin:5px 0;line-height:1.25}
+.tip{display:flex;gap:9px;align-items:flex-start;margin:9px 0;font-weight:800;font-size:calc(.97rem*var(--fs));line-height:1.35}
+.tip .tk{flex-shrink:0}
+.qa{border-left:3px solid var(--accent2);padding:6px 0 6px 12px;margin:11px 0}
+.qa .qq{font-weight:900;font-size:calc(.98rem*var(--fs));line-height:1.3}
+.qa .aa{font-weight:900;color:var(--accent);font-size:calc(1rem*var(--fs));margin-top:4px}
+.qa .aa .ar::before{content:"→ "}
+
+/* ---- MODO 2: palavras-chave (do CIE2_superrevisao) ---- */
+/* Cada bloco abre e fecha (10/08/2026): o mural inteiro aberto eram 9 blocos e
+   ~70 palavras numa parede so. Fechado, a crianca le 9 titulos e escolhe. */
+.kblock{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--bc,var(--accent));border-radius:var(--rad);box-shadow:0 10px 26px rgba(0,0,0,.26);margin-bottom:14px;padding:13px 14px;overflow:hidden}
+.kblock.open{padding-bottom:15px}
+/* min-height 48: virou area clicavel, entao vale a regra de alvo de toque
+   (o QA reprovou com 32px de altura). */
+.kbhead{display:flex;align-items:center;flex-wrap:wrap;gap:9px;cursor:pointer;user-select:none;min-height:48px}
+.kbchev{font-size:.9rem;color:var(--soft);transition:transform .25s;flex-shrink:0}
+.kblock.open .kbchev{transform:rotate(180deg)}
+.kbbody{display:none}
+.kblock.open .kbbody{display:block}
+.kbhead .ke{font-size:1.5rem;filter:drop-shadow(0 4px 7px rgba(0,0,0,.3))}
+.kbhead .kt{flex:1;min-width:0;font-weight:900;font-size:calc(1.05rem*var(--fs));line-height:1.15}
+.kbhead .kt .ktr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem}
+body.show-tr .kbhead .kt .ktr{display:block}
+.kaxis{font-size:.66rem;font-weight:900;letter-spacing:.4px;text-transform:uppercase;color:var(--soft);background:var(--line);border-radius:8px;padding:3px 8px;margin-left:auto;white-space:nowrap}
+.kgroup{margin-top:10px}
+.klabel{display:inline-flex;align-items:center;gap:6px;font-weight:900;font-size:calc(.9rem*var(--fs));border-radius:999px;padding:5px 13px;min-height:44px;cursor:pointer;border:none;font-family:inherit}
+.klabel .ltr{font-weight:800;font-style:italic;font-size:.74rem;opacity:.85}
+body:not(.show-tr) .klabel .ltr{display:none}
+.kchips{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}
+.kchip{display:flex;flex-direction:column;justify-content:center;gap:1px;min-height:44px;border-radius:13px;padding:6px 12px;cursor:pointer;font-family:inherit;text-align:left;border:1.5px solid var(--cc,var(--line));background:var(--cb,rgba(255,255,255,.05));color:var(--ink)}
+.kchip:active{transform:scale(.95)}
+.kchip .en{font-weight:900;font-size:calc(.92rem*var(--fs));line-height:1.1}
+.kchip .pt{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem;line-height:1.1}
+body.show-tr .kchip .pt{display:block}
+
+/* ---- MODO 3: mapa mental (do CIE2_mindmap) ---- */
+.mm-root-label{text-align:center;margin-bottom:10px}
+.mm-root-pill{display:inline-block;padding:12px 28px;border-radius:20px;font-size:calc(15px*var(--fs));font-weight:900;background:linear-gradient(135deg,#38bdf8,#fbbf24);color:#fff;box-shadow:0 0 24px rgba(56,189,248,.35)}
+.mm-root-tr{display:none;font-size:calc(11px*var(--fs));font-weight:800;color:var(--tr);font-style:italic;margin-top:8px}
+body.show-tr .mm-root-tr{display:block}
+.mm-branch{border-radius:18px;border:2px solid;margin-bottom:12px;overflow:hidden}
+.mm-branch-hd{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;min-height:52px}
+.mm-branch-hd:active{opacity:.8}
+.mm-branch-icon{font-size:22px;flex-shrink:0}
+.mm-branch-text{flex:1}
+.mm-branch-en{font-size:calc(15px*var(--fs));font-weight:900;color:var(--ink);line-height:1.2}
+.mm-branch-pt{display:none;font-size:calc(11px*var(--fs));font-weight:800;color:var(--tr);font-style:italic;margin-top:2px}
+.mm-branch-arrow{font-size:12px;color:var(--soft);transition:transform .25s;flex-shrink:0}
+.mm-branch.open .mm-branch-arrow{transform:rotate(90deg)}
+.mm-branch-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.mm-branch.open .mm-branch-body{max-height:6000px}
+.mm-branch-inner{padding:4px 12px 12px}
+.mm-leaf{border-radius:12px;margin-bottom:8px;overflow:hidden}
+.mm-leaf-hd{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;min-height:44px}
+.mm-leaf-hd:active{opacity:.8}
+.mm-leaf-icon{font-size:18px;flex-shrink:0}
+.mm-leaf-text{flex:1}
+.mm-leaf-en{font-size:calc(13px*var(--fs));font-weight:900;color:var(--ink);line-height:1.2}
+.mm-leaf-arrow{font-size:10px;color:var(--soft);transition:transform .2s;flex-shrink:0}
+.mm-leaf.open .mm-leaf-arrow{transform:rotate(90deg)}
+.mm-leaf-body{max-height:0;overflow:hidden;transition:max-height .25s ease}
+.mm-leaf.open .mm-leaf-body{max-height:1400px}
+.mm-detail{padding:4px 12px 4px 16px;font-size:calc(12px*var(--fs));font-weight:700;line-height:1.45}
+.mm-detail-en{color:var(--ink);opacity:.92}
+.mm-detail-pt{display:none;color:var(--tr);font-style:italic;margin-top:1px}
+body.show-tr .mm-branch-pt,body.show-tr .mm-leaf-pt,body.show-tr .mm-detail-pt{display:block}
+.mm-detail-last{padding-bottom:8px}
+.mm-tag{display:inline-block;font-size:calc(9px*var(--fs));font-weight:800;padding:1px 7px;border-radius:10px;margin-left:6px;background:rgba(251,146,60,.22);color:#fdba74;vertical-align:middle}
+body.light .mm-tag{background:rgba(180,83,9,.15);color:#b45309}
+.bc-blue{background:rgba(96,165,250,.06);border-color:rgba(96,165,250,.25)}
+.bc-blue .mm-branch-hd,.bc-blue .mm-leaf-hd{background:rgba(96,165,250,.08)}
+.bc-blue .mm-detail{border-left:2px solid rgba(96,165,250,.3)}
+.bc-orange{background:rgba(251,146,60,.06);border-color:rgba(251,146,60,.25)}
+.bc-orange .mm-branch-hd,.bc-orange .mm-leaf-hd{background:rgba(251,146,60,.08)}
+.bc-orange .mm-detail{border-left:2px solid rgba(251,146,60,.3)}
+.bc-green{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.25)}
+.bc-green .mm-branch-hd,.bc-green .mm-leaf-hd{background:rgba(52,211,153,.08)}
+.bc-green .mm-detail{border-left:2px solid rgba(52,211,153,.3)}
+.bc-purple{background:rgba(167,139,250,.06);border-color:rgba(167,139,250,.25)}
+.bc-purple .mm-branch-hd,.bc-purple .mm-leaf-hd{background:rgba(167,139,250,.08)}
+.bc-purple .mm-detail{border-left:2px solid rgba(167,139,250,.3)}
+.bc-pink{background:rgba(244,114,182,.06);border-color:rgba(244,114,182,.25)}
+.bc-pink .mm-branch-hd,.bc-pink .mm-leaf-hd{background:rgba(244,114,182,.08)}
+.bc-pink .mm-detail{border-left:2px solid rgba(244,114,182,.3)}
+
+.sombtn{transition:opacity .15s}
+.sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
+
+/* ---------- mouse (notebook) ---------- */
+@media (hover:hover){
+  .tabbtn:hover,.toolbtn:hover,.kchip:hover{border-color:var(--accent)}
+  .sechead:hover .st,.mm-branch-hd:hover .mm-branch-en{color:var(--accent)}
+}
+/* ---------- telas largas (notebook): a folha em 2 colunas ---------- */
+@media (min-width:1000px){
+  .wrap{max-width:860px;padding:16px 20px 48px}
+  /* GRID, nao `columns`: agora que os blocos abrem/fecham, o multicoluna do CSS
+     refluiria a coluna vizinha a cada clique (o bloco saltaria de coluna). */
+  #wordsContent{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;align-items:start}
+  .tabbar{margin:0 -20px 16px;padding:8px 20px}
+}
+/* ---------- celular em PAISAGEM ---------- */
+@media (orientation:landscape) and (max-height:520px){
+  .topbar{padding:5px 8px}
+  .wrap{max-width:none;padding:10px 14px 30px}
+  .tabbar{top:54px;margin:0 -14px 10px;padding:6px 14px}
+  .tabbtn{min-height:44px;flex-direction:row;gap:6px;font-size:calc(.8rem*var(--fs))}
+  .tabbtn .te{font-size:1rem}
+  .hint{margin:2px 0 8px}
+  #wordsContent{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;align-items:start}
+  .sechead{padding:11px 13px}
+  .sechead .si{font-size:1.3rem}
+  .secbody{padding:0 13px 13px}
+  .mm-root-pill{padding:8px 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+
+/* ---- 360px: a barra de cima nao cabia numa linha ----------------------
+   8 botoes de 44px + gaps dao 427px: a lockbtn nascia CORTADA fora da tela
+   (defeito herdado do GEO2, medido no QA de 17/08). O titulo sobe para a
+   propria linha e os botoes dividem a largura restante; a altura de toque
+   continua 44px. */
+@media(max-width:420px){
+  .topbar{flex-wrap:wrap;gap:4px}
+  .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px}
+  .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Estudar &mdash; Comunidades e lugares</span>
+    <button class="iconbtn dicabtn" id="dica" title="Ver em português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="wrap">
+    <div class="tabbar">
+      <button class="tabbtn on" id="tab-sheet" onclick="showTab('sheet')"><span class="te">&#128214;</span>Folha de estudo</button>
+      <button class="tabbtn" id="tab-words" onclick="showTab('words')"><span class="te">&#10024;</span>Palavras-chave</button>
+      <button class="tabbtn" id="tab-map" onclick="showTab('map')"><span class="te">&#129517;</span>Mapa mental</button>
+    </div>
+
+    <!-- ===== MODO 1: FOLHA DE ESTUDO ===== -->
+    <div class="pane on" id="pane-sheet">
+      <div class="hint">Sua folha de estudo! Toque no t&iacute;tulo para abrir/fechar, no &#128266; para ouvir em ingl&ecirc;s e na &#127463;&#127479; para ver a tradu&ccedil;&atilde;o.</div>
+      <div class="toolrow">
+        <button class="toolbtn" onclick="allSec(true)">&#11015;&#65039; Abrir tudo</button>
+        <button class="toolbtn" onclick="allSec(false)">&#11014;&#65039; Fechar tudo</button>
+      </div>
+      <div id="sheetContent"></div>
+    </div>
+
+    <!-- ===== MODO 2: PALAVRAS-CHAVE ===== -->
+    <div class="pane" id="pane-words">
+      <div class="hint">S&oacute; as palavras m&aacute;gicas! &#128073; Toque num t&iacute;tulo para abrir &bull; toque numa palavra para ouvir &#128266;.</div>
+      <div class="toolrow">
+        <button class="toolbtn" onclick="allWords(true)">&#11015;&#65039; Abrir tudo</button>
+        <button class="toolbtn" onclick="allWords(false)">&#11014;&#65039; Fechar tudo</button>
+      </div>
+      <div id="wordsContent"></div>
+    </div>
+
+    <!-- ===== MODO 3: MAPA MENTAL ===== -->
+    <div class="pane" id="pane-map">
+      <div class="hint">&#128073; Toque num t&oacute;pico para abrir &bull; toque de novo para fechar</div>
+      <div class="toolrow">
+        <button class="toolbtn" onclick="allMap(true)">&#11015;&#65039; Abrir tudo</button>
+        <button class="toolbtn" onclick="allMap(false)">&#11014;&#65039; Fechar tudo</button>
+      </div>
+      <div class="mm-root-label">
+        <div class="mm-root-pill">&#x1F4D0; 2-D Geometry &mdash; Exploring 2-D Figures</div>
+        <div class="mm-root-tr">Math &mdash; Y2 &middot; Unit 9</div>
+      </div>
+      <div id="mapContent"></div>
+    </div>
+
+    <div class="foot">Tudo aqui saiu do caderno da Unit 9. &#128218;</div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   ESTUDAR — Matematica 2tri · 3 modos sobre o MESMO conteúdo.
+   Conteúdo 100% derivado de trabalho/2tri_matematica/_roteiro.md.
+   Modo 1 (folha), 2 (palavras) e 3 (mapa) renderizam de arrays —
+   o mapa deixou de ser markup estático (refator: 1 dado, 3 vistas).
+   Matéria EM INGLES: conteúdo em EN, tradução PT na bandeira 🇧🇷.
+   ============================================================ */
+var $=function(id){return document.getElementById(id);};
+function esc(s){return String(s).replace(/<[^>]*>/g,'').replace(/"/g,'&quot;').replace(/'/g,"\\'");}
+
+/* ---- abas ---- */
+function showTab(k){
+  ['sheet','words','map'].forEach(function(t){
+    $('tab-'+t).classList.toggle('on',t===k);
+    $('pane-'+t).classList.toggle('on',t===k);
+  });
+  try{localStorage.setItem('geo2_estudo_tab',k);}catch(e){}
+}
+
+/* ================= CORES DA UNIDADE (uma só paleta em todo o produto) ==== */
+var C_FIG='#a78bfa', C_LAD='#34d399', C_OBJ='#38bdf8', C_SIM='#f472b6', C_PAD='#fbbf24';
+
+/* ============ MODO 1: folha de estudo ============ */
+const CONCEITOS=[
+ ["\u{1F4C4}","2-D figure","figura de duas dimensões: é <b>flat</b> (plana), dá para desenhar no papel.","o nome vem do número de lados"],
+ ["\u{1F4CF}","Side","o <b>lado</b>: cada linha reta da figura.","conte os pauzinhos retos"],
+ ["\u{1F4CD}","Vertex","o <b>vértice</b>: o cantinho onde dois lados se encontram. Plural: <b>vertices</b>.","corner = cantinho"],
+ ["\u{1F517}","Edge","outra palavra para <b>lado</b>. “a triangle on each edge” = um triângulo em cada lado.",""],
+ ["\u{1F511}","A regra de ouro","numa figura de lados retos, o número de <b>vertices</b> é igual ao número de <b>sides</b>.","3 lados = 3 vértices"],
+ ["\u{2B55}","A exceção","o <b>circle</b> é redondo: não tem lado reto e tem <b>0 vertices</b>.","é a única figura sem cantinho"]
+];
+const CONCEITOS_say="A two D figure is flat. A side is one straight line of the figure. A vertex is the corner where two sides meet. The plural of vertex is vertices. Edge means the same as side. In a figure with straight sides, the number of vertices is the same as the number of sides. The circle is the only one with zero vertices.";
+
+const MIGRACAO=[
+ ["\u{1F4D5}","Book cover · Door","parecem um <b>rectangle</b> (retângulo).",""],
+ ["\u{1FA99}","Coin · Plate · Wheel · Clock face","parecem um <b>circle</b> (círculo).","moeda, prato, roda e relógio"],
+ ["\u{1F355}","Slice of pizza · Party hat","parecem um <b>triangle</b> (triângulo).",""],
+ ["\u{1F6D1}","Stop sign","parece um <b>octagon</b> (octógono) — 8 lados.","octo = 8, como o octopus"],
+ ["\u{1F36F}","Honeycomb cell","parece um <b>hexagon</b> (hexágono) — 6 lados.",""],
+ ["\u{26BD}","O gomo preto da bola","parece um <b>pentagon</b> (pentágono) — 5 lados.",""]
+];
+const MIGRACAO_say="A book cover and a door look like a rectangle. A coin, a plate, a wheel and a clock face look like a circle. A slice of pizza and a party hat look like a triangle. A stop sign looks like an octagon. A honeycomb cell looks like a hexagon.";
+
+const TRADICOES=[
+ ["\u{1FA9E}","Symmetry","uma figura tem <b>symmetry</b> quando dá para dobrar (<b>fold</b>) e as duas metades <b>combinam</b> (match).",""],
+ ["\u{2702}\u{FE0F}","Line of symmetry","a linha da dobra. Pode ser <b>em pé</b> ou <b>deitada</b> — e uma figura pode ter mais de uma.","o C e o B só funcionam com a linha deitada"],
+ ["\u{1F5BC}\u{FE0F}","Matching part · Mirror image","a metade que falta é a imagem no espelho.",""],
+ ["\u{1F534}","Mira","o espelhinho vermelho da aula: põe em cima da linha e vê se a metade refletida completa a figura.",""],
+ ["\u{2705}","Letras COM simetria","<b>O</b> e <b>X</b> (em pé e deitada) · <b>A</b>, <b>M</b> e <b>V</b> (em pé) · <b>C</b> e <b>B</b> (deitada).","estas são as do material"],
+ ["\u{274C}","Letras SEM simetria","<b>G</b>, <b>P</b>, <b>J</b> e <b>R</b>.",""],
+ ["\u{1F469}","MOM","a palavra tem simetria: a Mira vai <b>em pé, no meio do O</b>. Outras: WOW, MUM, TOT.",""]
+];
+const TRADICOES_say="A figure has symmetry when you can fold it and the two halves match. The fold line is the line of symmetry. It can be standing up or lying down. The letters O, X, A, M, V, C and B have symmetry. The letters G, P, J and R do not. The word MOM has symmetry: the Mira goes standing up, in the middle of the O.";
+
+const DIVERSIDADE=[
+ ["\u{27A1}\u{FE0F}","Slide","<b>deslizar</b>: a figura anda para o lugar de perto, sem virar e sem girar.",""],
+ ["\u{1FA9E}","Flip","<b>virar</b>: a figura vira como no espelho — a gente vê a imagem espelhada.",""],
+ ["\u{1F503}","Turn","<b>girar</b>: a figura roda em volta de um pontinho, como o ponteiro do relógio.",""],
+ ["\u{1F9F5}","Repeating pattern","um pedacinho que se repete de novo e de novo, sempre na mesma ordem. Dá para fazer com <b>uma figura só</b>.",""],
+ ["\u{1F512}","O que NÃO muda","o número de lados, o número de vértices, o tamanho e o nome da figura.","a figura continua a mesma"],
+ ["\u{2728}","O que PODE mudar","onde a figura está e para que lado ela aponta.",""],
+ ["\u{1F9E9}","O quilt","a colcha é uma grade 3 por 3, blocos de 1 a 9. Do bloco 1, descendo dois, indo um à direita, subindo um e indo um à esquerda: chega-se no <b>bloco 4</b>.",""]
+];
+const DIVERSIDADE_say="Slide means the figure walks to the next spot. Flip means it shows its mirror image. Turn means it spins around a point. In a repeating pattern the same little piece comes again and again. The number of sides, the number of vertices, the size and the name of the figure never change. Only where it is and which way it faces can change.";
+
+const REGIOES=[
+ {k:'Circle',    pt:'Círculo',   co:C_OBJ, emo:"\u{2B55}", lados:"nenhum lado reto — é redondo", vert:"0 vertices", spot:"round, with no corners", obj:"a coin, a plate, a wheel, a clock face"},
+ {k:'Triangle',  pt:'Triângulo', co:'#fb923c', emo:"\u{1F53A}", lados:"3 sides", vert:"3 vertices", spot:"3 straight sides", obj:"a slice of pizza, a party hat"},
+ {k:'Square',    pt:'Quadrado',  co:C_LAD, emo:"\u{1F7E9}", lados:"4 sides", vert:"4 vertices", spot:"4 sides, all the same length", obj:"a chessboard square, a window pane"},
+ {k:'Rectangle', pt:'Retângulo', co:'#60a5fa', emo:"\u{1F7E6}", lados:"4 sides", vert:"4 vertices", spot:"2 long sides and 2 short sides", obj:"a book cover, a door"},
+ {k:'Pentagon',  pt:'Pentágono', co:C_SIM, emo:"\u{2B50}", lados:"5 sides", vert:"5 vertices", spot:"penta = 5", obj:"the black patch on a soccer ball"},
+ {k:'Hexagon',   pt:'Hexágono',  co:C_FIG, emo:"\u{1F41D}", lados:"6 sides", vert:"6 vertices", spot:"hexa = 6", obj:"a honeycomb cell"},
+ {k:'Octagon',   pt:'Octógono',  co:C_PAD, emo:"\u{1F6D1}", lados:"8 sides", vert:"8 vertices", spot:"octo = 8, like an octopus", obj:"a stop sign"}
+];
+const REGIOES_say="Circle: no straight sides, zero vertices. Triangle: three sides, three vertices. Square: four sides all the same length, four vertices. Rectangle: four sides, two long and two short, four vertices. Pentagon: five sides, five vertices. Hexagon: six sides, six vertices. Octagon: eight sides, eight vertices.";
+
+const DICAS=[
+ ["\u{1F4CD}","<b>Side</b> é o lado (a linha reta). <b>Vertex</b> é o vértice (o cantinho). Ler a pergunta até o fim: “how many <b>sides</b>?” é diferente de “how many <b>vertices</b>?”.","a pegadinha número 1"],
+ ["\u{1F511}","Numa figura de lados retos, <b>lados = vértices</b>. Sabendo um, você já sabe o outro.",""],
+ ["\u{2B55}","O <b>circle</b> tem <b>0 vértices</b>. É a única figura assim.",""],
+ ["\u{1F4CF}","A <b>line of symmetry</b> pode ser <b>deitada</b>! Quem só procura a linha em pé erra o <b>C</b> e o <b>B</b>.","a pegadinha número 2"],
+ ["\u{1F419}","<b>penta</b> = 5 · <b>hexa</b> = 6 · <b>octo</b> = 8, como o <b>octopus</b>.",""],
+ ["\u{1F7E9}","<b>Square</b> e <b>rectangle</b> têm os dois 4 lados e 4 vértices. O que muda: no <b>square</b> os 4 lados são iguais.",""],
+ ["\u{1F504}","<b>Flip</b> é espelho. <b>Turn</b> é girar, como o relógio. Em português a gente diz “virar” para os dois — em inglês, não.","a pegadinha número 3"],
+ ["\u{1F517}","<b>Edge</b> quer dizer <b>side</b>. Se a pergunta falar em edge, é o lado.",""]
+];
+
+const FAQ=[
+ ["What is a side?","One straight line of the figure. — É cada linha reta da figura."],
+ ["What is a vertex?","The corner where two sides meet. — O cantinho onde dois lados se encontram."],
+ ["How many sides does a triangle have?","Three. — Três."],
+ ["How many vertices does a triangle have?","Three. — Três."],
+ ["How many sides does a hexagon have?","Six. — Seis."],
+ ["How many sides does an octagon have?","Eight. — Oito."],
+ ["How many vertices does a circle have?","Zero. — Nenhum."],
+ ["What is the difference between a square and a rectangle?","In a square all four sides are the same length; a rectangle has 2 long and 2 short sides."],
+ ["What does a stop sign look like?","An octagon. — Um octógono."],
+ ["What does a honeycomb cell look like?","A hexagon. — Um hexágono."],
+ ["When does a figure have symmetry?","When you fold it and the two halves match."],
+ ["Which letters have symmetry?","O, X, A, M, V, C and B. G, P, J and R do not."],
+ ["Where do you put the Mira on MOM?","Standing up, in the middle of the O."],
+ ["What is a slide, a flip and a turn?","Slide = it walks · Flip = mirror image · Turn = it spins around a point."],
+ ["When a figure turns, what stays the same?","The number of sides, the number of vertices, the size and the name."]
+];
+
+function row(r){return '<div class="line"><span class="lk">'+r[0]+'</span><span><b>'+r[1]+'</b> — '+r[2]+
+  (r[3]?'<span class="tr">\u{1F4A1} '+r[3]+'</span>':'')+'</span></div>';}
+function regRow(r){
+  return '<div class="col" style="flex:1 1 100%;border-color:'+r.co+';background:'+rgba(r.co,.09)+'">'
+   +'<h4 style="color:'+r.co+'">'+r.emo+' '+r.k+' <span style="opacity:.75;font-weight:800">&middot; '+r.pt+'</span></h4>'
+   +'<div class="ci"><b>Sides:</b> '+r.lados+'</div>'
+   +'<div class="ci"><b>Vertices:</b> '+r.vert+'</div>'
+   +'<div class="ci"><b>How to spot it:</b> '+r.spot+'</div>'
+   +'<div class="ci"><b>Around us:</b> '+r.obj+'</div>'
+   +'<button class="listen" style="border-color:'+r.co+';color:'+r.co+';margin-top:8px" onclick="say(\''
+   +esc(r.k+'. '+r.lados+'. '+r.vert+'. '+r.spot)+'\')">&#128266; Ouvir: '+r.k+'</button>'
+   +'</div>';
+}
+function buildSheet(){
+  var mkBody=function(arr,sayTxt){return '<button class="listen" onclick="say(\''+esc(sayTxt)+'\')">&#128266; Ouvir</button>'+arr.map(row).join('');};
+  var regBody='<button class="listen" onclick="say(\''+esc(REGIOES_say)+'\')">&#128266; Ouvir</button>'
+    +'<div class="cols">'+REGIOES.map(regRow).join('')+'</div>';
+  var dicasBody=DICAS.map(function(t){return '<div class="tip"><span class="tk">'+t[0]+'</span><span>'+t[1]
+    +(t[2]?'<span class="tr">\u{1F4A1} '+t[2]+'</span>':'')+'</span></div>';}).join('');
+  var faqBody=FAQ.map(function(q){return '<div class="qa"><div class="qq">'+q[0]+'</div>'
+    +'<div class="aa"><span class="ar">'+q[1]+'</span></div></div>';}).join('');
+  /* TUDO FECHADO por padrao (10/08/2026): a tela abre como um indice — a crianca
+     ve os 7 titulos de uma vez e escolhe onde entrar. Antes, 4 secoes ja vinham
+     abertas e a folha nascia com metros de rolagem. */
+  var sections=[
+   {ic:"\u{1F4CF}",t:"Sides &amp; vertices — as palavras da unidade",body:mkBody(CONCEITOS,CONCEITOS_say),open:false},
+   {ic:"\u{1F441}\u{FE0F}",t:"Figures around us — as figuras no dia a dia",body:mkBody(MIGRACAO,MIGRACAO_say),open:false},
+   {ic:"\u{1F53A}",t:"As 7 figuras — lados e vértices de cada uma",body:regBody,open:false},
+   {ic:"\u{1FA9E}",t:"Symmetry — a linha do espelho",body:mkBody(TRADICOES,TRADICOES_say),open:false},
+   {ic:"\u{1F504}",t:"Slide, flip, turn — padrões e a colcha",body:mkBody(DIVERSIDADE,DIVERSIDADE_say),open:false},
+   {ic:"⭐",t:"Dicas para a prova",body:dicasBody,open:false},
+   {ic:"❓",t:"Perguntas que costumam cair",body:faqBody,open:false}
+  ];
+  $('sheetContent').innerHTML=sections.map(function(s,i){return '<div class="sec'+(s.open?' open':'')+'" id="sec'+i+'">'
+     +'<div class="sechead" onclick="toggleSec('+i+')">'
+     +'<span class="si">'+s.ic+'</span>'
+     +'<span class="st">'+s.t+'</span>'
+     +'<span class="chev">&#9660;</span></div>'
+     +'<div class="secbody">'+s.body+'</div></div>';}).join('');
+}
+function toggleSec(i){$('sec'+i).classList.toggle('open');}
+function allSec(open){document.querySelectorAll('#pane-sheet .sec').forEach(function(s){s.classList.toggle('open',open);});}
+
+/* ============ MODO 2: palavras-chave ============ */
+var BLOCKS=[
+ { key:'figuras', emo:"\u{1F53A}", en:"The 7 figures", axis:"nome em inglês · lados · vértices",
+   groups:[
+    {name:'0 vertices', pt:'sem cantinho', emo:"\u{2B55}", co:C_OBJ, chips:[
+      ["circle","círculo — redondo, 0 lados retos"]]},
+    {name:'3 sides', pt:'3 lados, 3 vértices', emo:"\u{1F53A}", co:'#fb923c', chips:[
+      ["triangle","triângulo"]]},
+    {name:'4 sides', pt:'4 lados, 4 vértices', emo:"\u{1F7E9}", co:C_LAD, chips:[
+      ["square","quadrado — 4 lados iguais"],["rectangle","retângulo — 2 compridos, 2 curtos"]]},
+    {name:'5, 6 and 8 sides', pt:'penta · hexa · octo', emo:"\u{2B50}", co:C_FIG, chips:[
+      ["pentagon","pentágono — 5"],["hexagon","hexágono — 6"],["octagon","octógono — 8"]]}
+   ]},
+ { key:'partes', emo:"\u{1F4CD}", en:"Sides and vertices", axis:"as palavras que a prova usa",
+   groups:[
+    {name:'Side / edge', pt:'o lado', emo:"\u{1F4CF}", co:C_LAD, chips:[
+      ["side","lado — cada linha reta"],["edge","lado (outra palavra)"],["straight","reto"],["curved","curvo"]]},
+    {name:'Vertex / vertices', pt:'o cantinho', emo:"\u{1F4CD}", co:C_SIM, chips:[
+      ["vertex","vértice (um)"],["vertices","vértices (mais de um)"],["corner","cantinho"]]},
+    {name:'The golden rule', pt:'lados = vértices', emo:"\u{1F511}", co:C_PAD, chips:[
+      ["3 sides = 3 vertices",""],["4 sides = 4 vertices",""],["6 sides = 6 vertices",""],["circle = 0 vertices","a exceção"]]}
+   ]},
+ { key:'objetos', emo:"\u{1F441}\u{FE0F}", en:"Figures around us", axis:"o objeto e a figura dele",
+   groups:[
+    {name:'Rectangle', pt:'retângulo', emo:"\u{1F7E6}", co:'#60a5fa', chips:[
+      ["book cover","capa de livro"],["door","porta"]]},
+    {name:'Circle', pt:'círculo', emo:"\u{2B55}", co:C_OBJ, chips:[
+      ["coin","moeda"],["plate","prato"],["wheel","roda"],["clock face","relógio de parede"]]},
+    {name:'Triangle', pt:'triângulo', emo:"\u{1F53A}", co:'#fb923c', chips:[
+      ["slice of pizza","fatia de pizza"],["party hat","chapéu de festa"]]},
+    {name:'Octagon · Hexagon · Pentagon', pt:'8 · 6 · 5', emo:"\u{1F6D1}", co:C_FIG, chips:[
+      ["stop sign","placa de PARE — octagon"],["honeycomb cell","favo de mel — hexagon"],["black patch on a ball","gomo preto da bola — pentagon"]]}
+   ]},
+ { key:'simetria', emo:"\u{1FA9E}", en:"Symmetry", axis:"a linha do espelho",
+   groups:[
+    {name:'The words', pt:'as palavras', emo:"\u{1F4AC}", co:C_SIM, chips:[
+      ["symmetry","simetria"],["line of symmetry","linha de simetria"],["fold","dobrar"],["match","combinar"],["matching part","a metade que combina"],["mirror image","imagem no espelho"],["half","metade"],["Mira","o espelhinho"]]},
+    {name:'Letters WITH symmetry', pt:'têm simetria', emo:"\u{2705}", co:C_LAD, chips:[
+      ["O","em pé e deitada"],["X","em pé e deitada"],["A","em pé"],["M","em pé"],["V","em pé"],["C","DEITADA"],["B","DEITADA"]]},
+    {name:'Letters WITHOUT', pt:'não têm simetria', emo:"\u{274C}", co:'#fb7185', chips:[
+      ["G",""],["P",""],["J",""],["R",""]]},
+    {name:'Words with symmetry', pt:'palavras simétricas', emo:"\u{1F469}", co:C_PAD, chips:[
+      ["MOM","a Mira vai no meio do O"],["WOW",""],["MUM",""],["TOT",""]]}
+   ]},
+ { key:'padroes', emo:"\u{1F504}", en:"Slide, flip, turn", axis:"os três movimentos",
+   groups:[
+    {name:'Slide', pt:'deslizar', emo:"\u{27A1}\u{FE0F}", co:'#60a5fa', chips:[
+      ["it walks to the next spot","anda para o lugar de perto"],["no spinning, no mirror","não roda nem espelha"]]},
+    {name:'Flip', pt:'virar', emo:"\u{1FA9E}", co:C_SIM, chips:[
+      ["you see the mirror image","vê-se a imagem no espelho"]]},
+    {name:'Turn', pt:'girar', emo:"\u{1F503}", co:C_PAD, chips:[
+      ["it spins around a point","roda em volta de um pontinho"],["like a clock hand","como o ponteiro do relógio"]]},
+    {name:'Always the same', pt:'nunca muda', emo:"\u{1F512}", co:C_LAD, chips:[
+      ["the number of sides","o número de lados"],["the number of vertices","o número de vértices"],["the size","o tamanho"],["the name of the figure","o nome da figura"]]}
+   ]},
+ { key:'pares', emo:"\u{26A0}\u{FE0F}", en:"Pairs that trick you", axis:"leia até o fim",
+   groups:[
+    {name:'side × vertex', pt:'lado × vértice', emo:"\u{1F4CD}", co:'#fb7185', chips:[
+      ["side = a straight line","o lado"],["vertex = a corner","o cantinho"]]},
+    {name:'flip × turn', pt:'espelho × girar', emo:"\u{1F504}", co:C_PAD, chips:[
+      ["flip = mirror","virar como no espelho"],["turn = spin","girar em volta de um ponto"]]},
+    {name:'hexagon × octagon', pt:'6 × 8', emo:"\u{1F41D}", co:C_FIG, chips:[
+      ["hexagon = 6","hexa = seis"],["octagon = 8","octo = oito, octopus"]]},
+    {name:'square × rectangle', pt:'os dois têm 4 lados', emo:"\u{1F7E9}", co:C_LAD, chips:[
+      ["square: 4 equal sides","4 lados iguais"],["rectangle: 2 long, 2 short","2 compridos, 2 curtos"]]}
+   ]}
+];
+function textOn(hex){var h=hex.replace('#','');var r=parseInt(h.substr(0,2),16)/255,g=parseInt(h.substr(2,2),16)/255,b=parseInt(h.substr(4,2),16)/255;
+  var L=.2126*r+.7152*g+.0722*b;return L>0.6?'#0c2238':'#ffffff';}
+function rgba(hex,a){var h=hex.replace('#','');return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+','+a+')';}
+function buildWords(){
+  var html='';
+  BLOCKS.forEach(function(b,bi){
+    /* fechado por padrao — o clique no cabecalho abre. O corpo fica num
+       .kbbody proprio para o toggle nao esconder tambem o cabecalho. */
+    html+='<div class="kblock" id="kb'+bi+'" style="--bc:'+b.groups[0].co+'">'
+        +'<div class="kbhead" onclick="toggleWordBlock('+bi+')"><span class="ke">'+b.emo+'</span>'
+        +'<span class="kt">'+b.en+'</span>'
+        +'<span class="kaxis">'+b.axis+'</span>'
+        +'<span class="kbchev">&#9660;</span></div>'
+        +'<div class="kbbody">';
+    b.groups.forEach(function(g){
+      var allWords=g.chips.map(function(c){return c[0];}).join(', ');
+      html+='<div class="kgroup">'
+          +'<button class="klabel" style="background:'+g.co+';color:'+textOn(g.co)+'" onclick="say(\''+esc(g.name+'. '+allWords)+'\')">'
+          +'<span>'+g.emo+'</span><span>'+g.name+'</span>'+(g.pt?'<span class="ltr">'+g.pt+'</span>':'')+'</button>'
+          +'<div class="kchips">';
+      g.chips.forEach(function(c){
+        html+='<button class="kchip" style="--cc:'+rgba(g.co,.55)+';--cb:'+rgba(g.co,.14)+'" onclick="say(\''+esc(c[0])+'\')">'
+            +'<span class="en">'+c[0]+'</span>'+(c[1]?'<span class="pt">'+c[1]+'</span>':'')+'</button>';
+      });
+      html+='</div></div>';
+    });
+    html+='</div></div>';
+  });
+  $('wordsContent').innerHTML=html;
+}
+function toggleWordBlock(i){$('kb'+i).classList.toggle('open');}
+function allWords(open){document.querySelectorAll('#pane-words .kblock').forEach(function(k){k.classList.toggle('open',open);});}
+
+/* ============ MODO 3: mapa mental (gerado dos MESMOS dados) ============ */
+var MAP=[
+ {c:'bc-orange', ic:"\u{1F53A}", t:'The 7 figures', tr:'as sete figuras da unidade', open:false,
+  leaves:[
+   {ic:"\u{2B55}", t:'Circle — círculo', d:['Round, with no corners.','No straight sides · 0 vertices.']},
+   {ic:"\u{1F53A}", t:'Triangle — triângulo', d:['3 straight sides · 3 vertices.']},
+   {ic:"\u{1F7E9}", t:'Square — quadrado', d:['4 sides, all the same length · 4 vertices.']},
+   {ic:"\u{1F7E6}", t:'Rectangle — retângulo', d:['4 sides: 2 long and 2 short · 4 vertices.']},
+   {ic:"\u{2B50}", t:'Pentagon — pentágono', d:['5 sides · 5 vertices.','penta = 5.']},
+   {ic:"\u{1F41D}", t:'Hexagon — hexágono', d:['6 sides · 6 vertices.','hexa = 6.']},
+   {ic:"\u{1F6D1}", t:'Octagon — octógono', d:['8 sides · 8 vertices.','octo = 8, like an octopus.']}
+  ]},
+ {c:'bc-blue', ic:"\u{1F4CD}", t:'Sides and vertices', tr:'o que a prova mais cobra', open:false,
+  leaves:[
+   {ic:"\u{1F4CF}", t:'Side — lado', d:['One straight line of the figure.','Edge means the same thing.']},
+   {ic:"\u{1F4CD}", t:'Vertex — vértice', d:['The corner where two sides meet.','More than one: vertices.']},
+   {ic:"\u{1F511}", t:'The golden rule', d:['In a figure with straight sides, the number of vertices is the same as the number of sides.']},
+   {ic:"\u{2B55}", t:'The exception', d:['The circle has 0 vertices — it has no corners at all.']},
+   {ic:"\u{1F45C}", t:'What is in the bag?', d:['3 figures with 13 sides: triangle + square + hexagon (3+4+6).','3 figures with 12 vertices: square + square + square (4+4+4).','There is more than one right answer.']}
+  ]},
+ {c:'bc-green', ic:"\u{1F441}\u{FE0F}", t:'Figures around us', tr:'as figuras nos objetos do dia a dia', open:false,
+  leaves:[
+   {ic:"\u{1F7E6}", t:'Rectangle', d:['A book cover.','A door.']},
+   {ic:"\u{2B55}", t:'Circle', d:['A coin, a plate, a wheel, a clock face.']},
+   {ic:"\u{1F53A}", t:'Triangle', d:['A slice of pizza.','A party hat.']},
+   {ic:"\u{1F6D1}", t:'Octagon', d:['A stop sign.']},
+   {ic:"\u{1F36F}", t:'Hexagon', d:['A honeycomb cell.']},
+   {ic:"\u{26BD}", t:'Pentagon', d:['The black patch on a soccer ball.']}
+  ]},
+ {c:'bc-pink', ic:"\u{1FA9E}", t:'Symmetry', tr:'a linha do espelho', open:false,
+  leaves:[
+   {ic:"\u{1FA9E}", t:'What symmetry is', d:['A figure has symmetry when you can fold it and the two halves match.']},
+   {ic:"\u{2702}\u{FE0F}", t:'Line of symmetry', d:['The fold line.','It can be standing up OR lying down.','A figure can have more than one.']},
+   {ic:"\u{1F5BC}\u{FE0F}", t:'Matching part', d:['The half that is missing.','It is the mirror image of the other half.']},
+   {ic:"\u{1F534}", t:'Mira', d:['The little red mirror we use to check.','Put it on the line and look.']},
+   {ic:"\u{2705}", t:'Letters with symmetry', d:['O and X — standing up AND lying down.','A, M and V — standing up.','C and B — lying down.']},
+   {ic:"\u{274C}", t:'Letters without symmetry', d:['G, P, J and R.']},
+   {ic:"\u{1F469}", t:'MOM', d:['The word has symmetry: the Mira goes standing up, in the middle of the O.','Other words: WOW, MUM, TOT.']}
+  ]},
+ {c:'bc-purple', ic:"\u{1F504}", t:'Slide, flip and turn', tr:'os padrões que se repetem', open:false,
+  leaves:[
+   {ic:"\u{27A1}\u{FE0F}", t:'Slide — deslizar', d:['The figure walks to the next spot.','It does not spin and it does not mirror.']},
+   {ic:"\u{1FA9E}", t:'Flip — virar', d:['The figure shows its mirror image.']},
+   {ic:"\u{1F503}", t:'Turn — girar', d:['The figure spins around a point, like a clock hand.']},
+   {ic:"\u{1F9F5}", t:'Repeating pattern', d:['A little piece that comes again and again, always in the same order.','You can make one with just one figure.']},
+   {ic:"\u{1F512}", t:'What never changes', d:['The number of sides, the number of vertices, the size and the name of the figure.']},
+   {ic:"\u{2728}", t:'What can change', d:['Where the figure is.','Which way it faces.']}
+  ]},
+ {c:'bc-green', ic:"\u{1F9E9}", t:'The quilt', tr:'a colcha da última lição', open:false,
+  leaves:[
+   {ic:"\u{1F522}", t:'The grid', d:['3 by 3 blocks, numbered 1 to 9.']},
+   {ic:"\u{2B50}", t:'Block 3', d:['The only block with just a pentagon.','A triangle on each edge makes a star.']},
+   {ic:"\u{1F46F}", t:'Same design', d:['Blocks 1 and 9.','Blocks 2 and 6.','Blocks 4 and 8.','Only the colours change.']},
+   {ic:"\u{2B07}\u{FE0F}", t:'Following directions', d:['Start in block 1 · down two blocks → 7 · one to the right → 8 · up one → 5 · one to the left → block 4.']}
+  ]},
+ {c:'bc-orange', ic:"\u{26A0}\u{FE0F}", t:'Careful with these pairs!', tr:'as pegadinhas mais prováveis', open:false,
+  leaves:[
+   {ic:"\u{1F4CD}", t:'side × vertex', d:['Side = one straight line.','Vertex = the corner where two sides meet.','Read the question to the end!']},
+   {ic:"\u{1F4CF}", t:'standing up × lying down', d:['A line of symmetry can be lying down.','C and B only work with the line lying down.']},
+   {ic:"\u{1F504}", t:'flip × turn', d:['Flip = mirror image.','Turn = spins around a point.','In Portuguese we say “virar” for both — in English we do not.']},
+   {ic:"\u{1F41D}", t:'hexagon × octagon', d:['Hexagon = 6 sides.','Octagon = 8 sides, like an octopus.']},
+   {ic:"\u{1F7E9}", t:'square × rectangle', d:['Both have 4 sides and 4 vertices.','In the square all four sides are the same length.']}
+  ]}
+];
+function buildMap(){
+  $('mapContent').innerHTML=MAP.map(function(b){
+    return '<div class="mm-branch '+b.c+(b.open?' open':'')+'" onclick="toggleBranch(this)">'
+     +'<div class="mm-branch-hd"><div class="mm-branch-icon">'+b.ic+'</div>'
+     +'<div class="mm-branch-text"><div class="mm-branch-en">'+b.t+'</div>'
+     +'<div class="mm-branch-pt">'+b.tr+'</div></div>'
+     +'<div class="mm-branch-arrow">&#9654;</div></div>'
+     +'<div class="mm-branch-body"><div class="mm-branch-inner">'
+     +b.leaves.map(function(l,i){
+        return '<div class="mm-leaf '+b.c+'" onclick="toggleLeaf(event,this)">'
+         +'<div class="mm-leaf-hd"><div class="mm-leaf-icon">'+l.ic+'</div>'
+         +'<div class="mm-leaf-text"><div class="mm-leaf-en">'+l.t+'</div></div>'
+         +'<div class="mm-leaf-arrow">&#9654;</div></div>'
+         +'<div class="mm-leaf-body">'
+         +l.d.map(function(d,k){return '<div class="mm-detail'+(k===l.d.length-1?' mm-detail-last':'')+'">'
+             +'<span class="mm-detail-en">'+d+'</span></div>';}).join('')
+         +'</div></div>';
+      }).join('')
+     +'</div></div></div>';
+  }).join('');
+}
+function toggleBranch(el){ el.classList.toggle('open'); }
+function toggleLeaf(e,el){ e.stopPropagation(); el.classList.toggle('open'); }
+/* "abrir tudo" abre ramo E folha; "fechar tudo" fecha os dois — senao o ramo
+   fecharia com folhas abertas por dentro e a proxima abertura viria cheia. */
+function allMap(open){
+  document.querySelectorAll('#pane-map .mm-branch').forEach(function(b){b.classList.toggle('open',open);});
+  document.querySelectorAll('#pane-map .mm-leaf').forEach(function(l){l.classList.toggle('open',open);});
+}
+
+/* ---- init ---- */
+buildSheet();
+buildWords();
+buildMap();
+/* A home entra direto num modo pelo hash (#map, #sheet, #words) — assim o
+   card "Mapa mental" da home abre o mapa, nao a folha. Sem hash, vale a
+   ultima aba usada. O hash VENCE o localStorage: quem clicou "mapa mental"
+   pediu o mapa, mesmo tendo saido da folha na visita anterior. */
+function abaDoHash(){
+  var h=(location.hash||'').replace('#','');
+  return (h==='map'||h==='words'||h==='sheet')?h:null;
+}
+(function(){
+  var h=abaDoHash();
+  if(h){ showTab(h); }
+  else { try{var t0=localStorage.getItem('geo2_estudo_tab');if(t0==='words'||t0==='map')showTab(t0);}catch(e){} }
+  /* trocar so o fragmento (#map -> #sheet) NAO recarrega a pagina: sem este
+     listener, voltar pelo historico deixaria a aba antiga na tela. */
+  addEventListener('hashchange',function(){ var k=abaDoHash(); if(k)showTab(k); });
+})();
+</script>
+<script>window.SERA_CFG={trKey:'mat2_tr',lang:'en-US',rate:.85,somKey:'mat2_som'};</script>
+<script src="serafina-core.js?v=20260817"></script>
+<script>window.SERA_ACCENT={accent:'#a78bfa'};</script>
+<script src="cie2_theme.js?v=20260817"></script>
+</body>
+</html>

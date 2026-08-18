@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Practice test — Math · 2-D Figures</title>
+<link rel="stylesheet" href="serafina-core.css?v=20260817">
+<style>
+:root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fbbf24;--tr:#fcd34d;--ok:#34d399;--no:#f87171;--mid:#fbbf24;--rad:22px;--surf:rgba(255,255,255,.055);--press:0 2px 0 rgba(0,0,0,.22)}
+body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309;--surf:rgba(0,0,0,.045);--press:0 2px 0 rgba(0,0,0,.07)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.92rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.05rem;font-weight:800;cursor:pointer;padding:0 8px}
+.iconbtn:active{transform:scale(.9)}
+.dicabtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.4;filter:grayscale(1)}
+.dicabtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .dicabtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
+.bar{height:8px;background:var(--line)}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .35s}
+/* ---------- palco / cartao ---------- */
+.stage{flex:1;display:flex;align-items:center;justify-content:center;padding:14px clamp(10px,3vw,26px) 94px}
+.card{position:relative;width:100%;max-width:560px;background:var(--card);border-radius:var(--rad);box-shadow:0 14px 40px rgba(0,0,0,.35);padding:clamp(16px,4.5vw,26px) clamp(14px,4.5vw,26px) clamp(18px,4.5vw,26px);text-align:center;border:1px solid var(--line)}
+/* cabecalho discreto: numero da pergunta + tipo */
+.qhead{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:2px;flex-wrap:wrap;padding:0 44px}
+.qnum{font-size:.68rem;font-weight:900;color:var(--soft);letter-spacing:1px;text-transform:uppercase}
+.badge{font-size:.6rem;font-weight:900;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px}
+.badge.mc{background:rgba(56,189,248,.2);color:#7dd3fc}
+.badge.vf{background:rgba(251,191,36,.18);color:#fbbf24}
+.badge.open{background:rgba(244,114,182,.2);color:#f9a8d4}
+.badge.fill{background:rgba(52,211,153,.18);color:#6ee7b7}
+.badge.match{background:rgba(167,139,250,.2);color:#c4b5fd}
+.badge.order{background:rgba(251,146,60,.2);color:#fdba74}
+/* tradução PT (bandeira BR) */
+.tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:calc(.88rem*var(--fs));line-height:1.3}
+body.show-tr .tr{display:block}
+.qtr{margin:2px 0 2px}
+.qfig{font-size:calc(clamp(2rem,7vw,2.8rem)*var(--fs));margin:8px 0 0;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
+/* a PERGUNTA domina a tela */
+.q{font-size:calc(clamp(1.18rem,3.6vw,1.5rem)*var(--fs));font-weight:900;line-height:1.32;margin:8px auto 2px;max-width:32ch}
+.speak{margin:8px auto 2px;display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--line);background:var(--surf);color:var(--soft);
+  font-weight:800;font-size:.78rem;border-radius:22px;padding:5px 14px;min-height:44px;cursor:pointer;font-family:inherit}
+.speak:active{transform:scale(.95)}
+/* linha de tarefa: diz O QUE FAZER, em uma frase curta */
+.task{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto;font-size:calc(.8rem*var(--fs));font-weight:900;color:var(--accent);line-height:1.25}
+.task::before,.task::after{content:"";flex:0 0 18px;height:2px;border-radius:2px;background:var(--accent);opacity:.45}
+/* botão refazer a questão (cliques acidentais) */
+.redoq{position:absolute;top:10px;right:10px;width:44px;height:44px;border:2px solid var(--line);border-radius:50%;background:var(--card);color:var(--soft);font-size:1.2rem;font-weight:900;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.redoq:active{transform:scale(.88) rotate(-90deg)}
+.redoq .rl{position:absolute;bottom:-13px;font-size:.5rem;font-weight:900;letter-spacing:.3px;color:var(--soft);text-transform:uppercase}
+/* ---------- alternativas: parecem teclas tocaveis ---------- */
+.opts{display:flex;flex-direction:column;gap:10px;width:100%;max-width:460px;margin:0 auto}
+.opt{min-height:52px;padding:11px 16px;border:2px solid var(--line);border-radius:14px;background:var(--surf);color:var(--ink);font-size:calc(clamp(1rem,2.6vw,1.12rem)*var(--fs));font-weight:800;cursor:pointer;font-family:inherit;transition:transform .12s,border-color .12s;display:flex;flex-direction:column;justify-content:center;gap:1px;box-shadow:var(--press)}
+.opt:active{transform:translateY(1px)}
+.opt.ok{background:var(--ok);color:#06251a;border-color:var(--ok);box-shadow:none}.opt.ok .otr{color:#06251a}
+.opt.no{background:var(--no);color:#3a0a0a;border-color:var(--no);box-shadow:none}.opt.no .otr{color:#3a0a0a}
+.opt:disabled{cursor:default;opacity:1}
+.opt .otr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.78rem}
+body.show-tr .opt .otr{display:block}
+.vfwrap{display:flex;gap:12px;justify-content:center}
+.vfbtn{flex:1;max-width:200px;min-height:96px;padding:14px 10px;border:2px solid var(--line);border-radius:18px;background:var(--surf);color:var(--ink);text-align:center;box-shadow:var(--press);
+  font-size:calc(1.12rem*var(--fs));font-weight:900;cursor:pointer;font-family:inherit;transition:.15s}
+.vfbtn .big{display:block;font-size:1.8rem;margin-bottom:2px}
+.vfbtn:active{transform:scale(.96)}
+.vfbtn.ok{background:var(--ok);color:#06251a;border-color:var(--ok);box-shadow:none}
+.vfbtn.no{background:var(--no);color:#3a0a0a;border-color:var(--no);box-shadow:none}
+/* FILL */
+.fillsent{font-size:calc(clamp(1.1rem,3.2vw,1.38rem)*var(--fs));font-weight:900;line-height:1.7;margin:8px 4px 0}
+.blank{display:inline-block;min-width:84px;border-bottom:3px solid var(--accent);margin:0 4px;padding:0 8px;color:var(--accent);background:var(--surf);border-radius:9px 9px 0 0}
+.blank.ok{color:var(--ok);border-color:var(--ok)}.blank.no{color:var(--no);border-color:var(--no)}
+.wbank{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:2px 0 4px}
+.wchip{min-height:48px;padding:10px 16px;border:2px solid var(--line);border-radius:14px;background:var(--surf);color:var(--ink);font-size:calc(1.02rem*var(--fs));font-weight:800;cursor:pointer;font-family:inherit;transition:transform .12s,border-color .12s;display:flex;flex-direction:column;justify-content:center;gap:1px;box-shadow:var(--press)}
+.wchip:active{transform:translateY(1px)}
+.wchip.ok{background:var(--ok);color:#06251a;border-color:var(--ok);box-shadow:none}
+.wchip.no{background:var(--no);color:#3a0a0a;border-color:var(--no);box-shadow:none}
+.wchip .otr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.72rem}
+body.show-tr .wchip .otr{display:block}
+/* MATCH */
+.mboard{display:flex;flex-direction:column;gap:8px;margin:2px 0}
+.mitem{display:flex;align-items:center;gap:8px;min-height:48px;padding:9px 11px;border:2px solid var(--line);border-radius:14px;background:var(--surf);color:var(--ink);font-weight:800;font-size:calc(.96rem*var(--fs));cursor:pointer;font-family:inherit;text-align:left;transition:border-color .12s}
+.mitem .mlbl{flex:1;display:flex;flex-direction:column;gap:1px}
+.mitem .mtr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem}
+body.show-tr .mitem .mtr{display:block}
+.mitem.active{border-color:var(--accent2);box-shadow:0 0 0 2px rgba(251,146,60,.4) inset}
+.mslot{min-width:74px;text-align:center;font-size:.74rem;font-weight:900;padding:5px 7px;border-radius:10px;background:var(--line);color:var(--soft)}
+.mslot.set{background:rgba(56,189,248,.25);color:#bae6fd}
+.mitem.ok{background:rgba(52,211,153,.16);border-color:var(--ok)}.mitem.ok .mslot{background:var(--ok);color:#06251a}
+.mitem.no{background:rgba(248,113,113,.14);border-color:var(--no)}.mitem.no .mslot{background:var(--no);color:#3a0a0a}
+.mcats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 2px}
+.mcat{min-height:48px;padding:9px 14px;border:2px solid var(--line);border-radius:13px;background:var(--surf);color:var(--ink);font-weight:900;font-size:calc(.9rem*var(--fs));cursor:pointer;font-family:inherit;transition:transform .12s,border-color .12s;display:flex;flex-direction:column;justify-content:center;gap:1px;box-shadow:var(--press)}
+.mcat:active{transform:translateY(1px)}
+.mcat .otr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.66rem}
+body.show-tr .mcat .otr{display:block}
+/* ORDER */
+.oseq{display:flex;flex-direction:column;gap:8px;margin:2px 0 4px;min-height:40px}
+.oslot{display:flex;align-items:center;gap:9px;min-height:48px;padding:8px 11px;border:2px dashed var(--line);border-radius:14px;color:var(--soft);font-weight:800;font-size:calc(.96rem*var(--fs));font-family:inherit;background:transparent;cursor:pointer;text-align:left;width:100%}
+.oslot.filled{border-style:solid;color:var(--ink);background:var(--surf)}
+.oslot.ok{border-color:var(--ok);background:rgba(52,211,153,.14)}
+.oslot.no{border-color:var(--no);background:rgba(248,113,113,.12)}
+.onum{min-width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem;background:var(--accent2);color:#3a1a00}
+.opool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0 2px}
+.opiece{min-height:44px;padding:10px 14px;border:2px solid var(--accent);border-radius:13px;background:var(--surf);color:var(--ink);font-weight:800;font-size:calc(.98rem*var(--fs));cursor:pointer;font-family:inherit;transition:transform .12s;box-shadow:var(--press)}
+.opiece:active{transform:translateY(1px)}
+.opiece.used{opacity:.25;pointer-events:none;box-shadow:none}
+.ocorrect{font-size:.85rem;font-weight:800;color:var(--soft);margin-top:8px;line-height:1.4}
+/* OPEN */
+.writeline{min-height:46px;border-bottom:3px dashed var(--line);margin:8px 4px 14px;display:flex;align-items:flex-end;justify-content:center;color:var(--soft);font-weight:700;font-size:.82rem;padding-bottom:4px}
+.hint{font-size:.9rem;font-weight:800;color:var(--soft);margin-bottom:10px}
+.reveal{display:none;margin:8px 0 4px;padding:13px 14px;border-radius:14px;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.4);
+  font-weight:800;font-size:calc(1.02rem*var(--fs));line-height:1.4;color:var(--ink)}
+.reveal.show{display:block}
+.reveal .lab{display:block;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.selfwrap{display:none;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.selfwrap.show{display:flex}
+.selfbtn{flex:1;min-width:96px;min-height:64px;padding:10px 8px;border:2px solid var(--line);border-radius:14px;background:var(--surf);color:var(--ink);font-weight:900;font-size:.86rem;cursor:pointer;font-family:inherit;transition:transform .12s;box-shadow:var(--press)}
+.selfbtn .big{display:block;font-size:1.5rem;margin-bottom:2px}
+.selfbtn .str{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.66rem}
+body.show-tr .selfbtn .str{display:block}
+.selfbtn:active{transform:translateY(1px)}
+.selfbtn.acertei.sel{background:var(--ok);color:#06251a;border-color:var(--ok);box-shadow:none}
+.selfbtn.parcial.sel{background:var(--mid);color:#3a2c00;border-color:var(--mid);box-shadow:none}
+.selfbtn.errei.sel{background:var(--no);color:#3a0a0a;border-color:var(--no);box-shadow:none}
+/* feedback: imediato e inconfundivel */
+.fb{margin-top:14px;font-size:calc(1.05rem*var(--fs));font-weight:900;min-height:1.4em;line-height:1.35}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}.fb.mid{color:var(--mid)}
+.next{margin-top:14px;width:100%;min-height:54px;border:none;border-radius:16px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#08263a;font-size:1.08rem;font-weight:900;cursor:pointer;display:none;font-family:inherit;box-shadow:0 8px 20px rgba(0,0,0,.28)}
+.next.show{display:block}
+/* quando o botao leva ao RESULTADO ele muda de cara: verde, maior e pulsa
+   uma vez — nao pode parecer um 'avancar' qualquer */
+.next.result{background:linear-gradient(90deg,#34d399,#fbbf24);min-height:60px;font-size:1.15rem;animation:pulsaFim .9s ease-out 1}
+@keyframes pulsaFim{0%{transform:scale(.96)}55%{transform:scale(1.04)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.next.result{animation:none}}
+.next:active{transform:scale(.98)}
+.fim .big{font-size:4rem}
+.fim .score{font-size:1.7rem;font-weight:900;color:var(--accent);margin:8px 0 2px}
+.fim .sub{font-weight:800;color:var(--soft);font-size:.95rem;margin-bottom:6px}
+.intro p{font-size:calc(1rem*var(--fs));font-weight:700;line-height:1.5;color:var(--soft);margin:10px auto;max-width:46ch}
+.themewrap{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:8px 0 4px}
+.themechip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:96px;min-height:64px;flex:1 1 96px;max-width:150px;padding:10px;border:2px solid var(--line);border-radius:15px;background:var(--surf);color:var(--soft);font-weight:800;font-size:.8rem;cursor:pointer;font-family:inherit;transition:.15s;opacity:.5}
+.themechip .tem{font-size:1.5rem}
+.themechip .ttr{font-size:.62rem;font-weight:700}
+.themechip.on{opacity:1;color:var(--ink);border-color:var(--accent);background:linear-gradient(135deg,rgba(56,189,248,.22),rgba(251,146,60,.15))}
+.themechip:active{transform:scale(.95)}
+.themehint{color:var(--no)!important;font-weight:900;font-size:.85rem;min-height:1em;margin:4px 0!important}
+.startnote{font-size:.8rem;margin-top:8px}
+.sizewrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0 4px}
+.sizebtn{min-width:64px;min-height:64px;padding:12px 10px;border:2px solid var(--accent2);border-radius:16px;background:var(--surf);color:var(--ink);font-size:1.3rem;font-weight:900;cursor:pointer;font-family:inherit;transition:.15s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:var(--press)}
+.sizebtn .sl{font-size:.6rem;font-weight:800;color:var(--soft);text-transform:uppercase;letter-spacing:.5px}
+.sizebtn:active{transform:translateY(1px)}
+.sizebtn.sel{background:linear-gradient(135deg,rgba(56,189,248,.25),rgba(251,146,60,.18));border-color:var(--accent)}
+.endbtns{display:flex;flex-direction:column;gap:10px;margin:18px auto 0;max-width:420px}
+.endbtn{width:100%;min-height:52px;padding:12px 16px;border:2px solid var(--line);border-radius:15px;background:var(--surf);color:var(--ink);font-size:1rem;font-weight:900;cursor:pointer;font-family:inherit;transition:.15s;box-shadow:var(--press)}
+.endbtn.redo{border-color:var(--accent);background:linear-gradient(90deg,rgba(56,189,248,.22),rgba(251,146,60,.15))}
+.endbtn .etr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.74rem}
+body.show-tr .endbtn .etr{display:block}
+.endbtn:active{transform:scale(.97)}
+/* --- question nav arrows (always visible during quiz) --- */
+.qnav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:none;justify-content:center;gap:14px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--card) 55%,rgba(0,0,0,0))}
+.qnav.show{display:flex}
+.qnav-btn{flex:1;max-width:160px;height:50px;border:1px solid var(--line);border-radius:15px;background:var(--card);color:var(--ink);font-size:1.5rem;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.qnav-btn .ql{font-size:.78rem;font-weight:900;letter-spacing:.5px}
+.qnav-btn:disabled{opacity:.32;cursor:default;box-shadow:none}
+.qnav-btn:active:not(:disabled){transform:scale(.96)}
+.qnav-btn.jump{max-width:130px;font-size:1.15rem;border-color:var(--accent2);color:var(--accent2);background:rgba(251,191,36,.12)}
+.qnav-btn.jump:disabled{border-color:var(--line);color:var(--ink)}
+.qnav-btn.results{max-width:160px;font-size:1.3rem;border-color:var(--accent);color:#08263a;background:var(--accent)}
+/* --- lock / fullscreen --- */
+
+.sombtn{transition:opacity .15s}
+.sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
+/* ---------- mouse (notebook): affordance de hover ---------- */
+@media (hover:hover){
+  .opt:not(:disabled):hover,.wchip:not(:disabled):hover,.mcat:not(:disabled):hover,.vfbtn:not(:disabled):hover,.selfbtn:not(:disabled):hover,.endbtn:hover,.themechip:hover,.sizebtn:hover{border-color:var(--accent)}
+  .opiece:not(.used):hover{border-color:var(--accent2)}
+  .next:hover{opacity:.92}
+}
+/* ---------- tablet retrato / telas medias ---------- */
+@media (min-width:700px){
+  .card{max-width:640px}
+  .stage{padding-bottom:100px}
+}
+/* ---------- telas largas (notebook) ---------- */
+@media (min-width:1000px){
+  .card{max-width:880px;padding:28px 34px 30px}
+  .stage{padding-bottom:104px}
+}
+/* ---------- pergunta ao lado das alternativas:
+   celular em PAISAGEM (altura escassa) e notebook ---------- */
+@media (orientation:landscape) and (max-height:520px),(min-width:1000px){
+  .card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);column-gap:clamp(16px,3vw,36px);align-items:start;align-content:start;text-align:left}
+  .card>.intro,.card>.fim{grid-column:1/-1;text-align:center}
+  .qhead,.qfig,.q,.qtr,.speak,.task,.fillsent{grid-column:1}
+  .qhead{justify-content:flex-start;padding:0}
+  .q,.fillsent{margin-left:0;margin-right:0;max-width:none}
+  .task{justify-content:flex-start;margin:10px 0 6px}
+  .task::after{display:none}
+  .speak{margin:6px 0 2px}
+  .opts,.vfwrap,.wbank{grid-column:2;grid-row:1/span 7;align-self:center;max-width:none;margin:0}
+  .wbank{justify-content:flex-start}
+  .mboard{grid-column:2;grid-row:1/span 4;margin:0}
+  .mcats{grid-column:2;grid-row:5/span 3;justify-content:flex-start;margin:4px 0 0}
+  .oseq{grid-column:2;grid-row:1/span 4;margin:0}
+  .opool{grid-column:2;grid-row:5/span 3;justify-content:flex-start;margin:4px 0 0}
+  .writeline{grid-column:2;grid-row:1/span 2;margin:6px 0}
+  .reveal{grid-column:2;grid-row:3/span 2;margin:4px 0;text-align:left}
+  .hint{grid-column:2;grid-row:5;margin:4px 0 2px}
+  .selfwrap{grid-column:2;grid-row:6/span 2;margin-top:4px}
+  .fb,.next{grid-column:1/-1;text-align:center}
+  .redoq{position:static;grid-column:1/-1;justify-self:center;width:auto;min-width:44px;flex-direction:row;gap:7px;padding:0 16px;border-radius:22px;margin-top:6px;font-size:1rem}
+  .redoq .rl{position:static;font-size:.62rem;bottom:auto}
+}
+/* ---------- celular em PAISAGEM: comprimir o eixo vertical ---------- */
+@media (orientation:landscape) and (max-height:520px){
+  .topbar{padding:5px 8px}
+  .bar{height:6px}
+  .stage{padding:8px 10px 70px}
+  .card{max-width:min(97vw,780px);padding:12px 16px 14px;border-radius:18px}
+  .qnum{font-size:.6rem}
+  .qfig{font-size:calc(1.5rem*var(--fs));margin:2px 0 0}
+  .q{font-size:calc(1.08rem*var(--fs));margin:4px 0 2px}
+  .fillsent{font-size:calc(1.05rem*var(--fs));line-height:1.55;margin:4px 0 0}
+  .task{margin:8px 0 4px}
+  .speak{padding:4px 12px}
+  .opts{gap:7px}
+  .opt{min-height:46px;padding:8px 12px}
+  .vfbtn{min-height:72px;padding:8px}
+  .vfbtn .big{font-size:1.4rem}
+  .wchip{min-height:44px;padding:7px 12px}
+  .mboard{gap:6px}
+  .mitem{min-height:44px;padding:6px 10px}
+  .mcat{min-height:44px;padding:6px 12px}
+  .oseq{gap:6px}
+  .oslot{min-height:44px;padding:6px 10px}
+  .opiece{min-height:44px;padding:7px 12px}
+  .selfwrap{gap:6px}
+  .selfbtn{min-height:56px;padding:6px 8px}
+  .selfbtn .big{font-size:1.2rem}
+  .reveal{padding:9px 12px}
+  .writeline{min-height:36px;margin:4px 0}
+  .fb{margin-top:8px;font-size:calc(.95rem*var(--fs))}
+  .next{margin-top:8px;min-height:46px;font-size:1rem}
+  .qnav{padding:4px 10px calc(4px + env(safe-area-inset-bottom));gap:10px}
+  .qnav-btn{height:46px}
+  .intro p{margin:6px auto;font-size:calc(.9rem*var(--fs))}
+  .themechip{min-width:84px;min-height:54px;padding:6px}
+  .themechip .tem{font-size:1.2rem}
+  .sizewrap{gap:8px}
+  .sizebtn{min-width:56px;min-height:54px;padding:8px;font-size:1.15rem}
+  .fim .big{font-size:2.4rem}
+  .fim .score{font-size:1.3rem;margin:2px 0}
+  .endbtns{flex-direction:row;flex-wrap:wrap;max-width:none;margin-top:10px}
+  .endbtn{flex:1 1 40%;min-width:170px;min-height:48px;padding:8px 12px}
+}
+/* ---------- celular estreito ---------- */
+@media (max-width:380px){
+  .qhead{padding:0 40px}
+  .stage{padding-left:8px;padding-right:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+
+/* ---- 360px: a barra de cima nao cabia numa linha ----------------------
+   8 botoes de 44px + gaps dao 427px: a lockbtn nascia CORTADA fora da tela
+   (defeito herdado do GEO2, medido no QA de 17/08). O titulo sobe para a
+   propria linha e os botoes dividem a largura restante; a altura de toque
+   continua 44px. */
+@media(max-width:420px){
+  .topbar{flex-wrap:wrap;gap:4px}
+  .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px}
+  .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Simulado &mdash; Comunidades e lugares</span>
+    <button class="iconbtn dicabtn" id="dica" title="Ver em português" onclick="toggleTr()">&#127463;&#127479;<span class="ft">PT</span></button>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Desligar a voz" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia e travar" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="bar"><span id="bar"></span></div>
+  <div class="stage"><div class="card" id="card"></div></div>
+</div>
+<div class="qnav" id="qnav">
+  <button class="qnav-btn" id="navPrev" onclick="prevQ()" title="Voltar">&#8249;<span class="ql">Voltar</span></button>
+  <button class="qnav-btn jump" id="navJump" onclick="jumpUnanswered()" title="Próxima sem resposta">&#9193;<span class="ql">Sem resposta</span></button>
+  <button class="qnav-btn" id="navNext" onclick="nextQ()" title="Avançar">&#8250;<span class="ql">Avançar</span></button>
+</div>
+
+<script>
+/* ============================================================
+   BANCO DE QUESTOES — Matematica Y2 · Unit 9 (2-D Geometry)
+   "Exploring 2-D Figures" — o topico que a AP1 do 2o trimestre avalia.
+
+   Tudo ancorado em trabalho/2tri_matematica/_roteiro.md (9 paginas do
+   caderno da Unit 9 + as instrucoes da AP1 postadas pela escola).
+   Temas (th): figuras | lados | objetos | simetria | padroes | palavras
+
+   REGRA DOS DISTRATORES: toda opcao errada e um termo que EXISTE no
+   material (outra figura da unidade, outro numero de lados, outro
+   movimento) — mas INEQUIVOCAMENTE errada. Nada de "segunda verdade".
+
+   AMBIGUIDADES BLOQUEADAS (roteiro BLOCO 2 e 3): objeto que pode ser DUAS
+   figuras (window, table, sheet of paper) nunca e gabarito unico; a conta
+   do saquinho so aparece em formato de VERIFICACAO (um unico grupo fecha),
+   nunca "quais sao as 3 figuras?"; e a contagem de vertices da estrela do
+   bloco 3 fica fora do banco (depende de contar ou nao os cantos que se
+   juntam).
+
+   Materia EM INGLES: o campo `en` e o texto principal e `pt` e a TRADUCAO,
+   que aparece quando a crianca liga a bandeira 🇧🇷.
+   ============================================================ */
+
+/* ---- MULTIPLA ESCOLHA ---- opts:[texto EN, correta?1:0, traducao PT] ---- */
+const MC = [
+ /* ===== AS FIGURAS E SEUS NOMES ===== */
+ {th:'figuras',fig:"\u{1F7E1}",en:"Which figure is round and has <b>no corners</b>?",pt:"Que figura é redonda e não tem nenhum cantinho?",opts:[["Circle",1,"Círculo"],["Triangle",0,"Triângulo"],["Square",0,"Quadrado"]]},
+ {th:'figuras',fig:"\u{1F53A}",en:"A figure with <b>3 straight sides</b> is a…",pt:"Uma figura com 3 lados retos é um…",opts:[["Triangle",1,"Triângulo"],["Rectangle",0,"Retângulo"],["Pentagon",0,"Pentágono"]]},
+ {th:'figuras',fig:"\u{1F7E9}",en:"A figure with <b>4 sides all the same length</b> is a…",pt:"Uma figura com 4 lados todos do mesmo tamanho é um…",opts:[["Square",1,"Quadrado"],["Rectangle",0,"Retângulo"],["Hexagon",0,"Hexágono"]]},
+ {th:'figuras',fig:"\u{1F7E6}",en:"A figure with <b>2 long sides and 2 short sides</b> is a…",pt:"Uma figura com 2 lados compridos e 2 curtinhos é um…",opts:[["Rectangle",1,"Retângulo"],["Square",0,"Quadrado"],["Triangle",0,"Triângulo"]]},
+ {th:'figuras',fig:"\u{2B50}",en:"What is the name of a figure with <b>5 sides</b>?",pt:"Qual é o nome de uma figura com 5 lados?",opts:[["Pentagon",1,"Pentágono"],["Hexagon",0,"Hexágono"],["Octagon",0,"Octógono"]]},
+ {th:'figuras',fig:"\u{1F41D}",en:"What is the name of a figure with <b>6 sides</b>?",pt:"Qual é o nome de uma figura com 6 lados?",opts:[["Hexagon",1,"Hexágono"],["Pentagon",0,"Pentágono"],["Octagon",0,"Octógono"]]},
+ {th:'figuras',fig:"\u{1F6D1}",en:"What is the name of a figure with <b>8 sides</b>?",pt:"Qual é o nome de uma figura com 8 lados?",opts:[["Octagon",1,"Octógono"],["Hexagon",0,"Hexágono"],["Pentagon",0,"Pentágono"]]},
+ {th:'figuras',fig:"\u{1F4C4}",en:"A <b>2-D figure</b> is a figure that is…",pt:"Uma figura 2-D é uma figura que é…",opts:[["Flat — you can draw it on paper",1,"Plana — dá para desenhar no papel"],["Round like a ball",0,"Redonda como uma bola"],["Made of wood",0,"Feita de madeira"]]},
+ {th:'figuras',fig:"\u{1F419}",en:"The word <b>octagon</b> starts like <b>octopus</b>. How many sides does it have?",pt:"A palavra octagon começa como octopus (polvo). Quantos lados ela tem?",opts:[["8",1,"oito, como os braços do polvo"],["5",0,""],["6",0,""]]},
+ {th:'figuras',fig:"\u{1F7E8}",en:"Which figure has <b>3 vertices</b>?",pt:"Que figura tem 3 vértices?",opts:[["Triangle",1,"Triângulo"],["Square",0,"Quadrado"],["Circle",0,"Círculo"]]},
+ {th:'figuras',fig:"\u{1F535}",en:"Which figure has <b>no straight sides</b>?",pt:"Que figura não tem nenhum lado reto?",opts:[["Circle",1,"Círculo"],["Pentagon",0,"Pentágono"],["Rectangle",0,"Retângulo"]]},
+ {th:'figuras',fig:"\u{1F7EA}",en:"A <b>square</b> and a <b>rectangle</b> both have…",pt:"O quadrado e o retângulo têm os dois…",opts:[["4 sides and 4 vertices",1,"4 lados e 4 vértices"],["3 sides and 3 vertices",0,"3 lados e 3 vértices"],["No vertices at all",0,"Nenhum vértice"]]},
+
+ /* ===== LADOS E VERTICES ===== */
+ {th:'lados',fig:"\u{1F4CF}",en:"A <b>side</b> is…",pt:"Um lado (side) é…",opts:[["One straight line of the figure",1,"Cada linha reta da figura"],["The colour of the figure",0,"A cor da figura"],["The name of the figure",0,"O nome da figura"]]},
+ {th:'lados',fig:"\u{1F4CD}",en:"A <b>vertex</b> is…",pt:"Um vértice (vertex) é…",opts:[["The corner where two sides meet",1,"O cantinho onde dois lados se encontram"],["The middle of the figure",0,"O meio da figura"],["A curved line",0,"Uma linha curva"]]},
+ {th:'lados',fig:"\u{1F524}",en:"What is the plural of <b>vertex</b>?",pt:"Qual é o plural de vertex?",opts:[["Vertices",1,"Vértices"],["Vertexes",0,"não existe"],["Verticals",0,""]]},
+ {th:'lados',fig:"\u{1F53A}",en:"How many <b>vertices</b> does a triangle have?",pt:"Quantos vértices tem um triângulo?",opts:[["3",1,"três"],["4",0,""],["0",0,""]]},
+ {th:'lados',fig:"\u{2B55}",en:"How many <b>vertices</b> does a circle have?",pt:"Quantos vértices tem um círculo?",opts:[["0",1,"nenhum: ele não tem cantinho"],["1",0,""],["4",0,""]]},
+ {th:'lados',fig:"\u{1F41D}",en:"How many <b>vertices</b> does a hexagon have?",pt:"Quantos vértices tem um hexágono?",opts:[["6",1,"seis"],["5",0,""],["8",0,""]]},
+ {th:'lados',fig:"\u{1F6D1}",en:"How many <b>sides</b> does an octagon have?",pt:"Quantos lados tem um octógono?",opts:[["8",1,"oito"],["6",0,""],["5",0,""]]},
+ {th:'lados',fig:"\u{2B50}",en:"How many <b>vertices</b> does a pentagon have?",pt:"Quantos vértices tem um pentágono?",opts:[["5",1,"cinco"],["4",0,""],["6",0,""]]},
+ {th:'lados',fig:"\u{1F511}",en:"In a figure with <b>straight sides</b>, the number of vertices is…",pt:"Numa figura de lados retos, o número de vértices é…",opts:[["The same as the number of sides",1,"O mesmo que o número de lados"],["Always one more than the sides",0,"Sempre um a mais que os lados"],["Always zero",0,"Sempre zero"]]},
+ {th:'lados',fig:"\u{1F517}",en:"The word <b>edge</b> means the same as…",pt:"A palavra edge quer dizer o mesmo que…",opts:[["Side",1,"Lado"],["Vertex",0,"Vértice"],["Colour",0,"Cor"]]},
+ {th:'lados',fig:"\u{1F45C}",en:"3 figures are in a bag. Together they have <b>13 sides</b>. Which group can it be?",pt:"3 figuras num saquinho, 13 lados no total. Qual grupo pode ser?",opts:[["Triangle + square + hexagon",1,"3 + 4 + 6 = 13"],["Triangle + square + square",0,"3 + 4 + 4 = 11"],["Circle + square + triangle",0,""]]},
+ {th:'lados',fig:"\u{1F45C}",en:"3 figures are in a bag. Together they have <b>12 vertices</b>. Which group can it be?",pt:"3 figuras num saquinho, 12 vértices no total. Qual grupo pode ser?",opts:[["Square + square + square",1,"4 + 4 + 4 = 12"],["Triangle + triangle + triangle",0,"3 + 3 + 3 = 9"],["Pentagon + pentagon + pentagon",0,"5 + 5 + 5 = 15"]]},
+ {th:'lados',fig:"\u{1F45C}",en:"Which group has <b>12 vertices</b> in total?",pt:"Qual grupo tem 12 vértices no total?",opts:[["Triangle + triangle + hexagon",1,"3 + 3 + 6 = 12"],["Triangle + square + square",0,"3 + 4 + 4 = 11"],["Square + hexagon + hexagon",0,"4 + 6 + 6 = 16"]]},
+ {th:'lados',fig:"\u{2795}",en:"A triangle and a square together have how many <b>sides</b>?",pt:"Um triângulo e um quadrado juntos têm quantos lados?",opts:[["7",1,"3 + 4 = 7"],["6",0,""],["8",0,""]]},
+ {th:'lados',fig:"\u{2795}",en:"Two triangles together have how many <b>vertices</b>?",pt:"Dois triângulos juntos têm quantos vértices?",opts:[["6",1,"3 + 3 = 6"],["3",0,""],["9",0,""]]},
+ {th:'lados',fig:"\u{2795}",en:"A pentagon and a hexagon together have how many <b>sides</b>?",pt:"Um pentágono e um hexágono juntos têm quantos lados?",opts:[["11",1,"5 + 6 = 11"],["10",0,""],["12",0,""]]},
+
+ /* ===== FIGURAS NOS OBJETOS DO DIA A DIA ===== */
+ {th:'objetos',fig:"\u{1F4D5}",en:"A <b>book cover</b> looks like a…",pt:"A capa de um livro parece um…",opts:[["Rectangle",1,"Retângulo"],["Circle",0,"Círculo"],["Triangle",0,"Triângulo"]]},
+ {th:'objetos',fig:"\u{1F6D1}",en:"A <b>stop sign</b> looks like a…",pt:"Uma placa de PARE parece um…",opts:[["Octagon",1,"Octógono"],["Hexagon",0,"Hexágono"],["Square",0,"Quadrado"]]},
+ {th:'objetos',fig:"\u{1F36F}",en:"A <b>honeycomb cell</b> looks like a…",pt:"Um favo de mel parece um…",opts:[["Hexagon",1,"Hexágono"],["Octagon",0,"Octógono"],["Pentagon",0,"Pentágono"]]},
+ {th:'objetos',fig:"\u{1F355}",en:"A <b>slice of pizza</b> looks like a…",pt:"Uma fatia de pizza parece um…",opts:[["Triangle",1,"Triângulo"],["Rectangle",0,"Retângulo"],["Circle",0,"Círculo"]]},
+ {th:'objetos',fig:"\u{1FA99}",en:"A <b>coin</b> looks like a…",pt:"Uma moeda parece um…",opts:[["Circle",1,"Círculo"],["Square",0,"Quadrado"],["Pentagon",0,"Pentágono"]]},
+ {th:'objetos',fig:"\u{1F6AA}",en:"A <b>door</b> looks like a…",pt:"Uma porta parece um…",opts:[["Rectangle",1,"Retângulo"],["Triangle",0,"Triângulo"],["Circle",0,"Círculo"]]},
+ {th:'objetos',fig:"\u{1F37D}\u{FE0F}",en:"Which object looks like a <b>circle</b>?",pt:"Que objeto parece um círculo?",opts:[["A plate",1,"Um prato"],["A book cover",0,"A capa de um livro"],["A party hat",0,"Um chapéu de festa"]]},
+ {th:'objetos',fig:"\u{1F389}",en:"Which object looks like a <b>triangle</b>?",pt:"Que objeto parece um triângulo?",opts:[["A party hat",1,"Um chapéu de festa"],["A wheel",0,"Uma roda"],["A door",0,"Uma porta"]]},
+ {th:'objetos',fig:"\u{1F553}",en:"A <b>clock face</b> on the wall looks like a…",pt:"Um relógio de parede parece um…",opts:[["Circle",1,"Círculo"],["Hexagon",0,"Hexágono"],["Rectangle",0,"Retângulo"]]},
+ {th:'objetos',fig:"\u{26A1}",en:"A <b>wheel</b> looks like a figure with how many <b>vertices</b>?",pt:"Uma roda parece uma figura com quantos vértices?",opts:[["0",1,"nenhum: é um círculo"],["4",0,""],["3",0,""]]},
+
+ /* ===== SIMETRIA ===== */
+ {th:'simetria',fig:"\u{1FA9E}",en:"A figure has <b>symmetry</b> when…",pt:"Uma figura tem simetria quando…",opts:[["You can fold it and the two halves match",1,"Dá para dobrar e as duas metades combinam"],["It has a lot of colours",0,"Ela tem muitas cores"],["It is very big",0,"Ela é bem grande"]]},
+ {th:'simetria',fig:"\u{2702}\u{FE0F}",en:"The fold line of a symmetrical figure is called the…",pt:"A linha da dobra de uma figura simétrica se chama…",opts:[["Line of symmetry",1,"Linha de simetria"],["Line of numbers",0,"Linha dos números"],["Side",0,"Lado"]]},
+ {th:'simetria',fig:"\u{1F5BC}\u{FE0F}",en:"The half that is missing in a symmetrical figure is its…",pt:"A metade que falta numa figura simétrica é a…",opts:[["Matching part — the mirror image",1,"A metade que combina — a imagem no espelho"],["Biggest side",0,"O maior lado"],["Number of vertices",0,"O número de vértices"]]},
+ {th:'simetria',fig:"\u{1F534}",en:"What do we use a <b>Mira</b> for?",pt:"Para que serve a Mira?",opts:[["To check if a figure has symmetry",1,"Para conferir se a figura tem simetria"],["To measure how long a side is",0,"Para medir o tamanho do lado"],["To count the vertices",0,"Para contar os vértices"]]},
+ {th:'simetria',fig:"\u{1F4CF}",en:"A line of symmetry can be…",pt:"A linha de simetria pode ser…",opts:[["Standing up OR lying down",1,"Em pé OU deitada"],["Only standing up",0,"Só em pé"],["Only lying down",0,"Só deitada"]]},
+ {th:'simetria',fig:"\u{1F170}\u{FE0F}",en:"Which letter has a <b>line of symmetry</b>?",pt:"Que letra tem linha de simetria?",opts:[["X",1,"em pé e deitada"],["J",0,"não tem"],["P",0,"não tem"]]},
+ {th:'simetria',fig:"\u{1F171}\u{FE0F}",en:"Which letter has <b>no</b> line of symmetry?",pt:"Que letra NÃO tem linha de simetria?",opts:[["R",1,"não tem"],["A",0,"tem, em pé"],["M",0,"tem, em pé"]]},
+ {th:'simetria',fig:"\u{1F17E}\u{FE0F}",en:"The letter <b>O</b> has…",pt:"A letra O tem…",opts:[["More than one line of symmetry",1,"Mais de uma linha de simetria"],["No line of symmetry",0,"Nenhuma linha de simetria"],["Only a lying-down line",0,"Só a linha deitada"]]},
+ {th:'simetria',fig:"\u{00A9}",en:"The letter <b>C</b> has a line of symmetry that is…",pt:"A letra C tem uma linha de simetria que é…",opts:[["Lying down",1,"Deitada"],["Standing up",0,"Em pé"],["It has none",0,"Ela não tem nenhuma"]]},
+ {th:'simetria',fig:"\u{1F469}",en:"Where do you put the Mira on the word <b>MOM</b>?",pt:"Onde se põe a Mira na palavra MOM?",opts:[["Standing up, in the middle of the O",1,"Em pé, no meio do O"],["Lying down, under the word",0,"Deitada, embaixo da palavra"],["At the end, after the last M",0,"No fim, depois do último M"]]},
+ {th:'simetria',fig:"\u{1F4AC}",en:"Which word shows <b>symmetry</b>?",pt:"Que palavra tem simetria?",opts:[["WOW",1,"como MOM"],["CAT",0,""],["DOG",0,""]]},
+ {th:'simetria',fig:"\u{1F5D2}\u{FE0F}",en:"You drew half of a figure. To finish it with symmetry you draw…",pt:"Você desenhou metade de uma figura. Para terminar com simetria você desenha…",opts:[["The matching part, like a mirror",1,"A metade que combina, como num espelho"],["Any figure you like",0,"Qualquer figura que quiser"],["A bigger half",0,"Uma metade maior"]]},
+
+ /* ===== PADROES: SLIDE, FLIP, TURN ===== */
+ {th:'padroes',fig:"\u{27A1}\u{FE0F}",en:"Which move makes the figure <b>walk</b> to the next spot without spinning?",pt:"Que movimento faz a figura andar para o lugar de perto sem rodar?",opts:[["Slide",1,"Deslizar"],["Flip",0,"Virar"],["Turn",0,"Girar"]]},
+ {th:'padroes',fig:"\u{1FA9E}",en:"Which move shows the <b>mirror image</b> of the figure?",pt:"Que movimento mostra a imagem da figura no espelho?",opts:[["Flip",1,"Virar"],["Slide",0,"Deslizar"],["Turn",0,"Girar"]]},
+ {th:'padroes',fig:"\u{1F503}",en:"Which move makes the figure <b>spin around a point</b>?",pt:"Que movimento faz a figura rodar em volta de um pontinho?",opts:[["Turn",1,"Girar"],["Slide",0,"Deslizar"],["Flip",0,"Virar"]]},
+ {th:'padroes',fig:"\u{1F53A}",en:"A triangle <b>turns</b>. How many sides does it have now?",pt:"Um triângulo gira. Quantos lados ele tem agora?",opts:[["Still 3",1,"Ainda 3 — o movimento não muda a figura"],["Now 4",0,""],["Now 0",0,""]]},
+ {th:'padroes',fig:"\u{1F504}",en:"When a figure slides, flips or turns, what <b>changes</b>?",pt:"Quando a figura desliza, vira ou gira, o que muda?",opts:[["Where it is and which way it faces",1,"O lugar dela e o lado para onde aponta"],["The number of sides",0,"O número de lados"],["The name of the figure",0,"O nome da figura"]]},
+ {th:'padroes',fig:"\u{1F9F5}",en:"In a <b>repeating pattern</b>, the little piece that comes again and again is the…",pt:"Num padrão que se repete, o pedacinho que vem de novo e de novo é o…",opts:[["Core",1,"O núcleo — o pedacinho que repete"],["Vertex",0,"Vértice"],["Mirror",0,"Espelho"]]},
+ {th:'padroes',fig:"\u{1F9F6}",en:"To draw the quilt border pattern, how many <b>different figures</b> do you need?",pt:"Para desenhar o padrão da borda da colcha, de quantas figuras diferentes você precisa?",opts:[["Just one — you slide, flip or turn it",1,"Uma só — é ela que desliza, vira ou gira"],["Three different ones",0,"Três diferentes"],["One for each block",0,"Uma para cada bloco"]]},
+ {th:'padroes',fig:"\u{1F9E9}",en:"The quilt is a grid with how many <b>blocks</b>?",pt:"A colcha é uma grade com quantos blocos?",opts:[["9 blocks, 3 by 3",1,"9 blocos, 3 por 3"],["6 blocks, 2 by 3",0,""],["4 blocks, 2 by 2",0,""]]},
+ {th:'padroes',fig:"\u{2B07}\u{FE0F}",en:"Start in <b>Block 1</b> and go straight <b>down two blocks</b>. Which block are you in?",pt:"Comece no bloco 1 e desça dois blocos. Em que bloco você está?",opts:[["Block 7",1,"1 → 4 → 7"],["Block 3",0,""],["Block 2",0,""]]},
+ {th:'padroes',fig:"\u{2B50}",en:"In the quilt, drawing a <b>triangle on each edge of the pentagon</b> makes a design that looks like a…",pt:"Na colcha, desenhar um triângulo em cada lado do pentágono faz um desenho que parece uma…",opts:[["Star",1,"Estrela"],["Circle",0,"Círculo"],["Door",0,"Porta"]]},
+
+ /* ===== AS PALAVRAS EM INGLES ===== */
+ {th:'palavras',fig:"\u{1F4D6}",en:"<b>Side</b> em português é…",pt:"",opts:[["Lado",1,""],["Cantinho",0,"isso é corner"],["Metade",0,"isso é half"]]},
+ {th:'palavras',fig:"\u{1F4D6}",en:"<b>Vertex</b> em português é…",pt:"",opts:[["Vértice (o cantinho)",1,""],["Lado",0,"isso é side"],["Padrão",0,"isso é pattern"]]},
+ {th:'palavras',fig:"\u{1F4D6}",en:"<b>Symmetry</b> em português é…",pt:"",opts:[["Simetria",1,""],["Simpatia",0,""],["Semelhança",0,""]]},
+ {th:'palavras',fig:"\u{1F4D6}",en:"<b>Flip</b> em português é…",pt:"",opts:[["Virar, como no espelho",1,""],["Deslizar",0,"isso é slide"],["Girar",0,"isso é turn"]]},
+ {th:'palavras',fig:"\u{1F4D6}",en:"<b>Turn</b> em português é…",pt:"",opts:[["Girar, como o ponteiro do relógio",1,""],["Virar no espelho",0,"isso é flip"],["Andar para o lado",0,"isso é slide"]]},
+ {th:'palavras',fig:"\u{1F4D6}",en:"<b>Slide</b> em português é…",pt:"",opts:[["Deslizar, andar para o lado",1,""],["Girar",0,"isso é turn"],["Dobrar",0,"isso é fold"]]},
+ {th:'palavras',fig:"\u{1F4D6}",en:"<b>Figure</b>, na aula de matemática, é…",pt:"",opts:[["Figura geométrica",1,""],["Pessoa de um livro",0,""],["Número",0,""]]},
+ {th:'palavras',fig:"\u{1F4D6}",en:"<b>Matching part</b> em português é…",pt:"",opts:[["A metade que combina",1,""],["O maior lado",0,""],["O nome da figura",0,""]]},
+ {th:'palavras',fig:"\u{1F4D6}",en:"<b>How many sides?</b> quer dizer…",pt:"",opts:[["Quantos lados?",1,""],["Quantos vértices?",0,"isso é how many vertices"],["De que cor?",0,""]]},
+ {th:'palavras',fig:"\u{1F4D6}",en:"<b>Sort the figures</b> quer dizer…",pt:"",opts:[["Separe as figuras em grupos",1,""],["Desenhe as figuras",0,""],["Conte as figuras",0,""]]}
+];
+
+/* ---- VERDADEIRO OU FALSO ---- */
+const VF = [
+ {th:'figuras',fig:"\u{2B55}",en:"A <b>circle</b> has no corners.",pt:"O círculo não tem nenhum cantinho.",ans:true},
+ {th:'figuras',fig:"\u{1F7E9}",en:"All four sides of a <b>square</b> are the same length.",pt:"Os quatro lados do quadrado são todos do mesmo tamanho.",ans:true},
+ {th:'figuras',fig:"\u{1F53A}",en:"A <b>triangle</b> has 4 sides.",pt:"O triângulo tem 4 lados.",ans:false},
+ {th:'figuras',fig:"\u{1F6D1}",en:"An <b>octagon</b> has 8 sides.",pt:"O octógono tem 8 lados.",ans:true},
+ {th:'figuras',fig:"\u{2B50}",en:"A <b>pentagon</b> has 6 sides.",pt:"O pentágono tem 6 lados.",ans:false},
+ {th:'figuras',fig:"\u{1F4C4}",en:"A <b>2-D figure</b> is flat.",pt:"Uma figura 2-D é plana.",ans:true},
+
+ {th:'lados',fig:"\u{1F4CD}",en:"A <b>vertex</b> is the corner where two sides meet.",pt:"O vértice é o cantinho onde dois lados se encontram.",ans:true},
+ {th:'lados',fig:"\u{1F511}",en:"A <b>hexagon</b> has 6 sides and 6 vertices.",pt:"O hexágono tem 6 lados e 6 vértices.",ans:true},
+ {th:'lados',fig:"\u{2B55}",en:"A <b>circle</b> has 4 vertices.",pt:"O círculo tem 4 vértices.",ans:false},
+ {th:'lados',fig:"\u{1F517}",en:"The word <b>edge</b> means the same as <b>side</b>.",pt:"A palavra edge quer dizer o mesmo que side (lado).",ans:true},
+ {th:'lados',fig:"\u{2795}",en:"A square and a triangle together have <b>7 sides</b>.",pt:"Um quadrado e um triângulo juntos têm 7 lados.",ans:true},
+ {th:'lados',fig:"\u{1F524}",en:"The plural of <b>vertex</b> is <b>vertexes</b>.",pt:"O plural de vertex é vertexes.",ans:false},
+
+ {th:'objetos',fig:"\u{1F4D5}",en:"A <b>book cover</b> looks like a rectangle.",pt:"A capa de um livro parece um retângulo.",ans:true},
+ {th:'objetos',fig:"\u{1F6D1}",en:"A <b>stop sign</b> looks like a hexagon.",pt:"Uma placa de PARE parece um hexágono.",ans:false},
+ {th:'objetos',fig:"\u{1F36F}",en:"A <b>honeycomb cell</b> looks like a hexagon.",pt:"Um favo de mel parece um hexágono.",ans:true},
+ {th:'objetos',fig:"\u{1FA99}",en:"A <b>coin</b> looks like a circle.",pt:"Uma moeda parece um círculo.",ans:true},
+
+ {th:'simetria',fig:"\u{1FA9E}",en:"A figure has <b>symmetry</b> when the two halves match.",pt:"Uma figura tem simetria quando as duas metades combinam.",ans:true},
+ {th:'simetria',fig:"\u{1F4CF}",en:"A line of symmetry can <b>only</b> be standing up.",pt:"A linha de simetria só pode ser em pé.",ans:false},
+ {th:'simetria',fig:"\u{1F17E}\u{FE0F}",en:"The letter <b>O</b> has symmetry.",pt:"A letra O tem simetria.",ans:true},
+ {th:'simetria',fig:"\u{1F171}\u{FE0F}",en:"The letter <b>R</b> has symmetry.",pt:"A letra R tem simetria.",ans:false},
+ {th:'simetria',fig:"\u{1F469}",en:"The word <b>MOM</b> has symmetry.",pt:"A palavra MOM tem simetria.",ans:true},
+ {th:'simetria',fig:"\u{00A9}",en:"The letter <b>C</b> has a line of symmetry lying down.",pt:"A letra C tem uma linha de simetria deitada.",ans:true},
+
+ {th:'padroes',fig:"\u{27A1}\u{FE0F}",en:"When a figure <b>slides</b>, it spins around.",pt:"Quando a figura desliza, ela roda.",ans:false},
+ {th:'padroes',fig:"\u{1F53A}",en:"A triangle that <b>turns</b> is still a triangle.",pt:"Um triângulo que gira continua sendo um triângulo.",ans:true},
+ {th:'padroes',fig:"\u{1F9F5}",en:"You can make a repeating pattern using <b>just one figure</b>.",pt:"Dá para fazer um padrão que se repete usando uma figura só.",ans:true},
+ {th:'padroes',fig:"\u{1F9E9}",en:"The <b>quilt</b> in the lesson is a grid of 3 by 3 blocks.",pt:"A colcha da lição é uma grade de 3 por 3 blocos.",ans:true}
+];
+
+/* ---- COMPLETAR ---- */
+const FILL = [
+ {th:'figuras',pre:"A triangle has three",post:".",ans:"sides",bank:["circles","corners of the room"],pt:"O triângulo tem três lados."},
+ {th:'figuras',pre:"A figure with five sides is a",post:".",ans:"pentagon",bank:["hexagon","octagon"],pt:"Penta quer dizer cinco."},
+ {th:'figuras',pre:"A figure with six sides is a",post:".",ans:"hexagon",bank:["pentagon","octagon"],pt:"Hexa quer dizer seis."},
+ {th:'figuras',pre:"A figure with eight sides is an",post:".",ans:"octagon",bank:["hexagon","pentagon"],pt:"Octo quer dizer oito, como o octopus."},
+ {th:'figuras',pre:"A 2-D figure is",post:": you can draw it on paper.",ans:"flat",bank:["round","heavy"],pt:"Flat quer dizer plana."},
+ {th:'lados',pre:"The corner where two sides meet is a",post:".",ans:"vertex",bank:["side","circle"],pt:"Vértice é o cantinho."},
+ {th:'lados',pre:"A circle has",post:"vertices.",ans:"zero",bank:["four","three"],pt:"O círculo não tem cantinho nenhum."},
+ {th:'lados',pre:"A square has four sides and four",post:".",ans:"vertices",bank:["circles","halves"],pt:"Vertices é o plural de vertex."},
+ {th:'lados',pre:"Another word for side is",post:".",ans:"edge",bank:["corner","half"],pt:"Edge = lado."},
+ {th:'objetos',pre:"A stop sign looks like an",post:".",ans:"octagon",bank:["hexagon","circle"],pt:""},
+ {th:'objetos',pre:"A plate looks like a",post:".",ans:"circle",bank:["square","triangle"],pt:""},
+ {th:'objetos',pre:"A door looks like a",post:".",ans:"rectangle",bank:["triangle","hexagon"],pt:""},
+ {th:'simetria',pre:"The fold line of a symmetrical figure is the line of",post:".",ans:"symmetry",bank:["numbers","colours"],pt:""},
+ {th:'simetria',pre:"The missing half is the",post:"image, like in a mirror.",ans:"mirror",bank:["biggest","smallest"],pt:""},
+ {th:'simetria',pre:"We use a",post:"to check if a figure has symmetry.",ans:"Mira",bank:["ruler","pencil"],pt:"A Mira é o espelhinho vermelho."},
+ {th:'simetria',pre:"A line of symmetry can be standing up or",post:".",ans:"lying down",bank:["invisible","coloured"],pt:""},
+ {th:'padroes',pre:"When a figure just walks to the next spot, it is a",post:".",ans:"slide",bank:["flip","turn"],pt:""},
+ {th:'padroes',pre:"When a figure shows its mirror image, it is a",post:".",ans:"flip",bank:["slide","turn"],pt:""},
+ {th:'padroes',pre:"When a figure spins around a point, it is a",post:".",ans:"turn",bank:["slide","flip"],pt:""},
+ {th:'padroes',pre:"A pattern that comes again and again is a",post:"pattern.",ans:"repeating",bank:["broken","silent"],pt:""}
+];
+/* dicas dos chips de palavra (traducao PT de cada palavra do banco) */
+const WPT={"sides":"lados","vertex":"vértice","vertices":"vértices","edge":"lado","flat":"plana",
+"pentagon":"pentágono","hexagon":"hexágono","octagon":"octógono","circle":"círculo","square":"quadrado",
+"rectangle":"retângulo","triangle":"triângulo","zero":"zero","symmetry":"simetria","mirror":"espelho",
+"Mira":"o espelhinho","lying down":"deitada","slide":"deslizar","flip":"virar","turn":"girar",
+"repeating":"que se repete","corners of the room":"cantos da sala","circles":"círculos","halves":"metades"};
+
+/* ---- LIGAR ---- cats:[[texto,traducao]], items:[[texto,traducao,catIdx]] ---- */
+const MATCH = [
+ {th:'figuras',t:"Match each figure to its number of sides.",tpt:"Ligue cada figura ao número de lados dela.",
+  cats:[["3 sides","3 lados"],["5 sides","5 lados"],["8 sides","8 lados"]],
+  items:[["\u{1F53A} Triangle","Triângulo",0],["\u{2B50} Pentagon","Pentágono",1],["\u{1F6D1} Octagon","Octógono",2]]},
+ {th:'figuras',t:"Match each figure to its number of vertices.",tpt:"Ligue cada figura ao número de vértices dela.",
+  cats:[["0 vertices","0 vértices"],["4 vertices","4 vértices"],["6 vertices","6 vértices"]],
+  items:[["\u{2B55} Circle","Círculo",0],["\u{1F7E9} Square","Quadrado",1],["\u{1F41D} Hexagon","Hexágono",2]]},
+ {th:'lados',t:"Match each word to what it means.",tpt:"Ligue cada palavra ao que ela quer dizer.",
+  cats:[["Side","Lado"],["Vertex","Vértice"],["Edge","Lado (outra palavra)"]],
+  items:[["One straight line of the figure","Cada linha reta da figura",0],["The corner where two sides meet","O cantinho onde dois lados se encontram",1],["Another word for side","Outra palavra para lado",2]]},
+ {th:'objetos',t:"Match each object to its figure.",tpt:"Ligue cada objeto à figura dele.",
+  cats:[["Rectangle","Retângulo"],["Circle","Círculo"],["Triangle","Triângulo"]],
+  items:[["\u{1F4D5} Book cover","Capa de livro",0],["\u{1FA99} Coin","Moeda",1],["\u{1F355} Slice of pizza","Fatia de pizza",2]]},
+ {th:'objetos',t:"Match each object to its figure.",tpt:"Ligue cada objeto à figura dele.",
+  cats:[["Octagon","Octógono"],["Hexagon","Hexágono"],["Circle","Círculo"]],
+  items:[["\u{1F6D1} Stop sign","Placa de PARE",0],["\u{1F36F} Honeycomb cell","Favo de mel",1],["\u{1F553} Clock face","Relógio de parede",2]]},
+ {th:'simetria',t:"Match each letter to its line of symmetry.",tpt:"Ligue cada letra à linha de simetria dela.",
+  cats:[["Standing up","Em pé"],["Lying down","Deitada"],["No symmetry","Não tem simetria"]],
+  items:[["The letter A","A letra A",0],["The letter C","A letra C",1],["The letter J","A letra J",2]]},
+ {th:'simetria',t:"Match each word to what it means.",tpt:"Ligue cada palavra ao que ela quer dizer.",
+  cats:[["Symmetry","Simetria"],["Mirror image","Imagem no espelho"],["Mira","O espelhinho"]],
+  items:[["The two halves match when you fold","As duas metades combinam quando se dobra",0],["What you see on the other side of the line","O que se vê do outro lado da linha",1],["The tool we use to check","A ferramenta que usamos para conferir",2]]},
+ {th:'padroes',t:"Match each move to what it does.",tpt:"Ligue cada movimento ao que ele faz.",
+  cats:[["Slide","Deslizar"],["Flip","Virar"],["Turn","Girar"]],
+  items:[["It walks to the next spot","Anda para o lugar de perto",0],["It shows the mirror image","Mostra a imagem no espelho",1],["It spins around a point","Roda em volta de um pontinho",2]]}
+];
+
+/* ---- ORDENAR ---- itens ja na ordem CORRETA ---- */
+const ORDER = [
+ {th:'figuras',t:"Put the figures in order, from the fewest sides to the most.",tpt:"Coloque as figuras em ordem, da que tem menos lados para a que tem mais.",
+  items:["\u{1F53A} Triangle — 3","\u{1F7E9} Square — 4","\u{2B50} Pentagon — 5","\u{1F41D} Hexagon — 6","\u{1F6D1} Octagon — 8"]},
+ {th:'lados',t:"Put the figures in order, from the fewest vertices to the most.",tpt:"Coloque em ordem, da que tem menos vértices para a que tem mais.",
+  items:["\u{2B55} Circle — 0","\u{1F53A} Triangle — 3","\u{1F7E6} Rectangle — 4","\u{2B50} Pentagon — 5","\u{1F41D} Hexagon — 6"]},
+ {th:'simetria',t:"Put the steps in order: how to check symmetry with a Mira.",tpt:"Coloque em ordem: como conferir a simetria com a Mira.",
+  items:["\u{1F440} Look at the figure","\u{1F4CF} Put the Mira on the line","\u{1FA9E} Look at the mirror image","\u{2705} See if the two halves match"]},
+ {th:'padroes',t:"Put the blocks in order: the path in the quilt.",tpt:"Coloque os blocos em ordem: o caminho na colcha.",
+  items:["\u{1F7E6} Start in block 1","\u{2B07}\u{FE0F} Go down two blocks: block 7","\u{27A1}\u{FE0F} Go one block right: block 8","\u{2B06}\u{FE0F} Go up one block: block 5","\u{2B05}\u{FE0F} Go one block left: block 4"]}
+];
+
+/* ---- RESPOSTA ABERTA ---- */
+const OPEN = [
+ {th:'lados',fig:"\u{1F4CD}",en:"What is the difference between a <b>side</b> and a <b>vertex</b>?",pt:"Qual é a diferença entre side e vertex?",men:"A side is one straight line of the figure. A vertex is the corner, where two sides meet.",menpt:"O lado é cada linha reta da figura. O vértice é o cantinho, onde dois lados se encontram."},
+ {th:'lados',fig:"\u{1F511}",en:"How many <b>sides</b> and how many <b>vertices</b> does a hexagon have?",pt:"Quantos lados e quantos vértices tem um hexágono?",men:"Six sides and six vertices.",menpt:"Seis lados e seis vértices."},
+ {th:'figuras',fig:"\u{2B55}",en:"Tell one thing that is special about the <b>circle</b>.",pt:"Diga uma coisa especial do círculo.",men:"It is round: it has no straight sides and no vertices at all.",menpt:"Ele é redondo: não tem lado reto nenhum nem nenhum vértice."},
+ {th:'figuras',fig:"\u{1F7E9}",en:"How can you tell a <b>square</b> from a <b>rectangle</b>?",pt:"Como dá para saber se é quadrado ou retângulo?",men:"Both have 4 sides and 4 vertices, but in the square all four sides are the same length. The rectangle has 2 long sides and 2 short sides.",menpt:"Os dois têm 4 lados e 4 vértices, mas no quadrado os quatro lados são do mesmo tamanho. O retângulo tem 2 lados compridos e 2 curtinhos."},
+ {th:'objetos',fig:"\u{1F441}\u{FE0F}",en:"Name <b>one thing in your house</b> that looks like a rectangle.",pt:"Diga uma coisa da sua casa que parece um retângulo.",men:"A door, a book cover, a table top, the TV screen.",menpt:"Uma porta, a capa de um livro, o tampo da mesa, a tela da TV."},
+ {th:'objetos',fig:"\u{1F441}\u{FE0F}",en:"Name <b>one thing</b> that looks like a circle.",pt:"Diga uma coisa que parece um círculo.",men:"A plate, a coin, a wheel, a clock face.",menpt:"Um prato, uma moeda, uma roda, um relógio de parede."},
+ {th:'simetria',fig:"\u{1FA9E}",en:"Explain what <b>symmetry</b> is.",pt:"Explique o que é simetria.",men:"A figure has symmetry when you can fold it on a line and the two halves match, like a mirror image.",menpt:"Uma figura tem simetria quando dá para dobrar numa linha e as duas metades combinam, como no espelho."},
+ {th:'simetria',fig:"\u{1F520}",en:"Name <b>two letters</b> that have symmetry and <b>one</b> that does not.",pt:"Diga duas letras que têm simetria e uma que não tem.",men:"With symmetry: O, X, A, M, V, C, B. Without: G, P, J, R.",menpt:"Com simetria: O, X, A, M, V, C, B. Sem: G, P, J, R."},
+ {th:'padroes',fig:"\u{1F504}",en:"What is the difference between a <b>flip</b> and a <b>turn</b>?",pt:"Qual é a diferença entre flip e turn?",men:"A flip shows the mirror image of the figure. A turn spins the figure around a point, like a clock hand.",menpt:"O flip mostra a imagem da figura no espelho. O turn faz a figura rodar em volta de um pontinho, como o ponteiro do relógio."},
+ {th:'padroes',fig:"\u{1F9F5}",en:"When a figure slides, flips or turns, what <b>stays the same</b>?",pt:"Quando a figura desliza, vira ou gira, o que continua igual?",men:"The number of sides, the number of vertices, the size and the name of the figure. Only where it is and which way it faces can change.",menpt:"O número de lados, o número de vértices, o tamanho e o nome da figura. Só o lugar e o lado para onde ela aponta é que mudam."}
+];
+
+/* ================= TEMAS ================= */
+const THEMES=[
+ {k:'figuras',  en:'The figures',        pt:'os nomes das 7 figuras',      emo:'\u{1F53A}'},
+ {k:'lados',    en:'Sides & vertices',   pt:'contar lados e vértices',     emo:'\u{1F4CD}'},
+ {k:'objetos',  en:'Figures around us',  pt:'as figuras no dia a dia',     emo:'\u{1F441}\u{FE0F}'},
+ {k:'simetria', en:'Symmetry',           pt:'simetria e a linha do espelho', emo:'\u{1FA9E}'},
+ {k:'padroes',  en:'Slide, flip, turn',  pt:'padrões e a colcha',          emo:'\u{1F504}'},
+ {k:'palavras', en:'The English words',  pt:'as palavras da unidade',      emo:'\u{1F4D6}'}
+];
+/* pesos — a AP1 diz que o eixo e figura, lados/vertices e simetria */
+const TH_WEIGHT={figuras:20,lados:24,objetos:16,simetria:22,padroes:10,palavras:8};
+
+/* ================= ENGINE ================= */
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const $=id=>document.getElementById(id);
+let deck=[], cur=0, total=0, roundSize=25;
+let selThemes=new Set(THEMES.map(t=>t.k));
+
+/* score is derived from the items, so free navigation never double-counts */
+function curScore(){return deck.reduce((s,it)=>s+(it.pts||0),0);}
+function wrongItems(){return deck.filter(it=>it.done&&it.wrong);}
+
+function makeItem(type,src){
+  const it={_type:type,_src:src,type:type,...src};
+  if(type==='mc') it.opts=shuffle(src.opts.map(p=>({t:p[0],ok:!!p[1],pt:p[2]})));
+  if(type==='fill') it.chips=shuffle([{w:src.ans,ok:true},...src.bank.map(w=>({w,ok:false}))]);
+  if(type==='match'){it.cho=new Array(src.items.length).fill(-1);it.active=0;it.locked=false;}
+  if(type==='order'){it.order=shuffle(src.items.map((t,i)=>({t,rank:i})));it.seq=[];it.locked=false;}
+  it.done=false; it.pts=0; it.wrong=false;
+  return it;
+}
+
+function pickTheme(tag,count){
+  const byType={mc:[],fill:[],vf:[],open:[],order:[],match:[]};
+  const add=(arr,type)=>arr.forEach(o=>{if(o.th===tag)byType[type].push({type,src:o});});
+  add(MC,'mc');add(FILL,'fill');add(VF,'vf');add(OPEN,'open');add(ORDER,'order');add(MATCH,'match');
+  Object.keys(byType).forEach(k=>shuffle(byType[k]));
+  const order=['mc','vf','fill','order','match','open'];
+  const out=[]; let guard=0;
+  while(out.length<count && guard<2000){
+    let any=false;
+    for(const t of order){ if(out.length>=count)break; if(byType[t].length){out.push(byType[t].shift());any=true;} }
+    if(!any)break; guard++;
+  }
+  return out;
+}
+
+function buildDeck(n){
+  const tags=[...selThemes];
+  const sumW=tags.reduce((s,t)=>s+(TH_WEIGHT[t]||1),0)||1;
+  let picks=[];
+  tags.forEach(t=>{ picks=picks.concat(pickTheme(t,Math.round(n*(TH_WEIGHT[t]||1)/sumW))); });
+  picks=shuffle(picks);
+  if(picks.length>n) picks=picks.slice(0,n);
+  if(picks.length<n){
+    const used=new Set(picks.map(p=>p.src)); const rest=[];
+    const addAll=(arr,type)=>arr.forEach(o=>{if(selThemes.has(o.th)&&!used.has(o))rest.push({type,src:o});});
+    addAll(MC,'mc');addAll(VF,'vf');addAll(FILL,'fill');addAll(ORDER,'order');addAll(MATCH,'match');addAll(OPEN,'open');
+    shuffle(rest);
+    while(picks.length<n && rest.length) picks.push(rest.shift());
+  }
+  deck=shuffle(picks).map(p=>makeItem(p.type,p.src));
+  total=deck.length; cur=0;
+}
+
+function esc(s){return String(s).replace(/<[^>]*>/g,'').replace(/"/g,'&quot;').replace(/'/g,"\\'");}
+
+
+/* ---- question navigation arrows ---- */
+function prevQ(){ if(cur>0){cur--;render();} }
+function nextQ(){ if(cur<total-1){cur++;render();} }
+/* index of the next UNANSWERED question (search forward, wrap around); -1 if none */
+function nextUnansweredIdx(){
+  if(!deck||!total)return -1;
+  for(var k=1;k<=total;k++){ var idx=(cur+k)%total; if(!deck[idx].done) return idx; }
+  return -1;
+}
+function jumpUnanswered(){ var idx=nextUnansweredIdx(); if(idx>=0){ cur=idx; render(); } }
+/* all questions answered? then the result screen must be reachable from anywhere */
+function allAnswered(){ return deck && total>0 && deck.every(function(it){return it.done;}); }
+function updateArrows(){
+  $('qnav').classList.add('show');
+  $('navPrev').disabled = cur<=0;
+  $('navNext').disabled = cur>=total-1;
+  var jb=$('navJump');
+  if(allAnswered()){
+    /* every question answered → turn the jump button into "See results" so the
+       child always reaches the grade, even when answering out of order */
+    jb.disabled=false; jb.classList.add('results');
+    jb.onclick=fim; jb.title='Ver o resultado';
+    jb.innerHTML='\u{1F389}<span class="ql">Resultado</span>';
+  }else{
+    jb.classList.remove('results');
+    jb.onclick=jumpUnanswered; jb.title='Próxima sem resposta';
+    jb.innerHTML='⏩<span class="ql">Sem resposta</span>';
+    var ji=nextUnansweredIdx();
+    jb.disabled = ji<0 || ji===cur;   /* só habilita se houver OUTRA questão sem resposta */
+  }
+}
+
+/* ---- screens ---- */
+function intro(){
+  $('bar').style.width='0%';
+  $('qnav').classList.remove('show');
+  $('card').innerHTML=`<div class="intro">
+    <div class="qfig">\u{1F30E}</div>
+    <div class="q">Vamos treinar para a prova!</div>
+    <div class="tr qtr">Vamos estudar para a prova!</div>
+    <p>Você escolhe o assunto e o tamanho do treino.
+       <span class="tr">Você escolhe o assunto e o tamanho do treino.</span></p>
+    <div class="task">1 · Escolha os temas</div>
+    <div class="themewrap">
+      ${THEMES.map(t=>`<button class="themechip${selThemes.has(t.k)?' on':''}" onclick="toggleTheme('${t.k}')">
+        <span class="tem">${t.emo}</span><span>${t.en}</span><span class="ttr tr">${t.pt}</span></button>`).join('')}
+    </div>
+    <p class="themehint" id="themehint"></p>
+    <div class="task">2 · Toque num número para começar</div>
+    <div class="sizewrap">
+      ${[5,10,25,50,100].map(n=>`<button class="sizebtn${n===roundSize?' sel':''}" onclick="start(${n})">${n}<span class="sl">perguntas</span></button>`).join('')}
+    </div>
+    <p class="startnote">Comece com 10 e vá aumentando. <span class="tr">Comece com 10 e depois aumente.</span></p>
+  </div>`;
+}
+function toggleTheme(k){
+  if(selThemes.has(k)){ if(selThemes.size>1) selThemes.delete(k); }
+  else selThemes.add(k);
+  intro();
+}
+function start(n){
+  if(selThemes.size===0)return;
+  roundSize=n; buildDeck(n);
+  if(total===0){ const h=$('themehint'); if(h)h.textContent='Escolha ao menos um tema.'; return; }
+  render();
+}
+function render(){
+  $('bar').style.width=(cur/total*100)+'%';
+  const it=deck[cur];
+  ({mc:renderMC,vf:renderVF,open:renderOpen,fill:renderFill,match:renderMatch,order:renderOrder}[it.type])(it);
+  addRedoBtn();
+  updateArrows();
+}
+/* redo THIS question — clears the answer, no score effect (accidental taps) */
+function addRedoBtn(){
+  const b=document.createElement('button');
+  b.className='redoq';b.id='redoq';b.title='Refazer esta pergunta';
+  b.innerHTML='↺<span class="rl">refazer</span>';
+  b.onclick=redoQ;
+  $('card').appendChild(b);
+}
+function redoQ(){
+  try{speechSynthesis.cancel();}catch(e){}
+  deck[cur]=makeItem(deck[cur]._type,deck[cur]._src);
+  render();
+}
+function head(it,label,cls){return `<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge ${cls}">${label}</span></div>
+  ${it.fig?`<div class="qfig">${it.fig}</div>`:''}${it.en?`<div class="q">${it.en}</div><div class="tr qtr">${it.pt}</div>`:''}
+  ${it.en?`<button class="speak" onclick="say('${esc(it.en)}')">&#128266; Ouvir</button>`:''}`;}
+/* ============================================================
+   REVELAR O BOTAO DEPOIS DE RESPONDER — e o caminho para o resultado.
+
+   BUG QUE ISTO CORRIGE (10/08/2026): nextBtn() nasce com o atributo
+   style="display:none" enquanto a pergunta nao foi respondida. Tres dos seis
+   tipos (MC, V/F e completar) so faziam classList.add('show') ao responder — e
+   estilo INLINE vence regra de classe, entao o botao continuava invisivel. Na
+   ultima pergunta isso deixava a crianca sem saida: respondia e nao aparecia
+   como ver o resultado.
+
+   Alem de mostrar, aqui se REESCREVE o rotulo: a resposta que acabou de ser
+   dada pode ter sido a ultima que faltava, e ai o botao deixa de ser "Avancar"
+   e passa a ser "Ver o resultado". O rotulo tinha sido calculado no render,
+   antes dessa resposta existir.
+   ============================================================ */
+function mostraNext(){
+  const b=$('next'); if(!b)return;
+  const acabou=(cur===total-1)||allAnswered();
+  b.style.display='block'; b.classList.add('show');
+  b.classList.toggle('result',acabou);
+  b.innerHTML=acabou?'Ver o resultado \u{1F389}':'Avan\u00e7ar \u2192';
+  updateArrows();                       /* a seta de cima tambem vira Resultado */
+  if(acabou){
+    /* em tela pequena o botao pode nascer abaixo da dobra: traz para a vista */
+    try{ b.scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){}
+  }
+}
+function nextBtn(hidden){return `<button class="next" id="next" ${hidden?'style="display:none"':''} onclick="next()">${(cur===total-1||allAnswered())?'Ver o resultado \u{1F389}':'Avançar →'}</button>`;}
+
+/* MC */
+function renderMC(it){
+  $('card').innerHTML=head(it,'Escolha uma','mc')+
+   `<div class="task">Toque na resposta certa</div>
+    <div class="opts">${it.opts.map((o,i)=>`<button class="opt" onclick="ansMC(${i})"><span>${o.t}</span>${o.pt?`<span class="otr">${o.pt}</span>`:''}</button>`).join('')}</div>
+    <div class="fb" id="fb"></div>`+nextBtn(!it.done);
+  if(it.done) paintMC(it);
+}
+function ansMC(i){
+  const it=deck[cur]; if(it.done)return;
+  it.done=true; it.pick=i;
+  it.pts=it.opts[i].ok?1:0; it.wrong=!it.opts[i].ok;
+  paintMC(it);
+}
+function paintMC(it){
+  const b=document.querySelectorAll('.opt'), i=it.pick;
+  b.forEach(x=>x.disabled=true);
+  if(it.opts[i].ok){b[i].classList.add('ok');$('fb').textContent='Isso mesmo! \u{1F31F}';$('fb').className='fb ok';}
+  else{b[i].classList.add('no');it.opts.forEach((o,k)=>{if(o.ok)b[k].classList.add('ok');});
+    $('fb').textContent='A verde é a certa \u{1F60A}';$('fb').className='fb no';}
+  mostraNext();
+}
+
+/* V/F */
+function renderVF(it){
+  $('card').innerHTML=head(it,'Verdadeiro ou falso','vf')+
+   `<div class="task">Toque em Verdadeiro ou em Falso</div>
+    <div class="vfwrap">
+      <button class="vfbtn" id="vT" onclick="ansVF(true)"><span class="big">✅</span>Verdadeiro</button>
+      <button class="vfbtn" id="vF" onclick="ansVF(false)"><span class="big">❌</span>Falso</button>
+    </div><div class="fb" id="fb"></div>`+nextBtn(!it.done);
+  if(it.done) paintVF(it);
+}
+function ansVF(val){
+  const it=deck[cur]; if(it.done)return;
+  it.done=true; it.pick=val;
+  it.pts=(val===it.ans)?1:0; it.wrong=(val!==it.ans);
+  paintVF(it);
+}
+function paintVF(it){
+  const T=$('vT'),F=$('vF'); T.disabled=F.disabled=true;
+  const rightBtn=it.ans?T:F;
+  if(it.pick===it.ans){rightBtn.classList.add('ok');$('fb').textContent='Isso mesmo! \u{1F31F}';$('fb').className='fb ok';}
+  else{(it.pick?T:F).classList.add('no');rightBtn.classList.add('ok');
+    $('fb').textContent='A verde é a certa \u{1F60A}';$('fb').className='fb no';}
+  mostraNext();
+}
+
+/* COMPLETE */
+function renderFill(it){
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge fill">Complete a frase</span></div>
+   <button class="speak" onclick="say('${esc(it.pre+' '+it.ans+' '+it.post)}')">&#128266; Ouvir</button>
+   <div class="fillsent">${it.pre} <span class="blank" id="blank">_____</span> ${it.post}</div>
+   <div class="tr qtr">${it.pt}</div>
+   <div class="task">Toque na palavra que completa</div>
+   <div class="wbank">${it.chips.map((c,i)=>`<button class="wchip" onclick="ansFill(${i})"><span>${c.w}</span>${WPT[c.w]?`<span class="otr">${WPT[c.w]}</span>`:''}</button>`).join('')}</div>
+   <div class="fb" id="fb"></div>`+nextBtn(!it.done);
+  if(it.done) paintFill(it);
+}
+function ansFill(i){
+  const it=deck[cur]; if(it.done)return;
+  it.done=true; it.pick=i;
+  it.pts=it.chips[i].ok?1:0; it.wrong=!it.chips[i].ok;
+  paintFill(it);
+}
+function paintFill(it){
+  const chips=document.querySelectorAll('.wchip'), i=it.pick, chosen=it.chips[i];
+  chips.forEach(c=>c.disabled=true);
+  $('blank').textContent=chosen.w;
+  if(chosen.ok){chips[i].classList.add('ok');$('blank').classList.add('ok');$('fb').textContent='Isso mesmo! \u{1F31F}';$('fb').className='fb ok';}
+  else{chips[i].classList.add('no');$('blank').classList.add('no');
+    it.chips.forEach((c,k)=>{if(c.ok)chips[k].classList.add('ok');});
+    $('blank').textContent=it.ans;$('blank').classList.remove('no');$('blank').classList.add('ok');
+    $('fb').textContent='A palavra certa é "'+it.ans+'" \u{1F60A}';$('fb').className='fb no';}
+  mostraNext();
+}
+
+/* MATCH */
+function renderMatch(it){
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge match">Ligue</span></div>
+   <div class="q">${it.t}</div>
+   <div class="tr qtr">${it.tpt}</div>
+   <button class="speak" onclick="say('${esc(it.t)}')">&#128266; Ouvir</button>
+   <div class="task">Toque no item, depois no grupo certo</div>
+   <div class="mboard" id="mboard"></div>
+   <div class="mcats" id="mcats">${it.cats.map((c,ci)=>`<button class="mcat" onclick="pickCat(${ci})"><span>${c[0]}</span>${c[1]?`<span class="otr">${c[1]}</span>`:''}</button>`).join('')}</div>
+   <div class="fb" id="fb"></div>
+   <button class="next" id="mcheck" style="display:none" onclick="checkMatch()">Conferir &#9989;</button>`+nextBtn(true);
+  drawMatch();
+  if(it.done) paintMatch(it);
+}
+function drawMatch(){
+  const it=deck[cur];
+  $('mboard').innerHTML=it.items.map((m,mi)=>{
+    const cho=it.cho[mi];
+    const slot=cho>=0?`<span class="mslot set">${it.cats[cho][0]}</span>`:`<span class="mslot">?</span>`;
+    return `<button class="mitem${mi===it.active?' active':''}" id="mi${mi}" onclick="pickItem(${mi})">
+      <span class="mlbl"><span>${m[0]}</span><span class="mtr">${m[1]}</span></span>${slot}</button>`;
+  }).join('');
+  const done=it.cho.every(c=>c>=0);
+  $('mcheck').style.display=done?'block':'none';
+}
+function pickItem(mi){const it=deck[cur];if(it.locked)return;it.active=mi;drawMatch();}
+function pickCat(ci){
+  const it=deck[cur];if(it.locked)return;
+  it.cho[it.active]=ci;
+  let nxt=it.cho.findIndex(c=>c<0); it.active=nxt<0?it.active:nxt;
+  drawMatch();
+}
+function checkMatch(){
+  const it=deck[cur]; if(it.done)return;
+  it.locked=true; it.done=true;
+  let right=0; it.items.forEach((m,mi)=>{ if(it.cho[mi]===m[2]) right++; });
+  const all=it.items.length;
+  it.pts=right/all; it.wrong=(right<all);
+  paintMatch(it);
+}
+function paintMatch(it){
+  let right=0;
+  it.items.forEach((m,mi)=>{
+    const el=$('mi'+mi); if(!el)return; el.disabled=true;
+    if(it.cho[mi]===m[2]){el.classList.add('ok');right++;}
+    else{el.classList.add('no');const sl=el.querySelector('.mslot');if(sl)sl.textContent=it.cats[m[2]][0];}
+  });
+  document.querySelectorAll('.mcat').forEach(c=>c.disabled=true);
+  $('mcheck').style.display='none';
+  const all=it.items.length;
+  if(right===all){$('fb').textContent='Tudo certo! \u{1F31F}';$('fb').className='fb ok';}
+  else{$('fb').textContent=right+' de '+all+' certas — o verde mostra a resposta \u{1F60A}';$('fb').className='fb mid';}
+  mostraNext();
+}
+
+/* ORDER */
+function renderOrder(it){
+  $('card').innerHTML=`<div class="qhead"><span class="qnum">Pergunta ${cur+1} de ${total}</span><span class="badge order">Coloque em ordem</span></div>
+   <div class="q">${it.t}</div>
+   <div class="tr qtr">${it.tpt}</div>
+   <button class="speak" onclick="say('${esc(it.t)}')">&#128266; Ouvir</button>
+   <div class="task">Toque na ordem certa — toque de novo para tirar</div>
+   <div class="oseq" id="oseq"></div>
+   <div class="opool" id="opool"></div>
+   <div class="fb" id="fb"></div>
+   <button class="next" id="ocheck" style="display:none" onclick="checkOrder()">Conferir &#9989;</button>`+nextBtn(true);
+  drawOrder();
+  if(it.done) paintOrder(it);
+}
+function drawOrder(){
+  const it=deck[cur], n=it.order.length;
+  let seqHtml='';
+  for(let p=0;p<n;p++){
+    const chip=it.seq[p];
+    seqHtml+=chip!=null
+      ? `<button class="oslot filled" onclick="orderRemove(${p})"><span class="onum">${p+1}</span><span>${it.order[chip].t}</span></button>`
+      : `<div class="oslot"><span class="onum">${p+1}</span><span>...</span></div>`;
+  }
+  $('oseq').innerHTML=seqHtml;
+  $('opool').innerHTML=it.order.map((o,i)=>`<button class="opiece${it.seq.includes(i)?' used':''}" onclick="orderPlace(${i})">${o.t}</button>`).join('');
+  $('ocheck').style.display=it.seq.length===n?'block':'none';
+}
+function orderPlace(i){const it=deck[cur];if(it.locked)return;if(it.seq.includes(i))return;it.seq.push(i);drawOrder();}
+function orderRemove(p){const it=deck[cur];if(it.locked)return;it.seq.splice(p,1);drawOrder();}
+function checkOrder(){
+  const it=deck[cur]; if(it.done)return;
+  it.locked=true; it.done=true;
+  let right=0; it.seq.forEach((chip,p)=>{ if(it.order[chip].rank===p) right++; });
+  const all=it.order.length;
+  it.pts=right/all; it.wrong=(right<all);
+  paintOrder(it);
+}
+function paintOrder(it){
+  let right=0;
+  const slots=document.querySelectorAll('#oseq .oslot');
+  it.seq.forEach((chip,p)=>{
+    const ok=it.order[chip].rank===p;
+    if(slots[p]){if(ok){slots[p].classList.add('ok');right++;}else slots[p].classList.add('no');}else if(ok)right++;
+  });
+  document.querySelectorAll('.opiece').forEach(c=>c.classList.add('used'));
+  $('ocheck').style.display='none';
+  const all=it.order.length;
+  if(right===all){$('fb').innerHTML='Ordem certa! \u{1F31F}';$('fb').className='fb ok';}
+  else{
+    const correct=it._src.items.join('  →  ');
+    $('fb').innerHTML=right+' de '+all+' no lugar certo \u{1F60A}<div class="ocorrect">Ordem certa: '+correct+'</div>';
+    $('fb').className='fb mid';
+  }
+  mostraNext();
+}
+
+/* OPEN */
+function renderOpen(it){
+  $('card').innerHTML=head(it,'Responda você','open')+
+   `<div class="task">Responda de cabeça e depois confira</div>
+    <div class="writeline">&#9999;&#65039; responda em voz alta</div>
+    <button class="next show" id="seebtn" onclick="reveal()">Ver a resposta &#128065;&#65039;</button>
+    <div class="reveal" id="rev"><span class="lab">Resposta</span>${it.men}<div class="tr">${it.menpt||''}</div></div>
+    <div class="hint" id="selfhint" style="display:none">Você acertou?</div>
+    <div class="selfwrap" id="self">
+      <button class="selfbtn acertei" onclick="self('ok')"><span class="big">\u{1F604}</span>Acertei</button>
+      <button class="selfbtn parcial" onclick="self('mid')"><span class="big">\u{1F610}</span>Mais ou menos</button>
+      <button class="selfbtn errei" onclick="self('no')"><span class="big">\u{1F605}</span>Ainda não</button>
+    </div>
+    <div class="fb" id="fb"></div>`+nextBtn(true);
+  if(it.revealed||it.done){$('rev').classList.add('show');$('seebtn').style.display='none';$('selfhint').style.display='block';$('self').classList.add('show');}
+  if(it.done) paintSelf(it);
+}
+function reveal(){const it=deck[cur];it.revealed=true;$('rev').classList.add('show');$('seebtn').style.display='none';$('selfhint').style.display='block';$('self').classList.add('show');}
+function self(v){
+  const it=deck[cur]; if(it.done)return;
+  it.done=true; it.selfv=v;
+  if(v==='ok'){it.pts=1;it.wrong=false;}else if(v==='mid'){it.pts=0.5;it.wrong=true;}else{it.pts=0;it.wrong=true;}
+  paintSelf(it);
+}
+function paintSelf(it){
+  document.querySelectorAll('.selfbtn').forEach(b=>b.disabled=true);
+  if(it.selfv==='ok'){document.querySelector('.selfbtn.acertei').classList.add('sel');$('fb').textContent='Muito bem! \u{1F31F}';$('fb').className='fb ok';}
+  else if(it.selfv==='mid'){document.querySelector('.selfbtn.parcial').classList.add('sel');$('fb').textContent='Quase lá! \u{1F44D}';$('fb').className='fb mid';}
+  else{document.querySelector('.selfbtn.errei').classList.add('sel');$('fb').textContent='Agora você sabe! \u{1F4AA}';$('fb').className='fb no';}
+  mostraNext();
+}
+
+function next(){ if(allAnswered()){fim();return;} cur++; if(cur<total)render(); else fim(); }
+function redoWrong(){
+  const w=wrongItems().map(it=>({type:it._type,src:it._src}));
+  deck=shuffle(w).map(x=>makeItem(x.type,x.src));
+  total=deck.length;cur=0;
+  render();
+}
+function fim(){
+  $('bar').style.width='100%';
+  $('qnav').classList.remove('show');
+  const score=curScore(), s=Math.round(score*10)/10, pct=total?score/total:0;
+  const msg=pct>=.9?'Você arrasou! \u{1F3C6}':pct>=.6?'Muito bem! Continue treinando.':'Bom treino — jogue de novo para aprender mais!';
+  const nWrong=wrongItems().length;
+  const redoBtn=nWrong?`<button class="endbtn redo" onclick="redoWrong()">↺ Refazer as que errei (${nWrong})<span class="etr"></span></button>`:'';
+  $('card').innerHTML=`<div class="fim"><div class="big">\u{1F3C6}</div>
+    <div class="score">${s} / ${total}</div>
+    <div class="sub">${msg}</div>
+    <div class="endbtns">
+      ${redoBtn}
+      <button class="endbtn" onclick="intro()">\u{1F3B2} Novo simulado<span class="etr"></span></button>
+      <button class="endbtn" onclick="goHome()">\u{1F3E0} Menu do site<span class="etr"></span></button>
+    </div></div>`;
+}
+
+intro();
+</script>
+<script>window.SERA_CFG={trKey:'mat2_tr',lang:'en-US',rate:.85,stars:140,somKey:'mat2_som'};</script>
+<script src="serafina-core.js?v=20260817"></script>
+<script>window.SERA_ACCENT={accent:'#a78bfa'};</script>
+<script src="cie2_theme.js?v=20260817"></script>
+</body>
+</html>
