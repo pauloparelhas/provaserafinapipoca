@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Unit video — Math AP1</title>
+<link rel="stylesheet" href="serafina-core.css?v=20260817">
+<style>
+:root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
+body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.05rem;font-weight:800;cursor:pointer;padding:0 8px}
+.iconbtn:active{transform:scale(.9)}
+.wrap{flex:1;width:100%;max-width:820px;margin:0 auto;padding:16px 12px 60px}
+.head{text-align:center;margin-bottom:14px}
+.head .em{font-size:calc(2.8rem*var(--fs));filter:drop-shadow(0 6px 12px rgba(0,0,0,.35))}
+.head h1{font-size:calc(1.3rem*var(--fs));font-weight:900;line-height:1.25;margin-top:4px}
+.head p{color:var(--soft);font-weight:700;font-size:calc(.93rem*var(--fs));line-height:1.5;margin-top:8px}
+.player{background:#000;border:2px solid var(--line);border-radius:var(--rad);overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.4)}
+video{width:100%;display:block;background:#000;aspect-ratio:16/9}
+.ctrl{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.cb{min-height:48px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-family:inherit;font-weight:900;font-size:.92rem;border-radius:16px;padding:8px 16px;cursor:pointer}
+.cb.on{border-color:var(--accent);background:rgba(52,211,153,.16);color:var(--ink)}
+.cb:active{transform:scale(.96)}
+.aviso{display:none;margin-top:14px;border:2px dashed var(--accent2);border-radius:16px;padding:14px 15px;font-weight:800;font-size:calc(.93rem*var(--fs));line-height:1.5;color:var(--ink)}
+.aviso.on{display:block}
+.aviso a{color:var(--accent)}
+.nota{text-align:center;color:var(--soft);font-weight:700;font-size:.8rem;margin-top:20px;line-height:1.55;opacity:.85}
+
+.sombtn{transition:opacity .15s}
+.sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
+
+/* ---------- mouse (notebook) ---------- */
+@media (hover:hover){
+  .cb:hover{border-color:var(--accent)}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+@media(max-width:420px){
+  .topbar{flex-wrap:wrap;gap:4px}
+  .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px}
+  .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
+}
+.dicabtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.62}
+.dicabtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .dicabtn{opacity:1;filter:none;background:rgba(252,211,77,.2)}
+.tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.86em;line-height:1.35}
+body.show-tr .tr{display:block}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Unit video</span>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()"><svg class="flagicon" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false"><rect width="20" height="14" rx="2" fill="#009C3B"/><polygon points="10,2 18,7 10,12 2,7" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/></svg><span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="wrap">
+    <div class="head">
+      <div class="em">&#127916;</div>
+      <h1>Time, Money &amp; Numbers in a video</h1>
+      <p>Units 3 &amp; 7 &mdash; telling time, making money amounts, and adding/subtracting 2-digit numbers.<br>Watch it once all the way through, then go back to the hard parts with &#9194; 10s.
+        <span class="tr">O v&iacute;deo &eacute; falado em portugu&ecirc;s e escreve cada palavra em ingl&ecirc;s na tela.</span></p>
+    </div>
+
+    <div class="player">
+      <video id="v" controls playsinline preload="metadata">
+        <source src="media/video_mat2_ap2_nb1_pt.mp4" type="video/mp4">
+        Your browser cannot play video.
+      </video>
+    </div>
+
+    <div class="ctrl">
+      <button class="cb" onclick="pula(-10)">&#9194; 10s</button>
+      <button class="cb" id="sp075" onclick="vel(0.75)">&#128034; Slower</button>
+      <button class="cb on" id="sp1" onclick="vel(1)">&#9654;&#65039; Normal</button>
+      <button class="cb" id="sp125" onclick="vel(1.25)">&#128007; Faster</button>
+      <button class="cb" onclick="pula(10)">10s &#9193;</button>
+      <button class="cb" onclick="reinicia()">&#8634; From the start</button>
+    </div>
+
+    <div class="aviso" id="aviso">
+      &#128274; The video is taking a while to load (the file is big &mdash; on a slow connection it can take some time).<br><br>
+      You can <a href="media/video_mat2_ap2_nb1_pt.mp4" target="_blank" rel="noopener">open the video directly</a>,
+      or study the <b>same content</b> without video in
+      <a href="MAT2_ap2_estudo.html">Study sheet</a> and in the <a href="MAT2_ap2_nlm.html">Explained quiz</a>.
+    </div>
+
+    <div class="nota">The video was made by <b>NotebookLM</b> from the Units 3 &amp; 7 book pages.<br>
+      Use <b>&#9194; 10s</b> and <b>10s &#9193;</b> to go back over anything you missed. &#128071;
+      <span class="tr">Use os bot&otilde;es de 10s para voltar no que voc&ecirc; n&atilde;o pegou.</span></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   VÍDEO DA UNIDADE — Matematica 2tri AP1 (Units 3 e 7)
+   Player do vídeo gerado pelo NotebookLM a partir das mesmas
+   fontes da unidade. Sem sumário clicável por trecho: a ordem do
+   vídeo nao foi conferida quadro a quadro (diferente do vídeo de
+   Geometria/AP2) — os botões de 10s bastam para voltar no que
+   nao foi pego.
+   ============================================================ */
+var $=function(id){return document.getElementById(id);};
+var v=$('v');
+
+function mmss(s){var m=Math.floor(s/60),r=Math.round(s%60);return m+':'+(r<10?'0':'')+r;}
+
+function pula(seg){
+  if(!v)return;
+  try{ v.currentTime=Math.max(0,Math.min((v.duration||1e9), v.currentTime+seg)); }catch(e){}
+}
+function vel(x){
+  if(!v)return;
+  v.playbackRate=x;
+  ['sp075','sp1','sp125'].forEach(function(id){$(id).classList.remove('on');});
+  $(x===0.75?'sp075':x===1.25?'sp125':'sp1').classList.add('on');
+}
+function reinicia(){ if(v){v.currentTime=0;v.play();} }
+
+var avisou=false;
+function mostraAviso(){ if(!avisou){avisou=true;$('aviso').classList.add('on');} }
+v.addEventListener('error', mostraAviso);
+v.addEventListener('stalled', mostraAviso);
+setTimeout(function(){ if(v.readyState===0) mostraAviso(); }, 15000);
+
+v.addEventListener('loadedmetadata',function(){
+  avisou=true; $('aviso').classList.remove('on');
+  var d=v.duration;
+  if(isFinite(d)&&d>0){
+    var h=document.querySelector('.head p');
+    h.innerHTML=h.innerHTML+'<br><b>Duration: '+mmss(d)+'</b><span class="tr"> &middot; dura&ccedil;&atilde;o: '+mmss(d)+'</span>';
+  }
+});
+</script>
+<script>window.SERA_CFG={trKey:'mat2ap2_tr',lang:'en-US',rate:.85,stars:100,somKey:'mat2ap2_som'};</script>
+<script src="serafina-core.js?v=20260817"></script>
+<script>window.SERA_ACCENT={accent:'#38bdf8'};</script>
+<script src="sera_theme.js?v=20260817"></script>
+</body>
+</html>

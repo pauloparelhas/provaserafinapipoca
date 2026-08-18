@@ -205,10 +205,13 @@ body.show-tr .tr{display:block}
 body.show-tr .cbtn.flag{opacity:1;filter:none;background:var(--warm-bg);border-color:var(--warm-line)}
 
 /* ============ ESCOLHA AP1 / AP2 (18/08) ============
-   Duas provas, mesmo dia. AP1 = a que ja estava no ar (Geometry).
-   AP2 = Time, Money, Adding/Subtracting, material novo. A home vira
+   Duas provas, mesmo dia. AP2 = a que ja estava no ar (Geometry).
+   AP1 = Time, Money, Adding/Subtracting, material novo. A home vira
    uma escolha antes de mostrar qualquer produto; a escolha fica salva
-   e cada painel tem um jeito de voltar/trocar. */
+   e cada painel tem um jeito de voltar/trocar.
+   (As classes CSS .ap1/.ap2 e os IDs #apPanel1/#apPanel2 sao so
+   ganchos internos de estilo/JS — NAO correspondem ao rotulo visivel;
+   apPanel1=Geometry(AP2), apPanel2=Time/Money(AP1).) */
 .apPick{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:22px}
 @media(min-width:620px){.apPick{grid-template-columns:1fr 1fr}}
 .apCard{display:flex;flex-direction:column;gap:6px;text-align:left;border-radius:22px;padding:18px 20px;
@@ -251,25 +254,25 @@ body.light .apCard.ap2 .apTt{color:#0369a1}
   <!-- ================= ESCOLHA AP1 / AP2 ================= -->
   <div class="apPick" id="apPick">
     <button class="apCard ap1" onclick="selectAP(1)">
-      <span class="apTag">AP1</span>
+      <span class="apTag">AP2</span>
       <span class="apTt">&#x1F4D0; 2-D Geometry</span>
       <span class="apDd">The figures, sides and vertices, symmetry and patterns.
         <span class="tr">As figuras, lados e vértices, simetria e padrões.</span></span>
     </button>
     <button class="apCard ap2" onclick="selectAP(2)">
-      <span class="apTag">AP2</span>
+      <span class="apTag">AP1</span>
       <span class="apTt">&#x23F0; Time, Money &amp; Numbers</span>
       <span class="apDd">Telling time, money, and adding/subtracting 2-digit numbers.
         <span class="tr">Horas, dinheiro, e somar/subtrair números de 2 dígitos.</span></span>
     </button>
   </div>
 
-  <!-- ================= MATEMATICA AP1 — 2-D Geometry (prova 19/08) ================= -->
+  <!-- ================= MATEMATICA AP2 — 2-D Geometry (prova 19/08) ================= -->
   <section class="geo-panel" id="apPanel1" style="display:none">
     <div class="apSwitch"><button onclick="selectAP(0)">&#8592; Choose a different test<span class="tr">escolher outra prova</span></button></div>
     <div class="geo-top">
       <span class="ic">&#x1F4D0;</span>
-      <span class="nm">Math &mdash; AP1</span>
+      <span class="nm">Math &mdash; AP2</span>
       <span class="dt">&#x1F525; test 19/08</span>
     </div>
     <div class="geo-unit">Unit 9 &mdash; <b>2-D Geometry: the figures, sides and vertices, symmetry and patterns</b>
@@ -399,12 +402,12 @@ body.light .apCard.ap2 .apTt{color:#0369a1}
     </details>
   </section>
 
-  <!-- ================= MATEMATICA AP2 — Time, Money & Numbers (prova 19/08) ================= -->
+  <!-- ================= MATEMATICA AP1 — Time, Money & Numbers (prova 19/08) ================= -->
   <section class="geo-panel" id="apPanel2" style="display:none">
     <div class="apSwitch"><button onclick="selectAP(0)">&#8592; Choose a different test<span class="tr">escolher outra prova</span></button></div>
     <div class="geo-top">
       <span class="ic">&#x23F0;</span>
-      <span class="nm">Math &mdash; AP2</span>
+      <span class="nm">Math &mdash; AP1</span>
       <span class="dt">&#x1F525; test 19/08</span>
     </div>
     <div class="geo-unit">Units 3 &amp; 7 &mdash; <b>Telling time, Making money amounts, Adding and Subtracting 2-digit numbers</b>
@@ -437,6 +440,26 @@ body.light .apCard.ap2 .apTt{color:#0369a1}
       </span>
       <span class="go">&#x270F;&#xFE0F; Practise now</span>
     </a>
+
+    <div class="kicker" style="color:var(--soft);">After you study</div>
+    <div class="picks">
+      <a class="pick video" href="ferramentas/MAT2_ap2_video.html">
+        <span class="em">&#x1F3AC;</span>
+        <span>
+          <span class="tt">Unit video</span>
+          <span class="dd">the whole unit in cartoons, step by step</span>
+        </span>
+        <span class="tag">&#x25B6;&#xFE0F; Watch</span>
+      </a>
+      <a class="pick mat" href="ferramentas/MAT2_ap2_nlm.html">
+        <span class="em">&#x1F914;</span>
+        <span>
+          <span class="tt">Explained quiz</span>
+          <span class="dd">10 questions with the why of every answer</span>
+        </span>
+        <span class="tag">&#x1F9E0; Try it</span>
+      </a>
+    </div>
   </section>
 
   <div class="footer">

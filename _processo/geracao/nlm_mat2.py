@@ -153,11 +153,26 @@ def etapa_gerar(s, nb):
 
 
 def status_artefatos(nb):
-    """{type_id: status} do --json. Nunca parsear a tabela (quebra em linhas)."""
+    """{type_id: status} do --json. Nunca parsear a tabela (quebra em linhas).
+    Se o mesmo tipo tem +1 artefato (regeracao apos falha), fica com o
+    'completed' se existir; senao, o mais recente por created_at. (bug real
+    achado 18/08 na copia AP2 deste script: pegar o ULTIMO da lista escondia
+    um 'completed' atras de um 'failed' mais novo na resposta da API.)"""
     rc, out = nlm("artifact", "list", "--notebook", nb, "--json", timeout=180)
     try:
         d = json.loads(out[out.index("{"):out.rindex("}") + 1])
-        return {a.get("type_id"): a.get("status") for a in d.get("artifacts", [])}
+        melhores = {}
+        for a in d.get("artifacts", []):
+            t = a.get("type_id")
+            if t not in melhores:
+                melhores[t] = a
+                continue
+            atual = melhores[t]
+            if a.get("status") == "completed" and atual.get("status") != "completed":
+                melhores[t] = a
+            elif a.get("status") == atual.get("status") and a.get("created_at", "") > atual.get("created_at", ""):
+                melhores[t] = a
+        return {t: a.get("status") for t, a in melhores.items()}
     except Exception:
         return {}
 

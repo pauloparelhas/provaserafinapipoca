@@ -11,6 +11,7 @@
   },
   "baixados": {
     "quiz": "ferramentas\\media\\quiz_mat2_ap2_nlm.json",
-    "flashcards": "ferramentas\\media\\flashcards_mat2_ap2_nlm.json"
+    "flashcards": "ferramentas\\media\\flashcards_mat2_ap2_nlm.json",
+    "video": "ferramentas/media/video_mat2_ap2_nb1_pt.mp4"
   }
 }
