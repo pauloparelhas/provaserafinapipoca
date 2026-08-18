@@ -202,9 +202,9 @@ function intro(){
     h+='<button class="deck'+(feitos[b.key]?' feito':'')+'" style="--dc:'+b.cor+'" onclick="abrir('+i+')">'
      +'<span class="de">'+b.emo+'</span>'
      +'<span class="dt">'+b.nome+'</span>'
-     +'<span class="dn">'+(feitos[b.key]?'&#10003; '+b.cards.length:b.cards.length+' cartas')+'</span></button>';
+     +'<span class="dn">'+(feitos[b.key]?'&#10003; '+b.cards.length:b.cards.length+' cards')+'</span></button>';
   });
-  h+='</div><button class="allbtn" onclick="abrirTudo()">&#127922; Embaralhar tudo ('+total+' cartas)</button>'
+  h+='</div><button class="allbtn" onclick="abrirTudo()">&#127922; Shuffle all ('+total+' cards)<span class="tr">embaralhar tudo ('+total+' cartas)</span></button>'
    +'<div class="hintline">Ten minutes a day beat one hour the night before. &#128522;<span class="tr">10 minutos por dia valem mais que 1 hora na véspera.</span></div></div>';
   $('stage').innerHTML=h;
 }
@@ -244,9 +244,9 @@ function carta(){
    +'</div></div>'
    +'<div id="judge"></div>'
    +'<div class="navrow">'
-     +'<button class="nb" id="prev" onclick="voltar()"'+(idx===0?' disabled':'')+'>&#8249; Anterior</button>'
+     +'<button class="nb" id="prev" onclick="voltar()"'+(idx===0?' disabled':'')+'>&#8249; Previous</button>'
      +'<button class="nb" onclick="intro()">&#127968; Menu</button>'
-     +'<button class="nb" onclick="pular()">Pular &#8250;</button>'
+     +'<button class="nb" onclick="pular()">Skip &#8250;</button>'
    +'</div>';
 }
 function virar(){
@@ -280,8 +280,8 @@ function fim(){
    +'<div class="sub">'+msg+'</div><div class="fimbtns">';
   if(errados.length)
     h+='<button class="fimbtn redo" onclick="treinarErradas()">&#8635; Practise the '+errados.length+' I missed</button>';
-  h+='<button class="fimbtn primary" onclick="abrirTudo()">&#127922; Embaralhar tudo de novo</button>'
-   +'<button class="fimbtn" onclick="intro()">&#127183; Escolher outro baralho</button>'
+  h+='<button class="fimbtn primary" onclick="abrirTudo()">&#127922; Shuffle all again<span class="tr">embaralhar tudo de novo</span></button>'
+   +'<button class="fimbtn" onclick="intro()">&#127183; Choose another deck<span class="tr">escolher outro baralho</span></button>'
    +'<button class="fimbtn" onclick="goHome()">&#127968; Site menu</button>'
    +'</div></div>';
   $('stage').innerHTML=h;

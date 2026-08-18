@@ -555,10 +555,10 @@ function finish(){
   $('qnav').classList.remove('show');
   var n=Object.keys(doneGames).length;
   $('card').innerHTML='<div class="fim"><div class="big">\u{1F3C6}</div>'
-    +'<div class="score">'+n+' / '+GAMES.length+' jogos sem erro</div>'
+    +'<div class="score">'+n+' / '+GAMES.length+' games perfect<span class="tr">'+n+' / '+GAMES.length+' jogos sem erro</span></div>'
     +'<div class="sub">Well done, shape explorer! \u{1F4D0}<span class="tr">Muito bem, explorador das figuras!</span></div>'
     +'<div class="actions">'
-    +'<button class="btn primary" onclick="intro()">\u{1F3AE} Jogar de novo<span class="etr"></span></button>'
+    +'<button class="btn primary" onclick="intro()">\u{1F3AE} Play again<span class="etr">jogar de novo</span></button>'
     +'<button class="btn" onclick="goHome()">\u{1F3E0} Menu<span class="etr">menu do site</span></button>'
     +'</div></div>';
   celebrate();

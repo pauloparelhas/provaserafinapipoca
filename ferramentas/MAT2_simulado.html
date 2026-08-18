@@ -615,7 +615,7 @@ function updateArrows(){
        child always reaches the grade, even when answering out of order */
     jb.disabled=false; jb.classList.add('results');
     jb.onclick=fim; jb.title='See my score';
-    jb.innerHTML='\u{1F389}<span class="ql">Resultado</span>';
+    jb.innerHTML='\u{1F389}<span class="ql">Results</span>';
   }else{
     jb.classList.remove('results');
     jb.onclick=jumpUnanswered; jb.title='Next unanswered';
@@ -890,10 +890,10 @@ function paintOrder(it){
   document.querySelectorAll('.opiece').forEach(c=>c.classList.add('used'));
   $('ocheck').style.display='none';
   const all=it.order.length;
-  if(right===all){$('fb').innerHTML='Ordem certa! \u{1F31F}';$('fb').className='fb ok';}
+  if(right===all){$('fb').innerHTML='Correct order! \u{1F31F}<span class="tr">ordem certa!</span>';$('fb').className='fb ok';}
   else{
     const correct=it._src.items.join('  →  ');
-    $('fb').innerHTML=right+' de '+all+' no lugar certo \u{1F60A}<div class="ocorrect">Ordem certa: '+correct+'</div>';
+    $('fb').innerHTML=right+' of '+all+' in the right place \u{1F60A}<span class="tr">'+right+' de '+all+' no lugar certo</span><div class="ocorrect">Correct order: '+correct+'<span class="tr">ordem certa: '+correct+'</span></div>';
     $('fb').className='fb mid';
   }
   mostraNext();
@@ -903,9 +903,9 @@ function paintOrder(it){
 function renderOpen(it){
   $('card').innerHTML=head(it,'Your answer','open')+
    `<div class="task">Answer in your head, then check<span class="tr">responda de cabeça e depois confira</span></div>
-    <div class="writeline">&#9999;&#65039; responda em voz alta</div>
+    <div class="writeline">&#9999;&#65039; Say your answer out loud<span class="tr">responda em voz alta</span></div>
     <button class="next show" id="seebtn" onclick="reveal()">Show the answer &#128065;&#65039;</button>
-    <div class="reveal" id="rev"><span class="lab">Resposta</span>${it.men}<div class="tr">${it.menpt||''}</div></div>
+    <div class="reveal" id="rev"><span class="lab">Answer<span class="tr">resposta</span></span>${it.men}<div class="tr">${it.menpt||''}</div></div>
     <div class="hint" id="selfhint" style="display:none">Did you get it?<span class="tr">você acertou?</span></div>
     <div class="selfwrap" id="self">
       <button class="selfbtn acertei" onclick="self('ok')"><span class="big">\u{1F604}</span>I got it</button>
@@ -944,14 +944,14 @@ function fim(){
   const score=curScore(), s=Math.round(score*10)/10, pct=total?score/total:0;
   const msg=pct>=.9?'You nailed it! \u{1F3C6}<span class="tr">você arrasou!</span>':pct>=.6?'Well done! Keep practising.<span class="tr">muito bem! continue treinando.</span>':'Good practice — play again to learn more!<span class="tr">bom treino: jogue de novo.</span>';
   const nWrong=wrongItems().length;
-  const redoBtn=nWrong?`<button class="endbtn redo" onclick="redoWrong()">↺ Refazer as que errei (${nWrong})<span class="etr"></span></button>`:'';
+  const redoBtn=nWrong?`<button class="endbtn redo" onclick="redoWrong()">↺ Redo the ones I missed (${nWrong})<span class="etr">refazer as que errei</span></button>`:'';
   $('card').innerHTML=`<div class="fim"><div class="big">\u{1F3C6}</div>
     <div class="score">${s} / ${total}</div>
     <div class="sub">${msg}</div>
     <div class="endbtns">
       ${redoBtn}
-      <button class="endbtn" onclick="intro()">\u{1F3B2} Novo simulado<span class="etr"></span></button>
-      <button class="endbtn" onclick="goHome()">\u{1F3E0} Menu do site<span class="etr"></span></button>
+      <button class="endbtn" onclick="intro()">\u{1F3B2} New practice test<span class="etr">novo simulado</span></button>
+      <button class="endbtn" onclick="goHome()">\u{1F3E0} Site menu<span class="etr">menu do site</span></button>
     </div></div>`;
 }
 
