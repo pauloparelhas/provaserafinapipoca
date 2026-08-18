@@ -587,7 +587,7 @@ function buildMap(){
         return '<div class="mm-leaf '+b.c+'" onclick="toggleLeaf(event,this)">'
          +'<div class="mm-leaf-hd"><div class="mm-leaf-icon">'+l.ic+'</div>'
          +'<div class="mm-leaf-text"><div class="mm-leaf-en">'+l.t+'</div>'
-         +(l.pt?'<div class="mm-leaf-pt">'+l.pt+'</div>':'')+'</div></div>'
+         +(l.pt?'<div class="mm-leaf-pt">'+l.pt+'</div>':'')+'</div>'
          +'<div class="mm-leaf-arrow">&#9654;</div></div>'
          +'<div class="mm-leaf-body">'
          +l.d.map(function(d,k){return '<div class="mm-detail'+(k===l.d.length-1?' mm-detail-last':'')+'">'
