@@ -1,0 +1,265 @@
+{
+  "title": "Quiz Matem\u00e1tica",
+  "questions": [
+    {
+      "question": "Qual destas atividades demora \"less than a minute\" (menos que um minuto)?",
+      "answerOptions": [
+        {
+          "text": "Piscar o olho uma vez (blink your eyes once).",
+          "isCorrect": true,
+          "rationale": "Esta \u00e9 uma a\u00e7\u00e3o instant\u00e2nea que acontece muito r\u00e1pido, levando bem menos que sessenta segundos."
+        },
+        {
+          "text": "Escovar os dentes (brush your teeth).",
+          "isCorrect": false,
+          "rationale": "Escovar os dentes \u00e9 uma atividade que geralmente leva cerca de um minuto ou um pouco mais para ser feita corretamente."
+        },
+        {
+          "text": "Dormir a noite inteira (sleeping all night).",
+          "isCorrect": false,
+          "rationale": "Dormir durante a noite \u00e9 uma atividade de longa dura\u00e7\u00e3o que leva muitas horas."
+        },
+        {
+          "text": "Um dia inteiro na escola (a whole day at school).",
+          "isCorrect": false,
+          "rationale": "O per\u00edodo escolar dura v\u00e1rias horas, sendo muito mais longo do que um \u00fanico minuto."
+        }
+      ],
+      "hint": "Pense em algo que acontece num piscar de olhos."
+    },
+    {
+      "question": "Se o rel\u00f3gio est\u00e1 marcando \"quarter past four\" ($4:15$), onde deve estar o \"minute hand\" (ponteiro dos minutos)?",
+      "answerOptions": [
+        {
+          "text": "Apontando para o $3$.",
+          "isCorrect": true,
+          "rationale": "Em um rel\u00f3gio anal\u00f3gico, o n\u00famero $3$ representa quinze minutos passados da hora cheia."
+        },
+        {
+          "text": "Apontando para o $6$.",
+          "isCorrect": false,
+          "rationale": "O n\u00famero $6$ indica que trinta minutos se passaram, o que chamamos de \"half past\"."
+        },
+        {
+          "text": "Apontando para o $9$.",
+          "isCorrect": false,
+          "rationale": "O n\u00famero $9$ indica que faltam quinze minutos para a pr\u00f3xima hora, o que chamamos de \"quarter to\"."
+        },
+        {
+          "text": "Apontando para o $12$.",
+          "isCorrect": false,
+          "rationale": "O n\u00famero $12$ \u00e9 usado para indicar a hora exata ou \"o'clock\"."
+        }
+      ],
+      "hint": "Lembre-se que um quarto de hora equivale a quinze minutos."
+    },
+    {
+      "question": "No rel\u00f3gio anal\u00f3gico, quando marcamos \"quarter to ten\" ($9:45$), o que acontece com o \"hour hand\" (ponteiro das horas)?",
+      "answerOptions": [
+        {
+          "text": "Ele est\u00e1 quase chegando no $10$.",
+          "isCorrect": true,
+          "rationale": "Como j\u00e1 se passaram quarenta e cinco minutos, o ponteiro das horas se moveu para perto da pr\u00f3xima hora."
+        },
+        {
+          "text": "Ele est\u00e1 apontando exatamente para o $9$.",
+          "isCorrect": false,
+          "rationale": "O ponteiro das horas s\u00f3 aponta exatamente para o n\u00famero no in\u00edcio da hora ($9:00$)."
+        },
+        {
+          "text": "Ele est\u00e1 exatamente entre o $9$ e o $10$.",
+          "isCorrect": false,
+          "rationale": "O ponteiro fica no meio do caminho quando o rel\u00f3gio marca meia hora ($9:30$)."
+        },
+        {
+          "text": "Ele est\u00e1 apontando para o $12$.",
+          "isCorrect": false,
+          "rationale": "Se o ponteiro das horas estivesse no $12$, seriam meio-dia ou meia-noite."
+        }
+      ],
+      "hint": "Pense que faltam apenas quinze minutos para a pr\u00f3xima hora."
+    },
+    {
+      "question": "Voc\u00ea quer comprar uma \"ball\" (bola) de $25\u00a2$ e um \"sandwich\" (sandu\u00edche) de $50\u00a2$. Qual o valor total que voc\u00ea precisa?",
+      "answerOptions": [
+        {
+          "text": "$75\u00a2$",
+          "isCorrect": true,
+          "rationale": "Somando as dezenas ($20 + 50 = 70$) e as unidades ($5 + 0 = 5$), chegamos ao total de $75$."
+        },
+        {
+          "text": "$65\u00a2$",
+          "isCorrect": false,
+          "rationale": "Este valor ignora $10\u00a2$ da soma das dezenas ou das unidades."
+        },
+        {
+          "text": "$85\u00a2$",
+          "isCorrect": false,
+          "rationale": "Este valor adicionaria $10\u00a2$ a mais do que o pre\u00e7o real dos dois itens."
+        },
+        {
+          "text": "$50\u00a2$",
+          "isCorrect": false,
+          "rationale": "Este \u00e9 apenas o pre\u00e7o do sandu\u00edche, sem incluir o valor da bola."
+        }
+      ],
+      "hint": "Some o valor das moedas de cada item."
+    },
+    {
+      "question": "Para comprar tr\u00eas itens com o \"exact amount\" (valor exato) de $95\u00a2$, quais itens voc\u00ea deve escolher?",
+      "answerOptions": [
+        {
+          "text": "Sandwich ($50\u00a2$), Ball ($25\u00a2$) e Juice box ($20\u00a2$).",
+          "isCorrect": true,
+          "rationale": "A soma de $50 + 25 + 20$ resulta exatamente em $95$."
+        },
+        {
+          "text": "Juice box ($20\u00a2$), Pencil ($20\u00a2$) e Ball ($25\u00a2$).",
+          "isCorrect": false,
+          "rationale": "A soma destes itens \u00e9 $65\u00a2$, o que \u00e9 menor que o valor necess\u00e1rio."
+        },
+        {
+          "text": "Sandwich ($50\u00a2$), Juice box ($20\u00a2$) e Pencil ($20\u00a2$).",
+          "isCorrect": false,
+          "rationale": "A soma de $50 + 20 + 20$ \u00e9 igual a $90\u00a2$, faltando $5\u00a2$ para o total."
+        },
+        {
+          "text": "Duas Balls ($25\u00a2$ cada) e um Sandwich ($50\u00a2$).",
+          "isCorrect": false,
+          "rationale": "Embora a soma seja pr\u00f3xima ($100\u00a2$), o valor ultrapassa os $95\u00a2$ solicitados."
+        }
+      ],
+      "hint": "Tente combinar o item mais caro com outros dois para chegar perto de cem."
+    },
+    {
+      "question": "Ao resolver a conta $37 + 25$ usando o \"standard algorithm\" (algoritmo em coluna), por que precisamos fazer o \"regroup\" (reagrupamento)?",
+      "answerOptions": [
+        {
+          "text": "Porque a soma de $7 + 5$ \u00e9 igual a $12$, que \u00e9 mais que $9$.",
+          "isCorrect": true,
+          "rationale": "Sempre que as unidades somam $10$ ou mais, devemos transformar $10$ unidades em $1$ dezena e lev\u00e1-la para a pr\u00f3xima coluna."
+        },
+        {
+          "text": "Porque o n\u00famero $37$ \u00e9 maior que o n\u00famero $25$.",
+          "isCorrect": false,
+          "rationale": "O tamanho total dos n\u00fameros n\u00e3o determina o reagrupamento, mas sim a soma de cada coluna individual."
+        },
+        {
+          "text": "Porque estamos somando dois n\u00fameros de dois d\u00edgitos.",
+          "isCorrect": false,
+          "rationale": "Muitas somas de dois d\u00edgitos, como $31 + 12$, n\u00e3o precisam de reagrupamento."
+        },
+        {
+          "text": "Porque as dezenas somam menos que dez.",
+          "isCorrect": false,
+          "rationale": "O reagrupamento na coluna das unidades depende apenas do resultado daquela coluna ser $10$ ou mais."
+        }
+      ],
+      "hint": "Olhe para a coluna das \"ones\" (unidades) e veja se o resultado cabe em um s\u00f3 d\u00edgito."
+    },
+    {
+      "question": "Qual \u00e9 o resultado da adi\u00e7\u00e3o $74 + 17$?",
+      "answerOptions": [
+        {
+          "text": "$91$",
+          "isCorrect": true,
+          "rationale": "Somando $4 + 7$ temos $11$ (reagrupa $1$), e somando as dezenas $7 + 1 + 1$ (do reagrupamento) temos $9$."
+        },
+        {
+          "text": "$81$",
+          "isCorrect": false,
+          "rationale": "Este erro ocorre se esquecermos de somar a dezena que veio do reagrupamento das unidades."
+        },
+        {
+          "text": "$92$",
+          "isCorrect": false,
+          "rationale": "Este erro pode acontecer ao somar as unidades incorretamente como $12$ em vez de $11$."
+        },
+        {
+          "text": "$87$",
+          "isCorrect": false,
+          "rationale": "Este valor n\u00e3o considera o processo de adi\u00e7\u00e3o correta nas colunas de unidade e dezena."
+        }
+      ],
+      "hint": "Lembre-se de somar o \"vai um\" na coluna das dezenas."
+    },
+    {
+      "question": "Na subtra\u00e7\u00e3o $65 - 28$, por que \u00e9 necess\u00e1rio fazer o \"regroup\" (reagrupar)?",
+      "answerOptions": [
+        {
+          "text": "Porque $5$ unidades \u00e9 menos do que $8$ unidades.",
+          "isCorrect": true,
+          "rationale": "N\u00e3o podemos tirar $8$ de $5$, ent\u00e3o precisamos trocar $1$ dezena do $60$ por $10$ unidades."
+        },
+        {
+          "text": "Porque o n\u00famero $65$ termina com o n\u00famero $5$.",
+          "isCorrect": false,
+          "rationale": "O n\u00famero final n\u00e3o importa, o que importa \u00e9 a compara\u00e7\u00e3o com o n\u00famero que est\u00e1 sendo subtra\u00eddo."
+        },
+        {
+          "text": "Porque o resultado da conta ser\u00e1 um n\u00famero \u00edmpar.",
+          "isCorrect": false,
+          "rationale": "Se o resultado \u00e9 par ou \u00edmpar n\u00e3o define a necessidade de trocar dezenas por unidades."
+        },
+        {
+          "text": "Porque $6$ dezenas \u00e9 maior que $2$ dezenas.",
+          "isCorrect": false,
+          "rationale": "O fato da dezena de cima ser maior \u00e9 o que permite a conta existir, mas o reagrupamento vem das unidades."
+        }
+      ],
+      "hint": "Tente tirar $8$ dedos se voc\u00ea s\u00f3 tem $5$ levantados."
+    },
+    {
+      "question": "Resolva o problema: No museu, havia $75$ crian\u00e7as. $36$ foram visitar os f\u00f3sseis. Quantas crian\u00e7as sobraram para visitar a caverna?",
+      "answerOptions": [
+        {
+          "text": "$39$ crian\u00e7as.",
+          "isCorrect": true,
+          "rationale": "Ao subtrair $75 - 36$, reagrupamos o $75$ para $6$ dezenas e $15$ unidades; $15 - 6 = 9$ e $6 - 3 = 3$."
+        },
+        {
+          "text": "$41$ crian\u00e7as.",
+          "isCorrect": false,
+          "rationale": "Este erro comum acontece se voc\u00ea subtrair o menor do maior nas unidades ($6 - 5 = 1$) sem reagrupar."
+        },
+        {
+          "text": "$49$ crian\u00e7as.",
+          "isCorrect": false,
+          "rationale": "Este resultado ignora que uma dezena foi usada para o reagrupamento das unidades."
+        },
+        {
+          "text": "$35$ crian\u00e7as.",
+          "isCorrect": false,
+          "rationale": "Este \u00e9 um erro de c\u00e1lculo b\u00e1sico na subtra\u00e7\u00e3o das colunas."
+        }
+      ],
+      "hint": "Voc\u00ea precisar\u00e1 trocar uma dezena por dez unidades para conseguir subtrair as unidades."
+    },
+    {
+      "question": "Qual destas contas de subtra\u00e7\u00e3o N\u00c3O precisa de \"regroup\" (reagrupamento)?",
+      "answerOptions": [
+        {
+          "text": "$78 - 45$",
+          "isCorrect": true,
+          "rationale": "Nesta conta, o $8$ \u00e9 maior que o $5$, ent\u00e3o podemos subtrair as unidades diretamente."
+        },
+        {
+          "text": "$32 - 13$",
+          "isCorrect": false,
+          "rationale": "Como $2$ \u00e9 menor que $3$, precisamos de reagrupamento para realizar a conta."
+        },
+        {
+          "text": "$55 - 28$",
+          "isCorrect": false,
+          "rationale": "Como $5$ \u00e9 menor que $8$, \u00e9 necess\u00e1rio trocar uma dezena por unidades."
+        },
+        {
+          "text": "$67 - 28$",
+          "isCorrect": false,
+          "rationale": "Nesta conta, o $7$ \u00e9 menor que o $8$, exigindo o processo de reagrupamento."
+        }
+      ],
+      "hint": "Olhe para a coluna das unidades e veja onde o n\u00famero de cima \u00e9 maior ou igual ao de baixo."
+    }
+  ]
+}

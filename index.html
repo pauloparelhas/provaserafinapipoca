@@ -203,6 +203,28 @@ details.more[open] summary .chev{transform:rotate(180deg);}
 body.show-tr .tr{display:block}
 .cbtn.flag{opacity:.65}
 body.show-tr .cbtn.flag{opacity:1;filter:none;background:var(--warm-bg);border-color:var(--warm-line)}
+
+/* ============ ESCOLHA AP1 / AP2 (18/08) ============
+   Duas provas, mesmo dia. AP1 = a que ja estava no ar (Geometry).
+   AP2 = Time, Money, Adding/Subtracting, material novo. A home vira
+   uma escolha antes de mostrar qualquer produto; a escolha fica salva
+   e cada painel tem um jeito de voltar/trocar. */
+.apPick{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:22px}
+@media(min-width:620px){.apPick{grid-template-columns:1fr 1fr}}
+.apCard{display:flex;flex-direction:column;gap:6px;text-align:left;border-radius:22px;padding:18px 20px;
+  border:2px solid var(--line);background:var(--card);box-shadow:var(--sh);cursor:pointer;font-family:inherit;color:inherit;
+  transition:transform .2s,border-color .2s}
+.apCard:hover{transform:translateY(-3px)}
+.apCard .apTag{font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--soft)}
+.apCard .apTt{font-size:clamp(18px,3.6vw,22px);font-weight:900;line-height:1.15}
+.apCard .apDd{font-size:clamp(12px,2.3vw,13.5px);font-weight:800;color:var(--dim);line-height:1.4}
+.apCard.ap1{border-color:color-mix(in srgb,var(--geo) 45%,transparent)}
+.apCard.ap1 .apTt{color:var(--geo-soft)}
+.apCard.ap2{border-color:color-mix(in srgb,#38bdf8 45%,transparent)}
+.apCard.ap2 .apTt{color:#38bdf8}
+body.light .apCard.ap2 .apTt{color:#0369a1}
+.apSwitch{display:flex;align-items:center;justify-content:center;gap:8px;margin:2px 0 16px;font-size:11.5px;font-weight:900;color:var(--soft)}
+.apSwitch button{border:none;background:none;color:var(--geo-soft);font-family:inherit;font-weight:900;font-size:11.5px;cursor:pointer;text-decoration:underline;padding:6px}
 </style>
 </head>
 <body>
@@ -226,11 +248,28 @@ body.show-tr .cbtn.flag{opacity:1;filter:none;background:var(--warm-bg);border-c
       <span class="tr">Matem&aacute;tica &middot; prova 19/08</span></div>
   </div>
 
-  <!-- ================= MATEMATICA (prova 19/08) ================= -->
-  <section class="geo-panel">
+  <!-- ================= ESCOLHA AP1 / AP2 ================= -->
+  <div class="apPick" id="apPick">
+    <button class="apCard ap1" onclick="selectAP(1)">
+      <span class="apTag">AP1</span>
+      <span class="apTt">&#x1F4D0; 2-D Geometry</span>
+      <span class="apDd">The figures, sides and vertices, symmetry and patterns.
+        <span class="tr">As figuras, lados e vértices, simetria e padrões.</span></span>
+    </button>
+    <button class="apCard ap2" onclick="selectAP(2)">
+      <span class="apTag">AP2</span>
+      <span class="apTt">&#x23F0; Time, Money &amp; Numbers</span>
+      <span class="apDd">Telling time, money, and adding/subtracting 2-digit numbers.
+        <span class="tr">Horas, dinheiro, e somar/subtrair números de 2 dígitos.</span></span>
+    </button>
+  </div>
+
+  <!-- ================= MATEMATICA AP1 — 2-D Geometry (prova 19/08) ================= -->
+  <section class="geo-panel" id="apPanel1" style="display:none">
+    <div class="apSwitch"><button onclick="selectAP(0)">&#8592; Choose a different test<span class="tr">escolher outra prova</span></button></div>
     <div class="geo-top">
       <span class="ic">&#x1F4D0;</span>
-      <span class="nm">Math</span>
+      <span class="nm">Math &mdash; AP1</span>
       <span class="dt">&#x1F525; test 19/08</span>
     </div>
     <div class="geo-unit">Unit 9 &mdash; <b>2-D Geometry: the figures, sides and vertices, symmetry and patterns</b>
@@ -360,6 +399,46 @@ body.show-tr .cbtn.flag{opacity:1;filter:none;background:var(--warm-bg);border-c
     </details>
   </section>
 
+  <!-- ================= MATEMATICA AP2 — Time, Money & Numbers (prova 19/08) ================= -->
+  <section class="geo-panel" id="apPanel2" style="display:none">
+    <div class="apSwitch"><button onclick="selectAP(0)">&#8592; Choose a different test<span class="tr">escolher outra prova</span></button></div>
+    <div class="geo-top">
+      <span class="ic">&#x23F0;</span>
+      <span class="nm">Math &mdash; AP2</span>
+      <span class="dt">&#x1F525; test 19/08</span>
+    </div>
+    <div class="geo-unit">Units 3 &amp; 7 &mdash; <b>Telling time, Making money amounts, Adding and Subtracting 2-digit numbers</b>
+      <span class="tr">horas, dinheiro, e somar/subtrair números de 2 dígitos</span></div>
+
+    <div class="calm">
+      <span class="em">&#x1F31F;</span>
+      <span>The test is <u>in English</u>. Every screen has the <b>flag<svg class="flagicon" width="16" height="11" viewBox="0 0 20 14" aria-hidden="true" focusable="false" style="vertical-align:-1px;margin-left:3px"><rect width="20" height="14" rx="2" fill="#009C3B"/><polygon points="10,2 18,7 10,12 2,7" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/></svg></b> button: tap it whenever you do not understand a word.
+        <span class="tr">A prova é em inglês. Em todo lugar tem o botão da bandeira: toque nele quando não entender uma palavra.</span></span>
+    </div>
+
+    <div class="kicker">&#x1F449; Start here</div>
+    <a class="hero" href="ferramentas/MAT2_ap2_estudo.html" style="border-radius:22px">
+      <span class="em">&#x1F9ED;</span>
+      <span>
+        <span class="tt">Study sheet</span>
+        <span class="dd">Everything on the test in one place — and all folded up: you open only what you want to read.
+          <span class="tr">Todo o conteúdo da prova em um lugar só.</span></span>
+      </span>
+      <span class="go">&#x1F4D6; Open</span>
+    </a>
+
+    <div style="margin-top:20px"></div>
+    <a class="hero2" href="ferramentas/MAT2_ap2_simulado.html">
+      <span class="em">&#x1F4DD;</span>
+      <span>
+        <span class="tt">Practice test</span>
+        <span class="dd">The best way to get ready: practise like it's the real thing. You choose how many questions.
+          <span class="tr">O melhor jeito de treinar: pratique como se fosse a prova de verdade.</span></span>
+      </span>
+      <span class="go">&#x270F;&#xFE0F; Practise now</span>
+    </a>
+  </section>
+
   <div class="footer">
     <div class="footer-logo">&#x1F4D0; Study time</div>
     <div class="footer-note">
@@ -414,6 +493,22 @@ try{ if(localStorage.getItem(TR_KEY)==='1') document.body.classList.add('show-tr
 pintaTr();
 
 function hardRefresh(){ window.location.href=window.location.pathname+'?v='+Date.now(); }
+
+/* Escolha AP1/AP2: 0 = mostra so a escolha, 1/2 = mostra o painel e some
+   com a escolha. Fica salva; quem volta ao site cai direto no painel. */
+var AP_KEY='ap_choice';
+function selectAP(n){
+  document.getElementById('apPick').style.display = n===0 ? 'grid' : 'none';
+  document.getElementById('apPanel1').style.display = n===1 ? 'block' : 'none';
+  document.getElementById('apPanel2').style.display = n===2 ? 'block' : 'none';
+  try{ if(n===0) localStorage.removeItem(AP_KEY); else localStorage.setItem(AP_KEY,String(n)); }catch(e){}
+  window.scrollTo(0,0);
+}
+(function(){
+  var saved=0;
+  try{ saved=parseInt(localStorage.getItem(AP_KEY)||'0',10)||0; }catch(e){}
+  selectAP(saved);
+})();
 </script>
 <script>
 /* Fundo animado. No escuro sao estrelas brancas; no claro, bolinhas

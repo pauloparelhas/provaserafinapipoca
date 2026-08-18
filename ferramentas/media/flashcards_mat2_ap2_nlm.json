@@ -1,0 +1,225 @@
+{
+  "title": "Matem\u00e1tica Flashcards",
+  "cards": [
+    {
+      "front": "Como chamamos o ponteiro curto de um rel\u00f3gio em ingl\u00eas?",
+      "back": "Hour hand (ponteiro das horas)."
+    },
+    {
+      "front": "Como chamamos o ponteiro comprido de um rel\u00f3gio em ingl\u00eas?",
+      "back": "Minute hand (ponteiro dos minutos)."
+    },
+    {
+      "front": "Termo: Minute",
+      "back": "Defini\u00e7\u00e3o: Uma unidade de tempo que dura 60 segundos (minuto)."
+    },
+    {
+      "front": "Piscar o olho uma vez (blink your eyes once) leva _____ a minute.",
+      "back": "Less than (menos que)."
+    },
+    {
+      "front": "Dormir a noite inteira (sleeping all night) leva _____ a minute.",
+      "back": "More than (mais que)."
+    },
+    {
+      "front": "Escovar os dentes (brush your teeth) leva _____ a minute.",
+      "back": "About (mais ou menos)."
+    },
+    {
+      "front": "Cantar 'Parab\u00e9ns pra voc\u00ea' leva cerca de _____ a minute.",
+      "back": "About (mais ou menos)."
+    },
+    {
+      "front": "Termo: O'clock",
+      "back": "Defini\u00e7\u00e3o: Usado para indicar uma hora exata, quando o ponteiro dos minutos est\u00e1 no 12 (em ponto)."
+    },
+    {
+      "front": "Termo: Quarter past",
+      "back": "Defini\u00e7\u00e3o: Significa que se passaram 15 minutos da hora (e quinze)."
+    },
+    {
+      "front": "Termo: Half past",
+      "back": "Defini\u00e7\u00e3o: Significa que se passaram 30 minutos da hora (e meia)."
+    },
+    {
+      "front": "Termo: Quarter to",
+      "back": "Defini\u00e7\u00e3o: Significa que faltam 15 minutos para a pr\u00f3xima hora (quinze para)."
+    },
+    {
+      "front": "Em um rel\u00f3gio anal\u00f3gico, onde fica o ponteiro dos minutos em $quarter \\ past$?",
+      "back": "No n\u00famero 3."
+    },
+    {
+      "front": "Em um rel\u00f3gio anal\u00f3gico, onde fica o ponteiro dos minutos em $half \\ past$?",
+      "back": "No n\u00famero 6."
+    },
+    {
+      "front": "Em um rel\u00f3gio anal\u00f3gico, onde fica o ponteiro dos minutos em $quarter \\ to$?",
+      "back": "No n\u00famero 9."
+    },
+    {
+      "front": "Para marcar 4:15, o ponteiro comprido deve apontar para o _____.",
+      "back": "3 (quarter past)."
+    },
+    {
+      "front": "Para marcar 10:30, o ponteiro comprido deve apontar para o _____.",
+      "back": "6 (half past)."
+    },
+    {
+      "front": "Para marcar 9:45, o ponteiro comprido aponta para o 9 e o ponteiro curto est\u00e1 perto do _____.",
+      "back": "10."
+    },
+    {
+      "front": "Como chamamos em ingl\u00eas o rel\u00f3gio que usa ponteiros?",
+      "back": "Analog clock (rel\u00f3gio anal\u00f3gico)."
+    },
+    {
+      "front": "Como chamamos em ingl\u00eas o rel\u00f3gio que mostra a hora apenas com n\u00fameros?",
+      "back": "Digital clock (rel\u00f3gio digital)."
+    },
+    {
+      "front": "Como se diz 'moeda' em ingl\u00eas?",
+      "back": "Coin."
+    },
+    {
+      "front": "Como se diz 'centavo' em ingl\u00eas e qual seu s\u00edmbolo?",
+      "back": "Cent ($\u00a2$)."
+    },
+    {
+      "front": "Termo: Exact amount",
+      "back": "Defini\u00e7\u00e3o: A quantia de dinheiro certinha, sem sobrar troco (valor exato)."
+    },
+    {
+      "front": "Qual \u00e9 o pre\u00e7o da 'juice box' (caixa de suco) no material?",
+      "back": "$20\u00a2$."
+    },
+    {
+      "front": "Qual \u00e9 o pre\u00e7o da 'ball' (bola) no material?",
+      "back": "$25\u00a2$."
+    },
+    {
+      "front": "Qual \u00e9 o pre\u00e7o do 'pencil' (l\u00e1pis) no material?",
+      "back": "$20\u00a2$."
+    },
+    {
+      "front": "Qual \u00e9 o pre\u00e7o do 'sandwich' (sandu\u00edche) no material?",
+      "back": "$50\u00a2$."
+    },
+    {
+      "front": "Com $95\u00a2$, quais 3 itens voc\u00ea pode comprar para gastar o valor exato?",
+      "back": "Ball ($25\u00a2$), Sandwich ($50\u00a2$) e Juice Box ($20\u00a2$)."
+    },
+    {
+      "front": "Termo: Add / Addition",
+      "back": "Defini\u00e7\u00e3o: A\u00e7\u00e3o de juntar quantidades para obter um total (somar / adi\u00e7\u00e3o)."
+    },
+    {
+      "front": "Termo: Subtract / Subtraction",
+      "back": "Defini\u00e7\u00e3o: A\u00e7\u00e3o de retirar uma quantidade de outra (subtrair / subtra\u00e7\u00e3o)."
+    },
+    {
+      "front": "Como se chama o resultado de uma conta de adi\u00e7\u00e3o em ingl\u00eas?",
+      "back": "Sum (soma)."
+    },
+    {
+      "front": "Como se chama o resultado de uma conta de subtra\u00e7\u00e3o em ingl\u00eas?",
+      "back": "Difference (diferen\u00e7a)."
+    },
+    {
+      "front": "Na conta armada (em coluna), como chamamos a coluna das dezenas?",
+      "back": "Tens."
+    },
+    {
+      "front": "Na conta armada (em coluna), como chamamos a coluna das unidades?",
+      "back": "Ones."
+    },
+    {
+      "front": "Termo: Regroup",
+      "back": "Defini\u00e7\u00e3o: Trocar 10 unidades por 1 dezena ou 1 dezena por 10 unidades (reagrupar)."
+    },
+    {
+      "front": "No p\u00e1tio da escola havia 37 crian\u00e7as e chegaram mais 25. Qual o total?",
+      "back": "62 crian\u00e7as ($37 + 25 = 62$)."
+    },
+    {
+      "front": "Na conta $37 + 25$, por que precisamos de 'regroup'?",
+      "back": "Porque $7 + 5$ \u00e9 igual a 12 unidades, que formam 1 dezena e 2 unidades."
+    },
+    {
+      "front": "Qual o resultado de $74 + 17$?",
+      "back": "91."
+    },
+    {
+      "front": "Qual o resultado de $28 + 23$?",
+      "back": "51."
+    },
+    {
+      "front": "Qual o resultado de $39 + 20$?",
+      "back": "59."
+    },
+    {
+      "front": "A conta $39 + 20$ precisa de 'regroup'?",
+      "back": "N\u00e3o, pois $9 + 0 = 9$ (n\u00e3o passa de 9)."
+    },
+    {
+      "front": "Qual o resultado de $31 + 19$?",
+      "back": "50."
+    },
+    {
+      "front": "Leo tem 65 gibis e deu 28 para Lizzie. Quantos sobraram?",
+      "back": "37 gibis ($65 - 28 = 37$)."
+    },
+    {
+      "front": "Na conta de subtra\u00e7\u00e3o $65 - 28$, o que fazemos se o 5 \u00e9 menor que o 8?",
+      "back": "Fazemos 'regroup', trocando 1 dezena por 10 unidades."
+    },
+    {
+      "front": "Havia 75 crian\u00e7as no museu, 36 visitam f\u00f3sseis e o resto visita a caverna. Quantas est\u00e3o na caverna?",
+      "back": "39 crian\u00e7as ($75 - 36 = 39$)."
+    },
+    {
+      "front": "Qual o resultado de $78 - 45$?",
+      "back": "33."
+    },
+    {
+      "front": "Qual o resultado de $32 - 13$?",
+      "back": "19."
+    },
+    {
+      "front": "Qual o resultado de $55 - 28$?",
+      "back": "27."
+    },
+    {
+      "front": "Qual o resultado de $67 - 28$?",
+      "back": "39."
+    },
+    {
+      "front": "Na subtra\u00e7\u00e3o $78 - 45$, precisamos fazer 'regroup'?",
+      "back": "N\u00e3o, porque 8 \u00e9 maior que 5."
+    },
+    {
+      "front": "No algoritmo padr\u00e3o ($standard \\ algorithm$), dezenas devem ficar embaixo de _____.",
+      "back": "Dezenas ($tens$)."
+    },
+    {
+      "front": "No algoritmo padr\u00e3o ($standard \\ algorithm$), unidades devem ficar embaixo de _____.",
+      "back": "Unidades ($ones$)."
+    },
+    {
+      "front": "Como se diz 'ponteiro dos minutos' em ingl\u00eas?",
+      "back": "Minute hand."
+    },
+    {
+      "front": "Qual express\u00e3o usamos para indicar ':30' em ingl\u00eas?",
+      "back": "Half past."
+    },
+    {
+      "front": "Qual express\u00e3o usamos para indicar ':45' em ingl\u00eas?",
+      "back": "Quarter to."
+    },
+    {
+      "front": "Como se diz 'problema de hist\u00f3ria' em ingl\u00eas?",
+      "back": "Story problem."
+    }
+  ]
+}

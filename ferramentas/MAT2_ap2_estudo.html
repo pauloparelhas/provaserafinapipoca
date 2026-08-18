@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Study sheet — Math AP2</title>
+<link rel="stylesheet" href="serafina-core.css?v=20260817">
+<style>
+/* ============================================================
+   ESTUDAR — Matematica 2tri AP2 (Time, Money, Adding/Subtracting).
+   Casca igual ao MAT2_estudo.html modo 1, sem abas (um so modo,
+   dado o prazo — prova no dia seguinte).
+   ============================================================ */
+:root{--fs:1;--bg:#0d0b1e;--bg2:#102a3a;--ink:#f0f9ff;--soft:rgba(255,255,255,.55);--card:#13243a;--line:rgba(255,255,255,.12);--accent:#a78bfa;--accent2:#fbbf24;--tr:#fcd34d;--rad:20px}
+body.light{--bg:#e0f2fe;--bg2:#dbeafe;--ink:#0c1e33;--soft:rgba(0,0,0,.5);--card:#fff;--line:rgba(0,0,0,.1);--tr:#b45309}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.95rem*var(--fs));color:var(--accent);flex:1;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.05rem;font-weight:800;cursor:pointer;padding:0 8px}
+.iconbtn:active{transform:scale(.9)}
+.dicabtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px;opacity:.62}
+.dicabtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
+body.show-tr .dicabtn{opacity:1;background:rgba(252,211,77,.2)}
+.wrap{flex:1;width:100%;max-width:640px;margin:0 auto;padding:14px 12px 44px}
+.hint{text-align:center;font-size:.82rem;font-weight:800;color:var(--soft);margin:2px 0 12px;line-height:1.4}
+.foot{text-align:center;color:var(--soft);font-weight:800;font-size:.82rem;margin-top:10px}
+.tr{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.82em}
+body.show-tr .tr{display:block}
+
+.toolrow{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
+.toolbtn{border:2px solid var(--line);background:transparent;color:var(--soft);font-weight:800;font-size:.78rem;border-radius:16px;padding:7px 14px;cursor:pointer;font-family:inherit;min-height:44px}
+.toolbtn:active{transform:scale(.95)}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);box-shadow:0 10px 30px rgba(0,0,0,.28);margin-bottom:16px;overflow:hidden}
+.sechead{display:flex;align-items:center;gap:10px;padding:15px 16px;cursor:pointer;user-select:none}
+.sechead .si{font-size:1.7rem;filter:drop-shadow(0 4px 7px rgba(0,0,0,.3))}
+.sechead .st{flex:1;font-weight:900;font-size:calc(1.06rem*var(--fs));line-height:1.2}
+.sechead .st .str{display:none;color:var(--tr);font-style:italic;font-weight:700;font-size:.78rem}
+body.show-tr .sechead .st .str{display:block}
+.sechead .chev{font-size:1rem;color:var(--soft);transition:transform .25s}
+.sec.open .chev{transform:rotate(180deg)}
+.secbody{display:none;padding:0 16px 16px}
+.sec.open .secbody{display:block}
+.listen{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border:2px solid var(--accent);background:transparent;color:var(--accent);font-weight:800;font-size:.85rem;border-radius:18px;padding:6px 16px;cursor:pointer;font-family:inherit;margin:2px 0 10px}
+.listen:active{transform:scale(.95)}
+.line{margin:8px 0 0;font-weight:700;font-size:calc(.96rem*var(--fs));line-height:1.35;display:flex;gap:8px}
+.line .lk{flex-shrink:0}
+.cols{display:flex;gap:10px;flex-wrap:wrap}
+.col{flex:1;min-width:130px;border:2px solid var(--line);border-radius:14px;padding:11px 13px}
+.col h4{font-size:.92rem;font-weight:900;margin-bottom:7px}
+.col .ci{font-weight:800;font-size:calc(.9rem*var(--fs));margin:5px 0;line-height:1.25}
+.tip{display:flex;gap:9px;align-items:flex-start;margin:9px 0;font-weight:800;font-size:calc(.97rem*var(--fs));line-height:1.35}
+.tip .tk{flex-shrink:0}
+.qa{border-left:3px solid var(--accent2);padding:6px 0 6px 12px;margin:11px 0}
+.qa .qq{font-weight:900;font-size:calc(.98rem*var(--fs));line-height:1.3}
+.qa .aa{font-weight:900;color:var(--accent);font-size:calc(1rem*var(--fs));margin-top:4px}
+.qa .aa .ar::before{content:"→ "}
+/* grade de contas (adicao/subtracao/relogio) */
+.factgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin:8px 0}
+.fact{border:2px solid var(--line);border-radius:12px;padding:9px 10px;text-align:center;font-weight:900;font-size:calc(1rem*var(--fs))}
+.fact .fr{color:var(--accent);font-size:.85em;margin-top:2px}
+.fact.regroup{border-color:var(--accent2)}
+.fact .rg{font-size:.62rem;font-weight:800;color:var(--accent2);letter-spacing:.3px;margin-top:2px}
+
+.sombtn{transition:opacity .15s}
+.sombtn.off{opacity:.45;background:rgba(248,113,113,.18)}
+@media(max-width:420px){
+  .topbar{flex-wrap:wrap;gap:4px}
+  .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px}
+  .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Home · Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Study sheet &mdash; AP2</span>
+    <button class="iconbtn dicabtn" id="dica" title="Português" onclick="toggleTr()"><svg class="flagicon" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false"><rect width="20" height="14" rx="2" fill="#009C3B"/><polygon points="10,2 18,7 10,12 2,7" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/></svg><span class="ft">PT</span></button>
+    <button class="iconbtn" title="Smaller text · Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Bigger text · Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound · Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Theme · Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen · Tela cheia" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="wrap">
+    <div class="hint">Tap a title to open or close it, tap &#128266; to listen, and tap the flag<svg class="flagicon" width="16" height="11" viewBox="0 0 20 14" aria-hidden="true" focusable="false" style="vertical-align:-1px;margin-left:3px"><rect width="20" height="14" rx="2" fill="#009C3B"/><polygon points="10,2 18,7 10,12 2,7" fill="#FFDF00"/><circle cx="10" cy="7" r="3.3" fill="#002776"/></svg> for the Portuguese.
+      <span class="tr">Toque no título para abrir/fechar, no 🔊 para ouvir em inglês e na bandeira para ver a tradução.</span></div>
+    <div class="toolrow">
+      <button class="toolbtn" onclick="allSec(true)">&#11015;&#65039; Open all</button>
+      <button class="toolbtn" onclick="allSec(false)">&#11014;&#65039; Close all</button>
+    </div>
+    <div id="sheetContent"></div>
+    <div class="foot">Everything here comes from Units 3 &amp; 7 of the book. &#128218;<span class="tr">Tudo aqui vem das Units 3 e 7 do livro.</span></div>
+  </div>
+</div>
+
+<script>
+function esc(s){return String(s).replace(/<[^>]*>/g,'').replace(/"/g,'&quot;').replace(/'/g,"\\'");}
+function row(r){return '<div class="line"><span class="lk">'+r[0]+'</span><span><b>'+r[1]+'</b> — '+r[2]+
+  (r[3]?'<span class="tr">\u{1F1E7}\u{1F1F7} '+r[3]+'</span>':'')+'</span></div>';}
+
+/* ============ CONTEUDO (roteiro_ap2.md) ============ */
+const MINUTE=[
+ ["\u{1F440}","Blink your eyes once","piscar o olho uma vez","less than a minute","menos que um minuto"],
+ ["\u{1F44F}","Clap your hands once","bater palma uma vez","less than a minute","menos que um minuto"],
+ ["\u{1F9B7}","Brush your teeth","escovar os dentes","about a minute","mais ou menos um minuto"],
+ ["\u{1F522}","Count slowly from 1 to 60","contar devagar de 1 até 60","about a minute — that's exactly what a minute is: 60 seconds","mais ou menos um minuto — é exatamente isso que um minuto é: 60 segundos"],
+ ["\u{1F634}","Sleep all night","dormir a noite inteira","more than a minute","mais que um minuto"],
+ ["\u{1F3EB}","A whole day at school","um dia inteiro de aula","more than a minute","mais que um minuto"]
+];
+const MINUTE_say="Some things take less than a minute, like blinking your eyes once. Some things take about a minute, like brushing your teeth. Some things take more than a minute, like sleeping all night.";
+
+const CLOCK_WORDS=[
+ ["\u{1F551}","o'clock","em ponto","the minute hand points to the 12","o ponteiro dos minutos aponta pro 12"],
+ ["\u{1F551}","quarter past","e quinze","the minute hand points to the 3","o ponteiro dos minutos aponta pro 3"],
+ ["\u{1F551}","half past","e meia","the minute hand points to the 6","o ponteiro dos minutos aponta pro 6"],
+ ["\u{1F551}","quarter to","quinze para","the minute hand points to the 9 — and the hour hand is almost at the NEXT hour","o ponteiro dos minutos aponta pro 9 — e o das horas já está quase na PRÓXIMA hora"]
+];
+const CLOCK_WORDS_say="O'clock: the minute hand points to the 12. Quarter past: the minute hand points to the 3. Half past: the minute hand points to the 6. Quarter to: the minute hand points to the 9.";
+
+const CLOCKS=[["4:15","3"],["6:15","3"],["9:45","9"],["12:45","9"],["11:00","12"],["10:30","6"],["5:15","3"],["10:45","9"],["7:15","3"]];
+
+const COINS=[
+ ["\u{1FA99}","penny","um centavo","1¢"],
+ ["\u{1FA99}","nickel","cinco centavos","5¢"],
+ ["\u{1FA99}","dime","dez centavos","10¢"],
+ ["\u{1FA99}","quarter","vinte e cinco centavos","25¢"]
+];
+const COINS_say="Penny is one cent. Nickel is five cents. Dime is ten cents. Quarter is twenty-five cents.";
+
+const ADDFACTS=[["74","+17","91",true],["28","+23","51",true],["39","+20","59",false],["31","+19","50",true]];
+const SUBFACTS=[["78","-45","33",false],["32","-13","19",true],["55","-28","27",true],["67","-28","39",true]];
+
+const DICAS=[
+ ["\u{1F550}","<b>Quarter to</b> means the hour hand is almost at the NEXT hour, not the one written. In <b>9:45</b>, the hour hand is almost at 10.","<b>Quarter to</b> quer dizer que o ponteiro das horas está quase na PRÓXIMA hora, não na escrita. Em <b>9:45</b>, o ponteiro está quase no 10."],
+ ["\u{1F4B0}","A <b>quarter</b> is worth <b>25¢</b>, the same as 2 dimes + 1 nickel. Both make the same amount.","Um <b>quarter</b> vale <b>25¢</b>, o mesmo que 2 dimes + 1 nickel. Os dois dão o mesmo valor."],
+ ["\u{1F522}","<b>Regroup</b> in addition: when the ones add up to 10 or more, 1 ten \"moves up\".","<b>Regroup</b> na adição: quando as unidades somam 10 ou mais, 1 dezena \"sobe\"."],
+ ["\u{1F522}","<b>Regroup</b> in subtraction: when the top ones digit is smaller than the bottom one, trade 1 ten for 10 ones.","<b>Regroup</b> na subtração: quando a unidade de cima é menor que a de baixo, troca 1 dezena por 10 unidades."],
+ ["\u{1F4CF}","<b>Tens</b> always line up under <b>tens</b>, and <b>ones</b> under <b>ones</b> — never mix the columns.","<b>Tens</b> (dezenas) sempre ficam embaixo de <b>tens</b>, e <b>ones</b> (unidades) embaixo de <b>ones</b> — nunca misture as colunas."]
+];
+
+const FAQ=[
+ ["What does \"about a minute\" mean?","Not exactly a minute, but close to it — not much less, not much more.","O que significa \"about a minute\"? Não é exatamente um minuto, mas perto disso — nem muito menos, nem muito mais."],
+ ["What time is shown when the minute hand points to the 9 and the hour hand is almost at 10?","9:45 (quarter to ten).","Que horas são quando o ponteiro dos minutos aponta pro 9 e o das horas está quase no 10? 9:45 (quarter to ten)."],
+ ["How much is a quarter plus a dime?","35 cents.","Quanto é um quarter mais um dime? 35 centavos."],
+ ["What is \"regroup\"?","Trading 10 ones for 1 ten (in addition), or 1 ten for 10 ones (in subtraction).","O que é \"regroup\"? Trocar 10 unidades por 1 dezena (na adição), ou 1 dezena por 10 unidades (na subtração)."],
+ ["What is 37 + 25?","62 — you regroup, because 7 + 5 = 12 ones.","Quanto é 37 + 25? 62 — precisa reagrupar, porque 7 + 5 = 12 unidades."],
+ ["What is 65 − 28?","37 — you regroup, because 5 is smaller than 8.","Quanto é 65 − 28? 37 — precisa reagrupar, porque 5 é menor que 8."]
+];
+
+function clockCard(c){return '<div class="fact"><div>'+c[0]+'</div><div class="fr">minute hand &#8594; '+c[1]+'</div></div>';}
+function factCard(f){return '<div class="fact'+(f[3]?' regroup':'')+'"><div>'+f[0]+' '+f[1]+'</div><div class="fr">= '+f[2]+'</div>'+(f[3]?'<div class="rg">regroup</div>':'')+'</div>';}
+
+function buildSheet(){
+  var mkMinute=function(){return '<button class="listen" onclick="say(\''+esc(MINUTE_say)+'\')">&#128266; Listen</button>'
+    +MINUTE.map(function(m){return '<div class="line"><span class="lk">'+m[0]+'</span><span><b>'+m[1]+'</b> — '+m[3]
+      +'<span class="tr">'+m[2]+' — '+m[4]+'</span></span></div>';}).join('');};
+  var mkClockWords=function(){return '<button class="listen" onclick="say(\''+esc(CLOCK_WORDS_say)+'\')">&#128266; Listen</button>'
+    +CLOCK_WORDS.map(function(c){return '<div class="line"><span class="lk">'+c[0]+'</span><span><b>'+c[1]+'</b> — '+c[3]
+      +'<span class="tr">'+c[2]+' — '+c[4]+'</span></span></div>';}).join('')
+    +'<div class="cols" style="margin-top:10px">'
+    +'<div class="col"><h4>Clocks in the book</h4>'+CLOCKS.map(function(c){return '<div class="ci">'+c[0]+' — minute hand on the '+c[1]+'</div>';}).join('')+'</div></div>';};
+  var mkMoney=function(){return '<button class="listen" onclick="say(\''+esc(COINS_say)+'\')">&#128266; Listen</button>'
+    +COINS.map(function(c){return '<div class="line"><span class="lk">'+c[0]+'</span><span><b>'+c[1]+'</b> = '+c[3]
+      +'<span class="tr">'+c[2]+' = '+c[3]+'</span></span></div>';}).join('')
+    +'<div class="col" style="margin-top:10px"><h4>What Can I Buy? (95&cent;)</h4>'
+    +'<div class="ci">ball (25&cent;) + sandwich (50&cent;) + juice box OR pencil (20&cent;) = 95&cent;<span class="tr">bola (25&cent;) + sanduíche (50&cent;) + suco OU lápis (20&cent;) = 95&cent;</span></div></div>';};
+  var mkAdd=function(){return '<button class="listen" onclick="say(\'37 plus 25 equals 62. In the schoolyard: 37 children plus 25 more children equals 62 children.\')">&#128266; Listen</button>'
+    +'<div class="line"><span class="lk">\u{1F3EB}</span><span><b>37 children + 25 more children = 62 children</b> (regroup: 7+5=12 ones)'
+    +'<span class="tr">37 crianças + 25 crianças a mais = 62 crianças (reagrupa: 7+5=12 unidades)</span></span></div>'
+    +'<div class="factgrid">'+ADDFACTS.map(factCard).join('')+'</div>';};
+  var mkSub=function(){return '<button class="listen" onclick="say(\'65 minus 28 equals 37. Leo had 65 comic books and gave 28 to Lizzie.\')">&#128266; Listen</button>'
+    +'<div class="line"><span class="lk">\u{1F4DA}</span><span><b>65 comic books &minus; 28 given away = 37 left</b> (regroup: 5&lt;8)'
+    +'<span class="tr">65 gibis &minus; 28 dados = 37 sobram (reagrupa: 5&lt;8)</span></span></div>'
+    +'<div class="factgrid">'+SUBFACTS.map(factCard).join('')+'</div>';};
+  var dicasBody=DICAS.map(function(t){return '<div class="tip"><span class="tk">'+t[0]+'</span><span>'+t[1]
+    +'<span class="tr">\u{1F1E7}\u{1F1F7} '+t[2]+'</span></span></div>';}).join('');
+  var faqBody=FAQ.map(function(q){return '<div class="qa"><div class="qq">'+q[0]+'</div>'
+    +'<div class="aa"><span class="ar">'+q[1]+'</span></div>'
+    +'<div class="tr">'+q[2]+'</div></div>';}).join('');
+  var sections=[
+   {ic:"\u{23F1}\u{FE0F}",t:"Units of time",tpt:"less, about, more than a minute",body:mkMinute(),open:false},
+   {ic:"\u{1F551}",t:"Telling time",tpt:"o'clock, quarter past/to, half past",body:mkClockWords(),open:false},
+   {ic:"\u{1FA99}",t:"Money",tpt:"as moedas e os centavos",body:mkMoney(),open:false},
+   {ic:"\u{2795}",t:"Adding 2-digit numbers",tpt:"somar com reagrupamento",body:mkAdd(),open:false},
+   {ic:"\u{2796}",t:"Subtracting 2-digit numbers",tpt:"subtrair com reagrupamento",body:mkSub(),open:false},
+   {ic:"⭐",t:"Tips for the test",tpt:"dicas para a prova",body:dicasBody,open:false},
+   {ic:"❓",t:"Questions that usually come up",tpt:"perguntas que costumam cair",body:faqBody,open:false}
+  ];
+  $('sheetContent').innerHTML=sections.map(function(s,i){return '<div class="sec'+(s.open?' open':'')+'" id="sec'+i+'">'
+     +'<div class="sechead" onclick="toggleSec('+i+')">'
+     +'<span class="si">'+s.ic+'</span>'
+     +'<span class="st">'+s.t+(s.tpt?'<span class="str">'+s.tpt+'</span>':'')+'</span>'
+     +'<span class="chev">&#9660;</span></div>'
+     +'<div class="secbody">'+s.body+'</div></div>';}).join('');
+}
+function toggleSec(i){$('sec'+i).classList.toggle('open');}
+function allSec(open){document.querySelectorAll('.sec').forEach(function(s){s.classList.toggle('open',open);});}
+function $(id){return document.getElementById(id);}
+buildSheet();
+</script>
+<script>window.SERA_CFG={trKey:'mat2ap2_tr',lang:'en-US',rate:.85,somKey:'mat2ap2_som'};</script>
+<script src="serafina-core.js?v=20260817"></script>
+<script>window.SERA_ACCENT={accent:'#a78bfa'};</script>
+<script src="sera_theme.js?v=20260817"></script>
+</body>
+</html>

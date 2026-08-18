@@ -1,0 +1,16 @@
+{
+  "notebook": "b8d614c3-44ad-478b-ac5e-4b68aeadda83",
+  "fontes": {
+    "roteiro": true,
+    "video_prompt": true
+  },
+  "artefatos": {
+    "quiz": true,
+    "flashcards": true,
+    "video": true
+  },
+  "baixados": {
+    "quiz": "ferramentas\\media\\quiz_mat2_ap2_nlm.json",
+    "flashcards": "ferramentas\\media\\flashcards_mat2_ap2_nlm.json"
+  }
+}
