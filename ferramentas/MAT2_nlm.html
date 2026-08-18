@@ -200,7 +200,7 @@ function showTab(k){
 
 Promise.all([
   fetch('media/quiz_mat2_nlm.json?v=20260818b').then(function(r){return r.json();}),
-  fetch('media/flashcards_mat2_nlm.json?v=20260818b').then(function(r){return r.json();})
+  fetch('media/flashcards_mat2_nlm.json?v=20260818c').then(function(r){return r.json();})
 ]).then(function(j){
   QZ=j[0]; RV=j[1];
   comecar(); montarRev();

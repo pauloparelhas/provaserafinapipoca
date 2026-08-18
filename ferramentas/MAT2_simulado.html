@@ -305,7 +305,7 @@ body.show-tr .endbtn .etr{display:block}
 
    Tudo ancorado em trabalho/2tri_matematica/_roteiro.md (9 paginas do
    caderno da Unit 9 + as instrucoes da AP1 postadas pela escola).
-   Temas (th): figuras | lados | objetos | simetria | padroes | palavras
+   Temas (th): figuras | lados | objetos | simetria | padroes
 
    REGRA DOS DISTRATORES: toda opcao errada e um termo que EXISTE no
    material (outra figura da unidade, outro numero de lados, outro
@@ -393,18 +393,6 @@ const MC = [
  {th:'padroes',fig:"\u{1F9E9}",en:"The quilt is a grid with how many <b>blocks</b>?",pt:"A colcha é uma grade com quantos blocos?",opts:[["9 blocks, 3 by 3",1,"9 blocos, 3 por 3"],["6 blocks, 2 by 3",0,""],["4 blocks, 2 by 2",0,""]]},
  {th:'padroes',fig:"\u{2B07}\u{FE0F}",en:"Start in <b>Block 1</b> and go straight <b>down two blocks</b>. Which block are you in?",pt:"Comece no bloco 1 e desça dois blocos. Em que bloco você está?",opts:[["Block 7",1,"1 → 4 → 7"],["Block 3",0,""],["Block 2",0,""]]},
  {th:'padroes',fig:"\u{2B50}",en:"In the quilt, drawing a <b>triangle on each edge of the pentagon</b> makes a design that looks like a…",pt:"Na colcha, desenhar um triângulo em cada lado do pentágono faz um desenho que parece uma…",opts:[["Star",1,"Estrela"],["Circle",0,"Círculo"],["Door",0,"Porta"]]},
-
- /* ===== AS PALAVRAS EM INGLES ===== */
- {th:'palavras',fig:"\u{1F4D6}",en:"<b>Side</b> em português é…",pt:"",opts:[["Lado",1,""],["Cantinho",0,"isso é corner"],["Metade",0,"isso é half"]]},
- {th:'palavras',fig:"\u{1F4D6}",en:"<b>Vertex</b> em português é…",pt:"",opts:[["Vértice (o cantinho)",1,""],["Lado",0,"isso é side"],["Padrão",0,"isso é pattern"]]},
- {th:'palavras',fig:"\u{1F4D6}",en:"<b>Symmetry</b> em português é…",pt:"",opts:[["Simetria",1,""],["Simpatia",0,""],["Semelhança",0,""]]},
- {th:'palavras',fig:"\u{1F4D6}",en:"<b>Flip</b> em português é…",pt:"",opts:[["Virar, como no espelho",1,""],["Deslizar",0,"isso é slide"],["Girar",0,"isso é turn"]]},
- {th:'palavras',fig:"\u{1F4D6}",en:"<b>Turn</b> em português é…",pt:"",opts:[["Girar, como o ponteiro do relógio",1,""],["Virar no espelho",0,"isso é flip"],["Andar para o lado",0,"isso é slide"]]},
- {th:'palavras',fig:"\u{1F4D6}",en:"<b>Slide</b> em português é…",pt:"",opts:[["Deslizar, andar para o lado",1,""],["Girar",0,"isso é turn"],["Dobrar",0,"isso é fold"]]},
- {th:'palavras',fig:"\u{1F4D6}",en:"<b>Figure</b>, na aula de matemática, é…",pt:"",opts:[["Figura geométrica",1,""],["Pessoa de um livro",0,""],["Número",0,""]]},
- {th:'palavras',fig:"\u{1F4D6}",en:"<b>Matching part</b> em português é…",pt:"",opts:[["A metade que combina",1,""],["O maior lado",0,""],["O nome da figura",0,""]]},
- {th:'palavras',fig:"\u{1F4D6}",en:"<b>How many sides?</b> quer dizer…",pt:"",opts:[["Quantos lados?",1,""],["Quantos vértices?",0,"isso é how many vertices"],["De que cor?",0,""]]},
- {th:'palavras',fig:"\u{1F4D6}",en:"<b>Sort the figures</b> quer dizer…",pt:"",opts:[["Separe as figuras em grupos",1,""],["Desenhe as figuras",0,""],["Conte as figuras",0,""]]}
 ];
 
 /* ---- VERDADEIRO OU FALSO ---- */
@@ -531,11 +519,10 @@ const THEMES=[
  {k:'lados',    en:'Sides & vertices',   pt:'contar lados e vértices',     emo:'\u{1F4CD}'},
  {k:'objetos',  en:'Figures around us',  pt:'as figuras no dia a dia',     emo:'\u{1F441}\u{FE0F}'},
  {k:'simetria', en:'Symmetry',           pt:'simetria e a linha do espelho', emo:'\u{1FA9E}'},
- {k:'padroes',  en:'Slide, flip, turn',  pt:'padrões e a colcha',          emo:'\u{1F504}'},
- {k:'palavras', en:'The English words',  pt:'as palavras da unidade',      emo:'\u{1F4D6}'}
+ {k:'padroes',  en:'Slide, flip, turn',  pt:'padrões e a colcha',          emo:'\u{1F504}'}
 ];
 /* pesos — a AP1 diz que o eixo e figura, lados/vertices e simetria */
-const TH_WEIGHT={figuras:20,lados:24,objetos:16,simetria:22,padroes:10,palavras:8};
+const TH_WEIGHT={figuras:22,lados:26,objetos:18,simetria:24,padroes:10};
 
 /* ================= ENGINE ================= */
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
