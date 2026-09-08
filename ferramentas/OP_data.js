@@ -2687,14 +2687,16 @@ var CARTOES = [
     questões, e não para um tipo só. A análise das seis provas mostrou que
     o erro típico não é ignorância: é responder à pergunta que a criança
     esperava, e não à que foi feita. Os distratores são construídos para
-    isso — a alternativa errada costuma ser verdadeira sobre o texto, só
-    não é o que o comando pediu.
+    isso — a alternativa errada costuma falar de algo que está no texto,
+    mas não é o que o comando pediu. (Nota de redação: para a criança,
+    NUNCA se diz que a errada "é verdadeira" — isso soa como permissão
+    para marcar. Diz-se que ela não responde à pergunta que foi feita.)
 
     Não tem `exemplo` nem `agora`: é uma ordem de leitura, não um tipo de
     questão. Quem treina esse gesto treina em todas as outras. */
  {k:'comando', titulo:'Antes de tudo: o que a pergunta está pedindo', min:3, mestre:true,
   truque:'Leia a pergunta ANTES do texto. Ache a palavra que manda — e responda exatamente ela.',
-  texto:'Este é o truque que vale para as quinze perguntas da prova. A resposta errada quase sempre é uma frase verdadeira; ela só não é o que a pergunta pediu. Quem lê o comando com atenção já sai procurando a coisa certa.',
+  texto:'Este truque vale para as quinze perguntas da prova. As respostas erradas costumam falar de coisas que aparecem no texto, mas não respondem à pergunta que foi feita. Quem lê a pergunta com atenção já sai procurando a coisa certa.',
   extras:['A ordem que funciona: primeiro a pergunta, depois o texto, depois a pergunta de novo com as quatro respostas.',
           'Ler a pergunta antes liga a sua cabeça no modo procurar. Aí, quando você lê o texto, já sabe o que está caçando.',
           'Ache a palavra que manda e passe o dedo nela: POR QUE pede um motivo. QUAL pede escolher um. QUANTOS pede contar. O QUE pede a coisa. COMPLETE pede encaixar. MARQUE APENAS pede olhar todas.',
