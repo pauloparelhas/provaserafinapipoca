@@ -52,3 +52,9 @@ ferramentas/media/*_v2.mp4
 
 # --- Cache do Python dos scripts de geracao ---
 __pycache__/
+
+# --- Olimpiada de Portugues: provas anteriores baixadas do site oficial ---
+# Insumo bruto (12 PDFs ~13 MB + PNGs por pagina). Fica local; o produto
+# publicado nao carrega prova de terceiros, so o material derivado.
+olimpiadas/_fontes/
+olimpiadas/_fontes_md/
