@@ -1814,6 +1814,571 @@ var ITENS = [
  porque:'O L está em LUA, em BALA e em ESCOLA, e é a letra que fica entre o K e o M no alfabeto. Só o L passa nas quatro pistas.',
  proximo:'Depois de achar a letra que aparece nas palavras, cante o alfabeto para conferir a pista do lugar. É ela que decide.'},
 
+
+/* ===== reserva_2023F2 ===== */
+{id:'23F2Q1', eixo:'buraco', origem:'Olimpíada 2023 · 2ª fase · questão 1',
+ pede:'QUE PALAVRA COMPLETA A FRASE A SEGUIR?',
+ quadro:'ONTEM, PAPAI E MAM&Atilde;E ME DISSERAM QUE, DAQUI A ALGUNS MESES, <span class="bl">_______</span> O MEU IRM&Atilde;ZINHO!',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'NASCERAM.', no:'O ONTEM do começo puxa para o que já passou, e é por isso que essa dá vontade. Mas o ONTEM é do DISSERAM: quem falou ontem foram papai e mamãe. Nascer é DAQUI A ALGUNS MESES, ainda vai acontecer.'},
+  {t:'NASCERÃO.', no:'NASCERÃO é para mais de um bebê, e na frase é O MEU IRMÃZINHO, um só. A diferença para a certa é o til, e é aí que quase todo mundo escorrega.'},
+  {t:'NASCI.', no:'NASCI é eu, e já aconteceu. Quem vai nascer é o irmãzinho, e daqui a alguns meses.'},
+  {t:'NASCERÁ.', ok:1}
+ ],
+ dica:'Duas pistas mandam na frase: DAQUI A ALGUNS MESES (ainda vai acontecer) e O MEU IRMÃZINHO (é um só). Ponha cada palavra no buraco e veja se as duas fecham.',
+ truque:'Ponha cada palavra no buraco e leia a frase inteira, do começo.',
+ visual:'<p class="vx"><span class="mk">DAQUI A ALGUNS MESES</span> &rarr; ainda vai acontecer &nbsp;&middot;&nbsp; <span class="mk">O MEU IRM&Atilde;ZINHO</span> &rarr; &eacute; um s&oacute;</p>'+
+        '<div class="pcs"><span class="pc bad">NASCERAM</span><span class="arw">&rarr;</span><span class="pc bad">j&aacute; aconteceu</span></div>'+
+        '<div class="pcs"><span class="pc bad">NASCER&Atilde;O</span><span class="arw">&rarr;</span><span class="pc bad">mais de um</span></div>'+
+        '<div class="pcs"><span class="pc hit">NASCER&Aacute;</span><span class="arw">&rarr;</span><span class="pc hit">vai acontecer &middot; um s&oacute;</span></div>',
+ porque:'A frase diz DAQUI A ALGUNS MESES, então ainda vai acontecer. E diz O MEU IRMÃZINHO, que é um só. NASCERÁ é a única que fecha as duas coisas ao mesmo tempo.',
+ proximo:'Quando a frase tem duas pistas, confira as duas na palavra que você escolheu. Passar em uma só não basta.'},
+
+{id:'23F2Q2', eixo:'ler', origem:'Olimpíada 2023 · 2ª fase · questão 2',
+ texto:['SOU UM PEQUENO MUNDO;',
+        'MOVO-ME, ROLO E DANÇO',
+        'POR ESTE CÉU PROFUNDO;',
+        'POR SORTE DEUS ME DEU',
+        'MOVER-ME SEM DESCANSO,',
+        'EM TORNO DE OUTRO MUNDO,',
+        'QUE INDA É MAIOR DO QUE EU.'],
+ pede:'QUE NOME PODERÍAMOS DAR A ESTE TRECHO DO POEMA O UNIVERSO, DO OLAVO BILAC?',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'AS ESTRELAS.', no:'Estrela fica no céu, e por isso essa é a mais tentadora de todas. Mas quem fala no poema é UM só — SOU UM PEQUENO MUNDO — e AS ESTRELAS são muitas. E estrela não fica dando voltas em volta de outro mundo.'},
+  {t:'A LUA.', ok:1},
+  {t:'O AVIÃO.', no:'O avião voa no céu e não para quieto, essa parte combina. Mas avião não é um pequeno mundo, e ele não dá voltas em volta de um mundo maior.'},
+  {t:'AS FOLHAS.', no:'Folha rola e dança no vento, e essa parte engana mesmo. Só que folha fica no chão, não no CÉU PROFUNDO, e são muitas, não uma só.'}
+ ],
+ dica:'Quem está falando dá três pistas sobre si: é UM só, está no céu e dá voltas em volta de outro mundo maior. Procure quem faz as três.',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[0,2,5,6],
+ visual:'<p class="vx"><span class="mk">SOU UM PEQUENO MUNDO</span> &rarr; &eacute; um s&oacute;</p>'+
+        '<p class="vx"><span class="mk">POR ESTE C&Eacute;U PROFUNDO</span> &rarr; est&aacute; no c&eacute;u</p>'+
+        '<p class="vx"><span class="mk">EM TORNO DE OUTRO MUNDO, QUE INDA &Eacute; MAIOR DO QUE EU</span> &rarr; d&aacute; voltas em volta de um maior</p>'+
+        '<div class="pcs"><span class="pc hit">A LUA</span><span class="arw">&rarr;</span><span class="pc hit">fecha as tr&ecirc;s</span></div>'+
+        '<div class="pcs"><span class="pc bad">AS ESTRELAS</span><span class="arw">&rarr;</span><span class="pc bad">s&atilde;o muitas e n&atilde;o d&atilde;o voltas</span></div>',
+ porque:'A Lua é uma só, fica no céu e dá voltas em volta da Terra, que é um mundo maior do que ela. As três pistas do poema fecham só com a Lua.',
+ proximo:'Junte TODAS as pistas do texto antes de marcar. Uma resposta pode fechar uma pista e brigar com a outra.'},
+
+{id:'23F2Q3', eixo:'letras', origem:'Olimpíada 2023 · 2ª fase · questão 3',
+ pede:'SE MISTURARMOS TODAS AS LETRAS DAS DUAS PALAVRAS A SEGUIR, QUE OUTRA PALAVRA OBTEREMOS?',
+ quadro:'<b>CANETA</b> &nbsp;&nbsp;&nbsp;&nbsp; <b>UVA</b>',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'ACENTUAR.', no:'Conte: as duas palavras juntas dão 9 letras, e ACENTUAR tem 8. E ela ainda pede um R, que não existe nem em CANETA nem em UVA.'},
+  {t:'ACENAVA.', no:'ACENAVA tem só 7 letras. Sobram o T e o U na mesa — e peça que sobra quer dizer palavra errada.'},
+  {t:'ACENTAVAM.', no:'Essa é a mais perigosa: tem 9 letras, igualzinho ao monte. Mas ela pede um M, que ninguém deu, e deixa o U sem uso. Só riscando letra por letra dá para ver.'},
+  {t:'ACENTUAVA.', ok:1}
+ ],
+ dica:'Escreva as letras de CANETA e as de UVA juntas e conte quantas são. Depois escreva a palavra da alternativa e risque uma letra do monte para cada letra dela.',
+ truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.',
+ visual:'<div class="pcs"><span class="pc">C</span><span class="pc">A</span><span class="pc">N</span><span class="pc">E</span><span class="pc">T</span><span class="pc">A</span><span class="pc">U</span><span class="pc">V</span><span class="pc">A</span><span class="arw">&rarr;</span><span class="pc hit">9 letras</span></div>'+
+        '<div class="pcs"><span class="pc hit">A</span><span class="pc hit">C</span><span class="pc hit">E</span><span class="pc hit">N</span><span class="pc hit">T</span><span class="pc hit">U</span><span class="pc hit">A</span><span class="pc hit">V</span><span class="pc hit">A</span></div>'+
+        '<p class="vx">ACENTUAVA gasta as nove, inclusive os <b>tr&ecirc;s A</b>. Nada sobrou, nada faltou.</p>'+
+        '<div class="pcs"><span class="pc bad">ACENTUA<b>R</b></span><span class="pc bad">ACENTAVA<b>M</b></span><span class="arw">&rarr;</span><span class="pc bad">pedem letra que ningu&eacute;m deu</span></div>',
+ porque:'CANETA e UVA juntas dão nove letras: três A, mais C, E, N, T, U e V. ACENTUAVA usa exatamente essas nove, uma vez cada.',
+ proximo:'Conte primeiro quantas letras o monte tem. A alternativa com número de letras diferente já cai sem precisar conferir uma por uma.'},
+
+{id:'23F2Q4', eixo:'letras', origem:'Olimpíada 2023 · 2ª fase · questão 4',
+ enun:'COMPLETE OS QUADRADINHOS ABAIXO COM O NOME DOS ANIMAIS, COLOCANDO UMA LETRA EM CADA QUADRADINHO:',
+ quadro:'OS TR&Ecirc;S ANIMAIS DESENHADOS: <b>MACACO</b> &ndash; <b>GIRAFA</b> &ndash; <b>OVELHA</b>'+
+        '<div class="sep"></div>NA CRUZADINHA, UM NOME FICA EM P&Eacute;, COM 6 QUADRADINHOS. OS OUTROS DOIS FICAM DEITADOS, COM 6 QUADRADINHOS CADA UM.'+
+        '<div class="sep"></div>CADA NOME DEITADO <b>TERMINA</b> DENTRO DO NOME EM P&Eacute;: UM NO 2&ordm; QUADRADINHO, O OUTRO NO 4&ordm;.'+
+        '<div class="sep"></div>A FLECHA APONTA O <b>6&ordm;</b> QUADRADINHO DO NOME EM P&Eacute;, QUE &Eacute; O &Uacute;LTIMO.',
+ pede:'QUAL É A LETRA QUE DEVERÁ FICAR NO QUADRADINHO INDICADO COM A FLECHA?',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas: aqui ela está com quatro, como na prova de hoje, e os três animais que na prova aparecem só desenhados (macaco, girafa e ovelha) vêm com o nome escrito, junto com o desenho da cruzadinha contado em palavras.',
+ opts:[
+  {t:'A.', no:'A é a letra dos dois cruzamentos, onde GIRAFA e OVELHA terminam. Mas a flecha não aponta o cruzamento: ela aponta o último quadradinho do nome em pé.'},
+  {t:'M.', no:'M é a PRIMEIRA letra de MACACO. A flecha está lá embaixo, no sexto quadradinho, e não no primeiro.'},
+  {t:'G.', no:'G é o começo de GIRAFA. Mas GIRAFA não pode ficar em pé: o 2º quadradinho dela seria o I, e nenhum dos outros dois nomes termina em I.'},
+  {t:'O.', ok:1}
+ ],
+ dica:'Os três nomes têm 6 letras cada. Teste um de cada vez no lugar em pé: o 2º e o 4º quadradinho dele têm de ser a ÚLTIMA letra dos nomes deitados.',
+ truque:'Teste um nome de cada vez no lugar em pé e veja se as letras do cruzamento batem.',
+ visual:'<div class="pcs"><span class="pc">M</span><span class="pc hit">A</span><span class="pc">C</span><span class="pc hit">A</span><span class="pc">C</span><span class="pc bad">O</span><span class="arw">&rarr;</span><span class="pc bad">a flecha aponta aqui</span></div>'+
+        '<p class="vx">Com MACACO em p&eacute;, os cruzamentos caem em <b>A</b> e <b>A</b>. E GIRAF<b>A</b> e OVELH<b>A</b> terminam em A: fecha.</p>'+
+        '<div class="pcs"><span class="pc bad">G I R A F A</span><span class="arw">&rarr;</span><span class="pc bad">o 2&ordm; seria I, e nenhum nome termina em I</span></div>'+
+        '<div class="pcs"><span class="pc bad">O V E L H A</span><span class="arw">&rarr;</span><span class="pc bad">o 2&ordm; seria V e o 4&ordm; seria L: n&atilde;o fecha</span></div>',
+ porque:'Só MACACO pode ficar em pé: o 2º e o 4º quadradinhos dele são A e A, e GIRAFA e OVELHA terminam em A. A flecha aponta o 6º quadradinho de MACACO, que é o O.',
+ proximo:'Teste os três nomes, um de cada vez, antes de responder. E confira bem qual quadradinho a flecha aponta: o primeiro ou o último.'},
+
+{id:'23F2Q5', eixo:'letras', origem:'Olimpíada 2023 · 2ª fase · questão 5',
+ pede:'QUE FRASE NÃO CONTÉM NENHUM ERRO DE ESCRITA?',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'EU E MEU AMIGO ESTUDARAM MUITO PARA A ATIVIDADE DE PORTUGUÊS.', no:'Aqui não tem nenhuma letra trocada, e é por isso que essa é a mais traiçoeira. O erro está em ESTUDARAM: eu e meu amigo somos NÓS, e nós ESTUDAMOS.'},
+  {t:'TENHO UMA ESTANTE CHEIA DE LIVROS.', ok:1},
+  {t:'EU PASSO MUITO TENPO LENDO.', no:'TENPO está escrito com N, e a gente escreve TEMPO com M: antes de P e de B vem sempre M, nunca N. Essa passa batido porque a boca fala igualzinho.'},
+  {t:'NÃO CONSIGO VER O ERROS DESTA FRASE.', no:'ERROS é mais de um, então tem de ser OS ERROS. Falta uma letrinha só, o S do O, e por isso o olho pula.'}
+ ],
+ dica:'Não procure a frase certa: cace o erro de cada frase, uma por uma. A que sobrar sem erro nenhum é a resposta.',
+ truque:'Cace o erro de uma frase de cada vez, até o fim. A que sobrar sem erro nenhum é a resposta.',
+ visual:'<p class="vx">EU E MEU AMIGO <b class="bad2">ESTUDARAM</b> <span class="dm">&mdash; n&oacute;s ESTUDAMOS</span></p>'+
+        '<p class="vx">EU PASSO MUITO <b class="bad2">TENPO</b> <span class="dm">&mdash; antes de P vem M: TEMPO</span></p>'+
+        '<p class="vx">N&Atilde;O CONSIGO VER <b class="bad2">O ERROS</b> <span class="dm">&mdash; s&atilde;o v&aacute;rios: OS ERROS</span></p>'+
+        '<p class="vx"><b class="mk">TENHO UMA ESTANTE CHEIA DE LIVROS.</b> <span class="dm">&mdash; sobrou sem erro nenhum</span></p>',
+ porque:'As outras três têm um erro cada uma: ESTUDARAM no lugar de ESTUDAMOS, TENPO no lugar de TEMPO e O ERROS no lugar de OS ERROS. TENHO UMA ESTANTE CHEIA DE LIVROS está inteirinha certa.',
+ proximo:'Erro nem sempre é letra trocada: às vezes a palavra é que não combina com quem está fazendo aquilo. Leia a frase inteira antes de dar por certa.'},
+
+{id:'23F2Q6', eixo:'intruso', origem:'Olimpíada 2023 · 2ª fase · questão 6',
+ pede:'QUE PALAVRA NÃO FAZ PARTE DO GRUPO DE PALAVRAS A SEGUIR?',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'CALOR.', no:'Calor não é uma coisa que a gente pega na mão, como o fogo, e alguns marcam essa por isso. Mas o grupo não é de coisas: é de quem esquenta. Calor esquenta, então ele fica no grupo.'},
+  {t:'QUENTE.', no:'QUENTE também não é uma coisa que se pega, e engana pelo mesmo motivo. Só que quente é justamente esquentar, e é isso que as outras têm de igual.'},
+  {t:'FOGO.', no:'Fogo é uma coisa que dá para ver, e as outras duas não são — daí a vontade de marcar. Mas o que junta o grupo é esquentar, e fogo é o que mais esquenta de todos.'},
+  {t:'FRESCO.', ok:1}
+ ],
+ dica:'Pergunte de cada palavra: ela esquenta ou ela esfria? Junte as que fazem a mesma coisa.',
+ truque:'O que os outros três têm de igual? Quem não tem isso é o intruso.',
+ visual:'<div class="pcs"><span class="pc hit">CALOR</span><span class="pc hit">QUENTE</span><span class="pc hit">FOGO</span><span class="arw">&rarr;</span><span class="pc hit">esquentam</span></div>'+
+        '<div class="pcs"><span class="pc bad">FRESCO</span><span class="arw">&rarr;</span><span class="pc bad">esfria</span></div>'+
+        '<p class="vx">Um dia fresco &eacute; um dia com um friozinho bom. &Eacute; o contr&aacute;rio de quente.</p>',
+ porque:'CALOR, QUENTE e FOGO falam todos de esquentar. FRESCO é o contrário: é o friozinho. Por isso é ele que não pertence ao grupo.',
+ proximo:'Não escolha o intruso porque a palavra é diferente das outras no jeito de escrever. Escolha pelo que a palavra QUER DIZER.'},
+
+{id:'23F2Q7', eixo:'buraco', origem:'Olimpíada 2023 · 2ª fase · questão 7',
+ pede:'QUE PALAVRA COMPLETA A FRASE A SEGUIR?',
+ quadro:'UMA ABELINHA SAIU EM BUSCA DE &Aacute;GUA, <span class="bl">_______</span> ESTAVA COM MUITA SEDE.',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'MAIS.', no:'MAIS é de quantidade: mais água, mais bolo. Ponha no buraco e leia tudo: "saiu em busca de água, mais estava com muita sede" — a frase não anda.'},
+  {t:'PORQUE.', ok:1},
+  {t:'MAS.', no:'MAS serve para dizer o contrário do que veio antes. Aqui a segunda parte não briga com a primeira: ela explica por que a abelinha saiu.'},
+  {t:'PURQUE.', no:'Essa é a pegadinha da questão: é a palavra certa escrita errada. A gente fala "purque", mas escreve PORQUE, com O.'}
+ ],
+ dica:'A segunda parte da frase conta o MOTIVO de a abelinha ter saído. E, depois de escolher, olhe bem as letras da palavra.',
+ truque:'Ponha cada palavra no buraco e leia a frase inteira, do começo.',
+ visual:'<p class="vx">SAIU EM BUSCA DE &Aacute;GUA <span class="mk">PORQUE</span> ESTAVA COM MUITA SEDE <span class="dm">&mdash; a segunda parte explica a primeira</span></p>'+
+        '<div class="pcs"><span class="pc hit">P<b>O</b>RQUE</span><span class="arw">&rarr;</span><span class="pc bad">P<b>U</b>RQUE</span></div>'+
+        '<p class="vx">A mesma palavra, uma letra trocada. A boca fala com U; o l&aacute;pis escreve com <b>O</b>.</p>',
+ porque:'A segunda parte diz o motivo: ela saiu atrás de água porque estava com sede. E a palavra se escreve PORQUE, com O.',
+ proximo:'Depois de achar a palavra certa, confira letra por letra se ela está escrita direito. A prova gosta de pôr a mesma palavra escrita errada logo ao lado.'},
+
+{id:'23F2Q8', eixo:'intruso', origem:'Olimpíada 2023 · 2ª fase · questão 8',
+ enun:'LEIA O POEMA NA CHÁCARA DO CHICO BOLACHA, DE CECÍLIA MEIRELES:',
+ texto:['NA CHÁCARA DO CHICO BOLACHA',
+        'O QUE SE PROCURA',
+        'NUNCA SE ACHA!',
+        'QUANDO CHOVE MUITO,',
+        'O CHICO BRINCA DE BARCO,',
+        'PORQUE A CHÁCARA VIRA CHARCO.',
+        'QUANDO NÃO CHOVE NADA,',
+        'CHICO TRABALHA COM A ENXADA',
+        'E LOGO SE MACHUCA',
+        'E FICA DE MÃO INCHADA.'],
+ pede:'PODEMOS TROCAR A PALAVRA SUBLINHADA POR QUAL OUTRA, SEM MUDAR O ENTENDIMENTO DO POEMA?',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas: aqui ela está com quatro, como na prova de hoje, e a palavra que na prova aparece sublinhada dentro do poema é CHARCO.',
+ opts:[
+  {t:'BANHADO.', ok:1},
+  {t:'DESERTO.', no:'Deserto é lugar seco, sem nada de água. É o contrário do que o poema conta: choveu muito e o Chico está brincando de barco.'},
+  {t:'BURACO.', no:'Charco faz pensar em buraco fundo, e é por isso que essa atrai. Mas buraco não quer dizer cheio de água, e dentro de um buraco não dá para brincar de barco.'},
+  {t:'NUVEM.', no:'Nuvem tem tudo a ver com chuva, e é a que mais engana. Só que quem virou charco foi a CHÁCARA, que é o chão. Chão não vira nuvem.'}
+ ],
+ dica:'Você não precisa saber o que é CHARCO. Duas linhas do poema contam: QUANDO CHOVE MUITO e O CHICO BRINCA DE BARCO.',
+ truque:'Tire a palavra velha, ponha a nova, leia a frase de novo. Continua dizendo a mesma coisa?',
+ acende:[3,4,5],
+ visual:'<p class="vx"><span class="mk">QUANDO CHOVE MUITO</span> ... <span class="mk">O CHICO BRINCA DE BARCO</span> <span class="dm">&mdash; a ch&aacute;cara ficou cheia de &aacute;gua</span></p>'+
+        '<p class="vx">A CH&Aacute;CARA VIRA <b class="mk">BANHADO</b> <span class="dm">&mdash; continua dizendo a mesma coisa</span></p>'+
+        '<p class="vx">A CH&Aacute;CARA VIRA <b class="bad2">DESERTO</b> <span class="dm">&mdash; deserto &eacute; seco: briga com a chuva</span></p>'+
+        '<p class="vx">A CH&Aacute;CARA VIRA <b class="bad2">NUVEM</b> <span class="dm">&mdash; nuvem fica no c&eacute;u, e a ch&aacute;cara &eacute; o ch&atilde;o</span></p>',
+ porque:'O poema diz que choveu muito e que o Chico brinca de barco: a chácara ficou coberta de água. BANHADO é justamente o chão encharcado, e a frase continua dizendo a mesma coisa.',
+ proximo:'Palavra difícil se descobre pelas linhas de perto. Leia a linha de antes e a de depois antes de escolher.'},
+
+{id:'23F2Q9', eixo:'contar', origem:'Olimpíada 2023 · 2ª fase · questão 9',
+ pede:'EM QUAL ITEM ABAIXO AS PALAVRAS, ENTRE SI, NÃO TÊM A MESMA QUANTIDADE DE SÍLABAS?',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'TELEFONEMA — INDIFERENÇA — MATEMÁTICA — DETERMINAÇÃO.', no:'DETERMINAÇÃO é a mais comprida no papel e faz muita gente marcar este item. Mas bata palma: DE-TER-MI-NA-ÇÃO dá 5, e TE-LE-FO-NE-MA, IN-DI-FE-REN-ÇA e MA-TE-MÁ-TI-CA dão 5 também. Todas iguais.'},
+  {t:'VELOCIDADE — SAGACIDADE — SERENIDADE — COMORBIDADE.', no:'COMORBIDADE é uma palavra estranha e dá medo. Mas bata palma nas quatro: VE-LO-CI-DA-DE, SA-GA-CI-DA-DE, SE-RE-NI-DA-DE e CO-MOR-BI-DA-DE dão 5 cada uma. Todas iguais.'},
+  {t:'ESPERANÇA — ILUMINAÇÃO — COLABORAÇÃO — TELEVISÃO.', ok:1},
+  {t:'RELATIVO — ATIVISTA — MONÓTONO — SUBESTIMAR.', no:'As quatro têm cara de tamanhos diferentes, e é isso que engana. Bata palma: RE-LA-TI-VO, A-TI-VIS-TA, MO-NÓ-TO-NO e SUB-ES-TI-MAR dão 4 cada uma. Todas iguais.'}
+ ],
+ dica:'A pergunta tem um NÃO: você procura o item em que as palavras são DIFERENTES entre si. Bata palma em cada palavra e escreva o número ao lado.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc">ES PE RAN &Ccedil;A</span><span class="arw">&rarr;</span><span class="pc bad">4 palmas</span></div>'+
+        '<div class="pcs"><span class="pc">I LU MI NA &Ccedil;&Atilde;O</span><span class="arw">&rarr;</span><span class="pc hit">5 palmas</span></div>'+
+        '<div class="pcs"><span class="pc">CO LA BO RA &Ccedil;&Atilde;O</span><span class="arw">&rarr;</span><span class="pc hit">5 palmas</span></div>'+
+        '<div class="pcs"><span class="pc">TE LE VI S&Atilde;O</span><span class="arw">&rarr;</span><span class="pc bad">4 palmas</span></div>'+
+        '<p class="vx">Duas de 4 e duas de 5. S&oacute; nesse item as palavras <b>n&atilde;o</b> t&ecirc;m o mesmo tanto de palmas &mdash; e era isso que a pergunta pedia.</p>',
+ porque:'Batendo palma: ES-PE-RAN-ÇA dá 4, I-LU-MI-NA-ÇÃO dá 5, CO-LA-BO-RA-ÇÃO dá 5 e TE-LE-VI-SÃO dá 4. Nos outros itens as quatro palavras dão sempre o mesmo número.',
+ proximo:'Nunca escolha pela palavra mais comprida no papel. Bata palma e escreva o número ao lado de cada palavra antes de comparar.'},
+
+{id:'23F2Q10', eixo:'silabas', origem:'Olimpíada 2023 · 2ª fase · questão 10',
+ pede:'QUE ALTERNATIVA MOSTRA UMA FRASE FORMADA APENAS PELAS SÍLABAS A SEGUIR?',
+ quadro:'<table class="tbc"><tr><td>LA</td><td>&Eacute;</td><td>VI</td><td>A</td><td>DA</td><td>BE</td></tr></table>',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'A VILA É DA BI.', no:'Essa é a mais perigosa: quase tudo bate. Mas ela pede a peça BI, e no quadro só tem BE. Uma letra de diferença — e o BE ainda fica sobrando na mesa.'},
+  {t:'É A VIDA DA VELA.', no:'Essa usa o DA duas vezes, e cada peça vale uma vez só. Ainda pede um VE que não existe no quadro, e deixa o BE parado.'},
+  {t:'A BELEZA É DA VILA.', no:'Ela usa as seis peças, é verdade, mas ainda pede LE e ZA, que ninguém deu. Quando a frase precisa de peça a mais, está errada do mesmo jeito.'},
+  {t:'A VIDA É BELA.', ok:1}
+ ],
+ dica:'São seis peças, e todas têm de ser usadas, uma vez cada. Monte a frase de cada alternativa com as peças e veja se sobra ou falta alguma.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc">LA</span><span class="pc">&Eacute;</span><span class="pc">VI</span><span class="pc">A</span><span class="pc">DA</span><span class="pc">BE</span><span class="arw">&rarr;</span><span class="pc hit">6 pe&ccedil;as</span></div>'+
+        '<div class="pcs"><span class="pc hit">A</span><span class="pc hit">VI</span><span class="pc hit">DA</span><span class="pc hit">&Eacute;</span><span class="pc hit">BE</span><span class="pc hit">LA</span></div>'+
+        '<p class="vx">A VIDA &Eacute; BELA gasta as seis, uma vez cada. Nada sobrou, nada faltou.</p>'+
+        '<div class="pcs"><span class="pc bad">B<b>I</b></span><span class="arw">&rarr;</span><span class="pc bad">no quadro s&oacute; tem B<b>E</b></span></div>',
+ porque:'A VIDA É BELA se monta com A + VI + DA + É + BE + LA: são as seis peças do quadro, uma vez cada, sem sobrar nem faltar.',
+ proximo:'Conte as peças do quadro e conte as peças da frase que você escolheu. Os dois números têm de bater, e as peças também.'},
+
+{id:'23F2Q11', eixo:'intruso', origem:'Olimpíada 2023 · 2ª fase · questão 11',
+ enun:'LEIA A SEGUIR UM TRECHO DE O PICAPAU AMARELO, DE MONTEIRO LOBATO:',
+ quadro:'&mdash; EU SEI O QUE QUER DIZER "ABSTRATO" &mdash; DISSE EM&Iacute;LIA. &mdash; &Eacute; TUDO QUANTO A GENTE N&Atilde;O V&Ecirc;, NEM CHEIRA, NEM OUVE, NEM PROVA, NEM PEGA &mdash; MAS SENTE QUE H&Aacute;.',
+ pede:'DE ACORDO COM O QUE A EMÍLIA EXPLICOU, ASSINALE A ALTERNATIVA QUE NÃO TEM ALGO ABSTRATO:',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'BONDADE.', no:'Bondade ninguém vê, cheira, ouve, prova nem pega: só sente que existe. Pelo que a Emília explicou, ela é abstrata — e a pergunta pede o contrário.'},
+  {t:'JUSTIÇA.', no:'Justiça também não se vê nem se pega. Ela passa em todos os testes da Emília, então é abstrata, e não era isso que a pergunta pediu.'},
+  {t:'BELEZA.', no:'Essa é a mais escondida: a gente pensa "eu vejo uma pessoa bonita" e acha que está vendo a beleza. O que se vê é a PESSOA; a beleza mesmo você não pega na mão.'},
+  {t:'LIVRO.', ok:1}
+ ],
+ dica:'A Emília deu cinco testes: ver, cheirar, ouvir, provar e pegar. Faça os cinco com cada palavra. E cuidado: a pergunta tem um NÃO.',
+ truque:'O que os outros três têm de igual? Quem não tem isso é o intruso.',
+ visual:'<div class="pcs"><span class="pc hit">BONDADE</span><span class="pc hit">JUSTI&Ccedil;A</span><span class="pc hit">BELEZA</span><span class="arw">&rarr;</span><span class="pc hit">n&atilde;o d&aacute; para pegar</span></div>'+
+        '<div class="pcs"><span class="pc bad">LIVRO</span><span class="arw">&rarr;</span><span class="pc bad">v&ecirc;, cheira e pega</span></div>'+
+        '<p class="vx">Livro passa nos cinco testes da Em&iacute;lia. Por isso &eacute; ele que <b>n&atilde;o</b> combina com os outros tr&ecirc;s.</p>',
+ porque:'Pela explicação da Emília, abstrato é o que a gente não vê, não cheira, não ouve, não prova e não pega. Livro a gente vê, cheira e pega — então é o único que não é abstrato.',
+ proximo:'Quando a pergunta tem NÃO, ponha o dedo em cima do NÃO antes de olhar as respostas. A errada é quase sempre a que seria certa sem ele.'},
+
+{id:'23F2Q12', eixo:'contar', origem:'Olimpíada 2023 · 2ª fase · questão 12',
+ enun:'NA ÚLTIMA AULA, A PROFESSORA GERTRUDES RESOLVEU FAZER UMA BRINCADEIRA COM SEUS ALUNOS: ELA COLOCAVA UMA CONTA NO QUADRO E, AO LADO, CINCO FRASES, DEPOIS PEDIA PARA QUE AS CRIANÇAS ADVINHASSEM QUAL DAS FRASES REPRESENTAVA AQUELA CONTA. JÚLIA, UMA ALUNA MUITO ESPERTA, DESCOBRIU A REGRA DO JOGO E ACERTOU AS RESPOSTAS PARA AS QUATRO PRIMEIRAS CONTAS QUE A PROFESSORA PASSOU. VEJA AS RESPOSTAS DE JÚLIA:',
+ quadro:'<table class="tbc"><tr><td>CONTA</td><td>FRASE</td></tr>'+
+        '<tr><td>2 + 1 + 3 + 3</td><td>HOJE, EU ESTIVE CANSADO.</td></tr>'+
+        '<tr><td>2 + 1 + 1 + 2</td><td>MINHA M&Atilde;E &Eacute; LEGAL.</td></tr>'+
+        '<tr><td>3 + 1</td><td>ADORO LER!</td></tr>'+
+        '<tr><td>2 + 1 + 3 + 2 + 2</td><td>TIVE QUE ACORDAR CEDO ONTEM.</td></tr></table>'+
+        '<div class="sep"></div>FINALMENTE, PARA TERMINAR A AULA, A PROFESSORA GERTRUDES PASSOU UMA &Uacute;LTIMA CONTA, PEDINDO QUE SEUS ALUNOS ADVINHASSEM QUE FRASE A REPRESENTAVA:'+
+        '<div class="seq">2 + 2 + 1 + 2</div>',
+ pede:'DE NOVO, JÚLIA ACERTOU. QUAL DAS CINCO FRASES A SEGUIR ELA ESCOLHEU?',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'NÃO TENHO CORAGEM PARA RESPONDER.', no:'Conte as palavras antes de bater palma: são cinco, e a conta tem só quatro números. Essa já cai na contagem das palavras.'},
+  {t:'ESTA QUESTÃO É DIFÍCIL.', no:'Essa é a armadilha da questão: as três primeiras palavras batem certinho, 2, 2 e 1. Mas DI-FÍ-CIL dá três palmas, e a conta pede 2 no fim. Quem para na terceira palavra marca esta.'},
+  {t:'ESTA QUESTÃO É FÁCIL.', ok:1},
+  {t:'EU PERDEREI UM PONTO.', no:'São quatro palavras, e isso engana. Mas bata palma: EU dá 1, PER-DE-REI dá 3, UM dá 1 e PON-TO dá 2. Sai 1+3+1+2, e a conta pede 2+2+1+2.'}
+ ],
+ dica:'Olhe as respostas da Júlia: cada número é o tanto de palmas de uma palavra da frase, na ordem. HO-JE dá 2, EU dá 1, ES-TI-VE dá 3.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc">HO JE</span><span class="pc">EU</span><span class="pc">ES TI VE</span><span class="pc">CAN SA DO</span><span class="arw">&rarr;</span><span class="pc hit">2 + 1 + 3 + 3</span></div>'+
+        '<p class="vx">Cada n&uacute;mero &eacute; o tanto de palmas de UMA palavra, na ordem em que ela aparece.</p>'+
+        '<div class="pcs"><span class="pc hit">ES TA</span><span class="pc hit">QUES T&Atilde;O</span><span class="pc hit">&Eacute;</span><span class="pc hit">F&Aacute; CIL</span><span class="arw">&rarr;</span><span class="pc hit">2 + 2 + 1 + 2</span></div>'+
+        '<div class="pcs"><span class="pc">ES TA</span><span class="pc">QUES T&Atilde;O</span><span class="pc">&Eacute;</span><span class="pc bad">DI F&Iacute; CIL</span><span class="arw">&rarr;</span><span class="pc bad">2 + 2 + 1 + <b>3</b></span></div>',
+ porque:'A regra da brincadeira é: cada número conta as palmas de uma palavra, na ordem. Para 2+2+1+2 serve ES-TA (2), QUES-TÃO (2), É (1) e FÁ-CIL (2) — ESTA QUESTÃO É FÁCIL.',
+ proximo:'Descubra a regra nos exemplos ANTES de olhar as respostas. E vá até a última palavra: duas frases podem começar iguaizinhas e mudar só no fim.'},
+
+{id:'23F2Q13', eixo:'ler', origem:'Olimpíada 2023 · 2ª fase · questão 13',
+ enun:'HELENA KOLODY GOSTAVA DE ESCREVER PEQUENAS POESIAS. VEJA UMA DELAS:',
+ texto:['QUEM É ESSA',
+        'QUE ME OLHA',
+        'DE TÃO LONGE,',
+        'COM OLHOS QUE FORAM MEUS?'],
+ pede:'PENSE SOBRE O PEQUENO POEMA ACIMA E RESPONDA: QUE NOME HELENA KOLODY DEU A ELE?',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'RETRATO ANTIGO.', ok:1},
+  {t:'OLHANDO PARA O FUTURO.', no:'O poema olha para trás, não para a frente: os olhos FORAM meus quer dizer que isso já passou.'},
+  {t:'TOTALMENTE DESCONHECIDA.', no:'QUEM É ESSA soa mesmo como não conhecer ninguém, e por isso essa engana muito. Mas a última linha entrega: os olhos FORAM dela. Quem ela vê é ela mesma, de um tempo antigo.'},
+  {t:'BELOS OLHOS.', no:'OLHOS é palavra que está no poema, e a mão vai nela. Só que o poema não diz que os olhos são bonitos: diz que eles FORAM dela.'}
+ ],
+ dica:'Leia com a régua a última linha: COM OLHOS QUE FORAM MEUS. FORAM quer dizer que já passou. Quem será que ela está vendo?',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[2,3],
+ visual:'<p class="vx">COM OLHOS QUE <b class="mk">FORAM</b> MEUS <span class="dm">&mdash; FORAM &eacute; coisa que j&aacute; passou</span></p>'+
+        '<p class="vx"><span class="mk">DE T&Atilde;O LONGE</span> <span class="dm">&mdash; longe no tempo, e n&atilde;o longe daqui</span></p>'+
+        '<div class="pcs"><span class="pc hit">RETRATO ANTIGO</span><span class="arw">&rarr;</span><span class="pc hit">ela se v&ecirc; numa foto de muito tempo atr&aacute;s</span></div>',
+ porque:'A última linha diz COM OLHOS QUE FORAM MEUS: os olhos já foram dela, então ela está se vendo como era antigamente. Isso é um retrato antigo.',
+ proximo:'Uma palavrinha só pode mudar tudo. Olhe se o texto está falando de agora ou de uma coisa que já passou.'},
+
+{id:'23F2Q14', eixo:'ler', origem:'Olimpíada 2023 · 2ª fase · questão 14',
+ enun:'LEIA A FÁBULA A SEGUIR:',
+ texto:['O SAPO E O ESCORPIÃO',
+        'À BEIRA DO RIO OPEZUDIS, UM SAPO E UM ESCORPIÃO SE ENCONTRARAM:',
+        '— SAPO, O SENHOR PODERIA ME AJUDAR A ATRAVESSAR ESTE GRANDE RIO.',
+        '— E COMO FARÍAMOS ISSO, SENHOR ESCORPIÃO?',
+        '— ORA, COLOQUE-ME NAS SUAS COSTAS E NADE ATÉ A OUTRA MARGEM.',
+        '— MEU AMIGO ESCORPIÃO, NÃO POSSO FAZER ISSO, POIS, SE O FIZER, O SENHOR ME PICARÁ NO MEIO DA TRAVESSIA, E ACABARÍAMOS MORTOS.',
+        '— ISSO NÃO FAZ SENTIDO, SENHOR SAPO, SE EU O PICAR, MORREREI AFOGADO. NÃO QUERO MORRER, POIS TENHO OS MEUS NEGÓCIOS, A MINHA FAMÍLIA.',
+        '— ESTÁ BEM, VAMOS ENTÃO ATRAVESSAR, SUBA NAS MINHAS COSTAS.',
+        'O SAPO PULOU NA ÁGUA COM O ESCORPIÃO NAS COSTAS E INICIARAM A TRAVESSIA. NA METADE DO CAMINHO, PORÉM, O SAPO SENTIU UMA PROFUNDA E DOLOROSA FERROADA. TRISTE PELA CERTEZA DE QUE MORRERIA, PERGUNTOU AO ESCORPIÃO:',
+        '— POR QUE FEZ ISSO, AMIGO ESCORPIÃO?',
+        'MAS ANTES QUE O ESCORPIÃO RESPONDESSE, AMBOS AFUNDARAM E NUNCA MAIS FORAM VISTOS.'],
+ pede:'SE HOUVESSE TEMPO, QUAL DAS RESPOSTAS ABAIXO O ESCORPIÃO PODERIA TER DADO AO SAPO?',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'O SENHOR ME TRATOU MUITO MAL, SAPO, POR ISSO O PIQUEI.', no:'Volte com a régua e procure: em nenhuma linha o sapo trata mal o escorpião. Ele foi educado o tempo todo e ainda deu carona.'},
+  {t:'NADA ME IMPORTA NA VIDA, SENHOR SAPO, POR ISSO PUDE FERROÁ-LO, MESMO SABENDO QUE MORRERIA JUNTO.', no:'Essa é a mais perigosa, porque a parte do morrer junto foi mesmo o que aconteceu. Mas o próprio escorpião tinha dito que NÃO QUERIA MORRER, porque tinha os negócios dele e a família. Então não é verdade que nada lhe importa.'},
+  {t:'DEI-LHE MINHA PICADA MORTAL, PORQUE SENTI QUE O SENHOR ESTAVA ME AMEAÇANDO.', no:'O sapo não ameaçou ninguém: ele só avisou que tinha medo da picada. Essa resposta inventa uma coisa que o texto não conta.'},
+  {t:'HÁ COISAS QUE NÃO PODEMOS MUDAR, SENHOR SAPO, É DA MINHA NATUREZA FAZER O QUE FIZ.', ok:1}
+ ],
+ dica:'O escorpião picou sabendo que ia morrer junto. Procure a resposta que combina com isso E com o que ele mesmo tinha dito antes de subir nas costas do sapo.',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[6,8],
+ visual:'<p class="vx"><span class="mk">N&Atilde;O QUERO MORRER, POIS TENHO OS MEUS NEG&Oacute;CIOS, A MINHA FAM&Iacute;LIA</span> <span class="dm">&mdash; ele disse isso antes de subir</span></p>'+
+        '<p class="vx"><span class="mk">O SAPO SENTIU UMA PROFUNDA E DOLOROSA FERROADA</span> <span class="dm">&mdash; e mesmo assim ele picou</span></p>'+
+        '<div class="pcs"><span class="pc hit">&Eacute; DA MINHA NATUREZA</span><span class="arw">&rarr;</span><span class="pc hit">ele picou sem conseguir evitar</span></div>'+
+        '<div class="pcs"><span class="pc bad">NADA ME IMPORTA NA VIDA</span><span class="arw">&rarr;</span><span class="pc bad">briga com os neg&oacute;cios e a fam&iacute;lia</span></div>',
+ porque:'O escorpião não queria morrer: ele mesmo falou dos negócios e da família. Mesmo assim picou o sapo no meio do rio. A única resposta que cabe é a que diz que ele não conseguiu evitar, porque é da natureza dele.',
+ proximo:'Quando a pergunta é sobre o motivo de um bicho da história, confira se a resposta briga com alguma coisa que ele já tinha dito antes.'},
+
+{id:'23F2Q15', eixo:'codigo', origem:'Olimpíada 2023 · 2ª fase · questão 15',
+ enun:'OPEZINO DECIDIU ESCREVER DE UM JEITO SÓ DELE, TROCANDO AS LETRAS DAS PALAVRAS. VEJA ABAIXO UM QUADRO, EM QUE ESTÃO ALGUMAS PALAVRAS E O MODO COMO OPEZINO AS ESCREVE:',
+ quadro:'<table class="tbc"><tr><td>ESCRITA NORMAL</td><td>ESCRITA DO OPEZINO</td></tr>'+
+        '<tr><td>VIRTUDE</td><td>RAVDETU</td></tr>'+
+        '<tr><td>MARGARIDA</td><td>GIVMIVATI</td></tr>'+
+        '<tr><td>BELEZA</td><td>ZUPUBI</td></tr>'+
+        '<tr><td>SERPENTE</td><td>NUVLUSDU</td></tr>'+
+        '<tr><td>OLHO</td><td>YPJY</td></tr></table>'+
+        '<div class="sep"></div>VEJA AGORA UMA FRASE QUE O MENINO ESCREVEU:'+
+        '<div class="seq">I P&Aacute;SMEI LYVDEMEUNI &Uacute; GIVIRAPJYNI!</div>',
+ pede:'COM BASE NISSO, PODEMOS DIZER QUE ELE:',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ opts:[
+  {t:'ACHA A PROFESSORA DE PORTUGUÊS LEGAL.', no:'A frase tem quatro pedaços e essa resposta também, mas nenhum pedaço bate. O segundo pedaço, PÁSMEI, vira LÍNGUA — não vira PROFESSORA.'},
+  {t:'ACHA A LÍNGUA PORTUGUESA DESASTROSA.', no:'O começo está certinho: A LÍNGUA PORTUGUESA. Quem decifra os dois primeiros pedaços e desiste do resto marca esta. O último pedaço não diz DESASTROSA.'},
+  {t:'ACHA A PROFESSORA DE PORTUGUÊS MARAVILHOSA.', no:'Essa acerta a última palavra, MARAVILHOSA, e erra todo o resto. É a pegadinha para quem decifra só o fim e chuta o começo.'},
+  {t:'ACHA A LÍNGUA PORTUGUESA MARAVILHOSA.', ok:1}
+ ],
+ dica:'Ache as parceiras das letras comparando OLHO com YPJY e BELEZA com ZUPUBI. Depois decifre uma letra de cada vez, sem pular nenhuma.',
+ truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
+ visual:'<div class="pcs"><span class="pc">O</span><span class="arw">&harr;</span><span class="pc">Y</span><span class="pc">L</span><span class="arw">&harr;</span><span class="pc">P</span><span class="pc">H</span><span class="arw">&harr;</span><span class="pc">J</span></div>'+
+        '<p class="vx">OLHO virou YPJY: cada letra tem uma parceira fixa, e a troca vale nos dois sentidos.</p>'+
+        '<div class="pcs"><span class="pc hit">I</span><span class="arw">&rarr;</span><span class="pc hit">A</span><span class="pc hit">P&Aacute;SMEI</span><span class="arw">&rarr;</span><span class="pc hit">L&Iacute;NGUA</span></div>'+
+        '<div class="pcs"><span class="pc hit">LYVDEMEUNI</span><span class="arw">&rarr;</span><span class="pc hit">PORTUGUESA</span><span class="pc hit">&Uacute;</span><span class="arw">&rarr;</span><span class="pc hit">&Eacute;</span></div>'+
+        '<div class="pcs"><span class="pc hit">GIVIRAPJYNI</span><span class="arw">&rarr;</span><span class="pc hit">MARAVILHOSA</span></div>'+
+        '<p class="vx">A frase inteira &eacute;: <b>A L&Iacute;NGUA PORTUGUESA &Eacute; MARAVILHOSA!</b></p>',
+ porque:'Comparando as palavras do quadro, cada letra tem uma parceira fixa: A com I, E com U, O com Y, L com P, H com J, R com V, G com M, S com N, D com T e B com Z. Decifrando a frase inteira sai A LÍNGUA PORTUGUESA É MARAVILHOSA.',
+ proximo:'Nunca chute o resto do código porque decifrou um pedaço. Vá até a última letra com o dedo.'},
+
+
+/* ===== reserva_treino_B ===== */
+{id:'TR13', eixo:'contar', origem:'Treino no estilo da prova',
+ enun:'RAFAEL ESCREVEU UMA FRASE NO CADERNO, MAS ESQUECEU DE DEIXAR ESPAÇO ENTRE AS PALAVRAS. VEJA COMO ELA FICOU:',
+ quadro:'OGATODEMARIADORMENOSOF&Aacute;DASALA.',
+ pede:'QUANTOS ESPAÇOS FALTAM PARA CONSERTAR A FRASE DE RAFAEL?',
+ opts:[
+  {t:'7.', no:'Sete é o que dá quando duas palavrinhas ficam grudadas na hora de separar, como NO SOFÁ virando NOSOFÁ. Aí sobram oito palavras. Separando com cuidado são nove.'},
+  {t:'8.', ok:1},
+  {t:'9.', no:'Nove é o número de PALAVRAS da frase, e é aqui que quase todo mundo cai. A pergunta é de ESPAÇOS: os espaços ficam ENTRE as palavras, então são sempre um a menos.'},
+  {t:'10.', no:'Dez é contar as nove palavras e ainda pôr um espaço depois do ponto final. Depois do ponto a frase acabou: ali não entra espaço nenhum.'}
+ ],
+ dica:'Primeiro separe a frase e escreva as palavras uma do lado da outra. Só depois conte os buraquinhos ENTRE elas.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc">O</span><span class="pc">GATO</span><span class="pc">DE</span><span class="pc">MARIA</span><span class="pc">DORME</span><span class="pc">NO</span><span class="pc">SOF&Aacute;</span><span class="pc">DA</span><span class="pc">SALA</span><span class="arw">&rarr;</span><span class="pc hit">9 palavras</span></div>'+
+        '<div class="pcs"><span class="pc hit">1</span><span class="pc hit">2</span><span class="pc hit">3</span><span class="pc hit">4</span><span class="pc hit">5</span><span class="pc hit">6</span><span class="pc hit">7</span><span class="pc hit">8</span><span class="arw">&rarr;</span><span class="pc hit">8 espa&ccedil;os</span></div>'+
+        '<p class="vx">O espa&ccedil;o mora <b>entre</b> duas palavras. Por isso ele &eacute; sempre <b>um a menos</b> que o n&uacute;mero de palavras.</p>'+
+        '<p class="vx"><span class="dm">Depois do ponto final n&atilde;o entra espa&ccedil;o: a frase j&aacute; acabou.</span></p>',
+ porque:'Separando, a frase é O GATO DE MARIA DORME NO SOFÁ DA SALA: nove palavras. Entre nove palavras cabem oito espaços, porque não tem espaço antes da primeira nem depois do ponto final.',
+ proximo:'Separe a frase INTEIRA antes de contar. Depois conte as palavras e tire um: esse é o número de espaços.'},
+
+{id:'TR14', eixo:'contar', origem:'Treino no estilo da prova',
+ enun:'LEIA A FRASE ABAIXO COM O DEDO, DEVAGAR:',
+ quadro:'O CARRO VERMELHO CORREU NA RUA ESTREITA.',
+ pede:'QUANTAS VEZES A LETRA R APARECE NESSA FRASE?',
+ opts:[
+  {t:'5.', no:'Cinco é o número de PALAVRAS que têm R: CARRO, VERMELHO, CORREU, RUA e ESTREITA. Mas a pergunta não é quantas palavras: é quantas vezes a LETRA aparece — e CARRO e CORREU têm dois R cada um.'},
+  {t:'6.', no:'Seis é o que dá quando o dedo para antes do fim da frase. O último R está escondido em ESTREITA, espremido entre o T e o E, bem no lugar em que a gente passa batido.'},
+  {t:'7.', ok:1},
+  {t:'8.', no:'Oito é um R a mais. Quem chega nele contou dois R em VERMELHO, porque a palavra é comprida e o dedo volta. Soletre devagar: V-E-R-M-E-L-H-O. Tem um R só.'}
+ ],
+ dica:'Vá de uma palavra por vez e escreva o número de R em cima de cada uma. Cuidado com as palavras que têm RR: ali são dois pontinhos, não um.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc hit">CA<b>RR</b>O = 2</span><span class="pc hit">VE<b>R</b>MELHO = 1</span><span class="pc hit">CO<b>RR</b>EU = 2</span><span class="pc hit"><b>R</b>UA = 1</span><span class="pc hit">EST<b>R</b>EITA = 1</span></div>'+
+        '<p class="vx">2 + 1 + 2 + 1 + 1 = <b>7</b></p>'+
+        '<div class="pcs"><span class="pc bad">5 palavras com R</span><span class="arw">&rarr;</span><span class="pc bad">a pergunta n&atilde;o &eacute; essa</span></div>'+
+        '<p class="vx"><span class="dm">CARRO e CORREU valem <b>dois</b> pontinhos cada. &Eacute; o que separa o 5 do 7.</span></p>',
+ porque:'CARRO tem dois R, VERMELHO tem um, CORREU tem dois, RUA tem um e ESTREITA tem um. Somando: 2 + 1 + 2 + 1 + 1 = 7.',
+ proximo:'Conte LETRA por letra, não palavra por palavra. Onde aparecer RR, marque dois pontinhos.'},
+
+{id:'TR15', eixo:'contar', origem:'Treino no estilo da prova',
+ pede:'QUAL DAS FRASES ABAIXO TEM MAIS CONSOANTES DO QUE VOGAIS?',
+ opts:[
+  {t:'MEU AVÔ VIAJOU PARA A PRAIA DE CARRO.', no:'É a frase mais comprida das quatro, e comprida engana. Mas AVÔ, VIAJOU e PRAIA vivem com vogal atrás de vogal: aqui sobram vogais, não consoantes.'},
+  {t:'O PASSARINHO AZUL VOOU ATÉ A JANELA.', no:'PASSARINHO tem letra dobrada e dá cara de frase pesada de consoante. Só que VOOU tem três vogais grudadas, e AZUL, ATÉ e A quase não trazem consoante. As vogais ganham.'},
+  {t:'CRISTINA PLANTOU FLORES BRANCAS.', ok:1},
+  {t:'A COELHINHA COMEU UMA CENOURA.', no:'O LH e o NH parecem consoantes grudadas, e é isso que atrai. Mas olhe o resto: COELHINHA, COMEU, UMA e CENOURA são cheias de vogal. Aqui as vogais também ganham.'}
+ ],
+ dica:'Vogal é A, E, I, O, U — todo o resto é consoante. Procure a frase em que as consoantes andam grudadas: CR, PL, FL, BR.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc hit">CR</span><span class="pc hit">ST</span><span class="pc hit">PL</span><span class="pc hit">NT</span><span class="pc hit">FL</span><span class="pc hit">BR</span><span class="pc hit">NC</span></div>'+
+        '<p class="vx">Em <b>CRISTINA PLANTOU FLORES BRANCAS</b> as consoantes andam de duas em duas o tempo todo: 10 vogais contra 18 consoantes.</p>'+
+        '<div class="pcs"><span class="pc bad">AV&Ocirc;</span><span class="pc bad">VIAJOU</span><span class="pc bad">PRAIA</span><span class="pc bad">VOOU</span><span class="pc bad">COMEU</span><span class="pc bad">CENOURA</span></div>'+
+        '<p class="vx">Nas outras tr&ecirc;s frases quem anda grudada &eacute; a <b>vogal</b>. &Eacute; o sinal de que ali as vogais ganham.</p>',
+ porque:'Em CRISTINA PLANTOU FLORES BRANCAS as consoantes vêm grudadas: CR, ST, PL, NT, FL, BR, NC. São 10 vogais contra 18 consoantes. Nas outras três, quem vem grudada é a vogal.',
+ proximo:'Não escolha pela frase mais comprida. Procure aquela em que as consoantes se encostam umas nas outras — é ali que elas ganham das vogais.'},
+
+{id:'TR16', eixo:'contar', origem:'Treino no estilo da prova',
+ enun:'DONA LUÍSA VAI ARRUMAR A CESTA DO PIQUENIQUE E INVENTOU UMA REGRA PARA ESCOLHER O QUE LEVA:',
+ quadro:'&mdash; S&Oacute; VOU LEVAR AS COMIDAS QUE T&Ecirc;M UMA &Uacute;NICA VOGAL, MESMO QUE ELA APARE&Ccedil;A V&Aacute;RIAS VEZES!'+
+        '<div class="sep"></div>BANANA &ndash; ABACATE &ndash; SALADA &ndash; PIPOCA &ndash; BATATA &ndash; SUCO &ndash; SORVETE',
+ pede:'MARQUE A ALTERNATIVA QUE MOSTRA APENAS AS COMIDAS QUE DONA LUÍSA VAI LEVAR:',
+ opts:[
+  {t:'BANANA, ABACATE E SALADA.', no:'BANANA e SALADA estão certas. ABACATE parece só de A — A, BA, CA — mas o último pedaço é TE: tem um E escondido bem no fim da palavra.'},
+  {t:'BATATA, PIPOCA E SUCO.', no:'BATATA está certa. Mas PIPOCA tem I, O e A, três vogais diferentes, e SUCO tem U e O. Duas erradas na mesma alternativa.'},
+  {t:'BANANA, SALADA E BATATA.', ok:1},
+  {t:'SALADA, BATATA E SORVETE.', no:'Duas estão certinhas, e é justamente por isso que essa engana. SORVETE tem O e tem E — basta uma comida errada para a alternativa inteira cair.'}
+ ],
+ dica:'Vogal é A, E, I, O, U. Ponha um pontinho embaixo de cada vogal do nome e vá até a ÚLTIMA letra da palavra.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc hit">B<b>A</b>N<b>A</b>N<b>A</b></span><span class="pc hit">S<b>A</b>L<b>A</b>D<b>A</b></span><span class="pc hit">B<b>A</b>T<b>A</b>T<b>A</b></span></div>'+
+        '<p class="vx">Nas tr&ecirc;s aparece s&oacute; o <b>A</b>, tr&ecirc;s vezes em cada uma. Repetir pode; o que n&atilde;o pode &eacute; entrar uma vogal diferente.</p>'+
+        '<div class="pcs"><span class="pc bad">ABACAT<b>E</b></span><span class="pc bad">P<b>I</b>P<b>O</b>CA</span><span class="pc bad">S<b>U</b>C<b>O</b></span><span class="pc bad">S<b>O</b>RV<b>E</b>TE</span></div>'+
+        '<p class="vx">No ABACATE a vogal diferente est&aacute; na <b>&uacute;ltima letra</b> &mdash; bem onde o dedo costuma parar de conferir.</p>',
+ porque:'BANANA, SALADA e BATATA usam só a vogal A, mesmo repetindo três vezes. Nas outras entra uma segunda vogal: o E de ABACATE, o I e o O de PIPOCA, o U de SUCO, o O e o E de SORVETE.',
+ proximo:'Vá com o dedo até a última letra da palavra. A vogal que estraga costuma estar no fim, depois de todas as outras terem dado certo.'},
+
+{id:'TR17', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'SE VOCÊ ME DER UM BO, UM LA E UM CHA, EU DAREI A VOCÊ UMA BOLACHA. SE VOCÊ ME DER UM PA, UM TO E UM SA, EU DAREI A VOCÊ UM SAPATO.',
+ pede:'AGORA, SE VOCÊ ME DER UM TA, UM CA E UM NE, O QUE EU DAREI A VOCÊ?',
+ opts:[
+  {t:'UMA CANECA.', no:'CANECA bate palma em CA-NE-CA: gasta o CA duas vezes, e você só recebeu um. E ainda deixa o TA parado na mesa.'},
+  {t:'UMA CANETA.', ok:1},
+  {t:'UMA NETA.', no:'NETA usa o NE e o TA, e essas duas peças existem mesmo. Mas gasta só duas e deixa o CA sobrando — quando sobra peça, a palavra está errada.'},
+  {t:'UMA TECLA.', no:'TECLA parece começar com a sua peça, e é por isso que atrai. Mas o começo dela é TE, e o que te deram foi TA: uma letra de diferença. E CLA ninguém te deu.'}
+ ],
+ dica:'Os dois exemplos ensinam a regra: usar TODAS as peças, uma vez cada, e pode trocar a ordem delas.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc">TA</span><span class="pc">CA</span><span class="pc">NE</span><span class="arw">&rarr;</span><span class="pc hit">CA</span><span class="pc hit">NE</span><span class="pc hit">TA</span></div>'+
+        '<p class="vx">Tr&ecirc;s pe&ccedil;as dadas, tr&ecirc;s pe&ccedil;as usadas. Nada sobrou e nada foi inventado.</p>'+
+        '<div class="pcs"><span class="pc hit">CA</span><span class="pc hit">NE</span><span class="pc bad">CA</span><span class="arw">&rarr;</span><span class="pc bad">o CA foi usado duas vezes</span></div>'+
+        '<div class="pcs"><span class="pc hit">NE</span><span class="pc hit">TA</span><span class="pc bad">CA</span><span class="arw">&rarr;</span><span class="pc bad">NETA deixou o CA sobrando</span></div>',
+ porque:'CA-NE-TA gasta as três peças, uma vez cada, só trocando a ordem — exatamente como nos exemplos: BO+LA+CHA virou BOLACHA e PA+TO+SA virou SAPATO.',
+ proximo:'Conte as peças que a prova deu e conte os pedaços da palavra que você escolheu. Os dois números têm de ser iguais.'},
+
+{id:'TR18', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'A PROFESSORA DEU A LUCAS QUATRO PEÇAS DE SÍLABA. ELE TEM DE USAR AS QUATRO, UMA VEZ CADA, NA ORDEM QUE QUISER.',
+ quadro:'FO &nbsp;&ndash;&nbsp; NE &nbsp;&ndash;&nbsp; TE &nbsp;&ndash;&nbsp; LE',
+ pede:'QUE PALAVRA LUCAS CONSEGUE FORMAR COM AS QUATRO PEÇAS?',
+ opts:[
+  {t:'ELEFANTE.', no:'ELEFANTE é a armadilha mais forte daqui: ele tem o LE e tem o TE, iguaizinhos aos de Lucas. Mas bata palma: E-LE-FAN-TE. O E sozinho e o FAN ninguém deu, e ainda sobrariam o FO e o NE.'},
+  {t:'FONTE.', no:'FONTE parece feita de FO + NE + TE, mas não é. Bata palma: FON-TE. O primeiro pedaço é FON, e Lucas tem FO e NE separados, que não viram FON. E sobrariam duas peças.'},
+  {t:'TELEFONE.', ok:1},
+  {t:'FONE.', no:'FONE usa o FO e o NE, e as duas peças existem mesmo. Mas gasta só duas: o TE e o LE ficam parados na mesa. Tem de usar as quatro.'}
+ ],
+ dica:'Bata palma na palavra de cada alternativa e conte os pedaços. Lucas tem QUATRO peças: a palavra certa tem de ter quatro pedaços.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc">FO</span><span class="pc">NE</span><span class="pc">TE</span><span class="pc">LE</span><span class="arw">&rarr;</span><span class="pc hit">TE</span><span class="pc hit">LE</span><span class="pc hit">FO</span><span class="pc hit">NE</span></div>'+
+        '<p class="vx">Quatro pe&ccedil;as dadas, quatro pe&ccedil;as usadas: TE-LE-FO-NE.</p>'+
+        '<div class="pcs"><span class="pc bad">E</span><span class="pc hit">LE</span><span class="pc bad">FAN</span><span class="pc hit">TE</span><span class="arw">&rarr;</span><span class="pc bad">E e FAN n&atilde;o existem</span></div>'+
+        '<div class="pcs"><span class="pc hit">FO</span><span class="pc hit">NE</span><span class="pc bad">TE</span><span class="pc bad">LE</span><span class="arw">&rarr;</span><span class="pc bad">FONE deixou duas sobrando</span></div>',
+ porque:'TE-LE-FO-NE usa as quatro peças, uma vez cada, só mudando a ordem. ELEFANTE pede E e FAN, que ninguém deu; FONTE pede FON; e FONE deixa duas peças na mesa.',
+ proximo:'Antes de escolher, bata palma na palavra e conte os pedaços. Se der um número diferente do número de peças, já pode riscar.'},
+
+{id:'TR19', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'ESTAS SÃO TRÊS COISAS QUE EXISTEM NA COZINHA:',
+ quadro:'SACOLA &nbsp;&ndash;&nbsp; PANELA &nbsp;&ndash;&nbsp; TOMATE',
+ pede:'QUE ALTERNATIVA MOSTRA UMA PALAVRA FORMADA APENAS COM SÍLABAS DOS NOMES ACIMA?',
+ opts:[
+  {t:'SALADA.', no:'SALADA é comida, e numa lista de cozinha ela parece pertencer — é essa a isca. O SA e o LA existem mesmo, mas o DA não vem de ninguém. Uma sílaba de fora derruba a palavra inteira.'},
+  {t:'SAPATO.', ok:1},
+  {t:'MACACO.', no:'MACACO chega perto: o MA vem do tomate e o CO vem da sacola. Mas o CA não existe — a sacola dá CO, não CA. Uma letra de diferença.'},
+  {t:'SAPO.', no:'SAPO começa com o SA da sacola, e é só por isso que atrai. Mas o segundo pedaço é PO, e ninguém tem PO: a panela dá PA. Uma letra de diferença.'}
+ ],
+ dica:'Bata palma em cada nome e escreva as peças: SA-CO-LA, PA-NE-LA, TO-MA-TE. Essas são todas as peças que você tem.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc">SA</span><span class="pc">CO</span><span class="pc">LA</span><span class="pc">PA</span><span class="pc">NE</span><span class="pc">LA</span><span class="pc">TO</span><span class="pc">MA</span><span class="pc">TE</span></div>'+
+        '<p class="vx">Essas s&atilde;o as pe&ccedil;as que os tr&ecirc;s nomes d&atilde;o.</p>'+
+        '<div class="pcs"><span class="pc hit">SA</span><span class="pc hit">PA</span><span class="pc hit">TO</span><span class="arw">&rarr;</span><span class="pc hit">uma de cada nome</span></div>'+
+        '<div class="pcs"><span class="pc hit">MA</span><span class="pc bad">CA</span><span class="pc hit">CO</span><span class="arw">&rarr;</span><span class="pc bad">CA n&atilde;o existe, s&oacute; CO</span></div>'+
+        '<div class="pcs"><span class="pc hit">SA</span><span class="pc hit">LA</span><span class="pc bad">DA</span><span class="arw">&rarr;</span><span class="pc bad">DA n&atilde;o existe</span></div>',
+ porque:'SA vem de SACOLA, PA vem de PANELA e TO vem de TOMATE: SAPATO usa uma sílaba de cada nome. Nas outras sempre falta uma peça — o DA de SALADA, o CA de MACACO, o PO de SAPO.',
+ proximo:'Confira TODAS as sílabas da palavra escolhida, uma por uma, não só a primeira. A que estraga costuma ser a do meio ou a do fim.'},
+
+{id:'TR20', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'VEJA ESTAS TRÊS PALAVRAS:',
+ quadro:'CAMISA &nbsp;&ndash;&nbsp; MENINO &nbsp;&ndash;&nbsp; BOLO',
+ pede:'QUE ALTERNATIVA MOSTRA O NOME DE UM ANIMAL FORMADO APENAS COM SÍLABAS DAS PALAVRAS ACIMA?',
+ opts:[
+  {t:'CAMINHO.', no:'CAMINHO começa igualzinho: CA-MI, as duas da camisa. Quem confere só o começo marca esta. Mas o terceiro pedaço é NHO, e o menino dá NI e NO — nunca NHO. E caminho nem animal é.'},
+  {t:'CAMELO.', ok:1},
+  {t:'MENINA.', no:'MENINA está a uma letra de dar certo: ME e NI existem, mas o último pedaço é NA, e o menino termina em NO. Além disso, menina não é animal.'},
+  {t:'BONITO.', no:'BONITO pega o BO do bolo e o NI do menino, e por isso engana. Mas o TO não existe em ninguém: o bolo dá BO e LO. E bonito não é nome de animal.'}
+ ],
+ dica:'Bata palma nas três palavras: CA-MI-SA, ME-NI-NO, BO-LO. Depois lembre que a pergunta pede o nome de um ANIMAL.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc">CA</span><span class="pc">MI</span><span class="pc">SA</span><span class="pc">ME</span><span class="pc">NI</span><span class="pc">NO</span><span class="pc">BO</span><span class="pc">LO</span></div>'+
+        '<p class="vx">Essas s&atilde;o todas as pe&ccedil;as dispon&iacute;veis.</p>'+
+        '<div class="pcs"><span class="pc hit">CA</span><span class="pc hit">ME</span><span class="pc hit">LO</span><span class="arw">&rarr;</span><span class="pc hit">CAMELO</span></div>'+
+        '<p class="vx">CA da camisa, ME do menino, LO do bolo: uma pe&ccedil;a de cada palavra.</p>'+
+        '<div class="pcs"><span class="pc hit">ME</span><span class="pc hit">NI</span><span class="pc bad">NA</span><span class="arw">&rarr;</span><span class="pc bad">o menino termina em NO</span></div>'+
+        '<div class="pcs"><span class="pc hit">CA</span><span class="pc hit">MI</span><span class="pc bad">NHO</span><span class="arw">&rarr;</span><span class="pc bad">NHO n&atilde;o existe</span></div>',
+ porque:'CA vem de CAMISA, ME vem de MENINO e LO vem de BOLO: CAMELO se forma com uma sílaba de cada palavra, e camelo é animal. Nas outras falta sempre uma peça — NHO, NA, TO —, e nenhuma delas é animal.',
+ proximo:'Confira as sílabas até o fim E confira o que a pergunta pediu. Aqui não bastava formar a palavra: tinha de ser o nome de um animal.'},
+
+{id:'TR21', eixo:'buraco', origem:'Treino no estilo da prova',
+ pede:'QUE PALAVRA COMPLETA A FRASE ABAIXO?',
+ quadro:'ONTEM JOANA PERDEU UM <span class="bl">_______</span>. HOJE DE MANH&Atilde; ELA ACHOU UMA MOEDINHA EMBAIXO DO TRAVESSEIRO!',
+ opts:[
+  {t:'BRINQUEDO.', no:'Brinquedo se perde o tempo todo, e é o que dá mais vontade de marcar. Mas leia a frase até o fim: ninguém troca brinquedo perdido por moedinha embaixo do travesseiro.'},
+  {t:'DENTE.', ok:1},
+  {t:'SAPATO.', no:'Dá para perder um sapato, e essa parte da frase combina. Só que a segunda parte não fecha: sapato perdido não vira moedinha embaixo do travesseiro.'},
+  {t:'TRAVESSEIRO.', no:'A palavra TRAVESSEIRO já aparece na própria frase, e é isso que puxa o olho para ela. Mas se Joana tivesse perdido o travesseiro, ela não podia achar nada embaixo dele.'}
+ ],
+ dica:'Leia a frase inteira com cada palavra dentro do buraco. Duas pistas mandam: PERDEU e MOEDINHA EMBAIXO DO TRAVESSEIRO.',
+ truque:'Ponha cada palavra no buraco e leia a frase inteira, do começo.',
+ visual:'<p class="vx"><span class="mk">PERDEU UM</span> ... <span class="mk">MOEDINHA</span> ... <span class="mk">EMBAIXO DO TRAVESSEIRO</span></p>'+
+        '<p class="vx">As tr&ecirc;s pistas t&ecirc;m de fechar ao mesmo tempo. S&oacute; o <b>dente</b> fecha as tr&ecirc;s.</p>'+
+        '<p class="vx"><span class="dm">perdeu um</span> <b class="bad2">SAPATO</b> <span class="dm">&mdash; a primeira pista at&eacute; combina, mas a moedinha n&atilde;o vem</span></p>',
+ porque:'Quem perde dente é que acha moedinha embaixo do travesseiro. As duas partes da frase só fecham juntas com DENTE.',
+ proximo:'Antes de marcar, leia a frase inteira com a palavra dentro, até o ponto final. Se a segunda metade brigar, é a errada.'},
+
+{id:'TR22', eixo:'buraco', origem:'Treino no estilo da prova',
+ pede:'QUE PALAVRA COMPLETA A FRASE ABAIXO?',
+ quadro:'O BOLO CHEGOU NA MESA COM SETE <span class="bl">_______</span> EM CIMA. TODO MUNDO CANTOU E LU&Iacute;SA SOPROU.',
+ opts:[
+  {t:'VELINHAS.', ok:1},
+  {t:'MORANGOS.', no:'Morango fica em cima do bolo mesmo, e essa parte combina. Mas a frase termina com Luísa SOPRANDO — e ninguém sopra morango.'},
+  {t:'BALÕES.', no:'Balão a gente sopra, e é aí que essa engana: ela passa na pista do sopro. Mas balão não fica em cima do bolo, e não é o que se sopra na hora do parabéns.'},
+  {t:'GARFOS.', no:'Garfo tem em toda festa, é verdade. Mas garfo fica ao lado do bolo, não em cima dele, e ninguém sopra garfo.'}
+ ],
+ dica:'Leia a frase inteira com cada palavra dentro. Três pistas mandam: SETE, EM CIMA DO BOLO e SOPROU.',
+ truque:'Ponha cada palavra no buraco e leia a frase inteira, do começo.',
+ visual:'<p class="vx"><span class="mk">SETE</span> ... <span class="mk">EM CIMA</span> do bolo ... <span class="mk">LU&Iacute;SA SOPROU</span></p>'+
+        '<p class="vx">S&oacute; a <b>velinha</b> fecha as tr&ecirc;s: sete velinhas s&atilde;o a idade, ficam em cima do bolo e s&atilde;o o que a gente sopra.</p>'+
+        '<p class="vx"><b class="bad2">BAL&Otilde;ES</b> <span class="dm">&mdash; passa na pista do sopro e cai na pista do bolo</span></p>'+
+        '<p class="vx"><b class="bad2">MORANGOS</b> <span class="dm">&mdash; passa na pista do bolo e cai na pista do sopro</span></p>',
+ porque:'Sete velinhas em cima do bolo são a idade de quem faz aniversário, e velinha é o que a gente sopra depois do parabéns. As três pistas da frase fecham só com VELINHAS.',
+ proximo:'Quando a frase dá mais de uma pista, confira TODAS. A alternativa errada costuma passar numa delas e cair na outra.'},
+
+{id:'TR23', eixo:'buraco', origem:'Treino no estilo da prova',
+ pede:'QUE PALAVRA PREENCHE CORRETAMENTE A LACUNA NA FRASE ABAIXO?',
+ quadro:'NO QUINTAL DA MINHA CASA NASCERAM <span class="bl">_____</span> FLORES AMARELAS.',
+ opts:[
+  {t:'UMA', no:'UMA é de uma só. Leia a frase inteira: "nasceram uma flores amarelas" — ela tropeça na hora. FLORES tem S no fim, são várias.'},
+  {t:'MUITAS', ok:1},
+  {t:'ALGUNS', no:'ALGUNS é de várias, e essa parte combina direitinho — é por isso que atrai. Mas leia baixinho: "nasceram alguns flores amarelas" tropeça. Aqui a palavra seria ALGUMAS.'},
+  {t:'AQUELE', no:'AQUELE é de um só, e a frase fala de várias. "Nasceram aquele flores amarelas" tropeça duas vezes.'}
+ ],
+ dica:'Ponha cada palavrinha no buraco e leia a frase toda em voz baixa. Repare no que vem DEPOIS do buraco: FLORES e AMARELAS terminam em S.',
+ truque:'Ponha cada palavra no buraco e leia a frase inteira, do começo.',
+ visual:'<p class="vx">nasceram <b class="mk">MUITAS</b> FLORES AMARELAS <span class="dm">&mdash; a frase anda</span></p>'+
+        '<p class="vx"><span class="dm">nasceram</span> <b class="bad2">ALGUNS</b> <span class="dm">FLORES AMARELAS &mdash; a frase tropeça</span></p>'+
+        '<p class="vx"><span class="dm">nasceram</span> <b class="bad2">UMA</b> <span class="dm">FLORES AMARELAS &mdash; a frase tropeça</span></p>'+
+        '<p class="vx">FLORES e AMARELAS t&ecirc;m <b>S</b> no fim. Ent&atilde;o a palavrinha da frente tamb&eacute;m tem de ser de <b>v&aacute;rias</b> e de <b>menina</b>.</p>',
+ porque:'A frase fala de várias flores, e FLORES e AMARELAS são de menina. Lendo a frase inteira, só MUITAS FLORES AMARELAS anda sem tropeçar.',
+ proximo:'Olhe a palavra que vem depois do buraco: tem S no fim? Então a palavrinha da frente também é de várias. E veja se ela é de menino ou de menina.'},
+
+{id:'TR24', eixo:'buraco', origem:'Treino no estilo da prova',
+ pede:'QUE PALAVRA PREENCHE CORRETAMENTE A LACUNA NA FRASE ABAIXO?',
+ quadro:'NO DIA DO ANIVERS&Aacute;RIO DELE, PEDRO GANHOU <span class="bl">_____</span> BICICLETA NOVA.',
+ opts:[
+  {t:'UM', no:'UM é de um só, e é uma bicicleta só mesmo — essa parte combina, e é aí que ele engana. Mas leia a frase inteira: "ganhou um bicicleta nova" tropeça.'},
+  {t:'UMAS', no:'UMAS combina com bicicleta, essa parte está certa. Mas UMAS é de várias, e a frase fala de uma bicicleta só, sem S: "ganhou umas bicicleta nova" tropeça.'},
+  {t:'UMA', ok:1},
+  {t:'ALGUNS', no:'ALGUNS tropeça duas vezes: é de vários e é de menino. "Ganhou alguns bicicleta nova" não é jeito de falar nem de escrever.'}
+ ],
+ dica:'Ponha cada palavrinha no buraco e leia a frase toda em voz baixa. A pista vem depois do buraco: BICICLETA NOVA, uma só, e não é palavra de menino.',
+ truque:'Ponha cada palavra no buraco e leia a frase inteira, do começo.',
+ visual:'<p class="vx">ganhou <b class="mk">UMA</b> BICICLETA NOVA <span class="dm">&mdash; a frase anda</span></p>'+
+        '<p class="vx"><span class="dm">ganhou</span> <b class="bad2">UM</b> <span class="dm">BICICLETA NOVA &mdash; a frase tropeça</span></p>'+
+        '<p class="vx"><span class="dm">ganhou</span> <b class="bad2">UMAS</b> <span class="dm">BICICLETA NOVA &mdash; a frase tropeça</span></p>'+
+        '<p class="vx">BICICLETA e NOVA est&atilde;o sozinhas, sem S no fim, e s&atilde;o palavras de menina. A palavrinha da frente tem de combinar com as duas coisas.</p>',
+ porque:'A frase fala de uma bicicleta só, e BICICLETA e NOVA são de menina. Lendo a frase inteira, só UMA BICICLETA NOVA anda sem tropeçar.',
+ proximo:'Leia sempre até o fim da frase com a palavra dentro. Uma palavrinha pode acertar o "quantos" e errar o "de menino ou de menina" — e uma coisa só já derruba.'},
+
 /* fim dos itens */
 {id:'FIM', eixo:'_', origem:'', pede:'', opts:[], _sentinela:1}
 ];
