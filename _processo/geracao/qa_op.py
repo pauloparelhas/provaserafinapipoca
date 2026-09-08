@@ -9,9 +9,9 @@ O que ele reprova:
   - erro de console em qualquer tela
   - rolagem horizontal em 360x640, 740x360 e 1280x800
   - alvo de toque com menos de 44px de altura
-  - percurso quebrado: nao chega ao resultado respondendo tudo errado
-  - a regua nao liberando as alternativas ao chegar na ultima linha
-  - questao-irma nao entrando depois de um erro
+  - percurso quebrado: nao chega ao resultado
+  - correcao de erro sem as tres partes (truque, a marcada, o gesto)
+  - popup da teoria que nao corrige, nao fecha ou perde a posicao da pagina
 
 Uso:  python _processo/geracao/qa_op.py
 """
@@ -19,7 +19,7 @@ import sys, pathlib
 from playwright.sync_api import sync_playwright
 
 RAIZ = pathlib.Path(__file__).resolve().parents[2]
-ALVOS = [("OP_simulado.html", "simulado"), ("OP_truques.html", "truques")]
+ALVOS = [("OP_simulado.html", "simulado"), ("OP_estudo.html", "estudo"), ("OP_provas.html", "provas"), ("OP_video.html", "video")]
 # O aparelho de uso e o TABLET (decisao do Paulo, 08/09). O celular fica
 # como piso de seguranca: nao e o alvo, mas nao pode quebrar.
 VIEWPORTS = [(810, 1080, "tablet retrato"), (1080, 810, "tablet paisagem"),
@@ -55,40 +55,78 @@ def checa_layout(page, ctx):
         falha(f"{ctx}: alvo de toque menor que 44px -> {b}")
 
 def percorre_simulado(page):
-    """Responde tudo ERRADO de proposito: e o caminho que exercita o
-       comentario didatico e a entrada da questao-irma."""
-    page.click(".esc.forte")          # o botao, nao o titulo da barra de cima
-    page.wait_for_selector(".pede", timeout=5000)
-    irmas_vistas = 0
-    for passo in range(60):
+    """Percorre uma rodada inteira marcando sempre a alternativa A.
+
+    Como a ordem das alternativas e sorteada, algumas serao certas e outras
+    erradas — o que e justamente o que se quer: exercita o elogio E a
+    correcao didatica. Toda correcao de erro tem de trazer as tres partes
+    (truque, a alternativa marcada, e o gesto para a proxima)."""
+    page.click(".linha >> nth=1")                 # "Prova inteira", 15 questoes
+    page.wait_for_selector(".opts .opt", timeout=5000)
+    irmas = 0
+    erros_corrigidos = 0
+    for _ in range(80):
         if page.locator(".placar").count():
             break
-        # desce a regua ate o fim, se houver
-        for _ in range(30):
-            bt = page.locator("#btDesce")
-            if not bt.count() or not bt.is_visible():
-                break
-            bt.click()
-        if page.locator("#opts").is_visible() is False:
-            falha("regua: cheguei ao fim do texto e as alternativas nao apareceram")
-            return irmas_vistas
-        # marca uma alternativa errada, se a questao ainda nao foi respondida
-        if page.locator("#fb.show").count() == 0:
-            idx = page.evaluate("""()=>{
-              var it=deck[cur];
-              for(var i=0;i<it.opts.length;i++) if(!it.opts[i].ok) return i;
-              return 0;
-            }""")
-            page.click(f"#opt{idx}")
-            page.wait_for_selector("#fb.show", timeout=3000)
-            for parte in [".truque", ".sua", ".prox"]:
-                if page.locator(f"#fb {parte}").count() == 0:
-                    falha(f"comentario de erro sem a parte {parte}")
-        if page.locator(".irma").count():
-            irmas_vistas += 1
-        page.click("#next")
-        page.wait_for_timeout(120)
-    return irmas_vistas
+        if page.locator(".fb").count() == 0:
+            page.click(".opts .opt >> nth=0")
+            page.wait_for_selector(".fb", timeout=3000)
+            if page.locator(".fb.errado").count():
+                erros_corrigidos += 1
+                for parte, oque in [(".truq", "o truque"), (".sua", "a alternativa marcada"),
+                                    (".prox", "o gesto para a proxima")]:
+                    if page.locator(".fb " + parte).count() == 0:
+                        falha("correcao de erro sem " + oque)
+            elif page.locator(".fb.certo .porq").count() == 0:
+                falha("acerto sem a explicacao do porque")
+        if page.locator(".qetq").count():
+            irmas += 1
+        botao = page.locator(".avancar").first
+        if botao.count():
+            botao.click()
+        else:
+            page.click("#navNext")
+        page.wait_for_timeout(140)
+    if erros_corrigidos == 0:
+        falha("simulado: percorri a rodada inteira e nenhuma correcao de erro apareceu")
+    return irmas
+
+
+def percorre_estudo(page):
+    """Abre um bloco, abre o popup de questoes reais daquele tipo, responde,
+       fecha — e confere que a pagina volta para onde estava."""
+    page.click(".blocotopo >> nth=0")
+    page.wait_for_selector(".bloco.aberto .acao.forte", timeout=4000)
+    page.evaluate("()=>window.scrollTo(0,300)")
+    antes = page.evaluate("()=>Math.round(window.scrollY)")
+    page.click(".bloco.aberto .acao.forte")
+    page.wait_for_selector(".modal .opt", timeout=4000)
+    page.click(".modal .opt >> nth=0")
+    page.wait_for_timeout(250)
+    if page.locator(".modal .fb").count() == 0:
+        falha("estudo: o popup nao corrigiu a resposta")
+    page.click(".fechar")
+    page.wait_for_timeout(300)
+    if page.locator(".modal").count():
+        falha("estudo: o popup nao fechou")
+    depois = page.evaluate("()=>Math.round(window.scrollY)")
+    if abs(depois - antes) > 30:
+        falha(f"estudo: ao fechar o popup a pagina pulou de {antes}px para {depois}px")
+    if page.locator(".bloco.aberto").count() == 0:
+        falha("estudo: o bloco fechou sozinho depois do popup")
+
+
+def percorre_provas(page):
+    """Abre a primeira prova anterior e responde a primeira questao."""
+    page.click(".provacard >> nth=0")
+    page.wait_for_selector(".opts .opt", timeout=4000)
+    if page.locator(".mapa button").count() == 0:
+        falha("provas: a grade de questoes nao apareceu")
+    page.click(".opts .opt >> nth=0")
+    page.wait_for_timeout(250)
+    if page.locator(".fb").count() == 0:
+        falha("provas: a questao nao foi corrigida")
+
 
 with sync_playwright() as pw:
     nav = pw.chromium.launch()
@@ -108,15 +146,20 @@ with sync_playwright() as pw:
             page.goto(caminho.as_uri())
             page.wait_for_timeout(500)
             checa_layout(page, f"{nome} {rot} inicio")
-            if nome == "simulado" and (w, h) == VP_PERCURSO:
-                irmas = percorre_simulado(page)
-                checa_layout(page, f"{nome} {rot} resultado")
-                if not page.locator(".placar").count():
-                    falha("simulado: nao cheguei ao resultado respondendo tudo")
-                if irmas == 0:
-                    falha("simulado: errei todas e nenhuma questao-irma entrou")
-                else:
-                    print(f"  ok: {irmas} questoes-irma entraram depois dos erros")
+            if (w, h) == VP_PERCURSO:
+                if nome == "simulado":
+                    irmas = percorre_simulado(page)
+                    checa_layout(page, f"{nome} {rot} resultado")
+                    if not page.locator(".placar").count():
+                        falha("simulado: nao cheguei ao resultado")
+                    else:
+                        print(f"  ok: rodada inteira ate o placar; {irmas} questoes-irma entraram")
+                elif nome == "estudo":
+                    percorre_estudo(page)
+                    print("  ok: popup de questoes reais abre, corrige e devolve a rolagem")
+                elif nome == "provas":
+                    percorre_provas(page)
+                    print("  ok: prova anterior abre e corrige")
             for e in erros:
                 falha(f"{nome} {rot}: erro de console -> {e}")
             ctx.close()

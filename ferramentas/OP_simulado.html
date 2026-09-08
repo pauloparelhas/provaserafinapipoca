@@ -6,221 +6,15 @@
 <meta name="theme-color" content="#0d0b1e">
 <title>Simulado — Olimpíada de Português</title>
 <link rel="stylesheet" href="serafina-core.css?v=20260908">
+<link rel="stylesheet" href="OP_estilo.css?v=20260908b">
 <style>
-/* ============================================================
-   SIMULADO — Olimpíada de Português · Categoria G · 1ª fase
-
-   Diferente dos simulados anteriores do site em três coisas:
-
-   1. TUDO EM PORTUGUÊS. O botão da bandeira não existe aqui (não há o
-      que traduzir); no lugar dele há o botão DICA, que mostra o empurrão
-      ANTES de responder — nunca a resposta.
-   2. A RÉGUA. Todo texto de 3 linhas ou mais nasce com uma linha acesa
-      só. A criança desce a régua uma linha por vez, e as alternativas
-      só aparecem quando ela chega ao fim. É o antídoto mecânico do pulo
-      de linha (a mãe: "ela pula linha o tempo todo").
-   3. O ERRO ENSINA. Errar não fecha a questão: abre o comentário com o
-      TRUQUE (a mesma frase do cartão), o truque aplicado visualmente
-      NESTA questão, por que a alternativa escolhida não serve, e o gesto
-      para a próxima. Depois de um erro entra uma questão-irmã da mesma
-      família, fora da nota — para ela acertar uma igual enquanto o
-      truque está fresco.
-
-   Os dados vêm todos de OP_data.js (banco único, questões reais das
-   provas oficiais 2024 e 2025). Aqui não há conteúdo, só motor.
-   ============================================================ */
-:root{--fs:1;--bg:#0d0b1e;--bg2:#11253a;--ink:#f2f7ff;--soft:rgba(255,255,255,.62);--dim:rgba(255,255,255,.42);
-  --card:#15243c;--line:rgba(255,255,255,.13);--accent:#4ade80;--accent2:#fbbf24;
-  --ok:#34d399;--no:#f87171;--dica:#fcd34d;--rad:22px;--surf:rgba(255,255,255,.06);--press:0 2px 0 rgba(0,0,0,.22)}
-body.light{--bg:#eaf6ee;--bg2:#e3f0fb;--ink:#0b2033;--soft:rgba(11,32,51,.66);--dim:rgba(11,32,51,.5);
-  --card:#fff;--line:rgba(11,32,51,.13);--accent:#15803d;--dica:#a16207;--surf:rgba(11,32,51,.05);--press:0 2px 0 rgba(0,0,0,.07)}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
-body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
-.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
-
-/* ---------- topo ---------- */
-.topbar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
-.topbar .title{font-weight:900;font-size:calc(.9rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
-.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.02rem;font-weight:800;cursor:pointer;padding:0 8px;font-family:inherit}
-.iconbtn:active{transform:scale(.9)}
-.dicabtn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;gap:1px}
-.dicabtn .ft{font-size:.5rem;font-weight:900;letter-spacing:.5px}
-.dicabtn.on{background:rgba(252,211,77,.24)}
-.bar{height:8px;background:var(--line)}
-.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .35s}
-
-/* ---------- palco ---------- */
-.stage{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:14px clamp(10px,3vw,26px) 96px}
-.card{position:relative;width:100%;max-width:620px;background:var(--card);border-radius:var(--rad);box-shadow:0 14px 40px rgba(0,0,0,.35);
-  padding:clamp(16px,4vw,26px);border:1px solid var(--line)}
-
-/* ---------- TABLET (o aparelho em que ela vai usar isto) ----------
-   Tela larga: o card cresce, a letra cresce junto e o texto do poema
-   passa a caber quase inteiro sem rolagem — que é o que faz a régua
-   valer a pena. Abaixo de 700px o layout de celular continua válido
-   como piso de segurança, mas o alvo é o tablet.                    */
-@media(min-width:700px){
-  :root{--fs:1.12}
-  .stage{padding:22px clamp(18px,4vw,40px) 110px}
-  .card{max-width:900px;padding:30px 34px;border-radius:26px}
-  .opt{min-height:62px;padding:13px 18px}
-  .opt .let{flex:0 0 36px;height:36px;font-size:1rem}
-  .lin{padding:9px 16px}
-  .quadro{padding:18px 22px}
-  .fb{padding:22px}
-}
-@media(min-width:1000px){
-  .card{max-width:1000px}
-}
-
-/* cabeçalho da questão */
-.qhead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.qnum{font-size:.7rem;font-weight:900;color:var(--soft);letter-spacing:1px;text-transform:uppercase}
-.fam{font-size:.62rem;font-weight:900;padding:4px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;
-  background:var(--surf);border:1px solid var(--line)}
-.orig{font-size:.66rem;font-weight:800;color:var(--dim);margin-bottom:10px;line-height:1.3}
-
-/* enunciado e pergunta — CAIXA ALTA, igual à prova */
-.enun{font-size:calc(clamp(.95rem,2.7vw,1.05rem)*var(--fs));font-weight:800;line-height:1.5;margin-bottom:12px;color:var(--soft)}
-.pede{font-size:calc(clamp(1.05rem,3vw,1.22rem)*var(--fs));font-weight:900;line-height:1.4;margin:14px 0 4px}
-.nota{font-size:calc(.72rem*var(--fs));font-weight:800;color:var(--dim);font-style:italic;line-height:1.4;margin:8px 0;
-  padding-left:10px;border-left:3px solid var(--line)}
-
-/* quadro destacado — a prova usa caixa verde para listas, frases e tabelas */
-.quadro{background:rgba(74,222,128,.11);border:1px solid rgba(74,222,128,.34);border-radius:14px;
-  padding:13px 15px;margin:12px 0;font-size:calc(clamp(1rem,2.9vw,1.14rem)*var(--fs));font-weight:800;line-height:1.55;text-align:center}
-body.light .quadro{background:rgba(21,128,61,.08)}
-.quadro .bl{display:inline-block;min-width:90px;border-bottom:3px solid var(--accent);vertical-align:-3px}
-.quadro .sep{height:7px}
-.lst{display:block;text-align:left;max-width:230px;margin:2px auto;padding:3px 12px;border-bottom:1px dashed var(--line)}
-.lst.vaz{border-bottom:3px solid var(--accent2);min-height:1.5em}
-.tbc{margin:0 auto;border-collapse:collapse}
-.tbc td{border:1px solid var(--line);padding:5px 8px;font-size:.95em;min-width:34px}
-.tbc tr:first-child td{font-size:1.15em}
-.seq{font-size:1.35em;letter-spacing:5px;line-height:1.7;margin-top:5px;word-break:break-word}
-
-/* ---------- A RÉGUA ---------- */
-.leitura{margin:12px 0;border:1px solid var(--line);border-radius:14px;padding:10px 6px;background:var(--surf)}
-.lin{display:block;width:100%;text-align:left;font-family:inherit;background:none;border:none;color:var(--ink);cursor:pointer;
-  font-size:calc(clamp(1rem,2.9vw,1.15rem)*var(--fs));font-weight:800;line-height:1.6;padding:7px 12px;border-radius:9px;
-  opacity:.3;transition:opacity .2s,background .2s}
-.lin.lida{opacity:.62}
-.lin.on{opacity:1;background:rgba(251,191,36,.17);box-shadow:inset 3px 0 0 var(--accent2)}
-body.light .lin.on{background:rgba(180,120,10,.13)}
-.lin.acesa{opacity:1;background:rgba(74,222,128,.2);box-shadow:inset 3px 0 0 var(--accent)}
-.lin.tudo{opacity:1}
-/* A barra da régua é FIXA acima da navegação. Antes ela ficava no fim do
-   poema: num celular, com 12 linhas, o botão nascia fora da tela e a
-   criança teria de rolar para baixo a cada linha — matando o gesto que a
-   régua existe para ensinar. Controle fora do conteúdo, sempre ao alcance. */
-.regcontrol{position:fixed;left:0;right:0;bottom:calc(66px + env(safe-area-inset-bottom));z-index:19;
-  display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;
-  padding:9px 12px;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(0,0,0,.28)}
-.regcontrol .regbtn{flex:1 1 auto;max-width:280px}
-.regbtn{min-height:48px;padding:0 18px;border-radius:14px;border:2px solid var(--accent);background:rgba(74,222,128,.15);
-  color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.92rem*var(--fs));cursor:pointer}
-.regbtn:active{transform:translateY(1px)}
-.regbtn.sec{border-color:var(--line);background:var(--surf);font-weight:800;font-size:.8rem}
-.reghint{flex:0 0 100%;font-size:calc(.74rem*var(--fs));font-weight:800;color:var(--dim);text-align:center;line-height:1.35}
-/* com a barra da régua no ar, o card precisa de chão extra para a última
-   linha do texto não nascer escondida atrás dela */
-body.regua .stage{padding-bottom:178px}
-
-/* ---------- alternativas ---------- */
-.opts{display:flex;flex-direction:column;gap:10px;margin:14px 0 0}
-.opt{display:flex;align-items:center;gap:11px;min-height:54px;padding:11px 14px;border:2px solid var(--line);border-radius:14px;
-  background:var(--surf);color:var(--ink);font-size:calc(clamp(.98rem,2.7vw,1.08rem)*var(--fs));font-weight:800;line-height:1.35;
-  cursor:pointer;font-family:inherit;text-align:left;box-shadow:var(--press);transition:transform .12s,border-color .12s}
-.opt:active{transform:translateY(1px)}
-.opt .let{flex:0 0 30px;height:30px;border-radius:9px;background:var(--line);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem}
-.opt.ok{background:var(--ok);color:#06251a;border-color:var(--ok);box-shadow:none}
-.opt.ok .let{background:rgba(0,0,0,.18);color:#06251a}
-.opt.no{background:var(--no);color:#3a0a0a;border-color:var(--no);box-shadow:none}
-.opt.no .let{background:rgba(0,0,0,.18);color:#3a0a0a}
-.opt[disabled]{cursor:default}
-
-/* ---------- botão ouvir ---------- */
-.speak{margin:10px auto 0;display:flex;align-items:center;justify-content:center;gap:7px;border:1.5px solid var(--line);background:var(--surf);
-  color:var(--soft);font-weight:800;font-size:.8rem;border-radius:22px;padding:0 16px;min-height:44px;cursor:pointer;font-family:inherit}
-
-/* ---------- a dica (antes de responder) ---------- */
-.dicabox{display:none;margin:12px 0 0;background:rgba(252,211,77,.14);border:1px dashed rgba(252,211,77,.5);border-radius:14px;
-  padding:12px 14px;font-size:calc(.94rem*var(--fs));font-weight:800;line-height:1.5;color:var(--ink)}
-.dicabox.show{display:block}
-.dicabox b{color:var(--dica)}
-
-/* ---------- o comentário do erro ---------- */
-.fb{margin-top:16px;border-radius:16px;padding:15px;border:2px solid;display:none}
-.fb.show{display:block}
-.fb.certo{border-color:var(--ok);background:rgba(52,211,153,.12)}
-.fb.errado{border-color:var(--accent2);background:rgba(251,191,36,.11)}
-.fb h3{font-size:calc(1rem*var(--fs));font-weight:900;margin-bottom:9px;display:flex;align-items:center;gap:8px;line-height:1.3}
-.fb .truque{font-size:calc(1.02rem*var(--fs));font-weight:900;line-height:1.45;margin-bottom:12px;padding:11px 13px;
-  border-radius:11px;background:var(--surf);border-left:5px solid var(--accent2)}
-.fb .sua{font-size:calc(.94rem*var(--fs));font-weight:800;line-height:1.5;margin:12px 0;padding:11px 13px;border-radius:11px;
-  background:rgba(248,113,113,.13);border-left:5px solid var(--no)}
-.fb .porq{font-size:calc(.94rem*var(--fs));font-weight:800;line-height:1.5;margin:12px 0}
-.fb .prox{font-size:calc(.96rem*var(--fs));font-weight:900;line-height:1.5;margin-top:12px;padding:11px 13px;border-radius:11px;
-  background:rgba(74,222,128,.14);border-left:5px solid var(--accent)}
-.fb .prox i{display:block;font-size:.72rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--soft);font-style:normal;margin-bottom:4px}
-
-/* o truque desenhado */
-.pcs{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:9px 0}
-.pc{padding:7px 11px;border-radius:10px;background:var(--surf);border:2px solid var(--line);font-weight:900;
-  font-size:calc(.92rem*var(--fs));line-height:1.25;text-align:center}
-.pc.hit{background:rgba(52,211,153,.24);border-color:var(--ok)}
-.pc.bad{background:rgba(248,113,113,.2);border-color:var(--no)}
-.arw{font-weight:900;color:var(--soft);font-size:1.1rem;padding:0 2px}
-.vx{font-size:calc(.92rem*var(--fs));font-weight:800;line-height:1.55;margin:8px 0;text-align:center}
-.mk{background:rgba(251,191,36,.3);border-radius:5px;padding:1px 5px}
-.bad2{background:rgba(248,113,113,.25);border-radius:5px;padding:1px 5px}
-.dm{opacity:.45;font-weight:700}
-
-/* ---------- irmã ---------- */
-.irma{display:inline-flex;align-items:center;gap:6px;font-size:.62rem;font-weight:900;letter-spacing:.5px;text-transform:uppercase;
-  padding:4px 10px;border-radius:20px;background:rgba(251,191,36,.2);color:var(--accent2);border:1px solid rgba(251,191,36,.4)}
-body.light .irma{color:#92400e}
-
-/* ---------- navegação ---------- */
-.next{display:none;width:100%;min-height:56px;margin-top:16px;border:none;border-radius:16px;background:linear-gradient(90deg,var(--accent),#22c55e);
-  color:#04261c;font-family:inherit;font-weight:900;font-size:calc(1.05rem*var(--fs));cursor:pointer}
-.next.show{display:block}
-.next:active{transform:translateY(1px)}
-.qnav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;gap:8px;padding:9px 12px calc(9px + env(safe-area-inset-bottom));
-  background:var(--card);border-top:1px solid var(--line)}
-.qnav-btn{flex:1;min-height:48px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-family:inherit;
-  font-weight:900;font-size:.92rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
-.qnav-btn[disabled]{opacity:.35}
-.qnav-btn .ql{font-size:.7rem;font-weight:900}
-.qnav-btn.fim{background:linear-gradient(90deg,var(--accent),#22c55e);color:#04261c}
-
-/* ---------- início e resultado ---------- */
-.intro{text-align:center}
-.intro h1{font-size:calc(clamp(1.3rem,4.4vw,1.7rem)*var(--fs));font-weight:900;line-height:1.2;margin-bottom:8px}
-.intro p{font-size:calc(.98rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.55;margin-bottom:16px}
-.escolha{display:grid;gap:11px;margin-top:8px}
-@media(min-width:520px){.escolha{grid-template-columns:1fr 1fr}}
-.esc{min-height:96px;border-radius:18px;border:2px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;
-  font-family:inherit;padding:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
-.esc:active{transform:translateY(1px)}
-.esc b{font-size:calc(1.12rem*var(--fs));font-weight:900}
-.esc span{font-size:calc(.83rem*var(--fs));font-weight:800;color:var(--dim);line-height:1.35}
-.esc.forte{border-color:var(--accent);background:rgba(74,222,128,.14)}
-.placar{font-size:calc(clamp(2.4rem,9vw,3.4rem)*var(--fs));font-weight:900;line-height:1;margin:14px 0 4px;color:var(--accent)}
-.reslinha{font-size:calc(.96rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.6;margin-bottom:6px}
-.resfam{display:flex;flex-direction:column;gap:7px;margin:16px 0;text-align:left}
-.resfam div{display:flex;justify-content:space-between;gap:10px;font-size:calc(.9rem*var(--fs));font-weight:800;
-  padding:9px 12px;border-radius:11px;background:var(--surf);border:1px solid var(--line)}
-.resfam b{font-weight:900}
-.resbtns{display:grid;gap:10px;margin-top:8px}
-
-@media(max-width:430px){
-  .topbar{flex-wrap:wrap;gap:4px}
-  .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px;font-size:.82rem}
-  .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
-}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* só o que é exclusivo desta tela */
+.placar{font-size:calc(2.6rem*var(--fs));font-weight:900;line-height:1;color:var(--accent);text-align:center;margin:6px 0 2px}
+.placarsub{text-align:center;font-size:calc(.9rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.45;margin-bottom:12px}
+.fambar{display:flex;justify-content:space-between;gap:9px;font-size:calc(.86rem*var(--fs));font-weight:800;
+  padding:7px 11px;border-radius:10px;background:var(--surf);border:1px solid var(--line);margin-bottom:6px}
+.fambar.zero{opacity:.55}
+.progresso{font-size:calc(.74rem*var(--fs));font-weight:800;color:var(--dim);text-align:center;margin-top:9px;line-height:1.4}
 </style>
 </head>
 <body>
@@ -228,306 +22,197 @@ body.light .irma{color:#92400e}
 <div class="app">
   <div class="topbar">
     <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
-    <span class="title">Simulado &middot; Olimpíada de Português</span>
-    <button class="iconbtn dicabtn" id="dicabtn" title="Dica" onclick="toggleDica()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 21h6M10 18h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span class="ft">DICA</span></button>
+    <span class="title">Simulado</span>
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Som" aria-pressed="false" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Som" onclick="toggleSom()">&#128266;</button>
     <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
   <div class="bar"><span id="bar"></span></div>
-  <div class="stage"><div class="card" id="card"></div></div>
+  <div class="stage"><div class="card" id="raiz"></div></div>
 </div>
 <div class="qnav" id="qnav" style="display:none">
-  <button class="qnav-btn" id="navPrev" onclick="voltar()">&#8249;<span class="ql">Voltar</span></button>
-  <button class="qnav-btn" id="navNext" onclick="avancar()">Avan&ccedil;ar<span class="ql">&#8250;</span></button>
+  <button class="qnav-btn" id="navPrev">&#8249; Voltar</button>
+  <button class="qnav-btn forte" id="navNext">Avan&ccedil;ar &#8250;</button>
 </div>
 
-<script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'op_som',stars:110};</script>
+<script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'op_som',stars:90};</script>
 <script src="serafina-core.js?v=20260908"></script>
-<script src="OP_data.js?v=20260908"></script>
+<script src="assets/react.production.min.js"></script>
+<script src="assets/react-dom.production.min.js"></script>
+<script src="OP_data.js?v=20260908b"></script>
+<script src="OP_questao.js?v=20260908b"></script>
 <script>
 /* ============================================================
-   MOTOR DO SIMULADO
+   SIMULADO — rodadas de 15, como a prova.
+
+   O banco tem mais de 100 questões reais das seis provas oficiais. Uma
+   rodada é sempre de 15, com as cotas por família que a prova real usa,
+   e o motor NÃO repete: guarda em localStorage os ids que ela já viu e
+   só volta a sortear os antigos quando o banco se esgota. Assim ela pode
+   fazer sete rodadas seguidas sem reencontrar uma pergunta.
+
+   Errar não fecha a questão: abre a correção (no componente único
+   OP_questao.js) e insere logo em seguida uma questão-irmã da mesma
+   família, fora da nota — para ela acertar uma igual enquanto o truque
+   está fresco.
    ============================================================ */
 'use strict';
-var FAM = {}, FAMLIST = window.OP.FAMILIAS, BANCO = window.OP.ITENS;
-FAMLIST.forEach(function(f){ FAM[f.k]=f; });
+var h=React.createElement, OP=window.OP, OPQ=window.OPQ;
+var FAM={}; OP.FAMILIAS.forEach(function(f){ FAM[f.k]=f; });
+var VISTOS='op_vistos';
 
-var deck=[], cur=0, usados={}, dicaOn=false;
-
-function $(i){ return document.getElementById(i); }
-function embaralha(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
-function porEixo(k){ return BANCO.filter(function(x){ return x.eixo===k; }); }
-
-/* limpa acentos e caixa alta para o TTS não soletrar */
-function paraFala(html){
-  return String(html).replace(/<[^>]+>/g,' ').replace(/&[a-z]+;/gi,' ').replace(/\s+/g,' ').trim();
+function vistos(){ try{ return JSON.parse(localStorage.getItem(VISTOS)||'[]'); }catch(e){ return []; } }
+function marcaVisto(ids){
+  var v=vistos(); ids.forEach(function(i){ if(v.indexOf(i)<0) v.push(i); });
+  try{ localStorage.setItem(VISTOS,JSON.stringify(v)); }catch(e){}
 }
+function zeraVistos(){ try{ localStorage.removeItem(VISTOS); }catch(e){} }
 
-/* ---------- monta a rodada ----------
-   Sorteia respeitando a cota de cada família (espelho da prova real).
-   Se uma família não tiver itens suficientes, completa com o que houver
-   das outras — nunca deixa a rodada menor do que o pedido.            */
-function montaDeck(n){
-  var escolhidos=[];
-  if(n>=15){
-    FAMLIST.forEach(function(f){
-      if(!f.cota) return;
-      var pool=embaralha(porEixo(f.k));
-      escolhidos=escolhidos.concat(pool.slice(0,f.cota));
-    });
-  }else{
-    /* aquecimento: uma de cada família das mais frequentes */
-    var ordem=['ler','letras','silabas','buraco','intruso'];
-    ordem.forEach(function(k){ var p=embaralha(porEixo(k)); if(p[0]) escolhidos.push(p[0]); });
+/* monta uma rodada de n questões respeitando as cotas da prova real e
+   dando prioridade ao que ela ainda não viu */
+function montaRodada(n){
+  var jaVi=vistos(), escolhidas=[];
+  function doEixo(k, quantas){
+    var pool=OP.ITENS.filter(function(i){ return i.eixo===k && escolhidas.indexOf(i)<0; });
+    var novas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)<0; }));
+    var velhas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)>=0; }));
+    escolhidas=escolhidas.concat(novas.concat(velhas).slice(0,quantas));
   }
-  /* completa se faltou */
-  var resto=embaralha(BANCO.filter(function(x){ return escolhidos.indexOf(x)<0; }));
-  while(escolhidos.length<n && resto.length) escolhidos.push(resto.shift());
-  deck = embaralha(escolhidos).slice(0,n).map(function(src){ return novoItem(src,false); });
-  cur=0; usados={};
-  deck.forEach(function(d){ usados[d.src.id]=1; });
+  if(n>=15){ OP.FAMILIAS.forEach(function(f){ if(f.cota) doEixo(f.k,f.cota); }); }
+  else { ['ler','letras','silabas','buraco','intruso'].forEach(function(k){ doEixo(k,1); }); }
+  /* completa o que faltar, do que ela menos viu */
+  var resto=OP.ITENS.filter(function(i){ return escolhidas.indexOf(i)<0; });
+  var novasResto=OPQ.embaralha(resto.filter(function(i){ return jaVi.indexOf(i.id)<0; }));
+  var velhasResto=OPQ.embaralha(resto.filter(function(i){ return jaVi.indexOf(i.id)>=0; }));
+  escolhidas=escolhidas.concat(novasResto).concat(velhasResto);
+  return OPQ.embaralha(escolhidas.slice(0,n));
 }
-function novoItem(src,ehIrma){
-  return {src:src, ehIrma:ehIrma, feito:false, pick:-1, acertou:false,
-          opts:embaralha(src.opts.map(function(o,i){ return {t:o.t, ok:!!o.ok, no:o.no, _i:i}; }))};
-}
-/* a irmã: outra questão da MESMA família, ainda não usada nesta rodada */
-function achaIrma(eixo){
-  var pool=porEixo(eixo).filter(function(x){ return !usados[x.id]; });
-  if(!pool.length) return null;
-  var esc=embaralha(pool)[0];
-  usados[esc.id]=1;
-  return novoItem(esc,true);
+function irma(eixo, usados){
+  var pool=OP.ITENS.filter(function(i){ return i.eixo===eixo && usados.indexOf(i.id)<0; });
+  return pool.length ? OPQ.embaralha(pool)[0] : null;
 }
 
-/* ---------- telas ---------- */
-function intro(){
-  $('qnav').style.display='none';
-  $('bar').style.width='0%';
-  $('card').innerHTML=
-   '<div class="intro">'+
-   '<h1>Vamos treinar para a Olimpíada</h1>'+
-   '<p>As perguntas s&atilde;o de verdade: sa&iacute;ram das provas da Olimp&iacute;ada de Portugu&ecirc;s dos anos passados, do 2&ordm; ano.<br>'+
-   'Errou? Melhor ainda: a&iacute; a gente aprende o truque e voc&ecirc; ganha outra igualzinha para acertar.</p>'+
-   '<div class="escolha">'+
-   '<button class="esc" onclick="comecar(5)"><b>Aquecer</b><span>5 perguntas<br>uns 5 minutinhos</span></button>'+
-   '<button class="esc forte" onclick="comecar(15)"><b>Simulado</b><span>15 perguntas<br>igual &agrave; prova de verdade</span></button>'+
-   '</div>'+
-   '<p style="margin-top:18px;font-size:.86rem">Na prova de verdade voc&ecirc; tem 1 hora e 30 minutos para 15 perguntas. &Eacute; tempo de sobra: d&aacute; para ler tudo duas vezes.</p>'+
-   '</div>';
-}
-function comecar(n){ montaDeck(n); $('qnav').style.display='flex'; render(); }
+function App(){
+  var t=React.useState('inicio'), tela=t[0], setTela=t[1];
+  var f=React.useState([]), fila=f[0], setFila=f[1];
+  var c=React.useState(0), cur=c[0], setCur=c[1];
+  var r=React.useState({}), resp=r[0], setResp=r[1];   /* id -> acertou */
+  var e=React.useState({}), extra=e[0], setExtra=e[1]; /* ids que sao irmas */
 
-function render(){
-  var it=deck[cur], s=it.src;
-  var fam=FAM[s.eixo]||{nome:'',cor:'var(--accent)'};
-  var reais=deck.filter(function(d){ return !d.ehIrma; }).length;
-  var idx=deck.slice(0,cur+1).filter(function(d){ return !d.ehIrma; }).length;
-  $('bar').style.width=Math.round((cur)/deck.length*100)+'%';
-  dicaOn=false; $('dicabtn').classList.remove('on');
+  var totalBanco=OP.ITENS.length, jaVistas=vistos().length;
 
-  var h='';
-  h+='<div class="qhead"><span class="qnum">'+(it.ehIrma?'Mais uma do mesmo jeito':'Pergunta '+idx+' de '+reais)+'</span>'+
-     '<span class="fam" style="color:'+fam.cor+';border-color:'+fam.cor+'">'+fam.nome+'</span></div>';
-  if(it.ehIrma) h+='<div style="margin-bottom:10px"><span class="irma">agora voc&ecirc; consegue</span></div>';
-  h+='<div class="orig">'+s.origem+'</div>';
-  if(s.enun) h+='<div class="enun">'+s.enun+'</div>';
-  if(s.nota) h+='<div class="nota">'+s.nota+'</div>';
-  if(s.quadro) h+='<div class="quadro">'+s.quadro+'</div>';
-
-  var temRegua = s.texto && s.texto.length>=3;
-  if(s.texto){
-    h+='<div class="leitura" id="leitura">';
-    s.texto.forEach(function(l,i){
-      h+='<button class="lin'+(temRegua?(i===0?' on':''):' tudo')+'" id="lin'+i+'" onclick="tocaLinha('+i+')">'+l+'</button>';
-    });
-    h+='</div>';
-    if(temRegua){
-      h+='<div class="regcontrol" id="regc">'+
-         '<button class="regbtn" onclick="desce()" id="btDesce">A r&eacute;gua desce &#9660;</button>'+
-         '<button class="regbtn sec" onclick="ouveLinha()">&#128266; Ouvir a linha</button>'+
-         '<div class="reghint" id="reghint">Leia a linha acesa at&eacute; o fim. Depois toque aqui para a r&eacute;gua descer uma linha.</div></div>';
+  function comeca(n){
+    var q=montaRodada(n);
+    setFila(q); setCur(0); setResp({}); setExtra({}); setTela('q');
+    marcaVisto(q.map(function(i){ return i.id; }));
+  }
+  function responde(acertou,item){
+    var novo={}; for(var k in resp) novo[k]=resp[k];
+    novo[item.id]=acertou; setResp(novo);
+    if(!acertou){
+      var usados=fila.map(function(i){ return i.id; });
+      var ir=irma(item.eixo, usados);
+      if(ir){
+        var nf=fila.slice(); nf.splice(cur+1,0,ir); setFila(nf);
+        var ne={}; for(var j in extra) ne[j]=extra[j]; ne[ir.id]=1; setExtra(ne);
+        marcaVisto([ir.id]);
+      }
     }
   }
-  h+='<div class="pede">'+s.pede+'</div>';
-  h+='<button class="speak" onclick="ouvePergunta()">&#128266; Ouvir a pergunta</button>';
-  h+='<div class="dicabox" id="dicabox"><b>Dica:</b> '+s.dica+'</div>';
+  function avanca(){ if(cur>=fila.length-1) setTela('fim'); else setCur(cur+1); }
+  function volta(){ if(cur>0) setCur(cur-1); }
 
-  h+='<div class="opts" id="opts"'+(temRegua && !it.feito ? ' style="display:none"' : '')+'>';
-  it.opts.forEach(function(o,i){
-    h+='<button class="opt" id="opt'+i+'" onclick="responde('+i+')"><span class="let">'+'ABCD'.charAt(i)+'</span><span>'+o.t+'</span></button>';
+  /* barra de progresso e navegação de baixo, que vivem fora do React */
+  React.useEffect(function(){
+    var bar=document.getElementById('bar');
+    var nav=document.getElementById('qnav');
+    if(tela!=='q'){ nav.style.display='none'; bar.style.width = tela==='fim'?'100%':'0%'; return; }
+    nav.style.display='flex';
+    bar.style.width=Math.round(cur/fila.length*100)+'%';
+    var p=document.getElementById('navPrev'), n=document.getElementById('navNext');
+    p.disabled = cur===0; p.onclick=volta;
+    n.onclick=avanca;
+    n.innerHTML = (cur===fila.length-1) ? 'Ver como fui' : 'Avan&ccedil;ar &#8250;';
   });
-  h+='</div>';
-  h+='<div class="fb" id="fb"></div>';
-  h+='<button class="next" id="next" onclick="avancar()">Pr&oacute;xima &rarr;</button>';
 
-  $('card').innerHTML=h;
-  it._reg = temRegua ? (it._reg||0) : -1;
-  document.body.classList.toggle('regua', temRegua && !it.feito);
-  if(temRegua && it._reg>0) restauraRegua(it);
-  if(it.feito) pinta(it,true);
-  atualizaNav();
-  try{ window.scrollTo({top:0,behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); }
-}
-
-/* ---------- a régua ---------- */
-function restauraRegua(it){
-  for(var i=0;i<=it._reg && i<it.src.texto.length;i++){
-    var el=$('lin'+i); if(!el) continue;
-    el.classList.remove('on'); el.classList.add(i===it._reg?'on':'lida');
+  if(tela==='inicio'){
+    var faltam=Math.max(0,totalBanco-jaVistas);
+    return h('div',null,
+      h('h1',{className:'tt'},'Simulado'),
+      h('p',{className:'sub'},'Perguntas que caíram de verdade nas provas da Olimpíada. Errou, o truque aparece na hora e vem outra igual para você acertar.'),
+      h('div',{className:'grade duas'},
+        h('button',{className:'linha',onClick:function(){ comeca(5); }},
+          h('span',{className:'n'},'5'),
+          h('span',null,h('b',null,'Aquecer'),h('small',null,'cinco perguntas, uns cinco minutos'))),
+        h('button',{className:'linha',onClick:function(){ comeca(15); }},
+          h('span',{className:'n'},'15'),
+          h('span',null,h('b',null,'Prova inteira'),h('small',null,'quinze perguntas, igual à de verdade')))
+      ),
+      h('p',{className:'progresso'},
+        faltam>0
+          ? 'O banco tem '+totalBanco+' perguntas. Você ainda não viu '+faltam+' delas.'
+          : 'Você já passou pelas '+totalBanco+' perguntas do banco. Daqui para a frente elas voltam a aparecer.'),
+      jaVistas>0 && h('div',{className:'linhabtn',style:{justifyContent:'center'}},
+        h('button',{className:'mini',onClick:function(){ zeraVistos(); setTela('inicio0'); setTimeout(function(){ setTela('inicio'); },0); }},
+          'Recomeçar do zero'))
+    );
   }
-  if(it._reg>=it.src.texto.length-1) abreOpcoes(it);
-}
-function desce(){
-  var it=deck[cur], n=it.src.texto.length;
-  if(it._reg>=n-1){ abreOpcoes(it); return; }
-  var atual=$('lin'+it._reg); if(atual){ atual.classList.remove('on'); atual.classList.add('lida'); }
-  it._reg++;
-  var prox=$('lin'+it._reg); if(prox) prox.classList.add('on');
-  if(it._reg>=n-1){
-    var b=$('btDesce'); if(b) b.innerHTML='Li tudo! Ver as respostas &#10003;';
-    var hint=$('reghint'); if(hint) hint.textContent='Esta é a última linha. Leia e toque no botão verde.';
+  if(tela==='inicio0') return h('div',null);
+
+  if(tela==='q'){
+    var item=fila[cur];
+    var reais=fila.filter(function(i){ return !extra[i.id]; });
+    var num=reais.indexOf(item)>=0 ? reais.indexOf(item)+1 : null;
+    return h(OPQ.Questao,{
+      key:item.id+'-'+cur,
+      item:item,
+      numero:num, total:num?reais.length:null,
+      etiqueta: extra[item.id] ? 'mais uma do mesmo jeito' : null,
+      respostaInicial: undefined,
+      aoResponder:responde,
+      aoAvancar:avanca,
+      rotuloAvancar: cur===fila.length-1 ? 'Ver como fui' : 'Próxima'
+    });
   }
-}
-function tocaLinha(i){
-  var it=deck[cur];
-  if(it._reg<0){ ouve(it.src.texto[i]); return; }   /* sem régua: só lê */
-  if(i===it._reg){ desce(); return; }               /* tocar a linha acesa desce a régua */
-  ouve(it.src.texto[i]);                            /* tocar outra linha só lê, NÃO pula */
-}
-function abreOpcoes(it){
-  var o=$('opts'); if(o) o.style.display='flex';
-  var c=$('regc'); if(c) c.style.display='none';
-  var hint=$('reghint'); if(hint) hint.style.display='none';
-  for(var i=0;i<it.src.texto.length;i++){ var el=$('lin'+i); if(el){ el.classList.remove('lida','on'); el.classList.add('tudo'); } }
-}
-function ouveLinha(){ var it=deck[cur]; if(it._reg>=0) ouve(it.src.texto[it._reg]); }
-function ouve(t){ say(paraFala(t)); }
-function ouvePergunta(){
-  var s=deck[cur].src;
-  ouve([s.enun||'', (s.texto||[]).join(' '), s.quadro||'', s.pede].join('. '));
-}
 
-/* ---------- dica ---------- */
-function toggleDica(){
-  var b=$('dicabox'); if(!b) return;
-  dicaOn=!dicaOn;
-  b.classList.toggle('show',dicaOn);
-  $('dicabtn').classList.toggle('on',dicaOn);
-  if(dicaOn) ouve(deck[cur].src.dica);
-}
-
-/* ---------- responder ---------- */
-function responde(i){
-  var it=deck[cur];
-  if(it.feito) return;
-  it.feito=true; it.pick=i; it.acertou=!!it.opts[i].ok;
-  pinta(it,false);
-  if(!it.acertou){
-    var irma=achaIrma(it.src.eixo);
-    if(irma) deck.splice(cur+1,0,irma);
-  }
-}
-function pinta(it,mudo){
-  var s=it.src;
-  it.opts.forEach(function(o,i){
-    var el=$('opt'+i); if(!el) return;
-    el.disabled=true;
-    if(o.ok) el.classList.add('ok');
-    if(i===it.pick && !o.ok) el.classList.add('no');
-  });
-  var fb=$('fb');
-  if(it.acertou){
-    fb.className='fb show certo';
-    fb.innerHTML='<h3>Isso mesmo!</h3>'+
-      '<div class="porq">'+s.porque+'</div>'+
-      '<div class="truque">'+s.truque+'</div>'+
-      '<button class="speak" onclick="ouve(document.getElementById(\'fb\').innerText)">&#128266; Ouvir</button>';
-  }else{
-    var sua=it.opts[it.pick];
-    fb.className='fb show errado';
-    fb.innerHTML='<h3>Olha o truque</h3>'+
-      '<div class="truque">'+s.truque+'</div>'+
-      s.visual+
-      '<div class="sua"><b>Voc&ecirc; marcou '+sua.t+'</b><br>'+(sua.no||'')+'</div>'+
-      '<div class="porq">'+s.porque+'</div>'+
-      '<div class="prox"><i>Na pr&oacute;xima, fa&ccedil;a assim</i>'+s.proximo+'</div>'+
-      '<button class="speak" onclick="ouve(document.getElementById(\'fb\').innerText)">&#128266; Ouvir a explica&ccedil;&atilde;o</button>';
-  }
-  var nx=$('next');
-  nx.classList.add('show');
-  nx.innerHTML = (cur===deck.length-1) ? 'Ver como fui &#10003;' : 'Pr&oacute;xima &rarr;';
-  atualizaNav();
-  if(!mudo){ try{ fb.scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){} }
-}
-
-/* ---------- navegação ---------- */
-/* Regra do projeto: a navegação NUNCA trava. Mesmo sem responder, a
-   criança avança, volta e chega ao resultado — nada a prende numa tela. */
-function avancar(){
-  if(cur>=deck.length-1) return fim();
-  cur++; render();
-}
-function voltar(){ if(cur>0){ cur--; render(); } }
-function atualizaNav(){
-  var p=$('navPrev'), n=$('navNext'); if(!p||!n) return;
-  p.disabled = cur===0;
-  var ultima = cur===deck.length-1;
-  n.classList.toggle('fim', ultima);
-  n.innerHTML = ultima ? 'Ver como fui <span class="ql">&#10003;</span>' : 'Avan&ccedil;ar<span class="ql">&#8250;</span>';
-}
-
-/* ---------- resultado ---------- */
-function fim(){
-  $('qnav').style.display='none';
-  $('bar').style.width='100%';
-  var reais=deck.filter(function(d){ return !d.ehIrma; });
-  var acertos=reais.filter(function(d){ return d.acertou; }).length;
-  var irmas=deck.filter(function(d){ return d.ehIrma; });
-  var irmasOk=irmas.filter(function(d){ return d.acertou; }).length;
-
+  /* resultado */
+  var reais=fila.filter(function(i){ return !extra[i.id]; });
+  var acertos=reais.filter(function(i){ return resp[i.id]; }).length;
+  var extras=fila.filter(function(i){ return extra[i.id]; });
+  var extrasOk=extras.filter(function(i){ return resp[i.id]; }).length;
   var porFam={};
-  reais.forEach(function(d){
-    var k=d.src.eixo; porFam[k]=porFam[k]||{ok:0,t:0};
-    porFam[k].t++; if(d.acertou) porFam[k].ok++;
+  reais.forEach(function(i){
+    porFam[i.eixo]=porFam[i.eixo]||{ok:0,t:0};
+    porFam[i.eixo].t++; if(resp[i.id]) porFam[i.eixo].ok++;
   });
-  var linhas='';
-  FAMLIST.forEach(function(f){
-    var v=porFam[f.k]; if(!v) return;
-    linhas+='<div><span style="color:'+f.cor+'">'+f.nome+'</span><b>'+v.ok+' de '+v.t+'</b></div>';
-  });
-
-  var msg;
-  if(acertos===reais.length) msg='Gabaritou! É exatamente isso que a prova pede.';
-  else if(acertos>=reais.length-2) msg='Quase tudo. Olhe embaixo qual truque escapou e treine só ele.';
-  else msg='Cada erro aqui é uma pergunta que você não vai errar na prova. Vamos de novo?';
-
-  $('card').innerHTML=
-   '<div class="intro">'+
-   '<div class="placar">'+acertos+'/'+reais.length+'</div>'+
-   '<div class="reslinha">'+msg+'</div>'+
-   (irmas.length? '<div class="reslinha">E voc&ecirc; ainda acertou <b>'+irmasOk+' de '+irmas.length+'</b> das perguntas extras que vieram depois dos truques.</div>':'')+
-   '<div class="resfam">'+linhas+'</div>'+
-   '<div class="resbtns">'+
-   (acertos<reais.length? '<button class="esc forte" onclick="refazerErradas()"><b>Refazer as que errei</b><span>s&oacute; essas, de novo</span></button>':'')+
-   '<button class="esc" onclick="comecar(15)"><b>Outro simulado</b><span>15 perguntas novas</span></button>'+
-   '<button class="esc" onclick="intro()"><b>Voltar ao in&iacute;cio</b><span></span></button>'+
-   '</div></div>';
-}
-function refazerErradas(){
-  var erradas=deck.filter(function(d){ return d.feito && !d.acertou; }).map(function(d){ return novoItem(d.src,false); });
-  if(!erradas.length) return intro();
-  deck=erradas; cur=0;
-  $('qnav').style.display='flex';
-  render();
+  var msg = acertos===reais.length ? 'Gabaritou. É exatamente isso que a prova pede.'
+          : acertos>=reais.length-2 ? 'Quase tudo. Olhe abaixo qual truque escapou e treine só ele.'
+          : 'Cada erro aqui é uma pergunta que você não vai errar na prova.';
+  return h('div',null,
+    h('div',{className:'placar'},acertos+'/'+reais.length),
+    h('p',{className:'placarsub'},msg),
+    extras.length>0 && h('p',{className:'placarsub'},
+      'Nas '+extras.length+' perguntas extras que vieram depois dos truques, você acertou '+extrasOk+'.'),
+    h('div',{className:'secao'},'por tipo de pergunta'),
+    OP.FAMILIAS.filter(function(f){ return porFam[f.k]; }).map(function(f){
+      var v=porFam[f.k];
+      return h('div',{key:f.k,className:'fambar'+(v.ok===0?' zero':'')},
+        h('span',{style:{color:f.cor}},f.nome), h('b',null,v.ok+' de '+v.t));
+    }),
+    h('div',{className:'grade',style:{marginTop:'12px'}},
+      acertos<reais.length && h('button',{className:'avancar',onClick:function(){
+        var err=reais.filter(function(i){ return !resp[i.id]; });
+        setFila(err); setCur(0); setResp({}); setExtra({}); setTela('q');
+      }},'Refazer as que errei'),
+      h('button',{className:'avancar calmo',onClick:function(){ comeca(15); }},'Outro simulado'),
+      h('button',{className:'avancar calmo',onClick:function(){ setTela('inicio'); }},'Voltar ao início')
+    )
+  );
 }
 
-intro();
+ReactDOM.createRoot(document.getElementById('raiz')).render(h(App));
 </script>
 <script>window.SERA_ACCENT={accent:'#4ade80'};</script>
 <script src="sera_theme.js?v=20260908"></script>

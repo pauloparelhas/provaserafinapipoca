@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Provas anteriores — Olimpíada de Português</title>
+<link rel="stylesheet" href="serafina-core.css?v=20260908">
+<link rel="stylesheet" href="OP_estilo.css?v=20260908b">
+<style>
+.provacard{display:flex;align-items:center;gap:11px;min-height:58px;padding:10px 13px;border-radius:12px;
+  border:1px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;width:100%}
+.provacard:active{transform:translateY(1px)}
+.provacard .ano{flex:0 0 54px;height:38px;border-radius:9px;background:var(--line);display:flex;align-items:center;
+  justify-content:center;font-weight:900;font-size:.92rem}
+.provacard b{display:block;font-size:calc(.95rem*var(--fs));font-weight:900;line-height:1.2}
+.provacard small{display:block;font-size:calc(.74rem*var(--fs));font-weight:800;color:var(--dim);margin-top:1px}
+.provacard .nota{margin-left:auto;font-size:calc(.8rem*var(--fs));font-weight:900;white-space:nowrap;color:var(--dim)}
+.provacard.completa{border-color:var(--ok)}
+.provacard.completa .ano{background:var(--ok);color:#06251a}
+.placar{font-size:calc(2.6rem*var(--fs));font-weight:900;line-height:1;color:var(--accent);text-align:center;margin:6px 0 2px}
+.placarsub{text-align:center;font-size:calc(.9rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.45;margin-bottom:12px}
+.mapa{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:10px 0}
+.mapa button{width:44px;height:44px;border-radius:9px;border:1px solid var(--line);background:var(--surf);
+  color:var(--ink);font-family:inherit;font-weight:900;font-size:.82rem;cursor:pointer}
+.mapa button.certo{background:var(--ok);color:#06251a;border-color:var(--ok)}
+.mapa button.errado{background:var(--no);color:#3a0a0a;border-color:var(--no)}
+.mapa button.agora{outline:3px solid var(--accent2);outline-offset:1px}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Provas anteriores</span>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Som" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="bar"><span id="bar"></span></div>
+  <div class="stage"><div class="card" id="raiz"></div></div>
+</div>
+<div class="qnav" id="qnav" style="display:none">
+  <button class="qnav-btn" id="navPrev">&#8249; Voltar</button>
+  <button class="qnav-btn" id="navLista">Todas as provas</button>
+  <button class="qnav-btn forte" id="navNext">Avan&ccedil;ar &#8250;</button>
+</div>
+
+<script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'op_som',stars:90};</script>
+<script src="serafina-core.js?v=20260908"></script>
+<script src="assets/react.production.min.js"></script>
+<script src="assets/react-dom.production.min.js"></script>
+<script src="OP_data.js?v=20260908b"></script>
+<script src="OP_questao.js?v=20260908b"></script>
+<script>
+/* ============================================================
+   PROVAS ANTERIORES — fazer uma prova inteira, na ordem em que caiu.
+
+   O simulado embaralha famílias e sorteia do banco todo. Aqui é o
+   contrário: cada prova oficial aparece como ela foi, na ordem original
+   das questões, para a criança sentir a prova de verdade — inclusive a
+   variação de assunto de uma questão para a outra, que é o que cansa.
+
+   A correção continua imediata: o objetivo do material é aprender, não
+   medir. O placar do fim mostra como ela foi naquela prova.
+
+   As questões vêm do mesmo banco (OP_data.js) e são renderizadas pelo
+   mesmo componente (OP_questao.js) do simulado e do estudo.
+   ============================================================ */
+'use strict';
+var h=React.createElement, OP=window.OP, OPQ=window.OPQ;
+var FEITAS='op_provas_feitas';
+
+/* De que prova cada item veio, deduzido do id (25F1Q7 -> 2025, 1a fase).
+   Os itens de treino autoral (TRnn) nao pertencem a prova nenhuma e
+   ficam fora desta tela — aqui so entra o que caiu de verdade. */
+function daProva(item){
+  var m=/^(\d\d)F(\d)Q(\d+)$/.exec(item.id);
+  if(!m) return null;
+  return {ano:2000+parseInt(m[1],10), fase:parseInt(m[2],10), n:parseInt(m[3],10)};
+}
+var PROVAS=(function(){
+  var mapa={};
+  OP.ITENS.forEach(function(it){
+    var p=daProva(it); if(!p) return;
+    var k=p.ano+'-'+p.fase;
+    (mapa[k]=mapa[k]||{ano:p.ano,fase:p.fase,itens:[]}).itens.push({it:it,n:p.n});
+  });
+  return Object.keys(mapa).map(function(k){
+    var p=mapa[k];
+    p.itens.sort(function(a,b){ return a.n-b.n; });
+    p.itens=p.itens.map(function(x){ return x.it; });
+    p.chave=k;
+    return p;
+  }).sort(function(a,b){ return b.ano-a.ano || a.fase-b.fase; });
+})();
+
+function feitas(){ try{ return JSON.parse(localStorage.getItem(FEITAS)||'{}'); }catch(e){ return {}; } }
+function salvaFeita(chave,acertos,total){
+  var f=feitas(); f[chave]={a:acertos,t:total};
+  try{ localStorage.setItem(FEITAS,JSON.stringify(f)); }catch(e){}
+}
+
+function App(){
+  var t=React.useState('lista'), tela=t[0], setTela=t[1];
+  var p=React.useState(null), prova=p[0], setProva=p[1];
+  var c=React.useState(0), cur=c[0], setCur=c[1];
+  var r=React.useState({}), resp=r[0], setResp=r[1];
+
+  function abre(pr){ setProva(pr); setCur(0); setResp({}); setTela('q'); }
+  function responde(acertou,item){
+    var novo={}; for(var k in resp) novo[k]=resp[k];
+    novo[item.id]=acertou; setResp(novo);
+  }
+  function avanca(){ if(cur>=prova.itens.length-1) fim(); else setCur(cur+1); }
+  function fim(){
+    var ac=prova.itens.filter(function(i){ return resp[i.id]; }).length;
+    salvaFeita(prova.chave, ac, prova.itens.length);
+    setTela('fim');
+  }
+
+  React.useEffect(function(){
+    var bar=document.getElementById('bar'), nav=document.getElementById('qnav');
+    if(tela!=='q'){ nav.style.display='none'; bar.style.width= tela==='fim'?'100%':'0%'; return; }
+    nav.style.display='flex';
+    bar.style.width=Math.round(cur/prova.itens.length*100)+'%';
+    var pv=document.getElementById('navPrev'), nx=document.getElementById('navNext'), li=document.getElementById('navLista');
+    pv.disabled=cur===0; pv.onclick=function(){ if(cur>0) setCur(cur-1); };
+    nx.onclick=avanca;
+    nx.innerHTML=(cur===prova.itens.length-1)?'Ver como fui':'Avan&ccedil;ar &#8250;';
+    li.onclick=function(){ setTela('lista'); };
+  });
+
+  if(tela==='lista'){
+    var f=feitas();
+    return h('div',null,
+      h('h1',{className:'tt'},'Provas anteriores'),
+      h('p',{className:'sub'},'As provas de verdade da Olimpíada, do 2º ano, na ordem em que caíram. A resposta é corrigida na hora, com o truque.'),
+      h('div',{className:'grade duas'},
+        PROVAS.map(function(pr){
+          var reg=f[pr.chave];
+          return h('button',{key:pr.chave, className:'provacard'+(reg?' completa':''), onClick:function(){ abre(pr); }},
+            h('span',{className:'ano'},pr.ano),
+            h('span',null,
+              h('b',null,pr.fase+'ª fase'),
+              h('small',null,pr.itens.length+' perguntas')),
+            reg && h('span',{className:'nota'},reg.a+'/'+reg.t)
+          );
+        })
+      ),
+      h('p',{className:'progresso',style:{marginTop:'12px',fontSize:'.74rem',color:'var(--dim)',fontWeight:800,textAlign:'center',lineHeight:1.4}},
+        'Algumas perguntas dessas provas dependiam de um desenho que não dá para escrever em palavras; essas ficaram de fora. Por isso uma prova aqui pode ter menos de 15.')
+    );
+  }
+
+  if(tela==='q'){
+    var item=prova.itens[cur];
+    return h('div',null,
+      h('div',{className:'mapa'}, prova.itens.map(function(i,k){
+        var cls=''; if(resp[i.id]===true) cls='certo'; else if(resp[i.id]===false) cls='errado';
+        if(k===cur) cls+=' agora';
+        return h('button',{key:i.id, className:cls, onClick:function(){ setCur(k); }}, k+1);
+      })),
+      h(OPQ.Questao,{
+        key:item.id,
+        item:item,
+        numero:cur+1, total:prova.itens.length,
+        mostrarOrigem:false,
+        etiqueta:'Olimpíada '+prova.ano+' · '+prova.fase+'ª fase',
+        aoResponder:responde,
+        aoAvancar:avanca,
+        rotuloAvancar: cur===prova.itens.length-1 ? 'Ver como fui' : 'Próxima'
+      })
+    );
+  }
+
+  var ac=prova.itens.filter(function(i){ return resp[i.id]; }).length;
+  var tot=prova.itens.length;
+  return h('div',null,
+    h('div',{className:'placar'},ac+'/'+tot),
+    h('p',{className:'placarsub'},'Olimpíada '+prova.ano+' · '+prova.fase+'ª fase'),
+    h('div',{className:'mapa'}, prova.itens.map(function(i,k){
+      return h('button',{key:i.id, className:resp[i.id]?'certo':(resp[i.id]===false?'errado':''),
+        onClick:function(){ setCur(k); setTela('q'); }}, k+1);
+    })),
+    h('p',{className:'placarsub'},'Toque num número para rever aquela pergunta.'),
+    h('div',{className:'grade'},
+      h('button',{className:'avancar',onClick:function(){ setTela('lista'); }},'Escolher outra prova'),
+      h('button',{className:'avancar calmo',onClick:function(){ setCur(0); setResp({}); setTela('q'); }},'Fazer esta de novo')
+    )
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('raiz')).render(h(App));
+</script>
+<script>window.SERA_ACCENT={accent:'#4ade80'};</script>
+<script src="sera_theme.js?v=20260908"></script>
+</body>
+</html>
