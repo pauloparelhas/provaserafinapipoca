@@ -121,9 +121,16 @@ function montaRodada(n){
   escolhidas=escolhidas.concat(novasResto).concat(velhasResto);
   return OPQ.embaralha(escolhidas.slice(0,n));
 }
+/* A questao-irma tambem tem de respeitar o historico. Sem isso ela era
+   sorteada so entre as que nao estavam na rodada ATUAL, e voltava a cair
+   nas mesmas poucas rodada apos rodada — num teste de 4 rodadas, 47 das
+   160 perguntas vistas eram repeticao, quase todas irmas. */
 function irma(eixo, usados){
+  var jaVi=vistos();
   var pool=OP.ITENS.filter(function(i){ return i.eixo===eixo && usados.indexOf(i.id)<0; });
-  return pool.length ? OPQ.embaralha(pool)[0] : null;
+  var novas=pool.filter(function(i){ return jaVi.indexOf(i.id)<0; });
+  var escolhida=OPQ.embaralha(novas.length?novas:pool)[0];
+  return escolhida||null;
 }
 
 function App(){

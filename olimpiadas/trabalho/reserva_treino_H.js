@@ -21,9 +21,10 @@
    linhas (base zero) onde mora a resposta.
 
    REDAÇÃO DOS COMENTÁRIOS `no`: primeiro o que a pergunta pediu,
-   depois o que a alternativa entregou no lugar. Nunca se diz que a
-   alternativa errada "é verdade, mas...": para uma criança de 7 anos
-   isso soa como permissão para marcá-la. Uma ideia por frase.
+   depois o que a alternativa entregou no lugar. Nenhum comentário
+   valida a alternativa errada antes de negá-la — para uma criança de
+   7 anos, dizer que ela está certa em alguma parte soa como permissão
+   para marcá-la. Uma ideia por frase, sem oração dentro de oração.
 
    Colar direto dentro de ITENS, em ferramentas/OP_data.js.
    ============================================================ */
@@ -243,25 +244,25 @@
 
 {id:'TR102', eixo:'ler', origem:'Treino no estilo da prova',
  enun:'LEIA O TEXTO ABAIXO:',
- texto:['HOJE É SÁBADO, E MATEUS ESTÁ FAZENDO UM BOLO COM A MÃE.',
-        'ANTEONTEM ELE FOI AO MERCADO COM O PAI E ESCOLHEU OS OVOS.',
-        'AMANHÃ A PRIMA DELE VEM ALMOÇAR E VAI COMER UM PEDAÇO.',
-        'NO MÊS PASSADO A AVÓ MANDOU A RECEITA DENTRO DE UMA CARTA.',
-        'MATEUS DIZ QUE O BOLO DA AVÓ É O MELHOR DO MUNDO.'],
+ texto:['HOJE É QUINTA, E HELENA ESTÁ APRENDENDO A ANDAR DE BICICLETA NO PÁTIO.',
+        'ONTEM O PAI DELA TIROU AS RODINHAS DA BICICLETA.',
+        'NA SEMANA QUE VEM ELA VAI PEDALAR ATÉ A CASA DA AVÓ.',
+        'NO ANO PASSADO, NO ANIVERSÁRIO DELA, A MADRINHA DEU A BICICLETA DE PRESENTE.',
+        'HELENA DIZ QUE AZUL É A COR MAIS BONITA DO MUNDO.'],
  pede:'COM BASE NO TEXTO, O QUE ACONTECEU ANTES DE TUDO?',
  opts:[
-  {t:'MATEUS COMEÇOU A FAZER O BOLO COM A MÃE.', no:'Essa é a primeira coisa contada no texto. Mas ela é de HOJE. A ordem em que o texto conta não é a ordem em que aconteceu.'},
-  {t:'A AVÓ MANDOU A RECEITA DENTRO DE UMA CARTA.', ok:1},
-  {t:'A PRIMA DELE COMEU UM PEDAÇO DO BOLO.', no:'Bolo de almoço a gente já imagina comido. O texto marca AMANHÃ. O que ainda não aconteceu não pode ser o mais antigo.'},
-  {t:'MATEUS DISSE QUE O BOLO DA AVÓ É O MELHOR DO MUNDO.', no:'Essa frase saiu da última linha. Ela não tem hora marcada: não diz ontem, nem mês passado, nem amanhã. Sem tempo, ela não entra na fila.'}
+  {t:'HELENA COMEÇOU A APRENDER A ANDAR DE BICICLETA.', no:'Essa é a primeira coisa contada no texto. Mas ela é de HOJE. A ordem em que o texto conta não é a ordem em que aconteceu.'},
+  {t:'A MADRINHA DEU A BICICLETA DE PRESENTE.', ok:1},
+  {t:'HELENA PEDALOU ATÉ A CASA DA AVÓ.', no:'Quem já anda de bicicleta a gente logo imagina pedalando por aí. O texto marca SEMANA QUE VEM. O que ainda não aconteceu não pode ser o mais antigo.'},
+  {t:'HELENA DISSE QUE AZUL É A COR MAIS BONITA DO MUNDO.', no:'Essa frase saiu da última linha. Ela não tem hora marcada: não diz ontem, nem ano passado, nem semana que vem. Sem tempo, ela não entra na fila.'}
  ],
- dica:'Procure as palavrinhas de tempo: HOJE, ANTEONTEM, AMANHÃ, NO MÊS PASSADO. Ponha-as em fila antes de responder.',
+ dica:'Procure as palavrinhas de tempo: HOJE, ONTEM, NA SEMANA QUE VEM, NO ANO PASSADO. Ponha-as em fila antes de responder.',
  truque:'Monte a fila do tempo: semana passada, ontem, hoje, semana que vem. Só então responda.',
  acende:[0,1,2,3],
- visual:'<div class="pcs"><span class="pc hit">M&Ecirc;S PASSADO<br>a receita</span><span class="arw">&rarr;</span><span class="pc">ANTEONTEM<br>os ovos</span>'+
-        '<span class="arw">&rarr;</span><span class="pc">HOJE<br>o bolo</span><span class="arw">&rarr;</span><span class="pc bad">AMANH&Atilde;<br>a prima</span></div>'+
-        '<p class="vx">O texto conta fora de ordem. Na fila do tempo, a receita &eacute; a mais antiga. E o almo&ccedil;o da prima ainda nem aconteceu.</p>',
- porque:'O texto conta os fatos fora de ordem. Na fila do tempo: mês passado a receita, anteontem os ovos, hoje o bolo, amanhã a prima. O mais antigo é a carta da avó.',
+ visual:'<div class="pcs"><span class="pc hit">ANO PASSADO<br>o presente</span><span class="arw">&rarr;</span><span class="pc">ONTEM<br>as rodinhas</span>'+
+        '<span class="arw">&rarr;</span><span class="pc">HOJE<br>o p&aacute;tio</span><span class="arw">&rarr;</span><span class="pc bad">SEMANA QUE VEM<br>a casa da av&oacute;</span></div>'+
+        '<p class="vx">O texto conta fora de ordem. Na fila do tempo, o presente da madrinha &eacute; o mais antigo. E a ida &agrave; casa da av&oacute; ainda nem aconteceu.</p>',
+ porque:'O texto conta os fatos fora de ordem. Na fila do tempo: ano passado o presente, ontem as rodinhas, hoje o pátio, semana que vem a casa da avó. O mais antigo é o presente da madrinha.',
  proximo:'Sublinhe as palavrinhas de tempo e monte a fila antes de olhar as respostas.'},
 
 {id:'TR103', eixo:'ler', origem:'Treino no estilo da prova',

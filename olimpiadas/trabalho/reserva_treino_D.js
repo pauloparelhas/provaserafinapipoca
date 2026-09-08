@@ -55,22 +55,22 @@
    ============================================================ */
 
 {id:'TR39', eixo:'letras', origem:'Treino no estilo da prova',
- enun:'NA BRINCADEIRA DAS VOGAIS, SÓ AS VOGAIS MUDAM DE LUGAR: AS OUTRAS LETRAS FICAM PARADAS. POR EXEMPLO, TOCA VIRA TACO.',
- pede:'TROCANDO AS VOGAIS DE LUGAR, QUAL DAS PALAVRAS ABAIXO SE TRANSFORMA NUMA COMIDA QUENTE QUE A GENTE TOMA DE COLHER?',
+ enun:'NA BRINCADEIRA DAS VOGAIS, SÓ AS VOGAIS MUDAM DE LUGAR: AS OUTRAS LETRAS FICAM PARADAS. POR EXEMPLO, PERA VIRA PARE.',
+ pede:'TROCANDO AS VOGAIS DE LUGAR, QUAL DAS PALAVRAS ABAIXO SE TRANSFORMA NO BURACO ONDE O COELHO MORA?',
  opts:[
-  {t:'SALTO.', no:'SALTO com as vogais trocadas vira SOLTA. Ninguém toma solta de colher. Formar palavra não basta: tem de ser a coisa que a pergunta descreveu.'},
-  {t:'SAPO.', ok:1},
-  {t:'COLA.', no:'COLA com as vogais trocadas vira CALO. Calo é aquilo que nasce no pé de tanto andar. Não é comida e não se toma de colher.'},
-  {t:'VELA.', no:'VELA com as vogais trocadas vira VALE. Vale não é comida quente. Aqui três trocas formam palavra, e o que decide é a comida.'}
+  {t:'SALTO.', no:'SALTO com as vogais trocadas vira SOLTA. Solta não é buraco nenhum. Formar palavra não basta: tem de ser a coisa que a pergunta descreveu.'},
+  {t:'TACO.', ok:1},
+  {t:'COLA.', no:'COLA com as vogais trocadas vira CALO. Calo é aquilo que nasce no pé de tanto andar. Ninguém mora dentro de um calo.'},
+  {t:'VELA.', no:'VELA com as vogais trocadas vira VALE. Vale é o lugar baixo entre dois morros. O coelho mora num buraco, e buraco não é vale.'}
  ],
  dica:'Vogal é A, E, I, O, U. Marque as duas vogais da palavra. Troque só elas de lugar e leia o que saiu.',
  truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.',
- visual:'<div class="pcs"><span class="pc">S</span><span class="pc hit">A</span><span class="pc">P</span><span class="pc hit">O</span>'+
-        '<span class="arw">&rarr;</span><span class="pc">S</span><span class="pc hit">O</span><span class="pc">P</span><span class="pc hit">A</span></div>'+
-        '<p class="vx">O <b>A</b> e o <b>O</b> trocaram. O S e o P n&atilde;o sa&iacute;ram do lugar: virou <b>SOPA</b>.</p>'+
+ visual:'<div class="pcs"><span class="pc">T</span><span class="pc hit">A</span><span class="pc">C</span><span class="pc hit">O</span>'+
+        '<span class="arw">&rarr;</span><span class="pc">T</span><span class="pc hit">O</span><span class="pc">C</span><span class="pc hit">A</span></div>'+
+        '<p class="vx">O <b>A</b> e o <b>O</b> trocaram. O T e o C n&atilde;o sa&iacute;ram do lugar: virou <b>TOCA</b>.</p>'+
         '<div class="pcs"><span class="pc bad">SALTO &rarr; SOLTA</span><span class="pc bad">COLA &rarr; CALO</span><span class="pc bad">VELA &rarr; VALE</span></div>'+
-        '<p class="vx">As tr&ecirc;s trocas formam palavra. Nenhuma delas &eacute; comida quente de colher.</p>',
- porque:'Em SAPO as vogais são o A e o O. Trocando as duas de lugar, com o S e o P parados: S-O-P-A. A sopa é quente e a gente toma de colher.',
+        '<p class="vx">As tr&ecirc;s trocas formam palavra. Nenhuma delas &eacute; o buraco onde o coelho mora.</p>',
+ porque:'Em TACO as vogais são o A e o O. Trocando as duas de lugar, com o T e o C parados: T-O-C-A. A toca é o buraco onde o coelho mora.',
  proximo:'Troque as vogais nas QUATRO palavras e leia as quatro. Marque só depois de saber o que saiu de cada uma.'},
 
 {id:'TR40', eixo:'letras', origem:'Treino no estilo da prova',
