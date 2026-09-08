@@ -93,6 +93,9 @@ function doEixo(k){ return OP.ITENS.filter(function(i){ return i.eixo===k; }); }
    porque o que reune essas questoes e o comando, nao o assunto. */
 function itensDo(c){
   if(c.itens) return c.itens.map(function(id){ return OP.acha(id); }).filter(Boolean);
+  /* um bloco pode cobrir mais de um eixo — "Codigo, tabela e placa" reune
+     os dois, e sem isso as questoes de placa ficavam sem porta de entrada */
+  if(c.eixos) return OP.ITENS.filter(function(i){ return c.eixos.indexOf(i.eixo)>=0; });
   return doEixo(c.k);
 }
 
