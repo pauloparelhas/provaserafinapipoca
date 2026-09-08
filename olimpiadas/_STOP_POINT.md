@@ -58,7 +58,17 @@ Duas das três auditorias chegaram antes de eu parar; a terceira pode ter
 chegado depois.
 - `_AUDITORIA_TR53_78.md` — **9 falhas críticas**, PRONTO, NÃO APLICADO
 - `_AUDITORIA_TR79_104.md` — **8 falhas críticas**, PARCIALMENTE APLICADO
-- `_AUDITORIA_TR25_52.md` — conferir se o arquivo existe; se sim, ler e aplicar
+- `_AUDITORIA_TR25_52.md` — **CHEGOU: 10 falhas críticas + 26 concessivas**,
+  NÃO APLICADO. As duas piores estão aqui:
+  · **TR48 e TR49** — o truque "use TODAS as peças, uma vez cada" ELIMINA a
+    resposta certa (PIPOCA usa 3 das 9 peças; PALITO, 3 das 6). É o pior caso
+    de todo o acervo: seguir o truque faz riscar o gabarito.
+  · **TR50** — fato falso: "SOU e RO são os outros pedaços da tesoura". RO não
+    existe em TE-SOU-RA; RO é de TESOURO.
+  · **TR25** — diz "última linha" onde a comida está na penúltima.
+  · **TR27, TR37, TR39, TR40, TR43, TR44** — truque incompatível com o gesto.
+  · 26 concessivas ("é palavra de verdade, mas…"), todas em `letras` e
+    `silabas`; os 14 itens de `ler` desse bloco estão limpos.
 
 **Já apliquei à mão** as concessivas de TR99, TR100, TR101, TR102, TR103 e
 TR104 (a fórmula banida aparecia uma vez em cada item do eixo `ler` da última
