@@ -1,34 +1,82 @@
 # OS TRUQUES DA PROVA — Olimpíada de Português, 2º ano
 
-Vídeo para uma menina de 7 anos assistir na véspera da prova. Fala direto com ela.
-Tudo o que aparece aqui saiu das provas de verdade dos anos passados.
-Nenhuma pergunta foi inventada.
+Vídeo para uma menina de 7 anos. Fala direto com ela, em frases curtas, uma informação
+por frase. Sem preâmbulo, sem encorajamento, sem falar de si mesmo.
+Todas as questões citadas são reais e vêm com o ano. Nenhuma foi inventada.
 
 ---
 
-## Abertura: o que cai nessa prova
+## Truque 1 — O que a pergunta está pedindo
 
-Oi! Amanhã você vai fazer a Olimpíada de Português.
+Este truque vale para as quinze perguntas da prova.
 
-São 15 perguntas. Cada pergunta tem quatro respostas: A, B, C e D. Você marca só uma.
-O tempo é enorme, uma hora e meia. Dá para ler tudo duas vezes com calma.
-E tudo na prova está escrito com LETRA GRANDE, igual às letras de forma que você já conhece.
+A resposta errada quase sempre é uma frase verdadeira. Ela só não é o que a pergunta pediu.
 
-Uma parte da prova pede para você ler uma historinha ou um poema e responder sobre ele.
-Mas a maior parte é brincadeira com letras: embaralhar letras, contar letras,
-juntar sílabas, achar a palavra que falta, achar o intruso, cantar o alfabeto.
+A ordem de leitura é esta:
 
-Cada uma dessas brincadeiras tem um truque. São oito truques.
-Você vai ver os oito agora, e cada um vem com uma pergunta de verdade da prova.
+1. Leia a pergunta.
+2. Leia o texto, quando tiver texto.
+3. Leia a pergunta de novo, agora com as quatro respostas.
+4. Volte no texto e ache o lugar que responde exatamente o que foi pedido.
+
+Ler a pergunta antes liga a sua cabeça no modo procurar. Quando você chega no texto,
+já sabe o que está caçando.
+
+Em toda pergunta tem uma palavra que manda. Ache ela e passe o dedo nela.
+POR QUE pede um motivo. QUAL pede escolher um. QUANTOS pede contar.
+O QUE pede a coisa. COMPLETE pede encaixar. MARQUE APENAS pede olhar todas.
+
+Repare no que a pergunta quer de volta: às vezes ela pede a LETRA e não a palavra;
+às vezes o TÍTULO e não o assunto.
+
+**2025, primeira fase, questão 12.** A frase era:
+O GALHO SUBIU NO GALO DA ÁRVORE E COMEÇOU A CANTAR.
+Galho não canta. Quem canta é o galo. Para consertar, o H sai de GALHO e entra em GALO.
+A pergunta foi: QUAL É ESSA LETRA? Ela não pediu a palavra consertada, pediu a letra.
+As quatro alternativas eram letras: B, H, M, P. Resposta certa: H.
+Quem conserta a frase e responde GALO não acha a própria resposta entre as alternativas.
+
+**2024, primeira fase, questão 8.** Um poema de férias que termina dizendo
+SÓ VOLTO PARA A ESCOLA NO ANO QUE VEM.
+A pergunta foi: QUAL TÍTULO MAIS COMBINA COM O POEMA?
+O título é do poema inteiro. Do começo ao fim o assunto é um só: férias.
+Resposta certa: LÁ VÊM AS FÉRIAS.
+A armadilha é VOLTA ÀS AULAS, que sai só da última linha.
+
+Quando a pergunta tem um NÃO, a resposta é a diferente, não a parecida.
+
+**2025, primeira fase, questão 9.** A pergunta foi:
+QUAL É A ÚNICA QUE NÃO MUDA DE SOM NAS DUAS PALAVRAS?
+As opções eram a letra C em CASA e CEGONHA, a letra B em BALA e ABACAXI,
+a letra G em GELEIA e AGASALHO, a letra S em SÁBIO e CASA.
+Fale em voz alta. CASA faz som de K e CEGONHA faz som de S: mudou.
+GELEIA e AGASALHO: mudou. Em SÁBIO o S é de S, e o S de CASA soa como Z: mudou.
+BALA e ABACAXI: o B faz o mesmo som nas duas. Resposta certa: letra B.
+Quem esquece o NÃO procura a que muda e marca errado.
+
+**2024, primeira fase, questão 14.** O texto era:
+HOJE É TERÇA-FEIRA, E MAURÍCIO SAIU PARA ANDAR DE BICICLETA.
+ONTEM ELE TREINOU FUTSAL COM A EQUIPE DA ESCOLA.
+SEMANA QUE VEM COMEÇA O CAMPEONATO MUNICIPAL.
+SEMANA PASSADA ELE CAIU E MACHUCOU O JOELHO.
+A pergunta foi: QUAL EVENTO ACONTECEU ANTES DOS OUTROS?
+A palavra que manda é ANTES. Monte a fila do tempo pelas palavrinhas de tempo:
+semana passada, o joelho; ontem, o futsal; hoje, a bicicleta; semana que vem, o campeonato.
+O mais antigo é o joelho. Resposta certa: MAURÍCIO MACHUCOU O JOELHO.
+A bicicleta é a primeira coisa contada, mas não é a primeira que aconteceu.
+A ordem em que o texto conta não é a ordem em que aconteceu.
+
+Antes de marcar, leia a sua resposta junto com a pergunta, uma atrás da outra.
+Ela responde mesmo o que foi perguntado? Se responde, marca.
 
 ---
 
-## Truque 1 — A resposta mora no texto
+## Truque 2 — A resposta mora no texto
 
-**O truque:** leia a pergunta primeiro. Depois volte no texto e ache a linha que responde.
+Leia a pergunta primeiro. Depois volte no texto e ache a linha que responde.
 A resposta está no papel, nunca na sua cabeça.
 
-**Na prova de 2025** apareceu este poema do Pedro Bandeira:
+**2025, primeira fase.** Poema de Pedro Bandeira:
 
 EU SOU PEQUENO, ME DIZEM,
 E EU FICO MUITO ZANGADO.
@@ -40,206 +88,148 @@ IA DIZER, COM CERTEZA:
 MINHA NOSSA, QUE GRANDÃO!
 
 A pergunta foi: POR QUE O MENINO PRECISA OLHAR TODO MUNDO COM O QUEIXO LEVANTADO?
+A palavra que manda é POR QUE, e POR QUE pede um motivo.
+Volte para o começo do poema e procure a razão.
+A primeira linha entrega: EU SOU PEQUENO. Quem é pequeno olha para cima para ver os outros.
+Resposta certa: porque as pessoas são mais altas do que ele.
 
-Passo a passo: a pergunta tem POR QUE. Então volte para o começo do poema e procure a razão.
-A primeira linha já entrega: EU SOU PEQUENO. Quem é pequeno precisa olhar para cima
-para ver os outros. Resposta certa: porque as pessoas são mais altas do que ele.
-
-**A armadilha:** uma das respostas erradas falava da formiga. A formiga aparece só no fim
-do poema, e ela nem dá medo, é ela que acha o menino grandão.
-Quem lê só o final marca errado. A resposta do POR QUE estava lá em cima.
-
-Outra coisa: quando a prova pergunta o TÍTULO, o título fala do texto INTEIRO,
-não da última linha. **Em 2024** teve um poema sobre férias que terminava dizendo
-"SÓ VOLTO PARA A ESCOLA NO ANO QUE VEM". O título certo era LÁ VÊM AS FÉRIAS.
-VOLTA ÀS AULAS era a armadilha, feita para quem lê só o finalzinho.
+A armadilha é a resposta que fala da formiga. A formiga aparece só no fim do poema,
+e é ela que acha o menino grandão. Quem lê só o final marca errado.
+A resposta do POR QUE estava lá em cima.
 
 ---
 
-## Truque 2 — Cada letra vale uma vez
+## Truque 3 — Cada letra vale uma vez
 
-**O truque:** escreva a palavra da resposta e vá riscando uma letra de cada vez.
-Sobrou letra? Faltou letra? Então está errada.
+Escreva a palavra da resposta e vá riscando uma letra de cada vez.
+Sobrou letra, está errada. Faltou letra, está errada.
 
-**Na prova de 2025** a professora espalhou estas letras pelo chão:
-O, F, H, L, N, O, I, G. E perguntou qual nome de animal dá para formar com elas.
+**2025, primeira fase.** A professora espalhou estas letras pelo chão:
+O, F, H, L, N, O, I, G. A pergunta pedia o nome de animal que dá para formar com elas.
 As respostas eram GAFANHOTO, GOLFINHO, FLAMINGO e GALINHO.
 
-Passo a passo: conte as letras do chão. São oito, e tem DOIS O.
-Agora escreva GOLFINHO: G, O, L, F, I, N, H, O. Oito letras, com dois O. Encaixa perfeito.
+Conte as letras do chão: são oito, e tem dois O.
+Escreva GOLFINHO: G, O, L, F, I, N, H, O. Oito letras, dois O. Encaixa.
 Resposta certa: GOLFINHO.
 
-**A armadilha:** GAFANHOTO, FLAMINGO e GALINHO todas precisam da letra A.
-E não tem nenhum A no chão. Quem olha rápido e pensa "tem G, tem F, tem N, deve ser essa"
-marca errado. Confira letra por letra, uma de cada vez.
-
-Tem uma versão mais fácil dessa brincadeira: trocar só as vogais de lugar.
-Vogal é A, E, I, O, U. As outras letras ficam paradas, quietinhas.
-**Na prova de 2025**, a pergunta era qual palavra vira uma parte da camisa
-quando as vogais trocam de lugar. GALO vira GOLA, e gola é a parte da camisa
-que fica no pescoço. Resposta certa: GALO.
-A armadilha era GATO, que vira GOTA. GOTA existe, é palavra de verdade,
-mas gota não é parte de camisa. Formar uma palavra não basta:
-tem que ser o que a pergunta pediu.
+A armadilha: GAFANHOTO, FLAMINGO e GALINHO precisam da letra A, e não tem nenhum A no chão.
+Confira letra por letra, uma de cada vez.
 
 ---
 
-## Truque 3 — Pontinho embaixo, e só depois conta
+## Truque 4 — Pontinho embaixo, e só depois conta
 
-**O truque:** quando a prova mandar contar, não conte de cabeça.
+Quando a prova mandar contar, não conte de cabeça.
 Faça um pontinho embaixo de cada letra que você procura, uma por uma.
-Só no fim você conta os pontinhos.
+Só no fim conte os pontinhos.
 
-**Na prova de 2025** a coruja da floresta só ia dançar com quem tivesse um nome
-usando uma única vogal. Os animais na fila eram JACARÉ, LAGARTA, MACACO,
-TAMANDUÁ, CAPIVARA, URUBU e ARARA.
+**2025, primeira fase.** A coruja só ia dançar com quem tivesse um nome com uma única vogal.
+Os animais eram JACARÉ, LAGARTA, MACACO, TAMANDUÁ, CAPIVARA, URUBU e ARARA.
 
-Passo a passo: pontinho embaixo de cada vogal.
-ARARA: A, A, A. Só A. Passou!
-LAGARTA: A, A, A. Só A. Passou!
-URUBU: U, U, U. Só U. Passou!
+Pontinho embaixo de cada vogal.
+ARARA: A, A, A. Só A. Passa.
+LAGARTA: A, A, A. Só A. Passa.
+URUBU: U, U, U. Só U. Passa.
 
-**A armadilha:** MACACO. Parece que só tem A, não parece? MA, CA... mas espera:
-o final é CO. Tem um O escondido lá no fim. MACACO tem A e tem O, então não passa.
-CAPIVARA esconde um I no meio. TAMANDUÁ esconde um U.
-É exatamente aí que se erra: a letra escondida no meio ou no fim da palavra.
-O pontinho não deixa você perder nenhuma.
+A armadilha é MACACO. Parece só de A, mas o final é CO: tem um O escondido no fim.
+MACACO tem A e tem O, então não passa. CAPIVARA esconde um I no meio.
+TAMANDUÁ esconde um U. JACARÉ tem A e tem E.
+A letra que estraga fica escondida no meio ou no fim da palavra. O pontinho não deixa passar.
 
-E se a pergunta falar de SOM, fale a palavra em voz alta, bem baixinho.
+Quando a pergunta fala de SOM, fale a palavra em voz alta, bem baixinho.
 O ouvido resolve o que o olho não vê.
 
 ---
 
-## Truque 4 — Bata palma e use todas as peças
+## Truque 5 — Bata palma e use todas as peças
 
-**O truque:** cada palma é uma sílaba, e cada sílaba é uma peça.
-Use TODAS as peças que a prova deu, uma vez cada, em qualquer ordem.
+Cada palma é uma sílaba, e cada sílaba é uma peça.
+Use todas as peças que a prova deu, uma vez cada, em qualquer ordem.
 Sobrou peça, está errado. Faltou peça, está errado.
 
-**Na prova de 2025** a pergunta foi assim: se você me der um PÉ, um TA e um LA,
+**2025, primeira fase.** A pergunta foi: se você me der um PÉ, um TA e um LA,
 eu darei a você uma PÉTALA. Se você me der um PO, um RE e um LHO,
-eu darei a você um REPOLHO. Agora, se você me der um LA, um CO e um SA,
-o que eu darei a você?
+eu darei a você um REPOLHO. Se você me der um LA, um CO e um SA, o que eu darei a você?
 
-Passo a passo: são três peças, LA, CO e SA. Tem que gastar as três.
-Vira SA, CO, LA. Bate palma: três palmas, três peças. Resposta certa: uma SACOLA.
+São três peças: LA, CO, SA. Tem que gastar as três.
+Vira SA, CO, LA. Três palmas, três peças. Resposta certa: uma SACOLA.
 
-**A armadilha:** uma das respostas era LAÇO. LAÇO usa LA e CO e para por aí,
-deixando o SA sobrando. A resposta errada é quase sempre a que PARA CEDO.
-Outra armadilha era COLAR, que gasta CO e LA e ainda inventa uma letra R
-que ninguém deu para você.
+A armadilha é LAÇO: usa LA e CO e para por aí, deixando o SA sobrando.
+A resposta errada é quase sempre a que para cedo.
+Outra armadilha é COLAR, que gasta CO e LA e ainda inventa uma letra R que ninguém deu.
 
 ---
 
-## Truque 5 — Leia a frase inteira com a palavra dentro
+## Truque 6 — Leia a frase inteira com a palavra dentro
 
-**O truque:** quando a frase tem um buraco, coloque cada uma das quatro palavras
-lá dentro e leia a frase toda, do comecinho. Só uma deixa a frase certinha.
+Quando a frase tem um buraco, coloque cada uma das quatro palavras lá dentro
+e leia a frase toda, do comecinho. Só uma deixa a frase certinha.
 A pista mora do lado do buraco.
 
-**Na prova de 2025** a frase era: EU VI MUITAS NUVENS NO CÉU.
+**2025, primeira fase.** A frase era: EU VI MUITAS NUVENS NO CÉU.
 POUCO DEPOIS, COMEÇOU A CAIR UMA _______ BEM FORTE.
 As respostas eram LUA, ESTRELA, CHUVA e BOLA.
 
-Passo a passo: as pistas do lado são NUVENS e CAIR. O que cai da nuvem? CHUVA.
-Resposta certa: CHUVA.
+As pistas do lado são NUVENS e CAIR. O que cai da nuvem é chuva. Resposta certa: CHUVA.
 
-**A armadilha:** LUA e ESTRELA estão no céu, igualzinho às nuvens.
+A armadilha: LUA e ESTRELA estão no céu, igual às nuvens.
 Quem se guia só pela palavra CÉU cai nelas e esquece que a frase diz CAIR.
-E bola cai, mas bola não vem de nuvem. Sempre leia a frase INTEIRA, não só um pedaço.
+Bola cai, mas bola não vem de nuvem. Leia a frase inteira, não só um pedaço.
 
 ---
 
-## Truque 6 — Ache o intruso, troque a palavra
+## Truque 7 — Ache o intruso, troque a palavra
 
-**O truque do intruso:** pergunte o que os outros TRÊS têm de igual.
-Quem não tem aquilo é o intruso.
+Pergunte o que os outros três têm de igual. Quem não tem aquilo é o intruso.
 
-**Na prova de 2025**, a Jéssica estava fazendo a lista de compras da frutaria
+**2025, primeira fase.** Jéssica fazia a lista de compras da frutaria
 e escreveu uma palavra estranha. As respostas eram ABACAXI, ACEROLA, ALICATE e AMEIXA.
 Abacaxi é fruta, acerola é fruta, ameixa é fruta. Alicate é ferramenta.
 Resposta certa: ALICATE.
 
-**A armadilha:** as quatro palavras começam com A e têm o mesmo tamanho.
-Elas foram feitas para parecerem irmãs. Não decida pelo som, decida pelo significado.
-E se você não conhecer uma palavra, não marque só por isso:
+A armadilha: as quatro palavras começam com A e têm o mesmo tamanho.
+Não decida pelo som, decida pelo significado.
+Se você não conhecer uma palavra, não marque só por isso:
 ACEROLA e AMEIXA podem ser desconhecidas e são frutas do mesmo jeito.
 
-**O truque da palavra que troca:** tire a palavra velha, ponha a nova e leia a frase de novo.
+Para trocar uma palavra por outra, tire a velha, ponha a nova e leia a frase de novo.
 Continua dizendo a mesma coisa?
-**Na prova de 2024** apareceu a frase A CHUVA CESSOU E SE FOI, e a pergunta era qual palavra
-podia entrar no lugar de CESSOU. Ponha TERMINOU: a chuva terminou e se foi. Combina.
-Resposta certa: TERMINOU.
-Ponha COMEÇOU: a chuva começou e se foi. Briga! Uma coisa que começou não se vai embora.
+
+**2024, primeira fase.** A frase era A CHUVA CESSOU E SE FOI,
+e a pergunta era qual palavra podia entrar no lugar de CESSOU.
+Ponha TERMINOU: a chuva terminou e se foi. Combina. Resposta certa: TERMINOU.
+Ponha COMEÇOU: a chuva começou e se foi. Briga. Uma coisa que começou não se vai embora.
 A pista estava do lado: E SE FOI.
 
 ---
 
-## Truque 7 — Cante o alfabeto com o dedo andando
+## Truque 8 — Cante o alfabeto com o dedo andando
 
-**O truque:** cante o alfabeto baixinho, com o dedo andando de letra em letra.
+Cante o alfabeto baixinho, com o dedo andando de letra em letra.
 Onde o dedo pula, tem um buraco.
 
-**Na prova de 2025**, a Joana anotou animais numa ordem misteriosa:
+**2025, primeira fase.** Joana anotou animais numa ordem misteriosa:
 ABELHA, BEIJA-FLOR, CAMALEÃO, DONINHA, ELEFANTE, um espaço vazio, GAIVOTA.
 As respostas eram IGUANA, FALCÃO, JACARÉ e HIENA.
 
-Passo a passo: olhe a primeira letra de cada um. A, B, C, D, E, buraco, G.
-Cante: A, B, C, D, E, F, G. O buraco é o F. E o animal que começa com F é FALCÃO.
+Olhe a primeira letra de cada um: A, B, C, D, E, buraco, G.
+Cante: A, B, C, D, E, F, G. O buraco é o F. O animal que começa com F é FALCÃO.
 Resposta certa: FALCÃO.
 
-**A armadilha:** HIENA. É a resposta de quem olha a lista de cima para baixo,
-chega em GAIVOTA e pergunta "o que vem DEPOIS do G?". Mas o buraco não estava no fim,
-estava no MEIO. Sempre olhe onde o buraco está antes de responder.
-
-E tem a versão dentro da palavra: **na prova de 2024** a pergunta foi em qual palavra
-as letras estão em ordem do alfabeto. A resposta certa foi AMOR: A, depois M, depois O,
-depois R, sempre para a frente, nunca voltando. A armadilha foi ALMA: começa lindo,
-A, L, M... e aí o A volta lá do começo. Quem para de conferir no meio marca errado.
-Confira até a última letra.
+A armadilha é HIENA. É a resposta de quem olha a lista de cima para baixo,
+chega em GAIVOTA e pergunta o que vem depois do G.
+O buraco não estava no fim, estava no meio. Olhe onde o buraco está antes de responder.
 
 ---
 
-## Truque 8 — Um símbolo de cada vez
+## Vale para todas as quinze
 
-**O truque:** quando a prova dá uma tabela de símbolos, faça um de cada vez.
-Dedo no símbolo, dedo na tabela, escreva a peça. Só junte tudo no fim.
-
-**Na prova de 2025** cada símbolo valia uma sílaba, e a fila de símbolos escondia uma frase.
-Traduzindo um por um saía: AN, TES, SÓ, DO, QUE, MAL, A, COM, PA, NHA, DO.
-Juntando no fim: ANTES SÓ DO QUE MAL ACOMPANHADO. Era essa a resposta certa.
-
-**A armadilha:** as respostas erradas eram frases quase iguais.
-ANTES SÓ DO QUE MAL COMPREENDIDO, por exemplo. Elas pegam quem traduz só o comecinho,
-reconhece o ditado e completa de memória. Não complete de memória.
-Traduza até o último símbolo.
-
-E se aparecer uma placa desenhada: círculo vermelho com uma barra cortando quer dizer
-PROIBIDO. O desenho que está DENTRO do círculo diz o que é proibido.
-**Na prova de 2025** tinha uma placa com um cachorro dentro do círculo vermelho cortado:
-proibido animal.
-
----
-
-## Vale para os oito truques
-
-Antes de marcar, leia as QUATRO respostas até o fim. Todas.
+Antes de marcar, leia as quatro respostas até o fim. Todas.
 A resposta errada quase sempre é uma quase-certa que para cedo:
-usou só duas peças das três, esqueceu a última pista, leu só o final do poema.
-Conferiu as quatro? Só então marca.
+usou duas peças das três, esqueceu a última pista, leu só o final do poema.
 
----
+Depois de escolher, leia a sua resposta junto com a pergunta.
+Ela responde mesmo o que foi perguntado?
 
-## E o mais importante de tudo: a régua
-
-Você já sabe ler sozinha. O problema é pular linha, e na prova pular linha faz perder ponto.
-
-Então guarde esta frase:
-
-**Na prova não tem tela. Seu dedo é a régua. Ele fica embaixo da linha e só desce
-quando a linha acaba.**
-
-Uma linha de cada vez. O dedo desce UMA só.
-Se preferir, a borracha também serve de régua. Mas o dedo está sempre com você.
-
-Dedo embaixo da linha. Leia as quatro respostas até o fim. E boa prova!
+Se o texto for comprido e você se perder de linha, o seu dedo é a régua:
+ele fica embaixo da linha e só desce quando a linha acaba.

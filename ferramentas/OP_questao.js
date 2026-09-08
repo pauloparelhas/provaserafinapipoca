@@ -68,19 +68,27 @@ function Texto(props){
     if(acende) return acende.indexOf(i)>=0 ? 'lin acesa' : 'lin apagada';
     if(!guia) return 'lin';
     if(i===atual) return 'lin on';
+    if(i===atual+1) return 'lin proxima';   /* a próxima é o alvo do toque */
     return i<atual ? 'lin lida' : 'lin adiante';
   }
+  /* O gesto é apontar para ONDE SE VAI, não para onde já se está: toca-se
+     na linha DE BAIXO para a régua descer até ela. (A primeira versão
+     pedia o toque na linha acesa, e o Paulo apontou que é contraintuitivo.)
+     Tocar em qualquer outra linha só lê a linha em voz alta. */
   return h('div',{className:'leitura'+(guia?' comguia':'')},
     linhas.map(function(l,i){
       return h('button',{key:i, className:classe(i), onClick:function(){
-        if(guia && i===atual && i<linhas.length-1) setAtual(i+1); else falar(l);
+        if(guia && i===atual+1) setAtual(i); else falar(l);
       }}, l);
     }),
     !acende && h('div',{className:'guiarow'},
       h('button',{className:'guiabtn'+(guia?' on':''), onClick:function(){
         var v=!guia; setGuia(v); salvaGuia(v); setAtual(0);
       }}, guia ? 'Guia de leitura ligado' : 'Ligar guia de leitura'),
-      guia && h('span',{className:'guiadica'},'toque na linha acesa para descer uma')
+      guia && h('span',{className:'guiadica'},
+        atual<linhas.length-1
+          ? 'leia a linha amarela; para continuar, toque na linha de baixo'
+          : 'esta é a última linha')
     )
   );
 }
@@ -89,12 +97,21 @@ function Texto(props){
 function Questao(props){
   var item=props.item;
   var alt=React.useState(function(){
-    return embaralha(item.opts.map(function(o){ return {t:o.t, ok:!!o.ok, no:o.no}; }));
+    /* `img` tem de vir junto: sem ele, a questao cujas alternativas SAO
+       desenhos perdia as imagens no embaralhamento e virava quatro
+       legendas sem figura. */
+    return embaralha(item.opts.map(function(o){ return {t:o.t, ok:!!o.ok, no:o.no, img:o.img}; }));
   })[0];
   var r=React.useState(typeof props.respostaInicial==='number'?props.respostaInicial:-1);
   var pick=r[0], setPick=r[1];
   var d=React.useState(false), dica=d[0], setDica=d[1];
   var fim=React.useRef(null);
+  /* "Só a pergunta": esconde o texto de apoio e deixa o comando sozinho na
+     tela. É a ordem de leitura que faz acertar — primeiro a pergunta, para
+     a cabeça já saber o que procurar; depois o texto; depois a pergunta de
+     novo com as alternativas. Só aparece quando há texto para esconder. */
+  var so=React.useState(false), soPergunta=so[0], setSoPergunta=so[1];
+  var temApoio = !!(item.texto || item.quadro || item.figura || item.enun);
 
   var feito = pick>=0;
   var acertou = feito && alt[pick].ok;
@@ -119,27 +136,52 @@ function Questao(props){
       props.etiqueta && h('span',{className:'qetq'},props.etiqueta),
       props.mostrarOrigem!==false && h('span',{className:'qorig'},item.origem)
     ),
-    item.enun && h('p',Object.assign({className:'enun'},html(item.enun))),
-    item.nota && h('p',{className:'nota'},item.nota),
-    item.quadro && h('div',Object.assign({className:'quadro'},html(item.quadro))),
-    item.texto && h(Texto,{linhas:item.texto}),
-    h('p',Object.assign({className:'pede'},html(item.pede))),
+    /* Com "Só a pergunta" ligado, o comando sobe sozinho para o topo e
+       todo o resto some. A criança lê o que está sendo pedido, e só então
+       manda aparecer o texto. */
+    soPergunta && h('div',{className:'sopergunta'},
+      h('span',{className:'sotit'},'O que a pergunta está pedindo'),
+      h('p',Object.assign({className:'pede'},html(item.pede))),
+      h('button',{className:'mini', onClick:function(){ setSoPergunta(false); }},'Agora mostrar o texto')
+    ),
+    !soPergunta && item.enun && h('p',Object.assign({className:'enun'},html(item.enun))),
+    !soPergunta && item.nota && h('p',{className:'nota'},item.nota),
+    !soPergunta && item.quadro && h('div',Object.assign({className:'quadro'},html(item.quadro))),
+    /* A figura recortada da prova original. Quando a questao depende do
+       desenho (nomear o objeto, ler a placa, decifrar os icones), e ele
+       que vale — descrever em palavras entregaria de graca o primeiro
+       passo do raciocinio, que na prova e da crianca. */
+    !soPergunta && item.figura && h('div',{className:'figura'},
+      h('img',{src:item.figura, alt:item.figuraAlt||'figura da questão', loading:'lazy'})),
+    !soPergunta && item.texto && h(Texto,{linhas:item.texto}),
+    !soPergunta && h('p',Object.assign({className:'pede'},html(item.pede))),
 
     h('div',{className:'linhabtn'},
       h('button',{className:'mini', onClick:leTudo},'Ouvir'),
+      !feito && temApoio && !soPergunta && h('button',{className:'mini', onClick:function(){
+        setSoPergunta(true); falar(item.pede);
+        try{ window.scrollTo({top:0,behavior:'smooth'}); }catch(e){}
+      }},'Só a pergunta'),
       !feito && h('button',{className:'mini'+(dica?' on':''), onClick:function(){
         var v=!dica; setDica(v); if(v) falar(item.dica);
       }}, dica?'Esconder a dica':'Dica')
     ),
     dica && !feito && h('div',{className:'dicabox'},h('b',null,'Dica: '),item.dica),
 
-    h('div',{className:'opts'}, alt.map(function(o,i){
+    /* Alternativas. Quando elas SAO desenhos (as placas de 2025, as
+       fileiras de icones de 2023), o texto vira a legenda e a imagem vem
+       recortada da prova. A letra e sempre desenhada pelo componente, e
+       nunca faz parte da imagem: a ordem e sorteada, e um "(A)" gravado no
+       recorte apareceria na posicao C e mentiria para a crianca. */
+    h('div',{className:'opts'+(alt[0].img?' comimg':'')}, alt.map(function(o,i){
       var cls='opt';
       if(feito && o.ok) cls+=' ok';
       if(feito && i===pick && !o.ok) cls+=' no';
       return h('button',{key:i, className:cls, disabled:feito, onClick:function(){ responde(i); }},
         h('span',{className:'let'},'ABCD'.charAt(i)),
-        h('span',Object.assign({className:'oct'},html(o.t)))
+        o.img
+          ? h('span',{className:'oimg'}, h('img',{src:o.img, alt:textoPuro(o.t), loading:'lazy'}))
+          : h('span',Object.assign({className:'oct'},html(o.t)))
       );
     })),
 

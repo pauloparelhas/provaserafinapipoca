@@ -18,6 +18,9 @@
 .blocotopo small{display:block;font-size:calc(.76rem*var(--fs));font-weight:800;color:var(--dim);line-height:1.3;margin-top:1px}
 .blocotopo .qtd{margin-left:auto;font-size:calc(.68rem*var(--fs));font-weight:900;color:var(--dim);white-space:nowrap}
 .bloco.aberto .blocotopo{border-bottom:1px solid var(--line)}
+.bloco.mestre{border-color:var(--accent2);background:rgba(251,191,36,.08)}
+.bloco.mestre .blocotopo .n{background:var(--accent2);color:#3a2a00}
+.bloco.mestre .truquefrase{background:rgba(251,191,36,.2)}
 .blococorpo{display:none;padding:11px 13px 13px}
 .bloco.aberto .blococorpo{display:block}
 .truquefrase{font-size:calc(1rem*var(--fs));font-weight:900;line-height:1.38;padding:9px 11px;border-radius:10px;
@@ -85,6 +88,13 @@ var LIDOS='op_blocos_lidos';
 function lidos(){ try{ return JSON.parse(localStorage.getItem(LIDOS)||'{}'); }catch(e){ return {}; } }
 function marcaLido(k){ var l=lidos(); l[k]=1; try{ localStorage.setItem(LIDOS,JSON.stringify(l)); }catch(e){} }
 function doEixo(k){ return OP.ITENS.filter(function(i){ return i.eixo===k; }); }
+/* As questoes que um bloco mostra no popup. O bloco mestre ("o que a
+   pergunta esta pedindo") nao tem eixo proprio: ele lista ids a dedo,
+   porque o que reune essas questoes e o comando, nao o assunto. */
+function itensDo(c){
+  if(c.itens) return c.itens.map(function(id){ return OP.acha(id); }).filter(Boolean);
+  return doEixo(c.k);
+}
 
 /* ---------- o popup ---------- */
 function Popup(props){
@@ -169,15 +179,15 @@ function App(){
 
   return h('div',null,
     h('h1',{className:'tt'},'Truques de prova'),
-    h('p',{className:'sub'},'Oito tipos de pergunta. Abra um, leia o truque em uma frase e veja as perguntas de verdade que já cobraram isso.'),
+    h('p',{className:'sub'},'Comece pelo de estrela: ele vale para as quinze perguntas. Depois, os oito tipos que caem — cada um com o truque em uma frase e as perguntas de verdade que já cobraram aquilo.'),
 
     OP.CARTOES.map(function(c,idx){
       var fam=FAM[c.k]||{cor:'var(--accent)'};
-      var itens=doEixo(c.k);
+      var itens=itensDo(c);
       var aberto=!!abertos[c.k];
-      return h('div',{key:c.k, className:'bloco'+(aberto?' aberto':'')},
+      return h('div',{key:c.k, className:'bloco'+(aberto?' aberto':'')+(c.mestre?' mestre':'')},
         h('button',{className:'blocotopo', onClick:function(){ alterna(c.k); }},
-          h('span',{className:'n', style:aberto?{background:fam.cor,color:'#06251a'}:null}, idx+1),
+          h('span',{className:'n', style:aberto&&fam.cor?{background:fam.cor,color:'#06251a'}:null}, c.mestre?'★':idx),
           h('span',null,
             h('b',null, c.titulo, lido[c.k] && !aberto ? h('span',{className:'feitoselo'},'lido') : null),
             h('small',null, aberto ? 'toque para fechar' : c.truque.split('.')[0]+'.')),
@@ -200,7 +210,7 @@ function App(){
     }),
 
     h('p',{style:{textAlign:'center',fontSize:'.76rem',fontWeight:800,color:'var(--dim)',margin:'12px 0 4px',lineHeight:1.4}},
-      quantosLidos+' de '+OP.CARTOES.length+' tipos abertos'),
+      quantosLidos+' de '+OP.CARTOES.length+' abertos'),
     h('div',{className:'grade duas',style:{marginTop:'8px'}},
       h('a',{className:'acao forte',href:'OP_simulado.html',style:{display:'flex',alignItems:'center',justifyContent:'center',textDecoration:'none'}},'Fazer um simulado'),
       h('a',{className:'acao',href:'OP_provas.html',style:{display:'flex',alignItems:'center',justifyContent:'center',textDecoration:'none'}},'Fazer uma prova anterior')
@@ -208,7 +218,7 @@ function App(){
 
     popup && h(Popup,{
       titulo: popup.titulo,
-      itens: doEixo(popup.k),
+      itens: itensDo(popup),
       respostas: respPorEixo[popup.k]||{},
       aoResponder:function(novo){
         var n={}; for(var i in respPorEixo) n[i]=respPorEixo[i];

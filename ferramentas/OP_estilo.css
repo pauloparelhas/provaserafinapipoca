@@ -88,6 +88,10 @@ body.light .quadro{background:rgba(21,128,61,.07)}
 .leitura.comguia .lin.adiante{opacity:.32}
 .leitura.comguia .lin.lida{opacity:.6}
 .leitura.comguia .lin.on{background:rgba(251,191,36,.16);box-shadow:inset 3px 0 0 var(--accent2)}
+/* a linha DE BAIXO é o alvo do toque, e tem de parecer um alvo: fica
+   legível e com a borda tracejada de "toque aqui para continuar" */
+.leitura.comguia .lin.proxima{opacity:.72;border:1.5px dashed var(--accent2);border-radius:8px}
+.leitura.comguia .lin.proxima::after{content:"\25BC";float:right;font-size:.7em;color:var(--accent2);opacity:.8}
 .lin.acesa{background:rgba(74,222,128,.18);box-shadow:inset 3px 0 0 var(--accent)}
 .lin.apagada{opacity:.4}
 .guiarow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 8px 2px}
@@ -201,6 +205,114 @@ p.sub{font-size:calc(.86rem*var(--fs));font-weight:800;color:var(--soft);line-he
 .secao{font-size:calc(.66rem*var(--fs));font-weight:900;letter-spacing:1.4px;text-transform:uppercase;
   color:var(--accent);margin:14px 0 7px;display:flex;align-items:center;gap:7px}
 .secao::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* ---------- "Só a pergunta" ----------
+   O comando sozinho na tela, antes do texto. É a ordem de leitura que faz
+   acertar: saber o que se procura antes de começar a procurar. */
+.sopergunta{border:2px dashed var(--accent2);border-radius:12px;padding:14px 15px;margin:6px 0 4px;
+  background:rgba(251,191,36,.1)}
+.sopergunta .sotit{display:block;font-size:calc(.66rem*var(--fs));font-weight:900;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--accent2);margin-bottom:6px}
+.sopergunta .pede{margin:0 0 12px}
+body.papel .sopergunta{background:#fff9e0;border-color:#d19a00}
+body.papel .sopergunta .sotit{color:#8a5a00}
+
+/* ---------- figuras recortadas da prova ---------- */
+.figura{text-align:center;margin:10px 0}
+.figura img{max-width:100%;height:auto;border-radius:8px}
+.opts.comimg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opts.comimg .opt{flex-direction:column;align-items:stretch;gap:6px;min-height:0;padding:9px}
+.opts.comimg .opt .let{align-self:flex-start}
+.oimg{display:flex;align-items:center;justify-content:center}
+/* A figura da alternativa é para ser reconhecida, não admirada: presa a
+   uma altura que deixa as quatro caberem na tela junto com o enunciado. */
+.oimg img{max-width:100%;max-height:150px;width:auto;height:auto}
+@media(min-width:700px){ .oimg img{max-height:190px} }
+.figura img{max-height:230px;width:auto}
+/* fileira larga (os ícones de 2023): uma alternativa por linha */
+.opts.comimg.larga{grid-template-columns:1fr}
+
+/* ============================================================
+   MODO PAPEL — a folha da prova de verdade.
+
+   Pedido do Paulo: "mostrar as questões em interface exatamente igual à
+   das provas reais, em termos de montagem, estrutura, diagramação, como
+   se fosse o papel digitalizado, mas com todas as ferramentas
+   interativas". O objetivo é treinar o olho para o dia: a criança chega
+   na prova e reconhece o que está vendo.
+
+   O que se copia do papel: folha branca, tipografia sem serifa em caixa
+   alta, o "4)" antes do enunciado, o "(A)" antes de cada alternativa,
+   as caixas verdes de destaque, a régua de margem, o número da página.
+   O que se adapta: as alternativas continuam sendo botões de 48px (dedo
+   de criança), o acerto pinta de verde e o erro de vermelho, e a correção
+   aparece embaixo, fora da folha — como se fosse a professora ao lado.
+   ============================================================ */
+body.papel{--bg:#8a8f98;--bg2:#6f747d}
+body.papel .card{
+  background:#fff;color:#111;border:none;border-radius:2px;
+  box-shadow:0 3px 14px rgba(0,0,0,.34), 0 0 0 1px rgba(0,0,0,.1);
+  padding:26px 30px 30px;max-width:760px;
+  font-family:Arial,Helvetica,'Segoe UI',sans-serif}
+body.papel .card::before{
+  content:"CATEGORIA G \2013 2\00BA ANO";
+  display:block;font-size:calc(.62rem*var(--fs));font-weight:700;letter-spacing:1.4px;
+  color:#444;border-bottom:1.5px solid #111;padding-bottom:5px;margin-bottom:14px}
+/* o enunciado numerado, como no caderno */
+body.papel .qhead{border:none;margin-bottom:10px;color:#555}
+body.papel .qnum{color:#111;font-weight:700}
+body.papel .qetq{color:#666}
+body.papel .qorig{color:#888}
+body.papel .enun,
+body.papel .pede{color:#111;font-weight:700;line-height:1.42;text-align:left}
+body.papel .enun{font-size:calc(.92rem*var(--fs))}
+body.papel .pede{font-size:calc(.95rem*var(--fs));margin:12px 0 10px}
+body.papel .nota{color:#777;border-left-color:#ccc}
+/* a caixa verde-clara que a prova usa para listas, frases e tabelas */
+body.papel .quadro{background:#e8f2e0;border:1px solid #b9d3a8;color:#111;border-radius:3px;
+  font-size:calc(.95rem*var(--fs));text-align:center}
+body.papel .quadro .bl{border-bottom-color:#111}
+body.papel .lst{border-bottom-color:#bbb}
+body.papel .lst.vaz{border-bottom:2px solid #111}
+body.papel .tbc td{border-color:#111}
+/* o texto do poema, sem moldura: no papel ele é só texto */
+body.papel .leitura{background:none;border:none;padding:0;margin:10px 0}
+body.papel .lin{color:#111;font-size:calc(.95rem*var(--fs));line-height:1.45;padding:1px 2px}
+body.papel .leitura.comguia .lin.on{background:#fff3c4;box-shadow:inset 3px 0 0 #d19a00}
+body.papel .lin.acesa{background:#dff3e3;box-shadow:inset 3px 0 0 #2e7d32}
+body.papel .guiabtn{color:#666;border-color:#bbb}
+body.papel .guiabtn.on{color:#8a5a00;border-color:#d19a00}
+body.papel .guiadica{color:#888}
+/* alternativas: parecem as do papel, mas continuam sendo botões grandes */
+body.papel .opt{background:#fff;border:1.5px solid #bbb;color:#111;box-shadow:none;
+  font-weight:700;font-size:calc(.95rem*var(--fs))}
+body.papel .opt .let{background:none;color:#111;font-weight:700;font-size:.9rem;
+  flex:0 0 auto;width:auto;height:auto;border-radius:0}
+body.papel .opt .let::before{content:"("}
+body.papel .opt .let::after{content:")"}
+body.papel .opt.ok{background:#dff3e3;border-color:#2e7d32;color:#123}
+body.papel .opt.ok .let{color:#1b5e20}
+body.papel .opt.no{background:#fdeaea;border-color:#c62828;color:#311}
+body.papel .opt.no .let{color:#b71c1c}
+body.papel .mini{background:#f4f4f4;border-color:#ccc;color:#444}
+body.papel .mini.on{background:#fff3c4;border-color:#d19a00;color:#8a5a00}
+body.papel .dicabox{background:#fff9e0;border-color:#e0c46a;color:#4a3c10}
+body.papel .dicabox b{color:#8a5a00}
+/* a correção sai da folha: é a voz de quem ensina, não a da prova */
+body.papel .fb{background:#1a2740;color:#f2f7ff;border-color:#2c3d5e;
+  font-family:'Nunito','Segoe UI',system-ui,sans-serif;margin-top:16px}
+body.papel .fb.certo{border-color:#2e7d32}
+body.papel .fb.errado{border-color:#d19a00}
+body.papel .fb .truq{background:rgba(255,255,255,.07)}
+body.papel .fb .pc{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+body.papel .fb .pc.hit{background:rgba(52,211,153,.22);border-color:#34d399}
+body.papel .fb .pc.bad{background:rgba(248,113,113,.2);border-color:#f87171}
+body.papel .fb .arw{color:rgba(255,255,255,.6)}
+body.papel .figura img{border:1px solid #e2e2e2}
+body.papel .avancar{font-family:'Nunito','Segoe UI',system-ui,sans-serif}
+/* número da página, no rodapé da folha */
+body.papel .card::after{content:attr(data-folha);display:block;text-align:center;
+  font-size:calc(.62rem*var(--fs));color:#999;margin-top:20px;border-top:1px solid #e0e0e0;padding-top:7px}
 
 /* ---------- tablet: mais largura, não mais altura ---------- */
 @media(min-width:700px){

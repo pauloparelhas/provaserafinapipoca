@@ -26,6 +26,7 @@
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
     <button class="iconbtn sombtn" id="sombtn" title="Som" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" id="papelbtn" title="Como no papel da prova" onclick="togglePapel()">&#128196;</button>
     <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
@@ -39,6 +40,33 @@
 
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'op_som',stars:90};</script>
 <script src="serafina-core.js?v=20260908"></script>
+<script>
+/* MODO PAPEL — a folha da prova de verdade, com a interacao por cima.
+   Ligado por padrao nesta tela: o objetivo e a crianca reconhecer no dia
+   o que esta vendo. O botao da folha alterna para o visual do site, para
+   quem preferir ler no escuro. A escolha fica salva. */
+(function(){
+  var K='op_papel';
+  function ligado(){ try{ return localStorage.getItem(K)!=='0'; }catch(e){ return true; } }
+  function pinta(){
+    var on=ligado();
+    document.body.classList.toggle('papel',on);
+    var b=document.getElementById('papelbtn');
+    if(b){
+      b.innerHTML = on ? '&#128196;' : '&#128421;&#65039;';
+      b.title = on ? 'Assim e a folha da prova. Tocar para ver na tela.' : 'Ver como na folha da prova';
+    }
+    var m=document.querySelector('meta[name=theme-color]');
+    if(m) m.setAttribute('content', on ? '#8a8f98' : '#0d0b1e');
+  }
+  window.togglePapel=function(){
+    try{ localStorage.setItem(K, ligado()?'0':'1'); }catch(e){}
+    pinta();
+  };
+  pinta();
+  document.addEventListener('DOMContentLoaded',pinta);
+})();
+</script>
 <script src="assets/react.production.min.js"></script>
 <script src="assets/react-dom.production.min.js"></script>
 <script src="OP_data.js?v=20260908b"></script>

@@ -26,6 +26,20 @@
 .mapa button.certo{background:var(--ok);color:#06251a;border-color:var(--ok)}
 .mapa button.errado{background:var(--no);color:#3a0a0a;border-color:var(--no)}
 .mapa button.agora{outline:3px solid var(--accent2);outline-offset:1px}
+/* sobre a folha branca, a grade tem de ter contraste propio: as cores do
+   tema escuro sumiam no papel */
+body.papel .mapa{border-bottom:1px solid #ddd;padding-bottom:9px;margin:0 0 12px}
+body.papel .mapa button{background:#fff;border:1.5px solid #999;color:#222;font-weight:700}
+body.papel .mapa button.certo{background:#dff3e3;border-color:#2e7d32;color:#1b5e20}
+body.papel .mapa button.errado{background:#fdeaea;border-color:#c62828;color:#b71c1c}
+body.papel .mapa button.agora{outline-color:#d19a00}
+body.papel .placar{color:#1b5e20}
+body.papel .placarsub{color:#444}
+body.papel .provacard{background:#fff;border-color:#bbb;color:#111}
+body.papel .provacard .ano{background:#eee;color:#111}
+body.papel .provacard small{color:#666}
+body.papel h1.tt{color:#111}
+body.papel p.sub{color:#444}
 </style>
 </head>
 <body>
@@ -37,6 +51,7 @@
     <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
     <button class="iconbtn sombtn" id="sombtn" title="Som" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" id="papelbtn" title="Como no papel da prova" onclick="togglePapel()">&#128196;</button>
     <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
@@ -51,6 +66,33 @@
 
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'op_som',stars:90};</script>
 <script src="serafina-core.js?v=20260908"></script>
+<script>
+/* MODO PAPEL — a folha da prova de verdade, com a interacao por cima.
+   Ligado por padrao nesta tela: o objetivo e a crianca reconhecer no dia
+   o que esta vendo. O botao da folha alterna para o visual do site, para
+   quem preferir ler no escuro. A escolha fica salva. */
+(function(){
+  var K='op_papel';
+  function ligado(){ try{ return localStorage.getItem(K)!=='0'; }catch(e){ return true; } }
+  function pinta(){
+    var on=ligado();
+    document.body.classList.toggle('papel',on);
+    var b=document.getElementById('papelbtn');
+    if(b){
+      b.innerHTML = on ? '&#128196;' : '&#128421;&#65039;';
+      b.title = on ? 'Assim e a folha da prova. Tocar para ver na tela.' : 'Ver como na folha da prova';
+    }
+    var m=document.querySelector('meta[name=theme-color]');
+    if(m) m.setAttribute('content', on ? '#8a8f98' : '#0d0b1e');
+  }
+  window.togglePapel=function(){
+    try{ localStorage.setItem(K, ligado()?'0':'1'); }catch(e){}
+    pinta();
+  };
+  pinta();
+  document.addEventListener('DOMContentLoaded',pinta);
+})();
+</script>
 <script src="assets/react.production.min.js"></script>
 <script src="assets/react-dom.production.min.js"></script>
 <script src="OP_data.js?v=20260908b"></script>

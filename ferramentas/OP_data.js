@@ -399,8 +399,9 @@ var ITENS = [
  proximo:'Repare se a palavra depois do buraco tem S no fim. Uma coisa só pede UM; várias coisas pedem OS ou ALGUNS.'},
 
 {id:'24F1Q3', eixo:'letras', origem:'Olimpíada 2024 · 1ª fase · questão 3',
- enun:'ENTRE OUTRAS COISAS, USAMOS O OBJETO ABAIXO PARA GELAR BEBIDAS: O GELO.',
- nota:'Na prova aparece o desenho de um cubo de gelo derretendo, e é a criança que descobre o nome. Aqui o nome vem escrito.',
+ enun:'ENTRE OUTRAS COISAS, USAMOS O OBJETO ABAIXO PARA GELAR BEBIDAS:',
+ figura:'media/op/24F1Q3_gelo.png',
+ figuraAlt:'desenho de um cubo de gelo derretendo sobre uma poça de água',
  pede:'SE TROCARMOS DE LUGAR AS VOGAIS DO NOME DESSE OBJETO, QUE PALAVRA TEREMOS?',
  opts:[
   {t:'LEGO', no:'LEGO usa as mesmas quatro letras de GELO, mas embaralhou tudo. A pergunta manda trocar SÓ as vogais e deixar as outras letras paradas.'},
@@ -544,9 +545,9 @@ var ITENS = [
  proximo:'Para saber se rima, fale as duas palavras em voz alta e escute só o fim. Terminar com a mesma letra não basta.'},
 
 {id:'24F1Q11', eixo:'silabas', origem:'Olimpíada 2024 · 1ª fase · questão 11',
- enun:'ESTES SÃO OS NOMES DE TRÊS ANIMAIS MUITO CONHECIDOS:',
- quadro:'GALO &nbsp;&ndash;&nbsp; CAVALO &nbsp;&ndash;&nbsp; ELEFANTE',
- nota:'Na prova aparecem três sombras pretas e é a criança que descobre os nomes. Aqui os nomes já vêm escritos.',
+ enun:'AS FIGURAS ABAIXO SÃO SOMBRAS DE ANIMAIS MUITO CONHECIDOS:',
+ figura:'media/op/24F1Q11_sombras.png',
+ figuraAlt:'três sombras pretas de animais, lado a lado',
  pede:'QUE ALTERNATIVA MOSTRA UMA PALAVRA FORMADA APENAS COM SÍLABAS DOS NOMES DOS ANIMAIS ACIMA?',
  opts:[
   {t:'COELHO', no:'COELHO é outro animal conhecido, e é só por isso que atrai. Mas CO e LHO não existem em nenhum dos três nomes.'},
@@ -554,7 +555,7 @@ var ITENS = [
   {t:'CAFANGA', ok:1},
   {t:'GALOPANTE', no:'Essa é a armadilha mais forte da prova. GA-LO é o galo inteirinho, galopar lembra cavalo e -TE lembra elefante. Mas PAN não existe: o elefante dá FAN, não PAN. Uma letra de diferença derruba a alternativa.'}
  ],
- dica:'Bata palma em cada nome: GA-LO, CA-VA-LO, E-LE-FAN-TE. Essas são todas as peças que você tem.',
+ dica:'Primeiro diga o nome de cada sombra em voz alta. Depois bata palma em cada nome: são essas as peças que você tem.',
  truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
  visual:'<div class="pcs"><span class="pc">GA</span><span class="pc">LO</span><span class="pc">CA</span><span class="pc">VA</span><span class="pc">LO</span><span class="pc">E</span><span class="pc">LE</span><span class="pc">FAN</span><span class="pc">TE</span></div>'+
         '<p class="vx">Essas s&atilde;o as pe&ccedil;as que os tr&ecirc;s nomes d&atilde;o.</p>'+
@@ -848,7 +849,7 @@ var ITENS = [
  proximo:'Quando o cartaz manda cumprir três regras, confira as três em cada um. Não pare na primeira que der certo.'},
 
 {id:'25F2Q11', eixo:'silabas', origem:'Olimpíada 2025 · 2ª fase · questão 11',
- enun:'OBSERVE AS FIGURAS:',
+ enun:'OBSERVE AS TRÊS COISAS ABAIXO:',
  quadro:'CACHORRO &nbsp;&ndash;&nbsp; NARIZ &nbsp;&ndash;&nbsp; BANANEIRA',
  nota:'Na prova aparecem três gravuras e é a criança que descobre os nomes: um cachorro, um nariz e uma bananeira. Aqui os nomes já vêm escritos.',
  pede:'USANDO APENAS A PRIMEIRA SÍLABA DOS NOMES DE CADA FIGURA, QUE NOVA PALAVRA PODEMOS FORMAR? DICA: AS SÍLABAS NÃO PRECISAM SEGUIR A MESMA ORDEM DAS FIGURAS.',
@@ -1030,7 +1031,7 @@ var ITENS = [
         '<div class="pcs"><span class="pc bad">C E <b>N</b> T R O</span><span class="arw">&rarr;</span><span class="pc bad">tem N e n&atilde;o tem A</span></div>'+
         '<p class="vx">Uma letra de diferen&ccedil;a em seis, bem no meio da palavra, onde a gente confere menos.</p>',
  porque:'ACERTO, ARCOTE e CERATO usam as mesmas seis letras: A, C, E, R, T, O. CENTRO trocou o A por um N — é a única diferente.',
- proximo:'CENTRO é a única palavra conhecida das quatro, e é justamente ela a intrusa. Confira as letras uma por uma; não confie no que parece familiar.'},
+ proximo:'CENTRO é a palavra mais familiar do grupo, e é justamente ela a intrusa. Confira as letras uma por uma; não confie no que parece conhecido.'},
 
 {id:'24F2Q5', eixo:'intruso', origem:'Olimpíada 2024 · 2ª fase · questão 5',
  enun:'A MITOLOGIA GREGA É MUITO INTERESSANTE! LEIA O TRECHO ADAPTADO DE CLAUDE POUZADOUX SOBRE HÉRACLES, UM HERÓI GREGO:',
@@ -1580,7 +1581,7 @@ var ITENS = [
  pede:'JUNTE AS SÍLABAS NA ORDEM DOS SÍMBOLOS. QUAL FRASE A SEQUÊNCIA FORMA?',
  opts:[
   {t:'CADA MACACO NO SEU LUGAR.', no:'O começo bate, e quem reconhece o ditado no meio do caminho completa de memória. Mas os dois últimos símbolos são o quadrado e o círculo, que valem GA e LHO: GALHO. LU e GAR não existem na tabela.'},
-  {t:'CADA MACACO NO GALHO.', no:'Essa pulou o losango, que vale SEU. Conte: a sequência tem nove símbolos e essa frase tem sete pedaços. Sobrou símbolo sem uso.'},
+  {t:'CADA MACACO NO GALHO.', no:'Essa pulou o losango, que vale SEU. Conte: a sequência tem nove símbolos e essa frase tem oito pedaços (CA-DA-MA-CA-CO-NO-GA-LHO). Sobrou símbolo sem uso.'},
   {t:'CADA MACACO NO SEU GALO.', no:'GALO e GALHO mudam uma letra só. O último símbolo é o círculo preto, e na tabela ele vale LHO, com LH. LO não está na tabela.'},
   {t:'CADA MACACO NO SEU GALHO.', ok:1}
  ],
@@ -1672,7 +1673,7 @@ var ITENS = [
   {t:'UMA PLACA COM O DESENHO DE UM HOMEM E DE UMA MULHER, UM DE CADA LADO DE UM RISCO EM PÉ.', ok:1},
   {t:'UMA PLACA COM O DESENHO DE UM COPO EMBAIXO DE UMA TORNEIRA.', no:'No banheiro tem torneira, e é aí que essa placa pega. Mas copo embaixo de torneira é a placa do bebedouro, o lugar de beber água — e não tem nenhuma pessoa desenhada.'}
  ],
- dica:'Três dessas placas têm gente ou água desenhada. Olhe o desenho INTEIRO de cada uma antes de escolher, e não só o primeiro pedaço.',
+ dica:'Quase todas essas placas têm gente ou água desenhada. Olhe o desenho INTEIRO de cada uma antes de escolher, e não só o primeiro pedaço.',
  truque:'Círculo vermelho cortado quer dizer PROIBIDO. O desenho de dentro diz o que é proibido.',
  visual:'<div class="pcs"><span class="pc hit">homem</span><span class="pc hit">risco em p&eacute;</span><span class="pc hit">mulher</span>'+
         '<span class="arw">&rarr;</span><span class="pc hit">banheiro</span></div>'+
@@ -1689,7 +1690,7 @@ var ITENS = [
  nota:'Na prova as placas são desenhadas. Aqui cada uma vem descrita em palavras: a forma, a cor, se tem barra e o que está desenhado dentro.',
  pede:'QUAL PLACA O PAI DE LUÍSA APONTOU?',
  opts:[
-  {t:'UMA PLACA VERMELHA DE OITO PONTAS COM A PALAVRA PARE ESCRITA DENTRO.', no:'É a placa mais conhecida de todas e a primeira que vem à cabeça quando se fala de rua. Mas ela manda o CARRO parar; ela não mostra o lugar de atravessar a pé.'},
+  {t:'UMA PLACA VERMELHA DE OITO LADOS COM A PALAVRA PARE ESCRITA DENTRO.', no:'É a placa mais conhecida de todas e a primeira que vem à cabeça quando se fala de rua. Mas ela manda o CARRO parar; ela não mostra o lugar de atravessar a pé.'},
   {t:'UMA PLACA COM O DESENHO DE UMA PESSOA ANDANDO EM CIMA DE UMAS FAIXAS BRANCAS.', ok:1},
   {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM O DESENHO DE UMA PESSOA ANDANDO DENTRO.', no:'A pessoa andando está lá, igualzinha à da placa certa, e por isso essa é a pegadinha forte. Mas o círculo vermelho cortado quer dizer PROIBIDO: essa placa diz que ali NÃO pode passar a pé.'},
   {t:'UMA PLACA COM O DESENHO DE UM CARRO E UMA SETA.', no:'Essa placa fala do carro e do caminho dele. Não tem pessoa desenhada nem faixa no chão.'}
@@ -2379,6 +2380,83 @@ var ITENS = [
  porque:'A frase fala de uma bicicleta só, e BICICLETA e NOVA são de menina. Lendo a frase inteira, só UMA BICICLETA NOVA anda sem tropeçar.',
  proximo:'Leia sempre até o fim da frase com a palavra dentro. Uma palavrinha pode acertar o "quantos" e errar o "de menino ou de menina" — e uma coisa só já derruba.'},
 
+/* ===== AS QUESTOES QUE SO EXISTEM COM A FIGURA =====
+   Estas tinham ficado de fora porque as ALTERNATIVAS sao desenhos. As
+   figuras agora vem recortadas do PDF oficial por
+   _processo/geracao/recorta_figuras_op.py — nada foi redesenhado nem
+   descrito em palavras. Em nenhum recorte entra o rotulo "(A)": a ordem
+   das alternativas e sorteada, e a letra quem desenha e o componente. */
+
+{id:'25F1Q4', eixo:'placa', origem:'Olimpíada 2025 · 1ª fase · questão 4',
+ enun:'LUCAS FOI PASSEAR NO PARQUE COM SEUS PAIS. LOGO NA ENTRADA, ELES VIRAM UMA PLACA COM UM DESENHO. LUCAS OLHOU PARA SUA MÃE E DISSE:',
+ quadro:'&mdash; J&Aacute; SEI! N&Atilde;O PODE TRAZER ANIMAL AQUI!',
+ pede:'QUAL DESTAS PLACAS LUCAS VIU?',
+ opts:[
+  {t:'Círculo vermelho cortado, com um cachorro dentro', img:'media/op/25F1Q4_a.png', ok:1},
+  {t:'Placa com uma pessoa jogando papel na lixeira', img:'media/op/25F1Q4_b.png',
+   no:'Essa placa é bem conhecida, mas ela fala de lixo. Não tem nenhum animal desenhado nela.'},
+  {t:'Placa de banheiro, com um homem e uma mulher', img:'media/op/25F1Q4_c.png',
+   no:'Essa é a placa do banheiro. Tem gente desenhada, e não animal.'},
+  {t:'Círculo preto com uma pessoa de bicicleta dentro', img:'media/op/25F1Q4_d.png',
+   no:'Essa é a pegadinha forte: também é redonda e parece placa de trânsito. Mas repare em duas coisas — não tem a barra vermelha atravessando, e quem está desenhado é uma pessoa, não um animal.'}
+ ],
+ dica:'Olhe duas coisas em cada placa: QUEM está desenhado dentro, e se tem a barra vermelha atravessando.',
+ truque:'Círculo vermelho cortado quer dizer PROIBIDO. O desenho de dentro diz o que é proibido.',
+ visual:'<div class="pcs"><span class="pc hit">c&iacute;rculo vermelho cortado</span><span class="arw">&rarr;</span><span class="pc hit">proibido</span></div>'+
+        '<div class="pcs"><span class="pc hit">cachorro dentro</span><span class="arw">&rarr;</span><span class="pc hit">proibido animal</span></div>'+
+        '<p class="vx">Lucas disse <b>N&Atilde;O PODE</b> e disse <b>ANIMAL</b>. A placa certa tem de ter as duas coisas.</p>',
+ porque:'Lucas disse duas coisas: NÃO PODE (a barra vermelha) e ANIMAL (o cachorro). Só uma placa tem as duas.',
+ proximo:'Quebre a placa em duas perguntas: o que o formato manda (proibido, aviso, informação) e o que o desenho de dentro mostra.'},
+
+{id:'23F1Q9', eixo:'codigo', origem:'Olimpíada 2023 · 1ª fase · questão 9',
+ enun:'NÓS VAMOS TRANSFORMAR CADA LETRA NO DESENHO QUE ESTÁ ABAIXO DELA. ASSIM, POR EXEMPLO, A LETRA "A" VIROU UMA TESOURA.',
+ figura:'media/op/23F1Q9_tabela.png',
+ figuraAlt:'tabela com as letras A, E, B, C, D, R, O, P e S, cada uma com o seu desenho embaixo',
+ nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
+ pede:'COM ESSA TRANSFORMAÇÃO, COMO FICARIA EM DESENHOS A PALAVRA "PESCADOR"?',
+ opts:[
+  {t:'fileira 1', img:'media/op/23F1Q9_a.png',
+   no:'Essa começa certo, mas embaralha o meio: os desenhos dizem P-E-S-D-A-C-O-R. O D e o C trocaram de lugar com o C e o A.'},
+  {t:'fileira 2', img:'media/op/23F1Q9_b.png',
+   no:'Essa diz P-E-O-C-A-D-S-R. O O pulou para o lugar do S, lá no começo.'},
+  {t:'fileira 3', img:'media/op/23F1Q9_c.png',
+   no:'Essa nem começa com P: o primeiro desenho é o do B. Ela diz B-E-O-C-A-D-S-P.'},
+  {t:'fileira 4', img:'media/op/23F1Q9_d.png', ok:1}
+ ],
+ dica:'Escreva P-E-S-C-A-D-O-R numa linha. Depois procure o desenho de cada letra na tabela, uma de cada vez, na ordem.',
+ truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
+ visual:'<div class="pcs"><span class="pc hit">P</span><span class="pc hit">E</span><span class="pc hit">S</span><span class="pc hit">C</span><span class="pc hit">A</span><span class="pc hit">D</span><span class="pc hit">O</span><span class="pc hit">R</span></div>'+
+        '<p class="vx">Oito letras, oito desenhos, <b>nessa ordem</b>. As erradas tem os mesmos desenhos, s&oacute; que trocados de lugar &mdash; por isso n&atilde;o adianta conferir s&oacute; o come&ccedil;o.</p>',
+ porque:'A palavra é P-E-S-C-A-D-O-R, e a fileira certa tem o desenho de cada uma dessas letras, na ordem. As erradas usam quase os mesmos desenhos, mas com dois deles trocados de lugar.',
+ proximo:'Escreva a palavra letra por letra antes de olhar as fileiras. Depois confira desenho por desenho, do começo ao fim — as erradas mudam só no meio.'},
+
+{id:'24F2Q15', eixo:'codigo', origem:'Olimpíada 2024 · 2ª fase · questão 15',
+ enun:'CARLITO TRANSFORMOU CADA LETRA EM UM SÍMBOLO DIFERENTE. VEJA COMO ELE ESCREVE A PALAVRA ESPORTE:',
+ quadro:'<table class="tbc"><tr><td>&#9632;</td><td>&#9679;</td><td>&#9650;</td><td>&#9670;</td><td>&#9733;</td><td>&#9829;</td><td>&#9632;</td></tr>'+
+        '<tr><td>E</td><td>S</td><td>P</td><td>O</td><td>R</td><td>T</td><td>E</td></tr></table>',
+ nota:'Na prova os símbolos são outros desenhinhos, feitos pelo Carlito. Aqui eles são estes, e a brincadeira é exatamente a mesma. Repare que o E aparece duas vezes em ESPORTE, e as duas vezes com o mesmo símbolo.',
+ /* campos que o gate usa para provar que a questao fecha (ver
+    valida_op_data.js): a chave de leitura e a palavra que se pede */
+ chave:{'■':'E','●':'S','▲':'P','◆':'O','★':'R','♥':'T'},
+ alvo:'POSTE',
+ pede:'NOS SÍMBOLOS CRIADOS POR CARLITO, COMO FICARIA A PALAVRA POSTE?',
+ opts:[
+  {t:'&#9679; &#9670; &#9733; &#9829; &#9632;',
+   no:'Essa diz S-O-R-T-E: SORTE. Começa com o símbolo do S, e POSTE começa com P.'},
+  {t:'&#9650; &#9670; &#9679; &#9829; &#9632;', ok:1},
+  {t:'&#9650; &#9632; &#9733; &#9829; &#9670;',
+   no:'Essa começa certo, com o símbolo do P, mas depois desanda: diz P-E-R-T-O, que é PERTO.'},
+  {t:'&#9632; &#9679; &#9829; &#9733; &#9670;',
+   no:'Essa usa quase os mesmos símbolos, só que embaralhados: diz E-S-T-R-O. Não adianta conferir se os símbolos estão lá; tem de conferir a ORDEM.'}
+ ],
+ dica:'Escreva P-O-S-T-E numa linha. Depois troque cada letra pelo símbolo dela, uma de cada vez, na ordem.',
+ truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
+ visual:'<div class="pcs"><span class="pc hit">P</span><span class="pc hit">O</span><span class="pc hit">S</span><span class="pc hit">T</span><span class="pc hit">E</span></div>'+
+        '<div class="pcs"><span class="pc hit">&#9650;</span><span class="pc hit">&#9670;</span><span class="pc hit">&#9679;</span><span class="pc hit">&#9829;</span><span class="pc hit">&#9632;</span></div>'+
+        '<p class="vx">As tr&ecirc;s erradas usam quase os mesmos s&iacute;mbolos, s&oacute; que fora de ordem: SORTE, PERTO e ESTRO.</p>',
+ porque:'POSTE é P-O-S-T-E. Trocando cada letra pelo símbolo dela, na ordem, sai a fileira certa. As erradas têm quase os mesmos símbolos, mas em outra ordem.',
+ proximo:'Escreva a palavra letra por letra antes de olhar as alternativas. Depois compare símbolo por símbolo, na ordem — do primeiro ao último.'},
+
 /* fim dos itens */
 {id:'FIM', eixo:'_', origem:'', pede:'', opts:[], _sentinela:1}
 ];
@@ -2395,6 +2473,29 @@ ITENS = ITENS.filter(function(i){ return !i._sentinela; });
    Por isso o cartão mostra o gesto, faz repetir uma vez e para.
    `min` é a estimativa de tempo, em minutos.                          */
 var CARTOES = [
+ /* O TRUQUE MESTRE — vem antes de todos porque vale para as quinze
+    questões, e não para um tipo só. A análise das seis provas mostrou que
+    o erro típico não é ignorância: é responder à pergunta que a criança
+    esperava, e não à que foi feita. Os distratores são construídos para
+    isso — a alternativa errada costuma ser verdadeira sobre o texto, só
+    não é o que o comando pediu.
+
+    Não tem `exemplo` nem `agora`: é uma ordem de leitura, não um tipo de
+    questão. Quem treina esse gesto treina em todas as outras. */
+ {k:'comando', titulo:'Antes de tudo: o que a pergunta está pedindo', min:3, mestre:true,
+  truque:'Leia a pergunta ANTES do texto. Ache a palavra que manda — e responda exatamente ela.',
+  texto:'Este é o truque que vale para as quinze perguntas da prova. A resposta errada quase sempre é uma frase verdadeira; ela só não é o que a pergunta pediu. Quem lê o comando com atenção já sai procurando a coisa certa.',
+  extras:['A ordem que funciona: primeiro a pergunta, depois o texto, depois a pergunta de novo com as quatro respostas.',
+          'Ler a pergunta antes liga a sua cabeça no modo procurar. Aí, quando você lê o texto, já sabe o que está caçando.',
+          'Ache a palavra que manda e passe o dedo nela: POR QUE pede um motivo. QUAL pede escolher um. QUANTOS pede contar. O QUE pede a coisa. COMPLETE pede encaixar. MARQUE APENAS pede olhar todas.',
+          'Cuidado com o NÃO: "qual NÃO combina", "qual é a única que NÃO muda". Aí a resposta é a diferente, não a parecida.',
+          'Repare no que a pergunta quer de volta: às vezes ela pede a LETRA e não a palavra; às vezes o TÍTULO e não o assunto.',
+          'Antes de marcar, leia sua resposta junto com a pergunta, uma atrás da outra. Faz sentido? Responde mesmo o que foi perguntado?'],
+  apoio:'Nas telas de treino existe um botão "Só a pergunta". Ele mostra o comando sozinho, antes do texto — é para praticar essa ordem de leitura.',
+  /* Este bloco não tem eixo próprio no banco: o popup dele reúne questões
+     REAIS em que ler o comando com atenção é o que decide a resposta. */
+  itens:['25F1Q12','24F1Q8','25F1Q9','25F1Q7','24F1Q14','25F1Q5']},
+
  {k:'ler', titulo:'Ler e entender', min:4,
   truque:'A resposta mora no texto. Volte e ache a linha que responde.',
   texto:'É o tipo com mais perguntas na prova, e o mais justo: a resposta está escrita ali. Não é para adivinhar nem para lembrar da sua vida — é para achar.',

@@ -25,7 +25,13 @@ var OP = global.window.OP;
 var falhas = [];
 function reprova(m){ falhas.push(m); }
 function limpa(s){
-  return String(s).replace(/&Oacute;/g,'Ó').replace(/&Eacute;/g,'É').replace(/&Aacute;/g,'Á')
+  return String(s)
+    /* entidades numéricas (&#9650;) são como os símbolos dos códigos são
+       escritos no banco — sem decodificar, o gate lia tudo como vazio e
+       "provava" que nenhuma alternativa fecha */
+    .replace(/&#(\d+);/g, function(_,n){ return String.fromCodePoint(parseInt(n,10)); })
+    .replace(/&#x([0-9a-f]+);/gi, function(_,n){ return String.fromCodePoint(parseInt(n,16)); })
+    .replace(/&Oacute;/g,'Ó').replace(/&Eacute;/g,'É').replace(/&Aacute;/g,'Á')
     .replace(/&Ccedil;/g,'Ç').replace(/&Atilde;/g,'Ã').replace(/&[a-z]+;/gi,'').trim();
 }
 
@@ -43,6 +49,29 @@ OP.ITENS.forEach(function(it){
     if(!it.texto || n>=it.texto.length) reprova(it.id+': acende aponta para a linha '+n+', que não existe');
   });
   if(!OP.FAMILIAS.filter(function(f){ return f.k===it.eixo; }).length) reprova(it.id+': eixo desconhecido "'+it.eixo+'"');
+});
+
+/* ---- 1b. toda figura citada tem de existir no disco ----
+   Imagem que não carrega vira questão sem enunciado, e em silêncio: o
+   navegador não avisa. Como as figuras são recortadas de PDF por um
+   script à parte, o caminho pode desencontrar do banco a qualquer
+   mudança de nome. */
+var fs=require('fs'), pathmod=require('path');
+var DIR_FERR=pathmod.join(__dirname,'..','..','ferramentas');
+function conferAcaminho(id, campo, caminho){
+  if(!caminho) return;
+  if(!fs.existsSync(pathmod.join(DIR_FERR, caminho)))
+    reprova(id+': '+campo+' aponta para "'+caminho+'", que não existe em ferramentas/');
+}
+OP.ITENS.forEach(function(it){
+  conferAcaminho(it.id,'figura',it.figura);
+  (it.opts||[]).forEach(function(o,i){ conferAcaminho(it.id,'imagem da alternativa '+(i+1),o.img); });
+  if(it.figura && !it.figuraAlt) console.log('  aviso: '+it.id+' tem figura sem figuraAlt (descrição para quem não vê a imagem)');
+  /* numa questão cujas alternativas são desenhos, ou todas têm imagem ou
+     nenhuma tem — meia dúzia de imagem e meia de texto confunde */
+  var comImg=(it.opts||[]).filter(function(o){ return o.img; }).length;
+  if(comImg && comImg!==(it.opts||[]).length)
+    reprova(it.id+': '+comImg+' de '+it.opts.length+' alternativas têm imagem; ou todas ou nenhuma');
 });
 
 /* ---- 2. cotas para duas rodadas sem repetir ---- */
@@ -77,6 +106,27 @@ OP.CARTOES.forEach(function(c){
 function soLetras(s){ return s.toUpperCase().replace(/[^A-ZÁÂÃÀÉÊÍÓÔÕÚÇ]/g,''); }
 
 OP.ITENS.filter(function(i){ return i.eixo==='codigo'; }).forEach(function(it){
+  /* ---- formato (c): a questao pede o caminho INVERSO — escrever uma
+     palavra no codigo, em vez de ler uma frase. Aqui a prova se faz com
+     `chave` (simbolo -> letra) e `alvo` (a palavra pedida): aplica-se a
+     chave a cada alternativa e confere-se que so a marcada como certa
+     produz o alvo. ---- */
+  if(it.chave && it.alvo){
+    var certas=[], todas=[];
+    it.opts.forEach(function(o){
+      var simbolos=limpa(o.t).split(/\s+/).filter(Boolean);
+      var palavra=simbolos.map(function(s){ return it.chave[s]||'?'; }).join('');
+      todas.push(palavra);
+      if(palavra.toUpperCase()===it.alvo.toUpperCase()) certas.push(o);
+    });
+    if(certas.length!==1)
+      reprova(it.id+': '+certas.length+' alternativas produzem "'+it.alvo+'" (li: '+todas.join(', ')+')');
+    else if(!certas[0].ok)
+      reprova(it.id+': a alternativa que produz "'+it.alvo+'" não é a marcada como certa (li: '+todas.join(', ')+')');
+    if(todas.some(function(p){ return p.indexOf('?')>=0; }))
+      reprova(it.id+': alguma alternativa usa símbolo que não está na chave (li: '+todas.join(', ')+')');
+    return;
+  }
   var trs=(it.quadro||'').match(/<tr>[\s\S]*?<\/tr>/g);
   var m=(it.quadro||'').match(/<div class="seq">([\s\S]*?)<\/div>/);
   if(!trs || !m) return;            /* item de código sem tabela+sequência: nada a provar */
