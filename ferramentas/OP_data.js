@@ -4044,7 +4044,7 @@ var ITENS = [
         'AÍ ELA DISSE: — DA PRÓXIMA VEZ EU TAMBÉM VOU DE BOTA!'],
  pede:'POR QUE LARA SAIU DE CASA COM AS BOTAS DE BORRACHA?',
  opts:[
-  {t:'PORQUE HOJE DE MANHÃ FAZIA SOL.', no:'É verdade que fazia sol, o texto diz isso na primeira linha. Mas sol não é motivo para calçar bota: essa parte da frase está ali justamente para mostrar que a bota não era por causa do tempo de agora.'},
+  {t:'PORQUE HOJE DE MANHÃ FAZIA SOL.', no:'Fazia sol de manhã, e a pergunta é sobre a bota da VOLTA. Na volta a rua estava cheia de poças.'},
   {t:'PORQUE A RUA POR ONDE ELA IA VOLTAR ESTAVA CHEIA DE POÇAS.', ok:1},
   {t:'PORQUE ESTAVA CHOVENDO NA HORA DE IR PARA A ESCOLA.', no:'Bota de borracha lembra chuva, e a gente calça bota quando chove — mas isso é a vida lá fora. No texto está escrito que de manhã fazia SOL.'},
   {t:'PORQUE A AMIGA DELA TAMBÉM IA DE BOTA.', no:'Essa vem da ÚLTIMA linha. Mas repare na hora: a amiga só falou em usar bota DEPOIS, na volta, com o tênis sujo. Quando Lara escolheu a bota, isso ainda não tinha acontecido.'}
@@ -4095,7 +4095,7 @@ var ITENS = [
         'MATEUS DIZ QUE O BOLO DA AVÓ É O MELHOR DO MUNDO.'],
  pede:'COM BASE NO TEXTO, O QUE ACONTECEU ANTES DE TUDO?',
  opts:[
-  {t:'MATEUS COMEÇOU A FAZER O BOLO COM A MÃE.', no:'É verdade que ele está fazendo o bolo, e é a primeira coisa CONTADA. Mas ela é de HOJE: a ordem em que o texto conta não é a ordem em que aconteceu.'},
+  {t:'MATEUS COMEÇOU A FAZER O BOLO COM A MÃE.', no:'Fazer o bolo é a primeira coisa CONTADA. Mas ela é de HOJE: a ordem em que o texto conta não é a ordem em que aconteceu.'},
   {t:'A AVÓ MANDOU A RECEITA DENTRO DE UMA CARTA.', ok:1},
   {t:'A PRIMA DELE COMEU UM PEDAÇO DO BOLO.', no:'Se o bolo é para o almoço, a gente já imagina a prima comendo. Mas o texto diz AMANHÃ: isso ainda não aconteceu, então não pode ser o mais antigo.'},
   {t:'MATEUS DISSE QUE O BOLO DA AVÓ É O MELHOR DO MUNDO.', no:'Essa vem da ÚLTIMA linha. Só que ela não tem hora nenhuma marcada: não diz ontem, nem mês passado, nem amanhã. Sem tempo, ela não entra na fila.'}
@@ -4150,7 +4150,7 @@ var ITENS = [
         'AÍ CLARA CHEGOU E DIVIDIU O BOLO DELA COM ELE.'],
  pede:'QUE LIÇÃO ESSA HISTORINHA ENSINA?',
  opts:[
-  {t:'QUE MIGUEL DERRUBOU O SUCO NO CHÃO.', no:'Isso aconteceu mesmo, está escrito na historinha. Mas a pergunta é qual é a LIÇÃO, e contar uma coisa que aconteceu não é ensinar nada.'},
+  {t:'QUE MIGUEL DERRUBOU O SUCO NO CHÃO.', no:'A pergunta é qual é a LIÇÃO, e contar uma coisa que aconteceu não é ensinar nada.'},
   {t:'QUE É PRECISO CORRER PARA CHEGAR NA FRENTE DA FILA.', no:'Na vida a gente pensa assim: quem corre mais chega primeiro. Mas na historinha foi correndo e empurrando que Miguel ficou sozinho — ela ensina justamente o contrário.'},
   {t:'QUEM TRATA MAL OS AMIGOS FICA SOZINHO NA HORA QUE PRECISA DE AJUDA.', ok:1},
   {t:'QUE BOLO É MELHOR DE DIVIDIR DO QUE SUCO.', no:'Essa vem da ÚLTIMA linha, onde aparece o bolo de Clara. Mas a historinha não está comparando bolo com suco: ela está falando do jeito de Miguel tratar os colegas.'}
