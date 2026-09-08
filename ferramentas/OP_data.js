@@ -2667,6 +2667,1506 @@ var ITENS = [
  porque:'É uma mochila só, e MOCHILA e VERMELHA são palavras de menina. Lendo a frase inteira, só SUA MOCHILA VERMELHA anda sem tropeçar.',
  proximo:'Leia sempre até o fim da frase com a palavrinha dentro. Se ela tropeçar em qualquer pedaço, já não serve.'},
 
+
+/* ===== reserva_treino_C ===== */
+{id:'TR25', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O POEMA ABAIXO:',
+ texto:['MEU GATO DORME NA CADEIRA,',
+        'DORME EM CIMA DA GELADEIRA,',
+        'DORME NO MEIO DA ESCADA,',
+        'DORME NA CAIXA GUARDADA.',
+        'SÓ ACORDA NA HORA DA COMIDA,',
+        'DEPOIS VOLTA PRA SUA DORMIDA.'],
+ pede:'QUAL TÍTULO MAIS COMBINA COM O POEMA?',
+ opts:[
+  {t:'A HORA DA COMIDA.', no:'Essa sai da última linha do poema. A comida aparece uma vez só, e aparece para o gato acordar e voltar a dormir.'},
+  {t:'O GATO E O RATO.', no:'Essa fala de rato, e no poema não tem rato nenhum. Gato correndo atrás de rato é coisa que a gente sabe da vida, não deste poema.'},
+  {t:'O GATO DORMINHOCO.', ok:1},
+  {t:'A GELADEIRA DA COZINHA.', no:'A geladeira é um dos quatro lugares onde o gato dorme. Uma palavra do meio não dá o título do poema inteiro.'}
+ ],
+ dica:'O título fala do poema INTEIRO, não de uma linha só. Desça a régua até o fim e pergunte: o que esse gato faz do começo ao fim?',
+ truque:'O título é do poema inteiro, não de uma linha. Uma palavra solta não manda.',
+ acende:[0,1,2,3],
+ visual:'<div class="pcs"><span class="pc hit">DORME NA CADEIRA</span><span class="pc hit">DORME NA GELADEIRA</span><span class="pc hit">DORME NA ESCADA</span><span class="pc hit">DORME NA CAIXA</span></div>'+
+        '<p class="vx">Quatro linhas seguidas dizem a mesma coisa: esse gato dorme o tempo todo.</p>'+
+        '<div class="pcs"><span class="pc bad">A HORA DA COMIDA</span><span class="arw">&rarr;</span><span class="pc bad">s&oacute; a &uacute;ltima linha</span></div>'+
+        '<div class="pcs"><span class="pc hit">O GATO DORMINHOCO</span><span class="arw">&rarr;</span><span class="pc hit">o poema inteiro</span></div>',
+ porque:'Quatro das seis linhas dizem onde o gato dorme: cadeira, geladeira, escada e caixa. A comida aparece só para ele acordar e voltar a dormir. O poema inteiro é sobre um gato dorminhoco.',
+ proximo:'Nunca tire o título da última linha. Leia o poema todo com a régua e pergunte: do que ele fala do começo ao fim?'},
+
+{id:'TR26', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O POEMA ABAIXO:',
+ texto:['EU ANDO NA PONTA DO PÉ,',
+        'EU FALO BEM BAIXINHO,',
+        'NÃO CORRO PELO CORREDOR,',
+        'NÃO CANTO NO CAMINHO.',
+        'É QUE O MEU IRMÃO PEQUENO',
+        'ACABOU DE ADORMECER,',
+        'E SE ELE ACORDAR AGORA',
+        'VAI CHORAR ATÉ AMANHECER.'],
+ pede:'POR QUE A MENINA DO POEMA ANDA NA PONTA DO PÉ?',
+ opts:[
+  {t:'PORQUE ELA ESTÁ APRENDENDO A DANÇAR.', no:'Essa fala de dança, e o poema não fala de dança em nenhuma linha. Dança é coisa que a gente lembra da vida quando ouve "ponta do pé".'},
+  {t:'PORQUE O IRMÃO PEQUENO DELA ACABOU DE DORMIR E ELA NÃO QUER ACORDAR ELE.', ok:1},
+  {t:'PORQUE O IRMÃO DELA ESTÁ CHORANDO.', no:'Essa diz que o irmão já está chorando. O poema diz que ele vai chorar SE acordar: agora ele está dormindo.'},
+  {t:'PORQUE ELA FALA BEM BAIXINHO E NÃO CANTA NO CAMINHO.', no:'Essa não responde à pergunta. Falar baixinho é mais uma coisa que ela faz para não acordar o irmão, e a pergunta é POR QUE ela faz.'}
+ ],
+ dica:'A pergunta tem POR QUE. Volte com a régua e ache a linha que explica. Ela vem depois de tudo o que a menina deixa de fazer.',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[4,5],
+ visual:'<p class="vx">ANDO NA PONTA DO P&Eacute; &middot; FALO BAIXINHO &middot; N&Atilde;O CORRO &middot; N&Atilde;O CANTO</p>'+
+        '<p class="vx">Quatro coisas que ela faz para n&atilde;o fazer barulho. O motivo vem logo depois:</p>'+
+        '<p class="vx"><b class="mk">&Eacute; QUE O MEU IRM&Atilde;O PEQUENO ACABOU DE ADORMECER</b></p>'+
+        '<p class="vx"><span class="dm">VAI CHORAR &eacute; o que aconteceria SE ele acordasse. N&atilde;o &eacute; o que est&aacute; acontecendo.</span></p>',
+ porque:'O poema diz "É QUE O MEU IRMÃO PEQUENO ACABOU DE ADORMECER". É por isso que ela anda na ponta do pé, fala baixinho, não corre e não canta: tudo para não acordar o irmão.',
+ proximo:'Se a pergunta começa com POR QUE, procure a linha que explica, não a que descreve. Muitas linhas contam O QUE a pessoa faz; só uma conta por quê.'},
+
+{id:'TR27', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA A FÁBULA ABAIXO:',
+ texto:['UM MACACO ACHOU UM CACHO DE BANANAS NO ALTO DA ÁRVORE.',
+        'ELE PEGOU UMA BANANA EM CADA MÃO, UMA EM CADA PÉ, E AINDA QUIS SEGURAR MAIS DUAS NA BOCA.',
+        'NA HORA DE DESCER, PRECISOU SEGURAR NO GALHO E SOLTOU TODAS.',
+        'AS BANANAS ROLARAM PARA DENTRO DO RIO, E O MACACO FICOU SEM NENHUMA.'],
+ pede:'AS FÁBULAS COSTUMAM NOS ENSINAR ALGO. QUE LIÇÃO PODEMOS TIRAR DA FÁBULA ACIMA?',
+ opts:[
+  {t:'QUEM QUER LEVAR TUDO DE UMA VEZ ACABA FICANDO SEM NADA.', ok:1},
+  {t:'BANANA É A COMIDA PREFERIDA DO MACACO.', no:'Essa é um palpite sobre macaco, não uma lição. A fábula não fala do que ele prefere: fala do que ele perdeu.'},
+  {t:'PARA DESCER DA ÁRVORE É PRECISO SEGURAR NO GALHO.', no:'Essa conta uma coisa que aconteceu na história. A pergunta é qual LIÇÃO a história ensina.'},
+  {t:'NÃO SE DEVE BRINCAR PERTO DO RIO.', no:'Essa sai da última linha da fábula. Ninguém brincou no rio: as bananas rolaram para lá depois que o macaco soltou tudo.'}
+ ],
+ dica:'A lição não está escrita em nenhuma linha. Compare duas partes: quantas bananas ele quis levar e com quantas ele ficou no fim.',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[1,3],
+ visual:'<div class="pcs"><span class="pc hit">2 nas m&atilde;os</span><span class="pc hit">2 nos p&eacute;s</span><span class="pc hit">2 na boca</span><span class="arw">&rarr;</span><span class="pc hit">seis de uma vez</span></div>'+
+        '<div class="pcs"><span class="pc bad">FICOU SEM NENHUMA</span></div>'+
+        '<p class="vx">Ele quis levar <b>seis</b> e ficou com <b>zero</b>. A li&ccedil;&atilde;o mora nessa conta.</p>'+
+        '<p class="vx"><span class="dm">O rio aparece s&oacute; para dizer onde as bananas foram parar. A hist&oacute;ria n&atilde;o &eacute; sobre o rio.</span></p>',
+ porque:'O macaco tentou carregar seis bananas ao mesmo tempo. Como precisava das mãos para descer, soltou todas e ficou sem nenhuma. Quem quer levar tudo de uma vez acaba ficando sem nada.',
+ proximo:'Na fábula, a lição sai do que o bicho fez e do que sobrou para ele no fim. Compare o começo com o fim antes de escolher.'},
+
+{id:'TR28', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O POEMA ABAIXO:',
+ texto:['O QUINTAL DA MINHA AVÓ',
+        'NUNCA FICA SOSSEGADO.',
+        'TEM CACHORRO CORRE-CORRE,',
+        'TEM GALINHA DE UM LADO,',
+        'TEM MENINO NA MANGUEIRA,',
+        'TEM PANELA NO FOGÃO,',
+        'TEM BARULHO DE MANHÃ',
+        'E DE NOITE TEM VIOLÃO.'],
+ pede:'SOBRE O QUINTAL DO POEMA, O QUE PODEMOS AFIRMAR?',
+ opts:[
+  {t:'É UM LUGAR CALMO E SILENCIOSO.', no:'Essa diz que o quintal é calmo. A segunda linha do poema diz NUNCA FICA SOSSEGADO.'},
+  {t:'LÁ SÓ MORAM BICHOS.', no:'Essa serve para quem parou na galinha e não desceu mais. O poema continua: tem menino, tem panela no fogão e tem violão.'},
+  {t:'O BARULHO DE LÁ ACABA QUANDO ANOITECE.', no:'Essa diz que de noite o quintal fica quieto. A última linha diz que de noite tem violão.'},
+  {t:'É UM LUGAR ANIMADO E CHEIO DE BARULHO.', ok:1}
+ ],
+ dica:'Junte as palavras que o poema usa para dizer como é o quintal. Elas estão espalhadas: uma na segunda linha, outras nas duas últimas.',
+ truque:'Quando a pergunta é sobre como é um lugar, junte as palavras que o texto usa para descrever ele.',
+ acende:[1,6,7],
+ visual:'<div class="pcs"><span class="pc hit">NUNCA FICA SOSSEGADO</span><span class="pc hit">BARULHO DE MANH&Atilde;</span><span class="pc hit">DE NOITE TEM VIOL&Atilde;O</span></div>'+
+        '<p class="vx">De manh&atilde; tem barulho e de noite tem viol&atilde;o: o quintal <b>n&atilde;o para nunca</b>.</p>'+
+        '<div class="pcs"><span class="pc bad">CALMO E SILENCIOSO</span><span class="arw">&rarr;</span><span class="pc bad">briga com NUNCA FICA SOSSEGADO</span></div>',
+ porque:'O poema diz que o quintal NUNCA FICA SOSSEGADO, que tem BARULHO DE MANHÃ e que DE NOITE TEM VIOLÃO. Somando as palavras do próprio poema, é um lugar animado e cheio de barulho.',
+ proximo:'Quando a pergunta é sobre o jeito de um lugar, não procure uma linha só. Junte as palavras que o texto repete do começo ao fim.'},
+
+{id:'TR29', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O TEXTO ABAIXO:',
+ texto:['HOJE PAULA LEVOU UM BOLO PARA A ESCOLA.',
+        'ONTEM À NOITE ELA E A MÃE FIZERAM O BOLO NA COZINHA.',
+        'AMANHÃ A TURMA VAI FAZER UM PIQUENIQUE NO PÁTIO.',
+        'NA SEMANA PASSADA A PROFESSORA AVISOU QUE IA TER FESTA,',
+        'E PAULA JÁ COMEÇOU A CONTAR OS DIAS.'],
+ pede:'COM BASE NO TEXTO, QUAL EVENTO ACONTECEU ANTES DOS OUTROS?',
+ opts:[
+  {t:'PAULA LEVOU O BOLO PARA A ESCOLA.', no:'Essa é a primeira coisa CONTADA, e não a primeira que aconteceu. O bolo foi levado HOJE.'},
+  {t:'PAULA E A MÃE FIZERAM O BOLO.', no:'O bolo foi feito ONTEM À NOITE. Tem uma coisa mais antiga no texto: procure a linha da semana passada.'},
+  {t:'A PROFESSORA AVISOU QUE IA TER FESTA.', ok:1},
+  {t:'A TURMA FEZ O PIQUENIQUE NO PÁTIO.', no:'O piquenique ainda NÃO aconteceu: o texto diz AMANHÃ. Uma coisa que nem aconteceu não pode ser a mais antiga.'}
+ ],
+ dica:'Procure as palavrinhas de tempo: HOJE, ONTEM À NOITE, AMANHÃ, NA SEMANA PASSADA. Ponha-as em fila antes de escolher.',
+ truque:'Monte a fila do tempo: semana passada, ontem, hoje, semana que vem. Só então responda.',
+ acende:[0,1,2,3],
+ visual:'<div class="pcs"><span class="pc hit">SEMANA PASSADA<br>o aviso</span><span class="arw">&rarr;</span><span class="pc">ONTEM<br>fizeram o bolo</span><span class="arw">&rarr;</span><span class="pc">HOJE<br>levou o bolo</span><span class="arw">&rarr;</span><span class="pc bad">AMANH&Atilde;<br>piquenique</span></div>'+
+        '<p class="vx">O texto conta fora de ordem. Na fila do tempo, o aviso da professora &eacute; o mais antigo &mdash; e o piquenique nem aconteceu.</p>',
+ porque:'Pondo em fila: na semana passada veio o aviso da professora, ontem à noite fizeram o bolo, hoje ela levou o bolo e amanhã será o piquenique. O mais antigo é o aviso.',
+ proximo:'Sublinhe as palavrinhas de tempo e monte a fila antes de responder. A ordem em que o texto conta quase nunca é a ordem em que aconteceu.'},
+
+{id:'TR30', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O POEMA ABAIXO:',
+ texto:['NA MOCHILA DO JOÃO',
+        'TEM CADERNO E LAPISEIRA.',
+        'NA MOCHILA DO IRMÃO BEBÊ',
+        'TEM UM URSO E UMA MAMADEIRA.',
+        'HOJE OS DOIS SE ATRAPALHARAM',
+        'E TROCARAM AS MOCHILAS.',
+        'NA HORA DA LIÇÃO, O JOÃO',
+        '_______________________'],
+ pede:'MARQUE O VERSO QUE MELHOR COMBINA COM O FINAL DA HISTÓRIA.',
+ opts:[
+  {t:'TIROU DA MOCHILA A SUA LAPISEIRA.', no:'A lapiseira está na mochila do João. E a mochila do João ficou com o irmão bebê.'},
+  {t:'TIROU DA MOCHILA UMA MAMADEIRA.', ok:1},
+  {t:'TIROU DA MOCHILA A LIÇÃO INTEIRA.', no:'Essa repete a palavra LIÇÃO da linha de cima. A lição estava no caderno, e o caderno foi junto na mochila trocada.'},
+  {t:'TIROU DA MOCHILA A SUA LANCHEIRA.', no:'Essa fala de lanche, e o poema não fala de lanche. O poema diz o que tem em cada mochila: caderno e lapiseira numa, urso e mamadeira na outra.'}
+ ],
+ dica:'Segure a troca na cabeça: cada um está com a mochila do outro. Agora pergunte: o João abriu qual mochila, e o que tem dentro dela?',
+ truque:'Quando a história troca duas coisas, escreva a troca antes de responder. Depois aplique na cena nova.',
+ acende:[1,3,5],
+ visual:'<div class="pcs"><span class="pc bad">MOCHILA DO JO&Atilde;O</span><span class="arw">&rarr;</span><span class="pc hit">caderno e lapiseira</span></div>'+
+        '<div class="pcs"><span class="pc bad">MOCHILA DO BEB&Ecirc;</span><span class="arw">&rarr;</span><span class="pc hit">urso e mamadeira</span></div>'+
+        '<p class="vx">Eles <b>trocaram</b>. Ent&atilde;o o Jo&atilde;o est&aacute; com a mochila do beb&ecirc; &mdash; e nela s&oacute; tem urso e mamadeira.</p>'+
+        '<p class="vx"><span class="dm">Aqui a rima n&atilde;o ajuda a escolher: LAPISEIRA, MAMADEIRA, INTEIRA e LANCHEIRA rimam todas. Quem decide &eacute; a mochila.</span></p>',
+ porque:'O poema diz que na mochila do bebê tem um urso e uma mamadeira, e que os dois trocaram as mochilas. Então o João abriu a mochila do bebê e tirou de dentro uma mamadeira.',
+ proximo:'Quando a história troca duas coisas de lugar, anote a troca antes de olhar as alternativas. Depois é só aplicar na cena nova.'},
+
+{id:'TR31', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O POEMA ABAIXO:',
+ texto:['A GALINHA',
+        'SUBIU NA CADEIRINHA.',
+        'O PATO',
+        'DORMIU NO SAPATO.',
+        'A ARARA',
+        'LAVOU A CARA.'],
+ pede:'SE FÔSSEMOS ADICIONAR MAIS DUAS LINHAS AO POEMA, QUAL ALTERNATIVA MELHOR SE ENCAIXARIA NELE?',
+ opts:[
+  {t:'O CACHORRO / LATIU NO PORTÃO.', no:'Fale em voz alta: CACHORRO e PORTÃO não terminam com o mesmo som. Ter o mesmo formato das outras duplas não basta.'},
+  {t:'A VACA / COMEU A GRAMA.', no:'VACA e GRAMA terminam as duas com A. Rima é o som do fim inteiro: VA-CA e GRA-MA não soam igual.'},
+  {t:'O PORCO / ROLOU NO BARRO.', no:'PORCO e BARRO terminam as duas com O e têm um R no meio. Escute o fim: POR-CO e BAR-RO não soam igual.'},
+  {t:'A COELHA / DORMIU NA TELHA.', ok:1}
+ ],
+ dica:'Repare no que acontece em cada dupla: galINHA / cadeirINHA, pATO / sapATO, arARA / cARA. Fale em voz alta e escute só o fim.',
+ truque:'Rima é quando o fim das duas palavras soa igual. Termina com a mesma letra não é a mesma coisa que rimar.',
+ acende:[0,1,2,3,4,5],
+ visual:'<div class="pcs"><span class="pc hit">GAL<b>INHA</b></span><span class="pc hit">CADEIR<b>INHA</b></span></div>'+
+        '<div class="pcs"><span class="pc hit">P<b>ATO</b></span><span class="pc hit">SAP<b>ATO</b></span></div>'+
+        '<div class="pcs"><span class="pc hit">AR<b>ARA</b></span><span class="pc hit">C<b>ARA</b></span></div>'+
+        '<div class="pcs"><span class="pc hit">CO<b>ELHA</b></span><span class="pc hit">T<b>ELHA</b></span></div>'+
+        '<p class="vx">Sempre o nome do bicho rima com o fim da linha seguinte. COELHA e TELHA seguem a mesma brincadeira.</p>'+
+        '<div class="pcs"><span class="pc bad">VACA / GRAMA</span><span class="pc bad">PORCO / BARRO</span><span class="arw">&rarr;</span><span class="pc bad">mesma letra, som diferente</span></div>',
+ porque:'No poema, o nome do bicho sempre rima com o fim da linha seguinte: galINHA/cadeirINHA, pATO/sapATO, arARA/cARA. COELHA e TELHA repetem a mesma brincadeira.',
+ proximo:'Para saber se rima, fale as duas palavras em voz alta e escute só o fim. Terminar com a mesma letra não basta.'},
+
+{id:'TR32', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'BRUNO CHEGOU DA ESCOLA E FOI CONVERSAR COM O AVÔ, QUE TINHA VOLTADO DA PESCARIA:',
+ texto:['— VOVÔ, COMO FOI A PESCARIA?',
+        '— FOI UM DIÃO, MENINO! O RIO ESTAVA UM ESPELHÃO.',
+        '— E O SENHOR PEGOU PEIXE?',
+        '— PEGUEI UM PEIXÃO! DEU UM PUXÃO NA LINHA QUE QUASE ME DERRUBOU DO BARCÃO.',
+        '— E DEPOIS, VOVÔ?',
+        '— DEPOIS COMI UM PRATÃO DE PEIXE FRITO COM UM COPÃO DE SUCO.'],
+ pede:'CONSIDERANDO O MODO DE FALAR DO AVÔ, O QUE ELE TERIA DITO NO FINAL DESSA CONVERSA?',
+ opts:[
+  {t:'— AGORA VOU TIRAR UM SONÃO NA MINHA REDE!', ok:1},
+  {t:'— AGORA VOU DESCANSAR UM POUCO NA REDE.', no:'Essa frase não tem nenhum -ÃO no fim das palavras. A pergunta é qual delas soa como o avô fala.'},
+  {t:'— OBRIGADO POR PERGUNTAR, MEU NETO. TENHA UMA BOA TARDE.', no:'Essa frase também não tem nenhum -ÃO. O avô estica o fim das palavras, e aqui nada está esticado.'},
+  {t:'— AGORA VOU TIRAR UM SONINHO NA MINHA REDE.', no:'SONINHO termina em -INHO, que deixa a coisa pequena. O avô põe -ÃO em tudo, que deixa a coisa grande.'}
+ ],
+ dica:'Não procure a frase que faz sentido: procure a que soa como ELE. Repare no fim das palavras que o avô usa.',
+ truque:'Quando a pergunta é sobre o JEITO de falar, procure o que se repete na fala da pessoa.',
+ acende:[1,3,5],
+ visual:'<div class="pcs"><span class="pc hit">DI<b>&Atilde;O</b></span><span class="pc hit">ESPELH<b>&Atilde;O</b></span><span class="pc hit">PEIX<b>&Atilde;O</b></span><span class="pc hit">BARC<b>&Atilde;O</b></span><span class="pc hit">PRAT<b>&Atilde;O</b></span><span class="pc hit">COP<b>&Atilde;O</b></span></div>'+
+        '<p class="vx">O av&ocirc; p&otilde;e <b>-&Atilde;O</b> em tudo, para tudo ficar grande. A &uacute;nica resposta que faz igual &eacute; SON<b>&Atilde;O</b>.</p>'+
+        '<div class="pcs"><span class="pc bad">SON<b>INHO</b></span><span class="arw">&rarr;</span><span class="pc bad">deixa pequeno, &eacute; o contr&aacute;rio</span></div>',
+ porque:'O avô põe -ÃO em tudo o que fala: dião, espelhão, peixão, barcão, pratão, copão. Só uma resposta fala do mesmo jeito: SONÃO.',
+ proximo:'Quando perguntarem sobre o JEITO de falar, ache o pedacinho que se repete na boca da pessoa e procure a resposta que repete o mesmo pedacinho.'},
+
+{id:'TR33', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA COM ATENÇÃO O TEXTO ABAIXO:',
+ texto:['A CAMPAINHA DA ESCOLA DO PEDRO ESTÁ QUEBRADA DESDE SEGUNDA-FEIRA.',
+        'POR ISSO, QUANDO O RECREIO ACABA, A PROFESSORA MARTA VAI ATÉ O MEIO DO PÁTIO E BATE PALMAS TRÊS VEZES.',
+        'AÍ TODO MUNDO LARGA A BOLA E CORRE PARA A FILA.'],
+ pede:'SEGUNDO O TEXTO, COMO AS CRIANÇAS FICAM SABENDO QUE O RECREIO ACABOU?',
+ opts:[
+  {t:'PELA CAMPAINHA DA ESCOLA.', no:'Essa repete uma palavra do texto. Leia a linha inteira: a campainha está QUEBRADA desde segunda-feira.'},
+  {t:'PELO RELÓGIO DO PÁTIO.', no:'Essa fala de relógio, e o texto não fala de relógio nenhum. A pergunta diz SEGUNDO O TEXTO.'},
+  {t:'PELAS PALMAS DA PROFESSORA MARTA.', ok:1},
+  {t:'PORQUE VEEM A FILA COMEÇANDO.', no:'Essa sai da última linha. A fila se forma DEPOIS das palmas: primeiro elas escutam, aí largam a bola e correm.'}
+ ],
+ dica:'Volte ao texto com a régua e ache o POR ISSO. Depois dele vem o que a professora faz quando o recreio acaba.',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[0,1],
+ visual:'<p class="vx">A CAMPAINHA EST&Aacute; <b class="bad2">QUEBRADA</b> &mdash; ela n&atilde;o pode avisar ningu&eacute;m.</p>'+
+        '<p class="vx"><b class="mk">POR ISSO</b> A PROFESSORA MARTA <b class="mk">BATE PALMAS TR&Ecirc;S VEZES</b></p>'+
+        '<div class="pcs"><span class="pc hit">as palmas</span><span class="arw">&rarr;</span><span class="pc">largam a bola</span><span class="arw">&rarr;</span><span class="pc">correm para a fila</span></div>'+
+        '<p class="vx">A fila vem <b>depois</b>. Quem avisa &eacute; a palma.</p>',
+ porque:'O texto diz que a campainha está quebrada e que POR ISSO a professora Marta bate palmas três vezes quando o recreio acaba. É a palma que avisa; a fila só se forma depois.',
+ proximo:'Marcar uma alternativa só porque a palavra dela aparece no texto é a armadilha. Leia a frase inteira em volta e veja o que ela diz daquela palavra.'},
+
+{id:'TR34', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O TEXTO ABAIXO:',
+ texto:['NO DIA DO PASSEIO, CLARA ABRIU O ARMÁRIO PARA ESCOLHER A ROUPA.',
+        'VIU O VESTIDO AMARELO, MAS ELE ESTAVA NO CESTO DE ROUPA SUJA.',
+        'VIU O CASACO DE LÃ, MAS O DIA ESTAVA QUENTE DEMAIS PARA ELE.',
+        'VIU A SAIA NOVA, MAS A SAIA AINDA ESTAVA MOLHADA NO VARAL.',
+        'ENTÃO CLARA VESTIU O SHORT AZUL E CORREU PARA PEGAR O ÔNIBUS.'],
+ pede:'O QUE CLARA VESTIU PARA O PASSEIO?',
+ opts:[
+  {t:'O VESTIDO AMARELO.', no:'A linha do vestido continua depois do MAS: ele estava no cesto de roupa suja. Ver a roupa não é vestir a roupa.'},
+  {t:'O CASACO DE LÃ.', no:'A linha do casaco continua depois do MAS: o dia estava quente demais para ele.'},
+  {t:'A SAIA NOVA.', no:'A linha da saia continua depois do MAS: ela ainda estava molhada no varal.'},
+  {t:'O SHORT AZUL.', ok:1}
+ ],
+ dica:'As quatro roupas estão todas escritas no texto. A pergunta não é o que ela VIU: é o que ela VESTIU. Procure com a régua a linha que tem a palavra VESTIU.',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[1,2,3,4],
+ visual:'<p class="vx">VIU O VESTIDO AMARELO <b class="bad2">MAS ESTAVA NO CESTO DE ROUPA SUJA</b></p>'+
+        '<p class="vx">VIU O CASACO DE L&Atilde; <b class="bad2">MAS O DIA ESTAVA QUENTE DEMAIS</b></p>'+
+        '<p class="vx">VIU A SAIA NOVA <b class="bad2">MAS ESTAVA MOLHADA NO VARAL</b></p>'+
+        '<p class="vx">CLARA <b class="mk">VESTIU O SHORT AZUL</b> E CORREU PARA PEGAR O &Ocirc;NIBUS</p>'+
+        '<p class="vx">Tr&ecirc;s linhas t&ecirc;m <b>MAS</b>. S&oacute; uma tem <b>VESTIU</b>.</p>',
+ porque:'O texto conta uma por uma as roupas que Clara viu e deixou de lado, sempre com um MAS logo depois. Só uma linha diz o que ela vestiu: "ENTÃO CLARA VESTIU O SHORT AZUL".',
+ proximo:'Não marque a palavra só porque ela apareceu no texto. Leia a linha inteira: depois do MAS ela pode estar dizendo que NÃO.'},
+
+{id:'TR35', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'NESTE POEMA, ALGUÉM ESTÁ FALANDO DE SI MESMO. LEIA COM ATENÇÃO:',
+ texto:['ANDO SEMPRE COM VOCÊ,',
+        'MAS NÃO POSSO TE TOCAR.',
+        'QUANDO O SOL VAI EMBORA,',
+        'EU TAMBÉM VOU DESCANSAR.',
+        'DE TARDE FICO COMPRIDA,',
+        'AO MEIO-DIA, ENCOLHIDA.'],
+ pede:'QUE NOME PODERÍAMOS DAR A ESSE POEMA?',
+ opts:[
+  {t:'O ESPELHO.', no:'O espelho fica pendurado na parede. Ele não anda com você para todo lado e não some quando o sol vai embora.'},
+  {t:'A SOMBRA.', ok:1},
+  {t:'O SOL.', no:'Essa repete uma palavra do poema. Quem fala aqui diz que descansa QUANDO O SOL VAI EMBORA, então quem fala não é o sol.'},
+  {t:'O RELÓGIO.', no:'Essa vem das palavras MEIO-DIA e TARDE. Relógio não anda com você e não fica comprido nem encolhido: ele só marca a hora.'}
+ ],
+ dica:'Quem está falando dá três pistas sobre si: anda sempre com você, some quando o sol vai embora e muda de tamanho durante o dia. Procure quem faz as três.',
+ truque:'Uma pista de cada vez. A cada pista, risque quem não passa. Quem sobrar é a resposta.',
+ acende:[0,2,4,5],
+ visual:'<p class="vx"><span class="mk">ANDO SEMPRE COM VOC&Ecirc;</span> &rarr; vai junto para todo lado</p>'+
+        '<p class="vx"><span class="mk">QUANDO O SOL VAI EMBORA, EU TAMB&Eacute;M VOU DESCANSAR</span> &rarr; depende do sol</p>'+
+        '<p class="vx"><span class="mk">DE TARDE COMPRIDA, AO MEIO-DIA ENCOLHIDA</span> &rarr; muda de tamanho</p>'+
+        '<div class="pcs"><span class="pc hit">A SOMBRA</span><span class="arw">&rarr;</span><span class="pc hit">fecha as tr&ecirc;s</span></div>'+
+        '<div class="pcs"><span class="pc bad">O ESPELHO</span><span class="arw">&rarr;</span><span class="pc bad">fica parado na parede</span></div>',
+ porque:'A sombra anda com a gente para todo lado, não dá para pegar nela, some quando o sol vai embora e fica comprida de tarde e curtinha ao meio-dia. As três pistas do poema fecham só com a sombra.',
+ proximo:'Junte TODAS as pistas do texto antes de marcar. Uma resposta pode fechar uma pista e brigar com a outra.'},
+
+{id:'TR36', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O TEXTO ABAIXO:',
+ texto:['TODO SÁBADO A MINHA MÃE PEDE QUE EU ARRUME O QUARTO.',
+        'MAS O MEU IRMÃO DE DOIS ANOS FICA SOLTO LÁ DENTRO, TIRANDO TUDO DE NOVO.',
+        'A VOVÓ DIZ QUE ARRUMAR O QUARTO ASSIM É O MESMO QUE VARRER A CASA COM A PORTA ABERTA NO VENTO.',
+        'DIZ QUE É O MESMO QUE ENXUGAR O CHÃO COM A TORNEIRA ESCORRENDO.',
+        'E O MESMO QUE FAZER A CAMA COM O GATO DORMINDO EM CIMA DELA.'],
+ pede:'SEGUINDO A IDEIA DO TEXTO, ARRUMAR O QUARTO ASSIM SERIA O MESMO QUE:',
+ opts:[
+  {t:'ENCHER O BALDE NA TORNEIRA.', no:'Essa repete a palavra TORNEIRA do texto. Encher o balde dá certo: a água fica dentro dele.'},
+  {t:'VARRER A CASA COM A PORTA FECHADA.', no:'Essa repete VARRER e PORTA, mas troca aberta por fechada. Com a porta fechada, a casa varrida continua varrida.'},
+  {t:'PINTAR UM DESENHO COM A IRMÃ RABISCANDO POR CIMA.', ok:1},
+  {t:'LAVAR A LOUÇA DEPOIS DO JANTAR.', no:'A louça lavada continua lavada. Nos três exemplos da vovó, alguém desmancha o trabalho na hora em que ele está sendo feito.'}
+ ],
+ dica:'Olhe os três exemplos que a vovó deu. Pergunte de cada um: quem está desmanchando o trabalho enquanto ele é feito?',
+ truque:'O que os três exemplos do texto têm de igual? A resposta certa faz a mesma coisa.',
+ acende:[2,3,4],
+ visual:'<div class="pcs"><span class="pc hit">VARRER COM A PORTA ABERTA</span><span class="pc hit">ENXUGAR COM A TORNEIRA ESCORRENDO</span><span class="pc hit">FAZER A CAMA COM O GATO EM CIMA</span></div>'+
+        '<p class="vx">Nos tr&ecirc;s, o trabalho <b>se desfaz enquanto est&aacute; sendo feito</b>: o vento traz sujeira, a torneira molha, o gato amassa.</p>'+
+        '<div class="pcs"><span class="pc hit">pintar com a irm&atilde; rabiscando por cima</span><span class="arw">&rarr;</span><span class="pc hit">desmancha na hora</span></div>'+
+        '<p class="vx"><span class="dm">Encher o balde, varrer com a porta fechada e lavar a lou&ccedil;a d&atilde;o certo. Por isso n&atilde;o servem.</span></p>',
+ porque:'A vovó compara arrumar o quarto com varrer com a porta aberta no vento, enxugar o chão com a torneira escorrendo e fazer a cama com o gato em cima: nos três, alguém desmancha o trabalho enquanto ele está sendo feito. Pintar um desenho com a irmã rabiscando por cima é assim.',
+ proximo:'Quando o texto dá três exemplos parecidos, ache o que eles têm de igual antes de olhar as alternativas. A certa vai repetir essa mesma ideia.'},
+
+{id:'TR37', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O PEQUENO POEMA ABAIXO:',
+ texto:['A CADEIRA DA COZINHA',
+        'TEM UM RISCO NO ENCOSTO.',
+        'FUI EU QUE FIZ, SUBINDO NELA,',
+        'QUANDO EU NÃO ALCANÇAVA A PIA.',
+        'HOJE EU ALCANÇO ATÉ O ARMÁRIO DE CIMA.'],
+ pede:'PENSE SOBRE O PEQUENO POEMA ACIMA E RESPONDA: QUE NOME O AUTOR DEU A ELE?',
+ opts:[
+  {t:'QUANDO EU ERA PEQUENO.', ok:1},
+  {t:'A CADEIRA QUEBRADA.', no:'Essa repete a palavra CADEIRA. O poema diz que a cadeira tem um RISCO no encosto, e riscada não é quebrada.'},
+  {t:'O ARMÁRIO DE CIMA.', no:'Essa sai da última linha. O armário aparece uma vez só, e aparece para mostrar o quanto ele cresceu.'},
+  {t:'A HORA DO JANTAR.', no:'Essa fala de jantar, e o poema não fala de comida em nenhuma linha. Ele fala de subir na cadeira e de alcançar.'}
+ ],
+ dica:'Leia com a régua as duas últimas linhas. Uma diz o que ele NÃO alcançava antes; a outra diz o que ele alcança hoje. O que mudou entre as duas?',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[3,4],
+ visual:'<div class="pcs"><span class="pc bad">ANTES<br>N&Atilde;O ALCAN&Ccedil;AVA A PIA</span><span class="arw">&rarr;</span><span class="pc hit">HOJE<br>ALCAN&Ccedil;A O ARM&Aacute;RIO DE CIMA</span></div>'+
+        '<p class="vx">Ele precisava da cadeira para chegar &agrave; pia. <b>Hoje n&atilde;o precisa mais.</b></p>'+
+        '<p class="vx">O poema n&atilde;o &eacute; sobre a cadeira nem sobre o arm&aacute;rio: &eacute; sobre o tempo em que ele era pequeno.</p>',
+ porque:'O poema conta que ele subia na cadeira porque NÃO ALCANÇAVA A PIA, e que HOJE alcança até o armário de cima. O risco na cadeira é a marca do tempo em que ele era pequeno.',
+ proximo:'Olhe se o texto está falando de agora ou de uma coisa que já passou. Uma palavrinha como NÃO ALCANÇAVA muda o poema inteiro.'},
+
+{id:'TR38', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O TEXTO ABAIXO:',
+ texto:['HOJE BRUNO VAI AO DENTISTA DEPOIS DA AULA.',
+        'AMANHÃ ELE VAI À FESTA DE ANIVERSÁRIO DA PRIMA.',
+        'ONTEM ELE TREINOU NATAÇÃO COM O TIO, PORQUE TODA QUARTA-FEIRA TEM TREINO.'],
+ pede:'EM QUAL DIA BRUNO VAI À FESTA DA PRIMA?',
+ opts:[
+  {t:'TERÇA-FEIRA.', no:'Terça é o dia antes da quarta. A pergunta é sobre AMANHÃ, que fica para a frente, não para trás.'},
+  {t:'QUARTA-FEIRA.', no:'Essa é o único dia com nome escrito no texto. O texto diz que a quarta foi ONTEM, e ontem ele treinou natação.'},
+  {t:'QUINTA-FEIRA.', no:'Quinta é HOJE. Hoje ele vai ao dentista; a festa é amanhã.'},
+  {t:'SEXTA-FEIRA.', ok:1}
+ ],
+ dica:'Ache no texto o único dia que tem nome. Depois monte a fila: ontem, hoje, amanhã. E confira em qual dos três está a festa.',
+ truque:'Monte a fila do tempo: semana passada, ontem, hoje, semana que vem. Só então responda.',
+ acende:[1,2],
+ visual:'<div class="pcs"><span class="pc">ONTEM<br>quarta<br>nata&ccedil;&atilde;o</span><span class="arw">&rarr;</span>'+
+        '<span class="pc">HOJE<br>quinta<br>dentista</span><span class="arw">&rarr;</span>'+
+        '<span class="pc hit">AMANH&Atilde;<br>sexta<br>festa da prima</span></div>'+
+        '<p class="vx">O &uacute;nico dia com nome est&aacute; na <b>&uacute;ltima</b> linha: <b class="mk">TODA QUARTA-FEIRA TEM TREINO</b>, e o treino foi ontem. A fila come&ccedil;a por ali.</p>',
+ porque:'O texto diz que o treino é toda quarta-feira e que o treino foi ONTEM. Então ontem foi quarta, hoje é quinta e amanhã é sexta. A festa da prima é amanhã: sexta-feira.',
+ proximo:'Ache o único dia que o texto nomeia, monte a fila ontem–hoje–amanhã e só então volte para ver qual dia a pergunta pediu.'},
+
+
+/* ===== reserva_treino_D ===== */
+{id:'TR39', eixo:'letras', origem:'Treino no estilo da prova',
+ enun:'NA BRINCADEIRA DAS VOGAIS, SÓ AS VOGAIS MUDAM DE LUGAR: AS OUTRAS LETRAS FICAM PARADAS. POR EXEMPLO, TOCA VIRA TACO.',
+ pede:'TROCANDO AS VOGAIS DE LUGAR, QUAL DAS PALAVRAS ABAIXO SE TRANSFORMA NUMA COMIDA QUENTE QUE A GENTE TOMA DE COLHER?',
+ opts:[
+  {t:'SALTO.', no:'SALTO com as vogais trocadas vira SOLTA — a corda ficou solta. É palavra de verdade, e é por isso que engana. Mas ninguém toma uma solta de colher.'},
+  {t:'SAPO.', ok:1},
+  {t:'COLA.', no:'COLA com as vogais trocadas vira CALO, aquele calo que nasce no pé de tanto andar. Também formou palavra de verdade, e também não é comida.'},
+  {t:'VELA.', no:'VELA com as vogais trocadas vira VALE. Formou palavra, só que vale não é quente, não é comida e ninguém come de colher.'}
+ ],
+ dica:'Vogal é A, E, I, O, U. Marque as duas vogais da palavra, troque só elas de lugar e leia o que saiu.',
+ truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.',
+ visual:'<div class="pcs"><span class="pc">S</span><span class="pc hit">A</span><span class="pc">P</span><span class="pc hit">O</span>'+
+        '<span class="arw">&rarr;</span><span class="pc">S</span><span class="pc hit">O</span><span class="pc">P</span><span class="pc hit">A</span></div>'+
+        '<p class="vx">O <b>A</b> e o <b>O</b> trocaram. O S e o P n&atilde;o sa&iacute;ram do lugar: virou <b>SOPA</b>.</p>'+
+        '<div class="pcs"><span class="pc bad">SALTO &rarr; SOLTA</span><span class="pc bad">COLA &rarr; CALO</span><span class="pc bad">VELA &rarr; VALE</span></div>'+
+        '<p class="vx">As tr&ecirc;s viram palavra de verdade. Nenhuma delas &eacute; comida quente de colher.</p>',
+ porque:'Em SAPO as vogais são o A e o O. Trocando as duas de lugar, com o S e o P parados: S-O-P-A. A sopa é quente e a gente toma de colher.',
+ proximo:'Troque as vogais nas QUATRO palavras e leia todas. Aqui as quatro formam palavra — quem para na primeira palavra que existe, erra.'},
+
+{id:'TR40', eixo:'letras', origem:'Treino no estilo da prova',
+ enun:'DE NOVO A BRINCADEIRA DAS VOGAIS: SÓ ELAS MUDAM DE LUGAR, E AS OUTRAS LETRAS FICAM PARADAS.',
+ pede:'TROCANDO AS VOGAIS DE LUGAR, QUAL DAS PALAVRAS ABAIXO SE TRANSFORMA NUMA COISA QUE A GENTE FAZ NA AULA DE MATEMÁTICA?',
+ opts:[
+  {t:'MANTO.', no:'MANTO com as vogais trocadas vira MONTA — ele monta no cavalo. É palavra de verdade, mas montar não é coisa de aula de matemática.'},
+  {t:'CANTO.', ok:1},
+  {t:'BANHO.', no:'BANHO com as vogais trocadas vira BONHA, e BONHA não é palavra nenhuma. Essa dava para riscar assim que você lesse o que saiu.'},
+  {t:'CARRO.', no:'CARRO com as vogais trocadas vira CORRA — corra, que o ônibus está saindo! Formou palavra, só que correr é na educação física, não na matemática.'}
+ ],
+ dica:'Vogal é A, E, I, O, U. Troque só as duas vogais de cada palavra, leia o que saiu e depois pergunte: isso é coisa de aula de matemática?',
+ truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.',
+ visual:'<div class="pcs"><span class="pc">C</span><span class="pc hit">A</span><span class="pc">N</span><span class="pc">T</span><span class="pc hit">O</span>'+
+        '<span class="arw">&rarr;</span><span class="pc">C</span><span class="pc hit">O</span><span class="pc">N</span><span class="pc">T</span><span class="pc hit">A</span></div>'+
+        '<p class="vx">O <b>A</b> e o <b>O</b> trocaram de lugar. O C, o N e o T ficaram parados: <b>CONTA</b>.</p>'+
+        '<div class="pcs"><span class="pc bad">MANTO &rarr; MONTA</span><span class="pc bad">CARRO &rarr; CORRA</span><span class="pc bad">BANHO &rarr; BONHA</span></div>'+
+        '<p class="vx">MONTA e CORRA existem, mas n&atilde;o s&atilde;o de matem&aacute;tica. BONHA nem palavra &eacute;.</p>',
+ porque:'Em CANTO as vogais são o A e o O. Trocando as duas de lugar: C-O-N-T-A. Fazer uma conta é exatamente o que a gente faz na aula de matemática.',
+ proximo:'Depois de trocar as vogais, faça duas perguntas: essa palavra existe? e ela é o que a pergunta pediu? As duas têm de dar sim.'},
+
+{id:'TR41', eixo:'letras', origem:'Treino no estilo da prova',
+ enun:'CAIO DERRUBOU O SACO DE LETRAS DE MADEIRA E JUNTOU DO CHÃO TODAS AS LETRAS DE UMA PALAVRA SÓ:',
+ quadro:'A &ndash; R &ndash; T &ndash; U &ndash; A &ndash; G &ndash; R &ndash; T &ndash; A',
+ pede:'MARQUE A PALAVRA QUE CAIO CONSEGUE FORMAR USANDO TODAS ESSAS LETRAS, UMA VEZ CADA:',
+ opts:[
+  {t:'GARRAFA.', no:'GARRAFA engana porque tem GA, RRA e um monte de A, igualzinho ao que está no chão. Mas ela precisa de um F, e não existe nenhum F entre as letras de Caio. Ela ainda deixaria os dois T e o U sobrando.'},
+  {t:'TARTARUGA.', ok:1},
+  {t:'GUITARRA.', no:'GUITARRA é a mais perigosa: tem G, T, A e os dois R, tudo parecido. Mas ela pede um I, e não foi dado nenhum I. Conte também: GUITARRA tem 8 letras, e no chão há 9.'},
+  {t:'GARRA.', no:'GARRA usa só letras que estão mesmo no chão: G, A, R, R, A. O problema é que ela gasta 5 e para. Sobram os dois T, um A e o U — quando sobra letra, a palavra está errada.'}
+ ],
+ dica:'Conte quantas letras Caio juntou: são 9. Repare que tem TRÊS A, DOIS R e DOIS T — a palavra certa gasta todas.',
+ truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.',
+ visual:'<div class="pcs"><span class="pc">A</span><span class="pc">R</span><span class="pc">T</span><span class="pc">U</span><span class="pc">A</span><span class="pc">G</span><span class="pc">R</span><span class="pc">T</span><span class="pc">A</span><span class="arw">&rarr;</span><span class="pc hit">9 letras</span></div>'+
+        '<div class="pcs"><span class="pc hit">T</span><span class="pc hit">A</span><span class="pc hit">R</span><span class="pc hit">T</span><span class="pc hit">A</span><span class="pc hit">R</span><span class="pc hit">U</span><span class="pc hit">G</span><span class="pc hit">A</span></div>'+
+        '<p class="vx">TARTARUGA gasta as nove: os <b>tr&ecirc;s A</b>, os <b>dois R</b>, os <b>dois T</b>, o U e o G. Nada sobrou, nada faltou.</p>'+
+        '<div class="pcs"><span class="pc bad">GARRA<b>F</b>A</span><span class="pc bad">GU<b>I</b>TARRA</span><span class="arw">&rarr;</span><span class="pc bad">pedem F e I, que ningu&eacute;m deu</span></div>'+
+        '<div class="pcs"><span class="pc hit">G</span><span class="pc hit">A</span><span class="pc hit">R</span><span class="pc hit">R</span><span class="pc hit">A</span><span class="pc bad">T</span><span class="pc bad">T</span><span class="pc bad">A</span><span class="pc bad">U</span><span class="arw">&rarr;</span><span class="pc bad">GARRA deixou 4 no ch&atilde;o</span></div>',
+ porque:'TARTARUGA usa exatamente as nove letras do chão, contando os três A, os dois R e os dois T. GARRAFA pede um F e GUITARRA pede um I, que não foram dados; GARRA gasta só cinco e deixa quatro letras paradas.',
+ proximo:'Escreva a palavra e risque uma letra do quadro para cada letra dela. Se faltar ou sobrar uma que seja, essa não é.'},
+
+{id:'TR42', eixo:'letras', origem:'Treino no estilo da prova',
+ enun:'BRUNO RECORTOU AS LETRAS DE UMA FRUTA E ELAS SE ESPALHARAM PELA MESA:',
+ quadro:'O &ndash; N &ndash; M &ndash; A &ndash; G &ndash; R &ndash; O',
+ pede:'QUE PALAVRA BRUNO CONSEGUE MONTAR USANDO TODAS ESSAS LETRAS, UMA VEZ CADA?',
+ opts:[
+  {t:'MORCEGO.', no:'MORCEGO é a mais perigosa: tem 7 letras, igualzinho ao monte da mesa, e começa com MOR. Mas ela pede um C e um E, e não existe nem C nem E entre as letras recortadas.'},
+  {t:'AMOR.', no:'AMOR só usa letras que estão mesmo na mesa: A, M, O, R. Mas ela gasta 4 e para. Sobram o N, o G e o segundo O — quando sobra letra, a palavra está errada.'},
+  {t:'MORANGO.', ok:1},
+  {t:'MARROM.', no:'MARROM engana porque é fácil de lembrar e usa M, A, R e O, que estão lá. Mas ela pede DOIS M e DOIS R, e Bruno recortou um M só e um R só.'}
+ ],
+ dica:'Conte as letras da mesa: são 7, e DUAS delas são O. A palavra certa gasta as sete, sem sobrar nenhuma.',
+ truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.',
+ visual:'<div class="pcs"><span class="pc">O</span><span class="pc">N</span><span class="pc">M</span><span class="pc">A</span><span class="pc">G</span><span class="pc">R</span><span class="pc">O</span><span class="arw">&rarr;</span><span class="pc hit">7 letras, com dois O</span></div>'+
+        '<div class="pcs"><span class="pc hit">M</span><span class="pc hit">O</span><span class="pc hit">R</span><span class="pc hit">A</span><span class="pc hit">N</span><span class="pc hit">G</span><span class="pc hit">O</span></div>'+
+        '<p class="vx">MORANGO gasta as sete, inclusive os <b>dois O</b>. Nada sobrou, nada faltou.</p>'+
+        '<div class="pcs"><span class="pc bad">MOR<b>C</b>E<b>G</b>O</span><span class="arw">&rarr;</span><span class="pc bad">pede C e E, que ningu&eacute;m deu</span></div>'+
+        '<div class="pcs"><span class="pc bad"><b>M</b>ARRO<b>M</b></span><span class="arw">&rarr;</span><span class="pc bad">pede dois M e dois R</span></div>'+
+        '<div class="pcs"><span class="pc hit">A</span><span class="pc hit">M</span><span class="pc hit">O</span><span class="pc hit">R</span><span class="pc bad">N</span><span class="pc bad">G</span><span class="pc bad">O</span><span class="arw">&rarr;</span><span class="pc bad">AMOR deixou 3 na mesa</span></div>',
+ porque:'MORANGO usa exatamente as sete letras da mesa, contando os dois O. MORCEGO pede um C e um E que não foram recortados; MARROM pede um segundo M e um segundo R; AMOR gasta só quatro e deixa três letras paradas.',
+ proximo:'Antes de conferir letra por letra, conte: se o número de letras já for diferente, a alternativa cai na hora.'},
+
+{id:'TR43', eixo:'letras', origem:'Treino no estilo da prova',
+ enun:'A FRASE ABAIXO ESTÁ UM POUCO ESTRANHA, MAS, MUDANDO UMA LETRA DE LUGAR, CONSEGUIMOS CONSERTÁ-LA.',
+ quadro:'O PRATO NADOU NO LAGO E O PATO CAIU DA MESA.',
+ pede:'QUAL É ESSA LETRA?',
+ opts:[
+  {t:'B.', no:'Não existe nenhum B nas duas palavras trocadas, PRATO e PATO. Uma letra que não está lá não pode sair de lugar nenhum: essa dava para riscar de cara.'},
+  {t:'T.', no:'O T existe, sim — está nas duas palavras. Por isso ele atrai. Mas experimente: tirando o T de PRATO sobra PRAO, e PATO com dois T fica PATTO. Não conserta nada.'},
+  {t:'R.', ok:1},
+  {t:'M.', no:'O M aparece em MESA, e é por isso que ele parece candidato. Mas as palavras esquisitas são PRATO e PATO, e nenhuma das duas tem M.'}
+ ],
+ dica:'Primeiro descubra por que a frase está esquisita: quem é que nada no lago e quem é que cai da mesa? Depois veja qual letra está na palavra errada.',
+ truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.',
+ visual:'<p class="vx">P<b class="mk">R</b>ATO nadou no lago? Prato n&atilde;o nada. Quem nada &eacute; o pato.</p>'+
+        '<div class="pcs"><span class="pc bad">P<b>R</b>ATO</span><span class="pc bad">PATO</span><span class="arw">&rarr;</span><span class="pc hit">PATO</span><span class="pc hit">P<b>R</b>ATO</span></div>'+
+        '<p class="vx">O <b>R</b> saiu de uma palavra e entrou na outra. Nenhuma letra foi inventada e nenhuma sumiu: foi uma s&oacute; que andou.</p>'+
+        '<p class="vx"><span class="dm">A frase certa: O PATO NADOU NO LAGO E O PRATO CAIU DA MESA.</span></p>',
+ porque:'A frase certa é "O PATO NADOU NO LAGO E O PRATO CAIU DA MESA". Para consertar, basta o R sair de PRATO e entrar em PATO. A letra que mudou de lugar é o R.',
+ proximo:'Ache as duas palavras trocadas e olhe só para elas. A letra que anda tem de existir numa das duas — se não existe, nem confira.'},
+
+{id:'TR44', eixo:'letras', origem:'Treino no estilo da prova',
+ enun:'PODEMOS TRANSFORMAR UMA PALAVRA EM OUTRA MUDANDO SOMENTE A PRIMEIRA LETRA. POR EXEMPLO, MOLA VIRA BOLA: A PRIMEIRA LETRA MUDOU E O RESTO, OLA, FICOU IGUALZINHO.',
+ pede:'MUDANDO SOMENTE A PRIMEIRA LETRA DA PALAVRA MALA, QUAL DAS PALAVRAS ABAIXO PODEMOS FORMAR?',
+ opts:[
+  {t:'MULA.', no:'MULA é palavra de verdade e é bem parecida com MALA, e é por isso que engana. Mas escreva uma embaixo da outra: a primeira letra continua sendo o M. Quem mudou foi a letra do meio.'},
+  {t:'BALA.', ok:1},
+  {t:'MALHA.', no:'MALHA também é palavra de verdade, e começa igualzinho. Mas conte as letras: MALA tem 4 e MALHA tem 5. Entrou um H no meio — e a brincadeira não deixa entrar letra nova.'},
+  {t:'BOLA.', no:'BOLA começa com B, e é isso que faz parecer certa. Só que mudaram DUAS letras: o M virou B e o A virou O. A brincadeira troca uma letra só, a primeira.'}
+ ],
+ dica:'Escreva MALA e, embaixo, a palavra da alternativa. Confira letra por letra: só a primeira pode ser diferente, e o resto tem de ficar ALA.',
+ truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.',
+ visual:'<div class="pcs"><span class="pc bad">M</span><span class="pc hit">A</span><span class="pc hit">L</span><span class="pc hit">A</span><span class="arw">&rarr;</span><span class="pc bad">B</span><span class="pc hit">A</span><span class="pc hit">L</span><span class="pc hit">A</span></div>'+
+        '<p class="vx">S&oacute; a primeira letra mudou. O peda&ccedil;o <b>ALA</b> ficou igualzinho: <b>BALA</b>.</p>'+
+        '<div class="pcs"><span class="pc bad">M<b>U</b>LA</span><span class="arw">&rarr;</span><span class="pc bad">mudou a do meio</span></div>'+
+        '<div class="pcs"><span class="pc bad">MAL<b>H</b>A</span><span class="arw">&rarr;</span><span class="pc bad">ganhou uma letra: 5 em vez de 4</span></div>'+
+        '<div class="pcs"><span class="pc bad"><b>B</b><b>O</b>LA</span><span class="arw">&rarr;</span><span class="pc bad">mudaram duas</span></div>',
+ porque:'De MALA para BALA muda só a primeira letra: o M vira B e o pedaço ALA continua igualzinho. MULA mudou a letra do meio, MALHA ganhou um H a mais e BOLA mudou duas letras.',
+ proximo:'Escreva as duas palavras uma embaixo da outra antes de decidir. O olho acha que são parecidas; o dedo, riscando letra por letra, mostra o que mudou.'},
+
+{id:'TR45', eixo:'letras', origem:'Treino no estilo da prova',
+ enun:'AS LETRAS DE UM BRINQUEDO SE EMBARALHARAM:',
+ quadro:'N &ndash; E &ndash; B &ndash; O &ndash; C &ndash; A',
+ pede:'QUE PALAVRA APARECE QUANDO COLOCAMOS ESSAS LETRAS NA ORDEM CERTA, USANDO TODAS ELAS?',
+ opts:[
+  {t:'BONECO.', no:'BONECO é a armadilha mais fina daqui: erra por uma letra só, a última. Ele pede DOIS O, e no embaralhado tem um O só — e ainda deixaria o A sobrando.'},
+  {t:'BONECA.', ok:1},
+  {t:'BOCA.', no:'BOCA usa só letras que estão mesmo no embaralhado: B, O, C, A. Mas gasta 4 e para, deixando o N e o E sobrando. Quando sobra letra, a palavra está errada.'},
+  {t:'CANOA.', no:'CANOA parece caber, e é por isso que atrai. Mas ela pede DOIS A, e só foi dado um. E ainda deixaria o B e o E sem uso.'}
+ ],
+ dica:'Conte as letras embaralhadas: são 6, uma de cada. A palavra certa gasta as seis, sem repetir nenhuma e sem deixar nenhuma para trás.',
+ truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.',
+ visual:'<div class="pcs"><span class="pc">N</span><span class="pc">E</span><span class="pc">B</span><span class="pc">O</span><span class="pc">C</span><span class="pc">A</span><span class="arw">&rarr;</span><span class="pc hit">6 letras, uma de cada</span></div>'+
+        '<div class="pcs"><span class="pc hit">B</span><span class="pc hit">O</span><span class="pc hit">N</span><span class="pc hit">E</span><span class="pc hit">C</span><span class="pc hit">A</span></div>'+
+        '<p class="vx">BONECA gasta as seis, uma vez cada. Nada sobrou, nada faltou.</p>'+
+        '<div class="pcs"><span class="pc hit">B</span><span class="pc hit">O</span><span class="pc hit">N</span><span class="pc hit">E</span><span class="pc hit">C</span><span class="pc bad">O</span><span class="arw">&rarr;</span><span class="pc bad">o segundo O n&atilde;o existe</span></div>'+
+        '<div class="pcs"><span class="pc hit">B</span><span class="pc hit">O</span><span class="pc hit">C</span><span class="pc hit">A</span><span class="pc bad">N</span><span class="pc bad">E</span><span class="arw">&rarr;</span><span class="pc bad">BOCA deixou duas para tr&aacute;s</span></div>',
+ porque:'BONECA usa exatamente as seis letras embaralhadas, uma vez cada. BONECO pediria um segundo O e CANOA um segundo A, que não foram dados; BOCA gasta só quatro e deixa o N e o E sobrando.',
+ proximo:'Cuidado com as palavras que só mudam a última letra: BONECO e BONECA parecem a mesma até o fim. Confira a letra final também.'},
+
+{id:'TR46', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'A PROFESSORA DEU A CLARA TRÊS PEÇAS DE SÍLABA. ELA TEM DE USAR AS TRÊS, UMA VEZ CADA, NA ORDEM QUE QUISER.',
+ quadro:'LA &nbsp;&ndash;&nbsp; MO &nbsp;&ndash;&nbsp; CHI',
+ pede:'QUE PALAVRA CLARA CONSEGUE FORMAR COM AS TRÊS PEÇAS?',
+ opts:[
+  {t:'CHAMA.', no:'CHAMA parece feita das peças, e erra por uma letra em cada pedaço. Bata palma: CHA-MA. Clara tem CHI, e não CHA; tem MO, e não MA. E ainda sobraria o LA na mesa.'},
+  {t:'MOCHILA.', ok:1},
+  {t:'CHINELO.', no:'CHINELO começa certinho, com o CHI, e por isso engana quem confere só o começo. Mas bata palma até o fim: CHI-NE-LO. NE e LO ninguém deu, e sobrariam o MO e o LA.'},
+  {t:'MOLA.', no:'MOLA usa duas peças de verdade, o MO e o LA. Mas gasta só duas e para: o CHI fica parado na mesa. Tem de usar as três.'}
+ ],
+ dica:'Bata palma na palavra de cada alternativa e conte os pedaços. Clara tem TRÊS peças: a palavra certa tem de ter três pedaços, e os três têm de ser esses.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc">LA</span><span class="pc">MO</span><span class="pc">CHI</span><span class="arw">&rarr;</span><span class="pc hit">MO</span><span class="pc hit">CHI</span><span class="pc hit">LA</span></div>'+
+        '<p class="vx">Tr&ecirc;s pe&ccedil;as dadas, tr&ecirc;s pe&ccedil;as usadas: MO-CHI-LA. Nada sobrou e nada foi inventado.</p>'+
+        '<div class="pcs"><span class="pc bad">CHA</span><span class="pc bad">MA</span><span class="arw">&rarr;</span><span class="pc bad">CHI e MO n&atilde;o viram CHA e MA</span></div>'+
+        '<div class="pcs"><span class="pc hit">CHI</span><span class="pc bad">NE</span><span class="pc bad">LO</span><span class="arw">&rarr;</span><span class="pc bad">come&ccedil;a certo e estraga no meio</span></div>'+
+        '<div class="pcs"><span class="pc hit">MO</span><span class="pc hit">LA</span><span class="pc bad">CHI</span><span class="arw">&rarr;</span><span class="pc bad">MOLA deixou o CHI sobrando</span></div>',
+ porque:'MO-CHI-LA usa as três peças, uma vez cada, só mudando a ordem. CHAMA pede CHA e MA, que são uma letra diferentes de CHI e MO; CHINELO pede NE e LO, que ninguém deu; e MOLA deixa o CHI na mesa.',
+ proximo:'Confira as sílabas até o fim, não só a primeira. E conte: se a palavra tem menos pedaços do que peças, sobrou peça e ela já caiu.'},
+
+{id:'TR47', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'VEJA AS QUATRO PEÇAS DE SÍLABA ABAIXO. TODAS TÊM DE SER USADAS, UMA VEZ CADA, NA ORDEM QUE VOCÊ QUISER:',
+ quadro:'TE &nbsp;&ndash;&nbsp; LA &nbsp;&ndash;&nbsp; CHO &nbsp;&ndash;&nbsp; CO',
+ pede:'QUE PALAVRA PODEMOS FORMAR COM ESSAS QUATRO PEÇAS?',
+ opts:[
+  {t:'COLA.', no:'COLA usa duas peças de verdade, o CO e o LA, e por isso parece certa. Mas gasta só duas e para: o CHO e o TE ficam parados na mesa.'},
+  {t:'CHOCALHO.', no:'CHOCALHO começa com CHO, igualzinho à peça, e é essa a isca. Mas bata palma: CHO-CA-LHO. CA e LHO ninguém deu — as peças são CO e LA. Uma letra de diferença em cada uma.'},
+  {t:'CHOCOLATE.', ok:1},
+  {t:'COLETE.', no:'COLETE quase fecha: CO está lá e TE está lá. Mas o pedaço do meio é LE, e a peça que você tem é LA. Uma letra de diferença — e o CHO ainda sobraria.'}
+ ],
+ dica:'Bata palma na palavra de cada alternativa: a certa tem de ter QUATRO pedaços, e cada um deles tem de ser uma das quatro peças.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc">TE</span><span class="pc">LA</span><span class="pc">CHO</span><span class="pc">CO</span><span class="arw">&rarr;</span><span class="pc hit">CHO</span><span class="pc hit">CO</span><span class="pc hit">LA</span><span class="pc hit">TE</span></div>'+
+        '<p class="vx">Quatro pe&ccedil;as dadas, quatro pe&ccedil;as usadas: CHO-CO-LA-TE.</p>'+
+        '<div class="pcs"><span class="pc hit">CHO</span><span class="pc bad">CA</span><span class="pc bad">LHO</span><span class="arw">&rarr;</span><span class="pc bad">CA n&atilde;o &eacute; CO, LHO n&atilde;o &eacute; LA</span></div>'+
+        '<div class="pcs"><span class="pc hit">CO</span><span class="pc bad">LE</span><span class="pc hit">TE</span><span class="arw">&rarr;</span><span class="pc bad">a pe&ccedil;a &eacute; LA, n&atilde;o LE</span></div>'+
+        '<div class="pcs"><span class="pc hit">CO</span><span class="pc hit">LA</span><span class="pc bad">CHO</span><span class="pc bad">TE</span><span class="arw">&rarr;</span><span class="pc bad">COLA deixou duas sobrando</span></div>',
+ porque:'CHO-CO-LA-TE gasta as quatro peças, uma vez cada, só trocando a ordem. CHOCALHO pede CA e LHO, COLETE pede LE — nenhuma dessas foi dada — e COLA usa só duas, deixando o CHO e o TE na mesa.',
+ proximo:'Conte os pedaços da palavra e conte as peças do quadro. Se os números não baterem, nem precisa conferir peça por peça: já caiu.'},
+
+{id:'TR48', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'VEJA ESTAS TRÊS COISAS QUE ESTAVAM NA MOCHILA DE ANA:',
+ quadro:'PIRULITO &nbsp;&ndash;&nbsp; POTE &nbsp;&ndash;&nbsp; CADERNO',
+ pede:'QUE ALTERNATIVA MOSTRA UMA PALAVRA FORMADA APENAS COM SÍLABAS DOS NOMES ACIMA?',
+ opts:[
+  {t:'PIRATA.', no:'PIRATA começa com o PI do pirulito, e quem confere só o começo marca esta. Mas o pirulito dá PI-RU-LI-TO: ele tem RU, não RA. E TA não sai de nome nenhum.'},
+  {t:'PICOLÉ.', no:'PICOLÉ atrai porque parece irmão do pirulito e começa com PI, que existe mesmo. Só que o segundo pedaço é CO, e o caderno dá CA — uma letra de diferença. E LÉ ninguém tem.'},
+  {t:'PIPOCA.', ok:1},
+  {t:'TOMADA.', no:'TOMADA começa com o TO, que é o último pedaço do pirulito, e por isso engana. Mas MA e DA não saem de nenhum dos três nomes.'}
+ ],
+ dica:'Bata palma em cada nome e escreva as peças: PI-RU-LI-TO, PO-TE, CA-DER-NO. Essas são todas as peças que existem.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc">PI</span><span class="pc">RU</span><span class="pc">LI</span><span class="pc">TO</span><span class="pc">PO</span><span class="pc">TE</span><span class="pc">CA</span><span class="pc">DER</span><span class="pc">NO</span></div>'+
+        '<p class="vx">Essas s&atilde;o as pe&ccedil;as que os tr&ecirc;s nomes d&atilde;o.</p>'+
+        '<div class="pcs"><span class="pc hit">PI</span><span class="pc hit">PO</span><span class="pc hit">CA</span><span class="arw">&rarr;</span><span class="pc hit">PI do pirulito, PO do pote, CA do caderno</span></div>'+
+        '<div class="pcs"><span class="pc hit">PI</span><span class="pc bad">RA</span><span class="pc bad">TA</span><span class="arw">&rarr;</span><span class="pc bad">o pirulito d&aacute; RU, n&atilde;o RA</span></div>'+
+        '<div class="pcs"><span class="pc hit">PI</span><span class="pc bad">CO</span><span class="pc bad">L&Eacute;</span><span class="arw">&rarr;</span><span class="pc bad">o caderno d&aacute; CA, n&atilde;o CO</span></div>',
+ porque:'PI vem de PIRULITO, PO vem de POTE e CA vem de CADERNO: as três sílabas de PIPOCA saem dos nomes. Nas outras sempre falta uma peça — o RA e o TA de PIRATA, o CO e o LÉ de PICOLÉ, o MA e o DA de TOMADA.',
+ proximo:'Confira TODAS as sílabas, uma por uma, não só a primeira. A que estraga costuma estar no meio ou no fim.'},
+
+{id:'TR49', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'AGORA VEJA ESTES TRÊS NOMES:',
+ quadro:'PATO &nbsp;&ndash;&nbsp; LIM&Atilde;O &nbsp;&ndash;&nbsp; DEDO',
+ pede:'QUE ALTERNATIVA MOSTRA UMA PALAVRA FORMADA APENAS COM SÍLABAS DOS NOMES ACIMA?',
+ opts:[
+  {t:'PALHAÇO.', no:'PALHAÇO começa com o PA do pato, e é só isso que ela tem de certo. Bata palma até o fim: PA-LHA-ÇO. LHA e ÇO não saem de nenhum dos três nomes.'},
+  {t:'PALITO.', ok:1},
+  {t:'LIMONADA.', no:'LIMONADA é a mais perigosa: o LI do limão está lá mesmo. Mas o segundo pedaço é MO, e o limão dá LI-MÃO — a peça é MÃO, com M e til. E NA e DA ninguém tem.'},
+  {t:'DEDÃO.', no:'DEDÃO pega o DE do dedo, e o resto parece caber. Mas DÃO não existe nos nomes: o limão termina em MÃO, com M. Uma letra de diferença derruba a palavra inteira.'}
+ ],
+ dica:'Bata palma em cada nome e escreva as peças: PA-TO, LI-MÃO, DE-DO. Depois confira pedaço por pedaço a palavra que você escolheu.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc">PA</span><span class="pc">TO</span><span class="pc">LI</span><span class="pc">M&Atilde;O</span><span class="pc">DE</span><span class="pc">DO</span></div>'+
+        '<p class="vx">Essas s&atilde;o todas as pe&ccedil;as dispon&iacute;veis.</p>'+
+        '<div class="pcs"><span class="pc hit">PA</span><span class="pc hit">LI</span><span class="pc hit">TO</span><span class="arw">&rarr;</span><span class="pc hit">PA e TO do pato, LI do lim&atilde;o</span></div>'+
+        '<div class="pcs"><span class="pc hit">LI</span><span class="pc bad">MO</span><span class="pc bad">NA</span><span class="pc bad">DA</span><span class="arw">&rarr;</span><span class="pc bad">a pe&ccedil;a &eacute; M&Atilde;O, n&atilde;o MO</span></div>'+
+        '<div class="pcs"><span class="pc hit">DE</span><span class="pc bad">D&Atilde;O</span><span class="arw">&rarr;</span><span class="pc bad">o lim&atilde;o d&aacute; M&Atilde;O, com M</span></div>',
+ porque:'PA e TO vêm de PATO e LI vem de LIMÃO: as três sílabas de PALITO saem dos nomes. PALHAÇO precisa de LHA e ÇO, LIMONADA precisa de MO, NA e DA, e DEDÃO precisa de DÃO — nenhuma dessas peças existe aqui.',
+ proximo:'Quando duas peças são quase iguais — MÃO e MO, DÃO e MÃO —, escreva as duas e compare letra por letra. É aí que a questão se decide.'},
+
+{id:'TR50', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'LEIA ESTAS TRÊS PALAVRAS:',
+ quadro:'SORTE &nbsp;&ndash;&nbsp; VER&Atilde;O &nbsp;&ndash;&nbsp; TESOURA',
+ pede:'USANDO APENAS A PRIMEIRA SÍLABA DE CADA UMA DELAS, QUE PALAVRA PODEMOS FORMAR?',
+ opts:[
+  {t:'SOFÁ.', no:'SOFÁ quase começa certo, e erra por uma letra: ele quer SO, e a primeira sílaba de SOR-TE é SOR, com R. E FÁ não é primeira sílaba de ninguém.'},
+  {t:'SORVETE.', ok:1},
+  {t:'TESOURO.', no:'TESOURO engana porque é quase a tesoura inteira. O TE está certo, sim, mas SOU e RO são os OUTROS pedaços da tesoura — e a pergunta manda pegar só o PRIMEIRO de cada palavra.'},
+  {t:'VERDE.', no:'VERDE começa parecido com verão, e erra por uma letra: VER-DE quer VER, com R, e a primeira sílaba de VE-RÃO é só VE. O DE também não é primeira sílaba de ninguém.'}
+ ],
+ dica:'Bata palma em cada palavra e guarde só o PRIMEIRO pedaço: SOR-TE, VE-RÃO, TE-SOU-RA. Escreva as três peças antes de olhar as alternativas.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc hit">SOR</span><span class="pc">TE</span><span class="arw">&rarr;</span><span class="pc hit">SOR</span></div>'+
+        '<div class="pcs"><span class="pc hit">VE</span><span class="pc">R&Atilde;O</span><span class="arw">&rarr;</span><span class="pc hit">VE</span></div>'+
+        '<div class="pcs"><span class="pc hit">TE</span><span class="pc">SOU</span><span class="pc">RA</span><span class="arw">&rarr;</span><span class="pc hit">TE</span></div>'+
+        '<div class="pcs"><span class="pc hit">SOR</span><span class="pc hit">VE</span><span class="pc hit">TE</span><span class="arw">&rarr;</span><span class="pc hit">SORVETE</span></div>'+
+        '<p class="vx">As tr&ecirc;s pe&ccedil;as, uma vez cada, na ordem em que as palavras aparecem.</p>'+
+        '<div class="pcs"><span class="pc bad">SO</span><span class="pc bad">F&Aacute;</span><span class="arw">&rarr;</span><span class="pc bad">a pe&ccedil;a &eacute; SOR, com R</span></div>',
+ porque:'O primeiro pedaço de cada palavra: SOR-TE dá SOR, VE-RÃO dá VE e TE-SOU-RA dá TE. Juntando as três peças sai SOR-VE-TE. SOFÁ pede SO e VERDE pede VER, que não são as peças; TESOURO usa pedaços que não são o primeiro.',
+ proximo:'Escreva as três peças num canto antes de olhar as respostas. Se você não escrever, o olho troca SOR por SO e VE por VER sem perceber.'},
+
+{id:'TR51', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'LEIA ESTAS TRÊS PALAVRAS:',
+ quadro:'SAMBA &nbsp;&ndash;&nbsp; MENINA &nbsp;&ndash;&nbsp; PISCINA',
+ pede:'USANDO APENAS A ÚLTIMA SÍLABA DE CADA UMA DELAS, QUE PALAVRA PODEMOS FORMAR?',
+ opts:[
+  {t:'NABO.', no:'NABO começa com o NA, que é peça de verdade. Mas o segundo pedaço é BO, e nenhuma das três palavras termina em BO: o samba termina em BA. E ainda sobrariam duas peças.'},
+  {t:'BANANA.', ok:1},
+  {t:'CANA.', no:'CANA usa o NA, que existe, e por isso engana. Mas CA não é o fim de nenhuma das três palavras, e a CANA gasta só duas peças: sobram o BA e um NA.'},
+  {t:'BANHO.', no:'BANHO começa com o BA do samba, e para aí o acerto. NHO não é o fim de nenhuma das palavras, e os dois NA ficariam sobrando na mesa.'}
+ ],
+ dica:'Bata palma em cada palavra e guarde só o ÚLTIMO pedaço: SAM-BA, ME-NI-NA, PIS-CI-NA. Repare que duas delas terminam igual.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc">SAM</span><span class="pc hit">BA</span><span class="arw">&rarr;</span><span class="pc hit">BA</span></div>'+
+        '<div class="pcs"><span class="pc">ME</span><span class="pc">NI</span><span class="pc hit">NA</span><span class="arw">&rarr;</span><span class="pc hit">NA</span></div>'+
+        '<div class="pcs"><span class="pc">PIS</span><span class="pc">CI</span><span class="pc hit">NA</span><span class="arw">&rarr;</span><span class="pc hit">NA</span></div>'+
+        '<div class="pcs"><span class="pc hit">BA</span><span class="pc hit">NA</span><span class="pc hit">NA</span><span class="arw">&rarr;</span><span class="pc hit">BANANA</span></div>'+
+        '<p class="vx">Tr&ecirc;s pe&ccedil;as, tr&ecirc;s peda&ccedil;os: BA-NA-NA. E os <b>dois NA</b> foram usados, um de cada palavra.</p>'+
+        '<div class="pcs"><span class="pc hit">NA</span><span class="pc bad">BO</span><span class="pc bad">BA</span><span class="pc bad">NA</span><span class="arw">&rarr;</span><span class="pc bad">NABO inventa o BO e deixa duas na mesa</span></div>',
+ porque:'O último pedaço de cada palavra: SAM-BA dá BA, ME-NI-NA dá NA e PIS-CI-NA dá NA. Com BA, NA e NA monta-se BA-NA-NA. As outras três inventam um pedaço (BO, CA, NHO) e ainda deixam peças sobrando.',
+ proximo:'Quando duas palavras dão a mesma peça, você fica com ela DUAS vezes — e a palavra certa tem de gastar as duas.'},
+
+{id:'TR52', eixo:'silabas', origem:'Treino no estilo da prova',
+ enun:'TIAGO ESCREVEU O QUE VIU NO QUINTAL, MAS ESTAVA COM TANTA PRESSA QUE ALGUMAS PALAVRAS TROCARAM DE SÍLABAS ENTRE SI. VEJA O QUE ELE ESCREVEU:',
+ quadro:'UMA ANILHA POUBE NO NARIZ DA MESOUNA.',
+ pede:'O QUE TIAGO VIU?',
+ opts:[
+  {t:'UMA ABELHA PICOU O NARIZ DA MENINA.', no:'Abelha pica, e por isso essa parece a história certa. Mas PICOU pede as peças PI e COU, e as peças que andaram foram BE, SOU e NI. Nenhuma delas forma PICOU.'},
+  {t:'UMA MENINA ESPANTOU UMA ABELHA COM O CHAPÉU.', no:'Aqui a abelha e a menina estão certas, e é isso que engana. Mas ESPANTOU e CHAPÉU não saem de peça nenhuma: nenhuma sílaba da frase embaralhada vira essas palavras.'},
+  {t:'UM PASSARINHO POUSOU NO NARIZ DA MENINA.', no:'POUSOU e MENINA estão certos — quem desembaraça duas palavras e inventa a terceira cai aqui. Mas ANILHA não vira PASSARINHO: devolvendo o BE no lugar do NI, ela vira ABELHA.'},
+  {t:'UMA ABELHA POUSOU NO NARIZ DA MENINA.', ok:1}
+ ],
+ dica:'Três palavras trocaram um pedaço entre si. Desembarace uma de cada vez, do começo ao fim da frase, e só depois olhe as alternativas.',
+ truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ visual:'<div class="pcs"><span class="pc bad">A <b>NI</b> LHA</span><span class="arw">&rarr;</span><span class="pc hit">A <b>BE</b> LHA</span></div>'+
+        '<div class="pcs"><span class="pc bad">POU <b>BE</b></span><span class="arw">&rarr;</span><span class="pc hit">POU <b>SOU</b></span></div>'+
+        '<div class="pcs"><span class="pc bad">ME <b>SOU</b> NA</span><span class="arw">&rarr;</span><span class="pc hit">ME <b>NI</b> NA</span></div>'+
+        '<p class="vx">Tr&ecirc;s pe&ccedil;as andaram em roda: o <b>BE</b> foi para POUSOU, o <b>SOU</b> foi para MENINA e o <b>NI</b> foi para ABELHA. Nenhuma sumiu, nenhuma apareceu do nada.</p>'+
+        '<p class="vx">A frase inteira: <b>UMA ABELHA POUSOU NO NARIZ DA MENINA.</b></p>',
+ porque:'Devolvendo cada pedaço ao seu lugar, ANILHA vira ABELHA, POUBE vira POUSOU e MESOUNA vira MENINA. A frase é: UMA ABELHA POUSOU NO NARIZ DA MENINA.',
+ proximo:'Desembarace a frase INTEIRA antes de escolher. Duas palavras certas e uma inventada continuam sendo alternativa errada.'},
+
+
+/* ===== reserva_treino_E ===== */
+{id:'TR53', eixo:'contar', origem:'Treino no estilo da prova',
+ enun:'A PROFESSORA VAI MONTAR UM MURAL COM FIGURINHAS E INVENTOU UMA REGRA PARA ESCOLHER QUAIS ENTRAM:',
+ quadro:'&mdash; S&Oacute; VOU COLAR AS FIGURINHAS CUJO NOME USA UMA &Uacute;NICA VOGAL, MESMO QUE ELA APARE&Ccedil;A V&Aacute;RIAS VEZES!'+
+        '<div class="sep"></div>LARANJA &ndash; CAVALO &ndash; DENTE &ndash; ESTRELA &ndash; PORCO &ndash; CADERNO &ndash; TESOURA',
+ pede:'MARQUE A ALTERNATIVA QUE MOSTRA APENAS AS FIGURINHAS QUE A PROFESSORA VAI COLAR:',
+ opts:[
+  {t:'LARANJA, CAVALO E DENTE.', no:'CAVALO termina em LO: tem A, A e O. São duas vogais diferentes. Os dois primeiros pedaços, CA-VA, só têm A — é ali que o dedo para de conferir.'},
+  {t:'DENTE, ESTRELA E PORCO.', no:'ESTRELA termina em A: tem E, E e A. São duas vogais diferentes. A vogal que estraga está na última letra da palavra.'},
+  {t:'LARANJA, DENTE E PORCO.', ok:1},
+  {t:'PORCO, CADERNO E TESOURA.', no:'CADERNO tem A, E e O: três vogais diferentes. TESOURA tem E, O, U e A: quatro. Uma figurinha errada derruba a alternativa inteira.'}
+ ],
+ dica:'Vogal é A, E, I, O, U. Ponha um pontinho embaixo de cada vogal do nome e vá até a ÚLTIMA letra da palavra.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc hit">L<b>A</b>R<b>A</b>NJ<b>A</b></span><span class="pc hit">D<b>E</b>NT<b>E</b></span><span class="pc hit">P<b>O</b>RC<b>O</b></span></div>'+
+        '<p class="vx">S&oacute; <b>A</b> na primeira, s&oacute; <b>E</b> na segunda, s&oacute; <b>O</b> na terceira. Repetir a mesma vogal pode. Trocar de vogal, n&atilde;o.</p>'+
+        '<div class="pcs"><span class="pc bad">CAVAL<b>O</b></span><span class="pc bad">ESTREL<b>A</b></span><span class="pc bad">C<b>A</b>D<b>E</b>RN<b>O</b></span><span class="pc bad">T<b>E</b>S<b>OU</b>R<b>A</b></span></div>'+
+        '<p class="vx">Em CAVALO e em ESTRELA a vogal que estraga est&aacute; na <b>&uacute;ltima letra</b>.</p>',
+ porque:'LARANJA usa só o A, três vezes. DENTE usa só o E, duas vezes. PORCO usa só o O, duas vezes. Nas outras entra uma segunda vogal: o O do fim de CAVALO, o A do fim de ESTRELA, o A, o E e o O de CADERNO, e as quatro de TESOURA.',
+ proximo:'Passe o dedo pela palavra até a última letra e só então conte os pontinhos. Na alternativa com três nomes, confira os três antes de marcar.'},
+
+{id:'TR54', eixo:'contar', origem:'Treino no estilo da prova',
+ pede:'QUAL DAS FRASES ABAIXO TEM MAIS CONSOANTES DO QUE VOGAIS?',
+ opts:[
+  {t:'A MENINA VIU UMA ABELHA NA AREIA.', no:'Esta frase tem 16 vogais e 10 consoantes: as vogais ganham. Em VIU e em AREIA as vogais vêm grudadas umas nas outras.'},
+  {t:'MARTA COMPROU PRATOS BRANCOS.', ok:1},
+  {t:'O PAPAGAIO COMEU A GOIABA MADURA.', no:'Esta frase tem 17 vogais e 10 consoantes: as vogais ganham. PAPAGAIO sozinha já traz cinco vogais.'},
+  {t:'A MOEDA DOURADA CAIU DEBAIXO DA MESA DA COZINHA.', no:'Esta frase tem 22 vogais e 17 consoantes: as vogais ganham. Ela é a mais comprida das quatro, e é o tamanho que puxa a mão para ela.'}
+ ],
+ dica:'Vogal é A, E, I, O, U — todo o resto é consoante. Em cada frase, procure os lugares em que duas consoantes estão coladas e os lugares em que duas vogais estão coladas.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc hit">MPR</span><span class="pc hit">PR</span><span class="pc hit">TS</span><span class="pc hit">BR</span><span class="pc hit">NC</span></div>'+
+        '<p class="vx">Em <b>MARTA COMPROU PRATOS BRANCOS</b> as consoantes andam grudadas o tempo todo: <b>9 vogais</b> contra <b>16 consoantes</b>.</p>'+
+        '<div class="pcs"><span class="pc bad">VIU</span><span class="pc bad">AREIA</span><span class="pc bad">PAPAGAIO</span><span class="pc bad">GOIABA</span><span class="pc bad">CAIU</span><span class="pc bad">DEBAIXO</span></div>'+
+        '<p class="vx">Nas outras tr&ecirc;s frases quem anda grudada &eacute; a <b>vogal</b>. As contas dessas tr&ecirc;s: 16 a 10, 17 a 10 e 22 a 17, sempre a favor das vogais.</p>',
+ porque:'MARTA COMPROU PRATOS BRANCOS tem 9 vogais e 16 consoantes. As consoantes vêm grudadas em MPR, PR, TS, BR e NC. Nas outras três frases as vogais é que vêm grudadas, e elas ganham em todas: 16 a 10, 17 a 10 e 22 a 17.',
+ proximo:'Antes de contar, olhe onde as letras estão coladas. Depois faça a conta das quatro frases e só então compare os números.'},
+
+{id:'TR55', eixo:'contar', origem:'Treino no estilo da prova',
+ enun:'BEATRIZ COPIOU UMA FRASE DO QUADRO CORRENDO E ESQUECEU DE DEIXAR ESPAÇO ENTRE AS PALAVRAS. VEJA COMO FICOU:',
+ quadro:'OPASSARINHOPEQUENOPOUSOUEMCIMADOMURODACASA.',
+ pede:'QUANTOS ESPAÇOS FALTAM PARA CONSERTAR A FRASE DE BEATRIZ?',
+ opts:[
+  {t:'8.', no:'Oito sai de quem cola duas palavras numa só na hora de separar, como EM CIMA virando EMCIMA. Aí a frase fica com nove palavras. Separando com cuidado são dez.'},
+  {t:'9.', ok:1},
+  {t:'10.', no:'Dez é o número de PALAVRAS da frase. A pergunta é de ESPAÇOS, e o espaço mora entre duas palavras: ele é sempre um a menos.'},
+  {t:'11.', no:'Onze é contar as dez palavras e ainda pôr um espaço depois do ponto final. Depois do ponto a frase acabou: ali não entra espaço nenhum.'}
+ ],
+ dica:'Primeiro separe a frase e escreva as palavras uma do lado da outra. Só depois conte os buraquinhos ENTRE elas.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc">O</span><span class="pc">PASSARINHO</span><span class="pc">PEQUENO</span><span class="pc">POUSOU</span><span class="pc bad">EM</span><span class="pc">CIMA</span><span class="pc bad">DO</span><span class="pc">MURO</span><span class="pc bad">DA</span><span class="pc">CASA</span></div>'+
+        '<p class="vx">S&atilde;o <b>10</b> palavras. As tr&ecirc;s em destaque s&atilde;o as curtinhas, as que somem quando a gente l&ecirc; r&aacute;pido.</p>'+
+        '<div class="pcs"><span class="pc hit">10 palavras</span><span class="arw">&rarr;</span><span class="pc hit">9 espa&ccedil;os</span></div>'+
+        '<p class="vx">O espa&ccedil;o mora <b>entre</b> duas palavras. Por isso ele &eacute; sempre <b>um a menos</b> que o n&uacute;mero de palavras.</p>',
+ porque:'Separando, a frase é O PASSARINHO PEQUENO POUSOU EM CIMA DO MURO DA CASA: dez palavras. Entre dez palavras cabem nove espaços, porque não tem espaço antes da primeira nem depois do ponto final.',
+ proximo:'Separe a frase inteira e escreva as palavras no papel. Depois conte as palavras e tire um: esse é o número de espaços.'},
+
+{id:'TR56', eixo:'contar', origem:'Treino no estilo da prova',
+ enun:'LEIA A FRASE ABAIXO COM O DEDO, BEM DEVAGAR:',
+ quadro:'O MENINO COMPROU OITO OVOS NO MERCADO.',
+ pede:'QUANTAS VEZES A LETRA O APARECE NESSA FRASE?',
+ opts:[
+  {t:'7.', no:'Sete é o número de PALAVRAS da frase. A pergunta é quantas vezes a LETRA aparece, e COMPROU, OITO e OVOS têm dois O cada uma.'},
+  {t:'8.', no:'Oito é o que sobra quando as palavras curtas somem da conta. O primeiro O da frase está sozinho e o NO tem O: cada um vale um pontinho.'},
+  {t:'9.', no:'Nove é um O a menos. O que escapa costuma ser o segundo O de COMPROU, espremido entre o R e o U.'},
+  {t:'10.', ok:1}
+ ],
+ dica:'Vá de uma palavra por vez e escreva o número de O em cima de cada uma. Só depois some tudo.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc hit"><b>O</b> = 1</span><span class="pc hit">MENIN<b>O</b> = 1</span><span class="pc hit">C<b>O</b>MPR<b>O</b>U = 2</span><span class="pc hit"><b>O</b>IT<b>O</b> = 2</span><span class="pc hit"><b>O</b>V<b>O</b>S = 2</span><span class="pc hit">N<b>O</b> = 1</span><span class="pc hit">MERCAD<b>O</b> = 1</span></div>'+
+        '<p class="vx">1 + 1 + 2 + 2 + 2 + 1 + 1 = <b>10</b></p>'+
+        '<div class="pcs"><span class="pc bad">7 palavras com O</span><span class="arw">&rarr;</span><span class="pc bad">a pergunta n&atilde;o &eacute; essa</span></div>'+
+        '<p class="vx"><span class="dm">COMPROU, OITO e OVOS valem <b>dois</b> pontinhos cada. &Eacute; o que separa o 7 do 10.</span></p>',
+ porque:'Contando letra por letra: O tem 1, MENINO tem 1, COMPROU tem 2, OITO tem 2, OVOS tem 2, NO tem 1 e MERCADO tem 1. Somando: 1+1+2+2+2+1+1 = 10.',
+ proximo:'Escreva o número em cima de cada palavra e some no fim. Não conte de cabeça, e não pule as palavras de uma ou duas letras.'},
+
+{id:'TR57', eixo:'contar', origem:'Treino no estilo da prova',
+ enun:'LEIA A FRASE ABAIXO COM O DEDO, UMA PALAVRA POR VEZ:',
+ quadro:'A PROFESSORA PASSOU SEIS LIVROS PARA A CLASSE.',
+ pede:'QUANTAS VEZES A LETRA S APARECE NESSA FRASE?',
+ opts:[
+  {t:'5.', no:'Cinco é o número de PALAVRAS que têm S: PROFESSORA, PASSOU, SEIS, LIVROS e CLASSE. A pergunta é quantas vezes a LETRA aparece, e quatro dessas palavras têm dois S cada uma.'},
+  {t:'6.', no:'Seis sai de quem lê o SS como se fosse um S só. Em PROFESSORA, PASSOU e CLASSE são duas letras coladas, e cada uma pede o seu pontinho.'},
+  {t:'8.', no:'Oito é um S a menos, e o que escapa é o último de tudo: o S do fim de LIVROS ou o segundo S de SEIS, que está na última letra.'},
+  {t:'9.', ok:1}
+ ],
+ dica:'Escreva o número de S em cima de cada palavra. Onde aparecer SS, marque dois pontinhos, não um.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc hit">PROFE<b>SS</b>ORA = 2</span><span class="pc hit">PA<b>SS</b>OU = 2</span><span class="pc hit"><b>S</b>EI<b>S</b> = 2</span><span class="pc hit">LIVRO<b>S</b> = 1</span><span class="pc hit">CLA<b>SS</b>E = 2</span></div>'+
+        '<p class="vx">2 + 2 + 2 + 1 + 2 = <b>9</b></p>'+
+        '<div class="pcs"><span class="pc bad">5 palavras com S</span><span class="arw">&rarr;</span><span class="pc bad">a pergunta n&atilde;o &eacute; essa</span></div>'+
+        '<p class="vx"><span class="dm">A, PARA e A n&atilde;o t&ecirc;m S nenhum. O <b>SS</b> vale dois pontinhos: quem conta um s&oacute; para no seis.</span></p>',
+ porque:'Contando letra por letra: PROFESSORA tem 2, PASSOU tem 2, SEIS tem 2 (o do começo e o do fim), LIVROS tem 1 e CLASSE tem 2. As outras palavras não têm nenhum. Somando: 2+2+2+1+2 = 9.',
+ proximo:'Marque dois pontinhos onde a palavra tiver duas letras iguais coladas. Depois vá até a última letra de cada palavra antes de somar.'},
+
+{id:'TR58', eixo:'contar', origem:'Treino no estilo da prova',
+ enun:'NO CIRCO, O MÁGICO CONTOU O SEGREDO DELE:',
+ quadro:'&mdash; S&Oacute; CONSIGO FAZER SUMIR AS COISAS CUJO NOME USA UMA &Uacute;NICA VOGAL, MESMO QUE ELA APARE&Ccedil;A V&Aacute;RIAS VEZES!',
+ pede:'QUAL DAS COISAS ABAIXO O MÁGICO CONSEGUE FAZER SUMIR?',
+ opts:[
+  {t:'ESPELHO.', no:'ESPELHO termina em LHO: tem E, E e O. São duas vogais diferentes. Os dois primeiros pedaços, ES-PE, só têm E — é ali que o dedo para de conferir.'},
+  {t:'ANEL.', no:'ANEL tem o A do começo e o E do fim: A-N-E-L. São duas vogais diferentes numa palavra de quatro letras.'},
+  {t:'PENTE.', ok:1},
+  {t:'TAMBOR.', no:'TAMBOR tem o A do primeiro pedaço e o O do segundo: TAM-BOR. São duas vogais diferentes.'}
+ ],
+ dica:'Vogal é A, E, I, O, U. Soletre a palavra inteira, do começo ao fim, e faça um pontinho em cada vogal.',
+ truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ visual:'<div class="pcs"><span class="pc hit">P<b>E</b>NT<b>E</b></span><span class="arw">&rarr;</span><span class="pc hit">s&oacute; E, duas vezes</span></div>'+
+        '<div class="pcs"><span class="pc bad">ESP<b>E</b>LH<b>O</b></span><span class="pc bad"><b>A</b>N<b>E</b>L</span><span class="pc bad">T<b>A</b>MB<b>O</b>R</span></div>'+
+        '<p class="vx">Nas tr&ecirc;s de baixo entram <b>duas</b> vogais diferentes. Repetir a mesma vogal pode. Trocar de vogal, n&atilde;o.</p>',
+ porque:'PENTE usa só a vogal E, mesmo aparecendo duas vezes: P-E-N-T-E. Nas outras entra uma segunda vogal: o O de ESPELHO, o E de ANEL e o O de TAMBOR.',
+ proximo:'Soletre a palavra em voz baixa, letra por letra, até o fim. A segunda vogal costuma aparecer no último pedaço.'},
+
+{id:'TR59', eixo:'contar', origem:'Treino no estilo da prova',
+ enun:'A MESMA LETRA NEM SEMPRE FAZ O MESMO BARULHO EM DUAS PALAVRAS DIFERENTES.',
+ pede:'ENTRE AS LETRAS ABAIXO, QUAL É A ÚNICA QUE NÃO MUDA DE SOM NAS DUAS PALAVRAS INDICADAS?',
+ opts:[
+  {t:'LETRA S: SOL, ROSA.', no:'Fale as duas em voz alta. SOL começa com o barulho de cobra: sssol. O S de ROSA fica espremido entre duas vogais e sai como Z: ro-Z-a.'},
+  {t:'LETRA P: PATO, COPO.', ok:1},
+  {t:'LETRA X: PEIXE, EXAME.', no:'Fale as duas em voz alta. O X de PEIXE faz o barulho de CHI. O X de EXAME sai como Z: e-Z-ame.'},
+  {t:'LETRA R: RIO, PERA.', no:'Fale as duas em voz alta. O R de RIO é forte, igual ao RR de CARRO. O R de PERA é fraquinho, batidinho. Esse é o par mais difícil de escutar.'}
+ ],
+ dica:'Aqui não adianta olhar: fale as duas palavras de cada alternativa em voz alta, baixinho, e escute a letra.',
+ truque:'Quando a pergunta fala de SOM, fale as palavras em voz alta e escute. Olhar não resolve.',
+ visual:'<div class="pcs"><span class="pc hit">PATO</span><span class="pc hit">COPO</span><span class="arw">&rarr;</span><span class="pc hit">mesmo som</span></div>'+
+        '<div class="pcs"><span class="pc bad">SOL</span><span class="pc bad">ROSA</span><span class="arw">&rarr;</span><span class="pc bad">S e Z</span></div>'+
+        '<div class="pcs"><span class="pc bad">PEIXE</span><span class="pc bad">EXAME</span><span class="arw">&rarr;</span><span class="pc bad">CHI e Z</span></div>'+
+        '<div class="pcs"><span class="pc bad">RIO</span><span class="pc bad">PERA</span><span class="arw">&rarr;</span><span class="pc bad">R forte e R fraco</span></div>',
+ porque:'O P faz o mesmo barulho em PATO e em COPO. Nas outras três, a mesma letra muda de som de uma palavra para a outra: o S vira Z em ROSA, o X vira Z em EXAME e o R forte de RIO vira o R fraquinho de PERA.',
+ proximo:'Fale as duas palavras de cada alternativa baixinho, uma atrás da outra. Marque só aquela em que a letra sair com o mesmo barulho nas duas.'},
+
+{id:'TR60', eixo:'intruso', origem:'Treino no estilo da prova',
+ enun:'TOMÁS PASSOU O DIA NA CHÁCARA DA VOVÓ E FOI ANOTANDO NUM PAPEL OS BICHOS QUE ENCONTRAVA. NA HORA DE ESCREVER DEPRESSA, ELE SE ATRAPALHOU E ANOTOU UMA PALAVRA QUE NÃO É BICHO.',
+ pede:'QUAL É ESSA PALAVRA?',
+ opts:[
+  {t:'MOSCA.', no:'A mosca é um bicho: ela voa e pousa na comida. Ela pertence à lista de bichos.'},
+  {t:'MORCEGO.', no:'O morcego é um bicho: ele voa de noite e dorme de cabeça para baixo. Ele pertence à lista de bichos.'},
+  {t:'MOCHILA.', ok:1},
+  {t:'MOSQUITO.', no:'O mosquito é um bicho: é ele que zune no ouvido e pica. Ele pertence à lista de bichos.'}
+ ],
+ dica:'As quatro começam com MO e têm um som parecido: por aí não dá para decidir. Pense no que cada palavra SIGNIFICA.',
+ truque:'O que os outros três têm de igual? Quem não tem isso é o intruso.',
+ visual:'<div class="pcs"><span class="pc hit">MOSCA</span><span class="pc hit">MORCEGO</span><span class="pc hit">MOSQUITO</span><span class="arw">&rarr;</span><span class="pc hit">bichos</span></div>'+
+        '<div class="pcs"><span class="pc bad">MOCHILA</span><span class="arw">&rarr;</span><span class="pc bad">coisa de carregar nas costas</span></div>'+
+        '<p class="vx">Mochila &eacute; onde se guarda o caderno para ir &agrave; escola. Ela n&atilde;o anda, n&atilde;o voa e n&atilde;o come.</p>',
+ porque:'Três das quatro são bichos: mosca, morcego e mosquito. MOCHILA é uma coisa que a gente carrega nas costas — não tem o que fazer numa lista de bichos.',
+ proximo:'Tape com o dedo o comecinho igual das quatro palavras. Depois diga em voz alta o que cada uma é: bicho ou coisa.'},
+
+{id:'TR61', eixo:'intruso', origem:'Treino no estilo da prova',
+ pede:'QUE PALAVRA NÃO FAZ PARTE DO GRUPO DE PALAVRAS A SEGUIR?',
+ opts:[
+  {t:'BOCA.', no:'A boca é uma parte do corpo da gente: é com ela que se come e se fala. Ela fica no grupo.'},
+  {t:'BONECA.', ok:1},
+  {t:'BARRIGA.', no:'A barriga é uma parte do corpo da gente: é ela que dói quando se come demais. Ela fica no grupo.'},
+  {t:'BRAÇO.', no:'O braço é uma parte do corpo da gente: é com ele que se abraça e se carrega peso. Ele fica no grupo.'}
+ ],
+ dica:'As quatro começam com B, e BOCA e BONECA soam quase iguais. Faça a mesma pergunta para as quatro: isso é uma parte do MEU corpo?',
+ truque:'O que os outros três têm de igual? Quem não tem isso é o intruso.',
+ visual:'<div class="pcs"><span class="pc hit">BOCA</span><span class="pc hit">BARRIGA</span><span class="pc hit">BRA&Ccedil;O</span><span class="arw">&rarr;</span><span class="pc hit">partes do corpo</span></div>'+
+        '<div class="pcs"><span class="pc bad">BONECA</span><span class="arw">&rarr;</span><span class="pc bad">brinquedo</span></div>'+
+        '<p class="vx">BOCA e BONECA come&ccedil;am com o mesmo <b>BO</b>. Uma fica no meu rosto. A outra fica na caixa de brinquedos.</p>',
+ porque:'BOCA, BARRIGA e BRAÇO são partes do corpo da gente. BONECA é um brinquedo: a gente pega na mão, e ela não faz parte do nosso corpo.',
+ proximo:'Faça uma pergunta só e faça ela para as quatro palavras. Aqui a pergunta foi: isso é uma parte do meu corpo? Marque a que responder não.'},
+
+{id:'TR62', eixo:'intruso', origem:'Treino no estilo da prova',
+ enun:'A PROFESSORA MANDOU UM BILHETE PEDINDO QUE CADA CRIANÇA LEVASSE PARA A AULA COISAS QUE SERVEM PARA ESCREVER. NO BILHETE DE DAVI ENTROU UMA COISA QUE NÃO SERVE PARA ISSO.',
+ pede:'QUAL DELAS NÃO SERVE PARA ESCREVER?',
+ opts:[
+  {t:'LÁPIS.', no:'O lápis escreve, e ainda dá para apagar depois. Ele pertence ao bilhete.'},
+  {t:'CANETA.', no:'A caneta escreve: é a mais usada de todas para isso. Ela pertence ao bilhete.'},
+  {t:'CANECA.', ok:1},
+  {t:'GIZ.', no:'O giz é o pauzinho branco que escreve no quadro. Ele pertence ao bilhete.'}
+ ],
+ dica:'CANETA e CANECA são quase a mesma palavra: muda uma letra só. Não decida pelo som — pergunte para que serve cada coisa.',
+ truque:'O que os outros três têm de igual? Quem não tem isso é o intruso.',
+ visual:'<div class="pcs"><span class="pc hit">L&Aacute;PIS</span><span class="pc hit">CANETA</span><span class="pc hit">GIZ</span><span class="arw">&rarr;</span><span class="pc hit">escrevem</span></div>'+
+        '<div class="pcs"><span class="pc bad">CANECA</span><span class="arw">&rarr;</span><span class="pc bad">serve para beber</span></div>'+
+        '<div class="pcs"><span class="pc">CANE<b>T</b>A</span><span class="arw">&rarr;</span><span class="pc">CANE<b>C</b>A</span></div>'+
+        '<p class="vx">Uma letra separa as duas palavras: o <b>T</b> e o <b>C</b>. Uma escreve. A outra segura o leite.</p>',
+ porque:'LÁPIS, CANETA e GIZ servem para escrever. CANECA serve para beber. Ela é parecidíssima com CANETA no som, e é aí que a questão pega.',
+ proximo:'Quando duas palavras forem quase iguais, leia as duas letra por letra com o dedo. Depois diga em voz alta o que cada coisa faz.'},
+
+{id:'TR63', eixo:'intruso', origem:'Treino no estilo da prova',
+ enun:'AS QUATRO PALAVRAS ABAIXO SÃO COISAS QUE A GENTE FAZ. TRÊS DELAS A GENTE FAZ COM A MESMA PARTE DO CORPO.',
+ pede:'QUAL DAS PALAVRAS ABAIXO NÃO É UMA COISA QUE A GENTE FAZ COM A BOCA?',
+ opts:[
+  {t:'CANTAR.', no:'Cantar é com a boca: é dela que sai a música. Fica no grupo.'},
+  {t:'COMER.', no:'Comer é com a boca: é ela que mastiga. Fica no grupo.'},
+  {t:'CORRER.', ok:1},
+  {t:'CONVERSAR.', no:'Conversar é falar com alguém, e falar é com a boca. Fica no grupo.'}
+ ],
+ dica:'As quatro começam com CA ou CO e as quatro são coisas que a gente faz. Faça cada uma de mentirinha e repare que parte do corpo se mexe.',
+ truque:'O que os outros três têm de igual? Quem não tem isso é o intruso.',
+ visual:'<div class="pcs"><span class="pc hit">CANTAR</span><span class="pc hit">COMER</span><span class="pc hit">CONVERSAR</span><span class="arw">&rarr;</span><span class="pc hit">com a boca</span></div>'+
+        '<div class="pcs"><span class="pc bad">CORRER</span><span class="arw">&rarr;</span><span class="pc bad">com as pernas</span></div>'+
+        '<p class="vx">As quatro come&ccedil;am quase igual: CA, CO, CO, CO. Quem junta as palavras pelo come&ccedil;o n&atilde;o acha o intruso.</p>',
+ porque:'CANTAR, COMER e CONVERSAR são coisas que a gente faz com a boca. CORRER a gente faz com as pernas: é a única que não usa a boca.',
+ proximo:'Faça cada palavra de mentirinha, uma por vez, e veja que parte do corpo se mexe. Não junte as palavras pelo comecinho igual.'},
+
+{id:'TR64', eixo:'intruso', origem:'Treino no estilo da prova',
+ enun:'LEIA O TRECHO ABAIXO E MARQUE A PALAVRA QUE PODERIA ENTRAR NO LUGAR DE EXAUSTO.',
+ quadro:'TIAGO CORREU A TARDE INTEIRA ATR&Aacute;S DA BOLA. QUANDO O SOL SE P&Ocirc;S, ELE CHEGOU EM CASA <b>EXAUSTO</b> E DORMIU ANTES DAS OITO.',
+ pede:'QUE PALAVRA PODERIA ENTRAR NO LUGAR DE EXAUSTO?',
+ opts:[
+  {t:'ANIMADO.', no:'Leia a frase com ela dentro: "CHEGOU EM CASA ANIMADO E DORMIU ANTES DAS OITO". As duas partes brigam: quem está animado não vai dormir tão cedo.'},
+  {t:'CANSADO.', ok:1},
+  {t:'DESCANSADO.', no:'Descansado é quem não gastou energia. O texto diz que o Tiago correu a tarde inteira atrás da bola. A palavra briga com a pista.'},
+  {t:'ACORDADO.', no:'Acordado é quem não está dormindo. O texto já diz que ele chegou em casa, então isso não conta nada de novo. E logo depois ele dorme.'}
+ ],
+ dica:'Você não precisa saber o que é EXAUSTO. Tire a palavra, ponha a nova e leia a frase toda. As pistas moram do lado: CORREU A TARDE INTEIRA e DORMIU ANTES DAS OITO.',
+ truque:'Tire a palavra velha, ponha a nova, leia a frase de novo. Continua dizendo a mesma coisa?',
+ visual:'<p class="vx"><span class="mk">CORREU A TARDE INTEIRA</span> ... <span class="mk">DORMIU ANTES DAS OITO</span></p>'+
+        '<p class="vx">CHEGOU EM CASA <b class="mk">CANSADO</b> <span class="dm">&mdash; continua dizendo a mesma coisa</span></p>'+
+        '<p class="vx">CHEGOU EM CASA <b class="bad2">DESCANSADO</b> <span class="dm">&mdash; briga: ele correu a tarde inteira</span></p>'+
+        '<p class="vx">CHEGOU EM CASA <b class="bad2">ANIMADO</b> <span class="dm">&mdash; briga: quem est&aacute; animado n&atilde;o dorme &agrave;s oito</span></p>',
+ porque:'As duas pistas estão grudadas na palavra: ele CORREU A TARDE INTEIRA e DORMIU ANTES DAS OITO. Quem corre a tarde toda e cai no sono cedo chegou em casa CANSADO.',
+ proximo:'Leia a linha de antes e a de depois da palavra difícil. Depois ponha cada alternativa no lugar dela e leia a frase inteira em voz alta.'},
+
+{id:'TR65', eixo:'intruso', origem:'Treino no estilo da prova',
+ enun:'LEIA O TRECHO ABAIXO E MARQUE A PALAVRA QUE PODERIA ENTRAR NO LUGAR DE VELOZ.',
+ quadro:'NA CORRIDA DA ESCOLA, BRUNO FOI O MAIS <b>VELOZ</b> DE TODOS. ELE CRUZOU A LINHA DE CHEGADA BEM ANTES DO SEGUNDO COLOCADO.',
+ pede:'QUE PALAVRA PODERIA ENTRAR NO LUGAR DE VELOZ?',
+ opts:[
+  {t:'RÁPIDO.', ok:1},
+  {t:'DEVAGAR.', no:'Ponha DEVAGAR no lugar e leia: "FOI O MAIS DEVAGAR DE TODOS". A frase seguinte diz que ele cruzou a chegada bem antes dos outros. As duas brigam.'},
+  {t:'FORTE.', no:'Forte fala da força do corpo. A pista do texto fala de CRUZAR A LINHA DE CHEGADA BEM ANTES, e isso é sobre correr depressa. Numa corrida a gente pensa logo em força: é aí que ela atrai.'},
+  {t:'ALEGRE.', no:'Alegre fala do que a pessoa está sentindo. O texto não fala do que o Bruno sentiu: ele fala de chegar na frente.'}
+ ],
+ dica:'Você não precisa saber o que é VELOZ. Tire a palavra, ponha a nova e leia a frase seguinte: ela dá a pista.',
+ truque:'Tire a palavra velha, ponha a nova, leia a frase de novo. Continua dizendo a mesma coisa?',
+ visual:'<p class="vx">FOI O MAIS <b class="mk">VELOZ</b>. ELE <span class="mk">CRUZOU A LINHA DE CHEGADA BEM ANTES</span>...</p>'+
+        '<p class="vx">FOI O MAIS <b class="mk">R&Aacute;PIDO</b> <span class="dm">&mdash; continua dizendo a mesma coisa</span></p>'+
+        '<p class="vx">FOI O MAIS <b class="bad2">DEVAGAR</b> <span class="dm">&mdash; briga com chegar na frente</span></p>'+
+        '<p class="vx">FOI O MAIS <b class="bad2">FORTE</b> <span class="dm">&mdash; fala de for&ccedil;a, e a pista fala de chegar antes</span></p>',
+ porque:'A frase seguinte explica a palavra: ele CRUZOU A LINHA DE CHEGADA BEM ANTES DO SEGUNDO COLOCADO. Quem chega bem antes é quem corre mais depressa. VELOZ quer dizer RÁPIDO.',
+ proximo:'Ache no texto a linha que fala da palavra difícil. Depois pergunte de cada alternativa: ela fala dessa mesma coisa?'},
+
+{id:'TR66', eixo:'intruso', origem:'Treino no estilo da prova',
+ enun:'NO RECREIO, A TURMA BRINCAVA DE ADIVINHAR UMA PALAVRA SECRETA. A TIA FOI DANDO AS PISTAS UMA POR UMA:',
+ quadro:'A PALAVRA TEM TR&Ecirc;S S&Iacute;LABAS.<div class="sep"></div>COME&Ccedil;A COM A LETRA C.<div class="sep"></div>&Eacute; UM BICHO.<div class="sep"></div>N&Atilde;O SABE VOAR.',
+ pede:'QUAL É A PALAVRA SECRETA?',
+ opts:[
+  {t:'CABRA.', no:'Bata palma em CABRA: CA-BRA, dois pedaços. A primeira pista pede três, e ela cai logo ali.'},
+  {t:'CADEIRA.', no:'Cadeira não é bicho: é onde a gente senta. Ela passa nas duas primeiras pistas e cai na terceira.'},
+  {t:'CAVALO.', ok:1},
+  {t:'CORUJA.', no:'A coruja voa. A quarta pista pede um bicho que não voa, e ela cai ali. Ela passa nas três primeiras pistas: é a armadilha para quem para antes do fim.'}
+ ],
+ dica:'São quatro pistas. Uma pista de cada vez: a cada pista, risque quem não passa. Quem sobrar no fim é a resposta.',
+ truque:'Uma pista de cada vez. A cada pista, risque quem não passa. Quem sobrar é a resposta.',
+ visual:'<div class="pcs"><span class="pc">CA</span><span class="pc">VA</span><span class="pc">LO</span><span class="arw">&rarr;</span><span class="pc hit">3 peda&ccedil;os</span></div>'+
+        '<p class="vx">come&ccedil;a com C <b>sim</b> &middot; &eacute; bicho <b>sim</b> &middot; sabe voar <b>n&atilde;o</b> &mdash; passou nas quatro.</p>'+
+        '<div class="pcs"><span class="pc bad">CA BRA</span><span class="arw">&rarr;</span><span class="pc bad">2 peda&ccedil;os</span></div>'+
+        '<div class="pcs"><span class="pc bad">CADEIRA</span><span class="arw">&rarr;</span><span class="pc bad">n&atilde;o &eacute; bicho</span></div>'+
+        '<div class="pcs"><span class="pc bad">CORUJA</span><span class="arw">&rarr;</span><span class="pc bad">voa</span></div>',
+ porque:'CAVALO passa nas quatro pistas ao mesmo tempo: CA-VA-LO tem três pedaços, começa com C, é bicho e não voa. CORUJA passa em três pistas e cai na quarta.',
+ proximo:'Escreva as quatro alternativas no papel e risque uma a cada pista. Só marque depois de usar a última pista.'},
+
+
+/* ===== reserva_treino_G ===== */
+{id:'TR79', eixo:'alfabeto', origem:'Treino no estilo da prova',
+ enun:'A MÃE DA CLARA ESCREVEU A LISTA DO LANCHE DA SEMANA EM UMA ORDEM. UM DOS LANCHES BORROU E NÃO DÁ MAIS PARA LER:',
+ quadro:'<span class="lst"><b>L</b>EITE</span><span class="lst"><b>M</b>A&Ccedil;&Atilde;</span>'+
+        '<span class="lst vaz">_____________</span><span class="lst"><b>O</b>VO</span><span class="lst"><b>P</b>IPOCA</span>',
+ pede:'QUAL LANCHE COMPLETA O ESPAÇO EM BRANCO DESSA LISTA?',
+ opts:[
+  {t:'QUEIJO.', no:'QUEIJO começa com Q, e o Q vem depois do P. Esse lanche continuaria a lista embaixo da pipoca. O buraco não é no fim da lista: é no meio, entre o M e o O.'},
+  {t:'NOZ.', ok:1},
+  {t:'MEL.', no:'MEL começa com M, e o M já está na lista: é a MAÇÃ, logo em cima do buraco. O dedo do alfabeto não volta para trás.'},
+  {t:'SUCO.', no:'SUCO começa com S. O S vem depois do P, ainda mais longe do buraco do que o Q do queijo.'}
+ ],
+ dica:'Olhe só a primeira letra de cada lanche, de cima para baixo. Que ordem é essa?',
+ truque:'Cante o alfabeto com o dedo andando: A B C D E F G. Onde o dedo pula, tem buraco.',
+ visual:'<div class="pcs"><span class="pc hit">L</span><span class="pc hit">M</span><span class="pc bad">?</span>'+
+        '<span class="pc hit">O</span><span class="pc hit">P</span></div>'+
+        '<p class="vx">Entre o <b>M</b> e o <b>O</b> falta o <b>N</b>. O lanche tem de come&ccedil;ar com N: NOZ.</p>'+
+        '<div class="pcs"><span class="pc bad">Q</span><span class="pc bad">S</span><span class="arw">&rarr;</span>'+
+        '<span class="pc bad">v&ecirc;m DEPOIS do P, no fim da lista</span></div>',
+ porque:'Os lanches estão na ordem do alfabeto: L, M, ?, O, P. Entre o M e o O falta o N. O único lanche que começa com N é NOZ.',
+ proximo:'Com o buraco no meio, olhe a letra de ANTES e a de DEPOIS dele. A resposta fica espremida entre as duas.'},
+
+{id:'TR80', eixo:'alfabeto', origem:'Treino no estilo da prova',
+ pede:'EM QUAL DAS PALAVRAS ABAIXO CADA LETRA VEM DEPOIS DA ANTERIOR NO ALFABETO, DA PRIMEIRA ATÉ A ÚLTIMA?',
+ opts:[
+  {t:'MESA.', no:'MESA volta no segundo passo. Depois do M vem o E, e o E fica atrás do M no alfabeto.'},
+  {t:'BOTA.', no:'BOTA volta na última letra. Depois do T vem o A, que é o começo do alfabeto. As três primeiras letras andam para a frente, e é aí que a maioria para de conferir.'},
+  {t:'FLOR.', ok:1},
+  {t:'SUCO.', no:'SUCO volta na terceira letra. Depois do U vem o C, e o C fica quase no começo do alfabeto.'}
+ ],
+ dica:'Cante o alfabeto e vá andando com o dedo dentro da palavra: da primeira letra para a segunda, da segunda para a terceira, até a última.',
+ truque:'Cante o alfabeto com o dedo andando. Cada letra tem de vir DEPOIS da anterior, até o fim da palavra.',
+ visual:'<div class="pcs"><span class="pc hit">F</span><span class="arw">&rarr;</span><span class="pc hit">L</span><span class="arw">&rarr;</span>'+
+        '<span class="pc hit">O</span><span class="arw">&rarr;</span><span class="pc hit">R</span></div>'+
+        '<p class="vx">Em FLOR o dedo s&oacute; anda para a frente, at&eacute; a &uacute;ltima letra.</p>'+
+        '<div class="pcs"><span class="pc hit">B</span><span class="arw">&rarr;</span><span class="pc hit">O</span><span class="arw">&rarr;</span>'+
+        '<span class="pc hit">T</span><span class="arw">&rarr;</span><span class="pc bad">A</span></div>'+
+        '<p class="vx">Em BOTA o dedo anda tr&ecirc;s vezes e <b>volta</b> na &uacute;ltima letra.</p>',
+ porque:'Em FLOR o dedo só anda para a frente no alfabeto: F, depois L, depois O, depois R. Nenhuma letra volta, e a palavra chega inteira até o fim.',
+ proximo:'Vá até a ÚLTIMA letra sempre. A palavra que engana é a que anda certinho quase até o fim e escorrega no último passo.'},
+
+{id:'TR81', eixo:'alfabeto', origem:'Treino no estilo da prova',
+ enun:'O TÉO ESCREVEU, EM UMA ORDEM, AS COISAS QUE TEM NA CASA DELE. DEPOIS APAGOU UMA SEM QUERER:',
+ quadro:'<span class="lst"><b>P</b>ANELA</span><span class="lst"><b>Q</b>UADRO</span>'+
+        '<span class="lst vaz">_____________</span><span class="lst"><b>S</b>OF&Aacute;</span><span class="lst"><b>T</b>APETE</span>',
+ pede:'QUAL PALAVRA COMPLETA O ESPAÇO EM BRANCO DESSA LISTA?',
+ opts:[
+  {t:'VASO.', no:'VASO começa com V, e o V vem depois do T. Essa palavra continuaria a lista embaixo do tapete. O buraco ficou no meio, entre o Q e o S.'},
+  {t:'PORTA.', no:'PORTA começa com P, e o P já está na lista: é a PANELA, a primeira de todas. O dedo do alfabeto não volta para trás.'},
+  {t:'RÁDIO.', ok:1},
+  {t:'JANELA.', no:'JANELA começa com J. O J vem antes do P, então essa palavra ficaria acima da panela, fora do buraco.'}
+ ],
+ dica:'Olhe só a primeira letra de cada coisa, de cima para baixo. Que ordem é essa?',
+ truque:'Cante o alfabeto com o dedo andando: A B C D E F G. Onde o dedo pula, tem buraco.',
+ visual:'<div class="pcs"><span class="pc hit">P</span><span class="pc hit">Q</span><span class="pc bad">?</span>'+
+        '<span class="pc hit">S</span><span class="pc hit">T</span></div>'+
+        '<p class="vx">Entre o <b>Q</b> e o <b>S</b> falta o <b>R</b>. A palavra tem de come&ccedil;ar com R: R&Aacute;DIO.</p>'+
+        '<div class="pcs"><span class="pc bad">J</span><span class="arw">&rarr;</span><span class="pc bad">antes da lista</span>'+
+        '<span class="pc bad">V</span><span class="arw">&rarr;</span><span class="pc bad">depois da lista</span></div>',
+ porque:'As coisas estão na ordem do alfabeto: P, Q, ?, S, T. Entre o Q e o S falta o R. A única palavra que começa com R é RÁDIO.',
+ proximo:'Antes de marcar, pergunte: essa palavra CONTINUA a lista ou TAPA o buraco? Só a que tapa o buraco serve.'},
+
+{id:'TR82', eixo:'alfabeto', origem:'Treino no estilo da prova',
+ enun:'LEIA A CHARADA ABAIXO. QUEM SOU EU?',
+ texto:['ESTOU NO RATO QUE CORRE PELA COZINHA,',
+        'ESTOU NA PORTA QUE RANGE DEVAGAR,',
+        'SOU O SOM DO CARRO QUE ACELERA: RRRUM,',
+        'E MORO ENTRE O Q E O S NO ALFABETO.'],
+ pede:'QUAL LETRA ESTÁ FALANDO NA CHARADA?',
+ opts:[
+  {t:'A LETRA O.', no:'O O não passa na última pista. Entre o Q e o S mora o R; o O mora entre o N e o P. O O aparece em RATO, em PORTA e em CARRO: passa em três pistas, e é por isso que ele atrai.'},
+  {t:'A LETRA R.', ok:1},
+  {t:'A LETRA T.', no:'O T não está em CARRO. E o T mora entre o S e o U, não entre o Q e o S. Ele aparece em RATO e em PORTA, e para por aí.'},
+  {t:'A LETRA C.', no:'O C não está em RATO nem em PORTA. E o C mora entre o B e o D, no começo do alfabeto. Ele aparece só em CARRO, a palavra da pista do som.'}
+ ],
+ dica:'Cada verso é uma pista para a MESMA letra. Ache a letra que aparece nas três primeiras. Depois confira se ela também passa na última.',
+ truque:'Na charada, a letra fala dela mesma. Pense na forma dela e no som dela — e confira TODAS as pistas.',
+ visual:'<div class="pcs"><span class="pc hit"><b>R</b>ATO</span><span class="pc hit">PO<b>R</b>TA</span>'+
+        '<span class="pc hit">carro faz <b>RRR</b>UM</span><span class="pc hit">Q &middot; <b>R</b> &middot; S</span></div>'+
+        '<p class="vx">As quatro pistas fecham no <b>R</b>.</p>'+
+        '<div class="pcs"><span class="pc hit">RAT<b>O</b></span><span class="pc hit">P<b>O</b>RTA</span>'+
+        '<span class="pc hit">CARR<b>O</b></span><span class="pc bad">Q &middot; O? &middot; S</span></div>'+
+        '<p class="vx">O <span class="bad2">O</span> passa em tr&ecirc;s pistas e morre na quarta. &Eacute; a que ningu&eacute;m confere.</p>',
+ porque:'O R está em RATO. Está em PORTA. É o som do carro acelerando, rrrum. E é a letra que fica entre o Q e o S. Só o R passa nas quatro pistas.',
+ proximo:'Leia a ÚLTIMA pista antes de marcar. Na charada, a letra que engana passa em três e morre na quarta.'},
+
+{id:'TR83', eixo:'alfabeto', origem:'Treino no estilo da prova',
+ enun:'LEIA A CHARADA ABAIXO. QUEM SOU EU?',
+ texto:['ESTOU NA FACA QUE CORTA O BOLO,',
+        'ESTOU NA FADA DA HISTÓRIA,',
+        'ESTOU NA FESTA DE ANIVERSÁRIO,',
+        'E VENHO LOGO DEPOIS DO E NO ALFABETO.'],
+ pede:'QUAL LETRA ESTÁ FALANDO NA CHARADA?',
+ opts:[
+  {t:'A LETRA A.', no:'O A não passa na última pista. O A é a PRIMEIRA letra do alfabeto e não vem depois de ninguém. Ele aparece em FACA, em FADA e em FESTA: passa em três pistas, e é por isso que ele atrai.'},
+  {t:'A LETRA E.', no:'Quem vem logo depois do E é outra letra, nunca o próprio E. O E também não está em FACA nem em FADA. Ele aparece em FESTA e está escrito na última pista, e é isso que puxa o olho.'},
+  {t:'A LETRA F.', ok:1},
+  {t:'A LETRA C.', no:'O C não está em FADA nem em FESTA. E quem vem logo depois do E não é o C: o C fica entre o B e o D. Ele aparece só em FACA.'}
+ ],
+ dica:'As três primeiras pistas são palavras. Ache a letra que aparece nas três. Depois cante o alfabeto para conferir a última.',
+ truque:'Na charada, cada linha é uma pista da mesma letra. Confira as quatro antes de marcar.',
+ visual:'<div class="pcs"><span class="pc hit"><b>F</b>ACA</span><span class="pc hit"><b>F</b>ADA</span>'+
+        '<span class="pc hit"><b>F</b>ESTA</span><span class="pc hit">E &middot; <b>F</b> &middot; G</span></div>'+
+        '<p class="vx">As quatro pistas fecham no <b>F</b>.</p>'+
+        '<div class="pcs"><span class="pc hit">F<b>A</b>C<b>A</b></span><span class="pc hit">F<b>A</b>D<b>A</b></span>'+
+        '<span class="pc hit">FEST<b>A</b></span><span class="pc bad">depois do E? n&atilde;o</span></div>'+
+        '<p class="vx">O <span class="bad2">A</span> passa em tr&ecirc;s e morre na quarta: ele &eacute; o come&ccedil;o do alfabeto.</p>',
+ porque:'O F está em FACA, em FADA e em FESTA. E é a letra que vem logo depois do E no alfabeto. Só o F passa nas quatro pistas.',
+ proximo:'Depois de achar a letra que aparece nas palavras, cante o alfabeto para conferir a pista do lugar. É ela que decide.'},
+
+{id:'TR84', eixo:'alfabeto', origem:'Treino no estilo da prova',
+ enun:'LEIA A CHARADA ABAIXO. QUEM SOU EU?',
+ texto:['ESTOU NA BOLA QUE VOCÊ CHUTA,',
+        'ESTOU NO BOLO QUE A VOVÓ FAZ,',
+        'ESTOU NA BOLSA DA SUA MÃE,',
+        'E MORO ENTRE O A E O C NO ALFABETO.'],
+ pede:'QUAL LETRA ESTÁ FALANDO NA CHARADA?',
+ opts:[
+  {t:'A LETRA B.', ok:1},
+  {t:'A LETRA L.', no:'O L não passa na última pista. O L mora entre o K e o M, longe do começo do alfabeto. Ele aparece em BOLA, em BOLO e em BOLSA: passa em três pistas, e é por isso que ele atrai.'},
+  {t:'A LETRA S.', no:'O S não está em BOLA nem em BOLO. E o S mora entre o R e o T. Ele aparece só em BOLSA.'},
+  {t:'A LETRA C.', no:'Quem mora ENTRE o A e o C não pode ser o próprio C: ele é uma das pontas. O C também não aparece em BOLA, em BOLO nem em BOLSA. Ele está escrito na última pista, e é isso que puxa o olho.'}
+ ],
+ dica:'As três primeiras pistas são palavras. Ache a letra que aparece nas três. Depois cante o alfabeto para conferir a última.',
+ truque:'Na charada, cada linha é uma pista da mesma letra. Confira as quatro antes de marcar.',
+ visual:'<div class="pcs"><span class="pc hit"><b>B</b>OLA</span><span class="pc hit"><b>B</b>OLO</span>'+
+        '<span class="pc hit"><b>B</b>OLSA</span><span class="pc hit">A &middot; <b>B</b> &middot; C</span></div>'+
+        '<p class="vx">As quatro pistas fecham no <b>B</b>.</p>'+
+        '<div class="pcs"><span class="pc hit">BO<b>L</b>A</span><span class="pc hit">BO<b>L</b>O</span>'+
+        '<span class="pc hit">BO<b>L</b>SA</span><span class="pc bad">A &middot; L? &middot; C</span></div>'+
+        '<p class="vx">O <span class="bad2">L</span> passa em tr&ecirc;s e morre na quarta: ele mora entre o K e o M.</p>',
+ porque:'O B está em BOLA, em BOLO e em BOLSA. E é a letra que fica entre o A e o C no alfabeto. Só o B passa nas quatro pistas.',
+ proximo:'Quando a pista diz ENTRE duas letras, risque as duas na hora. A resposta é a que fica espremida no meio delas.'},
+
+{id:'TR85', eixo:'alfabeto', origem:'Treino no estilo da prova',
+ enun:'LEIA A CHARADA ABAIXO. QUEM SOU EU?',
+ texto:['COMEÇO COM UM RISCO EM PÉ, DE CIMA A BAIXO,',
+        'ESTOU NA PIPA QUE VOA NO CÉU,',
+        'ESTOU NA PIPOCA DO CINEMA,',
+        'E VENHO LOGO DEPOIS DO O NO ALFABETO.'],
+ pede:'QUAL LETRA ESTÁ FALANDO NA CHARADA?',
+ opts:[
+  {t:'A LETRA I.', no:'O I não passa na última pista. Quem vem logo depois do O é outra letra; o I mora entre o H e o J. O I também é um risco em pé e aparece em PIPA e em PIPOCA: passa em três pistas, e é por isso que ele atrai.'},
+  {t:'A LETRA A.', no:'O A não começa com um risco em pé: ele é feito de dois riscos tortos e um deitado. E o A é a primeira letra do alfabeto, não vem depois do O. Ele aparece em PIPA e em PIPOCA.'},
+  {t:'A LETRA P.', ok:1},
+  {t:'A LETRA O.', no:'O O não tem risco em pé: ele é uma bolinha. Quem vem logo depois do O também não pode ser ele mesmo. Ele aparece em PIPOCA e está escrito na última pista, e é isso que puxa o olho.'}
+ ],
+ dica:'A primeira pista é sobre o DESENHO da letra. As duas do meio são palavras. A última é o lugar dela no alfabeto. Confira as quatro.',
+ truque:'Na charada, a letra fala dela mesma. Pense na forma dela e no som dela — e confira TODAS as pistas.',
+ visual:'<div class="pcs"><span class="pc hit">risco em p&eacute; + barriga = <b>P</b></span><span class="pc hit"><b>P</b>IPA</span>'+
+        '<span class="pc hit"><b>P</b>IPOCA</span><span class="pc hit">O &middot; <b>P</b> &middot; Q</span></div>'+
+        '<p class="vx">As quatro pistas fecham no <b>P</b>.</p>'+
+        '<div class="pcs"><span class="pc hit">risco em p&eacute; = I</span><span class="pc hit">P<b>I</b>PA</span>'+
+        '<span class="pc hit">P<b>I</b>POCA</span><span class="pc bad">depois do O? n&atilde;o</span></div>'+
+        '<p class="vx">O <span class="bad2">I</span> passa em tr&ecirc;s pistas e morre na quarta.</p>',
+ porque:'O P começa com um risco em pé. Está em PIPA e em PIPOCA. E é a letra que vem logo depois do O no alfabeto. Só o P passa nas quatro pistas.',
+ proximo:'Quando a charada fala do desenho da letra, desenhe as quatro no papel. Duas letras podem ter o mesmo risco, e aí é a pista do alfabeto que separa.'},
+
+{id:'TR86', eixo:'codigo', origem:'Treino no estilo da prova',
+ enun:'NA TABELA ABAIXO, CADA SÍMBOLO VALE UMA SÍLABA. A TABELA ESTÁ EMBARALHADA, E UM MESMO SÍMBOLO PODE APARECER MAIS DE UMA VEZ NA SEQUÊNCIA.',
+ quadro:'<table class="tbc"><tr><td>&#9733;</td><td>&#9632;</td><td>&#9829;</td><td>&#9650;</td><td>&#9679;</td><td>&#9670;</td><td>&#9788;</td><td>&#9660;</td></tr>'+
+        '<tr><td>TA</td><td>ES</td><td>MA</td><td>QUEM</td><td>PAN</td><td>LES</td><td>CAN</td><td>SEUS</td></tr></table>'+
+        '<div class="sep"></div><b>A SEQU&Ecirc;NCIA:</b><div class="seq">&#9650; &#9788; &#9733; &#9660; &#9829; &#9670; &#9632; &#9679; &#9733;</div>',
+ pede:'ESSA SEQUÊNCIA ESCONDE UM DITADO. JUNTE AS SÍLABAS NA ORDEM DOS SÍMBOLOS E ASSINALE A FRASE FORMADA.',
+ opts:[
+  {t:'QUEM CANTA MALES ESPANTA.', no:'Essa pulou o quarto símbolo. No lugar onde ela não escreve nada, a tabela diz SEUS. São nove símbolos na fila e sete pedaços nessa frase.'},
+  {t:'QUEM CANTA SEUS MALES ESPANTA.', ok:1},
+  {t:'QUEM CANTA SEUS MALES AFASTA.', no:'Essa troca o fim da frase. Os dois últimos símbolos valem ES e PAN, e AFAS não existe na tabela. Quem reconhece o ditado no meio do caminho completa de memória e cai aqui.'},
+  {t:'QUEM CANTA SEUS MALES ESPALHA.', no:'Essa troca a última palavra. O oitavo símbolo é o círculo preto, e o círculo preto vale PAN. LHA não existe na tabela.'}
+ ],
+ dica:'A estrela aparece duas vezes na sequência: na terceira posição e na última. Cada vez que ela aparece, você escreve a mesma sílaba de novo.',
+ truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
+ visual:'<div class="pcs"><span class="pc hit">QUEM</span><span class="pc hit">CAN</span><span class="pc hit">TA</span><span class="pc hit">SEUS</span>'+
+        '<span class="pc hit">MA</span><span class="pc hit">LES</span><span class="pc hit">ES</span><span class="pc hit">PAN</span><span class="pc hit">TA</span></div>'+
+        '<p class="vx">A estrela apareceu na 3&ordf; e na 9&ordf; posi&ccedil;&atilde;o, e nas duas vezes vale <b>TA</b>.</p>'+
+        '<div class="pcs"><span class="pc bad">AFAS</span><span class="arw">&rarr;</span><span class="pc bad">n&atilde;o existe na tabela</span>'+
+        '<span class="pc bad">LHA</span><span class="arw">&rarr;</span><span class="pc bad">n&atilde;o existe na tabela</span></div>',
+ porque:'Na ordem dos símbolos sai QUEM CAN-TA SEUS MA-LES ES-PAN-TA. A estrela vale TA e aparece duas vezes: uma no fim de CANTA e outra no fim de ESPANTA.',
+ proximo:'Quando um símbolo se repete, escreva a mesma sílaba nas duas vezes. Não invente uma sílaba nova só porque a frase ficaria mais bonita.'},
+
+{id:'TR87', eixo:'codigo', origem:'Treino no estilo da prova',
+ enun:'NA TABELA ABAIXO, CADA SÍMBOLO VALE UMA SÍLABA. A TABELA ESTÁ EMBARALHADA: É PRECISO CAÇAR CADA SÍMBOLO.',
+ quadro:'<table class="tbc"><tr><td>&#9679;</td><td>&#9733;</td><td>&#9650;</td><td>&#9829;</td><td>&#9670;</td><td>&#9632;</td><td>&#9788;</td><td>&#10022;</td></tr>'+
+        '<tr><td>VAI</td><td>LON</td><td>DE</td><td>GE</td><td>AO</td><td>VA</td><td>SE</td><td>GAR</td></tr></table>'+
+        '<div class="sep"></div><b>A SEQU&Ecirc;NCIA:</b><div class="seq">&#9650; &#9632; &#10022; &#9788; &#9679; &#9670; &#9733; &#9829;</div>',
+ pede:'ESSA SEQUÊNCIA ESCONDE UM DITADO. JUNTE AS SÍLABAS NA ORDEM DOS SÍMBOLOS E ASSINALE A FRASE FORMADA.',
+ opts:[
+  {t:'DEVAGAR SE VAI LONGE.', no:'Essa pulou o sexto símbolo. No lugar onde ela não escreve nada, a tabela diz AO. São oito símbolos na fila e sete pedaços nessa frase.'},
+  {t:'DEVAGAR SE VAI AO MAR.', no:'Essa troca o fim da frase. Os dois últimos símbolos valem LON e GE, e MAR não existe na tabela. Quem decifra metade e completa de memória cai aqui.'},
+  {t:'DEVAGAR SE VAI AO LONGE.', ok:1},
+  {t:'DEVAGAR SE VAI AO LONGO.', no:'Essa troca a última palavra. O último símbolo é o coração, e o coração vale GE. GO não existe na tabela.'}
+ ],
+ dica:'Escreva a sílaba embaixo de cada símbolo, um por um, sem pular nenhum. Só junte tudo depois que o último símbolo estiver escrito.',
+ truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
+ visual:'<div class="pcs"><span class="pc hit">DE</span><span class="pc hit">VA</span><span class="pc hit">GAR</span><span class="pc hit">SE</span>'+
+        '<span class="pc hit">VAI</span><span class="pc hit">AO</span><span class="pc hit">LON</span><span class="pc hit">GE</span></div>'+
+        '<p class="vx">Oito s&iacute;mbolos, oito peda&ccedil;os escritos. S&oacute; no fim a gente junta.</p>'+
+        '<div class="pcs"><span class="pc hit">LON</span><span class="pc hit">GE</span><span class="arw">&rarr;</span>'+
+        '<span class="pc bad">LON</span><span class="pc bad">GO</span></div>'+
+        '<p class="vx">Uma letra de diferen&ccedil;a no &uacute;ltimo peda&ccedil;o &mdash; e o GO nem est&aacute; na tabela.</p>',
+ porque:'Na ordem dos símbolos sai DE-VA-GAR SE VAI AO LON-GE: DEVAGAR SE VAI AO LONGE. As oito sílabas foram usadas na ordem em que os símbolos aparecem.',
+ proximo:'Confira as sílabas do FIM com o mesmo cuidado das do começo. É no fim que a memória tenta completar o ditado sozinha.'},
+
+{id:'TR88', eixo:'codigo', origem:'Treino no estilo da prova',
+ enun:'NA TABELA ABAIXO, CADA SÍMBOLO VALE UMA SÍLABA. A TABELA ESTÁ EMBARALHADA.',
+ quadro:'<table class="tbc"><tr><td>&#9733;</td><td>&#9632;</td><td>&#9679;</td><td>&#9650;</td><td>&#9660;</td><td>&#9670;</td><td>&#9829;</td><td>&#9788;</td><td>&#9834;</td><td>&#10022;</td></tr>'+
+        '<tr><td>LA</td><td>TEM</td><td>CHO</td><td>HO</td><td>DE</td><td>TE</td><td>BO</td><td>CO</td><td>JE</td><td>LO</td></tr></table>'+
+        '<div class="sep"></div><b>A SEQU&Ecirc;NCIA:</b><div class="seq">&#9650; &#9834; &#9632; &#9829; &#10022; &#9660; &#9679; &#9788; &#9733; &#9670;</div>',
+ nota:'Repare no fim da fila: os quatro últimos símbolos não formam quatro palavrinhas, formam UMA palavra só. É a parte em que todo mundo se perde.',
+ pede:'ESSA SEQUÊNCIA ESCONDE UMA FRASE. JUNTE AS SÍLABAS NA ORDEM DOS SÍMBOLOS E ASSINALE A FRASE FORMADA.',
+ opts:[
+  {t:'HOJE TEM BOLO CHOCOLATE.', no:'Essa pulou o sexto símbolo. No lugar onde ela não escreve nada, a tabela diz DE. São dez símbolos na fila e nove pedaços nessa frase.'},
+  {t:'HOJE TEM BOLO DE MORANGO.', no:'Essa troca o fim da frase. Os quatro últimos símbolos valem CHO, CO, LA e TE. MO, RAN e GO não existem na tabela. Quem lê metade e completa com o que gostaria de comer cai aqui.'},
+  {t:'HOJE TEM BOLO DE CHOCOLATE.', ok:1},
+  {t:'HOJE TEM BOLO DE CHOCOLATES.', no:'Essa põe um S que a fila não tem. A fila acaba no losango, e o losango vale TE. Não existe nenhum S na tabela.'}
+ ],
+ dica:'Escreva a sílaba embaixo de cada símbolo, um por um. Os quatro últimos, juntos, formam uma palavra só.',
+ truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
+ visual:'<div class="pcs"><span class="pc hit">HO</span><span class="pc hit">JE</span><span class="pc hit">TEM</span>'+
+        '<span class="pc hit">BO</span><span class="pc hit">LO</span><span class="pc hit">DE</span></div>'+
+        '<div class="pcs"><span class="pc hit">CHO</span><span class="pc hit">CO</span><span class="pc hit">LA</span><span class="pc hit">TE</span></div>'+
+        '<p class="vx">Os quatro &uacute;ltimos s&iacute;mbolos formam <b>uma palavra s&oacute;</b>: CHO-CO-LA-TE.</p>'+
+        '<div class="pcs"><span class="pc hit">TE</span><span class="arw">&rarr;</span><span class="pc bad">TES</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">n&atilde;o existe S na tabela</span></div>',
+ porque:'Na ordem dos símbolos sai HO-JE TEM BO-LO DE CHO-CO-LA-TE. Os quatro últimos símbolos formam uma palavra só, CHOCOLATE, e a fila acaba no símbolo que vale TE.',
+ proximo:'Nunca adivinhe o fim de um código porque reconheceu o começo. Vá até o último símbolo com o dedo.'},
+
+{id:'TR89', eixo:'codigo', origem:'Treino no estilo da prova',
+ enun:'NA TABELA ABAIXO, CADA SÍMBOLO VALE UMA SÍLABA. UM MESMO SÍMBOLO PODE APARECER MAIS DE UMA VEZ NA SEQUÊNCIA.',
+ quadro:'<table class="tbc"><tr><td>&#9660;</td><td>&#9733;</td><td>&#9650;</td><td>&#9829;</td><td>&#9632;</td><td>&#9788;</td><td>&#9670;</td><td>&#9679;</td><td>&#10022;</td></tr>'+
+        '<tr><td>DO</td><td>L&Atilde;O</td><td>CAI</td><td>SA</td><td>NA</td><td>A</td><td>B&Atilde;O</td><td>RU</td><td>BA</td></tr></table>'+
+        '<div class="sep"></div><b>A SEQU&Ecirc;NCIA:</b><div class="seq">&#9650; &#9650; &#10022; &#9733; &#9632; &#9679; &#9788; &#9660; &#9829; &#9670;</div>',
+ pede:'ESSA SEQUÊNCIA ESCONDE UM PEDACINHO DE UMA CANTIGA. JUNTE AS SÍLABAS NA ORDEM DOS SÍMBOLOS E ASSINALE A FRASE FORMADA.',
+ opts:[
+  {t:'CAI CAI BALÃO NA RUA SABÃO.', no:'Essa pulou o oitavo símbolo. No lugar onde ela não escreve nada, a tabela diz DO. São dez símbolos na fila e nove pedaços nessa frase.'},
+  {t:'CAI CAI BALÃO NA MINHA MÃO.', no:'Essa troca o fim da frase. Os últimos símbolos valem RU, A, DO, SA e BÃO. MI, NHA e MÃO não existem na tabela. Quem canta a música de memória completa o resto sem olhar a fila.'},
+  {t:'CAI CAI BALÃO NA RUA DO SABÃO.', ok:1},
+  {t:'CAI CAI BALÃO NA RUA DO JOÃO.', no:'Essa troca a última palavra. Os dois últimos símbolos valem SA e BÃO, e JO não existe na tabela. SABÃO e JOÃO terminam igual e passam no ouvido.'}
+ ],
+ dica:'O triângulo aparece duas vezes, logo no começo, um atrás do outro. Ele vale a mesma sílaba nas duas vezes.',
+ truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
+ visual:'<div class="pcs"><span class="pc hit">CAI</span><span class="pc hit">CAI</span><span class="pc hit">BA</span><span class="pc hit">L&Atilde;O</span>'+
+        '<span class="pc hit">NA</span><span class="pc hit">RU</span><span class="pc hit">A</span><span class="pc hit">DO</span>'+
+        '<span class="pc hit">SA</span><span class="pc hit">B&Atilde;O</span></div>'+
+        '<p class="vx">O tri&acirc;ngulo apareceu na 1&ordf; e na 2&ordf; posi&ccedil;&atilde;o, e nas duas vezes vale <b>CAI</b>.</p>'+
+        '<div class="pcs"><span class="pc hit">SA</span><span class="pc hit">B&Atilde;O</span><span class="arw">&rarr;</span>'+
+        '<span class="pc bad">JO</span><span class="pc bad">n&atilde;o existe na tabela</span></div>',
+ porque:'Na ordem dos símbolos sai CAI CAI BA-LÃO NA RU-A DO SA-BÃO. O triângulo vale CAI e aparece duas vezes seguidas, no começo da cantiga.',
+ proximo:'Símbolo repetido continua valendo a mesma peça. Escreva a sílaba nas duas vezes antes de ler a frase inteira.'},
+
+{id:'TR90', eixo:'codigo', origem:'Treino no estilo da prova',
+ enun:'NESTA TABELA, CADA SÍMBOLO VALE UMA LETRA — NÃO É UMA SÍLABA, É UMA LETRA SÓ. A TABELA ESTÁ EMBARALHADA.',
+ quadro:'<table class="tbc"><tr><td>&#9679;</td><td>&#9660;</td><td>&#9733;</td><td>&#9834;</td><td>&#9632;</td><td>&#9670;</td></tr>'+
+        '<tr><td>C</td><td>A</td><td>B</td><td>H</td><td>R</td><td>O</td></tr></table>'+
+        '<div class="sep"></div><b>A SEQU&Ecirc;NCIA:</b><div class="seq">&#9733; &#9670; &#9632; &#9632; &#9660; &#9679; &#9834; &#9660;</div>',
+ pede:'JUNTE AS LETRAS NA ORDEM DOS SÍMBOLOS. QUAL PALAVRA A SEQUÊNCIA FORMA?',
+ opts:[
+  {t:'BOLACHA.', no:'Essa põe um L que a tabela não tem. O terceiro e o quarto símbolos são o mesmo quadrado, e o quadrado vale R: são dois R seguidos. BOLACHA e BORRACHA passam quase igual no ouvido.'},
+  {t:'BORRACHA.', ok:1},
+  {t:'BARRACA.', no:'Essa erra a ordem das letras. O segundo símbolo é o losango, e o losango vale O, não A. As letras de BARRACA existem na tabela, e é isso que puxa o olho.'},
+  {t:'BORRACHAS.', no:'Essa põe um S que a fila não tem. A fila acaba no triângulo de ponta para baixo, e ele vale A. Não existe nenhum S na tabela.'}
+ ],
+ dica:'São oito símbolos, então a palavra tem oito letras. Escreva uma letra embaixo de cada símbolo antes de olhar as alternativas.',
+ truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
+ visual:'<div class="pcs"><span class="pc hit">B</span><span class="pc hit">O</span><span class="pc hit">R</span><span class="pc hit">R</span>'+
+        '<span class="pc hit">A</span><span class="pc hit">C</span><span class="pc hit">H</span><span class="pc hit">A</span></div>'+
+        '<p class="vx">Oito s&iacute;mbolos, oito letras: <b>BORRACHA</b>. O quadrado aparece duas vezes seguidas e vale <b>R</b> nas duas.</p>'+
+        '<div class="pcs"><span class="pc hit">B</span><span class="pc bad">A?</span><span class="arw">&rarr;</span>'+
+        '<span class="pc bad">o 2&ordm; s&iacute;mbolo vale O</span></div>'+
+        '<p class="vx">BARRACA usa letras que existem na tabela, mas na ordem errada.</p>',
+ porque:'Na ordem dos símbolos as letras são B, O, R, R, A, C, H, A: BORRACHA. São oito símbolos e oito letras — nenhuma sobra e nenhuma falta.',
+ proximo:'Conte os símbolos ANTES de escolher e veja se algum se repete. Ter as letras certas não basta: a ORDEM é que decide.'},
+
+{id:'TR91', eixo:'codigo', origem:'Treino no estilo da prova',
+ enun:'NA TABELA ABAIXO, CADA SÍMBOLO VALE UMA SÍLABA. A TABELA ESTÁ EMBARALHADA: É PRECISO CAÇAR CADA SÍMBOLO.',
+ quadro:'<table class="tbc"><tr><td>&#9632;</td><td>&#9733;</td><td>&#9660;</td><td>&#9679;</td><td>&#9829;</td><td>&#9650;</td><td>&#9670;</td><td>&#9788;</td><td>&#10022;</td></tr>'+
+        '<tr><td>QUE</td><td>MAIS</td><td>DO</td><td>LE</td><td>NUN</td><td>VA</td><td>CA</td><td>TAR</td><td>DE</td></tr></table>'+
+        '<div class="sep"></div><b>A SEQU&Ecirc;NCIA:</b><div class="seq">&#9733; &#9650; &#9679; &#9788; &#10022; &#9660; &#9632; &#9829; &#9670;</div>',
+ pede:'ESSA SEQUÊNCIA ESCONDE UM DITADO. JUNTE AS SÍLABAS NA ORDEM DOS SÍMBOLOS E ASSINALE A FRASE FORMADA.',
+ opts:[
+  {t:'MAIS VALE TARDE QUE NUNCA.', no:'Essa pulou o sexto símbolo. No lugar onde ela não escreve nada, a tabela diz DO. São nove símbolos na fila e oito pedaços nessa frase. Muita gente fala o ditado assim, e é por isso que ela atrai.'},
+  {t:'MAIS VALE CEDO DO QUE NUNCA.', no:'Essa troca a palavra do meio. O quarto e o quinto símbolos valem TAR e DE, e CE não existe na tabela.'},
+  {t:'MAIS VALE TARDE DO QUE NADA.', no:'Essa troca o fim da frase. Os dois últimos símbolos valem NUN e CA. NA e DA não existem na tabela.'},
+  {t:'MAIS VALE TARDE DO QUE NUNCA.', ok:1}
+ ],
+ dica:'Escreva a sílaba embaixo de cada símbolo, um por um, sem pular nenhum. Só junte tudo depois que o último símbolo estiver escrito.',
+ truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
+ visual:'<div class="pcs"><span class="pc hit">MAIS</span><span class="pc hit">VA</span><span class="pc hit">LE</span><span class="pc hit">TAR</span>'+
+        '<span class="pc hit">DE</span><span class="pc hit">DO</span><span class="pc hit">QUE</span><span class="pc hit">NUN</span><span class="pc hit">CA</span></div>'+
+        '<p class="vx">Nove s&iacute;mbolos, nove pe&ccedil;as escritas. S&oacute; no fim a gente junta.</p>'+
+        '<div class="pcs"><span class="pc bad">DO pulado</span><span class="arw">&rarr;</span>'+
+        '<span class="pc bad">sobra s&iacute;mbolo na fila</span></div>'+
+        '<p class="vx">O jeito de falar em casa n&atilde;o manda. Manda a fila de s&iacute;mbolos.</p>',
+ porque:'Na ordem dos símbolos sai MAIS VA-LE TAR-DE DO QUE NUN-CA: MAIS VALE TARDE DO QUE NUNCA. As nove sílabas da tabela foram usadas na ordem em que os símbolos aparecem.',
+ proximo:'Conte os símbolos e conte os pedaços da frase antes de marcar. Se os dois números não baterem, algum símbolo foi pulado.'},
+
+{id:'TR92', eixo:'codigo', origem:'Treino no estilo da prova',
+ enun:'NA TABELA ABAIXO, CADA SÍMBOLO VALE UMA SÍLABA. A TABELA ESTÁ EMBARALHADA, E UM MESMO SÍMBOLO PODE APARECER MAIS DE UMA VEZ NA SEQUÊNCIA.',
+ quadro:'<table class="tbc"><tr><td>&#9733;</td><td>&#9679;</td><td>&#9650;</td><td>&#9632;</td><td>&#9829;</td><td>&#9660;</td><td>&#9788;</td><td>&#9670;</td><td>&#9834;</td><td>&#10022;</td></tr>'+
+        '<tr><td>LA</td><td>VOU</td><td>A</td><td>ES</td><td>NH&Atilde;</td><td>RA</td><td>CO</td><td>MA</td><td>PA</td><td>EU</td></tr></table>'+
+        '<div class="sep"></div><b>A SEQU&Ecirc;NCIA:</b><div class="seq">&#9650; &#9670; &#9829; &#10022; &#9679; &#9834; &#9660; &#9650; &#9632; &#9788; &#9733;</div>',
+ nota:'Repare no fim da fila: os três últimos símbolos não formam três palavrinhas, formam UMA palavra só.',
+ pede:'ESSA SEQUÊNCIA ESCONDE UMA FRASE. JUNTE AS SÍLABAS NA ORDEM DOS SÍMBOLOS E ASSINALE A FRASE FORMADA.',
+ opts:[
+  {t:'AMANHÃ EU VOU PARA ESCOLA.', no:'Essa pulou o oitavo símbolo. No lugar onde ela não escreve nada, a tabela diz A. São onze símbolos na fila e dez pedaços nessa frase.'},
+  {t:'AMANHÃ EU VOU PARA A ESCOLA.', ok:1},
+  {t:'AMANHÃ EU VOU PARA A PRAIA.', no:'Essa troca o fim da frase. Os três últimos símbolos valem ES, CO e LA, e PRAI não existe na tabela. Quem decifra metade e completa com o passeio que prefere cai aqui.'},
+  {t:'AMANHÃ EU VOU PARA A ESCOLINHA.', no:'Essa põe dois pedaços que a fila não tem. A fila acaba na estrela, e a estrela vale LA. LI e NHA não existem na tabela.'}
+ ],
+ dica:'O triângulo aparece duas vezes: na primeira posição e na oitava. Ele vale a mesma sílaba nas duas vezes.',
+ truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
+ visual:'<div class="pcs"><span class="pc hit">A</span><span class="pc hit">MA</span><span class="pc hit">NH&Atilde;</span><span class="pc hit">EU</span>'+
+        '<span class="pc hit">VOU</span><span class="pc hit">PA</span><span class="pc hit">RA</span><span class="pc hit">A</span></div>'+
+        '<div class="pcs"><span class="pc hit">ES</span><span class="pc hit">CO</span><span class="pc hit">LA</span></div>'+
+        '<p class="vx">O tri&acirc;ngulo vale <b>A</b> nas duas vezes: no come&ccedil;o de AMANH&Atilde; e sozinho, antes de ESCOLA. Os tr&ecirc;s &uacute;ltimos s&iacute;mbolos formam <b>uma palavra s&oacute;</b>.</p>'+
+        '<div class="pcs"><span class="pc hit">PA</span><span class="pc hit">RA</span><span class="pc bad">A pulado</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">sobra s&iacute;mbolo na fila</span></div>',
+ porque:'Na ordem dos símbolos sai A-MA-NHÃ EU VOU PA-RA A ES-CO-LA. O triângulo vale A e aparece duas vezes: no começo de AMANHÃ e sozinho, antes de ESCOLA.',
+ proximo:'Sílaba de uma letra só também tem símbolo. Antes de marcar, confira se o número de pedaços da frase é igual ao número de símbolos da fila.'},
+
+
+/* ===== reserva_treino_H ===== */
+{id:'TR93', eixo:'placa', origem:'Treino no estilo da prova',
+ enun:'NA ESCOLA DO TEO TEVE UM TREINO: QUANDO O ALARME TOCA, TODO MUNDO SAI DA SALA E VAI PARA O PÁTIO. A PROFESSORA PAROU NO CORREDOR, APONTOU PARA UMA PLACA E DISSE:',
+ quadro:'&mdash; OLHEM BEM ESTA PLACA. &Eacute; ELA QUE MOSTRA POR ONDE A GENTE SAI.',
+ nota:'Na prova as quatro placas são desenhadas, e o desenho é a própria alternativa. Aqui cada placa vem descrita em palavras: a forma, a cor, se tem barra e o que está desenhado dentro.',
+ pede:'QUAL PLACA A PROFESSORA APONTOU?',
+ opts:[
+  {t:'UMA PLACA VERMELHA COM UM EXTINTOR DE INCÊNDIO DESENHADO DENTRO.', no:'No treino todo mundo fala de fogo, e essa placa é a cara do assunto. Mas ela mostra onde fica o extintor, o aparelho de apagar fogo. Não mostra por onde sair.'},
+  {t:'UMA PLACA VERDE COM UM HOMEM CORRENDO PARA UMA PORTA ABERTA DESENHADO DENTRO.', ok:1},
+  {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM UMA PESSOA ENTRANDO POR UMA PORTA DESENHADA DENTRO.', no:'A porta está lá, igualzinha à da placa certa, e por isso essa é a pegadinha forte. Mas o círculo vermelho cortado quer dizer PROIBIDO: essa manda NÃO entrar por aquela porta. Ela proíbe em vez de mostrar o caminho.'},
+  {t:'UM TRIÂNGULO AMARELO COM UM PONTO DE EXCLAMAÇÃO DESENHADO DENTRO.', no:'O triângulo amarelo avisa que tem perigo por perto, e num treino isso combina. Mas ele só diz CUIDADO: não tem porta nem gente andando, então não mostra caminho nenhum.'}
+ ],
+ dica:'Duas placas falam da mesma porta. O que muda de uma para a outra é o círculo vermelho cortado.',
+ truque:'Círculo vermelho cortado quer dizer PROIBIDO. O desenho de dentro diz o que é proibido.',
+ visual:'<div class="pcs"><span class="pc hit">placa verde</span><span class="arw">+</span><span class="pc hit">homem correndo para a porta</span>'+
+        '<span class="arw">&rarr;</span><span class="pc hit">a sa&iacute;da &eacute; por aqui</span></div>'+
+        '<div class="pcs"><span class="pc bad">c&iacute;rculo cortado</span><span class="arw">+</span><span class="pc hit">porta</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">proibido entrar por essa porta</span></div>'+
+        '<p class="vx">A mesma porta nas duas placas, e elas dizem coisas <b>contr&aacute;rias</b>. Quem decide &eacute; a barra.</p>'+
+        '<p class="vx"><span class="dm">Placa que MOSTRA um lugar nunca tem barra vermelha: a barra serve para proibir.</span></p>',
+ porque:'A professora disse que a placa MOSTRA por onde sair. A placa verde com o homem correndo para a porta aberta é a da saída. A do círculo cortado tem a mesma porta, mas com a barra ela proíbe entrar.',
+ proximo:'Pergunte sempre duas vezes: essa placa MOSTRA ou PROÍBE? e mostra (ou proíbe) O QUÊ? Se uma das duas respostas falhar, a placa não é a sua.'},
+
+{id:'TR94', eixo:'placa', origem:'Treino no estilo da prova',
+ enun:'NO DOMINGO, O AVÔ LEVOU PILAR PARA BRINCAR NA PRAÇA. ELA IA CORTAR CAMINHO POR CIMA DO GRAMADO, MAS PAROU NA FRENTE DE UMA PLACA E DISSE:',
+ quadro:'&mdash; VOV&Ocirc;, AQUI N&Atilde;O PODE PISAR NA GRAMA.',
+ nota:'Na prova as quatro placas são desenhadas, e o desenho é a própria alternativa. Aqui cada placa vem descrita em palavras: a forma, a cor, se tem barra e o que está desenhado dentro.',
+ pede:'QUAL PLACA PILAR VIU?',
+ opts:[
+  {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM UMA MÃO COLHENDO UMA FLOR DESENHADA DENTRO.', no:'Essa placa diz NÃO PODE de verdade, e quem procura só o círculo cortado marca esta. Mas o desenho de dentro é uma mão colhendo flor: ela proíbe colher as flores, não pisar na grama.'},
+  {t:'UMA PLACA VERDE COM UMA ÁRVORE E UM BANCO DESENHADOS DENTRO, SEM BARRA NENHUMA.', no:'É a placa da praça, o lugar onde os dois estão, e por isso ela parece a certa. Mas não tem círculo vermelho nem barra: sem a barra a placa não proíbe nada.'},
+  {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM UM PÉ PISANDO EM CIMA DE UMAS FOLHINHAS DE GRAMA DESENHADO DENTRO.', ok:1},
+  {t:'UM TRIÂNGULO AMARELO COM UMA ABELHA DESENHADA DENTRO.', no:'Esse triângulo avisa que tem abelha por perto, e numa praça com flores isso acontece mesmo. Mas ele não tem barra e não tem grama desenhada: não é o que Pilar disse.'}
+ ],
+ dica:'Pilar disse duas coisas ao mesmo tempo: NÃO PODE e PISAR NA GRAMA. Procure a placa que tem as duas.',
+ truque:'Círculo vermelho cortado quer dizer PROIBIDO. O desenho de dentro diz o que é proibido.',
+ visual:'<div class="pcs"><span class="pc hit">c&iacute;rculo vermelho cortado</span><span class="arw">+</span><span class="pc hit">p&eacute; em cima da grama</span>'+
+        '<span class="arw">&rarr;</span><span class="pc hit">proibido pisar na grama</span></div>'+
+        '<div class="pcs"><span class="pc hit">c&iacute;rculo cortado</span><span class="arw">+</span><span class="pc bad">m&atilde;o colhendo flor</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">pro&iacute;be colher flor</span></div>'+
+        '<div class="pcs"><span class="pc bad">&aacute;rvore e banco</span><span class="arw">+</span><span class="pc bad">sem barra</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">s&oacute; mostra a pra&ccedil;a</span></div>'+
+        '<p class="vx">As duas metades t&ecirc;m de fechar juntas. Uma s&oacute; n&atilde;o serve.</p>',
+ porque:'Pilar leu as duas metades da placa: o círculo vermelho cortado, que quer dizer PROIBIDO, e o pé em cima da grama, que diz o que é proibido. Só uma placa tem as duas coisas.',
+ proximo:'Quando a placa tiver a barra certa, não pare: olhe o desenho de dentro. É ele que diz o que está proibido.'},
+
+{id:'TR95', eixo:'placa', origem:'Treino no estilo da prova',
+ enun:'A TURMA DE CLARA FOI PASSEAR NUM MUSEU. NA PORTA DA SALA DOS DINOSSAUROS, CLARA IA ENTRAR MORDENDO UM SANDUÍCHE. ELA OLHOU A PLACA DA PORTA E PAROU:',
+ quadro:'&mdash; ESPERA! AQUI DENTRO N&Atilde;O PODE COMER NEM BEBER.',
+ nota:'Na prova as quatro placas são desenhadas, e o desenho é a própria alternativa. Aqui cada placa vem descrita em palavras: a forma, a cor, se tem barra e o que está desenhado dentro.',
+ pede:'QUAL PLACA CLARA VIU NA PORTA?',
+ opts:[
+  {t:'UMA PLACA COM UM SANDUÍCHE E UM COPO DESENHADOS DENTRO, SEM BARRA NENHUMA.', no:'O sanduíche e o copo estão lá, igualzinhos aos da placa certa, e quem procura só o desenho para aqui. Mas não tem círculo vermelho nem barra: sem a barra ela não proíbe nada — essa mostra o lugar de comer.'},
+  {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM UMA BOLA DESENHADA DENTRO.', no:'Essa placa diz NÃO PODE mesmo, e quem procura só o círculo cortado marca esta. Mas o desenho de dentro é uma bola: ela proíbe jogar bola.'},
+  {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM UM SANDUÍCHE E UM COPO DESENHADOS DENTRO.', ok:1},
+  {t:'UMA PLACA COM UM DINOSSAURO DESENHADO DENTRO.', no:'Essa placa mostra qual é a sala do passeio, a sala dos dinossauros. Ela não fala de comida e não tem barra vermelha.'}
+ ],
+ dica:'Duas placas têm sanduíche e copo desenhados. O que muda de uma para a outra é o círculo vermelho cortado.',
+ truque:'Círculo vermelho cortado quer dizer PROIBIDO. O desenho de dentro diz o que é proibido.',
+ visual:'<div class="pcs"><span class="pc hit">c&iacute;rculo vermelho cortado</span><span class="arw">+</span><span class="pc hit">sandu&iacute;che e copo</span>'+
+        '<span class="arw">&rarr;</span><span class="pc hit">proibido comer e beber</span></div>'+
+        '<div class="pcs"><span class="pc bad">sem barra</span><span class="arw">+</span><span class="pc hit">sandu&iacute;che e copo</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">aqui &Eacute; o lugar de comer</span></div>'+
+        '<p class="vx">O mesmo desenho dentro, e as duas placas dizem coisas <b>contr&aacute;rias</b>. Quem decide &eacute; a barra.</p>',
+ porque:'Clara disse NÃO PODE (a barra vermelha) e disse COMER NEM BEBER (o sanduíche e o copo). Só uma placa junta as duas coisas: a do círculo cortado com o sanduíche e o copo dentro.',
+ proximo:'Duas placas com o mesmo desenho dentro podem dizer o contrário uma da outra. Olhe a barra vermelha antes de decidir.'},
+
+{id:'TR96', eixo:'placa', origem:'Treino no estilo da prova',
+ enun:'NO MERCADO, UM MOÇO TINHA ACABADO DE LAVAR O CHÃO E DEIXOU UMA PLACA EM PÉ NO MEIO DO CORREDOR. A MÃE DE HUGO SEGUROU A MÃO DELE E DISSE:',
+ quadro:'&mdash; DEVAGAR, HUGO. ESSA PLACA AVISA QUE O CH&Atilde;O EST&Aacute; ESCORREGADIO.',
+ nota:'Na prova as quatro placas são desenhadas, e o desenho é a própria alternativa. Aqui cada placa vem descrita em palavras: a forma, a cor, se tem barra e o que está desenhado dentro.',
+ pede:'QUAL DESSAS PLACAS AVISA QUE O CHÃO ESTÁ ESCORREGADIO?',
+ opts:[
+  {t:'UM TRIÂNGULO AMARELO COM UMA PESSOA ESCORREGANDO NUM CHÃO MOLHADO DESENHADA DENTRO.', ok:1},
+  {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM DUAS CRIANÇAS CORRENDO DESENHADAS DENTRO.', no:'Em chão molhado ninguém deve correr, e é por isso que essa engana. Mas o círculo vermelho cortado quer dizer PROIBIDO: essa placa manda NÃO correr. Ela não avisa que o chão escorrega.'},
+  {t:'UM TRIÂNGULO AMARELO COM UM RAIO DESENHADO DENTRO.', no:'O triângulo amarelo é o mesmo da placa certa, e é aí que essa pega. Mas o desenho de dentro é um raio: ela avisa perigo de choque, não chão escorregadio.'},
+  {t:'UMA PLACA COM UM CARRINHO DE COMPRAS DESENHADO DENTRO E UMA SETA AO LADO.', no:'Essa placa mostra onde pegar o carrinho no mercado. Não tem ninguém escorregando e não avisa perigo nenhum.'}
+ ],
+ dica:'Duas placas são triângulos amarelos, e as duas avisam alguma coisa. O que muda é o desenho de dentro.',
+ truque:'Círculo vermelho cortado quer dizer PROIBIDO. O desenho de dentro diz o que é proibido.',
+ visual:'<div class="pcs"><span class="pc hit">tri&acirc;ngulo amarelo</span><span class="arw">&rarr;</span><span class="pc hit">CUIDADO, avisa</span>'+
+        '<span class="pc hit">pessoa escorregando</span><span class="arw">&rarr;</span><span class="pc hit">o ch&atilde;o escorrega</span></div>'+
+        '<div class="pcs"><span class="pc hit">tri&acirc;ngulo amarelo</span><span class="arw">+</span><span class="pc bad">raio</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">avisa outra coisa: choque</span></div>'+
+        '<div class="pcs"><span class="pc bad">c&iacute;rculo cortado</span><span class="arw">+</span><span class="pc bad">crian&ccedil;as correndo</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">PRO&Iacute;BE correr, n&atilde;o avisa</span></div>'+
+        '<p class="vx">O formato manda primeiro: tri&acirc;ngulo amarelo <b>avisa</b>, c&iacute;rculo cortado <b>pro&iacute;be</b>. Depois o desenho diz do qu&ecirc; se trata.</p>',
+ porque:'A mãe disse que a placa AVISA. Quem avisa é o triângulo amarelo, e o desenho de dentro tem de ser a pessoa escorregando no chão molhado. A do círculo cortado não avisa: ela proíbe correr.',
+ proximo:'Leia o formato antes do desenho: triângulo amarelo avisa, círculo vermelho cortado proíbe. Depois confira o que está desenhado dentro.'},
+
+{id:'TR97', eixo:'placa', origem:'Treino no estilo da prova',
+ enun:'NO PÁTIO DO PRÉDIO ONDE NINA MORA TEM UMA PAREDE TODA DE VIDRO. NINA CHEGOU COM A BOLA DEBAIXO DO BRAÇO, LEU A PLACA DA PAREDE E GUARDOU A BOLA:',
+ quadro:'&mdash; AQUI N&Atilde;O PODE JOGAR BOLA.',
+ nota:'Na prova as quatro placas são desenhadas, e o desenho é a própria alternativa. Aqui cada placa vem descrita em palavras: a forma, a cor, se tem barra e o que está desenhado dentro.',
+ pede:'QUAL PLACA NINA LEU?',
+ opts:[
+  {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM UMA BOLA DESENHADA DENTRO.', ok:1},
+  {t:'UMA PLACA AZUL COM UMA BOLA DESENHADA DENTRO E SEM BARRA NENHUMA.', no:'A bola está lá, e quem procura só a bola para aqui. Mas não tem círculo vermelho nem barra: sem a barra a placa não proíbe nada — essa mostra a quadra, o lugar de jogar.'},
+  {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM UM PATINETE DESENHADO DENTRO.', no:'Essa placa diz NÃO PODE de verdade, e quem procura só o círculo cortado marca esta. Mas o desenho de dentro é um patinete: ela proíbe andar de patinete, não jogar bola.'},
+  {t:'UMA PLACA COM UM ESCORREGADOR E UM BALANÇO DESENHADOS DENTRO.', no:'Essa placa mostra onde fica o parquinho. Não tem bola desenhada e não tem barra vermelha.'}
+ ],
+ dica:'Duas placas têm bola desenhada. O que muda de uma para a outra é o círculo vermelho cortado.',
+ truque:'Círculo vermelho cortado quer dizer PROIBIDO. O desenho de dentro diz o que é proibido.',
+ visual:'<div class="pcs"><span class="pc hit">c&iacute;rculo vermelho cortado</span><span class="arw">+</span><span class="pc hit">bola</span>'+
+        '<span class="arw">&rarr;</span><span class="pc hit">proibido jogar bola</span></div>'+
+        '<div class="pcs"><span class="pc bad">placa azul, sem barra</span><span class="arw">+</span><span class="pc hit">bola</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">aqui &Eacute; o lugar de jogar</span></div>'+
+        '<div class="pcs"><span class="pc hit">c&iacute;rculo cortado</span><span class="arw">+</span><span class="pc bad">patinete</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">pro&iacute;be o patinete</span></div>'+
+        '<p class="vx">Uma metade certa n&atilde;o basta. A placa de Nina tem a barra <b>E</b> a bola.</p>',
+ porque:'Nina disse NÃO PODE (a barra vermelha) e disse JOGAR BOLA (a bola desenhada). Só uma placa tem as duas coisas juntas.',
+ proximo:'Confira as quatro placas até achar a que tem a barra E o desenho que a história pediu. Parar na primeira metade certa é o erro.'},
+
+{id:'TR98', eixo:'placa', origem:'Treino no estilo da prova',
+ enun:'NO DOMINGO DE MANHÃ, A RUA DO BAIRRO FICA SÓ PARA AS PESSOAS PASSEAREM. UM HOMEM COLOCOU UMA PLACA NA ENTRADA DA RUA. O PAI DE ALICE OLHOU A PLACA E DISSE:',
+ quadro:'&mdash; HOJE AQUI N&Atilde;O PODE PASSAR CARRO.',
+ nota:'Na prova as quatro placas são desenhadas, e o desenho é a própria alternativa. Aqui cada placa vem descrita em palavras: a forma, a cor, se tem barra e o que está desenhado dentro.',
+ pede:'QUAL PLACA O PAI DE ALICE VIU?',
+ opts:[
+  {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM UMA MOTO DESENHADA DENTRO.', no:'Essa placa diz NÃO PODE mesmo, e quem procura só o círculo cortado marca esta. Mas o desenho de dentro é uma moto: ela proíbe a moto, e o pai falou de carro.'},
+  {t:'UMA PLACA AZUL COM UM CARRO DESENHADO DENTRO E SEM BARRA NENHUMA.', no:'O carro está lá, igualzinho ao da placa certa, e quem procura só o carro para aqui. Mas não tem círculo vermelho nem barra: sem a barra a placa não proíbe nada — essa mostra o caminho dos carros.'},
+  {t:'UM TRIÂNGULO AMARELO COM UM SEMÁFORO DESENHADO DENTRO.', no:'Esse triângulo avisa que tem um semáforo logo à frente. Ele avisa, mas não proíbe, e nem tem carro desenhado dentro.'},
+  {t:'UM CÍRCULO VERMELHO CORTADO POR UMA BARRA, COM UM CARRO DESENHADO DENTRO.', ok:1}
+ ],
+ dica:'O pai falou de CARRO, e não de moto. Ache a placa que proíbe e olhe bem o que está desenhado dentro dela.',
+ truque:'Círculo vermelho cortado quer dizer PROIBIDO. O desenho de dentro diz o que é proibido.',
+ visual:'<div class="pcs"><span class="pc hit">c&iacute;rculo vermelho cortado</span><span class="arw">+</span><span class="pc hit">carro</span>'+
+        '<span class="arw">&rarr;</span><span class="pc hit">proibido passar carro</span></div>'+
+        '<div class="pcs"><span class="pc hit">c&iacute;rculo cortado</span><span class="arw">+</span><span class="pc bad">moto</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">pro&iacute;be a moto</span></div>'+
+        '<div class="pcs"><span class="pc bad">placa azul, sem barra</span><span class="arw">+</span><span class="pc hit">carro</span>'+
+        '<span class="arw">&rarr;</span><span class="pc bad">caminho dos carros</span></div>'+
+        '<p class="vx">Tr&ecirc;s placas passam em <b>uma</b> das duas perguntas. S&oacute; a certa passa nas duas.</p>',
+ porque:'O pai disse NÃO PODE (a barra vermelha) e disse CARRO (o desenho de dentro). A da moto tem a barra mas o desenho errado; a azul tem o carro mas não tem barra.',
+ proximo:'Quebre a placa em duas perguntas: o que o formato manda (proibido, aviso, informação) e o que o desenho de dentro mostra.'},
+
+{id:'TR99', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O POEMA ABAIXO:',
+ texto:['MEU DENTE DA FRENTE BALANÇA,',
+        'BALANÇA E NÃO QUER PARAR.',
+        'EU EMPURRO COM A PONTA DA LÍNGUA,',
+        'MAS ELE NÃO QUER SE SOLTAR.',
+        'HOJE EU MORDI UMA MAÇÃ DURA',
+        'E O DENTE SAIU NUM SEGUNDO!',
+        'AGORA EU SORRIO NO ESPELHO',
+        'COM O MAIOR BURACO DO MUNDO.'],
+ pede:'QUAL TÍTULO MAIS COMBINA COM O POEMA INTEIRO?',
+ opts:[
+  {t:'A MAÇÃ DURA.', no:'A maçã aparece mesmo no poema, e é verdade que ele mordeu uma. Mas ela é só o que fez o dente cair: o poema inteiro não fala de maçã, fala do dente.'},
+  {t:'O DENTE QUE CAIU.', ok:1},
+  {t:'O MAIOR BURACO DO MUNDO.', no:'Essa vem da ÚLTIMA linha do poema. Mas a última linha não é o título: o buraco só aparece no fim, e o poema todo, do começo ao fim, é sobre o dente.'},
+  {t:'A FADA DO DENTE.', no:'Dente que cai lembra logo a fada do dente, e por isso essa dá vontade de marcar. Mas isso é a gente que sabe da vida: o poema não fala de fada nenhuma.'}
+ ],
+ dica:'O título fala do poema INTEIRO, não de uma linha só. Desça a régua até o fim e depois pergunte: do que ele fala do começo ao fim?',
+ truque:'O título é do poema inteiro, não de uma linha. Uma palavra solta não manda.',
+ acende:[0,3,5],
+ visual:'<p class="vx">O poema come&ccedil;a com <b class="mk">MEU DENTE DA FRENTE BALAN&Ccedil;A</b>, no meio diz que <b class="mk">ELE N&Atilde;O QUER SE SOLTAR</b> e depois que <b class="mk">O DENTE SAIU NUM SEGUNDO</b>.</p>'+
+        '<p class="vx">Do come&ccedil;o ao fim o assunto &eacute; um s&oacute;: o <b>dente</b>. A ma&ccedil;&atilde; e o buraco s&oacute; aparecem por causa dele.</p>'+
+        '<div class="pcs"><span class="pc hit">balan&ccedil;a</span><span class="arw">&rarr;</span><span class="pc hit">n&atilde;o solta</span><span class="arw">&rarr;</span><span class="pc hit">caiu</span></div>',
+ porque:'O poema conta a história do dente do começo ao fim: ele balança, não solta, e por fim cai quando o menino morde a maçã. A maçã e o buraco são pedaços dessa história, não o assunto dela.',
+ proximo:'Nunca tire o título da última linha. Leia o poema todo com a régua e pergunte: do que ele fala do começo ao fim?'},
+
+{id:'TR100', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O TEXTO ABAIXO:',
+ texto:['HOJE DE MANHÃ FAZIA SOL, MAS LARA SAIU DE CASA COM AS BOTAS DE BORRACHA NOS PÉS.',
+        'A AMIGA DELA RIU E PERGUNTOU POR QUE ELA ESTAVA COM AQUELAS BOTAS.',
+        'LARA EXPLICOU QUE, NA VOLTA DA ESCOLA, AS DUAS IAM PASSAR PELA RUA DE TERRA.',
+        'ONTEM CHOVEU A NOITE INTEIRA E A RUA DE TERRA FICOU CHEIA DE POÇAS.',
+        'NA VOLTA, A AMIGA CHEGOU EM CASA COM O TÊNIS TODO SUJO DE BARRO.',
+        'AÍ ELA DISSE: — DA PRÓXIMA VEZ EU TAMBÉM VOU DE BOTA!'],
+ pede:'POR QUE LARA SAIU DE CASA COM AS BOTAS DE BORRACHA?',
+ opts:[
+  {t:'PORQUE HOJE DE MANHÃ FAZIA SOL.', no:'É verdade que fazia sol, o texto diz isso na primeira linha. Mas sol não é motivo para calçar bota: essa parte da frase está ali justamente para mostrar que a bota não era por causa do tempo de agora.'},
+  {t:'PORQUE A RUA POR ONDE ELA IA VOLTAR ESTAVA CHEIA DE POÇAS.', ok:1},
+  {t:'PORQUE ESTAVA CHOVENDO NA HORA DE IR PARA A ESCOLA.', no:'Bota de borracha lembra chuva, e a gente calça bota quando chove — mas isso é a vida lá fora. No texto está escrito que de manhã fazia SOL.'},
+  {t:'PORQUE A AMIGA DELA TAMBÉM IA DE BOTA.', no:'Essa vem da ÚLTIMA linha. Mas repare na hora: a amiga só falou em usar bota DEPOIS, na volta, com o tênis sujo. Quando Lara escolheu a bota, isso ainda não tinha acontecido.'}
+ ],
+ dica:'A pergunta tem POR QUE. Volte com a régua e ache a linha em que Lara EXPLICA. A resposta dela vem logo em seguida.',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[2,3],
+ visual:'<p class="vx"><span class="mk">NA VOLTA DA ESCOLA, AS DUAS IAM PASSAR PELA RUA DE TERRA</span></p>'+
+        '<p class="vx"><span class="mk">ONTEM CHOVEU A NOITE INTEIRA E A RUA DE TERRA FICOU CHEIA DE PO&Ccedil;AS</span></p>'+
+        '<div class="pcs"><span class="pc hit">rua de terra com po&ccedil;a</span><span class="arw">&rarr;</span><span class="pc hit">bota de borracha</span></div>'+
+        '<p class="vx"><span class="dm">O sol de hoje de manh&atilde; est&aacute; no texto s&oacute; para mostrar que a bota n&atilde;o era por causa do tempo de agora.</span></p>',
+ porque:'Lara explica ela mesma: na volta as duas iam passar pela rua de terra, e essa rua ficou cheia de poças por causa da chuva de ontem. A bota era para a volta, não para o tempo da manhã.',
+ proximo:'Se a pergunta começa com POR QUE, procure a linha em que alguém EXPLICA. Marque só depois de achar essa linha.'},
+
+{id:'TR101', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O POEMA ABAIXO:',
+ texto:['A RUA DO MERCADO ACORDA CEDO,',
+        'CHEIA DE CAIXA E DE CAMINHÃO.',
+        'CHEIA DE GENTE QUE FALA ALTO,',
+        'CHEIA DE PRESSA E DE CONFUSÃO.',
+        'O MOÇO DAS BANANAS GRITA O PREÇO,',
+        'A MOÇA DO PEIXE GRITA MAIS ALTO.',
+        'LÁ NA MINHA RUA, DE TARDINHA,',
+        'SÓ SE OUVE O SINO DA IGREJINHA.'],
+ pede:'SEGUNDO O POEMA, COMO É A RUA DO MERCADO?',
+ opts:[
+  {t:'É UM LUGAR CHEIO E BARULHENTO.', ok:1},
+  {t:'É UMA RUA QUE FICA VAZIA DE MANHÃ CEDO.', no:'De manhã bem cedo a rua costuma estar vazia mesmo, e a gente pensa nisso sozinho. Mas o poema diz o contrário: essa rua ACORDA CEDO e já está cheia.'},
+  {t:'É UMA RUA ONDE SE VENDE BANANA E PEIXE.', no:'Isso é verdade, está escrito no poema. Só que a pergunta é COMO É a rua, e não o que vendem nela. Dizer o que se vende não diz como o lugar é.'},
+  {t:'É UM LUGAR CALADO, ONDE SÓ SE OUVE UM SINO.', no:'Essa vem da ÚLTIMA linha. Mas repare de qual rua a última linha fala: da MINHA rua, de tardinha. A pergunta é sobre a rua do mercado.'}
+ ],
+ dica:'Junte as palavras que o poema usa para falar dessa rua. Uma delas se repete três vezes: procure com a régua.',
+ truque:'Quando a pergunta é sobre como é um lugar, junte as palavras que o texto usa para descrever ele.',
+ acende:[1,2,3,5],
+ visual:'<div class="pcs"><span class="pc hit">CHEIA de caixa</span><span class="pc hit">CHEIA de gente</span><span class="pc hit">CHEIA de pressa</span></div>'+
+        '<div class="pcs"><span class="pc hit">FALA ALTO</span><span class="pc hit">GRITA O PRE&Ccedil;O</span><span class="pc hit">GRITA MAIS ALTO</span></div>'+
+        '<p class="vx">Somando as palavras que o poema repete: <b>cheia</b> tr&ecirc;s vezes e <b>grita</b> duas. Isso &eacute; um lugar cheio e barulhento.</p>'+
+        '<p class="vx"><span class="dm">A &uacute;ltima linha fala do sino, mas fala da OUTRA rua &mdash; a rua de quem escreve o poema.</span></p>',
+ porque:'O poema diz três vezes que a rua está CHEIA e mostra gente que FALA ALTO e GRITA duas vezes. Juntando essas palavras, a rua do mercado é um lugar cheio e barulhento.',
+ proximo:'Quando a pergunta é sobre o jeito de um lugar, não procure uma linha só. Junte as palavras que o texto repete.'},
+
+{id:'TR102', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O TEXTO ABAIXO:',
+ texto:['HOJE É SÁBADO, E MATEUS ESTÁ FAZENDO UM BOLO COM A MÃE.',
+        'ANTEONTEM ELE FOI AO MERCADO COM O PAI E ESCOLHEU OS OVOS.',
+        'AMANHÃ A PRIMA DELE VEM ALMOÇAR E VAI COMER UM PEDAÇO.',
+        'NO MÊS PASSADO A AVÓ MANDOU A RECEITA DENTRO DE UMA CARTA.',
+        'MATEUS DIZ QUE O BOLO DA AVÓ É O MELHOR DO MUNDO.'],
+ pede:'COM BASE NO TEXTO, O QUE ACONTECEU ANTES DE TUDO?',
+ opts:[
+  {t:'MATEUS COMEÇOU A FAZER O BOLO COM A MÃE.', no:'É verdade que ele está fazendo o bolo, e é a primeira coisa CONTADA. Mas ela é de HOJE: a ordem em que o texto conta não é a ordem em que aconteceu.'},
+  {t:'A AVÓ MANDOU A RECEITA DENTRO DE UMA CARTA.', ok:1},
+  {t:'A PRIMA DELE COMEU UM PEDAÇO DO BOLO.', no:'Se o bolo é para o almoço, a gente já imagina a prima comendo. Mas o texto diz AMANHÃ: isso ainda não aconteceu, então não pode ser o mais antigo.'},
+  {t:'MATEUS DISSE QUE O BOLO DA AVÓ É O MELHOR DO MUNDO.', no:'Essa vem da ÚLTIMA linha. Só que ela não tem hora nenhuma marcada: não diz ontem, nem mês passado, nem amanhã. Sem tempo, ela não entra na fila.'}
+ ],
+ dica:'Procure as palavrinhas de tempo: HOJE, ANTEONTEM, AMANHÃ, NO MÊS PASSADO. Ponha-as em fila antes de responder.',
+ truque:'Monte a fila do tempo: semana passada, ontem, hoje, semana que vem. Só então responda.',
+ acende:[0,1,2,3],
+ visual:'<div class="pcs"><span class="pc hit">M&Ecirc;S PASSADO<br>a receita</span><span class="arw">&rarr;</span><span class="pc">ANTEONTEM<br>os ovos</span>'+
+        '<span class="arw">&rarr;</span><span class="pc">HOJE<br>o bolo</span><span class="arw">&rarr;</span><span class="pc bad">AMANH&Atilde;<br>a prima</span></div>'+
+        '<p class="vx">O texto conta fora de ordem. Na fila do tempo, a receita &eacute; a mais antiga &mdash; e o almo&ccedil;o da prima nem aconteceu.</p>',
+ porque:'O texto conta os fatos fora de ordem. Na fila do tempo: mês passado (a receita), anteontem (os ovos), hoje (o bolo), amanhã (a prima). O mais antigo é a carta da avó com a receita.',
+ proximo:'Sublinhe as palavrinhas de tempo e monte a fila antes de responder. A ordem em que o texto conta quase nunca é a ordem em que aconteceu.'},
+
+{id:'TR103', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA O POEMA ABAIXO. A ÚLTIMA LINHA ESTÁ FALTANDO:',
+ texto:['HOJE DE MANHÃ, EM CIMA DA CAMA,',
+        'MINHA MÃE DEIXOU SEPARADA',
+        'A MINHA SAPATILHA COR-DE-ROSA.',
+        'NA MINHA SEMANA TEM UMA REGRA:',
+        'MAIÔ E TOUCA SÓ NA QUINTA, PRA NADAR,',
+        'SAPATILHA SÓ NA TERÇA, PRA DANÇAR,',
+        'BOLA E CHUTEIRA NA SEXTA, PRA JOGAR.',
+        'ENTÃO EU JÁ SEI QUE HOJE É',
+        '_______________________'],
+ pede:'MARQUE O VERSO QUE COMPLETA O POEMA.',
+ opts:[
+  {t:'QUINTA-FEIRA, DIA DE NADAR.', no:'A quinta está na regra do poema, isso é verdade. Mas a quinta é o dia do maiô e da touca, e em cima da cama a mãe deixou a sapatilha.'},
+  {t:'TERÇA-FEIRA, DIA DE DANÇAR.', ok:1},
+  {t:'SEXTA-FEIRA, DIA DE JOGAR.', no:'Essa vem da ÚLTIMA linha da regra, e a mão vai na última coisa que a gente leu. Mas a sexta é o dia da bola e da chuteira, e não da sapatilha.'},
+  {t:'SEGUNDA-FEIRA, DIA DE COMEÇAR.', no:'A segunda é o dia em que a semana começa, e por isso ela vem à cabeça sozinha. Mas a segunda não aparece em lugar nenhum da regra do poema.'}
+ ],
+ dica:'As quatro respostas rimam, então a rima não decide nada aqui. Ache na regra a linha que fala da sapatilha.',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[2,5],
+ visual:'<p class="vx">Em cima da cama estava <b class="mk">A MINHA SAPATILHA COR-DE-ROSA</b>.</p>'+
+        '<p class="vx">E a regra diz: <b class="mk">SAPATILHA S&Oacute; NA TER&Ccedil;A, PRA DAN&Ccedil;AR</b>.</p>'+
+        '<div class="pcs"><span class="pc hit">sapatilha</span><span class="arw">&rarr;</span><span class="pc hit">ter&ccedil;a</span>'+
+        '<span class="pc bad">mai&ocirc; e touca</span><span class="arw">&rarr;</span><span class="pc bad">quinta</span>'+
+        '<span class="pc bad">bola e chuteira</span><span class="arw">&rarr;</span><span class="pc bad">sexta</span></div>'+
+        '<p class="vx"><span class="dm">NADAR, DAN&Ccedil;AR, JOGAR e COME&Ccedil;AR rimam todas. Quem decide n&atilde;o &eacute; a rima: &eacute; o que estava em cima da cama.</span></p>',
+ porque:'A regra do poema diz que sapatilha é só na terça. Em cima da cama a mãe deixou a sapatilha cor-de-rosa. Então hoje é terça-feira, o dia de dançar.',
+ proximo:'Quando todas as respostas rimarem, a rima não escolhe nada. Ache no texto a regra e aplique ela na cena de hoje.'},
+
+{id:'TR104', eixo:'ler', origem:'Treino no estilo da prova',
+ enun:'LEIA A HISTORINHA ABAIXO:',
+ texto:['TODO DIA, DEPOIS DA AULA, MIGUEL CORRIA PARA SER O PRIMEIRO DA FILA DO LANCHE.',
+        'ELE EMPURRAVA OS COLEGAS, PASSAVA NA FRENTE E ÀS VEZES DERRUBAVA A MOCHILA DOS OUTROS.',
+        'UM DIA MIGUEL TROPEÇOU NA PORTA E O SUCO DELE CAIU TODO NO CHÃO.',
+        'ELE PEDIU AJUDA, MAS NINGUÉM QUIS DIVIDIR O LANCHE COM ELE.',
+        'A PROFESSORA DISSE: — QUEM EMPURRA OS AMIGOS FICA SEM AMIGO NA HORA DE PRECISAR.',
+        'NO DIA SEGUINTE, MIGUEL ENTROU NA FILA CALADO E ESPEROU A SUA VEZ.',
+        'AÍ CLARA CHEGOU E DIVIDIU O BOLO DELA COM ELE.'],
+ pede:'QUE LIÇÃO ESSA HISTORINHA ENSINA?',
+ opts:[
+  {t:'QUE MIGUEL DERRUBOU O SUCO NO CHÃO.', no:'Isso aconteceu mesmo, está escrito na historinha. Mas a pergunta é qual é a LIÇÃO, e contar uma coisa que aconteceu não é ensinar nada.'},
+  {t:'QUE É PRECISO CORRER PARA CHEGAR NA FRENTE DA FILA.', no:'Na vida a gente pensa assim: quem corre mais chega primeiro. Mas na historinha foi correndo e empurrando que Miguel ficou sozinho — ela ensina justamente o contrário.'},
+  {t:'QUEM TRATA MAL OS AMIGOS FICA SOZINHO NA HORA QUE PRECISA DE AJUDA.', ok:1},
+  {t:'QUE BOLO É MELHOR DE DIVIDIR DO QUE SUCO.', no:'Essa vem da ÚLTIMA linha, onde aparece o bolo de Clara. Mas a historinha não está comparando bolo com suco: ela está falando do jeito de Miguel tratar os colegas.'}
+ ],
+ dica:'Tem uma linha em que alguém DIZ a lição com todas as letras. Volte com a régua e procure a fala da professora.',
+ truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ acende:[1,3,4],
+ visual:'<p class="vx"><span class="mk">ELE EMPURRAVA OS COLEGAS</span> <span class="dm">&mdash; o jeito dele antes</span></p>'+
+        '<p class="vx"><span class="mk">NINGU&Eacute;M QUIS DIVIDIR O LANCHE COM ELE</span> <span class="dm">&mdash; o que aconteceu por causa disso</span></p>'+
+        '<p class="vx"><span class="mk">QUEM EMPURRA OS AMIGOS FICA SEM AMIGO NA HORA DE PRECISAR</span> <span class="dm">&mdash; a professora diz a li&ccedil;&atilde;o</span></p>'+
+        '<div class="pcs"><span class="pc bad">empurrou</span><span class="arw">&rarr;</span><span class="pc bad">ficou sozinho</span>'+
+        '<span class="pc hit">esperou a vez</span><span class="arw">&rarr;</span><span class="pc hit">ganhou bolo</span></div>',
+ porque:'A própria professora diz a lição: quem empurra os amigos fica sem amigo na hora de precisar. A historinha mostra isso duas vezes — Miguel empurrando e ficando sozinho, e Miguel esperando a vez e sendo ajudado.',
+ proximo:'Quando perguntarem a lição, procure primeiro se alguém do texto já disse ela em voz alta. Quase sempre disse.'},
+
 /* fim dos itens */
 {id:'FIM', eixo:'_', origem:'', pede:'', opts:[], _sentinela:1}
 ];
