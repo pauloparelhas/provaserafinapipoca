@@ -74,6 +74,35 @@ OP.ITENS.forEach(function(it){
     reprova(it.id+': '+comImg+' de '+it.opts.length+' alternativas têm imagem; ou todas ou nenhuma');
 });
 
+/* ---- 1c. duplicatas entre itens ----
+   As questões autorais são escritas por vários agentes em paralelo, cada
+   um sem ver o que o outro faz. Duas questões iguais no banco fazem a
+   criança reencontrar a mesma pergunta achando que é nova. Aqui se
+   compara o miolo da pergunta e a resposta certa. */
+function miolo(s){
+  return limpa(String(s||'')).toUpperCase()
+    .replace(/[^A-ZÀ-Ú0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+}
+/* O comando sozinho não serve de chave: "QUE PALAVRA COMPLETA A FRASE
+   ABAIXO" é o enunciado padrão da banca e se repete legitimamente em
+   provas diferentes. O que identifica a questão é o CONTEÚDO — o texto de
+   apoio, o quadro e as alternativas — junto com o comando. */
+var vistosTudo={}, vistosCerta={};
+OP.ITENS.forEach(function(it){
+  var certa=(it.opts||[]).filter(function(o){ return o.ok; })[0];
+  var conteudo=miolo([it.enun||'', it.quadro||'', (it.texto||[]).join(' '), it.pede,
+                      (it.opts||[]).map(function(o){ return o.t; }).join(' ')].join(' '));
+  if(conteudo && vistosTudo[conteudo])
+    reprova(it.id+' e '+vistosTudo[conteudo]+' são a MESMA questão (mesmo texto, mesmo comando, mesmas alternativas)');
+  vistosTudo[conteudo]=it.id;
+
+  var chaveCerta=it.eixo+'|'+miolo(certa&&certa.t);
+  if(chaveCerta && vistosCerta[chaveCerta])
+    console.log('  aviso: '+it.id+' e '+vistosCerta[chaveCerta]+' são do mesmo tipo e têm a mesma resposta certa ('+
+                miolo(certa&&certa.t).slice(0,30)+') — confira se não estão perto demais');
+  vistosCerta[chaveCerta]=it.id;
+});
+
 /* ---- 2. cotas para duas rodadas sem repetir ---- */
 OP.FAMILIAS.forEach(function(f){
   if(!f.cota) return;

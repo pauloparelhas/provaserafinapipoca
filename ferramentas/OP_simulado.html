@@ -15,6 +15,10 @@
   padding:7px 11px;border-radius:10px;background:var(--surf);border:1px solid var(--line);margin-bottom:6px}
 .fambar.zero{opacity:.55}
 .progresso{font-size:calc(.74rem*var(--fs));font-weight:800;color:var(--dim);text-align:center;margin-top:9px;line-height:1.4}
+.bancobar{height:8px;border-radius:5px;background:var(--line);margin:14px 0 0;overflow:hidden}
+.bancofill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s}
+body.papel .bancobar{background:#e4e4e4}
+body.papel .progresso{color:#555}
 </style>
 </head>
 <body>
@@ -167,9 +171,10 @@ function App(){
 
   if(tela==='inicio'){
     var faltam=Math.max(0,totalBanco-jaVistas);
+    var rodadas=Math.floor(totalBanco/15);
     return h('div',null,
       h('h1',{className:'tt'},'Simulado'),
-      h('p',{className:'sub'},'Perguntas que caíram de verdade nas provas da Olimpíada. Errou, o truque aparece na hora e vem outra igual para você acertar.'),
+      h('p',{className:'sub'},'Rodadas de 15, como a prova. Errou, o truque aparece na hora e vem outra igual para você acertar.'),
       h('div',{className:'grade duas'},
         h('button',{className:'linha',onClick:function(){ comeca(5); }},
           h('span',{className:'n'},'5'),
@@ -178,9 +183,14 @@ function App(){
           h('span',{className:'n'},'15'),
           h('span',null,h('b',null,'Prova inteira'),h('small',null,'quinze perguntas, igual à de verdade')))
       ),
+      /* Barra de progresso do banco: com mais de cem perguntas, saber
+         quanto falta é o que dá vontade de continuar — e mostra que não
+         vai repetir tão cedo. */
+      h('div',{className:'bancobar'},
+        h('div',{className:'bancofill',style:{width:Math.round(jaVistas/totalBanco*100)+'%'}})),
       h('p',{className:'progresso'},
         faltam>0
-          ? 'O banco tem '+totalBanco+' perguntas. Você ainda não viu '+faltam+' delas.'
+          ? 'São '+totalBanco+' perguntas no banco — dá para '+rodadas+' rodadas sem repetir nenhuma. Você já viu '+jaVistas+' e ainda faltam '+faltam+'.'
           : 'Você já passou pelas '+totalBanco+' perguntas do banco. Daqui para a frente elas voltam a aparecer.'),
       jaVistas>0 && h('div',{className:'linhabtn',style:{justifyContent:'center'}},
         h('button',{className:'mini',onClick:function(){ zeraVistos(); setTela('inicio0'); setTimeout(function(){ setTela('inicio'); },0); }},
