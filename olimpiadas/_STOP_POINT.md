@@ -1,6 +1,7 @@
 # STOP POINT — Olimpíada de Português (Categoria G · 2º ano)
 
-**Prova da Mariana: quinta-feira, 10/09/2026.** Parado em 08/09, à noite.
+**Prova da Mariana: quinta-feira, 10/09/2026 — é AMANHÃ.**
+Parado na madrugada de 09/09.
 Tudo o que está descrito como "no ar" está publicado e funcionando em
 `https://pauloparelhas.github.io/provaserafinapipoca/` (último commit: 78c3157).
 
@@ -117,13 +118,24 @@ TR27 (o que é "lição de fábula"), TR35 (O ESPELHO x A SOMBRA), TR45
 TR61 (critério do grupo não enunciado), TR85 (pista de forma vale para P e I),
 TR90 (BARRACA só cai pela ordem), TR96 (depende do "AVISA" no comando).
 
-### 2. Vídeo novo (EM ANDAMENTO quando parei)
-Está sendo regravado com o truque do comando na abertura e com o corte de tom
-que o Paulo pediu: sem preâmbulo, sem motivação, sem o vídeo falando de si
-mesmo. O agente foi instruído a **só substituir** `ferramentas/media/
-video_OP_truques_pt.mp4` depois de baixar e conferir o novo — o atual segue
-publicado e funcionando. Roteiro: `olimpiadas/trabalho/nlm_fonte_truques.md`.
-Caderno NotebookLM: `831c48c1-9a9e-4ed6-8638-44adfcb2d88c`.
+### 2. Vídeo novo — FALHOU, e o antigo segue no ar (correto)
+A regravação com o truque do comando na abertura chegou a gerar um vídeo,
+mas com **9min04** — longo demais para uma criança de 7 anos na véspera. O
+agente estava enxugando o roteiro para regerar quando travou.
+
+**Nada foi estragado:** o vídeo publicado continua o de 7min10s, intacto
+(38.019.754 bytes, sem alteração no git). A instrução de só substituir depois
+de conferir o novo funcionou.
+
+Para retomar: roteiro em `olimpiadas/trabalho/nlm_fonte_truques.md`, caderno
+NotebookLM `831c48c1-9a9e-4ed6-8638-44adfcb2d88c`. O que falta é cortar o
+roteiro (as variações internas dos truques 2 e 7, e o bloco do truque 8, que
+é o tipo mais raro) e regerar. O tom já foi acertado com o agente: sem
+preâmbulo, sem motivação, sem o vídeo falando de si mesmo.
+
+**Julgamento honesto:** o vídeo é a peça menos importante das quatro. O que
+prepara para a prova é responder questão, não assistir. Se o tempo for curto,
+esta pendência é a primeira a cair.
 
 ### 3. Repetição no pior caso
 Num teste de 4 rodadas **errando todas as 60 perguntas**, 38 de 160 vistas
