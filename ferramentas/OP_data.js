@@ -556,7 +556,7 @@ var ITENS = [
   {t:'GALOPANTE', no:'GALOPANTE tem um PAN no meio. O elefante dá FAN, não PAN. Uma letra de diferença já derruba a alternativa. O começo GA-LO engana porque é o galo inteirinho.'}
  ],
  dica:'Primeiro diga o nome de cada sombra em voz alta. Depois bata palma em cada nome: são essas as peças que você tem.',
- truque:'Bata palma em cada pedaço da palavra. Cada pedaço tem de sair de um dos nomes, sem trocar nenhuma letra.',
+ truque:'Toda sílaba da palavra tem de vir de um dos nomes. Não precisa usar todas — mas se uma sílaba não estiver lá, a palavra está errada.',
  visual:'<div class="pcs"><span class="pc">GA</span><span class="pc">LO</span><span class="pc">CA</span><span class="pc">VA</span><span class="pc">LO</span><span class="pc">E</span><span class="pc">LE</span><span class="pc">FAN</span><span class="pc">TE</span></div>'+
         '<p class="vx">Essas s&atilde;o as pe&ccedil;as que os tr&ecirc;s nomes d&atilde;o.</p>'+
         '<div class="pcs"><span class="pc hit">CA</span><span class="pc hit">FAN</span><span class="pc hit">GA</span><span class="arw">&rarr;</span><span class="pc hit">todas do banco</span></div>'+
@@ -1346,7 +1346,7 @@ var ITENS = [
   {t:'13', ok:1}
  ],
  dica:'Primeiro separe a frase e conte as PALAVRAS com o dedo, uma por uma. Depois lembre: entre duas palavras vai um espaço só, e depois do ponto final não vai espaço nenhum.',
- truque:'Separe a frase e conte as palavras com o dedo. Depois tire uma: o espaço fica entre duas palavras.',
+ truque:'Faça um risquinho onde uma palavra acaba e a outra começa. Conte os RISQUINHOS, não as palavras.',
  visual:'<div class="pcs"><span class="pc">UM</span><span class="pc">GRANDE</span><span class="pc">S&Aacute;BIO</span><span class="pc">DISSE</span><span class="pc">QUE</span><span class="pc">NADA</span><span class="pc">SABIA</span><span class="pc">SOBRE</span><span class="pc bad">A</span><span class="pc">VIDA</span><span class="pc bad">E</span><span class="pc">SOBRE</span><span class="pc">ELE</span><span class="pc">MESMO</span></div>'+
         '<p class="vx">S&atilde;o <b>14</b> palavras. As duas em destaque s&atilde;o as que somem quando a gente l&ecirc; r&aacute;pido: o <b>A</b> e o <b>E</b>, sozinhos no meio da frase.</p>'+
         '<div class="pcs"><span class="pc hit">14 palavras</span><span class="arw">&rarr;</span><span class="pc hit">13 espa&ccedil;os</span></div>'+
@@ -2167,7 +2167,7 @@ var ITENS = [
   {t:'10.', no:'Dez é contar as nove palavras e ainda pôr um espaço depois do ponto final. Depois do ponto a frase acabou: ali não entra espaço nenhum.'}
  ],
  dica:'Primeiro separe a frase e escreva as palavras uma do lado da outra. Só depois conte os buraquinhos ENTRE elas.',
- truque:'Separe a frase e conte as palavras com o dedo. Depois tire uma: o espaço fica entre duas palavras.',
+ truque:'Faça um risquinho onde uma palavra acaba e a outra começa. Conte os RISQUINHOS, não as palavras.',
  visual:'<div class="pcs"><span class="pc">O</span><span class="pc">GATO</span><span class="pc">DE</span><span class="pc">MARIA</span><span class="pc">DORME</span><span class="pc">NO</span><span class="pc">SOF&Aacute;</span><span class="pc">DA</span><span class="pc">SALA</span><span class="arw">&rarr;</span><span class="pc hit">9 palavras</span></div>'+
         '<div class="pcs"><span class="pc hit">1</span><span class="pc hit">2</span><span class="pc hit">3</span><span class="pc hit">4</span><span class="pc hit">5</span><span class="pc hit">6</span><span class="pc hit">7</span><span class="pc hit">8</span><span class="arw">&rarr;</span><span class="pc hit">8 espa&ccedil;os</span></div>'+
         '<p class="vx">O espa&ccedil;o mora <b>entre</b> duas palavras. Por isso ele &eacute; sempre <b>um a menos</b> que o n&uacute;mero de palavras.</p>'+
@@ -2279,7 +2279,7 @@ var ITENS = [
   {t:'SAPO.', no:'SAPO começa com o SA da sacola, e é só por isso que atrai. Mas o segundo pedaço é PO, e ninguém tem PO: a panela dá PA. Uma letra de diferença.'}
  ],
  dica:'Bata palma em cada nome e escreva as peças: SA-CO-LA, PA-NE-LA, TO-MA-TE. Essas são todas as peças que você tem.',
- truque:'Bata palma em cada pedaço da palavra. Cada pedaço tem de sair de um dos nomes, sem trocar nenhuma letra.',
+ truque:'Toda sílaba da palavra tem de vir de um dos nomes. Não precisa usar todas — mas se uma sílaba não estiver lá, a palavra está errada.',
  visual:'<div class="pcs"><span class="pc">SA</span><span class="pc">CO</span><span class="pc">LA</span><span class="pc">PA</span><span class="pc">NE</span><span class="pc">LA</span><span class="pc">TO</span><span class="pc">MA</span><span class="pc">TE</span></div>'+
         '<p class="vx">Essas s&atilde;o as pe&ccedil;as que os tr&ecirc;s nomes d&atilde;o.</p>'+
         '<div class="pcs"><span class="pc hit">SA</span><span class="pc hit">PA</span><span class="pc hit">TO</span><span class="arw">&rarr;</span><span class="pc hit">uma de cada nome</span></div>'+
@@ -2299,7 +2299,7 @@ var ITENS = [
   {t:'BONITO.', no:'BONITO pega o BO do bolo e o NI do menino, e por isso engana. Mas o TO não existe em ninguém: o bolo dá BO e LO. E bonito não é nome de animal.'}
  ],
  dica:'Bata palma nas três palavras: CA-MI-SA, ME-NI-NO, BO-LO. Depois lembre que a pergunta pede o nome de um ANIMAL.',
- truque:'Bata palma em cada pedaço da palavra. Cada pedaço tem de sair de um dos nomes, sem trocar nenhuma letra.',
+ truque:'Toda sílaba da palavra tem de vir de um dos nomes. Não precisa usar todas — mas se uma sílaba não estiver lá, a palavra está errada.',
  visual:'<div class="pcs"><span class="pc">CA</span><span class="pc">MI</span><span class="pc">SA</span><span class="pc">ME</span><span class="pc">NI</span><span class="pc">NO</span><span class="pc">BO</span><span class="pc">LO</span></div>'+
         '<p class="vx">Essas s&atilde;o todas as pe&ccedil;as dispon&iacute;veis.</p>'+
         '<div class="pcs"><span class="pc hit">CA</span><span class="pc hit">ME</span><span class="pc hit">LO</span><span class="arw">&rarr;</span><span class="pc hit">CAMELO</span></div>'+
@@ -2541,7 +2541,7 @@ var ITENS = [
   {t:'VAI VIAJAR COM A FAMÍLIA NO MÊS QUE VEM.', no:'Viajar no mês que vem ainda vai acontecer. Uma coisa de depois não pode explicar o que aconteceu agora.'}
  ],
  dica:'A palavra PORQUE pede um motivo. Teste cada opção assim: "isso impede mesmo a Beatriz de andar de patins?"',
- truque:'Depois de PORQUE vem a explicação. Pergunte: isso explica mesmo a primeira parte?',
+ truque:'Depois do PORQUE vem a explicação. Pergunte de cada uma: isso IMPEDE mesmo?',
  visual:'<p class="vx">n&atilde;o conseguiu andar <b class="mk">porque</b> uma rodinha tinha ca&iacute;do <span class="dm">&mdash; patins sem rodinha n&atilde;o anda. Explica.</span></p>'+
         '<p class="vx"><span class="dm">n&atilde;o conseguiu andar porque</span> <b class="bad2">n&atilde;o achou o bon&eacute;</b> <span class="dm">&mdash; tamb&eacute;m &eacute; n&atilde;o achar uma coisa, mas bon&eacute; &eacute; da cabe&ccedil;a. N&atilde;o impede.</span></p>',
  porque:'Patins sem uma das rodinhas não roda, e por isso ela não conseguiu andar. É a única alternativa que impede de verdade.',
@@ -2557,7 +2557,7 @@ var ITENS = [
   {t:'VAI COMER PIPOCA NO CINEMA NO SÁBADO.', no:'Pipoca no sábado é coisa que ainda vai acontecer. O que vem depois do PORQUE tem de explicar o que aconteceu agora.'}
  ],
  dica:'A palavra PORQUE pede um motivo. Pergunte em cada opção: "por causa disso o Caio ficou mesmo sem beber?"',
- truque:'Depois de PORQUE vem a explicação. Pergunte: isso explica mesmo a primeira parte?',
+ truque:'Depois do PORQUE vem a explicação. Pergunte de cada uma: isso IMPEDE mesmo?',
  visual:'<p class="vx">n&atilde;o bebeu nada <b class="mk">porque</b> o suco caiu no ch&atilde;o <span class="dm">&mdash; se o suco foi para o ch&atilde;o, n&atilde;o sobrou o que beber. Explica.</span></p>'+
         '<p class="vx"><span class="dm">n&atilde;o bebeu nada porque</span> <b class="bad2">esqueceu o canudinho</b> <span class="dm">&mdash; d&aacute; para beber sem canudo. N&atilde;o impede.</span></p>',
  porque:'Se o copo escorregou e o suco todo foi para o chão, não sobrou suco nenhum para beber. É a única que explica a primeira parte.',
@@ -2573,7 +2573,7 @@ var ITENS = [
   {t:'COMPROU PÃO NA PADARIA ONTEM DE MANHÃ.', no:'Comprar pão ontem não impede ninguém de entrar em casa hoje. A segunda parte tem de EXPLICAR a primeira.'}
  ],
  dica:'A palavra PORQUE pede um motivo. Pergunte em cada opção: "isso deixa a tia Marta trancada do lado de fora?"',
- truque:'Depois de PORQUE vem a explicação. Pergunte: isso explica mesmo a primeira parte?',
+ truque:'Depois do PORQUE vem a explicação. Pergunte de cada uma: isso IMPEDE mesmo?',
  visual:'<p class="vx">n&atilde;o conseguiu entrar <b class="mk">porque</b> perdeu a chave <span class="dm">&mdash; sem chave a porta n&atilde;o abre. Explica.</span></p>'+
         '<p class="vx"><span class="dm">n&atilde;o conseguiu entrar porque</span> <b class="bad2">n&atilde;o achou o guarda-chuva</b> <span class="dm">&mdash; tamb&eacute;m &eacute; n&atilde;o achar uma coisa na bolsa, mas guarda-chuva n&atilde;o abre porta. N&atilde;o impede.</span></p>',
  porque:'Quem perde a chave fica do lado de fora: sem chave a porta não abre. Só essa impede a tia Marta de entrar.',
@@ -2589,7 +2589,7 @@ var ITENS = [
   {t:'O SEU LÁPIS AZUL SUMIU DO ESTOJO.', ok:1}
  ],
  dica:'A palavra PORQUE pede um motivo. Pergunte em cada opção: "sem isso ela consegue ou não consegue pintar o céu?"',
- truque:'Depois de PORQUE vem a explicação. Pergunte: isso explica mesmo a primeira parte?',
+ truque:'Depois do PORQUE vem a explicação. Pergunte de cada uma: isso IMPEDE mesmo?',
  visual:'<p class="vx">n&atilde;o conseguiu pintar o c&eacute;u <b class="mk">porque</b> o l&aacute;pis azul sumiu <span class="dm">&mdash; c&eacute;u se pinta de azul. Sem o azul, n&atilde;o d&aacute;. Explica.</span></p>'+
         '<p class="vx"><span class="dm">n&atilde;o conseguiu pintar porque</span> <b class="bad2">esqueceu a borracha</b> <span class="dm">&mdash; borracha apaga, n&atilde;o pinta. N&atilde;o impede.</span></p>',
  porque:'O céu do desenho se pinta de azul, e o lápis azul sumiu do estojo. Só essa impede mesmo a Helena de pintar.',
@@ -2679,7 +2679,7 @@ var ITENS = [
         'DEPOIS VOLTA PRA SUA DORMIDA.'],
  pede:'QUAL TÍTULO MAIS COMBINA COM O POEMA?',
  opts:[
-  {t:'A HORA DA COMIDA.', no:'Essa sai da última linha do poema. A comida aparece uma vez só, e aparece para o gato acordar e voltar a dormir.'},
+  {t:'A HORA DA COMIDA.', no:'Essa sai de uma linha só, lá perto do fim. A comida aparece uma vez só, e aparece para o gato acordar e voltar a dormir.'},
   {t:'O GATO E O RATO.', no:'Essa fala de rato, e no poema não tem rato nenhum. Gato correndo atrás de rato é coisa que a gente sabe da vida, não deste poema.'},
   {t:'O GATO DORMINHOCO.', ok:1},
   {t:'A GELADEIRA DA COZINHA.', no:'A geladeira é um dos quatro lugares onde o gato dorme. Uma palavra do meio não dá o título do poema inteiro.'}
@@ -3202,7 +3202,7 @@ var ITENS = [
   {t:'TOMADA.', no:'TOMADA precisa de MA e de DA. Nenhum dos três nomes tem MA nem DA. A isca é o TO, que é mesmo o último pedaço do pirulito.'}
  ],
  dica:'Bata palma em cada nome e escreva as peças: PI-RU-LI-TO, PO-TE, CA-DER-NO. Essas são todas as peças que existem.',
- truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ truque:'Toda sílaba da palavra tem de vir de um dos nomes. Não precisa usar todas — mas se uma sílaba não estiver lá, a palavra está errada.',
  visual:'<div class="pcs"><span class="pc">PI</span><span class="pc">RU</span><span class="pc">LI</span><span class="pc">TO</span><span class="pc">PO</span><span class="pc">TE</span><span class="pc">CA</span><span class="pc">DER</span><span class="pc">NO</span></div>'+
         '<p class="vx">Essas s&atilde;o as pe&ccedil;as que os tr&ecirc;s nomes d&atilde;o.</p>'+
         '<div class="pcs"><span class="pc hit">PI</span><span class="pc hit">PO</span><span class="pc hit">CA</span><span class="arw">&rarr;</span><span class="pc hit">PI do pirulito, PO do pote, CA do caderno</span></div>'+
@@ -3222,7 +3222,7 @@ var ITENS = [
   {t:'DEDÃO.', no:'DEDÃO precisa de DÃO. O limão termina em MÃO, com M. Uma letra de diferença derruba a palavra inteira.'}
  ],
  dica:'Bata palma em cada nome e escreva as peças: PA-TO, LI-MÃO, DE-DO. Depois confira pedaço por pedaço a palavra que você escolheu.',
- truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ truque:'Toda sílaba da palavra tem de vir de um dos nomes. Não precisa usar todas — mas se uma sílaba não estiver lá, a palavra está errada.',
  visual:'<div class="pcs"><span class="pc">PA</span><span class="pc">TO</span><span class="pc">LI</span><span class="pc">M&Atilde;O</span><span class="pc">DE</span><span class="pc">DO</span></div>'+
         '<p class="vx">Essas s&atilde;o todas as pe&ccedil;as dispon&iacute;veis.</p>'+
         '<div class="pcs"><span class="pc hit">PA</span><span class="pc hit">LI</span><span class="pc hit">TO</span><span class="arw">&rarr;</span><span class="pc hit">PA e TO do pato, LI do lim&atilde;o</span></div>'+
@@ -3238,11 +3238,11 @@ var ITENS = [
  opts:[
   {t:'SOFÁ.', no:'SOFÁ precisa de SO. A primeira sílaba de SOR-TE é SOR, com R. E FÁ não é primeira sílaba de ninguém.'},
   {t:'SORVETE.', ok:1},
-  {t:'TESOURO.', no:'TESOURO precisa de SOU e de RO. SOU e RO são o segundo e o terceiro pedaços de TE-SOU-RA. A pergunta manda pegar só o primeiro pedaço de cada palavra.'},
+  {t:'TESOURO.', no:'TESOURO precisa de SOU e de RO. SOU é o segundo pedaço de TE-SOU-RA, e RO não existe nessa palavra: o último pedaço dela é RA. A pergunta manda pegar só o primeiro pedaço de cada palavra.'},
   {t:'VERDE.', no:'VERDE precisa de VER. A primeira sílaba de VE-RÃO é VE, sem R. E DE não é primeira sílaba de ninguém.'}
  ],
  dica:'Bata palma em cada palavra e guarde só o PRIMEIRO pedaço: SOR-TE, VE-RÃO, TE-SOU-RA. Escreva as três peças antes de olhar as alternativas.',
- truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+ truque:'Toda sílaba da palavra tem de vir de um dos nomes. Não precisa usar todas — mas se uma sílaba não estiver lá, a palavra está errada.',
  visual:'<div class="pcs"><span class="pc hit">SOR</span><span class="pc">TE</span><span class="arw">&rarr;</span><span class="pc hit">SOR</span></div>'+
         '<div class="pcs"><span class="pc hit">VE</span><span class="pc">R&Atilde;O</span><span class="arw">&rarr;</span><span class="pc hit">VE</span></div>'+
         '<div class="pcs"><span class="pc hit">TE</span><span class="pc">SOU</span><span class="pc">RA</span><span class="arw">&rarr;</span><span class="pc hit">TE</span></div>'+
@@ -3306,7 +3306,7 @@ var ITENS = [
   {t:'PORCO, CADERNO E TESOURA.', no:'CADERNO tem A, E e O: três vogais diferentes. TESOURA tem E, O, U e A: quatro. Uma figurinha errada derruba a alternativa inteira.'}
  ],
  dica:'Vogal é A, E, I, O, U. Ponha um pontinho embaixo de cada vogal do nome e vá até a ÚLTIMA letra da palavra.',
- truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ truque:'Marque as vogais diferentes de cada nome. Vale quem só tem UMA, mesmo que ela apareça várias vezes.',
  visual:'<div class="pcs"><span class="pc hit">L<b>A</b>R<b>A</b>NJ<b>A</b></span><span class="pc hit">D<b>E</b>NT<b>E</b></span><span class="pc hit">P<b>O</b>RC<b>O</b></span></div>'+
         '<p class="vx">S&oacute; <b>A</b> na primeira, s&oacute; <b>E</b> na segunda, s&oacute; <b>O</b> na terceira. Repetir a mesma vogal pode. Trocar de vogal, n&atilde;o.</p>'+
         '<div class="pcs"><span class="pc bad">CAVAL<b>O</b></span><span class="pc bad">ESTREL<b>A</b></span><span class="pc bad">C<b>A</b>D<b>E</b>RN<b>O</b></span><span class="pc bad">T<b>E</b>S<b>OU</b>R<b>A</b></span></div>'+
@@ -3324,11 +3324,11 @@ var ITENS = [
  ],
  dica:'Vogal é A, E, I, O, U — todo o resto é consoante. Em cada frase, procure os lugares em que duas consoantes estão coladas e os lugares em que duas vogais estão coladas.',
  truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
- visual:'<div class="pcs"><span class="pc hit">MPR</span><span class="pc hit">PR</span><span class="pc hit">TS</span><span class="pc hit">BR</span><span class="pc hit">NC</span></div>'+
+ visual:'<div class="pcs"><span class="pc hit">RT</span><span class="pc hit">MPR</span><span class="pc hit">PR</span><span class="pc hit">BR</span><span class="pc hit">NC</span></div>'+
         '<p class="vx">Em <b>MARTA COMPROU PRATOS BRANCOS</b> as consoantes andam grudadas o tempo todo: <b>9 vogais</b> contra <b>16 consoantes</b>.</p>'+
         '<div class="pcs"><span class="pc bad">VIU</span><span class="pc bad">AREIA</span><span class="pc bad">PAPAGAIO</span><span class="pc bad">GOIABA</span><span class="pc bad">CAIU</span><span class="pc bad">DEBAIXO</span></div>'+
         '<p class="vx">Nas outras tr&ecirc;s frases quem anda grudada &eacute; a <b>vogal</b>. As contas dessas tr&ecirc;s: 16 a 10, 17 a 10 e 22 a 17, sempre a favor das vogais.</p>',
- porque:'MARTA COMPROU PRATOS BRANCOS tem 9 vogais e 16 consoantes. As consoantes vêm grudadas em MPR, PR, TS, BR e NC. Nas outras três frases as vogais é que vêm grudadas, e elas ganham em todas: 16 a 10, 17 a 10 e 22 a 17.',
+ porque:'MARTA COMPROU PRATOS BRANCOS tem 9 vogais e 16 consoantes. As consoantes vêm grudadas em RT, MPR, PR, BR e NC. Nas outras três frases as vogais é que vêm grudadas, e elas ganham em todas: 16 a 10, 17 a 10 e 22 a 17.',
  proximo:'Antes de contar, olhe onde as letras estão coladas. Depois faça a conta das quatro frases e só então compare os números.'},
 
 {id:'TR55', eixo:'contar', origem:'Treino no estilo da prova',
@@ -3342,7 +3342,7 @@ var ITENS = [
   {t:'11.', no:'Onze é contar as dez palavras e ainda pôr um espaço depois do ponto final. Depois do ponto a frase acabou: ali não entra espaço nenhum.'}
  ],
  dica:'Primeiro separe a frase e escreva as palavras uma do lado da outra. Só depois conte os buraquinhos ENTRE elas.',
- truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ truque:'Faça um risquinho onde uma palavra acaba e a outra começa. Conte os RISQUINHOS, não as palavras.',
  visual:'<div class="pcs"><span class="pc">O</span><span class="pc">PASSARINHO</span><span class="pc">PEQUENO</span><span class="pc">POUSOU</span><span class="pc bad">EM</span><span class="pc">CIMA</span><span class="pc bad">DO</span><span class="pc">MURO</span><span class="pc bad">DA</span><span class="pc">CASA</span></div>'+
         '<p class="vx">S&atilde;o <b>10</b> palavras. As tr&ecirc;s em destaque s&atilde;o as curtinhas, as que somem quando a gente l&ecirc; r&aacute;pido.</p>'+
         '<div class="pcs"><span class="pc hit">10 palavras</span><span class="arw">&rarr;</span><span class="pc hit">9 espa&ccedil;os</span></div>'+
@@ -3399,7 +3399,7 @@ var ITENS = [
   {t:'TAMBOR.', no:'TAMBOR tem o A do primeiro pedaço e o O do segundo: TAM-BOR. São duas vogais diferentes.'}
  ],
  dica:'Vogal é A, E, I, O, U. Soletre a palavra inteira, do começo ao fim, e faça um pontinho em cada vogal.',
- truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
+ truque:'Marque as vogais diferentes de cada nome. Vale quem só tem UMA, mesmo que ela apareça várias vezes.',
  visual:'<div class="pcs"><span class="pc hit">P<b>E</b>NT<b>E</b></span><span class="arw">&rarr;</span><span class="pc hit">s&oacute; E, duas vezes</span></div>'+
         '<div class="pcs"><span class="pc bad">ESP<b>E</b>LH<b>O</b></span><span class="pc bad"><b>A</b>N<b>E</b>L</span><span class="pc bad">T<b>A</b>MB<b>O</b>R</span></div>'+
         '<p class="vx">Nas tr&ecirc;s de baixo entram <b>duas</b> vogais diferentes. Repetir a mesma vogal pode. Trocar de vogal, n&atilde;o.</p>',
@@ -3716,7 +3716,7 @@ var ITENS = [
         '<div class="sep"></div><b>A SEQU&Ecirc;NCIA:</b><div class="seq">&#9650; &#9788; &#9733; &#9660; &#9829; &#9670; &#9632; &#9679; &#9733;</div>',
  pede:'ESSA SEQUÊNCIA ESCONDE UM DITADO. JUNTE AS SÍLABAS NA ORDEM DOS SÍMBOLOS E ASSINALE A FRASE FORMADA.',
  opts:[
-  {t:'QUEM CANTA MALES ESPANTA.', no:'Essa pulou o quarto símbolo. No lugar onde ela não escreve nada, a tabela diz SEUS. São nove símbolos na fila e sete pedaços nessa frase.'},
+  {t:'QUEM CANTA MALES ESPANTA.', no:'Essa pulou o quarto símbolo. No lugar onde ela não escreve nada, a tabela diz SEUS. São nove símbolos na fila e oito pedaços nessa frase: QUEM-CAN-TA-MA-LES-ES-PAN-TA.'},
   {t:'QUEM CANTA SEUS MALES ESPANTA.', ok:1},
   {t:'QUEM CANTA SEUS MALES AFASTA.', no:'Essa troca o fim da frase. Os dois últimos símbolos valem ES e PAN, e AFAS não existe na tabela. Quem reconhece o ditado no meio do caminho completa de memória e cai aqui.'},
   {t:'QUEM CANTA SEUS MALES ESPALHA.', no:'Essa troca a última palavra. O oitavo símbolo é o círculo preto, e o círculo preto vale PAN. LHA não existe na tabela.'}
@@ -4237,9 +4237,17 @@ var CARTOES = [
   exemplo:'25F1Q7', agora:'24F1Q4'},
 
  {k:'silabas', titulo:'Sílabas', min:3,
-  truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
-  texto:'A prova dá pedaços de palavra e pergunta o que dá para montar. Às vezes ela manda usar todas as peças, uma vez cada. Às vezes ela dá peças demais e pergunta qual sobra. Leia a pergunta e veja qual dos dois é. Nos dois casos, pode trocar a ordem.',
-  extras:['Quando a pergunta manda usar todas: sobrou peça na mesa, errado; faltou peça, errado.',
+  truque:'Bata palma em cada pedaço, e leia direito o que a pergunta pede.',
+  /* Este cartão tinha UMA frase para TRÊS gestos diferentes, e ela era falsa
+     em vários itens: nas questões de "palavra formada apenas com sílabas
+     destes nomes", seguir "use todas as peças" faz riscar a resposta certa
+     (PIPOCA usa 3 das 9 peças que os nomes dão). O cartão passa a ensinar as
+     três variantes e a dizer que quem escolhe é a pergunta. */
+  texto:'A prova dá pedaços de palavra e pergunta o que dá para montar. Existem três brincadeiras parecidas, e é a pergunta que diz qual delas é. Em todas, a ordem dos pedaços pode mudar.',
+  extras:['MONTE COM ESTAS PEÇAS: use todas, uma vez cada. Sobrou peça na mesa, errado; faltou peça, errado.',
+          'APENAS COM SÍLABAS DESTES NOMES: cada pedaço tem de vir de algum nome — mas não precisa usar todos os pedaços.',
+          'QUAL SÍLABA SOBRA: aqui a prova dá peça demais de propósito, e a resposta é a que ficou de fora.',
+          'Nas três, o teste final é o mesmo: procure a sílaba que NÃO existe entre as peças. É ela que derruba a alternativa.',
           'Se as peças vêm de figuras, fale o nome da figura batendo palma.'],
   exemplo:'25F1Q3', agora:'24F1Q11'},
 

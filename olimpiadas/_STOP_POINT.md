@@ -75,22 +75,36 @@ chegado depois.
 TR104 (a fórmula banida aparecia uma vez em cada item do eixo `ler` da última
 leva). **Falta o resto.**
 
-**O que falta, em ordem de gravidade** (todas com o texto substituto pronto
-nos relatórios):
-- **TR54** — o comentário afirma um encontro de consoantes "TS" que NÃO existe
-  em PRATOS (o T e o S estão separados pelo O). Fato falso no `no`, no
-  `visual` e no `porque`. É o pior: ensina a contar errado numa questão de
-  contar.
-- **TR86** — o `no` diz "sete pedaços" onde são oito (QUEM·CAN·TA·MA·LES·ES·
-  PAN·TA), e chama de "os dois últimos símbolos" o 7º e o 8º.
-- **TR53, TR55, TR58** — `truque` incompatível: "conte os pontinhos" não
-  decide a questão (em TR55 o truque leva a 10, que é o distrator errado).
-- **TR71-TR74** — `truque` de "frase com buraco" em questões de PORQUE, onde
-  as quatro alternativas leem bem; o gesto certo é "isso IMPEDE?".
+**JÁ APLICADO depois da primeira versão deste stop point:**
+- os **15 truques incompatíveis** (o defeito mais grave): TR48, TR49, TR50,
+  TR19, TR20 e 24F1Q11 (que mandavam "use TODAS as peças" em questões onde a
+  resposta certa usa só algumas — seguir o truque fazia riscar o gabarito);
+  TR71-TR74 (truque de "frase com buraco" em questões de PORQUE); TR55,
+  23F1Q6 e TR13 (o truque entregava o número de PALAVRAS, que é uma das
+  alternativas erradas); TR53 e TR58 (contar pontinhos não decide "uma única
+  vogal").
+- o **cartão de sílabas**, que era a fonte do erro: tinha uma frase só para
+  três brincadeiras diferentes. Agora ensina as três e diz que quem escolhe
+  é a pergunta.
+- os **5 erros factuais**: o encontro "TS" que não existe em PRA-TOS (TR54,
+  no `visual` e no `porque`); "sete pedaços" onde são oito (TR86); "RO é
+  pedaço de TESOURA" quando é de TESOURO (TR50); "última linha" sendo a
+  penúltima (TR25).
+
+**O QUE AINDA FALTA** (todas com o texto substituto pronto nos relatórios):
+- **~38 concessivas** ("é palavra de verdade, mas…", "está certo, sim, mas…"):
+  26 em TR39-TR52 (`letras` e `silabas`) e 12 em TR67-TR78. Nenhuma é erro de
+  fato; são a fórmula que o Paulo bane porque valida a errada antes de negá-la.
+- **TR86** — o `no` chama de "os dois últimos símbolos" o 7º e o 8º.
 - **TR71, TR72, TR74** — comentários que dizem "igual à certa" descrevendo
-  algo que a certa não faz.
-- 12 concessivas remanescentes em TR67-TR78 (TR68, TR69, TR70, TR73, TR75,
-  TR76, TR78).
+  algo que a alternativa certa não faz.
+- **TR90** — a `dica` resolve o item sem decodificar nada (8 símbolos, e só
+  BORRACHA tem 8 letras).
+- **TR82** — a 3ª pista fala do SOM do carro, mas os quatro comentários a
+  tratam como a palavra CARRO (conserto de uma linha).
+- **TR104** — três alternativas começam com "QUE" e a certa com "QUEM": a
+  forma entrega a resposta.
+- as observações menores listadas nos três relatórios.
 
 **Por que não apliquei em massa:** o script casa o texto exato, e as tabelas
 dos relatórios reformatam os trechos (0 de 30 casaram). Aplicar por
