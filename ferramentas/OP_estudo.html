@@ -25,13 +25,34 @@
 .bloco.aberto .blococorpo{display:block}
 .truquefrase{font-size:calc(1rem*var(--fs));font-weight:900;line-height:1.38;padding:9px 11px;border-radius:10px;
   background:rgba(251,191,36,.13);border-left:5px solid var(--accent2);margin-bottom:9px}
-.como{font-size:calc(.88rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.45;margin-bottom:9px}
-.passos{list-style:none;margin-bottom:10px}
-.passos li{font-size:calc(.88rem*var(--fs));font-weight:800;line-height:1.4;padding:6px 10px 6px 24px;border-radius:9px;
-  background:var(--card);margin-bottom:5px;position:relative}
-.passos li::before{content:"\2022";position:absolute;left:9px;color:var(--accent);font-size:1.2rem;line-height:1}
-.apoio{font-size:calc(.8rem*var(--fs));font-weight:800;color:var(--dim);line-height:1.4;padding:8px 10px;
-  border-radius:9px;border:1px dashed var(--line);margin-bottom:10px}
+
+/* COMO VOCÊ RECONHECE e A ARMADILHA são os dois extremos do bloco e não
+   podem parecer a mesma coisa: a primeira é a porta de entrada (barra
+   verde à esquerda, sem moldura), a segunda é o aviso (moldura inteira
+   em --no). Só variáveis de tema — a tela tem modo claro e escuro. */
+.rot{display:block;font-size:calc(.62rem*var(--fs));font-weight:900;letter-spacing:.9px;
+  text-transform:uppercase;margin-bottom:3px}
+.rec,.arm{font-size:calc(.88rem*var(--fs));font-weight:800;line-height:1.4;
+  padding:8px 11px;border-radius:10px;background:var(--surf)}
+.rec{border-left:5px solid var(--accent);margin-bottom:12px}
+.rec .rot{color:var(--accent)}
+.arm{border:1px solid var(--no);border-left:5px solid var(--no);margin-bottom:12px}
+.arm .rot{color:var(--no)}
+
+/* As palavras de comando (só no bloco mestre) entram como fichas: ela
+   precisa RECONHECÊ-LAS no papel, e lista em prosa não se reconhece. */
+.mandas{display:flex;flex-wrap:wrap;gap:5px;margin:-6px 0 12px}
+.mandas span{font-size:calc(.7rem*var(--fs));font-weight:900;letter-spacing:.4px;
+  padding:5px 9px;border-radius:8px;background:var(--surf);border:1px solid var(--accent2)}
+
+/* Três passos têm de PARECER passos: numerados, um por linha, com ar. */
+.passos{list-style:none;margin:0 0 12px;counter-reset:p}
+.passos li{counter-increment:p;position:relative;font-size:calc(.92rem*var(--fs));font-weight:800;
+  line-height:1.35;padding:10px 12px 10px 42px;border-radius:10px;background:var(--card);
+  border:1px solid var(--line);margin-bottom:7px}
+.passos li::before{content:counter(p);position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);
+  display:flex;align-items:center;justify-content:center;font-size:.76rem;font-weight:900}
 .acoes{display:grid;gap:7px}
 @media(min-width:560px){.acoes{grid-template-columns:1fr 1fr}}
 .acao{min-height:46px;border-radius:11px;border:2px solid var(--line);background:var(--card);color:var(--ink);
@@ -74,9 +95,18 @@
    parágrafo de introdução; dava meia tela de preliminar antes do
    conteúdo.)
 
-   Cada bloco tem: o truque em uma frase, os passos, e DOIS atalhos —
-   "ver perguntas de prova desse tipo", que abre um popup com as questões
+   Cada bloco tem, nesta ordem e nada além: o truque em uma frase, COMO
+   VOCÊ RECONHECE a questão no papel, TRÊS passos (verbo na frente, um
+   por linha) e A ARMADILHA em uma linha. Depois, os DOIS atalhos — "ver
+   perguntas de prova desse tipo", que abre um popup com as questões
    REAIS que cobraram aquilo, e "treinar", que leva ao simulado.
+
+   REESCRITA DE 09/09: antes vinha um parágrafo de introdução (`texto`)
+   mais cinco ou seis `extras` mais um `apoio` — aberto, o bloco virava
+   parede de prosa e ninguém sabia QUANDO usar o truque. Saiu tudo o que
+   explicava por que o truque funciona (justificativa é conversa de
+   adulto) e entrou o que faltava: a cara da questão na prova. Teto duro
+   de 320 caracteres por bloco, 420 no mestre.
 
    O popup guarda a posição da página: fecha e ela volta exatamente onde
    estava, com o bloco ainda aberto e o que já respondeu preservado.
@@ -189,6 +219,12 @@ function App(){
       var fam=FAM[c.k]||{cor:'var(--accent)'};
       var itens=itensDo(c);
       var aberto=!!abertos[c.k];
+      /* `reconhece`/`passos` sao os campos novos. O fallback para
+         `texto`/`extras` existe so para o intervalo em que o OP_data.js
+         ainda carrega os cartoes velhos: a tela nao pode abrir vazia
+         enquanto o array novo nao entra. */
+      var rec = c.reconhece || c.texto;
+      var passos = c.passos || c.extras;
       return h('div',{key:c.k, className:'bloco'+(aberto?' aberto':'')+(c.mestre?' mestre':'')},
         h('button',{className:'blocotopo', onClick:function(){ alterna(c.k); }},
           h('span',{className:'n', style:aberto&&fam.cor?{background:fam.cor,color:'#06251a'}:null}, c.mestre?'★':idx),
@@ -199,10 +235,14 @@ function App(){
         ),
         aberto && h('div',{className:'blococorpo'},
           h('div',{className:'truquefrase'}, c.truque),
-          h('button',{className:'mini', onClick:function(){ if(window.say) say(c.truque); }},'Ouvir'),
-          c.texto && h('p',{className:'como'}, c.texto),
-          c.extras && h('ul',{className:'passos'}, c.extras.map(function(e,i){ return h('li',{key:i},e); })),
-          c.apoio && h('p',{className:'apoio'}, c.apoio),
+          h('button',{className:'mini', style:{margin:'0 0 12px'},
+                      onClick:function(){ if(window.say) say(c.truque); }},'Ouvir'),
+          rec && h('p',{className:'rec'}, h('span',{className:'rot'},'Como você reconhece'), rec),
+          c.palavras && h('div',{className:'mandas'},
+            c.palavras.map(function(p,i){ return h('span',{key:i},p); })),
+          passos && h('ol',{className:'passos'},
+            passos.map(function(e,i){ return h('li',{key:i},e); })),
+          c.armadilha && h('p',{className:'arm'}, h('span',{className:'rot'},'A armadilha'), c.armadilha),
           h('div',{className:'acoes'},
             h('button',{className:'acao forte', onClick:function(){ abrePopup(c); }},
               'Ver perguntas de prova · '+itens.length),
