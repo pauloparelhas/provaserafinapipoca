@@ -157,7 +157,9 @@ function Questao(props){
     !soPergunta && h('p',Object.assign({className:'pede'},html(item.pede))),
 
     h('div',{className:'linhabtn'},
-      h('button',{className:'mini', onClick:leTudo},'Ouvir'),
+      /* o botao de ouvir so existe se houver a voz certa (ver OP_voz.js):
+         botao que nao faz nada e pior do que botao nenhum */
+      (!global.temVoz || global.temVoz()) && h('button',{className:'mini ouvir', onClick:leTudo},'Ouvir'),
       !feito && temApoio && !soPergunta && h('button',{className:'mini', onClick:function(){
         setSoPergunta(true); falar(item.pede);
         try{ window.scrollTo({top:0,behavior:'smooth'}); }catch(e){}
@@ -200,7 +202,7 @@ function Questao(props){
               h('span',Object.assign({},html(alt[pick].no||'')))),
             h('p',Object.assign({className:'porq'},html(item.porque))),
             h('p',{className:'prox'},h('i',null,'Na próxima, faça assim'),item.proximo),
-            h('button',{className:'mini', onClick:function(){
+            (!global.temVoz || global.temVoz()) && h('button',{className:'mini ouvir', onClick:function(){
               falar([item.truque, alt[pick].no, item.porque, item.proximo].join('. '));
             }},'Ouvir a explicação'))
     ),

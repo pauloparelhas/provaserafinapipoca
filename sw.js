@@ -15,6 +15,7 @@ var BASE_FILES = [
   'ferramentas/MAT2_data.js',
   'ferramentas/OP_data.js',
   'ferramentas/OP_questao.js',
+  'ferramentas/OP_voz.js',
   'ferramentas/OP_estilo.css',
   'ferramentas/assets/react.production.min.js',
   'ferramentas/assets/react-dom.production.min.js'

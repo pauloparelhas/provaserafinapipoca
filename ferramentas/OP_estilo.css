@@ -322,3 +322,15 @@ body.papel .card::after{content:attr(data-folha);display:block;text-align:center
   .opt{min-height:52px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ============================================================
+   THALITA OU NADA (ordem do Paulo, 09/09)
+   A Thalita é voz neural e só existe no Edge. Sem ela, o navegador cai
+   nas vozes SAPI antigas do Windows — as robóticas. Em vez de ler com
+   voz ruim, a função de leitura em voz alta SOME da tela.
+   ============================================================ */
+body.sem-voz .mini.ouvir,
+body.sem-voz .speak,
+body.sem-voz .sombtn,
+body.sem-voz #sombtn,
+body.sem-voz .regbtn.sec2{display:none!important}
