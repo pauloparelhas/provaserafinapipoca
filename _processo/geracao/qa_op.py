@@ -19,7 +19,7 @@ import sys, pathlib
 from playwright.sync_api import sync_playwright
 
 RAIZ = pathlib.Path(__file__).resolve().parents[2]
-ALVOS = [("OP_simulado.html", "simulado"), ("OP_estudo.html", "estudo"), ("OP_provas.html", "provas"), ("OP_video.html", "video")]
+ALVOS = [("OP_simulado.html", "simulado"), ("OP_estudo.html", "estudo"), ("OP_provas.html", "provas"), ("OP_video.html", "video"), ("OP_slides.html", "slides")]
 # O aparelho de uso e o TABLET (decisao do Paulo, 08/09). O celular fica
 # como piso de seguranca: nao e o alvo, mas nao pode quebrar.
 VIEWPORTS = [(810, 1080, "tablet retrato"), (1080, 810, "tablet paisagem"),

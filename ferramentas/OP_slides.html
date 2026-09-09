@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Os truques em slides — Olimpíada de Português</title>
+<link rel="stylesheet" href="serafina-core.css?v=20260908">
+<link rel="stylesheet" href="OP_estilo.css?v=20260908b">
+<style>
+/* ============================================================
+   OS TRUQUES EM SLIDES — a mesma matéria da Caixa e do vídeo,
+   agora em slide, um de cada vez, para folhear na véspera.
+
+   Cada truque vem na ordem que o roteiro fixou: a pergunta que
+   caiu de verdade, a tentativa, o truque, e a armadilha que quase
+   pegou. Por isso a página só embute o PDF: quem conduz é o slide.
+
+   O aparelho de uso é o tablet — PDF abre direto no navegador.
+   ============================================================ */
+.stage{padding-bottom:24px}
+.card{max-width:980px}
+h1{font-size:calc(clamp(1.2rem,3.6vw,1.55rem)*var(--fs));font-weight:900;line-height:1.2;margin-bottom:5px}
+.sub{font-size:calc(.9rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.5;margin-bottom:12px}
+.visor{position:relative;width:100%;height:clamp(340px,64vh,760px);border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);background:var(--surf)}
+.visor iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+.telacheia{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;margin-top:9px;
+  border-radius:11px;border:2px solid var(--line);background:var(--card);color:var(--ink);
+  font-weight:900;font-size:calc(.88rem*var(--fs));text-decoration:none;padding:0 12px;text-align:center}
+.telacheia:active{transform:translateY(1px)}
+.lista{margin:14px 0 0;list-style:none}
+.lista li{font-size:calc(.86rem*var(--fs));font-weight:800;line-height:1.42;padding:8px 11px 8px 26px;
+  border-radius:10px;background:var(--surf);margin-bottom:6px;position:relative}
+.lista li::before{content:"\2022";position:absolute;left:11px;color:var(--accent);font-size:1.25rem;line-height:1.05}
+.acoes{display:grid;gap:8px;margin-top:14px}
+@media(min-width:560px){.acoes{grid-template-columns:1fr 1fr}}
+.acao{min-height:52px;border-radius:13px;border:2px solid var(--line);background:var(--card);color:var(--ink);
+  font-family:inherit;font-weight:900;font-size:calc(.92rem*var(--fs));cursor:pointer;padding:0 12px}
+.acao:active{transform:translateY(1px)}
+.acao.forte{border-color:var(--accent);background:rgba(74,222,128,.14)}
+@media(orientation:landscape) and (max-height:520px){
+  .visor{height:58vh}
+  .lista{display:none}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Os truques em slides</span>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="stage">
+    <div class="card">
+      <h1>Os truques em slides</h1>
+      <p class="sub">Um truque por vez, com a pergunta que caiu de verdade antes da explica&ccedil;&atilde;o.
+        D&aacute; para folhear na v&eacute;spera, sem responder nada.</p>
+
+      <div class="visor">
+        <iframe src="media/OP_truques_slides.pdf#view=FitH" title="Os truques em slides"></iframe>
+      </div>
+      <a class="telacheia" href="media/OP_truques_slides.pdf" target="_blank" rel="noopener">Abrir em tela cheia &#8599;</a>
+
+      <ul class="lista">
+        <li>Todas as perguntas dos slides ca&iacute;ram de verdade nas provas de 2023, 2024 e 2025.</li>
+        <li>Cada truque come&ccedil;a pela pergunta e termina pela armadilha &mdash; &eacute; a armadilha que ensina.</li>
+      </ul>
+
+      <div class="acoes">
+        <button class="acao forte" onclick="location.href='OP_simulado.html'">Agora treinar no simulado &rarr;</button>
+        <button class="acao" onclick="location.href='OP_estudo.html'">Abrir a caixa de truques</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>window.SERA_CFG={trKey:null,lang:'pt-BR',home:'../index.html',stars:110,somKey:'op_som'};</script>
+<script src="serafina-core.js?v=20260908"></script>
+<script>window.SERA_ACCENT={accent:'#4ade80'};</script>
+<script src="sera_theme.js?v=20260908"></script>
+</body>
+</html>
