@@ -124,23 +124,60 @@ body.light .quadro{background:rgba(21,128,61,.07)}
 .opt.no .let{background:rgba(0,0,0,.18);color:#3a0a0a}
 .opt[disabled]{cursor:default}
 
-/* ---------- correção ---------- */
-.fb{margin-top:11px;border-radius:12px;padding:11px 13px;border:2px solid}
-.fb.certo{border-color:var(--ok);background:rgba(52,211,153,.1)}
-.fb.errado{border-color:var(--accent2);background:rgba(251,191,36,.09)}
-.fb h3{font-size:calc(.94rem*var(--fs));font-weight:900;margin-bottom:7px}
-.fb .truq{font-size:calc(.96rem*var(--fs));font-weight:900;line-height:1.38;margin:7px 0;padding:8px 10px;
-  border-radius:9px;background:var(--surf);border-left:4px solid var(--accent2)}
-.fb .sua{font-size:calc(.9rem*var(--fs));font-weight:800;line-height:1.42;margin:8px 0;padding:8px 10px;
-  border-radius:9px;background:rgba(248,113,113,.12);border-left:4px solid var(--no)}
-.fb .porq{font-size:calc(.9rem*var(--fs));font-weight:800;line-height:1.45;margin:8px 0}
-.fb .prox{font-size:calc(.92rem*var(--fs));font-weight:900;line-height:1.42;margin-top:8px;padding:8px 10px;
-  border-radius:9px;background:rgba(74,222,128,.13);border-left:4px solid var(--accent)}
+/* ============================================================
+   CORREÇÃO (reescrita em 09/09, crítica do Paulo)
+
+   O defeito: no modo papel a correção era pintada de azul-quase-preto
+   para "sair da folha". Virou um retângulo escuro no meio de uma folha
+   branca, destoando do tema, com as peças internas mal legíveis. E, ao
+   errar, aparecia tudo de uma vez: ~800 caracteres para uma questão de
+   dez segundos.
+
+   Duas regras agora:
+   1. A correção SEGUE O TEMA, sempre. Toda cor daqui sai de token
+      (--card, --surf, --ink, --line, --ok, --no, --accent, --accent2).
+      Quem quiser mudar o visual por tema reescreve os TOKENS dentro do
+      bloco (ver `body.papel .fb` lá embaixo), nunca as cores peça a peça
+      — foi a pintura peça a peça que produziu o bloco preto.
+   2. Por padrão a criança lê no máximo TRÊS blocos: o truque, a frase da
+      alternativa que ela marcou, e uma fileira de botões. O desenho, o
+      porquê e o gesto da próxima ficam atrás de "Ver como se faz" — no
+      DOM sempre (o gate confere que existem), na tela só a pedido.
+   ============================================================ */
+.fb{margin-top:11px;border-radius:12px;padding:11px 13px;border:2px solid var(--line);
+  background:var(--surf);color:var(--ink)}
+.fb.certo{border-color:var(--ok)}
+.fb.errado{border-color:var(--accent2)}
+.fb [hidden]{display:none!important}
+/* acerto: uma linha e pronto — quem acertou não precisa de aula */
+.fb .fbok{font-size:calc(.94rem*var(--fs));font-weight:900;line-height:1.3;margin-bottom:8px;color:var(--ink)}
+/* o truque: a única coisa que ela precisa levar para a próxima questão */
+.fb .truq{font-size:calc(1rem*var(--fs));font-weight:900;line-height:1.4;margin:0;padding:10px 12px;
+  border-radius:9px;background:var(--card);border-left:5px solid var(--accent2);color:var(--ink)}
+.fb.certo .truq{border-left-color:var(--ok)}
+/* "por que a sua não serve": o nome da alternativa é ETIQUETA, não grito —
+   continua em caixa alta (é o que está escrito na prova, ela precisa
+   reconhecer), mas em corpo menor e espaçado; a explicação vem em letra
+   normal, no peso do texto comum. */
+.fb .sua{font-size:calc(.9rem*var(--fs));font-weight:700;line-height:1.46;margin:9px 0 0;padding:9px 12px;
+  border-radius:9px;background:var(--card);border-left:5px solid var(--no);color:var(--ink)}
+.fb .sua .suaetq{display:block;font-size:calc(.68rem*var(--fs));font-weight:900;letter-spacing:1.1px;
+  line-height:1.25;color:var(--soft);margin-bottom:4px}
+/* a fileira de botões discretos */
+.fbrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+/* o segundo nível, atrás do botão */
+.fbmais{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line)}
+.fb .porq{font-size:calc(.9rem*var(--fs));font-weight:700;line-height:1.5;margin:8px 0 0;color:var(--ink)}
+.fb .prox{font-size:calc(.88rem*var(--fs));font-weight:700;line-height:1.45;margin-top:10px;padding:9px 12px;
+  border-radius:9px;background:var(--card);border-left:5px solid var(--accent);color:var(--ink)}
 .fb .prox i{display:block;font-style:normal;font-size:calc(.64rem*var(--fs));font-weight:900;letter-spacing:1px;
   text-transform:uppercase;color:var(--soft);margin-bottom:3px}
 
 /* o truque desenhado */
 .desenho{margin:7px 0}
+/* dentro da correção a peça precisa se destacar do fundo do bloco, e o
+   fundo do bloco já é --surf; por isso aqui ela vira --card */
+.fb .pc{background:var(--card)}
 .pcs{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px;margin:7px 0}
 .pc{padding:5px 9px;border-radius:8px;background:var(--surf);border:2px solid var(--line);font-weight:900;
   font-size:calc(.88rem*var(--fs));line-height:1.2;text-align:center}
@@ -150,7 +187,10 @@ body.light .quadro{background:rgba(21,128,61,.07)}
 .vx{font-size:calc(.88rem*var(--fs));font-weight:800;line-height:1.45;margin:6px 0;text-align:center}
 .mk{background:rgba(251,191,36,.28);border-radius:4px;padding:1px 4px}
 .bad2{background:rgba(248,113,113,.24);border-radius:4px;padding:1px 4px}
-.dm{opacity:.5;font-weight:700}
+/* a tentativa descartada, apagada — mas ainda TEXTO: a .5 ela ficava em
+   3,4:1 sobre o creme do papel, abaixo do piso de 4,5:1. A .62 continua
+   nitidamente em segundo plano e passa dos 5:1 nos dois temas. */
+.dm{opacity:.62;font-weight:700}
 
 /* ---------- avançar ---------- */
 .avancar{display:block;width:100%;min-height:50px;margin-top:11px;border:none;border-radius:12px;
@@ -298,16 +338,21 @@ body.papel .mini{background:#f4f4f4;border-color:#ccc;color:#444}
 body.papel .mini.on{background:#fff3c4;border-color:#d19a00;color:#8a5a00}
 body.papel .dicabox{background:#fff9e0;border-color:#e0c46a;color:#4a3c10}
 body.papel .dicabox b{color:#8a5a00}
-/* a correção sai da folha: é a voz de quem ensina, não a da prova */
-body.papel .fb{background:#1a2740;color:#f2f7ff;border-color:#2c3d5e;
+/* A correção no papel: um cartão CREME sobre a folha branca — distingue-se
+   sem gritar. Até 09/09 ela era pintada de azul-quase-preto ("sair da
+   folha, como a professora ao lado"); na tela virou um bloco preto no
+   meio da folha, destoando do tema e com contraste ruim nas peças de
+   dentro. O conserto não é repintar peça a peça: é reescrever os TOKENS
+   dentro do bloco e deixar as regras de `.fb` (lá em cima) valerem. Sem
+   isso, cada peça nova nascia com a cor errada de novo. */
+body.papel .fb{
+  --ink:#14181f; --soft:#4a515e; --dim:#6b7280;
+  --card:#fffdf6; --surf:#f4efe1; --line:#d6cdb7;
+  --accent:#1b6b34; --accent2:#8a5a00; --ok:#2e7d32; --no:#b3261e;
   font-family:'Nunito','Segoe UI',system-ui,sans-serif;margin-top:16px}
-body.papel .fb.certo{border-color:#2e7d32}
-body.papel .fb.errado{border-color:#d19a00}
-body.papel .fb .truq{background:rgba(255,255,255,.07)}
-body.papel .fb .pc{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
-body.papel .fb .pc.hit{background:rgba(52,211,153,.22);border-color:#34d399}
-body.papel .fb .pc.bad{background:rgba(248,113,113,.2);border-color:#f87171}
-body.papel .fb .arw{color:rgba(255,255,255,.6)}
+/* os botõezinhos da correção seguem o creme do bloco, não o cinza da folha */
+body.papel .fb .mini{background:var(--card);border-color:var(--line);color:var(--soft)}
+body.papel .fb .mini.on{background:#fff3c4;border-color:var(--accent2);color:var(--accent2)}
 body.papel .figura img{border:1px solid #e2e2e2}
 body.papel .avancar{font-family:'Nunito','Segoe UI',system-ui,sans-serif}
 /* número da página, no rodapé da folha */

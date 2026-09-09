@@ -61,7 +61,7 @@ window.OP = (function(){
    espelhando a distribuição real de 2024+2025.                         */
 var FAMILIAS = [
   {k:'ler',      nome:'Ler e entender',   cota:3, cor:'#f472b6',
-   truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.'},
+   truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.'},
   {k:'letras',   nome:'Brincar com letras', cota:2, cor:'#a78bfa',
    truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.'},
   {k:'contar',   nome:'Contar com o dedo', cota:2, cor:'#38bdf8',
@@ -306,8 +306,8 @@ var ITENS = [
   {t:'PORQUE ELE GOSTA DE ERGUER A CABEÇA.', no:'O poema diz TENHO DE: ele é obrigado a olhar assim. Não diz que ele gosta.'},
   {t:'PORQUE ELE ESTÁ COM MEDO DA FORMIGA, QUE É MUITO GRANDE.', no:'A formiga aparece só no fim, e ela é pequena, não grande. Quem acha o menino GRANDÃO é ela. A resposta do POR QUE estava lá em cima, na primeira linha.'}
  ],
- dica:'A pergunta tem POR QUE. Volte com a régua para o começo e ache a linha que explica.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ dica:'A pergunta tem POR QUE. Volte ao começo do texto e ache a linha que explica.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[0,2,3],
  visual:'<p class="vx"><b class="mk">EU SOU PEQUENO</b>, e por isso <b class="mk">TENHO DE OLHAR TODO MUNDO COM O QUEIXO LEVANTADO</b>.</p>'+
         '<p class="vx">Quem &eacute; pequeno olha para cima para ver os outros. As duas linhas juntas d&atilde;o a resposta.</p>',
@@ -799,7 +799,7 @@ var ITENS = [
   {t:'PELA FUMACEIRA QUE FAZ.', no:'O texto não fala de fumaça nenhuma. Aqui vale o que está escrito, não o que a gente já viu na rua.'}
  ],
  dica:'Volte ao texto com a régua e ache a palavrinha ANTES. Ela diz o que chega primeiro.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  visual:'<p class="vx">ELE <b class="mk">CANTA T&Atilde;O ALTO</b> QUE TODO MUNDO O PERCEBE <b class="mk">ANTES</b> DE SENTIR O CHEIRO.</p>'+
         '<div class="pcs"><span class="pc hit">o canto</span><span class="arw">&rarr;</span><span class="pc bad">o cheiro</span></div>'+
         '<p class="vx">O canto chega <b>primeiro</b>. Quem avisa &eacute; ele.</p>',
@@ -1007,8 +1007,8 @@ var ITENS = [
   {t:'INVERNO', ok:1},
   {t:'OUTONO', no:'No outono também venta, e por isso essa é a mais difícil de riscar. Mas a primeira linha diz SOU A ESTAÇÃO DO FRIO. E no fim as pessoas entram em casa a tiritar, que é tremer de frio. Esse é o frio mais forte do ano.'}
  ],
- dica:'A resposta está escrita logo na primeira linha. Volte com a régua e leia a linha inteira, não só uma palavra.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ dica:'A resposta está escrita logo na primeira linha. Volte no texto e leia a linha inteira, não só uma palavra.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[0,2,11],
  visual:'<p class="vx"><b class="mk">SOU A ESTA&Ccedil;&Atilde;O DO FRIO</b> &middot; <b class="mk">O SOL N&Atilde;O TEM CALOR</b> &middot; <b class="mk">&Agrave; CASA A TIRITAR</b></p>'+
         '<p class="vx">Tiritar &eacute; tremer de frio. As tr&ecirc;s linhas juntas s&oacute; podem ser o <b>inverno</b>.</p>'+
@@ -1290,7 +1290,7 @@ var ITENS = [
   {t:'BOLACHA', no:'As bolachas estavam na mesa junto com os pães, e a mesma linha diz que ele não quis. Achar a palavra no texto não basta: é preciso ler o que a linha diz dela.'}
  ],
  dica:'As quatro comidas estão todas escritas no texto. A pergunta não é o que ele VIU: é o que ele COMEU. Procure com a régua a linha que tem a palavra COMEU.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[3,5,8],
  visual:'<p class="vx">VIU O ARROZ E O FEIJ&Atilde;O <b class="bad2">MAS N&Atilde;O QUIS COMER NADA DISSO</b></p>'+
         '<p class="vx">HAVIA P&Atilde;ES E ALGUMAS BOLACHAS <b class="bad2">MAS TAMB&Eacute;M N&Atilde;O QUIS</b></p>'+
@@ -2086,7 +2086,7 @@ var ITENS = [
   {t:'BELOS OLHOS.', no:'OLHOS é palavra que está no poema, e a mão vai nela. Só que o poema não diz que os olhos são bonitos: diz que eles FORAM dela.'}
  ],
  dica:'Leia com a régua a última linha: COM OLHOS QUE FORAM MEUS. FORAM quer dizer que já passou. Quem será que ela está vendo?',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[2,3],
  visual:'<p class="vx">COM OLHOS QUE <b class="mk">FORAM</b> MEUS <span class="dm">&mdash; FORAM &eacute; coisa que j&aacute; passou</span></p>'+
         '<p class="vx"><span class="mk">DE T&Atilde;O LONGE</span> <span class="dm">&mdash; longe no tempo, e n&atilde;o longe daqui</span></p>'+
@@ -2110,7 +2110,7 @@ var ITENS = [
  pede:'SE HOUVESSE TEMPO, QUAL DAS RESPOSTAS ABAIXO O ESCORPIÃO PODERIA TER DADO AO SAPO?',
  nota:'Esta questão é de 2023, quando a prova tinha cinco respostas. Aqui ela está com quatro, como na prova de hoje.',
  opts:[
-  {t:'O SENHOR ME TRATOU MUITO MAL, SAPO, POR ISSO O PIQUEI.', no:'Volte com a régua e procure: em nenhuma linha o sapo trata mal o escorpião. Ele foi educado o tempo todo e ainda deu carona.'},
+  {t:'O SENHOR ME TRATOU MUITO MAL, SAPO, POR ISSO O PIQUEI.', no:'Volte no texto e procure: em nenhuma linha o sapo trata mal o escorpião. Ele foi educado o tempo todo e ainda deu carona.'},
   {t:'NADA ME IMPORTA NA VIDA, SENHOR SAPO, POR ISSO PUDE FERROÁ-LO, MESMO SABENDO QUE MORRERIA JUNTO.', no:'O escorpião tinha dito que NÃO QUERIA MORRER: falou dos negócios dele e da família. Essa resposta briga com o que ele mesmo falou.'},
   {t:'DEI-LHE MINHA PICADA MORTAL, PORQUE SENTI QUE O SENHOR ESTAVA ME AMEAÇANDO.', no:'O sapo não ameaçou ninguém: ele só avisou que tinha medo da picada. Essa resposta inventa uma coisa que o texto não conta.'},
   {t:'HÁ COISAS QUE NÃO PODEMOS MUDAR, SENHOR SAPO, É DA MINHA NATUREZA FAZER O QUE FIZ.', ok:1}
@@ -2711,8 +2711,8 @@ var ITENS = [
   {t:'PORQUE O IRMÃO DELA ESTÁ CHORANDO.', no:'Essa diz que o irmão já está chorando. O poema diz que ele vai chorar SE acordar: agora ele está dormindo.'},
   {t:'PORQUE ELA FALA BEM BAIXINHO E NÃO CANTA NO CAMINHO.', no:'Essa não responde à pergunta. Falar baixinho é mais uma coisa que ela faz para não acordar o irmão, e a pergunta é POR QUE ela faz.'}
  ],
- dica:'A pergunta tem POR QUE. Volte com a régua e ache a linha que explica. Ela vem depois de tudo o que a menina deixa de fazer.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ dica:'A pergunta tem POR QUE. Volte no texto e ache a linha que explica. Ela vem depois de tudo o que a menina deixa de fazer.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[4,5],
  visual:'<p class="vx">ANDO NA PONTA DO P&Eacute; &middot; FALO BAIXINHO &middot; N&Atilde;O CORRO &middot; N&Atilde;O CANTO</p>'+
         '<p class="vx">Quatro coisas que ela faz para n&atilde;o fazer barulho. O motivo vem logo depois:</p>'+
@@ -2735,7 +2735,7 @@ var ITENS = [
   {t:'NÃO SE DEVE BRINCAR PERTO DO RIO.', no:'Essa sai da última linha da fábula. Ninguém brincou no rio: as bananas rolaram para lá depois que o macaco soltou tudo.'}
  ],
  dica:'A lição não está escrita em nenhuma linha. Compare duas partes: quantas bananas ele quis levar e com quantas ele ficou no fim.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[1,3],
  visual:'<div class="pcs"><span class="pc hit">2 nas m&atilde;os</span><span class="pc hit">2 nos p&eacute;s</span><span class="pc hit">2 na boca</span><span class="arw">&rarr;</span><span class="pc hit">seis de uma vez</span></div>'+
         '<div class="pcs"><span class="pc bad">FICOU SEM NENHUMA</span></div>'+
@@ -2883,7 +2883,7 @@ var ITENS = [
   {t:'PORQUE VEEM A FILA COMEÇANDO.', no:'Essa sai da última linha. A fila se forma DEPOIS das palmas: primeiro elas escutam, aí largam a bola e correm.'}
  ],
  dica:'Volte ao texto com a régua e ache o POR ISSO. Depois dele vem o que a professora faz quando o recreio acaba.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[0,1],
  visual:'<p class="vx">A CAMPAINHA EST&Aacute; <b class="bad2">QUEBRADA</b> &mdash; ela n&atilde;o pode avisar ningu&eacute;m.</p>'+
         '<p class="vx"><b class="mk">POR ISSO</b> A PROFESSORA MARTA <b class="mk">BATE PALMAS TR&Ecirc;S VEZES</b></p>'+
@@ -2907,7 +2907,7 @@ var ITENS = [
   {t:'O SHORT AZUL.', ok:1}
  ],
  dica:'As quatro roupas estão todas escritas no texto. A pergunta não é o que ela VIU: é o que ela VESTIU. Procure com a régua a linha que tem a palavra VESTIU.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[1,2,3,4],
  visual:'<p class="vx">VIU O VESTIDO AMARELO <b class="bad2">MAS ESTAVA NO CESTO DE ROUPA SUJA</b></p>'+
         '<p class="vx">VIU O CASACO DE L&Atilde; <b class="bad2">MAS O DIA ESTAVA QUENTE DEMAIS</b></p>'+
@@ -2982,7 +2982,7 @@ var ITENS = [
   {t:'A HORA DO JANTAR.', no:'Essa fala de jantar, e o poema não fala de comida em nenhuma linha. Ele fala de subir na cadeira e de alcançar.'}
  ],
  dica:'Leia com a régua as duas últimas linhas. Uma diz o que ele NÃO alcançava antes; a outra diz o que ele alcança hoje. O que mudou entre as duas?',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[3,4],
  visual:'<div class="pcs"><span class="pc bad">ANTES<br>N&Atilde;O ALCAN&Ccedil;AVA A PIA</span><span class="arw">&rarr;</span><span class="pc hit">HOJE<br>ALCAN&Ccedil;A O ARM&Aacute;RIO DE CIMA</span></div>'+
         '<p class="vx">Ele precisava da cadeira para chegar &agrave; pia. <b>Hoje n&atilde;o precisa mais.</b></p>'+
@@ -4049,8 +4049,8 @@ var ITENS = [
   {t:'PORQUE ESTAVA CHOVENDO NA HORA DE IR PARA A ESCOLA.', no:'Bota de borracha lembra chuva, e a gente calça bota quando chove — mas isso é a vida lá fora. No texto está escrito que de manhã fazia SOL.'},
   {t:'PORQUE A AMIGA DELA TAMBÉM IA DE BOTA.', no:'Essa vem da ÚLTIMA linha. Mas repare na hora: a amiga só falou em usar bota DEPOIS, na volta, com o tênis sujo. Quando Lara escolheu a bota, isso ainda não tinha acontecido.'}
  ],
- dica:'A pergunta tem POR QUE. Volte com a régua e ache a linha em que Lara EXPLICA. A resposta dela vem logo em seguida.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ dica:'A pergunta tem POR QUE. Volte no texto e ache a linha em que Lara EXPLICA. A resposta dela vem logo em seguida.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[2,3],
  visual:'<p class="vx"><span class="mk">NA VOLTA DA ESCOLA, AS DUAS IAM PASSAR PELA RUA DE TERRA</span></p>'+
         '<p class="vx"><span class="mk">ONTEM CHOVEU A NOITE INTEIRA E A RUA DE TERRA FICOU CHEIA DE PO&Ccedil;AS</span></p>'+
@@ -4128,7 +4128,7 @@ var ITENS = [
   {t:'SEGUNDA-FEIRA, DIA DE COMEÇAR.', no:'A segunda é o dia em que a semana começa, e por isso ela vem à cabeça sozinha. Mas a segunda não aparece em lugar nenhum da regra do poema.'}
  ],
  dica:'As quatro respostas rimam, então a rima não decide nada aqui. Ache na regra a linha que fala da sapatilha.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[2,5],
  visual:'<p class="vx">Em cima da cama estava <b class="mk">A MINHA SAPATILHA COR-DE-ROSA</b>.</p>'+
         '<p class="vx">E a regra diz: <b class="mk">SAPATILHA S&Oacute; NA TER&Ccedil;A, PRA DAN&Ccedil;AR</b>.</p>'+
@@ -4155,8 +4155,8 @@ var ITENS = [
   {t:'QUEM TRATA MAL OS AMIGOS FICA SOZINHO NA HORA QUE PRECISA DE AJUDA.', ok:1},
   {t:'QUE BOLO É MELHOR DE DIVIDIR DO QUE SUCO.', no:'Essa vem da ÚLTIMA linha, onde aparece o bolo de Clara. Mas a historinha não está comparando bolo com suco: ela está falando do jeito de Miguel tratar os colegas.'}
  ],
- dica:'Tem uma linha em que alguém DIZ a lição com todas as letras. Volte com a régua e procure a fala da professora.',
- truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
+ dica:'Tem uma linha em que alguém DIZ a lição com todas as letras. Volte no texto e procure a fala da professora.',
+ truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
  acende:[1,3,4],
  visual:'<p class="vx"><span class="mk">ELE EMPURRAVA OS COLEGAS</span> <span class="dm">&mdash; o jeito dele antes</span></p>'+
         '<p class="vx"><span class="mk">NINGU&Eacute;M QUIS DIVIDIR O LANCHE COM ELE</span> <span class="dm">&mdash; o que aconteceu por causa disso</span></p>'+
@@ -4183,102 +4183,103 @@ ITENS = ITENS.filter(function(i){ return !i._sentinela; });
    `min` é a estimativa de tempo, em minutos.                          */
 var CARTOES = [
  /* O TRUQUE MESTRE — vem antes de todos porque vale para as quinze
-    questões, e não para um tipo só. A análise das seis provas mostrou que
-    o erro típico não é ignorância: é responder à pergunta que a criança
-    esperava, e não à que foi feita. Os distratores são construídos para
-    isso — a alternativa errada costuma falar de algo que está no texto,
-    mas não é o que o comando pediu. (Nota de redação: para a criança,
-    NUNCA se diz que a errada "é verdadeira" — isso soa como permissão
-    para marcar. Diz-se que ela não responde à pergunta que foi feita.)
-
-    Não tem `exemplo` nem `agora`: é uma ordem de leitura, não um tipo de
-    questão. Quem treina esse gesto treina em todas as outras. */
+    questões, e não para um tipo só. O erro típico das seis provas
+    analisadas não é ignorância: é responder à pergunta que a criança
+    esperava, e não à que foi feita. Por isso ele é ordem de leitura,
+    e as palavras de comando aparecem como fichas, não como lista de
+    prosa: ela precisa RECONHECÊ-LAS no papel, não decorá-las. */
  {k:'comando', titulo:'Antes de tudo: o que a pergunta está pedindo', min:3, mestre:true,
   truque:'Leia a pergunta ANTES do texto. Ache a palavra que manda — e responda exatamente ela.',
-  texto:'Este truque vale para as quinze perguntas da prova. As respostas erradas costumam falar de coisas que aparecem no texto, mas não respondem à pergunta que foi feita. Quem lê a pergunta com atenção já sai procurando a coisa certa.',
-  extras:['A ordem que funciona: primeiro a pergunta, depois o texto, depois a pergunta de novo com as quatro respostas.',
-          'Ler a pergunta antes liga a sua cabeça no modo procurar. Aí, quando você lê o texto, já sabe o que está caçando.',
-          'Ache a palavra que manda e passe o dedo nela: POR QUE pede um motivo. QUAL pede escolher um. QUANTOS pede contar. O QUE pede a coisa. COMPLETE pede encaixar. MARQUE APENAS pede olhar todas.',
-          'Cuidado com o NÃO: "qual NÃO combina", "qual é a única que NÃO muda". Aí a resposta é a diferente, não a parecida.',
-          'Repare no que a pergunta quer de volta: às vezes ela pede a LETRA e não a palavra; às vezes o TÍTULO e não o assunto.',
-          'Antes de marcar, leia sua resposta junto com a pergunta, uma atrás da outra. Faz sentido? Responde mesmo o que foi perguntado?'],
-  apoio:'Nas telas de treino existe um botão "Só a pergunta". Ele mostra o comando sozinho, antes do texto — é para praticar essa ordem de leitura.',
+  reconhece:'Vale para as quinze perguntas da prova.',
+  palavras:['POR QUE','QUAL','QUANTOS','COMPLETE','MARQUE APENAS'],
+  passos:['Leia a pergunta antes do texto.',
+          'Passe o dedo na palavra que manda.',
+          'Leia sua resposta junto com a pergunta.'],
+  armadilha:'Se aparecer NÃO, a resposta é a diferente das outras.',
   /* Este bloco não tem eixo próprio no banco: o popup dele reúne questões
      REAIS em que ler o comando com atenção é o que decide a resposta. */
   itens:['25F1Q12','24F1Q8','25F1Q9','25F1Q7','24F1Q14','25F1Q5']},
 
  {k:'ler', titulo:'Ler e entender', min:4,
-  truque:'A resposta mora no texto. Volte com a régua e ache a linha que responde.',
-  texto:'É o tipo com mais perguntas na prova, e o mais justo: a resposta está escrita ali. Não é para adivinhar nem para lembrar da sua vida — é para achar.',
-  extras:['Pergunta que começa com POR QUE: procure a linha que explica.',
-          'Título é do texto INTEIRO, nunca da última linha.',
-          'Lição da fábula: o que os bichos deviam ter feito e não fizeram.',
-          'Se a pergunta é sobre um lugar ou uma pessoa, junte as palavras que o texto repete sobre ele.',
-          'Antes de marcar, leia as QUATRO respostas até o fim.'],
-  exemplo:'25F1Q13', agora:'24F1Q8',
-  /* A régua entra aqui, como apoio de quem quer, e não como lição de
-     abertura: é técnica de leitura, não conteúdo de prova. (Ela nasceu
-     de um problema real — a mãe relatou que a Mari pula linha —, mas
-     virou a primeira coisa da tela, o que era desproporcional.) */
-  apoio:'Se o texto for comprido e você se perder de linha, ligue o guia de leitura: ele acende uma linha por vez. Na prova, quem faz esse papel é o seu dedo embaixo da linha.'},
+  truque:'A resposta mora no texto. Volte no texto e ache a linha que responde.',
+  reconhece:'A prova dá um texto e pergunta uma coisa sobre ele.',
+  passos:['Leia a pergunta e guarde o que ela quer.',
+          'Ache no texto a linha que responde.',
+          'Leia as quatro respostas até o fim.'],
+  armadilha:'A errada está no texto, mas não responde a pergunta.',
+  exemplo:'25F1Q13', agora:'24F1Q8'},
 
  {k:'letras', titulo:'Brincar com letras', min:3,
   truque:'Cada letra vale uma vez. Escreva e vá riscando: sobrou ou faltou letra, está errada.',
-  texto:'Aqui a prova dá um monte de letras e pergunta que palavra dá para montar. Ou manda trocar as vogais de lugar. É conta de letra, não é adivinhação.',
-  extras:['Trocar as vogais: só as vogais mudam de lugar; as outras letras ficam paradas.',
-          'Mover uma letra: ache a palavra esquisita, tire UMA letra dela e dê para a outra.'],
+  reconhece:'A prova dá letras soltas e pergunta que palavra dá para montar.',
+  passos:['Escreva a palavra da resposta.',
+          'Risque uma letra da lista a cada letra escrita.',
+          'Confira: não pode sobrar nem faltar letra.'],
+  armadilha:'A errada usa quase todas as letras e sobra uma.',
   exemplo:'25F1Q6', agora:'25F1Q11'},
 
  {k:'contar', titulo:'Contar com o dedo', min:3,
   truque:'Pontinho embaixo de cada uma, uma por uma. Só no fim conte os pontinhos.',
-  texto:'Vogal é A, E, I, O, U. Todo o resto é consoante. Quando a prova manda contar, ninguém acerta de cabeça: acerta quem marca uma por uma e conta no fim.',
-  extras:['A vogal que estraga costuma estar no ÚLTIMO pedaço da palavra.',
-          'Quando a pergunta fala de SOM, fale as palavras em voz alta e escute. Olhar não resolve.'],
+  reconhece:'A prova pergunta QUANTAS vogais, letras ou sílabas tem.',
+  passos:['Ponha um pontinho embaixo de cada uma.',
+          'Vá até o fim da palavra, sem pular.',
+          'Conte os pontinhos só no fim.'],
+  armadilha:'A vogal que você esquece está no último pedaço da palavra.',
   exemplo:'25F1Q7', agora:'24F1Q4'},
 
  {k:'silabas', titulo:'Sílabas', min:3,
-  truque:'Bata palma em cada pedaço, e leia direito o que a pergunta pede.',
-  /* Este cartão tinha UMA frase para TRÊS gestos diferentes, e ela era falsa
-     em vários itens: nas questões de "palavra formada apenas com sílabas
-     destes nomes", seguir "use todas as peças" faz riscar a resposta certa
-     (PIPOCA usa 3 das 9 peças que os nomes dão). O cartão passa a ensinar as
-     três variantes e a dizer que quem escolhe é a pergunta. */
-  texto:'A prova dá pedaços de palavra e pergunta o que dá para montar. Existem três brincadeiras parecidas, e é a pergunta que diz qual delas é. Em todas, a ordem dos pedaços pode mudar.',
-  extras:['MONTE COM ESTAS PEÇAS: use todas, uma vez cada. Sobrou peça na mesa, errado; faltou peça, errado.',
-          'APENAS COM SÍLABAS DESTES NOMES: cada pedaço tem de vir de algum nome — mas não precisa usar todos os pedaços.',
-          'QUAL SÍLABA SOBRA: aqui a prova dá peça demais de propósito, e a resposta é a que ficou de fora.',
-          'Nas três, o teste final é o mesmo: procure a sílaba que NÃO existe entre as peças. É ela que derruba a alternativa.',
-          'Se as peças vêm de figuras, fale o nome da figura batendo palma.'],
+  /* truque de volta à frase do banco (ver cabeçalho): a ressalva das
+     variantes virou o passo 3, que é gesto e não emenda de frase. */
+  truque:'Bata palma em cada pedaço. Use TODAS as peças, uma vez cada.',
+  reconhece:'A prova dá pedaços de palavra e pergunta o que dá para montar.',
+  passos:['Bata palma em cada pedaço da resposta.',
+          'Ache cada pedaço entre as peças da prova.',
+          'Leia a pergunta: usa todas as peças ou não?'],
+  armadilha:'Se um pedaço não está entre as peças, a palavra está errada.',
   exemplo:'25F1Q3', agora:'24F1Q11'},
 
  {k:'buraco', titulo:'Frase com buraco', min:3,
   truque:'Ponha cada palavra no buraco e leia a frase inteira, do começo.',
-  texto:'A frase tem um espaço vazio e quatro palavras para escolher. Não dá para decidir olhando só a palavra: tem de ler a frase toda com ela dentro.',
-  extras:['A pista mora do lado do buraco.',
-          'Depois de PORQUE vem a explicação: pergunte se aquilo impede mesmo.'],
+  reconhece:'A frase tem um espaço vazio e quatro palavras para escolher.',
+  passos:['Ponha a primeira palavra no buraco.',
+          'Leia a frase inteira, do começo até o fim.',
+          'Faça isso com as quatro e escolha a que encaixa.'],
+  armadilha:'A errada combina com o lado do buraco e briga com o resto.',
   exemplo:'25F1Q2', agora:'24F1Q6'},
 
  {k:'intruso', titulo:'Intruso e troca-troca', min:3,
   truque:'O que os outros três têm de igual? Quem não tem isso é o intruso.',
-  texto:'Duas brincadeiras parecidas: achar a palavra que não pertence ao grupo, e trocar uma palavra por outra que diga a mesma coisa.',
-  extras:['Palavra que troca: tire a velha, ponha a nova, leia a frase de novo.',
-          'Quando a questão dá várias pistas, confira TODAS: a errada passa em quase todas e cai na última.'],
+  reconhece:'A prova dá quatro palavras e pergunta qual não combina.',
+  passos:['Olhe as quatro e ache o que três têm de igual.',
+          'Marque a que não tem isso.',
+          'Se a pergunta manda trocar, leia a frase nova.'],
+  armadilha:'A errada passa em quase todas as pistas e cai na última.',
   exemplo:'24F1Q9', agora:'25F1Q10'},
 
  {k:'alfabeto', titulo:'Alfabeto e charada', min:3,
   truque:'Cante o alfabeto com o dedo andando: A B C D E F G. Onde o dedo pula, tem buraco.',
-  texto:'Duas coisas caem aqui: listas em ordem alfabética e charadas em que uma letra fala dela mesma.',
-  extras:['Ordem dentro da palavra: cada letra tem de vir DEPOIS da anterior, até o fim.',
-          'Na charada, pense na FORMA da letra e no SOM dela.'],
+  reconhece:'A prova pede ordem do alfabeto, ou uma letra fala dela mesma.',
+  passos:['Cante o alfabeto com o dedo andando.',
+          'Veja se cada letra vem depois da anterior.',
+          'Na charada, pense na forma e no som da letra.'],
+  armadilha:'Uma letra passa nas primeiras pistas e cai na última.',
   exemplo:'25F1Q5', agora:'24F1Q1'},
 
+ /* Bloco de dois eixos: a tabela de desenhos e as placas entram juntas
+    porque o gesto é o mesmo — ler o desenho inteiro antes de decidir.
+    A regra da placa não cabia em passo e armadilha ao mesmo tempo; ficou
+    a regra no passo 3 (o que a placa quer dizer) e a pegadinha na
+    armadilha (o que ela NÃO quer dizer sem a barra vermelha). */
  {k:'codigo', titulo:'Código, tabela e placa', min:3, eixos:['codigo','placa'],
   truque:'Um símbolo de cada vez: dedo no símbolo, dedo na tabela, escreva a peça. Junte só no fim.',
-  texto:'A prova dá uma tabela em que cada desenho vale uma sílaba, e uma fila de desenhos para decifrar. É trabalho de detetive: devagar e sem pular nenhum.',
-  extras:['Nunca adivinhe o fim porque reconheceu o começo.',
-          'Placa: círculo vermelho cortado quer dizer PROIBIDO, e o desenho de dentro diz o que é proibido. Sem barra vermelha, a placa não proíbe: ela mostra o que tem ali. Na prova de 2025 a placa certa tinha um cachorro dentro do círculo cortado, e queria dizer: aqui não pode entrar com animal.'],
+  reconhece:'Tabela de desenhos para ler, ou placas para escolher.',
+  passos:['Ache cada desenho na tabela e escreva a peça.',
+          'Junte as peças só no fim, sem pular nenhuma.',
+          'Na placa, círculo cortado é PROIBIDO.'],
+  armadilha:'Placa sem barra vermelha não proíbe: ela mostra.',
   exemplo:'25F1Q15'}
 ];
+
 
 return { FAMILIAS: FAMILIAS, ITENS: ITENS, CARTOES: CARTOES,
          acha: function(id){ return ITENS.filter(function(x){ return x.id===id; })[0]||null; } };

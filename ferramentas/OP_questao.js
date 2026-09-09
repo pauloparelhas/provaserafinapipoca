@@ -29,9 +29,11 @@
      respostaInicial       // índice já respondido (para reabrir uma questão feita)
    })  -> { destruir() }
 
-   Toda a correção didática mora aqui: o truque, o truque desenhado sobre
-   AQUELA questão, por que a alternativa marcada não serve, e o gesto para
-   a próxima. É o coração do material — mexer aqui muda os três produtos.
+   Toda a correção didática mora aqui, em DOIS níveis (09/09): na tela,
+   por padrão, só o truque e por que a alternativa marcada não serve;
+   atrás de "Ver como se faz", o truque desenhado sobre AQUELA questão, o
+   porquê e o gesto para a próxima. É o coração do material — mexer aqui
+   muda os três produtos.
    ============================================================ */
 (function(global){
 'use strict';
@@ -47,6 +49,15 @@ function textoPuro(s){
   return String(s||'').replace(/<[^>]+>/g,' ').replace(/&[a-z]+;/gi,' ').replace(/\s+/g,' ').trim();
 }
 function html(s){ return {dangerouslySetInnerHTML:{__html:s}}; }
+/* O nome da alternativa marcada, para servir de ETIQUETA em cima do
+   comentário. Devolve '' quando o comentário do banco já abre com esse
+   mesmo nome — repetir seria gagueira na tela. */
+function etiquetaSua(o){
+  var nome = textoPuro(o.t).replace(/\s*\.\s*$/,'');
+  var frase = textoPuro(o.no);
+  if(!nome || !frase) return nome;
+  return frase.toUpperCase().indexOf(nome.toUpperCase())===0 ? '' : nome;
+}
 function falar(t){ if(global.say) global.say(textoPuro(t)); }
 
 /* --------- o texto longo, linha a linha ---------
@@ -105,6 +116,8 @@ function Questao(props){
   var r=React.useState(typeof props.respostaInicial==='number'?props.respostaInicial:-1);
   var pick=r[0], setPick=r[1];
   var d=React.useState(false), dica=d[0], setDica=d[1];
+  /* segundo nível da correção ("Ver como se faz"): fechado por padrão. */
+  var vm=React.useState(false), verMais=vm[0], setVerMais=vm[1];
   var fim=React.useRef(null);
   /* "Só a pergunta": esconde o texto de apoio e deixa o comando sozinho na
      tela. É a ordem de leitura que faz acertar — primeiro a pergunta, para
@@ -187,24 +200,52 @@ function Questao(props){
       );
     })),
 
+    /* ---------- a correção ----------
+       Regra nova (09/09, crítica do Paulo): "não pode uma questão de 10
+       segundos demorar 6 meses pra ler o comentário com o truque que
+       deveria simplificar". Antes vinha tudo de uma vez — título, truque,
+       o truque desenhado, a alternativa marcada, o porquê, o gesto da
+       próxima e um botão: perto de 800 caracteres por erro.
+
+       Agora, ao ERRAR, por padrão são três blocos curtos:
+         1. o truque — a única coisa que ela leva para a próxima questão;
+         2. a frase da alternativa que ela marcou, com o nome dela como
+            etiqueta (caixa alta porque é o que está escrito na prova,
+            mas em corpo de etiqueta, não de grito);
+         3. a fileira de botões.
+       Ao ACERTAR, menos ainda: a confirmação e o truque.
+
+       O desenho, o porquê e o gesto da próxima continuam existindo — no
+       segundo nível, atrás de "Ver como se faz". Ficam SEMPRE no DOM
+       (só escondidos), porque é assim que o gate os confere e porque
+       abrir/fechar não pode custar remontagem. */
     feito && h('div',{className:'fb '+(acertou?'certo':'errado'), ref:fim},
-      acertou
-        ? h('div',null,
-            h('h3',null,'Isso mesmo.'),
-            h('p',Object.assign({className:'porq'},html(item.porque))),
-            h('p',{className:'truq'},item.truque))
-        : h('div',null,
-            h('h3',null,'Olha o truque'),
-            h('p',{className:'truq'},item.truque),
-            h('div',Object.assign({className:'desenho'},html(item.visual))),
-            h('p',{className:'sua'},
-              h('b',null,'Você marcou '+textoPuro(alt[pick].t)+' '),
-              h('span',Object.assign({},html(alt[pick].no||'')))),
-            h('p',Object.assign({className:'porq'},html(item.porque))),
-            h('p',{className:'prox'},h('i',null,'Na próxima, faça assim'),item.proximo),
-            (!global.temVoz || global.temVoz()) && h('button',{className:'mini ouvir', onClick:function(){
-              falar([item.truque, alt[pick].no, item.porque, item.proximo].join('. '));
-            }},'Ouvir a explicação'))
+      acertou && h('p',{className:'fbok'},'Isso mesmo. Foi este o truque:'),
+      h('p',{className:'truq'},item.truque),
+      !acertou && h('p',{className:'sua'},
+        /* A etiqueta repete o nome da alternativa em caixa alta — mas em
+           37% do banco a própria frase do `no` já começa por ele ("MINHAS
+           tropeça duas vezes..."), e aí a etiqueta viraria gagueira
+           ("MINHAS / MINHAS tropeça"). Nesses casos ela some: quem
+           antecede o comentário é o próprio texto do banco. */
+        etiquetaSua(alt[pick]) && h('b',{className:'suaetq'}, etiquetaSua(alt[pick])),
+        h('span',Object.assign({},html(alt[pick].no||'')))),
+      h('div',{className:'fbmais', hidden:!verMais},
+        !acertou && h('div',Object.assign({className:'desenho'},html(item.visual))),
+        h('p',Object.assign({className:'porq'},html(item.porque))),
+        !acertou && h('p',{className:'prox'},h('i',null,'Na próxima'),item.proximo)
+      ),
+      /* a fileira de botões fica DEPOIS do texto, nunca entre duas frases
+         dele (regra do Paulo sobre controle no meio do conteúdo) */
+      h('div',{className:'fbrow'},
+        h('button',{className:'mini'+(verMais?' on':''), onClick:function(){ setVerMais(!verMais); }},
+          verMais ? 'Fechar' : 'Ver como se faz'),
+        (!global.temVoz || global.temVoz()) && h('button',{className:'mini ouvir', onClick:function(){
+          /* lê o que está na tela, não o que está escondido */
+          falar(acertou ? item.truque
+                        : [item.truque, alt[pick].no].join('. '));
+        }},'Ouvir')
+      )
     ),
 
     feito && props.aoAvancar && h('button',{className:'avancar', onClick:props.aoAvancar},
