@@ -96,6 +96,22 @@ var h=React.createElement, OP=window.OP, OPQ=window.OPQ;
 var FAM={}; OP.FAMILIAS.forEach(function(f){ FAM[f.k]=f; });
 var VISTOS='op_vistos';
 
+/* ============================================================
+   O SIMULADO SO USA QUESTOES INEDITAS.
+
+   Sao dois lugares com propositos diferentes, e misturar os dois
+   estragava os dois:
+     · "Provas anteriores" = as provas oficiais inteiras, cada uma
+       identificada por ano e fase, na ordem original. So o que caiu.
+     · "Simulado" = treino com perguntas que ela NUNCA viu. Se caisse
+       aqui uma questao que ela ja fez em Provas anteriores, o placar
+       mediria memoria em vez de raciocinio.
+
+   As ineditas sao as de id TRxx (`origem: 'Treino no estilo da prova'`),
+   escritas no molde da banca. Sao 104 — sete rodadas de 15 sem repetir.
+   ============================================================ */
+var INEDITAS = OP.ITENS.filter(function(i){ return /^TR/.test(i.id); });
+
 function vistos(){ try{ return JSON.parse(localStorage.getItem(VISTOS)||'[]'); }catch(e){ return []; } }
 function marcaVisto(ids){
   var v=vistos(); ids.forEach(function(i){ if(v.indexOf(i)<0) v.push(i); });
@@ -108,7 +124,7 @@ function zeraVistos(){ try{ localStorage.removeItem(VISTOS); }catch(e){} }
 function montaRodada(n){
   var jaVi=vistos(), escolhidas=[];
   function doEixo(k, quantas){
-    var pool=OP.ITENS.filter(function(i){ return i.eixo===k && escolhidas.indexOf(i)<0; });
+    var pool=INEDITAS.filter(function(i){ return i.eixo===k && escolhidas.indexOf(i)<0; });
     var novas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)<0; }));
     var velhas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)>=0; }));
     escolhidas=escolhidas.concat(novas.concat(velhas).slice(0,quantas));
@@ -116,7 +132,7 @@ function montaRodada(n){
   if(n>=15){ OP.FAMILIAS.forEach(function(f){ if(f.cota) doEixo(f.k,f.cota); }); }
   else { ['ler','letras','silabas','buraco','intruso'].forEach(function(k){ doEixo(k,1); }); }
   /* completa o que faltar, do que ela menos viu */
-  var resto=OP.ITENS.filter(function(i){ return escolhidas.indexOf(i)<0; });
+  var resto=INEDITAS.filter(function(i){ return escolhidas.indexOf(i)<0; });
   var novasResto=OPQ.embaralha(resto.filter(function(i){ return jaVi.indexOf(i.id)<0; }));
   var velhasResto=OPQ.embaralha(resto.filter(function(i){ return jaVi.indexOf(i.id)>=0; }));
   escolhidas=escolhidas.concat(novasResto).concat(velhasResto);
@@ -128,7 +144,7 @@ function montaRodada(n){
    160 perguntas vistas eram repeticao, quase todas irmas. */
 function irma(eixo, usados){
   var jaVi=vistos();
-  var pool=OP.ITENS.filter(function(i){ return i.eixo===eixo && usados.indexOf(i.id)<0; });
+  var pool=INEDITAS.filter(function(i){ return i.eixo===eixo && usados.indexOf(i.id)<0; });
   var novas=pool.filter(function(i){ return jaVi.indexOf(i.id)<0; });
   var escolhida=OPQ.embaralha(novas.length?novas:pool)[0];
   return escolhida||null;
@@ -141,7 +157,7 @@ function App(){
   var r=React.useState({}), resp=r[0], setResp=r[1];   /* id -> acertou */
   var e=React.useState({}), extra=e[0], setExtra=e[1]; /* ids que sao irmas */
 
-  var totalBanco=OP.ITENS.length, jaVistas=vistos().length;
+  var totalBanco=INEDITAS.length, jaVistas=vistos().filter(function(id){ return /^TR/.test(id); }).length;
 
   function comeca(n){
     var q=montaRodada(n);
@@ -182,7 +198,7 @@ function App(){
     var rodadas=Math.floor(totalBanco/15);
     return h('div',null,
       h('h1',{className:'tt'},'Simulado'),
-      h('p',{className:'sub'},'Rodadas de 15, como a prova. Errou, o truque aparece na hora e vem outra igual para você acertar.'),
+      h('p',{className:'sub'},'Perguntas novas, no estilo da prova — nenhuma delas está em Provas anteriores. Rodadas de 15. Errou, o truque aparece na hora e vem outra igual para você acertar.'),
       h('div',{className:'grade duas'},
         h('button',{className:'linha',onClick:function(){ comeca(5); }},
           h('span',{className:'n'},'5'),
@@ -198,7 +214,7 @@ function App(){
         h('div',{className:'bancofill',style:{width:Math.round(jaVistas/totalBanco*100)+'%'}})),
       h('p',{className:'progresso'},
         faltam>0
-          ? 'São '+totalBanco+' perguntas no banco — dá para '+rodadas+' rodadas sem repetir nenhuma. Você já viu '+jaVistas+' e ainda faltam '+faltam+'.'
+          ? 'São '+totalBanco+' perguntas novas — dá para '+rodadas+' rodadas sem repetir nenhuma. Você já viu '+jaVistas+' e ainda faltam '+faltam+'.'
           : 'Você já passou pelas '+totalBanco+' perguntas do banco. Daqui para a frente elas voltam a aparecer.'),
       jaVistas>0 && h('div',{className:'linhabtn',style:{justifyContent:'center'}},
         h('button',{className:'mini',onClick:function(){ zeraVistos(); setTela('inicio0'); setTimeout(function(){ setTela('inicio'); },0); }},
