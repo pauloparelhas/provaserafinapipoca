@@ -78,6 +78,7 @@ function iniciaFase(f){
 function solidos(M){
   var s=[]; M.segs.forEach(function(g){ s.push(g); }); M.tijolos.forEach(function(b){ if(b.vivo) s.push({x:b.x,y:b.y,w:b.w,h:b.h,tijolo:b}); });
   M.caixas.forEach(function(c){ if(!c.porta) s.push({x:c.x,y:c.y,w:c.w,h:c.h,caixa:c}); }); M.canos.forEach(function(p){ s.push({x:p.x,y:p.y,w:p.w,h:p.h,cano:p}); });
+  M.travas.forEach(function(g){ if(!g.aberta) s.push({x:g.x,y:g.y,w:g.w,h:g.h,trava:g}); });
   if(J.chefe) s.push({x:J.chefe.x-60,y:J.chefe.y-300,w:120,h:300});
   return s;
 }
@@ -102,7 +103,7 @@ function fisica(dt){
   var nx=u.x+u.vx*dt, ny=u.y+u.vy*dt;
   var sol=solidos(M), via=umaVia(M);
   if(nx<hw) nx=hw; if(nx>M.w-hw) nx=M.w-hw;
-  sol.forEach(function(b){ if(colideRet(nx-hw,u.y-hh+6,hw*2,hh-10,b.x,b.y,b.w,b.h)){ nx = u.vx>0? b.x-hw-.01 : b.x+b.w+hw+.01; u.vx=0; } });
+  sol.forEach(function(b){ if(colideRet(nx-hw,u.y-hh+6,hw*2,hh-10,b.x,b.y,b.w,b.h)){ nx = u.vx>0? b.x-hw-.01 : b.x+b.w+hw+.01; u.vx=0; if(b.trava) bateTrava(b.trava); } });
   u.x=nx;
   var noChao=false, sobre=null;
   if(u.vy>=0){
@@ -122,6 +123,17 @@ function fisica(dt){
 }
 
 /* ---------- caixas, tijolos, itens, perigos ---------- */
+function bateTrava(g){
+  if(g.avisoT>0||J.estado!=='nivel') return; g.avisoT=3; J.setaT=6; J.shake=3; SOM.fx('tranca');
+  var pend=g.alvos.filter(function(c){ return !c.aberta; })[0];
+  if(g.tipo==='X') toast('Primeiro: entre no cano e vença a arena do submundo',3200);
+  else if(pend&&pend.porta) toast('Primeiro: entre na porta ? (aperte ↓ na frente dela)',3200);
+  else toast('Primeiro: bata na caixa ? (pule embaixo dela)',3200);
+}
+function abreTravas(dt){
+  var M=J.mundo; M.travas.forEach(function(g){ if(g.avisoT>0) g.avisoT-=dt; if(g.aberta){ if(g.anim<1) g.anim+=dt*1.5; return; }
+    if(g.alvos.every(function(c){ return c.aberta; })){ g.aberta=true; g.anim=0; SOM.fx('destrava'); toast('A trava abriu! Siga em frente',2200); emite(16,function(){ return {x:g.x+22,y:g.y+g.h-Math.random()*g.h,vx:(Math.random()-.5)*200,vy:-100-Math.random()*200,vida:.9,max:.9,tipo:'neve',r:3+Math.random()*3,g:1}; }); } });
+}
 function bateCaixa(c){ if(c.aberta||c.cooldown>0||J.estado!=='nivel') return; if(c.porta){ SOM.fx('cano'); J.caixaAtual=c; J.in.left=J.in.right=J.in.jump=false; if(window.ARENA) ARENA.entra(c); return; } c.bump=14; c.cooldown=.8; SOM.fx('plim'); J.caixaAtual=c; J.in.left=J.in.right=J.in.jump=false; if(J.chefe){ setTimeout(function(){ if(window.ARENA) ARENA.duelo(c); },300); } else { if(window.ARENA) ARENA.entra(c); } }
 function quebraTijolo(b){ b.vivo=false; SOM.fx('tijolo'); J.shake=4; pontua(10,b.x+b.w/2,b.y); emite(8,function(i){ return {x:b.x+b.w/2,y:b.y+b.h/2,vx:(Math.random()-.5)*300,vy:-150-Math.random()*250,vida:.8,max:.8,tipo:'confete',cor:i%2?'#c2410c':'#7c2d12',rot:Math.random()*6,g:1}; }); J.part.push({x:b.x+b.w/2,y:b.y,vx:0,vy:-200,vida:.6,max:.6,tipo:'moeda',r:9,rot:0,g:1}); }
 function pegaItem(it){
@@ -151,6 +163,7 @@ function trocaMundo(nome){ var L=J.nivel; J.mundo= nome==='sub'&&L.sub? L.sub : 
 function mareY(a){ return J.nivel&&J.nivel.mare&&J.mundo===J.nivel? a.y-28*Math.max(0,Math.sin(J.t*.45)) : a.y; }
 function perigos(dt){
   var u=J.urso, M=J.mundo, R=ursoRet();
+  abreTravas(dt);
   if(u.invT>0) u.invT-=dt;
   M.moedas.forEach(function(m){ if(!m.pega && colideRet(R.x,R.y,R.w,R.h,m.x-m.r,m.y-m.r,m.r*2,m.r*2)){ m.pega=true; J.moedas+=m.big?5:1; pontua(m.big?50:10,m.x,m.y-10); SOM.fx(m.big?'moedaG':'moeda'); brilho(m.x,m.y,m.big?14:5); } });
   M.itens.forEach(function(it){ if(!it.pego && colideRet(R.x,R.y,R.w,R.h,it.x-18,it.y-18,36,36)) pegaItem(it); });

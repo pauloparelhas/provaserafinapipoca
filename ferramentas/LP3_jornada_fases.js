@@ -43,7 +43,7 @@ function parse(rows,opts){
   opts=opts||{};
   var h=rows.length, w=0; rows.forEach(function(s){ w=Math.max(w,s.length); });
   rows=rows.map(function(s){ return (s+new Array(w+1).join(' ')).slice(0,w); });
-  var L={w:w*T, h:h*T, cols:w, grade:rows, segs:[], plats:[], tijolos:[], caixas:[], moedas:[], itens:[], canhoes:[], espinhos:[], pingentes:[], molas:[], caindo:[], agua:[], canos:[], checkpoints:[], inimigos:[], troncos:[], movers:[], mastro:null, inicioX:90, mundo:opts.mundo||'main'};
+  var L={w:w*T, h:h*T, cols:w, grade:rows, segs:[], plats:[], tijolos:[], caixas:[], moedas:[], itens:[], canhoes:[], travas:[], espinhos:[], pingentes:[], molas:[], caindo:[], agua:[], canos:[], checkpoints:[], inimigos:[], troncos:[], movers:[], mastro:null, inicioX:90, mundo:opts.mundo||'main'};
   var at=function(c,r){ return (r<0||r>=h||c<0||c>=w)?' ':rows[r][c]; };
   var visto={};
   for(var r=0;r<h;r++) for(var c=0;c<w;c++){
@@ -66,6 +66,7 @@ function parse(rows,opts){
       case 'K': L.troncos.push({x:x+T/2,y:y+T,prox:1.2,cada:3.2,bola:true}); break;
       case 'C': L.canhoes.push({x:x+T/2,y:y+T/2,prox:2,cada:3.4}); break;
       case 'p': L.inimigos.push({tipo:'polar',x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,dir:-1,v:70,voa:false,grande:true}); break;
+      case 'G': case 'X': L.travas.push({x:x,y:Math.max(0,(r-7)*T),w:T,h:(r-Math.max(0,r-7)+1)*T,tipo:ch,aberta:false,alvos:[],anim:0,avisoT:0}); break;
       case 'D': L.caixas.push({x:x+4,y:y-T,w:T-8,h:2*T,porta:true,grande:false,tipo:'porta',mundo:L.mundo,n:5,meta:4}); break;
       case 'n': L.movers.push({x:x,y:y,x0:x,y0:y,w:2*T,h:18,dx:0,dy:-4*T,per:4.5}); break;
       case 'T': L.troncos.push({x:x+T/2,y:y+T,prox:1.5,cada:3.6}); break;
@@ -93,6 +94,13 @@ function monta(f){
   var L=parse(rows,{mundo:'main'}); L.fase=f; L.cena=f.cena; L.gelo=!!f.gelo; L.vento=!!f.vento; L.nevoa=!!f.nevoa; L.mare=!!f.mare; L.farol=!!f.farol; L.noite=!!f.noite;
   if(f.sub){ var S=parse(MP?MP.sub:N.SUBS[f.sub],{mundo:'sub'}); S.cena='sub_'+f.sub; S.fase=f; S.gelo=f.sub==='gelo'; L.sub=S; }
   L.totalArenas=L.caixas.length+(L.sub?L.sub.caixas.length:0);
+  /* liga cada trava às arenas que vêm ANTES dela (G) ou às do submundo (X) */
+  var vertical=L.h>12*T;
+  L.travas.forEach(function(g){
+    if(g.tipo==='X'){ g.alvos=L.sub?L.sub.caixas.slice():[]; g.cano=L.canos.filter(function(p){ return p.id==='1'; })[0]||null; }
+    else g.alvos=L.caixas.filter(function(c){ return vertical? (c.y>=g.y) : (c.x<=g.x); });
+    if(!g.alvos.length) g.aberta=true;
+  });
   if(f.treino){
     L.passos=[
       {id:'andar', texto:'Ande para a direita', teclas:[['→','D'],['▶']], ate:function(J){ return J.urso.x>380; }},
@@ -109,7 +117,7 @@ function monta(f){
 /* ---------- arena do chefão ---------- */
 function chefao(){
   var f=LISTA[9];
-  var L={fase:f, cena:'castelo', segs:[], plats:[], caixas:[], inimigos:[], checkpoints:[], tijolos:[], moedas:[], itens:[], canhoes:[], espinhos:[], pingentes:[], molas:[], caindo:[], agua:[], canos:[], troncos:[], movers:[], w:960, h:540, inicioX:110, inicioY:CHAO_Y, chefao:true, mundo:'main', totalArenas:0};
+  var L={fase:f, cena:'castelo', segs:[], plats:[], caixas:[], inimigos:[], checkpoints:[], tijolos:[], moedas:[], itens:[], canhoes:[], travas:[], espinhos:[], pingentes:[], molas:[], caindo:[], agua:[], canos:[], troncos:[], movers:[], w:960, h:540, inicioX:110, inicioY:CHAO_Y, chefao:true, mundo:'main', totalArenas:0};
   L.segs.push({x:0,y:CHAO_Y,w:960,h:90});
   L.plats.push({x:60,y:330,w:130,h:18});
   L.plats.push({x:300,y:280,w:140,h:18});
