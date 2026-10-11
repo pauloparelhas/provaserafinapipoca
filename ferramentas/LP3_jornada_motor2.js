@@ -59,13 +59,13 @@ function atualizaNivel(dt){
   M.caixas.forEach(function(c){ if(c.bump>0) c.bump=Math.max(0,c.bump-dt*60); if(c.cooldown>0) c.cooldown-=dt; if(c.flutua){ c.y=c.y0===undefined?(c.y0=c.y):c.y0+Math.sin(J.t*1.6+c.fase0)*10; } });
   M.checkpoints.forEach(function(cp){ if(!cp.acesa&&u.x>cp.x){ cp.acesa=true; J.respawn={x:cp.x,y:cp.y,mundo:M.mundo}; SOM.fx('checkpoint'); G.toast('Checkpoint!',1500); G.brilho(cp.x,cp.y-80,12); } });
   inimigos(dt); G.perigos(dt);
-  if(J.in.down && J.downSolto && J.estado==='nivel'){ var p=canoSob(); if(p){ J.downSolto=false; entraCano(p); return; } var pd=null; M.caixas.forEach(function(c){ if(c.porta&&!c.aberta&&Math.abs(c.x+c.w/2-u.x)<40&&Math.abs(c.y+c.h-u.y)<10&&u.noChao) pd=c; }); if(pd){ J.downSolto=false; G.bateCaixa(pd); return; } }
+  if(J.in.down && J.downSolto && J.estado==='nivel'){ var p=canoSob(); if(p){ J.downSolto=false; entraCano(p); return; } var pd=null; M.caixas.forEach(function(c){ if(c.porta&&Math.abs(c.x+c.w/2-u.x)<40&&Math.abs(c.y+c.h-u.y)<10&&u.noChao) pd=c; }); if(pd){ J.downSolto=false; G.bateCaixa(pd); return; } }
   if(!J.in.down) J.downSolto=true;
   if(J.in.act && J.actSolto){ J.actSolto=false; G.arremessaPinha(); } if(!J.in.act) J.actSolto=true;
   if(J.setaT>0) J.setaT-=dt;
   if(M.mastro && Math.abs(u.x-M.mastro.x)<30 && Math.abs(u.y-M.mastro.y)<70 && J.estado==='nivel'){
     if(faltam().length===0||L.fase.treino) fimDeFase();
-    else { u.x=M.mastro.x+(u.x<M.mastro.x?-32:32); u.vx=0; if(!J.trancaT||J.trancaT<=0){ var n=faltam().length; SOM.fx('tranca'); G.toast('Saída trancada! Falta'+(n>1?'m '+n+' arenas ?':' 1 arena ?')+' — siga a seta',3000); J.trancaT=3; J.setaT=6; J.shake=4; } }
+    else { u.x=M.mastro.x+(u.x<M.mastro.x?-32:32); u.vx=0; if(!J.trancaT||J.trancaT<=0){ var n=faltam().length; SOM.fx('tranca'); G.toast('Antes da bandeira: falta'+(n>1?'m '+n+' arenas ?':' 1 arena ?')+' — siga a seta',3000); J.trancaT=3; J.setaT=6; J.shake=4; } }
   }
   if(J.trancaT>0) J.trancaT-=dt;
   if(J.tut) atualizaTutorial(dt);
@@ -74,7 +74,7 @@ function atualizaNivel(dt){
 function dicas(){
   var u=J.urso, M=J.mundo, d=null, R=G.ursoRet();
   var p=canoSob(); if(p&&parDoCano(p)) d={x:p.x+p.w/2,y:p.y-50,txt:'Entre no cano: aperte ↓',teclas:['↓','S'],botao:'▼'};
-  if(!d) M.caixas.forEach(function(c){ if(c.aberta) return; if(c.porta){ if(Math.abs(c.x+c.w/2-u.x)<70 && Math.abs(c.y+c.h-u.y)<10) d={x:c.x+c.w/2,y:c.y-30,txt:'Entre na porta: aperte ↓',teclas:['↓','S'],botao:'▼'}; } else if(Math.abs(c.x+22-u.x)<80 && c.y<u.y && u.y-c.y<320) d={x:c.x+22,y:c.y-40,txt:'Pule embaixo e bata a cabeça na caixa ?',teclas:['↑','ESPAÇO'],botao:'PULAR'}; });
+  if(!d) M.caixas.forEach(function(c){ if(c.aberta){ if(J.chefe) return; if(c.porta){ if(Math.abs(c.x+c.w/2-u.x)<70 && Math.abs(c.y+c.h-u.y)<10) d={x:c.x+c.w/2,y:c.y-30,txt:'Quer treinar mais? Aperte ↓',teclas:['↓','S'],botao:'▼',leve:true}; } else if(Math.abs(c.x+22-u.x)<60 && c.y<u.y && u.y-c.y<320) d={x:c.x+22,y:c.y-40,txt:'Quer treinar mais? Bata na caixa',leve:true}; return; } if(c.porta){ if(Math.abs(c.x+c.w/2-u.x)<70 && Math.abs(c.y+c.h-u.y)<10) d={x:c.x+c.w/2,y:c.y-30,txt:'Entre na porta: aperte ↓',teclas:['↓','S'],botao:'▼'}; } else if(Math.abs(c.x+22-u.x)<80 && c.y<u.y && u.y-c.y<320) d={x:c.x+22,y:c.y-40,txt:'Pule embaixo e bata a cabeça na caixa ?',teclas:['↑','ESPAÇO'],botao:'PULAR'}; });
   if(!d) M.molas.forEach(function(m){ if(Math.abs(m.x+m.w/2-u.x)<80 && u.noChao) d={x:m.x+m.w/2,y:m.y-50,txt:'Pule na mola!'}; });
   if(!d) M.itens.forEach(function(it){ if(!it.pego && Math.abs(it.x-u.x)<110 && Math.abs(it.y-(u.y-40))<120) d={x:it.x,y:it.y-40,txt:{mel:'Pegue o mel para crescer',capa:'Pegue a capa!',bota:'Pegue a bota!',pinhas:'Pegue as pinhas!',patins:'Pegue os patins!'}[it.tipo]}; });
   if(!d) M.tijolos.forEach(function(b){ if(b.vivo && Math.abs(b.x+22-u.x)<50 && u.y-b.y<260 && u.y>b.y) d={x:b.x+22,y:b.y-40,txt:'Quebre o tijolo com a cabeça'}; });
@@ -131,7 +131,7 @@ function atualizaChefao(dt){
     if(J.estado==='nivel' && u.invT<=0 && u.tontoT<=0 && G.colideRet(R.x,R.y,R.w,R.h,bl.x-bl.r,bl.y-bl.r,bl.r*2,bl.r*2)){ J.bolas.splice(b,1); G.machucado(); G.toast('Plaft! Pule para desviar das bolas',1600); } }
 }
 function acertoChefao(c){ var g=J.chefe; J.folhas.push({x:c.x+c.w/2,y:c.y,tx:g.x,ty:g.y-230,t:0,dur:.8}); SOM.fx('folha'); }
-function erroChefao(){ var g=J.chefe; g.estado='laugh'; g.t=0; SOM.fx('risada'); if(g.hp<g.max) g.hp++; G.toast('O Gigante riu e recuperou 1 ponto!',2200); }
+function erroChefao(){ var g=J.chefe; g.estado='laugh'; g.t=0; SOM.fx('risada'); G.toast('O Gigante riu... mas não ganhou nada! Tente a próxima',2200); } /* sem cura: o chefão sempre termina */
 function vitoriaChefao(){
   var g=J.chefe; g.estado='down'; g.t=0; J.bolas=[]; J.estado='vitoria'; J.vit={t:0}; SOM.musica(''); SOM.fx('vitoria'); J.urso.estado='cheer'; J.urso.anim=0;
   J.prog.fases[10]={estrelas:3,pontos:J.pontos,acertos:J.stats.acertos,total:J.stats.perguntas,novo:true}; J.prog.zerado=true; G.salva();

@@ -143,10 +143,12 @@ function inimigo(c,e,t){
 function caixa(c,b,t){
   var y=b.y-(b.bump||0);
   c.save(); c.translate(b.x,y);
-  if(b.aberta){
-    c.fillStyle=lin(c,0,0,0,b.h,'#9a7b5a','#6b533b'); rr(c,0,0,b.w,b.h,7); c.fill();
-    c.strokeStyle='#4b3a28'; c.lineWidth=2; rr(c,3,3,b.w-6,b.h-6,5); c.stroke();
-    c.fillStyle='#4b3a28'; [[8,8],[b.w-8,8],[8,b.h-8],[b.w-8,b.h-8]].forEach(function(p){ circ(c,p[0],p[1],2); c.fill(); });
+  if(b.aberta){ /* visitada: "?" prateado = dá para treinar de novo (sem pulsar) */
+    c.fillStyle=lin(c,0,0,0,b.h,'#f1f5f9','#94a3b8'); rr(c,0,0,b.w,b.h,8); c.fill();
+    c.strokeStyle='#475569'; c.lineWidth=2.5; rr(c,2,2,b.w-4,b.h-4,6); c.stroke();
+    c.fillStyle='rgba(255,255,255,.55)'; rr(c,5,4,b.w-10,8,4); c.fill();
+    c.fillStyle='#475569'; c.font='900 28px "Segoe UI",Arial,sans-serif'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('?',b.w/2,b.h/2+2);
+    c.fillStyle='#64748b'; [[8,8],[b.w-8,8],[8,b.h-8],[b.w-8,b.h-8]].forEach(function(p){ circ(c,p[0],p[1],2); c.fill(); });
   } else {
     var multi=b.tipo==='multi';
     var g=lin(c,0,0,0,b.h, multi?'#c084fc':'#fde68a', multi?'#7e22ce':'#d97706');

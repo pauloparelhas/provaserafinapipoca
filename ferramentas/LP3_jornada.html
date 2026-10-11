@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='31e85dd1850';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='37bea5f1927';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -16,7 +16,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <title>WiseBear Game — Português 3º tri</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap">
-<link rel="stylesheet" href="serafina-core.css?v=31e85dd1850">
+<link rel="stylesheet" href="serafina-core.css?v=37bea5f1927">
 <style>
 /* ============================================================
    LP3_jornada.html (v2) — casca do jogo. Tudo que é jogo vive no
@@ -221,6 +221,12 @@ body.sem-voz .tbtns .mbtn.voz{display:none}
 body.portrait #rot{display:flex}
 #toast{position:absolute;left:50%;top:112px;transform:translateX(-50%);background:rgba(13,11,30,.82);border:2px solid rgba(253,224,71,.5);padding:8px 18px;border-radius:999px;font-weight:900;font-size:18px;display:none;white-space:nowrap;max-width:900px;overflow:hidden;text-overflow:ellipsis}
 #toast.show{display:block;animation:qin .3s}
+/* ---- X da arena: sai das perguntas na hora (3ª rodada) ---- */
+#btnSairArena{position:absolute;right:12px;top:58px;width:66px;height:66px;border-radius:18px;border:3px solid rgba(255,255,255,.75);background:linear-gradient(180deg,rgba(248,113,113,.95),rgba(185,28,28,.95));color:#fff;display:none;align-items:center;justify-content:center;flex-direction:column;padding:0;box-shadow:0 4px 0 rgba(0,0,0,.35),0 6px 18px rgba(0,0,0,.4);z-index:5}
+#btnSairArena.show{display:flex}
+#btnSairArena svg{width:32px;height:32px}
+#btnSairArena small{font-size:11px;font-weight:900;line-height:1;margin-top:1px;letter-spacing:.3px}
+#btnSairArena:active{transform:scale(.94)}
 </style>
 </head>
 <body>
@@ -233,7 +239,7 @@ body.portrait #rot{display:flex}
       <button class="ib" id="btnHelp" title="Ajuda" aria-label="Ajuda"></button>
       <button class="sombtn" id="sombtn" onclick="toggleSom()" aria-hidden="true" tabindex="-1"></button>
       <div id="hudName">WiseBear Game</div>
-      <div class="pill" id="hudArena" title="Arenas vencidas"><span id="hudArenaIco"></span><span id="hudArenaN">0/0</span></div>
+      <div class="pill" id="hudArena" title="Arenas visitadas"><span id="hudArenaIco"></span><span id="hudArenaN">0/0</span></div>
       <div class="pill" id="hudPtsPill" title="Pontos"><span id="hudPtsIco"></span><span id="hudPts">0</span></div>
       <div class="pill" id="hudCoins" title="Moedas"><span id="hudCoinIco"></span><span id="hudCoinN">0</span></div>
       <button class="ib" id="btnPause" title="Pausa" aria-label="Pausa"></button>
@@ -249,34 +255,35 @@ body.portrait #rot{display:flex}
     <div id="toast"></div>
     <div id="qbox" role="dialog" aria-modal="true"><div class="qcard" id="qcard"></div></div>
     <div id="menu"><div class="mcard" id="mcard"></div></div>
+    <button id="btnSairArena" title="Sair das perguntas (Esc)" aria-label="Sair das perguntas"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg><small>SAIR</small></button>
   </div>
 </div>
 <div id="rot"><span>Gire o tablet para a horizontal</span></div>
 
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.9,home:'../index.html',somKey:'lp3_som',stars:0,starfield:false};</script>
-<script src="serafina-core.js?v=31e85dd1850"></script>
-<script src="OP_voz.js?v=31e85dd1850"></script>
-<script src="LP3_banco.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_partituras.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_musica.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_som.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_arte.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_arte2.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_arte3.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_arte4.js?v=31e85dd1850"></script>
-<script src="LP3_arte.js?v=31e85dd1850"></script>
-<script src="LP3_estudo_licoes.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_regras.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_niveis.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_mapas.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_fases.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_motor.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_motor2.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_arena.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_cena.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_ui.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_ui2.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_ui3.js?v=31e85dd1850"></script>
-<script src="LP3_jornada_ui4.js?v=31e85dd1850"></script>
+<script src="serafina-core.js?v=37bea5f1927"></script>
+<script src="OP_voz.js?v=37bea5f1927"></script>
+<script src="LP3_banco.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_partituras.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_musica.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_som.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_arte.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_arte2.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_arte3.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_arte4.js?v=37bea5f1927"></script>
+<script src="LP3_arte.js?v=37bea5f1927"></script>
+<script src="LP3_estudo_licoes.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_regras.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_niveis.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_mapas.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_fases.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_motor.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_motor2.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_arena.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_cena.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_ui.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_ui2.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_ui3.js?v=37bea5f1927"></script>
+<script src="LP3_jornada_ui4.js?v=37bea5f1927"></script>
 </body>
 </html>

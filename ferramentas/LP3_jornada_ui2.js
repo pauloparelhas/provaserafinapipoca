@@ -48,6 +48,7 @@ function keydown(e){
   if(e.ctrlKey||e.metaKey||e.altKey) return;
   SOM.init(); document.body.classList.add('kbd');
   var k=e.key, J2=JOGO.J, q=U.qAberta(), m=U.menuAberto();
+  if(k==='Escape'&&(J2.estado==='arena'||J2.estado==='pergunta')&&!J2.pausado){ e.preventDefault(); if(window.ARENA) ARENA.sairX(); return; }
   if(k==='Escape'){ e.preventDefault(); if(m){ if(J2.estado==='nivel'||J2.estado==='arena'||J2.estado==='cano'){ U.fechaMenu(); JOGO.pausa(false); } } else U.pausa(); return; }
   if(m){ if(k==='Enter'||k===' '){ var pri=$('mcard').querySelector('.mbtn.pri'); if(pri){ e.preventDefault(); pri.click(); } } return; }
   if(q){ e.preventDefault(); q.tecla(k); return; }
@@ -76,6 +77,7 @@ function init(){
   U.pintaBotoes();
   $('btnHome').addEventListener('click',function(){ SOM.init(); if(window.screenLocked) return; U.confirmaCasa(); });
   U.initLock(); U.initAjuda();
+  $('btnSairArena').addEventListener('click',function(){ SOM.init(); if(window.ARENA) ARENA.sairX(); });
   $('btnPause').addEventListener('click',function(){ SOM.init(); if(U.menuAberto()){ U.fechaMenu(); JOGO.pausa(false); } else U.pausa(); });
   botaoToque('tLeft','left'); botaoToque('tRight','right'); botaoToque('tJump','jump'); botaoToque('tDown','down'); botaoToque('tAct','act');
   var cv=$('game');
@@ -91,7 +93,8 @@ function init(){
     responder:function(certa){ var q=U.qAberta(); if(!q) return false; var i=certa?q.certa():(q.certa()+1)%2; q.responderIdx(i); return true; },
     continuar:function(){ var q=U.qAberta(); if(q){ var g=$('qGo'); if(g) g.click(); } },
     menuAberto:function(){ return !!U.menuAberto(); }, perguntaAberta:function(){ return !!U.qAberta(); },
-    clicaPri:function(){ var p=$('mcard').querySelector('.mbtn.pri'); if(p) p.click(); }};
+    clicaPri:function(){ var p=$('mcard').querySelector('.mbtn.pri'); if(p) p.click(); },
+    sairX:function(){ var b=$('btnSairArena'); if(b&&b.classList.contains('show')){ b.click(); return true; } return false; }};
 }
 U.customizar=customizar;
 document.addEventListener('DOMContentLoaded',init);
