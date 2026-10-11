@@ -371,6 +371,31 @@ function ordena(a){ return a.slice().sort(function(x,y){ return x.localeCompare(
 ].forEach(function(x,i){ ITENS.push({id:'rid'+i,tema:'invento',tipo:'rapida',p:x[0]+' é...',o:x[1]==='Invenção'?['Invenção','Descoberta']:['Descoberta','Invenção'],c:0,
   dica:'Foi criada pelas pessoas ou já existia?',ex:x[1]==='Invenção'?'Invenção: foi criada pelas pessoas e não existia antes.':'Descoberta: já existia; alguém encontrou.'}); });
 
+/* v2 — conto como GÊNERO, sinônimos da paráfrase, paródia de música,
+   palavra com mais de um significado (roteiro v2) */
+[
+ ['conto','Num conto de fadas, o que acontece no MEIO da história?',['Aparece um problema','Era uma vez...','Viveram felizes para sempre'],'No meio aparece o problema. "Era uma vez" é o começo; "felizes para sempre", o fim.'],
+ ['conto','"Era uma vez..." aparece em que parte do conto?',['No começo','No meio','No fim'],'É o começo: apresenta o tempo, os personagens e o lugar.'],
+ ['conto','"Era uma vez" mostra um tempo...',['que não se sabe quando foi','que é hoje','que é amanhã'],'"Era uma vez" e "há muito tempo" mostram um tempo que não se sabe quando foi.'],
+ ['conto','Qual destes é um SER MÁGICO dos contos de fadas?',['Uma fada','Um professor','Um motorista'],'Fadas, bruxas, gigantes e animais que falam são seres mágicos.'],
+ ['conto','Qual destes é um conto de fadas?',['Cinderela','O jornal de hoje','A conta de luz'],'Cinderela é conto de fadas, como Branca de Neve e A Bela Adormecida.'],
+ ['conto','Os contos de fadas são histórias...',['antigas, contadas de geração em geração','que aconteceram ontem','escritas só no computador'],'São histórias antigas que as pessoas contavam umas para as outras e depois foram escritas.'],
+ ['conto','Na Chapeuzinho Vermelho, qual é o elemento MÁGICO?',['Um lobo que fala','A cesta de doces','A casa da vovó'],'Lobo que fala não existe de verdade: é a magia da história.'],
+ ['conto','Em João e o pé de feijão, qual é o elemento MÁGICO?',['Os feijões que crescem até as nuvens','A vaca','A janela'],'Feijões mágicos, galinha dos ovos de ouro e harpa que canta são a magia.'],
+ ['parodia','Na paráfrase, a gente troca palavras por...',['sinônimos, palavras de mesmo sentido','palavras de sentido contrário','números'],'Sinônimos: menina = garota, floresta = mata.'],
+ ['parodia','Qual é um sinônimo de MENINA?',['garota','menino','mulher'],'Menina e garota querem dizer a mesma coisa.'],
+ ['parodia','Qual é um sinônimo de FLORESTA?',['mata','deserto','praia'],'Floresta e mata querem dizer a mesma coisa.'],
+ ['parodia','Qual é um sinônimo de DOCES?',['guloseimas','legumes','salgados'],'Doces e guloseimas querem dizer a mesma coisa.'],
+ ['parodia','Qual é um sinônimo de GRANDE?',['enorme','pequeno','baixo'],'Grande e enorme querem dizer a mesma coisa.'],
+ ['parodia','Qual é um sinônimo de BRAVO?',['zangado','alegre','calmo'],'Bravo e zangado querem dizer a mesma coisa.'],
+ ['parodia','"Não atire o pau no gato" é uma paródia de qual música?',['Atirei o pau no gato','Parabéns a você','Ciranda cirandinha'],'Mesma melodia, letra mudada de propósito: paródia de "Atirei o pau no gato".'],
+ ['parodia','Paródia também pode ser feita com...',['música, mudando a letra','números','mapas'],'Na paródia de música, a melodia fica e a letra muda.'],
+ ['parodia','Na paráfrase, o SENTIDO da história...',['continua igual','muda de propósito','fica engraçado'],'Paráfrase muda as palavras, não o sentido.'],
+ ['dic','MANGA pode ser fruta e também parte da camisa. Isso mostra que uma palavra...',['pode ter mais de um significado','não está no dicionário','está escrita errado'],'O dicionário mostra todos os significados da palavra.'],
+ ['dic','PENA pode ser das aves e também sentir dó. No dicionário você vai achar...',['os dois significados','só um significado','nenhum significado'],'Uma palavra pode ter mais de um significado, e o dicionário mostra todos.']
+].forEach(function(x,i){ ITENS.push({id:'v2c'+i,tema:x[0],tipo:'conceito',p:x[1],o:x[2],c:0,
+  dica:'Releia a pergunta com calma e pense na regra.',ex:x[3]}); });
+
 /* tipo dos itens escritos à mão */
 var TIPO={h:'rapida',jg:'rapida',ggu:'rapida',cqu:'rapida',dig:'rapida',plural:'rapida',dic:'conceito',
   conto:'conceito',parodia:'conceito',invento:'conceito',chapeu:'leitura',joao:'leitura'};
