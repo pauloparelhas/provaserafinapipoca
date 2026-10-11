@@ -83,7 +83,7 @@ function rich(ctx, spec, x, y, size, o = {}) {
     const w = ctx.measureText(s).width;
     ctx.save();
     if (k === 'mute') { ctx.globalAlpha *= .28; ctx.fillStyle = col; }
-    else if (k === 'quiet') { ctx.globalAlpha *= .6; ctx.fillStyle = '#868e96'; }
+    else if (k === 'quiet') { ctx.globalAlpha *= .85; ctx.fillStyle = '#868e96'; }
     else if (k === 'hl') ctx.fillStyle = hl;
     else if (k === 'hl2') ctx.fillStyle = hl2;
     else ctx.fillStyle = col;

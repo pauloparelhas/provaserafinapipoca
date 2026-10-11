@@ -29,7 +29,7 @@ PAG = f'''<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
-<title>O vídeo — Português: Era uma vez e Invenções</title>
+<title>O vídeo — Português: contos de fadas, paráfrase, paródia e ortografia</title>
 <link rel="stylesheet" href="serafina-core.css?v=20261011">
 <style>
 /* ============================================================
@@ -92,7 +92,7 @@ h2{{font-size:calc(1.02rem*var(--fs));font-weight:900;margin:20px 0 10px;color:v
   </div>
   <div class="stage">
     <div class="card">
-      <h1>Era uma vez e Invenções, em desenho</h1>
+      <h1>Contos de fadas, paráfrase, paródia e ortografia, em desenho</h1>
       <p class="sub">Uns {minutos} minutos com o ursinho. Tudo o que está nas lições, contado de um jeito só de assistir.
         Toque numa parte da lista para pular direto para ela.</p>
 
