@@ -17,12 +17,21 @@ window.ARENA = (function(){
 'use strict';
 var G=window.JOGO, J=G.J, A=window.ARTE, W=G.W, H=G.H;
 var S=null; /* estado da arena corrente */
-var usadas={}; /* ids já perguntados nesta fase (reseta a cada fase) */
+/* ids já perguntados em TODO o jogo (11/10, Paulo: nada repetido nem entre fases).
+   Fica salvo no aparelho; um tema só recomeça quando todas as perguntas dele já saíram. */
+var USK='lp3_usadas_v1', usadas={};
+try{ usadas=JSON.parse(localStorage.getItem(USK)||'{}')||{}; }catch(e){ usadas={}; }
+function salvaUsadas(){ try{ localStorage.setItem(USK,JSON.stringify(usadas)); }catch(e){} }
 var GEN=0; /* geração da arena: timeout de uma arena velha não mexe na nova */
 
 function limite(item){ return 30; } /* 30 s para toda pergunta (pedido do pai) */
-function pool(temas,filtro){ var l=[]; temas.forEach(function(k){ LP3.doTema(k).forEach(function(i){ if(!filtro||filtro(i)) l.push(i); }); }); return l; }
-function sorteia(lista,n){ var a=lista.filter(function(i){ return !usadas[i.id]; }); if(a.length<n) a=lista.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a.slice(0,n); }
+/* 11/10 (Paulo): parafrase/parodia so o necessario — no maximo 4 por fase quando ha outros temas */
+var TETO={parodia:4};
+var porFase={}; /* quantas de cada tema já saíram NESTA fase (para o teto) */
+function contaTema(k){ return porFase[k]||0; }
+function pool(temas,filtro){ var l=[]; var ts=temas.filter(function(k){ return !(TETO[k]&&temas.length>1&&contaTema(k)>=TETO[k]); }); if(!ts.length) ts=temas; ts.forEach(function(k){ LP3.doTema(k).forEach(function(i){ if(i.tema==='parodia'&&i.tipo==='rapida'&&(porFase.parodiaRap||0)>=3) return; /* "isso e parafrase ou parodia?": no maximo 3 por fase */ if(!filtro||filtro(i)) l.push(i); }); }); return l; }
+/* 11/10 (Paulo): nunca repetir pergunta na mesma fase; só se o tema inteiro já saiu (treino extra) recomeça */
+function sorteia(lista,n){ var a=lista.filter(function(i){ return !usadas[i.id]; }); if(!a.length){ lista.forEach(function(i){ delete usadas[i.id]; }); a=lista.slice(); } for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a.slice(0,n); }
 /* composição: arena grande = só rápidas; arena comum = metade rápidas (se o tema tiver), metade conceito/leitura */
 function compoe(temas,n,grande){
   var rap=pool(temas,function(i){ return i.tipo==='rapida'; }), outras=pool(temas,function(i){ return i.tipo!=='rapida'; });
@@ -30,12 +39,15 @@ function compoe(temas,n,grande){
   if(grande||!outras.length) lista=sorteia(rap.length?rap:pool(temas),n);
   else if(!rap.length) lista=sorteia(outras,n);
   else { var nr=Math.ceil(n/2); lista=sorteia(rap,nr).concat(sorteia(outras,n-nr)); }
+  lista.forEach(function(it){ usadas[it.id]=1; });
   if(lista.length<n) lista=lista.concat(sorteia(pool(temas),n-lista.length));
+  var vis={}; lista=lista.filter(function(it){ if(vis[it.id]) return false; vis[it.id]=1; return true; });
+  lista.forEach(function(it){ usadas[it.id]=1; porFase[it.tema]=(porFase[it.tema]||0)+1; if(it.tema==='parodia'&&it.tipo==='rapida') porFase.parodiaRap=(porFase.parodiaRap||0)+1; }); salvaUsadas();
   for(var i=lista.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=lista[i]; lista[i]=lista[j]; lista[j]=t; }
   lista.forEach(function(it){ usadas[it.id]=1; });
   return lista;
 }
-function novaFase(){ usadas={}; }
+function novaFase(){ porFase={}; /* usadas NÃO zera: as perguntas não se repetem entre fases */ }
 
 /* ---------- entrar na arena ---------- */
 function entra(c){
@@ -43,7 +55,8 @@ function entra(c){
   J.estado='cano';
   G.iris(u.x-J.cam,u.y-40,function(){
     var g=++GEN;
-    S={c:c, n:c.n, meta:c.meta, itens:compoe(f.temas,c.n,c.grande), i:0, acertos:0, combo:0, peixes:[], fase:'intro', t:0, timer:0, lim:0, item:null, voando:[], cena:J.mundo.cena, pontos:0, extra:!!c.aberta, gen:g};
+    var its=compoe(f.temas,c.n,c.grande);
+    S={c:c, n:its.length, meta:Math.min(c.meta,its.length), itens:its, i:0, acertos:0, combo:0, peixes:[], fase:'intro', t:0, timer:0, lim:0, item:null, voando:[], cena:J.mundo.cena, pontos:0, extra:!!c.aberta, gen:g};
     J.estado='arena'; J.arenaUrso={x:150,y:430,estado:'idle',anim:0};
     var m=/gelo|canal|aurora|castelo/.test(S.cena)?'arena_gelo':(/mar|montanha|floresta/.test(S.cena)&&f.id<=2?'arena_hist':'arena'); SOM.musica(m);
     if(window.UI){ UI.modoNivel(false); UI.hudArena(true); UI.botaoSair(true); }
@@ -70,7 +83,7 @@ function avanca(){ if(!S||S.fase==='saindo') return; var g=S.gen; S.fase='entre'
 function atualiza(dt){
   if(!S) return; S.t+=dt; J.arenaUrso.anim+=dt;
   if(S.fase==='pergunta'){ S.timer-=dt; if(window.UI) UI.timer(Math.max(0,S.timer/S.lim),Math.ceil(Math.max(0,S.timer))); if(S.timer<=0){ UI.esgotou(); responde(false); } }
-  else if(S.fase==='feedback'){ if(S.t>=S.avancaEm) avanca(); }
+  else if(S.fase==='feedback'){ if(S.t>=S.avancaEm) avanca(); else if(S.avancaEm>1e8&&S.t>2.5&&window.UI&&!UI.menuAberto()&&!UI.teoriaAberta) avanca(); /* rede de segurança: nunca travar no feedback */ }
   for(var i=S.voando.length-1;i>=0;i--){ var v=S.voando[i]; v.t+=dt; var k=Math.min(1,v.t/v.dur); v.x=v.x0+(v.x1-v.x0)*k; v.y=v.y0+(v.y1-v.y0)*k-Math.sin(k*Math.PI)*160; if(k>=1){ S.voando.splice(i,1); S.peixes.push(1); J.arenaUrso.estado='eat'; J.arenaUrso.anim=0; J.arenaUrso.eatT=.9; SOM.fx('moeda'); G.brilho(v.x1,v.y1,8,'#fb923c'); } }
   if(J.arenaUrso.eatT>0){ J.arenaUrso.eatT-=dt; if(J.arenaUrso.eatT<=0) J.arenaUrso.estado='idle'; }
   if(S.fase==='pergunta'||S.fase==='entre') { if(J.arenaUrso.estado!=='eat') J.arenaUrso.estado='idle'; }
@@ -81,7 +94,7 @@ function fim(){
   if(ok){ SOM.fx('destrava'); J.arenaUrso.estado='cheer'; J.arenaUrso.anim=0; } else { SOM.fx('plim'); J.arenaUrso.estado='idle'; }
   var faltam=G.faltam().length;
   UI.fimArena(ok,S.acertos,S.n,S.meta,S.pontos,faltam,function(){ sai(); },function(){ /* tentar de novo: outras perguntas */
-    var g=S.gen; S.itens=compoe(J.faseAtual.temas,S.n,S.c.grande); S.i=0; S.acertos=0; S.combo=0; S.peixes=[]; S.pontos=0; S.fase='intro'; S.item=null; S.extra=true; J.arenaUrso.estado='idle'; setTimeout(function(){ if(S&&S.gen===g) proxima(); },500);
+    var g=S.gen; S.itens=compoe(J.faseAtual.temas,S.c.n,S.c.grande); S.n=S.itens.length; S.meta=Math.min(S.c.meta,S.n); S.i=0; S.acertos=0; S.combo=0; S.peixes=[]; S.pontos=0; S.fase='intro'; S.item=null; S.extra=true; J.arenaUrso.estado='idle'; setTimeout(function(){ if(S&&S.gen===g) proxima(); },500);
   });
 }
 /* botão X / Esc: sai na hora, sem confirmação (é reversível: a caixa continua abrindo) */

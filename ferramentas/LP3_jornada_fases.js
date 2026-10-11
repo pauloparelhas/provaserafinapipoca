@@ -10,16 +10,16 @@ window.FASES = (function(){
 var N=window.NIVEIS, C=N.C, T=N.T, CHAO_Y=10*T;
 
 var LISTA=[
-  {id:1, nome:'Vancouver',          lugar:'Costa do Pacífico',  cena:'mar',      temas:['conto','chapeu','parodia'], bichos:['b','g'],     sub:'caverna', mare:true, mx:95,  my:335, ideia:'Travessia de troncos na água com maré', cur:'Na costa do Pacífico vivem orcas, e os povos indígenas esculpem totens de madeira.'},
-  {id:2, nome:'Lago Moraine',       lugar:'Banff, Rochosas',    cena:'montanha', temas:['joao','parodia','conto'],   bichos:['r','w'],     sub:'gelo', mx:175, my:322, ideia:'Escalada vertical com elevador e avalanche', cur:'Banff é o parque nacional mais antigo do Canadá. A água do Lago Moraine é azul-turquesa.'},
+  {id:1, nome:'Vancouver',          lugar:'Costa do Pacífico',  cena:'mar',      temas:['conto','chapeu','joao'], bichos:['b','g'],     sub:'caverna', mare:true, mx:95,  my:335, ideia:'Travessia de troncos na água com maré', cur:'Na costa do Pacífico vivem orcas, e os povos indígenas esculpem totens de madeira.'},
+  {id:2, nome:'Lago Moraine',       lugar:'Banff, Rochosas',    cena:'montanha', temas:['parodia'],   bichos:['r','w'],     sub:'gelo', mx:175, my:322, ideia:'Escalada vertical com elevador e avalanche', cur:'Banff é o parque nacional mais antigo do Canadá. A água do Lago Moraine é azul-turquesa.'},
   {id:3, nome:'Pradarias',          lugar:'Saskatchewan',       cena:'pradaria', temas:['h'],                        bichos:['k','b','g'], sub:'caverna', mx:270, my:332, vento:true, ideia:'Vento que empurra, fardos rolando e molas', cur:'Saskatchewan tem campos de trigo enormes e um céu que parece não acabar.'},
   {id:4, nome:'Churchill',          lugar:'Baía de Hudson',     cena:'gelo',     temas:['jg'],                       bichos:['k','r'],     sub:'gelo',    mx:420, my:252, gelo:true, ideia:'Gelo escorregadio, patins e ursos-polares', cur:'Churchill é a capital mundial dos ursos-polares, na beira da Baía de Hudson.'},
   {id:5, nome:'Niágara',            lugar:'Cataratas',          cena:'agua',     temas:['ggu'],                      bichos:['b','g'],     sub:'caverna', mx:598, my:380, nevoa:true, ideia:'Subir a cachoeira: plataformas que caem e barris', cur:'As Cataratas do Niágara ficam na fronteira do Canadá com os Estados Unidos.'},
   {id:6, nome:'Toronto',            lugar:'CN Tower',           cena:'cidade',   temas:['dic'],                      bichos:['r','k'],     sub:'mina',    mx:680, my:378, ideia:'CN Tower vertical com elevadores e porta da biblioteca', cur:'Toronto é a maior cidade do Canadá. A CN Tower tem 553 metros de altura.'},
   {id:7, nome:'Ottawa',             lugar:'Canal Rideau',       cena:'canal',    temas:['cqu'],                      bichos:['r','k'],     sub:'gelo',    mx:740, my:352, gelo:true, ideia:'Canal congelado: patins, pingentes e espinhos de gelo', cur:'Ottawa é a capital do Canadá. No inverno, o Canal Rideau vira uma pista de patinação.'},
   {id:8, nome:'Quebec',             lugar:'Floresta de bordos', cena:'floresta', temas:['dig'],                      bichos:['b','r'],     sub:'mina',    mx:798, my:320, ideia:'Muralhas e telhados: molas, canhões de neve e a porta do Château', cur:'Em Quebec se fala francês, e o xarope de bordo vem das árvores da floresta.'},
-  {id:9, nome:"Peggy's Cove",       lugar:'Nova Escócia',       cena:'farol',    temas:['plural','invento'],         bichos:['g','w','b'], sub:'caverna', mx:868, my:316, nevoa:true, mare:true, farol:true, noite:true, ideia:'Noite no farol: a luz revela plataformas; maré', cur:"O farol de Peggy's Cove, na Nova Escócia, fica sobre rochas na beira do Atlântico."},
-  {id:10,nome:'Castelo de Gelo',    lugar:'Ártico · O Gigante', cena:'castelo',  temas:['conto','chapeu','joao','parodia','h','jg','ggu','dic','invento','cqu','dig','plural'], chefao:true, mx:560, my:95, cur:'No Ártico, a aurora boreal pinta o céu de verde à noite.'}
+  {id:9, nome:"Peggy's Cove",       lugar:'Nova Escócia',       cena:'farol',    temas:['plural'],         bichos:['g','w','b'], sub:'caverna', mx:868, my:316, nevoa:true, mare:true, farol:true, noite:true, ideia:'Noite no farol: a luz revela plataformas; maré', cur:"O farol de Peggy's Cove, na Nova Escócia, fica sobre rochas na beira do Atlântico."},
+  {id:10,nome:'Castelo de Gelo',    lugar:'Ártico · O Gigante', cena:'castelo',  temas:['invento'], chefao:true, mx:560, my:95, cur:'No Ártico, a aurora boreal pinta o céu de verde à noite.'}
 ];
 var TREINO={id:0, nome:'Treino', lugar:'Como jogar', cena:'floresta', temas:['conto','parodia'], bichos:['b'], treino:true, mx:70, my:470, cur:'Aqui você aprende a andar, pular e abrir as caixas.'};
 
@@ -54,7 +54,7 @@ function parse(rows,opts){
       case 'f': { var n3=1; while(at(c+n3,r)==='f'){ visto[(c+n3)+','+r]=1; n3++; } L.caindo.push({x:x,y:y,x0:x,y0:y,w:n3*T,h:18,t:0,estado:'ok'}); break; }
       case 'W': { var n4=1; while(at(c+n4,r)==='W'){ visto[(c+n4)+','+r]=1; n4++; } if(at(c,r-1)!=='W') L.agua.push({x:x,y:y,w:n4*T,h:(h-r)*T}); break; }
       case 'B': L.tijolos.push({x:x,y:y,w:T,h:T,vivo:true}); break;
-      case '?': case 'M': L.caixas.push({x:x+2,y:y,w:T-4,h:T,grande:ch==='M',tipo:ch==='M'?'multi':'single',mundo:L.mundo,n:ch==='M'?8:5,meta:ch==='M'?6:4}); break;
+      case '?': case 'M': L.caixas.push({x:x+2,y:y,w:T-4,h:T,grande:ch==='M',tipo:ch==='M'?'multi':'single',mundo:L.mundo,n:4,meta:3}); break;
       case 'o': L.moedas.push({x:x+T/2,y:y+T/2,r:11,big:false}); break;
       case 'O': L.moedas.push({x:x+T/2,y:y+T/2,r:17,big:true}); break;
       case '^': L.espinhos.push({x:x,y:y+T-22,w:T,h:22}); break;
@@ -67,7 +67,7 @@ function parse(rows,opts){
       case 'C': L.canhoes.push({x:x+T/2,y:y+T/2,prox:2,cada:3.4}); break;
       case 'p': L.inimigos.push({tipo:'polar',x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,dir:-1,v:70,voa:false,grande:true}); break;
       case 'G': case 'X': break; /* 11/10 (Paulo): nenhuma barreira na jogabilidade */
-      case 'D': L.caixas.push({x:x+4,y:y-T,w:T-8,h:2*T,porta:true,grande:false,tipo:'porta',mundo:L.mundo,n:5,meta:4}); break;
+      case 'D': L.caixas.push({x:x+4,y:y-T,w:T-8,h:2*T,porta:true,grande:false,tipo:'porta',mundo:L.mundo,n:4,meta:3}); break;
       case 'n': L.movers.push({x:x,y:y,x0:x,y0:y,w:2*T,h:18,dx:0,dy:-4*T,per:4.5}); break;
       case 'T': L.troncos.push({x:x+T/2,y:y+T,prox:1.5,cada:3.6}); break;
       case 'c': L.checkpoints.push({x:x+T/2,y:y+T,acesa:false}); break;
