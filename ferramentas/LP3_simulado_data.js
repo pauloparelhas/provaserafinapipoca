@@ -1,239 +1,78 @@
 /* ============================================================
    LP3_simulado_data.js — BANCO DO SIMULADO de Português · 3º tri · Y2
-   AF de Língua Portuguesa em 14/10/2026.  (v2, 11/10/2026)
+   AF de Língua Portuguesa em 14/10/2026.
 
-   POR QUE v2: a v1 (84 itens) cobrava sobretudo "lembrar o que aconteceu
-   nas histórias". O roteiro v2 (trabalho/3tri_portugues/_roteiro.md,
-   seções "Pistas do material da escola e PESO", "Contos de fadas COMO
-   GÊNERO", "Paráfrase e paródia" e "Regra das perguntas") manda:
-     · ortografia + plural + dicionário ........ ≈ 55%  (bloco A)
-     · conto como gênero + paráfrase/paródia ... ≈ 35%  (bloco B)
-     · invenções ................................ ≈ 10%  (bloco C)
-     · enredo das histórias no máximo ~10%, e sempre a serviço de um
-       elemento do gênero (lugar, magia, problema, solução).
-   E manda imitar o jeito da professora (revisão do 2º tri): "COMPLETE AS
-   PALAVRAS COM...", "COM SUAS PALAVRAS...", "ESCREVA...".
+   FONTE: trabalho/3tri_portugues/_roteiro.md (Unidades 4 e 5 do
+   informativo "Conteúdos das AFs - 3 Tri"). Banco INÉDITO, no formato
+   de prova escolar de 2º ano. Nada do livro "Invenções" da escola (não
+   foi fornecido). Respeitadas as notas "Evitar como pergunta" do roteiro:
+   sempre "o caçador"; nada do que o lobo fez com a vovó em detalhe; nada
+   de fala exata do gigante nem de quantas vezes João subiu; nenhum
+   plural em ÃES/ÃOS como pergunta. Vilão só o Lobo Mau: o Gigante nunca
+   é rotulado como vilão/mau (decisão de 11/10).
 
-   FORMATO do OP_data.js, para o componente único OP_questao.js funcionar
-   sem nenhuma mudança: id, eixo, origem, enun, texto[], quadro, pede,
-   opts[{t, ok|no}], dica, truque, visual, porque, proximo.
-   Campo extra (ignorado pelo componente): `tipo` = o tipo de enunciado,
-   para o validador contar o banco.
-   - Texto de prova (enun, pede, texto, quadro, alternativas) em CAIXA ALTA;
-     dica, porque, `no` e proximo em letra normal: é a voz de quem ensina.
-   - Distrator INDEFENSÁVEL. Nas listas de lacunas, NENHUMA palavra
-     preenchida com a letra errada forma outra palavra de verdade (JATO,
-     NICHO, ORA, IENA, GANHO, TENHA, MINHO... ficaram de fora de propósito).
-   - Vilão só o Lobo Mau; o Gigante nunca é rotulado (decisão de 11/10).
-   - Nada do livro "Invenções" da escola (não foi fornecido).
-   Validação: validador Node fora do projeto (ver relatório).
+   MESMO FORMATO do OP_data.js, para o componente único OP_questao.js
+   funcionar sem nenhuma mudança:
+     id, eixo, origem, enun, texto[], quadro, pede, opts[{t, ok|no}],
+     dica, truque, visual, porque, proximo
+   - enun, pede, texto, quadro e alternativas em CAIXA ALTA, como na prova;
+   - truque, porque, dica, `no` e proximo em letra normal: é a voz de quem
+     ensina, não a da prova.
+   - `truque` e `origem` vêm da FAMÍLIA (preenchidos no fim do arquivo):
+     a frase do truque é a mesma em todo item da família, de propósito.
+   - Distrator INDEFENSÁVEL: nenhuma alternativa errada pode ser defendida
+     como certa. Toda questão tem exatamente uma resposta.
+   Validação: node trabalho/3tri_portugues/... (ver relatório do QA).
    ============================================================ */
 window.LP3S = (function(){
 
-/* ---------- AS 12 FAMÍLIAS ----------
-   bloco A = ortografia/plural/dicionário · B = gênero/paráfrase/paródia ·
-   C = invenções.  `cota` = quantas entram na "Prova inteira" (12):
-   7 do bloco A + 4 do B + 1 do C — o mesmo peso do roteiro.          */
+/* ---------- AS 12 FAMÍLIAS = os 12 temas do roteiro ----------
+   `cota` = quantas entram na "Prova inteira" (12): uma de cada tema, para
+   cobrir TODOS os conteúdos da AF em cada rodada.                      */
 var FAMILIAS = [
-  {k:'h',      bloco:'A', cota:1, nome:'Letra H',               cor:'#38bdf8',
-   truque:'O H do começo não tem som, mas se escreve: HOJE, HOMEM, HOTEL. OVO, UVA e ILHA não têm H.'},
-  {k:'jg',     bloco:'A', cota:1, nome:'J ou G',                cor:'#fbbf24',
+  {k:'conto',   nome:'Contos de fadas',        cota:1, cor:'#f472b6',
+   truque:'Conto de fadas tem: Era uma vez, mocinho e vilão, magia, um problema e um final feliz.'},
+  {k:'chapeu',  nome:'Chapeuzinho Vermelho',   cota:1, cor:'#ef4444',
+   truque:'Conte a história na ordem: cesta, conselho da mãe, lobo, atalho, disfarce, olhos grandes, caçador.'},
+  {k:'joao',    nome:'João e o pé de feijão',  cota:1, cor:'#22c55e',
+   truque:'Conte a história na ordem: vaca, feijões mágicos, janela, pé de feijão, castelo, galinha, machado.'},
+  {k:'parodia', nome:'Paráfrase e paródia',    cota:1, cor:'#a78bfa',
+   truque:'Mudou o que acontece? Não: paráfrase. Sim, de propósito: paródia.'},
+  {k:'h',       nome:'Letra H',                cota:1, cor:'#38bdf8',
+   truque:'O H do começo não tem som, mas está lá. Lembre: HOJE, HORA, HOMEM.'},
+  {k:'jg',      nome:'J ou G',                 cota:1, cor:'#fbbf24',
    truque:'JA, JO, JU: sempre J. Com E e I, pode ser J ou G: lembre como a palavra se escreve.'},
-  {k:'ggu',    bloco:'A', cota:1, nome:'G ou GU',               cor:'#fb923c',
+  {k:'ggu',     nome:'G ou GU',                cota:1, cor:'#fb923c',
    truque:'GA, GO, GU: só o G. Antes de E e I, para soar guê, entra o U quietinho: GUE, GUI.'},
-  {k:'cqu',    bloco:'A', cota:1, nome:'C ou QU',               cor:'#34d399',
-   truque:'CA, CO, CU: só o C. Antes de E e I, o som de quê vira QUE, QUI, com o U quietinho.'},
-  {k:'dig',    bloco:'A', cota:1, nome:'CH · NH · LH',          cor:'#2dd4bf',
-   truque:'CH, NH, LH: duas letras, um som só. Leia a palavra com cada dupla: só uma existe.'},
-  {k:'plural', bloco:'A', cota:1, nome:'Plural',                cor:'#f87171',
-   truque:'Vogal: põe S. R ou Z: põe ES. ÃO vira ÕES. L vira IS. M vira NS.'},
-  {k:'dic',    bloco:'A', cota:1, nome:'Dicionário',            cor:'#60a5fa',
+  {k:'dic',     nome:'Dicionário',             cota:1, cor:'#60a5fa',
    truque:'No dicionário vale a ordem do alfabeto. Primeira letra igual? Olhe a segunda.'},
-  {k:'conto',  bloco:'B', cota:1, nome:'Conto de fadas',        cor:'#f472b6',
-   truque:'Conto de fadas: história inventada e antiga. Começo (Era uma vez), meio (um problema), fim (o problema se resolve).'},
-  {k:'leitura',bloco:'B', cota:1, nome:'Elementos do conto',    cor:'#e879f9',
-   truque:'Procure no conto: o tempo (Era uma vez), o lugar, a magia, o problema e a solução.'},
-  {k:'parafrase',bloco:'B',cota:1, nome:'Paráfrase',            cor:'#a78bfa',
-   truque:'Paráfrase: as mesmas ideias com outras palavras. O sentido não muda.'},
-  {k:'parodia',bloco:'B', cota:1, nome:'Paródia',               cor:'#c084fc',
-   truque:'Paródia: imita o original e muda algo de propósito, quase sempre para ficar engraçado.'},
-  {k:'invento',bloco:'C', cota:1, nome:'Invenções',             cor:'#facc15',
-   truque:'Invenção: alguém criou, não existia antes. Descoberta: já existia, alguém achou.'}
+  {k:'invento', nome:'Invenções e descobertas',cota:1, cor:'#facc15',
+   truque:'Invenção: alguém criou, não existia antes. Descoberta: já existia, alguém achou.'},
+  {k:'cqu',     nome:'CA CO CU · QUE QUI',     cota:1, cor:'#34d399',
+   truque:'CA, CO, CU: só o C. Antes de E e I, o som de quê vira QUE, QUI, com o U quietinho.'},
+  {k:'dig',     nome:'CH · NH · LH',           cota:1, cor:'#2dd4bf',
+   truque:'CH, NH, LH: duas letras, um som só. Uma letra a mais muda a palavra.'},
+  {k:'plural',  nome:'Plural',                 cota:1, cor:'#f87171',
+   truque:'Vogal: põe S. R ou Z: põe ES. ÃO vira ÕES. L vira IS. M vira NS.'}
 ];
-/* (são 12 entradas porque "conto" e "leitura" são duas famílias do mesmo
-   tema — gênero em si × achar os elementos num trecho; a cota de cada uma
-   é 1, e o bloco B soma 4.) */
 
-var SEP = ' · ';
-
-/* Regras e falas padrão das listas de lacunas, por família. */
-var LAC = {
-  jg:  {enun:'COMPLETE AS PALAVRAS COM J OU G:',
-        dica:'Olhe a letra que vem depois da lacuna. Antes de A, O, U é sempre J. Antes de E, I, lembre como a palavra se escreve.',
-        regra:'Antes de A, O e U o som de jê é sempre J. Antes de E e I pode ser J ou G, e é preciso lembrar a palavra.',
-        proximo:'Leia a letra que vem DEPOIS da lacuna: A, O, U pedem J.'},
-  ggu: {enun:'COMPLETE AS PALAVRAS COM G OU GU:',
-        dica:'Se depois da lacuna vem E ou I e o som é de guê, precisa do U: GUE, GUI.',
-        regra:'GA, GO, GU levam só o G. Antes de E e I, para soar guê, entra o U que não se fala: GUE, GUI.',
-        proximo:'Depois da lacuna vem E ou I? Para soar guê, ponha GU.'},
-  cqu: {enun:'COMPLETE AS PALAVRAS COM C OU QU:',
-        dica:'Se depois da lacuna vem E ou I e o som é de quê, precisa de QU.',
-        regra:'CA, CO, CU levam só o C. Antes de E e I, o som de quê se escreve QU, com o U quietinho.',
-        proximo:'Depois da lacuna vem E ou I? Para soar quê, ponha QU.'},
-  dig: {enun:'COMPLETE AS PALAVRAS COM CH, NH OU LH:',
-        dica:'Leia baixinho cada palavra com CH, com NH e com LH. Só uma forma vira palavra de verdade.',
-        regra:'CH, NH e LH são duas letras com um som só; trocar uma dupla pela outra estraga a palavra.',
-        proximo:'Teste as três duplas na mesma palavra e fique com a que existe.'}
-};
-
-/* Lista de lacunas no formato da prova: "COMPLETE AS PALAVRAS COM J OU G:"
-   + quadro numerado; as alternativas são a SEQUÊNCIA de letras, na ordem.
-   palavras: '[G]ELO' marca a letra que falta.
-   erradas : 'J J J G' (uma por distrator, letras separadas por espaço).
-   A fala de cada distrator é montada aqui: aponta a palavra que ficou
-   errada e mostra como ela ficaria — sempre uma palavra que NÃO existe. */
-function lac(id, eixo, palavras, erradas, extra){
-  var L = LAC[eixo];
-  var ws = palavras.map(function(p){
-    var m = /^(.*)\[(.+?)\](.*)$/.exec(p);
-    return {a:m[1], l:m[2], b:m[3]};
-  });
-  var certa = ws.map(function(w){ return w.l; });
-  var quadro = '<div class="lacs">' + ws.map(function(w,i){
-    return '<span class="lac"><i>'+(i+1)+'</i>'+w.a+'<span class="lb"></span>'+w.b+'</span>';
-  }).join('') + '</div>';
-  var opts = [{t:certa.join(SEP), ok:1}];
-  erradas.forEach(function(e){
-    var arr = e.split(' ');
-    var fala = [];
-    arr.forEach(function(l,i){
-      if(l===certa[i]) return;
-      var w = ws[i];
-      fala.push('Na '+(i+1)+', com '+l+' fica '+w.a+l+w.b+', que não existe: o certo é '+w.a+w.l+w.b+'.');
-    });
-    opts.push({t:arr.join(SEP), no:fala.join(' ')});
-  });
-  var it = {
-    id:id, eixo:eixo, tipo:'complete as palavras',
-    enun:L.enun, quadro:quadro,
-    pede:'QUAIS LETRAS COMPLETAM AS PALAVRAS, NA ORDEM?',
-    opts:opts, dica:L.dica,
-    visual:'<div class="pcs">'+ws.map(function(w){
-      return '<span class="pc">'+w.a+'<span class="mk">'+w.l+'</span>'+w.b+'</span>'; }).join('')+'</div>',
-    porque:'Completas, ficam: '+ws.map(function(w){ return w.a+w.l+w.b; }).join(', ')+'. '+L.regra,
-    proximo:L.proximo,
-    lacunas:ws
-  };
-  if(extra) for(var k in extra) it[k]=extra[k];
-  return it;
-}
-
-/* Lacunas do H: o H não tem som, então a pergunta é EM QUAIS palavras
-   ele falta. palavras: '[H]OJE' (tem H) ou 'OVO' (não tem).
-   erradas: listas de números (1 = primeira palavra) que levariam H. */
-function nums(a){
-  a = a.slice().sort(function(x,y){ return x-y; });
-  if(a.length===1) return 'SÓ NA '+a[0];
-  return a.slice(0,-1).join(', ')+' E '+a[a.length-1];
-}
-function hlac(id, palavras, erradas){
-  var ws = palavras.map(function(p){
-    var tem = p.indexOf('[H]')===0;
-    return {tem:tem, w:tem ? p.slice(3) : p};
-  });
-  var certa = []; ws.forEach(function(w,i){ if(w.tem) certa.push(i+1); });
-  var quadro = '<div class="lacs">' + ws.map(function(w,i){
-    return '<span class="lac"><i>'+(i+1)+'</i><span class="lb"></span>'+w.w+'</span>';
-  }).join('') + '</div>';
-  var opts = [{t:nums(certa), ok:1}];
-  erradas.forEach(function(e){
-    var fala = [];
-    ws.forEach(function(w,i){
-      var marcou = e.indexOf(i+1)>=0;
-      if(w.tem && !marcou) fala.push('Faltou o H na '+(i+1)+': sem ele fica '+w.w+', que não existe; o certo é H'+w.w+'.');
-      if(!w.tem && marcou) fala.push('A '+(i+1)+' não tem H: H'+w.w+' não existe; o certo é '+w.w+'.');
-    });
-    opts.push({t:nums(e), no:fala.join(' ')});
-  });
-  return {
-    id:id, eixo:'h', tipo:'complete as palavras',
-    enun:'COMPLETE COM H AS PALAVRAS QUE PRECISAM DE H:', quadro:quadro,
-    pede:'EM QUAIS PALAVRAS FALTA O H?',
-    opts:opts,
-    dica:'O H não tem som, então não adianta escutar. Lembre como a palavra aparece escrita nos livros.',
-    visual:'<div class="pcs">'+ws.map(function(w){
-      return '<span class="pc">'+(w.tem?'<span class="mk">H</span>':'')+w.w+'</span>'; }).join('')+'</div>',
-    porque:'Ficam assim: '+ws.map(function(w){ return (w.tem?'H':'')+w.w; }).join(', ')+'. O H do começo não tem som; quem se escreve com H tem de ser lembrada.',
-    proximo:'Não confie no ouvido: o H é mudo. Pense na palavra escrita.',
-    lacunas:ws.map(function(w){ return {a:'', l:w.tem?'H':'', b:w.w}; })
-  };
-}
-
-/* "ESCREVA O PLURAL DE:" — pares [singular, plural]; erradas: objetos
-   {posição: forma errada}, com 1 ou 2 trocas cada. A fala explica a regra
-   da palavra que ficou errada, deduzida do final dela. */
-function regraPlural(s){
-  if(/ÃO$/.test(s)) return 'termina em ÃO, que vira ÕES';
-  if(/[AEOU]L$/.test(s)) return 'termina em L, que vira IS';
-  if(/M$/.test(s)) return 'termina em M, que vira NS';
-  if(/[RZ]$/.test(s)) return 'termina em '+s.slice(-1)+', então ganha ES';
-  return 'termina em vogal, então ganha só S';
-}
-function plu(id, pares, erradas, extra){
-  var quadro = '<div class="lacs plu">' + pares.map(function(p,i){
-    return '<span class="lac"><i>'+(i+1)+'</i>'+p[0]+'</span>';
-  }).join('') + '</div>';
-  var opts = [{t:pares.map(function(p){ return p[1]; }).join(SEP), ok:1}];
-  erradas.forEach(function(e){
-    var fala = [];
-    var seq = pares.map(function(p,i){
-      if(e[i]===undefined) return p[1];
-      fala.push(e[i]+' não serve: '+p[0]+' '+regraPlural(p[0])+' e fica '+p[1]+'.');
-      return e[i];
-    });
-    opts.push({t:seq.join(SEP), no:fala.join(' ')});
-  });
-  var it = {
-    id:id, eixo:'plural', tipo:'escreva o plural',
-    enun:'ESCREVA O PLURAL DE:', quadro:quadro,
-    pede:'QUAL É O PLURAL DAS PALAVRAS, NA ORDEM?',
-    opts:opts,
-    dica:'Olhe como cada palavra TERMINA: vogal, R ou Z, ÃO, L ou M.',
-    visual:'<div class="pcs">'+pares.map(function(p){
-      return '<span class="pc">'+p[0]+' &rarr; <span class="mk">'+p[1]+'</span></span>'; }).join('')+'</div>',
-    porque:pares.map(function(p){ return p[0]+' '+regraPlural(p[0])+': '+p[1]+'.'; }).join(' '),
-    proximo:'Uma palavra de cada vez: olhe o final dela e aplique a regra.'
-  };
-  if(extra) for(var k in extra) it[k]=extra[k];
-  return it;
-}
-
-/* textos de apoio (trechos NOVOS de contos, para achar os elementos) */
-var TX_PEDRO = [
-  'ERA UMA VEZ, NUM REINO MUITO DISTANTE,',
-  'UM MENINO CHAMADO PEDRO.',
-  'UM DIA, O RIO DO REINO SECOU,',
-  'E TODOS FICARAM COM SEDE.',
-  'UMA FADA DEU A PEDRO UMA CONCHA MÁGICA.',
-  'PEDRO SOPROU A CONCHA, E A ÁGUA VOLTOU A CORRER.',
-  'E TODOS VIVERAM FELIZES PARA SEMPRE.'
+/* textos de apoio usados por mais de uma questão */
+var TX_CHAPEU = [
+  'UMA MENINA USAVA UMA CAPA COM CAPUZ VERMELHO.',
+  'POR ISSO, TODOS A CHAMAVAM DE CHAPEUZINHO VERMELHO.',
+  'UM DIA, A MÃE PEDIU QUE ELA LEVASSE UMA CESTA',
+  'COM DOCES PARA A VOVÓ, QUE ESTAVA DOENTE.',
+  '— NÃO SAIA DO CAMINHO E NÃO CONVERSE COM ESTRANHOS! — AVISOU A MÃE.',
+  'NA FLORESTA, CHAPEUZINHO ENCONTROU O LOBO MAU',
+  'E CONTOU PARA ELE AONDE IA.'
 ];
-var TX_PORQ = [
-  'ERA UMA VEZ TRÊS PORQUINHOS IRMÃOS.',
-  'O PRIMEIRO FEZ UMA CASA DE PALHA,',
-  'O SEGUNDO, UMA CASA DE MADEIRA,',
-  'E O TERCEIRO, UMA CASA DE TIJOLOS.',
-  'O LOBO MAU SOPROU E DERRUBOU AS CASAS DE PALHA E DE MADEIRA.',
-  'OS TRÊS PORQUINHOS CORRERAM PARA A CASA DE TIJOLOS.',
-  'O LOBO SOPROU, SOPROU, MAS A CASA NÃO CAIU.'
-];
-var TX_CIND = [
-  'ERA UMA VEZ UMA MOÇA CHAMADA CINDERELA.',
-  'ELA QUERIA MUITO IR AO BAILE DO CASTELO.',
-  'UMA FADA MADRINHA APARECEU E, COM SUA VARINHA,',
-  'TRANSFORMOU UMA ABÓBORA EM CARRUAGEM',
-  'E O VESTIDO VELHO EM UM VESTIDO LINDO.',
-  'MAS AVISOU: À MEIA-NOITE, O ENCANTO IA ACABAR.'
+var TX_JOAO = [
+  'JOÃO E A MÃE ERAM POBRES. SÓ TINHAM UMA VACA.',
+  'A MÃE MANDOU JOÃO VENDER A VACA,',
+  'MAS ELE TROCOU A VACA POR FEIJÕES MÁGICOS.',
+  'A MÃE FICOU BRAVA E JOGOU OS FEIJÕES PELA JANELA.',
+  'DE NOITE, NASCEU UM PÉ DE FEIJÃO GIGANTE,',
+  'QUE SUBIA ATÉ AS NUVENS.'
 ];
 var TX_PARODIA = [
   'ERA UMA VEZ UMA MENINA CHAMADA CHAPEUZINHO AZUL.',
@@ -243,352 +82,1075 @@ var TX_PARODIA = [
 var TX_INVENTO = [
   'AS PESSOAS INVENTAM COISAS PARA RESOLVER PROBLEMAS',
   'E FACILITAR A VIDA. A LÂMPADA, POR EXEMPLO, ILUMINA A NOITE.',
+  'O BRASILEIRO SANTOS DUMONT É CONHECIDO COMO O PAI DA AVIAÇÃO.',
+  'ELE CRIOU O 14-BIS.',
   'JÁ O FOGO NÃO FOI INVENTADO: ELE JÁ EXISTIA NA NATUREZA.',
   'ENCONTRAR ALGO QUE JÁ EXISTIA É UMA DESCOBERTA.'
 ];
 
-var ITENS = [];
+var ITENS = [
 
-/* =================== BLOCO A · LETRA H =================== */
-ITENS.push(
-hlac('SH1', ['[H]OJE','OVO','[H]OTEL','UVA','[H]ORTA'], [[1,3],[1,2,3,5],[3,5]]),
-hlac('SH2', ['ILHA','[H]OMEM','[H]IPOPÓTAMO','ESCOLA','[H]ELICÓPTERO'], [[2,3],[1,2,3,5],[2,3,4,5]]),
-hlac('SH3', ['ANEL','[H]ISTÓRIA','OLHO','[H]IGIENE','[H]ERÓI'], [[2,4],[1,2,4,5],[2,3,4,5]]),
-
-{id:'SH4', eixo:'h', tipo:'qual está escrita certo',
- pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
+/* ======================= CONTOS DE FADAS ======================= */
+{id:'SCO1', eixo:'conto',
+ pede:'QUAL DESTES COMEÇOS É DE UM CONTO DE FADAS?',
  opts:[
-  {t:'HOSPITAL', ok:1},
-  {t:'HOVO', no:'OVO não tem H. HOVO não existe.'},
-  {t:'OMEM', no:'Faltou o H: o certo é HOMEM.'},
-  {t:'HUVA', no:'UVA não tem H. HUVA não existe.'}
+  {t:'ERA UMA VEZ UM MENINO QUE MORAVA COM A MÃE E UMA VACA.', ok:1},
+  {t:'HOJE CHOVEU MUITO NA CIDADE E AS RUAS FICARAM CHEIAS DE ÁGUA.', no:'Isso é notícia: conta uma coisa que aconteceu de verdade, hoje. Conto de fadas é história inventada.'},
+  {t:'PARA FAZER O BOLO, MISTURE A FARINHA COM OS OVOS.', no:'Isso é receita: ensina a fazer um bolo. Não conta história nenhuma.'},
+  {t:'QUERIDA VOVÓ, ESTOU COM SAUDADE. UM BEIJO!', no:'Isso é um bilhete para a vovó. Não é história.'}
  ],
- dica:'Duas destas ganharam um H que não têm, e uma perdeu o H.',
- visual:'<div class="pcs"><span class="pc hit">HOSPITAL</span><span class="pc">OVO</span><span class="pc">HOMEM</span><span class="pc">UVA</span></div>',
- porque:'HOSPITAL se escreve com H. OVO e UVA não têm H; HOMEM tem.',
- proximo:'Lembre das palavras com H: HOJE, HOMEM, HOTEL, HOSPITAL, HORTA.'},
+ dica:'Procure o jeito mais famoso de começar uma história de fadas.',
+ visual:'<div class="pcs"><span class="pc hit">ERA UMA VEZ...</span><span class="arw">&rarr;</span><span class="pc hit">conto de fadas</span></div>',
+ porque:'"Era uma vez..." é o começo dos contos de fadas. As outras são notícia, receita e bilhete.',
+ proximo:'Procure as marcas do conto: Era uma vez, magia, vilão, final feliz.'},
 
-{id:'SH5', eixo:'h', tipo:'qual grupo',
+{id:'SCO2', eixo:'conto',
+ quadro:'E VIVERAM <span class="bl">________</span> PARA SEMPRE.',
+ pede:'QUE PALAVRA COMPLETA O FINAL MAIS CONHECIDO DOS CONTOS DE FADAS?',
+ opts:[
+  {t:'TRISTES', no:'Conto de fadas costuma ter final feliz. "Tristes para sempre" não é o final dos contos.'},
+  {t:'FELIZES', ok:1},
+  {t:'CANSADOS', no:'Ninguém termina um conto de fadas assim. O final conhecido é feliz.'},
+  {t:'BRAVOS', no:'Ninguém termina um conto de fadas bravo. O final conhecido é feliz.'}
+ ],
+ dica:'O final dos contos de fadas costuma ser bom para o mocinho.',
+ porque:'O final mais conhecido dos contos de fadas é: "e viveram felizes para sempre".',
+ proximo:'Lembre: começo = Era uma vez; fim = felizes para sempre.'},
+
+{id:'SCO3', eixo:'conto',
+ pede:'NA HISTÓRIA "CHAPEUZINHO VERMELHO", QUEM É O VILÃO?',
+ opts:[
+  {t:'O CAÇADOR', no:'O caçador não faz maldade: ele salva a Chapeuzinho e a vovó.'},
+  {t:'A VOVÓ', no:'A vovó estava doente, em casa. Ela não faz maldade com ninguém.'},
+  {t:'O LOBO MAU', ok:1},
+  {t:'A MÃE', no:'A mãe mandou a cesta e deu um conselho. Ela não faz maldade.'}
+ ],
+ dica:'Vilão é quem faz maldade na história. Quem enganou a Chapeuzinho?',
+ visual:'<div class="pcs"><span class="pc">MOCINHA</span><span class="arw">&rarr;</span><span class="pc">CHAPEUZINHO</span></div>'+
+        '<div class="pcs"><span class="pc hit">VILÃO</span><span class="arw">&rarr;</span><span class="pc hit">LOBO MAU</span></div>',
+ porque:'Chapeuzinho é a mocinha. O Lobo Mau enganou a menina e se disfarçou de vovó: ele é o vilão.',
+ proximo:'Vilão é quem faz maldade. Na Chapeuzinho, é o Lobo Mau.'},
+
+{id:'SCO4', eixo:'conto',
+ pede:'EM QUAL FRASE APARECE MAGIA?',
+ opts:[
+  {t:'A MENINA LEVOU UMA CESTA DE DOCES.', no:'Levar uma cesta de doces é coisa que acontece de verdade. Não tem magia.'},
+  {t:'A MÃE ABRIU A JANELA.', no:'Abrir a janela é comum, acontece todo dia. Não tem magia.'},
+  {t:'O MENINO SUBIU NA ÁRVORE.', no:'Subir numa árvore é coisa de verdade. Não tem magia.'},
+  {t:'A HARPA CANTAVA SOZINHA.', ok:1}
+ ],
+ dica:'Mágico é o que não acontece de verdade.',
+ porque:'Harpa de verdade não canta sozinha. A harpa que canta é um elemento mágico do conto de fadas.',
+ proximo:'Pergunte: isso pode acontecer de verdade? Se não pode, é magia.'},
+
+{id:'SCO5', eixo:'conto',
+ pede:'NA HISTÓRIA "CHAPEUZINHO VERMELHO", EM QUE LUGAR A MENINA ENCONTROU O LOBO PELA PRIMEIRA VEZ?',
+ opts:[
+  {t:'NO CASTELO', no:'O castelo é lugar da história do João, não da Chapeuzinho.'},
+  {t:'NA CASA DA VOVÓ', no:'Na casa da vovó o lobo já estava disfarçado, mas isso foi depois. A primeira vez foi no caminho, antes.'},
+  {t:'NO ALTO DAS NUVENS', no:'O alto das nuvens é lugar da história do João.'},
+  {t:'NA FLORESTA', ok:1}
+ ],
+ dica:'Ela ainda estava no caminho para a casa da vovó.',
+ visual:'<div class="pcs"><span class="pc hit">1. FLORESTA</span><span class="arw">&rarr;</span><span class="pc">2. CASA DA VOVÓ</span></div>',
+ porque:'Chapeuzinho encontrou o Lobo Mau na floresta, no caminho. Só depois o lobo foi para a casa da vovó. Floresta, castelo e casa da vovó são lugares dos contos de fadas.',
+ proximo:'Lugares dos contos: floresta e casa da vovó (Chapeuzinho); castelo no alto das nuvens (João).'},
+
+{id:'SCO6', eixo:'conto',
+ pede:'O QUE É UM CONTO DE FADAS?',
+ opts:[
+  {t:'UMA NOTÍCIA DE JORNAL SOBRE O QUE ACONTECEU ONTEM.', no:'Notícia conta o que aconteceu de verdade. Conto de fadas é inventado.'},
+  {t:'UMA LISTA DE COMPRAS DO MERCADO.', no:'Lista de compras não conta história nenhuma.'},
+  {t:'UMA HISTÓRIA INVENTADA, CONTADA DE GERAÇÃO EM GERAÇÃO.', ok:1},
+  {t:'UMA RECEITA PARA FAZER BOLO.', no:'Receita ensina a fazer comida. Não conta história.'}
+ ],
+ dica:'Conto de fadas é uma história. Ela aconteceu de verdade ou foi inventada?',
+ porque:'Conto de fadas é uma história inventada, que os avós contaram para os pais, e os pais contam para os filhos.',
+ proximo:'Separe: história inventada (conto) de texto que informa ou ensina (notícia, receita, lista).'},
+
+{id:'SCO7', eixo:'conto',
+ pede:'NO FIM DA HISTÓRIA "JOÃO E O PÉ DE FEIJÃO", QUAL É O PROBLEMA E COMO ELE É RESOLVIDO?',
+ opts:[
+  {t:'O LOBO ENGANA A MENINA, E O GIGANTE SALVA TODOS.', no:'Lobo e menina são da história da Chapeuzinho, e quem salva lá é o caçador, não o Gigante.'},
+  {t:'A VACA FOGE, E A MÃE COMPRA OUTRA.', no:'A vaca não foge: João troca a vaca por feijões. E a mãe não compra outra.'},
+  {t:'JOÃO SE PERDE NA FLORESTA, E O CAÇADOR O ENCONTRA.', no:'O caçador é da história da Chapeuzinho. João não se perde na floresta.'},
+  {t:'O GIGANTE DESCE ATRÁS DE JOÃO, E JOÃO CORTA O PÉ DE FEIJÃO.', ok:1}
+ ],
+ dica:'Qual é o perigo do fim da história? E o que João faz?',
+ porque:'O perigo é o Gigante descendo atrás de João. João resolve cortando o pé de feijão com o machado.',
+ proximo:'Problema = o perigo. Solução = o que alguém faz para acabar com ele.'},
+
+/* ======================= CHAPEUZINHO VERMELHO ======================= */
+{id:'SCH1', eixo:'chapeu', enun:'LEIA O TEXTO:', texto:TX_CHAPEU,
+ pede:'POR QUE A MENINA ERA CHAMADA DE CHAPEUZINHO VERMELHO?',
+ opts:[
+  {t:'PORQUE A VOVÓ ESTAVA DOENTE.', no:'A vovó doente está no texto, mas explica para onde ia a cesta, não o nome da menina.'},
+  {t:'PORQUE USAVA UMA CAPA COM CAPUZ VERMELHO.', ok:1},
+  {t:'PORQUE MORAVA NA FLORESTA.', no:'O texto não diz que ela morava na floresta. Ela passou pela floresta.'},
+  {t:'PORQUE LEVAVA DOCES NA CESTA.', no:'Os doces estão no texto, mas não explicam o nome dela.'}
+ ],
+ dica:'A resposta está nas duas primeiras linhas do texto. Procure a palavra POR ISSO.',
+ visual:'<p class="vx"><span class="mk">USAVA UMA CAPA COM CAPUZ VERMELHO</span> &rarr; <b>POR ISSO</b> &rarr; CHAPEUZINHO VERMELHO</p>',
+ porque:'O texto diz: ela usava uma capa com capuz vermelho; POR ISSO a chamavam de Chapeuzinho Vermelho.',
+ proximo:'Pergunta com POR QUE? Procure no texto a palavra POR ISSO ou PORQUE.'},
+
+{id:'SCH2', eixo:'chapeu', enun:'LEIA O TEXTO:', texto:TX_CHAPEU,
+ pede:'O QUE A MÃE AVISOU?',
+ opts:[
+  {t:'CORRER BEM RÁPIDO PELA FLORESTA.', no:'O texto não fala em correr. A fala da mãe está na linha com travessão.'},
+  {t:'CONTAR PARA TODOS AONDE IA.', no:'Foi a Chapeuzinho que contou ao lobo aonde ia. A mãe pediu outra coisa: não conversar com estranhos.'},
+  {t:'DEIXAR A CESTA NA FLORESTA.', no:'A cesta era para a vovó. O texto não manda deixar a cesta na floresta.'},
+  {t:'NÃO SAIR DO CAMINHO E NÃO CONVERSAR COM ESTRANHOS.', ok:1}
+ ],
+ dica:'Procure a linha que começa com o travessão (—): é a fala da mãe.',
+ visual:'<p class="vx"><span class="mk">— NÃO SAIA DO CAMINHO E NÃO CONVERSE COM ESTRANHOS!</span> — AVISOU A MÃE.</p>',
+ porque:'A fala da mãe, depois do travessão, é: "Não saia do caminho e não converse com estranhos!".',
+ proximo:'Quando a pergunta é o que alguém DISSE, procure o travessão (—) no texto.'},
+
+{id:'SCH3', eixo:'chapeu', enun:'LEIA O TEXTO:', texto:TX_CHAPEU,
+ pede:'PARA QUEM ERAM OS DOCES DA CESTA?',
+ opts:[
+  {t:'PARA A MÃE.', no:'A mãe deu a cesta. Os doces não eram para ela.'},
+  {t:'PARA O LOBO MAU.', no:'O lobo apareceu no caminho, mas a cesta não era para ele.'},
+  {t:'PARA A VOVÓ.', ok:1},
+  {t:'PARA A PRÓPRIA CHAPEUZINHO.', no:'Chapeuzinho levava a cesta, mas os doces eram para outra pessoa.'}
+ ],
+ dica:'Procure no texto a palavra PARA perto da palavra DOCES.',
+ visual:'<p class="vx">UMA CESTA COM DOCES <span class="mk">PARA A VOVÓ</span>, QUE ESTAVA DOENTE.</p>',
+ porque:'O texto diz: uma cesta com doces para a vovó, que estava doente.',
+ proximo:'Ache no texto a palavra que a pergunta usa (DOCES) e leia a linha inteira.'},
+
+{id:'SCH4', eixo:'chapeu',
+ quadro:'— VOVÓ, QUE ORELHAS GRANDES VOCÊ TEM!<br>— É PARA TE <span class="bl">________</span> MELHOR!',
+ pede:'QUE PALAVRA COMPLETA A RESPOSTA DO LOBO?',
+ opts:[
+  {t:'VER', no:'VER é a resposta sobre os OLHOS grandes. Aqui a fala é sobre as ORELHAS.'},
+  {t:'OUVIR', ok:1},
+  {t:'COMER', no:'COMER é a resposta sobre a BOCA grande. Aqui a fala é sobre as ORELHAS.'},
+  {t:'ABRAÇAR', no:'O lobo não fala em abraçar. Orelhas servem para ouvir.'}
+ ],
+ dica:'Para que servem as orelhas?',
+ visual:'<div class="pcs"><span class="pc">OLHOS</span><span class="arw">&rarr;</span><span class="pc">VER</span></div>'+
+        '<div class="pcs"><span class="pc hit">ORELHAS</span><span class="arw">&rarr;</span><span class="pc hit">OUVIR</span></div>'+
+        '<div class="pcs"><span class="pc">BOCA</span><span class="arw">&rarr;</span><span class="pc">COMER</span></div>',
+ porque:'Orelhas grandes: "é para te ouvir melhor!". Olhos: ver. Boca: comer.',
+ proximo:'Ligue a parte do corpo ao que ela faz: olhos veem, orelhas ouvem, boca come.'},
+
+{id:'SCH5', eixo:'chapeu',
+ pede:'QUAL É A ORDEM CERTA DOS FATOS?',
+ opts:[
+  {t:'O CAÇADOR SALVA AS DUAS → O LOBO VAI PELO ATALHO → O LOBO SE DISFARÇA DE VOVÓ.', no:'O caçador é o fim da história, não o começo.'},
+  {t:'O LOBO SE DISFARÇA DE VOVÓ → O LOBO VAI PELO ATALHO → O CAÇADOR SALVA AS DUAS.', no:'O lobo só pode se disfarçar depois de chegar à casa da vovó, e ele chega pelo atalho.'},
+  {t:'O LOBO VAI PELO ATALHO → O LOBO SE DISFARÇA DE VOVÓ → O CAÇADOR SALVA AS DUAS.', ok:1},
+  {t:'O LOBO VAI PELO ATALHO → O CAÇADOR SALVA AS DUAS → O LOBO SE DISFARÇA DE VOVÓ.', no:'O caçador salva as duas no fim. Depois disso o lobo não se disfarça mais.'}
+ ],
+ dica:'Primeiro o lobo precisa chegar à casa da vovó. O caçador aparece por último.',
+ visual:'<div class="pcs"><span class="pc hit">1. ATALHO</span><span class="arw">&rarr;</span><span class="pc hit">2. DISFARCE</span><span class="arw">&rarr;</span><span class="pc hit">3. CAÇADOR</span></div>',
+ porque:'O lobo vai pelo atalho e chega antes; depois se disfarça de vovó e deita na cama; no fim, o caçador salva as duas.',
+ proximo:'Conte a história com o dedo: o que vem primeiro, o que vem depois, o que vem no fim.'},
+
+{id:'SCH6', eixo:'chapeu',
+ pede:'O LOBO CHEGOU PRIMEIRO À CASA DA VOVÓ PORQUE...',
+ opts:[
+  {t:'FOI POR UM ATALHO.', ok:1},
+  {t:'O CAÇADOR LEVOU O LOBO ATÉ LÁ.', no:'O caçador só aparece no fim, para salvar as duas. Ele não ajudou o lobo.'},
+  {t:'A VOVÓ FOI BUSCÁ-LO NA FLORESTA.', no:'A vovó estava doente, em casa. Ela não foi buscar o lobo.'},
+  {t:'DORMIU NA CASA DA VOVÓ NA NOITE ANTERIOR.', no:'Isso não acontece na história. O lobo correu por um caminho mais curto.'}
+ ],
+ dica:'Atalho é um caminho mais curto.',
+ porque:'O lobo foi por um atalho, um caminho mais curto, e chegou antes da Chapeuzinho.',
+ proximo:'Lembre a sequência: lobo na floresta, atalho, casa da vovó.'},
+
+{id:'SCH7', eixo:'chapeu',
+ pede:'O QUE O CAÇADOR FEZ NA HISTÓRIA?',
+ opts:[
+  {t:'DEU A CESTA DE DOCES PARA A CHAPEUZINHO.', no:'Quem deu a cesta foi a mãe, no começo da história.'},
+  {t:'MOSTROU O ATALHO PARA O LOBO.', no:'O caçador não ajudou o lobo. Ele salvou a Chapeuzinho e a vovó.'},
+  {t:'SE DISFARÇOU DE VOVÓ.', no:'Quem se disfarçou de vovó foi o lobo.'},
+  {t:'OUVIU, ENTROU NA CASA E SALVOU A CHAPEUZINHO E A VOVÓ.', ok:1}
+ ],
+ dica:'O caçador aparece no fim da história.',
+ porque:'Um caçador ouviu, entrou na casa e salvou a Chapeuzinho e a vovó.',
+ proximo:'Para cada personagem, lembre UMA coisa que ele faz: mãe (cesta), lobo (atalho e disfarce), caçador (salva).'},
+
+/* ======================= JOÃO E O PÉ DE FEIJÃO ======================= */
+{id:'SJO1', eixo:'joao', enun:'LEIA O TEXTO:', texto:TX_JOAO,
+ pede:'O QUE A MÃE MANDOU JOÃO FAZER COM A VACA?',
+ opts:[
+  {t:'TROCAR POR FEIJÕES MÁGICOS.', no:'Trocar por feijões foi o que JOÃO fez, e a mãe ficou brava com isso. A pergunta é o que a MÃE mandou.'},
+  {t:'VENDER.', ok:1},
+  {t:'LEVAR PARA O CASTELO.', no:'O texto não fala em levar a vaca para o castelo.'},
+  {t:'DAR PARA O GIGANTE.', no:'O Gigante nem aparece neste pedaço do texto.'}
+ ],
+ dica:'Leia a segunda linha do texto. Cuidado: o que a mãe mandou é diferente do que João fez.',
+ visual:'<p class="vx">A MÃE MANDOU JOÃO <span class="mk">VENDER A VACA</span>,</p><p class="vx">MAS ELE <span class="dm">TROCOU A VACA POR FEIJÕES</span>.</p>',
+ porque:'O texto diz: "A mãe mandou João vender a vaca, mas ele trocou a vaca por feijões mágicos". Vender foi o pedido da mãe.',
+ proximo:'Veja de QUEM a pergunta fala. A mãe mandou uma coisa; João fez outra.'},
+
+{id:'SJO2', eixo:'joao', enun:'LEIA O TEXTO:', texto:TX_JOAO,
+ pede:'POR QUE A MÃE JOGOU OS FEIJÕES PELA JANELA?',
+ opts:[
+  {t:'PORQUE QUERIA PLANTAR UM PÉ DE FEIJÃO.', no:'A mãe não sabia que ia nascer um pé de feijão. Ela jogou os feijões fora.'},
+  {t:'PORQUE OS FEIJÕES ESTAVAM ESTRAGADOS.', no:'O texto não diz que os feijões estavam estragados. Eles eram mágicos.'},
+  {t:'PORQUE O GIGANTE PEDIU.', no:'O Gigante nem aparece neste pedaço do texto.'},
+  {t:'PORQUE FICOU BRAVA COM A TROCA.', ok:1}
+ ],
+ dica:'Leia a linha em que aparece a palavra JANELA. Como a mãe estava?',
+ visual:'<p class="vx">A MÃE <span class="mk">FICOU BRAVA</span> E JOGOU OS FEIJÕES PELA JANELA.</p>',
+ porque:'João trocou a vaca, que era tudo o que a família tinha, por feijões. A mãe ficou brava e jogou os feijões pela janela.',
+ proximo:'Para responder POR QUE, procure no texto o que aconteceu logo antes.'},
+
+{id:'SJO3', eixo:'joao', enun:'LEIA O TEXTO:', texto:TX_JOAO,
+ pede:'ATÉ ONDE SUBIA O PÉ DE FEIJÃO?',
+ opts:[
+  {t:'ATÉ O TELHADO.', no:'Era um pé de feijão GIGANTE: subia muito mais alto que o telhado.'},
+  {t:'ATÉ AS NUVENS.', ok:1},
+  {t:'ATÉ A JANELA.', no:'A janela aparece no texto, mas é por onde a mãe jogou os feijões.'},
+  {t:'ATÉ O TOPO DA ÁRVORE.', no:'O texto não fala em árvore. Leia a última linha.'}
+ ],
+ dica:'A resposta está na última linha do texto.',
+ visual:'<p class="vx">QUE SUBIA ATÉ <span class="mk">AS NUVENS</span>.</p>',
+ porque:'O texto diz: "nasceu um pé de feijão gigante, que subia até as nuvens".',
+ proximo:'A resposta mora no texto: ache a linha que tem a palavra da pergunta (SUBIA).'},
+
+{id:'SJO4', eixo:'joao',
+ pede:'O QUE JOÃO LEVOU DO CASTELO DO GIGANTE?',
+ opts:[
+  {t:'A VACA DA FAMÍLIA.', no:'A vaca foi trocada por feijões no começo da história. Ela nem foi ao castelo.'},
+  {t:'A CESTA DE DOCES DA VOVÓ.', no:'A cesta de doces é da história da Chapeuzinho.'},
+  {t:'A GALINHA DOS OVOS DE OURO.', ok:1},
+  {t:'UM LOBO QUE FALAVA.', no:'O lobo que fala é da história da Chapeuzinho.'}
+ ],
+ dica:'Era um animal mágico, que botava ovos muito valiosos.',
+ porque:'No castelo, João levou a galinha dos ovos de ouro (e, depois, a harpa mágica).',
+ proximo:'Cuidado com o que é de OUTRA história: cesta e lobo são da Chapeuzinho.'},
+
+{id:'SJO5', eixo:'joao',
+ pede:'O QUE ACONTECEU LOGO DEPOIS QUE O GIGANTE ACORDOU?',
+ opts:[
+  {t:'ELE DESCEU ATRÁS DE JOÃO.', ok:1},
+  {t:'JOÃO TROCOU A VACA POR FEIJÕES.', no:'A troca da vaca é o começo da história, muito antes de o Gigante acordar.'},
+  {t:'A MÃE JOGOU OS FEIJÕES PELA JANELA.', no:'Isso aconteceu no começo, antes de nascer o pé de feijão.'},
+  {t:'NASCEU O PÉ DE FEIJÃO.', no:'O pé de feijão nasceu antes: foi por ele que João subiu até o castelo.'}
+ ],
+ dica:'O Gigante acorda quase no fim da história.',
+ visual:'<div class="pcs"><span class="pc">FEIJÕES</span><span class="arw">&rarr;</span><span class="pc">PÉ DE FEIJÃO</span><span class="arw">&rarr;</span><span class="pc">CASTELO</span><span class="arw">&rarr;</span><span class="pc">GIGANTE ACORDA</span><span class="arw">&rarr;</span><span class="pc hit">DESCE ATRÁS</span></div>',
+ porque:'O Gigante acordou e desceu atrás de João. As outras alternativas aconteceram no começo da história.',
+ proximo:'LOGO DEPOIS quer dizer o fato seguinte. Ache o fato da pergunta e ande um passo.'},
+
+{id:'SJO6', eixo:'joao',
+ pede:'COMO A HISTÓRIA "JOÃO E O PÉ DE FEIJÃO" TERMINA?',
+ opts:[
+  {t:'O GIGANTE PEGA JOÃO E O LEVA PARA O CASTELO.', no:'O Gigante não pega João. Quem cai no fim é o Gigante.'},
+  {t:'JOÃO DEVOLVE A GALINHA E PEDE DESCULPAS.', no:'Isso não acontece na história.'},
+  {t:'A VACA VOLTA E OS FEIJÕES SOMEM.', no:'A vaca não volta. Isso não acontece na história.'},
+  {t:'JOÃO CORTA O PÉ DE FEIJÃO, O GIGANTE CAI, E JOÃO E A MÃE VIVEM FELIZES.', ok:1}
+ ],
+ dica:'Lembre o que João pegou para cortar o pé de feijão.',
+ porque:'João pegou o machado e cortou o pé de feijão; o Gigante caiu; João e a mãe viveram felizes, sem passar necessidade.',
+ proximo:'O fim dos contos de fadas costuma ser feliz para o mocinho.'},
+
+{id:'SJO7', eixo:'joao',
+ pede:'QUAL DESTES É UM OBJETO MÁGICO DA HISTÓRIA DE JOÃO?',
+ opts:[
+  {t:'A CESTA DE DOCES', no:'A cesta é da história da Chapeuzinho, e não é mágica.'},
+  {t:'A HARPA QUE CANTA', ok:1},
+  {t:'A CAPA VERMELHA', no:'A capa vermelha é da Chapeuzinho, e não é mágica.'},
+  {t:'A CAMA DA VOVÓ', no:'A cama é da casa da vovó, na história da Chapeuzinho. Não é mágica.'}
+ ],
+ dica:'Na história do João tem feijões mágicos, a galinha dos ovos de ouro e...',
+ porque:'Os objetos mágicos da história do João são os feijões mágicos, a galinha dos ovos de ouro e a harpa mágica, que canta sozinha.',
+ proximo:'Separe as duas histórias: cesta, capa e cama são da Chapeuzinho.'},
+
+/* ======================= PARÁFRASE E PARÓDIA ======================= */
+{id:'SPA1', eixo:'parodia',
+ quadro:'ORIGINAL: JOÃO TROCOU A VACA POR FEIJÕES MÁGICOS.<div class="sep"></div>NOVO: O MENINO DEU A VACA EM TROCA DE UNS FEIJÕES MÁGICOS.',
+ pede:'O TEXTO NOVO É...',
+ opts:[
+  {t:'UMA PARÁFRASE, PORQUE CONTA A MESMA COISA COM OUTRAS PALAVRAS.', ok:1},
+  {t:'UMA PARÓDIA, PORQUE MUDOU O QUE ACONTECE NA HISTÓRIA.', no:'Nada mudou no que acontece: a vaca continua sendo trocada por feijões mágicos.'},
+  {t:'UMA PARÓDIA, PORQUE FICOU ENGRAÇADO.', no:'O texto novo não mudou nada de propósito, e não tem nada engraçado nele.'},
+  {t:'UM VERBETE DE DICIONÁRIO.', no:'Verbete é a palavra explicada no dicionário. Aqui é um pedaço de história.'}
+ ],
+ dica:'Compare as duas frases: o que acontece mudou?',
+ visual:'<div class="pcs"><span class="pc">JOÃO</span><span class="arw">=</span><span class="pc hit">O MENINO</span></div>'+
+        '<div class="pcs"><span class="pc">TROCOU A VACA POR</span><span class="arw">=</span><span class="pc hit">DEU A VACA EM TROCA DE</span></div>',
+ porque:'Mudaram só as palavras: João virou "o menino", "trocou" virou "deu em troca". O que acontece é o mesmo. Isso é paráfrase.',
+ proximo:'Pergunte sempre: mudou o que acontece? Não mudou, é paráfrase.'},
+
+{id:'SPA2', eixo:'parodia', enun:'LEIA O TEXTO:', texto:TX_PARODIA,
+ pede:'ESSE TEXTO É UMA PARÓDIA DE QUAL HISTÓRIA?',
+ opts:[
+  {t:'JOÃO E O PÉ DE FEIJÃO', no:'No texto não tem vaca, feijão nem Gigante. Tem uma menina, um lobo e uma visita a alguém da família.'},
+  {t:'CHAPEUZINHO VERMELHO', ok:1},
+  {t:'OS TRÊS PORQUINHOS', no:'No texto não tem porquinhos. Tem uma menina, um lobo e uma visita.'},
+  {t:'NENHUMA, PORQUE NÃO DÁ PARA RECONHECER', no:'Na paródia sempre dá para reconhecer a original. Chapeuzinho + lobo + visita ao avô: é a Chapeuzinho Vermelho.'}
+ ],
+ dica:'Uma menina com "Chapeuzinho" no nome, um lobo e uma visita... lembra qual história?',
+ visual:'<p class="vx"><span class="mk">CHAPEUZINHO</span> AZUL · <span class="mk">LOBO</span> · LEVAR COMIDA PARA O <span class="mk">VOVÔ</span></p>',
+ porque:'A menina se chama Chapeuzinho, encontra um lobo no caminho e leva comida para o vovô: dá para reconhecer a Chapeuzinho Vermelho.',
+ proximo:'Paródia imita a original. Procure o que ficou igual: é a pista da história original.'},
+
+{id:'SPA3', eixo:'parodia', enun:'LEIA O TEXTO:', texto:TX_PARODIA,
+ pede:'O QUE MUDOU EM RELAÇÃO À HISTÓRIA ORIGINAL?',
+ opts:[
+  {t:'NADA MUDOU: É A MESMA HISTÓRIA.', no:'Mudou muita coisa: a cor do nome, a comida, quem recebe a visita e o lobo.'},
+  {t:'SÓ MUDOU O LUGAR: AGORA É NUM CASTELO.', no:'O texto não fala em castelo. E não mudou só uma coisa.'},
+  {t:'O NOME DA MENINA CONTINUOU IGUAL, SÓ O LOBO MUDOU.', no:'O nome mudou: de Chapeuzinho VERMELHO para Chapeuzinho AZUL.'},
+  {t:'A COR DO NOME, A COMIDA E QUEM RECEBE A VISITA.', ok:1}
+ ],
+ dica:'Compare com a original: menina de capuz vermelho, doces, vovó.',
+ visual:'<div class="pcs"><span class="pc">VERMELHO</span><span class="arw">&rarr;</span><span class="pc bad">AZUL</span></div>'+
+        '<div class="pcs"><span class="pc">DOCES</span><span class="arw">&rarr;</span><span class="pc bad">SANDUÍCHE</span></div>'+
+        '<div class="pcs"><span class="pc">VOVÓ</span><span class="arw">&rarr;</span><span class="pc bad">VOVÔ</span></div>',
+ porque:'Vermelho virou azul, os doces viraram sanduíche e a vovó virou o vovô. Isso foi mudado de propósito: é uma paródia.',
+ proximo:'Para achar o que mudou, ponha a original do lado e compare pedaço por pedaço.'},
+
+{id:'SPA4', eixo:'parodia',
+ pede:'QUAL FRASE É UMA PARÓDIA DE "JOÃO E O PÉ DE FEIJÃO"?',
+ opts:[
+  {t:'O MENINO TROCOU A VACA POR FEIJÕES MÁGICOS.', no:'Aqui nada mudou no que acontece: só trocou João por "o menino". É paráfrase.'},
+  {t:'JOÃO E A MÃE ERAM POBRES E SÓ TINHAM UMA VACA.', no:'Isso é a própria história original, sem mudança.'},
+  {t:'JOÃO TROCOU A VACA POR SEMENTES DE PIPOCA, E O PÉ DE PIPOCA ESTOUROU ATÉ O CÉU.', ok:1},
+  {t:'A MENINA DA CAPA VERMELHA LEVOU DOCES PARA A AVÓ.', no:'Essa frase é da história da Chapeuzinho, não da história do João.'}
+ ],
+ dica:'Paródia muda alguma coisa de propósito, e ainda dá para reconhecer a original.',
+ visual:'<div class="pcs"><span class="pc">FEIJÕES MÁGICOS</span><span class="arw">&rarr;</span><span class="pc bad">SEMENTES DE PIPOCA</span></div>',
+ porque:'O feijão virou pipoca, de propósito e de um jeito engraçado, mas ainda dá para reconhecer a história do João. É paródia.',
+ proximo:'Paródia = imita + muda de propósito. Se só trocou palavras, é paráfrase.'},
+
+{id:'SPA5', eixo:'parodia',
+ quadro:'CHAPEUZINHO LEVOU DOCES PARA A VOVÓ.',
+ pede:'QUAL FRASE É UMA PARÁFRASE DA FRASE DO QUADRO?',
+ opts:[
+  {t:'CHAPEUZINHO VERDE FOI DE BICICLETA LEVAR PIZZA PARA O VOVÔ.', no:'Aqui mudaram a cor, a comida e quem recebe: isso é paródia, não paráfrase.'},
+  {t:'CHAPEUZINHO COMEU TODOS OS DOCES NO CAMINHO.', no:'Aqui mudou o que acontece: os doces não chegaram à vovó.'},
+  {t:'A VOVÓ LEVOU DOCES PARA A CHAPEUZINHO.', no:'Aqui inverteu quem leva e quem recebe. Mudou o que acontece.'},
+  {t:'A MENINA DA CAPA VERMELHA FOI ENTREGAR GULOSEIMAS À AVÓ.', ok:1}
+ ],
+ dica:'Paráfrase: mesma história, outras palavras. Guloseimas são doces.',
+ visual:'<div class="pcs"><span class="pc">CHAPEUZINHO</span><span class="arw">=</span><span class="pc hit">A MENINA DA CAPA VERMELHA</span></div>'+
+        '<div class="pcs"><span class="pc">DOCES</span><span class="arw">=</span><span class="pc hit">GULOSEIMAS</span></div>',
+ porque:'"A menina da capa vermelha" é a Chapeuzinho, "guloseimas" são doces e "avó" é a vovó. Mesma história, outras palavras: paráfrase.',
+ proximo:'Troque cada palavra pela parecida e veja se a história continua igual.'},
+
+{id:'SPA6', eixo:'parodia',
+ pede:'O QUE É UMA PARÓDIA?',
+ opts:[
+  {t:'A MESMA HISTÓRIA CONTADA COM OUTRAS PALAVRAS, SEM MUDAR NADA DO QUE ACONTECE.', no:'Isso é a paráfrase. Na paródia, alguma coisa muda de propósito.'},
+  {t:'UM TEXTO QUE IMITA UMA HISTÓRIA E MUDA ALGUMA COISA DE PROPÓSITO.', ok:1},
+  {t:'UMA LISTA DE PALAVRAS EM ORDEM ALFABÉTICA.', no:'Lista em ordem alfabética lembra o dicionário, não a paródia.'},
+  {t:'UMA HISTÓRIA QUE NÃO DÁ PARA RECONHECER DE JEITO NENHUM.', no:'Na paródia sempre dá para reconhecer a original: ela imita a história.'}
+ ],
+ dica:'Pense na Chapeuzinho Verde que foi de bicicleta levar pizza.',
+ porque:'Paródia imita a história e muda alguma coisa de propósito (personagem, cor, lugar, final), muitas vezes para ficar engraçada.',
+ proximo:'Paródia muda; paráfrase não muda o que acontece.'},
+
+/* ======================= LETRA H ======================= */
+{id:'SH1', eixo:'h',
+ pede:'ASSINALE A PALAVRA ESCRITA CORRETAMENTE.',
+ opts:[
+  {t:'OSPITAL', no:'Falta o H do começo. Ele não tem som, mas tem de ser escrito.'},
+  {t:'ROSPITAL', no:'Não tem R no começo dessa palavra. O que fica quietinho no começo é o H.'},
+  {t:'HOSPITAL', ok:1},
+  {t:'OSPITÁ', no:'Falta o H do começo e falta o L do fim.'}
+ ],
+ dica:'Essa palavra começa com uma letra que não tem som.',
+ visual:'<div class="pcs"><span class="pc hit">H</span><span class="pc">OSPITAL</span></div><p class="vx">O H não tem som, mas está lá.</p>',
+ porque:'HOSPITAL se escreve com H no começo. A gente não ouve o H, mas ele é escrito.',
+ proximo:'Palavra que começa com som de vogal? Lembre se ela é do time do H: hora, hoje, hospital.'},
+
+{id:'SH2', eixo:'h',
+ pede:'QUAL PALAVRA COMEÇA COM H?',
+ opts:[
+  {t:'ILHA', no:'ILHA começa com I. Ela tem H no meio (LH), mas não no começo.'},
+  {t:'HIENA', ok:1},
+  {t:'UVA', no:'UVA começa direto com a vogal U.'},
+  {t:'ANEL', no:'ANEL começa direto com a vogal A.'}
+ ],
+ dica:'Olhe só a PRIMEIRA letra de cada palavra.',
+ porque:'HIENA começa com H. ILHA tem H, mas no meio, junto com o L.',
+ proximo:'Começa com H = o H é a primeira letra. Não vale H no meio.'},
+
+{id:'SH3', eixo:'h',
+ quadro:'A GENTE FALA: "OJE".<br>A GENTE ESCREVE: <span class="bl">________</span>',
+ pede:'COMO SE ESCREVE A PALAVRA?',
+ opts:[
+  {t:'OJE', no:'Assim é como a gente FALA. Na escrita, tem um H no começo.'},
+  {t:'OGE', no:'Falta o H do começo, e o som de jê antes do E dessa palavra é com J.'},
+  {t:'HOGE', no:'O H está certo, mas o som de jê dessa palavra é com J: HOJE.'},
+  {t:'HOJE', ok:1}
+ ],
+ dica:'O H do começo não tem som. E o som de jê dessa palavra é com J.',
+ visual:'<div class="pcs"><span class="pc hit">H</span><span class="pc">O</span><span class="pc hit">J</span><span class="pc">E</span></div>',
+ porque:'Falamos "oje", mas escrevemos HOJE: com H no começo e com J.',
+ proximo:'Desconfie da palavra que começa com som de vogal: pode ter um H escondido.'},
+
+{id:'SH4', eixo:'h',
+ quadro:'<span class="bl">___</span>IPOPÓTAMO',
+ pede:'QUAL LETRA COMPLETA A PALAVRA?',
+ opts:[
+  {t:'E', no:'"EIPOPÓTAMO" não existe. O começo é HI.'},
+  {t:'H', ok:1},
+  {t:'O', no:'"OIPOPÓTAMO" não existe. O começo é HI.'},
+  {t:'NENHUMA: A PALAVRA COMEÇA COM I.', no:'"IPOPÓTAMO" é como a gente fala, mas na escrita tem um H no começo.'}
+ ],
+ dica:'A letra que falta não faz som nenhum.',
+ porque:'HIPOPÓTAMO se escreve com H no começo, mesmo sem som.',
+ proximo:'Se o buraco está no começo e parece que não falta nada, pense no H.'},
+
+{id:'SH5', eixo:'h',
  pede:'EM QUAL GRUPO TODAS AS PALAVRAS COMEÇAM COM H?',
  opts:[
-  {t:'HINO · HOMEM · HORTA', ok:1},
-  {t:'HOTEL · UVA · HÉLICE', no:'UVA começa com U, sem H.'},
-  {t:'ILHA · HOJE · HIENA', no:'ILHA começa com I, sem H.'},
-  {t:'ANEL · OLHO · ESCOLA', no:'Nenhuma dessas começa com H.'}
+  {t:'HORA · OVO · HINO', no:'OVO começa direto com O. Uma palavra só já tira o grupo.'},
+  {t:'HOMEM · UVA · HERÓI', no:'UVA começa direto com U.'},
+  {t:'HORA · HOTEL · HINO', ok:1},
+  {t:'ILHA · HORTA · HÉLICE', no:'ILHA começa com I.'}
  ],
- dica:'Confira a primeira letra de cada palavra do grupo.',
- porque:'HINO, HOMEM e HORTA começam com H. Nos outros grupos aparece UVA, ILHA, ANEL, OLHO ou ESCOLA, que não têm H no começo.',
- proximo:'Uma palavra sem H já estraga o grupo inteiro.'},
+ dica:'Confira a primeira letra das TRÊS palavras de cada grupo.',
+ porque:'HORA, HOTEL e HINO começam com H. Nos outros grupos, sempre tem uma palavra que começa com vogal.',
+ proximo:'Grupo "todas": confira uma por uma. Uma errada já derruba o grupo.'},
 
-{id:'SH6', eixo:'h', tipo:'regra',
- pede:'NA PALAVRA HOJE, O QUE O H FAZ?',
+{id:'SH6', eixo:'h',
+ pede:'O H NO COMEÇO DA PALAVRA HORTA...',
  opts:[
-  {t:'NÃO TEM SOM, MAS É ESCRITO.', ok:1},
-  {t:'TEM SOM DE R, COMO EM RATO.', no:'O H do começo não tem som nenhum. Falamos "oje".'},
-  {t:'PODE SER APAGADO, PORQUE NÃO TEM SOM.', no:'Não tem som, mas não pode ser apagado: OJE está errado.'},
-  {t:'TEM SOM DE A.', no:'O H do começo não tem som nenhum.'}
+  {t:'NÃO TEM SOM, MAS PRECISA SER ESCRITO.', ok:1},
+  {t:'TEM SOM DE R, COMO EM RATO.', no:'Em português, o H do começo não tem som nenhum.'},
+  {t:'PODE SER APAGADO, PORQUE NÃO TEM SOM.', no:'Sem o H, a palavra fica escrita errada. Ele não tem som, mas tem de estar lá.'},
+  {t:'SÓ É ESCRITO PORQUE A PALAVRA É GRANDE.', no:'O tamanho não importa: HOJE é curtinha e tem H. O H do começo não tem som, mas é escrito.'}
  ],
- dica:'Fale HOJE em voz alta. Você ouve alguma coisa antes do O?',
- porque:'Falamos "oje", mas escrevemos HOJE. O H do começo é mudo e mesmo assim faz parte da palavra.',
- proximo:'H no começo: não se ouve, mas se escreve.'},
+ dica:'Fale HORTA bem devagar. Dá para ouvir o H?',
+ porque:'O H do começo não tem som. Mesmo assim, HORTA se escreve com H.',
+ proximo:'Lembre a regra em duas partes: sem som, mas escrito.'},
 
-{id:'SH7', eixo:'h', tipo:'complete as palavras',
- enun:'COMPLETE A FRASE:',
- quadro:'O <span class="lb"></span>ELICÓPTERO POUSOU NO <span class="lb"></span>OSPITAL.',
- pede:'QUE LETRA FALTA NAS PALAVRAS DA FRASE?',
+{id:'SH7', eixo:'h',
+ quadro:'A <span class="bl">________</span> DO RECREIO CHEGOU.',
+ pede:'QUE PALAVRA COMPLETA A FRASE?',
  opts:[
-  {t:'H NAS DUAS PALAVRAS', ok:1},
-  {t:'H SÓ NA PRIMEIRA', no:'OSPITAL não existe: falta o H também em HOSPITAL.'},
-  {t:'H SÓ NA SEGUNDA', no:'ELICÓPTERO não existe: falta o H também em HELICÓPTERO.'},
-  {t:'NENHUMA: JÁ ESTÁ CERTO ASSIM', no:'ELICÓPTERO e OSPITAL não existem. As duas começam com H.'}
+  {t:'ORA', no:'A frase fala do tempo do relógio. Essa palavra se escreve com H: HORA.'},
+  {t:'HÓRA', no:'HORA não tem acento. Só o H do começo e um R: HORA.'},
+  {t:'HORA', ok:1},
+  {t:'HORRA', no:'HORA tem um R só.'}
  ],
- dica:'As duas palavras estão na lista das que começam com H.',
- visual:'<p class="vx">O <span class="mk">H</span>ELICÓPTERO POUSOU NO <span class="mk">H</span>OSPITAL.</p>',
- porque:'HELICÓPTERO e HOSPITAL começam com H, mesmo sem a gente ouvir.',
- proximo:'Antes de responder, escreva as palavras inteiras na cabeça.'},
+ dica:'É a palavra do relógio: a ___ do recreio.',
+ visual:'<p class="vx">A <span class="mk">HORA</span> DO RECREIO CHEGOU.</p>',
+ porque:'A palavra do relógio é HORA, com H no começo e um R só.',
+ proximo:'Leia a frase inteira com a palavra no buraco e confira a escrita, letra por letra.'},
 
-{id:'SH8', eixo:'h', tipo:'qual está escrita certo',
- pede:'QUAL PALAVRA NÃO COMEÇA COM H?',
+/* ======================= J OU G ======================= */
+{id:'SJG1', eixo:'jg',
+ quadro:'<span class="bl">___</span>ACARÉ',
+ pede:'QUAL LETRA COMPLETA A PALAVRA?',
  opts:[
-  {t:'HORTELÃ', no:'HORTELÃ começa com H.'},
-  {t:'ELEFANTE', ok:1},
-  {t:'HIENA', no:'HIENA começa com H.'},
-  {t:'HOTEL', no:'HOTEL começa com H.'}
+  {t:'G', no:'GA tem som de guê, como em GATO. Para o som de jê antes do A, só J.'},
+  {t:'J', ok:1},
+  {t:'GU', no:'GUA não faz o som de jê. Antes do A, o som de jê é sempre J.'},
+  {t:'CH', no:'CH tem som de xis (CHAVE). A palavra começa com som de jê.'}
  ],
- dica:'Olhe a primeira letra de cada uma.',
- porque:'ELEFANTE começa com E. HORTELÃ, HIENA e HOTEL começam com H.',
- proximo:'Leia a primeira letra de cada alternativa antes de marcar.'},
+ dica:'Antes do A, o som de jê é sempre com...',
+ visual:'<div class="pcs"><span class="pc hit">JA</span><span class="pc">CA</span><span class="pc">RÉ</span></div>',
+ porque:'JA, JO, JU: sempre J. JACARÉ.',
+ proximo:'Veja a vogal depois do buraco. A, O ou U? Então é J.'},
 
-{id:'SH9', eixo:'h', tipo:'qual está escrita certo',
- pede:'QUAL FRASE ESTÁ ESCRITA CERTO?',
+{id:'SJG2', eixo:'jg',
+ pede:'ASSINALE A PALAVRA ESCRITA CORRETAMENTE.',
  opts:[
-  {t:'HOJE O HOMEM FOI AO HOTEL.', ok:1},
-  {t:'OJE O HOMEM FOI AO HOTEL.', no:'Faltou o H em HOJE.'},
-  {t:'HOJE O OMEM FOI AO HOTEL.', no:'Faltou o H em HOMEM.'},
-  {t:'HOJE O HOMEM FOI AO OTEL.', no:'Faltou o H em HOTEL.'}
+  {t:'JIRASSOL', no:'Antes do I, o som de jê pode ser J ou G, e é preciso lembrar a palavra. GIRASSOL é com G.'},
+  {t:'GUIRASSOL', no:'GUI tem som de guê (GUITARRA). GIRASSOL começa com som de jê.'},
+  {t:'XIRASSOL', no:'X tem outro som. GIRASSOL é com G.'},
+  {t:'GIRASSOL', ok:1}
  ],
- dica:'Três palavras da frase começam com H. Confira as três.',
- visual:'<p class="vx"><span class="mk">H</span>OJE O <span class="mk">H</span>OMEM FOI AO <span class="mk">H</span>OTEL.</p>',
- porque:'HOJE, HOMEM e HOTEL começam com H. Nas outras frases, uma delas perdeu o H.',
- proximo:'Frase inteira: confira palavra por palavra.'}
-);
+ dica:'É a flor que segue o sol. Começa igual a GIRAFA.',
+ porque:'GIRASSOL se escreve com G, igual a GIRAFA. Com E e I, é preciso lembrar como a palavra se escreve.',
+ proximo:'Com E e I, pense numa palavra parecida que você já sabe: GIRAFA, GIRASSOL.'},
 
-/* =================== BLOCO A · J OU G =================== */
-ITENS.push(
-lac('SJG1','jg', ['[G]ELO','[J]ANELA','CA[J]U','[G]IRAFA'], ['J J J G','G J G G','G G J J']),
-lac('SJG2','jg', ['[J]ACARÉ','[G]ENTE','LARAN[J]A','MÁ[G]ICO','[J]IPE'], ['J J J G J','J G G G J','J G J J G']),
-lac('SJG3','jg', ['[G]IGANTE','QUEI[J]O','TI[G]ELA','[J]UBA'], ['J J G J','G J J J','G G G J']),
-lac('SJG4','jg', ['[G]ELADEIRA','[J]EITO','PÁ[G]INA','BEI[J]O','[J]ABUTI'], ['G G G J J','G J J J J','J J G J G']),
-lac('SJG5','jg', ['RELÓ[G]IO','[J]ILÓ','SU[J]EIRA','[G]IRASSOL','FEI[J]ÃO'], ['G G J G J','G J G G J','J J J J J']),
-
-{id:'SJG6', eixo:'jg', tipo:'qual está escrita certo',
- pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
+{id:'SJG3', eixo:'jg',
+ pede:'EM QUAL PALAVRA O SOM DE JÊ É ESCRITO COM J?',
  opts:[
-  {t:'GIRAFA', ok:1},
-  {t:'JELO', no:'O certo é GELO, com G.'},
-  {t:'GANELA', no:'GA soa guê. O certo é JANELA, com J.'},
-  {t:'TIJELA', no:'O certo é TIGELA, com G.'}
+  {t:'GELADEIRA', no:'GELADEIRA tem som de jê, mas escrito com G.'},
+  {t:'PÁGINA', no:'PÁGINA tem som de jê, mas escrito com G.'},
+  {t:'CANJICA', ok:1},
+  {t:'RELÓGIO', no:'RELÓGIO tem som de jê, mas escrito com G.'}
  ],
- dica:'Uma delas começa com GA: lembre que GA não soa jê.',
- porque:'GIRAFA se escreve com G. As certas das outras são GELO, JANELA e TIGELA.',
- proximo:'GA, GO, GU nunca soam jê: para JA, JO, JU use J.'},
+ dica:'Todas têm som de jê. Olhe a LETRA que escreve esse som.',
+ visual:'<div class="pcs"><span class="pc">CAN</span><span class="pc hit">JI</span><span class="pc">CA</span></div>',
+ porque:'CANJICA tem JI, com J. As outras têm GE ou GI, com G.',
+ proximo:'Som igual não quer dizer letra igual: olhe a letra escrita.'},
 
-{id:'SJG7', eixo:'jg', tipo:'regra',
- pede:'QUANDO O SOM DE JÊ VEM ANTES DE A, O OU U (JA, JO, JU), QUE LETRA SE USA?',
+{id:'SJG4', eixo:'jg',
+ quadro:'O MACACO COMEU UMA LARAN<span class="bl">___</span>A.',
+ pede:'QUAL LETRA COMPLETA A PALAVRA?',
  opts:[
-  {t:'SEMPRE J', ok:1},
-  {t:'SEMPRE G', no:'GA, GO e GU soam guê, como em GATO. Para soar jê, é J.'},
-  {t:'PODE SER J OU G', no:'Com A, O e U não tem escolha: é sempre J. A escolha só existe com E e I.'},
-  {t:'SEMPRE GU', no:'GU é para o som de guê, como em GUERRA.'}
+  {t:'J', ok:1},
+  {t:'G', no:'GA tem som de guê (GATO). LARANJA tem som de jê antes do A: só J.'},
+  {t:'GU', no:'GUA não faz som de jê. Antes do A, o som de jê é sempre J.'},
+  {t:'X', no:'X não faz esse som em LARANJA. Antes do A, o som de jê é J.'}
  ],
- dica:'Pense em JACARÉ, JOGO e CAJU.',
- porque:'JA, JO, JU: sempre J. Com G ficaria GA, GO, GU, que é outro som.',
- proximo:'Só antes de E e I é preciso decorar a palavra.'},
+ dica:'Veja a vogal depois do buraco.',
+ visual:'<div class="pcs"><span class="pc">LA</span><span class="pc">RAN</span><span class="pc hit">JA</span></div>',
+ porque:'JA: sempre J. LARANJA.',
+ proximo:'Depois do buraco vem A, O ou U? Então o som de jê é J.'},
 
-{id:'SJG8', eixo:'jg', tipo:'qual está escrita certo',
- pede:'EM QUAL GRUPO TODAS AS PALAVRAS ESTÃO ESCRITAS CERTO?',
+{id:'SJG5', eixo:'jg',
+ pede:'EM QUAL GRUPO TODAS AS PALAVRAS ESTÃO ESCRITAS CORRETAMENTE?',
  opts:[
-  {t:'JACARÉ · GELO · CAJU', ok:1},
-  {t:'GACARÉ · GELO · CAJU', no:'GACARÉ não existe: o certo é JACARÉ.'},
-  {t:'JACARÉ · JELO · CAJU', no:'JELO não existe: o certo é GELO.'},
-  {t:'JACARÉ · GELO · CAGU', no:'CAGU não existe: o certo é CAJU.'}
+  {t:'JOGO · CAGU · GELO', no:'CAGU está errada: JU é sempre com J. O certo é CAJU.'},
+  {t:'JOGO · CAJU · JELO', no:'JELO está errada: GELO se escreve com G.'},
+  {t:'GOJO · CAJU · GELO', no:'GOJO está errada: o certo é JOGO, com J no começo.'},
+  {t:'JOGO · CAJU · GELO', ok:1}
  ],
- dica:'Confira as três palavras de cada grupo.',
- porque:'JACARÉ e CAJU têm J (JA, JU); GELO tem G.',
- proximo:'Uma palavra errada já estraga o grupo.'},
+ dica:'Confira as três palavras de cada grupo. Uma errada já derruba o grupo.',
+ porque:'JOGO e CAJU têm JO e JU (sempre J). GELO se escreve com G.',
+ proximo:'Em grupo "todas", leia palavra por palavra até o fim.'},
 
-{id:'SJG9', eixo:'jg', tipo:'qual está escrita certo',
- pede:'QUAL FRASE ESTÁ ESCRITA CERTO?',
+{id:'SJG6', eixo:'jg',
+ pede:'POR QUE JANELA SÓ PODE SER ESCRITA COM J?',
  opts:[
-  {t:'A GIRAFA COMEU JILÓ NA TIGELA.', ok:1},
-  {t:'A JIRAFA COMEU JILÓ NA TIGELA.', no:'O certo é GIRAFA, com G.'},
-  {t:'A GIRAFA COMEU GILÓ NA TIGELA.', no:'O certo é JILÓ, com J.'},
-  {t:'A GIRAFA COMEU JILÓ NA TIJELA.', no:'O certo é TIGELA, com G.'}
+  {t:'PORQUE TODA PALAVRA COMEÇA COM J.', no:'Não é verdade: GELO e GIRAFA começam com G.'},
+  {t:'PORQUE COM A, O E U O SOM DE JÊ É SEMPRE COM J.', ok:1},
+  {t:'PORQUE GA FAZ SOM DE JÊ.', no:'GA faz som de guê, como em GATO. Por isso não serve.'},
+  {t:'PORQUE J E G NUNCA FAZEM O MESMO SOM.', no:'Fazem, sim: com E e I, os dois podem fazer som de jê (JEITO, GELO).'}
  ],
- dica:'São três palavras com som de jê. Confira cada uma.',
- visual:'<p class="vx">A <span class="mk">G</span>IRAFA COMEU <span class="mk">J</span>ILÓ NA TI<span class="mk">G</span>ELA.</p>',
- porque:'GIRAFA e TIGELA se escrevem com G; JILÓ, com J. Antes de E e I, é preciso lembrar cada palavra.',
- proximo:'Com E e I, pense na palavra escrita: GIRAFA, GELO, JILÓ, JEITO.'}
-);
+ dica:'Olhe a vogal depois do J em JANELA.',
+ porque:'JA, JO, JU: sempre J, porque GA, GO e GU fazem o som de guê.',
+ proximo:'Antes de responder POR QUE, lembre a regra inteira: com A, O, U, sempre J.'},
 
-/* =================== BLOCO A · G OU GU =================== */
-ITENS.push(
-lac('SGG1','ggu', ['[G]ATO','[GU]ERRA','FO[G]O','Á[GU]IA'], ['GU GU G GU','G G G GU','G GU G G']),
-lac('SGG2','ggu', ['FO[GU]ETE','[G]ALINHA','[GU]ITARRA','LA[G]O','MAN[GU]EIRA'], ['G G GU G GU','GU G G G GU','GU GU GU G G']),
-lac('SGG3','ggu', ['PRE[GU]IÇA','[G]ORILA','FO[GU]EIRA','A[G]ULHA'], ['G G GU G','GU GU GU G','GU G GU GU']),
-lac('SGG4','ggu', ['FORMI[GU]EIRO','[G]ALHO','[GU]INDASTE','[G]OLA','[G]UDE'], ['G G GU G G','GU GU GU G G','GU G G G G']),
-
-{id:'SGG5', eixo:'ggu', tipo:'regra',
- pede:'EM QUAL PALAVRA O U FICA QUIETINHO (NÃO SE FALA)?',
+{id:'SJG7', eixo:'jg',
+ pede:'ASSINALE A PALAVRA ESCRITA CORRETAMENTE.',
  opts:[
+  {t:'TIJELA', no:'Muita gente escreve assim, mas o certo é com G: TIGELA.'},
+  {t:'TIGUELA', no:'GUE tem som de guê. TIGELA tem som de jê.'},
+  {t:'TIGELA', ok:1},
+  {t:'TIXELA', no:'X tem outro som. TIGELA se escreve com G.'}
+ ],
+ dica:'Com E, o som de jê pode ser J ou G. Essa palavra é do time do G.',
+ porque:'TIGELA se escreve com G. Com E e I, é preciso lembrar como a palavra se escreve.',
+ proximo:'Palavra de E e I com som de jê: lembre do jeito que você viu escrito.'},
+
+/* ======================= G OU GU ======================= */
+{id:'SGG1', eixo:'ggu',
+ quadro:'FO<span class="bl">___</span>ETE',
+ pede:'O QUE COMPLETA A PALAVRA?',
+ opts:[
+  {t:'G', no:'Sem o U, GE faz som de jê, como em GELO. Ficaria "fojete".'},
+  {t:'GU', ok:1},
+  {t:'J', no:'JE tem som de jê. FOGUETE tem som de guê.'},
+  {t:'Q', no:'Q faz som de quê, não de guê.'}
+ ],
+ dica:'Antes do E, para soar guê, precisa de uma ajudante quietinha.',
+ visual:'<div class="pcs"><span class="pc">FO</span><span class="pc hit">GUE</span><span class="pc">TE</span></div><p class="vx">O U fica quietinho: só ajuda o G a soar guê.</p>',
+ porque:'FOGUETE: GUE. Antes do E, o som de guê precisa do U, que não se fala.',
+ proximo:'Depois do buraco vem E ou I e o som é guê? Então é GU.'},
+
+{id:'SGG2', eixo:'ggu',
+ pede:'ASSINALE A PALAVRA ESCRITA CORRETAMENTE.',
+ opts:[
+  {t:'GITARRA', no:'Sem o U, GI faz som de jê, como em GIRAFA. Ficaria "jitarra".'},
+  {t:'JITARRA', no:'JI tem som de jê. GUITARRA tem som de guê.'},
   {t:'GUITARRA', ok:1},
-  {t:'AGULHA', no:'Em AGULHA o U se fala: a-GU-lha.'},
-  {t:'GUDE', no:'Em GUDE o U se fala: GU-de.'},
-  {t:'UVA', no:'Em UVA o U se fala: é a primeira letra.'}
+  {t:'QUITARRA', no:'QUI faz som de quê. GUITARRA começa com som de guê.'}
  ],
- dica:'O U quietinho aparece em GUE e GUI.',
- visual:'<div class="pcs"><span class="pc">G<span class="mk">U</span>ITARRA</span><span class="arw">&rarr;</span><span class="pc">o U não se fala</span></div>',
- porque:'Em GUITARRA o U só está ali para o G soar guê antes do I. Ele não se fala.',
- proximo:'GUE e GUI: o U é escrito, mas não se fala.'},
+ dica:'Começa com som de guê antes do I.',
+ visual:'<div class="pcs"><span class="pc hit">GUI</span><span class="pc">TAR</span><span class="pc">RA</span></div>',
+ porque:'GUITARRA: GUI, com o U quietinho.',
+ proximo:'Som de guê antes de E ou I: GUE, GUI.'},
 
-{id:'SGG6', eixo:'ggu', tipo:'qual está escrita certo',
- pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
+{id:'SGG3', eixo:'ggu',
+ pede:'EM QUAL PALAVRA O U NÃO É FALADO?',
  opts:[
-  {t:'FOGUETE', ok:1},
-  {t:'GERRA', no:'Sem o U, GE soa jê. O certo é GUERRA.'},
-  {t:'GITARRA', no:'Sem o U, GI soa jê. O certo é GUITARRA.'},
-  {t:'FOGEIRA', no:'Sem o U, GE soa jê. O certo é FOGUEIRA.'}
+  {t:'AGULHA', no:'Em AGULHA o U é falado: A-GU-LHA.'},
+  {t:'GUDE', no:'Em GUDE o U é falado: GU-DE.'},
+  {t:'CAJU', no:'Em CAJU o U é falado: CA-JU.'},
+  {t:'MANGUEIRA', ok:1}
  ],
- dica:'Leia cada uma do jeito que está escrita: GE e GI soam jê.',
- porque:'FOGUETE tem GUE. As outras perderam o U e ficaram com som de jê.',
- proximo:'Som de guê antes de E ou I? Tem de ter U.'},
+ dica:'Fale cada palavra bem devagar. Em qual o U some?',
+ visual:'<div class="pcs"><span class="pc">MAN</span><span class="pc hit">GUEI</span><span class="pc">RA</span></div><p class="vx">GUE: o U está escrito, mas não se fala.</p>',
+ porque:'Em MANGUEIRA, o U de GUE não se fala. Nas outras, o U é ouvido.',
+ proximo:'O U quietinho aparece em GUE e GUI. Em GU sozinho, o U é falado.'},
 
-{id:'SGG7', eixo:'ggu', tipo:'regra',
- pede:'NA PALAVRA GIGANTE, AS DUAS LETRAS G TÊM O MESMO SOM?',
+{id:'SGG4', eixo:'ggu',
+ pede:'QUAL PALAVRA TEM O SOM DE GUÊ?',
  opts:[
-  {t:'NÃO: GI SOA JÊ E GAN SOA GUÊ.', ok:1},
-  {t:'SIM: AS DUAS SOAM JÊ.', no:'GAN soa guê, como em GATO.'},
-  {t:'SIM: AS DUAS SOAM GUÊ.', no:'GI soa jê, como em GIRAFA.'},
-  {t:'NÃO: GI SOA GUÊ E GAN SOA JÊ.', no:'É o contrário: GI soa jê e GAN soa guê.'}
+  {t:'GELADEIRA', no:'GE tem som de jê: GELADEIRA.'},
+  {t:'LAGO', ok:1},
+  {t:'GIRASSOL', no:'GI tem som de jê: GIRASSOL.'},
+  {t:'GENTE', no:'GE tem som de jê: GENTE.'}
  ],
- dica:'Fale GIGANTE devagar: GI... GAN... TE.',
- visual:'<div class="pcs"><span class="pc"><span class="mk">GI</span> = jê</span><span class="pc"><span class="mk">GAN</span> = guê</span></div>',
- porque:'G antes de I soa jê; G antes de A soa guê. Por isso GIGANTE tem os dois sons.',
- proximo:'Olhe a vogal depois do G: E, I soam jê; A, O, U soam guê.'},
+ dica:'GE e GI têm som de jê. Procure GA, GO ou GU.',
+ visual:'<div class="pcs"><span class="pc">LA</span><span class="pc hit">GO</span></div>',
+ porque:'LAGO tem GO, com som de guê. As outras têm GE ou GI, com som de jê.',
+ proximo:'Olhe a vogal depois do G: A, O, U = guê; E, I = jê.'},
 
-{id:'SGG8', eixo:'ggu', tipo:'regra',
- pede:'PARA ESCREVER O SOM DE GUÊ ANTES DE E OU I, O QUE É PRECISO?',
+{id:'SGG5', eixo:'ggu',
+ pede:'NA PALAVRA GIGANTE, QUE SOM TÊM AS PARTES GI E GAN?',
  opts:[
-  {t:'COLOCAR UM U DEPOIS DO G.', ok:1},
-  {t:'TROCAR O G PELO J.', no:'J faz som de jê, não de guê.'},
-  {t:'COLOCAR UM H DEPOIS DO G.', no:'Em português não se usa GH. O certo é GU: GUERRA.'},
-  {t:'NADA: É SÓ ESCREVER GE OU GI.', no:'GE e GI soam jê, como em GELO e GIRAFA.'}
+  {t:'OS DOIS TÊM SOM DE JÊ.', no:'GAN tem som de guê, como em GATO.'},
+  {t:'GI TEM SOM DE JÊ, E GAN TEM SOM DE GUÊ.', ok:1},
+  {t:'OS DOIS TÊM SOM DE GUÊ.', no:'GI tem som de jê, como em GIRAFA.'},
+  {t:'GI TEM SOM DE GUÊ, E GAN TEM SOM DE JÊ.', no:'Está trocado: GI soa jê e GAN soa guê.'}
  ],
- dica:'Pense em GUERRA e GUITARRA.',
- porque:'Antes de E e I, o G sozinho soa jê. Para soar guê, entra o U: GUE, GUI.',
- proximo:'GUE, GUI: o U trabalha calado.'}
-);
+ dica:'Fale GI-GAN-TE devagar.',
+ visual:'<div class="pcs"><span class="pc hit">GI = jê</span><span class="pc hit">GAN = guê</span><span class="pc">TE</span></div>',
+ porque:'GI soa jê (como GIRAFA) e GAN soa guê (como GATO). Duas regras numa palavra só.',
+ proximo:'Olhe a vogal depois de cada G.'},
 
-/* =================== BLOCO A · C OU QU =================== */
-ITENS.push(
-lac('SCQ1','cqu', ['[C]ASA','[QU]EIJO','[C]OPO','ES[QU]ILO'], ['QU QU C QU','C C C QU','C QU C C']),
-lac('SCQ2','cqu', ['MÁ[QU]INA','[C]AVALO','[QU]IABO','[C]UBO','MOS[QU]ITO'], ['C C QU C QU','QU C C C QU','QU QU QU C C']),
-lac('SCQ3','cqu', ['[C]OELHO','LE[QU]E','[C]AMA','PERI[QU]ITO','[C]ORUJA'], ['C C C QU C','QU QU C QU C','C QU QU C C']),
-lac('SCQ4','cqu', ['[QU]ENTE','[C]UTIA','MOLE[QU]E','[QU]ILO','[C]AJU'], ['C C QU QU C','QU QU QU QU C','QU C C QU C']),
-
-{id:'SCQ5', eixo:'cqu', tipo:'qual está escrita certo',
- pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
+{id:'SGG6', eixo:'ggu',
+ quadro:'À NOITE, ACENDEMOS UMA FO<span class="bl">___</span>EIRA.',
+ pede:'O QUE COMPLETA A PALAVRA?',
  opts:[
-  {t:'ESQUILO', ok:1},
-  {t:'CEIJO', no:'CE soa sê. O certo é QUEIJO.'},
-  {t:'MOSCITO', no:'CI soa si. O certo é MOSQUITO.'},
-  {t:'QUOPO', no:'Antes de O é só o C. O certo é COPO.'}
+  {t:'G', no:'Sem o U, GE faz som de jê. Ficaria "fojeira".'},
+  {t:'J', no:'JE tem som de jê. FOGUEIRA tem som de guê.'},
+  {t:'Q', no:'Q faz som de quê.'},
+  {t:'GU', ok:1}
  ],
- dica:'QU só aparece antes de E e I.',
- porque:'ESQUILO tem QUI. As certas das outras são QUEIJO, MOSQUITO e COPO.',
- proximo:'Antes de A, O, U: C. Antes de E, I: QU.'},
+ dica:'Depois do buraco vem E. Queremos o som de guê.',
+ visual:'<div class="pcs"><span class="pc">FO</span><span class="pc hit">GUEI</span><span class="pc">RA</span></div>',
+ porque:'FOGUEIRA: GUE, com o U quietinho.',
+ proximo:'E ou I depois do buraco + som de guê = GU.'},
 
-{id:'SCQ6', eixo:'cqu', tipo:'regra',
- pede:'POR QUE QUEIJO SE ESCREVE COM QU, E NÃO COM C?',
+{id:'SGG7', eixo:'ggu',
+ pede:'QUAL DESTAS PALAVRAS ESTÁ ESCRITA DE FORMA ERRADA?',
  opts:[
-  {t:'PORQUE, ANTES DE E E I, O SOM DE QUÊ SE ESCREVE COM QU.', ok:1},
-  {t:'PORQUE É UMA PALAVRA COMPRIDA.', no:'O tamanho da palavra não muda a letra. COPO e CAVALO usam C.'},
-  {t:'PORQUE O U DE QUEIJO SE FALA BEM FORTE.', no:'O U de QUEIJO não se fala: ele fica quietinho.'},
-  {t:'PORQUE TODA PALAVRA DE COMIDA SE ESCREVE COM QU.', no:'CAJU é comida e se escreve com C.'}
+  {t:'FOGUETE', no:'FOGUETE está certa: GUE, com o U quietinho.'},
+  {t:'GERRA', ok:1},
+  {t:'ÁGUIA', no:'ÁGUIA está certa: GUI, com o U quietinho.'},
+  {t:'GATO', no:'GATO está certa: GA, só o G.'}
  ],
- dica:'Leia CEIJO do jeito que está escrito. Que som tem?',
- porque:'Com C ficaria CEIJO, que soa "seijo". Antes de E e I, o som de quê precisa de QU.',
- proximo:'Olhe a vogal depois da lacuna: E ou I pedem QU.'},
+ dica:'A pergunta pede a ERRADA. Fale cada uma como está escrita.',
+ visual:'<div class="pcs"><span class="pc bad">GERRA</span><span class="arw">&rarr;</span><span class="pc hit">GUERRA</span></div>',
+ porque:'Sem o U, GE soaria jê: "jerra". O certo é GUERRA, com GUE.',
+ proximo:'Pergunta com ERRADA: procure a que quebra a regra.'},
 
-{id:'SCQ7', eixo:'cqu', tipo:'qual está escrita certo',
- pede:'EM QUAL GRUPO TODAS AS PALAVRAS ESTÃO ESCRITAS CERTO?',
+/* ======================= DICIONÁRIO ======================= */
+{id:'SDI1', eixo:'dic',
+ pede:'QUAL PALAVRA VEM PRIMEIRO NO DICIONÁRIO?',
  opts:[
-  {t:'CASA · QUIABO · CUBO', ok:1},
-  {t:'QUASA · QUIABO · CUBO', no:'QUASA não existe: o certo é CASA.'},
-  {t:'CASA · CIABO · CUBO', no:'CIABO não existe: o certo é QUIABO.'},
-  {t:'CASA · QUIABO · QUUBO', no:'QUUBO não existe: o certo é CUBO.'}
+  {t:'BULE', no:'BU: o U vem depois do A, do E e do O no alfabeto.'},
+  {t:'BOLA', no:'BO: o O vem depois do A no alfabeto.'},
+  {t:'BELO', no:'BE: o E vem depois do A no alfabeto.'},
+  {t:'BALA', ok:1}
+ ],
+ dica:'Todas começam com B. Olhe a segunda letra.',
+ visual:'<div class="pcs"><span class="pc hit">BA</span><span class="arw">&rarr;</span><span class="pc">BE</span><span class="arw">&rarr;</span><span class="pc">BO</span><span class="arw">&rarr;</span><span class="pc">BU</span></div>',
+ porque:'A segunda letra decide: A, E, O, U. BALA vem primeiro.',
+ proximo:'Primeira letra igual? Passe para a segunda.'},
+
+{id:'SDI2', eixo:'dic',
+ pede:'EM QUAL ORDEM AS PALAVRAS APARECEM NO DICIONÁRIO?',
+ opts:[
+  {t:'LOBO · GATO · URSO', no:'L vem depois de G no alfabeto. GATO tem de vir antes de LOBO.'},
+  {t:'GATO · LOBO · URSO', ok:1},
+  {t:'URSO · LOBO · GATO', no:'Essa ordem está de trás para a frente.'},
+  {t:'GATO · URSO · LOBO', no:'U vem depois de L no alfabeto. LOBO tem de vir antes de URSO.'}
+ ],
+ dica:'G, L, U: cante o alfabeto e veja qual chega primeiro.',
+ porque:'No alfabeto, G vem antes de L, e L vem antes de U: GATO, LOBO, URSO.',
+ proximo:'Olhe a primeira letra de cada palavra e ponha na ordem do alfabeto.'},
+
+{id:'SDI3', eixo:'dic',
+ pede:'CASA E CAVALO COMEÇAM COM CA. QUAL VEM PRIMEIRO NO DICIONÁRIO?',
+ opts:[
+  {t:'CAVALO, PORQUE É UMA PALAVRA MAIOR.', no:'O tamanho não importa no dicionário. Vale a ordem do alfabeto.'},
+  {t:'CAVALO, PORQUE V VEM ANTES DE S.', no:'Não vem: no alfabeto, S vem antes de V.'},
+  {t:'CASA, PORQUE S VEM ANTES DE V.', ok:1},
+  {t:'AS DUAS FICAM NO MESMO LUGAR.', no:'Cada palavra tem o seu lugar. A terceira letra decide.'}
+ ],
+ dica:'As duas primeiras letras são iguais. Olhe a terceira.',
+ visual:'<div class="pcs"><span class="pc">CA</span><span class="pc hit">S</span><span class="pc">A</span></div><div class="pcs"><span class="pc">CA</span><span class="pc">V</span><span class="pc">ALO</span></div>',
+ porque:'CAS e CAV: a terceira letra decide. S vem antes de V, então CASA vem antes de CAVALO.',
+ proximo:'Letras iguais? Ande para a próxima letra até achar uma diferente.'},
+
+{id:'SDI4', eixo:'dic',
+ pede:'PARA QUE SERVE O DICIONÁRIO?',
+ opts:[
+  {t:'PARA LER UMA HISTÓRIA DO COMEÇO AO FIM.', no:'Histórias de começo ao fim estão nos livros de contos. O dicionário explica palavras, uma por uma.'},
+  {t:'PARA INVENTAR PALAVRAS NOVAS.', no:'O dicionário não inventa palavras: ele explica as que já existem.'},
+  {t:'PARA ENCONTRAR AS PALAVRAS EM ORDEM DE TAMANHO.', no:'No dicionário, as palavras ficam em ordem alfabética, não em ordem de tamanho.'},
+  {t:'PARA DESCOBRIR O SIGNIFICADO DE UMA PALAVRA E COMO ELA SE ESCREVE.', ok:1}
+ ],
+ dica:'O que tem dentro do dicionário? Palavras explicadas.',
+ porque:'O dicionário mostra o significado da palavra e a escrita certa dela.',
+ proximo:'Lembre as duas coisas: significado e escrita certa.'},
+
+{id:'SDI5', eixo:'dic',
+ quadro:'BOLA: OBJETO REDONDO, USADO PARA BRINCAR E JOGAR.',
+ pede:'NO DICIONÁRIO, A PALAVRA EXPLICADA COM O SEU SIGNIFICADO, COMO NO QUADRO, SE CHAMA...',
+ opts:[
+  {t:'VERBETE', ok:1},
+  {t:'PALAVRA-GUIA', no:'Palavras-guia ficam no alto da página e mostram a primeira e a última palavra dela.'},
+  {t:'ALFABETO', no:'Alfabeto são as 26 letras, de A a Z. A palavra explicada tem outro nome.'},
+  {t:'SÍLABA', no:'Sílaba é um pedacinho da palavra, como BO-LA. A palavra explicada tem outro nome.'}
+ ],
+ dica:'Começa com V.',
+ porque:'Cada palavra explicada no dicionário, com o seu significado, é um verbete.',
+ proximo:'Verbete = palavra + explicação. Palavras-guia = no alto da página.'},
+
+{id:'SDI6', eixo:'dic',
+ quadro:'NO ALTO DE UMA PÁGINA DO DICIONÁRIO ESTÁ ESCRITO:<br>BALA ........ BULE',
+ pede:'QUAL PALAVRA PODE ESTAR NESSA PÁGINA?',
+ opts:[
+  {t:'ABELHA', no:'ABELHA começa com A: vem antes de BALA, numa página anterior.'},
+  {t:'CASA', no:'CASA começa com C: vem depois de BULE, numa página seguinte.'},
+  {t:'BOLA', ok:1},
+  {t:'UVA', no:'UVA começa com U: fica bem mais para o fim do dicionário.'}
+ ],
+ dica:'As palavras-guia mostram a primeira (BALA) e a última (BULE) palavra da página.',
+ visual:'<div class="pcs"><span class="pc">BALA</span><span class="arw">&rarr;</span><span class="pc hit">BOLA</span><span class="arw">&rarr;</span><span class="pc">BULE</span></div>',
+ porque:'BOLA fica entre BALA e BULE: BA, BO, BU. Por isso está nessa página.',
+ proximo:'A palavra tem de caber ENTRE as duas palavras-guia.'},
+
+{id:'SDI7', eixo:'dic',
+ pede:'QUAL PALAVRA VEM POR ÚLTIMO NO DICIONÁRIO?',
+ opts:[
+  {t:'ABELHA', no:'A é a primeira letra do alfabeto: ABELHA vem logo no começo.'},
+  {t:'MAPA', no:'M fica no meio do alfabeto.'},
+  {t:'ZEBRA', ok:1},
+  {t:'VACA', no:'V vem antes de Z no alfabeto.'}
+ ],
+ dica:'Qual é a última letra do alfabeto?',
+ porque:'Z é a última letra do alfabeto. ZEBRA vem depois de todas.',
+ proximo:'POR ÚLTIMO: procure a letra mais perto do fim do alfabeto.'},
+
+/* ======================= INVENÇÕES E DESCOBERTAS ======================= */
+{id:'SIN1', eixo:'invento', enun:'LEIA O TEXTO:', texto:TX_INVENTO,
+ pede:'SEGUNDO O TEXTO, POR QUE AS PESSOAS INVENTAM COISAS?',
+ opts:[
+  {t:'PARA ACHAR O QUE JÁ EXISTIA NA NATUREZA.', no:'Achar o que já existia é DESCOBERTA, não invenção.'},
+  {t:'PARA RESOLVER PROBLEMAS E FACILITAR A VIDA.', ok:1},
+  {t:'PARA DEIXAR A NOITE MAIS ESCURA.', no:'É o contrário: a lâmpada ilumina a noite.'},
+  {t:'PARA DEIXAR A VIDA MAIS DIFÍCIL.', no:'É o contrário: o texto diz que as invenções FACILITAM a vida.'}
+ ],
+ dica:'A resposta está nas duas primeiras linhas.',
+ visual:'<p class="vx">AS PESSOAS INVENTAM COISAS <span class="mk">PARA RESOLVER PROBLEMAS E FACILITAR A VIDA</span>.</p>',
+ porque:'O texto diz: as pessoas inventam coisas para resolver problemas e facilitar a vida.',
+ proximo:'Procure no texto a palavra PARA perto de INVENTAM.'},
+
+{id:'SIN2', eixo:'invento', enun:'LEIA O TEXTO:', texto:TX_INVENTO,
+ pede:'SANTOS DUMONT É CONHECIDO COMO O PAI DA AVIAÇÃO. SEGUNDO O TEXTO, O QUE ELE CRIOU?',
+ opts:[
+  {t:'A LÂMPADA', no:'A lâmpada aparece no texto, mas como exemplo de invenção que ilumina a noite. O texto não diz que foi Santos Dumont.'},
+  {t:'O FOGO', no:'O texto diz que o fogo não foi inventado: ele já existia na natureza.'},
+  {t:'O 14-BIS', ok:1},
+  {t:'A RODA', no:'O texto não fala em roda. Leia a linha logo depois do nome de Santos Dumont.'}
+ ],
+ dica:'Procure no texto o nome SANTOS DUMONT e leia a linha seguinte.',
+ visual:'<p class="vx">O BRASILEIRO <span class="mk">SANTOS DUMONT</span> É CONHECIDO COMO O PAI DA AVIAÇÃO.</p><p class="vx">ELE CRIOU <span class="mk">O 14-BIS</span>.</p>',
+ porque:'O texto diz: o brasileiro Santos Dumont é conhecido como o pai da aviação. Ele criou o 14-Bis, um avião.',
+ proximo:'Ache no texto a palavra da pergunta e leia a linha inteira, e a seguinte.'},
+
+{id:'SIN3', eixo:'invento', enun:'LEIA O TEXTO:', texto:TX_INVENTO,
+ pede:'POR QUE O TEXTO DIZ QUE O FOGO NÃO FOI INVENTADO?',
+ opts:[
+  {t:'PORQUE SANTOS DUMONT O CRIOU.', no:'Santos Dumont criou o 14-Bis, não o fogo.'},
+  {t:'PORQUE ELE É UMA MÁQUINA.', no:'Fogo não é máquina. O texto diz outra coisa.'},
+  {t:'PORQUE NINGUÉM SABE O QUE É FOGO.', no:'O texto não diz isso.'},
+  {t:'PORQUE ELE JÁ EXISTIA NA NATUREZA.', ok:1}
+ ],
+ dica:'Leia a linha do texto que fala do fogo.',
+ visual:'<p class="vx">JÁ O FOGO NÃO FOI INVENTADO: <span class="mk">ELE JÁ EXISTIA NA NATUREZA</span>.</p>',
+ porque:'O fogo já existia na natureza. Encontrar algo que já existia é uma descoberta, não uma invenção.',
+ proximo:'Depois dos dois-pontos (:), o texto costuma explicar o porquê.'},
+
+{id:'SIN4', eixo:'invento',
+ pede:'QUAL DESTAS É UMA INVENÇÃO?',
+ opts:[
+  {t:'O RIO', no:'O rio é da natureza: ninguém o criou.'},
+  {t:'A MONTANHA', no:'A montanha é da natureza: ninguém a criou.'},
+  {t:'A BICICLETA', ok:1},
+  {t:'A CHUVA', no:'A chuva é da natureza: ninguém a criou.'}
+ ],
+ dica:'Qual delas foi construída por pessoas?',
+ porque:'A bicicleta foi criada pelas pessoas e não existia antes. Rio, montanha e chuva são da natureza.',
+ proximo:'Pergunte: alguém construiu isso? Se sim, é invenção.'},
+
+{id:'SIN5', eixo:'invento',
+ pede:'QUAL DESTAS É UMA DESCOBERTA?',
+ opts:[
+  {t:'CRIAR O PRIMEIRO TELEFONE.', no:'O telefone não existia antes: foi criado. É invenção.'},
+  {t:'ENCONTRAR UM ANIMAL NUNCA VISTO NA FLORESTA.', ok:1},
+  {t:'CONSTRUIR O PRIMEIRO AVIÃO.', no:'O avião foi construído pelas pessoas. É invenção.'},
+  {t:'FAZER A PRIMEIRA BICICLETA.', no:'A bicicleta foi feita pelas pessoas. É invenção.'}
+ ],
+ dica:'Descoberta é achar algo que já existia.',
+ porque:'O animal já existia na floresta: alguém só o encontrou. Isso é descoberta.',
+ proximo:'Criar, construir, fazer = invenção. Encontrar, achar = descoberta.'},
+
+{id:'SIN6', eixo:'invento',
+ pede:'QUEM INVENTA ALGUMA COISA É CHAMADO DE...',
+ opts:[
+  {t:'DESCOBRIDOR', no:'Descobridor é quem ACHA algo que já existia. Quem cria algo novo tem outro nome.'},
+  {t:'INVENÇÃO', no:'Invenção é a COISA criada, não a pessoa. A pessoa tem outro nome.'},
+  {t:'LEITOR', no:'Leitor é quem lê. Quem inventa tem outro nome.'},
+  {t:'INVENTOR', ok:1}
+ ],
+ dica:'A pergunta pede a PESSOA. Inventar... inven...',
+ porque:'Quem inventa é o inventor. Santos Dumont foi um inventor.',
+ proximo:'A palavra de quem faz vem da palavra do que se faz: inventar, inventor.'},
+
+{id:'SIN7', eixo:'invento',
+ pede:'ASSINALE O GRUPO QUE TEM SÓ INVENÇÕES.',
+ opts:[
+  {t:'RODA · FOGO · RELÓGIO', no:'O FOGO não foi inventado: ele já existia na natureza.'},
+  {t:'AVIÃO · RIO · TELEFONE', no:'O RIO é da natureza: ninguém o criou.'},
+  {t:'RODA · LÂMPADA · RELÓGIO', ok:1},
+  {t:'COMPUTADOR · GELADEIRA · CHUVA', no:'A CHUVA é da natureza: ninguém a criou.'}
+ ],
+ dica:'Confira as três coisas de cada grupo. Uma da natureza já derruba o grupo.',
+ porque:'Roda, lâmpada e relógio foram criados pelas pessoas. Nos outros grupos sempre tem algo da natureza.',
+ proximo:'Grupo "só": confira uma por uma até o fim.'},
+
+/* ======================= CA CO CU · QUE QUI ======================= */
+{id:'SCQ1', eixo:'cqu',
+ quadro:'<span class="bl">___</span>EIJO',
+ pede:'O QUE COMPLETA A PALAVRA?',
+ opts:[
+  {t:'C', no:'CE tem som de sê, como em CEBOLA. Para soar quê antes do E, é QU.'},
+  {t:'K', no:'Essa palavra não se escreve com K. Antes do E, o som de quê é QU.'},
+  {t:'QU', ok:1},
+  {t:'G', no:'G faz outro som. QUEIJO começa com som de quê.'}
+ ],
+ dica:'Antes do E, o som de quê se escreve com duas letras.',
+ visual:'<div class="pcs"><span class="pc hit">QUEI</span><span class="pc">JO</span></div><p class="vx">O U fica quietinho.</p>',
+ porque:'QUEIJO: QUE. Antes do E, o som de quê se escreve com QU, e o U não se fala.',
+ proximo:'Buraco antes de E ou I com som de quê? É QU.'},
+
+{id:'SCQ2', eixo:'cqu',
+ pede:'ASSINALE A PALAVRA ESCRITA CORRETAMENTE.',
+ opts:[
+  {t:'PERICITO', no:'CI tem som de si. Para soar quê antes do I, é QUI.'},
+  {t:'PERIQUITO', ok:1},
+  {t:'PERIKITO', no:'Essa palavra não se escreve com K.'},
+  {t:'PERIQITO', no:'Falta o U: o Q sempre vem com o U quietinho, QUI.'}
+ ],
+ dica:'Som de quê antes do I.',
+ visual:'<div class="pcs"><span class="pc">PE</span><span class="pc">RI</span><span class="pc hit">QUI</span><span class="pc">TO</span></div>',
+ porque:'PERIQUITO: QUI, com o U quietinho.',
+ proximo:'Q nunca anda sozinho: QUE, QUI.'},
+
+{id:'SCQ3', eixo:'cqu',
+ pede:'EM QUAL GRUPO TODAS AS PALAVRAS TÊM O SOM DE QUÊ ESCRITO SÓ COM C?',
+ opts:[
+  {t:'CAVALO · QUEIJO · CUBO', no:'QUEIJO tem QU, não C sozinho.'},
+  {t:'QUIABO · COPO · CAMA', no:'QUIABO tem QU, não C sozinho.'},
+  {t:'CAMA · LEQUE · CUCA', no:'LEQUE tem QU, não C sozinho.'},
+  {t:'CAVALO · COPO · CUTIA', ok:1}
+ ],
+ dica:'Procure o grupo só com CA, CO, CU.',
+ porque:'CAVALO, COPO e CUTIA têm CA, CO e CU: só o C. Os outros grupos têm uma palavra com QU.',
+ proximo:'Confira as três palavras do grupo, uma por uma.'},
+
+{id:'SCQ4', eixo:'cqu',
+ quadro:'O ES<span class="bl">___</span>ILO SUBIU NA ÁRVORE.',
+ pede:'O QUE COMPLETA A PALAVRA?',
+ opts:[
+  {t:'QU', ok:1},
+  {t:'C', no:'CI tem som de si. Ficaria "essilo".'},
+  {t:'CU', no:'CUI faz o U ser falado. ESQUILO tem o U quietinho, com QU.'},
+  {t:'G', no:'G faz outro som. ESQUILO tem som de quê.'}
+ ],
+ dica:'Antes do I, o som de quê precisa de duas letras.',
+ visual:'<div class="pcs"><span class="pc">ES</span><span class="pc hit">QUI</span><span class="pc">LO</span></div>',
+ porque:'ESQUILO: QUI, com o U quietinho.',
+ proximo:'E ou I depois do buraco + som de quê = QU.'},
+
+{id:'SCQ5', eixo:'cqu',
+ pede:'POR QUE QUEIJO SE ESCREVE COM QU?',
+ opts:[
+  {t:'PORQUE ANTES DE E E I O SOM DE QUÊ SE ESCREVE COM QU.', ok:1},
+  {t:'PORQUE O U DE QUEIJO É FALADO BEM ALTO.', no:'O U de QUEIJO não se fala: ele fica quietinho.'},
+  {t:'PORQUE CE TEM SOM DE QUÊ.', no:'CE não tem som de quê: tem som de sê, como em CEBOLA.'},
+  {t:'PORQUE TODA PALAVRA COMEÇA COM Q.', no:'Não é verdade: CASA, COPO e CUBO começam com C.'}
+ ],
+ dica:'Olhe a vogal que vem depois do QU em QUEIJO.',
+ porque:'Antes de E e I, o som de quê se escreve com QU: QUE, QUI. Antes de A, O, U, é só o C.',
+ proximo:'Lembre a regra inteira, com as duas partes: CA, CO, CU; QUE, QUI.'},
+
+{id:'SCQ6', eixo:'cqu',
+ pede:'QUAL PALAVRA ESTÁ ESCRITA DE FORMA ERRADA?',
+ opts:[
+  {t:'CAQUI', no:'CAQUI está certa: CA e QUI.'},
+  {t:'MOSQUITO', no:'MOSQUITO está certa: QUI.'},
+  {t:'QUBO', ok:1},
+  {t:'COELHO', no:'COELHO está certa: CO.'}
+ ],
+ dica:'A pergunta pede a ERRADA. Antes do U, o som de quê é só o C.',
+ visual:'<div class="pcs"><span class="pc bad">QUBO</span><span class="arw">&rarr;</span><span class="pc hit">CUBO</span></div>',
+ porque:'Antes do U, o som de quê é só o C: CUBO. QUBO está errada.',
+ proximo:'Pergunta com ERRADA: confira cada uma com a regra.'},
+
+{id:'SCQ7', eixo:'cqu',
+ quadro:'LE<span class="bl">___</span>E (OBJETO PARA SE ABANAR NO CALOR)',
+ pede:'O QUE COMPLETA A PALAVRA?',
+ opts:[
+  {t:'C', no:'CE tem som de sê. Ficaria "lesse".'},
+  {t:'CU', no:'Com CU, o U seria falado: "lecue". LEQUE tem o U quietinho.'},
+  {t:'G', no:'GE tem som de jê. Ficaria "leje".'},
+  {t:'QU', ok:1}
+ ],
+ dica:'Depois do buraco vem E, e o som é de quê.',
+ porque:'LEQUE: QUE, com o U quietinho.',
+ proximo:'E ou I depois do buraco + som de quê = QU.'},
+
+/* ======================= CH · NH · LH ======================= */
+{id:'SDG1', eixo:'dig',
+ pede:'QUAL PALAVRA TEM LH?',
+ opts:[
+  {t:'ARANHA', no:'ARANHA tem NH, não LH.'},
+  {t:'OVELHA', ok:1},
+  {t:'CHINELO', no:'CHINELO tem CH, não LH.'},
+  {t:'BANHO', no:'BANHO tem NH, não LH.'}
+ ],
+ dica:'Procure o L seguido de H.',
+ visual:'<div class="pcs"><span class="pc">O</span><span class="pc">VE</span><span class="pc hit">LHA</span></div>',
+ porque:'OVELHA tem LH. ARANHA e BANHO têm NH; CHINELO tem CH.',
+ proximo:'Olhe a letra que vem ANTES do H: C, N ou L.'},
+
+{id:'SDG2', eixo:'dig',
+ quadro:'MOLA &rarr; MOLHA',
+ pede:'O QUE ACONTECEU COM A PALAVRA MOLA?',
+ opts:[
+  {t:'TIROU UMA LETRA E A PALAVRA FICOU IGUAL.', no:'Nenhuma letra saiu: entrou uma. E a palavra mudou.'},
+  {t:'ENTROU UM N E FORMOU NH.', no:'Não entrou N. O H entrou depois do L.'},
+  {t:'ENTROU UM H DEPOIS DO L, FORMOU LH E A PALAVRA MUDOU.', ok:1},
+  {t:'O M VIROU CH.', no:'O M continua lá: MO-LHA.'}
+ ],
+ dica:'Compare as duas palavras letra por letra.',
+ visual:'<div class="pcs"><span class="pc">MO</span><span class="pc">LA</span><span class="arw">&rarr;</span><span class="pc">MO</span><span class="pc hit">LHA</span></div>',
+ porque:'Entrou um H depois do L. O L virou LH, e MOLA (de brinquedo) virou MOLHA (de molhar).',
+ proximo:'Uma letrinha muda tudo: mola e molha, fila e filha, sono e sonho.'},
+
+{id:'SDG3', eixo:'dig',
+ quadro:'ARA<span class="bl">___</span>A',
+ pede:'O QUE COMPLETA O NOME DO BICHO QUE FAZ TEIA?',
+ opts:[
+  {t:'LH', no:'"ARALHA" não é o bicho da teia.'},
+  {t:'CH', no:'"ARACHA" não é o bicho da teia.'},
+  {t:'RR', no:'"ARARRA" não é o bicho da teia.'},
+  {t:'NH', ok:1}
+ ],
+ dica:'Fale A-RA-NHA devagar.',
+ visual:'<div class="pcs"><span class="pc">A</span><span class="pc">RA</span><span class="pc hit">NHA</span></div>',
+ porque:'ARANHA se escreve com NH.',
+ proximo:'Fale a palavra devagar e ouça o som da dupla.'},
+
+{id:'SDG4', eixo:'dig',
+ pede:'EM QUAL GRUPO TODAS AS PALAVRAS TÊM CH?',
+ opts:[
+  {t:'CHAVE · CHUVA · BICHO', ok:1},
+  {t:'CHAVE · NINHO · BICHO', no:'NINHO tem NH, não CH.'},
+  {t:'CHUVA · FOLHA · CHAPÉU', no:'FOLHA tem LH, não CH.'},
+  {t:'CACHORRO · UNHA · CHINELO', no:'UNHA tem NH, não CH.'}
  ],
  dica:'Confira as três palavras de cada grupo.',
- porque:'CASA e CUBO têm C (CA, CU); QUIABO tem QUI.',
- proximo:'Uma palavra errada já estraga o grupo.'},
+ porque:'CHAVE, CHUVA e BICHO têm CH. Nos outros grupos, uma palavra tem NH ou LH.',
+ proximo:'Grupo "todas": uma palavra fora derruba o grupo inteiro.'},
 
-{id:'SCQ8', eixo:'cqu', tipo:'regra',
- pede:'NA PALAVRA ESQUILO, O U...',
+{id:'SDG5', eixo:'dig',
+ quadro:'O PASSARINHO DORMIU NO SEU NI<span class="bl">___</span>O.',
+ pede:'O QUE COMPLETA A PALAVRA?',
  opts:[
-  {t:'É ESCRITO, MAS NÃO SE FALA.', ok:1},
-  {t:'SE FALA BEM FORTE.', no:'Falamos "es-ki-lo": o U não aparece na fala.'},
-  {t:'PODE SER APAGADO.', no:'Sem o U ficaria ESCILO, com som de si. O U tem de ficar.'},
-  {t:'É A PRIMEIRA LETRA DA PALAVRA.', no:'ESQUILO começa com E.'}
+  {t:'LH', no:'"NILHO" não existe. A casa do passarinho é NINHO.'},
+  {t:'NH', ok:1},
+  {t:'RR', no:'"NIRRO" não existe. A casa do passarinho é NINHO.'},
+  {t:'N', no:'"NINO" não é a casa do passarinho. Falta o H: NINHO.'}
  ],
- dica:'Fale ESQUILO devagar. Você ouve o U?',
- porque:'Em QUE e QUI o U não se fala, mas sem ele o C soaria sê ou si.',
- proximo:'QUE, QUI: o U trabalha calado, igual em GUE, GUI.'}
-);
+ dica:'Fale NI-NHO devagar.',
+ visual:'<div class="pcs"><span class="pc">NI</span><span class="pc hit">NHO</span></div>',
+ porque:'A casa do passarinho é o NINHO, com NH.',
+ proximo:'Leia a frase inteira com a palavra completa: ela tem de fazer sentido.'},
 
-/* =================== BLOCO A · CH, NH, LH =================== */
-ITENS.push(
-lac('SDG1','dig', ['[CH]AVE','GALI[NH]A','FO[LH]A','CA[CH]ORRO'], ['CH LH LH CH','CH NH NH CH','NH NH LH CH']),
-lac('SDG2','dig', ['COE[LH]O','[CH]UVA','ARA[NH]A','O[LH]O','CAMI[NH]O'], ['NH CH NH LH NH','LH CH LH LH NH','LH CH NH CH CH']),
-lac('SDG3','dig', ['[CH]APÉU','ABE[LH]A','COZI[NH]A','[CH]INELO','OVE[LH]A'], ['CH NH NH CH LH','CH LH LH CH LH','CH LH NH LH NH']),
-lac('SDG4','dig', ['DI[NH]EIRO','JOE[LH]O','[CH]OCOLATE','BA[NH]O'], ['CH LH CH NH','NH NH CH NH','NH LH CH LH']),
-
-{id:'SDG5', eixo:'dig', tipo:'complete a frase',
- enun:'COMPLETE A FRASE:',
- quadro:'A MENINA <span class="lb lbw"></span> AS PLANTAS COM O REGADOR.',
- pede:'QUAL PALAVRA COMPLETA A FRASE?',
+{id:'SDG6', eixo:'dig',
+ pede:'EM QUAL PAR A PALAVRA MUDA DE SENTIDO SÓ PORQUE GANHOU UM H?',
  opts:[
-  {t:'MOLHA', ok:1},
-  {t:'MOLA', no:'MOLA é uma peça que estica e volta. Quem põe água nas plantas MOLHA as plantas.'},
-  {t:'MONHA', no:'MONHA não existe.'},
-  {t:'MOLLA', no:'MOLLA não existe. O som de lhe se escreve LH.'}
+  {t:'CASA → CASAS', no:'Aqui entrou um S: virou plural. Não entrou H.'},
+  {t:'GATO → GATA', no:'Aqui o O virou A. Não entrou H.'},
+  {t:'BOLA → BOLO', no:'Aqui o A virou O. Não entrou H.'},
+  {t:'FILA → FILHA', ok:1}
  ],
- dica:'O que a gente faz com as plantas usando o regador?',
- visual:'<div class="pcs"><span class="pc">MOLA</span><span class="arw">&ne;</span><span class="pc hit">MO<span class="mk">LH</span>A</span></div>',
- porque:'Com o regador, a menina MOLHA as plantas. MOLA e MOLHA são palavras diferentes: o H muda tudo.',
- proximo:'Leia a frase inteira com a palavra escolhida: ela tem de fazer sentido.'},
+ dica:'Procure o par em que a segunda palavra tem um H a mais.',
+ visual:'<div class="pcs"><span class="pc">FI</span><span class="pc">LA</span><span class="arw">&rarr;</span><span class="pc">FI</span><span class="pc hit">LHA</span></div>',
+ porque:'FILA (de esperar a vez) virou FILHA só porque entrou um H depois do L.',
+ proximo:'Compare letra por letra e veja qual letra entrou.'},
 
-{id:'SDG6', eixo:'dig', tipo:'complete a frase',
- enun:'COMPLETE A FRASE:',
- quadro:'ANA É <span class="lb lbw"></span> DA DONA ROSA.',
- pede:'QUAL PALAVRA COMPLETA A FRASE?',
- opts:[
-  {t:'FICHA', no:'FICHA é um cartão de papel. Ana não é um cartão.'},
-  {t:'FILA', no:'FILA é gente esperando, uma atrás da outra. Ana é uma pessoa só.'},
-  {t:'FILHA', ok:1},
-  {t:'FINHA', no:'FINHA não existe.'}
- ],
- dica:'Dona Rosa é a mãe de Ana. Então Ana é a...',
- visual:'<div class="pcs"><span class="pc">FILA</span><span class="arw">&ne;</span><span class="pc hit">FI<span class="mk">LH</span>A</span></div>',
- porque:'Ana é FILHA da Dona Rosa. FILA e FILHA são palavras diferentes: o H do LH muda o sentido.',
- proximo:'Leia a frase inteira com a palavra escolhida: ela tem de fazer sentido.'},
-
-{id:'SDG7', eixo:'dig', tipo:'regra',
+{id:'SDG7', eixo:'dig',
  pede:'CH, NH E LH SÃO...',
  opts:[
+  {t:'TRÊS VOGAIS.', no:'C, N, L e H não são vogais. Vogais são A, E, I, O, U.'},
   {t:'DUAS LETRAS QUE FAZEM UM SOM SÓ.', ok:1},
-  {t:'DUAS LETRAS QUE FAZEM DOIS SONS.', no:'Em CHUVA não se ouve C e depois H: CH é um som só.'},
-  {t:'UMA LETRA SÓ.', no:'São duas letras escritas: C e H, N e H, L e H.'},
-  {t:'LETRAS QUE NÃO TÊM SOM.', no:'Elas têm som: CH de CHUVA, NH de NINHO, LH de FOLHA.'}
+  {t:'LETRAS QUE NÃO FAZEM SOM NENHUM.', no:'Fazem som, sim: CH de CHAVE, NH de NINHO, LH de FOLHA.'},
+  {t:'UMA LETRA SÓ COM DOIS SONS.', no:'É o contrário: são duas letras com um som só.'}
  ],
- dica:'Fale CHUVA. O CH faz quantos sons?',
- porque:'CH, NH e LH são duplas de letras com um som só: CHUVA, GALINHA, FOLHA.',
+ dica:'Fale CHA-VE: quantos sons o CH faz?',
+ porque:'CH, NH e LH são duas letras juntas que fazem um som só.',
  proximo:'Duas letras, um som: CH, NH, LH.'},
 
-{id:'SDG8', eixo:'dig', tipo:'qual está escrita certo',
- pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
+/* ======================= PLURAL ======================= */
+{id:'SPL1', eixo:'plural',
+ pede:'QUAL É O PLURAL DE COLHER?',
  opts:[
-  {t:'GALINHA', ok:1},
-  {t:'ABENHA', no:'ABENHA não existe: o certo é ABELHA, com LH.'},
-  {t:'CANHORRO', no:'CANHORRO não existe: o certo é CACHORRO, com CH.'},
-  {t:'FOCHA', no:'FOCHA não existe: o certo é FOLHA, com LH.'}
+  {t:'COLHERS', no:'Terminou em R, não se põe só S: põe ES.'},
+  {t:'COLHERIS', no:'IS é para palavras que terminam em L. COLHER termina em R.'},
+  {t:'COLHERES', ok:1},
+  {t:'COLHEIS', no:'O R não pode sumir. Terminou em R: põe ES.'}
  ],
- dica:'Leia cada palavra em voz alta. Só uma existe.',
- porque:'GALINHA tem NH. As certas das outras são ABELHA, CACHORRO e FOLHA.',
- proximo:'Teste a palavra em voz alta: a dupla errada vira palavra que não existe.'}
-);
+ dica:'COLHER termina em R.',
+ visual:'<div class="pcs"><span class="pc">COLHER</span><span class="arw">+</span><span class="pc hit">ES</span></div>',
+ porque:'Terminou em R, põe ES: COLHER, COLHERES.',
+ proximo:'Olhe a ÚLTIMA letra da palavra antes de escolher.'},
 
-/* =================== BLOCO A · PLURAL =================== */
-ITENS.push(
-plu('SPL1', [['FLOR','FLORES'],['AVIÃO','AVIÕES'],['ANIMAL','ANIMAIS']], [{0:'FLORS'},{1:'AVIÃOS'},{2:'ANIMALS'}]),
-plu('SPL2', [['CASA','CASAS'],['LUZ','LUZES'],['HOMEM','HOMENS'],['BALÃO','BALÕES']], [{1:'LUZS'},{2:'HOMEMS'},{3:'BALÃOS'}]),
-plu('SPL3', [['MAR','MARES'],['JORNAL','JORNAIS'],['NUVEM','NUVENS'],['LOBO','LOBOS']], [{0:'MARS'},{1:'JORNALS'},{2:'NUVEMS',3:'LOBOES'}]),
-plu('SPL4', [['COLHER','COLHERES'],['LIMÃO','LIMÕES'],['VARAL','VARAIS']], [{0:'COLHERS'},{1:'LIMÃOS'},{2:'VARALES'}]),
-plu('SPL5', [['NARIZ','NARIZES'],['TREM','TRENS'],['OVO','OVOS'],['LEÃO','LEÕES']], [{0:'NARIZS'},{1:'TREMS'},{2:'OVOES',3:'LEÃOS'}]),
-
-{id:'SPL6', eixo:'plural', tipo:'escreva o plural',
- pede:'QUAL É O PLURAL DE "O PORQUINHO"?',
+{id:'SPL2', eixo:'plural',
+ pede:'QUAL É O PLURAL DE LIMÃO?',
  opts:[
-  {t:'OS PORQUINHOS', ok:1},
-  {t:'O PORQUINHOS', no:'O artigo também vai para o plural: O vira OS.'},
-  {t:'OS PORQUINHO', no:'A palavra PORQUINHO também tem de ir para o plural.'},
-  {t:'OS PORQUINHOES', no:'PORQUINHO termina em vogal: ganha só S.'}
+  {t:'LIMÕES', ok:1},
+  {t:'LIMÃOS', no:'LIMÃO segue a regra mais comum: ÃO vira ÕES.'},
+  {t:'LIMÕS', no:'Falta o E: ÃO vira ÕES.'},
+  {t:'LIMÃOES', no:'Não se põe ES depois do ÃO: o ÃO vira ÕES.'}
+ ],
+ dica:'ÃO vira...',
+ visual:'<div class="pcs"><span class="pc">LIM</span><span class="pc bad">ÃO</span><span class="arw">&rarr;</span><span class="pc">LIM</span><span class="pc hit">ÕES</span></div>',
+ porque:'ÃO vira ÕES: LIMÃO, LIMÕES (igual a BALÃO, BALÕES).',
+ proximo:'Pense numa palavra parecida que você conhece: AVIÃO, AVIÕES.'},
+
+{id:'SPL3', eixo:'plural',
+ pede:'QUAL É O PLURAL DE JORNAL?',
+ opts:[
+  {t:'JORNALS', no:'Terminou em L, não se põe S: o L vira IS.'},
+  {t:'JORNALES', no:'ES é para palavras que terminam em R ou Z. JORNAL termina em L.'},
+  {t:'JORNAL', no:'Essa é a palavra no singular, sem mudar nada.'},
+  {t:'JORNAIS', ok:1}
+ ],
+ dica:'JORNAL termina em L.',
+ visual:'<div class="pcs"><span class="pc">JORNA</span><span class="pc bad">L</span><span class="arw">&rarr;</span><span class="pc">JORNA</span><span class="pc hit">IS</span></div>',
+ porque:'Terminou em L, o L vira IS: JORNAL, JORNAIS.',
+ proximo:'L no fim? Troque o L por IS.'},
+
+{id:'SPL4', eixo:'plural',
+ pede:'QUAL É O PLURAL DE TREM?',
+ opts:[
+  {t:'TREMS', no:'Terminou em M, o M vira N: TRENS.'},
+  {t:'TRENS', ok:1},
+  {t:'TRENES', no:'Não entra E. Terminou em M: o M vira NS.'},
+  {t:'TREMES', no:'Terminou em M, não se põe ES: o M vira NS.'}
+ ],
+ dica:'TREM termina em M.',
+ visual:'<div class="pcs"><span class="pc">TRE</span><span class="pc bad">M</span><span class="arw">&rarr;</span><span class="pc">TRE</span><span class="pc hit">NS</span></div>',
+ porque:'Terminou em M, vira NS: TREM, TRENS (igual a HOMEM, HOMENS).',
+ proximo:'M no fim? Troque o M por NS.'},
+
+{id:'SPL5', eixo:'plural',
+ pede:'QUAL É O PLURAL DE "O LEÃO"?',
+ opts:[
+  {t:'O LEÕES', no:'O artigo também vai para o plural: O vira OS.'},
+  {t:'OS LEÃOS', no:'LEÃO segue a regra mais comum: ÃO vira ÕES.'},
+  {t:'OS LEÕES', ok:1},
+  {t:'OS LEÃO', no:'A palavra LEÃO também tem de ir para o plural.'}
  ],
  dica:'As DUAS palavras vão para o plural.',
- visual:'<div class="pcs"><span class="pc">O</span><span class="arw">&rarr;</span><span class="pc hit">OS</span></div><div class="pcs"><span class="pc">PORQUINHO</span><span class="arw">&rarr;</span><span class="pc hit">PORQUINHOS</span></div>',
- porque:'O artigo vai junto: O vira OS. E PORQUINHO termina em vogal, ganha S: OS PORQUINHOS.',
+ visual:'<div class="pcs"><span class="pc">O</span><span class="arw">&rarr;</span><span class="pc hit">OS</span></div><div class="pcs"><span class="pc">LEÃO</span><span class="arw">&rarr;</span><span class="pc hit">LEÕES</span></div>',
+ porque:'O artigo vai junto: O vira OS. E ÃO vira ÕES: OS LEÕES.',
  proximo:'Plural com artigo: mude as DUAS palavras.'},
 
-{id:'SPL7', eixo:'plural', tipo:'escreva o plural',
+{id:'SPL6', eixo:'plural',
  pede:'QUAL PALAVRA ESTÁ NO PLURAL?',
  opts:[
   {t:'NARIZ', no:'NARIZ é um só: está no singular.'},
@@ -600,7 +1162,20 @@ plu('SPL5', [['NARIZ','NARIZES'],['TREM','TRENS'],['OVO','OVOS'],['LEÃO','LEÕE
  porque:'NARIZES é o plural de NARIZ: mais de um. As outras estão no singular.',
  proximo:'Plural quase sempre termina em S.'},
 
-{id:'SPL8', eixo:'plural', tipo:'escreva o plural',
+{id:'SPL7', eixo:'plural',
+ pede:'QUAL É O PLURAL DE ANZOL?',
+ opts:[
+  {t:'ANZÓIS', ok:1},
+  {t:'ANZOLS', no:'Terminou em L, não se põe S: o L vira IS.'},
+  {t:'ANZOLES', no:'ES é para R e Z. ANZOL termina em L.'},
+  {t:'ANZÕES', no:'ÕES é para palavras que terminam em ÃO. ANZOL termina em L.'}
+ ],
+ dica:'ANZOL termina em L.',
+ visual:'<div class="pcs"><span class="pc">ANZO</span><span class="pc bad">L</span><span class="arw">&rarr;</span><span class="pc">ANZÓ</span><span class="pc hit">IS</span></div>',
+ porque:'Terminou em OL, o L vira IS: ANZOL, ANZÓIS.',
+ proximo:'L no fim? Troque o L por IS.'},
+
+{id:'SPL8', eixo:'plural',
  pede:'QUAL É O PLURAL DE "A NUVEM"?',
  opts:[
   {t:'A NUVENS', no:'O artigo também vai para o plural: A vira AS.'},
@@ -611,781 +1186,8 @@ plu('SPL5', [['NARIZ','NARIZES'],['TREM','TRENS'],['OVO','OVOS'],['LEÃO','LEÕE
  dica:'As DUAS palavras vão para o plural. NUVEM termina em M.',
  visual:'<div class="pcs"><span class="pc">A</span><span class="arw">&rarr;</span><span class="pc hit">AS</span></div><div class="pcs"><span class="pc">NUVEM</span><span class="arw">&rarr;</span><span class="pc hit">NUVENS</span></div>',
  porque:'A vira AS, e o M vira NS: AS NUVENS.',
- proximo:'Plural com artigo: mude as DUAS palavras.'},
-
-{id:'SPL9', eixo:'plural', tipo:'escreva o plural',
- pede:'QUAL É O PLURAL DE ANZOL?',
- opts:[
-  {t:'ANZÓIS', ok:1},
-  {t:'ANZOLS', no:'Terminou em L, não se põe S: o L vira IS.'},
-  {t:'ANZOLES', no:'ES é para R e Z. ANZOL termina em L.'},
-  {t:'ANZÕES', no:'ÕES é para palavras que terminam em ÃO. ANZOL termina em L.'}
- ],
- dica:'ANZOL termina em L.',
- visual:'<div class="pcs"><span class="pc">ANZO<span class="mk">L</span></span><span class="arw">&rarr;</span><span class="pc">ANZÓ<span class="mk">IS</span></span></div>',
- porque:'Terminou em OL, o L vira IS: ANZOL, ANZÓIS.',
- proximo:'L no fim? Troque o L por IS.'}
-);
-
-/* =================== BLOCO A · DICIONÁRIO =================== */
-ITENS.push(
-{id:'SDC1', eixo:'dic', tipo:'ordem alfabética',
- pede:'QUAL GRUPO ESTÁ EM ORDEM ALFABÉTICA?',
- opts:[
-  {t:'BALA · BOLA · BULE', ok:1},
-  {t:'BOLA · BALA · BULE', no:'BALA vem antes de BOLA: na 2ª letra, A vem antes de O.'},
-  {t:'BULE · BOLA · BALA', no:'Está ao contrário: U vem depois de O, que vem depois de A.'},
-  {t:'BALA · BULE · BOLA', no:'BOLA vem antes de BULE: na 2ª letra, O vem antes de U.'}
- ],
- dica:'As três começam com B. Olhe a SEGUNDA letra: A, O, U.',
- visual:'<div class="pcs"><span class="pc">B<span class="mk">A</span>LA</span><span class="pc">B<span class="mk">O</span>LA</span><span class="pc">B<span class="mk">U</span>LE</span></div>',
- porque:'Primeira letra igual (B), então vale a segunda: A, O, U. BALA, BOLA, BULE.',
- proximo:'Primeira letra igual? Compare a segunda.'},
-
-{id:'SDC2', eixo:'dic', tipo:'qual vem primeiro',
- pede:'QUAL PALAVRA VEM PRIMEIRO NO DICIONÁRIO?',
- opts:[
-  {t:'CAVALO', no:'CASA e CAVALO começam com CA. Na 3ª letra, S vem antes de V: CASA vem antes.'},
-  {t:'COPO', no:'CO vem depois de CA: CASA e CAVALO vêm antes.'},
-  {t:'CASA', ok:1},
-  {t:'CUBO', no:'CU vem depois de CA e de CO.'}
- ],
- dica:'Todas começam com C. Olhe a 2ª letra; se empatar, olhe a 3ª.',
- visual:'<div class="pcs"><span class="pc">CA<span class="mk">S</span>A</span><span class="pc">CA<span class="mk">V</span>ALO</span><span class="pc">C<span class="mk">O</span>PO</span><span class="pc">C<span class="mk">U</span>BO</span></div>',
- porque:'CA vem antes de CO e de CU. Entre CASA e CAVALO, a 3ª letra decide: S vem antes de V.',
- proximo:'Empatou? Ande uma letra para a direita e compare de novo.'},
-
-{id:'SDC3', eixo:'dic', tipo:'qual vem primeiro',
- pede:'QUAL PALAVRA VEM PRIMEIRO NO DICIONÁRIO?',
- opts:[
-  {t:'JANELA', no:'JA de novo: na 3ª letra, N vem depois de B e de C.'},
-  {t:'JACARÉ', no:'JACARÉ e JABUTI começam com JA. Na 3ª letra, B vem antes de C.'},
-  {t:'JOGO', no:'JO vem depois de JA.'},
-  {t:'JABUTI', ok:1}
- ],
- dica:'Três começam com JA. Olhe a 3ª letra: B, C ou N?',
- visual:'<div class="pcs"><span class="pc">JA<span class="mk">B</span>UTI</span><span class="pc">JA<span class="mk">C</span>ARÉ</span><span class="pc">JA<span class="mk">N</span>ELA</span><span class="pc">J<span class="mk">O</span>GO</span></div>',
- porque:'JABUTI, JACARÉ e JANELA empatam em JA; na 3ª letra, B vem antes de C e de N. JOGO fica por último.',
- proximo:'Empatou? Ande uma letra para a direita e compare de novo.'},
-
-{id:'SDC4', eixo:'dic', tipo:'ordem alfabética',
- pede:'QUAL GRUPO ESTÁ EM ORDEM ALFABÉTICA?',
- opts:[
-  {t:'CASA · CAMA · CAVALO', no:'CAMA vem antes de CASA: na 3ª letra, M vem antes de S.'},
-  {t:'CAMA · CASA · CAVALO', ok:1},
-  {t:'CAVALO · CASA · CAMA', no:'Está ao contrário: V vem depois de S, que vem depois de M.'},
-  {t:'CAMA · CAVALO · CASA', no:'CASA vem antes de CAVALO: na 3ª letra, S vem antes de V.'}
- ],
- dica:'As três começam com CA. Olhe a TERCEIRA letra: M, S, V.',
- visual:'<div class="pcs"><span class="pc">CA<span class="mk">M</span>A</span><span class="pc">CA<span class="mk">S</span>A</span><span class="pc">CA<span class="mk">V</span>ALO</span></div>',
- porque:'CA empata nas três; a 3ª letra decide: M, S, V. CAMA, CASA, CAVALO.',
- proximo:'Empatou na 1ª e na 2ª? Olhe a 3ª.'},
-
-{id:'SDC5', eixo:'dic', tipo:'significados',
- enun:'NO DICIONÁRIO, A PALAVRA MANGA TEM DOIS SIGNIFICADOS: UMA FRUTA E UMA PARTE DA ROUPA.',
- pede:'EM QUAL FRASE MANGA É PARTE DA ROUPA?',
- opts:[
-  {t:'A MANGA DA MINHA CAMISA RASGOU.', ok:1},
-  {t:'COMI UMA MANGA BEM DOCE.', no:'Aqui a manga se come: é a fruta.'},
-  {t:'O SUCO DE MANGA ESTAVA GELADO.', no:'Suco de manga é feito da fruta.'},
-  {t:'A MANGA CAIU DO PÉ.', no:'A manga que cai do pé é a fruta.'}
- ],
- dica:'Procure a frase que fala de roupa.',
- porque:'Na frase da camisa, MANGA é a parte que cobre o braço. Nas outras, é a fruta.',
- proximo:'Palavra com dois significados: leia a frase toda para saber qual vale.'},
-
-{id:'SDC6', eixo:'dic', tipo:'significados',
- enun:'NO DICIONÁRIO, A PALAVRA PENA TEM DOIS SIGNIFICADOS: O QUE COBRE AS AVES E SENTIR DÓ.',
- pede:'EM QUAL FRASE PENA QUER DIZER SENTIR DÓ?',
- opts:[
-  {t:'O PASSARINHO PERDEU UMA PENA.', no:'Aqui é a pena da ave.'},
-  {t:'TIVE PENA DO CACHORRINHO MOLHADO.', ok:1},
-  {t:'A PENA DO PAVÃO É COLORIDA.', no:'Aqui é a pena da ave.'},
-  {t:'ACHEI UMA PENA BRANCA NO CHÃO.', no:'Uma pena que se acha no chão é a pena de ave.'}
- ],
- dica:'Procure a frase que fala de um sentimento.',
- porque:'"Tive pena do cachorrinho" quer dizer: senti dó dele. Nas outras, é a pena das aves.',
- proximo:'Palavra com dois significados: leia a frase toda para saber qual vale.'},
-
-{id:'SDC7', eixo:'dic', tipo:'para que serve',
- pede:'NO DICIONÁRIO, A PALAVRA EXPLICADA COM O SEU SIGNIFICADO SE CHAMA...',
- opts:[
-  {t:'VERBETE', ok:1},
-  {t:'PARÁGRAFO', no:'Parágrafo é um pedaço de um texto, que começa um pouco para dentro.'},
-  {t:'RIMA', no:'Rima é quando palavras terminam com o mesmo som.'},
-  {t:'PERSONAGEM', no:'Personagem é quem participa de uma história.'}
- ],
- dica:'É uma palavra que começa com V.',
- porque:'Cada palavra explicada no dicionário, com seu significado, é um VERBETE.',
- proximo:'Dicionário: verbetes em ordem alfabética.'},
-
-{id:'SDC8', eixo:'dic', tipo:'para que serve',
- pede:'AS PALAVRAS-GUIA, NO ALTO DA PÁGINA DO DICIONÁRIO, MOSTRAM...',
- opts:[
-  {t:'AS PALAVRAS MAIS DIFÍCEIS DA PÁGINA.', no:'As palavras-guia não escolhem as difíceis: mostram onde a página começa e termina.'},
-  {t:'A PRIMEIRA E A ÚLTIMA PALAVRA DA PÁGINA.', ok:1},
-  {t:'O NOME DE QUEM FEZ O DICIONÁRIO.', no:'O nome de quem fez fica na capa, não no alto de cada página.'},
-  {t:'SÓ AS PALAVRAS QUE COMEÇAM COM A.', no:'Cada página tem as suas palavras-guia, com qualquer letra.'}
- ],
- dica:'Elas servem para achar a página certa mais depressa.',
- porque:'As palavras-guia mostram a primeira e a última palavra da página. Assim se sabe se a palavra procurada está ali.',
- proximo:'Para achar uma palavra, compare com as palavras-guia do alto da página.'},
-
-{id:'SDC9', eixo:'dic', tipo:'para que serve',
- pede:'PARA QUE SERVE O DICIONÁRIO?',
- opts:[
-  {t:'PARA LER UM CONTO DE FADAS DO COMEÇO AO FIM.', no:'Conto de fadas se lê num livro de histórias. O dicionário explica palavras.'},
-  {t:'PARA APRENDER A FAZER CONTAS DE MAIS.', no:'Contas são de Matemática. O dicionário explica palavras.'},
-  {t:'PARA DESCOBRIR O SIGNIFICADO E A ESCRITA CERTA DAS PALAVRAS.', ok:1},
-  {t:'PARA SABER AS NOTÍCIAS DO DIA.', no:'Notícias saem no jornal. O dicionário explica palavras.'}
- ],
- dica:'O que a gente procura no dicionário quando não conhece uma palavra?',
- porque:'O dicionário mostra o significado das palavras e como se escreve cada uma.',
- proximo:'Dicionário = significado + escrita certa.'},
-
-{id:'SDC10', eixo:'dic', tipo:'ordem alfabética',
- pede:'QUAL GRUPO ESTÁ EM ORDEM ALFABÉTICA?',
- opts:[
-  {t:'ABELHA · BOLA · COELHO · GIRAFA', ok:1},
-  {t:'BOLA · ABELHA · COELHO · GIRAFA', no:'A vem antes de B: ABELHA vem antes de BOLA.'},
-  {t:'ABELHA · COELHO · BOLA · GIRAFA', no:'B vem antes de C: BOLA vem antes de COELHO.'},
-  {t:'ABELHA · BOLA · GIRAFA · COELHO', no:'C vem antes de G: COELHO vem antes de GIRAFA.'}
- ],
- dica:'Olhe só a primeira letra de cada palavra: A, B, C, G.',
- visual:'<div class="pcs"><span class="pc"><span class="mk">A</span>BELHA</span><span class="pc"><span class="mk">B</span>OLA</span><span class="pc"><span class="mk">C</span>OELHO</span><span class="pc"><span class="mk">G</span>IRAFA</span></div>',
- porque:'Na ordem do alfabeto: A, B, C, G. ABELHA, BOLA, COELHO, GIRAFA.',
- proximo:'Cante o alfabeto e ponha cada palavra no seu lugar.'}
-);
-
-/* =================== BLOCO B · CONTO DE FADAS (o gênero) =================== */
-ITENS.push(
-{id:'SCO1', eixo:'conto', tipo:'qual é um conto',
- pede:'QUAL DESTES É UM CONTO DE FADAS?',
- opts:[
-  {t:'CINDERELA', ok:1},
-  {t:'RECEITA DE BOLO DE CENOURA', no:'Receita ensina a fazer uma comida. Não conta história.'},
-  {t:'NOTÍCIA DO JORNAL DE HOJE', no:'Notícia conta o que aconteceu de verdade. Conto de fadas é inventado.'},
-  {t:'LISTA DE COMPRAS DO MERCADO', no:'Lista de compras só lembra o que comprar. Não conta história.'}
- ],
- dica:'Procure a história com fada, magia e "Era uma vez".',
- porque:'Cinderela é um conto de fadas, como Chapeuzinho Vermelho, João e o pé de feijão e Os Três Porquinhos.',
- proximo:'Conto de fadas conta uma história inventada, com magia.'},
-
-{id:'SCO2', eixo:'conto', tipo:'qual é um conto',
- pede:'QUAL DESTES COMEÇOS É DE UM CONTO DE FADAS?',
- opts:[
-  {t:'ERA UMA VEZ UM REI QUE MORAVA NUM CASTELO.', ok:1},
-  {t:'HOJE CHOVEU MUITO NA CIDADE E AS RUAS FICARAM CHEIAS DE ÁGUA.', no:'Isso é notícia: conta uma coisa que aconteceu de verdade, hoje.'},
-  {t:'PARA FAZER O BOLO, MISTURE A FARINHA COM OS OVOS.', no:'Isso é receita: ensina a fazer um bolo.'},
-  {t:'QUERIDA VOVÓ, ESTOU COM SAUDADE. UM BEIJO!', no:'Isso é um bilhete para a vovó. Não é história.'}
- ],
- dica:'Procure o jeito mais famoso de começar uma história de fadas.',
- visual:'<div class="pcs"><span class="pc hit">ERA UMA VEZ...</span><span class="arw">&rarr;</span><span class="pc hit">conto de fadas</span></div>',
- porque:'"Era uma vez..." é o começo dos contos de fadas. As outras são notícia, receita e bilhete.',
- proximo:'Procure as marcas do conto: Era uma vez, reino, castelo, magia.'},
-
-{id:'SCO3', eixo:'conto', tipo:'elemento do conto',
- quadro:'E VIVERAM <span class="lb lbw"></span> PARA SEMPRE.',
- pede:'QUE PALAVRA COMPLETA O FINAL MAIS CONHECIDO DOS CONTOS DE FADAS?',
- opts:[
-  {t:'TRISTES', no:'Conto de fadas costuma ter final feliz.'},
-  {t:'FELIZES', ok:1},
-  {t:'CANSADOS', no:'Ninguém termina um conto de fadas assim. O final conhecido é feliz.'},
-  {t:'BRAVOS', no:'Ninguém termina um conto de fadas bravo. O final conhecido é feliz.'}
- ],
- dica:'O final dos contos de fadas costuma ser bom.',
- porque:'O final mais conhecido dos contos de fadas é: "e viveram felizes para sempre".',
- proximo:'Lembre: começo = Era uma vez; fim = felizes para sempre.'},
-
-{id:'SCO4', eixo:'conto', tipo:'com suas palavras',
- pede:'COM SUAS PALAVRAS: O QUE É UM CONTO DE FADAS? MARQUE A MELHOR RESPOSTA.',
- opts:[
-  {t:'UMA HISTÓRIA INVENTADA E MUITO ANTIGA, QUE AS PESSOAS CONTAVAM UMAS PARA AS OUTRAS.', ok:1},
-  {t:'UMA NOTÍCIA QUE CONTA O QUE ACONTECEU ONTEM NA CIDADE.', no:'Notícia conta fato de verdade. Conto de fadas é inventado.'},
-  {t:'UM TEXTO QUE ENSINA A FAZER UMA COMIDA.', no:'Texto que ensina a fazer comida é receita.'},
-  {t:'UMA HISTÓRIA DE VERDADE SOBRE A VIDA DE UMA PESSOA FAMOSA.', no:'Conto de fadas não é de verdade: é inventado.'}
- ],
- dica:'Conto de fadas é de verdade ou inventado? É novo ou antigo?',
- porque:'Conto de fadas é uma história inventada, bem antiga, que passou de pessoa para pessoa até ser escrita nos livros.',
- proximo:'Inventada + antiga + contada de geração em geração.'},
-
-{id:'SCO5', eixo:'conto', tipo:'começo, meio e fim',
- pede:'NO MEIO DE UM CONTO DE FADAS, O QUE COSTUMA ACONTECER?',
- opts:[
-  {t:'OS PERSONAGENS VIVEM FELIZES PARA SEMPRE.', no:'Isso é o FIM do conto.'},
-  {t:'APARECE UM PROBLEMA OU UM PERIGO.', ok:1},
-  {t:'A HISTÓRIA COMEÇA COM "ERA UMA VEZ".', no:'Isso é o COMEÇO do conto.'},
-  {t:'APARECE UMA LISTA DE PALAVRAS EM ORDEM ALFABÉTICA.', no:'Lista em ordem alfabética é coisa de dicionário.'}
- ],
- dica:'Começo: Era uma vez. Fim: felizes para sempre. E o meio?',
- visual:'<div class="pcs"><span class="pc">COMEÇO: ERA UMA VEZ</span><span class="arw">&rarr;</span><span class="pc hit">MEIO: UM PROBLEMA</span><span class="arw">&rarr;</span><span class="pc">FIM: O PROBLEMA SE RESOLVE</span></div>',
- porque:'No meio do conto aparece um problema ou um perigo. No fim, ele é resolvido.',
- proximo:'Começo, meio e fim: apresentação, problema, solução.'},
-
-{id:'SCO6', eixo:'conto', tipo:'começo, meio e fim',
- pede:'QUAL É A ORDEM CERTA DE UM CONTO DE FADAS?',
- opts:[
-  {t:'ERA UMA VEZ → APARECE UM PROBLEMA → O PROBLEMA É RESOLVIDO', ok:1},
-  {t:'APARECE UM PROBLEMA → ERA UMA VEZ → O PROBLEMA É RESOLVIDO', no:'"Era uma vez" é o começo: vem antes de tudo.'},
-  {t:'O PROBLEMA É RESOLVIDO → APARECE UM PROBLEMA → ERA UMA VEZ', no:'Está de trás para a frente.'},
-  {t:'ERA UMA VEZ → O PROBLEMA É RESOLVIDO → APARECE UM PROBLEMA', no:'Não dá para resolver um problema que ainda não apareceu.'}
- ],
- dica:'Primeiro se conhece a história; depois vem o problema; por fim...',
- porque:'Começo (Era uma vez), meio (aparece um problema), fim (o problema é resolvido).',
- proximo:'Começo, meio e fim: apresentação, problema, solução.'},
-
-{id:'SCO7', eixo:'conto', tipo:'elemento do conto',
- pede:'O QUE "ERA UMA VEZ" MOSTRA SOBRE O TEMPO DA HISTÓRIA?',
- opts:[
-  {t:'QUE ACONTECEU ONTEM.', no:'Ontem é um dia que a gente sabe qual foi. "Era uma vez" não diz quando.'},
-  {t:'QUE VAI ACONTECER AMANHÃ.', no:'"Era" fala do passado, não do futuro.'},
-  {t:'QUE FOI HÁ MUITO TEMPO, E NÃO SE SABE QUANDO.', ok:1},
-  {t:'QUE ACONTECEU NA SEMANA PASSADA.', no:'Semana passada é um tempo certo. "Era uma vez" não diz quando.'}
- ],
- dica:'Dá para saber o dia em que a história aconteceu?',
- porque:'"Era uma vez" e "Há muito tempo" mostram um tempo antigo, que não se sabe quando foi.',
- proximo:'O tempo do conto de fadas: há muito tempo, sem data.'},
-
-{id:'SCO8', eixo:'conto', tipo:'elemento do conto',
- pede:'QUAL DESTES LUGARES APARECE MUITO NOS CONTOS DE FADAS?',
- opts:[
-  {t:'O SUPERMERCADO', no:'Supermercado é lugar de hoje, da cidade. Não é lugar de conto de fadas.'},
-  {t:'O AEROPORTO', no:'Aeroporto é lugar de hoje. Não é lugar de conto de fadas.'},
-  {t:'A ESTAÇÃO DE METRÔ', no:'Metrô é lugar de hoje. Não é lugar de conto de fadas.'},
-  {t:'O CASTELO DE UM REINO', ok:1}
- ],
- dica:'Lembre dos contos: onde mora o rei? Onde fica o Gigante?',
- porque:'Os contos de fadas acontecem em reinos, castelos, florestas e aldeias.',
- proximo:'Lugares do conto: reino, castelo, floresta, aldeia.'},
-
-{id:'SCO9', eixo:'conto', tipo:'elemento do conto',
- pede:'COMO OS CONTOS DE FADAS CHEGARAM ATÉ HOJE?',
- opts:[
-  {t:'FORAM ESCRITOS NO ANO PASSADO.', no:'Os contos de fadas são muito antigos.'},
-  {t:'APARECERAM PRIMEIRO NA TELEVISÃO.', no:'Eles existem muito antes da televisão.'},
-  {t:'AS PESSOAS CONTAVAM UMAS PARA AS OUTRAS E, DEPOIS, ELES FORAM ESCRITOS EM LIVROS.', ok:1},
-  {t:'SAÍRAM COMO NOTÍCIA NO JORNAL.', no:'Notícia conta fatos de verdade. Conto de fadas é inventado.'}
- ],
- dica:'Pense em avó contando história para o neto.',
- porque:'Os contos passaram de geração em geração, de boca em boca, até serem escritos nos livros.',
- proximo:'Conto de fadas: antigo, contado de pessoa para pessoa.'},
-
-{id:'SCO10', eixo:'conto', tipo:'elemento do conto',
- pede:'NA HISTÓRIA "CHAPEUZINHO VERMELHO", QUEM É O VILÃO?',
- opts:[
-  {t:'O CAÇADOR', no:'O caçador não faz maldade: ele salva a Chapeuzinho e a vovó.'},
-  {t:'A VOVÓ', no:'A vovó estava doente, em casa. Ela não faz maldade com ninguém.'},
-  {t:'O LOBO MAU', ok:1},
-  {t:'A MÃE', no:'A mãe mandou a cesta e deu um conselho. Ela não faz maldade.'}
- ],
- dica:'Vilão é quem faz maldade na história. Quem enganou a Chapeuzinho?',
- visual:'<div class="pcs"><span class="pc">HEROÍNA</span><span class="arw">&rarr;</span><span class="pc">CHAPEUZINHO</span></div><div class="pcs"><span class="pc hit">VILÃO</span><span class="arw">&rarr;</span><span class="pc hit">LOBO MAU</span></div>',
- porque:'Chapeuzinho é a heroína. O Lobo Mau enganou a menina e se disfarçou de vovó: ele é o vilão.',
- proximo:'Personagens do conto: herói, vilão, ajudantes e seres mágicos.'}
-);
-
-/* ============ BLOCO B · ELEMENTOS DO CONTO num trecho ============ */
-ITENS.push(
-{id:'SLE1', eixo:'leitura', tipo:'trecho de conto', enun:'LEIA O TRECHO:', texto:TX_PEDRO,
- pede:'EM QUE LUGAR A HISTÓRIA ACONTECE?',
- opts:[
-  {t:'NUMA CIDADE GRANDE', no:'O texto não fala em cidade. Leia a primeira linha.'},
-  {t:'NUM REINO MUITO DISTANTE', ok:1},
-  {t:'NA ESCOLA DE PEDRO', no:'O texto não fala em escola.'},
-  {t:'NO FUNDO DO MAR', no:'O texto não fala em mar. A concha veio da fada.'}
- ],
- dica:'O lugar aparece logo na primeira linha.',
- visual:'<p class="vx">ERA UMA VEZ, <span class="mk">NUM REINO MUITO DISTANTE</span>,</p>',
- porque:'"Era uma vez, num reino muito distante": o lugar é um reino.',
- proximo:'O lugar costuma aparecer no começo, junto com "Era uma vez".'},
-
-{id:'SLE2', eixo:'leitura', tipo:'trecho de conto', enun:'LEIA O TRECHO:', texto:TX_PEDRO,
- pede:'QUAL É O PROBLEMA DA HISTÓRIA?',
- opts:[
-  {t:'O RIO DO REINO SECOU.', ok:1},
-  {t:'PEDRO SOPROU A CONCHA.', no:'Soprar a concha é a SOLUÇÃO: foi assim que a água voltou.'},
-  {t:'UMA FADA APARECEU.', no:'A fada ajudou: ela não é o problema.'},
-  {t:'TODOS VIVERAM FELIZES.', no:'Isso é o final feliz, quando o problema já acabou.'}
- ],
- dica:'O problema é a coisa ruim que acontece no meio.',
- visual:'<p class="vx">UM DIA, <span class="mk">O RIO DO REINO SECOU</span>, E TODOS FICARAM COM SEDE.</p>',
- porque:'O rio secou e todos ficaram com sede: esse é o problema. A concha mágica é a solução.',
- proximo:'Problema = a coisa ruim. Solução = como ela acaba.'},
-
-{id:'SLE3', eixo:'leitura', tipo:'trecho de conto', enun:'LEIA O TRECHO:', texto:TX_PEDRO,
- pede:'QUAL É O OBJETO MÁGICO DESSA HISTÓRIA?',
- opts:[
-  {t:'O RIO', no:'O rio é comum, existe de verdade.'},
-  {t:'A CONCHA', ok:1},
-  {t:'O REINO', no:'O reino é o lugar da história, não um objeto mágico.'},
-  {t:'A ÁGUA', no:'A água é comum. O que tinha magia era o que fez a água voltar.'}
- ],
- dica:'Procure a palavra MÁGICA no texto.',
- visual:'<p class="vx">UMA FADA DEU A PEDRO UMA <span class="mk">CONCHA MÁGICA</span>.</p>',
- porque:'A fada deu a Pedro uma concha mágica: soprou, e a água voltou. Concha comum não faz isso.',
- proximo:'Magia é o que não acontece de verdade.'},
-
-{id:'SLE4', eixo:'leitura', tipo:'trecho de conto', enun:'LEIA O TRECHO:', texto:TX_PEDRO,
- pede:'COMO O PROBLEMA FOI RESOLVIDO?',
- opts:[
-  {t:'CHOVEU MUITO NO REINO.', no:'O texto não fala em chuva.'},
-  {t:'PEDRO FOI MORAR EM OUTRO REINO.', no:'Pedro não foi embora. Leia a 6ª linha.'},
-  {t:'PEDRO SOPROU A CONCHA, E A ÁGUA VOLTOU.', ok:1},
-  {t:'O REI MANDOU CAVAR UM POÇO.', no:'O texto não fala em rei nem em poço.'}
- ],
- dica:'Leia a linha que vem logo depois da fada.',
- visual:'<p class="vx"><span class="mk">PEDRO SOPROU A CONCHA, E A ÁGUA VOLTOU A CORRER.</span></p>',
- porque:'Pedro soprou a concha mágica e a água voltou: essa é a solução do problema.',
- proximo:'A solução vem depois do problema e antes do final feliz.'},
-
-{id:'SLE5', eixo:'leitura', tipo:'trecho de conto', enun:'LEIA O TRECHO:', texto:TX_PEDRO,
- pede:'QUAL PARTE DO TEXTO MOSTRA O TEMPO DO CONTO DE FADAS?',
- opts:[
-  {t:'ERA UMA VEZ', ok:1},
-  {t:'E TODOS FICARAM COM SEDE', no:'Isso fala do problema, não do tempo.'},
-  {t:'A ÁGUA VOLTOU A CORRER', no:'Isso fala da solução, não do tempo.'},
-  {t:'UM MENINO CHAMADO PEDRO', no:'Isso apresenta o personagem, não o tempo.'}
- ],
- dica:'É o jeito mais famoso de começar um conto.',
- porque:'"Era uma vez" mostra um tempo antigo, que não se sabe quando foi.',
- proximo:'Tempo do conto: Era uma vez, há muito tempo.'},
-
-{id:'SLE6', eixo:'leitura', tipo:'trecho de conto', enun:'LEIA O TRECHO:', texto:TX_PORQ,
- pede:'QUAL É O PROBLEMA NESSE TRECHO?',
- opts:[
-  {t:'OS PORQUINHOS ERAM IRMÃOS.', no:'Ser irmãos não é um problema: é só a apresentação dos personagens.'},
-  {t:'O LOBO MAU DERRUBA AS CASAS COM SOPROS.', ok:1},
-  {t:'O TERCEIRO PORQUINHO FEZ UMA CASA DE TIJOLOS.', no:'A casa de tijolos é o que SALVA os porquinhos.'},
-  {t:'OS PORQUINHOS GOSTAVAM DE BRINCAR.', no:'O texto não fala em brincadeira.'}
- ],
- dica:'O problema é a coisa ruim que acontece.',
- porque:'O Lobo Mau sopra e derruba as casas de palha e de madeira: esse é o perigo da história.',
- proximo:'Problema = a coisa ruim. Solução = como ela acaba.'},
-
-{id:'SLE7', eixo:'leitura', tipo:'trecho de conto', enun:'LEIA O TRECHO:', texto:TX_PORQ,
- pede:'O QUE PROTEGEU OS PORQUINHOS NO FIM DO TRECHO?',
- opts:[
-  {t:'A CASA DE PALHA', no:'A casa de palha o lobo derrubou.'},
-  {t:'A CASA DE MADEIRA', no:'A casa de madeira o lobo também derrubou.'},
-  {t:'UMA FADA MADRINHA', no:'Não aparece fada nesse trecho.'},
-  {t:'A CASA DE TIJOLOS', ok:1}
- ],
- dica:'Leia a última linha: qual casa não caiu?',
- visual:'<p class="vx">O LOBO SOPROU, SOPROU, MAS <span class="mk">A CASA NÃO CAIU</span>.</p>',
- porque:'Os três correram para a casa de tijolos, e ela não caiu com os sopros.',
- proximo:'Para achar a solução, procure o que fez o perigo parar.'},
-
-{id:'SLE8', eixo:'leitura', tipo:'trecho de conto', enun:'LEIA O TRECHO:', texto:TX_CIND,
- pede:'QUAL MAGIA ACONTECE NESSE TRECHO?',
- opts:[
-  {t:'CINDERELA QUERIA IR AO BAILE.', no:'Querer ir a um baile é coisa de verdade. Não é magia.'},
-  {t:'UMA ABÓBORA VIROU CARRUAGEM.', ok:1},
-  {t:'O BAILE ERA NO CASTELO.', no:'Isso fala do lugar, não de magia.'},
-  {t:'A FADA DEU UM AVISO.', no:'Avisar não é magia. A magia foi o que a varinha fez.'}
- ],
- dica:'O que a varinha da fada fez?',
- visual:'<p class="vx">TRANSFORMOU UMA <span class="mk">ABÓBORA EM CARRUAGEM</span></p>',
- porque:'Abóbora não vira carruagem de verdade: isso é magia da fada madrinha.',
- proximo:'Magia é o que não acontece de verdade.'},
-
-{id:'SLE9', eixo:'leitura', tipo:'elemento nas histórias',
- pede:'EM "CHAPEUZINHO VERMELHO", QUAL É O LUGAR ONDE A MENINA ENCONTRA O LOBO?',
- opts:[
-  {t:'O CASTELO', no:'O castelo é de outra história, a de João.'},
-  {t:'A FLORESTA', ok:1},
-  {t:'A PRAIA', no:'Não tem praia na história da Chapeuzinho.'},
-  {t:'A ESCOLA', no:'Não tem escola na história da Chapeuzinho.'}
- ],
- dica:'Por onde a menina passava a caminho da casa da vovó?',
- porque:'Chapeuzinho encontra o lobo na floresta, a caminho da casa da vovó.',
- proximo:'Lugares de Chapeuzinho: floresta e casa da vovó.'},
-
-{id:'SLE10', eixo:'leitura', tipo:'elemento nas histórias',
- pede:'EM "JOÃO E O PÉ DE FEIJÃO", QUAL É A MAGIA QUE FAZ A HISTÓRIA ACONTECER?',
- opts:[
-  {t:'A CESTA DE DOCES', no:'A cesta é de Chapeuzinho Vermelho, e não é mágica.'},
-  {t:'A CAPA VERMELHA', no:'A capa é de Chapeuzinho Vermelho, e não é mágica.'},
-  {t:'A CASA DE TIJOLOS', no:'A casa de tijolos é dos Três Porquinhos, e não é mágica.'},
-  {t:'OS FEIJÕES MÁGICOS', ok:1}
- ],
- dica:'Do que nasceu o pé de feijão gigante?',
- porque:'Os feijões mágicos viram um pé de feijão até as nuvens. Também são mágicas a galinha dos ovos de ouro e a harpa que canta.',
- proximo:'Separe as histórias: cada uma tem a sua magia.'},
-
-{id:'SLE11', eixo:'leitura', tipo:'elemento nas histórias',
- pede:'EM "CHAPEUZINHO VERMELHO", COMO O PROBLEMA É RESOLVIDO?',
- opts:[
-  {t:'O CAÇADOR SALVA A MENINA E A VOVÓ.', ok:1},
-  {t:'A MENINA CORTA UM PÉ DE FEIJÃO.', no:'Cortar o pé de feijão é de outra história, a de João.'},
-  {t:'UMA FADA TRANSFORMA O LOBO EM SAPO.', no:'Não tem fada na história da Chapeuzinho.'},
-  {t:'O LOBO FICA AMIGO DE TODOS.', no:'O lobo não vira amigo: quem resolve é o caçador.'}
- ],
- dica:'Quem ouviu o barulho e entrou na casa da vovó?',
- porque:'O problema é o lobo enganar a menina e a vovó; a solução é o caçador, que salva as duas.',
- proximo:'Problema = a coisa ruim. Solução = quem ou o que acaba com ela.'}
-);
-
-/* =================== BLOCO B · PARÁFRASE =================== */
-ITENS.push(
-{id:'SPF1', eixo:'parafrase', tipo:'com suas palavras',
- pede:'COM SUAS PALAVRAS: O QUE É UMA PARÁFRASE? MARQUE A MELHOR RESPOSTA.',
- opts:[
-  {t:'MUDAR A HISTÓRIA DE PROPÓSITO PARA FICAR ENGRAÇADA.', no:'Isso é PARÓDIA. Na paráfrase, o sentido não muda.'},
-  {t:'CONTAR O MESMO TEXTO COM OUTRAS PALAVRAS, SEM MUDAR O SENTIDO.', ok:1},
-  {t:'COPIAR O TEXTO IGUALZINHO, PALAVRA POR PALAVRA.', no:'Copiar não é paráfrase: na paráfrase as palavras mudam.'},
-  {t:'INVENTAR UMA HISTÓRIA NOVA, COM OUTROS PERSONAGENS.', no:'Na paráfrase a história é a mesma: só as palavras mudam.'}
- ],
- dica:'Na paráfrase, o que muda: as palavras ou o que acontece?',
- porque:'Paráfrase é recontar com as suas palavras, sem mudar o sentido.',
- proximo:'Paráfrase: palavras novas, sentido igual.'},
-
-{id:'SPF2', eixo:'parafrase', tipo:'qual é a paráfrase',
- enun:'LEIA A FRASE:', quadro:'CHAPEUZINHO LEVOU DOCES PARA A VOVÓ.',
- pede:'QUAL FRASE É UMA PARÁFRASE DESSA?',
- opts:[
-  {t:'CHAPEUZINHO LEVOU PIZZA PARA O VOVÔ.', no:'Aqui o sentido mudou de propósito (pizza, vovô): isso é paródia.'},
-  {t:'A VOVÓ LEVOU DOCES PARA CHAPEUZINHO.', no:'O sentido mudou: agora é a vovó quem leva os doces.'},
-  {t:'A GAROTA LEVOU GULOSEIMAS PARA A AVÓ.', ok:1},
-  {t:'CHAPEUZINHO COMEU OS DOCES DA VOVÓ.', no:'O sentido mudou: levar não é o mesmo que comer.'}
- ],
- dica:'Procure a frase que conta a MESMA coisa com OUTRAS palavras.',
- visual:'<div class="pcs"><span class="pc">CHAPEUZINHO</span><span class="arw">=</span><span class="pc hit">A GAROTA</span></div><div class="pcs"><span class="pc">DOCES</span><span class="arw">=</span><span class="pc hit">GULOSEIMAS</span></div><div class="pcs"><span class="pc">VOVÓ</span><span class="arw">=</span><span class="pc hit">AVÓ</span></div>',
- porque:'Chapeuzinho virou "a garota", doces viraram "guloseimas", vovó virou "avó". As palavras mudaram; o sentido ficou igual.',
- proximo:'Paráfrase: troque palavras por sinônimos e não mude o que acontece.'},
-
-{id:'SPF3', eixo:'parafrase', tipo:'qual é a paráfrase',
- enun:'LEIA A FRASE:', quadro:'O LOBO ERA GRANDE E ESTAVA BRAVO.',
- pede:'QUAL FRASE É UMA PARÁFRASE DESSA?',
- opts:[
-  {t:'O LOBO ERA ENORME E ESTAVA ZANGADO.', ok:1},
-  {t:'O LOBO ERA PEQUENO E ESTAVA ALEGRE.', no:'Pequeno e alegre são o contrário de grande e bravo: o sentido mudou.'},
-  {t:'O LOBO ERA GRANDE E ESTAVA CONTENTE.', no:'Contente é o contrário de bravo: o sentido mudou.'},
-  {t:'A MENINA ERA GRANDE E ESTAVA BRAVA.', no:'Mudou o personagem: agora é a menina, não o lobo.'}
- ],
- dica:'Procure palavras que querem dizer o mesmo que GRANDE e BRAVO.',
- visual:'<div class="pcs"><span class="pc">GRANDE</span><span class="arw">=</span><span class="pc hit">ENORME</span></div><div class="pcs"><span class="pc">BRAVO</span><span class="arw">=</span><span class="pc hit">ZANGADO</span></div>',
- porque:'Grande = enorme; bravo = zangado. Trocaram as palavras por sinônimos e o sentido ficou igual.',
- proximo:'Sinônimos: palavras diferentes que querem dizer a mesma coisa.'},
-
-{id:'SPF4', eixo:'parafrase', tipo:'sinônimo',
- pede:'QUAL PALAVRA QUER DIZER O MESMO QUE FLORESTA?',
- opts:[
-  {t:'PRAIA', no:'Praia é areia e mar. Floresta é cheia de árvores.'},
-  {t:'CIDADE', no:'Cidade tem casas e ruas. Floresta é cheia de árvores.'},
-  {t:'DESERTO', no:'Deserto quase não tem árvores. Floresta é cheia delas.'},
-  {t:'MATA', ok:1}
- ],
- dica:'Um lugar cheio de árvores, onde a Chapeuzinho encontrou o lobo.',
- porque:'Floresta e mata são sinônimos: querem dizer a mesma coisa.',
- proximo:'Sinônimo é a palavra que pode entrar no lugar da outra sem mudar o sentido.'},
-
-{id:'SPF5', eixo:'parafrase', tipo:'sinônimo',
- pede:'QUAL PALAVRA QUER DIZER O MESMO QUE MENINA?',
- opts:[
-  {t:'GAROTA', ok:1},
-  {t:'SENHORA', no:'Senhora é uma mulher mais velha. Menina é criança.'},
-  {t:'MENINO', no:'Menino é o masculino de menina, não o mesmo sentido.'},
-  {t:'VOVÓ', no:'Vovó é a mãe do pai ou da mãe. Menina é criança.'}
- ],
- dica:'Uma palavra que serve para a Chapeuzinho.',
- porque:'Menina e garota são sinônimos.',
- proximo:'Sinônimo é a palavra que pode entrar no lugar da outra sem mudar o sentido.'},
-
-{id:'SPF6', eixo:'parafrase', tipo:'sinônimo',
- enun:'LEIA A FRASE:', quadro:'JOÃO FICOU <u>COM MEDO</u> QUANDO O GIGANTE ACORDOU.',
- pede:'QUE PALAVRA PODE ENTRAR NO LUGAR DE "COM MEDO" SEM MUDAR O SENTIDO?',
- opts:[
-  {t:'CORAJOSO', no:'Corajoso é quem NÃO tem medo: o sentido mudaria.'},
-  {t:'ASSUSTADO', ok:1},
-  {t:'ALEGRE', no:'Alegre não quer dizer com medo: o sentido mudaria.'},
-  {t:'CALMO', no:'Calmo é o contrário de assustado: o sentido mudaria.'}
- ],
- dica:'Leia a frase com cada palavra no lugar de COM MEDO.',
- porque:'"João ficou assustado" quer dizer o mesmo que "João ficou com medo".',
- proximo:'Teste o sinônimo dentro da frase: o sentido tem de continuar igual.'},
-
-{id:'SPF7', eixo:'parafrase', tipo:'regra',
- pede:'NUMA PARÁFRASE, O QUE MUDA E O QUE FICA IGUAL?',
- opts:[
-  {t:'MUDA O SENTIDO; AS PALAVRAS FICAM IGUAIS.', no:'É o contrário: as palavras mudam e o sentido fica.'},
-  {t:'MUDA TUDO: AS PALAVRAS E O SENTIDO.', no:'Se o sentido muda, já não é paráfrase.'},
-  {t:'NÃO MUDA NADA: É UMA CÓPIA.', no:'Cópia não é paráfrase: na paráfrase as palavras mudam.'},
-  {t:'MUDAM AS PALAVRAS; O SENTIDO FICA IGUAL.', ok:1}
- ],
- dica:'Paráfrase = contar com as SUAS palavras.',
- porque:'Na paráfrase trocam-se as palavras, mas o sentido do texto continua o mesmo.',
- proximo:'Paráfrase: palavras novas, sentido igual.'},
-
-{id:'SPF8', eixo:'parafrase', tipo:'qual é a paráfrase',
- enun:'LEIA A FRASE:', quadro:'O MENINO SUBIU NO PÉ DE FEIJÃO ATÉ AS NUVENS.',
- pede:'QUAL FRASE CONTA A MESMA COISA COM OUTRAS PALAVRAS?',
- opts:[
-  {t:'O MENINO DESCEU DO PÉ DE FEIJÃO ATÉ O CHÃO.', no:'Subir e descer são o contrário: o sentido mudou.'},
-  {t:'O MENINO SUBIU NO PÉ DE PIPOCA ATÉ A LUA.', no:'Mudou de propósito (pipoca, lua): isso é paródia.'},
-  {t:'O GAROTO ESCALOU O PÉ DE FEIJÃO ATÉ AS NUVENS.', ok:1},
-  {t:'O GIGANTE SUBIU NO PÉ DE FEIJÃO ATÉ AS NUVENS.', no:'Mudou o personagem: agora quem sobe é o Gigante.'}
- ],
- dica:'Procure a frase em que só as palavras mudaram.',
- visual:'<div class="pcs"><span class="pc">O MENINO</span><span class="arw">=</span><span class="pc hit">O GAROTO</span></div><div class="pcs"><span class="pc">SUBIU</span><span class="arw">=</span><span class="pc hit">ESCALOU</span></div>',
- porque:'Menino = garoto; subiu = escalou. O que acontece é o mesmo: é paráfrase.',
- proximo:'Se mudou o que acontece, não é paráfrase.'},
-
-{id:'SPF9', eixo:'parafrase', tipo:'paráfrase ou paródia',
- enun:'COMPARE:', quadro:'ORIGINAL: JOÃO TROCOU A VACA POR FEIJÕES MÁGICOS.<div class="sep"></div>NOVO: O MENINO DEU A VACA EM TROCA DE UNS FEIJÕES MÁGICOS.',
- pede:'O TEXTO NOVO É...',
- opts:[
-  {t:'UMA PARÁFRASE, PORQUE CONTA A MESMA COISA COM OUTRAS PALAVRAS.', ok:1},
-  {t:'UMA PARÓDIA, PORQUE MUDOU O QUE ACONTECE NA HISTÓRIA.', no:'Nada mudou no que acontece: a vaca continua sendo trocada por feijões mágicos.'},
-  {t:'UMA PARÓDIA, PORQUE FICOU ENGRAÇADO.', no:'O texto novo não mudou nada de propósito, e não tem nada engraçado nele.'},
-  {t:'UM VERBETE DE DICIONÁRIO.', no:'Verbete é a palavra explicada no dicionário. Aqui é um pedaço de história.'}
- ],
- dica:'Compare as duas frases: o que acontece mudou?',
- visual:'<div class="pcs"><span class="pc">JOÃO</span><span class="arw">=</span><span class="pc hit">O MENINO</span></div><div class="pcs"><span class="pc">TROCOU A VACA POR</span><span class="arw">=</span><span class="pc hit">DEU A VACA EM TROCA DE</span></div>',
- porque:'Mudaram só as palavras. O que acontece é o mesmo. Isso é paráfrase.',
- proximo:'Pergunte sempre: o sentido ficou igual? Então é paráfrase.'}
-);
-
-/* =================== BLOCO B · PARÓDIA =================== */
-ITENS.push(
-{id:'SPD1', eixo:'parodia', tipo:'com suas palavras',
- pede:'COM SUAS PALAVRAS: O QUE É UMA PARÓDIA? MARQUE A MELHOR RESPOSTA.',
- opts:[
-  {t:'IMITAR UM TEXTO CONHECIDO E MUDAR ALGUMA COISA DE PROPÓSITO, MUITAS VEZES PARA FICAR ENGRAÇADO.', ok:1},
-  {t:'CONTAR O MESMO TEXTO COM OUTRAS PALAVRAS, SEM MUDAR O SENTIDO.', no:'Isso é PARÁFRASE. Na paródia, alguma coisa muda de propósito.'},
-  {t:'COPIAR O TEXTO SEM MUDAR NADA.', no:'Na paródia alguma coisa muda de propósito.'},
-  {t:'EXPLICAR O SIGNIFICADO DE UMA PALAVRA.', no:'Isso é o que o dicionário faz.'}
- ],
- dica:'Na paródia, alguma coisa muda de propósito.',
- porque:'Paródia imita um texto conhecido e muda alguma coisa de propósito. Ainda dá para reconhecer o original.',
- proximo:'Paródia: imita + muda de propósito.'},
-
-{id:'SPD2', eixo:'parodia', tipo:'o que mudou na paródia', enun:'LEIA O TEXTO:', texto:TX_PARODIA,
- pede:'ESSE TEXTO É UMA PARÓDIA DE QUAL HISTÓRIA?',
- opts:[
-  {t:'JOÃO E O PÉ DE FEIJÃO', no:'No texto não tem vaca, feijão nem Gigante.'},
-  {t:'CHAPEUZINHO VERMELHO', ok:1},
-  {t:'OS TRÊS PORQUINHOS', no:'No texto não tem porquinhos.'},
-  {t:'NENHUMA, PORQUE NÃO DÁ PARA RECONHECER', no:'Na paródia sempre dá para reconhecer o original: menina chamada Chapeuzinho, lobo e visita a alguém da família.'}
- ],
- dica:'Uma menina com "Chapeuzinho" no nome e um lobo no caminho... lembra qual história?',
- visual:'<p class="vx"><span class="mk">CHAPEUZINHO</span> AZUL · <span class="mk">LOBO</span> · LEVAR COMIDA PARA O <span class="mk">VOVÔ</span></p>',
- porque:'A menina se chama Chapeuzinho, encontra um lobo no caminho e leva comida para o vovô: dá para reconhecer Chapeuzinho Vermelho.',
- proximo:'Paródia imita o original: o que ficou igual é a pista da história original.'},
-
-{id:'SPD3', eixo:'parodia', tipo:'o que mudou na paródia', enun:'LEIA O TEXTO:', texto:TX_PARODIA,
- pede:'O QUE MUDOU EM RELAÇÃO À HISTÓRIA ORIGINAL?',
- opts:[
-  {t:'NADA MUDOU: É A MESMA HISTÓRIA.', no:'Mudou muita coisa: a cor do nome, a comida e quem recebe a visita.'},
-  {t:'SÓ MUDOU O LUGAR: AGORA É NUM CASTELO.', no:'O texto não fala em castelo.'},
-  {t:'A COR DO NOME, A COMIDA E QUEM RECEBE A VISITA.', ok:1},
-  {t:'SÓ MUDOU O NOME DO LOBO.', no:'O lobo nem tem nome no texto. O que mudou foi a cor, a comida e quem recebe a visita.'}
- ],
- dica:'Compare com o original: capuz vermelho, doces, vovó.',
- visual:'<div class="pcs"><span class="pc">VERMELHO</span><span class="arw">&rarr;</span><span class="pc bad">AZUL</span></div><div class="pcs"><span class="pc">DOCES</span><span class="arw">&rarr;</span><span class="pc bad">SANDUÍCHE</span></div><div class="pcs"><span class="pc">VOVÓ</span><span class="arw">&rarr;</span><span class="pc bad">VOVÔ</span></div>',
- porque:'Vermelho virou azul, os doces viraram sanduíche e a vovó virou o vovô: mudanças de propósito. É uma paródia.',
- proximo:'Para achar o que mudou, ponha o original do lado e compare pedaço por pedaço.'},
-
-{id:'SPD4', eixo:'parodia', tipo:'qual é a paródia',
- pede:'QUAL FRASE É UMA PARÓDIA DE "JOÃO E O PÉ DE FEIJÃO"?',
- opts:[
-  {t:'O MENINO TROCOU A VACA POR FEIJÕES MÁGICOS.', no:'Aqui nada mudou no que acontece: só trocou João por "o menino". É paráfrase.'},
-  {t:'JOÃO E A MÃE ERAM POBRES E SÓ TINHAM UMA VACA.', no:'Isso é a própria história original, sem mudança.'},
-  {t:'JOÃO TROCOU A VACA POR SEMENTES DE PIPOCA, E O PÉ DE PIPOCA ESTOUROU ATÉ O CÉU.', ok:1},
-  {t:'A GAROTA LEVOU GULOSEIMAS PARA A AVÓ.', no:'Essa frase é da história da Chapeuzinho, não da de João.'}
- ],
- dica:'Paródia muda alguma coisa de propósito, e ainda dá para reconhecer o original.',
- visual:'<div class="pcs"><span class="pc">FEIJÕES MÁGICOS</span><span class="arw">&rarr;</span><span class="pc bad">SEMENTES DE PIPOCA</span></div>',
- porque:'O feijão virou pipoca, de propósito e de um jeito engraçado, mas ainda dá para reconhecer a história de João. É paródia.',
- proximo:'Paródia = imita + muda de propósito. Se só trocou palavras, é paráfrase.'},
-
-{id:'SPD5', eixo:'parodia', tipo:'paródia de música',
- enun:'LEIA:', quadro:'MÚSICA ORIGINAL: ATIREI O PAU NO GATO.<div class="sep"></div>PARÓDIA: NÃO ATIRE O PAU NO GATO, PORQUE ISSO NÃO SE FAZ.',
- pede:'NESSA PARÓDIA DE MÚSICA, O QUE FICOU IGUAL?',
- opts:[
-  {t:'A LETRA: NENHUMA PALAVRA MUDOU.', no:'A letra mudou: "atirei" virou "não atire".'},
-  {t:'A MELODIA: CANTA-SE DO MESMO JEITO.', ok:1},
-  {t:'NADA: NÃO DÁ PARA RECONHECER A MÚSICA ORIGINAL.', no:'Dá para reconhecer: é a mesma música, cantada do mesmo jeito.'},
-  {t:'O BICHO: AGORA A MÚSICA É SOBRE UM CACHORRO.', no:'O bicho continua sendo o gato.'}
- ],
- dica:'Cante as duas. O jeito de cantar muda?',
- porque:'Na paródia de música, a melodia continua a mesma e a letra muda.',
- proximo:'Paródia de música: mesma melodia, letra nova.'},
-
-{id:'SPD6', eixo:'parodia', tipo:'paródia de música',
- enun:'LEIA:', quadro:'MÚSICA ORIGINAL: ATIREI O PAU NO GATO.<div class="sep"></div>PARÓDIA: NÃO ATIRE O PAU NO GATO, PORQUE ISSO NÃO SE FAZ.',
- pede:'O QUE MUDOU NESTA PARÓDIA?',
- opts:[
-  {t:'A MELODIA: AGORA SE CANTA DE OUTRO JEITO.', no:'A melodia é a mesma. O que mudou foi a letra.'},
-  {t:'O GATO VIROU UM CACHORRO.', no:'O bicho continua sendo o gato.'},
-  {t:'NADA MUDOU.', no:'Mudou a letra: "atirei" virou "não atire... porque isso não se faz".'},
-  {t:'A LETRA: AGORA ELA ENSINA A NÃO MALTRATAR O GATO.', ok:1}
- ],
- dica:'Compare as palavras das duas.',
- porque:'A letra mudou de propósito: agora ela ensina a não maltratar o gato. A melodia é a mesma.',
- proximo:'Paródia de música: mesma melodia, letra nova.'},
-
-{id:'SPD7', eixo:'parodia', tipo:'paráfrase ou paródia',
- enun:'COMPARE:', quadro:'ORIGINAL: OS TRÊS PORQUINHOS FIZERAM CASAS DE PALHA, DE MADEIRA E DE TIJOLOS.<div class="sep"></div>NOVO: OS TRÊS PORQUINHOS FIZERAM CASAS DE CHOCOLATE, DE BISCOITO E DE BOLO.',
- pede:'O TEXTO NOVO É...',
- opts:[
-  {t:'UMA PARÁFRASE, PORQUE CONTA A MESMA COISA COM OUTRAS PALAVRAS.', no:'Não é a mesma coisa: casa de chocolate é diferente de casa de tijolos.'},
-  {t:'UMA PARÓDIA, PORQUE IMITA O ORIGINAL E MUDA DE PROPÓSITO AS CASAS.', ok:1},
-  {t:'UMA CÓPIA DO ORIGINAL, SEM NENHUMA MUDANÇA.', no:'Mudou o material das três casas.'},
-  {t:'UM TEXTO QUE NÃO TEM NADA A VER COM OS TRÊS PORQUINHOS.', no:'Tem tudo a ver: são os mesmos três porquinhos fazendo casas.'}
- ],
- dica:'O material das casas ficou igual?',
- visual:'<div class="pcs"><span class="pc">PALHA, MADEIRA, TIJOLOS</span><span class="arw">&rarr;</span><span class="pc bad">CHOCOLATE, BISCOITO, BOLO</span></div>',
- porque:'Dá para reconhecer os três porquinhos, mas as casas mudaram de propósito, de um jeito engraçado: é paródia.',
- proximo:'O sentido mudou de propósito, imitando o original? Paródia.'},
-
-{id:'SPD8', eixo:'parodia', tipo:'qual é a paródia',
- pede:'QUAL FRASE É UMA PARÓDIA DE "E VIVERAM FELIZES PARA SEMPRE"?',
- opts:[
-  {t:'E FORAM FELIZES PARA SEMPRE.', no:'Aqui o sentido é o mesmo: é paráfrase.'},
-  {t:'E VIVERAM FELIZES PARA SEMPRE.', no:'Essa é a frase original, sem mudança.'},
-  {t:'E TODOS FICARAM CONTENTES PARA SEMPRE.', no:'Contente = feliz: o sentido é o mesmo. É paráfrase.'},
-  {t:'E VIVERAM COMENDO PIZZA PARA SEMPRE.', ok:1}
- ],
- dica:'Procure a que imita a frase e muda algo de propósito, de um jeito engraçado.',
- porque:'"Comendo pizza para sempre" imita a frase famosa e muda de propósito, para ficar engraçado: é paródia.',
- proximo:'Mesmo sentido = paráfrase. Mudou de propósito, imitando = paródia.'},
-
-{id:'SPD9', eixo:'parodia', tipo:'paráfrase ou paródia',
- pede:'COMO SABER SE UM TEXTO É PARÁFRASE OU PARÓDIA?',
- opts:[
-  {t:'SE O SENTIDO FICOU IGUAL, É PARÁFRASE; SE MUDOU DE PROPÓSITO, IMITANDO O ORIGINAL, É PARÓDIA.', ok:1},
-  {t:'SE O SENTIDO FICOU IGUAL, É PARÓDIA; SE MUDOU DE PROPÓSITO, É PARÁFRASE.', no:'Está trocado: sentido igual é paráfrase.'},
-  {t:'SE O TEXTO É COMPRIDO, É PARÁFRASE; SE É CURTO, É PARÓDIA.', no:'O tamanho não decide. O que decide é se o sentido mudou.'},
-  {t:'SE TEM DESENHO, É PARÓDIA; SE NÃO TEM, É PARÁFRASE.', no:'Desenho não decide. O que decide é se o sentido mudou.'}
- ],
- dica:'A pergunta-chave é: o sentido mudou?',
- porque:'Teste rápido: sentido igual → paráfrase. Mudou de propósito, imitando o original → paródia.',
- proximo:'Sempre pergunte: o sentido mudou?'}
-);
-
-/* =================== BLOCO C · INVENÇÕES =================== */
-ITENS.push(
-{id:'SIN1', eixo:'invento', tipo:'com suas palavras',
- pede:'COM SUAS PALAVRAS: O QUE É UMA INVENÇÃO? MARQUE A MELHOR RESPOSTA.',
- opts:[
-  {t:'ALGO QUE JÁ EXISTIA NA NATUREZA E ALGUÉM ENCONTROU.', no:'Isso é DESCOBERTA. Invenção é algo que não existia antes.'},
-  {t:'ALGO QUE AS PESSOAS CRIARAM E QUE NÃO EXISTIA ANTES.', ok:1},
-  {t:'UMA HISTÓRIA QUE COMEÇA COM "ERA UMA VEZ".', no:'Isso é conto de fadas.'},
-  {t:'UMA PALAVRA EXPLICADA NO DICIONÁRIO.', no:'Isso é verbete.'}
- ],
- dica:'A lâmpada não existia na natureza. Alguém...',
- porque:'Invenção é algo criado pelas pessoas, que não existia antes: a roda, a lâmpada, o telefone.',
- proximo:'Invenção: criada. Descoberta: encontrada.'},
-
-{id:'SIN2', eixo:'invento', tipo:'invenção ou descoberta',
- pede:'QUAL DESTES É UMA INVENÇÃO?',
- opts:[
-  {t:'O SOL', no:'O sol sempre existiu. Ninguém inventou o sol.'},
-  {t:'A CHUVA', no:'A chuva é da natureza. Ninguém inventou a chuva.'},
-  {t:'A LÂMPADA', ok:1},
-  {t:'O RIO', no:'O rio é da natureza. Ninguém inventou o rio.'}
- ],
- dica:'Qual deles foi feito por pessoas?',
- porque:'A lâmpada foi criada por pessoas. Sol, chuva e rio são da natureza.',
- proximo:'Foi feito por gente e não existia antes? Invenção.'},
-
-{id:'SIN3', eixo:'invento', tipo:'invenção ou descoberta',
- pede:'QUAL DESTES FOI UMA DESCOBERTA, E NÃO UMA INVENÇÃO?',
- opts:[
-  {t:'A BICICLETA', no:'A bicicleta foi criada por pessoas: é invenção.'},
-  {t:'O TELEFONE', no:'O telefone foi criado por pessoas: é invenção.'},
-  {t:'O AVIÃO', no:'O avião foi criado por pessoas: é invenção.'},
-  {t:'O FOGO', ok:1}
- ],
- dica:'Qual deles já existia na natureza?',
- porque:'O fogo já existia na natureza: as pessoas o descobriram. Bicicleta, telefone e avião foram inventados.',
- proximo:'Já existia? Descoberta. Não existia? Invenção.'},
-
-{id:'SIN4', eixo:'invento', tipo:'conceito',
- pede:'QUEM INVENTA ALGUMA COISA É CHAMADO DE...',
- opts:[
-  {t:'INVENTOR', ok:1},
-  {t:'PERSONAGEM', no:'Personagem é quem participa de uma história.'},
-  {t:'LEITOR', no:'Leitor é quem lê.'},
-  {t:'VERBETE', no:'Verbete é a palavra explicada no dicionário.'}
- ],
- dica:'Inventa... inven...',
- porque:'Quem inventa é o INVENTOR.',
- proximo:'Inventar → invenção → inventor.'},
-
-{id:'SIN5', eixo:'invento', tipo:'conceito',
- pede:'O BRASILEIRO SANTOS DUMONT É CONHECIDO COMO...',
- opts:[
-  {t:'O PAI DA AVIAÇÃO', ok:1},
-  {t:'O DESCOBRIDOR DO FOGO', no:'O fogo foi descoberto há muitíssimo tempo, e ninguém sabe por quem.'},
-  {t:'O AUTOR DE CHAPEUZINHO VERMELHO', no:'Chapeuzinho é um conto antigo, contado de geração em geração.'},
-  {t:'O INVENTOR DO DICIONÁRIO', no:'Santos Dumont é lembrado pelo avião 14-Bis.'}
- ],
- dica:'Ele criou o 14-Bis, que voava.',
- porque:'Santos Dumont, brasileiro, é conhecido como o pai da aviação: ele criou o 14-Bis.',
- proximo:'Santos Dumont → avião → pai da aviação.'},
-
-{id:'SIN6', eixo:'invento', tipo:'para que serve',
- pede:'PARA QUE SERVEM AS INVENÇÕES?',
- opts:[
-  {t:'PARA RESOLVER PROBLEMAS E FACILITAR A VIDA DAS PESSOAS.', ok:1},
-  {t:'PARA ENFEITAR OS CONTOS DE FADAS.', no:'Invenções são usadas na vida real, não só nas histórias.'},
-  {t:'PARA FICAR GUARDADAS, SEM USO.', no:'Invenção é feita para ser usada.'},
-  {t:'PARA EXPLICAR O SIGNIFICADO DAS PALAVRAS.', no:'Isso é o que o dicionário faz.'}
- ],
- dica:'Pense na lâmpada: o que ela resolve?',
- porque:'As invenções resolvem problemas e facilitam a vida: a lâmpada ilumina a noite, a geladeira guarda a comida.',
- proximo:'Toda invenção resolve algum problema.'},
-
-{id:'SIN7', eixo:'invento', tipo:'para que serve',
- pede:'QUAL INVENÇÃO AJUDA A FALAR COM QUEM ESTÁ LONGE?',
- opts:[
-  {t:'A RODA', no:'A roda ajuda a levar coisas, mas não a falar.'},
-  {t:'O TELEFONE', ok:1},
-  {t:'A GELADEIRA', no:'A geladeira guarda os alimentos gelados.'},
-  {t:'A LÂMPADA', no:'A lâmpada ilumina.'}
- ],
- dica:'Alô? Quem fala?',
- porque:'O telefone foi inventado para as pessoas conversarem mesmo estando longe.',
- proximo:'Pense no problema que cada invenção resolve.'},
-
-{id:'SIN8', eixo:'invento', tipo:'para que serve',
- pede:'QUAL INVENÇÃO MANTÉM OS ALIMENTOS GELADOS?',
- opts:[
-  {t:'O RELÓGIO', no:'O relógio mostra as horas.'},
-  {t:'A BICICLETA', no:'A bicicleta serve para andar.'},
-  {t:'A GELADEIRA', ok:1},
-  {t:'O AVIÃO', no:'O avião leva as pessoas pelo ar.'}
- ],
- dica:'Onde fica o leite na sua casa?',
- porque:'A geladeira mantém os alimentos gelados e conservados.',
- proximo:'Pense no problema que cada invenção resolve.'},
-
-{id:'SIN9', eixo:'invento', tipo:'invenção ou descoberta',
- pede:'ENCONTRAR UM ANIMAL QUE NINGUÉM CONHECIA É...',
- opts:[
-  {t:'UMA INVENÇÃO, PORQUE O ANIMAL FOI CRIADO POR PESSOAS.', no:'Ninguém criou o animal: ele já existia na natureza.'},
-  {t:'UMA DESCOBERTA, PORQUE O ANIMAL JÁ EXISTIA.', ok:1},
-  {t:'UMA PARÓDIA, PORQUE O ANIMAL É ENGRAÇADO.', no:'Paródia é um texto que imita outro.'},
-  {t:'UM VERBETE, PORQUE O ANIMAL TEM NOME.', no:'Verbete é a palavra explicada no dicionário.'}
- ],
- dica:'O animal já existia antes de alguém achar?',
- porque:'O animal já vivia na natureza; alguém só o encontrou. Isso é descoberta.',
- proximo:'Já existia? Descoberta.'},
-
-{id:'SIN10', eixo:'invento', tipo:'trecho', enun:'LEIA O TEXTO:', texto:TX_INVENTO,
- pede:'SEGUNDO O TEXTO, POR QUE O FOGO NÃO É UMA INVENÇÃO?',
- opts:[
-  {t:'PORQUE ELE ILUMINA A NOITE.', no:'Quem ilumina a noite, no texto, é a lâmpada.'},
-  {t:'PORQUE ELE JÁ EXISTIA NA NATUREZA.', ok:1},
-  {t:'PORQUE ELE RESOLVE PROBLEMAS.', no:'Resolver problemas é o que o texto diz das invenções.'},
-  {t:'PORQUE ELE É MUITO QUENTE.', no:'O texto não fala do calor do fogo.'}
- ],
- dica:'Leia a terceira linha.',
- visual:'<p class="vx">JÁ O FOGO NÃO FOI INVENTADO: <span class="mk">ELE JÁ EXISTIA NA NATUREZA</span>.</p>',
- porque:'O texto diz que o fogo já existia na natureza. Encontrar algo que já existia é descoberta.',
- proximo:'A resposta mora no texto: ache a linha com a palavra da pergunta.'}
-);
+ proximo:'Plural com artigo: mude as DUAS palavras.'}
+];
 
 /* truque e origem vêm da família: a frase do truque é IDÊNTICA em todo
    item da família, e a origem é o nome do conteúdo na tela. */
