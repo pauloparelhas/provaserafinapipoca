@@ -126,7 +126,7 @@ function fisica(dt){
 function bateTrava(g){
   if(g.avisoT>0||J.estado!=='nivel') return; g.avisoT=3; J.setaT=6; J.shake=3; SOM.fx('tranca');
   var pend=g.alvos.filter(function(c){ return !c.aberta; })[0];
-  if(g.tipo==='X') toast('Primeiro: entre no cano e vença a arena do submundo',3200);
+  if(g.tipo==='X') toast('Primeiro: entre no cano e visite a arena do submundo',3200);
   else if(pend&&pend.porta) toast('Primeiro: entre na porta ? (aperte ↓ na frente dela)',3200);
   else toast('Primeiro: bata na caixa ? (pule embaixo dela)',3200);
 }
@@ -134,7 +134,7 @@ function abreTravas(dt){
   var M=J.mundo; M.travas.forEach(function(g){ if(g.avisoT>0) g.avisoT-=dt; if(g.aberta){ if(g.anim<1) g.anim+=dt*1.5; return; }
     if(g.alvos.every(function(c){ return c.aberta; })){ g.aberta=true; g.anim=0; SOM.fx('destrava'); toast('A trava abriu! Siga em frente',2200); emite(16,function(){ return {x:g.x+22,y:g.y+g.h-Math.random()*g.h,vx:(Math.random()-.5)*200,vy:-100-Math.random()*200,vida:.9,max:.9,tipo:'neve',r:3+Math.random()*3,g:1}; }); } });
 }
-function bateCaixa(c){ if(c.aberta||c.cooldown>0||J.estado!=='nivel') return; if(c.porta){ SOM.fx('cano'); J.caixaAtual=c; J.in.left=J.in.right=J.in.jump=false; if(window.ARENA) ARENA.entra(c); return; } c.bump=14; c.cooldown=.8; SOM.fx('plim'); J.caixaAtual=c; J.in.left=J.in.right=J.in.jump=false; if(J.chefe){ setTimeout(function(){ if(window.ARENA) ARENA.duelo(c); },300); } else { if(window.ARENA) ARENA.entra(c); } }
+function bateCaixa(c){ if((c.aberta&&J.chefe)||c.cooldown>0||J.estado!=='nivel') return; /* visitada = treinar de novo */ if(c.porta){ SOM.fx('cano'); J.caixaAtual=c; J.in.left=J.in.right=J.in.jump=false; if(window.ARENA) ARENA.entra(c); return; } c.bump=14; c.cooldown=.8; SOM.fx('plim'); J.caixaAtual=c; J.in.left=J.in.right=J.in.jump=false; if(J.chefe){ setTimeout(function(){ if(window.ARENA) ARENA.duelo(c); },300); } else { if(window.ARENA) ARENA.entra(c); } }
 function quebraTijolo(b){ b.vivo=false; SOM.fx('tijolo'); J.shake=4; pontua(10,b.x+b.w/2,b.y); emite(8,function(i){ return {x:b.x+b.w/2,y:b.y+b.h/2,vx:(Math.random()-.5)*300,vy:-150-Math.random()*250,vida:.8,max:.8,tipo:'confete',cor:i%2?'#c2410c':'#7c2d12',rot:Math.random()*6,g:1}; }); J.part.push({x:b.x+b.w/2,y:b.y,vx:0,vy:-200,vida:.6,max:.6,tipo:'moeda',r:9,rot:0,g:1}); }
 function pegaItem(it){
   var u=J.urso; it.pego=true; brilho(it.x,it.y,12,'#fff');

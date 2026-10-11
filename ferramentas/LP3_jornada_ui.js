@@ -34,6 +34,8 @@ function pintaBotoes(){ var b=$('btnLock'); if(b) b.classList.toggle('on',!!wind
 function modoNivel(on){ $('touch').style.display=on?'block':'none'; }
 function modoMapa(on){ var b=$('mapBtns'); if(b) b.style.display=on?'flex':'none'; }
 function hudArena(on){ $('hud').classList.toggle('arena',!!on); }
+/* botão X da arena (sai na hora; Esc faz o mesmo) */
+function botaoSair(on){ var b=$('btnSairArena'); if(b) b.classList.toggle('show',!!on); }
 function acao(on){ $('tAct').classList.toggle('show',!!on); }
 
 /* ---------- quadro da pergunta (arena e duelo do chefão) ---------- */
@@ -89,13 +91,16 @@ function fechaMenu(){ $('menu').classList.remove('show'); menuAberto=null; }
 function estrelasHtml(n){ var s='<div class="mstars">'; for(var i=0;i<3;i++) s+='<span class="'+(i<n?'on':'')+'" style="animation-delay:'+(i*.25)+'s">'+SVG.estrela+'</span>'; return s+'</div>'; }
 function peixesHtml(n,tot){ var s='<div class="mfish">'; for(var i=0;i<tot;i++) s+='<span class="'+(i<n?'on':'')+'">'+SVG.peixe+'</span>'; return s+'</div>'; }
 
-function fimArena(ok,acertos,n,meta,pontos,faltam,cb){
-  var h='<h2>'+(ok?'Arena vencida!':'Quase lá!')+'</h2>'+peixesHtml(acertos,n);
-  h+='<p><b>'+acertos+' de '+n+'</b> peixes · meta '+meta+(ok?' · <b>+'+pontos+' pontos</b>':'')+'</p>';
-  if(ok) h+='<p class="sub">'+(faltam===0?'Todas as arenas desta fase prontas: a saída está liberada!':'Falta'+(faltam>1?'m '+faltam+' arenas':' 1 arena')+' nesta fase.')+'</p>';
-  else h+='<p class="sub">Precisa de '+meta+' peixes para sair. Vamos de novo, com outras perguntas!</p>';
-  h+='<button class="mbtn pri" id="mOk">'+(ok?'Voltar à fase':'Tentar de novo')+'</button>';
-  menu(h,{mOk:function(){ fechaMenu(); cb(); }},'festa');
+/* fim da arena: acima da meta = festa; abaixo = placar amigável + SEGUIR (principal) ou TENTAR DE NOVO. Nada de fracasso. */
+function fimArena(ok,acertos,n,meta,pontos,faltam,seguir,deNovo){
+  var falta=faltam===0?'A saída da fase está liberada!':'Falta'+(faltam>1?'m '+faltam+' arenas':' 1 arena')+' nesta fase.';
+  var h='<h2>'+(ok?'Arena vencida!':'Você acertou '+acertos+' de '+n+'!')+'</h2>'+peixesHtml(acertos,n);
+  if(ok){ h+='<p><b>'+acertos+' de '+n+'</b> peixes · meta '+meta+' · <b>+'+pontos+' pontos</b></p><p class="sub">'+falta+'</p>';
+    h+='<button class="mbtn pri" id="mOk">Voltar à fase</button>';
+    menu(h,{mOk:function(){ fechaMenu(); seguir(); }},'festa'); return; }
+  h+='<p>'+(acertos>0?'<b>+'+pontos+' pontos</b> · cada pergunta já foi um treino!':'Cada pergunta já foi um treino!')+'</p><p class="sub">Pode seguir a aventura ou jogar de novo, com outras perguntas, para pegar mais peixes. '+falta+'</p>';
+  h+='<div class="mrow"><button class="mbtn" id="mDeNovo">Tentar de novo</button><button class="mbtn pri" id="mOk">Seguir em frente</button></div>';
+  menu(h,{mOk:function(){ fechaMenu(); seguir(); }, mDeNovo:function(){ fechaMenu(); deNovo(); }},'festa');
 }
 function fimFase(f,estrelas,acertos,total,pontos,moedas){
   var h='<h2>'+esc(f.nome)+'</h2>'+estrelasHtml(estrelas);
@@ -126,7 +131,7 @@ function confirmaSair(onde){
     {mNao:function(){ fechaMenu(); JOGO.pausa(false); }, mSim:function(){ fechaMenu(); JOGO.pausa(false); fechaPergunta(); hudArena(false); if(onde==='mapa') JOGO.irMapa(); else JOGO.irGlobo(); }});
 }
 function comoJogar(cb){
-  var h='<h2>Como jogar</h2><div class="como"><div><b>Andar</b> ← → ou A D · botões ◀ ▶</div><div><b>Pular</b> ↑ W ou ESPAÇO · botão PULAR (segure para pular mais alto)</div><div><b>Cano</b> ↓ ou S em cima do cano · botão ↓</div><div><b>Arremessar pinha</b> X ou ENTER · botão de ação</div><div><b>Arena</b> bata a cabeça na caixa <b>?</b> e responda rápido: cada acerto é um peixe. Bata a meta para sair!</div><div><b>Saída</b> a bandeira só abre com todas as arenas vencidas. Cair ou encostar sendo bebê = volta ao checkpoint.</div><div><b>Mel</b> faz o urso crescer · bicho encosta = encolhe</div></div>';
+  var h='<h2>Como jogar</h2><div class="como"><div><b>Andar</b> ← → ou A D · botões ◀ ▶</div><div><b>Pular</b> ↑ W ou ESPAÇO · botão PULAR (segure para pular mais alto)</div><div><b>Cano</b> ↓ ou S em cima do cano · botão ↓</div><div><b>Arremessar pinha</b> X ou ENTER · botão de ação</div><div><b>Arena</b> bata a cabeça na caixa <b>?</b> e responda: cada acerto é um peixe. Responda quantas quiser: o <b>X</b> (ou Esc) sai na hora. A caixa prateada abre de novo para treinar mais.</div><div><b>Saída</b> a bandeira abre quando você já visitou todas as arenas ? da fase. Cair ou encostar sendo bebê = volta ao checkpoint.</div><div><b>Mel</b> faz o urso crescer · bicho encosta = encolhe</div></div>';
   h+='<div class="mrow"><button class="mbtn" id="mTreino">Fazer o Treino</button><button class="mbtn pri" id="mOk">Entendi</button></div>';
   menu(h,{mOk:function(){ fechaMenu(); if(cb) cb(); }, mTreino:function(){ fechaMenu(); if(cb) cb(); fechaPergunta(); hudArena(false); JOGO.iniciaTutorial(); }});
 }
@@ -145,7 +150,7 @@ function confirmaRecomecar(){
     {mNao:fechaMenu, mSim:function(){ fechaMenu(); JOGO.recomecar(); }});
 }
 
-return {SVG:SVG, esc:esc, hud:hud, toast:toast, pintaBotoes:pintaBotoes, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, acao:acao, perguntaArena:perguntaArena, timer:timer, esgotou:esgotou, forcaErro:forcaErro, fechaPergunta:fechaPergunta,
+return {SVG:SVG, esc:esc, hud:hud, toast:toast, pintaBotoes:pintaBotoes, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, botaoSair:botaoSair, acao:acao, perguntaArena:perguntaArena, timer:timer, esgotou:esgotou, forcaErro:forcaErro, fechaPergunta:fechaPergunta,
   menu:menu, fechaMenu:fechaMenu, fimArena:fimArena, fimFase:fimFase, creditos:creditos, pausa:pausa, confirmaSair:confirmaSair, comoJogar:comoJogar, historia:historia, confirmaCasa:confirmaCasa, confirmaRecomecar:confirmaRecomecar,
   qAberta:function(){ return qAberta; }, menuAberto:function(){ return menuAberto; }};
 })();
