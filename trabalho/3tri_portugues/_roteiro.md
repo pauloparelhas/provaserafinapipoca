@@ -73,7 +73,7 @@ vídeo (LP3_video). Banco de perguntas curtas: `ferramentas/LP3_banco.js`.
 4. Na floresta, Chapeuzinho encontrou o **Lobo Mau** e contou aonde ia.
 5. O lobo foi por um atalho e chegou antes na casa da vovó.
 6. O lobo se disfarçou de vovó e deitou na cama.
-7. Diálogo: "Vovó, que olhos grandes você tem! — É para te ver melhor!" · "Que orelhas grandes! — É para te ouvir melhor!" · "Que boca grande! — É para te comer!"
+7. Diálogo: "Vovó, que olhos grandes você tem! — É para te ver melhor!" · "Que orelhas grandes! — É para te ouvir melhor!" · "Que boca grande! — É para te devorar!"
 8. Um caçador ouviu, entrou e salvou Chapeuzinho e a vovó.
 - **Evitar como pergunta:** caçador × lenhador (versões diferem) e o que o lobo fez com a vovó em detalhe. Usar sempre "o caçador".
 
@@ -173,7 +173,7 @@ Sem "bem-vindos", sem falar em prova, sem metalinguagem. Só conteúdo, tom de c
 Cenário de cada cena = o próprio assunto (floresta da Chapeuzinho, pé de feijão, etc.).
 
 1. **Contos de fadas.** "Era uma vez... É assim que começam os contos de fadas. Neles tem mocinho, tem vilão, tem um lugar como a floresta ou o castelo, tem magia, um problema para resolver, e um final feliz: e viveram felizes para sempre."
-2. **Chapeuzinho Vermelho.** "Chapeuzinho Vermelho levava uma cesta de doces para a vovó doente. A mãe avisou: não saia do caminho! Mas na floresta apareceu o Lobo Mau. Ele correu pelo atalho e chegou antes. Deitou na cama, vestido de vovó. — Vovó, que olhos grandes você tem! — É para te ver melhor! — Que boca grande! — É para te comer! Ainda bem que o caçador ouviu e salvou as duas."
+2. **Chapeuzinho Vermelho.** "Chapeuzinho Vermelho levava uma cesta de doces para a vovó doente. A mãe avisou: não saia do caminho! Mas na floresta apareceu o Lobo Mau. Ele correu pelo atalho e chegou antes. Deitou na cama, vestido de vovó. — Vovó, que olhos grandes você tem! — É para te ver melhor! — Que boca grande! — É para te devorar! Ainda bem que o caçador ouviu e salvou as duas."
 3. **João e o pé de feijão.** "João trocou a vaca da família por feijões mágicos. A mãe ficou brava e jogou os feijões pela janela. De noite, nasceu um pé de feijão gigante, até as nuvens. Lá em cima, João achou o castelo do Gigante, e levou a galinha dos ovos de ouro. O Gigante desceu atrás dele, mas João cortou o pé de feijão com o machado. E o Gigante caiu."
 4. **Paráfrase e paródia.** "Contar a mesma história com outras palavras, sem mudar nada do que acontece, é fazer uma paráfrase. A menina da capa vermelha foi levar guloseimas para a avó: é a mesma história. Agora, se a gente muda a história de propósito, para ficar diferente ou engraçada, é uma paródia. Chapeuzinho Verde foi de bicicleta levar pizza para o vovô! Mudou a história? É paródia. Não mudou? É paráfrase."
 5. **Letra H.** "Algumas palavras começam com H. O H no começo não faz som nenhum. Hoje, hora, homem, hipopótamo, helicóptero, hospital, história. A gente fala oje, mas escreve com H: hoje."

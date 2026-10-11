@@ -149,7 +149,7 @@ SCENES.chapeu = (ctx, lt, S) => {
     bubble(ctx, 330, 160, 'Que olhos grandes!', pop(lt, S.w('olhos') - .4) * (1 - ap(lt, S.f(7) - .2, .3)), 230, 400, { size: 30 });
     bubble(ctx, 820, 150, 'É para te ver melhor!', pop(lt, S.f(6)) * (1 - ap(lt, S.f(7) - .2, .3)), 640, 290, { size: 30 });
     bubble(ctx, 330, 160, 'Que boca grande!', pop(lt, S.f(7)) * (1 - ap(lt, S.w('caçador'), .3)), 230, 400, { size: 30 });
-    bubble(ctx, 820, 150, 'É para te comer!', pop(lt, S.f(8)) * (1 - ap(lt, S.w('caçador'), .3)), 640, 290, { size: 34, color: '#c92a2a' });
+    bubble(ctx, 820, 150, 'É para te devorar!', pop(lt, S.f(8)) * (1 - ap(lt, S.w('caçador'), .3)), 640, 290, { size: 34, color: '#c92a2a' });
     bear(ctx, 1190, 615, .48, { t: lt, look: -1, jump: Math.max(0, Math.sin(clamp((lt - S.w('comer')) / .5) * PI)), wave: ap(lt, S.w('salvou'), .4) });
     const hk = ap(lt, S.w('caçador') - .2, .8);
     if (hk > 0) {
