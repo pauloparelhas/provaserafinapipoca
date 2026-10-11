@@ -93,7 +93,7 @@ function Tarefa(props){
     h('p',{className:'pede'},t.cmd),
     t.quadro && h('div',Object.assign({className:'quadro'},html(t.quadro))),
     h('label',{className:'esclab', htmlFor:'esc-'+t.id},'Escreva no caderno ou aqui embaixo:'),
-    h('textarea',{id:'esc-'+t.id, className:'escarea', rows:t.linhas||3, value:texto,
+    h('textarea',{id:'esc-'+t.id, className:'escarea', rows:Math.max(3,t.linhas||3), value:texto,
       spellCheck:false, autoCapitalize:'characters', autoComplete:'off',
       onChange:function(e){ setTexto(e.target.value); }}),
     h('div',{className:'linhabtn'},
