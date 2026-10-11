@@ -34,6 +34,10 @@ if i>=0:
 open(sys.argv[2],'w',encoding='utf-8').write(s)
 EOF
 rm "$W/index.src.html"
+# carimbo de versao: ?v=BUILD em todo recurso + vigia que forca a versao nova
+# em aparelho que ja visitou o site (cache de 10 min do Pages, SW antigo)
+BUILD="$(git -C "$SRC" rev-parse --short HEAD)$(date +%H%M)"
+python "$SRC/trabalho/3tri_portugues/carimbo_versao.py" "$W" "$BUILD"
 cd "$W"
 git add -A
 if git diff --cached --quiet; then echo "nada mudou"; else
