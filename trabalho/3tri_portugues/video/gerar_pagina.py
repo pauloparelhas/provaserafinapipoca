@@ -97,7 +97,7 @@ h2{{font-size:calc(1.02rem*var(--fs));font-weight:900;margin:20px 0 10px;color:v
         Toque numa parte da lista para pular direto para ela.</p>
 
       <video id="vid" controls playsinline preload="metadata" poster="media/video_lp3_poster.jpg">
-        <source src="media/video_lp3_pt.mp4" type="video/mp4">
+        <source src="media/video_lp3_pt.mp4?v=20261012b" type="video/mp4">
         Se o vídeo não abrir aqui, peça para um adulto abrir o arquivo
         <b>media/video_lp3_pt.mp4</b>.
       </video>

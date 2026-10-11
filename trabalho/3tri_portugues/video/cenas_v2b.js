@@ -130,9 +130,9 @@ SCENES.parodia = (ctx, lt, S) => {
         if (kt > 0) popAt(ctx, kt, 710, y + 28, () => txtWrap(ctx, text, 710, y + 28, 940, 30, txtCol, 'center', 900));
       });
     };
-    line(345, pop(lt, S.w('melodia') - .1), 'original', '#868e96', 'Atirei o pau no gato', '#495057', pop(lt, S.w('atirei') - .1));
+    line(345, pop(lt, S.w('melodia') - .1), 'original', '#868e96', 'Ciranda, cirandinha, vamos todos cirandar', '#495057', pop(lt, S.f(3) - .1));
     withT(ctx, 640, 425, 1.3, PI / 2, () => arrowR(ctx, 0, 0, ap(lt, S.w('virou') - .1, .4), '#c2255c'));
-    line(505, pop(lt, S.w('letra') - .1), 'paródia', '#c2255c', 'Não atire o pau no gato, porque isso não se faz.', '#c2255c', pop(lt, S.f(4) - .1));
+    line(505, pop(lt, S.w('letra') - .1), 'paródia', '#c2255c', 'Ciranda, cirandinha, vamos todos estudar!', '#c2255c', pop(lt, S.f(4) - .1));
     ctx.restore();
   }
   bear(ctx, 1222, 665, .3, { t: lt, look: -1 });

@@ -42,7 +42,7 @@ var FAMILIAS = [
   {k:'ggu',    bloco:'A', cota:1, nome:'G ou GU',               cor:'#fb923c',
    truque:'GA, GO, GU: só o G. Antes de E e I, para soar guê, entra o U quietinho: GUE, GUI.'},
   {k:'cqu',    bloco:'A', cota:1, nome:'C ou QU',               cor:'#34d399',
-   truque:'CA, CO, CU: só o C. Antes de E e I, o som de quê vira QUE, QUI, com o U quietinho.'},
+   truque:'C com A, O e U (casa, copo, cubo): só o C. Antes de E e I, o som de quê vira QUE, QUI, com o U quietinho.'},
   {k:'dig',    bloco:'A', cota:1, nome:'CH · NH · LH',          cor:'#2dd4bf',
    truque:'CH, NH, LH: duas letras, um som só. Leia a palavra com cada dupla: só uma existe.'},
   {k:'plural', bloco:'A', cota:1, nome:'Plural',                cor:'#f87171',
@@ -78,7 +78,7 @@ var LAC = {
         proximo:'Depois da lacuna vem E ou I? Para soar guê, ponha GU.'},
   cqu: {enun:'COMPLETE AS PALAVRAS COM C OU QU:',
         dica:'Se depois da lacuna vem E ou I e o som é de quê, precisa de QU.',
-        regra:'CA, CO, CU levam só o C. Antes de E e I, o som de quê se escreve QU, com o U quietinho.',
+        regra:'Com A, O e U (casa, copo, cubo), vai só o C. Antes de E e I, o som de quê se escreve QU, com o U quietinho.',
         proximo:'Depois da lacuna vem E ou I? Para soar quê, ponha QU.'},
   dig: {enun:'COMPLETE AS PALAVRAS COM CH, NH OU LH:',
         dica:'Leia baixinho cada palavra com CH, com NH e com LH. Só uma forma vira palavra de verdade.',
@@ -368,13 +368,13 @@ lac('SJG5','jg', ['RELÓ[G]IO','[J]ILÓ','SU[J]EIRA','[G]IRASSOL','FEI[J]ÃO'], 
 {id:'SJG8', eixo:'jg', tipo:'qual está escrita certo',
  pede:'EM QUAL GRUPO TODAS AS PALAVRAS ESTÃO ESCRITAS CERTO?',
  opts:[
-  {t:'JACARÉ · GELO · CAJU', ok:1},
-  {t:'GACARÉ · GELO · CAJU', no:'GACARÉ não existe: o certo é JACARÉ.'},
-  {t:'JACARÉ · JELO · CAJU', no:'JELO não existe: o certo é GELO.'},
-  {t:'JACARÉ · GELO · CAGU', no:'CAGU não existe: o certo é CAJU.'}
+  {t:'JACARÉ · GELO · JUBA', ok:1},
+  {t:'GACARÉ · GELO · JUBA', no:'GACARÉ não existe: o certo é JACARÉ.'},
+  {t:'JACARÉ · JELO · JUBA', no:'JELO não existe: o certo é GELO.'},
+  {t:'JACARÉ · GELO · GUBA', no:'GUBA não existe: o certo é JUBA.'}
  ],
  dica:'Confira as três palavras de cada grupo.',
- porque:'JACARÉ e CAJU têm J (JA, JU); GELO tem G.',
+ porque:'JACARÉ e JUBA têm J (JA, JU); GELO tem G.',
  proximo:'Uma palavra errada já estraga o grupo.'},
 
 {id:'SJG9', eixo:'jg', tipo:'qual está escrita certo',
@@ -489,7 +489,7 @@ lac('SCQ4','cqu', ['[QU]ENTE','[C]UTIA','MOLE[QU]E','[QU]ILO','[C]AJU'], ['C C Q
   {t:'CASA · QUIABO · QUUBO', no:'QUUBO não existe: o certo é CUBO.'}
  ],
  dica:'Confira as três palavras de cada grupo.',
- porque:'CASA e CUBO têm C (CA, CU); QUIABO tem QUI.',
+ porque:'CASA e CUBO têm C (C com A, C com U); QUIABO tem QUI.',
  proximo:'Uma palavra errada já estraga o grupo.'},
 
 {id:'SCQ8', eixo:'cqu', tipo:'regra',
@@ -648,11 +648,11 @@ ITENS.push(
   {t:'CAVALO', no:'CASA e CAVALO começam com CA. Na 3ª letra, S vem antes de V: CASA vem antes.'},
   {t:'COPO', no:'CO vem depois de CA: CASA e CAVALO vêm antes.'},
   {t:'CASA', ok:1},
-  {t:'CUBO', no:'CU vem depois de CA e de CO.'}
+  {t:'CUBO', no:'Em CUBO, a 2ª letra é U, que vem depois de A e de O.'}
  ],
  dica:'Todas começam com C. Olhe a 2ª letra; se empatar, olhe a 3ª.',
  visual:'<div class="pcs"><span class="pc">CA<span class="mk">S</span>A</span><span class="pc">CA<span class="mk">V</span>ALO</span><span class="pc">C<span class="mk">O</span>PO</span><span class="pc">C<span class="mk">U</span>BO</span></div>',
- porque:'CA vem antes de CO e de CU. Entre CASA e CAVALO, a 3ª letra decide: S vem antes de V.',
+ porque:'Na 2ª letra, A vem antes de O e de U. Entre CASA e CAVALO, a 3ª letra decide: S vem antes de V.',
  proximo:'Empatou? Ande uma letra para a direita e compare de novo.'},
 
 {id:'SDC3', eixo:'dic', tipo:'qual vem primeiro',
@@ -1199,29 +1199,29 @@ ITENS.push(
  proximo:'Paródia = imita + muda de propósito. Se só trocou palavras, é paráfrase.'},
 
 {id:'SPD5', eixo:'parodia', tipo:'paródia de música',
- enun:'LEIA:', quadro:'MÚSICA ORIGINAL: ATIREI O PAU NO GATO.<div class="sep"></div>PARÓDIA: NÃO ATIRE O PAU NO GATO, PORQUE ISSO NÃO SE FAZ.',
+ enun:'LEIA:', quadro:'MÚSICA ORIGINAL: CIRANDA, CIRANDINHA, VAMOS TODOS CIRANDAR.<div class="sep"></div>PARÓDIA: CIRANDA, CIRANDINHA, VAMOS TODOS ESTUDAR!',
  pede:'NESSA PARÓDIA DE MÚSICA, O QUE FICOU IGUAL?',
  opts:[
-  {t:'A LETRA: NENHUMA PALAVRA MUDOU.', no:'A letra mudou: "atirei" virou "não atire".'},
+  {t:'A LETRA: NENHUMA PALAVRA MUDOU.', no:'A letra mudou: "cirandar" virou "estudar".'},
   {t:'A MELODIA: CANTA-SE DO MESMO JEITO.', ok:1},
   {t:'NADA: NÃO DÁ PARA RECONHECER A MÚSICA ORIGINAL.', no:'Dá para reconhecer: é a mesma música, cantada do mesmo jeito.'},
-  {t:'O BICHO: AGORA A MÚSICA É SOBRE UM CACHORRO.', no:'O bicho continua sendo o gato.'}
+  {t:'A MÚSICA: AGORA É OUTRA CANTIGA, A "BORBOLETINHA".', no:'Não virou outra cantiga: dá para reconhecer a "Ciranda, cirandinha", cantada do mesmo jeito.'}
  ],
  dica:'Cante as duas. O jeito de cantar muda?',
  porque:'Na paródia de música, a melodia continua a mesma e a letra muda.',
  proximo:'Paródia de música: mesma melodia, letra nova.'},
 
 {id:'SPD6', eixo:'parodia', tipo:'paródia de música',
- enun:'LEIA:', quadro:'MÚSICA ORIGINAL: ATIREI O PAU NO GATO.<div class="sep"></div>PARÓDIA: NÃO ATIRE O PAU NO GATO, PORQUE ISSO NÃO SE FAZ.',
+ enun:'LEIA:', quadro:'MÚSICA ORIGINAL: CIRANDA, CIRANDINHA, VAMOS TODOS CIRANDAR.<div class="sep"></div>PARÓDIA: CIRANDA, CIRANDINHA, VAMOS TODOS ESTUDAR!',
  pede:'O QUE MUDOU NESTA PARÓDIA?',
  opts:[
   {t:'A MELODIA: AGORA SE CANTA DE OUTRO JEITO.', no:'A melodia é a mesma. O que mudou foi a letra.'},
-  {t:'O GATO VIROU UM CACHORRO.', no:'O bicho continua sendo o gato.'},
-  {t:'NADA MUDOU.', no:'Mudou a letra: "atirei" virou "não atire... porque isso não se faz".'},
-  {t:'A LETRA: AGORA ELA ENSINA A NÃO MALTRATAR O GATO.', ok:1}
+  {t:'VIROU OUTRA MÚSICA: "PARABÉNS A VOCÊ".', no:'Continua sendo a "Ciranda, cirandinha": a melodia é a mesma.'},
+  {t:'NADA MUDOU.', no:'Mudou a letra: "cirandar" virou "estudar".'},
+  {t:'A LETRA: "CIRANDAR" VIROU "ESTUDAR".', ok:1}
  ],
  dica:'Compare as palavras das duas.',
- porque:'A letra mudou de propósito: agora ela ensina a não maltratar o gato. A melodia é a mesma.',
+ porque:'A letra mudou de propósito: "cirandar" virou "estudar". A melodia é a mesma.',
  proximo:'Paródia de música: mesma melodia, letra nova.'},
 
 {id:'SPD7', eixo:'parodia', tipo:'paráfrase ou paródia',

@@ -54,14 +54,13 @@ SCENES.invent = (ctx, lt, S) => {
   sceneTag(ctx, 'Invenções e descobertas', ap(lt, .2));
 };
 
-/* ---------- 10. CA CO CU / QUE QUI ---------- */
+/* ---------- 10. C ou QU (versao antiga; a que vale e a de cenas_v2c.js) ---------- */
 SCENES.caque = (ctx, lt, S) => {
   sky(ctx, '#d3f9d8', '#fff9db');
   pine(ctx, 60, 600, .9, '#40c057'); pine(ctx, 1240, 600, 1, '#2f9e44');
   ctx.fillStyle = '#b2f2bb'; ctx.fillRect(0, 590, W, 130);
   const OR = '#e8590c';
   const c1 = cardRow(ctx, ['[c]asa', '[c]opo', '[c]ubo'], 560, 150, 42, [pop(lt, S.w('casa')), pop(lt, S.w('copo')), pop(lt, S.w('cubo'))], { hl: OR });
-  ['CA', 'CO', 'CU'].forEach((g, i) => chip(ctx, g, c1[i], 222, 26, OR, '#fff', pop(lt, S.w(['cá', 'cô', 'cu'][i]))));
   popAt(ctx, pop(lt, S.w('casa')), 1010, 175, () => smallHouse(ctx, 1010, 205, .9));
   popAt(ctx, pop(lt, S.w('copo')), 1120, 175, () => cup(ctx, 1120, 180, .6));
   popAt(ctx, pop(lt, S.w('cubo')), 1220, 175, () => cube(ctx, 1215, 180, .7));
@@ -74,7 +73,7 @@ SCENES.caque = (ctx, lt, S) => {
   popAt(ctx, pop(lt, S.w('queijo')), 1000, 540, () => cheese(ctx, 1000, 545, .75));
   popAt(ctx, pop(lt, S.w('esquilo')), 1150, 600, () => squirrel(ctx, 1150, 600, .9, lt));
   bear(ctx, 170, 612, .48, { t: lt, look: 1 });
-  sceneTag(ctx, 'CA, CO, CU · QUE, QUI', ap(lt, .2));
+  sceneTag(ctx, 'C ou QU', ap(lt, .2));
 };
 
 /* ---------- 11. CH, NH, LH ---------- */

@@ -61,8 +61,8 @@ CENAS = [
     ("os três porquinhos fizeram casas de chocolate!", "os três porquinhos fizeram casas de chocolate!"),
     ("Dá para fazer paródia de música também: a mesma melodia, com a letra nova.",
      "Dá para fazer paródia de música também: a mesma melodia, com a letra nova."),
-    ("“Atirei o pau no gato” virou:", "Atirei o pau no gato virou:"),
-    ("“Não atire o pau no gato, porque isso não se faz.”", "não atire o pau no gato, porque isso não se faz."),
+    ("“Ciranda, cirandinha, vamos todos cirandar” virou:", "Ciranda, cirandinha, vamos todos cirandar virou:"),
+    ("“Ciranda, cirandinha, vamos todos estudar!”", "ciranda, cirandinha, vamos todos estudar!"),
   ]),
   ("pp", "Paráfrase ou paródia?", [
     ("Para saber, pergunte:", "Para saber, pergunte:"),

@@ -9,7 +9,9 @@ Saidas (em OUT, por padrao o scratch passado por argumento):
   timeline.js          o mesmo, como `window.TL = {...}` para a pagina de render
 
 NAO toca nenhum audio (regra do dono).
-Uso: python gerar_audio.py <pasta_saida>
+Uso: python gerar_audio.py <pasta_saida> [pasta_antiga]
+  Com pasta_antiga (scratch de uma geracao anterior), a frase cujo texto_tts nao mudou
+  reaproveita o mp3 e as palavras de la; so as frases novas/alteradas vao ao edge-tts.
 """
 import asyncio, json, os, subprocess, sys, wave, re, unicodedata
 
@@ -27,6 +29,15 @@ T_FIM = 2.0         # cauda final
 
 OUT = sys.argv[1] if len(sys.argv) > 1 else "out"
 os.makedirs(os.path.join(OUT, "frases"), exist_ok=True)
+OLD = sys.argv[2] if len(sys.argv) > 2 else None
+OLD_TL = {}
+if OLD:
+    _tl = json.load(open(os.path.join(OLD, "timeline.json"), encoding="utf-8"))
+    for _ci, _c in enumerate(_tl["cenas"]):
+        for _fi, _f in enumerate(_c["frases"]):
+            _ws = [{"t": p["ini"] - _f["ini"], "d": p["fim"] - p["ini"], "w": p["w"]}
+                   for p in _c["palavras"] if p["f"] == _fi]
+            OLD_TL[(_c["id"], _f["tts"])] = (os.path.join(OLD, "frases", f"{_ci+1:02d}_{_fi+1:02d}.mp3"), _ws)
 
 import edge_tts
 
@@ -74,14 +85,22 @@ async def main():
         silence(LEAD)
         for fi, (leg, txt) in enumerate(frases):
             mp3 = os.path.join(OUT, "frases", f"{ci+1:02d}_{fi+1:02d}.mp3")
-            for tent in range(4):
+            velho = OLD_TL.get((cid, txt))
+            if velho and os.path.exists(velho[0]):
+                import shutil
+                if os.path.abspath(velho[0]) != os.path.abspath(mp3):
+                    shutil.copy(velho[0], mp3)
+                words = velho[1]
+                print("  reaproveitada", mp3)
+            for tent in ([] if velho and os.path.exists(velho[0]) else range(4)):
                 try:
                     words = await tts(txt, mp3)
                     break
                 except Exception as e:
                     print("  retry", mp3, e); await asyncio.sleep(2)
             else:
-                raise SystemExit("TTS falhou: " + mp3)
+                if not (velho and os.path.exists(velho[0])):
+                    raise SystemExit("TTS falhou: " + mp3)
             raw = to_pcm(mp3)
             dur = len(raw) / 2 / SR
             dprobe = ffprobe_dur(mp3)

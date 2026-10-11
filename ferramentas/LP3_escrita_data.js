@@ -63,8 +63,8 @@ window.LP3E_BANCO = [
 
 {id:'E07', tipo:'Paródia de música', grupo:'texto', linhas:3,
  cmd:'FAÇA UMA PARÓDIA DA MÚSICA: MUDE A LETRA, MAS CANTE COM A MESMA MELODIA.',
- quadro:'ATIREI O PAU NO GATO.',
- modelo:'NÃO ATIRE O PAU NO GATO, PORQUE ISSO NÃO SE FAZ.',
+ quadro:'CIRANDA, CIRANDINHA, VAMOS TODOS CIRANDAR.',
+ modelo:'CIRANDA, CIRANDINHA, VAMOS TODOS ESTUDAR!',
  confere:['A letra mudou de propósito.',
           'Dá para cantar do mesmo jeito da música original.']},
 
@@ -108,7 +108,7 @@ window.LP3E_BANCO = [
  cmd:'COMPLETE AS PALAVRAS COM C OU QU. DEPOIS, ESCREVA-AS INTEIRAS:',
  quadro:'<div class="lacs"><span class="lac"><span class="lb"></span>ASA</span><span class="lac"><span class="lb"></span>EIJO</span><span class="lac">ES<span class="lb"></span>ILO</span><span class="lac"><span class="lb"></span>OPO</span><span class="lac">MÁ<span class="lb"></span>INA</span><span class="lac"><span class="lb"></span>UBO</span></div>',
  modelo:'CASA · QUEIJO · ESQUILO · COPO · MÁQUINA · CUBO',
- confere:['CA, CO, CU: só C (casa, copo, cubo).',
+ confere:['C com A, O e U: só C (casa, copo, cubo).',
           'Antes de E e I: QU (queijo, esquilo, máquina).']},
 
 {id:'E14', tipo:'Complete as palavras', grupo:'palavra', linhas:2,
