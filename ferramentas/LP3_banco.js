@@ -50,8 +50,7 @@ var ITENS = [
  dica:'Mágico é o que não acontece de verdade.',ex:'Os feijões mágicos fazem nascer um pé de feijão até as nuvens.'},
 {id:'co7',tema:'conto',p:'Qual destes é um conto de fadas?',o:['Os Três Porquinhos','A lista do mercado','O calendário'],c:0,
  dica:'Procure a história com "Era uma vez".',ex:'Os Três Porquinhos é um conto de fadas.'},
-{id:'co8',tema:'conto',p:'Onde muitos contos de fadas acontecem?',o:['Na floresta ou no castelo','No supermercado','No aeroporto'],c:0,
- dica:'Lembre da Chapeuzinho e do João.',ex:'Floresta (Chapeuzinho) e castelo (o Gigante) são lugares de conto de fadas.'},
+
 
 /* ---------------- CHAPEUZINHO VERMELHO ---------------- */
 {id:'ch1',tema:'chapeu',p:'Para quem a Chapeuzinho levava a cesta de doces?',o:['Para a vovó','Para o lobo','Para o caçador'],c:0,
@@ -264,6 +263,126 @@ var ITENS = [
  dica:'Plural é mais de um.',ex:'COELHOS: mais de um coelho.'}
 ];
 
+/* ============================================================
+   PERGUNTAS RÁPIDAS (tipo:'rapida') — geradas de listas de palavras.
+   Cada distrator foi conferido À MÃO: com a letra errada, a palavra
+   NÃO pode virar outra palavra que existe (o banco v1 tinha ___ATO+J =
+   JATO e NI___O+CH = NICHO). Palavras que caíam nessa armadilha ficaram
+   de fora: HORA (ORA), JOGO (GOGÓ), BERINJELA (BERINGELA), MILHO
+   (MINHO), GALHO (GANHO), TELHA (TENHA), BICHO, NINHO com CH.
+   ============================================================ */
+var EXPL_H='O H no começo não tem som, mas é escrito.';
+function maisH(){
+  var com=['HOJE','HOMEM','HOTEL','HOSPITAL','HIPOPÓTAMO','HELICÓPTERO','HISTÓRIA','HORTA','HINO','HERÓI','HÉLICE','HORTELÃ','HARPA','HIGIENE','HUMANO'];
+  var sem=['OVO','ILHA','UVA','ABELHA','ELEFANTE','OLHO','ESCOLA','ANEL'];
+  com.forEach(function(w,i){ ITENS.push({id:'rh'+i,tema:'h',tipo:'rapida',p:'Qual está escrita certo?',o:[w,w.slice(1)],c:0,
+    dica:'Será que ela começa com a letra que não faz som?',ex:w+' começa com H. '+EXPL_H}); });
+  sem.forEach(function(w,i){ ITENS.push({id:'rs'+i,tema:'h',tipo:'rapida',p:'Qual está escrita certo?',o:[w,'H'+w],c:0,
+    dica:'Nem toda palavra que começa com vogal tem H.',ex:w+' não tem H: começa direto com a vogal.'}); });
+}
+/* lacuna: [antes, letra certa, depois] */
+function lacunas(tema,pref,lista,ops,dica,regra){
+  lista.forEach(function(x,i){
+    var palavra=x[0]+x[1]+x[2];
+    var o=[x[1]].concat(ops.filter(function(l){ return l!==x[1]; }));
+    ITENS.push({id:pref+i,tema:tema,tipo:'rapida',p:'Complete: '+x[0]+'___'+x[2]+(x[3]?' ('+x[3]+')':''),o:o,c:0,
+      dica:dica,ex:palavra+'. '+regra(x)});
+  });
+}
+function regraJG(x){ var v=(x[2][0]||''); return /[AOUÃÕ]/.test(v)?'Antes de '+v+', o som de jê é sempre J.':'Antes de E e I pode ser J ou G: esta se escreve com '+x[1]+'.'; }
+function regraGGU(x){ return x[1]==='GU'?'Antes de E e I, o som de guê precisa do U quietinho.':
+  (/[EI]/.test(x[2][0])?'GE e GI fazem som de jê. Esta palavra tem som de jê: só G.':'Antes de A, O e U, o G já soa guê sozinho.'); }
+function regraCQU(x){ return x[1]==='QU'?'Antes de E e I, o som de quê se escreve com QU.':'Antes de A, O e U, o som de quê é só com C.'; }
+function regraDIG(x){ return x[1]+': duas letras, um som só.'; }
+
+maisH();
+lacunas('jg','rj',[
+ ['','J','ANELA'],['','J','ACARÉ'],['','J','ABUTI'],['','J','OIA'],['','J','UBA'],['CA','J','U','fruta'],['LARAN','J','A'],
+ ['QUEI','J','O'],['FEI','J','ÃO'],['BEI','J','O'],['','J','EITO'],['','J','ILÓ'],['','J','IPE','carro'],['CAN','J','ICA'],['SU','J','EIRA'],
+ ['','G','ELO'],['','G','ENTE'],['','G','ELADEIRA'],['','G','IRAFA'],['','G','IGANTE'],['','G','IRASSOL'],['MÁ','G','ICO'],
+ ['TI','G','ELA'],['PÁ','G','INA'],['RELÓ','G','IO']
+],['J','G'],'Antes de A, O, U: sempre J. Antes de E, I: lembre como a palavra se escreve.',regraJG);
+lacunas('ggu','rg',[
+ ['','G','ATO','bicho que mia'],['','G','ALINHA'],['','G','OLA'],['','G','ORILA'],['FO','G','O'],['LA','G','O'],
+ ['','GU','ERRA'],['FO','GU','ETE'],['FO','GU','EIRA'],['MAN','GU','EIRA'],['FORMI','GU','EIRO'],['','GU','ITARRA'],
+ ['Á','GU','IA'],['','GU','INDASTE'],['PRE','GU','IÇA'],
+ ['','G','ELO','água congelada'],['','G','IRAFA']
+],['G','GU'],'Som de guê antes de E ou I precisa do U. GE e GI soam jê.',regraGGU);
+lacunas('cqu','rc',[
+ ['','C','ASA'],['','C','AVALO'],['','C','AMA'],['','C','OPO'],['','C','OELHO'],['','C','ORUJA'],['','C','UBO'],['','C','UTIA'],
+ ['','QU','EIJO'],['','QU','ENTE'],['LE','QU','E'],['','QU','IABO'],['','QU','ILO'],['ES','QU','ILO'],['PERI','QU','ITO'],
+ ['MÁ','QU','INA'],['MOS','QU','ITO'],['CA','QU','I']
+],['C','QU'],'Antes de A, O, U: C. Antes de E, I: QU.',regraCQU);
+lacunas('dig','rd',[
+ ['','CH','AVE'],['','CH','UVA'],['','CH','APÉU'],['','CH','OCOLATE'],['','CH','INELO'],['CA','CH','ORRO'],
+ ['GALI','NH','A'],['BA','NH','O'],['U','NH','A'],['ARA','NH','A'],['COZI','NH','A'],['SO','NH','O'],['CAMI','NH','O'],['DI','NH','EIRO'],
+ ['FO','LH','A'],['PA','LH','A'],['COE','LH','O'],['ABE','LH','A'],['O','LH','O'],['OVE','LH','A'],['JOE','LH','O']
+],['CH','NH','LH'],'Fale a palavra devagar e escute o som do meio.',regraDIG);
+/* NINHO à parte: com CH viraria NICHO */
+ITENS.push({id:'rdn',tema:'dig',tipo:'rapida',p:'Complete: NI___O (casa do passarinho)',o:['NH','LH'],c:0,dica:'Fale NI-NHO.',ex:'NINHO: NH.'});
+
+/* plural: [singular, certo, errado1, errado2, regra] */
+[['OVO','OVOS','OVOES','OVONS','termina em vogal: põe S'],
+ ['PORQUINHO','PORQUINHOS','PORQUINHOES','PORQUINHONS','termina em vogal: põe S'],
+ ['COLHER','COLHERES','COLHERS','COLHERIS','termina em R: põe ES'],
+ ['MAR','MARES','MARS','MARIS','termina em R: põe ES'],
+ ['NARIZ','NARIZES','NARIZS','NARIZIS','termina em Z: põe ES'],
+ ['BOTÃO','BOTÕES','BOTÃOS','BOTÃOES','ÃO vira ÕES'],
+ ['LIMÃO','LIMÕES','LIMÃOS','LIMÃOES','ÃO vira ÕES'],
+ ['LEÃO','LEÕES','LEÃOS','LEÃOES','ÃO vira ÕES'],
+ ['JORNAL','JORNAIS','JORNALS','JORNALES','AL vira AIS'],
+ ['VARAL','VARAIS','VARALS','VARALES','AL vira AIS'],
+ ['ANZOL','ANZÓIS','ANZOLS','ANZOLES','OL vira ÓIS'],
+ ['TREM','TRENS','TREMS','TREMES','M vira NS'],
+ ['FLOR','FLORES','FLORS','FLORIS','termina em R: põe ES'],
+ ['CASA','CASAS','CASAES','CASANS','termina em vogal: põe S']
+].forEach(function(x,i){ ITENS.push({id:'rp'+i,tema:'plural',tipo:'rapida',p:'Plural de '+x[0]+':',o:[x[1],x[2],x[3]],c:0,
+  dica:'Olhe como a palavra termina.',ex:x[0]+' → '+x[1]+': '+x[4]+'.'}); });
+
+/* dicionário: qual vem primeiro / por último */
+function ordena(a){ return a.slice().sort(function(x,y){ return x.localeCompare(y,'pt'); }); }
+[['BALA','BOLA','BULE'],['GATO','LOBO','URSO'],['CASA','COPO','CUBO'],['ABELHA','BOLA','CASA'],['FADA','FOGO','FUMAÇA'],
+ ['LOBO','LUA','LAGO'],['MESA','MAPA','MOLA'],['PATO','PIPA','PENA'],['VACA','VELA','VIOLA'],['SAPO','SOL','SINO'],
+ ['CASA','CAVALO','CAMA'],['JOÃO','GIGANTE','HARPA']
+].forEach(function(t,i){
+  var ord=ordena(t), ult=i%3===2;
+  var certo=ult?ord[2]:ord[0];
+  var o=[certo].concat(t.filter(function(w){ return w!==certo; }));
+  ITENS.push({id:'rdc'+i,tema:'dic',tipo:'rapida',p:'Qual vem '+(ult?'POR ÚLTIMO':'PRIMEIRO')+' no dicionário?',o:o,c:0,
+    dica:'Compare a primeira letra. Se for igual, compare a segunda.',ex:'Ordem: '+ord.join(' · ')+'.'});
+});
+
+/* paráfrase × paródia: frases novas (não só Chapeuzinho e João) */
+[['Os três porquinhos fizeram casas de chocolate, e o lobo comeu todas.','Paródia','casas de chocolate mudam a história'],
+ ['Três irmãos porquinhos construíram suas casas: uma de palha, uma de madeira e uma de tijolos.','Paráfrase','é a mesma história com outras palavras'],
+ ['A menina de capuz vermelho atravessou a mata para visitar a avó.','Paráfrase','mata é floresta; nada mudou'],
+ ['Chapeuzinho Vermelho levou o celular e chamou a polícia quando viu o lobo.','Paródia','o celular muda a história de propósito'],
+ ['O garoto subiu pelo pé de feijão e chegou ao castelo nas nuvens.','Paráfrase','é o que acontece na história, com outras palavras'],
+ ['João subiu no pé de feijão e encontrou um gigante que só queria um amigo para jogar videogame.','Paródia','o gigante do videogame foi inventado para ficar engraçado'],
+ ['O lobo se vestiu de vovó e deitou na cama dela.','Paráfrase','é o que acontece na história'],
+ ['O Lobo Mau abriu uma loja de doces e ficou amigo de todos.','Paródia','o final mudou de propósito']
+].forEach(function(x,i){ ITENS.push({id:'rpp'+i,tema:'parodia',tipo:'rapida',p:'"'+x[0]+'" Isso é...',o:x[1]==='Paródia'?['Paródia','Paráfrase']:['Paráfrase','Paródia'],c:0,
+  dica:'Mudou o que acontece na história original?',ex:x[1]+': '+x[2]+'.'}); });
+
+/* invenção × descoberta */
+[['A roda','Invenção'],['A lâmpada','Invenção'],['O telefone','Invenção'],['O avião','Invenção'],['A bicicleta','Invenção'],
+ ['O computador','Invenção'],['A geladeira','Invenção'],['O fogo','Descoberta'],['Um animal que ninguém conhecia, encontrado na floresta','Descoberta'],
+ ['Uma planta nova encontrada na mata','Descoberta']
+].forEach(function(x,i){ ITENS.push({id:'rid'+i,tema:'invento',tipo:'rapida',p:x[0]+' é...',o:x[1]==='Invenção'?['Invenção','Descoberta']:['Descoberta','Invenção'],c:0,
+  dica:'Foi criada pelas pessoas ou já existia?',ex:x[1]==='Invenção'?'Invenção: foi criada pelas pessoas e não existia antes.':'Descoberta: já existia; alguém encontrou.'}); });
+
+/* tipo dos itens escritos à mão */
+var TIPO={h:'rapida',jg:'rapida',ggu:'rapida',cqu:'rapida',dig:'rapida',plural:'rapida',dic:'conceito',
+  conto:'conceito',parodia:'conceito',invento:'conceito',chapeu:'leitura',joao:'leitura'};
+ITENS.forEach(function(i){ if(!i.tipo) i.tipo=TIPO[i.tema]; });
+
+function embaralha(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
+
 return {TEMAS:TEMAS, ITENS:ITENS,
-  doTema:function(k){ return ITENS.filter(function(i){ return i.tema===k; }); }};
+  doTema:function(k){ return ITENS.filter(function(i){ return i.tema===k; }); },
+  /* sorteia n itens dos temas pedidos (opcional: só de um tipo) */
+  sorteia:function(temas,n,tipo){
+    var pool=ITENS.filter(function(i){ return temas.indexOf(i.tema)>=0 && (!tipo||i.tipo===tipo); });
+    return embaralha(pool).slice(0,n);
+  }};
 })();
