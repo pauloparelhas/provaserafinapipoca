@@ -66,7 +66,7 @@ function parse(rows,opts){
       case 'K': L.troncos.push({x:x+T/2,y:y+T,prox:1.2,cada:3.2,bola:true}); break;
       case 'C': L.canhoes.push({x:x+T/2,y:y+T/2,prox:2,cada:3.4}); break;
       case 'p': L.inimigos.push({tipo:'polar',x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,dir:-1,v:70,voa:false,grande:true}); break;
-      case 'G': case 'X': L.travas.push({x:x,y:Math.max(0,(r-7)*T),w:T,h:(r-Math.max(0,r-7)+1)*T,tipo:ch,aberta:false,alvos:[],anim:0,avisoT:0}); break;
+      case 'G': case 'X': break; /* 11/10 (Paulo): nenhuma barreira na jogabilidade */
       case 'D': L.caixas.push({x:x+4,y:y-T,w:T-8,h:2*T,porta:true,grande:false,tipo:'porta',mundo:L.mundo,n:5,meta:4}); break;
       case 'n': L.movers.push({x:x,y:y,x0:x,y0:y,w:2*T,h:18,dx:0,dy:-4*T,per:4.5}); break;
       case 'T': L.troncos.push({x:x+T/2,y:y+T,prox:1.5,cada:3.6}); break;
