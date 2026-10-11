@@ -36,7 +36,7 @@ function canoSob(){ var u=J.urso, M=J.mundo, hw=G.URSO_W*TAM[u.tam]/2; for(var i
 function parDoCano(p){ var L=J.nivel, outro= J.mundo===L? L.sub : L; if(!outro) return null; for(var i=0;i<outro.canos.length;i++) if(outro.canos[i].id===p.id) return {cano:outro.canos[i], mundo:outro}; return null; }
 function entraCano(p){
   var par=parDoCano(p); if(!par) return; var u=J.urso;
-  if(J.mundo.mundo==='sub' && p.id==='2' && J.mundo.caixas.some(function(c){ return !c.aberta; })){ SOM.fx('tranca'); J.setaT=6; G.toast('Este cano só abre depois da arena do submundo. Siga a seta!',3000); J.in.down=false; return; }
+  if(false){ /* cano do submundo nunca tranca (Paulo, 11/10) */ SOM.fx('tranca'); J.setaT=6; G.toast('Este cano só abre depois da arena do submundo. Siga a seta!',3000); J.in.down=false; return; }
   J.estado='cano'; J.canoAnim={t:0,dur:.55,p:p,fase:'desce'}; SOM.fx('cano'); u.estado='idle';
   iris(u.x-J.cam,u.y-40,function(){
     G.trocaMundo(par.mundo.mundo); var q=par.cano; u.x=q.x+q.w/2; u.y=q.y; u.vx=0; u.vy=0; J.cam=Math.max(0,Math.min(J.mundo.w-W,u.x-W*.4)); J.clima=[]; J.troncosVivos=[]; J.pinhas=[];
