@@ -276,6 +276,24 @@ var I = {
   dig: '<circle cx="30" cy="50" r="20" fill="none" stroke="#0d9488" stroke-width="9"/>'+
     '<path d="M48 50 L94 50 M80 50 L80 64 M90 50 L90 60" stroke="#0d9488" stroke-width="9" stroke-linecap="round"/>'+
     '<circle cx="30" cy="50" r="6" fill="#5eead4"/>',
+  /* v2 (12/10): lições do conto como GÊNERO e de paráfrase/paródia */
+  cmf: '<path d="M8 50 L92 50" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 8"/>'+
+    '<circle cx="18" cy="50" r="13" fill="#fb7185"/><circle cx="50" cy="50" r="13" fill="#fbbf24"/><circle cx="82" cy="50" r="13" fill="#34d399"/>'+
+    '<text x="18" y="56" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="17" fill="#fff">1</text>'+
+    '<text x="50" y="56" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="17" fill="#fff">2</text>'+
+    '<text x="82" y="56" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="17" fill="#fff">3</text>',
+  elem: '<path d="M22 86 L64 36" stroke="#4c1d95" stroke-width="8" stroke-linecap="round"/>'+
+    '<path d="M22 86 L34 72" stroke="#f8fafc" stroke-width="8" stroke-linecap="round"/>'+
+    estrela(70,28,18)+estrela(30,22,6)+estrela(86,62,5)+estrela(50,12,4),
+  historias: '<circle cx="34" cy="56" r="28" fill="#fee2e2"/><circle cx="70" cy="56" r="28" fill="#dcfce7"/>'+
+    g(32,90,.95,P.chapeu())+g(72,92,.95,P.joao()),
+  parafrase: '<rect x="6" y="18" width="40" height="30" rx="10" fill="#c4b5fd"/><path d="M16 46 L12 58 L26 47Z" fill="#c4b5fd"/>'+
+    '<rect x="54" y="52" width="40" height="30" rx="10" fill="#a5f3fc"/><path d="M84 80 L88 92 L74 81Z" fill="#a5f3fc"/>'+
+    '<path d="M14 30 L38 30 M14 38 L32 38 M62 64 L86 64 M62 72 L80 72" stroke="#1e1b4b" stroke-width="3" stroke-linecap="round"/>'+
+    '<path d="M44 58 L56 58 M44 66 L56 66" stroke="#7c3aed" stroke-width="4" stroke-linecap="round"/>',
+  pp: '<circle cx="50" cy="50" r="40" fill="#e0e7ff"/>'+
+    '<text x="50" y="70" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="56" fill="#4f46e5">?</text>'+
+    estrela(18,22,6)+estrela(84,80,5),
   plural: balao(24,52,12,'#f87171')+'<path d="M40 50 L52 50 M47 44 L53 50 L47 56" stroke="#64748b" stroke-width="3" fill="none" stroke-linecap="round"/>'+
     balao(66,40,10,'#60a5fa')+balao(86,46,10,'#facc15')+balao(74,62,10,'#34d399')
 };
