@@ -1,24 +1,341 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Em construção</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Português — 3º trimestre</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
-  html,body{height:100%;margin:0}
-  body{display:flex;align-items:center;justify-content:center;background:#f7f5f0;color:#2b2b2b;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center;padding:16px;box-sizing:border-box}
-  h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:600;margin:0}
-  @media (prefers-color-scheme: dark){body{background:#1c1c1c;color:#eee}}
+/* ============================================================
+   HOME — Revisão Y2 (2o trimestre)
+   Uma prova por vez: a home mostra SO a materia da prova atual
+   (Matematica 19/08). O que ja foi provado sai do site — nao vira
+   "arquivo morto" que a crianca abre por engano (pedido 10/08).
+
+   HIERARQUIA (pedido 10/08): 1 destaque grande (REVISAO, com o mapa
+   mental como porta principal) + 3 destaques medios (VIDEO, MATERIAIS
+   DA TURMA, SIMULADO). Todo o resto vive recolhido em "mais jeitos".
+
+   TEMA: claro/escuro na propria home, na mesma chave de localStorage
+   das ferramentas ('cie2_theme'), para a escolha atravessar as telas.
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+
+:root{
+  /* --- tema ESCURO (padrao) --- */
+  --bg:#0d0b1e; --bg2:#141033;
+  --ink:#ffffff; --soft:rgba(255,255,255,.62); --dim:rgba(255,255,255,.42);
+  --card:rgba(255,255,255,.055); --line:rgba(255,255,255,.10);
+  --geo:#a78bfa; --geo-soft:#c4b5fd; --geo-ink:#1b1140;
+  --hot:#f87171; --hot-bg:rgba(239,68,68,.12); --hot-line:rgba(239,68,68,.4);
+  --warm:#fde68a; --warm-bg:rgba(250,204,21,.07); --warm-line:rgba(250,204,21,.3);
+  --sh:0 14px 34px rgba(0,0,0,.34);
+  --grad:linear-gradient(135deg,#a78bfa,#f472b6,#fb923c);
+}
+body.light{
+  --bg:#eef5ff; --bg2:#e2f3ea;
+  --ink:#0c2033; --soft:rgba(12,32,51,.68); --dim:rgba(12,32,51,.5);
+  --card:#ffffff; --line:rgba(12,32,51,.14);
+  --geo:#6d28d9; --geo-soft:#5b21b6; --geo-ink:#ffffff;
+  --hot:#c0392b; --hot-bg:rgba(220,38,38,.09); --hot-line:rgba(220,38,38,.35);
+  --warm:#8a5a12; --warm-bg:rgba(250,204,21,.16); --warm-line:rgba(180,120,10,.35);
+  --sh:0 12px 28px rgba(12,32,51,.12);
+  --grad:linear-gradient(135deg,#7c3aed,#db2777,#ea580c);
+}
+
+body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;
+  background:linear-gradient(165deg,var(--bg),var(--bg2));color:var(--ink);
+  min-height:100vh;overflow-x:hidden;transition:background .35s,color .25s;}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
+#app{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:clamp(12px,3vh,26px) clamp(12px,3vw,24px) 56px;}
+
+/* ============ BARRA DE CONTROLES ============ */
+.ctrls{display:flex;justify-content:flex-end;gap:8px;margin-bottom:6px;}
+.cbtn{min-height:44px;min-width:44px;border-radius:14px;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);font-family:inherit;font-weight:900;font-size:.82rem;
+  padding:0 14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;box-shadow:var(--sh);}
+.cbtn:active{transform:scale(.95);}
+.cbtn .ce{font-size:1.1rem;}
+
+/* ============ HEADER ============ */
+.header{text-align:center;margin-bottom:clamp(16px,3.5vh,30px);}
+.mascot{font-size:clamp(40px,7.5vh,64px);display:inline-block;animation:mfloat 3s ease-in-out infinite;filter:drop-shadow(0 0 26px rgba(167,139,250,.5));margin-bottom:4px;}
+@keyframes mfloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-11px) rotate(3deg);}}
+/* block + width:fit-content: como inline-block, o selo e o mascote cabiam na
+   MESMA linha em tela larga e o globo aparecia colado ao lado do selo. */
+.badge{display:block;width:fit-content;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:5px 16px;font-size:11px;font-weight:900;color:var(--soft);letter-spacing:2px;text-transform:uppercase;margin:0 auto 8px;}
+.title{font-size:clamp(30px,6.5vw,50px);font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.08;margin-bottom:6px;}
+.subtitle{font-size:clamp(13px,2.5vw,15.5px);color:var(--soft);font-weight:800;}
+
+/* ============ PAINEL DA MATÉRIA ============ */
+.geo-panel{border:1px solid color-mix(in srgb,var(--geo) 26%,transparent);border-radius:26px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--geo) 8%,transparent),transparent);
+  padding:clamp(14px,3vw,26px);margin-bottom:22px;}
+.geo-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;margin-bottom:6px;}
+.geo-top .ic{font-size:clamp(24px,4vw,32px);}
+.geo-top .nm{font-size:clamp(20px,4vw,27px);font-weight:900;color:var(--geo);}
+.geo-top .dt{margin-left:auto;font-size:12px;font-weight:900;padding:6px 14px;border-radius:20px;background:var(--hot-bg);border:1px solid var(--hot-line);color:var(--hot);white-space:nowrap;}
+.geo-unit{font-size:clamp(12px,2.3vw,14px);font-weight:800;color:var(--dim);margin-bottom:14px;}
+.geo-unit b{color:var(--geo-soft);font-weight:900;}
+
+.calm{display:flex;align-items:center;gap:10px;background:var(--warm-bg);border:1px dashed var(--warm-line);border-radius:14px;padding:10px 14px;margin-bottom:18px;font-size:clamp(12px,2.4vw,14px);font-weight:800;color:var(--warm);line-height:1.45;}
+.calm .em{font-size:20px;flex-shrink:0;}
+
+.kicker{font-size:10px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;color:color-mix(in srgb,var(--geo) 80%,var(--soft));margin:0 0 9px 2px;}
+
+/* ---------- DESTAQUE 1: REVISÃO ---------- */
+.hero{display:flex;align-items:center;gap:clamp(12px,2.5vw,20px);text-decoration:none;color:inherit;
+  border-radius:22px 22px 6px 6px;padding:clamp(15px,2.6vw,22px);min-height:72px;
+  border:2px solid color-mix(in srgb,var(--geo) 52%,transparent);border-bottom:none;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--geo) 18%,transparent),color-mix(in srgb,#fb923c 10%,transparent));
+  transition:transform .2s,box-shadow .2s;}
+.hero:hover{transform:translateY(-3px);box-shadow:0 12px 34px color-mix(in srgb,var(--geo) 22%,transparent);}
+.hero .em{font-size:clamp(36px,6.5vw,52px);flex-shrink:0;filter:drop-shadow(0 0 14px color-mix(in srgb,var(--geo) 50%,transparent));}
+.hero .tt{font-size:clamp(19px,4vw,25px);font-weight:900;line-height:1.12;margin-bottom:3px;display:block;}
+.hero .dd{font-size:clamp(12px,2.4vw,14.5px);font-weight:800;color:var(--soft);line-height:1.4;display:block;}
+.hero .go{flex-shrink:0;font-size:clamp(12px,2.4vw,14px);font-weight:900;padding:11px 17px;min-height:46px;display:flex;align-items:center;border-radius:24px;background:var(--geo);border:none;color:var(--geo-ink);white-space:nowrap;}
+
+/* as 3 portas da revisão — o mapa mental vem marcado como o melhor caminho */
+.hero-doors{display:grid;grid-template-columns:1fr;gap:8px;padding:12px;border:2px solid color-mix(in srgb,var(--geo) 52%,transparent);border-top:none;border-radius:0 0 22px 22px;background:color-mix(in srgb,var(--geo) 7%,transparent);margin-bottom:20px;}
+/* ---------- DESTAQUE 2: SIMULADO (logo apos o hero, incentivando o uso) ---------- */
+.hero2{display:flex;align-items:center;gap:clamp(12px,2.5vw,20px);text-decoration:none;color:inherit;
+  border-radius:22px;padding:clamp(15px,2.6vw,22px);min-height:72px;margin-bottom:20px;
+  border:2px solid color-mix(in srgb,var(--hot) 55%,transparent);
+  background:linear-gradient(135deg,color-mix(in srgb,var(--hot) 16%,transparent),color-mix(in srgb,#fbbf24 12%,transparent));
+  transition:transform .2s,box-shadow .2s;}
+.hero2:hover{transform:translateY(-3px);box-shadow:0 12px 34px color-mix(in srgb,var(--hot) 22%,transparent);}
+.hero2 .em{font-size:clamp(36px,6.5vw,52px);flex-shrink:0;filter:drop-shadow(0 0 14px color-mix(in srgb,var(--hot) 50%,transparent));}
+.hero2 .tt{font-size:clamp(19px,4vw,25px);font-weight:900;line-height:1.12;margin-bottom:3px;display:block;}
+.hero2 .dd{font-size:clamp(12px,2.4vw,14.5px);font-weight:800;color:var(--soft);line-height:1.4;display:block;}
+.hero2 .go{flex-shrink:0;font-size:clamp(12px,2.4vw,14px);font-weight:900;padding:11px 17px;min-height:46px;display:flex;align-items:center;border-radius:24px;background:var(--hot);border:none;color:#fff;white-space:nowrap;}
+.door{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;border-radius:15px;padding:10px 13px;min-height:56px;background:var(--card);border:1px solid var(--line);transition:transform .18s,border-color .18s;}
+.door:hover{transform:translateY(-2px);border-color:var(--geo);}
+.door .de{font-size:23px;flex-shrink:0;}
+.door .dt2{font-size:14px;font-weight:900;line-height:1.15;}
+.door .ds{font-size:11.5px;font-weight:800;color:var(--dim);line-height:1.25;display:block;margin-top:1px;}
+.door.best{border-color:var(--geo);background:color-mix(in srgb,var(--geo) 14%,var(--card));}
+.door .star{margin-left:auto;flex-shrink:0;font-size:9.5px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:var(--geo-ink);background:var(--geo);border-radius:20px;padding:4px 9px;white-space:nowrap;}
+
+/* ---------- DESTAQUES 2-4: vídeo · materiais · simulado ---------- */
+.picks{display:grid;grid-template-columns:1fr;gap:11px;margin-bottom:20px;}
+.pick{display:flex;align-items:center;gap:13px;text-decoration:none;color:inherit;border-radius:19px;
+  padding:14px 15px;min-height:76px;background:var(--card);border:2px solid var(--line);box-shadow:var(--sh);
+  transition:transform .2s,border-color .2s,box-shadow .2s;}
+.pick:hover{transform:translateY(-3px);}
+.pick .em{font-size:29px;flex-shrink:0;width:52px;height:52px;border-radius:15px;display:flex;align-items:center;justify-content:center;}
+.pick .tt{font-size:clamp(15px,2.8vw,17px);font-weight:900;line-height:1.15;display:block;margin-bottom:2px;}
+.pick .dd{font-size:clamp(11.5px,2.2vw,13px);font-weight:800;color:var(--dim);line-height:1.32;display:block;}
+.pick .tag{flex-shrink:0;font-size:10px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;border-radius:20px;padding:6px 11px;white-space:nowrap;}
+.pick.video{border-color:rgba(96,165,250,.45);} .pick.video:hover{box-shadow:0 12px 30px rgba(96,165,250,.2);}
+.pick.video .em{background:rgba(96,165,250,.14);} .pick.video .tag{background:rgba(96,165,250,.16);color:#60a5fa;}
+.pick.mat{border-color:rgba(167,139,250,.45);} .pick.mat:hover{box-shadow:0 12px 30px rgba(167,139,250,.2);}
+.pick.mat .em{background:rgba(167,139,250,.14);} .pick.mat .tag{background:rgba(167,139,250,.16);color:#a78bfa;}
+.pick.quiz{border-color:rgba(239,68,68,.42);} .pick.quiz:hover{box-shadow:0 12px 30px rgba(239,68,68,.18);}
+.pick.quiz .em{background:rgba(239,68,68,.12);} .pick.quiz .tag{background:rgba(239,68,68,.14);color:var(--hot);}
+.pick.slides{border-color:rgba(251,191,36,.45);} .pick.slides:hover{box-shadow:0 12px 30px rgba(251,191,36,.2);}
+.pick.slides .em{background:rgba(251,191,36,.14);} .pick.slides .tag{background:rgba(251,191,36,.16);color:#fbbf24;}
+body.light .pick.video .tag{color:#1d4ed8;} body.light .pick.mat .tag{color:#6d28d9;} body.light .pick.slides .tag{color:#a16207;}
+
+/* ---------- MAIS JEITOS (recolhido) ---------- */
+details.more{border-radius:18px;border:1px dashed var(--line);background:var(--card);overflow:hidden;}
+details.more summary{list-style:none;display:flex;align-items:center;gap:10px;padding:14px 16px;min-height:52px;cursor:pointer;font-size:clamp(13px,2.5vw,14.5px);font-weight:900;color:var(--soft);}
+details.more summary::-webkit-details-marker{display:none;}
+details.more summary .chev{margin-left:auto;font-size:13px;transition:transform .25s;color:var(--dim);}
+details.more[open] summary .chev{transform:rotate(180deg);}
+.more-grid{display:grid;grid-template-columns:1fr;gap:8px;padding:2px 12px 14px;}
+.mini{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;border-radius:14px;padding:10px 12px;min-height:58px;background:transparent;border:1px solid var(--line);transition:transform .18s,border-color .18s;}
+.mini:hover{transform:translateY(-2px);border-color:var(--geo);}
+.mini .em{font-size:21px;flex-shrink:0;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;}
+.mini .tt{font-size:13.5px;font-weight:900;line-height:1.15;display:block;margin-bottom:1px;}
+.mini .dd{font-size:11.5px;font-weight:800;color:var(--dim);line-height:1.3;display:block;}
+
+/* ============ FOOTER ============ */
+.footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid var(--line);}
+.footer-logo{font-size:15px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+.footer-note{font-size:11.5px;color:var(--dim);font-weight:700;line-height:1.65;}
+.refresh-btn{margin-top:15px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:12px 22px;min-height:44px;color:var(--soft);font-size:12px;font-weight:900;cursor:pointer;letter-spacing:1px;font-family:inherit;}
+.refresh-btn:active{transform:scale(.96);}
+
+/* ============ RESPONSIVO ============ */
+@media(min-width:620px){
+  .hero-doors{grid-template-columns:repeat(3,1fr);}
+  .door{flex-direction:column;text-align:center;align-items:center;gap:6px;padding:13px 10px;min-height:104px;}
+  .door .star{margin-left:0;}
+  .picks{grid-template-columns:repeat(3,1fr);}
+  .pick{flex-direction:column;text-align:center;align-items:center;gap:9px;padding:16px 12px;min-height:170px;}
+  .pick .tag{margin-top:auto;}
+  .more-grid{grid-template-columns:1fr 1fr;}
+}
+@media(min-width:900px){
+  .more-grid{grid-template-columns:repeat(3,1fr);}
+}
+/* Celular PAISAGEM (altura escassa): comprime tudo na vertical */
+@media(orientation:landscape) and (max-height:500px){
+  #app{padding-top:8px;padding-bottom:30px;}
+  .header{margin-bottom:10px;}
+  .mascot,.badge{display:none;}
+  .title{font-size:23px;margin-bottom:2px;}
+  .subtitle{font-size:12px;}
+  .geo-panel{padding:12px 15px;}
+  .geo-unit{margin-bottom:8px;}
+  .calm{padding:7px 12px;margin-bottom:10px;}
+  .hero{padding:10px 14px;min-height:58px;}
+  .hero .em{font-size:30px;}
+  .hero .dd{display:none;}
+  .hero-doors{grid-template-columns:repeat(3,1fr);padding:8px;gap:7px;margin-bottom:12px;}
+  .door{flex-direction:row;text-align:left;min-height:48px;padding:7px 10px;}
+  .door .ds,.door .star{display:none;}
+  .picks{grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+  .pick{flex-direction:row;text-align:left;min-height:56px;padding:8px 10px;gap:9px;}
+  .pick .em{width:40px;height:40px;font-size:22px;}
+  .pick .dd,.pick .tag{display:none;}
+  .footer{margin-top:16px;padding-top:12px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .mascot{animation:none;}
+  *{transition:none!important;}
+}
+
 </style>
 </head>
 <body>
-<h1>Em construção</h1>
+<canvas id="starfield"></canvas>
+<div id="app">
+
+  <!-- A bandeira saiu: a prova da Olimpíada é toda em português, não há
+       o que traduzir. Sobrou o tema claro/escuro, que a criança usa. -->
+  <div class="ctrls">
+    <button class="cbtn" id="themeBtn" onclick="toggleTema()" aria-pressed="false" title="Claro ou escuro">
+      <span class="ce" id="themeEmo">&#9728;&#65039;</span><span id="themeTxt">Modo claro</span>
+    </button>
+  </div>
+
+  <div class="header">
+    <div class="badge">&#x1F4DA; 3&ordm; trimestre &middot; Y2</div>
+    <div class="mascot">&#x1F43B;</div>
+    <div class="title">Portugu&ecirc;s</div>
+    <div class="subtitle">Era uma vez &middot; Inven&ccedil;&otilde;es e descobertas &mdash; prova na quarta, 14/10 &#x1F525;</div>
+  </div>
+
+  <!-- ================= PORTUGUES 3o TRI (AF 14/10/2026) =================
+       Insumo: informativo "Conteudos das AFs - 3 Tri" (Unidades 4 e 5).
+       Roteiro unico: trabalho/3tri_portugues/_roteiro.md.
+       Ordem de uso: jogar (motivacao), estudar, ver o video, simulado. -->
+  <section class="geo-panel">
+    <div class="geo-top">
+      <span class="ic">&#x1F3AF;</span>
+      <span class="nm">O que cai</span>
+      <span class="dt">&#x1F525; quarta, 14/10</span>
+    </div>
+    <div class="geo-unit"><b>Unidade 4 &mdash; Era uma vez:</b> contos de fadas, Chapeuzinho Vermelho, Jo&atilde;o e o p&eacute; de feij&atilde;o, par&aacute;frase e par&oacute;dia, palavras com H, J ou G, G ou GU, dicion&aacute;rio.<br>
+      <b>Unidade 5 &mdash; Inven&ccedil;&otilde;es e descobertas:</b> CA CO CU e QUE QUI, CH NH LH, plural.</div>
+
+    <a class="hero" href="ferramentas/LP3_jornada.html" style="border-radius:22px">
+      <span class="em">&#x1F341;</span>
+      <span>
+        <span class="tt">A Jornada do Urso</span>
+        <span class="dd">Atravesse o Can&aacute;da de fase em fase, bata nas caixas de pergunta e ven&ccedil;a o Gigante no castelo de gelo.</span>
+      </span>
+      <span class="go">Jogar</span>
+    </a>
+    <div style="margin-top:16px"></div>
+    <a class="hero2" href="ferramentas/LP3_simulado.html">
+      <span class="em">&#x270F;&#xFE0F;</span>
+      <span>
+        <span class="tt">Simulado</span>
+        <span class="dd">Uma prova inteira, do jeito da escola. Errou, a explica&ccedil;&atilde;o aparece e vem outra igual para acertar.</span>
+      </span>
+      <span class="go">Treinar</span>
+    </a>
+    <div class="kicker" style="color:var(--soft);">E tamb&eacute;m</div>
+    <div class="picks" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+      <a class="pick mat" href="ferramentas/LP3_estudo.html">
+        <span class="em">&#x1F4D6;</span>
+        <span>
+          <span class="tt">Estudar o conte&uacute;do</span>
+          <span class="dd">as 12 li&ccedil;&otilde;es, com exemplos e um treininho no fim de cada uma</span>
+        </span>
+        <span class="tag">Estudar</span>
+      </a>
+      <a class="pick video" href="ferramentas/LP3_video.html">
+        <span class="em">&#x1F3AC;</span>
+        <span>
+          <span class="tt">O v&iacute;deo</span>
+          <span class="dd">todo o conte&uacute;do em desenho animado, com o ursinho</span>
+        </span>
+        <span class="tag">Assistir</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="footer-logo">&#x1F43B; Portugu&ecirc;s &middot; 3&ordm; trimestre</div>
+    <div class="footer-note">
+      Conte&uacute;do tirado do informativo da escola &ldquo;Conte&uacute;dos das AFs &mdash; 3&ordm; trimestre&rdquo; (23/09/2026).
+    </div>
+    <button class="refresh-btn" onclick="hardRefresh()">&#x21BA; Atualizar o site</button>
+  </div>
+</div>
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(function (rs) { rs.forEach(function (r) { r.unregister(); }); });
+/* ============================================================
+   TEMA claro/escuro — mesma chave das ferramentas ('cie2_theme'),
+   entao trocar aqui e entrar num jogo mantem a escolha. As ferramentas
+   tem 5 temas; a home so alterna os dois principais (night/day), mas
+   RESPEITA os outros: castelo/praia/natureza tambem sao claros ou
+   escuros, e a home se pinta de acordo em vez de "voltar" para escuro.
+   ============================================================ */
+var TEMA_KEY='cie2_theme';
+var CLAROS={day:1,beach:1,nature:1};
+function temaAtual(){ try{return localStorage.getItem(TEMA_KEY)||'night';}catch(e){return 'night';} }
+function ehClaro(){ return !!CLAROS[temaAtual()]; }
+function pintaTema(){
+  var claro=ehClaro();
+  document.body.classList.toggle('light',claro);
+  document.getElementById('themeEmo').innerHTML=claro?'🌙':'☀️';
+  document.getElementById('themeTxt').textContent=claro?'Modo escuro':'Modo claro';
+  document.getElementById('themeBtn').setAttribute('aria-pressed',String(claro));
+  var m=document.querySelector('meta[name=theme-color]');
+  if(m) m.setAttribute('content',claro?'#eef5ff':'#0d0b1e');
 }
-if (window.caches) { caches.keys().then(function (ks) { ks.forEach(function (k) { caches.delete(k); }); }); }
+function toggleTema(){
+  try{ localStorage.setItem(TEMA_KEY, ehClaro()?'night':'day'); }catch(e){}
+  pintaTema();
+}
+pintaTema();
+
+function hardRefresh(){ window.location.href=window.location.pathname+'?v='+Date.now(); }
+
+</script>
+<script>
+/* Fundo animado. No escuro sao estrelas brancas; no claro, bolinhas
+   azul-esverdeadas subindo (estrela branca em fundo claro some). */
+(function(){
+  var c=document.getElementById('starfield'),ctx=c.getContext('2d'),stars=[];
+  function resize(){
+    c.width=innerWidth;c.height=innerHeight;stars=[];
+    var n=innerWidth<600?110:200;
+    for(var i=0;i<n;i++)stars.push({x:Math.random()*c.width,y:Math.random()*c.height,
+      r:Math.random()*1.5+.2,a:Math.random(),da:(Math.random()-.5)*.004,sp:Math.random()*.12+.03});
+  }
+  function draw(){
+    var claro=document.body.classList.contains('light');
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(function(s){
+      s.y-=s.sp; if(s.y<-5)s.y=c.height+5;
+      s.a+=s.da; if(s.a>1||s.a<.1)s.da*=-1;
+      ctx.save();
+      ctx.globalAlpha=claro?s.a*.32:s.a;
+      ctx.fillStyle=claro?'#6d28d9':'#fff';
+      ctx.beginPath();ctx.arc(s.x,s.y,claro?s.r*1.5:s.r,0,Math.PI*2);ctx.fill();
+      ctx.restore();
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();addEventListener('resize',resize);draw();
+})();
+/* sem service worker neste ramo: o sw.js daqui so desliga o antigo */
 </script>
 </body>
 </html>

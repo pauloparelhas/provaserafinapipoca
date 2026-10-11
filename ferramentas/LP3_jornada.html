@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>A Jornada do Urso — Português 3º tri</title>
+<link rel="stylesheet" href="serafina-core.css?v=20261011">
+<style>
+/* ============================================================
+   LP3_jornada.html — casca do jogo de plataforma.
+   Tudo que é jogo vive no canvas #game (960x540 lógico, letterbox).
+   O DOM só cuida do que precisa de texto grande e acessível:
+   HUD do topo, quadro da pergunta, pausa, controles de toque.
+   ============================================================ */
+:root{--u:1;--fs:1}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#0d0b1e;
+  font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:#fff;
+  touch-action:none;-webkit-user-select:none;user-select:none;overscroll-behavior:none}
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0d0b1e}
+#game{display:block;background:#0d0b1e;image-rendering:auto}
+#ui{position:absolute;left:0;top:0;width:960px;height:540px;transform-origin:0 0;pointer-events:none}
+#ui > *{pointer-events:auto}
+button{font-family:inherit;cursor:pointer}
+
+/* ---- HUD do topo ---- */
+#hud{position:absolute;left:0;top:0;right:0;height:52px;display:flex;align-items:center;gap:8px;padding:6px 10px;
+  background:linear-gradient(180deg,rgba(13,11,30,.55),rgba(13,11,30,0));transition:opacity .3s}
+#hud.hide{opacity:0;pointer-events:none}
+.ib{width:42px;height:42px;border-radius:13px;border:2px solid rgba(255,255,255,.28);background:rgba(13,11,30,.55);
+  color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(3px);flex:0 0 auto}
+.ib:active{transform:scale(.94)}
+.ib.off{opacity:.55}
+#hudName{flex:1;text-align:center;font-weight:900;font-size:19px;text-shadow:0 2px 6px rgba(0,0,0,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#hudCoins{display:flex;align-items:center;gap:6px;font-weight:900;font-size:19px;text-shadow:0 2px 6px rgba(0,0,0,.7);background:rgba(13,11,30,.5);padding:6px 12px;border-radius:13px;border:2px solid rgba(255,255,255,.2)}
+#hudCoins svg{width:22px;height:22px}
+
+/* ---- controles de toque ---- */
+#touch{position:absolute;inset:0;pointer-events:none}
+body.kbd #touch{display:none}
+.tb{position:absolute;pointer-events:auto;border-radius:50%;border:3px solid rgba(255,255,255,.45);
+  background:rgba(255,255,255,.16);backdrop-filter:blur(2px);color:#fff;font-weight:900;font-size:30px;
+  display:flex;align-items:center;justify-content:center;width:84px;height:84px;bottom:22px;
+  text-shadow:0 2px 4px rgba(0,0,0,.5);transition:background .1s,transform .1s}
+.tb.on{background:rgba(255,255,255,.45);transform:scale(.95)}
+#tLeft{left:22px}#tRight{left:122px}
+#tJump{right:22px;width:104px;height:104px;bottom:16px;font-size:20px;letter-spacing:.5px;border-color:rgba(251,191,36,.7);background:rgba(251,191,36,.22)}
+#tAct{right:140px;width:72px;height:72px;bottom:30px;font-size:26px;border-color:rgba(96,165,250,.7);background:rgba(96,165,250,.2);display:none}
+#tAct.show{display:flex}
+
+/* ---- quadro da pergunta ---- */
+#qbox{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(13,11,30,.55);backdrop-filter:blur(3px)}
+#qbox.show{display:flex}
+.qcard{width:860px;max-height:520px;overflow:auto;border-radius:26px;padding:16px 22px 18px;
+  background:linear-gradient(160deg,#1c1a3a,#0f0e24);border:3px solid var(--tc,#60a5fa);box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 6px rgba(255,255,255,.06);
+  animation:qin .32s cubic-bezier(.2,1.4,.4,1)}
+@keyframes qin{from{transform:scale(.7) translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.qtop{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.qtema{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;background:var(--tc,#60a5fa);color:#0d0b1e;font-weight:900;font-size:16px}
+.qseq{font-weight:800;font-size:15px;opacity:.85;flex:1}
+.qvoz{width:46px;height:46px;border-radius:14px;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-size:21px;display:flex;align-items:center;justify-content:center}
+.qvoz:active{transform:scale(.94)}
+body.sem-voz .qvoz{display:none}
+.qp{font-size:25px;font-weight:900;line-height:1.3;margin:4px 0 12px;text-shadow:0 2px 4px rgba(0,0,0,.4)}
+.qops{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qops.tres{grid-template-columns:1fr 1fr 1fr}
+.qop{min-height:74px;border-radius:16px;border:3px solid rgba(255,255,255,.22);background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.06));
+  color:#fff;font-size:21px;font-weight:800;padding:8px 10px 8px 46px;text-align:left;position:relative;line-height:1.25;transition:transform .12s,background .2s}
+.qop .n{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:9px;background:rgba(255,255,255,.18);font-size:15px;display:flex;align-items:center;justify-content:center}
+.qop:active{transform:scale(.97)}
+.qop.sel{border-color:#fbbf24;background:rgba(251,191,36,.18)}
+.qop.ok{border-color:#22c55e;background:linear-gradient(180deg,#22c55e,#15803d);color:#fff;animation:pop .4s}
+.qop.err{border-color:#ef4444;background:linear-gradient(180deg,#ef4444,#991b1b);color:#fff;animation:shake .4s}
+.qop:disabled{cursor:default}
+.qop.dim{opacity:.45}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.07)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.qfoot{display:flex;align-items:center;gap:10px;margin-top:12px;min-height:50px}
+.qdica{height:48px;padding:0 18px;border-radius:14px;border:2px solid rgba(255,255,255,.28);background:rgba(255,255,255,.1);color:#fff;font-weight:800;font-size:17px}
+.qdicaTxt{flex:1;font-size:18px;font-weight:700;color:#fde68a;line-height:1.3;display:none}
+.qdicaTxt.show{display:block}
+.qex{flex:1;font-size:19px;font-weight:700;line-height:1.3;display:none;color:#e9e6ff}
+.qex.show{display:block}
+.qex.okc{color:#bbf7d0}.qex.errc{color:#fecaca}
+.qgo{height:56px;padding:0 26px;border-radius:16px;border:none;font-size:20px;font-weight:900;color:#0d0b1e;
+  background:linear-gradient(180deg,#fde68a,#f59e0b);box-shadow:0 6px 0 #b45309;display:none}
+.qgo.show{display:inline-block;animation:qin .3s}
+.qgo:active{transform:translateY(4px);box-shadow:0 2px 0 #b45309}
+
+/* ---- menus genéricos (pausa, confirmações) ---- */
+#menu{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(13,11,30,.7);backdrop-filter:blur(4px)}
+#menu.show{display:flex}
+.mcard{width:520px;border-radius:26px;padding:22px 24px;background:linear-gradient(160deg,#1c1a3a,#0f0e24);border:3px solid rgba(255,255,255,.2);
+  box-shadow:0 20px 60px rgba(0,0,0,.6);text-align:center;animation:qin .3s}
+.mcard h2{margin:0 0 14px;font-size:28px;font-weight:900}
+.mcard p{font-size:19px;line-height:1.4;margin:0 0 14px;opacity:.9}
+.mbtn{display:block;width:100%;height:60px;margin:8px 0;border-radius:16px;border:2px solid rgba(255,255,255,.25);
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.07));color:#fff;font-size:21px;font-weight:900}
+.mbtn.pri{background:linear-gradient(180deg,#fde68a,#f59e0b);color:#0d0b1e;border:none;box-shadow:0 5px 0 #b45309}
+.mbtn.danger{background:linear-gradient(180deg,#f87171,#b91c1c);border:none}
+.mbtn:active{transform:scale(.98)}
+.mrow{display:flex;gap:10px}
+.mrow .mbtn{flex:1}
+
+/* ---- aviso de orientação ---- */
+#rot{position:fixed;left:0;right:0;top:0;display:none;justify-content:center;padding:10px;pointer-events:none;z-index:50}
+#rot span{background:rgba(251,191,36,.95);color:#0d0b1e;font-weight:900;font-size:16px;padding:8px 16px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+body.portrait #rot{display:flex}
+
+/* ---- botões de tutorial no canvas (teclas) são desenhados no canvas ---- */
+#toast{position:absolute;left:50%;top:94px;transform:translateX(-50%);background:rgba(13,11,30,.8);border:2px solid rgba(255,255,255,.25);
+  padding:8px 18px;border-radius:999px;font-weight:900;font-size:18px;display:none;white-space:nowrap}
+#toast.show{display:block;animation:qin .3s}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="game" width="960" height="540"></canvas>
+  <div id="ui">
+    <div id="hud">
+      <button class="ib sera-home" id="btnHome" title="Início" aria-label="Voltar ao início">&#127968;</button>
+      <button class="ib" id="sfxbtn" title="Sons do jogo" aria-label="Sons do jogo">&#127925;</button>
+      <button class="ib sombtn" id="sombtn" title="Voz" aria-label="Voz" onclick="toggleSom()">&#128266;</button>
+      <div id="hudName">A Jornada do Urso</div>
+      <div id="hudCoins"><svg viewBox="0 0 24 24"><path d="M12 2l1.8 5.2 5.4-.6-3.4 4.1 3.3 4.3-5.3-.9L12 19l-1.8-4.9-5.3.9 3.3-4.3L4.8 6.6l5.4.6z" fill="#fbbf24" stroke="#b45309" stroke-width="1.2"/></svg><span id="hudCoinN">0</span></div>
+      <button class="ib" id="btnPause" title="Pausa" aria-label="Pausa">&#10074;&#10074;</button>
+    </div>
+    <div id="touch">
+      <button class="tb" id="tLeft" aria-label="Esquerda">&#9664;</button>
+      <button class="tb" id="tRight" aria-label="Direita">&#9654;</button>
+      <button class="tb" id="tAct" aria-label="Ação">&#10003;</button>
+      <button class="tb" id="tJump" aria-label="Pular">PULAR</button>
+    </div>
+    <div id="toast"></div>
+    <div id="qbox" role="dialog" aria-modal="true"><div class="qcard" id="qcard"></div></div>
+    <div id="menu"><div class="mcard" id="mcard"></div></div>
+  </div>
+</div>
+<div id="rot"><span>&#128260; Gire o tablet para a horizontal</span></div>
+
+<script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.9,home:'../index.html',somKey:'lp3_som',stars:0,starfield:false};</script>
+<script src="serafina-core.js?v=20261011"></script>
+<script src="OP_voz.js?v=20261011"></script>
+<script src="LP3_banco.js?v=20261011"></script>
+<script src="LP3_jornada_som.js?v=20261011"></script>
+<script src="LP3_jornada_arte.js?v=20261011"></script>
+<script src="LP3_jornada_fases.js?v=20261011"></script>
+<script src="LP3_jornada_motor.js?v=20261011"></script>
+<script src="LP3_jornada_ui.js?v=20261011"></script>
+</body>
+</html>

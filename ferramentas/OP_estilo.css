@@ -1,0 +1,381 @@
+/* ============================================================
+   OP_estilo.css — casca visual da Olimpíada de Português.
+   Compartilhada pelas três telas (estudo, simulado, provas anteriores)
+   e pelo componente de questão em OP_questao.js.
+
+   CORREÇÃO DE DENSIDADE (08/09, pedido do Paulo): a primeira versão
+   usava --fs:1.12 em tablet, card de 900px com 30px de padding, título
+   de truque em 1.2rem dentro de caixa de 15px, parágrafo de introdução
+   em cada cartão e uma barra fixa de régua ocupando 66px do rodapé. Dava
+   meia tela de preliminares antes da primeira coisa útil. Aqui: fonte
+   base 1, paddings pela metade, cabeçalho de questão em uma linha só, e
+   o conteúdo começa na primeira dobra.
+
+   Escala: --fs continua controlando A+/A- (serafina-core.js `fs()`).
+   ============================================================ */
+
+:root{
+  --fs:1;
+  --bg:#0d0b1e; --bg2:#11253a;
+  --ink:#f2f7ff; --soft:rgba(255,255,255,.62); --dim:rgba(255,255,255,.44);
+  --card:#15243c; --line:rgba(255,255,255,.13); --surf:rgba(255,255,255,.06);
+  --accent:#4ade80; --accent2:#fbbf24;
+  --ok:#34d399; --no:#f87171;
+  --press:0 2px 0 rgba(0,0,0,.22);
+}
+body.light{
+  --bg:#eaf6ee; --bg2:#e3f0fb;
+  --ink:#0b2033; --soft:rgba(11,32,51,.68); --dim:rgba(11,32,51,.52);
+  --card:#fff; --line:rgba(11,32,51,.14); --surf:rgba(11,32,51,.05);
+  --accent:#15803d; --accent2:#a16207;
+  --press:0 2px 0 rgba(0,0,0,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;
+  background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+
+/* ---------- topo: uma faixa fina, nada mais ---------- */
+.topbar{display:flex;align-items:center;gap:5px;padding:6px 10px;background:var(--card);
+  box-shadow:0 2px 10px rgba(0,0,0,.22);position:sticky;top:0;z-index:30}
+.topbar .title{font-weight:900;font-size:calc(.86rem*var(--fs));color:var(--accent);flex:1;line-height:1.1;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 44px e o minimo de alvo de toque — nao se ganha densidade tirando dos
+   botoes o que a mao de uma crianca precisa para acertar. O que encolheu
+   foi o espaco morto em volta, nao o alvo. */
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:11px;background:var(--line);color:var(--ink);
+  font-size:.95rem;font-weight:800;cursor:pointer;padding:0 7px;font-family:inherit;flex-shrink:0}
+.iconbtn:active{transform:scale(.92)}
+.bar{height:5px;background:var(--line);flex-shrink:0}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width .3s}
+
+/* ---------- palco ---------- */
+.stage{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:10px 12px 76px}
+.card{width:100%;max-width:820px;background:var(--card);border-radius:16px;border:1px solid var(--line);
+  box-shadow:0 8px 26px rgba(0,0,0,.28);padding:14px 16px}
+
+/* ---------- questão ---------- */
+.qhead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:8px;
+  font-size:calc(.68rem*var(--fs));font-weight:900;letter-spacing:.6px;text-transform:uppercase}
+.qnum{color:var(--accent)}
+.qetq{color:var(--accent2)}
+.qorig{color:var(--dim);margin-left:auto;text-transform:none;letter-spacing:0;font-weight:800;font-size:calc(.68rem*var(--fs))}
+
+.enun{font-size:calc(.95rem*var(--fs));font-weight:800;line-height:1.4;color:var(--soft);margin-bottom:8px}
+.pede{font-size:calc(1.05rem*var(--fs));font-weight:900;line-height:1.32;margin:10px 0 8px}
+.nota{font-size:calc(.72rem*var(--fs));font-weight:800;color:var(--dim);font-style:italic;line-height:1.35;
+  margin:6px 0;padding-left:8px;border-left:3px solid var(--line)}
+
+.quadro{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);border-radius:11px;
+  padding:10px 12px;margin:9px 0;font-size:calc(1rem*var(--fs));font-weight:800;line-height:1.45;text-align:center}
+body.light .quadro{background:rgba(21,128,61,.07)}
+.quadro .bl{display:inline-block;min-width:80px;border-bottom:3px solid var(--accent);vertical-align:-3px}
+.quadro .sep{height:6px}
+.lst{display:block;text-align:left;max-width:220px;margin:1px auto;padding:2px 10px;border-bottom:1px dashed var(--line)}
+.lst.vaz{border-bottom:3px solid var(--accent2);min-height:1.4em}
+.tbc{margin:0 auto;border-collapse:collapse}
+.tbc td{border:1px solid var(--line);padding:4px 7px;font-size:.92em;min-width:30px}
+.tbc tr:first-child td{font-size:1.1em}
+.seq{font-size:1.25em;letter-spacing:4px;line-height:1.6;margin-top:4px;word-break:break-word}
+
+/* ---------- texto longo + guia de leitura (opcional) ----------
+   A régua deixou de ser obrigatória: o texto nasce inteiro e legível.
+   Quem liga o guia vê só a linha atual acesa e desce uma por toque. */
+.leitura{margin:9px 0;border:1px solid var(--line);border-radius:11px;padding:6px 4px;background:var(--surf)}
+.lin{display:block;width:100%;text-align:left;font-family:inherit;background:none;border:none;color:var(--ink);
+  cursor:pointer;font-size:calc(1rem*var(--fs));font-weight:800;line-height:1.42;padding:3px 10px;border-radius:7px}
+.leitura.comguia .lin.adiante{opacity:.32}
+.leitura.comguia .lin.lida{opacity:.6}
+.leitura.comguia .lin.on{background:rgba(251,191,36,.16);box-shadow:inset 3px 0 0 var(--accent2)}
+/* a linha DE BAIXO é o alvo do toque, e tem de parecer um alvo: fica
+   legível e com a borda tracejada de "toque aqui para continuar" */
+.leitura.comguia .lin.proxima{opacity:.72;border:1.5px dashed var(--accent2);border-radius:8px}
+.leitura.comguia .lin.proxima::after{content:"\25BC";float:right;font-size:.7em;color:var(--accent2);opacity:.8}
+.lin.acesa{background:rgba(74,222,128,.18);box-shadow:inset 3px 0 0 var(--accent)}
+.lin.apagada{opacity:.4}
+.guiarow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 8px 2px}
+.guiabtn{border:1px solid var(--line);background:none;color:var(--dim);font-family:inherit;font-weight:800;
+  font-size:calc(.7rem*var(--fs));border-radius:16px;padding:0 13px;min-height:44px;cursor:pointer}
+.guiabtn.on{color:var(--accent2);border-color:var(--accent2)}
+.guiadica{font-size:calc(.68rem*var(--fs));font-weight:800;color:var(--dim)}
+
+/* ---------- botõezinhos de apoio ---------- */
+.linhabtn{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 4px}
+.mini{border:1px solid var(--line);background:var(--surf);color:var(--soft);font-family:inherit;font-weight:800;
+  font-size:calc(.76rem*var(--fs));border-radius:16px;padding:0 14px;min-height:44px;cursor:pointer}
+.mini.on{color:var(--accent2);border-color:var(--accent2);background:rgba(251,191,36,.13)}
+.dicabox{background:rgba(251,191,36,.12);border:1px dashed rgba(251,191,36,.45);border-radius:11px;
+  padding:9px 11px;margin:6px 0;font-size:calc(.9rem*var(--fs));font-weight:800;line-height:1.42}
+.dicabox b{color:var(--accent2)}
+
+/* ---------- alternativas ---------- */
+.opts{display:flex;flex-direction:column;gap:7px;margin-top:10px}
+.opt{display:flex;align-items:center;gap:9px;min-height:48px;padding:8px 11px;border:2px solid var(--line);
+  border-radius:11px;background:var(--surf);color:var(--ink);font-family:inherit;text-align:left;cursor:pointer;
+  font-size:calc(.98rem*var(--fs));font-weight:800;line-height:1.3;box-shadow:var(--press)}
+.opt:active{transform:translateY(1px)}
+.opt .let{flex:0 0 26px;height:26px;border-radius:7px;background:var(--line);display:flex;align-items:center;
+  justify-content:center;font-weight:900;font-size:.84rem}
+.opt .oct{flex:1}
+.opt.ok{background:var(--ok);color:#06251a;border-color:var(--ok);box-shadow:none}
+.opt.ok .let{background:rgba(0,0,0,.18);color:#06251a}
+.opt.no{background:var(--no);color:#3a0a0a;border-color:var(--no);box-shadow:none}
+.opt.no .let{background:rgba(0,0,0,.18);color:#3a0a0a}
+.opt[disabled]{cursor:default}
+
+/* ============================================================
+   CORREÇÃO (reescrita em 09/09, crítica do Paulo)
+
+   O defeito: no modo papel a correção era pintada de azul-quase-preto
+   para "sair da folha". Virou um retângulo escuro no meio de uma folha
+   branca, destoando do tema, com as peças internas mal legíveis. E, ao
+   errar, aparecia tudo de uma vez: ~800 caracteres para uma questão de
+   dez segundos.
+
+   Duas regras agora:
+   1. A correção SEGUE O TEMA, sempre. Toda cor daqui sai de token
+      (--card, --surf, --ink, --line, --ok, --no, --accent, --accent2).
+      Quem quiser mudar o visual por tema reescreve os TOKENS dentro do
+      bloco (ver `body.papel .fb` lá embaixo), nunca as cores peça a peça
+      — foi a pintura peça a peça que produziu o bloco preto.
+   2. Por padrão a criança lê no máximo TRÊS blocos: o truque, a frase da
+      alternativa que ela marcou, e uma fileira de botões. O desenho, o
+      porquê e o gesto da próxima ficam atrás de "Ver como se faz" — no
+      DOM sempre (o gate confere que existem), na tela só a pedido.
+   ============================================================ */
+.fb{margin-top:11px;border-radius:12px;padding:11px 13px;border:2px solid var(--line);
+  background:var(--surf);color:var(--ink)}
+.fb.certo{border-color:var(--ok)}
+.fb.errado{border-color:var(--accent2)}
+.fb [hidden]{display:none!important}
+/* acerto: uma linha e pronto — quem acertou não precisa de aula */
+.fb .fbok{font-size:calc(.94rem*var(--fs));font-weight:900;line-height:1.3;margin-bottom:8px;color:var(--ink)}
+/* o truque: a única coisa que ela precisa levar para a próxima questão */
+.fb .truq{font-size:calc(1rem*var(--fs));font-weight:900;line-height:1.4;margin:0;padding:10px 12px;
+  border-radius:9px;background:var(--card);border-left:5px solid var(--accent2);color:var(--ink)}
+.fb.certo .truq{border-left-color:var(--ok)}
+/* "por que a sua não serve": o nome da alternativa é ETIQUETA, não grito —
+   continua em caixa alta (é o que está escrito na prova, ela precisa
+   reconhecer), mas em corpo menor e espaçado; a explicação vem em letra
+   normal, no peso do texto comum. */
+.fb .sua{font-size:calc(.9rem*var(--fs));font-weight:700;line-height:1.46;margin:9px 0 0;padding:9px 12px;
+  border-radius:9px;background:var(--card);border-left:5px solid var(--no);color:var(--ink)}
+.fb .sua .suaetq{display:block;font-size:calc(.68rem*var(--fs));font-weight:900;letter-spacing:1.1px;
+  line-height:1.25;color:var(--soft);margin-bottom:4px}
+/* a fileira de botões discretos */
+.fbrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+/* o segundo nível, atrás do botão */
+.fbmais{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line)}
+.fb .porq{font-size:calc(.9rem*var(--fs));font-weight:700;line-height:1.5;margin:8px 0 0;color:var(--ink)}
+.fb .prox{font-size:calc(.88rem*var(--fs));font-weight:700;line-height:1.45;margin-top:10px;padding:9px 12px;
+  border-radius:9px;background:var(--card);border-left:5px solid var(--accent);color:var(--ink)}
+.fb .prox i{display:block;font-style:normal;font-size:calc(.64rem*var(--fs));font-weight:900;letter-spacing:1px;
+  text-transform:uppercase;color:var(--soft);margin-bottom:3px}
+
+/* o truque desenhado */
+.desenho{margin:7px 0}
+/* dentro da correção a peça precisa se destacar do fundo do bloco, e o
+   fundo do bloco já é --surf; por isso aqui ela vira --card */
+.fb .pc{background:var(--card)}
+.pcs{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px;margin:7px 0}
+.pc{padding:5px 9px;border-radius:8px;background:var(--surf);border:2px solid var(--line);font-weight:900;
+  font-size:calc(.88rem*var(--fs));line-height:1.2;text-align:center}
+.pc.hit{background:rgba(52,211,153,.22);border-color:var(--ok)}
+.pc.bad{background:rgba(248,113,113,.18);border-color:var(--no)}
+.arw{font-weight:900;color:var(--soft);font-size:1rem;padding:0 1px}
+.vx{font-size:calc(.88rem*var(--fs));font-weight:800;line-height:1.45;margin:6px 0;text-align:center}
+.mk{background:rgba(251,191,36,.28);border-radius:4px;padding:1px 4px}
+.bad2{background:rgba(248,113,113,.24);border-radius:4px;padding:1px 4px}
+/* a tentativa descartada, apagada — mas ainda TEXTO: a .5 ela ficava em
+   3,4:1 sobre o creme do papel, abaixo do piso de 4,5:1. A .62 continua
+   nitidamente em segundo plano e passa dos 5:1 nos dois temas. */
+.dm{opacity:.62;font-weight:700}
+
+/* ---------- avançar ---------- */
+.avancar{display:block;width:100%;min-height:50px;margin-top:11px;border:none;border-radius:12px;
+  background:linear-gradient(90deg,var(--accent),#22c55e);color:#04261c;font-family:inherit;font-weight:900;
+  font-size:calc(1rem*var(--fs));cursor:pointer}
+.avancar:active{transform:translateY(1px)}
+.avancar.calmo{background:var(--surf);color:var(--ink);border:2px solid var(--line)}
+
+/* ---------- barra de navegação inferior ---------- */
+.qnav{position:fixed;left:0;right:0;bottom:0;z-index:25;display:flex;gap:7px;
+  padding:7px 10px calc(7px + env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--line)}
+.qnav-btn{flex:1;min-height:44px;border:none;border-radius:11px;background:var(--line);color:var(--ink);
+  font-family:inherit;font-weight:900;font-size:.86rem;cursor:pointer}
+.qnav-btn[disabled]{opacity:.35}
+.qnav-btn.forte{background:linear-gradient(90deg,var(--accent),#22c55e);color:#04261c}
+
+/* ---------- popup (a questão chamada de dentro da teoria) ---------- */
+.modalbg{position:fixed;inset:0;z-index:60;background:rgba(6,10,20,.72);backdrop-filter:blur(3px);
+  display:flex;align-items:flex-start;justify-content:center;padding:10px;overflow-y:auto}
+.modal{width:100%;max-width:820px;background:var(--card);border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);padding:12px 14px 16px;margin:auto 0}
+.modalhead{display:flex;align-items:center;gap:9px;margin-bottom:9px;position:sticky;top:-12px;background:var(--card);
+  padding:4px 0 7px;z-index:2;border-bottom:1px solid var(--line)}
+.modalhead b{flex:1;font-size:calc(.95rem*var(--fs));font-weight:900;line-height:1.2}
+.modalhead .conta{font-size:calc(.68rem*var(--fs));font-weight:900;color:var(--dim);text-transform:uppercase;letter-spacing:.5px}
+.fechar{min-width:44px;height:44px;border:none;border-radius:11px;background:var(--line);color:var(--ink);
+  font-size:1.1rem;font-weight:900;cursor:pointer;font-family:inherit;flex-shrink:0}
+.modalnav{display:flex;gap:7px;margin-top:11px}
+.modalnav button{flex:1;min-height:44px;border:none;border-radius:11px;background:var(--line);color:var(--ink);
+  font-family:inherit;font-weight:900;font-size:.86rem;cursor:pointer}
+.modalnav button[disabled]{opacity:.35}
+.modalnav button.forte{background:linear-gradient(90deg,var(--accent),#22c55e);color:#04261c}
+
+/* ---------- listas e grades (índice, provas, resultado) ---------- */
+.grade{display:grid;gap:8px}
+@media(min-width:620px){.grade.duas{grid-template-columns:1fr 1fr}}
+@media(min-width:860px){.grade.tres{grid-template-columns:repeat(3,1fr)}}
+.linha{display:flex;align-items:center;gap:10px;min-height:52px;padding:9px 12px;border-radius:12px;
+  border:1px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;font-family:inherit;text-align:left;
+  text-decoration:none}
+.linha:active{transform:translateY(1px)}
+.linha .n{flex:0 0 30px;height:30px;border-radius:9px;background:var(--line);display:flex;align-items:center;
+  justify-content:center;font-weight:900;font-size:.86rem}
+.linha b{display:block;font-size:calc(.95rem*var(--fs));font-weight:900;line-height:1.2}
+.linha small{display:block;font-size:calc(.74rem*var(--fs));font-weight:800;color:var(--dim);line-height:1.3;margin-top:1px}
+.linha .fim{margin-left:auto;font-size:calc(.7rem*var(--fs));font-weight:900;color:var(--dim);white-space:nowrap}
+.linha.feita{border-color:var(--ok)}
+.linha.feita .n{background:var(--ok);color:#06251a}
+
+h1.tt{font-size:calc(1.25rem*var(--fs));font-weight:900;line-height:1.18;margin-bottom:4px}
+p.sub{font-size:calc(.86rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.4;margin-bottom:11px}
+.secao{font-size:calc(.66rem*var(--fs));font-weight:900;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--accent);margin:14px 0 7px;display:flex;align-items:center;gap:7px}
+.secao::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* ---------- "Só a pergunta" ----------
+   O comando sozinho na tela, antes do texto. É a ordem de leitura que faz
+   acertar: saber o que se procura antes de começar a procurar. */
+.sopergunta{border:2px dashed var(--accent2);border-radius:12px;padding:14px 15px;margin:6px 0 4px;
+  background:rgba(251,191,36,.1)}
+.sopergunta .sotit{display:block;font-size:calc(.66rem*var(--fs));font-weight:900;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--accent2);margin-bottom:6px}
+.sopergunta .pede{margin:0 0 12px}
+body.papel .sopergunta{background:#fff9e0;border-color:#d19a00}
+body.papel .sopergunta .sotit{color:#8a5a00}
+
+/* ---------- figuras recortadas da prova ---------- */
+.figura{text-align:center;margin:10px 0}
+.figura img{max-width:100%;height:auto;border-radius:8px}
+.opts.comimg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opts.comimg .opt{flex-direction:column;align-items:stretch;gap:6px;min-height:0;padding:9px}
+.opts.comimg .opt .let{align-self:flex-start}
+.oimg{display:flex;align-items:center;justify-content:center}
+/* A figura da alternativa é para ser reconhecida, não admirada: presa a
+   uma altura que deixa as quatro caberem na tela junto com o enunciado. */
+.oimg img{max-width:100%;max-height:150px;width:auto;height:auto}
+@media(min-width:700px){ .oimg img{max-height:190px} }
+.figura img{max-height:230px;width:auto}
+/* fileira larga (os ícones de 2023): uma alternativa por linha */
+.opts.comimg.larga{grid-template-columns:1fr}
+
+/* ============================================================
+   MODO PAPEL — a folha da prova de verdade.
+
+   Pedido do Paulo: "mostrar as questões em interface exatamente igual à
+   das provas reais, em termos de montagem, estrutura, diagramação, como
+   se fosse o papel digitalizado, mas com todas as ferramentas
+   interativas". O objetivo é treinar o olho para o dia: a criança chega
+   na prova e reconhece o que está vendo.
+
+   O que se copia do papel: folha branca, tipografia sem serifa em caixa
+   alta, o "4)" antes do enunciado, o "(A)" antes de cada alternativa,
+   as caixas verdes de destaque, a régua de margem, o número da página.
+   O que se adapta: as alternativas continuam sendo botões de 48px (dedo
+   de criança), o acerto pinta de verde e o erro de vermelho, e a correção
+   aparece embaixo, fora da folha — como se fosse a professora ao lado.
+   ============================================================ */
+body.papel{--bg:#8a8f98;--bg2:#6f747d}
+body.papel .card{
+  background:#fff;color:#111;border:none;border-radius:2px;
+  box-shadow:0 3px 14px rgba(0,0,0,.34), 0 0 0 1px rgba(0,0,0,.1);
+  padding:26px 30px 30px;max-width:760px;
+  font-family:Arial,Helvetica,'Segoe UI',sans-serif}
+body.papel .card::before{
+  content:"CATEGORIA G \2013 2\00BA ANO";
+  display:block;font-size:calc(.62rem*var(--fs));font-weight:700;letter-spacing:1.4px;
+  color:#444;border-bottom:1.5px solid #111;padding-bottom:5px;margin-bottom:14px}
+/* o enunciado numerado, como no caderno */
+body.papel .qhead{border:none;margin-bottom:10px;color:#555}
+body.papel .qnum{color:#111;font-weight:700}
+body.papel .qetq{color:#666}
+body.papel .qorig{color:#888}
+body.papel .enun,
+body.papel .pede{color:#111;font-weight:700;line-height:1.42;text-align:left}
+body.papel .enun{font-size:calc(.92rem*var(--fs))}
+body.papel .pede{font-size:calc(.95rem*var(--fs));margin:12px 0 10px}
+body.papel .nota{color:#777;border-left-color:#ccc}
+/* a caixa verde-clara que a prova usa para listas, frases e tabelas */
+body.papel .quadro{background:#e8f2e0;border:1px solid #b9d3a8;color:#111;border-radius:3px;
+  font-size:calc(.95rem*var(--fs));text-align:center}
+body.papel .quadro .bl{border-bottom-color:#111}
+body.papel .lst{border-bottom-color:#bbb}
+body.papel .lst.vaz{border-bottom:2px solid #111}
+body.papel .tbc td{border-color:#111}
+/* o texto do poema, sem moldura: no papel ele é só texto */
+body.papel .leitura{background:none;border:none;padding:0;margin:10px 0}
+body.papel .lin{color:#111;font-size:calc(.95rem*var(--fs));line-height:1.45;padding:1px 2px}
+body.papel .leitura.comguia .lin.on{background:#fff3c4;box-shadow:inset 3px 0 0 #d19a00}
+body.papel .lin.acesa{background:#dff3e3;box-shadow:inset 3px 0 0 #2e7d32}
+body.papel .guiabtn{color:#666;border-color:#bbb}
+body.papel .guiabtn.on{color:#8a5a00;border-color:#d19a00}
+body.papel .guiadica{color:#888}
+/* alternativas: parecem as do papel, mas continuam sendo botões grandes */
+body.papel .opt{background:#fff;border:1.5px solid #bbb;color:#111;box-shadow:none;
+  font-weight:700;font-size:calc(.95rem*var(--fs))}
+body.papel .opt .let{background:none;color:#111;font-weight:700;font-size:.9rem;
+  flex:0 0 auto;width:auto;height:auto;border-radius:0}
+body.papel .opt .let::before{content:"("}
+body.papel .opt .let::after{content:")"}
+body.papel .opt.ok{background:#dff3e3;border-color:#2e7d32;color:#123}
+body.papel .opt.ok .let{color:#1b5e20}
+body.papel .opt.no{background:#fdeaea;border-color:#c62828;color:#311}
+body.papel .opt.no .let{color:#b71c1c}
+body.papel .mini{background:#f4f4f4;border-color:#ccc;color:#444}
+body.papel .mini.on{background:#fff3c4;border-color:#d19a00;color:#8a5a00}
+body.papel .dicabox{background:#fff9e0;border-color:#e0c46a;color:#4a3c10}
+body.papel .dicabox b{color:#8a5a00}
+/* A correção no papel: um cartão CREME sobre a folha branca — distingue-se
+   sem gritar. Até 09/09 ela era pintada de azul-quase-preto ("sair da
+   folha, como a professora ao lado"); na tela virou um bloco preto no
+   meio da folha, destoando do tema e com contraste ruim nas peças de
+   dentro. O conserto não é repintar peça a peça: é reescrever os TOKENS
+   dentro do bloco e deixar as regras de `.fb` (lá em cima) valerem. Sem
+   isso, cada peça nova nascia com a cor errada de novo. */
+body.papel .fb{
+  --ink:#14181f; --soft:#4a515e; --dim:#6b7280;
+  --card:#fffdf6; --surf:#f4efe1; --line:#d6cdb7;
+  --accent:#1b6b34; --accent2:#8a5a00; --ok:#2e7d32; --no:#b3261e;
+  font-family:'Nunito','Segoe UI',system-ui,sans-serif;margin-top:16px}
+/* os botõezinhos da correção seguem o creme do bloco, não o cinza da folha */
+body.papel .fb .mini{background:var(--card);border-color:var(--line);color:var(--soft)}
+body.papel .fb .mini.on{background:#fff3c4;border-color:var(--accent2);color:var(--accent2)}
+body.papel .figura img{border:1px solid #e2e2e2}
+body.papel .avancar{font-family:'Nunito','Segoe UI',system-ui,sans-serif}
+/* número da página, no rodapé da folha */
+body.papel .card::after{content:attr(data-folha);display:block;text-align:center;
+  font-size:calc(.62rem*var(--fs));color:#999;margin-top:20px;border-top:1px solid #e0e0e0;padding-top:7px}
+
+/* ---------- tablet: mais largura, não mais altura ---------- */
+@media(min-width:700px){
+  .stage{padding:12px 18px 80px}
+  .card{padding:16px 20px}
+  .pede{font-size:calc(1.1rem*var(--fs))}
+  .opt{min-height:52px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ============================================================
+   THALITA OU NADA (ordem do Paulo, 09/09)
+   A Thalita é voz neural e só existe no Edge. Sem ela, o navegador cai
+   nas vozes SAPI antigas do Windows — as robóticas. Em vez de ler com
+   voz ruim, a função de leitura em voz alta SOME da tela.
+   ============================================================ */
+body.sem-voz .mini.ouvir,
+body.sem-voz .speak,
+body.sem-voz .sombtn,
+body.sem-voz #sombtn,
+body.sem-voz .regbtn.sec2{display:none!important}
