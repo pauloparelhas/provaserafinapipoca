@@ -64,8 +64,9 @@ function atualizaNivel(dt){
   if(J.in.act && J.actSolto){ J.actSolto=false; G.arremessaPinha(); } if(!J.in.act) J.actSolto=true;
   if(J.setaT>0) J.setaT-=dt;
   if(M.mastro && Math.abs(u.x-M.mastro.x)<30 && Math.abs(u.y-M.mastro.y)<70 && J.estado==='nivel'){
-    if(faltam().length===0||L.fase.treino) fimDeFase();
-    else { u.x=M.mastro.x+(u.x<M.mastro.x?-32:32); u.vx=0; if(!J.trancaT||J.trancaT<=0){ var n=faltam().length; SOM.fx('tranca'); G.toast('Antes da bandeira: falta'+(n>1?'m '+n+' arenas ?':' 1 arena ?')+' — siga a seta',3000); J.trancaT=3; J.setaT=6; J.shake=4; } }
+    /* 11/10 (Paulo): a bandeira SEMPRE deixa passar, mesmo faltando arena pelo caminho */
+    var nf=faltam().length; fimDeFase();
+    if(nf>0&&!L.fase.treino) G.toast('Fase concluída! Ficou'+(nf>1?'ram '+nf+' arenas':' 1 arena')+' para treinar quando quiser.',3500);
   }
   if(J.trancaT>0) J.trancaT-=dt;
   if(J.tut) atualizaTutorial(dt);
