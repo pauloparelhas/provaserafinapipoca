@@ -201,10 +201,10 @@ return [
    caixa('Paródia da Chapeuzinho','<p class="frase">Chapeuzinho <span class="muda">Verde</span> foi <span class="muda">de bicicleta</span> levar <span class="muda">pizza</span> para o <span class="muda">vovô</span>.</p>')+'</div>'+
    R('Mesmo mudando, <b>dá para reconhecer</b> a história original.')},
  {tipo:'texto', tit:'Paródia de música',
-  fala:'Paródia também se faz com música: a mesma melodia, com a letra mudada. Atirei o pau no gato, mas o gato não morreu. Virou: Não atire o pau no gato, porque isso não se faz.',
+  fala:'Paródia também se faz com música: a mesma melodia, com a letra mudada. Ciranda, cirandinha, vamos todos cirandar. Virou: Ciranda, cirandinha, vamos todos estudar!',
   html:R('Paródia também se faz com <b>música</b>: a <b>mesma melodia</b>, com a <b>letra mudada</b>.')+
-   '<div class="dupla">'+caixa('Música original','<p class="frase">Atirei o pau no gato,<br>mas o gato não morreu.</p>')+
-   caixa('Paródia','<p class="frase"><span class="muda">Não atire</span> o pau no gato,<br><span class="muda">porque isso não se faz</span>.</p>')+'</div>'+
+   '<div class="dupla">'+caixa('Música original','<p class="frase">Ciranda, cirandinha,<br>vamos todos cirandar.</p>')+
+   caixa('Paródia','<p class="frase">Ciranda, cirandinha,<br>vamos todos <span class="muda">estudar</span>!</p>')+'</div>'+
    R('A música é a mesma. A letra mudou de propósito.')},
  {tipo:'escolha', tit:'O que mudou?', pergunta:'O que a paródia mudou?', rotulo:'Paródia', proxRot:'Próxima paródia', frase:true,
   itens:[
@@ -214,7 +214,7 @@ return [
    {m:'Original: A menina atravessou a <b>floresta</b>.<br>Paródia: A menina atravessou a <b>praia</b>.', op:['O lugar','A cor','A comida'], c:'O lugar', d:'Floresta virou praia: mudou o lugar.'},
    {m:'Original: Os porquinhos fizeram casas de <b>palha, madeira e tijolos</b>.<br>Paródia: Os porquinhos fizeram casas de <b>chocolate</b>.', op:['Do que as casas eram feitas','O lugar','O final'], c:'Do que as casas eram feitas', d:'Palha, madeira e tijolos viraram chocolate.'},
    {m:'Original: O caçador salvou as duas.<br>Paródia: <b>O lobo virou amigo de todos e tomou chá com a vovó.</b>', op:['O final','A cor','O lugar'], c:'O final', d:'O fim da história mudou de propósito.'},
-   {m:'Original: <b>Atirei</b> o pau no gato...<br>Paródia: <b>Não atire</b> o pau no gato...', op:['A letra da música','A melodia','Nada'], c:'A letra da música', d:'A melodia ficou igual; a letra mudou.'}
+   {m:'Original: Ciranda, cirandinha, vamos todos <b>cirandar</b>.<br>Paródia: Ciranda, cirandinha, vamos todos <b>estudar</b>!', op:['A letra da música','A melodia','Nada'], c:'A letra da música', d:'A melodia ficou igual; a letra mudou: cirandar virou estudar.'}
   ]}
 ]},
 
@@ -235,7 +235,7 @@ return [
    {m:'O garoto trocou a vaca por feijões mágicos.', c:'Paráfrase', d:'Garoto = menino. É o que acontece na história do João.'},
    {m:'João trocou a vaca por sementes de pipoca, e o pé de pipoca estourou até o céu.', c:'Paródia', d:'O feijão virou pipoca, de propósito, para ficar engraçado.'},
    {m:'O pé de feijão ficou enorme e chegou até as nuvens.', c:'Paráfrase', d:'Enorme = muito grande. O sentido é o mesmo.'},
-   {m:'Não atire o pau no gato, porque isso não se faz.', c:'Paródia', d:'É a música “Atirei o pau no gato” com a letra mudada.'},
+   {m:'Ciranda, cirandinha, vamos todos estudar!', c:'Paródia', d:'É a música “Ciranda, cirandinha” com a letra mudada.'},
    {m:'A mãe ficou zangada e jogou os feijões pela janela.', c:'Paráfrase', d:'Zangada = brava. Nada mudou no que acontece.'},
    {m:'Chapeuzinho chamou a polícia pelo celular quando viu o lobo.', c:'Paródia', d:'O celular foi posto de propósito: mudou a história.'}
   ]}
@@ -331,10 +331,10 @@ return [
 /* ===================== 11. C OU QU ===================== */
 {k:'cqu', tema:'cqu', nome:'C ou QU', ic:'cqu',
  treino:[[['cqu'],7,'rapida']], telas:[
- {tipo:'palavras', tit:'CA, CO, CU',
-  fala:'Com A, O e U, o som de quê é só o C: casa, cavalo, cama, caju, copo, coelho, coruja, cubo, cutia, cuca.',
-  regra:'Com <b>A</b>, <b>O</b> e <b>U</b>, o som de <b>quê</b> é só o <b>C</b>: CA, CO, CU.',
-  pals:['[CA]SA','[CA]VALO','[CA]MA','[CA]JU','[CO]PO','[CO]ELHO','[CO]RUJA','[CU]BO','[CU]TIA','[CU]CA']},
+ {tipo:'palavras', tit:'C com A, O e U',
+  fala:'Com A, O e U, o som de quê é só o C: casa, cavalo, cama, caju, copo, coelho, coruja, cubo, cutia.',
+  regra:'Com <b>A</b>, <b>O</b> e <b>U</b>, o som de <b>quê</b> é só o <b>C</b>: casa, copo, cubo.',
+  pals:['[C]ASA','[C]AVALO','[C]AMA','[C]AJU','[C]OPO','[C]OELHO','[C]ORUJA','[C]UBO','[C]UTIA']},
  {tipo:'palavras', tit:'QUE, QUI: o U quietinho',
   fala:'Antes de E e I, o som de quê se escreve com QU, e o U não se fala: queijo, quente, leque, moleque, quiabo, quilo, esquilo, periquito, máquina, mosquito, caqui.',
   regra:'Antes de <b>E</b> e <b>I</b>, o som de quê se escreve com <b>QU</b>. O <b>U</b> não se fala: QUE, QUI.',
@@ -364,8 +364,8 @@ return [
   pals:['[CH]AVE','[CH]UVA','[CH]APÉU','[CH]OCOLATE','NI[NH]O','GALI[NH]A','BA[NH]O','ARA[NH]A','FO[LH]A','COE[LH]O','ABE[LH]A','O[LH]O'],
   depois:'E <b>CHAPEUZINHO</b> tem dois: CH no começo e NH no fim!'},
  {tipo:'pares', tit:'Uma letrinha muda tudo', regra:'Toque em cada par: entra um H e a palavra vira outra.',
-  fala:'Mola, molha. Fila, filha. Mina, minha. Sono, sonho. Cala, calha.',
-  pares:[['MOLA','MO[LH]A'],['FILA','FI[LH]A'],['MINA','MI[NH]A'],['SONO','SO[NH]O'],['CALA','CA[LH]A']]},
+  fala:'Mola, molha. Fila, filha. Mina, minha. Sono, sonho. Galo, galho.',
+  pares:[['MOLA','MO[LH]A'],['FILA','FI[LH]A'],['MINA','MI[NH]A'],['SONO','SO[NH]O'],['GALO','GA[LH]O']]},
  {tipo:'completa', tit:'Complete as palavras', regra:'Complete com <b>CH</b>, <b>NH</b> ou <b>LH</b>.', op:['CH','NH','LH'], itens:[
    {m:'_AVE', cheia:'[CH]AVE', c:'CH'},
    {m:'CAMI_O', cheia:'CAMI[NH]O', c:'NH'},
@@ -427,7 +427,7 @@ return [
   fala:'O dicionário mostra o significado da palavra e a escrita certa. Cada palavra explicada é um verbete. No alto da página, as palavras-guia mostram a primeira e a última palavra daquela página.',
   html:R('O dicionário mostra o <b>significado</b> e a <b>escrita certa</b>.')+
    '<div class="pagdic"><div class="guias"><span>BALA</span><em>palavras-guia</em><span>BULE</span></div>'+
-   '<p><b>bala</b> doce pequeno, que se chupa.</p>'+
+   '<p><b>bala</b> doce pequeno e duro.</p>'+
    '<p class="verb"><b>bola</b> objeto redondo, usado para brincar e jogar.<em>verbete</em></p>'+
    '<p><b>bule</b> vasilha com bico, usada para servir chá ou café.</p></div>'+
    R('<b>Verbete</b>: cada palavra explicada. <b>Palavras-guia</b>: a primeira e a última palavra da página.')},
@@ -440,7 +440,7 @@ return [
   itens:[
    {m:'', op:['LOBO','GATO','URSO'], c:'GATO', d:'G vem antes de L, e L vem antes de U.'},
    {m:'', op:['BOLA','BULE','BALA'], c:'BALA', d:'Mesma 1ª letra: olhe a 2ª. A vem antes de O e de U.'},
-   {m:'', op:['COPO','CUBO','CASA'], c:'CASA', d:'CA, CO, CU: o A vem primeiro.'},
+   {m:'', op:['COPO','CUBO','CASA'], c:'CASA', d:'Casa, copo, cubo: olhe a 2ª letra. O A vem antes do O e do U.'},
    {m:'', op:['CAVALO','CASA'], c:'CASA', d:'CAS e CAV: o S vem antes do V.'},
    {m:'', op:['ZEBRA','MAPA','ABELHA'], c:'ABELHA', d:'A é a primeira letra do alfabeto.'},
    {m:'', op:['PATO','PIPA','PENA'], c:'PATO', d:'PA, PE, PI: o A vem primeiro.'}
