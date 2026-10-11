@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
-<title>Simulado — Português · 3º trimestre</title>
+<title>Simulado — Português</title>
 <link rel="stylesheet" href="serafina-core.css?v=20261011">
 <link rel="stylesheet" href="OP_estilo.css?v=20261011">
 <style>
@@ -44,6 +44,43 @@ body.papel .secao::after{background:#ddd}
 .sairbox{width:100%;max-width:360px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 16px;text-align:center;color:var(--ink)}
 .sairbox h2{font-size:1.15rem;font-weight:900}
 .sairbox p{font-size:.92rem;font-weight:800;color:var(--soft);line-height:1.4;margin:6px 0 2px}
+/* ---- v2 (12/10): listas de lacunas "COMPLETE AS PALAVRAS COM..." ---- */
+.quadro .lacs{display:flex;flex-wrap:wrap;justify-content:center;gap:9px 20px;text-align:left}
+.quadro .lac{display:inline-flex;align-items:baseline;font-size:calc(1.05rem*var(--fs));letter-spacing:.6px;white-space:nowrap}
+.quadro .lac i{font-style:normal;font-size:.72em;font-weight:900;color:var(--soft);margin-right:6px}
+.lb{display:inline-block;min-width:1.7em;height:1em;border-bottom:2.5px solid var(--accent);margin:0 2px;vertical-align:baseline}
+.lb.lbw{min-width:4.6em}
+body.papel .lb{border-bottom-color:#111}
+body.papel .quadro .lac i{color:#555}
+/* no truque desenhado, a letra destacada fica colada na palavra (DI NH EIRO -> DINHEIRO) */
+.pc .mk{padding:0 1px;border-radius:3px}
+/* ---- v2: PARTE ESCRITA (LP3_escrita.js) ---- */
+.esclab{display:block;font-size:calc(.8rem*var(--fs));font-weight:800;color:var(--soft);margin:12px 0 5px}
+.escarea{display:block;width:100%;resize:vertical;font-family:inherit;font-size:calc(1.05rem*var(--fs));font-weight:800;
+  line-height:2.1;padding:0 10px;border:2px solid var(--line);border-radius:10px;color:var(--ink);text-transform:uppercase;
+  background-color:var(--surf);background-attachment:local;
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(2.1em - 1px),var(--line) calc(2.1em - 1px),var(--line) 2.1em)}
+.escarea:focus{outline:none;border-color:var(--accent2)}
+.fb.modelo{border-color:var(--accent)}
+.fb .modtxt{font-size:calc(1rem*var(--fs));font-weight:900;line-height:1.5;letter-spacing:.3px;padding:10px 12px;
+  border-radius:9px;background:var(--card);color:var(--ink)}
+.fb .confti{font-size:calc(.68rem*var(--fs));font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--soft);margin:12px 0 4px}
+.fb .confere{margin:0 0 0 20px;font-size:calc(.9rem*var(--fs));font-weight:700;line-height:1.45}
+.fb .confere li{margin:2px 0}
+.autoav{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.av{min-height:48px;border-radius:11px;border:2px solid var(--line);background:var(--card);color:var(--ink);
+  font-family:inherit;font-weight:900;font-size:calc(.95rem*var(--fs));cursor:pointer;padding:0 6px}
+.av:active{transform:translateY(1px)}
+.av-ok.on{background:#dff3e3;border-color:#2e7d32;color:#123}
+.av-quase.on{background:#fff3c4;border-color:#d19a00;color:#5a3b00}
+.av-errei.on{background:#fdeaea;border-color:#c62828;color:#311}
+.av.apaga{opacity:.45;cursor:default}
+.fb .avmsg{font-size:calc(.88rem*var(--fs));font-weight:800;line-height:1.4;margin-top:9px}
+.escbar.n-ok b{color:var(--ok)} .escbar.n-quase b{color:var(--accent2)} .escbar.n-errei b{color:var(--no)}
+body.papel .esclab{color:#555}
+body.papel .escarea{background-color:#fff;border-color:#bbb;color:#111;
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(2.1em - 1px),#c9d6e8 calc(2.1em - 1px),#c9d6e8 2.1em)}
+body.papel .escbar.n-ok b{color:#1b5e20} body.papel .escbar.n-quase b{color:#8a5a00} body.papel .escbar.n-errei b{color:#b3261e}
 </style>
 </head>
 <body>
@@ -107,48 +144,40 @@ body.papel .secao::after{background:#ddd}
 </script>
 <script src="assets/react.production.min.js"></script>
 <script src="assets/react-dom.production.min.js"></script>
-<script src="LP3_simulado_data.js?v=20261011"></script>
+<script src="LP3_simulado_data.js?v=20261012"></script>
 <script src="OP_questao.js?v=20261011"></script>
+<script src="LP3_escrita_data.js?v=20261012"></script>
+<script src="LP3_escrita.js?v=20261012"></script>
 <script>
-/* ============================================================
-   SIMULADO DE PORTUGUÊS (3º tri) — derivado do OP_simulado.html com o
-   motor intacto (OP_questao.js). Prova inteira = 12, uma questão de cada
-   um dos 12 conteúdos da AF; Aquecer = 5 conteúdos diferentes.
-   (comentário herdado do modelo abaixo)
-   SIMULADO — rodadas de 15, como a prova.
-
-   O banco tem mais de 100 questões reais das seis provas oficiais. Uma
-   rodada é sempre de 15, com as cotas por família que a prova real usa,
-   e o motor NÃO repete: guarda em localStorage os ids que ela já viu e
-   só volta a sortear os antigos quando o banco se esgota. Assim ela pode
-   fazer sete rodadas seguidas sem reencontrar uma pergunta.
-
-   Errar não fecha a questão: abre a correção (no componente único
-   OP_questao.js) e insere logo em seguida uma questão-irmã da mesma
-   família, fora da nota — para ela acertar uma igual enquanto o truque
-   está fresco.
-   ============================================================ */
 'use strict';
-var h=React.createElement, OP=window.LP3S, OPQ=window.OPQ;
-var FAM={}; OP.FAMILIAS.forEach(function(f){ FAM[f.k]=f; });
-var VISTOS='lp3_vistos';
-
 /* ============================================================
-   O SIMULADO SO USA QUESTOES INEDITAS.
+   SIMULADO DE PORTUGUÊS (3º tri) — v2, 12/10/2026.
 
-   Sao dois lugares com propositos diferentes, e misturar os dois
-   estragava os dois:
-     · "Provas anteriores" = as provas oficiais inteiras, cada uma
-       identificada por ano e fase, na ordem original. So o que caiu.
-     · "Simulado" = treino com perguntas que ela NUNCA viu. Se caisse
-       aqui uma questao que ela ja fez em Provas anteriores, o placar
-       mediria memoria em vez de raciocinio.
+   O pai achou a v1 focada demais em "lembrar o que aconteceu nas
+   histórias". A v2 segue o PESO do roteiro v2: ortografia/plural/
+   dicionário ≈ 55%, conto como gênero + paráfrase/paródia ≈ 35%,
+   invenções ≈ 10%. As cotas moram no banco (FAMILIAS[].cota) e somam 12.
 
-   As ineditas sao as de id TRxx (`origem: 'Treino no estilo da prova'`),
-   escritas no molde da banca. Sao 104 — sete rodadas de 15 sem repetir.
+   Três jeitos de treinar:
+     · Aquecer ......... 5 de marcar: 3 conteúdos do bloco A (ortografia,
+                         plural, dicionário) + 2 dos blocos B/C.
+     · Prova inteira ... 12 de marcar (7 A + 4 B + 1 C) e depois a PARTE
+                         ESCRITA com 4 tarefas, como a folha da escola.
+     · Parte escrita ... só as tarefas de escrever (8), sorteadas do banco
+                         do LP3_escrita_data.js.
+
+   Motor das questões de marcar intacto (OP_questao.js): errou, abre a
+   correção e entra uma questão-irmã da mesma família, fora da nota. O
+   motor NÃO repete: guarda os ids vistos e só volta aos antigos quando o
+   banco se esgota. A chave mudou para lp3_vistos2 — o banco é outro, e o
+   histórico do antigo não vale mais.
    ============================================================ */
-var INEDITAS = OP.ITENS;   /* o banco inteiro é inédito: escrito para este simulado */
-var RODADA = 12;
+var h=React.createElement, OP=window.LP3S, OPQ=window.OPQ, LP3E=window.LP3E;
+var FAM={}; OP.FAMILIAS.forEach(function(f){ FAM[f.k]=f; });
+var VISTOS='lp3_vistos2';
+var BANCO=OP.ITENS;
+var RODADA=OP.FAMILIAS.reduce(function(s,f){ return s+(f.cota||0); },0);   /* 12 */
+var AQUECER=5, ESC_PROVA=4, ESC_SO=8;
 
 function vistos(){ try{ return JSON.parse(localStorage.getItem(VISTOS)||'[]'); }catch(e){ return []; } }
 function marcaVisto(ids){
@@ -157,113 +186,139 @@ function marcaVisto(ids){
 }
 function zeraVistos(){ try{ localStorage.removeItem(VISTOS); }catch(e){} }
 
-/* monta uma rodada de n questões respeitando as cotas da prova real e
-   dando prioridade ao que ela ainda não viu */
+/* monta uma rodada de n questões com as cotas do roteiro, dando prioridade
+   ao que ela ainda não viu */
 function montaRodada(n){
   var jaVi=vistos(), escolhidas=[];
-  function doEixo(k, quantas){
-    var pool=INEDITAS.filter(function(i){ return i.eixo===k && escolhidas.indexOf(i)<0; });
+  function pegaDe(k, quantas){
+    var pool=BANCO.filter(function(i){ return i.eixo===k && escolhidas.indexOf(i)<0; });
     var novas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)<0; }));
     var velhas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)>=0; }));
     escolhidas=escolhidas.concat(novas.concat(velhas).slice(0,quantas));
   }
-  if(n>=RODADA){ OP.FAMILIAS.forEach(function(f){ if(f.cota) doEixo(f.k,f.cota); }); }
-  else {
-    /* aquecer: cinco conteúdos diferentes, primeiro os que ela menos viu */
-    var fams=OPQ.embaralha(OP.FAMILIAS).map(function(f){
-      return {k:f.k, novas:INEDITAS.filter(function(i){ return i.eixo===f.k && jaVi.indexOf(i.id)<0; }).length};
+  function menosVistas(filtro){
+    return OPQ.embaralha(OP.FAMILIAS.filter(filtro)).map(function(f){
+      return {k:f.k, novas:BANCO.filter(function(i){ return i.eixo===f.k && jaVi.indexOf(i.id)<0; }).length};
     }).sort(function(a,b){ return b.novas-a.novas; });
-    fams.slice(0,n).forEach(function(f){ doEixo(f.k,1); });
   }
-  /* completa o que faltar, do que ela menos viu */
-  var resto=INEDITAS.filter(function(i){ return escolhidas.indexOf(i)<0; });
-  var novasResto=OPQ.embaralha(resto.filter(function(i){ return jaVi.indexOf(i.id)<0; }));
-  var velhasResto=OPQ.embaralha(resto.filter(function(i){ return jaVi.indexOf(i.id)>=0; }));
-  escolhidas=escolhidas.concat(novasResto).concat(velhasResto);
+  if(n>=RODADA){
+    OP.FAMILIAS.forEach(function(f){ if(f.cota) pegaDe(f.k,f.cota); });
+  } else {
+    /* aquecer: o mesmo peso em miniatura — 3 do bloco A, 2 dos blocos B/C */
+    var a=Math.round(n*0.6);
+    menosVistas(function(f){ return f.bloco==='A'; }).slice(0,a).forEach(function(f){ pegaDe(f.k,1); });
+    menosVistas(function(f){ return f.bloco!=='A'; }).slice(0,n-a).forEach(function(f){ pegaDe(f.k,1); });
+  }
   return OPQ.embaralha(escolhidas.slice(0,n));
 }
-/* A questao-irma tambem tem de respeitar o historico. Sem isso ela era
-   sorteada so entre as que nao estavam na rodada ATUAL, e voltava a cair
-   nas mesmas poucas rodada apos rodada — num teste de 4 rodadas, 47 das
-   160 perguntas vistas eram repeticao, quase todas irmas. */
+/* A questão-irmã também respeita o histórico (senão volta sempre às
+   mesmas poucas, rodada após rodada). */
 function irma(eixo, usados){
   var jaVi=vistos();
-  var pool=INEDITAS.filter(function(i){ return i.eixo===eixo && usados.indexOf(i.id)<0; });
+  var pool=BANCO.filter(function(i){ return i.eixo===eixo && usados.indexOf(i.id)<0; });
   var novas=pool.filter(function(i){ return jaVi.indexOf(i.id)<0; });
-  var escolhida=OPQ.embaralha(novas.length?novas:pool)[0];
-  return escolhida||null;
+  return OPQ.embaralha(novas.length?novas:pool)[0]||null;
 }
+function copia(o){ var n={}; for(var k in o) n[k]=o[k]; return n; }
+var NOTA_ROT={ok:'Acertei', quase:'Quase', errei:'Errei'};
 
 function App(){
   var t=React.useState('inicio'), tela=t[0], setTela=t[1];
+  var m=React.useState('prova'), modo=m[0], setModo=m[1];
   var f=React.useState([]), fila=f[0], setFila=f[1];
   var c=React.useState(0), cur=c[0], setCur=c[1];
-  var r=React.useState({}), resp=r[0], setResp=r[1];   /* id -> acertou */
-  var e=React.useState({}), extra=e[0], setExtra=e[1]; /* ids que sao irmas */
+  var r=React.useState({}), resp=r[0], setResp=r[1];     /* id -> acertou */
+  var e=React.useState({}), extra=e[0], setExtra=e[1];   /* ids que são irmãs */
+  var es=React.useState([]), esc=es[0], setEsc=es[1];    /* tarefas escritas */
+  var ec=React.useState(0), ecur=ec[0], setEcur=ec[1];
+  var en=React.useState({}), enotas=en[0], setEnotas=en[1]; /* id -> ok|quase|errei */
 
-  var ids=INEDITAS.map(function(i){ return i.id; });
-  var totalBanco=INEDITAS.length, jaVistas=vistos().filter(function(id){ return ids.indexOf(id)>=0; }).length;
+  var ids=BANCO.map(function(i){ return i.id; });
+  var totalBanco=BANCO.length, jaVistas=vistos().filter(function(id){ return ids.indexOf(id)>=0; }).length;
 
   function comeca(n){
     var q=montaRodada(n);
-    setFila(q); setCur(0); setResp({}); setExtra({}); setTela('q');
+    setModo(n>=RODADA?'prova':'aquecer');
+    setFila(q); setCur(0); setResp({}); setExtra({});
+    setEsc(n>=RODADA ? LP3E.sorteia(ESC_PROVA) : []); setEcur(0); setEnotas({});
+    setTela('q');
     marcaVisto(q.map(function(i){ return i.id; }));
   }
+  function comecaEscrita(){
+    setModo('escrita'); setFila([]); setCur(0); setResp({}); setExtra({});
+    setEsc(LP3E.sorteia(ESC_SO)); setEcur(0); setEnotas({}); setTela('esc');
+  }
   function responde(acertou,item){
-    var novo={}; for(var k in resp) novo[k]=resp[k];
-    novo[item.id]=acertou; setResp(novo);
+    var novo=copia(resp); novo[item.id]=acertou; setResp(novo);
     if(!acertou){
-      var usados=fila.map(function(i){ return i.id; });
-      var ir=irma(item.eixo, usados);
+      var ir=irma(item.eixo, fila.map(function(i){ return i.id; }));
       if(ir){
         var nf=fila.slice(); nf.splice(cur+1,0,ir); setFila(nf);
-        var ne={}; for(var j in extra) ne[j]=extra[j]; ne[ir.id]=1; setExtra(ne);
+        var ne=copia(extra); ne[ir.id]=1; setExtra(ne);
         marcaVisto([ir.id]);
       }
     }
   }
-  function avanca(){ if(cur>=fila.length-1) setTela('fim'); else setCur(cur+1); }
+  function avanca(){
+    if(cur<fila.length-1){ setCur(cur+1); return; }
+    if(esc.length){ setEcur(0); setTela('esc'); } else setTela('fim');
+  }
   function volta(){ if(cur>0) setCur(cur-1); }
+  function avancaEsc(){ if(ecur<esc.length-1) setEcur(ecur+1); else setTela('fim'); }
+  function voltaEsc(){
+    if(ecur>0) setEcur(ecur-1);
+    else if(fila.length){ setCur(fila.length-1); setTela('q'); }
+  }
+  function avalia(nota,tarefa){ var n=copia(enotas); n[tarefa.id]=nota; setEnotas(n); }
 
   /* barra de progresso e navegação de baixo, que vivem fora do React */
   React.useEffect(function(){
-    var bar=document.getElementById('bar');
-    var nav=document.getElementById('qnav');
-    if(tela!=='q'){ nav.style.display='none'; bar.style.width = tela==='fim'?'100%':'0%'; return; }
-    nav.style.display='flex';
-    bar.style.width=Math.round(cur/fila.length*100)+'%';
+    var bar=document.getElementById('bar'), nav=document.getElementById('qnav');
     var p=document.getElementById('navPrev'), n=document.getElementById('navNext');
-    p.disabled = cur===0; p.onclick=volta;
-    n.onclick=avanca;
-    n.innerHTML = (cur===fila.length-1) ? 'Ver como fui' : 'Avan&ccedil;ar &#8250;';
+    var total=fila.length+esc.length;
+    if(tela==='q'){
+      nav.style.display='flex';
+      bar.style.width=Math.round(cur/total*100)+'%';
+      p.disabled = cur===0; p.onclick=volta; n.onclick=avanca;
+      n.innerHTML = cur<fila.length-1 ? 'Avan&ccedil;ar &#8250;' : (esc.length ? 'Parte escrita &#8250;' : 'Ver como fui');
+    } else if(tela==='esc'){
+      nav.style.display='flex';
+      bar.style.width=Math.round((fila.length+ecur)/total*100)+'%';
+      p.disabled = ecur===0 && !fila.length; p.onclick=voltaEsc; n.onclick=avancaEsc;
+      n.innerHTML = ecur<esc.length-1 ? 'Avan&ccedil;ar &#8250;' : 'Ver como fui';
+    } else {
+      nav.style.display='none'; bar.style.width = tela==='fim'?'100%':'0%';
+    }
   });
+  /* cada questão nova começa do alto da página */
+  React.useEffect(function(){ try{ window.scrollTo(0,0); }catch(x){} },[tela,cur,ecur]);
 
   if(tela==='inicio'){
-    var faltam=Math.max(0,totalBanco-jaVistas);
-    var rodadas=Math.floor(totalBanco/RODADA);
+    var faltam=Math.max(0,totalBanco-jaVistas), rodadas=Math.floor(totalBanco/RODADA);
     return h('div',null,
       h('h1',{className:'tt'},'Simulado — Português'),
-      h('p',{className:'sub'},'Perguntas no jeito da prova de Português, com os 12 conteúdos da AF. Errou, o truque aparece na hora e vem outra do mesmo tipo para você acertar.'),
-      h('div',{className:'grade duas'},
-        h('button',{className:'linha',onClick:function(){ comeca(5); }},
-          h('span',{className:'n'},'5'),
-          h('span',null,h('b',null,'Aquecer'),h('small',null,'cinco perguntas, de cinco conteúdos'))),
+      h('p',{className:'sub'},'No jeito da prova da escola: completar palavras, plural, dicionário, conto de fadas, paráfrase, paródia e invenções. Errou, o truque aparece na hora e vem outra do mesmo tipo.'),
+      h('div',{className:'grade tres'},
+        h('button',{className:'linha',onClick:function(){ comeca(AQUECER); }},
+          h('span',{className:'n'},String(AQUECER)),
+          h('span',null,h('b',null,'Aquecer'),h('small',null,'cinco perguntas de marcar'))),
         h('button',{className:'linha',onClick:function(){ comeca(RODADA); }},
-          h('span',{className:'n'},'12'),
-          h('span',null,h('b',null,'Prova inteira'),h('small',null,'doze perguntas, uma de cada conteúdo')))
+          h('span',{className:'n'},String(RODADA)),
+          h('span',null,h('b',null,'Prova inteira'),h('small',null,RODADA+' de marcar e '+ESC_PROVA+' para escrever'))),
+        h('button',{className:'linha',onClick:comecaEscrita},
+          h('span',{className:'n'},String(ESC_SO)),
+          h('span',null,h('b',null,'Parte escrita'),h('small',null,'só as tarefas de escrever')))
       ),
-      /* Barra de progresso do banco: com mais de cem perguntas, saber
-         quanto falta é o que dá vontade de continuar — e mostra que não
-         vai repetir tão cedo. */
       h('div',{className:'bancobar'},
         h('div',{className:'bancofill',style:{width:Math.round(jaVistas/totalBanco*100)+'%'}})),
       h('p',{className:'progresso'},
         faltam>0
-          ? 'São '+totalBanco+' perguntas — dá para '+rodadas+' provas inteiras sem repetir nenhuma. Você já viu '+jaVistas+' e ainda faltam '+faltam+'.'
+          ? 'São '+totalBanco+' perguntas de marcar: dá para '+rodadas+' provas inteiras sem repetir. Você já viu '+jaVistas+' e faltam '+faltam+'. E mais '+LP3E.BANCO.length+' tarefas de escrever.'
           : 'Você já passou pelas '+totalBanco+' perguntas do banco. Daqui para a frente elas voltam a aparecer.'),
       jaVistas>0 && h('div',{className:'linhabtn',style:{justifyContent:'center'}},
-        h('button',{className:'mini',onClick:function(){ zeraVistos(); setTela('inicio0'); setTimeout(function(){ setTela('inicio'); },0); }},
-          'Recomeçar do zero'))
+        h('button',{className:'mini',onClick:function(){
+          zeraVistos(); LP3E.zeraVistos(); setTela('inicio0'); setTimeout(function(){ setTela('inicio'); },0);
+        }},'Recomeçar do zero'))
     );
   }
   if(tela==='inicio0') return h('div',null);
@@ -272,48 +327,66 @@ function App(){
     var item=fila[cur];
     var reais=fila.filter(function(i){ return !extra[i.id]; });
     var num=reais.indexOf(item)>=0 ? reais.indexOf(item)+1 : null;
+    var ultima = cur===fila.length-1;
     return h(OPQ.Questao,{
-      key:item.id+'-'+cur,
-      item:item,
+      key:item.id+'-'+cur, item:item,
       numero:num, total:num?reais.length:null,
       etiqueta: extra[item.id] ? 'mais uma do mesmo jeito' : null,
-      respostaInicial: undefined,
-      aoResponder:responde,
-      aoAvancar:avanca,
-      rotuloAvancar: cur===fila.length-1 ? 'Ver como fui' : 'Próxima'
+      aoResponder:responde, aoAvancar:avanca,
+      rotuloAvancar: !ultima ? 'Próxima' : (esc.length ? 'Ir para a parte escrita' : 'Ver como fui')
     });
   }
 
-  /* resultado */
-  var reais=fila.filter(function(i){ return !extra[i.id]; });
-  var acertos=reais.filter(function(i){ return resp[i.id]; }).length;
+  if(tela==='esc'){
+    var tar=esc[ecur];
+    return h(LP3E.Tarefa,{
+      key:tar.id+'-'+ecur, tarefa:tar, numero:ecur+1, total:esc.length,
+      aoAvaliar:avalia, aoAvancar:avancaEsc,
+      rotuloAvancar: ecur<esc.length-1 ? 'Próxima tarefa' : 'Ver como fui'
+    });
+  }
+
+  /* ---------------- resultado ---------------- */
+  var reais2=fila.filter(function(i){ return !extra[i.id]; });
+  var acertos=reais2.filter(function(i){ return resp[i.id]; }).length;
   var extras=fila.filter(function(i){ return extra[i.id]; });
   var extrasOk=extras.filter(function(i){ return resp[i.id]; }).length;
   var porFam={};
-  reais.forEach(function(i){
+  reais2.forEach(function(i){
     porFam[i.eixo]=porFam[i.eixo]||{ok:0,t:0};
     porFam[i.eixo].t++; if(resp[i.id]) porFam[i.eixo].ok++;
   });
-  var msg = acertos===reais.length ? 'Gabaritou. É exatamente isso que a prova pede.'
-          : acertos>=reais.length-2 ? 'Quase tudo. Olhe abaixo qual truque escapou e treine só ele.'
+  var escOk=esc.filter(function(x){ return enotas[x.id]==='ok'; }).length;
+  var msg = acertos===reais2.length ? 'Gabaritou as de marcar. É exatamente isso que a prova pede.'
+          : acertos>=reais2.length-2 ? 'Quase tudo. Olhe abaixo qual truque escapou e treine só ele.'
           : 'Cada erro aqui é uma pergunta que você não vai errar na prova.';
   return h('div',null,
-    h('div',{className:'placar'},acertos+'/'+reais.length),
-    h('p',{className:'placarsub'},msg),
+    reais2.length>0 && h('div',{className:'placar'},acertos+'/'+reais2.length),
+    reais2.length>0 && h('p',{className:'placarsub'},msg),
+    reais2.length===0 && esc.length>0 && h('div',{className:'placar'},escOk+'/'+esc.length),
+    reais2.length===0 && esc.length>0 && h('p',{className:'placarsub'},'Acertei: '+escOk+' · Quase: '+esc.filter(function(x){ return enotas[x.id]==='quase'; }).length+' · Errei: '+esc.filter(function(x){ return enotas[x.id]==='errei'; }).length),
     extras.length>0 && h('p',{className:'placarsub'},
       'Nas '+extras.length+' perguntas extras que vieram depois dos truques, você acertou '+extrasOk+'.'),
-    h('div',{className:'secao'},'por tipo de pergunta'),
-    OP.FAMILIAS.filter(function(f){ return porFam[f.k]; }).map(function(f){
-      var v=porFam[f.k];
-      return h('div',{key:f.k,className:'fambar'+(v.ok===0?' zero':'')},
-        h('span',{style:{color:f.cor}},f.nome), h('b',null,v.ok+' de '+v.t));
+    reais2.length>0 && h('div',{className:'secao'},'por tipo de pergunta'),
+    OP.FAMILIAS.filter(function(fm){ return porFam[fm.k]; }).map(function(fm){
+      var v=porFam[fm.k];
+      return h('div',{key:fm.k,className:'fambar'+(v.ok===0?' zero':'')},
+        h('span',{style:{color:fm.cor}},fm.nome), h('b',null,v.ok+' de '+v.t));
+    }),
+    esc.length>0 && h('div',{className:'secao'},'parte escrita'),
+    esc.map(function(x){
+      var nt=enotas[x.id];
+      return h('div',{key:x.id,className:'fambar escbar'+(nt?' n-'+nt:' zero')},
+        h('span',null,x.tipo), h('b',null, nt ? NOTA_ROT[nt] : 'sem nota'));
     }),
     h('div',{className:'grade',style:{marginTop:'12px'}},
-      acertos<reais.length && h('button',{className:'avancar',onClick:function(){
-        var err=reais.filter(function(i){ return !resp[i.id]; });
-        setFila(err); setCur(0); setResp({}); setExtra({}); setTela('q');
+      acertos<reais2.length && h('button',{className:'avancar',onClick:function(){
+        var err=reais2.filter(function(i){ return !resp[i.id]; });
+        setModo('refazer'); setFila(err); setCur(0); setResp({}); setExtra({}); setEsc([]); setTela('q');
       }},'Refazer as que errei'),
-      h('button',{className:'avancar calmo',onClick:function(){ comeca(RODADA); }},'Outro simulado'),
+      modo==='escrita'
+        ? h('button',{className:'avancar calmo',onClick:comecaEscrita},'Outra parte escrita')
+        : h('button',{className:'avancar calmo',onClick:function(){ comeca(RODADA); }},'Outro simulado'),
       h('button',{className:'avancar calmo',onClick:function(){ setTela('inicio'); }},'Voltar ao início')
     )
   );
