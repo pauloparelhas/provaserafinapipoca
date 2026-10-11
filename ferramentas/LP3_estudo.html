@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Estudar — Português · 3º trimestre</title>
-<link rel="stylesheet" href="serafina-core.css?v=20261011">
+<link rel="stylesheet" href="serafina-core.css?v=20261012">
 <style>
 /* ============================================================
    LP3_estudo — "o conteúdo sendo ensinado".
-   12 lições na ordem do roteiro (trabalho/3tri_portugues/_roteiro.md).
-   Cada lição: 3 a 6 telinhas curtas + Treininho (3 do LP3_banco.js).
+   v2 (12/10): 15 lições curtas na ordem do roteiro v2 (trabalho/3tri_portugues/_roteiro.md):
+   conto de fadas como GÊNERO, paráfrase, paródia, ortografia com listas de
+   "complete as palavras", dicionário e invenções. Cada lição: 2 a 4 telinhas
+   + Treininho sorteado do LP3_banco.js (LP3.sorteia, por tipo).
    Dados das lições: LP3_estudo_licoes.js · desenhos: LP3_arte.js.
    ============================================================ */
 :root{
@@ -234,6 +236,65 @@ body.voz-ok .ouvir,body.voz-ok #sombtn{display:inline-flex!important}
 .per span{display:block;font-size:calc(.82rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.3;margin-top:2px}
 .per.vilao{border-color:rgba(248,113,113,.7)}
 
+/* ---------- v2: passos (avó > mãe > filhos; começo > meio > fim) ---------- */
+.passos{display:flex;align-items:stretch;justify-content:center;gap:3px;margin:4px 0 12px}
+.passo{flex:1 1 0;min-width:0;max-width:170px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;
+  padding:6px 4px 8px;border-radius:14px;background:var(--surf);border:2px solid var(--line)}
+.passo .fig{width:100%;max-width:72px;height:auto}
+.passo b{font-size:calc(.86rem*var(--fs));font-weight:900;line-height:1.15;color:var(--lcx)}
+.passo span{font-size:calc(.82rem*var(--fs));font-weight:800;line-height:1.3;color:var(--ink)}
+.pseta{align-self:center;font-size:1.5rem;font-weight:900;color:var(--dim);flex:0 0 auto}
+
+/* ---------- v2: capas de livro ---------- */
+.capas{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;margin:4px 0}
+.capa1{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 8px 12px 14px;border-radius:6px 14px 14px 6px;
+  color:#fff;text-align:center;box-shadow:inset 7px 0 0 rgba(0,0,0,.22),0 3px 8px rgba(0,0,0,.25)}
+.capa1 .fig{width:64px;height:64px}
+.capa1 b{font-size:calc(.95rem*var(--fs));font-weight:900;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+
+/* ---------- v2: ficha de elementos de uma história ---------- */
+.ficha{border:2px solid var(--line);border-radius:16px;overflow:hidden}
+.fhead{display:flex;align-items:center;gap:10px;padding:8px 10px;background:color-mix(in srgb,var(--lc) 18%,transparent)}
+.fhead .fig{width:52px;height:52px;flex-shrink:0}
+.fhead b{font-size:calc(1.05rem*var(--fs));font-weight:900;line-height:1.2}
+.flin{display:grid;grid-template-columns:118px 1fr;gap:8px;align-items:center;padding:8px 10px;border-top:2px solid var(--line)}
+.flin .rot{font-size:calc(.8rem*var(--fs));font-weight:900;letter-spacing:.3px;text-transform:uppercase;color:var(--lcx);line-height:1.15}
+.flin .figs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:3px}
+.flin .figs .fig{width:40px;height:40px}
+.flin p{font-size:calc(.98rem*var(--fs));font-weight:800;line-height:1.35}
+@media(max-width:480px){.flin{grid-template-columns:1fr;gap:3px}}
+
+/* ---------- v2: lista de completar (como a folha da professora) ---------- */
+.lista{display:flex;flex-direction:column;gap:6px}
+.lrow{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;padding:5px 6px 5px 10px;border-radius:12px;border:2px solid var(--line);background:var(--surf)}
+.lrow .lnum{flex:0 0 auto;min-width:22px;font-size:calc(.78rem*var(--fs));font-weight:900;color:var(--dim)}
+.lrow .lw{flex:1 1 auto;min-width:0;font-size:calc(1.3rem*var(--fs));font-weight:900;letter-spacing:1.5px;line-height:1.2;word-break:break-word}
+.lrow .lw .buraco{display:inline-block;min-width:1.3em;border-bottom:4px solid var(--lcx);color:var(--lcx);text-align:center}
+.lrow .lops{display:flex;gap:6px;margin-left:auto;flex:0 0 auto}
+.lop{min-width:54px;min-height:46px;padding:4px 10px;border-radius:12px;border:2px solid var(--line);background:var(--card);
+  font-size:calc(1.08rem*var(--fs));font-weight:900;cursor:pointer;letter-spacing:.5px}
+.lop:active{transform:scale(.95)}
+.lop.certa{background:var(--ok);border-color:var(--ok);color:#06251a}
+.lop.errada{background:var(--no);border-color:var(--no);color:#3a0a0a}
+.lop[disabled]{cursor:default}
+.lrow.ok{border-color:var(--ok)}
+.lrow.no{border-color:var(--no)}
+.lrow .lmark{flex:0 0 auto;font-weight:900;font-size:calc(.8rem*var(--fs))}
+.lrow.ok .lmark{color:var(--ok)}
+.lrow.no .lmark{color:var(--no)}
+.lplacar{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--surf);border:2px solid var(--line);
+  font-size:calc(1rem*var(--fs));font-weight:900;text-align:center;line-height:1.4}
+
+/* ---------- v2: ligar pares (sinônimos) ---------- */
+.liga{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
+.liga .col{display:flex;flex-direction:column;gap:8px}
+.lg{min-height:52px;padding:6px 8px;border-radius:12px;border:2px solid var(--line);background:var(--surf);
+  font-size:calc(1rem*var(--fs));font-weight:900;cursor:pointer;letter-spacing:.5px;line-height:1.15;word-break:break-word}
+.lg.sel{border-color:var(--lc);background:color-mix(in srgb,var(--lc) 26%,transparent)}
+.lg.feito{border-color:var(--ok);background:rgba(52,211,153,.18);cursor:default}
+.lg.feito::before{content:attr(data-n)' · ';color:var(--ok)}
+.lg.erro{border-color:var(--no);animation:trem .35s}
+
 /* ---------- treininho ---------- */
 .tq .tqnum{font-size:calc(.74rem*var(--fs));font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:var(--lcx)}
 .tq .tqp{font-size:calc(1.18rem*var(--fs));font-weight:900;line-height:1.35;margin:6px 0 10px}
@@ -310,11 +371,11 @@ body.voz-ok .ouvir,body.voz-ok #sombtn{display:inline-flex!important}
 </div>
 
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'lp3_som',stars:80};</script>
-<script src="serafina-core.js?v=20261011"></script>
-<script src="OP_voz.js?v=20261011"></script>
-<script src="LP3_banco.js?v=20261011"></script>
-<script src="LP3_arte.js?v=20261011"></script>
-<script src="LP3_estudo_licoes.js?v=20261011"></script>
+<script src="serafina-core.js?v=20261012"></script>
+<script src="OP_voz.js?v=20261012"></script>
+<script src="LP3_banco.js?v=20261012"></script>
+<script src="LP3_arte.js?v=20261012"></script>
+<script src="LP3_estudo_licoes.js?v=20261012"></script>
 <script>
 /* ============================================================
    MOTOR DO ESTUDO — navegação, telinhas e treininho.
@@ -323,7 +384,7 @@ body.voz-ok .ouvir,body.voz-ok #sombtn{display:inline-flex!important}
 (function(){
 'use strict';
 var L=window.LP3, ARTE=window.LP3ARTE, LICOES=window.LP3_LICOES;
-var KEY='lp3_estudo_v1';
+var KEY='lp3_estudo_v2';
 var $=function(i){ return document.getElementById(i); };
 var tela=$('tela'), bar=$('bar'), navPrev=$('navPrev'), navNext=$('navNext'), navPos=$('navPos'), titulo=$('titulo');
 var est={lic:-1,i:0}, sessao=null;
@@ -348,11 +409,21 @@ function temVoz(){ return !!(window.temVoz && window.temVoz()); }
 })(0);
 
 /* ---------------- montagem de cada lição ---------------- */
+function corDe(lic){ return lic.cor || L.TEMAS[lic.tema].cor; }
+function icDe(lic){ return ARTE.icone(lic.ic || lic.tema); }
+/* treininho: perguntas sorteadas do banco, pelos temas e pelo tipo da lição */
+function sorteiaTreino(lic){
+  var specs=lic.treino || [[[lic.tema],3]], vistos={}, out=[];
+  specs.forEach(function(s){
+    L.sorteia(s[0], s[1], s[2]).forEach(function(it){ if(!vistos[it.id]){ vistos[it.id]=1; out.push(it); } });
+  });
+  return out;
+}
 function montaTelas(lic){
   var t=lic.telas.slice();
-  var banco=emb(L.doTema(lic.tema)).slice(0,3);
+  var banco=sorteiaTreino(lic);
   banco.forEach(function(it,n){
-    t.push({tipo:'treino', tit:'Treininho', item:it, n:n+1, ord:emb(it.o.map(function(_,i){ return i; }))});
+    t.push({tipo:'treino', tit:'Treininho', item:it, n:n+1, tot:banco.length, ord:emb(it.o.map(function(_,i){ return i; }))});
   });
   t.push({tipo:'fim', tit:'Lição feita!'});
   return t;
@@ -474,7 +545,7 @@ R.ordena=function(t){
         var i=+b.dataset.i;
         if(i===prox){
           b.classList.add('feito'); b.querySelector('.ob').textContent=prox+1; prox++;
-          if(prox===t.quadros.length){ msg.textContent='Muito bem! Essa é a ordem da história.'; fala(msg.textContent); }
+          if(prox===t.quadros.length){ msg.textContent=t.fimMsg||'Muito bem! Essa é a ordem da história.'; fala(msg.textContent); }
           else msg.textContent='Isso! E o que vem depois?';
         }else{
           b.classList.remove('erro'); void b.offsetWidth; b.classList.add('erro');
@@ -485,10 +556,95 @@ R.ordena=function(t){
       el.querySelector('[data-a="re"]').onclick=function(){ render(); };
     }};
 };
+/* v2: capas de livro (exemplos de contos de fadas) */
+R.capas=function(t){
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="capas">'+t.livros.map(function(b){
+    return '<div class="capa1" style="background:linear-gradient(165deg,'+b.cor+',color-mix(in srgb,'+b.cor+' 62%,#000))">'+
+      ARTE.figura(b.fig,'#fff7ed')+'<b>'+b.t+'</b></div>';
+  }).join('')+'</div>'};
+};
+/* v2: ficha com os elementos de uma história (lugar, personagens, magia, problema, solução) */
+R.ficha=function(t){
+  return {html:'<div class="ficha"><div class="fhead">'+ARTE.figura(t.heroi,t.fundo)+'<b>Os elementos do conto</b></div>'+
+    t.linhas.map(function(l){
+      return '<div class="flin"><span class="rot">'+l.rot+'</span><div>'+
+        (l.figs?'<div class="figs">'+l.figs.map(function(k){ return ARTE.figura(k, k==='lobo'?'#fee2e2':null); }).join('')+'</div>':'')+
+        '<p>'+l.txt+'</p></div></div>';
+    }).join('')+'</div>'};
+};
+/* v2: "complete as palavras" — a lista inteira na tela, como a folha da professora.
+   Um toque por palavra; errou, a certa aparece na hora. Nada passa sozinho. */
+R.completa=function(t){
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="lista"></div><div class="lplacar"></div>',
+    init:function(el){
+      var box=el.querySelector('.lista'), plac=el.querySelector('.lplacar');
+      function monta(){
+        var itens=emb(t.itens), resp=0, ac=0;
+        box.innerHTML=itens.map(function(it,i){
+          return '<div class="lrow" data-i="'+i+'"><span class="lnum">'+(i+1)+'.</span>'+
+            '<span class="lw">'+W(it.m).replace(/_+/,'<span class="buraco">?</span>')+'</span>'+
+            '<span class="lops">'+(it.op||t.op).map(function(o){ return '<button class="lop">'+o+'</button>'; }).join('')+'</span></div>';
+        }).join('');
+        function placar(){
+          if(resp<itens.length){ plac.innerHTML='Respondidas: '+resp+' de '+itens.length+(resp?' · acertos: '+ac:''); return; }
+          plac.innerHTML='Você acertou '+ac+' de '+itens.length+'. '+(ac===itens.length?'Tudo certo!':'Faça de novo para fixar.')+
+            '<button class="btn calmo" data-a="denovo">Fazer de novo</button>';
+          plac.querySelector('[data-a]').onclick=monta;
+        }
+        box.querySelectorAll('.lrow').forEach(function(row){
+          var it=itens[+row.dataset.i];
+          row.querySelectorAll('.lop').forEach(function(b){ b.onclick=function(){
+            var ok=b.textContent===it.c;
+            row.querySelectorAll('.lop').forEach(function(x){ x.disabled=true; if(x.textContent===it.c) x.classList.add('certa'); });
+            if(!ok) b.classList.add('errada');
+            row.classList.add(ok?'ok':'no');
+            row.querySelector('.lw').innerHTML=W(it.cheia);
+            resp++; if(ok) ac++;
+            placar();
+            fala((ok?'':'A certa é '+it.c+'. ')+puro(it.cheia).replace(/→/g,',').toLowerCase());
+          }; });
+        });
+        placar();
+      }
+      monta();
+    }};
+};
+/* v2: ligar pares (sinônimos): toque numa palavra e depois no par dela */
+R.liga=function(t){
+  var esq=t.pares.map(function(p,i){ return {s:p[0],i:i}; }), dir=emb(t.pares.map(function(p,i){ return {s:p[1],i:i}; }));
+  if(dir.every(function(x,j){ return x.i===j; })) dir.push(dir.shift());
+  function bt(lado){ return function(x){ return '<button class="lg" data-l="'+lado+'" data-i="'+x.i+'">'+x.s+'</button>'; }; }
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+
+    '<div class="liga"><div class="col">'+esq.map(bt('e')).join('')+'</div><div class="col">'+dir.map(bt('d')).join('')+'</div></div>'+
+    '<div class="ordmsg">Toque numa palavra.</div><button class="btn calmo" data-a="re">Recomeçar</button>',
+    init:function(el){
+      var sel=null, feitos=0, msg=el.querySelector('.ordmsg');
+      el.querySelectorAll('.lg').forEach(function(b){ b.onclick=function(){
+        if(b.classList.contains('feito')) return;
+        if(!sel || sel.dataset.l===b.dataset.l){
+          if(sel) sel.classList.remove('sel');
+          sel=(sel===b)?null:b; if(sel){ sel.classList.add('sel'); msg.textContent='Agora toque no sinônimo de '+b.textContent+'.'; }
+          return;
+        }
+        var a=sel; sel=null; a.classList.remove('sel');
+        if(a.dataset.i===b.dataset.i){
+          feitos++; [a,b].forEach(function(x){ x.classList.add('feito'); x.dataset.n=feitos; });
+          var e=a.dataset.l==='e'?a:b, d=a.dataset.l==='e'?b:a;
+          msg.textContent=feitos===t.pares.length?'Muito bem! Todos ligados.':'Isso! '+e.textContent+' = '+d.textContent+'.';
+          fala(e.textContent.toLowerCase()+', '+d.textContent.toLowerCase());
+        }else{
+          [a,b].forEach(function(x){ x.classList.remove('erro'); void x.offsetWidth; x.classList.add('erro'); });
+          setTimeout(function(){ a.classList.remove('erro'); b.classList.remove('erro'); },450);
+          msg.textContent='Ainda não. Esses dois não querem dizer a mesma coisa.';
+        }
+      }; });
+      el.querySelector('[data-a="re"]').onclick=function(){ render(); };
+    }};
+};
 /* treininho: pergunta do LP3_banco, alternativas embaralhadas */
 R.treino=function(t){
   var it=t.item, r=sessao.resp[t.n];
-  return {html:'<div class="tq"><div class="tqnum">Treininho · pergunta '+t.n+' de 3</div><p class="tqp">'+esc(it.p)+'</p>'+
+  return {html:'<div class="tq"><div class="tqnum">Treininho · pergunta '+t.n+' de '+t.tot+'</div><p class="tqp">'+esc(it.p)+'</p>'+
     '<div class="tops">'+t.ord.map(function(oi,j){
       return '<button class="top" data-oi="'+oi+'"><span class="let">'+'ABCD'.charAt(j)+'</span><span>'+esc(it.o[oi])+'</span></button>';
     }).join('')+'</div>'+
@@ -525,7 +681,7 @@ R.fim=function(){
   return {html:'<div class="fim"><svg class="selo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="var(--ok)"/>'+
       '<path d="M28 52l15 15 30-32" stroke="#06251a" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
       '<h2>Lição feita!</h2><p>'+lic.nome+'</p>'+
-      (tot?'<p>No treininho você acertou <b>'+ac+' de 3</b>.</p>':'<p>O treininho ficou sem resposta. Volte e responda quando quiser.</p>')+
+      (tot?'<p>No treininho você acertou <b>'+ac+' de '+tot+'</b>.</p>':'<p>O treininho ficou sem resposta. Volte e responda quando quiser.</p>')+
       '<div class="btnrow">'+(prox?'<button class="btn" data-a="prox">Próxima lição: '+prox.nome+'</button>':'')+
       '<button class="btn calmo" data-a="capa">Ver todas as lições</button></div></div>',
     fala:'Lição feita! '+lic.nome,
@@ -535,18 +691,18 @@ R.fim=function(){
     }};
 };
 
-/* ---------------- capa: a grade das 12 lições ---------------- */
+/* ---------------- capa: a grade das 15 lições ---------------- */
 function renderCapa(){
   var f=feitas(), n=0;
   LICOES.forEach(function(l){ if(f[l.k]) n++; });
   document.body.style.setProperty('--lc','#f472b6');
   titulo.textContent='Português · Estudar';
   tela.innerHTML='<div class="capa"><h1>Português · 3º trimestre</h1>'+
-    '<p class="sub">Toque numa lição. Cada uma tem telinhas curtas e um treininho no fim.</p>'+
+    '<p class="sub">Toque numa lição. Cada uma é curtinha: a regra, exemplos, uma atividade e um treininho no fim.</p>'+
     '<div class="licoes">'+LICOES.map(function(l,i){
-      return '<button class="lic'+(f[l.k]?' ok':'')+'" data-i="'+i+'" style="--lc:'+L.TEMAS[l.tema].cor+'">'+
+      return '<button class="lic'+(f[l.k]?' ok':'')+'" data-i="'+i+'" style="--lc:'+corDe(l)+'">'+
         '<span class="num">'+(i+1)+'</span><span class="feito" aria-label="feita">'+CHECK+'</span>'+
-        ARTE.icone(l.tema)+'<b>'+l.nome+'</b></button>';
+        icDe(l)+'<b>'+l.nome+'</b></button>';
     }).join('')+'</div>'+
     '<div class="placarcapa"><span>'+n+' de '+LICOES.length+' feitas</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div>'+
     '<a class="linkbtn" href="LP3_simulado.html">Fazer o simulado de Português &#8250;</a></div>';
@@ -560,11 +716,11 @@ function renderCapa(){
 function render(){
   try{ speechSynthesis.cancel(); }catch(e){}
   if(est.lic<0){ renderCapa(); window.scrollTo(0,0); return; }
-  var lic=LICOES[est.lic], t=sessao.telas[est.i], cor=L.TEMAS[lic.tema].cor;
+  var lic=LICOES[est.lic], t=sessao.telas[est.i], cor=corDe(lic);
   document.body.style.setProperty('--lc',cor);
   titulo.textContent=lic.nome;
   var r=(R[t.tipo]||R.texto)(t);
-  tela.innerHTML='<div class="lh">'+ARTE.icone(lic.tema)+'<div class="lhtx"><small>Lição '+(est.lic+1)+' · '+lic.nome+'</small>'+
+  tela.innerHTML='<div class="lh">'+icDe(lic)+'<div class="lhtx"><small>Lição '+(est.lic+1)+' · '+lic.nome+'</small>'+
     '<h2>'+t.tit+'</h2></div><button class="ouvir" aria-label="Ouvir">'+OUVIR+'</button></div>'+
     '<div class="corpo">'+r.html+'</div>';
   if(r.init) r.init(tela.querySelector('.corpo'));
@@ -609,6 +765,6 @@ window.LP3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic,
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#f472b6'};</script>
-<script src="sera_theme.js?v=20261011"></script>
+<script src="sera_theme.js?v=20261012"></script>
 </body>
 </html>
