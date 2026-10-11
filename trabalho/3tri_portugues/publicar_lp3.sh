@@ -11,17 +11,20 @@ cd "$SRC"
 git fetch -q origin em-construcao
 git worktree add -q --detach "$W" origin/em-construcao
 cd "$SRC/ferramentas"
-FILES=$(ls LP3_*.html LP3_*.js 2>/dev/null)
+FILES=$(git ls-files "LP3_*.html" "LP3_*.js")
 [ "$1" = "semjogo" ] && FILES=$(echo "$FILES" | grep -v '^LP3_jornada')
 DEPS="OP_estilo.css OP_questao.js OP_voz.js sera_theme.js serafina-core.css serafina-core.js
 assets/react-dom.production.min.js assets/react.production.min.js
 media/video_lp3_poster.jpg media/video_lp3_pt.mp4"
 # vendor de engine do jogo, se existir
-for f in assets/*; do case "$f" in *phaser*|*lp3*) DEPS="$DEPS $f";; esac; done
+for f in $(git ls-files assets); do case "$f" in *phaser*|*lp3*) DEPS="$DEPS $f";; esac; done
 mkdir -p "$W/ferramentas/assets" "$W/ferramentas/media"
-for f in $FILES $DEPS; do cp "$f" "$W/ferramentas/$f"; done
+# copia o BLOB commitado (HEAD), nunca a working tree: agentes podem estar
+# editando os arquivos e o que vai ao ar tem de ser o que foi conferido.
+for f in $FILES $DEPS; do git show "HEAD:ferramentas/$f" > "$W/ferramentas/$f"; done
 # index sem service worker: o sw.js deste ramo so desliga o antigo
-python - "$SRC/index.html" "$W/index.html" <<'EOF'
+git show HEAD:index.html > "$W/index.src.html"
+python - "$W/index.src.html" "$W/index.html" <<'EOF'
 import sys
 s=open(sys.argv[1],encoding='utf-8').read()
 i=s.find("if ('serviceWorker' in navigator) {")
@@ -30,6 +33,7 @@ if i>=0:
     s=s[:i]+"/* sem service worker neste ramo */\n"+s[j:]
 open(sys.argv[2],'w',encoding='utf-8').write(s)
 EOF
+rm "$W/index.src.html"
 cd "$W"
 git add -A
 if git diff --cached --quiet; then echo "nada mudou"; else
