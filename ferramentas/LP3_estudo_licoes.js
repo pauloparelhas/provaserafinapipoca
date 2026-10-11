@@ -5,7 +5,10 @@
    livro "Invenções" da escola (não foi fornecido). Respeitadas as notas
    "Evitar como pergunta": sempre "o caçador"; nada do que o lobo fez
    com a vovó em detalhe; nada de fala exata do gigante nem de quantas
-   vezes João subiu; nada de plural em ÃES/ÃOS.
+   vezes João subiu; nada de plural em ÃES/ÃOS. Vilão só o Lobo Mau: o
+   Gigante nunca é rotulado como vilão/mau (decisão de 11/10).
+   Lacunas não podem formar OUTRA palavra real com a opção errada
+   (NI_O + CH = NICHO, MI_O + NH = MINHO: trocados).
 
    Tipos de telinha (o motor desenha cada um):
      texto       html livre
@@ -49,18 +52,22 @@ return [
   cartoes:[
    {f:'Começo', fig:'livro', b:'“Era uma vez...”'},
    {f:'Mocinho', fig:'chapeu', b:'O herói da história: Chapeuzinho, João.'},
-   {f:'Vilão', fig:'lobo', fundo:'#fee2e2', b:'Quem faz maldade: o Lobo Mau, o Gigante.'},
+   {f:'Vilão', fig:'lobo', fundo:'#fee2e2', b:'Quem faz maldade: o Lobo Mau, que engana a Chapeuzinho.'},
    {f:'Lugar', fig:'castelo', b:'Floresta, castelo, casa da vovó, a terra no alto das nuvens.'},
    {f:'Magia', fig:'feijoes', b:'Feijões mágicos, galinha dos ovos de ouro, harpa que canta, lobo que fala.'},
    {f:'Problema e solução', fig:'machado', b:'Acontece um perigo, e alguém resolve.'},
    {f:'Final feliz', fig:'coracao', b:'“...e viveram felizes para sempre.”'}
   ]},
- {tipo:'escolha', tit:'Mocinho ou vilão?', pergunta:'Esse personagem é mocinho ou vilão?', rotulo:'Personagem', medio:true,
-  op:['Mocinho','Vilão'], itens:[
-   {m:'CHAPEUZINHO VERMELHO', c:'Mocinho', d:'Chapeuzinho é a mocinha da história.'},
-   {m:'LOBO MAU', c:'Vilão', d:'O Lobo Mau engana a Chapeuzinho: é o vilão.'},
-   {m:'JOÃO', c:'Mocinho', d:'João é o herói da sua história.'},
-   {m:'GIGANTE', c:'Vilão', d:'O Gigante do castelo é o vilão da história do João.'}
+ {tipo:'escolha', tit:'De qual história?', pergunta:'Isso é da história da Chapeuzinho ou da história do João?', rotulo:'Personagem ou coisa', medio:true,
+  op:['Chapeuzinho','João'], itens:[
+   {m:'O LOBO MAU', c:'Chapeuzinho', d:'O Lobo Mau é o vilão da Chapeuzinho Vermelho.'},
+   {m:'O GIGANTE', c:'João', d:'O Gigante morava no castelo, lá no alto do pé de feijão.'},
+   {m:'O CAÇADOR', c:'Chapeuzinho', d:'O caçador ouviu, entrou e salvou a Chapeuzinho e a vovó.'},
+   {m:'A VACA', c:'João', d:'João trocou a vaca por feijões mágicos.'},
+   {m:'A CESTA DE DOCES', c:'Chapeuzinho', d:'A cesta de doces era para a vovó doente.'},
+   {m:'A GALINHA DOS OVOS DE OURO', c:'João', d:'João levou a galinha do castelo do Gigante.'},
+   {m:'A CAPA VERMELHA', c:'Chapeuzinho', d:'Por causa da capa com capuz vermelho, a menina se chamava Chapeuzinho Vermelho.'},
+   {m:'A HARPA QUE CANTA', c:'João', d:'A harpa mágica estava no castelo do Gigante.'}
   ]},
  {tipo:'escolha', tit:'É mágico?', pergunta:'Isso é mágico ou é comum?', rotulo:'Coisa', medio:true,
   op:['Mágico','Comum'], itens:[
@@ -123,7 +130,7 @@ return [
    {k:'joao', nome:'João', desc:'trocou a vaca por feijões mágicos'},
    {k:'mae', nome:'A mãe', desc:'ficou brava e jogou os feijões pela janela'},
    {k:'vaca', nome:'A vaca', desc:'era tudo o que a família tinha'},
-   {k:'gigante', nome:'O Gigante', desc:'o vilão: morava num castelo nas nuvens', vilao:true, fundo:'#fee2e2'}
+   {k:'gigante', nome:'O Gigante', desc:'morava num castelo, lá no alto das nuvens'}
   ]},
  {tipo:'revela', tit:'Os objetos mágicos', regra:'Na história do João tem magia. Toque para ver.',
   cartoes:[
@@ -369,13 +376,13 @@ return [
   pares:[['MOLA','MO[LH]A'],['FILA','FI[LH]A'],['MINA','MI[NH]A'],['SONO','SO[NH]O'],['CALA','CA[LH]A']]},
  {tipo:'escolha', tit:'CH, NH ou LH?', pergunta:'Qual dupla completa a palavra?', op:['CH','NH','LH'], itens:[
    {m:'_AVE', cheia:'[CH]AVE', c:'CH', d:'CHAVE, de abrir a porta.'},
-   {m:'NI_O', cheia:'NI[NH]O', c:'NH', d:'NINHO, a casa do passarinho.'},
+   {m:'CAMI_O', cheia:'CAMI[NH]O', c:'NH', d:'CAMINHO, aquele de que a Chapeuzinho não podia sair.'},
    {m:'FO_A', cheia:'FO[LH]A', c:'LH', d:'FOLHA, da árvore.'},
    {m:'GALI_A', cheia:'GALI[NH]A', c:'NH', d:'GALINHA, a dos ovos de ouro.'},
    {m:'_UVA', cheia:'[CH]UVA', c:'CH', d:'CHUVA, que cai das nuvens.'},
    {m:'COE_O', cheia:'COE[LH]O', c:'LH', d:'COELHO, o bicho de orelha comprida.'},
    {m:'ARA_A', cheia:'ARA[NH]A', c:'NH', d:'ARANHA, a que faz teia.'},
-   {m:'MI_O', cheia:'MI[LH]O', c:'LH', d:'MILHO, o da pipoca.'}
+   {m:'OVE_A', cheia:'OVE[LH]A', c:'LH', d:'OVELHA, o bicho da lã.'}
   ]}
 ]},
 

@@ -8,7 +8,8 @@
    foi fornecido). Respeitadas as notas "Evitar como pergunta" do roteiro:
    sempre "o caçador"; nada do que o lobo fez com a vovó em detalhe; nada
    de fala exata do gigante nem de quantas vezes João subiu; nenhum
-   plural em ÃES/ÃOS como pergunta.
+   plural em ÃES/ÃOS como pergunta. Vilão só o Lobo Mau: o Gigante nunca
+   é rotulado como vilão/mau (decisão de 11/10).
 
    MESMO FORMATO do OP_data.js, para o componente único OP_questao.js
    funcionar sem nenhuma mudança:
@@ -75,7 +76,7 @@ var TX_JOAO = [
 ];
 var TX_PARODIA = [
   'ERA UMA VEZ UMA MENINA CHAMADA CHAPEUZINHO AZUL.',
-  'ELA FOI DE PATINETE LEVAR SORVETE PARA O VOVÔ.',
+  'ELA FOI DE PATINETE LEVAR SANDUÍCHE PARA O VOVÔ.',
   'NO CAMINHO, ENCONTROU UM LOBO QUE SÓ COMIA SALADA.'
 ];
 var TX_INVENTO = [
@@ -110,25 +111,25 @@ var ITENS = [
   {t:'TRISTES', no:'Conto de fadas costuma ter final feliz. "Tristes para sempre" não é o final dos contos.'},
   {t:'FELIZES', ok:1},
   {t:'CANSADOS', no:'Ninguém termina um conto de fadas assim. O final conhecido é feliz.'},
-  {t:'BRAVOS', no:'Bravo é o vilão, não o final da história. O final conhecido é feliz.'}
+  {t:'BRAVOS', no:'Ninguém termina um conto de fadas bravo. O final conhecido é feliz.'}
  ],
  dica:'O final dos contos de fadas costuma ser bom para o mocinho.',
  porque:'O final mais conhecido dos contos de fadas é: "e viveram felizes para sempre".',
  proximo:'Lembre: começo = Era uma vez; fim = felizes para sempre.'},
 
 {id:'SCO3', eixo:'conto',
- pede:'QUAL PAR MOSTRA UM MOCINHO E UM VILÃO DA MESMA HISTÓRIA?',
+ pede:'NA HISTÓRIA "CHAPEUZINHO VERMELHO", QUEM É O VILÃO?',
  opts:[
-  {t:'JOÃO E O LOBO MAU', no:'O Lobo Mau é vilão, mas da história da Chapeuzinho, não da história do João.'},
-  {t:'CHAPEUZINHO VERMELHO E O GIGANTE', no:'O Gigante é vilão da história do João. Na história da Chapeuzinho, o vilão é o Lobo Mau.'},
-  {t:'CHAPEUZINHO VERMELHO E O LOBO MAU', ok:1},
-  {t:'JOÃO E O CAÇADOR', no:'O caçador não é vilão: ele salva a Chapeuzinho. E nem é da história do João.'}
+  {t:'O CAÇADOR', no:'O caçador não faz maldade: ele salva a Chapeuzinho e a vovó.'},
+  {t:'A VOVÓ', no:'A vovó estava doente, em casa. Ela não faz maldade com ninguém.'},
+  {t:'O LOBO MAU', ok:1},
+  {t:'A MÃE', no:'A mãe mandou a cesta e deu um conselho. Ela não faz maldade.'}
  ],
- dica:'Pense em cada história separada: quem é o mocinho e quem é o vilão de cada uma?',
- visual:'<div class="pcs"><span class="pc hit">CHAPEUZINHO</span><span class="arw">&times;</span><span class="pc hit">LOBO MAU</span></div>'+
-        '<div class="pcs"><span class="pc">JOÃO</span><span class="arw">&times;</span><span class="pc">GIGANTE</span></div>',
- porque:'Chapeuzinho é a mocinha e o Lobo Mau é o vilão da mesma história. João e o Gigante também formariam um par, mas não aparecem juntos em nenhuma alternativa.',
- proximo:'Confira as DUAS partes da resposta: os dois têm de ser da mesma história.'},
+ dica:'Vilão é quem faz maldade na história. Quem enganou a Chapeuzinho?',
+ visual:'<div class="pcs"><span class="pc">MOCINHA</span><span class="arw">&rarr;</span><span class="pc">CHAPEUZINHO</span></div>'+
+        '<div class="pcs"><span class="pc hit">VILÃO</span><span class="arw">&rarr;</span><span class="pc hit">LOBO MAU</span></div>',
+ porque:'Chapeuzinho é a mocinha. O Lobo Mau enganou a menina e se disfarçou de vovó: ele é o vilão.',
+ proximo:'Vilão é quem faz maldade. Na Chapeuzinho, é o Lobo Mau.'},
 
 {id:'SCO4', eixo:'conto',
  pede:'EM QUAL FRASE APARECE MAGIA?',
@@ -143,16 +144,17 @@ var ITENS = [
  proximo:'Pergunte: isso pode acontecer de verdade? Se não pode, é magia.'},
 
 {id:'SCO5', eixo:'conto',
- pede:'QUAL DESTES LUGARES APARECE MUITO NOS CONTOS DE FADAS?',
+ pede:'NA HISTÓRIA "CHAPEUZINHO VERMELHO", EM QUE LUGAR A MENINA ENCONTROU O LOBO PELA PRIMEIRA VEZ?',
  opts:[
-  {t:'O SUPERMERCADO', no:'Nas histórias da Chapeuzinho e do João não tem supermercado.'},
-  {t:'O CASTELO', ok:1},
-  {t:'O AEROPORTO', no:'Nas histórias da Chapeuzinho e do João não tem aeroporto.'},
-  {t:'A ESTAÇÃO DE METRÔ', no:'Nas histórias da Chapeuzinho e do João não tem estação de metrô.'}
+  {t:'NO CASTELO', no:'O castelo é lugar da história do João, não da Chapeuzinho.'},
+  {t:'NA CASA DA VOVÓ', no:'Na casa da vovó o lobo já estava disfarçado, mas isso foi depois. A primeira vez foi no caminho, antes.'},
+  {t:'NO ALTO DAS NUVENS', no:'O alto das nuvens é lugar da história do João.'},
+  {t:'NA FLORESTA', ok:1}
  ],
- dica:'Lembre onde morava o Gigante.',
- porque:'Floresta e castelo são lugares dos contos de fadas. O Gigante morava num castelo nas nuvens.',
- proximo:'Pense nos lugares das histórias que você conhece: floresta, castelo, casa da vovó.'},
+ dica:'Ela ainda estava no caminho para a casa da vovó.',
+ visual:'<div class="pcs"><span class="pc hit">1. FLORESTA</span><span class="arw">&rarr;</span><span class="pc">2. CASA DA VOVÓ</span></div>',
+ porque:'Chapeuzinho encontrou o Lobo Mau na floresta, no caminho. Só depois o lobo foi para a casa da vovó. Floresta, castelo e casa da vovó são lugares dos contos de fadas.',
+ proximo:'Lugares dos contos: floresta e casa da vovó (Chapeuzinho); castelo no alto das nuvens (João).'},
 
 {id:'SCO6', eixo:'conto',
  pede:'O QUE É UM CONTO DE FADAS?',
@@ -167,9 +169,9 @@ var ITENS = [
  proximo:'Separe: história inventada (conto) de texto que informa ou ensina (notícia, receita, lista).'},
 
 {id:'SCO7', eixo:'conto',
- pede:'NA HISTÓRIA "JOÃO E O PÉ DE FEIJÃO", QUAL É O PROBLEMA E COMO ELE É RESOLVIDO?',
+ pede:'NO FIM DA HISTÓRIA "JOÃO E O PÉ DE FEIJÃO", QUAL É O PROBLEMA E COMO ELE É RESOLVIDO?',
  opts:[
-  {t:'O LOBO ENGANA A MENINA, E O GIGANTE SALVA TODOS.', no:'Lobo e menina são da história da Chapeuzinho. E o Gigante não salva ninguém: ele é o vilão.'},
+  {t:'O LOBO ENGANA A MENINA, E O GIGANTE SALVA TODOS.', no:'Lobo e menina são da história da Chapeuzinho, e quem salva lá é o caçador, não o Gigante.'},
   {t:'A VACA FOGE, E A MÃE COMPRA OUTRA.', no:'A vaca não foge: João troca a vaca por feijões. E a mãe não compra outra.'},
   {t:'JOÃO SE PERDE NA FLORESTA, E O CAÇADOR O ENCONTRA.', no:'O caçador é da história da Chapeuzinho. João não se perde na floresta.'},
   {t:'O GIGANTE DESCE ATRÁS DE JOÃO, E JOÃO CORTA O PÉ DE FEIJÃO.', ok:1}
@@ -196,7 +198,7 @@ var ITENS = [
  pede:'O QUE A MÃE AVISOU?',
  opts:[
   {t:'CORRER BEM RÁPIDO PELA FLORESTA.', no:'O texto não fala em correr. A fala da mãe está na linha com travessão.'},
-  {t:'CONTAR PARA TODOS AONDE IA.', no:'Foi a Chapeuzinho que contou ao lobo aonde ia, e isso foi um erro. A mãe pediu o contrário: não conversar com estranhos.'},
+  {t:'CONTAR PARA TODOS AONDE IA.', no:'Foi a Chapeuzinho que contou ao lobo aonde ia. A mãe pediu outra coisa: não conversar com estranhos.'},
   {t:'DEIXAR A CESTA NA FLORESTA.', no:'A cesta era para a vovó. O texto não manda deixar a cesta na floresta.'},
   {t:'NÃO SAIR DO CAMINHO E NÃO CONVERSAR COM ESTRANHOS.', ok:1}
  ],
@@ -251,7 +253,7 @@ var ITENS = [
  pede:'O LOBO CHEGOU PRIMEIRO À CASA DA VOVÓ PORQUE...',
  opts:[
   {t:'FOI POR UM ATALHO.', ok:1},
-  {t:'PEGOU CARONA COM O CAÇADOR.', no:'O caçador só aparece no fim, para salvar as duas. Ele não deu carona ao lobo.'},
+  {t:'O CAÇADOR LEVOU O LOBO ATÉ LÁ.', no:'O caçador só aparece no fim, para salvar as duas. Ele não ajudou o lobo.'},
   {t:'A VOVÓ FOI BUSCÁ-LO NA FLORESTA.', no:'A vovó estava doente, em casa. Ela não foi buscar o lobo.'},
   {t:'DORMIU NA CASA DA VOVÓ NA NOITE ANTERIOR.', no:'Isso não acontece na história. O lobo correu por um caminho mais curto.'}
  ],
@@ -352,12 +354,12 @@ var ITENS = [
  pede:'QUAL DESTES É UM OBJETO MÁGICO DA HISTÓRIA DE JOÃO?',
  opts:[
   {t:'A CESTA DE DOCES', no:'A cesta é da história da Chapeuzinho, e não é mágica.'},
-  {t:'A HARPA MÁGICA', ok:1},
+  {t:'A HARPA QUE CANTA', ok:1},
   {t:'A CAPA VERMELHA', no:'A capa vermelha é da Chapeuzinho, e não é mágica.'},
   {t:'A CAMA DA VOVÓ', no:'A cama é da casa da vovó, na história da Chapeuzinho. Não é mágica.'}
  ],
  dica:'Na história do João tem feijões mágicos, a galinha dos ovos de ouro e...',
- porque:'Os objetos mágicos da história do João são os feijões mágicos, a galinha dos ovos de ouro e a harpa mágica.',
+ porque:'Os objetos mágicos da história do João são os feijões mágicos, a galinha dos ovos de ouro e a harpa mágica, que canta sozinha.',
  proximo:'Separe as duas histórias: cesta, capa e cama são da Chapeuzinho.'},
 
 /* ======================= PARÁFRASE E PARÓDIA ======================= */
@@ -399,9 +401,9 @@ var ITENS = [
  ],
  dica:'Compare com a original: menina de capuz vermelho, doces, vovó.',
  visual:'<div class="pcs"><span class="pc">VERMELHO</span><span class="arw">&rarr;</span><span class="pc bad">AZUL</span></div>'+
-        '<div class="pcs"><span class="pc">DOCES</span><span class="arw">&rarr;</span><span class="pc bad">SORVETE</span></div>'+
+        '<div class="pcs"><span class="pc">DOCES</span><span class="arw">&rarr;</span><span class="pc bad">SANDUÍCHE</span></div>'+
         '<div class="pcs"><span class="pc">VOVÓ</span><span class="arw">&rarr;</span><span class="pc bad">VOVÔ</span></div>',
- porque:'Vermelho virou azul, doces viraram sorvete e a vovó virou o vovô. Isso foi mudado de propósito: é uma paródia.',
+ porque:'Vermelho virou azul, os doces viraram sanduíche e a vovó virou o vovô. Isso foi mudado de propósito: é uma paródia.',
  proximo:'Para achar o que mudou, ponha a original do lado e compare pedaço por pedaço.'},
 
 {id:'SPA4', eixo:'parodia',
@@ -515,7 +517,7 @@ var ITENS = [
   {t:'NÃO TEM SOM, MAS PRECISA SER ESCRITO.', ok:1},
   {t:'TEM SOM DE R, COMO EM RATO.', no:'Em português, o H do começo não tem som nenhum.'},
   {t:'PODE SER APAGADO, PORQUE NÃO TEM SOM.', no:'Sem o H, a palavra fica escrita errada. Ele não tem som, mas tem de estar lá.'},
-  {t:'TEM SOM DE A.', no:'O H não tem som de A. Ele não tem som nenhum.'}
+  {t:'SÓ É ESCRITO PORQUE A PALAVRA É GRANDE.', no:'O tamanho não importa: HOJE é curtinha e tem H. O H do começo não tem som, mas é escrito.'}
  ],
  dica:'Fale HORTA bem devagar. Dá para ouvir o H?',
  porque:'O H do começo não tem som. Mesmo assim, HORTA se escreve com H.',
@@ -526,7 +528,7 @@ var ITENS = [
  pede:'QUE PALAVRA COMPLETA A FRASE?',
  opts:[
   {t:'ORA', no:'A frase fala do tempo do relógio. Essa palavra se escreve com H: HORA.'},
-  {t:'OURA', no:'Essa palavra não existe. A do relógio é HORA, com H.'},
+  {t:'HÓRA', no:'HORA não tem acento. Só o H do começo e um R: HORA.'},
   {t:'HORA', ok:1},
   {t:'HORRA', no:'HORA tem um R só.'}
  ],
@@ -761,9 +763,9 @@ var ITENS = [
 {id:'SDI4', eixo:'dic',
  pede:'PARA QUE SERVE O DICIONÁRIO?',
  opts:[
-  {t:'PARA CONTAR HISTÓRIAS DE FADAS.', no:'Histórias de fadas estão em livros de contos, não no dicionário.'},
-  {t:'PARA FAZER CONTAS DE MAIS.', no:'Conta se faz na Matemática. O dicionário explica palavras.'},
-  {t:'PARA VER AS HORAS.', no:'Para ver as horas, usamos o relógio.'},
+  {t:'PARA LER UMA HISTÓRIA DO COMEÇO AO FIM.', no:'Histórias de começo ao fim estão nos livros de contos. O dicionário explica palavras, uma por uma.'},
+  {t:'PARA INVENTAR PALAVRAS NOVAS.', no:'O dicionário não inventa palavras: ele explica as que já existem.'},
+  {t:'PARA ENCONTRAR AS PALAVRAS EM ORDEM DE TAMANHO.', no:'No dicionário, as palavras ficam em ordem alfabética, não em ordem de tamanho.'},
   {t:'PARA DESCOBRIR O SIGNIFICADO DE UMA PALAVRA E COMO ELA SE ESCREVE.', ok:1}
  ],
  dica:'O que tem dentro do dicionário? Palavras explicadas.',
@@ -776,8 +778,8 @@ var ITENS = [
  opts:[
   {t:'VERBETE', ok:1},
   {t:'PALAVRA-GUIA', no:'Palavras-guia ficam no alto da página e mostram a primeira e a última palavra dela.'},
-  {t:'TÍTULO', no:'Título é o nome de um texto. No dicionário, a palavra explicada tem outro nome.'},
-  {t:'RIMA', no:'Rima é quando palavras terminam com o mesmo som. Não tem nada a ver.'}
+  {t:'ALFABETO', no:'Alfabeto são as 26 letras, de A a Z. A palavra explicada tem outro nome.'},
+  {t:'SÍLABA', no:'Sílaba é um pedacinho da palavra, como BO-LA. A palavra explicada tem outro nome.'}
  ],
  dica:'Começa com V.',
  porque:'Cada palavra explicada no dicionário, com o seu significado, é um verbete.',
@@ -816,7 +818,7 @@ var ITENS = [
   {t:'PARA ACHAR O QUE JÁ EXISTIA NA NATUREZA.', no:'Achar o que já existia é DESCOBERTA, não invenção.'},
   {t:'PARA RESOLVER PROBLEMAS E FACILITAR A VIDA.', ok:1},
   {t:'PARA DEIXAR A NOITE MAIS ESCURA.', no:'É o contrário: a lâmpada ilumina a noite.'},
-  {t:'PARA ASSUSTAR AS PESSOAS.', no:'O texto não diz isso.'}
+  {t:'PARA DEIXAR A VIDA MAIS DIFÍCIL.', no:'É o contrário: o texto diz que as invenções FACILITAM a vida.'}
  ],
  dica:'A resposta está nas duas primeiras linhas.',
  visual:'<p class="vx">AS PESSOAS INVENTAM COISAS <span class="mk">PARA RESOLVER PROBLEMAS E FACILITAR A VIDA</span>.</p>',
@@ -824,17 +826,17 @@ var ITENS = [
  proximo:'Procure no texto a palavra PARA perto de INVENTAM.'},
 
 {id:'SIN2', eixo:'invento', enun:'LEIA O TEXTO:', texto:TX_INVENTO,
- pede:'QUEM É CONHECIDO COMO O PAI DA AVIAÇÃO?',
+ pede:'SANTOS DUMONT É CONHECIDO COMO O PAI DA AVIAÇÃO. SEGUNDO O TEXTO, O QUE ELE CRIOU?',
  opts:[
-  {t:'JOÃO, DO PÉ DE FEIJÃO', no:'João é personagem de conto de fadas. O texto fala de outra pessoa.'},
-  {t:'O CAÇADOR', no:'O caçador é da história da Chapeuzinho.'},
-  {t:'SANTOS DUMONT', ok:1},
-  {t:'O GIGANTE', no:'O Gigante é o vilão da história do João.'}
+  {t:'A LÂMPADA', no:'A lâmpada aparece no texto, mas como exemplo de invenção que ilumina a noite. O texto não diz que foi Santos Dumont.'},
+  {t:'O FOGO', no:'O texto diz que o fogo não foi inventado: ele já existia na natureza.'},
+  {t:'O 14-BIS', ok:1},
+  {t:'A RODA', no:'O texto não fala em roda. Leia a linha logo depois do nome de Santos Dumont.'}
  ],
- dica:'Procure no texto a palavra AVIAÇÃO.',
- visual:'<p class="vx">O BRASILEIRO <span class="mk">SANTOS DUMONT</span> É CONHECIDO COMO O PAI DA AVIAÇÃO.</p>',
- porque:'O texto diz: o brasileiro Santos Dumont é conhecido como o pai da aviação. Ele criou o 14-Bis.',
- proximo:'Ache no texto a palavra da pergunta e leia a linha inteira.'},
+ dica:'Procure no texto o nome SANTOS DUMONT e leia a linha seguinte.',
+ visual:'<p class="vx">O BRASILEIRO <span class="mk">SANTOS DUMONT</span> É CONHECIDO COMO O PAI DA AVIAÇÃO.</p><p class="vx">ELE CRIOU <span class="mk">O 14-BIS</span>.</p>',
+ porque:'O texto diz: o brasileiro Santos Dumont é conhecido como o pai da aviação. Ele criou o 14-Bis, um avião.',
+ proximo:'Ache no texto a palavra da pergunta e leia a linha inteira, e a seguinte.'},
 
 {id:'SIN3', eixo:'invento', enun:'LEIA O TEXTO:', texto:TX_INVENTO,
  pede:'POR QUE O TEXTO DIZ QUE O FOGO NÃO FOI INVENTADO?',
@@ -876,12 +878,12 @@ var ITENS = [
 {id:'SIN6', eixo:'invento',
  pede:'QUEM INVENTA ALGUMA COISA É CHAMADO DE...',
  opts:[
-  {t:'VILÃO', no:'Vilão é o personagem que faz maldade nas histórias.'},
-  {t:'LEITOR', no:'Leitor é quem lê.'},
-  {t:'CAÇADOR', no:'Caçador é personagem da Chapeuzinho.'},
+  {t:'DESCOBRIDOR', no:'Descobridor é quem ACHA algo que já existia. Quem cria algo novo tem outro nome.'},
+  {t:'INVENÇÃO', no:'Invenção é a COISA criada, não a pessoa. A pessoa tem outro nome.'},
+  {t:'LEITOR', no:'Leitor é quem lê. Quem inventa tem outro nome.'},
   {t:'INVENTOR', ok:1}
  ],
- dica:'Inventar... inven...',
+ dica:'A pergunta pede a PESSOA. Inventar... inven...',
  porque:'Quem inventa é o inventor. Santos Dumont foi um inventor.',
  proximo:'A palavra de quem faz vem da palavra do que se faz: inventar, inventor.'},
 
@@ -1102,7 +1104,7 @@ var ITENS = [
   {t:'LIMÕES', ok:1},
   {t:'LIMÃOS', no:'LIMÃO segue a regra mais comum: ÃO vira ÕES.'},
   {t:'LIMÕS', no:'Falta o E: ÃO vira ÕES.'},
-  {t:'LIMONES', no:'Essa forma não existe em português. ÃO vira ÕES.'}
+  {t:'LIMÃOES', no:'Não se põe ES depois do ÃO: o ÃO vira ÕES.'}
  ],
  dica:'ÃO vira...',
  visual:'<div class="pcs"><span class="pc">LIM</span><span class="pc bad">ÃO</span><span class="arw">&rarr;</span><span class="pc">LIM</span><span class="pc hit">ÕES</span></div>',
