@@ -44,7 +44,7 @@ function perguntaArena(item,opts,aoResponder,aoContinuar){
   var ordem=embaralha(item.o.map(function(_,i){ return i; })), certa=ordem.indexOf(item.c), letras='ABCD';
   var card=$('qcard'); card.style.setProperty('--tc',tema.cor);
   var h='<div class="qtimer"><div class="qtbar" id="qTbar"></div><span class="qtseg" id="qTseg">'+opts.lim+'</span></div>';
-  h+='<div class="qtop"><span class="qtema">'+esc(tema.nome)+'</span><span class="qseq">'+(opts.chefao?'Duelo ':'Pergunta ')+opts.i+' de '+opts.n+'</span><span class="qpeixes" title="Peixes">'+SVG.peixe+'<b>'+opts.peixes+'</b><i>/ meta '+opts.meta+'</i></span><button class="qvoz" id="qVoz" aria-label="Ouvir a pergunta">'+SVG.ouvir+'</button></div>';
+  h+='<div class="qtop"><span class="qtema">'+esc(tema.nome)+'</span><span class="qseq">'+(opts.chefao?'Duelo ':'Pergunta ')+opts.i+' de '+opts.n+'</span><span class="qpeixes" title="Peixes">'+SVG.peixe+'<b>'+opts.peixes+'</b><i>/ meta '+opts.meta+'</i></span><button class="qvoz" id="qVoz" aria-label="Ouvir a pergunta">'+SVG.ouvir+'</button><button class="qsair" onclick="btnSairArena.click()" aria-label="Sair das perguntas">&#10005; Sair</button></div>';
   h+='<div class="qp" id="qP">'+esc(item.p)+'</div>';
   h+='<div class="qops n'+ordem.length+'" id="qOps">';
   ordem.forEach(function(oi,k){ h+='<button class="qop" data-k="'+k+'"><span class="n">'+letras[k]+'</span><span class="tx">'+esc(item.o[oi])+'</span></button>'; });
