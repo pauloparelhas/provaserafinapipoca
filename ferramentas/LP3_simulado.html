@@ -158,13 +158,13 @@ body.papel .escbar.n-ok b{color:#1b5e20} body.papel .escbar.n-quase b{color:#8a5
    dicionário ≈ 55%, conto como gênero + paráfrase/paródia ≈ 35%,
    invenções ≈ 10%. As cotas moram no banco (FAMILIAS[].cota) e somam 12.
 
-   Três jeitos de treinar:
+   Dois jeitos de treinar:
      · Aquecer ......... 5 de marcar: 3 conteúdos do bloco A (ortografia,
                          plural, dicionário) + 2 dos blocos B/C.
-     · Prova inteira ... 12 de marcar (7 A + 4 B + 1 C) e depois a PARTE
-                         ESCRITA com 4 tarefas, como a folha da escola.
-     · Parte escrita ... só as tarefas de escrever (8), sorteadas do banco
-                         do LP3_escrita_data.js.
+     · Prova inteira ... 12 de marcar (7 A + 4 B + 1 C).
+     (A PARTE ESCRITA foi descontinuada em 11/10 a pedido do Paulo: no
+      aparelho não há como escrever, e no caderno fica lento. O código
+      LP3_escrita*.js fica no repo para um uso futuro em que faça sentido.)
 
    Motor das questões de marcar intacto (OP_questao.js): errou, abre a
    correção e entra uma questão-irmã da mesma família, fora da nota. O
@@ -240,7 +240,7 @@ function App(){
     var q=montaRodada(n);
     setModo(n>=RODADA?'prova':'aquecer');
     setFila(q); setCur(0); setResp({}); setExtra({});
-    setEsc(n>=RODADA ? LP3E.sorteia(ESC_PROVA) : []); setEcur(0); setEnotas({});
+    setEsc([]); /* parte escrita descontinuada em 11/10 (Paulo): nao ha como escrever no aparelho */ setEcur(0); setEnotas({});
     setTela('q');
     marcaVisto(q.map(function(i){ return i.id; }));
   }
@@ -298,22 +298,19 @@ function App(){
     return h('div',null,
       h('h1',{className:'tt'},'Simulado — Português'),
       h('p',{className:'sub'},'No jeito da prova da escola: completar palavras, plural, dicionário, conto de fadas, paráfrase, paródia e invenções. Errou, o truque aparece na hora e vem outra do mesmo tipo.'),
-      h('div',{className:'grade tres'},
+      h('div',{className:'grade duas'},
         h('button',{className:'linha',onClick:function(){ comeca(AQUECER); }},
           h('span',{className:'n'},String(AQUECER)),
           h('span',null,h('b',null,'Aquecer'),h('small',null,'cinco perguntas de marcar'))),
         h('button',{className:'linha',onClick:function(){ comeca(RODADA); }},
           h('span',{className:'n'},String(RODADA)),
-          h('span',null,h('b',null,'Prova inteira'),h('small',null,RODADA+' de marcar e '+ESC_PROVA+' para escrever'))),
-        h('button',{className:'linha',onClick:comecaEscrita},
-          h('span',{className:'n'},String(ESC_SO)),
-          h('span',null,h('b',null,'Parte escrita'),h('small',null,'só as tarefas de escrever')))
+          h('span',null,h('b',null,'Prova inteira'),h('small',null,RODADA+' perguntas, igual à prova'))),
       ),
       h('div',{className:'bancobar'},
         h('div',{className:'bancofill',style:{width:Math.round(jaVistas/totalBanco*100)+'%'}})),
       h('p',{className:'progresso'},
         faltam>0
-          ? 'São '+totalBanco+' perguntas de marcar: dá para '+rodadas+' provas inteiras sem repetir. Você já viu '+jaVistas+' e faltam '+faltam+'. E mais '+LP3E.BANCO.length+' tarefas de escrever.'
+          ? 'São '+totalBanco+' perguntas de marcar: dá para '+rodadas+' provas inteiras sem repetir. Você já viu '+jaVistas+' e faltam '+faltam+'.'
           : 'Você já passou pelas '+totalBanco+' perguntas do banco. Daqui para a frente elas voltam a aparecer.'),
       jaVistas>0 && h('div',{className:'linhabtn',style:{justifyContent:'center'}},
         h('button',{className:'mini',onClick:function(){
