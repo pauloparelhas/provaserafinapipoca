@@ -29,7 +29,7 @@ var TEMAS = {
   ggu:     {nome:'G ou GU',              cor:'#fb923c', emoji:'🎸'},
   dic:     {nome:'Dicionário',           cor:'#60a5fa', emoji:'📖'},
   invento: {nome:'Invenções e descobertas', cor:'#facc15', emoji:'💡'},
-  cqu:     {nome:'CA CO CU · QUE QUI',   cor:'#34d399', emoji:'🧀'},
+  cqu:     {nome:'C ou QU',   cor:'#34d399', emoji:'🧀'},
   dig:     {nome:'CH · NH · LH',         cor:'#2dd4bf', emoji:'🔑'},
   plural:  {nome:'Plural',               cor:'#f87171', emoji:'🎈'}
 };
@@ -62,7 +62,7 @@ var ITENS = [
 {id:'ch4',tema:'chapeu',p:'"Vovó, que olhos grandes você tem!" O que o lobo respondeu?',o:['É para te ver melhor!','É para te ouvir melhor!','É para te devorar!'],c:0,
  dica:'Olhos servem para...',ex:'Olhos grandes: "é para te ver melhor!". Orelhas: ouvir. Boca: devorar.'},
 {id:'ch5',tema:'chapeu',p:'"Que boca grande você tem!" O que o lobo respondeu?',o:['É para te devorar!','É para te ver melhor!','É para cantar!'],c:0,
- dica:'É a parte mais assustadora da história.',ex:'"É para te devorar!" é a última fala do lobo no diálogo.'},
+ dica:'É a última fala do lobo.',ex:'"É para te devorar!" é a última fala do lobo no diálogo.'},
 {id:'ch6',tema:'chapeu',p:'Como o lobo chegou antes na casa da vovó?',o:['Foi por um atalho','Pegou um avião','Dormiu na floresta'],c:0,
  dica:'Atalho é um caminho mais curto.',ex:'O lobo correu por um atalho e chegou primeiro.'},
 {id:'ch7',tema:'chapeu',p:'Quem salvou a Chapeuzinho e a vovó?',o:['O caçador','O Gigante','O João'],c:0,
@@ -127,8 +127,6 @@ var ITENS = [
  dica:'É uma palavra de G antes do I.',ex:'GIRAFA se escreve com G.'},
 {id:'jg3',tema:'jg',p:'Complete: ___ELO (água congelada)',o:['G','J'],c:0,
  dica:'Começa igual a GELADEIRA.',ex:'GELO se escreve com G.'},
-{id:'jg4',tema:'jg',p:'Complete: CA___U (uma fruta)',o:['J','G'],c:0,
- dica:'Antes do U, o som de jê é sempre com...',ex:'JU: sempre J. CAJU.'},
 {id:'jg5',tema:'jg',p:'Qual está escrita certo?',o:['FEIJÃO','FEIGÃO','FEIXÃO'],c:0,
  dica:'Antes de Ã, o som de jê é com J.',ex:'FEIJÃO, com J — igual ao nome JOÃO.'},
 {id:'jg6',tema:'jg',p:'Qual está escrita certo?',o:['GIGANTE','JIGANTE','GUIGANTE'],c:0,
@@ -176,7 +174,7 @@ var ITENS = [
 {id:'di6',tema:'dic',p:'Qual vem DEPOIS de todas no dicionário?',o:['ZEBRA','CASA','MAPA'],c:0,
  dica:'Qual é a última letra do alfabeto?',ex:'Z é a última letra: ZEBRA vem depois.'},
 {id:'di7',tema:'dic',p:'Qual ordem está certa?',o:['CASA · COPO · CUBO','CUBO · CASA · COPO','COPO · CUBO · CASA'],c:0,
- dica:'Segunda letra: A, O, U.',ex:'CA, CO, CU: casa, copo, cubo.'},
+ dica:'Segunda letra: A, O, U.',ex:'Casa, copo, cubo: a segunda letra é A, depois O, depois U.'},
 {id:'di8',tema:'dic',p:'As palavras no alto da página do dicionário se chamam...',o:['palavras-guia','palavras-chave','títulos'],c:0,
  dica:'Elas guiam você para achar a página.',ex:'As palavras-guia mostram a primeira e a última palavra da página.'},
 
@@ -196,7 +194,7 @@ var ITENS = [
 {id:'in7',tema:'invento',p:'Por que as pessoas inventam coisas?',o:['Para resolver problemas e facilitar a vida','Para fazer bagunça','Para assustar'],c:0,
  dica:'Pense na lâmpada: o que ela resolve?',ex:'Invenções resolvem problemas, como a lâmpada que ilumina a noite.'},
 
-/* ---------------- CA CO CU · QUE QUI ---------------- */
+/* ---------------- C ou QU ---------------- */
 {id:'cq1',tema:'cqu',p:'Complete: ___EIJO',o:['QU','C','K'],c:0,
  dica:'Antes do E, o som de quê se escreve com...',ex:'QUEIJO: QUE, com U quietinho.'},
 {id:'cq2',tema:'cqu',p:'Complete: ___ELHO',o:['CO','QUO','QU'],c:0,
@@ -205,12 +203,12 @@ var ITENS = [
  dica:'Antes do I, o som de quê precisa do U.',ex:'ESQUILO: QUI.'},
 {id:'cq4',tema:'cqu',p:'Qual está escrita certo?',o:['MÁQUINA','MÁCINA','MÁKINA'],c:0,
  dica:'Uma invenção! Antes do I, som de quê...',ex:'MÁQUINA: QUI.'},
-{id:'cq5',tema:'cqu',p:'Complete: ___BO (forma de dado)',o:['CU','QU','CO'],c:0,
- dica:'Antes do U, só o C basta.',ex:'CUBO: CU.'},
+{id:'cq5',tema:'cqu',p:'Complete: ___UBO (forma de dado)',o:['C','QU','CH'],c:0,
+ dica:'Antes do U, só o C basta.',ex:'CUBO: antes do U, só o C.'},
 {id:'cq6',tema:'cqu',p:'Qual está escrita certo?',o:['QUIABO','CIABO','QIABO'],c:0,
  dica:'É um legume. Começa com o som de quê antes do I.',ex:'QUIABO: QUI.'},
 {id:'cq7',tema:'cqu',p:'Antes de E e I, o som de quê se escreve com...',o:['QU','C','CH'],c:0,
- dica:'Pense em QUEIJO e QUIABO.',ex:'QUE e QUI. Antes de A, O, U, é C: CA, CO, CU.'},
+ dica:'Pense em QUEIJO e QUIABO.',ex:'QUE e QUI. Antes de A, O e U, é só C: casa, copo, cubo.'},
 {id:'cq8',tema:'cqu',p:'Complete: ___SA',o:['CA','QUA','QUE'],c:0,
  dica:'Onde você mora.',ex:'CASA: CA.'},
 {id:'cq9',tema:'cqu',p:'Qual está escrita certo?',o:['MOSQUITO','MOSCITO','MOSKITO'],c:0,
@@ -297,7 +295,7 @@ function regraDIG(x){ return x[1]+': duas letras, um som só.'; }
 
 maisH();
 lacunas('jg','rj',[
- ['','J','ANELA'],['','J','ACARÉ'],['','J','ABUTI'],['','J','OIA'],['','J','UBA'],['CA','J','U','fruta'],['LARAN','J','A'],
+ ['','J','ANELA'],['','J','ACARÉ'],['','J','ABUTI'],['','J','OIA'],['','J','UBA'],['LARAN','J','A'],
  ['QUEI','J','O'],['FEI','J','ÃO'],['BEI','J','O'],['','J','EITO'],['','J','ILÓ'],['','J','IPE','carro'],['CAN','J','ICA'],['SU','J','EIRA'],
  ['','G','ELO'],['','G','ENTE'],['','G','ELADEIRA'],['','G','IRAFA'],['','G','IGANTE'],['','G','IRASSOL'],['MÁ','G','ICO'],
  ['TI','G','ELA'],['PÁ','G','INA'],['RELÓ','G','IO']
@@ -388,7 +386,7 @@ function ordena(a){ return a.slice().sort(function(x,y){ return x.localeCompare(
  ['parodia','Qual é um sinônimo de DOCES?',['guloseimas','legumes','salgados'],'Doces e guloseimas querem dizer a mesma coisa.'],
  ['parodia','Qual é um sinônimo de GRANDE?',['enorme','pequeno','baixo'],'Grande e enorme querem dizer a mesma coisa.'],
  ['parodia','Qual é um sinônimo de BRAVO?',['zangado','alegre','calmo'],'Bravo e zangado querem dizer a mesma coisa.'],
- ['parodia','"Não atire o pau no gato" é uma paródia de qual música?',['Atirei o pau no gato','Parabéns a você','Ciranda cirandinha'],'Mesma melodia, letra mudada de propósito: paródia de "Atirei o pau no gato".'],
+ ['parodia','"Ciranda, cirandinha, vamos todos estudar" é uma paródia de qual música?',['Ciranda, cirandinha','Parabéns a você','Borboletinha'],'Mesma melodia, letra mudada de propósito: paródia de "Ciranda, cirandinha" (a original diz "vamos todos cirandar").'],
  ['parodia','Paródia também pode ser feita com...',['música, mudando a letra','números','mapas'],'Na paródia de música, a melodia fica e a letra muda.'],
  ['parodia','Na paráfrase, o SENTIDO da história...',['continua igual','muda de propósito','fica engraçado'],'Paráfrase muda as palavras, não o sentido.'],
  ['dic','MANGA pode ser fruta e também parte da camisa. Isso mostra que uma palavra...',['pode ter mais de um significado','não está no dicionário','está escrita errado'],'O dicionário mostra todos os significados da palavra.'],

@@ -36,7 +36,7 @@ vídeo (LP3_video). Banco de perguntas curtas: `ferramentas/LP3_banco.js`.
   - "Chapeuzinho levou doces para a vovó." → "A garota levou guloseimas para a avó."
 - **Paródia** = **imitar** um texto conhecido e **mudar** alguma coisa **de propósito** (personagem, lugar, objeto, final), muitas vezes para ficar **engraçado**. Dá para reconhecer o texto original.
   - "Os três porquinhos fizeram casas de chocolate."
-  - **Paródia também se faz com música:** a mesma melodia, com a letra mudada. "Atirei o pau no gato" → "Não atire o pau no gato, porque isso não se faz".
+  - **Paródia também se faz com música:** a mesma melodia, com a letra mudada. "Ciranda, cirandinha, vamos todos cirandar" → "Ciranda, cirandinha, vamos todos estudar".
 - **Teste rápido:** o sentido continua igual? → paráfrase. Mudou de propósito, imitando o original? → paródia.
 
 ## Mapa insumo → átomos
@@ -157,7 +157,7 @@ Sem "bem-vindos", sem falar em prova, sem metalinguagem. Só conteúdo, tom de c
 3. **Os elementos.** "Preste atenção nos elementos. O tempo: era uma vez, há muito tempo. O lugar: um reino, um castelo, uma floresta. Os personagens: o herói, o vilão e os seres mágicos, como fadas, bruxas, gigantes e animais que falam. E sempre tem magia."
 4. **Os elementos nas duas histórias.** "Em Chapeuzinho Vermelho, o lugar é a floresta, a magia é um lobo que fala, o problema é o lobo enganar a menina, e a solução é o caçador salvar a menina e a vovó. Em João e o pé de feijão, a magia são os feijões mágicos, a galinha dos ovos de ouro e a harpa que canta. O problema é fugir do Gigante, e a solução é cortar o pé de feijão."
 5. **Paráfrase.** "Paráfrase é contar com as suas palavras, sem mudar o sentido. O segredo são os sinônimos, palavras que querem dizer a mesma coisa: menina e garota, vovó e avó, floresta e mata, doces e guloseimas. Chapeuzinho levou doces para a vovó. Paráfrase: a garota levou guloseimas para a avó. Mudaram as palavras. O sentido ficou igual."
-6. **Paródia.** "Paródia é imitar um texto conhecido e mudar alguma coisa de propósito, quase sempre para ficar engraçado: os três porquinhos fizeram casas de chocolate! Dá para fazer paródia de música também: a mesma melodia, com a letra nova. Atirei o pau no gato virou: não atire o pau no gato, porque isso não se faz."
+6. **Paródia.** "Paródia é imitar um texto conhecido e mudar alguma coisa de propósito, quase sempre para ficar engraçado: os três porquinhos fizeram casas de chocolate! Dá para fazer paródia de música também: a mesma melodia, com a letra nova. Ciranda, cirandinha, vamos todos cirandar virou: ciranda, cirandinha, vamos todos estudar!"
 7. **Paráfrase ou paródia?** "Para saber, pergunte: o sentido ficou igual? É paráfrase. Mudou de propósito, imitando o original? É paródia."
 8. **Letra H.** "Algumas palavras começam com H. O H no começo não faz som nenhum, mas é escrito: hoje, homem, hotel, hospital, hipopótamo, helicóptero, história, horta, herói. Ovo, uva, ilha e escola não têm H."
 9. **J ou G.** "O som de jê pode ser escrito com J ou com G. Com A, O e U, é sempre J: janela, jacaré, joia, caju, laranja, feijão. Com E e I, pode ser J ou G: jeito, jiló e jipe têm J; gelo, gente, girafa, gigante e mágico têm G. Essas a gente aprende palavra por palavra."
@@ -190,3 +190,8 @@ Cenário de cada cena = o próprio assunto (floresta da Chapeuzinho, pé de feij
 1. **Resposta inequívoca:** nenhuma alternativa errada pode ser defendida como certa por alguém que conhece outra versão da história ou outro sentido da palavra (ex.: "___ATO" com J forma JATO; "NI___O" com CH forma NICHO; ESTÓRIA existe no dicionário).
 2. **Prepara para a prova:** cada pergunta treina um átomo da tabela acima no formato em que a escola cobra; nada de pergunta-brinde com distrator absurdo que não ensina nada.
 3. Julgamento moral de personagem (vilão, bom, mau, certo, errado) só para o Lobo Mau.
+
+## Adequação à idade (11/10, pedido do Paulo)
+- Nunca "é para te comer": usar "é para te devorar".
+- Nunca a sílaba CU sozinha (escrita, destacada ou lida): falar "C com A, O e U" e mostrar palavras inteiras (casa, copo, cubo). Tema chama-se "C ou QU".
+- Nada de "pau", "cuca", "cagu" (distrator), "chupa", "cala"; paródia de música = "Ciranda, cirandinha".
