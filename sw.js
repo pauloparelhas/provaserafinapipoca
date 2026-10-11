@@ -1,6 +1,6 @@
 // Service Worker — Projeto Serafina
 // Estratégia: network-first para HTML, cache-first para base CSS/JS
-var CACHE = 'serafina-v31';
+var CACHE = 'serafina-v32';
 
 // Arquivos base compartilhados — pre-cache no install.
 // Caminhos RELATIVOS ao escopo do SW: com barra inicial eles apontavam
@@ -14,6 +14,7 @@ var BASE_FILES = [
   'ferramentas/sera_summary.js',
   'ferramentas/MAT2_data.js',
   'ferramentas/OP_data.js',
+  'ferramentas/LP3_banco.js',
   'ferramentas/OP_questao.js',
   'ferramentas/OP_voz.js',
   'ferramentas/OP_estilo.css',

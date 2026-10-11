@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Estudar — Português · 3º trimestre</title>
+<link rel="stylesheet" href="serafina-core.css?v=20261011">
+<style>
+/* ============================================================
+   LP3_estudo — "o conteúdo sendo ensinado".
+   12 lições na ordem do roteiro (trabalho/3tri_portugues/_roteiro.md).
+   Cada lição: 3 a 6 telinhas curtas + Treininho (3 do LP3_banco.js).
+   Dados das lições: LP3_estudo_licoes.js · desenhos: LP3_arte.js.
+   ============================================================ */
+:root{
+  --fs:1;
+  --bg:#0d0b1e; --bg2:#11253a;
+  --ink:#f2f7ff; --soft:rgba(255,255,255,.66); --dim:rgba(255,255,255,.46);
+  --card:#15243c; --line:rgba(255,255,255,.14); --surf:rgba(255,255,255,.06);
+  --accent:#f472b6; --accent2:#fbbf24; --ok:#34d399; --no:#f87171;
+  --lc:#f472b6;
+}
+body.light{ --surf:rgba(11,32,51,.05); --dim:rgba(11,32,51,.55); }
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:#0d0b1e}
+html,body{min-height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));
+  color:var(--ink);overflow-x:hidden}
+button{font-family:inherit;color:inherit}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+
+/* ---------- topo ---------- */
+.topbar{display:flex;align-items:center;gap:5px;padding:6px 8px;background:var(--card);
+  box-shadow:0 2px 10px rgba(0,0,0,.22);position:sticky;top:0;z-index:30}
+.topbar .title{font-weight:900;font-size:calc(.88rem*var(--fs));flex:1;min-width:0;line-height:1.1;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:11px;background:var(--line);color:var(--ink);
+  font-size:.95rem;font-weight:900;cursor:pointer;padding:0 6px;flex-shrink:0;display:inline-flex;
+  align-items:center;justify-content:center}
+.iconbtn svg{width:22px;height:22px}
+.iconbtn:active{transform:scale(.92)}
+.bar{height:5px;background:var(--line)}
+.bar span{display:block;height:100%;width:0;background:var(--lc);transition:width .3s}
+
+/* ---------- palco ---------- */
+.stage{flex:1;display:flex;justify-content:center;padding:10px 10px 84px}
+.card{width:100%;max-width:780px;background:var(--card);border-radius:18px;border:1px solid var(--line);
+  box-shadow:0 8px 26px rgba(0,0,0,.25);padding:14px 14px 18px;--lcx:var(--lc)}
+body.light .card{--lcx:color-mix(in srgb,var(--lc) 58%,#000)}
+
+/* ---------- grade de lições ---------- */
+.capa h1{font-size:calc(1.35rem*var(--fs));font-weight:900;line-height:1.15}
+.capa p.sub{font-size:calc(.92rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.4;margin:4px 0 12px}
+.licoes{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px}
+.lic{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 8px 12px;
+  border-radius:16px;border:2px solid color-mix(in srgb,var(--lc) 55%,transparent);cursor:pointer;text-align:center;
+  background:linear-gradient(170deg,color-mix(in srgb,var(--lc) 26%,var(--card)),var(--card));min-height:150px}
+.lic:active{transform:translateY(1px)}
+.lic .icone{width:72px;height:72px}
+.lic .num{position:absolute;top:7px;left:8px;min-width:26px;height:26px;border-radius:9px;background:var(--lc);
+  color:#1a1530;font-weight:900;font-size:.82rem;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.lic b{font-size:calc(.95rem*var(--fs));font-weight:900;line-height:1.18}
+.lic .feito{position:absolute;top:7px;right:8px;width:26px;height:26px;border-radius:50%;background:var(--ok);
+  display:none;align-items:center;justify-content:center}
+.lic .feito svg{width:16px;height:16px}
+.lic.ok .feito{display:flex}
+.lic.ok{border-color:var(--ok)}
+.placarcapa{display:flex;align-items:center;gap:10px;margin:14px 0 4px;font-weight:900;font-size:calc(.86rem*var(--fs));color:var(--soft)}
+.placarcapa .trilho{flex:1;height:9px;border-radius:6px;background:var(--line);overflow:hidden}
+.placarcapa .trilho i{display:block;height:100%;background:var(--ok)}
+.linkbtn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;min-height:52px;border-radius:14px;
+  border:2px solid var(--line);background:var(--surf);color:var(--ink);font-weight:900;font-size:calc(.95rem*var(--fs));
+  text-decoration:none;padding:0 14px}
+
+/* ---------- cabeçalho de cada telinha ---------- */
+.lh{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.lh .icone{width:44px;height:44px;flex-shrink:0;border-radius:12px;background:color-mix(in srgb,var(--lc) 22%,transparent);padding:3px}
+.lh .lhtx{flex:1;min-width:0}
+.lh small{display:block;font-size:calc(.7rem*var(--fs));font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:var(--lcx)}
+.lh h2{font-size:calc(1.18rem*var(--fs));font-weight:900;line-height:1.18}
+.ouvir{min-width:48px;min-height:44px;border-radius:12px;border:2px solid var(--line);background:var(--surf);
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;font-weight:900;
+  font-size:calc(.8rem*var(--fs));padding:0 10px;flex-shrink:0}
+.ouvir svg{width:20px;height:20px}
+/* Thalita ou nada (OP_voz.js): sem a voz certa, nada de botão de ouvir */
+.ouvir,#sombtn{display:none!important}
+body.voz-ok .ouvir,body.voz-ok #sombtn{display:inline-flex!important}
+
+/* ---------- regra e exemplos ---------- */
+.regra{font-size:calc(1.08rem*var(--fs));font-weight:800;line-height:1.48;padding:11px 13px;border-radius:14px;
+  background:color-mix(in srgb,var(--lc) 13%,transparent);margin-bottom:12px}
+.regra b{color:var(--lcx)}
+.regra + .regra{margin-top:-4px}
+.pals{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 10px}
+.pal{min-height:56px;padding:6px 14px;border-radius:14px;border:2px solid var(--line);background:var(--surf);
+  font-size:calc(1.45rem*var(--fs));font-weight:900;letter-spacing:1.5px;cursor:pointer;line-height:1.2}
+.pal:active{transform:scale(.96)}
+.pal small{display:block;font-size:calc(.72rem*var(--fs));letter-spacing:.3px;color:var(--soft);font-weight:800}
+.pals.grandes .pal{font-size:calc(1.9rem*var(--fs));min-width:120px}
+.hl{color:var(--lcx);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
+.mudo{opacity:.34;border-bottom:3px dotted currentColor}
+.qt{opacity:.4;text-decoration:line-through;text-decoration-thickness:3px}
+.sil{display:inline-block;font-size:calc(.95rem*var(--fs));letter-spacing:2px;font-weight:900;color:var(--soft);margin-top:2px}
+.dupla{display:grid;gap:10px;margin:6px 0 10px}
+@media(min-width:620px){.dupla{grid-template-columns:1fr 1fr}}
+.caixa{border:2px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--surf)}
+.caixa h3{font-size:calc(.98rem*var(--fs));font-weight:900;margin-bottom:6px;color:var(--lcx)}
+.caixa .pal{font-size:calc(1.15rem*var(--fs));min-height:48px;padding:5px 11px}
+.caixa p{font-size:calc(.98rem*var(--fs));font-weight:800;line-height:1.45}
+.frase{font-size:calc(1.08rem*var(--fs));font-weight:800;line-height:1.5}
+.troca{background:color-mix(in srgb,var(--lc) 30%,transparent);border-radius:6px;padding:0 4px}
+.muda{background:rgba(248,113,113,.28);border-radius:6px;padding:0 4px}
+.chave{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.chave div{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;border:2px solid var(--line);
+  font-size:calc(1rem*var(--fs));font-weight:900;line-height:1.35}
+.chave .tag{flex-shrink:0;min-width:92px;text-align:center;padding:6px 8px;border-radius:10px;background:var(--lc);color:#1a1530}
+.abc{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:5px;margin:8px 0 12px}
+.abc span{height:44px;border-radius:10px;background:var(--surf);border:2px solid var(--line);display:flex;
+  align-items:center;justify-content:center;font-weight:900;font-size:calc(1.05rem*var(--fs))}
+.abc span.on{background:var(--lc);color:#1a1530;border-color:var(--lc)}
+.fig{width:100%;height:auto;display:block}
+/* a página de dicionário desenhada */
+.pagdic{border:2px solid var(--line);border-radius:12px;background:#fffdf7;color:#1f2937;padding:8px 12px 10px;margin:4px 0 12px;font-size:calc(.95rem*var(--fs));line-height:1.45}
+.pagdic .guias{display:flex;align-items:center;justify-content:space-between;gap:6px;border-bottom:2px solid #1d4ed8;padding-bottom:5px;margin-bottom:6px;font-weight:900;color:#1d4ed8}
+.pagdic .guias em{font-style:normal;font-size:calc(.7rem*var(--fs));background:#dbeafe;border-radius:8px;padding:2px 8px;color:#1e3a8a}
+.pagdic p{font-weight:700;margin:3px 0}
+.pagdic p b{font-weight:900;margin-right:4px}
+.pagdic .verb{background:#fef3c7;border:2px dashed #d97706;border-radius:8px;padding:3px 6px}
+.pagdic .verb em{display:block;font-style:normal;font-size:calc(.7rem*var(--fs));font-weight:900;color:#92400e;letter-spacing:.5px;text-transform:uppercase}
+.cena{width:100%;height:auto;display:block;border-radius:12px}
+
+/* ---------- botões de ação ---------- */
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border:none;border-radius:14px;
+  background:var(--lc);color:#1a1530;font-weight:900;font-size:calc(1rem*var(--fs));cursor:pointer;padding:6px 14px;
+  margin-top:10px;line-height:1.2;text-align:center}
+.btn:active{transform:translateY(1px)}
+.btn.calmo{background:var(--surf);color:var(--ink);border:2px solid var(--line)}
+.btnrow{display:grid;gap:8px}
+@media(min-width:560px){.btnrow{grid-template-columns:1fr 1fr}}
+
+/* ---------- tocar para revelar ---------- */
+.revs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px;margin:4px 0}
+.rev{display:flex;flex-direction:column;align-items:stretch;gap:6px;min-height:96px;padding:10px;border-radius:14px;
+  border:2px dashed color-mix(in srgb,var(--lc) 70%,transparent);background:var(--surf);cursor:pointer;text-align:left}
+.rev .fig{width:56px;height:56px;align-self:center}
+.rev b{font-size:calc(1rem*var(--fs));font-weight:900;text-align:center}
+.rev .tras{display:none;font-size:calc(.95rem*var(--fs));font-weight:800;line-height:1.4;text-align:center}
+.rev .toque{font-size:calc(.72rem*var(--fs));font-weight:900;color:var(--dim);text-align:center;letter-spacing:.4px}
+.rev.aberto{border-style:solid;border-color:var(--lc);background:color-mix(in srgb,var(--lc) 14%,transparent)}
+.rev.aberto .tras{display:block}
+.rev.aberto .toque{display:none}
+
+/* ---------- escolher (uma palavra por vez) ---------- */
+.esc{border:2px solid var(--line);border-radius:16px;padding:12px;background:var(--surf);text-align:center}
+.esc .cont{font-size:calc(.74rem*var(--fs));font-weight:900;color:var(--dim);letter-spacing:.6px;text-transform:uppercase}
+.esc .perg{font-size:calc(1rem*var(--fs));font-weight:900;margin:4px 0 6px;color:var(--soft)}
+.esc .alvo{font-size:calc(2rem*var(--fs));font-weight:900;letter-spacing:2px;line-height:1.25;margin:6px 0 10px;word-break:break-word}
+.esc .alvo.frasealvo{font-size:calc(1.08rem*var(--fs));letter-spacing:0;line-height:1.45;text-align:left}
+.esc .buraco{display:inline-block;min-width:1.4em;border-bottom:4px solid var(--lcx);color:var(--lcx)}
+.ops{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.op{min-width:84px;min-height:56px;padding:6px 14px;border-radius:14px;border:2px solid var(--line);background:var(--card);
+  font-size:calc(1.25rem*var(--fs));font-weight:900;cursor:pointer;letter-spacing:1px}
+.ops.longas .op{flex:1 1 140px;font-size:calc(1rem*var(--fs));letter-spacing:0}
+.op:active{transform:scale(.96)}
+.op.certa{background:var(--ok);border-color:var(--ok);color:#06251a}
+.op.errada{background:var(--no);border-color:var(--no);color:#3a0a0a}
+.op[disabled]{cursor:default}
+.fbk{margin-top:10px;padding:10px 12px;border-radius:12px;font-size:calc(1rem*var(--fs));font-weight:800;line-height:1.45;text-align:left}
+.fbk.ok{background:rgba(52,211,153,.16);border:2px solid var(--ok)}
+.fbk.no{background:rgba(248,113,113,.14);border:2px solid var(--no)}
+.fbk b.t{display:block;font-weight:900;margin-bottom:2px}
+.fbk.ok b.t{color:var(--ok)}
+.fbk.no b.t{color:var(--no)}
+.esc .alvo.medio{font-size:calc(1.35rem*var(--fs));letter-spacing:1px}
+.esc .alvo:empty{display:none}
+.fimesc{font-size:calc(1.1rem*var(--fs));font-weight:900;margin:6px 0}
+
+/* ---------- quadrinhos ---------- */
+.quads{display:grid;gap:9px}
+@media(min-width:620px){.quads{grid-template-columns:1fr 1fr}}
+.quad{display:grid;grid-template-columns:44% 1fr;gap:10px;align-items:center;padding:7px;border-radius:14px;
+  background:var(--surf);border:2px solid var(--line)}
+.quad .qimg{position:relative}
+.quad .qn{position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:8px;background:var(--lc);color:#1a1530;
+  font-weight:900;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+.quad p{font-size:calc(.98rem*var(--fs));font-weight:800;line-height:1.38}
+.quad p b{color:var(--lcx)}
+.conselho{margin-top:10px;padding:10px 12px;border-radius:14px;border:2px solid var(--accent2);
+  font-size:calc(1.02rem*var(--fs));font-weight:900;line-height:1.4;background:rgba(251,191,36,.1)}
+
+/* ---------- ordenar tocando ---------- */
+.ord{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.oq{position:relative;display:flex;flex-direction:column;gap:5px;padding:6px;border-radius:14px;border:2px solid var(--line);
+  background:var(--surf);cursor:pointer;text-align:left}
+.oq span.cap{font-size:calc(.84rem*var(--fs));font-weight:800;line-height:1.3;padding:0 2px 2px}
+.oq .ob{position:absolute;top:2px;right:2px;width:34px;height:34px;border-radius:50%;background:var(--ok);color:#06251a;
+  font-weight:900;font-size:1.05rem;display:none;align-items:center;justify-content:center;border:3px solid var(--card)}
+.oq.feito{border-color:var(--ok)}
+.oq.feito .ob{display:flex}
+.oq.erro{border-color:var(--no);animation:trem .35s}
+@keyframes trem{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.ordmsg{margin-top:10px;min-height:1.4em;font-size:calc(1rem*var(--fs));font-weight:900;line-height:1.4;text-align:center}
+
+/* ---------- diálogo do lobo ---------- */
+.dial{display:flex;flex-direction:column;gap:9px;margin-top:10px}
+.bal{display:block;width:100%;text-align:left;padding:10px 14px;border-radius:18px;font-size:calc(1.02rem*var(--fs));
+  font-weight:900;line-height:1.38;border:2px solid var(--line);cursor:pointer;background:var(--surf);min-height:48px}
+.bal.menina{border-color:#ef4444;border-bottom-left-radius:4px}
+.bal.menina small{display:block;font-size:calc(.72rem*var(--fs));color:var(--dim);font-weight:900;letter-spacing:.4px}
+.bal .resp{display:none;margin-top:7px;padding:8px 12px;border-radius:14px;border-bottom-right-radius:4px;
+  background:rgba(148,163,184,.22);border:2px solid #94a3b8}
+.bal.aberto .resp{display:block}
+.bal.aberto small.toque{display:none}
+
+/* ---------- pares que mudam o sentido ---------- */
+.pares{display:grid;gap:8px}
+@media(min-width:560px){.pares{grid-template-columns:1fr 1fr}}
+.par{display:flex;align-items:center;justify-content:center;gap:10px;min-height:60px;border-radius:14px;border:2px solid var(--line);
+  background:var(--surf);cursor:pointer;font-size:calc(1.35rem*var(--fs));font-weight:900;letter-spacing:1.5px;padding:6px 10px}
+.par .seta{color:var(--dim);font-size:1.1rem}
+.par .depois{opacity:.15}
+.par.aberto .depois{opacity:1}
+.par.aberto{border-color:var(--lc)}
+
+/* ---------- personagens ---------- */
+.pers{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:9px}
+.pers.compacto{grid-template-columns:repeat(auto-fill,minmax(98px,1fr))}
+.pers.compacto .per{flex-direction:column;text-align:center;gap:5px;padding:8px 5px}
+.pers.compacto .per .fig{width:60px;height:60px}
+.per{display:flex;align-items:center;gap:9px;padding:7px;border-radius:14px;background:var(--surf);border:2px solid var(--line)}
+.per .fig{width:64px;height:64px;flex-shrink:0}
+.per b{display:block;font-size:calc(.98rem*var(--fs));font-weight:900;line-height:1.15}
+.per span{display:block;font-size:calc(.82rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.3;margin-top:2px}
+.per.vilao{border-color:rgba(248,113,113,.7)}
+
+/* ---------- treininho ---------- */
+.tq .tqnum{font-size:calc(.74rem*var(--fs));font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:var(--lcx)}
+.tq .tqp{font-size:calc(1.18rem*var(--fs));font-weight:900;line-height:1.35;margin:6px 0 10px}
+.tops{display:flex;flex-direction:column;gap:8px}
+.top{display:flex;align-items:center;gap:10px;min-height:54px;padding:8px 12px;border-radius:14px;border:2px solid var(--line);
+  background:var(--surf);font-size:calc(1.05rem*var(--fs));font-weight:800;text-align:left;cursor:pointer;line-height:1.3}
+.top .let{flex:0 0 30px;height:30px;border-radius:9px;background:var(--line);display:flex;align-items:center;justify-content:center;font-weight:900}
+.top.certa{background:var(--ok);border-color:var(--ok);color:#06251a}
+.top.errada{background:var(--no);border-color:var(--no);color:#3a0a0a}
+.top.certa .let,.top.errada .let{background:rgba(0,0,0,.16)}
+.top[disabled]{cursor:default}
+.dicabtn{min-height:44px;border-radius:12px;border:2px solid var(--line);background:var(--surf);font-weight:900;
+  font-size:calc(.85rem*var(--fs));padding:0 14px;cursor:pointer;margin-top:10px}
+.dicabox{margin-top:8px;padding:9px 12px;border-radius:12px;border:2px dashed var(--accent2);background:rgba(251,191,36,.1);
+  font-size:calc(.95rem*var(--fs));font-weight:800;line-height:1.4}
+
+/* ---------- fim da lição ---------- */
+.fim{text-align:center}
+.fim .selo{width:96px;height:96px;margin:6px auto 8px}
+.fim h2{font-size:calc(1.5rem*var(--fs));font-weight:900}
+.fim p{font-size:calc(1rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.45;margin:6px 0 4px}
+
+/* ---------- barra de baixo ---------- */
+.qnav{position:fixed;left:0;right:0;bottom:0;z-index:25;display:flex;align-items:center;gap:8px;
+  padding:7px 10px calc(7px + env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--line);
+  box-shadow:0 -4px 14px rgba(0,0,0,.18)}
+.qnav-btn{flex:1;min-height:50px;border:none;border-radius:13px;background:var(--line);color:var(--ink);
+  font-weight:900;font-size:calc(.98rem*var(--fs));cursor:pointer;max-width:260px}
+.qnav-btn[disabled]{opacity:.35;cursor:default}
+.qnav-btn.forte{background:var(--lc);color:#1a1530}
+.qpos{flex:0 0 auto;min-width:54px;text-align:center;font-weight:900;font-size:calc(.8rem*var(--fs));color:var(--soft)}
+@media(min-width:700px){.qnav{justify-content:center}}
+
+/* ---------- sair (confirmação dentro da página, não o confirm() do navegador) ---------- */
+.sairov{position:fixed;inset:0;z-index:150;display:none;align-items:center;justify-content:center;padding:20px;
+  background:rgba(5,7,18,.72);backdrop-filter:blur(3px)}
+.sairov.show{display:flex}
+.sairbox{width:100%;max-width:360px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 16px;
+  text-align:center;--lc:#f472b6}
+.sairbox h2{font-size:calc(1.2rem*var(--fs));font-weight:900}
+.sairbox p{font-size:calc(.92rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.4;margin:6px 0 4px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" id="btnHome" title="Início" aria-label="Início" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button>
+    <span class="title" id="titulo">Português · Estudar</span>
+    <button class="iconbtn" id="btnFontDown" title="Letra menor" aria-label="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" id="btnFontUp" title="Letra maior" aria-label="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Som" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" id="themeBtn" title="Tema" aria-label="Tema">&#9788;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" aria-label="Travar a tela" onclick="toggleLock()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
+  </div>
+  <div class="bar"><span id="bar"></span></div>
+  <main class="stage"><section class="card" id="tela" aria-live="polite"></section></main>
+</div>
+<nav class="qnav" id="nav">
+  <button class="qnav-btn" id="navPrev">&#8249; Voltar</button>
+  <span class="qpos" id="navPos"></span>
+  <button class="qnav-btn forte" id="navNext">Avan&ccedil;ar &#8250;</button>
+</nav>
+<div class="sairov" id="sairov" role="dialog" aria-modal="true" aria-labelledby="sairtit">
+  <div class="sairbox">
+    <h2 id="sairtit">Sair do estudo?</h2>
+    <p>Você volta para a página inicial. As lições feitas ficam marcadas.</p>
+    <button class="btn" id="sairSim">Sim, sair</button>
+    <button class="btn calmo" id="sairNao">Não, continuar estudando</button>
+  </div>
+</div>
+
+<script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'lp3_som',stars:80};</script>
+<script src="serafina-core.js?v=20261011"></script>
+<script src="OP_voz.js?v=20261011"></script>
+<script src="LP3_banco.js?v=20261011"></script>
+<script src="LP3_arte.js?v=20261011"></script>
+<script src="LP3_estudo_licoes.js?v=20261011"></script>
+<script>
+/* ============================================================
+   MOTOR DO ESTUDO — navegação, telinhas e treininho.
+   Nunca avança sozinho: quem decide é o botão Avançar (ou a seta →).
+   ============================================================ */
+(function(){
+'use strict';
+var L=window.LP3, ARTE=window.LP3ARTE, LICOES=window.LP3_LICOES;
+var KEY='lp3_estudo_v1';
+var $=function(i){ return document.getElementById(i); };
+var tela=$('tela'), bar=$('bar'), navPrev=$('navPrev'), navNext=$('navNext'), navPos=$('navPos'), titulo=$('titulo');
+var est={lic:-1,i:0}, sessao=null;
+var OUVIR='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
+var CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="#06251a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+function feitas(){ try{ return JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ return {}; } }
+function marca(k){ var f=feitas(); f[k]=1; try{ localStorage.setItem(KEY,JSON.stringify(f)); }catch(e){} }
+function emb(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function puro(s){ return String(s||'').replace(/<[^>]+>/g,' ').replace(/[\[\]{}()_]/g,'').replace(/\s+/g,' ').trim(); }
+/* marcação das palavras-exemplo: [X] destaca, {U} U quietinho, (H) H mudo */
+function W(s){ return String(s).replace(/\[([^\]]+)\]/g,'<span class="hl">$1</span>')
+  .replace(/\{([^}]+)\}/g,'<span class="qt">$1</span>').replace(/\(([^)]+)\)/g,'<span class="mudo">$1</span>'); }
+function fala(t){ if(window.say) window.say(puro(t)); }
+function temVoz(){ return !!(window.temVoz && window.temVoz()); }
+
+/* o botão de ouvir só aparece com a Thalita (OP_voz.js); a lista de vozes chega atrasada */
+(function vigiaVoz(n){
+  document.body.classList.toggle('voz-ok', temVoz());
+  if(n<40 && !temVoz()) setTimeout(function(){ vigiaVoz(n+1); }, 300);
+})(0);
+
+/* ---------------- montagem de cada lição ---------------- */
+function montaTelas(lic){
+  var t=lic.telas.slice();
+  var banco=emb(L.doTema(lic.tema)).slice(0,3);
+  banco.forEach(function(it,n){
+    t.push({tipo:'treino', tit:'Treininho', item:it, n:n+1, ord:emb(it.o.map(function(_,i){ return i; }))});
+  });
+  t.push({tipo:'fim', tit:'Lição feita!'});
+  return t;
+}
+function abre(n){
+  if(n<0||n>=LICOES.length) return capa();
+  sessao={telas:montaTelas(LICOES[n]), resp:{}};
+  est.lic=n; est.i=0; render();
+}
+function capa(){ est.lic=-1; est.i=0; sessao=null; render(); }
+function proxNaoFeita(){
+  var f=feitas();
+  for(var i=0;i<LICOES.length;i++) if(!f[LICOES[i].k]) return i;
+  return 0;
+}
+function avanca(){
+  if(est.lic<0) return abre(proxNaoFeita());
+  if(est.i<sessao.telas.length-1){ est.i++; render(); }
+  else if(est.lic<LICOES.length-1) abre(est.lic+1);
+  else capa();
+}
+function volta(){
+  if(est.lic<0) return;
+  if(est.i>0){ est.i--; render(); } else capa();
+}
+
+/* ---------------- desenho de cada tipo de telinha ---------------- */
+var R={};
+R.texto=function(t){ return {html:t.html||''}; };
+R.palavras=function(t){
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+
+    '<div class="pals'+(t.grandes?' grandes':'')+'">'+t.pals.map(function(p){
+      var sil=''; var m=p.split('|'); if(m[1]) sil='<small class="sil">'+m[1]+'</small>';
+      return '<button class="pal" data-f="'+esc(puro(m[0]))+'">'+W(m[0])+sil+'</button>';
+    }).join('')+'</div>'+(t.depois?'<div class="regra">'+t.depois+'</div>':''),
+    init:function(el){ el.querySelectorAll('.pal').forEach(function(b){ b.onclick=function(){ fala(b.dataset.f.toLowerCase()); }; }); }};
+};
+R.revela=function(t){
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="revs">'+t.cartoes.map(function(c){
+      return '<button class="rev">'+(c.fig?ARTE.figura(c.fig,c.fundo):'')+'<b>'+c.f+'</b><span class="toque">toque para ver</span><span class="tras">'+c.b+'</span></button>';
+    }).join('')+'</div>',
+    init:function(el){ el.querySelectorAll('.rev').forEach(function(b){ b.onclick=function(){
+      b.classList.toggle('aberto'); if(b.classList.contains('aberto')) fala(b.querySelector('b').textContent+'. '+b.querySelector('.tras').textContent); }; }); }};
+};
+R.personagens=function(t){
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="pers'+(t.compacto?' compacto':'')+'">'+t.figs.map(function(f){
+    return '<div class="per'+(f.vilao?' vilao':'')+'">'+ARTE.figura(f.k,f.fundo)+'<div><b>'+f.nome+'</b>'+(f.desc?'<span>'+f.desc+'</span>':'')+'</div></div>';
+  }).join('')+'</div>'+(t.depois?'<div class="regra" style="margin-top:10px">'+t.depois+'</div>':'')};
+};
+R.quadrinhos=function(t){
+  return {html:'<div class="quads">'+t.quadros.map(function(q){
+    return '<div class="quad"><div class="qimg">'+ARTE.cena(q.cena,puro(q.cap))+'<span class="qn">'+q.n+'</span></div><p>'+q.cap+'</p></div>';
+  }).join('')+'</div>'+(t.depois?'<div class="conselho">'+t.depois+'</div>':'')};
+};
+R.dialogo=function(t){
+  return {html:'<div style="max-width:420px;margin:0 auto">'+ARTE.cena(t.cena,'o lobo deitado na cama, vestido de vovó')+'</div>'+
+    (t.regra?'<div class="regra" style="margin-top:10px">'+t.regra+'</div>':'')+
+    '<div class="dial">'+t.falas.map(function(f){
+      return '<button class="bal menina"><small>CHAPEUZINHO</small>'+f.p+'<small class="toque">toque para ouvir a resposta do lobo</small>'+
+        '<span class="resp"><small>LOBO</small>'+f.r+'</span></button>';
+    }).join('')+'</div>',
+    init:function(el){ el.querySelectorAll('.bal').forEach(function(b){ b.onclick=function(){
+      b.classList.add('aberto'); fala(b.querySelector('.resp').textContent.replace('LOBO','')); }; }); }};
+};
+R.pares=function(t){
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="pares">'+t.pares.map(function(p){
+    return '<button class="par"><span>'+W(p[0])+'</span><span class="seta">&rarr;</span><span class="depois">'+W(p[1])+'</span></button>';
+  }).join('')+'</div>'+(t.depois?'<div class="regra" style="margin-top:10px">'+t.depois+'</div>':''),
+    init:function(el){ el.querySelectorAll('.par').forEach(function(b){ b.onclick=function(){
+      b.classList.add('aberto'); fala(puro(b.querySelector('.depois').innerHTML).toLowerCase()); }; }); }};
+};
+/* escolher: uma palavra (ou frase) por vez, nunca passa sozinho */
+R.escolha=function(t){
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="esc"></div>',
+    init:function(el){
+      var box=el.querySelector('.esc'), itens=emb(t.itens), k=0, acertos=0;
+      function mostra(){
+        if(k>=itens.length){
+          box.innerHTML='<p class="fimesc">Você acertou '+acertos+' de '+itens.length+'.</p>'+
+            '<p class="perg">'+(acertos===itens.length?'Tudo certo!':'Faça de novo para fixar.')+'</p>'+
+            '<button class="btn calmo" data-a="denovo">Fazer de novo</button>';
+          box.querySelector('[data-a]').onclick=function(){ itens=emb(t.itens); k=0; acertos=0; mostra(); };
+          return;
+        }
+        var it=itens[k], os=it.op?emb(it.op):t.op, longas=os.some(function(o){ return o.length>3; });
+        box.innerHTML='<div class="cont">'+(t.rotulo||'Palavra')+' '+(k+1)+' de '+itens.length+'</div>'+
+          '<div class="perg">'+t.pergunta+'</div>'+
+          '<div class="alvo'+(t.frase?' frasealvo':'')+(t.medio?' medio':'')+'">'+W(it.m).replace(/_+/,'<span class="buraco">?</span>')+'</div>'+
+          '<div class="ops'+(longas?' longas':'')+'">'+os.map(function(o){ return '<button class="op">'+o+'</button>'; }).join('')+'</div>'+
+          '<div class="fbkslot"></div>';
+        box.querySelectorAll('.op').forEach(function(b){ b.onclick=function(){
+          var certo=b.textContent===it.c;
+          box.querySelectorAll('.op').forEach(function(x){ x.disabled=true; if(x.textContent===it.c) x.classList.add('certa'); });
+          if(!certo) b.classList.add('errada'); else acertos++;
+          var bur=box.querySelector('.buraco'); if(bur && it.cheia){ bur.parentNode.innerHTML=W(it.cheia); }
+          box.querySelector('.fbkslot').innerHTML='<div class="fbk '+(certo?'ok':'no')+'"><b class="t">'+
+            (certo?'Isso!':'Ainda não. A certa é '+it.c+'.')+'</b>'+(it.d||'')+'</div>'+
+            '<button class="btn" data-a="prox">'+(k<itens.length-1?(t.proxRot||'Próxima palavra')+' &#8250;':'Ver como fui')+'</button>';
+          box.querySelector('[data-a="prox"]').onclick=function(){ k++; mostra(); };
+          fala(certo?'Isso! '+puro(it.d):'Ainda não. A certa é '+it.c+'. '+puro(it.d));
+        }; });
+      }
+      mostra();
+    }};
+};
+/* ordenar a história tocando nos quadros na ordem */
+R.ordena=function(t){
+  var lista=t.quadros.map(function(q,i){ return {q:q,i:i}; });
+  var mostra=emb(lista);
+  /* nunca começar já na ordem certa */
+  if(mostra.every(function(x,j){ return x.i===j; })) mostra.push(mostra.shift());
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="ord">'+mostra.map(function(x){
+      return '<button class="oq" data-i="'+x.i+'">'+ARTE.cena(x.q.cena,puro(x.q.cap))+'<span class="cap">'+x.q.cap+'</span><span class="ob"></span></button>';
+    }).join('')+'</div><div class="ordmsg">Toque no quadro que acontece primeiro.</div><button class="btn calmo" data-a="re">Recomeçar</button>',
+    init:function(el){
+      var prox=0, msg=el.querySelector('.ordmsg');
+      el.querySelectorAll('.oq').forEach(function(b){ b.onclick=function(){
+        if(b.classList.contains('feito')) return;
+        var i=+b.dataset.i;
+        if(i===prox){
+          b.classList.add('feito'); b.querySelector('.ob').textContent=prox+1; prox++;
+          if(prox===t.quadros.length){ msg.textContent='Muito bem! Essa é a ordem da história.'; fala(msg.textContent); }
+          else msg.textContent='Isso! E o que vem depois?';
+        }else{
+          b.classList.remove('erro'); void b.offsetWidth; b.classList.add('erro');
+          msg.textContent='Ainda não. O que acontece antes disso?';
+          setTimeout(function(){ b.classList.remove('erro'); },450);
+        }
+      }; });
+      el.querySelector('[data-a="re"]').onclick=function(){ render(); };
+    }};
+};
+/* treininho: pergunta do LP3_banco, alternativas embaralhadas */
+R.treino=function(t){
+  var it=t.item, r=sessao.resp[t.n];
+  return {html:'<div class="tq"><div class="tqnum">Treininho · pergunta '+t.n+' de 3</div><p class="tqp">'+esc(it.p)+'</p>'+
+    '<div class="tops">'+t.ord.map(function(oi,j){
+      return '<button class="top" data-oi="'+oi+'"><span class="let">'+'ABCD'.charAt(j)+'</span><span>'+esc(it.o[oi])+'</span></button>';
+    }).join('')+'</div>'+
+    '<button class="dicabtn" data-a="dica">Dica</button><div class="dicabox" hidden>'+esc(it.dica)+'</div>'+
+    '<div class="fbkslot"></div><button class="btn" data-a="prox">Próxima &#8250;</button></div>',
+    fala:it.p+' '+t.ord.map(function(oi){ return it.o[oi]; }).join('. '),
+    init:function(el){
+      var bts=el.querySelectorAll('.top');
+      function pinta(oi){
+        var ok=oi===it.c;
+        bts.forEach(function(b){ b.disabled=true; var x=+b.dataset.oi;
+          if(x===it.c) b.classList.add('certa'); else if(x===oi) b.classList.add('errada'); });
+        el.querySelector('[data-a="dica"]').hidden=true; el.querySelector('.dicabox').hidden=true;
+        el.querySelector('.fbkslot').innerHTML='<div class="fbk '+(ok?'ok':'no')+'"><b class="t">'+
+          (ok?'Isso mesmo!':'Ainda não. A certa é: '+esc(it.o[it.c]))+'</b>'+esc(it.ex)+'</div>';
+        return ok;
+      }
+      if(r) pinta(r.oi);
+      bts.forEach(function(b){ b.onclick=function(){
+        if(sessao.resp[t.n]) return;
+        var oi=+b.dataset.oi, ok=pinta(oi);
+        sessao.resp[t.n]={oi:oi,ok:ok};
+        fala((ok?'Isso mesmo! ':'Ainda não. A certa é: '+it.o[it.c]+'. ')+it.ex);
+      }; });
+      el.querySelector('[data-a="dica"]').onclick=function(){ var d=el.querySelector('.dicabox'); d.hidden=!d.hidden; if(!d.hidden) fala(it.dica); };
+      el.querySelector('[data-a="prox"]').onclick=avanca;
+    }};
+};
+R.fim=function(){
+  var lic=LICOES[est.lic], ac=0, tot=0;
+  for(var k in sessao.resp){ tot++; if(sessao.resp[k].ok) ac++; }
+  marca(lic.k);
+  var prox=LICOES[est.lic+1];
+  return {html:'<div class="fim"><svg class="selo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="var(--ok)"/>'+
+      '<path d="M28 52l15 15 30-32" stroke="#06251a" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
+      '<h2>Lição feita!</h2><p>'+lic.nome+'</p>'+
+      (tot?'<p>No treininho você acertou <b>'+ac+' de 3</b>.</p>':'<p>O treininho ficou sem resposta. Volte e responda quando quiser.</p>')+
+      '<div class="btnrow">'+(prox?'<button class="btn" data-a="prox">Próxima lição: '+prox.nome+'</button>':'')+
+      '<button class="btn calmo" data-a="capa">Ver todas as lições</button></div></div>',
+    fala:'Lição feita! '+lic.nome,
+    init:function(el){
+      var p=el.querySelector('[data-a="prox"]'); if(p) p.onclick=function(){ abre(est.lic+1); };
+      el.querySelector('[data-a="capa"]').onclick=capa;
+    }};
+};
+
+/* ---------------- capa: a grade das 12 lições ---------------- */
+function renderCapa(){
+  var f=feitas(), n=0;
+  LICOES.forEach(function(l){ if(f[l.k]) n++; });
+  document.body.style.setProperty('--lc','#f472b6');
+  titulo.textContent='Português · Estudar';
+  tela.innerHTML='<div class="capa"><h1>Português · 3º trimestre</h1>'+
+    '<p class="sub">Toque numa lição. Cada uma tem telinhas curtas e um treininho no fim.</p>'+
+    '<div class="licoes">'+LICOES.map(function(l,i){
+      return '<button class="lic'+(f[l.k]?' ok':'')+'" data-i="'+i+'" style="--lc:'+L.TEMAS[l.tema].cor+'">'+
+        '<span class="num">'+(i+1)+'</span><span class="feito" aria-label="feita">'+CHECK+'</span>'+
+        ARTE.icone(l.tema)+'<b>'+l.nome+'</b></button>';
+    }).join('')+'</div>'+
+    '<div class="placarcapa"><span>'+n+' de '+LICOES.length+' feitas</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div>'+
+    '<a class="linkbtn" href="LP3_simulado.html">Fazer o simulado de Português &#8250;</a></div>';
+  tela.querySelectorAll('.lic').forEach(function(b){ b.onclick=function(){ abre(+b.dataset.i); }; });
+  bar.style.width=Math.round(n/LICOES.length*100)+'%';
+  navPrev.disabled=true; navNext.disabled=false;
+  navNext.innerHTML=(n?'Continuar':'Começar')+' &#8250;';
+  navPos.textContent=n+'/'+LICOES.length;
+}
+
+function render(){
+  try{ speechSynthesis.cancel(); }catch(e){}
+  if(est.lic<0){ renderCapa(); window.scrollTo(0,0); return; }
+  var lic=LICOES[est.lic], t=sessao.telas[est.i], cor=L.TEMAS[lic.tema].cor;
+  document.body.style.setProperty('--lc',cor);
+  titulo.textContent=lic.nome;
+  var r=(R[t.tipo]||R.texto)(t);
+  tela.innerHTML='<div class="lh">'+ARTE.icone(lic.tema)+'<div class="lhtx"><small>Lição '+(est.lic+1)+' · '+lic.nome+'</small>'+
+    '<h2>'+t.tit+'</h2></div><button class="ouvir" aria-label="Ouvir">'+OUVIR+'</button></div>'+
+    '<div class="corpo">'+r.html+'</div>';
+  if(r.init) r.init(tela.querySelector('.corpo'));
+  /* toda palavra-exemplo é tocável: a Thalita lê */
+  tela.querySelectorAll('.pal').forEach(function(b){ if(!b.onclick) b.onclick=function(){ fala((b.dataset.f||b.textContent).toLowerCase()); }; });
+  tela.querySelector('.ouvir').onclick=function(){
+    fala(r.fala || t.fala || (t.tit+'. '+tela.querySelector('.corpo').innerText));
+  };
+  var n=sessao.telas.length;
+  bar.style.width=Math.round((est.i+1)/n*100)+'%';
+  navPrev.disabled=false;
+  navPrev.innerHTML='&#8249; Voltar';
+  navNext.disabled=false;
+  navNext.innerHTML = est.i<n-1 ? 'Avan&ccedil;ar &#8250;' : (est.lic<LICOES.length-1 ? 'Pr&oacute;xima li&ccedil;&atilde;o &#8250;' : 'Ver li&ccedil;&otilde;es &#8250;');
+  navPos.textContent=(est.i+1)+'/'+n;
+  window.scrollTo(0,0);
+}
+
+navPrev.onclick=volta; navNext.onclick=avanca;
+
+/* casinha: confirma dentro da página antes de sair */
+var sairov=$('sairov'), irEmbora=window.goHome;
+window.goHome=function(){ if(window.screenLocked) return; sairov.classList.add('show'); $('sairNao').focus(); };
+$('sairSim').onclick=function(){ sairov.classList.remove('show'); irEmbora(); };
+$('sairNao').onclick=function(){ sairov.classList.remove('show'); };
+sairov.onclick=function(e){ if(e.target===sairov) sairov.classList.remove('show'); };
+
+document.addEventListener('keydown',function(e){
+  if(sairov.classList.contains('show')){ if(e.key==='Escape') sairov.classList.remove('show'); return; }
+  var m=document.getElementById('ctMenu'); if(m && m.classList.contains('show')) return;
+  if(e.key==='ArrowRight'){ e.preventDefault(); avanca(); }
+  else if(e.key==='ArrowLeft'){ e.preventDefault(); volta(); }
+  else if(e.key==='Enter'){
+    var a=document.activeElement;
+    if(a && (a.tagName==='BUTTON'||a.tagName==='A')) return;   /* Enter no botão = clicar nele */
+    e.preventDefault(); avanca();
+  }
+});
+
+render();
+window.LP3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic,i:est.i,n:sessao?sessao.telas.length:0}; }};
+})();
+</script>
+<script>window.SERA_ACCENT={accent:'#f472b6'};</script>
+<script src="sera_theme.js?v=20261011"></script>
+</body>
+</html>
