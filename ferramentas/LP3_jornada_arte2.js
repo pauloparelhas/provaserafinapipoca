@@ -85,6 +85,23 @@ A.bolaRolando=function(c,b,t,cena){
   else { c.fillStyle='#fff'; circ(c,0,0,b.r); c.fill(); c.fillStyle='rgba(148,163,184,.4)'; circ(c,b.r*.3,b.r*.3,b.r*.5); c.fill(); c.fillStyle='rgba(255,255,255,.9)'; circ(c,-b.r*.35,-b.r*.35,b.r*.25); c.fill(); }
   c.restore();
 };
+A.trava=function(c,g,t,cena){
+  var gelo=/gelo|canal|aurora|castelo|montanha/.test(cena), k=g.aberta?Math.min(1,g.anim):0; if(k>=1) return;
+  c.save(); c.globalAlpha=1-k; c.translate(g.x,g.y+k*g.h);
+  if(gelo){ c.fillStyle=lin(c,0,0,g.w,0,'rgba(191,235,255,.95)','rgba(96,165,250,.9)'); rr(c,2,0,g.w-4,g.h,8); c.fill(); c.strokeStyle='rgba(255,255,255,.9)'; c.lineWidth=2; for(var i=1;i<6;i++){ c.beginPath(); c.moveTo(8,g.h*i/6); c.lineTo(g.w-8,g.h*i/6+6); c.stroke(); } }
+  else { c.fillStyle=lin(c,0,0,g.w,0,'#8b5a2b','#5c3a1a'); rr(c,4,0,g.w-8,g.h,6); c.fill(); c.fillStyle='#d4a26a'; for(var j=0;j<g.h;j+=45){ rr(c,0,j+10,g.w,8,3); c.fill(); } }
+  var cy=g.h*.45; c.fillStyle='rgba(13,11,30,.75)'; circ(c,g.w/2,cy,20); c.fill(); A.cadeado(c,g.w/2,cy+2);
+  c.fillStyle='#fde68a'; c.font='900 20px "Nunito","Segoe UI",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('?',g.w/2,cy-40);
+  c.restore();
+};
+/* destaque de elemento pendente: brilho pulsando + seta grande animada apontando */
+A.destaque=function(c,x,y,t,txt){
+  var p=.5+.5*Math.sin(t*5); c.save();
+  var g=c.createRadialGradient(x,y,10,x,y,70+p*20); g.addColorStop(0,'rgba(253,224,71,'+(.35+.25*p)+')'); g.addColorStop(1,'rgba(253,224,71,0)'); c.fillStyle=g; circ(c,x,y,90); c.fill();
+  var by=Math.max((window.JOGO?JOGO.J.camY:0)+150,y-70-p*12); c.fillStyle='#fde68a'; c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(x,by+26); c.lineTo(x-22,by); c.lineTo(x-9,by); c.lineTo(x-9,by-26); c.lineTo(x+9,by-26); c.lineTo(x+9,by); c.lineTo(x+22,by); c.closePath(); c.fill(); c.stroke();
+  if(txt){ c.font='900 14px "Nunito","Segoe UI",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw=c.measureText(txt).width+16; c.fillStyle='rgba(13,11,30,.8)'; rr(c,x-tw/2,by-52,tw,22,8); c.fill(); c.fillStyle='#fff'; c.fillText(txt,x,by-41); }
+  c.restore();
+};
 var inimigo1=A.inimigo;
 A.inimigo=function(c,e,t){
   if(e.tipo==='polar') A.polar(c,e.x,e.y,t,e.dir,e.achatado);

@@ -51,6 +51,10 @@ function desenhaNivel(c){
   M.checkpoints.forEach(function(cp){ if(vis(cp)) A.bandeira(c,cp.x,cp.y,cp.acesa,t); });
   if(M.mastro){ A.mastro(c,M.mastro.x,M.mastro.y,t); if(!M.fase.treino&&G.faltam().length){ c.save(); c.translate(M.mastro.x,M.mastro.y-200); A.cadeado(c,0,0); c.restore(); } }
   M.tijolos.forEach(function(b){ if(vis(b)) A.tijolo(c,b,cena); });
+  M.travas.forEach(function(g){ if(vis(g)) A.trava(c,g,t,cena); });
+  /* destaque do que ainda falta responder (caixa, porta, cano que leva à arena do submundo) */
+  M.caixas.forEach(function(k){ if(!k.aberta&&vis(k)) A.destaque(c,k.x+k.w/2,k.porta?k.y+20:k.y+22,t,k.porta?'porta ?':'arena ?'); });
+  if(M.mundo==='main'&&M!==J.nivel.sub&&J.nivel.sub&&J.nivel.sub.caixas.some(function(k){ return !k.aberta; })) M.canos.forEach(function(p){ if(p.id==='1'&&vis(p)) A.destaque(c,p.x+p.w/2,p.y-10,t,'arena no cano'); });
   M.caixas.forEach(function(k){ if(!vis(k)) return; if(k.porta) A.porta(c,k,t,cena); else A.caixa(c,k,t); });
   M.moedas.forEach(function(m){ if(m.x>vx0&&m.x<vx1) A.moeda(c,m,t); });
   M.itens.forEach(function(it){ if(it.x>vx0&&it.x<vx1) A.item(c,it,t); });
@@ -62,15 +66,31 @@ function desenhaNivel(c){
   /* o urso: tamanho + squash & stretch, pisca quando invencível */
   if(!(u.invT>0 && Math.floor(t*14)%2===0)){ var s=TAM[u.tam]; c.save(); c.translate(u.x,u.y); c.scale(s*u.sx,s*u.sy); A.urso(c,0,0,u.estado,u.anim,u.dir,1); c.restore(); }
   J.part.forEach(function(p){ A.particula(c,p); });
-  if(J.dica && J.estado==='nivel'){ var d=J.dica, pul=Math.sin(t*7)*5; c.save(); c.translate(d.x,Math.max(J.camY+150,d.y)+pul); c.fillStyle='#fde68a'; c.beginPath(); c.moveTo(0,0); c.lineTo(-10,-16); c.lineTo(10,-16); c.fill(); c.font='900 15px "Nunito","Segoe UI",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw=c.measureText(d.txt).width+18; c.fillStyle='rgba(13,11,30,.8)'; A.rr(c,-tw/2,-44,tw,26,9); c.fill(); c.fillStyle='#fff'; c.fillText(d.txt,0,-31); c.restore(); }
+  if(J.dica && J.estado==='nivel') desenhaDica(c,J.dica,t);
   if(J.tut && M.passos && M.passos[J.tut.i]) desenhaTutorial(c,M.passos[J.tut.i]);
   c.restore();
   /* seta para a arena que falta (saída trancada ou perto do mastro) */
   var perto=M.mastro && Math.abs(u.x-M.mastro.x)<420 && G.faltam().length && !M.fase.treino;
-  if((J.setaT>0||perto) && J.estado==='nivel'){ var al=G.alvoSeta(); if(al){ var dx=al.x-u.x, dy=al.y-(u.y-40), ang=Math.atan2(dy,dx); var sx=Math.max(50,Math.min(W-50,al.x-J.cam)), sy=Math.max(130,Math.min(H-110,al.y-J.camY)); if(al.x-J.cam<0) sx=50; if(al.x-J.cam>W) sx=W-50; A.setaIndicador(c,sx,sy,ang,t,al.txt); } }
+  if((J.setaT>0||perto) && J.estado==='nivel'){ var al=G.alvoSeta(); if(al && !(al.x-J.cam>60 && al.x-J.cam<W-60 && al.y-J.camY>100 && al.y-J.camY<H-60)){ var dx=al.x-u.x, dy=al.y-(u.y-40), ang=Math.atan2(dy,dx); var sx=Math.max(50,Math.min(W-50,al.x-J.cam)), sy=Math.max(130,Math.min(H-110,al.y-J.camY)); if(al.x-J.cam<0) sx=50; if(al.x-J.cam>W) sx=W-50; A.setaIndicador(c,sx,sy,ang,t,al.txt); } }
   if(J.chefe) A.barraVida(c,W/2-140,70,280,J.chefe.hp,J.chefe.max);
   if(J.fimFase){ var k=Math.min(1,J.fimFase.t/.8); c.fillStyle='rgba(13,11,30,'+(k*.35)+')'; c.fillRect(0,0,W,H); if(J.fimFase.t>.3){ c.save(); c.translate(W/2,150); var sc=Math.min(1,(J.fimFase.t-.3)*2.5); c.scale(sc,sc); titulo(c,'Fase concluída!',0,0,56); c.restore(); } }
   if(J.estado==='vitoria'){ titulo(c,'O Gigante caiu!',W/2,150,54); var fl=Math.min(1,J.vit.t/2); A.folha(c,J.chefe.x-200*fl, J.chefe.y-250+Math.sin(fl*Math.PI)*-80, 34, J.vit.t*2, '#fbbf24', 3); }
+}
+/* balão de instrução: texto + teclas + botão de toque, sempre inteiro dentro da tela */
+function desenhaDica(c,d,t){
+  var pul=Math.sin(t*7)*4; c.save(); c.font='900 16px "Nunito","Segoe UI",Arial';
+  var tw=c.measureText(d.txt).width+24, kw=0; (d.teclas||[]).forEach(function(k){ kw+=(k.length>2?k.length*11+14:44)+8; }); if(d.botao) kw+=d.botao.length*11+30;
+  var w=Math.max(tw,kw+24), h=(d.teclas?76:34);
+  var sx=Math.max(J.cam+w/2+8,Math.min(J.cam+W-w/2-8,d.x)), sy=Math.max(J.camY+h+178,d.y); sy=Math.min(sy,J.camY+H-130);
+  c.translate(sx,sy+pul);
+  c.fillStyle='#fde68a'; c.beginPath(); c.moveTo(d.x-sx,0); c.lineTo(d.x-sx-10,-14); c.lineTo(d.x-sx+10,-14); c.fill();
+  c.fillStyle='rgba(13,11,30,.86)'; A.rr(c,-w/2,-14-h,w,h,12); c.fill(); c.strokeStyle='rgba(253,224,71,.6)'; c.lineWidth=2; A.rr(c,-w/2,-14-h,w,h,12); c.stroke();
+  c.fillStyle='#fff'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(d.txt,0,-14-h+18);
+  if(d.teclas){ var x=-kw/2; d.teclas.forEach(function(k){ var w2=k.length>2?k.length*11+14:44; A.tecla(c,x,-52,k,w2); x+=w2+8; });
+    if(d.botao){ var bw=d.botao.length*11+30; c.fillStyle='rgba(251,191,36,.3)'; c.strokeStyle='rgba(251,191,36,.9)'; c.lineWidth=2; A.rr(c,x+4,-50,bw,36,18); c.fill(); c.stroke(); c.fillStyle='#fff'; c.font='900 14px "Nunito",Arial'; c.fillText(d.botao,x+4+bw/2,-32); }
+  }
+  c.restore();
+  if(window.__lp3) window.__lp3.dicaRect={x:sx-w/2-J.cam,y:sy-14-h-J.camY,w:w,h:h};
 }
 function titulo(c,txt,x,y,px){ c.save(); c.fillStyle='#fde68a'; c.font='900 '+px+'px "Nunito","Segoe UI",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.strokeStyle='#78350f'; c.lineWidth=8; c.lineJoin='round'; c.strokeText(txt,x,y); c.fillText(txt,x,y); c.restore(); }
 function desenhaTutorial(c,p){

@@ -15,7 +15,7 @@ var G=window.JOGO, J=G.J, A=window.ARTE, W=G.W, H=G.H;
 var S=null; /* estado da arena corrente */
 var usadas={}; /* ids já perguntados nesta fase (reseta a cada fase) */
 
-function limite(item){ return item.tipo==='rapida'?12:(item.tipo==='leitura'?25:20); }
+function limite(item){ return 30; } /* 30 s para toda pergunta (pedido do pai) */
 function pool(temas,filtro){ var l=[]; temas.forEach(function(k){ LP3.doTema(k).forEach(function(i){ if(!filtro||filtro(i)) l.push(i); }); }); return l; }
 function sorteia(lista,n){ var a=lista.filter(function(i){ return !usadas[i.id]; }); if(a.length<n) a=lista.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a.slice(0,n); }
 /* composição: arena grande = só rápidas; arena comum = metade rápidas (se o tema tiver), metade conceito/leitura */
@@ -48,7 +48,7 @@ function proxima(){
   if(!S||J.estado!=='arena') return;
   if(S.i>=S.n){ fim(); return; }
   S.item=S.itens[S.i]; S.lim=limite(S.item); S.timer=S.lim; S.fase='pergunta'; J.stats.perguntas++;
-  UI.perguntaArena(S.item,{i:S.i+1,n:S.n,acertos:S.acertos,meta:S.meta,peixes:S.acertos,lim:S.lim},function(ok){ responde(ok); },function(){ /* ok/continuar */ if(S&&S.fase==='feedback') avanca(); });
+  UI.perguntaArena(S.item,{i:S.i+1,n:S.n,acertos:S.acertos,meta:S.meta,peixes:S.acertos,lim:S.lim},function(ok){ responde(ok); },function(){ /* ok/continuar */ if(S&&S.fase==='feedback'&&!UI.menuAberto()) avanca(); });
 }
 function responde(ok){
   if(!S||S.fase!=='pergunta') return; S.fase='feedback'; S.t=0;
@@ -57,7 +57,7 @@ function responde(ok){
     S.voando.push({t:0,dur:.7,x0:W/2,y0:H*.75,x1:J.arenaUrso.x+10,y1:J.arenaUrso.y-60}); SOM.fx('acerto');
     if(S.combo>=3) G.toast('Combo x'+S.combo+'! +'+bonus,1200);
     S.avancaEm=1.1;
-  } else { S.combo=0; SOM.fx('erro'); J.shake=6; S.avancaEm=3.2; }
+  } else { S.combo=0; SOM.fx('erro'); J.shake=6; S.avancaEm=1e9; setTimeout(function(){ if(S&&S.fase==='feedback') UI.teoria(S.item,function(){ if(S&&S.fase==='feedback') avanca(); }); },700); }
 }
 function avanca(){ if(!S) return; S.fase='entre'; S.i++; UI.fechaPergunta(); setTimeout(proxima,250); }
 function atualiza(dt){
@@ -97,7 +97,7 @@ function proximaDuelo(){
   if(D.i>=2){ D.c.aberta=true; D.c.respawn=1.6; D.c.cooldown=1.6; J.estado='nivel'; J.caixaAtual=null; D=null; UI.hudArena(false); return; }
   var item=D.itens[D.i]; D.lim=limite(item); D.timer=D.lim; D.fase='pergunta'; J.stats.perguntas++; UI.hudArena(true);
   UI.perguntaArena(item,{i:D.i+1,n:2,acertos:0,meta:2,peixes:0,lim:D.lim,chefao:true},function(ok){
-    D.fase='feedback'; D.t=0; if(ok){ J.stats.acertos++; G.pontua(100); SOM.fx('acerto'); J.urso.cheerT=1.2; G.acertoChefao(D.c); D.avancaEm=1.1; } else { SOM.fx('erro'); G.erroChefao(); D.avancaEm=3; }
+    D.fase='feedback'; D.t=0; if(ok){ J.stats.acertos++; G.pontua(100); SOM.fx('acerto'); J.urso.cheerT=1.2; G.acertoChefao(D.c); D.avancaEm=1.1; } else { SOM.fx('erro'); G.erroChefao(); D.avancaEm=1e9; setTimeout(function(){ if(D&&D.fase==='feedback') UI.teoria(item,function(){ if(D&&D.fase==='feedback'&&!UI.menuAberto()) avancaDuelo(); }); },700); }
   },function(){ if(D&&D.fase==='feedback') avancaDuelo(); });
 }
 function avancaDuelo(){ D.fase='entre'; D.i++; UI.fechaPergunta(); setTimeout(proximaDuelo,250); }

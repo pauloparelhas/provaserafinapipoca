@@ -36,6 +36,7 @@ function canoSob(){ var u=J.urso, M=J.mundo, hw=G.URSO_W*TAM[u.tam]/2; for(var i
 function parDoCano(p){ var L=J.nivel, outro= J.mundo===L? L.sub : L; if(!outro) return null; for(var i=0;i<outro.canos.length;i++) if(outro.canos[i].id===p.id) return {cano:outro.canos[i], mundo:outro}; return null; }
 function entraCano(p){
   var par=parDoCano(p); if(!par) return; var u=J.urso;
+  if(J.mundo.mundo==='sub' && p.id==='2' && J.mundo.caixas.some(function(c){ return !c.aberta; })){ SOM.fx('tranca'); J.setaT=6; G.toast('Este cano só abre depois da arena do submundo. Siga a seta!',3000); J.in.down=false; return; }
   J.estado='cano'; J.canoAnim={t:0,dur:.55,p:p,fase:'desce'}; SOM.fx('cano'); u.estado='idle';
   iris(u.x-J.cam,u.y-40,function(){
     G.trocaMundo(par.mundo.mundo); var q=par.cano; u.x=q.x+q.w/2; u.y=q.y; u.vx=0; u.vy=0; J.cam=Math.max(0,Math.min(J.mundo.w-W,u.x-W*.4)); J.clima=[]; J.troncosVivos=[]; J.pinhas=[];
@@ -72,8 +73,8 @@ function atualizaNivel(dt){
 }
 function dicas(){
   var u=J.urso, M=J.mundo, d=null, R=G.ursoRet();
-  var p=canoSob(); if(p&&parDoCano(p)) d={x:p.x+p.w/2,y:p.y-50,txt:'Aperte ↓ para entrar no cano'};
-  if(!d) M.caixas.forEach(function(c){ if(c.aberta) return; if(c.porta){ if(Math.abs(c.x+c.w/2-u.x)<50 && Math.abs(c.y+c.h-u.y)<10) d={x:c.x+c.w/2,y:c.y-30,txt:'Aperte ↓ para entrar na porta'}; } else if(Math.abs(c.x+22-u.x)<60 && c.y<u.y && u.y-c.y<300) d={x:c.x+22,y:c.y-40,txt:'Pule e bata a cabeça na ?'}; });
+  var p=canoSob(); if(p&&parDoCano(p)) d={x:p.x+p.w/2,y:p.y-50,txt:'Entre no cano: aperte ↓',teclas:['↓','S'],botao:'▼'};
+  if(!d) M.caixas.forEach(function(c){ if(c.aberta) return; if(c.porta){ if(Math.abs(c.x+c.w/2-u.x)<70 && Math.abs(c.y+c.h-u.y)<10) d={x:c.x+c.w/2,y:c.y-30,txt:'Entre na porta: aperte ↓',teclas:['↓','S'],botao:'▼'}; } else if(Math.abs(c.x+22-u.x)<80 && c.y<u.y && u.y-c.y<320) d={x:c.x+22,y:c.y-40,txt:'Pule embaixo e bata a cabeça na caixa ?',teclas:['↑','ESPAÇO'],botao:'PULAR'}; });
   if(!d) M.molas.forEach(function(m){ if(Math.abs(m.x+m.w/2-u.x)<80 && u.noChao) d={x:m.x+m.w/2,y:m.y-50,txt:'Pule na mola!'}; });
   if(!d) M.itens.forEach(function(it){ if(!it.pego && Math.abs(it.x-u.x)<110 && Math.abs(it.y-(u.y-40))<120) d={x:it.x,y:it.y-40,txt:{mel:'Pegue o mel para crescer',capa:'Pegue a capa!',bota:'Pegue a bota!',pinhas:'Pegue as pinhas!',patins:'Pegue os patins!'}[it.tipo]}; });
   if(!d) M.tijolos.forEach(function(b){ if(b.vivo && Math.abs(b.x+22-u.x)<50 && u.y-b.y<260 && u.y>b.y) d={x:b.x+22,y:b.y-40,txt:'Quebre o tijolo com a cabeça'}; });

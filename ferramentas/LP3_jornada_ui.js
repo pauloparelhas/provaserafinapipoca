@@ -65,7 +65,7 @@ function perguntaArena(item,opts,aoResponder,aoContinuar){
   qAberta={
     tecla:function(k){
       if(k==='Escape') return;
-      if(respondido){ if(k==='Enter'||k===' ') aoContinuar(); return; }
+      if(respondido){ if((k==='Enter'||k===' ')&&!menuAberto) aoContinuar(); return; }
       var n=parseInt(k,10); if(n>=1&&n<=ops.length){ marca(n-1); responde(n-1); return; }
       var L=k.toUpperCase(); var li=letras.indexOf(L); if(li>=0&&li<ops.length&&k.length===1){ marca(li); responde(li); return; }
       if(k==='ArrowRight'||k==='ArrowDown'){ marca((sel+1)%ops.length); SOM.fx('clique'); }

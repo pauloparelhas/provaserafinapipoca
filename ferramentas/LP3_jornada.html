@@ -118,6 +118,38 @@ body.sem-voz .qvoz{display:none}
 .rge{margin:4px 0 0;padding-left:18px;font-size:15px;line-height:1.35;columns:2;column-gap:14px}
 .rge li{break-inside:avoid}
 .rge b,.rgr b,.recap b{color:#fde68a}
+/* popup de teoria (errou) */
+.mcard.teoria{width:800px;max-height:520px;display:flex;flex-direction:column;text-align:left;padding:14px 20px;border-color:var(--tc,#60a5fa)}
+.mcard.teoria h2{text-align:center;font-size:22px;margin:0 0 8px;display:flex;align-items:center;justify-content:center;gap:10px}
+.mcard.teoria h2 .qtema{font-size:15px}
+.tcorpo{overflow:auto;min-height:0;flex:1;display:grid;gap:8px}
+.tregra{font-size:19px;font-weight:900;line-height:1.3;background:rgba(255,255,255,.08);border-radius:14px;padding:10px 14px;border-left:0}
+.tregra b,.tex b{color:#fde68a}
+.tex{display:flex;flex-wrap:wrap;gap:8px}
+.tex span{background:rgba(255,255,255,.1);border-radius:12px;padding:6px 12px;font-size:17px;font-weight:800}
+.tcerta{display:flex;align-items:flex-start;gap:10px;background:linear-gradient(90deg,rgba(34,197,94,.25),rgba(34,197,94,.08));border:2px solid rgba(74,222,128,.6);border-radius:14px;padding:10px 14px;font-size:18px;font-weight:800;line-height:1.3}
+.tcerta b{color:#bbf7d0;font-size:20px}
+.tmais{display:none;gap:8px}
+.tmais.show{display:grid}
+.tmais .regra{font-size:17px;font-weight:800;line-height:1.35;margin-bottom:4px}
+.tmais h4{margin:0 0 4px;font-size:16px;color:#fde68a}
+.tmais .tela{background:rgba(255,255,255,.06);border-radius:14px;padding:8px 12px}
+.pals{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}
+.pal{border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;border-radius:10px;padding:4px 10px;font-size:18px;font-weight:900;letter-spacing:.5px}
+.pal .sil{display:block;font-size:11px;opacity:.7;letter-spacing:1px}
+.hl{color:#fde68a;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:3px}
+.mudo{opacity:.4;border-bottom:3px dotted currentColor}
+.qt{opacity:.45;text-decoration:line-through;text-decoration-thickness:3px}
+.caixa{border:2px solid rgba(255,255,255,.15);border-radius:12px;padding:8px 10px;margin:4px 0}
+.caixa h3{margin:0 0 4px;font-size:15px;color:#fde68a}
+.dupla{display:flex;gap:8px}.dupla .caixa{flex:1}
+.passos{display:flex;gap:6px;align-items:stretch}.passo{flex:1;background:rgba(255,255,255,.06);border-radius:10px;padding:6px;font-size:14px;text-align:center}.passo .fig{display:none}.pseta{align-self:center;opacity:.6}
+.chave{display:grid;gap:6px}.chave .tag{display:inline-block;background:#fde68a;color:var(--ink);border-radius:8px;padding:2px 8px;margin-right:6px;font-weight:900}
+.tbtns{display:flex;gap:10px;margin-top:10px;flex:0 0 auto}
+.tbtns .mbtn{margin:0;height:54px}
+.tbtns .mbtn.voz{flex:0 0 64px;display:flex;align-items:center;justify-content:center}
+.tbtns .mbtn.voz svg{width:28px;height:28px}
+body.sem-voz .tbtns .mbtn.voz{display:none}
 /* cartão do conteúdo no mapa */
 #mapCard{position:absolute;left:150px;right:150px;bottom:6px;max-height:104px;overflow:hidden;display:none;background:rgba(13,11,30,.9);border:2px solid rgba(253,224,71,.55);border-radius:18px;padding:6px 12px;text-align:left;animation:qin .25s}
 #mapCard.show{display:block}
@@ -223,6 +255,8 @@ body.portrait #rot{display:flex}
 <script src="LP3_jornada_arte2.js?v=20261012"></script>
 <script src="LP3_jornada_arte3.js?v=20261012"></script>
 <script src="LP3_jornada_arte4.js?v=20261012"></script>
+<script src="LP3_arte.js?v=20261012"></script>
+<script src="LP3_estudo_licoes.js?v=20261012"></script>
 <script src="LP3_jornada_regras.js?v=20261012"></script>
 <script src="LP3_jornada_niveis.js?v=20261012"></script>
 <script src="LP3_jornada_mapas.js?v=20261012"></script>
@@ -234,5 +268,6 @@ body.portrait #rot{display:flex}
 <script src="LP3_jornada_ui.js?v=20261012"></script>
 <script src="LP3_jornada_ui2.js?v=20261012"></script>
 <script src="LP3_jornada_ui3.js?v=20261012"></script>
+<script src="LP3_jornada_ui4.js?v=20261012"></script>
 </body>
 </html>
