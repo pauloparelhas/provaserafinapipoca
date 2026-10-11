@@ -62,7 +62,7 @@ var ITENS = [
 {id:'ch4',tema:'chapeu',p:'"Vovó, que olhos grandes você tem!" O que o lobo respondeu?',o:['É para te ver melhor!','É para te ouvir melhor!','É para te comer!'],c:0,
  dica:'Olhos servem para...',ex:'Olhos grandes: "é para te ver melhor!". Orelhas: ouvir. Boca: comer.'},
 {id:'ch5',tema:'chapeu',p:'"Que boca grande você tem!" O que o lobo respondeu?',o:['É para te comer!','É para te ver melhor!','É para cantar!'],c:0,
- dica:'É a parte mais assustadora da história.',ex:'"É para te comer!" — aí o lobo pulou da cama.'},
+ dica:'É a parte mais assustadora da história.',ex:'"É para te comer!" é a última fala do lobo no diálogo.'},
 {id:'ch6',tema:'chapeu',p:'Como o lobo chegou antes na casa da vovó?',o:['Foi por um atalho','Pegou um avião','Dormiu na floresta'],c:0,
  dica:'Atalho é um caminho mais curto.',ex:'O lobo correu por um atalho e chegou primeiro.'},
 {id:'ch7',tema:'chapeu',p:'Quem salvou a Chapeuzinho e a vovó?',o:['O caçador','O Gigante','O João'],c:0,
@@ -273,7 +273,7 @@ var ITENS = [
    ============================================================ */
 var EXPL_H='O H no começo não tem som, mas é escrito.';
 function maisH(){
-  var com=['HOJE','HOMEM','HOTEL','HOSPITAL','HIPOPÓTAMO','HELICÓPTERO','HISTÓRIA','HORTA','HINO','HERÓI','HÉLICE','HORTELÃ','HARPA','HIGIENE','HUMANO'];
+  var com=['HOJE','HOMEM','HOTEL','HOSPITAL','HIPOPÓTAMO','HELICÓPTERO','HISTÓRIA','HORTA','HINO','HERÓI','HÉLICE','HORTELÃ','HIGIENE','HUMANO'];
   var sem=['OVO','ILHA','UVA','ABELHA','ELEFANTE','OLHO','ESCOLA','ANEL'];
   com.forEach(function(w,i){ ITENS.push({id:'rh'+i,tema:'h',tipo:'rapida',p:'Qual está escrita certo?',o:[w,w.slice(1)],c:0,
     dica:'Será que ela começa com a letra que não faz som?',ex:w+' começa com H. '+EXPL_H}); });
