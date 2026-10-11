@@ -27,7 +27,8 @@ vídeo (LP3_video). Banco de perguntas curtas: `ferramentas/LP3_banco.js`.
 
 ## U4.1 Contos de fadas — elementos
 - Começo: **"Era uma vez..."**
-- **Personagens:** mocinho/herói (Chapeuzinho, João) e **vilão** (Lobo Mau, o Gigante).
+- **Personagens:** mocinho/herói (Chapeuzinho, João) e **vilão** (o Lobo Mau).
+  - **NÃO rotular o Gigante como vilão:** na história, quem invade o castelo e leva a galinha e a harpa é o João; dizer que o Gigante é "o vilão" não é inequívoco (decisão do Paulo, 11/10). Ele é só "o Gigante", dono do castelo.
 - **Lugar:** floresta, castelo, casa da vovó, terra no alto das nuvens.
 - **Magia:** feijões mágicos, galinha dos ovos de ouro, harpa que canta, lobo que fala.
 - **Problema e solução:** acontece um perigo, alguém resolve.
@@ -55,7 +56,7 @@ vídeo (LP3_video). Banco de perguntas curtas: `ferramentas/LP3_banco.js`.
 7. O Gigante acordou e desceu atrás dele.
 8. João pegou o **machado** e cortou o pé de feijão; o Gigante caiu.
 9. João e a mãe viveram felizes, sem passar necessidade.
-- **Evitar como pergunta:** a fala exata do gigante; quantas vezes João subiu (versões diferem).
+- **Evitar como pergunta:** a fala exata do gigante; quantas vezes João subiu (versões diferem); quem é o vilão / se o Gigante é mau ou bom; se João agiu certo.
 
 ## U4.4 Paráfrase × paródia
 - **Paráfrase:** conta a MESMA história com OUTRAS PALAVRAS. Nada muda no que acontece.
@@ -133,3 +134,8 @@ Cenário de cada cena = o próprio assunto (floresta da Chapeuzinho, pé de feij
 11. **CH, NH, LH.** "Algumas duplas de letras fazem um som só. CH: chave, chuva, chapéu. NH: ninho, galinha, caminho. LH: folha, coelho, olho. Uma letrinha muda tudo: mola e molha, fila e filha, sono e sonho."
 12. **Plural.** "Uma casa, duas casas: plural é quando tem mais de um. Quase sempre, é só pôr S: lobo, lobos. Termina em R ou Z, põe ES: flor, flores; luz, luzes. Termina em ÃO, vira ÕES: avião, aviões; balão, balões. Termina em L, vira IS: animal, animais. Termina em M, vira NS: homem, homens. E o artigo também vai para o plural: o lobo, os lobos."
 13. **Fecho (conteúdo, não despedida).** "Era uma vez, H que não faz som, J e G, G e GU, dicionário, invenções, CA e QUE, CH, NH, LH, e o plural. ... E viveram felizes para sempre."
+
+## Regra das perguntas (todas os produtos) — 11/10
+1. **Resposta inequívoca:** nenhuma alternativa errada pode ser defendida como certa por alguém que conhece outra versão da história ou outro sentido da palavra (ex.: "___ATO" com J forma JATO; "NI___O" com CH forma NICHO; ESTÓRIA existe no dicionário).
+2. **Prepara para a prova:** cada pergunta treina um átomo da tabela acima no formato em que a escola cobra; nada de pergunta-brinde com distrator absurdo que não ensina nada.
+3. Julgamento moral de personagem (vilão, bom, mau, certo, errado) só para o Lobo Mau.
