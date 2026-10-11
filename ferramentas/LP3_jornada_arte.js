@@ -367,6 +367,7 @@ function gigante(c,x,y,estado,t,fase){
   if(estado==='throw'){ braco=-1.8; inc=-.05; }
   if(estado==='hit'){ inc=.12; boca=1; }
   if(estado==='laugh'){ resp=Math.sin(t*14)*8; boca=.7; braco=-.4; }
+  if(estado==='stomp'){ inc=-.06; resp=t<.3?-40*(.3-t)/.3:0; boca=.5; }
   if(sent){ c.translate(0,0); }
   c.save(); c.globalAlpha=.3; c.fillStyle='#000'; el(c,0,4,110,16); c.fill(); c.restore();
   c.rotate(inc);
