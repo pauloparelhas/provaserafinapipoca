@@ -8,6 +8,37 @@ nenhuma questão cita personagem, página ou fato desse livro).
 Fonte única de TODOS os produtos: jogo (LP3_jornada), estudo (LP3_estudo), simulado (LP3_simulado),
 vídeo (LP3_video). Banco de perguntas curtas: `ferramentas/LP3_banco.js`.
 
+## v2 (11/10) — Pistas do material da escola e PESO de cada parte
+**Pistas** (informativo do 3º tri + revisão de LP do 2º tri em `trabalho/2tri_portugues/conteudo/`, das mesmas professoras):
+- O informativo diz "Livro literário - Contos de fadas **(estudo de paráfrases e paródias)**": as duas histórias são o MEIO para estudar o gênero conto de fadas, a paráfrase e a paródia. Não são o fim.
+- A revisão do 2º tri mostra o jeito de cobrar: "**complete as palavras** com as letras M ou N" (listas de 6-10 palavras com lacuna), "**com suas palavras**, como você definiria ARTE?", "**escreva** 8 personagens e uma característica de cada", "**crie** uma frase para cada sinal". Logo a AF deve ter: listas de palavras com lacuna (H, J/G, G/GU, C/QU, CH/NH/LH), definição com as próprias palavras (conto de fadas, paráfrase, paródia, invenção, descoberta), produção curta (reescrever uma frase = paráfrase; mudar uma história = paródia; escrever o plural; pôr palavras em ordem alfabética).
+- "Aspectos linguísticos" ocupam metade das linhas do informativo → **ortografia + plural + dicionário pesam mais do que lembrar enredo**.
+
+**Peso nos produtos:** ortografia/plural/dicionário ≈ 55% · conto de fadas como gênero + paráfrase/paródia ≈ 35% · invenções ≈ 10%. Perguntas de "lembrar o que aconteceu na história" só como exemplo de elemento do gênero (no máximo ~10% do total).
+
+## v2 — Contos de fadas COMO GÊNERO (a tese)
+- **O que é:** uma história inventada, muito antiga, que as pessoas contavam umas para as outras (de geração em geração) e depois foi escrita em livros.
+- **Estrutura:** **começo** (Era uma vez... apresenta personagens e lugar) → **meio** (aparece um problema, um perigo) → **fim** (o problema é resolvido; muitas vezes "e viveram felizes para sempre").
+- **Elementos:** **tempo** que não se sabe quando foi ("Era uma vez...", "Há muito tempo..."); **lugar** (reino, castelo, floresta, aldeia); **personagens** (mocinho/herói, vilão, ajudantes, seres mágicos: fadas, bruxas, gigantes, animais que falam); **magia** (objeto ou acontecimento mágico); **problema** e **solução**; **final feliz**.
+- **Exemplos de contos de fadas:** Chapeuzinho Vermelho, João e o pé de feijão, Os Três Porquinhos, Cinderela, Branca de Neve, A Bela Adormecida.
+- **As duas histórias como exemplo dos elementos:**
+
+| Elemento | Chapeuzinho Vermelho | João e o pé de feijão |
+|---|---|---|
+| Lugar | floresta, casa da vovó | casa do João, castelo nas nuvens |
+| Magia | o lobo que fala | feijões mágicos, galinha dos ovos de ouro, harpa que canta |
+| Problema | o lobo engana a menina e a vovó | João precisa fugir do Gigante |
+| Solução | o caçador salva as duas | João corta o pé de feijão |
+
+## v2 — Paráfrase e paródia (a tese)
+- **Paráfrase** = recontar com **as suas palavras**, **sem mudar o sentido**. Como fazer: trocar palavras por outras de mesmo sentido (**sinônimos**), mudar a ordem da frase, contar do seu jeito.
+  - Sinônimos úteis: menina = garota · vovó = avó · floresta = mata · doces = guloseimas · grande = enorme · bravo = zangado · com medo = assustado.
+  - "Chapeuzinho levou doces para a vovó." → "A garota levou guloseimas para a avó."
+- **Paródia** = **imitar** um texto conhecido e **mudar** alguma coisa **de propósito** (personagem, lugar, objeto, final), muitas vezes para ficar **engraçado**. Dá para reconhecer o texto original.
+  - "Os três porquinhos fizeram casas de chocolate."
+  - **Paródia também se faz com música:** a mesma melodia, com a letra mudada. "Atirei o pau no gato" → "Não atire o pau no gato, porque isso não se faz".
+- **Teste rápido:** o sentido continua igual? → paráfrase. Mudou de propósito, imitando o original? → paródia.
+
 ## Mapa insumo → átomos
 
 | # | Linha do informativo | Átomo (tem de ser TREINADO) |
@@ -88,6 +119,7 @@ hora, hoje, homem, hotel, hospital, hipopótamo, helicóptero, história, horta,
 - Para que serve: descobrir o **significado** e conferir a **escrita certa**.
 - **Verbete:** a palavra explicada com seu significado.
 - **Palavras-guia:** no alto da página, mostram a primeira e a última palavra da página.
+- Uma palavra pode ter **mais de um significado**; o dicionário mostra todos: **manga** (fruta / parte da camisa), **pena** (das aves / sentir dó).
 
 ## U5.1 Invenções e descobertas
 - **Invenção:** criada por pessoas, não existia antes — roda, lâmpada, telefone, avião, bicicleta, computador, relógio, geladeira.
@@ -117,7 +149,26 @@ hora, hoje, homem, hotel, hospital, hipopótamo, helicóptero, história, horta,
 - O artigo acompanha: **o** lobo → **os** lobos · **a** casa → **as** casas.
 - Evitar como pergunta: plurais em ÃES/ÃOS (pão→pães, mão→mãos) — exceção, confunde a regra ÃO→ÕES.
 
-## Roteiro do VÍDEO (narração da Thalita — eu controlo o texto)
+## Roteiro do VÍDEO v2 (VALE ESTE — narração da Thalita)
+Sem "bem-vindos", sem falar em prova, sem metalinguagem. Só conteúdo, tom de criança. Menos enredo, mais regra e muitos exemplos.
+
+1. **O que é conto de fadas.** "Conto de fadas é uma história inventada, bem antiga. As pessoas contavam umas para as outras, de avó para neto, até que ela foi escrita nos livros. Chapeuzinho Vermelho, João e o pé de feijão, Os Três Porquinhos, Cinderela e Branca de Neve são contos de fadas."
+2. **Começo, meio e fim.** "Todo conto de fadas tem começo, meio e fim. No começo: Era uma vez... e a gente conhece os personagens e o lugar. No meio, aparece um problema. No fim, o problema é resolvido, e muitas vezes: viveram felizes para sempre."
+3. **Os elementos.** "Preste atenção nos elementos. O tempo: era uma vez, há muito tempo. O lugar: um reino, um castelo, uma floresta. Os personagens: o herói, o vilão e os seres mágicos, como fadas, bruxas, gigantes e animais que falam. E sempre tem magia."
+4. **Os elementos nas duas histórias.** "Em Chapeuzinho Vermelho, o lugar é a floresta, a magia é um lobo que fala, o problema é o lobo enganar a menina, e a solução é o caçador salvar a menina e a vovó. Em João e o pé de feijão, a magia são os feijões mágicos, a galinha dos ovos de ouro e a harpa que canta. O problema é fugir do Gigante, e a solução é cortar o pé de feijão."
+5. **Paráfrase.** "Paráfrase é contar com as suas palavras, sem mudar o sentido. O segredo são os sinônimos, palavras que querem dizer a mesma coisa: menina e garota, vovó e avó, floresta e mata, doces e guloseimas. Chapeuzinho levou doces para a vovó. Paráfrase: a garota levou guloseimas para a avó. Mudaram as palavras. O sentido ficou igual."
+6. **Paródia.** "Paródia é imitar um texto conhecido e mudar alguma coisa de propósito, quase sempre para ficar engraçado: os três porquinhos fizeram casas de chocolate! Dá para fazer paródia de música também: a mesma melodia, com a letra nova. Atirei o pau no gato virou: não atire o pau no gato, porque isso não se faz."
+7. **Paráfrase ou paródia?** "Para saber, pergunte: o sentido ficou igual? É paráfrase. Mudou de propósito, imitando o original? É paródia."
+8. **Letra H.** "Algumas palavras começam com H. O H no começo não faz som nenhum, mas é escrito: hoje, homem, hotel, hospital, hipopótamo, helicóptero, história, horta, herói. Ovo, uva, ilha e escola não têm H."
+9. **J ou G.** "O som de jê pode ser escrito com J ou com G. Com A, O e U, é sempre J: janela, jacaré, joia, caju, laranja, feijão. Com E e I, pode ser J ou G: jeito, jiló e jipe têm J; gelo, gente, girafa, gigante e mágico têm G. Essas a gente aprende palavra por palavra."
+10. **G ou GU.** "Gato, galinha, gorila, fogo: G com A, O e U faz som de guê. Antes do E e do I, para ter esse som, entra o U quietinho: guerra, foguete, fogueira, guitarra, águia. Sem o U, GE e GI soam jê: gelo, girafa. Gigante tem os dois sons!"
+11. **C ou QU.** "Casa, cavalo, copo, coelho, cubo: C com A, O e U. Antes do E e do I, o mesmo som se escreve com QU: queijo, quente, quiabo, esquilo, máquina, mosquito."
+12. **CH, NH, LH.** "CH, NH e LH são duas letras que fazem um som só. CH: chave, chuva, chapéu, chocolate. NH: ninho, galinha, banho, caminho. LH: folha, coelho, abelha, olho. Uma letra muda tudo: mola e molha, fila e filha, sono e sonho."
+13. **Plural.** "Plural é mais de um. Termina em vogal, põe S: casa, casas; lobo, lobos. Termina em R ou Z, põe ES: flor, flores; luz, luzes. ÃO vira ÕES: avião, aviões; balão, balões. AL vira AIS: animal, animais; jornal, jornais. M vira NS: homem, homens; nuvem, nuvens. E o artigo também: o lobo, os lobos; a casa, as casas."
+14. **Dicionário.** "No dicionário, as palavras estão em ordem alfabética. Se a primeira letra é igual, olhe a segunda: bala, bola, bule. Se a segunda também é igual, olhe a terceira: cama, casa, cavalo. Cada palavra explicada é um verbete. No alto da página, as palavras-guia mostram a primeira e a última palavra daquela página. E uma palavra pode ter mais de um significado: manga é fruta, e manga é parte da camisa."
+15. **Invenções e descobertas.** "Invenção é algo que as pessoas criaram e que não existia antes: a roda, a lâmpada, o telefone, a bicicleta, o avião. Quem inventa é o inventor; o brasileiro Santos Dumont é conhecido como o pai da aviação. Descoberta é encontrar algo que já existia, como o fogo, uma planta nova ou um animal que ninguém conhecia."
+
+## Roteiro do VÍDEO v1 (SUBSTITUÍDO pelo v2 acima — histórico)
 Sem "bem-vindos", sem falar em prova, sem metalinguagem. Só conteúdo, tom de criança.
 Cenário de cada cena = o próprio assunto (floresta da Chapeuzinho, pé de feijão, etc.).
 
