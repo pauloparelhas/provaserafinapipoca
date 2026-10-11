@@ -13,7 +13,7 @@ var $=function(id){ return document.getElementById(id); };
 function cartaoMapa(f){
   var d=$('mapCard'); if(!d) return;
   if(!f){ d.classList.remove('show'); return; }
-  var n=0, q=0; if(f.treino){ n=1; q=5; } else if(f.chefao){ n=4; q=8; } else { var mp=window.MAPAS&&MAPAS[f.id]; var rows=(mp?mp.main:NIVEIS.grade(FASES.SEQ[f.id])).join(''), sub=(mp?mp.sub:NIVEIS.SUBS[f.sub]||[]).join(''); var ns=(rows.match(/[?D]/g)||[]).length+(sub.match(/[?D]/g)||[]).length, nm=(rows.match(/M/g)||[]).length+(sub.match(/M/g)||[]).length; n=ns+nm; q=ns*5+nm*8; }
+  var n=0, q=0; if(f.treino){ n=1; q=5; } else if(f.chefao){ n=4; q=8; } else { var mp=window.MAPAS&&MAPAS[f.id]; var rows=(mp?mp.main:NIVEIS.grade(FASES.SEQ[f.id])).join(''), sub=(mp?mp.sub:NIVEIS.SUBS[f.sub]||[]).join(''); var ns=(rows.match(/[?D]/g)||[]).length+(sub.match(/[?D]/g)||[]).length, nm=(rows.match(/M/g)||[]).length+(sub.match(/M/g)||[]).length; n=ns+nm; q=(ns+nm)*4; }
   var h='<div class="mcTop"><div class="mcNome"><b>'+U.esc(f.nome)+'</b> · '+U.esc(f.lugar)+(f.ideia?' <small>· '+U.esc(f.ideia)+'</small>':'')+'</div><div class="mcN">'+n+' arena'+(n>1?'s':'')+' · '+q+' perguntas</div><button class="mbtn pri" id="mcJogar">Jogar</button></div>';
   h+='<div class="mcRegras">'+(window.REGRAS?REGRAS.cartaoFase(f,true):'')+'</div>';
   d.innerHTML=h; d.classList.add('show');
