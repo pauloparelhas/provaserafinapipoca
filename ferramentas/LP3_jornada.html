@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='56711871446';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>WiseBear Game — Português 3º tri</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap">
-<link rel="stylesheet" href="serafina-core.css?v=20261012">
+<link rel="stylesheet" href="serafina-core.css?v=56711871446">
 <style>
 /* ============================================================
    LP3_jornada.html (v2) — casca do jogo. Tudo que é jogo vive no
@@ -213,26 +222,26 @@ body.portrait #rot{display:flex}
 <div id="rot"><span>Gire o tablet para a horizontal</span></div>
 
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.9,home:'../index.html',somKey:'lp3_som',stars:0,starfield:false};</script>
-<script src="serafina-core.js?v=20261012"></script>
-<script src="OP_voz.js?v=20261012"></script>
-<script src="LP3_banco.js?v=20261012"></script>
-<script src="LP3_jornada_partituras.js?v=20261012"></script>
-<script src="LP3_jornada_musica.js?v=20261012"></script>
-<script src="LP3_jornada_som.js?v=20261012"></script>
-<script src="LP3_jornada_arte.js?v=20261012"></script>
-<script src="LP3_jornada_arte2.js?v=20261012"></script>
-<script src="LP3_jornada_arte3.js?v=20261012"></script>
-<script src="LP3_jornada_arte4.js?v=20261012"></script>
-<script src="LP3_jornada_regras.js?v=20261012"></script>
-<script src="LP3_jornada_niveis.js?v=20261012"></script>
-<script src="LP3_jornada_mapas.js?v=20261012"></script>
-<script src="LP3_jornada_fases.js?v=20261012"></script>
-<script src="LP3_jornada_motor.js?v=20261012"></script>
-<script src="LP3_jornada_motor2.js?v=20261012"></script>
-<script src="LP3_jornada_arena.js?v=20261012"></script>
-<script src="LP3_jornada_cena.js?v=20261012"></script>
-<script src="LP3_jornada_ui.js?v=20261012"></script>
-<script src="LP3_jornada_ui2.js?v=20261012"></script>
-<script src="LP3_jornada_ui3.js?v=20261012"></script>
+<script src="serafina-core.js?v=56711871446"></script>
+<script src="OP_voz.js?v=56711871446"></script>
+<script src="LP3_banco.js?v=56711871446"></script>
+<script src="LP3_jornada_partituras.js?v=56711871446"></script>
+<script src="LP3_jornada_musica.js?v=56711871446"></script>
+<script src="LP3_jornada_som.js?v=56711871446"></script>
+<script src="LP3_jornada_arte.js?v=56711871446"></script>
+<script src="LP3_jornada_arte2.js?v=56711871446"></script>
+<script src="LP3_jornada_arte3.js?v=56711871446"></script>
+<script src="LP3_jornada_arte4.js?v=56711871446"></script>
+<script src="LP3_jornada_regras.js?v=56711871446"></script>
+<script src="LP3_jornada_niveis.js?v=56711871446"></script>
+<script src="LP3_jornada_mapas.js?v=56711871446"></script>
+<script src="LP3_jornada_fases.js?v=56711871446"></script>
+<script src="LP3_jornada_motor.js?v=56711871446"></script>
+<script src="LP3_jornada_motor2.js?v=56711871446"></script>
+<script src="LP3_jornada_arena.js?v=56711871446"></script>
+<script src="LP3_jornada_cena.js?v=56711871446"></script>
+<script src="LP3_jornada_ui.js?v=56711871446"></script>
+<script src="LP3_jornada_ui2.js?v=56711871446"></script>
+<script src="LP3_jornada_ui3.js?v=56711871446"></script>
 </body>
 </html>
