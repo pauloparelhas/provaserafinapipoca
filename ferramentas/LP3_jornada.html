@@ -47,6 +47,8 @@ body.globo #hud .pill,body.globo #hudName,body.globo #btnPause{display:none}
 /* ---- controles de toque ---- */
 #touch{position:absolute;inset:0;pointer-events:none}
 body.kbd #touch{display:none !important}
+/* pergunta, teoria ou menu na tela: sem botões de controle por cima */
+body.naArena #touch,body:has(#qbox.show) #touch,body:has(#menu.show) #touch{display:none !important}
 .tb{position:absolute;pointer-events:auto;border-radius:50%;border:3px solid rgba(255,255,255,.45);background:rgba(255,255,255,.16);backdrop-filter:blur(2px);color:#fff;font-weight:900;font-size:30px;display:flex;align-items:center;justify-content:center;width:84px;height:84px;bottom:22px;text-shadow:0 2px 4px rgba(0,0,0,.5);transition:background .1s,transform .1s}
 .tb.on{background:rgba(255,255,255,.45);transform:scale(.95)}
 #tLeft{left:22px}#tRight{left:122px}#tDown{left:72px;bottom:112px;width:66px;height:66px;font-size:26px}
