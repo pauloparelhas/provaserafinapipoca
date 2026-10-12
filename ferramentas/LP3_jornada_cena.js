@@ -64,7 +64,7 @@ function desenhaNivel(c){
   J.pinhas.forEach(function(p){ c.save(); c.translate(p.x,p.y); c.rotate(p.rot); c.fillStyle='#78350f'; A.el(c,0,0,7,10); c.fill(); c.restore(); });
   if(J.chefe){ var g=J.chefe; A.gigante(c,g.x,g.y,g.estado,g.t,0); J.bolas.forEach(function(b){ A.bolaNeve(c,b,t); }); J.folhas.forEach(function(f){ if(f.cx!==undefined){ A.folha(c,f.cx,f.cy,18,f.t*10,'#fbbf24',2); } }); }
   /* o urso: tamanho + squash & stretch, pisca quando invencível */
-  if(!(u.invT>0 && Math.floor(t*14)%2===0)){ var s=TAM[u.tam]; c.save(); c.translate(u.x,u.y); c.scale(s*u.sx,s*u.sy); A.urso(c,0,0,u.estado,u.anim,u.dir,1); c.restore(); }
+  if(!(u.invT>0 && Math.floor(t*14)%2===0)){ var s=TAM[u.tam]; c.save(); if(u.abaixado){ var d=u.dir<0?-1:1, rast=Math.abs(u.vx)>8?Math.sin(u.anim*12)*2.5:0; /* deitado se arrastando */ c.translate(u.x-d*30*s,u.y-15*s+rast); c.rotate(d*1.42); c.scale(s,s); A.urso(c,0,0,Math.abs(u.vx)>8?'walk':'idle',u.anim,u.dir,1); } else { c.translate(u.x,u.y); c.scale(s*u.sx,s*u.sy); A.urso(c,0,0,u.estado,u.anim,u.dir,1); } c.restore(); }
   J.part.forEach(function(p){ A.particula(c,p); });
   if(J.dica && J.estado==='nivel') desenhaDica(c,J.dica,t);
   if(J.tut && M.passos && M.passos[J.tut.i]) desenhaTutorial(c,M.passos[J.tut.i]);
