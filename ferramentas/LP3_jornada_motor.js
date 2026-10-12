@@ -87,6 +87,7 @@ function fisica(dt){
   var u=J.urso, M=J.mundo, s=TAM[u.tam], hw=URSO_W*s/2, hh=URSO_H*s;
   if(u.tontoT>0){ u.tontoT-=dt; u.estado='dizzy'; u.vx=0; u.anim+=dt; return; }
   var ax=0; if(J.in.left) ax-=1; if(J.in.right) ax+=1;
+  u.abaixado=!!(J.in.down&&u.noChao); if(u.abaixado) ax=0; /* ↓ = abaixar, como no Mario */
   if(J.tut && J.tut.i===0 && ax<0) ax=0;
   var vel=VAND*(u.poderes.patins?1.18:1), alvo=ax*vel, gelo=M.gelo&&!u.poderes.patins;
   u.vx+=(alvo-u.vx)*Math.min(1,dt*(gelo?2.6:18)); if(Math.abs(u.vx)<2&&!ax) u.vx=0;
@@ -118,7 +119,7 @@ function fisica(dt){
   u.y=ny; u.noChao=noChao; u.sobre=sobre;
   if(!noChao) u.estado=u.planando?'glide':(u.vy<0?'jump':'fall'); else u.estado=Math.abs(u.vx)>5?'walk':'idle';
   if(noChao&&u.estado==='walk'&&Math.random()<dt*6) poeira(u.x-u.dir*10,u.y,1);
-  u.anim+=dt; u.sx+=(1-u.sx)*Math.min(1,dt*10); u.sy+=(1-u.sy)*Math.min(1,dt*10);
+  u.anim+=dt; var alvoSx=u.abaixado?1.18:1, alvoSy=u.abaixado?.62:1; u.sx+=(alvoSx-u.sx)*Math.min(1,dt*14); u.sy+=(alvoSy-u.sy)*Math.min(1,dt*14);
   if(u.y>M.h+60) caiu('Opa! De volta ao checkpoint');
 }
 
