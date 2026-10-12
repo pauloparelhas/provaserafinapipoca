@@ -33,7 +33,7 @@ function toast(txt,dur){ var t=$('toast'); t.textContent=txt; t.classList.remove
 function pintaBotoes(){ var b=$('btnLock'); if(b) b.classList.toggle('on',!!window.screenLocked); }
 function modoNivel(on){ $('touch').style.display=on?'block':'none'; }
 function modoMapa(on){ var b=$('mapBtns'); if(b) b.style.display=on?'flex':'none'; }
-function hudArena(on){ $('hud').classList.toggle('arena',!!on); }
+function hudArena(on){ $('hud').classList.toggle('arena',!!on); document.body.classList.toggle('naArena',!!on); }
 /* botão X da arena (sai na hora; Esc faz o mesmo) */
 function botaoSair(on){ var b=$('btnSairArena'); if(b) b.classList.toggle('show',!!on); }
 function acao(on){ $('tAct').classList.toggle('show',!!on); }

@@ -21,7 +21,10 @@
    para o validador contar o banco.
    - Texto de prova (enun, pede, texto, quadro, alternativas) em CAIXA ALTA;
      dica, porque, `no` e proximo em letra normal: é a voz de quem ensina.
-   - Distrator INDEFENSÁVEL. Nas listas de lacunas, NENHUMA palavra
+   - v3 (12/10): as lacunas de H, J/G, G/GU, C/QU e CH/NH/LH vivem
+     DENTRO de um texto curto (como o "complete o texto com a pontuação"
+     do material da escola), e não mais numa lista de palavras soltas.
+   - Distrator INDEFENSÁVEL. Nos textos com lacunas, NENHUMA palavra
      preenchida com a letra errada forma outra palavra de verdade (JATO,
      NICHO, ORA, IENA, GANHO, TENHA, MINHO... ficaram de fora de propósito).
    - Vilão só o Lobo Mau; o Gigante nunca é rotulado (decisão de 11/10).
@@ -67,40 +70,44 @@ var FAMILIAS = [
 var SEP = ' · ';
 
 /* Regras e falas padrão das listas de lacunas, por família. */
+/* v3 (12/10): as lacunas deixam de ser LISTA de palavras soltas e passam a
+   viver DENTRO de um texto curto, como no material da escola ("O diálogo
+   abaixo está sem pontuação. Leia atentamente e complete o texto"). A
+   criança lê o texto, entende as palavras e aplica a regra em cada lacuna. */
 var LAC = {
-  jg:  {enun:'COMPLETE AS PALAVRAS COM J OU G:',
-        dica:'Olhe a letra que vem depois da lacuna. Antes de A, O, U é sempre J. Antes de E, I, lembre como a palavra se escreve.',
+  jg:  {enun:'LEIA O TEXTO E COMPLETE AS PALAVRAS COM J OU G:',
+        dica:'Leia o texto inteiro primeiro. Em cada lacuna, olhe a letra que vem DEPOIS: A, O, U pedem J. Antes de E e I, lembre como a palavra se escreve.',
         regra:'Antes de A, O e U o som de jê é sempre J. Antes de E e I pode ser J ou G, e é preciso lembrar a palavra.',
         proximo:'Leia a letra que vem DEPOIS da lacuna: A, O, U pedem J.'},
-  ggu: {enun:'COMPLETE AS PALAVRAS COM G OU GU:',
-        dica:'Se depois da lacuna vem E ou I e o som é de guê, precisa do U: GUE, GUI.',
+  ggu: {enun:'LEIA O TEXTO E COMPLETE AS PALAVRAS COM G OU GU:',
+        dica:'Leia o texto inteiro primeiro. Se depois da lacuna vem E ou I e o som é de guê, precisa do U: GUE, GUI.',
         regra:'GA, GO, GU levam só o G. Antes de E e I, para soar guê, entra o U que não se fala: GUE, GUI.',
         proximo:'Depois da lacuna vem E ou I? Para soar guê, ponha GU.'},
-  cqu: {enun:'COMPLETE AS PALAVRAS COM C OU QU:',
-        dica:'Se depois da lacuna vem E ou I e o som é de quê, precisa de QU.',
-        regra:'Com A, O e U (casa, copo, cubo), vai só o C. Antes de E e I, o som de quê se escreve QU, com o U quietinho.',
+  cqu: {enun:'LEIA O TEXTO E COMPLETE AS PALAVRAS COM C OU QU:',
+        dica:'Leia o texto inteiro primeiro. Se depois da lacuna vem E ou I e o som é de quê, precisa de QU.',
+        regra:'Com A, O e U (casa, copo), vai só o C. Antes de E e I, o som de quê se escreve QU, com o U quietinho.',
         proximo:'Depois da lacuna vem E ou I? Para soar quê, ponha QU.'},
-  dig: {enun:'COMPLETE AS PALAVRAS COM CH, NH OU LH:',
-        dica:'Leia baixinho cada palavra com CH, com NH e com LH. Só uma forma vira palavra de verdade.',
+  dig: {enun:'LEIA O TEXTO E COMPLETE AS PALAVRAS COM CH, NH OU LH:',
+        dica:'Leia o texto inteiro primeiro, para saber de que palavra se trata. Depois pense em como cada palavra se escreve: CH, NH ou LH?',
         regra:'CH, NH e LH são duas letras com um som só; trocar uma dupla pela outra estraga a palavra.',
-        proximo:'Teste as três duplas na mesma palavra e fique com a que existe.'}
+        proximo:'Descubra a palavra pelo texto e lembre como ela se escreve.'}
 };
 
-/* Lista de lacunas no formato da prova: "COMPLETE AS PALAVRAS COM J OU G:"
-   + quadro numerado; as alternativas são a SEQUÊNCIA de letras, na ordem.
-   palavras: '[G]ELO' marca a letra que falta.
-   erradas : 'J J J G' (uma por distrator, letras separadas por espaço).
-   A fala de cada distrator é montada aqui: aponta a palavra que ficou
-   errada e mostra como ela ficaria — sempre uma palavra que NÃO existe. */
-function lac(id, eixo, palavras, erradas, extra){
-  var L = LAC[eixo];
-  var ws = palavras.map(function(p){
-    var m = /^(.*)\[(.+?)\](.*)$/.exec(p);
-    return {a:m[1], l:m[2], b:m[3]};
-  });
+/* Texto com lacunas no formato da prova: o texto vai no quadro, com cada
+   lacuna numerada; as alternativas são a SEQUÊNCIA de letras, na ordem.
+   linhas : frases do texto; '[G]ELO' marca a letra que falta.
+   erradas: 'J J J G' (uma por distrator, letras separadas por espaço).
+   A fala de cada distrator aponta a palavra que ficou errada e mostra como
+   ela ficaria — sempre uma palavra que NÃO existe (conferido à mão). */
+var RE_LAC = /([A-ZÀ-Ú]*)\[([A-Z]+)\]([A-ZÀ-Ú]*)/g;
+function lac(id, eixo, linhas, erradas, extra){
+  var L = LAC[eixo], ws = [];
+  linhas.forEach(function(l){ l.replace(RE_LAC, function(_,a,x,b){ ws.push({a:a, l:x, b:b}); return _; }); });
   var certa = ws.map(function(w){ return w.l; });
-  var quadro = '<div class="lacs">' + ws.map(function(w,i){
-    return '<span class="lac"><i>'+(i+1)+'</i>'+w.a+'<span class="lb"></span>'+w.b+'</span>';
+  var n = 0;
+  var quadro = '<div class="lacs" style="display:block;text-align:left;line-height:2.2">' + linhas.map(function(l){
+    return '<div>' + l.replace(RE_LAC, function(_,a,x,b){ n++;
+      return '<span class="lac"><i>'+n+'</i>'+a+'<span class="lb"></span>'+b+'</span>'; }) + '</div>';
   }).join('') + '</div>';
   var opts = [{t:certa.join(SEP), ok:1}];
   erradas.forEach(function(e){
@@ -114,13 +121,13 @@ function lac(id, eixo, palavras, erradas, extra){
     opts.push({t:arr.join(SEP), no:fala.join(' ')});
   });
   var it = {
-    id:id, eixo:eixo, tipo:'complete as palavras',
+    id:id, eixo:eixo, tipo:'complete o texto',
     enun:L.enun, quadro:quadro,
-    pede:'QUAIS LETRAS COMPLETAM AS PALAVRAS, NA ORDEM?',
+    pede:'QUAIS LETRAS COMPLETAM AS LACUNAS 1 A '+ws.length+', NA ORDEM?',
     opts:opts, dica:L.dica,
-    visual:'<div class="pcs">'+ws.map(function(w){
-      return '<span class="pc">'+w.a+'<span class="mk">'+w.l+'</span>'+w.b+'</span>'; }).join('')+'</div>',
-    porque:'Completas, ficam: '+ws.map(function(w){ return w.a+w.l+w.b; }).join(', ')+'. '+L.regra,
+    visual:linhas.map(function(l){ return '<p class="vx">'+l.replace(RE_LAC, function(_,a,x,b){
+      return a+'<span class="mk">'+x+'</span>'+b; })+'</p>'; }).join(''),
+    porque:'Completas, as palavras ficam: '+ws.map(function(w){ return w.a+w.l+w.b; }).join(', ')+'. '+L.regra,
     proximo:L.proximo,
     lacunas:ws
   };
@@ -128,22 +135,22 @@ function lac(id, eixo, palavras, erradas, extra){
   return it;
 }
 
-/* Lacunas do H: o H não tem som, então a pergunta é EM QUAIS palavras
-   ele falta. palavras: '[H]OJE' (tem H) ou 'OVO' (não tem).
-   erradas: listas de números (1 = primeira palavra) que levariam H. */
+/* Lacunas do H dentro de um texto: o H não tem som, então a pergunta é EM
+   QUAIS palavras numeradas ele falta. '[H]OJE' = falta H; '[]OVO' = não tem. */
 function nums(a){
   a = a.slice().sort(function(x,y){ return x-y; });
   if(a.length===1) return 'SÓ NA '+a[0];
-  return a.slice(0,-1).join(', ')+' E '+a[a.length-1];
+  return 'NA '+a.slice(0,-1).join(', ')+' E '+a[a.length-1];
 }
-function hlac(id, palavras, erradas){
-  var ws = palavras.map(function(p){
-    var tem = p.indexOf('[H]')===0;
-    return {tem:tem, w:tem ? p.slice(3) : p};
-  });
+var RE_H = /\[(H?)\]([A-ZÀ-Ú]+)/g;
+function hlac(id, linhas, erradas){
+  var ws = [];
+  linhas.forEach(function(l){ l.replace(RE_H, function(_,h,w){ ws.push({tem:!!h, w:w}); return _; }); });
   var certa = []; ws.forEach(function(w,i){ if(w.tem) certa.push(i+1); });
-  var quadro = '<div class="lacs">' + ws.map(function(w,i){
-    return '<span class="lac"><i>'+(i+1)+'</i><span class="lb"></span>'+w.w+'</span>';
+  var n = 0;
+  var quadro = '<div class="lacs" style="display:block;text-align:left;line-height:2.2">' + linhas.map(function(l){
+    return '<div>' + l.replace(RE_H, function(_,h,w){ n++;
+      return '<span class="lac"><i>'+n+'</i><span class="lb"></span>'+w+'</span>'; }) + '</div>';
   }).join('') + '</div>';
   var opts = [{t:nums(certa), ok:1}];
   erradas.forEach(function(e){
@@ -156,14 +163,14 @@ function hlac(id, palavras, erradas){
     opts.push({t:nums(e), no:fala.join(' ')});
   });
   return {
-    id:id, eixo:'h', tipo:'complete as palavras',
-    enun:'COMPLETE COM H AS PALAVRAS QUE PRECISAM DE H:', quadro:quadro,
-    pede:'EM QUAIS PALAVRAS FALTA O H?',
+    id:id, eixo:'h', tipo:'complete o texto',
+    enun:'LEIA O TEXTO. ALGUMAS PALAVRAS NUMERADAS PERDERAM O H DO COMEÇO.', quadro:quadro,
+    pede:'EM QUAIS PALAVRAS NUMERADAS FALTA O H?',
     opts:opts,
-    dica:'O H não tem som, então não adianta escutar. Lembre como a palavra aparece escrita nos livros.',
-    visual:'<div class="pcs">'+ws.map(function(w){
-      return '<span class="pc">'+(w.tem?'<span class="mk">H</span>':'')+w.w+'</span>'; }).join('')+'</div>',
-    porque:'Ficam assim: '+ws.map(function(w){ return (w.tem?'H':'')+w.w; }).join(', ')+'. O H do começo não tem som; quem se escreve com H tem de ser lembrada.',
+    dica:'O H não tem som, então não adianta escutar. Leia cada palavra numerada e lembre como ela aparece escrita nos livros.',
+    visual:linhas.map(function(l){ return '<p class="vx">'+l.replace(RE_H, function(_,h,w){
+      return (h?'<span class="mk">H</span>':'')+w; })+'</p>'; }).join(''),
+    porque:'As palavras numeradas ficam assim: '+ws.map(function(w){ return (w.tem?'H':'')+w.w; }).join(', ')+'. O H do começo não tem som; quem se escreve com H tem de ser lembrada.',
     proximo:'Não confie no ouvido: o H é mudo. Pense na palavra escrita.',
     lacunas:ws.map(function(w){ return {a:'', l:w.tem?'H':'', b:w.w}; })
   };
@@ -251,9 +258,9 @@ var ITENS = [];
 
 /* =================== BLOCO A · LETRA H =================== */
 ITENS.push(
-hlac('SH1', ['[H]OJE','OVO','[H]OTEL','UVA','[H]ORTA'], [[1,3],[1,2,3,5],[3,5]]),
-hlac('SH2', ['ILHA','[H]OMEM','[H]IPOPÓTAMO','ESCOLA','[H]ELICÓPTERO'], [[2,3],[1,2,3,5],[2,3,4,5]]),
-hlac('SH3', ['ANEL','[H]ISTÓRIA','OLHO','[H]IGIENE','[H]ERÓI'], [[2,4],[1,2,4,5],[2,3,4,5]]),
+hlac('SH1', ['OI, VOVÓ!','[H]OJE FUI AO [H]OSPITAL COM O PAPAI.','NA VOLTA, COMI UM []OVO E UMA []UVA.','BEIJOS DO PEDRO.'], [[1],[1,2,3,4],[2,4]]),
+hlac('SH2', ['O [H]OMEM DO [H]OTEL MORA NUMA []ILHA.','ELE TEM UM []ELEFANTE DE BRINQUEDO','E UM [H]ELICÓPTERO DE VERDADE.'], [[1,2],[1,2,3,4,5],[2,5]]),
+hlac('SH3', ['NA []ESCOLA, A PROFESSORA CONTOU','A [H]ISTÓRIA DE UM [H]ERÓI.','ELE PLANTOU UMA [H]ORTA','E GANHOU UM []ANEL DE PRESENTE.'], [[2,3],[1,2,3,4],[2,4,5]]),
 
 {id:'SH4', eixo:'h', tipo:'qual está escrita certo',
  pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
@@ -335,11 +342,11 @@ hlac('SH3', ['ANEL','[H]ISTÓRIA','OLHO','[H]IGIENE','[H]ERÓI'], [[2,4],[1,2,4,
 
 /* =================== BLOCO A · J OU G =================== */
 ITENS.push(
-lac('SJG1','jg', ['[G]ELO','[J]ANELA','CA[J]U','[G]IRAFA'], ['J J J G','G J G G','G G J J']),
-lac('SJG2','jg', ['[J]ACARÉ','[G]ENTE','LARAN[J]A','MÁ[G]ICO','[J]IPE'], ['J J J G J','J G G G J','J G J J G']),
-lac('SJG3','jg', ['[G]IGANTE','QUEI[J]O','TI[G]ELA','[J]UBA'], ['J J G J','G J J J','G G G J']),
-lac('SJG4','jg', ['[G]ELADEIRA','[J]EITO','PÁ[G]INA','BEI[J]O','[J]ABUTI'], ['G G G J J','G J J J J','J J G J G']),
-lac('SJG5','jg', ['RELÓ[G]IO','[J]ILÓ','SU[J]EIRA','[G]IRASSOL','FEI[J]ÃO'], ['G G J G J','G J G G J','J J J J J']),
+lac('SJG1','jg', ['O [J]ACARÉ E A [G]IRAFA FORAM À FEIRA.','COMPRARAM LARAN[J]A, QUEI[J]O E [G]ELO.'], ['G G J J G','J J J J G','J G J J J']),
+lac('SJG2','jg', ['O MÁ[G]ICO ABRIU O LIVRO NA PÁ[G]INA DOIS.','TIROU DE DENTRO UMA [J]OIA E UM [J]ABUTI!'], ['J G J J','G J J J','G G G J']),
+lac('SJG3','jg', ['O [G]IGANTE ACORDOU COM FOME.','COMEU FEI[J]ÃO NUMA TI[G]ELA','E DEU UM BEI[J]O NA GALINHA.'], ['J J G J','G G G J','G J J J']),
+lac('SJG4','jg', ['DE MANHÃ, O RELÓ[G]IO TOCOU.','O MENINO OLHOU PELA [J]ANELA E VIU UM [J]IPE.','QUE [G]ENTE ANIMADA NA RUA!'], ['J J J G','G G J G','G J G J']),
+lac('SJG5','jg', ['O LEÃO BALANÇOU A [J]UBA.','O [G]IRASSOL ABRIU NO SOL.','A [G]ELADEIRA FICOU SEM SU[J]EIRA.'], ['G G G J','J J G J','J G J G']),
 
 {id:'SJG6', eixo:'jg', tipo:'qual está escrita certo',
  pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
@@ -393,10 +400,10 @@ lac('SJG5','jg', ['RELÓ[G]IO','[J]ILÓ','SU[J]EIRA','[G]IRASSOL','FEI[J]ÃO'], 
 
 /* =================== BLOCO A · G OU GU =================== */
 ITENS.push(
-lac('SGG1','ggu', ['[G]ATO','[GU]ERRA','FO[G]O','Á[GU]IA'], ['GU GU G GU','G G G GU','G GU G G']),
-lac('SGG2','ggu', ['FO[GU]ETE','[G]ALINHA','[GU]ITARRA','LA[G]O','MAN[GU]EIRA'], ['G G GU G GU','GU G G G GU','GU GU GU G G']),
-lac('SGG3','ggu', ['PRE[GU]IÇA','[G]ORILA','FO[GU]EIRA','A[G]ULHA'], ['G G GU G','GU GU GU G','GU G GU GU']),
-lac('SGG4','ggu', ['FORMI[GU]EIRO','[G]ALHO','[GU]INDASTE','[G]OLA','[G]UDE'], ['G G GU G G','GU GU GU G G','GU G G G G']),
+lac('SGG1','ggu', ['NA FESTA JUNINA, TEVE FO[GU]EIRA E FO[GU]ETE.','O [G]ATO DORMIU PERTO DO LA[G]O.'], ['G GU G G','GU G G G','GU GU GU G']),
+lac('SGG2','ggu', ['A Á[GU]IA VOOU SOBRE A MAN[GU]EIRA.','LÁ EMBAIXO, UM [G]ORILA TOCAVA [GU]ITARRA.'], ['G GU G GU','GU GU GU GU','GU GU G G']),
+lac('SGG3','ggu', ['A [G]ALINHA ACHOU UMA A[G]ULHA NO [G]ALHO.','A PRE[GU]IÇA NEM ACORDOU.'], ['GU G G GU','G G G G','G GU G GU']),
+lac('SGG4','ggu', ['AS FORMIGAS SAÍRAM DO FORMI[GU]EIRO.','SUBIRAM NO [GU]INDASTE E NA [G]OLA DA CAMISA.','DEPOIS, BRINCARAM DE BOLINHA DE [G]UDE.'], ['G GU G G','GU G G G','GU GU GU G']),
 
 {id:'SGG5', eixo:'ggu', tipo:'regra',
  pede:'EM QUAL PALAVRA O U FICA QUIETINHO (NÃO SE FALA)?',
@@ -451,10 +458,10 @@ lac('SGG4','ggu', ['FORMI[GU]EIRO','[G]ALHO','[GU]INDASTE','[G]OLA','[G]UDE'], [
 
 /* =================== BLOCO A · C OU QU =================== */
 ITENS.push(
-lac('SCQ1','cqu', ['[C]ASA','[QU]EIJO','[C]OPO','ES[QU]ILO'], ['QU QU C QU','C C C QU','C QU C C']),
-lac('SCQ2','cqu', ['MÁ[QU]INA','[C]AVALO','[QU]IABO','[C]UBO','MOS[QU]ITO'], ['C C QU C QU','QU C C C QU','QU QU QU C C']),
-lac('SCQ3','cqu', ['[C]OELHO','LE[QU]E','[C]AMA','PERI[QU]ITO','[C]ORUJA'], ['C C C QU C','QU QU C QU C','C QU QU C C']),
-lac('SCQ4','cqu', ['[QU]ENTE','[C]UTIA','MOLE[QU]E','[QU]ILO','[C]AJU'], ['C C QU QU C','QU QU QU QU C','QU C C QU C']),
+lac('SCQ1','cqu', ['O ES[QU]ILO MORA NA ÁRVORE, PERTO DA [C]ASA.','ELE GUARDA NOZES NUM [C]OPO E ADORA [QU]EIJO.'], ['C C C QU','QU QU C QU','QU C C C']),
+lac('SCQ2','cqu', ['O MOS[QU]ITO PICOU O [C]AVALO.','O PERI[QU]ITO RIU, E A [C]ORUJA TAMBÉM.'], ['C C QU C','QU QU QU C','QU C C C']),
+lac('SCQ3','cqu', ['A MÁ[QU]INA FEZ SUCO DE CA[QU]I.','O SUCO FICOU [QU]ENTE, MAS O [C]OELHO GOSTOU.'], ['C QU QU C','QU C QU C','QU QU QU QU']),
+lac('SCQ4','cqu', ['NO VERÃO, A VOVÓ USA UM LE[QU]E.','ELA DORME NUMA [C]AMA AZUL,','COME [QU]IABO NO ALMOÇO E BEBE [C]AFÉ.'], ['C C QU C','QU QU QU C','QU C C C']),
 
 {id:'SCQ5', eixo:'cqu', tipo:'qual está escrita certo',
  pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
@@ -507,10 +514,10 @@ lac('SCQ4','cqu', ['[QU]ENTE','[C]UTIA','MOLE[QU]E','[QU]ILO','[C]AJU'], ['C C Q
 
 /* =================== BLOCO A · CH, NH, LH =================== */
 ITENS.push(
-lac('SDG1','dig', ['[CH]AVE','GALI[NH]A','FO[LH]A','CA[CH]ORRO'], ['CH LH LH CH','CH NH NH CH','NH NH LH CH']),
-lac('SDG2','dig', ['COE[LH]O','[CH]UVA','ARA[NH]A','O[LH]O','CAMI[NH]O'], ['NH CH NH LH NH','LH CH LH LH NH','LH CH NH CH CH']),
-lac('SDG3','dig', ['[CH]APÉU','ABE[LH]A','COZI[NH]A','[CH]INELO','OVE[LH]A'], ['CH NH NH CH LH','CH LH LH CH LH','CH LH NH LH NH']),
-lac('SDG4','dig', ['DI[NH]EIRO','JOE[LH]O','[CH]OCOLATE','BA[NH]O'], ['CH LH CH NH','NH NH CH NH','NH LH CH LH']),
+lac('SDG1','dig', ['A [CH]UVA CAIU NO QUINTAL.','A GALI[NH]A CORREU PARA O NI[NH]O,','E A ABE[LH]A SE ESCONDEU NA FLOR.'], ['NH NH NH LH','CH LH NH LH','CH NH NH NH']),
+lac('SDG2','dig', ['O CA[CH]ORRO ACHOU UMA FO[LH]A NO CAMI[NH]O.','DEPOIS, CORREU PARA A COZI[NH]A.'], ['NH LH NH NH','CH NH NH NH','CH LH LH NH']),
+lac('SDG3','dig', ['A OVE[LH]A E O COE[LH]O DORMIRAM NA PA[LH]A.','DE MANHÃ, TOMARAM BA[NH]O.'], ['NH LH LH NH','LH LH CH NH','LH LH LH LH']),
+lac('SDG4','dig', ['A ARA[NH]A SUBIU NO [CH]INELO DO MENINO.','ELE GUARDOU O DI[NH]EIRO E ABRIU BEM O O[LH]O.'], ['LH CH NH LH','NH LH NH LH','NH CH NH NH']),
 
 {id:'SDG5', eixo:'dig', tipo:'complete a frase',
  enun:'COMPLETE A FRASE:',
