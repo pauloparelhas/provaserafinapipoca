@@ -16,9 +16,9 @@
        c    índice da certa em o
        dica empurrão antes de responder (nunca a resposta)
        ex   explicação curta mostrada depois (certa ou errada)
-   v3 (12/10): ortografia e plural reescritos NO JEITO DA PROVA (frase
-   com sentido, achar o erro, contar, classificar, explicar a regra);
-   ver a seção "ORTOGRAFIA E PLURAL — v3".
+   v4 (12/10): ortografia e plural só no formato que a prova cobra
+   (escrever a palavra certa); saíram pares de sentido, contagem,
+   classificar e teoria. Ver a seção "ORTOGRAFIA E PLURAL — v4".
    ============================================================ */
 window.LP3 = (function(){
 
@@ -105,31 +105,13 @@ var ITENS = [
 {id:'pa7',tema:'parodia',p:'Numa paródia, dá para reconhecer a história original?',o:['Sim','Não'],c:0,
  dica:'A paródia imita a original.',ex:'Sim: a paródia imita a original e muda só algumas coisas.'},
 
-/* ---------------- ORTOGRAFIA: itens escritos à mão que ficaram ----------------
-   (v3, 12/10) Saíram os "Complete: ___AVE (abre a porta)": lacuna solta com
-   pista de adivinhação não treina a regra e não é o jeito da prova. Ficaram
-   só as perguntas de REGRA e de leitura; o resto da ortografia está mais
-   abaixo, em frases com sentido (seção v3). */
-{id:'h3',tema:'h',p:'O H no começo da palavra tem som?',o:['Não: ele não tem som, mas é escrito','Sim: tem som de R','Sim: tem som de A'],c:0,
- dica:'Fale "hora" bem devagar. Você ouve alguma coisa antes do O?',ex:'O H no começo não tem som: hora, hoje, homem. Mesmo assim ele é escrito.'},
-{id:'jg7',tema:'jg',p:'Com A, O e U, o som de jê se escreve com...',o:['J','G','os dois'],c:0,
- dica:'GA, GO e GU fazem outro som, como em GATO.',ex:'JA, JO, JU: sempre J. (GA, GO, GU fazem som de guê.)'},
-{id:'gg4',tema:'ggu',p:'Em GUERRA, o U...',o:['fica quietinho, não se fala','faz som de U','pode ser apagado'],c:0,
- dica:'Fale GUERRA em voz alta.',ex:'Em GUE e GUI, o U não se fala. Mas sem ele GERRA soaria com jê.'},
-{id:'gg6',tema:'ggu',p:'Qual palavra tem som de guê?',o:['GORILA','GELO','GIRAFA'],c:0,
- dica:'GE e GI soam jê.',ex:'GORILA: GO soa guê. GELO e GIRAFA soam jê.'},
-{id:'gg9',tema:'ggu',p:'GIGANTE tem quais sons?',o:['jê (GI) e guê (GAN)','só guê','só jê'],c:0,
- dica:'Fale GI-GAN-TE devagar.',ex:'GI soa jê, GAN soa guê. Duas regras numa palavra só!'},
-{id:'cq7',tema:'cqu',p:'Antes de E e I, o som de quê se escreve com...',o:['QU','C','CH'],c:0,
- dica:'Pense em QUEIJO e QUIABO.',ex:'QUE e QUI. Antes de A, O e U, é só C: casa, copo, cubo.'},
-{id:'dg9',tema:'dig',p:'CH, NH e LH são duas letras que fazem...',o:['um som só','dois sons','nenhum som'],c:0,
- dica:'Fale CHA-VE: o CH faz um barulho só.',ex:'Duas letras, um som só.'},
-{id:'dg10',tema:'dig',p:'Qual palavra tem CH e também NH?',o:['CHAPEUZINHO','CHUVA','NINHO'],c:0,
- dica:'Procure as duas duplas na mesma palavra.',ex:'CHAPEUZINHO: CH no começo, NH no fim. CHUVA só tem CH; NINHO só tem NH.'},
+/* ---------------- ORTOGRAFIA: item escrito à mão que ficou ----------------
+   (v4, 12/10) Saíram as perguntas de teoria ("o H tem som?", "qual palavra
+   tem som de guê?", "GIGANTE tem quais sons?", "CH, NH e LH fazem...") e a
+   de classificar ("qual tem CH e também NH?"). A prova cobra ESCREVER a
+   palavra certa; o resto da ortografia está na seção v4, mais abaixo. */
 {id:'pl8',tema:'plural',p:'Passe para o plural: O PORQUINHO',o:['OS PORQUINHOS','O PORQUINHOS','OS PORQUINHO'],c:0,
- dica:'O artigo também vai para o plural.',ex:'O → OS, porquinho → porquinhos. As duas palavras mudam.'},
-{id:'pl11',tema:'plural',p:'Qual frase fala de MAIS DE UM bicho?',o:['OS COELHOS COMERAM CENOURA.','O COELHO COMEU CENOURA.','A MENINA VIU O COELHO.'],c:0,
- dica:'Plural é mais de um. Procure o S no fim.',ex:'OS COELHOS: plural, mais de um. Nas outras frases há um coelho só.'},
+ dica:'As duas palavras mudam.',ex:'O PORQUINHO → OS PORQUINHOS.'},
 
 /* ---------------- DICIONÁRIO ---------------- */
 {id:'di1',tema:'dic',p:'No dicionário, as palavras estão em...',o:['ordem alfabética','ordem de tamanho','qualquer ordem'],c:0,
@@ -168,176 +150,150 @@ var ITENS = [
 ];
 
 /* ============================================================
-   ORTOGRAFIA E PLURAL — v3 (12/10/2026): NO JEITO DA PROVA.
-   A v2 tinha "Complete: ___AVE (abre a porta)" e "Qual está escrita
-   certo? HOJE · OJE": lacuna solta + pista de adivinhar. Não é assim que
-   a escola cobra. A revisão do 2º tri (trabalho/2tri_portugues/conteudo/)
-   mostra: a regra é dita e depois APLICADA ("Aprendemos que usamos M
-   antes de P e B. Registre as palavras corretamente"), e os aspectos
-   linguísticos vêm DENTRO de um texto ("O diálogo abaixo está sem
-   pontuação. Leia atentamente e complete o texto"). Então cada pergunta
-   aqui faz a criança PENSAR, sempre numa frase com sentido:
-     LAC    frase com uma lacuna; a REGRA decide a letra (J/G, G/GU, C/QU)
-     FR     frase com lacuna; escolher a palavra escrita certo
-     ERR    achar a palavra escrita ERRADA na frase (e o ex corrige)
-     CONTA  contar, na frase, as palavras com a dupla/som pedido
-            (a conta é feita aqui pelo próprio código: não tem erro)
-     GRUPO  achar o grupo em que todas seguem a regra / a palavra intrusa
-     FRASES qual das frases está toda escrita certo
-     PAR    MOLA × MOLHA, FILA × FILHA: só uma combina com a frase
-     REGRA  explicar o porquê
-   Distrator: palavra que NÃO existe (GALILHA, FOGETE, CEIJO...), ou,
-   no PAR, palavra real que não combina com a frase.
+   ORTOGRAFIA E PLURAL — v4 (12/10/2026): SÓ O QUE A PROVA COBRA.
+   O que a prova cobra é ESCREVER A PALAVRA CERTA. Então toda pergunta
+   daqui é uma destas:
+     LAC    completar a palavra com a letra certa (J ou G, G ou GU, C ou QU)
+     PAL    completar a palavra com CH, NH ou LH
+     CERTA  qual palavra está escrita certo (as erradas são a MESMA
+            palavra escrita errado, nunca outra palavra que existe)
+     ERR    qual palavra da frase está escrita errado
+     FR     qual palavra completa a frase e está escrita certo
+     GRUPO  em qual grupo todas estão escritas certo
+     FRASES qual frase está toda escrita certo
+     PLU / PLD / REGRA(plural)  escrever o plural
+   SAÍRAM na v4 (pedido do Paulo, 12/10): pares de SENTIDO (FILA × FILHA,
+   SONO × SONHO, MOLA × MOLHA, MINA × MINHA: todas as opções existem e a
+   pergunta vira interpretação), CONTAGEM ("quantas palavras têm LH?"),
+   CLASSIFICAR ("em qual grupo todas têm NH?") e TEORIA ("qual som?",
+   "por que tem U?", "as duas letras têm o mesmo som?"). Dica e explicação
+   são curtas: mostram a palavra certa, sem conversa de som e de letra.
+   IDS ESTÁVEIS: item que saiu guarda o número (null / pula), para os ids
+   dos que ficaram não mudarem.
    ============================================================ */
 var V3=0;
 function nv(tema,pref,p,o,dica,ex){ ITENS.push({id:pref+(++V3),tema:tema,tipo:'rapida',p:p,o:o,c:0,dica:dica,ex:ex}); }
+function pula(n){ V3+=n; }
 var DICA={
-  h:{LAC:'',ERR:'O H do começo não tem som: não dá para ouvir. Lembre como cada palavra aparece escrita.',CONTA:'Olhe só a PRIMEIRA letra de cada palavra.',GRUPO:'Confira a primeira letra de cada palavra do grupo.',FRASES:'Confira as palavras que começam com vogal e as que começam com H.'},
-  jg:{LAC:'Olhe a letra que vem DEPOIS da lacuna. A, O, U pedem J. Com E e I, lembre como a palavra se escreve.',ERR:'GA, GO, GU nunca soam jê. Procure a palavra que ficou com o som errado.',CONTA:'Leia cada palavra em voz alta e escute o som de jê.',GRUPO:'Confira as três palavras de cada grupo.',FRASES:'Confira cada palavra que tem som de jê.'},
-  ggu:{LAC:'Depois da lacuna vem E ou I e o som é de guê? Então precisa do U.',ERR:'Leia a palavra do jeito que está escrita: GE e GI soam jê.',CONTA:'Procure GUE e GUI, com o U que não se fala.',GRUPO:'Confira as três palavras de cada grupo.',FRASES:'Confira as palavras com som de guê.'},
-  cqu:{LAC:'Depois da lacuna vem E ou I e o som é de quê? Então é QU.',ERR:'Leia a palavra do jeito que está escrita: CE e CI soam sê e si.',CONTA:'Procure QUE e QUI.',GRUPO:'Confira as três palavras de cada grupo.',FRASES:'Confira as palavras com som de quê.'},
-  dig:{FR:'Leia a frase inteira. Depois leia cada palavra em voz alta e pense em como ela se escreve.',ERR:'Procure a palavra em que a dupla CH, NH ou LH foi trocada.',CONTA:'Procure a dupla pedida no meio e no começo das palavras.',GRUPO:'Confira as três palavras de cada grupo.',FRASES:'Confira as palavras que têm CH, NH ou LH.',PAR:'As duas palavras existem. Leia a frase com cada uma: só uma faz sentido.'},
-  plural:{FR:'Olhe como a palavra entre parênteses TERMINA: vogal, R ou Z, ÃO, L ou M.',ERR:'Confira o final de cada palavra que está no plural.'}
+  h:{ERR:'Leia cada palavra com calma. Uma está escrita errado.',GRUPO:'Confira cada palavra do grupo.',FRASES:'Confira cada palavra da frase.'},
+  jg:{LAC:'Com A, O e U, use J: JANELA, JOGO, CAJU.',ERR:'Leia cada palavra com calma. Uma está escrita errado.',GRUPO:'Confira cada palavra do grupo.',FRASES:'Confira cada palavra da frase.'},
+  ggu:{LAC:'Lembre: GATO e GORILA, só G. FOGUETE e GUITARRA, com GU.',ERR:'Leia cada palavra com calma. Uma está escrita errado.',GRUPO:'Confira cada palavra do grupo.',FRASES:'Confira cada palavra da frase.'},
+  cqu:{LAC:'Lembre: CASA e COPO, só C. QUEIJO e ESQUILO, com QU.',ERR:'Leia cada palavra com calma. Uma está escrita errado.',GRUPO:'Confira cada palavra do grupo.',FRASES:'Confira cada palavra da frase.'},
+  dig:{FR:'Lembre como a palavra se escreve.',ERR:'Leia cada palavra com calma. Uma está escrita errado.',GRUPO:'Confira cada palavra do grupo.',FRASES:'Confira cada palavra da frase.'},
+  plural:{FR:'Olhe como a palavra termina.',ERR:'Confira as palavras que estão no plural.'}
 };
-function LAC(tema,regra,ops,lista){ lista.forEach(function(x){
+var D_CERTA='Leia as três com calma. Só uma está escrita certo.';
+var D_PAL='Leia a palavra inteira e lembre como ela se escreve.';
+function LAC(tema,ops,lista){ lista.forEach(function(x){
   /* x = [frase com ___, letra certa, palavra inteira] */
-  nv(tema,tema+'L','Complete com '+ops.join(' ou ')+': "'+x[0]+'"',[x[1]].concat(ops.filter(function(l){ return l!==x[1]; })),DICA[tema].LAC,x[2]+'. '+regra(x));
+  if(!x){ V3++; return; }
+  nv(tema,tema+'L','Complete com '+ops.join(' ou ')+': "'+x[0]+'"',[x[1]].concat(ops.filter(function(l){ return l!==x[1]; })),DICA[tema].LAC,'Escreve-se '+x[2]+', com '+x[1]+'.');
 }); }
 function FR(tema,lista){ lista.forEach(function(x){
   /* x = [frase com ___, certa, [erradas], explicação] */
+  if(!x){ V3++; return; }
   nv(tema,tema+'F','Qual palavra completa a frase e está escrita certo? "'+x[0]+'"',[x[1]].concat(x[2]),DICA[tema].FR,x[3]);
 }); }
 function ERR(tema,lista){ lista.forEach(function(x){
-  /* x = [frase, palavra errada, como se escreve, [outras palavras da frase], regra] */
+  /* x = [frase, palavra errada, como se escreve, [outras palavras da frase], nota curta] */
+  if(!x){ V3++; return; }
   nv(tema,tema+'E','Uma palavra desta frase está escrita ERRADA. Qual? "'+x[0]+'"',[x[1]].concat(x[3]),DICA[tema].ERR,
-    x[1]+' está errada: o certo é '+x[2]+'. '+x[4]);
-}); }
-var ALVO={
-  h:{rot:'começam com H',re:/^H/},
-  jg:{rot:'têm o som de jê',re:/J|G[EIÉÍÊ]/},
-  ggu:{rot:'têm GUE ou GUI (o U que não se fala)',re:/GU[EIÉÍÊ]/},
-  cqu:{rot:'têm QUE ou QUI',re:/QU[EIÉÍÊ]/},
-  CH:{rot:'têm CH',re:/CH/}, NH:{rot:'têm NH',re:/NH/}, LH:{rot:'têm LH',re:/LH/}
-};
-function CONTA(tema,lista){ lista.forEach(function(x){
-  /* x = [frase, chave do ALVO, nota para o ex]. A resposta é CONTADA aqui. */
-  var a=ALVO[x[1]], ws=x[0].replace(/[.,!?:;"]/g,'').split(/\s+/).filter(function(w){ return w && a.re.test(w); });
-  var n=ws.length, o=[String(n),String(n+1),String(n>0?n-1:n+2)];
-  nv(tema,tema+'C','Quantas palavras desta frase '+a.rot+'? "'+x[0]+'"',o,DICA[tema].CONTA,
-    (n?'São '+n+': '+ws.join(', ')+'.':'Nenhuma.')+(x[2]?' '+x[2]:''));
+    'O certo é '+x[2]+'.'+(x[4]?' '+x[4]:''));
 }); }
 function GRUPO(tema,lista){ lista.forEach(function(x){
   /* x = [pergunta, [certo, errado, errado], explicação] */
-  nv(tema,tema+'G',x[0],x[1],DICA[tema].GRUPO||'Confira cada palavra.',x[2]);
+  if(!x){ V3++; return; }
+  nv(tema,tema+'G',x[0],x[1],DICA[tema].GRUPO,x[2]);
 }); }
 function FRASES(tema,lista){ lista.forEach(function(x){
   /* x = [[frase certa, erradas...], explicação] */
+  if(!x){ V3++; return; }
   nv(tema,tema+'S','Qual frase está escrita certo?',x[0],DICA[tema].FRASES,x[1]);
-}); }
-function PAR(tema,lista){ lista.forEach(function(x){
-  /* x = [frase com ___, certa, [outras], explicação] */
-  nv(tema,tema+'P','Qual palavra combina com a frase? "'+x[0]+'"',[x[1]].concat(x[2]),DICA[tema].PAR,x[3]);
 }); }
 function REGRA(tema,lista){ lista.forEach(function(x){
   /* x = [pergunta, [certa, erradas...], dica, explicação] */
+  if(!x){ V3++; return; }
   nv(tema,tema+'R',x[0],x[1],x[2],x[3]);
 }); }
+function CERTA(tema,lista){ lista.forEach(function(x){
+  /* x = [certa, [a mesma palavra escrita errado], nota curta] */
+  nv(tema,tema+'K','Qual palavra está escrita certo?',[x[0]].concat(x[1]),D_CERTA,'Escreve-se '+x[0]+(x[2]?', '+x[2]:'')+'.');
+}); }
+function PAL(lista){ var ops=['CH','NH','LH']; lista.forEach(function(x){
+  /* x = [frase com __ dentro da palavra, dupla certa, palavra inteira] */
+  nv('dig','digW','Complete a palavra com CH, NH ou LH: "'+x[0]+'"',[x[1]].concat(ops.filter(function(l){ return l!==x[1]; })),D_PAL,'Escreve-se '+x[2]+', com '+x[1]+'.');
+}); }
+var GR='Em qual grupo TODAS as palavras estão escritas certo?';
 
 /* ---------- LETRA H ---------- */
-var H_MUDO='O H do começo não tem som, mas é escrito.';
 ERR('h',[
- ['ONTEM FUI AO OSPITAL VISITAR MEU AVÔ.','OSPITAL','HOSPITAL',['ONTEM','AVÔ'],H_MUDO+' ONTEM e AVÔ não têm H.'],
- ['A ORTA DA ESCOLA TEM ALFACE E HORTELÃ.','ORTA','HORTA',['ESCOLA','HORTELÃ'],H_MUDO+' HORTELÃ já está certa, com H.'],
- ['A PROFESSORA CONTOU UMA ISTÓRIA DE UM HERÓI.','ISTÓRIA','HISTÓRIA',['PROFESSORA','HERÓI'],H_MUDO],
- ['MEU TIO É UM OMEM MUITO ALTO.','OMEM','HOMEM',['TIO','ALTO'],H_MUDO],
- ['NAS FÉRIAS, DORMIMOS NUM OTEL PERTO DA PRAIA.','OTEL','HOTEL',['FÉRIAS','PRAIA'],H_MUDO],
- ['O IPOPÓTAMO E O ELEFANTE TOMARAM BANHO NO RIO.','IPOPÓTAMO','HIPOPÓTAMO',['ELEFANTE','BANHO'],H_MUDO+' ELEFANTE começa direto com E.'],
- ['OJE É O DIA DO PASSEIO DA ESCOLA.','OJE','HOJE',['DIA','ESCOLA'],'Falamos "oje", mas escrevemos HOJE. '+H_MUDO],
- ['O ELICÓPTERO POUSOU EM CIMA DO HOSPITAL.','ELICÓPTERO','HELICÓPTERO',['HOSPITAL','CIMA'],H_MUDO+' HOSPITAL já está certa.'],
- ['ANTES DO ALMOÇO, LAVE AS MÃOS: É IGIENE!','IGIENE','HIGIENE',['ALMOÇO','MÃOS'],H_MUDO],
- ['NO CAFÉ DA MANHÃ, COMI UM HOVO.','HOVO','OVO',['CAFÉ','MANHÃ'],'OVO não tem H: começa direto com a vogal. Nem toda palavra que começa com vogal tem H.'],
- ['A HUVA ESTAVA DOCE E GELADA.','HUVA','UVA',['DOCE','GELADA'],'UVA não tem H: começa direto com a vogal.'],
- ['O BARCO CHEGOU À HILHA DEPOIS DE UMA HORA.','HILHA','ILHA',['BARCO','HORA'],'ILHA não tem H no começo. HORA, do relógio, tem.']
+ ['ONTEM FUI AO OSPITAL VISITAR MEU AVÔ.','OSPITAL','HOSPITAL',['ONTEM','AVÔ'],''],
+ ['A ORTA DA ESCOLA TEM ALFACE E HORTELÃ.','ORTA','HORTA',['ESCOLA','HORTELÃ'],''],
+ ['A PROFESSORA CONTOU UMA ISTÓRIA DE UM HERÓI.','ISTÓRIA','HISTÓRIA',['PROFESSORA','HERÓI'],''],
+ ['MEU TIO É UM OMEM MUITO ALTO.','OMEM','HOMEM',['TIO','ALTO'],''],
+ ['NAS FÉRIAS, DORMIMOS NUM OTEL PERTO DA PRAIA.','OTEL','HOTEL',['FÉRIAS','PRAIA'],''],
+ ['O IPOPÓTAMO E O ELEFANTE TOMARAM BANHO NO RIO.','IPOPÓTAMO','HIPOPÓTAMO',['ELEFANTE','BANHO'],''],
+ ['OJE É O DIA DO PASSEIO DA ESCOLA.','OJE','HOJE',['DIA','ESCOLA'],''],
+ ['O ELICÓPTERO POUSOU EM CIMA DO HOSPITAL.','ELICÓPTERO','HELICÓPTERO',['HOSPITAL','CIMA'],''],
+ ['ANTES DO ALMOÇO, LAVE AS MÃOS: É IGIENE!','IGIENE','HIGIENE',['ALMOÇO','MÃOS'],''],
+ ['NO CAFÉ DA MANHÃ, COMI UM HOVO.','HOVO','OVO',['CAFÉ','MANHÃ'],'OVO não tem H.'],
+ ['A HUVA ESTAVA DOCE E GELADA.','HUVA','UVA',['DOCE','GELADA'],'UVA não tem H.'],
+ ['O BARCO CHEGOU À HILHA DEPOIS DE UMA HORA.','HILHA','ILHA',['BARCO','HORA'],'ILHA não tem H.']
 ]);
-CONTA('h',[
- ['A HIENA E O HIPOPÓTAMO VIVEM LONGE DA ESCOLA.','h'],
- ['NA HORTA DO HOTEL TEM UVA, ALFACE E HORTELÃ.','h','UVA e ALFACE começam direto com a vogal.'],
- ['O HERÓI CANTOU O HINO NA HORA CERTA.','h'],
- ['O OVO DA GALINHA CAIU NO CHÃO.','h','GALINHA e CHÃO têm H, mas no meio, não no começo.']
-]);
-/* h8: era "HOMEM · ILHA · HORA"; agora a mesma conta, numa frase */
-ITENS.push({id:'h8',tema:'h',tipo:'rapida',p:'Quantas palavras desta frase começam com H? "HOJE O HOMEM FOI À ILHA DE HELICÓPTERO."',o:['3','2','4'],c:0,
- dica:DICA.h.CONTA,ex:'São 3: HOJE, HOMEM, HELICÓPTERO. ILHA começa com I.'});
+pula(4); /* saíram as 4 de contar palavras com H */
 FRASES('h',[
- [['O HOMEM LEVOU O FILHO AO HOSPITAL.','O OMEM LEVOU O FILHO AO HOSPITAL.','O HOMEM LEVOU O FILHO AO OSPITAL.'],'HOMEM e HOSPITAL começam com H.'],
- [['A ABELHA VOOU ATÉ A HORTA.','A HABELHA VOOU ATÉ A HORTA.','A ABELHA VOOU ATÉ A ORTA.'],'ABELHA começa com A, sem H. HORTA começa com H.'],
- [['O ELEFANTE OUVIU A HISTÓRIA.','O HELEFANTE OUVIU A HISTÓRIA.','O ELEFANTE OUVIU A ISTÓRIA.'],'ELEFANTE não tem H. HISTÓRIA tem.'],
- [['NA ESCOLA, CANTAMOS O HINO.','NA HESCOLA, CANTAMOS O HINO.','NA ESCOLA, CANTAMOS O INO.'],'ESCOLA não tem H. HINO tem.']
+ [['O HOMEM LEVOU O FILHO AO HOSPITAL.','O OMEM LEVOU O FILHO AO HOSPITAL.','O HOMEM LEVOU O FILHO AO OSPITAL.'],'Escreve-se HOMEM e HOSPITAL, com H.'],
+ [['A ABELHA VOOU ATÉ A HORTA.','A HABELHA VOOU ATÉ A HORTA.','A ABELHA VOOU ATÉ A ORTA.'],'Escreve-se ABELHA, sem H, e HORTA, com H.'],
+ [['O ELEFANTE OUVIU A HISTÓRIA.','O HELEFANTE OUVIU A HISTÓRIA.','O ELEFANTE OUVIU A ISTÓRIA.'],'Escreve-se ELEFANTE, sem H, e HISTÓRIA, com H.'],
+ [['NA ESCOLA, CANTAMOS O HINO.','NA HESCOLA, CANTAMOS O HINO.','NA ESCOLA, CANTAMOS O INO.'],'Escreve-se ESCOLA, sem H, e HINO, com H.']
 ]);
 GRUPO('h',[
- ['Em qual grupo TODAS as palavras começam com H?',['HOTEL · HINO · HUMANO','HOTEL · OVO · HINO','ILHA · HINO · HUMANO'],'HOTEL, HINO e HUMANO começam com H. OVO e ILHA, não.'],
- ['Em qual grupo NENHUMA palavra começa com H?',['OVO · UVA · ILHA','OVO · HORA · ILHA','UVA · ESCOLA · HOJE'],'OVO, UVA e ILHA começam direto com a vogal. HORA e HOJE têm H.'],
- ['Em qual grupo TODAS as palavras começam com H?',['HÉLICE · HIGIENE · HORTA','HÉLICE · ANEL · HORTA','OLHO · HIGIENE · HORTA'],'OLHO tem H, mas no meio (LH). Começar com H é ter o H na primeira letra.']
+ [GR,['HOTEL · HINO · HUMANO','OTEL · HINO · HUMANO','HOTEL · INO · UMANO'],'Escreve-se HOTEL, HINO e HUMANO, com H.'],
+ [GR,['OVO · UVA · ILHA','HOVO · UVA · ILHA','OVO · HUVA · HILHA'],'OVO, UVA e ILHA não têm H.'],
+ [GR,['HÉLICE · HORTA · ANEL','ÉLICE · HORTA · ANEL','HÉLICE · ORTA · HANEL'],'Escreve-se HÉLICE e HORTA, com H. ANEL não tem H.']
 ]);
 REGRA('h',[
- ['Falamos "oje", mas escrevemos HOJE. Por quê?',['O H do começo não tem som, mas faz parte da palavra','Porque o H tem som de O','Porque toda palavra que começa com O tem H'],'Pense em OVO: começa com O e não tem H.','O H do começo é mudo: não se ouve, mas se escreve. OVO, que também começa com O, não tem H.'],
- ['Se o H não tem som, como saber se a palavra começa com H?',['Lembrar como ela se escreve ou procurar no dicionário','Escutar o som do H','Pôr H em toda palavra que começa com vogal'],'O ouvido não ajuda com o H.','O H mudo não se ouve: é preciso lembrar a palavra escrita, ou conferir no dicionário.'],
- ['Qual palavra está escrita ERRADA?',['UMANO','HOTEL','OVO'],'Uma delas perdeu o H do começo.','UMANO está errada: o certo é HUMANO. HOTEL tem H; OVO não tem.'],
- ['Qual palavra está escrita ERRADA?',['HANEL','HINO','UVA'],'Uma delas ganhou um H que não tem.','HANEL está errada: o certo é ANEL, sem H. HINO tem H; UVA não tem.']
+ null, null, /* saíram as 2 de teoria do H */
+ ['Qual palavra está escrita ERRADA?',['UMANO','HOTEL','OVO'],'Uma delas está escrita errado.','O certo é HUMANO, com H.'],
+ ['Qual palavra está escrita ERRADA?',['HANEL','HINO','UVA'],'Uma delas está escrita errado.','O certo é ANEL, sem H.']
 ]);
 
-/* ---------- J OU G (som de jê) ---------- */
-function rJG(x){ var v=x[0].split('___')[1].charAt(0); return /[AOUÃÕ]/.test(v)?'Antes de '+v+', o som de jê é sempre J (GA, GO, GU soam guê).':'Antes de E e I pode ser J ou G: '+x[2]+' se escreve com '+x[1]+'. Essa a gente lembra palavra por palavra.'; }
-LAC('jg',rJG,['J','G'],[
+/* ---------- J OU G ---------- */
+LAC('jg',['J','G'],[
  ['O ___ACARÉ NADOU NO RIO.','J','JACARÉ'],
  ['A MAMÃE FEZ SUCO DE LARAN___A.','J','LARANJA'],
  ['O LEÃO BALANÇOU A ___UBA.','J','JUBA'],
  ['COMI ARROZ, FEI___ÃO E SALADA.','J','FEIJÃO'],
  ['O ___ABUTI ANDA DEVAGAR.','J','JABUTI'],
  ['DEI UM BEI___O NA VOVÓ.','J','BEIJO'],
- ['O SUCO FICOU FRIO COM ___ELO.','G','GELO'],
- ['A ___IRAFA COMEU AS FOLHAS DO ALTO.','G','GIRAFA'],
- ['ABRA O LIVRO NA PÁ___INA DEZ.','G','PÁGINA'],
- ['O RELÓ___IO MARCOU OITO HORAS.','G','RELÓGIO'],
- ['O ___IPE SUBIU A ESTRADA DE TERRA.','J','JIPE'],
- ['O MÁ___ICO TIROU UM COELHO DA CARTOLA.','G','MÁGICO']
+ null, null, null, null, null, null /* GELO, GIRAFA, PÁGINA, RELÓGIO, JIPE, MÁGICO: viraram "qual está escrita certo" (CERTA, no fim) */
 ]);
 ERR('jg',[
- ['A GIRAFA E O GACARÉ SÃO ANIMAIS.','GACARÉ','JACARÉ',['GIRAFA','ANIMAIS'],'GA soa guê, como em GATO. Para o som de jê com A, é J.'],
- ['COLOQUEI A SOPA NA TIJELA AZUL.','TIJELA','TIGELA',['SOPA','AZUL'],'Antes de E pode ser J ou G; TIGELA se escreve com G.'],
- ['NA COZINHA TEM UMA LARANGA.','LARANGA','LARANJA',['COZINHA','UMA'],'GA soa guê. Para o som de jê com A, é J.'],
- ['O JIPE PASSOU PERTO DA JIRAFA.','JIRAFA','GIRAFA',['JIPE','PERTO'],'JIPE é com J, mas GIRAFA é com G. Antes de I, é preciso lembrar a palavra.'],
- ['O QUEIGO E O PÃO ESTÃO NA MESA.','QUEIGO','QUEIJO',['PÃO','MESA'],'GO soa guê. Para o som de jê com O, é J.'],
- ['A FADA FEZ UMA MÁJICA COM A VARINHA.','MÁJICA','MÁGICA',['FADA','VARINHA'],'MÁGICA, como MÁGICO, se escreve com G.'],
- ['NO PRATO TEM JILÓ E FEIGÃO.','FEIGÃO','FEIJÃO',['JILÓ','PRATO'],'GÃ soaria guã. Para o som de jê com Ã, é J, igual a JOÃO.'],
- ['O RELÓJIO DA SALA PAROU.','RELÓJIO','RELÓGIO',['SALA','PAROU'],'Antes de I pode ser J ou G; RELÓGIO se escreve com G.']
+ ['A GIRAFA E O GACARÉ SÃO ANIMAIS.','GACARÉ','JACARÉ',['GIRAFA','ANIMAIS'],''],
+ ['COLOQUEI A SOPA NA TIJELA AZUL.','TIJELA','TIGELA',['SOPA','AZUL'],''],
+ ['NA COZINHA TEM UMA LARANGA.','LARANGA','LARANJA',['COZINHA','UMA'],''],
+ ['O JIPE PASSOU PERTO DA JIRAFA.','JIRAFA','GIRAFA',['JIPE','PERTO'],''],
+ ['O QUEIGO E O PÃO ESTÃO NA MESA.','QUEIGO','QUEIJO',['PÃO','MESA'],''],
+ ['A FADA FEZ UMA MÁJICA COM A VARINHA.','MÁJICA','MÁGICA',['FADA','VARINHA'],''],
+ ['NO PRATO TEM JILÓ E FEIGÃO.','FEIGÃO','FEIJÃO',['JILÓ','PRATO'],''],
+ ['O RELÓJIO DA SALA PAROU.','RELÓJIO','RELÓGIO',['SALA','PAROU'],'']
 ]);
-CONTA('jg',[
- ['O GIGANTE COMEU QUEIJO E JILÓ.','jg','No GIGANTE, só o GI soa jê; o GAN soa guê.'],
- ['A GIRAFA VIU O GATO NA JANELA.','jg','GATO tem G, mas GA soa guê.'],
- ['O JACARÉ DORMIU PERTO DO LAGO.','jg','LAGO tem G, mas GO soa guê.'],
- ['A GENTE BEBEU SUCO DE LARANJA COM GELO.','jg']
-]);
+pula(4); /* saíram as 4 de contar */
 GRUPO('jg',[
- ['Em qual grupo TODAS as palavras se escrevem com J?',['JANELA · JUBA · JOIA','JANELA · GELO · JOIA','GIRAFA · JUBA · JOIA'],'JANELA, JUBA e JOIA têm J. GELO e GIRAFA têm G.'],
- ['Em qual grupo TODAS as palavras têm som de jê escrito com G?',['GELO · GIRAFA · TIGELA','GELO · JIPE · TIGELA','GENTE · GIRAFA · JILÓ'],'GELO, GIRAFA e TIGELA: GE e GI. JIPE e JILÓ são com J.'],
- ['Em qual grupo TODAS as palavras estão escritas certo?',['JABUTI · PÁGINA · BEIJO','GABUTI · PÁGINA · BEIJO','JABUTI · PÁJINA · BEIJO'],'JABUTI (JA: sempre J), PÁGINA (com G) e BEIJO (JO: sempre J).'],
- ['Qual palavra tem o som de jê escrito com G?',['GIRASSOL','GATO','JOIA'],'GIRASSOL: GI soa jê. GATO soa guê; JOIA tem som de jê, mas com J.']
+ [GR,['JANELA · JUBA · JOIA','GANELA · JUBA · JOIA','JANELA · JUBA · GOIA'],'Escreve-se JANELA, JUBA e JOIA, com J.'],
+ [GR,['GELO · GIRAFA · TIGELA','JELO · GIRAFA · TIGELA','GELO · JIRAFA · TIJELA'],'Escreve-se GELO, GIRAFA e TIGELA, com G.'],
+ [GR,['JABUTI · PÁGINA · BEIJO','GABUTI · PÁGINA · BEIJO','JABUTI · PÁJINA · BEIJO'],'Escreve-se JABUTI e BEIJO, com J, e PÁGINA, com G.'],
+ ['Qual palavra está escrita certo?',['GIRASSOL','JIRASSOL'],'Escreve-se GIRASSOL, com G.']
 ]);
 FRASES('jg',[
- [['O GIGANTE GUARDOU A JOIA.','O JIGANTE GUARDOU A JOIA.','O GIGANTE GUARDOU A GOIA.'],'GIGANTE é com G; JOIA é com J (JO: sempre J).'],
- [['O JABUTI COMEU GELEIA.','O GABUTI COMEU GELEIA.','O JABUTI COMEU JELEIA.'],'JABUTI: JA é sempre J. GELEIA se escreve com G.'],
- [['A SUJEIRA FICOU NA PÁGINA.','A SUGEIRA FICOU NA PÁGINA.','A SUJEIRA FICOU NA PÁJINA.'],'SUJEIRA é com J; PÁGINA é com G. Antes de E e I, lembre a palavra.']
+ [['O GIGANTE GUARDOU A JOIA.','O JIGANTE GUARDOU A JOIA.','O GIGANTE GUARDOU A GOIA.'],'Escreve-se GIGANTE, com G, e JOIA, com J.'],
+ [['O JABUTI COMEU GELEIA.','O GABUTI COMEU GELEIA.','O JABUTI COMEU JELEIA.'],'Escreve-se JABUTI, com J, e GELEIA, com G.'],
+ [['A SUJEIRA FICOU NA PÁGINA.','A SUGEIRA FICOU NA PÁGINA.','A SUJEIRA FICOU NA PÁJINA.'],'Escreve-se SUJEIRA, com J, e PÁGINA, com G.']
 ]);
-REGRA('jg',[
- ['Por que JACARÉ não pode ser escrito com G?',['Porque GA tem som de guê, como em GATO','Porque é nome de bicho','Porque é uma palavra comprida'],'Leia GACARÉ do jeito que está escrito.','Com G ficaria GACARÉ, com som de guê. JA, JO, JU: sempre J.'],
- ['Antes de E e I, como saber se o som de jê é com J ou com G?',['Lembrar como a palavra se escreve ou olhar no dicionário','É sempre G','É sempre J'],'Pense em JEITO e GELO.','Com E e I os dois existem: JEITO, JIPE; GELO, GIRAFA. É preciso lembrar a palavra.'],
- ['GIRAFA e JIPE começam com o mesmo som. O que muda?',['A letra: G em GIRAFA, J em JIPE','O som do começo','Nada: as duas começam com J'],'Fale as duas. O som é igual?','O som é o mesmo (jê), mas a escrita muda: GIRAFA com G, JIPE com J.']
-]);
+pula(3); /* saíram as 3 de teoria */
 
-/* ---------- G OU GU (som de guê) ---------- */
-function rGGU(x){ return x[1]==='GU'?'Antes de E e I, o som de guê precisa do U quietinho: sem ele, GE e GI soam jê.':'Antes de A, O e U, o G já soa guê sozinho: não precisa de U.'; }
-LAC('ggu',rGGU,['G','GU'],[
+/* ---------- G OU GU ---------- */
+LAC('ggu',['G','GU'],[
  ['NA FESTA, O MENINO TOCOU ___ITARRA.','GU','GUITARRA'],
  ['O FO___ETE SUBIU ATÉ O CÉU.','GU','FOGUETE'],
  ['A FO___EIRA ESQUENTOU A FESTA JUNINA.','GU','FOGUEIRA'],
@@ -350,35 +306,26 @@ LAC('ggu',rGGU,['G','GU'],[
  ['A PRE___IÇA DORMIU NO GALHO.','GU','PREGUIÇA']
 ]);
 ERR('ggu',[
- ['AS FORMIGAS FIZERAM UM FORMIGEIRO NO JARDIM.','FORMIGEIRO','FORMIGUEIRO',['FORMIGAS','JARDIM'],'Sem o U, GE soa jê. Para soar guê antes do E, é GUE.'],
- ['NA FESTA, O MENINO TOCOU GITARRA.','GITARRA','GUITARRA',['FESTA','MENINO'],'Sem o U, GI soa jê. Para soar guê antes do I, é GUI.'],
- ['O FOGETE DO DESENHO ERA AZUL.','FOGETE','FOGUETE',['DESENHO','AZUL'],'Sem o U, GE soa jê. O certo é GUE.'],
- ['A ÁGIA FEZ O NINHO NA MONTANHA.','ÁGIA','ÁGUIA',['NINHO','MONTANHA'],'Sem o U, GI soa jê. O certo é GUI.'],
- ['O GUATO BEBEU O LEITE.','GUATO','GATO',['LEITE','BEBEU'],'Antes de A o G já soa guê: GA, sem U.'],
- ['A FOGEIRA DA FESTA ERA GRANDE.','FOGEIRA','FOGUEIRA',['FESTA','GRANDE'],'Sem o U, GE soa jê. O certo é GUE.']
+ ['AS FORMIGAS FIZERAM UM FORMIGEIRO NO JARDIM.','FORMIGEIRO','FORMIGUEIRO',['FORMIGAS','JARDIM'],''],
+ ['NA FESTA, O MENINO TOCOU GITARRA.','GITARRA','GUITARRA',['FESTA','MENINO'],''],
+ ['O FOGETE DO DESENHO ERA AZUL.','FOGETE','FOGUETE',['DESENHO','AZUL'],''],
+ ['A ÁGIA FEZ O NINHO NA MONTANHA.','ÁGIA','ÁGUIA',['NINHO','MONTANHA'],''],
+ ['O GUATO BEBEU O LEITE.','GUATO','GATO',['LEITE','BEBEU'],''],
+ ['A FOGEIRA DA FESTA ERA GRANDE.','FOGEIRA','FOGUEIRA',['FESTA','GRANDE'],'']
 ]);
-CONTA('ggu',[
- ['A ÁGUIA E O FOGUETE VOARAM SOBRE O LAGO.','ggu','LAGO tem GO: o G soa guê sem precisar de U.'],
- ['PERTO DA FOGUEIRA, O MENINO TOCAVA GUITARRA.','ggu'],
- ['O GORILA E O GATO BRINCARAM NO GALHO.','ggu','GO e GA não precisam de U.']
-]);
+pula(3); /* saíram as 3 de contar */
 GRUPO('ggu',[
- ['Em qual grupo TODAS as palavras têm o U que não se fala (GUE, GUI)?',['GUERRA · FOGUETE · ÁGUIA','GUERRA · AGULHA · ÁGUIA','GATO · FOGUETE · ÁGUIA'],'Em AGULHA o U se fala (a-GU-lha). GATO não tem U.'],
- ['Em qual grupo TODAS as palavras estão escritas certo?',['GORILA · MANGUEIRA · LAGO','GORILA · MANGEIRA · LAGO','GUORILA · MANGUEIRA · LAGO'],'GORILA e LAGO: GO, sem U. MANGUEIRA: GUE, com U.']
+ [GR,['GUERRA · FOGUETE · ÁGUIA','GERRA · FOGUETE · ÁGUIA','GUERRA · FOGETE · ÁGIA'],'Escreve-se GUERRA, FOGUETE e ÁGUIA, com GU.'],
+ [GR,['GORILA · MANGUEIRA · LAGO','GORILA · MANGEIRA · LAGO','GUORILA · MANGUEIRA · LAGO'],'Escreve-se GORILA e LAGO, só com G, e MANGUEIRA, com GU.']
 ]);
-REGRA('ggu',[
- ['Por que GUITARRA tem um U depois do G?',['Para o G soar guê antes do I','Porque o U se fala forte','Porque toda palavra com G tem U'],'Leia GITARRA do jeito que está escrito.','Sem o U ficaria GITARRA, com som de jê. O U faz o G soar guê antes do I.'],
- ['Sem o U, FOGUETE viraria FOGETE. Como se leria FOGETE?',['Com som de jê: fo-JE-te','Do mesmo jeito que FOGUETE','Com som de quê'],'GE soa como em GELO.','GE soa jê. Por isso FOGUETE precisa do U: GUE.'],
- ['GELO e GUERRA: o G tem o mesmo som?',['Não: GE soa jê e GUE soa guê','Sim: os dois soam guê','Sim: os dois soam jê'],'Fale as duas palavras devagar.','GE (GELO) soa jê. GUE (GUERRA) soa guê: o U muda o som do G.']
-]);
+pula(3); /* saíram as 3 de teoria */
 FRASES('ggu',[
- [['A ÁGUIA VIU O FOGUETE.','A ÁGIA VIU O FOGUETE.','A ÁGUIA VIU O FOGETE.'],'ÁGUIA (GUI) e FOGUETE (GUE) precisam do U.'],
- [['O GATO DORMIU NA MANGUEIRA.','O GUATO DORMIU NA MANGUEIRA.','O GATO DORMIU NA MANGEIRA.'],'GATO: GA, sem U. MANGUEIRA: GUE, com U.']
+ [['A ÁGUIA VIU O FOGUETE.','A ÁGIA VIU O FOGUETE.','A ÁGUIA VIU O FOGETE.'],'Escreve-se ÁGUIA e FOGUETE, com GU.'],
+ [['O GATO DORMIU NA MANGUEIRA.','O GUATO DORMIU NA MANGUEIRA.','O GATO DORMIU NA MANGEIRA.'],'Escreve-se GATO, só com G, e MANGUEIRA, com GU.']
 ]);
 
-/* ---------- C OU QU (som de quê) ---------- */
-function rCQU(x){ return x[1]==='QU'?'Antes de E e I, o som de quê se escreve QU, com o U quietinho (com C ficaria som de sê ou si).':'Antes de A, O e U, o C já tem som de quê: não precisa de QU.'; }
-LAC('cqu',rCQU,['C','QU'],[
+/* ---------- C OU QU ---------- */
+LAC('cqu',['C','QU'],[
  ['NO LANCHE, COMI PÃO COM ___EIJO.','QU','QUEIJO'],
  ['O ES___ILO GUARDOU NOZES NA ÁRVORE.','QU','ESQUILO'],
  ['O MOS___ITO PICOU MEU BRAÇO.','QU','MOSQUITO'],
@@ -391,119 +338,164 @@ LAC('cqu',rCQU,['C','QU'],[
  ['A ___ASA DA VOVÓ É AMARELA.','C','CASA']
 ]);
 ERR('cqu',[
- ['NO LANCHE TEM PÃO COM CEIJO.','CEIJO','QUEIJO',['LANCHE','PÃO'],'CE soa sê. Para o som de quê antes do E, é QUE.'],
- ['O ESCILO SUBIU NA ÁRVORE.','ESCILO','ESQUILO',['SUBIU','ÁRVORE'],'CI soa si. Para o som de quê antes do I, é QUI.'],
- ['O MOSCITO ZUMBIU NA ORELHA.','MOSCITO','MOSQUITO',['ZUMBIU','ORELHA'],'CI soa si. O certo é QUI.'],
- ['A QUASA DA VOVÓ É AMARELA.','QUASA','CASA',['VOVÓ','AMARELA'],'Antes de A, o C já soa quê: CA, sem U.'],
- ['MAMÃE COMPROU CIABO NA FEIRA.','CIABO','QUIABO',['MAMÃE','FEIRA'],'CI soa si. O certo é QUI.'],
- ['O MOLECE CORREU PELA RUA.','MOLECE','MOLEQUE',['CORREU','RUA'],'CE soa sê. O certo é QUE.']
+ ['NO LANCHE TEM PÃO COM CEIJO.','CEIJO','QUEIJO',['LANCHE','PÃO'],''],
+ ['O ESCILO SUBIU NA ÁRVORE.','ESCILO','ESQUILO',['SUBIU','ÁRVORE'],''],
+ ['O MOSCITO ZUMBIU NA ORELHA.','MOSCITO','MOSQUITO',['ZUMBIU','ORELHA'],''],
+ ['A QUASA DA VOVÓ É AMARELA.','QUASA','CASA',['VOVÓ','AMARELA'],''],
+ ['MAMÃE COMPROU CIABO NA FEIRA.','CIABO','QUIABO',['MAMÃE','FEIRA'],''],
+ ['O MOLECE CORREU PELA RUA.','MOLECE','MOLEQUE',['CORREU','RUA'],'']
 ]);
-CONTA('cqu',[
- ['O ESQUILO E O PERIQUITO COMERAM QUIABO.','cqu'],
- ['O QUEIJO QUENTE CAIU NO COPO.','cqu','COPO tem som de quê, mas com C: antes de O não precisa de QU.'],
- ['A CORUJA VIU O CAVALO PERTO DA CASA.','cqu','Antes de O e A o som de quê é só C: CORUJA, CAVALO, CASA.']
-]);
+pula(3); /* saíram as 3 de contar */
 GRUPO('cqu',[
- ['Em qual grupo TODAS as palavras se escrevem com QU?',['QUEIJO · LEQUE · ESQUILO','QUEIJO · COPO · ESQUILO','CASA · LEQUE · ESQUILO'],'QUEIJO, LEQUE e ESQUILO: QUE e QUI. COPO e CASA são com C.'],
- ['Em qual grupo TODAS as palavras estão escritas certo?',['CAMA · QUIABO · COELHO','QUAMA · QUIABO · COELHO','CAMA · CIABO · COELHO'],'CAMA e COELHO: C antes de A e O. QUIABO: QUI.']
+ [GR,['QUEIJO · LEQUE · ESQUILO','CEIJO · LEQUE · ESQUILO','QUEIJO · LECE · ESCILO'],'Escreve-se QUEIJO, LEQUE e ESQUILO, com QU.'],
+ [GR,['CAMA · QUIABO · COELHO','QUAMA · QUIABO · COELHO','CAMA · CIABO · COELHO'],'Escreve-se CAMA e COELHO, com C, e QUIABO, com QU.']
 ]);
-REGRA('cqu',[
- ['Por que QUEIJO se escreve com QU, e não com C?',['Porque com C ficaria CEIJO, com som de sê','Porque é uma comida','Porque o U se fala forte'],'Leia CEIJO do jeito que está escrito.','Antes de E e I, o C soa sê/si. Para o som de quê, é QUE, QUI.'],
- ['Em ESQUILO, o U...',['é escrito, mas não se fala','se fala bem forte','pode ser apagado'],'Fale ESQUILO devagar. Você ouve o U?','Em QUE e QUI o U não se fala, mas sem ele ficaria ESCILO.'],
- ['Por que COPO se escreve só com C?',['Porque antes de O o C já tem som de quê','Porque é uma palavra pequena','Porque o O não deixa usar QU'],'Pense em CASA e CUBO.','Com A, O e U o C já soa quê: CASA, COPO, CUBO. QU só antes de E e I.']
-]);
+pula(3); /* saíram as 3 de teoria */
 FRASES('cqu',[
- [['O ESQUILO COMEU O QUIABO.','O ESCILO COMEU O QUIABO.','O ESQUILO COMEU O CIABO.'],'ESQUILO e QUIABO: QUI.'],
- [['O CAVALO BEBEU ÁGUA QUENTE.','O QUAVALO BEBEU ÁGUA QUENTE.','O CAVALO BEBEU ÁGUA CENTE.'],'CAVALO: CA, só C. QUENTE: QUE.'],
- [['A MÁQUINA FEZ SUCO DE CAQUI.','A MÁCINA FEZ SUCO DE CAQUI.','A MÁQUINA FEZ SUCO DE CACI.'],'MÁQUINA e CAQUI: QUI.']
+ [['O ESQUILO COMEU O QUIABO.','O ESCILO COMEU O QUIABO.','O ESQUILO COMEU O CIABO.'],'Escreve-se ESQUILO e QUIABO, com QU.'],
+ [['O CAVALO BEBEU ÁGUA QUENTE.','O QUAVALO BEBEU ÁGUA QUENTE.','O CAVALO BEBEU ÁGUA CENTE.'],'Escreve-se CAVALO, com C, e QUENTE, com QU.'],
+ [['A MÁQUINA FEZ SUCO DE CAQUI.','A MÁCINA FEZ SUCO DE CAQUI.','A MÁQUINA FEZ SUCO DE CACI.'],'Escreve-se MÁQUINA e CAQUI, com QU.']
 ]);
 
 /* ---------- CH · NH · LH ---------- */
 FR('dig',[
- ['A ___ FEZ MEL NA COLMEIA.','ABELHA',['ABENHA','ABECHA'],'ABELHA se escreve com LH.'],
- ['O CAVALO DEITOU NA ___ SECA.','PALHA',['PANHA','PACHA'],'PALHA se escreve com LH.'],
- ['O ___ LATIU PARA O CARTEIRO.','CACHORRO',['CANHORRO','CALHORRO'],'CACHORRO se escreve com CH.'],
- ['A ___ FEZ UMA TEIA NO CANTO DA SALA.','ARANHA',['ARACHA','ARALHA'],'ARANHA se escreve com NH.']
+ ['A ___ FEZ MEL NA COLMEIA.','ABELHA',['ABENHA','ABECHA'],'Escreve-se ABELHA, com LH.'],
+ ['O CAVALO DEITOU NA ___ SECA.','PALHA',['PANHA','PACHA'],'Escreve-se PALHA, com LH.'],
+ ['O ___ LATIU PARA O CARTEIRO.','CACHORRO',['CANHORRO','CALHORRO'],'Escreve-se CACHORRO, com CH.'],
+ ['A ___ FEZ UMA TEIA NO CANTO DA SALA.','ARANHA',['ARACHA','ARALHA'],'Escreve-se ARANHA, com NH.']
 ]);
 ERR('dig',[
- ['A GALINA FEZ O NINHO NA PALHA.','GALINA','GALINHA',['NINHO','PALHA'],'Faltou o H: GALINHA tem NH. NINHO (NH) e PALHA (LH) estão certas.'],
- ['O COENHO COMEU A FOLHA DA ALFACE.','COENHO','COELHO',['FOLHA','ALFACE'],'COELHO tem LH, igual a FOLHA.'],
- ['CHAPEUZINHO SEGUIU PELO CAMILHO DA FLORESTA.','CAMILHO','CAMINHO',['CHAPEUZINHO','FLORESTA'],'CAMINHO tem NH.'],
- ['A OVENHA DORMIU PERTO DO CACHORRO.','OVENHA','OVELHA',['CACHORRO','DORMIU'],'OVELHA tem LH.'],
- ['DEPOIS DO BALHO, ELA CALÇOU O CHINELO.','BALHO','BANHO',['CHINELO','DEPOIS'],'BANHO tem NH.'],
- ['GUARDEI O DINHEIRO E A LHAVE NA BOLSA.','LHAVE','CHAVE',['DINHEIRO','BOLSA'],'CHAVE tem CH. DINHEIRO (NH) está certa.'],
- ['A ABENHA POUSOU NA FLOR DO CAMINHO.','ABENHA','ABELHA',['CAMINHO','FLOR'],'ABELHA tem LH.'],
- ['NA COZILHA, A VOVÓ FEZ CHOCOLATE QUENTE.','COZILHA','COZINHA',['VOVÓ','CHOCOLATE'],'COZINHA tem NH.'],
- ['CAÍ NO PARQUE E RALEI O JOENHO.','JOENHO','JOELHO',['PARQUE','RALEI'],'JOELHO tem LH.']
+ ['A GALINA FEZ O NINHO NA PALHA.','GALINA','GALINHA',['NINHO','PALHA'],''],
+ ['O COENHO COMEU A FOLHA DA ALFACE.','COENHO','COELHO',['FOLHA','ALFACE'],''],
+ ['CHAPEUZINHO SEGUIU PELO CAMILHO DA FLORESTA.','CAMILHO','CAMINHO',['CHAPEUZINHO','FLORESTA'],''],
+ ['A OVENHA DORMIU PERTO DO CACHORRO.','OVENHA','OVELHA',['CACHORRO','DORMIU'],''],
+ ['DEPOIS DO BALHO, ELA CALÇOU O CHINELO.','BALHO','BANHO',['CHINELO','DEPOIS'],''],
+ ['GUARDEI O DINHEIRO E A LHAVE NA BOLSA.','LHAVE','CHAVE',['DINHEIRO','BOLSA'],''],
+ ['A ABENHA POUSOU NA FLOR DO CAMINHO.','ABENHA','ABELHA',['CAMINHO','FLOR'],''],
+ ['NA COZILHA, A VOVÓ FEZ CHOCOLATE QUENTE.','COZILHA','COZINHA',['VOVÓ','CHOCOLATE'],''],
+ ['CAÍ NO PARQUE E RALEI O JOENHO.','JOENHO','JOELHO',['PARQUE','RALEI'],'']
 ]);
-CONTA('dig',[
- ['A OVELHA E O COELHO COMERAM FOLHAS PERTO DO GALHO.','LH'],
- ['A GALINHA FEZ O NINHO NO CAMINHO.','NH'],
- ['COM A CHUVA, O CACHORRO FICOU NA CASINHA.','CH','CASINHA tem NH, não CH.'],
- ['A ABELHA VOOU ATÉ A ARANHA.','LH','ARANHA tem NH, não LH.'],
- ['A ABELHA E A OVELHA COMERAM PALHA.','NH','Todas essas têm LH, nenhuma tem NH.']
-]);
+pula(5); /* saíram as 5 de contar */
 GRUPO('dig',[
- ['Em qual grupo TODAS as palavras têm LH?',['FOLHA · OLHO · ABELHA','FOLHA · NINHO · ABELHA','CHAVE · OLHO · ABELHA'],'FOLHA, OLHO e ABELHA têm LH. NINHO tem NH; CHAVE tem CH.'],
- ['Em qual grupo TODAS as palavras têm NH?',['UNHA · BANHO · ARANHA','UNHA · TELHA · ARANHA','UNHA · BANHO · CHUVA'],'UNHA, BANHO e ARANHA têm NH. TELHA tem LH; CHUVA tem CH.'],
- ['Em qual grupo TODAS as palavras têm CH?',['CHAPÉU · CHINELO · CACHORRO','CHAPÉU · COELHO · CACHORRO','CHAPÉU · CHINELO · DINHEIRO'],'CHAPÉU, CHINELO e CACHORRO têm CH. COELHO tem LH; DINHEIRO tem NH.'],
- ['Qual palavra NÃO tem a mesma dupla de letras que as outras: GALINHA, CAMINHO, FOLHA, ARANHA?',['FOLHA','GALINHA','CAMINHO','ARANHA'],'FOLHA tem LH. GALINHA, CAMINHO e ARANHA têm NH.'],
- ['Qual palavra NÃO tem a mesma dupla de letras que as outras: OLHO, CHUVA, COELHO, JOELHO?',['CHUVA','OLHO','COELHO','JOELHO'],'CHUVA tem CH. OLHO, COELHO e JOELHO têm LH.']
+ [GR,['FOLHA · OLHO · ABELHA','FONHA · OLHO · ABELHA','FOLHA · OLHO · ABENHA'],'Escreve-se FOLHA, OLHO e ABELHA, com LH.'],
+ [GR,['UNHA · BANHO · ARANHA','ULHA · BANHO · ARANHA','UNHA · BALHO · ARALHA'],'Escreve-se UNHA, BANHO e ARANHA, com NH.'],
+ [GR,['CHAPÉU · CHINELO · CACHORRO','LHAPÉU · CHINELO · CACHORRO','CHAPÉU · CHINELO · CANHORRO'],'Escreve-se CHAPÉU, CHINELO e CACHORRO, com CH.'],
+ null, null /* saíram as 2 de "qual não tem a mesma dupla" */
 ]);
-PAR('dig',[
- ['ANA É ___ DA DONA ROSA.','FILHA',['FILA'],'Ana é FILHA da Dona Rosa. FILA é gente esperando, uma atrás da outra: o LH mudou o sentido.'],
- ['ANTES DO LANCHE, A TURMA FEZ UMA ___ PARA LAVAR AS MÃOS.','FILA',['FILHA'],'A turma fez uma FILA. FILHA é outra palavra, com outro sentido.'],
- ['A MENINA ___ AS PLANTAS COM O REGADOR.','MOLHA',['MOLA'],'Com o regador, ela MOLHA as plantas. MOLA é a peça que estica e volta.'],
- ['ESTA BONECA É ___, NÃO É SUA!','MINHA',['MINA'],'A boneca é MINHA. MINA é outra palavra: o NH mudou o sentido.'],
- ['ESTOU COM MUITO ___, VOU DORMIR.','SONO',['SONHO'],'Quem vai dormir está com SONO. SONHO é o que a gente vê dormindo.'],
- ['ESTA NOITE TIVE UM ___ COM DRAGÕES.','SONHO',['SONO'],'O que se vê dormindo é um SONHO. Entrou o NH e a palavra mudou.']
-]);
-REGRA('dig',[
- ['MOLA virou MOLHA quando entrou o H. O que aconteceu?',['Virou outra palavra, com outro sentido','Ficou a mesma palavra','A palavra ficou errada'],'Mola e molha querem dizer a mesma coisa?','Uma letrinha muda tudo: MOLA é uma peça; MOLHA é pôr água.']
-]);
+pula(6); /* saíram os 6 pares de sentido: FILA/FILHA, MOLA/MOLHA, MINA/MINHA, SONO/SONHO */
+pula(1); /* saiu "MOLA virou MOLHA: o que aconteceu?" */
 FRASES('dig',[
- [['A OVELHA DORMIU NA PALHA.','A OVENHA DORMIU NA PALHA.','A OVELHA DORMIU NA PANHA.'],'OVELHA e PALHA têm LH.'],
- [['O CACHORRO ACHOU UM NINHO.','O CANHORRO ACHOU UM NINHO.','O CACHORRO ACHOU UM NILHO.'],'CACHORRO tem CH; NINHO tem NH.'],
- [['CHAPEUZINHO SEGUIU PELO CAMINHO.','CHAPEUZILHO SEGUIU PELO CAMINHO.','CHAPEUZINHO SEGUIU PELO CAMILHO.'],'CHAPEUZINHO e CAMINHO têm NH.']
+ [['A OVELHA DORMIU NA PALHA.','A OVENHA DORMIU NA PALHA.','A OVELHA DORMIU NA PANHA.'],'Escreve-se OVELHA e PALHA, com LH.'],
+ [['O CACHORRO ACHOU UM NINHO.','O CANHORRO ACHOU UM NINHO.','O CACHORRO ACHOU UM NILHO.'],'Escreve-se CACHORRO, com CH, e NINHO, com NH.'],
+ [['CHAPEUZINHO SEGUIU PELO CAMINHO.','CHAPEUZILHO SEGUIU PELO CAMINHO.','CHAPEUZINHO SEGUIU PELO CAMILHO.'],'Escreve-se CHAPEUZINHO e CAMINHO, com NH.']
 ]);
 
 /* ---------- PLURAL: numa frase, com o número pedindo o plural ---------- */
 function PLU(lista){ lista.forEach(function(x){
-  /* x = [frase com ___ , singular, certa, [erradas], regra] */
+  /* x = [frase com ___ , singular, certa, [erradas], regra curta] */
   nv('plural','plF','Complete a frase com o plural de '+x[1]+': "'+x[0]+'"',[x[2]].concat(x[3]),DICA.plural.FR,x[1]+' → '+x[2]+': '+x[4]+'.');
 }); }
 PLU([
  ['NO CÉU PASSARAM DOIS ___.','AVIÃO','AVIÕES',['AVIÃOS','AVIÕS'],'ÃO vira ÕES'],
- ['NO JARDIM NASCERAM MUITAS ___.','FLOR','FLORES',['FLORS','FLORIS'],'termina em R, põe ES'],
+ ['NO JARDIM NASCERAM MUITAS ___.','FLOR','FLORES',['FLORS','FLORIS'],'R ganha ES'],
  ['NO ZOOLÓGICO VIMOS VÁRIOS ___.','ANIMAL','ANIMAIS',['ANIMALS','ANIMALES'],'AL vira AIS'],
  ['NA FESTA, AS CRIANÇAS SOLTARAM ___ COLORIDOS.','BALÃO','BALÕES',['BALÃOS','BALÕS'],'ÃO vira ÕES'],
  ['NO CÉU HAVIA MUITAS ___ BRANCAS.','NUVEM','NUVENS',['NUVEMS','NUVEIS'],'M vira NS'],
  ['DOIS ___ CONVERSAVAM NA PRAÇA.','HOMEM','HOMENS',['HOMEMS','HOMEMES'],'M vira NS'],
- ['NA MESA HAVIA QUATRO ___.','COLHER','COLHERES',['COLHERS','COLHERIS'],'termina em R, põe ES'],
- ['DE NOITE, ACENDEMOS AS ___ DA CASA.','LUZ','LUZES',['LUZS','LUZIS'],'termina em Z, põe ES'],
+ ['NA MESA HAVIA QUATRO ___.','COLHER','COLHERES',['COLHERS','COLHERIS'],'R ganha ES'],
+ ['DE NOITE, ACENDEMOS AS ___ DA CASA.','LUZ','LUZES',['LUZS','LUZIS'],'Z ganha ES'],
  ['NO DOMINGO, O PAPAI LEU DOIS ___.','JORNAL','JORNAIS',['JORNALS','JORNALES'],'AL vira AIS'],
- ['OS TRÊS ___ FIZERAM SUAS CASAS.','PORQUINHO','PORQUINHOS',['PORQUINHOES','PORQUINHONS'],'termina em vogal, põe S'],
+ ['OS TRÊS ___ FIZERAM SUAS CASAS.','PORQUINHO','PORQUINHOS',['PORQUINHOES','PORQUINHONS'],'ganha S'],
  ['O PESCADOR LEVOU DOIS ___.','ANZOL','ANZÓIS',['ANZOLS','ANZOLES'],'OL vira ÓIS'],
  ['NO ZOOLÓGICO, DOIS ___ RUGIRAM.','LEÃO','LEÕES',['LEÃOS','LEÕS'],'ÃO vira ÕES'],
  ['A CAMISA TEM CINCO ___.','BOTÃO','BOTÕES',['BOTÃOS','BOTÕS'],'ÃO vira ÕES'],
  ['NA ESTAÇÃO PASSARAM DOIS ___.','TREM','TRENS',['TREMS','TREMES'],'M vira NS'],
- ['A GALINHA BOTOU SEIS ___.','OVO','OVOS',['OVOES','OVONS'],'termina em vogal, põe S'],
+ ['A GALINHA BOTOU SEIS ___.','OVO','OVOS',['OVOES','OVONS'],'ganha S'],
  ['NA FEIRA, MAMÃE COMPROU TRÊS ___.','LIMÃO','LIMÕES',['LIMÃOS','LIMÕS'],'ÃO vira ÕES'],
- ['NA PRAIA, VIMOS DOIS ___ DIFERENTES.','MAR','MARES',['MARS','MARIS'],'termina em R, põe ES']
+ ['NA PRAIA, VIMOS DOIS ___ DIFERENTES.','MAR','MARES',['MARS','MARIS'],'R ganha ES']
 ]);
 REGRA('plural',[
- ['Passe para o plural: A CASA',['AS CASAS','A CASAS','AS CASA'],'As DUAS palavras vão para o plural.','A → AS, casa → casas. O artigo acompanha a palavra.'],
- ['Passe para o plural: O LOBO',['OS LOBOS','O LOBOS','OS LOBO'],'As DUAS palavras vão para o plural.','O → OS, lobo → lobos.'],
- ['Passe para o plural: A NUVEM',['AS NUVENS','A NUVENS','AS NUVEMS'],'As DUAS palavras vão para o plural. NUVEM termina em M.','A → AS, e o M vira NS: AS NUVENS.'],
- ['Qual destas palavras faz o plural com ES?',['MAR','LOBO','BALÃO'],'Olhe como cada uma termina.','MAR termina em R: MARES. LOBO ganha só S; BALÃO vira BALÕES.'],
- ['Qual destas palavras faz o plural trocando ÃO por ÕES?',['LIMÃO','FLOR','JORNAL'],'Olhe como cada uma termina.','LIMÃO → LIMÕES. FLOR → FLORES; JORNAL → JORNAIS.'],
- ['Qual destas palavras faz o plural trocando o L por IS?',['ANIMAL','HOMEM','CASA'],'Olhe como cada uma termina.','ANIMAL → ANIMAIS. HOMEM → HOMENS; CASA → CASAS.']
+ ['Passe para o plural: A CASA',['AS CASAS','A CASAS','AS CASA'],'As duas palavras mudam.','A CASA → AS CASAS.'],
+ ['Passe para o plural: O LOBO',['OS LOBOS','O LOBOS','OS LOBO'],'As duas palavras mudam.','O LOBO → OS LOBOS.'],
+ ['Passe para o plural: A NUVEM',['AS NUVENS','A NUVENS','AS NUVEMS'],'As duas palavras mudam.','A NUVEM → AS NUVENS.'],
+ null, null, null /* saíram as 3 de "qual destas faz o plural com ES / ÕES / IS" */
 ]);
 ERR('plural',[
- ['OS ANIMALS COMERAM AS FLORES.','ANIMALS','ANIMAIS',['FLORES','COMERAM'],'Terminou em AL, o plural é AIS. FLORES está certa (R ganha ES).'],
- ['AS CRIANÇAS VIRAM DOIS AVIÃOS E TRÊS BALÕES.','AVIÃOS','AVIÕES',['BALÕES','CRIANÇAS'],'ÃO vira ÕES. BALÕES está certa.'],
- ['OS HOMEMS ACENDERAM AS LUZES.','HOMEMS','HOMENS',['LUZES','ACENDERAM'],'Terminou em M, o M vira NS. LUZES está certa (Z ganha ES).']
+ ['OS ANIMALS COMERAM AS FLORES.','ANIMALS','ANIMAIS',['FLORES','COMERAM'],''],
+ ['AS CRIANÇAS VIRAM DOIS AVIÃOS E TRÊS BALÕES.','AVIÃOS','AVIÕES',['BALÕES','CRIANÇAS'],''],
+ ['OS HOMEMS ACENDERAM AS LUZES.','HOMEMS','HOMENS',['LUZES','ACENDERAM'],'']
 ]);
+
+/* ---------- v4: itens NOVOS (no fim, para não mexer nos ids de cima) ---------- */
+CERTA('h',[
+ ['HOJE',['OJE','HOGE'],'com H'],
+ ['HOMEM',['OMEM','HOMEN'],'com H'],
+ ['HOSPITAL',['OSPITAL','HOSPITAU'],'com H'],
+ ['HIPOPÓTAMO',['IPOPÓTAMO','HIPOPÓTAMU'],'com H'],
+ ['HISTÓRIA',['ISTÓRIA','HISTÓRRIA'],'com H'],
+ ['HELICÓPTERO',['ELICÓPTERO','HELICÓPITERO'],'com H'],
+ ['OVO',['HOVO','OVU'],'sem H'],
+ ['ILHA',['HILHA','ILIA'],'sem H']
+]);
+CERTA('jg',[
+ ['GELO',['JELO','GELU'],'com G'],
+ ['GIRAFA',['JIRAFA','GIRRAFA'],'com G'],
+ ['PÁGINA',['PÁJINA','PÁGENA'],'com G'],
+ ['RELÓGIO',['RELÓJIO','RELÓGEO'],'com G'],
+ ['JIPE',['GIPE','JIPI'],'com J'],
+ ['MÁGICO',['MÁJICO','MÁGECO'],'com G'],
+ ['GELADEIRA',['JELADEIRA','GELADERA'],'com G'],
+ ['GIGANTE',['JIGANTE','GIGANTI'],'com G'],
+ ['JEITO',['GEITO','JEITU'],'com J'],
+ ['CANJICA',['CANGICA','CAMJICA'],'com J'],
+ ['GENTE',['JENTE','GENTI'],'com G'],
+ ['TIGELA',['TIJELA','TEGELA'],'com G'],
+ ['SUJEIRA',['SUGEIRA','SUJERA'],'com J']
+]);
+CERTA('ggu',[
+ ['FOGUETE',['FOGETE','FOGUETI'],'com GU'],
+ ['GUERRA',['GERRA','GUERA'],'com GU'],
+ ['FORMIGUEIRO',['FORMIGEIRO','FORMIGUERO'],'com GU'],
+ ['PREGUIÇA',['PREGIÇA','PREGUISSA'],'com GU'],
+ ['GUINDASTE',['GINDASTE','GUIMDASTE'],'com GU'],
+ ['FOGUEIRA',['FOGEIRA','FOGUERA'],'com GU'],
+ ['MANGUEIRA',['MANGEIRA','MANGUERA'],'com GU']
+]);
+CERTA('cqu',[
+ ['ESQUILO',['ESCILO','ESQILO'],'com QU'],
+ ['MÁQUINA',['MÁCINA','MÁQINA'],'com QU'],
+ ['PERIQUITO',['PERICITO','PERIQITO'],'com QU'],
+ ['QUIABO',['CIABO','QIABO'],'com QU'],
+ ['MOLEQUE',['MOLECE','MOLEQE'],'com QU'],
+ ['QUENTE',['CENTE','QENTE'],'com QU']
+]);
+PAL([
+ ['A GALI__A BOTOU UM OVO.','NH','GALINHA'],
+ ['A ABE__A FEZ MEL.','LH','ABELHA'],
+ ['CAIU MUITA __UVA HOJE.','CH','CHUVA'],
+ ['O CA__ORRO LATIU.','CH','CACHORRO'],
+ ['CHAPEUZINHO SEGUIU PELO CAMI__O.','NH','CAMINHO'],
+ ['O VENTO LEVOU A FO__A DA ÁRVORE.','LH','FOLHA'],
+ ['O COE__O COMEU CENOURA.','LH','COELHO'],
+ ['A ARA__A FEZ UMA TEIA.','NH','ARANHA'],
+ ['O MENINO CALÇOU O __INELO.','CH','CHINELO'],
+ ['A OVE__A DORMIU NO PASTO.','LH','OVELHA'],
+ ['A VOVÓ FEZ BOLO NA COZI__A.','NH','COZINHA'],
+ ['GUARDEI O DI__EIRO NO COFRE.','NH','DINHEIRO']
+]);
+CERTA('dig',[
+ ['COELHO',['COENHO','COELIO'],'com LH'],
+ ['CACHORRO',['CANHORRO','CACHORO'],'com CH'],
+ ['ABELHA',['ABENHA','ABELA'],'com LH'],
+ ['GALINHA',['GALILHA','GALINIA'],'com NH'],
+ ['ARANHA',['ARALHA','ARANIA'],'com NH'],
+ ['JOELHO',['JOENHO','JOELIO'],'com LH']
+]);
+[['Qual é o plural de NARIZ?',['NARIZES','NARIZS','NARIZIS'],'NARIZ → NARIZES.'],
+ ['Qual é o plural de VARAL?',['VARAIS','VARALS','VARALES'],'VARAL → VARAIS.'],
+ ['Passe para o plural: A FLOR',['AS FLORES','A FLORES','AS FLORS'],'A FLOR → AS FLORES.'],
+ ['Passe para o plural: O LEÃO',['OS LEÕES','O LEÕES','OS LEÃOS'],'O LEÃO → OS LEÕES.']
+].forEach(function(x){ nv('plural','plD',x[0],x[1],'Olhe como a palavra termina.',x[2]); });
 
 /* dicionário v3: palavras-guia em uso (achar a página certa) */
 [['BALA','BULE','BONÉ',['CASA','ABELHA'],'BA... BO... BU: BONÉ fica entre BALA e BULE.'],
@@ -514,9 +506,10 @@ ERR('plural',[
   p:'No alto de uma página do dicionário estão as palavras-guia '+x[0]+' e '+x[1]+'. Qual destas palavras está nessa página?',
   o:[x[2]].concat(x[3]),c:0,dica:'A palavra tem de vir DEPOIS de '+x[0]+' e ANTES de '+x[1]+' na ordem alfabética.',ex:x[4]}); });
 
-/* dicionário: qual vem primeiro / por último */
+/* dicionário: qual vem primeiro / por último (v4: os 2 primeiros trios eram
+   iguais a di2 e di3; trocados por DADO/DEDO/DOCE e RATO/PATO/MATO) */
 function ordena(a){ return a.slice().sort(function(x,y){ return x.localeCompare(y,'pt'); }); }
-[['BALA','BOLA','BULE'],['GATO','LOBO','URSO'],['CASA','COPO','CUBO'],['ABELHA','BOLA','CASA'],['FADA','FOGO','FUMAÇA'],
+[['DADO','DEDO','DOCE'],['RATO','PATO','MATO'],['CASA','COPO','CUBO'],['ABELHA','BOLA','CASA'],['FADA','FOGO','FUMAÇA'],
  ['LOBO','LUA','LAGO'],['MESA','MAPA','MOLA'],['PATO','PIPA','PENA'],['VACA','VELA','VIOLA'],['SAPO','SOL','SINO'],
  ['CASA','CAVALO','CAMA'],['JOÃO','GIGANTE','HARPA']
 ].forEach(function(t,i){

@@ -24,6 +24,13 @@
    - v3 (12/10): as lacunas de H, J/G, G/GU, C/QU e CH/NH/LH vivem
      DENTRO de um texto curto (como o "complete o texto com a pontuação"
      do material da escola), e não mais numa lista de palavras soltas.
+   - v4 (12/10, pedido do Paulo): ortografia só no formato que a prova
+     cobra — escrever/reconhecer a palavra certa. Saíram os pares de
+     SENTIDO (MOLA × MOLHA, FILHA × FILA × FICHA), as de TEORIA ("o que o
+     H faz", "U quietinho", "GIGANTE: as duas letras têm o mesmo som?",
+     "por que QUEIJO tem QU", "CH, NH e LH são...") e a de classificar
+     ("qual não começa com H"). Dica, truque, porque e fala de erro
+     ficaram curtos: mostram a palavra certa, sem conversa de som.
    - Distrator INDEFENSÁVEL. Nos textos com lacunas, NENHUMA palavra
      preenchida com a letra errada forma outra palavra de verdade (JATO,
      NICHO, ORA, IENA, GANHO, TENHA, MINHO... ficaram de fora de propósito).
@@ -39,15 +46,15 @@ window.LP3S = (function(){
    7 do bloco A + 4 do B + 1 do C — o mesmo peso do roteiro.          */
 var FAMILIAS = [
   {k:'h',      bloco:'A', cota:1, nome:'Letra H',               cor:'#38bdf8',
-   truque:'O H do começo não tem som, mas se escreve: HOJE, HOMEM, HOTEL. OVO, UVA e ILHA não têm H.'},
+   truque:'Com H: HOJE, HOMEM, HOTEL, HOSPITAL, HORTA. Sem H: OVO, UVA, ILHA, ESCOLA.'},
   {k:'jg',     bloco:'A', cota:1, nome:'J ou G',                cor:'#fbbf24',
-   truque:'JA, JO, JU: sempre J. Com E e I, pode ser J ou G: lembre como a palavra se escreve.'},
+   truque:'Com A, O e U, é J: JANELA, JOGO, CAJU. Com G: GELO, GIRAFA, GIGANTE. Com J: JEITO, JIPE, JILÓ.'},
   {k:'ggu',    bloco:'A', cota:1, nome:'G ou GU',               cor:'#fb923c',
-   truque:'GA, GO, GU: só o G. Antes de E e I, para soar guê, entra o U quietinho: GUE, GUI.'},
+   truque:'Só G: GATO, GORILA, LAGO. Com GU: FOGUETE, GUITARRA, ÁGUIA.'},
   {k:'cqu',    bloco:'A', cota:1, nome:'C ou QU',               cor:'#34d399',
-   truque:'C com A, O e U (casa, copo, cubo): só o C. Antes de E e I, o som de quê vira QUE, QUI, com o U quietinho.'},
+   truque:'Só C: CASA, COPO, CAVALO. Com QU: QUEIJO, ESQUILO, MÁQUINA.'},
   {k:'dig',    bloco:'A', cota:1, nome:'CH · NH · LH',          cor:'#2dd4bf',
-   truque:'CH, NH, LH: duas letras, um som só. Leia a palavra com cada dupla: só uma existe.'},
+   truque:'CH: CHUVA, CACHORRO. NH: GALINHA, NINHO. LH: FOLHA, ABELHA.'},
   {k:'plural', bloco:'A', cota:1, nome:'Plural',                cor:'#f87171',
    truque:'Vogal: põe S. R ou Z: põe ES. ÃO vira ÕES. L vira IS. M vira NS.'},
   {k:'dic',    bloco:'A', cota:1, nome:'Dicionário',            cor:'#60a5fa',
@@ -76,20 +83,16 @@ var SEP = ' · ';
    criança lê o texto, entende as palavras e aplica a regra em cada lacuna. */
 var LAC = {
   jg:  {enun:'LEIA O TEXTO E COMPLETE AS PALAVRAS COM J OU G:',
-        dica:'Leia o texto inteiro primeiro. Em cada lacuna, olhe a letra que vem DEPOIS: A, O, U pedem J. Antes de E e I, lembre como a palavra se escreve.',
-        regra:'Antes de A, O e U o som de jê é sempre J. Antes de E e I pode ser J ou G, e é preciso lembrar a palavra.',
-        proximo:'Leia a letra que vem DEPOIS da lacuna: A, O, U pedem J.'},
+        dica:'Leia o texto inteiro primeiro. Depois lembre como cada palavra se escreve. Com A, O e U, é J.',
+        proximo:'Com A, O e U, use J: JANELA, JOGO, CAJU.'},
   ggu: {enun:'LEIA O TEXTO E COMPLETE AS PALAVRAS COM G OU GU:',
-        dica:'Leia o texto inteiro primeiro. Se depois da lacuna vem E ou I e o som é de guê, precisa do U: GUE, GUI.',
-        regra:'GA, GO, GU levam só o G. Antes de E e I, para soar guê, entra o U que não se fala: GUE, GUI.',
-        proximo:'Depois da lacuna vem E ou I? Para soar guê, ponha GU.'},
+        dica:'Leia o texto inteiro primeiro. Depois lembre como cada palavra se escreve.',
+        proximo:'Lembre: GATO e GORILA, só G. FOGUETE e GUITARRA, com GU.'},
   cqu: {enun:'LEIA O TEXTO E COMPLETE AS PALAVRAS COM C OU QU:',
-        dica:'Leia o texto inteiro primeiro. Se depois da lacuna vem E ou I e o som é de quê, precisa de QU.',
-        regra:'Com A, O e U (casa, copo), vai só o C. Antes de E e I, o som de quê se escreve QU, com o U quietinho.',
-        proximo:'Depois da lacuna vem E ou I? Para soar quê, ponha QU.'},
+        dica:'Leia o texto inteiro primeiro. Depois lembre como cada palavra se escreve.',
+        proximo:'Lembre: CASA e COPO, só C. QUEIJO e ESQUILO, com QU.'},
   dig: {enun:'LEIA O TEXTO E COMPLETE AS PALAVRAS COM CH, NH OU LH:',
-        dica:'Leia o texto inteiro primeiro, para saber de que palavra se trata. Depois pense em como cada palavra se escreve: CH, NH ou LH?',
-        regra:'CH, NH e LH são duas letras com um som só; trocar uma dupla pela outra estraga a palavra.',
+        dica:'Leia o texto inteiro primeiro, para saber que palavra é. Depois lembre como ela se escreve.',
         proximo:'Descubra a palavra pelo texto e lembre como ela se escreve.'}
 };
 
@@ -127,7 +130,7 @@ function lac(id, eixo, linhas, erradas, extra){
     opts:opts, dica:L.dica,
     visual:linhas.map(function(l){ return '<p class="vx">'+l.replace(RE_LAC, function(_,a,x,b){
       return a+'<span class="mk">'+x+'</span>'+b; })+'</p>'; }).join(''),
-    porque:'Completas, as palavras ficam: '+ws.map(function(w){ return w.a+w.l+w.b; }).join(', ')+'. '+L.regra,
+    porque:'As palavras certas são: '+ws.map(function(w){ return w.a+w.l+w.b; }).join(', ')+'.',
     proximo:L.proximo,
     lacunas:ws
   };
@@ -167,11 +170,11 @@ function hlac(id, linhas, erradas){
     enun:'LEIA O TEXTO. ALGUMAS PALAVRAS NUMERADAS PERDERAM O H DO COMEÇO.', quadro:quadro,
     pede:'EM QUAIS PALAVRAS NUMERADAS FALTA O H?',
     opts:opts,
-    dica:'O H não tem som, então não adianta escutar. Leia cada palavra numerada e lembre como ela aparece escrita nos livros.',
+    dica:'Leia cada palavra numerada e lembre como ela aparece escrita nos livros.',
     visual:linhas.map(function(l){ return '<p class="vx">'+l.replace(RE_H, function(_,h,w){
       return (h?'<span class="mk">H</span>':'')+w; })+'</p>'; }).join(''),
-    porque:'As palavras numeradas ficam assim: '+ws.map(function(w){ return (w.tem?'H':'')+w.w; }).join(', ')+'. O H do começo não tem som; quem se escreve com H tem de ser lembrada.',
-    proximo:'Não confie no ouvido: o H é mudo. Pense na palavra escrita.',
+    porque:'As palavras certas são: '+ws.map(function(w){ return (w.tem?'H':'')+w.w; }).join(', ')+'.',
+    proximo:'Com H: HOJE, HOMEM, HOTEL, HOSPITAL, HORTA. Sem H: OVO, UVA, ILHA.',
     lacunas:ws.map(function(w){ return {a:'', l:w.tem?'H':'', b:w.w}; })
   };
 }
@@ -265,39 +268,38 @@ hlac('SH3', ['NA []ESCOLA, A PROFESSORA CONTOU','A [H]ISTÓRIA DE UM [H]ERÓI.',
 {id:'SH4', eixo:'h', tipo:'qual está escrita certo',
  pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
  opts:[
-  {t:'HOSPITAL', ok:1},
-  {t:'HOVO', no:'OVO não tem H. HOVO não existe.'},
-  {t:'OMEM', no:'Faltou o H: o certo é HOMEM.'},
-  {t:'HUVA', no:'UVA não tem H. HUVA não existe.'}
+  {t:'OVO', ok:1},
+  {t:'HOVO', no:'OVO não tem H.'},
+  {t:'OVU', no:'O certo é OVO.'},
+  {t:'HOVU', no:'O certo é OVO, sem H.'}
  ],
- dica:'Duas destas ganharam um H que não têm, e uma perdeu o H.',
- visual:'<div class="pcs"><span class="pc hit">HOSPITAL</span><span class="pc">OVO</span><span class="pc">HOMEM</span><span class="pc">UVA</span></div>',
- porque:'HOSPITAL se escreve com H. OVO e UVA não têm H; HOMEM tem.',
- proximo:'Lembre das palavras com H: HOJE, HOMEM, HOTEL, HOSPITAL, HORTA.'},
+ dica:'Leia as quatro com calma. Só uma está escrita certo.',
+ porque:'Escreve-se OVO, sem H.',
+ proximo:'Sem H: OVO, UVA, ILHA, ESCOLA.'},
 
 {id:'SH5', eixo:'h', tipo:'qual grupo',
- pede:'EM QUAL GRUPO TODAS AS PALAVRAS COMEÇAM COM H?',
+ pede:'EM QUAL GRUPO TODAS AS PALAVRAS ESTÃO ESCRITAS CERTO?',
  opts:[
   {t:'HINO · HOMEM · HORTA', ok:1},
-  {t:'HOTEL · UVA · HÉLICE', no:'UVA começa com U, sem H.'},
-  {t:'ILHA · HOJE · HIENA', no:'ILHA começa com I, sem H.'},
-  {t:'ANEL · OLHO · ESCOLA', no:'Nenhuma dessas começa com H.'}
+  {t:'INO · HOMEM · HORTA', no:'O certo é HINO, com H.'},
+  {t:'HINO · OMEM · HORTA', no:'O certo é HOMEM, com H.'},
+  {t:'HINO · HOMEM · ORTA', no:'O certo é HORTA, com H.'}
  ],
- dica:'Confira a primeira letra de cada palavra do grupo.',
- porque:'HINO, HOMEM e HORTA começam com H. Nos outros grupos aparece UVA, ILHA, ANEL, OLHO ou ESCOLA, que não têm H no começo.',
- proximo:'Uma palavra sem H já estraga o grupo inteiro.'},
+ dica:'Confira cada palavra do grupo.',
+ porque:'Escreve-se HINO, HOMEM e HORTA, com H.',
+ proximo:'Uma palavra errada já estraga o grupo.'},
 
-{id:'SH6', eixo:'h', tipo:'regra',
- pede:'NA PALAVRA HOJE, O QUE O H FAZ?',
+{id:'SH6', eixo:'h', tipo:'qual está escrita certo',
+ pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
  opts:[
-  {t:'NÃO TEM SOM, MAS É ESCRITO.', ok:1},
-  {t:'TEM SOM DE R, COMO EM RATO.', no:'O H do começo não tem som nenhum. Falamos "oje".'},
-  {t:'PODE SER APAGADO, PORQUE NÃO TEM SOM.', no:'Não tem som, mas não pode ser apagado: OJE está errado.'},
-  {t:'TEM SOM DE A.', no:'O H do começo não tem som nenhum.'}
+  {t:'OJE', no:'O certo é HOJE, com H.'},
+  {t:'HOJE', ok:1},
+  {t:'HOGE', no:'O certo é HOJE, com J.'},
+  {t:'OGE', no:'O certo é HOJE, com H e com J.'}
  ],
- dica:'Fale HOJE em voz alta. Você ouve alguma coisa antes do O?',
- porque:'Falamos "oje", mas escrevemos HOJE. O H do começo é mudo e mesmo assim faz parte da palavra.',
- proximo:'H no começo: não se ouve, mas se escreve.'},
+ dica:'Leia as quatro com calma. Só uma está escrita certo.',
+ porque:'Escreve-se HOJE, com H.',
+ proximo:'Com H: HOJE, HOMEM, HOTEL, HOSPITAL, HORTA.'},
 
 {id:'SH7', eixo:'h', tipo:'complete as palavras',
  enun:'COMPLETE A FRASE:',
@@ -305,38 +307,38 @@ hlac('SH3', ['NA []ESCOLA, A PROFESSORA CONTOU','A [H]ISTÓRIA DE UM [H]ERÓI.',
  pede:'QUE LETRA FALTA NAS PALAVRAS DA FRASE?',
  opts:[
   {t:'H NAS DUAS PALAVRAS', ok:1},
-  {t:'H SÓ NA PRIMEIRA', no:'OSPITAL não existe: falta o H também em HOSPITAL.'},
-  {t:'H SÓ NA SEGUNDA', no:'ELICÓPTERO não existe: falta o H também em HELICÓPTERO.'},
-  {t:'NENHUMA: JÁ ESTÁ CERTO ASSIM', no:'ELICÓPTERO e OSPITAL não existem. As duas começam com H.'}
+  {t:'H SÓ NA PRIMEIRA', no:'O certo é HOSPITAL, com H.'},
+  {t:'H SÓ NA SEGUNDA', no:'O certo é HELICÓPTERO, com H.'},
+  {t:'NENHUMA: JÁ ESTÁ CERTO ASSIM', no:'O certo é HELICÓPTERO e HOSPITAL, com H.'}
  ],
- dica:'As duas palavras estão na lista das que começam com H.',
+ dica:'Lembre como as duas palavras se escrevem.',
  visual:'<p class="vx">O <span class="mk">H</span>ELICÓPTERO POUSOU NO <span class="mk">H</span>OSPITAL.</p>',
- porque:'HELICÓPTERO e HOSPITAL começam com H, mesmo sem a gente ouvir.',
+ porque:'Escreve-se HELICÓPTERO e HOSPITAL, com H.',
  proximo:'Antes de responder, escreva as palavras inteiras na cabeça.'},
 
 {id:'SH8', eixo:'h', tipo:'qual está escrita certo',
- pede:'QUAL PALAVRA NÃO COMEÇA COM H?',
+ pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
  opts:[
-  {t:'HORTELÃ', no:'HORTELÃ começa com H.'},
-  {t:'ELEFANTE', ok:1},
-  {t:'HIENA', no:'HIENA começa com H.'},
-  {t:'HOTEL', no:'HOTEL começa com H.'}
+  {t:'ISTÓRIA', no:'O certo é HISTÓRIA, com H.'},
+  {t:'HISTÓRRIA', no:'O certo é HISTÓRIA, com um R só.'},
+  {t:'HISTÓRIA', ok:1},
+  {t:'ISTÓRRIA', no:'O certo é HISTÓRIA, com H e com um R só.'}
  ],
- dica:'Olhe a primeira letra de cada uma.',
- porque:'ELEFANTE começa com E. HORTELÃ, HIENA e HOTEL começam com H.',
- proximo:'Leia a primeira letra de cada alternativa antes de marcar.'},
+ dica:'Leia as quatro com calma. Só uma está escrita certo.',
+ porque:'Escreve-se HISTÓRIA, com H.',
+ proximo:'Com H: HISTÓRIA, HERÓI, HINO, HIPOPÓTAMO.'},
 
 {id:'SH9', eixo:'h', tipo:'qual está escrita certo',
  pede:'QUAL FRASE ESTÁ ESCRITA CERTO?',
  opts:[
   {t:'HOJE O HOMEM FOI AO HOTEL.', ok:1},
-  {t:'OJE O HOMEM FOI AO HOTEL.', no:'Faltou o H em HOJE.'},
-  {t:'HOJE O OMEM FOI AO HOTEL.', no:'Faltou o H em HOMEM.'},
-  {t:'HOJE O HOMEM FOI AO OTEL.', no:'Faltou o H em HOTEL.'}
+  {t:'OJE O HOMEM FOI AO HOTEL.', no:'O certo é HOJE, com H.'},
+  {t:'HOJE O OMEM FOI AO HOTEL.', no:'O certo é HOMEM, com H.'},
+  {t:'HOJE O HOMEM FOI AO OTEL.', no:'O certo é HOTEL, com H.'}
  ],
- dica:'Três palavras da frase começam com H. Confira as três.',
+ dica:'Confira cada palavra da frase.',
  visual:'<p class="vx"><span class="mk">H</span>OJE O <span class="mk">H</span>OMEM FOI AO <span class="mk">H</span>OTEL.</p>',
- porque:'HOJE, HOMEM e HOTEL começam com H. Nas outras frases, uma delas perdeu o H.',
+ porque:'Escreve-se HOJE, HOMEM e HOTEL, com H.',
  proximo:'Frase inteira: confira palavra por palavra.'}
 );
 
@@ -351,37 +353,37 @@ lac('SJG5','jg', ['O LEÃO BALANÇOU A [J]UBA.','O [G]IRASSOL ABRIU NO SOL.','A 
 {id:'SJG6', eixo:'jg', tipo:'qual está escrita certo',
  pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
  opts:[
-  {t:'GIRAFA', ok:1},
-  {t:'JELO', no:'O certo é GELO, com G.'},
-  {t:'GANELA', no:'GA soa guê. O certo é JANELA, com J.'},
-  {t:'TIJELA', no:'O certo é TIGELA, com G.'}
+  {t:'GELADEIRA', ok:1},
+  {t:'JELADEIRA', no:'O certo é GELADEIRA, com G.'},
+  {t:'GELADERA', no:'O certo é GELADEIRA, com EI.'},
+  {t:'JELADERA', no:'O certo é GELADEIRA, com G e com EI.'}
  ],
- dica:'Uma delas começa com GA: lembre que GA não soa jê.',
- porque:'GIRAFA se escreve com G. As certas das outras são GELO, JANELA e TIGELA.',
- proximo:'GA, GO, GU nunca soam jê: para JA, JO, JU use J.'},
+ dica:'Leia as quatro com calma. Só uma está escrita certo.',
+ porque:'Escreve-se GELADEIRA, com G.',
+ proximo:'Com G: GELO, GELADEIRA, GIRAFA, GIGANTE.'},
 
-{id:'SJG7', eixo:'jg', tipo:'regra',
- pede:'QUANDO O SOM DE JÊ VEM ANTES DE A, O OU U (JA, JO, JU), QUE LETRA SE USA?',
+{id:'SJG7', eixo:'jg', tipo:'qual está escrita certo',
+ pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
  opts:[
-  {t:'SEMPRE J', ok:1},
-  {t:'SEMPRE G', no:'GA, GO e GU soam guê, como em GATO. Para soar jê, é J.'},
-  {t:'PODE SER J OU G', no:'Com A, O e U não tem escolha: é sempre J. A escolha só existe com E e I.'},
-  {t:'SEMPRE GU', no:'GU é para o som de guê, como em GUERRA.'}
+  {t:'GEITO', no:'O certo é JEITO, com J.'},
+  {t:'JEITU', no:'O certo é JEITO, com O no fim.'},
+  {t:'GEITU', no:'O certo é JEITO, com J e com O no fim.'},
+  {t:'JEITO', ok:1}
  ],
- dica:'Pense em JACARÉ, JOGO e CAJU.',
- porque:'JA, JO, JU: sempre J. Com G ficaria GA, GO, GU, que é outro som.',
- proximo:'Só antes de E e I é preciso decorar a palavra.'},
+ dica:'Leia as quatro com calma. Só uma está escrita certo.',
+ porque:'Escreve-se JEITO, com J.',
+ proximo:'Com J: JEITO, JIPE, JILÓ, CANJICA.'},
 
 {id:'SJG8', eixo:'jg', tipo:'qual está escrita certo',
  pede:'EM QUAL GRUPO TODAS AS PALAVRAS ESTÃO ESCRITAS CERTO?',
  opts:[
   {t:'JACARÉ · GELO · JUBA', ok:1},
-  {t:'GACARÉ · GELO · JUBA', no:'GACARÉ não existe: o certo é JACARÉ.'},
-  {t:'JACARÉ · JELO · JUBA', no:'JELO não existe: o certo é GELO.'},
-  {t:'JACARÉ · GELO · GUBA', no:'GUBA não existe: o certo é JUBA.'}
+  {t:'GACARÉ · GELO · JUBA', no:'O certo é JACARÉ, com J.'},
+  {t:'JACARÉ · JELO · JUBA', no:'O certo é GELO, com G.'},
+  {t:'JACARÉ · GELO · GUBA', no:'O certo é JUBA, com J.'}
  ],
- dica:'Confira as três palavras de cada grupo.',
- porque:'JACARÉ e JUBA têm J (JA, JU); GELO tem G.',
+ dica:'Confira cada palavra do grupo.',
+ porque:'Escreve-se JACARÉ e JUBA, com J, e GELO, com G.',
  proximo:'Uma palavra errada já estraga o grupo.'},
 
 {id:'SJG9', eixo:'jg', tipo:'qual está escrita certo',
@@ -392,10 +394,10 @@ lac('SJG5','jg', ['O LEÃO BALANÇOU A [J]UBA.','O [G]IRASSOL ABRIU NO SOL.','A 
   {t:'A GIRAFA COMEU GILÓ NA TIGELA.', no:'O certo é JILÓ, com J.'},
   {t:'A GIRAFA COMEU JILÓ NA TIJELA.', no:'O certo é TIGELA, com G.'}
  ],
- dica:'São três palavras com som de jê. Confira cada uma.',
+ dica:'Confira cada palavra da frase.',
  visual:'<p class="vx">A <span class="mk">G</span>IRAFA COMEU <span class="mk">J</span>ILÓ NA TI<span class="mk">G</span>ELA.</p>',
- porque:'GIRAFA e TIGELA se escrevem com G; JILÓ, com J. Antes de E e I, é preciso lembrar cada palavra.',
- proximo:'Com E e I, pense na palavra escrita: GIRAFA, GELO, JILÓ, JEITO.'}
+ porque:'Escreve-se GIRAFA e TIGELA, com G, e JILÓ, com J.',
+ proximo:'Frase inteira: confira palavra por palavra.'}
 );
 
 /* =================== BLOCO A · G OU GU =================== */
@@ -405,55 +407,56 @@ lac('SGG2','ggu', ['A Á[GU]IA VOOU SOBRE A MAN[GU]EIRA.','LÁ EMBAIXO, UM [G]OR
 lac('SGG3','ggu', ['A [G]ALINHA ACHOU UMA A[G]ULHA NO [G]ALHO.','A PRE[GU]IÇA NEM ACORDOU.'], ['GU G G GU','G G G G','G GU G GU']),
 lac('SGG4','ggu', ['AS FORMIGAS SAÍRAM DO FORMI[GU]EIRO.','SUBIRAM NO [GU]INDASTE E NA [G]OLA DA CAMISA.','DEPOIS, BRINCARAM DE BOLINHA DE [G]UDE.'], ['G GU G G','GU G G G','GU GU GU G']),
 
-{id:'SGG5', eixo:'ggu', tipo:'regra',
- pede:'EM QUAL PALAVRA O U FICA QUIETINHO (NÃO SE FALA)?',
+{id:'SGG5', eixo:'ggu', tipo:'qual está escrita certo',
+ pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
  opts:[
   {t:'GUITARRA', ok:1},
-  {t:'AGULHA', no:'Em AGULHA o U se fala: a-GU-lha.'},
-  {t:'GUDE', no:'Em GUDE o U se fala: GU-de.'},
-  {t:'UVA', no:'Em UVA o U se fala: é a primeira letra.'}
+  {t:'GITARRA', no:'O certo é GUITARRA, com GU.'},
+  {t:'GUITARA', no:'O certo é GUITARRA, com RR.'},
+  {t:'GITARA', no:'O certo é GUITARRA, com GU e com RR.'}
  ],
- dica:'O U quietinho aparece em GUE e GUI.',
- visual:'<div class="pcs"><span class="pc">G<span class="mk">U</span>ITARRA</span><span class="arw">&rarr;</span><span class="pc">o U não se fala</span></div>',
- porque:'Em GUITARRA o U só está ali para o G soar guê antes do I. Ele não se fala.',
- proximo:'GUE e GUI: o U é escrito, mas não se fala.'},
+ dica:'Leia as quatro com calma. Só uma está escrita certo.',
+ porque:'Escreve-se GUITARRA, com GU.',
+ proximo:'Com GU: GUITARRA, FOGUETE, ÁGUIA, MANGUEIRA.'},
 
 {id:'SGG6', eixo:'ggu', tipo:'qual está escrita certo',
  pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
  opts:[
-  {t:'FOGUETE', ok:1},
-  {t:'GERRA', no:'Sem o U, GE soa jê. O certo é GUERRA.'},
-  {t:'GITARRA', no:'Sem o U, GI soa jê. O certo é GUITARRA.'},
-  {t:'FOGEIRA', no:'Sem o U, GE soa jê. O certo é FOGUEIRA.'}
+  {t:'FOGEIRA', no:'O certo é FOGUEIRA, com GU.'},
+  {t:'FOGUEIRA', ok:1},
+  {t:'FOGUERA', no:'O certo é FOGUEIRA, com EI.'},
+  {t:'FOGERA', no:'O certo é FOGUEIRA, com GU e com EI.'}
  ],
- dica:'Leia cada uma do jeito que está escrita: GE e GI soam jê.',
- porque:'FOGUETE tem GUE. As outras perderam o U e ficaram com som de jê.',
- proximo:'Som de guê antes de E ou I? Tem de ter U.'},
+ dica:'Leia as quatro com calma. Só uma está escrita certo.',
+ porque:'Escreve-se FOGUEIRA, com GU.',
+ proximo:'Com GU: FOGUEIRA, FOGUETE, GUERRA, PREGUIÇA.'},
 
-{id:'SGG7', eixo:'ggu', tipo:'regra',
- pede:'NA PALAVRA GIGANTE, AS DUAS LETRAS G TÊM O MESMO SOM?',
+{id:'SGG7', eixo:'ggu', tipo:'qual está escrita certo',
+ pede:'QUAL FRASE ESTÁ ESCRITA CERTO?',
  opts:[
-  {t:'NÃO: GI SOA JÊ E GAN SOA GUÊ.', ok:1},
-  {t:'SIM: AS DUAS SOAM JÊ.', no:'GAN soa guê, como em GATO.'},
-  {t:'SIM: AS DUAS SOAM GUÊ.', no:'GI soa jê, como em GIRAFA.'},
-  {t:'NÃO: GI SOA GUÊ E GAN SOA JÊ.', no:'É o contrário: GI soa jê e GAN soa guê.'}
+  {t:'A ÁGIA VOOU PERTO DO FOGUETE.', no:'O certo é ÁGUIA, com GU.'},
+  {t:'A ÁGUIA VOOU PERTO DO FOGETE.', no:'O certo é FOGUETE, com GU.'},
+  {t:'A ÁGUIA VOOU PERTO DO FOGUETE.', ok:1},
+  {t:'A ÁGIA VOOU PERTO DO FOGETE.', no:'O certo é ÁGUIA e FOGUETE, com GU.'}
  ],
- dica:'Fale GIGANTE devagar: GI... GAN... TE.',
- visual:'<div class="pcs"><span class="pc"><span class="mk">GI</span> = jê</span><span class="pc"><span class="mk">GAN</span> = guê</span></div>',
- porque:'G antes de I soa jê; G antes de A soa guê. Por isso GIGANTE tem os dois sons.',
- proximo:'Olhe a vogal depois do G: E, I soam jê; A, O, U soam guê.'},
+ dica:'Confira cada palavra da frase.',
+ visual:'<p class="vx">A Á<span class="mk">GU</span>IA VOOU PERTO DO FO<span class="mk">GU</span>ETE.</p>',
+ porque:'Escreve-se ÁGUIA e FOGUETE, com GU.',
+ proximo:'Frase inteira: confira palavra por palavra.'},
 
-{id:'SGG8', eixo:'ggu', tipo:'regra',
- pede:'PARA ESCREVER O SOM DE GUÊ ANTES DE E OU I, O QUE É PRECISO?',
+{id:'SGG8', eixo:'ggu', tipo:'qual está escrita errado',
+ enun:'LEIA A FRASE:', quadro:'NA FESTA TEVE FOGUEIRA, PIPOCA E GITARRA.',
+ pede:'QUAL PALAVRA DA FRASE ESTÁ ESCRITA ERRADO?',
  opts:[
-  {t:'COLOCAR UM U DEPOIS DO G.', ok:1},
-  {t:'TROCAR O G PELO J.', no:'J faz som de jê, não de guê.'},
-  {t:'COLOCAR UM H DEPOIS DO G.', no:'Em português não se usa GH. O certo é GU: GUERRA.'},
-  {t:'NADA: É SÓ ESCREVER GE OU GI.', no:'GE e GI soam jê, como em GELO e GIRAFA.'}
+  {t:'FESTA', no:'FESTA está certa.'},
+  {t:'FOGUEIRA', no:'FOGUEIRA está certa.'},
+  {t:'PIPOCA', no:'PIPOCA está certa.'},
+  {t:'GITARRA', ok:1}
  ],
- dica:'Pense em GUERRA e GUITARRA.',
- porque:'Antes de E e I, o G sozinho soa jê. Para soar guê, entra o U: GUE, GUI.',
- proximo:'GUE, GUI: o U trabalha calado.'}
+ dica:'Leia cada palavra com calma. Uma está escrita errado.',
+ visual:'<p class="vx">O certo é G<span class="mk">U</span>ITARRA.</p>',
+ porque:'O certo é GUITARRA, com GU.',
+ proximo:'Leia a frase palavra por palavra.'}
 );
 
 /* =================== BLOCO A · C OU QU =================== */
@@ -466,50 +469,52 @@ lac('SCQ4','cqu', ['NO VERÃO, A VOVÓ USA UM LE[QU]E.','ELA DORME NUMA [C]AMA A
 {id:'SCQ5', eixo:'cqu', tipo:'qual está escrita certo',
  pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
  opts:[
-  {t:'ESQUILO', ok:1},
-  {t:'CEIJO', no:'CE soa sê. O certo é QUEIJO.'},
-  {t:'MOSCITO', no:'CI soa si. O certo é MOSQUITO.'},
-  {t:'QUOPO', no:'Antes de O é só o C. O certo é COPO.'}
+  {t:'MOSCITO', no:'O certo é MOSQUITO, com QU.'},
+  {t:'MOSQUITO', ok:1},
+  {t:'MOSQITO', no:'O certo é MOSQUITO: faltou o U.'},
+  {t:'MOSCUITO', no:'O certo é MOSQUITO, com QU.'}
  ],
- dica:'QU só aparece antes de E e I.',
- porque:'ESQUILO tem QUI. As certas das outras são QUEIJO, MOSQUITO e COPO.',
- proximo:'Antes de A, O, U: C. Antes de E, I: QU.'},
+ dica:'Leia as quatro com calma. Só uma está escrita certo.',
+ porque:'Escreve-se MOSQUITO, com QU.',
+ proximo:'Com QU: MOSQUITO, ESQUILO, MÁQUINA, PERIQUITO.'},
 
-{id:'SCQ6', eixo:'cqu', tipo:'regra',
- pede:'POR QUE QUEIJO SE ESCREVE COM QU, E NÃO COM C?',
+{id:'SCQ6', eixo:'cqu', tipo:'qual está escrita certo',
+ pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
  opts:[
-  {t:'PORQUE, ANTES DE E E I, O SOM DE QUÊ SE ESCREVE COM QU.', ok:1},
-  {t:'PORQUE É UMA PALAVRA COMPRIDA.', no:'O tamanho da palavra não muda a letra. COPO e CAVALO usam C.'},
-  {t:'PORQUE O U DE QUEIJO SE FALA BEM FORTE.', no:'O U de QUEIJO não se fala: ele fica quietinho.'},
-  {t:'PORQUE TODA PALAVRA DE COMIDA SE ESCREVE COM QU.', no:'CAJU é comida e se escreve com C.'}
+  {t:'CEIJO', no:'O certo é QUEIJO, com QU.'},
+  {t:'QEIJO', no:'O certo é QUEIJO: faltou o U.'},
+  {t:'QUEIGO', no:'O certo é QUEIJO, com J.'},
+  {t:'QUEIJO', ok:1}
  ],
- dica:'Leia CEIJO do jeito que está escrito. Que som tem?',
- porque:'Com C ficaria CEIJO, que soa "seijo". Antes de E e I, o som de quê precisa de QU.',
- proximo:'Olhe a vogal depois da lacuna: E ou I pedem QU.'},
+ dica:'Leia as quatro com calma. Só uma está escrita certo.',
+ porque:'Escreve-se QUEIJO, com QU e com J.',
+ proximo:'Com QU: QUEIJO, QUENTE, LEQUE, QUIABO.'},
 
 {id:'SCQ7', eixo:'cqu', tipo:'qual está escrita certo',
  pede:'EM QUAL GRUPO TODAS AS PALAVRAS ESTÃO ESCRITAS CERTO?',
  opts:[
   {t:'CASA · QUIABO · CUBO', ok:1},
-  {t:'QUASA · QUIABO · CUBO', no:'QUASA não existe: o certo é CASA.'},
-  {t:'CASA · CIABO · CUBO', no:'CIABO não existe: o certo é QUIABO.'},
-  {t:'CASA · QUIABO · QUUBO', no:'QUUBO não existe: o certo é CUBO.'}
+  {t:'QUASA · QUIABO · CUBO', no:'O certo é CASA, só com C.'},
+  {t:'CASA · CIABO · CUBO', no:'O certo é QUIABO, com QU.'},
+  {t:'CASA · QUIABO · QUUBO', no:'O certo é CUBO, só com C.'}
  ],
- dica:'Confira as três palavras de cada grupo.',
- porque:'CASA e CUBO têm C (C com A, C com U); QUIABO tem QUI.',
+ dica:'Confira cada palavra do grupo.',
+ porque:'Escreve-se CASA e CUBO, com C, e QUIABO, com QU.',
  proximo:'Uma palavra errada já estraga o grupo.'},
 
-{id:'SCQ8', eixo:'cqu', tipo:'regra',
- pede:'NA PALAVRA ESQUILO, O U...',
+{id:'SCQ8', eixo:'cqu', tipo:'qual está escrita errado',
+ enun:'LEIA A FRASE:', quadro:'O PERIQUITO E O CAVALO COMERAM CIABO.',
+ pede:'QUAL PALAVRA DA FRASE ESTÁ ESCRITA ERRADO?',
  opts:[
-  {t:'É ESCRITO, MAS NÃO SE FALA.', ok:1},
-  {t:'SE FALA BEM FORTE.', no:'Falamos "es-ki-lo": o U não aparece na fala.'},
-  {t:'PODE SER APAGADO.', no:'Sem o U ficaria ESCILO, com som de si. O U tem de ficar.'},
-  {t:'É A PRIMEIRA LETRA DA PALAVRA.', no:'ESQUILO começa com E.'}
+  {t:'PERIQUITO', no:'PERIQUITO está certa.'},
+  {t:'CIABO', ok:1},
+  {t:'CAVALO', no:'CAVALO está certa.'},
+  {t:'COMERAM', no:'COMERAM está certa.'}
  ],
- dica:'Fale ESQUILO devagar. Você ouve o U?',
- porque:'Em QUE e QUI o U não se fala, mas sem ele o C soaria sê ou si.',
- proximo:'QUE, QUI: o U trabalha calado, igual em GUE, GUI.'}
+ dica:'Leia cada palavra com calma. Uma está escrita errado.',
+ visual:'<p class="vx">O certo é <span class="mk">QU</span>IABO.</p>',
+ porque:'O certo é QUIABO, com QU.',
+ proximo:'Leia a frase palavra por palavra.'}
 );
 
 /* =================== BLOCO A · CH, NH, LH =================== */
@@ -519,59 +524,62 @@ lac('SDG2','dig', ['O CA[CH]ORRO ACHOU UMA FO[LH]A NO CAMI[NH]O.','DEPOIS, CORRE
 lac('SDG3','dig', ['A OVE[LH]A E O COE[LH]O DORMIRAM NA PA[LH]A.','DE MANHÃ, TOMARAM BA[NH]O.'], ['NH LH LH NH','LH LH CH NH','LH LH LH LH']),
 lac('SDG4','dig', ['A ARA[NH]A SUBIU NO [CH]INELO DO MENINO.','ELE GUARDOU O DI[NH]EIRO E ABRIU BEM O O[LH]O.'], ['LH CH NH LH','NH LH NH LH','NH CH NH NH']),
 
-{id:'SDG5', eixo:'dig', tipo:'complete a frase',
- enun:'COMPLETE A FRASE:',
- quadro:'A MENINA <span class="lb lbw"></span> AS PLANTAS COM O REGADOR.',
- pede:'QUAL PALAVRA COMPLETA A FRASE?',
+/* v4: SDG5 e SDG6 eram MOLA × MOLHA e "ANA É ___ DA DONA ROSA" (FILHA ×
+   FILA × FICHA): todas as opções existiam e a pergunta virava de sentido.
+   Agora é completar a palavra, como a prova cobra. */
+{id:'SDG5', eixo:'dig', tipo:'complete a palavra',
+ enun:'COMPLETE A PALAVRA:',
+ quadro:'A GALI<span class="lb"></span>A BOTOU UM OVO.',
+ pede:'QUE LETRAS COMPLETAM A PALAVRA?',
  opts:[
-  {t:'MOLHA', ok:1},
-  {t:'MOLA', no:'MOLA é uma peça que estica e volta. Quem põe água nas plantas MOLHA as plantas.'},
-  {t:'MONHA', no:'MONHA não existe.'},
-  {t:'MOLLA', no:'MOLLA não existe. O som de lhe se escreve LH.'}
+  {t:'LH', no:'GALILHA não existe: o certo é GALINHA.'},
+  {t:'NH', ok:1},
+  {t:'CH', no:'GALICHA não existe: o certo é GALINHA.'}
  ],
- dica:'O que a gente faz com as plantas usando o regador?',
- visual:'<div class="pcs"><span class="pc">MOLA</span><span class="arw">&ne;</span><span class="pc hit">MO<span class="mk">LH</span>A</span></div>',
- porque:'Com o regador, a menina MOLHA as plantas. MOLA e MOLHA são palavras diferentes: o H muda tudo.',
- proximo:'Leia a frase inteira com a palavra escolhida: ela tem de fazer sentido.'},
+ dica:'Leia a palavra inteira e lembre como ela se escreve.',
+ visual:'<p class="vx">A GALI<span class="mk">NH</span>A BOTOU UM OVO.</p>',
+ porque:'Escreve-se GALINHA, com NH.',
+ proximo:'Com NH: GALINHA, NINHO, CAMINHO, ARANHA.'},
 
-{id:'SDG6', eixo:'dig', tipo:'complete a frase',
- enun:'COMPLETE A FRASE:',
- quadro:'ANA É <span class="lb lbw"></span> DA DONA ROSA.',
- pede:'QUAL PALAVRA COMPLETA A FRASE?',
+{id:'SDG6', eixo:'dig', tipo:'complete a palavra',
+ enun:'COMPLETE A PALAVRA:',
+ quadro:'O CA<span class="lb"></span>ORRO LATIU PARA O CARTEIRO.',
+ pede:'QUE LETRAS COMPLETAM A PALAVRA?',
  opts:[
-  {t:'FICHA', no:'FICHA é um cartão de papel. Ana não é um cartão.'},
-  {t:'FILA', no:'FILA é gente esperando, uma atrás da outra. Ana é uma pessoa só.'},
-  {t:'FILHA', ok:1},
-  {t:'FINHA', no:'FINHA não existe.'}
+  {t:'NH', no:'CANHORRO não existe: o certo é CACHORRO.'},
+  {t:'LH', no:'CALHORRO não existe: o certo é CACHORRO.'},
+  {t:'CH', ok:1}
  ],
- dica:'Dona Rosa é a mãe de Ana. Então Ana é a...',
- visual:'<div class="pcs"><span class="pc">FILA</span><span class="arw">&ne;</span><span class="pc hit">FI<span class="mk">LH</span>A</span></div>',
- porque:'Ana é FILHA da Dona Rosa. FILA e FILHA são palavras diferentes: o H do LH muda o sentido.',
- proximo:'Leia a frase inteira com a palavra escolhida: ela tem de fazer sentido.'},
+ dica:'Leia a palavra inteira e lembre como ela se escreve.',
+ visual:'<p class="vx">O CA<span class="mk">CH</span>ORRO LATIU PARA O CARTEIRO.</p>',
+ porque:'Escreve-se CACHORRO, com CH.',
+ proximo:'Com CH: CACHORRO, CHUVA, CHAVE, CHINELO.'},
 
-{id:'SDG7', eixo:'dig', tipo:'regra',
- pede:'CH, NH E LH SÃO...',
+{id:'SDG7', eixo:'dig', tipo:'complete a palavra',
+ enun:'COMPLETE A PALAVRA:',
+ quadro:'A OVE<span class="lb"></span>A DORMIU NO PASTO.',
+ pede:'QUE LETRAS COMPLETAM A PALAVRA?',
  opts:[
-  {t:'DUAS LETRAS QUE FAZEM UM SOM SÓ.', ok:1},
-  {t:'DUAS LETRAS QUE FAZEM DOIS SONS.', no:'Em CHUVA não se ouve C e depois H: CH é um som só.'},
-  {t:'UMA LETRA SÓ.', no:'São duas letras escritas: C e H, N e H, L e H.'},
-  {t:'LETRAS QUE NÃO TÊM SOM.', no:'Elas têm som: CH de CHUVA, NH de NINHO, LH de FOLHA.'}
+  {t:'LH', ok:1},
+  {t:'NH', no:'OVENHA não existe: o certo é OVELHA.'},
+  {t:'CH', no:'OVECHA não existe: o certo é OVELHA.'}
  ],
- dica:'Fale CHUVA. O CH faz quantos sons?',
- porque:'CH, NH e LH são duplas de letras com um som só: CHUVA, GALINHA, FOLHA.',
- proximo:'Duas letras, um som: CH, NH, LH.'},
+ dica:'Leia a palavra inteira e lembre como ela se escreve.',
+ visual:'<p class="vx">A OVE<span class="mk">LH</span>A DORMIU NO PASTO.</p>',
+ porque:'Escreve-se OVELHA, com LH.',
+ proximo:'Com LH: OVELHA, FOLHA, ABELHA, COELHO.'},
 
 {id:'SDG8', eixo:'dig', tipo:'qual está escrita certo',
  pede:'QUAL PALAVRA ESTÁ ESCRITA CERTO?',
  opts:[
-  {t:'GALINHA', ok:1},
-  {t:'ABENHA', no:'ABENHA não existe: o certo é ABELHA, com LH.'},
-  {t:'CANHORRO', no:'CANHORRO não existe: o certo é CACHORRO, com CH.'},
-  {t:'FOCHA', no:'FOCHA não existe: o certo é FOLHA, com LH.'}
+  {t:'COENHO', no:'O certo é COELHO, com LH.'},
+  {t:'COELIO', no:'O certo é COELHO, com LH.'},
+  {t:'COELHO', ok:1},
+  {t:'COELO', no:'O certo é COELHO: faltou o H.'}
  ],
- dica:'Leia cada palavra em voz alta. Só uma existe.',
- porque:'GALINHA tem NH. As certas das outras são ABELHA, CACHORRO e FOLHA.',
- proximo:'Teste a palavra em voz alta: a dupla errada vira palavra que não existe.'}
+ dica:'Leia as quatro com calma. Só uma está escrita certo.',
+ porque:'Escreve-se COELHO, com LH.',
+ proximo:'Com LH: COELHO, FOLHA, ABELHA, OVELHA.'}
 );
 
 /* =================== BLOCO A · PLURAL =================== */
@@ -596,16 +604,18 @@ plu('SPL5', [['NARIZ','NARIZES'],['TREM','TRENS'],['OVO','OVOS'],['LEÃO','LEÕE
  proximo:'Plural com artigo: mude as DUAS palavras.'},
 
 {id:'SPL7', eixo:'plural', tipo:'escreva o plural',
- pede:'QUAL PALAVRA ESTÁ NO PLURAL?',
+ enun:'COMPLETE A FRASE COM O PLURAL DE BOTÃO:', quadro:'A CAMISA TEM CINCO <span class="lb lbw"></span>.',
+ pede:'QUAL PALAVRA COMPLETA A FRASE?',
  opts:[
-  {t:'NARIZ', no:'NARIZ é um só: está no singular.'},
-  {t:'FLOR', no:'FLOR é uma só: está no singular.'},
-  {t:'ANZOL', no:'ANZOL é um só: está no singular.'},
-  {t:'NARIZES', ok:1}
+  {t:'BOTÃOS', no:'BOTÃO termina em ÃO, que vira ÕES: BOTÕES.'},
+  {t:'BOTÕS', no:'Faltou o E: BOTÕES.'},
+  {t:'BOTÕES', ok:1},
+  {t:'BOTÕIS', no:'O certo é BOTÕES, com ES no fim.'}
  ],
- dica:'Plural é mais de um.',
- porque:'NARIZES é o plural de NARIZ: mais de um. As outras estão no singular.',
- proximo:'Plural quase sempre termina em S.'},
+ dica:'São cinco. Olhe como BOTÃO termina.',
+ visual:'<div class="pcs"><span class="pc">BOTÃO</span><span class="arw">&rarr;</span><span class="pc hit">BOTÕES</span></div>',
+ porque:'BOTÃO → BOTÕES: ÃO vira ÕES.',
+ proximo:'Uma palavra de cada vez: olhe o final dela e aplique a regra.'},
 
 {id:'SPL8', eixo:'plural', tipo:'escreva o plural',
  pede:'QUAL É O PLURAL DE "A NUVEM"?',
