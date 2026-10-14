@@ -295,6 +295,7 @@ function App(){
     var faltam=Math.max(0,totalBanco-jaVistas), rodadas=Math.floor(totalBanco/RODADA);
     return h('div',null,
       h('h1',{className:'tt'},'Practice Test — English'),
+      h('p',{style:{margin:'6px 0 10px',padding:'8px 12px',borderRadius:'12px',border:'2px dashed #d19a00',background:'#fff3c4',color:'#5a3b00',fontWeight:900,fontSize:'14px',textAlign:'center'}},'Em construção — conteúdo ainda não validado'),
       h('p',{className:'sub'},'Fairy tales, real or make-believe, circle stories, cause and effect, and poems. Tap the flag to see Portuguese.',h('span',{className:'tr'},'Contos de fadas, real ou faz de conta, histórias circulares, causa e efeito e poemas. Toque na bandeira para ver em português.')),
       h('div',{className:'grade duas'},
         h('button',{className:'linha',onClick:function(){ comeca(AQUECER); }},
