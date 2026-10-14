@@ -225,7 +225,7 @@ function Questao(props){
        abrir/fechar não pode custar remontagem. */
     feito && h('div',{className:'fb '+(acertou?'certo':'errado'), ref:fim},
       acertou && h('p',{className:'fbok'},T('certo','Isso mesmo. Foi este o truque:')),
-      h('p',{className:'truq'},item.truque),
+      item.truqueHtml ? h('p',Object.assign({className:'truq'},html(item.truqueHtml))) : h('p',{className:'truq'},item.truque),
       !acertou && h('p',{className:'sua'},
         /* A etiqueta repete o nome da alternativa em caixa alta — mas em
            37% do banco a própria frase do `no` já começa por ele ("MINHAS
@@ -242,7 +242,8 @@ function Questao(props){
       /* a fileira de botões fica DEPOIS do texto, nunca entre duas frases
          dele (regra do Paulo sobre controle no meio do conteúdo) */
       h('div',{className:'fbrow'},
-        h('button',{className:'mini'+(verMais?' on':''), onClick:function(){ setVerMais(!verMais); }},
+        /* sem nada a mais para mostrar (ING3), o botão não aparece: botão que repete o que já está na tela tira a credibilidade */
+        (item.porque||item.visual||item.proximo) && h('button',{className:'mini'+(verMais?' on':''), onClick:function(){ setVerMais(!verMais); }},
           verMais ? T('fechar','Fechar') : T('verMais','Ver como se faz')),
         (!global.temVoz || global.temVoz()) && h('button',{className:'mini ouvir', onClick:function(){
           /* lê o que está na tela, não o que está escondido */

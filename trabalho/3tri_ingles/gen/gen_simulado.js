@@ -20,12 +20,13 @@ const ITENS = I.ITENS.map(it => {
       : '<p class="pest">' + esc(it.texto).replace(/\n/g, '<br>') + '</p>' + (it.texto_pt ? '<div class="tr">' + esc(it.texto_pt).replace(/\n/g, '<br>') + '</div>' : '');
   }
   q.pede = esc(it.p) + tr(it.p_pt);
-  q.opts = it.o.map((o, i) => i === it.c ? { t: esc(o) + tr(it.o_pt[i]), ok: true } : { t: esc(o) + tr(it.o_pt[i]), no: esc(it.ex) + tr(it.ex_pt) });
+  q.opts = it.o.map((o, i) => i === it.c ? { t: esc(o) + tr(it.o_pt[i]), ok: true } : { t: esc(o) + tr(it.o_pt[i]), no: 'The answer is: <b>' + esc(it.o[it.c]) + '</b>' + tr('A resposta é: ' + (it.o_pt[it.c] || it.o[it.c])) });
   q.dica = it.dica_en || it.dica;
   q.dicaHtml = esc(it.dica_en || it.dica) + (it.dica_en ? tr(it.dica) : '');
   q.truque = it.ex;
-  q.porque = esc(it.ex) + tr(it.ex_pt);
-  q.visual = ''; q.proximo = 'Read the question again and look for the key word.';
+  q.truqueHtml = esc(it.ex) + tr(it.ex_pt);
+  q.porque = '';
+  q.visual = ''; q.proximo = '';
   return q;
 });
 const out = '/* ING3_simulado_data.js — GERADO por trabalho/3tri_ingles/gen/gen_simulado.js a partir de ING3_banco.js. Não editar à mão. */\nwindow.ING3S=' + JSON.stringify({ FAMILIAS, ITENS }) + ';\n';
