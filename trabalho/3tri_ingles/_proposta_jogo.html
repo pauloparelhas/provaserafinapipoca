@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Proposta do jogo de Inglês</title>
+<style>
+:root{--bg:#f7f5ef;--card:#fff;--ink:#1f2433;--soft:#5b6275;--line:#e3dfd3;--a:#7c3aed;--b:#0e7490;--c:#b45309;--d:#be185d;--ok:#15803d;--chip:#efeafd}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14131c;--card:#1d1c29;--ink:#ecebf5;--soft:#a9a8bd;--line:#2e2d3d;--chip:#2a2440}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Segoe UI",system-ui,sans-serif}
+main{max-width:1060px;margin:0 auto;padding:28px 16px 80px}
+h1{font-size:30px;margin:0 0 4px}
+h2{font-size:22px;margin:38px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:17px;margin:0 0 6px}
+p{margin:6px 0}
+.sub{color:var(--soft);margin-bottom:18px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.card small{color:var(--soft)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--chip);color:var(--a);margin:0 4px 4px 0}
+.t1{color:#7c3aed}.t2{color:#0e7490}.t3{color:#b45309}.t4{color:#be185d}.t5{color:#15803d}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;font-size:15px}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:var(--chip);font-size:13px;text-transform:uppercase;letter-spacing:.03em}
+.lvl{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:start}
+.lvl svg{width:150px;height:96px;border-radius:10px;display:block}
+@media (max-width:640px){.lvl{grid-template-columns:1fr}.lvl svg{width:100%;height:120px}}
+.dec{counter-reset:d}
+.dec li{margin:8px 0}
+.pill{font-weight:700}
+.chars svg{width:100%;height:150px;display:block;margin-bottom:6px}
+.note{border-left:0;background:var(--chip);border-radius:12px;padding:12px 14px}
+ul{margin:6px 0 6px 20px;padding:0}
+</style>
+</head>
+<body>
+<main>
+<h1>Jogo de Inglês (3º tri): proposta para você validar</h1>
+<p class="sub">Documento interno (não publicado). Baseado no material da prova: contos de fadas e seus elementos, real ou faz de conta, circle story, causa e efeito, poesia e poema. Responda pelos números da seção final; o que não for comentado, eu sigo como está aqui.</p>
+
+<h2>1. A ideia em uma frase</h2>
+<div class="card">
+<p><b>"The Lost Endings" (Os Finais Perdidos).</b> O Conde Rabisco, um mago trapalhão de tinta, apagou os finais das histórias do Reino dos Livros: nenhuma chega mais ao <i>"happily ever after"</i>. A criança entra no livro, atravessa os reinos das histórias com um amigo dragãozinho e devolve cada página perdida respondendo às perguntas dos moradores. Cada reino é um assunto da prova.</p>
+<p>O próprio jogo é uma <b>circle story</b>: começa na biblioteca da escola com um biscoito na mesa e termina no mesmo lugar, com o mesmo biscoito. É o tópico T3 vivido na pele, e a última pergunta do jogo pede exatamente isso: "Por que esta é uma circle story?".</p>
+</div>
+
+<h2>2. Por que a história casa com a matéria</h2>
+<div class="grid">
+<div class="card"><h3 class="t1">Conto de fadas</h3><p>O jogo inteiro É um conto de fadas: começa com "Once upon a time", tem royalty, special helper (o dragãozinho), magical objects, número três (três páginas por reino) e termina com "happily ever after" e uma moral.</p></div>
+<div class="card"><h3 class="t2">Real ou faz de conta</h3><p>A biblioteca é o mundo real; dentro do livro, tudo é make-believe. A passagem de um para o outro é o primeiro ensinamento.</p></div>
+<div class="card"><h3 class="t4">Causa e efeito</h3><p>A trama é uma cadeia de "If… then…": <i>if</i> o Conde apaga os finais, <i>then</i> as histórias param; <i>if</i> você devolve a página, <i>then</i> o reino volta a ter cor.</p></div>
+<div class="card"><h3 class="t5">Poesia</h3><p>Dois reinos são feitos de poemas: estrofes viram plataformas e as rimas viram bolhas e nuvens.</p></div>
+</div>
+
+<h2>3. Personagens</h2>
+<p>O urso deixa de ser o único herói. A criança escolhe um dos três, e todos usam a customização que já existe (uniforme, chapéu, óculos, cachecol).</p>
+<div class="grid chars">
+<div class="card">
+<svg viewBox="0 0 200 150" aria-label="Lia"><rect width="200" height="150" rx="12" fill="#ede9fe"/><circle cx="100" cy="50" r="24" fill="#f2c9a0"/><path d="M76 46q24-34 48 0" fill="#7c2d12"/><rect x="80" y="74" width="40" height="44" rx="10" fill="#94a3b8"/><path d="M120 80l28-26" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/><rect x="84" y="118" width="12" height="20" rx="5" fill="#334155"/><rect x="104" y="118" width="12" height="20" rx="5" fill="#334155"/><circle cx="92" cy="50" r="3" fill="#111"/><circle cx="108" cy="50" r="3" fill="#111"/></svg>
+<h3>Lia, the brave knight</h3><small>A cavaleira. Poder próprio: escudo, que segura um golpe por fase.</small></div>
+<div class="card">
+<svg viewBox="0 0 200 150" aria-label="Theo"><rect width="200" height="150" rx="12" fill="#cffafe"/><path d="M70 40l30-34 30 34z" fill="#1d4ed8"/><circle cx="100" cy="54" r="22" fill="#8d5a3b"/><rect x="78" y="76" width="44" height="46" rx="10" fill="#2563eb"/><path d="M124 90l26-14" stroke="#92400e" stroke-width="5" stroke-linecap="round"/><circle cx="152" cy="74" r="6" fill="#fde047"/><circle cx="92" cy="54" r="3" fill="#111"/><circle cx="108" cy="54" r="3" fill="#111"/><rect x="84" y="122" width="12" height="16" rx="5" fill="#1e293b"/><rect x="104" y="122" width="12" height="16" rx="5" fill="#1e293b"/></svg>
+<h3>Theo, the wizard apprentice</h3><small>O aprendiz de mago. Poder próprio: a varinha (magical object) acende plataformas escondidas.</small></div>
+<div class="card">
+<svg viewBox="0 0 200 150" aria-label="Bia"><rect width="200" height="150" rx="12" fill="#fce7f3"/><circle cx="100" cy="46" r="21" fill="#f2c9a0"/><circle cx="100" cy="24" r="10" fill="#111"/><rect x="82" y="68" width="36" height="40" rx="12" fill="#db2777"/><path d="M82 76l-26-22M118 76l26-22" stroke="#f2c9a0" stroke-width="7" stroke-linecap="round"/><path d="M90 108l-14 30M110 108l14 30" stroke="#f2c9a0" stroke-width="8" stroke-linecap="round"/><circle cx="93" cy="46" r="3" fill="#111"/><circle cx="107" cy="46" r="3" fill="#111"/></svg>
+<h3>Bia, the gymnast</h3><small>A ginasta. Poder próprio: estrelinha, que faz um pulo duplo em giro. Ela leva a criança que faz ginástica para dentro do jogo.</small></div>
+<div class="card">
+<svg viewBox="0 0 200 150" aria-label="Pip"><rect width="200" height="150" rx="12" fill="#dcfce7"/><ellipse cx="100" cy="92" rx="38" ry="28" fill="#22c55e"/><circle cx="128" cy="62" r="22" fill="#22c55e"/><path d="M78 74l-24-22 30 8z" fill="#86efac"/><circle cx="134" cy="56" r="4" fill="#111"/><path d="M144 70q6 4 0 8" stroke="#14532d" stroke-width="3" fill="none"/><path d="M62 96q-22 8-26-6" stroke="#22c55e" stroke-width="10" stroke-linecap="round" fill="none"/></svg>
+<h3>Pip, the special helper</h3><small>O dragãozinho amigo (o "Yoshi" da história). A criança monta nele em algumas fases: ele dá o pulo de planar e come as manchas de tinta. Ele é o "special helper" do conto, e a prova pergunta exatamente isso.</small></div>
+<div class="card">
+<svg viewBox="0 0 200 150" aria-label="Conde Rabisco"><rect width="200" height="150" rx="12" fill="#e5e7eb"/><path d="M60 140q40-120 80 0z" fill="#312e81"/><circle cx="100" cy="56" r="24" fill="#c4b5fd"/><path d="M76 40q24-30 48 0l-6-26-12 14-6-18-6 18-12-14z" fill="#1e1b4b"/><circle cx="92" cy="56" r="4" fill="#111"/><circle cx="108" cy="56" r="4" fill="#111"/><path d="M90 68q10 8 20 0" stroke="#111" stroke-width="3" fill="none"/><path d="M140 96l22-30" stroke="#111" stroke-width="5" stroke-linecap="round"/><circle cx="164" cy="62" r="6" fill="#111"/></svg>
+<h3>Conde Rabisco (o "vilão")</h3><small>Trapalhão, nada assustador: ele borra as coisas com a pena de tinta e foge rindo. No fim vem a surpresa (seção 6).</small></div>
+</div>
+
+<h2>4. O mapa: um reino por assunto</h2>
+<p>São 7 reinos e o castelo final, com o mesmo peso que o material dá a cada assunto. Cada reino traz uma <b>mecânica diferente</b>, para não virar sempre o mesmo pulo e corrida, e um <b>morador que faz as perguntas</b>.</p>
+
+<div class="card lvl"><svg viewBox="0 0 150 96"><rect width="150" height="96" fill="#fde68a"/><rect x="10" y="40" width="30" height="40" fill="#b45309"/><path d="M6 42l19-18 19 18z" fill="#7c2d12"/><rect x="100" y="30" width="36" height="50" fill="#a8a29e"/><path d="M100 30v-8h6v8h6v-8h6v8h6v-8h6v8" fill="#a8a29e"/><rect y="80" width="150" height="16" fill="#65a30d"/></svg>
+<div><h3>1. Once Upon a Time Village <span class="tag t1">T1 personagens e cenários</span></h3>
+<p><b>Mecânica:</b> plataforma clássica, a mais fácil, que ensina os controles. <b>Quem pergunta:</b> o arauto da vila, que desenrola um pergaminho ("Hear ye! Who is royalty?"). <b>Como se responde:</b> a criança toca um dos três sinos da praça, cada um com uma resposta. <b>Recompensa:</b> a página "Once upon a time" volta e a vila ganha cor. Aqui entram as categorias characters, settings e story events.</p></div></div>
+
+<div class="card lvl"><svg viewBox="0 0 150 96"><rect width="150" height="96" fill="#14532d"/><circle cx="30" cy="40" r="22" fill="#166534"/><circle cx="110" cy="34" r="26" fill="#15803d"/><rect x="26" y="50" width="8" height="34" fill="#78350f"/><circle cx="76" cy="30" r="5" fill="#fde047"/><circle cx="90" cy="46" r="3" fill="#fde047"/><rect y="84" width="150" height="12" fill="#3f6212"/></svg>
+<div><h3>2. Enchanted Forest <span class="tag t1">T1 magia, special helper, números 3 e 7, bom × mau</span></h3>
+<p><b>Mecânica:</b> a criança conhece o Pip e monta nele (pulo planado, come tinta). <b>Quem pergunta:</b> a fada madrinha. <b>Como se responde:</b> o Pip voa até a lanterna com a resposta certa. Tem três portais e sete cogumelos de propósito: os números especiais aparecem no cenário e na pergunta.</p></div></div>
+
+<div class="card lvl"><svg viewBox="0 0 150 96"><rect width="150" height="96" fill="#93c5fd"/><path d="M0 96L60 40h30l60 56z" fill="#475569"/><path d="M75 44v52" stroke="#fde047" stroke-width="3" stroke-dasharray="6 6"/><rect x="34" y="22" width="34" height="14" rx="3" fill="#0e7490"/><rect x="82" y="22" width="40" height="14" rx="3" fill="#be185d"/><rect x="64" y="70" width="22" height="14" rx="4" fill="#dc2626"/></svg>
+<div><h3>3. Real or Make-believe Rally <span class="tag t2">T2 real × make-believe</span></h3>
+<p><b>Mecânica:</b> corrida no estilo Mario Kart, mas simples: o carrinho anda sozinho e a criança só troca de faixa. <b>Quem pergunta:</b> o locutor da corrida. Aparece uma figura ("a talking dog", "the sun", "Cinderella", "a tree") e a criança passa pelo portal <b>REAL</b> ou pelo <b>MAKE-BELIEVE</b>. Acertar dá turbo; errar faz o carro rodar, e o locutor explica.</p></div></div>
+
+<div class="card lvl"><svg viewBox="0 0 150 96"><rect width="150" height="96" fill="#0c4a6e"/><circle cx="30" cy="30" r="10" fill="none" stroke="#bae6fd" stroke-width="2"/><circle cx="70" cy="50" r="12" fill="none" stroke="#bae6fd" stroke-width="2"/><circle cx="116" cy="28" r="9" fill="none" stroke="#bae6fd" stroke-width="2"/><path d="M0 86q20-14 40 0t40 0 40 0 30 0v10H0z" fill="#f59e0b"/><ellipse cx="96" cy="66" rx="16" ry="10" fill="#c026d3"/></svg>
+<div><h3>4. Rhyme Reef <span class="tag t5">T5 rima e imagery</span></h3>
+<p><b>Mecânica:</b> fase submarina com <b>roupa de mergulho de verdade</b>: o personagem nada em qualquer direção e fica sem ar se demorar longe das bolhas. <b>Quem pergunta:</b> um polvo poeta que recita um versinho com a última palavra faltando ("I saw a cat / wearing a …"). <b>Como se responde:</b> nadar até a bolha com a rima (hat). Imagery aparece como "feche os olhos e imagine": o polvo descreve e a criança escolhe a cena certa.</p></div></div>
+
+<div class="card lvl"><svg viewBox="0 0 150 96"><rect width="150" height="96" fill="#bfdbfe"/><ellipse cx="34" cy="60" rx="26" ry="10" fill="#fff"/><ellipse cx="110" cy="40" rx="30" ry="11" fill="#fff"/><rect x="92" y="20" width="36" height="6" fill="#6366f1"/><rect x="92" y="30" width="30" height="4" fill="#94a3b8"/><path d="M60 70l14-10 4 12z" fill="#7c3aed"/></svg>
+<div><h3>5. Stanza Skies <span class="tag t5">T5 title, lines, stanza, author; poetry × poem</span></h3>
+<p><b>Mecânica:</b> fase de <b>voo com capa de verdade</b>: o personagem voa livre o tempo todo, desviando das gotas de tinta. Os versos de um poema flutuam como nuvens. <b>Quem pergunta:</b> o bardo das nuvens. <b>Como se responde:</b> voar até a parte do poema que ele pede (o título, o autor, a 2ª estrofe) ou até a nuvem com o número de lines e stanzas. Aqui se fixa a diferença: poem = o papel; poetry = a arte.</p></div></div>
+
+<div class="card lvl"><svg viewBox="0 0 150 96"><rect width="150" height="96" fill="#fdf2f8"/><rect y="70" width="150" height="26" fill="#2563eb"/><circle cx="50" cy="44" r="7" fill="#f2c9a0"/><path d="M50 52l-10 18M50 52l10 18M50 52l-14-12M50 52l14-12" stroke="#db2777" stroke-width="4" stroke-linecap="round"/><path d="M100 70l0-30" stroke="#f2c9a0" stroke-width="4"/><circle cx="100" cy="74" r="7" fill="#f2c9a0"/><path d="M90 40h20" stroke="#db2777" stroke-width="5"/></svg>
+<div><h3>6. Rhythm Gym <span class="tag t5">T5 rhythm</span></h3>
+<p><b>Mecânica:</b> ginásio de ginástica artística. A criança aperta no tempo da batida e a personagem faz bananeira, estrelinha e rondada no tapete. <b>Quem pergunta:</b> a treinadora, entre uma série e outra. Rhythm (a batida) se aprende fazendo; depois vem a pergunta que diferencia rhyme de rhythm.</p></div></div>
+
+<div class="card lvl"><svg viewBox="0 0 150 96"><rect width="150" height="96" fill="#166534"/><rect x="0" y="0" width="150" height="22" fill="#334155"/><rect x="58" y="34" width="34" height="22" fill="none" stroke="#fff" stroke-width="3"/><path d="M75 34v62" stroke="#fff" stroke-width="2" opacity=".6"/><circle cx="75" cy="78" r="6" fill="#fff"/><circle cx="20" cy="12" r="3" fill="#fde047"/><circle cx="40" cy="12" r="3" fill="#f87171"/><circle cx="110" cy="12" r="3" fill="#fde047"/></svg>
+<div><h3>7. Cause &amp; Effect Stadium <span class="tag t4">T4 cause and effect</span></h3>
+<p><b>Mecânica:</b> estádio de futebol. A criança dribla, chuta e bate pênaltis. <b>Quem pergunta:</b> o juiz, que mostra no telão o "If…" (a causa). <b>Como se responde:</b> chutar no canto do gol onde está o "Then…" (o efeito) certo. Os exemplos do pôster aparecem como figurinhas do álbum: Ash, Cinderela, o cachorro e o donut, a criança que lê. Gol vale torcida e taça.</p></div></div>
+
+<div class="card lvl"><svg viewBox="0 0 150 96"><rect width="150" height="96" fill="#fef3c7"/><circle cx="75" cy="48" r="34" fill="none" stroke="#b45309" stroke-width="5" stroke-dasharray="10 6"/><circle cx="75" cy="14" r="9" fill="#d97706"/><circle cx="72" cy="12" r="1.6" fill="#78350f"/><circle cx="78" cy="16" r="1.6" fill="#78350f"/><circle cx="109" cy="48" r="6" fill="#fff" stroke="#94a3b8"/><rect x="36" y="44" width="10" height="10" fill="#a78bfa"/></svg>
+<div><h3>8. The Cookie Circle <span class="tag t3">T3 circle story</span></h3>
+<p><b>Mecânica:</b> a fase é <b>um círculo de verdade</b>: o mundo é uma roda que gira, e quem anda sempre para a frente volta ao começo. <b>Quem pergunta:</b> o ratinho de <i>If You Give a Mouse a Cookie</i>. Ele pede o biscoito, depois o leite, o canudo, o guardanapo… e a criança leva cada objeto na ordem certa até fechar a roda e voltar ao biscoito. A última pergunta: "Why is this a circle story?".</p></div></div>
+
+<div class="card lvl"><svg viewBox="0 0 150 96"><rect width="150" height="96" fill="#312e81"/><rect x="40" y="30" width="70" height="66" fill="#4c1d95"/><path d="M40 30v-12h10v12h10v-12h10v12h10v-12h10v12h10v-12h10v12" fill="#4c1d95"/><rect x="66" y="60" width="18" height="36" rx="9" fill="#1e1b4b"/><circle cx="120" cy="20" r="8" fill="#fef3c7"/><path d="M20 70q10-20 20 0" stroke="#111" stroke-width="5" fill="none"/></svg>
+<div><h3>Final: Inkwell Castle <span class="tag">chefão: tudo junto</span></h3>
+<p>O castelo do Conde Rabisco. Ele usa a pena para "reescrever" o chão, as plataformas e os inimigos. Cada pergunta respondida apaga uma parte do borrão.</p></div></div>
+
+<h2>5. Como a pergunta deixa de ser outro universo</h2>
+<div class="grid">
+<div class="card"><h3>Quem pergunta é alguém do mundo</h3><p>Some a caixa "?" que abria uma tela escura de prova. Em cada reino, um morador para a criança e pergunta em balão de fala, com a voz em inglês (e o português atrás da bandeira, como no site).</p></div>
+<div class="card"><h3>Responder é uma ação do jogo</h3><p>Tocar o sino, nadar até a bolha, passar pelo portal, chutar no canto do gol, levar o objeto ao ratinho. As opções são objetos do cenário, não botões de quiz. Em telas pequenas, o mesmo balão mostra botões grandes como reserva.</p></div>
+<div class="card"><h3>Errou: o morador explica</h3><p>O próprio personagem explica em uma ou duas frases curtas, no lugar da janela de teoria. A criança tenta de novo, sem perder a fase.</p></div>
+<div class="card"><h3>Acertou: o mundo muda</h3><p>Volta uma página do livro: cor no reino, ponte que aparece, porta que abre. As três páginas de cada reino montam o "happily ever after" daquele reino, e o livro, visível no menu, vai se completando.</p></div>
+</div>
+
+<h2>6. Chefão: surpresa no fim</h2>
+<div class="card">
+<p>A luta tem três etapas, uma por grande assunto. Em cada uma o Conde muda de forma usando a pena:</p>
+<ul>
+<li><b>Ele vira um dragão de tinta</b> (magical creature) e pergunta de conto de fadas e de real ou make-believe.</li>
+<li><b>Ele embaralha um poema</b>: a criança devolve título, estrofes e rima.</li>
+<li><b>Ele quebra uma corrente de "If… then…"</b>: a criança religa causa e efeito.</li>
+</ul>
+<p><b>A surpresa:</b> derrotado, o Conde chora. Ele apagou os finais porque nunca conseguiu terminar a própria história. A criança o ajuda a escrever o final; ele vira amigo e a moral aparece (o conto tem "a lesson or moral"). Todos voltam à biblioteca, onde o biscoito continua na mesa: começou e terminou no mesmo lugar, uma circle story. Nada assustador, e com motivo para jogar de novo.</p>
+</div>
+
+<h2>7. O que muda na jogabilidade (o que deu errado no WiseBear)</h2>
+<table>
+<tr><th>Problema</th><th>O que eu faço agora</th></tr>
+<tr><td>Morrer e reaparecer num checkpoint lá em cima, por onde a criança ainda não passou</td><td>Reaparece SEMPRE no último checkpoint que ela tocou de verdade, nunca num que está à frente ou fora do caminho. Um teste automático mata o personagem em cada trecho de cada fase e confere onde ele reaparece.</td></tr>
+<tr><td>Espaço onde o urso não cabe, com recompensa lá dentro</td><td>Um verificador simula o personagem no maior tamanho e em todos os poderes, passando por cada corredor e chegando a cada recompensa, pergunta e porta. Fase só vai ao ar com 100%. O mesmo teste roda no mapa antigo para provar que ele pega o defeito.</td></tr>
+<tr><td>Poder que quase não muda nada (o patins)</td><td>Cada poder muda o jeito de jogar: a capa voa de verdade (Stanza Skies), a roupa de mergulho nada em qualquer direção (Rhyme Reef), o Pip plana e come tinta, o carrinho corre sozinho.</td></tr>
+<tr><td>Sempre a mesma dinâmica de pulo e corrida</td><td>Oito dinâmicas: plataforma, montaria, corrida, nado, voo, ritmo, futebol e a fase-roda. Cada uma é curta (3 a 5 minutos).</td></tr>
+<tr><td>Começo de fase difícil (vários obstáculos e inimigo no chão)</td><td>Os primeiros 20 segundos de cada fase não têm perigo, só ensinam. A dificuldade sobe aos poucos e o primeiro inimigo só aparece depois do primeiro checkpoint.</td></tr>
+<tr><td>Pergunta desconectada do jogo</td><td>Seção 5.</td></tr>
+</table>
+
+<h2>8. 2D ou 3D</h2>
+<div class="card">
+<p><b>Minha recomendação: 2D, mas não chapado.</b> O 3D livre estilo Mario 64 custaria muito mais, roda mal em tablet comum, é difícil de controlar no toque para uma criança de 8 anos e enjoa. O próprio Mario Wonder voltou ao 2D, como você disse.</p>
+<p>A variedade vem de três coisas:</p>
+<ul>
+<li><b>Dinâmica diferente em cada reino</b> (seção 4).</li>
+<li><b>Profundidade 2,5D:</b> cenário em várias camadas e, em dois reinos, passagens para uma camada do fundo, como as portas de Wonder e de Paper Mario.</li>
+<li><b>Visão de cima</b> na corrida e no estádio.</li>
+</ul>
+<p>Se um dia valer o 3D, a corrida é a candidata natural: dá para fazer em 3D simples sem mexer no resto.</p>
+</div>
+
+<h2>9. Trilha sonora (domínio público)</h2>
+<p>Peças clássicas cujos compositores morreram há mais de 70 anos, em arranjo próprio ou em gravações com licença livre (Musopen/CC0). Antes de usar cada gravação, eu confiro a licença.</p>
+<table>
+<tr><th>Lugar</th><th>Música</th><th>Clima</th></tr>
+<tr><td>Biblioteca e mapa</td><td>Mussorgsky, <i>Quadros de uma Exposição: Promenade</i></td><td>passeio, começo de aventura</td></tr>
+<tr><td>Vila</td><td>Grieg, <i>Peer Gynt: Morning Mood</i></td><td>manhã, calma</td></tr>
+<tr><td>Floresta</td><td>Tchaikovsky, <i>Dança da Fada Açucarada</i></td><td>mágico</td></tr>
+<tr><td>Corrida</td><td>Rossini, <i>Guilherme Tell</i> (final)</td><td>velocidade</td></tr>
+<tr><td>Recife</td><td>Saint-Saëns, <i>Carnaval dos Animais: Aquário</i></td><td>submarino</td></tr>
+<tr><td>Céus</td><td>Debussy, <i>Clair de Lune</i> (trecho)</td><td>voo, nuvens</td></tr>
+<tr><td>Ginásio</td><td>Offenbach, <i>Can-can</i></td><td>batida marcada</td></tr>
+<tr><td>Estádio</td><td>Elgar, <i>Pompa e Circunstância nº 1</i> (trecho)</td><td>torcida</td></tr>
+<tr><td>Roda do biscoito</td><td>Mozart, <i>Ah vous dirai-je maman</i> (variações)</td><td>circular, repete e varia</td></tr>
+<tr><td>Chegada ao castelo</td><td>Grieg, <i>Na Gruta do Rei da Montanha</i></td><td>tensão que acelera, sem medo</td></tr>
+<tr><td>Chefão</td><td>Dukas, <i>O Aprendiz de Feiticeiro</i></td><td>mago trapalhão</td></tr>
+<tr><td>Final feliz</td><td>Beethoven, <i>Ode à Alegria</i></td><td>"happily ever after"</td></tr>
+</table>
+
+<h2>10. Canadá, Brasília e o que fica para depois</h2>
+<div class="card">
+<p>Desta vez o cenário vem do conteúdo (o reino dos livros), o que reforça o que cai na prova. Do Canadá ficam alguns acenos, como neve e pinheiros na floresta e o Pip com cachecol vermelho. Se você quiser uma fase de esqui, ela cabe como reino extra de causa e efeito ("If you push the snowball… then it gets bigger"), mas eu a deixaria fora: o conteúdo já está coberto e o jogo ficaria mais longo. Brasília combina com uma matéria futura de Geografia ou História, que tenha monumentos para cobrar.</p>
+</div>
+
+<h2>11. O que vai junto no site</h2>
+<div class="grid">
+<div class="card"><h3>Vídeo</h3><p>Narração em inglês, com legenda e versão em português, cobrindo os 5 tópicos.</p></div>
+<div class="card"><h3>Teoria</h3><p>Uma lição por tópico, com os exemplos do próprio material e treininho no fim.</p></div>
+<div class="card"><h3>Simulado</h3><p>No jeito da prova: classificar (characters / settings / events; real / make-believe), ligar causa e efeito, contar lines e stanzas, achar a rima, completar "Once upon a time…" e "happily ever after".</p></div>
+<div class="card"><h3>Jogo</h3><p>O desta proposta, depois da sua validação.</p></div>
+</div>
+<p class="note"><b>Ordem de trabalho:</b> começo pelo roteiro, pela teoria, pelo simulado e pelo vídeo, que não dependem das escolhas do jogo. O jogo começa assim que você responder abaixo. Preciso da <b>data da prova de Inglês</b> para dimensionar o jogo: com pouco tempo, faço primeiro 4 reinos e o castelo e completo o resto depois.</p>
+
+<h2>12. Para você decidir (responda pelos números)</h2>
+<ol class="dec">
+<li><span class="pill">História:</span> "The Lost Endings", com o Conde Rabisco e o final circular na biblioteca. Aprova ou quer outro enredo?</li>
+<li><span class="pill">Heróis:</span> Lia (cavaleira), Theo (mago) e Bia (ginasta), mais o Pip de montaria. O urso volta como 4ª opção?</li>
+<li><span class="pill">Reinos:</span> os 7 mais o castelo, ou uma versão menor (5 mais o castelo, juntando Céus com Ginásio e Floresta com Vila)?</li>
+<li><span class="pill">Esqui:</span> fica fora (minha sugestão) ou entra como reino extra?</li>
+<li><span class="pill">Corrida e estádio:</span> visão de cima (mais simples e legível) ou de lado?</li>
+<li><span class="pill">Perguntas no mundo:</span> responder com ação do jogo (sino, bolha, gol), com botões grandes de reserva. Aprova?</li>
+<li><span class="pill">Trilha:</span> a lista da seção 9 serve, ou você tem preferências?</li>
+<li><span class="pill">Data da prova de Inglês:</span> ?</li>
+</ol>
+</main>
+</body>
+</html>
