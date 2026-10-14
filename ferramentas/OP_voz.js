@@ -19,7 +19,8 @@
 (function(global){
 'use strict';
 
-var PREFERIDA = 'thalita';
+/* materia em ingles: SERA_CFG.voz='thalitamultilingual' (a Thalita que le ingles) */
+var PREFERIDA = (global.SERA_CFG && global.SERA_CFG.voz) || 'thalita';
 var vozBoa = null;
 var jaDecidiu = false;
 
@@ -52,7 +53,7 @@ global.say = function(txt){
     speechSynthesis.cancel();
     var u = new SpeechSynthesisUtterance(String(txt));
     u.voice = vozBoa;
-    u.lang = vozBoa.lang || 'pt-BR';
+    u.lang = (global.SERA_CFG && global.SERA_CFG.lang) || vozBoa.lang || 'pt-BR';
     u.rate = (global.SERA_CFG && global.SERA_CFG.rate) || 0.86;
     speechSynthesis.speak(u);
   }catch(e){}

@@ -11,7 +11,7 @@ cd "$SRC"
 git fetch -q origin em-construcao
 git worktree add -q --detach "$W" origin/em-construcao
 cd "$SRC/ferramentas"
-FILES=$(git ls-files "LP3_*.html" "LP3_*.js")
+FILES=$(git ls-files "LP3_*.html" "LP3_*.js" "ING3_*.html" "ING3_*.js")
 [ "$1" = "semjogo" ] && FILES=$(echo "$FILES" | grep -v '^LP3_jornada')
 DEPS="OP_estilo.css OP_questao.js OP_voz.js sera_theme.js serafina-core.css serafina-core.js
 assets/react-dom.production.min.js assets/react.production.min.js

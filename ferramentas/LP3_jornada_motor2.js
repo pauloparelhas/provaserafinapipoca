@@ -57,7 +57,8 @@ function atualizaNivel(dt){
   var L=J.nivel, M=J.mundo, u=J.urso;
   if(u.cheerT>0){ u.cheerT-=dt; u.estado='cheer'; u.anim+=dt; }
   M.caixas.forEach(function(c){ if(c.bump>0) c.bump=Math.max(0,c.bump-dt*60); if(c.cooldown>0) c.cooldown-=dt; if(c.flutua){ c.y=c.y0===undefined?(c.y0=c.y):c.y0+Math.sin(J.t*1.6+c.fase0)*10; } });
-  M.checkpoints.forEach(function(cp){ if(!cp.acesa&&u.x>cp.x){ cp.acesa=true; J.respawn={x:cp.x,y:cp.y,mundo:M.mundo}; SOM.fx('checkpoint'); G.toast('Checkpoint!',1500); G.brilho(cp.x,cp.y-80,12); } });
+  /* só acende o checkpoint por onde o urso passou DE VERDADE: mesma altura (±4 tiles), não só a mesma coluna (antes, em fase vertical, acendia o de cima) */
+  M.checkpoints.forEach(function(cp){ if(!cp.acesa&&u.x>cp.x&&u.x<cp.x+160&&Math.abs(u.y-cp.y)<180){ cp.acesa=true; J.respawn={x:cp.x,y:cp.y,mundo:M.mundo}; SOM.fx('checkpoint'); G.toast('Checkpoint!',1500); G.brilho(cp.x,cp.y-80,12); } });
   inimigos(dt); G.perigos(dt);
   if(J.in.down && J.downSolto && J.estado==='nivel'){ var p=canoSob(); if(p){ J.downSolto=false; entraCano(p); return; } var pd=null; M.caixas.forEach(function(c){ if(c.porta&&Math.abs(c.x+c.w/2-u.x)<40&&Math.abs(c.y+c.h-u.y)<10&&u.noChao) pd=c; }); if(pd){ J.downSolto=false; G.bateCaixa(pd); return; } }
   if(!J.in.down) J.downSolto=true;

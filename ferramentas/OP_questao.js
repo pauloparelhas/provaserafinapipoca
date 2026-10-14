@@ -46,7 +46,8 @@ function embaralha(a){
   return a;
 }
 function textoPuro(s){
-  return String(s||'').replace(/<[^>]+>/g,' ').replace(/&[a-z]+;/gi,' ').replace(/\s+/g,' ').trim();
+  /* a traducao atras da bandeira (<span class="tr">, materias em ingles) nao e lida em voz alta */
+  return String(s||'').replace(/<span class="tr">[\s\S]*?<\/span>/g,' ').replace(/<div class="tr">[\s\S]*?<\/div>/g,' ').replace(/<[^>]+>/g,' ').replace(/&[a-z]+;/gi,' ').replace(/\s+/g,' ').trim();
 }
 function html(s){ return {dangerouslySetInnerHTML:{__html:s}}; }
 /* O nome da alternativa marcada, para servir de ETIQUETA em cima do
@@ -58,6 +59,9 @@ function etiquetaSua(o){
   if(!nome || !frase) return nome;
   return frase.toUpperCase().indexOf(nome.toUpperCase())===0 ? '' : nome;
 }
+/* rotulos da casca: em materia de prova em ingles a pagina define
+   window.OPQ_TXT = {pergunta:'Question', de:'of', ...} e a tela inteira fica em ingles */
+function T(k,d){ var x=global.OPQ_TXT; return (x && x[k]) || d; }
 function falar(t){ if(global.say) global.say(textoPuro(t)); }
 
 /* --------- o texto longo, linha a linha ---------
@@ -95,11 +99,11 @@ function Texto(props){
     !acende && h('div',{className:'guiarow'},
       h('button',{className:'guiabtn'+(guia?' on':''), onClick:function(){
         var v=!guia; setGuia(v); salvaGuia(v); setAtual(0);
-      }}, guia ? 'Guia de leitura ligado' : 'Ligar guia de leitura'),
+      }}, guia ? T('guiaOn','Guia de leitura ligado') : T('guiaOff','Ligar guia de leitura')),
       guia && h('span',{className:'guiadica'},
         atual<linhas.length-1
-          ? 'leia a linha amarela; para continuar, toque na linha de baixo'
-          : 'esta é a última linha')
+          ? T('guiaDica','leia a linha amarela; para continuar, toque na linha de baixo')
+          : T('guiaFim','esta é a última linha'))
     )
   );
 }
@@ -145,7 +149,7 @@ function Questao(props){
   return h('div',{className:'q'},
     /* cabeçalho enxuto: número, família, e de onde a questão saiu */
     h('div',{className:'qhead'},
-      props.numero && h('span',{className:'qnum'},'Pergunta '+props.numero+(props.total?' de '+props.total:'')),
+      props.numero && h('span',{className:'qnum'},T('pergunta','Pergunta')+' '+props.numero+(props.total?' '+T('de','de')+' '+props.total:'')),
       props.etiqueta && h('span',{className:'qetq'},props.etiqueta),
       props.mostrarOrigem!==false && h('span',{className:'qorig'},item.origem)
     ),
@@ -153,9 +157,9 @@ function Questao(props){
        todo o resto some. A criança lê o que está sendo pedido, e só então
        manda aparecer o texto. */
     soPergunta && h('div',{className:'sopergunta'},
-      h('span',{className:'sotit'},'O que a pergunta está pedindo'),
+      h('span',{className:'sotit'},T('soTit','O que a pergunta está pedindo')),
       h('p',Object.assign({className:'pede'},html(item.pede))),
-      h('button',{className:'mini', onClick:function(){ setSoPergunta(false); }},'Agora mostrar o texto')
+      h('button',{className:'mini', onClick:function(){ setSoPergunta(false); }},T('mostrarTexto','Agora mostrar o texto'))
     ),
     !soPergunta && item.enun && h('p',Object.assign({className:'enun'},html(item.enun))),
     !soPergunta && item.nota && h('p',{className:'nota'},item.nota),
@@ -172,16 +176,16 @@ function Questao(props){
     h('div',{className:'linhabtn'},
       /* o botao de ouvir so existe se houver a voz certa (ver OP_voz.js):
          botao que nao faz nada e pior do que botao nenhum */
-      (!global.temVoz || global.temVoz()) && h('button',{className:'mini ouvir', onClick:leTudo},'Ouvir'),
+      (!global.temVoz || global.temVoz()) && h('button',{className:'mini ouvir', onClick:leTudo},T('ouvir','Ouvir')),
       !feito && temApoio && !soPergunta && h('button',{className:'mini', onClick:function(){
         setSoPergunta(true); falar(item.pede);
         try{ window.scrollTo({top:0,behavior:'smooth'}); }catch(e){}
-      }},'Só a pergunta'),
+      }},T('soPergunta','Só a pergunta')),
       !feito && h('button',{className:'mini'+(dica?' on':''), onClick:function(){
         var v=!dica; setDica(v); if(v) falar(item.dica);
-      }}, dica?'Esconder a dica':'Dica')
+      }}, dica?T('escDica','Esconder a dica'):T('dica','Dica'))
     ),
-    dica && !feito && h('div',{className:'dicabox'},h('b',null,'Dica: '),item.dica),
+    dica && !feito && h('div',{className:'dicabox'},h('b',null,T('dica','Dica')+': '),item.dicaHtml?h('span',html(item.dicaHtml)):item.dica),
 
     /* Alternativas. Quando elas SAO desenhos (as placas de 2025, as
        fileiras de icones de 2023), o texto vira a legenda e a imagem vem
@@ -220,7 +224,7 @@ function Questao(props){
        (só escondidos), porque é assim que o gate os confere e porque
        abrir/fechar não pode custar remontagem. */
     feito && h('div',{className:'fb '+(acertou?'certo':'errado'), ref:fim},
-      acertou && h('p',{className:'fbok'},'Isso mesmo. Foi este o truque:'),
+      acertou && h('p',{className:'fbok'},T('certo','Isso mesmo. Foi este o truque:')),
       h('p',{className:'truq'},item.truque),
       !acertou && h('p',{className:'sua'},
         /* A etiqueta repete o nome da alternativa em caixa alta — mas em
@@ -233,23 +237,23 @@ function Questao(props){
       h('div',{className:'fbmais', hidden:!verMais},
         !acertou && h('div',Object.assign({className:'desenho'},html(item.visual))),
         h('p',Object.assign({className:'porq'},html(item.porque))),
-        !acertou && h('p',{className:'prox'},h('i',null,'Na próxima'),item.proximo)
+        !acertou && h('p',{className:'prox'},h('i',null,T('naProxima','Na próxima')),item.proximo)
       ),
       /* a fileira de botões fica DEPOIS do texto, nunca entre duas frases
          dele (regra do Paulo sobre controle no meio do conteúdo) */
       h('div',{className:'fbrow'},
         h('button',{className:'mini'+(verMais?' on':''), onClick:function(){ setVerMais(!verMais); }},
-          verMais ? 'Fechar' : 'Ver como se faz'),
+          verMais ? T('fechar','Fechar') : T('verMais','Ver como se faz')),
         (!global.temVoz || global.temVoz()) && h('button',{className:'mini ouvir', onClick:function(){
           /* lê o que está na tela, não o que está escondido */
           falar(acertou ? item.truque
                         : [item.truque, alt[pick].no].join('. '));
-        }},'Ouvir')
+        }},T('ouvir','Ouvir'))
       )
     ),
 
     feito && props.aoAvancar && h('button',{className:'avancar', onClick:props.aoAvancar},
-      props.rotuloAvancar||'Próxima')
+      props.rotuloAvancar||T('proxima','Próxima'))
   );
 }
 

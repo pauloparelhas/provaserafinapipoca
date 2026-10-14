@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Simulado — Inglês</title>
+<link rel="stylesheet" href="serafina-core.css?v=20261011">
+<link rel="stylesheet" href="OP_estilo.css?v=20261011">
+<style>
+/* só o que é exclusivo desta tela */
+.placar{font-size:calc(2.6rem*var(--fs));font-weight:900;line-height:1;color:var(--accent);text-align:center;margin:6px 0 2px}
+.placarsub{text-align:center;font-size:calc(.9rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.45;margin-bottom:12px}
+.fambar{display:flex;justify-content:space-between;gap:9px;font-size:calc(.86rem*var(--fs));font-weight:800;
+  padding:7px 11px;border-radius:10px;background:var(--surf);border:1px solid var(--line);margin-bottom:6px}
+.fambar.zero{opacity:.55}
+.progresso{font-size:calc(.74rem*var(--fs));font-weight:800;color:var(--dim);text-align:center;margin-top:9px;line-height:1.4}
+.bancobar{height:8px;border-radius:5px;background:var(--line);margin:14px 0 0;overflow:hidden}
+.bancofill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s}
+body.papel .bancobar{background:#e4e4e4}
+body.papel .progresso{color:#555}
+/* a folha é da prova de PORTUGUÊS da escola, não da Olimpíada: o
+   cabeçalho que o OP_estilo.css desenha é trocado aqui, só por CSS */
+body.papel .card::before{content:"ENGLISH LANGUAGE ARTS \2013  YEAR 2"}
+/* na folha branca, os botões de escolha e o placar precisam de tinta escura
+   (no modo papel o --ink continua claro, herdado do tema da tela) */
+body.papel .card h1.tt{color:#111}
+body.papel .card p.sub{color:#444}
+body.papel .linha{background:#f6f6f6;border:1.5px solid #bbb;color:#111}
+body.papel .linha .n{background:#e2e2e2;color:#111}
+body.papel .linha small{color:#555}
+body.papel .avancar.calmo{background:#f6f6f6;border-color:#bbb;color:#111}
+body.papel .fambar{background:#f6f6f6;border-color:#ddd;color:#111}
+body.papel .fambar span{filter:brightness(.55) saturate(1.3)}
+body.papel .placarsub{color:#444}
+body.papel .secao{color:#1b6b34}
+body.papel .secao::after{background:#ddd}
+.sairov{position:fixed;inset:0;z-index:150;display:none;align-items:center;justify-content:center;padding:20px;
+  background:rgba(5,7,18,.72);backdrop-filter:blur(3px)}
+.sairov.show{display:flex}
+/* cada linha do texto é um botão (ler em voz alta / guia de leitura):
+   alvo de toque de 44px, como o resto da tela */
+.leitura .lin{min-height:44px;display:flex;align-items:center}
+.sairbox{width:100%;max-width:360px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 16px;text-align:center;color:var(--ink)}
+.sairbox h2{font-size:1.15rem;font-weight:900}
+.sairbox p{font-size:.92rem;font-weight:800;color:var(--soft);line-height:1.4;margin:6px 0 2px}
+/* ---- v2 (12/10): listas de lacunas "COMPLETE AS PALAVRAS COM..." ---- */
+.quadro .lacs{display:flex;flex-wrap:wrap;justify-content:center;gap:9px 20px;text-align:left}
+.quadro .lac{display:inline-flex;align-items:baseline;font-size:calc(1.05rem*var(--fs));letter-spacing:.6px;white-space:nowrap}
+.quadro .lac i{font-style:normal;font-size:.72em;font-weight:900;color:var(--soft);margin-right:6px}
+.lb{display:inline-block;min-width:1.7em;height:1em;border-bottom:2.5px solid var(--accent);margin:0 2px;vertical-align:baseline}
+.lb.lbw{min-width:4.6em}
+body.papel .lb{border-bottom-color:#111}
+body.papel .quadro .lac i{color:#555}
+/* no truque desenhado, a letra destacada fica colada na palavra (DI NH EIRO -> DINHEIRO) */
+.pc .mk{padding:0 1px;border-radius:3px}
+/* ---- v2: PARTE ESCRITA (LP3_escrita.js) ---- */
+.esclab{display:block;font-size:calc(.8rem*var(--fs));font-weight:800;color:var(--soft);margin:12px 0 5px}
+.escarea{display:block;width:100%;resize:vertical;font-family:inherit;font-size:calc(1.05rem*var(--fs));font-weight:800;
+  line-height:2.1;padding:0 10px;border:2px solid var(--line);border-radius:10px;color:var(--ink);text-transform:uppercase;
+  background-color:var(--surf);background-attachment:local;
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(2.1em - 1px),var(--line) calc(2.1em - 1px),var(--line) 2.1em)}
+.escarea:focus{outline:none;border-color:var(--accent2)}
+.fb.modelo{border-color:var(--accent)}
+.fb .modtxt{font-size:calc(1rem*var(--fs));font-weight:900;line-height:1.5;letter-spacing:.3px;padding:10px 12px;
+  border-radius:9px;background:var(--card);color:var(--ink)}
+.fb .confti{font-size:calc(.68rem*var(--fs));font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--soft);margin:12px 0 4px}
+.fb .confere{margin:0 0 0 20px;font-size:calc(.9rem*var(--fs));font-weight:700;line-height:1.45}
+.fb .confere li{margin:2px 0}
+.autoav{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.av{min-height:48px;border-radius:11px;border:2px solid var(--line);background:var(--card);color:var(--ink);
+  font-family:inherit;font-weight:900;font-size:calc(.95rem*var(--fs));cursor:pointer;padding:0 6px}
+.av:active{transform:translateY(1px)}
+.av-ok.on{background:#dff3e3;border-color:#2e7d32;color:#123}
+.av-quase.on{background:#fff3c4;border-color:#d19a00;color:#5a3b00}
+.av-errei.on{background:#fdeaea;border-color:#c62828;color:#311}
+.av.apaga{opacity:.45;cursor:default}
+.fb .avmsg{font-size:calc(.88rem*var(--fs));font-weight:800;line-height:1.4;margin-top:9px}
+.escbar.n-ok b{color:var(--ok)} .escbar.n-quase b{color:var(--accent2)} .escbar.n-errei b{color:var(--no)}
+body.papel .esclab{color:#555}
+body.papel .escarea{background-color:#fff;border-color:#bbb;color:#111;
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(2.1em - 1px),#c9d6e8 calc(2.1em - 1px),#c9d6e8 2.1em)}
+body.papel .escbar.n-ok b{color:#1b5e20} body.papel .escbar.n-quase b{color:#8a5a00} body.papel .escbar.n-errei b{color:#b3261e}
+/* ---- ING3: traducao atras da bandeira e poema ---- */
+.tr{display:none}
+body.show-tr .tr{display:block;font-size:.82em;font-weight:700;color:var(--soft);margin-top:3px;text-transform:none;letter-spacing:0}
+body.show-tr .opt .tr{display:block}
+#trbtn svg{display:block;margin:auto;border-radius:3px}
+body.show-tr #trbtn{outline:2px solid var(--accent);outline-offset:2px}
+.quadro .ptit{display:block;font-size:1.08em;margin-bottom:6px}
+.quadro .pest{margin:0 0 10px;line-height:1.55}
+.quadro .paut{display:block;text-align:right;font-size:.92em}
+body.papel .tr{color:#555}
+/* 8 botões no topo: no celular estreito eles encolhem para caber sem rolar de lado */
+@media (max-width:430px){.topbar{gap:4px}.topbar .iconbtn{width:38px;min-width:38px;height:44px;padding:0;font-size:15px}#trbtn svg{width:22px;height:16px}}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Practice Test</span>
+    <button class="iconbtn" id="trbtn" title="Tradução em português" onclick="toggleTr()"><svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rect width="28" height="20" rx="3" fill="#009c3b"/><path d="M14 3 25 10 14 17 3 10z" fill="#ffdf00"/><circle cx="14" cy="10" r="4.2" fill="#002776"/></svg></button>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Som" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" id="papelbtn" title="Como no papel da prova" onclick="togglePapel()">&#128196;</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="bar"><span id="bar"></span></div>
+  <div class="stage"><div class="card" id="raiz"></div></div>
+</div>
+<div class="sairov" id="sairov" role="dialog" aria-modal="true" aria-labelledby="sairtit">
+  <div class="sairbox">
+    <h2 id="sairtit">Leave the test?</h2>
+    <p>You will go back to the home page.</p>
+    <button class="avancar" id="sairSim">Yes, leave</button>
+    <button class="avancar calmo" id="sairNao">No, keep going</button>
+  </div>
+</div>
+<div class="qnav" id="qnav" style="display:none">
+  <button class="qnav-btn" id="navPrev">&#8249; Back</button>
+  <button class="qnav-btn forte" id="navNext">Next &#8250;</button>
+</div>
+
+<script>window.SERA_CFG={trKey:'ing3_tr',lang:'en-US',voz:'thalitamultilingual',rate:.8,home:'../index.html',somKey:'ing3_som',stars:90};</script>
+<script src="serafina-core.js?v=20261011"></script>
+<script src="OP_voz.js?v=20261011"></script>
+<script>
+/* MODO PAPEL — a folha da prova de verdade, com a interacao por cima.
+   Ligado por padrao nesta tela: o objetivo e a crianca reconhecer no dia
+   o que esta vendo. O botao da folha alterna para o visual do site, para
+   quem preferir ler no escuro. A escolha fica salva. */
+(function(){
+  var K='ing3_papel';
+  function ligado(){ try{ return localStorage.getItem(K)!=='0'; }catch(e){ return true; } }
+  function pinta(){
+    var on=ligado();
+    document.body.classList.toggle('papel',on);
+    var b=document.getElementById('papelbtn');
+    if(b){
+      b.innerHTML = on ? '&#128196;' : '&#128421;&#65039;';
+      b.title = on ? 'Assim e a folha da prova. Tocar para ver na tela.' : 'Ver como na folha da prova';
+    }
+    var m=document.querySelector('meta[name=theme-color]');
+    if(m) m.setAttribute('content', on ? '#8a8f98' : '#0d0b1e');
+  }
+  window.togglePapel=function(){
+    try{ localStorage.setItem(K, ligado()?'0':'1'); }catch(e){}
+    pinta();
+  };
+  pinta();
+  document.addEventListener('DOMContentLoaded',pinta);
+})();
+</script>
+<script src="assets/react.production.min.js"></script>
+<script src="assets/react-dom.production.min.js"></script>
+<script src="ING3_simulado_data.js"></script>
+<script>window.OPQ_TXT={pergunta:'Question',de:'of',soTit:'What is the question asking?',mostrarTexto:'Show the text',ouvir:'Listen',soPergunta:'Only the question',escDica:'Hide the hint',dica:'Hint',certo:'Correct! Here is why:',naProxima:'Next time',fechar:'Close',verMais:'Show me how',proxima:'Next',guiaOn:'Reading guide on',guiaOff:'Reading guide',guiaDica:'read the yellow line; tap the line below to go on',guiaFim:'this is the last line'};</script>
+<script src="OP_questao.js"></script>
+<script>
+'use strict';
+/* ============================================================
+   SIMULADO DE INGLÊS (ELA, 3º tri) — mesmo motor do simulado de
+   Português (OP_questao.js intacto). Dados: ING3_simulado_data.js, GERADO
+   do banco único ING3_banco.js (trabalho/3tri_ingles/gen/gen_simulado.js).
+   Inglês na frente, português atrás da bandeira (body.show-tr).
+   Rodada de 12 com as cotas por tema (fairy 3, real 2, circle 2, cause 2,
+   poem 3); errou, entra uma questão-irmã do mesmo tema, fora da nota.
+   ============================================================ */
+var h=React.createElement, OP=window.ING3S, OPQ=window.OPQ, LP3E={zeraVistos:function(){},sorteia:function(){return [];}};
+var FAM={}; OP.FAMILIAS.forEach(function(f){ FAM[f.k]=f; });
+var VISTOS='ing3_vistos';
+var BANCO=OP.ITENS;
+var RODADA=OP.FAMILIAS.reduce(function(s,f){ return s+(f.cota||0); },0);   /* 12 */
+var AQUECER=5, ESC_PROVA=4, ESC_SO=8;
+
+function vistos(){ try{ return JSON.parse(localStorage.getItem(VISTOS)||'[]'); }catch(e){ return []; } }
+function marcaVisto(ids){
+  var v=vistos(); ids.forEach(function(i){ if(v.indexOf(i)<0) v.push(i); });
+  try{ localStorage.setItem(VISTOS,JSON.stringify(v)); }catch(e){}
+}
+function zeraVistos(){ try{ localStorage.removeItem(VISTOS); }catch(e){} }
+
+/* monta uma rodada de n questões com as cotas do roteiro, dando prioridade
+   ao que ela ainda não viu */
+function montaRodada(n){
+  var jaVi=vistos(), escolhidas=[];
+  function pegaDe(k, quantas){
+    var pool=BANCO.filter(function(i){ return i.eixo===k && escolhidas.indexOf(i)<0; });
+    var novas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)<0; }));
+    var velhas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)>=0; }));
+    escolhidas=escolhidas.concat(novas.concat(velhas).slice(0,quantas));
+  }
+  function menosVistas(filtro){
+    return OPQ.embaralha(OP.FAMILIAS.filter(filtro)).map(function(f){
+      return {k:f.k, novas:BANCO.filter(function(i){ return i.eixo===f.k && jaVi.indexOf(i.id)<0; }).length};
+    }).sort(function(a,b){ return b.novas-a.novas; });
+  }
+  if(n>=RODADA){
+    OP.FAMILIAS.forEach(function(f){ if(f.cota) pegaDe(f.k,f.cota); });
+  } else {
+    /* aquecer: o mesmo peso em miniatura — 3 do bloco A, 2 dos blocos B/C */
+    var a=Math.round(n*0.6);
+    menosVistas(function(f){ return f.bloco==='A'; }).slice(0,a).forEach(function(f){ pegaDe(f.k,1); });
+    menosVistas(function(f){ return f.bloco!=='A'; }).slice(0,n-a).forEach(function(f){ pegaDe(f.k,1); });
+  }
+  return OPQ.embaralha(escolhidas.slice(0,n));
+}
+/* A questão-irmã também respeita o histórico (senão volta sempre às
+   mesmas poucas, rodada após rodada). */
+function irma(eixo, usados){
+  var jaVi=vistos();
+  var pool=BANCO.filter(function(i){ return i.eixo===eixo && usados.indexOf(i.id)<0; });
+  var novas=pool.filter(function(i){ return jaVi.indexOf(i.id)<0; });
+  return OPQ.embaralha(novas.length?novas:pool)[0]||null;
+}
+function copia(o){ var n={}; for(var k in o) n[k]=o[k]; return n; }
+var NOTA_ROT={ok:'Acertei', quase:'Quase', errei:'Errei'};
+
+function App(){
+  var t=React.useState('inicio'), tela=t[0], setTela=t[1];
+  var m=React.useState('prova'), modo=m[0], setModo=m[1];
+  var f=React.useState([]), fila=f[0], setFila=f[1];
+  var c=React.useState(0), cur=c[0], setCur=c[1];
+  var r=React.useState({}), resp=r[0], setResp=r[1];     /* id -> acertou */
+  var e=React.useState({}), extra=e[0], setExtra=e[1];   /* ids que são irmãs */
+  var es=React.useState([]), esc=es[0], setEsc=es[1];    /* tarefas escritas */
+  var ec=React.useState(0), ecur=ec[0], setEcur=ec[1];
+  var en=React.useState({}), enotas=en[0], setEnotas=en[1]; /* id -> ok|quase|errei */
+
+  var ids=BANCO.map(function(i){ return i.id; });
+  var totalBanco=BANCO.length, jaVistas=vistos().filter(function(id){ return ids.indexOf(id)>=0; }).length;
+
+  function comeca(n){
+    var q=montaRodada(n);
+    setModo(n>=RODADA?'prova':'aquecer');
+    setFila(q); setCur(0); setResp({}); setExtra({});
+    setEsc([]); /* parte escrita descontinuada em 11/10 (Paulo): nao ha como escrever no aparelho */ setEcur(0); setEnotas({});
+    setTela('q');
+    marcaVisto(q.map(function(i){ return i.id; }));
+  }
+  function comecaEscrita(){
+    setModo('escrita'); setFila([]); setCur(0); setResp({}); setExtra({});
+    setEsc(LP3E.sorteia(ESC_SO)); setEcur(0); setEnotas({}); setTela('esc');
+  }
+  function responde(acertou,item){
+    var novo=copia(resp); novo[item.id]=acertou; setResp(novo);
+    if(!acertou){
+      var ir=irma(item.eixo, fila.map(function(i){ return i.id; }));
+      if(ir){
+        var nf=fila.slice(); nf.splice(cur+1,0,ir); setFila(nf);
+        var ne=copia(extra); ne[ir.id]=1; setExtra(ne);
+        marcaVisto([ir.id]);
+      }
+    }
+  }
+  function avanca(){
+    if(cur<fila.length-1){ setCur(cur+1); return; }
+    if(esc.length){ setEcur(0); setTela('esc'); } else setTela('fim');
+  }
+  function volta(){ if(cur>0) setCur(cur-1); }
+  function avancaEsc(){ if(ecur<esc.length-1) setEcur(ecur+1); else setTela('fim'); }
+  function voltaEsc(){
+    if(ecur>0) setEcur(ecur-1);
+    else if(fila.length){ setCur(fila.length-1); setTela('q'); }
+  }
+  function avalia(nota,tarefa){ var n=copia(enotas); n[tarefa.id]=nota; setEnotas(n); }
+
+  /* barra de progresso e navegação de baixo, que vivem fora do React */
+  React.useEffect(function(){
+    var bar=document.getElementById('bar'), nav=document.getElementById('qnav');
+    var p=document.getElementById('navPrev'), n=document.getElementById('navNext');
+    var total=fila.length+esc.length;
+    if(tela==='q'){
+      nav.style.display='flex';
+      bar.style.width=Math.round(cur/total*100)+'%';
+      p.disabled = cur===0; p.onclick=volta; n.onclick=avanca;
+      n.innerHTML = cur<fila.length-1 ? 'Next &#8250;' : 'See my score';
+    } else if(tela==='esc'){
+      nav.style.display='flex';
+      bar.style.width=Math.round((fila.length+ecur)/total*100)+'%';
+      p.disabled = ecur===0 && !fila.length; p.onclick=voltaEsc; n.onclick=avancaEsc;
+      n.innerHTML = ecur<esc.length-1 ? 'Next &#8250;' : 'See my score';
+    } else {
+      nav.style.display='none'; bar.style.width = tela==='fim'?'100%':'0%';
+    }
+  });
+  /* cada questão nova começa do alto da página */
+  React.useEffect(function(){ try{ window.scrollTo(0,0); }catch(x){} },[tela,cur,ecur]);
+
+  if(tela==='inicio'){
+    var faltam=Math.max(0,totalBanco-jaVistas), rodadas=Math.floor(totalBanco/RODADA);
+    return h('div',null,
+      h('h1',{className:'tt'},'Practice Test — English'),
+      h('p',{className:'sub'},'Fairy tales, real or make-believe, circle stories, cause and effect, and poems. Tap the flag to see Portuguese.',h('span',{className:'tr'},'Contos de fadas, real ou faz de conta, histórias circulares, causa e efeito e poemas. Toque na bandeira para ver em português.')),
+      h('div',{className:'grade duas'},
+        h('button',{className:'linha',onClick:function(){ comeca(AQUECER); }},
+          h('span',{className:'n'},String(AQUECER)),
+          h('span',null,h('b',null,'Warm-up'),h('small',null,'5 questions'))),
+        h('button',{className:'linha',onClick:function(){ comeca(RODADA); }},
+          h('span',{className:'n'},String(RODADA)),
+          h('span',null,h('b',null,'Full test'),h('small',null,RODADA+' questions, like the real test'))),
+      ),
+      h('div',{className:'bancobar'},
+        h('div',{className:'bancofill',style:{width:Math.round(jaVistas/totalBanco*100)+'%'}})),
+      h('p',{className:'progresso'},
+        faltam>0
+          ? totalBanco+' questions: '+rodadas+' full tests with no repeats. You have seen '+jaVistas+'; '+faltam+' to go.'
+          : 'You have seen all '+totalBanco+' questions. Now they come back again.'),
+      jaVistas>0 && h('div',{className:'linhabtn',style:{justifyContent:'center'}},
+        h('button',{className:'mini',onClick:function(){
+          zeraVistos(); LP3E.zeraVistos(); setTela('inicio0'); setTimeout(function(){ setTela('inicio'); },0);
+        }},'Start again from zero'))
+    );
+  }
+  if(tela==='inicio0') return h('div',null);
+
+  if(tela==='q'){
+    var item=fila[cur];
+    var reais=fila.filter(function(i){ return !extra[i.id]; });
+    var num=reais.indexOf(item)>=0 ? reais.indexOf(item)+1 : null;
+    var ultima = cur===fila.length-1;
+    return h(OPQ.Questao,{
+      key:item.id+'-'+cur, item:item,
+      numero:num, total:num?reais.length:null,
+      etiqueta: extra[item.id] ? 'one more like this' : null,
+      aoResponder:responde, aoAvancar:avanca,
+      rotuloAvancar: !ultima ? 'Next' : 'See my score'
+    });
+  }
+
+  if(tela==='esc'){
+    var tar=esc[ecur];
+    return h(LP3E.Tarefa,{
+      key:tar.id+'-'+ecur, tarefa:tar, numero:ecur+1, total:esc.length,
+      aoAvaliar:avalia, aoAvancar:avancaEsc,
+      rotuloAvancar: ecur<esc.length-1 ? 'Próxima tarefa' : 'Ver como fui'
+    });
+  }
+
+  /* ---------------- resultado ---------------- */
+  var reais2=fila.filter(function(i){ return !extra[i.id]; });
+  var acertos=reais2.filter(function(i){ return resp[i.id]; }).length;
+  var extras=fila.filter(function(i){ return extra[i.id]; });
+  var extrasOk=extras.filter(function(i){ return resp[i.id]; }).length;
+  var porFam={};
+  reais2.forEach(function(i){
+    porFam[i.eixo]=porFam[i.eixo]||{ok:0,t:0};
+    porFam[i.eixo].t++; if(resp[i.id]) porFam[i.eixo].ok++;
+  });
+  var escOk=esc.filter(function(x){ return enotas[x.id]==='ok'; }).length;
+  var msg = acertos===reais2.length ? 'All correct! Great job!'
+          : acertos>=reais2.length-2 ? 'Almost all! Look below and practise that part.'
+          : 'Every mistake here is one you will not make on the test.';
+  return h('div',null,
+    reais2.length>0 && h('div',{className:'placar'},acertos+'/'+reais2.length),
+    reais2.length>0 && h('p',{className:'placarsub'},msg),
+    reais2.length===0 && esc.length>0 && h('div',{className:'placar'},escOk+'/'+esc.length),
+    reais2.length===0 && esc.length>0 && h('p',{className:'placarsub'},'Acertei: '+escOk+' · Quase: '+esc.filter(function(x){ return enotas[x.id]==='quase'; }).length+' · Errei: '+esc.filter(function(x){ return enotas[x.id]==='errei'; }).length),
+    extras.length>0 && h('p',{className:'placarsub'},
+      'Extra questions: '+extrasOk+' of '+extras.length+' correct.'),
+    reais2.length>0 && h('div',{className:'secao'},'by topic'),
+    OP.FAMILIAS.filter(function(fm){ return porFam[fm.k]; }).map(function(fm){
+      var v=porFam[fm.k];
+      return h('div',{key:fm.k,className:'fambar'+(v.ok===0?' zero':'')},
+        h('span',{style:{color:fm.cor}},fm.nome), h('b',null,v.ok+' of '+v.t));
+    }),
+    esc.length>0 && h('div',{className:'secao'},'parte escrita'),
+    esc.map(function(x){
+      var nt=enotas[x.id];
+      return h('div',{key:x.id,className:'fambar escbar'+(nt?' n-'+nt:' zero')},
+        h('span',null,x.tipo), h('b',null, nt ? NOTA_ROT[nt] : 'sem nota'));
+    }),
+    h('div',{className:'grade',style:{marginTop:'12px'}},
+      acertos<reais2.length && h('button',{className:'avancar',onClick:function(){
+        var err=reais2.filter(function(i){ return !resp[i.id]; });
+        setModo('refazer'); setFila(err); setCur(0); setResp({}); setExtra({}); setEsc([]); setTela('q');
+      }},'Try my mistakes again'),
+      modo==='escrita'
+        ? h('button',{className:'avancar calmo',onClick:comecaEscrita},'Another test')
+        : h('button',{className:'avancar calmo',onClick:function(){ comeca(RODADA); }},'Another test'),
+      h('button',{className:'avancar calmo',onClick:function(){ setTela('inicio'); }},'Back to start')
+    )
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('raiz')).render(h(App));
+document.getElementById('raiz').setAttribute('data-folha','Simulado de Inglês · 3º trimestre');
+
+/* casinha: confirma dentro da página antes de sair */
+(function(){
+  var ov=document.getElementById('sairov'), irEmbora=window.goHome;
+  window.goHome=function(){ if(window.screenLocked) return; ov.classList.add('show'); };
+  document.getElementById('sairSim').onclick=function(){ ov.classList.remove('show'); irEmbora(); };
+  document.getElementById('sairNao').onclick=function(){ ov.classList.remove('show'); };
+  ov.onclick=function(e){ if(e.target===ov) ov.classList.remove('show'); };
+  document.addEventListener('keydown',function(e){
+    if(ov.classList.contains('show')){ if(e.key==='Escape') ov.classList.remove('show'); return; }
+    var nav=document.getElementById('qnav'); if(nav.style.display==='none') return;
+    if(e.key==='ArrowRight') document.getElementById('navNext').click();
+    else if(e.key==='ArrowLeft'){ var p=document.getElementById('navPrev'); if(!p.disabled) p.click(); }
+  });
+})();
+</script>
+<script>window.SERA_ACCENT={accent:'#f472b6'};</script>
+<script src="sera_theme.js?v=20261011"></script>
+</body>
+</html>
