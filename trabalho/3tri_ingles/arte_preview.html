@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prévia da arte ING3</title>
+<style>
+body{margin:0;background:#1b1830;color:#ece9ff;font:14px/1.4 "Segoe UI",Arial,sans-serif;padding:12px}
+h2{font-size:16px;margin:18px 0 6px}
+canvas{display:block;background:#2a2640;border-radius:8px;margin-bottom:8px;max-width:100%}
+</style></head><body>
+<h2>Heróis — todos os estados (escala 1)</h2><canvas id="h1" data-w="1100" data-h="420"></canvas>
+<h2>Heróis — escala 2</h2><canvas id="h2" data-w="1400" data-h="760"></canvas>
+<h2>Heróis — look.cor alternativo + crawl/swim/fly escala 2</h2><canvas id="h3" data-w="1400" data-h="420"></canvas>
+<h2>Abaixado: crouch e crawl nos 3 tamanhos (.72, 1, 1.25)</h2><canvas id="baixo" data-w="1400" data-h="380"></canvas>
+<canvas id="baixo2" data-w="1400" data-h="300"></canvas>
+<h2>swim (mergulho) e fly (capa) escala 2</h2><canvas id="agua" data-w="1400" data-h="300"></canvas>
+<h2>Pip</h2><canvas id="pip" data-w="1300" data-h="440"></canvas>
+<h2>Moradores</h2><canvas id="mor" data-w="1300" data-h="440"></canvas>
+<h2>Moradores zoom</h2><canvas id="mor2" data-w="1400" data-h="560"></canvas><canvas id="mor3" data-w="1400" data-h="560"></canvas>
+<h2>Conde Rabisco</h2><canvas id="conde" data-w="1300" data-h="300"></canvas>
+<canvas id="conde2" data-w="1400" data-h="420"></canvas>
+<h2>Placas e páginas</h2><canvas id="placas" data-w="1300" data-h="300"></canvas>
+<h2>Cena vila</h2><canvas id="c_vila" data-w="960" data-h="540" data-cena="vila"></canvas>
+<h2>Cena vila (câmera deslocada)</h2><canvas id="c_vila2" data-w="960" data-h="540" data-cena="vila" data-cam="1300"></canvas>
+<h2>Cena bosque</h2><canvas id="c_bosque" data-w="960" data-h="540" data-cena="bosque"></canvas>
+<h2>Cena bosque (câmera deslocada)</h2><canvas id="c_bosque2" data-w="960" data-h="540" data-cena="bosque" data-cam="1700"></canvas>
+<h2>Cena biblioteca</h2><canvas id="c_biblioteca" data-w="960" data-h="540" data-cena="biblioteca"></canvas>
+<h2>Mapa-livro</h2><canvas id="mapa" data-w="960" data-h="540"></canvas>
+<script src="../../ferramentas/LP3_jornada_arte.js"></script>
+<script src="../../ferramentas/LP3_jornada_arte2.js"></script>
+<script src="../../ferramentas/LP3_jornada_arte3.js"></script>
+<script src="../../ferramentas/ING3_jogo_arte.js"></script>
+<script src="../../ferramentas/ING3_jogo_arte2.js"></script>
+<script>
+var A=window.ARTE, Q=new URLSearchParams(location.search), TFIX=Q.has('t')?parseFloat(Q.get('t')):null, DPR=2;
+var EST=['idle','walk','jump','fall','cheer','dizzy','crouch','crawl','swim','fly','ride'], QUEM=['lia','theo','bia'];
+function rotulo(c,x,y,s){ c.fillStyle='rgba(236,233,255,.8)'; c.font='700 12px Segoe UI,Arial'; c.textAlign='center'; c.fillText(s,x,y); }
+function chao(c,w,y){ c.fillStyle='rgba(255,255,255,.08)'; c.fillRect(0,y,w,1); }
+var DES={
+  h1:function(c,t){ QUEM.forEach(function(q,r){ var y=120+r*135; chao(c,1000,y); EST.forEach(function(e,i){ var x=55+i*97; if(e==='ride'){ A.pip(c,x,y,'ride',t,1,.75); A.heroi(c,x+A.pip.SELA_X*.75,y-A.pip.SELA_Y*.75,'ride',t,1,.75,q); } else A.heroi(c,x,y,e,t,1,1,q); if(r===2) rotulo(c,x,y+22,e); }); }); },
+  h2:function(c,t){ var e5=['idle','walk','jump','fall','cheer','dizzy']; QUEM.forEach(function(q,r){ var y=225+r*250; chao(c,1400,y); e5.forEach(function(e,i){ A.heroi(c,110+i*235,y,e,t+i*.13,i%2?-1:1,2,q); }); }); },
+  h3:function(c,t){ var y=330; chao(c,1400,y); A.heroi(c,90,y,'idle',t,1,2,'lia',{cor:'#16a34a'}); A.heroi(c,250,y,'walk',t,1,2,'theo',{cor:'#9333ea'}); A.heroi(c,410,y,'cheer',t,1,2,'bia',{cor:'#0ea5e9'});
+    A.heroi(c,620,y,'crawl',t,1,2,'lia'); A.heroi(c,880,y-60,'swim',t,1,2,'theo'); A.heroi(c,1160,y-90,'fly',t,1,2,'bia'); A.heroi(c,1300,y,'ride',t,-1,1.2,'theo'); },
+  baixo:function(c,t){ var TS=[.72,1,1.25]; QUEM.forEach(function(q,r){ var y=110+r*125; chao(c,1400,y); TS.forEach(function(e,i){ A.heroi(c,60+i*120,y,'idle',t,1,e,q); A.heroi(c,430+i*120,y,'crouch',t,1,e,q); A.heroi(c,820+i*190,y,'crawl',t+i*.2,1,e,q); }); }); },
+  baixo2:function(c,t){ var y=250; chao(c,1400,y); QUEM.forEach(function(q,i){ A.heroi(c,80+i*150,y,'crouch',t,1,2.4,q); A.heroi(c,560+i*290,y,'crawl',t,1,2.4,q); }); },
+  agua:function(c,t){ QUEM.forEach(function(q,i){ A.heroi(c,110+i*230,190,'swim',t+i*.3,1,2,q); A.heroi(c,820+i*200,170,'fly',t+i*.3,1,1.6,q); }); },
+  pip:function(c,t){ var y=170; chao(c,1300,y); ['idle','walk','fly','ride','egg'].forEach(function(e,i){ A.pip(c,90+i*130,y,e,t,1,1); rotulo(c,90+i*130,y+22,e); });
+    var y2=410; chao(c,1300,y2); A.pip(c,140,y2,'idle',t,1,2); A.pip(c,420,y2-30,'fly',t,-1,2); A.pip(c,720,y2,'ride',t,1,2); A.heroi(c,720+A.pip.SELA_X*2,y2-A.pip.SELA_Y*2,'ride',t,1,2,'lia'); A.pip(c,960,y2,'egg',t,1,2);
+    A.pip(c,1180,y2,'ride',t,-1,1.5); A.heroi(c,1180-A.pip.SELA_X*1.5,y2-A.pip.SELA_Y*1.5,'ride',t,-1,1.5,'bia'); },
+  mor:function(c,t){ if(!A.morador) return; var tipos=['crier','godmother','owl','octopus','bard','coach','referee','mouse','announcer']; var y=190; chao(c,1300,y); tipos.forEach(function(k,i){ var x=75+i*142; A.morador(c,k,x,y,t,i%2?-1:1,false); rotulo(c,x,y+20,k); });
+    y=420; chao(c,1300,y); tipos.forEach(function(k,i){ var x=75+i*142; A.morador(c,k,x,y,t,1,true); }); rotulo(c,650,y+16,'falando=true'); },
+  mor2:function(c,t){ if(!A.morador) return; c.save(); c.scale(2,2); ['crier','godmother','owl','octopus','bard'].forEach(function(k,i){ A.morador(c,k,70+i*140,250,t,1,i%2==1); }); c.restore(); },
+  mor3:function(c,t){ if(!A.morador) return; c.save(); c.scale(2,2); ['coach','referee','mouse','announcer'].forEach(function(k,i){ A.morador(c,k,80+i*170,250,t,1,i%2==1); }); c.restore(); },
+  conde:function(c,t){ if(!A.conde) return; var y=260; chao(c,1300,y); ['idle','laugh','hit','sad','write'].forEach(function(e,i){ A.conde(c,130+i*250,y,e,t); rotulo(c,130+i*250,y+20,e); }); },
+  conde2:function(c,t){ if(!A.conde) return; c.save(); c.scale(2,2); ['idle','laugh','hit'].forEach(function(e,i){ A.conde(c,110+i*230,200,e,t); }); c.restore(); },
+  placas:function(c,t){ ['normal','certa','errada','apagada','bump'].forEach(function(e,i){ var x=130+i*235, y=150; A.placa(c,x,y,200,74,e,t); c.fillStyle='#3b2412'; c.font='900 22px Nunito,Segoe UI,Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(e==='certa'?'a castle':'royalty',x,y+(e==='bump'?-7:0)); rotulo(c,x,y+66,e); });
+    A.paginaHud(c,120,265,3,t); A.paginaVoando(c,330,250,t*2); A.paginaVoando(c,470,250,1.1); },
+  mapa:function(c,t){ if(!A.mapaLivro) return; A.mapaLivro(c,t); (A.MAPA_NOS||[]).forEach(function(n,i){ c.fillStyle='#fde68a'; c.strokeStyle='#7c2d12'; c.lineWidth=3; c.beginPath(); c.arc(n.x,n.y,15,0,7); c.fill(); c.stroke(); c.fillStyle='#7c2d12'; c.font='900 15px Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(i+1,n.x,n.y+1); });
+    c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,180,450,600,74,14); c.fill(); c.fillStyle='#fff'; c.font='800 18px Segoe UI'; c.fillText('cartão de texto (faixa y>440)',480,487); }
+};
+function cena(c,cv,t){ var nome=cv.dataset.cena, cam=+(cv.dataset.cam||0)+(TFIX==null?t*40:0);
+  A.ceu(c,nome,t); A.longe(c,nome,cam*.15,t); A.perto(c,nome,cam*.45,t);
+  c.save(); c.translate(-cam,0);
+  var segs=[{x:cam-100,y:452,w:560,h:100},{x:cam+560,y:452,w:600,h:100}]; segs.forEach(function(s){ A.chao(c,s,nome); });
+  [{x:cam+250,y:330,w:150,h:24},{x:cam+620,y:300,w:180,h:24}].forEach(function(p){ A.plataforma(c,p,nome); });
+  c.restore();
+  A.heroi(c,200,452,'idle',t,1,1,'lia'); A.heroi(c,320,330,'walk',t,1,1,'theo'); A.pip(c,700,452,'idle',t,-1,1);
+  if(nome==='vila'&&A.morador) A.morador(c,'crier',820,452,t,-1,true);
+  if(nome==='bosque'&&A.morador){ A.morador(c,'godmother',840,452,t,-1,true); A.morador(c,'owl',520,452,t,1,false); }
+  if(nome==='biblioteca') A.heroi(c,560,452,'cheer',t,1,1,'bia');
+  for(var i=0;i<12;i++){ var p={x:(i*83+t*20)%960,y:120+(i*53)%300,vida:1,max:1,tipo:A.CENAS[nome].part,r:i%3+2,rot:t+i,cor:'#fbbf24'}; if(p.tipo) A.particula(c,p); }
+}
+var cvs=[].slice.call(document.querySelectorAll('canvas'));
+cvs.forEach(function(cv){ cv.width=cv.dataset.w*DPR; cv.height=cv.dataset.h*DPR; cv.style.width=cv.dataset.w+'px'; });
+var t0=performance.now();
+function frame(){ var t=TFIX==null?(performance.now()-t0)/1000:TFIX;
+  cvs.forEach(function(cv){ var c=cv.getContext('2d'); c.setTransform(DPR,0,0,DPR,0,0); c.clearRect(0,0,cv.width,cv.height);
+    try{ if(cv.dataset.cena){ if(A.CENAS[cv.dataset.cena]) cena(c,cv,t); } else DES[cv.id](c,t); }catch(e){ console.error(cv.id,e); c.fillStyle='#f87171'; c.font='16px Arial'; c.fillText('ERRO: '+e.message,20,30); } });
+  if(TFIX==null) requestAnimationFrame(frame); else document.body.dataset.pronto='1'; }
+frame();
+</script></body></html>

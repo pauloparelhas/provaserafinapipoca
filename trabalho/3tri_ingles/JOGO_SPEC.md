@@ -62,3 +62,10 @@ Arquivos novos `ferramentas/ING3_jogo*`; o LP3 fica intacto. Reaproveitados sem 
 - **E2:** Reef (nado) e Skies (voo).
 - **E3:** Rally, Gym, Stadium, Cookie Circle.
 - **E4:** Castle, final circular, trilha de domínio público, polimento.
+
+## Ponto de parada (14/10, noite) — retomar daqui
+Feito e testado (QA mudo, Playwright): casca EN + bandeira; intro; escolha de herói; mapa; quiz no mundo (placas, bater a cabeça, toque, 1/2/3; 3 perguntas → 1 página; Leave); Village (1) e Forest (2, com Pip); Reef (4, nado) e Skies (5, voo com teto); checkpoint corrigido; instruções mínimas (Paulo). Teste: `scratchpad/t_jogo1.py`, `t_jogo2.py` (bate em todas as placas nos 3 tamanhos), `t_jogo3.py` (nado/voo).
+Em andamento:
+- `ING3_jogo_corrida.js` (Rally, reino 3) ESCRITO, ainda NÃO ligado: falta `<script>` no html, `iniciaFase` desviar para `CORRIDA.inicia(f)` quando `f.modo==='corrida'`, estado 'corrida' no laço/cena/teclado/toque, `UI.modoCorrida(on)` (trocar rótulos ▲▼), `FASES` reino 3 `modo:'corrida'` e PRONTOS[3]; exportar `QUIZ.embaralha`/`QUIZ.marca`.
+- Agente de arte (ING3_jogo_arte.js + trabalho/3tri_ingles/arte_preview.html): heróis, Pip, moradores, conde, cenas vila/bosque/biblioteca/recife/nuvens, mapa-livro, placa (centro em x,y). Regra do Paulo: humano NUNCA de quatro apoios — estados 'crouch' (agachado) e 'crawl' (rastejar de barriga).
+A fazer: Stadium (pênaltis, reino 7), Gym (6) e Cookie Circle (8) como fases de plataforma temáticas, Castle (9, chefão Conde), final circular, trilha domínio público, teoria e vídeo; publicar o jogo como beta (hoje não está linkado; site com aviso "em construção").

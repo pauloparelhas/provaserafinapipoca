@@ -1,0 +1,181 @@
+/* ============================================================
+   ING3_jogo_motor2.js — The Lost Endings, parte 2: bichos de tinta,
+   moradores que perguntam (abrem o quiz no mundo), checkpoints,
+   fim de reino, mapa-livro, a INTRO (biblioteca → livro) e a escolha
+   do herói, transições em íris e o laço principal.
+   Estende window.JOGO (ING3_jogo_motor.js).
+   CHECKPOINT (bug do WiseBear corrigido): só acende quando o herói
+   passa por ele NA MESMA ALTURA; reaparece sempre no último aceso.
+   ============================================================ */
+(function(G){
+'use strict';
+var J=G.J, W=G.W, H=G.H, A=window.ARTE, F=window.FASES, TAM=G.TAM;
+
+/* ---------- bichos (manchas de tinta do Conde) ---------- */
+function inimigos(dt){
+  var u=J.urso, M=J.mundo, R=G.ursoRet();
+  M.inimigos.forEach(function(e){
+    if(e.morto) return;
+    if(e.achatado){ e.tAch-=dt; if(e.tAch<=0) e.morto=true; return; }
+    e.t=(e.t||0)+dt;
+    var px=e.x+e.dir*e.v*dt, apoio=false, parede=false;
+    G.solidos(M).forEach(function(s){ if(px+e.dir*14>s.x && px+e.dir*14<s.x+s.w && e.y>=s.y-2 && e.y<=s.y+6) apoio=true; if(G.colideRet(px-14,e.y-30,28,26,s.x,s.y,s.w,s.h)) parede=true; });
+    M.plats.forEach(function(s){ if(px+e.dir*14>s.x && px+e.dir*14<s.x+s.w && Math.abs(e.y-s.y)<4) apoio=true; });
+    if(!apoio||parede||px<16||px>M.w-16) e.dir=-e.dir; else e.x=px;
+    if(u.invT>0||u.tontoT>0||J.estado!=='nivel') return;
+    if(G.colideRet(R.x+6,R.y+6,R.w-12,R.h-6,e.x-18,e.y-30,36,30)){
+      if(u.vy>50 && u.y<e.y-14){ e.achatado=true; e.tAch=.7; u.vy=-400; u.noChao=false; u.sx=1.3; u.sy=.7; SOM.fx('pisao'); G.pontua(20,e.x,e.y-40); G.emite(10,function(){ return {x:e.x,y:e.y-10,vx:(Math.random()-.5)*240,vy:-100-Math.random()*200,vida:.6,max:.6,tipo:'fogo',cor:'#312e81',r:4,g:1}; }); }
+      else G.machucado();
+    }
+  });
+}
+
+/* ---------- moradores: chegar perto abre a pergunta ---------- */
+function moradores(dt){
+  var u=J.urso, L=J.nivel;
+  L.moradores.forEach(function(m){
+    if(m.falando>0) m.falando-=dt;
+    if(m.feito||J.estado!=='nivel'||!(u.noChao||L.modo)) return;
+    if(m.esperaT>0){ m.esperaT-=dt; return; }
+    if(Math.abs(u.x-m.x)<95 && Math.abs(u.y-m.y)<(L.modo?160:40) && window.QUIZ) QUIZ.inicia(m);
+  });
+}
+
+/* ---------- checkpoints e dicas ---------- */
+function atualizaNivel(dt){
+  var L=J.nivel, M=J.mundo, u=J.urso;
+  if(u.cheerT>0){ u.cheerT-=dt; u.estado='cheer'; u.anim+=dt; }
+  M.checkpoints.forEach(function(cp){ if(!cp.acesa&&u.x>cp.x&&u.x<cp.x+160&&Math.abs(u.y-cp.y)<180){ cp.acesa=true; J.respawn={x:cp.x,y:cp.y,mundo:M.mundo}; SOM.fx('checkpoint'); G.brilho(cp.x,cp.y-80,12); } });
+  inimigos(dt); G.perigos(dt); moradores(dt);
+  if(M.mastro && Math.abs(u.x-M.mastro.x)<30 && Math.abs(u.y-M.mastro.y)<70 && J.estado==='nivel') fimDeFase();
+  if(J.tut) atualizaTutorial(dt);
+  dicas();
+}
+function dicas(){ /* só o indispensável: o ovo do Pip, na primeira vez */
+  var u=J.urso, M=J.mundo, d=null;
+  if(!J.prog.pipVisto) M.ovos.forEach(function(o){ if(!o.chocado && Math.abs(o.x-u.x)<160) d={x:o.x,y:o.y-80,txt:'Touch the egg!',pt:'Encoste no ovo!'}; });
+  J.dica=d;
+}
+function atualizaTutorial(dt){ var Tt=J.tut, L=J.nivel; Tt.t+=dt; var p=L.passos[Tt.i]; if(!p) return; if(p.ate(J)){ Tt.i++; Tt.t=0; SOM.fx('moeda'); if(Tt.i>=L.passos.length) J.tut=null; } }
+
+/* ---------- fim do reino ---------- */
+function fimDeFase(){
+  var f=J.faseAtual, s=J.stats, total=Math.max(1,s.perguntas), razao=s.perguntas?s.acertos/total:0;
+  var pags=J.nivel.moradores.filter(function(m){ return m.feito; }).length;
+  var estrelas= s.perguntas===0?1:(razao>=.9?3:(razao>=.7?2:1));
+  J.fimFase={t:0,estrelas:estrelas}; J.estado='fimFase'; SOM.musica('vitoria'); SOM.fx('vitoria'); J.urso.estado='cheer'; J.urso.anim=0;
+  var ant=J.prog.fases[f.id]||{}; J.prog.fases[f.id]={estrelas:Math.max(ant.estrelas||0,estrelas),pontos:Math.max(ant.pontos||0,J.pontos),acertos:s.acertos,total:s.perguntas,paginas:Math.max(ant.paginas||0,pags),novo:!ant.estrelas};
+  J.prog.pontos=Object.keys(J.prog.fases).reduce(function(a,k){ return a+(J.prog.fases[k].pontos||0); },0);
+  G.salva(); if(window.UI) UI.modoNivel(false);
+  setTimeout(function(){ if(window.UI) UI.fimFase(f,estrelas,s.acertos,s.perguntas,J.pontos,J.moedas,pags,J.nivel.moradores.length); },1500);
+}
+function voltaMapa(){ var f=J.faseAtual, novo=f&&J.prog.fases[f.id]&&J.prog.fases[f.id].novo; if(novo){ J.prog.fases[f.id].novo=false; G.salva(); } var i=F.LISTA.indexOf(f); irMapa(novo&&i<F.LISTA.length-1?i+1:false); }
+function irMapa(animaPara){
+  J.estado='mapa'; J.nivel=null; J.mundo=null; J.tut=null; J.part=[]; J.clima=[]; J.faseAtual=null; J.t=0; J.dica=null; J.quiz=null; J.pip=null;
+  F.posiciona();
+  J.sel=animaPara?animaPara-1:G.proximaFase(); J.mapaAnim= animaPara?{de:animaPara-1,para:animaPara,t:0,dur:2.2}:null;
+  SOM.musica('mapa'); G.hud();
+  if(window.UI){ UI.modoNivel(false); UI.modoMapa(true); UI.hudArena(false); UI.cartaoMapa(J.mapaAnim?null:F.LISTA[J.sel]); }
+}
+function entraFase(idx){
+  var f=F.LISTA[idx];
+  if(!F.PRONTOS[f.id]){ SOM.fx('clique'); G.toast('Coming soon! This kingdom is still being built.',2400,'Em breve! Este reino ainda está sendo construído.'); return; }
+  if(window.UI){ UI.modoMapa(false); UI.cartaoMapa(null); } J.sel=idx; SOM.fx('iris');
+  iris(f.mx,f.my,function(){ G.iniciaFase(f); });
+}
+
+/* ---------- transição em íris ---------- */
+function iris(x,y,meio){ J.trans={t:0,dur:.55,x:x,y:y,fase:'fecha',meio:meio}; }
+function atualizaTrans(dt){ var tr=J.trans; if(!tr) return; tr.t+=dt; if(tr.fase==='fecha'&&tr.t>=tr.dur){ tr.fase='abre'; tr.t=0; if(tr.meio) tr.meio(); var u=J.urso; if(u&&J.estado==='nivel'){ tr.x=u.x-J.cam; tr.y=u.y-40-J.camY; } else { tr.x=W/2; tr.y=H/2; } } else if(tr.fase==='abre'&&tr.t>=tr.dur) J.trans=null; }
+function raioIris(){ var tr=J.trans; if(!tr) return 1e9; var k=Math.min(1,tr.t/tr.dur); return tr.fase==='fecha'? 1100*(1-k)*(1-k) : 1100*k*k; }
+
+/* ---------- partículas e clima ---------- */
+var CORES_FESTA=['#f87171','#fbbf24','#4ade80','#60a5fa','#c084fc','#f472b6'];
+function atualizaParticulas(dt){
+  for(var i=J.part.length-1;i>=0;i--){ var p=J.part[i]; p.vida-=dt; if(p.vida<=0){ J.part.splice(i,1); continue; } if(p.g) p.vy+=900*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; if(p.rot!==undefined) p.rot+=dt*4; }
+  var cena=J.mundo?J.mundo.cena:''; var tipo=cena&&A.CENAS[cena]?A.CENAS[cena].part:'';
+  if(J.estado==='fimFase'){
+    if(Math.random()<.08){ var fx=100+Math.random()*760, fy=80+Math.random()*200, cor=CORES_FESTA[Math.floor(Math.random()*6)]; for(var k=0;k<22;k++){ var a=k/22*6.283; J.clima.push({x:fx,y:fy,vx:Math.cos(a)*(120+Math.random()*60),vy:Math.sin(a)*(120+Math.random()*60),vida:1.1,max:1.1,tipo:'fogo',cor:cor,r:3,g:1}); } }
+    if(Math.random()<.5) J.clima.push({x:Math.random()*W,y:-10,vx:(Math.random()-.5)*40,vy:120+Math.random()*100,vida:4,max:4,tipo:'confete',cor:CORES_FESTA[Math.floor(Math.random()*6)],rot:Math.random()*6});
+  }
+  if(tipo && J.clima.length<80){
+    var n=tipo==='vagalume'?.1:(tipo==='nuvem'?.01:(tipo==='polen'?.3:.4));
+    if(Math.random()<n){
+      var p2={x:Math.random()*W,y:-20,vx:0,vy:0,vida:9,max:9,tipo:tipo,rot:Math.random()*6,alpha:1};
+      if(tipo==='folha'){ p2.vx=-40-Math.random()*40; p2.vy=50+Math.random()*50; p2.r=5+Math.random()*4; p2.cor=['#16a34a','#65a30d','#f59e0b'][Math.floor(Math.random()*3)]; }
+      else if(tipo==='polen'){ p2.y=Math.random()*H; p2.vx=-30; p2.vy=-10+Math.random()*20; p2.r=1.5+Math.random(); p2.vida=p2.max=6; }
+      else if(tipo==='vagalume'){ p2.y=150+Math.random()*250; p2.vx=(Math.random()-.5)*30; p2.vy=(Math.random()-.5)*20; p2.r=5+Math.random()*4; p2.vida=p2.max=3+Math.random()*3; }
+      else if(tipo==='nuvem'){ p2.x=W+80; p2.y=40+Math.random()*120; p2.vx=-12-Math.random()*10; p2.r=.8+Math.random()*.8; p2.vida=p2.max=90; }
+      else if(tipo==='neve'){ p2.vx=-20+Math.random()*10; p2.vy=40+Math.random()*50; p2.r=1.5+Math.random()*2.5; }
+      J.clima.push(p2);
+    }
+  }
+  for(var j=J.clima.length-1;j>=0;j--){ var q=J.clima[j]; q.vida-=dt; if(q.g) q.vy+=400*dt; q.x+=q.vx*dt; q.y+=q.vy*dt; if(q.rot!==undefined) q.rot+=dt*2; if(q.tipo==='folha') q.x+=Math.sin(J.t*3+q.rot)*1.2; if(q.tipo==='vagalume') q.alpha=.4+.6*Math.abs(Math.sin(J.t*3+q.rot)); if(q.vida<=0||q.y>H+40||q.x<-120) J.clima.splice(j,1); }
+}
+function atualizaCamera(dt){
+  var M=J.mundo, u=J.urso, alvo;
+  if(J.quiz&&J.quiz.camX!==undefined) alvo=J.quiz.camX; else alvo=u.x-W*.42+u.dir*30;
+  alvo=Math.max(0,Math.min(M.w-W,alvo)); J.cam+=(alvo-J.cam)*Math.min(1,dt*(J.quiz?3:5));
+  var ay=Math.max(0,Math.min(M.h-H,u.y-H*.62)); J.camY+=(ay-J.camY)*Math.min(1,dt*4);
+}
+
+/* ---------- mapa ---------- */
+function atualizaMapa(dt){ if(J.mapaAnim){ var m=J.mapaAnim; m.t+=dt; if(m.t>=m.dur){ J.mapaAnim=null; J.sel=-2; seleciona(m.para); SOM.fx('destrava'); } } }
+function mapaMove(d){ if(J.mapaAnim) return; var n=F.LISTA.length, s=J.sel<0?0:J.sel; s=(s+d+n)%n; seleciona(s); SOM.fx('clique'); }
+function noEm(lx,ly){ for(var i=0;i<F.LISTA.length;i++){ var f=F.LISTA[i]; if(Math.hypot(lx-f.mx,ly-f.my)<34) return i; } return null; }
+function seleciona(i){ if(i===J.sel) return; J.sel=i; if(window.UI) UI.cartaoMapa(F.LISTA[i]); }
+function mapaToque(lx,ly){ if(J.mapaAnim) return; var i=noEm(lx,ly); if(i===null) return; if(i===J.sel) entraFase(i); else { seleciona(i); SOM.fx('clique'); } }
+function mapaHover(lx,ly){ if(J.estado!=='mapa'||J.mapaAnim) return; var i=noEm(lx,ly); if(i!==null) seleciona(i); }
+
+/* ---------- intro: biblioteca → o livro abre → Conde → herói entra ---------- */
+var CENAS_INTRO=[
+  {en:'Once upon a time, in a school library, there was a magic storybook.', pt:'Era uma vez, na biblioteca da escola, um livro de histórias mágico.', dur:5},
+  {en:'One day, Count Scribble splashed ink on it. The stories lost their endings!', pt:'Um dia, o Conde Rabisco derramou tinta nele. As histórias perderam os seus finais!', dur:5.5},
+  {en:'No more "happily ever after"… Who can help?', pt:'Nada mais de "felizes para sempre"… Quem pode ajudar?', dur:4.5},
+  {en:'You can! Jump into the book and find the lost pages.', pt:'Você pode! Pule para dentro do livro e encontre as páginas perdidas.', dur:5}
+];
+function iniciaIntro(){ J.estado='intro'; J.t=0; J.intro={i:0,t:0}; SOM.musica('mapa'); if(window.UI){ UI.modoNivel(false); UI.modoMapa(false); UI.cartaoMapa(null); UI.legenda(CENAS_INTRO[0]); } }
+function atualizaIntro(dt){ var it=J.intro; it.t+=dt; if(it.t>=CENAS_INTRO[it.i].dur) avancaIntro(); }
+function avancaIntro(){ var it=J.intro; if(!it) return; it.i++; it.t=0; if(it.i>=CENAS_INTRO.length){ fimIntro(); return; } SOM.fx('clique'); if(window.UI) UI.legenda(CENAS_INTRO[it.i]); }
+function fimIntro(){ J.intro=null; if(window.UI) UI.legenda(null); J.prog.introVista=true; G.salva(); if(!J.prog.heroi) iniciaEscolha(); else irMapa(false); }
+function iniciaEscolha(){ J.estado='escolha'; J.t=0; if(window.UI){ UI.modoMapa(false); UI.cartaoMapa(null); UI.escolhaHeroi(function(){ G.salva(); irMapa(false); }); } }
+
+/* ---------- laço principal ---------- */
+var ultimo=0;
+function passo(ts){
+  requestAnimationFrame(passo);
+  var dt=Math.min(.033,(ts-ultimo)/1000||0); ultimo=ts;
+  if(J.pausado){ if(window.CENA) CENA.desenha(); return; }
+  J.t+=dt; J.tFase+=dt;
+  if(J.shake>0) J.shake=Math.max(0,J.shake-dt*30); if(J.flash>0) J.flash=Math.max(0,J.flash-dt*2);
+  atualizaTrans(dt);
+  switch(J.estado){
+    case 'nivel': if(!J.trans||J.trans.fase==='abre'){ G.fisica(dt); if(J.estado==='nivel') atualizaNivel(dt); if(J.mundo&&J.estado!=='mapa') atualizaCamera(dt); } break;
+    case 'quiz': G.fisica(dt); G.perigos(dt); if(window.QUIZ) QUIZ.atualiza(dt); if(J.mundo) atualizaCamera(dt); break;
+    case 'fimFase': J.fimFase.t+=dt; J.urso.anim+=dt; break;
+    case 'mapa': atualizaMapa(dt); break;
+    case 'intro': atualizaIntro(dt); break;
+  }
+  atualizaParticulas(dt);
+  if(window.CENA) CENA.desenha();
+}
+
+/* ---------- init / API ---------- */
+function init(){
+  var cv=document.getElementById('game'); G.setCanvas(cv);
+  G.carrega(); G.redimensiona(); window.addEventListener('resize',G.redimensiona);
+  if(!J.prog.introVista) iniciaIntro(); else if(!J.prog.heroi) iniciaEscolha(); else irMapa(false);
+  requestAnimationFrame(passo);
+}
+function toque(cx,cy){ var p=G.paraLogico(cx,cy);
+  if(J.estado==='intro'){ avancaIntro(); return true; }
+  if(J.estado==='mapa'&&p.y>60&&!J.trans){ mapaToque(p.x,p.y); return true; }
+  if(J.estado==='quiz'&&window.QUIZ) return QUIZ.toque(p.x,p.y);
+  return false; }
+function confirmar(){ if(J.estado==='intro'){ avancaIntro(); return true; } if(J.estado==='mapa'&&!J.trans){ entraFase(J.sel); return true; } return false; }
+function pausa(v){ J.pausado=!!v; }
+
+G.init=init; G.toque=toque; G.mapaHover=mapaHover; G.seleciona=seleciona; G.confirmar=confirmar; G.mapaMove=mapaMove; G.pausa=pausa; G.irMapa=function(){ irMapa(false); }; G.voltaMapa=voltaMapa; G.entraFase=entraFase;
+G.raioIris=raioIris; G.iris=iris; G.fimDeFase=fimDeFase; G.iniciaIntro=iniciaIntro; G.pulaIntro=fimIntro; G.iniciaEscolha=iniciaEscolha; G.CENAS_INTRO=CENAS_INTRO;
+G.jogarDeNovo=function(){ if(J.faseAtual) G.iniciaFase(J.faseAtual); };
+})(window.JOGO);
