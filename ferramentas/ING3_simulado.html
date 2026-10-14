@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='aca24bd2030';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c5ff2782035';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,8 +14,8 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Simulado — Inglês</title>
-<link rel="stylesheet" href="serafina-core.css?v=aca24bd2030">
-<link rel="stylesheet" href="OP_estilo.css?v=aca24bd2030">
+<link rel="stylesheet" href="serafina-core.css?v=c5ff2782035">
+<link rel="stylesheet" href="OP_estilo.css?v=c5ff2782035">
 <style>
 /* só o que é exclusivo desta tela */
 .placar{font-size:calc(2.6rem*var(--fs));font-weight:900;line-height:1;color:var(--accent);text-align:center;margin:6px 0 2px}
@@ -135,8 +135,8 @@ body.papel .tr{color:#555}
 </div>
 
 <script>window.SERA_CFG={trKey:'ing3_tr',lang:'en-US',voz:'thalitamultilingual',rate:.8,home:'../index.html',somKey:'ing3_som',stars:90};</script>
-<script src="serafina-core.js?v=aca24bd2030"></script>
-<script src="OP_voz.js?v=aca24bd2030"></script>
+<script src="serafina-core.js?v=c5ff2782035"></script>
+<script src="OP_voz.js?v=c5ff2782035"></script>
 <script>
 /* MODO PAPEL — a folha da prova de verdade, com a interacao por cima.
    Ligado por padrao nesta tela: o objetivo e a crianca reconhecer no dia
@@ -164,11 +164,11 @@ body.papel .tr{color:#555}
   document.addEventListener('DOMContentLoaded',pinta);
 })();
 </script>
-<script src="assets/react.production.min.js?v=aca24bd2030"></script>
-<script src="assets/react-dom.production.min.js?v=aca24bd2030"></script>
-<script src="ING3_simulado_data.js?v=aca24bd2030"></script>
+<script src="assets/react.production.min.js?v=c5ff2782035"></script>
+<script src="assets/react-dom.production.min.js?v=c5ff2782035"></script>
+<script src="ING3_simulado_data.js?v=c5ff2782035"></script>
 <script>window.OPQ_TXT={pergunta:'Question',de:'of',soTit:'What is the question asking?',mostrarTexto:'Show the text',ouvir:'Listen',soPergunta:'Only the question',escDica:'Hide the hint',dica:'Hint',certo:'Correct! Here is why:',naProxima:'Next time',fechar:'Close',verMais:'Show me how',proxima:'Next',guiaOn:'Reading guide on',guiaOff:'Reading guide',guiaDica:'read the yellow line; tap the line below to go on',guiaFim:'this is the last line'};</script>
-<script src="OP_questao.js?v=aca24bd2030"></script>
+<script src="OP_questao.js?v=c5ff2782035"></script>
 <script>
 'use strict';
 /* ============================================================
@@ -304,6 +304,7 @@ function App(){
     var faltam=Math.max(0,totalBanco-jaVistas), rodadas=Math.floor(totalBanco/RODADA);
     return h('div',null,
       h('h1',{className:'tt'},'Practice Test — English'),
+      h('p',{style:{margin:'6px 0 10px',padding:'8px 12px',borderRadius:'12px',border:'2px dashed #d19a00',background:'#fff3c4',color:'#5a3b00',fontWeight:900,fontSize:'14px',textAlign:'center'}},'Em construção — conteúdo ainda não validado'),
       h('p',{className:'sub'},'Fairy tales, real or make-believe, circle stories, cause and effect, and poems. Tap the flag to see Portuguese.',h('span',{className:'tr'},'Contos de fadas, real ou faz de conta, histórias circulares, causa e efeito e poemas. Toque na bandeira para ver em português.')),
       h('div',{className:'grade duas'},
         h('button',{className:'linha',onClick:function(){ comeca(AQUECER); }},
@@ -415,6 +416,6 @@ document.getElementById('raiz').setAttribute('data-folha','Simulado de Inglês �
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#f472b6'};</script>
-<script src="sera_theme.js?v=aca24bd2030"></script>
+<script src="sera_theme.js?v=c5ff2782035"></script>
 </body>
 </html>
