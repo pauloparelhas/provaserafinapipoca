@@ -69,7 +69,7 @@ function atualizaNivel(dt){
 function dicas(){ /* só o indispensável: o ovo do Pip, na primeira vez */
   var u=J.urso, M=J.mundo, d=window.PODERES?PODERES.dica():null;
   if(!d&&!J.prog.pipVisto) M.ovos.forEach(function(o){ if(!o.chocado && Math.abs(o.x-u.x)<160) d={x:o.x,y:o.y-80,txt:'Touch the egg!',pt:'Encoste no ovo!'}; });
-  if(!d&&J.mundo) J.mundo.moradores.forEach(function(m){ if(m.perto&&!J.chefe) d={x:m.x,y:m.y-150,txt:m.feito?'Play again? Press ▼':'Press ▼ to go in',pt:m.feito?'Jogar de novo? Aperte ▼':'Aperte ▼ para entrar',botao:true}; });
+  if(!d&&J.mundo) J.mundo.moradores.forEach(function(m){ if(m.perto&&!J.chefe) d={x:m.x,y:m.y-198,txt:m.feito?'Play again? Press ▼':'Press ▼ to go in',pt:m.feito?'Jogar de novo? Aperte ▼':'Aperte ▼ para entrar',botao:true}; });
   if(!d&&J.mundo&&window.PERIGOS&&J.nivel&&J.nivel.sub){ var cn=PERIGOS.canoSob(); if(cn) d={x:u.x,y:u.y-G.URSO_H*TAM[u.tam]-30,txt:'Press ▼ to go down the pipe',pt:'Aperte ▼ para entrar no cano',botao:true}; }
   J.dica=d;
 }
@@ -89,7 +89,7 @@ function fimDeFase(){
 function voltaMapa(){ var f=J.faseAtual, novo=f&&J.prog.fases[f.id]&&J.prog.fases[f.id].novo; if(novo){ J.prog.fases[f.id].novo=false; G.salva(); } var i=F.LISTA.indexOf(f); irMapa(novo&&i<F.LISTA.length-1?i+1:false); }
 function irMapa(animaPara){
   if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false);
-  J.estado='mapa'; J.agarrado=null; if(window.UI&&UI.poderHud) UI.poderHud(null); J.soltouT=0; if(window.UI) UI.acao(false,0); J.nivel=null; J.mundo=null; J.tut=null; J.part=[]; J.clima=[]; J.faseAtual=null; J.t=0; J.dica=null; J.quiz=null; J.pip=null;
+  J.estado='mapa'; document.body.classList.remove('cozinha'); J.agarrado=null; if(window.UI&&UI.poderHud) UI.poderHud(null); J.soltouT=0; if(window.UI) UI.acao(false,0); J.nivel=null; J.mundo=null; J.tut=null; J.part=[]; J.clima=[]; J.faseAtual=null; J.t=0; J.dica=null; J.quiz=null; J.pip=null;
   F.posiciona();
   J.sel=animaPara?animaPara-1:G.proximaFase(); J.mapaAnim= animaPara?{de:animaPara-1,para:animaPara,t:0,dur:2.2}:null;
   SOM.musica('mapa'); G.hud();
@@ -134,7 +134,7 @@ function atualizaCamera(dt){
   var M=J.mundo, u=J.urso, alvo;
   if(J.quiz&&J.quiz.camX!==undefined) alvo=J.quiz.camX; else alvo=u.x-W*.42+u.dir*30;
   alvo=Math.max(0,Math.min(M.w-W,alvo)); J.cam+=(alvo-J.cam)*Math.min(1,dt*(J.quiz?3:5));
-  var ay=Math.max(0,Math.min(M.h-H,u.y-H*.62)); J.camY+=(ay-J.camY)*Math.min(1,dt*4);
+  var ay=Math.max(-120,Math.min(M.h-H,u.y-H*.62)); J.camY+=(ay-J.camY)*Math.min(1,dt*4); /* 18/10: folga em cima — o pulo alto e a praia do recife não somem atrás do HUD */
 }
 
 /* ---------- mapa ---------- */

@@ -34,6 +34,7 @@ function desenha(){
 /* ---------- personagens (com reserva enquanto a arte não chega) ---------- */
 function heroi(c,x,y,estado,t,dir,s,quem){
   var look=J.prog.cor?{cor:J.prog.cor}:null; if(J.estado!=='mapa'&&J.urso&&J.urso.poderes&&J.urso.poderes.traje&&J.mundo&&J.mundo.modo==='nado'&&(!quem||quem===J.urso.quem)){ look=look||{}; look.mergulho=true; } /* roupa de mergulho: vestida desde que pegou */
+  if(J.estado!=='mapa'&&J.urso&&J.urso.poderes&&J.urso.poderes.capa&&J.mundo&&J.mundo.modo==='voo'&&(!quem||quem===J.urso.quem)){ look=look||{}; look.capaNuvem=true; } /* capa das nuvens: vestida desde que pegou (também parado e andando) */
   if(A.heroi){ A.heroi(c,x,y,estado,t,dir,s,quem||J.prog.heroi||'lia',look); return; }
   c.save(); c.translate(x,y); c.scale(s*dir,s); c.fillStyle={lia:'#94a3b8',theo:'#2563eb',bia:'#db2777'}[quem||'lia']; A.rr(c,-16,-60,32,46,12); c.fill(); c.fillStyle='#f2c9a0'; A.circ(c,0,-72,20); c.fill(); c.fillStyle='#111'; A.circ(c,6,-74,3); c.fill(); c.fillStyle='#334155'; A.rr(c,-14,-16,12,16,5); c.fill(); A.rr(c,2,-16,12,16,5); c.fill(); c.restore();
 }

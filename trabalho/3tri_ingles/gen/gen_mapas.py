@@ -207,13 +207,13 @@ def praia(m, n=4, larg=12):
     m.g = ceu + m.g
     for r in range(n - 1, len(m.g)):
         for c in range(larg): m.g[r][c] = '#'
-    m.p(2, n - 2, 'U'); m.p(7, n - 2, 'd'); m.fx(4, 5, n - 3, 'o')
+    m.p(4, n - 2, 'U'); m.p(8, n - 2, 'd'); m.fx(5, 6, n - 3, 'o')
     return m
 def ceu_v2():
     """céu: voo com capa; nuvens de tempestade com raio avisado, vento para baixo, corvos; chão só nas nuvens"""
     m = V2.Mapa(160)
     for c in range(26, 160): m.g[10][c] = m.g[11][c] = ' '
-    m.p(2, 9, 'U'); m.fx(6, 9, 7, 'o'); m.p(15, 9, 'A')    # começa ANDANDO; a capa no caminho: só depois dela se voa
+    m.p(5, 9, 'U'); m.fx(7, 9, 7, 'o'); m.p(15, 9, 'A')    # começa ANDANDO; a capa no caminho: só depois dela se voa
     m.fx(19, 22, 6, 'o')
     m.fx(29, 33, 5, '#'); m.fx(29, 33, 4, 'o'); m.p(36, 2, 'g')
     m.fx(38, 50, 10, '#'); m.fx(38, 50, 11, '#'); m.p(39, 9, 'c'); m.p(44, 9, 'D')

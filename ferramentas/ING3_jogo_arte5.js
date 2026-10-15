@@ -186,7 +186,7 @@ function rasteja(c,K,t){
 
 function leo(c,x,y,estado,t,dir,escala,look){
   var K={q:'leo',pele:LEO.pele,peleS:LEO.peleS,cab:LEO.cab,cabS:LEO.cabS,olho:LEO.olho,cor:(look&&look.cor)||LEO.cor,
-    friso:(look&&look.cor)?(claro(look.cor)?'#1e3a8a':'#ffffff'):LEO.friso,calcao:LEO.calcao,capa:look&&look.capa,mergulho:estado==='swim'||!!(look&&look.mergulho)};
+    friso:(look&&look.cor)?(claro(look.cor)?'#1e3a8a':'#ffffff'):LEO.friso,calcao:LEO.calcao,capa:(look&&look.capaNuvem)?'#7c3aed':(look&&look.capa),capaNuvem:!!(look&&look.capaNuvem),mergulho:estado==='swim'||!!(look&&look.mergulho)};
   escala=escala||1; dir=dir||1; t=t||0;
   c.save(); c.translate(x,y); c.scale(dir*escala,escala); c.lineJoin='round'; c.lineCap='round';
   if(estado==='crawl'){ rasteja(c,K,t); c.restore(); return; }
@@ -197,7 +197,7 @@ function leo(c,x,y,estado,t,dir,escala,look){
   c.translate(0,P.bob);
   if(P.corpo){ c.translate(0,-30); c.rotate(P.corpo); c.translate(0,30); }
   c.rotate(P.rot+P.lean); c.scale(P.sx,P.sy);
-  if(estado==='fly') capaVoo(c,K,t);
+  if(estado==='fly'||K.capaNuvem) capaVoo(c,K,t);
   braco(c,K,P.aF,5,true);
   perna(c,K,P.lF,3,true);
   perna(c,K,P.lN,-3,false);

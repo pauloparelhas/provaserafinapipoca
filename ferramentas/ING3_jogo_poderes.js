@@ -75,9 +75,9 @@ function interage(){ /* ▼ na frente do móvel pega o objeto (o mesmo gesto da 
 function toca(wx,wy){ var M=J.mundo; if(!M) return false;
   for(var i=0;i<M.itens.length;i++){ var it=M.itens[i]; if(it.pego||!interativo(it)) continue; if(Math.abs(wx-it.x)<55&&wy>it.y-80&&wy<it.y+40){ if(perto(it)) G.pegaItem(it); else G.toast('Walk to it first!',1600,'Primeiro vá até lá!'); return true; } }
   return false; }
-function dica(){ var it=itemPerto(); if(!it) return null; var v=verbo(it); return {x:it.x,y:it.y-62,txt:v[0]+' Press ▼',pt:v[1]+' Aperte ▼',botao:true}; }
+function dica(){ var it=itemPerto(); if(!it) return null; var v=verbo(it); return {x:it.x,y:it.y-(it.tipo==='historia'?62:150),txt:v[0]+' Press ▼',pt:v[1]+' Aperte ▼',botao:true}; }
 function alvo(){ var M=J.mundo, u=J.urso; if(!M) return null; var r=null, trava=(M.modo==='voo'&&!u.poderes.capa)||(M.modo==='nado'&&!u.poderes.traje); /* barreira ativa: a seta volta para o item */
-  M.itens.forEach(function(it){ if(!r&&!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa')&&(trava||it.x>u.x-300)) r={x:it.x,y:it.y-40,tipo:'poder',txt:verbo(it)[0]}; });
+  M.itens.forEach(function(it){ if(!r&&!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa')&&(trava||it.x>u.x-300)) r={x:it.x,y:it.y-150,tipo:'poder',txt:verbo(it)[0]}; });
   M.ovos.forEach(function(o){ if(!r&&!o.chocado&&o.x>u.x-300) r={x:o.x,y:o.y-70,tipo:'poder',txt:'Touch the egg!'}; });
   return r; }
 
@@ -196,7 +196,7 @@ function atualiza(dt){
 }
 /* segundo pulo do giz = cambalhota (chamado pelo motor) */
 function segundoPulo(){ var u=J.urso; if(u.poderes.giz){ u.flip=1; u.invT=Math.max(u.invT,.6); G.emite(8,function(){ return {x:u.x,y:u.y-30,vx:(Math.random()-.5)*140,vy:-30-Math.random()*60,vida:.6,max:.6,tipo:'nevoa',r:5}; }); } }
-function reinicia(){ tiroVisto=undefined; montVisto=null; J.recarga=0; J.pratos=[]; J.pratosM=null; J.historia=[]; J.faixaHist=null; J.varre=null; montaPorteiras(); hudPoder(); }
+function reinicia(){ document.body.classList.toggle('cozinha',fase()===8); tiroVisto=undefined; montVisto=null; J.recarga=0; J.pratos=[]; J.pratosM=null; J.historia=[]; J.faixaHist=null; J.varre=null; montaPorteiras(); hudPoder(); }
 
 /* ---------- PORTEIRAS (18/10, Paulo: "a criança tem de ser desestimulada a seguir sem acessar as questões") ----------
    Uma cortina de tinta 5 tiles depois de cada entrada (porta, baú) — e depois do cano, para a entrada do submundo.
@@ -208,15 +208,19 @@ function montaPorteiras(){
   if(L.sub){ var ids=L.sub.canos.map(function(q){ return q.id; }), cs=L.canos.filter(function(p){ return ids.indexOf(p.id)>=0; });
     if(cs.length){ var xm=Math.max.apply(null,cs.map(function(p){ return p.x+p.w; })); L.sub.moradores.forEach(function(m){ trig.push({x:xm,m:m}); }); } }
   var livre=function(c){ if(c<1||c>=L.cols-2) return false; if(g[rc].charAt(c)!=='#') return false;
-    for(var r=0;r<rc;r++){ var ch=g[r].charAt(c); if('#B%DcF1234Q=fmnSVlRX'.indexOf(ch)>=0&&ch!==' ') return false; } return true; };
-  trig.sort(function(a,b){ return a.x-b.x; }).forEach(function(tr){ var c=Math.floor(tr.x/T)+5; while(c<L.cols-3&&!livre(c)) c++; if(c<L.cols-3) J.porteiras.push({x:c*T+8,w:30,m:tr.m,abre:0}); });
+    for(var r=0;r<rc;r++){ for(var dc=-1;dc<=1;dc++){ var ch=g[r].charAt(c+dc); if(dc!==0&&'XRl'.indexOf(ch)<0) continue; if(ch!==' '&&'#B%DcF1234Q=fmnSVlRXtuLW'.indexOf(ch)>=0) return false; } } return true; };
+  var usadas={};
+  trig.sort(function(a,b){ return a.x-b.x; }).forEach(function(tr){ var c0=Math.floor(tr.x/T), c=-1;
+    for(var k=4;k<=9&&c<0;k++) if(livre(c0+k)&&!usadas[c0+k]) c=c0+k; /* logo depois da entrada, no chão */
+    for(var k2=2;k2<4&&c<0;k2++) if(livre(c0+k2)&&!usadas[c0+k2]) c=c0+k2;
+    if(c>0){ usadas[c]=1; J.porteiras.push({x:c*T+8,w:30,m:tr.m,abre:0}); } });
 }
-function solidos(M,s){ if(M!==J.nivel||!J.porteiras) return; J.porteiras.forEach(function(p){ if(!p.m.feito) s.push({x:p.x,y:-3000,w:p.w,h:M.h+3000,porteira:p}); }); }
+function solidos(M,s){ if(M!==J.nivel||!J.porteiras||!J.urso) return; J.porteiras.forEach(function(p){ if(!p.m.feito&&J.urso.x<p.x+p.w/2) s.push({x:p.x,y:-3000,w:p.w,h:M.h+3000,porteira:p}); }); } /* mão única: quem já está do outro lado (saiu por um cano) volta livre */
 function porteiras(dt){ var u=J.urso, M=J.mundo; if(!J.porteiras||M!==J.nivel) return;
   J.porteiras.forEach(function(p){ if(p.m.feito&&p.abre<1){ if(p.abre===0){ SOM.fx('destrava'); G.brilho(p.x+15,u.y-60,16,'#c4b5fd'); } p.abre=Math.min(1,p.abre+dt*1.5); }
     if(!p.m.feito&&Math.abs(u.x-p.x)<46&&J.estado==='nivel'&&!(J.avisoPort>0)){ J.avisoPort=2.5; SOM.fx('clique'); G.toast('Go back! Answer the ? first ◀',2200,'Volte! Responda o ? primeiro ◀'); } });
   if(J.avisoPort>0) J.avisoPort-=dt; }
-function desenhaPorteiras(c,t){ var M=J.mundo; if(!J.porteiras||M!==J.nivel) return; var vx0=J.cam-80, vx1=J.cam+W+80;
+function desenhaPorteiras(c,t){ var M=J.mundo; if(!J.porteiras||M!==J.nivel||J.quiz) return; var vx0=J.cam-80, vx1=J.cam+W+80;
   J.porteiras.forEach(function(p){ if(p.abre>=1||p.x<vx0||p.x>vx1) return; var a=1-p.abre, top=J.camY-20, bot=J.camY+560;
     c.save(); c.globalAlpha=a;
     var g=c.createLinearGradient(p.x,0,p.x+p.w,0); g.addColorStop(0,'rgba(49,46,129,.15)'); g.addColorStop(.5,'rgba(67,56,202,.85)'); g.addColorStop(1,'rgba(49,46,129,.15)'); c.fillStyle=g;

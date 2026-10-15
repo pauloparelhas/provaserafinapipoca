@@ -77,7 +77,7 @@ def conta(m):
 # ---------------- 1. Once Upon a Time Village ----------------
 def vila():
     m = Mapa(132)
-    m.p(2, 9, 'U'); m.fx(5, 8, 8, 'o')
+    m.p(5, 9, 'U'); m.fx(6, 8, 8, 'o')
     m.fx(10, 13, 7, '='); m.fx(10, 13, 6, 'o')            # toldo da feira = telhado da barraca do sapateiro
     m.p(11, 9, '*')                                      # PODER do reino: Botas de Sete Leguas na barraca (antes do D1)
     m.p(16, 9, 'D')                                      # D1: casa do contador de historias (cedo, sem perigo)
@@ -122,7 +122,7 @@ def vila_sub():
 # ---------------- 2. Enchanted Forest ----------------
 def bosque():
     m = Mapa(134)
-    m.p(2, 9, 'U'); m.p(6, 9, 'P')                       # ovo do Pip: montaria (planar)
+    m.p(4, 9, 'U'); m.p(7, 9, 'P')                       # ovo do Pip: montaria (planar)
     m.fx(9, 12, 7, '='); m.fx(9, 12, 6, 'o')
     m.p(15, 9, 'D')                                      # D1: arvore oca da fada madrinha
     m.p(19, 9, 'c')
@@ -154,7 +154,7 @@ def bosque():
 # ---------------- 6. Rhythm Gym ----------------
 def ginasio():
     m = Mapa(136)
-    m.p(2, 9, 'U'); m.fx(4, 7, 8, 'o'); m.p(9, 9, '*')   # PODER do reino: giz de ginastica no pedestal
+    m.p(5, 9, 'U'); m.fx(6, 7, 8, 'o'); m.p(9, 9, '*')   # PODER do reino: giz de ginastica no pedestal
     m.p(11, 9, 'S'); m.fx(13, 16, 4, '='); m.fx(13, 16, 3, 'o')   # trampolim
     m.p(19, 9, 'D')                                      # D1: vestiario
     m.p(23, 9, 'c')
@@ -184,7 +184,7 @@ def ginasio():
 # ---------------- 7. Cause & Effect Stadium (aventura 2D) ----------------
 def estadio():
     m = Mapa(140)
-    m.p(2, 9, 'U')
+    m.p(5, 9, 'U')
     m.fx(6, 9, 7, '='); m.fx(12, 15, 7, '=')             # bancos do vestiario
     m.p(10, 9, '*')                                      # PODER do reino: rack de bolas (chutar)
     m.p(18, 9, 'D')                                      # D1: marca do penalti 1
@@ -216,7 +216,7 @@ def estadio():
 # ---------------- 8. The Cookie Circle ----------------
 def biscoito():
     m = Mapa(132)
-    m.p(2, 9, 'U')
+    m.p(3, 9, 'U')
     m.p(5, 9, '&'); m.p(9, 9, '&')                       # mesa do cafe: biscoito e o copo de leite COM o canudo (o PODER: esguicho de leite)
     m.p(15, 9, 'D')                                      # D1: porta da geladeira
     m.p(21, 9, 'c')
@@ -237,8 +237,8 @@ def biscoito():
     m.p(85, 9, 'i'); m.p(87, 6, 'g'); m.p(90, 9, 'e')
     m.fx(93, 94, 8, '1')                                 # gaveta = cano (D3 no submundo: armario)
     m.p(97, 9, 'c')
-    m.p(100, 7, 'n'); m.p(103, 5, 'n'); m.p(106, 2, 'n') # prateleiras da geladeira (sobe)
-    m.fx(108, 112, 2, '='); m.p(110, 1, '&')             # fita adesiva (conserta a ponte)
+    m.p(101, 7, 'n')                                     # prateleira da geladeira que sobe e desce
+    m.fx(104, 108, 5, '='); m.p(106, 4, '&')             # fita adesiva na prateleira (abaixo do HUD; conserta a ponte)
     m.buraco(114, 3)                                     # ponte quebrada (a fita conserta; da para pular)
     m.p(119, 9, 'E')                                     # Mancha Rolo-de-massa
     m.fx(95, 96, 8, '2')
