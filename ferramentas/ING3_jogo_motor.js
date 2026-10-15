@@ -63,7 +63,7 @@ function paraLogico(cx,cy){ return {x:(cx-offX)/escala, y:(cy-offY)/escala}; }
 /* ---------- carregar reino ---------- */
 function novoUrso(x,y){ return {x:x,y:y,vx:0,vy:0,noChao:true,dir:1,estado:'idle',anim:0,tontoT:0,invT:0,tam:1,sx:1,sy:1,poderes:{capa:false,bota:false},puloExtra:false,planando:false,cheerT:0,sobre:null,montado:false,quem:J.prog.heroi||'lia'}; }
 function iniciaFase(f){
-  J.faseAtual=f;
+  J.faseAtual=f; if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); J.corrida=null; J.estadio=null;
   if(f.modo==='estadio'&&window.ESTADIO){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; ESTADIO.inicia(f); return; }
   if(f.modo==='corrida'&&window.CORRIDA){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; CORRIDA.inicia(f); return; }
   var L=F.monta(f);

@@ -19,16 +19,31 @@ canvas{display:block;background:#2a2640;border-radius:8px;margin-bottom:8px;max-
 <canvas id="conde2" data-w="1400" data-h="420"></canvas>
 <h2>Placas e páginas</h2><canvas id="placas" data-w="1300" data-h="300"></canvas>
 <h2>Cena vila</h2><canvas id="c_vila" data-w="960" data-h="540" data-cena="vila"></canvas>
-<h2>Cena vila (câmera deslocada)</h2><canvas id="c_vila2" data-w="960" data-h="540" data-cena="vila" data-cam="1300"></canvas>
+<h2>Cena vila (câmera deslocada 1300)</h2><canvas id="c_vila2" data-w="960" data-h="540" data-cena="vila" data-cam="1300"></canvas>
 <h2>Cena bosque</h2><canvas id="c_bosque" data-w="960" data-h="540" data-cena="bosque"></canvas>
-<h2>Cena bosque (câmera deslocada)</h2><canvas id="c_bosque2" data-w="960" data-h="540" data-cena="bosque" data-cam="1700"></canvas>
+<h2>Cena bosque (câmera deslocada 1700)</h2><canvas id="c_bosque2" data-w="960" data-h="540" data-cena="bosque" data-cam="1700"></canvas>
 <h2>Cena biblioteca</h2><canvas id="c_biblioteca" data-w="960" data-h="540" data-cena="biblioteca"></canvas>
+<h2>Cena biblioteca (câmera deslocada 900)</h2><canvas id="c_biblioteca2" data-w="960" data-h="540" data-cena="biblioteca" data-cam="900"></canvas>
+<h2>Cena recife</h2><canvas id="c_recife" data-w="960" data-h="540" data-cena="recife"></canvas>
+<h2>Cena recife (câmera deslocada 1500)</h2><canvas id="c_recife2" data-w="960" data-h="540" data-cena="recife" data-cam="1500"></canvas>
+<h2>Cena nuvens</h2><canvas id="c_nuvens" data-w="960" data-h="540" data-cena="nuvens"></canvas>
+<h2>Cena nuvens (câmera deslocada 1200)</h2><canvas id="c_nuvens2" data-w="960" data-h="540" data-cena="nuvens" data-cam="1200"></canvas>
+<h2>Cena ginasio</h2><canvas id="c_ginasio" data-w="960" data-h="540" data-cena="ginasio"></canvas>
+<h2>Cena ginasio (câmera deslocada 1400)</h2><canvas id="c_ginasio2" data-w="960" data-h="540" data-cena="ginasio" data-cam="1400"></canvas>
+<h2>Cena estadio</h2><canvas id="c_estadio" data-w="960" data-h="540" data-cena="estadio"></canvas>
+<h2>Cena estadio (câmera deslocada 1500)</h2><canvas id="c_estadio2" data-w="960" data-h="540" data-cena="estadio" data-cam="1500"></canvas>
+<h2>Cena biscoito</h2><canvas id="c_biscoito" data-w="960" data-h="540" data-cena="biscoito"></canvas>
+<h2>Cena biscoito (câmera deslocada 1300)</h2><canvas id="c_biscoito2" data-w="960" data-h="540" data-cena="biscoito" data-cam="1300"></canvas>
+<h2>Cena tinta</h2><canvas id="c_tinta" data-w="960" data-h="540" data-cena="tinta"></canvas>
+<h2>Cena tinta (câmera deslocada 1600)</h2><canvas id="c_tinta2" data-w="960" data-h="540" data-cena="tinta" data-cam="1600"></canvas>
 <h2>Mapa-livro</h2><canvas id="mapa" data-w="960" data-h="540"></canvas>
 <script src="../../ferramentas/LP3_jornada_arte.js"></script>
 <script src="../../ferramentas/LP3_jornada_arte2.js"></script>
 <script src="../../ferramentas/LP3_jornada_arte3.js"></script>
 <script src="../../ferramentas/ING3_jogo_arte.js"></script>
 <script src="../../ferramentas/ING3_jogo_arte2.js"></script>
+<script src="../../ferramentas/ING3_jogo_arte3.js"></script>
+<script src="../../ferramentas/ING3_jogo_arte4.js"></script>
 <script>
 var A=window.ARTE, Q=new URLSearchParams(location.search), TFIX=Q.has('t')?parseFloat(Q.get('t')):null, DPR=2;
 var EST=['idle','walk','jump','fall','cheer','dizzy','crouch','crawl','swim','fly','ride'], QUEM=['lia','theo','bia'];
@@ -56,17 +71,23 @@ var DES={
   mapa:function(c,t){ if(!A.mapaLivro) return; A.mapaLivro(c,t); (A.MAPA_NOS||[]).forEach(function(n,i){ c.fillStyle='#fde68a'; c.strokeStyle='#7c2d12'; c.lineWidth=3; c.beginPath(); c.arc(n.x,n.y,15,0,7); c.fill(); c.stroke(); c.fillStyle='#7c2d12'; c.font='900 15px Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(i+1,n.x,n.y+1); });
     c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,180,450,600,74,14); c.fill(); c.fillStyle='#fff'; c.font='800 18px Segoe UI'; c.fillText('cartão de texto (faixa y>440)',480,487); }
 };
+var MOR={vila:[['crier',820,1]],bosque:[['godmother',840,1],['owl',520,0]],recife:[['octopus',820,1]],nuvens:[['bard',820,1]],ginasio:[['coach',820,1]],estadio:[['referee',820,1]],biscoito:[['mouse',820,1]],tinta:[]};
 function cena(c,cv,t){ var nome=cv.dataset.cena, cam=+(cv.dataset.cam||0)+(TFIX==null?t*40:0);
   A.ceu(c,nome,t); A.longe(c,nome,cam*.15,t); A.perto(c,nome,cam*.45,t);
-  c.save(); c.translate(-cam,0);
-  var segs=[{x:cam-100,y:452,w:560,h:100},{x:cam+560,y:452,w:600,h:100}]; segs.forEach(function(s){ A.chao(c,s,nome); });
-  [{x:cam+250,y:330,w:150,h:24},{x:cam+620,y:300,w:180,h:24}].forEach(function(p){ A.plataforma(c,p,nome); });
-  c.restore();
-  A.heroi(c,200,452,'idle',t,1,1,'lia'); A.heroi(c,320,330,'walk',t,1,1,'theo'); A.pip(c,700,452,'idle',t,-1,1);
-  if(nome==='vila'&&A.morador) A.morador(c,'crier',820,452,t,-1,true);
-  if(nome==='bosque'&&A.morador){ A.morador(c,'godmother',840,452,t,-1,true); A.morador(c,'owl',520,452,t,1,false); }
-  if(nome==='biblioteca') A.heroi(c,560,452,'cheer',t,1,1,'bia');
-  for(var i=0;i<12;i++){ var p={x:(i*83+t*20)%960,y:120+(i*53)%300,vida:1,max:1,tipo:A.CENAS[nome].part,r:i%3+2,rot:t+i,cor:'#fbbf24'}; if(p.tipo) A.particula(c,p); }
+  if(nome!=='biblioteca'){
+    c.save(); c.translate(-cam,0);
+    var segs=[{x:cam-100,y:450,w:560,h:90},{x:cam+560,y:450,w:600,h:90},{x:cam+860,y:360,w:135,h:90}]; segs.forEach(function(s){ A.chao(c,s,nome); });
+    [{x:cam+250,y:330,w:135,h:18},{x:cam+600,y:290,w:180,h:18}].forEach(function(p){ A.plataforma(c,p,nome); });
+    c.restore();
+    A.heroi(c,200,450,nome==='recife'?'swim':(nome==='nuvens'?'fly':'idle'),t,1,1,'lia'); A.heroi(c,320,330,'walk',t,1,1,'theo'); A.pip(c,690,290,'idle',t,-1,1);
+    (MOR[nome]||[]).forEach(function(m){ if(A.morador) A.morador(c,m[0],m[1]-(m[0]==='owl'?0:0),450,t,-1,!!m[2]); });
+    if(nome==='tinta'&&A.conde) A.conde(c,560,450,'laugh',t);
+  } else {
+    A.heroi(c,300,450,'cheer',t,1,1.25,'lia'); A.heroi(c,660,450,'cheer',t,1,1.25,'bia');
+    c.save(); c.translate(480,330); c.fillStyle='#7c2d12'; A.rr(c,-150,-20,300,26,8); c.fill(); c.fillStyle='#fffbeb'; c.beginPath(); c.moveTo(-140,-16); c.quadraticCurveTo(-70,-60,0,-14); c.lineTo(0,4); c.quadraticCurveTo(-70,-12,-140,4); c.closePath(); c.fill(); c.beginPath(); c.moveTo(140,-16); c.quadraticCurveTo(70,-60,0,-14); c.lineTo(0,4); c.quadraticCurveTo(70,-12,140,4); c.closePath(); c.fill(); c.restore();
+  }
+  for(var i=0;i<12;i++){ var p={x:(i*83+t*20)%960,y:120+(i*53)%300,vida:1,max:1,tipo:A.CENAS[nome].part,r:i%3+2,rot:t+i,cor:'#fbbf24'}; if(p.tipo&&p.tipo!=='nuvem') A.particula(c,p); }
+  c.fillStyle='rgba(255,255,255,.18)'; c.fillRect(0,450,6,1);
 }
 var cvs=[].slice.call(document.querySelectorAll('canvas'));
 cvs.forEach(function(cv){ cv.width=cv.dataset.w*DPR; cv.height=cv.dataset.h*DPR; cv.style.width=cv.dataset.w+'px'; });

@@ -350,15 +350,15 @@ body.show-tr #trbtn{outline:2px solid var(--accent,#f472b6);outline-offset:2px}
 <canvas id="starfield"></canvas>
 <div class="app">
   <div class="topbar">
-    <button class="iconbtn sera-home" id="btnHome" title="Início" aria-label="Início" onclick="goHome()">
+    <button class="iconbtn sera-home" id="btnHome" title="Home" aria-label="Home" onclick="goHome()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button>
     <span class="title" id="titulo">English · Study</span>
-    <button class="iconbtn" id="trbtn" title="Português" aria-label="Português" onclick="toggleTr()"><svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rect width="28" height="20" rx="3" fill="#009c3b"/><path d="M14 3 25 10 14 17 3 10z" fill="#ffdf00"/><circle cx="14" cy="10" r="4.2" fill="#002776"/></svg></button>
-    <button class="iconbtn" id="btnFontDown" title="Letra menor" aria-label="Letra menor" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" id="btnFontUp" title="Letra maior" aria-label="Letra maior" onclick="fs(1)">A+</button>
-    <button class="iconbtn sombtn" id="sombtn" title="Som" onclick="toggleSom()">&#128266;</button>
-    <button class="iconbtn" id="themeBtn" title="Tema" aria-label="Tema">&#9788;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" aria-label="Travar a tela" onclick="toggleLock()">
+    <button class="iconbtn" id="trbtn" title="Portuguese" aria-label="Portuguese" onclick="toggleTr()"><svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rect width="28" height="20" rx="3" fill="#009c3b"/><path d="M14 3 25 10 14 17 3 10z" fill="#ffdf00"/><circle cx="14" cy="10" r="4.2" fill="#002776"/></svg></button>
+    <button class="iconbtn" id="btnFontDown" title="Smaller text" aria-label="Smaller text" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" id="btnFontUp" title="Bigger text" aria-label="Bigger text" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Sound" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" id="themeBtn" title="Theme" aria-label="Theme">&#9788;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen" aria-label="Full screen" onclick="toggleLock()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
   </div>
   <div class="bar"><span id="bar"></span></div>
@@ -716,7 +716,7 @@ function renderCapa(){
   document.body.style.setProperty('--lc','#f472b6');
   titulo.textContent='English · Study';
   tela.innerHTML='<div class="capa"><h1>English · 3rd term</h1>'+
-    '<div class="aviso">Em construção — conteúdo ainda não validado</div>'+
+    '<div class="aviso">Under construction — content not yet reviewed<span class="tr">Em construção — conteúdo ainda não validado</span></div>'+
     '<div class="licoes">'+LICOES.map(function(l,i){
       return '<button class="lic'+(f[l.k]?' ok':'')+'" data-i="'+i+'" style="--lc:'+corDe(l)+'">'+
         '<span class="num">'+(i+1)+'</span><span class="feito" aria-label="feita">'+CHECK+'</span>'+
@@ -782,7 +782,7 @@ render();
 window.ING3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic,i:est.i,n:sessao?sessao.telas.length:0}; }};
 })();
 </script>
-<script>window.SERA_ACCENT={accent:'#f472b6'};</script>
+<script>window.SERA_EN=true; window.SERA_ACCENT={accent:'#f472b6'};</script>
 <script src="sera_theme.js"></script>
 </body>
 </html>
