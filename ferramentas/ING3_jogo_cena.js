@@ -98,7 +98,7 @@ function desenhaNivel(c){
   M.ovos.forEach(function(o){ if(!o.chocado&&o.x>vx0&&o.x<vx1){ var bal=Math.sin(t*5)*.12; c.save(); c.translate(o.x,o.y); c.rotate(bal); pip(c,0,0,'egg',t,1,1); c.restore(); } });
   M.moradores.forEach(function(m){ if(m.x>vx0-100&&m.x<vx1+100) morador(c,m,t); });
   M.inimigos.forEach(function(e){ if(!e.morto&&e.x>vx0&&e.x<vx1){ if(e.tipo==='tinta') manchaTinta(c,e,t); else A.inimigo(c,e,t); } });
-  if(J.chefe&&window.CHEFAO) CHEFAO.desenha(c,t);
+  if(J.chefe&&window.CHEFAO&&!J.quiz) CHEFAO.desenha(c,t); /* no duelo, o Conde aparece uma vez só: no ambiente de questões */
   if(J.quiz&&window.QUIZ) QUIZ.desenhaMundo(c,t);
   if(J.pip){ var p=J.pip; pip(c,p.x,p.y,p.parado?'idle':'walk',t,p.vx>=0?1:-1,1); }
   /* o herói: tamanho + squash & stretch, pisca quando invencível */

@@ -1,11 +1,18 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Prévia da arte ING3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap">
 <style>
 body{margin:0;background:#1b1830;color:#ece9ff;font:14px/1.4 "Segoe UI",Arial,sans-serif;padding:12px}
 h2{font-size:16px;margin:18px 0 6px}
 canvas{display:block;background:#2a2640;border-radius:8px;margin-bottom:8px;max-width:100%}
 </style></head><body>
+<h2>Leo — os 4 heróis, todos os estados (escala 1)</h2><canvas id="leo1" data-w="1100" data-h="560"></canvas>
+<h2>Leo — escala 2</h2><canvas id="leo2" data-w="1400" data-h="270"></canvas>
+<h2>Leo — crouch, crawl, swim, fly, ride (escala 2)</h2><canvas id="leo3" data-w="1400" data-h="300"></canvas>
+<h2>Leo — lado a lado com Lia/Theo/Bia (escala 2.4) + look.cor</h2><canvas id="leo4" data-w="1400" data-h="300"></canvas>
+<h2>Capa do livro (A.capaLivro)</h2><canvas id="capa" data-w="960" data-h="540"></canvas>
+<h2>Capa com botão simulado (faixa y&gt;440) e sel='leo'</h2><canvas id="capa2" data-w="960" data-h="540"></canvas>
 <h2>Heróis — todos os estados (escala 1)</h2><canvas id="h1" data-w="1100" data-h="420"></canvas>
 <h2>Heróis — escala 2</h2><canvas id="h2" data-w="1400" data-h="760"></canvas>
 <h2>Heróis — look.cor alternativo + crawl/swim/fly escala 2</h2><canvas id="h3" data-w="1400" data-h="420"></canvas>
@@ -44,12 +51,19 @@ canvas{display:block;background:#2a2640;border-radius:8px;margin-bottom:8px;max-
 <script src="../../ferramentas/ING3_jogo_arte2.js"></script>
 <script src="../../ferramentas/ING3_jogo_arte3.js"></script>
 <script src="../../ferramentas/ING3_jogo_arte4.js"></script>
+<script src="../../ferramentas/ING3_jogo_arte5.js"></script>
 <script>
 var A=window.ARTE, Q=new URLSearchParams(location.search), TFIX=Q.has('t')?parseFloat(Q.get('t')):null, DPR=2;
 var EST=['idle','walk','jump','fall','cheer','dizzy','crouch','crawl','swim','fly','ride'], QUEM=['lia','theo','bia'];
 function rotulo(c,x,y,s){ c.fillStyle='rgba(236,233,255,.8)'; c.font='700 12px Segoe UI,Arial'; c.textAlign='center'; c.fillText(s,x,y); }
 function chao(c,w,y){ c.fillStyle='rgba(255,255,255,.08)'; c.fillRect(0,y,w,1); }
 var DES={
+  leo1:function(c,t){ QUEM.concat(['leo']).forEach(function(q,r){ var y=110+r*130; chao(c,1100,y); EST.forEach(function(e,i){ var x=55+i*97; if(e==='ride'){ A.pip(c,x,y,'ride',t,1,.75); A.heroi(c,x+A.pip.SELA_X*.75,y-A.pip.SELA_Y*.75,'ride',t,1,.75,q); } else A.heroi(c,x,y,e,t,1,1,q); if(r===3) rotulo(c,x,y+22,e); }); }); },
+  leo2:function(c,t){ var y=235; chao(c,1400,y); ['idle','walk','jump','fall','cheer','dizzy'].forEach(function(e,i){ A.heroi(c,110+i*235,y,e,t+i*.13,i%2?-1:1,2,'leo'); }); },
+  leo3:function(c,t){ var y=250; chao(c,1400,y); A.heroi(c,110,y,'crouch',t,1,2,'leo'); A.heroi(c,330,y,'crawl',t,1,2,'leo'); A.heroi(c,640,y-70,'swim',t,1,2,'leo'); A.heroi(c,950,y-90,'fly',t,1,1.8,'leo'); A.pip(c,1230,y,'ride',t,1,1.6); A.heroi(c,1230+A.pip.SELA_X*1.6,y-A.pip.SELA_Y*1.6,'ride',t,1,1.6,'leo'); },
+  leo4:function(c,t){ var y=270; chao(c,1400,y); ['lia','theo','bia','leo'].forEach(function(q,i){ A.heroi(c,110+i*200,y,'idle',t,1,2.4,q); }); A.heroi(c,950,y,'idle',t,1,2.4,'leo',{cor:'#dc2626'}); A.heroi(c,1150,y,'cheer',t,-1,2.4,'leo',{cor:'#f8fafc'}); },
+  capa:function(c,t){ if(A.capaLivro) A.capaLivro(c,t); },
+  capa2:function(c,t){ if(!A.capaLivro) return; A.capaLivro(c,t,'leo'); c.fillStyle='rgba(255,255,255,.12)'; c.fillRect(0,440,960,1); c.save(); c.shadowColor='rgba(0,0,0,.5)'; c.shadowBlur=10; c.fillStyle='#16a34a'; A.rr(c,330,452,300,56,28); c.fill(); c.restore(); c.fillStyle='#fff'; c.font='900 22px Nunito,Segoe UI,Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('Open the book',480,481); },
   h1:function(c,t){ QUEM.forEach(function(q,r){ var y=120+r*135; chao(c,1000,y); EST.forEach(function(e,i){ var x=55+i*97; if(e==='ride'){ A.pip(c,x,y,'ride',t,1,.75); A.heroi(c,x+A.pip.SELA_X*.75,y-A.pip.SELA_Y*.75,'ride',t,1,.75,q); } else A.heroi(c,x,y,e,t,1,1,q); if(r===2) rotulo(c,x,y+22,e); }); }); },
   h2:function(c,t){ var e5=['idle','walk','jump','fall','cheer','dizzy']; QUEM.forEach(function(q,r){ var y=225+r*250; chao(c,1400,y); e5.forEach(function(e,i){ A.heroi(c,110+i*235,y,e,t+i*.13,i%2?-1:1,2,q); }); }); },
   h3:function(c,t){ var y=330; chao(c,1400,y); A.heroi(c,90,y,'idle',t,1,2,'lia',{cor:'#16a34a'}); A.heroi(c,250,y,'walk',t,1,2,'theo',{cor:'#9333ea'}); A.heroi(c,410,y,'cheer',t,1,2,'bia',{cor:'#0ea5e9'});
@@ -96,5 +110,5 @@ function frame(){ var t=TFIX==null?(performance.now()-t0)/1000:TFIX;
   cvs.forEach(function(cv){ var c=cv.getContext('2d'); c.setTransform(DPR,0,0,DPR,0,0); c.clearRect(0,0,cv.width,cv.height);
     try{ if(cv.dataset.cena){ if(A.CENAS[cv.dataset.cena]) cena(c,cv,t); } else DES[cv.id](c,t); }catch(e){ console.error(cv.id,e); c.fillStyle='#f87171'; c.font='16px Arial'; c.fillText('ERRO: '+e.message,20,30); } });
   if(TFIX==null) requestAnimationFrame(frame); else document.body.dataset.pronto='1'; }
-frame();
+(document.fonts?Promise.all([document.fonts.load('900 40px "Nunito"'),document.fonts.load('800 20px "Nunito"')]).catch(function(){}):Promise.resolve()).then(frame);
 </script></body></html>
