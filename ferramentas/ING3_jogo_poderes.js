@@ -77,8 +77,8 @@ function toca(wx,wy){ var M=J.mundo; if(!M) return false;
   return false; }
 function dica(){ var it=itemPerto(); if(!it) return null; var v=verbo(it); return {x:it.x,y:it.y-(it.tipo==='historia'?62:150),txt:v[0]+' Press ▼',pt:v[1]+' Aperte ▼',botao:true}; }
 function alvo(){ var M=J.mundo, u=J.urso; if(!M) return null; var r=null, trava=(M.modo==='voo'&&!u.poderes.capa)||(M.modo==='nado'&&!u.poderes.traje); /* barreira ativa: a seta volta para o item */
-  M.itens.forEach(function(it){ if(!r&&!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa')&&(trava||it.x>u.x-300)) r={x:it.x,y:it.y-150,tipo:'poder',txt:verbo(it)[0]}; });
-  M.ovos.forEach(function(o){ if(!r&&!o.chocado&&o.x>u.x-300) r={x:o.x,y:o.y-70,tipo:'poder',txt:'Touch the egg!'}; });
+  M.itens.forEach(function(it){ if(!r&&!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa')&&(trava||it.x>u.x-300)) r={x:it.x,y:it.y-150,tipo:'poder',txt:verbo(it)[0],txtPt:verbo(it)[1]}; });
+  M.ovos.forEach(function(o){ if(!r&&!o.chocado&&o.x>u.x-300) r={x:o.x,y:o.y-70,tipo:'poder',txt:'Touch the egg!',txtPt:'Toque no ovo!'}; });
   return r; }
 
 /* ---------- pegar ---------- */
@@ -126,6 +126,7 @@ function atira(){
   var s=tiroAtual(); if(!s){ if(poder().montado&&u.poderes.tiro) G.toast('Ride Pip first!',1400,'Monte no Pip primeiro!'); return true; }
   if((J.recarga||0)>0) return true; J.recarga=.45;
   var v=VEL[s], s0=G.TAM[u.tam], n=s==='faisca'?3:1;
+  if(s==='bola'){ u.chuteAte=J.t+.32; J.estrelas.push({x:u.x+u.dir*30*s0,y:u.y-12*s0,vx:u.dir*v.vx,vy:v.vy,g:v.g,alc:v.alc,dist:0,rot:0,skin:s,quiques:0}); SOM.fx('pisao'); log({ev:'tiro',skin:s}); return true; } /* sai do PÉ */
   for(var k=0;k<n;k++) J.estrelas.push({x:u.x+u.dir*24,y:u.y-46*s0+(k-1)*12,vx:u.dir*v.vx,vy:v.vy+(k-1)*(s==='faisca'?60:0),g:v.g,alc:v.alc,dist:0,rot:0,skin:s,quiques:0});
   SOM.fx(s==='bola'?'pisao':'pulo'); log({ev:'tiro',skin:s}); return true;
 }
@@ -387,7 +388,7 @@ function desenhaFundo(c,t){
   /* argolas e barras: viga do teto do ginásio */
   if(cena==='ginasio') (M.pendulos||[]).forEach(function(p){ if(p.ax>vx0&&p.ax<vx1){ c.fillStyle='#475569'; c.fillRect(p.ax-60,p.ay-10,120,12); c.fillStyle='#334155'; c.fillRect(p.ax-4,0,8,p.ay-8); } });
   /* rolantes: pilha de toras / portão com barris */
-  M.troncos.forEach(function(g){ if(g.x<vx0||g.x>vx1) return; var tr=g.aviso>0?Math.sin(t*50)*2:0; if(cena==='bosque') pilhaToras(c,g.x,g.y,tr); else if(cena==='vila') portaoBarris(c,g.x,g.y,tr); else if(g.bola) maquina(c,g,t); });
+  M.troncos.forEach(function(g){ if(g.x<vx0||g.x>vx1) return; var tr=g.aviso>0?Math.sin(t*14)*1.5:0; if(cena==='bosque') pilhaToras(c,g.x,g.y,tr); else if(cena==='vila') portaoBarris(c,g.x,g.y,tr); else if(g.bola) maquina(c,g,t); });
   M.canhoes.forEach(function(g){ if(g.x>vx0&&g.x<vx1) maquina(c,g,t); });
   /* voadores da floresta e da cozinha moram numa luz */
   if(cena==='bosque'||cena==='biscoito') M.inimigos.forEach(function(e){ if(e.tipo==='corvo'&&e.x0>vx0&&e.x0<vx1) luz(c,e.x0,e.y0-200,cena,t); });
@@ -413,7 +414,7 @@ function portaoBarris(c,x,y,tr){ c.save(); c.translate(x-14,y); /* o arco fica e
   var barril=function(dx,dy){ c.fillStyle=lin(c,dx-14,dy-30,dx+14,dy,'#b45309','#78350f'); rr(c,dx-14,dy-30,28,30,6); c.fill(); c.strokeStyle='#451a03'; c.lineWidth=2.5; c.beginPath(); c.moveTo(dx-14,dy-22); c.lineTo(dx+14,dy-22); c.moveTo(dx-14,dy-8); c.lineTo(dx+14,dy-8); c.stroke(); };
   barril(-2,0); barril(28,0); c.save(); c.translate(tr,0); barril(13,-30); c.restore(); c.restore(); }
 function maquina(c,g,t){ /* máquina de bolas de futebol: funil cheio, luz que fica vermelha antes de chutar */
-  c.save(); c.translate(g.x,g.y+22); var tr=g.aviso>0?Math.sin(t*50)*2:0; c.translate(tr,0);
+  c.save(); c.translate(g.x,g.y+22); var tr=g.aviso>0?Math.sin(t*14)*1.5:0; c.translate(tr,0);
   c.fillStyle=g.desligado?'#9ca3af':'#facc15'; rr(c,-26,-50,52,50,8); c.fill(); c.strokeStyle='#a16207'; c.lineWidth=3; rr(c,-26,-50,52,50,8); c.stroke();
   c.fillStyle='#374151'; circ(c,-26,-20,13); c.fill(); c.fillStyle='#111'; circ(c,-28,-20,9); c.fill();
   c.fillStyle='rgba(203,213,225,.85)'; c.beginPath(); c.moveTo(-22,-50); c.lineTo(-34,-86); c.lineTo(34,-86); c.lineTo(22,-50); c.closePath(); c.fill();

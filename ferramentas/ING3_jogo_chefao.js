@@ -26,6 +26,19 @@
      se resolve na derrota dele e no FINAL circular).
    Sem game over: dano encolhe / volta ao início da sala; a rodada
    continua de onde estava.
+   v4 (15/10, Paulo: "as estrelas não acertam o chefão nem causam dano;
+   tem que ser fácil perceber que ESPAÇO joga a estrela, pode ser ▼
+   também; outros seres do jogo podem apresentar as questões; só o
+   chefão recomeça se a criança cair MUITAS vezes"):
+     A FADA MADRINHA fica no canto da sala: é ela que dá as estrelas
+       (voam dela para o herói), explica "ESPAÇO ou ▼ = estrela" e
+       apresenta as perguntas dos duelos.
+     ESTRELA GUIADA: a estrela voa em arco até o alvo da rodada (o
+       tinteiro que brilha, se o herói está virado para ele) ou até o
+       CONDE, que pisca de dor, perde vida e reage.
+     VIDA: 12. Estrela tira 1 (até o piso da rodada), resposta certa
+       tira 1; na derrota a barra esvazia até o fim.
+     RECOMEÇO: 7 quedas na luta = a fada recomeça da rodada 1.
    ============================================================ */
 window.CHEFAO = (function(){
 'use strict';
@@ -38,14 +51,14 @@ var C=null;
 var ABERTURA=[
   {en:'Inkwell Castle. Count Scribble lives here!', pt:'Castelo do Tinteiro. Aqui mora o Conde Rabisco!', fx:'trovao'},
   {en:'"HA HA! The lost endings are MINE!"', pt:'"RÁ RÁ! Os finais perdidos são MEUS!"', fx:'conde'},
-  {en:'Jump on the shelf. Throw a ★ at the glowing inkwell!', pt:'Pule na prateleira. Jogue uma ★ no tinteiro que brilha!', fx:'tinteiros', botao:"Let's go! ▶"}
+  {en:'Fairy stars! SPACE or ▼: toss a star at the inkwell and the Count!', pt:'Estrelas da fada! ESPAÇO ou ▼: jogue uma estrela no tinteiro e no Conde!', fx:'tinteiros', botao:"Let's go! ▶"}
 ];
 
 function falaC(en,pt,dur){ if(!C) return; C.fala={en:en,pt:pt,t:0,dur:dur||3.2}; try{ say(en); }catch(e){} }
 function inicia(L){
-  C={x:19*T, y:SACADA_Y, hp:9, max:9, estado:'idle', et:0, ronda:-1, fase:'abertura', t:0, passo:0, aparece:0, escuro:1, raio:0,
+  C={x:19*T, y:SACADA_Y, hp:12, max:12, minHp:9, mortes:0, tiros:[], dons:[], fada:{x:2.4*T,y:CHAO-150,fala:null} /* flutua no alto: os botões de toque não cobrem */, downAnt:false, estado:'idle', et:0, ronda:-1, fase:'abertura', t:0, passo:0, aparece:0, escuro:1, raio:0,
      gotas:[], voando:[], letras:[], blocos:[], tinteiros:[], alvo:0, ondas:0, convertidas:0, banner:null, tRaio:6, alt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], tLetra:0, nLetra:0,
-     m:{x:19*T, y:SACADA_Y, tipo:'conde', falando:0, i:0}};
+     m:{x:19*T, y:SACADA_Y, tipo:'godmother', falando:0, i:0}};
   J.chefe=C; J.estado='chefeIntro'; SOM.musica('');
   C.tinteiros=[{x:5*T+22,y:7*T},{x:11*T+22,y:7*T},{x:8*T+22,y:CHAO}].map(function(p){ return {x:p.x,y:p.y,caido:false}; });
   if(window.UI){ UI.modoNivel(false); UI.acao(false,0); }
@@ -58,15 +71,46 @@ function mostraPasso(){
   if(p.fx==='conde'){ C.aparece=.001; C.estado='laugh'; C.et=0; SOM.fx('chefao'); J.shake=6; J.flash=.35; SOM.musica('chefao'); }
   if(p.fx==='risada'){ C.estado='laugh'; C.et=0; SOM.fx('risada'); }
   if(p.fx==='tinteiros'){ SOM.fx('destrava'); }
+  if(p.fx==='fada'){ SOM.fx('estrela'); }
   if(window.UI) UI.legenda({en:p.en,pt:p.pt,botao:p.botao},{next:avancaIntro,pula:fimIntro});
 }
 function avancaIntro(){ if(!C||C.fase!=='abertura') return; C.passo++; if(C.passo>=ABERTURA.length){ fimIntro(); return; } mostraPasso(); }
 function fimIntro(){ if(!C) return; if(window.UI){ UI.legenda(null); UI.modoNivel(true); } C.aparece=1; C.escuro=0; J.estado='nivel'; SOM.musica('chefao'); comecaFase(1); }
 
-function daEstrelas(){ var u=J.urso; u.poderes.estrelas=Math.max(u.poderes.estrelas||0,3); if(window.UI) UI.acao(true,u.poderes.estrelas); }
+function falaF(en,pt,dur){ if(!C) return; C.fada.fala={en:en,pt:pt,t:0,dur:dur||3.4}; try{ say(en); }catch(e){} }
+/* as estrelas vêm da fada: voam dela até o herói */
+function daEstrelas(){ var u=J.urso; if(!u) return; var f=C.fada; for(var k=0;k<3;k++) C.dons.push({x0:f.x+20,y0:f.y-40,t:-k*.12}); SOM.fx('estrela');
+  u.poderes.estrelas=Math.max(u.poderes.estrelas||0,5); if(window.UI) UI.acao(true,u.poderes.estrelas); }
+/* a estrela que o herói joga vira ESTRELA GUIADA: arco até o tinteiro da rodada ou até o Conde */
+function guiaEstrelas(){
+  var u=J.urso; (J.estrelas||[]).forEach(function(e){ if(e.skin||e.guiada) return; e.guiada=true; e.dist=999; /* sai da lista comum */
+    var alvo=null, tq=C.tinteiros[C.alvo];
+    if(C.fase==='p1'&&tq&&!tq.caido&&(tq.x-u.x)*u.dir>-20&&Math.abs(tq.x-u.x)<480) alvo={x:tq.x,y:tq.y-24,tipo:'tinteiro',tq:tq};
+    if(!alvo&&C.fase==='p2'){ var bl=null; J.mundo.inimigos.forEach(function(en){ if(en.doConde&&!en.morto&&!en.achatado&&(en.x-u.x)*u.dir>0&&Math.abs(en.x-u.x)<360&&(!bl||Math.abs(en.x-u.x)<Math.abs(bl.x-u.x))) bl=en; }); if(bl) alvo={x:bl.x,y:bl.y-20,tipo:'mancha',en:bl}; }
+    if(!alvo) alvo={x:C.x,y:C.y-70,tipo:'conde'};
+    C.tiros.push({x0:e.x,y0:e.y,x:e.x,y:e.y,alvo:alvo,t:0,dur:.5+Math.min(.35,Math.abs(alvo.x-e.x)/1400),rot:0}); });
+}
+function acertaConde(){ C.hp=Math.max(C.minHp,C.hp-1); C.estado='hit'; C.et=0; C.dor=.5; SOM.fx('chefao'); J.shake=6; G.brilho(C.x,C.y-70,14,'#fde047'); G.pontua(25,C.x,C.y-150);
+  C.nAcertos=(C.nAcertos||0)+1; if(C.nAcertos%3===1){ var r=[['OUCH! My hat!','AI! Meu chapéu!'],['Stop that, little hero!','Pare com isso, heroizinho!'],['Grr! That tickles!','Grr! Isso faz cócegas!']][(C.nAcertos>>1)%3]; falaC(r[0],r[1],2.2); } }
+function voaTiros(dt){
+  for(var i=C.tiros.length-1;i>=0;i--){ var p=C.tiros[i]; p.t+=dt; p.rot+=dt*12; var k=Math.min(1,p.t/p.dur), a=p.alvo, ax=a.tipo==='conde'?C.x:a.x;
+    p.x=p.x0+(ax-p.x0)*k; p.y=p.y0+(a.y-p.y0)*k-Math.sin(k*Math.PI)*90;
+    if(k>=1){ C.tiros.splice(i,1); G.brilho(p.x,p.y,10,'#fde047');
+      if(a.tipo==='conde') acertaConde();
+      else if(a.tipo==='mancha'){ if(!a.en.morto&&!a.en.achatado&&window.PERIGOS) PERIGOS.transforma(a.en); }
+      else if(a.tipo==='tinteiro'&&!a.tq.caido&&C.fase==='p1'){ a.tq.caido=true; C.alvo++; SOM.fx('chefao'); J.shake=8; G.brilho(a.tq.x,a.tq.y-30,16,'#a78bfa'); C.estado='hit'; C.et=0; C.hp=Math.max(C.minHp,C.hp-1);
+        if(C.alvo<3) falaC(C.alvo===1?'NO! My inkwell!':'Not another one!',C.alvo===1?'NÃO! Meu tinteiro!':'Outro não!'); } } }
+  for(var j=C.dons.length-1;j>=0;j--){ var d=C.dons[j]; d.t+=dt; if(d.t>.7) C.dons.splice(j,1); }
+}
+/* quedas na luta: só depois de MUITAS a fada recomeça do começo */
+function morreu(){ if(!C||C.fase==='abertura'||C.fase==='derrota') return; C.mortes++;
+  if(C.mortes===4) falaF('You can do it! Throw stars: SPACE or ▼','Você consegue! Jogue estrelas: ESPAÇO ou ▼');
+  if(C.mortes>=7){ C.mortes=0; C.hp=C.max; C.minHp=9; C.ronda=-1; C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; });
+    banner('ROUND 1','RODADA 1'); falaF('Let\'s try again from the start!','Vamos tentar de novo do começo!'); comecaFase(1); } }
 function comecaFase(n){
   C.fase='p'+n; C.t=0; C.gotas=[]; C.letras=[]; daEstrelas(); SOM.musica('chefao');
-  if(n===1){ C.alvo=0; C.tinteiros.forEach(function(q){ q.caido=false; }); falaC('My magic inkwells!','Meus tinteiros mágicos!'); }
+  C.minHp=[9,6,3][n-1]; C.mortes=0; /* 7 quedas na MESMA rodada para recomeçar: só se cair muitas vezes mesmo */
+  if(n===1){ C.alvo=0; C.tinteiros.forEach(function(q){ q.caido=false; }); falaC('My magic inkwells!','Meus tinteiros mágicos!'); falaF('SPACE or ▼ = throw a star!','ESPAÇO ou ▼ = jogar uma estrela!'); }
   if(n===2){ C.convertidas=0; C.ondas=0; J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; }); falaC('Ink blots, GO!','Manchas, VÃO!'); }
   if(n===3){ C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); C.nLetra=0; C.tLetra=1.2; falaC('GIANT letters!','Letras GIGANTES!'); }
 }
@@ -88,7 +132,7 @@ function transicao(n){
   else falaC('ENOUGH! Giant letters!','CHEGA! Letras gigantes!');
 }
 function derrota(){
-  C.fase='derrota'; C.t=0; C.estado='sad'; C.gotas=[]; C.letras=[]; SOM.musica(''); SOM.fx('vitoria');
+  C.fase='derrota'; C.t=0; C.minHp=0; C.drena=true; /* a barra esvazia até o fim: a derrota é de verdade */ C.estado='sad'; C.gotas=[]; C.letras=[]; SOM.musica(''); SOM.fx('vitoria');
   falaC('Oh no… you found the endings.','Ah, não… você achou os finais.');
   C.t=0;
 }
@@ -115,18 +159,20 @@ function atualiza(dt){
   C.tRaio-=dt; if(C.tRaio<=0){ C.tRaio=9+Math.random()*5; C.raio=.6; J.flash=Math.max(J.flash,.12); SOM.fx('quebra'); }
   /* o Conde anda pela sacada (não fica parado) */
   if(C.fase!=='abertura'&&C.fase!=='derrota'&&C.fase!=='quiz') C.x=19.2*T+Math.sin(C.t*.7)*1.3*T;
-  voa(dt);
+  voa(dt); voaTiros(dt); if(C.dor>0) C.dor-=dt; if(C.fada.fala) C.fada.fala.t+=dt;
+  if(C.drena&&C.hp>0){ C.dreno=(C.dreno||0)+dt; if(C.dreno>.18){ C.dreno=0; C.hp--; } }
   if(J.estado!=='nivel') return;
   var u=J.urso, R=G.ursoRet(), vivo=u.invT<=0&&u.tontoT<=0;
-  if((u.poderes.estrelas||0)<=0&&/^p/.test(C.fase)&&C.t>2) daEstrelas();
+  if((u.poderes.estrelas||0)<=0&&/^p/.test(C.fase)&&C.t>1&&!C.dons.length) daEstrelas();
+  /* ▼ também joga a estrela (Paulo: "pode ser pra baixo também") */
+  if(J.in.down&&!C.downAnt&&/^p/.test(C.fase)&&window.PERIGOS) PERIGOS.atira(); C.downAnt=!!J.in.down;
+  guiaEstrelas();
   if(C.fase==='espera'){ if(C.t>2) duelo(); }
   else if(C.fase==='derrota'){ if(C.t>3.2){ G.iniciaFinal(); return; } } /* o final limpa o Conde: não seguir usando C */
   else if(C.fase==='transicao'){ if(C.t>2.8){ C.banner=null; comecaFase(C.prox); } }
   else if(C.fase==='p1'){
     var ritmo=3.4-C.alvo*.3;
     if(Math.floor((C.t-dt)/ritmo)!==Math.floor(C.t/ritmo)) novaGota();
-    (J.estrelas||[]).forEach(function(e){ var tq=C.tinteiros[C.alvo]; if(tq&&!tq.caido&&Math.abs(e.x-tq.x)<36&&Math.abs(e.y-(tq.y-24))<70){ tq.caido=true; e.dist=999; C.alvo++; SOM.fx('chefao'); J.shake=8; G.brilho(tq.x,tq.y-30,16,'#a78bfa'); C.estado='hit'; C.et=0;
-      if(C.alvo<3) falaC(C.alvo===1?'NO! My inkwell!':'Not another one!',C.alvo===1?'NÃO! Meu tinteiro!':'Outro não!'); } });
     if(C.alvo>=3&&C.t>.5){ C.fase='espera'; C.t=0; C.estado='hit'; falaC('Answer THIS!','Responda ISTO!'); C.t=0; }
   }
   else if(C.fase==='p2'){
@@ -158,9 +204,9 @@ function atualiza(dt){
   });
 }
 function voa(dt){
-  for(var i=C.voando.length-1;i>=0;i--){ var p=C.voando[i]; p.t+=dt; var k=Math.min(1,p.t/.8); p.cx=p.x+(C.x-p.x)*k; p.cy=p.y+(C.y-60-p.y)*k-Math.sin(k*Math.PI)*120; if(k>=1){ C.voando.splice(i,1); C.hp=Math.max(0,C.hp-1); C.estado='hit'; C.et=0; SOM.fx('chefao'); J.shake=8; G.brilho(C.x,C.y-60,14,'#fde047'); } }
+  for(var i=C.voando.length-1;i>=0;i--){ var p=C.voando[i]; p.t+=dt; var k=Math.min(1,p.t/.8); p.cx=p.x+(C.x-p.x)*k; p.cy=p.y+(C.y-60-p.y)*k-Math.sin(k*Math.PI)*120; if(k>=1){ C.voando.splice(i,1); C.hp=Math.max(1,C.hp-1); C.dor=.5; C.estado='hit'; C.et=0; SOM.fx('chefao'); J.shake=8; G.brilho(C.x,C.y-60,14,'#fde047'); } }
 }
-function anima(dt){ if(!C) return; C.et+=dt; if(C.estado!=='idle'&&C.estado!=='sad'&&C.et>1) C.estado='idle'; voa(dt); }
+function anima(dt){ if(!C) return; C.et+=dt; if(C.estado!=='idle'&&C.estado!=='sad'&&C.et>1) C.estado='idle'; voa(dt); if(C.dor>0) C.dor-=dt; }
 
 /* ---------- desenho (no mundo) ---------- */
 function desenha(c,t){
@@ -172,7 +218,13 @@ function desenha(c,t){
   /* a poça que borbulha na sacada (abertura) e o Conde surgindo dela */
   if(C.fase==='abertura'&&C.passo>=1){ var bb=Math.sin(t*6); c.fillStyle='#1e1b4b'; A.el(c,C.x,C.y-4,70,12); c.fill(); c.fillStyle='#4338ca'; for(var q=0;q<5;q++){ var ph=(t*1.6+q*.37)%1; A.circ(c,C.x-50+q*25,C.y-8-ph*40,6*(1-ph)+2); c.fill(); } }
   if(A.conde&&(C.fase!=='abertura'||C.aparece>0)){ var k=C.fase==='abertura'?C.aparece:1;
-    c.save(); c.translate(C.x,C.y); c.scale(.6+.4*k,k); c.globalAlpha=Math.min(1,k*1.5); A.conde(c,0,0,C.estado,t); c.restore(); }
+    var dor=C.dor>0?C.dor/.5:0; c.save(); c.translate(C.x+(dor?Math.sin((1-dor)*Math.PI*3)*6:0),C.y); c.scale(.6+.4*k,k); c.globalAlpha=Math.min(1,k*1.5); A.conde(c,0,0,C.estado,t);
+    if(dor){ c.globalAlpha=dor*.45; c.fillStyle='#fde047'; A.circ(c,0,-80,60); c.fill(); } c.restore(); }
+  /* a Fada Madrinha no canto da sala (dá as estrelas e faz as perguntas) */
+  if(A.morador&&C.fase!=='quiz'){ var f=C.fada, fy=f.y+Math.sin(t*1.6)*6; c.save(); c.globalAlpha=.35; c.fillStyle='#fde68a'; A.circ(c,f.x,fy-50,54); c.fill(); c.restore(); A.morador(c,'godmother',f.x,fy,t,1,!!(f.fala&&f.fala.t<f.fala.dur));
+    for(var s3=0;s3<4;s3++){ var a3=t*1.2+s3*1.57; A.estrela(c,f.x+Math.cos(a3)*46,fy-56+Math.sin(a3)*20,4,'#fde047',a3); } }
+  C.dons.forEach(function(d){ if(d.t<0) return; var u=J.urso, k2=Math.min(1,d.t/.6), x=d.x0+(u.x-d.x0)*k2, y=d.y0+(u.y-50-d.y0)*k2-Math.sin(k2*Math.PI)*80; A.estrela(c,x,y,10,'#fde047',d.t*8); });
+  C.tiros.forEach(function(p){ c.save(); c.globalAlpha=.35; A.estrela(c,p.x-(p.alvo.x>p.x0?14:-14),p.y+4,9,'#fde68a',p.rot); c.restore(); A.estrela(c,p.x,p.y,13,'#fde047',p.rot); });
   /* tinteiros (rodada 1) com seta no que brilha */
   C.tinteiros.forEach(function(tq,i){ c.save(); c.translate(tq.x,tq.y); if(tq.caido) c.rotate(1.3);
     var aceso=!tq.caido&&i===C.alvo&&(C.fase==='p1'||(C.fase==='abertura'&&C.passo>=2));
@@ -189,7 +241,7 @@ function desenha(c,t){
   /* sombras de aviso, gotas e letras em voo */
   [C.gotas,C.letras].forEach(function(lista,ehLetra){ lista.forEach(function(d){ if(d.t<0) return;
     var k=Math.min(1,d.t/d.dur), chao=ehLetra&&d.degrau?CHAO-C.alt[d.col]*T:CHAO; c.fillStyle='rgba(30,27,75,'+(.15+.45*k)+')'; A.el(c,d.alvo,chao-2,(ehLetra?28:16)*(.5+.6*k),6); c.fill();
-    if(!d.vira){ c.strokeStyle='rgba(239,68,68,'+(.3+.5*Math.abs(Math.sin(t*12)))+')'; c.lineWidth=2; A.el(c,d.alvo,chao-2,(ehLetra?32:22),8); c.stroke(); }
+    if(!d.vira){ c.strokeStyle='rgba(239,68,68,.6)'; c.lineWidth=2; A.el(c,d.alvo,chao-2,(ehLetra?32:22),8); c.stroke(); }
     if(ehLetra){ c.save(); c.translate(d.x,d.y); c.rotate(Math.sin(k*6)*.2); c.fillStyle=d.degrau?'#8b5cf6':'#7c3aed'; c.strokeStyle='#2e1065'; c.lineWidth=5; c.font='900 50px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.strokeText(d.ch,0,0); c.fillText(d.ch,0,0); c.restore(); }
     else { c.fillStyle='#312e81'; c.beginPath(); c.moveTo(d.x,d.y-d.r*1.6); c.quadraticCurveTo(d.x+d.r,d.y-d.r*.2,d.x,d.y+d.r); c.quadraticCurveTo(d.x-d.r,d.y-d.r*.2,d.x,d.y-d.r*1.6); c.fill(); c.fillStyle='rgba(196,181,253,.7)'; A.circ(c,d.x-d.r*.3,d.y,d.r*.3); c.fill(); }
   }); });
@@ -204,15 +256,19 @@ function desenhaTela(c,t){
     c.fillStyle='#e9d5ff'; c.font='900 13px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='top'; c.fillText('COUNT SCRIBBLE',W/2,y-3);
     for(var i=0;i<C.max;i++){ var w=(320-(C.max-1)*4)/C.max; c.fillStyle=i<C.hp?A.lin(c,0,y+14,0,y+34,'#a78bfa','#5b21b6'):'rgba(255,255,255,.15)'; A.rr(c,x+i*(w+4),y+14,w,20,6); c.fill(); }
     var vencidas=C.convertidas||0;
-    var obj=C.fase==='p1'?['★ the glowing inkwell!  '+C.alvo+' / 3','★ no tinteiro que brilha!']:(C.fase==='p2'?['Stomp the ink blots!  '+Math.min(6,vencidas)+' / 6','Pise nas manchas!']:(C.fase==='p3'?['Climb the letters!','Suba nas letras!']:null));
-    if(obj){ c.font='900 18px "Nunito",Arial'; var tw=c.measureText(obj[0]).width+30; c.fillStyle='rgba(76,29,149,.85)'; A.rr(c,W/2-tw/2,y+46,tw,J.tr?46:30,15); c.fill(); c.fillStyle='#fde68a'; c.textBaseline='top'; c.fillText(obj[0],W/2,y+51); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText(obj[1],W/2,y+73); } }
+    var obj=C.fase==='p1'?['★ the glowing inkwell!  '+C.alvo+' / 3','★ no tinteiro que brilha!']:(C.fase==='p2'?['Stomp or ★ the ink blots!  '+Math.min(6,vencidas)+' / 6','Pise ou jogue ★ nas manchas!']:(C.fase==='p3'?['Climb the letters!','Suba nas letras!']:null));
+    if(obj){ c.font='900 18px "Nunito",Arial'; var tw=c.measureText(obj[0]).width+30; c.fillStyle='rgba(76,29,149,.85)'; A.rr(c,W/2-tw/2,y+46,tw,J.tr?46:30,15); c.fill(); c.fillStyle='#fde68a'; c.textBaseline='top'; c.fillText(obj[0],W/2,y+51); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText(obj[1],W/2,y+73); }
+      /* como jogar a estrela: sempre à vista, no canto de baixo */
+      var dica=J.tr?'★ = ESPAÇO ou ▼':'★ = SPACE or ▼'; c.font='900 16px "Nunito",Arial'; var tw4=c.measureText(dica).width+28; c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,W/2-tw4/2,H-44,tw4,32,16); c.fill(); c.fillStyle='#fde047'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(dica,W/2,H-28); }
   }
   if(C.fala&&!J.quiz&&C.fala.t<C.fala.dur&&C.fase!=='abertura'){ c.font='900 19px "Nunito",Arial'; var tw2=Math.min(560,c.measureText(C.fala.en).width)+36, bx=Math.max(20,Math.min(W-tw2-20,C.x-J.cam-tw2-30)), by=150;
     c.fillStyle='#ede9fe'; A.rr(c,bx,by,tw2,J.tr?62:44,16); c.fill(); c.beginPath(); c.moveTo(bx+tw2-30,by+(J.tr?60:42)); c.lineTo(bx+tw2,by+(J.tr?78:60)); c.lineTo(bx+tw2-60,by+(J.tr?60:42)); c.fill();
     c.fillStyle='#2e1065'; c.textAlign='left'; c.textBaseline='top'; c.fillText(C.fala.en,bx+18,by+12); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#6d28d9'; c.fillText(C.fala.pt,bx+18,by+38); } }
+  var ff=C.fada.fala; if(ff&&!J.quiz&&ff.t<ff.dur){ c.font='900 17px "Nunito",Arial'; var tw5=Math.min(440,c.measureText(ff.en).width)+30, bx5=Math.max(12,C.fada.x-J.cam+48), by5=150; /* ao lado da fada, longe dos botões de toque */
+    c.fillStyle='#fef9c3'; A.rr(c,bx5,by5,tw5,J.tr?58:40,14); c.fill(); c.fillStyle='#713f12'; c.textAlign='left'; c.textBaseline='top'; c.fillText(ff.en,bx5+15,by5+10,440); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#a16207'; c.fillText(ff.pt,bx5+15,by5+34,440); } }
   if(C.banner&&C.banner.t<2.6){ var k=Math.min(1,C.banner.t/.3), sai=Math.max(0,(C.banner.t-2.1)/.5); c.save(); c.globalAlpha=1-sai; c.fillStyle='rgba(13,11,30,.6)'; c.fillRect(0,H/2-70,W,140);
     c.translate(W/2,H/2); c.scale(.6+.4*k,.6+.4*k); c.font='900 72px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=10; c.strokeStyle='#2e1065'; c.strokeText(C.banner.en,0,0); c.fillStyle='#fde047'; c.fillText(C.banner.en,0,0);
     if(J.tr){ c.font='700 20px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText(C.banner.pt,0,46); } c.restore(); }
 }
-return {inicia:inicia, atualiza:atualiza, anima:anima, desenha:desenha, desenhaTela:desenhaTela, solidos:solidos, avancaIntro:avancaIntro, ativo:function(){ return !!C; }, limpa:function(){ C=null; J.chefe=null; if(window.UI) UI.legenda(null); }};
+return {morreu:morreu, inicia:inicia, atualiza:atualiza, anima:anima, desenha:desenha, desenhaTela:desenhaTela, solidos:solidos, avancaIntro:avancaIntro, ativo:function(){ return !!C; }, limpa:function(){ C=null; J.chefe=null; if(window.UI) UI.legenda(null); }};
 })();

@@ -34,7 +34,7 @@ function atualiza(dt){
   });
   (M.correntes||[]).forEach(function(cr){ if(G.colideRet(R.x,R.y,R.w,R.h,cr.x,cr.y,cr.w,cr.h)) u.x+=cr.vx*dt*(u.noChao?.4:1); });
   (M.ventos||[]).forEach(function(v){ if(G.colideRet(R.x,R.y,R.w,R.h,v.x,v.y,v.w,v.h)) u.vy+=v.vy*dt*6; });
-  (M.tempestades||[]).forEach(function(z){ if(cicloTempestade(z)==='raio'&&vivo&&G.colideRet(R.x,R.y,R.w,R.h,z.x+z.w/2-14,z.y+40,28,M.h)) G.machucado(); });
+  (M.tempestades||[]).forEach(function(z){ if(cicloTempestade(z)==='raio'&&vivo&&G.colideRet(R.x,R.y,R.w,R.h,z.x+z.w/2-14,z.y+40,28,M.h)){ if(u.tam>0) G.machucado(); else { u.vx=-320; u.x-=50; u.invT=1.6; u.tontoT=.4; SOM.fx('tonto'); J.shake=4; } } }); /* 15/10: o raio empurra para trás, não manda de volta ao checkpoint */
 }
 /* inimigos novos: o dano de encostar é o do motor (machucado); o baiacu inchado não se pisa */
 function inimigo(c,e,t){
@@ -42,7 +42,7 @@ function inimigo(c,e,t){
     c.fillStyle='rgba(129,140,248,.85)'; c.beginPath(); c.ellipse(0,0,20*pul,16/pul,0,Math.PI,0); c.fill();
     c.strokeStyle='rgba(165,180,252,.8)'; c.lineWidth=3; for(var i=-2;i<=2;i++){ c.beginPath(); c.moveTo(i*7,0); c.quadraticCurveTo(i*7+Math.sin(t*5+i)*6,16,i*7,30); c.stroke(); }
     c.fillStyle='#fff'; A.circ(c,-6,-6,3); c.fill(); A.circ(c,6,-6,3); c.fill(); c.fillStyle='#111'; A.circ(c,-6,-6,1.5); c.fill(); A.circ(c,6,-6,1.5); c.fill(); c.restore(); return true; }
-  if(e.tipo==='baiacu'){ c.save(); c.translate(e.x+(e.treme?Math.sin(t*50)*2:0),e.y-24); var r=e.inchado?24:15;
+  if(e.tipo==='baiacu'){ c.save(); c.translate(e.x+(e.treme?Math.sin(t*14)*1.5:0),e.y-24); var r=e.inchado?24:15;
     if(e.inchado){ c.fillStyle='#1e1b4b'; for(var k=0;k<14;k++){ var a=k*Math.PI/7; c.beginPath(); c.moveTo(Math.cos(a)*r*.8,Math.sin(a)*r*.8); c.lineTo(Math.cos(a)*(r+9),Math.sin(a)*(r+9)); c.lineTo(Math.cos(a+.15)*r*.8,Math.sin(a+.15)*r*.8); c.fill(); } }
     var g=c.createRadialGradient(-4,-6,2,0,0,r); g.addColorStop(0,'#a5b4fc'); g.addColorStop(1,'#3730a3'); c.fillStyle=g; A.circ(c,0,0,r); c.fill();
     c.fillStyle='#4338ca'; c.beginPath(); c.moveTo(r-2,0); c.lineTo(r+10,-7); c.lineTo(r+10,7); c.fill();
@@ -56,7 +56,7 @@ function desenha(c,t){
   (M.tempestades||[]).forEach(function(z){ var est=cicloTempestade(z), cx=z.x+z.w/2;
     c.save(); var cor=est==='calma'?'#94a3b8':(est==='aviso'?'#475569':'#334155'); c.fillStyle=cor; A.circ(c,cx-30,z.y+20,26); c.fill(); A.circ(c,cx,z.y+10,32); c.fill(); A.circ(c,cx+30,z.y+20,26); c.fill(); A.rr(c,cx-56,z.y+18,112,26,13); c.fill();
     c.fillStyle='#fff'; A.circ(c,cx-10,z.y+20,4); c.fill(); A.circ(c,cx+10,z.y+20,4); c.fill(); c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.arc(cx,z.y+34,7,1.15*Math.PI,1.85*Math.PI); c.stroke();
-    if(est==='aviso'){ c.fillStyle='rgba(253,224,71,'+(.18+.32*(.5+.5*Math.sin(t*9.4)))+')'; A.circ(c,cx,z.y+28,40); c.fill(); }
+    if(est==='aviso'){ c.fillStyle='rgba(253,224,71,'+(.18+.32*(.5+.5*Math.sin(t*5)))+')'; A.circ(c,cx,z.y+28,40); c.fill(); }
     if(est==='raio'){ c.strokeStyle='#fde047'; c.lineWidth=7; c.shadowColor='#fde047'; c.shadowBlur=16; c.beginPath(); c.moveTo(cx,z.y+44); var yy=z.y+44; for(var k=0;k<8;k++){ yy+=55; c.lineTo(cx+(k%2?14:-14),yy); } c.stroke(); }
     c.restore(); });
 }

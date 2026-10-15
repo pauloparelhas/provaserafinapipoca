@@ -20,12 +20,13 @@ function usadas(){ try{ return JSON.parse(localStorage.getItem(USADAS)||'[]'); }
 function marca(id){ var u=usadas(); if(u.indexOf(id)<0){ u.push(id); try{ localStorage.setItem(USADAS,JSON.stringify(u)); }catch(e){} } }
 function embaralha(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
 function escolhe(f,n,jaNaFase){
-  var pool=ING3.ITENS.filter(function(it){ if(f.tema!=='todos'&&it.tema!==f.tema) return false; if(f.at&&it.at&&!it.at.some(function(a){ return f.at.indexOf(a)>=0; })) return false; return jaNaFase.indexOf(it.id)<0; });
+  var pool=ING3.ITENS.filter(function(it){ if(f.tema!=='todos'&&it.tema!==f.tema) return false; if(f.at&&it.at&&!it.at.some(function(a){ return f.at.indexOf(a)>=0; })) return false; if(it.texto) return false; /* 15/10 (Paulo): no jogo a pergunta tem 1-2 linhas; textos de leitura ficam no simulado e no estudo */ return jaNaFase.indexOf(it.id)<0; });
   var u=usadas(), novas=pool.filter(function(it){ return u.indexOf(it.id)<0; });
   if(novas.length<n){ var ids=pool.map(function(it){ return it.id; }); try{ localStorage.setItem(USADAS,JSON.stringify(u.filter(function(id){ return ids.indexOf(id)<0; }))); }catch(e){} novas=pool; }
   var sel=[], leit=0;
   if(f.mix){ f.mix.forEach(function(tp){ var c=embaralha(novas.filter(function(it){ return it.tipo===tp&&sel.indexOf(it)<0; }))[0]||embaralha(pool.filter(function(it){ return it.tipo===tp&&sel.indexOf(it)<0; }))[0]; if(c) sel.push(c); }); if(sel.length>=n) return sel.slice(0,n); }
   embaralha(novas).forEach(function(it){ if(sel.length>=n) return; if(it.tipo==='leitura'){ if(leit>=1) return; leit++; } sel.push(it); });
+  if(sel.length<n) embaralha(pool).forEach(function(it){ if(sel.length<n&&sel.indexOf(it)<0) sel.push(it); }); /* nunca porta com 1 pergunta só */
   return sel;
 }
 
@@ -37,19 +38,20 @@ function inicia(m,op){
   itens.forEach(function(it){ ja.push(it.id); });
   var u=J.urso; u.vx=0; J.in.left=J.in.right=J.in.jump=J.in.down=false;
   J.quiz={m:m, op:op||null, itens:itens, i:0, fase:'entra', t:0, acertos:0, cartoes:[], dica:false};
+  try{ var tt=document.getElementById('toast'); if(tt) tt.classList.remove('show'); }catch(e){} /* nada cobre a pergunta */
   J.estado='quiz'; m.visto=true; SOM.fx('iris'); SOM.musica('arena');
   montaPergunta();
   if(window.UI) UI.quizBotoes(true);
 }
 function montaPergunta(){
   var q=J.quiz, it=q.itens[q.i], ordem=embaralha(it.o.map(function(_,i){ return i; }));
-  q.item=it; q.ordem=ordem; q.certa=ordem.indexOf(it.c); q.escolha=-1; q.minT=0; q.fase=q.i?'pergunta':'entra'; q.t=0; q.tempo=TEMPO; q.dica=false; q.lay=null;
+  q.item=it; q.ordem=ordem; q.certa=ordem.indexOf(it.c); q.escolha=-1; q.minT=0; q.fase=q.i?'pergunta':'entra'; q.t=0; q.tempo=TEMPO; q.dica=false; q.lay=null; q.next=null;
   q.cartoes=ordem.map(function(oi,k){ return {k:k, txt:it.o[oi], pt:(it.o_pt||[])[oi]||'', estado:'normal', bump:0}; });
   try{ say(it.p); }catch(e){}
 }
 function responde(k){
   var q=J.quiz; if(!q||q.fase!=='pergunta') return;
-  var ok=k===q.certa; q.escolha=k; q.fase='resposta'; q.t=0; q.auto=ok?1.6:4.5; if(penalti()) q.auto=Math.max(q.auto,2.8); /* 18/10 (Paulo): segue sozinho para a próxima; errou = tempo de ver a certa e o comentário */
+  var ok=k===q.certa; q.escolha=k; q.fase='resposta'; q.t=0; q.auto=0; /* 15/10 (Paulo): não avança sozinho — a criança lê o comentário e toca no Next, que respira suave para chamar */
   J.stats.perguntas++; marca(q.item.id);
   q.cartoes.forEach(function(c){ c.estado= c.k===q.certa?'certa':(c.k===k?'errada':'apagada'); });
   if(k>=0) q.cartoes[k].bump=10;
@@ -79,7 +81,7 @@ function atualiza(dt){
   q.cartoes.forEach(function(c){ if(c.bump>0) c.bump=Math.max(0,c.bump-dt*50); });
   if(q.fase==='entra'&&q.t>.7){ q.fase='pergunta'; q.t=0; }
   else if(q.fase==='pergunta'){ var antes=Math.ceil(q.tempo); var lendo=false; try{ lendo=speechSynthesis.speaking; }catch(e){} if(!lendo&&q.item.tipo!=='leitura') q.tempo=Math.max(0,q.tempo-dt); /* guardiao: sem pressa para ler */ var agora=Math.ceil(q.tempo); if(agora!==antes&&agora<=5&&agora>0) SOM.fx('clique'); if(q.tempo<=0) responde(-1); }
-  else if(q.fase==='resposta'&&q.auto&&q.t>=q.auto) segue();
+  
   else if(q.fase==='pagina'&&q.t>1.6) termina();
 }
 
@@ -118,12 +120,19 @@ function desenhaTela(c,t){
   relogio(c,W/2,88,q,t);
   balao(c,q,it);
   q.cartoes.forEach(function(cd){ cartao(c,cd); });
-  if(q.fase==='resposta'&&q.t>.3){ /* barrinha que enche sozinha até a próxima pergunta (tocar adianta) */ var bx=W-150, by=CART_Y-58, fr=Math.min(1,q.t/(q.auto||1.6)); c.globalAlpha=ent; c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,bx,by,126,40,20); c.fill(); c.fillStyle='#fde047'; c.save(); A.rr(c,bx,by,126,40,20); c.clip(); c.fillRect(bx,by,126*fr,40); c.restore(); c.strokeStyle='#fde047'; c.lineWidth=2; A.rr(c,bx,by,126,40,20); c.stroke(); c.fillStyle=fr>.5?'#1e1b3a':'#fff'; c.font=F(900,17); c.textAlign='center'; c.textBaseline='middle'; c.fillText(q.i<q.itens.length-1?'Next ▶':'Done ▶',bx+63,by+20); }
+  if(q.fase==='resposta'&&q.t>.5) botaoNext(c,q,t,ent);
   c.restore();
 }
+/* Next: grande, amarelo, "respirando" devagar (escala e brilho suaves, ~1 vez por segundo — nada de piscar) */
+function botaoNext(c,q,t,ent){ var bw=170, bh=56, bx=W-bw-26, by=CART_Y-bh-12, k=.5+.5*Math.sin(t*3.2), s=1+.05*k;
+  c.save(); c.globalAlpha=ent*Math.min(1,(q.t-.5)/.3); c.translate(bx+bw/2,by+bh/2); c.scale(s,s);
+  c.shadowColor='rgba(253,224,71,'+(.35+.4*k)+')'; c.shadowBlur=14+12*k; c.fillStyle=A.lin?A.lin(c,0,-bh/2,0,bh/2,'#fde68a','#f59e0b'):'#fbbf24'; A.rr(c,-bw/2,-bh/2,bw,bh,22); c.fill(); c.shadowBlur=0;
+  c.strokeStyle='#b45309'; c.lineWidth=3; A.rr(c,-bw/2,-bh/2,bw,bh,22); c.stroke();
+  c.fillStyle='#1e1b3a'; c.font=F(900,24); c.textAlign='center'; c.textBaseline='middle'; c.fillText(q.i<q.itens.length-1?'Next ▶':'Done ▶',0,1); c.restore();
+  q.next={x:bx,y:by,w:bw,h:bh}; }
 function relogio(c,x,y,q,t){
   var frac=q.fase==='entra'?1:q.tempo/TEMPO, urg=frac<.34&&q.fase==='pergunta';
-  c.save(); c.translate(x,y); if(urg){ var s=1+.05*Math.sin(t*12); c.scale(s,s); }
+  c.save(); c.translate(x,y); if(urg){ var s=1+.05*Math.sin(t*4); c.scale(s,s); }
   c.fillStyle='rgba(13,11,30,.85)'; A.circ(c,0,0,30); c.fill();
   c.strokeStyle='rgba(255,255,255,.15)'; c.lineWidth=7; A.circ(c,0,0,24); c.stroke();
   c.strokeStyle=urg?'#ef4444':'#fde047'; c.lineCap='round'; c.beginPath(); c.arc(0,0,24,-Math.PI/2,-Math.PI/2+Math.PI*2*frac); c.stroke();
@@ -175,7 +184,7 @@ function cartao(c,cd){
 function bate(){}
 function toque(lx,ly){
   var q=J.quiz; if(!q) return false;
-  if(q.fase==='resposta'){ segue(); return true; }
+  if(q.fase==='resposta'){ var nb=q.next; if(!nb||(lx>nb.x-12&&lx<nb.x+nb.w+12&&ly>nb.y-12&&ly<nb.y+nb.h+12)) segue(); return true; } /* só o botão Next avança: tocar no cartão não pula o comentário */
   if(q.fase!=='pergunta') return true;
   for(var i=0;i<q.cartoes.length;i++){ var cd=q.cartoes[i]; if(lx>cd.x&&lx<cd.x+cd.w&&ly>cd.y&&ly<cd.y+cd.h){ responde(i); return true; } }
   return true;

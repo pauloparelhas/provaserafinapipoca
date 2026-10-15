@@ -63,6 +63,7 @@ function pose(e,t){
   switch(e){
     case 'walk': s=Math.sin(t*11); P.bob=-Math.abs(Math.cos(t*11))*2.4; P.lN=[s*.62,Math.max(0,-s)*.75+.1]; P.lF=[-s*.62,Math.max(0,s)*.75+.1];
       P.aN=-s*.75; P.aF=s*.75; P.lean=.06; P.sw=.45+Math.abs(s)*.15; P.capa=1.4+Math.abs(s); P.tilt=s*.03; break;
+    case 'kick': P.lF=[1.45,.08]; P.lN=[-.18,.12]; P.aN=-.7; P.aF=1.0; P.lean=-.1; P.boca='open'; P.face='feliz'; P.sw=.3; P.capa=1.2; break; /* chute de futebol: perna da frente esticada */
     case 'jump': P.sx=.94; P.sy=1.07; P.lN=[1.05,1.4]; P.lF=[-.25,.75]; P.aN=-2.35; P.aF=2.15; P.boca='o'; P.face='alto'; P.sw=-.15; P.capa=2.2; break;
     case 'fall': s=Math.sin(t*16); P.sy=.98; P.lN=[.28,.4]; P.lF=[-.22,.55]; P.aN=-2.55+s*.25; P.aF=2.35-s*.25; P.boca='O'; P.face='susto'; P.sw=1.0; P.capa=-2.6; break;
     case 'cheer': s=Math.abs(Math.sin(t*7)); k=s<.22?(.22-s)/.22:0; P.bob=-s*12; P.sx=1+k*.08-s*.03; P.sy=1-k*.08+s*.05;
@@ -361,7 +362,7 @@ function ovo(c,t){
    ============================================================ */
 A.placa=function(c,x,y,w,h,estado,t){
   t=t||0; var dx=0, dy=0, lift=0;
-  if(estado==='errada') dx=Math.sin(t*42)*3*Math.max(0,Math.cos(t*2));
+  if(estado==='errada') dx=Math.sin(t*20)*3*Math.max(0,Math.cos(t*2));
   if(estado==='bump') dy=-7;
   var pal={normal:['#d79a5a','#94602f','#fdf3dc','#6b3f1f'], bump:['#e3a868','#9b6532','#fff7e6','#6b3f1f'], certa:['#6fd38a','#1f8a4c','#e9fbe9','#145c32'], errada:['#f08a7c','#b3362b','#feeceb','#7f1d1d'], apagada:['#b9b3ac','#857d75','#eeebe7','#5c5650']}[estado]||null;
   if(!pal) pal=['#d79a5a','#94602f','#fdf3dc','#6b3f1f'];

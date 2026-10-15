@@ -26,7 +26,7 @@ function desenha(){
     case 'cano': default: desenhaNivel(c);
   }
   if(!J.mundo||J.estado==='mapa'||J.estado==='capa'||J.estado==='intro'||J.estado==='escolha'||J.estado==='final'||J.estado==='corrida'||J.estado==='estadio') J.clima.forEach(function(p){ A.particula(c,p); });
-  if(J.flash>0){ c.fillStyle='rgba(255,255,255,'+(J.flash*.5)+')'; c.fillRect(0,0,W,H); }
+  if(J.flash>0){ c.fillStyle='rgba(255,247,230,'+Math.min(.16,J.flash*.22)+')'; c.fillRect(0,0,W,H); } /* sem clarão: só um véu morno e suave */
   if(J.trans) A.iris(c,J.trans.x,J.trans.y,G.raioIris());
   c.restore();
 }
@@ -112,7 +112,7 @@ function desenhaNivel(c){
   if(J.quiz&&window.QUIZ) QUIZ.desenhaMundo(c,t);
   if(J.pip){ var p=J.pip; pip(c,p.x,p.y,p.parado?'idle':'walk',t,p.vx>=0?1:-1,1); }
   /* o herói: tamanho + squash & stretch, pisca quando invencível */
-  if(u.invT>0){ c.globalAlpha=.55+.35*Math.sin(t*12); } { var s=TAM[u.tam];
+  if(u.invT>0){ c.globalAlpha=.6; } { var s=TAM[u.tam];
     if(u.montado){ var sela=(A.pip&&A.pip.SELA_Y)||40; pip(c,u.x,u.y,u.noChao?(Math.abs(u.vx)>5?'walk':'idle'):'fly',u.anim,u.dir,1); c.save(); c.translate(u.x,u.y-sela); c.scale(u.sx,u.sy); heroi(c,0,0,'ride',u.anim,u.dir,s,u.quem); c.restore(); }
     else { var poseH=poseDoHeroi(u,M); J.poseHeroi=poseH; J.capaLonga=poseH==='fly'; if(window.PODERES) PODERES.antesHeroi(c,u,s,t);
       c.save(); c.translate(u.x,u.y); if(u.giro){ var hh2=G.URSO_H*s*(u.estado==='hang'?1:.5); c.translate(0,-hh2); c.rotate(u.giro); c.translate(0,hh2); } c.scale(u.sx,u.sy); var est2=u.estado==='hang'||u.estado==='spin'?'cheer':null; heroi(c,0,0,est2||(poseH==='paraquedas'?'jump':poseH),u.anim,u.dir,s,u.quem); c.restore(); if(window.PODERES) PODERES.depoisHeroi(c,u,s,t); } }
@@ -129,6 +129,7 @@ function desenhaNivel(c){
 }
 /* pose do herói: a capa longa de voo SÓ aparece com a capa no céu; o guardanapo é paraquedas (Paulo: "voa de capa sem ter pego capa") */
 function poseDoHeroi(u,M){
+  if(u.chuteAte&&J.t<u.chuteAte) return 'kick'; /* bola: o herói CHUTA (Paulo: "tem que chutar, não jogar com a mão") */
   if(u.abaixado) return Math.abs(u.vx)>8?'crawl':'crouch';
   if(u.estado==='glide') return (u.poderes.capa&&M.modo==='voo')?'fly':(u.poderes.guardanapo?'paraquedas':'jump');
   if(u.estado==='fly'&&!(u.poderes.capa&&M.modo==='voo')) return 'jump';
@@ -190,7 +191,7 @@ function desenhaGuia(c,t,mundo){
     var b=Math.abs(Math.sin(t*4))*12; c.save(); c.translate(a.x,Math.max(J.camY+130,a.y)-24-b); /* nunca debaixo do HUD */
     c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(-16,-30); c.lineTo(16,-30); c.lineTo(16,-12); c.lineTo(28,-12); c.lineTo(0,14); c.lineTo(-28,-12); c.lineTo(-16,-12); c.closePath(); c.fill(); c.stroke();
     var txt=a.tipo==='cano'?'Go in: ▼':(a.tipo==='poder'?(a.txt||'Take it!'):'The end!'); c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw=c.measureText(txt).width+18; c.fillStyle='rgba(13,11,30,.85)'; A.rr(c,-tw/2,-62,tw,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(txt,0,-49);
-    if(J.tr){ var tpt=a.tipo==='cano'?'Entre no cano ▼':(a.tipo==='poder'?'Pegue! ▼':'Fim!'); c.font='700 12px "Nunito",Arial'; var twp=c.measureText(tpt).width+12; c.fillStyle='rgba(13,11,30,.8)'; A.rr(c,-twp/2,-84,twp,20,10); c.fill(); c.fillStyle='#fde68a'; c.fillText(tpt,0,-74); }
+    if(J.tr){ var tpt=a.tipo==='cano'?'Entre no cano ▼':(a.tipo==='poder'?((a.txtPt||'Pegue!')+' ▼'):'Fim!'); c.font='700 12px "Nunito",Arial'; var twp=c.measureText(tpt).width+12; c.fillStyle='rgba(13,11,30,.8)'; A.rr(c,-twp/2,-84,twp,20,10); c.fill(); c.fillStyle='#fde68a'; c.fillText(tpt,0,-74); }
     c.restore(); return; }
   if(dentro) return;
   var lado=sx<20?-1:(sx>W-20?1:0), ex=lado<0?44:(lado>0?W-44:Math.max(60,Math.min(W-60,sx))), ey=lado?Math.max(150,Math.min(330,sy)):(sy<60?96:H-150);
