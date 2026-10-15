@@ -38,9 +38,11 @@ function modoNivel(on){ $('touch').style.display=on?'block':'none'; }
 function modoMapa(on){ var b=$('mapBtns'); if(b) b.style.display=on?'flex':'none'; }
 function hudArena(on){ document.body.classList.toggle('naArena',!!on); }
 function quizBotoes(on){ $('quizBtns').classList.toggle('show',!!on); }
+/* corrida: ◀ ▶ somem (o carro anda sozinho); PULAR vira ▲ e o ▼ desce de faixa */
+function modoCorrida(on){ document.body.classList.toggle('corrida',!!on); $('tJump').innerHTML=on?'&#9650;':'JUMP'; }
 
 /* ---------- legenda da intro ---------- */
-function legenda(cena){ var d=$('legenda'); if(!cena){ d.classList.remove('show'); return; } d.innerHTML='<p>'+bi(cena.en,cena.pt)+'</p><button class="mini" id="lgPula">Skip ▶▶</button>'; d.classList.add('show'); $('lgPula').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); JOGO.pulaIntro(); }); try{ say(cena.en); }catch(e){} }
+function legenda(cena){ var d=$('legenda'); if(!cena){ d.classList.remove('show'); return; } d.innerHTML='<p>'+bi(cena.en,cena.pt)+'</p><button class="mini" id="lgPula">Skip ▶▶</button>'; d.classList.add('show'); $('lgPula').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); if(JOGO.J.estado==='final') JOGO.pulaFinal(); else JOGO.pulaIntro(); }); try{ say(cena.en); }catch(e){} }
 
 /* ---------- escolha do herói ---------- */
 var HEROIS=[{k:'lia',en:'Lia, the brave knight',pt:'Lia, a cavaleira corajosa'},{k:'theo',en:'Theo, the wizard',pt:'Theo, o aprendiz de mago'},{k:'bia',en:'Bia, the gymnast',pt:'Bia, a ginasta'}];
@@ -82,7 +84,7 @@ function fimFase(f,estrelas,acertos,total,pontos,moedas,pags,totPags){
   menu(h,{mMapa:function(){ fechaMenu(); JOGO.voltaMapa(); }, mDeNovo:function(){ fechaMenu(); JOGO.jogarDeNovo(); }},'festa');
 }
 function pausa(){
-  if(menuAberto) return; var J2=JOGO.J; if(J2.estado!=='nivel'&&J2.estado!=='quiz') return;
+  if(menuAberto) return; var J2=JOGO.J; if(['nivel','quiz','corrida','estadio'].indexOf(J2.estado)<0) return;
   JOGO.pausa(true);
   var h='<h2>'+bi('Paused','Pausa')+'</h2><button class="mbtn pri" id="mCont">'+bi('Continue','Continuar')+'</button><div class="mrow"><button class="mbtn" id="mSfx">Sounds: '+(SOM.sfx?'on':'off')+'</button><button class="mbtn" id="mMus">Music: '+(SOM.mus?'on':'off')+'</button></div>';
   if(!document.body.classList.contains('sem-voz')) h+='<button class="mbtn" id="mVoz">Voice: '+(window.somLigado?'on':'off')+'</button>';
@@ -107,6 +109,12 @@ function historia(){
   JOGO.CENAS_INTRO.forEach(function(c2){ h+='<div>'+bi(c2.en,c2.pt)+'</div>'; });
   h+='</div><div class="mrow"><button class="mbtn" id="mVer">'+bi('Watch again','Ver de novo')+'</button><button class="mbtn pri" id="mOk">OK</button></div>';
   menu(h,{mOk:fechaMenu, mVer:function(){ fechaMenu(); modoMapa(false); cartaoMapa(null); JOGO.iniciaIntro(); }});
+}
+function creditos(){
+  var P=JOGO.J.prog, h='<h2>'+bi('The End','Fim')+'</h2><p>'+bi('You found the lost endings! Every story has its ending back.','Você achou os finais perdidos! Toda história tem o seu final de volta.')+'</p><div class="lista">';
+  FASES.LISTA.forEach(function(f){ var p=P.fases[f.id]||{}; h+='<div><span>'+esc(f.nome)+'</span><span class="st">'+'★'.repeat(p.estrelas||0)+'</span></div>'; });
+  h+='</div><button class="mbtn pri" id="mMapa">'+bi('Back to the map','Voltar ao mapa')+'</button>';
+  menu(h,{mMapa:function(){ fechaMenu(); JOGO.irMapa(); }},'festa');
 }
 function confirmaCasa(){
   if(menuAberto) return; var estava=JOGO.J.pausado; JOGO.pausa(true);
@@ -138,12 +146,14 @@ function keydown(e){
   var k=e.key, J2=JOGO.J, m=menuAberto;
   if(k==='Escape'){ e.preventDefault(); if(J2.estado==='quiz'&&!m){ QUIZ.sai(); return; } if(m){ if(J2.estado==='nivel'||J2.estado==='quiz'){ fechaMenu(); JOGO.pausa(false); } } else pausa(); return; }
   if(m){ if(k==='Enter'){ var pri=$('mcard').querySelector('.mbtn.pri'); if(pri){ e.preventDefault(); pri.click(); } } return; }
-  if(J2.estado==='intro'||J2.estado==='mapa'){
+  if(J2.estado==='intro'||J2.estado==='mapa'||J2.estado==='final'){
     if(k==='Enter'||k===' '){ e.preventDefault(); JOGO.confirmar(); return; }
     if(J2.estado==='mapa'){ if(k==='ArrowRight'||k==='d'||k==='D') JOGO.mapaMove(1); if(k==='ArrowLeft'||k==='a'||k==='A') JOGO.mapaMove(-1); }
     return;
   }
   if(J2.estado==='quiz'&&QUIZ.tecla(k)){ e.preventDefault(); return; }
+  if(J2.estado==='corrida'&&CORRIDA.tecla(k)){ e.preventDefault(); return; }
+  if(J2.estado==='estadio'&&ESTADIO.tecla(k)){ e.preventDefault(); return; }
   var ac=mapaTeclas[k]; if(ac){ e.preventDefault(); J2.in[ac]=true; }
 }
 function keyup(e){ var ac=mapaTeclas[e.key]; if(ac) JOGO.J.in[ac]=false; }
@@ -205,7 +215,7 @@ function init(){
 }
 document.addEventListener('DOMContentLoaded',init);
 
-return {SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
-  menu:menu, fechaMenu:fechaMenu, fimFase:fimFase, pausa:pausa, comoJogar:comoJogar, historia:historia, confirmaCasa:confirmaCasa, confirmaRecomecar:confirmaRecomecar, alternaTr:alternaTr,
+return {SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, modoCorrida:modoCorrida, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
+  creditos:creditos, menu:menu, fechaMenu:fechaMenu, fimFase:fimFase, pausa:pausa, comoJogar:comoJogar, historia:historia, confirmaCasa:confirmaCasa, confirmaRecomecar:confirmaRecomecar, alternaTr:alternaTr,
   menuAberto:function(){ return menuAberto; }};
 })();

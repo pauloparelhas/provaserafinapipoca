@@ -64,13 +64,16 @@ function paraLogico(cx,cy){ return {x:(cx-offX)/escala, y:(cy-offY)/escala}; }
 function novoUrso(x,y){ return {x:x,y:y,vx:0,vy:0,noChao:true,dir:1,estado:'idle',anim:0,tontoT:0,invT:0,tam:1,sx:1,sy:1,poderes:{capa:false,bota:false},puloExtra:false,planando:false,cheerT:0,sobre:null,montado:false,quem:J.prog.heroi||'lia'}; }
 function iniciaFase(f){
   J.faseAtual=f;
+  if(f.modo==='estadio'&&window.ESTADIO){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; ESTADIO.inicia(f); return; }
+  if(f.modo==='corrida'&&window.CORRIDA){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; CORRIDA.inicia(f); return; }
   var L=F.monta(f);
   J.nivel=L; J.mundo=L; J.urso=novoUrso(L.inicioX,L.inicioY); J.cam=0; J.camY=Math.max(0,L.h-H); J.bolasCanhao=[]; J.part=[]; J.clima=[]; J.shake=0; J.tFase=0; J.fimFase=null; J.troncosVivos=[]; J.dica=null; J.setaT=0; J.quiz=null; J.pip=null;
   J.respawn={x:L.inicioX,y:L.inicioY,mundo:'main'}; J.stats={perguntas:0,acertos:0}; J.pontos=0;
   L.ovos.forEach(function(o){ o.chocado=false; o.t=0; });
   J.tut= L.passos?{i:0,t:0}:null;
+  J.chefe=null; if(f.chefao&&window.CHEFAO){ CHEFAO.limpa(); CHEFAO.inicia(L); }
   J.estado='nivel'; J.flash=.6;
-  SOM.musica((A.CENAS[L.cena]||{}).musica||'floresta'); hud();
+  SOM.musica(f.chefao?'chefao':((A.CENAS[L.cena]||{}).musica||'floresta')); hud();
   if(window.UI){ UI.modoNivel(true); UI.modoMapa(false); }
 }
 

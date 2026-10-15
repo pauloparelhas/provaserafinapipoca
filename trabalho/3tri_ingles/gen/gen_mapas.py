@@ -116,7 +116,46 @@ def ceu():
     m.p(157, 9, 'F')
     return m
 
-MAPAS = {1: vila(), 2: bosque(), 4: recife(), 5: ceu()}
+def ginasio():
+    """ginásio: trampolins (molas), traves altas e argolas (plataformas), nenhum perigo grave"""
+    m = Mapa(150)
+    m.p(2, 9, 'U')
+    m.p(9, 9, 'S'); m.faixa(11, 15, 5, '='); m.faixa(11, 15, 4, 'o')
+    m.faixa(18, 22, 7, '=')
+    m.p(26, 9, 'c'); m.praca(29)
+    m.p(50, 9, 'S'); m.faixa(52, 55, 4, '='); m.faixa(52, 55, 3, 'o'); m.faixa(58, 61, 6, '='); m.buraco(63, 2)
+    m.p(67, 9, 'i'); m.p(71, 9, 'S'); m.faixa(73, 76, 5, '=')
+    m.p(78, 9, 'c'); m.praca(81)
+    m.faixa(102, 104, 7, '='); m.faixa(106, 108, 5, '='); m.faixa(110, 112, 7, '='); m.buraco(105, 3)
+    m.p(114, 9, 'i'); m.p(116, 9, 'c'); m.praca(119)
+    m.faixa(141, 144, 7, 'o'); m.p(146, 9, 'F')
+    return m
+
+def biscoito():
+    """a roda do biscoito: a fase COMEÇA e TERMINA no prato com o biscoito (é uma circle story)"""
+    m = Mapa(150)
+    m.p(2, 9, 'U')
+    m.faixa(6, 9, 7, '='); m.faixa(6, 9, 6, 'o')                 # o prato com o biscoito (início)
+    m.faixa(13, 16, 5, '='); m.faixa(19, 22, 7, '=')
+    m.p(25, 9, 'c'); m.praca(28)
+    m.bloco(49, 50, 7, 9); m.faixa(52, 55, 5, '='); m.p(58, 9, 'i'); m.buraco(61, 3)
+    m.faixa(65, 68, 6, '='); m.faixa(65, 68, 5, 'o')
+    m.p(72, 9, 'c'); m.praca(75)
+    m.bloco(96, 97, 7, 9); m.faixa(99, 101, 5, '='); m.p(104, 9, 'i'); m.buraco(107, 3); m.p(112, 9, 'i')
+    m.p(115, 9, 'c'); m.praca(118)
+    m.faixa(140, 143, 7, '='); m.faixa(140, 143, 6, 'o')         # o mesmo prato com biscoito (fim)
+    m.p(146, 9, 'F')
+    return m
+
+def castelo():
+    """sala do Conde Rabisco: uma tela só; ele fica na sacada (direita), o herói desvia da tinta em baixo"""
+    m = Mapa(22)
+    m.p(2, 9, 'U')
+    m.bloco(17, 21, 6, 9)                                        # sacada do Conde (alta: o herói não sobe)
+    m.faixa(4, 6, 6, '='); m.faixa(10, 12, 6, '=')               # duas plataformas para desviar
+    return m
+
+MAPAS = {1: vila(), 2: bosque(), 4: recife(), 5: ceu(), 6: ginasio(), 8: biscoito(), 9: castelo()}
 js = ['/* ING3_jogo_mapas.js — GERADO por trabalho/3tri_ingles/gen/gen_mapas.py. Não editar à mão. */', 'window.MAPAS = {']
 for k, m in MAPAS.items():
     js.append('  %d:{main:[' % k)

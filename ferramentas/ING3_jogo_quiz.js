@@ -31,13 +31,14 @@ function escolhe(f,n,jaNaFase){
 }
 
 /* ---------- ciclo ---------- */
-function inicia(m){
+/* op (chefão): {itens, baseX, camX, aoResponder(ok), aoTerminar()} — perguntas e lugar das placas vêm de fora */
+function inicia(m,op){
   if(J.quiz) return;
   var f=J.faseAtual, L=J.nivel, ja=L.quizIds||(L.quizIds=[]);
-  var itens=escolhe(f,N_POR_MORADOR,ja); if(!itens.length) return;
+  var itens=(op&&op.itens)||escolhe(f,N_POR_MORADOR,ja); if(!itens.length) return;
   itens.forEach(function(it){ ja.push(it.id); });
   var u=J.urso; u.vx=0; J.in.left=J.in.right=false;
-  J.quiz={m:m, itens:itens, i:0, fase:'entra', t:0, acertos:0, placas:[], camX:m.x-140, chao:m.y, lay:null};
+  J.quiz={m:m, op:op||null, itens:itens, i:0, fase:'entra', t:0, acertos:0, placas:[], camX:op&&op.camX!==undefined?op.camX:m.x-140, chao:op&&op.chao||m.y, lay:null};
   J.estado='quiz'; m.visto=true; SOM.fx('plim');
   montaPergunta();
   if(window.UI) UI.quizBotoes(true);
@@ -45,7 +46,8 @@ function inicia(m){
 function montaPergunta(){
   var q=J.quiz, it=q.itens[q.i]; var ordem=embaralha(it.o.map(function(_,i){ return i; }));
   q.item=it; q.ordem=ordem; q.certa=ordem.indexOf(it.c); q.escolha=-1; q.fase='entra'; q.t=0; q.lay=null; q.dica=false;
-  q.placas=ordem.map(function(oi,k){ return {k:k, x:q.m.x+170+k*(PLACA_W+PLACA_GAP), y:q.chao-PLACA_BASE-90, w:PLACA_W, h:90, txt:it.o[oi], pt:(it.o_pt||[])[oi]||'', estado:'normal', ativa:false, bump:0, queda:0}; });
+  var x0=q.op&&q.op.baseX!==undefined?q.op.baseX:q.m.x+170;
+  q.placas=ordem.map(function(oi,k){ return {k:k, x:x0+k*(PLACA_W+PLACA_GAP), y:q.chao-PLACA_BASE-90, w:PLACA_W, h:90, txt:it.o[oi], pt:(it.o_pt||[])[oi]||'', estado:'normal', ativa:false, bump:0, queda:0}; });
   q.m.falando=2.5;
   try{ say(it.p); }catch(e){}
 }
@@ -59,11 +61,13 @@ function responde(k){
   else { SOM.fx('erro'); J.shake=4; }
   q.m.falando=2.5;
   try{ say((ok?'Yes! ':'Not quite. ')+(q.item.ex||'')); }catch(e){}
+  if(q.op&&q.op.aoResponder) q.op.aoResponder(ok);
 }
 function segue(){
   var q=J.quiz; if(!q||q.fase!=='resposta'||q.t<.6) return;
   q.i++;
   if(q.i<q.itens.length){ montaPergunta(); return; }
+  if(q.op){ q.fase='pagina'; q.t=0; q.placas.forEach(function(p){ p.ativa=false; }); return; } /* chefão: sem página de morador */
   /* fim do morador: uma página do livro */
   q.fase='pagina'; q.t=0; q.placas.forEach(function(p){ p.ativa=false; p.estado='sobe'; });
   q.m.feito=true; SOM.fx('vitoria');
@@ -72,9 +76,9 @@ function segue(){
   G.pontua(150);
 }
 function sai(){ /* ✕ Leave: volta a jogar na hora; o morador espera o herói se afastar */
-  var q=J.quiz; if(!q) return; q.m.esperaT=1.5; termina();
+  var q=J.quiz; if(!q) return; if(q.op){ q.op.aoTerminar=null; } q.m.esperaT=1.5; termina(); if(q.op&&q.op.aoSair) q.op.aoSair();
 }
-function termina(){ var q=J.quiz; J.quiz=null; J.estado='nivel'; if(window.UI) UI.quizBotoes(false); G.hud(); try{ speechSynthesis.cancel(); }catch(e){} if(q&&!q.m.feito){ q.m.esperaT=Math.max(q.m.esperaT||0,1.5); } }
+function termina(){ var q=J.quiz; J.quiz=null; J.estado='nivel'; if(q&&q.op&&q.op.aoTerminar) setTimeout(q.op.aoTerminar,0); if(window.UI) UI.quizBotoes(false); G.hud(); try{ speechSynthesis.cancel(); }catch(e){} if(q&&!q.m.feito){ q.m.esperaT=Math.max(q.m.esperaT||0,1.5); } }
 
 function atualiza(dt){
   var q=J.quiz; if(!q) return; q.t+=dt;
@@ -187,5 +191,5 @@ function tecla(k){
 function alternaDica(){ var q=J.quiz; if(!q||q.fase!=='pergunta') return; q.dica=!q.dica; if(q.dica){ try{ say(q.item.dica_en||''); }catch(e){} } }
 function ouvir(){ var q=J.quiz; if(!q) return; var it=q.item; try{ say(q.fase==='resposta'?(it.ex||''):it.p+'. '+q.ordem.map(function(oi,k){ return (k+1)+': '+it.o[oi]; }).join('. ')); }catch(e){} }
 
-return {inicia:inicia, atualiza:atualiza, desenhaMundo:desenhaMundo, desenhaTela:desenhaTela, bate:bate, toque:toque, tecla:tecla, sai:sai, segue:segue, alternaDica:alternaDica, ouvir:ouvir, escolhe:escolhe};
+return {embaralha:embaralha, marca:marca, inicia:inicia, atualiza:atualiza, desenhaMundo:desenhaMundo, desenhaTela:desenhaTela, bate:bate, toque:toque, tecla:tecla, sai:sai, segue:segue, alternaDica:alternaDica, ouvir:ouvir, escolhe:escolhe};
 })();

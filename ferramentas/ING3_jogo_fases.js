@@ -19,22 +19,22 @@ var LISTA=[
    resumo:'Characters, settings and story events. "Once upon a time…" and "…happily ever after."', resumo_pt:'Personagens, cenários e acontecimentos. "Era uma vez…" e "…felizes para sempre."'},
   {id:2, nome:'Enchanted Forest', nome_pt:'Floresta Encantada', cena:'bosque', tema:'fairy', at:['F3','F4','F5','F8','F9','F13','F14'], moradores:['godmother','owl','godmother'],
    resumo:'Magic, magical creatures, the special helper, threes and sevens, good and bad characters, the lesson.', resumo_pt:'Magia, criaturas mágicas, o ajudante especial, três e sete, personagem bom e mau, a lição.'},
-  {id:3, nome:'Real or Make-believe Rally', nome_pt:'Corrida Real ou Faz de Conta', cena:'pista', tema:'realmb', breve:true, moradores:['announcer'],
+  {id:3, nome:'Real or Make-believe Rally', nome_pt:'Corrida Real ou Faz de Conta', cena:'pista', modo:'corrida', tema:'realmb', moradores:['announcer','announcer','announcer'],
    resumo:'Real or make-believe? Can it really happen?', resumo_pt:'Real ou faz de conta? Pode acontecer de verdade?'},
   {id:4, nome:'Rhyme Reef', nome_pt:'Recife das Rimas', cena:'recife', modo:'nado', tema:'poem', at:['P7','P9','P10'], moradores:['octopus','octopus','octopus'],
    resumo:'Rhyme and imagery.', resumo_pt:'Rima e imagens na mente.'},
   {id:5, nome:'Stanza Skies', nome_pt:'Céu das Estrofes', cena:'nuvens', modo:'voo', tema:'poem', at:['P1','P2','P3','P4','P5','P6','P11'], moradores:['bard','bard','bard'],
    resumo:'Title, lines, stanzas and author. Poem or poetry?', resumo_pt:'Título, versos, estrofes e autor. Poema ou poesia?'},
-  {id:6, nome:'Rhythm Gym', nome_pt:'Ginásio do Ritmo', cena:'ginasio', tema:'poem', at:['P8','P10'], breve:true, moradores:['coach'],
+  {id:6, nome:'Rhythm Gym', nome_pt:'Ginásio do Ritmo', cena:'ginasio', tema:'poem', at:['P8','P10','P7','P9'], moradores:['coach','coach','coach'],
    resumo:'Rhythm: the beat of a poem.', resumo_pt:'Ritmo: a batida do poema.'},
-  {id:7, nome:'Cause & Effect Stadium', nome_pt:'Estádio da Causa e Efeito', cena:'estadio', tema:'cause', breve:true, moradores:['referee'],
+  {id:7, nome:'Cause & Effect Stadium', nome_pt:'Estádio da Causa e Efeito', cena:'estadio', modo:'estadio', tema:'cause', moradores:['referee','referee','referee'],
    resumo:'If… (cause) → Then… (effect).', resumo_pt:'Se… (causa) → Então… (efeito).'},
-  {id:8, nome:'The Cookie Circle', nome_pt:'A Roda do Biscoito', cena:'biscoito', tema:'circle', breve:true, moradores:['mouse'],
+  {id:8, nome:'The Cookie Circle', nome_pt:'A Roda do Biscoito', cena:'biscoito', tema:'circle', moradores:['mouse','mouse','mouse'],
    resumo:'A circle story ends where it began.', resumo_pt:'A história circular termina onde começou.'},
-  {id:9, nome:'Inkwell Castle', nome_pt:'Castelo do Tinteiro', cena:'tinta', tema:'todos', chefao:true, breve:true, moradores:[],
+  {id:9, nome:'Inkwell Castle', nome_pt:'Castelo do Tinteiro', cena:'tinta', tema:'todos', chefao:true, moradores:[],
    resumo:'Count Scribble mixed up all the stories!', resumo_pt:'O Conde Rabisco misturou todas as histórias!'}
 ];
-var PRONTOS={1:true,2:true,4:true,5:true}; /* reinos já construídos (E1: vila e floresta; E2: recife e céu) */
+var PRONTOS={1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:true,9:true}; /* reinos já construídos (E1: vila e floresta; E2: recife e céu) */
 
 /* ---------- parser: grade → objeto de nível ---------- */
 var ITENS={H:'maca',A:'capa',J:'bota'};

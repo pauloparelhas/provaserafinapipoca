@@ -19,6 +19,9 @@ function desenha(){
     case 'intro': desenhaIntro(c); break;
     case 'escolha': desenhaEscolha(c); break;
     case 'mapa': desenhaMapa(c); break;
+    case 'corrida': if(window.CORRIDA) CORRIDA.desenha(c); break;
+    case 'final': desenhaFinal(c); break;
+    case 'estadio': if(window.ESTADIO) ESTADIO.desenha(c); break;
     default: desenhaNivel(c);
   }
   J.clima.forEach(function(p){ A.particula(c,p); });
@@ -77,6 +80,7 @@ function desenhaNivel(c){
   M.ovos.forEach(function(o){ if(!o.chocado&&o.x>vx0&&o.x<vx1){ var bal=Math.sin(t*5)*.12; c.save(); c.translate(o.x,o.y); c.rotate(bal); pip(c,0,0,'egg',t,1,1); c.restore(); } });
   M.moradores.forEach(function(m){ if(m.x>vx0-100&&m.x<vx1+100) morador(c,m,t); });
   M.inimigos.forEach(function(e){ if(!e.morto&&e.x>vx0&&e.x<vx1){ if(e.tipo==='tinta') manchaTinta(c,e,t); else A.inimigo(c,e,t); } });
+  if(J.chefe&&window.CHEFAO) CHEFAO.desenha(c,t);
   if(J.quiz&&window.QUIZ) QUIZ.desenhaMundo(c,t);
   if(J.pip){ var p=J.pip; pip(c,p.x,p.y,p.parado?'idle':'walk',t,p.vx>=0?1:-1,1); }
   /* o herói: tamanho + squash & stretch, pisca quando invencível */
@@ -86,6 +90,7 @@ function desenhaNivel(c){
   J.part.forEach(function(p){ A.particula(c,p); });
   if(J.dica && J.estado==='nivel') desenhaDica(c,J.dica,t);
   c.restore();
+  if(J.chefe&&window.CHEFAO) CHEFAO.desenhaTela(c,t);
   if(J.quiz&&window.QUIZ) QUIZ.desenhaTela(c,t);
   if(J.fimFase){ var k=Math.min(1,J.fimFase.t/.8); c.fillStyle='rgba(13,11,30,'+(k*.35)+')'; c.fillRect(0,0,W,H); if(J.fimFase.t>.3){ c.save(); c.translate(W/2,150); var sc=Math.min(1,(J.fimFase.t-.3)*2.5); c.scale(sc,sc); titulo(c,'Kingdom complete!',0,0,54); c.restore(); } }
 }
@@ -141,6 +146,15 @@ function desenhaIntro(c){
   if(it.i>=3){ var k=Math.min(1,it.t/1.5); HEROIS.forEach(function(q,i){ heroi(c,cx-180+i*180,450-k*20*Math.abs(Math.sin(t*3+i)),'cheer',t,1,1.25,q); }); if(A.pip) A.pip(c,cx+260,450,'idle',t,-1,1); }
   titulo(c,'The Lost Endings',W/2,58,46);
   c.save(); c.globalAlpha=.65+.35*Math.sin(t*3); c.fillStyle='#fff'; c.font='800 15px "Nunito",Arial'; c.textAlign='right'; c.fillText('Tap to continue  ▶',W-20,H-14); c.restore();
+}
+/* ---------- final ---------- */
+function desenhaFinal(c){
+  var t=J.t, it=J.final||{i:3,t:0}, sc=JOGO.CENAS_FINAL[it.i]||JOGO.CENAS_FINAL[3], cena=A.CENAS[sc.cena]?sc.cena:'floresta';
+  A.ceu(c,cena,t); A.longe(c,cena,0,t); A.perto(c,cena,0,t); if(cena!=='biblioteca') A.chao(c,{x:0,y:450,w:W,h:90},cena);
+  if(it.i<=1){ if(A.conde) A.conde(c,620,450,it.i===0?'sad':'write',t); heroi(c,330,450,'idle',t,1,1.2); if(it.i===1){ for(var k=0;k<6;k++){ var a=t*1.2+k; if(A.paginaVoando) A.paginaVoando(c,480+Math.cos(a)*200,240+Math.sin(a*1.3)*60,a); } } }
+  else if(it.i===2){ ['lia','theo','bia'].forEach(function(q,i){ heroi(c,320+i*160,450-Math.abs(Math.sin(t*3+i))*16,'cheer',t,1,1.2,q); }); if(A.pip) A.pip(c,800,450,'idle',t,-1,1.1); if(A.conde) A.conde(c,160,450,'laugh',t); }
+  else { if(A.biscoito) A.biscoito(c,480,330,46,0); heroi(c,330,450,'cheer',t,1,1.2); }
+  titulo(c,it.i===2?'Happily ever after':'The Lost Endings',W/2,58,40);
 }
 /* ---------- escolha do herói (os cartões ficam no DOM; aqui só o palco) ---------- */
 function desenhaEscolha(c){

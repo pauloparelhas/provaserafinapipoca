@@ -46,7 +46,7 @@ function atualizaNivel(dt){
   var L=J.nivel, M=J.mundo, u=J.urso;
   if(u.cheerT>0){ u.cheerT-=dt; u.estado='cheer'; u.anim+=dt; }
   M.checkpoints.forEach(function(cp){ if(!cp.acesa&&u.x>cp.x&&u.x<cp.x+160&&Math.abs(u.y-cp.y)<180){ cp.acesa=true; J.respawn={x:cp.x,y:cp.y,mundo:M.mundo}; SOM.fx('checkpoint'); G.brilho(cp.x,cp.y-80,12); } });
-  inimigos(dt); G.perigos(dt); moradores(dt);
+  inimigos(dt); G.perigos(dt); moradores(dt); if(J.chefe&&window.CHEFAO) CHEFAO.atualiza(dt);
   if(M.mastro && Math.abs(u.x-M.mastro.x)<30 && Math.abs(u.y-M.mastro.y)<70 && J.estado==='nivel') fimDeFase();
   if(J.tut) atualizaTutorial(dt);
   dicas();
@@ -138,6 +138,21 @@ function iniciaIntro(){ J.estado='intro'; J.t=0; J.intro={i:0,t:0}; SOM.musica('
 function atualizaIntro(dt){ var it=J.intro; it.t+=dt; if(it.t>=CENAS_INTRO[it.i].dur) avancaIntro(); }
 function avancaIntro(){ var it=J.intro; if(!it) return; it.i++; it.t=0; if(it.i>=CENAS_INTRO.length){ fimIntro(); return; } SOM.fx('clique'); if(window.UI) UI.legenda(CENAS_INTRO[it.i]); }
 function fimIntro(){ J.intro=null; if(window.UI) UI.legenda(null); J.prog.introVista=true; G.salva(); if(!J.prog.heroi) iniciaEscolha(); else irMapa(false); }
+/* ---------- final: o Conde, o final feliz e a volta à biblioteca (circle story) ---------- */
+var CENAS_FINAL=[
+  {en:'Count Scribble sat down. "I never finished my own story," he said.', pt:'O Conde Rabisco se sentou. "Eu nunca terminei a minha própria história", ele disse.', dur:5.5, cena:'tinta'},
+  {en:'So you helped him write the ending. The lost pages flew back into the book!', pt:'Então você ajudou o Conde a escrever o final. As páginas perdidas voltaram para o livro!', dur:5.5, cena:'tinta'},
+  {en:'And they all lived happily ever after.', pt:'E todos viveram felizes para sempre.', dur:4.5, cena:'vila'},
+  {en:'Back in the library, the cookie was still there. The story ended where it began: a circle story!', pt:'De volta à biblioteca, o biscoito ainda estava lá. A história terminou onde começou: uma história circular!', dur:6.5, cena:'biblioteca'}
+];
+function iniciaFinal(){
+  var f=J.faseAtual, s=J.stats; if(window.CHEFAO) CHEFAO.limpa(); J.quiz=null;
+  var ant=J.prog.fases[f.id]||{}; var est=s.perguntas?(s.acertos/s.perguntas>=.9?3:(s.acertos/s.perguntas>=.7?2:1)):1;
+  J.prog.fases[f.id]={estrelas:Math.max(ant.estrelas||0,est),pontos:Math.max(ant.pontos||0,J.pontos),acertos:s.acertos,total:s.perguntas,paginas:3,novo:!ant.estrelas}; J.prog.zerado=true; G.salva();
+  J.estado='final'; J.t=0; J.final={i:0,t:0}; SOM.musica('final'); if(window.UI){ UI.modoNivel(false); UI.quizBotoes(false); UI.legenda(CENAS_FINAL[0]); }
+}
+function atualizaFinal(dt){ var it=J.final; if(!it||it.fim) return; it.t+=dt; if(it.t>=CENAS_FINAL[it.i].dur) avancaFinal(); }
+function avancaFinal(){ var it=J.final; if(!it||it.fim) return; it.i++; it.t=0; if(it.i>=CENAS_FINAL.length){ it.i=CENAS_FINAL.length-1; it.fim=true; if(window.UI){ UI.legenda(null); UI.creditos(); } return; } if(window.UI) UI.legenda(CENAS_FINAL[it.i]); }
 function iniciaEscolha(){ J.estado='escolha'; J.t=0; if(window.UI){ UI.modoMapa(false); UI.cartaoMapa(null); UI.escolhaHeroi(function(){ G.salva(); irMapa(false); }); } }
 
 /* ---------- laço principal ---------- */
@@ -151,7 +166,10 @@ function passo(ts){
   atualizaTrans(dt);
   switch(J.estado){
     case 'nivel': if(!J.trans||J.trans.fase==='abre'){ G.fisica(dt); if(J.estado==='nivel') atualizaNivel(dt); if(J.mundo&&J.estado!=='mapa') atualizaCamera(dt); } break;
-    case 'quiz': G.fisica(dt); G.perigos(dt); if(window.QUIZ) QUIZ.atualiza(dt); if(J.mundo) atualizaCamera(dt); break;
+    case 'quiz': G.fisica(dt); G.perigos(dt); if(window.QUIZ) QUIZ.atualiza(dt); if(J.chefe&&window.CHEFAO) CHEFAO.atualiza(dt); if(J.mundo) atualizaCamera(dt); break;
+    case 'final': atualizaFinal(dt); break;
+    case 'corrida': if(window.CORRIDA) CORRIDA.atualiza(dt); break;
+    case 'estadio': if(window.ESTADIO) ESTADIO.atualiza(dt); break;
     case 'fimFase': J.fimFase.t+=dt; J.urso.anim+=dt; break;
     case 'mapa': atualizaMapa(dt); break;
     case 'intro': atualizaIntro(dt); break;
@@ -169,13 +187,17 @@ function init(){
 }
 function toque(cx,cy){ var p=G.paraLogico(cx,cy);
   if(J.estado==='intro'){ avancaIntro(); return true; }
+  if(J.estado==='final'){ avancaFinal(); return true; }
   if(J.estado==='mapa'&&p.y>60&&!J.trans){ mapaToque(p.x,p.y); return true; }
   if(J.estado==='quiz'&&window.QUIZ) return QUIZ.toque(p.x,p.y);
+  if(J.estado==='corrida'&&window.CORRIDA) return CORRIDA.toque(p.x,p.y);
+  if(J.estado==='estadio'&&window.ESTADIO) return ESTADIO.toque(p.x,p.y);
   return false; }
-function confirmar(){ if(J.estado==='intro'){ avancaIntro(); return true; } if(J.estado==='mapa'&&!J.trans){ entraFase(J.sel); return true; } return false; }
+function confirmar(){ if(J.estado==='intro'){ avancaIntro(); return true; } if(J.estado==='final'){ avancaFinal(); return true; } if(J.estado==='mapa'&&!J.trans){ entraFase(J.sel); return true; } return false; }
 function pausa(v){ J.pausado=!!v; }
 
 G.init=init; G.toque=toque; G.mapaHover=mapaHover; G.seleciona=seleciona; G.confirmar=confirmar; G.mapaMove=mapaMove; G.pausa=pausa; G.irMapa=function(){ irMapa(false); }; G.voltaMapa=voltaMapa; G.entraFase=entraFase;
+G.iniciaFinal=iniciaFinal; G.CENAS_FINAL=CENAS_FINAL; G.pulaFinal=function(){ if(J.final&&!J.final.fim){ J.final.i=CENAS_FINAL.length-1; avancaFinal(); } };
 G.raioIris=raioIris; G.iris=iris; G.fimDeFase=fimDeFase; G.iniciaIntro=iniciaIntro; G.pulaIntro=fimIntro; G.iniciaEscolha=iniciaEscolha; G.CENAS_INTRO=CENAS_INTRO;
 G.jogarDeNovo=function(){ if(J.faseAtual) G.iniciaFase(J.faseAtual); };
 })(window.JOGO);

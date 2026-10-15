@@ -223,6 +223,10 @@ body.portrait #rot{display:flex}
 #btnSairArena small{font-size:11px;font-weight:900;line-height:1;margin-top:1px;letter-spacing:.3px}
 #btnSairArena:active{transform:scale(.94)}
 
+/* corrida: só ▲ ▼ */
+body.corrida #tLeft,body.corrida #tRight{display:none}
+body.corrida #tDown{left:30px;bottom:22px;width:84px;height:84px}
+body.corrida #tJump{font-size:34px}
 /* ---- ING3: tradução atrás da bandeira ---- */
 .tr{display:none}
 body.show-tr .tr{display:block;font-size:.72em;font-weight:700;opacity:.85;margin-top:2px;line-height:1.25}
@@ -300,11 +304,15 @@ body.show-tr .mcNome small.tr{display:inline;margin-left:6px}
 <script src="LP3_jornada_arte.js"></script>
 <script src="LP3_jornada_arte2.js"></script>
 <script src="ING3_jogo_arte.js"></script>
+<script src="ING3_jogo_arte2.js"></script>
 <script src="ING3_jogo_mapas.js"></script>
 <script src="ING3_jogo_fases.js"></script>
 <script src="ING3_jogo_motor.js"></script>
 <script src="ING3_jogo_motor2.js"></script>
 <script src="ING3_jogo_quiz.js"></script>
+<script src="ING3_jogo_corrida.js"></script>
+<script src="ING3_jogo_estadio.js"></script>
+<script src="ING3_jogo_chefao.js"></script>
 <script src="ING3_jogo_cena.js"></script>
 <script src="ING3_jogo_ui.js"></script>
 </body>
