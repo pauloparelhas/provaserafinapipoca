@@ -18,7 +18,7 @@ DEPS="OP_estilo.css OP_questao.js OP_voz.js sera_theme.js serafina-core.css sera
 assets/react-dom.production.min.js assets/react.production.min.js
 media/video_ing3.mp4 media/video_ing3_poster.jpg media/video_ing3_pt.vtt"
 # vendor de engine do jogo, se existir
-for f in $(git ls-files assets); do case "$f" in *phaser*|*lp3*) DEPS="$DEPS $f";; esac; done
+for f in $(git ls-files assets); do case "$f" in *phaser*|*lp3*|assets/fonts/*) DEPS="$DEPS $f";; esac; done
 mkdir -p "$W/ferramentas/assets" "$W/ferramentas/media"
 # tira do ar o que era so do Portugues
 for f in $(cd "$W/ferramentas" && ls LP3_* 2>/dev/null); do case " $FILES " in *" $f "*) ;; *) rm -f "$W/ferramentas/$f";; esac; done
