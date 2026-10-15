@@ -34,25 +34,35 @@ function atualiza(dt){
   });
   /* barris e bolas rolando */
   J.troncosVivos=J.troncosVivos||[];
-  M.troncos.forEach(function(g){ g.prox-=dt; if(g.prox<=0 && Math.abs(g.x-u.x)<900 && Math.abs(g.y-u.y)<600){ g.prox=g.cada; J.troncosVivos.push({x:g.x,y:g.y-22,vx:-150,vy:0,r:22,rot:0,bola:!!g.bola,m:M}); } });
+  /* 17/10: rolante só nasce com a FONTE na tela (pilha de toras, portão de barris) e depois de 0,6 s de aviso (a peça de cima balança) */
+  M.troncos.forEach(function(g){ if(g.aviso>0){ g.aviso-=dt; if(g.aviso<=0){ var sk=M.cena==='vila'?'barril':(M.cena==='estadio'?'futebol':null); J.troncosVivos.push({x:g.x,y:g.y-22,vx:-150,vy:0,r:22,rot:0,bola:!!g.bola,skin:sk,m:M}); if(J.log) J.log.push({ev:'spawn',de:'tronco',x:g.x,y:g.y-22,cam:J.cam,aviso:.6,t:J.t}); } return; }
+    g.prox-=dt; if(g.prox<=0 && g.x>J.cam-20 && g.x<J.cam+W+20 && Math.abs(g.y-u.y)<600){ g.prox=g.cada; g.aviso=.6; } });
   for(var i=J.troncosVivos.length-1;i>=0;i--){ var b=J.troncosVivos[i]; if(b.m!==M){ J.troncosVivos.splice(i,1); continue; } b.vy+=900*dt; b.x+=b.vx*dt; b.y+=b.vy*dt; b.rot-=dt*7;
     G.solidos(M).forEach(function(s){ if(b.y+b.r>=s.y && b.y+b.r<s.y+30 && b.x>s.x && b.x<s.x+s.w){ b.y=s.y-b.r; b.vy=0; } });
+    /* degrau: sobe um degrau baixo (até 50 px); parede mais alta quebra o barril (nunca atravessa) */
+    var parou=false; G.solidos(M).forEach(function(s){ if(parou) return; if(b.x-b.r<s.x+s.w && b.x+b.r>s.x && b.y>s.y+4 && b.y-b.r<s.y+s.h){ if(b.y+b.r-s.y<=50){ b.y=s.y-b.r; } else parou=true; } });
+    if(parou){ J.troncosVivos.splice(i,1); SOM.fx('quebra'); G.emite(8,function(){ return {x:b.x,y:b.y,vx:(Math.random()-.5)*220,vy:-120-Math.random()*160,vida:.6,max:.6,tipo:'confete',cor:'#92400e',rot:Math.random()*6,g:1}; }); continue; }
     if(b.y>M.h+60||b.x<-100){ J.troncosVivos.splice(i,1); continue; }
     if(vivo&&G.colideRet(R.x+4,R.y,R.w-8,R.h,b.x-b.r,b.y-b.r,b.r*2,b.r*2)){ if(u.vy>50&&u.y<b.y){ u.vy=-420; u.noChao=false; SOM.fx('pisao'); } else { G.machucado(); } } }
   /* canhão / máquina de bolas */
   J.bolasCanhao=J.bolasCanhao||[];
-  M.canhoes.forEach(function(g){ g.prox-=dt; if(g.prox<=0 && Math.abs(g.x-u.x)<800){ g.prox=g.cada; g.t=.3; J.bolasCanhao.push({x:g.x-30,y:g.y,vx:-170,vy:-40,r:13}); SOM.fx('clique'); } if(g.t>0) g.t-=dt; });
+  /* máquina de bolas: luz vermelha 0,6 s (aviso), depois solta uma bola que ROLA no chão; chutar uma bola nela desliga */
+  M.canhoes.forEach(function(g){ if(g.t>0) g.t-=dt; if(g.desligado) return; if(g.aviso>0){ g.aviso-=dt; if(g.aviso<=0){ g.t=.3; J.troncosVivos.push({x:g.x-34,y:g.y+22-14,vx:-170,vy:0,r:14,rot:0,bola:true,skin:'futebol',m:M}); SOM.fx('clique'); if(J.log) J.log.push({ev:'spawn',de:'maquina',x:g.x-34,y:g.y+8,cam:J.cam,aviso:.6,t:J.t}); } return; }
+    g.prox-=dt; if(g.prox<=0 && g.x>J.cam-20 && g.x<J.cam+W+20){ g.prox=g.cada; g.aviso=.6; } });
   for(var q=J.bolasCanhao.length-1;q>=0;q--){ var bc=J.bolasCanhao[q]; bc.vy+=260*dt; bc.x+=bc.vx*dt; bc.y+=bc.vy*dt; if(bc.x<-60||bc.y>M.h+40||Math.abs(bc.x-u.x)>1100){ J.bolasCanhao.splice(q,1); continue; }
     var bateu=false; G.solidos(M).forEach(function(s){ if(bc.x>s.x&&bc.x<s.x+s.w&&bc.y+bc.r>s.y&&bc.y-bc.r<s.y+s.h) bateu=true; });
     if(bateu){ J.bolasCanhao.splice(q,1); continue; }
     if(vivo&&G.colideRet(R.x+4,R.y,R.w-8,R.h,bc.x-bc.r,bc.y-bc.r,bc.r*2,bc.r*2)){ J.bolasCanhao.splice(q,1); G.machucado(); } }
   /* estrelas (projétil) */
   J.estrelas=J.estrelas||[];
-  for(var k=J.estrelas.length-1;k>=0;k--){ var e=J.estrelas[k]; e.x+=e.vx*dt; e.dist+=Math.abs(e.vx*dt); e.rot+=dt*14;
-    var fim=e.dist>270||e.x<0||e.x>M.w;
-    G.solidos(M).forEach(function(s){ if(e.x>s.x&&e.x<s.x+s.w&&e.y>s.y&&e.y<s.y+s.h){ fim=true; if(s.parede){ quebraParede(M,s.parede); } } });
+  for(var k=J.estrelas.length-1;k>=0;k--){ var e=J.estrelas[k], fim;
+    if(e.skin&&window.PODERES) fim=PODERES.moveTiro(e,dt,M); /* tiro do reino: faísca, bolha, vento, bola, leite */
+    else { e.x+=e.vx*dt; e.dist+=Math.abs(e.vx*dt); e.rot+=dt*14;
+    fim=e.dist>270||e.x<0||e.x>M.w;
+    G.solidos(M).forEach(function(s){ if(e.x>s.x&&e.x<s.x+s.w&&e.y>s.y&&e.y<s.y+s.h){ fim=true; if(s.parede){ quebraParede(M,s.parede); } } }); }
     M.inimigos.forEach(function(en){ if(fim||en.morto||en.achatado) return; if(G.colideRet(e.x-12,e.y-12,24,24,en.x-20,en.y-40,40,40)){ fim=true; transforma(en); } });
     (M.chefinhos||[]).forEach(function(ch){ if(!fim&&!ch.vencido&&window.CHEFINHO&&G.colideRet(e.x-12,e.y-12,24,24,ch.x-40,ch.y-80,80,80)){ fim=true; CHEFINHO.acerta(ch); } });
+    if(!fim&&e.skin&&window.PODERES) fim=PODERES.acertaExtra(e,M);
     if(fim){ J.estrelas.splice(k,1); G.brilho(e.x,e.y,5,'#fde047'); } }
 }
 /* a estrela quebra a PAREDE INTEIRA (todos os % encostados) */
@@ -61,6 +71,7 @@ function quebraParede(M,p0){ var fila=[p0]; p0.viva=false; SOM.fx('tijolo'); J.s
 function transforma(en){ en.achatado=true; en.tAch=.4; SOM.fx('moeda'); G.pontua(30,en.x,en.y-40);
   for(var i=0;i<3;i++) J.part.push({x:en.x,y:en.y-20,vx:(i-1)*60,vy:-120-Math.random()*60,vida:1.4,max:1.4,tipo:'borboleta',cor:['#f472b6','#60a5fa','#fbbf24'][i],r:8,rot:0}); }
 function atira(){
+  if(window.PODERES&&PODERES.atira()) return; /* reinos 1-8: o poder do reino; o castelo continua com as estrelas contadas */
   var u=J.urso; if(J.estado!=='nivel'||!u||(u.poderes.estrelas||0)<=0) return;
   u.poderes.estrelas--; J.estrelas=J.estrelas||[]; J.estrelas.push({x:u.x+u.dir*22,y:u.y-46*(G.TAM[u.tam]),vx:u.dir*560,dist:0,rot:0});
   SOM.fx('pulo'); if(window.UI) UI.acao(u.poderes.estrelas>0,u.poderes.estrelas);
@@ -80,11 +91,11 @@ function entraCano(p){
 function desenha(c,t,vx0,vx1){
   var M=J.mundo;
   M.pingentes.forEach(function(p){ if(p.estado==='sumiu'||p.x<vx0||p.x>vx1) return; var tr=p.estado==='tremendo'?Math.sin(t*60)*2:0; desenhaQueda(c,p.x+tr,p.y,M.cena,t); });
-  (J.troncosVivos||[]).forEach(function(b){ if(b.bola) A.bolaRolando(c,b,t,M.cena); else A.tronco(c,b,t); });
-  M.canhoes.forEach(function(g){ if(g.x>vx0-60&&g.x<vx1+60) A.canhao(c,g,t); });
+  (J.troncosVivos||[]).forEach(function(b){ if(b.skin&&window.PODERES&&PODERES.desenhaRolante(c,b,t)) return; if(b.bola) A.bolaRolando(c,b,t,M.cena); else A.tronco(c,b,t); });
+  if(!window.PODERES) M.canhoes.forEach(function(g){ if(g.x>vx0-60&&g.x<vx1+60) A.canhao(c,g,t); }); /* com PODERES: a máquina de bolas é desenhada no fundo */
   (J.bolasCanhao||[]).forEach(function(b){ c.fillStyle='#f8fafc'; A.circ(c,b.x,b.y,b.r); c.fill(); c.strokeStyle='#111'; c.lineWidth=1.5; c.stroke(); });
   (M.paredes||[]).forEach(function(p){ if(!p.viva||p.x<vx0||p.x>vx1) return; desenhaParede(c,p,M.cena,t); });
-  (J.estrelas||[]).forEach(function(e){ c.save(); c.globalAlpha=.35; A.estrela(c,e.x-Math.sign(e.vx)*14,e.y,9,'#fde68a',e.rot); c.restore(); A.estrela(c,e.x,e.y,13,'#fde047',e.rot); });
+  (J.estrelas||[]).forEach(function(e){ if(e.skin&&window.PODERES&&PODERES.desenhaTiro(c,e,t)) return; c.save(); c.globalAlpha=.35; A.estrela(c,e.x-Math.sign(e.vx)*14,e.y,9,'#fde68a',e.rot); c.restore(); A.estrela(c,e.x,e.y,13,'#fde047',e.rot); });
 }
 /* o que cai, conforme o reino: telha (vila), bolota (floresta), gota (cozinha/recife), pingente (outros) */
 function desenhaQueda(c,x,y,cena,t){
@@ -118,5 +129,5 @@ function inimigo(c,e,t){
 }
 function particula(c,p){ if(p.tipo!=='borboleta') return false; var a=Math.max(0,Math.min(1,p.vida/p.max)); c.save(); c.globalAlpha=a; c.translate(p.x,p.y); var f=Math.abs(Math.sin(p.vida*14)); c.fillStyle=p.cor; A.el(c,-5,0,6*f+1,8); c.fill(); A.el(c,5,0,6*f+1,8); c.fill(); c.fillStyle='#1e1b3a'; A.rr(c,-1,-5,2,10,1); c.fill(); c.restore(); p.vx*=.98; return true; }
 
-return {solidosExtra:solidosExtra, atualiza:atualiza, atira:atira, transforma:transforma, canoSob:canoSob, entraCano:entraCano, desenha:desenha, inimigo:inimigo, particula:particula};
+return {quebraParede:quebraParede, solidosExtra:solidosExtra, atualiza:atualiza, atira:atira, transforma:transforma, canoSob:canoSob, entraCano:entraCano, desenha:desenha, inimigo:inimigo, particula:particula};
 })();

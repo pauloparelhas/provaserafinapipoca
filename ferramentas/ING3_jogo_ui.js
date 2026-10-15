@@ -41,7 +41,10 @@ function hudArena(on){ document.body.classList.toggle('naArena',!!on); }
 /* capa: botão grande 'Open the book' */
 function botaoCapa(on){ var b=$('btnCapa'); if(!b){ b=document.createElement('button'); b.id='btnCapa'; b.innerHTML=bi('Open the book ▶','Abrir o livro'); $('ui').appendChild(b); b.addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); JOGO.abreLivro(); }); } b.style.display=on?'block':'none'; document.body.classList.toggle('nacapa',!!on); }
 /* botão de ação (estrela) com o número que sobra, e os corações = tamanho do herói */
-function acao(on,n){ var b=$('tAct'); if(!b) return; b.classList.toggle('show',!!on); b.innerHTML='★<small>'+(n||0)+'</small>'; var h=$('hudStar'); if(h){ h.style.display=on?'flex':'none'; h.querySelector('b').textContent=n||0; } }
+/* reinos 1-8: o botão mostra o desenho do poder do reino (faísca, bolha, vento, bola, leite), sem contagem */
+function acao(on,n,ico,id){ var b=$('tAct'); if(!b) return; b.classList.toggle('show',!!on); b.innerHTML= ico?'<img src="'+ico+'" alt="">':'★<small>'+(n||0)+'</small>'; b.dataset.poder=id||(on?'estrela':''); b.setAttribute('aria-label',id||'Throw a star'); var h=$('hudStar'); if(h){ h.style.display=on?'flex':'none'; h.querySelector('b').textContent=n||0; } }
+/* o poder que o herói tem neste reino, ao lado dos corações */
+function poderHud(ico,nome,pt){ var d=$('hudPoder'); if(!d) return; if(!ico){ d.style.display='none'; return; } d.style.display='flex'; d.innerHTML='<img src="'+ico+'" alt=""><span>'+bi(nome||'',pt||'','small')+'</span>'; }
 function coracoes(n,dano){ var d=$('hudVida'); if(!d) return; var h=''; for(var i=0;i<3;i++) h+='<span class="cor'+(i<n?' on':'')+'">'+SVG.coracao+'</span>'; d.innerHTML=h; if(dano){ d.classList.remove('dano'); void d.offsetWidth; d.classList.add('dano'); } }
 function quizBotoes(on){ $('quizBtns').classList.toggle('show',!!on); }
 /* corrida: ◀ ▶ somem (o carro anda sozinho); PULAR vira ▲ e o ▼ desce de faixa */
@@ -240,7 +243,7 @@ function init(){
 }
 document.addEventListener('DOMContentLoaded',init);
 
-return {aviso:aviso, selecionaHeroi:selecionaHeroi, saiParaMapa:saiParaMapa, SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, acao:acao, coracoes:coracoes, botaoCapa:botaoCapa, modoCorrida:modoCorrida, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
+return {aviso:aviso, selecionaHeroi:selecionaHeroi, saiParaMapa:saiParaMapa, SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, acao:acao, poderHud:poderHud, coracoes:coracoes, botaoCapa:botaoCapa, modoCorrida:modoCorrida, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
   creditos:creditos, menu:menu, fechaMenu:fechaMenu, fimFase:fimFase, pausa:pausa, comoJogar:comoJogar, historia:historia, confirmaCasa:confirmaCasa, confirmaRecomecar:confirmaRecomecar, alternaTr:alternaTr,
   menuAberto:function(){ return menuAberto; }};
 })();

@@ -226,7 +226,7 @@ function longeBisc(c,cam,t){
 }
 function pertoBisc(c,cam,t){
   rep(cam,1300,function(ox){ if(ox>W+250||ox<-1550) return;
-    copoLeite(c,ox+170,452,156,300,t);
+    /* 17/10: o copo de leite gigante saiu do fundo: o único copo de leite é o da mesa do café, que se bebe */
     c.fillStyle='rgba(120,80,40,.2)'; el(c,ox+478,452,84,8); c.fill(); biscoitoG(c,ox+470,452-92,94,-.12+Math.sin(t*.6)*.01,21);
     c.fillStyle='rgba(120,80,40,.2)'; el(c,ox+770,452,96,9); c.fill(); discoBisc(c,ox+770,422,86,16,26,31); discoBisc(c,ox+776,392,82,15,26,37); discoBisc(c,ox+766,362,80,15,26,43);
     pote(c,ox+1070,452);

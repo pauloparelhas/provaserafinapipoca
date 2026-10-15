@@ -51,6 +51,7 @@ function moradores(dt){
 }
 function tocaEntrada(lx,ly){ /* toque no tablet: tocar na porta/baú quando o herói está na frente dela */
   var L=J.mundo; if(!L) return false; var wx=lx+J.cam, wy=ly+J.camY;
+  if(window.PODERES&&PODERES.toca(wx,wy)) return true;
   for(var i=0;i<L.moradores.length;i++){ var m=L.moradores[i]; if(wx>m.x-50&&wx<m.x+50&&wy>m.y-130&&wy<m.y+10){ if(m.perto&&window.QUIZ){ SOM.fx('cano'); QUIZ.inicia(m); } else G.toast('Walk to the door first!',1600,'Primeiro vá até a porta!'); return true; } }
   return false;
 }
@@ -60,14 +61,14 @@ function atualizaNivel(dt){
   var L=J.nivel, M=J.mundo, u=J.urso;
   if(u.cheerT>0){ u.cheerT-=dt; u.estado='cheer'; u.anim+=dt; }
   M.checkpoints.forEach(function(cp){ if(!cp.acesa&&u.x>cp.x&&u.x<cp.x+160&&Math.abs(u.y-cp.y)<180){ cp.acesa=true; J.respawn={x:cp.x,y:cp.y,mundo:M.mundo}; SOM.fx('checkpoint'); G.brilho(cp.x,cp.y-80,12); } });
-  inimigos(dt); G.perigos(dt); moradores(dt); if(window.CHEFINHO) CHEFINHO.atualiza(dt); if(J.chefe&&window.CHEFAO) CHEFAO.atualiza(dt);
+  inimigos(dt); G.perigos(dt); if(window.PODERES) PODERES.interage(); moradores(dt); if(window.CHEFINHO) CHEFINHO.atualiza(dt); if(J.chefe&&window.CHEFAO) CHEFAO.atualiza(dt);
   if(M.mastro && Math.abs(u.x-M.mastro.x)<30 && Math.abs(u.y-M.mastro.y)<70 && J.estado==='nivel') fimDeFase();
   if(J.tut) atualizaTutorial(dt);
   dicas();
 }
 function dicas(){ /* só o indispensável: o ovo do Pip, na primeira vez */
-  var u=J.urso, M=J.mundo, d=null;
-  if(!J.prog.pipVisto) M.ovos.forEach(function(o){ if(!o.chocado && Math.abs(o.x-u.x)<160) d={x:o.x,y:o.y-80,txt:'Touch the egg!',pt:'Encoste no ovo!'}; });
+  var u=J.urso, M=J.mundo, d=window.PODERES?PODERES.dica():null;
+  if(!d&&!J.prog.pipVisto) M.ovos.forEach(function(o){ if(!o.chocado && Math.abs(o.x-u.x)<160) d={x:o.x,y:o.y-80,txt:'Touch the egg!',pt:'Encoste no ovo!'}; });
   if(!d&&J.mundo) J.mundo.moradores.forEach(function(m){ if(m.perto&&!J.chefe) d={x:m.x,y:m.y-150,txt:m.feito?'Play again? Press ▼':'Press ▼ to go in',pt:m.feito?'Jogar de novo? Aperte ▼':'Aperte ▼ para entrar',botao:true}; });
   if(!d&&J.mundo&&window.PERIGOS&&J.nivel&&J.nivel.sub){ var cn=PERIGOS.canoSob(); if(cn) d={x:u.x,y:u.y-G.URSO_H*TAM[u.tam]-30,txt:'Press ▼ to go down the pipe',pt:'Aperte ▼ para entrar no cano',botao:true}; }
   J.dica=d;
@@ -88,7 +89,7 @@ function fimDeFase(){
 function voltaMapa(){ var f=J.faseAtual, novo=f&&J.prog.fases[f.id]&&J.prog.fases[f.id].novo; if(novo){ J.prog.fases[f.id].novo=false; G.salva(); } var i=F.LISTA.indexOf(f); irMapa(novo&&i<F.LISTA.length-1?i+1:false); }
 function irMapa(animaPara){
   if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false);
-  J.estado='mapa'; J.agarrado=null; J.soltouT=0; if(window.UI) UI.acao(false,0); J.nivel=null; J.mundo=null; J.tut=null; J.part=[]; J.clima=[]; J.faseAtual=null; J.t=0; J.dica=null; J.quiz=null; J.pip=null;
+  J.estado='mapa'; J.agarrado=null; if(window.UI&&UI.poderHud) UI.poderHud(null); J.soltouT=0; if(window.UI) UI.acao(false,0); J.nivel=null; J.mundo=null; J.tut=null; J.part=[]; J.clima=[]; J.faseAtual=null; J.t=0; J.dica=null; J.quiz=null; J.pip=null;
   F.posiciona();
   J.sel=animaPara?animaPara-1:G.proximaFase(); J.mapaAnim= animaPara?{de:animaPara-1,para:animaPara,t:0,dur:2.2}:null;
   SOM.musica('mapa'); G.hud();

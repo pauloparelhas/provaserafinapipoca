@@ -176,11 +176,7 @@ def parede_inteira(m):
             if m.g[r][c] == '%':
                 rr = r + 1
                 while rr < 10 and m.g[rr][c] == '#': m.g[rr][c] = '%'; rr += 1
-    # saco de estrelas logo antes de cada parede: nunca fica preso sem estrela
-    for c in range(1, m.w):
-        if m.g[9][c] == '%' and m.g[9][c-1] != '%':
-            for k in range(3, 8):
-                if c-k > 0 and m.g[9][c-k] == ' ' and m.g[10][c-k] == '#': m.g[8][c-k] = 'Y'; break
+    # 17/10: sem saco de estrelas: cada reino tem o seu poder (ING3_jogo_poderes.js) e a parede de 2 tiles se pula
     return m
 def estadio_v2():
     m = V2.estadio()
@@ -193,7 +189,7 @@ def recife_v2():
     m.p(20, 9, 'c')
     for k, c in enumerate((25, 29, 33, 37)): m.p(c, 7, 'j')   # corredor de águas-vivas
     m.fx(24, 38, 9, ' '); m.fx(26, 27, 9, '^'); m.fx(34, 35, 9, '^')
-    m.fx(40, 42, 4, 'o'); m.p(44, 9, 'c'); m.p(46, 8, 'Y')
+    m.fx(40, 42, 4, 'o'); m.p(44, 9, 'c')
     m.p(52, 6, '<'); m.p(58, 6, '<'); m.p(55, 8, 'p'); m.fx(53, 57, 3, 'o')   # corrente contrária + baiacu
     m.fx(60, 61, 9, '^'); m.p(64, 9, 'i')
     m.p(48, 9, 'D')                                        # D1: baú, depois do 1º trecho (imersão antes das perguntas)
@@ -217,10 +213,10 @@ def ceu_v2():
     """céu: voo com capa; nuvens de tempestade com raio avisado, vento para baixo, corvos; chão só nas nuvens"""
     m = V2.Mapa(160)
     for c in range(26, 160): m.g[10][c] = m.g[11][c] = ' '
-    m.p(2, 9, 'U'); m.fx(6, 9, 7, 'o'); m.p(15, 8, 'A')    # começa ANDANDO; a capa no caminho: só depois dela se voa
+    m.p(2, 9, 'U'); m.fx(6, 9, 7, 'o'); m.p(15, 9, 'A')    # começa ANDANDO; a capa no caminho: só depois dela se voa
     m.fx(19, 22, 6, 'o')
     m.fx(29, 33, 5, '#'); m.fx(29, 33, 4, 'o'); m.p(36, 2, 'g')
-    m.fx(38, 50, 10, '#'); m.fx(38, 50, 11, '#'); m.p(39, 9, 'c'); m.p(44, 9, 'D'); m.p(48, 9, 'Y')
+    m.fx(38, 50, 10, '#'); m.fx(38, 50, 11, '#'); m.p(39, 9, 'c'); m.p(44, 9, 'D')
     m.p(54, 1, 'Z'); m.p(60, 5, '~'); m.p(64, 3, 'g'); m.p(68, 1, 'Z'); m.fx(66, 69, 7, '#')
     m.fx(74, 77, 4, '#'); m.fx(74, 77, 3, 'o'); m.p(80, 5, '~'); m.p(84, 2, 'g'); m.fx(82, 85, 8, '#')
     m.fx(90, 101, 10, '#'); m.fx(90, 101, 11, '#'); m.p(91, 9, 'c'); m.fx(94, 95, 8, '1'); m.fx(98, 99, 8, '2')

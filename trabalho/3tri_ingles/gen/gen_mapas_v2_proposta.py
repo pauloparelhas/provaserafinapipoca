@@ -78,7 +78,8 @@ def conta(m):
 def vila():
     m = Mapa(132)
     m.p(2, 9, 'U'); m.fx(5, 8, 8, 'o')
-    m.fx(10, 13, 7, '='); m.fx(10, 13, 6, 'o')            # toldo da feira
+    m.fx(10, 13, 7, '='); m.fx(10, 13, 6, 'o')            # toldo da feira = telhado da barraca do sapateiro
+    m.p(11, 9, '*')                                      # PODER do reino: Botas de Sete Leguas na barraca (antes do D1)
     m.p(16, 9, 'D')                                      # D1: casa do contador de historias (cedo, sem perigo)
     m.p(20, 9, 'S'); m.fx(21, 24, 4, '='); m.p(23, 3, 'O')  # monte de feno = mola; telhado com moeda grande
     m.p(27, 9, 'c')
@@ -87,11 +88,10 @@ def vila():
     m.fx(38, 40, 7, '=')
     m.fx(43, 45, 6, 'B'); m.p(44, 5, 'o')                # tijolos com moeda
     m.p(47, 6, 'g')                                      # corvo de tinta em onda
-    m.p(50, 8, 'Y')                                      # saco de estrelas: o poder global aparece aqui
     m.p(53, 9, 'i'); m.p(56, 9, 'e')                     # 1o espinhento: so tiro ou pulo por cima
     m.p(60, 9, 'c')
     m.p(63, 9, 'D')                                      # D2: padaria
-    m.fx(66, 68, 7, '='); m.p(67, 6, 'J')                # Botas de Sete Leguas (pulo duplo)
+    m.fx(66, 68, 7, '='); m.p(67, 6, 'O')                # plataforma de apoio para o muro (com ou sem botas)
     m.bloco(71, 72, 6, 9)                                # muro alto: so com pulo duplo
     m.fx(73, 78, 6, '#'); m.fx(74, 77, 5, 'o')           # muralha (telhados) — superficie linha 6
     m.p(80, 3, 'v'); m.p(82, 3, 'v')                     # telhas que caem quando passa embaixo
@@ -130,7 +130,7 @@ def bosque():
     m.p(28, 9, 'i'); m.p(30, 3, 'v'); m.p(32, 3, 'v')    # bolotas caem quando passa
     m.buraco(35, 3); m.buraco(39, 3); m.p(38, 9, ' '); m.p(36, 2, 'l'); m.p(40, 2, 'l')  # ravina dupla: 2 cipos
     m.g[10][38] = m.g[11][38] = '#'                      # toco de 1 tile entre as ravinas
-    m.p(44, 8, 'Y'); m.p(47, 9, 'e')
+    m.p(47, 9, 'e')
     m.p(50, 9, 'c')
     m.fx(53, 54, 8, '%'); m.bloco(53, 54, 9, 9)          # espinheiro BAIXO (2 tiles): pula-se por cima ou queima com a estrela (Paulo: nada intransponivel)
     m.p(57, 9, 'D')                                      # D2: casa da coruja
@@ -154,7 +154,7 @@ def bosque():
 # ---------------- 6. Rhythm Gym ----------------
 def ginasio():
     m = Mapa(136)
-    m.p(2, 9, 'U'); m.fx(5, 9, 8, 'o')
+    m.p(2, 9, 'U'); m.fx(4, 7, 8, 'o'); m.p(9, 9, '*')   # PODER do reino: giz de ginastica no pedestal
     m.p(11, 9, 'S'); m.fx(13, 16, 4, '='); m.fx(13, 16, 3, 'o')   # trampolim
     m.p(19, 9, 'D')                                      # D1: vestiario
     m.p(23, 9, 'c')
@@ -186,7 +186,7 @@ def estadio():
     m = Mapa(140)
     m.p(2, 9, 'U')
     m.fx(6, 9, 7, '='); m.fx(12, 15, 7, '=')             # bancos do vestiario
-    m.p(10, 8, 'Y')                                      # bola (poder: chutar) fica no saco
+    m.p(10, 9, '*')                                      # PODER do reino: rack de bolas (chutar)
     m.p(18, 9, 'D')                                      # D1: marca do penalti 1
     m.p(22, 9, 'c')
     m.p(26, 9, 'C')                                      # maquina de bolas (atira para a esquerda)
@@ -216,34 +216,33 @@ def estadio():
 # ---------------- 8. The Cookie Circle ----------------
 def biscoito():
     m = Mapa(132)
-    m.p(2, 9, 'U'); m.fx(4, 8, 7, '='); m.p(6, 6, '&')   # o prato com o BISCOITO (item 1)
-    m.p(12, 9, 'D')                                      # D1: porta da geladeira (leite)
-    m.fx(15, 18, 7, '='); m.p(17, 6, '&')                # copo de leite (item 2)
+    m.p(2, 9, 'U')
+    m.p(5, 9, '&'); m.p(8, 9, '&'); m.p(11, 9, '&')      # mesa do cafe: biscoito, copo de leite, pote de canudos (o PODER)
+    m.p(15, 9, 'D')                                      # D1: porta da geladeira
     m.p(21, 9, 'c')
-    m.p(24, 9, 'i'); m.p(27, 3, 'v'); m.p(29, 3, 'v')    # gotas da torneira
-    m.p(32, 8, '&')                                      # canudo (item 3 = poder: atirar gotas de leite)
-    m.p(35, 9, 'e'); m.p(38, 9, 'K')                     # ervilhas rolando
+    m.p(24, 9, 'i'); m.p(27, 3, 'v'); m.p(29, 3, 'v')    # gotas da TORNEIRA (desenhada no armario)
+    m.p(35, 9, 'e'); m.p(38, 9, 'q')                     # Chef de Tinta: joga pratos do escorredor (aviso antes)
     m.buraco(41, 3)
-    m.fx(45, 47, 7, '='); m.p(46, 6, '&')                # guardanapo (item 4 = planar)
+    m.fx(45, 47, 7, '='); m.p(46, 6, '&')                # guardanapo no porta-guardanapos do balcao
     m.p(50, 9, 'c')
-    m.buraco(53, 3); m.buraco(57, 3); m.g[10][56] = m.g[11][56] = '#'  # vao da pia: planar com o guardanapo
+    m.buraco(53, 3); m.buraco(57, 3); m.g[10][56] = m.g[11][56] = '#'  # vao da pia: o guardanapo vira paraquedas
     m.p(60, 9, 'D')                                      # D2: forno
-    m.p(63, 8, '&')                                      # espelho (item 5) -> tesoura (6)
-    m.p(66, 8, '&')
+    m.p(63, 9, '&')                                      # espelho na comoda
+    m.p(66, 9, '&')                                      # tesoura na caneca
     m.fx(69, 72, 4, '='); m.p(70, 3, 'O')
     m.p(68, 9, 'S')                                      # torradeira = mola
     m.p(75, 9, 'c')
-    m.p(78, 8, '&')                                      # vassoura (item 7 = varrer)
-    m.fx(81, 82, 8, '%'); m.bloco(81, 82, 9, 9)          # monte de migalhas BAIXO: pula ou varre
+    m.p(78, 9, '&')                                      # vassoura encostada na parede
+    m.fx(81, 82, 8, '%'); m.bloco(81, 82, 9, 9)          # monte de migalhas BAIXO: pula ou varre com a vassoura
     m.p(85, 9, 'i'); m.p(87, 6, 'g'); m.p(90, 9, 'e')
     m.fx(93, 94, 8, '1')                                 # gaveta = cano (D3 no submundo: armario)
     m.p(97, 9, 'c')
     m.p(100, 7, 'n'); m.p(103, 5, 'n'); m.p(106, 2, 'n') # prateleiras da geladeira (sobe)
-    m.fx(108, 112, 2, '='); m.p(110, 1, '&')             # fita adesiva (item 8 = consertar a ponte)
-    m.buraco(114, 3)                                     # ponte quebrada (fita conserta)
+    m.fx(108, 112, 2, '='); m.p(110, 1, '&')             # fita adesiva (conserta a ponte)
+    m.buraco(114, 3)                                     # ponte quebrada (a fita conserta; da para pular)
     m.p(119, 9, 'E')                                     # Mancha Rolo-de-massa
     m.fx(95, 96, 8, '2')
-    m.fx(125, 129, 7, '='); m.p(127, 6, '&')             # o MESMO prato com o biscoito (fecha o circulo)
+    m.p(127, 9, '&')                                     # o MESMO biscoito na mesma mesa do cafe (fecha o circulo)
     m.p(130, 9, 'F')
     return m
 

@@ -42,7 +42,7 @@ function parse(rows,opts){
   opts=opts||{};
   var h=rows.length, w=0; rows.forEach(function(s){ w=Math.max(w,s.length); });
   rows=rows.map(function(s){ return (s+new Array(w+1).join(' ')).slice(0,w); });
-  var L={w:w*T, h:h*T, cols:w, grade:rows, segs:[], plats:[], tijolos:[], caixas:[], moedas:[], itens:[], canhoes:[], travas:[], espinhos:[], pingentes:[], molas:[], caindo:[], agua:[], canos:[], checkpoints:[], inimigos:[], troncos:[], movers:[], moradores:[], ovos:[], paredes:[], chefinhos:[], pendulos:[], barras:[], saltos:[], mastro:null, inicioX:90, mundo:opts.mundo||'main'};
+  var L={w:w*T, h:h*T, cols:w, grade:rows, segs:[], plats:[], tijolos:[], caixas:[], moedas:[], itens:[], canhoes:[], travas:[], espinhos:[], pingentes:[], molas:[], caindo:[], agua:[], canos:[], checkpoints:[], inimigos:[], troncos:[], movers:[], moradores:[], ovos:[], paredes:[], chefinhos:[], chefs:[], pendulos:[], barras:[], saltos:[], mastro:null, inicioX:90, mundo:opts.mundo||'main'};
   var at=function(c,r){ return (r<0||r>=h||c<0||c>=w)?' ':rows[r][c]; };
   var visto={};
   for(var r=0;r<h;r++) for(var c=0;c<w;c++){
@@ -68,6 +68,8 @@ function parse(rows,opts){
       case 'N': L.movers.push({x:x,y:y,x0:x,y0:y,w:2*T,h:18,dx:0,dy:-6*T,per:7,elevador:true}); break;
       case '%': L.paredes.push({x:x,y:y,w:T,h:T,viva:true}); break;
       case '&': L.itens.push({x:x+T/2,y:y+T/2,tipo:'historia',pego:false}); break;
+      case '*': L.itens.push({x:x+T/2,y:y+T/2,tipo:'poder',pego:false}); break; /* o PODER do reino (ING3_jogo_poderes.js) */
+      case 'q': L.chefs.push({x:x+T/2,y:y+T,x0:x+T/2,estado:'espera',t:1.2,desligado:false}); break; /* Chef de Tinta: joga pratos */
       case 'D': L.moradores.push({x:x+T/2,y:y+T,i:L.moradores.length,feito:false,visto:false,falando:0,mundo:L.mundo}); break;
       case 'e': L.inimigos.push({tipo:'espinho',x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,dir:-1,v:40,voa:false,espinho:true}); break;
       case 'E': L.chefinhos.push({x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,hp:3,max:3,estado:'anda',t:0,dir:-1,vencido:false}); break;
@@ -89,7 +91,8 @@ function parse(rows,opts){
   L.segs=segs;
   if(L.inicioY===undefined) L.inicioY=CHAO_Y;
   /* itens da história do Mouse: na ordem do livro, da esquerda para a direita */
-  L.itens.filter(function(it){ return it.tipo==='historia'; }).sort(function(a,b){ return a.x-b.x; }).forEach(function(it,i,arr){ it.ordem= (i===arr.length-1&&i>0)?8:i; }); /* o último é sempre o biscoito de novo: a história volta ao começo */
+  var NOMES=['cookie','milk','straw','napkin','mirror','scissors','broom','tape','cookie'];
+  L.itens.filter(function(it){ return it.tipo==='historia'; }).sort(function(a,b){ return a.x-b.x; }).forEach(function(it,i,arr){ it.ordem= (i===arr.length-1&&i>0)?8:i; it.nome=NOMES[it.ordem]; }); /* o último é sempre o biscoito de novo: a história volta ao começo */
   return L;
 }
 
