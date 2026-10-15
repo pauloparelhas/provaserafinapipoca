@@ -60,7 +60,7 @@ function desenha(c){
   var g=c.createLinearGradient(0,0,0,H); g.addColorStop(0,'#0f172a'); g.addColorStop(.4,'#1e3a8a'); g.addColorStop(1,'#1e3a8a'); c.fillStyle=g; c.fillRect(0,0,W,H);
   [[60,40],[900,40]].forEach(function(p){ c.fillStyle='#94a3b8'; c.fillRect(p[0]-3,p[1],6,150); c.fillStyle='#fef9c3'; A.rr(c,p[0]-26,p[1]-14,52,22,5); c.fill(); var rg=c.createRadialGradient(p[0],p[1],4,p[0],p[1],160); rg.addColorStop(0,'rgba(254,249,195,.45)'); rg.addColorStop(1,'rgba(254,249,195,0)'); c.fillStyle=rg; A.circ(c,p[0],p[1],160); c.fill(); });
   c.fillStyle='#334155'; c.fillRect(0,150,W,70);
-  for(var k=0;k<120;k++){ var px=(k*8.3)%W, py=158+(k%5)*11; c.fillStyle=['#f87171','#fbbf24','#60a5fa','#4ade80','#f472b6','#fff'][k%6]; A.circ(c,px,py+(S.festa>0?Math.sin(t*20+k)*4:Math.sin(t*3+k)*1.5),4.5); c.fill(); }
+  for(var k=0;k<120;k++){ var px=(k*8.3)%W, py=158+(k%5)*11; c.fillStyle=['#f87171','#fbbf24','#60a5fa','#4ade80','#f472b6','#fff'][k%6]; A.circ(c,px,py+(S.festa>0?Math.sin(t*8+k)*4:Math.sin(t*3+k)*1.5),4.5); c.fill(); }
   /* gramado listrado em perspectiva */
   for(var i=0;i<8;i++){ c.fillStyle=i%2?'#15803d':'#16a34a'; c.fillRect(0,220+i*40,W,40); }
   c.strokeStyle='rgba(255,255,255,.8)'; c.lineWidth=3; c.beginPath(); c.moveTo(150,366); c.lineTo(810,366); c.lineTo(870,520); c.moveTo(150,366); c.lineTo(90,520); c.stroke(); A.circ(c,480,470,4); c.fillStyle='#fff'; c.fill();

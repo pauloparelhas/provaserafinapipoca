@@ -38,6 +38,11 @@ with sync_playwright() as pw:
         media_q = len(quedas) / max(1, len(corridas)); media_t = sum(c['tempo'] for c in corridas) / max(1, len(corridas))
         travas = sum(len(c['travou']) for c in corridas) / max(1, len(corridas))
         resumo[NOMES[r]] = {'terminaram': '%d/%d' % (terminou, len(corridas)), 'tempo_medio_s': round(media_t), 'quedas_por_crianca': round(media_q, 1), 'danos': sum(c['danos'] for c in corridas), 'travadas': round(travas, 1), 'trechos_perigosos': trecho, 'paradas': [c['x'] for c in corridas if c['esgotou']], 'onde_travou': [t['x'] for c in corridas for t in c['travou']][:10], 'estado_final': [c['estado']+'/'+str(c['chefe']) for c in corridas if c['esgotou']]}
+        if NOMES[r] == 'Corrida':
+            cc = [c.get('corrida') or {} for c in corridas]
+            resumo['Corrida']['posicoes'] = [x.get('pos') for x in cc]; resumo['Corrida']['paginas'] = [x.get('pag') for x in cc]
+            if any((x.get('pag') or 0) < 3 for x in cc): falhas.append('Corrida: criança seguindo a placa não fez os 3 boxes %s' % resumo['Corrida']['paginas'])
+            if any((x.get('pos') or 99) > 3 for x in cc): falhas.append('Corrida: criança terminou fora do pódio %s' % resumo['Corrida']['posicoes'])
         if terminou < len(corridas): falhas.append('%s: %d de %d crianças não terminaram (pararam nos tiles %s)' % (NOMES[r], len(corridas) - terminou, len(corridas), resumo[NOMES[r]]['paradas']))
         if trecho and trecho[0][1] / max(1, len(corridas)) > 3: falhas.append('%s: trecho %d-%d derruba demais (%d quedas em %d crianças)' % (NOMES[r], trecho[0][0], trecho[0][0] + 7, trecho[0][1], len(corridas)))
         if media_q > 8: falhas.append('%s: %.1f quedas por criança' % (NOMES[r], media_q))

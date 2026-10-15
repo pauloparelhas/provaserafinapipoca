@@ -361,7 +361,7 @@ function ovo(c,t){
    ============================================================ */
 A.placa=function(c,x,y,w,h,estado,t){
   t=t||0; var dx=0, dy=0, lift=0;
-  if(estado==='errada') dx=Math.sin(t*42)*3*Math.max(0,Math.cos(t*2));
+  if(estado==='errada') dx=Math.sin(t*20)*3*Math.max(0,Math.cos(t*2));
   if(estado==='bump') dy=-7;
   var pal={normal:['#d79a5a','#94602f','#fdf3dc','#6b3f1f'], bump:['#e3a868','#9b6532','#fff7e6','#6b3f1f'], certa:['#6fd38a','#1f8a4c','#e9fbe9','#145c32'], errada:['#f08a7c','#b3362b','#feeceb','#7f1d1d'], apagada:['#b9b3ac','#857d75','#eeebe7','#5c5650']}[estado]||null;
   if(!pal) pal=['#d79a5a','#94602f','#fdf3dc','#6b3f1f'];

@@ -78,14 +78,16 @@ window.CRIANCA = (function(){
     if(st.pulo>0){ inp.jump=true; st.pulo-=dt; } else inp.jump=false;
   }
   /* corrida: troca de faixa para desviar, pega moedas, usa o turbo quando tem */
-  function decideCorrida(dt){ var R=CORRIDA._R(), inp=J.in; if(!R) return;
+  function decideCorrida(dt){ var R=CORRIDA._R(), inp=J.in; if(!R) return; st.corr={pos:R.final||R.pos,pag:R.paginas,fase:R.fase};
     if(R.fase==='apresenta'){ if(R.t>1.5+rnd()) CORRIDA.largar(); return; }
     if(R.fase==='podio'){ if(R.podio&&R.podio.t>1) CORRIDA.toque(800,500); return; }
-    var me=R.me, alvo=me.x, frente=null; R.rivais.forEach(function(o){ var dz=o.z-me.z; if(dz>0&&dz<200*10&&Math.abs(o.x-me.x)<.5) frente=o; });
-    if(frente) alvo=frente.x>0?-.55:.55; if(st.t%7<.02) st.ruido=(rnd()-.5)*.5; alvo+=st.ruido||0;
+    var me=R.me, alvo=[-.55,0,.55].reduce(function(a,b){ return Math.abs(b-me.x)<Math.abs(a-me.x)?b:a; }), frente=null; /* fica na faixa em que está (toque curto), não segura a seta para sempre */ R.rivais.forEach(function(o){ var dz=o.z-me.z; if(dz>0&&dz<200*10&&Math.abs(o.x-me.x)<.5) frente=o; });
+    if(frente) alvo=frente.x>0?-.55:.55; if(st.t%7<.02) st.ruido=(rnd()-.5)*.3; alvo+=st.ruido||0;
     inp.right=alvo>me.x+.1; inp.left=alvo<me.x-.1;
+    var nS=Math.floor(me.z/200); CORRIDA._K.PITS().forEach(function(P,i){ if(!me.pitFeito[i]&&nS>P.ini-45&&nS<P.ini+6){ inp.right=true; inp.left=false; } }); /* a placa do box: a criança segue para a direita */
     if(R.latas>0&&rnd()<.01){ inp.jump=true; J.actSolto=true; } else inp.jump=false; }
-  function decideQuiz(dt){ var q=J.quiz; if(!q) return; if(q.fase==='pergunta'){ st.quizT+=dt; if(st.quizT>1+rnd()*1.5){ st.quizT=0; I.responde(rnd()<(op.acerto||.7)); } } }
+  function decideQuiz(dt){ var q=J.quiz; if(!q) return; if(q.fase==='pergunta'){ st.quizT+=dt; if(st.quizT>1+rnd()*1.5){ st.quizT=0; I.responde(rnd()<(op.acerto||.7)); } }
+    else if(q.fase==='resposta'){ st.quizT+=dt; if(st.quizT>1.5+rnd()){ st.quizT=0; QUIZ.segue(); } } } /* lê o comentário e toca no Next */
   function passo(n){
     for(var i=0;i<n;i++){
       if(st.fim) return st;
@@ -100,6 +102,6 @@ window.CRIANCA = (function(){
       if(st.t>op.limite){ st.fim=true; st.tempo=+st.t.toFixed(1); st.esgotou=true; return st; }
     }
     return st; }
-  function relatorio(){ var u=J.urso||{}; return {fim:st.fim, esgotou:!!st.esgotou, tempo:st.tempo||+st.t.toFixed(1), quedas:J.teste.quedas, danos:J.teste.danos.length, travou:st.travou.slice(0,8), x:Math.round((u.x||0)/T), estado:J.estado, paginas:J.nivel&&J.nivel.todasEntradas?J.nivel.todasEntradas.filter(function(m){ return m.feito; }).length:null, chefe:J.chefe?J.chefe.fase:null}; }
+  function relatorio(){ var u=J.urso||{}; return {fim:st.fim, esgotou:!!st.esgotou, tempo:st.tempo||+st.t.toFixed(1), quedas:J.teste.quedas, danos:J.teste.danos.length, travou:st.travou.slice(0,8), x:Math.round((u.x||0)/T), estado:J.estado, paginas:J.nivel&&J.nivel.todasEntradas?J.nivel.todasEntradas.filter(function(m){ return m.feito; }).length:null, chefe:J.chefe?J.chefe.fase:null, corrida:st.corr||null}; }
   return {inicia:inicia, passo:passo, relatorio:relatorio};
 })();

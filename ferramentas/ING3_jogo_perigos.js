@@ -90,7 +90,7 @@ function entraCano(p){
 /* ---------- desenho ---------- */
 function desenha(c,t,vx0,vx1){
   var M=J.mundo;
-  M.pingentes.forEach(function(p){ if(p.estado==='sumiu'||p.x<vx0||p.x>vx1) return; var tr=p.estado==='tremendo'?Math.sin(t*60)*2:0; desenhaQueda(c,p.x+tr,p.y,M.cena,t); });
+  M.pingentes.forEach(function(p){ if(p.estado==='sumiu'||p.x<vx0||p.x>vx1) return; var tr=p.estado==='tremendo'?Math.sin(t*14)*1.5:0; desenhaQueda(c,p.x+tr,p.y,M.cena,t); });
   (J.troncosVivos||[]).forEach(function(b){ if(b.skin&&window.PODERES&&PODERES.desenhaRolante(c,b,t)) return; if(b.bola) A.bolaRolando(c,b,t,M.cena); else A.tronco(c,b,t); });
   if(!window.PODERES) M.canhoes.forEach(function(g){ if(g.x>vx0-60&&g.x<vx1+60) A.canhao(c,g,t); }); /* com PODERES: a máquina de bolas é desenhada no fundo */
   (J.bolasCanhao||[]).forEach(function(b){ c.fillStyle='#f8fafc'; A.circ(c,b.x,b.y,b.r); c.fill(); c.strokeStyle='#111'; c.lineWidth=1.5; c.stroke(); });
