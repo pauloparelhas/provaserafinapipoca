@@ -39,7 +39,7 @@ var TAB={
      txt:'Chalky hands hold rings and bars tight. Jump, then tap JUMP again in the air: a FLIP!', txtPt:'Mãos com giz seguram firme argolas e barras. Pule e aperte PULAR de novo no ar: uma CAMBALHOTA!'},
   7:{id:'bolas', tiro:'bola', suporte:'rack', verbo:'Take!', verboPt:'Pegue!', nome:'soccer balls', nomePt:'bolas de futebol',
      tit:'Soccer balls!', titPt:'Bolas de futebol!',
-     txt:'Press SPACE (or the ball button) to kick a ball. Kick the ball at the ink players and the ball machine!', txtPt:'Aperte ESPAÇO (ou o botão da bola) para chutar. Chute os jogadores de tinta e a máquina de bolas!'},
+     txt:'Press SPACE (or the ball button) to kick a ball. Kick the ball at the ink players and the ball machine!', txtPt:'Aperte ESPAÇO (ou o botão da bola) para chutar. Chute a bola nos jogadores de tinta e na máquina de bolas!'},
   8:{id:'biscoitos', tiro:'biscoito', nome:'cookies', nomePt:'biscoitos',
      tit:'Cookies!', titPt:'Biscoitos!',
      txt:'Press SPACE (or the cookie button) to throw a cookie. Ink blobs love cookies: they turn into butterflies!', txtPt:'Aperte ESPAÇO (ou o botão do biscoito) para jogar um biscoito. As manchas de tinta adoram biscoito: viram borboletas!'}
