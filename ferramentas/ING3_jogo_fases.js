@@ -48,6 +48,7 @@ function parse(rows,opts){
   for(var r=0;r<h;r++) for(var c=0;c<w;c++){
     var ch=at(c,r), x=c*T, y=r*T, k=c+','+r; if(visto[k]) continue;
     if(window.APARELHOS&&APARELHOS.parse(ch,x,y,L)) continue;
+    if(window.MARCEU&&MARCEU.parse(ch,x,y,L)) continue;
     switch(ch){
       case '#': { var n=1; while(at(c+n,r)==='#'){ visto[(c+n)+','+r]=1; n++; } L.segs.push({x:x,y:y,w:n*T,h:T}); break; }
       case '=': { var n2=1; while(at(c+n2,r)==='='){ visto[(c+n2)+','+r]=1; n2++; } L.plats.push({x:x,y:y,w:n2*T,h:18}); break; }
@@ -66,6 +67,7 @@ function parse(rows,opts){
       case 'C': L.canhoes.push({x:x+T/2,y:y+T/2,prox:2,cada:3.4}); break;
       case 'N': L.movers.push({x:x,y:y,x0:x,y0:y,w:2*T,h:18,dx:0,dy:-6*T,per:7,elevador:true}); break;
       case '%': L.paredes.push({x:x,y:y,w:T,h:T,viva:true}); break;
+      case '&': L.itens.push({x:x+T/2,y:y+T/2,tipo:'historia',pego:false}); break;
       case 'D': L.moradores.push({x:x+T/2,y:y+T,i:L.moradores.length,feito:false,visto:false,falando:0,mundo:L.mundo}); break;
       case 'e': L.inimigos.push({tipo:'espinho',x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,dir:-1,v:40,voa:false,espinho:true}); break;
       case 'E': L.chefinhos.push({x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,hp:3,max:3,estado:'anda',t:0,dir:-1,vencido:false}); break;
@@ -86,6 +88,8 @@ function parse(rows,opts){
   L.segs.forEach(function(s){ var u=null; for(var i=0;i<segs.length;i++){ var q=segs[i]; if(q.x===s.x&&q.w===s.w&&q.y+q.h===s.y){ u=q; break; } } if(u) u.h+=s.h; else segs.push(s); });
   L.segs=segs;
   if(L.inicioY===undefined) L.inicioY=CHAO_Y;
+  /* itens da história do Mouse: na ordem do livro, da esquerda para a direita */
+  L.itens.filter(function(it){ return it.tipo==='historia'; }).sort(function(a,b){ return a.x-b.x; }).forEach(function(it,i){ it.ordem=i; });
   return L;
 }
 

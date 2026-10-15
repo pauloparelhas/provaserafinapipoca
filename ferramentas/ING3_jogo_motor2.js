@@ -18,7 +18,8 @@ function inimigos(dt){
     if(e.morto) return;
     if(e.achatado){ e.tAch-=dt; if(e.tAch<=0) e.morto=true; return; }
     e.t=(e.t||0)+dt;
-    if(e.voa){ e.x=e.x0+Math.sin(e.t*.9)*150; e.dir=Math.cos(e.t*.9)>=0?1:-1; e.y=e.y0-110+Math.sin(e.t*2.3)*e.amp; }
+    if(e.fixo){ /* água-viva/baiacu: o movimento vem do ING3_jogo_marceu.js */ }
+    else if(e.voa){ e.x=e.x0+Math.sin(e.t*.9)*150; e.dir=Math.cos(e.t*.9)>=0?1:-1; e.y=e.y0-110+Math.sin(e.t*2.3)*e.amp; }
     else {
     var px=e.x+e.dir*e.v*dt, apoio=false, parede=false;
     G.solidos(M).forEach(function(s){ if(px+e.dir*14>s.x && px+e.dir*14<s.x+s.w && e.y>=s.y-2 && e.y<=s.y+6) apoio=true; if(G.colideRet(px-14,e.y-30,28,26,s.x,s.y,s.w,s.h)) parede=true; });

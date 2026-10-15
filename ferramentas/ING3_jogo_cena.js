@@ -100,7 +100,8 @@ function desenhaNivel(c){
   M.moradores.forEach(function(m){ if(m.x>vx0-100&&m.x<vx1+100) morador(c,m,t); });
   if(window.PERIGOS) PERIGOS.desenha(c,t,vx0,vx1);
   if(window.CHEFINHO) CHEFINHO.desenha(c,t);
-  M.inimigos.forEach(function(e){ if(!e.morto&&e.x>vx0&&e.x<vx1){ if(e.tipo==='tinta') manchaTinta(c,e,t); else if(!(window.PERIGOS&&PERIGOS.inimigo(c,e,t))&&!(window.APARELHOS&&APARELHOS.zagueiro(c,e,t))) A.inimigo(c,e,t); } });
+  if(window.MARCEU) MARCEU.desenha(c,t);
+  M.inimigos.forEach(function(e){ if(!e.morto&&e.x>vx0&&e.x<vx1){ if(e.tipo==='tinta') manchaTinta(c,e,t); else if(!(window.PERIGOS&&PERIGOS.inimigo(c,e,t))&&!(window.APARELHOS&&APARELHOS.zagueiro(c,e,t))&&!(window.MARCEU&&MARCEU.inimigo(c,e,t))) A.inimigo(c,e,t); } });
   if(J.chefe&&window.CHEFAO&&!J.quiz) CHEFAO.desenha(c,t); /* no duelo, o Conde aparece uma vez só: no ambiente de questões */
   if(J.quiz&&window.QUIZ) QUIZ.desenhaMundo(c,t);
   if(J.pip){ var p=J.pip; pip(c,p.x,p.y,p.parado?'idle':'walk',t,p.vx>=0?1:-1,1); }
@@ -120,6 +121,11 @@ function item(c,it,t){
   var g=c.createRadialGradient(0,0,4,0,0,30); g.addColorStop(0,'rgba(255,255,255,.4)'); g.addColorStop(1,'rgba(255,255,255,0)'); c.fillStyle=g; A.circ(c,0,0,30); c.fill();
   if(it.tipo==='maca'){ c.fillStyle=A.lin(c,-14,-14,14,14,'#f87171','#b91c1c'); A.circ(c,-6,2,13); c.fill(); A.circ(c,6,2,13); c.fill(); c.fillStyle='rgba(255,255,255,.45)'; A.el(c,-8,-4,4,6); c.fill(); c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(0,-8); c.lineTo(2,-18); c.stroke(); c.fillStyle='#22c55e'; A.el(c,8,-16,7,4); c.fill(); A.estrela(c,12,-6,5,'#fde047',t*2); }
   else if(it.tipo==='capa'){ c.fillStyle='#7c3aed'; c.beginPath(); c.moveTo(-14,-14); c.quadraticCurveTo(0,-20,14,-14); c.lineTo(18,14); c.quadraticCurveTo(0,8,-18,14); c.fill(); c.fillStyle='#fbbf24'; A.circ(c,0,-12,3.5); c.fill(); }
+  else if(it.tipo==='historia'){ var n=it.ordem||0; c.fillStyle='rgba(255,255,255,.9)'; A.circ(c,0,0,20); c.fill(); c.strokeStyle='#d97706'; c.lineWidth=3; c.stroke();
+    if(n===0||n===8){ if(A.biscoito) A.biscoito(c,0,0,13,0); } else if(n===1){ c.fillStyle='#e0f2fe'; A.rr(c,-8,-12,16,24,4); c.fill(); c.fillStyle='#fff'; A.rr(c,-6,-4,12,14,3); c.fill(); }
+    else if(n===2){ c.strokeStyle='#ef4444'; c.lineWidth=4; c.beginPath(); c.moveTo(-6,12); c.lineTo(4,-8); c.lineTo(10,-12); c.stroke(); } else if(n===3){ c.fillStyle='#93c5fd'; c.fillRect(-10,-10,20,20); c.strokeStyle='#fff'; c.lineWidth=2; c.strokeRect(-6,-6,12,12); }
+    else if(n===4){ c.fillStyle='#cbd5e1'; A.el(c,0,0,9,12); c.fill(); c.fillStyle='#e0f2fe'; A.el(c,-2,-2,5,8); c.fill(); } else if(n===5){ c.strokeStyle='#64748b'; c.lineWidth=3; c.beginPath(); c.moveTo(-10,-10); c.lineTo(8,8); c.moveTo(10,-10); c.lineTo(-8,8); c.stroke(); A.circ(c,-10,10,4); c.stroke(); A.circ(c,10,10,4); c.stroke(); }
+    else if(n===6){ c.strokeStyle='#92400e'; c.lineWidth=3; c.beginPath(); c.moveTo(8,-12); c.lineTo(-4,6); c.stroke(); c.fillStyle='#fbbf24'; c.beginPath(); c.moveTo(-10,4); c.lineTo(2,8); c.lineTo(-6,14); c.closePath(); c.fill(); } else { c.fillStyle='#d6d3d1'; A.circ(c,0,0,10); c.fill(); c.fillStyle='#fff'; A.circ(c,0,0,4); c.fill(); } }
   else if(it.tipo==='bota'){ c.fillStyle='#b45309'; A.rr(c,-8,-16,14,24,4); c.fill(); A.rr(c,-10,2,26,10,4); c.fill(); c.fillStyle='#fde68a'; A.rr(c,-8,-16,14,5,2); c.fill(); }
   c.restore();
 }

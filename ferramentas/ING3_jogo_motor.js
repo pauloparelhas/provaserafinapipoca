@@ -145,6 +145,15 @@ function pegaItem(it){
   switch(it.tipo){
     case 'maca': if(u.tam<2){ u.tam++; u.sx=1.3; u.sy=1.3; } if(window.UI) UI.coracoes(u.tam+1); SOM.fx('moedaG'); pontua(50,it.x,it.y); break;
     case 'capa': u.poderes.capa=true; SOM.fx('destrava'); toast('A cape! Hold JUMP in the air to float',2600,'Uma capa! Segure PULAR no ar para planar'); break;
+    case 'historia': { /* If You Give a Mouse a Cookie: cada objeto, na ordem do livro, dá um poder */
+      var H=[['a cookie','um biscoito','moedas'],['a glass of milk','um copo de leite','cura'],['a straw','um canudo','estrelas'],['a napkin','um guardanapo','capa'],['a mirror','um espelho','moedas'],['scissors','uma tesoura','estrelas'],['a broom','uma vassoura','estrelas'],['tape','fita adesiva','cura'],['a cookie again!','um biscoito de novo!','moedas']];
+      var h=H[Math.min(H.length-1,it.ordem||0)], ef=h[2];
+      if(ef==='cura'&&u.tam<2){ u.tam++; if(window.UI) UI.coracoes(u.tam+1); }
+      if(ef==='estrelas'){ u.poderes.estrelas=Math.min(9,(u.poderes.estrelas||0)+3); if(window.UI) UI.acao(true,u.poderes.estrelas); }
+      if(ef==='capa') u.poderes.capa=true;
+      if(ef==='moedas'){ J.moedas+=5; }
+      SOM.fx('moedaG'); pontua(80,it.x,it.y);
+      toast((it.ordem? 'He wants ':'If you give a mouse ')+h[0],2600,(it.ordem?'Ele quer ':'Se você der a um ratinho ')+h[1]); break; }
     case 'estrelas': u.poderes.estrelas=Math.min(9,(u.poderes.estrelas||0)+3); SOM.fx('moedaG'); if(window.UI) UI.acao(true,u.poderes.estrelas); if(!J.prog.estrelaVista){ J.prog.estrelaVista=true; salva(); toast('Magic stars! Press ★ to throw one',2800,'Estrelas mágicas! Aperte ★ para jogar uma'); } break;
     case 'bota': u.poderes.bota=true; u.puloExtra=true; SOM.fx('destrava'); toast('Magic boots! Press JUMP again in the air',2600,'Botas mágicas! Aperte PULAR de novo no ar'); break;
   }
@@ -189,6 +198,7 @@ function perigos(dt){
   });
   if(window.PERIGOS) PERIGOS.atualiza(dt);
   if(window.APARELHOS) APARELHOS.atualiza(dt);
+  if(window.MARCEU) MARCEU.atualiza(dt);
   M.movers.forEach(function(p){ var k=.5-.5*Math.cos(J.t*6.2832/p.per+(p.x0*.01)); var nx=p.x0+p.dx*k, ny=p.y0+p.dy*k; var ddx=nx-p.x, ddy=ny-p.y; p.vyAnt=Math.max(0,ddy); p.x=nx; p.y=ny; if(u.sobre===p&&u.noChao){ u.x+=ddx; u.y=p.y; } });
 }
 

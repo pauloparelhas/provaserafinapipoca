@@ -186,7 +186,40 @@ def estadio_v2():
     m = V2.estadio()
     m.p(54, 9, 'S')   # irrigador-mola antes do gol: é por ele que se sobe no travessão
     return m
-MAPAS = {1: (V2.vila(), V2.vila_sub()), 2: (parede_inteira(V2.bosque()), sub_generico(1)), 4: recife(), 5: ceu(), 6: (V2.ginasio(), sub_generico(0)),
+def recife_v2():
+    """fundo do mar: nado livre; águas-vivas em fila fora de fase, baiacus, ouriços, correntes, navio afundado"""
+    m = V2.Mapa(150)
+    m.p(2, 9, 'U'); m.fx(6, 9, 6, 'o')
+    m.p(14, 9, 'D')                                       # D1: baú (antes do 1º perigo)
+    m.p(20, 9, 'c')
+    for k, c in enumerate((25, 29, 33, 37)): m.p(c, 7, 'j')   # corredor de águas-vivas
+    m.fx(24, 38, 9, ' '); m.fx(26, 27, 9, '^'); m.fx(34, 35, 9, '^')
+    m.fx(40, 42, 4, 'o'); m.p(44, 9, 'c'); m.p(46, 8, 'Y')
+    m.p(52, 6, '<'); m.p(58, 6, '<'); m.p(55, 8, 'p'); m.fx(53, 57, 3, 'o')   # corrente contrária + baiacu
+    m.fx(60, 61, 9, '^'); m.p(64, 9, 'i')
+    m.p(68, 9, 'c'); m.p(71, 9, 'D')                       # D2
+    m.fx(76, 77, 8, '1'); m.p(81, 7, 'j'); m.p(85, 7, 'j'); m.p(89, 8, 'p')
+    m.bloco(92, 94, 2, 5)                                  # rocha pendurada
+    m.fx(96, 97, 9, '^'); m.p(100, 5, '>'); m.p(103, 8, 'p'); m.p(106, 9, 'c')
+    m.fx(109, 110, 8, '2'); m.p(114, 7, 'j'); m.p(118, 9, 'e'); m.p(121, 7, 'j'); m.fx(124, 125, 9, '^')
+    m.p(128, 9, 'c'); m.p(135, 9, 'E'); m.fx(140, 143, 6, 'o'); m.p(147, 9, 'F')
+    return m
+def ceu_v2():
+    """céu: voo com capa; nuvens de tempestade com raio avisado, vento para baixo, corvos; chão só nas nuvens"""
+    m = V2.Mapa(160)
+    for c in range(18, 160): m.g[10][c] = m.g[11][c] = ' '
+    m.p(2, 9, 'U'); m.p(9, 8, 'A'); m.p(13, 9, 'D')        # capa e D1 no castelo de nuvem
+    m.fx(20, 24, 7, '#'); m.fx(20, 24, 6, 'o'); m.p(22, 1, 'Z')
+    m.fx(29, 33, 5, '#'); m.fx(29, 33, 4, 'o'); m.p(36, 2, 'g')
+    m.fx(38, 50, 10, '#'); m.fx(38, 50, 11, '#'); m.p(39, 9, 'c'); m.p(44, 9, 'D'); m.p(48, 9, 'Y')
+    m.p(54, 1, 'Z'); m.p(60, 5, '~'); m.p(64, 3, 'g'); m.p(68, 1, 'Z'); m.fx(66, 69, 7, '#')
+    m.fx(74, 77, 4, '#'); m.fx(74, 77, 3, 'o'); m.p(80, 5, '~'); m.p(84, 2, 'g'); m.fx(82, 85, 8, '#')
+    m.fx(90, 101, 10, '#'); m.fx(90, 101, 11, '#'); m.p(91, 9, 'c'); m.fx(94, 95, 8, '1'); m.fx(98, 99, 8, '2')
+    m.p(106, 1, 'Z'); m.p(110, 5, '~'); m.p(114, 3, 'g'); m.p(118, 1, 'Z'); m.fx(116, 119, 6, '#'); m.fx(116, 119, 5, 'o')
+    m.p(124, 4, 'g'); m.p(128, 1, 'Z'); m.fx(126, 129, 8, '#')
+    m.fx(133, 159, 10, '#'); m.fx(133, 159, 11, '#'); m.p(134, 9, 'c'); m.p(146, 9, 'E'); m.p(157, 9, 'F')
+    return m
+MAPAS = {1: (V2.vila(), V2.vila_sub()), 2: (parede_inteira(V2.bosque()), sub_generico(1)), 4: (recife_v2(), sub_generico(1)), 5: (ceu_v2(), sub_generico(0)), 6: (V2.ginasio(), sub_generico(0)),
          7: (estadio_v2(), sub_generico(1)), 8: (parede_inteira(V2.biscoito()), sub_generico(0)), 9: castelo()}
 js = ['/* ING3_jogo_mapas.js — GERADO por trabalho/3tri_ingles/gen/gen_mapas.py. Não editar à mão. */', 'window.MAPAS = {']
 for k, m in MAPAS.items():
