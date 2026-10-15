@@ -306,7 +306,8 @@ function usaTurbo(auto){
   if(R.latas<=0){ if(!auto&&(!R.avisoSemTurbo||R.t-R.avisoSemTurbo>4)){ R.avisoSemTurbo=R.t; fala(proxPit()>=0?'No turbos yet! Answer right at the pit stop to win one.':'No turbos left!',proxPit()>=0?'Ainda sem turbo! Acerte no pit stop para ganhar um.':'Acabaram os turbos!'); } return false; }
   if(R.turbo>0) return false;
   if(pitPerto()||pista(R.dist).pz){ if(!auto&&(!R.avisoPit||R.t-R.avisoPit>3)){ R.avisoPit=R.t; fala('Save it! Use the turbo on the race track.','Guarde! Use o turbo na pista.'); } return false; }
-  var alvo=null; R.rivais.forEach(function(r){ if(r.s>R.dist&&r.estado!=='ultrapassado'&&(!alvo||r.s<alvo.s)) alvo=r; });
+  var alvo=null; R.rivais.forEach(function(r){ if(r.s>R.dist&&r.estado==='frente'&&(!alvo||r.s<alvo.s)) alvo=r; }); /* o turbo passa um carro que estava À FRENTE desde a largada (o que passou numa batida se repassa dirigindo) */
+  if(!alvo) R.rivais.forEach(function(r){ if(r.s>R.dist&&r.estado!=='ultrapassado'&&(!alvo||r.s<alvo.s)) alvo=r; });
   R.latas--; R.turbo=2.0; SOM.fx('arremesso'); faiscas(R.dist-40,R.x,10,'#fde047'); pintaTurbo();
   if(alvo){ if(alvo.s-R.dist>300) alvo.s=R.dist+300; /* o carro passado aparece na tela */
     alvo.estado='ultrapassado'; alvo.tUlt=0; var Pa=pista(alvo.s), lado=(R.x-Pa.c)>0?-1:1; alvo.alvo=lado*Math.max(40,Pa.hw-40); alvo.pisca=0; alvo.cede=2.5; alvo.tag=2.5;
@@ -1050,7 +1051,7 @@ function hud(c,t){
   if(R.turbo>0){ c.strokeStyle='rgba(255,255,255,.5)'; c.lineWidth=3; for(var s2=0;s2<12;s2++){ var hx=hash(s2+Math.floor(t*12)), lx=s2%2?hx*130:W-hx*130, ly2=(t*900+s2*97)%H; c.beginPath(); c.moveTo(lx,ly2); c.lineTo(lx,ly2+60); c.stroke(); } } /* só nas laterais: nada de "chuva" na pista */
   else if(R.fase==='corre'&&R.v>40){ c.strokeStyle='rgba(255,255,255,'+(.12*R.v/V0)+')'; c.lineWidth=2; for(var s3=0;s3<6;s3++){ var lx3=s3%2?20+hash(s3)*60:W-20-hash(s3)*60, ly3=(t*R.v*1.6+s3*130)%H; c.beginPath(); c.moveTo(lx3,ly3); c.lineTo(lx3,ly3+34); c.stroke(); } }
   /* aviso grande no meio: subiu/caiu de posição, ganhou turbo */
-  if(R.anunc){ var ka=R.anunc.t, sc=1+.4*Math.max(0,1-ka/.25); c.save(); c.globalAlpha=Math.min(1,(1.3-ka)*3); c.translate(W/2,170); c.scale(sc,sc); c.font=F(900,46); c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=9; c.strokeStyle='rgba(13,11,30,.85)'; c.strokeText(R.anunc.txt,0,0); c.fillStyle=R.anunc.cor; c.fillText(R.anunc.txt,0,0); if(J.tr&&R.anunc.pt){ c.font=F(700,16); c.lineWidth=5; c.strokeText(R.anunc.pt,0,34); c.fillStyle='#fde68a'; c.fillText(R.anunc.pt,0,34); } c.restore(); }
+  if(R.anunc){ var ka=R.anunc.t, sc=1+.4*Math.max(0,1-ka/.25); c.save(); c.globalAlpha=Math.min(1,(1.3-ka)*3); c.translate(W/2,262); c.scale(sc,sc); c.font=F(900,46); c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=9; c.strokeStyle='rgba(13,11,30,.85)'; c.strokeText(R.anunc.txt,0,0); c.fillStyle=R.anunc.cor; c.fillText(R.anunc.txt,0,0); if(J.tr&&R.anunc.pt){ c.font=F(700,16); c.lineWidth=5; c.strokeText(R.anunc.pt,0,34); c.fillStyle='#fde68a'; c.fillText(R.anunc.pt,0,34); } c.restore(); }
 }
 function quebra(c,txt,larg){ var pal=String(txt).split(' '), linhas=[], cur=''; pal.forEach(function(w){ var tt=cur?cur+' '+w:w; if(c.measureText(tt).width>larg&&cur){ linhas.push(cur); cur=w; } else cur=tt; }); if(cur) linhas.push(cur); return linhas; }
 function largada(c,t){

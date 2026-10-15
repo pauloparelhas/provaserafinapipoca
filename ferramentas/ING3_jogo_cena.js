@@ -179,7 +179,7 @@ function desenhaGuia(c,t,mundo){
   var a=alvoGuia(); if(!a) return;
   var sx=a.x-J.cam, sy=a.y-J.camY, dentro=sx>20&&sx<W-20&&sy>60&&sy<H-20;
   if(mundo){ if(!dentro||a.tipo==='porta'||(a.tipo==='poder'&&J.dica)) return; /* a porta já tem o "?" que pula; o cano e o livro ganham a seta */
-    var b=Math.abs(Math.sin(t*4))*12; c.save(); c.translate(a.x,a.y-24-b);
+    var b=Math.abs(Math.sin(t*4))*12; c.save(); c.translate(a.x,Math.max(J.camY+130,a.y)-24-b); /* nunca debaixo do HUD */
     c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(-16,-30); c.lineTo(16,-30); c.lineTo(16,-12); c.lineTo(28,-12); c.lineTo(0,14); c.lineTo(-28,-12); c.lineTo(-16,-12); c.closePath(); c.fill(); c.stroke();
     var txt=a.tipo==='cano'?'Go in: ▼':(a.tipo==='poder'?(a.txt||'Take it!'):'The end!'); c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw=c.measureText(txt).width+18; c.fillStyle='rgba(13,11,30,.85)'; A.rr(c,-tw/2,-62,tw,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(txt,0,-49);
     c.restore(); return; }

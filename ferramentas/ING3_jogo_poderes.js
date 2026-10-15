@@ -75,8 +75,8 @@ function toca(wx,wy){ var M=J.mundo; if(!M) return false;
   for(var i=0;i<M.itens.length;i++){ var it=M.itens[i]; if(it.pego||!interativo(it)) continue; if(Math.abs(wx-it.x)<55&&wy>it.y-80&&wy<it.y+40){ if(perto(it)) G.pegaItem(it); else G.toast('Walk to it first!',1600,'Primeiro vá até lá!'); return true; } }
   return false; }
 function dica(){ var it=itemPerto(); if(!it) return null; var v=verbo(it); return {x:it.x,y:it.y-62,txt:v[0]+' Press ▼',pt:v[1]+' Aperte ▼',botao:true}; }
-function alvo(){ var M=J.mundo, u=J.urso; if(!M) return null; var r=null;
-  M.itens.forEach(function(it){ if(!r&&!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa')&&it.x>u.x-300) r={x:it.x,y:it.y-40,tipo:'poder',txt:verbo(it)[0]}; });
+function alvo(){ var M=J.mundo, u=J.urso; if(!M) return null; var r=null, trava=(M.modo==='voo'&&!u.poderes.capa)||(M.modo==='nado'&&!u.poderes.traje); /* barreira ativa: a seta volta para o item */
+  M.itens.forEach(function(it){ if(!r&&!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa')&&(trava||it.x>u.x-300)) r={x:it.x,y:it.y-40,tipo:'poder',txt:verbo(it)[0]}; });
   M.ovos.forEach(function(o){ if(!r&&!o.chocado&&o.x>u.x-300) r={x:o.x,y:o.y-70,tipo:'poder',txt:'Touch the egg!'}; });
   return r; }
 
@@ -151,7 +151,7 @@ function desliga(g){ g.desligado=true; g.aviso=0; SOM.fx('tijolo'); J.shake=5; G
 /* ---------- Chef de Tinta (reino 8): espera, ERGUE o prato (aviso), joga em arco; o prato rola e quebra ---------- */
 function naTela(x,m){ return x>J.cam-(m||0)&&x<J.cam+W+(m||0); }
 function atualizaChefs(dt){
-  var M=J.mundo, u=J.urso; if(!M.chefs||!M.chefs.length) return; if(!J.pratos||J.pratosM!==M){ J.pratos=[]; J.pratosM=M; }
+  var M=J.mundo, u=J.urso; if(!J.pratos||J.pratosM!==M){ J.pratos=[]; J.pratosM=M; } if(!M.chefs||!M.chefs.length) return;
   var R=G.ursoRet(), vivo=u.invT<=0&&u.tontoT<=0&&J.estado==='nivel';
   M.chefs.forEach(function(ch){
     if(ch.desligado){ ch.t+=dt; return; }
@@ -176,7 +176,7 @@ function quebraPrato(p){ if(p.quebrou) return; p.quebrou=true; SOM.fx('quebra');
 function desligaChef(ch){ ch.desligado=true; ch.t=0; SOM.fx('pisao'); G.pontua(60,ch.x,ch.y-90); PERIGOS.transforma({x:ch.x,y:ch.y,achatado:false}); G.toast('The Ink Chef is clean now!',1600,'O Chef de Tinta ficou limpinho!'); }
 
 /* ---------- por quadro ---------- */
-var tiroVisto=null, avisoCeu=0;
+var tiroVisto=null, avisoCeu=0, montVisto=null;
 function atualiza(dt){
   var M=J.mundo, u=J.urso; if(!M||!u) return;
   if(J.recarga>0) J.recarga-=dt;
@@ -188,13 +188,14 @@ function atualiza(dt){
   /* giz: a cambalhota transforma o bicho que encostar */
   if(u.poderes.giz&&u.flip>0){ var R=G.ursoRet(); M.inimigos.forEach(function(e){ if(!e.morto&&!e.achatado&&G.colideRet(R.x,R.y,R.w,R.h,e.x-18,e.y-30,36,30)) PERIGOS.transforma(e); }); }
   /* o botão de ação acompanha o poder (Pip: só montado) */
+  if(fase()===2&&!!u.montado!==montVisto){ montVisto=!!u.montado; hudPoder(); }
   var s=tiroAtual(); if(fase()!==9&&s!==tiroVisto){ tiroVisto=s; if(window.UI) UI.acao(!!s,0,s?icone(s):null,s); }
 }
 /* segundo pulo do giz = cambalhota (chamado pelo motor) */
 function segundoPulo(){ var u=J.urso; if(u.poderes.giz){ u.flip=1; u.invT=Math.max(u.invT,.6); G.emite(8,function(){ return {x:u.x,y:u.y-30,vx:(Math.random()-.5)*140,vy:-30-Math.random()*60,vida:.6,max:.6,tipo:'nevoa',r:5}; }); } }
 function reinicia(){ tiroVisto=undefined; J.recarga=0; J.pratos=[]; J.pratosM=null; hudPoder(); }
 function hudPoder(){ if(!window.UI||!UI.poderHud) return; var u=J.urso, P=poder(); if(!u||!P){ UI.poderHud(null); return; }
-  var tem= P.id==='botas'?u.poderes.bota:(P.id==='giz'?u.poderes.giz:(P.id==='pip'?false:(P.id==='traje'?u.poderes.traje:(P.id==='capa'?u.poderes.capa:!!u.poderes.tiro))));
+  var tem= P.id==='botas'?u.poderes.bota:(P.id==='giz'?u.poderes.giz:(P.id==='pip'?!!u.montado:(P.id==='traje'?u.poderes.traje:(P.id==='capa'?u.poderes.capa:!!u.poderes.tiro))));
   if(fase()===8){ var l=[]; if(u.poderes.tiro) l.push('straw'); if(u.poderes.guardanapo) l.push('napkin'); if(u.poderes.vassoura) l.push('broom'); UI.poderHud(l.length?icone(l[l.length-1]==='straw'?'leite':l[l.length-1]):null,l.join(' · ')); return; }
   UI.poderHud(tem?icone(P.id):null,tem?P.nome:'',tem?P.nomePt:''); }
 
@@ -259,7 +260,7 @@ function desenhaSuporte(c,it,t){
     c.fillStyle='#1e293b'; rr(c,-11,-34,22,12,6); c.fill(); c.fillStyle='rgba(125,211,252,.9)'; rr(c,-8,-32,16,7,3); c.fill();
     c.strokeStyle='#f97316'; c.lineWidth=3; c.beginPath(); c.moveTo(11,-30); c.lineTo(13,-42); c.stroke();
     c.fillStyle='#f97316'; c.beginPath(); c.moveTo(-10,8); c.lineTo(-18,18); c.lineTo(-2,18); c.closePath(); c.fill(); c.beginPath(); c.moveTo(10,8); c.lineTo(18,18); c.lineTo(2,18); c.closePath(); c.fill(); c.restore(); }
-    placa(c,0,-138,'DIVING SUIT'); return; }
+    placa(c,52,-40,'DIVING SUIT'); return; } /* placa ao lado do poste: no alto, o HUD cobria */
   if(id==='capa'){ /* cabide de madeira com a capa das nuvens */
     c.fillStyle='#78350f'; c.fillRect(-3,-130,6,130); c.fillRect(-22,-4,44,6); c.strokeStyle='#78350f'; c.lineWidth=4; c.beginPath(); c.moveTo(0,-122); c.quadraticCurveTo(14,-128,16,-116); c.stroke();
     if(it.pego){ placa(c,0,-146,'CAPE'); return; }
@@ -365,7 +366,7 @@ function torneira(c,x,y){ c.save(); c.fillStyle='#a7f3d0'; rr(c,x-46,y-74,92,46,
   c.fillStyle=lin(c,0,y-30,0,y,'#e5e7eb','#94a3b8'); rr(c,x-6,y-30,12,22,3); c.fill(); rr(c,x-14,y-14,28,10,4); c.fill(); c.fillStyle='#64748b'; rr(c,x-4,y-6,8,8,2); c.fill(); c.fillStyle='#ef4444'; circ(c,x,y-34,5); c.fill(); c.restore(); }
 function pilhaToras(c,x,y,tr){ c.save(); c.translate(x+30,y); var tora=function(dx,dy){ c.fillStyle='#92400e'; rr(c,dx-26,dy-18,52,18,8); c.fill(); c.fillStyle='#d97706'; circ(c,dx-24,dy-9,9); c.fill(); c.strokeStyle='#78350f'; c.lineWidth=1.5; circ(c,dx-24,dy-9,5); c.stroke(); };
   tora(0,0); tora(40,0); tora(20,-18); c.translate(tr,0); tora(10,-36); c.restore(); }
-function portaoBarris(c,x,y,tr){ c.save(); c.translate(x+34,y); c.fillStyle='#57534e'; rr(c,-30,-150,90,150,6); c.fill(); c.fillStyle='#292524'; c.beginPath(); c.moveTo(-18,0); c.lineTo(-18,-90); c.quadraticCurveTo(14,-128,46,-90); c.lineTo(46,0); c.closePath(); c.fill();
+function portaoBarris(c,x,y,tr){ c.save(); c.translate(x-14,y); /* o arco fica em cima de onde o barril nasce */ c.fillStyle='#57534e'; rr(c,-30,-150,90,150,6); c.fill(); c.fillStyle='#292524'; c.beginPath(); c.moveTo(-18,0); c.lineTo(-18,-90); c.quadraticCurveTo(14,-128,46,-90); c.lineTo(46,0); c.closePath(); c.fill();
   var barril=function(dx,dy){ c.fillStyle=lin(c,dx-14,dy-30,dx+14,dy,'#b45309','#78350f'); rr(c,dx-14,dy-30,28,30,6); c.fill(); c.strokeStyle='#451a03'; c.lineWidth=2.5; c.beginPath(); c.moveTo(dx-14,dy-22); c.lineTo(dx+14,dy-22); c.moveTo(dx-14,dy-8); c.lineTo(dx+14,dy-8); c.stroke(); };
   barril(-2,0); barril(28,0); c.save(); c.translate(tr,0); barril(13,-30); c.restore(); c.restore(); }
 function maquina(c,g,t){ /* máquina de bolas de futebol: funil cheio, luz que fica vermelha antes de chutar */
