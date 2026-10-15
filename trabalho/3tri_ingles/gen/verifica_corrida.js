@@ -17,14 +17,14 @@ const hw = 17 * K.KS, hh = 30 * K.KS;
 const passoLat = K.VLAT * 0.6 * PASSO / K.V0; // px por passo
 const cel = Math.max(1, Math.round(passoLat / DX)); // 2 células = 6 px por passo = 60 % de VLAT
 const FIM = K.S(178);
-const AR = 1.9 * K.V0; // duração do voo da rampa em px (R.arDur)
+// 18/10: o voo da rampa é por DISTÂNCIA (K.pouso): cobre o último obstáculo + 20% do vão
 
 function bloqueado(s, x, modo) {
   const P = pista(s);
   if (P.pz) return false; // trecho do box: o kart é guiado
   if (x < Math.max(26, P.l - 34) || x > Math.min(934, P.r + 34)) return true;
   if (P.ag && (x < P.l + 4 || x > P.r - 4)) return true;
-  if (modo === 3 && (x < P.l + hw || x > P.r - hw)) return true;
+  if (modo === 3 && (x < P.l + hw + 10 || x > P.r - hw - 10)) return true; // 18/10: com 10 px de margem
   for (const o of OB) {
     if (o.s < s - 120) continue; if (o.s > s + 120) break;
     const ox = pista(o.s).c + o.off, dx = Math.abs(ox - x), ds = Math.abs(o.s - s);
@@ -33,7 +33,7 @@ function bloqueado(s, x, modo) {
     if (o.tipo === 'oleo' && dx < hw + o.w / 2 - 10 && ds < hh + o.h / 2 - 10) return true;
     if (modo >= 2 && o.tipo === 'lama' && dx < hw + o.w / 2 - 10 && ds < hh + o.h / 2 - 10) {
       // coberta pelo voo da rampa?
-      const rampa = OB.find(r => r.tipo === 'rampa' && o.s > r.s && o.s - r.s < AR + 40);
+      const rampa = OB.find(r => r.tipo === 'rampa' && o.s > r.s && o.s + o.h / 2 + 18 < K.pouso(r) - 50);
       if (!rampa) return true;
     }
   }
@@ -53,6 +53,24 @@ function anda(modo) {
   return pior;
 }
 let falhas = 0;
+// 18/10 (revisão): checagens que o DP sozinho deixava passar
+const Tf = K.S(K.T_FIM);
+// (4) fileiras seguidas de cones/pedras: |Δx| <= 0,45·VLAT·(Δt-0,6) + 2·folga
+const filas = []; OB.forEach(o => { if (o.gap === undefined) return; const f = filas[filas.length - 1]; if (f && Math.abs(f.s - o.s) < 1) return; filas.push({ s: o.s, gap: o.gap, tipo: o.tipo }); });
+for (let i = 1; i < filas.length; i++) { const a = filas[i - 1], b = filas[i], dt = (b.s - a.s) / K.V0; if (dt > 3) continue;
+  const tol = (a.tipo === 'cone' ? 58 - 9 : 72 - 15) - hw, dx = Math.abs((pista(b.s).c + b.gap) - (pista(a.s).c + a.gap)), lim = 0.45 * K.VLAT * (dt - 0.6) + 2 * tol;
+  if (dx > lim) { falhas++; console.log('FALHA fileira em t=' + (b.s / K.V0).toFixed(1) + ': precisa ' + dx.toFixed(0) + ' px, alcançável ' + lim.toFixed(0)); } }
+console.log('ok    ' + filas.length + ' fileiras checadas pela fórmula');
+// (5) curvas exigem direção: kart parado no meio sai do asfalto em >= 4 trechos; e nenhuma curva pede mais que 0,6·VLAT
+let trechos = 0, fora = false, maxv = 0;
+for (let s = 0; s < Tf; s += 8) { const P = pista(s); const out = !P.pz && !P.ag && (480 < P.l + hw || 480 > P.r - hw); if (out && !fora) trechos++; fora = out; if (s > 0) maxv = Math.max(maxv, Math.abs(P.c - pista(s - 8).c) / (8 / K.V0)); }
+if (trechos < 4) { falhas++; console.log('FALHA curvas fracas: kart sem virar sai do asfalto só em ' + trechos + ' trechos'); } else console.log('ok    curvas pedem direção (' + trechos + ' trechos)');
+if (maxv > 0.6 * K.VLAT) { falhas++; console.log('FALHA curva rápida demais: ' + maxv.toFixed(0) + ' px/s'); } else console.log('ok    curva mais rápida pede ' + (maxv / K.VLAT * 100).toFixed(0) + '% da velocidade lateral');
+// (6) kart pequeno
+if (34 * K.KS > 30 || 34 * K.KS > 0.1 * K.LARG + 0.5) { falhas++; console.log('FALHA kart grande: ' + (34 * K.KS).toFixed(1) + ' px'); } else console.log('ok    kart de ' + (34 * K.KS).toFixed(1) + ' px numa pista de ' + K.LARG);
+// (7) rampa: largura e pouso
+OB.filter(o => o.tipo === 'rampa').forEach(r => { const fim = Math.max(...OB.filter(q => q !== r && q.s > r.s && q.s < r.s + 900 && q.tipo === 'lama').map(q => q.s + q.h / 2)); const pz = K.pouso(r);
+  if (r.w < K.LARG - 40 || pz < fim + 60) { falhas++; console.log('FALHA rampa em t=' + (r.s / K.V0).toFixed(1)); } else console.log('ok    rampa cobre a lama com ' + (pz - fim).toFixed(0) + ' px de folga'); });
 [[1, 'sem bater (cones, pedras, óleo, ponte)'], [2, 'sem lama fora do voo da rampa'], [3, 'sem sair do asfalto']].forEach(([m, nome]) => {
   const p = anda(m);
   if (p === null) console.log('ok    ' + nome);
