@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='0c471512052';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='d902eee2211';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -13,7 +13,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
-<title>Inglês — 3º trimestre</title>
+<title>English — 3rd term</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
@@ -207,66 +207,83 @@ details.more[open] summary .chev{transform:rotate(180deg);}
   *{transition:none!important;}
 }
 
+.tr{display:none}
+body.show-tr .tr{display:block;font-size:.85em;font-weight:700;opacity:.85;margin-top:2px}
+#trBtn svg{display:block}
+body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
+.aviso{margin:4px 0 14px;padding:10px 14px;border-radius:14px;background:#fff3c4;border:2px solid #d19a00;color:#4a3000;font-weight:900;font-size:15px;text-align:center}
+.aviso .tr{color:#4a3000}
 </style>
 </head>
 <body>
 <canvas id="starfield"></canvas>
 <div id="app">
 
-  <!-- A bandeira saiu: a prova da Olimpíada é toda em português, não há
-       o que traduzir. Sobrou o tema claro/escuro, que a criança usa. -->
+  <!-- Imersão em inglês (Paulo, 14/10): NADA em português na tela; o português
+       aparece só com a bandeira do Brasil (body.show-tr, chave 'ing3_tr', a mesma
+       do simulado, da teoria, do vídeo e do jogo). -->
   <div class="ctrls">
-    <button class="cbtn" id="themeBtn" onclick="toggleTema()" aria-pressed="false" title="Claro ou escuro">
-      <span class="ce" id="themeEmo">&#9728;&#65039;</span><span id="themeTxt">Modo claro</span>
+    <button class="cbtn" id="trBtn" onclick="alternaTr()" aria-pressed="false" title="Portuguese"><svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rect width="28" height="20" rx="3" fill="#009c3b"/><path d="M14 3 25 10 14 17 3 10z" fill="#ffdf00"/><circle cx="14" cy="10" r="4.2" fill="#002776"/></svg></button>
+    <button class="cbtn" id="themeBtn" onclick="toggleTema()" aria-pressed="false" title="Light or dark">
+      <span class="ce" id="themeEmo">&#9728;&#65039;</span><span id="themeTxt">Light mode</span>
     </button>
   </div>
 
   <div class="header">
-    <div class="badge">&#x1F4DA; 3&ordm; trimestre &middot; Y2</div>
+    <div class="badge">&#x1F4DA; 3rd term &middot; Year 2</div>
     <div class="mascot">&#x1F3F0;</div>
-    <div class="title">Ingl&ecirc;s</div>
-    <div class="subtitle">Fairy tales &middot; Real or make-believe &middot; Circle stories &middot; Cause and effect &middot; Poems</div>
+    <div class="title">English</div>
+    <div class="subtitle">Fairy tales &middot; Real or make-believe &middot; Circle stories &middot; Cause and effect &middot; Poems<span class="tr">Contos de fadas · Real ou faz de conta · Histórias circulares · Causa e efeito · Poemas</span></div>
   </div>
 
   <!-- ================= INGLES (ELA) 3o TRI =================
        Insumo: trabalho/3tri_ingles/insumo (poster Cause and Effect + 6 slides).
        Roteiro unico: trabalho/3tri_ingles/_roteiro.md. Banco unico: ING3_banco.js. -->
   <section class="geo-panel">
-    <div class="geo-top">
-      <span class="ic">&#x1F3AF;</span>
-      <span class="nm">O que cai</span>
-    </div>
-    <div style="margin:4px 0 14px;padding:10px 14px;border-radius:14px;background:#fff3c4;border:2px solid #d19a00;color:#4a3000;font-weight:900;font-size:15px;text-align:center">&#9888;&#65039; Em constru&ccedil;&atilde;o &mdash; conte&uacute;do ainda n&atilde;o validado</div>
-    <div class="geo-unit"><b>Fairy tales:</b> characters, settings, story events, &ldquo;Once upon a time&rdquo;, &ldquo;happily ever after&rdquo;, magic, special helper, threes and sevens.<br>
-      <b>Real or make-believe &middot; Circle story</b> (<i>If You Give a Mouse a Cookie</i>) <b>&middot; Cause and effect</b> (If&hellip; Then&hellip;)<b> &middot; Poems:</b> title, lines, stanza, author, rhyme, rhythm, imagery, poem &times; poetry.</div>
+    <div class="aviso">&#9888;&#65039; Under construction &mdash; content not yet reviewed<span class="tr">Em construção — conteúdo ainda não validado</span></div>
 
-    <a class="hero2" href="ferramentas/ING3_simulado.html?v=0c471512052">
+    <a class="hero2" href="ferramentas/ING3_simulado.html?v=d902eee2211">
       <span class="em">&#x270F;&#xFE0F;</span>
       <span>
         <span class="tt">Practice Test</span>
-        <span class="dd">Tudo em ingl&ecirc;s, como na prova.</span>
+        <span class="dd">Just like the real test.<span class="tr">Igual à prova de verdade.</span></span>
       </span>
-      <span class="go">Treinar</span>
+      <span class="go">Start</span>
     </a>
     <div style="margin-top:16px"></div>
-    <div class="hero" style="border-radius:22px;opacity:.75;cursor:default">
+    <a class="hero" href="ferramentas/ING3_jogo.html?v=d902eee2211" style="border-radius:22px">
       <span class="em">&#x1F3F0;</span>
       <span>
-        <span class="tt">The Lost Endings &mdash; o jogo</span>
-        <span class="dd">Em constru&ccedil;&atilde;o.</span>
+        <span class="tt">The Lost Endings</span>
+        <span class="dd">Find the lost pages and save the stories!<span class="tr">Ache as páginas perdidas e salve as histórias!</span></span>
       </span>
+      <span class="go">Play</span>
+    </a>
+    <div class="picks" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px">
+      <a class="pick mat" href="ferramentas/ING3_estudo.html?v=d902eee2211">
+        <span class="em">&#x1F4D6;</span>
+        <span>
+          <span class="tt">Study</span>
+          <span class="dd">8 short lessons with practice<span class="tr">8 lições curtas com treino</span></span>
+        </span>
+        <span class="tag">Study</span>
+      </a>
+      <div class="pick video" style="opacity:.75;cursor:default">
+        <span class="em">&#x1F3AC;</span>
+        <span>
+          <span class="tt">The video</span>
+          <span class="dd">Coming soon<span class="tr">Em breve</span></span>
+        </span>
+      </div>
     </div>
-    <div class="kicker" style="color:var(--soft);">Teoria e v&iacute;deo: em constru&ccedil;&atilde;o</div>
   </section>
 
-
-
   <div class="footer">
-    <div class="footer-logo">&#x1F3F0; Ingl&ecirc;s &middot; 3&ordm; trimestre</div>
+    <div class="footer-logo">&#x1F3F0; English &middot; 3rd term</div>
     <div class="footer-note">
-      Conte&uacute;do tirado do material da escola: p&ocirc;ster &ldquo;Cause and Effect&rdquo; e os slides de E.L.A. do 3&ordm; trimestre.
+      From the school material: the &ldquo;Cause and Effect&rdquo; poster and the E.L.A. slides of the 3rd term.<span class="tr">Do material da escola: o pôster “Cause and Effect” e os slides de E.L.A. do 3º trimestre.</span>
     </div>
-    <button class="refresh-btn" onclick="hardRefresh()">&#x21BA; Atualizar o site</button>
+    <button class="refresh-btn" onclick="hardRefresh()">&#x21BA; Refresh the site</button>
   </div>
 </div>
 <script>
@@ -285,7 +302,7 @@ function pintaTema(){
   var claro=ehClaro();
   document.body.classList.toggle('light',claro);
   document.getElementById('themeEmo').innerHTML=claro?'🌙':'☀️';
-  document.getElementById('themeTxt').textContent=claro?'Modo escuro':'Modo claro';
+  document.getElementById('themeTxt').textContent=claro?'Dark mode':'Light mode';
   document.getElementById('themeBtn').setAttribute('aria-pressed',String(claro));
   var m=document.querySelector('meta[name=theme-color]');
   if(m) m.setAttribute('content',claro?'#eef5ff':'#0d0b1e');
@@ -296,6 +313,10 @@ function toggleTema(){
 }
 pintaTema();
 
+/* bandeira do Brasil: liga/desliga o português em todo o site (mesma chave das ferramentas) */
+function pintaTr(){ var on=false; try{ on=localStorage.getItem('ing3_tr')==='1'; }catch(e){} document.body.classList.toggle('show-tr',on); var b=document.getElementById('trBtn'); if(b) b.setAttribute('aria-pressed',String(on)); }
+function alternaTr(){ var on=!document.body.classList.contains('show-tr'); try{ localStorage.setItem('ing3_tr',on?'1':'0'); }catch(e){} pintaTr(); }
+pintaTr();
 function hardRefresh(){ window.location.href=window.location.pathname+'?v='+Date.now(); }
 
 </script>
