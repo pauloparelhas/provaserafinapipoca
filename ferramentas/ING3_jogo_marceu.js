@@ -25,11 +25,11 @@ function parse(ch,x,y,L){
   }
   return false;
 }
-function cicloTempestade(z){ if(z.calmaT>0) return 'calma'; var k=((J.t+z.fase)%3)/3; return k<.43?'calma':(k<.77?'aviso':'raio'); }
+function cicloTempestade(z){ if(z.calmaT>0) return 'calma'; var k=((J.t+z.fase)%4.5)/4.5; return k<.55?'calma':(k<.85?'aviso':'raio'); } /* 18/10: aviso mais longo, raio mais curto (as crianças-robo caíam ali) */
 function atualiza(dt){
   var M=J.mundo, u=J.urso; if(!M) return; var R=G.ursoRet(), vivo=u.invT<=0&&u.tontoT<=0&&J.estado==='nivel';
   M.inimigos.forEach(function(e){
-    if(e.tipo==='agua_viva'){ e.y=e.y0-60+Math.sin(J.t*2*Math.PI/2.4+e.fase)*70; }
+    if(e.tipo==='agua_viva'){ e.y=e.y0-60+Math.sin(J.t*2*Math.PI/3.4+e.fase)*60; } /* mais lenta: dá para passar */
     if(e.tipo==='baiacu'){ var k=((J.t+e.fase)%3); e.inchado=k>2; e.treme=k>1.5&&k<=2; e.espinho=e.inchado; e.y=e.y0-20+Math.sin(J.t*2+e.fase)*12; }
   });
   (M.correntes||[]).forEach(function(cr){ if(G.colideRet(R.x,R.y,R.w,R.h,cr.x,cr.y,cr.w,cr.h)) u.x+=cr.vx*dt*(u.noChao?.4:1); });
@@ -56,7 +56,7 @@ function desenha(c,t){
   (M.tempestades||[]).forEach(function(z){ var est=cicloTempestade(z), cx=z.x+z.w/2;
     c.save(); var cor=est==='calma'?'#94a3b8':(est==='aviso'?'#475569':'#334155'); c.fillStyle=cor; A.circ(c,cx-30,z.y+20,26); c.fill(); A.circ(c,cx,z.y+10,32); c.fill(); A.circ(c,cx+30,z.y+20,26); c.fill(); A.rr(c,cx-56,z.y+18,112,26,13); c.fill();
     c.fillStyle='#fff'; A.circ(c,cx-10,z.y+20,4); c.fill(); A.circ(c,cx+10,z.y+20,4); c.fill(); c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.arc(cx,z.y+34,7,1.15*Math.PI,1.85*Math.PI); c.stroke();
-    if(est==='aviso'&&Math.floor(t*10)%2){ c.fillStyle='rgba(253,224,71,.5)'; A.circ(c,cx,z.y+28,40); c.fill(); }
+    if(est==='aviso'){ c.fillStyle='rgba(253,224,71,'+(.18+.32*(.5+.5*Math.sin(t*9.4)))+')'; A.circ(c,cx,z.y+28,40); c.fill(); }
     if(est==='raio'){ c.strokeStyle='#fde047'; c.lineWidth=7; c.shadowColor='#fde047'; c.shadowBlur=16; c.beginPath(); c.moveTo(cx,z.y+44); var yy=z.y+44; for(var k=0;k<8;k++){ yy+=55; c.lineTo(cx+(k%2?14:-14),yy); } c.stroke(); }
     c.restore(); });
 }

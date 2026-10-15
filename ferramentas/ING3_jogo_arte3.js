@@ -252,7 +252,7 @@ function ceuBosque(c,t){
 function longeBosque(c,cam,t){
   rep(cam*.6,700,function(ox){ for(var i=0;i<6;i++){ var tx=ox+i*118+hash(i)*30; if(tx<-90||tx>W+90) continue; var h=150+hash(i+5)*80; c.fillStyle='#8a5aa6'; c.fillRect(tx-5,450-h*.5,10,h*.5); circ(c,tx,450-h*.62,h*.3); c.fill(); circ(c,tx-h*.16,450-h*.48,h*.2); c.fill(); circ(c,tx+h*.17,450-h*.5,h*.21); c.fill(); } });
   bruma(c,250,440,'rgba(255,190,150,.35)');
-  rep(cam,640,function(ox){ for(var i=0;i<5;i++){ var tx=ox+i*130+hash(i+9)*40; if(tx<-90||tx>W+90) continue; var h=200+hash(i+2)*90; c.fillStyle='#5a3577'; c.fillRect(tx-7,450-h*.5,14,h*.5); c.beginPath(); c.moveTo(tx-30,450); c.quadraticCurveTo(tx-8,440,tx-7,420); c.lineTo(tx+7,420); c.quadraticCurveTo(tx+8,440,tx+30,450); c.fill(); circ(c,tx,450-h*.66,h*.27); c.fill(); circ(c,tx-h*.17,450-h*.52,h*.19); c.fill(); circ(c,tx+h*.18,450-h*.55,h*.2); c.fill(); } });
+  rep(cam,640,function(ox){ for(var i=0;i<5;i++){ var tx=ox+i*130+hash(i+9)*40; if(tx<-120||tx>W+120) continue; var h=200+hash(i+2)*90; c.fillStyle='#5a3577'; c.fillRect(tx-7,450-h*.5,14,h*.5); c.beginPath(); c.moveTo(tx-30,450); c.quadraticCurveTo(tx-8,440,tx-7,420); c.lineTo(tx+7,420); c.quadraticCurveTo(tx+8,440,tx+30,450); c.fill(); circ(c,tx,450-h*.66,h*.27); c.fill(); circ(c,tx-h*.17,450-h*.52,h*.19); c.fill(); circ(c,tx+h*.18,450-h*.55,h*.2); c.fill(); } });
   bruma(c,330,452,'rgba(255,200,160,.42)');
 }
 function pertoBosque(c,cam,t){
@@ -460,13 +460,13 @@ function balao(c,x,y,s,cores,t){
   c.restore();
 }
 function longeNuvens(c,cam,t){
-  rep(cam*.5,900,function(ox){ for(var i=0;i<6;i++){ var x=ox+i*150+hash(i)*40; if(x<-200||x>W+200) continue; nuvemF(c,x,430-hash(i+3)*36,2.2+hash(i+1)*1.1,'#eef4fc','#bccdea',.7); } });
+  rep(cam*.5,900,function(ox){ for(var i=0;i<6;i++){ var x=ox+i*150+hash(i)*40; if(x<-240||x>W+200) continue; nuvemF(c,x,430-hash(i+3)*36,2.2+hash(i+1)*1.1,'#eef4fc','#bccdea',.7); } });
   rep(cam,1100,function(ox){ if(ox+300>-100&&ox+300<W+100) balao(c,ox+300,190,.9,['#f87171','#fde68a'],t); if(ox+860>-100&&ox+860<W+100) balao(c,ox+860,250,.6,['#60a5fa','#ffffff'],t); });
   rep(cam,700,function(ox){ for(var i=0;i<5;i++){ var x=ox+i*145+hash(i+9)*50; if(x<-200||x>W+200) continue; nuvemF(c,x,486-hash(i+2)*20,1.8+hash(i)*.9,'#f2f6fd','#b3c5e6',.85); } });
 }
 function pertoNuvens(c,cam,t){
   rep(cam,1000,function(ox){ [[80,130,1.2],[420,215,.9],[700,110,1.5],[930,280,.8]].forEach(function(n,i){ var x=ox+n[0]+Math.sin(t*.3+i)*20; if(x<-150||x>W+150) return; nuvemF(c,x,n[1],n[2],'#ffffff','#d3e0f4',.6); }); });
-  rep(cam*1.2,620,function(ox){ for(var i=0;i<6;i++){ var x=ox+i*110; if(x<-150||x>W+150) continue; nuvemF(c,x,520-hash(i)*12,1.6+hash(i+4)*.6,'#e3ebf8','#9fb3dc',1); } });
+  rep(cam*1.2,620,function(ox){ for(var i=0;i<6;i++){ var x=ox+i*110; if(x<-170||x>W+150) continue; nuvemF(c,x,520-hash(i)*12,1.6+hash(i+4)*.6,'#e3ebf8','#9fb3dc',1); } });
 }
 function puffsLinha(c,a,b,y,r0,passo,seed){ for(var x=grade(a,passo);x<b+passo;x+=passo){ var r=r0+hash(x*.13+seed)*r0*.45; c.moveTo(x+passo/2+r,y); c.arc(x+passo/2,y,r,0,TAU); } }
 function formaNuvem(c,s,a,b,e,fundo){

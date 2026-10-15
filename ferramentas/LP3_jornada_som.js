@@ -26,7 +26,7 @@ function init(){
     fxGain=ctx.createGain(); fxGain.gain.value=S.sfx?.9:0; fxGain.connect(master);
     ok=true;
     if(ctx.state==='suspended'){ try{ ctx.resume(); }catch(e){} }
-    if(window.MUSICA){ MUSICA.ligar(ctx,master); MUSICA.setGanho(.42); MUSICA.setLigada(S.mus); if(S.cena) MUSICA.toca(S.cena); }
+    if(window.MUSICA){ MUSICA.ligar(ctx,master); MUSICA.setGanho(.22); MUSICA.setLigada(S.mus); if(S.cena) MUSICA.toca(S.cena); }
   }catch(e){ ok=false; ctx=null; }
   return ok;
 }

@@ -17,7 +17,7 @@ function atualiza(dt){
     var perto=Math.abs(u.x-ch.x)<560; if(!perto) return;
     if(ch.estado==='anda'){ ch.dir=u.x<ch.x?-1:1; ch.x+=ch.dir*40*dt; if(ch.t>1.4){ ch.estado='prepara'; ch.t=0; } }
     else if(ch.estado==='prepara'){ if(ch.t>.6){ ch.estado='pulo'; ch.t=0; ch.vy=-620; ch.vx=ch.dir*170; SOM.fx('pulo'); } }
-    else if(ch.estado==='pulo'){ ch.vy+=1500*dt; ch.x+=ch.vx*dt; ch.y+=ch.vy*dt; if(ch.y>=ch.y0){ ch.y=ch.y0; ch.estado='anda'; ch.t=0; J.shake=5; SOM.fx('aterra'); G.poeira(ch.x,ch.y,10); } }
+    else if(ch.estado==='pulo'){ ch.vy+=1500*dt; ch.x+=ch.vx*dt; ch.y+=ch.vy*dt; if(ch.y>=ch.y0){ ch.y=ch.y0; ch.estado='anda'; ch.t=0; if(Math.abs(ch.x-(J.cam+480))<480) J.shake=Math.max(J.shake,2); SOM.fx('aterra'); G.poeira(ch.x,ch.y,10); } }
     ch.x=Math.max(ch.x0-380,Math.min(ch.x0+200,ch.x));
     if(u.invT>0||u.tontoT>0||J.estado!=='nivel') return;
     var w=34, h=70;
@@ -39,9 +39,9 @@ function acerta(ch){
 function desenha(c,t){
   var M=J.mundo; if(!M||!M.chefinhos) return;
   M.chefinhos.forEach(function(ch){
-    if(ch.vencido) return; if(ch.inv>0&&Math.floor(t*20)%2) return;
+    if(ch.vencido) return; var alC=ch.inv>0?.6+.3*Math.sin(t*12):1;
     var sy=ch.estado==='prepara'?.78:(ch.estado==='pulo'?1.12:1+Math.sin(t*5)*.04), sx=2-sy;
-    c.save(); c.translate(ch.x,ch.y);
+    c.save(); c.globalAlpha=alC; c.translate(ch.x,ch.y);
     c.fillStyle='rgba(0,0,0,.25)'; A.el(c,0,ch.y0-ch.y+3,40,8); c.fill();
     c.scale(sx,sy);
     var g=c.createRadialGradient(-12,-50,6,0,-36,58); g.addColorStop(0,'#6366f1'); g.addColorStop(.6,'#312e81'); g.addColorStop(1,'#1e1b4b'); c.fillStyle=g;

@@ -31,18 +31,18 @@ var TAB={
   4:{id:'traje', tiro:'bolha', suporte:'arara', verbo:'Put on!', verboPt:'Vista!', nome:'diving suit', nomePt:'roupa de mergulho',
      tit:'A diving suit!', titPt:'Uma roupa de mergulho!',
      txt:'Jump into the sea. Tap JUMP to swim up. Press SPACE (or the bubble button): bubbles catch jellyfish!', txtPt:'Pule no mar. Toque PULAR para nadar para cima. Aperte ESPAÇO (ou o botão de bolha): bolhas prendem águas-vivas!'},
-  5:{id:'capa', tiro:'vento', suporte:'cabide', verbo:'Put on!', verboPt:'Vista!', nome:'cloud cape', nomePt:'capa das nuvens',
+  5:{id:'capa', tiro:null, suporte:'cabide', verbo:'Put on!', verboPt:'Vista!', nome:'cloud cape', nomePt:'capa das nuvens',
      tit:'The Cloud Cape!', titPt:'A Capa das Nuvens!',
-     txt:'Hold JUMP to fly. Let go to float down. Press SPACE (or the wind button): wind blows crows and storms away!', txtPt:'Segure PULAR para voar. Solte para descer devagar. Aperte ESPAÇO (ou o botão de vento): o vento espanta corvos e tempestades!'},
-  6:{id:'giz', tiro:null, suporte:'pedestal', verbo:'Chalk up!', verboPt:'Passe o giz!', nome:'gym chalk', nomePt:'giz de ginástica',
+     txt:'Hold JUMP to fly up. Let go to float down slowly. Fly around the storms and the crows!', txtPt:'Segure PULAR para subir voando. Solte para descer devagar. Voe por fora das tempestades e dos corvos!'},
+  6:{desligado:true, id:'giz', tiro:null, suporte:'pedestal', verbo:'Chalk up!', verboPt:'Passe o giz!', nome:'gym chalk', nomePt:'giz de ginástica',
      tit:'Gym chalk!', titPt:'Giz de ginástica!',
      txt:'Chalky hands hold rings and bars tight. Jump, then tap JUMP again in the air: a FLIP!', txtPt:'Mãos com giz seguram firme argolas e barras. Pule e aperte PULAR de novo no ar: uma CAMBALHOTA!'},
   7:{id:'bolas', tiro:'bola', suporte:'rack', verbo:'Take!', verboPt:'Pegue!', nome:'soccer balls', nomePt:'bolas de futebol',
      tit:'Soccer balls!', titPt:'Bolas de futebol!',
-     txt:'Press SPACE (or the ball button) to kick a ball. Kick the ink players and the ball machine!', txtPt:'Aperte ESPAÇO (ou o botão da bola) para chutar. Chute os jogadores de tinta e a máquina de bolas!'},
-  8:{id:'canudo', tiro:'leite', nome:'milk + straw', nomePt:'leite + canudo',
-     tit:'Milk and a straw!', titPt:'Leite e um canudo!',
-     txt:'Yum! Now you are big and strong. Press SPACE (or the milk button) to squirt milk with the straw. Milk washes the ink away!', txtPt:'Hum! Agora você está grande e forte. Aperte ESPAÇO (ou o botão do leite) para esguichar leite com o canudo. O leite lava a tinta!'}
+     txt:'Press SPACE (or the ball button) to kick a ball. Kick the ball at the ink players and the ball machine!', txtPt:'Aperte ESPAÇO (ou o botão da bola) para chutar. Chute a bola nos jogadores de tinta e na máquina de bolas!'},
+  8:{id:'biscoitos', tiro:'biscoito', nome:'cookies', nomePt:'biscoitos',
+     tit:'Cookies!', titPt:'Biscoitos!',
+     txt:'Press SPACE (or the cookie button) to throw a cookie. Ink blobs love cookies: they turn into butterflies!', txtPt:'Aperte ESPAÇO (ou o botão do biscoito) para jogar um biscoito. As manchas de tinta adoram biscoito: viram borboletas!'}
 };
 /* a história do ratinho: cada objeto no seu móvel, com o seu verbo */
 var HIST={
@@ -58,7 +58,7 @@ var HIST={
 var CARTAO_GUARDANAPO={tit:'A napkin!',titPt:'Um guardanapo!',txt:'It is a parachute! Jump, then HOLD JUMP to float over the sink.',txtPt:'Vira paraquedas! Pule e SEGURE PULAR para flutuar por cima da pia.'};
 
 function fase(){ return J.faseAtual?J.faseAtual.id:0; }
-function poder(){ return TAB[fase()]||null; }
+function poder(){ var P=TAB[fase()]; return P&&!P.desligado?P:null; }
 function log(o){ J.log=J.log||[]; o.t=+J.t.toFixed(2); J.log.push(o); if(J.log.length>400) J.log.shift(); }
 function cartao(id,c){ var i=J.in; i.left=i.right=i.jump=i.down=false; log({ev:'aviso',id:id}); if(window.UI&&UI.aviso) UI.aviso(id,c.tit,c.titPt,c.txt,c.txtPt,"Let's go! ▶",'Vamos!'); }
 
@@ -98,8 +98,8 @@ function pega(it){
     J.historia=J.historia||[]; J.historia.push(it.fim?'fim':it.nome); if(it.nome==='milk') J.historia.push('straw');
     J.faixaHist={en:h.fala,pt:h.falaPt,t:0,fim:!!it.fim};
     switch(it.nome){
-      case 'cookie': J.moedas+=5; if(it.fim) u.cheerT=2; break;
-      case 'milk': if(u.tam<2){ u.tam++; u.sx=1.3; u.sy=1.3; } if(window.UI) UI.coracoes(u.tam+1); u.cheerT=.9; u.poderes.tiro='leite'; hudPoder(); cartao('canudo',TAB[8]); break;
+      case 'cookie': J.moedas+=5; if(it.fim){ u.cheerT=2; break; } u.poderes.tiro='biscoito'; hudPoder(); cartao('biscoitos',TAB[8]); break;
+      case 'milk': if(u.tam<2){ u.tam++; u.sx=1.3; u.sy=1.3; } if(window.UI) UI.coracoes(u.tam+1); u.cheerT=.9; break; /* beber o leite: fica grande e forte (+1 coração) */
       case 'napkin': u.poderes.guardanapo=true; cartao('guardanapo',CARTAO_GUARDANAPO); break;
       case 'mirror': case 'scissors': u.cheerT=.8; break;
       case 'broom': u.cheerT=.8; J.varre={t:0}; break; /* varre o monte de migalhas logo ali, na hora */
@@ -119,7 +119,7 @@ function varre(dt){ var M=J.mundo; if(!J.varre||!M.paredes) return; J.varre.t+=d
   var viva=M.paredes.filter(function(p){ return p.viva&&p.x>u.x-100&&p.x<u.x+500; })[0]; if(viva) PERIGOS.quebraParede(M,viva); J.varre=null; }
 
 /* ---------- ação: o tiro do reino ---------- */
-var VEL={faisca:{vx:430,vy:0,g:0,alc:200},bolha:{vx:220,vy:-18,g:0,alc:240},vento:{vx:520,vy:0,g:0,alc:200},bola:{vx:470,vy:-200,g:1200,alc:520},leite:{vx:520,vy:-140,g:650,alc:330}};
+var VEL={faisca:{vx:430,vy:0,g:0,alc:200},bolha:{vx:220,vy:-18,g:0,alc:240},vento:{vx:520,vy:0,g:0,alc:200},bola:{vx:470,vy:-200,g:1200,alc:520},biscoito:{vx:430,vy:-240,g:700,alc:420}};
 function tiroAtual(){ var u=J.urso; if(!u) return null; var P=poder(); if(fase()===8) return u.poderes.tiro||null; if(!P||!P.tiro||!u.poderes.tiro) return null; if(P.montado&&!u.montado) return null; return P.tiro; }
 function atira(){
   var u=J.urso; if(fase()===9||!poder()) return false; if(J.estado!=='nivel'||!u) return true;
@@ -135,7 +135,7 @@ function moveTiro(e,dt,M){
   var fim=e.dist>e.alc||e.x<0||e.x>M.w||e.y>M.h;
   G.solidos(M).forEach(function(s){ if(fim) return; if(e.x>s.x&&e.x<s.x+s.w&&e.y>s.y&&e.y<s.y+s.h){
     if(e.skin==='bola'&&oy<=s.y+2&&e.vy>0&&e.quiques<2){ e.y=s.y-1; e.vy=-e.vy*.6; e.quiques++; SOM.fx('aterra'); return; }
-    if(e.skin==='leite'){ G.emite(6,function(){ return {x:e.x,y:s.y,vx:(Math.random()-.5)*160,vy:-60-Math.random()*90,vida:.5,max:.5,tipo:'nevoa',r:4}; }); }
+    if(e.skin==='biscoito'){ G.emite(6,function(){ return {x:e.x,y:s.y,vx:(Math.random()-.5)*160,vy:-60-Math.random()*90,vida:.5,max:.5,tipo:'nevoa',r:4}; }); }
     fim=true; if(s.parede&&e.skin==='faisca') PERIGOS.quebraParede(M,s.parede); } });
   if(e.skin==='bola'&&!fim) G.umaVia(M).forEach(function(p){ if(e.vy>0&&e.x>p.x&&e.x<p.x+p.w&&oy<=p.y&&e.y>=p.y&&e.quiques<2){ e.y=p.y-1; e.vy=-e.vy*.6; e.quiques++; } });
   return fim;
@@ -159,18 +159,18 @@ function atualizaChefs(dt){
   M.chefs.forEach(function(ch){
     if(ch.desligado){ ch.t+=dt; return; }
     ch.t-=dt; ch.dir=u.x<ch.x?-1:1;
-    if(ch.estado==='espera'&&ch.t<=0&&naTela(ch.x,-40)&&u.x<ch.x+40){ ch.estado='ergue'; ch.t=.7; SOM.fx('clique'); }
-    else if(ch.estado==='ergue'&&ch.t<=0){ ch.estado='joga'; ch.t=.25; var dx=Math.max(-260,Math.min(-120,(u.x-ch.x)*.55)); J.pratos.push({x:ch.x-14,y:ch.y-96,vx:dx,vy:-380,fase:'voo',vida:0,rot:0,r:15}); log({ev:'spawn',de:'chef',x:ch.x-14,y:ch.y-96,cam:J.cam,aviso:.7}); SOM.fx('pulo'); }
-    else if(ch.estado==='joga'&&ch.t<=0){ ch.estado='espera'; ch.t=2.6; }
+    if(ch.estado==='espera'&&ch.t<=0&&naTela(ch.x,-40)&&u.x<ch.x-140){ ch.estado='ergue'; ch.t=.9; SOM.fx('clique'); } /* só joga de longe, com aviso de 0,9 s */
+    else if(ch.estado==='ergue'&&ch.t<=0){ ch.estado='joga'; ch.t=.25; var dx=Math.max(-260,Math.min(-120,(u.x-ch.x)*.55)); J.pratos.push({x:ch.x-14,y:ch.y-96,vx:dx*.8,vy:-330,fase:'voo',vida:0,rot:0,r:15}); log({ev:'spawn',de:'chef',x:ch.x-14,y:ch.y-96,cam:J.cam,aviso:.7}); SOM.fx('pulo'); }
+    else if(ch.estado==='joga'&&ch.t<=0){ ch.estado='espera'; ch.t=4.2; }
     if(!vivo) return;
     if(G.colideRet(R.x+4,R.y+4,R.w-8,R.h-4,ch.x-22,ch.y-70,44,70)){
-      if(u.vy>50&&u.y<ch.y-40){ u.vy=-480; u.noChao=false; u.lancado=true; desligaChef(ch); } else G.machucado(); }
+      if(u.vy>20&&u.y<ch.y-25){ u.vy=-480; u.noChao=false; u.lancado=true; desligaChef(ch); } else G.machucado(); }
   });
   for(var i=J.pratos.length-1;i>=0;i--){ var p=J.pratos[i]; p.vida+=dt; p.rot+=dt*(p.fase==='voo'?8:6);
     if(p.quebrou){ J.pratos.splice(i,1); continue; }
     if(p.fase==='voo'){ p.vy+=900*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; G.solidos(M).concat(G.umaVia(M)).forEach(function(s){ if(p.fase==='voo'&&p.vy>0&&p.x>s.x&&p.x<s.x+s.w&&p.y+p.r>=s.y&&p.y+p.r<s.y+30){ p.y=s.y-p.r; p.fase='rola'; p.vx=-150; p.vy=0; p.vida=0; SOM.fx('aterra'); } }); }
     else { p.x+=p.vx*dt; var piso=null; G.solidos(M).concat(G.umaVia(M)).forEach(function(s){ if(p.x>s.x&&p.x<s.x+s.w&&p.y+p.r>=s.y-4&&p.y+p.r<s.y+30) piso=s.y; }); if(piso===null){ p.vy=(p.vy||0)+900*dt; p.y+=p.vy*dt; } else p.y=piso-p.r;
-      var bate=false; G.solidos(M).forEach(function(s){ if(p.x-p.r<s.x+s.w&&p.x+p.r>s.x&&p.y>s.y+4&&p.y<s.y+s.h) bate=true; }); if(bate||p.vida>2.5) { quebraPrato(p); continue; } }
+      var bate=false; G.solidos(M).forEach(function(s){ if(p.x-p.r<s.x+s.w&&p.x+p.r>s.x&&p.y>s.y+4&&p.y<s.y+s.h) bate=true; }); if(bate||p.vida>.5) { quebraPrato(p); continue; } } /* o prato quebra logo depois de cair (não rola atrás da criança) */
     if(p.y>M.h+60){ J.pratos.splice(i,1); continue; }
     if(vivo&&G.colideRet(R.x+4,R.y,R.w-8,R.h,p.x-p.r,p.y-p.r*.6,p.r*2,p.r*1.2)){ if(p.fase==='rola'&&u.vy>50&&u.y<p.y){ u.vy=-420; u.noChao=false; SOM.fx('pisao'); quebraPrato(p); } else { G.machucado(); quebraPrato(p); } }
   }
@@ -202,7 +202,8 @@ function reinicia(){ document.body.classList.toggle('cozinha',fase()===8); tiroV
    Uma cortina de tinta 5 tiles depois de cada entrada (porta, baú) — e depois do cano, para a entrada do submundo.
    Ela só some quando as 3 perguntas daquela entrada terminam (certas ou não: nunca prende a criança). */
 function montaPorteiras(){
-  var L=J.nivel; J.porteiras=[]; if(!L||!L.grade||J.faseAtual&&J.faseAtual.chefao) return;
+  J.porteiras=[]; return; /* 18/10 (Paulo): nada de barreira — a seta incentiva, não obriga. Código mantido só para referência. */
+  var L=J.nivel; if(!L||!L.grade||J.faseAtual&&J.faseAtual.chefao) return;
   var g=L.grade, rc=g.length-2, trig=[];
   L.moradores.forEach(function(m){ trig.push({x:m.x,m:m}); });
   if(L.sub){ var ids=L.sub.canos.map(function(q){ return q.id; }), cs=L.canos.filter(function(p){ return ids.indexOf(p.id)>=0; });
@@ -233,7 +234,7 @@ function desenhaPorteiras(c,t){ var M=J.mundo; if(!J.porteiras||M!==J.nivel||J.q
 
 function hudPoder(){ if(!window.UI||!UI.poderHud) return; var u=J.urso, P=poder(); if(!u||!P){ UI.poderHud(null); return; }
   var tem= P.id==='botas'?u.poderes.bota:(P.id==='giz'?u.poderes.giz:(P.id==='pip'?!!u.montado:(P.id==='traje'?u.poderes.traje:(P.id==='capa'?u.poderes.capa:!!u.poderes.tiro))));
-  if(fase()===8){ UI.poderHud(u.poderes.tiro?icone('leite'):null,'milk','leite'); return; }
+  if(fase()===8){ UI.poderHud(u.poderes.tiro?icone('biscoito'):null,'cookies','biscoitos'); return; }
   UI.poderHud(tem?icone(P.id):null,tem?P.nome:'',tem?P.nomePt:''); }
 
 /* ---------- ícones (desenhados no canvas, iguais no botão e no HUD) ---------- */
@@ -244,6 +245,7 @@ function icone(k){ if(ICO[k]) return ICO[k]; var cv=document.createElement('canv
     case 'bolha': case 'traje': desBolha(c,0,0,13); break;
     case 'vento': case 'capa': desVento(c,0,0,1); break;
     case 'bola': case 'bolas': desBola(c,0,0,13,0); break;
+    case 'biscoito': A.biscoito(c,0,0,13,0); break;
     case 'leite': case 'canudo': case 'straw': c.fillStyle='rgba(191,219,254,.6)'; c.beginPath(); c.moveTo(-9,-14); c.lineTo(9,-14); c.lineTo(7,14); c.lineTo(-7,14); c.closePath(); c.fill(); c.fillStyle='#fff'; c.beginPath(); c.moveTo(-8.4,-6); c.lineTo(8.4,-6); c.lineTo(7,14); c.lineTo(-7,14); c.closePath(); c.fill(); canudo(c,4,-4,1); break;
     case 'napkin': guardanapoIco(c); break;
     case 'broom': vassoura(c,0,10,.5); break;
@@ -265,7 +267,8 @@ function bota(c,x,y,s){ c.save(); c.translate(x,y); c.scale(s,s); c.fillStyle='#
 function vassoura(c,x,y,s){ c.save(); c.translate(x,y); c.scale(s,s); c.strokeStyle='#92400e'; c.lineWidth=5; c.beginPath(); c.moveTo(8,-80); c.lineTo(0,-22); c.stroke();
   c.fillStyle='#facc15'; c.beginPath(); c.moveTo(-6,-24); c.lineTo(8,-22); c.lineTo(14,0); c.lineTo(-16,0); c.closePath(); c.fill(); c.strokeStyle='#ca8a04'; c.lineWidth=1.5; for(var k=0;k<5;k++){ c.beginPath(); c.moveTo(-3+k*2.5,-20); c.lineTo(-12+k*6,0); c.stroke(); } c.fillStyle='#dc2626'; rr(c,-6,-27,14,5,2); c.fill(); c.restore(); }
 function guardanapoIco(c){ c.fillStyle='#fff'; rr(c,-13,-13,26,26,3); c.fill(); c.strokeStyle='#3b82f6'; c.lineWidth=2.5; rr(c,-13,-13,26,26,3); c.stroke(); c.strokeStyle='rgba(59,130,246,.5)'; c.lineWidth=1.5; for(var i=-6;i<=6;i+=6){ c.beginPath(); c.moveTo(i,-13); c.lineTo(i,13); c.moveTo(-13,i); c.lineTo(13,i); c.stroke(); } }
-function placa(c,x,y,txt){ c.save(); c.font='900 12px "Nunito",Arial'; var w=c.measureText(txt).width+12; c.fillStyle='#fef3c7'; rr(c,x-w/2,y-9,w,18,5); c.fill(); c.strokeStyle='#92400e'; c.lineWidth=2; rr(c,x-w/2,y-9,w,18,5); c.stroke(); c.fillStyle='#78350f'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(txt,x,y+1); c.restore(); }
+var PLACA_PT={'BOOTS':'Botas','BALLS':'Bolas','DIVING SUIT':'Roupa de mergulho','CAPE':'Capa','COOKIE':'Biscoito','MILK + STRAW':'Leite e canudo','NAPKINS':'Guardanapos','MIRROR':'Espelho','SCISSORS':'Tesoura','BROOM':'Vassoura','TAPE':'Fita adesiva','STRAWS':'Canudos','CHALK':'Giz'};
+function placa(c,x,y,txt){ if(J.tr&&PLACA_PT[txt]){ c.save(); c.font='700 11px "Nunito",Arial'; var wp=c.measureText(PLACA_PT[txt]).width+10; c.fillStyle='rgba(13,11,30,.82)'; rr(c,x-wp/2,y+10,wp,16,5); c.fill(); c.fillStyle='#fde68a'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(PLACA_PT[txt],x,y+18.5); c.restore(); } c.save(); c.font='900 12px "Nunito",Arial'; var w=c.measureText(txt).width+12; c.fillStyle='#fef3c7'; rr(c,x-w/2,y-9,w,18,5); c.fill(); c.strokeStyle='#92400e'; c.lineWidth=2; rr(c,x-w/2,y-9,w,18,5); c.stroke(); c.fillStyle='#78350f'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(txt,x,y+1); c.restore(); }
 function brilhoChao(c,x,y,t){ var a=.25+.15*Math.sin(t*4); var g=c.createRadialGradient(x,y,4,x,y,60); g.addColorStop(0,'rgba(253,224,71,'+a+')'); g.addColorStop(1,'rgba(253,224,71,0)'); c.fillStyle=g; el(c,x,y,60,18); c.fill(); }
 
 /* ---------- desenho dos itens nos seus móveis ---------- */
@@ -358,6 +361,7 @@ function desenhaTiro(c,e,t){
     case 'bolha': desBolha(c,e.x,e.y,14); return true;
     case 'vento': c.save(); c.globalAlpha=.9; c.translate(e.x,e.y); c.scale(Math.sign(e.vx)||1,1); desVento(c,0,0,1.2); c.restore(); return true;
     case 'bola': desBola(c,e.x,e.y,11,e.rot); return true;
+    case 'biscoito': c.save(); c.translate(e.x,e.y); c.rotate(e.rot); A.biscoito(c,0,0,10,0); c.restore(); return true;
     case 'leite': c.save(); c.fillStyle='#fff'; c.strokeStyle='#cbd5e1'; c.lineWidth=1.5; c.beginPath(); el(c,e.x,e.y,10,7); c.fill(); c.stroke(); c.globalAlpha=.6; circ(c,e.x-Math.sign(e.vx)*12,e.y+2,5); c.fill(); circ(c,e.x-Math.sign(e.vx)*22,e.y+4,3); c.fill(); c.restore(); return true;
   }
   return false;
@@ -414,7 +418,7 @@ function maquina(c,g,t){ /* máquina de bolas de futebol: funil cheio, luz que f
   c.fillStyle='#374151'; circ(c,-26,-20,13); c.fill(); c.fillStyle='#111'; circ(c,-28,-20,9); c.fill();
   c.fillStyle='rgba(203,213,225,.85)'; c.beginPath(); c.moveTo(-22,-50); c.lineTo(-34,-86); c.lineTo(34,-86); c.lineTo(22,-50); c.closePath(); c.fill();
   if(!g.desligado){ desBola(c,-12,-66,9,0); desBola(c,8,-68,9,1); desBola(c,-2,-80,8,2); }
-  c.fillStyle=g.desligado?'#4b5563':(g.aviso>0?(Math.floor(t*12)%2?'#ef4444':'#fca5a5'):'#22c55e'); circ(c,12,-30,6); c.fill();
+  c.fillStyle=g.desligado?'#4b5563':(g.aviso>0?'#ef4444':'#22c55e'); circ(c,12,-30,6); c.fill();
   if(g.desligado){ c.fillStyle='rgba(148,163,184,.6)'; for(var k=0;k<3;k++){ var f=(t*.7+k/3)%1; circ(c,0+k*6,-90-f*40,6+f*8); c.fill(); } }
   c.restore(); }
 function luz(c,x,y,cena,t){ c.save(); c.strokeStyle='#44403c'; c.lineWidth=2; c.beginPath(); c.moveTo(x,cena==='biscoito'?0:y-60); c.lineTo(x,y); c.stroke();
@@ -480,6 +484,14 @@ function inimigo(c,e,t){
   else { c.fillStyle='rgba(203,213,225,.7)'; c.save(); c.scale(1,.3+bat*.7); el(c,-6,-12,10,7); c.fill(); el(c,6,-12,10,7); c.fill(); c.restore(); c.fillStyle='#1e1b4b'; el(c,0,0,11,8); c.fill(); c.fillStyle='#ef4444'; circ(c,8,-3,4); c.fill(); c.strokeStyle='#1e1b4b'; c.lineWidth=1.5; for(var i=-1;i<=1;i++){ c.beginPath(); c.moveTo(i*4,6); c.lineTo(i*6,12); c.stroke(); } }
   c.restore(); return true; }
 
-return {solidos:solidos, desenhaPorteiras:desenhaPorteiras, desenhaTela:desenhaTela, TAB:TAB, poder:poder, pega:pega, interage:interage, toca:toca, dica:dica, alvo:alvo, atira:atira, moveTiro:moveTiro, acertaExtra:acertaExtra, atualiza:atualiza, reinicia:reinicia, segundoPulo:segundoPulo,
+/* explicaçãozinha do poder (passar o mouse ou tocar na pílula/no botão) */
+var DICA_PODER={1:['Seven-League Boots: jump, then press JUMP again in the air for a super jump.','Botas de Sete Léguas: pule e aperte PULAR de novo no ar para um superpulo.'],
+  2:['Pip the baby dragon: hold JUMP to float. Press SPACE: Pip blows sparkles that burn thorns.','Pip, o dragãozinho: segure PULAR para planar. Aperte ESPAÇO: o Pip sopra faíscas que queimam espinhos.'],
+  4:['Diving suit: tap JUMP to swim up. Press SPACE to blow bubbles at the jellyfish.','Roupa de mergulho: toque PULAR para nadar para cima. Aperte ESPAÇO para soprar bolhas nas águas-vivas.'],
+  5:['Cloud Cape: hold JUMP to fly up. Let go to float down slowly.','Capa das Nuvens: segure PULAR para subir voando. Solte para descer devagar.'],
+  7:['Soccer balls: press SPACE to kick a ball at the ink players and the ball machine.','Bolas de futebol: aperte ESPAÇO para chutar uma bola nos jogadores de tinta e na máquina.'],
+  8:['Cookies: press SPACE to throw a cookie. Ink blobs love cookies and turn into butterflies!','Biscoitos: aperte ESPAÇO para jogar um biscoito. As manchas de tinta adoram e viram borboletas!']};
+function dicaPoder(){ var d=DICA_PODER[fase()]; return d?{en:d[0],pt:d[1]}:null; }
+return {dicaPoder:dicaPoder, solidos:solidos, desenhaPorteiras:desenhaPorteiras, desenhaTela:desenhaTela, TAB:TAB, poder:poder, pega:pega, interage:interage, toca:toca, dica:dica, alvo:alvo, atira:atira, moveTiro:moveTiro, acertaExtra:acertaExtra, atualiza:atualiza, reinicia:reinicia, segundoPulo:segundoPulo,
   desenhaItem:desenhaItem, plataforma:plataforma, ninho:ninho, antesHeroi:antesHeroi, depoisHeroi:depoisHeroi, desenhaTiro:desenhaTiro, desenhaRolante:desenhaRolante, desenhaFundo:desenhaFundo, desenhaFrente:desenhaFrente, mola:mola, inimigo:inimigo, icone:icone, hudPoder:hudPoder, tiroAtual:tiroAtual, cartao:cartao};
 })();

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='0f983871517';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='acab2021743';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,9 +14,9 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>The Lost Endings — English</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap">
-<link rel="stylesheet" href="serafina-core.css?v=0f983871517">
+<!-- Nunito (SIL OFL 1.1, assets/fonts/OFL-Nunito.txt), servida daqui: nenhuma chamada a servidor de terceiros -->
+<style>@font-face{font-family:"Nunito";font-style:normal;font-weight:200 1000;font-display:swap;src:url(assets/fonts/nunito-latin.woff2) format("woff2")}</style>
+<link rel="stylesheet" href="serafina-core.css?v=acab2021743">
 <style>
 /* ============================================================
    ING3_jogo.html — The Lost Endings (Inglês 3º tri). Casca herdada do
@@ -245,6 +245,16 @@ body.portrait #rot{display:flex}
 #hudPoder{gap:4px;padding:3px 10px 3px 4px;font-weight:900;font-size:14px;border-color:rgba(253,224,71,.7)}
 #hudPoder img{width:30px;height:30px}
 #hudPoder span{display:none}
+#hudPoder{cursor:help;pointer-events:auto}
+#tipPoder{position:absolute;width:320px;padding:10px 14px;border-radius:14px;background:rgba(255,251,235,.97);color:#3b2a14;font:800 15px Nunito,Arial;line-height:1.3;box-shadow:0 6px 18px rgba(0,0,0,.35);border:2px solid #f59e0b;opacity:0;transition:opacity .25s;pointer-events:none;z-index:30}
+#tipPoder.show{opacity:1}
+.fimHist{margin:6px auto 10px;padding:10px 14px;border-radius:14px;background:linear-gradient(180deg,#fffbeb,#fde68a);color:#78350f;max-width:460px;text-align:center}
+.fimHist b{display:block;font-size:13px;letter-spacing:.3px;color:#92400e}
+.fimHist p{margin:4px 0 0;font:italic 900 18px Nunito,Arial}
+.fimHist small.tr{display:none;font-weight:700;font-size:12px}
+body.show-tr .fimHist small.tr{display:block}
+#tipPoder small.tr{display:none;color:#92400e;font-weight:700;font-size:13px;margin-top:3px}
+body.show-tr #tipPoder small.tr{display:block}
 #hudPoder{padding:3px 6px}
 body.cozinha #toast{top:250px}
 body.emcorrida #hudVida,body.emcorrida #hudPoder{display:none!important}
@@ -336,36 +346,36 @@ body.show-tr .mcNome small.tr{display:inline;margin-left:6px}
 <div id="rot"><span>Turn the tablet sideways</span></div>
 
 <script>window.SERA_CFG={trKey:null,lang:'en-US',voz:'thalitamultilingual',rate:.85,home:'../index.html',somKey:'ing3_som',stars:0,starfield:false};</script>
-<script src="serafina-core.js?v=0f983871517"></script>
-<script src="OP_voz.js?v=0f983871517"></script>
-<script src="ING3_banco.js?v=0f983871517"></script>
-<script src="LP3_jornada_partituras.js?v=0f983871517"></script>
-<script src="ING3_jogo_partituras.js?v=0f983871517"></script>
-<script src="LP3_jornada_musica.js?v=0f983871517"></script>
-<script src="LP3_jornada_som.js?v=0f983871517"></script>
-<script src="LP3_jornada_arte.js?v=0f983871517"></script>
-<script src="LP3_jornada_arte2.js?v=0f983871517"></script>
-<script src="ING3_jogo_arte.js?v=0f983871517"></script>
-<script src="ING3_jogo_arte2.js?v=0f983871517"></script>
-<script src="ING3_jogo_arte3.js?v=0f983871517"></script>
-<script src="ING3_jogo_arte4.js?v=0f983871517"></script>
-<script src="ING3_jogo_arte5.js?v=0f983871517"></script>
-<script src="ING3_jogo_mapas.js?v=0f983871517"></script>
-<script src="ING3_jogo_fases.js?v=0f983871517"></script>
-<script src="ING3_jogo_motor.js?v=0f983871517"></script>
-<script src="ING3_jogo_motor2.js?v=0f983871517"></script>
-<script src="ING3_jogo_perigos.js?v=0f983871517"></script>
-<script src="ING3_jogo_poderes.js?v=0f983871517"></script>
-<script src="ING3_jogo_aparelhos.js?v=0f983871517"></script>
-<script src="ING3_jogo_marceu.js?v=0f983871517"></script>
-<script src="ING3_jogo_chefinho.js?v=0f983871517"></script>
-<script src="ING3_jogo_penalti.js?v=0f983871517"></script>
-<script src="ING3_jogo_quiz.js?v=0f983871517"></script>
-<script src="ING3_jogo_carrinhos.js?v=0f983871517"></script>
-<script src="ING3_jogo_corrida.js?v=0f983871517"></script>
-<script src="ING3_jogo_estadio.js?v=0f983871517"></script>
-<script src="ING3_jogo_chefao.js?v=0f983871517"></script>
-<script src="ING3_jogo_cena.js?v=0f983871517"></script>
-<script src="ING3_jogo_ui.js?v=0f983871517"></script>
+<script src="serafina-core.js?v=acab2021743"></script>
+<script src="OP_voz.js?v=acab2021743"></script>
+<script src="ING3_banco.js?v=acab2021743"></script>
+<script src="LP3_jornada_partituras.js?v=acab2021743"></script>
+<script src="ING3_jogo_partituras.js?v=acab2021743"></script>
+<script src="LP3_jornada_musica.js?v=acab2021743"></script>
+<script src="LP3_jornada_som.js?v=acab2021743"></script>
+<script src="LP3_jornada_arte.js?v=acab2021743"></script>
+<script src="LP3_jornada_arte2.js?v=acab2021743"></script>
+<script src="ING3_jogo_arte.js?v=acab2021743"></script>
+<script src="ING3_jogo_arte2.js?v=acab2021743"></script>
+<script src="ING3_jogo_arte3.js?v=acab2021743"></script>
+<script src="ING3_jogo_arte4.js?v=acab2021743"></script>
+<script src="ING3_jogo_arte5.js?v=acab2021743"></script>
+<script src="ING3_jogo_mapas.js?v=acab2021743"></script>
+<script src="ING3_jogo_fases.js?v=acab2021743"></script>
+<script src="ING3_jogo_motor.js?v=acab2021743"></script>
+<script src="ING3_jogo_motor2.js?v=acab2021743"></script>
+<script src="ING3_jogo_perigos.js?v=acab2021743"></script>
+<script src="ING3_jogo_poderes.js?v=acab2021743"></script>
+<script src="ING3_jogo_aparelhos.js?v=acab2021743"></script>
+<script src="ING3_jogo_marceu.js?v=acab2021743"></script>
+<script src="ING3_jogo_chefinho.js?v=acab2021743"></script>
+<script src="ING3_jogo_penalti.js?v=acab2021743"></script>
+<script src="ING3_jogo_quiz.js?v=acab2021743"></script>
+<script src="ING3_jogo_carrinhos.js?v=acab2021743"></script>
+<script src="ING3_jogo_corrida.js?v=acab2021743"></script>
+<script src="ING3_jogo_estadio.js?v=acab2021743"></script>
+<script src="ING3_jogo_chefao.js?v=acab2021743"></script>
+<script src="ING3_jogo_cena.js?v=acab2021743"></script>
+<script src="ING3_jogo_ui.js?v=acab2021743"></script>
 </body>
 </html>

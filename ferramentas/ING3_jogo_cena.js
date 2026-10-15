@@ -13,7 +13,7 @@ var HEROIS=['lia','theo','bia','leo'];
 function desenha(){
   var c=G.ctx(), esc=G.escala(), dpr=G.dpr(); if(!c) return;
   c.setTransform(esc*dpr,0,0,esc*dpr,0,0); c.save();
-  if(J.shake>0) c.translate((Math.random()-.5)*J.shake,(Math.random()-.5)*J.shake);
+  if(J.shake>0){ var sk=J.shake*.5; c.translate(Math.sin(J.t*70)*sk,Math.cos(J.t*53)*sk); } /* tremor suave e previsível (o aleatório chiava) */
   switch(J.estado){
     case 'boot': c.fillStyle='#1c1917'; c.fillRect(0,0,W,H); break;
     case 'intro': desenhaIntro(c); break;
@@ -112,11 +112,11 @@ function desenhaNivel(c){
   if(J.quiz&&window.QUIZ) QUIZ.desenhaMundo(c,t);
   if(J.pip){ var p=J.pip; pip(c,p.x,p.y,p.parado?'idle':'walk',t,p.vx>=0?1:-1,1); }
   /* o herói: tamanho + squash & stretch, pisca quando invencível */
-  if(!(u.invT>0 && Math.floor(t*14)%2===0)){ var s=TAM[u.tam];
+  if(u.invT>0){ c.globalAlpha=.55+.35*Math.sin(t*12); } { var s=TAM[u.tam];
     if(u.montado){ var sela=(A.pip&&A.pip.SELA_Y)||40; pip(c,u.x,u.y,u.noChao?(Math.abs(u.vx)>5?'walk':'idle'):'fly',u.anim,u.dir,1); c.save(); c.translate(u.x,u.y-sela); c.scale(u.sx,u.sy); heroi(c,0,0,'ride',u.anim,u.dir,s,u.quem); c.restore(); }
     else { var poseH=poseDoHeroi(u,M); J.poseHeroi=poseH; J.capaLonga=poseH==='fly'; if(window.PODERES) PODERES.antesHeroi(c,u,s,t);
       c.save(); c.translate(u.x,u.y); if(u.giro){ var hh2=G.URSO_H*s*(u.estado==='hang'?1:.5); c.translate(0,-hh2); c.rotate(u.giro); c.translate(0,hh2); } c.scale(u.sx,u.sy); var est2=u.estado==='hang'||u.estado==='spin'?'cheer':null; heroi(c,0,0,est2||(poseH==='paraquedas'?'jump':poseH),u.anim,u.dir,s,u.quem); c.restore(); if(window.PODERES) PODERES.depoisHeroi(c,u,s,t); } }
-  J.part.forEach(function(p){ if(!(window.PERIGOS&&PERIGOS.particula(c,p))) A.particula(c,p); });
+  c.globalAlpha=1; J.part.forEach(function(p){ if(!(window.PERIGOS&&PERIGOS.particula(c,p))) A.particula(c,p); });
   if(J.estado==='nivel') desenhaGuia(c,t,true);
   if(J.dica && J.estado==='nivel') desenhaDica(c,J.dica,t);
   c.restore();
@@ -156,7 +156,7 @@ function praia(c,M,t){
   ['#ef4444','#fff','#ef4444','#fff','#ef4444'].forEach(function(cor,k){ c.fillStyle=cor; c.beginPath(); c.moveTo(gx,topo-104); c.arc(gx,topo-90,62,Math.PI+k*Math.PI/5,Math.PI+(k+1)*Math.PI/5); c.closePath(); c.fill(); });
   /* placa: o mar está ali */
   var bx=x1-60; c.fillStyle='#92400e'; c.fillRect(bx-3,topo-60,6,60); c.fillStyle='#fef3c7'; A.rr(c,bx-46,topo-92,92,38,8); c.fill(); c.strokeStyle='#92400e'; c.lineWidth=3; A.rr(c,bx-46,topo-92,92,38,8); c.stroke();
-  c.fillStyle='#0e7490'; c.font='900 15px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('THE SEA ▶',bx,topo-73);
+  c.fillStyle='#0e7490'; c.font='900 15px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(J.tr?'O MAR ▶':'THE SEA ▶',bx,topo-73);
 }
 /* ---------- guia do caminho (Paulo: faltava indicar portas, baús e canos) ----------
    alvo = a entrada sem resposta mais perto neste mundo; sem nenhuma aqui, o cano que leva ao outro mundo
@@ -184,11 +184,13 @@ function desenhaGuia(c,t,mundo){
   if(mundo&&a.tipo==='porta'&&dentro&&a.m&&!a.m.perto){ /* 18/10: seta grande pulando em cima da porta/baú/caixa que leva às perguntas */
     var bau=J.mundo&&(J.mundo.cena==='recife'||J.mundo.cena==='nuvens'||J.mundo.cena==='biscoito'), bb=Math.abs(Math.sin(t*4))*14, ay=Math.max(J.camY+150,a.m.y-(bau?150:188))-bb;
     c.save(); c.translate(a.x,ay); c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(-14,-34); c.lineTo(14,-34); c.lineTo(14,-14); c.lineTo(26,-14); c.lineTo(0,10); c.lineTo(-26,-14); c.lineTo(-14,-14); c.closePath(); c.fill(); c.stroke();
-    var tx=bau?'Open it! ▼':'Go in! ▼'; c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw2=c.measureText(tx).width+18; c.fillStyle="rgba(13,11,30,.88)"; A.rr(c,-tw2/2,-66,tw2,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(tx,0,-53); c.restore(); return; }
+    var tx=bau?'Open it! ▼':'Go in! ▼'; c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw2=c.measureText(tx).width+18; c.fillStyle="rgba(13,11,30,.88)"; A.rr(c,-tw2/2,-66,tw2,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(tx,0,-53);
+    if(J.tr){ var tp=bau?'Abra! ▼':'Entre! ▼'; c.font='700 12px "Nunito",Arial'; var tw3=c.measureText(tp).width+12; c.fillStyle='rgba(13,11,30,.8)'; A.rr(c,-tw3/2,-88,tw3,20,10); c.fill(); c.fillStyle='#fde68a'; c.fillText(tp,0,-78); } c.restore(); return; }
   if(mundo){ if(!dentro||a.tipo==='porta'||(a.tipo==='poder'&&J.dica)) return; /* a porta já tem o "?" que pula; o cano e o livro ganham a seta */
     var b=Math.abs(Math.sin(t*4))*12; c.save(); c.translate(a.x,Math.max(J.camY+130,a.y)-24-b); /* nunca debaixo do HUD */
     c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(-16,-30); c.lineTo(16,-30); c.lineTo(16,-12); c.lineTo(28,-12); c.lineTo(0,14); c.lineTo(-28,-12); c.lineTo(-16,-12); c.closePath(); c.fill(); c.stroke();
     var txt=a.tipo==='cano'?'Go in: ▼':(a.tipo==='poder'?(a.txt||'Take it!'):'The end!'); c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw=c.measureText(txt).width+18; c.fillStyle='rgba(13,11,30,.85)'; A.rr(c,-tw/2,-62,tw,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(txt,0,-49);
+    if(J.tr){ var tpt=a.tipo==='cano'?'Entre no cano ▼':(a.tipo==='poder'?'Pegue! ▼':'Fim!'); c.font='700 12px "Nunito",Arial'; var twp=c.measureText(tpt).width+12; c.fillStyle='rgba(13,11,30,.8)'; A.rr(c,-twp/2,-84,twp,20,10); c.fill(); c.fillStyle='#fde68a'; c.fillText(tpt,0,-74); }
     c.restore(); return; }
   if(dentro) return;
   var lado=sx<20?-1:(sx>W-20?1:0), ex=lado<0?44:(lado>0?W-44:Math.max(60,Math.min(W-60,sx))), ey=lado?Math.max(150,Math.min(330,sy)):(sy<60?96:H-150);

@@ -112,7 +112,7 @@ A.inimigo=function(c,e,t){
   else inimigo1(c,e,t);
 };
 
-/* ---------- cano (verde Mario-like, mas com folha de bordo) ---------- */
+/* ---------- cano (cano verde de desenho, com folha de bordo) ---------- */
 A.cano=function(c,p,cena,t,marcado){
   var gelo=/gelo|aurora|castelo/.test(cena), c1=gelo?'#7dd3fc':'#4ade80', c2=gelo?'#0369a1':'#166534';
   c.fillStyle=lin(c,p.x,0,p.x+p.w,0,c1,c2); c.fillRect(p.x+4,p.y+16,p.w-8,p.h-16);
@@ -170,8 +170,9 @@ A.agua=function(c,a,t,cam){
 };
 /* ---------- plataforma que cai / móvel ---------- */
 A.platMovel=function(c,p,cena,t){
-  A.plataforma(c,p,cena); c.fillStyle='rgba(0,0,0,.35)'; for(var i=0;i<2;i++){ circ(c,p.x+10+i*(p.w-20),p.y+p.h-5,3); c.fill(); }
-  c.strokeStyle='rgba(255,255,255,.25)'; c.lineWidth=2; c.beginPath(); c.moveTo(p.x+p.w/2-14,p.y+p.h+6); c.lineTo(p.x+p.w/2+14,p.y+p.h+6); c.stroke();
+  var ox=(p.x0!=null?p.x-p.x0:0), oy=(p.y0!=null?p.y-p.y0:0), q=Object.create(p); q.x=p.x-ox; q.y=p.y-oy; /* desenha na ORIGEM e translada: a decoração sorteada pela posição não pisca */
+  c.save(); c.translate(ox,oy); A.plataforma(c,q,cena); c.fillStyle='rgba(0,0,0,.35)'; for(var i=0;i<2;i++){ circ(c,q.x+10+i*(q.w-20),q.y+q.h-5,3); c.fill(); }
+  c.strokeStyle='rgba(255,255,255,.25)'; c.lineWidth=2; c.beginPath(); c.moveTo(q.x+q.w/2-14,q.y+q.h+6); c.lineTo(q.x+q.w/2+14,q.y+q.h+6); c.stroke(); c.restore();
 };
 A.platCaindo=function(c,p,cena,t){
   var trem=p.estado==='tremendo'?Math.sin(t*50)*2:0; c.save(); c.translate(trem,0); A.plataforma(c,p,cena);
