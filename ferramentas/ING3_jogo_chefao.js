@@ -51,7 +51,7 @@ var C=null;
 var ABERTURA=[
   {en:'Inkwell Castle. Count Scribble lives here!', pt:'Castelo do Tinteiro. Aqui mora o Conde Rabisco!', fx:'trovao'},
   {en:'"HA HA! The lost endings are MINE!"', pt:'"RÁ RÁ! Os finais perdidos são MEUS!"', fx:'conde'},
-  {en:'Fairy stars! SPACE or ▼: hit the inkwell and the Count!', pt:'Estrelas da fada! ESPAÇO ou ▼: acerte o tinteiro e o Conde!', fx:'tinteiros', botao:"Let's go! ▶"}
+  {en:'Fairy stars! SPACE or ▼: toss a star at the inkwell and the Count!', pt:'Estrelas da fada! ESPAÇO ou ▼: jogue uma estrela no tinteiro e no Conde!', fx:'tinteiros', botao:"Let's go! ▶"}
 ];
 
 function falaC(en,pt,dur){ if(!C) return; C.fala={en:en,pt:pt,t:0,dur:dur||3.2}; try{ say(en); }catch(e){} }
@@ -109,7 +109,7 @@ function morreu(){ if(!C||C.fase==='abertura'||C.fase==='derrota') return; C.mor
     banner('ROUND 1','RODADA 1'); falaF('Let\'s try again from the start!','Vamos tentar de novo do começo!'); comecaFase(1); } }
 function comecaFase(n){
   C.fase='p'+n; C.t=0; C.gotas=[]; C.letras=[]; daEstrelas(); SOM.musica('chefao');
-  C.minHp=[9,6,3][n-1];
+  C.minHp=[9,6,3][n-1]; C.mortes=0; /* 7 quedas na MESMA rodada para recomeçar: só se cair muitas vezes mesmo */
   if(n===1){ C.alvo=0; C.tinteiros.forEach(function(q){ q.caido=false; }); falaC('My magic inkwells!','Meus tinteiros mágicos!'); falaF('SPACE or ▼ = throw a star!','ESPAÇO ou ▼ = jogar uma estrela!'); }
   if(n===2){ C.convertidas=0; C.ondas=0; J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; }); falaC('Ink blots, GO!','Manchas, VÃO!'); }
   if(n===3){ C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); C.nLetra=0; C.tLetra=1.2; falaC('GIANT letters!','Letras GIGANTES!'); }
@@ -160,7 +160,7 @@ function atualiza(dt){
   /* o Conde anda pela sacada (não fica parado) */
   if(C.fase!=='abertura'&&C.fase!=='derrota'&&C.fase!=='quiz') C.x=19.2*T+Math.sin(C.t*.7)*1.3*T;
   voa(dt); voaTiros(dt); if(C.dor>0) C.dor-=dt; if(C.fada.fala) C.fada.fala.t+=dt;
-  if(C.drena&&C.hp>0){ C.dreno=(C.dreno||0)+dt; if(C.dreno>.18){ C.dreno=0; C.hp--; J.shake=3; } }
+  if(C.drena&&C.hp>0){ C.dreno=(C.dreno||0)+dt; if(C.dreno>.18){ C.dreno=0; C.hp--; } }
   if(J.estado!=='nivel') return;
   var u=J.urso, R=G.ursoRet(), vivo=u.invT<=0&&u.tontoT<=0;
   if((u.poderes.estrelas||0)<=0&&/^p/.test(C.fase)&&C.t>1&&!C.dons.length) daEstrelas();
