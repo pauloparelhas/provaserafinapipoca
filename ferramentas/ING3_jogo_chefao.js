@@ -147,7 +147,7 @@ function quebraEscudo(){ if(!C.escudo) return; C.escudo=false; SOM.fx('quebra');
   falaC('NO! My shield!','NÃO! Meu escudo!',2.4); }
 /* quedas na luta: só depois de MUITAS (7 na mesma rodada) tudo recomeça do começo */
 function morreu(){ if(!C||C.fase==='abertura'||C.fase==='derrota') return; C.mortes++;
-  if(C.mortes===4) falaC('HA HA! Give up, little hero!','RÁ RÁ! Desista, heroizinho!',2.6);
+  if(C.mortes===4) falaC('HA HA! Is that all, little hero?','RÁ RÁ! Só isso, heroizinho?',2.6); C.animaF=1;
   if(C.mortes>=7){ C.mortes=0; C.letrasOk=0; C.ronda=0; C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; });
     J.urso.poderes.estrelas=0; estrelasHUD(); banner('TRY AGAIN!','TENTE DE NOVO!'); comecaFase(1); } }
 function comecaFase(n){
@@ -171,7 +171,7 @@ function transicao(n){
 function vitoria(){ derrota(); C.vitoria={t:0}; try{ say('You are a super player!'); }catch(e){} }
 function derrota(){
   C.fase='derrota'; C.t=0; C.estado='sad'; C.gotas=[]; C.letras=[]; C.tiros=[]; SOM.musica(''); SOM.fx('vitoria');
-  falaC('Oh no… you found the endings.','Ah, não… você achou os finais.',4);
+  falaC('Oh no… you won! The lost endings are free!','Ah, não… você venceu! Os finais perdidos estão livres!',4);
 }
 /* a pena do Conde: de onde sai tudo que ele joga */
 function pena(){ return {x:C.x-46, y:C.y-170}; }
@@ -200,6 +200,7 @@ function atualiza(dt){
   if(J.estado!=='nivel') return;
   var u=J.urso, R=G.ursoRet(), vivo=u.invT<=0&&u.tontoT<=0;
   /* a fada: chega depois da fala do Conde, pergunta, entrega as estrelas e vai embora */
+  if(C.animaF){ C.animaF=0; C.fadaOn=true; C.fadaT=0; C.fadaSai=3; falaF("Don't give up! You can do it!",'Não desista! Você consegue!',2.8); }
   if(C.fadaDepois>0){ C.fadaDepois-=dt; if(C.fadaDepois<=0) fadaVem(C.visitas===0); }
   if(C.esperaFada>0){ C.esperaFada-=dt; if(C.esperaFada<=0){ abreDuelo(); return; } }
   if(C.fadaSai>0){ C.fadaSai-=dt; if(C.fadaSai<=0){ C.fadaOn=false; C.ultVisita=C.t; } }
