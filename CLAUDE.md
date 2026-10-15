@@ -17,6 +17,8 @@ Os agentes estao em `.claude/agents/`. Sao invocados com `Agent(subagent_type="n
 | Antes de declarar a MATERIA pronta + a cada insumo novo | `auditor-cobertura` | `Agent(subagent_type="auditor-cobertura")` |
 | Apos entregar ferramenta | `arquivista` | `Agent(subagent_type="arquivista")` |
 | Para retomar sessao ou checar prioridades | `gerente` | `Agent(subagent_type="gerente")` |
+| Antes de PUBLICAR qualquer jogo: portao rapido | `bash trabalho/3tri_ingles/gen/portao_jogo.sh` | criancas-robo jogam todos os reinos (~1 min) + regras de dificuldade; ver `_processo/jogos/PREPROMPTS.md` |
+| Seguranca / controle parental de jogo | `guardiao` | `Agent(subagent_type="guardiao")` — LIBERA obrigatorio antes de publicar |
 | Antes de PUBLICAR qualquer jogo (fases, chefao, corrida) | `jogador` | `Agent(subagent_type="jogador")` — joga cada fase do inicio ao fim SO com teclas, sem teletransporte; sem LIBERA dele nao publica |
 
 **NUNCA declarar ferramenta como "pronta" sem ter rodado o agente `ti` antes.**

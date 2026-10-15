@@ -1,0 +1,62 @@
+# Pré-prompts de desenvolvimento de jogos (versionados)
+
+**v1 · 18/10/2026.** Use antes de desenhar, codar, testar e publicar qualquer jogo. Cada correção do Paulo vira uma regra aqui, para não repetir.
+
+## P1 · Desenhar uma fase (antes de codar)
+1. Gênero da `BIBLIOTECA_JOGOS.md`, objetivo da criança em uma frase, duração (~1 min por fase, fora as perguntas).
+2. Mapa de trechos: calmo → porta → desafio → checkpoint (×3) → mini-chefe → fim. Respeitar R1–R8.
+3. Um poder **temático** que interaja com a fase, num móvel, antes da 1ª porta. Se não houver poder razoável, **não inventar**.
+4. Todo perigo com origem visível e aviso. Todo texto curto, com tradução PT na bandeira (DOM e canvas).
+5. Carga cognitiva: no máximo 2 mecânicas novas por fase.
+
+## P2 · Codar
+- Reaproveitar o motor e os módulos. Não reescrever do zero sem motivo.
+- Arquivo > 500 linhas: escrever direto, em partes. Agente não escreve arquivo grande.
+- Nada aleatório dentro do desenho (pisca). Decoração sorteada pela posição, nunca recalculada em objeto que se move.
+- QA hooks: `JOGO.relogioTeste`, `JOGO.passoFixo`, `J.teste` (quedas, danos).
+
+## P3 · Testar (obrigatório, mudo, rápido)
+1. `bash trabalho/3tri_ingles/gen/portao_jogo.sh` (~1 min). Faz:
+   - sintaxe;
+   - mapas (alcance + regras de dificuldade);
+   - corrida;
+   - **crianças-robô** jogando todos os reinos com imprecisão.
+2. Critérios das crianças-robô:
+   - 5 de 5 terminam;
+   - no máximo 3 quedas por trecho de 8 tiles;
+   - no máximo 8 quedas por criança;
+   - travar no máximo 3 vezes;
+   - zero erro de JavaScript.
+3. Depois, `Agent(subagent_type="jogador")` para o olhar visual (capturas) e `Agent(subagent_type="guardiao")` para segurança/parental.
+4. Só publica com APROVADA + LIBERA + LIBERA. Publicação: `bash trabalho/3tri_ingles/publicar_ing3.sh`, depois conferir o build no ar.
+
+## P4 · Relatar
+Relatório curto, no passado, com o que foi testado e os números (terminaram X/Y, quedas, tempo).
+Durante trabalho longo: aviso curto a cada ~10 min do que está sendo feito.
+
+## Lições já incorporadas (não repetir)
+- **Poderes:**
+  - poder genérico repetido em todo reino (capa para tudo, estrela global) → poder do reino, explicado;
+  - roupa ou capa só aparecendo numa pose → visual do poder em todas as poses;
+  - "jorrar leite" no inimigo → banido (duplo sentido).
+- **Obstáculos e mapa:**
+  - porteira que obrigava a responder → só incentivo (seta);
+  - pula-pula longe de muro alto, muro de 4 tiles, duas ravinas com toco de 1 tile → R1–R3;
+  - Chef que joga pratos logo antes do buraco → R2;
+  - fosso de espuma sob aparelho → R4.
+- **Corrida:**
+  - vista de cima que gira → tontura → 2,5D com câmera fixa atrás;
+  - rival que nunca para no box → todos param o mesmo tempo;
+  - herói mais lento → herói sempre mais rápido.
+- **Chefão:** alvo inalcançável e ataque certeiro → prateleira de 3 tiles, ataque com sombra e fora do alvo; abertura de 5 frases → 3 telas curtas.
+- **Imagem:** pisca (`Math.floor` instável, hash da posição de plataforma móvel, tremor aleatório) → correções em `arte4`/`LP3_jornada_arte2`/`cena`.
+- **Teste e publicação:**
+  - teste que demorava 30 min e não jogava de verdade → crianças-robô em relógio acelerado (~15 s);
+  - publicar só no `main` → o site sai do ramo `em-construcao`.
+
+## Atualização ("melhore, se atualize")
+Quando o Paulo pedir para se atualizar:
+1. Pesquisar referências **abertas e seguras** (MIT/BSD/Apache/CC0) do gênero pedido: técnica, números, boas práticas de jogo infantil. O agente `guardiao` confere licença e segurança.
+2. Escrever o que se aprendeu como regra ou número nesta página e na biblioteca. Subir a versão (v2, v3…) com data.
+3. Se a regra puder ser verificada por código, acrescentar ao portão (`verifica_ing3.js`, `crianca_bot.js`, `testa_criancas.py`).
+4. Nunca copiar arte, nome, personagem ou marca de jogo comercial. Inspiração de mecânica, sim; conteúdo, não.
