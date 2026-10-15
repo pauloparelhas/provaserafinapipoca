@@ -69,22 +69,26 @@ window.CRIANCA = (function(){
   /* o chefão: tinteiro que brilha (sobe na prateleira e joga a ★), manchas (pisa), letras (sobe) */
   function decideChefe(dt){
     var u=J.urso, C=J.chefe, inp=J.in; inp.down=false; var alvoX=null;
-    if(C.fase==='p1'){ var tq=C.tinteiros[C.alvo]; if(tq){ var naPrat=tq.y<450; alvoX=naPrat?tq.x-50:tq.x-80;
-        if(naPrat&&u.y>420){ alvoX=tq.x-110; if(Math.abs(u.x-alvoX)<20&&u.noChao) pula(.5); }
-        if(Math.abs(u.x-alvoX)<22&&(!naPrat||u.y<420)){ inp.left=false; inp.right=false; u.dir=1; if(st.acao<=0){ st.acao=.5; PERIGOS.atira(); } } } }
-    else if(C.fase==='p2'){ var e=null; J.mundo.inimigos.forEach(function(x){ if(x.doConde&&!x.morto&&!x.achatado&&(!e||Math.abs(x.x-u.x)<Math.abs(e.x-u.x))) e=x; }); if(e){ alvoX=e.x; if(Math.abs(e.x-u.x)<90&&u.noChao) pula(.3); } }
-    else if(C.fase==='p3'){ alvoX=19*T; if(u.noChao&&(parede(1)||rnd()<.02)) pula(.5); }
+    var temEst=(u.poderes.estrelas||0)>0, joga=function(){ if(st.acao<=0){ st.acao=.45+rnd()*.4; PERIGOS.atira(); } };
+    if(C.fase==='p1'){ alvoX=8*T+Math.sin(st.t*.6)*3*T; if(temEst) joga(); } /* anda desviando e joga as estrelas que ganhou */
+    else if(C.fase==='p2'){ if(temEst&&!C.escudo) joga(); var e=null; J.mundo.inimigos.forEach(function(x){ if(x.doConde&&!x.morto&&!x.achatado&&(!e||Math.abs(x.x-u.x)<Math.abs(e.x-u.x))) e=x; }); if(e){ alvoX=e.x; if(Math.abs(e.x-u.x)<90&&u.noChao) pula(.3); } }
+    else if(C.fase==='p3'){ alvoX=19*T; if(u.noChao&&(parede(1)||rnd()<.02)) pula(.5); if(temEst&&!C.escudo) joga(); }
+    /* vê a sombra no chão e sai de baixo (nem sempre: imprecisão) */
+    (C.gotas||[]).concat(C.letras||[]).forEach(function(d){ if(d.t>.35*d.dur&&!d.degrau&&Math.abs(d.alvo-u.x)<55&&(st.esquiva===undefined||st.esquiva)) alvoX=d.alvo+(u.x<d.alvo?-110:110); });
+    if(st.t%3<.02) st.esquiva=rnd()<.75;
     if(alvoX!==null&&!(inp.left===false&&inp.right===false&&Math.abs(u.x-alvoX)<22)){ inp.right=u.x<alvoX-12; inp.left=u.x>alvoX+12; }
     if(st.acao>0) st.acao-=dt;
     if(st.pulo>0){ inp.jump=true; st.pulo-=dt; } else inp.jump=false;
   }
   /* corrida: troca de faixa para desviar, pega moedas, usa o turbo quando tem */
-  function decideCorrida(dt){ var R=CORRIDA._R(), inp=J.in; if(!R) return; st.corr={pos:R.final||R.pos,pag:R.paginas,fase:R.fase};
+  function decideCorrida(dt){ var R=CORRIDA._R(), inp=J.in; if(!R) return; st.corr={pos:R.final||R.pos,pag:R.paginas,fase:R.fase,pior:R.piorPos};
     if(R.fase==='apresenta'){ if(R.t>1.5+rnd()) CORRIDA.largar(); return; }
     if(R.fase==='podio'){ if(R.podio&&R.podio.t>1) CORRIDA.toque(800,500); return; }
     var me=R.me, alvo=[-.55,0,.55].reduce(function(a,b){ return Math.abs(b-me.x)<Math.abs(a-me.x)?b:a; }), frente=null; /* fica na faixa em que está (toque curto), não segura a seta para sempre */ R.rivais.forEach(function(o){ var dz=o.z-me.z; if(dz>0&&dz<200*10&&Math.abs(o.x-me.x)<.5) frente=o; });
     if(frente) alvo=frente.x>0?-.55:.55; if(st.t%7<.02) st.ruido=(rnd()-.5)*.3; alvo+=st.ruido||0;
     inp.right=alvo>me.x+.1; inp.left=alvo<me.x-.1;
+    /* vê o pneu ou a poça na sua faixa e desvia (às vezes não dá tempo: imprecisão) */
+    var nO=Math.floor(me.z/200)+3, O=CORRIDA._O(); O.pneus.concat(O.poças).forEach(function(o){ if(o.n>nO&&o.n<nO+12&&Math.abs(o.x-me.x)<.4){ if(o.reage===undefined) o.reage=rnd()<(op.reflexo||.75); if(o.reage){ var outra=[-.55,0,.55].filter(function(l){ return Math.abs(l-o.x)>.3; }).sort(function(a,b){ return Math.abs(a-me.x)-Math.abs(b-me.x); })[0]; inp.right=outra>me.x+.1; inp.left=outra<me.x-.1; } } });
     var nS=Math.floor(me.z/200); CORRIDA._K.PITS().forEach(function(P,i){ if(!me.pitFeito[i]&&nS>P.ini-45&&nS<P.ini+6){ inp.right=true; inp.left=false; } }); /* a placa do box: a criança segue para a direita */
     if(R.latas>0&&rnd()<.01){ inp.jump=true; J.actSolto=true; } else inp.jump=false; }
   function decideQuiz(dt){ var q=J.quiz; if(!q) return; if(q.fase==='pergunta'){ st.quizT+=dt; if(st.quizT>1+rnd()*1.5){ st.quizT=0; I.responde(rnd()<(op.acerto||.7)); } }

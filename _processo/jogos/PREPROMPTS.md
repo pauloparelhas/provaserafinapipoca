@@ -1,6 +1,6 @@
 # Pré-prompts de desenvolvimento de jogos (versionados)
 
-**v2 · 15/10/2026** (v1 · 18/10). Use antes de desenhar, codar, testar e publicar qualquer jogo. Cada correção do Paulo vira uma regra aqui, para não repetir.
+**v3 · 15/10/2026** (v2 · 15/10, v1 · 18/10). Use antes de desenhar, codar, testar e publicar qualquer jogo. Cada correção do Paulo vira uma regra aqui, para não repetir.
 
 ## P1 · Desenhar uma fase (antes de codar)
 1. Gênero da `BIBLIOTECA_JOGOS.md`, objetivo da criança em uma frase, duração (~1 min por fase, fora as perguntas).
@@ -59,6 +59,8 @@ Durante trabalho longo: aviso curto a cada ~10 min do que está sendo feito.
 - **Pisca:** nada de alternar cor/visibilidade, nem tremer rápido (`sin(t*50)`): oscilação lenta (≤ 1,5 Hz) ou fixa; clarão de tela só véu morno ≤ 16 %.
 - **Poder com o corpo certo:** bola se CHUTA (pose `kick`, sai do pé), não se joga com a mão.
 - **Chefão (v4):** a estrela era reta e não alcançava o Conde → estrela GUIADA (arco até o tinteiro ou o Conde, que sente e perde vida); ESPAÇO **ou ▼** jogam; a Fada Madrinha dá as estrelas e faz as perguntas; só o chefão recomeça, e só após 7 quedas.
+- **Equilíbrio (v3):** "fácil demais" também é defeito. Corrida em 3 voltas de ritmo: 1ª o herói lidera; 2ª (até 70 %) os 5 fortes encostam e passam (a criança cai para 5º–6º salvo se for perfeita); 3ª os fortes colam na traseira e um razoável vence (meta do portão: ≥3/5 em 1º, ≥3/5 caem para ≥3º na volta 2). Poça e pneu FAZEM rodar e perder; raio é raro (≈9 na pista).
+- **Chefão (v5):** estrela se CONQUISTA (a fada só aparece para perguntar; certa = 3 ★); cada rodada tem ESCUDO; estrela sem escudo arranca uma LETRA que forma "YOU ARE A SUPER PLAYER" no alto — o fim tem lógica e drama.
 - **Teste e publicação:**
   - teste que demorava 30 min e não jogava de verdade → crianças-robô em relógio acelerado (~15 s);
   - publicar só no `main` → o site sai do ramo `em-construcao`.

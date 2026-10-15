@@ -22,7 +22,8 @@ with sync_playwright() as pw:
     for r in reinos:
         corridas = []
         for sd in range(nsem):
-            p.evaluate("([r,sd])=>{ __ing3.JOGO.relogioTeste(true); __ing3.JOGO.iniciaFase(__ing3.FASES.LISTA[r]); CRIANCA.inicia({seed:101+sd*37+r, acerto:.7, limite:r===2?420:240}); }", [r, sd])
+            if sd: p.wait_for_timeout(1300)  # os setTimeout do fim da rodada anterior vencem antes da próxima
+            p.evaluate("([r,sd])=>{ __ing3.JOGO.relogioTeste(true); try{ UI.fechaMenu(); }catch(e){} __ing3.JOGO.iniciaFase(__ing3.FASES.LISTA[r]); CRIANCA.inicia({seed:101+sd*37+r, acerto:.7, limite:r===2?420:(r===8?360:240)}); }", [r, sd])
             for _ in range(400):
                 st = p.evaluate("()=>{ var s=CRIANCA.passo(600); return s.fim; }")
                 if st: break
@@ -42,9 +43,11 @@ with sync_playwright() as pw:
         resumo[NOMES[r]]['causas'] = dict(Counter('%s@%d' % (q.get('causa'), q['x']//8*8) for c in corridas for q in c['quedas']).most_common(4))
         if NOMES[r] == 'Corrida':
             cc = [c.get('corrida') or {} for c in corridas]
-            resumo['Corrida']['posicoes'] = [x.get('pos') for x in cc]; resumo['Corrida']['paginas'] = [x.get('pag') for x in cc]
+            resumo['Corrida']['posicoes'] = [x.get('pos') for x in cc]; resumo['Corrida']['paginas'] = [x.get('pag') for x in cc]; resumo['Corrida']['pior_na_volta2'] = [x.get('pior') for x in cc]
+            if sum(1 for x in cc if (x.get('pior') or 0) >= 3) < 3: falhas.append('Corrida: fácil demais — na volta 2 a maioria nem caiu para 3º %s' % resumo['Corrida']['pior_na_volta2'])
+            if sum(1 for x in cc if x.get('pos') == 1) < 3: falhas.append('Corrida: difícil demais no fim — menos de 3 de 5 chegaram em 1º %s' % resumo['Corrida']['posicoes'])
             if any((x.get('pag') or 0) < 3 for x in cc): falhas.append('Corrida: criança seguindo a placa não fez os 3 boxes %s' % resumo['Corrida']['paginas'])
-            if any((x.get('pos') or 99) > 3 for x in cc): falhas.append('Corrida: criança terminou fora do pódio %s' % resumo['Corrida']['posicoes'])
+            if any((x.get('pos') or 99) > 4 for x in cc): falhas.append('Corrida: criança terminou fora do pódio %s' % resumo['Corrida']['posicoes'])
         if terminou < len(corridas): falhas.append('%s: %d de %d crianças não terminaram (pararam nos tiles %s)' % (NOMES[r], len(corridas) - terminou, len(corridas), resumo[NOMES[r]]['paradas']))
         if trecho and trecho[0][1] / max(1, len(corridas)) > 3: falhas.append('%s: trecho %d-%d derruba demais (%d quedas em %d crianças)' % (NOMES[r], trecho[0][0], trecho[0][0] + 7, trecho[0][1], len(corridas)))
         if media_q > 8: falhas.append('%s: %.1f quedas por criança' % (NOMES[r], media_q))
