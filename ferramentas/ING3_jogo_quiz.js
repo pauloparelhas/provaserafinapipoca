@@ -1,21 +1,19 @@
 /* ============================================================
-   ING3_jogo_quiz.js — a PERGUNTA DENTRO DO MUNDO (The Lost Endings).
-   Ao chegar perto de um morador, o jogo não troca de tela: a câmera
-   enquadra a praça, o morador fala a pergunta num balão (inglês; a
-   bandeira mostra o português menor embaixo) e três PLACAS de madeira
-   descem à altura de um pulo. Responder = pular e bater a cabeça na
-   placa certa (o mesmo gesto da caixa "?"), ou tocar nela, ou 1/2/3.
-   Acertou: placa verde, o morador diz o porquê. Errou: a placa treme,
-   a certa acende e o morador explica. Toque/ENTER/pulo segue.
-   Cada morador faz 3 perguntas e entrega 1 página do livro.
-   Perguntas: ING3_banco.js, filtradas pelo tema e pelos átomos do
-   reino (FASES.LISTA[].at), sem repetir (localStorage ing3_jogo_usadas).
+   ING3_jogo_quiz.js — o AMBIENTE DE QUESTÕES (v2, 15/10, Paulo).
+   A criança ENTRA num elemento da fase (porta, baú…; ▼ ou toque nele)
+   e o jogo muda de clima: a fase fica esmaecida atrás de uma moldura
+   escura, toca a música de suspense, um relógio de 30 s corre, o
+   personagem que pergunta aparece grande e a criança TOCA no cartão
+   numerado da resposta (ou aperta 1/2/3). Errou ou o tempo acabou: o
+   cartão certo acende e o personagem explica (curto). ▶ segue.
+   3 perguntas por entrada = 1 página do livro; depois volta à fase.
+   "✕ Leave" sai a qualquer hora. Perguntas: ING3_banco.js filtradas
+   pelo tema/átomos do reino, sem repetir (localStorage).
    ============================================================ */
 window.QUIZ = (function(){
 'use strict';
 var G=window.JOGO, J=G.J, A=window.ARTE, W=G.W, H=G.H;
-var N_POR_MORADOR=3, PLACA_W=200, PLACA_GAP=15, PLACA_BASE=150; /* base da placa = chão - 150 px: o herói grande (110) passa por baixo; o pequeno alcança com um pulo */
-var USADAS='ing3_jogo_usadas';
+var N_POR_MORADOR=3, TEMPO=30, USADAS='ing3_jogo_usadas';
 
 /* ---------- escolha das perguntas ---------- */
 function usadas(){ try{ return JSON.parse(localStorage.getItem(USADAS)||'[]'); }catch(e){ return []; } }
@@ -24,169 +22,163 @@ function embaralha(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.fl
 function escolhe(f,n,jaNaFase){
   var pool=ING3.ITENS.filter(function(it){ if(f.tema!=='todos'&&it.tema!==f.tema) return false; if(f.at&&it.at&&!it.at.some(function(a){ return f.at.indexOf(a)>=0; })) return false; return jaNaFase.indexOf(it.id)<0; });
   var u=usadas(), novas=pool.filter(function(it){ return u.indexOf(it.id)<0; });
-  if(novas.length<n){ /* o reino esgotou: recomeça só as deste reino */ var ids=pool.map(function(it){ return it.id; }); try{ localStorage.setItem(USADAS,JSON.stringify(u.filter(function(id){ return ids.indexOf(id)<0; }))); }catch(e){} novas=pool; }
+  if(novas.length<n){ var ids=pool.map(function(it){ return it.id; }); try{ localStorage.setItem(USADAS,JSON.stringify(u.filter(function(id){ return ids.indexOf(id)<0; }))); }catch(e){} novas=pool; }
   var sel=[], leit=0;
   embaralha(novas).forEach(function(it){ if(sel.length>=n) return; if(it.tipo==='leitura'){ if(leit>=1) return; leit++; } sel.push(it); });
   return sel;
 }
 
 /* ---------- ciclo ---------- */
-/* op (chefão): {itens, baseX, camX, aoResponder(ok), aoTerminar()} — perguntas e lugar das placas vêm de fora */
 function inicia(m,op){
   if(J.quiz) return;
   var f=J.faseAtual, L=J.nivel, ja=L.quizIds||(L.quizIds=[]);
   var itens=(op&&op.itens)||escolhe(f,N_POR_MORADOR,ja); if(!itens.length) return;
   itens.forEach(function(it){ ja.push(it.id); });
-  var u=J.urso; u.vx=0; J.in.left=J.in.right=false;
-  J.quiz={m:m, op:op||null, itens:itens, i:0, fase:'entra', t:0, acertos:0, placas:[], camX:op&&op.camX!==undefined?op.camX:m.x-140, chao:op&&op.chao||m.y, lay:null};
-  J.estado='quiz'; m.visto=true; SOM.fx('plim');
+  var u=J.urso; u.vx=0; J.in.left=J.in.right=J.in.jump=J.in.down=false;
+  J.quiz={m:m, op:op||null, itens:itens, i:0, fase:'entra', t:0, acertos:0, cartoes:[], dica:false};
+  J.estado='quiz'; m.visto=true; SOM.fx('iris'); SOM.musica('arena');
   montaPergunta();
   if(window.UI) UI.quizBotoes(true);
 }
 function montaPergunta(){
-  var q=J.quiz, it=q.itens[q.i]; var ordem=embaralha(it.o.map(function(_,i){ return i; }));
-  q.item=it; q.ordem=ordem; q.certa=ordem.indexOf(it.c); q.escolha=-1; q.fase='entra'; q.t=0; q.lay=null; q.dica=false;
-  var x0=q.op&&q.op.baseX!==undefined?q.op.baseX:q.m.x+170;
-  q.placas=ordem.map(function(oi,k){ return {k:k, x:x0+k*(PLACA_W+PLACA_GAP), y:q.chao-PLACA_BASE-90, w:PLACA_W, h:90, txt:it.o[oi], pt:(it.o_pt||[])[oi]||'', estado:'normal', ativa:false, bump:0, queda:0}; });
-  q.m.falando=2.5;
+  var q=J.quiz, it=q.itens[q.i], ordem=embaralha(it.o.map(function(_,i){ return i; }));
+  q.item=it; q.ordem=ordem; q.certa=ordem.indexOf(it.c); q.escolha=-1; q.fase=q.i?'pergunta':'entra'; q.t=0; q.tempo=TEMPO; q.dica=false; q.lay=null;
+  q.cartoes=ordem.map(function(oi,k){ return {k:k, txt:it.o[oi], pt:(it.o_pt||[])[oi]||'', estado:'normal', bump:0}; });
   try{ say(it.p); }catch(e){}
 }
 function responde(k){
   var q=J.quiz; if(!q||q.fase!=='pergunta') return;
-  var ok=k===q.certa; q.escolha=k; q.fase='resposta'; q.t=0; if(!J.prog.quizVisto){ J.prog.quizVisto=true; G.salva(); }
+  var ok=k===q.certa; q.escolha=k; q.fase='resposta'; q.t=0;
   J.stats.perguntas++; marca(q.item.id);
-  q.placas.forEach(function(p){ p.ativa=false; p.estado= p.k===q.certa?'certa':(p.k===k?'errada':'apagada'); });
-  var p=q.placas[k]; p.bump=12;
-  if(ok){ q.acertos++; J.stats.acertos++; G.pontua(100,p.x+p.w/2,p.y); SOM.fx('acerto'); G.brilho(p.x+p.w/2,p.y+p.h/2,14,'#86efac'); J.urso.cheerT=.9; }
+  q.cartoes.forEach(function(c){ c.estado= c.k===q.certa?'certa':(c.k===k?'errada':'apagada'); });
+  if(k>=0) q.cartoes[k].bump=10;
+  if(ok){ q.acertos++; J.stats.acertos++; G.pontua(100); SOM.fx('acerto'); }
   else { SOM.fx('erro'); J.shake=4; }
-  q.m.falando=2.5;
   try{ say((ok?'Yes! ':'Not quite. ')+(q.item.ex||'')); }catch(e){}
   if(q.op&&q.op.aoResponder) q.op.aoResponder(ok);
 }
 function segue(){
-  var q=J.quiz; if(!q||q.fase!=='resposta'||q.t<.6) return;
+  var q=J.quiz; if(!q||q.fase!=='resposta'||q.t<.5) return;
   q.i++;
   if(q.i<q.itens.length){ montaPergunta(); return; }
-  if(q.op){ q.fase='pagina'; q.t=0; q.placas.forEach(function(p){ p.ativa=false; }); return; } /* chefão: sem página de morador */
-  /* fim do morador: uma página do livro */
-  q.fase='pagina'; q.t=0; q.placas.forEach(function(p){ p.ativa=false; p.estado='sobe'; });
-  q.m.feito=true; SOM.fx('vitoria');
-  var L=J.nivel, n=L.moradores.filter(function(mm){ return mm.feito; }).length;
-  G.toast('You found a lost page! ('+n+' of '+L.moradores.length+')',2600,'Você achou uma página perdida! ('+n+' de '+L.moradores.length+')');
-  G.pontua(150);
+  q.fase='pagina'; q.t=0;
+  if(!q.op){ q.m.feito=true; var L=J.nivel, n=L.moradores.filter(function(mm){ return mm.feito; }).length;
+    G.toast('You found a lost page! ('+n+' of '+L.moradores.length+')',2600,'Você achou uma página perdida! ('+n+' de '+L.moradores.length+')'); G.pontua(150); SOM.fx('vitoria'); }
 }
-function sai(){ /* ✕ Leave: volta a jogar na hora; o morador espera o herói se afastar */
-  var q=J.quiz; if(!q) return; if(q.op){ q.op.aoTerminar=null; } q.m.esperaT=1.5; termina(); if(q.op&&q.op.aoSair) q.op.aoSair();
+function sai(){ var q=J.quiz; if(!q) return; if(q.op) q.op.aoTerminar=null; termina(); if(q.op&&q.op.aoSair) q.op.aoSair(); }
+function termina(){
+  var q=J.quiz; J.quiz=null; J.estado='nivel'; if(window.UI) UI.quizBotoes(false); G.hud(); try{ speechSynthesis.cancel(); }catch(e){}
+  if(q){ q.m.esperaT=1.2; if(!q.op){ var cn=J.nivel.cena; SOM.musica(window.PARTITURAS&&PARTITURAS.CENAS[cn]?cn:'floresta'); } }
+  if(J.urso) J.urso.invT=Math.max(J.urso.invT||0,1);
+  if(q&&q.op&&q.op.aoTerminar) setTimeout(q.op.aoTerminar,0);
 }
-function termina(){ var q=J.quiz; J.quiz=null; J.estado='nivel'; if(q&&q.op&&q.op.aoTerminar) setTimeout(q.op.aoTerminar,0); if(window.UI) UI.quizBotoes(false); G.hud(); try{ speechSynthesis.cancel(); }catch(e){} if(q&&!q.m.feito){ q.m.esperaT=Math.max(q.m.esperaT||0,1.5); } }
-
 function atualiza(dt){
   var q=J.quiz; if(!q) return; q.t+=dt;
-  var u=J.urso; /* o herói fica na praça enquanto a conversa dura */
-  if(u.x<q.camX+30){ u.x=q.camX+30; u.vx=0; } if(u.x>q.camX+W-30){ u.x=q.camX+W-30; u.vx=0; }
-  q.placas.forEach(function(p){ if(p.bump>0) p.bump=Math.max(0,p.bump-dt*60); });
-  if(q.fase==='entra'){ q.placas.forEach(function(p,i){ p.queda=Math.min(1,Math.max(0,(q.t-i*.12)/.45)); }); if(q.t>.75){ q.fase='pergunta'; q.placas.forEach(function(p){ p.ativa=true; p.queda=1; }); } }
-  else if(q.fase==='resposta'){ if(J.in.jump&&J.jumpSolto===false&&q.t>.9&&u.noChao){ /* pular de novo também segue */ } }
-  else if(q.fase==='pagina'){ q.placas.forEach(function(p){ p.queda=Math.max(0,1-q.t/.5); }); if(q.t>1.8) termina(); }
+  q.cartoes.forEach(function(c){ if(c.bump>0) c.bump=Math.max(0,c.bump-dt*50); });
+  if(q.fase==='entra'&&q.t>.7){ q.fase='pergunta'; q.t=0; }
+  else if(q.fase==='pergunta'){ var antes=Math.ceil(q.tempo); q.tempo=Math.max(0,q.tempo-dt); var agora=Math.ceil(q.tempo); if(agora!==antes&&agora<=5&&agora>0) SOM.fx('clique'); if(q.tempo<=0) responde(-1); }
+  else if(q.fase==='pagina'&&q.t>1.6) termina();
 }
 
-/* ---------- texto em canvas ---------- */
+/* ---------- texto ---------- */
 function quebra(c,txt,larg){ var pal=String(txt).split(' '), linhas=[], cur=''; pal.forEach(function(w){ var t=cur?cur+' '+w:w; if(c.measureText(t).width>larg&&cur){ linhas.push(cur); cur=w; } else cur=t; }); if(cur) linhas.push(cur); return linhas; }
-function layout(c){
-  var q=J.quiz, it=q.item, tr=!!J.tr, chaoTela=q.chao-J.camY, baseY=chaoTela-PLACA_BASE;
-  var temTexto=!!it.texto, bx=temTexto?300:20, bw=temTexto?640:920;
-  /* tenta o maior corpo de letra que deixa as placas abaixo do balão */
-  var tamanhos=[24,21,19,17], L=null;
-  for(var s=0;s<tamanhos.length;s++){
-    var fs=tamanhos[s]; c.font='900 '+fs+'px "Nunito","Segoe UI",Arial';
-    var lp=quebra(c,it.p,bw-36); c.font='700 '+Math.round(fs*.68)+'px "Nunito","Segoe UI",Arial';
-    var lpt=tr&&it.p_pt?quebra(c,it.p_pt,bw-36):[];
-    var bh=18+lp.length*fs*1.22+(lpt.length?6+lpt.length*fs*.86:0)+16;
-    var fsP=Math.max(15,fs-4); c.font='900 '+fsP+'px "Nunito","Segoe UI",Arial';
-    var placas=q.placas.map(function(p){ var l1=quebra(c,p.txt,p.w-24); c.font='700 '+Math.round(fsP*.72)+'px "Nunito","Segoe UI",Arial'; var l2=tr&&p.pt&&p.pt!==p.txt?quebra(c,p.pt,p.w-24):[]; c.font='900 '+fsP+'px "Nunito","Segoe UI",Arial'; return {l1:l1,l2:l2,h:22+l1.length*fsP*1.15+(l2.length?4+l2.length*fsP*.82:0)}; });
-    var hp=Math.max.apply(null,placas.map(function(x){ return x.h; }));
-    L={fs:fs,fsP:fsP,lp:lp,lpt:lpt,bx:bx,by:60,bw:bw,bh:bh,placas:placas,hp:Math.max(70,hp),baseY:baseY};
-    if(60+bh+18<baseY-L.hp) break;
-  }
-  q.placas.forEach(function(p,i){ p.h=L.hp; p.y=q.chao-PLACA_BASE-L.hp; });
-  L.tr=tr; q.lay=L; return L;
+function F(peso,px){ return peso+' '+px+'px "Nunito","Segoe UI",Arial'; }
+
+/* layout: quem pergunta à esquerda; balão no alto; texto de leitura (se houver) ao lado; cartões embaixo */
+var CART_Y=372, CART_H=118;
+function layout(){
+  var q=J.quiz, n=q.cartoes.length, gap=16, x0=200, larg=(W-x0-24-gap*(n-1))/n;
+  q.cartoes.forEach(function(cd,k){ cd.x=x0+k*(larg+gap); cd.y=CART_Y; cd.w=larg; cd.h=CART_H; });
+  q.lay={larg:larg,tr:!!J.tr}; return q.lay;
 }
 
-/* ---------- desenho: placas (coordenadas do mundo) ---------- */
-function desenhaMundo(c,t){
-  var q=J.quiz; if(!q) return; var L=(q.lay&&q.lay.tr===!!J.tr)?q.lay:layout(c);
-  q.placas.forEach(function(p,i){
-    var desce=(1-Math.pow(1-p.queda,3))*(p.y+p.h+40)-(p.h+40), y=desce-(p.bump||0)+(p.estado==='errada'?Math.sin(q.t*40)*Math.max(0,3-q.t*4):0);
-    if(p.queda<=0) return;
-    var cx=p.x;
-    /* correntes até o alto da tela */
-    /* correntes até o alto da tela (a placa da arte desenha só o trecho de perto) */
-    c.strokeStyle='rgba(75,85,99,.55)'; c.lineWidth=2; c.setLineDash([5,5]); c.beginPath(); c.moveTo(cx+p.w*.18,J.camY-10); c.lineTo(cx+p.w*.18,y-66); c.moveTo(cx+p.w*.82,J.camY-10); c.lineTo(cx+p.w*.82,y-66); c.stroke(); c.setLineDash([]);
-    if(A.placa) A.placa(c,cx+p.w/2,y+p.h/2,p.w,p.h,p.estado==='normal'&&p.bump>0?'bump':p.estado,q.t); else { c.fillStyle=p.estado==='certa'?'#86efac':(p.estado==='errada'?'#fca5a5':(p.estado==='apagada'?'#a8a29e':'#fde68a')); A.rr(c,cx,y,p.w,p.h,12); c.fill(); }
-    var lp=L.placas[i]; c.textAlign='center'; c.textBaseline='top';
-    var cor= p.estado==='apagada'?'rgba(41,24,10,.45)':'#2b1a0b';
-    var ty=y+(p.h-(lp.l1.length*L.fsP*1.15+(lp.l2.length?4+lp.l2.length*L.fsP*.82:0)))/2;
-    c.fillStyle=cor; c.font='900 '+L.fsP+'px "Nunito","Segoe UI",Arial'; lp.l1.forEach(function(l,k){ c.fillText(l,cx+p.w/2,ty+k*L.fsP*1.15); });
-    if(lp.l2.length){ c.fillStyle=p.estado==='apagada'?'rgba(91,53,20,.45)':'#7c4a1e'; c.font='700 '+Math.round(L.fsP*.72)+'px "Nunito","Segoe UI",Arial'; var y2=ty+lp.l1.length*L.fsP*1.15+4; lp.l2.forEach(function(l,k){ c.fillText(l,cx+p.w/2,y2+k*L.fsP*.82); }); }
-    /* número da tecla */
-    c.fillStyle='rgba(43,26,11,.75)'; A.circ(c,cx+16,y+16,11); c.fill(); c.fillStyle='#fde68a'; c.font='900 13px Arial'; c.textBaseline='middle'; c.fillText(String(i+1),cx+16,y+16);
-  });
-}
-
-/* ---------- desenho: balão, pergaminho, instrução (coordenadas da tela) ---------- */
+/* ---------- desenho ---------- */
+function desenhaMundo(){ /* o ambiente de questões é desenhado por cima, na tela */ }
 function desenhaTela(c,t){
-  var q=J.quiz; if(!q||q.fase==='pagina') return; var L=q.lay; if(!L) return; var it=q.item;
-  if(it.texto) pergaminho(c,it,t);
-  /* balão: pergunta, ou a fala de resposta */
-  var falaEN, falaPT, cor='#fff';
-  if(q.fase==='resposta'){ var ok=q.escolha===q.certa; falaEN=(ok?'Yes! ':'Not quite! ')+(it.ex||''); falaPT=(ok?'Isso! ':'Quase! ')+(it.ex_pt||''); fs=Math.min(fs,20); cor=ok?'#dcfce7':'#fee2e2'; }
-  var bx=L.bx, by=L.by, bw=L.bw, bh=L.bh, linhas=L.lp, linhasPT=L.lpt, fs=L.fs;
-  if(falaEN){ fs=Math.min(fs,20); c.font='900 '+fs+'px "Nunito","Segoe UI",Arial'; linhas=quebra(c,falaEN,bw-36); c.font='700 '+Math.round(fs*.68)+'px "Nunito","Segoe UI",Arial'; linhasPT=J.tr?quebra(c,falaPT,bw-36):[]; bh=18+linhas.length*fs*1.22+(linhasPT.length?6+linhasPT.length*fs*.86:0)+16; }
-  var mx=q.m.x-J.cam;
-  c.save(); c.shadowColor='rgba(0,0,0,.35)'; c.shadowBlur=14; c.shadowOffsetY=5;
-  c.fillStyle=cor; A.rr(c,bx,by,bw,bh,20); c.fill(); c.restore();
-  c.fillStyle=cor; c.beginPath(); var tx=Math.max(bx+30,Math.min(bx+bw-30,mx+20)); c.moveTo(tx-14,by+bh-2); c.lineTo(tx+14,by+bh-2); c.lineTo(mx+6,by+bh+26); c.closePath(); c.fill();
-  c.strokeStyle='rgba(30,27,58,.15)'; c.lineWidth=2; A.rr(c,bx,by,bw,bh,20); c.stroke();
-  c.textAlign='left'; c.textBaseline='top'; c.fillStyle='#1e1b3a'; c.font='900 '+fs+'px "Nunito","Segoe UI",Arial';
-  linhas.forEach(function(l,k){ c.fillText(l,bx+18,by+16+k*fs*1.22); });
-  if(linhasPT.length){ c.fillStyle='#6b5d4f'; c.font='700 '+Math.round(fs*.68)+'px "Nunito","Segoe UI",Arial'; var y0=by+16+linhas.length*fs*1.22+6; linhasPT.forEach(function(l,k){ c.fillText(l,bx+18,y0+k*fs*.86); }); }
-  /* contador e instrução */
-  c.textAlign='right'; c.fillStyle='rgba(30,27,58,.5)'; c.font='900 13px "Nunito",Arial'; c.fillText((q.i+1)+' / '+q.itens.length,bx+bw-14,by+6);
-  if(q.dica&&q.fase==='pergunta'){ var d=it.dica_en||it.dica; c.font='800 16px "Nunito",Arial'; var dl=quebra(c,'Hint: '+d,560), dh=dl.length*20+14+(J.tr&&it.dica?18:0); var dy=L.baseY-L.hp-dh-14; if(dy<by+bh+8) dy=by+bh+8; c.fillStyle='rgba(254,243,199,.97)'; A.rr(c,300,dy,600,dh,12); c.fill(); c.fillStyle='#78350f'; c.textAlign='left'; dl.forEach(function(l,k){ c.fillText(l,314,dy+7+k*20); }); if(J.tr&&it.dica){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#a16207'; c.fillText(it.dica,314,dy+7+dl.length*20); } }
-  var instr=null, ipt=null;
-  /* instrução só na 1ª pergunta do jogo; depois, só a seta discreta para seguir */
-  if(q.fase==='pergunta'&&!J.prog.quizVisto){ instr='Jump and hit the right sign!'; ipt='Pule e bata a cabeça na placa certa!'; }
-  else if(q.fase==='resposta'&&q.t>.6){ instr='▶'; ipt=''; }
-  if(instr){ var a=.7+.3*Math.sin(t*4); c.save(); c.globalAlpha=a; c.textAlign='center'; c.textBaseline='middle'; c.font='900 18px "Nunito",Arial'; var w2=c.measureText(instr).width+30, yy=H-88-(J.tr?14:0); c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,W/2-w2/2,yy-16-(J.tr?2:0),w2,32+(J.tr?16:0),16); c.fill(); c.fillStyle='#fde68a'; c.fillText(instr,W/2,yy); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#e9e6ff'; c.fillText(ipt,W/2,yy+17); } c.restore(); }
+  var q=J.quiz; if(!q) return; var it=q.item; if(!q.lay||q.lay.tr!==!!J.tr) layout();
+  var ent=q.fase==='entra'?Math.min(1,q.t/.7):(q.fase==='pagina'?Math.max(0,1-q.t/1.2):1);
+  /* a fase esmaecida e a moldura escura (clima de desafio) */
+  c.save(); c.globalAlpha=ent;
+  c.fillStyle='rgba(10,8,26,.72)'; c.fillRect(0,0,W,H);
+  var vg=c.createRadialGradient(W/2,H/2,H*.35,W/2,H/2,H*.95); vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.75)'); c.fillStyle=vg; c.fillRect(0,0,W,H);
+  var pul=.5+.5*Math.sin(t*3); c.strokeStyle='rgba(253,224,71,'+(.25+.2*pul)+')'; c.lineWidth=6; A.rr(c,10,10,W-20,H-20,22); c.stroke();
+  var sp=c.createRadialGradient(110,330,10,110,330,170); sp.addColorStop(0,'rgba(253,230,138,.28)'); sp.addColorStop(1,'rgba(253,230,138,0)'); c.fillStyle=sp; c.fillRect(0,120,260,380);
+  c.restore();
+  if(q.fase==='pagina'){ if(A.paginaVoando&&!q.op){ var k2=Math.min(1,q.t/1.2); A.paginaVoando(c,W/2+(W/2-80)*k2,H/2-(H/2-30)*k2,q.t*6); } return; }
+  c.save(); c.globalAlpha=ent;
+  var tipo=q.m.tipo||'crier', fala=(q.fase==='pergunta'||q.fase==='resposta')&&q.t<2.5;
+  if(tipo==='conde'&&A.conde) A.conde(c,110,350,q.fase==='resposta'?(q.escolha===q.certa?'hit':'laugh'):'idle',t);
+  else if(A.morador){ c.save(); c.translate(110,350); c.scale(1.45,1.45); A.morador(c,tipo,0,0,t,1,fala); c.restore(); }
+  relogio(c,W/2,88,q,t);
+  balao(c,q,it);
+  q.cartoes.forEach(function(cd){ cartao(c,cd); });
+  if(q.fase==='resposta'&&q.t>.5){ var bx=W-120, by=CART_Y-58, a=.8+.2*Math.sin(t*5); c.globalAlpha=ent*a; c.fillStyle='#fde047'; A.rr(c,bx,by,96,44,22); c.fill(); c.fillStyle='#1e1b3a'; c.font=F(900,20); c.textAlign='center'; c.textBaseline='middle'; c.fillText(q.i<q.itens.length-1?'Next ▶':'Done ▶',bx+48,by+22); c.globalAlpha=ent; }
+  c.restore();
 }
-function pergaminho(c,it,t){
-  var x=16, y=60, w=274; c.font='800 16px "Nunito","Segoe UI",Arial';
-  var linhas=[]; String(it.texto).split('\n').forEach(function(l){ if(!l.trim()){ linhas.push(''); return; } quebra(c,l,w-28).forEach(function(q2){ linhas.push(q2); }); });
-  var h=24+(it.titulo?28:0)+linhas.length*21+(it.autor?24:0)+14;
-  c.save(); c.shadowColor='rgba(0,0,0,.35)'; c.shadowBlur=12; c.shadowOffsetY=4;
-  c.fillStyle=A.lin(c,x,y,x+w,y,'#fef3c7','#fde68a'); A.rr(c,x,y,w,h,10); c.fill(); c.restore();
-  c.fillStyle='#d6b77a'; A.rr(c,x-6,y-6,w+12,14,7); c.fill(); A.rr(c,x-6,y+h-8,w+12,14,7); c.fill();
-  c.textAlign='left'; c.textBaseline='top'; var yy=y+16;
-  if(it.titulo){ c.fillStyle='#7c2d12'; c.font='900 19px "Nunito","Segoe UI",Arial'; c.fillText(it.titulo,x+14,yy); yy+=28; }
-  c.fillStyle='#3b2412'; c.font='800 16px "Nunito","Segoe UI",Arial';
-  linhas.forEach(function(l){ if(l.trim()) c.fillText(l,x+14,yy); yy+=21; });
-  if(it.autor){ c.textAlign='right'; c.font='italic 800 15px "Nunito",Arial'; c.fillStyle='#7c4a1e'; c.fillText(it.autor,x+w-12,yy+4); }
+function relogio(c,x,y,q,t){
+  var frac=q.fase==='entra'?1:q.tempo/TEMPO, urg=frac<.34&&q.fase==='pergunta';
+  c.save(); c.translate(x,y); if(urg){ var s=1+.05*Math.sin(t*12); c.scale(s,s); }
+  c.fillStyle='rgba(13,11,30,.85)'; A.circ(c,0,0,30); c.fill();
+  c.strokeStyle='rgba(255,255,255,.15)'; c.lineWidth=7; A.circ(c,0,0,24); c.stroke();
+  c.strokeStyle=urg?'#ef4444':'#fde047'; c.lineCap='round'; c.beginPath(); c.arc(0,0,24,-Math.PI/2,-Math.PI/2+Math.PI*2*frac); c.stroke();
+  c.fillStyle=urg?'#fecaca':'#fff'; c.font=F(900,20); c.textAlign='center'; c.textBaseline='middle'; c.fillText(String(Math.ceil(q.tempo)),0,1);
+  c.restore();
+}
+function balao(c,q,it){
+  var resp=q.fase==='resposta', ok=q.escolha===q.certa;
+  var en=resp?((ok?'Yes! ':(q.escolha<0?'Time is up! ':'Not quite! '))+(it.ex||'')):it.p;
+  var pt=resp?((ok?'Isso! ':(q.escolha<0?'Acabou o tempo! ':'Quase! '))+(it.ex_pt||'')):(it.p_pt||'');
+  var temTexto=!!it.texto&&!resp, bx=200, bw=W-bx-24, by=128, fs=23;
+  if(temTexto){ textoLeitura(c,it,bx,by); bx=520; bw=W-bx-24; fs=20; }
+  c.font=F(900,fs); var l1=quebra(c,en,bw-36); c.font=F(700,Math.round(fs*.66)); var l2=J.tr&&pt?quebra(c,pt,bw-36):[];
+  var bh=20+l1.length*fs*1.22+(l2.length?6+l2.length*fs*.84:0)+14;
+  if(bh>CART_Y-24-by){ fs=18; c.font=F(900,fs); l1=quebra(c,en,bw-36); c.font=F(700,12); l2=J.tr&&pt?quebra(c,pt,bw-36):[]; bh=20+l1.length*fs*1.22+(l2.length?6+l2.length*14:0)+14; }
+  c.fillStyle=resp?(ok?'#dcfce7':'#fee2e2'):'#ffffff'; A.rr(c,bx,by,bw,bh,20); c.fill();
+  c.beginPath(); c.moveTo(bx+2,by+26); c.lineTo(bx-22,by+44); c.lineTo(bx+2,by+50); c.closePath(); c.fill();
+  c.fillStyle='#1e1b3a'; c.textAlign='left'; c.textBaseline='top'; c.font=F(900,fs); l1.forEach(function(l,k){ c.fillText(l,bx+18,by+14+k*fs*1.22); });
+  if(l2.length){ c.fillStyle='#6b5d4f'; c.font=F(700,Math.round(fs*.66)); l2.forEach(function(l,k){ c.fillText(l,bx+18,by+18+l1.length*fs*1.22+k*fs*.84); }); }
+  c.textAlign='right'; c.fillStyle='rgba(30,27,58,.45)'; c.font=F(900,13); c.fillText((q.i+1)+' / '+q.itens.length,bx+bw-12,by+6);
+  if(q.dica&&!resp){ var d=(it.dica_en||it.dica), dy=by+bh+8; c.font=F(800,16); var dl=quebra(c,'Hint: '+d,bw-28); var dh=dl.length*20+12+(J.tr&&it.dica?16:0); if(dy+dh<CART_Y-6){ c.fillStyle='rgba(254,243,199,.97)'; A.rr(c,bx,dy,bw,dh,12); c.fill(); c.fillStyle='#78350f'; c.textAlign='left'; c.textBaseline='top'; dl.forEach(function(l,k){ c.fillText(l,bx+14,dy+6+k*20); }); if(J.tr&&it.dica){ c.font=F(700,12); c.fillStyle='#a16207'; c.fillText(it.dica,bx+14,dy+6+dl.length*20); } } }
+}
+function textoLeitura(c,it,x,y){
+  var w=304; c.font=F(800,15); var linhas=[]; String(it.texto).split('\n').forEach(function(l){ if(!l.trim()){ linhas.push(''); return; } quebra(c,l,w-28).forEach(function(q2){ linhas.push(q2); }); });
+  var h=Math.min(CART_Y-14-y,20+(it.titulo?26:0)+linhas.length*19+(it.autor?22:0));
+  c.fillStyle=A.lin(c,x,y,x+w,y,'#fef3c7','#fde68a'); A.rr(c,x,y,w,h,12); c.fill(); c.fillStyle='#d6b77a'; A.rr(c,x-4,y-5,w+8,10,5); c.fill();
+  c.save(); A.rr(c,x,y,w,h,12); c.clip(); c.textAlign='left'; c.textBaseline='top'; var yy=y+12;
+  if(it.titulo){ c.fillStyle='#7c2d12'; c.font=F(900,18); c.fillText(it.titulo,x+14,yy); yy+=26; }
+  c.fillStyle='#3b2412'; c.font=F(800,15); linhas.forEach(function(l){ if(l) c.fillText(l,x+14,yy); yy+=19; });
+  if(it.autor){ c.textAlign='right'; c.font='italic 800 14px "Nunito",Arial'; c.fillStyle='#7c4a1e'; c.fillText(it.autor,x+w-12,yy+2); }
+  c.restore();
+}
+function cartao(c,cd){
+  var y=cd.y-cd.bump, cores={normal:['#fffbeb','#f59e0b','#1e1b3a'],certa:['#dcfce7','#16a34a','#14532d'],errada:['#fee2e2','#dc2626','#7f1d1d'],apagada:['rgba(255,255,255,.35)','rgba(255,255,255,.3)','rgba(30,27,58,.55)']}[cd.estado];
+  c.save();
+  if(cd.estado==='certa'){ c.shadowColor='rgba(74,222,128,.9)'; c.shadowBlur=24; }
+  c.fillStyle=cores[0]; A.rr(c,cd.x,y,cd.w,cd.h,18); c.fill(); c.shadowBlur=0;
+  c.strokeStyle=cores[1]; c.lineWidth=4; A.rr(c,cd.x,y,cd.w,cd.h,18); c.stroke();
+  c.fillStyle=cores[1]; A.circ(c,cd.x+30,y+30,20); c.fill(); c.fillStyle='#fff'; c.font=F(900,22); c.textAlign='center'; c.textBaseline='middle'; c.fillText(String(cd.k+1),cd.x+30,y+31);
+  var fs=20; c.font=F(900,fs); var l1=quebra(c,cd.txt,cd.w-70); if(l1.length>3){ fs=16; c.font=F(900,fs); l1=quebra(c,cd.txt,cd.w-64); }
+  c.font=F(700,12); var l2=J.tr&&cd.pt&&cd.pt!==cd.txt?quebra(c,cd.pt,cd.w-64):[];
+  var th=l1.length*fs*1.15+(l2.length?4+l2.length*14:0), ty=y+(cd.h-th)/2;
+  c.fillStyle=cores[2]; c.textAlign='left'; c.textBaseline='top'; c.font=F(900,fs); l1.forEach(function(l,k){ c.fillText(l,cd.x+58,ty+k*fs*1.15); });
+  if(l2.length){ c.fillStyle='#7c4a1e'; c.font=F(700,12); l2.forEach(function(l,k){ c.fillText(l,cd.x+58,ty+l1.length*fs*1.15+4+k*14); }); }
+  c.restore();
 }
 
 /* ---------- entradas ---------- */
-function bate(p){ var q=J.quiz; if(!q||q.fase!=='pergunta'||!p.ativa) return; responde(p.k); }
+function bate(){}
 function toque(lx,ly){
   var q=J.quiz; if(!q) return false;
   if(q.fase==='resposta'){ segue(); return true; }
-  if(q.fase!=='pergunta') return false;
-  for(var i=0;i<q.placas.length;i++){ var p=q.placas[i], sx=p.x-J.cam, sy=p.y-J.camY; if(lx>sx&&lx<sx+p.w&&ly>sy&&ly<sy+p.h){ p.bump=10; responde(i); return true; } }
-  return false;
+  if(q.fase!=='pergunta') return true;
+  for(var i=0;i<q.cartoes.length;i++){ var cd=q.cartoes[i]; if(lx>cd.x&&lx<cd.x+cd.w&&ly>cd.y&&ly<cd.y+cd.h){ responde(i); return true; } }
+  return true;
 }
 function tecla(k){
   var q=J.quiz; if(!q) return false;
-  if(q.fase==='pergunta'){ var n=parseInt(k,10); if(n>=1&&n<=q.placas.length){ responde(n-1); return true; } }
-  if(q.fase==='resposta'&&(k==='Enter'||k===' '||k==='ArrowUp'||k==='w'||k==='W')){ segue(); return k==='Enter'; }
-  return false;
+  if(q.fase==='pergunta'){ var n=parseInt(k,10); if(n>=1&&n<=q.cartoes.length){ responde(n-1); return true; } }
+  if(q.fase==='resposta'&&(k==='Enter'||k===' ')){ segue(); return true; }
+  return ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' ','w','a','s','d','W','A','S','D'].indexOf(k)>=0; /* durante o desafio o herói fica parado */
 }
 function alternaDica(){ var q=J.quiz; if(!q||q.fase!=='pergunta') return; q.dica=!q.dica; if(q.dica){ try{ say(q.item.dica_en||''); }catch(e){} } }
 function ouvir(){ var q=J.quiz; if(!q) return; var it=q.item; try{ say(q.fase==='resposta'?(it.ex||''):it.p+'. '+q.ordem.map(function(oi,k){ return (k+1)+': '+it.o[oi]; }).join('. ')); }catch(e){} }

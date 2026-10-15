@@ -35,17 +35,21 @@ function alternaTr(){ var on=!document.body.classList.contains('show-tr'); docum
 function hud(nome,pontos,moedas,feitas,tot,mostrar){ $('hudName').textContent=nome; $('hudPts').textContent=pontos; $('hudCoinN').textContent=moedas; $('hudArenaN').textContent=feitas+'/'+tot; $('hudArena').style.display=mostrar?'flex':'none'; }
 function toast(txt,dur,pt){ var t=$('toast'); t.innerHTML=bi(txt,pt,'small'); t.classList.remove('show'); void t.offsetWidth; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){ t.classList.remove('show'); },dur||2200); }
 function modoNivel(on){ $('touch').style.display=on?'block':'none'; }
-function modoMapa(on){ var b=$('mapBtns'); if(b) b.style.display=on?'flex':'none'; }
+function modoMapa(on){ var b=$('mapBtns'); if(b) b.style.display=on?'flex':'none'; document.body.classList.toggle('nomapa',!!on); }
 function hudArena(on){ document.body.classList.toggle('naArena',!!on); }
+/* capa: botão grande 'Open the book' */
+function botaoCapa(on){ var b=$('btnCapa'); if(!b){ b=document.createElement('button'); b.id='btnCapa'; b.innerHTML=bi('Open the book ▶','Abrir o livro'); $('ui').appendChild(b); b.addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); JOGO.abreLivro(); }); } b.style.display=on?'block':'none'; document.body.classList.toggle('nacapa',!!on); }
 function quizBotoes(on){ $('quizBtns').classList.toggle('show',!!on); }
 /* corrida: ◀ ▶ somem (o carro anda sozinho); PULAR vira ▲ e o ▼ desce de faixa */
 function modoCorrida(on){ document.body.classList.toggle('corrida',!!on); $('tJump').innerHTML=on?'&#9650;':'JUMP'; }
 
 /* ---------- legenda da intro ---------- */
-function legenda(cena){ var d=$('legenda'); if(!cena){ d.classList.remove('show'); return; } d.innerHTML='<p>'+bi(cena.en,cena.pt)+'</p><button class="mini" id="lgPula">Skip ▶▶</button>'; d.classList.add('show'); $('lgPula').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); if(JOGO.J.estado==='final') JOGO.pulaFinal(); else JOGO.pulaIntro(); }); try{ say(cena.en); }catch(e){} }
+function legenda(cena){ var d=$('legenda'); if(!cena){ d.classList.remove('show'); return; } d.innerHTML='<p>'+bi(cena.en,cena.pt)+'</p><div class="lgrow"><button class="mini" id="lgPula">Skip</button><button class="lgnext" id="lgNext">Next ▶</button></div>'; d.classList.add('show');
+  $('lgPula').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); if(JOGO.J.estado==='final') JOGO.pulaFinal(); else JOGO.pulaIntro(); });
+  $('lgNext').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); SOM.fx('clique'); JOGO.confirmar(); }); try{ say(cena.en); }catch(e){} }
 
 /* ---------- escolha do herói ---------- */
-var HEROIS=[{k:'lia',en:'Lia, the brave knight',pt:'Lia, a cavaleira corajosa'},{k:'theo',en:'Theo, the wizard',pt:'Theo, o aprendiz de mago'},{k:'bia',en:'Bia, the gymnast',pt:'Bia, a ginasta'}];
+var HEROIS=[{k:'lia',en:'Lia, the knight',pt:'Lia, a cavaleira'},{k:'theo',en:'Theo, the wizard',pt:'Theo, o aprendiz de mago'},{k:'bia',en:'Bia, the gymnast',pt:'Bia, a ginasta'},{k:'leo',en:'Leo, the football player',pt:'Leo, o jogador de futebol'}];
 var CORES=['#dc2626','#2563eb','#16a34a','#eab308','#9333ea','#ec4899','#f97316','#0d9488'];
 function escolhaHeroi(cb){
   heroiEscolhido=JOGO.J.prog.heroi||'lia';
@@ -146,7 +150,7 @@ function keydown(e){
   var k=e.key, J2=JOGO.J, m=menuAberto;
   if(k==='Escape'){ e.preventDefault(); if(J2.estado==='quiz'&&!m){ QUIZ.sai(); return; } if(m){ if(J2.estado==='nivel'||J2.estado==='quiz'){ fechaMenu(); JOGO.pausa(false); } } else pausa(); return; }
   if(m){ if(k==='Enter'){ var pri=$('mcard').querySelector('.mbtn.pri'); if(pri){ e.preventDefault(); pri.click(); } } return; }
-  if(J2.estado==='intro'||J2.estado==='mapa'||J2.estado==='final'){
+  if(J2.estado==='intro'||J2.estado==='mapa'||J2.estado==='final'||J2.estado==='capa'){
     if(k==='Enter'||k===' '){ e.preventDefault(); JOGO.confirmar(); return; }
     if(J2.estado==='mapa'){ if(k==='ArrowRight'||k==='d'||k==='D') JOGO.mapaMove(1); if(k==='ArrowLeft'||k==='a'||k==='A') JOGO.mapaMove(-1); }
     return;
@@ -201,7 +205,6 @@ function init(){
   var cv=$('game');
   cv.addEventListener('pointerdown',function(e){ SOM.init(); if(e.pointerType==='touch') document.body.classList.remove('kbd'); if(menuAberto) return; JOGO.toque(e.clientX,e.clientY); });
   cv.addEventListener('pointermove',function(e){ if(e.pointerType==='mouse'&&!menuAberto){ var p=JOGO.paraLogico(e.clientX,e.clientY); JOGO.mapaHover(p.x,p.y); } });
-  $('legenda').addEventListener('pointerdown',function(e){ if(e.target.id!=='lgPula'){ SOM.init(); JOGO.toque(e.clientX,e.clientY); } });
   window.addEventListener('keydown',keydown); window.addEventListener('keyup',keyup);
   window.addEventListener('blur',function(){ var i=JOGO.J.in; i.left=i.right=i.jump=i.down=false; });
   document.addEventListener('touchmove',function(e){ e.preventDefault(); },{passive:false});
@@ -215,7 +218,7 @@ function init(){
 }
 document.addEventListener('DOMContentLoaded',init);
 
-return {SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, modoCorrida:modoCorrida, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
+return {SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, botaoCapa:botaoCapa, modoCorrida:modoCorrida, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
   creditos:creditos, menu:menu, fechaMenu:fechaMenu, fimFase:fimFase, pausa:pausa, comoJogar:comoJogar, historia:historia, confirmaCasa:confirmaCasa, confirmaRecomecar:confirmaRecomecar, alternaTr:alternaTr,
   menuAberto:function(){ return menuAberto; }};
 })();

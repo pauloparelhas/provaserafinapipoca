@@ -8,7 +8,7 @@
 window.CENA = (function(){
 'use strict';
 var G=window.JOGO, J=G.J, A=window.ARTE, F=window.FASES, W=G.W, H=G.H, TAM=G.TAM;
-var HEROIS=['lia','theo','bia'];
+var HEROIS=['lia','theo','bia','leo'];
 
 function desenha(){
   var c=G.ctx(), esc=G.escala(), dpr=G.dpr(); if(!c) return;
@@ -18,6 +18,7 @@ function desenha(){
     case 'boot': c.fillStyle='#1c1917'; c.fillRect(0,0,W,H); break;
     case 'intro': desenhaIntro(c); break;
     case 'escolha': desenhaEscolha(c); break;
+    case 'capa': desenhaCapa(c); break;
     case 'mapa': desenhaMapa(c); break;
     case 'corrida': if(window.CORRIDA) CORRIDA.desenha(c); break;
     case 'final': desenhaFinal(c); break;
@@ -39,12 +40,29 @@ function pip(c,x,y,estado,t,dir,s){
   if(A.pip){ A.pip(c,x,y,estado,t,dir,s); return; }
   c.save(); c.translate(x,y); c.scale(s*dir,s); if(estado==='egg'){ c.fillStyle='#ecfccb'; A.el(c,0,-26,20,26); c.fill(); c.fillStyle='#22c55e'; A.circ(c,-6,-30,5); c.fill(); A.circ(c,8,-16,4); c.fill(); } else { c.fillStyle='#22c55e'; A.el(c,0,-22,28,20); c.fill(); A.circ(c,22,-40,14); c.fill(); c.fillStyle='#111'; A.circ(c,26,-43,3); c.fill(); } c.restore();
 }
+/* entrada do ambiente de questões: PORTA (vila, floresta, ginásio, castelo) ou BAÚ (recife, céu, cozinha).
+   Fechada e brilhando = desafio novo; prateada = já feita (pode jogar de novo). */
 function morador(c,m,t){
-  var olha=J.urso&&J.urso.x>m.x?1:-1;
-  if(A.morador){ A.morador(c,m.tipo,m.x,m.y,t,olha,m.falando>0); }
-  else { c.save(); c.translate(m.x,m.y); c.fillStyle='#7c3aed'; A.rr(c,-22,-80,44,80,16); c.fill(); c.fillStyle='#fde68a'; A.circ(c,0,-96,22); c.fill(); c.restore(); }
-  if(!m.feito&&!(J.quiz&&J.quiz.m===m)){ var b=Math.sin(t*4)*4; c.save(); c.translate(m.x,m.y-150+b); c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=4; c.font='900 34px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.strokeText('!',0,0); c.fillText('!',0,0); c.restore(); }
-  if(m.feito&&A.paginaHud){ c.save(); c.globalAlpha=.9; A.paginaHud(c,m.x+30,m.y-120,1,t); c.restore(); }
+  var cena=J.mundo&&J.mundo.cena, bau=cena==='recife'||cena==='nuvens'||cena==='biscoito', feita=m.feito;
+  c.save(); c.translate(m.x,m.y);
+  if(!feita){ var g=c.createRadialGradient(0,-50,6,0,-50,90); g.addColorStop(0,'rgba(253,224,71,'+(.35+.15*Math.sin(t*3))+')'); g.addColorStop(1,'rgba(253,224,71,0)'); c.fillStyle=g; A.circ(c,0,-50,90); c.fill(); }
+  if(bau){
+    c.fillStyle='rgba(0,0,0,.25)'; A.el(c,0,2,44,7); c.fill();
+    c.fillStyle=feita?A.lin(c,0,-60,0,0,'#e2e8f0','#94a3b8'):A.lin(c,0,-60,0,0,'#b45309','#78350f'); A.rr(c,-40,-52,80,52,8); c.fill();
+    c.fillStyle=feita?'#cbd5e1':A.lin(c,0,-80,0,-50,'#d97706','#92400e'); c.beginPath(); c.moveTo(-42,-50); c.quadraticCurveTo(0,-86,42,-50); c.closePath(); c.fill();
+    c.fillStyle=feita?'#64748b':'#fbbf24'; c.fillRect(-42,-54,84,7); c.fillRect(-6,-70,12,70); A.rr(c,-10,-40,20,18,4); c.fill();
+    c.fillStyle=feita?'#334155':'#78350f'; A.circ(c,0,-33,3); c.fill();
+  } else {
+    c.fillStyle=feita?'#94a3b8':'#57534e'; A.rr(c,-38,-118,76,118,8); c.fill();
+    c.fillStyle=feita?A.lin(c,0,-110,0,0,'#e2e8f0','#94a3b8'):A.lin(c,0,-110,0,0,'#a16207','#713f12'); c.beginPath(); c.moveTo(-30,0); c.lineTo(-30,-80); c.quadraticCurveTo(-30,-110,0,-110); c.quadraticCurveTo(30,-110,30,-80); c.lineTo(30,0); c.closePath(); c.fill();
+    c.strokeStyle='rgba(0,0,0,.25)'; c.lineWidth=2; for(var k=-15;k<=15;k+=15){ c.beginPath(); c.moveTo(k,-104); c.lineTo(k,-4); c.stroke(); }
+    c.fillStyle=feita?'#475569':'#fbbf24'; A.circ(c,18,-50,4.5); c.fill();
+  }
+  /* o "?" que pula: diz que ali há um desafio */
+  var b=Math.sin(t*4)*5, yq=bau?-112:-150; c.translate(0,yq+b);
+  c.fillStyle=feita?'#e2e8f0':'#fde047'; c.strokeStyle=feita?'#475569':'#78350f'; c.lineWidth=3; A.rr(c,-19,-19,38,38,10); c.fill(); c.stroke();
+  c.fillStyle=feita?'#475569':'#78350f'; c.font='900 26px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(feita?'✓':'?',0,1);
+  c.restore();
 }
 function manchaTinta(c,e,t){
   var esm=e.achatado?.35:1, ond=Math.sin(t*6+e.x*.05);
@@ -145,7 +163,6 @@ function desenhaIntro(c){
   if(it.i===2&&A.conde) A.conde(c,cx+300,450,'laugh',t);
   if(it.i>=3){ var k=Math.min(1,it.t/1.5); HEROIS.forEach(function(q,i){ heroi(c,cx-180+i*180,450-k*20*Math.abs(Math.sin(t*3+i)),'cheer',t,1,1.25,q); }); if(A.pip) A.pip(c,cx+260,450,'idle',t,-1,1); }
   titulo(c,'The Lost Endings',W/2,58,46);
-  c.save(); c.globalAlpha=.65+.35*Math.sin(t*3); c.fillStyle='#fff'; c.font='800 15px "Nunito",Arial'; c.textAlign='right'; c.fillText('Tap to continue  ▶',W-20,H-14); c.restore();
 }
 /* ---------- final ---------- */
 function desenhaFinal(c){
@@ -156,12 +173,18 @@ function desenhaFinal(c){
   else { if(A.biscoito) A.biscoito(c,480,330,46,0); heroi(c,330,450,'cheer',t,1,1.2); }
   titulo(c,it.i===2?'Happily ever after':'The Lost Endings',W/2,58,40);
 }
+/* ---------- capa do livro ---------- */
+function desenhaCapa(c){
+  var t=J.t; if(A.capaLivro){ A.capaLivro(c,t); return; }
+  c.fillStyle='#7c2d12'; c.fillRect(0,0,W,H); c.fillStyle='#9a3412'; A.rr(c,60,30,840,440,24); c.fill(); titulo(c,'The Lost Endings',W/2,140,64);
+  HEROIS.forEach(function(q,i){ heroi(c,240+i*160,400,'idle',t+i,1,1.2,q); });
+}
 /* ---------- escolha do herói (os cartões ficam no DOM; aqui só o palco) ---------- */
 function desenhaEscolha(c){
   var t=J.t, cena=A.CENAS.vila?'vila':'floresta'; A.ceu(c,cena,t); A.longe(c,cena,t*8,t); A.perto(c,cena,t*16,t); A.chao(c,{x:0,y:450,w:W,h:90},cena);
   c.fillStyle='rgba(13,11,30,.25)'; c.fillRect(0,0,W,H);
   var sel=(window.UI&&UI.heroiSel)?UI.heroiSel():(J.prog.heroi||'lia');
-  HEROIS.forEach(function(q,i){ var x=200+i*280, on=q===sel; if(on){ c.fillStyle='rgba(253,224,71,.25)'; A.el(c,x,452,90,16); c.fill(); } heroi(c,x,450,on?(Math.floor(t)%4===0?'cheer':'idle'):'idle',t+i,1,on?1.9:1.5,q); });
+  HEROIS.forEach(function(q,i){ var x=150+i*220, on=q===sel; if(on){ c.fillStyle='rgba(253,224,71,.25)'; A.el(c,x,452,90,16); c.fill(); } heroi(c,x,450,on?(Math.floor(t)%4===0?'cheer':'idle'):'idle',t+i,1,on?1.9:1.5,q); });
   titulo(c,'Choose your hero',W/2,58,42);
 }
 /* ---------- mapa-livro ---------- */
