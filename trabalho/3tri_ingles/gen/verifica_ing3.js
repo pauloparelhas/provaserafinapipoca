@@ -12,7 +12,7 @@ eval(fs.readFileSync(path.join(DIR,'ING3_jogo_fases.js'),'utf8'));
 const F=window.FASES, MAPAS=window.MAPAS;
 
 function blocking(ch){ return ch==='#'||ch==='B'||ch==='?'||ch==='M'||(ch>='1'&&ch<='4'); }
-function support(ch){ return blocking(ch)||ch==='='||ch==='f'||ch==='S'||ch==='h'; }
+function support(ch){ return blocking(ch)||ch==='='||ch==='f'||ch==='S'||ch==='h'||ch==='L'||ch==='t'||ch==='u'||ch==='V'; } /* v2: trave, blocos do ritmo, salto; '%' (parede) não bloqueia: a estrela quebra */
 
 function fechaTravas(rows){ const h=rows.length; const g=rows.map(r=>r.split('')); for(let r=0;r<h;r++) for(let c=0;c<g[r].length;c++){ const ch=rows[r][c]; if(ch==='G'||ch==='X'){ for(let k=0;k<8;k++){ const rr=r-k; if(rr>=0) g[rr][c]='#'; } } } return g.map(a=>a.join('')); }
 function analisa(rows, nome){
@@ -26,9 +26,12 @@ function analisa(rows, nome){
     if(at(c,r)==='n') for(let k=0;k<2;k++) for(let d=0;d<=4;d++) mov.add((c+k)+','+(r-d));
     if(at(c,r)==='N') for(let k=0;k<2;k++) for(let d=0;d<=8;d++) mov.add((c+k)+','+(r-d));
   }
+  /* v2: cipó (l), argola (R) e barra (X) viram pontos de apoio virtuais onde o herói fica pendurado */
+  const virt=new Set();
+  for(let r=0;r<h;r++) for(let c=0;c<w;c++){ const ch=at(c,r); if(ch==='l') virt.add(c+','+(r+5)); if(ch==='R') virt.add(c+','+(r+4)); if(ch==='X') virt.add(c+','+(r+2)); }
   const sup=(c,r)=>support(at(c,r))||mov.has(c+','+r);
-  const stand=(c,r)=>{ if(c<0||c>=w||r<2||r>=h) return false; if(!sup(c,r)) return false; if(blocking(at(c,r-1))||blocking(at(c,r-2))||blocking(at(c,r-3))) return false; /* herói grande: 3 linhas */ if(at(c,r-1)==='^') return false; return true; };
-  return {rows,h,w,at,stand,sup};
+  const stand=(c,r)=>{ if(c<0||c>=w||r<2||r>=h) return false; if(virt.has(c+','+r)) return true; if(!sup(c,r)) return false; if(blocking(at(c,r-1))||blocking(at(c,r-2))||blocking(at(c,r-3))) return false; /* herói grande: 3 linhas */ if(at(c,r-1)==='^') return false; return true; };
+  return {rows,h,w,at,stand,sup,virt};
 }
 
 function bfs(worlds, startKey){
@@ -42,11 +45,13 @@ function bfs(worlds, startKey){
     // andar
     for(const dc of [-1,1]) if(A.stand(c+dc,r)) push(wn,c+dc,r);
     // pulo (com mola: mais alto)
-    const mola = A.at(c,r-1)==='S' || A.at(c,r)==='S';
+    const mola = A.at(c,r-1)==='S' || A.at(c,r)==='S' || A.at(c,r)==='V' || A.at(c,r-1)==='V';
+    const balanco = A.virt.has(c+','+r); /* soltar do cipó/argola/barra: voa mais longe */
     const headFree1=!blocking(A.at(c,r-4)), headFree2=headFree1&&!blocking(A.at(c,r-5));
     for(let r2=r-(mola?8:3); r2<=Math.min(A.h-1,r+9); r2++){
       const up=r-r2; let maxdc;
       if(up>=7) maxdc=3; else if(up>=4) maxdc=4; else if(up===3) maxdc=2; else if(up===2) maxdc=3; else if(up>=0) maxdc=4; else maxdc=5;
+      if(balanco) maxdc+=3; if(A.at(c,r)==='V'||A.at(c,r-1)==='V') maxdc+=4;
       if(up>=1 && !headFree1) continue; if(up>=2 && !headFree2) continue;
       for(let c2=c-maxdc;c2<=c+maxdc;c2++){ if(c2===c&&r2===r) continue; if(!A.stand(c2,r2)) continue;
         /* colunas intermediárias: parede contínua de 4+ linhas a partir do nível do apoio (8+ com mola) bloqueia o pulo */

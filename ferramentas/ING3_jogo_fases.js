@@ -27,7 +27,7 @@ var LISTA=[
    resumo:'Title, lines, stanzas and author. Poem or poetry?', resumo_pt:'Título, versos, estrofes e autor. Poema ou poesia?'},
   {id:6, nome:'Rhythm Gym', nome_pt:'Ginásio do Ritmo', cena:'ginasio', tema:'poem', at:['P8','P10','P7','P9'], moradores:['coach','coach','coach'],
    resumo:'Rhythm: the beat of a poem.', resumo_pt:'Ritmo: a batida do poema.'},
-  {id:7, nome:'Cause & Effect Stadium', nome_pt:'Estádio da Causa e Efeito', cena:'estadio', modo:'estadio', tema:'cause', moradores:['referee','referee','referee'],
+  {id:7, nome:'Cause & Effect Stadium', nome_pt:'Estádio da Causa e Efeito', cena:'estadio', tema:'cause', moradores:['referee','referee','referee'],
    resumo:'If… (cause) → Then… (effect).', resumo_pt:'Se… (causa) → Então… (efeito).'},
   {id:8, nome:'The Cookie Circle', nome_pt:'A Roda do Biscoito', cena:'biscoito', tema:'circle', moradores:['mouse','mouse','mouse'],
    resumo:'A circle story ends where it began.', resumo_pt:'A história circular termina onde começou.'},
@@ -42,11 +42,12 @@ function parse(rows,opts){
   opts=opts||{};
   var h=rows.length, w=0; rows.forEach(function(s){ w=Math.max(w,s.length); });
   rows=rows.map(function(s){ return (s+new Array(w+1).join(' ')).slice(0,w); });
-  var L={w:w*T, h:h*T, cols:w, grade:rows, segs:[], plats:[], tijolos:[], caixas:[], moedas:[], itens:[], canhoes:[], travas:[], espinhos:[], pingentes:[], molas:[], caindo:[], agua:[], canos:[], checkpoints:[], inimigos:[], troncos:[], movers:[], moradores:[], ovos:[], paredes:[], chefinhos:[], mastro:null, inicioX:90, mundo:opts.mundo||'main'};
+  var L={w:w*T, h:h*T, cols:w, grade:rows, segs:[], plats:[], tijolos:[], caixas:[], moedas:[], itens:[], canhoes:[], travas:[], espinhos:[], pingentes:[], molas:[], caindo:[], agua:[], canos:[], checkpoints:[], inimigos:[], troncos:[], movers:[], moradores:[], ovos:[], paredes:[], chefinhos:[], pendulos:[], barras:[], saltos:[], mastro:null, inicioX:90, mundo:opts.mundo||'main'};
   var at=function(c,r){ return (r<0||r>=h||c<0||c>=w)?' ':rows[r][c]; };
   var visto={};
   for(var r=0;r<h;r++) for(var c=0;c<w;c++){
     var ch=at(c,r), x=c*T, y=r*T, k=c+','+r; if(visto[k]) continue;
+    if(window.APARELHOS&&APARELHOS.parse(ch,x,y,L)) continue;
     switch(ch){
       case '#': { var n=1; while(at(c+n,r)==='#'){ visto[(c+n)+','+r]=1; n++; } L.segs.push({x:x,y:y,w:n*T,h:T}); break; }
       case '=': { var n2=1; while(at(c+n2,r)==='='){ visto[(c+n2)+','+r]=1; n2++; } L.plats.push({x:x,y:y,w:n2*T,h:18}); break; }

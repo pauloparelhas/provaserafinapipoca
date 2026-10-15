@@ -158,7 +158,36 @@ def castelo():
 # v2 (Game Design v2): os reinos já portados vêm do arquivo da proposta, que tem o portão de encaixe próprio
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen_mapas_v2_proposta as V2
-MAPAS = {1: (V2.vila(), V2.vila_sub()), 2: bosque(), 4: recife(), 5: ceu(), 6: ginasio(), 8: biscoito(), 9: castelo()}
+def sub_generico(var=0):
+    """submundo curto (porão, toca, vestiário, armário): entra pelo cano 1, a 3ª entrada D, um perigo, sai pelo cano 2"""
+    m = V2.Mapa(28)
+    for r in (0, 1): m.fx(0, 27, r, '#')
+    m.bloco(0, 1, 2, 9); m.bloco(26, 27, 2, 9)
+    m.fx(3, 4, 8, '1'); m.p(8, 9, 'i'); m.fx(9, 12, 7, '='); m.fx(9, 12, 6, 'o')
+    m.p(15, 9, 'D')
+    if var == 1: m.p(19, 9, 'e')
+    else: m.p(18, 9, '^'); m.p(19, 9, '^'); m.fx(17, 20, 7, '=')
+    m.fx(23, 24, 8, '2')
+    return m
+def parede_inteira(m):
+    """a parede de espinheiro/migalhas é % de cima a baixo (a estrela quebra a parede toda)"""
+    for c in range(m.w):
+        for r in range(12):
+            if m.g[r][c] == '%':
+                rr = r + 1
+                while rr < 10 and m.g[rr][c] == '#': m.g[rr][c] = '%'; rr += 1
+    # saco de estrelas logo antes de cada parede: nunca fica preso sem estrela
+    for c in range(1, m.w):
+        if m.g[9][c] == '%' and m.g[9][c-1] != '%':
+            for k in range(3, 8):
+                if c-k > 0 and m.g[9][c-k] == ' ' and m.g[10][c-k] == '#': m.g[8][c-k] = 'Y'; break
+    return m
+def estadio_v2():
+    m = V2.estadio()
+    m.p(54, 9, 'S')   # irrigador-mola antes do gol: é por ele que se sobe no travessão
+    return m
+MAPAS = {1: (V2.vila(), V2.vila_sub()), 2: (parede_inteira(V2.bosque()), sub_generico(1)), 4: recife(), 5: ceu(), 6: (V2.ginasio(), sub_generico(0)),
+         7: (estadio_v2(), sub_generico(1)), 8: (parede_inteira(V2.biscoito()), sub_generico(0)), 9: castelo()}
 js = ['/* ING3_jogo_mapas.js — GERADO por trabalho/3tri_ingles/gen/gen_mapas.py. Não editar à mão. */', 'window.MAPAS = {']
 for k, m in MAPAS.items():
     main, sub = (m if isinstance(m, tuple) else (m, None))

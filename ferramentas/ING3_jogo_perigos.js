@@ -50,11 +50,13 @@ function atualiza(dt){
   J.estrelas=J.estrelas||[];
   for(var k=J.estrelas.length-1;k>=0;k--){ var e=J.estrelas[k]; e.x+=e.vx*dt; e.dist+=Math.abs(e.vx*dt); e.rot+=dt*14;
     var fim=e.dist>270||e.x<0||e.x>M.w;
-    G.solidos(M).forEach(function(s){ if(e.x>s.x&&e.x<s.x+s.w&&e.y>s.y&&e.y<s.y+s.h){ fim=true; if(s.parede){ s.parede.viva=false; SOM.fx('tijolo'); G.brilho(s.x+22,s.y+22,12,'#fde047'); } } });
+    G.solidos(M).forEach(function(s){ if(e.x>s.x&&e.x<s.x+s.w&&e.y>s.y&&e.y<s.y+s.h){ fim=true; if(s.parede){ quebraParede(M,s.parede); } } });
     M.inimigos.forEach(function(en){ if(fim||en.morto||en.achatado) return; if(G.colideRet(e.x-12,e.y-12,24,24,en.x-20,en.y-40,40,40)){ fim=true; transforma(en); } });
     (M.chefinhos||[]).forEach(function(ch){ if(!fim&&!ch.vencido&&window.CHEFINHO&&G.colideRet(e.x-12,e.y-12,24,24,ch.x-40,ch.y-80,80,80)){ fim=true; CHEFINHO.acerta(ch); } });
     if(fim){ J.estrelas.splice(k,1); G.brilho(e.x,e.y,5,'#fde047'); } }
 }
+/* a estrela quebra a PAREDE INTEIRA (todos os % encostados) */
+function quebraParede(M,p0){ var fila=[p0]; p0.viva=false; SOM.fx('tijolo'); J.shake=4; while(fila.length){ var p=fila.pop(); G.brilho(p.x+22,p.y+22,6,'#fde047'); M.paredes.forEach(function(q){ if(q.viva&&Math.abs(q.x-p.x)+Math.abs(q.y-p.y)<=45){ q.viva=false; fila.push(q); } }); } }
 /* mancha/inimigo atingido pela estrela vira 3 borboletas (nada morre: transforma) */
 function transforma(en){ en.achatado=true; en.tAch=.4; SOM.fx('moeda'); G.pontua(30,en.x,en.y-40);
   for(var i=0;i<3;i++) J.part.push({x:en.x,y:en.y-20,vx:(i-1)*60,vy:-120-Math.random()*60,vida:1.4,max:1.4,tipo:'borboleta',cor:['#f472b6','#60a5fa','#fbbf24'][i],r:8,rot:0}); }

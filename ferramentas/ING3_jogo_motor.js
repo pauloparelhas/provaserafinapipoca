@@ -84,13 +84,14 @@ function solidos(M){
   if(window.PERIGOS) PERIGOS.solidosExtra(M,s);
   return s;
 }
-function umaVia(M){ var s=M.plats.slice(); M.caindo.forEach(function(p){ if(p.estado!=='sumiu') s.push(p); }); M.movers.forEach(function(p){ s.push(p); }); return s; }
+function umaVia(M){ var s=M.plats.filter(function(p){ return !p.ritmo||p.visivel; }); M.caindo.forEach(function(p){ if(p.estado!=='sumiu') s.push(p); }); M.movers.forEach(function(p){ s.push(p); }); return s; }
 function fisica(dt){
   var u=J.urso, M=J.mundo, s=TAM[u.tam], hw=URSO_W*s/2, hh=URSO_H*s;
   if(u.tontoT>0){ u.tontoT-=dt; u.estado='dizzy'; u.vx=0; u.anim+=dt; return; }
+  if(window.APARELHOS&&APARELHOS.ativo()){ APARELHOS.fisica(dt); return; }
   var ax=0; if(J.in.left) ax-=1; if(J.in.right) ax+=1;
   u.abaixado=!!(J.in.down&&u.noChao&&!u.montado); if(u.abaixado) ax*=.35; /* ↓ = se arrastar devagar */
-  var alvo=ax*VAND*(u.montado?1.1:1);
+  var alvo=ax*VAND*(u.montado?1.1:1)*(u.sobre&&u.sobre.trave?.7:1);
   u.vx+=(alvo-u.vx)*Math.min(1,dt*18); if(Math.abs(u.vx)<2&&!ax) u.vx=0;
   if(ax) u.dir=ax>0?1:-1;
   /* pulo (buffer, altura variável, pulo duplo com a bota, planar com a capa ou montado no Pip) */
@@ -187,6 +188,7 @@ function perigos(dt){
     else if(p.estado==='sumiu'){ p.t+=dt; if(p.t>1.5){ p.estado='ok'; p.x=p.x0; p.y=p.y0; } }
   });
   if(window.PERIGOS) PERIGOS.atualiza(dt);
+  if(window.APARELHOS) APARELHOS.atualiza(dt);
   M.movers.forEach(function(p){ var k=.5-.5*Math.cos(J.t*6.2832/p.per+(p.x0*.01)); var nx=p.x0+p.dx*k, ny=p.y0+p.dy*k; var ddx=nx-p.x, ddy=ny-p.y; p.vyAnt=Math.max(0,ddy); p.x=nx; p.y=ny; if(u.sobre===p&&u.noChao){ u.x+=ddx; u.y=p.y; } });
 }
 
