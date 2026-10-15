@@ -41,7 +41,7 @@ function recomecar(){ var hr=J.prog.heroi, cr=J.prog.cor; J.prog={fases:{},moeda
 /* ---------- utilidades ---------- */
 function emite(n,fn){ for(var i=0;i<n;i++) J.part.push(fn(i)); }
 function toast(txt,dur,pt){ if(window.UI) UI.toast(txt,dur||2200,pt); }
-function hud(){ if(!window.UI) return; var L=J.nivel; var feitas=L?L.moradores.filter(function(m){ return m.feito; }).length:0, tot=L?L.moradores.length:0; UI.hud(J.faseAtual?J.faseAtual.nome:'The Lost Endings', J.pontos, J.moedas, feitas, tot, !!(L&&tot)); }
+function hud(){ if(!window.UI) return; var L=J.nivel, E=L?(L.todasEntradas||L.moradores):[]; var feitas=E.filter(function(m){ return m.feito; }).length, tot=E.length; UI.hud(J.faseAtual?J.faseAtual.nome:'The Lost Endings', J.pontos, J.moedas, feitas, tot, !!(L&&tot)); }
 function colideRet(ax,ay,aw,ah,bx,by,bw,bh){ return ax<bx+bw && ax+aw>bx && ay<by+bh && ay+ah>by; }
 function ursoRet(){ var u=J.urso, s=TAM[u.tam], w=URSO_W*s, h=URSO_H*s; return {x:u.x-w/2,y:u.y-h,w:w,h:h}; }
 function poeira(x,y,n){ emite(n||6,function(){ return {x:x+(Math.random()-.5)*24,y:y,vx:(Math.random()-.5)*90,vy:-20-Math.random()*50,vida:.45,max:.45,tipo:'nevoa',r:4+Math.random()*4}; }); }
@@ -61,9 +61,9 @@ function redimensiona(){
 function paraLogico(cx,cy){ return {x:(cx-offX)/escala, y:(cy-offY)/escala}; }
 
 /* ---------- carregar reino ---------- */
-function novoUrso(x,y){ return {x:x,y:y,vx:0,vy:0,noChao:true,dir:1,estado:'idle',anim:0,tontoT:0,invT:0,tam:1,sx:1,sy:1,poderes:{capa:false,bota:false},puloExtra:false,planando:false,cheerT:0,sobre:null,montado:false,quem:J.prog.heroi||'lia'}; }
+function novoUrso(x,y){ return {x:x,y:y,vx:0,vy:0,noChao:true,dir:1,estado:'idle',anim:0,tontoT:0,invT:0,tam:1,sx:1,sy:1,poderes:{capa:false,bota:false,estrelas:0},puloExtra:false,planando:false,cheerT:0,sobre:null,montado:false,quem:J.prog.heroi||'lia'}; }
 function iniciaFase(f){
-  J.faseAtual=f; if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); J.corrida=null; J.estadio=null;
+  J.faseAtual=f; if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false); if(window.UI) UI.modoMapa(false); J.corrida=null; J.estadio=null;
   if(f.modo==='estadio'&&window.ESTADIO){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; ESTADIO.inicia(f); return; }
   if(f.modo==='corrida'&&window.CORRIDA){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; CORRIDA.inicia(f); return; }
   var L=F.monta(f);
@@ -72,7 +72,7 @@ function iniciaFase(f){
   L.ovos.forEach(function(o){ o.chocado=false; o.t=0; });
   J.tut= L.passos?{i:0,t:0}:null;
   J.chefe=null; if(f.chefao&&window.CHEFAO){ CHEFAO.limpa(); CHEFAO.inicia(L); }
-  J.estado='nivel'; J.flash=.6;
+  J.estado='nivel'; J.flash=.6; J.estrelas=[]; J.troncosVivos=[]; J.bolasCanhao=[]; if(window.UI){ UI.coracoes(2); UI.acao(false,0); }
   SOM.musica(f.chefao?'chefao':(window.PARTITURAS&&PARTITURAS.CENAS[L.cena]?L.cena:((A.CENAS[L.cena]||{}).musica||'floresta'))); hud();
   if(window.UI){ UI.modoNivel(true); UI.modoMapa(false); }
 }
@@ -81,16 +81,17 @@ function iniciaFase(f){
 function solidos(M){
   var s=[]; M.segs.forEach(function(g){ s.push(g); }); M.tijolos.forEach(function(b){ if(b.vivo) s.push({x:b.x,y:b.y,w:b.w,h:b.h,tijolo:b}); });
   M.canos.forEach(function(p){ s.push({x:p.x,y:p.y,w:p.w,h:p.h,cano:p}); });
-  if(J.quiz&&J.quiz.placas) J.quiz.placas.forEach(function(p){ if(p.ativa) s.push({x:p.x,y:p.y,w:p.w,h:p.h,placa:p}); });
+  if(window.PERIGOS) PERIGOS.solidosExtra(M,s);
   return s;
 }
-function umaVia(M){ var s=M.plats.slice(); M.caindo.forEach(function(p){ if(p.estado!=='sumiu') s.push(p); }); M.movers.forEach(function(p){ s.push(p); }); return s; }
+function umaVia(M){ var s=M.plats.filter(function(p){ return !p.ritmo||p.visivel; }); M.caindo.forEach(function(p){ if(p.estado!=='sumiu') s.push(p); }); M.movers.forEach(function(p){ s.push(p); }); return s; }
 function fisica(dt){
   var u=J.urso, M=J.mundo, s=TAM[u.tam], hw=URSO_W*s/2, hh=URSO_H*s;
   if(u.tontoT>0){ u.tontoT-=dt; u.estado='dizzy'; u.vx=0; u.anim+=dt; return; }
+  if(window.APARELHOS&&APARELHOS.ativo()){ APARELHOS.fisica(dt); return; }
   var ax=0; if(J.in.left) ax-=1; if(J.in.right) ax+=1;
   u.abaixado=!!(J.in.down&&u.noChao&&!u.montado); if(u.abaixado) ax*=.35; /* ↓ = se arrastar devagar */
-  var alvo=ax*VAND*(u.montado?1.1:1);
+  var alvo=ax*VAND*(u.montado?1.1:1)*(u.sobre&&u.sobre.trave?.7:1);
   u.vx+=(alvo-u.vx)*Math.min(1,dt*18); if(Math.abs(u.vx)<2&&!ax) u.vx=0;
   if(ax) u.dir=ax>0?1:-1;
   /* pulo (buffer, altura variável, pulo duplo com a bota, planar com a capa ou montado no Pip) */
@@ -142,8 +143,18 @@ function quebraTijolo(b){ b.vivo=false; SOM.fx('tijolo'); J.shake=4; pontua(10,b
 function pegaItem(it){
   var u=J.urso; it.pego=true; brilho(it.x,it.y,12,'#fff');
   switch(it.tipo){
-    case 'maca': if(u.tam<2){ u.tam++; u.sx=1.3; u.sy=1.3; } SOM.fx('moedaG'); pontua(50,it.x,it.y); break;
+    case 'maca': if(u.tam<2){ u.tam++; u.sx=1.3; u.sy=1.3; } if(window.UI) UI.coracoes(u.tam+1); SOM.fx('moedaG'); pontua(50,it.x,it.y); break;
     case 'capa': u.poderes.capa=true; SOM.fx('destrava'); toast('A cape! Hold JUMP in the air to float',2600,'Uma capa! Segure PULAR no ar para planar'); break;
+    case 'historia': { /* If You Give a Mouse a Cookie: cada objeto, na ordem do livro, dá um poder */
+      var H=[['a cookie','um biscoito','moedas'],['a glass of milk','um copo de leite','cura'],['a straw','um canudo','estrelas'],['a napkin','um guardanapo','capa'],['a mirror','um espelho','moedas'],['scissors','uma tesoura','estrelas'],['a broom','uma vassoura','estrelas'],['tape','fita adesiva','cura'],['a cookie again!','um biscoito de novo!','moedas']];
+      var h=H[Math.min(H.length-1,it.ordem||0)], ef=h[2];
+      if(ef==='cura'&&u.tam<2){ u.tam++; if(window.UI) UI.coracoes(u.tam+1); }
+      if(ef==='estrelas'){ u.poderes.estrelas=Math.min(9,(u.poderes.estrelas||0)+3); if(window.UI) UI.acao(true,u.poderes.estrelas); }
+      if(ef==='capa') u.poderes.capa=true;
+      if(ef==='moedas'){ J.moedas+=5; }
+      SOM.fx('moedaG'); pontua(80,it.x,it.y);
+      toast((it.ordem? 'He wants ':'If you give a mouse ')+h[0],2600,(it.ordem?'Ele quer ':'Se você der a um ratinho ')+h[1]); break; }
+    case 'estrelas': u.poderes.estrelas=Math.min(9,(u.poderes.estrelas||0)+3); SOM.fx('moedaG'); if(window.UI) UI.acao(true,u.poderes.estrelas); if(!J.prog.estrelaVista){ J.prog.estrelaVista=true; salva(); toast('Magic stars! Press ★ to throw one',2800,'Estrelas mágicas! Aperte ★ para jogar uma'); } break;
     case 'bota': u.poderes.bota=true; u.puloExtra=true; SOM.fx('destrava'); toast('Magic boots! Press JUMP again in the air',2600,'Botas mágicas! Aperte PULAR de novo no ar'); break;
   }
 }
@@ -151,6 +162,7 @@ function pegaItem(it){
 function monta(){ var u=J.urso; u.montado=true; J.pip=null; SOM.fx('destrava'); brilho(u.x,u.y-40,10,'#86efac'); u.sx=1.2; u.sy=.85; }
 function machucado(){
   var u=J.urso; if(u.invT>0||u.tontoT>0) return;
+  setTimeout(function(){ if(window.UI&&J.urso) UI.coracoes(J.urso.tam+1,true); },0);
   if(u.montado){ /* o Pip leva o susto no lugar do herói e espera ali perto */
     u.montado=false; u.invT=1.6; u.vy=-380; u.noChao=false; SOM.fx('tonto'); J.shake=5;
     J.pip={x:u.x,y:u.y,vx:-u.dir*260,vy:-300,t:0,parado:false}; return; }
@@ -159,6 +171,7 @@ function machucado(){
 }
 function caiu(msg,pt){
   var u=J.urso; SOM.fx('tonto'); J.shake=6;
+  if(J.nivel&&J.respawn.mundo&&J.mundo.mundo!==J.respawn.mundo){ J.mundo= J.respawn.mundo==='sub'&&J.nivel.sub?J.nivel.sub:J.nivel; J.troncosVivos=[]; J.bolasCanhao=[]; J.estrelas=[]; }
   u.x=J.respawn.x; u.y=J.respawn.y; u.vx=0; u.vy=0; u.tontoT=.8; u.invT=1.2; J.flash=.7; u.puloExtra=u.poderes.bota;
   if(J.pip){ J.pip.x=u.x+50; J.pip.y=u.y; J.pip.vx=0; J.pip.vy=0; }
   J.cam=Math.max(0,Math.min(J.mundo.w-W,u.x-W*.4)); J.camY=Math.max(0,Math.min(J.mundo.h-H,u.y-H*.62)); J.bolasCanhao=[]; 
@@ -183,6 +196,9 @@ function perigos(dt){
     else if(p.estado==='caindo'){ p.vy+=900*dt; p.y+=p.vy*dt; p.t+=dt; if(p.t>2.6){ p.estado='sumiu'; p.t=0; } }
     else if(p.estado==='sumiu'){ p.t+=dt; if(p.t>1.5){ p.estado='ok'; p.x=p.x0; p.y=p.y0; } }
   });
+  if(window.PERIGOS) PERIGOS.atualiza(dt);
+  if(window.APARELHOS) APARELHOS.atualiza(dt);
+  if(window.MARCEU) MARCEU.atualiza(dt);
   M.movers.forEach(function(p){ var k=.5-.5*Math.cos(J.t*6.2832/p.per+(p.x0*.01)); var nx=p.x0+p.dx*k, ny=p.y0+p.dy*k; var ddx=nx-p.x, ddy=ny-p.y; p.vyAnt=Math.max(0,ddy); p.x=nx; p.y=ny; if(u.sobre===p&&u.noChao){ u.x+=ddx; u.y=p.y; } });
 }
 

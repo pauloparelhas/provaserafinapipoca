@@ -27,7 +27,7 @@ var LISTA=[
    resumo:'Title, lines, stanzas and author. Poem or poetry?', resumo_pt:'Título, versos, estrofes e autor. Poema ou poesia?'},
   {id:6, nome:'Rhythm Gym', nome_pt:'Ginásio do Ritmo', cena:'ginasio', tema:'poem', at:['P8','P10','P7','P9'], moradores:['coach','coach','coach'],
    resumo:'Rhythm: the beat of a poem.', resumo_pt:'Ritmo: a batida do poema.'},
-  {id:7, nome:'Cause & Effect Stadium', nome_pt:'Estádio da Causa e Efeito', cena:'estadio', modo:'estadio', tema:'cause', moradores:['referee','referee','referee'],
+  {id:7, nome:'Cause & Effect Stadium', nome_pt:'Estádio da Causa e Efeito', cena:'estadio', tema:'cause', moradores:['referee','referee','referee'],
    resumo:'If… (cause) → Then… (effect).', resumo_pt:'Se… (causa) → Então… (efeito).'},
   {id:8, nome:'The Cookie Circle', nome_pt:'A Roda do Biscoito', cena:'biscoito', tema:'circle', moradores:['mouse','mouse','mouse'],
    resumo:'A circle story ends where it began.', resumo_pt:'A história circular termina onde começou.'},
@@ -37,16 +37,18 @@ var LISTA=[
 var PRONTOS={1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:true,9:true}; /* reinos já construídos (E1: vila e floresta; E2: recife e céu) */
 
 /* ---------- parser: grade → objeto de nível ---------- */
-var ITENS={H:'maca',A:'capa',J:'bota'};
+var ITENS={H:'maca',A:'capa',J:'bota',Y:'estrelas'};
 function parse(rows,opts){
   opts=opts||{};
   var h=rows.length, w=0; rows.forEach(function(s){ w=Math.max(w,s.length); });
   rows=rows.map(function(s){ return (s+new Array(w+1).join(' ')).slice(0,w); });
-  var L={w:w*T, h:h*T, cols:w, grade:rows, segs:[], plats:[], tijolos:[], caixas:[], moedas:[], itens:[], canhoes:[], travas:[], espinhos:[], pingentes:[], molas:[], caindo:[], agua:[], canos:[], checkpoints:[], inimigos:[], troncos:[], movers:[], moradores:[], ovos:[], mastro:null, inicioX:90, mundo:opts.mundo||'main'};
+  var L={w:w*T, h:h*T, cols:w, grade:rows, segs:[], plats:[], tijolos:[], caixas:[], moedas:[], itens:[], canhoes:[], travas:[], espinhos:[], pingentes:[], molas:[], caindo:[], agua:[], canos:[], checkpoints:[], inimigos:[], troncos:[], movers:[], moradores:[], ovos:[], paredes:[], chefinhos:[], pendulos:[], barras:[], saltos:[], mastro:null, inicioX:90, mundo:opts.mundo||'main'};
   var at=function(c,r){ return (r<0||r>=h||c<0||c>=w)?' ':rows[r][c]; };
   var visto={};
   for(var r=0;r<h;r++) for(var c=0;c<w;c++){
     var ch=at(c,r), x=c*T, y=r*T, k=c+','+r; if(visto[k]) continue;
+    if(window.APARELHOS&&APARELHOS.parse(ch,x,y,L)) continue;
+    if(window.MARCEU&&MARCEU.parse(ch,x,y,L)) continue;
     switch(ch){
       case '#': { var n=1; while(at(c+n,r)==='#'){ visto[(c+n)+','+r]=1; n++; } L.segs.push({x:x,y:y,w:n*T,h:T}); break; }
       case '=': { var n2=1; while(at(c+n2,r)==='='){ visto[(c+n2)+','+r]=1; n2++; } L.plats.push({x:x,y:y,w:n2*T,h:18}); break; }
@@ -60,13 +62,22 @@ function parse(rows,opts){
       case 'm': L.movers.push({x:x,y:y,x0:x,y0:y,w:3*T,h:18,dx:4*T,dy:0,per:4.2}); break;
       case 'n': L.movers.push({x:x,y:y,x0:x,y0:y,w:2*T,h:18,dx:0,dy:-3*T,per:4.5}); break;
       case 'T': L.troncos.push({x:x+T/2,y:y+T,prox:1.5,cada:3.6}); break;
+      case 'K': L.troncos.push({x:x+T/2,y:y+T,prox:1.2,cada:3.2,bola:true}); break;
+      case 'v': L.pingentes.push({x:x+T/2,y:y,y0:y,estado:'preso',t:0}); break;
+      case 'C': L.canhoes.push({x:x+T/2,y:y+T/2,prox:2,cada:3.4}); break;
+      case 'N': L.movers.push({x:x,y:y,x0:x,y0:y,w:2*T,h:18,dx:0,dy:-6*T,per:7,elevador:true}); break;
+      case '%': L.paredes.push({x:x,y:y,w:T,h:T,viva:true}); break;
+      case '&': L.itens.push({x:x+T/2,y:y+T/2,tipo:'historia',pego:false}); break;
+      case 'D': L.moradores.push({x:x+T/2,y:y+T,i:L.moradores.length,feito:false,visto:false,falando:0,mundo:L.mundo}); break;
+      case 'e': L.inimigos.push({tipo:'espinho',x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,dir:-1,v:40,voa:false,espinho:true}); break;
+      case 'E': L.chefinhos.push({x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,hp:3,max:3,estado:'anda',t:0,dir:-1,vencido:false}); break;
       case 'c': L.checkpoints.push({x:x+T/2,y:y+T,acesa:false}); break;
       case 'F': L.mastro={x:x+T/2,y:y+T}; break;
       case 'U': L.inicioX=x+T/2; L.inicioY=y+T; break;
       case 'Q': L.moradores.push({x:x+T/2,y:y+T,i:L.moradores.length,feito:false,visto:false,falando:0}); break;
       case 'P': L.ovos.push({x:x+T/2,y:y+T,chocado:false,t:0}); break;
       case 'b': case 'r': case 'k': case 'w': L.inimigos.push({tipo:{b:'castor',r:'guaxinim',k:'gamba',w:'carcaju'}[ch],x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,dir:-1,v:ch==='w'?95:(ch==='k'?45:60),voa:false}); break;
-      case 'g': L.inimigos.push({tipo:'ganso',x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,dir:-1,v:70,voa:true,amp:40}); break;
+      case 'g': L.inimigos.push({tipo:'corvo',x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,dir:-1,v:70,voa:true,amp:40}); break;
       case 'i': L.inimigos.push({tipo:'tinta',x:x+T/2,y:y+T,x0:x+T/2,y0:y+T,dir:-1,v:55,voa:false}); break;
       default:
         if(ITENS[ch]) L.itens.push({x:x+T/2,y:y+T/2,tipo:ITENS[ch],pego:false});
@@ -77,6 +88,8 @@ function parse(rows,opts){
   L.segs.forEach(function(s){ var u=null; for(var i=0;i<segs.length;i++){ var q=segs[i]; if(q.x===s.x&&q.w===s.w&&q.y+q.h===s.y){ u=q; break; } } if(u) u.h+=s.h; else segs.push(s); });
   L.segs=segs;
   if(L.inicioY===undefined) L.inicioY=CHAO_Y;
+  /* itens da história do Mouse: na ordem do livro, da esquerda para a direita */
+  L.itens.filter(function(it){ return it.tipo==='historia'; }).sort(function(a,b){ return a.x-b.x; }).forEach(function(it,i,arr){ it.ordem= (i===arr.length-1&&i>0)?8:i; }); /* o último é sempre o biscoito de novo: a história volta ao começo */
   return L;
 }
 
@@ -84,8 +97,10 @@ function parse(rows,opts){
 function monta(f){
   var MP=window.MAPAS&&MAPAS[f.id];
   var L=parse(MP.main,{mundo:'main'}); L.fase=f; L.cena=f.cena; L.modo=f.modo||''; L.superficie=f.modo==='nado'?20:0;
-  L.moradores.forEach(function(m,i){ m.tipo=f.moradores[i%f.moradores.length]||'crier'; });
-  L.totalArenas=L.moradores.length;
+  if(MP.sub){ var S=parse(MP.sub,{mundo:'sub'}); S.fase=f; S.cena=f.subCena||'sub_caverna'; S.modo=L.modo; S.superficie=L.superficie; S.sub=true; L.sub=S; }
+  var todos=L.moradores.concat(L.sub?L.sub.moradores:[]);
+  todos.forEach(function(m,i){ m.tipo=f.moradores[i%f.moradores.length]||'crier'; });
+  L.todasEntradas=todos; L.totalArenas=todos.length;
   if(f.treino) L.passos=MP.passos;
   return L;
 }

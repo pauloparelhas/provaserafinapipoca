@@ -18,13 +18,17 @@ function inimigos(dt){
     if(e.morto) return;
     if(e.achatado){ e.tAch-=dt; if(e.tAch<=0) e.morto=true; return; }
     e.t=(e.t||0)+dt;
+    if(e.fixo){ /* água-viva/baiacu: o movimento vem do ING3_jogo_marceu.js */ }
+    else if(e.voa){ e.x=e.x0+Math.sin(e.t*.9)*150; e.dir=Math.cos(e.t*.9)>=0?1:-1; e.y=e.y0-110+Math.sin(e.t*2.3)*e.amp; }
+    else {
     var px=e.x+e.dir*e.v*dt, apoio=false, parede=false;
     G.solidos(M).forEach(function(s){ if(px+e.dir*14>s.x && px+e.dir*14<s.x+s.w && e.y>=s.y-2 && e.y<=s.y+6) apoio=true; if(G.colideRet(px-14,e.y-30,28,26,s.x,s.y,s.w,s.h)) parede=true; });
     M.plats.forEach(function(s){ if(px+e.dir*14>s.x && px+e.dir*14<s.x+s.w && Math.abs(e.y-s.y)<4) apoio=true; });
     if(!apoio||parede||px<16||px>M.w-16) e.dir=-e.dir; else e.x=px;
+    }
     if(u.invT>0||u.tontoT>0||J.estado!=='nivel') return;
     if(G.colideRet(R.x+6,R.y+6,R.w-12,R.h-6,e.x-18,e.y-30,36,30)){
-      if(u.vy>50 && u.y<e.y-14){ e.achatado=true; e.tAch=.7; u.vy=-400; u.noChao=false; u.sx=1.3; u.sy=.7; SOM.fx('pisao'); G.pontua(20,e.x,e.y-40); G.emite(10,function(){ return {x:e.x,y:e.y-10,vx:(Math.random()-.5)*240,vy:-100-Math.random()*200,vida:.6,max:.6,tipo:'fogo',cor:'#312e81',r:4,g:1}; }); }
+      if(u.vy>50 && u.y<e.y-14 && !e.espinho){ e.achatado=true; e.tAch=.7; u.vy=-400; u.noChao=false; u.sx=1.3; u.sy=.7; SOM.fx('pisao'); G.pontua(20,e.x,e.y-40); G.emite(10,function(){ return {x:e.x,y:e.y-10,vx:(Math.random()-.5)*240,vy:-100-Math.random()*200,vida:.6,max:.6,tipo:'fogo',cor:'#312e81',r:4,g:1}; }); }
       else G.machucado();
     }
   });
@@ -32,19 +36,21 @@ function inimigos(dt){
 
 /* ---------- moradores: chegar perto abre a pergunta ---------- */
 /* ---------- entradas do ambiente de questões (porta, baú…): ▼ na frente, ou tocar nela ---------- */
-function pertoDe(m){ var u=J.urso, L=J.nivel; return Math.abs(u.x-m.x)<60 && Math.abs(u.y-m.y)<(L.modo?140:30); }
+function pertoDe(m){ var u=J.urso, L=J.mundo; return Math.abs(u.x-m.x)<60 && Math.abs(u.y-m.y)<(L.modo?140:30); }
 function moradores(dt){
-  var u=J.urso, L=J.nivel;
+  var u=J.urso, L=J.mundo, entrou=false;
   L.moradores.forEach(function(m){
     if(m.esperaT>0) m.esperaT-=dt;
     m.perto=pertoDe(m);
-    if(J.estado!=='nivel'||!window.QUIZ||m.esperaT>0) return;
-    if(m.perto && J.in.down && J.downSolto){ J.downSolto=false; SOM.fx('cano'); QUIZ.inicia(m); }
+    if(entrou||J.estado!=='nivel'||!window.QUIZ||m.esperaT>0) return;
+    if(m.perto && J.in.down && J.downSolto){ J.downSolto=false; entrou=true; SOM.fx('cano'); QUIZ.inicia(m); }
   });
+  /* ▼ em cima de um cano: submundo */
+  if(!entrou&&J.estado==='nivel'&&J.in.down&&J.downSolto&&window.PERIGOS){ var p=PERIGOS.canoSob(); if(p){ J.downSolto=false; PERIGOS.entraCano(p); } }
   if(!J.in.down) J.downSolto=true;
 }
 function tocaEntrada(lx,ly){ /* toque no tablet: tocar na porta/baú quando o herói está na frente dela */
-  var L=J.nivel; if(!L) return false; var wx=lx+J.cam, wy=ly+J.camY;
+  var L=J.mundo; if(!L) return false; var wx=lx+J.cam, wy=ly+J.camY;
   for(var i=0;i<L.moradores.length;i++){ var m=L.moradores[i]; if(wx>m.x-50&&wx<m.x+50&&wy>m.y-130&&wy<m.y+10){ if(m.perto&&window.QUIZ){ SOM.fx('cano'); QUIZ.inicia(m); } else G.toast('Walk to the door first!',1600,'Primeiro vá até a porta!'); return true; } }
   return false;
 }
@@ -54,7 +60,7 @@ function atualizaNivel(dt){
   var L=J.nivel, M=J.mundo, u=J.urso;
   if(u.cheerT>0){ u.cheerT-=dt; u.estado='cheer'; u.anim+=dt; }
   M.checkpoints.forEach(function(cp){ if(!cp.acesa&&u.x>cp.x&&u.x<cp.x+160&&Math.abs(u.y-cp.y)<180){ cp.acesa=true; J.respawn={x:cp.x,y:cp.y,mundo:M.mundo}; SOM.fx('checkpoint'); G.brilho(cp.x,cp.y-80,12); } });
-  inimigos(dt); G.perigos(dt); moradores(dt); if(J.chefe&&window.CHEFAO) CHEFAO.atualiza(dt);
+  inimigos(dt); G.perigos(dt); moradores(dt); if(window.CHEFINHO) CHEFINHO.atualiza(dt); if(J.chefe&&window.CHEFAO) CHEFAO.atualiza(dt);
   if(M.mastro && Math.abs(u.x-M.mastro.x)<30 && Math.abs(u.y-M.mastro.y)<70 && J.estado==='nivel') fimDeFase();
   if(J.tut) atualizaTutorial(dt);
   dicas();
@@ -62,7 +68,7 @@ function atualizaNivel(dt){
 function dicas(){ /* só o indispensável: o ovo do Pip, na primeira vez */
   var u=J.urso, M=J.mundo, d=null;
   if(!J.prog.pipVisto) M.ovos.forEach(function(o){ if(!o.chocado && Math.abs(o.x-u.x)<160) d={x:o.x,y:o.y-80,txt:'Touch the egg!',pt:'Encoste no ovo!'}; });
-  if(!d&&J.nivel) J.nivel.moradores.forEach(function(m){ if(m.perto&&!J.chefe) d={x:m.x,y:m.y-150,txt:m.feito?'Play again? Press ▼':'Press ▼ to go in',pt:m.feito?'Jogar de novo? Aperte ▼':'Aperte ▼ para entrar',botao:true}; });
+  if(!d&&J.mundo) J.mundo.moradores.forEach(function(m){ if(m.perto&&!J.chefe) d={x:m.x,y:m.y-150,txt:m.feito?'Play again? Press ▼':'Press ▼ to go in',pt:m.feito?'Jogar de novo? Aperte ▼':'Aperte ▼ para entrar',botao:true}; });
   J.dica=d;
 }
 function atualizaTutorial(dt){ var Tt=J.tut, L=J.nivel; Tt.t+=dt; var p=L.passos[Tt.i]; if(!p) return; if(p.ate(J)){ Tt.i++; Tt.t=0; SOM.fx('moeda'); if(Tt.i>=L.passos.length) J.tut=null; } }
@@ -70,17 +76,17 @@ function atualizaTutorial(dt){ var Tt=J.tut, L=J.nivel; Tt.t+=dt; var p=L.passos
 /* ---------- fim do reino ---------- */
 function fimDeFase(){
   var f=J.faseAtual, s=J.stats, total=Math.max(1,s.perguntas), razao=s.perguntas?s.acertos/total:0;
-  var pags=J.nivel.moradores.filter(function(m){ return m.feito; }).length;
+  var pags=(J.nivel.todasEntradas||J.nivel.moradores).filter(function(m){ return m.feito; }).length;
   var estrelas= s.perguntas===0?1:(razao>=.9?3:(razao>=.7?2:1));
   J.fimFase={t:0,estrelas:estrelas}; J.estado='fimFase'; SOM.musica('vitoria'); SOM.fx('vitoria'); J.urso.estado='cheer'; J.urso.anim=0;
   var ant=J.prog.fases[f.id]||{}; J.prog.fases[f.id]={estrelas:Math.max(ant.estrelas||0,estrelas),pontos:Math.max(ant.pontos||0,J.pontos),acertos:s.acertos,total:s.perguntas,paginas:Math.max(ant.paginas||0,pags),novo:!ant.estrelas};
   J.prog.pontos=Object.keys(J.prog.fases).reduce(function(a,k){ return a+(J.prog.fases[k].pontos||0); },0);
   G.salva(); if(window.UI) UI.modoNivel(false);
-  setTimeout(function(){ if(window.UI) UI.fimFase(f,estrelas,s.acertos,s.perguntas,J.pontos,J.moedas,pags,J.nivel.moradores.length); },1500);
+  setTimeout(function(){ if(window.UI) UI.fimFase(f,estrelas,s.acertos,s.perguntas,J.pontos,J.moedas,pags,(J.nivel.todasEntradas||J.nivel.moradores).length); },1500);
 }
 function voltaMapa(){ var f=J.faseAtual, novo=f&&J.prog.fases[f.id]&&J.prog.fases[f.id].novo; if(novo){ J.prog.fases[f.id].novo=false; G.salva(); } var i=F.LISTA.indexOf(f); irMapa(novo&&i<F.LISTA.length-1?i+1:false); }
 function irMapa(animaPara){
-  if(window.UI&&UI.modoCorrida) UI.modoCorrida(false);
+  if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false);
   J.estado='mapa'; J.nivel=null; J.mundo=null; J.tut=null; J.part=[]; J.clima=[]; J.faseAtual=null; J.t=0; J.dica=null; J.quiz=null; J.pip=null;
   F.posiciona();
   J.sel=animaPara?animaPara-1:G.proximaFase(); J.mapaAnim= animaPara?{de:animaPara-1,para:animaPara,t:0,dur:2.2}:null;
@@ -183,6 +189,7 @@ function passo(ts){
   atualizaTrans(dt);
   switch(J.estado){
     case 'nivel': if(!J.trans||J.trans.fase==='abre'){ G.fisica(dt); if(J.estado==='nivel') atualizaNivel(dt); if(J.mundo&&J.estado!=='mapa') atualizaCamera(dt); } break;
+    case 'cano': break;
     case 'quiz': if(window.QUIZ) QUIZ.atualiza(dt); if(J.chefe&&window.CHEFAO) CHEFAO.anima(dt); break;
     case 'final': atualizaFinal(dt); break;
     case 'corrida': if(window.CORRIDA) CORRIDA.atualiza(dt); break;
