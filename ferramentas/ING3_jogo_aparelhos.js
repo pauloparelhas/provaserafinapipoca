@@ -46,9 +46,9 @@ function ativo(){ return !!J.agarrado; }
 /* agarrar é GENEROSO: as mãos do herói perto da ponta (50 px de lado, 60 px de altura) */
 function tentaAgarrar(M){
   var u=J.urso; if(J.agarrado||u.noChao||(J.soltouT||0)>0) return;
-  var hh=G.URSO_H*G.TAM[u.tam], maos=u.y-hh;
-  (M.pendulos||[]).forEach(function(p){ if(J.agarrado) return; var e=pontaPend(p); if(Math.abs(u.x-e.x)<50&&Math.abs(maos-e.y)<60){ J.agarrado={tipo:p.tipo,p:p,t:0}; SOM.fx('clique'); u.vx=0; u.vy=0; u.lancado=false; } });
-  (M.barras||[]).forEach(function(b){ if(J.agarrado) return; if(Math.abs(u.x-b.x)<50&&Math.abs(maos-b.y)<60){ J.agarrado={tipo:'barra',b:b,t:0,th0:Math.max(-.5,Math.min(.5,u.vx/600))}; SOM.fx('clique'); u.vx=0; u.vy=0; u.lancado=false; } });
+  var hh=G.URSO_H*G.TAM[u.tam], maos=u.y-hh, gx=u.poderes.giz?70:50, gy=u.poderes.giz?80:60; /* giz: mãos que seguram mais fácil */
+  (M.pendulos||[]).forEach(function(p){ if(J.agarrado) return; var e=pontaPend(p); if(Math.abs(u.x-e.x)<gx&&Math.abs(maos-e.y)<gy){ J.agarrado={tipo:p.tipo,p:p,t:0}; SOM.fx('clique'); u.vx=0; u.vy=0; u.lancado=false; } });
+  (M.barras||[]).forEach(function(b){ if(J.agarrado) return; if(Math.abs(u.x-b.x)<gx&&Math.abs(maos-b.y)<gy){ J.agarrado={tipo:'barra',b:b,t:0,th0:Math.max(-.5,Math.min(.5,u.vx/600))}; SOM.fx('clique'); u.vx=0; u.vy=0; u.lancado=false; } });
 }
 /* solta: o impulso é SEMPRE para a frente (para onde o herói olha ou a seta segurada); mais forte se o
    balanço vai para a frente, mas nunca "errado": não existe janela que derrube (Paulo: facilitar soltar e pegar) */

@@ -25,7 +25,7 @@ function parse(ch,x,y,L){
   }
   return false;
 }
-function cicloTempestade(z){ var k=((J.t+z.fase)%3)/3; return k<.43?'calma':(k<.77?'aviso':'raio'); }
+function cicloTempestade(z){ if(z.calmaT>0) return 'calma'; var k=((J.t+z.fase)%3)/3; return k<.43?'calma':(k<.77?'aviso':'raio'); }
 function atualiza(dt){
   var M=J.mundo, u=J.urso; if(!M) return; var R=G.ursoRet(), vivo=u.invT<=0&&u.tontoT<=0&&J.estado==='nivel';
   M.inimigos.forEach(function(e){

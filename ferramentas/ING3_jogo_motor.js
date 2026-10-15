@@ -61,16 +61,16 @@ function redimensiona(){
 function paraLogico(cx,cy){ return {x:(cx-offX)/escala, y:(cy-offY)/escala}; }
 
 /* ---------- carregar reino ---------- */
-function novoUrso(x,y){ return {x:x,y:y,vx:0,vy:0,noChao:true,dir:1,estado:'idle',anim:0,tontoT:0,invT:0,tam:1,sx:1,sy:1,poderes:{capa:false,bota:false,estrelas:0,traje:false,guardanapo:false},puloExtra:false,planando:false,cheerT:0,sobre:null,montado:false,quem:J.prog.heroi||'lia'}; }
+function novoUrso(x,y){ return {x:x,y:y,vx:0,vy:0,noChao:true,dir:1,estado:'idle',anim:0,tontoT:0,invT:0,tam:1,sx:1,sy:1,poderes:{capa:false,bota:false,estrelas:0,traje:false,guardanapo:false,giz:false,tiro:null,vassoura:false},puloExtra:false,planando:false,cheerT:0,sobre:null,montado:false,quem:J.prog.heroi||'lia'}; }
 function iniciaFase(f){
-  J.faseAtual=f; J.agarrado=null; J.soltouT=0; if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false); if(window.UI) UI.modoMapa(false); J.corrida=null; J.estadio=null;
+  J.faseAtual=f; J.agarrado=null; if(window.UI&&UI.poderHud) UI.poderHud(null); J.soltouT=0; if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false); if(window.UI) UI.modoMapa(false); J.corrida=null; J.estadio=null;
   if(f.modo==='estadio'&&window.ESTADIO){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; ESTADIO.inicia(f); return; }
   if(f.modo==='corrida'&&window.CORRIDA){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; CORRIDA.inicia(f); return; }
   var L=F.monta(f);
   J.nivel=L; J.mundo=L; J.urso=novoUrso(L.inicioX,L.inicioY); J.cam=0; J.camY=Math.max(0,L.h-H); J.bolasCanhao=[]; J.part=[]; J.clima=[]; J.shake=0; J.tFase=0; J.fimFase=null; J.troncosVivos=[]; J.dica=null; J.setaT=0; J.quiz=null; J.pip=null;
   J.respawn={x:L.inicioX,y:L.inicioY,mundo:'main'}; J.stats={perguntas:0,acertos:0}; J.pontos=0;
   L.ovos.forEach(function(o){ o.chocado=false; o.t=0; });
-  J.tut= L.passos?{i:0,t:0}:null;
+  J.tut= L.passos?{i:0,t:0}:null; J.log=[]; J.pipCartao=false; if(window.PODERES) PODERES.reinicia();
   J.chefe=null; if(window.CHEFAO) CHEFAO.limpa();
   J.estado='nivel'; J.flash=.6; J.estrelas=[]; J.troncosVivos=[]; J.bolasCanhao=[]; if(window.UI){ UI.coracoes(2); UI.acao(false,0); }
   SOM.musica(f.chefao?'chefao':(window.PARTITURAS&&PARTITURAS.CENAS[L.cena]?L.cena:((A.CENAS[L.cena]||{}).musica||'floresta'))); hud();
@@ -113,8 +113,8 @@ function fisica(dt){
     u.planando=!u.noChao;
   } else {
   if(J.in.jump && J.jumpSolto){
-    if(u.noChao){ u.vy=VPULO; u.noChao=false; J.jumpSolto=false; u.puloExtra=u.poderes.bota; u.sx=.8; u.sy=1.25; SOM.fx('pulo'); poeira(u.x,u.y,5); u.sobre=null; }
-    else if(u.puloExtra){ u.vy=-640; u.puloExtra=false; J.jumpSolto=false; u.sx=.85; u.sy=1.2; SOM.fx('pulo'); brilho(u.x,u.y-20,6,'#fbbf24'); }
+    if(u.noChao){ u.vy=VPULO; u.noChao=false; J.jumpSolto=false; u.puloExtra=u.poderes.bota||u.poderes.giz; u.sx=.8; u.sy=1.25; SOM.fx('pulo'); poeira(u.x,u.y,5); u.sobre=null; }
+    else if(u.puloExtra){ u.vy=-640; u.puloExtra=false; J.jumpSolto=false; u.lancado=true; u.sx=.85; u.sy=1.2; SOM.fx('pulo'); brilho(u.x,u.y-20,6,'#fbbf24'); if(window.PODERES) PODERES.segundoPulo(); }
   }
   /* soltar PULAR corta o pulo (altura variável) — mas NUNCA o impulso de mola, trampolim, cipó ou barra:
      era esse corte que deixava o pula-pula fraco e o obstáculo depois dele intransponível (Paulo) */
@@ -134,7 +134,7 @@ function fisica(dt){
     var piso=null;
     via.forEach(function(p){ if(u.x+hw-4>p.x && u.x-hw+4<p.x+p.w && u.y<=p.y+4+(p.vyAnt||0) && ny>=p.y){ if(piso===null||p.y<piso){ piso=p.y; sobre=p; } } });
     sol.forEach(function(b){ if(b.placa) return; if(u.x+hw-2>b.x && u.x-hw+2<b.x+b.w && u.y<=b.y+2 && ny>=b.y){ if(piso===null||b.y<piso){ piso=b.y; sobre=b; } } });
-    if(piso!==null){ if(!u.noChao){ u.sx=1.25; u.sy=.75; SOM.fx('aterra'); poeira(u.x,piso,6); } ny=piso; u.vy=0; noChao=true; u.puloExtra=u.poderes.bota; }
+    if(piso!==null){ if(!u.noChao){ u.sx=1.25; u.sy=.75; SOM.fx('aterra'); poeira(u.x,piso,6); } ny=piso; u.vy=0; noChao=true; u.puloExtra=u.poderes.bota||u.poderes.giz; }
   } else {
     var topo=ny-hh;
     sol.forEach(function(b){ if(u.x+hw-6>b.x && u.x-hw+6<b.x+b.w && topo<=b.y+b.h && (u.y-hh)>=b.y+b.h-6){ ny=b.y+b.h+hh; u.vy=120; if(b.tijolo) quebraTijolo(b.tijolo); if(b.placa&&window.QUIZ) QUIZ.bate(b.placa); } });
@@ -153,7 +153,7 @@ function fisica(dt){
 /* ---------- itens, perigos ---------- */
 function quebraTijolo(b){ b.vivo=false; SOM.fx('tijolo'); J.shake=4; pontua(10,b.x+b.w/2,b.y); emite(8,function(i){ return {x:b.x+b.w/2,y:b.y+b.h/2,vx:(Math.random()-.5)*300,vy:-150-Math.random()*250,vida:.8,max:.8,tipo:'confete',cor:i%2?'#c2410c':'#7c2d12',rot:Math.random()*6,g:1}; }); J.part.push({x:b.x+b.w/2,y:b.y,vx:0,vy:-200,vida:.6,max:.6,tipo:'moeda',r:9,rot:0,g:1}); }
 function pegaItem(it){
-  var u=J.urso; it.pego=true; brilho(it.x,it.y,12,'#fff');
+  var u=J.urso; it.pego=true; brilho(it.x,it.y,12,'#fff'); if(window.PODERES&&PODERES.pega(it)) return;
   switch(it.tipo){
     case 'maca': if(u.tam<2){ u.tam++; u.sx=1.3; u.sy=1.3; } if(window.UI) UI.coracoes(u.tam+1); SOM.fx('moedaG'); pontua(50,it.x,it.y); break;
     case 'capa': u.poderes.capa=true; SOM.fx('destrava');
@@ -190,7 +190,7 @@ function machucado(){
 function caiu(msg,pt){
   var u=J.urso; SOM.fx('tonto'); J.shake=6; J.agarrado=null; J.soltouT=0; u.giro=0;
   if(J.nivel&&J.respawn.mundo&&J.mundo.mundo!==J.respawn.mundo){ J.mundo= J.respawn.mundo==='sub'&&J.nivel.sub?J.nivel.sub:J.nivel; J.troncosVivos=[]; J.bolasCanhao=[]; J.estrelas=[]; }
-  u.x=J.respawn.x; u.y=J.respawn.y; u.vx=0; u.vy=0; u.tontoT=.8; u.invT=1.2; J.flash=.7; u.puloExtra=u.poderes.bota;
+  u.x=J.respawn.x; u.y=J.respawn.y; u.vx=0; u.vy=0; u.tontoT=.8; u.invT=1.2; J.flash=.7; u.puloExtra=u.poderes.bota||u.poderes.giz;
   if(J.pip){ J.pip.x=u.x+50; J.pip.y=u.y; J.pip.vx=0; J.pip.vy=0; }
   J.cam=Math.max(0,Math.min(J.mundo.w-W,u.x-W*.4)); J.camY=Math.max(0,Math.min(J.mundo.h-H,u.y-H*.62)); J.bolasCanhao=[]; 
   J.mundo.caindo.forEach(function(p){ p.estado='ok'; p.x=p.x0; p.y=p.y0; p.t=0; });
@@ -199,8 +199,8 @@ function perigos(dt){
   var u=J.urso, M=J.mundo, R=ursoRet();
   if(u.invT>0) u.invT-=dt;
   M.moedas.forEach(function(m){ if(!m.pega && colideRet(R.x,R.y,R.w,R.h,m.x-m.r,m.y-m.r,m.r*2,m.r*2)){ m.pega=true; J.moedas+=m.big?5:1; pontua(m.big?50:10,m.x,m.y-10); SOM.fx(m.big?'moedaG':'moeda'); brilho(m.x,m.y,m.big?14:5); } });
-  M.itens.forEach(function(it){ if(!it.pego && colideRet(R.x,R.y,R.w,R.h,it.x-18,it.y-18,36,36)) pegaItem(it); });
-  M.ovos.forEach(function(o){ if(!o.chocado && !u.montado && colideRet(R.x,R.y,R.w,R.h,o.x-22,o.y-50,44,50)){ o.chocado=true; monta(); if(!J.prog.pipVisto){ J.prog.pipVisto=true; salva(); toast('Pip! Hold JUMP to float',2600,'Pip! Segure PULAR para planar'); } } });
+  M.itens.forEach(function(it){ if(!it.pego && (it.tipo==='maca'||it.tipo==='bota'||it.tipo==='estrelas') && colideRet(R.x,R.y,R.w,R.h,it.x-18,it.y-18,36,36)) pegaItem(it); });
+  M.ovos.forEach(function(o){ if(!o.chocado && !u.montado && colideRet(R.x,R.y,R.w,R.h,o.x-22,o.y-50,44,50)){ o.chocado=true; monta(); J.urso.poderes.tiro='faisca'; if(!J.prog.pipVisto){ J.prog.pipVisto=true; salva(); } if(!J.pipCartao&&window.PODERES){ J.pipCartao=true; PODERES.cartao('pip',PODERES.TAB[2]); PODERES.hudPoder(); } } });
   if(J.pip){ var p=J.pip; p.t+=dt; if(!p.parado){ p.vy+=1400*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; var piso=null; solidos(M).concat(umaVia(M)).forEach(function(b){ if(p.x>b.x&&p.x<b.x+b.w&&p.y>=b.y&&p.y-p.vy*dt<=b.y+4) piso=b.y; }); if(piso!==null&&p.vy>0){ p.y=piso; p.vy=0; p.vx*=.5; if(Math.abs(p.vx)<20){ p.parado=true; } } if(p.y>M.h+100){ p.x=J.respawn.x+60; p.y=J.respawn.y; p.vy=0; } }
     if(p.t>1 && u.invT<=.3 && colideRet(R.x,R.y,R.w,R.h,p.x-24,p.y-50,48,50)) monta(); }
   M.molas.forEach(function(m){ if(m.t>0) m.t-=dt; if(u.vy>=0 && colideRet(R.x,R.y+R.h-8,R.w,12,m.x,m.y-6,m.w,m.h)){ u.vy=VMOLA; u.lancado=true; u.noChao=false; u.y=m.y; m.t=.3; u.sx=.7; u.sy=1.4; SOM.fx('mola'); poeira(u.x,m.y,8); } });
@@ -215,12 +215,13 @@ function perigos(dt){
     else if(p.estado==='sumiu'){ p.t+=dt; if(p.t>1.5){ p.estado='ok'; p.x=p.x0; p.y=p.y0; } }
   });
   if(window.PERIGOS) PERIGOS.atualiza(dt);
+  if(window.PODERES) PODERES.atualiza(dt);
   if(window.APARELHOS) APARELHOS.atualiza(dt);
   if(window.MARCEU) MARCEU.atualiza(dt);
   M.movers.forEach(function(p){ var k=.5-.5*Math.cos(J.t*6.2832/p.per+(p.x0*.01)); var nx=p.x0+p.dx*k, ny=p.y0+p.dy*k; var ddx=nx-p.x, ddy=ny-p.y; p.vyAnt=Math.max(0,ddy); p.x=nx; p.y=ny; if(u.sobre===p&&u.noChao){ u.x+=ddx; u.y=p.y; } });
 }
 
-var api={J:J, W:W, H:H, TAM:TAM, URSO_W:URSO_W, URSO_H:URSO_H, carrega:carrega, salva:salva, faseFeita:faseFeita, paginas:paginas, proximaFase:proximaFase, recomecar:recomecar, emite:emite, toast:toast, hud:hud, colideRet:colideRet, ursoRet:ursoRet, poeira:poeira, brilho:brilho, pontua:pontua, redimensiona:redimensiona, paraLogico:paraLogico, iniciaFase:iniciaFase, fisica:fisica, perigos:perigos, caiu:caiu, machucado:machucado, solidos:solidos, umaVia:umaVia,
+var api={J:J, W:W, H:H, TAM:TAM, URSO_W:URSO_W, URSO_H:URSO_H, carrega:carrega, salva:salva, faseFeita:faseFeita, paginas:paginas, proximaFase:proximaFase, recomecar:recomecar, emite:emite, toast:toast, hud:hud, colideRet:colideRet, ursoRet:ursoRet, poeira:poeira, brilho:brilho, pontua:pontua, redimensiona:redimensiona, paraLogico:paraLogico, iniciaFase:iniciaFase, fisica:fisica, perigos:perigos, caiu:caiu, pegaItem:pegaItem, machucado:machucado, solidos:solidos, umaVia:umaVia,
   canvas:function(){ return canvas; }, ctx:function(){ return ctx; }, escala:function(){ return escala; }, dpr:function(){ return dpr; },
   setCanvas:function(cv){ canvas=cv; ctx=cv.getContext('2d'); }};
 var irMapa=function(){ if(api.irMapa) api.irMapa.apply(null,arguments); };
