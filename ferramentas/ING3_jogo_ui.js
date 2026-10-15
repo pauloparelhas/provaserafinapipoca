@@ -48,13 +48,16 @@ function quizBotoes(on){ $('quizBtns').classList.toggle('show',!!on); }
 function modoCorrida(on){ document.body.classList.toggle('corrida',!!on); $('tJump').innerHTML=on?'&#9650;':'JUMP'; }
 
 /* ---------- legenda da intro ---------- */
-function legenda(cena){ var d=$('legenda'); if(!cena){ d.classList.remove('show'); return; } d.innerHTML='<p>'+bi(cena.en,cena.pt)+'</p><div class="lgrow"><button class="mini" id="lgPula">Skip</button><button class="lgnext" id="lgNext">Next ▶</button></div>'; d.classList.add('show');
-  $('lgPula').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); if(JOGO.J.estado==='final') JOGO.pulaFinal(); else JOGO.pulaIntro(); });
-  $('lgNext').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); SOM.fx('clique'); JOGO.confirmar(); }); try{ say(cena.en); }catch(e){} }
+function legenda(cena,acoes){ var d=$('legenda'); if(!cena){ d.classList.remove('show'); return; } d.innerHTML='<p>'+bi(cena.en,cena.pt)+'</p><div class="lgrow"><button class="mini" id="lgPula">Skip</button><button class="lgnext" id="lgNext">'+(cena.botao||'Next ▶')+'</button></div>'; d.classList.add('show');
+  $('lgPula').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); if(acoes&&acoes.pula){ acoes.pula(); return; } if(JOGO.J.estado==='final') JOGO.pulaFinal(); else JOGO.pulaIntro(); });
+  $('lgNext').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); SOM.fx('clique'); if(acoes&&acoes.next){ acoes.next(); return; } JOGO.confirmar(); }); try{ say(cena.en); }catch(e){} }
 
 /* ---------- escolha do herói ---------- */
 var HEROIS=[{k:'lia',en:'Lia, the knight',pt:'Lia, a cavaleira'},{k:'theo',en:'Theo, the wizard',pt:'Theo, o aprendiz de mago'},{k:'bia',en:'Bia, the gymnast',pt:'Bia, a ginasta'},{k:'leo',en:'Leo, the football player',pt:'Leo, o jogador de futebol'}];
 var CORES=['#dc2626','#2563eb','#16a34a','#eab308','#9333ea','#ec4899','#f97316','#0d9488'];
+/* escolha do herói: os quatro ficam INTEIROS no canvas, em cima; aqui embaixo, o nome de cada um bem
+   embaixo do seu herói (mesmas colunas), as cores e o "Let's go!". Tocar no herói também escolhe. */
+function selecionaHeroi(k){ if(!k) return; SOM.init(); SOM.fx('plim'); heroiEscolhido=k; var hs=$('mcard').querySelectorAll('.hbtn'); [].slice.call(hs).forEach(function(x){ x.classList.toggle('on',x.getAttribute('data-k')===k); }); try{ var H=HEROIS.filter(function(x){ return x.k===k; })[0]; if(H) say(H.en); }catch(e){} }
 function escolhaHeroi(cb){
   heroiEscolhido=JOGO.J.prog.heroi||'lia';
   var h='<div class="hsel">';
@@ -62,10 +65,17 @@ function escolhaHeroi(cb){
   h+='</div><div class="hcores">'; CORES.forEach(function(cor){ h+='<button class="hcor'+(JOGO.J.prog.cor===cor?' on':'')+'" data-c="'+cor+'" style="background:'+cor+'" aria-label="color"></button>'; }); h+='</div>';
   h+='<button class="mbtn pri" id="mOk">'+bi("Let's go!",'Vamos!')+'</button>';
   menu(h,{mOk:function(){ JOGO.J.prog.heroi=heroiEscolhido; fechaMenu(); cb(); }},'escolha');
-  [].slice.call($('mcard').querySelectorAll('.hbtn')).forEach(function(b){ b.addEventListener('click',function(){ SOM.init(); SOM.fx('plim'); heroiEscolhido=b.getAttribute('data-k'); [].slice.call(b.parentNode.children).forEach(function(x){ x.classList.toggle('on',x===b); }); }); });
+  [].slice.call($('mcard').querySelectorAll('.hbtn')).forEach(function(b){ b.addEventListener('click',function(){ selecionaHeroi(b.getAttribute('data-k')); }); });
   [].slice.call($('mcard').querySelectorAll('.hcor')).forEach(function(b){ b.addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); var cor=b.getAttribute('data-c'); JOGO.J.prog.cor= JOGO.J.prog.cor===cor?null:cor; [].slice.call(b.parentNode.children).forEach(function(x){ x.classList.toggle('on',JOGO.J.prog.cor&&x===b); }); }); });
 }
 
+/* ---------- aviso de PODER novo (capa no céu, roupa de mergulho no recife): pausa e explica ---------- */
+function aviso(icone,tit,titPt,txt,txtPt,btn,btnPt){
+  if(menuAberto) return; JOGO.pausa(true);
+  var h='<h2>'+bi(tit,titPt,'small')+'</h2><p>'+bi(txt,txtPt)+'</p><button class="mbtn pri" id="mOk">'+bi(btn,btnPt)+'</button>';
+  menu(h,{mOk:function(){ fechaMenu(); var i=JOGO.J.in; i.left=i.right=i.jump=i.down=false; JOGO.pausa(false); }},'festa');
+  try{ say(tit+' '+txt); }catch(e){}
+}
 /* ---------- cartão do reino no mapa ---------- */
 function cartaoMapa(f){
   var d=$('mapCard'); if(!d) return;
@@ -99,7 +109,7 @@ function pausa(){
   h+='<button class="mbtn" id="mMapa">'+bi('Leave to the map','Sair para o mapa')+'</button>';
   menu(h,{mCont:function(){ fechaMenu(); JOGO.pausa(false); }, mSfx:function(){ SOM.setSfx(!SOM.sfx); $('mSfx').textContent='Sounds: '+(SOM.sfx?'on':'off'); }, mMus:function(){ SOM.setMus(!SOM.mus); $('mMus').textContent='Music: '+(SOM.mus?'on':'off'); },
     mVoz:function(){ try{ toggleSom(); }catch(e){} $('mVoz').textContent='Voice: '+(window.somLigado?'on':'off'); },
-    mMapa:function(){ fechaMenu(); JOGO.pausa(false); if(JOGO.J.quiz) QUIZ.sai(); quizBotoes(false); JOGO.irMapa(); }});
+    mMapa:function(){ fechaMenu(); saiParaMapa(); }});
 }
 function comoJogar(cb){
   var h='<h2>'+bi('How to play','Como jogar')+'</h2><div class="como">';
@@ -124,8 +134,16 @@ function creditos(){
   h+='</div><button class="mbtn pri" id="mMapa">'+bi('Back to the map','Voltar ao mapa')+'</button>';
   menu(h,{mMapa:function(){ fechaMenu(); JOGO.irMapa(); }},'festa');
 }
+function saiParaMapa(){ JOGO.pausa(false); if(JOGO.J.quiz&&window.QUIZ) QUIZ.sai(); quizBotoes(false); legenda(null); if(window.CHEFAO&&CHEFAO.ativo()) CHEFAO.limpa(); JOGO.irMapa(); try{ speechSynthesis.cancel(); }catch(e){} }
 function confirmaCasa(){
-  if(menuAberto) return; var estava=JOGO.J.pausado; JOGO.pausa(true);
+  if(menuAberto) return; var estava=JOGO.J.pausado, st=JOGO.J.estado;
+  if(['nivel','quiz','corrida','estadio','cano','fimFase','chefeIntro'].indexOf(st)>=0){
+    JOGO.pausa(true);
+    menu('<h2>'+bi('Back to the map?','Voltar ao mapa?')+'</h2><p>'+bi('You can come back to this kingdom any time.','Você pode voltar a este reino quando quiser.')+'</p><div class="mrow"><button class="mbtn" id="mNao">'+bi('Stay','Ficar')+'</button><button class="mbtn pri" id="mSim">'+bi('Go to the map','Ir para o mapa')+'</button></div>',
+      {mNao:function(){ fechaMenu(); JOGO.pausa(estava); }, mSim:function(){ fechaMenu(); saiParaMapa(); }});
+    return;
+  }
+  JOGO.pausa(true);
   menu('<h2>'+bi('Leave the game?','Sair do jogo?')+'</h2><p>'+bi('Your progress is saved.','Seu progresso fica salvo.')+'</p><div class="mrow"><button class="mbtn" id="mNao">'+bi('Stay','Ficar')+'</button><button class="mbtn danger" id="mSim">'+bi('Leave','Sair')+'</button></div>',
     {mNao:function(){ fechaMenu(); JOGO.pausa(estava); }, mSim:function(){ goHome(); }});
 }
@@ -154,7 +172,7 @@ function keydown(e){
   var k=e.key, J2=JOGO.J, m=menuAberto;
   if(k==='Escape'){ e.preventDefault(); if(J2.estado==='quiz'&&!m){ QUIZ.sai(); return; } if(m){ if(J2.estado==='nivel'||J2.estado==='quiz'){ fechaMenu(); JOGO.pausa(false); } } else pausa(); return; }
   if(m){ if(k==='Enter'){ var pri=$('mcard').querySelector('.mbtn.pri'); if(pri){ e.preventDefault(); pri.click(); } } return; }
-  if(J2.estado==='intro'||J2.estado==='mapa'||J2.estado==='final'||J2.estado==='capa'){
+  if(J2.estado==='intro'||J2.estado==='mapa'||J2.estado==='final'||J2.estado==='capa'||J2.estado==='chefeIntro'){
     if(k==='Enter'||k===' '){ e.preventDefault(); JOGO.confirmar(); return; }
     if(J2.estado==='mapa'){ if(k==='ArrowRight'||k==='d'||k==='D') JOGO.mapaMove(1); if(k==='ArrowLeft'||k==='a'||k==='A') JOGO.mapaMove(-1); }
     return;
@@ -200,14 +218,14 @@ function init(){
   $('btnTr').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); alternaTr(); });
   $('btnHome').addEventListener('click',function(){ SOM.init(); if(window.screenLocked) return; confirmaCasa(); });
   $('btnHelp').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); if(menuAberto) return; var J=JOGO.J, p=(J.estado==='nivel'||J.estado==='quiz'); if(p) JOGO.pausa(true); comoJogar(function(){ if(p) JOGO.pausa(false); }); });
-  $('btnPause').addEventListener('click',function(){ SOM.init(); if(menuAberto){ fechaMenu(); JOGO.pausa(false); } else pausa(); });
+  $('btnPause').addEventListener('click',function(){ SOM.init(); if(menuAberto){ if(JOGO.J.estado==='fimFase') return; fechaMenu(); JOGO.pausa(false); } else pausa(); });
   $('qSair').addEventListener('click',function(){ SOM.init(); QUIZ.sai(); });
   $('qDica').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); QUIZ.alternaDica(); });
   $('qOuvir').addEventListener('click',function(){ SOM.init(); QUIZ.ouvir(); });
   initLock();
   botaoToque('tLeft','left'); botaoToque('tRight','right'); botaoToque('tJump','jump'); botaoToque('tDown','down'); botaoToque('tAct','act');
   var cv=$('game');
-  cv.addEventListener('pointerdown',function(e){ SOM.init(); if(e.pointerType==='touch') document.body.classList.remove('kbd'); if(menuAberto) return; JOGO.toque(e.clientX,e.clientY); });
+  cv.addEventListener('pointerdown',function(e){ SOM.init(); if(e.pointerType==='touch') document.body.classList.remove('kbd'); if(menuAberto&&JOGO.J.estado!=='escolha') return; JOGO.toque(e.clientX,e.clientY); });
   cv.addEventListener('pointermove',function(e){ if(e.pointerType==='mouse'&&!menuAberto){ var p=JOGO.paraLogico(e.clientX,e.clientY); JOGO.mapaHover(p.x,p.y); } });
   window.addEventListener('keydown',keydown); window.addEventListener('keyup',keyup);
   window.addEventListener('blur',function(){ var i=JOGO.J.in; i.left=i.right=i.jump=i.down=false; });
@@ -222,7 +240,7 @@ function init(){
 }
 document.addEventListener('DOMContentLoaded',init);
 
-return {SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, acao:acao, coracoes:coracoes, botaoCapa:botaoCapa, modoCorrida:modoCorrida, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
+return {aviso:aviso, selecionaHeroi:selecionaHeroi, saiParaMapa:saiParaMapa, SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, acao:acao, coracoes:coracoes, botaoCapa:botaoCapa, modoCorrida:modoCorrida, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
   creditos:creditos, menu:menu, fechaMenu:fechaMenu, fimFase:fimFase, pausa:pausa, comoJogar:comoJogar, historia:historia, confirmaCasa:confirmaCasa, confirmaRecomecar:confirmaRecomecar, alternaTr:alternaTr,
   menuAberto:function(){ return menuAberto; }};
 })();
