@@ -88,7 +88,7 @@ function fimDeFase(){
 function voltaMapa(){ var f=J.faseAtual, novo=f&&J.prog.fases[f.id]&&J.prog.fases[f.id].novo; if(novo){ J.prog.fases[f.id].novo=false; G.salva(); } var i=F.LISTA.indexOf(f); irMapa(novo&&i<F.LISTA.length-1?i+1:false); }
 function irMapa(animaPara){
   if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false);
-  J.estado='mapa'; J.nivel=null; J.mundo=null; J.tut=null; J.part=[]; J.clima=[]; J.faseAtual=null; J.t=0; J.dica=null; J.quiz=null; J.pip=null;
+  J.estado='mapa'; J.agarrado=null; J.soltouT=0; if(window.UI) UI.acao(false,0); J.nivel=null; J.mundo=null; J.tut=null; J.part=[]; J.clima=[]; J.faseAtual=null; J.t=0; J.dica=null; J.quiz=null; J.pip=null;
   F.posiciona();
   J.sel=animaPara?animaPara-1:G.proximaFase(); J.mapaAnim= animaPara?{de:animaPara-1,para:animaPara,t:0,dur:2.2}:null;
   SOM.musica('mapa'); G.hud();
@@ -189,7 +189,7 @@ function passo(ts){
   if(J.shake>0) J.shake=Math.max(0,J.shake-dt*30); if(J.flash>0) J.flash=Math.max(0,J.flash-dt*2);
   atualizaTrans(dt);
   switch(J.estado){
-    case 'nivel': if(!J.trans||J.trans.fase==='abre'){ G.fisica(dt); if(J.estado==='nivel') atualizaNivel(dt); if(J.mundo&&J.estado!=='mapa') atualizaCamera(dt); } break;
+    case 'nivel': if(J.mundo&&J.urso&&(!J.trans||J.trans.fase==='abre')){ G.fisica(dt); if(J.estado==='nivel') atualizaNivel(dt); if(J.mundo&&J.estado!=='mapa') atualizaCamera(dt); } break;
     case 'cano': break;
     case 'chefeIntro': if(window.CHEFAO) CHEFAO.atualiza(dt); break;
     case 'quiz': if(window.QUIZ) QUIZ.atualiza(dt); if(J.chefe&&window.CHEFAO) CHEFAO.anima(dt); break;

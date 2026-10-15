@@ -67,8 +67,8 @@ function fimIntro(){ if(!C) return; if(window.UI){ UI.legenda(null); UI.modoNive
 function daEstrelas(){ var u=J.urso; u.poderes.estrelas=Math.max(u.poderes.estrelas||0,3); if(window.UI) UI.acao(true,u.poderes.estrelas); }
 function comecaFase(n){
   C.fase='p'+n; C.t=0; C.gotas=[]; C.letras=[]; daEstrelas(); SOM.musica('chefao');
-  if(n===1){ C.alvo=0; falaC('My magic inkwells! You will never touch them!','Meus tinteiros mágicos! Você nunca vai tocar neles!'); }
-  if(n===2){ C.convertidas=0; C.ondas=0; falaC('Ink blots! Come out of my inkwell and GET THEM!','Manchas! Saiam do meu tinteiro e PEGUEM!'); }
+  if(n===1){ C.alvo=0; C.tinteiros.forEach(function(q){ q.caido=false; }); falaC('My magic inkwells! You will never touch them!','Meus tinteiros mágicos! Você nunca vai tocar neles!'); }
+  if(n===2){ C.convertidas=0; C.ondas=0; J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; }); falaC('Ink blots! Come out of my inkwell and GET THEM!','Manchas! Saiam do meu tinteiro e PEGUEM!'); }
   if(n===3){ C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); C.nLetra=0; C.tLetra=1.2; falaC('I will write a GIANT word on you!','Vou escrever uma palavra GIGANTE em você!'); }
 }
 function banner(en,pt){ C.banner={en:en,pt:pt,t:0}; SOM.fx('chefao'); J.shake=8; }
@@ -91,7 +91,7 @@ function transicao(n){
 function derrota(){
   C.fase='derrota'; C.t=0; C.estado='sad'; C.gotas=[]; C.letras=[]; SOM.musica(''); SOM.fx('vitoria');
   falaC('Oh no… you found the endings.','Ah, não… você achou os finais.');
-  setTimeout(function(){ if(J.chefe===C) G.iniciaFinal(); },3200);
+  C.t=0;
 }
 /* a pena do Conde: de onde sai tudo que ele joga */
 function pena(){ return {x:C.x-46, y:C.y-170}; }
@@ -120,13 +120,15 @@ function atualiza(dt){
   if(J.estado!=='nivel') return;
   var u=J.urso, R=G.ursoRet(), vivo=u.invT<=0&&u.tontoT<=0;
   if((u.poderes.estrelas||0)<=0&&/^p/.test(C.fase)&&C.t>2) daEstrelas();
-  if(C.fase==='transicao'){ if(C.t>2.8){ C.banner=null; comecaFase(C.prox); } }
+  if(C.fase==='espera'){ if(C.t>2) duelo(); }
+  else if(C.fase==='derrota'){ if(C.t>3.2) G.iniciaFinal(); }
+  else if(C.fase==='transicao'){ if(C.t>2.8){ C.banner=null; comecaFase(C.prox); } }
   else if(C.fase==='p1'){
     var ritmo=2.6-C.alvo*.35;
     if(Math.floor((C.t-dt)/ritmo)!==Math.floor(C.t/ritmo)) novaGota();
     (J.estrelas||[]).forEach(function(e){ var tq=C.tinteiros[C.alvo]; if(tq&&!tq.caido&&Math.abs(e.x-tq.x)<30&&Math.abs(e.y-(tq.y-24))<40){ tq.caido=true; e.dist=999; C.alvo++; SOM.fx('chefao'); J.shake=8; G.brilho(tq.x,tq.y-30,16,'#a78bfa'); C.estado='hit'; C.et=0;
       if(C.alvo<3) falaC(C.alvo===1?'NO! My inkwell!':'Not another one!',C.alvo===1?'NÃO! Meu tinteiro!':'Outro não!'); } });
-    if(C.alvo>=3&&C.t>.5){ C.fase='espera'; C.t=0; C.estado='hit'; falaC('My inkwells! Fine… answer THIS!','Meus tinteiros! Está bem… responda ISTO!'); setTimeout(function(){ if(C&&C.fase==='espera') duelo(); },2000); }
+    if(C.alvo>=3&&C.t>.5){ C.fase='espera'; C.t=0; C.estado='hit'; falaC('My inkwells! Fine… answer THIS!','Meus tinteiros! Está bem… responda ISTO!'); C.t=0; }
   }
   else if(C.fase==='p2'){
     if(Math.floor((C.t-dt)/2.4)!==Math.floor(C.t/2.4)) novaGota();
@@ -134,12 +136,12 @@ function atualiza(dt){
       /* derrama do tinteiro da sacada: caem pela borda e saem andando */
       for(var k=0;k<2;k++) C.gotas.push({x0:SACADA_X0+20,y0:SACADA_Y-10,alvo:SACADA_X0-40-k*70,t:-k*.3,dur:.7,x:SACADA_X0,y:SACADA_Y,r:15,vira:true}); }
     var vencidas=J.mundo.inimigos.filter(function(e){ return e.doConde&&(e.morto||e.achatado); }).length; C.convertidas=vencidas;
-    if(vencidas>=6){ J.mundo.inimigos.forEach(function(e){ if(e.doConde){ e.achatado=true; e.tAch=.3; } }); C.fase='espera'; C.t=0; C.estado='hit'; falaC('Grr! My blots! Answer THIS!','Grr! Minhas manchas! Responda ISTO!'); setTimeout(function(){ if(C&&C.fase==='espera') duelo(); },2000); }
+    if(vencidas>=6){ J.mundo.inimigos.forEach(function(e){ if(e.doConde){ e.achatado=true; e.tAch=.3; } }); C.fase='espera'; C.t=0; C.estado='hit'; falaC('Grr! My blots! Answer THIS!','Grr! Minhas manchas! Responda ISTO!'); C.t=0; }
   }
   else if(C.fase==='p3'){
     C.tLetra-=dt; if(C.tLetra<=0){ C.tLetra=1.5; novaLetra(); }
     /* chegou na sacada pela escada de letras: o duelo final */
-    if(u.noChao&&u.x>SACADA_X0+10&&u.y<=SACADA_Y+6){ C.fase='espera'; C.t=0; C.estado='hit'; C.letras=[]; falaC('WHAT?! You climbed my own letters! Last chance…','O QUÊ?! Você subiu nas minhas letras! Última chance…'); setTimeout(function(){ if(C&&C.fase==='espera') duelo(); },2000); }
+    if(u.noChao&&u.x>SACADA_X0+10&&u.y<=SACADA_Y+6){ C.fase='espera'; C.t=0; C.estado='hit'; C.letras=[]; falaC('WHAT?! You climbed my own letters! Last chance…','O QUÊ?! Você subiu nas minhas letras! Última chance…'); C.t=0; }
   }
   /* gotas e letras voam em ARCO da pena até o alvo; a sombra no chão avisa */
   [C.gotas,C.letras].forEach(function(lista,ehLetra){

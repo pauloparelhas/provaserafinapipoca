@@ -134,7 +134,7 @@ function creditos(){
   h+='</div><button class="mbtn pri" id="mMapa">'+bi('Back to the map','Voltar ao mapa')+'</button>';
   menu(h,{mMapa:function(){ fechaMenu(); JOGO.irMapa(); }},'festa');
 }
-function saiParaMapa(){ JOGO.pausa(false); if(JOGO.J.quiz&&window.QUIZ) QUIZ.sai(); quizBotoes(false); legenda(null); if(window.CHEFAO&&CHEFAO.ativo()) CHEFAO.limpa(); JOGO.irMapa(); }
+function saiParaMapa(){ JOGO.pausa(false); if(JOGO.J.quiz&&window.QUIZ) QUIZ.sai(); quizBotoes(false); legenda(null); if(window.CHEFAO&&CHEFAO.ativo()) CHEFAO.limpa(); JOGO.irMapa(); try{ speechSynthesis.cancel(); }catch(e){} }
 function confirmaCasa(){
   if(menuAberto) return; var estava=JOGO.J.pausado, st=JOGO.J.estado;
   if(['nivel','quiz','corrida','estadio','cano','fimFase','chefeIntro'].indexOf(st)>=0){
@@ -218,7 +218,7 @@ function init(){
   $('btnTr').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); alternaTr(); });
   $('btnHome').addEventListener('click',function(){ SOM.init(); if(window.screenLocked) return; confirmaCasa(); });
   $('btnHelp').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); if(menuAberto) return; var J=JOGO.J, p=(J.estado==='nivel'||J.estado==='quiz'); if(p) JOGO.pausa(true); comoJogar(function(){ if(p) JOGO.pausa(false); }); });
-  $('btnPause').addEventListener('click',function(){ SOM.init(); if(menuAberto){ fechaMenu(); JOGO.pausa(false); } else pausa(); });
+  $('btnPause').addEventListener('click',function(){ SOM.init(); if(menuAberto){ if(JOGO.J.estado==='fimFase') return; fechaMenu(); JOGO.pausa(false); } else pausa(); });
   $('qSair').addEventListener('click',function(){ SOM.init(); QUIZ.sai(); });
   $('qDica').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); QUIZ.alternaDica(); });
   $('qOuvir').addEventListener('click',function(){ SOM.init(); QUIZ.ouvir(); });
