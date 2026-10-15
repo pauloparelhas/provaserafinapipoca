@@ -18,7 +18,7 @@ function inicia(f){
   var itens=QUIZ.escolhe({tema:'realmb'},N,[]);
   R={f:f, itens:itens, i:-1, fase:'largada', t:0, faixa:1, yCarro:FAIXAS[1], dist:0, giro:0, turbo:0, portais:[], coisas:[], acertos:0, paginas:0, fala:null, prox:2.2, quer:0};
   J.estado='corrida'; J.stats={perguntas:0,acertos:0}; J.pontos=0; J.corrida=R;
-  SOM.musica('pradaria'); G.hud(); if(window.UI){ UI.modoNivel(true); UI.modoMapa(false); UI.modoCorrida(true); }
+  SOM.musica('pista'); G.hud(); if(window.UI){ UI.modoNivel(true); UI.modoMapa(false); UI.modoCorrida(true); }
   falaLocutor('Ready… set… GO!','Preparar… apontar… JÁ!');
 }
 function falaLocutor(en,pt,cor){ R.fala={en:en,pt:pt,cor:cor||'#fff',t:0}; try{ say(en); }catch(e){} }

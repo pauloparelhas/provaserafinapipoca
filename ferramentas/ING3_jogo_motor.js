@@ -73,7 +73,7 @@ function iniciaFase(f){
   J.tut= L.passos?{i:0,t:0}:null;
   J.chefe=null; if(f.chefao&&window.CHEFAO){ CHEFAO.limpa(); CHEFAO.inicia(L); }
   J.estado='nivel'; J.flash=.6;
-  SOM.musica(f.chefao?'chefao':((A.CENAS[L.cena]||{}).musica||'floresta')); hud();
+  SOM.musica(f.chefao?'chefao':(window.PARTITURAS&&PARTITURAS.CENAS[L.cena]?L.cena:((A.CENAS[L.cena]||{}).musica||'floresta'))); hud();
   if(window.UI){ UI.modoNivel(true); UI.modoMapa(false); }
 }
 

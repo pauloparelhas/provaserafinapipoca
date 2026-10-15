@@ -15,7 +15,7 @@ var S=null;
 function inicia(f){
   S={f:f, itens:QUIZ.escolhe({tema:'cause'},N,[]), i:-1, fase:'entra', t:0, gols:0, paginas:0, fala:null, bola:{x:BOLA0.x,y:BOLA0.y,r:16}, goleiro:{x:480,alvo:480,pulo:0}, festa:0};
   J.estado='estadio'; J.stats={perguntas:0,acertos:0}; J.pontos=0; J.estadio=S;
-  SOM.musica('cidade'); G.hud(); if(window.UI){ UI.modoNivel(false); UI.modoMapa(false); }
+  SOM.musica('estadio'); G.hud(); if(window.UI){ UI.modoNivel(false); UI.modoMapa(false); }
   proximo();
 }
 function fala(en,pt,cor){ S.fala={en:en,pt:pt,cor:cor||'#fff',t:0}; try{ say(en); }catch(e){} }
