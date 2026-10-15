@@ -26,7 +26,7 @@ function torcida(c,w,h,rows,esp,banco,camisas,tom,k){
       if(hv>.6){ c.fillStyle=mix('#3b2416',tom,.25); c.beginPath(); c.arc(px,y0+rh*.25,rh*.155,PI,TAU); c.fill(); } } }
 }
 function bandeirinhas(c,x0,x1,y,sag,t,cores){ var cx=(x0+x1)/2, cy=y+sag*2; c.strokeStyle='rgba(20,25,50,.8)'; c.lineWidth=1.2; c.beginPath(); c.moveTo(x0,y); c.quadraticCurveTo(cx,cy,x1,y); c.stroke();
-  var n=Math.floor((x1-x0)/20); for(var i=1;i<n;i++){ var p=pontoQ(x0,y,cx,cy,x1,y,i/n); c.save(); c.translate(p[0],p[1]); c.rotate(Math.sin(t*2+i)*.1); c.fillStyle=cores[i%cores.length]; c.beginPath(); c.moveTo(-6,0); c.lineTo(6,0); c.lineTo(0,13); c.fill(); c.restore(); } }
+  var n=Math.round((x1-x0)/20); for(var i=1;i<n;i++){ /* round: com floor o fio alternava 23/24 bandeiras (pisca) */ var p=pontoQ(x0,y,cx,cy,x1,y,i/n); c.save(); c.translate(p[0],p[1]); c.rotate(Math.sin(t*2+i)*.1); c.fillStyle=cores[i%cores.length]; c.beginPath(); c.moveTo(-6,0); c.lineTo(6,0); c.lineTo(0,13); c.fill(); c.restore(); } }
 
 /* ============================================================
    GINÁSIO — ginástica artística
@@ -116,7 +116,8 @@ function longeEst(c,cam,t){
   rep(cam,960,function(ox){ c.drawImage(gente,ox,172,960,232); }); c.fillStyle='rgba(12,18,48,.32)'; c.fillRect(0,172,W,232);
   c.fillStyle='#0e1430'; c.fillRect(0,140,W,26); c.fillStyle='#2b3566'; c.fillRect(0,164,W,4);
   rep(cam,24,function(ox){ c.fillStyle='rgba(255,247,214,.85)'; circ(c,ox+12,170,1.8); c.fill(); });
-  for(var f=0;f<10;f++){ var sd=f*7+Math.floor(t*2.5); if(hash(sd)>.55){ var fx=hash(sd+1)*W, fy=190+hash(sd+2)*200; brilho(c,fx,fy,10,'rgba(255,255,255,.95)',.9); cintila(c,fx,fy,5,'#fff'); } }
+  for(var f=0;f<10;f++){ var ph=t*1.2+f*.37, sd=f*7+Math.floor(ph), kf=ph-Math.floor(ph); if(hash(sd)<=.55) continue; /* flashes que acendem e apagam suave, presos à torcida */
+    var af=Math.sin(kf*Math.PI); af*=af; var fx=((hash(sd+1)*1600-cam)%1000+1000)%1000-20, fy=190+hash(sd+2)*200; c.save(); c.globalAlpha=af; brilho(c,fx,fy,10,'rgba(255,255,255,.95)',.9); cintila(c,fx,fy,5,'#fff'); c.restore(); }
   c.fillStyle=lin(c,0,400,0,452,'#1a2350','#0f1534'); c.fillRect(0,400,W,52); c.fillStyle='#0c112a'; c.fillRect(0,452,W,H-452);
 }
 function placaLed(c,x,y,i){ var cores=[['#1d4ed8','#1e3a8a'],['#dc2626','#991b1b'],['#16a34a','#14532d'],['#f59e0b','#b45309'],['#7c3aed','#4c1d95']], k=cores[i%5];
@@ -149,7 +150,7 @@ function chaoEst(c,s){
 }
 function platEst(c,p){
   sombraPlat(c,p,5); c.save(); rr(c,p.x,p.y,p.w,p.h,5); c.clip();
-  for(var x=p.x;x<p.x+p.w;x+=28){ c.fillStyle=Math.floor((x-p.x)/28)%2?'#4fb354':'#42a048'; c.fillRect(x,p.y,28,p.h); }
+  for(var x=p.x,kk=0;x<p.x+p.w;x+=28,kk++){ c.fillStyle=kk%2?'#4fb354':'#42a048'; c.fillRect(x,p.y,28,p.h); }
   c.fillStyle='#6b4a2a'; c.fillRect(p.x,p.y+p.h-5,p.w,5); c.fillStyle='rgba(255,255,255,.9)'; c.fillRect(p.x,p.y+3,p.w,3); c.fillStyle='rgba(255,255,255,.25)'; c.fillRect(p.x,p.y,p.w,1.5); c.restore();
   c.fillStyle='#6fcf6a'; for(x=p.x+3;x<p.x+p.w-3;x+=6){ c.beginPath(); c.moveTo(x,p.y+1); c.lineTo(x+2,p.y-3-hash(x)*3); c.lineTo(x+4,p.y+1); c.fill(); }
 }

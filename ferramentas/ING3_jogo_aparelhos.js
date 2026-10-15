@@ -80,7 +80,7 @@ function atualiza(dt){
   balancaTodos(M,dt); tentaAgarrar(M);
   /* ritmo */
   var fase=Math.floor(J.t/(2*BATIDA))%2, dentro=(J.t%(2*BATIDA))/(2*BATIDA);
-  (M.plats||[]).forEach(function(p){ if(!p.ritmo) return; var vis=(p.ritmo==='t')===(fase===0); p.visivel=vis; p.pisca=vis&&dentro>.75; if(!vis&&u.sobre===p){ u.sobre=null; u.noChao=false; } });
+  (M.plats||[]).forEach(function(p){ if(!p.ritmo) return; var vis=(p.ritmo==='t')===(fase===0); p.visivel=vis; p.pisca=vis&&dentro>.6; if(!vis&&u.sobre===p){ u.sobre=null; u.noChao=false; } });
   /* salto */
   var R=G.ursoRet();
   /* salto: o trampolim SEMPRE lança alto e para a frente (correndo, mais longe); o impulso não é cortado ao soltar PULAR */
@@ -113,7 +113,7 @@ function desenha(c,t){
 function plataforma(c,p,cena,t){
   if(p.trave){ c.fillStyle='#a16207'; A.rr(c,p.x,p.y,p.w+1,p.h,4); c.fill(); c.fillStyle='#fde68a'; c.fillRect(p.x,p.y,p.w+1,3); c.fillStyle='#78716c'; if(Math.round(p.x/45)%6===0){ c.fillRect(p.x+18,p.y+p.h,6,450-p.y-p.h); } return true; }
   if(p.ritmo){ if(!p.visivel){ c.save(); c.globalAlpha=.18; c.strokeStyle='#fff'; c.setLineDash([5,5]); A.rr(c,p.x+2,p.y,p.w-4,p.h,6); c.stroke(); c.restore(); return true; }
-    var a=p.pisca?(.4+.6*Math.abs(Math.sin(t*20))):1; c.save(); c.globalAlpha=a; c.fillStyle=p.ritmo==='t'?'#ec4899':'#22d3ee'; A.rr(c,p.x+2,p.y,p.w-4,p.h,6); c.fill(); c.fillStyle='rgba(255,255,255,.5)'; A.rr(c,p.x+5,p.y+2,p.w-10,5,3); c.fill(); c.restore(); return true; }
+    var a=p.pisca?(.5+.5*Math.abs(Math.sin(t*9))):1; c.save(); c.globalAlpha=a; c.fillStyle=p.ritmo==='t'?'#ec4899':'#22d3ee'; A.rr(c,p.x+2,p.y,p.w-4,p.h,6); c.fill(); c.fillStyle='rgba(255,255,255,.5)'; A.rr(c,p.x+5,p.y+2,p.w-10,5,3); c.fill(); c.restore(); return true; }
   return false;
 }
 function zagueiro(c,e,t){

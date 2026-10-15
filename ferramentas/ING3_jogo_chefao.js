@@ -112,7 +112,7 @@ function atualiza(dt){
   if(C.raio>0) C.raio=Math.max(0,C.raio-dt*1.5);
   if(C.fase!=='abertura'&&C.escuro>0) C.escuro=Math.max(0,C.escuro-dt);
   /* relâmpago de vez em quando nas janelas (clima) */
-  C.tRaio-=dt; if(C.tRaio<=0){ C.tRaio=7+Math.random()*5; C.raio=1; J.flash=Math.max(J.flash,.35); SOM.fx('quebra'); }
+  C.tRaio-=dt; if(C.tRaio<=0){ C.tRaio=9+Math.random()*5; C.raio=.6; J.flash=Math.max(J.flash,.12); SOM.fx('quebra'); }
   /* o Conde anda pela sacada (não fica parado) */
   if(C.fase!=='abertura'&&C.fase!=='derrota'&&C.fase!=='quiz') C.x=19.2*T+Math.sin(C.t*.7)*1.3*T;
   voa(dt);
@@ -198,7 +198,7 @@ function desenha(c,t){
 /* ---------- na tela: escuridão da abertura, barra do Conde, objetivo, fala, faixa da rodada ---------- */
 function desenhaTela(c,t){
   if(!C) return;
-  if(C.escuro>0){ c.fillStyle='rgba(8,6,20,'+(C.escuro*(.55-C.raio*.4))+')'; c.fillRect(0,0,W,H); }
+  if(C.escuro>0){ c.fillStyle='rgba(8,6,20,'+(C.escuro*(.55-C.raio*.2))+')'; c.fillRect(0,0,W,H); }
   if(C.fase!=='abertura'){
     var x=W/2-160, y=58; c.fillStyle='rgba(0,0,0,.55)'; A.rr(c,x-8,y-6,336,48,12); c.fill();
     c.fillStyle='#e9d5ff'; c.font='900 13px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='top'; c.fillText('COUNT SCRIBBLE',W/2,y-3);

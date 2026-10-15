@@ -13,7 +13,7 @@ var HEROIS=['lia','theo','bia','leo'];
 function desenha(){
   var c=G.ctx(), esc=G.escala(), dpr=G.dpr(); if(!c) return;
   c.setTransform(esc*dpr,0,0,esc*dpr,0,0); c.save();
-  if(J.shake>0) c.translate((Math.random()-.5)*J.shake,(Math.random()-.5)*J.shake);
+  if(J.shake>0){ var sk=J.shake*.5; c.translate(Math.sin(J.t*70)*sk,Math.cos(J.t*53)*sk); } /* tremor suave e previsível (o aleatório chiava) */
   switch(J.estado){
     case 'boot': c.fillStyle='#1c1917'; c.fillRect(0,0,W,H); break;
     case 'intro': desenhaIntro(c); break;

@@ -17,7 +17,7 @@ function atualiza(dt){
     var perto=Math.abs(u.x-ch.x)<560; if(!perto) return;
     if(ch.estado==='anda'){ ch.dir=u.x<ch.x?-1:1; ch.x+=ch.dir*40*dt; if(ch.t>1.4){ ch.estado='prepara'; ch.t=0; } }
     else if(ch.estado==='prepara'){ if(ch.t>.6){ ch.estado='pulo'; ch.t=0; ch.vy=-620; ch.vx=ch.dir*170; SOM.fx('pulo'); } }
-    else if(ch.estado==='pulo'){ ch.vy+=1500*dt; ch.x+=ch.vx*dt; ch.y+=ch.vy*dt; if(ch.y>=ch.y0){ ch.y=ch.y0; ch.estado='anda'; ch.t=0; J.shake=5; SOM.fx('aterra'); G.poeira(ch.x,ch.y,10); } }
+    else if(ch.estado==='pulo'){ ch.vy+=1500*dt; ch.x+=ch.vx*dt; ch.y+=ch.vy*dt; if(ch.y>=ch.y0){ ch.y=ch.y0; ch.estado='anda'; ch.t=0; if(Math.abs(ch.x-(J.cam+480))<480) J.shake=Math.max(J.shake,2); SOM.fx('aterra'); G.poeira(ch.x,ch.y,10); } }
     ch.x=Math.max(ch.x0-380,Math.min(ch.x0+200,ch.x));
     if(u.invT>0||u.tontoT>0||J.estado!=='nivel') return;
     var w=34, h=70;
