@@ -95,3 +95,10 @@ QA mudo: `scratchpad/qa_v3.py` (telas) e `qa_v3b.py` (mecânicas por teletranspo
 - **Perigo com origem visível e aviso**: Chef de Tinta ergue o prato (!) antes de jogar, torneira, telhado, galho de carvalho (bolotas e cipós), pilha de toras, portão de barris, máquina de bolas (luz vermelha), nuvem que sopra, luminária/lanterna dos voadores. Rolante/máquina só disparam com a fonte na tela.
 - **Corrida**: posição final = 10 − respostas certas (turbo passa um carro na tela; turbo automático no fim; batida só atrasa), kart de 20 px com chassi e cor próprios, pelotão visível, curvas que exigem direção com câmera lateral, slalom em reta, rampa por distância. Portão `verifica_corrida.js` endurecido (fórmula das fileiras, curvas, rampa).
 - **Publicação**: o site sai do ramo `em-construcao` via `trabalho/3tri_ingles/publicar_ing3.sh` (push em main não publica).
+
+## Correções de 18/10 (terceira jogada do Paulo)
+- **Corrida v3** (`ING3_jogo_corrida.js` + `ING3_jogo_carrinhos.js`): rali de carrinhos de rolimã temáticos, pista em serpentina vista de cima com câmera que gira junto, física de bicicleta (pivô traseiro, derrapagem), rivais com personalidade e erros visíveis, vácuo, pads, moedas (+0,5% cada), 2 saltos, ponte, pântano, 3 pits (pergunta de conceito + historinha + rápida), minimapa, resgate da fada, apresentação na rampa. Portão `verifica_corrida.js` reescrito. Simulação: bom piloto sem acertos ≈ 4º; com 5–9 acertos, 1º.
+- **Porteiras de tinta** depois de cada entrada (mão única, lado travado) e **seta grande** em cada porta/baú pendente.
+- **Cookie**: leite COM canudo (um item, "Drink!"), roda da história no topo, vassoura varre na hora; ESPAÇO usa o poder.
+- **Roupa de mergulho e capa das nuvens** vestidas em todas as poses depois de pegas.
+- **Release** só depois do playtester (agente que joga e olha screenshots) dar LIBERA.
