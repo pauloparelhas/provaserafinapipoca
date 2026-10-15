@@ -183,6 +183,7 @@ function keydown(e){
   if(J2.estado==='quiz'&&QUIZ.tecla(k)){ e.preventDefault(); return; }
   if(J2.estado==='corrida'&&CORRIDA.tecla(k)){ e.preventDefault(); return; }
   if(J2.estado==='estadio'&&ESTADIO.tecla(k)){ e.preventDefault(); return; }
+  if(k===' '&&J2.estado==='nivel'&&window.PODERES&&(PODERES.tiroAtual()||(J2.faseAtual&&J2.faseAtual.chefao&&J2.urso&&J2.urso.poderes.estrelas>0))){ e.preventDefault(); if(!e.repeat&&window.PERIGOS) PERIGOS.atira(); return; } /* 18/10: ESPAÇO = usar o poder; pular fica no ↑ / W */
   var ac=mapaTeclas[k]; if(ac){ e.preventDefault(); if(ac==='act'&&!e.repeat&&window.PERIGOS){ PERIGOS.atira(); return; } J2.in[ac]=true; }
 }
 function keyup(e){ var ac=mapaTeclas[e.key]; if(ac) JOGO.J.in[ac]=false; }

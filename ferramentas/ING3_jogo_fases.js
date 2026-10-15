@@ -91,8 +91,8 @@ function parse(rows,opts){
   L.segs=segs;
   if(L.inicioY===undefined) L.inicioY=CHAO_Y;
   /* itens da história do Mouse: na ordem do livro, da esquerda para a direita */
-  var NOMES=['cookie','milk','straw','napkin','mirror','scissors','broom','tape','cookie'];
-  L.itens.filter(function(it){ return it.tipo==='historia'; }).sort(function(a,b){ return a.x-b.x; }).forEach(function(it,i,arr){ it.ordem= (i===arr.length-1&&i>0)?8:i; it.nome=NOMES[it.ordem]; }); /* o último é sempre o biscoito de novo: a história volta ao começo */
+  var NOMES=['cookie','milk','napkin','mirror','scissors','broom','tape','cookie']; /* 18/10: o canudo vem no copo de leite */
+  L.itens.filter(function(it){ return it.tipo==='historia'; }).sort(function(a,b){ return a.x-b.x; }).forEach(function(it,i,arr){ it.ordem= (i===arr.length-1&&i>0)?8:i; it.nome=NOMES[Math.min(i,NOMES.length-1)]; it.fim=i===arr.length-1&&i>0; if(it.fim) it.nome='cookie'; }); /* o último é sempre o biscoito de novo: a história volta ao começo */
   return L;
 }
 

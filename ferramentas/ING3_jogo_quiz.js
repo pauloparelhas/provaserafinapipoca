@@ -24,6 +24,7 @@ function escolhe(f,n,jaNaFase){
   var u=usadas(), novas=pool.filter(function(it){ return u.indexOf(it.id)<0; });
   if(novas.length<n){ var ids=pool.map(function(it){ return it.id; }); try{ localStorage.setItem(USADAS,JSON.stringify(u.filter(function(id){ return ids.indexOf(id)<0; }))); }catch(e){} novas=pool; }
   var sel=[], leit=0;
+  if(f.mix){ f.mix.forEach(function(tp){ var c=embaralha(novas.filter(function(it){ return it.tipo===tp&&sel.indexOf(it)<0; }))[0]||embaralha(pool.filter(function(it){ return it.tipo===tp&&sel.indexOf(it)<0; }))[0]; if(c) sel.push(c); }); if(sel.length>=n) return sel.slice(0,n); }
   embaralha(novas).forEach(function(it){ if(sel.length>=n) return; if(it.tipo==='leitura'){ if(leit>=1) return; leit++; } sel.push(it); });
   return sel;
 }

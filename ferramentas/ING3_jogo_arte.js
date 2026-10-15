@@ -244,7 +244,7 @@ function rasteja(c,K,t){
 
 A.heroi=function(c,x,y,estado,t,dir,escala,quem,look){
   var H0=HEROIS[quem]||HEROIS.lia; quem=HEROIS[quem]?quem:'lia';
-  var K={q:quem,pele:H0.pele,peleS:H0.peleS,cab:H0.cab,cabS:H0.cabS,olho:H0.olho,cilio:H0.cilio,cor:(look&&look.cor)||H0.cor,capa:look&&look.capa,mergulho:estado==='swim'};
+  var K={q:quem,pele:H0.pele,peleS:H0.peleS,cab:H0.cab,cabS:H0.cabS,olho:H0.olho,cilio:H0.cilio,cor:(look&&look.cor)||H0.cor,capa:(look&&look.capaNuvem)?'#7c3aed':(look&&look.capa),capaNuvem:!!(look&&look.capaNuvem),mergulho:estado==='swim'||!!(look&&look.mergulho)}; /* 18/10: com a roupa pega, ela fica vestida também fora d'água e parada */
   escala=escala||1; dir=dir||1; t=t||0;
   c.save(); c.translate(x,y); c.scale(dir*escala,escala); c.lineJoin='round'; c.lineCap='round';
   if(estado==='crawl'){ rasteja(c,K,t); c.restore(); return; }
@@ -255,7 +255,7 @@ A.heroi=function(c,x,y,estado,t,dir,escala,quem,look){
   c.translate(0,P.bob);
   if(P.corpo){ c.translate(0,-30); c.rotate(P.corpo); c.translate(0,30); }
   c.rotate(P.rot+P.lean); c.scale(P.sx,P.sy);
-  if((quem==='lia'&&estado!=='swim')||estado==='fly') capa(c,K,P,t,estado==='fly');
+  if((quem==='lia'&&!K.mergulho)||estado==='fly'||K.capaNuvem) capa(c,K,P,t,estado==='fly');
   braco(c,K,P.aF,5,true,t,estado);
   perna(c,K,P.lF,3,true);
   perna(c,K,P.lN,-3,false);

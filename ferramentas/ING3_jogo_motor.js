@@ -83,6 +83,7 @@ function solidos(M){
   var s=[]; M.segs.forEach(function(g){ s.push(g); }); M.tijolos.forEach(function(b){ if(b.vivo) s.push({x:b.x,y:b.y,w:b.w,h:b.h,tijolo:b}); });
   M.canos.forEach(function(p){ s.push({x:p.x,y:p.y,w:p.w,h:p.h,cano:p}); });
   if(window.PERIGOS) PERIGOS.solidosExtra(M,s);
+  if(window.PODERES) PODERES.solidos(M,s); /* porteiras de tinta: só abrem depois das perguntas */
   if(J.chefe&&window.CHEFAO) CHEFAO.solidos(s); /* letras caídas do Conde: a escada até a sacada */
   return s;
 }
@@ -199,7 +200,7 @@ function perigos(dt){
   var u=J.urso, M=J.mundo, R=ursoRet();
   if(u.invT>0) u.invT-=dt;
   M.moedas.forEach(function(m){ if(!m.pega && colideRet(R.x,R.y,R.w,R.h,m.x-m.r,m.y-m.r,m.r*2,m.r*2)){ m.pega=true; J.moedas+=m.big?5:1; pontua(m.big?50:10,m.x,m.y-10); SOM.fx(m.big?'moedaG':'moeda'); brilho(m.x,m.y,m.big?14:5); } });
-  M.itens.forEach(function(it){ if(!it.pego && (it.tipo==='maca'||it.tipo==='bota'||it.tipo==='estrelas') && colideRet(R.x,R.y,R.w,R.h,it.x-18,it.y-18,36,36)) pegaItem(it); });
+  M.itens.forEach(function(it){ if(!it.pego && (it.tipo==='maca'||it.tipo==='bota'||it.tipo==='estrelas'||(it.tipo==='historia'&&it.nome!=='milk')) && colideRet(R.x,R.y,R.w,R.h,it.x-18,it.y-18,36,36)) pegaItem(it); });
   M.ovos.forEach(function(o){ if(!o.chocado && !u.montado && colideRet(R.x,R.y,R.w,R.h,o.x-22,o.y-50,44,50)){ o.chocado=true; monta(); J.urso.poderes.tiro='faisca'; if(!J.prog.pipVisto){ J.prog.pipVisto=true; salva(); } if(!J.pipCartao&&window.PODERES){ J.pipCartao=true; PODERES.cartao('pip',PODERES.TAB[2]); PODERES.hudPoder(); } } });
   if(J.pip){ var p=J.pip; p.t+=dt; if(!p.parado){ p.vy+=1400*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; var piso=null; solidos(M).concat(umaVia(M)).forEach(function(b){ if(p.x>b.x&&p.x<b.x+b.w&&p.y>=b.y&&p.y-p.vy*dt<=b.y+4) piso=b.y; }); if(piso!==null&&p.vy>0){ p.y=piso; p.vy=0; p.vx*=.5; if(Math.abs(p.vx)<20){ p.parado=true; } } if(p.y>M.h+100){ p.x=J.respawn.x+60; p.y=J.respawn.y; p.vy=0; } }
     if(p.t>1 && u.invT<=.3 && colideRet(R.x,R.y,R.w,R.h,p.x-24,p.y-50,48,50)) monta(); }
