@@ -56,6 +56,7 @@ function atualiza(dt){
   /* estrelas (projétil) */
   J.estrelas=J.estrelas||[];
   for(var k=J.estrelas.length-1;k>=0;k--){ var e=J.estrelas[k], fim;
+    if(J.chefe&&!e.skin){ if(e.guiada) J.estrelas.splice(k,1); continue; } /* no chefão a estrela é GUIADA (ING3_jogo_chefao.js): não bate na parede antes */
     if(e.skin&&window.PODERES) fim=PODERES.moveTiro(e,dt,M); /* tiro do reino: faísca, bolha, vento, bola, leite */
     else { e.x+=e.vx*dt; e.dist+=Math.abs(e.vx*dt); e.rot+=dt*14;
     fim=e.dist>270||e.x<0||e.x>M.w;
