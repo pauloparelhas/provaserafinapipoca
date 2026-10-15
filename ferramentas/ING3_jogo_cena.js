@@ -25,7 +25,7 @@ function desenha(){
     case 'estadio': if(window.ESTADIO) ESTADIO.desenha(c); break;
     case 'cano': default: desenhaNivel(c);
   }
-  J.clima.forEach(function(p){ A.particula(c,p); });
+  if(!J.mundo||J.estado==='mapa'||J.estado==='capa'||J.estado==='intro'||J.estado==='escolha'||J.estado==='final'||J.estado==='corrida'||J.estado==='estadio') J.clima.forEach(function(p){ A.particula(c,p); });
   if(J.flash>0){ c.fillStyle='rgba(255,255,255,'+(J.flash*.5)+')'; c.fillRect(0,0,W,H); }
   if(J.trans) A.iris(c,J.trans.x,J.trans.y,G.raioIris());
   c.restore();
@@ -80,10 +80,12 @@ function desenhaNivel(c){
   var M=J.mundo, u=J.urso, t=J.t; if(!M) return;
   var sub=/^sub_/.test(M.cena), cena=sub?'sub_caverna':(A.CENAS[M.cena]?M.cena:'floresta');
   if(sub&&A.fundoSub){ A.ceu(c,cena,t); A.fundoSub(c,cena,J.cam*.2,t); } else { A.ceu(c,cena,t); c.save(); A.longe(c,cena,J.cam*.15,t); A.perto(c,cena,J.cam*.45,t); c.restore(); }
+  if(M.modo==='nado'&&M.superficie>40) ceuDoMar(c,M,t);
   c.save(); c.translate(-Math.round(J.cam),-Math.round(J.camY));
   var vx0=J.cam-120, vx1=J.cam+W+120, vis=function(o){ return o.x+(o.w||60)>vx0 && o.x-(o.w?0:60)<vx1; };
   M.agua.forEach(function(a){ if(vis(a)) A.agua(c,a,t); });
   M.segs.forEach(function(s){ if(vis(s)) A.chao(c,s,cena); });
+  if(M.praiaX&&J.cam<M.praiaX+200) praia(c,M,t);
   M.canos.forEach(function(p){ if(vis(p)) A.cano(c,p,cena,t,false); });
   M.plats.forEach(function(p){ if(vis(p)&&!(window.APARELHOS&&APARELHOS.plataforma(c,p,cena,t))) A.plataforma(c,p,cena); });
   if(window.APARELHOS) APARELHOS.desenha(c,t);
@@ -108,26 +110,117 @@ function desenhaNivel(c){
   /* o herói: tamanho + squash & stretch, pisca quando invencível */
   if(!(u.invT>0 && Math.floor(t*14)%2===0)){ var s=TAM[u.tam];
     if(u.montado){ var sela=(A.pip&&A.pip.SELA_Y)||40; pip(c,u.x,u.y,u.noChao?(Math.abs(u.vx)>5?'walk':'idle'):'fly',u.anim,u.dir,1); c.save(); c.translate(u.x,u.y-sela); c.scale(u.sx,u.sy); heroi(c,0,0,'ride',u.anim,u.dir,s,u.quem); c.restore(); }
-    else { c.save(); c.translate(u.x,u.y); if(u.giro){ var hh2=G.URSO_H*s*.5; c.translate(0,-hh2); c.rotate(u.giro); c.translate(0,hh2); } c.scale(u.sx,u.sy); var est2=u.estado==='hang'||u.estado==='spin'?'cheer':null; heroi(c,0,0,est2||(u.abaixado?(Math.abs(u.vx)>8?'crawl':'crouch'):(u.estado==='glide'?'fly':u.estado)),u.anim,u.dir,s,u.quem); c.restore(); } }
+    else { c.save(); c.translate(u.x,u.y); if(u.giro){ var hh2=G.URSO_H*s*(u.estado==='hang'?1:.5); c.translate(0,-hh2); c.rotate(u.giro); c.translate(0,hh2); } c.scale(u.sx,u.sy); var est2=u.estado==='hang'||u.estado==='spin'?'cheer':null; heroi(c,0,0,est2||(u.abaixado?(Math.abs(u.vx)>8?'crawl':'crouch'):(u.estado==='glide'?'fly':u.estado)),u.anim,u.dir,s,u.quem); c.restore(); } }
   J.part.forEach(function(p){ if(!(window.PERIGOS&&PERIGOS.particula(c,p))) A.particula(c,p); });
+  if(J.estado==='nivel') desenhaGuia(c,t,true);
   if(J.dica && J.estado==='nivel') desenhaDica(c,J.dica,t);
   c.restore();
+  if(!J.quiz) J.clima.forEach(function(p){ A.particula(c,p); }); /* clima ANTES do quadro da pergunta: a nuvem nunca cobre o texto */
+  if(J.estado==='nivel') desenhaGuia(c,t,false);
   if(J.chefe&&window.CHEFAO) CHEFAO.desenhaTela(c,t);
   if(J.quiz&&window.QUIZ) QUIZ.desenhaTela(c,t);
   if(J.fimFase){ var k=Math.min(1,J.fimFase.t/.8); c.fillStyle='rgba(13,11,30,'+(k*.35)+')'; c.fillRect(0,0,W,H); if(J.fimFase.t>.3){ c.save(); c.translate(W/2,150); var sc=Math.min(1,(J.fimFase.t-.3)*2.5); c.scale(sc,sc); titulo(c,'Kingdom complete!',0,0,54); c.restore(); } }
 }
+/* ---------- recife: o começo é FORA d'água (céu, sol, ondas e a praia) ---------- */
+function ceuDoMar(c,M,t){
+  var ys=M.superficie-J.camY; if(ys<=0) return;
+  var g=c.createLinearGradient(0,0,0,ys); g.addColorStop(0,'#7dd3fc'); g.addColorStop(1,'#e0f2fe'); c.fillStyle=g; c.fillRect(0,0,W,ys);
+  var sx=760-J.cam*.05; c.fillStyle='rgba(254,240,138,.45)'; A.circ(c,sx,ys-110,46); c.fill(); c.fillStyle='#fde047'; A.circ(c,sx,ys-110,30); c.fill();
+  c.fillStyle='rgba(255,255,255,.9)'; [[120,40],[420,70],[690,30]].forEach(function(n,i){ var nx=((n[0]-J.cam*.1+t*6*(i+1))%(W+200)+W+200)%(W+200)-100, ny=ys-150+n[1]; if(ny<-30) return; A.circ(c,nx,ny,18); c.fill(); A.circ(c,nx+20,ny-8,22); c.fill(); A.circ(c,nx+44,ny,16); c.fill(); });
+  /* linha do mar com ondas */
+  c.fillStyle='rgba(14,116,144,.55)'; c.beginPath(); c.moveTo(0,ys); for(var x=0;x<=W;x+=12) c.lineTo(x,ys+Math.sin((x+J.cam)*.04+t*2.4)*4); c.lineTo(W,ys+14); c.lineTo(0,ys+14); c.closePath(); c.fill();
+  c.strokeStyle='rgba(255,255,255,.85)'; c.lineWidth=3; c.beginPath(); for(var x2=0;x2<=W;x2+=12){ var yy=ys+Math.sin((x2+J.cam)*.04+t*2.4)*4; if(x2===0) c.moveTo(x2,yy); else c.lineTo(x2,yy); } c.stroke();
+}
+function praia(c,M,t){
+  var topo=M.superficie-45, x1=M.praiaX;
+  c.fillStyle=A.lin(c,0,topo,0,topo+50,'#fde68a','#eab308'); c.beginPath(); c.moveTo(-10,topo); c.lineTo(x1,topo); c.quadraticCurveTo(x1+10,topo+20,x1-2,topo+52); c.lineTo(-10,topo+52); c.closePath(); c.fill();
+  c.fillStyle='rgba(180,83,9,.25)'; for(var i=0;i<26;i++){ A.circ(c,10+i*21%x1,topo+8+(i*7%30),1.8); c.fill(); }
+  /* coqueiro e guarda-sol: aqui é a praia, ainda não é o mar */
+  var px=120; c.strokeStyle='#92400e'; c.lineWidth=12; c.lineCap='round'; c.beginPath(); c.moveTo(px,topo+4); c.quadraticCurveTo(px-20,topo-90,px+10,topo-170); c.stroke();
+  c.fillStyle='#16a34a'; for(var f=0;f<6;f++){ var a=f/6*Math.PI*2+Math.sin(t*1.5)*.08; c.save(); c.translate(px+10,topo-170); c.rotate(a); c.beginPath(); c.moveTo(0,0); c.quadraticCurveTo(40,-18,78,6); c.quadraticCurveTo(40,-2,0,0); c.fill(); c.restore(); }
+  c.fillStyle='#7c2d12'; A.circ(c,px+4,topo-160,7); c.fill(); A.circ(c,px+16,topo-162,7); c.fill();
+  var gx=430; c.strokeStyle='#e5e7eb'; c.lineWidth=4; c.beginPath(); c.moveTo(gx,topo+2); c.lineTo(gx,topo-96); c.stroke();
+  ['#ef4444','#fff','#ef4444','#fff','#ef4444'].forEach(function(cor,k){ c.fillStyle=cor; c.beginPath(); c.moveTo(gx,topo-104); c.arc(gx,topo-90,62,Math.PI+k*Math.PI/5,Math.PI+(k+1)*Math.PI/5); c.closePath(); c.fill(); });
+  /* placa: o mar está ali */
+  var bx=x1-60; c.fillStyle='#92400e'; c.fillRect(bx-3,topo-60,6,60); c.fillStyle='#fef3c7'; A.rr(c,bx-46,topo-92,92,38,8); c.fill(); c.strokeStyle='#92400e'; c.lineWidth=3; A.rr(c,bx-46,topo-92,92,38,8); c.stroke();
+  c.fillStyle='#0e7490'; c.font='900 15px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('THE SEA ▶',bx,topo-73);
+}
+/* ---------- guia do caminho (Paulo: faltava indicar portas, baús e canos) ----------
+   alvo = a entrada sem resposta mais perto neste mundo; sem nenhuma aqui, o cano que leva ao outro mundo
+   (se lá ainda há entrada) ou, com tudo feito, o livro do fim. Na tela: seta que pula em cima do alvo;
+   fora da tela: seta na borda apontando para ele. */
+function alvoGuia(){
+  var M=J.mundo, L=J.nivel, u=J.urso; if(!M||!L||J.chefe) return null;
+  var pend=function(W2){ return W2?W2.moradores.filter(function(m){ return !m.feito; }):[]; };
+  var aqui=pend(M), lst=[];
+  aqui.forEach(function(m){ lst.push({x:m.x,y:m.y-60,tipo:'porta'}); });
+  for(var vi=0;vi<lst.length;vi++){ var vx=lst[vi].x-J.cam; if(vx>0&&vx<W) return lst[vi]; } /* uma porta já na tela: ela mesma (o "?" dela basta) */
+  if(!lst.length){
+    var outro=M===L?L.sub:L, pendOutro=pend(outro).length;
+    if(outro&&(pendOutro||M.sub)) M.canos.forEach(function(p){ if(outro.canos.some(function(q){ return q.id===p.id; })) lst.push({x:p.x+p.w/2,y:p.y,tipo:'cano'}); });
+    if(!lst.length&&M.mastro) lst.push({x:M.mastro.x,y:M.mastro.y-60,tipo:'fim'});
+  }
+  if(!lst.length) return null;
+  lst.sort(function(a,b){ var da=a.x-u.x, db=b.x-u.x; return (da<-40?3000:0)+Math.abs(da)-((db<-40?3000:0)+Math.abs(db)); });
+  return lst[0];
+}
+function desenhaGuia(c,t,mundo){
+  var a=alvoGuia(); if(!a) return;
+  var sx=a.x-J.cam, sy=a.y-J.camY, dentro=sx>20&&sx<W-20&&sy>60&&sy<H-20;
+  if(mundo){ if(!dentro||a.tipo==='porta') return; /* a porta já tem o "?" que pula; o cano e o livro ganham a seta */
+    var b=Math.abs(Math.sin(t*4))*12; c.save(); c.translate(a.x,a.y-24-b);
+    c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(-16,-30); c.lineTo(16,-30); c.lineTo(16,-12); c.lineTo(28,-12); c.lineTo(0,14); c.lineTo(-28,-12); c.lineTo(-16,-12); c.closePath(); c.fill(); c.stroke();
+    var txt=a.tipo==='cano'?'Go in: ▼':'The end!'; c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw=c.measureText(txt).width+18; c.fillStyle='rgba(13,11,30,.85)'; A.rr(c,-tw/2,-62,tw,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(txt,0,-49);
+    c.restore(); return; }
+  if(dentro) return;
+  var lado=sx<20?-1:(sx>W-20?1:0), ex=lado<0?44:(lado>0?W-44:Math.max(60,Math.min(W-60,sx))), ey=lado?Math.max(150,Math.min(330,sy)):(sy<60?96:H-150);
+  var ang=Math.atan2(sy-ey,sx-ex), pul=1+.1*Math.sin(t*6);
+  c.save(); c.translate(ex,ey); c.scale(pul,pul);
+  c.fillStyle='rgba(13,11,30,.75)'; A.circ(c,0,0,30); c.fill(); c.strokeStyle='#fde047'; c.lineWidth=3; A.circ(c,0,0,30); c.stroke();
+  c.save(); c.rotate(ang); c.fillStyle='#fde047'; c.beginPath(); c.moveTo(40,0); c.lineTo(24,-12); c.lineTo(24,12); c.closePath(); c.fill(); c.restore();
+  c.fillStyle='#fde047'; c.font='900 24px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(a.tipo==='porta'?'?':(a.tipo==='cano'?'▼':'★'),0,1);
+  c.restore();
+}
+function rotulo(c,txt,y){ c.font='900 13px "Nunito",Arial'; var tw=c.measureText(txt).width+12; c.fillStyle='rgba(13,11,30,.78)'; A.rr(c,-tw/2,y,tw,19,9); c.fill(); c.fillStyle='#fff'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(txt,0,y+10); }
+var NOMES_HIST=['cookie','milk','straw','napkin','mirror','scissors','broom','tape','cookie!'];
 function item(c,it,t){
   var b=Math.sin(t*3+it.x*.03)*4; c.save(); c.translate(it.x,it.y+b);
   var g=c.createRadialGradient(0,0,4,0,0,30); g.addColorStop(0,'rgba(255,255,255,.4)'); g.addColorStop(1,'rgba(255,255,255,0)'); c.fillStyle=g; A.circ(c,0,0,30); c.fill();
   if(it.tipo==='maca'){ c.fillStyle=A.lin(c,-14,-14,14,14,'#f87171','#b91c1c'); A.circ(c,-6,2,13); c.fill(); A.circ(c,6,2,13); c.fill(); c.fillStyle='rgba(255,255,255,.45)'; A.el(c,-8,-4,4,6); c.fill(); c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(0,-8); c.lineTo(2,-18); c.stroke(); c.fillStyle='#22c55e'; A.el(c,8,-16,7,4); c.fill(); A.estrela(c,12,-6,5,'#fde047',t*2); }
   else if(it.tipo==='capa'){ c.fillStyle='#7c3aed'; c.beginPath(); c.moveTo(-14,-14); c.quadraticCurveTo(0,-20,14,-14); c.lineTo(18,14); c.quadraticCurveTo(0,8,-18,14); c.fill(); c.fillStyle='#fbbf24'; A.circ(c,0,-12,3.5); c.fill(); }
-  else if(it.tipo==='historia'){ var n=it.ordem||0; c.fillStyle='rgba(255,255,255,.9)'; A.circ(c,0,0,20); c.fill(); c.strokeStyle='#d97706'; c.lineWidth=3; c.stroke();
-    if(n===0||n===8){ if(A.biscoito) A.biscoito(c,0,0,13,0); } else if(n===1){ c.fillStyle='#e0f2fe'; A.rr(c,-8,-12,16,24,4); c.fill(); c.fillStyle='#fff'; A.rr(c,-6,-4,12,14,3); c.fill(); }
-    else if(n===2){ c.strokeStyle='#ef4444'; c.lineWidth=4; c.beginPath(); c.moveTo(-6,12); c.lineTo(4,-8); c.lineTo(10,-12); c.stroke(); } else if(n===3){ c.fillStyle='#93c5fd'; c.fillRect(-10,-10,20,20); c.strokeStyle='#fff'; c.lineWidth=2; c.strokeRect(-6,-6,12,12); }
-    else if(n===4){ c.fillStyle='#cbd5e1'; A.el(c,0,0,9,12); c.fill(); c.fillStyle='#e0f2fe'; A.el(c,-2,-2,5,8); c.fill(); } else if(n===5){ c.strokeStyle='#64748b'; c.lineWidth=3; c.beginPath(); c.moveTo(-10,-10); c.lineTo(8,8); c.moveTo(10,-10); c.lineTo(-8,8); c.stroke(); A.circ(c,-10,10,4); c.stroke(); A.circ(c,10,10,4); c.stroke(); }
-    else if(n===6){ c.strokeStyle='#92400e'; c.lineWidth=3; c.beginPath(); c.moveTo(8,-12); c.lineTo(-4,6); c.stroke(); c.fillStyle='#fbbf24'; c.beginPath(); c.moveTo(-10,4); c.lineTo(2,8); c.lineTo(-6,14); c.closePath(); c.fill(); } else { c.fillStyle='#d6d3d1'; A.circ(c,0,0,10); c.fill(); c.fillStyle='#fff'; A.circ(c,0,0,4); c.fill(); } }
+  else if(it.tipo==='historia'){ var n=it.ordem||0; c.save(); c.scale(1.5,1.5); histItem(c,n,t); c.restore(); rotulo(c,NOMES_HIST[n]||'',34); }
+  else if(it.tipo==='traje'){ /* roupa de mergulho: máscara, snorkel e pés de pato */
+    c.save(); c.scale(1.3,1.3); c.fillStyle='#0e7490'; A.rr(c,-12,-6,24,26,8); c.fill(); c.fillStyle='#facc15'; c.fillRect(-12,4,24,4);
+    c.fillStyle='#1e293b'; A.rr(c,-14,-22,28,16,7); c.fill(); c.fillStyle='rgba(125,211,252,.85)'; A.rr(c,-11,-19,22,10,5); c.fill(); c.fillStyle='rgba(255,255,255,.7)'; A.rr(c,-8,-18,6,3,1.5); c.fill();
+    c.strokeStyle='#f97316'; c.lineWidth=4; c.lineCap='round'; c.beginPath(); c.moveTo(14,-16); c.lineTo(16,-30); c.stroke();
+    c.fillStyle='#f97316'; c.beginPath(); c.moveTo(-12,20); c.lineTo(-22,30); c.lineTo(-4,30); c.closePath(); c.fill(); c.beginPath(); c.moveTo(12,20); c.lineTo(22,30); c.lineTo(4,30); c.closePath(); c.fill(); c.restore(); rotulo(c,'diving suit',42); }
   else if(it.tipo==='bota'){ c.fillStyle='#b45309'; A.rr(c,-8,-16,14,24,4); c.fill(); A.rr(c,-10,2,26,10,4); c.fill(); c.fillStyle='#fde68a'; A.rr(c,-8,-16,14,5,2); c.fill(); }
   c.restore();
+}
+/* os objetos de "If You Give a Mouse a Cookie", desenhados de verdade (Paulo: não dava para entender) */
+function histItem(c,n,t){
+  c.fillStyle='rgba(255,255,255,.92)'; A.circ(c,0,0,21); c.fill(); c.strokeStyle='#d97706'; c.lineWidth=2.5; A.circ(c,0,0,21); c.stroke();
+  if(n===0||n===8){ if(A.biscoito) A.biscoito(c,0,0,14,0); return; }
+  if(n===1){ /* copo de leite: vidro, leite branco e reflexo */
+    c.fillStyle='rgba(191,219,254,.55)'; c.beginPath(); c.moveTo(-9,-15); c.lineTo(9,-15); c.lineTo(7,15); c.lineTo(-7,15); c.closePath(); c.fill();
+    c.fillStyle='#fff'; c.beginPath(); c.moveTo(-8.4,-7); c.lineTo(8.4,-7); c.lineTo(7,15); c.lineTo(-7,15); c.closePath(); c.fill(); c.strokeStyle='#94a3b8'; c.lineWidth=1.4; c.beginPath(); c.moveTo(-9,-15); c.lineTo(-7,15); c.lineTo(7,15); c.lineTo(9,-15); c.stroke();
+    c.fillStyle='#e2e8f0'; A.el(c,0,-7,8.4,2); c.fill(); c.fillStyle='rgba(255,255,255,.9)'; c.fillRect(-6,-12,2,22); return; }
+  if(n===2){ /* canudo listrado, dobrado */
+    c.save(); c.rotate(-.35); c.lineCap='round'; c.strokeStyle='#fff'; c.lineWidth=6; c.beginPath(); c.moveTo(0,16); c.lineTo(0,-6); c.quadraticCurveTo(0,-12,7,-15); c.stroke();
+    c.strokeStyle='#ef4444'; c.lineWidth=6; c.setLineDash([4,4]); c.beginPath(); c.moveTo(0,16); c.lineTo(0,-6); c.quadraticCurveTo(0,-12,7,-15); c.stroke(); c.setLineDash([]); c.restore(); return; }
+  if(n===3){ /* guardanapo dobrado em triângulo, borda xadrez */
+    c.fillStyle='#fff'; c.beginPath(); c.moveTo(-15,-10); c.lineTo(15,-10); c.lineTo(0,14); c.closePath(); c.fill(); c.strokeStyle='#60a5fa'; c.lineWidth=3; c.stroke();
+    c.strokeStyle='rgba(96,165,250,.6)'; c.lineWidth=1.2; c.beginPath(); c.moveTo(-8,-10); c.lineTo(0,3); c.moveTo(8,-10); c.lineTo(0,3); c.stroke(); return; }
+  if(n===4){ /* espelho de mão */
+    c.fillStyle='#b45309'; A.rr(c,-2.5,6,5,12,2); c.fill(); c.fillStyle='#d97706'; A.el(c,0,-4,11,13); c.fill(); c.fillStyle='#bae6fd'; A.el(c,0,-4,8,10); c.fill(); c.fillStyle='rgba(255,255,255,.8)'; A.el(c,-3,-7,2,4); c.fill(); return; }
+  if(n===5){ /* tesoura */
+    c.strokeStyle='#94a3b8'; c.lineWidth=3.5; c.lineCap='round'; c.beginPath(); c.moveTo(-3,4); c.lineTo(9,-14); c.moveTo(3,4); c.lineTo(-9,-14); c.stroke();
+    c.strokeStyle='#ef4444'; c.lineWidth=3; A.circ(c,-6,10,5); c.stroke(); A.circ(c,6,10,5); c.stroke(); return; }
+  if(n===6){ /* vassoura */
+    c.strokeStyle='#92400e'; c.lineWidth=3.5; c.lineCap='round'; c.beginPath(); c.moveTo(9,-16); c.lineTo(-2,4); c.stroke();
+    c.fillStyle='#facc15'; c.beginPath(); c.moveTo(-6,2); c.lineTo(3,7); c.lineTo(-4,18); c.lineTo(-15,12); c.closePath(); c.fill(); c.strokeStyle='#ca8a04'; c.lineWidth=1; for(var k=0;k<4;k++){ c.beginPath(); c.moveTo(-3+k*1.5,5); c.lineTo(-11+k*2.5,15); c.stroke(); } return; }
+  /* fita adesiva */
+  c.fillStyle='#d6d3d1'; A.circ(c,0,0,12); c.fill(); c.fillStyle='#fff'; A.circ(c,0,0,6); c.fill(); c.strokeStyle='#a8a29e'; c.lineWidth=1.5; A.circ(c,0,0,12); c.stroke(); c.fillStyle='rgba(214,211,209,.9)'; c.fillRect(8,6,10,6);
 }
 function desenhaMastro(c,x,y,t){ /* fim do reino: um grande livro aberto num pedestal */
   c.save(); c.translate(x,y);
@@ -189,12 +282,16 @@ function desenhaCapa(c){
   HEROIS.forEach(function(q,i){ heroi(c,240+i*160,400,'idle',t+i,1,1.2,q); });
 }
 /* ---------- escolha do herói (os cartões ficam no DOM; aqui só o palco) ---------- */
+var HX=[154,371,588,805], HY=318;
 function desenhaEscolha(c){
   var t=J.t, cena=A.CENAS.vila?'vila':'floresta'; A.ceu(c,cena,t); A.longe(c,cena,t*8,t); A.perto(c,cena,t*16,t); A.chao(c,{x:0,y:450,w:W,h:90},cena);
   c.fillStyle='rgba(13,11,30,.25)'; c.fillRect(0,0,W,H);
   var sel=(window.UI&&UI.heroiSel)?UI.heroiSel():(J.prog.heroi||'lia');
-  HEROIS.forEach(function(q,i){ var x=150+i*220, on=q===sel; if(on){ c.fillStyle='rgba(253,224,71,.25)'; A.el(c,x,452,90,16); c.fill(); } heroi(c,x,450,on?(Math.floor(t)%4===0?'cheer':'idle'):'idle',t+i,1,on?1.9:1.5,q); });
-  titulo(c,'Choose your hero',W/2,58,42);
+  HEROIS.forEach(function(q,i){ var x=HX[i], on=q===sel;
+    if(on){ var g=c.createRadialGradient(x,240,10,x,240,120); g.addColorStop(0,'rgba(253,224,71,.45)'); g.addColorStop(1,'rgba(253,224,71,0)'); c.fillStyle=g; A.circ(c,x,240,120); c.fill(); c.fillStyle='rgba(253,224,71,.4)'; A.el(c,x,HY+2,70,13); c.fill(); }
+    else { c.fillStyle='rgba(0,0,0,.25)'; A.el(c,x,HY+2,50,10); c.fill(); }
+    heroi(c,x,HY,on?(Math.floor(t*1.2)%3===0?'cheer':'idle'):'idle',t+i,1,on?1.75:1.45,q); });
+  titulo(c,'Choose your hero',W/2,52,40);
 }
 /* ---------- mapa-livro ---------- */
 function desenhaMapa(c){
@@ -221,5 +318,5 @@ function desenhaMapa(c){
   else if(J.sel>=0&&L[J.sel]){ var f2=L[J.sel]; heroi(c,f2.mx,f2.my-26+Math.sin(t*3)*3,'idle',t,1,.55); }
 }
 
-return {desenha:desenha, titulo:titulo, heroi:heroi};
+return {desenha:desenha, titulo:titulo, heroi:heroi, HX:HX, HY:HY, HEROIS:HEROIS};
 })();

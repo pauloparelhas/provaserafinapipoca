@@ -61,7 +61,7 @@ function redimensiona(){
 function paraLogico(cx,cy){ return {x:(cx-offX)/escala, y:(cy-offY)/escala}; }
 
 /* ---------- carregar reino ---------- */
-function novoUrso(x,y){ return {x:x,y:y,vx:0,vy:0,noChao:true,dir:1,estado:'idle',anim:0,tontoT:0,invT:0,tam:1,sx:1,sy:1,poderes:{capa:false,bota:false,estrelas:0},puloExtra:false,planando:false,cheerT:0,sobre:null,montado:false,quem:J.prog.heroi||'lia'}; }
+function novoUrso(x,y){ return {x:x,y:y,vx:0,vy:0,noChao:true,dir:1,estado:'idle',anim:0,tontoT:0,invT:0,tam:1,sx:1,sy:1,poderes:{capa:false,bota:false,estrelas:0,traje:false,guardanapo:false},puloExtra:false,planando:false,cheerT:0,sobre:null,montado:false,quem:J.prog.heroi||'lia'}; }
 function iniciaFase(f){
   J.faseAtual=f; if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false); if(window.UI) UI.modoMapa(false); J.corrida=null; J.estadio=null;
   if(f.modo==='estadio'&&window.ESTADIO){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; ESTADIO.inicia(f); return; }
@@ -71,10 +71,11 @@ function iniciaFase(f){
   J.respawn={x:L.inicioX,y:L.inicioY,mundo:'main'}; J.stats={perguntas:0,acertos:0}; J.pontos=0;
   L.ovos.forEach(function(o){ o.chocado=false; o.t=0; });
   J.tut= L.passos?{i:0,t:0}:null;
-  J.chefe=null; if(f.chefao&&window.CHEFAO){ CHEFAO.limpa(); CHEFAO.inicia(L); }
+  J.chefe=null; if(window.CHEFAO) CHEFAO.limpa();
   J.estado='nivel'; J.flash=.6; J.estrelas=[]; J.troncosVivos=[]; J.bolasCanhao=[]; if(window.UI){ UI.coracoes(2); UI.acao(false,0); }
   SOM.musica(f.chefao?'chefao':(window.PARTITURAS&&PARTITURAS.CENAS[L.cena]?L.cena:((A.CENAS[L.cena]||{}).musica||'floresta'))); hud();
   if(window.UI){ UI.modoNivel(true); UI.modoMapa(false); }
+  if(f.chefao&&window.CHEFAO) CHEFAO.inicia(L); /* por último: a abertura do chefão congela o herói e esconde os botões */
 }
 
 /* ---------- física do herói ---------- */
@@ -82,6 +83,7 @@ function solidos(M){
   var s=[]; M.segs.forEach(function(g){ s.push(g); }); M.tijolos.forEach(function(b){ if(b.vivo) s.push({x:b.x,y:b.y,w:b.w,h:b.h,tijolo:b}); });
   M.canos.forEach(function(p){ s.push({x:p.x,y:p.y,w:p.w,h:p.h,cano:p}); });
   if(window.PERIGOS) PERIGOS.solidosExtra(M,s);
+  if(J.chefe&&window.CHEFAO) CHEFAO.solidos(s); /* letras caídas do Conde: a escada até a sacada */
   return s;
 }
 function umaVia(M){ var s=M.plats.filter(function(p){ return !p.ritmo||p.visivel; }); M.caindo.forEach(function(p){ if(p.estado!=='sumiu') s.push(p); }); M.movers.forEach(function(p){ s.push(p); }); return s; }
@@ -92,10 +94,16 @@ function fisica(dt){
   var ax=0; if(J.in.left) ax-=1; if(J.in.right) ax+=1;
   u.abaixado=!!(J.in.down&&u.noChao&&!u.montado); if(u.abaixado) ax*=.35; /* ↓ = se arrastar devagar */
   var alvo=ax*VAND*(u.montado?1.1:1)*(u.sobre&&u.sobre.trave?.7:1);
-  u.vx+=(alvo-u.vx)*Math.min(1,dt*18); if(Math.abs(u.vx)<2&&!ax) u.vx=0;
+  if(u.impulsoT>0){ u.impulsoT-=dt; if(ax&&(ax>0)!==(u.vx>0)) u.vx+=(alvo-u.vx)*Math.min(1,dt*6); } /* trampolim/cipó: o impulso para a frente não some no ar */
+  else { u.vx+=(alvo-u.vx)*Math.min(1,dt*18); if(Math.abs(u.vx)<2&&!ax) u.vx=0; }
   if(ax) u.dir=ax>0?1:-1;
   /* pulo (buffer, altura variável, pulo duplo com a bota, planar com a capa ou montado no Pip) */
   var modo=M.modo||'';
+  /* recife: só nada com a roupa de mergulho e DENTRO d'água (começa na praia); céu: só voa depois de pegar a capa (Paulo) */
+  if(modo==='nado'&&!(u.poderes.traje&&(u.y-hh*.5)>(M.superficie||0))) modo='';
+  if(modo==='voo'&&!u.poderes.capa) modo='';
+  if(M.modo==='nado'&&!u.poderes.traje&&M.praiaX&&u.x+hw>M.praiaX-4&&u.vx>0){ u.vx=0; u.x=Math.min(u.x,M.praiaX-4-hw); if(!J.avisoTraje){ J.avisoTraje=1.6; toast('Get the diving suit first!',1800,'Pegue a roupa de mergulho primeiro!'); } }
+  if(J.avisoTraje>0) J.avisoTraje-=dt;
   if(modo==='nado'){ /* Rhyme Reef: roupa de mergulho; cada toque em PULAR dá uma braçada para cima, afunda devagar */
     if(J.in.jump && J.jumpSolto){ u.vy=-330; J.jumpSolto=false; u.noChao=false; SOM.fx('pulo'); emite(4,function(){ return {x:u.x+(Math.random()-.5)*16,y:u.y-hh,vx:(Math.random()-.5)*30,vy:-60-Math.random()*40,vida:1,max:1,tipo:'neve',r:3,cor:'#e0f2fe'}; }); }
     if(!J.in.jump) J.jumpSolto=true;
@@ -108,9 +116,13 @@ function fisica(dt){
     if(u.noChao){ u.vy=VPULO; u.noChao=false; J.jumpSolto=false; u.puloExtra=u.poderes.bota; u.sx=.8; u.sy=1.25; SOM.fx('pulo'); poeira(u.x,u.y,5); u.sobre=null; }
     else if(u.puloExtra){ u.vy=-640; u.puloExtra=false; J.jumpSolto=false; u.sx=.85; u.sy=1.2; SOM.fx('pulo'); brilho(u.x,u.y-20,6,'#fbbf24'); }
   }
-  if(!J.in.jump){ J.jumpSolto=true; if(u.vy<-250) u.vy=-250; }
-  u.planando= (u.poderes.capa||u.montado) && J.in.jump && !u.noChao && u.vy>0;
-  u.vy+=GRAV*dt; if(u.planando&&u.vy>(u.montado?80:95)) u.vy=u.montado?80:95; if(u.vy>900) u.vy=900;
+  /* soltar PULAR corta o pulo (altura variável) — mas NUNCA o impulso de mola, trampolim, cipó ou barra:
+     era esse corte que deixava o pula-pula fraco e o obstáculo depois dele intransponível (Paulo) */
+  if(!J.in.jump){ J.jumpSolto=true; if(u.vy<-250&&!u.lancado) u.vy=-250; }
+  if(u.lancado&&u.vy>=0) u.lancado=false;
+  u.planando= (u.poderes.capa||u.montado||u.poderes.guardanapo) && J.in.jump && !u.noChao && u.vy>0;
+  var teto=u.montado?80:(u.poderes.capa?95:170); /* guardanapo: só freia a queda, não é voo */
+  u.vy+=GRAV*dt; if(u.planando&&u.vy>teto) u.vy=teto; if(u.vy>900) u.vy=900;
   }
   var nx=u.x+u.vx*dt, ny=u.y+u.vy*dt;
   var sol=solidos(M), via=umaVia(M);
@@ -127,7 +139,7 @@ function fisica(dt){
     var topo=ny-hh;
     sol.forEach(function(b){ if(u.x+hw-6>b.x && u.x-hw+6<b.x+b.w && topo<=b.y+b.h && (u.y-hh)>=b.y+b.h-6){ ny=b.y+b.h+hh; u.vy=120; if(b.tijolo) quebraTijolo(b.tijolo); if(b.placa&&window.QUIZ) QUIZ.bate(b.placa); } });
   }
-  u.y=ny; u.noChao=noChao; u.sobre=sobre;
+  u.y=ny; u.noChao=noChao; u.sobre=sobre; if(noChao) u.impulsoT=0;
   if(modo==='nado') u.estado= noChao&&Math.abs(u.vx)<5?'idle':'swim';
   else if(modo==='voo') u.estado= noChao?(Math.abs(u.vx)>5?'walk':'idle'):'fly';
   else if(!noChao) u.estado=u.planando?'glide':(u.vy<0?'jump':'fall'); else u.estado=Math.abs(u.vx)>5?'walk':'idle';
@@ -144,13 +156,19 @@ function pegaItem(it){
   var u=J.urso; it.pego=true; brilho(it.x,it.y,12,'#fff');
   switch(it.tipo){
     case 'maca': if(u.tam<2){ u.tam++; u.sx=1.3; u.sy=1.3; } if(window.UI) UI.coracoes(u.tam+1); SOM.fx('moedaG'); pontua(50,it.x,it.y); break;
-    case 'capa': u.poderes.capa=true; SOM.fx('destrava'); toast('A cape! Hold JUMP in the air to float',2600,'Uma capa! Segure PULAR no ar para planar'); break;
+    case 'capa': u.poderes.capa=true; SOM.fx('destrava');
+      if(J.mundo&&J.mundo.modo==='voo'&&window.UI&&UI.aviso){ J.in.left=J.in.right=J.in.jump=false; UI.aviso('capa','The magic cape!','A capa mágica!',
+        'Now you can FLY! Hold JUMP (▲) to go up. Let go to float down. The sky is full of surprises…','Agora você pode VOAR! Segure PULAR (▲) para subir. Solte para descer devagar. O céu está cheio de surpresas…',"Let's fly! ▶",'Vamos voar!'); }
+      else toast('A cape! Hold JUMP in the air to float',2600,'Uma capa! Segure PULAR no ar para planar'); break;
+    case 'traje': u.poderes.traje=true; SOM.fx('destrava'); J.in.left=J.in.right=J.in.jump=false;
+      if(window.UI&&UI.aviso) UI.aviso('traje','A diving suit!','Uma roupa de mergulho!',
+        'Now you can breathe under the sea! Jump into the water. Under the water, tap JUMP (▲) to swim up.','Agora você respira debaixo do mar! Pule na água. Lá embaixo, toque PULAR (▲) para nadar para cima.','Dive in! ▶','Mergulhar!'); break;
     case 'historia': { /* If You Give a Mouse a Cookie: cada objeto, na ordem do livro, dá um poder */
       var H=[['a cookie','um biscoito','moedas'],['a glass of milk','um copo de leite','cura'],['a straw','um canudo','estrelas'],['a napkin','um guardanapo','capa'],['a mirror','um espelho','moedas'],['scissors','uma tesoura','estrelas'],['a broom','uma vassoura','estrelas'],['tape','fita adesiva','cura'],['a cookie again!','um biscoito de novo!','moedas']];
       var h=H[Math.min(H.length-1,it.ordem||0)], ef=h[2];
       if(ef==='cura'&&u.tam<2){ u.tam++; if(window.UI) UI.coracoes(u.tam+1); }
       if(ef==='estrelas'){ u.poderes.estrelas=Math.min(9,(u.poderes.estrelas||0)+3); if(window.UI) UI.acao(true,u.poderes.estrelas); }
-      if(ef==='capa') u.poderes.capa=true;
+      if(ef==='capa') u.poderes.guardanapo=true;
       if(ef==='moedas'){ J.moedas+=5; }
       SOM.fx('moedaG'); pontua(80,it.x,it.y);
       toast((it.ordem? 'He wants ':'If you give a mouse ')+h[0],2600,(it.ordem?'Ele quer ':'Se você der a um ratinho ')+h[1]); break; }
@@ -185,7 +203,7 @@ function perigos(dt){
   M.ovos.forEach(function(o){ if(!o.chocado && !u.montado && colideRet(R.x,R.y,R.w,R.h,o.x-22,o.y-50,44,50)){ o.chocado=true; monta(); if(!J.prog.pipVisto){ J.prog.pipVisto=true; salva(); toast('Pip! Hold JUMP to float',2600,'Pip! Segure PULAR para planar'); } } });
   if(J.pip){ var p=J.pip; p.t+=dt; if(!p.parado){ p.vy+=1400*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; var piso=null; solidos(M).concat(umaVia(M)).forEach(function(b){ if(p.x>b.x&&p.x<b.x+b.w&&p.y>=b.y&&p.y-p.vy*dt<=b.y+4) piso=b.y; }); if(piso!==null&&p.vy>0){ p.y=piso; p.vy=0; p.vx*=.5; if(Math.abs(p.vx)<20){ p.parado=true; } } if(p.y>M.h+100){ p.x=J.respawn.x+60; p.y=J.respawn.y; p.vy=0; } }
     if(p.t>1 && u.invT<=.3 && colideRet(R.x,R.y,R.w,R.h,p.x-24,p.y-50,48,50)) monta(); }
-  M.molas.forEach(function(m){ if(m.t>0) m.t-=dt; if(u.vy>=0 && colideRet(R.x,R.y+R.h-8,R.w,12,m.x,m.y-6,m.w,m.h)){ u.vy=VMOLA; u.noChao=false; u.y=m.y; m.t=.3; u.sx=.7; u.sy=1.4; SOM.fx('mola'); poeira(u.x,m.y,8); } });
+  M.molas.forEach(function(m){ if(m.t>0) m.t-=dt; if(u.vy>=0 && colideRet(R.x,R.y+R.h-8,R.w,12,m.x,m.y-6,m.w,m.h)){ u.vy=VMOLA; u.lancado=true; u.noChao=false; u.y=m.y; m.t=.3; u.sx=.7; u.sy=1.4; SOM.fx('mola'); poeira(u.x,m.y,8); } });
   if(u.invT<=0&&u.tontoT<=0&&J.estado==='nivel'){
     M.espinhos.forEach(function(s){ if(colideRet(R.x+6,R.y+R.h-10,R.w-12,10,s.x,s.y,s.w,s.h)) caiu('Ouch, thorns! Back to the checkpoint','Ai, espinhos! De volta ao checkpoint'); });
     M.agua.forEach(function(a){ if(u.y>a.y+30 && u.x>a.x && u.x<a.x+a.w) caiu('Splash! Back to the checkpoint','Splash! De volta ao checkpoint'); });

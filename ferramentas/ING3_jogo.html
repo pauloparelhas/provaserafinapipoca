@@ -229,6 +229,8 @@ body.portrait #rot{display:flex}
 #hudVida .cor.on{opacity:1;filter:none}
 #hudVida.dano{animation:shake .4s}
 #tAct{font-size:34px;flex-direction:column}
+#tJump.turbo0{opacity:.5;filter:grayscale(.6)}
+#tJump svg{display:block;margin:0 auto}
 #tAct small{font-size:14px;line-height:1}
 body.nomapa #hudVida,body.nacapa #hudVida{display:none}
 /* corrida: só ▲ ▼ */
@@ -258,7 +260,9 @@ body.sem-voz #qOuvir{display:none}
 #legenda .mini{height:40px;padding:0 16px;border-radius:12px;border:2px solid rgba(255,255,255,.35);background:transparent;color:rgba(255,255,255,.8);font:900 15px Nunito,Arial}
 #legenda .lgnext{height:52px;padding:0 28px;border-radius:16px;border:none;background:linear-gradient(180deg,#fde68a,#f59e0b);color:#1e1b3a;font:900 20px Nunito,Arial;box-shadow:0 4px 0 #b45309}
 /* escolha do herói */
-.mcard.escolha{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:900px;max-height:200px;padding:12px 16px;background:rgba(15,14,36,.92)}
+.mcard.escolha{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:900px;max-height:196px;padding:10px 16px;background:rgba(15,14,36,.9);animation:none}
+#menu:has(.mcard.escolha){background:transparent;backdrop-filter:none;pointer-events:none}
+#menu:has(.mcard.escolha) .mcard{pointer-events:auto}
 .hsel{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
 .hbtn{font-size:16px!important}
 #btnCapa{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:none;height:60px;padding:0 36px;border-radius:20px;border:none;background:linear-gradient(180deg,#fde68a,#f59e0b);color:#1e1b3a;font:900 24px Nunito,Arial;box-shadow:0 5px 0 #b45309,0 10px 24px rgba(0,0,0,.35)}
@@ -316,30 +320,30 @@ body.show-tr .mcNome small.tr{display:inline;margin-left:6px}
 <script src="OP_voz.js"></script>
 <script src="ING3_banco.js"></script>
 <script src="LP3_jornada_partituras.js"></script>
-<script src="ING3_jogo_partituras.js"></script>
+<script src="ING3_jogo_partituras.js?v=20261017"></script>
 <script src="LP3_jornada_musica.js"></script>
 <script src="LP3_jornada_som.js"></script>
 <script src="LP3_jornada_arte.js"></script>
 <script src="LP3_jornada_arte2.js"></script>
-<script src="ING3_jogo_arte.js"></script>
-<script src="ING3_jogo_arte2.js"></script>
-<script src="ING3_jogo_arte3.js"></script>
-<script src="ING3_jogo_arte4.js"></script>
-<script src="ING3_jogo_arte5.js"></script>
-<script src="ING3_jogo_mapas.js"></script>
-<script src="ING3_jogo_fases.js"></script>
-<script src="ING3_jogo_motor.js"></script>
-<script src="ING3_jogo_motor2.js"></script>
-<script src="ING3_jogo_perigos.js"></script>
-<script src="ING3_jogo_aparelhos.js"></script>
-<script src="ING3_jogo_marceu.js"></script>
-<script src="ING3_jogo_chefinho.js"></script>
-<script src="ING3_jogo_penalti.js"></script>
-<script src="ING3_jogo_quiz.js"></script>
-<script src="ING3_jogo_corrida.js"></script>
-<script src="ING3_jogo_estadio.js"></script>
-<script src="ING3_jogo_chefao.js"></script>
-<script src="ING3_jogo_cena.js"></script>
-<script src="ING3_jogo_ui.js"></script>
+<script src="ING3_jogo_arte.js?v=20261017"></script>
+<script src="ING3_jogo_arte2.js?v=20261017"></script>
+<script src="ING3_jogo_arte3.js?v=20261017"></script>
+<script src="ING3_jogo_arte4.js?v=20261017"></script>
+<script src="ING3_jogo_arte5.js?v=20261017"></script>
+<script src="ING3_jogo_mapas.js?v=20261017"></script>
+<script src="ING3_jogo_fases.js?v=20261017"></script>
+<script src="ING3_jogo_motor.js?v=20261017"></script>
+<script src="ING3_jogo_motor2.js?v=20261017"></script>
+<script src="ING3_jogo_perigos.js?v=20261017"></script>
+<script src="ING3_jogo_aparelhos.js?v=20261017"></script>
+<script src="ING3_jogo_marceu.js?v=20261017"></script>
+<script src="ING3_jogo_chefinho.js?v=20261017"></script>
+<script src="ING3_jogo_penalti.js?v=20261017"></script>
+<script src="ING3_jogo_quiz.js?v=20261017"></script>
+<script src="ING3_jogo_corrida.js?v=20261017"></script>
+<script src="ING3_jogo_estadio.js?v=20261017"></script>
+<script src="ING3_jogo_chefao.js?v=20261017"></script>
+<script src="ING3_jogo_cena.js?v=20261017"></script>
+<script src="ING3_jogo_ui.js?v=20261017"></script>
 </body>
 </html>

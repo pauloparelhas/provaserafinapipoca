@@ -22,7 +22,10 @@ function atualiza(dt){
     if(u.invT>0||u.tontoT>0||J.estado!=='nivel') return;
     var w=34, h=70;
     if(G.colideRet(R.x+4,R.y+4,R.w-8,R.h-4,ch.x-w,ch.y-h,w*2,h)){
-      if(u.vy>60&&u.y<ch.y-h+26){ u.vy=-560; u.noChao=false; acerta(ch); }
+      /* pisar vale sempre que o herói vem de CIMA (pés na metade de cima do bicho); antes a margem era de 26 px
+         e a queda rápida atravessava a margem num quadro: pular em cima matava o herói (Paulo) */
+      var pesAntes=u.y-u.vy*.034;
+      if(u.vy>0&&(u.y<ch.y-h*.45||pesAntes<=ch.y-h+30)){ u.vy=-600; u.noChao=false; u.lancado=true; u.invT=Math.max(u.invT,.35); acerta(ch); }
       else G.machucado();
     }
   });

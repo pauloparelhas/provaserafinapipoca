@@ -4,9 +4,11 @@
      l  cipó (floresta)      R  argola (ginásio)  → pêndulo: encostou,
         agarra; balança sozinho; PULAR solta e o impulso segue o balanço
         (soltar na frente, no alto, voa mais longe; soltar cedo = cai).
-     X  barra: encostou, gira em volta dela; um ARCO VERDE marca a
-        janela de soltura; PULAR na janela = voa para cima e para a
-        frente; fora da janela = cai de pé (sem dano: tenta de novo).
+     X  barra (17/10, pedido do Paulo: o giro de 360 graus ficou feio): o
+        herói fica PENDURADO pelos braços e balança as pernas como um
+        pêndulo; PULAR solta e o impulso é sempre para a frente (mais
+        forte quando as pernas vão para a frente, nunca "errado"); a
+        barra seguinte fica perto e agarra sozinha ao passar.
      L  trave: plataforma estreita; anda a 70% da velocidade.
      V  trampolim do salto: chegar CORRENDO = reversão longa (vx 520,
         vy -950); parado = pulinho.
@@ -22,8 +24,9 @@ var G=window.JOGO, J=G.J, A=window.ARTE, T=45, BATIDA=60/100;
 /* ---------- parser (chamado por FASES.parse para os símbolos novos) ---------- */
 function parse(ch,x,y,L){
   switch(ch){
-    case 'l': L.pendulos.push({ax:x+T/2,ay:y,len:150,g:150*Math.pow(2*Math.PI/1.4,2),th:.8,om:0,tipo:'cipo',fase0:x*.01}); return true;
-    case 'R': L.pendulos.push({ax:x+T/2,ay:y,len:100,g:100*Math.pow(2*Math.PI/1.2,2),th:.8,om:0,tipo:'argola',fase0:x*.01}); return true;
+    /* a ponta fica à altura das mãos do herói (y 290-300): pega-se com um pulinho, do chão ou da borda (Paulo: "tão lá no alto") */
+    case 'l': { var lc=Math.max(80,290-y); L.pendulos.push({ax:x+T/2,ay:y,len:lc,th:0,tipo:'cipo',fase0:x*.01}); return true; }
+    case 'R': { var lr=Math.max(80,300-y); L.pendulos.push({ax:x+T/2,ay:y,len:lr,th:0,tipo:'argola',fase0:x*.01}); return true; }
     case 'X': L.barras.push({x:x+T/2,y:y+T/2}); return true;
     case 'L': L.plats.push({x:x,y:y+T-14,w:T,h:12,trave:true}); return true;
     case 'V': L.saltos.push({x:x+2,y:y+T-22,w:T-4,h:22,t:0}); return true;
@@ -35,31 +38,39 @@ function parse(ch,x,y,L){
 
 /* ---------- pêndulos: todos balançam sempre (o herói só pega carona) ---------- */
 function pontaPend(p){ return {x:p.ax+Math.sin(p.th)*p.len, y:p.ay+Math.cos(p.th)*p.len}; }
+var AMP=.55, PER={cipo:1.5,argola:1.3,barra:1.25};
 function balancaTodos(M,dt){
-  (M.pendulos||[]).forEach(function(p){ if(J.agarrado&&J.agarrado.p===p) return; var amp=.85; p.th=amp*Math.sin(J.t*2*Math.PI/(p.tipo==='cipo'?1.4:1.2)+p.fase0); });
+  (M.pendulos||[]).forEach(function(p){ if(J.agarrado&&J.agarrado.p===p) return; p.th=AMP*Math.sin(J.t*2*Math.PI/PER[p.tipo]+p.fase0); });
 }
 function ativo(){ return !!J.agarrado; }
+/* agarrar é GENEROSO: as mãos do herói perto da ponta (50 px de lado, 60 px de altura) */
 function tentaAgarrar(M){
   var u=J.urso; if(J.agarrado||u.noChao||(J.soltouT||0)>0) return;
-  var hh=G.URSO_H*G.TAM[u.tam];
-  (M.pendulos||[]).forEach(function(p){ if(J.agarrado) return; var e=pontaPend(p); if(Math.abs(u.x-e.x)<34&&Math.abs((u.y-hh)-e.y)<40){ J.agarrado={tipo:p.tipo,p:p,om:2*Math.PI/(p.tipo==='cipo'?1.4:1.2)*.85*Math.cos(J.t*2*Math.PI/(p.tipo==='cipo'?1.4:1.2)+p.fase0)}; SOM.fx('clique'); u.vx=0; u.vy=0; } });
-  (M.barras||[]).forEach(function(b){ if(J.agarrado) return; if(Math.abs(u.x-b.x)<30&&Math.abs((u.y-hh)-b.y)<36){ J.agarrado={tipo:'barra',b:b,ang:Math.PI/2*(u.vx>=0?1:-1),dir:u.vx>=0?1:-1}; SOM.fx('clique'); } });
+  var hh=G.URSO_H*G.TAM[u.tam], maos=u.y-hh;
+  (M.pendulos||[]).forEach(function(p){ if(J.agarrado) return; var e=pontaPend(p); if(Math.abs(u.x-e.x)<50&&Math.abs(maos-e.y)<60){ J.agarrado={tipo:p.tipo,p:p,t:0}; SOM.fx('clique'); u.vx=0; u.vy=0; u.lancado=false; } });
+  (M.barras||[]).forEach(function(b){ if(J.agarrado) return; if(Math.abs(u.x-b.x)<50&&Math.abs(maos-b.y)<60){ J.agarrado={tipo:'barra',b:b,t:0,th0:Math.max(-.5,Math.min(.5,u.vx/600))}; SOM.fx('clique'); u.vx=0; u.vy=0; u.lancado=false; } });
 }
-/* janela de soltura da barra: no alto, à frente (de -35° a +15° a partir do topo no sentido do giro) */
-function naJanela(a){ var ang=((a.ang%(2*Math.PI))+2*Math.PI)%(2*Math.PI); var alvo=a.dir>0?0:0; var d=Math.atan2(Math.sin(ang-alvo),Math.cos(ang-alvo))*a.dir; return d>-0.6&&d<0.25; }
+/* solta: o impulso é SEMPRE para a frente (para onde o herói olha ou a seta segurada); mais forte se o
+   balanço vai para a frente, mas nunca "errado": não existe janela que derrube (Paulo: facilitar soltar e pegar) */
+function solta(u,a,th,om){
+  var d=J.in.left?-1:(J.in.right?1:(u.dir||1)), aFavor=(om*d)>0;
+  J.agarrado=null; J.soltouT=.3; u.giro=0; u.noChao=false; u.lancado=true; u.impulsoT=.45;
+  u.vx=d*(aFavor?380:330); u.vy=a.tipo==='barra'?-780:(aFavor?-640:-580); u.dir=d;
+  SOM.fx(aFavor?'mola':'pulo'); if(aFavor) G.brilho(u.x,u.y-50,8,'#86efac');
+}
 function fisica(dt){
   var u=J.urso, a=J.agarrado, hh=G.URSO_H*G.TAM[u.tam];
+  a.t+=dt; var per=PER[a.tipo], th, om;
   if(a.tipo==='barra'){
-    a.ang+=a.dir*2*Math.PI/0.8*dt; var r=52; u.x=a.b.x+Math.sin(a.ang)*r; u.y=a.b.y-Math.cos(a.ang)*r+hh*.5; u.estado='spin'; u.anim+=dt; u.giro=a.ang;
-    if(J.in.jump&&J.jumpSolto){ J.jumpSolto=false; var ok=naJanela(a); J.agarrado=null; J.soltouT=.35; u.giro=0;
-      if(ok){ u.vx=a.dir*300; u.vy=-860; SOM.fx('mola'); G.brilho(u.x,u.y-40,10,'#86efac'); } else { u.vx=0; u.vy=60; } u.noChao=false; }
-    if(!J.in.jump) J.jumpSolto=true; return;
+    /* pendurado pelos braços: as mãos ficam na barra e as pernas balançam (pêndulo pelo topo) */
+    var k=Math.min(1,a.t/.4); th=(AMP+.15)*Math.sin(a.t*2*Math.PI/per)*k+(a.th0||0)*(1-k); om=Math.cos(a.t*2*Math.PI/per);
+    u.x=a.b.x+Math.sin(th)*6; u.y=a.b.y+hh; u.giro=-th; u.estado='hang'; u.anim+=dt;
+  } else {
+    var p=a.p; p.th=AMP*Math.sin(J.t*2*Math.PI/per+p.fase0); th=p.th; om=Math.cos(J.t*2*Math.PI/per+p.fase0);
+    var e=pontaPend(p); u.x=e.x; u.y=e.y+hh; u.giro=-th*.8; u.estado='hang'; u.anim+=dt;
   }
-  var p=a.p, w2=p.g/p.len; a.om+=-w2*Math.sin(p.th)*dt; p.th+=a.om*dt;
-  if(Math.abs(p.th)<.95&&Math.abs(a.om)<1.6){ a.om*=1.004; } /* não perde o balanço */
-  var e=pontaPend(p); u.x=e.x; u.y=e.y+hh; u.estado='hang'; u.anim+=dt; u.giro=-p.th*.6; u.dir=a.om>=0?1:-1;
-  if(J.in.jump&&J.jumpSolto){ J.jumpSolto=false; J.agarrado=null; J.soltouT=.35; u.giro=0;
-    var v=a.om*p.len; u.vx=Math.cos(p.th)*v*1.05; u.vy=-Math.abs(Math.sin(p.th)*v)-380; u.noChao=false; SOM.fx('pulo'); }
+  if(J.in.left) u.dir=-1; else if(J.in.right) u.dir=1;
+  if(J.in.jump&&J.jumpSolto&&a.t>.12){ J.jumpSolto=false; solta(u,a,th,om); return; }
   if(!J.in.jump) J.jumpSolto=true;
 }
 
@@ -72,7 +83,8 @@ function atualiza(dt){
   (M.plats||[]).forEach(function(p){ if(!p.ritmo) return; var vis=(p.ritmo==='t')===(fase===0); p.visivel=vis; p.pisca=vis&&dentro>.75; if(!vis&&u.sobre===p){ u.sobre=null; u.noChao=false; } });
   /* salto */
   var R=G.ursoRet();
-  (M.saltos||[]).forEach(function(s){ if(s.t>0) s.t-=dt; if(u.vy>=0&&G.colideRet(R.x,R.y+R.h-8,R.w,12,s.x,s.y-6,s.w,s.h)){ var correndo=Math.abs(u.vx)>200; u.vy=correndo?-950:-560; u.vx=correndo?520*(u.vx>0?1:-1):u.vx; u.noChao=false; u.y=s.y; s.t=.3; u.flip=correndo?1:0; SOM.fx('mola'); } });
+  /* salto: o trampolim SEMPRE lança alto e para a frente (correndo, mais longe); o impulso não é cortado ao soltar PULAR */
+  (M.saltos||[]).forEach(function(s){ if(s.t>0) s.t-=dt; if(u.vy>=0&&G.colideRet(R.x,R.y+R.h-8,R.w,12,s.x,s.y-6,s.w,s.h)){ var correndo=Math.abs(u.vx)>150, d=u.vx<-5?-1:(u.vx>5?1:(u.dir||1)); u.vy=correndo?-980:-900; u.vx=d*(correndo?470:330); u.noChao=false; u.y=s.y; s.t=.3; u.flip=1; u.lancado=true; u.impulsoT=.7; SOM.fx('mola'); } });
   if(u.flip>0){ u.flip=Math.max(0,u.flip-dt*1.4); u.giro=(1-u.flip)*Math.PI*2*(u.dir||1); if(u.flip===0||u.noChao){ u.flip=0; u.giro=0; } }
   /* zagueiros */
   M.inimigos.forEach(function(e){ if(e.tipo!=='zagueiro'||e.morto||e.achatado) return; e.et+=dt;
@@ -93,7 +105,7 @@ function desenha(c,t){
   (M.barras||[]).forEach(function(b){ c.save();
     c.strokeStyle='#94a3b8'; c.lineWidth=6; c.beginPath(); c.moveTo(b.x-30,b.y); c.lineTo(b.x-30,b.y+(450-b.y)); c.moveTo(b.x+30,b.y); c.lineTo(b.x+30,b.y+(450-b.y)); c.stroke();
     c.strokeStyle='#e2e8f0'; c.lineWidth=7; c.beginPath(); c.moveTo(b.x-34,b.y); c.lineTo(b.x+34,b.y); c.stroke();
-    var a=J.agarrado; if(a&&a.b===b){ c.strokeStyle='rgba(74,222,128,'+(.55+.35*Math.sin(t*10))+')'; c.lineWidth=10; c.beginPath(); var dir=a.dir; c.arc(b.x,b.y,52,-Math.PI/2-(dir>0?.6:.25),-Math.PI/2+(dir>0?.25:.6)); c.stroke(); }
+    var a=J.agarrado; if(!(a&&a.b===b)){ c.strokeStyle='rgba(253,224,71,'+(.35+.3*Math.sin(t*5))+')'; c.lineWidth=3; c.beginPath(); c.arc(b.x,b.y,22,0,Math.PI*2); c.stroke(); } /* brilho: pegue aqui */
     c.restore(); });
   (M.saltos||[]).forEach(function(s){ var sq=s.t>0?.6:1; c.save(); c.translate(s.x,s.y+s.h); c.fillStyle='#1d4ed8'; A.rr(c,0,-s.h*sq,s.w,s.h*sq,6); c.fill(); c.fillStyle='#fde047'; A.rr(c,2,-s.h*sq,s.w-4,5,3); c.fill(); c.restore(); });
 }

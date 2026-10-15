@@ -69,6 +69,7 @@ function dicas(){ /* só o indispensável: o ovo do Pip, na primeira vez */
   var u=J.urso, M=J.mundo, d=null;
   if(!J.prog.pipVisto) M.ovos.forEach(function(o){ if(!o.chocado && Math.abs(o.x-u.x)<160) d={x:o.x,y:o.y-80,txt:'Touch the egg!',pt:'Encoste no ovo!'}; });
   if(!d&&J.mundo) J.mundo.moradores.forEach(function(m){ if(m.perto&&!J.chefe) d={x:m.x,y:m.y-150,txt:m.feito?'Play again? Press ▼':'Press ▼ to go in',pt:m.feito?'Jogar de novo? Aperte ▼':'Aperte ▼ para entrar',botao:true}; });
+  if(!d&&J.mundo&&window.PERIGOS&&J.nivel&&J.nivel.sub){ var cn=PERIGOS.canoSob(); if(cn) d={x:u.x,y:u.y-G.URSO_H*TAM[u.tam]-30,txt:'Press ▼ to go down the pipe',pt:'Aperte ▼ para entrar no cano',botao:true}; }
   J.dica=d;
 }
 function atualizaTutorial(dt){ var Tt=J.tut, L=J.nivel; Tt.t+=dt; var p=L.passos[Tt.i]; if(!p) return; if(p.ate(J)){ Tt.i++; Tt.t=0; SOM.fx('moeda'); if(Tt.i>=L.passos.length) J.tut=null; } }
@@ -176,7 +177,7 @@ function avancaFinal(){ var it=J.final; if(!it||it.fim) return; it.i++; it.t=0; 
 /* ---------- capa do livro: antes do mapa (o livro aberto) ---------- */
 function iniciaCapa(){ J.estado='capa'; J.t=0; J.nivel=null; J.mundo=null; J.faseAtual=null; SOM.musica('mapa'); if(window.UI){ UI.modoNivel(false); UI.modoMapa(false); UI.cartaoMapa(null); UI.botaoCapa(true); } G.hud(); }
 function abreLivro(){ if(window.UI) UI.botaoCapa(false); SOM.fx('iris'); iris(W/2,H/2,function(){ irMapa(false); }); }
-function iniciaEscolha(){ J.estado='escolha'; J.t=0; if(window.UI){ UI.modoMapa(false); UI.cartaoMapa(null); UI.escolhaHeroi(function(){ G.salva(); iniciaCapa(); }); } }
+function iniciaEscolha(){ J.estado='escolha'; J.t=0; document.body.classList.add('nacapa'); if(window.UI){ UI.modoMapa(false); UI.cartaoMapa(null); UI.escolhaHeroi(function(){ G.salva(); iniciaCapa(); }); } }
 
 /* ---------- laço principal ---------- */
 var ultimo=0;
@@ -190,6 +191,7 @@ function passo(ts){
   switch(J.estado){
     case 'nivel': if(!J.trans||J.trans.fase==='abre'){ G.fisica(dt); if(J.estado==='nivel') atualizaNivel(dt); if(J.mundo&&J.estado!=='mapa') atualizaCamera(dt); } break;
     case 'cano': break;
+    case 'chefeIntro': if(window.CHEFAO) CHEFAO.atualiza(dt); break;
     case 'quiz': if(window.QUIZ) QUIZ.atualiza(dt); if(J.chefe&&window.CHEFAO) CHEFAO.anima(dt); break;
     case 'final': atualizaFinal(dt); break;
     case 'corrida': if(window.CORRIDA) CORRIDA.atualiza(dt); break;
@@ -211,13 +213,14 @@ function init(){
 }
 function toque(cx,cy){ var p=G.paraLogico(cx,cy);
   if(J.estado==='intro'||J.estado==='final') return true; /* só o botão Next avança */
+  if(J.estado==='escolha'&&window.CENA&&CENA.HX&&window.UI){ for(var hi=0;hi<CENA.HX.length;hi++){ if(Math.abs(p.x-CENA.HX[hi])<95&&p.y>110&&p.y<CENA.HY+10){ UI.selecionaHeroi(CENA.HEROIS[hi]); return true; } } return true; }
   if(J.estado==='mapa'&&p.y>60&&!J.trans){ mapaToque(p.x,p.y); return true; }
   if(J.estado==='quiz'&&window.QUIZ) return QUIZ.toque(p.x,p.y);
   if(J.estado==='nivel'&&tocaEntrada(p.x,p.y)) return true;
   if(J.estado==='corrida'&&window.CORRIDA) return CORRIDA.toque(p.x,p.y);
   if(J.estado==='estadio'&&window.ESTADIO) return ESTADIO.toque(p.x,p.y);
   return false; }
-function confirmar(){ if(J.estado==='capa'){ abreLivro(); return true; } if(J.estado==='intro'){ avancaIntro(); return true; } if(J.estado==='final'){ avancaFinal(); return true; } if(J.estado==='mapa'&&!J.trans){ entraFase(J.sel); return true; } return false; }
+function confirmar(){ if(J.estado==='capa'){ abreLivro(); return true; } if(J.estado==='chefeIntro'&&window.CHEFAO){ CHEFAO.avancaIntro(); return true; } if(J.estado==='intro'){ avancaIntro(); return true; } if(J.estado==='final'){ avancaFinal(); return true; } if(J.estado==='mapa'&&!J.trans){ entraFase(J.sel); return true; } return false; }
 function pausa(v){ J.pausado=!!v; }
 
 G.init=init; G.toque=toque; G.mapaHover=mapaHover; G.seleciona=seleciona; G.confirmar=confirmar; G.mapaMove=mapaMove; G.pausa=pausa; G.irMapa=function(){ irMapa(false); }; G.voltaMapa=voltaMapa; G.entraFase=entraFase;

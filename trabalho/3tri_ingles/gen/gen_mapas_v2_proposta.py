@@ -132,8 +132,7 @@ def bosque():
     m.g[10][38] = m.g[11][38] = '#'                      # toco de 1 tile entre as ravinas
     m.p(44, 8, 'Y'); m.p(47, 9, 'e')
     m.p(50, 9, 'c')
-    m.fx(53, 54, 2, '%'); m.bloco(53, 54, 3, 9); m.p(53, 2, '%')  # muro de espinheiro: Pip sopra
-    m.bloco(53, 54, 3, 9)
+    m.fx(53, 54, 8, '%'); m.bloco(53, 54, 9, 9)          # espinheiro BAIXO (2 tiles): pula-se por cima ou queima com a estrela (Paulo: nada intransponivel)
     m.p(57, 9, 'D')                                      # D2: casa da coruja
     m.p(60, 9, 'T')                                      # troncos rolando
     m.fx(62, 64, 7, '='); m.fx(66, 68, 5, '=') ; m.p(67, 4, 'O')
@@ -146,7 +145,7 @@ def bosque():
     m.p(104, 9, 'c')
     m.buraco(107, 3); m.p(108, 2, 'l'); m.buraco(111, 3); m.p(112, 2, 'l')  # gran-final: cipo, cipo
     m.g[10][110] = m.g[11][110] = '#'
-    m.fx(115, 116, 2, '%'); m.bloco(115, 116, 3, 9)      # portao de espinheiro (Pip)
+    m.fx(115, 116, 8, '%'); m.bloco(115, 116, 9, 9)      # espinheiro baixo (pula ou queima)
     m.p(120, 9, 'E')                                     # Ogro de tinta (mini-chefe comico)
     m.fx(102, 103, 8, '2')
     m.p(130, 9, 'F')
@@ -168,11 +167,11 @@ def ginasio():
     m.g[10][46] = m.g[11][46] = '#'; m.g[10][50] = m.g[11][50] = '#'
     m.p(56, 9, 'D')                                      # D2: mesa dos juizes
     m.p(60, 9, 'c')
-    m.p(63, 6, 'X'); m.p(67, 3, 'X')                     # BARRAS ASSIMETRICAS: baixa (6) -> alta (3)
-    m.fx(70, 75, 3, '='); m.fx(70, 75, 2, 'o')           # pouso alto
+    m.p(63, 6, 'X'); m.p(66, 4, 'X')                     # BARRAS ASSIMETRICAS: baixa (6) -> alta (4), perto uma da outra
+    m.fx(70, 75, 4, '='); m.fx(70, 75, 3, 'o')           # pouso alto
     m.p(73, 9, 'e'); m.p(77, 9, 'i')
     m.p(80, 9, 'c')
-    m.p(84, 9, 'V'); m.bloco(90, 93, 5, 9); m.p(91, 4, 'O')  # SALTO: correr, trampolim, mesa -> parapeito alto
+    m.p(86, 9, 'V'); m.bloco(89, 93, 6, 9); m.p(91, 5, 'O')  # SALTO: trampolim perto da mesa (4 tiles), parapeito alto
     m.fx(95, 96, 8, '1')                                 # alcapao (D3 no submundo: sala de aquecimento)
     m.p(99, 9, 'c')
     for k, c in enumerate(range(103, 118, 3)): m.fx(c, c + 1, 8, 't' if k % 2 == 0 else 'u')  # SOLO NO RITMO (2 grupos)
@@ -235,7 +234,7 @@ def biscoito():
     m.p(68, 9, 'S')                                      # torradeira = mola
     m.p(75, 9, 'c')
     m.p(78, 8, '&')                                      # vassoura (item 7 = varrer)
-    m.fx(81, 82, 2, '%'); m.bloco(81, 82, 3, 9)          # muro de migalhas: so a vassoura
+    m.fx(81, 82, 8, '%'); m.bloco(81, 82, 9, 9)          # monte de migalhas BAIXO: pula ou varre
     m.p(85, 9, 'i'); m.p(87, 6, 'g'); m.p(90, 9, 'e')
     m.fx(93, 94, 8, '1')                                 # gaveta = cano (D3 no submundo: armario)
     m.p(97, 9, 'c')

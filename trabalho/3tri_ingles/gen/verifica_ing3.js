@@ -11,7 +11,7 @@ eval(fs.readFileSync(path.join(DIR,'ING3_jogo_mapas.js'),'utf8'));
 eval(fs.readFileSync(path.join(DIR,'ING3_jogo_fases.js'),'utf8'));
 const F=window.FASES, MAPAS=window.MAPAS;
 
-function blocking(ch){ return ch==='#'||ch==='B'||ch==='?'||ch==='M'||(ch>='1'&&ch<='4'); }
+function blocking(ch){ return ch==='#'||ch==='B'||ch==='?'||ch==='M'||ch==='%'||(ch>='1'&&ch<='4'); } /* 17/10: '%' BLOQUEIA (Paulo: nada pode depender de poder para passar; a parede tem de ser pulável) */
 function support(ch){ return blocking(ch)||ch==='='||ch==='f'||ch==='S'||ch==='h'||ch==='L'||ch==='t'||ch==='u'||ch==='V'; } /* v2: trave, blocos do ritmo, salto; '%' (parede) não bloqueia: a estrela quebra */
 
 function fechaTravas(rows){ const h=rows.length; const g=rows.map(r=>r.split('')); for(let r=0;r<h;r++) for(let c=0;c<g[r].length;c++){ const ch=rows[r][c]; if(ch==='G'||ch==='X'){ for(let k=0;k<8;k++){ const rr=r-k; if(rr>=0) g[rr][c]='#'; } } } return g.map(a=>a.join('')); }
@@ -28,7 +28,7 @@ function analisa(rows, nome){
   }
   /* v2: cipó (l), argola (R) e barra (X) viram pontos de apoio virtuais onde o herói fica pendurado */
   const virt=new Set();
-  for(let r=0;r<h;r++) for(let c=0;c<w;c++){ const ch=at(c,r); if(ch==='l') virt.add(c+','+(r+5)); if(ch==='R') virt.add(c+','+(r+4)); if(ch==='X') virt.add(c+','+(r+2)); }
+  for(let r=0;r<h;r++) for(let c=0;c<w;c++){ const ch=at(c,r); if(ch==='l'||ch==='R') virt.add(c+','+Math.round((Math.max(ch==='l'?290:300, r*45+80)+88)/45)); if(ch==='X') virt.add(c+','+(r+2)); /* ponta do cipó/argola: y≈290–300 (ING3_jogo_aparelhos.js) */ }
   const sup=(c,r)=>support(at(c,r))||mov.has(c+','+r);
   const stand=(c,r)=>{ if(c<0||c>=w||r<2||r>=h) return false; if(virt.has(c+','+r)) return true; if(!sup(c,r)) return false; if(blocking(at(c,r-1))||blocking(at(c,r-2))||blocking(at(c,r-3))) return false; /* herói grande: 3 linhas */ if(at(c,r-1)==='^') return false; return true; };
   return {rows,h,w,at,stand,sup,virt};
@@ -48,7 +48,7 @@ function bfs(worlds, startKey){
     const mola = A.at(c,r-1)==='S' || A.at(c,r)==='S' || A.at(c,r)==='V' || A.at(c,r-1)==='V';
     const balanco = A.virt.has(c+','+r); /* soltar do cipó/argola/barra: voa mais longe */
     const headFree1=!blocking(A.at(c,r-4)), headFree2=headFree1&&!blocking(A.at(c,r-5));
-    for(let r2=r-(mola?8:3); r2<=Math.min(A.h-1,r+9); r2++){
+    for(let r2=r-(mola?7:3); r2<=Math.min(A.h-1,r+9); r2++){
       const up=r-r2; let maxdc;
       if(up>=7) maxdc=3; else if(up>=4) maxdc=4; else if(up===3) maxdc=2; else if(up===2) maxdc=3; else if(up>=0) maxdc=4; else maxdc=5;
       if(balanco) maxdc+=3; if(A.at(c,r)==='V'||A.at(c,r-1)==='V') maxdc+=4;

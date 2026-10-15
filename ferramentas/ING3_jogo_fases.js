@@ -37,7 +37,7 @@ var LISTA=[
 var PRONTOS={1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:true,9:true}; /* reinos já construídos (E1: vila e floresta; E2: recife e céu) */
 
 /* ---------- parser: grade → objeto de nível ---------- */
-var ITENS={H:'maca',A:'capa',J:'bota',Y:'estrelas'};
+var ITENS={H:'maca',A:'capa',J:'bota',Y:'estrelas',d:'traje'};
 function parse(rows,opts){
   opts=opts||{};
   var h=rows.length, w=0; rows.forEach(function(s){ w=Math.max(w,s.length); });
@@ -96,8 +96,9 @@ function parse(rows,opts){
 /* ---------- monta um reino ---------- */
 function monta(f){
   var MP=window.MAPAS&&MAPAS[f.id];
-  var L=parse(MP.main,{mundo:'main'}); L.fase=f; L.cena=f.cena; L.modo=f.modo||''; L.superficie=f.modo==='nado'?20:0;
-  if(MP.sub){ var S=parse(MP.sub,{mundo:'sub'}); S.fase=f; S.cena=f.subCena||'sub_caverna'; S.modo=L.modo; S.superficie=L.superficie; S.sub=true; L.sub=S; }
+  var L=parse(MP.main,{mundo:'main'}); L.fase=f; L.cena=f.cena; L.modo=f.modo||''; L.superficie=f.modo==='nado'?(MP.sup?MP.sup*T:20):0;
+  if(MP.sup){ L.praiaX=0; var r0=MP.main[MP.sup]; while(L.praiaX<r0.length&&r0.charAt(L.praiaX)==='#') L.praiaX++; L.praiaX*=T; } /* recife: a praia do começo, fora d'água */
+  if(MP.sub){ var S=parse(MP.sub,{mundo:'sub'}); S.fase=f; S.cena=f.subCena||'sub_caverna'; S.modo=L.modo; S.superficie=f.modo==='nado'?20:0; S.sub=true; L.sub=S; }
   var todos=L.moradores.concat(L.sub?L.sub.moradores:[]);
   todos.forEach(function(m,i){ m.tipo=f.moradores[i%f.moradores.length]||'crier'; });
   L.todasEntradas=todos; L.totalArenas=todos.length;
