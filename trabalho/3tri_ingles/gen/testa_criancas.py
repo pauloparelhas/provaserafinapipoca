@@ -28,7 +28,7 @@ with sync_playwright() as pw:
                 if st: break
             rel = p.evaluate("()=>CRIANCA.relatorio()")
             corridas.append(rel)
-        p.evaluate("()=>{ __ing3.JOGO.relogioTeste(false); }")
+        p.evaluate("()=>{ __ing3.JOGO.relogioTeste(false); }"); p.wait_for_timeout(3000)  # deixa vencer os setTimeout do reino anterior (o final do castelo) antes do próximo
         # medidas
         terminou = sum(1 for c in corridas if c['fim'] and not c['esgotou'])
         quedas = [q['x'] for c in corridas for q in c['quedas']]
@@ -38,6 +38,8 @@ with sync_playwright() as pw:
         media_q = len(quedas) / max(1, len(corridas)); media_t = sum(c['tempo'] for c in corridas) / max(1, len(corridas))
         travas = sum(len(c['travou']) for c in corridas) / max(1, len(corridas))
         resumo[NOMES[r]] = {'terminaram': '%d/%d' % (terminou, len(corridas)), 'tempo_medio_s': round(media_t), 'quedas_por_crianca': round(media_q, 1), 'danos': sum(c['danos'] for c in corridas), 'travadas': round(travas, 1), 'trechos_perigosos': trecho, 'paradas': [c['x'] for c in corridas if c['esgotou']], 'onde_travou': [t['x'] for c in corridas for t in c['travou']][:10], 'estado_final': [c['estado']+'/'+str(c['chefe']) for c in corridas if c['esgotou']]}
+        from collections import Counter
+        resumo[NOMES[r]]['causas'] = dict(Counter('%s@%d' % (q.get('causa'), q['x']//8*8) for c in corridas for q in c['quedas']).most_common(4))
         if NOMES[r] == 'Corrida':
             cc = [c.get('corrida') or {} for c in corridas]
             resumo['Corrida']['posicoes'] = [x.get('pos') for x in cc]; resumo['Corrida']['paginas'] = [x.get('pag') for x in cc]

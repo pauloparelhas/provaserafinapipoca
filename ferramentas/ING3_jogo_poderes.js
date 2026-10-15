@@ -126,6 +126,7 @@ function atira(){
   var s=tiroAtual(); if(!s){ if(poder().montado&&u.poderes.tiro) G.toast('Ride Pip first!',1400,'Monte no Pip primeiro!'); return true; }
   if((J.recarga||0)>0) return true; J.recarga=.45;
   var v=VEL[s], s0=G.TAM[u.tam], n=s==='faisca'?3:1;
+  if(s==='bola'){ u.chuteAte=J.t+.32; J.estrelas.push({x:u.x+u.dir*30*s0,y:u.y-12*s0,vx:u.dir*v.vx,vy:v.vy,g:v.g,alc:v.alc,dist:0,rot:0,skin:s,quiques:0}); SOM.fx('pisao'); log({ev:'tiro',skin:s}); return true; } /* sai do PÉ */
   for(var k=0;k<n;k++) J.estrelas.push({x:u.x+u.dir*24,y:u.y-46*s0+(k-1)*12,vx:u.dir*v.vx,vy:v.vy+(k-1)*(s==='faisca'?60:0),g:v.g,alc:v.alc,dist:0,rot:0,skin:s,quiques:0});
   SOM.fx(s==='bola'?'pisao':'pulo'); log({ev:'tiro',skin:s}); return true;
 }

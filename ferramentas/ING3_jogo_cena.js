@@ -129,6 +129,7 @@ function desenhaNivel(c){
 }
 /* pose do herói: a capa longa de voo SÓ aparece com a capa no céu; o guardanapo é paraquedas (Paulo: "voa de capa sem ter pego capa") */
 function poseDoHeroi(u,M){
+  if(u.chuteAte&&J.t<u.chuteAte) return 'kick'; /* bola: o herói CHUTA (Paulo: "tem que chutar, não jogar com a mão") */
   if(u.abaixado) return Math.abs(u.vx)>8?'crawl':'crouch';
   if(u.estado==='glide') return (u.poderes.capa&&M.modo==='voo')?'fly':(u.poderes.guardanapo?'paraquedas':'jump');
   if(u.estado==='fly'&&!(u.poderes.capa&&M.modo==='voo')) return 'jump';

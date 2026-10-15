@@ -194,7 +194,7 @@ def recife_v2():
     m.p(64, 9, 'i')
     m.p(48, 9, 'D')                                        # D1: baú, depois do 1º trecho (imersão antes das perguntas)
     m.p(68, 9, 'c'); m.p(71, 9, 'D')                       # D2
-    m.fx(76, 77, 8, '1'); m.p(81, 7, 'j'); m.p(85, 7, 'j'); m.p(89, 8, 'p')
+    m.fx(76, 77, 8, '1'); m.p(83, 7, 'j'); m.p(89, 8, 'p')   # 15/10: uma água-viva só aqui (duas a 4 tiles derrubavam até 19 vezes em 5 crianças)
     m.bloco(92, 94, 2, 5)                                  # rocha pendurada
     m.p(100, 5, '>'); m.p(103, 8, 'p'); m.p(106, 9, 'c')
     m.fx(109, 110, 8, '2'); m.p(114, 7, 'j'); m.p(118, 9, 'e')

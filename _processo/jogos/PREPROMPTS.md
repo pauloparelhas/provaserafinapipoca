@@ -1,6 +1,6 @@
 # Pré-prompts de desenvolvimento de jogos (versionados)
 
-**v1 · 18/10/2026.** Use antes de desenhar, codar, testar e publicar qualquer jogo. Cada correção do Paulo vira uma regra aqui, para não repetir.
+**v2 · 15/10/2026** (v1 · 18/10). Use antes de desenhar, codar, testar e publicar qualquer jogo. Cada correção do Paulo vira uma regra aqui, para não repetir.
 
 ## P1 · Desenhar uma fase (antes de codar)
 1. Gênero da `BIBLIOTECA_JOGOS.md`, objetivo da criança em uma frase, duração (~1 min por fase, fora as perguntas).
@@ -50,6 +50,15 @@ Durante trabalho longo: aviso curto a cada ~10 min do que está sendo feito.
   - herói mais lento → herói sempre mais rápido.
 - **Chefão:** alvo inalcançável e ataque certeiro → prateleira de 3 tiles, ataque com sombra e fora do alvo; abertura de 5 frases → 3 telas curtas.
 - **Imagem:** pisca (`Math.floor` instável, hash da posição de plataforma móvel, tremor aleatório) → correções em `arte4`/`LP3_jornada_arte2`/`cena`.
+- **Corrida (v2):**
+  - box no meio da pista com todo mundo entrando → box é DESVIO à direita, convite (segurar ◀ passa direto), rápido (1,2 s), cada rival na sua vez e o mesmo tempo;
+  - encostar no carro da frente "batia" e mostrava plaquinha → encostar não freia, não mostra nada: o da frente abre caminho;
+  - moedas que não serviam para nada → raios (3 = 1 turbo) e rampas com salto;
+  - sem música → sons de ambiente baixinhos e esparsos (motor, torcida, passarinhos, ondas, vento, gotas).
+- **Perguntas:** barra que enchia sozinha → o Next só avança no toque e "respira" devagar; no jogo a pergunta tem 1–2 linhas (texto de leitura fica no simulado/estudo).
+- **Pisca:** nada de alternar cor/visibilidade, nem tremer rápido (`sin(t*50)`): oscilação lenta (≤ 1,5 Hz) ou fixa; clarão de tela só véu morno ≤ 16 %.
+- **Poder com o corpo certo:** bola se CHUTA (pose `kick`, sai do pé), não se joga com a mão.
+- **Chefão (v4):** a estrela era reta e não alcançava o Conde → estrela GUIADA (arco até o tinteiro ou o Conde, que sente e perde vida); ESPAÇO **ou ▼** jogam; a Fada Madrinha dá as estrelas e faz as perguntas; só o chefão recomeça, e só após 7 quedas.
 - **Teste e publicação:**
   - teste que demorava 30 min e não jogava de verdade → crianças-robô em relógio acelerado (~15 s);
   - publicar só no `main` → o site sai do ramo `em-construcao`.

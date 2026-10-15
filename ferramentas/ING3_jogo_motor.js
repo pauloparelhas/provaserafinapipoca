@@ -189,7 +189,8 @@ function machucado(){
   else caiu('Ouch! Back to the checkpoint','Ai! De volta ao checkpoint');
 }
 function caiu(msg,pt){
-  var u=J.urso; if(J.teste) J.teste.quedas.push({x:Math.round(u.x/45),mundo:J.mundo&&J.mundo.mundo,t:+J.tFase.toFixed(1)}); SOM.fx('tonto'); J.shake=6; J.agarrado=null; J.soltouT=0; u.giro=0;
+  if(J.chefe&&window.CHEFAO&&CHEFAO.morreu) CHEFAO.morreu();
+  var u=J.urso; if(J.teste) J.teste.quedas.push({x:Math.round(u.x/45),mundo:J.mundo&&J.mundo.mundo,t:+J.tFase.toFixed(1),causa:String(msg).split(' ')[0]}); SOM.fx('tonto'); J.shake=6; J.agarrado=null; J.soltouT=0; u.giro=0;
   if(J.nivel&&J.respawn.mundo&&J.mundo.mundo!==J.respawn.mundo){ J.mundo= J.respawn.mundo==='sub'&&J.nivel.sub?J.nivel.sub:J.nivel; J.troncosVivos=[]; J.bolasCanhao=[]; J.estrelas=[]; }
   u.x=J.respawn.x; u.y=J.respawn.y; u.vx=0; u.vy=0; u.tontoT=.8; u.invT=2.4; J.flash=.7; /* renasce protegido mais tempo: dá para sair de perto de um chefinho */ u.puloExtra=u.poderes.bota||u.poderes.giz;
   if(J.pip){ J.pip.x=u.x+50; J.pip.y=u.y; J.pip.vx=0; J.pip.vy=0; }

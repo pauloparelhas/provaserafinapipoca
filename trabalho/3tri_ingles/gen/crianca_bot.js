@@ -48,7 +48,8 @@ window.CRIANCA = (function(){
     if(st.baixo>0) st.baixo-=dt;
     /* modos: nadar (toca pulo para ficar no meio da água) e voar (segura para manter altura) */
     if(M.modo==='nado'&&u.poderes.traje&&u.y>(M.superficie||0)+60){ st.toque=(st.toque||0)-dt; if((u.y>M.h-4.6*T||parede(dir))&&st.toque<=0){ st.toque=.28; pula(.1); } } /* nadar = TOCAR o pulo (segurar não sobe) */
-    else if(M.modo==='voo'&&u.poderes.capa){ var alvoY=5.5*T+Math.sin(st.t*.7)*40; M.moradores.forEach(function(m){ if(!m.feito&&Math.abs(m.x-u.x)<220) alvoY=m.y-10; }); if(M.mastro&&Math.abs(M.mastro.x-u.x)<300) alvoY=M.mastro.y-10; inp.jump=u.y>alvoY||parede(dir); } /* desce para a porta como a criança faz */
+    else if(M.modo==='voo'&&u.poderes.capa){ var alvoY=5.5*T+Math.sin(st.t*.7)*40; M.moradores.forEach(function(m){ if(!m.feito&&Math.abs(m.x-u.x)<220) alvoY=m.y-10; }); if(M.mastro&&Math.abs(M.mastro.x-u.x)<300) alvoY=M.mastro.y-10; inp.jump=u.y>alvoY||parede(dir);
+      (M.tempestades||[]).forEach(function(z){ var cx=z.x+z.w/2, k=((J.t+z.fase)%4.5)/4.5; if(cx-u.x>0&&cx-u.x<120&&k>=.5){ inp.right=false; inp.left=false; } }); } /* desce para a porta como a criança faz; nuvem escura = espera */
     /* cipó/barra: solta depois de um tempinho */
     if(J.agarrado){ st.solta-=dt; if(st.solta<=0){ inp.jump=true; J.jumpSolto=true; st.solta=.5+rnd()*.8; st.pulo=.15; } return; } else st.solta=.4+rnd()*.7;
     /* pular: buraco, parede ou bicho à frente — com atraso de reação e imprecisão */

@@ -38,6 +38,7 @@ function inicia(m,op){
   itens.forEach(function(it){ ja.push(it.id); });
   var u=J.urso; u.vx=0; J.in.left=J.in.right=J.in.jump=J.in.down=false;
   J.quiz={m:m, op:op||null, itens:itens, i:0, fase:'entra', t:0, acertos:0, cartoes:[], dica:false};
+  try{ var tt=document.getElementById('toast'); if(tt) tt.classList.remove('show'); }catch(e){} /* nada cobre a pergunta */
   J.estado='quiz'; m.visto=true; SOM.fx('iris'); SOM.musica('arena');
   montaPergunta();
   if(window.UI) UI.quizBotoes(true);

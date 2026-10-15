@@ -34,7 +34,7 @@ function atualiza(dt){
   });
   (M.correntes||[]).forEach(function(cr){ if(G.colideRet(R.x,R.y,R.w,R.h,cr.x,cr.y,cr.w,cr.h)) u.x+=cr.vx*dt*(u.noChao?.4:1); });
   (M.ventos||[]).forEach(function(v){ if(G.colideRet(R.x,R.y,R.w,R.h,v.x,v.y,v.w,v.h)) u.vy+=v.vy*dt*6; });
-  (M.tempestades||[]).forEach(function(z){ if(cicloTempestade(z)==='raio'&&vivo&&G.colideRet(R.x,R.y,R.w,R.h,z.x+z.w/2-14,z.y+40,28,M.h)) G.machucado(); });
+  (M.tempestades||[]).forEach(function(z){ if(cicloTempestade(z)==='raio'&&vivo&&G.colideRet(R.x,R.y,R.w,R.h,z.x+z.w/2-14,z.y+40,28,M.h)){ if(u.tam>0) G.machucado(); else { u.vx=-320; u.x-=50; u.invT=1.6; u.tontoT=.4; SOM.fx('tonto'); J.shake=4; } } }); /* 15/10: o raio empurra para trás, não manda de volta ao checkpoint */
 }
 /* inimigos novos: o dano de encostar é o do motor (machucado); o baiacu inchado não se pisa */
 function inimigo(c,e,t){
