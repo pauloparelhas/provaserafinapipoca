@@ -48,7 +48,6 @@ function moradores(dt){
   /* ▼ em cima de um cano: submundo */
   if(!entrou&&J.estado==='nivel'&&J.in.down&&J.downSolto&&window.PERIGOS){ var p=PERIGOS.canoSob(); if(p){ J.downSolto=false; PERIGOS.entraCano(p); } }
   if(!J.in.down) J.downSolto=true;
-  if(J.in.act&&J.actSolto){ J.actSolto=false; if(window.PERIGOS) PERIGOS.atira(); } if(!J.in.act) J.actSolto=true;
 }
 function tocaEntrada(lx,ly){ /* toque no tablet: tocar na porta/baú quando o herói está na frente dela */
   var L=J.mundo; if(!L) return false; var wx=lx+J.cam, wy=ly+J.camY;

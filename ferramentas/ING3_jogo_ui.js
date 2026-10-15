@@ -162,14 +162,14 @@ function keydown(e){
   if(J2.estado==='quiz'&&QUIZ.tecla(k)){ e.preventDefault(); return; }
   if(J2.estado==='corrida'&&CORRIDA.tecla(k)){ e.preventDefault(); return; }
   if(J2.estado==='estadio'&&ESTADIO.tecla(k)){ e.preventDefault(); return; }
-  var ac=mapaTeclas[k]; if(ac){ e.preventDefault(); J2.in[ac]=true; }
+  var ac=mapaTeclas[k]; if(ac){ e.preventDefault(); if(ac==='act'&&!e.repeat&&window.PERIGOS){ PERIGOS.atira(); return; } J2.in[ac]=true; }
 }
 function keyup(e){ var ac=mapaTeclas[e.key]; if(ac) JOGO.J.in[ac]=false; }
 
 /* ---------- toque ---------- */
 function botaoToque(id,ac){
   var b=$(id);
-  function on(e){ e.preventDefault(); SOM.init(); document.body.classList.remove('kbd'); b.classList.add('on'); JOGO.J.in[ac]=true; try{ b.setPointerCapture(e.pointerId); }catch(x){} }
+  function on(e){ e.preventDefault(); SOM.init(); document.body.classList.remove('kbd'); b.classList.add('on'); if(ac==='act'){ if(window.PERIGOS) PERIGOS.atira(); return; } JOGO.J.in[ac]=true; try{ b.setPointerCapture(e.pointerId); }catch(x){} }
   function off(e){ e.preventDefault(); b.classList.remove('on'); JOGO.J.in[ac]=false; }
   b.addEventListener('pointerdown',on); b.addEventListener('pointerup',off); b.addEventListener('pointercancel',off); b.addEventListener('pointerleave',off);
   b.addEventListener('contextmenu',function(e){ e.preventDefault(); });

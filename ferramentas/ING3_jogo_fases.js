@@ -89,7 +89,7 @@ function parse(rows,opts){
   L.segs=segs;
   if(L.inicioY===undefined) L.inicioY=CHAO_Y;
   /* itens da história do Mouse: na ordem do livro, da esquerda para a direita */
-  L.itens.filter(function(it){ return it.tipo==='historia'; }).sort(function(a,b){ return a.x-b.x; }).forEach(function(it,i){ it.ordem=i; });
+  L.itens.filter(function(it){ return it.tipo==='historia'; }).sort(function(a,b){ return a.x-b.x; }).forEach(function(it,i,arr){ it.ordem= (i===arr.length-1&&i>0)?8:i; }); /* o último é sempre o biscoito de novo: a história volta ao começo */
   return L;
 }
 
