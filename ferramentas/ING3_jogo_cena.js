@@ -33,7 +33,8 @@ function desenha(){
 
 /* ---------- personagens (com reserva enquanto a arte não chega) ---------- */
 function heroi(c,x,y,estado,t,dir,s,quem){
-  if(A.heroi){ A.heroi(c,x,y,estado,t,dir,s,quem||J.prog.heroi||'lia',J.prog.cor?{cor:J.prog.cor}:null); return; }
+  var look=J.prog.cor?{cor:J.prog.cor}:null; if(J.estado!=='mapa'&&J.urso&&J.urso.poderes&&J.urso.poderes.traje&&J.mundo&&J.mundo.modo==='nado'&&(!quem||quem===J.urso.quem)){ look=look||{}; look.mergulho=true; } /* roupa de mergulho: vestida desde que pegou */
+  if(A.heroi){ A.heroi(c,x,y,estado,t,dir,s,quem||J.prog.heroi||'lia',look); return; }
   c.save(); c.translate(x,y); c.scale(s*dir,s); c.fillStyle={lia:'#94a3b8',theo:'#2563eb',bia:'#db2777'}[quem||'lia']; A.rr(c,-16,-60,32,46,12); c.fill(); c.fillStyle='#f2c9a0'; A.circ(c,0,-72,20); c.fill(); c.fillStyle='#111'; A.circ(c,6,-74,3); c.fill(); c.fillStyle='#334155'; A.rr(c,-14,-16,12,16,5); c.fill(); A.rr(c,2,-16,12,16,5); c.fill(); c.restore();
 }
 function pip(c,x,y,estado,t,dir,s){
@@ -102,7 +103,7 @@ function desenhaNivel(c){
   M.ovos.forEach(function(o){ if(!o.chocado&&o.x>vx0&&o.x<vx1){ if(window.PODERES) PODERES.ninho(c,o.x,o.y); var bal=Math.sin(t*5)*.12; c.save(); c.translate(o.x,o.y); c.rotate(bal); pip(c,0,0,'egg',t,1,1); c.restore(); } });
   M.moradores.forEach(function(m){ if(m.x>vx0-100&&m.x<vx1+100) morador(c,m,t); });
   if(window.PERIGOS) PERIGOS.desenha(c,t,vx0,vx1);
-  if(window.PODERES) PODERES.desenhaFrente(c,t);
+  if(window.PODERES){ PODERES.desenhaFrente(c,t); PODERES.desenhaPorteiras(c,t); }
   if(window.CHEFINHO) CHEFINHO.desenha(c,t);
   if(window.MARCEU) MARCEU.desenha(c,t);
   M.inimigos.forEach(function(e){ if(!e.morto&&e.x>vx0&&e.x<vx1){ if(e.tipo==='tinta') manchaTinta(c,e,t); else if(!(window.PODERES&&PODERES.inimigo(c,e,t))&&!(window.PERIGOS&&PERIGOS.inimigo(c,e,t))&&!(window.APARELHOS&&APARELHOS.zagueiro(c,e,t))&&!(window.MARCEU&&MARCEU.inimigo(c,e,t))) A.inimigo(c,e,t); } });
@@ -121,6 +122,7 @@ function desenhaNivel(c){
   if(!J.quiz) J.clima.forEach(function(p){ A.particula(c,p); }); /* clima ANTES do quadro da pergunta: a nuvem nunca cobre o texto */
   if(J.estado==='nivel') desenhaGuia(c,t,false);
   if(J.chefe&&window.CHEFAO) CHEFAO.desenhaTela(c,t);
+  if(window.PODERES&&J.estado==='nivel') PODERES.desenhaTela(c,t);
   if(J.quiz&&window.QUIZ) QUIZ.desenhaTela(c,t);
   if(J.fimFase){ var k=Math.min(1,J.fimFase.t/.8); c.fillStyle='rgba(13,11,30,'+(k*.35)+')'; c.fillRect(0,0,W,H); if(J.fimFase.t>.3){ c.save(); c.translate(W/2,150); var sc=Math.min(1,(J.fimFase.t-.3)*2.5); c.scale(sc,sc); titulo(c,'Kingdom complete!',0,0,54); c.restore(); } }
 }
@@ -164,7 +166,7 @@ function alvoGuia(){
   var pd=window.PODERES&&PODERES.alvo(); if(pd) return pd; /* primeiro o poder do reino, que fica antes da 1ª porta */
   var pend=function(W2){ return W2?W2.moradores.filter(function(m){ return !m.feito; }):[]; };
   var aqui=pend(M), lst=[];
-  aqui.forEach(function(m){ lst.push({x:m.x,y:m.y-60,tipo:'porta'}); });
+  aqui.forEach(function(m){ lst.push({x:m.x,y:m.y-60,tipo:'porta',m:m}); });
   for(var vi=0;vi<lst.length;vi++){ var vx=lst[vi].x-J.cam; if(vx>0&&vx<W) return lst[vi]; } /* uma porta já na tela: ela mesma (o "?" dela basta) */
   if(!lst.length){
     var outro=M===L?L.sub:L, pendOutro=pend(outro).length;
@@ -178,6 +180,10 @@ function alvoGuia(){
 function desenhaGuia(c,t,mundo){
   var a=alvoGuia(); if(!a) return;
   var sx=a.x-J.cam, sy=a.y-J.camY, dentro=sx>20&&sx<W-20&&sy>60&&sy<H-20;
+  if(mundo&&a.tipo==='porta'&&dentro&&a.m&&!a.m.perto){ /* 18/10: seta grande pulando em cima da porta/baú/caixa que leva às perguntas */
+    var bau=J.mundo&&(J.mundo.cena==='recife'||J.mundo.cena==='nuvens'||J.mundo.cena==='biscoito'), bb=Math.abs(Math.sin(t*4))*14, ay=Math.max(J.camY+150,a.m.y-(bau?150:188))-bb;
+    c.save(); c.translate(a.x,ay); c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(-14,-34); c.lineTo(14,-34); c.lineTo(14,-14); c.lineTo(26,-14); c.lineTo(0,10); c.lineTo(-26,-14); c.lineTo(-14,-14); c.closePath(); c.fill(); c.stroke();
+    var tx=bau?'Open it! ▼':'Go in! ▼'; c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw2=c.measureText(tx).width+18; c.fillStyle="rgba(13,11,30,.88)"; A.rr(c,-tw2/2,-66,tw2,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(tx,0,-53); c.restore(); return; }
   if(mundo){ if(!dentro||a.tipo==='porta'||(a.tipo==='poder'&&J.dica)) return; /* a porta já tem o "?" que pula; o cano e o livro ganham a seta */
     var b=Math.abs(Math.sin(t*4))*12; c.save(); c.translate(a.x,Math.max(J.camY+130,a.y)-24-b); /* nunca debaixo do HUD */
     c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(-16,-30); c.lineTo(16,-30); c.lineTo(16,-12); c.lineTo(28,-12); c.lineTo(0,14); c.lineTo(-28,-12); c.lineTo(-16,-12); c.closePath(); c.fill(); c.stroke();

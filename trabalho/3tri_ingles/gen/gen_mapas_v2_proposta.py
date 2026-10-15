@@ -217,7 +217,7 @@ def estadio():
 def biscoito():
     m = Mapa(132)
     m.p(2, 9, 'U')
-    m.p(5, 9, '&'); m.p(8, 9, '&'); m.p(11, 9, '&')      # mesa do cafe: biscoito, copo de leite, pote de canudos (o PODER)
+    m.p(5, 9, '&'); m.p(9, 9, '&')                       # mesa do cafe: biscoito e o copo de leite COM o canudo (o PODER: esguicho de leite)
     m.p(15, 9, 'D')                                      # D1: porta da geladeira
     m.p(21, 9, 'c')
     m.p(24, 9, 'i'); m.p(27, 3, 'v'); m.p(29, 3, 'v')    # gotas da TORNEIRA (desenhada no armario)

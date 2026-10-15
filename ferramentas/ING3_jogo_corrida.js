@@ -454,7 +454,7 @@ function particulas(dt){
    ============================================================ */
 function abrePit(){
   var pi=R.pitAtual; R.fase='pit'; R.t=0; R.pitRes=[]; R.pitAnim=null;
-  var itens=QUIZ.escolhe({tema:'realmb'},3,J.nivel.quizIds||[]);
+  var itens=QUIZ.escolhe({tema:'realmb',mix:['conceito','leitura','rapida']},3,J.nivel.quizIds||[]); /* 18/10: não só "é real ou faz de conta?": um porquê/qual é, uma historinha e uma rápida */
   R.mPit={x:110,y:350,tipo:'announcer',falando:0};
   J.in.left=J.in.right=J.in.act=false;
   QUIZ.inicia(R.mPit,{itens:itens,
