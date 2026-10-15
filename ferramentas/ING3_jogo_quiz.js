@@ -62,8 +62,8 @@ function segue(){
   q.i++;
   if(q.i<q.itens.length){ montaPergunta(); return; }
   q.fase='pagina'; q.t=0;
-  if(!q.op){ q.m.feito=true; var L=J.nivel, n=L.moradores.filter(function(mm){ return mm.feito; }).length;
-    G.toast('You found a lost page! ('+n+' of '+L.moradores.length+')',2600,'Você achou uma página perdida! ('+n+' de '+L.moradores.length+')'); G.pontua(150); SOM.fx('vitoria'); }
+  if(!q.op){ q.m.feito=true; var E=J.nivel.todasEntradas||J.nivel.moradores, n=E.filter(function(mm){ return mm.feito; }).length;
+    G.toast('You found a lost page! ('+n+' of '+E.length+')',2600,'Você achou uma página perdida! ('+n+' de '+E.length+')'); G.pontua(150); SOM.fx('vitoria'); }
 }
 function sai(){ var q=J.quiz; if(!q) return; if(q.op) q.op.aoTerminar=null; termina(); if(q.op&&q.op.aoSair) q.op.aoSair(); }
 function termina(){

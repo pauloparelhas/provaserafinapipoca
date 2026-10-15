@@ -16,6 +16,7 @@ var SVG={
   pausa:'<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1.5" fill="currentColor"/><rect x="14" y="4" width="4" height="16" rx="1.5" fill="currentColor"/></svg>',
   moeda:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#fbbf24" stroke="#b45309" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="#b45309" stroke-width="1.5"/></svg>',
   estrela:'<svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21l1.5-7L2 9.3l7-.8z" fill="#fde047" stroke="#b45309" stroke-width="1.2"/></svg>',
+  coracao:'<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.4h2c.7-1.2 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" fill="#f43f5e" stroke="#881337" stroke-width="1.4"/></svg>',
   pagina:'<svg viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5z" fill="#fffbeb" stroke="#92400e" stroke-width="1.6"/><path d="M15 3v4h4" fill="none" stroke="#92400e" stroke-width="1.6"/><path d="M8 11h8M8 14h8M8 17h5" stroke="#d97706" stroke-width="1.4"/></svg>',
   cadeado:'<svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="15.5" r="1.6" fill="#0d0b1e"/></svg>',
   ajuda:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.3 9.5a2.7 2.7 0 1 1 3.9 2.4c-.8.4-1.2 1-1.2 1.9v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.2" fill="currentColor"/></svg>',
@@ -39,6 +40,9 @@ function modoMapa(on){ var b=$('mapBtns'); if(b) b.style.display=on?'flex':'none
 function hudArena(on){ document.body.classList.toggle('naArena',!!on); }
 /* capa: botão grande 'Open the book' */
 function botaoCapa(on){ var b=$('btnCapa'); if(!b){ b=document.createElement('button'); b.id='btnCapa'; b.innerHTML=bi('Open the book ▶','Abrir o livro'); $('ui').appendChild(b); b.addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); JOGO.abreLivro(); }); } b.style.display=on?'block':'none'; document.body.classList.toggle('nacapa',!!on); }
+/* botão de ação (estrela) com o número que sobra, e os corações = tamanho do herói */
+function acao(on,n){ var b=$('tAct'); if(!b) return; b.classList.toggle('show',!!on); b.innerHTML='★<small>'+(n||0)+'</small>'; var h=$('hudStar'); if(h){ h.style.display=on?'flex':'none'; h.querySelector('b').textContent=n||0; } }
+function coracoes(n,dano){ var d=$('hudVida'); if(!d) return; var h=''; for(var i=0;i<3;i++) h+='<span class="cor'+(i<n?' on':'')+'">'+SVG.coracao+'</span>'; d.innerHTML=h; if(dano){ d.classList.remove('dano'); void d.offsetWidth; d.classList.add('dano'); } }
 function quizBotoes(on){ $('quizBtns').classList.toggle('show',!!on); }
 /* corrida: ◀ ▶ somem (o carro anda sozinho); PULAR vira ▲ e o ▼ desce de faixa */
 function modoCorrida(on){ document.body.classList.toggle('corrida',!!on); $('tJump').innerHTML=on?'&#9650;':'JUMP'; }
@@ -143,7 +147,7 @@ function montaMapBtns(){
 }
 
 /* ---------- teclado ---------- */
-var mapaTeclas={ArrowLeft:'left',a:'left',A:'left',ArrowRight:'right',d:'right',D:'right',ArrowUp:'jump',w:'jump',W:'jump',' ':'jump',ArrowDown:'down',s:'down',S:'down'};
+var mapaTeclas={ArrowLeft:'left',a:'left',A:'left',ArrowRight:'right',d:'right',D:'right',ArrowUp:'jump',w:'jump',W:'jump',' ':'jump',ArrowDown:'down',s:'down',S:'down',x:'act',X:'act',Enter:'act'};
 function keydown(e){
   if(e.ctrlKey||e.metaKey||e.altKey) return;
   SOM.init(); document.body.classList.add('kbd');
@@ -201,7 +205,7 @@ function init(){
   $('qDica').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); QUIZ.alternaDica(); });
   $('qOuvir').addEventListener('click',function(){ SOM.init(); QUIZ.ouvir(); });
   initLock();
-  botaoToque('tLeft','left'); botaoToque('tRight','right'); botaoToque('tJump','jump'); botaoToque('tDown','down');
+  botaoToque('tLeft','left'); botaoToque('tRight','right'); botaoToque('tJump','jump'); botaoToque('tDown','down'); botaoToque('tAct','act');
   var cv=$('game');
   cv.addEventListener('pointerdown',function(e){ SOM.init(); if(e.pointerType==='touch') document.body.classList.remove('kbd'); if(menuAberto) return; JOGO.toque(e.clientX,e.clientY); });
   cv.addEventListener('pointermove',function(e){ if(e.pointerType==='mouse'&&!menuAberto){ var p=JOGO.paraLogico(e.clientX,e.clientY); JOGO.mapaHover(p.x,p.y); } });
@@ -218,7 +222,7 @@ function init(){
 }
 document.addEventListener('DOMContentLoaded',init);
 
-return {SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, botaoCapa:botaoCapa, modoCorrida:modoCorrida, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
+return {SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, acao:acao, coracoes:coracoes, botaoCapa:botaoCapa, modoCorrida:modoCorrida, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
   creditos:creditos, menu:menu, fechaMenu:fechaMenu, fimFase:fimFase, pausa:pausa, comoJogar:comoJogar, historia:historia, confirmaCasa:confirmaCasa, confirmaRecomecar:confirmaRecomecar, alternaTr:alternaTr,
   menuAberto:function(){ return menuAberto; }};
 })();

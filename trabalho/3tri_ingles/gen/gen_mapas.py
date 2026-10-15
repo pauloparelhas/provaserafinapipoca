@@ -155,12 +155,19 @@ def castelo():
     m.faixa(4, 6, 6, '='); m.faixa(10, 12, 6, '=')               # duas plataformas para desviar
     return m
 
-MAPAS = {1: vila(), 2: bosque(), 4: recife(), 5: ceu(), 6: ginasio(), 8: biscoito(), 9: castelo()}
+# v2 (Game Design v2): os reinos já portados vêm do arquivo da proposta, que tem o portão de encaixe próprio
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import gen_mapas_v2_proposta as V2
+MAPAS = {1: (V2.vila(), V2.vila_sub()), 2: bosque(), 4: recife(), 5: ceu(), 6: ginasio(), 8: biscoito(), 9: castelo()}
 js = ['/* ING3_jogo_mapas.js — GERADO por trabalho/3tri_ingles/gen/gen_mapas.py. Não editar à mão. */', 'window.MAPAS = {']
 for k, m in MAPAS.items():
+    main, sub = (m if isinstance(m, tuple) else (m, None))
     js.append('  %d:{main:[' % k)
-    js.append(',\n'.join("    '" + r + "'" for r in m.rows()))
+    js.append(',\n'.join("    '" + r + "'" for r in main.rows()))
+    if sub:
+        js.append('  ], sub:[')
+        js.append(',\n'.join("    '" + r + "'" for r in sub.rows()))
     js.append('  ]},')
 js.append('};')
 open(OUT, 'w', encoding='utf-8').write('\n'.join(js) + '\n')
-print('ok', {k: m.w for k, m in MAPAS.items()})
+print('ok', {k: (m[0].w if isinstance(m, tuple) else m.w) for k, m in MAPAS.items()})

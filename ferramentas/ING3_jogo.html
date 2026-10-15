@@ -223,6 +223,14 @@ body.portrait #rot{display:flex}
 #btnSairArena small{font-size:11px;font-weight:900;line-height:1;margin-top:1px;letter-spacing:.3px}
 #btnSairArena:active{transform:scale(.94)}
 
+/* corações e estrela */
+#hudVida{gap:2px;padding:5px 8px}
+#hudVida .cor{width:24px;height:24px;opacity:.22;filter:grayscale(1)}
+#hudVida .cor.on{opacity:1;filter:none}
+#hudVida.dano{animation:shake .4s}
+#tAct{font-size:34px;flex-direction:column}
+#tAct small{font-size:14px;line-height:1}
+body.nomapa #hudVida,body.nacapa #hudVida{display:none}
 /* corrida: só ▲ ▼ */
 body.corrida #tLeft,body.corrida #tRight{display:none}
 body.corrida #tDown{left:30px;bottom:22px;width:84px;height:84px}
@@ -280,6 +288,7 @@ body.show-tr .mcNome small.tr{display:inline;margin-left:6px}
       <button class="ib" id="btnHelp" title="Help" aria-label="Help"></button>
       <button class="ib" id="btnTr" title="Portuguese" aria-label="Portuguese"></button>
       <button class="sombtn" id="sombtn" onclick="toggleSom()" aria-hidden="true" tabindex="-1"></button>
+      <div class="pill" id="hudVida" title="Hearts"></div>
       <div id="hudName">The Lost Endings</div>
       <div class="pill" id="hudArena" title="Pages"><span id="hudArenaIco"></span><span id="hudArenaN">0/0</span></div>
       <div class="pill" id="hudPtsPill" title="Points"><span id="hudPtsIco"></span><span id="hudPts">0</span></div>
@@ -290,6 +299,7 @@ body.show-tr .mcNome small.tr{display:inline;margin-left:6px}
       <button class="tb" id="tLeft" aria-label="Left">&#9664;</button>
       <button class="tb" id="tRight" aria-label="Right">&#9654;</button>
       <button class="tb" id="tDown" aria-label="Crawl">&#9660;</button>
+      <button class="tb" id="tAct" aria-label="Throw a star">★</button>
       <button class="tb" id="tJump" aria-label="Jump">JUMP</button>
     </div>
     <div id="quizBtns"><button id="qDica"></button><button id="qOuvir"></button><button id="qSair">&#10005; Leave</button></div>
@@ -320,6 +330,8 @@ body.show-tr .mcNome small.tr{display:inline;margin-left:6px}
 <script src="ING3_jogo_fases.js"></script>
 <script src="ING3_jogo_motor.js"></script>
 <script src="ING3_jogo_motor2.js"></script>
+<script src="ING3_jogo_perigos.js"></script>
+<script src="ING3_jogo_chefinho.js"></script>
 <script src="ING3_jogo_quiz.js"></script>
 <script src="ING3_jogo_corrida.js"></script>
 <script src="ING3_jogo_estadio.js"></script>
