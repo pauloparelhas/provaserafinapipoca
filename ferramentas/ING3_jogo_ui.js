@@ -216,7 +216,7 @@ function init(){
   JOGO.init();
   /* gancho de QA (automatizado, MUDO) */
   window.__ing3={J:JOGO.J, JOGO:JOGO, QUIZ:QUIZ, FASES:FASES, UI:window.UI,
-    responde:function(certa){ var q=JOGO.J.quiz; if(!q||q.fase!=='pergunta') return false; QUIZ.tecla(String((certa?q.certa:(q.certa+1)%q.placas.length)+1)); return true; },
+    responde:function(certa){ var q=JOGO.J.quiz; if(!q||q.fase!=='pergunta') return false; QUIZ.tecla(String((certa?q.certa:(q.certa+1)%q.cartoes.length)+1)); return true; },
     segue:function(){ QUIZ.tecla('Enter'); }, menuAberto:function(){ return !!menuAberto; },
     clicaPri:function(){ var p=$('mcard').querySelector('.mbtn.pri'); if(p) p.click(); }};
 }

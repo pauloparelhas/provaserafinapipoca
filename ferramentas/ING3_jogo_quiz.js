@@ -42,7 +42,7 @@ function inicia(m,op){
 }
 function montaPergunta(){
   var q=J.quiz, it=q.itens[q.i], ordem=embaralha(it.o.map(function(_,i){ return i; }));
-  q.item=it; q.ordem=ordem; q.certa=ordem.indexOf(it.c); q.escolha=-1; q.fase=q.i?'pergunta':'entra'; q.t=0; q.tempo=TEMPO; q.dica=false; q.lay=null;
+  q.item=it; q.ordem=ordem; q.certa=ordem.indexOf(it.c); q.escolha=-1; q.minT=0; q.fase=q.i?'pergunta':'entra'; q.t=0; q.tempo=TEMPO; q.dica=false; q.lay=null;
   q.cartoes=ordem.map(function(oi,k){ return {k:k, txt:it.o[oi], pt:(it.o_pt||[])[oi]||'', estado:'normal', bump:0}; });
   try{ say(it.p); }catch(e){}
 }
@@ -52,13 +52,14 @@ function responde(k){
   J.stats.perguntas++; marca(q.item.id);
   q.cartoes.forEach(function(c){ c.estado= c.k===q.certa?'certa':(c.k===k?'errada':'apagada'); });
   if(k>=0) q.cartoes[k].bump=10;
+  if(penalti()) PENALTI.chute(q,k,ok,J.t); /* reino 7: a resposta vira um pênalti (só a animação) */
   if(ok){ q.acertos++; J.stats.acertos++; G.pontua(100); SOM.fx('acerto'); }
   else { SOM.fx('erro'); J.shake=4; }
   try{ say((ok?'Yes! ':'Not quite. ')+(q.item.ex||'')); }catch(e){}
   if(q.op&&q.op.aoResponder) q.op.aoResponder(ok);
 }
 function segue(){
-  var q=J.quiz; if(!q||q.fase!=='resposta'||q.t<.5) return;
+  var q=J.quiz; if(!q||q.fase!=='resposta'||q.t<(q.minT||.5)) return;
   q.i++;
   if(q.i<q.itens.length){ montaPergunta(); return; }
   q.fase='pagina'; q.t=0;
@@ -94,8 +95,11 @@ function layout(){
 
 /* ---------- desenho ---------- */
 function desenhaMundo(){ /* o ambiente de questões é desenhado por cima, na tela */ }
+/* reino 7 (estádio): o ambiente de questões é a cena de pênalti (ING3_jogo_penalti.js) */
+function penalti(){ var f=J.faseAtual; return !!(window.PENALTI&&f&&f.cena==='estadio'&&!f.chefao&&!J.chefe); }
 function desenhaTela(c,t){
-  var q=J.quiz; if(!q) return; var it=q.item; if(!q.lay||q.lay.tr!==!!J.tr) layout();
+  var q=J.quiz; if(!q) return; var it=q.item;
+  if(penalti()){ if(!q.lay||!q.lay.pen||q.lay.tr!==!!J.tr) PENALTI.layout(q); PENALTI.desenha(c,t,q); return; } if(!q.lay||q.lay.tr!==!!J.tr) layout();
   var ent=q.fase==='entra'?Math.min(1,q.t/.7):(q.fase==='pagina'?Math.max(0,1-q.t/1.2):1);
   /* a fase esmaecida e a moldura escura (clima de desafio) */
   c.save(); c.globalAlpha=ent;
