@@ -209,13 +209,14 @@ function montaPorteiras(){
     if(cs.length){ var xm=Math.max.apply(null,cs.map(function(p){ return p.x+p.w; })); L.sub.moradores.forEach(function(m){ trig.push({x:xm,m:m}); }); } }
   var livre=function(c){ if(c<1||c>=L.cols-2) return false; if(g[rc].charAt(c)!=='#') return false;
     for(var r=0;r<rc;r++){ for(var dc=-1;dc<=1;dc++){ var ch=g[r].charAt(c+dc); if(dc!==0&&'XRl'.indexOf(ch)<0) continue; if(ch!==' '&&'#B%DcF1234Q=fmnSVlRXtuLW'.indexOf(ch)>=0) return false; } } return true; };
-  var usadas={};
+  var usadas={}, ocupa=function(c){ return usadas[c]||usadas[c-1]||usadas[c+1]||usadas[c-2]||usadas[c+2]; };
   trig.sort(function(a,b){ return a.x-b.x; }).forEach(function(tr){ var c0=Math.floor(tr.x/T), c=-1;
-    for(var k=4;k<=9&&c<0;k++) if(livre(c0+k)&&!usadas[c0+k]) c=c0+k; /* logo depois da entrada, no chão */
-    for(var k2=2;k2<4&&c<0;k2++) if(livre(c0+k2)&&!usadas[c0+k2]) c=c0+k2;
+    for(var k=4;k<=9&&c<0;k++) if(livre(c0+k)&&!ocupa(c0+k)) c=c0+k; /* logo depois da entrada, no chão */
+    for(var k2=2;k2<4&&c<0;k2++) if(livre(c0+k2)&&!ocupa(c0+k2)) c=c0+k2;
+    for(var k3=10;k3<=45&&c<0;k3++) if(livre(c0+k3)&&livre(c0+k3-1)&&livre(c0+k3-2)&&!ocupa(c0+k3)) c=c0+k3; /* depois de um vão (céu): com chão antes, nunca no ar */
     if(c>0){ usadas[c]=1; J.porteiras.push({x:c*T+8,w:30,m:tr.m,abre:0}); } });
 }
-function solidos(M,s){ if(M!==J.nivel||!J.porteiras||!J.urso) return; J.porteiras.forEach(function(p){ if(!p.m.feito&&J.urso.x<p.x+p.w/2) s.push({x:p.x,y:-3000,w:p.w,h:M.h+3000,porteira:p}); }); } /* mão única: quem já está do outro lado (saiu por um cano) volta livre */
+function solidos(M,s){ if(M!==J.nivel||!J.porteiras||!J.urso) return; var u=J.urso; J.porteiras.forEach(function(p){ var cx=p.x+p.w/2; if(Math.abs(u.x-cx)>50) p.lado=u.x<cx?'esq':'dir'; if(!p.m.feito&&p.lado!=='dir') s.push({x:p.x,y:-3000,w:p.w,h:M.h+3000,porteira:p}); }); } /* mão única: o lado fica TRAVADO até o herói se afastar; quem chegou pela direita (saiu por um cano) volta livre */
 function porteiras(dt){ var u=J.urso, M=J.mundo; if(!J.porteiras||M!==J.nivel) return;
   J.porteiras.forEach(function(p){ if(p.m.feito&&p.abre<1){ if(p.abre===0){ SOM.fx('destrava'); G.brilho(p.x+15,u.y-60,16,'#c4b5fd'); } p.abre=Math.min(1,p.abre+dt*1.5); }
     if(!p.m.feito&&Math.abs(u.x-p.x)<46&&J.estado==='nivel'&&!(J.avisoPort>0)){ J.avisoPort=2.5; SOM.fx('clique'); G.toast('Go back! Answer the ? first ◀',2200,'Volte! Responda o ? primeiro ◀'); } });

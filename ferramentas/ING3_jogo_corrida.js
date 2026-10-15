@@ -153,12 +153,12 @@ var FALAS=[
 /* ============================================================
    ESTADO
    ============================================================ */
-var R=null;
+var R=null, R_BASE=0;
 function novoCarro(id,s,d,eu){ var p=pontoEm(s,d); return {id:id,x:p.x,y:p.y,h:p.h,v:0,b:0,st:0,stIn:0,i:p.i,s:s,d:d,ar:0,rol:0,giro:0,fora:0,resg:0,turbo:0,pad:0,vac:0,vacT:0,moedas:0,eu:!!eu,parado:0,wob:0,tag:0,naTela:false,pitFeito:[false,false,false]}; }
 function inicia(f){
-  if(!TRK) montaPista(); instalaCena(); semente=4242;
+  if(!TRK) montaPista(); instalaCena(); var base=Math.floor(Math.random()*9000); semente=4242+base; R_BASE=base;
   R={f:f, fase:'apresenta', t:0, latas:0, acertos:0, paginas:0, pitFeito:[false,false,false], pitAtual:-1, pitRes:[], pitAnim:null, pos:10, posPulse:0, anunc:null, fala:null, falou:{}, pt:[], marcas:[], podio:null, acabou:false, final:0, errosIA:[], ultrapassagens:0, conde:null, cam:{x:0,y:0,a:-PI/2,w:0,z:1.3}, auto:null, tSaida:0, resgates:0};
-  R.me=novoCarro(J.prog.heroi||'lia',640-4*70,-38,true);
+  R.me=novoCarro(J.prog.heroi||'lia',640-5*70,0,true); /* 6ª fila, sozinho no meio: ninguém nasce em cima de ninguém */
   R.rivais=RIVAIS_DEF.map(function(d,k){ var lin=Math.floor(k/2), c=novoCarro(d.id,640-lin*70+(k%2?0:22),(k%2?38:-38)+0,false); c.p=d; c.cor=CR.LISTA[d.id].cor; c.nome=CR.LISTA[d.id].nome; c.fase=hash(k*3.1)*6; c.erros=agendaErros(d,k); c.errosFeitos=0; return c; });
   /* o herói larga em 10º, atrás de todos */
   var cam=R.cam; cam.x=R.me.x; cam.y=R.me.y; cam.a=R.me.h;
@@ -168,13 +168,13 @@ function inicia(f){
   J.in.left=J.in.right=J.in.jump=J.in.down=J.in.act=false;
   SOM.musica('pista'); G.hud();
   if(window.UI){ UI.modoNivel(false); UI.modoMapa(false); UI.modoCorrida(false); UI.quizBotoes(false); }
-  botoes(true); document.body.classList.add('nacapa');
+  botoes(true); document.body.classList.add('nacapa'); document.body.classList.add('emcorrida'); if(window.UI&&UI.poderHud) UI.poderHud(null);
   fala('The Soapbox Rally! Meet the racers and their crazy carts!','O Rali dos Carrinhos! Conheça os pilotos e os carrinhos malucos!');
 }
 /* erros de cada rival, sorteados nos trechos certos (grampo, chicane, pântano, salto) */
 function agendaErros(d,k){ var lst=[], tipos=[];
   TRECHOS.forEach(function(tr,ti){ var tg=tr[tr.length-1]; if(tg.erro) tipos.push(ti); });
-  semente=1000+k*37; var esc=tipos.slice().sort(function(){ return rnd()-.5; }).slice(0,d.erros);
+  semente=1000+k*37+(R_BASE||0); var esc=tipos.slice().sort(function(){ return rnd()-.5; }).slice(0,d.erros);
   esc.forEach(function(ti){ var tg=TRECHOS[ti][TRECHOS[ti].length-1], i0=0; for(var i=0;i<TRK.n;i++){ if(TRK.tag[i].ti===ti){ i0=i; break; } } lst.push({s:TRK.s[i0]+(tg.erro==='aterrissa'?0:40+rnd()*120), tipo:tg.erro, feito:false}); });
   return lst.sort(function(a,b){ return a.s-b.s; }); }
 function largar(){ if(!R||R.fase!=='apresenta'||R.t<.5) return false; document.body.classList.remove('nacapa'); R.fase='largada'; R.t=0; SOM.fx('clique'); if(window.UI) UI.modoNivel(true); botoes(true); fala('Ready… set…','Preparar… apontar…'); return true; }
@@ -187,7 +187,7 @@ function botoes(on){
 }
 var SVG_RAIO='<svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M14 2 4 14h7l-2 8 11-13h-7z" fill="#fde047" stroke="#92400e" stroke-width="1.6" stroke-linejoin="round"/></svg>';
 function pintaTurbo(){ if(!R) return; var n=R.latas, b=el('tJump'); if(!b) return; b.innerHTML=SVG_RAIO+'<small style="display:block;font-size:15px;line-height:1">TURBO '+n+'</small>'; b.style.flexDirection='column'; b.setAttribute('aria-label','Turbo'); b.classList.toggle('turbo0',n<=0); }
-function limpa(){ botoes(false); document.body.classList.remove('nacapa'); R=null; J.corrida=null; }
+function limpa(){ botoes(false); document.body.classList.remove('nacapa'); document.body.classList.remove('emcorrida'); R=null; J.corrida=null; }
 
 /* ============================================================
    LAÇO
@@ -211,11 +211,13 @@ function corre(dt){
   var inp=(J.in.right?1:0)-(J.in.left?1:0); if(chegando||me.resg>0) inp=0;
   if(R.auto){ pilotoIA(me,dt,R.auto); }
   else {
-    var alvoIn=inp; me.stIn+= (alvoIn-me.stIn)*Math.min(1,dt*(alvoIn?5.5:10));
+    var alvoIn=inp; me.stIn+= (alvoIn-me.stIn)*Math.min(1,dt*(alvoIn?2.2:8)); /* 18/10: o esterço sobe devagar (criança segura o botão) */
+    var pa=proj(me.x,me.y,me.i), angA=TRK.h[cl(pa.i+8,0,TRK.n-1)], assist=cl(angDif(angA,me.h)*1.6,-1,1)*.7;
+    if(inp) me.st=me.stIn*.72+assist*.28; /* mesmo virando, a pista ajuda um pouco */
     if(!inp){ /* direção assistida: sem tocar, o carrinho acompanha a pista e volta do canto */
       var p=proj(me.x,me.y,me.i), ang=TRK.h[cl(p.i+8,0,TRK.n-1)], puxa=Math.abs(p.d)>TRK.hw[p.i]*.72?-Math.sign(p.d)*.35:0;
       var err=angDif(ang+puxa*0,me.h)+(-puxa*0); var corr=cl(err*1.6+(Math.abs(p.d)>TRK.hw[p.i]*.72?(p.d>0?.25:-.25):0),-1,1); me.st=corr*.7; }
-    else me.st=me.stIn;
+
     if((J.in.act||J.in.jump)&&J.actSolto){ J.actSolto=false; usaTurbo(); }
     if(!J.in.act&&!J.in.jump) J.actSolto=true;
   }
@@ -255,7 +257,7 @@ function fisica(k,dt,mult){
   var pz=pitZona(k.s); if(pz&&!k.pitFeito[pz.pi]) vm=Math.min(vm,145);
   vm*=sup.vmax*(k.limite||1)*mult;
   /* esterço: menos ângulo em alta velocidade (raio cresce com a velocidade) */
-  var dmax=lerp(.6,.17,cl(k.v/VMAX,0,1)), delta=cl(k.st,-1,1)*dmax;
+  var dmax=lerp(.6,.17,cl(k.v/VMAX,0,1))*(k.eu&&sup.tipo==='grama'?.6:1), delta=cl(k.st,-1,1)*dmax;
   if(k.ar>0){ delta=0; k.ar-=dt; if(k.ar<=0){ SOM.fx('aterra'); poeira(k.x,k.y,8,'#d6d3d1'); if(k.eu) J.shake=3; if(Math.abs(k.b)<.12&&k.eu){ k.pad=Math.max(k.pad,.6); } } }
   var yr=k.v*Math.tan(delta)/LB, aLat=k.v*yr, lim=GRIP*(sup.grip||.01)*(k.eu?1:k.p.grip);
   if(k.ar<=0&&Math.abs(aLat)>lim){ var exc=(Math.abs(aLat)-lim)/lim; k.b+=Math.sign(yr)*Math.min(exc,1.5)*dt*1.4; k.v-=exc*110*dt; yr=Math.sign(yr)*lim/Math.max(40,k.v); if(Math.random()<dt*20) marca(k); }
@@ -331,12 +333,12 @@ function pits(dt){
   R.rivais.forEach(function(r){ var z=pitZona(r.s); if(z&&!r.pitFeito[z.pi]&&r.s>=z.P.sb-6){ r.pitFeito[z.pi]=true; } }); /* rivais passam pela faixa do pit no limitador (o herói para no quiz, com o mundo congelado) */
 }
 function turboFinal(dt){ if(R.fase!=='corre'||R.latas<=0) return; var falta=(FIM_S-R.me.s)/VMAX;
-  if(falta<2.8*R.latas+2){ R.autoT=(R.autoT||0)-dt; if(R.autoT<=0&&R.me.turbo<=0){ R.autoT=.3; usaTurbo(true); } }
+  if(falta<2.8*R.latas+2){ R.autoT=(R.autoT||0)-dt; if(R.autoT<=0&&(R.me.turbo<=0||falta<2.6*R.latas+4)){ R.autoT=.6; usaTurbo(true); } }
   else if(falta<2.8*R.latas+6&&!R.avisoFinal){ R.avisoFinal=true; fala('USE YOUR TURBO! Press ▲!','USE O SEU TURBO! Aperte ▲!'); } }
 function usaTurbo(auto){
   if(!R||R.acabou||R.fase!=='corre') return false;
   if(R.latas<=0){ if(!auto&&(!R.avisoSem||R.t-R.avisoSem>4)){ R.avisoSem=R.t; fala('No turbos yet! Answer right at the pit stop to win one.','Ainda sem turbo! Acerte no pit stop para ganhar um.'); } return false; }
-  if(R.me.turbo>0) return false;
+  if(R.me.turbo>0){ if(!auto) return false; R.latas--; R.me.turbo+=2.5; pintaTurbo(); return true; } /* fim da corrida: a equipe emenda os turbos que sobraram */
   var pz=pitZona(R.me.s); if(pz&&!R.me.pitFeito[pz.pi]){ return false; }
   R.latas--; R.me.turbo=2.5; SOM.fx('arremesso'); pintaTurbo(); fala(auto?'Your crew fires your turbo!':'TURBO!',auto?'A equipe dispara o seu turbo!':'TURBO!'); return true; }
 /* ---------- o Conde Rabisco: na frente, solta tinta do tinteiro (a origem é ele) ---------- */
@@ -399,7 +401,7 @@ function montaPodio(){
   try{ say(pos<=3?['Gold medal!','Silver medal!','Bronze medal!'][pos-1]:'Finisher medal!'); }catch(e){}
 }
 function continua(){ if(!R||R.fase!=='podio'||R.podio.t<.6) return false; SOM.fx('clique'); termina(); return true; }
-function termina(){ var f=R.f; botoes(false); if(window.UI) UI.modoCorrida(false); J.nivel.moradores.forEach(function(m,k){ m.feito=R.paginas>k; }); J.mundo=null; J.faseAtual=f; J.urso={estado:'cheer',anim:0}; R.acabou=true; J.corrida=null; G.fimDeFase(); }
+function termina(){ var f=R.f; botoes(false); document.body.classList.remove('emcorrida'); if(window.UI) UI.modoCorrida(false); J.nivel.moradores.forEach(function(m,k){ m.feito=R.paginas>k; }); J.mundo=null; J.faseAtual=f; J.urso={estado:'cheer',anim:0}; R.acabou=true; J.corrida=null; G.fimDeFase(); }
 function toque(lx,ly){ if(!R||R.acabou) return false; if(R.fase==='podio'){ continua(); return true; } if(R.fase==='apresenta'){ if(lx>W-260&&ly>H-80) largar(); else if(lx<200&&ly>H-80) largar(); return true; } return false; }
 function tecla(k){ if(!R||R.acabou) return false; if(R.fase==='podio'&&(k==='Enter'||k===' '||k==='x'||k==='X')){ continua(); return true; }
   if(R.fase==='apresenta'){ if(k==='Enter'||k===' ') largar(); return true; }
@@ -559,9 +561,15 @@ function desenhaCarro(c,k,t){
   c.translate(k.x,k.y); c.rotate(k.h+wob); c.scale(1.35,1.35); /* o desenho é maior que a caixa de colisão: dá para ver o tema */
   CR.desenha(c,k.id,{cor:k.eu?corHeroi():(k.cor||'#888'),cap:k.eu?corHeroi():null,st:cl(k.st,-1,1)*.45,t:t,rol:k.rol,ar:arK,turbo:k.turbo>0||k.pad>0,eu:k.eu,giro:k.s*.3});
   c.restore();
-  if(k.resg>0){ c.save(); c.translate(k.x,k.y); for(var i=0;i<6;i++){ var aa=t*6+i; A.estrela(c,Math.cos(aa)*30,Math.sin(aa)*30,5,'#fde047',aa); } c.restore(); }
+  if(k.resg>0){ c.save(); c.translate(k.x,k.y); for(var i=0;i<6;i++){ var aa=t*6+i; A.estrela(c,Math.cos(aa)*30,Math.sin(aa)*30,5,'#fde047',aa); } c.restore(); if(k.eu) fada(c,k,t); }
   if(k.vac>0&&k.eu){ c.save(); c.translate(k.x,k.y); c.rotate(k.h); c.strokeStyle='rgba(255,255,255,.7)'; c.lineWidth=2; for(var j=0;j<4;j++){ var o=(t*300+j*40)%120; c.beginPath(); c.moveTo(-o,-22+j*14); c.lineTo(-o-26,-22+j*14); c.stroke(); } c.restore(); }
 }
+/* a fada que leva o carrinho de volta à pista (o resgate tem rosto: não é teletransporte) */
+function fada(c,k,t){ var bat=Math.abs(Math.sin(t*20)); c.save(); c.translate(k.x,k.y); c.rotate(R.cam.a+PI/2); c.translate(0,-46-Math.sin(t*6)*4);
+  c.fillStyle='rgba(224,231,255,.8)'; c.save(); c.scale(1,.5+bat*.5); A.el(c,-14,-6,13,9); c.fill(); A.el(c,14,-6,13,9); c.fill(); c.restore();
+  c.fillStyle='#f0abfc'; c.beginPath(); c.moveTo(-9,14); c.lineTo(9,14); c.lineTo(4,-2); c.lineTo(-4,-2); c.closePath(); c.fill(); c.fillStyle='#fde7d4'; A.circ(c,0,-8,7); c.fill(); c.fillStyle='#fcd34d'; A.el(c,0,-13,8,4); c.fill(); c.fillStyle='#111'; A.circ(c,-2.5,-8,1.1); c.fill(); A.circ(c,2.5,-8,1.1); c.fill();
+  c.strokeStyle='#fbbf24'; c.lineWidth=2; c.beginPath(); c.moveTo(8,2); c.lineTo(20,-10); c.stroke(); A.estrela(c,21,-11,5,'#fde047',t*4);
+  c.strokeStyle='rgba(253,224,71,.8)'; c.lineWidth=1.5; c.beginPath(); c.moveTo(-6,14); c.lineTo(-10,38); c.moveTo(6,14); c.lineTo(10,38); c.stroke(); c.restore(); }
 function carros(c,t){ var lst=R.rivais.slice(); if(R.conde) lst.push(R.conde); lst.push(R.me);
   lst.sort(function(a,b){ return (a.ar>0?1:0)-(b.ar>0?1:0); }).forEach(function(k){ var dx=k.x-R.cam.x, dy=k.y-R.cam.y; if(dx*dx+dy*dy<Math.pow(900/R.cam.z,2)) desenhaCarro(c,k,t); }); }
 function particulasMundo(c,t){ R.pt.forEach(function(p){ if(p.tipo==='texto') return; var k=p.vida/p.max; c.save(); c.globalAlpha=Math.min(1,k*1.6);
@@ -571,7 +579,8 @@ function particulasMundo(c,t){ R.pt.forEach(function(p){ if(p.tipo==='texto') re
 /* etiquetas e textos SEMPRE de pé (fora da rotação da câmera) */
 function etiquetas(c,t){
   R.rivais.forEach(function(r){ var p=tela(r.x,r.y), dentro=p.x>-20&&p.x<W+20&&p.y>40&&p.y<H; if(dentro&&!r.naTela) r.tag=2.5; r.naTela=dentro; if(r.tag>0) r.tag-=1/60;
-    if(dentro&&r.tag>0){ c.save(); c.globalAlpha=Math.min(1,r.tag*2); c.font=F(900,13); var tw=c.measureText(r.nome).width+14; c.fillStyle='rgba(13,11,30,.72)'; rr(c,p.x-tw/2,p.y+26,tw,19,9); c.fill(); c.fillStyle='#fff'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(r.nome,p.x,p.y+36); c.restore(); } });
+    var pertoEu=Math.hypot(p.x-tela(R.me.x,R.me.y).x,p.y-tela(R.me.x,R.me.y).y)<80;
+    if(dentro&&r.tag>0&&!pertoEu&&R.fase!=='largada'){ c.save(); c.globalAlpha=Math.min(1,r.tag*2); c.font=F(900,13); var tw=c.measureText(r.nome).width+14; c.fillStyle='rgba(13,11,30,.72)'; rr(c,p.x-tw/2,p.y+26,tw,19,9); c.fill(); c.fillStyle='#fff'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(r.nome,p.x,p.y+36); c.restore(); } });
   if(R.conde){ var pc=tela(R.conde.x,R.conde.y); if(pc.y>40&&pc.y<H){ c.font=F(900,13); var nm='Count Scribble', tw=c.measureText(nm).width+16; c.fillStyle='rgba(76,29,149,.9)'; rr(c,pc.x-tw/2,pc.y+28,tw,20,10); c.fill(); c.fillStyle='#fde68a'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(nm,pc.x,pc.y+38.5); } }
   var me=tela(R.me.x,R.me.y); if(R.fase!=='podio'){ var yb=me.y-48+Math.sin(t*6)*3; c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=2; c.beginPath(); c.moveTo(me.x,yb+10); c.lineTo(me.x-8,yb); c.lineTo(me.x+8,yb); c.closePath(); c.fill(); c.stroke(); c.font=F(900,12); c.fillStyle='rgba(234,179,8,.95)'; rr(c,me.x-18,yb-17,36,16,8); c.fill(); c.fillStyle='#1e1b3a'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('YOU',me.x,yb-8.5); }
   R.pt.forEach(function(p){ if(p.tipo!=='texto') return; var q=tela(p.x,p.y), k=p.vida/p.max; c.save(); c.globalAlpha=Math.min(1,k*1.6); c.font=F(900,p.r); c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=5; c.strokeStyle='rgba(13,11,30,.75)'; c.strokeText(p.txt,q.x,q.y-30-(1-k)*30); c.fillStyle=p.cor; c.fillText(p.txt,q.x,q.y-30-(1-k)*30); c.restore(); });
@@ -579,8 +588,8 @@ function etiquetas(c,t){
 function textoGrande(c,txt,cor,k){ c.save(); c.translate(W/2,H/2-60); var s=1.4-.4*suave(k); c.scale(s,s); c.globalAlpha=1-k; c.font=F(900,96); c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=10; c.strokeStyle='rgba(13,11,30,.8)'; c.strokeText(txt,0,0); c.fillStyle=cor; c.fillText(txt,0,0); c.restore(); }
 function largada(c,t){
   var n=Math.floor(R.t/.8), txt=n<3?String(3-n):'GO!', k=(R.t%.8)/.8;
-  c.save(); c.translate(W/2,H/2-80); for(var i=0;i<3;i++){ c.fillStyle='#111827'; A.circ(c,-60+i*60,0,24); c.fill(); c.fillStyle=n>i?(n>=3?'#22c55e':'#ef4444'):'#374151'; A.circ(c,-60+i*60,0,18); c.fill(); } c.restore();
-  c.save(); c.translate(W/2,H/2); var s=1.4-.4*suave(k); c.scale(s,s); c.font=F(900,80); c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=10; c.strokeStyle='rgba(13,11,30,.8)'; c.strokeText(txt,0,0); c.fillStyle=n<3?'#fde047':'#4ade80'; c.fillText(txt,0,0); c.restore();
+  c.save(); c.translate(W/2,118); for(var i=0;i<3;i++){ c.fillStyle='#111827'; A.circ(c,-60+i*60,0,24); c.fill(); c.fillStyle=n>i?(n>=3?'#22c55e':'#ef4444'):'#374151'; A.circ(c,-60+i*60,0,18); c.fill(); } c.restore();
+  c.save(); c.translate(W/2,190); var s=1.4-.4*suave(k); c.scale(s,s); c.font=F(900,80); c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=10; c.strokeStyle='rgba(13,11,30,.8)'; c.strokeText(txt,0,0); c.fillStyle=n<3?'#fde047':'#4ade80'; c.fillText(txt,0,0); c.restore();
   c.fillStyle='rgba(13,11,30,.7)'; rr(c,W/2-230,H-62,460,42,21); c.fill(); c.fillStyle='#fde68a'; c.font=F(900,18); c.textAlign='center'; c.textBaseline='middle'; c.fillText('Hold ◀ ▶ to steer  ·  ▲ = TURBO',W/2,H-41);
 }
 /* ---------- HUD ---------- */
