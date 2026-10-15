@@ -15,7 +15,8 @@ FILES=$(git ls-files "ING3_*.html" "ING3_*.js")
 # o jogo ING3 reaproveita o som, a musica e a arte-base do WiseBear
 FILES="$FILES LP3_jornada_partituras.js LP3_jornada_musica.js LP3_jornada_som.js LP3_jornada_arte.js LP3_jornada_arte2.js"
 DEPS="OP_estilo.css OP_questao.js OP_voz.js sera_theme.js serafina-core.css serafina-core.js
-assets/react-dom.production.min.js assets/react.production.min.js"
+assets/react-dom.production.min.js assets/react.production.min.js
+media/video_ing3.mp4 media/video_ing3_poster.jpg media/video_ing3_pt.vtt"
 # vendor de engine do jogo, se existir
 for f in $(git ls-files assets); do case "$f" in *phaser*|*lp3*) DEPS="$DEPS $f";; esac; done
 mkdir -p "$W/ferramentas/assets" "$W/ferramentas/media"

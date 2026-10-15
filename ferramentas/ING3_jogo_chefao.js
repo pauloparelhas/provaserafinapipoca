@@ -65,5 +65,8 @@ function desenhaTela(c,t){
   /* fala do Conde fora do quiz */
   if(C.fala&&!J.quiz&&C.fala.t<4){ c.font='900 20px "Nunito",Arial'; var tw=Math.min(560,c.measureText(C.fala.en).width)+36, bx=C.x-tw-20, by=C.y-190; c.fillStyle='#ede9fe'; A.rr(c,bx,by,tw,J.tr?62:44,16); c.fill(); c.fillStyle='#2e1065'; c.textAlign='left'; c.textBaseline='top'; c.fillText(C.fala.en,bx+18,by+11); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#6d28d9'; c.fillText(C.fala.pt,bx+18,by+38); } }
 }
-return {inicia:inicia, atualiza:atualiza, desenha:desenha, desenhaTela:desenhaTela, ativo:function(){ return !!C; }, limpa:function(){ C=null; J.chefe=null; }};
+/* durante o ambiente de questões: só as animações (páginas voando, expressão do Conde) */
+function anima(dt){ if(!C) return; C.et+=dt; if(C.estado!=='idle'&&C.estado!=='sad'&&C.et>1) C.estado='idle';
+  for(var i=C.voando.length-1;i>=0;i--){ var p=C.voando[i]; p.t+=dt; if(p.t>=.8){ C.voando.splice(i,1); C.hp=Math.max(0,C.hp-1); C.estado='hit'; C.et=0; SOM.fx('chefao'); } } }
+return {inicia:inicia, atualiza:atualiza, anima:anima, desenha:desenha, desenhaTela:desenhaTela, ativo:function(){ return !!C; }, limpa:function(){ C=null; J.chefe=null; }};
 })();

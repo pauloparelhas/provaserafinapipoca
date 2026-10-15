@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>render ING3</title>
+<style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
+</head><body>
+<canvas id="cv" width="1280" height="720"></canvas>
+<script src="timeline.js"></script>
+<script src="lib.js"></script>
+<!-- ajudantes de desenho do video de Portugues (so funcoes; copiados do pipeline LP3 por capturar.py) -->
+<script>const SCENES = {};</script>
+<script src="chars.js"></script>
+<script src="props.js"></script>
+<script src="props2.js"></script>
+<script src="props3.js"></script>
+<script src="cenas1.js"></script>
+<script src="cenas_v2a.js"></script>
+<!-- a ARTE DO JOGO de Ingles (window.ARTE), na ordem do ING3_jogo.html -->
+<script src="LP3_jornada_arte.js"></script>
+<script src="LP3_jornada_arte2.js"></script>
+<script src="LP3_jornada_arte3.js"></script>
+<script src="ING3_jogo_arte.js"></script>
+<script src="ING3_jogo_arte2.js"></script>
+<script src="ING3_jogo_arte3.js"></script>
+<script src="ING3_jogo_arte4.js"></script>
+<script>for (const k in SCENES) delete SCENES[k];</script>
+<!-- as cenas do video de Ingles -->
+<script src="ing_base.js"></script>
+<script src="cenas_ing1.js"></script>
+<script src="cenas_ing2.js"></script>
+<script src="cenas_ing3.js"></script>
+<script src="cenas_ing4.js"></script>
+<script>
+/* Motor: render(t) desenha o quadro do tempo t (segundos). Deterministico. */
+const cv = document.getElementById('cv'), CX = cv.getContext('2d');
+const bufA = document.createElement('canvas'), bufB = document.createElement('canvas');
+bufA.width = bufB.width = W; bufA.height = bufB.height = H;
+const XF = 0.6;
+const MISSING = [];
+
+const LIST = [{ id: 'titulo', nome: '', ini: 0, fim: TL.t_titulo, frases: [], palavras: [] }].concat(TL.cenas);
+LIST[LIST.length - 1].fim = TL.total;
+
+function mkS(sc) {
+  const ini = sc.ini;
+  return {
+    sc, dur: sc.fim - sc.ini,
+    w(word, n = 0) {
+      const hits = sc.palavras.filter(p => p.w === word);
+      if (!hits[n]) { if (!MISSING.includes(sc.id + ':' + word + n)) MISSING.push(sc.id + ':' + word + n); return 1e9; }
+      return hits[n].ini - ini;
+    },
+    f(i) { return sc.frases[i].ini - ini; },
+    fe(i) { return sc.frases[i].fim - ini; },
+    talk(lt) {
+      const t = lt + ini;
+      for (const p of sc.palavras) if (t >= p.ini && t <= p.fim + .04) return .45 + .55 * Math.abs(Math.sin((t - p.ini) * 15));
+      return 0;
+    }
+  };
+}
+const SS = LIST.map(mkS);
+
+function drawScene(ctx, i, t) {
+  const sc = LIST[i], fn = SCENES[sc.id];
+  ctx.save(); ctx.clearRect(0, 0, W, H);
+  if (fn) fn(ctx, t - sc.ini, SS[i]);
+  else { ctx.fillStyle = '#333'; ctx.fillRect(0, 0, W, H); txt(ctx, 'scene ' + sc.id, W / 2, H / 2, 60, '#fff'); }
+  ctx.restore();
+}
+
+/* ---------- legenda com karaoke: a palavra ja falada fica amarela ---------- */
+const ALL = [];
+TL.cenas.forEach(c => c.frases.forEach((f, fi) => ALL.push({ f, fi, cena: c })));
+function nrm(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’]/g, "'").replace(/[^a-z0-9'-]/g, ''); }
+/* tempo de cada palavra da legenda: casa em ordem com as palavras que a voz disse */
+ALL.forEach(a => {
+  const ws = a.cena.palavras.filter(p => p.f === a.fi).map(p => ({ n: nrm(p.w), t: p.ini }));
+  let j = 0, last = a.f.ini;
+  a.toks = a.f.leg.split(' ').map(tok => {
+    const n = nrm(tok); let hit = -1;
+    if (n) for (let k = j; k < Math.min(ws.length, j + 4); k++) if (ws[k].n === n) { hit = k; break; }
+    if (hit >= 0) { j = hit + 1; last = ws[hit].t; return { s: tok, t: last }; }
+    if (n && j < ws.length) { last = ws[j].t; j++; return { s: tok, t: last }; }   /* numero escrito x falado */
+    return { s: tok, t: last };
+  });
+});
+function captionAt(t) {
+  for (let k = 0; k < ALL.length; k++) {
+    const { f, cena } = ALL[k];
+    const nxt = ALL[k + 1];
+    let end;
+    if (nxt && nxt.cena === cena) end = nxt.f.ini - 0.06; else end = Math.min(cena.fim - 0.35, f.fim + 0.9);
+    const st = f.ini - 0.12;
+    if (t >= st && t < end) return { a: Math.min(clamp((t - st) / .15), clamp((end - t) / .15)), item: ALL[k] };
+  }
+  return null;
+}
+function drawCaption(ctx, t) {
+  const c = captionAt(t); if (!c || c.a <= 0) return;
+  const toks = c.item.toks;
+  let size = 36, maxW = 1120;
+  const lay = () => {
+    ctx.font = `800 ${size}px ${FONT}`;
+    const sp = ctx.measureText(' ').width, lines = [[]]; let lw = 0;
+    toks.forEach(tk => {
+      const w = ctx.measureText(tk.s).width;
+      if (lines[lines.length - 1].length && lw + sp + w > maxW) { lines.push([]); lw = 0; }
+      const L = lines[lines.length - 1]; lw += (L.length ? sp : 0) + w; L.push({ tk, w });
+    });
+    return { lines, sp };
+  };
+  let L = lay();
+  if (L.lines.length > 2) { size = 32; maxW = 1160; L = lay(); }
+  const lh = size * 1.25, bh = L.lines.length * lh + 26;
+  const widths = L.lines.map(l => l.reduce((a, o, i) => a + o.w + (i ? L.sp : 0), 0));
+  const bw = Math.max(...widths) + 56, by = H - 18 - bh;
+  ctx.save(); ctx.globalAlpha = c.a;
+  rr(ctx, (W - bw) / 2, by, bw, bh, 22); ctx.fillStyle = 'rgba(14,16,34,.84)'; ctx.fill();
+  ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(255,255,255,.18)'; ctx.stroke();
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.font = `800 ${size}px ${FONT}`;
+  L.lines.forEach((l, i) => {
+    let x = (W - widths[i]) / 2; const y = by + 13 + lh * (i + .5) + 1;
+    l.forEach(o => { ctx.fillStyle = t >= o.tk.t - 0.02 ? '#ffd43b' : '#fffdf5'; ctx.fillText(o.tk.s, x, y); x += o.w + L.sp; });
+  });
+  ctx.restore();
+}
+
+function render(t) {
+  let i = LIST.findIndex(s => t >= s.ini && t < s.fim); if (i < 0) i = LIST.length - 1;
+  const sc = LIST[i];
+  let other = -1, k = 0;
+  if (i + 1 < LIST.length && t > sc.fim - XF / 2) { other = i + 1; k = (t - (sc.fim - XF / 2)) / XF; }
+  else if (i > 0 && t < sc.ini + XF / 2) { other = i - 1; k = 1 - (t - (sc.ini - XF / 2)) / XF; }
+  CX.save(); CX.globalAlpha = 1;
+  if (other < 0) { drawScene(CX, i, t); }
+  else {
+    const [a, b] = other > i ? [i, other] : [other, i];
+    const wNext = other > i ? easeInOut(k) : easeInOut(1 - k);
+    drawScene(bufA.getContext('2d'), a, t); drawScene(bufB.getContext('2d'), b, t);
+    CX.drawImage(bufA, 0, 0); CX.globalAlpha = wNext; CX.drawImage(bufB, 0, 0); CX.globalAlpha = 1;
+  }
+  drawCaption(CX, t);
+  CX.restore();
+  return true;
+}
+window.render = render;
+window.frameJPEG = (t, q) => { render(t); return cv.toDataURL('image/jpeg', q || 0.9); };
+</script>
+</body></html>
