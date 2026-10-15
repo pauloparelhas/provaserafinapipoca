@@ -112,7 +112,7 @@ A.inimigo=function(c,e,t){
   else inimigo1(c,e,t);
 };
 
-/* ---------- cano (verde Mario-like, mas com folha de bordo) ---------- */
+/* ---------- cano (cano verde de desenho, com folha de bordo) ---------- */
 A.cano=function(c,p,cena,t,marcado){
   var gelo=/gelo|aurora|castelo/.test(cena), c1=gelo?'#7dd3fc':'#4ade80', c2=gelo?'#0369a1':'#166534';
   c.fillStyle=lin(c,p.x,0,p.x+p.w,0,c1,c2); c.fillRect(p.x+4,p.y+16,p.w-8,p.h-16);

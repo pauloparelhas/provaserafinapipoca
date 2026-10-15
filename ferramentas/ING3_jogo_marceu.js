@@ -56,7 +56,7 @@ function desenha(c,t){
   (M.tempestades||[]).forEach(function(z){ var est=cicloTempestade(z), cx=z.x+z.w/2;
     c.save(); var cor=est==='calma'?'#94a3b8':(est==='aviso'?'#475569':'#334155'); c.fillStyle=cor; A.circ(c,cx-30,z.y+20,26); c.fill(); A.circ(c,cx,z.y+10,32); c.fill(); A.circ(c,cx+30,z.y+20,26); c.fill(); A.rr(c,cx-56,z.y+18,112,26,13); c.fill();
     c.fillStyle='#fff'; A.circ(c,cx-10,z.y+20,4); c.fill(); A.circ(c,cx+10,z.y+20,4); c.fill(); c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.arc(cx,z.y+34,7,1.15*Math.PI,1.85*Math.PI); c.stroke();
-    if(est==='aviso'&&Math.floor(t*10)%2){ c.fillStyle='rgba(253,224,71,.5)'; A.circ(c,cx,z.y+28,40); c.fill(); }
+    if(est==='aviso'){ c.fillStyle='rgba(253,224,71,'+(.18+.32*(.5+.5*Math.sin(t*9.4)))+')'; A.circ(c,cx,z.y+28,40); c.fill(); }
     if(est==='raio'){ c.strokeStyle='#fde047'; c.lineWidth=7; c.shadowColor='#fde047'; c.shadowBlur=16; c.beginPath(); c.moveTo(cx,z.y+44); var yy=z.y+44; for(var k=0;k<8;k++){ yy+=55; c.lineTo(cx+(k%2?14:-14),yy); } c.stroke(); }
     c.restore(); });
 }

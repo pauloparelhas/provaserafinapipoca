@@ -38,7 +38,7 @@ var C=null;
 var ABERTURA=[
   {en:'Inkwell Castle. Count Scribble lives here!', pt:'Castelo do Tinteiro. Aqui mora o Conde Rabisco!', fx:'trovao'},
   {en:'"HA HA! The lost endings are MINE!"', pt:'"RÁ RÁ! Os finais perdidos são MEUS!"', fx:'conde'},
-  {en:'Jump on the shelf. Throw a ★ at the glowing inkwell!', pt:'Pule na prateleira. Jogue uma ★ no tinteiro que brilha!', fx:'tinteiros', botao:'Fight! ▶'}
+  {en:'Jump on the shelf. Throw a ★ at the glowing inkwell!', pt:'Pule na prateleira. Jogue uma ★ no tinteiro que brilha!', fx:'tinteiros', botao:"Let's go! ▶"}
 ];
 
 function falaC(en,pt,dur){ if(!C) return; C.fala={en:en,pt:pt,t:0,dur:dur||3.2}; try{ say(en); }catch(e){} }
@@ -53,9 +53,9 @@ function inicia(L){
 }
 function mostraPasso(){
   var p=ABERTURA[C.passo]; if(!p) return;
-  if(p.fx==='trovao'){ C.raio=1; J.flash=.9; SOM.fx('quebra'); J.shake=6; }
+  if(p.fx==='trovao'){ C.raio=1; J.flash=.4; SOM.fx('quebra'); J.shake=6; }
   if(p.fx==='borbulha'){ SOM.fx('cano'); }
-  if(p.fx==='conde'){ C.aparece=.001; C.estado='laugh'; C.et=0; SOM.fx('chefao'); J.shake=10; J.flash=.6; SOM.musica('chefao'); }
+  if(p.fx==='conde'){ C.aparece=.001; C.estado='laugh'; C.et=0; SOM.fx('chefao'); J.shake=6; J.flash=.35; SOM.musica('chefao'); }
   if(p.fx==='risada'){ C.estado='laugh'; C.et=0; SOM.fx('risada'); }
   if(p.fx==='tinteiros'){ SOM.fx('destrava'); }
   if(window.UI) UI.legenda({en:p.en,pt:p.pt,botao:p.botao},{next:avancaIntro,pula:fimIntro});

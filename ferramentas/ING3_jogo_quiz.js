@@ -13,7 +13,7 @@
 window.QUIZ = (function(){
 'use strict';
 var G=window.JOGO, J=G.J, A=window.ARTE, W=G.W, H=G.H;
-var N_POR_MORADOR=3, TEMPO=30, USADAS='ing3_jogo_usadas';
+var N_POR_MORADOR=3, TEMPO=60, USADAS='ing3_jogo_usadas';
 
 /* ---------- escolha das perguntas ---------- */
 function usadas(){ try{ return JSON.parse(localStorage.getItem(USADAS)||'[]'); }catch(e){ return []; } }
@@ -78,7 +78,7 @@ function atualiza(dt){
   var q=J.quiz; if(!q) return; q.t+=dt;
   q.cartoes.forEach(function(c){ if(c.bump>0) c.bump=Math.max(0,c.bump-dt*50); });
   if(q.fase==='entra'&&q.t>.7){ q.fase='pergunta'; q.t=0; }
-  else if(q.fase==='pergunta'){ var antes=Math.ceil(q.tempo); q.tempo=Math.max(0,q.tempo-dt); var agora=Math.ceil(q.tempo); if(agora!==antes&&agora<=5&&agora>0) SOM.fx('clique'); if(q.tempo<=0) responde(-1); }
+  else if(q.fase==='pergunta'){ var antes=Math.ceil(q.tempo); var lendo=false; try{ lendo=speechSynthesis.speaking; }catch(e){} if(!lendo&&q.item.tipo!=='leitura') q.tempo=Math.max(0,q.tempo-dt); /* guardiao: sem pressa para ler */ var agora=Math.ceil(q.tempo); if(agora!==antes&&agora<=5&&agora>0) SOM.fx('clique'); if(q.tempo<=0) responde(-1); }
   else if(q.fase==='resposta'&&q.auto&&q.t>=q.auto) segue();
   else if(q.fase==='pagina'&&q.t>1.6) termina();
 }

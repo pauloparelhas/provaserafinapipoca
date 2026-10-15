@@ -39,9 +39,9 @@ function acerta(ch){
 function desenha(c,t){
   var M=J.mundo; if(!M||!M.chefinhos) return;
   M.chefinhos.forEach(function(ch){
-    if(ch.vencido) return; if(ch.inv>0&&Math.floor(t*20)%2) return;
+    if(ch.vencido) return; var alC=ch.inv>0?.6+.3*Math.sin(t*12):1;
     var sy=ch.estado==='prepara'?.78:(ch.estado==='pulo'?1.12:1+Math.sin(t*5)*.04), sx=2-sy;
-    c.save(); c.translate(ch.x,ch.y);
+    c.save(); c.globalAlpha=alC; c.translate(ch.x,ch.y);
     c.fillStyle='rgba(0,0,0,.25)'; A.el(c,0,ch.y0-ch.y+3,40,8); c.fill();
     c.scale(sx,sy);
     var g=c.createRadialGradient(-12,-50,6,0,-36,58); g.addColorStop(0,'#6366f1'); g.addColorStop(.6,'#312e81'); g.addColorStop(1,'#1e1b4b'); c.fillStyle=g;

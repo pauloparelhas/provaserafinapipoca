@@ -35,7 +35,7 @@ var KX=480, KPE=399, KS=.84;                     /* goleiro: x, pés, escala */
 var REF={x:78,y:404,s:1.28};                     /* juiz */
 var CORRE=.5, VOO=.7, BATE=CORRE+VOO;            /* linha do tempo (s) */
 var FALA_T=1.45, NEXT_T=1.6;                     /* juiz fala / botão aparece */
-var TEMPO=30;
+var TEMPO=60;
 
 function F(peso,px){ return peso+' '+px+'px "Nunito","Segoe UI",Arial'; }
 function cl(v,a,b){ return v<a?a:(v>b?b:v); }

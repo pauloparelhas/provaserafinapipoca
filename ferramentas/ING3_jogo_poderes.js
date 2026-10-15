@@ -39,10 +39,10 @@ var TAB={
      txt:'Chalky hands hold rings and bars tight. Jump, then tap JUMP again in the air: a FLIP!', txtPt:'Mãos com giz seguram firme argolas e barras. Pule e aperte PULAR de novo no ar: uma CAMBALHOTA!'},
   7:{id:'bolas', tiro:'bola', suporte:'rack', verbo:'Take!', verboPt:'Pegue!', nome:'soccer balls', nomePt:'bolas de futebol',
      tit:'Soccer balls!', titPt:'Bolas de futebol!',
-     txt:'Press SPACE (or the ball button) to kick a ball. Kick the ink players and the ball machine!', txtPt:'Aperte ESPAÇO (ou o botão da bola) para chutar. Chute os jogadores de tinta e a máquina de bolas!'},
+     txt:'Press SPACE (or the ball button) to kick a ball. Kick the ball at the ink players and the ball machine!', txtPt:'Aperte ESPAÇO (ou o botão da bola) para chutar. Chute os jogadores de tinta e a máquina de bolas!'},
   8:{id:'biscoitos', tiro:'biscoito', nome:'cookies', nomePt:'biscoitos',
      tit:'Cookies!', titPt:'Biscoitos!',
-     txt:'Press SPACE (or the cookie button) to toss a cookie. Ink blobs love cookies: they turn into butterflies!', txtPt:'Aperte ESPAÇO (ou o botão do biscoito) para jogar um biscoito. As manchas de tinta adoram biscoito: viram borboletas!'}
+     txt:'Press SPACE (or the cookie button) to throw a cookie. Ink blobs love cookies: they turn into butterflies!', txtPt:'Aperte ESPAÇO (ou o botão do biscoito) para jogar um biscoito. As manchas de tinta adoram biscoito: viram borboletas!'}
 };
 /* a história do ratinho: cada objeto no seu móvel, com o seu verbo */
 var HIST={
@@ -418,7 +418,7 @@ function maquina(c,g,t){ /* máquina de bolas de futebol: funil cheio, luz que f
   c.fillStyle='#374151'; circ(c,-26,-20,13); c.fill(); c.fillStyle='#111'; circ(c,-28,-20,9); c.fill();
   c.fillStyle='rgba(203,213,225,.85)'; c.beginPath(); c.moveTo(-22,-50); c.lineTo(-34,-86); c.lineTo(34,-86); c.lineTo(22,-50); c.closePath(); c.fill();
   if(!g.desligado){ desBola(c,-12,-66,9,0); desBola(c,8,-68,9,1); desBola(c,-2,-80,8,2); }
-  c.fillStyle=g.desligado?'#4b5563':(g.aviso>0?(Math.floor(t*12)%2?'#ef4444':'#fca5a5'):'#22c55e'); circ(c,12,-30,6); c.fill();
+  c.fillStyle=g.desligado?'#4b5563':(g.aviso>0?'#ef4444':'#22c55e'); circ(c,12,-30,6); c.fill();
   if(g.desligado){ c.fillStyle='rgba(148,163,184,.6)'; for(var k=0;k<3;k++){ var f=(t*.7+k/3)%1; circ(c,0+k*6,-90-f*40,6+f*8); c.fill(); } }
   c.restore(); }
 function luz(c,x,y,cena,t){ c.save(); c.strokeStyle='#44403c'; c.lineWidth=2; c.beginPath(); c.moveTo(x,cena==='biscoito'?0:y-60); c.lineTo(x,y); c.stroke();
@@ -490,7 +490,7 @@ var DICA_PODER={1:['Seven-League Boots: jump, then press JUMP again in the air f
   4:['Diving suit: tap JUMP to swim up. Press SPACE to blow bubbles at the jellyfish.','Roupa de mergulho: toque PULAR para nadar para cima. Aperte ESPAÇO para soprar bolhas nas águas-vivas.'],
   5:['Cloud Cape: hold JUMP to fly up. Let go to float down slowly.','Capa das Nuvens: segure PULAR para subir voando. Solte para descer devagar.'],
   7:['Soccer balls: press SPACE to kick a ball at the ink players and the ball machine.','Bolas de futebol: aperte ESPAÇO para chutar uma bola nos jogadores de tinta e na máquina.'],
-  8:['Cookies: press SPACE to toss a cookie. Ink blobs love cookies and turn into butterflies!','Biscoitos: aperte ESPAÇO para jogar um biscoito. As manchas de tinta adoram e viram borboletas!']};
+  8:['Cookies: press SPACE to throw a cookie. Ink blobs love cookies and turn into butterflies!','Biscoitos: aperte ESPAÇO para jogar um biscoito. As manchas de tinta adoram e viram borboletas!']};
 function dicaPoder(){ var d=DICA_PODER[fase()]; return d?{en:d[0],pt:d[1]}:null; }
 return {dicaPoder:dicaPoder, solidos:solidos, desenhaPorteiras:desenhaPorteiras, desenhaTela:desenhaTela, TAB:TAB, poder:poder, pega:pega, interage:interage, toca:toca, dica:dica, alvo:alvo, atira:atira, moveTiro:moveTiro, acertaExtra:acertaExtra, atualiza:atualiza, reinicia:reinicia, segundoPulo:segundoPulo,
   desenhaItem:desenhaItem, plataforma:plataforma, ninho:ninho, antesHeroi:antesHeroi, depoisHeroi:depoisHeroi, desenhaTiro:desenhaTiro, desenhaRolante:desenhaRolante, desenhaFundo:desenhaFundo, desenhaFrente:desenhaFrente, mola:mola, inimigo:inimigo, icone:icone, hudPoder:hudPoder, tiroAtual:tiroAtual, cartao:cartao};

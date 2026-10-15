@@ -112,11 +112,11 @@ function desenhaNivel(c){
   if(J.quiz&&window.QUIZ) QUIZ.desenhaMundo(c,t);
   if(J.pip){ var p=J.pip; pip(c,p.x,p.y,p.parado?'idle':'walk',t,p.vx>=0?1:-1,1); }
   /* o herói: tamanho + squash & stretch, pisca quando invencível */
-  if(!(u.invT>0 && Math.floor(t*14)%2===0)){ var s=TAM[u.tam];
+  if(u.invT>0){ c.globalAlpha=.55+.35*Math.sin(t*12); } { var s=TAM[u.tam];
     if(u.montado){ var sela=(A.pip&&A.pip.SELA_Y)||40; pip(c,u.x,u.y,u.noChao?(Math.abs(u.vx)>5?'walk':'idle'):'fly',u.anim,u.dir,1); c.save(); c.translate(u.x,u.y-sela); c.scale(u.sx,u.sy); heroi(c,0,0,'ride',u.anim,u.dir,s,u.quem); c.restore(); }
     else { var poseH=poseDoHeroi(u,M); J.poseHeroi=poseH; J.capaLonga=poseH==='fly'; if(window.PODERES) PODERES.antesHeroi(c,u,s,t);
       c.save(); c.translate(u.x,u.y); if(u.giro){ var hh2=G.URSO_H*s*(u.estado==='hang'?1:.5); c.translate(0,-hh2); c.rotate(u.giro); c.translate(0,hh2); } c.scale(u.sx,u.sy); var est2=u.estado==='hang'||u.estado==='spin'?'cheer':null; heroi(c,0,0,est2||(poseH==='paraquedas'?'jump':poseH),u.anim,u.dir,s,u.quem); c.restore(); if(window.PODERES) PODERES.depoisHeroi(c,u,s,t); } }
-  J.part.forEach(function(p){ if(!(window.PERIGOS&&PERIGOS.particula(c,p))) A.particula(c,p); });
+  c.globalAlpha=1; J.part.forEach(function(p){ if(!(window.PERIGOS&&PERIGOS.particula(c,p))) A.particula(c,p); });
   if(J.estado==='nivel') desenhaGuia(c,t,true);
   if(J.dica && J.estado==='nivel') desenhaDica(c,J.dica,t);
   c.restore();

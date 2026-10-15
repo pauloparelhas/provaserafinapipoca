@@ -1,3 +1,6 @@
+/* Portions derived from javascript-racer (https://github.com/jakesgordon/javascript-racer)
+   Copyright (c) 2012-2016 Jake Gordon and contributors - MIT License
+   (https://github.com/jakesgordon/javascript-racer/blob/master/LICENSE). Tecnica reescrita aqui. */
 /* ============================================================
    ING3_jogo_corrida.js — Real or Make-believe RALLY (reino 3), v4 (2,5D).
    18/10 (Paulo: "vista de cima deixa tonto, não dá para entender os
@@ -429,7 +432,7 @@ function hud(c,t){
   var f=R.fala; if(f&&f.t<3.2&&R.fase!=='podio'&&R.fase!=='pit'&&!pzp){ var al=Math.min(1,f.t*6,(3.2-f.t)*3);
     c.save(); c.globalAlpha=al; c.font=F(900,18); var tw=Math.min(560,c.measureText(f.en).width)+34, bx2=W/2-tw/2, by2=64, hh=J.tr&&f.pt?54:36;
     c.fillStyle='rgba(255,255,255,.96)'; rr(c,bx2,by2,tw,hh,16); c.fill(); c.fillStyle='#1e1b3a'; c.textAlign='center'; c.textBaseline='top'; c.fillText(f.en,W/2,by2+8,560); if(J.tr&&f.pt){ c.fillStyle='#6b5d4f'; c.font=F(700,13); c.fillText(f.pt,W/2,by2+32,560); } c.restore(); }
-  if(me.turbo>0||me.pad>0){ c.strokeStyle='rgba(255,255,255,.55)'; c.lineWidth=3; for(var s2=0;s2<12;s2++){ var hx=hash(s2+Math.floor(t*12)), lx=s2%2?hx*120:W-hx*120, ly=(t*900+s2*97)%H; c.beginPath(); c.moveTo(lx,ly); c.lineTo(lx,ly+60); c.stroke(); } }
+  if(me.turbo>0||me.pad>0){ c.strokeStyle='rgba(255,255,255,.55)'; c.lineWidth=3; for(var s2=0;s2<12;s2++){ var hx=hash(s2*7+3), lx=s2%2?hx*120:W-hx*120, ly=(t*900+s2*97)%H; c.beginPath(); c.moveTo(lx,ly); c.lineTo(lx,ly+60); c.stroke(); } }
   if(R.anunc){ var ka=R.anunc.t, sc=1+.4*Math.max(0,1-ka/.25); c.save(); c.globalAlpha=Math.min(1,(1.3-ka)*3); c.translate(W/2,170); c.scale(sc,sc); c.font=F(900,46); c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=9; c.strokeStyle='rgba(13,11,30,.85)'; c.strokeText(R.anunc.txt,0,0); c.fillStyle=R.anunc.cor; c.fillText(R.anunc.txt,0,0); if(J.tr&&R.anunc.pt){ c.font=F(700,16); c.lineWidth=5; c.strokeText(R.anunc.pt,0,34); c.fillStyle='#fde68a'; c.fillText(R.anunc.pt,0,34); } c.restore(); }
   R.pt.forEach(function(p){ if(!p.c||!p.c.eu) return; var a=p.vida/p.max; c.save(); c.globalAlpha=Math.min(1,a*2); c.font=F(900,24); c.textAlign='center'; c.lineWidth=5; c.strokeStyle='rgba(13,11,30,.8)'; c.strokeText(p.txt,W/2,H-170-(1-a)*30); c.fillStyle='#fde68a'; c.fillText(p.txt,W/2,H-170-(1-a)*30); c.restore(); });
 }
