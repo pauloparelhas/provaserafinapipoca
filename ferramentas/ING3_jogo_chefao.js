@@ -96,7 +96,7 @@ function derrota(){
 function pena(){ return {x:C.x-46, y:C.y-170}; }
 function novaGota(){ var u=J.urso, p=pena(), lado=Math.random()<.5?-1:1, alvo=Math.max(40,Math.min(16*T,u.x+(Math.random()<.35?0:lado*(70+Math.random()*90)))); C.gotas.push({x0:p.x,y0:p.y,alvo:alvo,t:0,dur:1.35,x:p.x,y:p.y,r:13}); /* 18/10: nem sempre na criança; 1,35 s de sombra para sair */ C.estado='write'; C.et=0; SOM.fx('arremesso'); }
 /* letras: a cada duas, uma vira degrau da ESCADA (colunas 13, 14, 15 empilhando 1, 2, 3); a outra é ataque */
-var ESCADA=[13,14,14,15,15,15];
+var ESCADA=[14,15,15,16,16,16]; /* 18/10: o último degrau encosta na sacada (col 17): sobe sem pulo de fé */
 function novaLetra(){
   var u=J.urso, p=pena(), deg=C.nLetra%2===1&&C.nLetra>>1<ESCADA.length, alvo;
   if(deg){ var col=ESCADA[C.nLetra>>1]; alvo=col*T+T/2; } else alvo=Math.max(40,Math.min(12*T,u.x+(Math.random()<.5?-1:1)*(80+Math.random()*80)));
@@ -120,7 +120,7 @@ function atualiza(dt){
   var u=J.urso, R=G.ursoRet(), vivo=u.invT<=0&&u.tontoT<=0;
   if((u.poderes.estrelas||0)<=0&&/^p/.test(C.fase)&&C.t>2) daEstrelas();
   if(C.fase==='espera'){ if(C.t>2) duelo(); }
-  else if(C.fase==='derrota'){ if(C.t>3.2) G.iniciaFinal(); }
+  else if(C.fase==='derrota'){ if(C.t>3.2){ G.iniciaFinal(); return; } } /* o final limpa o Conde: não seguir usando C */
   else if(C.fase==='transicao'){ if(C.t>2.8){ C.banner=null; comecaFase(C.prox); } }
   else if(C.fase==='p1'){
     var ritmo=3.4-C.alvo*.3;
@@ -185,7 +185,7 @@ function desenha(c,t){
   /* letras caídas: a ESCADA */
   C.blocos.forEach(function(b){ c.fillStyle=A.lin(c,b.x,b.y,b.x,b.y+b.h,'#8b5cf6','#4c1d95'); A.rr(c,b.x+1,b.y+1,b.w-2,b.h-2,8); c.fill(); c.strokeStyle='#2e1065'; c.lineWidth=2; A.rr(c,b.x+1,b.y+1,b.w-2,b.h-2,8); c.stroke();
     c.fillStyle='#f5f3ff'; c.font='900 30px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(b.ch,b.x+b.w/2,b.y+b.h/2+1); });
-  if(C.fase==='p3'){ /* setas mostrando a subida */ var b2=Math.abs(Math.sin(t*3))*6; c.save(); c.globalAlpha=.85; c.fillStyle='#fde047'; [[13,1],[14,2],[15,3],[16.6,4]].forEach(function(p,i){ var yy=CHAO-p[1]*T-22-b2; if(p[0]<16&&C.alt[p[0]]<p[1]) return; c.beginPath(); c.moveTo(p[0]*T+10,yy); c.lineTo(p[0]*T+34,yy-10); c.lineTo(p[0]*T+34,yy+10); c.closePath(); c.fill(); }); c.restore(); }
+  if(C.fase==='p3'){ /* setas mostrando a subida */ var b2=Math.abs(Math.sin(t*3))*6; c.save(); c.globalAlpha=.85; c.fillStyle='#fde047'; [[14,1],[15,2],[16,3],[17.4,4]].forEach(function(p,i){ var yy=CHAO-p[1]*T-22-b2; if(p[0]<17&&C.alt[p[0]]<p[1]) return; c.beginPath(); c.moveTo(p[0]*T+10,yy); c.lineTo(p[0]*T+34,yy-10); c.lineTo(p[0]*T+34,yy+10); c.closePath(); c.fill(); }); c.restore(); }
   /* sombras de aviso, gotas e letras em voo */
   [C.gotas,C.letras].forEach(function(lista,ehLetra){ lista.forEach(function(d){ if(d.t<0) return;
     var k=Math.min(1,d.t/d.dur), chao=ehLetra&&d.degrau?CHAO-C.alt[d.col]*T:CHAO; c.fillStyle='rgba(30,27,75,'+(.15+.45*k)+')'; A.el(c,d.alvo,chao-2,(ehLetra?28:16)*(.5+.6*k),6); c.fill();

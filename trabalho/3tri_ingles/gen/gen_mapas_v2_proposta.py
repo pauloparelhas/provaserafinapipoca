@@ -83,7 +83,7 @@ def vila():
     m.p(16, 9, 'D')                                      # D1: casa do contador de historias (cedo, sem perigo)
     m.p(20, 9, 'S'); m.fx(21, 24, 4, '='); m.p(23, 3, 'O')  # monte de feno = mola; telhado com moeda grande
     m.p(27, 9, 'c')
-    m.p(31, 9, 'i')                                      # 1a mancha: pisar
+    m.p(41, 9, 'i')                                      # 1a mancha: pisar (longe do riacho: regra R2)
     m.buraco(34, 3, 'W')                                 # riacho
     m.fx(38, 40, 7, '=')
     m.fx(43, 45, 6, 'B'); m.p(44, 5, 'o')                # tijolos com moeda
@@ -92,15 +92,15 @@ def vila():
     m.p(60, 9, 'c')
     m.p(63, 9, 'D')                                      # D2: padaria
     m.fx(66, 68, 7, '='); m.p(67, 6, 'O')                # plataforma de apoio para o muro (com ou sem botas)
-    m.bloco(71, 72, 6, 9)                                # muro alto: so com pulo duplo
+    m.bloco(71, 72, 7, 9)                                # muro de 3 tiles: um pulo normal passa (as botas so ajudam)
     m.fx(73, 78, 6, '#'); m.fx(74, 77, 5, 'o')           # muralha (telhados) — superficie linha 6
     m.p(80, 3, 'v'); m.p(82, 3, 'v')                     # telhas que caem quando passa embaixo
     m.buraco(84, 3); m.fx(84, 86, 8, 'f')                # telhas que caem sobre buraco
-    m.buraco(89, 3); m.p(88, 6, 'g')                     # ilha de 2 tiles entre 2 buracos
+    m.buraco(90, 2); m.p(88, 6, 'g')                     # ilha de 3 tiles entre os buracos (regra R1)
     m.p(94, 9, 'c')
     m.fx(97, 98, 8, '1')                                 # poco = cano para o porao (D3 no submundo)
     m.p(103, 9, 'H')
-    m.bloco(105, 105, 9, 9); m.bloco(106, 106, 8, 9); m.p(112, 9, 'K')  # rampa do castelo: barris rolam
+    m.bloco(105, 105, 9, 9); m.bloco(106, 106, 8, 9)  # rampa do castelo (barris sairam: rolavam logo antes do fosso, regra R2)
     m.fx(107, 108, 6, 'o')
     m.p(109, 9, 'c')
     m.buraco(113, 3, 'W'); m.p(114, 8, 'm')              # fosso com ponte levadica (movel)
@@ -128,8 +128,7 @@ def bosque():
     m.p(19, 9, 'c')
     m.buraco(22, 3); m.p(23, 2, 'l')                     # 1o cipo: balancar sobre a ravina
     m.p(28, 9, 'i'); m.p(30, 3, 'v'); m.p(32, 3, 'v')    # bolotas caem quando passa
-    m.buraco(35, 3); m.buraco(39, 3); m.p(38, 9, ' '); m.p(36, 2, 'l'); m.p(40, 2, 'l')  # ravina dupla: 2 cipos
-    m.g[10][38] = m.g[11][38] = '#'                      # toco de 1 tile entre as ravinas
+    m.buraco(34, 3); m.buraco(40, 3); m.p(35, 2, 'l'); m.p(41, 2, 'l')  # ravina dupla: 2 cipos, com chao de 3 tiles no meio (regra R1)
     m.p(47, 9, 'e')
     m.p(50, 9, 'c')
     m.fx(53, 54, 8, '%'); m.bloco(53, 54, 9, 9)          # espinheiro BAIXO (2 tiles): pula-se por cima ou queima com a estrela (Paulo: nada intransponivel)
@@ -143,8 +142,7 @@ def bosque():
     m.buraco(95, 3); m.fx(95, 97, 8, 'f')
     m.fx(100, 101, 8, '1')                               # toca do coelho = cano (D3 no submundo)
     m.p(104, 9, 'c')
-    m.buraco(107, 3); m.p(108, 2, 'l'); m.buraco(111, 3); m.p(112, 2, 'l')  # gran-final: cipo, cipo
-    m.g[10][110] = m.g[11][110] = '#'
+    m.buraco(106, 3); m.p(107, 2, 'l'); m.buraco(112, 3); m.p(113, 2, 'l')  # gran-final: cipo, cipo, com 3 tiles de chao no meio
     m.fx(115, 116, 8, '%'); m.bloco(115, 116, 9, 9)      # espinheiro baixo (pula ou queima)
     m.p(120, 9, 'E')                                     # Ogro de tinta (mini-chefe comico)
     m.fx(102, 103, 8, '2')
@@ -159,11 +157,11 @@ def ginasio():
     m.p(19, 9, 'D')                                      # D1: vestiario
     m.p(23, 9, 'c')
     m.fx(26, 37, 7, 'L'); m.p(30, 6, 'o'); m.p(34, 6, 'o') # TRAVE longa (linha 7) sobre fosso de espuma
-    m.buraco(27, 3, 'W'); m.buraco(31, 3, 'W'); m.buraco(35, 3, 'W')  # espuma (cair = volta ao inicio da trave)
+    # 18/10: sem fosso de espuma sob a trave (as criancas-robo caiam e voltavam sem parar)
     m.g[10][30] = m.g[11][30] = '#'; m.g[10][34] = m.g[11][34] = '#'
     m.p(32, 6, 'i')                                      # mancha rolando NA trave
     m.p(41, 9, 'c')
-    m.p(44, 2, 'R'); m.buraco(43, 3, 'W'); m.p(48, 2, 'R'); m.buraco(47, 3, 'W'); m.p(52, 2, 'R'); m.buraco(51, 3, 'W')  # ARGOLAS
+    m.p(44, 2, 'R'); m.p(48, 2, 'R'); m.p(52, 2, 'R')  # ARGOLAS sobre o tapete (sem fosso)
     m.g[10][46] = m.g[11][46] = '#'; m.g[10][50] = m.g[11][50] = '#'
     m.p(56, 9, 'D')                                      # D2: mesa dos juizes
     m.p(60, 9, 'c')
@@ -174,8 +172,8 @@ def ginasio():
     m.p(86, 9, 'V'); m.bloco(89, 93, 6, 9); m.p(91, 5, 'O')  # SALTO: trampolim perto da mesa (4 tiles), parapeito alto
     m.fx(95, 96, 8, '1')                                 # alcapao (D3 no submundo: sala de aquecimento)
     m.p(99, 9, 'c')
-    for k, c in enumerate(range(103, 118, 3)): m.fx(c, c + 1, 8, 't' if k % 2 == 0 else 'u')  # SOLO NO RITMO (2 grupos)
-    for c in range(103, 119): m.g[10][c] = m.g[11][c] = 'W'  # fosso de espuma: EXCECAO NOMEADA (atravessa-se pelos blocos)
+    for k, c in enumerate(range(103, 118, 3)): m.fx(c, c + 1, 7, 't' if k % 2 == 0 else 'u'); m.p(c, 6, 'o')  # SOLO NO RITMO (2 grupos)
+    # 18/10 (teste das criancas-robo: 80 quedas): sem fosso de espuma aqui; os blocos do ritmo viram caminho de moedas
     m.p(124, 9, 'E')                                     # mini-chefe: Mancha Malabarista (3 bolas no ritmo)
     m.fx(97, 98, 8, '2')
     m.p(132, 9, 'F')
@@ -192,7 +190,7 @@ def estadio():
     m.p(26, 9, 'C')                                      # maquina de bolas (atira para a esquerda)
     m.p(30, 9, 's'); m.p(36, 9, 's')                     # zagueiros que deslizam (avisam 0,6 s)
     m.p(39, 9, 'S'); m.fx(40, 43, 4, '='); m.p(42, 3, 'O')  # irrigador = mola
-    m.buraco(46, 2, 'W')                                 # poca do gramado (irrigacao)
+    # 18/10: a poca logo depois do irrigador-mola derrubava sempre (teste das criancas-robo): saiu
     m.p(50, 9, 'c')
     m.p(53, 9, 'D')                                      # D2: marca do penalti 2
     m.bloco(57, 57, 4, 9); m.fx(58, 63, 4, '=')          # trave do gol (travessao) como plataforma
@@ -202,11 +200,11 @@ def estadio():
     # ARQUIBANCADA: degraus + a OLA (moveis verticais em fila, fora de fase)
     for c, r in ((70, 7), (73, 6), (76, 6), (79, 5), (82, 5)): m.p(c, r, 'n')  # a OLA: sobem/descem fora de fase
     m.p(76, 9, 'i'); m.p(84, 9, 'e')
-    m.bloco(86, 90, 4, 9); m.fx(87, 89, 3, 'o')          # camarote (topo linha 4)
+    m.bloco(86, 90, 7, 9); m.fx(87, 89, 6, 'o')          # camarote de 3 tiles (era 6: as criancas-robo travavam)
     m.p(95, 9, 'c')
     m.fx(97, 98, 8, '1')                                 # tunel = cano (D3 no submundo: vestiario dos juizes)
     m.p(103, 9, 's'); m.p(106, 9, 'C'); m.p(109, 9, 's')
-    m.buraco(112, 3, 'W'); m.p(113, 7, 'm')              # carrinho de maca (movel) sobre a poca
+    # 18/10: a poca com carrinho saiu (vinha logo depois da maquina e do zagueiro: regra R2)
     m.p(118, 9, 'c')
     m.p(124, 9, 'E')                                     # Goleiro-Mancha: chutar a bola nele 3x (abre os bracos)
     m.fx(100, 101, 8, '2')
@@ -222,7 +220,7 @@ def biscoito():
     m.p(21, 9, 'c')
     m.p(24, 9, 'i'); m.p(27, 3, 'v'); m.p(29, 3, 'v')    # gotas da TORNEIRA (desenhada no armario)
     m.p(38, 9, 'q')                                      # Chef de Tinta: joga pratos do escorredor (aviso antes)
-    m.buraco(43, 2)                                      # buraco pequeno, longe do Chef
+    m.buraco(46, 2)                                      # buraco pequeno, longe do Chef (regra R2)
     m.fx(45, 47, 7, '='); m.p(46, 6, '&')                # guardanapo no porta-guardanapos do balcao
     m.p(50, 9, 'c')
     m.buraco(53, 2); m.buraco(58, 2)                     # vao da pia em duas partes com ilha LARGA (55-57); o guardanapo ajuda

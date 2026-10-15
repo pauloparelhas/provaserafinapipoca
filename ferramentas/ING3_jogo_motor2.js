@@ -62,7 +62,7 @@ function atualizaNivel(dt){
   if(u.cheerT>0){ u.cheerT-=dt; u.estado='cheer'; u.anim+=dt; }
   M.checkpoints.forEach(function(cp){ if(!cp.acesa&&u.x>cp.x&&u.x<cp.x+160&&Math.abs(u.y-cp.y)<180){ cp.acesa=true; J.respawn={x:cp.x,y:cp.y,mundo:M.mundo}; SOM.fx('checkpoint'); G.brilho(cp.x,cp.y-80,12); } });
   inimigos(dt); G.perigos(dt); if(window.PODERES) PODERES.interage(); moradores(dt); if(window.CHEFINHO) CHEFINHO.atualiza(dt); if(J.chefe&&window.CHEFAO) CHEFAO.atualiza(dt);
-  if(M.mastro && Math.abs(u.x-M.mastro.x)<30 && Math.abs(u.y-M.mastro.y)<70 && J.estado==='nivel') fimDeFase();
+  if(M.mastro && Math.abs(u.x-M.mastro.x)<30 && Math.abs(u.y-M.mastro.y)<(M.modo?400:70) && J.estado==='nivel') fimDeFase(); /* nadando/voando, passar por cima do livro também vale */
   if(J.tut) atualizaTutorial(dt);
   dicas();
 }
@@ -84,7 +84,8 @@ function fimDeFase(){
   var ant=J.prog.fases[f.id]||{}; J.prog.fases[f.id]={estrelas:Math.max(ant.estrelas||0,estrelas),pontos:Math.max(ant.pontos||0,J.pontos),acertos:s.acertos,total:s.perguntas,paginas:Math.max(ant.paginas||0,pags),novo:!ant.estrelas};
   J.prog.pontos=Object.keys(J.prog.fases).reduce(function(a,k){ return a+(J.prog.fases[k].pontos||0); },0);
   G.salva(); if(window.UI) UI.modoNivel(false);
-  setTimeout(function(){ if(window.UI) UI.fimFase(f,estrelas,s.acertos,s.perguntas,J.pontos,J.moedas,pags,(J.nivel.todasEntradas||J.nivel.moradores).length); },1500);
+  var totPags=(J.nivel.todasEntradas||J.nivel.moradores).length; /* calculado já: em 1,5 s o reino pode ter sido fechado */
+  setTimeout(function(){ if(window.UI&&J.estado==='fimFase') UI.fimFase(f,estrelas,s.acertos,s.perguntas,J.pontos,J.moedas,pags,totPags); },1500);
 }
 function voltaMapa(){ var f=J.faseAtual, novo=f&&J.prog.fases[f.id]&&J.prog.fases[f.id].novo; if(novo){ J.prog.fases[f.id].novo=false; G.salva(); } var i=F.LISTA.indexOf(f); irMapa(novo&&i<F.LISTA.length-1?i+1:false); }
 function irMapa(animaPara){
@@ -185,7 +186,12 @@ var ultimo=0;
 function passo(ts){
   requestAnimationFrame(passo);
   var dt=Math.min(.033,(ts-ultimo)/1000||0); ultimo=ts;
-  if(J.pausado){ if(window.CENA) CENA.desenha(); return; }
+  if(J.pausado||J.relogioTeste){ if(window.CENA) CENA.desenha(); return; }
+  logica(dt);
+  if(window.CENA) CENA.desenha();
+}
+/* um passo da LÓGICA (sem desenhar): o laço do jogo e o teste acelerado usam a mesma função */
+function logica(dt){
   J.t+=dt; J.tFase+=dt;
   if(J.shake>0) J.shake=Math.max(0,J.shake-dt*30); if(J.flash>0) J.flash=Math.max(0,J.flash-dt*2);
   atualizaTrans(dt);
@@ -202,8 +208,10 @@ function passo(ts){
     case 'intro': atualizaIntro(dt); break;
   }
   atualizaParticulas(dt);
-  if(window.CENA) CENA.desenha();
 }
+/* TESTE ACELERADO (QA): o relógio real para e o teste avança a lógica em passos fixos, rápido, sem desenhar */
+G.relogioTeste=function(on){ J.relogioTeste=!!on; };
+G.passoFixo=function(dt,n){ for(var i=0;i<(n||1);i++){ if(J.pausado) return; logica(dt); } };
 
 /* ---------- init / API ---------- */
 function init(){

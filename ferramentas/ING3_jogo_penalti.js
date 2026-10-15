@@ -234,7 +234,7 @@ function rede(c,t,amp,Pb,ondaT){
     c.beginPath(); c.moveTo(lerp(GOL.x1,FUN.x1,w),lerp(GOL.y0,FUN.y0,w)); c.lineTo(lerp(GOL.x1,FUN.x1,w),lerp(GOL.y1,FUN.y1,w)); c.stroke(); }
   for(i=0;i<=nx;i++){ var u=i/nx; c.beginPath(); c.moveTo(lerp(GOL.x0,GOL.x1,u),GOL.y0); c.lineTo(lerp(FUN.x0,FUN.x1,u),FUN.y0); c.stroke(); }
   /* bolsão escuro onde a bola estufou */
-  if(amp>0){ var g=c.createRadialGradient(Pb.x,Pb.y+4,2,Pb.x,Pb.y+4,sig*1.2); g.addColorStop(0,'rgba(0,0,10,'+(.7*amp)+')'); g.addColorStop(.55,'rgba(0,0,10,'+(.35*amp)+')'); g.addColorStop(1,'rgba(0,0,10,0)'); c.fillStyle=g; circ(c,Pb.x,Pb.y+4,sig*1.6); c.fill(); }
+  if(amp>0&&isFinite(Pb.x)&&isFinite(Pb.y)&&isFinite(sig)&&sig>0){ var g=c.createRadialGradient(Pb.x,Pb.y+4,2,Pb.x,Pb.y+4,sig*1.2); g.addColorStop(0,'rgba(0,0,10,'+(.7*amp)+')'); g.addColorStop(.55,'rgba(0,0,10,'+(.35*amp)+')'); g.addColorStop(1,'rgba(0,0,10,0)'); c.fillStyle=g; circ(c,Pb.x,Pb.y+4,sig*1.6); c.fill(); }
   /* malha do fundo (losangos: diagonais) */
   c.strokeStyle='rgba(240,244,255,.62)'; c.lineWidth=1.15;
   for(i=0;i<=nx;i++){ c.beginPath(); for(j=0;j<=ny;j++){ var p=P(i/nx,j/ny); if(j) c.lineTo(p[0],p[1]); else c.moveTo(p[0],p[1]); } c.stroke(); }

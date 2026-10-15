@@ -96,6 +96,23 @@ function testaFase(f, rows, subRows, nome){
   const ls=new Set(rows.map(s=>s.length)); if(ls.size>1){ console.log('   - linhas de tamanho desigual', [...ls]); }
 }
 
+/* ---------- REGRAS DE DIFICULDADE PARA 7–8 ANOS (18/10, lições do teste das crianças-robô) ----------
+   R1 ilha pequena: dois buracos separados por menos de 3 tiles de chão
+   R2 inimigo/arremessador logo antes do precipício (até 4 tiles; arremessador/canhão até 6)
+   R3 muro alto: pilha sólida de 4+ tiles sem degrau, mola, plataforma ou aparelho nos 5 tiles antes
+   R4 buraco largo: mais de 3 tiles (já no gerador) */
+function regrasCrianca(rows,nome){
+  const h=rows.length, w=rows[0].length, chao=h-2, at=(c,r)=>(r<0||r>=h||c<0||c>=w)?' ':rows[r][c], out=[];
+  const vazio=c=>at(c,chao)===' '||at(c,chao)==='W';
+  const buracos=[]; let ini=-1; for(let c=0;c<=w;c++){ const v=c<w&&vazio(c); if(v&&ini<0) ini=c; if(!v&&ini>=0){ buracos.push([ini,c-1]); ini=-1; } }
+  for(let i=1;i<buracos.length;i++){ const ilha=buracos[i][0]-buracos[i-1][1]-1; if(ilha<3) out.push('R1 ilha de '+ilha+' tile(s) entre buracos nas colunas '+buracos[i-1][1]+'–'+buracos[i][0]); }
+  buracos.forEach(([b0])=>{ for(let c=Math.max(0,b0-6);c<b0;c++){ for(let r=0;r<chao;r++){ const ch=at(c,r); if('ies'.includes(ch)&&b0-c<=4) out.push('R2 inimigo "'+ch+'" na coluna '+c+' logo antes do buraco em '+b0); if('qCKT'.includes(ch)) out.push('R2 arremessador "'+ch+'" na coluna '+c+' logo antes do buraco em '+b0); } } });
+  for(let c=1;c<w;c++){ let alt=0; for(let r=chao-1;r>=0;r--){ if('#B%'.includes(at(c,r))) alt++; else break; } if(alt>=4&&alt<chao){ let ajuda=false; for(let cc=Math.max(0,c-5);cc<c;cc++) for(let r=0;r<chao;r++){ const ch=at(cc,r); if('=SVnmNlRXtuL#B'.includes(ch)&&r<chao&&r>=chao-alt) ajuda=true; } if(!ajuda) out.push('R3 muro de '+alt+' tiles na coluna '+c+' sem degrau antes'); } }
+  return out;
+}
+let falhasDif=0;
+F.LISTA.forEach(f=>{ if(f.chefao||f.modo) return; const mp=MAPAS[f.id]; if(!mp) return; [['main',mp.main],['sub',mp.sub]].forEach(([wn,rows])=>{ if(!rows) return; const r=regrasCrianca(rows,f.nome); if(r.length){ falhasDif++; console.log('DIFÍCIL '+f.id+' '+f.nome+' ('+wn+')'); r.forEach(x=>console.log('   - '+x)); } }); });
+if(falhasDif) falhas+=falhasDif; else console.log('ok    regras de dificuldade para 7–8 anos (ilhas, inimigo antes do buraco, muros)');
 F.LISTA.forEach(f=>{ if(f.chefao||f.modo) return; const mp=MAPAS[f.id]; if(!mp){ console.log('--    '+f.id+' '+f.nome+' (sem mapa)'); return; } testaFase(f, mp.main, mp.sub, f.id+' '+f.nome); });
 if(process.argv[3]==='mapa'){ MAPAS[+process.argv[4]].main.forEach(s=>console.log(s)); }
 if(process.argv[3]==='sub'){ MAPAS[+process.argv[4]].sub.forEach(s=>console.log(s)); }

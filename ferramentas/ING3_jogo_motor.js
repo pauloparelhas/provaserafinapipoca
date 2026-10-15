@@ -63,7 +63,7 @@ function paraLogico(cx,cy){ return {x:(cx-offX)/escala, y:(cy-offY)/escala}; }
 /* ---------- carregar reino ---------- */
 function novoUrso(x,y){ return {x:x,y:y,vx:0,vy:0,noChao:true,dir:1,estado:'idle',anim:0,tontoT:0,invT:0,tam:1,sx:1,sy:1,poderes:{capa:false,bota:false,estrelas:0,traje:false,guardanapo:false,giz:false,tiro:null,vassoura:false},puloExtra:false,planando:false,cheerT:0,sobre:null,montado:false,quem:J.prog.heroi||'lia'}; }
 function iniciaFase(f){
-  J.faseAtual=f; J.agarrado=null; if(window.UI&&UI.poderHud) UI.poderHud(null); J.soltouT=0; if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false); if(window.UI) UI.modoMapa(false); J.corrida=null; J.estadio=null;
+  J.faseAtual=f; J.agarrado=null; J.chefe=null; if(window.CHEFAO) CHEFAO.limpa(); /* nada do castelo vaza para outro reino */ if(window.UI&&UI.poderHud) UI.poderHud(null); J.soltouT=0; if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false); if(window.UI) UI.modoMapa(false); J.corrida=null; J.estadio=null;
   if(f.modo==='estadio'&&window.ESTADIO){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; ESTADIO.inicia(f); return; }
   if(f.modo==='corrida'&&window.CORRIDA){ J.quiz=null; J.part=[]; J.clima=[]; J.fimFase=null; J.flash=.6; CORRIDA.inicia(f); return; }
   var L=F.monta(f);
@@ -180,7 +180,7 @@ function pegaItem(it){
 /* montar no Pip: ele choca do ovo (1ª vez) ou volta correndo */
 function monta(){ var u=J.urso; u.montado=true; J.pip=null; SOM.fx('destrava'); brilho(u.x,u.y-40,10,'#86efac'); u.sx=1.2; u.sy=.85; }
 function machucado(){
-  var u=J.urso; if(u.invT>0||u.tontoT>0) return;
+  var u=J.urso; if(u.invT>0||u.tontoT>0) return; if(J.teste) J.teste.danos.push({x:Math.round(u.x/45),t:+J.tFase.toFixed(1)});
   setTimeout(function(){ if(window.UI&&J.urso) UI.coracoes(J.urso.tam+1,true); },0);
   if(u.montado){ /* o Pip leva o susto no lugar do herói e espera ali perto */
     u.montado=false; u.invT=1.6; u.vy=-380; u.noChao=false; SOM.fx('tonto'); J.shake=5;
@@ -189,7 +189,7 @@ function machucado(){
   else caiu('Ouch! Back to the checkpoint','Ai! De volta ao checkpoint');
 }
 function caiu(msg,pt){
-  var u=J.urso; SOM.fx('tonto'); J.shake=6; J.agarrado=null; J.soltouT=0; u.giro=0;
+  var u=J.urso; if(J.teste) J.teste.quedas.push({x:Math.round(u.x/45),mundo:J.mundo&&J.mundo.mundo,t:+J.tFase.toFixed(1)}); SOM.fx('tonto'); J.shake=6; J.agarrado=null; J.soltouT=0; u.giro=0;
   if(J.nivel&&J.respawn.mundo&&J.mundo.mundo!==J.respawn.mundo){ J.mundo= J.respawn.mundo==='sub'&&J.nivel.sub?J.nivel.sub:J.nivel; J.troncosVivos=[]; J.bolasCanhao=[]; J.estrelas=[]; }
   u.x=J.respawn.x; u.y=J.respawn.y; u.vx=0; u.vy=0; u.tontoT=.8; u.invT=1.2; J.flash=.7; u.puloExtra=u.poderes.bota||u.poderes.giz;
   if(J.pip){ J.pip.x=u.x+50; J.pip.y=u.y; J.pip.vx=0; J.pip.vy=0; }

@@ -715,15 +715,16 @@ function renderCapa(){
   LICOES.forEach(function(l){ if(f[l.k]) n++; });
   document.body.style.setProperty('--lc','#f472b6');
   titulo.textContent='English · Study';
-  tela.innerHTML='<div class="capa"><h1>English · 3rd term</h1>'+
+  var TRc=function(t){ return '<span class="tr">'+t+'</span>'; }; /* 18/10: a bandeira traduz também os cartões da capa */
+  tela.innerHTML='<div class="capa"><h1>English · 3rd term'+TRc('Inglês · 3º trimestre')+'</h1>'+
     '<div class="aviso">Under construction — content not yet reviewed<span class="tr">Em construção — conteúdo ainda não validado</span></div>'+
     '<div class="licoes">'+LICOES.map(function(l,i){
       return '<button class="lic'+(f[l.k]?' ok':'')+'" data-i="'+i+'" style="--lc:'+corDe(l)+'">'+
         '<span class="num">'+(i+1)+'</span><span class="feito" aria-label="feita">'+CHECK+'</span>'+
-        icDe(l)+'<b>'+l.nome+'</b></button>';
+        icDe(l)+'<b>'+l.nome+(l.nome_pt?TRc(l.nome_pt):'')+'</b></button>';
     }).join('')+'</div>'+
-    '<div class="placarcapa"><span>'+n+' / '+LICOES.length+' done</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div>'+
-    '<a class="linkbtn" href="ING3_simulado.html">Practice Test &#8250;</a></div>';
+    '<div class="placarcapa"><span>'+n+' / '+LICOES.length+' done'+TRc(n+' de '+LICOES.length+' feitas')+'</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div>'+
+    '<a class="linkbtn" href="ING3_simulado.html">Practice Test &#8250;'+TRc('Simulado')+'</a></div>';
   tela.querySelectorAll('.lic').forEach(function(b){ b.onclick=function(){ abre(+b.dataset.i); }; });
   bar.style.width=Math.round(n/LICOES.length*100)+'%';
   navPrev.disabled=true; navNext.disabled=false;

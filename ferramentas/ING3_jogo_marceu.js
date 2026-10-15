@@ -25,11 +25,11 @@ function parse(ch,x,y,L){
   }
   return false;
 }
-function cicloTempestade(z){ if(z.calmaT>0) return 'calma'; var k=((J.t+z.fase)%3)/3; return k<.43?'calma':(k<.77?'aviso':'raio'); }
+function cicloTempestade(z){ if(z.calmaT>0) return 'calma'; var k=((J.t+z.fase)%4.5)/4.5; return k<.55?'calma':(k<.85?'aviso':'raio'); } /* 18/10: aviso mais longo, raio mais curto (as crianças-robo caíam ali) */
 function atualiza(dt){
   var M=J.mundo, u=J.urso; if(!M) return; var R=G.ursoRet(), vivo=u.invT<=0&&u.tontoT<=0&&J.estado==='nivel';
   M.inimigos.forEach(function(e){
-    if(e.tipo==='agua_viva'){ e.y=e.y0-60+Math.sin(J.t*2*Math.PI/2.4+e.fase)*70; }
+    if(e.tipo==='agua_viva'){ e.y=e.y0-60+Math.sin(J.t*2*Math.PI/3.4+e.fase)*60; } /* mais lenta: dá para passar */
     if(e.tipo==='baiacu'){ var k=((J.t+e.fase)%3); e.inchado=k>2; e.treme=k>1.5&&k<=2; e.espinho=e.inchado; e.y=e.y0-20+Math.sin(J.t*2+e.fase)*12; }
   });
   (M.correntes||[]).forEach(function(cr){ if(G.colideRet(R.x,R.y,R.w,R.h,cr.x,cr.y,cr.w,cr.h)) u.x+=cr.vx*dt*(u.noChao?.4:1); });
