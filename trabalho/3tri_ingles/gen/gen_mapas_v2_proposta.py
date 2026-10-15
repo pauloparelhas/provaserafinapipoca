@@ -154,7 +154,7 @@ def bosque():
 # ---------------- 6. Rhythm Gym ----------------
 def ginasio():
     m = Mapa(136)
-    m.p(5, 9, 'U'); m.fx(6, 7, 8, 'o'); m.p(9, 9, '*')   # PODER do reino: giz de ginastica no pedestal
+    m.p(5, 9, 'U'); m.fx(6, 9, 8, 'o')                   # 18/10: sem poder no ginasio (o giz nao interagia com a fase)
     m.p(11, 9, 'S'); m.fx(13, 16, 4, '='); m.fx(13, 16, 3, 'o')   # trampolim
     m.p(19, 9, 'D')                                      # D1: vestiario
     m.p(23, 9, 'c')
@@ -221,11 +221,11 @@ def biscoito():
     m.p(15, 9, 'D')                                      # D1: porta da geladeira
     m.p(21, 9, 'c')
     m.p(24, 9, 'i'); m.p(27, 3, 'v'); m.p(29, 3, 'v')    # gotas da TORNEIRA (desenhada no armario)
-    m.p(35, 9, 'e'); m.p(38, 9, 'q')                     # Chef de Tinta: joga pratos do escorredor (aviso antes)
-    m.buraco(41, 3)
+    m.p(38, 9, 'q')                                      # Chef de Tinta: joga pratos do escorredor (aviso antes)
+    m.buraco(43, 2)                                      # buraco pequeno, longe do Chef
     m.fx(45, 47, 7, '='); m.p(46, 6, '&')                # guardanapo no porta-guardanapos do balcao
     m.p(50, 9, 'c')
-    m.buraco(53, 3); m.buraco(57, 3); m.g[10][56] = m.g[11][56] = '#'  # vao da pia: o guardanapo vira paraquedas
+    m.buraco(53, 2); m.buraco(58, 2)                     # vao da pia em duas partes com ilha LARGA (55-57); o guardanapo ajuda
     m.p(60, 9, 'D')                                      # D2: forno
     m.p(63, 9, '&')                                      # espelho na comoda
     m.p(66, 9, '&')                                      # tesoura na caneca

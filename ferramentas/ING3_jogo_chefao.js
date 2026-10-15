@@ -34,12 +34,11 @@ var RODADAS=[['fairy','realmb'],['poem'],['cause','circle']];
 var SACADA_X0=17*T, SACADA_Y=6*T;
 var C=null;
 
+/* 18/10 (Paulo: "5 frases grandes, difícil de ler"): 3 telas, frases curtas */
 var ABERTURA=[
-  {en:'Inkwell Castle. The last lost ending is hidden here…', pt:'Castelo do Tinteiro. O último final perdido está escondido aqui…', fx:'trovao'},
-  {en:'Look! The ink on the balcony is bubbling…', pt:'Olhe! A tinta na sacada está borbulhando…', fx:'borbulha'},
-  {en:'"HA HA HA! I am COUNT SCRIBBLE! I spilled ink on every story!"', pt:'"RÁ RÁ RÁ! Eu sou o CONDE RABISCO! Eu derramei tinta em todas as histórias!"', fx:'conde'},
-  {en:'"The endings are MINE! You want them back? Then beat me in my castle!"', pt:'"Os finais são MEUS! Quer de volta? Então me vença no meu castelo!"', fx:'risada'},
-  {en:'His magic comes from 3 INKWELLS. Throw a ★ star at the one that glows!', pt:'A magia dele vem de 3 TINTEIROS. Jogue uma ★ estrela no que brilha!', fx:'tinteiros', botao:'Fight! ▶'}
+  {en:'Inkwell Castle. Count Scribble lives here!', pt:'Castelo do Tinteiro. Aqui mora o Conde Rabisco!', fx:'trovao'},
+  {en:'"HA HA! The lost endings are MINE!"', pt:'"RÁ RÁ! Os finais perdidos são MEUS!"', fx:'conde'},
+  {en:'Jump on the shelf. Throw a ★ at the glowing inkwell!', pt:'Pule na prateleira. Jogue uma ★ no tinteiro que brilha!', fx:'tinteiros', botao:'Fight! ▶'}
 ];
 
 function falaC(en,pt,dur){ if(!C) return; C.fala={en:en,pt:pt,t:0,dur:dur||3.2}; try{ say(en); }catch(e){} }
@@ -48,7 +47,7 @@ function inicia(L){
      gotas:[], voando:[], letras:[], blocos:[], tinteiros:[], alvo:0, ondas:0, convertidas:0, banner:null, tRaio:6, alt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], tLetra:0, nLetra:0,
      m:{x:19*T, y:SACADA_Y, tipo:'conde', falando:0, i:0}};
   J.chefe=C; J.estado='chefeIntro'; SOM.musica('');
-  C.tinteiros=[{x:5*T+22,y:6*T},{x:11*T+22,y:6*T},{x:8*T+22,y:CHAO}].map(function(p){ return {x:p.x,y:p.y,caido:false}; });
+  C.tinteiros=[{x:5*T+22,y:7*T},{x:11*T+22,y:7*T},{x:8*T+22,y:CHAO}].map(function(p){ return {x:p.x,y:p.y,caido:false}; });
   if(window.UI){ UI.modoNivel(false); UI.acao(false,0); }
   mostraPasso();
 }
@@ -56,7 +55,7 @@ function mostraPasso(){
   var p=ABERTURA[C.passo]; if(!p) return;
   if(p.fx==='trovao'){ C.raio=1; J.flash=.9; SOM.fx('quebra'); J.shake=6; }
   if(p.fx==='borbulha'){ SOM.fx('cano'); }
-  if(p.fx==='conde'){ C.aparece=.001; SOM.fx('chefao'); J.shake=10; J.flash=.6; SOM.musica('chefao'); }
+  if(p.fx==='conde'){ C.aparece=.001; C.estado='laugh'; C.et=0; SOM.fx('chefao'); J.shake=10; J.flash=.6; SOM.musica('chefao'); }
   if(p.fx==='risada'){ C.estado='laugh'; C.et=0; SOM.fx('risada'); }
   if(p.fx==='tinteiros'){ SOM.fx('destrava'); }
   if(window.UI) UI.legenda({en:p.en,pt:p.pt,botao:p.botao},{next:avancaIntro,pula:fimIntro});
@@ -67,9 +66,9 @@ function fimIntro(){ if(!C) return; if(window.UI){ UI.legenda(null); UI.modoNive
 function daEstrelas(){ var u=J.urso; u.poderes.estrelas=Math.max(u.poderes.estrelas||0,3); if(window.UI) UI.acao(true,u.poderes.estrelas); }
 function comecaFase(n){
   C.fase='p'+n; C.t=0; C.gotas=[]; C.letras=[]; daEstrelas(); SOM.musica('chefao');
-  if(n===1){ C.alvo=0; C.tinteiros.forEach(function(q){ q.caido=false; }); falaC('My magic inkwells! You will never touch them!','Meus tinteiros mágicos! Você nunca vai tocar neles!'); }
-  if(n===2){ C.convertidas=0; C.ondas=0; J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; }); falaC('Ink blots! Come out of my inkwell and GET THEM!','Manchas! Saiam do meu tinteiro e PEGUEM!'); }
-  if(n===3){ C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); C.nLetra=0; C.tLetra=1.2; falaC('I will write a GIANT word on you!','Vou escrever uma palavra GIGANTE em você!'); }
+  if(n===1){ C.alvo=0; C.tinteiros.forEach(function(q){ q.caido=false; }); falaC('My magic inkwells!','Meus tinteiros mágicos!'); }
+  if(n===2){ C.convertidas=0; C.ondas=0; J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; }); falaC('Ink blots, GO!','Manchas, VÃO!'); }
+  if(n===3){ C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); C.nLetra=0; C.tLetra=1.2; falaC('GIANT letters!','Letras GIGANTES!'); }
 }
 function banner(en,pt){ C.banner={en:en,pt:pt,t:0}; SOM.fx('chefao'); J.shake=8; }
 function itensDa(r){ var ja=J.nivel.quizIds||(J.nivel.quizIds=[]), out=[];
@@ -85,8 +84,8 @@ function duelo(){
 function transicao(n){
   C.fase='transicao'; C.t=0; C.prox=n; C.estado='hit'; C.et=0;
   banner('ROUND '+n,'RODADA '+n);
-  if(n===2) falaC('Grrr! That hurt! Now my INK BLOTS will stop you!','Grrr! Doeu! Agora as minhas MANCHAS vão te parar!');
-  else falaC('ENOUGH! I will bury you in GIANT LETTERS!','CHEGA! Vou te enterrar em LETRAS GIGANTES!');
+  if(n===2) falaC('Grrr! My blots will stop you!','Grrr! Minhas manchas vão te parar!');
+  else falaC('ENOUGH! Giant letters!','CHEGA! Letras gigantes!');
 }
 function derrota(){
   C.fase='derrota'; C.t=0; C.estado='sad'; C.gotas=[]; C.letras=[]; SOM.musica(''); SOM.fx('vitoria');
@@ -95,12 +94,12 @@ function derrota(){
 }
 /* a pena do Conde: de onde sai tudo que ele joga */
 function pena(){ return {x:C.x-46, y:C.y-170}; }
-function novaGota(){ var u=J.urso, p=pena(), alvo=Math.max(40,Math.min(16*T,u.x+(Math.random()-.5)*90)); C.gotas.push({x0:p.x,y0:p.y,alvo:alvo,t:0,dur:1,x:p.x,y:p.y,r:13}); C.estado='write'; C.et=0; SOM.fx('arremesso'); }
+function novaGota(){ var u=J.urso, p=pena(), lado=Math.random()<.5?-1:1, alvo=Math.max(40,Math.min(16*T,u.x+(Math.random()<.35?0:lado*(70+Math.random()*90)))); C.gotas.push({x0:p.x,y0:p.y,alvo:alvo,t:0,dur:1.35,x:p.x,y:p.y,r:13}); /* 18/10: nem sempre na criança; 1,35 s de sombra para sair */ C.estado='write'; C.et=0; SOM.fx('arremesso'); }
 /* letras: a cada duas, uma vira degrau da ESCADA (colunas 13, 14, 15 empilhando 1, 2, 3); a outra é ataque */
 var ESCADA=[13,14,14,15,15,15];
 function novaLetra(){
   var u=J.urso, p=pena(), deg=C.nLetra%2===1&&C.nLetra>>1<ESCADA.length, alvo;
-  if(deg){ var col=ESCADA[C.nLetra>>1]; alvo=col*T+T/2; } else alvo=Math.max(40,Math.min(12*T,u.x+(Math.random()-.5)*120));
+  if(deg){ var col=ESCADA[C.nLetra>>1]; alvo=col*T+T/2; } else alvo=Math.max(40,Math.min(12*T,u.x+(Math.random()<.5?-1:1)*(80+Math.random()*80)));
   C.letras.push({x0:p.x,y0:p.y,alvo:alvo,t:0,dur:1.1,x:p.x,y:p.y,ch:'INKBLOT'.charAt(C.nLetra%7),degrau:deg,col:deg?ESCADA[C.nLetra>>1]:-1});
   C.nLetra++; C.estado='write'; C.et=0; SOM.fx('arremesso');
 }
@@ -124,31 +123,31 @@ function atualiza(dt){
   else if(C.fase==='derrota'){ if(C.t>3.2) G.iniciaFinal(); }
   else if(C.fase==='transicao'){ if(C.t>2.8){ C.banner=null; comecaFase(C.prox); } }
   else if(C.fase==='p1'){
-    var ritmo=2.6-C.alvo*.35;
+    var ritmo=3.4-C.alvo*.3;
     if(Math.floor((C.t-dt)/ritmo)!==Math.floor(C.t/ritmo)) novaGota();
-    (J.estrelas||[]).forEach(function(e){ var tq=C.tinteiros[C.alvo]; if(tq&&!tq.caido&&Math.abs(e.x-tq.x)<30&&Math.abs(e.y-(tq.y-24))<40){ tq.caido=true; e.dist=999; C.alvo++; SOM.fx('chefao'); J.shake=8; G.brilho(tq.x,tq.y-30,16,'#a78bfa'); C.estado='hit'; C.et=0;
+    (J.estrelas||[]).forEach(function(e){ var tq=C.tinteiros[C.alvo]; if(tq&&!tq.caido&&Math.abs(e.x-tq.x)<36&&Math.abs(e.y-(tq.y-24))<70){ tq.caido=true; e.dist=999; C.alvo++; SOM.fx('chefao'); J.shake=8; G.brilho(tq.x,tq.y-30,16,'#a78bfa'); C.estado='hit'; C.et=0;
       if(C.alvo<3) falaC(C.alvo===1?'NO! My inkwell!':'Not another one!',C.alvo===1?'NÃO! Meu tinteiro!':'Outro não!'); } });
-    if(C.alvo>=3&&C.t>.5){ C.fase='espera'; C.t=0; C.estado='hit'; falaC('My inkwells! Fine… answer THIS!','Meus tinteiros! Está bem… responda ISTO!'); C.t=0; }
+    if(C.alvo>=3&&C.t>.5){ C.fase='espera'; C.t=0; C.estado='hit'; falaC('Answer THIS!','Responda ISTO!'); C.t=0; }
   }
   else if(C.fase==='p2'){
-    if(Math.floor((C.t-dt)/2.4)!==Math.floor(C.t/2.4)) novaGota();
+    if(Math.floor((C.t-dt)/3.4)!==Math.floor(C.t/3.4)) novaGota();
     if(Math.floor((C.t-dt)/3.6)!==Math.floor(C.t/3.6)&&C.ondas<5){ C.ondas++; C.estado='write'; C.et=0; SOM.fx('cano');
       /* derrama do tinteiro da sacada: caem pela borda e saem andando */
       for(var k=0;k<2;k++) C.gotas.push({x0:SACADA_X0+20,y0:SACADA_Y-10,alvo:SACADA_X0-40-k*70,t:-k*.3,dur:.7,x:SACADA_X0,y:SACADA_Y,r:15,vira:true}); }
     var vencidas=J.mundo.inimigos.filter(function(e){ return e.doConde&&(e.morto||e.achatado); }).length; C.convertidas=vencidas;
-    if(vencidas>=6){ J.mundo.inimigos.forEach(function(e){ if(e.doConde){ e.achatado=true; e.tAch=.3; } }); C.fase='espera'; C.t=0; C.estado='hit'; falaC('Grr! My blots! Answer THIS!','Grr! Minhas manchas! Responda ISTO!'); C.t=0; }
+    if(vencidas>=6){ J.mundo.inimigos.forEach(function(e){ if(e.doConde){ e.achatado=true; e.tAch=.3; } }); C.fase='espera'; C.t=0; C.estado='hit'; falaC('Grr! Answer THIS!','Grr! Responda ISTO!'); C.t=0; }
   }
   else if(C.fase==='p3'){
-    C.tLetra-=dt; if(C.tLetra<=0){ C.tLetra=1.5; novaLetra(); }
+    C.tLetra-=dt; if(C.tLetra<=0){ C.tLetra=1.4; novaLetra(); }
     /* chegou na sacada pela escada de letras: o duelo final */
-    if(u.noChao&&u.x>SACADA_X0+10&&u.y<=SACADA_Y+6){ C.fase='espera'; C.t=0; C.estado='hit'; C.letras=[]; falaC('WHAT?! You climbed my own letters! Last chance…','O QUÊ?! Você subiu nas minhas letras! Última chance…'); C.t=0; }
+    if(u.noChao&&u.x>SACADA_X0+10&&u.y<=SACADA_Y+6){ C.fase='espera'; C.t=0; C.estado='hit'; C.letras=[]; falaC('WHAT?! Last chance!','O QUÊ?! Última chance!'); C.t=0; }
   }
   /* gotas e letras voam em ARCO da pena até o alvo; a sombra no chão avisa */
   [C.gotas,C.letras].forEach(function(lista,ehLetra){
     for(var g=lista.length-1;g>=0;g--){ var d=lista[g]; d.t+=dt; if(d.t<0) continue; var k=Math.min(1,d.t/d.dur);
       var chao=ehLetra&&d.degrau?CHAO-C.alt[d.col]*T:CHAO;
       d.x=d.x0+(d.alvo-d.x0)*k; d.y=d.y0+(chao-d.y0)*k*k-Math.sin(k*Math.PI)*(ehLetra?60:110);
-      var tam=ehLetra?24:d.r;
+      var tam=(ehLetra?24:d.r)*.75; /* acerta só se cair mesmo em cima */
       if(vivo&&k>.55&&G.colideRet(R.x+4,R.y,R.w-8,R.h,d.x-tam,d.y-tam,tam*2,tam*2)){ lista.splice(g,1); G.machucado(); SOM.fx('risada'); C.estado='laugh'; C.et=0; continue; }
       if(k>=1){ lista.splice(g,1); J.shake=ehLetra?6:2;
         G.emite(8,function(){ return {x:d.alvo,y:chao-4,vx:(Math.random()-.5)*160,vy:-60-Math.random()*90,vida:.5,max:.5,tipo:'fogo',cor:ehLetra?'#7c3aed':'#312e81',r:3,g:1}; });
@@ -176,7 +175,7 @@ function desenha(c,t){
     c.save(); c.translate(C.x,C.y); c.scale(.6+.4*k,k); c.globalAlpha=Math.min(1,k*1.5); A.conde(c,0,0,C.estado,t); c.restore(); }
   /* tinteiros (rodada 1) com seta no que brilha */
   C.tinteiros.forEach(function(tq,i){ c.save(); c.translate(tq.x,tq.y); if(tq.caido) c.rotate(1.3);
-    var aceso=!tq.caido&&i===C.alvo&&(C.fase==='p1'||(C.fase==='abertura'&&C.passo>=4));
+    var aceso=!tq.caido&&i===C.alvo&&(C.fase==='p1'||(C.fase==='abertura'&&C.passo>=2));
     if(aceso){ var g=c.createRadialGradient(0,-24,4,0,-24,62); g.addColorStop(0,'rgba(253,224,71,'+(.75+.25*Math.sin(t*6))+')'); g.addColorStop(1,'rgba(253,224,71,0)'); c.fillStyle=g; A.circ(c,0,-24,62); c.fill(); }
     c.fillStyle=aceso?A.lin(c,-16,-40,16,0,'#fde68a','#d97706'):'#1e1b4b'; A.rr(c,-16,-40,32,40,8); c.fill(); if(aceso){ c.strokeStyle='#fff'; c.lineWidth=3; A.rr(c,-16,-40,32,40,8); c.stroke(); } c.fillStyle='#4c1d95'; A.rr(c,-10,-48,20,10,4); c.fill();
     c.strokeStyle='#e9d5ff'; c.lineWidth=3; c.beginPath(); c.moveTo(6,-48); c.quadraticCurveTo(22,-78,30,-92); c.stroke();
@@ -205,7 +204,7 @@ function desenhaTela(c,t){
     c.fillStyle='#e9d5ff'; c.font='900 13px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='top'; c.fillText('COUNT SCRIBBLE',W/2,y-3);
     for(var i=0;i<C.max;i++){ var w=(320-(C.max-1)*4)/C.max; c.fillStyle=i<C.hp?A.lin(c,0,y+14,0,y+34,'#a78bfa','#5b21b6'):'rgba(255,255,255,.15)'; A.rr(c,x+i*(w+4),y+14,w,20,6); c.fill(); }
     var vencidas=C.convertidas||0;
-    var obj=C.fase==='p1'?['★ Throw a star at the GLOWING inkwell!  '+C.alvo+' / 3','★ Jogue uma estrela no tinteiro que BRILHA!']:(C.fase==='p2'?['Stomp or ★ the ink blots!  '+Math.min(6,vencidas)+' / 6','Pise ou jogue ★ nas manchas!']:(C.fase==='p3'?['Climb the purple letters to the Count!','Suba nas letras roxas até o Conde!']:null));
+    var obj=C.fase==='p1'?['★ the glowing inkwell!  '+C.alvo+' / 3','★ no tinteiro que brilha!']:(C.fase==='p2'?['Stomp the ink blots!  '+Math.min(6,vencidas)+' / 6','Pise nas manchas!']:(C.fase==='p3'?['Climb the letters!','Suba nas letras!']:null));
     if(obj){ c.font='900 18px "Nunito",Arial'; var tw=c.measureText(obj[0]).width+30; c.fillStyle='rgba(76,29,149,.85)'; A.rr(c,W/2-tw/2,y+46,tw,J.tr?46:30,15); c.fill(); c.fillStyle='#fde68a'; c.textBaseline='top'; c.fillText(obj[0],W/2,y+51); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText(obj[1],W/2,y+73); } }
   }
   if(C.fala&&!J.quiz&&C.fala.t<C.fala.dur&&C.fase!=='abertura'){ c.font='900 19px "Nunito",Arial'; var tw2=Math.min(560,c.measureText(C.fala.en).width)+36, bx=Math.max(20,Math.min(W-tw2-20,C.x-J.cam-tw2-30)), by=150;

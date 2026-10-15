@@ -152,7 +152,7 @@ def castelo():
     m = Mapa(22)
     m.p(2, 9, 'U')
     m.bloco(17, 21, 6, 9)                                        # sacada do Conde (alta: o herói não sobe)
-    m.faixa(4, 6, 6, '='); m.faixa(10, 12, 6, '=')               # duas plataformas para desviar
+    m.faixa(4, 6, 7, '='); m.faixa(10, 12, 7, '=')               # 18/10: prateleiras BAIXAS (3 tiles): um pulo alcança o tinteiro
     return m
 
 # v2 (Game Design v2): os reinos já portados vêm do arquivo da proposta, que tem o portão de encaixe próprio

@@ -95,7 +95,7 @@ function fisica(dt){
   var ax=0; if(J.in.left) ax-=1; if(J.in.right) ax+=1;
   u.abaixado=!!(J.in.down&&u.noChao&&!u.montado); if(u.abaixado) ax*=.35; /* ↓ = se arrastar devagar */
   var alvo=ax*VAND*(u.montado?1.1:1)*(u.sobre&&u.sobre.trave?.7:1);
-  if(u.impulsoT>0){ u.impulsoT-=dt; if(ax&&(ax>0)!==(u.vx>0)) u.vx+=(alvo-u.vx)*Math.min(1,dt*6); } /* trampolim/cipó: o impulso para a frente não some no ar */
+  if(u.impulsoT>0){ u.impulsoT-=dt; if(ax&&(ax>0)!==(u.vx>0)) u.vx+=(alvo-u.vx)*Math.min(1,dt*16); else if(ax&&Math.abs(u.vx)<Math.abs(alvo)) u.vx+=(alvo-u.vx)*Math.min(1,dt*10); } /* trampolim/cipó: o impulso para a frente não some, mas a criança corrige no ar (18/10) */
   else { u.vx+=(alvo-u.vx)*Math.min(1,dt*18); if(Math.abs(u.vx)<2&&!ax) u.vx=0; }
   if(ax) u.dir=ax>0?1:-1;
   /* pulo (buffer, altura variável, pulo duplo com a bota, planar com a capa ou montado no Pip) */
@@ -110,7 +110,7 @@ function fisica(dt){
     if(!J.in.jump) J.jumpSolto=true;
     u.vy+=520*dt; if(u.vy>150) u.vy=150; if(u.vy<-380) u.vy=-380; u.planando=false;
   } else if(modo==='voo'){ /* Stanza Skies: a capa voa de verdade; segurar PULAR sobe, soltar desce planando */
-    if(J.in.jump){ u.vy-=1500*dt; if(u.vy<-300) u.vy=-300; } else { u.vy+=650*dt; if(u.vy>200) u.vy=200; }
+    if(J.in.jump){ u.vy-=1500*dt; if(u.vy<-300) u.vy=-300; } else { u.vy+=380*dt; if(u.vy>105) u.vy=105; } /* 18/10: solta e desce flutuando */
     u.planando=!u.noChao;
   } else {
   if(J.in.jump && J.jumpSolto){

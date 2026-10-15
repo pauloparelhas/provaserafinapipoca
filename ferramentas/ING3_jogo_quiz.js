@@ -49,7 +49,7 @@ function montaPergunta(){
 }
 function responde(k){
   var q=J.quiz; if(!q||q.fase!=='pergunta') return;
-  var ok=k===q.certa; q.escolha=k; q.fase='resposta'; q.t=0;
+  var ok=k===q.certa; q.escolha=k; q.fase='resposta'; q.t=0; q.auto=ok?1.6:4.5; if(penalti()) q.auto=Math.max(q.auto,2.8); /* 18/10 (Paulo): segue sozinho para a próxima; errou = tempo de ver a certa e o comentário */
   J.stats.perguntas++; marca(q.item.id);
   q.cartoes.forEach(function(c){ c.estado= c.k===q.certa?'certa':(c.k===k?'errada':'apagada'); });
   if(k>=0) q.cartoes[k].bump=10;
@@ -79,6 +79,7 @@ function atualiza(dt){
   q.cartoes.forEach(function(c){ if(c.bump>0) c.bump=Math.max(0,c.bump-dt*50); });
   if(q.fase==='entra'&&q.t>.7){ q.fase='pergunta'; q.t=0; }
   else if(q.fase==='pergunta'){ var antes=Math.ceil(q.tempo); q.tempo=Math.max(0,q.tempo-dt); var agora=Math.ceil(q.tempo); if(agora!==antes&&agora<=5&&agora>0) SOM.fx('clique'); if(q.tempo<=0) responde(-1); }
+  else if(q.fase==='resposta'&&q.auto&&q.t>=q.auto) segue();
   else if(q.fase==='pagina'&&q.t>1.6) termina();
 }
 
@@ -117,7 +118,7 @@ function desenhaTela(c,t){
   relogio(c,W/2,88,q,t);
   balao(c,q,it);
   q.cartoes.forEach(function(cd){ cartao(c,cd); });
-  if(q.fase==='resposta'&&q.t>.5){ var bx=W-120, by=CART_Y-58, a=.8+.2*Math.sin(t*5); c.globalAlpha=ent*a; c.fillStyle='#fde047'; A.rr(c,bx,by,96,44,22); c.fill(); c.fillStyle='#1e1b3a'; c.font=F(900,20); c.textAlign='center'; c.textBaseline='middle'; c.fillText(q.i<q.itens.length-1?'Next ▶':'Done ▶',bx+48,by+22); c.globalAlpha=ent; }
+  if(q.fase==='resposta'&&q.t>.3){ /* barrinha que enche sozinha até a próxima pergunta (tocar adianta) */ var bx=W-150, by=CART_Y-58, fr=Math.min(1,q.t/(q.auto||1.6)); c.globalAlpha=ent; c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,bx,by,126,40,20); c.fill(); c.fillStyle='#fde047'; c.save(); A.rr(c,bx,by,126,40,20); c.clip(); c.fillRect(bx,by,126*fr,40); c.restore(); c.strokeStyle='#fde047'; c.lineWidth=2; A.rr(c,bx,by,126,40,20); c.stroke(); c.fillStyle=fr>.5?'#1e1b3a':'#fff'; c.font=F(900,17); c.textAlign='center'; c.textBaseline='middle'; c.fillText(q.i<q.itens.length-1?'Next ▶':'Done ▶',bx+63,by+20); }
   c.restore();
 }
 function relogio(c,x,y,q,t){

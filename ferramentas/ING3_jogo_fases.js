@@ -34,6 +34,9 @@ var LISTA=[
   {id:9, nome:'Inkwell Castle', nome_pt:'Castelo do Tinteiro', cena:'tinta', tema:'todos', chefao:true, moradores:[],
    resumo:'Count Scribble mixed up all the stories!', resumo_pt:'O Conde Rabisco misturou todas as histórias!'}
 ];
+/* o FINAL PERDIDO que cada reino devolve ao livro (aparece no fim do reino: o fio da história da jornada) */
+var FINS={1:['…and they all lived happily ever after.','…e todos viveram felizes para sempre.'],2:['The good fairy helped, and the bad wolf ran away. The end!','A fada boa ajudou, e o lobo mau fugiu. Fim!'],3:['The race was make-believe… but the fun was real!','A corrida era de faz de conta… mas a diversão foi real!'],4:['The fish sang a song with words that rhyme. The end!','Os peixes cantaram uma música com palavras que rimam. Fim!'],5:['The poem got its title, lines and stanzas back. The end!','O poema ganhou de volta o título, os versos e as estrofes. Fim!'],6:['Clap, clap, clap! The poem found its rhythm again. The end!','Palma, palma, palma! O poema achou o ritmo de novo. Fim!'],7:['IF you practise, THEN you score a goal! The end!','SE você treina, ENTÃO você faz gol! Fim!'],8:['…and the mouse wants a cookie AGAIN! It is a circle story.','…e o ratinho quer um biscoito DE NOVO! É uma história circular.']};
+LISTA.forEach(function(f){ if(FINS[f.id]){ f.fim=FINS[f.id][0]; f.fim_pt=FINS[f.id][1]; } });
 var PRONTOS={1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:true,9:true}; /* reinos já construídos (E1: vila e floresta; E2: recife e céu) */
 
 /* ---------- parser: grade → objeto de nível ---------- */

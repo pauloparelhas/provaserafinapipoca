@@ -45,6 +45,11 @@ function botaoCapa(on){ var b=$('btnCapa'); if(!b){ b=document.createElement('bu
 function acao(on,n,ico,id){ var b=$('tAct'); if(!b) return; b.classList.toggle('show',!!on); b.innerHTML= ico?'<img src="'+ico+'" alt="">':'★<small>'+(n||0)+'</small>'; b.dataset.poder=id||(on?'estrela':''); b.setAttribute('aria-label',id||'Throw a star'); var h=$('hudStar'); if(h){ h.style.display=on?'flex':'none'; h.querySelector('b').textContent=n||0; } }
 /* o poder que o herói tem neste reino, ao lado dos corações */
 function poderHud(ico,nome,pt){ var d=$('hudPoder'); if(!d) return; if(!ico){ d.style.display='none'; return; } d.style.display='flex'; d.innerHTML='<img src="'+ico+'" alt=""><span>'+bi(nome||'',pt||'','small')+'</span>'; }
+/* explicaçãozinha do poder: passar o mouse ou tocar na pílula do HUD (e passar o mouse no botão de ação) */
+var tipT=null;
+function dicaPoder(alvo){ if(!window.PODERES) return; var d=PODERES.dicaPoder(); if(!d) return; var t=$('tipPoder'); if(!t){ t=document.createElement('div'); t.id='tipPoder'; $('ui').appendChild(t); }
+  t.innerHTML=bi(d.en,d.pt,'small'); var r=alvo.getBoundingClientRect(), u=$('ui').getBoundingClientRect(), esc=u.width/960||1; t.style.left=Math.max(8,Math.min(960-328,(r.left-u.left)/esc-20))+'px'; t.style.top=((r.bottom-u.top)/esc+8)+'px'; if(alvo.id==='tAct'){ t.style.top=((r.top-u.top)/esc-110)+'px'; t.style.left=Math.max(8,(r.left-u.left)/esc-240)+'px'; }
+  t.classList.add('show'); clearTimeout(tipT); tipT=setTimeout(function(){ t.classList.remove('show'); },4500); }
 function coracoes(n,dano){ var d=$('hudVida'); if(!d) return; var h=''; for(var i=0;i<3;i++) h+='<span class="cor'+(i<n?' on':'')+'">'+SVG.coracao+'</span>'; d.innerHTML=h; if(dano){ d.classList.remove('dano'); void d.offsetWidth; d.classList.add('dano'); } }
 function quizBotoes(on){ $('quizBtns').classList.toggle('show',!!on); }
 /* corrida: ◀ ▶ somem (o carro anda sozinho); PULAR vira ▲ e o ▼ desce de faixa */
@@ -99,6 +104,7 @@ function fechaMenu(){ $('menu').classList.remove('show'); menuAberto=null; }
 function estrelasHtml(n){ var s='<div class="mstars">'; for(var i=0;i<3;i++) s+='<span class="'+(i<n?'on':'')+'" style="animation-delay:'+(i*.25)+'s">'+SVG.estrela+'</span>'; return s+'</div>'; }
 function fimFase(f,estrelas,acertos,total,pontos,moedas,pags,totPags){
   var h='<h2>'+bi(f.nome,f.nome_pt,'small')+'</h2>'+estrelasHtml(estrelas);
+  if(f.fim) h+='<div class="fimHist"><b>'+bi('The lost ending is back in the book!','O final perdido voltou para o livro!','small')+'</b><p>'+bi(f.fim,f.fim_pt,'small')+'</p></div>'; /* 18/10: o fio da história da jornada */
   h+='<div class="placar"><div><span>'+SVG.pagina+'</span><b>'+pags+'/'+totPags+'</b><i>'+bi('pages','páginas')+'</i></div><div><span>'+SVG.estrela+'</span><b>'+acertos+'/'+total+'</b><i>'+bi('right answers','respostas certas')+'</i></div><div><span>'+SVG.moeda+'</span><b>'+moedas+'</b><i>'+bi('coins','moedas')+'</i></div></div>';
   if(pags<totPags) h+='<p class="sub">'+bi('Some pages are still lost here. Play again to find them!','Ainda há páginas perdidas aqui. Jogue de novo para achá-las!')+'</p>';
   h+='<button class="mbtn pri" id="mMapa">'+bi('Back to the map','Voltar ao mapa')+'</button><button class="mbtn" id="mDeNovo">'+bi('Play this kingdom again','Jogar este reino de novo')+'</button>';
@@ -110,7 +116,7 @@ function pausa(){
   var h='<h2>'+bi('Paused','Pausa')+'</h2><button class="mbtn pri" id="mCont">'+bi('Continue','Continuar')+'</button><div class="mrow"><button class="mbtn" id="mSfx">Sounds: '+(SOM.sfx?'on':'off')+'</button><button class="mbtn" id="mMus">Music: '+(SOM.mus?'on':'off')+'</button></div>';
   if(!document.body.classList.contains('sem-voz')) h+='<button class="mbtn" id="mVoz">Voice: '+(window.somLigado?'on':'off')+'</button>';
   h+='<button class="mbtn" id="mMapa">'+bi('Leave to the map','Sair para o mapa')+'</button>';
-  menu(h,{mCont:function(){ fechaMenu(); JOGO.pausa(false); }, mSfx:function(){ SOM.setSfx(!SOM.sfx); $('mSfx').textContent='Sounds: '+(SOM.sfx?'on':'off'); }, mMus:function(){ SOM.setMus(!SOM.mus); $('mMus').textContent='Music: '+(SOM.mus?'on':'off'); },
+  menu(h,{mCont:function(){ fechaMenu(); JOGO.pausa(false); }, mSfx:function(){ SOM.setSfx(!SOM.sfx); $('mSfx').textContent='Sounds: '+(SOM.sfx?'on':'off'); }, mMus:function(){ try{ localStorage.setItem('ing3_mus_escolheu','1'); }catch(e){} SOM.setMus(!SOM.mus); $('mMus').textContent='Music: '+(SOM.mus?'on':'off'); },
     mVoz:function(){ try{ toggleSom(); }catch(e){} $('mVoz').textContent='Voice: '+(window.somLigado?'on':'off'); },
     mMapa:function(){ fechaMenu(); saiParaMapa(); }});
 }
@@ -213,6 +219,9 @@ function initLock(){
 }
 
 function init(){
+  var hp=$('hudPoder'); if(hp){ hp.addEventListener('mouseenter',function(){ dicaPoder(hp); }); hp.addEventListener('click',function(e){ e.stopPropagation(); dicaPoder(hp); }); }
+  var ta=$('tAct'); if(ta){ ta.addEventListener('mouseenter',function(){ dicaPoder(ta); }); }
+  try{ if(localStorage.getItem('ing3_mus_escolheu')!=='1'){ SOM.setMus(false); } }catch(e){} /* 18/10 (Paulo): trilha desligada por padrão; efeitos continuam */
   montaMapBtns();
   $('btnHome').innerHTML=SVG.casa; $('btnLock').innerHTML=SVG.cadeado; $('btnHelp').innerHTML=SVG.ajuda; $('btnPause').innerHTML=SVG.pausa; $('btnTr').innerHTML=SVG.bandeira;
   $('hudCoinIco').innerHTML=SVG.moeda; $('hudArenaIco').innerHTML=SVG.pagina; $('hudPtsIco').innerHTML=SVG.estrela;

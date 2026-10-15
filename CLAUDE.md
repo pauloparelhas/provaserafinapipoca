@@ -17,8 +17,10 @@ Os agentes estao em `.claude/agents/`. Sao invocados com `Agent(subagent_type="n
 | Antes de declarar a MATERIA pronta + a cada insumo novo | `auditor-cobertura` | `Agent(subagent_type="auditor-cobertura")` |
 | Apos entregar ferramenta | `arquivista` | `Agent(subagent_type="arquivista")` |
 | Para retomar sessao ou checar prioridades | `gerente` | `Agent(subagent_type="gerente")` |
+| Antes de PUBLICAR qualquer jogo (fases, chefao, corrida) | `jogador` | `Agent(subagent_type="jogador")` — joga cada fase do inicio ao fim SO com teclas, sem teletransporte; sem LIBERA dele nao publica |
 
 **NUNCA declarar ferramenta como "pronta" sem ter rodado o agente `ti` antes.**
+**NUNCA publicar um JOGO sem o agente `jogador` ter terminado TODAS as fases com controles reais (licao de 18/10: o chefao do castelo foi ao ar sem ninguem ter conseguido jogar).**
 **NUNCA comecar a codar sem ter rodado o agente `pedagogico` antes.**
 **NUNCA declarar a MATERIA pronta sem `auditor-cobertura` com veredito SIM (zero buracos de escopo).**
 
