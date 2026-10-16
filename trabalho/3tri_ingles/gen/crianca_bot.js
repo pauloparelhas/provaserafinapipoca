@@ -70,7 +70,8 @@ window.CRIANCA = (function(){
   function decideChefe(dt){
     var u=J.urso, C=J.chefe, inp=J.in; inp.down=false; var alvoX=null;
     var temEst=(u.poderes.estrelas||0)>0, joga=function(){ if(st.acao<=0){ st.acao=.45+rnd()*.4; PERIGOS.atira(); } };
-    if(C.fase==='p1'){ alvoX=8*T+Math.sin(st.t*.6)*3*T; if(temEst) joga(); } /* anda desviando e joga as estrelas que ganhou */
+    if(C.fase==='p1'){ var tq=null; if(C.escudo) C.tinteiros.forEach(function(q){ if(!q.caido&&(!tq||Math.abs(q.x-u.x)<Math.abs(tq.x-u.x))) tq=q; });
+      if(tq){ alvoX=tq.x; if(Math.abs(tq.x-u.x)<40&&u.noChao&&tq.y<450-10) pula(.5); } else { alvoX=8*T+Math.sin(st.t*.6)*3*T; if(temEst) joga(); } } /* derruba os tinteiros (encosta/pula) e depois joga as estrelas no Conde */
     else if(C.fase==='p2'){ if(temEst&&!C.escudo) joga(); var e=null; J.mundo.inimigos.forEach(function(x){ if(x.doConde&&!x.morto&&!x.achatado&&(!e||Math.abs(x.x-u.x)<Math.abs(e.x-u.x))) e=x; }); if(e){ alvoX=e.x; if(Math.abs(e.x-u.x)<90&&u.noChao) pula(.3); } }
     else if(C.fase==='p3'){ alvoX=19*T; if(u.noChao&&(parede(1)||rnd()<.02)) pula(.5); if(temEst&&!C.escudo) joga(); }
     /* vê a sombra no chão e sai de baixo (nem sempre: imprecisão) */
