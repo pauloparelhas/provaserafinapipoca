@@ -192,7 +192,7 @@ function caiu(msg,pt){
   if(J.chefe&&window.CHEFAO&&CHEFAO.morreu) CHEFAO.morreu();
   var u=J.urso; if(J.teste) J.teste.quedas.push({x:Math.round(u.x/45),mundo:J.mundo&&J.mundo.mundo,t:+J.tFase.toFixed(1),causa:String(msg).split(' ')[0]}); SOM.fx('tonto'); J.shake=6; J.agarrado=null; J.soltouT=0; u.giro=0;
   if(J.nivel&&J.respawn.mundo&&J.mundo.mundo!==J.respawn.mundo){ J.mundo= J.respawn.mundo==='sub'&&J.nivel.sub?J.nivel.sub:J.nivel; J.troncosVivos=[]; J.bolasCanhao=[]; J.estrelas=[]; }
-  u.x=J.respawn.x; u.y=J.respawn.y; u.vx=0; u.vy=0; u.tontoT=.8; u.invT=2.4; J.flash=.7; /* renasce protegido mais tempo: dá para sair de perto de um chefinho */ u.puloExtra=u.poderes.bota||u.poderes.giz;
+  u.x=J.respawn.x; u.y=J.respawn.y; u.vx=0; u.vy=0; u.tontoT=.8; u.invT=J.chefe?3.5:2.4; J.flash=.7; /* renasce protegido mais tempo: dá para sair de perto de um chefinho */ u.puloExtra=u.poderes.bota||u.poderes.giz;
   if(u.tam<1){ u.tam=1; setTimeout(function(){ if(window.UI&&J.urso) UI.coracoes(J.urso.tam+1,false); },0); } /* 16/10 (jogador): renasce com 2 corações — um toque logo depois não vira outra queda */
   if(J.pip){ J.pip.x=u.x+50; J.pip.y=u.y; J.pip.vx=0; J.pip.vy=0; }
   J.cam=Math.max(0,Math.min(J.mundo.w-W,u.x-W*.4)); J.camY=Math.max(0,Math.min(J.mundo.h-H,u.y-H*.62)); J.bolasCanhao=[]; 
