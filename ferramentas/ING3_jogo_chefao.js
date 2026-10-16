@@ -266,7 +266,7 @@ function atualiza(dt){
       /* derrama do tinteiro da sacada: caem pela borda e saem andando */
       var lx=(C.lado<0)?C.x+60:SACADA_X0, dl=(C.lado<0)?1:-1; if(C.lado<0&&C.ondas>3) { C.ondas=5; } /* do lado esquerdo, menos ondas */ for(var k=0;k<Math.min(2,3-vivasC);k++) C.gotas.push({x0:lx,y0:C.y-10,alvo:(C.lado<0)?(7+k*2)*T:lx+dl*(40+k*70),t:-k*.3,dur:(C.lado<0)?1.0:.7,x:lx,y:C.y,r:15,vira:true}); }
     var vencidas=J.mundo.inimigos.filter(function(e){ return e.doConde&&(e.morto||e.achatado); }).length; C.convertidas=vencidas;
-    if(vencidas>=4&&C.escudo){ J.mundo.inimigos.forEach(function(e){ if(e.doConde){ e.achatado=true; e.tAch=.3; } }); quebraEscudo(); }
+    if(vencidas>=3&&C.escudo){ J.mundo.inimigos.forEach(function(e){ if(e.doConde){ e.achatado=true; e.tAch=.3; } }); quebraEscudo(); }
   }
   else if(C.fase==='p3'){
     if(!C.muda) C.tLetra-=dt; if(C.tLetra<=0){ C.tLetra=C.escudo?1.4:2.6; if(C.escudo) novaLetra(); else novaGota(); }
@@ -366,7 +366,7 @@ function desenhaTela(c,t){
     var y=58;
     frase(c,t);
     var vencidas=C.convertidas||0;
-    var obj=!/^p/.test(C.fase)?null:(!C.escudo?['★ the Count! Take his letters!','Jogue ★ no Conde! Tire as letras dele!']:(C.fase==='p1'?['Break his shield: knock over the inkwells!  '+C.alvo+' / 3','Quebre o escudo: derrube os tinteiros!']:(C.fase==='p2'?['Break his shield: jump on the blots!  '+Math.min(4,vencidas)+' / 4','Quebre o escudo: pule nas manchas!']:['Climb the letters to the Count!','Suba nas letras até o Conde!'])));
+    var obj=!/^p/.test(C.fase)?null:(!C.escudo?['★ the Count! Take his letters!','Jogue ★ no Conde! Tire as letras dele!']:(C.fase==='p1'?['Break his shield: knock over the inkwells!  '+C.alvo+' / 3','Quebre o escudo: derrube os tinteiros!']:(C.fase==='p2'?['Break his shield: jump on the blots!  '+Math.min(3,vencidas)+' / 3','Quebre o escudo: pule nas manchas!']:['Climb the letters to the Count!','Suba nas letras até o Conde!'])));
     if(obj){ c.font='900 17px "Nunito",Arial'; var tw=c.measureText(obj[0]).width+30; c.fillStyle='rgba(76,29,149,.8)'; A.rr(c,W/2-tw/2,y+54,tw,J.tr?44:28,14); c.fill(); c.fillStyle='#fde68a'; c.textAlign='center'; c.textBaseline='top'; c.fillText(obj[0],W/2,y+59); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText(obj[1],W/2,y+79); }
       /* como jogar a estrela: sempre à vista, no canto de baixo */
       var dica=J.tr?'★ = ESPAÇO ou ▼':'★ = SPACE or ▼'; c.font='900 16px "Nunito",Arial'; var tw4=c.measureText(dica).width+28; c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,W/2-tw4/2,H-44,tw4,32,16); c.fill(); c.fillStyle='#fde047'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(dica,W/2,H-28); }

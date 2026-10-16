@@ -28,7 +28,8 @@ function inimigos(dt){
     }
     if(u.invT>0||u.tontoT>0||J.estado!=='nivel') return;
     if(G.colideRet(R.x+6,R.y+6,R.w-12,R.h-6,e.x-18,e.y-30,36,30)){
-      if(u.vy>50 && u.y<e.y-14 && !e.espinho){ e.achatado=true; e.tAch=.7; u.vy=-400; u.noChao=false; u.sx=1.3; u.sy=.7; SOM.fx('pisao'); G.pontua(20,e.x,e.y-40); if(window.PERIGOS&&PERIGOS.transforma) PERIGOS.transforma(e); else G.emite(10,function(){ return {x:e.x,y:e.y-10,vx:(Math.random()-.5)*240,vy:-100-Math.random()*200,vida:.9,max:.9,tipo:'estrela',cor:'#f9a8d4',r:4,g:.3}; }); }
+      if(e.doConde&&!(u.vy>0&&u.y<e.y-6)){ var lado=u.x<e.x?-1:1; u.vx=lado*230; u.vy=-260; u.noChao=false; u.invT=Math.max(u.invT,.45); e.dir=-lado; SOM.fx('pisao'); return; } /* 16/10 (jogador): mancha do Conde encostada de lado só EMPURRA (sem tirar coração); de cima, vence */
+      if((u.vy>50 && u.y<e.y-14 || e.doConde) && !e.espinho){ e.achatado=true; e.tAch=.7; u.vy=-400; u.noChao=false; u.sx=1.3; u.sy=.7; SOM.fx('pisao'); G.pontua(20,e.x,e.y-40); if(window.PERIGOS&&PERIGOS.transforma) PERIGOS.transforma(e); else G.emite(10,function(){ return {x:e.x,y:e.y-10,vx:(Math.random()-.5)*240,vy:-100-Math.random()*200,vida:.9,max:.9,tipo:'estrela',cor:'#f9a8d4',r:4,g:.3}; }); }
       else G.machucado();
     }
   });
