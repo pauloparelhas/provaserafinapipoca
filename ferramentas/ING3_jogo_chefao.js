@@ -333,7 +333,7 @@ function desenha(c,t){
   /* letras caídas: a ESCADA */
   C.blocos.forEach(function(b){ c.fillStyle=A.lin(c,b.x,b.y,b.x,b.y+b.h,'#8b5cf6','#4c1d95'); A.rr(c,b.x+1,b.y+1,b.w-2,b.h-2,8); c.fill(); c.strokeStyle='#2e1065'; c.lineWidth=2; A.rr(c,b.x+1,b.y+1,b.w-2,b.h-2,8); c.stroke();
     c.fillStyle='#f5f3ff'; c.font='900 30px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(b.ch,b.x+b.w/2,b.y+b.h/2+1); });
-  if(C.fase==='p3'&&C.escudo){ /* setas mostrando a subida (somem quando ele chega lá em cima) */ var b2=Math.abs(Math.sin(t*3))*6; c.save(); c.globalAlpha=.85; c.fillStyle='#fde047'; [[14,1],[15,2],[16,3],[17.4,4]].forEach(function(p,i){ var yy=CHAO-p[1]*T-22-b2; if(p[0]<17&&C.alt[p[0]]<p[1]) return; c.beginPath(); c.moveTo(p[0]*T+10,yy); c.lineTo(p[0]*T+34,yy-10); c.lineTo(p[0]*T+34,yy+10); c.closePath(); c.fill(); }); c.restore(); }
+  if(C.fase==='p3'&&C.escudo){ /* setas mostrando a subida (somem quando ele chega lá em cima) */ var b2=Math.abs(Math.sin(t*3))*6; c.save(); c.globalAlpha=.85; c.fillStyle='#fde047'; [[14,1],[15,2],[16,3],[17.4,4]].forEach(function(p,i){ var yy=CHAO-p[1]*T-22-b2; if(p[0]<17&&C.alt[p[0]]<p[1]) return; c.beginPath(); c.moveTo(p[0]*T+38,yy-8); c.lineTo(p[0]*T+14,yy-14); c.lineTo(p[0]*T+22,yy+6); /* seta para a direita e para cima: sobe a escada */ c.closePath(); c.fill(); }); c.restore(); }
   /* sombras de aviso, gotas e letras em voo */
   [C.gotas,C.letras].forEach(function(lista,ehLetra){ lista.forEach(function(d){ if(d.t<0) return;
     var k=Math.min(1,d.t/d.dur), chao=ehLetra&&d.degrau?CHAO-C.alt[d.col]*T:CHAO; c.fillStyle='rgba(30,27,75,'+(.15+.45*k)+')'; A.el(c,d.alvo,chao-2,(ehLetra?28:16)*(.5+.6*k),6); c.fill();
@@ -368,8 +368,8 @@ function desenhaTela(c,t){
       /* como jogar a estrela: sempre à vista, no canto de baixo */
       var dica=J.tr?'★ = ESPAÇO ou ▼':'★ = SPACE or ▼'; c.font='900 16px "Nunito",Arial'; var tw4=c.measureText(dica).width+28; c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,W/2-tw4/2,H-44,tw4,32,16); c.fill(); c.fillStyle='#fde047'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(dica,W/2,H-28); }
   }
-  if(C.fala&&!J.quiz&&!C.vitoria&&C.fala.t<C.fala.dur&&C.fase!=='abertura'){ c.font='900 19px "Nunito",Arial'; var tw2=Math.min(560,c.measureText(C.fala.en).width)+36, bx=Math.max(20,Math.min(W-tw2-20,(C.lado<0)?C.x-J.cam+80:C.x-J.cam-tw2-30)), by=150;
-    by=C.cansado?168:158; c.fillStyle='#ede9fe'; A.rr(c,bx,by,tw2,J.tr?62:44,16); c.fill(); c.beginPath(); c.moveTo(bx+tw2-30,by+(J.tr?60:42)); c.lineTo(bx+tw2,by+(J.tr?78:60)); c.lineTo(bx+tw2-60,by+(J.tr?60:42)); c.fill();
+  if(C.fala&&!J.quiz&&!C.vitoria&&C.fala.t<C.fala.dur&&C.fase!=='abertura'){ c.font='900 19px "Nunito",Arial'; var tw2=Math.min(560,c.measureText(C.fala.en).width)+36, bx=Math.max(20,Math.min(W-tw2-20,(C.x-J.cam<W/2)?C.x-J.cam+80:C.x-J.cam-tw2-30)), by=150;
+    by=C.cansado?168:158; c.fillStyle='#ede9fe'; A.rr(c,bx,by,tw2,J.tr?62:44,16); c.fill(); var esqC=C.x-J.cam<W/2, bt=by+(J.tr?60:42); c.beginPath(); if(esqC){ c.moveTo(bx+30,bt); c.lineTo(bx,bt+18); c.lineTo(bx+60,bt); } else { c.moveTo(bx+tw2-30,bt); c.lineTo(bx+tw2,bt+18); c.lineTo(bx+tw2-60,bt); } c.fill(); /* o rabinho aponta para o Conde, do lado em que ele está */
     c.fillStyle='#2e1065'; c.textAlign='left'; c.textBaseline='top'; c.fillText(C.fala.en,bx+18,by+12); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#6d28d9'; c.fillText(C.fala.pt,bx+18,by+38); } }
   var ff=C.fada.fala; if(ff&&!J.quiz&&ff.t<ff.dur){ c.font='900 17px "Nunito",Arial'; var tw5=Math.min(440,c.measureText(ff.en).width)+30, bx5=Math.max(12,Math.min(W-tw5-12,(C.lado<0)?C.fada.x-J.cam-tw5-48:C.fada.x-J.cam+48)), by5=236; /* ao lado da fada, abaixo da fala do Conde e longe dos botões de toque */
     c.fillStyle='#fef9c3'; A.rr(c,bx5,by5,tw5,J.tr?58:40,14); c.fill(); c.fillStyle='#713f12'; c.textAlign='left'; c.textBaseline='top'; c.fillText(ff.en,bx5+15,by5+10,440); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#a16207'; c.fillText(ff.pt,bx5+15,by5+34,440); } }
@@ -384,7 +384,7 @@ function desenhaTela(c,t){
     for(var cf=0;cf<26;cf++){ var hx2=(cf*97)%W, yy2=((tv*120+cf*53)%(H+40))-20; c.fillStyle=['#fde047','#f472b6','#60a5fa','#4ade80'][cf%4]; c.save(); c.translate(hx2+Math.sin(tv*2+cf)*20,yy2); c.rotate(tv*2+cf); c.fillRect(-5,-3,10,6); c.restore(); }
     if(J.tr&&tv>1.8){ c.font='700 22px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText('VOCÊ É UM SUPER JOGADOR!',W/2,H/2+100); } c.restore(); }
   if(C.banner&&C.banner.t<1.8&&!C.vitoria){ var k=Math.min(1,C.banner.t/.3), sai=Math.max(0,(C.banner.t-1.3)/.5); c.save(); c.globalAlpha=1-sai;
-    c.translate(W/2,H/2-40); c.scale(.6+.4*k,.6+.4*k); c.font='900 60px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=10; c.strokeStyle='#2e1065'; c.strokeText(C.banner.en,0,0); c.fillStyle='#fde047'; c.fillText(C.banner.en,0,0);
+    c.translate(W/2,H/2+60); c.scale(.6+.4*k,.6+.4*k); c.font='900 60px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=10; c.strokeStyle='#2e1065'; c.strokeText(C.banner.en,0,0); c.fillStyle='#fde047'; c.fillText(C.banner.en,0,0);
     if(J.tr){ c.font='700 20px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText(C.banner.pt,0,46); } c.restore(); }
 }
 return {morreu:morreu, inicia:inicia, atualiza:atualiza, anima:anima, desenha:desenha, desenhaTela:desenhaTela, solidos:solidos, avancaIntro:avancaIntro, ativo:function(){ return !!C; }, limpa:function(){ try{ SOM.tensao(0); }catch(e){} C=null; J.chefe=null; if(window.UI) UI.legenda(null); }};

@@ -152,7 +152,7 @@ function inicia(f){
   R.me=novoCarro(J.prog.heroi||'lia',2*SEG,0,true);
   R.rivais=RIVAIS_DEF.map(function(d,k){ var c=novoCarro(d.id,(4+Math.floor(k/2)*3+((9-k)>>1)*0)*SEG+ (8-k)*SEG*1.2,(k%2?.5:-.5),false); c.p=d; c.cor=CR.LISTA[d.id].cor; c.nome=CR.LISTA[d.id].nome; return c; });
   /* grade de largada: todos À FRENTE do herói e à vista (o herói é desenhado PLAYER_Z adiante da câmera) */
-  R.rivais.forEach(function(c,k){ c.z=R.me.z+PLAYER_Z+(2.5+(8-k)*2.2)*SEG; c.x=(k%2?.5:-.5); });
+  R.rivais.forEach(function(c,k){ c.z=R.me.z+PLAYER_Z+(3.5+(8-k)*2.4)*SEG; c.x=(k%2?.5:-.5); });
   J.estado='corrida'; J.stats={perguntas:0,acertos:0}; J.pontos=0; J.corrida=R;
   J.nivel={moradores:[{feito:false},{feito:false},{feito:false}], quizIds:[]}; J.mundo=null;
   J.urso={x:0,y:0,vx:0,vy:0,estado:'ride',anim:0,invT:0,tam:1};
@@ -220,7 +220,7 @@ var LANE_X=1.5, ENTRA=6, SAI=6;
 /* 15/10 (Paulo: "tá muito fácil; na 2ª volta (2/3 da corrida) todos mais rápidos, o jogador cai várias
    posições salvo se for perfeito; no final facilite, para um jogador razoável chegar em 1º, mas não tão
    fácil"): a corrida tem 3 VOLTAS de ritmo (pela posição do herói na pista). */
-var COMPR=SEG*1.1; /* um carrinho de comprimento */
+var COMPR=SEG*2.4; /* distância mínima entre dois carrinhos na mesma faixa (16/10: com 1,1 o da frente parecia 'dentro' do herói na tela) */
 function progresso(){ return R?cl((R.me.z+PLAYER_Z)/(FIM_SEG*SEG),0,1):0; }
 function voltaDe(z){ var p=cl(z/(FIM_SEG*SEG),0,1); return p<.33?1:(p<.7?2:3); }
 function volta(){ return voltaDe(R.me.z+PLAYER_Z); }
@@ -420,7 +420,7 @@ function desenha(c){
   /* céu e morros distantes (sobem e deslizam com a curva) */
   var CM=temaMisto(me.z+PLAYER_Z), g=c.createLinearGradient(0,0,0,H*.55); g.addColorStop(0,CM.c0); g.addColorStop(1,CM.c1); c.fillStyle=g; c.fillRect(0,0,W,H);
   R.ceuX=(R.ceuX||0)+base.curva*.002*(me.v/VMAX); fundo(c,t,temaMisto(me.z+PLAYER_Z));
-  var playerY=lerp(base.p1.world.y,base.p2.world.y,basePct), camX=me.x*ROAD, camY=playerY+CAM_H, camZ=me.z;
+  var zhC=me.z+PLAYER_Z, segH=segDe(zhC), pctH=(zhC%SEG)/SEG, playerY=lerp(segH.p1.world.y,segH.p2.world.y,pctH), camX=me.x*ROAD, camY=playerY+CAM_H, camZ=me.z; /* 16/10 (jogador): a altura da câmera vem do chão ONDE O HERÓI É DESENHADO (antes, do chão da câmera: no morro o rival aparecia 'dentro' do herói) */
   var maxy=H, x=0, dx=-(base.curva*basePct); VIS=[]; var TODOS=[];
   for(var n=0;n<DRAW;n++){
     var s=segs[(base.i+n)%segs.length]; if(base.i+n>=segs.length) break;
@@ -445,9 +445,9 @@ function desenha(c){
   /* o herói, grande, embaixo e no centro */
   var inc=(me.inc||0)+(me.wob>0?Math.sin((1-me.wob/.8)*PI*2)*.5:0), ar=me.salto>0?Math.sin((1-me.salto/.9)*PI)*70:0;
   if(ar){ c.fillStyle='rgba(0,0,0,.25)'; A.el(c,W/2,H-14,90-ar*.4,14); c.fill(); }
-  if(R.fase!=='podio'){ c.save(); c.translate(W/2,H-12-ar); var esc=.95; c.scale(esc,esc); CR.desenhaTras(c,me.id,{cor:corHeroi(),t:t,inc:inc,giro:me.giro>0?1-me.giro/1.1:0,turbo:me.turbo>0||me.pad>0,eu:true});
+  if(R.fase!=='podio'){ c.save(); c.translate(W/2,H-4-ar); var esc=.9; c.scale(esc,esc); /* tamanho e altura do herói = os da projeção no ponto em que ele está (sem parecer 'colado' no da frente) */ CR.desenhaTras(c,me.id,{cor:corHeroi(),t:t,inc:inc,giro:me.giro>0?1-me.giro/1.1:0,turbo:me.turbo>0||me.pad>0,eu:true});
     if(me.freio&&me.v>20){ c.fillStyle='rgba(239,68,68,.9)'; rr(c,-52,-30,18,9,4); c.fill(); rr(c,34,-30,18,9,4); c.fill(); } c.restore(); }
-  if(R.fase!=='podio'){ c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=2; var yb=H-150+Math.sin(t*6)*3; c.beginPath(); c.moveTo(W/2,yb+10); c.lineTo(W/2-8,yb); c.lineTo(W/2+8,yb); c.closePath(); c.fill(); c.stroke(); c.font=F(900,12); c.fillStyle='rgba(234,179,8,.95)'; rr(c,W/2-18,yb-17,36,16,8); c.fill(); c.fillStyle='#1e1b3a'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('YOU',W/2,yb-8.5); }
+  if(R.fase!=='podio'){ c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=2; var yb=H-124+Math.sin(t*6)*2; c.beginPath(); c.moveTo(W/2,yb+10); c.lineTo(W/2-8,yb); c.lineTo(W/2+8,yb); c.closePath(); c.fill(); c.stroke(); c.font=F(900,12); c.fillStyle='rgba(234,179,8,.95)'; rr(c,W/2-18,yb-17,36,16,8); c.fill(); c.fillStyle='#1e1b3a'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('YOU',W/2,yb-8.5); }
   hud(c,t);
   if(R.fase==='largada') largada(c,t);
   if(R.goT>0) textoGrande(c,'GO!','#4ade80',1-R.goT/.9);
@@ -625,5 +625,5 @@ function podio(c,t){
 }
 
 return {inicia:inicia, atualiza:atualiza, desenha:desenha, toque:toque, tecla:tecla, ativa:function(){ return !!R&&!R.acabou; }, largar:largar, nivel:escolheNivel, NIVEIS:NIVEIS,
-  /* QA */ _R:function(){ return R; }, _O:function(){ return OBJ; }, _K:{VMAX:VMAX,SEG:SEG,PIT_T:PIT_T,PLAYER_Z:PLAYER_Z,COMPR:SEG*1.1,segs:function(){ if(!segs.length) montaPista(); return segs; },PITS:function(){ if(!segs.length) montaPista(); return PITS; },FIM:function(){ if(!segs.length) montaPista(); return FIM_SEG; }}, _auto:function(on){ if(R) R.auto=on?{}:null; }};
+  /* QA */ _R:function(){ return R; }, _O:function(){ return OBJ; }, _K:{VMAX:VMAX,SEG:SEG,PIT_T:PIT_T,PLAYER_Z:PLAYER_Z,COMPR:COMPR,segs:function(){ if(!segs.length) montaPista(); return segs; },PITS:function(){ if(!segs.length) montaPista(); return PITS; },FIM:function(){ if(!segs.length) montaPista(); return FIM_SEG; }}, _auto:function(on){ if(R) R.auto=on?{}:null; }};
 })();
