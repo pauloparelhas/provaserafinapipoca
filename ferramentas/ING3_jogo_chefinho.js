@@ -2,7 +2,7 @@
    ING3_jogo_chefinho.js — o MINI-CHEFE do fim de cada reino (E).
    Reino 1 "The Big Blot": mancha grande que pula em arco a cada 2 s
    (aviso: encolhe 0,6 s antes de pular). Pisar nela (ou acertar a
-   estrela) 3 vezes; a cada acerto ela solta 2 manchinhas. Encostar
+   estrela) 3 vezes; a cada acerto ela solta 1 manchinha (16/10: eram 2 e o trecho matava várias vezes seguidas), do lado de longe do herói; vencida, nenhuma. Encostar
    de lado machuca. Vencida, vira um monte de borboletas e libera
    o caminho. Outros reinos usam o mesmo motor com outra pele.
    ============================================================ */
@@ -34,7 +34,7 @@ function acerta(ch){
   if(ch.inv>0||ch.vencido) return; ch.inv=.5; ch.hp--; SOM.fx('chefao'); J.shake=8; G.brilho(ch.x,ch.y-60,12,'#c7d2fe');
   if(ch.hp<=0){ ch.vencido=true; SOM.fx('vitoria'); G.pontua(300,ch.x,ch.y-80); for(var i=0;i<9;i++) J.part.push({x:ch.x,y:ch.y-30,vx:(Math.random()-.5)*300,vy:-150-Math.random()*200,vida:1.6,max:1.6,tipo:'borboleta',cor:['#f472b6','#60a5fa','#fbbf24'][i%3],r:8}); G.toast('You did it! The Big Blot is gone!',2400,'Conseguiu! A Grande Mancha sumiu!'); return; }
   /* solta duas manchinhas */
-  var M=J.mundo; [-1,1].forEach(function(d){ M.inimigos.push({tipo:'tinta',x:ch.x+d*40,y:ch.y0,x0:ch.x+d*40,y0:ch.y0,dir:d,v:60,voa:false}); });
+  if(ch.vencido) return; var M=J.mundo; [ch.x<J.urso.x?-1:1].forEach(function(d){ M.inimigos.push({tipo:'tinta',x:ch.x+d*40,y:ch.y0,x0:ch.x+d*40,y0:ch.y0,dir:d,v:60,voa:false}); });
 }
 function desenha(c,t){
   var M=J.mundo; if(!M||!M.chefinhos) return;

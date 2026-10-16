@@ -190,7 +190,7 @@ function atualiza(dt){
     case 'largada': var a0=Math.floor((R.t-dt)/.8), a1=Math.floor(R.t/.8); if(a1!==a0&&a1>=1&&a1<=3) SOM.fx(a1<3?'clique':'plim'); if(R.t>=2.4){ R.fase='corre'; R.t=0; R.goT=.9; fala(FALAS.go[0],FALAS.go[1]); } break;
     case 'corre': if(R.goT>0) R.goT-=dt; corre(dt); break;
     case 'pit': break;
-    case 'box': R.me.v=0; R.rivais.forEach(function(r){ dirigeRival(r,dt); }); if(R.t>.25) abrePit(); break;
+    case 'box': R.me.v=0; if(R.t>.25) abrePit(); break;
     case 'saida': corre(dt); if(R.me.box<=0){ R.fase='corre'; } break;
     case 'chegada': corre(dt); if(R.t>2.2){ R.fase='podio'; R.t=0; montaPodio(); } break;
     case 'podio': if(R.podio) R.podio.t+=dt; break;
@@ -239,7 +239,7 @@ function dirigeHeroi(me,dt,chegando){
   else { inp=(J.in.right?1:0)-(J.in.left?1:0); }
   var gas=R.auto?true:!!J.in.jump, freio=!R.auto&&!!J.in.down&&!gas;
   if(chegando){ inp=0; vm*=Math.max(0,1-R.t/1.8); gas=true; freio=false; }
-  if(R.goT>0) R.dicaGas=0; else if(!gas&&me.v<VMAX*.3&&me.lane<0&&me.box<=0){ R.dicaGas=(R.dicaGas||0)+dt; if(R.dicaGas>2.5&&(!R.avisoGas||R.t-R.avisoGas>8)){ R.avisoGas=R.t; fala('Hold ▲ to go!','Segure ▲ para andar!'); } } else R.dicaGas=0;
+  if(R.goT>0) R.dicaGas=0; else if(!gas&&me.v<VMAX*.3&&me.lane<0&&me.box<=0){ R.dicaGas=(R.dicaGas||0)+dt; if(R.dicaGas>2.5&&(!R.avisoGas||J.t-R.avisoGas>8)){ R.avisoGas=J.t; fala('Hold ▲ to go!','Segure ▲ para andar!'); } } else R.dicaGas=0;
   var k=me.v/VMAX, dx=dt*1.5*Math.max(.35,k);
   /* chegando ao box: a direção assistida leva para a ENTRADA à direita; segurar ◀ segue na pista (o box é convite, não obrigação) */
   if(pz&&me.lane<0&&!me.pitFeito[pz.pi]){ var P=pz.P;

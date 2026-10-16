@@ -60,7 +60,7 @@ var HIST={
    fica no seu móvel com um "?"; ▼ abre UMA pergunta do ratinho cuja resposta É o objeto
    (c11 "o que ele pede depois do biscoito?" → leite …). Certa = ganha o objeto. Errada =
    vê a resposta e vem outra pergunta na hora; na 2ª errada o ratinho entrega assim mesmo (nada trava). */
-var QUIZ_ITEM={milk:['c11','c20'],napkin:['c13','c22'],mirror:['c14','c26'],scissors:['c24','c22'],broom:['c15','c23'],tape:['c19','c23']};
+var QUIZ_ITEM={milk:['c11','c20'],napkin:['c13'],mirror:['c14'],scissors:['c24'],broom:['c15'],tape:['c19']}; /* a 2ª tentativa repete a pergunta cuja resposta É o objeto (a criança acabou de ver a resposta) */
 var NOME_ITEM={milk:['a glass of milk','um copo de leite'],napkin:['a napkin','um guardanapo'],mirror:['a mirror','um espelho'],scissors:['scissors','uma tesoura'],broom:['a broom','uma vassoura'],tape:['tape','fita adesiva']};
 function peloQuiz(it){ return it&&it.tipo==='historia'&&!it.fim&&!!QUIZ_ITEM[it.nome]; }
 function pedeItem(it){

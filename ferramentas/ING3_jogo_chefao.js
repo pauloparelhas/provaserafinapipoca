@@ -138,7 +138,7 @@ function acertaConde(p){
   if(C.escudo){ /* rebate no escudo: ensina que primeiro se quebra o escudo */
     SOM.fx('pisao'); G.brilho(C.x,C.y-70,8,'#c4b5fd'); C.estado='laugh'; C.et=0; C.escudoBrilho=.5;
     var u0=J.urso; u0.poderes.estrelas=(u0.poderes.estrelas||0)+1; C.dons.push({x0:C.x,y0:C.y-90,t:0}); setTimeout(estrelasHUD,600); /* a estrela rebatida volta para o herói */
-    if(!C.avisouEscudo||C.t-C.avisouEscudo>5){ C.avisouEscudo=C.t; var m=C.fase==='p1'?['HA! My shield! Break my inkwells first!','RÁ! Meu escudo! Quebre meus tinteiros primeiro!']:(C.fase==='p2'?['HA! My shield! Stop my ink blots first!','RÁ! Meu escudo! Pare minhas manchas primeiro!']:['HA! Come up here if you can!','RÁ! Suba aqui se puder!']); falaC(m[0],m[1],2.6); }
+    if(!C.avisouEscudo||J.t-C.avisouEscudo>5){ C.avisouEscudo=J.t; var m=C.fase==='p1'?['HA! My shield! Break my inkwells first!','RÁ! Meu escudo! Quebre meus tinteiros primeiro!']:(C.fase==='p2'?['HA! My shield! Stop my ink blots first!','RÁ! Meu escudo! Pare minhas manchas primeiro!']:['HA! Come up here if you can!','RÁ! Suba aqui se puder!']); falaC(m[0],m[1],2.6); }
     return; }
   C.estado='hit'; C.et=0; C.dor=.8; SOM.fx('chefao'); SOM.fx('quebra'); J.shake=10; G.brilho(C.x,C.y-70,22,'#fde047'); G.pontua(50,C.x,C.y-150);
   /* um PEDAÇO da frase sai do Conde e voa para o alto (golpe que se sente) */
@@ -298,7 +298,7 @@ function desenha(c,t){
   /* letras caídas: a ESCADA */
   C.blocos.forEach(function(b){ c.fillStyle=A.lin(c,b.x,b.y,b.x,b.y+b.h,'#8b5cf6','#4c1d95'); A.rr(c,b.x+1,b.y+1,b.w-2,b.h-2,8); c.fill(); c.strokeStyle='#2e1065'; c.lineWidth=2; A.rr(c,b.x+1,b.y+1,b.w-2,b.h-2,8); c.stroke();
     c.fillStyle='#f5f3ff'; c.font='900 30px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(b.ch,b.x+b.w/2,b.y+b.h/2+1); });
-  if(C.fase==='p3'){ /* setas mostrando a subida */ var b2=Math.abs(Math.sin(t*3))*6; c.save(); c.globalAlpha=.85; c.fillStyle='#fde047'; [[14,1],[15,2],[16,3],[17.4,4]].forEach(function(p,i){ var yy=CHAO-p[1]*T-22-b2; if(p[0]<17&&C.alt[p[0]]<p[1]) return; c.beginPath(); c.moveTo(p[0]*T+10,yy); c.lineTo(p[0]*T+34,yy-10); c.lineTo(p[0]*T+34,yy+10); c.closePath(); c.fill(); }); c.restore(); }
+  if(C.fase==='p3'&&C.escudo){ /* setas mostrando a subida (somem quando ele chega lá em cima) */ var b2=Math.abs(Math.sin(t*3))*6; c.save(); c.globalAlpha=.85; c.fillStyle='#fde047'; [[14,1],[15,2],[16,3],[17.4,4]].forEach(function(p,i){ var yy=CHAO-p[1]*T-22-b2; if(p[0]<17&&C.alt[p[0]]<p[1]) return; c.beginPath(); c.moveTo(p[0]*T+10,yy); c.lineTo(p[0]*T+34,yy-10); c.lineTo(p[0]*T+34,yy+10); c.closePath(); c.fill(); }); c.restore(); }
   /* sombras de aviso, gotas e letras em voo */
   [C.gotas,C.letras].forEach(function(lista,ehLetra){ lista.forEach(function(d){ if(d.t<0) return;
     var k=Math.min(1,d.t/d.dur), chao=ehLetra&&d.degrau?CHAO-C.alt[d.col]*T:CHAO; c.fillStyle='rgba(30,27,75,'+(.15+.45*k)+')'; A.el(c,d.alvo,chao-2,(ehLetra?28:16)*(.5+.6*k),6); c.fill();
