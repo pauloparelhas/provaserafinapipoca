@@ -64,7 +64,7 @@
      a estrela vai SEMPRE no Conde (com escudo ela volta); o escudo se quebra DERRUBANDO os tinteiros
      (encostar/pular neles) e PISANDO nas manchas; o Conde voa (vira tinta) para o outro lado da sala 3 vezes
      (rodada 1 depois do 2º golpe, rodada 2 depois do 1º e do 2º) e volta para a sacada no clímax, cansado e
-     bravo (chapéu torto, curativo, suor, aura escura); frase do alto maior, com brilho em cada pedaço;
+     bravo (chapéu torto, estrelinhas de tontura, suor, aura escura); frase do alto maior, com brilho em cada pedaço;
      vitória com a frase gigante letra a letra; faixas do meio da tela mais finas e curtas.
    ============================================================ */
 window.CHEFAO = (function(){
@@ -186,7 +186,7 @@ function comecaFase(n){
   C.letrasOk=Math.min(C.letrasOk,n>1?METAS[n-2]:0);
   if(n===1){ C.lado=1; C.cansado=false; C.muda=null; C.yOff=0; C.alvo=0; C.tinteiros.forEach(function(q){ q.caido=false; }); falaC('My magic inkwells make my SHIELD!','Meus tinteiros mágicos fazem o meu ESCUDO!'); }
   if(n===2){ C.convertidas=0; C.ondas=0; J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; }); falaC('New shield! Ink blots, GO!','Escudo novo! Manchas, VÃO!'); }
-  if(n===3){ C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); C.nLetra=0; C.tLetra=2.6; if((C.lado||1)<0) mudaLado(1,true); else { C.cansado=true; falaC('Huff… puff… I am TIRED… but I am still SCARY! GRRR!','Ufa… ufa… estou CANSADO… mas ainda sou ASSUSTADOR! GRRR!',3.2); } }
+  if(n===3){ C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); C.nLetra=0; C.tLetra=2.6; if((C.lado||1)<0) mudaLado(1,true); else { C.cansado=true; falaC('Huff… puff… I am TIRED… but I am still SCARY! GRRR!','Arf… arf… estou CANSADO… mas ainda sou ASSUSTADOR! GRRR!',3.2); } }
   C.fadaDepois=n===1?2.6:3.0; /* a fada chega logo depois da fala do Conde */
 }
 function banner(en,pt){ C.banner={en:en,pt:pt,t:0}; SOM.fx('chefao'); J.shake=6; }
@@ -210,7 +210,7 @@ function pena(){ return {x:C.x-46*(C.lado||1), y:C.y-170}; }
 /* o Conde vira TINTA e voa para o outro lado da sala (nenhum golpe pega nesse instante) */
 var LADO_X={'1':19.2*T,'-1':3.4*T};
 function mudaLado(novo,cansado){ if(!C||C.muda) return; C.muda={t:0,de:C.x,para:LADO_X[String(novo)],novo:novo,cansado:!!cansado}; C.gotas=[]; C.letras=[]; SOM.fx('cano'); SOM.fx('risada');
-  if(cansado) falaC('Huff… puff… I am TIRED… but I am still SCARY! GRRR!','Ufa… ufa… estou CANSADO… mas ainda sou ASSUSTADOR! GRRR!',3.2);
+  if(cansado) falaC('Huff… puff… I am TIRED… but I am still SCARY! GRRR!','Arf… arf… estou CANSADO… mas ainda sou ASSUSTADOR! GRRR!',3.2);
   else falaC(novo<0?'You can\'t catch me! Over here!':'HA! Now I am over HERE!',novo<0?'Você não me pega! Aqui!':'RÁ! Agora estou AQUI!',2.4); }
 function moveConde(dt){ var M=C.muda; if(!M) return false; M.t+=dt; var k=Math.min(1,M.t/1.5);
   C.x=M.de+(M.para-M.de)*suaveK(k); C.yOff=-Math.sin(k*Math.PI)*150;
@@ -309,9 +309,9 @@ function desenha(c,t){
     if(C.cansado){ /* abatido mas bravo: sobrancelhas franzidas, curativo, suor, manchas na capa, bufando */
       c.strokeStyle='#1e1b4b'; c.lineWidth=4; c.lineCap='round'; c.beginPath(); c.moveTo(-20,-131); c.lineTo(-5,-125); c.moveTo(20,-131); c.lineTo(5,-125); c.stroke(); /* sobrancelhas bravas */
       c.fillStyle='#3b0764'; A.rr(c,-9,-104,18,8,4); c.fill(); c.fillStyle='#fff'; c.fillRect(-6,-102,12,3); /* dentes cerrados (no lugar do sorriso) */
-      c.fillStyle='#fef3c7'; c.save(); c.translate(-19,-108); c.rotate(.5); A.rr(c,-8,-3,16,6,2); c.fill(); c.rotate(-1); A.rr(c,-8,-3,16,6,2); c.fill(); c.restore(); /* curativo na bochecha */
+      for(var tz=0;tz<3;tz++){ var at=t*1.6+tz*2.1; A.estrela(c,Math.cos(at)*34,-176+Math.sin(at)*8,5,'#fde047',at); } /* estrelinhas de tontura em volta do chapéu (abatido, não ferido) */
       for(var sw=0;sw<2;sw++){ var fy=((t*.8+sw*.5)%1); c.fillStyle='rgba(147,197,253,'+(.9-fy*.6)+')'; A.el(c,-28+sw*56,-128+fy*26,3.5,5.5); c.fill(); } /* suor */
-      c.fillStyle='rgba(30,27,75,.6)'; A.circ(c,-18,-40,9); c.fill(); A.circ(c,14,-22,7); c.fill(); A.circ(c,-4,-60,6); c.fill();
+      c.fillStyle='#4338ca'; [[-18,-40,9],[14,-22,7],[-4,-60,6]].forEach(function(p){ c.beginPath(); for(var a5=0;a5<8;a5++){ var rr5=p[2]*(a5%2?.6:1.1); c.lineTo(p[0]+Math.cos(a5*.785)*rr5,p[1]+Math.sin(a5*.785)*rr5); } c.closePath(); c.fill(); }); /* respingos de tinta na capa */
       var pf=(t*1.1)%1; c.fillStyle='rgba(255,255,255,'+(.5-pf*.5)+')'; A.circ(c,-40-pf*20,-120-pf*10,6+pf*8); c.fill(); }
     if(dor){ c.globalAlpha=dor*.45; c.fillStyle='#fde047'; A.circ(c,0,-80,60); c.fill(); }
     if(C.escudo&&C.fase!=='abertura'&&C.fase!=='derrota'){ c.globalAlpha=1; var eb=C.escudoBrilho>0?C.escudoBrilho/.5:0; c.fillStyle='rgba(167,139,250,'+(.16+.3*eb)+')'; A.circ(c,0,-95,105); c.fill(); c.strokeStyle='rgba(221,214,254,'+(.7+.3*eb)+')'; c.lineWidth=4; A.circ(c,0,-95,105); c.stroke(); c.strokeStyle='rgba(255,255,255,.35)'; c.lineWidth=2; c.beginPath(); c.arc(0,-95,92,3.6+Math.sin(t*.8)*.2,4.4+Math.sin(t*.8)*.2); c.stroke(); }
