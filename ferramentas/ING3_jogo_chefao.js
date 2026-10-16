@@ -178,6 +178,8 @@ function quebraEscudo(){ if(!C.escudo) return; C.escudo=false; SOM.fx('quebra');
   falaC('NO! My shield!','NÃO! Meu escudo!',2.4); }
 /* quedas na luta: só depois de MUITAS (7 na mesma rodada) tudo recomeça do começo */
 function morreu(){ if(!C||C.fase==='abertura'||C.fase==='derrota') return; C.mortes++;
+  J.respawn.x=(C.lado<0)?12*T:2*T; /* 16/10 (jogador): renasce LONGE do Conde (do lado esquerdo ele derrama manchas no canto do início) */
+  J.mundo.inimigos.forEach(function(e){ if(e.doConde&&!e.morto&&!e.achatado&&Math.abs(e.x-J.respawn.x)<140) e.x+=e.x<J.respawn.x?-140:140; }); /* tira as manchas de cima do ponto de volta */
   if(C.mortes===4) falaC('HA HA! Is that all, little hero?','RÁ RÁ! Só isso, heroizinho?',2.6); C.animaF=1;
   if(C.mortes>=7){ C.mortes=0; C.letrasOk=0; C.ronda=0; C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; });
     J.urso.poderes.estrelas=0; estrelasHUD(); banner('TRY AGAIN!','TENTE DE NOVO!'); comecaFase(1); } }
@@ -261,14 +263,14 @@ function atualiza(dt){
     if(!C.muda&&Math.floor((C.t-dt)/3.0)!==Math.floor(C.t/3.0)) novaGota();
     if(C.escudo&&!C.muda&&Math.floor((C.t-dt)/3.6)!==Math.floor(C.t/3.6)&&C.ondas<5){ C.ondas++; C.estado='write'; C.et=0; SOM.fx('cano');
       /* derrama do tinteiro da sacada: caem pela borda e saem andando */
-      var lx=(C.lado<0)?C.x+60:SACADA_X0, dl=(C.lado<0)?1:-1; for(var k=0;k<2;k++) C.gotas.push({x0:lx,y0:C.y-10,alvo:lx+dl*(40+k*70),t:-k*.3,dur:.7,x:lx,y:C.y,r:15,vira:true}); }
+      var lx=(C.lado<0)?C.x+60:SACADA_X0, dl=(C.lado<0)?1:-1; if(C.lado<0&&C.ondas>3) { C.ondas=5; } /* do lado esquerdo, menos ondas */ for(var k=0;k<2;k++) C.gotas.push({x0:lx,y0:C.y-10,alvo:(C.lado<0)?(7+k*2)*T:lx+dl*(40+k*70),t:-k*.3,dur:(C.lado<0)?1.0:.7,x:lx,y:C.y,r:15,vira:true}); }
     var vencidas=J.mundo.inimigos.filter(function(e){ return e.doConde&&(e.morto||e.achatado); }).length; C.convertidas=vencidas;
     if(vencidas>=4&&C.escudo){ J.mundo.inimigos.forEach(function(e){ if(e.doConde){ e.achatado=true; e.tAch=.3; } }); quebraEscudo(); }
   }
   else if(C.fase==='p3'){
     if(!C.muda) C.tLetra-=dt; if(C.tLetra<=0){ C.tLetra=C.escudo?1.4:2.6; if(C.escudo) novaLetra(); else novaGota(); }
     /* chegou na sacada pela escada de letras: o duelo final */
-    if(C.escudo&&u.noChao&&u.x>SACADA_X0+10&&u.y<=SACADA_Y+6){ C.letras=[]; quebraEscudo(); falaC('WHAT?! You climbed up here?!','O QUÊ?! Você subiu aqui?!',2.6); }
+    if(C.escudo&&u.noChao&&u.x>SACADA_X0-10&&u.y<=SACADA_Y+6){ C.letras=[]; quebraEscudo(); falaC('WHAT?! You climbed up here?!','O QUÊ?! Você subiu aqui?!',2.6); }
   }
   /* gotas e letras voam em ARCO da pena até o alvo; a sombra no chão avisa */
   [C.gotas,C.letras].forEach(function(lista,ehLetra){
