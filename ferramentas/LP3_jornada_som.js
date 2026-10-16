@@ -157,14 +157,14 @@ setInterval(function(){ if(!ok||!amb||!S.sfx||!amb.A.det) return; try{ var now=c
 /* ---------- tensão (chefão, 16/10): batida de coração grave + nota longa; 1 = tenso, 2 = TÁ QUASE ----------
    fica sob o botão de efeitos, baixinho; sem agudos e sem pisca-pisca sonoro */
 var ten={n:0,prox:0,dr:null};
-function tensao(n){ n=n||0; if(n===ten.n) return; ten.n=n; if(!ok) return;
+function tensao(n){ n=n||0; if(!ok) return; if(n===ten.n) return; ten.n=n;
   try{ var now=ctx.currentTime;
     if(!ten.dr&&n>0){ var d={}; d.o1=ctx.createOscillator(); d.o2=ctx.createOscillator(); d.o1.type='sawtooth'; d.o2.type='sawtooth'; d.o1.frequency.value=73.4; d.o2.frequency.value=110; d.o2.detune.value=6;
       d.f=ctx.createBiquadFilter(); d.f.type='lowpass'; d.f.frequency.value=220; d.g=ctx.createGain(); d.g.gain.value=0;
       d.o1.connect(d.f); d.o2.connect(d.f); d.f.connect(d.g); d.g.connect(fxGain); d.o1.start(); d.o2.start(); ten.dr=d; }
     if(ten.dr){ ten.dr.g.gain.setTargetAtTime(n===0?0:(n===1?.018:.03),now,.8); ten.dr.f.frequency.setTargetAtTime(n===2?340:220,now,1.2); ten.dr.o1.frequency.setTargetAtTime(n===2?77.8:73.4,now,2); }
     ten.prox=now+.3; }catch(e){} }
-setInterval(function(){ if(!ok||!S.sfx||!ten.n) return; try{ var now=ctx.currentTime; if(now<ten.prox) return; var per=ten.n===2?.62:.95; ten.prox=now+per;
+setInterval(function(){ if(!ok||!ten.n) return; var JJ=window.JOGO&&JOGO.J; if(document.hidden||(JJ&&(JJ.pausado||!JJ.chefe))){ tensao(0); return; } if(!S.sfx) return; try{ var now=ctx.currentTime; if(now<ten.prox) return; var per=ten.n===2?.62:.95; ten.prox=now+per;
   [0,.2].forEach(function(dt,i){ var t=now+.03+dt, o=ctx.createOscillator(), g=ctx.createGain(); o.type='sine'; o.frequency.setValueAtTime(i?62:72,t); o.frequency.exponentialRampToValueAtTime(38,t+.16); g.gain.setValueAtTime(.0001,t); g.gain.linearRampToValueAtTime(ten.n===2?.2:.13,t+.012); g.gain.exponentialRampToValueAtTime(.0001,t+.22); o.connect(g); g.connect(fxGain); o.start(t); o.stop(t+.25); }); }catch(e){} },90);
 
 /* ---------- música ---------- */

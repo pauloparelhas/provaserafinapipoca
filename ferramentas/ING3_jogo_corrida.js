@@ -168,8 +168,8 @@ function falaUma(k){ if(R.falou[k]) return; R.falou[k]=true; fala(FALAS[k][0],FA
 function el(id){ return document.getElementById(id); }
 function botoes(on){
   var bj=el('tJump'), bd=el('tDown'), ba=el('tAct');
-  if(on){ if(bj){ bj.innerHTML='&#9650;<small style="display:block;font-size:15px;line-height:1">GO</small>'; bj.style.flexDirection='column'; bj.setAttribute('aria-label','Speed up'); }
-    if(bd){ bd.style.display=''; bd.innerHTML='&#9660;<small style="display:block;font-size:12px;line-height:1">BRAKE</small>'; bd.style.flexDirection='column'; bd.setAttribute('aria-label','Brake'); }
+  if(on){ if(bj){ bj.innerHTML='&#9650;<small style="display:block;font-size:15px;line-height:1">'+(J.tr?'VAI':'GO')+'</small>'; bj.style.flexDirection='column'; bj.setAttribute('aria-label','Speed up'); }
+    if(bd){ bd.style.display=''; bd.innerHTML='&#9660;<small style="display:block;font-size:12px;line-height:1">'+(J.tr?'FREIA':'BRAKE')+'</small>'; bd.style.flexDirection='column'; bd.setAttribute('aria-label','Brake'); }
     pintaTurbo(); }
   else { if(bj){ bj.innerHTML='JUMP'; bj.style.flexDirection=''; bj.setAttribute('aria-label','Jump'); } if(bd){ bd.innerHTML='&#9660;'; bd.style.flexDirection=''; bd.setAttribute('aria-label','Crawl'); }
     if(ba){ ba.classList.remove('turbo0'); ba.classList.remove('turboOn'); } if(window.UI) UI.acao(false,0); }
@@ -396,7 +396,7 @@ function projeta(p,camX,camY,camZ){ p.camera.x=(p.world.x||0)-camX; p.camera.y=p
 function poli(c,x1,y1,x2,y2,x3,y3,x4,y4,cor){ c.fillStyle=cor; c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2,y2); c.lineTo(x3,y3); c.lineTo(x4,y4); c.closePath(); c.fill(); }
 var VIS=[];
 function desenha(c){
-  if(!R) return; var t=J.t, me=R.me;
+  if(!R) return; var t=J.t, me=R.me; c.lineJoin='round'; c.miterLimit=2; /* contorno de texto sem pontas (o Y do título fazia um espinho) */
   if(R.fase==='apresenta'){ apresentacao(c,t); return; }
   var base=segDe(me.z), basePct=(me.z%SEG)/SEG, tema=TEMAS[segDe(me.z+PLAYER_Z).tema];
   /* céu e morros distantes (sobem e deslizam com a curva) */

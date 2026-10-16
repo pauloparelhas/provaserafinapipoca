@@ -1,6 +1,6 @@
 # Pré-prompts de desenvolvimento de jogos (versionados)
 
-**v3 · 15/10/2026** (v2 · 15/10, v1 · 18/10). Use antes de desenhar, codar, testar e publicar qualquer jogo. Cada correção do Paulo vira uma regra aqui, para não repetir.
+**v4 · 16/10/2026** (v3 · 15/10, v2 · 15/10, v1 · 18/10). Use antes de desenhar, codar, testar e publicar qualquer jogo. Cada correção do Paulo vira uma regra aqui, para não repetir.
 
 ## P1 · Desenhar uma fase (antes de codar)
 1. Gênero da `BIBLIOTECA_JOGOS.md`, objetivo da criança em uma frase, duração (~1 min por fase, fora as perguntas).
@@ -59,7 +59,10 @@ Durante trabalho longo: aviso curto a cada ~10 min do que está sendo feito.
 - **Pisca:** nada de alternar cor/visibilidade, nem tremer rápido (`sin(t*50)`): oscilação lenta (≤ 1,5 Hz) ou fixa; clarão de tela só véu morno ≤ 16 %.
 - **Poder com o corpo certo:** bola se CHUTA (pose `kick`, sai do pé), não se joga com a mão.
 - **Chefão (v4):** a estrela era reta e não alcançava o Conde → estrela GUIADA (arco até o tinteiro ou o Conde, que sente e perde vida); ESPAÇO **ou ▼** jogam; a Fada Madrinha dá as estrelas e faz as perguntas; só o chefão recomeça, e só após 7 quedas.
-- **Equilíbrio (v3):** "fácil demais" também é defeito. Corrida em 3 voltas de ritmo: 1ª o herói lidera; 2ª (até 70 %) os 5 fortes encostam e passam (a criança cai para 5º–6º salvo se for perfeita); 3ª os fortes colam na traseira e um razoável vence (meta do portão: ≥3/5 em 1º, ≥3/5 caem para ≥3º na volta 2). Poça e pneu FAZEM rodar e perder; raio é raro (≈9 na pista).
+- **Equilíbrio (v3, SUBSTITUÍDO em v4):** ~~3 voltas de ritmo por roteiro~~ — o Paulo reprovou: "as posições ficaram artificiais… mesmo sem ver ninguém ultrapassar… magicamente volta pra 1". Handicap indicado por ele é só a INTENÇÃO; o mecanismo nunca pode ser roteiro.
+- **Mérito (v4, corrida):** posição = habilidade. (1) A posição só muda quando um carro passa INTEIRO pelo outro (histerese de 1 carrinho) — e medir o herói ONDE ELE É DESENHADO (z + PLAYER_Z no pseudo-3D; o erro de 8 segmentos fazia carros "invisíveis" contarem à frente). (2) Nada de elástico nem ritmo que olha a posição do herói; o rival só depende do NÍVEL escolhido, da volta em que ELE está e da curva. (3) A criança escolhe EASY/MEDIUM/HARD. (4) ▲ acelera, ▼ freia, soltar perde; curva empurra para fora; turbo é da criança (nunca automático). (5) Portão `testa_corrida.py`: crianças perfeita/boa/fraca × 3 níveis; reprova se a habilidade ou o nível não pesam, se alguma troca de posição não foi à vista, se o EASY é difícil ou o HARD é fácil.
+- **Prêmio pela pergunta (v4, biscoito):** o objeto da história se GANHA respondendo (a resposta É o objeto); errou → outra pergunta na hora; 2ª errada → entrega assim mesmo (incentiva, nunca trava).
+- **Chefão (v4):** golpe = dano que se sente (pedaço da frase + tremida forte, sem pisca); estrela rebatida volta; a fada cura; tensão sonora grave cresce até o "tá quase".
 - **Chefão (v5):** estrela se CONQUISTA (a fada só aparece para perguntar; certa = 3 ★); cada rodada tem ESCUDO; estrela sem escudo arranca uma LETRA que forma "YOU ARE A SUPER PLAYER" no alto — o fim tem lógica e drama.
 - **Teste e publicação:**
   - teste que demorava 30 min e não jogava de verdade → crianças-robô em relógio acelerado (~15 s);

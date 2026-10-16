@@ -89,6 +89,7 @@ function fimDeFase(){
 }
 function voltaMapa(){ var f=J.faseAtual, novo=f&&J.prog.fases[f.id]&&J.prog.fases[f.id].novo; if(novo){ J.prog.fases[f.id].novo=false; G.salva(); } var i=F.LISTA.indexOf(f); irMapa(novo&&i<F.LISTA.length-1?i+1:false); }
 function irMapa(animaPara){
+  if(window.CHEFAO&&CHEFAO.ativo()) CHEFAO.limpa(); /* nada do castelo vaza para o mapa (batida de coração) */
   if(window.UI&&UI.modoCorrida) UI.modoCorrida(false); if(window.UI&&UI.botaoCapa) UI.botaoCapa(false);
   J.estado='mapa'; document.body.classList.remove('cozinha'); J.agarrado=null; if(window.UI&&UI.poderHud) UI.poderHud(null); J.soltouT=0; if(window.UI) UI.acao(false,0); J.nivel=null; J.mundo=null; J.tut=null; J.part=[]; J.clima=[]; J.faseAtual=null; J.t=0; J.dica=null; J.quiz=null; J.pip=null;
   F.posiciona();

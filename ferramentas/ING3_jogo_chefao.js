@@ -102,11 +102,11 @@ function falaF(en,pt,dur){ if(!C) return; C.fada.fala={en:en,pt:pt,t:0,dur:dur||
    arranca uma LETRA dele, que voa para a frase do alto: YOU ARE A SUPER PLAYER. ---------- */
 var FRASE='YOU ARE A SUPER PLAYER', NLET=FRASE.replace(/ /g,'').length, METAS=[7,12,18]; /* YOU ARE A | SUPER | PLAYER */
 var CORTES=[3,6,7,9,11,12,14,16,18]; /* cada golpe arranca um pedaço: YOU|ARE|A · SU|PE|R · PL|AY|ER */
-function tensaoDa(){ if(!C||!/^p|transicao|quiz/.test(C.fase)) return 0; if(C.letrasOk>=CORTES[CORTES.length-2]) return 2; return C.ronda>=1||C.fase==='transicao'?1:0; }
+function tensaoDa(){ if(!C||!/^p|transicao/.test(C.fase)) return 0; if(C.letrasOk>=CORTES[CORTES.length-2]) return 2; return C.ronda>=1||C.fase==='transicao'?1:0; }
 function estrelasHUD(){ var u=J.urso, n=(u&&u.poderes.estrelas)||0; if(window.UI) UI.acao(n>0,n); }
 /* a fada chega (brilho), faz 3 perguntas; certa = 2 estrelas; no fim ela joga as estrelas no herói */
 function fadaVem(primeira){
-  if(!C||C.fadaOn) return; C.fadaOn=true; C.fadaT=0; C.ganho=0; C.visitas++; SOM.fx('estrela');
+  if(!C||C.fadaOn) return; try{ SOM.tensao(0); }catch(e){} C.fadaOn=true; C.fadaT=0; C.ganho=0; /* perguntas sem batida de coração: sem pressão de tempo */ C.visitas++; SOM.fx('estrela');
   falaF(primeira?'I am the Fairy Godmother! Answer and win STARS!':'Need stars? Answer my questions!',primeira?'Sou a Fada Madrinha! Responda e ganhe ESTRELAS!':'Precisa de estrelas? Responda às minhas perguntas!',2.6);
   C.esperaFada=1.6;
 }
@@ -140,7 +140,7 @@ function acertaConde(p){
     var u0=J.urso; u0.poderes.estrelas=(u0.poderes.estrelas||0)+1; C.dons.push({x0:C.x,y0:C.y-90,t:0}); setTimeout(estrelasHUD,600); /* a estrela rebatida volta para o herói */
     if(!C.avisouEscudo||C.t-C.avisouEscudo>5){ C.avisouEscudo=C.t; var m=C.fase==='p1'?['HA! My shield! Break my inkwells first!','RÁ! Meu escudo! Quebre meus tinteiros primeiro!']:(C.fase==='p2'?['HA! My shield! Stop my ink blots first!','RÁ! Meu escudo! Pare minhas manchas primeiro!']:['HA! Come up here if you can!','RÁ! Suba aqui se puder!']); falaC(m[0],m[1],2.6); }
     return; }
-  C.estado='hit'; C.et=0; C.dor=.8; SOM.fx('chefao'); SOM.fx('quebra'); J.shake=16; G.brilho(C.x,C.y-70,22,'#fde047'); G.pontua(50,C.x,C.y-150);
+  C.estado='hit'; C.et=0; C.dor=.8; SOM.fx('chefao'); SOM.fx('quebra'); J.shake=10; G.brilho(C.x,C.y-70,22,'#fde047'); G.pontua(50,C.x,C.y-150);
   /* um PEDAÇO da frase sai do Conde e voa para o alto (golpe que se sente) */
   var ate=NLET; for(var c2=0;c2<CORTES.length;c2++) if(CORTES[c2]>C.letrasOk){ ate=CORTES[c2]; break; }
   for(var i=C.letrasOk,k=0;i<ate;i++,k++) C.letraVoa.push({i:i,x0:C.x-J.cam+(k-1)*26,y0:C.y-120-J.camY,t:-k*.08});
