@@ -104,7 +104,7 @@ function montaSprites(){
     if(s.tag.ponte&&n%6===0){ spr(n,-1.15,'corrimao'); spr(n,1.15,'corrimao'); }
     if(Math.abs(s.curva)>1.5&&n%10===0) spr(n,s.curva>0?-1.25:1.25,'placa_curva',{dir:s.curva>0?1:-1});
   });
-  PITS.forEach(function(P,pi){ spr(P.ini-60,2.0,'placa_pit'); spr(P.ini-25,2.0,'placa_pit'); for(var g=0;g<10;g++) spr(P.box-10+g*4,2.15,'garagem',{k:g===0?9:g-1,pi:pi}); spr(P.box+24,1.32,'caixa_box'); });
+  PITS.forEach(function(P,pi){ spr(P.ini-60,2.0,'placa_pit'); spr(P.ini-25,2.0,'placa_pit'); for(var g=0;g<10;g++) spr(P.box-10+g*4,2.15,'garagem',{k:g,pi:pi}); spr(P.box+24,1.32,'caixa_box'); });
   spr(FIM_SEG-40,-1.7,'castelo'); spr(FIM_SEG,0,'portico'); spr(12,0,'portico_largada');
   /* moedas em grupos, sempre na pista; setas de impulso; poças do pântano */
   segs.forEach(function(s,n){ if(n>FIM_SEG*.3&&n<FIM_SEG-60&&!s.tag.pit&&!s.tag.ponte&&n%80===40&&!PITS.some(function(P){ return n>P.ini-70&&n<P.fim+15; })){ var pl=Math.floor(hash(n*29)*3); OBJ.pneus.push({n:n,x:[-.55,0,.55][pl]}); if(hash(n*31)<.5) OBJ.pneus.push({n:n+5,x:[-.55,0,.55][(pl+1+Math.floor(hash(n*37)*2))%3]}); }
@@ -148,7 +148,7 @@ var FALAS={
   fim:['The finish line! Use your turbos!','A chegada! Use os turbos!']};
 function inicia(f){
   if(!segs.length) montaPista(); instalaCena();
-  R={f:f, fase:'apresenta', t:0, nivel:nivelSalvo(), trocas:[], latas:0, carga:0, volta:1, piorPos:0, acertos:0, paginas:0, pitRes:[], pitAtual:-1, pos:10, posPulse:0, anunc:null, fala:null, falou:{}, pt:[], podio:null, acabou:false, final:0, conde:null, auto:null, ultrap:0, erros:0, errosVistos:0};
+  R={f:f, pitLog:[], sobrepos:0, tt:0, fase:'apresenta', t:0, nivel:nivelSalvo(), trocas:[], latas:0, carga:0, volta:1, piorPos:0, acertos:0, paginas:0, pitRes:[], pitAtual:-1, pos:10, posPulse:0, anunc:null, fala:null, falou:{}, pt:[], podio:null, acabou:false, final:0, conde:null, auto:null, ultrap:0, erros:0, errosVistos:0};
   R.me=novoCarro(J.prog.heroi||'lia',2*SEG,0,true);
   R.rivais=RIVAIS_DEF.map(function(d,k){ var c=novoCarro(d.id,(4+Math.floor(k/2)*3+((9-k)>>1)*0)*SEG+ (8-k)*SEG*1.2,(k%2?.5:-.5),false); c.p=d; c.cor=CR.LISTA[d.id].cor; c.nome=CR.LISTA[d.id].nome; return c; });
   /* grade de largada: todos À FRENTE do herói e à vista (o herói é desenhado PLAYER_Z adiante da câmera) */
@@ -202,7 +202,7 @@ function corre(dt){
   dirigeHeroi(me,dt,chegando);
   R.rivais.forEach(function(r){ dirigeRival(r,dt); });
   if(R.conde) dirigeConde(dt);
-  colisoes(dt); coletas(dt); turboFinal(dt); eventos();
+  colisoes(dt); corposSolidos(); coletas(dt); turboFinal(dt); eventos();
   /* a posição só muda quando um carro passa INTEIRO pelo outro (um carrinho de distância), à vista */
   var zh=me.z+PLAYER_Z, pos=1;
   R.rivais.forEach(function(r){ var dz=r.z-zh;
@@ -228,7 +228,11 @@ function volta(){ return voltaDe(R.me.z+PLAYER_Z); }
    e a curva (rival tira o pé; o herói que vira bem não precisa). Nada olha para a posição do herói. */
 function ritmoRivais(r){ var N=NIVEIS[R.nivel], v=voltaDe(r.z), s=segDe(r.z);
   return N.k*(v===2?1.03:1)*(1-Math.min(.06,Math.abs(s.curva)*.02)); }
-function boxZ(c,P){ var slot=c.eu?0:R.rivais.indexOf(c)+1; return (P.box-10+slot*4)*SEG-(c.eu?PLAYER_Z:0); } /* o herói tem a 1ª garagem (o herói é desenhado PLAYER_Z adiante do seu z) */
+/* 16/10 (Paulo: "no box perde várias quando erra, mas logo ao largar recupera todas"): o herói tinha a 1ª garagem —
+   quem passava por ele parava nas garagens da frente e era devolvido na saída. Agora a garagem do herói é a ÚLTIMA:
+   quem passa por ele no box já fez a própria parada, e a posição perdida é de verdade. */
+function boxZ(c,P){ var slot=c.eu?9:R.rivais.indexOf(c); return (P.box-10+slot*4)*SEG-(c.eu?PLAYER_Z:0); }
+var X_FAIXA=1.35, X_GARAGEM=1.74; /* na faixa do box se anda à esquerda; parado, o carrinho entra na garagem (ninguém passa por dentro) */
 function limitePit(falta){ return Math.max(VMAX*.1,Math.min(VMAX*.5,VMAX*.5*falta/(SEG*12))); } /* faixa do box: o mesmo limite para todos; freia só nos últimos 12 segmentos */
 /* o herói: ▲ acelera, ▼ freia, ◀ ▶ dirigem; a curva empurra para fora (quem vira bem não perde nada) */
 function dirigeHeroi(me,dt,chegando){
@@ -248,9 +252,9 @@ function dirigeHeroi(me,dt,chegando){
     if(me.pula!==pz.pi){ vm=Math.min(vm,VMAX*.75); var alvoP=n<P.ini?.9:LANE_X; me.x+=(alvoP-me.x)*Math.min(1,dt*(n<P.ini?1.6:3)); if(inp>0) me.x+=dx*inp; if(n<P.ini) me.x=Math.min(me.x,1.0); }
     else { me.x+=dx*inp; }
     if(me.pula!==pz.pi){ gas=true; freio=false; } /* a equipe do box guia o carrinho até a garagem */
-    if(n>=P.ini+ENTRA-1){ if(me.pula!==pz.pi){ me.x=Math.max(me.x,.9); me.lane=pz.pi; SOM.fx('desvio'); } else { me.pitFeito[pz.pi]=true; R.rivais.forEach(function(r){ if(r.lane<0) r.pitFeito[pz.pi]=true; }); /* passou direto: quem ainda não entrou também não para (ninguém ganha tempo pulando o box) */ fala('You drove past the pit. Next time, keep right!','Você passou o box. Na próxima, fique à direita!'); } }
+    if(n>=P.ini+ENTRA-1){ if(me.pula!==pz.pi){ me.x=Math.max(me.x,.9); me.lane=pz.pi; SOM.fx('desvio'); R.pitLog.push({pi:pz.pi,antes:R.pos}); } else { me.pitFeito[pz.pi]=true; R.rivais.forEach(function(r){ if(r.lane<0) r.pitFeito[pz.pi]=true; }); /* passou direto: quem ainda não entrou também não para (ninguém ganha tempo pulando o box) */ fala('You drove past the pit. Next time, keep right!','Você passou o box. Na próxima, fique à direita!'); } }
   }
-  else if(me.lane>=0){ gas=true; freio=false; var PL=PITS[me.lane], zb=boxZ(me,PL), falta=zb-me.z; me.x+=(LANE_X-me.x)*Math.min(1,dt*4);
+  else if(me.lane>=0){ gas=true; freio=false; var PL=PITS[me.lane], zb=boxZ(me,PL), falta=zb-me.z, parado=me.pitFeito[me.lane]&&(me.box>0||R.fase==='box'||R.fase==='pit'); me.x+=((parado?X_GARAGEM:X_FAIXA)-me.x)*Math.min(1,dt*4);
     if(!me.pitFeito[me.lane]){ vm=Math.min(vm,falta<0?0:limitePit(falta)); if(falta<=SEG*.5){ me.z=zb; me.v=0; me.pitFeito[me.lane]=true; R.fase='box'; R.t=0; R.pitAtual=me.lane; SOM.fx('checkpoint'); fala('Pit stop! Answer to win TURBOS!','Pit stop! Responda para ganhar TURBOS!'); return; } }
     else if(me.box>0){ var b0=me.box; me.box-=dt; vm=0; me.v=0; if(Math.floor(b0*2.5)!==Math.floor(me.box*2.5)) SOM.fx('chave'); if(me.box<=0){ me.v=VMAX*.5; fala(R.latas>0?'GO! SPACE or ⚡ = TURBO!':'GO! Hold ▲!',R.latas>0?'Vai! ESPAÇO ou ⚡ = TURBO!':'Vai! Segure ▲!'); } }
     else { vm=Math.min(vm,VMAX*.9); if(n>=PL.fim-SAI){ me.lane=-1; } }
@@ -266,7 +270,7 @@ function dirigeHeroi(me,dt,chegando){
   if(me.lane<0&&!(pz&&!me.pitFeito[pz.pi])){ if(Math.abs(me.x)>1.17) vm*=.55; else if(Math.abs(me.x)>1.0) vm*=.85; } /* zebra freia um pouco; grama, bastante (nunca para) */
   /* encostou atrás de um rival na mesma faixa: não bate nem machuca, só não atravessa — é preciso trocar de faixa */
   if(me.lane<0) R.rivais.forEach(function(r){ if(r.lane>=0||r.box>0) return; var dz=r.z-zh; if(dz>0&&dz<COMPR&&Math.abs(r.x-me.x)<.42) vm=Math.min(vm,Math.max(r.v*1.01,VMAX*.2)); });
-  me.x=cl(me.x,-1.55,1.6); /* jogador: na grama o carrinho atravessava a torcida e as arquibancadas */
+  if(me.lane<0) me.x=cl(me.x,-1.55,1.6); else me.x=cl(me.x,-1.55,1.85); /* jogador: na grama o carrinho atravessava a torcida e as arquibancadas */
   if(!gas&&me.turbo<=0&&me.pad<=0) vm=0;
   if(me.v<vm) me.v=Math.min(vm,me.v+ACEL*dt*(me.turbo>0||me.pad>0?2.5:1));
   else me.v=Math.max(vm,me.v-(freio?ACEL*2.4:(gas?ACEL*2:ACEL*.45))*dt); /* soltou o ▲: vai perdendo; ▼: freia */
@@ -279,9 +283,9 @@ function dirigeRival(r,dt){
   if(r.pad>0){ r.pad-=dt; vm*=1.4; } if(r.giro>0){ r.giro-=dt; vm*=.5; } if(r.wob>0){ r.wob-=dt; vm*=.7; } if(r.salto>0) r.salto-=dt;
   /* o box dos rivais: a mesma faixa, o mesmo tempo parado (PIT_T), cada um na sua vez */
   if(pz&&r.lane<0&&!r.pitFeito[pz.pi]){ r.alvoX=n<pz.P.ini?.9:LANE_X; vm=Math.min(vm,VMAX*.75); if(n>=pz.P.ini+ENTRA-1) r.lane=pz.pi; }
-  if(r.lane>=0){ var PL=PITS[r.lane], zb=boxZ(r,PL), falta=zb-r.z; r.alvoX=LANE_X;
+  if(r.lane>=0){ var PL=PITS[r.lane], zb=boxZ(r,PL), falta=zb-r.z; r.alvoX=X_FAIXA;
     if(!r.pitFeito[r.lane]){ vm=Math.min(vm,falta<0?0:limitePit(falta)); if(falta<=SEG*.5){ r.z=zb; r.v=0; r.pitFeito[r.lane]=true; r.box=PIT_T; } }
-    else if(r.box>0){ r.box-=dt; r.v=0; r.x+=(LANE_X-r.x)*Math.min(1,dt*3); if(r.box<=0) r.v=VMAX*.5; return; } /* sai embalado como o herói */
+    else if(r.box>0){ r.box-=dt; r.v=0; r.x+=(X_GARAGEM-r.x)*Math.min(1,dt*5); if(r.box<=0) r.v=VMAX*.5; return; } /* sai embalado como o herói */
     else { vm=Math.min(vm,VMAX*.9); if(n>=PL.fim-SAI){ r.lane=-1; r.alvoX=.55; } }
     r.x+=(r.alvoX-r.x)*Math.min(1,dt*3); if(r.v<vm) r.v=Math.min(vm,r.v+ACEL*.9*dt); else r.v=Math.max(vm,r.v-ACEL*2*dt); r.z+=r.v*dt; return; }
   if(!pz||r.pitFeito[pz.pi]){ if(Math.abs(r.alvoX)>1) r.alvoX=r.ondaX||0; desvia(r); }
@@ -302,6 +306,16 @@ function desvia(r){ var a=null; [R.me].concat(R.rivais).forEach(function(o){ if(
 function pilotoAuto(me){ var alvo=0, best=null; R.rivais.forEach(function(o){ var dz=o.z-me.z-PLAYER_Z; if(dz>0&&dz<SEG*10&&Math.abs(o.x-me.x)<.5){ best=o; } }); if(best) alvo=best.x>0?-.6:.6; else { OBJ.raios.forEach(function(m){ if(m.vivo&&m.n*SEG>me.z&&m.n*SEG<me.z+SEG*20) alvo=m.x; }); } var d=alvo-me.x; return Math.abs(d)<.08?0:(d>0?1:-1); }
 /* encostar: só balança e freia um pouco, nunca machuca */
 /* 15/10 (Paulo): encostar NÃO bate, não freia, não mostra plaquinha — o carrinho da frente só abre caminho */
+/* 16/10 (Paulo: "o carro está passando por dentro dos outros; só ultrapassa se passar AO LADO"): carrinho que alcança
+   outro na mesma faixa encosta atrás dele e acompanha (sem dano, sem plaquinha) até trocar de faixa. Vale para todos. */
+var LARG=.34;
+function corposSolidos(){ var me=R.me, L=[{c:me,z:me.z+PLAYER_Z}]; R.tt+=1/60;
+  R.pitLog.forEach(function(p){ if(p.tSai&&p.depois===undefined&&R.tt-p.tSai>10) p.depois=R.pos; }); /* QA: posição 10 s depois de sair do box */
+  R.rivais.forEach(function(r){ if(r.box<=0) L.push({c:r,z:r.z}); });
+  if(me.box>0||R.fase==='box') L.shift();
+  for(var it=0;it<2;it++){ L.sort(function(a,b){ return b.z-a.z; });
+    for(var i=0;i<L.length;i++) for(var j=i+1;j<L.length;j++){ var A1=L[i], B1=L[j], dz=A1.z-B1.z; if(dz>=COMPR) break; /* A1 na frente, B1 atrás */
+      if(Math.abs(A1.c.x-B1.c.x)<LARG&&(A1.c.lane>=0)===(B1.c.lane>=0)){ if(it===1&&dz<COMPR*.9) R.sobrepos++; var nz=A1.z-COMPR; B1.z=nz; if(B1.c.eu) B1.c.z=nz-PLAYER_Z; else B1.c.z=nz; if(B1.c.v>A1.c.v) B1.c.v=A1.c.v; } } } }
 function colisoes(dt){ var me=R.me; if(me.box>0||me.lane>=0) return; var zh=me.z+PLAYER_Z;
   R.rivais.forEach(function(r){ if(r.box>0||r.lane>=0) return; var dz=r.z-zh; if(Math.abs(dz)<COMPR*.8&&Math.abs(r.x-me.x)<.45){ var lado=r.x>=me.x?1:-1; r.x+=lado*dt*.8; me.x-=lado*dt*.4; if(dz<-SEG*.2) r.alvoX=cl(r.x+lado*.3,-.85,.85); } }); } /* lado a lado: cada um para o seu lado, sem dano */
 function coletas(dt){ var me=R.me, n=Math.floor((me.z+PLAYER_Z)/SEG);
@@ -346,7 +360,7 @@ function abrePit(){
 }
 function fimPit(completo){
   if(!R||R.fase!=='pit') return;
-  var errs=R.pitRes.filter(function(x){ return !x; }).length; R.erroBox=errs;
+  var errs=R.pitRes.filter(function(x){ return !x; }).length; R.erroBox=errs; var PLg=R.pitLog[R.pitLog.length-1]; if(PLg){ PLg.erros=errs; PLg.tSai=R.tt||0; }
   R.fala=null; /* a fala de antes do box já é velha */
   try{ if(window.UI&&UI.segurando){ J.in.jump=UI.segurando('ArrowUp')||UI.segurando('w')||UI.segurando('W'); J.in.left=UI.segurando('ArrowLeft'); J.in.right=UI.segurando('ArrowRight'); } }catch(e){} /* jogador: o ▲ seguro durante as perguntas continua acelerando */
   J.estado='corrida'; R.fase='saida'; R.t=0; R.me.box=PIT_T+errs*1.0; /* 16/10 (Paulo): errou = a equipe demora 1 s a mais por erro (o rival passa no box); acertou = turbo */
@@ -510,7 +524,7 @@ function desenhaSprite(c,sp,x,y,k,t,clip){
     case 'corrimao': c.scale(s*300/100,s*300/100); c.fillStyle='#78350f'; c.fillRect(-4,-40,8,40); c.fillRect(-30,-40,60,6); break;
     case 'placa_curva': c.scale(s*600/100,s*600/100); c.fillStyle='#57534e'; c.fillRect(-3,-40,6,40); c.fillStyle='#fde047'; rr(c,-30,-70,60,32,6); c.fill(); c.fillStyle='#1c1917'; c.beginPath(); var d=sp.dir; c.moveTo(-14*d,-54); c.lineTo(10*d,-64); c.lineTo(10*d,-44); c.closePath(); c.fill(); break;
     case 'placa_pit': c.scale(s*800/100,s*800/100); c.fillStyle='#57534e'; c.fillRect(-4,-50,8,50); c.fillStyle='#fde047'; rr(c,-46,-92,92,44,8); c.fill(); c.strokeStyle='#1c1917'; c.lineWidth=3; rr(c,-46,-92,92,44,8); c.stroke(); c.fillStyle='#1c1917'; c.font=F(900,22); c.textAlign='center'; c.textBaseline='middle'; c.fillText('PIT ▶',0,-70); break;
-    case 'garagem': c.scale(s*900/100,s*900/100); c.fillStyle='#57534e'; c.fillRect(-50,-80,100,80); c.fillStyle=['#3b82f6','#16a34a','#f59e0b','#8b5cf6','#0ea5e9','#ef4444','#14b8a6','#a855f7','#f97316','#eab308'][sp.k]; c.fillRect(-44,-74,88,74); c.fillStyle='rgba(255,255,255,.25)'; for(var g2=0;g2<5;g2++) c.fillRect(-44,-68+g2*14,88,6); c.fillStyle='#fff'; c.font=F(900,20); c.textAlign='center'; c.textBaseline='middle'; c.fillText(sp.k===9?'YOU':String(sp.k+1),0,-40); break;
+    case 'garagem': c.scale(s*900/100,s*900/100); c.fillStyle='#57534e'; c.fillRect(-50,-80,100,80); c.fillStyle=['#3b82f6','#16a34a','#f59e0b','#8b5cf6','#0ea5e9','#ef4444','#14b8a6','#a855f7','#f97316','#eab308'][sp.k]; c.fillRect(-44,-74,88,74); c.fillStyle='rgba(255,255,255,.25)'; for(var g2=0;g2<5;g2++) c.fillRect(-44,-68+g2*14,88,6); c.fillStyle='#fff'; c.font=F(900,20); c.textAlign='center'; c.textBaseline='middle'; c.fillText(sp.k===9?(J.tr?'VOCÊ':'YOU'):String(sp.k+1),0,-40); break;
     case 'caixa_box': break;
     case 'torcida_magica': { c.scale(s*2000/300,s*2000/300);
       c.fillStyle='#7c3aed'; c.fillRect(-150,-78,300,78); c.fillStyle='#a78bfa'; c.fillRect(-150,-82,300,8);

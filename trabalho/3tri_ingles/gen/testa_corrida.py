@@ -22,7 +22,7 @@ PERFIS = {
 nsem = int(sys.argv[1]) if len(sys.argv) > 1 else 3
 rapido = len(sys.argv) > 2 and sys.argv[2] == 'rapido'
 plano = [(n, p) for n in ('easy', 'medium', 'hard') for p in ('perfeita', 'boa', 'fraca')]
-falhas = []; res = {}
+falhas = []; res = {}; PITS_ALL = []; SOBRE = []
 t0 = time.time()
 with sync_playwright() as pw:
     b = pw.chromium.launch(); pg = b.new_page(viewport={'width': 960, 'height': 540}); pg.add_init_script(MUDO)
@@ -43,6 +43,8 @@ with sync_playwright() as pw:
             ruins = [t for t in tro if not (K['C'] - 2 <= abs(t['dz']) <= K['C'] + 3 * K['S'])]
             if ruins: falhas.append('%s/%s: troca de posição sem ultrapassagem à vista %s' % (nivel, perfil, ruins[:3]))
             if not rel['fim'] or rel['esgotou']: falhas.append('%s/%s: não terminou' % (nivel, perfil))
+            PITS_ALL.extend([pp for pp in (c.get('pitLog') or []) if pp.get('depois') is not None and pp.get('erros') is not None])
+            SOBRE.append(c.get('sobrepos') or 0)
             res.setdefault((nivel, perfil), []).append({'pos': c.get('pos'), 'pag': c.get('pag'), 'trocas': len(tro), 'turbos': c.get('turbos'), 'tempo': rel['tempo']})
         r = res[(nivel, perfil)]
         print('%-6s %-8s posições %s  páginas %s  ultrapassagens %s  turbos %s  tempo %s' % (nivel, perfil, [x['pos'] for x in r], [x['pag'] for x in r], [x['trocas'] for x in r], [x['turbos'] for x in r], [x['tempo'] for x in r]), flush=True)
@@ -57,6 +59,12 @@ if media('hard', 'boa') <= media('easy', 'boa'): falhas.append('o nível não pe
 if sum(1 for x in res[('easy', 'boa')] if x['pos'] == 1) < (2 * nsem + 2) // 3: falhas.append('EASY difícil demais para a criança boa %s' % [x['pos'] for x in res[('easy', 'boa')]])
 if all(x['pos'] == 1 for x in res[('hard', 'boa')]): falhas.append('HARD fácil demais: a criança boa ganhou todas')
 if any((x['pos'] or 99) > 3 for x in res[('hard', 'perfeita')]): falhas.append('HARD: a criança perfeita ficou fora do pódio %s' % [x['pos'] for x in res[('hard', 'perfeita')]])
+# o box tem de pesar: quem erra 2+ perde posição que NÃO volta logo na saída (10 s depois)
+def media_perda(sel): return sum(p['depois'] - p['antes'] for p in sel) / max(1, len(sel))
+p0 = [p for p in PITS_ALL if p['erros'] == 0]; p2 = [p for p in PITS_ALL if p['erros'] >= 2]
+print('box: sem erro %.2f posições (%d boxes) · 2+ erros %.2f posições (%d boxes) · sobreposições %s' % (media_perda(p0), len(p0), media_perda(p2), len(p2), sum(SOBRE)))
+if p2 and media_perda(p2) - media_perda(p0) < .5: falhas.append('o erro no box não custa posição de verdade (%.2f vs %.2f)' % (media_perda(p2), media_perda(p0)))
+if sum(SOBRE) > 0: falhas.append('carrinhos passaram por dentro uns dos outros (%d quadros)' % sum(SOBRE))
 if erros: falhas.append('erros de JavaScript: ' + '; '.join(erros[:3]))
 print('tempo real do teste: %.0f s' % (time.time() - t0))
 print('CORRIDA ' + ('REPROVADA:\n  ' + '\n  '.join(falhas) if falhas else 'APROVADA'))

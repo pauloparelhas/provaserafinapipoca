@@ -82,7 +82,7 @@ window.CRIANCA = (function(){
   }
   /* corrida (v7): segura ▲ (às vezes solta sem querer), escolhe o nível, fica na faixa e vira nas curvas
      com imprecisão, desvia de pneu/poça às vezes, segue a placa do box, usa o turbo com ESPAÇO */
-  function decideCorrida(dt){ var R=CORRIDA._R(), inp=J.in, K=CORRIDA._K; if(!R) return; st.corr={pos:R.final||R.pos,pag:R.paginas,fase:R.fase,pior:R.piorPos,nivel:R.nivel,trocas:R.trocas,turbos:R.turbosUsados||0};
+  function decideCorrida(dt){ var R=CORRIDA._R(), inp=J.in, K=CORRIDA._K; if(!R) return; st.corr={pos:R.final||R.pos,pag:R.paginas,fase:R.fase,pior:R.piorPos,nivel:R.nivel,trocas:R.trocas,turbos:R.turbosUsados||0,pitLog:R.pitLog,sobrepos:R.sobrepos};
     if(R.fase==='apresenta'){ if(R.t>1.5+rnd()) CORRIDA.largar(op.nivel||'easy'); return; }
     if(R.fase==='podio'){ if(R.podio&&R.podio.t>1) CORRIDA.toque(800,500); return; }
     var me=R.me, zh=me.z+K.PLAYER_Z, alvo=[-.55,0,.55].reduce(function(a,b){ return Math.abs(b-me.x)<Math.abs(a-me.x)?b:a; }), frente=null;
