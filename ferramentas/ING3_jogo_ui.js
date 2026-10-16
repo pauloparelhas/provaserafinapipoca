@@ -177,7 +177,7 @@ function montaMapBtns(){
 var mapaTeclas={ArrowLeft:'left',a:'left',A:'left',ArrowRight:'right',d:'right',D:'right',ArrowUp:'jump',w:'jump',W:'jump',' ':'jump',ArrowDown:'down',s:'down',S:'down',x:'act',X:'act',Enter:'act'};
 function keydown(e){
   if(e.ctrlKey||e.metaKey||e.altKey) return;
-  SOM.init(); document.body.classList.add('kbd');
+  SOM.init(); document.body.classList.add('kbd'); fisico[e.key]=true;
   var k=e.key, J2=JOGO.J, m=menuAberto;
   if(k==='Escape'){ e.preventDefault(); if(J2.estado==='quiz'&&!m){ QUIZ.sai(); return; } if(m){ if(J2.estado==='nivel'||J2.estado==='quiz'){ fechaMenu(); JOGO.pausa(false); } } else pausa(); return; }
   if(m){ if(k==='Enter'){ var pri=$('mcard').querySelector('.mbtn.pri'); if(pri){ e.preventDefault(); pri.click(); } } return; }
@@ -192,7 +192,9 @@ function keydown(e){
   if(k===' '&&J2.estado==='nivel'&&window.PODERES&&(PODERES.tiroAtual()||(J2.faseAtual&&J2.faseAtual.chefao&&J2.urso&&J2.urso.poderes.estrelas>0))){ e.preventDefault(); if(!e.repeat&&window.PERIGOS) PERIGOS.atira(); return; } /* 18/10: ESPAÇO = usar o poder; pular fica no ↑ / W */
   var ac=mapaTeclas[k]; if(ac){ e.preventDefault(); if(ac==='act'&&!e.repeat&&window.PERIGOS){ PERIGOS.atira(); return; } J2.in[ac]=true; }
 }
-function keyup(e){ if(e.key===' '&&JOGO.J.estado==='corrida') return; /* na corrida ESPAÇO é turbo: soltar não pode tirar o pé do ▲ */ var ac=mapaTeclas[e.key]; if(ac) JOGO.J.in[ac]=false; }
+var fisico={}; /* teclas fisicamente apertadas (o quiz zera J.in; a corrida repõe o ▲ que continua seguro) */
+function teclaSegura(k){ return !!fisico[k]; }
+function keyup(e){ delete fisico[e.key]; if(e.key===' '&&JOGO.J.estado==='corrida') return; /* na corrida ESPAÇO é turbo: soltar não pode tirar o pé do ▲ */ var ac=mapaTeclas[e.key]; if(ac) JOGO.J.in[ac]=false; }
 
 /* ---------- toque ---------- */
 function botaoToque(id,ac){
@@ -241,7 +243,7 @@ function init(){
   cv.addEventListener('pointerdown',function(e){ SOM.init(); if(e.pointerType==='touch') document.body.classList.remove('kbd'); if(menuAberto&&JOGO.J.estado!=='escolha') return; JOGO.toque(e.clientX,e.clientY); });
   cv.addEventListener('pointermove',function(e){ if(e.pointerType==='mouse'&&!menuAberto){ var p=JOGO.paraLogico(e.clientX,e.clientY); JOGO.mapaHover(p.x,p.y); } });
   window.addEventListener('keydown',keydown); window.addEventListener('keyup',keyup);
-  window.addEventListener('blur',function(){ var i=JOGO.J.in; i.left=i.right=i.jump=i.down=false; });
+  window.addEventListener('blur',function(){ var i=JOGO.J.in; i.left=i.right=i.jump=i.down=false; fisico={}; });
   document.addEventListener('touchmove',function(e){ e.preventDefault(); },{passive:false});
   modoNivel(false); modoMapa(false);
   JOGO.init();
@@ -255,5 +257,5 @@ document.addEventListener('DOMContentLoaded',init);
 
 return {aviso:aviso, selecionaHeroi:selecionaHeroi, saiParaMapa:saiParaMapa, SVG:SVG, esc:esc, bi:bi, hud:hud, toast:toast, modoNivel:modoNivel, modoMapa:modoMapa, hudArena:hudArena, quizBotoes:quizBotoes, acao:acao, poderHud:poderHud, coracoes:coracoes, botaoCapa:botaoCapa, modoCorrida:modoCorrida, legenda:legenda, escolhaHeroi:escolhaHeroi, heroiSel:function(){ return heroiEscolhido; }, cartaoMapa:cartaoMapa,
   creditos:creditos, menu:menu, fechaMenu:fechaMenu, fimFase:fimFase, pausa:pausa, comoJogar:comoJogar, historia:historia, confirmaCasa:confirmaCasa, confirmaRecomecar:confirmaRecomecar, alternaTr:alternaTr,
-  menuAberto:function(){ return menuAberto; }};
+  menuAberto:function(){ return menuAberto; }, segurando:teclaSegura};
 })();

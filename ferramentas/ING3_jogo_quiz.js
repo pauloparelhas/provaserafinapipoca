@@ -13,7 +13,7 @@
 window.QUIZ = (function(){
 'use strict';
 var G=window.JOGO, J=G.J, A=window.ARTE, W=G.W, H=G.H;
-var N_POR_MORADOR=3, TEMPO=60, USADAS='ing3_jogo_usadas';
+var N_POR_MORADOR=3, TEMPO=30, /* regra do Paulo (16/10): 30 s por pergunta */ USADAS='ing3_jogo_usadas';
 
 /* ---------- escolha das perguntas ---------- */
 function usadas(){ try{ return JSON.parse(localStorage.getItem(USADAS)||'[]'); }catch(e){ return []; } }
