@@ -55,6 +55,25 @@ var HIST={
   tape:{verbo:'Take!',verboPt:'Pegue!',fala:'He wants tape. Fix the bridge!',falaPt:'Ele quer fita adesiva. Conserte a ponte!'},
   fim:{fala:'He wants a cookie… again! The story ends where it began.',falaPt:'Ele quer um biscoito… de novo! A história termina onde começou.'}
 };
+/* 16/10 (Paulo: "as perguntas respondidas certas podem dar ao herói o produto esperado,
+   tipo tesoura, espelho, e não simplesmente encontrá-los"): cada objeto do meio da história
+   fica no seu móvel com um "?"; ▼ abre UMA pergunta do ratinho cuja resposta É o objeto
+   (c11 "o que ele pede depois do biscoito?" → leite …). Certa = ganha o objeto. Errada =
+   vê a resposta e vem outra pergunta na hora; na 2ª errada o ratinho entrega assim mesmo (nada trava). */
+var QUIZ_ITEM={milk:['c11','c20'],napkin:['c13'],mirror:['c14'],scissors:['c24'],broom:['c15'],tape:['c19']}; /* a 2ª tentativa repete a pergunta cuja resposta É o objeto (a criança acabou de ver a resposta) */
+var NOME_ITEM={milk:['a glass of milk','um copo de leite'],napkin:['a napkin','um guardanapo'],mirror:['a mirror','um espelho'],scissors:['scissors','uma tesoura'],broom:['a broom','uma vassoura'],tape:['tape','fita adesiva']};
+function peloQuiz(it){ return it&&it.tipo==='historia'&&!it.fim&&!!QUIZ_ITEM[it.nome]; }
+function pedeItem(it){
+  if(J.quiz||!window.QUIZ||it.ganho) return; it.tent=(it.tent||0); var ids=QUIZ_ITEM[it.nome], id=ids[Math.min(it.tent,ids.length-1)];
+  var q=(window.ING3&&ING3.ITENS||[]).filter(function(x){ return x.id===id; })[0]; if(!q){ entregaItem(it,true); return; }
+  var m={x:it.x,y:it.y,tipo:'mouse',falando:0}, ok0=false;
+  log({ev:'pedeItem',nome:it.nome,id:id});
+  QUIZ.inicia(m,{itens:[q], aoResponder:function(ok){ ok0=ok; },
+    aoTerminar:function(){ it.cool=J.t+5; if(ok0) entregaItem(it,false); else { it.tent++; if(it.tent>=2) entregaItem(it,true); else setTimeout(function(){ if(!J.quiz&&J.estado==='nivel'&&!it.pego) pedeItem(it); },500); } }, /* errou: outra pergunta na hora (a criança não perde o lugar) */
+    aoSair:function(){} });
+}
+function entregaItem(it,ajuda){ if(it.ganho) return; it.ganho=true; var n=NOME_ITEM[it.nome]||[it.nome,it.nome]; G.pegaItem(it); log({ev:'ganhaItem',nome:it.nome,ajuda:!!ajuda});
+  setTimeout(function(){ G.toast(ajuda?'The mouse helps you: '+n[0]+'!':'Right! You get '+n[0]+'!',2400,ajuda?'O ratinho te ajuda: '+n[1]+'!':'Certo! Você ganhou '+n[1]+'!'); },50); }
 var CARTAO_GUARDANAPO={tit:'A napkin!',titPt:'Um guardanapo!',txt:'It is a parachute! Jump, then HOLD JUMP to float over the sink.',txtPt:'Vira paraquedas! Pule e SEGURE PULAR para flutuar por cima da pia.'};
 
 function fase(){ return J.faseAtual?J.faseAtual.id:0; }
@@ -63,9 +82,9 @@ function log(o){ J.log=J.log||[]; o.t=+J.t.toFixed(2); J.log.push(o); if(J.log.l
 function cartao(id,c){ var i=J.in; i.left=i.right=i.jump=i.down=false; log({ev:'aviso',id:id}); if(window.UI&&UI.aviso) UI.aviso(id,c.tit,c.titPt,c.txt,c.txtPt,"Let's go! ▶",'Vamos!'); }
 
 /* ---------- itens que se pegam com ▼ (num móvel) ---------- */
-function interativo(it){ return it.tipo==='poder'||(it.tipo==='historia'&&it.nome==='milk')||it.tipo==='traje'||it.tipo==='capa'; } /* da história, só o leite se pega com ▼ ("Drink!"); o resto se pega andando */
+function interativo(it){ return it.tipo==='poder'||(it.tipo==='historia'&&it.nome==='milk')||peloQuiz(it)||it.tipo==='traje'||it.tipo==='capa'; } /* da história, só o leite se pega com ▼ ("Drink!"); o resto se pega andando */
 function desenhavel(it){ return interativo(it)||it.tipo==='historia'; }
-function verbo(it){ if(it.tipo==='historia'){ var h=HIST[it.nome]||HIST.cookie; return [h.verbo,h.verboPt]; } var P=poder(); return P&&P.verbo?[P.verbo,P.verboPt]:['Take!','Pegue!']; }
+function verbo(it){ if(peloQuiz(it)&&!it.ganho) return ['Answer and win it!','Responda e ganhe!']; if(it.tipo==='historia'){ var h=HIST[it.nome]||HIST.cookie; return [h.verbo,h.verboPt]; } var P=poder(); return P&&P.verbo?[P.verbo,P.verboPt]:['Take!','Pegue!']; }
 function perto(it){ var u=J.urso; return Math.abs(u.x-it.x)<62 && Math.abs((u.y-30)-it.y)<95; }
 function itemPerto(){ var M=J.mundo; if(!M) return null; for(var i=0;i<M.itens.length;i++){ var it=M.itens[i]; if(!it.pego&&interativo(it)&&perto(it)) return it; } return null; }
 function interage(){ /* ▼ na frente do móvel pega o objeto (o mesmo gesto da porta e do cano) */
@@ -79,6 +98,7 @@ function dica(){ var it=itemPerto(); if(!it) return null; var v=verbo(it); retur
 function alvo(){ var M=J.mundo, u=J.urso; if(!M) return null; var r=null, trava=(M.modo==='voo'&&!u.poderes.capa)||(M.modo==='nado'&&!u.poderes.traje); /* barreira ativa: a seta volta para o item */
   M.itens.forEach(function(it){ if(!r&&!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa')&&(trava||it.x>u.x-300)) r={x:it.x,y:it.y-150,tipo:'poder',txt:verbo(it)[0],txtPt:verbo(it)[1]}; });
   M.ovos.forEach(function(o){ if(!r&&!o.chocado&&o.x>u.x-300) r={x:o.x,y:o.y-70,tipo:'poder',txt:'Touch the egg!',txtPt:'Toque no ovo!'}; });
+  M.itens.forEach(function(it){ if(!r&&!it.pego&&peloQuiz(it)&&it.x>u.x-300&&it.x<u.x+700) r={x:it.x,y:it.y-110,tipo:'poder',txt:'Answer here!',txtPt:'Responda aqui!'}; }); /* a seta leva a criança ao objeto da história */
   return r; }
 
 /* ---------- pegar ---------- */
@@ -93,6 +113,7 @@ function pega(it){
     if(P.tiro) u.poderes.tiro=P.tiro;
     hudPoder(); cartao(P.id,P); return true;
   }
+  if(peloQuiz(it)&&!it.ganho){ it.pego=false; pedeItem(it); return true; }
   if(it.tipo==='historia'){
     var h=it.fim?HIST.fim:(HIST[it.nome]||HIST.cookie); SOM.fx('moedaG'); G.pontua(80,it.x,it.y);
     J.historia=J.historia||[]; J.historia.push(it.fim?'fim':it.nome); if(it.nome==='milk') J.historia.push('straw');
@@ -277,7 +298,9 @@ function desenhaItem(c,it,t){
   if(!desenhavel(it)) return false;
   var base=it.y+T/2; c.save(); c.translate(it.x,base);
   if(!it.pego&&(it.tipo!=='historia'||it.nome==='milk'||it.nome==='napkin')) brilhoChao(c,0,0,t);
-  if(it.tipo==='historia'){ c.scale(1.2,1.2); desenhaHist(c,it,t); } else desenhaSuporte(c,it,t);
+  if(it.tipo==='historia'){ c.scale(1.2,1.2); desenhaHist(c,it,t);
+    if(peloQuiz(it)&&!it.pego){ var yb=-78+Math.sin(t*3)*3; c.fillStyle='rgba(253,224,71,.3)'; circ(c,0,yb,22); c.fill(); c.fillStyle='#fde047'; circ(c,0,yb,15); c.fill(); c.strokeStyle='#92400e'; c.lineWidth=2.5; circ(c,0,yb,15); c.stroke(); c.fillStyle='#78350f'; c.font='900 20px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('?',0,yb+1); } }
+  else desenhaSuporte(c,it,t);
   c.restore(); return true;
 }
 function desenhaSuporte(c,it,t){
@@ -493,6 +516,6 @@ var DICA_PODER={1:['Seven-League Boots: jump, then press JUMP again in the air f
   7:['Soccer balls: press SPACE to kick a ball at the ink players and the ball machine.','Bolas de futebol: aperte ESPAÇO para chutar uma bola nos jogadores de tinta e na máquina.'],
   8:['Cookies: press SPACE to throw a cookie. Ink blobs love cookies and turn into butterflies!','Biscoitos: aperte ESPAÇO para jogar um biscoito. As manchas de tinta adoram e viram borboletas!']};
 function dicaPoder(){ var d=DICA_PODER[fase()]; return d?{en:d[0],pt:d[1]}:null; }
-return {dicaPoder:dicaPoder, solidos:solidos, desenhaPorteiras:desenhaPorteiras, desenhaTela:desenhaTela, TAB:TAB, poder:poder, pega:pega, interage:interage, toca:toca, dica:dica, alvo:alvo, atira:atira, moveTiro:moveTiro, acertaExtra:acertaExtra, atualiza:atualiza, reinicia:reinicia, segundoPulo:segundoPulo,
+return {peloQuiz:peloQuiz, dicaPoder:dicaPoder, solidos:solidos, desenhaPorteiras:desenhaPorteiras, desenhaTela:desenhaTela, TAB:TAB, poder:poder, pega:pega, interage:interage, toca:toca, dica:dica, alvo:alvo, atira:atira, moveTiro:moveTiro, acertaExtra:acertaExtra, atualiza:atualiza, reinicia:reinicia, segundoPulo:segundoPulo,
   desenhaItem:desenhaItem, plataforma:plataforma, ninho:ninho, antesHeroi:antesHeroi, depoisHeroi:depoisHeroi, desenhaTiro:desenhaTiro, desenhaRolante:desenhaRolante, desenhaFundo:desenhaFundo, desenhaFrente:desenhaFrente, mola:mola, inimigo:inimigo, icone:icone, hudPoder:hudPoder, tiroAtual:tiroAtual, cartao:cartao};
 })();

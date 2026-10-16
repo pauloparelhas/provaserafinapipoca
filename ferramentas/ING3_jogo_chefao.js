@@ -48,6 +48,16 @@
      cada rodada tem um ESCUDO (tinteiros / manchas / subir a escada);
      com escudo a estrela é rebatida; sem escudo arranca uma LETRA;
      rodada 1 = YOU ARE A (7), 2 = SUPER (5), 3 = PLAYER (6): 18 letras.
+   v6 (16/10, Paulo: "ajuste pra ficar razoável a qtde de estrelas gasta e
+   recebida e o dano ao herói e ao chefão; dano considerável = tremida na tela
+   + trilha de 'tá quase'"):
+     cada estrela no Conde arranca um PEDAÇO da frase (3 golpes por rodada:
+     YOU|ARE|A · SU|PE|R · PL|AY|ER) com tremida forte da tela;
+     estrela que bate no ESCUDO volta para o herói (não se perde);
+     a fada, a cada visita, também devolve os 3 corações;
+     batida de coração grave a partir da rodada 2; no último golpe, "TÁ QUASE"
+     (mais rápida) e o Conde e a fada falam disso. Conta: ~14 estrelas na luta
+     toda, ~2–3 visitas da fada (6–9 perguntas).
    ============================================================ */
 window.CHEFAO = (function(){
 'use strict';
@@ -91,10 +101,12 @@ function falaF(en,pt,dur){ if(!C) return; C.fada.fala={en:en,pt:pt,t:0,dur:dur||
    das perguntas; cada resposta certa vira estrelas. Cada estrela no Conde (sem escudo)
    arranca uma LETRA dele, que voa para a frase do alto: YOU ARE A SUPER PLAYER. ---------- */
 var FRASE='YOU ARE A SUPER PLAYER', NLET=FRASE.replace(/ /g,'').length, METAS=[7,12,18]; /* YOU ARE A | SUPER | PLAYER */
+var CORTES=[3,6,7,9,11,12,14,16,18]; /* cada golpe arranca um pedaço: YOU|ARE|A · SU|PE|R · PL|AY|ER */
+function tensaoDa(){ if(!C||!/^p|transicao/.test(C.fase)) return 0; if(C.letrasOk>=CORTES[CORTES.length-2]) return 2; return C.ronda>=1||C.fase==='transicao'?1:0; }
 function estrelasHUD(){ var u=J.urso, n=(u&&u.poderes.estrelas)||0; if(window.UI) UI.acao(n>0,n); }
 /* a fada chega (brilho), faz 3 perguntas; certa = 2 estrelas; no fim ela joga as estrelas no herói */
 function fadaVem(primeira){
-  if(!C||C.fadaOn) return; C.fadaOn=true; C.fadaT=0; C.ganho=0; C.visitas++; SOM.fx('estrela');
+  if(!C||C.fadaOn) return; try{ SOM.tensao(0); }catch(e){} C.fadaOn=true; C.fadaT=0; C.ganho=0; /* perguntas sem batida de coração: sem pressão de tempo */ C.visitas++; SOM.fx('estrela');
   falaF(primeira?'I am the Fairy Godmother! Answer and win STARS!':'Need stars? Answer my questions!',primeira?'Sou a Fada Madrinha! Responda e ganhe ESTRELAS!':'Precisa de estrelas? Responda às minhas perguntas!',2.6);
   C.esperaFada=1.6;
 }
@@ -111,6 +123,7 @@ function fimDuelo(){
   if(n<3){ n=3; falaF('Here are 3 stars. You can do it!','Tome 3 estrelas. Você consegue!',2.6); } else falaF(n+' stars for you! SPACE or ▼ to throw!',n+' estrelas para você! ESPAÇO ou ▼ para jogar!',2.6);
   var u=J.urso, f=C.fada; for(var k=0;k<Math.min(n,9);k++) C.dons.push({x0:f.x+20,y0:f.y-40,t:-k*.12});
   u.poderes.estrelas=(u.poderes.estrelas||0)+n; estrelasHUD(); C.fadaSai=1.8;
+  if(u.tam<2){ u.tam=2; setTimeout(function(){ if(window.UI&&J.urso) UI.coracoes(3,false); },0); G.brilho(u.x,u.y-50,12,'#f472b6'); } /* a fada também devolve os corações */
 }
 /* a estrela que o herói joga vira ESTRELA GUIADA: vai ao alvo da rodada; com escudo, o Conde a rebate */
 function guiaEstrelas(){
@@ -124,12 +137,17 @@ function guiaEstrelas(){
 function acertaConde(p){
   if(C.escudo){ /* rebate no escudo: ensina que primeiro se quebra o escudo */
     SOM.fx('pisao'); G.brilho(C.x,C.y-70,8,'#c4b5fd'); C.estado='laugh'; C.et=0; C.escudoBrilho=.5;
-    if(!C.avisouEscudo||C.t-C.avisouEscudo>5){ C.avisouEscudo=C.t; var m=C.fase==='p1'?['HA! My shield! Break my inkwells first!','RÁ! Meu escudo! Quebre meus tinteiros primeiro!']:(C.fase==='p2'?['HA! My shield! Stop my ink blots first!','RÁ! Meu escudo! Pare minhas manchas primeiro!']:['HA! Come up here if you can!','RÁ! Suba aqui se puder!']); falaC(m[0],m[1],2.6); }
+    var u0=J.urso; u0.poderes.estrelas=(u0.poderes.estrelas||0)+1; C.dons.push({x0:C.x,y0:C.y-90,t:0}); setTimeout(estrelasHUD,600); /* a estrela rebatida volta para o herói */
+    if(!C.avisouEscudo||J.t-C.avisouEscudo>5){ C.avisouEscudo=J.t; var m=C.fase==='p1'?['HA! My shield! Break my inkwells first!','RÁ! Meu escudo! Quebre meus tinteiros primeiro!']:(C.fase==='p2'?['HA! My shield! Stop my ink blots first!','RÁ! Meu escudo! Pare minhas manchas primeiro!']:['HA! Come up here if you can!','RÁ! Suba aqui se puder!']); falaC(m[0],m[1],2.6); }
     return; }
-  C.estado='hit'; C.et=0; C.dor=.5; SOM.fx('chefao'); J.shake=5; G.brilho(C.x,C.y-70,14,'#fde047'); G.pontua(25,C.x,C.y-150);
-  /* uma letra sai do Conde e voa para a frase do alto */
-  var i=C.letrasOk; if(i<NLET){ C.letraVoa.push({i:i,x0:C.x-J.cam,y0:C.y-120-J.camY,t:0}); C.letrasOk++; SOM.fx('faisca'); }
-  C.nAcertos=(C.nAcertos||0)+1; if(C.nAcertos%3===1){ var r=[['OUCH! My hat!','AI! Meu chapéu!'],['Stop that, little hero!','Pare com isso, heroizinho!'],['Grr! My letters!','Grr! Minhas letras!']][(C.nAcertos>>1)%3]; falaC(r[0],r[1],2.2); }
+  C.estado='hit'; C.et=0; C.dor=.8; SOM.fx('chefao'); SOM.fx('quebra'); J.shake=10; G.brilho(C.x,C.y-70,22,'#fde047'); G.pontua(50,C.x,C.y-150);
+  /* um PEDAÇO da frase sai do Conde e voa para o alto (golpe que se sente) */
+  var ate=NLET; for(var c2=0;c2<CORTES.length;c2++) if(CORTES[c2]>C.letrasOk){ ate=CORTES[c2]; break; }
+  for(var i=C.letrasOk,k=0;i<ate;i++,k++) C.letraVoa.push({i:i,x0:C.x-J.cam+(k-1)*26,y0:C.y-120-J.camY,t:-k*.08});
+  C.letrasOk=ate; SOM.fx('faisca');
+  var ultimo=C.letrasOk>=CORTES[CORTES.length-2]&&C.letrasOk<NLET;
+  if(ultimo){ falaC('NO, NO, NO! One more and I lose!','NÃO, NÃO, NÃO! Mais uma e eu perco!',2.6); setTimeout(function(){ if(!C||C.fadaOn||!/^p/.test(C.fase)) return; C.fadaOn=true; C.fadaT=0; C.fadaSai=3; falaF('One more star! You can do it!','Só mais uma estrela! Você consegue!',2.6); },1400); }
+  else { C.nAcertos=(C.nAcertos||0)+1; var r=[['OUCH! My hat!','AI! Meu chapéu!'],['Stop that, little hero!','Pare com isso, heroizinho!'],['Grr! My letters!','Grr! Minhas letras!']][C.nAcertos%3]; falaC(r[0],r[1],2.2); }
   if(C.letrasOk>=METAS[C.ronda]){ if(C.ronda>=2) vitoria(); else transicao(C.ronda+2); }
 }
 function voaTiros(dt){
@@ -142,6 +160,7 @@ function voaTiros(dt){
         if(C.alvo<3) falaC(C.alvo===1?'NO! My inkwell!':'Not another one!',C.alvo===1?'NÃO! Meu tinteiro!':'Outro não!'); else quebraEscudo(); } } }
   for(var j=C.dons.length-1;j>=0;j--){ var d=C.dons[j]; d.t+=dt; if(d.t>.7) C.dons.splice(j,1); }
   for(var q=C.letraVoa.length-1;q>=0;q--){ var L=C.letraVoa[q]; L.t+=dt; if(L.t>.9) C.letraVoa.splice(q,1); }
+  try{ SOM.tensao(tensaoDa()); }catch(e){}
 }
 function quebraEscudo(){ if(!C.escudo) return; C.escudo=false; SOM.fx('quebra'); J.shake=8; G.brilho(C.x,C.y-80,24,'#c4b5fd'); banner('SHIELD DOWN!','ESCUDO QUEBRADO!');
   falaC('NO! My shield!','NÃO! Meu escudo!',2.4); }
@@ -170,6 +189,7 @@ function transicao(n){
 }
 function vitoria(){ derrota(); C.vitoria={t:0}; try{ say('You are a super player!'); }catch(e){} }
 function derrota(){
+  try{ SOM.tensao(0); }catch(e){}
   C.fase='derrota'; C.t=0; C.estado='sad'; C.gotas=[]; C.letras=[]; C.tiros=[]; SOM.musica(''); SOM.fx('vitoria');
   falaC('Oh no… you won! The lost endings are free!','Ah, não… você venceu! Os finais perdidos estão livres!',4);
 }
@@ -278,7 +298,7 @@ function desenha(c,t){
   /* letras caídas: a ESCADA */
   C.blocos.forEach(function(b){ c.fillStyle=A.lin(c,b.x,b.y,b.x,b.y+b.h,'#8b5cf6','#4c1d95'); A.rr(c,b.x+1,b.y+1,b.w-2,b.h-2,8); c.fill(); c.strokeStyle='#2e1065'; c.lineWidth=2; A.rr(c,b.x+1,b.y+1,b.w-2,b.h-2,8); c.stroke();
     c.fillStyle='#f5f3ff'; c.font='900 30px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(b.ch,b.x+b.w/2,b.y+b.h/2+1); });
-  if(C.fase==='p3'){ /* setas mostrando a subida */ var b2=Math.abs(Math.sin(t*3))*6; c.save(); c.globalAlpha=.85; c.fillStyle='#fde047'; [[14,1],[15,2],[16,3],[17.4,4]].forEach(function(p,i){ var yy=CHAO-p[1]*T-22-b2; if(p[0]<17&&C.alt[p[0]]<p[1]) return; c.beginPath(); c.moveTo(p[0]*T+10,yy); c.lineTo(p[0]*T+34,yy-10); c.lineTo(p[0]*T+34,yy+10); c.closePath(); c.fill(); }); c.restore(); }
+  if(C.fase==='p3'&&C.escudo){ /* setas mostrando a subida (somem quando ele chega lá em cima) */ var b2=Math.abs(Math.sin(t*3))*6; c.save(); c.globalAlpha=.85; c.fillStyle='#fde047'; [[14,1],[15,2],[16,3],[17.4,4]].forEach(function(p,i){ var yy=CHAO-p[1]*T-22-b2; if(p[0]<17&&C.alt[p[0]]<p[1]) return; c.beginPath(); c.moveTo(p[0]*T+10,yy); c.lineTo(p[0]*T+34,yy-10); c.lineTo(p[0]*T+34,yy+10); c.closePath(); c.fill(); }); c.restore(); }
   /* sombras de aviso, gotas e letras em voo */
   [C.gotas,C.letras].forEach(function(lista,ehLetra){ lista.forEach(function(d){ if(d.t<0) return;
     var k=Math.min(1,d.t/d.dur), chao=ehLetra&&d.degrau?CHAO-C.alt[d.col]*T:CHAO; c.fillStyle='rgba(30,27,75,'+(.15+.45*k)+')'; A.el(c,d.alvo,chao-2,(ehLetra?28:16)*(.5+.6*k),6); c.fill();
@@ -317,11 +337,11 @@ function desenhaTela(c,t){
   var ff=C.fada.fala; if(ff&&!J.quiz&&ff.t<ff.dur){ c.font='900 17px "Nunito",Arial'; var tw5=Math.min(440,c.measureText(ff.en).width)+30, bx5=Math.max(12,C.fada.x-J.cam+48), by5=236; /* ao lado da fada, abaixo da fala do Conde e longe dos botões de toque */
     c.fillStyle='#fef9c3'; A.rr(c,bx5,by5,tw5,J.tr?58:40,14); c.fill(); c.fillStyle='#713f12'; c.textAlign='left'; c.textBaseline='top'; c.fillText(ff.en,bx5+15,by5+10,440); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#a16207'; c.fillText(ff.pt,bx5+15,by5+34,440); } }
   /* letras voando do Conde para a frase */
-  C.letraVoa.forEach(function(L){ var k=Math.min(1,L.t/.9), dst=slot(L.i), x=L.x0+(dst.x-L.x0)*k, yy=L.y0+(dst.y-L.y0)*k-Math.sin(k*Math.PI)*120; c.save(); c.translate(x,yy); var sc=1.6-.6*k; c.scale(sc,sc); c.font='900 26px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=5; c.strokeStyle='#2e1065'; c.strokeText(dst.ch,0,0); c.fillStyle='#fde047'; c.fillText(dst.ch,0,0); c.restore(); });
+  C.letraVoa.forEach(function(L){ if(L.t<0) return; var k=Math.min(1,L.t/.9), dst=slot(L.i), x=L.x0+(dst.x-L.x0)*k, yy=L.y0+(dst.y-L.y0)*k-Math.sin(k*Math.PI)*120; c.save(); c.translate(x,yy); var sc=1.6-.6*k; c.scale(sc,sc); c.font='900 26px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=5; c.strokeStyle='#2e1065'; c.strokeText(dst.ch,0,0); c.fillStyle='#fde047'; c.fillText(dst.ch,0,0); c.restore(); });
   if(C.vitoria){ var kv=Math.min(1,C.vitoria.t/.6); c.save(); c.globalAlpha=kv; c.fillStyle='rgba(13,11,30,.55)'; c.fillRect(0,H/2-80,W,160); c.translate(W/2,H/2); c.scale(.7+.3*kv,.7+.3*kv); c.font='900 54px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=10; c.strokeStyle='#2e1065'; c.strokeText('YOU ARE A SUPER PLAYER!',0,-6); c.fillStyle='#fde047'; c.fillText('YOU ARE A SUPER PLAYER!',0,-6); if(J.tr){ c.font='700 20px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText('VOCÊ É UM SUPER JOGADOR!',0,44); } c.restore(); }
   if(C.banner&&C.banner.t<2.6&&!C.vitoria){ var k=Math.min(1,C.banner.t/.3), sai=Math.max(0,(C.banner.t-2.1)/.5); c.save(); c.globalAlpha=1-sai; c.fillStyle='rgba(13,11,30,.6)'; c.fillRect(0,H/2-70,W,140);
     c.translate(W/2,H/2); c.scale(.6+.4*k,.6+.4*k); c.font='900 72px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=10; c.strokeStyle='#2e1065'; c.strokeText(C.banner.en,0,0); c.fillStyle='#fde047'; c.fillText(C.banner.en,0,0);
     if(J.tr){ c.font='700 20px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText(C.banner.pt,0,46); } c.restore(); }
 }
-return {morreu:morreu, inicia:inicia, atualiza:atualiza, anima:anima, desenha:desenha, desenhaTela:desenhaTela, solidos:solidos, avancaIntro:avancaIntro, ativo:function(){ return !!C; }, limpa:function(){ C=null; J.chefe=null; if(window.UI) UI.legenda(null); }};
+return {morreu:morreu, inicia:inicia, atualiza:atualiza, anima:anima, desenha:desenha, desenhaTela:desenhaTela, solidos:solidos, avancaIntro:avancaIntro, ativo:function(){ return !!C; }, limpa:function(){ try{ SOM.tensao(0); }catch(e){} C=null; J.chefe=null; if(window.UI) UI.legenda(null); }};
 })();

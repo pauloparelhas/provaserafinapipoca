@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='77ba22b1945';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='47205321103';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -16,7 +16,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <title>The Lost Endings — English</title>
 <!-- Nunito (SIL OFL 1.1, assets/fonts/OFL-Nunito.txt), servida daqui: nenhuma chamada a servidor de terceiros -->
 <style>@font-face{font-family:"Nunito";font-style:normal;font-weight:200 1000;font-display:swap;src:url(assets/fonts/nunito-latin.woff2) format("woff2")}</style>
-<link rel="stylesheet" href="serafina-core.css?v=77ba22b1945">
+<link rel="stylesheet" href="serafina-core.css?v=47205321103">
 <style>
 /* ============================================================
    ING3_jogo.html — The Lost Endings (Inglês 3º tri). Casca herdada do
@@ -266,6 +266,11 @@ body.nomapa #hudVida,body.nacapa #hudVida{display:none}
 body.corrida #tLeft,body.corrida #tRight{display:none}
 body.corrida #tDown{left:30px;bottom:22px;width:84px;height:84px}
 body.corrida #tJump{font-size:34px}
+/* 16/10 corrida v7: ▲ acelera (grande), ▼ freia (ao lado), ⚡ turbo (em cima do ▲) */
+body.emcorrida #tJump{font-size:34px;border-color:rgba(74,222,128,.8);background:rgba(74,222,128,.25)}
+body.emcorrida #tDown{left:auto;right:140px;bottom:22px;width:84px;height:84px;font-size:28px;border-color:rgba(248,113,113,.8);background:rgba(248,113,113,.22)}
+body.emcorrida #tAct{right:32px;bottom:136px;border-color:rgba(253,224,71,.8);background:rgba(253,224,71,.22)}
+body.emcorrida #tAct.turbo0{opacity:.5;filter:grayscale(.6)}
 /* ---- ING3: tradução atrás da bandeira ---- */
 .tr{display:none}
 body.show-tr .tr{display:block;font-size:.72em;font-weight:700;opacity:.85;margin-top:2px;line-height:1.25}
@@ -346,37 +351,37 @@ body.show-tr .mcNome small.tr{display:inline;margin-left:6px}
 <div id="rot"><span>Turn the tablet sideways</span></div>
 
 <script>window.SERA_CFG={trKey:null,lang:'en-US',voz:'thalitamultilingual',rate:.85,home:'../index.html',somKey:'ing3_som',stars:0,starfield:false};</script>
-<script src="serafina-core.js?v=77ba22b1945"></script>
-<script src="OP_voz.js?v=77ba22b1945"></script>
-<script src="ING3_banco.js?v=77ba22b1945"></script>
-<script src="LP3_jornada_partituras.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_partituras.js?v=77ba22b1945"></script>
-<script src="LP3_jornada_musica.js?v=77ba22b1945"></script>
-<script src="LP3_jornada_som.js?v=77ba22b1945"></script>
-<script src="LP3_jornada_arte.js?v=77ba22b1945"></script>
-<script src="LP3_jornada_arte2.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_arte.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_arte2.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_arte3.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_arte4.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_arte5.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_mapas.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_fases.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_motor.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_motor2.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_perigos.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_poderes.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_aparelhos.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_marceu.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_chefinho.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_penalti.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_quiz.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_carrinhos.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_corrida.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_estadio.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_chefao.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_cena.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_ui.js?v=77ba22b1945"></script>
-<script src="ING3_jogo_ambiente.js?v=77ba22b1945"></script>
+<script src="serafina-core.js?v=47205321103"></script>
+<script src="OP_voz.js?v=47205321103"></script>
+<script src="ING3_banco.js?v=47205321103"></script>
+<script src="LP3_jornada_partituras.js?v=47205321103"></script>
+<script src="ING3_jogo_partituras.js?v=47205321103"></script>
+<script src="LP3_jornada_musica.js?v=47205321103"></script>
+<script src="LP3_jornada_som.js?v=47205321103"></script>
+<script src="LP3_jornada_arte.js?v=47205321103"></script>
+<script src="LP3_jornada_arte2.js?v=47205321103"></script>
+<script src="ING3_jogo_arte.js?v=47205321103"></script>
+<script src="ING3_jogo_arte2.js?v=47205321103"></script>
+<script src="ING3_jogo_arte3.js?v=47205321103"></script>
+<script src="ING3_jogo_arte4.js?v=47205321103"></script>
+<script src="ING3_jogo_arte5.js?v=47205321103"></script>
+<script src="ING3_jogo_mapas.js?v=47205321103"></script>
+<script src="ING3_jogo_fases.js?v=47205321103"></script>
+<script src="ING3_jogo_motor.js?v=47205321103"></script>
+<script src="ING3_jogo_motor2.js?v=47205321103"></script>
+<script src="ING3_jogo_perigos.js?v=47205321103"></script>
+<script src="ING3_jogo_poderes.js?v=47205321103"></script>
+<script src="ING3_jogo_aparelhos.js?v=47205321103"></script>
+<script src="ING3_jogo_marceu.js?v=47205321103"></script>
+<script src="ING3_jogo_chefinho.js?v=47205321103"></script>
+<script src="ING3_jogo_penalti.js?v=47205321103"></script>
+<script src="ING3_jogo_quiz.js?v=47205321103"></script>
+<script src="ING3_jogo_carrinhos.js?v=47205321103"></script>
+<script src="ING3_jogo_corrida.js?v=47205321103"></script>
+<script src="ING3_jogo_estadio.js?v=47205321103"></script>
+<script src="ING3_jogo_chefao.js?v=47205321103"></script>
+<script src="ING3_jogo_cena.js?v=47205321103"></script>
+<script src="ING3_jogo_ui.js?v=47205321103"></script>
+<script src="ING3_jogo_ambiente.js?v=47205321103"></script>
 </body>
 </html>

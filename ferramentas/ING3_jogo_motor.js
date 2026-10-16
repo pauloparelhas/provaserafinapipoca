@@ -193,6 +193,7 @@ function caiu(msg,pt){
   var u=J.urso; if(J.teste) J.teste.quedas.push({x:Math.round(u.x/45),mundo:J.mundo&&J.mundo.mundo,t:+J.tFase.toFixed(1),causa:String(msg).split(' ')[0]}); SOM.fx('tonto'); J.shake=6; J.agarrado=null; J.soltouT=0; u.giro=0;
   if(J.nivel&&J.respawn.mundo&&J.mundo.mundo!==J.respawn.mundo){ J.mundo= J.respawn.mundo==='sub'&&J.nivel.sub?J.nivel.sub:J.nivel; J.troncosVivos=[]; J.bolasCanhao=[]; J.estrelas=[]; }
   u.x=J.respawn.x; u.y=J.respawn.y; u.vx=0; u.vy=0; u.tontoT=.8; u.invT=2.4; J.flash=.7; /* renasce protegido mais tempo: dá para sair de perto de um chefinho */ u.puloExtra=u.poderes.bota||u.poderes.giz;
+  if(u.tam<1){ u.tam=1; setTimeout(function(){ if(window.UI&&J.urso) UI.coracoes(J.urso.tam+1,false); },0); } /* 16/10 (jogador): renasce com 2 corações — um toque logo depois não vira outra queda */
   if(J.pip){ J.pip.x=u.x+50; J.pip.y=u.y; J.pip.vx=0; J.pip.vy=0; }
   J.cam=Math.max(0,Math.min(J.mundo.w-W,u.x-W*.4)); J.camY=Math.max(0,Math.min(J.mundo.h-H,u.y-H*.62)); J.bolasCanhao=[]; 
   J.mundo.caindo.forEach(function(p){ p.estado='ok'; p.x=p.x0; p.y=p.y0; p.t=0; });
@@ -201,7 +202,8 @@ function perigos(dt){
   var u=J.urso, M=J.mundo, R=ursoRet();
   if(u.invT>0) u.invT-=dt;
   M.moedas.forEach(function(m){ if(!m.pega && colideRet(R.x,R.y,R.w,R.h,m.x-m.r,m.y-m.r,m.r*2,m.r*2)){ m.pega=true; J.moedas+=m.big?5:1; pontua(m.big?50:10,m.x,m.y-10); SOM.fx(m.big?'moedaG':'moeda'); brilho(m.x,m.y,m.big?14:5); } });
-  M.itens.forEach(function(it){ if(!it.pego && (it.tipo==='maca'||it.tipo==='bota'||it.tipo==='estrelas'||(it.tipo==='historia'&&it.nome!=='milk')) && colideRet(R.x,R.y,R.w,R.h,it.x-18,it.y-18,36,36)) pegaItem(it); });
+  M.itens.forEach(function(it){ if(!it.pego && (it.tipo==='maca'||it.tipo==='bota'||it.tipo==='estrelas'||(it.tipo==='historia'&&it.nome!=='milk'&&!(window.PODERES&&PODERES.peloQuiz(it)))) && colideRet(R.x,R.y,R.w,R.h,it.x-18,it.y-18,36,36)) pegaItem(it);
+    else if(!it.pego&&window.PODERES&&PODERES.peloQuiz(it)&&!J.quiz&&J.t>(it.cool||0)&&colideRet(R.x,R.y,R.w,R.h,it.x-24,it.y-30,48,60)){ it.cool=J.t+5; pegaItem(it); } }); /* encostou no objeto da história: o ratinho pergunta (de novo só depois de 5 s ou com ▼) */
   M.ovos.forEach(function(o){ if(!o.chocado && !u.montado && colideRet(R.x,R.y,R.w,R.h,o.x-22,o.y-50,44,50)){ o.chocado=true; monta(); J.urso.poderes.tiro='faisca'; if(!J.prog.pipVisto){ J.prog.pipVisto=true; salva(); } if(!J.pipCartao&&window.PODERES){ J.pipCartao=true; PODERES.cartao('pip',PODERES.TAB[2]); PODERES.hudPoder(); } } });
   if(J.pip){ var p=J.pip; p.t+=dt; if(!p.parado){ p.vy+=1400*dt; p.x+=p.vx*dt; p.y+=p.vy*dt; var piso=null; solidos(M).concat(umaVia(M)).forEach(function(b){ if(p.x>b.x&&p.x<b.x+b.w&&p.y>=b.y&&p.y-p.vy*dt<=b.y+4) piso=b.y; }); if(piso!==null&&p.vy>0){ p.y=piso; p.vy=0; p.vx*=.5; if(Math.abs(p.vx)<20){ p.parado=true; } } if(p.y>M.h+100){ p.x=J.respawn.x+60; p.y=J.respawn.y; p.vy=0; } }
     if(p.t>1 && u.invT<=.3 && colideRet(R.x,R.y,R.w,R.h,p.x-24,p.y-50,48,50)) monta(); }
