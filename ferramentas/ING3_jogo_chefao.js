@@ -184,7 +184,7 @@ function morreu(){ if(!C||C.fase==='abertura'||C.fase==='derrota') return; C.mor
   if(C.mortes>=7){ C.mortes=0; C.letrasOk=0; C.ronda=0; C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; });
     J.urso.poderes.estrelas=0; estrelasHUD(); banner('TRY AGAIN!','TENTE DE NOVO!'); comecaFase(1); } }
 function comecaFase(n){
-  C.fase='p'+n; C.ronda=n-1; C.t=0; C.gotas=[]; C.letras=[]; C.escudo=true; C.mortes=0; C.fadaOn=false; SOM.musica('chefao');
+  C.ultProg=undefined; C.fase='p'+n; C.ronda=n-1; C.t=0; C.gotas=[]; C.letras=[]; C.escudo=true; C.mortes=0; C.fadaOn=false; SOM.musica('chefao');
   C.letrasOk=Math.min(C.letrasOk,n>1?METAS[n-2]:0);
   if(n===1){ C.lado=1; C.cansado=false; C.muda=null; C.yOff=0; C.alvo=0; C.tinteiros.forEach(function(q){ q.caido=false; }); falaC('My magic inkwells make my SHIELD!','Meus tinteiros mágicos fazem o meu ESCUDO!'); }
   if(n===2){ C.convertidas=0; C.ondas=0; J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; }); falaC('New shield! Ink blots, GO!','Escudo novo! Manchas, VÃO!'); }
@@ -265,7 +265,8 @@ function atualiza(dt){
     if(C.escudo&&!C.muda&&Math.floor((C.t-dt)/3.6)!==Math.floor(C.t/3.6)&&vivasC<3){ C.ondas++; C.estado='write'; C.et=0; SOM.fx('cano');
       /* derrama do tinteiro da sacada: caem pela borda e saem andando */
       var lx=(C.lado<0)?C.x+60:SACADA_X0, dl=(C.lado<0)?1:-1; if(C.lado<0&&C.ondas>3) { C.ondas=5; } /* do lado esquerdo, menos ondas */ for(var k=0;k<Math.min(2,3-vivasC);k++) C.gotas.push({x0:lx,y0:C.y-10,alvo:(C.lado<0)?(7+k*2)*T:lx+dl*(40+k*70),t:-k*.3,dur:(C.lado<0)?1.0:.7,x:lx,y:C.y,r:15,vira:true}); }
-    var vencidas=J.mundo.inimigos.filter(function(e){ return e.doConde&&(e.morto||e.achatado); }).length; C.convertidas=vencidas;
+    var vencidas=J.mundo.inimigos.filter(function(e){ return e.doConde&&(e.morto||e.achatado); }).length; if(vencidas!==C.convertidas||C.ultProg===undefined) C.ultProg=C.t; C.convertidas=vencidas;
+    if(C.escudo&&C.t-C.ultProg>40&&!C.fadaOn){ C.ultProg=C.t; C.fadaOn=true; C.fadaT=0; C.fadaSai=3.5; falaF('Jump ON the blots, from above!','Pule EM CIMA das manchas!',3.2); } /* jogador: dica da fada depois de 40 s sem progresso */
     if(vencidas>=3&&C.escudo){ J.mundo.inimigos.forEach(function(e){ if(e.doConde){ e.achatado=true; e.tAch=.3; } }); quebraEscudo(); }
   }
   else if(C.fase==='p3'){
