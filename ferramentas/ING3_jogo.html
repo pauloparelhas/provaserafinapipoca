@@ -257,6 +257,11 @@ body.nomapa #hudVida,body.nacapa #hudVida{display:none}
 body.corrida #tLeft,body.corrida #tRight{display:none}
 body.corrida #tDown{left:30px;bottom:22px;width:84px;height:84px}
 body.corrida #tJump{font-size:34px}
+/* 16/10 corrida v7: ▲ acelera (grande), ▼ freia (ao lado), ⚡ turbo (em cima do ▲) */
+body.emcorrida #tJump{font-size:34px;border-color:rgba(74,222,128,.8);background:rgba(74,222,128,.25)}
+body.emcorrida #tDown{left:auto;right:140px;bottom:22px;width:84px;height:84px;font-size:28px;border-color:rgba(248,113,113,.8);background:rgba(248,113,113,.22)}
+body.emcorrida #tAct{right:32px;bottom:136px;border-color:rgba(253,224,71,.8);background:rgba(253,224,71,.22)}
+body.emcorrida #tAct.turbo0{opacity:.5;filter:grayscale(.6)}
 /* ---- ING3: tradução atrás da bandeira ---- */
 .tr{display:none}
 body.show-tr .tr{display:block;font-size:.72em;font-weight:700;opacity:.85;margin-top:2px;line-height:1.25}

@@ -197,7 +197,7 @@ function keyup(e){ var ac=mapaTeclas[e.key]; if(ac) JOGO.J.in[ac]=false; }
 /* ---------- toque ---------- */
 function botaoToque(id,ac){
   var b=$(id);
-  function on(e){ e.preventDefault(); SOM.init(); document.body.classList.remove('kbd'); b.classList.add('on'); if(ac==='act'){ if(window.PERIGOS) PERIGOS.atira(); return; } JOGO.J.in[ac]=true; try{ b.setPointerCapture(e.pointerId); }catch(x){} }
+  function on(e){ e.preventDefault(); SOM.init(); document.body.classList.remove('kbd'); b.classList.add('on'); if(ac==='act'){ if(JOGO.J.estado==='corrida'&&window.CORRIDA){ CORRIDA.tecla(' '); return; } if(window.PERIGOS) PERIGOS.atira(); return; } JOGO.J.in[ac]=true; try{ b.setPointerCapture(e.pointerId); }catch(x){} }
   function off(e){ e.preventDefault(); b.classList.remove('on'); JOGO.J.in[ac]=false; }
   b.addEventListener('pointerdown',on); b.addEventListener('pointerup',off); b.addEventListener('pointercancel',off); b.addEventListener('pointerleave',off);
   b.addEventListener('contextmenu',function(e){ e.preventDefault(); });

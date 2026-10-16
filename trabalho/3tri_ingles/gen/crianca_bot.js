@@ -33,7 +33,7 @@ window.CRIANCA = (function(){
   /* para onde ir: porta/baú pendente atrás e perto → volta (a criança segue a seta); senão, direita */
   function direcao(){ var u=J.urso, M=J.mundo, dir=1;
     M.moradores.forEach(function(m){ if(!m.feito&&m.x<u.x-50&&u.x-m.x<500) dir=-1; });
-    M.itens.forEach(function(it){ if(!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa'||(it.tipo==='historia'&&it.nome==='milk'))&&it.x<u.x-40&&u.x-it.x<500) dir=-1; });
+    M.itens.forEach(function(it){ if(!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa'||(it.tipo==='historia'&&(it.nome==='milk'||PODERES.peloQuiz(it))))&&it.x<u.x-40&&u.x-it.x<500) dir=-1; });
     if(st.recua>0) dir=-1;
     /* no submundo, depois da porta: vai até o cano de saída (a seta aponta para ele) e para em cima */
     if(M!==J.nivel&&!M.moradores.some(function(m){ return !m.feito; })){ var sai=null; M.canos.forEach(function(c){ if(!sai||c.x>sai.x) sai=c; }); if(sai){ var cx=sai.x+sai.w/2; if(Math.abs(u.x-cx)<14&&u.noChao) dir=0; else dir=u.x<cx?1:-1; } }
@@ -80,17 +80,20 @@ window.CRIANCA = (function(){
     if(st.acao>0) st.acao-=dt;
     if(st.pulo>0){ inp.jump=true; st.pulo-=dt; } else inp.jump=false;
   }
-  /* corrida: troca de faixa para desviar, pega moedas, usa o turbo quando tem */
-  function decideCorrida(dt){ var R=CORRIDA._R(), inp=J.in; if(!R) return; st.corr={pos:R.final||R.pos,pag:R.paginas,fase:R.fase,pior:R.piorPos};
-    if(R.fase==='apresenta'){ if(R.t>1.5+rnd()) CORRIDA.largar(); return; }
+  /* corrida (v7): segura ▲ (às vezes solta sem querer), escolhe o nível, fica na faixa e vira nas curvas
+     com imprecisão, desvia de pneu/poça às vezes, segue a placa do box, usa o turbo com ESPAÇO */
+  function decideCorrida(dt){ var R=CORRIDA._R(), inp=J.in, K=CORRIDA._K; if(!R) return; st.corr={pos:R.final||R.pos,pag:R.paginas,fase:R.fase,pior:R.piorPos,nivel:R.nivel,trocas:R.trocas,turbos:R.turbosUsados||0};
+    if(R.fase==='apresenta'){ if(R.t>1.5+rnd()) CORRIDA.largar(op.nivel||'easy'); return; }
     if(R.fase==='podio'){ if(R.podio&&R.podio.t>1) CORRIDA.toque(800,500); return; }
-    var me=R.me, alvo=[-.55,0,.55].reduce(function(a,b){ return Math.abs(b-me.x)<Math.abs(a-me.x)?b:a; }), frente=null; /* fica na faixa em que está (toque curto), não segura a seta para sempre */ R.rivais.forEach(function(o){ var dz=o.z-me.z; if(dz>0&&dz<200*10&&Math.abs(o.x-me.x)<.5) frente=o; });
-    if(frente) alvo=frente.x>0?-.55:.55; if(st.t%7<.02) st.ruido=(rnd()-.5)*.3; alvo+=st.ruido||0;
-    inp.right=alvo>me.x+.1; inp.left=alvo<me.x-.1;
-    /* vê o pneu ou a poça na sua faixa e desvia (às vezes não dá tempo: imprecisão) */
-    var nO=Math.floor(me.z/200)+3, O=CORRIDA._O(); O.pneus.concat(O.poças).forEach(function(o){ if(o.n>nO&&o.n<nO+12&&Math.abs(o.x-me.x)<.4){ if(o.reage===undefined) o.reage=rnd()<(op.reflexo||.75); if(o.reage){ var outra=[-.55,0,.55].filter(function(l){ return Math.abs(l-o.x)>.3; }).sort(function(a,b){ return Math.abs(a-me.x)-Math.abs(b-me.x); })[0]; inp.right=outra>me.x+.1; inp.left=outra<me.x-.1; } } });
-    var nS=Math.floor(me.z/200); CORRIDA._K.PITS().forEach(function(P,i){ if(!me.pitFeito[i]&&nS>P.ini-45&&nS<P.ini+6){ inp.right=true; inp.left=false; } }); /* a placa do box: a criança segue para a direita */
-    if(R.latas>0&&rnd()<.01){ inp.jump=true; J.actSolto=true; } else inp.jump=false; }
+    var me=R.me, zh=me.z+K.PLAYER_Z, alvo=[-.55,0,.55].reduce(function(a,b){ return Math.abs(b-me.x)<Math.abs(a-me.x)?b:a; }), frente=null;
+    R.rivais.forEach(function(o){ var dz=o.z-zh; if(dz>0&&dz<200*8&&Math.abs(o.x-me.x)<.5) frente=o; });
+    if(frente&&rnd()<(op.ultrapassa||.9)) alvo=frente.x>0?-.55:.55; if(st.t%5<.02) st.ruido=(rnd()-.5)*(op.ruido||.3); alvo+=st.ruido||0;
+    var tol=op.tol||.1; inp.right=alvo>me.x+tol; inp.left=alvo<me.x-tol;
+    var nO=Math.floor(zh/200)+2, O=CORRIDA._O(); O.pneus.concat(O.poças).forEach(function(o){ if(o.n>nO&&o.n<nO+12&&Math.abs(o.x-me.x)<.4){ if(o.reage===undefined) o.reage=rnd()<(op.reflexo||.75); if(o.reage){ var outra=[-.55,0,.55].filter(function(l){ return Math.abs(l-o.x)>.3; }).sort(function(a,b){ return Math.abs(a-me.x)-Math.abs(b-me.x); })[0]; inp.right=outra>me.x+.1; inp.left=outra<me.x-.1; } } });
+    var nS=Math.floor(zh/200); K.PITS().forEach(function(P,i){ if(!me.pitFeito[i]&&nS>P.ini-45&&nS<P.ini+6){ inp.right=true; inp.left=false; } });
+    /* acelerador: segura quase sempre; distração solta por um instante */
+    st.gasT=(st.gasT||0)-dt; if(st.gasT<=0){ st.gasOn=rnd()<(op.gas||.95); st.gasT=st.gasOn?1.5+rnd()*2:.3+rnd()*.5; } inp.jump=!!st.gasOn; inp.down=false;
+    if(R.latas>0&&me.turbo<=0&&rnd()<(op.turbo||.01)) CORRIDA.tecla(' '); }
   function decideQuiz(dt){ var q=J.quiz; if(!q) return; if(q.fase==='pergunta'){ st.quizT+=dt; if(st.quizT>1+rnd()*1.5){ st.quizT=0; I.responde(rnd()<(op.acerto||.7)); } }
     else if(q.fase==='resposta'){ st.quizT+=dt; if(st.quizT>1.5+rnd()){ st.quizT=0; QUIZ.segue(); } } } /* lê o comentário e toca no Next */
   function passo(n){

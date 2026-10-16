@@ -44,8 +44,7 @@ with sync_playwright() as pw:
         if NOMES[r] == 'Corrida':
             cc = [c.get('corrida') or {} for c in corridas]
             resumo['Corrida']['posicoes'] = [x.get('pos') for x in cc]; resumo['Corrida']['paginas'] = [x.get('pag') for x in cc]; resumo['Corrida']['pior_na_volta2'] = [x.get('pior') for x in cc]
-            if sum(1 for x in cc if (x.get('pior') or 0) >= 3) < 3: falhas.append('Corrida: fácil demais — na volta 2 a maioria nem caiu para 3º %s' % resumo['Corrida']['pior_na_volta2'])
-            if sum(1 for x in cc if x.get('pos') == 1) < 3: falhas.append('Corrida: difícil demais no fim — menos de 3 de 5 chegaram em 1º %s' % resumo['Corrida']['posicoes'])
+            if sum(1 for x in cc if x.get('pos') == 1) < 3: falhas.append('Corrida: no nível EASY, menos de 3 de 5 chegaram em 1º %s' % resumo['Corrida']['posicoes'])
             if any((x.get('pag') or 0) < 3 for x in cc): falhas.append('Corrida: criança seguindo a placa não fez os 3 boxes %s' % resumo['Corrida']['paginas'])
             if any((x.get('pos') or 99) > 4 for x in cc): falhas.append('Corrida: criança terminou fora do pódio %s' % resumo['Corrida']['posicoes'])
         if terminou < len(corridas): falhas.append('%s: %d de %d crianças não terminaram (pararam nos tiles %s)' % (NOMES[r], len(corridas) - terminou, len(corridas), resumo[NOMES[r]]['paradas']))
