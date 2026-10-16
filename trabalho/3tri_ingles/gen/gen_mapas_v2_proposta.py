@@ -220,6 +220,7 @@ def biscoito():
     m.p(21, 9, 'c')
     m.p(24, 9, 'i'); m.p(27, 3, 'v'); m.p(29, 3, 'v')    # gotas da TORNEIRA (desenhada no armario)
     m.p(38, 9, 'q')                                      # Chef de Tinta: joga pratos do escorredor (aviso antes)
+    m.p(43, 9, 'c')                                      # 16/10 (jogador): checkpoint antes do buraco da pia
     m.buraco(46, 2)                                      # buraco pequeno, longe do Chef (regra R2)
     m.fx(45, 47, 7, '='); m.p(46, 6, '&')                # guardanapo no porta-guardanapos do balcao
     m.p(50, 9, 'c')
