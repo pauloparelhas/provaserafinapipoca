@@ -99,8 +99,8 @@ function montaSprites(){
     if(t==='floresta') spr(n,x,h<.7?'pinheiro':'arvore'); else if(t==='pantano') spr(n,x,h<.5?'junco':'arvore_seca'); else if(t==='castelo') spr(n,x,h<.5?'tocha':'bandeira'); else spr(n,x,h<.45?'arvore':(h<.7?'arbusto':(h<.85?'flores':'fardo')));
     if(hash(n*7)<.35) spr(n,-x*1.1,t==='floresta'?'arvore':'arbusto'); }
   segs.forEach(function(s,n){
-    if(s.tag.arq&&n%14===0){ spr(n,-1.9,'arquibancada'); spr(n,1.9,'arquibancada'); }
-    if(!s.tag.arq&&!s.tag.pit&&!s.tag.ponte&&n>60&&n%95===50&&!PITS.some(function(P){ return n>P.ini-40&&n<P.fim+10; })) spr(n,hash(n*41)<.5?-2.0:2.0,'torcida_magica',{k:Math.floor(hash(n*43)*5)}); /* 16/10: a torcida é o povo dos reinos */
+    if(s.tag.arq&&n%14===0){ spr(n,-2.3,'arquibancada'); spr(n,2.3,'arquibancada'); }
+    if(!s.tag.arq&&!s.tag.pit&&!s.tag.ponte&&n>60&&n%95===50&&!PITS.some(function(P){ return n>P.ini-40&&n<P.fim+10; })) spr(n,hash(n*41)<.5?-2.4:2.4,'torcida_magica',{k:Math.floor(hash(n*43)*5)}); /* 16/10: a torcida é o povo dos reinos */
     if(s.tag.ponte&&n%6===0){ spr(n,-1.15,'corrimao'); spr(n,1.15,'corrimao'); }
     if(Math.abs(s.curva)>1.5&&n%10===0) spr(n,s.curva>0?-1.25:1.25,'placa_curva',{dir:s.curva>0?1:-1});
   });
@@ -242,7 +242,7 @@ function dirigeHeroi(me,dt,chegando){
   if(chegando){ inp=0; vm*=Math.max(0,1-R.t/1.8); gas=true; freio=false; }
   if(R.goT>0) R.dicaGas=0; else if(!gas&&me.v<VMAX*.3&&me.lane<0&&me.box<=0){ R.dicaGas=(R.dicaGas||0)+dt; if(R.dicaGas>2.5&&(!R.avisoGas||J.t-R.avisoGas>8)){ R.avisoGas=J.t; fala('Hold ▲ to go!','Segure ▲ para andar!'); } } else R.dicaGas=0;
   var k=me.v/VMAX, dx=dt*1.5*Math.max(.35,k);
-  /* chegando ao box: a direção assistida leva para a ENTRADA à direita; segurar ◀ segue na pista (o box é convite, não obrigação) */
+  /* chegando ao box: a equipe guia o carrinho para a ENTRADA à direita (16/10: o box é obrigatório a cada volta) */
   if(pz&&me.lane<0&&!me.pitFeito[pz.pi]){ var P=pz.P;
     /* 16/10 (Paulo): o box é OBRIGATÓRIO a cada volta — a equipe guia o carrinho para dentro */
     if(me.pula!==pz.pi){ vm=Math.min(vm,VMAX*.75); var alvoP=n<P.ini?.9:LANE_X; me.x+=(alvoP-me.x)*Math.min(1,dt*(n<P.ini?1.6:3)); if(inp>0) me.x+=dx*inp; if(n<P.ini) me.x=Math.min(me.x,1.0); }
@@ -266,7 +266,7 @@ function dirigeHeroi(me,dt,chegando){
   if(me.lane<0&&!(pz&&!me.pitFeito[pz.pi])){ if(Math.abs(me.x)>1.17) vm*=.55; else if(Math.abs(me.x)>1.0) vm*=.85; } /* zebra freia um pouco; grama, bastante (nunca para) */
   /* encostou atrás de um rival na mesma faixa: não bate nem machuca, só não atravessa — é preciso trocar de faixa */
   if(me.lane<0) R.rivais.forEach(function(r){ if(r.lane>=0||r.box>0) return; var dz=r.z-zh; if(dz>0&&dz<COMPR&&Math.abs(r.x-me.x)<.42) vm=Math.min(vm,Math.max(r.v*1.01,VMAX*.2)); });
-  me.x=cl(me.x,-2,2.2);
+  me.x=cl(me.x,-1.55,1.6); /* jogador: na grama o carrinho atravessava a torcida e as arquibancadas */
   if(!gas&&me.turbo<=0&&me.pad<=0) vm=0;
   if(me.v<vm) me.v=Math.min(vm,me.v+ACEL*dt*(me.turbo>0||me.pad>0?2.5:1));
   else me.v=Math.max(vm,me.v-(freio?ACEL*2.4:(gas?ACEL*2:ACEL*.45))*dt); /* soltou o ▲: vai perdendo; ▼: freia */
@@ -347,6 +347,8 @@ function abrePit(){
 function fimPit(completo){
   if(!R||R.fase!=='pit') return;
   var errs=R.pitRes.filter(function(x){ return !x; }).length; R.erroBox=errs;
+  R.fala=null; /* a fala de antes do box já é velha */
+  try{ if(window.UI&&UI.segurando){ J.in.jump=UI.segurando('ArrowUp')||UI.segurando('w')||UI.segurando('W'); J.in.left=UI.segurando('ArrowLeft'); J.in.right=UI.segurando('ArrowRight'); } }catch(e){} /* jogador: o ▲ seguro durante as perguntas continua acelerando */
   J.estado='corrida'; R.fase='saida'; R.t=0; R.me.box=PIT_T+errs*1.0; /* 16/10 (Paulo): errou = a equipe demora 1 s a mais por erro (o rival passa no box); acertou = turbo */
   SOM.musica(R.conde?'chefao':'pista'); J.in.left=J.in.right=J.in.act=false;
   if(window.UI){ UI.quizBotoes(false); UI.modoNivel(true); } botoes(true);
@@ -402,8 +404,8 @@ function desenha(c){
   if(R.fase==='apresenta'){ apresentacao(c,t); return; }
   var base=segDe(me.z), basePct=(me.z%SEG)/SEG, tema=TEMAS[segDe(me.z+PLAYER_Z).tema];
   /* céu e morros distantes (sobem e deslizam com a curva) */
-  var g=c.createLinearGradient(0,0,0,H*.55); g.addColorStop(0,tema.ceu[0]); g.addColorStop(1,tema.ceu[1]); c.fillStyle=g; c.fillRect(0,0,W,H);
-  R.ceuX=(R.ceuX||0)+base.curva*.002*(me.v/VMAX); fundo(c,t,tema);
+  var CM=temaMisto(me.z+PLAYER_Z), g=c.createLinearGradient(0,0,0,H*.55); g.addColorStop(0,CM.c0); g.addColorStop(1,CM.c1); c.fillStyle=g; c.fillRect(0,0,W,H);
+  R.ceuX=(R.ceuX||0)+base.curva*.002*(me.v/VMAX); fundo(c,t,temaMisto(me.z+PLAYER_Z));
   var playerY=lerp(base.p1.world.y,base.p2.world.y,basePct), camX=me.x*ROAD, camY=playerY+CAM_H, camZ=me.z;
   var maxy=H, x=0, dx=-(base.curva*basePct); VIS=[]; var TODOS=[];
   for(var n=0;n<DRAW;n++){
@@ -437,12 +439,20 @@ function desenha(c){
   if(R.goT>0) textoGrande(c,'GO!','#4ade80',1-R.goT/.9);
   if(R.fase==='podio') podio(c,t);
 }
+/* 16/10 (jogador): o céu e os morros trocavam de cor num quadro ao mudar de cenário; agora misturam
+   ao longo dos 60 segmentos antes da troca */
+function hx(h){ h=h.replace('#',''); return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)]; }
+function mix(a,b,k){ var A1=hx(a), B1=hx(b); return 'rgb('+[0,1,2].map(function(i){ return Math.round(A1[i]+(B1[i]-A1[i])*k); }).join(',')+')'; }
+function coresTema(T){ var cas=T===TEMAS.castelo; return {c0:T.ceu[0],c1:T.ceu[1],m1:cas?'#5b21b6':'#86b38a',m2:cas?'#4c1d95':'#5f9a5c',g:T.grama[0]}; }
+function temaMisto(z){ var n=Math.floor(z/SEG), a=segs[Math.min(segs.length-1,n)].tema, C0=coresTema(TEMAS[a]), d=-1;
+  for(var i=1;i<=60&&n+i<segs.length;i++){ if(segs[n+i].tema!==a){ d=i; break; } }
+  if(d<0) return C0; var C1=coresTema(TEMAS[segs[n+d].tema]), k=suave(1-d/60), o={}; for(var key in C0) o[key]=mix(C0[key],C1[key],k); return o; }
 function fundo(c,t,tema){
   var off=((R.ceuX||0)*400)%W, hz=H*.5;
   c.fillStyle='rgba(255,255,255,.85)'; for(var k=0;k<5;k++){ var nx=((k*230-off*.3)%(W+200)+W+200)%(W+200)-100, ny=60+(k%3)*30; A.circ(c,nx,ny,18); c.fill(); A.circ(c,nx+22,ny-8,22); c.fill(); A.circ(c,nx+46,ny,16); c.fill(); }
-  c.fillStyle=tema===TEMAS.castelo?'#5b21b6':'#86b38a'; c.beginPath(); c.moveTo(0,hz); for(var x=0;x<=W;x+=20) c.lineTo(x,hz-30-Math.sin((x+off)*.012)*28-Math.sin((x+off)*.031)*12); c.lineTo(W,hz); c.closePath(); c.fill();
-  c.fillStyle=tema===TEMAS.castelo?'#4c1d95':'#5f9a5c'; c.beginPath(); c.moveTo(0,hz); for(var x2=0;x2<=W;x2+=20) c.lineTo(x2,hz-12-Math.sin((x2+off*1.6)*.02)*14); c.lineTo(W,hz); c.closePath(); c.fill();
-  c.fillStyle=tema.grama[0]; c.fillRect(0,hz,W,H-hz);
+  c.fillStyle=tema.m1; c.beginPath(); c.moveTo(0,hz); for(var x=0;x<=W;x+=20) c.lineTo(x,hz-30-Math.sin((x+off)*.012)*28-Math.sin((x+off)*.031)*12); c.lineTo(W,hz); c.closePath(); c.fill();
+  c.fillStyle=tema.m2; c.beginPath(); c.moveTo(0,hz); for(var x2=0;x2<=W;x2+=20) c.lineTo(x2,hz-12-Math.sin((x2+off*1.6)*.02)*14); c.lineTo(W,hz); c.closePath(); c.fill();
+  c.fillStyle=tema.g; c.fillRect(0,hz,W,H-hz);
 }
 function segmento(c,s){
   var T=TEMAS[s.tema], p1=s.p1.screen, p2=s.p2.screen, cor=s.cor;
