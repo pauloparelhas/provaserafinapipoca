@@ -260,10 +260,11 @@ function atualiza(dt){
     if(!C.muda&&Math.floor((C.t-dt)/ritmo)!==Math.floor(C.t/ritmo)) novaGota();
   }
   else if(C.fase==='p2'){
-    if(!C.muda&&Math.floor((C.t-dt)/3.0)!==Math.floor(C.t/3.0)) novaGota();
-    if(C.escudo&&!C.muda&&Math.floor((C.t-dt)/3.6)!==Math.floor(C.t/3.6)&&C.ondas<5){ C.ondas++; C.estado='write'; C.et=0; SOM.fx('cano');
+    if(!C.muda&&Math.floor((C.t-dt)/3.8)!==Math.floor(C.t/3.8)) novaGota();
+    var vivasC=J.mundo.inimigos.filter(function(e){ return e.doConde&&!e.morto&&!e.achatado; }).length; /* 16/10 (jogador): no máximo 3 manchas vivas no chão */
+    if(C.escudo&&!C.muda&&Math.floor((C.t-dt)/3.6)!==Math.floor(C.t/3.6)&&vivasC<3){ C.ondas++; C.estado='write'; C.et=0; SOM.fx('cano');
       /* derrama do tinteiro da sacada: caem pela borda e saem andando */
-      var lx=(C.lado<0)?C.x+60:SACADA_X0, dl=(C.lado<0)?1:-1; if(C.lado<0&&C.ondas>3) { C.ondas=5; } /* do lado esquerdo, menos ondas */ for(var k=0;k<2;k++) C.gotas.push({x0:lx,y0:C.y-10,alvo:(C.lado<0)?(7+k*2)*T:lx+dl*(40+k*70),t:-k*.3,dur:(C.lado<0)?1.0:.7,x:lx,y:C.y,r:15,vira:true}); }
+      var lx=(C.lado<0)?C.x+60:SACADA_X0, dl=(C.lado<0)?1:-1; if(C.lado<0&&C.ondas>3) { C.ondas=5; } /* do lado esquerdo, menos ondas */ for(var k=0;k<Math.min(2,3-vivasC);k++) C.gotas.push({x0:lx,y0:C.y-10,alvo:(C.lado<0)?(7+k*2)*T:lx+dl*(40+k*70),t:-k*.3,dur:(C.lado<0)?1.0:.7,x:lx,y:C.y,r:15,vira:true}); }
     var vencidas=J.mundo.inimigos.filter(function(e){ return e.doConde&&(e.morto||e.achatado); }).length; C.convertidas=vencidas;
     if(vencidas>=4&&C.escudo){ J.mundo.inimigos.forEach(function(e){ if(e.doConde){ e.achatado=true; e.tAch=.3; } }); quebraEscudo(); }
   }
@@ -281,7 +282,7 @@ function atualiza(dt){
       if(vivo&&k>.55&&G.colideRet(R.x+4,R.y,R.w-8,R.h,d.x-tam,d.y-tam,tam*2,tam*2)){ lista.splice(g,1); G.machucado(); SOM.fx('risada'); C.estado='laugh'; C.et=0; continue; }
       if(k>=1){ lista.splice(g,1); J.shake=ehLetra?6:2;
         G.emite(8,function(){ return {x:d.alvo,y:chao-4,vx:(Math.random()-.5)*160,vy:-60-Math.random()*90,vida:.5,max:.5,tipo:'fogo',cor:ehLetra?'#7c3aed':'#312e81',r:3,g:1}; });
-        if(d.vira){ J.mundo.inimigos.push({tipo:'tinta',x:d.alvo,y:CHAO,x0:d.alvo,y0:CHAO,dir:-1,v:55+Math.random()*20,voa:false,doConde:true}); }
+        if(d.vira){ J.mundo.inimigos.push({tipo:'tinta',x:d.alvo,y:CHAO,x0:d.alvo,y0:CHAO,dir:-1,v:38+Math.random()*12,voa:false,doConde:true}); }
         if(ehLetra&&d.degrau){ var bx=d.col*T, by=chao-T; C.blocos.push({x:bx,y:by,w:T,h:T,ch:d.ch}); C.alt[d.col]++; SOM.fx('tijolo');
           if(u.x>bx-12&&u.x<bx+T+12&&u.y>by){ u.x=bx-20; G.machucado(); } }
       } }
