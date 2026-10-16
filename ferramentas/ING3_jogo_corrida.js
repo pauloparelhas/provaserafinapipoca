@@ -100,6 +100,7 @@ function montaSprites(){
     if(hash(n*7)<.35) spr(n,-x*1.1,t==='floresta'?'arvore':'arbusto'); }
   segs.forEach(function(s,n){
     if(s.tag.arq&&n%14===0){ spr(n,-1.9,'arquibancada'); spr(n,1.9,'arquibancada'); }
+    if(!s.tag.arq&&!s.tag.pit&&!s.tag.ponte&&n>60&&n%95===50&&!PITS.some(function(P){ return n>P.ini-40&&n<P.fim+10; })) spr(n,hash(n*41)<.5?-2.0:2.0,'torcida_magica',{k:Math.floor(hash(n*43)*5)}); /* 16/10: a torcida é o povo dos reinos */
     if(s.tag.ponte&&n%6===0){ spr(n,-1.15,'corrimao'); spr(n,1.15,'corrimao'); }
     if(Math.abs(s.curva)>1.5&&n%10===0) spr(n,s.curva>0?-1.25:1.25,'placa_curva',{dir:s.curva>0?1:-1});
   });
@@ -108,7 +109,7 @@ function montaSprites(){
   /* moedas em grupos, sempre na pista; setas de impulso; poças do pântano */
   segs.forEach(function(s,n){ if(n>FIM_SEG*.3&&n<FIM_SEG-60&&!s.tag.pit&&!s.tag.ponte&&n%80===40&&!PITS.some(function(P){ return n>P.ini-70&&n<P.fim+15; })){ var pl=Math.floor(hash(n*29)*3); OBJ.pneus.push({n:n,x:[-.55,0,.55][pl]}); if(hash(n*31)<.5) OBJ.pneus.push({n:n+5,x:[-.55,0,.55][(pl+1+Math.floor(hash(n*37)*2))%3]}); }
     if(s.tag.moedas&&n%90===45) OBJ.raios.push({n:n,x:[-.55,0,.55][Math.floor(hash(n*13)*3)],vivo:true}); /* um raio por vez, trocando de faixa: é preciso dirigir para pegar */
-    if(s.tag.rampa&&n%60===30) OBJ.rampas.push({n:n,x:[-.55,0,.55][Math.floor(hash(n*17)*3)]});
+    if((s.tag.rampa&&n%60===30)||(!s.tag.pit&&!s.tag.ponte&&!s.tag.largada&&n>40&&n<FIM_SEG-40&&n%110===70&&!PITS.some(function(P){ return n>P.ini-70&&n<P.fim+15; }))){ var rx=[-.55,0,.55][Math.floor(hash(n*17)*3)]; OBJ.rampas.push({n:n,x:rx}); OBJ.raios.push({n:n+6,x:rx,vivo:true,alto:true}); } /* 16/10 (Paulo: "a rampa ficou boa, quero mais"): rampa com um raio no ar */
     if(s.tag.pad&&n%80===20) OBJ.pads.push({n:n,x:[-.5,.5][Math.floor(hash(n*2)*2)]});
     if(s.tag.tinta&&n%30===5) OBJ.poças.push({n:n,x:[-.55,0,.55][Math.floor(hash(n*5)*3)]});
     if(s.tag.lama&&n%26===13) OBJ.poças.push({n:n,x:[-.6,.6][Math.floor(hash(n*9)*2)],lama:true}); });
@@ -140,7 +141,7 @@ var FALAS={
   volta3:['LAST LAP! Use your turbos!','ÚLTIMA VOLTA! Use os turbos!'],
   bate:['Watch out for the tires!','Cuidado com os pneus!'],
   rampa:['A ramp! Jump!','Uma rampa! Pule!'],
-  pit:['Pit lane on the right: questions = TURBOS!','A entrada do box é à direita: perguntas = TURBOS!'],
+  pit:['PIT STOP! Every lap, every racer stops. Right answer = TURBO!','PIT STOP! A cada volta, todos param. Resposta certa = TURBO!'],
   ponte:['The troll bridge!','A ponte do troll!'],
   lama:['Witch swamp! Watch the ink!','O pântano da bruxa! Cuidado com a tinta!'],
   conde:['Count Scribble! Pass him!','O Conde Rabisco! Passe por ele!'],
@@ -243,11 +244,11 @@ function dirigeHeroi(me,dt,chegando){
   var k=me.v/VMAX, dx=dt*1.5*Math.max(.35,k);
   /* chegando ao box: a direção assistida leva para a ENTRADA à direita; segurar ◀ segue na pista (o box é convite, não obrigação) */
   if(pz&&me.lane<0&&!me.pitFeito[pz.pi]){ var P=pz.P;
-    if(inp<0&&n>=P.ini-10) me.pula=pz.pi; /* só passa direto quem segura ◀ bem na entrada */
+    /* 16/10 (Paulo): o box é OBRIGATÓRIO a cada volta — a equipe guia o carrinho para dentro */
     if(me.pula!==pz.pi){ vm=Math.min(vm,VMAX*.75); var alvoP=n<P.ini?.9:LANE_X; me.x+=(alvoP-me.x)*Math.min(1,dt*(n<P.ini?1.6:3)); if(inp>0) me.x+=dx*inp; if(n<P.ini) me.x=Math.min(me.x,1.0); }
     else { me.x+=dx*inp; }
     if(me.pula!==pz.pi){ gas=true; freio=false; } /* a equipe do box guia o carrinho até a garagem */
-    if(n>=P.ini+ENTRA-1){ if(me.pula!==pz.pi&&me.x>.85){ me.lane=pz.pi; SOM.fx('desvio'); } else { me.pitFeito[pz.pi]=true; R.rivais.forEach(function(r){ if(r.lane<0) r.pitFeito[pz.pi]=true; }); /* passou direto: quem ainda não entrou também não para (ninguém ganha tempo pulando o box) */ fala('You drove past the pit. Next time, keep right!','Você passou o box. Na próxima, fique à direita!'); } }
+    if(n>=P.ini+ENTRA-1){ if(me.pula!==pz.pi){ me.x=Math.max(me.x,.9); me.lane=pz.pi; SOM.fx('desvio'); } else { me.pitFeito[pz.pi]=true; R.rivais.forEach(function(r){ if(r.lane<0) r.pitFeito[pz.pi]=true; }); /* passou direto: quem ainda não entrou também não para (ninguém ganha tempo pulando o box) */ fala('You drove past the pit. Next time, keep right!','Você passou o box. Na próxima, fique à direita!'); } }
   }
   else if(me.lane>=0){ gas=true; freio=false; var PL=PITS[me.lane], zb=boxZ(me,PL), falta=zb-me.z; me.x+=(LANE_X-me.x)*Math.min(1,dt*4);
     if(!me.pitFeito[me.lane]){ vm=Math.min(vm,falta<0?0:limitePit(falta)); if(falta<=SEG*.5){ me.z=zb; me.v=0; me.pitFeito[me.lane]=true; R.fase='box'; R.t=0; R.pitAtual=me.lane; SOM.fx('checkpoint'); fala('Pit stop! Answer to win TURBOS!','Pit stop! Responda para ganhar TURBOS!'); return; } }
@@ -304,7 +305,7 @@ function pilotoAuto(me){ var alvo=0, best=null; R.rivais.forEach(function(o){ va
 function colisoes(dt){ var me=R.me; if(me.box>0||me.lane>=0) return; var zh=me.z+PLAYER_Z;
   R.rivais.forEach(function(r){ if(r.box>0||r.lane>=0) return; var dz=r.z-zh; if(Math.abs(dz)<COMPR*.8&&Math.abs(r.x-me.x)<.45){ var lado=r.x>=me.x?1:-1; r.x+=lado*dt*.8; me.x-=lado*dt*.4; if(dz<-SEG*.2) r.alvoX=cl(r.x+lado*.3,-.85,.85); } }); } /* lado a lado: cada um para o seu lado, sem dano */
 function coletas(dt){ var me=R.me, n=Math.floor((me.z+PLAYER_Z)/SEG);
-  OBJ.raios.forEach(function(m){ if(m.vivo&&Math.abs(m.n-n)<1&&Math.abs(m.x-me.x)<.36){ m.vivo=false; R.carga++; G.pontua(10); SOM.fx('faisca'); falaUma('coin');
+  OBJ.raios.forEach(function(m){ if(m.vivo&&Math.abs(m.n-n)<1&&Math.abs(m.x-me.x)<(m.alto?.45:.36)&&(!m.alto||me.salto>0)){ m.vivo=false; R.carga++; G.pontua(10); SOM.fx('faisca'); falaUma('coin');
     if(R.carga>=3){ R.carga=0; R.latas=Math.min(9,R.latas+1); pintaTurbo(); SOM.fx('moedaG'); R.anunc={txt:'+1 TURBO',pt:'+1 turbo',cor:'#fde047',t:0}; } } });
   OBJ.rampas.forEach(function(rp){ if(Math.abs(rp.n-n)<1&&Math.abs(rp.x-me.x)<.45&&me.salto<=0&&me.lane<0){ me.salto=.9; me.pad=Math.max(me.pad,1.1); SOM.fx('rampa'); SOM.fx('torcida'); falaUma('rampa'); } });
   OBJ.pads.forEach(function(p){ if(Math.abs(p.n-n)<1&&Math.abs(p.x-me.x)<.4&&me.pad<=0){ me.pad=1; SOM.fx('turbo'); texto(me,'BOOST!'); } });
@@ -345,7 +346,8 @@ function abrePit(){
 }
 function fimPit(completo){
   if(!R||R.fase!=='pit') return;
-  J.estado='corrida'; R.fase='saida'; R.t=0; R.me.box=PIT_T; /* o mesmo tempo de box que os rivais */
+  var errs=R.pitRes.filter(function(x){ return !x; }).length; R.erroBox=errs;
+  J.estado='corrida'; R.fase='saida'; R.t=0; R.me.box=PIT_T+errs*1.0; /* 16/10 (Paulo): errou = a equipe demora 1 s a mais por erro (o rival passa no box); acertou = turbo */
   SOM.musica(R.conde?'chefao':'pista'); J.in.left=J.in.right=J.in.act=false;
   if(window.UI){ UI.quizBotoes(false); UI.modoNivel(true); } botoes(true);
   if(completo){ R.paginas++; var m=J.nivel.moradores[R.paginas-1]; if(m) m.feito=true; G.pontua(150); SOM.fx('vitoria'); G.toast('You found a lost page! ('+R.paginas+' of 3)',2600,'Você achou uma página perdida! ('+R.paginas+' de 3)'); }
@@ -403,20 +405,26 @@ function desenha(c){
   var g=c.createLinearGradient(0,0,0,H*.55); g.addColorStop(0,tema.ceu[0]); g.addColorStop(1,tema.ceu[1]); c.fillStyle=g; c.fillRect(0,0,W,H);
   R.ceuX=(R.ceuX||0)+base.curva*.002*(me.v/VMAX); fundo(c,t,tema);
   var playerY=lerp(base.p1.world.y,base.p2.world.y,basePct), camX=me.x*ROAD, camY=playerY+CAM_H, camZ=me.z;
-  var maxy=H, x=0, dx=-(base.curva*basePct); VIS=[];
+  var maxy=H, x=0, dx=-(base.curva*basePct); VIS=[]; var TODOS=[];
   for(var n=0;n<DRAW;n++){
     var s=segs[(base.i+n)%segs.length]; if(base.i+n>=segs.length) break;
     s.p1.world.x=0; s.p2.world.x=0;
     projeta(s.p1,camX-x,camY,camZ); projeta(s.p2,camX-x-dx,camY,camZ); x+=dx; dx+=s.curva;
-    s.clip=maxy;
+    s.clip=maxy; s.dist=n; if(s.p1.camera.z>CAM_D) TODOS.push(s);
     if(s.p1.camera.z<=CAM_D||s.p2.screen.y>=s.p1.screen.y||s.p2.screen.y>=maxy) continue;
     segmento(c,s);
     maxy=s.p1.screen.y; VIS.push(s);
   }
   /* de trás para a frente: enfeites, objetos do chão já foram; carrinhos */
-  for(var k=VIS.length-1;k>=0;k--){ var sg=VIS[k];
-    sg.sprites.forEach(function(sp){ var sc=sg.p1.screen.scale, sx=sg.p1.screen.x+sc*sp.x*ROAD*W/2, sy=sg.p1.screen.y; desenhaSprite(c,sp,sx,sy,sc*W/2,t,sg.clip); });
-    carrosNoSeg(c,sg,t);
+  /* 16/10 (Paulo: "elementos no horizonte piscando, tipo castelo"): antes só se desenhava o enfeite cujo chão
+     estava à vista — atrás de um morro ele sumia e voltava de repente. Agora todo enfeite da frente é desenhado
+     RECORTADO pela linha do morro (só a parte acima aparece) e esmaece suave na distância (nada "surge"). */
+  for(var k=TODOS.length-1;k>=0;k--){ var sg=TODOS[k], temC=R.rivais.some(function(r){ return Math.floor(r.z/SEG)===sg.i; })||(R.conde&&Math.floor(R.conde.z/SEG)===sg.i)||OBJ.raios.some(function(m){ return m.vivo&&m.n===sg.i; });
+    if(!sg.sprites.length&&!temC) continue;
+    var fade=cl((DRAW*.82-sg.dist)/(DRAW*.3),0,1); if(fade<=0) continue;
+    c.save(); c.beginPath(); c.rect(0,0,W,sg.clip); c.clip(); c.globalAlpha=fade;
+    sg.sprites.forEach(function(sp){ var sc=sg.p1.screen.scale, sx=sg.p1.screen.x+sc*sp.x*ROAD*W/2, sy=sg.p1.screen.y; desenhaSprite(c,sp,sx,sy,sc*W/2,t,H*2); });
+    carrosNoSeg(c,sg,t); c.restore();
   }
   /* o herói, grande, embaixo e no centro */
   var inc=(me.inc||0)+(me.wob>0?Math.sin((1-me.wob/.8)*PI*2)*.5:0), ar=me.salto>0?Math.sin((1-me.salto/.9)*PI)*70:0;
@@ -463,14 +471,14 @@ function segmento(c,s){
 function carrosNoSeg(c,sg,t){
   var lst=R.rivais.slice(); if(R.conde) lst.push(R.conde);
   lst.forEach(function(r){ var n=Math.floor(r.z/SEG); if(n!==sg.i) return; var pct=(r.z%SEG)/SEG, sc=lerp(sg.p1.screen.scale,sg.p2.screen.scale,pct), sx=lerp(sg.p1.screen.x,sg.p2.screen.x,pct)+sc*r.x*ROAD*W/2, sy=lerp(sg.p1.screen.y,sg.p2.screen.y,pct);
-    if(sy>sg.clip+2) return; var k=sc*W/2*CARRO_W/120; if(k<.05) return;
+    var k=sc*W/2*CARRO_W/120; if(k<.05) return;
     var arR=r.salto>0?Math.sin((1-r.salto/.8)*PI)*k*70:0; if(arR){ c.fillStyle='rgba(0,0,0,.25)'; A.el(c,sx,sy,k*60,k*12); c.fill(); }
     c.save(); c.translate(sx,sy-arR); c.scale(k,k); CR.desenhaTras(c,r.id,{cor:r.cor,t:t+r.z*.001,inc:cl((r.alvoX-r.x)*2,-1,1),giro:r.giro>0?1-r.giro/1.2:0,turbo:false}); c.restore();
     r.scr={x:sx,y:sy-k*110,k:k};
     if(k>.25&&k<1.3&&R.fase!=='largada'&&!(Math.abs(sx-W/2)<120&&sy>H-200)){ var nm=r.nome||'Count Scribble'; c.font=F(900,Math.round(11+k*4)); var tw=c.measureText(nm).width+12; c.fillStyle=r.id==='count'?'rgba(76,29,149,.9)':'rgba(13,11,30,.7)'; rr(c,sx-tw/2,sy-k*120-22,tw,18,9); c.fill(); c.fillStyle=r.id==='count'?'#fde68a':'#fff'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(nm,sx,sy-k*120-13); }
   });
   /* raios deste segmento (3 = 1 turbo) */
-  OBJ.raios.forEach(function(m){ if(!m.vivo||m.n!==sg.i) return; var sc=sg.p1.screen.scale, sx=sg.p1.screen.x+sc*m.x*ROAD*W/2, sy=sg.p1.screen.y, r=Math.max(3,sc*W/2*110), yy=sy-r*1.6+Math.sin(t*2.5+m.n)*r*.12;
+  OBJ.raios.forEach(function(m){ if(!m.vivo||m.n!==sg.i) return; var sc=sg.p1.screen.scale, sx=sg.p1.screen.x+sc*m.x*ROAD*W/2, sy=sg.p1.screen.y, r=Math.max(3,sc*W/2*110), yy=sy-r*(m.alto?4.2:1.6)+Math.sin(t*2.5+m.n)*r*.12;
     c.save(); c.translate(sx,yy); c.scale(r/12,r/12); c.fillStyle='rgba(253,224,71,.35)'; A.circ(c,0,0,15); c.fill(); c.fillStyle='#fde047'; c.strokeStyle='#92400e'; c.lineWidth=1.6; c.beginPath(); c.moveTo(2,-12); c.lineTo(-8,2); c.lineTo(-1,2); c.lineTo(-3,12); c.lineTo(8,-3); c.lineTo(1,-3); c.closePath(); c.fill(); c.stroke(); c.restore(); });
   /* textos dos carros (só BOOST do herói) */
   R.pt.forEach(function(p){ if(!p.c||p.c.eu||!p.c.scr||Math.floor(p.c.z/SEG)!==sg.i) return; var a=p.vida/p.max; c.save(); c.globalAlpha=Math.min(1,a*2); c.font=F(900,20); c.textAlign='center'; c.lineWidth=5; c.strokeStyle='rgba(13,11,30,.8)'; c.strokeText(p.txt,p.c.scr.x,p.c.scr.y-20-(1-a)*20); c.fillStyle='#fde68a'; c.fillText(p.txt,p.c.scr.x,p.c.scr.y-20-(1-a)*20); c.restore(); });
@@ -494,6 +502,12 @@ function desenhaSprite(c,sp,x,y,k,t,clip){
     case 'placa_pit': c.scale(s*800/100,s*800/100); c.fillStyle='#57534e'; c.fillRect(-4,-50,8,50); c.fillStyle='#fde047'; rr(c,-46,-92,92,44,8); c.fill(); c.strokeStyle='#1c1917'; c.lineWidth=3; rr(c,-46,-92,92,44,8); c.stroke(); c.fillStyle='#1c1917'; c.font=F(900,22); c.textAlign='center'; c.textBaseline='middle'; c.fillText('PIT ▶',0,-70); break;
     case 'garagem': c.scale(s*900/100,s*900/100); c.fillStyle='#57534e'; c.fillRect(-50,-80,100,80); c.fillStyle=['#3b82f6','#16a34a','#f59e0b','#8b5cf6','#0ea5e9','#ef4444','#14b8a6','#a855f7','#f97316','#eab308'][sp.k]; c.fillRect(-44,-74,88,74); c.fillStyle='rgba(255,255,255,.25)'; for(var g2=0;g2<5;g2++) c.fillRect(-44,-68+g2*14,88,6); c.fillStyle='#fff'; c.font=F(900,20); c.textAlign='center'; c.textBaseline='middle'; c.fillText(sp.k===9?'YOU':String(sp.k+1),0,-40); break;
     case 'caixa_box': break;
+    case 'torcida_magica': { c.scale(s*2000/300,s*2000/300);
+      c.fillStyle='#7c3aed'; c.fillRect(-150,-78,300,78); c.fillStyle='#a78bfa'; c.fillRect(-150,-82,300,8);
+      var GR=[['godmother','mouse','owl','bard'],['crier','godmother','octopus','mouse'],['owl','bard','mouse','coach'],['mouse','godmother','crier','owl'],['bard','octopus','godmother','mouse']][sp.k||0];
+      if(A.morador&&k*2000/300>.18) GR.forEach(function(tp,i){ var bob=Math.abs(Math.sin(t*3+i*1.3))*6; c.save(); c.translate(-108+i*72,-82-bob); c.scale(.62,.62); A.morador(c,tp,0,0,t+i,i%2?-1:1,false); c.restore(); });
+      for(var q3=0;q3<6;q3++){ var a3=t*1.5+q3; if(A.estrela) A.estrela(c,-130+q3*52,-196+Math.sin(a3)*8,5,['#fde047','#f472b6','#93c5fd'][q3%3],a3); }
+      c.fillStyle='#fde047'; rr(c,-92,-40,184,30,10); c.fill(); c.fillStyle='#4c1d95'; c.font=F(900,20); c.textAlign='center'; c.textBaseline='middle'; c.fillText('GO, HERO!',0,-25); break; }
     case 'castelo': c.scale(s*4000/300,s*4000/300); c.fillStyle='#6d28d9'; c.fillRect(-120,-160,240,160); for(var k3=0;k3<8;k3++) c.fillRect(-120+k3*32,-176,18,18); c.fillStyle='#5b21b6'; c.fillRect(-150,-230,60,230); c.fillRect(90,-230,60,230); c.fillStyle='#a78bfa'; c.beginPath(); c.moveTo(-158,-230); c.lineTo(-120,-300); c.lineTo(-82,-230); c.fill(); c.beginPath(); c.moveTo(82,-230); c.lineTo(120,-300); c.lineTo(158,-230); c.fill(); c.fillStyle='#1e1b4b'; rr(c,-30,-90,60,90,30); c.fill(); break;
     case 'portico': case 'portico_largada': c.scale(s*ROAD*2.6/300,s*ROAD*2.6/300); c.fillStyle='#1f2937'; c.fillRect(-150,-160,12,160); c.fillRect(138,-160,12,160); c.fillStyle=sp.tipo==='portico'?'#111827':'#dc2626'; c.fillRect(-156,-190,312,34); if(sp.tipo==='portico'){ for(var q2=0;q2<24;q2++){ c.fillStyle=q2%2?'#111827':'#f8fafc'; c.fillRect(-156+q2*13,-190,13,17); c.fillStyle=q2%2?'#f8fafc':'#111827'; c.fillRect(-156+q2*13,-173,13,17); } } else { c.fillStyle='#fff'; c.font=F(900,22); c.textAlign='center'; c.textBaseline='middle'; c.fillText('START',0,-173); } break;
   }
@@ -525,9 +539,11 @@ function hud(c,t){
   var ey=lerp(by0,by1,cl((me.z+PLAYER_Z)/tot,0,1)); c.fillStyle=corHeroi(); A.circ(c,bx,ey,7); c.fill(); c.strokeStyle='#fff'; c.lineWidth=2; A.circ(c,bx,ey,7); c.stroke();
   for(var q=0;q<4;q++) for(var w=0;w<2;w++){ c.fillStyle=(q+w)%2?'#111':'#fff'; c.fillRect(bx-6+w*6,by1-14+q*3,6,3); }
   /* box: contagem da equipe */
-  if(me.box>0){ c.save(); c.fillStyle='rgba(13,11,30,.75)'; rr(c,W/2-120,H-250,240,46,23); c.fill(); c.fillStyle='#fde047'; c.font=F(900,20); c.textAlign='center'; c.textBaseline='middle'; c.fillText(J.tr?'Equipe trabalhando…':'Crew working…',W/2,H-227); c.restore(); }
+  if(me.box>0){ c.save(); c.fillStyle='rgba(13,11,30,.75)'; rr(c,W/2-120,H-250,240,46,23); c.fill(); c.fillStyle='#fde047'; c.font=F(900,20); c.textAlign='center'; c.textBaseline='middle'; c.fillText(J.tr?'Equipe trabalhando…':'Crew working…',W/2,H-227);
+    if(R.erroBox){ c.fillStyle='rgba(127,29,29,.85)'; rr(c,W/2-150,H-198,300,30,15); c.fill(); c.fillStyle='#fecaca'; c.font=F(900,15); c.fillText((J.tr?'Errou ':'Wrong answers: ')+R.erroBox+(J.tr?' → +'+R.erroBox+' s no box':' → +'+R.erroBox+' s in the pit'),W/2,H-183); }
+    c.restore(); }
   var pzp=null; PITS.forEach(function(P,i){ var n=Math.floor((me.z+PLAYER_Z)/SEG); if(!me.pitFeito[i]&&me.lane<0&&n>P.ini-90&&n<P.ini+ENTRA) pzp=P; });
-  if(pzp&&R.fase==='corre'){ c.save(); c.fillStyle='#fde047'; rr(c,W/2-190,62,380,38,19); c.fill(); c.fillStyle='#1c1917'; c.font=F(900,18); c.textAlign='center'; c.textBaseline='middle'; c.fillText(J.tr?'BOX à direita ➜ perguntas = turbos':'PIT on the right ➜ questions = turbos',W/2,81); c.restore(); }
+  if(pzp&&R.fase==='corre'){ c.save(); c.fillStyle='#fde047'; rr(c,W/2-190,62,380,38,19); c.fill(); c.fillStyle='#1c1917'; c.font=F(900,18); c.textAlign='center'; c.textBaseline='middle'; c.fillText(J.tr?'PIT STOP à direita ➜ certa = turbo':'PIT STOP ➜ right answer = TURBO',W/2,81); c.restore(); }
   /* locutor (frase curta) */
   var f=R.fala; if(f&&f.t<3.2&&R.fase!=='podio'&&R.fase!=='pit'&&!pzp){ var al=Math.min(1,f.t*6,(3.2-f.t)*3);
     c.save(); c.globalAlpha=al; c.font=F(900,18); var tw=Math.min(560,c.measureText(f.en).width)+34, bx2=W/2-tw/2, by2=64, hh=J.tr&&f.pt?54:36;
