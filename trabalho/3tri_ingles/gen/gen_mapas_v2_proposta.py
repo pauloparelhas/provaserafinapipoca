@@ -224,7 +224,7 @@ def biscoito():
     m.buraco(46, 2)                                      # buraco pequeno, longe do Chef (regra R2)
     m.fx(45, 47, 7, '='); m.p(46, 6, '&')                # guardanapo no porta-guardanapos do balcao
     m.p(50, 9, 'c')
-    m.buraco(53, 2); m.buraco(58, 2)                     # vao da pia em duas partes com ilha LARGA (55-57); o guardanapo ajuda
+    m.buraco(53, 2); m.buraco(59, 1)                     # vao da pia em duas partes com ilha LARGA (55-58; 16/10 jogador: era 55-57 e exigia pulo exato)
     m.p(60, 9, 'D')                                      # D2: forno
     m.p(63, 9, '&')                                      # espelho na comoda
     m.p(66, 9, '&')                                      # tesoura na caneca
