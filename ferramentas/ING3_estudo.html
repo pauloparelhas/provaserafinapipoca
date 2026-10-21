@@ -717,7 +717,6 @@ function renderCapa(){
   titulo.textContent='English · Study';
   var TRc=function(t){ return '<span class="tr">'+t+'</span>'; }; /* 18/10: a bandeira traduz também os cartões da capa */
   tela.innerHTML='<div class="capa"><h1>English · 3rd term'+TRc('Inglês · 3º trimestre')+'</h1>'+
-    '<div class="aviso">Under construction — content not yet reviewed<span class="tr">Em construção — conteúdo ainda não validado</span></div>'+
     '<div class="licoes">'+LICOES.map(function(l,i){
       return '<button class="lic'+(f[l.k]?' ok':'')+'" data-i="'+i+'" style="--lc:'+corDe(l)+'">'+
         '<span class="num">'+(i+1)+'</span><span class="feito" aria-label="feita">'+CHECK+'</span>'+
