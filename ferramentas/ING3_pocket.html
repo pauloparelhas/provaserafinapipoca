@@ -164,8 +164,8 @@ b{font-weight:850}
 @media print{
   body{background:none}
   .tela{display:none}
-  .palco{padding:0}
-  .escala{transform:none!important;height:auto!important}
+  .palco{padding:0;overflow:visible}
+  .escala{transform:none!important;height:auto!important;margin-left:0!important}
   .page{box-shadow:none;margin:0}
 }
 </style>
@@ -256,7 +256,7 @@ b{font-weight:850}
       <div class="duas">
         <div class="col real">
           <h3>&#9989; REAL</h3>
-          <p>It <b>really exists</b> or <b>can really happen</b> in real life. We can <b>see</b> it, <b>touch</b> it. It is <b>TRUE</b>.<span class="pt">Existe ou pode acontecer de verdade. Dá para ver e tocar. É verdade.</span></p>
+          <p>It <b>really exists</b> or <b>can really happen</b> in real life. We can <b>see</b> it or <b>touch</b> it, <b>or</b> it is <b>TRUE</b>.<span class="pt">Existe ou pode acontecer de verdade. Dá para ver ou tocar, ou é verdade.</span></p>
           <div class="chips"><span>&#128054; a dog</span><span>&#127795; a tree</span><span>&#127979; the school</span><span>&#9728;&#65039; the sun</span><span>&#9917; Richarlison</span><span class="ex">&#128010; an alligator in a river</span><span class="ex">&#128214; The Diary of Anne Frank — a TRUE story</span></div>
         </div>
         <div class="col mb">
@@ -365,7 +365,7 @@ b{font-weight:850}
 /* a roda da circle story: o biscoito no alto é o começo E o fim (o 14º evento volta a ele) */
 (function(){
   var E=[['cookie','\u{1F36A}'],['milk','\u{1F95B}'],['straw','\u{1F964}'],['napkin','\u{1F9FB}'],['mirror','\u{1FA9E}'],['scissors','✂️'],
-         ['broom','\u{1F9F9}'],['nap','\u{1F634}'],['story','\u{1F4D6}'],['drawing','\u{1F58D}️'],['pen','\u{1F58A}️'],['tape','\u{1F4CE}'],['milk','\u{1F95B}']];
+         ['broom','\u{1F9F9}'],['nap','\u{1F634}'],['story','\u{1F4D6}'],['drawing','\u{1F58D}️'],['pen','\u{1F58A}️'],['tape/fridge','\u{1F4CE}'],['milk','\u{1F95B}']];
   var s='', cx=100, cy=100, R=64, n=E.length;
   s+='<defs><marker id="pta" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10z" fill="#b45309"/></marker></defs>';
   s+='<circle cx="100" cy="100" r="'+R+'" fill="none" stroke="#fcd34d" stroke-width="5"/>';

@@ -202,7 +202,8 @@ body.papel .reva{color:#111}
    do banco único ING3_banco.js (trabalho/3tri_ingles/gen/gen_simulado.js).
    Inglês na frente, português atrás da bandeira (body.show-tr).
    Rodada de 12 com as cotas por tema (fairy 3, real 2, circle 2, cause 2,
-   poem 3); errou, entra uma questão-irmã do mesmo tema, fora da nota.
+   poem 3). A rodada acaba na última questão; as questões-irmãs (mesmo tema)
+   são oferecidas no resultado, em "Practise with similar questions".
    ============================================================ */
 var h=React.createElement, OP=window.ING3S, OPQ=window.OPQ, LP3E={zeraVistos:function(){},sorteia:function(){return [];}};
 var FAM={}; OP.FAMILIAS.forEach(function(f){ FAM[f.k]=f; });
@@ -350,11 +351,11 @@ function App(){
           : pct>=50 ? T2('Good work! Practise the mistakes and try again.','Bom trabalho! Treine os erros e tente de novo.')
           : T2('Every mistake here is one you will not make on the test.','Cada erro aqui é um erro a menos na prova.');
   var lista = ver==='erros' ? erradas : fila;
-  var parecidas = function(){
+  var parecidas = (function(){
     var usados=fila.map(function(i){ return i.id; }), q=[];
     erradas.forEach(function(i){ var ir=irma(i.eixo, usados); if(ir){ q.push(ir); usados.push(ir.id); } });
     return q;
-  };
+  })();
   return h('div',{className:'resultado'},
     h('h1',{className:'tt',style:{textAlign:'center'}}, modo==='refazer'?'Mistakes, one more time':modo==='parecidas'?'Similar questions':'My score', h('span',{className:'tr'},modo==='refazer'?'Os erros, de novo':modo==='parecidas'?'Questões parecidas':'Meu resultado')),
     h('div',{className:'anel',style:{background:'conic-gradient(var(--ok) '+pct*3.6+'deg, var(--line) 0)'},'aria-label':pct+'% correct'},
@@ -369,7 +370,7 @@ function App(){
     h('div',{className:'grade',style:{marginTop:'12px'}},
       erradas.length>0 && h('button',{className:'avancar',onClick:function(){ joga(OPQ.embaralha(erradas.slice()),'refazer'); }},
         'Redo my mistakes ('+erradas.length+')', h('span',{className:'tr'},'Refazer os erros')),
-      erradas.length>0 && parecidas().length>0 && h('button',{className:'avancar calmo',onClick:function(){ joga(parecidas(),'parecidas'); }},
+      erradas.length>0 && parecidas.length>0 && h('button',{className:'avancar calmo',onClick:function(){ joga(parecidas,'parecidas'); }},
         'Practise with similar questions', h('span',{className:'tr'},'Treinar com questões parecidas')),
       h('button',{className:'avancar'+(erradas.length?' calmo':''),onClick:function(){ comeca(tam); }},
         'Next test ('+tam+' new questions)', h('span',{className:'tr'},'Próximo simulado ('+tam+' questões novas)')),
