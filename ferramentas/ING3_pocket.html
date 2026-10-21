@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='bf8b02d0906';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4c1d95">
+<title>English Pocket — 3rd term</title>
+<style>
+/* ===========================================================================
+   ING3_pocket — a prova inteira numa folha A4 (paisagem), para imprimir colorida.
+   Lógica herdada do pocket do Arrais (tudo numa folha, medida em mm, nada de
+   rolagem), mas o desenho é de criança: cada tópico tem a sua cor (a mesma do
+   simulado), um desenho que ensina (castelo com 4 gavetas, roda da circle story,
+   seta If → Then, poema com etiquetas) e o português pequeno embaixo.
+   Fonte única: trabalho/3tri_ingles/_roteiro.md. Nada aqui vem de fora dele.
+   O poema-modelo é o "My Dog" (Lily Bell) do Study Hub; o "animals" do Brian
+   Bilston NÃO é reproduzido (regra do roteiro) — só os números 31 e 8.
+   =========================================================================== */
+:root{
+  --ink:#1e1b2e; --soft:#4b4763; --pt:#6b6580; --paper:#fffdf7; --line:#e7e1d3;
+  --fa:#be185d; --fa2:#fdf2f8; --fa3:#fbcfe8;   /* fairy tales  */
+  --re:#0369a1; --re2:#f0f9ff; --re3:#bae6fd;   /* real / make-believe */
+  --ci:#b45309; --ci2:#fffbeb; --ci3:#fde68a;   /* circle story */
+  --ca:#047857; --ca2:#ecfdf5; --ca3:#a7f3d0;   /* cause and effect */
+  --po:#6d28d9; --po2:#f5f3ff; --po3:#ddd6fe;   /* poem */
+  --tk:#c2410c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#5b5675;font-family:"Segoe UI","Trebuchet MS",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink)}
+@page{size:A4 landscape;margin:0}
+
+/* ---------- barra de tela (some na impressão) ---------- */
+.tela{position:sticky;top:0;z-index:5;display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;
+  padding:8px 16px;background:#2e1065;color:#fff}
+.tela button,.tela a{min-height:44px;min-width:44px;padding:0 14px;border-radius:12px;border:2px solid #a78bfa;background:#4c1d95;
+  color:#fff;font:800 15px/1 inherit;font-family:inherit;display:inline-flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer}
+.tela button.on{background:#7c3aed}
+.tela .dica{font-size:13px;font-weight:700;opacity:.85;flex-basis:100%;text-align:center}
+.palco{padding:14px 0 30px;overflow:hidden}
+.escala{transform-origin:top left;width:297mm}
+.sem-pt .pt{display:none!important}
+
+/* ---------- a folha ---------- */
+.page{width:297mm;height:210mm;background:var(--paper);padding:4.5mm 5mm 4mm;display:flex;flex-direction:column;gap:2mm;
+  overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.4);font-size:7.35pt;line-height:1.2}
+.pt{display:block;color:var(--pt);font-style:italic;font-weight:600;font-size:.86em;line-height:1.15}
+.pt.in{display:inline}
+b{font-weight:850}
+
+/* topo */
+.topo{display:flex;align-items:center;gap:3mm;padding:1.1mm 3mm;border-radius:3mm;
+  background:linear-gradient(100deg,#4c1d95,#7c3aed 45%,#db2777);color:#fff}
+.topo .em{font-size:17pt;line-height:1}
+.topo h1{font-size:13pt;font-weight:900;letter-spacing:.2pt;line-height:1}
+.topo h1 small{display:block;font-size:7.4pt;font-weight:700;opacity:.9;letter-spacing:0;margin-top:.6mm}
+.topo .temas{display:flex;gap:1.4mm;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+.topo .temas span{background:rgba(255,255,255,.2);border:.3mm solid rgba(255,255,255,.55);border-radius:5mm;padding:.5mm 2.2mm;font-weight:800;font-size:7pt;white-space:nowrap}
+.topo .nome{font-weight:800;font-size:7.6pt;white-space:nowrap;margin-left:2mm}
+.topo .nome i{display:inline-block;width:30mm;border-bottom:.3mm solid #fff;margin-left:1mm}
+
+/* grade principal */
+.grade{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:.84fr 1fr 1.08fr;grid-template-rows:1.12fr 1fr;gap:2.4mm}
+.sec{position:relative;border-radius:3mm;border:.55mm solid var(--c);background:var(--c2);padding:2.2mm 2.6mm 2mm;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:1mm}
+.sec>h2{display:flex;align-items:center;gap:1.8mm;font-size:10.8pt;font-weight:900;color:var(--c);line-height:1}
+.sec>h2 .n{flex:0 0 auto;width:6mm;height:6mm;border-radius:50%;background:var(--c);color:#fff;font-size:9pt;display:flex;align-items:center;justify-content:center}
+.sec>h2 .em{font-size:13pt}
+.sec>h2 .pt{margin-left:auto;font-size:7.4pt;color:var(--c);opacity:.8}
+.sec>*{flex-shrink:0}
+.def{background:#fff;border-radius:2mm;border-left:1.4mm solid var(--c);padding:1mm 2mm;font-size:7.9pt;font-weight:700}
+.def b{color:var(--c)}
+.fa{--c:var(--fa);--c2:var(--fa2);--c3:var(--fa3);grid-row:1 / span 2}
+.re{--c:var(--re);--c2:var(--re2);--c3:var(--re3)}
+.ci{--c:var(--ci);--c2:var(--ci2);--c3:var(--ci3)}
+.ca{--c:var(--ca);--c2:var(--ca2);--c3:var(--ca3)}
+.po{--c:var(--po);--c2:var(--po2);--c3:var(--po3)}
+
+/* 1 · fairy tales: as 4 gavetas do castelo */
+.castelo{display:flex;align-items:flex-end;gap:2mm}
+.castelo svg{flex:0 0 auto;width:23mm;height:21mm}
+.castelo .def{flex:1}
+.gav{background:#fff;border-radius:2mm;border:.35mm solid var(--c3);overflow:hidden}
+.gav>h3{display:flex;align-items:center;gap:1.5mm;background:var(--c3);color:#831843;font-size:8.6pt;font-weight:900;padding:.7mm 2mm;line-height:1.05}
+.gav>h3 .q{margin-left:auto;background:var(--c);color:#fff;border-radius:3mm;padding:.3mm 1.8mm;font-size:7pt;letter-spacing:.3pt}
+.gav ul{list-style:none;padding:.7mm 2mm .8mm;display:flex;flex-direction:column;gap:.6mm}
+.gav li{display:flex;gap:1.4mm;align-items:baseline}
+.gav li>i{font-style:normal;flex:0 0 4.6mm;text-align:center}
+.linhatempo{display:flex;align-items:stretch;gap:1mm;margin:.4mm 0 .2mm}
+.linhatempo div{flex:1;border-radius:1.6mm;padding:.8mm 1.2mm;text-align:center;font-weight:800;font-size:7.2pt;background:var(--fa2);border:.3mm dashed var(--c)}
+.linhatempo div b{display:block;color:var(--c);font-size:7.8pt}
+.nota{font-size:7pt;font-weight:700;color:var(--soft);background:#fff8;border-radius:1.5mm;padding:.6mm 1.6mm}
+.nota b{color:var(--c)}
+
+/* 2 · real × make-believe */
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:1.6mm}
+.col{background:#fff;border-radius:2mm;padding:1.2mm 1.8mm;border-top:1.4mm solid var(--k)}
+.col.real{--k:#0369a1} .col.mb{--k:#9333ea}
+.col h3{font-size:9.6pt;font-weight:900;color:var(--k);display:flex;align-items:center;gap:1.2mm}
+.col p{font-size:7.1pt;font-weight:650;margin:.4mm 0 .7mm;line-height:1.16}
+.chips{display:flex;flex-wrap:wrap;gap:.7mm}
+.chips span{border-radius:3mm;padding:.1mm 1.2mm;font-weight:800;font-size:6.8pt;background:color-mix(in srgb,var(--k) 12%,#fff);border:.25mm solid color-mix(in srgb,var(--k) 40%,#fff);white-space:nowrap}
+.par{display:grid;grid-template-columns:1fr auto 1fr;gap:1mm;align-items:center;background:#fff;border-radius:2mm;padding:1mm 1.6mm;font-size:7.2pt;font-weight:750;border:.3mm dashed var(--c)}
+.par .r{color:#0369a1} .par .m{color:#9333ea;text-align:right}
+.chips span.ex{white-space:normal;border-style:dashed;border-width:.35mm;background:#fff}
+.par .lembra{grid-column:1 / -1;font-size:6.8pt;font-weight:700;color:var(--soft);text-align:center;border-top:.25mm dotted var(--c3);padding-top:.3mm}
+.par .vs{font-weight:900;color:var(--soft);font-size:7pt}
+.par .tag{display:block;font-size:6.8pt;font-weight:900;letter-spacing:.3pt}
+
+/* 3 · circle story */
+.ci .corpo{display:grid;grid-template-columns:60mm 1fr;gap:1.8mm;align-items:center;flex:1;min-height:0}
+.roda{width:60mm;height:55mm}
+.roda text{font-family:inherit}
+.passos{display:flex;flex-direction:column;gap:1mm}
+.passos div{background:#fff;border-radius:2mm;padding:.8mm 1.6mm;font-size:7.4pt;font-weight:700;border-left:1.2mm solid var(--c)}
+.passos div b{color:var(--c)}
+.livro{font-size:7.2pt;font-weight:800;background:var(--ci3);border-radius:2mm;padding:.8mm 1.6mm;text-align:center}
+
+/* 4 · cause and effect */
+.ifthen{display:grid;grid-template-columns:1fr 5mm 1fr;gap:.7mm 0;align-items:stretch}
+.ifthen .hd{font-size:8.4pt;font-weight:900;text-align:center;border-radius:2mm 2mm 0 0;padding:.5mm 0;color:#fff}
+.ifthen .hd.c{background:#047857} .ifthen .hd.e{background:#0f766e}
+.ifthen .hd small{font-weight:700;opacity:.9;font-size:6.8pt}
+.ifthen .cx{background:#fff;border-radius:1.6mm;padding:.5mm 1.4mm;font-size:7.1pt;line-height:1.15;font-weight:700;border:.3mm solid var(--c3)}
+.ifthen .cx b{color:var(--c)}
+.ifthen .sx{display:flex;align-items:center;justify-content:center;color:var(--c);font-size:12pt;font-weight:900}
+.chart{display:grid;grid-template-columns:1fr 1.1fr 1fr;border:.35mm solid var(--c);border-radius:1.6mm;overflow:hidden;font-size:7pt;font-weight:750;background:#fff}
+.chart>div{padding:.5mm 1.4mm;border-right:.25mm solid var(--c3)}
+.chart .h{background:var(--ca3);font-weight:900;color:#064e3b}
+
+/* 5 · poem */
+.po .corpo{display:grid;grid-template-columns:1.05fr 1fr;gap:1.8mm;flex:1;min-height:0}
+.poema{position:relative;background:#fff;border-radius:2mm;padding:1mm 1.6mm .8mm 12.5mm;border:.3mm solid var(--c3);font-size:7.2pt;font-weight:650;line-height:1.16}
+.poema .pp{position:relative}
+.poema .et{position:absolute;left:-11.6mm;top:.2mm;font-size:5.6pt;font-weight:900;color:#fff;background:var(--c);border-radius:1mm;padding:.2mm .7mm;letter-spacing:.2pt}
+.poema .tit{font-weight:900;font-size:8.4pt;color:var(--c)}
+.poema .aut{font-size:6.8pt;font-weight:800;color:var(--soft);margin-bottom:.6mm}
+.poema .st{border-left:.6mm solid var(--c3);padding-left:1.3mm;margin:.4mm 0}
+.poema .ln{display:block}
+.poema .ln.um{background:#fef9c3;border-radius:.8mm}
+.r1{color:#db2777;font-weight:900} .r2{color:#0284c7;font-weight:900} .r3{color:#16a34a;font-weight:900} .r4{color:#ea580c;font-weight:900}
+.poema .conta{font-size:6.8pt;font-weight:800;color:var(--c);border-top:.25mm dashed var(--c3);padding-top:.5mm;margin-top:.5mm}
+.lado{display:flex;flex-direction:column;gap:.5mm}
+.venn{display:flex;align-items:center;gap:1.4mm;background:#fff;border-radius:2mm;padding:.5mm 1.3mm;font-size:7pt;font-weight:700}
+.venn svg{flex:0 0 auto;width:12mm;height:10.5mm}
+.el{background:#fff;border-radius:2mm;padding:.5mm 1.3mm;font-size:6.9pt;line-height:1.15;font-weight:700;border-left:1.2mm solid var(--c)}
+.el b{color:var(--c);font-size:7.8pt}
+.el4{display:grid;grid-template-columns:1fr 1fr;gap:.6mm;font-size:6.9pt;font-weight:800}
+.el4 span{background:var(--po3);border-radius:1.4mm;padding:.4mm 1.2mm;text-align:center}
+
+/* faixa de baixo: pegadinhas + check yourself */
+.baixo{display:grid;grid-template-columns:2.25fr 1fr;gap:2.4mm}
+.peg{border-radius:3mm;border:.55mm solid var(--tk);background:#fff7ed;padding:1.1mm 2mm;display:flex;align-items:center;gap:2mm}
+.peg h2{font-size:9.4pt;font-weight:900;color:var(--tk);line-height:1.05;flex:0 0 auto}
+.peg h2 .pt{color:var(--tk)}
+.pares{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2mm;flex:1}
+.pares div{background:#fff;border:.3mm solid #fdba74;border-radius:2mm;padding:.7mm 1.2mm;font-size:6.9pt;font-weight:700;line-height:1.18}
+.pares div b{display:block;color:var(--tk);font-size:7.7pt}
+.chk{border-radius:3mm;border:.55mm solid #334155;background:#f8fafc;padding:1mm 2.2mm}
+.chk h2{font-size:9pt;font-weight:900;color:#334155}
+.chk ol{padding-left:4mm;font-size:7pt;font-weight:700;columns:2;column-gap:3mm}
+.chk li{margin:.25mm 0;break-inside:avoid}
+.chk .resp{font-size:6.4pt;font-weight:700;color:var(--soft);transform:rotate(180deg);text-align:right;margin-top:.5mm}
+
+@media print{
+  body{background:none}
+  .tela{display:none}
+  .palco{padding:0;overflow:visible}
+  .escala{transform:none!important;height:auto!important;margin-left:0!important}
+  .page{box-shadow:none;margin:0}
+}
+</style>
+</head>
+<body>
+<div class="tela">
+  <a href="../index.html?v=bf8b02d0906" title="Home">&#127968; Home</a>
+  <button id="btPrint" onclick="window.print()">&#128424;&#65039; Print</button>
+  <button id="btPt" onclick="alternaPt()" aria-pressed="true">PT: on</button>
+  <span class="dica">Print in COLOR, A4, landscape. One page has everything for the test. · Imprima COLORIDO, A4, paisagem.</span>
+</div>
+<div class="palco"><div class="escala" id="escala">
+<div class="page">
+
+  <header class="topo">
+    <span class="em">&#127984;</span>
+    <h1>My English Pocket — 3rd term<small>Everything for the test on one page <span class="pt in" style="color:#fff;opacity:.85">· tudo da prova numa folha</span></small></h1>
+    <div class="temas"><span>1 Fairy tales</span><span>2 Real or make-believe</span><span>3 Circle story</span><span>4 Cause and effect</span><span>5 Poems</span></div>
+    <span class="nome">Name:<i></i></span>
+  </header>
+
+  <main class="grade">
+
+    <!-- ================= 1. FAIRY TALES ================= -->
+    <section class="sec fa">
+      <h2><span class="n">1</span><span class="em">&#129498;</span>Fairy tales<span class="pt">Contos de fadas</span></h2>
+      <div class="castelo">
+        <svg viewBox="0 0 92 84" aria-hidden="true">
+          <rect x="14" y="34" width="64" height="46" fill="#f9a8d4" stroke="#be185d" stroke-width="2"/>
+          <rect x="4" y="22" width="18" height="58" fill="#f472b6" stroke="#be185d" stroke-width="2"/>
+          <rect x="70" y="22" width="18" height="58" fill="#f472b6" stroke="#be185d" stroke-width="2"/>
+          <path d="M2 23 13 5 24 23z M68 23 79 5 90 23z" fill="#7c3aed" stroke="#4c1d95" stroke-width="1.5"/>
+          <path d="M14 34v-6h8v6M30 34v-6h8v6M46 34v-6h8v6M62 34v-6h8v6" fill="#f9a8d4" stroke="#be185d" stroke-width="2"/>
+          <path d="M38 80V60a8 8 0 0 1 16 0v20z" fill="#7c2d12"/>
+          <rect x="8" y="34" width="7" height="9" rx="3" fill="#fde68a"/><rect x="77" y="34" width="7" height="9" rx="3" fill="#fde68a"/>
+          <path d="M79 5V-4l9 3-9 3" fill="#facc15" stroke="#a16207" stroke-width="1"/>
+        </svg>
+        <div class="def">A fairy tale is <b>a make-believe type of story</b>.<span class="pt">Conto de fadas é um tipo de história de faz de conta.</span></div>
+      </div>
+
+      <div class="gav">
+        <h3>&#128101; Characters <span class="pt in" style="color:#9d174d">personagens</span><span class="q">WHO?</span></h3>
+        <ul>
+          <li><i>&#128081;</i><span><b>Royalty:</b> king, queen, princess, prince, knight <span class="pt in">realeza</span></span></li>
+          <li><i>&#128009;</i><span><b>Magical creatures:</b> fairies, dragons, ogres <span class="pt in">criaturas mágicas</span></span></li>
+          <li><i>&#128519;</i><span><b>A good character</b> &amp; <b>a bad character</b> &#128520; <span class="pt in">um bom e um mau</span></span></li>
+          <li><i>&#129497;</i><span><b>A special helper:</b> fairy, godmother, wizard, elf <span class="pt in">ajudante especial</span></span></li>
+          <li><i>&#128048;</i><span><b>Talking animals</b> &#128172; <span class="pt in">animais que falam</span></span></li>
+        </ul>
+      </div>
+
+      <div class="gav">
+        <h3>&#127984; Settings <span class="pt in" style="color:#9d174d">cenários (lugares)</span><span class="q">WHERE?</span></h3>
+        <ul>
+          <li><i>&#128081;</i><span><b>Kingdom:</b> castle &#127984;, forest &#127794;, village &#127960;&#65039;</span></li>
+          <li><i>&#127968;</i><span><b>House</b> <span class="pt in">casa</span></span></li>
+        </ul>
+      </div>
+
+      <div class="gav">
+        <h3>&#10024; Story elements <span class="pt in" style="color:#9d174d">elementos da história</span></h3>
+        <ul>
+          <li><i>&#129668;</i><span><b>Magical objects:</b> wand, books, foods <span class="pt in">objetos mágicos: varinha, livros, comidas</span></span></li>
+          <li><i>3&#65039;&#8419;</i><span><b>Special numbers:</b> <b>threes</b> or <b>sevens</b> <span class="pt in">números especiais: 3 ou 7</span></span></li>
+          <li><i>&#128214;</i><span><b>Beginning – middle – end</b> <span class="pt in">começo – meio – fim</span></span></li>
+        </ul>
+      </div>
+
+      <div class="gav">
+        <h3>&#127914; Story events <span class="pt in" style="color:#9d174d">acontecimentos</span><span class="q">WHAT?</span></h3>
+        <ul>
+          <li style="display:block">
+            <div class="linhatempo">
+              <div><b>BEGINNING</b>“Once upon a time…”<span class="pt">Era uma vez…</span></div>
+              <div><b>END</b>“And they lived happily ever after.”<span class="pt">E viveram felizes para sempre.</span></div>
+            </div>
+          </li>
+          <li><i>&#129668;</i><span><b>Spells, enchantments, curses = magic</b> <span class="pt in">feitiços, encantamentos, maldições = magia</span></span></li>
+          <li><i>&#128161;</i><span><b>A lesson or moral</b> <span class="pt in">uma lição ou moral</span></span></li>
+        </ul>
+      </div>
+      <p class="nota">&#129498; A <b>fairy</b> can be a magical creature <b>AND</b> a special helper. · &#128048;&#128172; Talking animals = <b>make-believe</b> (see 2).<span class="pt">A fada pode ser criatura mágica E ajudante especial. Animal que fala é faz de conta.</span></p>
+    </section>
+
+    <!-- ================= 2. REAL OR MAKE-BELIEVE ================= -->
+    <section class="sec re">
+      <h2><span class="n">2</span><span class="em">&#129300;</span>Real or make-believe?<span class="pt">Real ou faz de conta?</span></h2>
+      <div class="duas">
+        <div class="col real">
+          <h3>&#9989; REAL</h3>
+          <p>It <b>really exists</b> or <b>can really happen</b> in real life. We can <b>see</b> it or <b>touch</b> it, <b>or</b> it is <b>TRUE</b>.<span class="pt">Existe ou pode acontecer de verdade. Dá para ver ou tocar, ou é verdade.</span></p>
+          <div class="chips"><span>&#128054; a dog</span><span>&#127795; a tree</span><span>&#127979; the school</span><span>&#9728;&#65039; the sun</span><span>&#9917; Richarlison</span><span class="ex">&#128010; an alligator in a river</span><span class="ex">&#128214; The Diary of Anne Frank — a TRUE story</span></div>
+        </div>
+        <div class="col mb">
+          <h3>&#10024; MAKE-BELIEVE</h3>
+          <p><b>NOT real</b> or true. It <b>cannot happen</b> in real life. We <b>can't touch</b> it. It is <b>imagined</b> or <b>invented</b>.<span class="pt">Não é real. Não pode acontecer. É imaginado, inventado.</span></p>
+          <div class="chips"><span>&#129464; superheroes</span><span>&#128048;&#128172; talking animals</span><span>&#128096; Cinderella</span><span>&#127984; fairy tales</span><span>&#129497; Harry Potter</span><span>Mew (Pokémon)</span><span class="ex">&#128010;&#128172; an alligator that lives under my bed and talks</span><span class="ex">&#128211; Diary of a Wimpy Kid — an invented story</span></div>
+        </div>
+      </div>
+      <p class="nota">&#128161; The animal is real; what it <b>does</b> can be make-believe. A diary can be a TRUE story or an invented one.<span class="pt">O animal é real; o que ele faz pode ser faz de conta. Um diário pode ser história verdadeira ou inventada.</span></p>
+    </section>
+
+    <!-- ================= 3. CIRCLE STORY ================= -->
+    <section class="sec ci">
+      <h2><span class="n">3</span><span class="em">&#128260;</span>Circle story<span class="pt">História circular</span></h2>
+      <div class="def">A circle story <b>begins and ends in the same place</b> or <b>with the same thing</b>. Many events happen in the middle, but at the end the story <b>comes back to the beginning</b>.<span class="pt">Começa e termina no mesmo lugar ou com a mesma coisa. Muitos acontecimentos no meio; no fim, volta para o começo.</span></div>
+      <div class="corpo">
+        <svg class="roda" id="roda" viewBox="-28 -6 256 212" aria-label="If You Give a Mouse a Cookie circle"></svg>
+        <div class="passos">
+          <div class="livro">&#128214; <i>If You Give a Mouse a Cookie</i><br>by Laura Numeroff</div>
+          <div><b>Beginning:</b> the story starts with a cookie &#127850;<span class="pt">começa com um biscoito</span></div>
+          <div><b>Middle:</b> many events happen<span class="pt">muitos acontecimentos</span></div>
+          <div><b>End:</b> the story ends with a cookie again &#127850;<span class="pt">termina com o biscoito de novo</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4. CAUSE AND EFFECT ================= -->
+    <section class="sec ca">
+      <h2><span class="n">4</span><span class="em">&#128165;</span>Cause and effect<span class="pt">Causa e efeito</span></h2>
+      <div class="def">Cause and effect happen when <b>one thing makes another thing happen</b>.<span class="pt">Quando uma coisa faz outra coisa acontecer.</span></div>
+      <div class="ifthen">
+        <div class="hd c">CAUSE = “If…” <small>causa</small></div><div></div><div class="hd e">EFFECT = “Then…” <small>efeito</small></div>
+        <div class="cx"><b>If</b> Ash goes on adventure…</div><div class="sx">&#10140;</div><div class="cx"><b>Then</b> he will find many Pokémon to catch.</div>
+        <div class="cx">&#128096; <b>If</b> Cinderella goes to the ball…</div><div class="sx">&#10140;</div><div class="cx"><b>Then</b> she will lose one of her slippers.</div>
+        <div class="cx">&#128218; <b>If</b> you read books every day…</div><div class="sx">&#10140;</div><div class="cx"><b>Then</b> you will be more intelligent and learn new things.</div>
+        <div class="cx">&#128054;&#127849; <b>If</b> you give a dog a donut…</div><div class="sx">&#10140;</div><div class="cx"><b>Then</b> he'll want to drink some juice. &#129475;</div>
+      </div>
+      <div class="chart">
+        <div class="h">Cause and Effect Chart</div><div class="h">If… (cause)</div><div class="h" style="border-right:0">Then… (effect)</div>
+        <div>Book: <i>If You Give a Mouse a Cookie</i></div><div>If you give a mouse a cookie…</div><div style="border-right:0">then he will want some milk. &#129371;</div>
+      </div>
+    </section>
+
+    <!-- ================= 5. POEMS ================= -->
+    <section class="sec po">
+      <h2><span class="n">5</span><span class="em">&#128220;</span>Poetry and poem<span class="pt">Poesia e poema</span></h2>
+      <div class="corpo">
+        <div class="poema">
+          <div class="pp"><span class="et">TITLE</span><div class="tit">My Dog</div></div>
+          <div class="pp"><span class="et">AUTHOR</span><div class="aut">by Lily Bell</div></div>
+          <div class="st pp"><span class="et">STANZA 1</span>
+            <span class="ln um">My dog is <span class="r1">small</span>, <span class="et" style="position:static;margin-left:1mm;background:#ca8a04">&#8592; LINE</span></span>
+            <span class="ln">he loves his <span class="r1">ball</span>.</span>
+            <span class="ln">He runs and <span class="r2">plays</span></span>
+            <span class="ln">on sunny <span class="r2">days</span>.</span>
+          </div>
+          <div class="st pp"><span class="et">STANZA 2</span>
+            <span class="ln">When day is <span class="r3">done</span>,</span>
+            <span class="ln">he dreams of <span class="r3">fun</span>.</span>
+            <span class="ln">He curls up <span class="r4">tight</span></span>
+            <span class="ln">and sleeps all <span class="r4">night</span>.</span>
+          </div>
+          <div class="conta">8 lines · 2 stanzas · the colors show the <b>rhymes</b><span class="pt">Não conte o título nem o autor. As cores mostram as rimas.</span></div>
+          <div class="conta">“animals” by Brian Bilston: <b>31 lines</b>, <b>8 stanzas</b>.</div>
+        </div>
+        <div class="lado">
+          <div class="venn">
+            <svg viewBox="0 0 60 52" aria-hidden="true"><circle cx="30" cy="26" r="24" fill="#ddd6fe" stroke="#6d28d9" stroke-width="2"/><circle cx="33" cy="32" r="13" fill="#fff" stroke="#db2777" stroke-width="2"/><text x="33" y="34.5" text-anchor="middle" font-size="7.4" font-weight="900" fill="#db2777">poem</text><text x="30" y="13" text-anchor="middle" font-size="7.6" font-weight="900" fill="#6d28d9">poetry</text></svg>
+            <span><b style="color:#6d28d9">Poetry</b> = the full art.<br><b style="color:#db2777">Poem</b> = the text / paper.<span class="pt">Poesia = a arte toda. Poema = o texto.</span></span>
+          </div>
+          <div class="el"><b>Elements of a poem:</b> title · lines · stanza · author. A <b>stanza</b> is a <b>group of lines</b>.<span class="pt">título · linhas · estrofe · autor. Estrofe é um grupo de linhas.</span></div>
+          <div class="el"><b>&#128276; Rhyme:</b> words that <b>sound the same</b> at the end of the lines (cat / hat).<span class="pt">Rima: som igual no fim das linhas.</span></div>
+          <div class="el"><b>&#129345; Rhythm:</b> a <b>beat</b> or a <b>pattern</b>; it often sounds like a song.<span class="pt">Ritmo: batida, parece música.</span></div>
+          <div class="el"><b>&#128173; Imagery:</b> words that help us <b>create pictures in our minds</b>.<span class="pt">Imagens: palavras que criam figuras na cabeça.</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="baixo">
+    <div class="peg">
+      <h2>&#9888;&#65039; Tricky<br>pairs<span class="pt">Pegadinhas</span></h2>
+      <div class="pares">
+        <div><b>poem ≠ poetry</b>poem = a text · poetry = the full art<span class="pt">texto × arte</span></div>
+        <div><b>line ≠ stanza</b>line = one row · stanza = a group of lines<span class="pt">linha × estrofe</span></div>
+        <div><b>rhyme ≠ rhythm</b>rhyme = same end sound · rhythm = beat<span class="pt">rima × ritmo</span></div>
+        <div><b>cause ≠ effect</b>If… = cause · Then… = effect<span class="pt">“Se” = causa · “Então” = efeito</span></div>
+        <div><b>real = true</b>make-believe = invented<span class="pt">real = verdade · faz de conta = inventado</span></div>
+      </div>
+    </div>
+    <div class="chk">
+      <h2>&#9989; Check yourself <span class="pt in">Teste-se</span></h2>
+      <ol>
+        <li>A castle: character, setting or event?</li>
+        <li>“If you give a mouse a cookie…” cause or effect?</li>
+        <li>A stanza is a group of ___.</li>
+        <li>Cinderella: real or make-believe?</li>
+      </ol>
+      <p class="resp">1 setting · 2 cause · 3 lines · 4 make-believe</p>
+    </div>
+  </footer>
+</div>
+</div></div>
+
+<script>
+/* a roda da circle story: o biscoito no alto é o começo E o fim (o 14º evento volta a ele) */
+(function(){
+  var E=[['cookie','\u{1F36A}'],['milk','\u{1F95B}'],['straw','\u{1F964}'],['napkin','\u{1F9FB}'],['mirror','\u{1FA9E}'],['scissors','✂️'],
+         ['broom','\u{1F9F9}'],['nap','\u{1F634}'],['story','\u{1F4D6}'],['drawing','\u{1F58D}️'],['pen','\u{1F58A}️'],['tape/fridge','\u{1F4CE}'],['milk','\u{1F95B}']];
+  var s='', cx=100, cy=100, R=64, n=E.length;
+  s+='<defs><marker id="pta" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10z" fill="#b45309"/></marker></defs>';
+  s+='<circle cx="100" cy="100" r="'+R+'" fill="none" stroke="#fcd34d" stroke-width="5"/>';
+  for(var i=0;i<n;i++){ var a0=(-90+(i+.42)*360/n)*Math.PI/180, a1=(-90+(i+.6)*360/n)*Math.PI/180;
+    s+='<path d="M'+(cx+R*Math.cos(a0)).toFixed(1)+' '+(cy+R*Math.sin(a0)).toFixed(1)+' L'+(cx+R*Math.cos(a1)).toFixed(1)+' '+(cy+R*Math.sin(a1)).toFixed(1)+'" stroke="#b45309" stroke-width="2.2" marker-end="url(#pta)"/>'; }
+  for(var j=0;j<n;j++){ var a=(-90+j*360/n)*Math.PI/180, ca=Math.cos(a), sa=Math.sin(a), x=cx+R*ca, y=cy+R*sa, ini=j===0;
+    s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+(ini?14:11)+'" fill="'+(ini?'#fde68a':'#fff')+'" stroke="#b45309" stroke-width="'+(ini?2.6:1.6)+'"/>';
+    s+='<text x="'+x.toFixed(1)+'" y="'+(y+1).toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" font-size="'+(ini?13:10)+'">'+E[j][1]+'</text>';
+    var lr=R+(ini?20:16), lx=cx+lr*ca, ly=cy+lr*sa, anc=Math.abs(ca)<.3?'middle':(ca>0?'start':'end');
+    s+='<text x="'+lx.toFixed(1)+'" y="'+(ly+1).toFixed(1)+'" text-anchor="'+anc+'" dominant-baseline="middle" font-size="9.5" font-weight="800" fill="#78350f">'+(ini?'1 cookie':(j+1)+' '+E[j][0])+'</text>'; }
+  s+='<text x="100" y="92" text-anchor="middle" font-size="12" font-weight="900" fill="#b45309">START</text>';
+  s+='<text x="100" y="106" text-anchor="middle" font-size="11" font-weight="900" fill="#b45309">= END</text>';
+  s+='<text x="100" y="120" text-anchor="middle" font-size="8.6" font-weight="800" fill="#78350f">14: cookie again</text>';
+  document.getElementById('roda').innerHTML=s;
+})();
+/* na tela, a folha encolhe para caber na largura (no celular, sem rolar de lado); na impressão volta ao tamanho real */
+function encaixa(){
+  var e=document.getElementById('escala'), larg=e.firstElementChild.offsetWidth, alt=e.firstElementChild.offsetHeight;
+  var k=Math.min(1,(window.innerWidth-16)/larg);
+  e.style.transform='scale('+k+')'; e.style.height=(alt*k)+'px'; e.style.marginLeft=Math.max(8,(window.innerWidth-larg*k)/2)+'px';
+}
+window.addEventListener('resize',encaixa); window.addEventListener('load',encaixa); encaixa();
+function pintaPt(){ var on=true; try{ on=localStorage.getItem('ing3_pocket_pt')!=='0'; }catch(e){}
+  document.body.classList.toggle('sem-pt',!on); var b=document.getElementById('btPt'); b.textContent='PT: '+(on?'on':'off'); b.classList.toggle('on',on); b.setAttribute('aria-pressed',String(on)); }
+function alternaPt(){ var on=document.body.classList.contains('sem-pt'); try{ localStorage.setItem('ing3_pocket_pt',on?'1':'0'); }catch(e){} pintaPt(); }
+pintaPt();
+</script>
+</body>
+</html>

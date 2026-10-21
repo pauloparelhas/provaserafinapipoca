@@ -117,7 +117,13 @@ function Questao(props){
        legendas sem figura. */
     return embaralha(item.opts.map(function(o){ return {t:o.t, ok:!!o.ok, no:o.no, img:o.img}; }));
   })[0];
-  var r=React.useState(typeof props.respostaInicial==='number'?props.respostaInicial:-1);
+  /* respostaTexto: o texto da alternativa já escolhida (o índice não serve, porque a ordem é sorteada de novo
+     ao remontar) — quem volta a uma questão feita vê a própria resposta, e não uma questão em branco */
+  var r=React.useState(function(){
+    if(typeof props.respostaInicial==='number') return props.respostaInicial;
+    if(props.respostaTexto!=null){ for(var q=0;q<alt.length;q++) if(alt[q].t===props.respostaTexto) return q; }
+    return -1;
+  });
   var pick=r[0], setPick=r[1];
   var d=React.useState(false), dica=d[0], setDica=d[1];
   /* segundo nível da correção ("Ver como se faz"): fechado por padrão. */
@@ -136,7 +142,7 @@ function Questao(props){
   function responde(i){
     if(feito) return;
     setPick(i);
-    if(props.aoResponder) props.aoResponder(!!alt[i].ok, item);
+    if(props.aoResponder) props.aoResponder(!!alt[i].ok, item, alt[i].t);
   }
   React.useEffect(function(){
     if(feito && fim.current){ try{ fim.current.scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){} }
