@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Simulado — História</title>
+<link rel="stylesheet" href="serafina-core.css?v=20261011">
+<link rel="stylesheet" href="OP_estilo.css?v=20261011">
+<style>
+/* só o que é exclusivo desta tela */
+.placar{font-size:calc(2.6rem*var(--fs));font-weight:900;line-height:1;color:var(--accent);text-align:center;margin:6px 0 2px}
+.placarsub{text-align:center;font-size:calc(.9rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.45;margin-bottom:12px}
+.fambar{display:flex;justify-content:space-between;gap:9px;font-size:calc(.86rem*var(--fs));font-weight:800;
+  padding:7px 11px;border-radius:10px;background:var(--surf);border:1px solid var(--line);margin-bottom:6px}
+.fambar.zero{opacity:.55}
+.progresso{font-size:calc(.74rem*var(--fs));font-weight:800;color:var(--dim);text-align:center;margin-top:9px;line-height:1.4}
+.bancobar{height:8px;border-radius:5px;background:var(--line);margin:14px 0 0;overflow:hidden}
+.bancofill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s}
+body.papel .bancobar{background:#e4e4e4}
+body.papel .progresso{color:#555}
+/* a folha é da prova de PORTUGUÊS da escola, não da Olimpíada: o
+   cabeçalho que o OP_estilo.css desenha é trocado aqui, só por CSS */
+body.papel .card::before{content:"HIST\00D3RIA \2013  YEAR 2"}
+/* na folha branca, os botões de escolha e o placar precisam de tinta escura
+   (no modo papel o --ink continua claro, herdado do tema da tela) */
+body.papel .card h1.tt{color:#111}
+body.papel .card p.sub{color:#444}
+body.papel .linha{background:#f6f6f6;border:1.5px solid #bbb;color:#111}
+body.papel .linha .n{background:#e2e2e2;color:#111}
+body.papel .linha small{color:#555}
+body.papel .avancar.calmo{background:#f6f6f6;border-color:#bbb;color:#111}
+body.papel .fambar{background:#f6f6f6;border-color:#ddd;color:#111}
+body.papel .fambar span{filter:brightness(.55) saturate(1.3)}
+body.papel .placarsub{color:#444}
+body.papel .secao{color:#1b6b34}
+body.papel .secao::after{background:#ddd}
+.sairov{position:fixed;inset:0;z-index:150;display:none;align-items:center;justify-content:center;padding:20px;
+  background:rgba(5,7,18,.72);backdrop-filter:blur(3px)}
+.sairov.show{display:flex}
+/* cada linha do texto é um botão (ler em voz alta / guia de leitura):
+   alvo de toque de 44px, como o resto da tela */
+.leitura .lin{min-height:44px;display:flex;align-items:center}
+.sairbox{width:100%;max-width:360px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 16px;text-align:center;color:var(--ink)}
+.sairbox h2{font-size:1.15rem;font-weight:900}
+.sairbox p{font-size:.92rem;font-weight:800;color:var(--soft);line-height:1.4;margin:6px 0 2px}
+/* ---- v2 (12/10): listas de lacunas "COMPLETE AS PALAVRAS COM..." ---- */
+.quadro .lacs{display:flex;flex-wrap:wrap;justify-content:center;gap:9px 20px;text-align:left}
+.quadro .lac{display:inline-flex;align-items:baseline;font-size:calc(1.05rem*var(--fs));letter-spacing:.6px;white-space:nowrap}
+.quadro .lac i{font-style:normal;font-size:.72em;font-weight:900;color:var(--soft);margin-right:6px}
+.lb{display:inline-block;min-width:1.7em;height:1em;border-bottom:2.5px solid var(--accent);margin:0 2px;vertical-align:baseline}
+.lb.lbw{min-width:4.6em}
+body.papel .lb{border-bottom-color:#111}
+body.papel .quadro .lac i{color:#555}
+/* no truque desenhado, a letra destacada fica colada na palavra (DI NH EIRO -> DINHEIRO) */
+.pc .mk{padding:0 1px;border-radius:3px}
+/* ---- v2: PARTE ESCRITA (LP3_escrita.js) ---- */
+.esclab{display:block;font-size:calc(.8rem*var(--fs));font-weight:800;color:var(--soft);margin:12px 0 5px}
+.escarea{display:block;width:100%;resize:vertical;font-family:inherit;font-size:calc(1.05rem*var(--fs));font-weight:800;
+  line-height:2.1;padding:0 10px;border:2px solid var(--line);border-radius:10px;color:var(--ink);text-transform:uppercase;
+  background-color:var(--surf);background-attachment:local;
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(2.1em - 1px),var(--line) calc(2.1em - 1px),var(--line) 2.1em)}
+.escarea:focus{outline:none;border-color:var(--accent2)}
+.fb.modelo{border-color:var(--accent)}
+.fb .modtxt{font-size:calc(1rem*var(--fs));font-weight:900;line-height:1.5;letter-spacing:.3px;padding:10px 12px;
+  border-radius:9px;background:var(--card);color:var(--ink)}
+.fb .confti{font-size:calc(.68rem*var(--fs));font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--soft);margin:12px 0 4px}
+.fb .confere{margin:0 0 0 20px;font-size:calc(.9rem*var(--fs));font-weight:700;line-height:1.45}
+.fb .confere li{margin:2px 0}
+.autoav{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.av{min-height:48px;border-radius:11px;border:2px solid var(--line);background:var(--card);color:var(--ink);
+  font-family:inherit;font-weight:900;font-size:calc(.95rem*var(--fs));cursor:pointer;padding:0 6px}
+.av:active{transform:translateY(1px)}
+.av-ok.on{background:#dff3e3;border-color:#2e7d32;color:#123}
+.av-quase.on{background:#fff3c4;border-color:#d19a00;color:#5a3b00}
+.av-errei.on{background:#fdeaea;border-color:#c62828;color:#311}
+.av.apaga{opacity:.45;cursor:default}
+.fb .avmsg{font-size:calc(.88rem*var(--fs));font-weight:800;line-height:1.4;margin-top:9px}
+.escbar.n-ok b{color:var(--ok)} .escbar.n-quase b{color:var(--accent2)} .escbar.n-errei b{color:var(--no)}
+body.papel .esclab{color:#555}
+body.papel .escarea{background-color:#fff;border-color:#bbb;color:#111;
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(2.1em - 1px),#c9d6e8 calc(2.1em - 1px),#c9d6e8 2.1em)}
+body.papel .escbar.n-ok b{color:#1b5e20} body.papel .escbar.n-quase b{color:#8a5a00} body.papel .escbar.n-errei b{color:#b3261e}
+/* ---- HIS3: foto da fonte (aula 3 da U3) ---- */
+.quadro .fotofonte{display:block;width:100%;max-width:420px;margin:0 auto;border-radius:10px;border:2px solid var(--line)}
+body.papel .quadro .fotofonte{border-color:#bbb}
+.tr{display:none}
+body.show-tr .tr{display:block;font-size:.82em;font-weight:700;color:var(--soft);margin-top:3px;text-transform:none;letter-spacing:0}
+body.show-tr .opt .tr{display:block}
+#trbtn svg{display:block;margin:auto;border-radius:3px}
+body.show-tr #trbtn{outline:2px solid var(--accent);outline-offset:2px}
+.quadro .ptit{display:block;font-size:1.08em;margin-bottom:6px}
+.quadro .pest{margin:0 0 10px;line-height:1.55}
+.quadro .paut{display:block;text-align:right;font-size:.92em}
+body.papel .tr{color:#555}
+/* 8 botões no topo: no celular estreito eles encolhem para caber sem rolar de lado */
+@media (max-width:430px){.topbar{gap:4px}.topbar .iconbtn{width:38px;min-width:38px;height:44px;padding:0;font-size:15px}#trbtn svg{width:22px;height:16px}}
+/* ---- resultado (21/10): porcentagem, tópicos, revisão só das erradas ---- */
+.anel{width:150px;height:150px;border-radius:50%;margin:10px auto 4px;display:flex;align-items:center;justify-content:center}
+.anelin{width:116px;height:116px;border-radius:50%;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.anelin b{font-size:calc(2.2rem*var(--fs));font-weight:900;color:var(--ink)}
+.anelin small{font-size:calc(.85rem*var(--fs));font-weight:800;color:var(--soft);margin-top:4px}
+.estrelas{text-align:center;font-size:30px;letter-spacing:6px;color:var(--line);margin-bottom:2px}
+.estrelas .on{color:#f5b301;text-shadow:0 1px 3px rgba(0,0,0,.25)}
+.resnum{display:flex;justify-content:center;gap:8px;margin:4px 0 6px;flex-wrap:wrap}
+.rn{min-width:86px;padding:7px 10px;border-radius:12px;text-align:center;border:2px solid var(--line);background:var(--surf)}
+.rn b{display:block;font-size:calc(1.4rem*var(--fs));font-weight:900;line-height:1.1}
+.rn span{font-size:calc(.78rem*var(--fs));font-weight:800;color:var(--soft)}
+.rn.ok b{color:var(--ok)} .rn.no b{color:var(--no)} .rn.pu b{color:var(--accent2)}
+.fambar{flex-wrap:wrap}
+.fbarra{display:block;flex:1 0 100%;height:6px;border-radius:4px;background:var(--line);overflow:hidden}
+.fbarra i{display:block;height:100%;border-radius:4px}
+.filtro{display:flex;gap:8px;justify-content:center;margin:4px 0 10px;flex-wrap:wrap}
+.filtro .mini{min-height:44px}
+.rev{border:2px solid var(--line);border-left-width:7px;border-radius:12px;padding:9px 11px;margin-bottom:9px;background:var(--surf)}
+.rev.ok{border-left-color:var(--ok)} .rev.no{border-left-color:var(--no)}
+.revtop{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:calc(.78rem*var(--fs));font-weight:900}
+.revn{background:var(--line);border-radius:8px;padding:1px 8px}
+.revf{flex:1}
+.rev.ok .revst{color:var(--ok)} .rev.no .revst{color:var(--no)}
+.revq{font-weight:800;line-height:1.4;margin:2px 0 6px}
+.reva{font-size:calc(.92rem*var(--fs));font-weight:700;line-height:1.4;margin:3px 0;padding:5px 8px;border-radius:8px}
+.reva.sua{background:rgba(198,40,40,.12)} .reva.certa{background:rgba(46,125,50,.14)}
+.revt{font-size:calc(.85rem*var(--fs));color:var(--soft);font-weight:700;line-height:1.4;margin-top:5px}
+.rev .tr{font-size:.85em}
+body.papel .anelin{background:#fff} body.papel .anelin b{color:#111} body.papel .anelin small,body.papel .rn span,body.papel .revt{color:#555}
+body.papel .rn,body.papel .rev{background:#f8f8f8;border-color:#ccc;color:#111}
+body.papel .rev.ok{border-left-color:#2e7d32} body.papel .rev.no{border-left-color:#c62828}
+body.papel .revn{background:#e2e2e2}
+body.papel .estrelas{color:#ddd}
+body.papel .reva{color:#111}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" title="Home" onclick="goHome()">&#127968;</button>
+    <span class="title">Simulado</span>
+    <button class="iconbtn" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn sombtn" id="sombtn" title="Som" onclick="toggleSom()">&#128266;</button>
+    <button class="iconbtn" id="papelbtn" title="Folha da prova" onclick="togglePapel()">&#128196;</button>
+    <button class="iconbtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="bar"><span id="bar"></span></div>
+  <div class="stage"><div class="card" id="raiz"></div></div>
+</div>
+<div class="sairov" id="sairov" role="dialog" aria-modal="true" aria-labelledby="sairtit">
+  <div class="sairbox">
+    <h2 id="sairtit">Sair do simulado?</h2>
+    <p>Você vai voltar para a página inicial.</p>
+    <button class="avancar" id="sairSim">Sim, sair</button>
+    <button class="avancar calmo" id="sairNao">Não, continuar</button>
+  </div>
+</div>
+<div class="qnav" id="qnav" style="display:none">
+  <button class="qnav-btn" id="navPrev">&#8249; Voltar</button>
+  <button class="qnav-btn forte" id="navNext">Próxima &#8250;</button>
+</div>
+
+<script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'his3_som',stars:90};</script>
+<script src="serafina-core.js?v=20261011"></script>
+<script src="OP_voz.js?v=20261011"></script>
+<script>
+/* MODO PAPEL — a folha da prova de verdade, com a interacao por cima.
+   Ligado por padrao nesta tela: o objetivo e a crianca reconhecer no dia
+   o que esta vendo. O botao da folha alterna para o visual do site, para
+   quem preferir ler no escuro. A escolha fica salva. */
+(function(){
+  var K='his3_papel';
+  function ligado(){ try{ return localStorage.getItem(K)!=='0'; }catch(e){ return true; } }
+  function pinta(){
+    var on=ligado();
+    document.body.classList.toggle('papel',on);
+    var b=document.getElementById('papelbtn');
+    if(b){
+      b.innerHTML = on ? '&#128196;' : '&#128421;&#65039;';
+      b.title = on ? 'Folha da prova (como a de verdade)' : 'Folha da prova';
+    }
+    var m=document.querySelector('meta[name=theme-color]');
+    if(m) m.setAttribute('content', on ? '#8a8f98' : '#0d0b1e');
+  }
+  window.togglePapel=function(){
+    try{ localStorage.setItem(K, ligado()?'0':'1'); }catch(e){}
+    pinta();
+  };
+  pinta();
+  document.addEventListener('DOMContentLoaded',pinta);
+})();
+</script>
+<script src="assets/react.production.min.js"></script>
+<script src="assets/react-dom.production.min.js"></script>
+<script src="HIS3_simulado_data.js"></script>
+<script>window.OPQ_TXT={};</script>
+<script src="OP_questao.js"></script>
+<script>
+'use strict';
+/* ============================================================
+   SIMULADO DE HISTÓRIA (3º tri) — fork do de Inglês — mesmo motor do simulado de
+   Português (OP_questao.js intacto). Dados: HIS3_simulado_data.js, GERADO
+   do banco único HIS3_banco.js (trabalho/3tri_historia/gen/gen_simulado_his3.js).
+   Inglês na frente, português atrás da bandeira (body.show-tr).
+   Rodada de 12 com as cotas por tema (fairy 3, real 2, circle 2, cause 2,
+   poem 3). A rodada acaba na última questão; as questões-irmãs (mesmo tema)
+   são oferecidas no resultado, em "Practise with similar questions".
+   ============================================================ */
+var h=React.createElement, OP=window.HIS3S, OPQ=window.OPQ, LP3E={zeraVistos:function(){},sorteia:function(){return [];}};
+var FAM={}; OP.FAMILIAS.forEach(function(f){ FAM[f.k]=f; });
+var VISTOS='his3_vistos';
+var BANCO=OP.ITENS;
+var RODADA=OP.FAMILIAS.reduce(function(s,f){ return s+(f.cota||0); },0);   /* 12 */
+var AQUECER=5, ESC_PROVA=4, ESC_SO=8;
+
+function vistos(){ try{ return JSON.parse(localStorage.getItem(VISTOS)||'[]'); }catch(e){ return []; } }
+function marcaVisto(ids){
+  var v=vistos(); ids.forEach(function(i){ if(v.indexOf(i)<0) v.push(i); });
+  try{ localStorage.setItem(VISTOS,JSON.stringify(v)); }catch(e){}
+}
+function zeraVistos(){ try{ localStorage.removeItem(VISTOS); }catch(e){} }
+
+/* monta uma rodada de n questões com as cotas do roteiro, dando prioridade
+   ao que ela ainda não viu */
+function montaRodada(n){
+  var jaVi=vistos(), escolhidas=[];
+  function pegaDe(k, quantas){
+    var pool=BANCO.filter(function(i){ return i.eixo===k && escolhidas.indexOf(i)<0; });
+    var novas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)<0; }));
+    var velhas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)>=0; }));
+    escolhidas=escolhidas.concat(novas.concat(velhas).slice(0,quantas));
+  }
+  function menosVistas(filtro){
+    return OPQ.embaralha(OP.FAMILIAS.filter(filtro)).map(function(f){
+      return {k:f.k, novas:BANCO.filter(function(i){ return i.eixo===f.k && jaVi.indexOf(i.id)<0; }).length};
+    }).sort(function(a,b){ return b.novas-a.novas; });
+  }
+  if(n>=RODADA){
+    OP.FAMILIAS.forEach(function(f){ if(f.cota) pegaDe(f.k,f.cota); });
+  } else {
+    /* aquecer: o mesmo peso em miniatura — 3 do bloco A, 2 dos blocos B/C */
+    var a=Math.round(n*0.6);
+    menosVistas(function(f){ return f.bloco==='A'; }).slice(0,a).forEach(function(f){ pegaDe(f.k,1); });
+    menosVistas(function(f){ return f.bloco!=='A'; }).slice(0,n-a).forEach(function(f){ pegaDe(f.k,1); });
+  }
+  return OPQ.embaralha(escolhidas.slice(0,n));
+}
+/* A questão-irmã também respeita o histórico (senão volta sempre às
+   mesmas poucas, rodada após rodada). */
+function irma(eixo, usados){
+  var jaVi=vistos();
+  var pool=BANCO.filter(function(i){ return i.eixo===eixo && usados.indexOf(i.id)<0; });
+  var novas=pool.filter(function(i){ return jaVi.indexOf(i.id)<0; });
+  return OPQ.embaralha(novas.length?novas:pool)[0]||null;
+}
+function copia(o){ var n={}; for(var k in o) n[k]=o[k]; return n; }
+/* 21/10 (Paulo: "o aluno termina o simulado e não mostra o resultado"): a cada erro entrava uma questão-irmã
+   logo depois — e a irmã errada puxava outra. Depois da "Question 12 of 12" vinham mais e mais questões, e o
+   resultado parecia nunca chegar. Agora a rodada acaba na última questão e o resultado vem na hora: a
+   porcentagem, os tópicos, a revisão (só as erradas ou todas) e o que fazer em seguida. As questões
+   parecidas viraram um botão do resultado. */
+function T2(en,pt){ return pt; }
+function certaDe(item){ for(var i=0;i<item.opts.length;i++) if(item.opts[i].ok) return item.opts[i].t; return ''; }
+function estrelas(p){ return p>=90?3:p>=70?2:p>=40?1:0; }
+
+function App(){
+  var t=React.useState('inicio'), tela=t[0], setTela=t[1];
+  var m=React.useState('prova'), modo=m[0], setModo=m[1];      /* prova | aquecer | refazer | parecidas */
+  var tm=React.useState(RODADA), tam=tm[0], setTam=tm[1];        /* tamanho da última rodada nova */
+  var f=React.useState([]), fila=f[0], setFila=f[1];
+  var c=React.useState(0), cur=c[0], setCur=c[1];
+  var r=React.useState({}), resp=r[0], setResp=r[1];             /* id -> {ok, t} */
+  var v=React.useState('erros'), ver=v[0], setVer=v[1];          /* revisão: erros | todas */
+
+  var ids=BANCO.map(function(i){ return i.id; });
+  var totalBanco=BANCO.length, jaVistas=vistos().filter(function(id){ return ids.indexOf(id)>=0; }).length;
+
+  function joga(q, md){ setModo(md); setFila(q); setCur(0); setResp({}); setVer('erros'); setTela('q'); marcaVisto(q.map(function(i){ return i.id; })); }
+  function comeca(n){ setTam(n); joga(montaRodada(n), n>=RODADA?'prova':'aquecer'); }
+  function responde(acertou,item,texto){
+    if(resp[item.id]) return; /* voltou a uma questão já feita: vale a primeira resposta */
+    var novo=copia(resp); novo[item.id]={ok:acertou,t:texto}; setResp(novo);
+  }
+  function avanca(){ if(cur<fila.length-1) setCur(cur+1); else setTela('fim'); }
+  function volta(){ if(cur>0) setCur(cur-1); }
+
+  /* barra de progresso e navegação de baixo, que vivem fora do React */
+  React.useEffect(function(){
+    var bar=document.getElementById('bar'), nav=document.getElementById('qnav');
+    var p=document.getElementById('navPrev'), n=document.getElementById('navNext');
+    if(tela==='q'){
+      nav.style.display='flex';
+      bar.style.width=Math.round(cur/fila.length*100)+'%';
+      p.disabled = cur===0; p.onclick=volta; n.onclick=avanca;
+      n.innerHTML = cur<fila.length-1 ? 'Próxima &#8250;' : 'Ver meu resultado';
+    } else {
+      nav.style.display='none'; bar.style.width = tela==='fim'?'100%':'0%';
+    }
+  });
+  /* cada questão nova começa do alto da página */
+  React.useEffect(function(){ try{ window.scrollTo(0,0); }catch(x){} },[tela,cur]);
+
+  if(tela==='inicio'){
+    var faltam=Math.max(0,totalBanco-jaVistas), rodadas=Math.floor(totalBanco/RODADA);
+    return h('div',null,
+      h('h1',{className:'tt'},'Simulado — História'),
+      h('p',{className:'sub'},'Detetives do Tempo · Fontes históricas · A escola tem história · Profissões no tempo'),
+      h('div',{className:'grade duas'},
+        h('button',{className:'linha',onClick:function(){ comeca(AQUECER); }},
+          h('span',{className:'n'},String(AQUECER)),
+          h('span',null,h('b',null,'Aquecer'),h('small',null,'5 questões'))),
+        h('button',{className:'linha',onClick:function(){ comeca(RODADA); }},
+          h('span',{className:'n'},String(RODADA)),
+          h('span',null,h('b',null,'Simulado completo'),h('small',null,RODADA+' questões, como a prova'))),
+      ),
+      h('div',{className:'bancobar'},
+        h('div',{className:'bancofill',style:{width:Math.round(jaVistas/totalBanco*100)+'%'}})),
+      h('p',{className:'progresso'},
+        faltam>0
+          ? totalBanco+' questões: '+rodadas+' simulados sem repetir. Você já viu '+jaVistas+'; faltam '+faltam+'.'
+          : 'Você já viu as '+totalBanco+' questões. Agora elas voltam.'),
+      jaVistas>0 && h('div',{className:'linhabtn',style:{justifyContent:'center'}},
+        h('button',{className:'mini',onClick:function(){
+          zeraVistos(); LP3E.zeraVistos(); setTela('inicio0'); setTimeout(function(){ setTela('inicio'); },0);
+        }},'Começar de novo do zero'))
+    );
+  }
+  if(tela==='inicio0') return h('div',null);
+
+  if(tela==='q'){
+    var item=fila[cur], ultima=cur===fila.length-1, rr=resp[item.id];
+    return h(OPQ.Questao,{
+      key:item.id+'-'+cur, item:item,
+      numero:cur+1, total:fila.length,
+      etiqueta: modo==='refazer' ? 'de novo' : modo==='parecidas' ? 'parecida' : null,
+      respostaTexto: rr ? rr.t : null,
+      aoResponder:responde, aoAvancar:avanca,
+      rotuloAvancar: !ultima ? 'Próxima' : 'Ver meu resultado'
+    });
+  }
+
+  /* ---------------- resultado ---------------- */
+  var total=fila.length;
+  var certas=fila.filter(function(i){ return resp[i.id]&&resp[i.id].ok; });
+  var erradas=fila.filter(function(i){ return !(resp[i.id]&&resp[i.id].ok); });
+  var pulou=fila.filter(function(i){ return !resp[i.id]; }).length;
+  var pct=total?Math.round(certas.length/total*100):0, est=estrelas(pct);
+  var porFam={};
+  fila.forEach(function(i){ porFam[i.eixo]=porFam[i.eixo]||{ok:0,t:0}; porFam[i.eixo].t++; if(resp[i.id]&&resp[i.id].ok) porFam[i.eixo].ok++; });
+  var msg = pct===100 ? T2('All correct! Great job!','Acertou tudo! Muito bem!')
+          : pct>=75 ? T2('Almost all! Look at your mistakes below.','Quase tudo! Olhe os erros aqui embaixo.')
+          : pct>=50 ? T2('Good work! Practise the mistakes and try again.','Bom trabalho! Treine os erros e tente de novo.')
+          : T2('Every mistake here is one you will not make on the test.','Cada erro aqui é um erro a menos na prova.');
+  var lista = ver==='erros' ? erradas : fila;
+  var parecidas = (function(){
+    var usados=fila.map(function(i){ return i.id; }), q=[];
+    erradas.forEach(function(i){ var ir=irma(i.eixo, usados); if(ir){ q.push(ir); usados.push(ir.id); } });
+    return q;
+  })();
+  return h('div',{className:'resultado'},
+    h('h1',{className:'tt',style:{textAlign:'center'}}, modo==='refazer'?'Os erros, de novo':modo==='parecidas'?'Questões parecidas':'Meu resultado'),
+    h('div',{className:'anel',style:{background:'conic-gradient(var(--ok) '+pct*3.6+'deg, var(--line) 0)'},'aria-label':pct+'% de acertos'},
+      h('div',{className:'anelin'}, h('b',null,pct+'%'), h('small',null,certas.length+' de '+total))),
+    h('div',{className:'estrelas','aria-label':est+' estrelas'}, [0,1,2].map(function(k){ return h('span',{key:k,className:k<est?'on':''},'★'); })),
+    h('p',{className:'placarsub'},msg),
+    h('div',{className:'resnum'},
+      h('div',{className:'rn ok'},h('b',null,certas.length),h('span',null,'certas')),
+      h('div',{className:'rn no'},h('b',null,erradas.length-pulou),h('span',null,'erradas')),
+      pulou>0 && h('div',{className:'rn pu'},h('b',null,pulou),h('span',null,'sem resposta'))),
+
+    h('div',{className:'grade',style:{marginTop:'12px'}},
+      erradas.length>0 && h('button',{className:'avancar',onClick:function(){ joga(OPQ.embaralha(erradas.slice()),'refazer'); }},
+        'Refazer os erros ('+erradas.length+')'),
+      erradas.length>0 && parecidas.length>0 && h('button',{className:'avancar calmo',onClick:function(){ joga(parecidas,'parecidas'); }},
+        'Treinar com questões parecidas'),
+      h('button',{className:'avancar'+(erradas.length?' calmo':''),onClick:function(){ comeca(tam); }},
+        'Próximo simulado ('+tam+' questões novas)'),
+      h('button',{className:'avancar calmo',onClick:function(){ setTela('inicio'); }},'Voltar ao início')
+    ),
+
+    h('div',{className:'secao'},'por assunto'),
+    OP.FAMILIAS.filter(function(fm){ return porFam[fm.k]; }).map(function(fm){
+      var pv=porFam[fm.k];
+      return h('div',{key:fm.k,className:'fambar'+(pv.ok===0?' zero':'')},
+        h('span',{style:{color:fm.cor}},fm.nome), h('b',null,pv.ok+' de '+pv.t),
+        h('i',{className:'fbarra'},h('i',{style:{width:Math.round(pv.ok/pv.t*100)+'%',background:fm.cor}})));
+    }),
+
+    h('div',{className:'secao'},'revisão'),
+    h('div',{className:'filtro',role:'group'},
+      h('button',{className:'mini'+(ver==='erros'?' on':''),'aria-pressed':ver==='erros',onClick:function(){ setVer('erros'); }},'Só as erradas ('+erradas.length+')'),
+      h('button',{className:'mini'+(ver==='todas'?' on':''),'aria-pressed':ver==='todas',onClick:function(){ setVer('todas'); }},'Todas ('+total+')')),
+    lista.length===0 && h('p',{className:'placarsub'},T2('No mistakes to review. Well done!','Nenhum erro para rever. Muito bem!')),
+    lista.map(function(i){
+      var rs=resp[i.id], ok=rs&&rs.ok, fm=FAM[i.eixo]||{};
+      return h('div',{key:i.id,className:'rev '+(ok?'ok':'no')},
+        h('div',{className:'revtop'},
+          h('span',{className:'revn'},(fila.indexOf(i)+1)),
+          h('span',{className:'revf',style:{color:fm.cor}},fm.nome),
+          h('span',{className:'revst'},ok?'✔':'✖')),
+        h('p',Object.assign({className:'revq'},html(i.pede))),
+        !ok && h('p',{className:'reva sua'},h('b',null,'Sua resposta: '),rs?h('span',html(rs.t)):h('i',null,'sem resposta')),
+        h('p',{className:'reva certa'},h('b',null,ok?'Sua resposta: ':'Resposta certa: '),h('span',html(certaDe(i)))),
+        i.truqueHtml && h('p',Object.assign({className:'revt'},html(i.truqueHtml)))
+      );
+    })
+  );
+}
+function html(s){ return {dangerouslySetInnerHTML:{__html:s}}; }
+
+ReactDOM.createRoot(document.getElementById('raiz')).render(h(App));
+document.getElementById('raiz').setAttribute('data-folha','Simulado de História · 3º trimestre');
+
+/* casinha: confirma dentro da página antes de sair */
+(function(){
+  var ov=document.getElementById('sairov'), irEmbora=window.goHome;
+  window.goHome=function(){ if(window.screenLocked) return; ov.classList.add('show'); };
+  document.getElementById('sairSim').onclick=function(){ ov.classList.remove('show'); irEmbora(); };
+  document.getElementById('sairNao').onclick=function(){ ov.classList.remove('show'); };
+  ov.onclick=function(e){ if(e.target===ov) ov.classList.remove('show'); };
+  document.addEventListener('keydown',function(e){
+    if(ov.classList.contains('show')){ if(e.key==='Escape') ov.classList.remove('show'); return; }
+    var nav=document.getElementById('qnav'); if(nav.style.display==='none') return;
+    if(e.key==='ArrowRight') document.getElementById('navNext').click();
+    else if(e.key==='ArrowLeft'){ var p=document.getElementById('navPrev'); if(!p.disabled) p.click(); }
+  });
+})();
+</script>
+<script>window.SERA_ACCENT={accent:'#f59e0b'};</script>
+<script src="sera_theme.js?v=20261011"></script>
+</body>
+</html>
