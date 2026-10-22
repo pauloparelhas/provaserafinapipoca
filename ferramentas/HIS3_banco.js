@@ -45,8 +45,8 @@ var TIPOS = {
 };
 
 var ITENS = [];
-var IMG={"f11": "carta", "f12": "chapeu", "f13": "album", "f14": "mapa", "f15": "livros", "f16": "entrevista", "f17": "sofa", "f18": "certidao", "f19": "quadros", "f20": "bonecas", "f21": "castelo", "f22": "roda"}; /* foto da aula (media/his3/fonte_*.jpg), com o objeto NOMEADO no enunciado */
-function Q(tema,tipo,id,at,p,o,dica,ex,quem){ ITENS.push({id:id,tema:tema,tipo:tipo,at:at,p:p,o:o,c:0,dica:dica,ex:ex,quem:quem||'',img:IMG[id]?'media/his3/fonte_'+IMG[id]+'.jpg':''}); }
+var IMG={"f11": "carta", "f12": "chapeu", "f13": "album", "f14": "mapa", "f15": "livros", "f16": "entrevista", "f17": "sofa", "f18": "certidao", "f19": "quadros", "f20": "bonecas", "f21": "castelo", "f22": "roda"}; /* foto da aula (media/his3/fonte-*.jpg), com o objeto NOMEADO no enunciado */
+function Q(tema,tipo,id,at,p,o,dica,ex,quem){ ITENS.push({id:id,tema:tema,tipo:tipo,at:at,p:p,o:o,c:0,dica:dica,ex:ex,quem:quem||'',img:IMG[id]?'media/his3/fonte-'+IMG[id]+'.jpg':''}); }
 var OR='Fonte oral', ES='Fonte escrita', VI='Fonte visual', MA='Fonte material';
 var DT='Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?';
 

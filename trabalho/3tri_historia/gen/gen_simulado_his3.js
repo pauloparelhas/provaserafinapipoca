@@ -3,7 +3,7 @@
 // PT puro: enunciado e alternativas em CAIXA ALTA (como a folha da prova da escola);
 // dica, explicação e "a resposta é" em letra normal (voz de quem ensina).
 const fs = require('fs'), path = require('path');
-const DIR = process.argv[2]; global.window = {}; require(path.join(DIR, 'HIS3_banco.js'));
+const DIR = path.resolve(process.argv[2]); global.window = {}; require(path.join(DIR, 'HIS3_banco.js'));
 const I = window.HIS3;
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const UP = s => esc(String(s).toLocaleUpperCase('pt-BR'));
