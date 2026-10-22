@@ -1,0 +1,753 @@
+[
+ {
+  "id": "m09",
+  "tema": "mundo",
+  "at": [
+   "M3"
+  ],
+  "p": "Por que as cidades mais antigas cresceram perto dos rios?",
+  "o": [
+   "Sem os rios a vida não seria possível ali",
+   "Porque gostavam de barulho de água",
+   "Porque era proibido morar longe"
+  ],
+  "dica": "Água para beber e plantar.",
+  "ex": "As cidades cresceram \"abraçadas\" aos rios: sem eles a vida não seria possível."
+ },
+ {
+  "id": "m10",
+  "tema": "mundo",
+  "at": [
+   "M4"
+  ],
+  "p": "O que é patrimônio?",
+  "o": [
+   "Tudo o que é importante para a memória de um povo",
+   "Só dinheiro guardado",
+   "Um brinquedo novo"
+  ],
+  "dica": "Tesouros que o tempo não apaga.",
+  "ex": "Patrimônio é tudo o que consideramos importante para a memória de um povo."
+ },
+ {
+  "id": "m11",
+  "tema": "mundo",
+  "at": [
+   "M4"
+  ],
+  "p": "Uma estátua numa praça é patrimônio…",
+  "o": [
+   "material",
+   "imaterial",
+   "escrito"
+  ],
+  "dica": "Dá para tocar.",
+  "ex": "Museus, praças e estátuas são patrimônio material."
+ },
+ {
+  "id": "m12",
+  "tema": "mundo",
+  "at": [
+   "M4"
+  ],
+  "p": "A capoeira é patrimônio…",
+  "o": [
+   "imaterial",
+   "material",
+   "visual"
+  ],
+  "dica": "Não é um objeto: é algo que se faz.",
+  "ex": "Capoeira, festas juninas e receitas de família são patrimônio imaterial."
+ },
+ {
+  "id": "m13",
+  "tema": "mundo",
+  "at": [
+   "M4"
+  ],
+  "p": "A festa junina é patrimônio…",
+  "o": [
+   "imaterial",
+   "material",
+   "escrito"
+  ],
+  "dica": "É uma festa, um costume.",
+  "ex": "Festa junina é patrimônio imaterial."
+ },
+ {
+  "id": "m14",
+  "tema": "mundo",
+  "at": [
+   "M4"
+  ],
+  "p": "Um museu é patrimônio…",
+  "o": [
+   "material",
+   "imaterial",
+   "oral"
+  ],
+  "dica": "É um prédio.",
+  "ex": "Museus são patrimônio material."
+ },
+ {
+  "id": "m15",
+  "tema": "mundo",
+  "at": [
+   "M4"
+  ],
+  "p": "Quais são patrimônio IMATERIAL? — escolha o grupo certo",
+  "o": [
+   "Capoeira, festa junina e receitas de família",
+   "Museu, praça e estátua",
+   "Sofá, chapéu e boneca"
+  ],
+  "dica": "Costumes e saberes.",
+  "ex": "Capoeira, festas juninas e receitas de família: patrimônio imaterial."
+ },
+ {
+  "id": "m16",
+  "tema": "mundo",
+  "at": [
+   "M5"
+  ],
+  "p": "O que você faz hoje (desenhos, textos, escolhas) será…",
+  "o": [
+   "a fonte histórica de amanhã",
+   "lixo sem importância",
+   "apagado para sempre"
+  ],
+  "dica": "O protagonista da história é você!",
+  "ex": "O que você faz hoje se tornará fonte histórica de amanhã."
+ },
+ {
+  "id": "m17",
+  "tema": "mundo",
+  "at": [
+   "M5"
+  ],
+  "p": "Complete: \"Para entender para onde vamos, precisamos descobrir de onde…\"",
+  "o": [
+   "viemos",
+   "corremos",
+   "dormimos"
+  ],
+  "dica": "Último slide da unidade.",
+  "ex": "\"Para entender para onde vamos, precisamos descobrir de onde viemos.\""
+ },
+ {
+  "id": "p01",
+  "tema": "profissoes",
+  "at": [
+   "P1"
+  ],
+  "p": "Por que muitas profissões mudaram com o tempo?",
+  "o": [
+   "Surgiram novas máquinas, tecnologias e formas de se comunicar",
+   "Porque as pessoas ficaram com preguiça",
+   "Porque mudou a cor do céu"
+  ],
+  "dica": "Pense na tecnologia.",
+  "ex": "Novas máquinas, tecnologias e jeitos de se comunicar mudaram o trabalho."
+ },
+ {
+  "id": "p02",
+  "tema": "profissoes",
+  "at": [
+   "P1"
+  ],
+  "p": "Com as novas tecnologias, as pessoas passaram a trabalhar…",
+  "o": [
+   "mais rápido ou com mais conforto",
+   "sempre mais devagar",
+   "sem fazer nada"
+  ],
+  "dica": "Diz o texto das transformações.",
+  "ex": "As pessoas passaram a trabalhar de um jeito diferente, mais rápido ou com mais conforto."
+ },
+ {
+  "id": "p03",
+  "tema": "profissoes",
+  "at": [
+   "P1"
+  ],
+  "p": "Uma profissão pode continuar existindo, mas com o jeito de trabalhar…",
+  "o": [
+   "diferente",
+   "sempre igual",
+   "proibido"
+  ],
+  "dica": "Pense no carteiro.",
+  "ex": "Algumas profissões continuam existindo, mas o jeito de trabalhar mudou."
+ },
+ {
+  "id": "p04",
+  "tema": "profissoes",
+  "at": [
+   "P2"
+  ],
+  "p": "O que fazia o acendedor de lampião?",
+  "o": [
+   "Acendia os postes das ruas um a um",
+   "Entregava pizzas",
+   "Consertava celulares"
+  ],
+  "dica": "Lampião = luz da rua antiga.",
+  "ex": "Ele caminhava pelas ruas acendendo os postes um a um."
+ },
+ {
+  "id": "p05",
+  "tema": "profissoes",
+  "at": [
+   "P2"
+  ],
+  "p": "Por que o acendedor de lampião deixou de existir?",
+  "o": [
+   "Chegou a energia elétrica",
+   "Os postes ficaram com medo",
+   "As ruas sumiram"
+  ],
+  "dica": "O que acende as luzes hoje?",
+  "ex": "Com a energia elétrica, esse trabalho deixou de ser necessário."
+ },
+ {
+  "id": "p06",
+  "tema": "profissoes",
+  "at": [
+   "P2"
+  ],
+  "p": "Qual destas profissões DESAPARECEU?",
+  "o": [
+   "Acendedor de lampião",
+   "Carteiro",
+   "Professora"
+  ],
+  "dica": "Uma delas ninguém faz mais.",
+  "ex": "O acendedor de lampião desapareceu. Carteiro e professora mudaram, mas continuam."
+ },
+ {
+  "id": "p07",
+  "tema": "profissoes",
+  "at": [
+   "P2"
+  ],
+  "p": "Algumas profissões deixaram de existir porque…",
+  "o": [
+   "novas tecnologias passaram a fazer o que pessoas faziam",
+   "as pessoas cansaram de ter nomes",
+   "choveu muito"
+  ],
+  "dica": "Máquinas e tecnologias.",
+  "ex": "Novas tecnologias passaram a fazer coisas que antes eram feitas por pessoas."
+ },
+ {
+  "id": "p08",
+  "tema": "profissoes",
+  "at": [
+   "P3"
+  ],
+  "p": "No começo, como Seu Francisco entregava as cartas?",
+  "o": [
+   "A pé, com uma bolsa de couro no ombro",
+   "De drone",
+   "De avião"
+  ],
+  "dica": "Ele era bem jovem.",
+  "ex": "Ele entregava cartas a pé, com uma grande bolsa de couro."
+ },
+ {
+  "id": "p09",
+  "tema": "profissoes",
+  "at": [
+   "P3"
+  ],
+  "p": "Depois de andar a pé, Seu Francisco ganhou… para entregar mais rápido.",
+  "o": [
+   "uma bicicleta",
+   "um foguete",
+   "um navio"
+  ],
+  "dica": "Duas rodas e pedal.",
+  "ex": "Ele ganhou uma bicicleta para fazer as entregas mais rápido."
+ },
+ {
+  "id": "p10",
+  "tema": "profissoes",
+  "at": [
+   "P3"
+  ],
+  "p": "Com as motos, o que melhorou para o carteiro?",
+  "o": [
+   "Chegar a lugares mais distantes e levar mais encomendas",
+   "Ficar parado em casa",
+   "Não entregar nada"
+  ],
+  "dica": "Motor é mais rápido.",
+  "ex": "As motos levaram os carteiros mais longe, com mais encomendas."
+ },
+ {
+  "id": "p11",
+  "tema": "profissoes",
+  "at": [
+   "P3"
+  ],
+  "p": "Ponha em ordem o jeito de entregar do Seu Francisco:",
+  "o": [
+   "a pé → bicicleta → moto → aparelho com tela",
+   "moto → a pé → bicicleta → aparelho com tela",
+   "aparelho com tela → moto → bicicleta → a pé"
+  ],
+  "dica": "Do mais antigo ao mais novo.",
+  "ex": "A pé, depois bicicleta, depois moto; hoje os carteiros registram tudo num aparelho com tela."
+ },
+ {
+  "id": "p12",
+  "tema": "profissoes",
+  "at": [
+   "P3"
+  ],
+  "p": "As cartas diminuíram. O que o carteiro passou a entregar também?",
+  "o": [
+   "Contas, revistas e caixas de compras pela internet",
+   "Só flores",
+   "Nada"
+  ],
+  "dica": "Compras feitas pela internet!",
+  "ex": "Ele passou a entregar contas, revistas e pequenas caixas de compras pela internet."
+ },
+ {
+  "id": "p13",
+  "tema": "profissoes",
+  "at": [
+   "P3"
+  ],
+  "p": "Hoje os carteiros usam… para registrar as entregas.",
+  "o": [
+   "aparelhos com tela",
+   "penas e tinteiros",
+   "sinais de fumaça"
+  ],
+  "dica": "Tecnologia de hoje.",
+  "ex": "Hoje os carteiros usam aparelhos com tela para registrar as entregas."
+ },
+ {
+  "id": "p14",
+  "tema": "profissoes",
+  "at": [
+   "P3",
+   "P1"
+  ],
+  "p": "A profissão de carteiro…",
+  "o": [
+   "continua existindo, de um jeito diferente",
+   "desapareceu",
+   "nunca existiu"
+  ],
+  "dica": "Seu Francisco se orgulha dela.",
+  "ex": "O carteiro continua existindo, mas de um jeito diferente."
+ },
+ {
+  "id": "p15",
+  "tema": "profissoes",
+  "at": [
+   "P10"
+  ],
+  "p": "Como as pessoas mandavam mensagens antes do celular?",
+  "o": [
+   "Cartas escritas à mão, levadas pelo carteiro",
+   "Por mensagem de voz",
+   "Por vídeo-chamada"
+  ],
+  "dica": "Papel, envelope, selo.",
+  "ex": "Antes do celular, as pessoas mandavam cartas escritas à mão."
+ },
+ {
+  "id": "p16",
+  "tema": "profissoes",
+  "at": [
+   "P10"
+  ],
+  "p": "Hoje, com celular e computador, as mensagens chegam…",
+  "o": [
+   "em segundos",
+   "em meses",
+   "nunca"
+  ],
+  "dica": "Rapidinho!",
+  "ex": "Hoje muitas pessoas mandam mensagens em segundos."
+ },
+ {
+  "id": "p17",
+  "tema": "profissoes",
+  "at": [
+   "P4"
+  ],
+  "p": "Quando era criança, como Dona Lúcia brincava?",
+  "o": [
+   "De dar aula para as bonecas, com uma lousinha de papelão",
+   "De pilotar avião",
+   "De médica"
+  ],
+  "dica": "Ela sempre quis ser professora.",
+  "ex": "Ela brincava de dar aula para as bonecas numa lousinha de papelão."
+ },
+ {
+  "id": "p18",
+  "tema": "profissoes",
+  "at": [
+   "P4"
+  ],
+  "p": "Na escola de antigamente da Dona Lúcia, como era?",
+  "o": [
+   "Quadro de giz, livros pesados e tudo escrito à mão",
+   "Tablets e lousa digital",
+   "Aulas por vídeo"
+  ],
+  "dica": "Não existia computador na sala.",
+  "ex": "Antes: quadro de giz, livros grandes e pesados, cadernos grossos e tudo escrito à mão."
+ },
+ {
+  "id": "p19",
+  "tema": "profissoes",
+  "at": [
+   "P4"
+  ],
+  "p": "O que Dona Lúcia usa hoje nas aulas?",
+  "o": [
+   "Computador e vídeos para a turma",
+   "Só uma lousinha de papelão",
+   "Pombo-correio"
+  ],
+  "dica": "Tecnologia na sala.",
+  "ex": "Hoje ela usa computador e mostra vídeos para a turma."
+ },
+ {
+  "id": "p20",
+  "tema": "profissoes",
+  "at": [
+   "P4"
+  ],
+  "p": "Antigamente, para pesquisar, os alunos da Dona Lúcia…",
+  "o": [
+   "iam à biblioteca ou traziam um livro de casa",
+   "usavam a internet",
+   "perguntavam ao celular"
+  ],
+  "dica": "Não existia internet na escola dela.",
+  "ex": "Antes pesquisavam na biblioteca ou em livros de casa."
+ },
+ {
+  "id": "p21",
+  "tema": "profissoes",
+  "at": [
+   "P4"
+  ],
+  "p": "O que NÃO mudou no trabalho da Dona Lúcia?",
+  "o": [
+   "Conversar com os alunos e ajudá-los a aprender com alegria",
+   "O quadro de giz",
+   "Escrever tudo à mão"
+  ],
+  "dica": "O que ela mais ama.",
+  "ex": "Continuou igual: conversar com os alunos, ouvir suas ideias e ajudá-los a aprender com alegria."
+ },
+ {
+  "id": "p22",
+  "tema": "profissoes",
+  "at": [
+   "P5"
+  ],
+  "p": "Quando Seu Pedro era pequeno, como era o trabalho na fazenda?",
+  "o": [
+   "Feito com as mãos e com ajuda dos animais",
+   "Feito por robôs",
+   "Feito pelo celular"
+  ],
+  "dica": "Bois puxavam o arado.",
+  "ex": "Antes, tudo era feito com as mãos e com a ajuda dos animais."
+ },
+ {
+  "id": "p23",
+  "tema": "profissoes",
+  "at": [
+   "P5"
+  ],
+  "p": "Para arar a terra, antigamente, Seu Pedro usava…",
+  "o": [
+   "um arado puxado por bois",
+   "um drone",
+   "um computador"
+  ],
+  "dica": "Animais fortes ajudavam.",
+  "ex": "Ele usava um arado puxado por bois."
+ },
+ {
+  "id": "p24",
+  "tema": "profissoes",
+  "at": [
+   "P5"
+  ],
+  "p": "Que máquinas chegaram à fazenda e fizeram o trabalho mais rápido?",
+  "o": [
+   "Os tratores",
+   "As máquinas de escrever",
+   "Os lampiões"
+  ],
+  "dica": "Máquina grande do campo.",
+  "ex": "Vieram os tratores, que fazem o trabalho mais rápido e com menos cansaço."
+ },
+ {
+  "id": "p25",
+  "tema": "profissoes",
+  "at": [
+   "P5"
+  ],
+  "p": "Hoje Seu Pedro usa o celular para…",
+  "o": [
+   "saber se vai chover e cuidar da plantação a distância",
+   "arar a terra com bois",
+   "escrever cartas"
+  ],
+  "dica": "Tecnologia no campo.",
+  "ex": "Ele usa o celular para saber se vai chover e cuidar da plantação a distância."
+ },
+ {
+  "id": "p26",
+  "tema": "profissoes",
+  "at": [
+   "P5"
+  ],
+  "p": "Na história do Seu Pedro, o fazendeiro do FUTURO poderá…",
+  "o": [
+   "cultivar em cima de prédios ou com ajuda de robôs",
+   "usar só as mãos",
+   "parar de plantar"
+  ],
+  "dica": "Futuro, não hoje!",
+  "ex": "O fazendeiro do futuro pode cultivar em cima de prédios ou com robôs."
+ },
+ {
+  "id": "p27",
+  "tema": "profissoes",
+  "at": [
+   "P5"
+  ],
+  "p": "O que continuou igual para o Seu Pedro?",
+  "o": [
+   "Amar a terra, cuidar da natureza e produzir alimentos saudáveis",
+   "O arado puxado por bois",
+   "Colher tudo com as mãos"
+  ],
+  "dica": "O mais importante.",
+  "ex": "Continuou: amar a terra, cuidar da natureza e produzir alimentos saudáveis."
+ },
+ {
+  "id": "p28",
+  "tema": "profissoes",
+  "at": [
+   "P6"
+  ],
+  "p": "No começo da carreira, o Doutor João usava…",
+  "o": [
+   "estetoscópio, termômetro de mercúrio, papel e caneta",
+   "robôs e computador",
+   "exames pelo celular"
+  ],
+  "dica": "Consultório simples.",
+  "ex": "No começo: estetoscópio, termômetro de mercúrio, papel e caneta."
+ },
+ {
+  "id": "p29",
+  "tema": "profissoes",
+  "at": [
+   "P6"
+  ],
+  "p": "Na época em que o Doutor João começou, os exames…",
+  "o": [
+   "demoravam dias para ficar prontos",
+   "chegavam no celular",
+   "eram feitos por robôs"
+  ],
+  "dica": "Era bem mais lento.",
+  "ex": "Os exames demoravam dias para ficar prontos."
+ },
+ {
+  "id": "p30",
+  "tema": "profissoes",
+  "at": [
+   "P6"
+  ],
+  "p": "Onde ficavam as fichas dos pacientes, antigamente?",
+  "o": [
+   "Em grandes arquivos de papel",
+   "No computador",
+   "Na nuvem"
+  ],
+  "dica": "Muito papel!",
+  "ex": "As fichas ficavam guardadas em grandes arquivos de papel."
+ },
+ {
+  "id": "p31",
+  "tema": "profissoes",
+  "at": [
+   "P6"
+  ],
+  "p": "O que o Doutor João tem hoje? — escolha o grupo certo",
+  "o": [
+   "Computador, exames pelo celular e consultas por vídeo",
+   "Só papel e caneta",
+   "Arado e bois"
+  ],
+  "dica": "Tecnologia na medicina.",
+  "ex": "Hoje: computador, exames pelo celular, consulta por vídeo e máquinas que mostram dentro do corpo."
+ },
+ {
+  "id": "p32",
+  "tema": "profissoes",
+  "at": [
+   "P6"
+  ],
+  "p": "O que continua sendo a parte mais importante do trabalho do Doutor João?",
+  "o": [
+   "O cuidado e a atenção com cada paciente",
+   "O termômetro de mercúrio",
+   "Os arquivos de papel"
+  ],
+  "dica": "Mesmo com tanta tecnologia…",
+  "ex": "O cuidado e a atenção com cada paciente não mudaram."
+ },
+ {
+  "id": "p33",
+  "tema": "profissoes",
+  "at": [
+   "P7"
+  ],
+  "p": "Maleta, seringa antiga e termômetro de mercúrio são ferramentas de qual profissão?",
+  "o": [
+   "Médico",
+   "Pedreiro",
+   "Fotógrafo"
+  ],
+  "dica": "Quem cuida da saúde?",
+  "ex": "São ferramentas do médico."
+ },
+ {
+  "id": "p34",
+  "tema": "profissoes",
+  "at": [
+   "P7"
+  ],
+  "p": "A câmera antiga de tripé era ferramenta de qual profissão?",
+  "o": [
+   "Fotógrafo",
+   "Professora",
+   "Médico"
+  ],
+  "dica": "Tirava fotos.",
+  "ex": "Era a ferramenta do fotógrafo antigamente."
+ },
+ {
+  "id": "p35",
+  "tema": "profissoes",
+  "at": [
+   "P7"
+  ],
+  "p": "Lousa, livros e globo são ferramentas de qual profissão?",
+  "o": [
+   "Professora",
+   "Fotógrafo",
+   "Fazendeiro"
+  ],
+  "dica": "Quem ensina?",
+  "ex": "São ferramentas da professora."
+ },
+ {
+  "id": "p36",
+  "tema": "profissoes",
+  "at": [
+   "P7"
+  ],
+  "p": "Marreta, colher de pedreiro e pincel são ferramentas de qual profissão?",
+  "o": [
+   "Construtor (pedreiro)",
+   "Médico",
+   "Carteiro"
+  ],
+  "dica": "Quem constrói casas?",
+  "ex": "São ferramentas do construtor."
+ },
+ {
+  "id": "p37",
+  "tema": "profissoes",
+  "at": [
+   "P7"
+  ],
+  "p": "No jogo das cartas, cada profissão tinha…",
+  "o": [
+   "mais de uma ferramenta",
+   "só uma ferramenta",
+   "nenhuma ferramenta"
+  ],
+  "dica": "Fique atento à regra do jogo.",
+  "ex": "Para cada profissão há mais de uma ferramenta."
+ },
+ {
+  "id": "p38",
+  "tema": "profissoes",
+  "at": [
+   "P8"
+  ],
+  "p": "Na entrega, antes havia carrinho de mão; hoje existe até…",
+  "o": [
+   "drone",
+   "arado",
+   "lampião"
+  ],
+  "dica": "Voa!",
+  "ex": "Hoje existem entregas por drone."
+ },
+ {
+  "id": "p39",
+  "tema": "profissoes",
+  "at": [
+   "P8"
+  ],
+  "p": "Na agricultura, antes boi e arado; hoje…",
+  "o": [
+   "máquinas no campo",
+   "acendedor de lampião",
+   "carta à mão"
+  ],
+  "dica": "Trator e máquina.",
+  "ex": "Hoje máquinas trabalham no campo."
+ },
+ {
+  "id": "p40",
+  "tema": "profissoes",
+  "at": [
+   "P8"
+  ],
+  "p": "Na medicina, uma novidade de hoje mostrada na aula é…",
+  "o": [
+   "o robô que ajuda na cirurgia",
+   "o termômetro de mercúrio",
+   "a ficha de papel"
+  ],
+  "dica": "Máquina moderna.",
+  "ex": "Hoje existem robôs que ajudam nas cirurgias."
+ },
+ {
+  "id": "p41",
+  "tema": "profissoes",
+  "at": [
+   "P8"
+  ],
+  "p": "Na engenharia, antes desenhos de engrenagens no papel; hoje…",
+  "o": [
+   "engenheiros com robôs e computador",
+   "só régua de madeira",
+   "bois puxando"
+  ],
+  "dica": "Tecnologia.",
+  "ex": "Hoje engenheiros trabalham com robôs e computadores."
+ }
+]

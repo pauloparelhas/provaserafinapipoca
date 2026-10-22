@@ -1,0 +1,783 @@
+[
+ {
+  "id": "f01",
+  "tema": "fontes",
+  "at": [
+   "F1"
+  ],
+  "p": "O que são fontes históricas?",
+  "o": [
+   "Pistas do passado que a gente pode ver, ouvir, tocar ou ler",
+   "Só os livros de História da escola",
+   "Coisas que acabaram de ser inventadas"
+  ],
+  "dica": "Detetive procura PISTAS.",
+  "ex": "Fontes históricas são pistas do passado: tudo o que a gente pode ver, ouvir, tocar ou ler para aprender sobre outras épocas."
+ },
+ {
+  "id": "f02",
+  "tema": "fontes",
+  "at": [
+   "F1"
+  ],
+  "p": "Para que servem as fontes históricas?",
+  "o": [
+   "Para aprender sobre outras épocas",
+   "Para enfeitar a sala",
+   "Para adivinhar o futuro"
+  ],
+  "dica": "Elas contam o passado.",
+  "ex": "As fontes ajudam a aprender como as pessoas viviam em outras épocas."
+ },
+ {
+  "id": "f03",
+  "tema": "fontes",
+  "at": [
+   "F1"
+  ],
+  "p": "Complete: \"Tudo ao nosso redor pode contar uma…\"",
+  "o": [
+   "história",
+   "mentira",
+   "música"
+  ],
+  "dica": "Tudo pode contar uma…",
+  "ex": "\"Tudo ao nosso redor pode contar uma história.\" Até um objeto simples é uma pista."
+ },
+ {
+  "id": "f04",
+  "tema": "fontes",
+  "at": [
+   "F1"
+  ],
+  "p": "\"Tudo o que produzimos deixa um rastro.\" Esses rastros são as…",
+  "o": [
+   "fontes históricas",
+   "pegadas de bicho",
+   "notas da prova"
+  ],
+  "dica": "São as pistas do passado.",
+  "ex": "Tudo o que as pessoas fazem deixa rastros. Esses rastros são as fontes históricas."
+ },
+ {
+  "id": "f05",
+  "tema": "fontes",
+  "at": [
+   "F1"
+  ],
+  "p": "Qual destes pode ser uma fonte histórica?",
+  "o": [
+   "Uma carta antiga da bisavó",
+   "Uma nuvem passando no céu",
+   "O barulho da chuva de agora"
+  ],
+  "dica": "Uma pista que guarda o passado.",
+  "ex": "A carta antiga guarda o passado: é uma fonte histórica."
+ },
+ {
+  "id": "f06",
+  "tema": "fontes",
+  "at": [
+   "F2"
+  ],
+  "p": "O que é uma fonte ORAL?",
+  "o": [
+   "Um relato ou história contada por uma pessoa",
+   "Um desenho numa parede",
+   "Um brinquedo antigo"
+  ],
+  "dica": "Oral vem de boca, de falar.",
+  "ex": "Fonte oral é um relato ou história CONTADA por uma pessoa."
+ },
+ {
+  "id": "f07",
+  "tema": "fontes",
+  "at": [
+   "F3"
+  ],
+  "p": "O que é uma fonte ESCRITA?",
+  "o": [
+   "Um texto: carta, diário, jornal ou lei",
+   "Uma foto antiga",
+   "Uma música cantada"
+  ],
+  "dica": "Escrita tem letras num papel.",
+  "ex": "Fonte escrita é um texto: diários, leis, jornais e cartas."
+ },
+ {
+  "id": "f08",
+  "tema": "fontes",
+  "at": [
+   "F4"
+  ],
+  "p": "O que é uma fonte VISUAL?",
+  "o": [
+   "Uma imagem: pintura, fotografia ou mapa",
+   "Um relato do vovô",
+   "Uma panela antiga"
+  ],
+  "dica": "Visual é o que a gente VÊ como imagem.",
+  "ex": "Fonte visual é uma imagem: pinturas, fotografias e mapas."
+ },
+ {
+  "id": "f09",
+  "tema": "fontes",
+  "at": [
+   "F5"
+  ],
+  "p": "O que é uma fonte MATERIAL?",
+  "o": [
+   "Um objeto: brinquedo, roupa, construção ou utensílio",
+   "Uma entrevista gravada",
+   "Uma carta"
+  ],
+  "dica": "Material é o que a gente TOCA.",
+  "ex": "Fonte material é um objeto: brinquedos, roupas, construções e utensílios."
+ },
+ {
+  "id": "f10",
+  "tema": "fontes",
+  "at": [
+   "F2",
+   "F6"
+  ],
+  "p": "A vovó CONTOU como era a escola dela. Que fonte é essa?",
+  "o": [
+   "Fonte oral",
+   "Fonte escrita",
+   "Fonte visual"
+  ],
+  "dica": "Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?",
+  "ex": "A vovó contou falando: é fonte oral."
+ },
+ {
+  "id": "f11",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Uma carta antiga escrita pelo bisavô. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte oral",
+   "Fonte material"
+  ],
+  "dica": "Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?",
+  "ex": "A carta tem um texto escrito: é fonte escrita."
+ },
+ {
+  "id": "f12",
+  "tema": "fontes",
+  "at": [
+   "F5",
+   "F6"
+  ],
+  "p": "Um chapéu antigo, o objeto. Que fonte é essa?",
+  "o": [
+   "Fonte material",
+   "Fonte visual",
+   "Fonte escrita"
+  ],
+  "dica": "Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?",
+  "ex": "O chapéu é um objeto que a gente toca: fonte material."
+ },
+ {
+  "id": "f13",
+  "tema": "fontes",
+  "at": [
+   "F4",
+   "F6"
+  ],
+  "p": "As fotos do álbum da família. Que fonte é essa?",
+  "o": [
+   "Fonte visual",
+   "Fonte escrita",
+   "Fonte oral"
+  ],
+  "dica": "Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?",
+  "ex": "Foto é imagem: fonte visual."
+ },
+ {
+  "id": "f14",
+  "tema": "fontes",
+  "at": [
+   "F4",
+   "F6"
+  ],
+  "p": "Um mapa antigo. Que fonte é essa?",
+  "o": [
+   "Fonte visual",
+   "Fonte escrita",
+   "Fonte oral"
+  ],
+  "dica": "O mapa é um desenho de um lugar.",
+  "ex": "Mapa é imagem, como pintura e fotografia: fonte visual."
+ },
+ {
+  "id": "f15",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "O que está escrito num livro antigo. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte visual",
+   "Fonte oral"
+  ],
+  "dica": "Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?",
+  "ex": "É texto escrito: fonte escrita."
+ },
+ {
+  "id": "f16",
+  "tema": "fontes",
+  "at": [
+   "F2",
+   "F6"
+  ],
+  "p": "Uma entrevista gravada em que uma moça conta a vida dela. Que fonte é essa?",
+  "o": [
+   "Fonte oral",
+   "Fonte escrita",
+   "Fonte material"
+  ],
+  "dica": "Mesmo gravada, a pessoa está CONTANDO.",
+  "ex": "Entrevista é alguém contando: fonte oral, mesmo gravada."
+ },
+ {
+  "id": "f17",
+  "tema": "fontes",
+  "at": [
+   "F5",
+   "F6"
+  ],
+  "p": "Um sofá antigo, o móvel. Que fonte é essa?",
+  "o": [
+   "Fonte material",
+   "Fonte visual",
+   "Fonte escrita"
+  ],
+  "dica": "Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?",
+  "ex": "O sofá é um objeto: fonte material."
+ },
+ {
+  "id": "f18",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Uma certidão de nascimento. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte visual",
+   "Fonte oral"
+  ],
+  "dica": "É um documento com informações escritas.",
+  "ex": "Certidão é documento escrito: fonte escrita."
+ },
+ {
+  "id": "f19",
+  "tema": "fontes",
+  "at": [
+   "F4",
+   "F6"
+  ],
+  "p": "As fotos nos quadros da parede. Que fonte é essa?",
+  "o": [
+   "Fonte visual",
+   "Fonte escrita",
+   "Fonte oral"
+  ],
+  "dica": "Olhe para as FOTOS.",
+  "ex": "As fotos são imagens: fonte visual."
+ },
+ {
+  "id": "f20",
+  "tema": "fontes",
+  "at": [
+   "F5",
+   "F6"
+  ],
+  "p": "Bonecas antigas, os brinquedos. Que fonte é essa?",
+  "o": [
+   "Fonte material",
+   "Fonte escrita",
+   "Fonte oral"
+  ],
+  "dica": "Brinquedo a gente toca.",
+  "ex": "Brinquedos antigos são objetos: fonte material."
+ },
+ {
+  "id": "f21",
+  "tema": "fontes",
+  "at": [
+   "F5",
+   "F6"
+  ],
+  "p": "Um castelo antigo, a construção. Que fonte é essa?",
+  "o": [
+   "Fonte material",
+   "Fonte escrita",
+   "Fonte oral"
+  ],
+  "dica": "Construções estão na lista da fonte material.",
+  "ex": "Construção é fonte material (a FOTO do castelo seria visual)."
+ },
+ {
+  "id": "f22",
+  "tema": "fontes",
+  "at": [
+   "F2",
+   "F6"
+  ],
+  "p": "As cantigas de roda que a vovó ensinou cantando. Que fonte é essa?",
+  "o": [
+   "Fonte oral",
+   "Fonte escrita",
+   "Fonte visual"
+  ],
+  "dica": "Passou de boca em boca.",
+  "ex": "Cantigas passadas cantando, pela fala, são fonte oral."
+ },
+ {
+  "id": "f23",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "O diário da tia, com o que ela escrevia todo dia. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte oral",
+   "Fonte visual"
+  ],
+  "dica": "Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?",
+  "ex": "Diário é texto escrito: fonte escrita."
+ },
+ {
+  "id": "f24",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Um jornal antigo. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte material",
+   "Fonte oral"
+  ],
+  "dica": "Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?",
+  "ex": "Jornal tem textos escritos: fonte escrita."
+ },
+ {
+  "id": "f25",
+  "tema": "fontes",
+  "at": [
+   "F4",
+   "F6"
+  ],
+  "p": "Uma pintura antiga num museu. Que fonte é essa?",
+  "o": [
+   "Fonte visual",
+   "Fonte escrita",
+   "Fonte oral"
+  ],
+  "dica": "Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?",
+  "ex": "Pintura é imagem: fonte visual."
+ },
+ {
+  "id": "f26",
+  "tema": "fontes",
+  "at": [
+   "F5",
+   "F6"
+  ],
+  "p": "Uma panela antiga da bisavó, o utensílio. Que fonte é essa?",
+  "o": [
+   "Fonte material",
+   "Fonte visual",
+   "Fonte escrita"
+  ],
+  "dica": "Utensílio é objeto de usar.",
+  "ex": "Utensílios são objetos: fonte material."
+ },
+ {
+  "id": "f27",
+  "tema": "fontes",
+  "at": [
+   "F2",
+   "F6"
+  ],
+  "p": "Um vídeo de um senhor contando como era a cidade. Que fonte é essa?",
+  "o": [
+   "Fonte oral",
+   "Fonte visual",
+   "Fonte escrita"
+  ],
+  "dica": "Pegadinha: é vídeo, mas o senhor está CONTANDO.",
+  "ex": "Vídeo de alguém contando uma história é fonte oral."
+ },
+ {
+  "id": "f28",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Um bilhete escrito pela professora. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte oral",
+   "Fonte material"
+  ],
+  "dica": "Pense: alguém CONTA? alguém ESCREVEU? a gente VÊ uma imagem? a gente TOCA um objeto?",
+  "ex": "Bilhete tem texto: fonte escrita."
+ },
+ {
+  "id": "f29",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Uma receita escrita no caderno da avó. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte oral",
+   "Fonte material"
+  ],
+  "dica": "Está escrita no caderno.",
+  "ex": "Receita escrita é fonte escrita."
+ },
+ {
+  "id": "f30",
+  "tema": "fontes",
+  "at": [
+   "F5",
+   "F6"
+  ],
+  "p": "Um uniforme antigo da escola, a roupa. Que fonte é essa?",
+  "o": [
+   "Fonte material",
+   "Fonte visual",
+   "Fonte escrita"
+  ],
+  "dica": "Roupa está na lista da fonte material.",
+  "ex": "Roupas são objetos: fonte material."
+ },
+ {
+  "id": "f31",
+  "tema": "fontes",
+  "at": [
+   "F4",
+   "F6"
+  ],
+  "p": "Uma escultura antiga. Que fonte é essa?",
+  "o": [
+   "Fonte visual",
+   "Fonte oral",
+   "Fonte escrita"
+  ],
+  "dica": "O material da escola põe escultura junto de foto e pintura.",
+  "ex": "No material, escultura é uma imagem que registra o passado: fonte visual."
+ },
+ {
+  "id": "f32",
+  "tema": "fontes",
+  "at": [
+   "F4",
+   "F5"
+  ],
+  "p": "A FOTO de uma boneca antiga é fonte…",
+  "o": [
+   "visual",
+   "material",
+   "oral"
+  ],
+  "dica": "Pegadinha! É a foto, não a boneca.",
+  "ex": "A foto é imagem: visual. A boneca em si seria material."
+ },
+ {
+  "id": "f33",
+  "tema": "fontes",
+  "at": [
+   "F4",
+   "F5"
+  ],
+  "p": "A boneca antiga, o brinquedo de verdade, é fonte…",
+  "o": [
+   "material",
+   "visual",
+   "escrita"
+  ],
+  "dica": "Agora é o objeto.",
+  "ex": "O brinquedo é objeto que se toca: material."
+ },
+ {
+  "id": "f34",
+  "tema": "fontes",
+  "at": [
+   "F2",
+   "F3"
+  ],
+  "p": "A vovó ESCREVEU uma carta contando a infância dela. A carta é fonte…",
+  "o": [
+   "escrita",
+   "oral",
+   "material"
+  ],
+  "dica": "Ela escreveu, não falou.",
+  "ex": "A carta é texto escrito: fonte escrita."
+ },
+ {
+  "id": "f35",
+  "tema": "fontes",
+  "at": [
+   "F2",
+   "F3"
+  ],
+  "p": "A vovó FALOU sobre a infância dela, sentada no sofá. Isso é fonte…",
+  "o": [
+   "oral",
+   "escrita",
+   "visual"
+  ],
+  "dica": "Ela falou.",
+  "ex": "Contar falando é fonte oral."
+ },
+ {
+  "id": "f36",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Quais destas são fontes ESCRITAS? — escolha o grupo certo",
+  "o": [
+   "Diário e carta",
+   "Foto e pintura",
+   "Boneca e chapéu"
+  ],
+  "dica": "Procure o que tem texto.",
+  "ex": "Diário e carta têm texto: fontes escritas."
+ },
+ {
+  "id": "f37",
+  "tema": "fontes",
+  "at": [
+   "F5",
+   "F6"
+  ],
+  "p": "Quais destas são fontes MATERIAIS? — escolha o grupo certo",
+  "o": [
+   "Brinquedo antigo e roupa antiga",
+   "Jornal e lei",
+   "Mapa e fotografia"
+  ],
+  "dica": "Objetos que a gente toca.",
+  "ex": "Brinquedos e roupas são objetos: fontes materiais."
+ },
+ {
+  "id": "f38",
+  "tema": "fontes",
+  "at": [
+   "F4",
+   "F6"
+  ],
+  "p": "Quais destas são fontes VISUAIS? — escolha o grupo certo",
+  "o": [
+   "Fotografia, pintura e mapa",
+   "Carta e diário",
+   "Panela e sofá"
+  ],
+  "dica": "Imagens.",
+  "ex": "Fotografias, pinturas e mapas são imagens: fontes visuais."
+ },
+ {
+  "id": "f39",
+  "tema": "fontes",
+  "at": [
+   "F2",
+   "F6"
+  ],
+  "p": "Quais destas são fontes ORAIS? — escolha o grupo certo",
+  "o": [
+   "Relato do vovô e entrevista",
+   "Certidão e bilhete",
+   "Castelo e uniforme"
+  ],
+  "dica": "Alguém contando.",
+  "ex": "Relatos e entrevistas são pessoas contando: fontes orais."
+ },
+ {
+  "id": "f40",
+  "tema": "fontes",
+  "at": [
+   "F2"
+  ],
+  "p": "Fonte oral passa de geração em geração por meio da…",
+  "o": [
+   "fala",
+   "fotografia",
+   "construção"
+  ],
+  "dica": "\"Fonte falada, história guardada.\"",
+  "ex": "As memórias orais passam de geração em geração pela fala."
+ },
+ {
+  "id": "f41",
+  "tema": "fontes",
+  "at": [
+   "F2"
+  ],
+  "p": "Para entender um relato, o detetive pergunta: quem contou? o que contou? e…",
+  "o": [
+   "De que época a pessoa se lembrava?",
+   "Qual é a cor do sofá?",
+   "Quanto custa a entrevista?"
+  ],
+  "dica": "Pense no passado que a pessoa lembra.",
+  "ex": "Perguntas do relato: quem conta, o que contou, de que época se lembrava, o que aprendi."
+ },
+ {
+  "id": "f42",
+  "tema": "fontes",
+  "at": [
+   "F7"
+  ],
+  "p": "Uma roupa antiga pode nos ensinar…",
+  "o": [
+   "como as pessoas se vestiam antigamente",
+   "que amanhã vai chover",
+   "o nome do presidente de hoje"
+  ],
+  "dica": "O que essa pista mostra do passado?",
+  "ex": "A roupa antiga mostra como as pessoas se vestiam."
+ },
+ {
+  "id": "f43",
+  "tema": "fontes",
+  "at": [
+   "F7"
+  ],
+  "p": "Um brinquedo antigo pode nos ensinar…",
+  "o": [
+   "como as crianças brincavam antigamente",
+   "como funciona um celular",
+   "a tabuada do 2"
+  ],
+  "dica": "É pista de quê?",
+  "ex": "O brinquedo antigo mostra como as crianças brincavam."
+ },
+ {
+  "id": "f44",
+  "tema": "fontes",
+  "at": [
+   "F7"
+  ],
+  "p": "Uma carta antiga pode nos contar…",
+  "o": [
+   "notícias e sentimentos de quem escreveu",
+   "o que vai acontecer no futuro",
+   "como é a chuva de hoje"
+  ],
+  "dica": "Leia o que está escrito.",
+  "ex": "A carta conta o que a pessoa vivia e sentia."
+ },
+ {
+  "id": "f45",
+  "tema": "fontes",
+  "at": [
+   "F8"
+  ],
+  "p": "Na ficha de observação, o detetive pergunta: esse objeto conta uma história do…",
+  "o": [
+   "passado",
+   "futuro",
+   "sonho"
+  ],
+  "dica": "É uma pista do tempo que já passou.",
+  "ex": "A ficha pergunta se o objeto conta uma história do passado."
+ },
+ {
+  "id": "f46",
+  "tema": "fontes",
+  "at": [
+   "F8"
+  ],
+  "p": "Na ficha do objeto, o que ele pode fazer você lembrar? — escolha o grupo certo",
+  "o": [
+   "Uma pessoa da família, algo que já aconteceu ou um lugar",
+   "Só a tarefa de casa",
+   "Nada, objeto não lembra nada"
+  ],
+  "dica": "Pense em quem, o quê e onde.",
+  "ex": "Um objeto pode lembrar uma pessoa da família, algo que já aconteceu ou um lugar."
+ },
+ {
+  "id": "f47",
+  "tema": "fontes",
+  "at": [
+   "F9"
+  ],
+  "p": "Uma boa legenda de fonte diz o que a imagem mostra, que tipo de fonte é e…",
+  "o": [
+   "o que ela pode contar sobre o passado",
+   "quanto ela custou",
+   "quem ganhou o jogo ontem"
+  ],
+  "dica": "Legenda de detetive.",
+  "ex": "A legenda diz: o que mostra, que tipo de fonte é e o que conta do passado."
+ },
+ {
+  "id": "f48",
+  "tema": "fontes",
+  "at": [
+   "F9",
+   "F4"
+  ],
+  "p": "A foto de um trem a vapor antigo é fonte…",
+  "o": [
+   "visual",
+   "oral",
+   "escrita"
+  ],
+  "dica": "É uma foto.",
+  "ex": "Foto é fonte visual. Ela mostra como eram os trens antigamente."
+ },
+ {
+  "id": "f49",
+  "tema": "fontes",
+  "at": [
+   "F9"
+  ],
+  "p": "A foto antiga de pessoas chegando de navio pode contar…",
+  "o": [
+   "como as pessoas viajavam antigamente",
+   "como se faz bolo",
+   "qual é o celular mais novo"
+  ],
+  "dica": "Olhe o navio cheio de gente.",
+  "ex": "A foto mostra como as pessoas viajavam e chegavam de outros lugares."
+ },
+ {
+  "id": "f50",
+  "tema": "fontes",
+  "at": [
+   "F10"
+  ],
+  "p": "O que faz um detetive da história?",
+  "o": [
+   "Observa com atenção, pergunta e compara as pistas",
+   "Inventa o passado do jeito que quer",
+   "Joga fora as coisas velhas"
+  ],
+  "dica": "Lupa na mão!",
+  "ex": "O detetive da história observa, pergunta e compara as fontes."
+ }
+]

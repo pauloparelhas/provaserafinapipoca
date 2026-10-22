@@ -1,0 +1,203 @@
+[
+ {
+  "id": "f41",
+  "at": [
+   "F2"
+  ],
+  "p": "Qual destas é uma pergunta para analisar um RELATO (fonte oral)?",
+  "o": [
+   "De que época a pessoa se lembrava?",
+   "Onde e quando a foto foi tirada?",
+   "Como é esse objeto antigo?"
+  ],
+  "dica": "No relato tem uma pessoa contando as lembranças dela.",
+  "ex": "Para analisar um relato perguntamos quem contou, o que contou e de que época a pessoa se lembrava."
+ },
+ {
+  "id": "s09",
+  "at": [
+   "S2",
+   "S5"
+  ],
+  "p": "Comparar documentos da escola de tempos diferentes ajuda a perceber…",
+  "o": [
+   "o que mudou e o que continuou igual",
+   "quem produziu cada um e para quem",
+   "de que época cada pessoa se lembrava"
+  ],
+  "dica": "Pense em colocar lado a lado um caderno de antigamente e um de hoje.",
+  "ex": "Quando comparamos documentos de tempos diferentes, vemos o que mudou e o que continuou igual na escola."
+ },
+ {
+  "id": "s17",
+  "at": [
+   "S6"
+  ],
+  "p": "Um aluno, uma professora e um funcionário lembram da mesma escola de jeitos diferentes. Por quê?",
+  "o": [
+   "Cada um viveu a escola do seu jeito",
+   "Só um deles guardou documentos da escola",
+   "Um deles inventou as lembranças"
+  ],
+  "dica": "Pense: o aluno, a professora e o funcionário fazem as mesmas coisas na escola?",
+  "ex": "Estudantes, professores e funcionários vivem a escola de jeitos diferentes, por isso têm memórias diferentes dela."
+ },
+ {
+  "id": "i01",
+  "at": [
+   "I1"
+  ],
+  "p": "Duas crianças olham a mesma foto. Cada uma repara em coisas diferentes. Por quê?",
+  "o": [
+   "Cada pessoa observa de um jeito",
+   "Uma delas fez uma suposição errada",
+   "A foto mudou de uma vez para outra"
+  ],
+  "dica": "Lembre do desafio de olhar a foto por 1 minuto e comparar com o colega.",
+  "ex": "Olhando a mesma imagem, cada pessoa observa de um jeito e repara em detalhes diferentes."
+ },
+ {
+  "id": "i05",
+  "at": [
+   "I2"
+  ],
+  "p": "O cartão-postal de Salvador: qual era o objetivo de quem o escreveu?",
+  "o": [
+   "Contar a viagem aos amigos",
+   "Vender leite tirado na hora",
+   "Mostrar um mapa antigo do Brasil"
+  ],
+  "dica": "Pense em quem manda um cartão-postal e para quem.",
+  "ex": "Quem viajou para Salvador escreveu o cartão-postal para contar a viagem aos amigos."
+ },
+ {
+  "id": "p07",
+  "at": [
+   "P2"
+  ],
+  "p": "Algumas profissões, como o acendedor de lampião, deixaram de existir porque…",
+  "o": [
+   "novas tecnologias passaram a fazer o trabalho",
+   "as cartas escritas à mão diminuíram",
+   "as compras passaram a ser pela internet"
+  ],
+  "dica": "Quem acende os postes hoje, se o acendedor não existe mais?",
+  "ex": "Com a energia elétrica, os postes passaram a acender sozinhos: uma tecnologia nova passou a fazer o trabalho que antes era de uma pessoa."
+ },
+ {
+  "id": "p12",
+  "at": [
+   "P3"
+  ],
+  "p": "Quando as cartas diminuíram, o carteiro passou a entregar também…",
+  "o": [
+   "contas, revistas e compras da internet",
+   "garrafas de leite na porta das casas",
+   "mensagens em segundos, pelo celular"
+  ],
+  "dica": "O que as pessoas começaram a pedir sem sair de casa?",
+  "ex": "Com menos cartas, Seu Francisco passou a levar contas, revistas e caixinhas de compras feitas pela internet."
+ },
+ {
+  "id": "p27",
+  "at": [
+   "P5"
+  ],
+  "p": "O que continuou igual para o Seu Pedro?",
+  "o": [
+   "Amar a terra e a natureza",
+   "Arar a terra com bois",
+   "Colher tudo com as mãos"
+  ],
+  "dica": "O que as máquinas NÃO mudaram?",
+  "ex": "Amar a terra e cuidar da natureza continua igual; arar com bois e colher com as mãos mudou com as máquinas."
+ },
+ {
+  "id": "p39",
+  "at": [
+   "P8"
+  ],
+  "p": "Nos slides de antes e hoje, as máquinas trabalhando no campo vieram no lugar de…",
+  "o": [
+   "boi e arado",
+   "carrinho de mão",
+   "desenhos no papel"
+  ],
+  "dica": "Lembre da fazenda do Seu Pedro quando ele era menino.",
+  "ex": "Na agricultura, antes o boi puxava o arado; hoje máquinas trabalham no campo."
+ },
+ {
+  "id": "p41",
+  "at": [
+   "P8"
+  ],
+  "p": "Nos slides de antes e hoje, a engenheira com robô e computador veio no lugar de…",
+  "o": [
+   "desenhos no papel",
+   "carrinho de mão",
+   "boi e arado"
+  ],
+  "dica": "O que se fazia com lápis antes do computador?",
+  "ex": "Na engenharia, antes as engrenagens eram desenhadas no papel; hoje a engenheira trabalha com robô e computador."
+ },
+ {
+  "id": "p45",
+  "at": [
+   "P14",
+   "P9"
+  ],
+  "p": "Qual destas profissões NÃO existia no tempo dos nossos avós?",
+  "o": [
+   "Designer gráfico",
+   "Professora",
+   "Médico"
+  ],
+  "dica": "Lembre: nem todas as profissões de hoje já existiam antes.",
+  "ex": "Professora e médico já existiam no tempo dos avós; designer gráfico é uma profissão nova, criada pela tecnologia."
+ },
+ {
+  "id": "b07",
+  "at": [
+   "B3"
+  ],
+  "p": "Como a natureza mostra o tempo passando?",
+  "o": [
+   "As pessoas envelhecem e a árvore muda",
+   "O relógio e o calendário marcam os dias",
+   "A ampulheta deixa a areia cair"
+  ],
+  "dica": "Natureza não é instrumento: pense em coisas vivas.",
+  "ex": "A natureza mostra o tempo passando quando as pessoas envelhecem, a árvore muda nas estações e o dia vira noite; relógio, calendário e ampulheta são instrumentos."
+ },
+ {
+  "id": "b12",
+  "at": [
+   "B7"
+  ],
+  "p": "O que guarda memórias para as futuras gerações? — escolha o grupo certo",
+  "o": [
+   "Museus e arquivos",
+   "Anúncios e propagandas",
+   "Relógios e calendários"
+  ],
+  "dica": "Onde ficam guardados os objetos e documentos antigos?",
+  "ex": "Museus e arquivos guardam objetos e documentos para que as próximas gerações conheçam o passado."
+ },
+ {
+  "id": "x05",
+  "at": [
+   "P3",
+   "P4",
+   "P5",
+   "P6"
+  ],
+  "p": "Hoje, na história do Doutor João, o que chega pelo celular?",
+  "o": [
+   "Os exames dos pacientes",
+   "As encomendas para entregar",
+   "O aviso de que vai chover"
+  ],
+  "dica": "Antes isso demorava dias para ficar pronto.",
+  "ex": "Hoje os exames dos pacientes do Doutor João chegam pelo celular; antes demoravam dias."
+ }
+]

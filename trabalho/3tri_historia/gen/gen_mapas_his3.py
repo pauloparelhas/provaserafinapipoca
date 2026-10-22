@@ -77,6 +77,13 @@ OUT[4]['main'] = [s for s in OUT[4]['main']]
 # o cavalo do Seu Pedro entra no lugar do ovo do Pip (mesma posição)
 for r, s in enumerate(M[2]['main']):
     if 'P' in s: c = s.index('P'); row = list(OUT[4]['main'][r]); row[c] = 'P'; OUT[4]['main'][r] = ''.join(row)
+# Trilha (fase 8): o objeto do alto (col ~107) segurava a criança ~15 s; desce para 2 tiles acima do chão
+_m = [list(r) for r in OUT[8]['main']]
+for c in range(100, 115):
+    if _m[4][c] == '&': _m[4][c] = ' '; _m[7][c] = '&'
+    if _m[5][c] == '=': _m[5][c] = ' '; _m[8][c] = '='
+    if _m[7][c] == 'n': _m[7][c] = ' '
+OUT[8]['main'] = [''.join(r) for r in _m]
 js = ['/* HIS3_jogo_mapas.js — GERADO por trabalho/3tri_historia/gen/gen_mapas_his3.py. Não editar à mão. */', 'window.MAPAS = {']
 for k in sorted(OUT):
     d = OUT[k]; parts = []

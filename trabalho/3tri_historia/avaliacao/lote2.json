@@ -1,0 +1,766 @@
+[
+ {
+  "id": "f51",
+  "tema": "fontes",
+  "at": [
+   "F11"
+  ],
+  "p": "Por que as fontes históricas são importantes?",
+  "o": [
+   "Porque preservam a memória das pessoas e dos povos",
+   "Porque são novinhas",
+   "Porque servem para a prova só"
+  ],
+  "dica": "Sem pistas, o passado se perde.",
+  "ex": "As fontes preservam a memória, em todas as culturas."
+ },
+ {
+  "id": "f52",
+  "tema": "fontes",
+  "at": [
+   "F12"
+  ],
+  "p": "Para descobrir a história de uma foto antiga da família, o que perguntar? — escolha o grupo certo",
+  "o": [
+   "Quem aparece, onde e quando foi tirada, o que acontecia",
+   "Qual é o preço da moldura",
+   "Que dia é hoje"
+  ],
+  "dica": "São as perguntas da atividade de casa.",
+  "ex": "Perguntas da foto: quem aparece, onde e quando foi tirada, o que acontecia e por que é importante."
+ },
+ {
+  "id": "f53",
+  "tema": "fontes",
+  "at": [
+   "F12"
+  ],
+  "p": "Por que uma foto antiga pode ser importante para uma família?",
+  "o": [
+   "Guarda a lembrança de um momento especial",
+   "Porque é nova",
+   "Porque é grande"
+  ],
+  "dica": "Pense numa festa ou passeio guardado na foto.",
+  "ex": "A foto guarda lembranças de momentos especiais da família."
+ },
+ {
+  "id": "f54",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Uma lei antiga, escrita no papel. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte visual",
+   "Fonte material"
+  ],
+  "dica": "Leis estão na lista da fonte escrita.",
+  "ex": "Leis são textos: fonte escrita."
+ },
+ {
+  "id": "f55",
+  "tema": "fontes",
+  "at": [
+   "F2",
+   "F6"
+  ],
+  "p": "Seu Francisco contou para a turma como entregava cartas a pé. Que fonte é essa?",
+  "o": [
+   "Fonte oral",
+   "Fonte escrita",
+   "Fonte material"
+  ],
+  "dica": "Ele CONTOU.",
+  "ex": "Relato falado é fonte oral."
+ },
+ {
+  "id": "f56",
+  "tema": "fontes",
+  "at": [
+   "F5",
+   "F6"
+  ],
+  "p": "A bolsa de couro do carteiro, o objeto. Que fonte é essa?",
+  "o": [
+   "Fonte material",
+   "Fonte escrita",
+   "Fonte oral"
+  ],
+  "dica": "Objeto que se toca.",
+  "ex": "A bolsa é objeto: fonte material."
+ },
+ {
+  "id": "s01",
+  "tema": "escola",
+  "at": [
+   "S1"
+  ],
+  "p": "A escola onde a gente estuda tem história?",
+  "o": [
+   "Sim, cheia de acontecimentos, pessoas e mudanças",
+   "Não, escola não tem passado",
+   "Só se for um castelo"
+  ],
+  "dica": "Tudo ao nosso redor conta uma história.",
+  "ex": "A escola tem uma história cheia de acontecimentos, pessoas e mudanças."
+ },
+ {
+  "id": "s02",
+  "tema": "escola",
+  "at": [
+   "S1"
+  ],
+  "p": "Quais destas são fontes históricas que podemos achar na escola? — escolha o grupo certo",
+  "o": [
+   "Fotos antigas de turmas, cadernos guardados e troféus",
+   "Nuvens do céu",
+   "O lanche de hoje"
+  ],
+  "dica": "Pistas guardadas na escola.",
+  "ex": "Fotos de turmas, cadernos, uniformes, troféus, bilhetes e livros antigos contam a história da escola."
+ },
+ {
+  "id": "s03",
+  "tema": "escola",
+  "at": [
+   "S1",
+   "F5"
+  ],
+  "p": "Um troféu antigo da escola é fonte…",
+  "o": [
+   "material",
+   "oral",
+   "escrita"
+  ],
+  "dica": "É um objeto.",
+  "ex": "O troféu é objeto: fonte material da escola."
+ },
+ {
+  "id": "s04",
+  "tema": "escola",
+  "at": [
+   "S1",
+   "F4"
+  ],
+  "p": "A foto antiga de uma turma é fonte…",
+  "o": [
+   "visual",
+   "escrita",
+   "material"
+  ],
+  "dica": "É uma foto.",
+  "ex": "Foto de turma é fonte visual."
+ },
+ {
+  "id": "s05",
+  "tema": "escola",
+  "at": [
+   "S2",
+   "F3"
+  ],
+  "p": "Um boletim antigo é fonte…",
+  "o": [
+   "escrita",
+   "visual",
+   "oral"
+  ],
+  "dica": "Tem notas e nomes escritos.",
+  "ex": "Boletim é documento escrito da vida escolar."
+ },
+ {
+  "id": "s06",
+  "tema": "escola",
+  "at": [
+   "S2"
+  ],
+  "p": "Quais destes são documentos da vida escolar? — escolha o grupo certo",
+  "o": [
+   "Caderno, boletim e bilhete",
+   "Bola e chuteira",
+   "Árvore e flor"
+  ],
+  "dica": "Documentos escritos da escola.",
+  "ex": "Cadernos, boletins, bilhetes e registros de eventos são documentos da vida escolar."
+ },
+ {
+  "id": "s07",
+  "tema": "escola",
+  "at": [
+   "S2"
+  ],
+  "p": "O que os documentos guardados na escola mostram?",
+  "o": [
+   "Como era o ensino, as regras e o dia a dia da escola",
+   "O que vai cair na prova do ano que vem",
+   "Só o nome do diretor"
+  ],
+  "dica": "Eles registram fatos e decisões.",
+  "ex": "Os documentos mostram como era o ensino, as regras, o que se aprendia e como era o dia a dia."
+ },
+ {
+  "id": "s08",
+  "tema": "escola",
+  "at": [
+   "S2"
+  ],
+  "p": "Os documentos da escola registram…",
+  "o": [
+   "fatos e decisões que aconteceram ali",
+   "sonhos de quem dormiu",
+   "o tempo de amanhã"
+  ],
+  "dica": "Registro = o que aconteceu.",
+  "ex": "Documentos da escola registram fatos e decisões que aconteceram ali."
+ },
+ {
+  "id": "s09",
+  "tema": "escola",
+  "at": [
+   "S2",
+   "S5"
+  ],
+  "p": "Comparando cadernos antigos e novos, a gente descobre…",
+  "o": [
+   "como a escola mudou com o tempo",
+   "o nome do vizinho",
+   "a cor do céu"
+  ],
+  "dica": "Comparar ajuda a ver mudanças.",
+  "ex": "Comparar documentos de tempos diferentes mostra como a escola mudou."
+ },
+ {
+  "id": "s10",
+  "tema": "escola",
+  "at": [
+   "S3"
+  ],
+  "p": "Por que é importante guardar documentos da escola?",
+  "o": [
+   "Para preservar memórias e contar a história da escola",
+   "Para ocupar espaço no armário",
+   "Porque ninguém pode ler"
+  ],
+  "dica": "Guardar = não esquecer.",
+  "ex": "Guardar documentos preserva a memória e conta a história da escola e de cada estudante."
+ },
+ {
+  "id": "s11",
+  "tema": "escola",
+  "at": [
+   "S4"
+  ],
+  "p": "Na pesquisa com a família, você pergunta sobre um documento da época de escola deles e…",
+  "o": [
+   "para que esse documento servia",
+   "quantos anos você tem",
+   "qual é seu desenho favorito"
+  ],
+  "dica": "A ficha perguntava a utilidade.",
+  "ex": "A pesquisa pergunta qual documento era importante e para que ele servia."
+ },
+ {
+  "id": "s12",
+  "tema": "escola",
+  "at": [
+   "S5"
+  ],
+  "p": "O que é uma MUDANÇA?",
+  "o": [
+   "Algo que era de um jeito e ficou diferente",
+   "Algo que continua igual",
+   "Algo que nunca existiu"
+  ],
+  "dica": "Mudou = ficou diferente.",
+  "ex": "Mudança é o que ficou diferente com o tempo."
+ },
+ {
+  "id": "s13",
+  "tema": "escola",
+  "at": [
+   "S5"
+  ],
+  "p": "O que é uma PERMANÊNCIA?",
+  "o": [
+   "Algo que continuou igual com o passar do tempo",
+   "Algo que sumiu",
+   "Algo que vai acontecer amanhã"
+  ],
+  "dica": "Permanecer = continuar.",
+  "ex": "Permanência é o que continuou igual."
+ },
+ {
+  "id": "s14",
+  "tema": "escola",
+  "at": [
+   "S5",
+   "P4"
+  ],
+  "p": "Na história da Dona Lúcia, antes era quadro de giz; hoje algumas escolas têm lousa digital. Isso é…",
+  "o": [
+   "uma mudança",
+   "uma permanência",
+   "uma fonte oral"
+  ],
+  "dica": "Ficou diferente?",
+  "ex": "Do quadro de giz para a lousa digital: mudança."
+ },
+ {
+  "id": "s15",
+  "tema": "escola",
+  "at": [
+   "S5",
+   "P4"
+  ],
+  "p": "Dona Lúcia sempre conversou com os alunos e ouviu as ideias deles, antes e hoje. Isso é…",
+  "o": [
+   "uma permanência",
+   "uma mudança",
+   "uma profissão nova"
+  ],
+  "dica": "Continuou igual?",
+  "ex": "Conversar e ouvir os alunos continuou igual: permanência."
+ },
+ {
+  "id": "s16",
+  "tema": "escola",
+  "at": [
+   "S5",
+   "P4"
+  ],
+  "p": "Antes os alunos pesquisavam na biblioteca; hoje também pesquisam na internet. O que apareceu de novo?",
+  "o": [
+   "A internet",
+   "A biblioteca",
+   "O livro"
+  ],
+  "dica": "O que é novidade?",
+  "ex": "A internet é a novidade: uma mudança no jeito de pesquisar."
+ },
+ {
+  "id": "s17",
+  "tema": "escola",
+  "at": [
+   "S6"
+  ],
+  "p": "Um aluno, uma professora e um funcionário lembram da mesma escola. As memórias deles…",
+  "o": [
+   "podem ser diferentes",
+   "são sempre iguais",
+   "não contam nada"
+  ],
+  "dica": "Cada um viveu a escola de um jeito.",
+  "ex": "Estudantes, professores e funcionários podem ter memórias diferentes da mesma escola."
+ },
+ {
+  "id": "s18",
+  "tema": "escola",
+  "at": [
+   "S7"
+  ],
+  "p": "O que objetos, documentos e festas têm a ver com História?",
+  "o": [
+   "Guardam lembranças e contam o passado",
+   "Nada, são só enfeites",
+   "Só servem para festa"
+  ],
+  "dica": "Lembre do mapa de conclusão.",
+  "ex": "Objetos, documentos e festas guardam lembranças e contam o passado das pessoas e da escola."
+ },
+ {
+  "id": "s19",
+  "tema": "escola",
+  "at": [
+   "S1",
+   "F3"
+  ],
+  "p": "Um bilhete antigo deixado por um aluno é fonte…",
+  "o": [
+   "escrita",
+   "material",
+   "oral"
+  ],
+  "dica": "Tem texto.",
+  "ex": "Bilhete é texto: fonte escrita."
+ },
+ {
+  "id": "s20",
+  "tema": "escola",
+  "at": [
+   "S1",
+   "F7"
+  ],
+  "p": "Um uniforme antigo da escola pode contar…",
+  "o": [
+   "como os alunos se vestiam antigamente",
+   "quem ganhou a eleição",
+   "como fazer bolo"
+  ],
+  "dica": "É uma roupa.",
+  "ex": "O uniforme antigo mostra como os alunos se vestiam."
+ },
+ {
+  "id": "s21",
+  "tema": "escola",
+  "at": [
+   "S1",
+   "F7"
+  ],
+  "p": "Quais fontes da escola contam como os alunos se vestiam? — escolha o grupo certo",
+  "o": [
+   "O uniforme antigo e a foto antiga da turma",
+   "O boletim e o bilhete",
+   "A lei e o jornal"
+  ],
+  "dica": "Roupa e imagem de gente.",
+  "ex": "O uniforme (material) e a foto da turma (visual) mostram as roupas."
+ },
+ {
+  "id": "i01",
+  "tema": "olhar",
+  "at": [
+   "I1"
+  ],
+  "p": "Duas crianças olham a mesma foto. Cada uma repara em coisas diferentes. Por quê?",
+  "o": [
+   "Cada pessoa observa de um jeito",
+   "Uma delas está errada",
+   "A foto mudou sozinha"
+  ],
+  "dica": "Lembre do desafio de olhar a foto por 1 minuto.",
+  "ex": "Cada pessoa observa de um jeito e repara em detalhes diferentes."
+ },
+ {
+  "id": "i02",
+  "tema": "olhar",
+  "at": [
+   "I1"
+  ],
+  "p": "Olhando a mesma imagem uma segunda vez, a gente…",
+  "o": [
+   "percebe coisas novas",
+   "vê sempre exatamente o mesmo",
+   "esquece tudo"
+  ],
+  "dica": "Na 2ª observação vocês anotaram mais 5 coisas.",
+  "ex": "Olhar de novo ajuda a perceber detalhes novos."
+ },
+ {
+  "id": "i03",
+  "tema": "olhar",
+  "at": [
+   "I2"
+  ],
+  "p": "Toda fonte histórica foi criada por alguém, em um tempo e lugar, com…",
+  "o": [
+   "um objetivo",
+   "um feitiço",
+   "um sorteio"
+  ],
+  "dica": "Quem fez e POR QUÊ?",
+  "ex": "Toda fonte foi criada por alguém, num tempo e lugar, com um objetivo."
+ },
+ {
+  "id": "i04",
+  "tema": "olhar",
+  "at": [
+   "I2"
+  ],
+  "p": "Para investigar uma fonte, o detetive pergunta: quem produziu? para quem foi feita? e…",
+  "o": [
+   "Qual era o objetivo de quem criou?",
+   "Qual é a cor favorita?",
+   "Quando é o recreio?"
+  ],
+  "dica": "São as 3 colunas da tabela.",
+  "ex": "Quem produziu, para quem foi feita e qual era o objetivo."
+ },
+ {
+  "id": "i05",
+  "tema": "olhar",
+  "at": [
+   "I2"
+  ],
+  "p": "Um cartão-postal de Salvador foi escrito por quem viajou para os amigos. Qual era o objetivo?",
+  "o": [
+   "Contar sobre a viagem e mandar um abraço",
+   "Vender leite",
+   "Ensinar matemática"
+  ],
+  "dica": "Quem viaja manda notícias.",
+  "ex": "O cartão-postal servia para contar da viagem aos amigos."
+ },
+ {
+  "id": "i06",
+  "tema": "olhar",
+  "at": [
+   "I2"
+  ],
+  "p": "Um anúncio de jornal antigo dizia que na rua tal vendia-se leite. Qual era o objetivo do anúncio?",
+  "o": [
+   "Vender leite",
+   "Contar uma história de fadas",
+   "Mostrar um mapa"
+  ],
+  "dica": "Anúncio serve para…",
+  "ex": "Anúncio e propaganda servem para VENDER."
+ },
+ {
+  "id": "i07",
+  "tema": "olhar",
+  "at": [
+   "I2"
+  ],
+  "p": "Uma propaganda antiga dizia que um alimento era bom para as crianças. Para que ela foi feita?",
+  "o": [
+   "Para vender o alimento às famílias",
+   "Para guardar uma receita da vovó",
+   "Para ensinar a ler"
+  ],
+  "dica": "Propaganda quer que você compre.",
+  "ex": "A propaganda foi feita para vender o alimento."
+ },
+ {
+  "id": "i08",
+  "tema": "olhar",
+  "at": [
+   "I3",
+   "I5"
+  ],
+  "p": "Por que podem existir histórias diferentes a partir de um mesmo documento?",
+  "o": [
+   "Cada pessoa olha com sua experiência, imaginação e ponto de vista",
+   "Porque o documento é falso",
+   "Porque só uma pessoa pode olhar"
+  ],
+  "dica": "É a pergunta essencial da sequência 3.",
+  "ex": "Cada pessoa interpreta com sua experiência e ponto de vista: surgem histórias diferentes."
+ },
+ {
+  "id": "i09",
+  "tema": "olhar",
+  "at": [
+   "I3"
+  ],
+  "p": "Quando não temos todas as informações de uma foto, nós fazemos…",
+  "o": [
+   "suposições, que nem sempre estão certas",
+   "certeza absoluta",
+   "a foto falar"
+  ],
+  "dica": "Lembre da atividade \"imaginando outras histórias\".",
+  "ex": "Sem todas as informações, fazemos suposições, e nem sempre elas são corretas."
+ },
+ {
+  "id": "i10",
+  "tema": "olhar",
+  "at": [
+   "I3"
+  ],
+  "p": "Para chegar mais perto da verdade, o historiador…",
+  "o": [
+   "reúne várias fontes, compara e ouve diferentes versões",
+   "escolhe a história mais bonita",
+   "usa uma fonte só"
+  ],
+  "dica": "Detetive não confia numa pista só.",
+  "ex": "O historiador reúne várias fontes, compara e ouve versões diferentes."
+ },
+ {
+  "id": "i11",
+  "tema": "olhar",
+  "at": [
+   "I3"
+  ],
+  "p": "A turma imaginou a história de uma foto. Depois, o dono contou a história verdadeira. Por que algumas ficaram diferentes?",
+  "o": [
+   "Cada um usou a imaginação para preencher o que não estava claro",
+   "Porque a foto era colorida",
+   "Porque o dono errou"
+  ],
+  "dica": "Suposição × fato.",
+  "ex": "Cada pessoa preencheu as partes que faltavam com a imaginação."
+ },
+ {
+  "id": "i12",
+  "tema": "olhar",
+  "at": [
+   "I4"
+  ],
+  "p": "Todas as histórias do passado foram registradas?",
+  "o": [
+   "Não, algumas foram registradas e outras esquecidas",
+   "Sim, todas estão nos livros",
+   "Só as tristes"
+  ],
+  "dica": "Lembre: histórias escondidas.",
+  "ex": "Algumas histórias são registradas e outras acabam esquecidas."
+ },
+ {
+  "id": "i13",
+  "tema": "olhar",
+  "at": [
+   "I5"
+  ],
+  "p": "Numa história em quadrinhos com dois pontos de vista sobre a mesma pintura, cada personagem…",
+  "o": [
+   "tem sua própria fala e pensamento",
+   "diz exatamente a mesma coisa",
+   "fica calado"
+  ],
+  "dica": "Pontos de vista diferentes.",
+  "ex": "Cada personagem tem sua fala e seu jeito de explicar a mesma cena."
+ },
+ {
+  "id": "i14",
+  "tema": "olhar",
+  "at": [
+   "I5"
+  ],
+  "p": "Quando um colega interpreta uma fonte de outro jeito, devemos…",
+  "o": [
+   "respeitar a opinião dele",
+   "rir dele",
+   "apagar a resposta dele"
+  ],
+  "dica": "Valorizar todas as interpretações.",
+  "ex": "Devemos respeitar as opiniões e valorizar todas as interpretações."
+ },
+ {
+  "id": "i15",
+  "tema": "olhar",
+  "at": [
+   "I3"
+  ],
+  "p": "A história é feita de…",
+  "o": [
+   "muitos pontos de vista",
+   "uma única versão",
+   "só datas"
+  ],
+  "dica": "Várias narrativas.",
+  "ex": "A história é feita de múltiplas narrativas e pontos de vista."
+ },
+ {
+  "id": "m01",
+  "tema": "mundo",
+  "at": [
+   "M1"
+  ],
+  "p": "\"A história começa em nós.\" O que cada família carrega?",
+  "o": [
+   "Tradições que formam o que somos hoje",
+   "Só documentos de carro",
+   "Nada do passado"
+  ],
+  "dica": "Ancestralidade.",
+  "ex": "Cada família carrega tradições que formam o que somos hoje."
+ },
+ {
+  "id": "m02",
+  "tema": "mundo",
+  "at": [
+   "M1"
+  ],
+  "p": "Um objeto que está na família há muito tempo pode contar…",
+  "o": [
+   "a história da família",
+   "o futuro",
+   "a previsão do tempo"
+  ],
+  "dica": "Pergunte em casa!",
+  "ex": "Objetos e histórias antigas da família contam a história dela."
+ },
+ {
+  "id": "m03",
+  "tema": "mundo",
+  "at": [
+   "M2"
+  ],
+  "p": "O que eram os NÔMADES?",
+  "o": [
+   "Pessoas que viajavam em busca de comida",
+   "Pessoas que moravam em prédios",
+   "Pessoas que dirigiam carros"
+  ],
+  "dica": "Não tinham casa fixa.",
+  "ex": "Por milhares de anos os seres humanos foram nômades: viajavam em busca de comida."
+ },
+ {
+  "id": "m04",
+  "tema": "mundo",
+  "at": [
+   "M2"
+  ],
+  "p": "O que mudou tudo para os seres humanos nômades?",
+  "o": [
+   "Aprender a cultivar a terra (agricultura)",
+   "Inventar o celular",
+   "Construir shoppings"
+  ],
+  "dica": "Plantar!",
+  "ex": "Com a agricultura, as pessoas pararam de viajar e fizeram acampamentos fixos."
+ },
+ {
+  "id": "m05",
+  "tema": "mundo",
+  "at": [
+   "M2"
+  ],
+  "p": "Os acampamentos fixos, que surgiram com a agricultura, deram origem…",
+  "o": [
+   "às cidades",
+   "aos dinossauros",
+   "aos rios"
+  ],
+  "dica": "Ficaram num lugar só…",
+  "ex": "Os acampamentos fixos deram origem às primeiras cidades."
+ },
+ {
+  "id": "m06",
+  "tema": "mundo",
+  "at": [
+   "M3"
+  ],
+  "p": "Qual rio é do Egito?",
+  "o": [
+   "Rio Nilo",
+   "Rio Amarelo",
+   "Rio Tigre"
+  ],
+  "dica": "Pense no rio mais famoso da África.",
+  "ex": "O Rio Nilo fica no Egito."
+ },
+ {
+  "id": "m07",
+  "tema": "mundo",
+  "at": [
+   "M3"
+  ],
+  "p": "Os rios Tigre e Eufrates ficam na…",
+  "o": [
+   "Mesopotâmia",
+   "China",
+   "Egito"
+  ],
+  "dica": "Mesopotâmia quer dizer \"entre rios\".",
+  "ex": "Tigre e Eufrates: Mesopotâmia."
+ },
+ {
+  "id": "m08",
+  "tema": "mundo",
+  "at": [
+   "M3"
+  ],
+  "p": "O Rio Amarelo fica na…",
+  "o": [
+   "China",
+   "Mesopotâmia",
+   "Egito"
+  ],
+  "dica": "O nome do rio é uma cor.",
+  "ex": "O Rio Amarelo fica na China."
+ }
+]

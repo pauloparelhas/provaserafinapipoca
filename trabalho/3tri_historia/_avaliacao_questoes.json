@@ -1,0 +1,1263 @@
+{
+ "f01": {
+  "decisao": "APROVA",
+  "fp": "49d02f6cfe1f"
+ },
+ "f02": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E",
+   "C",
+   "A"
+  ],
+  "motivo": "Mesma ideia do f01 (aprender sobre outras épocas); distratores 'enfeitar a sala' e 'adivinhar o futuro' são eliminação por bom senso."
+ },
+ "f03": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "'Contar uma história' é expressão do dia a dia: qualquer criança completa sem estudar; 'mentira' é distrator-piada."
+ },
+ "f04": {
+  "decisao": "APROVA",
+  "fp": "52b0d598164f"
+ },
+ "f05": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "A",
+   "E"
+  ],
+  "motivo": "Nuvem e barulho da chuva se eliminam por bom senso; o conteúdo (reconhecer fonte) já é treinado de forma melhor em f10–f39."
+ },
+ "f06": {
+  "decisao": "APROVA",
+  "fp": "72e0baf237a2"
+ },
+ "f07": {
+  "decisao": "APROVA",
+  "fp": "a4c23fae2a39"
+ },
+ "f08": {
+  "decisao": "APROVA",
+  "fp": "247f01496b9c"
+ },
+ "f09": {
+  "decisao": "APROVA",
+  "fp": "c214c9d7a161"
+ },
+ "f10": {
+  "decisao": "APROVA",
+  "fp": "1066670bc7dd"
+ },
+ "f11": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Repete o f34 (carta = fonte escrita). O f34 é melhor porque tem a armadilha escrita × oral ('contando')."
+ },
+ "f12": {
+  "decisao": "APROVA",
+  "fp": "3e4ea4184b4e"
+ },
+ "f13": {
+  "decisao": "APROVA",
+  "fp": "9f2792919cfb"
+ },
+ "f14": {
+  "decisao": "APROVA",
+  "fp": "a16f3964639c"
+ },
+ "f15": {
+  "decisao": "APROVA",
+  "fp": "960bac24a1a6"
+ },
+ "f16": {
+  "decisao": "APROVA",
+  "fp": "4806293b7fa8"
+ },
+ "f17": {
+  "decisao": "APROVA",
+  "fp": "6e6baa9777af"
+ },
+ "f18": {
+  "decisao": "APROVA",
+  "fp": "bba5bc0a8e48"
+ },
+ "f19": {
+  "decisao": "APROVA",
+  "fp": "bf3f8c62a3cf"
+ },
+ "f20": {
+  "decisao": "APROVA",
+  "fp": "dec9c0bd01e1"
+ },
+ "f21": {
+  "decisao": "APROVA",
+  "fp": "93ef2f1e99fb"
+ },
+ "f22": {
+  "decisao": "APROVA",
+  "fp": "db2c6e62c4f7"
+ },
+ "f23": {
+  "decisao": "APROVA",
+  "fp": "4dc29845a8d1"
+ },
+ "f24": {
+  "decisao": "APROVA",
+  "fp": "4727da0288de"
+ },
+ "f25": {
+  "decisao": "APROVA",
+  "fp": "233a9d8c592d"
+ },
+ "f26": {
+  "decisao": "APROVA",
+  "fp": "d3c04fd0e2cb"
+ },
+ "f27": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "F",
+   "E"
+  ],
+  "motivo": "Vídeo não está na lista F6 e é ambíguo (é imagem também: oral × visual sem resposta inequívoca); o caso legítimo — entrevista gravada = oral — já é o f16."
+ },
+ "f28": {
+  "decisao": "APROVA",
+  "fp": "e6cd1a0b7ed8"
+ },
+ "f29": {
+  "decisao": "APROVA",
+  "fp": "def042a33c45"
+ },
+ "f30": {
+  "decisao": "APROVA",
+  "fp": "110f4aab1351"
+ },
+ "f31": {
+  "decisao": "APROVA",
+  "fp": "65ec0b249244"
+ },
+ "f32": {
+  "decisao": "APROVA",
+  "fp": "3f36a6534dbf"
+ },
+ "f33": {
+  "decisao": "APROVA",
+  "fp": "548cdd23cab6"
+ },
+ "f34": {
+  "decisao": "APROVA",
+  "fp": "19cd4d146abf"
+ },
+ "f35": {
+  "decisao": "APROVA",
+  "fp": "5ea061ca4f00"
+ },
+ "f36": {
+  "decisao": "APROVA",
+  "fp": "019418bb443e"
+ },
+ "f37": {
+  "decisao": "APROVA",
+  "fp": "acf877700ac7"
+ },
+ "f38": {
+  "decisao": "APROVA",
+  "fp": "62d040e05b76"
+ },
+ "f39": {
+  "decisao": "APROVA",
+  "fp": "79e9be011b33"
+ },
+ "f40": {
+  "decisao": "APROVA",
+  "fp": "b2448f8b17e9"
+ },
+ "f41": {
+  "decisao": "APROVA",
+  "fp": "6df265f4c2c2"
+ },
+ "f42": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "A"
+  ],
+  "motivo": "Roupa → 'como se vestiam' é bom senso puro; 'amanhã vai chover' e 'presidente de hoje' fora do mundo. F7 fica treinado no f44 adaptado."
+ },
+ "f43": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "A"
+  ],
+  "motivo": "Brinquedo → 'como brincavam' é bom senso; 'celular' e 'tabuada do 2' são distratores-piada."
+ },
+ "f44": {
+  "decisao": "APROVA",
+  "fp": "d5a56f1d1201"
+ },
+ "f45": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "A"
+  ],
+  "motivo": "'passado / futuro / sonho': qualquer criança responde 'passado' sem estudar; 'sonho' é fora do mundo. F8 fica no f46 adaptado."
+ },
+ "f46": {
+  "decisao": "APROVA",
+  "fp": "7754e029d7c1"
+ },
+ "f47": {
+  "decisao": "APROVA",
+  "fp": "17f275ebf356"
+ },
+ "f48": {
+  "decisao": "APROVA",
+  "fp": "13124d235aae"
+ },
+ "f49": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "A"
+  ],
+  "motivo": "'como se faz bolo' e 'celular mais novo' são piada; e navio → 'como viajavam' é bom senso mesmo com distratores bons (trocar por 'como se vestiam' criaria 2ª verdade, a foto mostra roupas). F9 já está em f47/f48."
+ },
+ "f50": {
+  "decisao": "APROVA",
+  "fp": "9206448db57c"
+ },
+ "f51": {
+  "decisao": "APROVA",
+  "fp": "5475dd0f4372"
+ },
+ "f52": {
+  "decisao": "APROVA",
+  "fp": "a1e88a8783ca"
+ },
+ "f53": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "C"
+  ],
+  "motivo": "Responde-se por bom senso (foto guarda lembrança); distratores 'é nova'/'é grande' sem conteúdo. F12 já treinado em f52."
+ },
+ "f54": {
+  "decisao": "APROVA",
+  "fp": "c2547118b19b"
+ },
+ "f55": {
+  "decisao": "APROVA",
+  "fp": "301b584e6e46"
+ },
+ "f56": {
+  "decisao": "APROVA",
+  "fp": "905283db2e3b"
+ },
+ "s01": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "A"
+  ],
+  "motivo": "Sim/não respondível por bom senso; 'só se for um castelo' é piada. S1 fica treinado em s02/s03/s04."
+ },
+ "s02": {
+  "decisao": "APROVA",
+  "fp": "815170678192"
+ },
+ "s03": {
+  "decisao": "APROVA",
+  "fp": "ee0a48f3bfbb"
+ },
+ "s04": {
+  "decisao": "APROVA",
+  "fp": "5534f96a3beb"
+ },
+ "s05": {
+  "decisao": "APROVA",
+  "fp": "46f86d2dc921"
+ },
+ "s06": {
+  "decisao": "APROVA",
+  "fp": "aa1006ae8d2e"
+ },
+ "s07": {
+  "decisao": "APROVA",
+  "fp": "f02102e842dd"
+ },
+ "s08": {
+  "decisao": "APROVA",
+  "fp": "c2cde9e851b5"
+ },
+ "s09": {
+  "decisao": "APROVA",
+  "fp": "304bd11ec453"
+ },
+ "s10": {
+  "decisao": "APROVA",
+  "fp": "9aeb9542eb9f"
+ },
+ "s11": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Item de procedimento da tarefa de casa; 'quantos anos você tem'/'desenho favorito' se eliminam e o roteiro não oferece distrator plausível sem inventar."
+ },
+ "s12": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "'Mudança = ficou diferente' é o sentido comum da palavra; o átomo S5 já é treinado por exemplo (s14, s16)."
+ },
+ "s13": {
+  "decisao": "APROVA",
+  "fp": "0680de584948"
+ },
+ "s14": {
+  "decisao": "APROVA",
+  "fp": "bd80eddefe4b"
+ },
+ "s15": {
+  "decisao": "APROVA",
+  "fp": "454a7cb49089"
+ },
+ "s16": {
+  "decisao": "APROVA",
+  "fp": "12202390bbfe"
+ },
+ "s17": {
+  "decisao": "APROVA",
+  "fp": "0274c18e28d7"
+ },
+ "s18": {
+  "decisao": "APROVA",
+  "fp": "0daec4eae226"
+ },
+ "s19": {
+  "decisao": "APROVA",
+  "fp": "e5252ffba935"
+ },
+ "s20": {
+  "decisao": "APROVA",
+  "fp": "faf7aa033cea"
+ },
+ "s21": {
+  "decisao": "APROVA",
+  "fp": "a4d33cdff418"
+ },
+ "i01": {
+  "decisao": "APROVA",
+  "fp": "c6dc291d1545"
+ },
+ "i02": {
+  "decisao": "APROVA",
+  "fp": "4b80cf963e0a"
+ },
+ "i03": {
+  "decisao": "APROVA",
+  "fp": "c1aa7f9e08dc"
+ },
+ "i04": {
+  "decisao": "APROVA",
+  "fp": "c27b932a88f1"
+ },
+ "i05": {
+  "decisao": "APROVA",
+  "fp": "853bf4319c48"
+ },
+ "i06": {
+  "decisao": "APROVA",
+  "fp": "439ffab02dc4"
+ },
+ "i07": {
+  "decisao": "APROVA",
+  "fp": "3132004f68e9"
+ },
+ "i08": {
+  "decisao": "APROVA",
+  "fp": "4f70c53f068e"
+ },
+ "i09": {
+  "decisao": "APROVA",
+  "fp": "3bea5a677bfc"
+ },
+ "i10": {
+  "decisao": "APROVA",
+  "fp": "f2ab73f1f1b0"
+ },
+ "i11": {
+  "decisao": "APROVA",
+  "fp": "07eef97d7fdf"
+ },
+ "i12": {
+  "decisao": "APROVA",
+  "fp": "1164e8e1eb89"
+ },
+ "i13": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "O enunciado já diz 'dois pontos de vista', logo cada personagem tem sua fala — bom senso; 'fica calado' não é distrator. I5 fica em i08."
+ },
+ "i14": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "C"
+  ],
+  "motivo": "'Devemos respeitar o colega' é exatamente o exemplo de bom senso do critério; 'rir dele'/'apagar a resposta' são óbvios."
+ },
+ "i15": {
+  "decisao": "APROVA",
+  "fp": "fd839f2eb448"
+ },
+ "m01": {
+  "decisao": "APROVA",
+  "fp": "7dbaec0d3ce2"
+ },
+ "m02": {
+  "decisao": "APROVA",
+  "fp": "f8e84093f873"
+ },
+ "m03": {
+  "decisao": "APROVA",
+  "fp": "d137474e4152"
+ },
+ "m04": {
+  "decisao": "APROVA",
+  "fp": "2a21268ba994"
+ },
+ "m05": {
+  "decisao": "APROVA",
+  "fp": "53439ed4609e"
+ },
+ "m06": {
+  "decisao": "APROVA",
+  "fp": "3cdd0a3879cd"
+ },
+ "m07": {
+  "decisao": "APROVA",
+  "fp": "4e22d10fc57f"
+ },
+ "m08": {
+  "decisao": "APROVA",
+  "fp": "ea3e539c0555"
+ },
+ "m09": {
+  "decisao": "APROVA",
+  "fp": "892091347841"
+ },
+ "m10": {
+  "decisao": "APROVA",
+  "fp": "765e27436c86"
+ },
+ "m11": {
+  "decisao": "APROVA",
+  "fp": "4e520f5204b5"
+ },
+ "m12": {
+  "decisao": "APROVA",
+  "fp": "d2a9917959fe"
+ },
+ "m13": {
+  "decisao": "APROVA",
+  "fp": "04d8e920d3e4"
+ },
+ "m14": {
+  "decisao": "APROVA",
+  "fp": "6f5ab9c8649e"
+ },
+ "m15": {
+  "decisao": "APROVA",
+  "fp": "0a0e0eb5cfa2"
+ },
+ "m16": {
+  "decisao": "APROVA",
+  "fp": "8beb180218f9"
+ },
+ "m17": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "'De onde viemos' é frase feita: a criança completa sem ter estudado. O átomo M5 continua coberto pelo m16."
+ },
+ "p01": {
+  "decisao": "APROVA",
+  "fp": "fcd24366fa4a"
+ },
+ "p02": {
+  "decisao": "APROVA",
+  "fp": "febd195be45b"
+ },
+ "p03": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E",
+   "C"
+  ],
+  "motivo": "É a mesma ideia de p14 (a profissão continua, mas de um jeito diferente) e de p06; tem 'proibido' como distrator. Fica p14."
+ },
+ "p04": {
+  "decisao": "APROVA",
+  "fp": "21eeeed0de66"
+ },
+ "p05": {
+  "decisao": "APROVA",
+  "fp": "299883f10ca5"
+ },
+ "p06": {
+  "decisao": "APROVA",
+  "fp": "79fd5c03ad54"
+ },
+ "p07": {
+  "decisao": "APROVA",
+  "fp": "9cf53ac561fa"
+ },
+ "p08": {
+  "decisao": "APROVA",
+  "fp": "2d5b4fa9b640"
+ },
+ "p09": {
+  "decisao": "APROVA",
+  "fp": "98f8c4a6abe6"
+ },
+ "p10": {
+  "decisao": "APROVA",
+  "fp": "ab18f888ed58"
+ },
+ "p11": {
+  "decisao": "APROVA",
+  "fp": "0d4bbdf7e347"
+ },
+ "p12": {
+  "decisao": "APROVA",
+  "fp": "47f1057dcb07"
+ },
+ "p13": {
+  "decisao": "APROVA",
+  "fp": "d4bbccf91e98"
+ },
+ "p14": {
+  "decisao": "APROVA",
+  "fp": "ab772e58701f"
+ },
+ "p15": {
+  "decisao": "APROVA",
+  "fp": "547273b1af36"
+ },
+ "p16": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "C",
+   "E"
+  ],
+  "motivo": "'Mensagens chegam em segundos' é vida diária, sem conteúdo; tem 'nunca' como distrator. A P10 já está em p15."
+ },
+ "p17": {
+  "decisao": "APROVA",
+  "fp": "83957ee6c0ac"
+ },
+ "p18": {
+  "decisao": "APROVA",
+  "fp": "1d41eaf67ede"
+ },
+ "p19": {
+  "decisao": "APROVA",
+  "fp": "4672234c0659"
+ },
+ "p20": {
+  "decisao": "APROVA",
+  "fp": "2765425bb9be"
+ },
+ "p21": {
+  "decisao": "APROVA",
+  "fp": "303fb98233d7"
+ },
+ "p22": {
+  "decisao": "APROVA",
+  "fp": "8f760384ddea"
+ },
+ "p23": {
+  "decisao": "APROVA",
+  "fp": "0f36149d9774"
+ },
+ "p24": {
+  "decisao": "APROVA",
+  "fp": "085bc11062f4"
+ },
+ "p25": {
+  "decisao": "APROVA",
+  "fp": "a5b17910cc3c"
+ },
+ "p26": {
+  "decisao": "APROVA",
+  "fp": "74ba9919dbde"
+ },
+ "p27": {
+  "decisao": "APROVA",
+  "fp": "1df47d0f25d9"
+ },
+ "p28": {
+  "decisao": "APROVA",
+  "fp": "3d54df2e16a8"
+ },
+ "p29": {
+  "decisao": "APROVA",
+  "fp": "8cb3ba80b80a"
+ },
+ "p30": {
+  "decisao": "APROVA",
+  "fp": "9839b41c4409"
+ },
+ "p31": {
+  "decisao": "APROVA",
+  "fp": "92cde80d5e3c"
+ },
+ "p32": {
+  "decisao": "APROVA",
+  "fp": "672b124d0349"
+ },
+ "p33": {
+  "decisao": "APROVA",
+  "fp": "55d3c14fc564"
+ },
+ "p34": {
+  "decisao": "APROVA",
+  "fp": "d57df5a61685"
+ },
+ "p35": {
+  "decisao": "APROVA",
+  "fp": "752c705f261d"
+ },
+ "p36": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "G",
+   "E"
+  ],
+  "motivo": "'Colher de pedreiro' no enunciado e '(pedreiro)' na certa entregam a resposta; o x02 já cobre as ferramentas do construtor."
+ },
+ "p37": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E",
+   "C"
+  ],
+  "motivo": "Pergunta sobre a regra do jogo, não sobre conteúdo; 'nenhuma ferramenta' é absoluto. As ferramentas por profissão já estão em p33–p36."
+ },
+ "p38": {
+  "decisao": "APROVA",
+  "fp": "6ef754c5a796"
+ },
+ "p39": {
+  "decisao": "APROVA",
+  "fp": "18fc6e5fbbbb"
+ },
+ "p40": {
+  "decisao": "APROVA",
+  "fp": "c3c4573be2bb"
+ },
+ "p41": {
+  "decisao": "APROVA",
+  "fp": "82e233fc15fc"
+ },
+ "p42": {
+  "decisao": "APROVA",
+  "fp": "c2b3df0abb21"
+ },
+ "p43": {
+  "decisao": "APROVA",
+  "fp": "72cc79f77353"
+ },
+ "p44": {
+  "decisao": "APROVA",
+  "fp": "d57cb98747f7"
+ },
+ "p45": {
+  "decisao": "APROVA",
+  "fp": "12ef063c83ee"
+ },
+ "p46": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Distratores de outros blocos (tempo sentido, tipo de fonte) não fazem sentido; a frase do P11 é resolvível por bom senso. Fica no estudo/lição, fora do banco."
+ },
+ "p47": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "'Trabalhos despercebidos são importantes' é juízo moral resolvível sem conteúdo; os distratores não se ligam à pergunta."
+ },
+ "p48": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "'O trabalho que polui precisa mudar' é bom senso; distratores sem relação. P12 fica no estudo/lição."
+ },
+ "p49": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "C",
+   "A",
+   "E"
+  ],
+  "motivo": "Sim/Não banal, 'Só nos contos de fadas' é piada; responde-se por bom senso e duplica p48."
+ },
+ "p50": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "C",
+   "G"
+  ],
+  "motivo": "Bom senso de vida diária ('onde as pessoas trabalham'), distratores 'Só…' absolutos e certa muito mais longa. Não mede conteúdo."
+ },
+ "p51": {
+  "decisao": "APROVA",
+  "fp": "48ca86c227c6"
+ },
+ "p52": {
+  "decisao": "APROVA",
+  "fp": "22f4861b2ffe"
+ },
+ "p53": {
+  "decisao": "APROVA",
+  "fp": "aae35f6fac46"
+ },
+ "p54": {
+  "decisao": "APROVA",
+  "fp": "8e763f271dc0"
+ },
+ "b01": {
+  "decisao": "APROVA",
+  "fp": "411c39ff3158"
+ },
+ "b02": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "'Brincando o tempo voa' é experiência de vida diária, resolvível sem estudar. O B1 continua treinado no b04."
+ },
+ "b03": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "E"
+  ],
+  "motivo": "Espelho do b02 (mesmas opções invertidas), também bom senso."
+ },
+ "b04": {
+  "decisao": "APROVA",
+  "fp": "5fd2f7ec9956"
+ },
+ "b05": {
+  "decisao": "APROVA",
+  "fp": "3ac4886879da"
+ },
+ "b06": {
+  "decisao": "APROVA",
+  "fp": "6aa4b7bfc951"
+ },
+ "b07": {
+  "decisao": "APROVA",
+  "fp": "a44386a6731b"
+ },
+ "b08": {
+  "decisao": "APROVA",
+  "fp": "16dfb1081f0a"
+ },
+ "b09": {
+  "decisao": "APROVA",
+  "fp": "7ab4b915c9f6"
+ },
+ "b10": {
+  "decisao": "APROVA",
+  "fp": "ac515a467129"
+ },
+ "b11": {
+  "decisao": "APROVA",
+  "fp": "dc3491692268"
+ },
+ "b12": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "G"
+  ],
+  "motivo": "A pergunta pede LUGARES e só 'Museus e arquivos' são lugares (anúncios e relógios são coisas, não lugares): elimina por gramática. E qualquer criança sabe que o museu guarda coisas antigas, então se acerta por bom senso. Os distratores vêm do roteiro (F3, B2), mas a forma entrega a resposta."
+ },
+ "b13": {
+  "decisao": "APROVA",
+  "fp": "b2b2a69aed3e"
+ },
+ "x01": {
+  "decisao": "APROVA",
+  "fp": "f610c37e0405"
+ },
+ "x02": {
+  "decisao": "APROVA",
+  "fp": "0c74eda3e536"
+ },
+ "x03": {
+  "decisao": "APROVA",
+  "fp": "49d62e37a602"
+ },
+ "x06": {
+  "decisao": "APROVA",
+  "fp": "33668d4bf289"
+ },
+ "x04": {
+  "decisao": "APROVA",
+  "fp": "ad26295bc02c"
+ },
+ "x05": {
+  "decisao": "APROVA",
+  "fp": "a71cb6e8cfe1"
+ },
+ "x07": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "G"
+  ],
+  "motivo": "'Leiteiro' → 'leite': o nome da profissão dá a resposta, e não tem conserto. O leiteiro continua como distrator (p12)."
+ },
+ "x08": {
+  "decisao": "APROVA",
+  "fp": "1ee87ca5d869"
+ },
+ "x09": {
+  "decisao": "APROVA",
+  "fp": "6915e38cd3b5"
+ },
+ "x10": {
+  "decisao": "APROVA",
+  "fp": "ffe78fd7d7ef"
+ },
+ "x11": {
+  "decisao": "APROVA",
+  "fp": "30e7c613678d"
+ },
+ "x12": {
+  "decisao": "APROVA",
+  "fp": "88e39f767d0e"
+ },
+ "x13": {
+  "decisao": "APROVA",
+  "fp": "e2960cb5be70"
+ },
+ "x14": {
+  "decisao": "APROVA",
+  "fp": "891b272e25a7"
+ },
+ "x15": {
+  "decisao": "APROVA",
+  "fp": "e9ac0ce6abf4"
+ },
+ "x16": {
+  "decisao": "APROVA",
+  "fp": "0708ec9b07c5"
+ },
+ "x17": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "A",
+   "C",
+   "E"
+  ],
+  "motivo": "'como fazer um bolo' (piada citada pelo Paulo) e 'nada sobre a escola' (absoluto); mesma ideia de x16."
+ },
+ "t01": {
+  "decisao": "APROVA",
+  "fp": "030ab079aecb"
+ },
+ "t02": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "F"
+  ],
+  "motivo": "Isola o par jornal → carta, o que o roteiro B5 proíbe ('Não isolar jornal × carta')."
+ },
+ "t03": {
+  "decisao": "APROVA",
+  "fp": "153f3be23cc1"
+ },
+ "t04": {
+  "decisao": "APROVA",
+  "fp": "a8b3f73cff7b"
+ },
+ "t05": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "A",
+   "C",
+   "E"
+  ],
+  "motivo": "'As traças' (piada) e 'Ninguém' (absoluto); mesma ideia de b12 (museus e arquivos guardam memória)."
+ },
+ "t06": {
+  "decisao": "APROVA",
+  "fp": "aef5148ed6d3"
+ },
+ "L_missao_3_0": {
+  "decisao": "APROVA",
+  "fp": "314d5fa895ce"
+ },
+ "L_missao_3_1": {
+  "decisao": "APROVA",
+  "fp": "24f67b79254b"
+ },
+ "L_missao_3_2": {
+  "decisao": "APROVA",
+  "fp": "0712f507fc12"
+ },
+ "L_missao_3_3": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "A",
+   "B",
+   "F"
+  ],
+  "motivo": "'Nuvem passando no céu' é coisa de outro universo, único Não da tela (entrega o padrão) e contradiz o roteiro F1 ('tudo ao nosso redor pode contar uma história')."
+ },
+ "L_missao_3_4": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Foto da turma já está em L_escola_3_4 e L_quatro_2_8; na nova pergunta F7 ficaria ambígua (ensina como se vestiam? como era a escola?)."
+ },
+ "L_quatro_2_0": {
+  "decisao": "APROVA",
+  "fp": "61290fbef014"
+ },
+ "L_quatro_2_1": {
+  "decisao": "APROVA",
+  "fp": "c80b6eb8d549"
+ },
+ "L_quatro_2_2": {
+  "decisao": "APROVA",
+  "fp": "d0e3e277b690"
+ },
+ "L_quatro_2_3": {
+  "decisao": "APROVA",
+  "fp": "afb9e9633b31"
+ },
+ "L_quatro_2_4": {
+  "decisao": "APROVA",
+  "fp": "ce5b7aa33574"
+ },
+ "L_quatro_2_5": {
+  "decisao": "APROVA",
+  "fp": "450a32cf64de"
+ },
+ "L_quatro_2_6": {
+  "decisao": "APROVA",
+  "fp": "35cf0e753af9"
+ },
+ "L_quatro_2_7": {
+  "decisao": "APROVA",
+  "fp": "41573fe12b68"
+ },
+ "L_quatro_2_8": {
+  "decisao": "APROVA",
+  "fp": "4b0315f8297f"
+ },
+ "L_quatro_2_9": {
+  "decisao": "APROVA",
+  "fp": "1a6589ac5241"
+ },
+ "L_quatro_2_10": {
+  "decisao": "APROVA",
+  "fp": "fcdaad07407a"
+ },
+ "L_quatro_2_11": {
+  "decisao": "APROVA",
+  "fp": "bf76e0e0dc72"
+ },
+ "L_pegadinhas_1_0": {
+  "decisao": "APROVA",
+  "fp": "d39c9d9a7fb6"
+ },
+ "L_pegadinhas_1_1": {
+  "decisao": "APROVA",
+  "fp": "d97f96cd0420"
+ },
+ "L_pegadinhas_1_2": {
+  "decisao": "APROVA",
+  "fp": "ec29e4c12de5"
+ },
+ "L_pegadinhas_1_3": {
+  "decisao": "APROVA",
+  "fp": "9feb33347fa3"
+ },
+ "L_pegadinhas_1_4": {
+  "decisao": "APROVA",
+  "fp": "a2882e0e1873"
+ },
+ "L_pegadinhas_1_5": {
+  "decisao": "APROVA",
+  "fp": "984a6a5b9c39"
+ },
+ "L_pegadinhas_1_6": {
+  "decisao": "APROVA",
+  "fp": "82f4b0c4fed4"
+ },
+ "L_pegadinhas_1_7": {
+  "decisao": "APROVA",
+  "fp": "90c0f875af03"
+ },
+ "L_pegadinhas_4_0": {
+  "decisao": "APROVA",
+  "fp": "f4dd9bb8f5d8"
+ },
+ "L_pegadinhas_4_1": {
+  "decisao": "APROVA",
+  "fp": "c986be5b2692"
+ },
+ "L_pegadinhas_4_2": {
+  "decisao": "APROVA",
+  "fp": "3ca4f5656798"
+ },
+ "L_pegadinhas_4_3": {
+  "decisao": "APROVA",
+  "fp": "ce755506d8ed"
+ },
+ "L_pegadinhas_4_4": {
+  "decisao": "APROVA",
+  "fp": "df6b30021bed"
+ },
+ "L_pegadinhas_4_5": {
+  "decisao": "APROVA",
+  "fp": "faae512f787e"
+ },
+ "L_pegadinhas_4_6": {
+  "decisao": "APROVA",
+  "fp": "d92f799db270"
+ },
+ "L_escola_3_0": {
+  "decisao": "APROVA",
+  "fp": "47f4f7b3266a"
+ },
+ "L_escola_3_1": {
+  "decisao": "APROVA",
+  "fp": "6f27f37dc2db"
+ },
+ "L_escola_3_2": {
+  "decisao": "APROVA",
+  "fp": "091f9aa9d6dc"
+ },
+ "L_escola_3_3": {
+  "decisao": "APROVA",
+  "fp": "7ace573be84b"
+ },
+ "L_escola_3_4": {
+  "decisao": "APROVA",
+  "fp": "ba2a5be3fa87"
+ },
+ "L_mudou_2_0": {
+  "decisao": "APROVA",
+  "fp": "a0cdb57d32ec"
+ },
+ "L_mudou_2_1": {
+  "decisao": "APROVA",
+  "fp": "c2241e416f26"
+ },
+ "L_mudou_2_2": {
+  "decisao": "APROVA",
+  "fp": "227b04e4b15e"
+ },
+ "L_mudou_2_3": {
+  "decisao": "APROVA",
+  "fp": "b084495bf96c"
+ },
+ "L_mudou_2_4": {
+  "decisao": "APROVA",
+  "fp": "cf1a203b0ced"
+ },
+ "L_mudou_2_5": {
+  "decisao": "APROVA",
+  "fp": "4f459365df3d"
+ },
+ "L_olhar_3_0": {
+  "decisao": "APROVA",
+  "fp": "67702b375268"
+ },
+ "L_olhar_3_1": {
+  "decisao": "APROVA",
+  "fp": "1aa7f7685abd"
+ },
+ "L_olhar_3_2": {
+  "decisao": "APROVA",
+  "fp": "aa7af61845b3"
+ },
+ "L_profissoes_2_0": {
+  "decisao": "APROVA",
+  "fp": "52a6566fe2e2"
+ },
+ "L_profissoes_2_1": {
+  "decisao": "APROVA",
+  "fp": "7fdffe37e5df"
+ },
+ "L_profissoes_2_2": {
+  "decisao": "APROVA",
+  "fp": "050fca9014f9"
+ },
+ "L_profissoes_2_3": {
+  "decisao": "APROVA",
+  "fp": "19c9cb93f409"
+ },
+ "L_profissoes_2_4": {
+  "decisao": "APROVA",
+  "fp": "655db3a4ed43"
+ },
+ "L_luciajoao_2_0": {
+  "decisao": "APROVA",
+  "fp": "4a1815d61672"
+ },
+ "L_luciajoao_2_1": {
+  "decisao": "APROVA",
+  "fp": "7442c9703356"
+ },
+ "L_luciajoao_2_2": {
+  "decisao": "APROVA",
+  "fp": "9b61c891c568"
+ },
+ "L_luciajoao_2_3": {
+  "decisao": "APROVA",
+  "fp": "1b216de0bff3"
+ },
+ "L_luciajoao_2_4": {
+  "decisao": "APROVA",
+  "fp": "22b2586c336e"
+ },
+ "L_luciajoao_2_5": {
+  "decisao": "APROVA",
+  "fp": "caad6f9e227b"
+ },
+ "L_fazenda_2_0": {
+  "decisao": "APROVA",
+  "fp": "838df867d96e"
+ },
+ "L_fazenda_2_1": {
+  "decisao": "APROVA",
+  "fp": "f9623ddde230"
+ },
+ "L_fazenda_2_2": {
+  "decisao": "APROVA",
+  "fp": "e48dd3a7cb29"
+ },
+ "L_fazenda_2_3": {
+  "decisao": "APROVA",
+  "fp": "bf54dd33ffbd"
+ },
+ "L_fazenda_2_4": {
+  "decisao": "APROVA",
+  "fp": "77eff7ead9d2"
+ },
+ "L_ferramentas_2_0": {
+  "decisao": "APROVA",
+  "fp": "6a8d5b274838"
+ },
+ "L_ferramentas_2_1": {
+  "decisao": "APROVA",
+  "fp": "369722812be1"
+ },
+ "L_ferramentas_2_2": {
+  "decisao": "APROVA",
+  "fp": "8f905dba5a87"
+ },
+ "L_ferramentas_2_3": {
+  "decisao": "APROVA",
+  "fp": "e4597ad8aa2e"
+ },
+ "L_ferramentas_2_4": {
+  "decisao": "APROVA",
+  "fp": "67f304a4e72a"
+ },
+ "L_ferramentas_2_5": {
+  "decisao": "APROVA",
+  "fp": "901e7d5b965f"
+ },
+ "L_ferramentas_3_0": {
+  "decisao": "APROVA",
+  "fp": "d3777b45119a"
+ },
+ "L_ferramentas_3_1": {
+  "decisao": "APROVA",
+  "fp": "2f4f5e43e829"
+ },
+ "L_ferramentas_3_2": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "F",
+   "G"
+  ],
+  "motivo": "Sozinho, num sim/não, o pincel é ambíguo (o roteiro só o aceita junto da marreta e da colher, ou em qual(is)); a muleta 'junto da marreta e da colher' entrega a resposta. O pincel já aparece na tela de texto da lição."
+ },
+ "L_ferramentas_3_3": {
+  "decisao": "APROVA",
+  "fp": "2af857551cd0"
+ },
+ "L_ferramentas_3_4": {
+  "decisao": "APROVA",
+  "fp": "7fd8330d5173"
+ },
+ "L_rios_2_0": {
+  "decisao": "APROVA",
+  "fp": "b7b698b6dc06"
+ },
+ "L_rios_2_1": {
+  "decisao": "APROVA",
+  "fp": "3801f0baaf4a"
+ },
+ "L_rios_2_2": {
+  "decisao": "APROVA",
+  "fp": "706fc05eceb9"
+ },
+ "L_rios_2_3": {
+  "decisao": "APROVA",
+  "fp": "e0c1bfa656c0"
+ },
+ "L_rios_2_4": {
+  "decisao": "APROVA",
+  "fp": "82952f35e6ce"
+ },
+ "L_rios_2_5": {
+  "decisao": "APROVA",
+  "fp": "1b3596408abf"
+ },
+ "L_rios_3_0": {
+  "decisao": "APROVA",
+  "fp": "5b35b6e65fff"
+ },
+ "L_rios_3_1": {
+  "decisao": "APROVA",
+  "fp": "3d89bc49d39c"
+ },
+ "L_rios_3_2": {
+  "decisao": "APROVA",
+  "fp": "93a18544cc90"
+ }
+}

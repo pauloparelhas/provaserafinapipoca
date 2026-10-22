@@ -1,0 +1,756 @@
+[
+ {
+  "id": "p42",
+  "tema": "profissoes",
+  "at": [
+   "P9"
+  ],
+  "p": "Qual destas é uma profissão NOVA, criada pela tecnologia?",
+  "o": [
+   "Desenvolvedor de aplicativos",
+   "Acendedor de lampião",
+   "Nenhuma: todas são antigas"
+  ],
+  "dica": "Aplicativo é coisa de celular.",
+  "ex": "Desenvolvedor de aplicativos é profissão nova, criada pela tecnologia."
+ },
+ {
+  "id": "p43",
+  "tema": "profissoes",
+  "at": [
+   "P9"
+  ],
+  "p": "Quais são profissões novas que a tecnologia criou? — escolha o grupo certo",
+  "o": [
+   "Designer gráfico e cientista de dados",
+   "Acendedor de lampião",
+   "Nenhuma"
+  ],
+  "dica": "Computador e internet.",
+  "ex": "Designer gráfico, desenvolvedor de aplicativos e cientista de dados são profissões novas."
+ },
+ {
+  "id": "p44",
+  "tema": "profissoes",
+  "at": [
+   "P9"
+  ],
+  "p": "Numa entrevista com um profissional, o que podemos perguntar? — escolha o grupo certo",
+  "o": [
+   "Ferramentas, local de trabalho e o que a tecnologia mudou",
+   "A senha do celular dele",
+   "Nada"
+  ],
+  "dica": "Lembre do quadro da visita.",
+  "ex": "Perguntas: profissão, ferramentas, local de trabalho, como trabalha e avanços tecnológicos."
+ },
+ {
+  "id": "p45",
+  "tema": "profissoes",
+  "at": [
+   "P14",
+   "P9"
+  ],
+  "p": "Todas as profissões de hoje já existiam no tempo dos nossos avós?",
+  "o": [
+   "Não, algumas são novas",
+   "Sim, todas",
+   "Os avós não trabalhavam"
+  ],
+  "dica": "Desenvolvedor de aplicativos existia?",
+  "ex": "Não: algumas profissões, como desenvolvedor de aplicativos, são novas."
+ },
+ {
+  "id": "p46",
+  "tema": "profissoes",
+  "at": [
+   "P11"
+  ],
+  "p": "O que pode influenciar o trabalho que uma pessoa faz?",
+  "o": [
+   "O lugar onde vive, a família e as condições de vida",
+   "A cor do tênis",
+   "O signo"
+  ],
+  "dica": "Diz a introdução da unidade.",
+  "ex": "O lugar onde a pessoa vive, a família e as condições de vida influenciam o trabalho."
+ },
+ {
+  "id": "p47",
+  "tema": "profissoes",
+  "at": [
+   "P11"
+  ],
+  "p": "Existem trabalhos que passam despercebidos. Eles são…",
+  "o": [
+   "muito importantes também",
+   "inúteis",
+   "proibidos"
+  ],
+  "dica": "Todo trabalho conta.",
+  "ex": "Muitos trabalhos passam despercebidos, mas são muito importantes."
+ },
+ {
+  "id": "p48",
+  "tema": "profissoes",
+  "at": [
+   "P12"
+  ],
+  "p": "Sobre trabalho e meio ambiente, é certo dizer:",
+  "o": [
+   "Alguns trabalhos ajudam a natureza e outros podem causar problemas",
+   "Nenhum trabalho mexe com a natureza",
+   "Todo trabalho destrói a natureza"
+  ],
+  "dica": "Existem os dois tipos.",
+  "ex": "Alguns trabalhos ajudam o meio ambiente; outros causam problemas e precisam mudar."
+ },
+ {
+  "id": "p49",
+  "tema": "profissoes",
+  "at": [
+   "P12"
+  ],
+  "p": "Existe trabalho que cuida da natureza?",
+  "o": [
+   "Sim",
+   "Não",
+   "Só nos contos de fadas"
+  ],
+  "dica": "Pense em quem protege florestas.",
+  "ex": "Sim, existem trabalhos que cuidam da natureza."
+ },
+ {
+  "id": "p50",
+  "tema": "profissoes",
+  "at": [
+   "P13"
+  ],
+  "p": "Onde as pessoas trabalham? — escolha o grupo certo",
+  "o": [
+   "Na escola, em casa, nas ruas, nas fazendas e nos hospitais",
+   "Só em escritórios",
+   "Só na escola"
+  ],
+  "dica": "O trabalho está em todo lugar.",
+  "ex": "O trabalho está em muitos lugares: escola, casa, ruas, fazendas, hospitais."
+ },
+ {
+  "id": "p51",
+  "tema": "profissoes",
+  "at": [
+   "P1",
+   "P3"
+  ],
+  "p": "Seu Francisco passou da bicicleta para a moto. Isso é…",
+  "o": [
+   "uma mudança",
+   "uma permanência",
+   "uma profissão nova"
+  ],
+  "dica": "Ficou diferente.",
+  "ex": "Trocar a bicicleta pela moto é uma mudança."
+ },
+ {
+  "id": "p52",
+  "tema": "profissoes",
+  "at": [
+   "P1",
+   "P6"
+  ],
+  "p": "Doutor João sempre escutou com atenção os pacientes, antes e hoje. Isso é…",
+  "o": [
+   "uma permanência",
+   "uma mudança",
+   "uma fonte escrita"
+  ],
+  "dica": "Continuou?",
+  "ex": "Escutar com atenção continuou: permanência."
+ },
+ {
+  "id": "p53",
+  "tema": "profissoes",
+  "at": [
+   "P1",
+   "P5"
+  ],
+  "p": "Na fazenda do Seu Pedro, o arado puxado por bois deu lugar aos tratores. Isso é…",
+  "o": [
+   "uma mudança",
+   "uma permanência",
+   "um patrimônio"
+  ],
+  "dica": "Ficou diferente.",
+  "ex": "Dos bois para o trator: mudança."
+ },
+ {
+  "id": "p54",
+  "tema": "profissoes",
+  "at": [
+   "P1"
+  ],
+  "p": "Como trabalhava um fotógrafo antigamente?",
+  "o": [
+   "Com uma câmera grande, de tripé",
+   "Com o celular",
+   "Com um drone"
+  ],
+  "dica": "Lembre da carta do fotógrafo.",
+  "ex": "O fotógrafo antigo usava uma câmera grande de tripé."
+ },
+ {
+  "id": "b01",
+  "tema": "tempo",
+  "at": [
+   "B1"
+  ],
+  "p": "O relógio marca o tempo…",
+  "o": [
+   "igual para todas as pessoas",
+   "mais rápido para as crianças",
+   "só de dia"
+  ],
+  "dica": "Segundos, minutos e horas.",
+  "ex": "O relógio marca o tempo da mesma forma para todos."
+ },
+ {
+  "id": "b02",
+  "tema": "tempo",
+  "at": [
+   "B1"
+  ],
+  "p": "Brincando com os amigos, o tempo parece passar…",
+  "o": [
+   "rápido",
+   "devagar",
+   "para trás"
+  ],
+  "dica": "Quando é divertido…",
+  "ex": "Quando é divertido, sentimos o tempo passar rápido."
+ },
+ {
+  "id": "b03",
+  "tema": "tempo",
+  "at": [
+   "B1"
+  ],
+  "p": "Esperando numa fila, o tempo parece passar…",
+  "o": [
+   "devagar",
+   "rápido",
+   "para trás"
+  ],
+  "dica": "Esperar cansa.",
+  "ex": "Na espera, sentimos o tempo passar devagar."
+ },
+ {
+  "id": "b04",
+  "tema": "tempo",
+  "at": [
+   "B1"
+  ],
+  "p": "Mesmo com o relógio marcando o mesmo tempo, cada pessoa pode…",
+  "o": [
+   "sentir o tempo de um jeito diferente",
+   "parar o relógio",
+   "voltar no tempo"
+  ],
+  "dica": "Tempo que sentimos.",
+  "ex": "Cada pessoa pode sentir o tempo de forma diferente."
+ },
+ {
+  "id": "b05",
+  "tema": "tempo",
+  "at": [
+   "B2"
+  ],
+  "p": "Qual destes é um instrumento de medir o tempo?",
+  "o": [
+   "Ampulheta",
+   "Lupa",
+   "Arado"
+  ],
+  "dica": "Tem areia caindo.",
+  "ex": "A ampulheta mede o tempo com areia."
+ },
+ {
+  "id": "b06",
+  "tema": "tempo",
+  "at": [
+   "B2"
+  ],
+  "p": "Quais medem o tempo? — escolha o grupo certo",
+  "o": [
+   "Relógio de sol, ampulheta e calendário",
+   "Estetoscópio e termômetro",
+   "Marreta e pincel"
+  ],
+  "dica": "Instrumentos da unidade 1.",
+  "ex": "Relógio de sol, ampulheta, relógio de água, cuco, ponteiros, calendário, digital e celular medem o tempo."
+ },
+ {
+  "id": "b07",
+  "tema": "tempo",
+  "at": [
+   "B3"
+  ],
+  "p": "Como a natureza mostra o tempo passando? — escolha o grupo certo",
+  "o": [
+   "Dia e noite e as estações do ano",
+   "O barulho do carro",
+   "A cor da camiseta"
+  ],
+  "dica": "A árvore muda nas estações.",
+  "ex": "Dia e noite, as estações do ano e o crescimento mostram o tempo passando."
+ },
+ {
+  "id": "b08",
+  "tema": "tempo",
+  "at": [
+   "B4"
+  ],
+  "p": "Em \"A árvore generosa\", o menino cresceu. O que isso mostra?",
+  "o": [
+   "Que o tempo passou",
+   "Que a árvore era mágica",
+   "Que era um sonho"
+  ],
+  "dica": "Menino → rapaz → homem → velho.",
+  "ex": "O menino cresceu e envelheceu: o tempo passou."
+ },
+ {
+  "id": "b09",
+  "tema": "tempo",
+  "at": [
+   "B5"
+  ],
+  "p": "Na linha do tempo dos registros do material, qual veio por ÚLTIMO?",
+  "o": [
+   "Redes sociais",
+   "Diário",
+   "Álbum de fotos"
+  ],
+  "dica": "O mais novo, do nosso tempo.",
+  "ex": "Ordem do material: jornal, carta, diário, álbum de fotos, foto digital, redes sociais."
+ },
+ {
+  "id": "b10",
+  "tema": "tempo",
+  "at": [
+   "B5"
+  ],
+  "p": "Qual registro é do tempo de quando papai e mamãe eram crianças?",
+  "o": [
+   "Foto digital",
+   "Redes sociais",
+   "Jornal"
+  ],
+  "dica": "Câmera digital.",
+  "ex": "A foto digital apareceu quando nossos pais eram crianças."
+ },
+ {
+  "id": "b11",
+  "tema": "tempo",
+  "at": [
+   "B6"
+  ],
+  "p": "A certidão de nascimento é um documento que…",
+  "o": [
+   "registra a nossa história",
+   "serve para jogar bola",
+   "mede o tempo"
+  ],
+  "dica": "Documento pessoal.",
+  "ex": "Documentos pessoais registram a nossa história."
+ },
+ {
+  "id": "b12",
+  "tema": "tempo",
+  "at": [
+   "B7"
+  ],
+  "p": "O que fazem os museus e arquivos?",
+  "o": [
+   "Guardam memórias para as futuras gerações",
+   "Vendem brinquedos novos",
+   "Apagam o passado"
+  ],
+  "dica": "Guardar memórias.",
+  "ex": "Museus e arquivos guardam memórias para as futuras gerações."
+ },
+ {
+  "id": "b13",
+  "tema": "tempo",
+  "at": [
+   "B7"
+  ],
+  "p": "As festas da família ajudam a…",
+  "o": [
+   "guardar lembranças e tradições",
+   "esquecer o passado",
+   "medir o tempo"
+  ],
+  "dica": "Memória que celebramos.",
+  "ex": "Festas e seus objetos guardam lembranças e tradições."
+ },
+ {
+  "id": "x01",
+  "tema": "profissoes",
+  "at": [
+   "P7"
+  ],
+  "p": "Quais são ferramentas do MÉDICO? (pode ser mais de uma)",
+  "o": [
+   "Maleta, termômetro de mercúrio e estetoscópio",
+   "Só o estetoscópio",
+   "Marreta e globo"
+  ],
+  "dica": "Marque TODAS as do médico.",
+  "ex": "Maleta, termômetro de mercúrio, seringa antiga e estetoscópio são do médico."
+ },
+ {
+  "id": "x02",
+  "tema": "profissoes",
+  "at": [
+   "P7"
+  ],
+  "p": "Quais são ferramentas do CONSTRUTOR? (pode ser mais de uma)",
+  "o": [
+   "Marreta, colher de pedreiro e pincel",
+   "Só a marreta",
+   "Lousa e globo"
+  ],
+  "dica": "Quem constrói casas usa várias.",
+  "ex": "Marreta, colher de pedreiro e pincel são do construtor."
+ },
+ {
+  "id": "x03",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Quais destas são fontes ESCRITAS? (pode ser mais de uma)",
+  "o": [
+   "Carta, diário e certidão de nascimento",
+   "Só a carta",
+   "Chapéu e fotos do álbum"
+  ],
+  "dica": "Procure TODAS que têm texto.",
+  "ex": "Carta, diário e certidão de nascimento têm texto: são fontes escritas."
+ },
+ {
+  "id": "x06",
+  "tema": "fontes",
+  "at": [
+   "F5",
+   "F6"
+  ],
+  "p": "Quais destas são fontes MATERIAIS? (pode ser mais de uma)",
+  "o": [
+   "Chapéu, sofá antigo e bonecas",
+   "Só o chapéu",
+   "Carta e mapa"
+  ],
+  "dica": "Objetos que a gente toca.",
+  "ex": "Chapéu, sofá antigo e bonecas são objetos: fontes materiais."
+ },
+ {
+  "id": "x04",
+  "tema": "profissoes",
+  "at": [
+   "P1",
+   "P3",
+   "P4",
+   "P5",
+   "P6"
+  ],
+  "p": "Nas histórias, quais profissões CONTINUAM existindo hoje? (pode ser mais de uma)",
+  "o": [
+   "Carteiro, professora, fazendeiro e médico",
+   "Só o médico",
+   "O acendedor de lampião"
+  ],
+  "dica": "O jeito de trabalhar mudou, mas elas existem.",
+  "ex": "As quatro continuam existindo, de um jeito diferente. O acendedor de lampião desapareceu."
+ },
+ {
+  "id": "x05",
+  "tema": "profissoes",
+  "at": [
+   "P3",
+   "P4",
+   "P5",
+   "P6"
+  ],
+  "p": "Em quais histórias aparece aparelho com tela (celular, computador, tablet) no HOJE? (pode ser mais de uma)",
+  "o": [
+   "Nas quatro: carteiro, professora, fazendeiro e médico",
+   "Só na do médico",
+   "Em nenhuma"
+  ],
+  "dica": "Lembre do HOJE de cada um.",
+  "ex": "Nas quatro histórias a tecnologia com tela chegou: aparelho do carteiro, computador da professora, celular do fazendeiro e do médico."
+ },
+ {
+  "id": "x07",
+  "tema": "profissoes",
+  "at": [
+   "P2"
+  ],
+  "p": "Na foto antiga da aula, o que fazia o leiteiro?",
+  "o": [
+   "Entregava garrafas de leite na porta das casas",
+   "Acendia os postes da rua",
+   "Consertava computadores"
+  ],
+  "dica": "Olhe as garrafas na mão dele.",
+  "ex": "O leiteiro entregava garrafas de leite na porta das casas."
+ },
+ {
+  "id": "x08",
+  "tema": "profissoes",
+  "at": [
+   "P2"
+  ],
+  "p": "Na foto antiga da aula, a datilógrafa trabalhava com…",
+  "o": [
+   "uma máquina de escrever",
+   "um trator",
+   "um drone"
+  ],
+  "dica": "Teclas que batem no papel.",
+  "ex": "A datilógrafa escrevia numa máquina de escrever."
+ },
+ {
+  "id": "x09",
+  "tema": "olhar",
+  "at": [
+   "I2"
+  ],
+  "p": "Quem escreveu o cartão-postal de Salvador?",
+  "o": [
+   "Quem viajou",
+   "O carteiro",
+   "O jornal"
+  ],
+  "dica": "Quem estava passeando.",
+  "ex": "Quem viajou escreveu o cartão-postal."
+ },
+ {
+  "id": "x10",
+  "tema": "olhar",
+  "at": [
+   "I2"
+  ],
+  "p": "Para quem foi feito o cartão-postal de Salvador?",
+  "o": [
+   "Para os amigos de quem viajou",
+   "Para vender leite",
+   "Para a escola"
+  ],
+  "dica": "Para quem ficou em casa.",
+  "ex": "O cartão-postal foi feito para os amigos de quem viajou."
+ },
+ {
+  "id": "x11",
+  "tema": "olhar",
+  "at": [
+   "I2"
+  ],
+  "p": "Para quem foi feita a propaganda antiga do alimento?",
+  "o": [
+   "Para as famílias",
+   "Para os carteiros",
+   "Para os rios"
+  ],
+  "dica": "Quem compraria o alimento?",
+  "ex": "A propaganda foi feita para as famílias, para elas comprarem."
+ },
+ {
+  "id": "x12",
+  "tema": "olhar",
+  "at": [
+   "I2"
+  ],
+  "p": "O anúncio de leite no jornal antigo era para quem?",
+  "o": [
+   "Para quem queria comprar leite",
+   "Para os amigos de quem viajou",
+   "Para o médico"
+  ],
+  "dica": "Quem precisava de leite.",
+  "ex": "O anúncio era para quem queria comprar leite."
+ },
+ {
+  "id": "x13",
+  "tema": "fontes",
+  "at": [
+   "F3",
+   "F9"
+  ],
+  "p": "A mensagem ESCRITA no verso do cartão-postal antigo é fonte…",
+  "o": [
+   "escrita",
+   "visual",
+   "oral"
+  ],
+  "dica": "Olhe só a parte com letras.",
+  "ex": "A mensagem escrita é fonte escrita. (A foto da frente seria visual.)"
+ },
+ {
+  "id": "x14",
+  "tema": "fontes",
+  "at": [
+   "F4",
+   "F9"
+  ],
+  "p": "A foto antiga de pessoas chegando de navio é fonte…",
+  "o": [
+   "visual",
+   "escrita",
+   "material"
+  ],
+  "dica": "É uma foto.",
+  "ex": "Foto é fonte visual."
+ },
+ {
+  "id": "x15",
+  "tema": "fontes",
+  "at": [
+   "F2",
+   "F7"
+  ],
+  "p": "O que um relato da vovó pode nos ensinar?",
+  "o": [
+   "Como era a vida dela antigamente",
+   "O que vai acontecer amanhã",
+   "A tabuada do 3"
+  ],
+  "dica": "Ela conta o que viveu.",
+  "ex": "O relato oral ensina como era a vida antigamente."
+ },
+ {
+  "id": "x16",
+  "tema": "escola",
+  "at": [
+   "S1",
+   "S5"
+  ],
+  "p": "Comparando a foto antiga de uma turma com uma foto de hoje, descobrimos…",
+  "o": [
+   "o que mudou e o que continuou igual na escola",
+   "a previsão do tempo",
+   "o preço do uniforme"
+  ],
+  "dica": "Comparar = mudanças e permanências.",
+  "ex": "Comparar fontes de tempos diferentes mostra o que mudou e o que continuou."
+ },
+ {
+  "id": "x17",
+  "tema": "escola",
+  "at": [
+   "S2",
+   "S5"
+  ],
+  "p": "Um caderno antigo e um caderno de hoje, lado a lado, ajudam a perceber…",
+  "o": [
+   "mudanças e permanências na escola",
+   "como fazer um bolo",
+   "nada sobre a escola"
+  ],
+  "dica": "São documentos de tempos diferentes.",
+  "ex": "Documentos de tempos diferentes mostram mudanças e permanências."
+ },
+ {
+  "id": "t01",
+  "tema": "tempo",
+  "at": [
+   "B5"
+  ],
+  "p": "Na linha do tempo dos registros do material, qual é um dos PRIMEIROS?",
+  "o": [
+   "O jornal",
+   "As redes sociais",
+   "A foto digital"
+  ],
+  "dica": "O mais antigo da lista.",
+  "ex": "O jornal é um dos primeiros registros. Ordem: jornal, carta, diário, álbum, foto digital, redes sociais."
+ },
+ {
+  "id": "t02",
+  "tema": "tempo",
+  "at": [
+   "B5"
+  ],
+  "p": "Na linha do tempo dos registros, o que vem depois do JORNAL?",
+  "o": [
+   "A carta",
+   "As redes sociais",
+   "A foto digital"
+  ],
+  "dica": "Escrita à mão, dentro de um envelope.",
+  "ex": "Depois do jornal vem a carta."
+ },
+ {
+  "id": "t03",
+  "tema": "tempo",
+  "at": [
+   "B5"
+  ],
+  "p": "Na linha do tempo dos registros, o que vem depois da CARTA?",
+  "o": [
+   "O diário",
+   "A foto digital",
+   "As redes sociais"
+  ],
+  "dica": "Alguém escrevia nele todo dia.",
+  "ex": "Depois da carta vem o diário."
+ },
+ {
+  "id": "t04",
+  "tema": "tempo",
+  "at": [
+   "B5"
+  ],
+  "p": "Na linha do tempo dos registros, o que vem depois do DIÁRIO?",
+  "o": [
+   "O álbum de fotos",
+   "O jornal",
+   "A carta"
+  ],
+  "dica": "Fotos coladas nas páginas.",
+  "ex": "Depois do diário vem o álbum de fotos."
+ },
+ {
+  "id": "t05",
+  "tema": "tempo",
+  "at": [
+   "B7",
+   "F11"
+  ],
+  "p": "Quem guarda as fontes históricas para as futuras gerações?",
+  "o": [
+   "Os museus e os arquivos",
+   "As traças",
+   "Ninguém"
+  ],
+  "dica": "Lugares onde as pistas ficam protegidas.",
+  "ex": "Museus e arquivos guardam memórias para as futuras gerações."
+ },
+ {
+  "id": "t06",
+  "tema": "tempo",
+  "at": [
+   "F11"
+  ],
+  "p": "Por que é importante cuidar e consertar as fontes antigas?",
+  "o": [
+   "Para preservar a memória",
+   "Para jogar fora depois",
+   "Para ficarem novas"
+  ],
+  "dica": "Sem pistas, o passado se perde.",
+  "ex": "Cuidar das fontes preserva a memória das pessoas e dos povos."
+ }
+]

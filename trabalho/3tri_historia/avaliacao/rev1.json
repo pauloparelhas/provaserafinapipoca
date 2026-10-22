@@ -1,0 +1,835 @@
+[
+ {
+  "id": "f01",
+  "at": [
+   "F1"
+  ],
+  "p": "O que são fontes históricas?",
+  "o": [
+   "Pistas do passado para aprender sobre outras épocas",
+   "Só os objetos guardados nos museus",
+   "Só as histórias que os avós contam"
+  ],
+  "ex": "Fontes históricas são pistas do passado: tudo o que a gente pode ver, ouvir, tocar ou ler para aprender sobre outras épocas."
+ },
+ {
+  "id": "f04",
+  "at": [
+   "F1"
+  ],
+  "p": "\"Tudo o que produzimos deixa um rastro.\" Esses rastros são as…",
+  "o": [
+   "fontes históricas",
+   "suposições",
+   "versões diferentes"
+  ],
+  "ex": "Tudo o que as pessoas fazem deixa rastros. Esses rastros são as fontes históricas."
+ },
+ {
+  "id": "f06",
+  "at": [
+   "F2"
+  ],
+  "p": "O que é uma fonte ORAL?",
+  "o": [
+   "Um relato contado, como entrevista e cantiga",
+   "Um texto, como carta e diário",
+   "Uma imagem, como foto e mapa"
+  ],
+  "ex": "Fonte oral é um relato ou história CONTADA por uma pessoa."
+ },
+ {
+  "id": "f07",
+  "at": [
+   "F3"
+  ],
+  "p": "O que é uma fonte ESCRITA?",
+  "o": [
+   "Um texto, como carta e diário",
+   "Um objeto, como roupa e brinquedo",
+   "Um relato contado, como entrevista e cantiga"
+  ],
+  "ex": "Fonte escrita é um texto: diários, leis, jornais e cartas."
+ },
+ {
+  "id": "f08",
+  "at": [
+   "F4"
+  ],
+  "p": "O que é uma fonte VISUAL?",
+  "o": [
+   "Uma imagem, como foto e mapa",
+   "Um texto, como carta e diário",
+   "Um objeto, como roupa e brinquedo"
+  ],
+  "ex": "Fonte visual é uma imagem: pinturas, fotografias e mapas."
+ },
+ {
+  "id": "f09",
+  "at": [
+   "F5"
+  ],
+  "p": "O que é uma fonte MATERIAL?",
+  "o": [
+   "Um objeto, como roupa e brinquedo",
+   "Uma imagem, como foto e mapa",
+   "Um relato contado, como entrevista e cantiga"
+  ],
+  "ex": "Fonte material é um objeto: brinquedos, roupas, construções e utensílios."
+ },
+ {
+  "id": "f11",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Uma carta antiga do bisavô. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte oral",
+   "Fonte material"
+  ],
+  "ex": "A carta tem um texto escrito: é fonte escrita."
+ },
+ {
+  "id": "f15",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Um livro antigo de histórias. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte visual",
+   "Fonte oral"
+  ],
+  "ex": "É texto escrito: fonte escrita."
+ },
+ {
+  "id": "f23",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "O diário antigo da tia. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte oral",
+   "Fonte visual"
+  ],
+  "ex": "Diário é texto escrito: fonte escrita."
+ },
+ {
+  "id": "f28",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Um bilhete antigo da professora. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte oral",
+   "Fonte material"
+  ],
+  "ex": "Bilhete tem texto: fonte escrita."
+ },
+ {
+  "id": "f29",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Uma receita anotada no caderno da avó. Que fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte oral",
+   "Fonte material"
+  ],
+  "ex": "Receita escrita é fonte escrita."
+ },
+ {
+  "id": "f34",
+  "at": [
+   "F2",
+   "F3"
+  ],
+  "p": "A vovó mandou uma carta contando a infância dela. A carta é fonte…",
+  "o": [
+   "escrita",
+   "oral",
+   "material"
+  ],
+  "ex": "A carta é texto escrito: fonte escrita."
+ },
+ {
+  "id": "f38",
+  "at": [
+   "F4",
+   "F6"
+  ],
+  "p": "Quais destas são fontes VISUAIS? — escolha o grupo certo",
+  "o": [
+   "Fotografia e mapa",
+   "Carta e diário",
+   "Panela e sofá"
+  ],
+  "ex": "Fotografias, pinturas e mapas são imagens: fontes visuais."
+ },
+ {
+  "id": "f40",
+  "at": [
+   "F2"
+  ],
+  "p": "Fonte oral passa de geração em geração por meio da…",
+  "o": [
+   "fala",
+   "escrita",
+   "fotografia"
+  ],
+  "ex": "As memórias orais passam de geração em geração pela fala."
+ },
+ {
+  "id": "f41",
+  "at": [
+   "F2"
+  ],
+  "p": "Qual destas é uma pergunta para analisar um RELATO (fonte oral)?",
+  "o": [
+   "De que época a pessoa se lembrava?",
+   "Como é o objeto por fora?",
+   "Que tipo de fonte a imagem é?"
+  ],
+  "ex": "Perguntas do relato: quem conta, o que contou, de que época se lembrava, o que aprendi."
+ },
+ {
+  "id": "f44",
+  "at": [
+   "F7"
+  ],
+  "p": "Uma carta antiga pode nos ensinar…",
+  "o": [
+   "como as pessoas se comunicavam",
+   "como as crianças brincavam",
+   "como as pessoas se vestiam"
+  ],
+  "ex": "A carta conta o que a pessoa vivia e sentia."
+ },
+ {
+  "id": "f46",
+  "at": [
+   "F8"
+  ],
+  "p": "Quais perguntas são da FICHA DE OBSERVAÇÃO DO OBJETO?",
+  "o": [
+   "Como é? Conta uma história do passado? O que faz lembrar?",
+   "Quem produziu? Para quem foi feita? Qual era o objetivo?",
+   "Quem contou? O que contou? De que época se lembrava?"
+  ],
+  "ex": "Um objeto pode lembrar uma pessoa da família, algo que já aconteceu ou um lugar."
+ },
+ {
+  "id": "f47",
+  "at": [
+   "F9"
+  ],
+  "p": "Uma boa legenda de fonte diz o que a imagem mostra, que tipo de fonte é e…",
+  "o": [
+   "o que ela pode contar sobre o passado",
+   "para quem ela foi vendida",
+   "de que época a pessoa se lembrava"
+  ],
+  "ex": "A legenda diz: o que mostra, que tipo de fonte é e o que conta do passado."
+ },
+ {
+  "id": "f48",
+  "at": [
+   "F9",
+   "F4"
+  ],
+  "p": "A FOTO de um trem a vapor antigo é fonte…",
+  "o": [
+   "visual",
+   "material",
+   "escrita"
+  ],
+  "ex": "Foto é fonte visual. Ela mostra como eram os trens antigamente."
+ },
+ {
+  "id": "f50",
+  "at": [
+   "F10"
+  ],
+  "p": "O que faz um detetive da história?",
+  "o": [
+   "Observa, pergunta e compara as pistas",
+   "Olha uma pista só e já tem certeza",
+   "Acredita na primeira versão que ouve"
+  ],
+  "ex": "O detetive da história observa, pergunta e compara as fontes."
+ },
+ {
+  "id": "f51",
+  "at": [
+   "F11"
+  ],
+  "p": "Por que as fontes históricas são importantes?",
+  "o": [
+   "Preservam a memória das pessoas e dos povos",
+   "Mostram o que vai acontecer no futuro",
+   "Mostram só como as pessoas vivem hoje"
+  ],
+  "ex": "As fontes preservam a memória, em todas as culturas."
+ },
+ {
+  "id": "f52",
+  "at": [
+   "F12"
+  ],
+  "p": "Na atividade de casa sobre a foto antiga da família, quais eram as perguntas? — escolha o grupo certo",
+  "o": [
+   "Quem aparece, onde e quando foi tirada, o que acontecia",
+   "Quem fez o relato, o que contou, de que época lembrava",
+   "Como é o objeto e o que ele faz você lembrar"
+  ],
+  "ex": "Perguntas da foto: quem aparece, onde e quando foi tirada, o que acontecia e por que é importante."
+ },
+ {
+  "id": "f54",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Uma lei antiga. Que tipo de fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte visual",
+   "Fonte oral"
+  ],
+  "ex": "Leis são textos: fonte escrita."
+ },
+ {
+  "id": "s02",
+  "at": [
+   "S1"
+  ],
+  "p": "Quais destas são fontes históricas que podemos achar na escola? — escolha o grupo certo",
+  "o": [
+   "Fotos antigas de turmas, cadernos guardados e troféus",
+   "O castelo, o sofá antigo e as bonecas antigas",
+   "O lampião da rua, o arado e o trator da fazenda"
+  ],
+  "ex": "Fotos de turmas, cadernos, uniformes, troféus, bilhetes e livros antigos contam a história da escola."
+ },
+ {
+  "id": "s06",
+  "at": [
+   "S2"
+  ],
+  "p": "Quais destes são documentos da vida escolar? — escolha o grupo certo",
+  "o": [
+   "Caderno, boletim e bilhete",
+   "Foto da turma, troféu e uniforme",
+   "Entrevista, cantiga e relato da vovó"
+  ],
+  "ex": "Cadernos, boletins, bilhetes e registros de eventos são documentos da vida escolar."
+ },
+ {
+  "id": "s07",
+  "at": [
+   "S2"
+  ],
+  "p": "O que os documentos guardados na escola mostram?",
+  "o": [
+   "Como era o ensino, as regras e o dia a dia",
+   "Como será a escola daqui a muitos anos",
+   "Como os alunos se vestiam e se pareciam"
+  ],
+  "ex": "Os documentos mostram como era o ensino, as regras, o que se aprendia e como era o dia a dia."
+ },
+ {
+  "id": "s08",
+  "at": [
+   "S2"
+  ],
+  "p": "Os documentos da escola registram…",
+  "o": [
+   "fatos e decisões que aconteceram ali",
+   "suposições de quem olhou uma foto",
+   "cantigas contadas pelos avós"
+  ],
+  "ex": "Documentos da escola registram fatos e decisões que aconteceram ali."
+ },
+ {
+  "id": "s09",
+  "at": [
+   "S2",
+   "S5"
+  ],
+  "p": "Comparando cadernos antigos e novos, a gente descobre…",
+  "o": [
+   "como a escola mudou com o tempo",
+   "como será a escola no futuro",
+   "como foi o recreio de cada aluno"
+  ],
+  "ex": "Comparar documentos de tempos diferentes mostra como a escola mudou."
+ },
+ {
+  "id": "s10",
+  "at": [
+   "S3"
+  ],
+  "p": "Por que é importante guardar documentos da escola?",
+  "o": [
+   "Para preservar memórias e contar a história da escola",
+   "Para mostrar como será a escola no futuro",
+   "Para vender os cadernos às famílias, como propaganda"
+  ],
+  "ex": "Guardar documentos preserva a memória e conta a história da escola e de cada estudante."
+ },
+ {
+  "id": "s13",
+  "at": [
+   "S5"
+  ],
+  "p": "O que é uma PERMANÊNCIA?",
+  "o": [
+   "Algo que continuou igual com o passar do tempo",
+   "Algo que ficou diferente com o passar do tempo",
+   "Algo que só vai existir no futuro"
+  ],
+  "ex": "Permanência é o que continuou igual."
+ },
+ {
+  "id": "s14",
+  "at": [
+   "S5",
+   "P4"
+  ],
+  "p": "Na história da Dona Lúcia, antes era quadro de giz; hoje algumas escolas têm lousa digital. Isso é…",
+  "o": [
+   "uma mudança",
+   "uma permanência",
+   "uma profissão que desapareceu"
+  ],
+  "ex": "Do quadro de giz para a lousa digital: mudança."
+ },
+ {
+  "id": "s16",
+  "at": [
+   "S5",
+   "P4"
+  ],
+  "p": "Na história da Dona Lúcia, ANTES os alunos pesquisavam…",
+  "o": [
+   "na biblioteca",
+   "na internet",
+   "no tablet"
+  ],
+  "ex": "A internet é a novidade: uma mudança no jeito de pesquisar."
+ },
+ {
+  "id": "s17",
+  "at": [
+   "S6"
+  ],
+  "p": "Um aluno, uma professora e um funcionário lembram da mesma escola. As memórias deles…",
+  "o": [
+   "podem ser diferentes",
+   "são sempre iguais",
+   "só a do aluno está certa"
+  ],
+  "ex": "Estudantes, professores e funcionários podem ter memórias diferentes da mesma escola."
+ },
+ {
+  "id": "s18",
+  "at": [
+   "S7"
+  ],
+  "p": "O que objetos, documentos e festas têm a ver com História?",
+  "o": [
+   "Guardam lembranças e contam o passado",
+   "Mostram como será o futuro",
+   "Contam só o que acontece hoje"
+  ],
+  "ex": "Objetos, documentos e festas guardam lembranças e contam o passado das pessoas e da escola."
+ },
+ {
+  "id": "s20",
+  "at": [
+   "S1",
+   "F7"
+  ],
+  "p": "Um uniforme antigo da escola pode contar…",
+  "o": [
+   "como os alunos se vestiam antigamente",
+   "o que os alunos estudavam nas aulas",
+   "como os alunos mandavam recados"
+  ],
+  "ex": "O uniforme antigo mostra como os alunos se vestiam."
+ },
+ {
+  "id": "i01",
+  "at": [
+   "I1"
+  ],
+  "p": "Duas crianças olham a mesma foto. Cada uma repara em coisas diferentes. Por quê?",
+  "o": [
+   "Cada pessoa observa de um jeito",
+   "Uma delas está olhando errado",
+   "Só quem é mais velho sabe olhar"
+  ],
+  "ex": "Cada pessoa observa de um jeito e repara em detalhes diferentes."
+ },
+ {
+  "id": "i02",
+  "at": [
+   "I1"
+  ],
+  "p": "Olhando a mesma imagem uma segunda vez, a gente…",
+  "o": [
+   "percebe coisas novas",
+   "vê sempre exatamente o mesmo",
+   "já sabe toda a história verdadeira"
+  ],
+  "ex": "Olhar de novo ajuda a perceber detalhes novos."
+ },
+ {
+  "id": "i03",
+  "at": [
+   "I2"
+  ],
+  "p": "Toda fonte histórica foi criada por alguém, em um tempo e lugar, com…",
+  "o": [
+   "um objetivo",
+   "a mesma história para todos",
+   "a ajuda de um historiador"
+  ],
+  "ex": "Toda fonte foi criada por alguém, num tempo e lugar, com um objetivo."
+ },
+ {
+  "id": "i04",
+  "at": [
+   "I2"
+  ],
+  "p": "Para investigar uma fonte, o detetive pergunta: quem produziu? para quem foi feita? e…",
+  "o": [
+   "Qual era o objetivo de quem criou?",
+   "O que estava acontecendo na foto?",
+   "De que época a pessoa se lembrava?"
+  ],
+  "ex": "Quem produziu, para quem foi feita e qual era o objetivo."
+ },
+ {
+  "id": "i05",
+  "at": [
+   "I2"
+  ],
+  "p": "Um cartão-postal de Salvador foi escrito por uma pessoa para os amigos. Qual era o objetivo?",
+  "o": [
+   "Contar como foi a viagem",
+   "Vender leite tirado na hora",
+   "Vender um alimento às famílias"
+  ],
+  "ex": "O cartão-postal servia para contar da viagem aos amigos."
+ },
+ {
+  "id": "i06",
+  "at": [
+   "I2"
+  ],
+  "p": "Um anúncio de jornal antigo falava do leite tirado na hora, na rua tal. Para que ele foi feito?",
+  "o": [
+   "Para vender o leite",
+   "Para contar uma viagem aos amigos",
+   "Para registrar as notas dos alunos"
+  ],
+  "ex": "Anúncio e propaganda servem para VENDER."
+ },
+ {
+  "id": "i07",
+  "at": [
+   "I2"
+  ],
+  "p": "Uma propaganda antiga dizia que um alimento era bom para as crianças. Para que ela foi feita?",
+  "o": [
+   "Para vender o alimento às famílias",
+   "Para contar uma viagem aos amigos",
+   "Para registrar as regras da escola"
+  ],
+  "ex": "A propaganda foi feita para vender o alimento."
+ },
+ {
+  "id": "i08",
+  "at": [
+   "I3",
+   "I5"
+  ],
+  "p": "Por que podem existir histórias diferentes a partir de um mesmo documento?",
+  "o": [
+   "Cada pessoa olha com seu ponto de vista",
+   "O documento mudou com o tempo",
+   "Uma das pessoas está mentindo"
+  ],
+  "ex": "Cada pessoa interpreta com sua experiência e ponto de vista: surgem histórias diferentes."
+ },
+ {
+  "id": "i09",
+  "at": [
+   "I3"
+  ],
+  "p": "Quando não temos todas as informações de uma foto, nós fazemos…",
+  "o": [
+   "suposições, que nem sempre estão certas",
+   "fatos, que estão sempre certos",
+   "uma fonte escrita da foto"
+  ],
+  "ex": "Sem todas as informações, fazemos suposições, e nem sempre elas são corretas."
+ },
+ {
+  "id": "i10",
+  "at": [
+   "I3"
+  ],
+  "p": "Para chegar mais perto da verdade, o historiador…",
+  "o": [
+   "reúne várias fontes e compara",
+   "escolhe a história mais bonita",
+   "confia em uma fonte só"
+  ],
+  "ex": "O historiador reúne várias fontes, compara e ouve versões diferentes."
+ },
+ {
+  "id": "i11",
+  "at": [
+   "I3"
+  ],
+  "p": "A turma imaginou a história de uma foto. Depois, o dono contou a história verdadeira. Por que algumas ficaram diferentes?",
+  "o": [
+   "Usaram a imaginação no que faltava",
+   "Olharam fotos diferentes",
+   "O dono contou errado"
+  ],
+  "ex": "Cada pessoa preencheu as partes que faltavam com a imaginação."
+ },
+ {
+  "id": "i12",
+  "at": [
+   "I4"
+  ],
+  "p": "Todas as histórias do passado foram registradas?",
+  "o": [
+   "Não, algumas foram esquecidas",
+   "Sim, todas estão nos livros",
+   "Sim, todas estão nos museus"
+  ],
+  "ex": "Algumas histórias são registradas e outras acabam esquecidas."
+ },
+ {
+  "id": "m01",
+  "at": [
+   "M1"
+  ],
+  "p": "\"A história começa em nós.\" O que cada família carrega?",
+  "o": [
+   "Tradições que formam o que somos hoje",
+   "Só objetos novos, comprados agora",
+   "Só histórias que estão nos livros"
+  ],
+  "ex": "Cada família carrega tradições que formam o que somos hoje."
+ },
+ {
+  "id": "m02",
+  "at": [
+   "M1"
+  ],
+  "p": "Um objeto que está na família há muito tempo pode contar…",
+  "o": [
+   "a história da família",
+   "como será a família no futuro",
+   "só como as pessoas vivem hoje"
+  ],
+  "ex": "Objetos e histórias antigas da família contam a história dela."
+ },
+ {
+  "id": "m03",
+  "at": [
+   "M2"
+  ],
+  "p": "O que eram os NÔMADES?",
+  "o": [
+   "Pessoas que viajavam em busca de comida",
+   "Pessoas que moravam num acampamento fixo",
+   "Pessoas que viviam nas primeiras cidades"
+  ],
+  "ex": "Por milhares de anos os seres humanos foram nômades: viajavam em busca de comida."
+ },
+ {
+  "id": "m04",
+  "at": [
+   "M2"
+  ],
+  "p": "O que mudou tudo para os seres humanos nômades?",
+  "o": [
+   "Aprender a cultivar a terra (agricultura)",
+   "Viajar para mais longe atrás de comida",
+   "Construir as primeiras cidades"
+  ],
+  "ex": "Com a agricultura, as pessoas pararam de viajar e fizeram acampamentos fixos."
+ },
+ {
+  "id": "m05",
+  "at": [
+   "M2"
+  ],
+  "p": "Os acampamentos fixos, que surgiram com a agricultura, deram origem…",
+  "o": [
+   "às primeiras cidades",
+   "aos povos nômades",
+   "às viagens atrás de comida"
+  ],
+  "ex": "Os acampamentos fixos deram origem às primeiras cidades."
+ },
+ {
+  "id": "m09",
+  "at": [
+   "M3"
+  ],
+  "p": "Por que as cidades mais antigas cresceram perto dos grandes rios?",
+  "o": [
+   "Sem os rios, a vida ali não seria possível",
+   "Porque perto dos rios já havia castelos",
+   "Para os nômades continuarem viajando"
+  ],
+  "ex": "As cidades cresceram \"abraçadas\" aos rios: sem eles a vida não seria possível."
+ },
+ {
+  "id": "m10",
+  "at": [
+   "M4"
+  ],
+  "p": "O que é patrimônio?",
+  "o": [
+   "Tudo o que é importante para a memória de um povo",
+   "Só os museus, as praças e as estátuas",
+   "Diários, leis, jornais e cartas antigas"
+  ],
+  "ex": "Patrimônio é tudo o que consideramos importante para a memória de um povo."
+ },
+ {
+  "id": "m16",
+  "at": [
+   "M5"
+  ],
+  "p": "O que você faz hoje (desenhos, textos, escolhas) será…",
+  "o": [
+   "a fonte histórica de amanhã",
+   "um patrimônio imaterial do povo",
+   "uma suposição sobre o passado"
+  ],
+  "ex": "O que você faz hoje se tornará fonte histórica de amanhã."
+ },
+ {
+  "id": "m17",
+  "at": [
+   "M5"
+  ],
+  "p": "Complete: \"Para entender para onde vamos, precisamos descobrir de onde…\"",
+  "o": [
+   "viemos",
+   "moramos",
+   "estamos"
+  ],
+  "ex": "\"Para entender para onde vamos, precisamos descobrir de onde viemos.\""
+ },
+ {
+  "id": "p01",
+  "at": [
+   "P1"
+  ],
+  "p": "Por que muitas profissões mudaram com o tempo?",
+  "o": [
+   "Surgiram novas máquinas, tecnologias e jeitos de se comunicar",
+   "Todas as profissões antigas desapareceram de uma vez",
+   "O trabalho voltou a ser feito só com as mãos e os animais"
+  ],
+  "ex": "Novas máquinas, tecnologias e jeitos de se comunicar mudaram o trabalho."
+ },
+ {
+  "id": "p02",
+  "at": [
+   "P1"
+  ],
+  "p": "Com as novas tecnologias, as pessoas passaram a trabalhar…",
+  "o": [
+   "mais rápido ou com mais conforto",
+   "com as mãos e a ajuda dos animais",
+   "do mesmo jeito de antigamente"
+  ],
+  "ex": "As pessoas passaram a trabalhar de um jeito diferente, mais rápido ou com mais conforto."
+ },
+ {
+  "id": "p04",
+  "at": [
+   "P2"
+  ],
+  "p": "Qual profissão antiga caminhava pelas ruas cuidando da luz dos postes, um a um?",
+  "o": [
+   "Acendedor de lampião",
+   "Leiteiro",
+   "Vendedor de rua"
+  ],
+  "ex": "Ele caminhava pelas ruas acendendo os postes um a um."
+ },
+ {
+  "id": "p05",
+  "at": [
+   "P2"
+  ],
+  "p": "Por que o acendedor de lampião deixou de existir?",
+  "o": [
+   "Chegou a energia elétrica",
+   "Chegaram os tratores",
+   "Chegou a internet"
+  ],
+  "ex": "Com a energia elétrica, esse trabalho deixou de ser necessário."
+ },
+ {
+  "id": "p07",
+  "at": [
+   "P2"
+  ],
+  "p": "Algumas profissões deixaram de existir porque…",
+  "o": [
+   "novas tecnologias passaram a fazer o que as pessoas faziam",
+   "as pessoas voltaram a trabalhar com a ajuda dos animais",
+   "as ruas e as casas deixaram de precisar de luz"
+  ],
+  "ex": "Novas tecnologias passaram a fazer coisas que antes eram feitas por pessoas."
+ },
+ {
+  "id": "p08",
+  "at": [
+   "P3"
+  ],
+  "p": "No começo, como Seu Francisco entregava as cartas?",
+  "o": [
+   "A pé, com uma bolsa de couro no ombro",
+   "De bicicleta, levando caixas de compras",
+   "De moto, com um aparelho com tela"
+  ],
+  "ex": "Ele entregava cartas a pé, com uma grande bolsa de couro."
+ },
+ {
+  "id": "p09",
+  "at": [
+   "P3"
+  ],
+  "p": "Depois de andar a pé, Seu Francisco ganhou… para entregar mais rápido.",
+  "o": [
+   "uma bicicleta",
+   "uma moto",
+   "um aparelho com tela"
+  ],
+  "ex": "Ele ganhou uma bicicleta para fazer as entregas mais rápido."
+ }
+]

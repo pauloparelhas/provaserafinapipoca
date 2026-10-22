@@ -1,0 +1,58 @@
+[
+ {
+  "id": "s17",
+  "at": [
+   "S6"
+  ],
+  "p": "Um aluno, uma professora e um funcionário lembram da mesma escola de jeitos diferentes. Por quê?",
+  "o": [
+   "Cada um viveu a escola do seu jeito",
+   "Só um deles guardou documentos da escola",
+   "Cada um olhou uma foto diferente da escola"
+  ],
+  "dica": "Pense: o aluno, a professora e o funcionário fazem as mesmas coisas na escola?",
+  "ex": "Estudantes, professores e funcionários vivem a escola de jeitos diferentes, por isso têm memórias diferentes dela."
+ },
+ {
+  "id": "i01",
+  "at": [
+   "I1"
+  ],
+  "p": "Duas crianças olham a mesma foto. Cada uma repara em coisas diferentes. Por quê?",
+  "o": [
+   "Cada pessoa observa de um jeito",
+   "Uma delas fez uma suposição errada",
+   "Só uma delas sabia quem tirou a foto"
+  ],
+  "dica": "Lembre do desafio de olhar a foto por 1 minuto e comparar com o colega.",
+  "ex": "Olhando a mesma imagem, cada pessoa observa de um jeito e repara em detalhes diferentes."
+ },
+ {
+  "id": "p41",
+  "at": [
+   "P8"
+  ],
+  "p": "Nos slides de antes e hoje, a engenheira com robô e computador veio no lugar de…",
+  "o": [
+   "desenhos no papel",
+   "cirurgia antiga",
+   "carrinho de mão"
+  ],
+  "dica": "O que se fazia com lápis antes do computador?",
+  "ex": "Na engenharia, antes as engrenagens eram desenhadas no papel; hoje a engenheira trabalha com robô e computador. A cirurgia antiga foi trocada pelo robô na medicina."
+ },
+ {
+  "id": "b12",
+  "at": [
+   "B7"
+  ],
+  "p": "Quais lugares guardam memórias para as futuras gerações?",
+  "o": [
+   "Museus e arquivos",
+   "Anúncios e propagandas",
+   "Relógios e calendários"
+  ],
+  "dica": "Onde ficam guardados os objetos e documentos antigos?",
+  "ex": "Museus e arquivos guardam objetos e documentos para que as próximas gerações conheçam o passado."
+ }
+]

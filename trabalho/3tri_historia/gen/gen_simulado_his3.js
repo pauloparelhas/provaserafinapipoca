@@ -5,6 +5,8 @@
 const fs = require('fs'), path = require('path');
 const DIR = path.resolve(process.argv[2]); global.window = {}; require(path.join(DIR, 'HIS3_banco.js'));
 const I = window.HIS3;
+/* portão de viabilidade: só gera o simulado se TODAS as questões estiverem aprovadas (_processo/CRITERIO_QUESTOES.md) */
+if (!process.argv.includes('--sem-portao')) { const r = require('child_process').spawnSync('node', [path.join(__dirname, 'valida_questoes.js'), DIR], { encoding: 'utf8' }); if (r.status !== 0) { console.log(r.stdout); console.error('SIMULADO NÃO GERADO: há questões sem aprovação.'); process.exit(1); } }
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const UP = s => esc(String(s).toLocaleUpperCase('pt-BR'));
 /* rodada de 15 com o peso do roteiro v1.1: U3 ≈ 50% (fontes+escola+olhar), U4 ≈ 33%, mundo e base 1 cada */

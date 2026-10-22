@@ -2,8 +2,10 @@
 # Publica a materia de Historia (HIS3) no ramo que o GitHub Pages serve (em-construcao),
 # e TIRA DO AR o Ingles (ING3_*), cuja prova ja passou (22/10; pedido do Paulo).
 # Fork do trabalho/3tri_ingles/publicar_ing3.sh. Uso: bash publicar_his3.sh
-set -e
+set -e -o pipefail
 SRC="$(cd "$(dirname "$0")/../.." && pwd)"
+# portão de viabilidade das questões (_processo/CRITERIO_QUESTOES.md): sem aprovação, não publica
+node "$SRC/trabalho/3tri_historia/gen/valida_questoes.js" "$SRC/ferramentas" | tail -3 || { echo "NÃO PUBLICADO: questões sem aprovação"; exit 1; }
 W="$(mktemp -d)/pub"
 cd "$SRC"
 git fetch -q origin em-construcao

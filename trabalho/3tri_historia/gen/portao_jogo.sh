@@ -8,6 +8,7 @@ set -e
 cd "$(dirname "$0")"
 F=../../../ferramentas
 for f in $F/HIS3_jogo*.js; do node --check "$f"; done
+node valida_questoes.js $F | tail -4
 node verifica_his3.js $F | tail -3
 node verifica_corrida.js $F | tail -1
 PYTHONIOENCODING=utf-8 python testa_corrida.py 2 | tail -6

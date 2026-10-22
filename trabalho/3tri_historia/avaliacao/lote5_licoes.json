@@ -1,0 +1,952 @@
+[
+ {
+  "id": "L_missao_3_0",
+  "licao": "A missão: o que são fontes históricas",
+  "pergunta": "Isto pode ser uma fonte histórica?",
+  "item": "uma carta antiga da bisavó",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Guarda o passado: é fonte histórica."
+ },
+ {
+  "id": "L_missao_3_1",
+  "licao": "A missão: o que são fontes históricas",
+  "pergunta": "Isto pode ser uma fonte histórica?",
+  "item": "uma boneca antiga",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Brinquedo antigo conta como as crianças brincavam."
+ },
+ {
+  "id": "L_missao_3_2",
+  "licao": "A missão: o que são fontes históricas",
+  "pergunta": "Isto pode ser uma fonte histórica?",
+  "item": "a vovó contando a infância dela",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Relato contado é fonte histórica: oral."
+ },
+ {
+  "id": "L_missao_3_3",
+  "licao": "A missão: o que são fontes históricas",
+  "pergunta": "Isto pode ser uma fonte histórica?",
+  "item": "uma nuvem passando no céu agora",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "A nuvem não guarda nada do passado das pessoas."
+ },
+ {
+  "id": "L_missao_3_4",
+  "licao": "A missão: o que são fontes históricas",
+  "pergunta": "Isto pode ser uma fonte histórica?",
+  "item": "uma foto antiga da turma",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "A foto guarda um momento do passado."
+ },
+ {
+  "id": "L_quatro_2_0",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  a carta antiga",
+  "o": [
+   "Escrita",
+   "Oral",
+   "Visual",
+   "Material"
+  ],
+  "d": "Carta tem texto escrito."
+ },
+ {
+  "id": "L_quatro_2_1",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  o chapéu e o casaco, os objetos",
+  "o": [
+   "Material",
+   "Oral",
+   "Escrita",
+   "Visual"
+  ],
+  "d": "Roupas são objetos: material."
+ },
+ {
+  "id": "L_quatro_2_2",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  as fotos do álbum",
+  "o": [
+   "Visual",
+   "Oral",
+   "Escrita",
+   "Material"
+  ],
+  "d": "Foto é imagem: visual."
+ },
+ {
+  "id": "L_quatro_2_3",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  o mapa antigo",
+  "o": [
+   "Visual",
+   "Oral",
+   "Escrita",
+   "Material"
+  ],
+  "d": "Mapa é imagem, como pintura e foto."
+ },
+ {
+  "id": "L_quatro_2_4",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  o que está escrito nos livros antigos",
+  "o": [
+   "Escrita",
+   "Oral",
+   "Visual",
+   "Material"
+  ],
+  "d": "Texto escrito: fonte escrita."
+ },
+ {
+  "id": "L_quatro_2_5",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  a entrevista: uma moça contando a vida dela",
+  "o": [
+   "Oral",
+   "Escrita",
+   "Visual",
+   "Material"
+  ],
+  "d": "Ela está CONTANDO: oral."
+ },
+ {
+  "id": "L_quatro_2_6",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  o sofá antigo, o móvel",
+  "o": [
+   "Material",
+   "Oral",
+   "Escrita",
+   "Visual"
+  ],
+  "d": "Móvel é objeto: material."
+ },
+ {
+  "id": "L_quatro_2_7",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  a certidão de nascimento",
+  "o": [
+   "Escrita",
+   "Oral",
+   "Visual",
+   "Material"
+  ],
+  "d": "Documento escrito."
+ },
+ {
+  "id": "L_quatro_2_8",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  as fotos nos quadros da parede",
+  "o": [
+   "Visual",
+   "Oral",
+   "Escrita",
+   "Material"
+  ],
+  "d": "São fotos: visual."
+ },
+ {
+  "id": "L_quatro_2_9",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  as bonecas antigas, os brinquedos",
+  "o": [
+   "Material",
+   "Oral",
+   "Escrita",
+   "Visual"
+  ],
+  "d": "Brinquedos são objetos."
+ },
+ {
+  "id": "L_quatro_2_10",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  o castelo, a construção",
+  "o": [
+   "Material",
+   "Oral",
+   "Escrita",
+   "Visual"
+  ],
+  "d": "Construções são fonte material."
+ },
+ {
+  "id": "L_quatro_2_11",
+  "licao": "As 4 cartas: oral, escrita, visual e material",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "[foto]  as cantigas de roda que a vovó ensinou cantando",
+  "o": [
+   "Oral",
+   "Escrita",
+   "Visual",
+   "Material"
+  ],
+  "d": "Passaram pela fala, cantando: oral."
+ },
+ {
+  "id": "L_pegadinhas_1_0",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "a FOTO de uma boneca antiga",
+  "o": [
+   "Visual",
+   "Oral",
+   "Escrita",
+   "Material"
+  ],
+  "d": "É a foto, não a boneca: visual."
+ },
+ {
+  "id": "L_pegadinhas_1_1",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "a boneca antiga de verdade",
+  "o": [
+   "Material",
+   "Oral",
+   "Escrita",
+   "Visual"
+  ],
+  "d": "O brinquedo é objeto: material."
+ },
+ {
+  "id": "L_pegadinhas_1_2",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "um vídeo do vovô contando como era a cidade",
+  "o": [
+   "Oral",
+   "Escrita",
+   "Visual",
+   "Material"
+  ],
+  "d": "Ele está contando: oral."
+ },
+ {
+  "id": "L_pegadinhas_1_3",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "a carta que a vovó escreveu",
+  "o": [
+   "Escrita",
+   "Oral",
+   "Visual",
+   "Material"
+  ],
+  "d": "Ela escreveu: escrita."
+ },
+ {
+  "id": "L_pegadinhas_1_4",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "a vovó falando da infância dela",
+  "o": [
+   "Oral",
+   "Escrita",
+   "Visual",
+   "Material"
+  ],
+  "d": "Ela falou: oral."
+ },
+ {
+  "id": "L_pegadinhas_1_5",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "uma pintura antiga",
+  "o": [
+   "Visual",
+   "Oral",
+   "Escrita",
+   "Material"
+  ],
+  "d": "Pintura é imagem."
+ },
+ {
+  "id": "L_pegadinhas_1_6",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "um uniforme antigo da escola",
+  "o": [
+   "Material",
+   "Oral",
+   "Escrita",
+   "Visual"
+  ],
+  "d": "Roupa é objeto."
+ },
+ {
+  "id": "L_pegadinhas_1_7",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Que tipo de fonte é?",
+  "item": "um jornal antigo",
+  "o": [
+   "Escrita",
+   "Oral",
+   "Visual",
+   "Material"
+  ],
+  "d": "Jornal tem textos."
+ },
+ {
+  "id": "L_pegadinhas_4_0",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Esta pista é fonte ESCRITA? (na prova, marque TODAS as escritas)",
+  "item": "a carta antiga",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Tem texto escrito."
+ },
+ {
+  "id": "L_pegadinhas_4_1",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Esta pista é fonte ESCRITA? (na prova, marque TODAS as escritas)",
+  "item": "o chapéu antigo, o objeto",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "É objeto: material."
+ },
+ {
+  "id": "L_pegadinhas_4_2",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Esta pista é fonte ESCRITA? (na prova, marque TODAS as escritas)",
+  "item": "o diário da tia",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Tem texto escrito."
+ },
+ {
+  "id": "L_pegadinhas_4_3",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Esta pista é fonte ESCRITA? (na prova, marque TODAS as escritas)",
+  "item": "as fotos do álbum",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "São imagens: visual."
+ },
+ {
+  "id": "L_pegadinhas_4_4",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Esta pista é fonte ESCRITA? (na prova, marque TODAS as escritas)",
+  "item": "a certidão de nascimento",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Documento escrito."
+ },
+ {
+  "id": "L_pegadinhas_4_5",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Esta pista é fonte ESCRITA? (na prova, marque TODAS as escritas)",
+  "item": "o mapa antigo",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "Mapa é imagem: visual."
+ },
+ {
+  "id": "L_pegadinhas_4_6",
+  "licao": "Pegadinhas do detetive, ficha e legenda",
+  "pergunta": "Esta pista é fonte ESCRITA? (na prova, marque TODAS as escritas)",
+  "item": "a mensagem escrita no verso do cartão-postal",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "A parte com letras é escrita; a foto da frente seria visual."
+ },
+ {
+  "id": "L_escola_3_0",
+  "licao": "A escola tem história",
+  "pergunta": "É um documento ESCRITO da vida escolar?",
+  "item": "um boletim antigo",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Boletim é documento escrito."
+ },
+ {
+  "id": "L_escola_3_1",
+  "licao": "A escola tem história",
+  "pergunta": "É um documento ESCRITO da vida escolar?",
+  "item": "um caderno guardado",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "O que está escrito no caderno é registro escrito."
+ },
+ {
+  "id": "L_escola_3_2",
+  "licao": "A escola tem história",
+  "pergunta": "É um documento ESCRITO da vida escolar?",
+  "item": "um bilhete da professora",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Bilhete é texto escrito."
+ },
+ {
+  "id": "L_escola_3_3",
+  "licao": "A escola tem história",
+  "pergunta": "É um documento ESCRITO da vida escolar?",
+  "item": "um troféu antigo",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "Troféu é fonte da escola, mas MATERIAL (objeto)."
+ },
+ {
+  "id": "L_escola_3_4",
+  "licao": "A escola tem história",
+  "pergunta": "É um documento ESCRITO da vida escolar?",
+  "item": "a foto antiga da turma",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "A foto também guarda lembranças da escola, mas é fonte VISUAL, não escrita."
+ },
+ {
+  "id": "L_mudou_2_0",
+  "licao": "Mudou ou continuou igual?",
+  "pergunta": "Isso é uma mudança ou uma permanência?",
+  "item": "Na história da Dona Lúcia: do quadro de giz para a lousa digital",
+  "o": [
+   "Mudança",
+   "Permanência"
+  ],
+  "d": "Ficou diferente."
+ },
+ {
+  "id": "L_mudou_2_1",
+  "licao": "Mudou ou continuou igual?",
+  "pergunta": "Isso é uma mudança ou uma permanência?",
+  "item": "Dona Lúcia conversa e ouve os alunos, antes e hoje",
+  "o": [
+   "Permanência",
+   "Mudança"
+  ],
+  "d": "Continuou igual."
+ },
+ {
+  "id": "L_mudou_2_2",
+  "licao": "Mudou ou continuou igual?",
+  "pergunta": "Isso é uma mudança ou uma permanência?",
+  "item": "Seu Francisco trocou a bicicleta pela moto",
+  "o": [
+   "Mudança",
+   "Permanência"
+  ],
+  "d": "O jeito de entregar ficou diferente."
+ },
+ {
+  "id": "L_mudou_2_3",
+  "licao": "Mudou ou continuou igual?",
+  "pergunta": "Isso é uma mudança ou uma permanência?",
+  "item": "Doutor João cuida com atenção de cada paciente, antes e hoje",
+  "o": [
+   "Permanência",
+   "Mudança"
+  ],
+  "d": "Isso não mudou."
+ },
+ {
+  "id": "L_mudou_2_4",
+  "licao": "Mudou ou continuou igual?",
+  "pergunta": "Isso é uma mudança ou uma permanência?",
+  "item": "Na fazenda do Seu Pedro: dos bois puxando o arado para o trator",
+  "o": [
+   "Mudança",
+   "Permanência"
+  ],
+  "d": "Ficou diferente."
+ },
+ {
+  "id": "L_mudou_2_5",
+  "licao": "Mudou ou continuou igual?",
+  "pergunta": "Isso é uma mudança ou uma permanência?",
+  "item": "Seu Pedro ama a terra e cuida da natureza, antes e hoje",
+  "o": [
+   "Permanência",
+   "Mudança"
+  ],
+  "d": "Continuou igual."
+ },
+ {
+  "id": "L_olhar_3_0",
+  "licao": "Cada um vê de um jeito",
+  "pergunta": "Qual era o objetivo de quem criou?",
+  "item": "um cartão-postal escrito numa viagem para os amigos",
+  "o": [
+   "Contar a viagem",
+   "Vender leite"
+  ],
+  "d": "Quem viaja manda notícias."
+ },
+ {
+  "id": "L_olhar_3_1",
+  "licao": "Cada um vê de um jeito",
+  "pergunta": "Qual era o objetivo de quem criou?",
+  "item": "um anúncio de jornal: vende-se leite na rua tal",
+  "o": [
+   "Vender leite",
+   "Contar uma viagem"
+  ],
+  "d": "Anúncio serve para vender."
+ },
+ {
+  "id": "L_olhar_3_2",
+  "licao": "Cada um vê de um jeito",
+  "pergunta": "Qual era o objetivo de quem criou?",
+  "item": "uma propaganda antiga de alimento para crianças",
+  "o": [
+   "Vender o alimento",
+   "Guardar uma receita"
+  ],
+  "d": "Propaganda quer que você compre."
+ },
+ {
+  "id": "L_profissoes_2_0",
+  "licao": "Profissões no tempo",
+  "pergunta": "Esta profissão continua existindo hoje? (pode ser mais de uma)",
+  "item": "carteiro, do Seu Francisco",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Continua, de um jeito diferente."
+ },
+ {
+  "id": "L_profissoes_2_1",
+  "licao": "Profissões no tempo",
+  "pergunta": "Esta profissão continua existindo hoje? (pode ser mais de uma)",
+  "item": "professora, da Dona Lúcia",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Continua, com computador e lousa digital."
+ },
+ {
+  "id": "L_profissoes_2_2",
+  "licao": "Profissões no tempo",
+  "pergunta": "Esta profissão continua existindo hoje? (pode ser mais de uma)",
+  "item": "fazendeiro, do Seu Pedro",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Continua, com trator e celular."
+ },
+ {
+  "id": "L_profissoes_2_3",
+  "licao": "Profissões no tempo",
+  "pergunta": "Esta profissão continua existindo hoje? (pode ser mais de uma)",
+  "item": "médico, do Doutor João",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Continua, com exames no celular."
+ },
+ {
+  "id": "L_profissoes_2_4",
+  "licao": "Profissões no tempo",
+  "pergunta": "Esta profissão continua existindo hoje? (pode ser mais de uma)",
+  "item": "acendedor de lampião",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "Desapareceu com a energia elétrica."
+ },
+ {
+  "id": "L_luciajoao_2_0",
+  "licao": "Dona Lúcia e Doutor João",
+  "pergunta": "Na história, isto era ANTES ou é HOJE?",
+  "item": "Doutor João: exames que demoravam dias",
+  "o": [
+   "Antes",
+   "Hoje"
+  ],
+  "d": "Antes os exames demoravam dias."
+ },
+ {
+  "id": "L_luciajoao_2_1",
+  "licao": "Dona Lúcia e Doutor João",
+  "pergunta": "Na história, isto era ANTES ou é HOJE?",
+  "item": "Doutor João: consulta por vídeo",
+  "o": [
+   "Hoje",
+   "Antes"
+  ],
+  "d": "Hoje ele atende por vídeo quem mora longe."
+ },
+ {
+  "id": "L_luciajoao_2_2",
+  "licao": "Dona Lúcia e Doutor João",
+  "pergunta": "Na história, isto era ANTES ou é HOJE?",
+  "item": "Doutor João: fichas em arquivos de papel",
+  "o": [
+   "Antes",
+   "Hoje"
+  ],
+  "d": "Hoje usa programas no computador."
+ },
+ {
+  "id": "L_luciajoao_2_3",
+  "licao": "Dona Lúcia e Doutor João",
+  "pergunta": "Na história, isto era ANTES ou é HOJE?",
+  "item": "Dona Lúcia: lousa digital e tablets",
+  "o": [
+   "Hoje",
+   "Antes"
+  ],
+  "d": "Novidade de hoje."
+ },
+ {
+  "id": "L_luciajoao_2_4",
+  "licao": "Dona Lúcia e Doutor João",
+  "pergunta": "Na história, isto era ANTES ou é HOJE?",
+  "item": "Dona Lúcia: tudo escrito à mão no quadro de giz",
+  "o": [
+   "Antes",
+   "Hoje"
+  ],
+  "d": "Era assim no começo."
+ },
+ {
+  "id": "L_luciajoao_2_5",
+  "licao": "Dona Lúcia e Doutor João",
+  "pergunta": "Na história, isto era ANTES ou é HOJE?",
+  "item": "Dona Lúcia: mostrar vídeos para a turma",
+  "o": [
+   "Hoje",
+   "Antes"
+  ],
+  "d": "Hoje ela usa computador e vídeos."
+ },
+ {
+  "id": "L_fazenda_2_0",
+  "licao": "Seu Pedro e a fazenda",
+  "pergunta": "Na história do Seu Pedro, é antes, hoje ou futuro?",
+  "item": "arado puxado por bois",
+  "o": [
+   "Antes",
+   "Hoje",
+   "Futuro"
+  ],
+  "d": "Era assim quando ele era pequeno."
+ },
+ {
+  "id": "L_fazenda_2_1",
+  "licao": "Seu Pedro e a fazenda",
+  "pergunta": "Na história do Seu Pedro, é antes, hoje ou futuro?",
+  "item": "usar o celular para saber se vai chover",
+  "o": [
+   "Hoje",
+   "Antes",
+   "Futuro"
+  ],
+  "d": "É o que ele faz hoje."
+ },
+ {
+  "id": "L_fazenda_2_2",
+  "licao": "Seu Pedro e a fazenda",
+  "pergunta": "Na história do Seu Pedro, é antes, hoje ou futuro?",
+  "item": "cultivar em cima de prédios",
+  "o": [
+   "Futuro",
+   "Antes",
+   "Hoje"
+  ],
+  "d": "É o fazendeiro do futuro."
+ },
+ {
+  "id": "L_fazenda_2_3",
+  "licao": "Seu Pedro e a fazenda",
+  "pergunta": "Na história do Seu Pedro, é antes, hoje ou futuro?",
+  "item": "colher tudo com as mãos",
+  "o": [
+   "Antes",
+   "Hoje",
+   "Futuro"
+  ],
+  "d": "Colheita manual era antes."
+ },
+ {
+  "id": "L_fazenda_2_4",
+  "licao": "Seu Pedro e a fazenda",
+  "pergunta": "Na história do Seu Pedro, é antes, hoje ou futuro?",
+  "item": "plantar com a ajuda de robôs",
+  "o": [
+   "Futuro",
+   "Antes",
+   "Hoje"
+  ],
+  "d": "Robôs: fazendeiro do futuro."
+ },
+ {
+  "id": "L_ferramentas_2_0",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do MÉDICO? (pode ser mais de uma)",
+  "item": "maleta",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Do médico."
+ },
+ {
+  "id": "L_ferramentas_2_1",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do MÉDICO? (pode ser mais de uma)",
+  "item": "seringa antiga",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Do médico."
+ },
+ {
+  "id": "L_ferramentas_2_2",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do MÉDICO? (pode ser mais de uma)",
+  "item": "termômetro de mercúrio",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Do médico."
+ },
+ {
+  "id": "L_ferramentas_2_3",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do MÉDICO? (pode ser mais de uma)",
+  "item": "estetoscópio",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Do médico."
+ },
+ {
+  "id": "L_ferramentas_2_4",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do MÉDICO? (pode ser mais de uma)",
+  "item": "globo",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "É da professora."
+ },
+ {
+  "id": "L_ferramentas_2_5",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do MÉDICO? (pode ser mais de uma)",
+  "item": "marreta",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "É do construtor."
+ },
+ {
+  "id": "L_ferramentas_3_0",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do CONSTRUTOR? (pode ser mais de uma)",
+  "item": "marreta",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Do construtor."
+ },
+ {
+  "id": "L_ferramentas_3_1",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do CONSTRUTOR? (pode ser mais de uma)",
+  "item": "colher de pedreiro",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Do construtor."
+ },
+ {
+  "id": "L_ferramentas_3_2",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do CONSTRUTOR? (pode ser mais de uma)",
+  "item": "pincel, junto da marreta e da colher",
+  "o": [
+   "Sim",
+   "Não"
+  ],
+  "d": "Do construtor."
+ },
+ {
+  "id": "L_ferramentas_3_3",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do CONSTRUTOR? (pode ser mais de uma)",
+  "item": "lousa",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "É da professora."
+ },
+ {
+  "id": "L_ferramentas_3_4",
+  "licao": "O jogo das ferramentas",
+  "pergunta": "É ferramenta do CONSTRUTOR? (pode ser mais de uma)",
+  "item": "câmera de tripé",
+  "o": [
+   "Não",
+   "Sim"
+  ],
+  "d": "É do fotógrafo."
+ },
+ {
+  "id": "L_rios_2_0",
+  "licao": "Rios antigos e patrimônio",
+  "pergunta": "Este patrimônio é material ou imaterial?",
+  "item": "um museu",
+  "o": [
+   "Material",
+   "Imaterial"
+  ],
+  "d": "É um prédio."
+ },
+ {
+  "id": "L_rios_2_1",
+  "licao": "Rios antigos e patrimônio",
+  "pergunta": "Este patrimônio é material ou imaterial?",
+  "item": "a capoeira",
+  "o": [
+   "Imaterial",
+   "Material"
+  ],
+  "d": "É um saber, um costume."
+ },
+ {
+  "id": "L_rios_2_2",
+  "licao": "Rios antigos e patrimônio",
+  "pergunta": "Este patrimônio é material ou imaterial?",
+  "item": "uma estátua na praça",
+  "o": [
+   "Material",
+   "Imaterial"
+  ],
+  "d": "Dá para tocar."
+ },
+ {
+  "id": "L_rios_2_3",
+  "licao": "Rios antigos e patrimônio",
+  "pergunta": "Este patrimônio é material ou imaterial?",
+  "item": "a festa junina",
+  "o": [
+   "Imaterial",
+   "Material"
+  ],
+  "d": "É uma festa."
+ },
+ {
+  "id": "L_rios_2_4",
+  "licao": "Rios antigos e patrimônio",
+  "pergunta": "Este patrimônio é material ou imaterial?",
+  "item": "uma receita de família passada de geração em geração",
+  "o": [
+   "Imaterial",
+   "Material"
+  ],
+  "d": "É um costume da família."
+ },
+ {
+  "id": "L_rios_2_5",
+  "licao": "Rios antigos e patrimônio",
+  "pergunta": "Este patrimônio é material ou imaterial?",
+  "item": "uma praça antiga",
+  "o": [
+   "Material",
+   "Imaterial"
+  ],
+  "d": "É um lugar construído."
+ },
+ {
+  "id": "L_rios_3_0",
+  "licao": "Rios antigos e patrimônio",
+  "pergunta": "Qual é o rio?",
+  "item": "Egito",
+  "o": [
+   "Nilo",
+   "Amarelo",
+   "Tigre e Eufrates"
+  ],
+  "d": "Egito: Rio Nilo."
+ },
+ {
+  "id": "L_rios_3_1",
+  "licao": "Rios antigos e patrimônio",
+  "pergunta": "Qual é o rio?",
+  "item": "Mesopotâmia",
+  "o": [
+   "Tigre e Eufrates",
+   "Nilo",
+   "Amarelo"
+  ],
+  "d": "Mesopotâmia: Tigre e Eufrates."
+ },
+ {
+  "id": "L_rios_3_2",
+  "licao": "Rios antigos e patrimônio",
+  "pergunta": "Qual é o rio?",
+  "item": "China",
+  "o": [
+   "Amarelo",
+   "Nilo",
+   "Tigre e Eufrates"
+  ],
+  "d": "China: Rio Amarelo."
+ }
+]

@@ -1,0 +1,46 @@
+[
+ {
+  "id": "s17",
+  "decisao": "APROVA",
+  "p": "Um aluno, uma professora e um funcionário lembram da mesma escola de jeitos diferentes. Por quê?",
+  "o": [
+   "Cada um viveu a escola do seu jeito",
+   "Só um deles guardou documentos da escola",
+   "Cada um olhou uma foto diferente da escola"
+  ],
+  "ex": "Estudantes, professores e funcionários vivem a escola de jeitos diferentes, por isso têm memórias diferentes dela.",
+  "dica": "Pense: o aluno, a professora e o funcionário fazem as mesmas coisas na escola?",
+  "motivo": "Átomo S6 literal; distratores do mesmo universo (documento, foto como fonte), tamanhos parecidos. Ressalva: o átomo é intuitivo por natureza, então a questão é fácil, mas é exatamente como a AF cobraria."
+ },
+ {
+  "id": "i01",
+  "decisao": "APROVA",
+  "p": "Duas crianças olham a mesma foto. Cada uma repara em coisas diferentes. Por quê?",
+  "o": [
+   "Cada pessoa observa de um jeito",
+   "Uma delas fez uma suposição errada",
+   "Só uma delas sabia quem tirou a foto"
+  ],
+  "ex": "Olhando a mesma imagem, cada pessoa observa de um jeito e repara em detalhes diferentes.",
+  "dica": "Lembre do desafio de olhar a foto por 1 minuto e comparar com o colega.",
+  "motivo": "Átomo I1 literal; distratores tirados do método do historiador (suposição, quem produziu a fonte). Mesma ressalva do s17: fácil, mas cobrável."
+ },
+ {
+  "id": "p41",
+  "decisao": "APROVA",
+  "p": "Nos slides de antes e hoje, a engenheira com robô e computador veio no lugar de…",
+  "o": [
+   "desenhos no papel",
+   "cirurgia antiga",
+   "carrinho de mão"
+  ],
+  "ex": "Na engenharia, antes as engrenagens eram desenhadas no papel; hoje a engenheira trabalha com robô e computador. A cirurgia antiga foi trocada pelo robô na medicina.",
+  "dica": "O que se fazia com lápis antes do computador?"
+ },
+ {
+  "id": "b12",
+  "decisao": "EXCLUI",
+  "regras": ["B", "G"],
+  "motivo": "A pergunta pede LUGARES e só 'Museus e arquivos' são lugares (anúncios e relógios são coisas, não lugares): elimina por gramática. E qualquer criança sabe que o museu guarda coisas antigas, então se acerta por bom senso. Os distratores vêm do roteiro (F3, B2), mas a forma entrega a resposta."
+ }
+]

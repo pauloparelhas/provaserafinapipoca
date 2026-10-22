@@ -18,6 +18,7 @@ Os agentes estao em `.claude/agents/`. Sao invocados com `Agent(subagent_type="n
 | Apos entregar ferramenta | `arquivista` | `Agent(subagent_type="arquivista")` |
 | Para retomar sessao ou checar prioridades | `gerente` | `Agent(subagent_type="gerente")` |
 | Antes de PUBLICAR qualquer jogo: portao rapido | `bash trabalho/3tri_ingles/gen/portao_jogo.sh` | criancas-robo jogam todos os reinos (~1 min) + regras de dificuldade; ver `_processo/jogos/PREPROMPTS.md` |
+| Antes de PUBLICAR qualquer banco/simulado/tela de escolha | `avaliador-questoes` + `node trabalho/<tri>_<mat>/gen/valida_questoes.js ferramentas` | identificador de questao absurda (`_processo/CRITERIO_QUESTOES.md`): so entra questao com nexo e conteudo cobravel; distrator-piada, bom senso, anacronismo, certa maior = ADAPTA ou EXCLUI. O simulado e a publicacao RECUSAM item sem APROVA com a impressao digital atual |
 | Seguranca / controle parental de jogo | `guardiao` | `Agent(subagent_type="guardiao")` — LIBERA obrigatorio antes de publicar |
 | Antes de PUBLICAR qualquer jogo (fases, chefao, corrida) | `jogador` | `Agent(subagent_type="jogador")` — joga cada fase do inicio ao fim SO com teclas, sem teletransporte; sem LIBERA dele nao publica |
 

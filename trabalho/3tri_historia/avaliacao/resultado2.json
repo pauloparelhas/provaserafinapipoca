@@ -1,0 +1,563 @@
+[
+ {
+  "id": "f51",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "C"
+  ],
+  "motivo": "'novinhas' e 'para a prova só' são piada/óbvio.",
+  "p": "Por que as fontes históricas são importantes?",
+  "o": [
+   "Preservam a memória das pessoas e dos povos",
+   "Mostram o que vai acontecer no futuro",
+   "Mostram só como as pessoas vivem hoje"
+  ]
+ },
+ {
+  "id": "f52",
+  "decisao": "ADAPTA",
+  "regras": [
+   "B"
+  ],
+  "motivo": "'preço da moldura' e 'que dia é hoje' se eliminam por bom senso; distratores agora são as perguntas de outras atividades (relato oral F2, ficha do objeto F8).",
+  "p": "Na atividade de casa sobre a foto antiga da família, quais eram as perguntas? — escolha o grupo certo",
+  "o": [
+   "Quem aparece, onde e quando foi tirada, o que acontecia",
+   "Quem fez o relato, o que contou, de que época lembrava",
+   "Como é o objeto e o que ele faz você lembrar"
+  ]
+ },
+ {
+  "id": "f53",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "C"
+  ],
+  "motivo": "Responde-se por bom senso (foto guarda lembrança); distratores 'é nova'/'é grande' sem conteúdo. F12 já treinado em f52."
+ },
+ {
+  "id": "f54",
+  "decisao": "ADAPTA",
+  "regras": [
+   "G"
+  ],
+  "motivo": "'escrita no papel' no enunciado entrega 'Fonte escrita'.",
+  "p": "Uma lei antiga. Que tipo de fonte é essa?",
+  "o": [
+   "Fonte escrita",
+   "Fonte visual",
+   "Fonte oral"
+  ]
+ },
+ {
+  "id": "f55",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f56",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "s01",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "A"
+  ],
+  "motivo": "Sim/não respondível por bom senso; 'só se for um castelo' é piada. S1 fica treinado em s02/s03/s04."
+ },
+ {
+  "id": "s02",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "B"
+  ],
+  "motivo": "'Nuvens do céu' e 'o lanche de hoje' são fora do mundo; distratores agora são fontes reais do roteiro que não são da escola.",
+  "p": "Quais destas são fontes históricas que podemos achar na escola? — escolha o grupo certo",
+  "o": [
+   "Fotos antigas de turmas, cadernos guardados e troféus",
+   "O castelo, o sofá antigo e as bonecas antigas",
+   "O lampião da rua, o arado e o trator da fazenda"
+  ]
+ },
+ {
+  "id": "s03",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "s04",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "s05",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "s06",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "B"
+  ],
+  "motivo": "'Bola e chuteira' e 'árvore e flor' não são do assunto; distratores agora: fontes da escola que não são documento escrito (armadilha S2) e fontes orais.",
+  "p": "Quais destes são documentos da vida escolar? — escolha o grupo certo",
+  "o": [
+   "Caderno, boletim e bilhete",
+   "Foto da turma, troféu e uniforme",
+   "Entrevista, cantiga e relato da vovó"
+  ]
+ },
+ {
+  "id": "s07",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "C"
+  ],
+  "motivo": "'prova do ano que vem' é piada; 'só o nome do diretor' é absoluto.",
+  "p": "O que os documentos guardados na escola mostram?",
+  "o": [
+   "Como era o ensino, as regras e o dia a dia",
+   "Como será a escola daqui a muitos anos",
+   "Como os alunos se vestiam e se pareciam"
+  ]
+ },
+ {
+  "id": "s08",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "'sonhos de quem dormiu' e 'o tempo de amanhã' são piada.",
+  "p": "Os documentos da escola registram…",
+  "o": [
+   "fatos e decisões que aconteceram ali",
+   "suposições de quem olhou uma foto",
+   "cantigas contadas pelos avós"
+  ]
+ },
+ {
+  "id": "s09",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "B"
+  ],
+  "motivo": "'nome do vizinho' e 'cor do céu' fora do assunto.",
+  "p": "Comparando cadernos antigos e novos, a gente descobre…",
+  "o": [
+   "como a escola mudou com o tempo",
+   "como será a escola no futuro",
+   "como foi o recreio de cada aluno"
+  ]
+ },
+ {
+  "id": "s10",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "C"
+  ],
+  "motivo": "'ocupar espaço no armário' é piada; 'ninguém pode ler' é absurdo.",
+  "p": "Por que é importante guardar documentos da escola?",
+  "o": [
+   "Para preservar memórias e contar a história da escola",
+   "Para mostrar como será a escola no futuro",
+   "Para vender os cadernos às famílias, como propaganda"
+  ]
+ },
+ {
+  "id": "s11",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Item de procedimento da tarefa de casa; 'quantos anos você tem'/'desenho favorito' se eliminam e o roteiro não oferece distrator plausível sem inventar."
+ },
+ {
+  "id": "s12",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "'Mudança = ficou diferente' é o sentido comum da palavra; o átomo S5 já é treinado por exemplo (s14, s16)."
+ },
+ {
+  "id": "s13",
+  "decisao": "ADAPTA",
+  "regras": [
+   "C"
+  ],
+  "motivo": "'Algo que vai acontecer amanhã' não é erro plausível; o distrator principal deve ser a mudança.",
+  "p": "O que é uma PERMANÊNCIA?",
+  "o": [
+   "Algo que continuou igual com o passar do tempo",
+   "Algo que ficou diferente com o passar do tempo",
+   "Algo que só vai existir no futuro"
+  ]
+ },
+ {
+  "id": "s14",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "'uma fonte oral' é de outro assunto e se elimina; trocado pela armadilha desapareceu × mudou.",
+  "p": "Na história da Dona Lúcia, antes era quadro de giz; hoje algumas escolas têm lousa digital. Isso é…",
+  "o": [
+   "uma mudança",
+   "uma permanência",
+   "uma profissão que desapareceu"
+  ]
+ },
+ {
+  "id": "s15",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "s16",
+  "decisao": "ADAPTA",
+  "regras": [
+   "B"
+  ],
+  "motivo": "O enunciado ('hoje também pesquisam na internet') já dá a resposta; virou antes × hoje ancorado na história.",
+  "p": "Na história da Dona Lúcia, ANTES os alunos pesquisavam…",
+  "o": [
+   "na biblioteca",
+   "na internet",
+   "no tablet"
+  ]
+ },
+ {
+  "id": "s17",
+  "decisao": "ADAPTA",
+  "regras": [
+   "C"
+  ],
+  "motivo": "'não contam nada' é absoluto.",
+  "p": "Um aluno, uma professora e um funcionário lembram da mesma escola. As memórias deles…",
+  "o": [
+   "podem ser diferentes",
+   "são sempre iguais",
+   "só a do aluno está certa"
+  ]
+ },
+ {
+  "id": "s18",
+  "decisao": "ADAPTA",
+  "regras": [
+   "C"
+  ],
+  "motivo": "'Nada, são só enfeites' está na lista C; 'só servem para festa' é óbvio.",
+  "p": "O que objetos, documentos e festas têm a ver com História?",
+  "o": [
+   "Guardam lembranças e contam o passado",
+   "Mostram como será o futuro",
+   "Contam só o que acontece hoje"
+  ]
+ },
+ {
+  "id": "s19",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "s20",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "F"
+  ],
+  "motivo": "'como fazer bolo' é o distrator-piada reprovado; 'quem ganhou a eleição' fora do roteiro. Distratores agora são o que OUTRAS fontes da escola ensinam (F7/S2).",
+  "p": "Um uniforme antigo da escola pode contar…",
+  "o": [
+   "como os alunos se vestiam antigamente",
+   "o que os alunos estudavam nas aulas",
+   "como os alunos mandavam recados"
+  ]
+ },
+ {
+  "id": "s21",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "i01",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "'A foto mudou sozinha' é absurdo.",
+  "p": "Duas crianças olham a mesma foto. Cada uma repara em coisas diferentes. Por quê?",
+  "o": [
+   "Cada pessoa observa de um jeito",
+   "Uma delas está olhando errado",
+   "Só quem é mais velho sabe olhar"
+  ]
+ },
+ {
+  "id": "i02",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "'esquece tudo' é absurdo.",
+  "p": "Olhando a mesma imagem uma segunda vez, a gente…",
+  "o": [
+   "percebe coisas novas",
+   "vê sempre exatamente o mesmo",
+   "já sabe toda a história verdadeira"
+  ]
+ },
+ {
+  "id": "i03",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "'um feitiço' e 'um sorteio' são piada.",
+  "p": "Toda fonte histórica foi criada por alguém, em um tempo e lugar, com…",
+  "o": [
+   "um objetivo",
+   "a mesma história para todos",
+   "a ajuda de um historiador"
+  ]
+ },
+ {
+  "id": "i04",
+  "decisao": "ADAPTA",
+  "regras": [
+   "B"
+  ],
+  "motivo": "'cor favorita' e 'recreio' se eliminam; distratores agora são perguntas de outras atividades (foto F12, relato F2).",
+  "p": "Para investigar uma fonte, o detetive pergunta: quem produziu? para quem foi feita? e…",
+  "o": [
+   "Qual era o objetivo de quem criou?",
+   "O que estava acontecendo na foto?",
+   "De que época a pessoa se lembrava?"
+  ]
+ },
+ {
+  "id": "i05",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "G"
+  ],
+  "motivo": "'Ensinar matemática' fora do assunto; 'quem viajou' no enunciado entregava 'viagem'. Distratores: objetivos dos outros exemplos do I2.",
+  "p": "Um cartão-postal de Salvador foi escrito por uma pessoa para os amigos. Qual era o objetivo?",
+  "o": [
+   "Contar como foi a viagem",
+   "Vender leite tirado na hora",
+   "Vender um alimento às famílias"
+  ]
+ },
+ {
+  "id": "i06",
+  "decisao": "ADAPTA",
+  "regras": [
+   "G",
+   "A"
+  ],
+  "motivo": "'vendia-se leite' no enunciado entrega 'Vender leite'; 'história de fadas' é piada.",
+  "p": "Um anúncio de jornal antigo falava do leite tirado na hora, na rua tal. Para que ele foi feito?",
+  "o": [
+   "Para vender o leite",
+   "Para contar uma viagem aos amigos",
+   "Para registrar as notas dos alunos"
+  ]
+ },
+ {
+  "id": "i07",
+  "decisao": "ADAPTA",
+  "regras": [
+   "B"
+  ],
+  "motivo": "'ensinar a ler' se elimina; distratores agora são objetivos de outras fontes do roteiro.",
+  "p": "Uma propaganda antiga dizia que um alimento era bom para as crianças. Para que ela foi feita?",
+  "o": [
+   "Para vender o alimento às famílias",
+   "Para contar uma viagem aos amigos",
+   "Para registrar as regras da escola"
+  ]
+ },
+ {
+  "id": "i08",
+  "decisao": "ADAPTA",
+  "regras": [
+   "G",
+   "C"
+  ],
+  "motivo": "Certa muito mais longa que as erradas; 'só uma pessoa pode olhar' é absurdo.",
+  "p": "Por que podem existir histórias diferentes a partir de um mesmo documento?",
+  "o": [
+   "Cada pessoa olha com seu ponto de vista",
+   "O documento mudou com o tempo",
+   "Uma das pessoas está mentindo"
+  ]
+ },
+ {
+  "id": "i09",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "C"
+  ],
+  "motivo": "'a foto falar' é absurdo; 'certeza absoluta' é óbvio.",
+  "p": "Quando não temos todas as informações de uma foto, nós fazemos…",
+  "o": [
+   "suposições, que nem sempre estão certas",
+   "fatos, que estão sempre certos",
+   "uma fonte escrita da foto"
+  ]
+ },
+ {
+  "id": "i10",
+  "decisao": "ADAPTA",
+  "regras": [
+   "G"
+  ],
+  "motivo": "Certa bem mais longa que as erradas; distratores eram bons, só equilibrado o tamanho.",
+  "p": "Para chegar mais perto da verdade, o historiador…",
+  "o": [
+   "reúne várias fontes e compara",
+   "escolhe a história mais bonita",
+   "confia em uma fonte só"
+  ]
+ },
+ {
+  "id": "i11",
+  "decisao": "ADAPTA",
+  "regras": [
+   "G",
+   "A"
+  ],
+  "motivo": "Certa muito mais longa; 'a foto era colorida' sem nexo.",
+  "p": "A turma imaginou a história de uma foto. Depois, o dono contou a história verdadeira. Por que algumas ficaram diferentes?",
+  "o": [
+   "Usaram a imaginação no que faltava",
+   "Olharam fotos diferentes",
+   "O dono contou errado"
+  ]
+ },
+ {
+  "id": "i12",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "'Só as tristes' sem nexo.",
+  "p": "Todas as histórias do passado foram registradas?",
+  "o": [
+   "Não, algumas foram esquecidas",
+   "Sim, todas estão nos livros",
+   "Sim, todas estão nos museus"
+  ]
+ },
+ {
+  "id": "i13",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "O enunciado já diz 'dois pontos de vista', logo cada personagem tem sua fala — bom senso; 'fica calado' não é distrator. I5 fica em i08."
+ },
+ {
+  "id": "i14",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "C"
+  ],
+  "motivo": "'Devemos respeitar o colega' é exatamente o exemplo de bom senso do critério; 'rir dele'/'apagar a resposta' são óbvios."
+ },
+ {
+  "id": "i15",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m01",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "C"
+  ],
+  "motivo": "'documentos de carro' é piada; 'nada do passado' é absoluto.",
+  "p": "\"A história começa em nós.\" O que cada família carrega?",
+  "o": [
+   "Tradições que formam o que somos hoje",
+   "Só objetos novos, comprados agora",
+   "Só histórias que estão nos livros"
+  ]
+ },
+ {
+  "id": "m02",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A",
+   "B"
+  ],
+  "motivo": "'o futuro' e 'a previsão do tempo' se eliminam por bom senso.",
+  "p": "Um objeto que está na família há muito tempo pode contar…",
+  "o": [
+   "a história da família",
+   "como será a família no futuro",
+   "só como as pessoas vivem hoje"
+  ]
+ },
+ {
+  "id": "m03",
+  "decisao": "ADAPTA",
+  "regras": [
+   "D"
+  ],
+  "motivo": "'moravam em prédios'/'dirigiam carros' é anacronismo grotesco; distratores agora são as etapas seguintes da mesma história (fixos, cidades).",
+  "p": "O que eram os NÔMADES?",
+  "o": [
+   "Pessoas que viajavam em busca de comida",
+   "Pessoas que moravam num acampamento fixo",
+   "Pessoas que viviam nas primeiras cidades"
+  ]
+ },
+ {
+  "id": "m04",
+  "decisao": "ADAPTA",
+  "regras": [
+   "D"
+  ],
+  "motivo": "'celular' e 'shoppings' são anacronismo grotesco; distratores agora são outras etapas da mesma história.",
+  "p": "O que mudou tudo para os seres humanos nômades?",
+  "o": [
+   "Aprender a cultivar a terra (agricultura)",
+   "Viajar para mais longe atrás de comida",
+   "Construir as primeiras cidades"
+  ]
+ },
+ {
+  "id": "m05",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "'aos dinossauros' é piada; 'aos rios' sem nexo.",
+  "p": "Os acampamentos fixos, que surgiram com a agricultura, deram origem…",
+  "o": [
+   "às primeiras cidades",
+   "aos povos nômades",
+   "às viagens atrás de comida"
+  ]
+ },
+ {
+  "id": "m06",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m07",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m08",
+  "decisao": "APROVA"
+ }
+]
