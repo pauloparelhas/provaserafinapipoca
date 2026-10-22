@@ -44,6 +44,7 @@ function desenha(c,t){
     c.save(); c.globalAlpha=alC; c.translate(ch.x,ch.y);
     c.fillStyle='rgba(0,0,0,.25)'; A.el(c,0,ch.y0-ch.y+3,40,8); c.fill();
     c.scale(sx,sy);
+    if(A.tracona){ A.tracona(c,0,0,t,ch.hp,ch.max); c.restore(); return; } /* HIS3: a Traçona */
     var g=c.createRadialGradient(-12,-50,6,0,-36,58); g.addColorStop(0,'#6366f1'); g.addColorStop(.6,'#312e81'); g.addColorStop(1,'#1e1b4b'); c.fillStyle=g;
     c.beginPath(); c.moveTo(-40,0); c.quadraticCurveTo(-50,-46,-24,-68); c.quadraticCurveTo(0,-82,24,-68); c.quadraticCurveTo(50,-46,40,0);
     for(var i=0;i<5;i++) c.quadraticCurveTo(30-i*16,10+(i%2)*6,24-i*16,0); c.closePath(); c.fill();

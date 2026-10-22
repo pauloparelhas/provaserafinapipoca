@@ -70,7 +70,7 @@
 window.CHEFAO = (function(){
 'use strict';
 var G=window.JOGO, J=G.J, A=window.ARTE, W=G.W, H=G.H, T=45, CHAO=450;
-var RODADAS=[['fairy','realmb'],['poem'],['cause','circle']];
+var RODADAS=[['fontes','escola'],['profissoes','olhar'],['mundo','tempo','fontes']]; /* HIS3: rodada 1 = U3 (fontes e escola), 2 = U4 + pontos de vista, 3 = mundo antigo, base e fontes de novo */
 var SACADA_X0=17*T, SACADA_Y=6*T;
 var C=null;
 
@@ -108,7 +108,7 @@ function falaF(en,pt,dur){ if(!C) return; C.fada.fala={en:en,pt:pt,t:0,dur:dur||
 /* ---------- v5 (15/10, Paulo): as estrelas se CONQUISTAM. A fada só aparece na hora
    das perguntas; cada resposta certa vira estrelas. Cada estrela no Conde (sem escudo)
    arranca uma LETRA dele, que voa para a frase do alto: YOU ARE A SUPER PLAYER. ---------- */
-var FRASE='YOU ARE A SUPER PLAYER', NLET=FRASE.replace(/ /g,'').length, METAS=[7,12,18]; /* YOU ARE A | SUPER | PLAYER */
+var FRASE='VOCÊ FAZ HISTÓRIA', NLET=FRASE.replace(/ /g,'').length, METAS=[4,7,15]; /* YOU ARE A | SUPER | PLAYER */
 var CORTES=[3,6,7,9,11,12,14,16,18]; /* cada golpe arranca um pedaço: YOU|ARE|A · SU|PE|R · PL|AY|ER */
 function tensaoDa(){ if(!C||!/^p|transicao/.test(C.fase)) return 0; if(C.letrasOk>=CORTES[CORTES.length-2]) return 2; return C.ronda>=1||C.fase==='transicao'?1:0; }
 function estrelasHUD(){ var u=J.urso, n=(u&&u.poderes.estrelas)||0; if(window.UI) UI.acao(n>0,n); }
@@ -380,7 +380,7 @@ function desenhaTela(c,t){
   /* letras voando do Conde para a frase */
   C.letraVoa.forEach(function(L){ if(L.t<0) return; var k=Math.min(1,L.t/.9), dst=slot(L.i), x=L.x0+(dst.x-L.x0)*k, yy=L.y0+(dst.y-L.y0)*k-Math.sin(k*Math.PI)*120; c.save(); c.translate(x,yy); var sc=1.6-.6*k; c.scale(sc,sc); c.font='900 26px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.lineWidth=5; c.strokeStyle='#2e1065'; c.strokeText(dst.ch,0,0); c.fillStyle='#fde047'; c.fillText(dst.ch,0,0); c.restore(); });
   if(C.vitoria){ var tv=C.vitoria.t, kv=Math.min(1,tv/.5); c.save(); c.globalAlpha=kv*.6; c.fillStyle='#0d0b1e'; c.fillRect(0,0,W,H); c.globalAlpha=1;
-    var L1=['YOU','ARE','A'], L2=['SUPER','PLAYER!'], ix=0; c.textAlign='center'; c.textBaseline='middle';
+    var L1=['VOCÊ','FAZ'], L2=['HISTÓRIA!'], ix=0; c.textAlign='center'; c.textBaseline='middle';
     [[L1.join(' '),H/2-60,64],[L2.join(' '),H/2+30,88]].forEach(function(lin){ c.font='900 '+lin[2]+'px "Nunito",Arial'; var tot=c.measureText(lin[0]).width, xx=W/2-tot/2;
       for(var q4=0;q4<lin[0].length;q4++){ var ch=lin[0][q4], wch=c.measureText(ch).width, ap=Math.max(0,Math.min(1,(tv-.3-ix*.07)/.25)); ix++;
         if(ap>0&&ch!==' '){ c.save(); c.translate(xx+wch/2,lin[1]-(1-ap)*40+Math.sin(tv*3+ix)*3); c.scale(.5+.5*ap,.5+.5*ap); c.globalAlpha=ap; c.lineWidth=12; c.strokeStyle='#4c1d95'; c.strokeText(ch,0,0); var gL=c.createLinearGradient(0,-lin[2]/2,0,lin[2]/2); gL.addColorStop(0,'#fef08a'); gL.addColorStop(1,'#f59e0b'); c.fillStyle=gL; c.fillText(ch,0,0); c.restore(); }

@@ -154,10 +154,10 @@ function mapaHover(lx,ly){ if(J.estado!=='mapa'||J.mapaAnim) return; var i=noEm(
 
 /* ---------- intro: biblioteca → o livro abre → Conde → herói entra ---------- */
 var CENAS_INTRO=[
-  {en:'Once upon a time, in a school library, there was a magic storybook.', pt:'Era uma vez, na biblioteca da escola, um livro de histórias mágico.', dur:5},
-  {en:'One day, Count Scribble splashed ink on it. The stories lost their endings!', pt:'Um dia, o Conde Rabisco derramou tinta nele. As histórias perderam os seus finais!', dur:5.5},
-  {en:'No more "happily ever after"… Who can help?', pt:'Nada mais de "felizes para sempre"… Quem pode ajudar?', dur:4.5},
-  {en:'You can! Jump into the book and find the lost pages.', pt:'Você pode! Pule para dentro do livro e encontre as páginas perdidas.', dur:5}
+  {en:'', pt:'No Museu da Memória ficam guardadas as pistas do passado: cartas, fotos, mapas, brinquedos e histórias contadas.', dur:5},
+  {en:'', pt:'Mas a Rainha Traça e as traçinhas começaram a roer tudo! Sem pistas, todo mundo esquece de onde veio.', dur:5.5},
+  {en:'', pt:'"Trim! Socorro!", gritou o Tic, o despertador do museu. "Precisamos de detetives do tempo!"', dur:4.5},
+  {en:'', pt:'Pegue a sua lupa! Viaje pelo tabuleiro do mapa e recupere as cartas de fonte histórica.', dur:5}
 ];
 function iniciaIntro(){ J.estado='intro'; J.t=0; J.intro={i:0,t:0}; SOM.musica('mapa'); if(window.UI){ UI.modoNivel(false); UI.modoMapa(false); UI.cartaoMapa(null); UI.legenda(CENAS_INTRO[0]); } }
 function atualizaIntro(dt){ J.intro.t+=dt; } /* nunca avança sozinha (Paulo): só Next ▶ ou ENTER */
@@ -165,10 +165,10 @@ function avancaIntro(){ var it=J.intro; if(!it) return; it.i++; it.t=0; if(it.i>
 function fimIntro(){ J.intro=null; if(window.UI) UI.legenda(null); J.prog.introVista=true; G.salva(); if(!J.prog.heroi) iniciaEscolha(); else iniciaCapa(); }
 /* ---------- final: o Conde, o final feliz e a volta à biblioteca (circle story) ---------- */
 var CENAS_FINAL=[
-  {en:'Count Scribble sat down. "I never finished my own story," he said.', pt:'O Conde Rabisco se sentou. "Eu nunca terminei a minha própria história", ele disse.', dur:5.5, cena:'tinta'},
-  {en:'So you helped him write the ending. The lost pages flew back into the book!', pt:'Então você ajudou o Conde a escrever o final. As páginas perdidas voltaram para o livro!', dur:5.5, cena:'tinta'},
-  {en:'And they all lived happily ever after.', pt:'E todos viveram felizes para sempre.', dur:4.5, cena:'vila'},
-  {en:'Back in the library, the cookie was still there. The story ended where it began: a circle story!', pt:'De volta à biblioteca, o biscoito ainda estava lá. A história terminou onde começou: uma história circular!', dur:6.5, cena:'biblioteca'}
+  {en:'', pt:'A Rainha Traça se sentou no chão do museu. "Eu só roía porque ninguém me contava as histórias", ela disse.', dur:5.5, cena:'tinta'},
+  {en:'', pt:'Então os detetives contaram tudo o que descobriram. Cada pista voltou para o seu lugar no museu!', dur:5.5, cena:'tinta'},
+  {en:'', pt:'Oral, escrita, visual e material: as fontes estão a salvo. E o passado pode ser estudado de novo.', dur:4.5, cena:'vila'},
+  {en:'', pt:'E lembre: o que você faz hoje será a fonte histórica de amanhã. Para entender para onde vamos, precisamos descobrir de onde viemos!', dur:6.5, cena:'tinta'}
 ];
 function iniciaFinal(){
   var f=J.faseAtual, s=J.stats; if(window.CHEFAO) CHEFAO.limpa(); J.quiz=null;

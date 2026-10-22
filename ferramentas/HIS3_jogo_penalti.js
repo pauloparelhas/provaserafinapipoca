@@ -43,7 +43,7 @@ function lerp(a,b,k){ return a+(b-a)*k; }
 function sstep(a,b,v){ var k=cl((v-a)/(b-a),0,1); return k*k*(3-2*k); }
 function eOut(k){ k=cl(k,0,1); return 1-Math.pow(1-k,3); }
 function hs(n){ var x=Math.sin(n*127.1+311.7)*43758.5453; return x-Math.floor(x); }
-function quebra(c,txt,larg){ var pal=String(txt||'').split(' '), linhas=[], cur=''; pal.forEach(function(w){ var t=cur?cur+' '+w:w; if(c.measureText(t).width>larg&&cur){ linhas.push(cur); cur=w; } else cur=t; }); if(cur) linhas.push(cur); return linhas; }
+function quebra(c,txt,larg){ if(window.HIS3_TR) txt=HIS3_TR(txt); var pal=String(txt||'').split(' '), linhas=[], cur=''; pal.forEach(function(w){ var t=cur?cur+' '+w:w; if(c.measureText(t).width>larg&&cur){ linhas.push(cur); cur=w; } else cur=t; }); if(cur) linhas.push(cur); return linhas; }
 
 function ativo(){ var f=J.faseAtual; return !!(f&&f.cena==='estadio'&&!f.chefao&&!J.chefe); }
 

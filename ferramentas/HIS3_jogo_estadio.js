@@ -13,7 +13,7 @@ var GOL={x:230,y:196,w:500,h:170}, BOLA0={x:480,y:470}, N=9;
 var S=null;
 
 function inicia(f){
-  S={f:f, itens:QUIZ.escolhe({tema:'cause'},N,[]), i:-1, fase:'entra', t:0, gols:0, paginas:0, fala:null, bola:{x:BOLA0.x,y:BOLA0.y,r:16}, goleiro:{x:480,alvo:480,pulo:0}, festa:0};
+  S={f:f, itens:QUIZ.escolhe({tema:'todos',at:f.at||null},N,[]), i:-1, fase:'entra', t:0, gols:0, paginas:0, fala:null, bola:{x:BOLA0.x,y:BOLA0.y,r:16}, goleiro:{x:480,alvo:480,pulo:0}, festa:0};
   J.estado='estadio'; J.stats={perguntas:0,acertos:0}; J.pontos=0; J.estadio=S;
   SOM.musica('estadio'); G.hud(); if(window.UI){ UI.modoNivel(false); UI.modoMapa(false); }
   proximo();
@@ -53,7 +53,7 @@ function toque(lx,ly){ if(!S) return false; if(S.fase!=='mira') return true; for
 function tecla(k){ if(!S) return false; var n=S.q?S.q.alvos.length:0; var m={'1':0,'2':1,'3':2,ArrowLeft:0,ArrowUp:n===3?1:-1,ArrowRight:n-1}; if(m[k]!==undefined&&m[k]>=0){ chuta(m[k]); return true; } return false; }
 
 /* ---------- desenho ---------- */
-function quebra(c,txt,larg){ var pal=String(txt).split(' '), linhas=[], cur=''; pal.forEach(function(w){ var t=cur?cur+' '+w:w; if(c.measureText(t).width>larg&&cur){ linhas.push(cur); cur=w; } else cur=t; }); if(cur) linhas.push(cur); return linhas; }
+function quebra(c,txt,larg){ if(window.HIS3_TR) txt=HIS3_TR(txt); var pal=String(txt).split(' '), linhas=[], cur=''; pal.forEach(function(w){ var t=cur?cur+' '+w:w; if(c.measureText(t).width>larg&&cur){ linhas.push(cur); cur=w; } else cur=t; }); if(cur) linhas.push(cur); return linhas; }
 function desenha(c){
   if(!S) return; var t=J.t;
   /* noite de jogo: céu, refletores, torcida */

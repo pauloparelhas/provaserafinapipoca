@@ -349,7 +349,7 @@ function usaTurbo(auto){
    ============================================================ */
 function abrePit(){
   R.fase='pit'; R.t=0; R.pitRes=[];
-  var itens=QUIZ.escolhe({tema:'realmb',mix:['conceito','rapida','rapida']},3,J.nivel.quizIds||[]);
+  var itens=QUIZ.escolhe({tema:'todos',at:(J.faseAtual&&J.faseAtual.at)||null,mix:['conceito','rapida','rapida']},3,J.nivel.quizIds||[]);
   R.mPit={x:110,y:350,tipo:'announcer',falando:0};
   J.in.left=J.in.right=J.in.act=false;
   QUIZ.inicia(R.mPit,{itens:itens,

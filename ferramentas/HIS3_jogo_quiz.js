@@ -58,7 +58,7 @@ function responde(k){
   if(penalti()) PENALTI.chute(q,k,ok,J.t); /* reino 7: a resposta vira um pênalti (só a animação) */
   if(ok){ q.acertos++; J.stats.acertos++; G.pontua(100); SOM.fx('acerto'); }
   else { SOM.fx('erro'); J.shake=4; }
-  try{ say((ok?'Yes! ':'Not quite. ')+(q.item.ex||'')); }catch(e){}
+  try{ say((ok?'Isso! ':'Quase! ')+(q.item.ex||'')); }catch(e){}
   if(q.op&&q.op.aoResponder) q.op.aoResponder(ok);
 }
 function segue(){
@@ -67,7 +67,7 @@ function segue(){
   if(q.i<q.itens.length){ montaPergunta(); return; }
   q.fase='pagina'; q.t=0;
   if(!q.op){ q.m.feito=true; var E=J.nivel.todasEntradas||J.nivel.moradores, n=E.filter(function(mm){ return mm.feito; }).length;
-    G.toast('You found a lost page! ('+n+' of '+E.length+')',2600,'Você achou uma página perdida! ('+n+' de '+E.length+')'); G.pontua(150); SOM.fx('vitoria'); }
+    G.toast('Você recuperou uma carta de fonte! ('+n+' de '+E.length+')',2600); G.pontua(150); SOM.fx('vitoria'); }
 }
 function sai(){ var q=J.quiz; if(!q) return; if(q.op) q.op.aoTerminar=null; termina(); if(q.op&&q.op.aoSair) q.op.aoSair(); }
 function termina(){
@@ -86,7 +86,7 @@ function atualiza(dt){
 }
 
 /* ---------- texto ---------- */
-function quebra(c,txt,larg){ var pal=String(txt).split(' '), linhas=[], cur=''; pal.forEach(function(w){ var t=cur?cur+' '+w:w; if(c.measureText(t).width>larg&&cur){ linhas.push(cur); cur=w; } else cur=t; }); if(cur) linhas.push(cur); return linhas; }
+function quebra(c,txt,larg){ if(window.HIS3_TR) txt=HIS3_TR(txt); var pal=String(txt).split(' '), linhas=[], cur=''; pal.forEach(function(w){ var t=cur?cur+' '+w:w; if(c.measureText(t).width>larg&&cur){ linhas.push(cur); cur=w; } else cur=t; }); if(cur) linhas.push(cur); return linhas; }
 function F(peso,px){ return peso+' '+px+'px "Nunito","Segoe UI",Arial'; }
 
 /* layout: quem pergunta à esquerda; balão no alto; texto de leitura (se houver) ao lado; cartões embaixo */
@@ -128,7 +128,7 @@ function botaoNext(c,q,t,ent){ var bw=170, bh=56, bx=W-bw-26, by=CART_Y-bh-12, k
   c.save(); c.globalAlpha=ent*Math.min(1,(q.t-.5)/.3); c.translate(bx+bw/2,by+bh/2); c.scale(s,s);
   c.shadowColor='rgba(253,224,71,'+(.35+.4*k)+')'; c.shadowBlur=14+12*k; c.fillStyle=A.lin?A.lin(c,0,-bh/2,0,bh/2,'#fde68a','#f59e0b'):'#fbbf24'; A.rr(c,-bw/2,-bh/2,bw,bh,22); c.fill(); c.shadowBlur=0;
   c.strokeStyle='#b45309'; c.lineWidth=3; A.rr(c,-bw/2,-bh/2,bw,bh,22); c.stroke();
-  c.fillStyle='#1e1b3a'; c.font=F(900,24); c.textAlign='center'; c.textBaseline='middle'; c.fillText(q.i<q.itens.length-1?'Next ▶':'Done ▶',0,1); c.restore();
+  c.fillStyle='#1e1b3a'; c.font=F(900,24); c.textAlign='center'; c.textBaseline='middle'; c.fillText(q.i<q.itens.length-1?'Próxima ▶':'Pronto ▶',0,1); c.restore();
   q.next={x:bx,y:by,w:bw,h:bh}; }
 function relogio(c,x,y,q,t){
   var frac=q.fase==='entra'?1:q.tempo/TEMPO, urg=frac<.34&&q.fase==='pergunta';
@@ -141,8 +141,8 @@ function relogio(c,x,y,q,t){
 }
 function balao(c,q,it){
   var resp=q.fase==='resposta', ok=q.escolha===q.certa;
-  var en=resp?((ok?'Yes! ':(q.escolha<0?'Time is up! ':'Not quite! '))+(it.ex||'')):it.p;
-  var pt=resp?((ok?'Isso! ':(q.escolha<0?'Acabou o tempo! ':'Quase! '))+(it.ex_pt||'')):(it.p_pt||'');
+  var en=resp?((ok?'Isso! ':(q.escolha<0?'Acabou o tempo! ':'Quase! '))+(it.ex||'')):it.p;
+  var pt='';
   var temTexto=!!it.texto&&!resp, bx=200, bw=W-bx-24, by=128, fs=23;
   if(temTexto){ textoLeitura(c,it,bx,by); bx=520; bw=W-bx-24; fs=20; }
   c.font=F(900,fs); var l1=quebra(c,en,bw-36); c.font=F(700,Math.round(fs*.66)); var l2=J.tr&&pt?quebra(c,pt,bw-36):[];
@@ -153,7 +153,7 @@ function balao(c,q,it){
   c.fillStyle='#1e1b3a'; c.textAlign='left'; c.textBaseline='top'; c.font=F(900,fs); l1.forEach(function(l,k){ c.fillText(l,bx+18,by+14+k*fs*1.22); });
   if(l2.length){ c.fillStyle='#6b5d4f'; c.font=F(700,Math.round(fs*.66)); l2.forEach(function(l,k){ c.fillText(l,bx+18,by+18+l1.length*fs*1.22+k*fs*.84); }); }
   c.textAlign='right'; c.fillStyle='rgba(30,27,58,.45)'; c.font=F(900,13); c.fillText((q.i+1)+' / '+q.itens.length,bx+bw-12,by+6);
-  if(q.dica&&!resp){ var d=(it.dica_en||it.dica), dy=by+bh+8; c.font=F(800,16); var dl=quebra(c,'Hint: '+d,bw-28); var dh=dl.length*20+12+(J.tr&&it.dica?16:0); if(dy+dh<CART_Y-6){ c.fillStyle='rgba(254,243,199,.97)'; A.rr(c,bx,dy,bw,dh,12); c.fill(); c.fillStyle='#78350f'; c.textAlign='left'; c.textBaseline='top'; dl.forEach(function(l,k){ c.fillText(l,bx+14,dy+6+k*20); }); if(J.tr&&it.dica){ c.font=F(700,12); c.fillStyle='#a16207'; c.fillText(it.dica,bx+14,dy+6+dl.length*20); } } }
+  if(q.dica&&!resp){ var d=(it.dica_en||it.dica), dy=by+bh+8; c.font=F(800,16); var dl=quebra(c,'Dica: '+d,bw-28); var dh=dl.length*20+12+(J.tr&&it.dica?16:0); if(dy+dh<CART_Y-6){ c.fillStyle='rgba(254,243,199,.97)'; A.rr(c,bx,dy,bw,dh,12); c.fill(); c.fillStyle='#78350f'; c.textAlign='left'; c.textBaseline='top'; dl.forEach(function(l,k){ c.fillText(l,bx+14,dy+6+k*20); }); if(J.tr&&it.dica){ c.font=F(700,12); c.fillStyle='#a16207'; c.fillText(it.dica,bx+14,dy+6+dl.length*20); } } }
 }
 function textoLeitura(c,it,x,y){
   var w=304; c.font=F(800,15); var linhas=[]; String(it.texto).split('\n').forEach(function(l){ if(!l.trim()){ linhas.push(''); return; } quebra(c,l,w-28).forEach(function(q2){ linhas.push(q2); }); });
@@ -195,7 +195,7 @@ function tecla(k){
   if(q.fase==='resposta'&&(k==='Enter'||k===' ')){ segue(); return true; }
   return ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' ','w','a','s','d','W','A','S','D'].indexOf(k)>=0; /* durante o desafio o herói fica parado */
 }
-function alternaDica(){ var q=J.quiz; if(!q||q.fase!=='pergunta') return; q.dica=!q.dica; if(q.dica){ try{ say(q.item.dica_en||''); }catch(e){} } }
+function alternaDica(){ var q=J.quiz; if(!q||q.fase!=='pergunta') return; q.dica=!q.dica; if(q.dica){ try{ say(q.item.dica||''); }catch(e){} } }
 function ouvir(){ var q=J.quiz; if(!q) return; var it=q.item; try{ say(q.fase==='resposta'?(it.ex||''):it.p+'. '+q.ordem.map(function(oi,k){ return (k+1)+': '+it.o[oi]; }).join('. ')); }catch(e){} }
 
 return {embaralha:embaralha, marca:marca, inicia:inicia, atualiza:atualiza, desenhaMundo:desenhaMundo, desenhaTela:desenhaTela, bate:bate, toque:toque, tecla:tecla, sai:sai, segue:segue, alternaDica:alternaDica, ouvir:ouvir, escolhe:escolhe};

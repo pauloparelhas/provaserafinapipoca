@@ -67,6 +67,7 @@ function morador(c,m,t){
   c.restore();
 }
 function manchaTinta(c,e,t){
+  if(A.poeira){ A.poeira(c,e.x,e.y,t,e.dir||-1,!!e.achatado); return; } /* HIS3: bolinha de poeira das traças */
   var esm=e.achatado?.35:1, ond=Math.sin(t*6+e.x*.05);
   c.save(); c.translate(e.x,e.y); c.scale(1,esm);
   c.fillStyle='rgba(0,0,0,.2)'; A.el(c,0,2,20,5); c.fill();
@@ -125,7 +126,7 @@ function desenhaNivel(c){
   if(J.chefe&&window.CHEFAO) CHEFAO.desenhaTela(c,t);
   if(window.PODERES&&J.estado==='nivel') PODERES.desenhaTela(c,t);
   if(J.quiz&&window.QUIZ) QUIZ.desenhaTela(c,t);
-  if(J.fimFase){ var k=Math.min(1,J.fimFase.t/.8); c.fillStyle='rgba(13,11,30,'+(k*.35)+')'; c.fillRect(0,0,W,H); if(J.fimFase.t>.3){ c.save(); c.translate(W/2,150); var sc=Math.min(1,(J.fimFase.t-.3)*2.5); c.scale(sc,sc); titulo(c,'Kingdom complete!',0,0,54); c.restore(); } }
+  if(J.fimFase){ var k=Math.min(1,J.fimFase.t/.8); c.fillStyle='rgba(13,11,30,'+(k*.35)+')'; c.fillRect(0,0,W,H); if(J.fimFase.t>.3){ c.save(); c.translate(W/2,150); var sc=Math.min(1,(J.fimFase.t-.3)*2.5); c.scale(sc,sc); titulo(c,'Fase concluída!',0,0,54); c.restore(); } }
 }
 /* pose do herói: a capa longa de voo SÓ aparece com a capa no céu; o guardanapo é paraquedas (Paulo: "voa de capa sem ter pego capa") */
 function poseDoHeroi(u,M){
@@ -157,7 +158,7 @@ function praia(c,M,t){
   ['#ef4444','#fff','#ef4444','#fff','#ef4444'].forEach(function(cor,k){ c.fillStyle=cor; c.beginPath(); c.moveTo(gx,topo-104); c.arc(gx,topo-90,62,Math.PI+k*Math.PI/5,Math.PI+(k+1)*Math.PI/5); c.closePath(); c.fill(); });
   /* placa: o mar está ali */
   var bx=x1-60; c.fillStyle='#92400e'; c.fillRect(bx-3,topo-60,6,60); c.fillStyle='#fef3c7'; A.rr(c,bx-46,topo-92,92,38,8); c.fill(); c.strokeStyle='#92400e'; c.lineWidth=3; A.rr(c,bx-46,topo-92,92,38,8); c.stroke();
-  c.fillStyle='#0e7490'; c.font='900 15px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(J.tr?'O MAR ▶':'THE SEA ▶',bx,topo-73);
+  c.fillStyle='#0e7490'; c.font='900 15px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('O RIO ▶',bx,topo-73);
 }
 /* ---------- guia do caminho (Paulo: faltava indicar portas, baús e canos) ----------
    alvo = a entrada sem resposta mais perto neste mundo; sem nenhuma aqui, o cano que leva ao outro mundo
@@ -185,13 +186,13 @@ function desenhaGuia(c,t,mundo){
   if(mundo&&a.tipo==='porta'&&dentro&&a.m&&!a.m.perto){ /* 18/10: seta grande pulando em cima da porta/baú/caixa que leva às perguntas */
     var bau=J.mundo&&(J.mundo.cena==='recife'||J.mundo.cena==='nuvens'||J.mundo.cena==='biscoito'), bb=Math.abs(Math.sin(t*4))*14, ay=Math.max(J.camY+150,a.m.y-(bau?150:188))-bb;
     c.save(); c.translate(a.x,ay); c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(-14,-34); c.lineTo(14,-34); c.lineTo(14,-14); c.lineTo(26,-14); c.lineTo(0,10); c.lineTo(-26,-14); c.lineTo(-14,-14); c.closePath(); c.fill(); c.stroke();
-    var tx=bau?'Open it! ▼':'Go in! ▼'; c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw2=c.measureText(tx).width+18; c.fillStyle="rgba(13,11,30,.88)"; A.rr(c,-tw2/2,-66,tw2,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(tx,0,-53);
-    if(J.tr){ var tp=bau?'Abra! ▼':'Entre! ▼'; c.font='700 12px "Nunito",Arial'; var tw3=c.measureText(tp).width+12; c.fillStyle='rgba(13,11,30,.8)'; A.rr(c,-tw3/2,-88,tw3,20,10); c.fill(); c.fillStyle='#fde68a'; c.fillText(tp,0,-78); } c.restore(); return; }
+    var tx=bau?'Abra! ▼':'Entre! ▼'; c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw2=c.measureText(tx).width+18; c.fillStyle="rgba(13,11,30,.88)"; A.rr(c,-tw2/2,-66,tw2,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(tx,0,-53);
+    if(false){ var tp=bau?'Abra! ▼':'Entre! ▼'; c.font='700 12px "Nunito",Arial'; var tw3=c.measureText(tp).width+12; c.fillStyle='rgba(13,11,30,.8)'; A.rr(c,-tw3/2,-88,tw3,20,10); c.fill(); c.fillStyle='#fde68a'; c.fillText(tp,0,-78); } c.restore(); return; }
   if(mundo){ if(!dentro||a.tipo==='porta'||(a.tipo==='poder'&&J.dica)) return; /* a porta já tem o "?" que pula; o cano e o livro ganham a seta */
     var b=Math.abs(Math.sin(t*4))*12; c.save(); c.translate(a.x,Math.max(J.camY+130,a.y)-24-b); /* nunca debaixo do HUD */
     c.fillStyle='#fde047'; c.strokeStyle='#78350f'; c.lineWidth=3; c.beginPath(); c.moveTo(-16,-30); c.lineTo(16,-30); c.lineTo(16,-12); c.lineTo(28,-12); c.lineTo(0,14); c.lineTo(-28,-12); c.lineTo(-16,-12); c.closePath(); c.fill(); c.stroke();
-    var txt=a.tipo==='cano'?'Go in: ▼':(a.tipo==='poder'?(a.txt||'Take it!'):'The end!'); c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw=c.measureText(txt).width+18; c.fillStyle='rgba(13,11,30,.85)'; A.rr(c,-tw/2,-62,tw,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(txt,0,-49);
-    if(J.tr){ var tpt=a.tipo==='cano'?'Entre no cano ▼':(a.tipo==='poder'?((a.txtPt||'Pegue!')+' ▼'):'Fim!'); c.font='700 12px "Nunito",Arial'; var twp=c.measureText(tpt).width+12; c.fillStyle='rgba(13,11,30,.8)'; A.rr(c,-twp/2,-84,twp,20,10); c.fill(); c.fillStyle='#fde68a'; c.fillText(tpt,0,-74); }
+    var txt=a.tipo==='cano'?'Entre no cano ▼':(a.tipo==='poder'?((a.txtPt||a.txt||'Pegue!')+' ▼'):'Fim da fase!'); c.font='900 16px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var tw=c.measureText(txt).width+18; c.fillStyle='rgba(13,11,30,.85)'; A.rr(c,-tw/2,-62,tw,26,13); c.fill(); c.fillStyle='#fff'; c.fillText(txt,0,-49);
+    if(false){ var tpt=a.tipo==='cano'?'Entre no cano ▼':(a.tipo==='poder'?((a.txtPt||'Pegue!')+' ▼'):'Fim!'); c.font='700 12px "Nunito",Arial'; var twp=c.measureText(tpt).width+12; c.fillStyle='rgba(13,11,30,.8)'; A.rr(c,-twp/2,-84,twp,20,10); c.fill(); c.fillStyle='#fde68a'; c.fillText(tpt,0,-74); }
     c.restore(); return; }
   if(dentro) return;
   var lado=sx<20?-1:(sx>W-20?1:0), ex=lado<0?44:(lado>0?W-44:Math.max(60,Math.min(W-60,sx))), ey=lado?Math.max(150,Math.min(330,sy)):(sy<60?96:H-150);
@@ -203,7 +204,7 @@ function desenhaGuia(c,t,mundo){
   c.restore();
 }
 function rotulo(c,txt,y){ c.font='900 13px "Nunito",Arial'; var tw=c.measureText(txt).width+12; c.fillStyle='rgba(13,11,30,.78)'; A.rr(c,-tw/2,y,tw,19,9); c.fill(); c.fillStyle='#fff'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(txt,0,y+10); }
-var NOMES_HIST=['cookie','milk','straw','napkin','mirror','scissors','broom','tape','cookie!'];
+var NOMES_HIST=['ampulheta','jornal','carta','diário','álbum de fotos','espanador','fita','','ampulheta!']; /* por it.ordem (0..6 e 8 = o fim) */
 function item(c,it,t){
   var b=Math.sin(t*3+it.x*.03)*4; c.save(); c.translate(it.x,it.y+b);
   var g=c.createRadialGradient(0,0,4,0,0,30); g.addColorStop(0,'rgba(255,255,255,.4)'); g.addColorStop(1,'rgba(255,255,255,0)'); c.fillStyle=g; A.circ(c,0,0,30); c.fill();
@@ -214,13 +215,14 @@ function item(c,it,t){
     c.save(); c.scale(1.3,1.3); c.fillStyle='#0e7490'; A.rr(c,-12,-6,24,26,8); c.fill(); c.fillStyle='#facc15'; c.fillRect(-12,4,24,4);
     c.fillStyle='#1e293b'; A.rr(c,-14,-22,28,16,7); c.fill(); c.fillStyle='rgba(125,211,252,.85)'; A.rr(c,-11,-19,22,10,5); c.fill(); c.fillStyle='rgba(255,255,255,.7)'; A.rr(c,-8,-18,6,3,1.5); c.fill();
     c.strokeStyle='#f97316'; c.lineWidth=4; c.lineCap='round'; c.beginPath(); c.moveTo(14,-16); c.lineTo(16,-30); c.stroke();
-    c.fillStyle='#f97316'; c.beginPath(); c.moveTo(-12,20); c.lineTo(-22,30); c.lineTo(-4,30); c.closePath(); c.fill(); c.beginPath(); c.moveTo(12,20); c.lineTo(22,30); c.lineTo(4,30); c.closePath(); c.fill(); c.restore(); rotulo(c,'diving suit',42); }
+    c.fillStyle='#f97316'; c.beginPath(); c.moveTo(-12,20); c.lineTo(-22,30); c.lineTo(-4,30); c.closePath(); c.fill(); c.beginPath(); c.moveTo(12,20); c.lineTo(22,30); c.lineTo(4,30); c.closePath(); c.fill(); c.restore(); rotulo(c,'roupa de mergulho',42); }
   else if(it.tipo==='bota'){ c.fillStyle='#b45309'; A.rr(c,-8,-16,14,24,4); c.fill(); A.rr(c,-10,2,26,10,4); c.fill(); c.fillStyle='#fde68a'; A.rr(c,-8,-16,14,5,2); c.fill(); }
   c.restore();
 }
 /* os objetos de "If You Give a Mouse a Cookie", desenhados de verdade (Paulo: não dava para entender) */
 function histItem(c,n,t){
   c.fillStyle='rgba(255,255,255,.92)'; A.circ(c,0,0,21); c.fill(); c.strokeStyle='#d97706'; c.lineWidth=2.5; A.circ(c,0,0,21); c.stroke();
+  if(A.itemTrilha){ A.itemTrilha(c,(n>=2&&n<=6)?n+1:n,t); return; } /* HIS3: os objetos da Trilha da Linha do Tempo */
   if(n===0||n===8){ if(A.biscoito) A.biscoito(c,0,0,14,0); return; }
   if(n===1){ /* copo de leite: vidro, leite branco e reflexo */
     c.fillStyle='rgba(191,219,254,.55)'; c.beginPath(); c.moveTo(-9,-15); c.lineTo(9,-15); c.lineTo(7,15); c.lineTo(-7,15); c.closePath(); c.fill();
@@ -257,21 +259,21 @@ function desenhaMastro(c,x,y,t){ /* fim do reino: um grande livro aberto num ped
 /* balão de dica (inglês; português embaixo com a bandeira) */
 function desenhaDica(c,d,t){
   var pul=Math.sin(t*7)*4; c.save(); c.font='900 17px "Nunito","Segoe UI",Arial';
-  var w=c.measureText(d.txt).width+28; c.font='700 13px "Nunito",Arial'; if(J.tr&&d.pt) w=Math.max(w,c.measureText(d.pt).width+28);
-  var h=J.tr&&d.pt?52:34;
+  var dtx=d.pt||d.txt, w=c.measureText(dtx).width+28;
+  var h=34;
   var sx=Math.max(J.cam+w/2+8,Math.min(J.cam+W-w/2-8,d.x)), sy=Math.max(J.camY+h+70,d.y);
   c.translate(sx,sy+pul); c.globalAlpha=d.leve?.85:1;
   c.fillStyle='rgba(13,11,30,.86)'; c.beginPath(); c.moveTo(d.x-sx,0); c.lineTo(d.x-sx-10,-14); c.lineTo(d.x-sx+10,-14); c.fill();
   A.rr(c,-w/2,-14-h,w,h,12); c.fill(); c.strokeStyle='rgba(253,224,71,.6)'; c.lineWidth=2; A.rr(c,-w/2,-14-h,w,h,12); c.stroke();
-  c.fillStyle='#fff'; c.textAlign='center'; c.textBaseline='middle'; c.font='900 17px "Nunito","Segoe UI",Arial'; c.fillText(d.txt,0,-14-h+17);
-  if(J.tr&&d.pt){ c.fillStyle='#fde68a'; c.font='700 13px "Nunito",Arial'; c.fillText(d.pt,0,-14-h+37); }
+  c.fillStyle='#fff'; c.textAlign='center'; c.textBaseline='middle'; c.font='900 17px "Nunito","Segoe UI",Arial'; c.fillText(dtx,0,-14-h+17);
+  if(false){ c.fillStyle='#fde68a'; c.font='700 13px "Nunito",Arial'; c.fillText(d.pt,0,-14-h+37); }
   c.restore();
 }
 function titulo(c,txt,x,y,px){ c.save(); c.fillStyle='#fde68a'; c.font='900 '+px+'px "Nunito","Segoe UI",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.strokeStyle='#4c1d95'; c.lineWidth=8; c.lineJoin='round'; c.strokeText(txt,x,y); c.fillText(txt,x,y); c.restore(); }
 
 /* ---------- intro ---------- */
 function desenhaIntro(c){
-  var t=J.t, it=J.intro||{i:0,t:0}, cena=A.CENAS.biblioteca?'biblioteca':'floresta';
+  var t=J.t, it=J.intro||{i:0,t:0}, cena=A.CENAS.museu?'museu':(A.CENAS.biblioteca?'biblioteca':'floresta');
   A.ceu(c,cena,t); A.longe(c,cena,0,t); A.perto(c,cena,0,t);
   var cx=W/2, cy=330;
   /* o livro sobre a mesa */
@@ -284,22 +286,22 @@ function desenhaIntro(c){
   c.restore();
   if(it.i===1&&A.conde) A.conde(c,cx+250,450,it.t<2?'write':'laugh',t);
   if(it.i===2&&A.conde) A.conde(c,cx+300,450,'laugh',t);
-  if(it.i>=3){ var k=Math.min(1,it.t/1.5); HEROIS.forEach(function(q,i){ heroi(c,cx-180+i*180,450-k*20*Math.abs(Math.sin(t*3+i)),'cheer',t,1,1.25,q); }); if(A.pip) A.pip(c,cx+260,450,'idle',t,-1,1); }
-  titulo(c,'The Lost Endings',W/2,58,46);
+  if(it.i>=3){ var k=Math.min(1,it.t/1.5); HEROIS.forEach(function(q,i){ heroi(c,cx-180+i*180,450-k*20*Math.abs(Math.sin(t*3+i)),'cheer',t,1,1.25,q); }); if(A.morador) A.morador(c,'tic',cx+300,450,t,-1,true); }
+  titulo(c,'Detetives do Tempo',W/2,58,46);
 }
 /* ---------- final ---------- */
 function desenhaFinal(c){
   var t=J.t, it=J.final||{i:3,t:0}, sc=JOGO.CENAS_FINAL[it.i]||JOGO.CENAS_FINAL[3], cena=A.CENAS[sc.cena]?sc.cena:'floresta';
   A.ceu(c,cena,t); A.longe(c,cena,0,t); A.perto(c,cena,0,t); if(cena!=='biblioteca') A.chao(c,{x:0,y:450,w:W,h:90},cena);
   if(it.i<=1){ if(A.conde) A.conde(c,620,450,it.i===0?'sad':'write',t); heroi(c,330,450,'idle',t,1,1.2); if(it.i===1){ for(var k=0;k<6;k++){ var a=t*1.2+k; if(A.paginaVoando) A.paginaVoando(c,480+Math.cos(a)*200,240+Math.sin(a*1.3)*60,a); } } }
-  else if(it.i===2){ ['lia','theo','bia'].forEach(function(q,i){ heroi(c,320+i*160,450-Math.abs(Math.sin(t*3+i))*16,'cheer',t,1,1.2,q); }); if(A.pip) A.pip(c,800,450,'idle',t,-1,1.1); if(A.conde) A.conde(c,160,450,'laugh',t); }
-  else { if(A.biscoito) A.biscoito(c,480,330,46,0); heroi(c,330,450,'cheer',t,1,1.2); }
-  titulo(c,it.i===2?'Happily ever after':'The Lost Endings',W/2,58,40);
+  else if(it.i===2){ ['lia','theo','bia'].forEach(function(q,i){ heroi(c,320+i*160,450-Math.abs(Math.sin(t*3+i))*16,'cheer',t,1,1.2,q); }); if(A.morador) A.morador(c,'tic',800,450,t,-1,true); if(A.conde) A.conde(c,160,450,'sad',t); }
+  else { if(A.morador){ A.morador(c,'clio',600,450,t,-1,true); A.morador(c,'tic',720,450,t,-1,false); } heroi(c,330,450,'cheer',t,1,1.2); }
+  titulo(c,it.i===2?'O museu está salvo!':'Detetives do Tempo',W/2,58,40);
 }
 /* ---------- capa do livro ---------- */
 function desenhaCapa(c){
   var t=J.t; if(A.capaLivro){ A.capaLivro(c,t); return; }
-  c.fillStyle='#7c2d12'; c.fillRect(0,0,W,H); c.fillStyle='#9a3412'; A.rr(c,60,30,840,440,24); c.fill(); titulo(c,'The Lost Endings',W/2,140,64);
+  c.fillStyle='#7c2d12'; c.fillRect(0,0,W,H); c.fillStyle='#9a3412'; A.rr(c,60,30,840,440,24); c.fill(); titulo(c,'Detetives do Tempo',W/2,140,64);
   HEROIS.forEach(function(q,i){ heroi(c,240+i*160,400,'idle',t+i,1,1.2,q); });
 }
 /* ---------- escolha do herói (os cartões ficam no DOM; aqui só o palco) ---------- */
@@ -312,7 +314,7 @@ function desenhaEscolha(c){
     if(on){ var g=c.createRadialGradient(x,240,10,x,240,120); g.addColorStop(0,'rgba(253,224,71,.45)'); g.addColorStop(1,'rgba(253,224,71,0)'); c.fillStyle=g; A.circ(c,x,240,120); c.fill(); c.fillStyle='rgba(253,224,71,.4)'; A.el(c,x,HY+2,70,13); c.fill(); }
     else { c.fillStyle='rgba(0,0,0,.25)'; A.el(c,x,HY+2,50,10); c.fill(); }
     heroi(c,x,HY,on?(Math.floor(t*1.2)%3===0?'cheer':'idle'):'idle',t+i,1,on?1.75:1.45,q); });
-  titulo(c,'Choose your hero',W/2,52,40);
+  titulo(c,'Escolha o seu detetive',W/2,52,40);
 }
 /* ---------- mapa-livro ---------- */
 function desenhaMapa(c){
@@ -331,7 +333,7 @@ function desenhaMapa(c){
     c.fillStyle=g; A.circ(c,0,0,24); c.fill(); c.strokeStyle='#fff'; c.lineWidth=3; c.stroke();
     c.fillStyle='#fff'; c.font='900 19px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(String(f.id),0,1);
     if(feita){ var pg=G.paginas(f.id); for(var s=0;s<3;s++) A.estrela(c,-16+s*16,32,6.5,s<(J.prog.fases[f.id].estrelas||0)?'#fde047':'rgba(120,53,15,.3)',0); }
-    if(!pronto){ c.fillStyle='rgba(68,64,60,.85)'; c.font='900 10px "Nunito",Arial'; var tw=c.measureText('SOON').width+10; A.rr(c,-tw/2,-38,tw,15,6); c.fill(); c.fillStyle='#fff'; c.fillText('SOON',0,-30); }
+    if(!pronto){ c.fillStyle='rgba(68,64,60,.85)'; c.font='900 10px "Nunito",Arial'; var tw=c.measureText('EM BREVE').width+10; A.rr(c,-tw/2,-38,tw,15,6); c.fill(); c.fillStyle='#fff'; c.fillText('EM BREVE',0,-30); }
     c.restore();
   });
   /* o herói no mapa */

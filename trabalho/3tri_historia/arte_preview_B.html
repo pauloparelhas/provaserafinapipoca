@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prévia cenários HIS3</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap">
+<style>
+:root{--bg:#1b1830;--ink:#ece9ff}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 "Segoe UI",Arial,sans-serif;padding:12px 16px}
+h2{font-size:16px;margin:18px 0 6px}
+canvas{display:block;background:#2a2640;border-radius:8px;margin-bottom:8px;max-width:100%;height:auto}
+</style></head><body>
+<p>Detetives do Tempo — cenários da arteB/arteB2. Parâmetros: <code>?t=3</code> congela o tempo; sem isso a câmera anda.</p>
+<div id="lista"></div>
+<script src="../../ferramentas/LP3_jornada_arte.js"></script>
+<script src="../../ferramentas/LP3_jornada_arte2.js"></script>
+<script src="../../ferramentas/LP3_jornada_arte3.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arte.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arte2.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arte3.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arte4.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arte5.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arteB.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arteB2.js"></script>
+<script>
+var A=window.ARTE, W=960, H=540, DPR=1;
+var q=new URLSearchParams(location.search), TFIX=q.has('t')?+q.get('t'):null;
+var CENAS=['escola','casa','fazenda','rios','cidade','museu','linha','sub_arquivo'];
+var CAMS=[0,1300,2700];
+var lista=document.getElementById('lista');
+CENAS.forEach(function(n){ CAMS.forEach(function(cm){ var h=document.createElement('h2'); h.textContent='Cena '+n+' (câmera '+cm+')'; lista.appendChild(h);
+  var cv=document.createElement('canvas'); cv.id='c_'+n+'_'+cm; cv.width=W; cv.height=H; cv.dataset.cena=n; cv.dataset.cam=cm; lista.appendChild(cv); }); });
+function cena(c,cv,t){
+  var nome=cv.dataset.cena, cam=+(cv.dataset.cam||0)+(TFIX==null?t*60:0);
+  if(/^sub_/.test(nome)){ A.ceu(c,'sub_caverna',t); if(A.fundoSub) A.fundoSub(c,nome,cam*.2,t); }
+  else { A.ceu(c,nome,t); A.longe(c,nome,cam*.15,t); A.perto(c,nome,cam*.45,t); }
+  var cn=/^sub_/.test(nome)?nome:nome;
+  c.save(); c.translate(-cam,0);
+  [{x:cam-100,y:450,w:560,h:90},{x:cam+560,y:450,w:600,h:90},{x:cam+860,y:360,w:135,h:90}].forEach(function(s){ A.chao(c,s,cn); });
+  [{x:cam+230,y:330,w:135,h:18},{x:cam+560,y:280,w:180,h:18},{x:cam+40,y:220,w:110,h:18}].forEach(function(p){ A.plataforma(c,p,cn); });
+  c.restore();
+  if(A.heroi){ A.heroi(c,200,450,nome==='rios'?'swim':'idle',t,1,1,'lia'); A.heroi(c,300,330,'walk',t,1,1,'theo'); }
+}
+var cvs=[].slice.call(document.querySelectorAll('canvas[data-cena]'));
+var t0=performance.now();
+function frame(){ var t=TFIX==null?(performance.now()-t0)/1000:TFIX;
+  cvs.forEach(function(cv){ var c=cv.getContext('2d'); c.setTransform(DPR,0,0,DPR,0,0); c.clearRect(0,0,W,H);
+    try{ cena(c,cv,t); }catch(e){ console.error(cv.id,e); c.fillStyle='#f87171'; c.font='16px Arial'; c.fillText('ERRO: '+e.message,20,30); } });
+  if(TFIX==null) requestAnimationFrame(frame); else document.body.dataset.pronto='1'; }
+(document.fonts?Promise.all([document.fonts.load('900 40px "Nunito"')]).catch(function(){}):Promise.resolve()).then(frame);
+</script></body></html>

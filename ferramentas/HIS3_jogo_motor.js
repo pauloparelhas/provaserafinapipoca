@@ -41,7 +41,7 @@ function recomecar(){ var hr=J.prog.heroi, cr=J.prog.cor; J.prog={fases:{},moeda
 /* ---------- utilidades ---------- */
 function emite(n,fn){ for(var i=0;i<n;i++) J.part.push(fn(i)); }
 function toast(txt,dur,pt){ if(window.UI) UI.toast(txt,dur||2200,pt); }
-function hud(){ if(!window.UI) return; var L=J.nivel, E=L?(L.todasEntradas||L.moradores):[]; var feitas=E.filter(function(m){ return m.feito; }).length, tot=E.length; UI.hud(J.faseAtual?J.faseAtual.nome:'The Lost Endings', J.pontos, J.moedas, feitas, tot, !!(L&&tot)); }
+function hud(){ if(!window.UI) return; var L=J.nivel, E=L?(L.todasEntradas||L.moradores):[]; var feitas=E.filter(function(m){ return m.feito; }).length, tot=E.length; UI.hud(J.faseAtual?J.faseAtual.nome:'Detetives do Tempo', J.pontos, J.moedas, feitas, tot, !!(L&&tot)); }
 function colideRet(ax,ay,aw,ah,bx,by,bw,bh){ return ax<bx+bw && ax+aw>bx && ay<by+bh && ay+ah>by; }
 function ursoRet(){ var u=J.urso, s=TAM[u.tam], w=URSO_W*s, h=URSO_H*s; return {x:u.x-w/2,y:u.y-h,w:w,h:h}; }
 function poeira(x,y,n){ emite(n||6,function(){ return {x:x+(Math.random()-.5)*24,y:y,vx:(Math.random()-.5)*90,vy:-20-Math.random()*50,vida:.45,max:.45,tipo:'nevoa',r:4+Math.random()*4}; }); }
@@ -172,7 +172,7 @@ function pegaItem(it){
       if(ef==='capa') u.poderes.guardanapo=true;
       if(ef==='moedas'){ J.moedas+=5; }
       SOM.fx('moedaG'); pontua(80,it.x,it.y);
-      toast((it.ordem? 'He wants ':'If you give a mouse ')+h[0],2600,(it.ordem?'Ele quer ':'Se você der a um ratinho ')+h[1]); break; }
+      toast((it.ordem?'Você achou: ':'Comece pela pista: ')+h[1],2600); break; }
     case 'estrelas': u.poderes.estrelas=Math.min(9,(u.poderes.estrelas||0)+3); SOM.fx('moedaG'); if(window.UI) UI.acao(true,u.poderes.estrelas); if(!J.prog.estrelaVista){ J.prog.estrelaVista=true; salva(); toast('Magic stars! Press ★ to throw one',2800,'Estrelas mágicas! Aperte ★ para jogar uma'); } break;
     case 'bota': u.poderes.bota=true; u.puloExtra=true; SOM.fx('destrava'); toast('Magic boots! Press JUMP again in the air',2600,'Botas mágicas! Aperte PULAR de novo no ar'); break;
   }

@@ -22,59 +22,58 @@ var rr=A.rr, circ=A.circ, el=A.el, lin=A.lin;
 
 /* ---------- a tabela: um poder por reino (id da fase) ---------- */
 var TAB={
-  1:{id:'botas', tiro:null, suporte:'barraca', verbo:'Put on!', verboPt:'Calce!', nome:'boots', nomePt:'botas',
-     tit:'Seven-League Boots!', titPt:'Botas de Sete Léguas!',
-     txt:'Jump, then tap JUMP again in the air. A super high jump!', txtPt:'Pule e aperte PULAR de novo no ar. Um pulo bem alto!'},
-  2:{id:'pip', tiro:'faisca', montado:true, nome:'Pip', nomePt:'Pip',
-     tit:'Pip the baby dragon!', titPt:'Pip, o dragãozinho!',
-     txt:'Ride Pip! Hold JUMP to float. Press SPACE (or the fire button): Pip blows sparkles. Sparkles burn thorns!', txtPt:'Monte no Pip! Segure PULAR para planar. Aperte ESPAÇO (ou o botão de fogo): o Pip sopra faíscas. Faíscas queimam espinhos!'},
-  4:{id:'traje', tiro:'bolha', suporte:'arara', verbo:'Put on!', verboPt:'Vista!', nome:'diving suit', nomePt:'roupa de mergulho',
-     tit:'A diving suit!', titPt:'Uma roupa de mergulho!',
-     txt:'Jump into the sea. Tap JUMP to swim up. Press SPACE (or the bubble button): bubbles catch jellyfish!', txtPt:'Pule no mar. Toque PULAR para nadar para cima. Aperte ESPAÇO (ou o botão de bolha): bolhas prendem águas-vivas!'},
-  5:{id:'capa', tiro:null, suporte:'cabide', verbo:'Put on!', verboPt:'Vista!', nome:'cloud cape', nomePt:'capa das nuvens',
-     tit:'The Cloud Cape!', titPt:'A Capa das Nuvens!',
-     txt:'Hold JUMP to fly up. Let go to float down slowly. Fly around the storms and the crows!', txtPt:'Segure PULAR para subir voando. Solte para descer devagar. Voe por fora das tempestades e dos corvos!'},
-  6:{desligado:true, id:'giz', tiro:null, suporte:'pedestal', verbo:'Chalk up!', verboPt:'Passe o giz!', nome:'gym chalk', nomePt:'giz de ginástica',
-     tit:'Gym chalk!', titPt:'Giz de ginástica!',
-     txt:'Chalky hands hold rings and bars tight. Jump, then tap JUMP again in the air: a FLIP!', txtPt:'Mãos com giz seguram firme argolas e barras. Pule e aperte PULAR de novo no ar: uma CAMBALHOTA!'},
-  7:{id:'bolas', tiro:'bola', suporte:'rack', verbo:'Take!', verboPt:'Pegue!', nome:'soccer balls', nomePt:'bolas de futebol',
-     tit:'Soccer balls!', titPt:'Bolas de futebol!',
-     txt:'Press SPACE (or the ball button) to kick a ball. Kick the ball at the ink players and the ball machine!', txtPt:'Aperte ESPAÇO (ou o botão da bola) para chutar. Chute a bola nos jogadores de tinta e na máquina de bolas!'},
-  8:{id:'biscoitos', tiro:'biscoito', nome:'cookies', nomePt:'biscoitos',
-     tit:'Cookies!', titPt:'Biscoitos!',
-     txt:'Press SPACE (or the cookie button) to throw a cookie. Ink blobs love cookies: they turn into butterflies!', txtPt:'Aperte ESPAÇO (ou o botão do biscoito) para jogar um biscoito. As manchas de tinta adoram biscoito: viram borboletas!'}
+  1:{id:'botas', tiro:null, suporte:'barraca', verbo:'Calce!', verboPt:'Calce!', nome:'tênis saltador', nomePt:'tênis saltador',
+     tit:'Tênis saltador da educação física!', titPt:'Tênis saltador da educação física!',
+     txt:'Pule e aperte PULAR de novo no ar. Um pulo bem alto!', txtPt:'Pule e aperte PULAR de novo no ar. Um pulo bem alto!'},
+  2:{id:'botas', tiro:null, suporte:'barraca', verbo:'Calce!', verboPt:'Calce!', nome:'pantufas saltadoras', nomePt:'pantufas saltadoras',
+     tit:'As pantufas saltadoras da Vovó!', titPt:'As pantufas saltadoras da Vovó!',
+     txt:'Pule e aperte PULAR de novo no ar: pulo duplo! Assim você sobe do porão até o sótão.', txtPt:'Pule e aperte PULAR de novo no ar: pulo duplo! Assim você sobe do porão até o sótão.'},
+  4:{id:'pip', tiro:'faisca', montado:true, nome:'Pangaré', nomePt:'Pangaré',
+     tit:'Pangaré, o cavalo do Seu Pedro!', titPt:'Pangaré, o cavalo do Seu Pedro!',
+     txt:'Antigamente os animais ajudavam no trabalho da fazenda! Monte no Pangaré e segure PULAR para saltar longe. Aperte ESPAÇO: ele relincha e espanta as traças.', txtPt:'Antigamente os animais ajudavam no trabalho da fazenda! Monte no Pangaré e segure PULAR para saltar longe. Aperte ESPAÇO: ele relincha e espanta as traças.'},
+  5:{id:'traje', tiro:'bolha', suporte:'arara', verbo:'Vista!', verboPt:'Vista!', nome:'roupa de mergulho', nomePt:'roupa de mergulho',
+     tit:'Uma roupa de mergulho!', titPt:'Uma roupa de mergulho!',
+     txt:'Pule no rio. Toque PULAR para nadar para cima. Aperte ESPAÇO: as bolhas prendem as traças.', txtPt:'Pule no rio. Toque PULAR para nadar para cima. Aperte ESPAÇO: as bolhas prendem as traças.'},
+  6:{desligado:true, id:'giz', tiro:null, suporte:'pedestal', verbo:'Pegue!', verboPt:'Pegue!', nome:'capacete', nomePt:'capacete',
+     tit:'Capacete!', titPt:'Capacete!', txt:'Segure firme nos ganchos e nas vigas.', txtPt:'Segure firme nos ganchos e nas vigas.'},
+  7:{id:'bolas', tiro:'bola', suporte:'rack', verbo:'Pegue!', verboPt:'Pegue!', nome:'bolas de futebol', nomePt:'bolas de futebol',
+     tit:'Bolas de futebol!', titPt:'Bolas de futebol!',
+     txt:'Aperte ESPAÇO (ou o botão da bola) para chutar. Chute a bola nas traças e na máquina de bolas!', txtPt:'Aperte ESPAÇO (ou o botão da bola) para chutar. Chute a bola nas traças e na máquina de bolas!'},
+  8:{id:'biscoitos', tiro:'biscoito', nome:'biscoitos da Vovó', nomePt:'biscoitos da Vovó',
+     tit:'Biscoitos da Vovó!', titPt:'Biscoitos da Vovó!',
+     txt:'Aperte ESPAÇO (ou o botão do biscoito) para jogar um biscoito. As traças adoram biscoito: viram borboletas!', txtPt:'Aperte ESPAÇO (ou o botão do biscoito) para jogar um biscoito. As traças adoram biscoito: viram borboletas!'}
 };
 /* a história do ratinho: cada objeto no seu móvel, com o seu verbo */
-var HIST={
-  cookie:{verbo:'Take!',verboPt:'Pegue!',fala:'If you give a mouse a cookie…',falaPt:'Se você der um biscoito a um ratinho…'},
-  milk:{verbo:'Drink!',verboPt:'Beba!',fala:'He wants a glass of milk… and a straw!',falaPt:'Ele quer um copo de leite… e um canudo!'},
-  napkin:{verbo:'Take!',verboPt:'Pegue!',fala:'He wants a napkin.',falaPt:'Ele quer um guardanapo.'},
-  mirror:{verbo:'Look!',verboPt:'Olhe!',fala:'He looks in a mirror: a milk mustache!',falaPt:'Ele se olha no espelho: um bigode de leite!'},
-  scissors:{verbo:'Take!',verboPt:'Pegue!',fala:'He wants scissors to trim his hair.',falaPt:'Ele quer uma tesoura para aparar o cabelo.'},
-  broom:{verbo:'Take!',verboPt:'Pegue!',fala:'He wants a broom. Sweep, sweep!',falaPt:'Ele quer uma vassoura. Varre, varre!'},
-  tape:{verbo:'Take!',verboPt:'Pegue!',fala:'He wants tape. Fix the bridge!',falaPt:'Ele quer fita adesiva. Conserte a ponte!'},
-  fim:{fala:'He wants a cookie… again! The story ends where it began.',falaPt:'Ele quer um biscoito… de novo! A história termina onde começou.'}
+var HIST={ /* HIS3: a Trilha da Linha do Tempo — os registros na ORDEM do material (jornal → carta → diário → álbum) */
+  cookie:{verbo:'Pegue!',verboPt:'Pegue!',fala:'A ampulheta do Tic: o tempo começa a contar!',falaPt:'A ampulheta do Tic: o tempo começa a contar!'},
+  milk:{verbo:'Pegue!',verboPt:'Pegue!',fala:'O jornal: um dos primeiros registros, de muito tempo atrás.',falaPt:'O jornal: um dos primeiros registros, de muito tempo atrás.'},
+  napkin:{verbo:'Pegue!',verboPt:'Pegue!',fala:'A carta, escrita à mão. Abra o envelope: ele vira paraquedas!',falaPt:'A carta, escrita à mão. Abra o envelope: ele vira paraquedas!'},
+  mirror:{verbo:'Pegue!',verboPt:'Pegue!',fala:'O diário: alguém escrevia o que vivia todo dia.',falaPt:'O diário: alguém escrevia o que vivia todo dia.'},
+  scissors:{verbo:'Pegue!',verboPt:'Pegue!',fala:'O álbum de fotos, do tempo dos bisavós e dos avós.',falaPt:'O álbum de fotos, do tempo dos bisavós e dos avós.'},
+  broom:{verbo:'Pegue!',verboPt:'Pegue!',fala:'O espanador! Espante a poeira das traças.',falaPt:'O espanador! Espante a poeira das traças.'},
+  tape:{verbo:'Pegue!',verboPt:'Pegue!',fala:'A fita! Conserte a ponte de papel rasgada.',falaPt:'A fita! Conserte a ponte de papel rasgada.'},
+  fim:{fala:'Depois vieram a foto digital e as redes sociais. A ampulheta vira de novo: o tempo não para!',falaPt:'Depois vieram a foto digital e as redes sociais. A ampulheta vira de novo: o tempo não para!'}
 };
 /* 16/10 (Paulo: "as perguntas respondidas certas podem dar ao herói o produto esperado,
    tipo tesoura, espelho, e não simplesmente encontrá-los"): cada objeto do meio da história
    fica no seu móvel com um "?"; ▼ abre UMA pergunta do ratinho cuja resposta É o objeto
    (c11 "o que ele pede depois do biscoito?" → leite …). Certa = ganha o objeto. Errada =
    vê a resposta e vem outra pergunta na hora; na 2ª errada o ratinho entrega assim mesmo (nada trava). */
-var QUIZ_ITEM={milk:['c11','c20'],napkin:['c13'],mirror:['c14'],scissors:['c24'],broom:['c15'],tape:['c19']}; /* a 2ª tentativa repete a pergunta cuja resposta É o objeto (a criança acabou de ver a resposta) */
-var NOME_ITEM={milk:['a glass of milk','um copo de leite'],napkin:['a napkin','um guardanapo'],mirror:['a mirror','um espelho'],scissors:['scissors','uma tesoura'],broom:['a broom','uma vassoura'],tape:['tape','fita adesiva']};
+var QUIZ_ITEM={milk:['t01'],napkin:['t02'],mirror:['t03'],scissors:['t04'],broom:['t05'],tape:['t06']}; /* a 2ª tentativa repete a pergunta cuja resposta É o objeto (a criança acabou de ver a resposta) */
+var NOME_ITEM={milk:['o jornal','o jornal'],napkin:['a carta','a carta'],mirror:['o diário','o diário'],scissors:['o álbum de fotos','o álbum de fotos'],broom:['o espanador','o espanador'],tape:['a fita','a fita']};
 function peloQuiz(it){ return it&&it.tipo==='historia'&&!it.fim&&!!QUIZ_ITEM[it.nome]; }
 function pedeItem(it){
   if(J.quiz||!window.QUIZ||it.ganho) return; it.tent=(it.tent||0); var ids=QUIZ_ITEM[it.nome], id=ids[Math.min(it.tent,ids.length-1)];
   var q=(window.HIS3&&HIS3.ITENS||[]).filter(function(x){ return x.id===id; })[0]; if(!q){ entregaItem(it,true); return; }
-  var m={x:it.x,y:it.y,tipo:'mouse',falando:0}, ok0=false;
+  var m={x:it.x,y:it.y,tipo:'tic',falando:0}, ok0=false;
   log({ev:'pedeItem',nome:it.nome,id:id});
   QUIZ.inicia(m,{itens:[q], aoResponder:function(ok){ ok0=ok; },
     aoTerminar:function(){ it.cool=J.t+5; if(ok0) entregaItem(it,false); else { it.tent++; if(it.tent>=2) entregaItem(it,true); else setTimeout(function(){ if(!J.quiz&&J.estado==='nivel'&&!it.pego) pedeItem(it); },500); } }, /* errou: outra pergunta na hora (a criança não perde o lugar) */
     aoSair:function(){} });
 }
 function entregaItem(it,ajuda){ if(it.ganho) return; it.ganho=true; var n=NOME_ITEM[it.nome]||[it.nome,it.nome]; G.pegaItem(it); log({ev:'ganhaItem',nome:it.nome,ajuda:!!ajuda});
-  setTimeout(function(){ G.toast(ajuda?'The mouse helps you: '+n[0]+'!':'Right! You get '+n[0]+'!',2400,ajuda?'O ratinho te ajuda: '+n[1]+'!':'Certo! Você ganhou '+n[1]+'!'); },50); }
-var CARTAO_GUARDANAPO={tit:'A napkin!',titPt:'Um guardanapo!',txt:'It is a parachute! Jump, then HOLD JUMP to float over the sink.',txtPt:'Vira paraquedas! Pule e SEGURE PULAR para flutuar por cima da pia.'};
+  setTimeout(function(){ G.toast(ajuda?'O Tic te ajuda: '+n[1]+'!':'Certo! Você ganhou '+n[1]+'!',2400); },50); }
+var CARTAO_GUARDANAPO={tit:'A carta!',titPt:'A carta!',txt:'It is a parachute! Jump, then HOLD JUMP to float over the sink.',txtPt:'Vira paraquedas! Pule e SEGURE PULAR para flutuar por cima da pia.'};
 
 function fase(){ return J.faseAtual?J.faseAtual.id:0; }
 function poder(){ var P=TAB[fase()]; return P&&!P.desligado?P:null; }
@@ -509,12 +508,12 @@ function inimigo(c,e,t){
   c.restore(); return true; }
 
 /* explicaçãozinha do poder (passar o mouse ou tocar na pílula/no botão) */
-var DICA_PODER={1:['Seven-League Boots: jump, then press JUMP again in the air for a super jump.','Botas de Sete Léguas: pule e aperte PULAR de novo no ar para um superpulo.'],
-  2:['Pip the baby dragon: hold JUMP to float. Press SPACE: Pip blows sparkles that burn thorns.','Pip, o dragãozinho: segure PULAR para planar. Aperte ESPAÇO: o Pip sopra faíscas que queimam espinhos.'],
-  4:['Diving suit: tap JUMP to swim up. Press SPACE to blow bubbles at the jellyfish.','Roupa de mergulho: toque PULAR para nadar para cima. Aperte ESPAÇO para soprar bolhas nas águas-vivas.'],
-  5:['Cloud Cape: hold JUMP to fly up. Let go to float down slowly.','Capa das Nuvens: segure PULAR para subir voando. Solte para descer devagar.'],
-  7:['Soccer balls: press SPACE to kick a ball at the ink players and the ball machine.','Bolas de futebol: aperte ESPAÇO para chutar uma bola nos jogadores de tinta e na máquina.'],
-  8:['Cookies: press SPACE to throw a cookie. Ink blobs love cookies and turn into butterflies!','Biscoitos: aperte ESPAÇO para jogar um biscoito. As manchas de tinta adoram e viram borboletas!']};
+var DICA_PODER={1:['Tênis saltador: pule e aperte PULAR de novo no ar para um superpulo.','Tênis saltador: pule e aperte PULAR de novo no ar para um superpulo.'],
+  2:['Pantufas saltadoras: pule e aperte PULAR de novo no ar. Suba até o sótão!','Pantufas saltadoras: pule e aperte PULAR de novo no ar. Suba até o sótão!'],
+  4:['Pangaré: segure PULAR para saltar longe. Aperte ESPAÇO para ele relinchar e espantar as traças.','Pangaré: segure PULAR para saltar longe. Aperte ESPAÇO para ele relinchar e espantar as traças.'],
+  5:['Roupa de mergulho: toque PULAR para nadar para cima. Aperte ESPAÇO para soprar bolhas.','Roupa de mergulho: toque PULAR para nadar para cima. Aperte ESPAÇO para soprar bolhas.'],
+  7:['Bolas de futebol: aperte ESPAÇO para chutar uma bola nas traças e na máquina.','Bolas de futebol: aperte ESPAÇO para chutar uma bola nas traças e na máquina.'],
+  8:['Biscoitos: aperte ESPAÇO para jogar um biscoito. As traças viram borboletas!','Biscoitos: aperte ESPAÇO para jogar um biscoito. As traças viram borboletas!']};
 function dicaPoder(){ var d=DICA_PODER[fase()]; return d?{en:d[0],pt:d[1]}:null; }
 return {peloQuiz:peloQuiz, dicaPoder:dicaPoder, solidos:solidos, desenhaPorteiras:desenhaPorteiras, desenhaTela:desenhaTela, TAB:TAB, poder:poder, pega:pega, interage:interage, toca:toca, dica:dica, alvo:alvo, atira:atira, moveTiro:moveTiro, acertaExtra:acertaExtra, atualiza:atualiza, reinicia:reinicia, segundoPulo:segundoPulo,
   desenhaItem:desenhaItem, plataforma:plataforma, ninho:ninho, antesHeroi:antesHeroi, depoisHeroi:depoisHeroi, desenhaTiro:desenhaTiro, desenhaRolante:desenhaRolante, desenhaFundo:desenhaFundo, desenhaFrente:desenhaFrente, mola:mola, inimigo:inimigo, icone:icone, hudPoder:hudPoder, tiroAtual:tiroAtual, cartao:cartao};

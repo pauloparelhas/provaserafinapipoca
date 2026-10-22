@@ -1,0 +1,49 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prévia Arte A</title>
+<style>body{margin:0;background:#1e1b3a;color:#fff;font:14px Arial}canvas{display:block;width:100%;max-width:960px;margin:0 auto;background:#e8f1fb}#bar{text-align:center;padding:6px}button{font:inherit;margin:2px;padding:6px 10px}</style></head><body>
+<div id="bar"><button data-p="0">Moradores</button><button data-p="1">Rainha Traça</button><button data-p="2">Inimigos</button><button data-p="3">Rainha zoom</button><button data-p="4">Moradores zoom</button><button data-p="5">Pangaré + itens</button><label><input type="checkbox" id="fal" checked> falando</label></div>
+<canvas id="cv" width="960" height="540"></canvas>
+<script src="../../ferramentas/LP3_jornada_arte.js"></script>
+<script src="../../ferramentas/LP3_jornada_arte2.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arte.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arte2.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arte3.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arte4.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arte5.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arteA.js"></script>
+<script src="../../ferramentas/HIS3_jogo_arteA2.js"></script>
+<script>
+var q=new URLSearchParams(location.search), pag=+(q.get('p')||0), T0=q.get('t')!=null?+q.get('t'):null, ESC=+(q.get('s')||1);
+var c=document.getElementById('cv').getContext('2d'), A=window.ARTE;
+document.querySelectorAll('[data-p]').forEach(function(b){ b.onclick=function(){ pag=+b.dataset.p; }; });
+function rot(s,x,y){ c.fillStyle='#1e293b'; c.font='bold 13px Arial'; c.textAlign='center'; c.fillText(s,x,y); }
+function chao(y){ c.fillStyle='#cfe3c0'; c.fillRect(0,y,960,6); }
+function quadro(t){
+  c.clearRect(0,0,960,540); c.fillStyle='#e8f1fb'; c.fillRect(0,0,960,540);
+  var fal=document.getElementById('fal').checked;
+  if(pag===0){
+    var L=['lucia','francisco','pedro','joao','vovo','clio','tic','locutor','engenheira','fotografo'];
+    L.forEach(function(k,i){ var x=90+(i%5)*190, y=i<5?240:500; chao(y); c.save(); c.translate(x,y); c.scale(1.6*ESC,1.6*ESC); A.morador(c,k,0,0,t+i,1,fal&&i%2===0); c.restore(); rot(k+(fal&&i%2===0?' (fala)':''),x,y+20); });
+  } else if(pag===1){
+    var E=['idle','write','laugh','hit','sad']; chao(300); chao(530);
+    E.forEach(function(e,i){ var x=i<3?140+i*340:300+(i-3)*360, y=i<3?300:530; A.conde(c,x,y,e,t); rot(e,x,y+16); });
+  } else if(pag===3){
+    ['idle','write','laugh'].forEach(function(e,i){ c.save(); c.translate(160+i*320,500); c.scale(1.9,1.9); A.conde(c,0,0,e,t); c.restore(); });
+  } else if(pag===4){
+    ['lucia','pedro','vovo','tic','fotografo'].forEach(function(k,i){ c.save(); c.translate(100+i*185,500); c.scale(3.6,3.6); A.morador(c,k,0,0,t,1,false); c.restore(); });
+  } else if(pag===5){
+    chao(230); var S=1.5;
+    ['idle','walk','fly','egg'].forEach(function(e,i){ var x=110+i*190, y=230-(e==='fly'?40:0); A.pip(c,x,y,e,t,1,S); rot(e,x,250); });
+    var xr=870; A.pip(c,xr,230,'walk',t,-1,S); A.heroi(c,xr+A.pip.SELA_X*S*-1,230-A.pip.SELA_Y*S,'ride',t,-1,S,'theo'); rot('montado',xr,250);
+    for(var n=0;n<9;n++){ var ix=70+n*102, iy=400; c.save(); c.translate(ix,iy); c.scale(1.5,1.5); c.fillStyle='#fff'; A.circ(c,0,0,21); c.fill(); c.strokeStyle='#cbd5e1'; c.lineWidth=1.5; c.stroke(); A.itemTrilha(c,n,t); c.restore(); rot('n='+n,ix,450); }
+  } else {
+    chao(200); chao(420);
+    [[1,true],[-1,true],[1,false]].forEach(function(o,i){ c.save(); c.translate(100+i*130,200); c.scale(2.2,2.2); A.traca(c,0,0,t+i,o[0],o[1]); c.restore(); rot('traca '+(o[1]?'voando':'chão'),100+i*130,218); });
+    [[1,false],[-1,false],[1,true]].forEach(function(o,i){ c.save(); c.translate(520+i*130,200); c.scale(2.2,2.2); A.poeira(c,0,0,t+i,o[0],o[1]); c.restore(); rot('poeira'+(o[1]?' achatada':''),520+i*130,218); });
+    [3,2,1].forEach(function(h,i){ A.tracona(c,170+i*310,420,t+i,h,3); rot('tracona hp '+h+'/3',170+i*310,438); });
+    [[1,true],[1,false]].forEach(function(o,i){ A.traca(c,60+i*40,500,t,o[0],o[1]); A.poeira(c,160+i*40,500,t,1,false); }); rot('escala real',140,520);
+  }
+}
+function loop(ms){ quadro(T0!=null?T0:ms/1000); if(T0==null) requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
+</script></body></html>
