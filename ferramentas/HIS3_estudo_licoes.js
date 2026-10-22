@@ -20,6 +20,10 @@
    ============================================================ */
 window.HIS3_LICOES = (function(){
 'use strict';
+/* REVISÃO do avaliador de questões (_processo/CRITERIO_QUESTOES.md), aplicada nas telas de escolha */
+/*REVISAO-INICIO*/var REVISAO_L={"L_missao_3_0":{"m":"uma carta antiga da bisavó","o":["como as pessoas se comunicavam","como as crianças brincavam","como as pessoas se vestiam"],"q":"O que esta pista pode nos ensinar sobre o passado?"},"L_missao_3_1":{"m":"uma boneca antiga","o":["Material","Visual","Escrita"],"q":"Que tipo de fonte é?","d":"A boneca é um objeto, um brinquedo antigo: fonte material. Ela conta como as crianças brincavam."},"L_missao_3_2":{"m":"o chapéu e o casaco antigos","o":["Material","Visual","Oral"],"q":"Que tipo de fonte é?","d":"Chapéu e casaco são roupas, objetos que a gente pode tocar: fonte material. Mostram como as pessoas se vestiam."},"L_missao_3_3":null,"L_missao_3_4":null,"L_quatro_2_4":{"m":"[foto]  o texto dos livros antigos","o":["Escrita","Oral","Visual","Material"]},"L_pegadinhas_1_3":{"m":"a carta que a vovó mandou","o":["Escrita","Oral","Visual","Material"]},"L_pegadinhas_4_6":{"m":"o recado no verso do cartão-postal","o":["Sim","Não"]},"L_mudou_2_0":{"m":"Na história da Dona Lúcia: o quadro onde ela escreve a lição","o":["Mudança","Permanência"]},"L_mudou_2_1":{"m":"Na história da Dona Lúcia: conversar com os alunos e ouvir as ideias deles","o":["Permanência","Mudança"]},"L_mudou_2_2":{"m":"Na história do Seu Francisco: o que ele usa para levar as entregas","o":["Mudança","Permanência"]},"L_mudou_2_3":{"m":"Na história do Doutor João: o cuidado e a atenção com cada paciente","o":["Permanência","Mudança"]},"L_mudou_2_4":{"m":"Na história do Seu Pedro: o que ele usa para preparar a terra","o":["Mudança","Permanência"]},"L_mudou_2_5":{"m":"Na história do Seu Pedro: amar a terra e cuidar da natureza","o":["Permanência","Mudança"]},"L_olhar_3_0":{"m":"o cartão-postal de Salvador","o":["Contar uma viagem aos amigos","Vender um produto","Registrar as regras da escola"]},"L_olhar_3_1":{"m":"um anúncio de jornal antigo","o":["Vender um produto","Contar uma viagem aos amigos","Registrar as regras da escola"]},"L_olhar_3_2":{"m":"uma propaganda antiga de um alimento","o":["Vender um produto","Contar uma viagem aos amigos","Registrar as regras da escola"]},"L_profissoes_2_0":{"m":"carteiro, do Seu Francisco","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_1":{"m":"professora, da Dona Lúcia","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_2":{"m":"fazendeiro, do Seu Pedro","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_3":{"m":"médico, do Doutor João","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_4":{"m":"acendedor de lampião","o":["Deixou de existir","Continua, mas o jeito mudou","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_luciajoao_2_0":{"m":"Doutor João: o resultado do exame leva dias","o":["Antes","Hoje"]},"L_luciajoao_2_3":{"m":"Dona Lúcia: pesquisar na biblioteca","o":["Antes","Hoje"],"q":"Na história, isto era ANTES ou é HOJE?","d":"Antes, os alunos da Dona Lúcia pesquisavam na biblioteca; hoje pesquisam na internet."},"L_ferramentas_3_2":null};/*REVISAO-FIM*/
+/* (aplicada em REVISA_L) */
+function REVISA_L(l){ l.telas.forEach(function(t,ti){ if(t.tipo!=="escolha") return; t.itens=t.itens.map(function(it,k){ var id="L_"+l.k+"_"+ti+"_"+k, r=REVISAO_L[id]; if(r===null) return null; it=Object.assign({},it,{_id:id}); if(r){ it.m=r.m||it.m; it.c=r.o[0]; it.op=r.o.slice(); if(r.q) t.pergunta=r.q; } return it; }).filter(Boolean); }); return true; }
 function R(t){ return '<div class="regra">'+t+'</div>'; }
 function caixa(t,corpo,cor){ return '<div class="caixa"'+(cor?' style="border-color:'+cor+'"':'')+'><h3'+(cor?' style="color:'+cor+'"':'')+'>'+t+'</h3>'+corpo+'</div>'; }
 function esp(){ return '<div style="height:10px"></div>'; }
@@ -228,7 +232,7 @@ return [
    {m:'uma propaganda antiga de alimento para crianças', op:['Vender o alimento','Guardar uma receita'], c:'Vender o alimento', d:'Propaganda quer que você compre.'}
   ]},
  {tipo:'liga', tit:'Quem fez e para quem?', regra:'Toque na fonte e depois em quem fez ou para quem foi feita.', fala:'Ligue a fonte a quem fez ou para quem foi feita.',
-  pares:[['cartão-postal de Salvador: quem escreveu?','quem viajou'],['cartão-postal: para quem?','os amigos de quem viajou'],['propaganda do alimento: para quem?','as famílias'],['anúncio de leite: para quem?','quem queria comprar leite']]}
+  pares:[['cartão-postal de Salvador: quem escreveu?','quem viajou'],['cartão-postal: para quem?','os amigos de quem viajou'],['propaganda do alimento: para quem?','as famílias'],['anúncio de leite: para quem?','quem queria comprar']]}
 ]},
 
 /* ===================== 7. PROFISSÕES NO TEMPO ===================== */
@@ -341,7 +345,7 @@ return [
    R('Para cada profissão há <b>mais de uma</b> ferramenta.')},
  {tipo:'liga', tit:'Ligue a ferramenta à profissão', regra:'Toque numa ferramenta e depois na profissão.',
   fala:'Ligue a ferramenta à profissão.',
-  pares:[['estetoscópio e termômetro de mercúrio','médico'],['câmera antiga de tripé','fotógrafo'],['lousa e globo','professora'],['marreta e colher de pedreiro','construtor'],['bolsa de couro com cartas','carteiro'],['arado puxado por bois','fazendeiro']]},
+  pares:[['estetoscópio e termômetro de mercúrio','médico'],['câmera antiga de tripé','fotógrafo'],['lousa e globo','professora'],['marreta e colher de pedreiro','construtor'],['bolsa de couro','carteiro'],['arado puxado por bois','fazendeiro']]},
  {tipo:'escolha', tit:'Pode ser mais de uma: é do MÉDICO?', fala:'É ferramenta do médico?', pergunta:'É ferramenta do MÉDICO? (pode ser mais de uma)', rotulo:'Ferramenta', proxRot:'Próxima', op:['Sim','Não'], itens:[
    {m:'maleta', c:'Sim', d:'Do médico.'},{m:'seringa antiga', c:'Sim', d:'Do médico.'},{m:'termômetro de mercúrio', c:'Sim', d:'Do médico.'},{m:'estetoscópio', c:'Sim', d:'Do médico.'},{m:'globo', c:'Não', d:'É da professora.'},{m:'marreta', c:'Não', d:'É do construtor.'}
   ]},
@@ -414,9 +418,9 @@ return [
    {f:'Por que existem histórias diferentes a partir de um mesmo documento?', b:'Porque cada pessoa olha com a sua experiência, imaginação e ponto de vista. Por isso o historiador compara várias fontes.'},
    {f:'Como as formas de trabalho mudaram com o tempo?', b:'Surgiram novas máquinas e tecnologias: o carteiro passou da bicicleta para a moto e o aparelho com tela; o fazendeiro, dos bois para o trator.'},
    {f:'O que mudou e o que continuou nas profissões?', b:'Mudaram as ferramentas e o jeito de trabalhar. Continuou o mais importante: cuidar das pessoas, ensinar com alegria, amar a terra.'},
-   {f:'Por que o acendedor de lampião não existe mais?', b:'Porque chegou a energia elétrica, e os postes passaram a acender sozinhos.'}
+   {f:'Por que o acendedor de lampião não existe mais?', b:'Porque chegou a energia elétrica, que acende os postes das ruas.'}
   ]}
 ]}
 
-];
+].filter(REVISA_L);
 })();
