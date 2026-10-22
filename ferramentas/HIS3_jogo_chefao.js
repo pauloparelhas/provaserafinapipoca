@@ -73,15 +73,24 @@ var G=window.JOGO, J=G.J, A=window.ARTE, W=G.W, H=G.H, T=45, CHAO=450;
 var RODADAS=[['fontes','escola'],['profissoes','olhar'],['mundo','tempo','fontes']]; /* HIS3: rodada 1 = U3 (fontes e escola), 2 = U4 + pontos de vista, 3 = mundo antigo, base e fontes de novo */
 var SACADA_X0=17*T, SACADA_Y=6*T;
 var C=null;
+/* HIS3: as falas são desenhadas e lidas em PORTUGUÊS; o português herdado do Inglês falava do Conde e da tinta */
+function PT(s){ return String(s||'')
+  .replace('RÁ RÁ! Só isso, heroizinho?','Ops! Tente de novo, detetive!')
+  .replace(/estou CANSADO… mas ainda sou ASSUSTADOR! GRRR!/g,'estou CANSADA… mas ainda sou a RAINHA! Hmpf!')
+  .replace(/Os finais perdidos estão livres!/g,'As pistas do passado estão salvas!')
+  .replace(/Meus tinteiros mágicos fazem/g,'Minhas caixas de papel roído fazem').replace(/NÃO! Meu tinteiro!/g,'NÃO! Minha caixa de papel!')
+  .replace(/os tinteiros/g,'as caixas de papel roído').replace(/Manchas, VÃO!/g,'Poeira, VAI!').replace(/as manchas/g,'as bolinhas de poeira').replace(/das manchas/g,'das bolinhas de poeira').replace(/nas manchas/g,'nas bolinhas de poeira')
+  .replace(/heroizinho/g,'detetivezinho').replace(/Fada Madrinha/g,'Dra. Clio, do museu')
+  .replace(/no Conde/g,'na Rainha').replace(/até o Conde/g,'até a Rainha').replace(/as letras dele/g,'as letras dela').replace(/o Conde/g,'a Rainha').replace(/Conde Rabisco/g,'Rainha Traça').replace(/Conde/g,'Rainha'); }
 
 /* 18/10 (Paulo: "5 frases grandes, difícil de ler"): 3 telas, frases curtas */
 var ABERTURA=[
-  {en:'Inkwell Castle. Count Scribble lives here!', pt:'Castelo do Tinteiro. Aqui mora o Conde Rabisco!', fx:'trovao'},
-  {en:'"HA HA! The lost endings are MINE!"', pt:'"RÁ RÁ! Os finais perdidos são MEUS!"', fx:'conde'},
-  {en:'Answer to win stars. Hit the Count to take his letters!', pt:'Responda para ganhar estrelas. Acerte o Conde para tirar as letras dele!', fx:'tinteiros', botao:"Let's go! ▶"}
+  {en:'O Museu da Memória. A Rainha Traça está aqui!', pt:'O Museu da Memória. A Rainha Traça está aqui!', fx:'trovao'},
+  {en:'"RÁ RÁ! As pistas do passado são MINHAS!"', pt:'"RÁ RÁ! As pistas do passado são MINHAS!"', fx:'conde'},
+  {en:'Responda para ganhar estrelas. Acerte a Rainha para tirar as letras dela!', pt:'Responda para ganhar estrelas. Acerte a Rainha para tirar as letras dela!', fx:'tinteiros', botao:'Vamos! ▶'}
 ];
 
-function falaC(en,pt,dur){ if(!C) return; C.fala={en:en,pt:pt,t:0,dur:dur||3.2}; try{ say(en); }catch(e){} }
+function falaC(en,pt,dur){ if(!C) return; en=PT(pt||en); C.fala={en:en,pt:'',t:0,dur:dur||3.2}; try{ say(en); }catch(e){} }
 function inicia(L){
   C={x:19*T, y:SACADA_Y, letrasOk:0, letraVoa:[], escudo:true, fadaOn:false, visitas:0, fadaDepois:0, esperaFada:0, fadaSai:0, mortes:0, tiros:[], dons:[], fada:{x:2.4*T,y:CHAO-150,fala:null} /* flutua no alto: os botões de toque não cobrem */, downAnt:false, estado:'idle', et:0, ronda:-1, fase:'abertura', t:0, passo:0, aparece:0, escuro:1, raio:0,
      gotas:[], voando:[], letras:[], blocos:[], tinteiros:[], alvo:0, ondas:0, convertidas:0, banner:null, tRaio:6, alt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], tLetra:0, nLetra:0,
@@ -104,7 +113,7 @@ function mostraPasso(){
 function avancaIntro(){ if(!C||C.fase!=='abertura') return; C.passo++; if(C.passo>=ABERTURA.length){ fimIntro(); return; } mostraPasso(); }
 function fimIntro(){ if(!C) return; if(window.UI){ UI.legenda(null); UI.modoNivel(true); } C.aparece=1; C.escuro=0; J.estado='nivel'; SOM.musica('chefao'); J.urso.poderes.estrelas=0; comecaFase(1); estrelasHUD(); }
 
-function falaF(en,pt,dur){ if(!C) return; C.fada.fala={en:en,pt:pt,t:0,dur:dur||3.4}; try{ say(en); }catch(e){} }
+function falaF(en,pt,dur){ if(!C) return; en=PT(pt||en); C.fada.fala={en:en,pt:'',t:0,dur:dur||3.4}; try{ say(en); }catch(e){} }
 /* ---------- v5 (15/10, Paulo): as estrelas se CONQUISTAM. A fada só aparece na hora
    das perguntas; cada resposta certa vira estrelas. Cada estrela no Conde (sem escudo)
    arranca uma LETRA dele, que voa para a frase do alto: YOU ARE A SUPER PLAYER. ---------- */
@@ -191,7 +200,7 @@ function comecaFase(n){
   if(n===3){ C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); C.nLetra=0; C.tLetra=2.6; if((C.lado||1)<0) mudaLado(1,true); else { C.cansado=true; falaC('Huff… puff… I am TIRED… but I am still SCARY! GRRR!','Arf… arf… estou CANSADO… mas ainda sou ASSUSTADOR! GRRR!',3.2); } }
   C.fadaDepois=n===1?2.6:3.0; /* a fada chega logo depois da fala do Conde */
 }
-function banner(en,pt){ C.banner={en:en,pt:pt,t:0}; SOM.fx('chefao'); J.shake=6; }
+function banner(en,pt){ C.banner={en:PT(pt||en),pt:'',t:0}; SOM.fx('chefao'); J.shake=6; }
 function itensDa(r){ var ja=J.nivel.quizIds||(J.nivel.quizIds=[]), out=[];
   RODADAS[r].forEach(function(tema,k){ var n=k===0?(RODADAS[r].length>1?2:3):1; QUIZ.escolhe({tema:tema},n,ja).forEach(function(it){ ja.push(it.id); out.push(it); }); });
   return out; }
@@ -367,10 +376,10 @@ function desenhaTela(c,t){
     var y=58;
     frase(c,t);
     var vencidas=C.convertidas||0;
-    var obj=!/^p/.test(C.fase)?null:(!C.escudo?['★ the Count! Take his letters!','Jogue ★ no Conde! Tire as letras dele!']:(C.fase==='p1'?['Break his shield: knock over the inkwells!  '+C.alvo+' / 3','Quebre o escudo: derrube os tinteiros!']:(C.fase==='p2'?['Break his shield: jump on the blots!  '+Math.min(3,vencidas)+' / 3','Quebre o escudo: pule nas manchas!']:['Climb the letters to the Count!','Suba nas letras até o Conde!'])));
+    var obj=!/^p/.test(C.fase)?null:(!C.escudo?['Jogue ★ na Rainha! Tire as letras dela!','']:(C.fase==='p1'?['Quebre o escudo: derrube as caixas de papel roído!  '+C.alvo+' / 3','']:(C.fase==='p2'?['Quebre o escudo: pule nas bolinhas de poeira!  '+Math.min(3,vencidas)+' / 3','']:['Suba nas letras até a Rainha!',''])));
     if(obj){ c.font='900 17px "Nunito",Arial'; var tw=c.measureText(obj[0]).width+30; c.fillStyle='rgba(76,29,149,.8)'; A.rr(c,W/2-tw/2,y+54,tw,J.tr?44:28,14); c.fill(); c.fillStyle='#fde68a'; c.textAlign='center'; c.textBaseline='top'; c.fillText(obj[0],W/2,y+59); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText(obj[1],W/2,y+79); }
       /* como jogar a estrela: sempre à vista, no canto de baixo */
-      var dica=J.tr?'★ = ESPAÇO ou ▼':'★ = SPACE or ▼'; c.font='900 16px "Nunito",Arial'; var tw4=c.measureText(dica).width+28; c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,W/2-tw4/2,H-44,tw4,32,16); c.fill(); c.fillStyle='#fde047'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(dica,W/2,H-28); }
+      var dica=('★ = ESPAÇO ou ▼'); c.font='900 16px "Nunito",Arial'; var tw4=c.measureText(dica).width+28; c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,W/2-tw4/2,H-44,tw4,32,16); c.fill(); c.fillStyle='#fde047'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(dica,W/2,H-28); }
   }
   if(C.fala&&!J.quiz&&!C.vitoria&&C.fala.t<C.fala.dur&&C.fase!=='abertura'){ c.font='900 19px "Nunito",Arial'; var tw2=Math.min(560,c.measureText(C.fala.en).width)+36, bx=Math.max(20,Math.min(W-tw2-20,(C.x-J.cam<W/2)?C.x-J.cam+80:C.x-J.cam-tw2-30)), by=150;
     by=C.cansado?168:158; c.fillStyle='#ede9fe'; A.rr(c,bx,by,tw2,J.tr?62:44,16); c.fill(); var esqC=C.x-J.cam<W/2, bt=by+(J.tr?60:42); c.beginPath(); if(esqC){ c.moveTo(bx+30,bt); c.lineTo(bx,bt+18); c.lineTo(bx+60,bt); } else { c.moveTo(bx+tw2-30,bt); c.lineTo(bx+tw2,bt+18); c.lineTo(bx+tw2-60,bt); } c.fill(); /* o rabinho aponta para o Conde, do lado em que ele está */

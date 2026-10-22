@@ -35,7 +35,7 @@ function alternaTr(){ var on=!document.body.classList.contains('show-tr'); docum
 /* ---------- HUD ---------- */
 function hud(nome,pontos,moedas,feitas,tot,mostrar){ $('hudName').textContent=nome; $('hudPts').textContent=pontos; $('hudCoinN').textContent=moedas; $('hudArenaN').textContent=feitas+'/'+tot; $('hudArena').style.display=mostrar?'flex':'none'; }
 function toast(txt,dur,pt){ var t=$('toast'); t.innerHTML=bi(txt,pt,'small'); t.classList.remove('show'); void t.offsetWidth; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){ t.classList.remove('show'); },dur||2200); }
-function modoNivel(on){ $('touch').style.display=on?'block':'none'; }
+function modoNivel(on){ escondeDicaPoder(); $('touch').style.display=on?'block':'none'; }
 function modoMapa(on){ var b=$('mapBtns'); if(b) b.style.display=on?'flex':'none'; document.body.classList.toggle('nomapa',!!on); }
 function hudArena(on){ document.body.classList.toggle('naArena',!!on); }
 /* capa: botão grande 'Open the book' */
@@ -51,7 +51,8 @@ function dicaPoder(alvo){ if(!window.PODERES) return; var d=PODERES.dicaPoder();
   t.innerHTML=bi(d.en,d.pt,'small'); var r=alvo.getBoundingClientRect(), u=$('ui').getBoundingClientRect(), esc=u.width/960||1; t.style.left=Math.max(8,Math.min(960-328,(r.left-u.left)/esc-20))+'px'; t.style.top=((r.bottom-u.top)/esc+8)+'px'; if(alvo.id==='tAct'){ t.style.top=((r.top-u.top)/esc-110)+'px'; t.style.left=Math.max(8,(r.left-u.left)/esc-240)+'px'; }
   t.classList.add('show'); clearTimeout(tipT); tipT=setTimeout(function(){ t.classList.remove('show'); },4500); }
 function coracoes(n,dano){ var d=$('hudVida'); if(!d) return; var h=''; for(var i=0;i<3;i++) h+='<span class="cor'+(i<n?' on':'')+'">'+SVG.coracao+'</span>'; d.innerHTML=h; if(dano){ d.classList.remove('dano'); void d.offsetWidth; d.classList.add('dano'); } }
-function quizBotoes(on){ $('quizBtns').classList.toggle('show',!!on); }
+function escondeDicaPoder(){ var tp=$('tipPoder'); if(tp) tp.classList.remove('show'); clearTimeout(tipT); }
+function quizBotoes(on){ escondeDicaPoder(); $('quizBtns').classList.toggle('show',!!on); }
 /* corrida: ◀ ▶ somem (o carro anda sozinho); PULAR vira ▲ e o ▼ desce de faixa */
 function modoCorrida(on){ document.body.classList.toggle('corrida',!!on); $('tJump').innerHTML=on?'&#9650;':'PULAR'; }
 
@@ -127,7 +128,7 @@ function comoJogar(cb){
    ['','<b>Cartas de fonte:</b> cada personagem faz 3 perguntas e devolve uma pista do passado'],
    ['','<b>Poder da fase:</b> pegue o objeto brilhando no começo de cada fase'],
    ['<b>Checkpoint</b> the green flag saves your place','Ponto de controle: a bandeira verde guarda o seu lugar'],
-   ['','<b>Traças:</b> pule em cima das bolinhas de poeira; desvie das traçinhas']].forEach(function(x){ h+='<div>'+x[1].replace(/^([^:<]+):/,'<b>$1:</b>')+'</div>'; });
+   ['','<b>Traças:</b> pule em cima das bolinhas de poeira; desvie das tracinhas']].forEach(function(x){ h+='<div>'+x[1].replace(/^([^:<]+):/,'<b>$1:</b>')+'</div>'; });
   h+='</div><button class="mbtn pri" id="mOk">'+bi('Got it!','Entendi!')+'</button>';
   menu(h,{mOk:function(){ fechaMenu(); if(cb) cb(); }});
 }

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-"""ING3 (copia adaptada do gerar_pagina.py do LP3). Monta ferramentas/ING3_video.html e a legenda
-em portugues ferramentas/media/video_ing3_pt.vtt.
+"""HIS3 (copia do ING3). Monta ferramentas/HIS3_video.html e a legenda
+ferramentas/media/video_his3_pt.vtt.
 
 Imersao total em ingles: nenhuma palavra em portugues visivel. O portugues so aparece pela
 bandeira do Brasil (toggleTr do serafina-core, chave 'ing3_tr' — a mesma do resto do site):
@@ -14,22 +14,15 @@ import json, os, subprocess, sys, html
 SCR = sys.argv[1]
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.abspath(os.path.join(AQUI, "..", "..", ".."))
-MP4 = os.path.join(RAIZ, "ferramentas", "media", "video_ing3.mp4")
-VTT = os.path.join(RAIZ, "ferramentas", "media", "video_ing3_pt.vtt")
+MP4 = os.path.join(RAIZ, "ferramentas", "media", "video_his3.mp4")
+VTT = os.path.join(RAIZ, "ferramentas", "media", "video_his3_pt.vtt")
 tl = json.load(open(os.path.join(SCR, "timeline.json"), encoding="utf-8"))
 dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=nk=1:nw=1", MP4],
                            capture_output=True, text=True).stdout)
 assert abs(dur - tl["total"]) < 0.5, (dur, tl["total"])
-VER = "20261014"
+VER = "20261022"
 
-NOME_PT = {
-    "ft": "O que é conto de fadas?", "chars": "Personagens", "goodbad": "Bom, mau e um ajudante especial",
-    "settings": "Cenários", "events": "Era uma vez…", "magic": "Magia", "numbers": "Três e sete",
-    "lesson": "Uma lição", "real": "Real ou faz de conta?", "circle": "História circular",
-    "mouse": "Se você der um biscoito a um rato", "cause": "Causa e efeito", "ifthen": "Se… Então…",
-    "poetry": "Poesia e poema", "elements": "Elementos do poema", "rhyme": "Rima, ritmo e imagens",
-    "recap": "Lembre!",
-}
+NOME_PT = {}
 
 
 def mmss(s):
@@ -58,7 +51,7 @@ itens = []
 for c in tl["cenas"]:
     t = max(0, c["ini"] + 0.35)  # depois do cruzamento entre cenas
     itens.append(f'        <li><button class="cap" data-t="{t:.2f}"><span class="tm">{mmss(t)}</span>'
-                 f'<span class="nm">{html.escape(c["nome"])}<span class="tr">{html.escape(NOME_PT[c["id"]])}</span></span></button></li>')
+                 f'<span class="nm">{html.escape(c["nome"])}</span></button></li>')
 minutos = round(dur / 60)
 cues_js = json.dumps([[round(a, 2), round(b, 2), t] for a, b, t in cues], ensure_ascii=False)
 
@@ -66,12 +59,12 @@ FLAG = ('<svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rec
         '<path d="M14 3 25 10 14 17 3 10z" fill="#ffdf00"/><circle cx="14" cy="10" r="4.2" fill="#002776"/></svg>')
 
 PAG = f'''<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
-<title>The video — English: fairy tales, stories and poems</title>
+<title>O vídeo — História: Detetives do Tempo</title>
 <link rel="stylesheet" href="serafina-core.css?v={VER}">
 <style>
 /* ============================================================
@@ -139,44 +132,41 @@ h2{{font-size:calc(1.02rem*var(--fs));font-weight:900;margin:20px 0 10px;color:v
   <div class="topbar">
     <button class="iconbtn sera-home" id="btnHome" title="Home" aria-label="Home" onclick="goHome()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button>
-    <span class="title">The video · English</span>
-    <button class="iconbtn" id="trbtn" title="Portuguese" aria-label="Portuguese" onclick="toggleTr()">{FLAG}</button>
-    <button class="iconbtn" id="btnFontDown" title="Smaller text" aria-label="Smaller text" onclick="fs(-1)">A-</button>
-    <button class="iconbtn" id="btnFontUp" title="Bigger text" aria-label="Bigger text" onclick="fs(1)">A+</button>
-    <button class="iconbtn" id="themeBtn" title="Theme" aria-label="Theme">&#9788;</button>
-    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen" aria-label="Full screen" onclick="toggleLock()">
+    <span class="title">O vídeo · História</span>
+    <button class="iconbtn" id="btnFontDown" title="Letra menor" aria-label="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" id="btnFontUp" title="Letra maior" aria-label="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" id="themeBtn" title="Tema" aria-label="Tema">&#9788;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" aria-label="Tela cheia" onclick="toggleLock()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
   </div>
   <div class="stage">
     <div class="card">
-      <div class="aviso">Under construction — content not yet reviewed<span class="tr">Em construção — conteúdo ainda não validado</span></div>
-      <h1>Fairy tales, stories and poems<span class="tr">Contos de fadas, histórias e poemas</span></h1>
-      <p class="sub">About {minutos} minutes of cartoons with Lia, Theo, Bia and Pip. Tap a part of the list to jump straight to it.
-        <span class="tr">Uns {minutos} minutos de desenho com a Lia, o Theo, a Bia e o Pip. Toque numa parte da lista para pular direto para ela.</span></p>
+      <h1>Detetives do Tempo</h1>
+      <p class="sub">Uns {minutos} minutos com o Tic e os detetives: tudo da prova de História. Toque numa parte da lista para pular direto para ela.</p>
 
-      <video id="vid" controls playsinline preload="metadata" poster="media/video_ing3_poster.jpg?v={VER}">
-        <source src="media/video_ing3.mp4?v={VER}" type="video/mp4">
-        If the video does not open here, ask a grown-up to open the file <b>media/video_ing3.mp4</b>.
+      <video id="vid" controls playsinline preload="metadata" poster="media/video_his3_poster.jpg?v={VER}">
+        <source src="media/video_his3.mp4?v={VER}" type="video/mp4">
+        Se o vídeo não abrir aqui, peça a um adulto para abrir o arquivo <b>media/video_his3.mp4</b>.
       </video>
       <div class="ptcap" id="ptcap" aria-live="polite"></div>
 
-      <h2>The parts of the video<span class="tr">As partes do vídeo</span></h2>
+      <h2>As partes do vídeo</h2>
       <ul class="caps" id="caps">
 {chr(10).join(itens)}
       </ul>
 
-      <button class="acao" onclick="location.href='ING3_simulado.html'">Now practise in the test &rarr;<span class="tr">Agora treinar no simulado</span></button>
-      <button class="acao pass" onclick="location.href='ING3_estudo.html'">Study the lessons<span class="tr">Estudar as lições</span></button>
+      <button class="acao" onclick="location.href='HIS3_simulado.html'">Agora treinar no simulado &rarr;</button>
+      <button class="acao pass" onclick="location.href='HIS3_estudo.html'">Estudar no Caderno do Detetive</button>
     </div>
   </div>
 </div>
 <div class="unlockov" id="unlockov">
   <div class="ulk-emo">&#128274;</div>
-  <h2>Unlock the screen?<small>Ask a grown-up</small></h2>
-  <button class="ulk-yes" onclick="doUnlock()">Unlock</button>
-  <button class="ulk-no" onclick="cancelUnlock()">Keep watching</button>
+  <h2>Desbloquear a tela?<small>Peça para um adulto</small></h2>
+  <button class="ulk-yes" onclick="doUnlock()">Desbloquear</button>
+  <button class="ulk-no" onclick="cancelUnlock()">Continuar assistindo</button>
 </div>
-<script>window.SERA_CFG={{trKey:'ing3_tr',lang:'en-US',home:'../index.html',stars:110,somKey:'ing3_som'}};</script>
+<script>window.SERA_PT=true; window.SERA_CFG={{trKey:null,lang:'pt-BR',home:'../index.html',stars:110,somKey:'his3_som'}};</script>
 <script src="serafina-core.js?v={VER}"></script>
 <script>
 (function(){{
@@ -191,7 +181,7 @@ h2{{font-size:calc(1.02rem*var(--fs));font-weight:900;margin:20px 0 10px;color:v
     bts.forEach(function(b,i){{ b.classList.toggle('on',i===on); }});
   }});
   /* legenda em portugues: so com a bandeira ligada; aparece na faixa abaixo do player */
-  /* mesmas falas e tempos de media/video_ing3_pt.vtt, embutidos (o file:// bloqueia <track>) */
+  /* mesmas falas e tempos de media/video_his3_pt.vtt, embutidos (o file:// bloqueia <track>) */
   var CUES={cues_js};
   var cap=document.getElementById('ptcap');
   function mostra(){{
@@ -204,12 +194,12 @@ h2{{font-size:calc(1.02rem*var(--fs));font-weight:900;margin:20px 0 10px;color:v
   mostra();
 }})();
 </script>
-<script>window.SERA_EN=true; window.SERA_ACCENT={{accent:'#f472b6'}};</script>
+<script>window.SERA_ACCENT={{accent:'#a855f7'}};</script>
 <script src="sera_theme.js?v={VER}"></script>
 </body>
 </html>
 '''
-open(os.path.join(RAIZ, "ferramentas", "ING3_video.html"), "w", encoding="utf-8", newline="\n").write(PAG)
-print("ING3_video.html ok; duracao", round(dur, 2), "; legendas PT:", len(cues))
+open(os.path.join(RAIZ, "ferramentas", "HIS3_video.html"), "w", encoding="utf-8", newline="\n").write(PAG)
+print("HIS3_video.html ok; duracao", round(dur, 2), "; legendas PT:", len(cues))
 for c in tl["cenas"]:
     print(f"  {mmss(c['ini'] + .35)}  ({c['ini']:.2f}s)  {c['nome']}")

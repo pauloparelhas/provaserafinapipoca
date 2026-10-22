@@ -69,7 +69,7 @@ function atualizaNivel(dt){
 }
 function dicas(){ /* só o indispensável: o ovo do Pip, na primeira vez */
   var u=J.urso, M=J.mundo, d=window.PODERES?PODERES.dica():null;
-  if(!d&&!J.prog.pipVisto) M.ovos.forEach(function(o){ if(!o.chocado && Math.abs(o.x-u.x)<160) d={x:o.x,y:o.y-80,txt:'Touch the egg!',pt:'Encoste no ovo!'}; });
+  if(!d&&!J.prog.pipVisto) M.ovos.forEach(function(o){ if(!o.chocado && Math.abs(o.x-u.x)<160) d={x:o.x,y:o.y-80,txt:'Monte no Pangaré!',pt:'Monte no Pangaré!'}; });
   if(!d&&J.mundo) J.mundo.moradores.forEach(function(m){ if(m.perto&&!J.chefe) d={x:m.x,y:m.y-198,txt:m.feito?'Play again? Press ▼':'Press ▼ to go in',pt:m.feito?'Jogar de novo? Aperte ▼':'Aperte ▼ para entrar',botao:true}; });
   if(!d&&J.mundo&&window.PERIGOS&&J.nivel&&J.nivel.sub){ var cn=PERIGOS.canoSob(); if(cn) d={x:u.x,y:u.y-G.URSO_H*TAM[u.tam]-30,txt:'Press ▼ to go down the pipe',pt:'Aperte ▼ para entrar no cano',botao:true}; }
   J.dica=d;
@@ -155,7 +155,7 @@ function mapaHover(lx,ly){ if(J.estado!=='mapa'||J.mapaAnim) return; var i=noEm(
 /* ---------- intro: biblioteca → o livro abre → Conde → herói entra ---------- */
 var CENAS_INTRO=[
   {en:'', pt:'No Museu da Memória ficam guardadas as pistas do passado: cartas, fotos, mapas, brinquedos e histórias contadas.', dur:5},
-  {en:'', pt:'Mas a Rainha Traça e as traçinhas começaram a roer tudo! Sem pistas, todo mundo esquece de onde veio.', dur:5.5},
+  {en:'', pt:'Mas a Rainha Traça e as tracinhas começaram a roer tudo! Sem pistas, todo mundo esquece de onde veio.', dur:5.5},
   {en:'', pt:'"Trim! Socorro!", gritou o Tic, o despertador do museu. "Precisamos de detetives do tempo!"', dur:4.5},
   {en:'', pt:'Pegue a sua lupa! Viaje pelo tabuleiro do mapa e recupere as cartas de fonte histórica.', dur:5}
 ];

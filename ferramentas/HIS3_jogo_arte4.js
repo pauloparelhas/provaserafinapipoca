@@ -48,7 +48,7 @@ function longeGin(c,cam,t){
       c.fillStyle='#f8fafc'; rr(c,bx-120,100,240,50,6); c.fill(); c.fillStyle='#c0264b'; c.fillRect(bx-120,100,240,7); c.fillRect(bx-120,143,240,7);
       c.fillStyle='#1e3a8a'; c.font='900 25px "Nunito","Segoe UI",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('RHYTHM GYM',bx,126); }
     var sx=ox+1120; if(sx>-200&&sx<W+200){ c.fillStyle='#0e1329'; rr(c,sx-80,96,160,84,8); c.fill(); c.strokeStyle='#3b4f9a'; c.lineWidth=3; rr(c,sx-80,96,160,84,8); c.stroke();
-      c.fillStyle='#93c5fd'; c.font='800 12px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('SCORE',sx,112); brilho(c,sx,146,60,'rgba(251,191,36,.35)',1); c.fillStyle='#fbbf24'; c.font='900 36px "Segoe UI",Arial'; c.fillText('9.95',sx,148); } });
+      c.fillStyle='#93c5fd'; c.font='800 12px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; c.fillText('PLACAR',sx,112); brilho(c,sx,146,60,'rgba(251,191,36,.35)',1); c.fillStyle='#fbbf24'; c.font='900 36px "Segoe UI",Arial'; c.fillText('9.95',sx,148); } });
   /* muro acolchoado */
   c.fillStyle=lin(c,0,408,0,452,'#22306a','#141b40'); c.fillRect(0,408,W,44); c.fillStyle='#4a62b8'; c.fillRect(0,406,W,4);
   rep(cam,240,function(ox){ c.fillStyle='rgba(255,255,255,.07)'; rr(c,ox+10,416,220,28,6); c.fill(); c.fillStyle='rgba(255,255,255,.18)'; A.estrela(c,ox+120,430,8,'rgba(250,204,21,.55)',0); });
@@ -102,7 +102,7 @@ function platGin(c,p){
    ============================================================ */
 A.CENAS.estadio ={ceu:['#0b1640','#24418f','#f2b170'], chaoTop:'#5cbf60', chao:'#43a047', chaoBase:'#2b6b33', plat:'#4caf50', platTop:'#ffffff', part:'', musica:'mar'};
 var CAM_E=['#dc2626','#dc2626','#f8fafc','#2563eb','#2563eb','#facc15','#16a34a','#f97316'];
-var FRASES=['GOAL!','FAIR PLAY','KICK OFF','GO TEAM!','CAUSE & EFFECT','WELL DONE!','SCORE!'];
+var FRASES=['GOL!','JOGO LIMPO','VAI, TIME!','FEIRA DAS PROFISSÕES','MUITO BEM!','DETETIVES!'];
 function ceuEst(c,t){ ceuG(c,[[0,'#0b1640'],[.4,'#24418f'],[.75,'#b9708a'],[1,'#f2b170']]); c.fillStyle='#fff'; for(var i=0;i<30;i++){ c.globalAlpha=.3+.5*Math.abs(Math.sin(t*1.3+i)); circ(c,hash(i+5)*W,hash(i+50)*150,hash(i)*1.2+.4); c.fill(); } c.globalAlpha=1; }
 function bola(c,x,y,r){ c.fillStyle='#fff'; circ(c,x,y,r); c.fill(); c.fillStyle='#1f2937'; c.beginPath(); for(var i=0;i<5;i++){ var a=-PI/2+i*TAU/5; c.lineTo(x+Math.cos(a)*r*.38,y+Math.sin(a)*r*.38); } c.fill(); for(i=0;i<5;i++){ a=-PI/2+i*TAU/5; c.strokeStyle='#1f2937'; c.lineWidth=r*.12; linha(c,x+Math.cos(a)*r*.38,y+Math.sin(a)*r*.38,x+Math.cos(a)*r*.95,y+Math.sin(a)*r*.95); } c.strokeStyle='rgba(0,0,0,.3)'; c.lineWidth=1; circ(c,x,y,r); c.stroke(); }
 function longeEst(c,cam,t){

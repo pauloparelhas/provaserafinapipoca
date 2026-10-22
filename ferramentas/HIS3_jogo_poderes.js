@@ -73,7 +73,7 @@ function pedeItem(it){
 }
 function entregaItem(it,ajuda){ if(it.ganho) return; it.ganho=true; var n=NOME_ITEM[it.nome]||[it.nome,it.nome]; G.pegaItem(it); log({ev:'ganhaItem',nome:it.nome,ajuda:!!ajuda});
   setTimeout(function(){ G.toast(ajuda?'O Tic te ajuda: '+n[1]+'!':'Certo! Você ganhou '+n[1]+'!',2400); },50); }
-var CARTAO_GUARDANAPO={tit:'A carta!',titPt:'A carta!',txt:'It is a parachute! Jump, then HOLD JUMP to float over the sink.',txtPt:'Vira paraquedas! Pule e SEGURE PULAR para flutuar por cima da pia.'};
+var CARTAO_GUARDANAPO={tit:'A carta!',titPt:'A carta!',txt:'It is a parachute! Jump, then HOLD JUMP to float over the sink.',txtPt:'Vira paraquedas! Pule e SEGURE PULAR para flutuar por cima do buraco.'};
 
 function fase(){ return J.faseAtual?J.faseAtual.id:0; }
 function poder(){ var P=TAB[fase()]; return P&&!P.desligado?P:null; }
@@ -96,7 +96,7 @@ function toca(wx,wy){ var M=J.mundo; if(!M) return false;
 function dica(){ var it=itemPerto(); if(!it) return null; var v=verbo(it); return {x:it.x,y:it.y-(it.tipo==='historia'?62:150),txt:v[0]+' Press ▼',pt:v[1]+' Aperte ▼',botao:true}; }
 function alvo(){ var M=J.mundo, u=J.urso; if(!M) return null; var r=null, trava=(M.modo==='voo'&&!u.poderes.capa)||(M.modo==='nado'&&!u.poderes.traje); /* barreira ativa: a seta volta para o item */
   M.itens.forEach(function(it){ if(!r&&!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa')&&(trava||it.x>u.x-300)) r={x:it.x,y:it.y-150,tipo:'poder',txt:verbo(it)[0],txtPt:verbo(it)[1]}; });
-  M.ovos.forEach(function(o){ if(!r&&!o.chocado&&o.x>u.x-300) r={x:o.x,y:o.y-70,tipo:'poder',txt:'Touch the egg!',txtPt:'Toque no ovo!'}; });
+  M.ovos.forEach(function(o){ if(!r&&!o.chocado&&o.x>u.x-300) r={x:o.x,y:o.y-70,tipo:'poder',txt:'Monte no Pangaré!',txtPt:'Monte no Pangaré!'}; });
   M.itens.forEach(function(it){ if(!r&&!it.pego&&peloQuiz(it)&&it.x>u.x-300&&it.x<u.x+700) r={x:it.x,y:it.y-110,tipo:'poder',txt:'Answer here!',txtPt:'Responda aqui!'}; }); /* a seta leva a criança ao objeto da história */
   return r; }
 
@@ -143,7 +143,7 @@ var VEL={faisca:{vx:430,vy:0,g:0,alc:200},bolha:{vx:220,vy:-18,g:0,alc:240},vent
 function tiroAtual(){ var u=J.urso; if(!u) return null; var P=poder(); if(fase()===8) return u.poderes.tiro||null; if(!P||!P.tiro||!u.poderes.tiro) return null; if(P.montado&&!u.montado) return null; return P.tiro; }
 function atira(){
   var u=J.urso; if(fase()===9||!poder()) return false; if(J.estado!=='nivel'||!u) return true;
-  var s=tiroAtual(); if(!s){ if(poder().montado&&u.poderes.tiro) G.toast('Ride Pip first!',1400,'Monte no Pip primeiro!'); return true; }
+  var s=tiroAtual(); if(!s){ if(poder().montado&&u.poderes.tiro) G.toast('Monte no Pangaré primeiro!',1400); return true; }
   if((J.recarga||0)>0) return true; J.recarga=.45;
   var v=VEL[s], s0=G.TAM[u.tam], n=s==='faisca'?3:1;
   if(s==='bola'){ u.chuteAte=J.t+.32; J.estrelas.push({x:u.x+u.dir*30*s0,y:u.y-12*s0,vx:u.dir*v.vx,vy:v.vy,g:v.g,alc:v.alc,dist:0,rot:0,skin:s,quiques:0}); SOM.fx('pisao'); log({ev:'tiro',skin:s}); return true; } /* sai do PÉ */

@@ -93,10 +93,10 @@ SCENES.fontes = (ctx, lt, S) => {
     kw(ctx, 'pistas do passado', 640, 215, 46, pop(lt, S.w('pistas') - .1), '#fff3bf', '#7c2d12', { border: '#f59f00' });
     const kr = ap(lt, S.w('redor') - .3, .6);
     board(ctx, 150, 280, 980, 250, ap(lt, S.w('pistas') + .2, .4));
-    [[1, 230, 360], [3, 420, 420], [5, 860, 420], [7, 1050, 360], [4, 640, 470]].forEach(([n, x, y], i) => {
+    [[1, 300, 440], [3, 470, 440], [4, 640, 440], [5, 810, 440], [7, 980, 440]].forEach(([n, x, y], i) => {
       const k = pop(lt, S.w('pistas') + .3 + i * .2); popAt(ctx, k, x, y, () => trilhaD(ctx, n, x, y, 2.2, lt));
     });
-    if (kr > 0) { ctx.save(); ctx.globalAlpha *= kr; board(ctx, 330, 290, 620, 76, 1, 'rgba(255,253,245,.95)'); txt(ctx, 'Tudo pode contar uma história!', 640, 328, 34, '#2b2f6b'); ctx.restore(); }
+    if (kr > 0) { ctx.save(); ctx.globalAlpha *= kr; txt(ctx, 'Tudo pode contar uma história!', 640, 330, 40, '#2b2f6b'); ctx.restore(); }
     ctx.restore();
   }
   const a2 = ph(lt, t2);
@@ -125,17 +125,16 @@ const CARTAS4 = [
 SCENES.quatro = (ctx, lt, S) => {
   artBg(ctx, 'casa', lt, { pan: 8 });
   sceneTag(ctx, 'As 4 cartas', ap(lt, .1, .4));
-  const ends = [S.f(1) - .25, S.f(2) - .25, S.f(3) - .25, S.fe(3) + .5];
+  const fe = S.fe(3), ends = [S.f(1) - .25, S.f(2) - .25, S.f(3) - .25, fe + .05];
+  const af = easeInOut(ap(lt, fe + .1, .7));          /* final: leque vai para o centro */
   CARTAS4.forEach((C, i) => {
     const a = ph(lt, i ? ends[i - 1] : 0, ends[i]);
     if (a <= 0) return;
     const cor = COR_F[C.t];
     ctx.save(); ctx.globalAlpha *= a;
-    const kc = pop(lt, S.f(i) - .05, .55);
-    popAt(ctx, kc, 250, 330, () => cartaD(ctx, C.t, 250, 330, 3.9, lt));
     board(ctx, 450, 120, 770, 400, 1, 'rgba(255,253,245,.95)', cor);
     kw(ctx, C.nome, 835, 185, 52, pop(lt, S.f(i) + .05), cor, '#fff');
-    lab(ctx, C.sub, 835, 272, ap(lt, S.w(C.subW, C.t === 'material' ? 0 : 0) - .2, .4), '#23314f', 40);
+    lab(ctx, C.sub, 835, 272, ap(lt, S.w(C.subW) - .2, .4), '#23314f', 40);
     const n = C.ex.length, cols = n > 2 ? 2 : n;
     C.ex.forEach(([w, s], j) => {
       const cx = cols === 1 ? 835 : 835 + ((j % cols) - .5) * 340, cy = (n > 2 ? 370 : 390) + Math.floor(j / cols) * 84;
@@ -143,14 +142,17 @@ SCENES.quatro = (ctx, lt, S) => {
     });
     ctx.restore();
   });
-  /* final: as 4 em leque */
-  const af = ap(lt, S.fe(3) + .4, .5);
-  if (af > 0) {
-    ctx.save(); ctx.globalAlpha *= af;
-    ['oral', 'escrita', 'visual', 'material'].forEach((t, i) => cartaD(ctx, t, 640 + (i - 1.5) * 190, 330 + Math.abs(i - 1.5) * 18, 3.2, lt, (i - 1.5) * .12));
-    ctx.restore();
-  }
-  mor(ctx, 'tic', 95, GROUND, lt, 1, 1.4, S.talk(lt) > 0);
+  /* leque das cartas ja apresentadas; a carta da vez fica grande na frente */
+  let cur = -1; for (let i = 0; i < 4; i++) if (lt >= S.f(i) - .3) cur = i;
+  const ord = [0, 1, 2, 3].filter(j => j !== cur).concat(cur >= 0 ? [cur] : []);
+  ord.forEach(j => {
+    const k = pop(lt, S.f(j) - .3, .55); if (k <= 0) return;
+    const big = j === cur ? 1 - af : 0;
+    const fx = lerp(230 + (j - 1.5) * 52, 640 + (j - 1.5) * 200, af), fy = lerp(360 + Math.abs(j - 1.5) * 12, 330 + Math.abs(j - 1.5) * 20, af);
+    const x = lerp(fx, 250, big), y = lerp(fy, 300, big), sc = lerp(lerp(2.5, 3.4, af), 3.7, big), rot = lerp((j - 1.5) * lerp(.2, .12, af), 0, big);
+    popAt(ctx, k, x, y, () => cartaD(ctx, CARTAS4[j].t, x, y, sc, lt, rot));
+  });
+  mor(ctx, 'tic', 85, GROUND, lt, 1, 1.3, S.talk(lt) > 0);
 };
 
 /* 4. PEGADINHAS */
@@ -197,17 +199,17 @@ SCENES.pegadinhas = (ctx, lt, S) => {
   if (a2 > 0) {
     ctx.save(); ctx.globalAlpha *= a2;
     mor(ctx, 'vovo', 640, GROUND, lt, 1, 1.9, lt > S.w('contou') - .1 && S.talk(lt) > 0);
-    const ke = pop(lt, W(S, 'carta', 2) - .1), ko = pop(lt, W(S, 'contou', 2) - .1);
+    const ke = pop(lt, wF(S, 'carta', 2) - .1), ko = pop(lt, wF(S, 'contou', 2) - .1);
     board(ctx, 90, 130, 380, 330, ke, 'rgba(255,253,245,.95)', COR_F.escrita);
     popAt(ctx, ke, 200, 260, () => trilhaD(ctx, 3, 200, 250, 3.2, lt));
     popAt(ctx, ke, 370, 260, () => cartaD(ctx, 'escrita', 370, 260, 2.2, lt));
     lab(ctx, 'escreveu', 280, 375, ke, COR_F.escrita, 36);
-    regra(ctx, 280, 430, 260, 'ESCRITA', COR_F.escrita, pop(lt, W(S, 'escrita', 2) - .1));
+    regra(ctx, 280, 430, 260, 'ESCRITA', COR_F.escrita, pop(lt, wF(S, 'escrita', 2) - .1));
     board(ctx, 810, 130, 380, 330, ko, 'rgba(255,253,245,.95)', COR_F.oral);
     bubble(ctx, 920, 245, 'Era uma\nvez...', ko, 840, 330, { size: 28, color: '#5f3dc4' });
     popAt(ctx, ko, 1100, 260, () => cartaD(ctx, 'oral', 1100, 260, 2.2, lt));
     lab(ctx, 'contou falando', 1000, 375, ko, COR_F.oral, 34);
-    regra(ctx, 1000, 430, 220, 'ORAL', COR_F.oral, pop(lt, W(S, 'oral', 2) - .1));
+    regra(ctx, 1000, 430, 220, 'ORAL', COR_F.oral, pop(lt, wF(S, 'oral', 2) - .1));
     ctx.restore();
   }
 };
@@ -221,6 +223,7 @@ SCENES.escola = (ctx, lt, S) => {
   const a0 = ph(lt, 0, t1);
   if (a0 > 0) {
     ctx.save(); ctx.globalAlpha *= a0;
+    board(ctx, 250, 90, 900, 270, ap(lt, .3, .4));
     kw(ctx, 'A escola tem história', 680, 150, 54, pop(lt, S.w('escola') - .1), '#c92a2a', '#fff');
     [['acontecimentos', 'acontecimentos', '#e8590c'], ['pessoas', 'pessoas', '#1c7ed6'], ['mudanças', 'mudanças', '#2f9e44']]
       .forEach(([w, s, c], i) => kw(ctx, s, 680 + (i - 1) * 330, 290, 36, pop(lt, S.w(w) - .1), '#fff', c, { border: c, minW: 280 }));
@@ -255,15 +258,18 @@ SCENES.escola = (ctx, lt, S) => {
   const a3 = ph(lt, t3);
   if (a3 > 0) {
     ctx.save(); ctx.globalAlpha *= a3;
+    board(ctx, 290, 130, 920, 390);
     const kg = pop(lt, S.w('guardar') - .1);
-    popAt(ctx, kg, 520, 340, () => {
-      rr(ctx, 400, 300, 240, 140, 14); ctx.fillStyle = '#a0662f'; ctx.fill(); rr(ctx, 400, 300, 240, 36, 14); ctx.fillStyle = '#8a5428'; ctx.fill();
-      trilhaD(ctx, 5, 470, 280, 2.2, lt); trilhaD(ctx, 3, 570, 285, 2.2, lt); trilhaD(ctx, 4, 520, 268, 2, lt);
+    popAt(ctx, kg, 500, 400, () => {
+      ctx.save(); ctx.translate(500, 330); ctx.rotate(-.35); rr(ctx, -110, -70, 220, 70, 12); ctx.fillStyle = '#8a5428'; ctx.fill(); ctx.restore();
+      trilhaD(ctx, 5, 450, 320, 2.3, lt); trilhaD(ctx, 4, 510, 305, 2.2, lt); trilhaD(ctx, 3, 565, 322, 2.2, lt);
+      rr(ctx, 390, 330, 220, 130, 14); ctx.fillStyle = '#a0662f'; ctx.fill(); ctx.fillStyle = '#8a5428'; ctx.fillRect(390, 380, 220, 14);
+      rr(ctx, 488, 372, 24, 30, 5); ctx.fillStyle = '#fcc419'; ctx.fill();
     });
-    kw(ctx, 'Guardar documentos', 820, 220, 42, kg, '#fff', '#7c2d12', { border: '#f59f00' });
+    kw(ctx, 'Guardar documentos', 900, 220, 40, kg, '#fff', '#7c2d12', { border: '#f59f00' });
     const km = pop(lt, S.w('memórias') - .1);
-    kw(ctx, 'preserva memórias', 860, 330, 48, km, '#2f9e44', '#fff');
-    popAt(ctx, km, 860, 420, () => { heart(ctx, 800, 425, .8); heart(ctx, 920, 425, .8, '#ff8787'); });
+    kw(ctx, 'preserva memórias', 900, 330, 46, km, '#2f9e44', '#fff');
+    popAt(ctx, km, 900, 430, () => { heart(ctx, 850, 435, .8); heart(ctx, 950, 435, .8, '#ff8787'); });
     ctx.restore();
   }
 };

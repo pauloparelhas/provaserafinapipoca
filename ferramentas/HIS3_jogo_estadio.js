@@ -38,8 +38,8 @@ function resultado(){
   S.q.alvos.forEach(function(x){ x.estado= x.certa?'certa':(x===a?'errada':'apagada'); });
   if(ok){ S.gols++; J.stats.acertos++; G.pontua(100); SOM.fx('vitoria'); S.festa=1.6; }
   else { SOM.fx('erro'); J.shake=4; }
-  var it=S.q.it; fala((ok?'GOAL! ':'Saved! ')+(it.ex||''),(ok?'GOL! ':'Defendeu! ')+(it.ex_pt||''),ok?'#dcfce7':'#fee2e2');
-  if(S.i%3===2){ S.paginas++; setTimeout(function(){ if(S) G.toast('You found a lost page! ('+S.paginas+' of 3)',2400,'Você achou uma página perdida! ('+S.paginas+' de 3)'); },800); }
+  var it=S.q.it; fala((ok?'GOL! ':'Defendeu! ')+(it.ex||''),(ok?'GOL! ':'Defendeu! ')+(it.ex_pt||''),ok?'#dcfce7':'#fee2e2');
+  if(S.i%3===2){ S.paginas++; setTimeout(function(){ if(S) G.toast('You found a lost page! ('+S.paginas+' of 3)',2400,'Você recuperou uma carta de fonte! ('+S.paginas+' de 3)'); },800); }
 }
 function atualiza(dt){
   if(!S) return; S.t+=dt; if(S.fala) S.fala.t+=dt; if(S.festa>0) S.festa-=dt;

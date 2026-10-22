@@ -182,7 +182,7 @@ function trilhaD(ctx, n, x, y, s, lt) { withT(ctx, x, y, s, 0, () => A.itemTrilh
 function poderD(ctx, tipo, x, y, s, lt) { withT(ctx, x, y, s, 0, () => A.itemPoder(ctx, tipo, 0, 0, lt)); }
 function tracaD(ctx, x, y, s, lt, dir = 1) { withT(ctx, x, y, s, 0, () => A.traca(ctx, 0, 0, lt, dir, true)); }
 /* instante da palavra w DENTRO da frase fi (evita pegar a mesma palavra de outra frase) */
-function W(S, w, fi, n = 0) {
+function wF(S, w, fi, n = 0) {
   const hits = S.sc.palavras.filter(p => p.f === fi && p.w === w);
   if (!hits[n]) { const key = S.sc.id + ':' + w + '@' + fi; if (!MISSING.includes(key)) MISSING.push(key); return 1e9; }
   return hits[n].ini - S.sc.ini;
@@ -308,8 +308,8 @@ function icoMuseu(ctx, x, y, s) { icoBase(ctx, x, y, s, () => {
   for (let i = 0; i < 5; i++) { ctx.fillStyle = '#f8f9fa'; ctx.fillRect(-56 + i * 26, -26, 14, 60); }
   ctx.fillStyle = '#ced4da'; ctx.fillRect(-72, 34, 144, 12); }); }
 function icoEstatua(ctx, x, y, s) { icoBase(ctx, x, y, s, () => {
-  ctx.fillStyle = '#adb5bd'; rr(ctx, -34, 30, 68, 24, 3); ctx.fill(); ctx.fillStyle = '#ced4da';
-  circ(ctx, 0, -46, 13, '#ced4da'); ctx.fillStyle = '#ced4da'; rr(ctx, -16, -32, 32, 62, 8); ctx.fill(); ctx.save(); ctx.translate(14, -26); ctx.rotate(-.9); rr(ctx, -5, -34, 10, 36, 5); ctx.fill(); ctx.restore(); }); }
+  ctx.fillStyle = '#868e96'; rr(ctx, -34, 30, 68, 24, 3); ctx.fill(); ctx.fillStyle = '#adb5bd';
+  circ(ctx, 0, -46, 13, '#adb5bd', '#868e96', 3); ctx.fillStyle = '#adb5bd'; rr(ctx, -16, -32, 32, 62, 8); ctx.fill(); ctx.save(); ctx.translate(14, -26); ctx.rotate(-.9); rr(ctx, -5, -34, 10, 36, 5); ctx.fill(); ctx.restore(); }); }
 function icoBerimbau(ctx, x, y, s) { icoBase(ctx, x, y, s, () => {
   ctx.strokeStyle = '#8d5a35'; ctx.lineWidth = 6; ctx.beginPath(); ctx.arc(70, 0, 80, PI * .72, PI * 1.28); ctx.stroke();
   ctx.strokeStyle = '#495057'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(70 + Math.cos(PI * .72) * 80, Math.sin(PI * .72) * 80); ctx.lineTo(70 + Math.cos(PI * 1.28) * 80, Math.sin(PI * 1.28) * 80); ctx.stroke();

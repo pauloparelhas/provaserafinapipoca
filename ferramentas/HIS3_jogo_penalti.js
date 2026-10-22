@@ -448,7 +448,7 @@ function juiz(c,t,fala,apito){
 }
 function balao(c,q,it,e){
   var resp=q.fase==='resposta'&&(e<0||e>=FALA_T), ok=q.escolha===q.certa;
-  var en=resp?((ok?'Goal! ':(q.escolha<0?'Time is up! ':'Saved! '))+(it.ex||'')):it.p;
+  var en=resp?((ok?'Gol! ':(q.escolha<0?'Acabou o tempo! ':'Defendeu! '))+(it.ex||'')):it.p;
   var pt=resp?((ok?'Gol! ':(q.escolha<0?'Acabou o tempo! ':'Defendeu! '))+(it.ex_pt||'')):(it.p_pt||'');
   var bx=18, bw=590, by=60, fs=21, maxH=GOL.y0+14-by;
   var hist=!resp&&it.texto?String(it.texto).replace(/\n+/g,' '):'';
@@ -480,7 +480,7 @@ function dica(c,q,it){
 function botaoNext(c,q,t){
   var bx=W-150, by=470, k=.5+.5*Math.sin(t*3.2), s=1+.05*k; q.next={x:bx,y:by,w:128,h:52}; /* respira devagar, sem piscar */
   c.save(); c.translate(bx+64,by+26); c.scale(s,s); c.translate(-bx-64,-by-26); c.shadowColor='rgba(253,224,71,.6)'; c.shadowBlur=10+12*k; c.fillStyle='#b45309'; rr(c,bx,by+5,128,52,24); c.fill(); c.fillStyle=lin(c,0,by,0,by+52,'#fde68a','#f59e0b'); rr(c,bx,by,128,52,24); c.fill();
-  c.fillStyle='#1e1b3a'; c.font=F(900,22); c.textAlign='center'; c.textBaseline='middle'; c.fillText(q.i<q.itens.length-1?'Next ▶':'Done ▶',bx+64,by+27); c.restore();
+  c.fillStyle='#1e1b3a'; c.font=F(900,22); c.textAlign='center'; c.textBaseline='middle'; c.fillText(q.i<q.itens.length-1?'Próxima ▶':'Pronto ▶',bx+64,by+27); c.restore();
 }
 
 /* ============================================================
