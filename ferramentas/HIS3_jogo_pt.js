@@ -14,7 +14,7 @@ var D={
 "Stop that, little hero!": "Pare com isso, detetivezinho!",
 "Grr! My letters!": "Grr! Minhas letras!",
 "Climb the letters to the Count!": "Suba nas letras até a Rainha!",
-"VOCÊ": "FAZ",
+"VOCÊ": "VOCÊ",
 "You did it! The Big Blot is gone!": "Conseguiu! A Traçona fugiu!",
 "GO": "VAI",
 "BRAKE": "FREIA",
@@ -110,7 +110,7 @@ var D={
 "You drove past the pit. Next time, keep right!": "Você passou o box. Na próxima, fique à direita!",
 "TURBO!": "TURBO!",
 "Grrr! You took my letters! Now my blots!": "Hmpf! Você pegou minhas letras! Agora, as bolinhas de poeira!",
-"HA HA! Is that all, little hero?": "RÁ RÁ! Só isso, detetivezinho?",
+"HA HA! Is that all, little hero?": "Ops! Tente de novo, detetive!",
 "HA! Now I am over HERE!": "RÁ! Agora estou AQUI!",
 "Here are 3 stars. You can do it!": "Aqui estão 3 estrelas. Você consegue!",
 "Huff… puff… I am TIRED… but I am still SCARY! GRRR!": "Ufa… ufa… estou CANSADA… mas ainda sou a RAINHA! Hmpf!",
@@ -163,9 +163,22 @@ var D={
 "CAUSE & EFFECT": "FEIRA DAS PROFISSÕES",
 "A B C": "A B C",
 "cookies": "biscoitos",
-"Leite": "Jornal"
+"Leite": "Jornal",
+"NO! My inkwell!": "NÃO! Minha caixa de papel!",
+"NO! My shield!": "NÃO! Meu escudo!",
+"ENOUGH! My GIANT letters!": "CHEGA! Minhas letras GIGANTES!",
+"You can't catch me! Over here!": "Você não me pega! Aqui!",
+"You can’t catch me! Over here!": "Você não me pega! Aqui!",
+"Ready… set…": "Preparar… apontar…",
+"USE YOUR TURBOS! Press SPACE or ⚡!": "USE OS TURBOS! Aperte ESPAÇO ou ⚡!",
+"GO! SPACE or ⚡ = TURBO!": "VAI! ESPAÇO ou ⚡ = TURBO!",
+"GO! Hold ▲!": "VAI! Segure ▲!",
+"PIT ➜": "BOX ➜",
+"PIT ▶": "BOX ▶",
+"Continue ▶": "Continuar ▶",
+"Saved!": "Defendeu!"
 };
-var RX=[["^Checkered flag! You finished (.*)$", "Bandeira quadriculada! Você chegou em $1"], ["^You finished (.*)$", "Você chegou em $1"], ["^The crew needs \\+(.*)$", "A equipe precisa de +$1"], ["^Right answer = TURBO! (.*)$", "Resposta certa = TURBO! $1"], ["^Right answers: (.*)$", "Respostas certas: $1"], ["^LAP (.*)$", "VOLTA $1"], ["^ROUND (.*)$", "RODADA $1"], ["^GOALS (.*)$", "GOLS $1"], ["^GOAL! (.*)$", "GOL! $1"], ["^Time is up! (.*)$", "Acabou o tempo! $1"], ["^You found a lost page! \\((.*)$", "Você recuperou uma carta de fonte! ($1"], ["^Break his shield: knock over the inkwells! +(.*)$", "Quebre o escudo: derrube as caixas de papel roído! $1"], ["^Break his shield: jump on the blots! +(.*)$", "Quebre o escudo: pule nas bolinhas de poeira! $1"], ["^(\\d+)(st|nd|rd|th)$", "$1º"], ["^(\\d+)(st|nd|rd|th) place(.*)$", "$1º lugar$3"]].map(function(r){ return [new RegExp(r[0]), r[1]]; });
+var RX=[["^Checkered flag! You finished (.*)$", "Bandeira quadriculada! Você chegou em $1"], ["^You finished (.*)$", "Você chegou em $1"], ["^The crew needs \\+(.*)$", "A equipe precisa de +$1"], ["^Right answer = TURBO! (.*)$", "Resposta certa = TURBO! $1"], ["^Right answers: (.*)$", "Respostas certas: $1"], ["^LAP (.*)$", "VOLTA $1"], ["^ROUND (.*)$", "RODADA $1"], ["^GOALS (.*)$", "GOLS $1"], ["^GOAL! (.*)$", "GOL! $1"], ["^Time is up! (.*)$", "Acabou o tempo! $1"], ["^You found a lost page! \\((.*)$", "Você recuperou uma carta de fonte! ($1"], ["^Break his shield: knock over the inkwells! +(.*)$", "Quebre o escudo: derrube as caixas de papel roído! $1"], ["^Break his shield: jump on the blots! +(.*)$", "Quebre o escudo: pule nas bolinhas de poeira! $1"], ["^(\\d+)(st|nd|rd|th)$", "$1º"], ["^(\\d+)(st|nd|rd|th) place(.*)$", "$1º lugar$3"], ["^Saved! (.*)$", "Defendeu! $1"]].map(function(r){ return [new RegExp(r[0]), r[1]]; });
 function tr(s){ if(typeof s!=="string"||!s) return s; var k=s.trim(); if(D[k]!==undefined) return s.replace(k,D[k]); for(var i=0;i<RX.length;i++){ if(RX[i][0].test(s)) return s.replace(RX[i][0],RX[i][1]); } return s; }
 window.HIS3_TR=tr; window.HIS3_DIC=D;
 var P=CanvasRenderingContext2D.prototype;

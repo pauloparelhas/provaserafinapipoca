@@ -53,7 +53,7 @@
   "Answer to win stars. Hit the Count to take his letters!": "Responda para ganhar estrelas. Acerte a Rainha para tirar as letras dela!",
   "Climb the letters to the Count!": "Suba nas letras até a Rainha!",
   "Grrr! You took my letters! Now my blots!": "Hmpf! Você pegou minhas letras! Agora, as bolinhas de poeira!",
-  "HA HA! Is that all, little hero?": "RÁ RÁ! Só isso, detetivezinho?",
+  "HA HA! Is that all, little hero?": "Ops! Tente de novo, detetive!",
   "HA! Come up here if you can!": "RÁ! Suba aqui se puder!",
   "HA! My shield! Jump on my ink blots first!": "RÁ! Meu escudo! Pule nas minhas bolinhas de poeira primeiro!",
   "HA! My shield! Knock over my inkwells first!": "RÁ! Meu escudo! Derrube minhas caixas de papel roído primeiro!",
@@ -139,7 +139,21 @@
   "CAUSE & EFFECT": "FEIRA DAS PROFISSÕES",
   "A B C": "A B C",
   "cookies": "biscoitos",
-  "Leite": "Jornal"
+  "Leite": "Jornal",
+  "NO! My inkwell!": "NÃO! Minha caixa de papel!",
+  "NO! My shield!": "NÃO! Meu escudo!",
+  "ENOUGH! My GIANT letters!": "CHEGA! Minhas letras GIGANTES!",
+  "You can't catch me! Over here!": "Você não me pega! Aqui!",
+  "You can’t catch me! Over here!": "Você não me pega! Aqui!",
+  "Ready… set…": "Preparar… apontar…",
+  "USE YOUR TURBOS! Press SPACE or ⚡!": "USE OS TURBOS! Aperte ESPAÇO ou ⚡!",
+  "GO! SPACE or ⚡ = TURBO!": "VAI! ESPAÇO ou ⚡ = TURBO!",
+  "GO! Hold ▲!": "VAI! Segure ▲!",
+  "PIT ➜": "BOX ➜",
+  "PIT ▶": "BOX ▶",
+  "Continue ▶": "Continuar ▶",
+  "Saved!": "Defendeu!",
+  "VOCÊ": "VOCÊ"
  },
  "regex": [
   [
@@ -201,6 +215,10 @@
   [
    "^(\\d+)(st|nd|rd|th) place(.*)$",
    "$1º lugar$3"
+  ],
+  [
+   "^Saved! (.*)$",
+   "Defendeu! $1"
   ]
  ]
 }
