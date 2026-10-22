@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='73cf86c1244';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#4c1d95">
+<title>Pocket de História — 3º trimestre</title>
+<style>
+/* ===========================================================================
+   HIS3_pocket — a prova de História inteira numa folha A4 (paisagem), para
+   imprimir colorida. Mesma lógica do pocket de Inglês (tudo numa folha, em mm,
+   sem rolagem); universo "Detetives do Tempo": as 4 cartas de fonte com as
+   cores fixas (oral lilás, escrita azul, visual laranja, material verde).
+   Fonte única: trabalho/3tri_historia/_roteiro.md. Nada aqui vem de fora dele.
+   =========================================================================== */
+:root{
+  --ink:#1e1b2e; --soft:#4b4763; --paper:#fffdf7;
+  --or:#9333ea; --es:#2563eb; --vi:#ea580c; --ma:#16a34a;
+  --fo:#7c3aed; --fo2:#f5f3ff; --fo3:#ddd6fe;
+  --pr:#15803d; --pr2:#f0fdf4; --pr3:#bbf7d0;
+  --esc:#0369a1; --esc2:#f0f9ff; --esc3:#bae6fd;
+  --ol:#c2410c; --ol2:#fff7ed; --ol3:#fed7aa;
+  --mu:#a16207; --mu2:#fefce8; --mu3:#fde68a;
+  --tk:#be123c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#5b5675;font-family:"Segoe UI","Trebuchet MS",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink)}
+@page{size:A4 landscape;margin:0}
+.tela{position:sticky;top:0;z-index:5;display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;padding:8px 16px;background:#2e1065;color:#fff}
+.tela button,.tela a{min-height:44px;min-width:44px;padding:0 14px;border-radius:12px;border:2px solid #a78bfa;background:#4c1d95;color:#fff;font:800 15px/1 inherit;font-family:inherit;display:inline-flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer}
+.tela .dica{font-size:13px;font-weight:700;opacity:.85;flex-basis:100%;text-align:center}
+.palco{padding:14px 0 30px;overflow:hidden}
+.escala{transform-origin:top left;width:297mm}
+.page{width:297mm;height:210mm;background:var(--paper);padding:4.5mm 5mm 4mm;display:flex;flex-direction:column;gap:2mm;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.4);font-size:7.4pt;line-height:1.2}
+b{font-weight:850}
+.topo{display:flex;align-items:center;gap:3mm;padding:1.1mm 3mm;border-radius:3mm;background:linear-gradient(100deg,#4c1d95,#7c3aed 45%,#ea580c);color:#fff}
+.topo .em{font-size:17pt;line-height:1}
+.topo h1{font-size:13pt;font-weight:900;line-height:1}
+.topo h1 small{display:block;font-size:7.4pt;font-weight:700;opacity:.92;margin-top:.6mm}
+.topo .lema{margin-left:auto;font-size:7.4pt;font-weight:800;font-style:italic;max-width:78mm;text-align:right;opacity:.95}
+.topo .nome{font-weight:800;font-size:7.6pt;white-space:nowrap;margin-left:2mm}
+.topo .nome i{display:inline-block;width:28mm;border-bottom:.3mm solid #fff;margin-left:1mm}
+.grade{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:.95fr 1.2fr 1fr;grid-template-rows:1.4fr 1fr;gap:2.4mm}
+.sec{position:relative;border-radius:3mm;border:.55mm solid var(--c);background:var(--c2);padding:2.2mm 2.6mm 2mm;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:1.1mm}
+.sec>h2{display:flex;align-items:center;gap:1.8mm;font-size:10.6pt;font-weight:900;color:var(--c);line-height:1}
+.sec>h2 .n{flex:0 0 auto;width:6mm;height:6mm;border-radius:50%;background:var(--c);color:#fff;font-size:9pt;display:flex;align-items:center;justify-content:center}
+.sec>h2 small{margin-left:auto;font-size:7pt;font-weight:800;opacity:.85}
+.sec>*{flex-shrink:0}
+.def{background:#fff;border-radius:2mm;border-left:1.4mm solid var(--c);padding:1mm 2mm;font-size:7.8pt;font-weight:700}
+.def b{color:var(--c)}
+.fo{--c:var(--fo);--c2:var(--fo2);--c3:var(--fo3);grid-row:1 / span 2}
+.pr{--c:var(--pr);--c2:var(--pr2);--c3:var(--pr3)}
+.esc{--c:var(--esc);--c2:var(--esc2);--c3:var(--esc3)}
+.ol{--c:var(--ol);--c2:var(--ol2);--c3:var(--ol3)}
+.mu{--c:var(--mu);--c2:var(--mu2);--c3:var(--mu3)}
+/* 1 · as 4 cartas */
+.cartas{display:grid;grid-template-columns:1fr;gap:1.2mm}
+.carta{display:grid;grid-template-columns:11mm 1fr;gap:1.6mm;align-items:center;background:#fff;border-radius:2.2mm;border:.5mm solid var(--k);padding:1mm 1.6mm}
+.carta .ic{width:11mm;height:11mm;border-radius:2mm;background:var(--k);display:flex;align-items:center;justify-content:center}
+.carta .ic svg{width:8mm;height:8mm}
+.carta h3{font-size:9.4pt;font-weight:900;color:var(--k);line-height:1}
+.carta h3 i{font-style:normal;font-size:7pt;font-weight:800;color:var(--soft);margin-left:1mm}
+.carta p{font-size:7.2pt;font-weight:700;margin-top:.4mm;line-height:1.16}
+.k-or{--k:var(--or)} .k-es{--k:var(--es)} .k-vi{--k:var(--vi)} .k-ma{--k:var(--ma)}
+.peg2{display:grid;grid-template-columns:1fr 1fr;gap:1mm}
+.peg2 div{background:#fff;border:.35mm dashed var(--tk);border-radius:2mm;padding:.7mm 1.2mm;font-size:6.9pt;font-weight:750;line-height:1.16}
+.peg2 div b{color:var(--tk)}
+.ficha{background:#fff;border-radius:2mm;padding:.8mm 1.6mm;font-size:6.9pt;font-weight:700;border-left:1.2mm solid var(--c)}
+.ficha b{color:var(--c)}
+/* 2 · profissões */
+.prof{width:100%;border-collapse:separate;border-spacing:0;font-size:6.85pt;font-weight:700;background:#fff;border-radius:2mm;overflow:hidden;border:.35mm solid var(--c3)}
+.prof th{background:var(--c);color:#fff;font-size:7.2pt;padding:.5mm 1mm;text-align:left}
+.prof td{padding:.5mm 1mm;border-top:.25mm solid var(--c3);vertical-align:top;line-height:1.13}
+.prof td:first-child{font-weight:900;color:var(--c);white-space:nowrap}
+.prof td.cont{color:#166534;background:#f0fdf4}
+.linha3{display:grid;grid-template-columns:1fr 1fr;gap:1mm}
+.linha3 div{background:#fff;border-radius:2mm;padding:.6mm 1.3mm;font-size:6.9pt;font-weight:700;border-left:1.2mm solid var(--c)}
+.linha3 div b{color:var(--c)}
+/* 3 · escola */
+.chips{display:flex;flex-wrap:wrap;gap:.7mm}
+.chips span{border-radius:3mm;padding:.2mm 1.4mm;font-weight:800;font-size:6.9pt;background:#fff;border:.3mm solid var(--k,var(--c3));white-space:nowrap}
+.ah{display:grid;grid-template-columns:1fr 1fr;gap:1mm}
+.ah div{background:#fff;border-radius:2mm;padding:.6mm 1.3mm;font-size:6.9pt;font-weight:700;border-top:1.2mm solid var(--k)}
+.ah div b{display:block;color:var(--k);font-size:7.4pt}
+/* 4 · cada um vê */
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:1mm}
+.tres div{background:#fff;border-radius:2mm;padding:.8mm 1mm;text-align:center;font-size:7.2pt;font-weight:900;color:var(--c);border:.35mm solid var(--c3)}
+.exs{background:#fff;border-radius:2mm;padding:.7mm 1.4mm;font-size:6.9pt;font-weight:700;line-height:1.17}
+.exs b{color:var(--c)}
+/* 5 · mundo */
+.passos{display:flex;align-items:center;gap:.6mm}
+.passos span{flex:1;background:#fff;border-radius:1.6mm;padding:.5mm .7mm;text-align:center;font-size:6.8pt;font-weight:800;border:.3mm solid var(--c3)}
+.passos i{font-style:normal;color:var(--c);font-weight:900}
+.rios{display:grid;grid-template-columns:repeat(3,1fr);gap:1mm}
+.rios div{background:linear-gradient(170deg,#e0f2fe,#fef9c3);border-radius:2mm;padding:.6mm;text-align:center;font-size:6.9pt;font-weight:800;border:.3mm solid #7dd3fc;line-height:1.12}
+.rios b{display:block;color:#0369a1;font-size:7.3pt}
+/* baixo */
+.baixo{display:grid;grid-template-columns:1.25fr 1.15fr 1fr;gap:2.4mm}
+.box{border-radius:3mm;border:.55mm solid var(--c);background:var(--c2);padding:1.1mm 2mm}
+.box h2{font-size:9pt;font-weight:900;color:var(--c);margin-bottom:.6mm}
+.lt{--c:#be185d;--c2:#fdf2f8}
+.lt .seq{display:flex;align-items:stretch;gap:.6mm}
+.lt .seq div{flex:1;background:#fff;border-radius:1.6mm;padding:.5mm .5mm;text-align:center;font-size:6.8pt;font-weight:800;border:.3mm solid #f9a8d4;line-height:1.1}
+.lt .seq small{display:block;font-size:5.8pt;color:var(--soft);font-weight:700}
+.lt p{font-size:6.8pt;font-weight:700;margin-top:.6mm}
+.tk{--c:var(--tk);--c2:#fff1f2}
+.tk ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.5mm 2mm;font-size:6.8pt;font-weight:700}
+.tk li b{color:var(--tk)}
+.chk{--c:#334155;--c2:#f8fafc}
+.chk ol{padding-left:4mm;font-size:6.8pt;font-weight:700;columns:2;column-gap:3mm}
+.chk li{margin:.2mm 0;break-inside:avoid}
+.chk .resp{font-size:6.2pt;font-weight:700;color:var(--soft);transform:rotate(180deg);text-align:right;margin-top:.4mm}
+@media print{ body{background:none} .tela{display:none} .palco{padding:0;overflow:visible} .escala{transform:none!important;height:auto!important;margin-left:0!important} .page{box-shadow:none;margin:0} }
+</style>
+</head>
+<body>
+<div class="tela">
+  <a href="../index.html?v=73cf86c1244" title="Início">&#127968; Início</a>
+  <button onclick="window.print()">&#128424;&#65039; Imprimir</button>
+  <span class="dica">Imprima COLORIDO, A4, paisagem. Uma folha com tudo para a prova de História.</span>
+</div>
+<div class="palco"><div class="escala" id="escala">
+<div class="page">
+
+  <header class="topo">
+    <span class="em">&#128269;</span>
+    <h1>Pocket do Detetive do Tempo — História · 3º trimestre<small>Fontes históricas · A escola tem história · Profissões: o que mudou e o que continuou</small></h1>
+    <span class="lema">"Para entender para onde vamos, precisamos descobrir de onde viemos."</span>
+    <span class="nome">Nome:<i></i></span>
+  </header>
+
+  <main class="grade">
+
+    <!-- 1 · FONTES -->
+    <section class="sec fo">
+      <h2><span class="n">1</span>As 4 cartas de fonte histórica</h2>
+      <div class="def"><b>Fonte histórica</b> = aquilo que a gente pode <b>ver, ouvir, tocar ou ler</b> para aprender sobre <b>outras épocas</b>. São <b>pistas do passado</b>. "Tudo ao nosso redor pode contar uma história."</div>
+      <div class="cartas">
+        <div class="carta k-or"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v10H10l-5 4v-4H4z" fill="#fff"/></svg></span><div><h3>ORAL <i>alguém CONTA</i></h3><p>Relatos e histórias <b>contadas</b> por pessoas: a vovó contando, entrevista, histórias de vida, cantigas. Passa <b>de geração em geração pela fala</b>.</p></div></div>
+        <div class="carta k-es"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z" fill="#fff"/><path d="M8.5 10h8M8.5 13h8M8.5 16h5" stroke="#2563eb" stroke-width="1.6"/></svg></span><div><h3>ESCRITA <i>alguém ESCREVEU</i></h3><p><b>Diários, leis, jornais e cartas</b>; bilhete, receita, certidão de nascimento, livro antigo, anúncio de jornal.</p></div></div>
+        <div class="carta k-vi"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="#fff"/><path d="M5 18l5-6 4 4 2-2 3 4z" fill="#ea580c"/><circle cx="16" cy="8.5" r="1.8" fill="#ea580c"/></svg></span><div><h3>VISUAL <i>a gente VÊ uma imagem</i></h3><p><b>Pinturas, fotografias e mapas</b>; escultura; outra imagem que registre um momento do passado.</p></div></div>
+        <div class="carta k-ma"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 9l8-4 8 4v10l-8 4-8-4z" fill="#fff"/><path d="M4 9l8 4 8-4M12 13v10" stroke="#16a34a" stroke-width="1.6" fill="none"/></svg></span><div><h3>MATERIAL <i>a gente TOCA um objeto</i></h3><p><b>Brinquedos, roupas, construções e utensílios</b>: chapéu, sofá antigo, bonecas, castelo, uniforme, troféu.</p></div></div>
+      </div>
+      <div class="peg2">
+        <div><b>Foto × objeto:</b> a FOTO da boneca = visual; a boneca = material.</div>
+        <div><b>Vídeo de alguém contando</b> = continua oral.</div>
+        <div><b>Escreveu × falou:</b> a carta da vovó = escrita; a vovó contando = oral.</div>
+        <div><b>Mapa e pintura</b> = visual (mesmo com letras).</div>
+      </div>
+      <div class="ficha"><b>Ficha do objeto:</b> como é? conta uma história do passado? por quê? faz lembrar <b>uma pessoa da família, algo que aconteceu, um lugar</b>.</div>
+      <div class="ficha"><b>Legenda:</b> o que mostra · que tipo de fonte é · o que conta do passado. <b>Foto antiga da família:</b> quem aparece? onde e quando? o que acontecia? por que é importante?</div>
+      <div class="ficha"><b>O protagonista é você:</b> o que você faz hoje será a <b>fonte histórica de amanhã</b>. As fontes <b>preservam a memória</b>.</div>
+    </section>
+
+    <!-- 2 · PROFISSÕES -->
+    <section class="sec pr">
+      <h2><span class="n">2</span>Profissões no tempo<small>o que mudou e o que continuou</small></h2>
+      <table class="prof">
+        <tr><th></th><th>ANTES</th><th>HOJE</th><th>CONTINUOU</th></tr>
+        <tr><td>Seu Francisco<br>carteiro</td><td>a pé, bolsa de couro, cartas à mão → bicicleta → moto</td><td>contas e compras da internet; aparelho com tela; mensagens em segundos</td><td class="cont">a profissão existe, de um jeito diferente</td></tr>
+        <tr><td>Dona Lúcia<br>professora</td><td>quadro de giz, livros pesados, tudo à mão, biblioteca</td><td>computador, vídeos, lousa digital, tablets, internet</td><td class="cont">conversar, ouvir os alunos, ensinar com alegria</td></tr>
+        <tr><td>Seu Pedro<br>fazendeiro</td><td>mãos e animais, arado puxado por bois, colheita manual</td><td>trator, máquinas que plantam e colhem, celular (chuva). <i>Futuro: robôs, prédios</i></td><td class="cont">amar a terra, cuidar da natureza</td></tr>
+        <tr><td>Doutor João<br>médico</td><td>estetoscópio, termômetro de mercúrio, papel; exames em dias</td><td>computador, exames no celular, consulta por vídeo</td><td class="cont">cuidado e atenção com cada paciente</td></tr>
+      </table>
+      <div class="linha3">
+        <div><b>Por que mudam?</b> novas máquinas, tecnologias e formas de comunicar: trabalho mais rápido ou com mais conforto.</div>
+        <div><b>Desapareceu:</b> o <b>acendedor de lampião</b> (acendia os postes um a um) — chegou a energia elétrica.</div>
+        <div><b>Profissões novas:</b> designer gráfico, desenvolvedor de aplicativos, cientista de dados.</div>
+        <div><b>Ferramentas:</b> médico = maleta, seringa, termômetro · fotógrafo = câmera de tripé · professora = lousa, livros, globo · pedreiro = marreta, colher, pincel.</div>
+      </div>
+    </section>
+
+    <!-- 4 · CADA UM VÊ -->
+    <section class="sec ol">
+      <h2><span class="n">4</span>Cada um vê de um jeito</h2>
+      <div class="def">Toda fonte foi criada <b>por alguém</b>, num <b>tempo e lugar</b>, com um <b>objetivo</b>.</div>
+      <div class="tres"><div>Quem produziu?</div><div>Para quem?</div><div>Qual o objetivo?</div></div>
+      <div class="exs"><b>Cartão-postal</b> de Salvador: quem viajou escreveu aos amigos contando a viagem. <b>Anúncio</b> de jornal e <b>propaganda</b>: servem para <b>VENDER</b>.</div>
+      <div class="exs"><b>Histórias diferentes do mesmo documento:</b> cada pessoa olha com a sua experiência, imaginação e <b>ponto de vista</b>. Olhando de novo, vemos coisas novas.</div>
+      <div class="exs">Sem todas as informações fazemos <b>suposições</b> (nem sempre certas). O <b>historiador</b> reúne <b>várias fontes</b>, compara e ouve versões diferentes. Respeite a opinião do colega!</div>
+    </section>
+
+    <!-- 3 · ESCOLA -->
+    <section class="sec esc">
+      <h2><span class="n">3</span>A escola tem história</h2>
+      <div class="chips"><span style="--k:var(--vi)">fotos antigas de turmas</span><span style="--k:var(--es)">cadernos</span><span style="--k:var(--es)">boletins</span><span style="--k:var(--es)">bilhetes</span><span style="--k:var(--es)">registros de eventos</span><span style="--k:var(--ma)">uniformes</span><span style="--k:var(--ma)">troféus</span><span style="--k:var(--es)">livros antigos</span></div>
+      <div class="def"><b>Documentos da vida escolar</b> (fontes escritas) registram <b>fatos e decisões</b>: como era o <b>ensino</b>, as <b>regras</b>, o que se <b>aprendia</b> e o <b>dia a dia</b>.</div>
+      <div class="ah"><div style="--k:#b45309"><b>MUDANÇA</b>o que ficou diferente: quadro de giz → lousa digital; biblioteca → internet</div><div style="--k:#15803d"><b>PERMANÊNCIA</b>o que continuou igual: aprender, conversar com a professora</div></div>
+      <div class="def">Guardar documentos <b>preserva memórias</b>. Alunos, professores e funcionários podem ter <b>memórias diferentes</b> da mesma escola. Objetos, documentos e festas guardam lembranças.</div>
+    </section>
+
+    <!-- 5 · MUNDO -->
+    <section class="sec mu">
+      <h2><span class="n">5</span>Pistas no mundo</h2>
+      <div class="passos"><span>nômades<br>(buscavam comida)</span><i>›</i><span>agricultura</span><i>›</i><span>acampamentos fixos</span><i>›</i><span>cidades</span></div>
+      <div class="rios"><div><b>Rio Nilo</b>Egito</div><div><b>Tigre e Eufrates</b>Mesopotâmia</div><div><b>Rio Amarelo</b>China</div></div>
+      <div class="exs" style="--c:var(--mu)">As cidades mais antigas cresceram <b>"abraçadas" aos rios</b>.</div>
+      <div class="ah"><div style="--k:#a16207"><b>PATRIMÔNIO MATERIAL</b>museus, praças, estátuas</div><div style="--k:#9333ea"><b>PATRIMÔNIO IMATERIAL</b>capoeira, festa junina, receitas de família</div></div>
+    </section>
+  </main>
+
+  <footer class="baixo">
+    <div class="box lt">
+      <h2>Linha do tempo dos registros (ordem do material)</h2>
+      <div class="seq"><div>jornal</div><div>carta</div><div>diário</div><div>álbum de fotos<small>bem antigo</small></div><div>foto digital<small>papai e mamãe crianças</small></div><div>redes sociais<small>hoje</small></div></div>
+      <p>Tempo do relógio = igual para todos; tempo que sentimos = rápido (brincar) ou devagar (fila). Museus e arquivos guardam memórias.</p>
+    </div>
+    <div class="box tk">
+      <h2>Pegadinhas</h2>
+      <ul>
+        <li><b>Mudou × sumiu:</b> carteiro mudou; acendedor de lampião sumiu.</li>
+        <li><b>Hoje × futuro:</b> robô na fazenda é futuro.</li>
+        <li><b>Estetoscópio e quadro de giz</b> ainda existem.</li>
+        <li><b>Receita escrita</b> = fonte escrita; <b>receita de família</b> = imaterial.</li>
+      </ul>
+    </div>
+    <div class="box chk">
+      <h2>Confira!</h2>
+      <ol><li>Diário: que fonte?</li><li>Vovó contando: que fonte?</li><li>Foto do castelo?</li><li>Bola antiga?</li><li>O que sumiu com a luz elétrica?</li><li>Anúncio serve para…?</li></ol>
+      <div class="resp">1 escrita · 2 oral · 3 visual · 4 material · 5 acendedor de lampião · 6 vender</div>
+    </div>
+  </footer>
+</div>
+</div></div>
+<script>
+function encaixa(){ var e=document.getElementById('escala'), larg=e.firstElementChild.offsetWidth, alt=e.firstElementChild.offsetHeight; var k=Math.min(1,(window.innerWidth-16)/larg); e.style.transform='scale('+k+')'; e.style.height=(alt*k)+'px'; e.style.marginLeft=Math.max(8,(window.innerWidth-larg*k)/2)+'px'; }
+window.addEventListener('resize',encaixa); window.addEventListener('load',encaixa); encaixa();
+</script>
+</body>
+</html>

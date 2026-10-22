@@ -151,9 +151,11 @@ if(CFG.unlock && !$id('unlockov')){
   var d=document.createElement('div');
   d.className='unlockov'; d.id='unlockov';
   d.innerHTML='<div class="ulk-emo">&#128274;</div>'
-   +'<h2>Desbloquear a tela?<small>Unlock the screen? &middot; ask a grown-up</small></h2>'
+   +(window.SERA_PT /* materia em portugues: so PT (HIS3, 22/10) */
+     ? '<h2>Desbloquear a tela?<small>peça para um adulto</small></h2><button class="ulk-yes" onclick="doUnlock()">&#128275; Desbloquear</button><button class="ulk-no" onclick="cancelUnlock()">&#8617;&#65039; Continuar</button>'
+     : '<h2>Desbloquear a tela?<small>Unlock the screen? &middot; ask a grown-up</small></h2>'
    +'<button class="ulk-yes" onclick="doUnlock()">&#128275; Desbloquear / Unlock</button>'
-   +'<button class="ulk-no" onclick="cancelUnlock()">&#8617;&#65039; Continuar / Keep playing</button>';
+   +'<button class="ulk-no" onclick="cancelUnlock()">&#8617;&#65039; Continuar / Keep playing</button>');
   document.body.appendChild(d);
 }
 

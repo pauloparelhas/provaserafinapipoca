@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='73cf86c1244';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>O vídeo — História: Detetives do Tempo</title>
+<link rel="stylesheet" href="serafina-core.css?v=73cf86c1244">
+<style>
+/* ============================================================
+   O VIDEO DE INGLES (3o tri) — gerado por trabalho/3tri_ingles/video/ (mesmo pipeline do LP3),
+   com a arte do jogo The Lost Endings, narrado pela Thalita multilingue em ingles.
+   Imersao total: nada em portugues na tela; o portugues vive atras da bandeira
+   (<span class="tr"> + legenda PT numa faixa abaixo do player, sincronizada pelo timeupdate).
+   Sem autoplay: som so quando ela mandar (regra do projeto).
+   ============================================================ */
+:root{--fs:1;--bg:#0d0b1e;--bg2:#2a1736;--ink:#f2f7ff;--soft:rgba(255,255,255,.62);--dim:rgba(255,255,255,.42);
+  --card:#22152f;--line:rgba(255,255,255,.13);--accent:#f472b6;--surf:rgba(255,255,255,.06)}
+body.light{--bg:#fdf0f6;--bg2:#f3e8ff;--ink:#2a1030;--soft:rgba(42,16,48,.66);--dim:rgba(42,16,48,.5);
+  --card:#fff;--line:rgba(42,16,48,.13);--accent:#be185d;--surf:rgba(42,16,48,.05)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.9rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.02rem;font-weight:800;cursor:pointer;padding:0 8px;font-family:inherit}
+.iconbtn svg{width:22px;height:22px;display:block;margin:auto}
+#trbtn svg{width:26px;height:19px;border-radius:3px}
+body.show-tr #trbtn{outline:2px solid var(--accent);outline-offset:2px}
+.iconbtn:active{transform:scale(.9)}
+.stage{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:16px clamp(10px,3vw,26px) 40px}
+.card{width:100%;max-width:900px;background:var(--card);border-radius:24px;box-shadow:0 14px 40px rgba(0,0,0,.35);
+  padding:clamp(16px,4vw,28px);border:1px solid var(--line)}
+.aviso{margin:0 0 14px;padding:9px 12px;border-radius:12px;background:#fff3c4;border:2px solid #d19a00;color:#4a3000;font-weight:900;font-size:14px;text-align:center}
+.aviso .tr{color:#4a3000}
+h1{font-size:calc(clamp(1.25rem,4vw,1.65rem)*var(--fs));font-weight:900;line-height:1.2;margin-bottom:6px}
+.sub{font-size:calc(.95rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.55;margin-bottom:16px}
+.tr{display:none}
+body.show-tr .tr{display:block;font-size:.8em;font-weight:700;opacity:.8;margin-top:3px;line-height:1.3}
+video{width:100%;border-radius:16px;background:#000;display:block;border:1px solid var(--line);aspect-ratio:16/9}
+.ptcap{display:none;margin-top:8px;min-height:3.2em;padding:8px 14px;border-radius:12px;background:var(--surf);border:1px dashed var(--line);
+  font-weight:800;font-size:calc(1rem*var(--fs));line-height:1.4;color:var(--ink);text-align:center}
+body.show-tr .ptcap{display:flex;align-items:center;justify-content:center}
+h2{font-size:calc(1.02rem*var(--fs));font-weight:900;margin:20px 0 10px;color:var(--accent)}
+.caps{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.cap{width:100%;min-height:48px;display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);
+  border-radius:13px;background:var(--surf);color:var(--ink);font-family:inherit;font-weight:800;
+  font-size:calc(.92rem*var(--fs));padding:8px 12px;cursor:pointer}
+.cap:active{transform:scale(.98)}
+.cap .tm{flex:0 0 auto;min-width:46px;padding:3px 7px;border-radius:9px;background:var(--line);font-variant-numeric:tabular-nums;text-align:center;font-size:.85em}
+.cap .nm{min-width:0}
+.cap.on{border-color:var(--accent);background:rgba(244,114,182,.16)}
+.cap.on .tm{background:var(--accent);color:#2a1030}
+.acao{display:block;width:100%;min-height:56px;margin-top:18px;border:none;border-radius:16px;padding:8px 12px;
+  background:linear-gradient(90deg,var(--accent),#ec4899);color:#2a0618;font-family:inherit;font-weight:900;
+  font-size:calc(1.05rem*var(--fs));cursor:pointer}
+.acao:active{transform:translateY(1px)}
+.acao.pass{background:var(--surf);color:var(--ink);border:2px solid var(--line);margin-top:10px}
+@media(min-width:700px){:root{--fs:1.1} .card{padding:30px 34px}}
+@media(max-width:430px){
+  .topbar{flex-wrap:wrap;gap:4px}
+  .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px;font-size:.82rem}
+  .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
+  .caps{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" id="btnHome" title="Home" aria-label="Home" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button>
+    <span class="title">O vídeo · História</span>
+    <button class="iconbtn" id="btnFontDown" title="Letra menor" aria-label="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" id="btnFontUp" title="Letra maior" aria-label="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" id="themeBtn" title="Tema" aria-label="Tema">&#9788;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" aria-label="Tela cheia" onclick="toggleLock()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
+  </div>
+  <div class="stage">
+    <div class="card">
+      <h1>Detetives do Tempo</h1>
+      <p class="sub">Uns 5 minutos com o Tic e os detetives: tudo da prova de História. Toque numa parte da lista para pular direto para ela.</p>
+
+      <video id="vid" controls playsinline preload="metadata" poster="media/video_his3_poster.jpg?v=73cf86c1244">
+        <source src="media/video_his3.mp4?v=73cf86c1244" type="video/mp4">
+        Se o vídeo não abrir aqui, peça a um adulto para abrir o arquivo <b>media/video_his3.mp4?v=73cf86c1244</b>.
+      </video>
+      <div class="ptcap" id="ptcap" aria-live="polite"></div>
+
+      <h2>As partes do vídeo</h2>
+      <ul class="caps" id="caps">
+        <li><button class="cap" data-t="3.15"><span class="tm">0:03</span><span class="nm">A missão</span></button></li>
+        <li><button class="cap" data-t="21.31"><span class="tm">0:21</span><span class="nm">O que são fontes históricas?</span></button></li>
+        <li><button class="cap" data-t="41.23"><span class="tm">0:41</span><span class="nm">As 4 cartas de fonte</span></button></li>
+        <li><button class="cap" data-t="72.04"><span class="tm">1:12</span><span class="nm">Cuidado com as pegadinhas!</span></button></li>
+        <li><button class="cap" data-t="92.68"><span class="tm">1:32</span><span class="nm">A escola tem história</span></button></li>
+        <li><button class="cap" data-t="119.34"><span class="tm">1:59</span><span class="nm">Mudou ou continuou?</span></button></li>
+        <li><button class="cap" data-t="140.03"><span class="tm">2:20</span><span class="nm">Cada um vê de um jeito</span></button></li>
+        <li><button class="cap" data-t="164.55"><span class="tm">2:44</span><span class="nm">Seu Francisco, o carteiro</span></button></li>
+        <li><button class="cap" data-t="187.42"><span class="tm">3:07</span><span class="nm">Doutor João, o médico</span></button></li>
+        <li><button class="cap" data-t="208.25"><span class="tm">3:28</span><span class="nm">Seu Pedro e a fazenda</span></button></li>
+        <li><button class="cap" data-t="229.37"><span class="tm">3:49</span><span class="nm">Profissões que sumiram e que nasceram</span></button></li>
+        <li><button class="cap" data-t="254.35"><span class="tm">4:14</span><span class="nm">Rios antigos e patrimônio</span></button></li>
+        <li><button class="cap" data-t="278.99"><span class="tm">4:38</span><span class="nm">A linha do tempo</span></button></li>
+        <li><button class="cap" data-t="295.66"><span class="tm">4:55</span><span class="nm">Você faz história</span></button></li>
+      </ul>
+
+      <button class="acao" onclick="location.href='HIS3_simulado.html?v=73cf86c1244'">Agora treinar no simulado &rarr;</button>
+      <button class="acao pass" onclick="location.href='HIS3_estudo.html?v=73cf86c1244'">Estudar no Caderno do Detetive</button>
+    </div>
+  </div>
+</div>
+<div class="unlockov" id="unlockov">
+  <div class="ulk-emo">&#128274;</div>
+  <h2>Desbloquear a tela?<small>Peça para um adulto</small></h2>
+  <button class="ulk-yes" onclick="doUnlock()">Desbloquear</button>
+  <button class="ulk-no" onclick="cancelUnlock()">Continuar assistindo</button>
+</div>
+<script>window.SERA_PT=true; window.SERA_CFG={trKey:null,lang:'pt-BR',home:'../index.html',stars:110,somKey:'his3_som'};</script>
+<script src="serafina-core.js?v=73cf86c1244"></script>
+<script>
+(function(){
+  var v=document.getElementById('vid'), bts=[].slice.call(document.querySelectorAll('.cap'));
+  bts.forEach(function(b){ b.addEventListener('click',function(){
+    var t=parseFloat(b.dataset.t);
+    try{ v.currentTime=t; }catch(e){}
+    var p=v.play(); if(p&&p.catch) p.catch(function(){});
+  }); });
+  v.addEventListener('timeupdate',function(){
+    var on=-1; bts.forEach(function(b,i){ if(v.currentTime+0.4>=parseFloat(b.dataset.t)) on=i; });
+    bts.forEach(function(b,i){ b.classList.toggle('on',i===on); });
+  });
+  /* legenda em portugues: so com a bandeira ligada; aparece na faixa abaixo do player */
+  /* mesmas falas e tempos de media/video_his3_pt.vtt, embutidos (o file:// bloqueia <track>) */
+  var CUES=[[3.58, 8.37, "No Museu da Memória ficam guardadas as pistas do passado."], [8.38, 14.78, "Mas a Rainha Traça está roendo tudo: cartas, fotos, mapas e brinquedos!"], [14.79, 20.56, "Trim! Eu sou o Tic. Vamos ser detetives do tempo?"], [21.74, 29.49, "Fontes históricas são aquilo que a gente pode ver, ouvir, tocar ou ler para aprender sobre outras épocas."], [29.5, 35.15, "São pistas do passado. Tudo ao nosso redor pode contar uma história."], [35.16, 40.48, "O detetive observa, pergunta e compara as pistas."], [41.66, 48.47, "Fonte oral: alguém conta. Relatos e histórias contadas por pessoas."], [48.48, 55.67, "Fonte escrita: alguém escreveu. Diários, leis, jornais e cartas."], [55.68, 62.85, "Fonte visual: a gente vê uma imagem. Pinturas, fotografias e mapas."], [62.86, 71.29, "Fonte material: a gente toca um objeto. Brinquedos, roupas, construções e utensílios."], [72.47, 79.21, "A foto de uma boneca é fonte visual. A boneca de verdade é fonte material."], [79.22, 84.47, "Um vídeo de alguém contando uma história continua sendo fonte oral."], [84.48, 91.93, "A vovó escreveu uma carta? Escrita. A vovó contou falando? Oral."], [93.11, 99.05, "A escola tem uma história cheia de acontecimentos, pessoas e mudanças."], [99.06, 107.77, "Fotos antigas de turmas, cadernos, boletins, bilhetes, uniformes e troféus guardam pistas."], [107.78, 114.35, "Os documentos da vida escolar mostram como era o ensino, as regras e o dia a dia da escola."], [114.36, 118.59, "Guardar documentos preserva memórias."], [119.77, 126.44, "Mudança é o que ficou diferente com o tempo. Permanência é o que continuou igual."], [126.45, 132.97, "Na escola da Dona Lúcia, o quadro de giz deu lugar à lousa digital: mudança."], [132.98, 139.28, "Mas conversar com os alunos e ensinar com alegria continuou: permanência."], [140.46, 146.3, "Toda fonte foi criada por alguém, num tempo e num lugar, com um objetivo."], [146.31, 153.41, "O detetive pergunta: quem produziu? Para quem foi feita? Qual era o objetivo?"], [153.42, 157.2, "O anúncio e a propaganda servem para vender."], [157.21, 163.8, "Cada pessoa olha de um jeito. Por isso o historiador compara várias fontes."], [164.98, 170.13, "Seu Francisco entregava cartas a pé, com uma bolsa de couro."], [170.14, 174.07, "Depois veio a bicicleta, depois a moto."], [174.08, 180.94, "Hoje os carteiros usam aparelhos com tela, e as mensagens chegam em segundos pelo celular."], [180.95, 186.67, "A profissão de carteiro continua existindo, de um jeito diferente."], [187.85, 195.31, "No começo, o Doutor João usava estetoscópio, termômetro de mercúrio, papel e caneta."], [195.32, 202.75, "Os exames demoravam dias. Hoje chegam pelo celular, e tem até consulta por vídeo."], [202.76, 207.5, "Mas o cuidado com cada paciente continua igual."], [208.68, 214.05, "Antes, o Seu Pedro arava a terra com um arado puxado por bois."], [214.06, 220.43, "Depois vieram os tratores. Hoje ele usa o celular para saber se vai chover."], [220.44, 228.62, "Lá atrás, as pessoas eram nômades. Com a agricultura, surgiram as primeiras cidades."], [229.8, 238.31, "O acendedor de lampião acendia os postes um a um. Com a energia elétrica, essa profissão desapareceu."], [238.32, 244.72, "A tecnologia também criou profissões novas, como desenvolvedor de aplicativos."], [244.73, 253.6, "Cada profissão tem suas ferramentas: a câmera de tripé era do fotógrafo; a marreta e a colher, do pedreiro."], [254.78, 265.95, "As cidades mais antigas cresceram perto dos rios: o Nilo, no Egito; o Tigre e o Eufrates, na Mesopotâmia; e o Rio Amarelo, na China."], [265.96, 270.44, "Patrimônio é o que é importante para a memória de um povo."], [270.45, 278.24, "Museus e estátuas são patrimônio material. Capoeira e festa junina são patrimônio imaterial."], [279.42, 288.48, "Os registros, na ordem: jornal, carta, diário, álbum de fotos, foto digital e redes sociais."], [288.49, 294.91, "O relógio marca o tempo igual para todos, mas cada um sente o tempo de um jeito."], [296.09, 300.29, "O que você faz hoje será a fonte histórica de amanhã."], [300.3, 308.78, "Para entender para onde vamos, precisamos descobrir de onde viemos. Boa prova, detetive!"]];
+  var cap=document.getElementById('ptcap');
+  function mostra(){
+    var on=document.body.classList.contains('show-tr'), s='', t=v.currentTime;
+    if(on) for(var i=0;i<CUES.length;i++){ if(t>=CUES[i][0]&&t<CUES[i][1]){ s=CUES[i][2]; break; } }
+    if(cap.textContent!==s) cap.textContent=s;
+  }
+  v.addEventListener('timeupdate',mostra); v.addEventListener('seeked',mostra);
+  var orig=window.toggleTr; window.toggleTr=function(){ orig(); mostra(); };
+  mostra();
+})();
+</script>
+<script>window.SERA_ACCENT={accent:'#a855f7'};</script>
+<script src="sera_theme.js?v=73cf86c1244"></script>
+</body>
+</html>
