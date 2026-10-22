@@ -9,7 +9,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.normpath(os.path.join(AQUI, '..', '..', '..', 'ferramentas', 'HIS3_jogo.html')).replace('\\', '/')
 BOT = open(os.path.join(AQUI, 'crianca_bot.js'), encoding='utf-8').read()
 MUDO = "try{ speechSynthesis.speak=function(){}; speechSynthesis.cancel=function(){}; speechSynthesis.getVoices=function(){return [];}; }catch(e){} window.SpeechSynthesisUtterance=function(){}; window.AudioContext=window.webkitAudioContext=function(){ throw new Error('audio off'); };"
-NOMES = {0: 'Vila', 1: 'Floresta', 2: 'Corrida', 3: 'Recife', 4: 'Ceu', 5: 'Ginasio', 6: 'Estadio', 7: 'Biscoito', 8: 'Castelo'}
+NOMES = {0: 'Escola', 1: 'Casa', 2: 'Corrida', 3: 'Fazenda', 4: 'Rios', 5: 'Cidade', 6: 'Estadio', 7: 'Trilha', 8: 'Museu'}
 reinos = [int(x) for x in (sys.argv[1] if len(sys.argv) > 1 else '0,1,3,4,5,6,7,8,2').split(',')]
 nsem = int(sys.argv[2]) if len(sys.argv) > 2 else 4
 falhas = []; resumo = {}

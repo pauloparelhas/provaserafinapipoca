@@ -32,9 +32,15 @@ def casa():
     fx(0, W - 1, 0, '#'); fx(0, W - 1, 1, '#')               # telhado
     fx(0, W - 1, 32, '#'); fx(0, W - 1, 33, '#')             # chão do porão
     # lajes dos andares (linha de apoio) com o buraco da "escada" alternando lados
-    for r, h0 in [(26, 33), (20, 3), (14, 33), (8, 3)]:
-        fx(1, W - 2, r, '#'); fx(h0, h0 + 2, r, ' ')
-        fx(h0, h0 + 2, r + 3, '=')                            # degrau debaixo do buraco
+    # buraco de 4 tiles; o degrau fica na metade ESQUERDA do buraco: o pulo sobe e cai na laje à direita
+    # o buraco fica encostado na parede: só há um lado para subir (o mapa ziguezagueia)
+    # escada de 2 degraus de 2 tiles (pulo confortável para 7 anos): degrau 1 ao lado, degrau 2 debaixo do buraco
+    # pulo simples sobe ~2,8 tiles: cada laje tem uma escadinha de 2 degraus de 2 tiles, os dois DENTRO do buraco
+    # (nada depende do poder; as pantufas só facilitam)
+    for r, h0, e0, d0 in [(26, 35, 35, 37), (20, 1, 3, 1), (14, 35, 35, 37), (8, 1, 3, 1)]:
+        fx(1, W - 2, r, '#'); fx(h0, h0 + 3, r, ' ')
+        fx(e0, e0 + 1, r + 4, '=')                            # degrau 1
+        fx(d0, d0 + 1, r + 2, '=')                            # degrau 2
     # PORÃO (r=32): começo calmo, o poder, uma poeira, baú para pular
     p(3, 31, 'U'); fx(6, 9, 30, 'o')
     p(12, 31, '*')                                            # o poder da fase (pantufas saltadoras)
@@ -42,24 +48,23 @@ def casa():
     fx(21, 22, 31, '#'); fx(21, 22, 30, 'o')                  # baú baixo
     p(27, 31, 'i')                                            # bolinha de poeira (se pisa)
     # SALA (r=26)
-    p(37, 25, 'c'); fx(26, 29, 23, 'o')
+    p(33, 25, 'c'); fx(26, 29, 23, 'o')
     p(28, 25, 'D')                                            # 1ª porta: a Vovó conta (fonte oral)
-    fx(18, 20, 23, '='); fx(18, 20, 22, 'o')
+    fx(18, 19, 25, '#'); fx(18, 19, 24, 'o')                  # mesinha baixa (sob a laje só cabe obstáculo baixo)
     p(14, 25, 'i')
     fx(9, 10, 25, '#')                                        # sofá antigo
     # QUARTO (r=20)
-    p(4, 19, 'c')
+    p(6, 19, 'c')
     p(10, 19, 'D')                                            # 2ª porta: o baú das fontes
-    fx(16, 17, 19, '#'); p(19, 19, 'S')                       # cômoda + mola
-    fx(21, 24, 16, '='); fx(21, 24, 15, 'o')
+    fx(16, 17, 19, '#')                                       # cômoda
+    fx(22, 25, 19, 'o')
     p(28, 19, 'i')
     # CORREDOR (r=14)
-    p(37, 13, 'c')
-    fx(24, 26, 11, 'f')                                       # tábua solta (cai)
-    p(20, 13, 'i'); fx(12, 15, 11, '='); fx(12, 15, 10, 'o')
-    p(8, 13, 'E')                                             # Traçona (mini-chefe)
+    p(33, 13, 'c')
+    p(20, 13, 'i'); fx(15, 18, 13, 'o'); fx(25, 26, 13, '#')
+    p(12, 13, 'E')                                             # Traçona (mini-chefe)
     # SÓTÃO (r=8)
-    p(4, 7, 'c')
+    p(6, 7, 'c')
     p(14, 7, 'D')                                             # 3ª porta: o álbum de fotos
     fx(20, 22, 5, 'o')
     p(26, 7, 'i')

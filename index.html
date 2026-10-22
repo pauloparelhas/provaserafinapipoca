@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
-<title>English — 3rd term</title>
+<title>História — 3º trimestre</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
@@ -210,79 +210,65 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
 <canvas id="starfield"></canvas>
 <div id="app">
 
-  <!-- Imersão em inglês (Paulo, 14/10): NADA em português na tela; o português
-       aparece só com a bandeira do Brasil (body.show-tr, chave 'ing3_tr', a mesma
-       do simulado, da teoria, do vídeo e do jogo). -->
   <div class="ctrls">
-    <button class="cbtn" id="trBtn" onclick="alternaTr()" aria-pressed="false" title="Portuguese"><svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rect width="28" height="20" rx="3" fill="#009c3b"/><path d="M14 3 25 10 14 17 3 10z" fill="#ffdf00"/><circle cx="14" cy="10" r="4.2" fill="#002776"/></svg></button>
-    <button class="cbtn" id="themeBtn" onclick="toggleTema()" aria-pressed="false" title="Light or dark">
-      <span class="ce" id="themeEmo">&#9728;&#65039;</span><span id="themeTxt">Light mode</span>
+    <button class="cbtn" id="themeBtn" onclick="toggleTema()" aria-pressed="false" title="Claro ou escuro">
+      <span class="ce" id="themeEmo">&#9728;&#65039;</span><span id="themeTxt">Modo claro</span>
     </button>
   </div>
 
   <div class="header">
-    <div class="badge">&#x1F4DA; 3rd term &middot; Year 2</div>
-    <div class="mascot">&#x1F3F0;</div>
-    <div class="title">English</div>
-    <div class="subtitle">Fairy tales &middot; Real or make-believe &middot; Circle stories &middot; Cause and effect &middot; Poems<span class="tr">Contos de fadas · Real ou faz de conta · Histórias circulares · Causa e efeito · Poemas</span></div>
+    <div class="badge">&#x1F4DA; 3º trimestre &middot; Year 2 &middot; prova 27/10</div>
+    <div class="mascot">&#x1F50E;</div>
+    <div class="title">História</div>
+    <div class="subtitle">Detetives do Tempo: fontes históricas &middot; a escola tem história &middot; profissões que mudaram e que continuaram</div>
   </div>
 
-  <!-- ================= INGLES (ELA) 3o TRI =================
-       Insumo: trabalho/3tri_ingles/insumo (poster Cause and Effect + 6 slides).
-       Roteiro unico: trabalho/3tri_ingles/_roteiro.md. Banco unico: ING3_banco.js. -->
+  <!-- ================= HISTÓRIA 3o TRI =================
+       Insumos: trabalho/3tri_historia (U3 Fontes históricas, U4 O mundo do trabalho, U1/U2 base).
+       Roteiro único: trabalho/3tri_historia/_roteiro.md. Banco único: HIS3_banco.js. -->
   <section class="geo-panel">
-
-    <a class="hero2" href="ferramentas/ING3_simulado.html">
+    <a class="hero2" href="ferramentas/HIS3_simulado.html">
       <span class="em">&#x270F;&#xFE0F;</span>
       <span>
-        <span class="tt">Practice Test</span>
-        <span class="dd">Just like the real test.<span class="tr">Igual à prova de verdade.</span></span>
+        <span class="tt">Simulado</span>
+        <span class="dd">Igual à prova de verdade.</span>
       </span>
-      <span class="go">Start</span>
+      <span class="go">Começar</span>
     </a>
     <div style="margin-top:16px"></div>
-    <a class="hero" href="ferramentas/ING3_jogo.html" style="border-radius:22px">
-      <span class="em">&#x1F3F0;</span>
+    <a class="hero" href="ferramentas/HIS3_jogo.html" style="border-radius:22px">
+      <span class="em">&#x1F50D;</span>
       <span>
-        <span class="tt">The Lost Endings</span>
-        <span class="dd">Find the lost pages and save the stories!<span class="tr">Ache as páginas perdidas e salve as histórias!</span></span>
+        <span class="tt">Detetives do Tempo</span>
+        <span class="dd">A Rainha Traça está roendo as pistas do passado. Salve o Museu da Memória!</span>
       </span>
-      <span class="go">Play</span>
+      <span class="go">Jogar</span>
     </a>
     <div class="picks" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px">
-      <a class="pick mat" href="ferramentas/ING3_estudo.html">
+      <a class="pick mat" href="ferramentas/HIS3_estudo.html">
         <span class="em">&#x1F4D6;</span>
         <span>
-          <span class="tt">Study</span>
-          <span class="dd">8 short lessons with practice<span class="tr">8 lições curtas com treino</span></span>
+          <span class="tt">Caderno do Detetive</span>
+          <span class="dd">13 lições curtas, com treino</span>
         </span>
-        <span class="tag">Study</span>
+        <span class="tag">Estudar</span>
       </a>
-      <a class="pick video" href="ferramentas/ING3_video.html">
-        <span class="em">&#x1F3AC;</span>
-        <span>
-          <span class="tt">The video</span>
-          <span class="dd">Everything for the test in 5 minutes<span class="tr">Tudo da prova em 5 minutos</span></span>
-        </span>
-        <span class="tag">Watch</span>
-      </a>
-      <a class="pick mat" href="ferramentas/ING3_pocket.html">
+      <!--VIDEO_HIS3-->
+      <a class="pick mat" href="ferramentas/HIS3_pocket.html">
         <span class="em">&#x1F5A8;&#xFE0F;</span>
         <span>
-          <span class="tt">Pocket — one page</span>
-          <span class="dd">Everything for the test on one sheet. Print it in color!<span class="tr">Tudo da prova numa folha. Imprima colorido!</span></span>
+          <span class="tt">Pocket — uma folha</span>
+          <span class="dd">Tudo da prova numa folha. Imprima colorido!</span>
         </span>
-        <span class="tag">Print</span>
+        <span class="tag">Imprimir</span>
       </a>
     </div>
   </section>
 
   <div class="footer">
-    <div class="footer-logo">&#x1F3F0; English &middot; 3rd term</div>
-    <div class="footer-note">
-      From the school material: the &ldquo;Cause and Effect&rdquo; poster and the E.L.A. slides of the 3rd term.<span class="tr">Do material da escola: o pôster “Cause and Effect” e os slides de E.L.A. do 3º trimestre.</span>
-    </div>
-    <button class="refresh-btn" onclick="hardRefresh()">&#x21BA; Refresh the site</button>
+    <div class="footer-logo">&#x1F50E; História &middot; 3º trimestre</div>
+    <div class="footer-note">Do material da escola: Unidade 3 (Fontes históricas) e Unidade 4 (O mundo do trabalho), com a base das Unidades 1 e 2.</div>
+    <button class="refresh-btn" onclick="hardRefresh()">&#x21BA; Atualizar o site</button>
   </div>
 </div>
 <script>
@@ -301,7 +287,7 @@ function pintaTema(){
   var claro=ehClaro();
   document.body.classList.toggle('light',claro);
   document.getElementById('themeEmo').innerHTML=claro?'🌙':'☀️';
-  document.getElementById('themeTxt').textContent=claro?'Dark mode':'Light mode';
+  document.getElementById('themeTxt').textContent=claro?'Modo escuro':'Modo claro';
   document.getElementById('themeBtn').setAttribute('aria-pressed',String(claro));
   var m=document.querySelector('meta[name=theme-color]');
   if(m) m.setAttribute('content',claro?'#eef5ff':'#0d0b1e');
@@ -313,7 +299,7 @@ function toggleTema(){
 pintaTema();
 
 /* bandeira do Brasil: liga/desliga o português em todo o site (mesma chave das ferramentas) */
-function pintaTr(){ var on=false; try{ on=localStorage.getItem('ing3_tr')==='1'; }catch(e){} document.body.classList.toggle('show-tr',on); var b=document.getElementById('trBtn'); if(b) b.setAttribute('aria-pressed',String(on)); }
+function pintaTr(){ var on=false; document.body.classList.toggle('show-tr',on); var b=document.getElementById('trBtn'); if(b) b.setAttribute('aria-pressed',String(on)); }
 function alternaTr(){ var on=!document.body.classList.contains('show-tr'); try{ localStorage.setItem('ing3_tr',on?'1':'0'); }catch(e){} pintaTr(); }
 pintaTr();
 function hardRefresh(){ window.location.href=window.location.pathname+'?v='+Date.now(); }

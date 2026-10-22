@@ -338,6 +338,12 @@ function mesa(c,larg){ var h=46; c.fillStyle='#92400e'; c.fillRect(-larg/2+6,-h,
   c.strokeStyle='rgba(0,0,0,.15)'; c.lineWidth=1; c.strokeRect(-larg/2,-h-6,larg,24); return -h-6; }
 function desenhaHist(c,it,t){
   var n=it.nome, topo;
+  if(A.itemTrilha){ /* HIS3: cada registro da Trilha do Tempo num pedestal do museu */
+    var IC={cookie:0,milk:1,napkin:3,mirror:4,scissors:5,broom:6,tape:7}, PL={cookie:'COOKIE',milk:'MILK + STRAW',napkin:'NAPKINS',mirror:'MIRROR',scissors:'SCISSORS',broom:'BROOM',tape:'TAPE'};
+    c.fillStyle=lin(c,-16,0,16,0,'#e7e5e4','#a8a29e'); rr(c,-16,-46,32,46,4); c.fill(); c.fillStyle='#d6d3d1'; rr(c,-24,-52,48,8,3); c.fill(); rr(c,-22,-4,44,6,3); c.fill();
+    if(it.pego&&!it.fim){ placa(c,0,-110,PL[n]||'COOKIE'); return; }
+    c.save(); c.translate(0,-80); c.fillStyle='rgba(255,255,255,.95)'; circ(c,0,0,25); c.fill(); c.strokeStyle='#d97706'; c.lineWidth=2.5; circ(c,0,0,25); c.stroke(); c.scale(1.5,1.5); A.itemTrilha(c,it.fim?8:(IC[n]||0),t); c.restore();
+    placa(c,0,-122,PL[n]||'COOKIE'); return; }
   switch(n){
     case 'cookie': topo=mesa(c,150); if(it.pego) return; c.fillStyle='#fff'; el(c,0,topo-2,30,8); c.fill(); c.strokeStyle='#cbd5e1'; c.lineWidth=2; el(c,0,topo-2,30,8); c.stroke(); A.biscoito(c,0,topo-14,17,0); placa(c,0,topo-50,'COOKIE'); return;
     case 'milk': topo=mesa(c,150); if(it.pego){ c.fillStyle='rgba(191,219,254,.5)'; c.beginPath(); c.moveTo(-14,topo-56); c.lineTo(14,topo-56); c.lineTo(11,topo); c.lineTo(-11,topo); c.closePath(); c.fill(); return; }

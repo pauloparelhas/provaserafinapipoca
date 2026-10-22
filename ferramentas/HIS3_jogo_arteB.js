@@ -124,14 +124,14 @@ function escolaPredio(c,x,y,t){
   c.fillStyle='#2f7fc1'; c.fillRect(x,y-36,w,36); c.fillStyle='#1f5f97'; c.fillRect(x,y-38,w,4);
   c.fillStyle='rgba(255,255,255,.12)'; for(i=0;i<w;i+=24) c.fillRect(x+i,y-34,2,34);
   c.fillStyle='#e7b86a'; c.fillRect(x-6,y-h-10,w+12,12); c.fillStyle='#fff5d8'; c.fillRect(x-6,y-h-10,w+12,3);
-  for(r=0;r<2;r++) for(i=0;i<6;i++){ if(i===2||i===3) continue; janelaEsc(c,x+22+i*66,y-h+22+r*62,40,40,x*.01+i+r*7); }
+  for(r=0;r<2;r++) for(i=0;i<6;i++){ if(i===2||i===3) continue; janelaEsc(c,x+22+i*66,y-h+22+r*62,40,40,i+r*7); }
   /* bloco da entrada: frontão, relógio e placa */
   c.fillStyle=lin(c,0,y-h-40,0,y,'#fff6dc','#f3d89a'); c.fillRect(ex-62,y-h-30,124,h+30);
   c.fillStyle='#e7b86a'; c.beginPath(); c.moveTo(ex-72,y-h-28); c.lineTo(ex,y-h-70); c.lineTo(ex+72,y-h-28); c.fill(); c.fillStyle='#fff5d8'; c.beginPath(); c.moveTo(ex-58,y-h-32); c.lineTo(ex,y-h-62); c.lineTo(ex+58,y-h-32); c.fill();
   relogio(c,ex,y-h-40,15,t,'#c98a2e');
   c.fillStyle='#1f5f97'; rr(c,ex-56,y-h-14,112,26,6); c.fill(); c.strokeStyle='#fff5d8'; c.lineWidth=2; rr(c,ex-53,y-h-11,106,20,4); c.stroke();
   txt(c,'ESCOLA',ex,y-h-1,14,'#fff5d8');
-  janelaEsc(c,ex-44,y-h+40,30,34,x+3); janelaEsc(c,ex+14,y-h+40,30,34,x+4);
+  janelaEsc(c,ex-44,y-h+40,30,34,3.3); janelaEsc(c,ex+14,y-h+40,30,34,4.4);
   c.fillStyle='#1f5f97'; c.fillRect(ex-34,y-78,68,78); c.fillStyle=lin(c,0,y-74,0,y,'#3fa05a','#26773e'); c.fillRect(ex-30,y-74,29,74); c.fillRect(ex+1,y-74,29,74);
   c.fillStyle=lin(c,0,y-68,0,y-40,'#d8f0ff','#8cc0e0'); c.fillRect(ex-26,y-68,21,26); c.fillRect(ex+5,y-68,21,26);
   c.fillStyle='#f6cf4a'; c.fillRect(ex-6,y-38,3,12); c.fillRect(ex+3,y-38,3,12);
@@ -454,7 +454,7 @@ function fenoRedondo(c,x,y){
 function pertoFazenda(c,cam,t){
   rep(cam,1300,function(ox){ if(ox>W+80||ox<-1380) return;
     cercaRustica(c,ox+20,452,410); cercaRustica(c,ox+780,452,300);
-    for(var i=0;i<7;i++) milho(c,ox+470+i*30,452,96+hash(i+ox*.001)*20,t,i);
+    for(var i=0;i<7;i++) milho(c,ox+470+i*30,452,96+hash(i+.5)*20,t,i);
     espantalho(c,ox+700,452,t); fenoRedondo(c,ox+1170,452);
     galinha(c,ox+180,452,t,1,0); galinha(c,ox+220,452,t,-1,2); galinha(c,ox+1110,452,t,1,4);
     arvoreR(c,ox+1260,452,180,'#4f8f4a','#6fb35e');

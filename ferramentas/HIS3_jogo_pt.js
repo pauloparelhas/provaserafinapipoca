@@ -14,7 +14,7 @@ var D={
 "Stop that, little hero!": "Pare com isso, detetivezinho!",
 "Grr! My letters!": "Grr! Minhas letras!",
 "Climb the letters to the Count!": "Suba nas letras até a Rainha!",
-"SUPER": "PLAYER!",
+"VOCÊ": "FAZ",
 "You did it! The Big Blot is gone!": "Conseguiu! A Traçona fugiu!",
 "GO": "VAI",
 "BRAKE": "FREIA",
@@ -159,7 +159,11 @@ var D={
 "Tesoura": "Álbum",
 "Vassoura": "Espanador",
 "Fita adesiva": "Fita",
-"Kingdom complete!": "Fase concluída!"
+"Kingdom complete!": "Fase concluída!",
+"CAUSE & EFFECT": "FEIRA DAS PROFISSÕES",
+"A B C": "A B C",
+"cookies": "biscoitos",
+"Leite": "Jornal"
 };
 var RX=[["^Checkered flag! You finished (.*)$", "Bandeira quadriculada! Você chegou em $1"], ["^You finished (.*)$", "Você chegou em $1"], ["^The crew needs \\+(.*)$", "A equipe precisa de +$1"], ["^Right answer = TURBO! (.*)$", "Resposta certa = TURBO! $1"], ["^Right answers: (.*)$", "Respostas certas: $1"], ["^LAP (.*)$", "VOLTA $1"], ["^ROUND (.*)$", "RODADA $1"], ["^GOALS (.*)$", "GOLS $1"], ["^GOAL! (.*)$", "GOL! $1"], ["^Time is up! (.*)$", "Acabou o tempo! $1"], ["^You found a lost page! \\((.*)$", "Você recuperou uma carta de fonte! ($1"], ["^Break his shield: knock over the inkwells! +(.*)$", "Quebre o escudo: derrube as caixas de papel roído! $1"], ["^Break his shield: jump on the blots! +(.*)$", "Quebre o escudo: pule nas bolinhas de poeira! $1"], ["^(\\d+)(st|nd|rd|th)$", "$1º"], ["^(\\d+)(st|nd|rd|th) place(.*)$", "$1º lugar$3"]].map(function(r){ return [new RegExp(r[0]), r[1]]; });
 function tr(s){ if(typeof s!=="string"||!s) return s; var k=s.trim(); if(D[k]!==undefined) return s.replace(k,D[k]); for(var i=0;i<RX.length;i++){ if(RX[i][0].test(s)) return s.replace(RX[i][0],RX[i][1]); } return s; }

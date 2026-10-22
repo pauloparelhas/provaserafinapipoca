@@ -31,7 +31,17 @@ window.CRIANCA = (function(){
     return perto; }
   function pula(seg){ st.pulo=Math.max(st.pulo,seg); }
   /* para onde ir: porta/baú pendente atrás e perto → volta (a criança segue a seta); senão, direita */
+  /* HIS3: fase VERTICAL (Casa da Vovó): no andar, vai à porta pendente / ao poder / ao fim; senão sobe:
+     a superfície acima mais perto (degrau sob o buraco da laje, ou a borda da laje ao lado do buraco) */
+  function alvoVertical(){ var u=J.urso, M=J.mundo, al=null, d=function(x){ return Math.abs(x-u.x); };
+    M.moradores.forEach(function(m){ if(!m.feito&&Math.abs(m.y-u.y)<50&&(!al||d(m.x)<d(al.x))) al={x:m.x}; }); if(al) return al;
+    M.itens.forEach(function(it){ if(!it.pego&&it.tipo==='poder'&&Math.abs(it.y+T/2-u.y)<60) al={x:it.x}; }); if(al) return al;
+    if(M.mastro&&Math.abs(M.mastro.y-u.y)<50) return {x:M.mastro.x};
+    G.umaVia(M).map(function(p){ return {x:p.x,y:p.y,w:p.w,fina:1}; }).concat(G.solidos(M)).forEach(function(p){ var dy=u.y-p.y; if(dy<80||dy>150||p.w>=M.w-T*3||(!p.fina&&p.w<3*T-2)) return;
+      var xs=p.w<=T*4?[p.x+p.w/2]:[p.x+28,p.x+p.w-28]; xs.forEach(function(x){ var pen=function(z){ return d(z); }; if(!al||pen(x)<pen(al.x)) al={x:x,sobe:true}; }); }); /* subir sempre para a DIREITA do buraco (é o caminho do mapa) */
+    return al; }
   function direcao(){ var u=J.urso, M=J.mundo, dir=1;
+    if(M.h>12*T){ var av=alvoVertical()||st.alvoV; st.alvoV=av; if(av){ if(av.sobe){ st.espera=(st.espera||0)-DT; if(Math.abs(av.x-u.x)<3.2*T&&u.noChao&&st.pulo<=0&&st.espera<=0){ pula(.32); st.espera=.9; st.duplo=u.puloExtra?.12:0; } } return Math.abs(av.x-u.x)<10?0:(av.x>u.x?1:-1); } }
     M.moradores.forEach(function(m){ if(!m.feito&&m.x<u.x-50&&u.x-m.x<500) dir=-1; });
     M.itens.forEach(function(it){ if(!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa'||(it.tipo==='historia'&&(it.nome==='milk'||PODERES.peloQuiz(it))))&&it.x<u.x-40&&u.x-it.x<500) dir=-1; });
     if(st.recua>0) dir=-1;
@@ -41,7 +51,7 @@ window.CRIANCA = (function(){
   function decideNivel(dt){
     var u=J.urso, M=J.mundo, inp=J.in; if(!u||!M) return;
     if(J.chefe) return decideChefe(dt);
-    var dir=direcao(); inp.left=dir<0; inp.right=dir>0; inp.down=false; if(dir===0){ dir=1; if(PERIGOS.canoSob()&&st.baixo<=0){ inp.down=true; J.downSolto=true; st.baixo=.8; } }
+    var dir=direcao(); inp.left=dir<0; inp.right=dir>0; inp.down=false; if(dir===0&&M.h>12*T){ dir=st.alvoV&&st.alvoV.x<J.urso.x?-1:1; } else if(dir===0){ dir=1; if(PERIGOS.canoSob()&&st.baixo<=0){ inp.down=true; J.downSolto=true; st.baixo=.8; } }
     /* entrar em porta/baú, pegar item com ▼, descer no cano (quase sempre: a criança segue a seta) */
     if(J.dica&&J.dica.botao&&st.baixo<=0){ if(rnd()<.9){ inp.down=true; J.downSolto=true; st.baixo=.6; } else st.baixo=1.5; }
     if(!J.dica&&window.PERIGOS&&I.J.nivel.sub&&PERIGOS.canoSob()){ var outro=J.mundo===J.nivel?J.nivel.sub:J.nivel, pend=outro&&outro.moradores.some(function(m){ return !m.feito; }); if((pend||J.mundo!==J.nivel)&&st.baixo<=0){ inp.down=true; J.downSolto=true; st.baixo=.8; } }
@@ -61,9 +71,9 @@ window.CRIANCA = (function(){
     }
     if((M.modo==='nado'||M.modo==='voo')&&u.poderes.tiro&&bicho(dir)&&st.acao<=0&&rnd()<.05) st.acao=.05; /* na água/no ar, a criança usa o poder no bicho da frente */
     if(st.acao>0){ st.acao-=dt; if(st.acao<=0&&window.PERIGOS){ PERIGOS.atira(); } }
-    if(!(M.modo==='voo'&&u.poderes.capa)){ if(st.pulo>0){ inp.jump=true; st.pulo-=dt; if(st.pulo<=0){ inp.jump=false; } } else inp.jump=false; }
+    if(!(M.modo==='voo'&&u.poderes.capa)){ if(st.pulo>0){ inp.jump=true; st.pulo-=dt; if(st.pulo<=0){ inp.jump=false; } } else { inp.jump=false; if(st.duplo>0&&!u.noChao){ st.duplo-=dt; if(st.duplo<=0){ J.jumpSolto=true; st.pulo=.3; } } } } /* HIS3: o 2º toque no ar (pulo duplo das pantufas) */
     /* travou? (não anda 3 s): pulo longo, ou recua um pouco e tenta de novo */
-    if(Math.abs(u.x-st.ultX)>6){ st.ultX=u.x; st.paradoT=0; } else { st.paradoT+=dt; if(st.paradoT>3){ st.travou.push({x:Math.round(u.x/T),mundo:M.mundo}); st.paradoT=0; if(rnd()<.5){ pula(.5); } else st.recua=.6; } }
+    if(Math.abs(u.x-st.ultX)>6||Math.abs(u.y-(st.ultY||0))>30){ st.ultX=u.x; st.ultY=u.y; st.paradoT=0; } else { st.paradoT+=dt; if(st.paradoT>3){ st.travou.push({x:Math.round(u.x/T),mundo:M.mundo}); st.paradoT=0; if(rnd()<.5){ pula(.5); } else st.recua=.6; } }
     if(st.recua>0) st.recua-=dt;
   }
   /* o chefão: tinteiro que brilha (sobe na prateleira e joga a ★), manchas (pisa), letras (sobe) */
