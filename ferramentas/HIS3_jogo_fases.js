@@ -17,7 +17,7 @@ var T=45, CHAO_Y=10*T;
 var LISTA=[
   {id:1, nome:'Escola do Tempo', nome_pt:'Escola do Tempo', cena:'vila', tema:'todos', at:['S1','S2','S3','S4','S5','S6','S7','P4','F1','F10'], moradores:['lucia','lucia','lucia'],
    resumo:'A escola tem história: fontes da escola, documentos da vida escolar, o que mudou e o que continuou.', resumo_pt:'A escola tem história: fontes da escola, documentos da vida escolar, o que mudou e o que continuou.'},
-  {id:2, nome:'Casa da Vovó', nome_pt:'Casa da Vovó', cena:'casa', subCena:'sub_arquivo', tema:'todos', at:['F2','F3','F4','F5','F6','F8','F12','M1','B6','B7'], moradores:['vovo','vovo','vovo'],
+  {id:2, nome:'Casa da Vovó', nome_pt:'Casa da Vovó', cena:'casa', subCena:'sub_arquivo', tema:'todos', at:['F2','F3','F4','F5','F6','F7','F8','F9','F12','M1','B6','B7'], moradores:['vovo','vovo','vovo'],
    resumo:'Suba até o sótão: as 4 cartas de fonte (oral, escrita, visual e material) e as fotos da família.', resumo_pt:'Suba até o sótão: as 4 cartas de fonte (oral, escrita, visual e material) e as fotos da família.'},
   {id:3, nome:'Corrida do Correio', nome_pt:'Corrida do Correio', cena:'pista', modo:'corrida', tema:'todos', at:['P3','P10','P8','P2','P1','P9','P14'], moradores:['francisco','francisco','francisco'],
    resumo:'Seu Francisco, o carteiro: a pé, de bicicleta, de moto e hoje. Profissões que mudaram e que sumiram.', resumo_pt:'Seu Francisco, o carteiro: a pé, de bicicleta, de moto e hoje. Profissões que mudaram e que sumiram.'},

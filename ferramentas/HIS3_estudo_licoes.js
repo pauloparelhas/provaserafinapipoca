@@ -133,7 +133,17 @@ return [
  {tipo:'texto', tit:'Legenda de detetive e fotos da família',
   fala:'Uma boa legenda diz o que a imagem mostra, que tipo de fonte é e o que ela pode contar sobre o passado. Para descobrir a história de uma foto antiga da família, pergunte: quem aparece, onde e quando foi tirada, o que estava acontecendo e por que ela é importante.',
   html:caixa('Legenda de fonte','<p>1. O que a imagem mostra?<br>2. Que tipo de fonte é?<br>3. O que ela pode contar sobre o passado?</p><p>Ex.: <i>foto de um trem a vapor antigo · fonte visual · mostra como as pessoas viajavam antigamente.</i></p>')+esp()+
-   caixa('Histórias escondidas nas fotografias','<p>Quem são as pessoas? Onde e quando foi tirada? O que estava acontecendo? Por que a foto é importante para a família?</p>')}
+   caixa('Histórias escondidas nas fotografias','<p>Quem são as pessoas? Onde e quando foi tirada? O que estava acontecendo? Por que a foto é importante para a família?</p>')},
+ {tipo:'escolha', tit:'Pode ser mais de uma: é fonte ESCRITA?', fala:'Pode ser mais de uma. Esta pista é fonte escrita?', pergunta:'Esta pista é fonte ESCRITA? (na prova, marque TODAS as escritas)',
+  rotulo:'Pista', proxRot:'Próxima', op:['Sim','Não'], itens:[
+   {m:'a carta antiga', c:'Sim', d:'Tem texto escrito.'},
+   {m:'o chapéu antigo, o objeto', c:'Não', d:'É objeto: material.'},
+   {m:'o diário da tia', c:'Sim', d:'Tem texto escrito.'},
+   {m:'as fotos do álbum', c:'Não', d:'São imagens: visual.'},
+   {m:'a certidão de nascimento', c:'Sim', d:'Documento escrito.'},
+   {m:'o mapa antigo', c:'Não', d:'Mapa é imagem: visual.'},
+   {m:'a mensagem escrita no verso do cartão-postal', c:'Sim', d:'A parte com letras é escrita; a foto da frente seria visual.'}
+  ]}
 ]},
 
 /* ===================== 4. A ESCOLA TEM HISTÓRIA ===================== */
@@ -166,7 +176,7 @@ return [
    {m:'um caderno guardado', c:'Sim', d:'O que está escrito no caderno é registro escrito.'},
    {m:'um bilhete da professora', c:'Sim', d:'Bilhete é texto escrito.'},
    {m:'um troféu antigo', c:'Não', d:'Troféu é fonte da escola, mas MATERIAL (objeto).'},
-   {m:'a foto antiga da turma', c:'Não', d:'Foto é fonte da escola, mas VISUAL.'}
+   {m:'a foto antiga da turma', c:'Não', d:'A foto também guarda lembranças da escola, mas é fonte VISUAL, não escrita.'}
   ]}
 ]},
 
@@ -216,7 +226,9 @@ return [
    {m:'um cartão-postal escrito numa viagem para os amigos', op:['Contar a viagem','Vender leite'], c:'Contar a viagem', d:'Quem viaja manda notícias.'},
    {m:'um anúncio de jornal: vende-se leite na rua tal', op:['Vender leite','Contar uma viagem'], c:'Vender leite', d:'Anúncio serve para vender.'},
    {m:'uma propaganda antiga de alimento para crianças', op:['Vender o alimento','Guardar uma receita'], c:'Vender o alimento', d:'Propaganda quer que você compre.'}
-  ]}
+  ]},
+ {tipo:'liga', tit:'Quem fez e para quem?', regra:'Toque na fonte e depois em quem fez ou para quem foi feita.', fala:'Ligue a fonte a quem fez ou para quem foi feita.',
+  pares:[['cartão-postal de Salvador: quem escreveu?','quem viajou'],['cartão-postal: para quem?','os amigos de quem viajou'],['propaganda do alimento: para quem?','as famílias'],['anúncio de leite: para quem?','quem queria comprar leite']]}
 ]},
 
 /* ===================== 7. PROFISSÕES NO TEMPO ===================== */
@@ -232,7 +244,14 @@ return [
   fala:'O acendedor de lampião caminhava pelas ruas acendendo os postes um a um. Com a chegada da energia elétrica, esse trabalho deixou de ser necessário. Novas tecnologias passaram a fazer coisas que antes eram feitas por pessoas.',
   html:caixa('O acendedor de lampião','<p>Caminhava pelas ruas acendendo os <b>postes um a um</b>. Com a <b>energia elétrica</b>, esse trabalho <b>deixou de existir</b>.</p>','#eab308')+esp()+
    R('Novas tecnologias passaram a fazer coisas que antes eram feitas por pessoas.')+
-   R('<b>Desapareceu</b> × <b>mudou</b>: o acendedor de lampião desapareceu; o carteiro mudou, mas continua existindo.')},
+   R('<b>Desapareceu</b> × <b>mudou</b>: o acendedor de lampião desapareceu; o carteiro mudou, mas continua existindo.')+
+   caixa('Nas fotos antigas da aula','<p>• o <b>leiteiro</b> entregava garrafas de leite na porta das casas<br>• a <b>datilógrafa</b> escrevia numa máquina de escrever<br>• vendedores de rua levavam cestos de frutas e vassouras</p>')},
+ {tipo:'escolha', tit:'Pode ser mais de uma: continua existindo?', fala:'Esta profissão das histórias continua existindo hoje?', pergunta:'Esta profissão continua existindo hoje? (pode ser mais de uma)',
+  rotulo:'Profissão', proxRot:'Próxima', op:['Sim','Não'], itens:[
+   {m:'carteiro, do Seu Francisco', c:'Sim', d:'Continua, de um jeito diferente.'},{m:'professora, da Dona Lúcia', c:'Sim', d:'Continua, com computador e lousa digital.'},
+   {m:'fazendeiro, do Seu Pedro', c:'Sim', d:'Continua, com trator e celular.'},{m:'médico, do Doutor João', c:'Sim', d:'Continua, com exames no celular.'},
+   {m:'acendedor de lampião', c:'Não', d:'Desapareceu com a energia elétrica.'}
+  ]},
  {tipo:'revela', tit:'Profissões novas e mais', regra:'Toque em cada cartão.',
   fala:'Todas as profissões de hoje já existiam no tempo dos avós? Não. A tecnologia criou profissões novas: designer gráfico, desenvolvedor de aplicativos, cientista de dados.',
   cartoes:[
@@ -322,7 +341,13 @@ return [
    R('Para cada profissão há <b>mais de uma</b> ferramenta.')},
  {tipo:'liga', tit:'Ligue a ferramenta à profissão', regra:'Toque numa ferramenta e depois na profissão.',
   fala:'Ligue a ferramenta à profissão.',
-  pares:[['estetoscópio e termômetro de mercúrio','médico'],['câmera antiga de tripé','fotógrafo'],['lousa e globo','professora'],['marreta e colher de pedreiro','construtor'],['bolsa de couro com cartas','carteiro'],['arado puxado por bois','fazendeiro']]}
+  pares:[['estetoscópio e termômetro de mercúrio','médico'],['câmera antiga de tripé','fotógrafo'],['lousa e globo','professora'],['marreta e colher de pedreiro','construtor'],['bolsa de couro com cartas','carteiro'],['arado puxado por bois','fazendeiro']]},
+ {tipo:'escolha', tit:'Pode ser mais de uma: é do MÉDICO?', fala:'É ferramenta do médico?', pergunta:'É ferramenta do MÉDICO? (pode ser mais de uma)', rotulo:'Ferramenta', proxRot:'Próxima', op:['Sim','Não'], itens:[
+   {m:'maleta', c:'Sim', d:'Do médico.'},{m:'seringa antiga', c:'Sim', d:'Do médico.'},{m:'termômetro de mercúrio', c:'Sim', d:'Do médico.'},{m:'estetoscópio', c:'Sim', d:'Do médico.'},{m:'globo', c:'Não', d:'É da professora.'},{m:'marreta', c:'Não', d:'É do construtor.'}
+  ]},
+ {tipo:'escolha', tit:'Pode ser mais de uma: é do CONSTRUTOR?', fala:'É ferramenta do construtor?', pergunta:'É ferramenta do CONSTRUTOR? (pode ser mais de uma)', rotulo:'Ferramenta', proxRot:'Próxima', op:['Sim','Não'], itens:[
+   {m:'marreta', c:'Sim', d:'Do construtor.'},{m:'colher de pedreiro', c:'Sim', d:'Do construtor.'},{m:'pincel, junto da marreta e da colher', c:'Sim', d:'Do construtor.'},{m:'lousa', c:'Não', d:'É da professora.'},{m:'câmera de tripé', c:'Não', d:'É do fotógrafo.'}
+  ]}
 ]},
 
 /* ===================== 12. RIOS ANTIGOS E PATRIMÔNIO ===================== */
@@ -366,9 +391,31 @@ return [
    R('Em <i>A árvore generosa</i>, o menino cresceu: o tempo passou e o que ele queria <b>mudou</b>.')},
  {tipo:'texto', tit:'Memória, registros e museus',
   fala:'A linha do tempo dos registros, na ordem do material: jornal, carta, diário, álbum de fotos, foto digital e redes sociais. Documentos pessoais, como a certidão de nascimento, registram a nossa história. Festas guardam lembranças, e museus e arquivos guardam memórias para as futuras gerações.',
-  html:passos([{t:'jornal'},{t:'carta'},{t:'diário'},{t:'álbum de fotos',s:'tempo dos bisavós e avós'},{t:'foto digital',s:'quando papai e mamãe eram crianças'},{t:'redes sociais',s:'hoje'}])+
+  html:passos([{t:'jornal'},{t:'carta'},{t:'diário'},{t:'álbum de fotos',s:'bem antigo'},{t:'foto digital',s:'quando papai e mamãe eram crianças'},{t:'redes sociais',s:'hoje'}])+
    R('<b>Documentos pessoais</b> (como a certidão de nascimento) registram a nossa história.')+
    R('<b>Festas</b> guardam lembranças; <b>museus e arquivos</b> guardam memórias para as futuras gerações.')}
+]},
+
+/* ===================== 14. RESPOSTAS DE DETETIVE (perguntas abertas) ===================== */
+{k:'respostas', tema:'fontes', nome:'Respostas de detetive (com as suas palavras)', cor:'#7c3aed', quem:'Dra. Clio',
+ treino:[[['fontes','escola','profissoes','olhar'],4,'conceito']], telas:[
+ {tipo:'texto', tit:'Na prova pode ter pergunta aberta',
+  fala:'Na prova pode ter pergunta para responder com as suas palavras. Leia a pergunta, pense e depois toque para ver um jeito de responder.',
+  html:fala('Dra. Clio','Pergunta aberta = responder com as suas palavras. Pense primeiro, depois toque no cartão e compare com o modelo!')},
+ {tipo:'revela', tit:'Fontes e escola', regra:'Pense na resposta. Depois toque para ver o modelo.', fala:'Respostas de detetive sobre fontes e escola.',
+  cartoes:[
+   {f:'Como registramos o passado?', b:'Com fontes históricas: relatos contados (oral), textos (escrita), imagens (visual) e objetos (material).'},
+   {f:'O que são fontes históricas?', b:'São pistas do passado: tudo o que a gente pode ver, ouvir, tocar ou ler para aprender sobre outras épocas.'},
+   {f:'Como objetos e documentos da escola contam o passado dela?', b:'Fotos de turmas, cadernos, boletins, uniformes e troféus mostram como era o ensino, as regras e o dia a dia, e o que mudou.'},
+   {f:'O que objetos, documentos e festas têm a ver com História?', b:'Eles guardam lembranças e contam o passado das pessoas e da escola.'}
+  ]},
+ {tipo:'revela', tit:'Pontos de vista e profissões', regra:'Pense na resposta. Depois toque para ver o modelo.', fala:'Respostas de detetive sobre pontos de vista e profissões.',
+  cartoes:[
+   {f:'Por que existem histórias diferentes a partir de um mesmo documento?', b:'Porque cada pessoa olha com a sua experiência, imaginação e ponto de vista. Por isso o historiador compara várias fontes.'},
+   {f:'Como as formas de trabalho mudaram com o tempo?', b:'Surgiram novas máquinas e tecnologias: o carteiro passou da bicicleta para a moto e o aparelho com tela; o fazendeiro, dos bois para o trator.'},
+   {f:'O que mudou e o que continuou nas profissões?', b:'Mudaram as ferramentas e o jeito de trabalhar. Continuou o mais importante: cuidar das pessoas, ensinar com alegria, amar a terra.'},
+   {f:'Por que o acendedor de lampião não existe mais?', b:'Porque chegou a energia elétrica, e os postes passaram a acender sozinhos.'}
+  ]}
 ]}
 
 ];

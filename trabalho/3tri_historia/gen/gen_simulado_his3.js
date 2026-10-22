@@ -8,7 +8,7 @@ const I = window.HIS3;
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const UP = s => esc(String(s).toLocaleUpperCase('pt-BR'));
 /* rodada de 15 com o peso do roteiro v1.1: U3 ≈ 50% (fontes+escola+olhar), U4 ≈ 33%, mundo e base 1 cada */
-const COTA = { fontes: 5, escola: 2, olhar: 1, mundo: 1, profissoes: 5, tempo: 1 };
+const COTA = { fontes: 4, escola: 3, olhar: 1, mundo: 1, profissoes: 5, tempo: 1 };
 const BLOCO = { fontes: 'A', escola: 'A', profissoes: 'A', olhar: 'B', mundo: 'B', tempo: 'B' };
 const FAMILIAS = Object.keys(I.TEMAS).map(k => ({ k, nome: I.TEMAS[k].nome, cor: I.TEMAS[k].cor, cota: COTA[k], bloco: BLOCO[k] }));
 const ITENS = I.ITENS.map(it => {

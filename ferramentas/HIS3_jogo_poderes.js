@@ -49,7 +49,7 @@ var HIST={ /* HIS3: a Trilha da Linha do Tempo — os registros na ORDEM do mate
   milk:{verbo:'Pegue!',verboPt:'Pegue!',fala:'O jornal: um dos primeiros registros, de muito tempo atrás.',falaPt:'O jornal: um dos primeiros registros, de muito tempo atrás.'},
   napkin:{verbo:'Pegue!',verboPt:'Pegue!',fala:'A carta, escrita à mão. Abra o envelope: ele vira paraquedas!',falaPt:'A carta, escrita à mão. Abra o envelope: ele vira paraquedas!'},
   mirror:{verbo:'Pegue!',verboPt:'Pegue!',fala:'O diário: alguém escrevia o que vivia todo dia.',falaPt:'O diário: alguém escrevia o que vivia todo dia.'},
-  scissors:{verbo:'Pegue!',verboPt:'Pegue!',fala:'O álbum de fotos, do tempo dos bisavós e dos avós.',falaPt:'O álbum de fotos, do tempo dos bisavós e dos avós.'},
+  scissors:{verbo:'Pegue!',verboPt:'Pegue!',fala:'O álbum de fotos guarda fotos bem antigas.',falaPt:'O álbum de fotos guarda fotos bem antigas.'},
   broom:{verbo:'Pegue!',verboPt:'Pegue!',fala:'O espanador! Espante a poeira das traças.',falaPt:'O espanador! Espante a poeira das traças.'},
   tape:{verbo:'Pegue!',verboPt:'Pegue!',fala:'A fita! Conserte a ponte de papel rasgada.',falaPt:'A fita! Conserte a ponte de papel rasgada.'},
   fim:{fala:'Depois vieram a foto digital e as redes sociais. A ampulheta vira de novo: o tempo não para!',falaPt:'Depois vieram a foto digital e as redes sociais. A ampulheta vira de novo: o tempo não para!'}
