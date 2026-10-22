@@ -94,7 +94,7 @@ function falaC(en,pt,dur){ if(!C) return; en=PT(pt||en); C.fala={en:en,pt:'',t:0
 function inicia(L){
   C={x:19*T, y:SACADA_Y, letrasOk:0, letraVoa:[], escudo:true, fadaOn:false, visitas:0, fadaDepois:0, esperaFada:0, fadaSai:0, mortes:0, tiros:[], dons:[], fada:{x:2.4*T,y:CHAO-150,fala:null} /* flutua no alto: os botões de toque não cobrem */, downAnt:false, estado:'idle', et:0, ronda:-1, fase:'abertura', t:0, passo:0, aparece:0, escuro:1, raio:0,
      gotas:[], voando:[], letras:[], blocos:[], tinteiros:[], alvo:0, ondas:0, convertidas:0, banner:null, tRaio:6, alt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], tLetra:0, nLetra:0,
-     m:{x:19*T, y:SACADA_Y, tipo:'godmother', falando:0, i:0}};
+     m:{x:19*T, y:SACADA_Y, tipo:'clio', falando:0, i:0}};
   J.chefe=C; J.estado='chefeIntro'; SOM.musica('');
   C.tinteiros=[{x:5*T+22,y:7*T},{x:11*T+22,y:7*T},{x:8*T+22,y:CHAO}].map(function(p){ return {x:p.x,y:p.y,caido:false}; });
   if(window.UI){ UI.modoNivel(false); UI.acao(false,0); }
@@ -330,7 +330,7 @@ function desenha(c,t){
     if(C.escudo&&C.fase!=='abertura'&&C.fase!=='derrota'){ c.globalAlpha=1; var eb=C.escudoBrilho>0?C.escudoBrilho/.5:0; c.fillStyle='rgba(167,139,250,'+(.16+.3*eb)+')'; A.circ(c,0,-95,105); c.fill(); c.strokeStyle='rgba(221,214,254,'+(.7+.3*eb)+')'; c.lineWidth=4; A.circ(c,0,-95,105); c.stroke(); c.strokeStyle='rgba(255,255,255,.35)'; c.lineWidth=2; c.beginPath(); c.arc(0,-95,92,3.6+Math.sin(t*.8)*.2,4.4+Math.sin(t*.8)*.2); c.stroke(); }
     c.restore(); }
   /* a Fada Madrinha no canto da sala (dá as estrelas e faz as perguntas) */
-  if(A.morador&&C.fadaOn&&C.fase!=='quiz'){ var f=C.fada, fy=f.y+Math.sin(t*1.6)*6-Math.max(0,1-C.fadaT*2)*120; /* chega descendo do alto, só na hora das perguntas */ c.save(); c.globalAlpha=.35; c.fillStyle='#fde68a'; A.circ(c,f.x,fy-50,54); c.fill(); c.restore(); A.morador(c,'godmother',f.x,fy,t,1,!!(f.fala&&f.fala.t<f.fala.dur));
+  if(A.morador&&C.fadaOn&&C.fase!=='quiz'){ var f=C.fada, fy=f.y+Math.sin(t*1.6)*6-Math.max(0,1-C.fadaT*2)*120; /* chega descendo do alto, só na hora das perguntas */ c.save(); c.globalAlpha=.35; c.fillStyle='#fde68a'; A.circ(c,f.x,fy-50,54); c.fill(); c.restore(); A.morador(c,'clio',f.x,fy,t,1,!!(f.fala&&f.fala.t<f.fala.dur));
     for(var s3=0;s3<4;s3++){ var a3=t*1.2+s3*1.57; A.estrela(c,f.x+Math.cos(a3)*46,fy-56+Math.sin(a3)*20,4,'#fde047',a3); } }
   C.dons.forEach(function(d){ if(d.t<0) return; var u=J.urso, k2=Math.min(1,d.t/.6), x=d.x0+(u.x-d.x0)*k2, y=d.y0+(u.y-50-d.y0)*k2-Math.sin(k2*Math.PI)*80; A.estrela(c,x,y,10,'#fde047',d.t*8); });
   C.tiros.forEach(function(p){ c.save(); c.globalAlpha=.35; A.estrela(c,p.x-(p.alvo.x>p.x0?14:-14),p.y+4,9,'#fde68a',p.rot); c.restore(); A.estrela(c,p.x,p.y,13,'#fde047',p.rot); });
