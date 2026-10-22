@@ -1,0 +1,16 @@
+R=[
+('<html lang="en">','<html lang="pt-BR">'),
+('<title>The Lost Endings — English</title>','<title>Detetives do Tempo — História</title>'),
+('title="Full screen and lock" aria-label="Full screen and lock"','title="Tela cheia e cadeado" aria-label="Tela cheia e cadeado"'),
+('title="Help" aria-label="Help"','title="Ajuda" aria-label="Ajuda"'),
+('<button class="ib" id="btnTr" title="Portuguese" aria-label="Portuguese"></button>','<button class="ib" id="btnTr" title="Português" aria-label="Português" style="display:none"></button>'),
+('title="Hearts"','title="Corações"'),('title="Power"','title="Poder"'),
+('<div id="hudName">The Lost Endings</div>','<div id="hudName">Detetives do Tempo</div>'),
+('title="Pages"','title="Cartas de fonte"'),('title="Points"','title="Pontos"'),('title="Coins"','title="Moedas"'),
+('title="Pause" aria-label="Pause"','title="Pausa" aria-label="Pausa"'),
+('aria-label="Left"','aria-label="Esquerda"'),('aria-label="Right"','aria-label="Direita"'),('aria-label="Crawl"','aria-label="Abaixar"'),
+('aria-label="Throw a star">','aria-label="Usar o poder">'),('aria-label="Jump">JUMP</button>','aria-label="Pular">PULAR</button>'),
+('<span>Turn the tablet sideways</span>','<span>Vire o celular de lado</span>'),
+("window.SERA_CFG={trKey:null,lang:'en-US',voz:'thalitamultilingual',rate:.85,","window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.92,"),
+('<script src="HIS3_jogo_arte5.js?v=20261018d"></script>','<script src="HIS3_jogo_arte5.js?v=20261018d"></script>\n<script src="HIS3_jogo_arteA.js"></script>\n<script src="HIS3_jogo_arteB.js"></script>\n<script src="HIS3_jogo_arteC.js"></script>'),
+]

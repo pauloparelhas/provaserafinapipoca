@@ -25,7 +25,7 @@ function caixa(t,corpo,cor){ return '<div class="caixa"'+(cor?' style="border-co
 function esp(){ return '<div style="height:10px"></div>'; }
 function fala(quem,t){ return '<div class="falaper"><b>'+quem+'</b><span>'+t+'</span></div>'; }
 function passos(lista){
-  return '<div class="passos">'+lista.map(function(p,i){
+  return '<div class="passos'+(lista.length>3?' vert':'')+'">'+lista.map(function(p,i){
     return (i?'<span class="pseta" aria-hidden="true">&rsaquo;</span>':'')+
       '<div class="passo"><b>'+p.t+'</b>'+(p.s?'<span>'+p.s+'</span>':'')+'</div>';
   }).join('')+'</div>';
@@ -273,7 +273,7 @@ return [
   fala:'No começo, Doutor João atendia num consultório simples, com estetoscópio, termômetro de mercúrio, papel e caneta. Os exames demoravam dias e as fichas ficavam em arquivos de papel. Hoje ele usa computador, recebe exames pelo celular, faz consultas por vídeo e há máquinas que mostram o que acontece dentro do corpo. Continua igual: o cuidado e a atenção com cada paciente.',
   html:fala('Doutor João','Quando eu era pequeno, media a "pressão" da família com uma fita métrica!')+
    antesHoje(['consultório simples, poucos aparelhos','estetoscópio, termômetro de mercúrio','papel e caneta','exames demoravam dias','fichas em arquivos de papel'],
-    ['computador','exames pelo celular','consulta por vídeo','máquinas que mostram dentro do corpo','na aula: robô que ajuda na cirurgia'],
+    ['computador','exames pelo celular','consulta por vídeo','máquinas que mostram dentro do corpo','na aula: robô que ajuda na cirurgia (já existe hoje)'],
     'o cuidado e a atenção com cada paciente')},
  {tipo:'escolha', tit:'Antes ou hoje?', fala:'Na história, isto era antes ou é hoje?', pergunta:'Na história, isto era ANTES ou é HOJE?',
   rotulo:'Pista', proxRot:'Próxima', op:['Antes','Hoje'], itens:[
@@ -314,15 +314,15 @@ return [
 {k:'ferramentas', tema:'profissoes', nome:'O jogo das ferramentas', cor:'#10b981', quem:'Tic',
  treino:[[['profissoes'],3,'rapida']], telas:[
  {tipo:'texto', tit:'Cada profissão, suas ferramentas',
-  fala:'No jogo das cartas, cada profissão tem mais de uma ferramenta. Médico: maleta, seringa antiga, termômetro, estetoscópio. Fotógrafo: câmera antiga de tripé e fotografias. Professora: lousa, livros e globo. Construtor: marreta, colher de pedreiro e pincel.',
-  html:caixa('Médico','<p>maleta · seringa antiga · termômetro · estetoscópio</p>','#14b8a6')+esp()+
+  fala:'No jogo das cartas, cada profissão tem mais de uma ferramenta. Médico: maleta, seringa antiga, termômetro de mercúrio, estetoscópio. Fotógrafo: câmera antiga de tripé e fotografias. Professora: lousa, livros e globo. Construtor: marreta, colher de pedreiro e pincel.',
+  html:caixa('Médico','<p>maleta · seringa antiga · termômetro de mercúrio · estetoscópio</p>','#14b8a6')+esp()+
    caixa('Fotógrafo','<p>câmera antiga de tripé · fotografias</p>','#f97316')+esp()+
    caixa('Professora','<p>lousa · livros · globo</p>','#0ea5e9')+esp()+
    caixa('Construtor (pedreiro)','<p>marreta · colher de pedreiro · pincel</p>','#eab308')+
    R('Para cada profissão há <b>mais de uma</b> ferramenta.')},
  {tipo:'liga', tit:'Ligue a ferramenta à profissão', regra:'Toque numa ferramenta e depois na profissão.',
   fala:'Ligue a ferramenta à profissão.',
-  pares:[['estetoscópio e termômetro','médico'],['câmera antiga de tripé','fotógrafo'],['lousa e globo','professora'],['marreta e colher de pedreiro','construtor'],['bolsa de couro com cartas','carteiro'],['arado puxado por bois','fazendeiro']]}
+  pares:[['estetoscópio e termômetro de mercúrio','médico'],['câmera antiga de tripé','fotógrafo'],['lousa e globo','professora'],['marreta e colher de pedreiro','construtor'],['bolsa de couro com cartas','carteiro'],['arado puxado por bois','fazendeiro']]}
 ]},
 
 /* ===================== 12. RIOS ANTIGOS E PATRIMÔNIO ===================== */

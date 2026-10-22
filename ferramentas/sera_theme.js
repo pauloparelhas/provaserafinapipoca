@@ -86,11 +86,11 @@
     var cur=getCur();
     var chips=THEMES.map(function(t){
       return '<button class="ct-chip'+(t.k===cur?' on':'')+'" data-k="'+t.k+'" onclick="cieTheme.set(\''+t.k+'\')">'
-        +'<span class="ct-emo">'+t.emo+'</span><span class="ct-nm">'+(window.SERA_EN?t.en+'<small class="tr">'+t.name+'</small>':t.name+'<small>'+t.en+'</small>')+'</span></button>';
+        +'<span class="ct-emo">'+t.emo+'</span><span class="ct-nm">'+(window.SERA_EN?t.en+'<small class="tr">'+t.name+'</small>':(window.SERA_PT?t.name:t.name+'<small>'+t.en+'</small>'))+'</span></button>';
     }).join('');
-    ov.innerHTML='<div class="ct-panel"><div class="ct-h">\u{1F3A8} '+(window.SERA_EN?'Theme':'Tema / Theme')+'</div>'
+    ov.innerHTML='<div class="ct-panel"><div class="ct-h">\u{1F3A8} '+(window.SERA_EN?'Theme':(window.SERA_PT?'Tema':'Tema / Theme'))+'</div>'
       +'<div class="ct-grid">'+chips+'</div>'
-      +'<button class="ct-close" onclick="cieTheme.close()">\u{2713} '+(window.SERA_EN?'Done':'Pronto / Done')+'</button></div>';
+      +'<button class="ct-close" onclick="cieTheme.close()">\u{2713} '+(window.SERA_EN?'Done':(window.SERA_PT?'Pronto':'Pronto / Done'))+'</button></div>';
     document.body.appendChild(ov);
   }
   function open(){ buildMenu(); document.getElementById('ctMenu').classList.add('show'); }
@@ -127,7 +127,7 @@
       var t=(b.getAttribute('title')||'').toLowerCase();
       if((t.indexOf('theme')>-1||t.indexOf('tema')>-1) && btns.indexOf(b)<0) btns.push(b);
     });
-    btns.forEach(function(b){ b.onclick=open; b.setAttribute('title',window.SERA_EN?'Theme':'Tema / Theme'); if(window.SERA_EN) b.setAttribute('aria-label','Theme'); b.innerHTML='\u{1F3A8}'; });
+    btns.forEach(function(b){ b.onclick=open; b.setAttribute('title',window.SERA_EN?'Theme':(window.SERA_PT?'Tema':'Tema / Theme')); if(window.SERA_EN) b.setAttribute('aria-label','Theme'); b.innerHTML='\u{1F3A8}'; });
     /* bandeira: troca o conteudo por SVG real, preserva o toggleTr existente */
     document.querySelectorAll('.flagbtn, #flag, #btnFlag').forEach(function(f){
       f.innerHTML=FLAG; f.setAttribute('title','Tradução em português');

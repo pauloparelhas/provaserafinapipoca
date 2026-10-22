@@ -94,7 +94,7 @@ body.show-tr #trbtn{outline:2px solid var(--accent);outline-offset:2px}
 .quadro .paut{display:block;text-align:right;font-size:.92em}
 body.papel .tr{color:#555}
 /* 8 botões no topo: no celular estreito eles encolhem para caber sem rolar de lado */
-@media (max-width:430px){.topbar{gap:4px}.topbar .iconbtn{width:38px;min-width:38px;height:44px;padding:0;font-size:15px}#trbtn svg{width:22px;height:16px}}
+@media (max-width:430px){.topbar{gap:3px;padding:6px}.topbar .title{display:none}.topbar .iconbtn{min-width:44px;height:44px}}
 /* ---- resultado (21/10): porcentagem, tópicos, revisão só das erradas ---- */
 .anel{width:150px;height:150px;border-radius:50%;margin:10px auto 4px;display:flex;align-items:center;justify-content:center}
 .anelin{width:116px;height:116px;border-radius:50%;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
@@ -160,6 +160,7 @@ body.papel .reva{color:#111}
   <button class="qnav-btn forte" id="navNext">Próxima &#8250;</button>
 </div>
 
+<script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'his3_som',stars:90};</script>
 <script src="serafina-core.js?v=20261011"></script>
 <script src="OP_voz.js?v=20261011"></script>
