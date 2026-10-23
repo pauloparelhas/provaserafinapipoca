@@ -19,17 +19,18 @@ window.FAB = window.FAB || {};
 
 /* opções que os parâmetros oferecem */
 FAB.OPCOES = {
-  objToca:  ['moeda','estrela','coracao','chave','porta','placa','bandeira','controle','mola','espinho','lava','agua','inimigo','gosma','besouro','abelha','fantasma','sapo'],
-  objPisa:  ['inimigo','gosma','besouro','abelha','fantasma','sapo'],
-  objTem:   ['chave','estrela','moeda','coracao'],
-  objCria:  ['moeda','estrela','coracao','gosma','abelha','fantasma'],
+  objToca:  ['moeda','estrela','coracao','chave','porta','placa','bandeira','controle','mola','espinho','lava','agua','inimigo','gosma','besouro','abelha','fantasma','sapo','cristal','relogio','cogumelo','pontovolta','morcego','caracol','robozinho'],
+  objPisa:  ['inimigo','gosma','besouro','abelha','fantasma','sapo','morcego','caracol','robozinho'],
+  objTem:   ['chave','estrela','moeda','coracao','cristal','cogumelo','relogio'],
+  objCria:  ['moeda','estrela','coracao','gosma','abelha','fantasma','cristal','cogumelo','relogio','morcego'],
   num:      [1, 2, 3, 5, 10],
   numSinal: [1, 2, 5, 10, -1, -5],
   seg:      [1, 2, 3, 5, 10],
   pontos:   [5, 10, 20, 50, 100],
   tecla:    ['X', 'C', 'V'],
   sons:     ['moeda', 'pulo', 'magia', 'ai', 'vitoria', 'bum'],
-  falas:    ['Oba!', 'Cuidado!', 'Você conseguiu!', 'Ai, ai, ai!', 'Achei!', 'Quase!', 'Vamos lá!']
+  falas:    ['Oba!', 'Cuidado!', 'Você conseguiu!', 'Ai, ai, ai!', 'Achei!', 'Quase!', 'Vamos lá!',
+             'Que legal!', 'Pega!', 'Uhuu!', 'Mais rápido!', 'Estou com fome!', 'Que frio!', 'Brilhou!', 'Ponto de volta!', 'Eu consigo!']
 };
 
 FAB.QUANDO = {
@@ -43,7 +44,8 @@ FAB.QUANDO = {
   acerta: { nome: 'acertar a pergunta', fala: 'Quando acertar a pergunta', icone: 'certo',   param: null,      conceito: 'evento' },
   erra:   { nome: 'errar a pergunta',   fala: 'Quando errar a pergunta',   icone: 'errado',  param: null,      conceito: 'evento' },
   vidas0: { nome: 'as vidas acabarem',  fala: 'Quando as vidas acabarem',  icone: 'semvida', param: null,      conceito: 'variavel' },
-  tempo0: { nome: 'o tempo acabar',     fala: 'Quando o relógio chegar no zero', icone: 'ampulheta', param: null, conceito: 'variavel' }
+  tempo0: { nome: 'o tempo acabar',     fala: 'Quando o relógio chegar no zero', icone: 'ampulheta', param: null, conceito: 'variavel' },
+  passavolta: { nome: 'passar no ponto de volta', fala: 'Quando o herói passar no ponto de volta', icone: 'pontovolta', param: null, conceito: 'evento' }
 };
 
 FAB.SE = {
@@ -71,7 +73,11 @@ FAB.FACA = {
   cria:     { nome: 'fazer aparecer',      fala: 'Fazer aparecer uma peça',   icone: 'magica',   param: 'objCria', conceito: 'sequencia' },
   tempo:    { nome: 'segundos no relógio', fala: 'Pôr mais segundos no relógio', icone: 'ampulheta', param: 'num', prefixo: '+', conceito: 'variavel' },
   treme:    { nome: 'tremer a tela',       fala: 'Tremer a tela',             icone: 'treme',    param: null, conceito: 'sequencia' },
-  confete:  { nome: 'soltar confete',      fala: 'Soltar confete',            icone: 'confete',  param: null, conceito: 'sequencia' }
+  confete:  { nome: 'soltar confete',      fala: 'Soltar confete',            icone: 'confete',  param: null, conceito: 'sequencia' },
+  pulaalto: { nome: 'pular mais alto',     fala: 'Pular mais alto por 8 segundos', icone: 'pulaalto', param: null, conceito: 'sequencia' },
+  gigante:  { nome: 'ficar gigante',       fala: 'O herói fica gigante por 6 segundos', icone: 'gigante', param: null, conceito: 'sequencia' },
+  pequeno:  { nome: 'ficar pequeno',       fala: 'O herói fica pequeno por 6 segundos', icone: 'pequeno', param: null, conceito: 'sequencia' },
+  cenario:  { nome: 'trocar o cenário',    fala: 'Trocar o cenário do fundo', icone: 'cenario', param: null, conceito: 'sequencia' }
 };
 
 /* nomes que aparecem para o objeto "inimigo" genérico */
@@ -96,7 +102,12 @@ FAB.REGRAS_PADRAO = [
   { quando: { t: 'acerta' },                faca: [{ t: 'ponto', n: 10 }, { t: 'confete' }] },
   { quando: { t: 'erra' },                  faca: [{ t: 'fala', v: 'Quase!' }] },
   { quando: { t: 'toca', obj: 'bandeira' }, faca: [{ t: 'ganha' }] },
-  { quando: { t: 'vidas0' },                faca: [{ t: 'perde' }] }
+  { quando: { t: 'vidas0' },                faca: [{ t: 'perde' }] },
+  /* peças novas (23/10/2026) */
+  { quando: { t: 'toca', obj: 'cristal' },  faca: [{ t: 'guarda' }, { t: 'som', v: 'moeda' }] },
+  { quando: { t: 'toca', obj: 'relogio' },  faca: [{ t: 'tempo', n: 10 }, { t: 'some' }, { t: 'som', v: 'magia' }] },
+  { quando: { t: 'toca', obj: 'cogumelo' }, faca: [{ t: 'pulaalto' }, { t: 'some' }, { t: 'fala', v: 'Uhuu!' }] },
+  { quando: { t: 'passavolta' },            faca: [{ t: 'fala', v: 'Ponto de volta!' }, { t: 'som', v: 'magia' }] }
 ];
 
 /* os bugs de propósito do modelo "quebrado" (missão do caça-bichinho) */
@@ -139,6 +150,11 @@ FAB.ICONES = {
   treme:    '<rect x="7" y="6" width="10" height="12" rx="2" fill="#a7b0bd" stroke="#1a1c2c" stroke-width="1.6"/><path d="M4 8v8M2 10v4M20 8v8M22 10v4" stroke="#1a1c2c" stroke-width="1.6" stroke-linecap="round"/>',
   confete:  '<path d="M3 21 8 8l8 8z" fill="#feae34" stroke="#1a1c2c" stroke-width="1.6" stroke-linejoin="round"/><circle cx="15" cy="5" r="1.5" fill="#e43b44"/><circle cx="20" cy="9" r="1.5" fill="#3b9bff"/><rect x="18" y="3" width="2.5" height="2.5" fill="#63c74d"/><rect x="11" y="3" width="2" height="2" fill="#8b5cf6"/><circle cx="20" cy="15" r="1.4" fill="#ff9ad5"/>',
   cadeado:  '<rect x="5" y="10" width="14" height="11" rx="2.5" fill="#feae34" stroke="#1a1c2c" stroke-width="1.6"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#1a1c2c" stroke-width="1.8" fill="none"/><circle cx="12" cy="15.5" r="1.6" fill="#1a1c2c"/>',
+  pontovolta:'<path d="M6 22V3" stroke="#1a1c2c" stroke-width="2"/><path d="M7 4h11l-3 3.5 3 3.5H7z" fill="#63c74d" stroke="#1a1c2c" stroke-width="1.4"/><path d="M20 21h-9a3 3 0 0 1 0-6h6" stroke="#3b9bff" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M15 13l2.5 2-2.5 2" stroke="#3b9bff" stroke-width="2" fill="none" stroke-linecap="round"/>',
+  pulaalto: '<path d="M12 21V6M7 10l5-5 5 5" stroke="#2f8a4a" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 21h16" stroke="#1a1c2c" stroke-width="2"/><path d="M5 5a4 3 0 0 1 8 0z" fill="#e43b44" stroke="#1a1c2c" stroke-width="1.2" transform="translate(-1 9)"/>',
+  gigante:  '<rect x="8" y="4" width="10" height="16" rx="3" fill="#feae34" stroke="#1a1c2c" stroke-width="1.6"/><circle cx="11" cy="9" r="1.2" fill="#1a1c2c"/><circle cx="15" cy="9" r="1.2" fill="#1a1c2c"/><path d="M3 9V3M1 5l2-2 2 2" stroke="#1a1c2c" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M2 21h20" stroke="#1a1c2c" stroke-width="2"/>',
+  pequeno:  '<rect x="10" y="14" width="6" height="6" rx="2" fill="#ff9ad5" stroke="#1a1c2c" stroke-width="1.4"/><circle cx="12" cy="16.5" r=".8" fill="#1a1c2c"/><circle cx="14" cy="16.5" r=".8" fill="#1a1c2c"/><path d="M5 4v8M3 10l2 2 2-2" stroke="#1a1c2c" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M2 21h20" stroke="#1a1c2c" stroke-width="2"/>',
+  cenario:  '<rect x="2" y="4" width="20" height="16" rx="2" fill="#5ec8ff" stroke="#1a1c2c" stroke-width="1.6"/><circle cx="17" cy="8.5" r="2.2" fill="#fee761"/><path d="M2 18l6-7 4 4 3-3 7 6v2H2z" fill="#63c74d" stroke="#1a1c2c" stroke-width="1.2" stroke-linejoin="round"/>',
   lupa:     '<circle cx="10" cy="10" r="6.5" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="2"/><path d="M15 15l6 6" stroke="#1a1c2c" stroke-width="3" stroke-linecap="round"/>',
   /* barra de telas */
   t_painel: '<path d="M3 11 12 3l9 8v10H3z" fill="#fee761" stroke="#1a1c2c" stroke-width="1.6" stroke-linejoin="round"/><rect x="9.5" y="14" width="5" height="7" fill="#b86f50" stroke="#1a1c2c" stroke-width="1.4"/>',

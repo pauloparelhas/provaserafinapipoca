@@ -11,8 +11,14 @@ var CHAVE = 'fab_mariana_v1';
 function novoEstado() {
   return { v: 1, criadora: { nome: 'Mariana' }, missoes: {}, jogos: [], atual: null,
     sprites: {}, perguntas: [], pedidos: [], diario: [],
-    stats: { testes: 0, convidado: 0, lupa: 0 }, criado: Date.now() };
+    stats: { testes: 0, convidado: 0, lupa: 0 }, prefs: prefsPadrao(), criado: Date.now() };
 }
+/* o jeito dela: voz, cores, tamanho, barra, tela grande (tela "Meu jeito") */
+function prefsPadrao() {
+  return { voz: 'thalita', vel: 1, tema: 'noite', tam: 'm', navLado: 'esq', navNomes: true, navEsconde: [],
+    lingua: 'pt', imersivo: true, toques: 'auto', navFechada: false, topoFechado: false, ajuda: true, pecasFechadas: false, zoomFase: 0 };
+}
+FAB.prefsPadrao = prefsPadrao;
 function copia(o) { return JSON.parse(JSON.stringify(o)); }
 function uid(p) { return (p || 'x') + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
 FAB.copia = copia; FAB.uid = uid;
@@ -24,6 +30,9 @@ try { E = JSON.parse(localStorage.getItem(CHAVE) || 'null'); } catch (e) { E = n
 function completa(n) {
   if (!n || n.v !== 1 || !Array.isArray(n.jogos)) return null;
   var b = novoEstado(); Object.keys(b).forEach(function (k) { if (n[k] === undefined || n[k] === null) n[k] = b[k]; });
+  var pp = prefsPadrao(); if (typeof n.prefs !== 'object' || Array.isArray(n.prefs)) n.prefs = {};
+  Object.keys(pp).forEach(function (k) { if (n.prefs[k] === undefined || n.prefs[k] === null) n.prefs[k] = pp[k]; });
+  if (!Array.isArray(n.prefs.navEsconde)) n.prefs.navEsconde = [];
   n.jogos = n.jogos.filter(function (j) { return j && Array.isArray(j.fases) && j.fases.length && Array.isArray(j.regras); });
   n.jogos.forEach(function (j) { j.versoes = j.versoes || []; j.testes = j.testes || []; j.ajustes = j.ajustes || { vidas: 3, tempo: 0, perguntas: 'prova' }; j.skins = j.skins || { heroi: 'urso' }; j.ideia = j.ideia || {}; });
   return n;
@@ -34,7 +43,9 @@ FAB.E = E;
 var tSalva = null;
 FAB.salva = function () {
   clearTimeout(tSalva);
+  FAB.E.salvoEm = Date.now();   /* a nuvem compara este carimbo para saber quem é mais novo */
   tSalva = setTimeout(function () {
+    if (FAB.nuvem) FAB.nuvem.agenda();
     try { localStorage.setItem(CHAVE, JSON.stringify(FAB.E)); } catch (e) { console.warn('não salvou', e); if (FAB.ui && FAB.ui.toast) FAB.ui.toast('O navegador está cheio! Peça ao papai: Guardar no computador.', true); }
   }, 250);
 };
@@ -51,7 +62,7 @@ FAB.novoJogo = function (modeloId) {
   var J = {
     id: uid('j'), nome: M.nome, origem: modeloId, criado: Date.now(), mudado: Date.now(),
     ideia: { heroi: 'urso', objetivo: 'chegar na bandeira', historia: '' },
-    skins: skins, fases: copia(M.fases), ajustes: { vidas: 3, tempo: 0, perguntas: 'prova' },
+    skins: skins, fases: copia(M.fases), ajustes: Object.assign({ vidas: 3, tempo: 0, perguntas: 'prova' }, M.ajustes || {}),
     regras: FAB.REGRAS_PADRAO.map(FAB.novaRegra), versoes: [], testes: [], ultimoTeste: null
   };
   if (M.bugs && FAB.BUGS_QUEBRADO) FAB.BUGS_QUEBRADO(J.regras);
@@ -163,8 +174,7 @@ FAB.confereMissoes = function () {
   return novas;
 };
 
-/* ---------------- voz ---------------- */
-FAB.fala = function (t) { if (window.say) window.say(t); };
+/* a voz mora em voz.js (Thalita ou Antonio gravadas) */
 
 /* primeira vez: já nasce com um jogo pronto para brincar */
 if (!E.jogos.length) FAB.novoJogo('primeiro');

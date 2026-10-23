@@ -70,7 +70,7 @@ window.FAB = window.FAB || {};
       onde: 'pixel',
       confere: function (E, J) {
         var sk = J.skins || {};
-        return ['gosma', 'besouro', 'abelha', 'fantasma', 'sapo'].some(function (t) { return meu(sk[t]) && pecas(J, FAB.TIPOS[t].letra) > 0; });
+        return ['gosma', 'besouro', 'abelha', 'fantasma', 'sapo', 'morcego', 'caracol', 'robozinho'].some(function (t) { return meu(sk[t]) && pecas(J, FAB.TIPOS[t].letra) > 0; });
       } },
 
     { id: 'tecla', conceito: 'evento', xp: 15,
@@ -145,7 +145,51 @@ window.FAB = window.FAB || {};
     { id: 'robo', conceito: 'especificacao', xp: 20,
       frase: 'Peça uma peça nova ao robô: o que é, como é e o que faz.',
       onde: 'robo',
-      confere: function (E) { return (E.pedidos || []).length >= 1; } }
+      confere: function (E) { return (E.pedidos || []).length >= 1; } },
+
+    /* missões novas (23/10/2026): peças, heróis e cenários novos */
+    { id: 'pontovolta', conceito: 'fase', xp: 15,
+      frase: 'Ponha um ponto de volta na fase e passe por ele jogando.',
+      onde: 'fases',
+      confere: function (E, J) { return pecas(J, 'v') >= 1 && (T(J).pontosVolta || 0) >= 1; } },
+
+    { id: 'heroinovo', conceito: 'pixel', xp: 10,
+      frase: 'Troque o herói pelo dino, pinguim, raposa ou unicórnio.',
+      onde: 'pixel',
+      confere: function (E, J) {
+        var NOVOS = ['dino', 'pinguim', 'raposa', 'unicornio'], id = J.skins && J.skins.heroi;
+        if (NOVOS.indexOf(id) >= 0) return true;
+        var meuS = meu(id) && E.sprites && E.sprites[id];
+        return !!(meuS && NOVOS.indexOf(meuS.base) >= 0);
+      } },
+
+    { id: 'cristais', conceito: 'fase', xp: 10,
+      frase: 'Ponha 5 cristais na mesma fase.',
+      onde: 'fases',
+      confere: function (E, J) {
+        return (J.fases || []).some(function (f) { return f.mapa.join('').split('c').length - 1 >= 5; });
+      } },
+
+    { id: 'pulaalto', conceito: 'evento', xp: 20,
+      frase: 'Crie uma regra nova que faça o herói pular mais alto. Teste!',
+      onde: 'regras',
+      confere: function (E, J) {
+        return regras(J, function (r) { return temAcao(r, 'pulaalto') && !(r.quando.t === 'toca' && r.quando.obj === 'cogumelo'); })
+          .some(function (r) { return disparou(J, r); });
+      } },
+
+    { id: 'cenarionovo', conceito: 'fase', xp: 10,
+      frase: 'Mude o cenário da fase para neve, floresta, vulcão ou cidade.',
+      onde: 'fases',
+      confere: function (E, J) {
+        return (J.fases || []).some(function (f) { return ['neve', 'floresta', 'vulcao', 'cidade'].indexOf(f.cenario) >= 0; });
+      } },
+
+    /* Opções (a engrenagem): a Fábrica do jeito dela */
+    { id: 'jeito', conceito: 'pixel', xp: 10,
+      frase: 'Abra a engrenagem e deixe a Fábrica com a sua cor.',
+      onde: 'jeito',
+      confere: function (E) { return !!E.prefs && E.prefs.tema !== 'noite'; } }
   ];
 
   /* níveis da criadora (por missões cumpridas) */
@@ -155,7 +199,8 @@ window.FAB = window.FAB || {};
     { min: 7,  nome: 'Programadora' },
     { min: 11, nome: 'Caçadora de bichinhos' },
     { min: 15, nome: 'Inventora' },
-    { min: 19, nome: 'Mestra dos Jogos' }
+    { min: 19, nome: 'Mestra dos Jogos' },
+    { min: 25, nome: 'Dona da Fábrica' }
   ];
 
   /* CARTAS DO SABER — o nome de criança de cada ideia de programação */

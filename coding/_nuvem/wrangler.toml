@@ -1,0 +1,10 @@
+# Nuvem da família da Fábrica de Jogos (ver ../_engenharia/NUVEM.md)
+name = "fabrica-mariana-nuvem"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fabrica-mariana"
+database_id = "19d8c38a-c333-4871-bca0-2b8a69f73353"

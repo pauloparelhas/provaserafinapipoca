@@ -90,7 +90,7 @@ function pintaPapeis() {
   papeis().forEach(function (p) {
     if (p.g !== g0) { g0 = p.g; h += '<div class="mut" style="margin-top:6px">' + p.g + '</div>'; }
     var nm = (FAB.jogo().nomes || {})[p.id];
-    h += '<button class="papel' + (p.id === papel ? ' on' : '') + '" data-p="' + p.id + '">' + FAB.ico('spr:' + FAB.skinDe(p.id), 36) + '<span>' + FAB.esc(nm || p.nome) + (nm ? '<small>' + p.nome + '</small>' : '') + '</span></button>';
+    h += '<button class="papel' + (p.id === papel ? ' on' : '') + '" data-p="' + p.id + '">' + FAB.ico('spr:' + FAB.skinDe(p.id), 36) + '<span>' + (nm ? '<span data-sem-traducao>' + FAB.esc(nm) + '</span><small>' + p.nome + '</small>' : FAB.esc(p.nome)) + '</span></button>';
   });
   el.innerHTML = h;
   el.querySelectorAll('.papel').forEach(function (b) { b.onclick = function () { papel = b.dataset.p; carrega(); monta(FAB.$('t-pixel').querySelector('.corpo')); }; });
