@@ -58,3 +58,7 @@ __pycache__/
 # publicado nao carrega prova de terceiros, so o material derivado.
 olimpiadas/_fontes/
 olimpiadas/_fontes_md/
+
+# --- Fábrica de Jogos: o que a Mariana exporta (dado da criança) e capturas do QA ---
+coding/_engenharia/entrada/
+coding/_engenharia/gate/capturas/
