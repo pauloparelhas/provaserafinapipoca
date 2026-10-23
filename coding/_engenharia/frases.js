@@ -7,7 +7,7 @@
 var vm = require('vm'), fs = require('fs'), path = require('path');
 var R = path.resolve(__dirname, '..');
 var sb = { document: { write: function () {} } }; sb.window = sb; sb.globalThis = sb; vm.createContext(sb);
-['banco/catalogo.js', 'banco/blocos.js', 'banco/missoes.js', 'banco/oficina.js', 'banco/provas.js', 'banco/ingles.js', 'banco/ingles_dic.js', 'js/voz.js'].forEach(function (f) {
+['banco/catalogo.js', 'banco/blocos.js', 'banco/missoes.js', 'banco/oficina.js', 'banco/provas.js', 'banco/ingles.js', 'banco/ingles_dic.js', 'banco/ingles_dic_nav.js', 'banco/ingles_dic_mundo.js', 'js/voz.js'].forEach(function (f) {
   vm.runInContext(fs.readFileSync(path.join(R, f), 'utf8'), sb, { filename: f });
 });
 var F = sb.FAB, P = F.PROVAS.lista[F.PROVAS.atual];

@@ -49,3 +49,13 @@ voz gravada Thalita/Antonio e Ava/Brian · Fábrica inteira em inglês · trava 
   afastados da plataforma de cima (o herói batia a cabeça e caía neles). Robô-jogador passou a
   morar dentro da página (a máquina de teste roda a menos de 30 quadros e o vaivém do Playwright
   chegava atrasado).
+
+## PAROU AQUI (23/10/2026, noite) — retomar daqui
+v2 commitada (f56b4f6) e publicada. v3 planejada em `painel/5_sintese.md` (painel: designer,
+pedagoga, navegação, engenharia). Os dois agentes da v3 foram parados antes de mexer em código.
+Para retomar: relançar as duas frentes em paralelo, cada uma só nos seus arquivos —
+- Frente A (navegação): ui.js, telas.js, estado.js, jeito.js, index.html, banco/ingles_dic_nav.js.
+- Frente B (mundo): motor.js, editor.js, regras.js (filtro), catalogo.js, blocos.js, missoes.js,
+  banco/ingles_dic_mundo.js, gate/jogador_robo.py, gate/valida_banco.js.
+Depois: `node _engenharia/frases.js && python _engenharia/gera_audio.py` (voz nova, precisa de
+internet), todos os portões (+ teste_nuvem.py), commit, `publicar_coding.sh`.
