@@ -54,6 +54,12 @@ F.MISSOES.forEach(function (m) {
   if (['painel', 'ideia', 'pixel', 'fases', 'regras', 'testar', 'diario', 'robo', 'missoes', 'jogar'].indexOf(m.onde) < 0) e('missão ' + m.id + ': tela ' + m.onde);
   if (m.frase.split(/\s+/).length > 16) e('missão ' + m.id + ': frase longa demais para 7 anos');
 });
+/* filtro de palavras impróprias nos textos que a criança lê (nomes, falas, entregas do robô) */
+var PROIBIDAS = /(mata|matar|morte|morre|morrer|sangue|arma|faca|tiro|bomba|idiota|burr[ao]|feio|odeio|demônio|diabo)/i;
+var textos = [].concat(F.OPCOES.falas, Object.keys(F.SPRITES).map(function (k) { return F.SPRITES[k].nome; }),
+  Object.keys(F.TIPOS).map(function (k) { return F.TIPOS[k].nome; }), Object.keys(F.ENTREGAS || {}).map(function (k) { return F.ENTREGAS[k]; }),
+  F.MISSOES.map(function (m) { return m.frase; }));
+textos.forEach(function (t) { if (PROIBIDAS.test(t || '')) e('texto impróprio: "' + t + '"'); });
 var P = F.PROVAS.lista[F.PROVAS.atual];
 if (!P) e('prova atual sem cadastro'); else if (!fs.existsSync(path.resolve(R, P.arquivo))) e('banco da prova não existe: ' + P.arquivo);
 console.log(erros.length ? 'BANCO REPROVADO:\n- ' + erros.join('\n- ') : 'BANCO OK: ' + Object.keys(F.SPRITES).length + ' sprites, ' + Object.keys(F.TIPOS).length + ' peças, ' +

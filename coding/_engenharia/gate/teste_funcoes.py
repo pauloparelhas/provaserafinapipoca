@@ -112,7 +112,14 @@ with sync_playwright() as p:
     pg2 = ctx.new_page(); pg2.add_init_script(MUDO); pg2.goto(url); pg2.wait_for_timeout(600)
     ok(pg2.evaluate("FAB.compartilhado===true && FAB.jogo().fases.length>=1"), 'link abre o jogo dela em modo visita')
     ok(pg2.evaluate("/^meu_/.test(FAB.jogo().skins.heroi) && !!FAB.E.sprites[FAB.jogo().skins.heroi]"), 'o herói desenhado viaja no link')
-    pg2.close()
+    pg2.close(run_before_unload=True); pg.wait_for_timeout(300)
+    ok(pg.evaluate("JSON.parse(localStorage.getItem('fab_mariana_v1')).jogos.some(j=>j.id!=='visita') && !JSON.parse(localStorage.getItem('fab_mariana_v1')).jogos.some(j=>j.id==='visita')"), 'fechar a aba do link não apaga o trabalho dela')
+    # arquivo incompleto não trava (TI 23/10)
+    pg3 = ctx.new_page(); pg3.add_init_script(MUDO); pg3.goto(URL); pg3.wait_for_timeout(300)
+    pg3.evaluate("localStorage.setItem('fab_mariana_v1', JSON.stringify({v:1, jogos:[{id:'a',nome:'X',fases:[{nome:'F',cenario:'dia',mapa:FAB.MODELOS.vazio.fases[0].mapa}],regras:[]}], atual:'a'}))")
+    e3 = []; pg3.on('pageerror', lambda e: e3.append(str(e))); pg3.reload(); pg3.wait_for_timeout(500)
+    ok(not e3 and pg3.evaluate("Array.isArray(FAB.E.diario) && typeof FAB.E.stats.testes==='number'"), 'estado incompleto é completado sem erro')
+    pg3.evaluate("localStorage.clear()"); pg3.close()
 
     # 8. jogo quebrado: missão bug1 só confere depois de consertar
     pg.evaluate("FAB.novoJogo('quebrado'); FAB.ui.nav(); FAB.ui.vai('regras')"); pg.wait_for_timeout(200)

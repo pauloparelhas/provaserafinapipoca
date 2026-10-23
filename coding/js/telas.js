@@ -43,7 +43,9 @@ FAB.T.painel = { nome: 'Fábrica de Jogos', ajuda: 'Aqui você cria jogos. Apert
     '<div class="tit" style="margin-top:22px">' + FAB.ico('t_jogar', 28) + 'Meus jogos</div><div class="grade jogos" id="pnJogos"></div>' +
     '<div class="linha" style="margin-top:24px"><button class="bt cinza" id="pnExp">' + FAB.ico('foto', 22) + 'Guardar no computador</button>' +
       '<label class="bt cinza">' + FAB.ico('desfazer', 22) + 'Abrir do computador<input type="file" accept=".json" id="pnImp" hidden></label>' +
-      '<span class="mut">Para o papai: o arquivo guarda tudo e é o mesmo que vai para o robô.</span></div>';
+      '<span class="mut">Para o papai: o arquivo guarda tudo e é o mesmo que vai para o robô.</span></div>' +
+    '<div class="linha" style="margin-top:12px"><button class="bt cinza" id="pnMic">' + FAB.ico('microfone', 22) + (ui.micLigado() ? 'Desligar o microfone' : 'Ligar o microfone') + '</button>' +
+      '<span class="mut">Para o papai: o ditado por voz do Chrome envia a voz ao Google.</span></div>';
   miniatura($('pnThumb'), J);
   function vaiMissao() { if (!m) { ui.vai('fases'); return; } if (m.abre) abreModelo(m.abre); FAB.fala(m.frase); ui.nav(); ui.vai(m.onde); }
   $('pnCont').onclick = vaiMissao; if ($('pnIr')) $('pnIr').onclick = vaiMissao;
@@ -71,6 +73,11 @@ FAB.T.painel = { nome: 'Fábrica de Jogos', ajuda: 'Aqui você cria jogos. Apert
     ui.escolhe('Começar de onde?', 'Escolha como o jogo novo começa', Object.keys(FAB.MODELOS).map(function (k) {
       return { id: k, nome: FAB.MODELOS[k].nome, sub: FAB.MODELOS[k].descricao, ico: FAB.ico(k === 'quebrado' ? 'lupa' : k === 'vazio' ? 'mais' : k === 'castelo' ? 'cadeado' : 'play', 40) };
     }), function (k) { FAB.novoJogo(k); ui.nav(); ui.vai(k === 'quebrado' ? 'testar' : 'painel'); });
+  };
+  $('pnMic').onclick = function () {
+    if (ui.micLigado()) { try { localStorage.removeItem('fab_mic'); } catch (e) {} FAB.T.painel.monta(C); return; }
+    ui.abre('<h2>Ligar o microfone?</h2><p style="margin-bottom:14px">O ditado do Chrome envia a voz da criança ao Google para virar texto. Ligue só se você concordar.</p><div class="linha"><button class="bt verde" id="micSim">Concordo, ligar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
+    $('micSim').onclick = function () { try { localStorage.setItem('fab_mic', '1'); } catch (e) {} ui.fecha(); FAB.T.painel.monta(C); };
   };
   $('pnExp').onclick = function () { FAB.exporta(); ui.toast('Arquivo guardado na pasta Downloads.'); };
   $('pnImp').onchange = function () { var f = this.files[0]; if (!f) return; FAB.importa(f, function (ok) { if (ok) location.reload(); else ui.toast('Esse arquivo não é da Fábrica.', true); }); };
@@ -184,7 +191,7 @@ function fimTeste(C, R, convidado) {
 }
 function palcoHTML() {
   return '<div class="palco"><canvas class="pix"></canvas><div class="hud"></div>' +
-    '<div class="toques"><div class="gp"><button data-k="esq">◀</button><button data-k="dir">▶</button></div><div class="gp"><button data-k="X">X</button><button data-k="pulo">▲</button></div></div>' +
+    '<div class="toques"><div class="gp"><button data-k="esq">◀</button><button data-k="dir">▶</button></div><div class="gp"><button data-k="X">X</button><button data-k="C">C</button><button data-k="V">V</button><button data-k="pulo">▲</button></div></div>' +
     '<div class="sobre"></div></div>';
 }
 function ligaToques(C) {
@@ -308,7 +315,7 @@ FAB.T.jogar = { nome: 'Mostrar', ajuda: 'Chame alguém para jogar o seu jogo.', 
   var J = FAB.jogo(), I = J.ideia || {};
   C.innerHTML = '<div class="card" style="text-align:center;max-width:860px;margin:0 auto" id="jgCapa">' +
     '<div>' + FAB.ico('spr:' + FAB.skinDe('heroi'), 120) + '</div><h1 style="font-size:36px;font-weight:900">' + esc(J.nome) + '</h1>' +
-    '<p class="mut">um jogo criado por ' + esc(FAB.E.criadora.nome) + (I.paraQuem ? ' · para ' + esc(I.paraQuem) : '') + '</p>' +
+    (FAB.compartilhado ? '<p class="mut">Jogo feito na Fábrica de Jogos por outra pessoa.</p>' : '<p class="mut">um jogo criado por ' + esc(FAB.E.criadora.nome) + (I.paraQuem ? ' · para ' + esc(I.paraQuem) : '') + '</p>') +
     (I.historia ? '<p style="font-size:19px;font-weight:800;margin:12px auto;max-width:640px">' + esc(I.historia) + '</p>' : '') +
     (I.objetivo ? '<p class="mut">Para ganhar: ' + esc(I.objetivo) + '</p>' : '') +
     '<div class="linha" style="justify-content:center;margin-top:16px"><button class="bt verde grande" id="jgPlay">' + FAB.ico('play', 30) + 'Jogar</button>' +
@@ -319,7 +326,7 @@ FAB.T.jogar = { nome: 'Mostrar', ajuda: 'Chame alguém para jogar o seu jogo.', 
   $('jgSai').onclick = function () { FAB.motor.para(); FAB.T.jogar.monta(C); };
   if ($('jgLink')) $('jgLink').onclick = function () {
     FAB.linkDoJogo(J).then(function (url) {
-      try { navigator.clipboard.writeText(url); ui.toast('Link copiado! Cole no WhatsApp.', true); } catch (e) { ui.abre('<h2>Link do jogo</h2><textarea style="width:100%;height:140px">' + esc(url) + '</textarea>'); }
+      try { navigator.clipboard.writeText(url); ui.toast('Link copiado! Ele leva o nome e a história do jogo.', true); } catch (e) { ui.abre('<h2>Link do jogo</h2><textarea style="width:100%;height:140px">' + esc(url) + '</textarea>'); }
     }).catch(function () { ui.toast('Este navegador não faz link. Use o Chrome.', true); });
   };
 } };
@@ -328,7 +335,8 @@ FAB.T.jogar = { nome: 'Mostrar', ajuda: 'Chame alguém para jogar o seu jogo.', 
 function b64url(buf) { var s = '', b = new Uint8Array(buf); for (var i = 0; i < b.length; i++) s += String.fromCharCode(b[i]); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
 function deb64url(t) { t = t.replace(/-/g, '+').replace(/_/g, '/'); while (t.length % 4) t += '='; var s = atob(t), b = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) b[i] = s.charCodeAt(i); return b; }
 FAB.linkDoJogo = function (J) {
-  var p = { j: { nome: J.nome, ideia: J.ideia, skins: J.skins, nomes: J.nomes, fases: J.fases, ajustes: J.ajustes, regras: J.regras }, s: {}, c: FAB.E.criadora.nome };
+  var I = J.ideia || {};
+  var p = { j: { nome: J.nome, ideia: { objetivo: I.objetivo, historia: I.historia }, skins: J.skins, nomes: J.nomes, fases: J.fases, ajustes: J.ajustes, regras: J.regras }, s: {} };   /* sem nome da criança nem 'para quem' (guardião) */
   Object.keys(J.skins).forEach(function (k) { var id = J.skins[k]; if (FAB.E.sprites[id]) p.s[id] = FAB.E.sprites[id]; });
   var dados = new Blob([JSON.stringify(p)]).stream().pipeThrough(new CompressionStream('deflate-raw'));
   return new Response(dados).arrayBuffer().then(function (buf) { return location.href.split('#')[0] + '#jogo=' + b64url(buf); });
@@ -339,8 +347,10 @@ function abreCompartilhado(t) {
     var p = JSON.parse(txt);
     FAB.salva = function () {};                      /* quem recebe o link não mexe na Fábrica de ninguém */
     FAB.compartilhado = true;
-    var J = p.j; J.id = 'visita'; J.versoes = []; J.testes = []; J.origem = 'link';
-    FAB.E = { v: 1, criadora: { nome: p.c || 'Mariana' }, missoes: {}, jogos: [J], atual: 'visita', sprites: p.s || {}, perguntas: [], pedidos: [], diario: [], stats: { testes: 0, convidado: 0, lupa: 0 } };
+    var J = p.j; J.id = 'visita';
+    J.nome = String(J.nome || 'Jogo').slice(0, 40); J.ideia = { objetivo: String((J.ideia || {}).objetivo || '').slice(0, 40), historia: String((J.ideia || {}).historia || '').slice(0, 200) }; J.nomes = {};
+    if (!Array.isArray(J.fases) || !Array.isArray(J.regras)) throw new Error('link inválido'); J.versoes = []; J.testes = []; J.origem = 'link';
+    FAB.E = { v: 1, criadora: { nome: '' }, missoes: {}, jogos: [J], atual: 'visita', sprites: p.s || {}, perguntas: [], pedidos: [], diario: [], stats: { testes: 0, convidado: 0, lupa: 0 } };
     document.body.classList.add('visita');
   });
 }

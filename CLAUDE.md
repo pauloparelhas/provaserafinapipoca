@@ -46,6 +46,19 @@ _arquivo_1tri/        backup leve + APRENDIZADOS_1TRI.md (fora do site)
 
 Quatro camadas: **processo** (imutavel) · **fontes** (insumo) · **trabalho** (producao) · **ferramentas** (deploy). Para produzir matéria nova, seguir `_processo/RUNBOOK_MATERIA.md`.
 
+## FÁBRICA DE JOGOS DA MARIANA — módulo `coding/` (23/10/2026)
+
+Estúdio em que a Mariana CRIA jogos (pixel art, fases, regras QUANDO/SÓ SE/FAÇA, teste com
+lupa de bichinhos, diário com fotos/versões, robô = pedidos à IA, 19 missões). Integra com as
+provas pela **Placa ?**, que pergunta o banco único da matéria atual (`coding/banco/provas.js`
+aponta para `ferramentas/<MAT>_banco.js`). **A cada prova nova: trocar `atual` em provas.js.**
+- Mapa e regras: `coding/_engenharia/README.md` · desenho: `DESIGN.md` · pedidos à IA: `OFICINA.md` · melhoria contínua: `ROADMAP.md`.
+- Skill `fabrica-mariana` ("pedidos da Mariana", "rodada da Fábrica", prova nova); agentes `oficina-robo` (faz a peça) e `mentor-coding` (lê o .json dela e diagnostica).
+- Portões (mudos), todos verdes antes de publicar: `node coding/_engenharia/gate/valida_banco.js` ·
+  `python coding/_engenharia/gate/qa_fabrica.py` · `python coding/_engenharia/gate/jogador_robo.py` · `python coding/_engenharia/gate/teste_funcoes.py`.
+- Publicar: `bash coding/_engenharia/publicar_coding.sh` (não toca na matéria que está no ar).
+- O .json que ela exporta é dado da criança: fica em `coding/_engenharia/entrada/`, fora do git.
+
 ## CICLO DE VIDA DOS PRODUTOS — POLITICA
 
 **Produto serve ate a prova. Depois da prova, os arquivos pesados (video, audio,

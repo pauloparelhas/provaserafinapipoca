@@ -20,17 +20,25 @@ FAB.copia = copia; FAB.uid = uid;
 /* ---------------- carregar / salvar ---------------- */
 var E;
 try { E = JSON.parse(localStorage.getItem(CHAVE) || 'null'); } catch (e) { E = null; }
-if (!E || E.v !== 1) E = novoEstado();
+/* completa o que faltar (arquivo velho ou incompleto não trava a Fábrica) */
+function completa(n) {
+  if (!n || n.v !== 1 || !Array.isArray(n.jogos)) return null;
+  var b = novoEstado(); Object.keys(b).forEach(function (k) { if (n[k] === undefined || n[k] === null) n[k] = b[k]; });
+  n.jogos = n.jogos.filter(function (j) { return j && Array.isArray(j.fases) && j.fases.length && Array.isArray(j.regras); });
+  n.jogos.forEach(function (j) { j.versoes = j.versoes || []; j.testes = j.testes || []; j.ajustes = j.ajustes || { vidas: 3, tempo: 0, perguntas: 'prova' }; j.skins = j.skins || { heroi: 'urso' }; j.ideia = j.ideia || {}; });
+  return n;
+}
+E = completa(E) || novoEstado();
 FAB.E = E;
 
 var tSalva = null;
 FAB.salva = function () {
   clearTimeout(tSalva);
   tSalva = setTimeout(function () {
-    try { localStorage.setItem(CHAVE, JSON.stringify(FAB.E)); } catch (e) { console.warn('não salvou', e); }
+    try { localStorage.setItem(CHAVE, JSON.stringify(FAB.E)); } catch (e) { console.warn('não salvou', e); if (FAB.ui && FAB.ui.toast) FAB.ui.toast('O navegador está cheio! Peça ao papai: Guardar no computador.', true); }
   }, 250);
 };
-window.addEventListener('beforeunload', function () { try { localStorage.setItem(CHAVE, JSON.stringify(FAB.E)); } catch (e) {} });
+window.addEventListener('beforeunload', function () { if (FAB.compartilhado) return; try { localStorage.setItem(CHAVE, JSON.stringify(FAB.E)); } catch (e) {} });
 
 /* ---------------- jogos ---------------- */
 FAB.novaRegra = function (r) {
@@ -67,6 +75,7 @@ FAB.apagaJogo = function (id) {
 FAB.tiraFoto = function (nome) {
   var J = FAB.jogo(), s = copia(J); delete s.versoes; delete s.testes;
   J.versoes.push({ nome: nome || ('Foto ' + (J.versoes.length + 1)), data: Date.now(), snap: s });
+  if (J.versoes.length > 20) J.versoes.splice(0, J.versoes.length - 20);   /* cabe no navegador (5 MB) */
   FAB.mudou();
 };
 FAB.voltaFoto = function (i) {
@@ -89,7 +98,7 @@ FAB.exporta = function () { FAB.baixa('fabrica_mariana_' + carimbo() + '.json', 
 FAB.importa = function (arquivo, pronto) {
   var r = new FileReader();
   r.onload = function () {
-    try { var n = JSON.parse(r.result); if (!n || n.v !== 1 || !n.jogos) throw 0;
+    try { var n = completa(JSON.parse(r.result)); if (!n || !n.jogos.length) throw 0;
       localStorage.setItem(CHAVE + '_antes_de_importar', JSON.stringify(FAB.E));
       FAB.E = n; localStorage.setItem(CHAVE, JSON.stringify(n)); pronto(true);
     } catch (e) { pronto(false); }

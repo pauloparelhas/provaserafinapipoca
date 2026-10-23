@@ -26,13 +26,13 @@ svg{flex:none}
 #app{display:grid;grid-template-columns:var(--nav) 1fr;grid-template-rows:64px 1fr;height:100vh;height:100dvh}
 #nav{grid-row:1/3;background:linear-gradient(180deg,#1d1846,#151135);border-right:2px solid #2c2665;display:flex;flex-direction:column;align-items:center;padding:8px 6px;gap:4px;overflow-y:auto}
 #nav .logo{width:64px;height:64px;margin-bottom:6px;border-radius:16px;background:linear-gradient(135deg,#ffd84a,#ff7ac6);display:grid;place-items:center;box-shadow:0 4px 0 #b4459a}
-.nb{width:84px;min-height:70px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-weight:800;font-size:14px;color:var(--txt2);border:2px solid transparent;transition:.15s}
+.nb{position:relative;width:84px;min-height:70px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-weight:800;font-size:14px;color:var(--txt2);border:2px solid transparent;transition:.15s}
 .nb:hover{background:#2a2462;color:#fff}
 .nb.on{background:linear-gradient(180deg,#3a3192,#2b2470);border-color:#7d6ff0;color:#fff;box-shadow:0 3px 0 #1a1550}
 .nb.testar{background:linear-gradient(180deg,#46d065,#2a9a44);color:#fff;box-shadow:0 4px 0 #1d6e31;margin:4px 0}
 .nb.testar.on{border-color:#fff}
 .nb.peq{min-height:56px;font-size:13px}
-.nb .dot{position:absolute;margin:-30px 0 0 44px;width:14px;height:14px;border-radius:50%;background:var(--amarelo);border:2px solid #151135;display:none}
+.nb .dot{position:absolute;top:5px;right:8px;width:14px;height:14px;border-radius:50%;background:var(--amarelo);border:2px solid #151135;display:none}
 .nb.tem-missao .dot{display:block;animation:pisca 1.2s infinite}
 @keyframes pisca{50%{transform:scale(1.35)}}
 .nav-sep{width:60px;height:2px;background:#2c2665;margin:6px 0;border-radius:2px}
@@ -75,7 +75,7 @@ svg{flex:none}
 /* ---------- painel ---------- */
 .pn-hero{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
 .pn-cont{display:flex;flex-direction:column;gap:12px;background:linear-gradient(150deg,#2f8a4a,#1d5e3a);border-color:#63c74d}
-.pn-thumb{width:100%;border-radius:12px;background:#000;aspect-ratio:40/12;image-rendering:pixelated}
+.pn-thumb{width:100%;height:auto;border-radius:12px;background:#000;image-rendering:pixelated}
 .pn-missao{background:linear-gradient(150deg,#5a4510,#33285e);border-color:#ffd84a}
 .pn-missao .fr{font-size:22px;font-weight:900;line-height:1.25;margin:8px 0 12px}
 .barra{height:14px;background:#1a1640;border-radius:8px;overflow:hidden}
@@ -83,7 +83,7 @@ svg{flex:none}
 .jogos{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
 .jg{cursor:pointer;padding:10px;display:flex;flex-direction:column;gap:8px}
 .jg.on{border-color:#ffd84a;box-shadow:0 0 0 2px #ffd84a}
-.jg canvas{width:100%;border-radius:8px;aspect-ratio:40/12}
+.jg canvas{width:100%;height:84px;object-fit:cover;object-position:left;border-radius:8px}
 .jg b{font-size:16px}
 
 /* ---------- ateliê de pixel ---------- */
@@ -162,7 +162,8 @@ body.toque .toques{display:flex}
 .log div{padding:6px 8px;border-radius:8px;background:#1b1740;border-left:4px solid #3b9bff}
 .log div.vida{border-left-color:#ff5a64}
 .log div.cadeado{border-left-color:#ff7ac6}
-.sobre{position:absolute;inset:0;background:rgba(10,8,30,.82);display:none;align-items:center;justify-content:center;padding:16px}
+.sobre{position:absolute;inset:0;background:rgba(10,8,30,.82);display:none;align-items:safe center;justify-content:center;padding:16px;overflow:auto}
+.palco:has(.sobre.on) .toques{display:none}
 .sobre.on{display:flex}
 .res{max-width:560px;width:100%;text-align:center}
 .res h2{font-size:30px;font-weight:900}
@@ -235,6 +236,7 @@ body.toque .toques{display:flex}
   .pecas .gp{grid-template-columns:repeat(7,52px)}
 }
 @media (max-width:640px){
+  .res h2{font-size:22px} .nums div{font-size:17px;padding:4px} .cara{width:56px;height:56px} .bt.grande{min-height:52px;font-size:18px}
   :root{--nav:0px}
   #app{grid-template-columns:1fr;grid-template-rows:56px 1fr 74px}
   #nav{grid-row:3;grid-column:1;flex-direction:row;overflow-x:auto;border-right:0;border-top:2px solid #2c2665;padding:4px}

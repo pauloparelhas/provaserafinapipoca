@@ -37,7 +37,7 @@ ui.marcaMissao = function () {
 ui.vai = function (id, semFala) {
   if (!FAB.T[id]) return;
   if (atual === 'testar' && id !== 'testar' && FAB.motor.rodando()) FAB.motor.termina();
-  if (atual === 'jogar' && id !== 'jogar') FAB.motor.para();
+  if (atual === 'jogar') FAB.motor.para();
   atual = id;
   document.querySelectorAll('.tela').forEach(function (t) { t.classList.toggle('on', t.id === 't-' + id); });
   document.querySelectorAll('.nb').forEach(function (b) { b.classList.toggle('on', b.id === 'nb-' + id); });
@@ -126,7 +126,10 @@ ui.campo = function (id, ph, area) {
   return '<div class="campo">' + (area ? '<textarea id="' + id + '" rows="2" placeholder="' + esc(ph) + '"></textarea>' : '<input id="' + id + '" placeholder="' + esc(ph) + '">') +
     '<button class="mic" title="Falar" data-alvo="' + id + '">' + FAB.ico('microfone', 26) + '</button></div>';
 };
+/* o ditado do Chrome manda a voz ao Google: só com a chave do adulto (guardião, 23/10) */
+ui.micLigado = function () { try { return localStorage.getItem('fab_mic') === '1'; } catch (e) { return false; } };
 ui.ligaMic = function (raiz) {
+  if (!ui.micLigado()) { raiz.querySelectorAll('.mic').forEach(function (b) { b.remove(); }); return; }
   raiz.querySelectorAll('.mic').forEach(function (b) { b.onclick = function () { ui.ditado($(b.dataset.alvo), b); }; });
 };
 

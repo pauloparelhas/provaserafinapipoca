@@ -135,7 +135,7 @@ function monta(C) {
   g.onpointerdown = function (ev) { ev.preventDefault(); var i = alvo(ev); if (i < 0) return; snap(); pintando = true; var f = ferr; pinta(i % 16, Math.floor(i / 16));
     if (f === 'balde') { pintando = false; grava(); } else if (f === 'conta') { pintando = false; desfaz.pop(); } };
   g.onpointermove = function (ev) { if (!pintando) return; var i = alvo(ev); if (i >= 0) pinta(i % 16, Math.floor(i / 16)); };
-  window.onpointerup = function () { if (pintando) { pintando = false; grava(); } };
+  window.onpointerup = window.onpointercancel = function () { if (pintando) { pintando = false; grava(); } };
   pintaGrade(); pintaPaleta(); pintaFerr(); pintaPapeis(); anima();
   FAB.$('pxNome').oninput = function () { J.nomes = J.nomes || {}; J.nomes[papel] = this.value; var id = idAtual(); if (/^meu_/.test(id)) FAB.E.sprites[id].nome = this.value; FAB.mudou(); pintaPapeis(); };
   FAB.$('pxGal').querySelectorAll('button').forEach(function (b) {

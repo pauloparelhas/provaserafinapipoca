@@ -39,10 +39,14 @@ function poe(i, j, t) {
   var ch = letra(t);
   if (t === 'inicio') f.mapa = f.mapa.map(function (l) { return l.replace(/@/g, '.'); });   /* só um começo */
   var L = f.mapa[j]; if (L[i] === ch) return;
+  if ((L[i] === '@' || L[i] === 'F') && t !== 'inicio' && t !== 'bandeira') { FAB.ui.toast(L[i] === '@' ? 'O começo do herói não pode sumir. Ponha ele em outro lugar.' : 'Toda fase precisa de bandeira.', true); arrastando = false; return; }
+  if (L[i] === 'F' && t === 'inicio' || L[i] === '@' && t === 'bandeira') return;
+  if (t === 'bandeira' && (f.mapa.join('').match(/F/g) || []).length >= 3) { FAB.ui.toast('Já tem 3 bandeiras nesta fase.', true); return; }
   f.mapa[j] = L.slice(0, i) + ch + L.slice(i + 1);
   redesenha();
 }
-function snap() { desfaz.push(JSON.stringify(F().mapa)); if (desfaz.length > 60) desfaz.shift(); }
+var donoDesfaz = '';
+function snap() { var dono = FAB.E.atual + '|' + fase; if (dono !== donoDesfaz) { desfaz = []; donoDesfaz = dono; } desfaz.push(JSON.stringify(F().mapa)); if (desfaz.length > 60) desfaz.shift(); }
 function celula(ev) { var r = FAB.$('fzCanvas').getBoundingClientRect(); return [Math.floor((ev.clientX - r.left) / (16 * Z)), Math.floor((ev.clientY - r.top) / (16 * Z))]; }
 
 function pecas() {
@@ -71,6 +75,7 @@ function monta(C) {
     '<div class="fz-barra">' + abas +
       (J.fases.length < MAXF ? '<button class="aba" id="fzNova">' + FAB.ico('mais', 20) + ' Fase nova</button>' : '') +
       '<span style="flex:1"></span>' +
+      '<button class="bt cinza" id="fzEsq" title="Ver mais para trás">◀</button><button class="bt cinza" id="fzDir" title="Ver mais para frente">▶</button>' +
       '<button class="bt cinza" id="fzCen">' + FAB.ico('t_ideia', 22) + 'Cenário</button>' +
       '<button class="bt cinza" id="fzMenos" title="Fase mais curta">−</button><button class="bt cinza" id="fzMais" title="Fase mais comprida">+</button>' +
       '<button class="bt cinza" id="fzDesf">' + FAB.ico('desfazer', 22) + 'Desfazer</button>' +
@@ -86,12 +91,14 @@ function monta(C) {
     var base = { nome: 'Fase ' + (J.fases.length + 1), cenario: ['dia', 'tarde', 'noite', 'caverna', 'mar', 'espaco', 'doce'][J.fases.length % 7], mapa: [] };
     for (var j = 0; j < 9; j++) base.mapa.push(rep('.', w));
     base.mapa.push('.@' + rep('.', w - 4) + 'F.', rep('#', w), rep('T', w));
-    J.fases.push(base); fase = J.fases.length - 1; FAB.mudou(); monta(C); FAB.ui.toast('Fase nova! Ligue as fases chegando na bandeira.', true);
+    J.fases.push(base); fase = J.fases.length - 1; desfaz = []; FAB.mudou(); monta(C); FAB.ui.toast('Fase nova! Ligue as fases chegando na bandeira.', true);
   };
   var ap = FAB.$('fzApaga'); if (ap) ap.onclick = function () {
     FAB.ui.abre('<h2>Apagar a ' + FAB.esc(f.nome) + '?</h2><p class="mut" style="margin-bottom:14px">Dica: tire uma foto do jogo antes (no Diário).</p><div class="linha"><button class="bt rosa" id="apSim">Apagar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
-    FAB.$('apSim').onclick = function () { J.fases.splice(fase, 1); fase = 0; FAB.mudou(); FAB.ui.fecha(); monta(C); };
+    FAB.$('apSim').onclick = function () { J.fases.splice(fase, 1); fase = 0; desfaz = []; FAB.mudou(); FAB.ui.fecha(); monta(C); };
   };
+  FAB.$('fzEsq').onclick = function () { FAB.$('fzScroll').scrollBy({ left: -320, behavior: 'smooth' }); };
+  FAB.$('fzDir').onclick = function () { FAB.$('fzScroll').scrollBy({ left: 320, behavior: 'smooth' }); };
   FAB.$('fzCen').onclick = function () {
     FAB.ui.escolhe('Onde acontece esta fase?', 'Escolha o cenário', Object.keys(FAB.CENARIOS).map(function (k) {
       var c = FAB.CENARIOS[k]; return { id: k, nome: c.nome, ico: '<span style="width:90px;height:44px;border-radius:10px;border:2px solid #1a1c2c;background:linear-gradient(' + c.ceu[0] + ',' + c.ceu[1] + ')"></span>' };
@@ -104,7 +111,7 @@ function monta(C) {
     if (corta) { FAB.ui.toast('O começo ou a bandeira estão no pedaço que ia sumir.', true); return; }
     snap(); f.mapa = f.mapa.map(function (l) { return l.slice(0, n); }); FAB.mudou(); redesenha();
   };
-  FAB.$('fzDesf').onclick = function () { if (!desfaz.length) return; f.mapa = JSON.parse(desfaz.pop()); FAB.mudou(); redesenha(); };
+  FAB.$('fzDesf').onclick = function () { if (!desfaz.length || donoDesfaz !== FAB.E.atual + '|' + fase) return; f.mapa = JSON.parse(desfaz.pop()); FAB.mudou(); redesenha(); };
   var cv = FAB.$('fzCanvas');
   cv.oncontextmenu = function (e) { e.preventDefault(); };
   cv.onpointerdown = function (ev) {

@@ -16,7 +16,7 @@ var TS = 16, LINHAS = 12, VH = LINHAS * TS;
 var GRAV = 900, PULO = 330, SUPER = 480, VEL = 90, MAXQ = 420;
 
 var M = {}, cv, cx, J, O, W, H, S, heroi, ents, parts, cam, raf, tAnt, pausado, rodando, LUPA;
-var teclas = {}, tPulo = 0, tChao = 0, relogios = {}, pontosDisp = {}, falaB = null, treme = 0;
+var geracao = 0, teclas = {}, tPulo = 0, tChao = 0, relogios = {}, pontosDisp = {}, falaB = null, treme = 0;
 var letraTipo = {};
 function montaLetras() { letraTipo = {}; Object.keys(FAB.TIPOS).forEach(function (t) { letraTipo[FAB.TIPOS[t].letra] = t; }); }
 
@@ -158,17 +158,18 @@ function faz(a, ctx) {
         log('O herói perdeu vida aqui', null, 'vida');
       }
       S.vidas += a.n;
-      if (S.vidas <= 0 && !S.semVidas) { S.semVidas = true; S.vidas = 0; setTimeout(function () { if (!dispara('vidas0', {})) fim(false); }, 0); }
+      if (S.vidas > 0) S.semVidas = false;
+      if (S.vidas <= 0 && !S.semVidas) { S.semVidas = true; S.vidas = 0; (function (g0) { setTimeout(function () { if (g0 === geracao && !dispara('vidas0', {})) fim(false); }, 0); })(geracao); }
       break;
-    case 'some': if (e) { e.vivo = false; poeira(e.x + 8, e.y + 8, '#fee761'); if (e.tipo === 'porta') S.portas++; if (e.tipo === 'moeda') S.moedas++; } break;
-    case 'guarda': if (e) { S.mochila[e.tipo] = (S.mochila[e.tipo] || 0) + 1; e.vivo = false; poeira(e.x + 8, e.y + 8, '#2ce8f5'); if (e.tipo === 'moeda') S.moedas++; } break;
+    case 'some': if (e && e.vivo) { e.vivo = false; poeira(e.x + 8, e.y + 8, '#fee761'); if (e.tipo === 'porta') S.portas++; if (e.tipo === 'moeda') S.moedas++; } break;
+    case 'guarda': if (e && e.vivo) { S.mochila[e.tipo] = (S.mochila[e.tipo] || 0) + 1; e.vivo = false; poeira(e.x + 8, e.y + 8, '#2ce8f5'); if (e.tipo === 'moeda') S.moedas++; } break;
     case 'gasta': if (S.mochila[a.obj]) S.mochila[a.obj]--; break;
     case 'pulo': heroi.vy = -SUPER; heroi.noChao = false; break;
     case 'volta': heroi.x = S.controle.x; heroi.y = S.controle.y; heroi.vx = heroi.vy = 0; break;
     case 'marca': if (e) { S.controle = { x: e.x + 3, y: e.y + 2 }; e.ativo = true; } else S.controle = { x: heroi.x, y: heroi.y }; break;
-    case 'ganha': setTimeout(ganhaFase, 0); break;
-    case 'perde': setTimeout(function () { fim(false); }, 0); break;
-    case 'pergunta': if (e && !e.usada) { e.usada = true; pergunta(); } break;
+    case 'ganha': if (!S.ganhando) { S.ganhando = true; var g0 = geracao; setTimeout(function () { if (g0 === geracao) ganhaFase(); }, 0); } break;
+    case 'perde': (function (g0) { setTimeout(function () { if (g0 === geracao) fim(false); }, 0); })(geracao); break;
+    case 'pergunta': if (e && !e.usada) { e.usada = true; pergunta(); } else if (!e) pergunta(); break;
     case 'fala': falaB = { txt: a.v || 'Oba!', t: 2.2 }; break;
     case 'som': toca(a.v); break;
     case 'rapido': heroi.rapido = 5; break;
@@ -211,8 +212,9 @@ function cria(tipo) {
 function ganhaFase() {
   if (!rodando) return;
   toca('vitoria'); confete();
-  if (S.fase + 1 < J.fases.length) { pausado = true; setTimeout(function () { if (!rodando) return; pausado = false; carregaFase(S.fase + 1); tAnt = performance.now(); }, 1100); }
-  else { S.venceu = true; setTimeout(function () { fim(true); }, 900); }
+  var g0 = geracao;
+  if (S.fase + 1 < J.fases.length) { pausado = true; setTimeout(function () { if (g0 !== geracao || !rodando) return; pausado = false; S.ganhando = false; carregaFase(S.fase + 1); tAnt = performance.now(); }, 1100); }
+  else { S.venceu = true; setTimeout(function () { if (g0 === geracao) fim(true); }, 900); }
 }
 function fim(venceu) {
   if (!rodando) return; rodando = false; cancelAnimationFrame(raf);
@@ -437,7 +439,7 @@ function quadro(t) {
     relogios[r.id] = (relogios[r.id] || 0) + dt;
     if (relogios[r.id] >= (r.quando.n || 3)) { relogios[r.id] = 0; dispara('cada', { id: r.id }); }
   });
-  if (S.tempoFase > 0) { S.tempoRest -= dt; if (S.tempoRest <= 0) { S.tempoRest = 0; S.tempoFase = 0; if (!dispara('tempo0', {})) fim(false); } if (Math.floor(S.tempoRest) !== S.ultTempo) { S.ultTempo = Math.floor(S.tempoRest); hud(); } }
+  if (S.tempoFase > 0) { S.tempoRest -= dt; if (S.tempoRest <= 0) { S.tempoRest = 0; var deu = dispara('tempo0', {}); if (S.tempoRest <= 0) { S.tempoFase = 0; hud(); if (!deu) fim(false); } } if (Math.floor(S.tempoRest) !== S.ultTempo) { S.ultTempo = Math.floor(S.tempoRest); hud(); } }
   parts.forEach(function (p) { p.x += p.vx * dt; p.y += p.vy * dt; if (!p.conf && !p.txt) p.vy += 300 * dt; p.t -= dt; }); parts = parts.filter(function (p) { return p.t > 0; });
   if (falaB) { falaB.t -= dt; if (falaB.t <= 0) falaB = null; }
   if (treme > 0) treme -= dt;
@@ -455,7 +457,7 @@ function hud() {
 
 /* ---------------- API ---------------- */
 M.inicia = function (canvas, jogo, opts) {
-  M.para(); montaLetras();
+  M.para(); geracao++; montaLetras();
   cv = canvas; cx = cv.getContext('2d'); J = jogo; O = opts || {}; LUPA = !!O.lupa;
   var r = cv.getBoundingClientRect(), asp = r.width && r.height ? r.width / r.height : 16 / 9;
   cv.height = VH; cv.width = Math.max(200, Math.min(420, Math.round(VH * asp)));
@@ -482,7 +484,7 @@ M.olha = function () {
   var h = heroi, pe = Math.floor((h.y + h.h + 2) / TS), frente = Math.floor((h.x + h.w + 14) / TS);
   return { x: h.x, y: h.y, noChao: h.noChao, buraco: !solidoTile(frente, pe) && !nuvemTile(frente, pe) && !solidoTile(frente, pe + 1),
     parede: solidoTile(Math.floor((h.x + h.w + 6) / TS), Math.floor((h.y + 8) / TS)),
-    perigo: ents.some(function (e) { return e.vivo && (e.classe === 'inimigo' || e.classe === 'perigo') && e.x - h.x > -4 && e.x - h.x < 40 && Math.abs(e.y - h.y) < 30; }) };
+    perigo: ents.some(function (e) { return e.vivo && (e.classe === 'inimigo' || e.classe === 'perigo') && e.x - h.x > -4 && e.x - h.x < 26 && Math.abs(e.y - h.y) < 30; }) };
 };
 M.TS = TS; M.LINHAS = LINHAS; M.SONS = SONS;
 
@@ -490,6 +492,7 @@ var MAPA_TECLAS = { ArrowLeft: 'esq', a: 'esq', A: 'esq', ArrowRight: 'dir', d: 
 window.addEventListener('keydown', function (ev) {
   if (!rodando || /INPUT|TEXTAREA/.test((ev.target || {}).tagName)) return;
   var k = MAPA_TECLAS[ev.key]; if (!k) return;
+  if (ev.ctrlKey || ev.metaKey) return;
   ev.preventDefault(); if (ev.repeat) return; M.tecla(k, true);
 });
 window.addEventListener('keyup', function (ev) { var k = MAPA_TECLAS[ev.key]; if (k && k !== 'X' && k !== 'C' && k !== 'V') M.tecla(k, false); });
