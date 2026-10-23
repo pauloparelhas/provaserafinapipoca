@@ -49,13 +49,23 @@ Quatro camadas: **processo** (imutavel) · **fontes** (insumo) · **trabalho** (
 ## FÁBRICA DE JOGOS DA MARIANA — módulo `coding/` (23/10/2026)
 
 Estúdio em que a Mariana CRIA jogos (pixel art, fases, regras QUANDO/SÓ SE/FAÇA, teste com
-lupa de bichinhos, diário com fotos/versões, robô = pedidos à IA, 19 missões). Integra com as
+lupa de bichinhos, diário com fotos/versões, robô = pedidos à IA, 25 missões, tela Opções na
+engrenagem). Integra com as
 provas pela **Placa ?**, que pergunta o banco único da matéria atual (`coding/banco/provas.js`
 aponta para `ferramentas/<MAT>_banco.js`). **A cada prova nova: trocar `atual` em provas.js.**
 - Mapa e regras: `coding/_engenharia/README.md` · desenho: `DESIGN.md` · pedidos à IA: `OFICINA.md` · melhoria contínua: `ROADMAP.md`.
 - Skill `fabrica-mariana` ("pedidos da Mariana", "rodada da Fábrica", prova nova); agentes `oficina-robo` (faz a peça) e `mentor-coding` (lê o .json dela e diagnostica).
+- **Voz (23/10): só Thalita ou Antonio (pt) e Ava ou Brian (en), GRAVADAS** em `coding/audio/<voz>/`
+  (edge-tts). Voz robótica do sistema é proibida: frase sem gravação só fala se o navegador tiver
+  a voz natural (Edge); senão fica muda. Texto falado novo ou prova nova → regravar:
+  `node coding/_engenharia/frases.js && python coding/_engenharia/gera_audio.py`.
+- **Inglês (23/10):** Opções > Idioma. O código escreve em português; `banco/ingles_dic.js` traduz
+  tela e voz. Texto novo na tela → entrada nova no dicionário. Pergunta da prova fica na língua da prova.
+- **Segurança (23/10):** sem chat, sem rede, sem endereço de fora; trava CSP no `index.html`.
 - Portões (mudos), todos verdes antes de publicar: `node coding/_engenharia/gate/valida_banco.js` ·
-  `python coding/_engenharia/gate/qa_fabrica.py` · `python coding/_engenharia/gate/jogador_robo.py` · `python coding/_engenharia/gate/teste_funcoes.py`.
+  `node coding/_engenharia/gate/seguranca.js` · `python coding/_engenharia/gate/qa_fabrica.py` ·
+  `python coding/_engenharia/gate/jogador_robo.py` · `python coding/_engenharia/gate/teste_funcoes.py` ·
+  `python coding/_engenharia/gate/teste_ingles.py` (no Windows: `PYTHONIOENCODING=utf-8`).
 - Publicar: `bash coding/_engenharia/publicar_coding.sh` (não toca na matéria que está no ar).
 - O .json que ela exporta é dado da criança: fica em `coding/_engenharia/entrada/`, fora do git.
 
@@ -87,6 +97,7 @@ try{ speechSynthesis.speak=function(){}; speechSynthesis.cancel=function(){};
      speechSynthesis.getVoices=function(){return [];}; }catch(e){}
 window.SpeechSynthesisUtterance=function(){};
 window.AudioContext=window.webkitAudioContext=function(){ throw new Error('audio off'); };
+HTMLMediaElement.prototype.play=function(){ return Promise.resolve(); };   /* mp3 gravado (Fábrica) */
 ```
 
 Script de referencia pronto: QA de layout com Playwright que mede 24 telas x 3 viewports

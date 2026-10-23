@@ -51,7 +51,7 @@ var ids = {};
 F.MISSOES.forEach(function (m) {
   if (ids[m.id]) e('missão repetida ' + m.id); ids[m.id] = 1;
   if (!F.CONCEITOS[m.conceito]) e('missão ' + m.id + ': conceito ' + m.conceito);
-  if (['painel', 'ideia', 'pixel', 'fases', 'regras', 'testar', 'diario', 'robo', 'missoes', 'jogar'].indexOf(m.onde) < 0) e('missão ' + m.id + ': tela ' + m.onde);
+  if (['painel', 'ideia', 'pixel', 'fases', 'regras', 'testar', 'diario', 'robo', 'missoes', 'jogar', 'jeito'].indexOf(m.onde) < 0) e('missão ' + m.id + ': tela ' + m.onde);
   if (m.frase.split(/\s+/).length > 16) e('missão ' + m.id + ': frase longa demais para 7 anos');
 });
 /* filtro de palavras impróprias nos textos que a criança lê (nomes, falas, entregas do robô) */

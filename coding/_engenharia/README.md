@@ -19,6 +19,10 @@
 | `banco/oficina.js` | peças que o robô fez a pedido dela (cresce sempre) | a cada pedido |
 | `_engenharia/gate/` | `valida_banco.js`, `qa_fabrica.py` (telas × 4 tamanhos, mudo), `jogador_robo.py` (joga com teclas) | rodar antes de publicar |
 | `_engenharia/entrada/` | os .json que ela exportou (dados da criança: **fora do git**) | só leitura |
+| `js/voz.js` · `banco/audio_indice.js` · `audio/<voz>/` | a voz: Thalita/Antonio (pt), Ava/Brian (en), frases gravadas por `frases.js` + `gera_audio.py`; sem voz robótica | texto falado novo → regravar |
+| `js/idioma.js` · `banco/ingles.js` · `banco/ingles_dic.js` | a Fábrica em inglês (tradutor da tela + dicionário) | texto novo → entrada no dicionário |
+| `js/jeito.js` | tela Opções (engrenagem): idioma, voz, cores, tamanho, barras, tela grande, do que é feita | ao criar preferência |
+| `_engenharia/gate/seguranca.js` · `teste_ingles.py` | trava de rede (CSP, sem endereço de fora) · nada em português no modo inglês | rodar antes de publicar |
 
 ## Trocar a prova (quando o Paulo mandar a próxima matéria)
 1. A matéria nova já tem `ferramentas/<MAT>_banco.js` com `window.<MAT>.ITENS` no formato

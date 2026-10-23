@@ -13,10 +13,10 @@ var CARAS = {
   triste:'<circle cx="12" cy="12" r="10" fill="#a7b0bd" stroke="#1a1c2c" stroke-width="1.6"/><circle cx="8.5" cy="10" r="1.4" fill="#1a1c2c"/><circle cx="15.5" cy="10" r="1.4" fill="#1a1c2c"/><path d="M8 16.5a5 5 0 0 1 8 0" stroke="#1a1c2c" stroke-width="1.8" fill="none" stroke-linecap="round"/>'
 };
 Object.keys(CARAS).forEach(function (k) { FAB.ICONES['cara_' + k] = CARAS[k]; });
-var FALA_CARA = { feliz: 'Ficou do jeito que eu queria', meio: 'Quase do jeito que eu queria', triste: 'Não ficou do jeito que eu queria' };
+var FALA_CARA = {   /* falado */ feliz: 'Ficou do jeito que eu queria', meio: 'Quase do jeito que eu queria', triste: 'Não ficou do jeito que eu queria' };
 var MUDAR = ['o pulo', 'os inimigos', 'as moedas', 'o caminho', 'as regras', 'o desenho', 'nada, ficou ótimo'];
 
-function quando(t) { var d = new Date(t); return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); }
+function quando(t) { var d = new Date(t), L = FAB.lingua() === 'en' ? 'en-US' : 'pt-BR'; return d.toLocaleDateString(L) + ' ' + d.toLocaleTimeString(L, { hour: '2-digit', minute: '2-digit' }); }
 function miniatura(cv, J) { try { FAB.desenhaMapa(cv, J.fases[0], 1, false); } catch (e) {} }
 function comJogo(J, f) { var a = FAB.E.atual; FAB.E.atual = J.id; try { return f(); } finally { FAB.E.atual = a; } }
 
@@ -29,15 +29,15 @@ FAB.T.painel = { nome: 'Fábrica de Jogos', ajuda: 'Aqui você cria jogos. Apert
   var J = FAB.jogo(), m = FAB.proximaMissao(), feitas = FAB.feitas(), tot = FAB.MISSOES.length;
   C.innerHTML =
     '<div class="pn-hero">' +
-      '<div class="card pn-cont"><div class="tit">' + FAB.ico('spr:' + FAB.skinDe('heroi'), 36) + esc(J.nome) + '</div>' +
+      '<div class="card pn-cont"><div class="tit">' + FAB.ico('spr:' + FAB.skinDe('heroi'), 36) + '<span data-sem-traducao>' + esc(FAB.tr(J.nome)) + '</span></div>' +
         '<canvas class="pn-thumb pix" id="pnThumb"></canvas>' +
         '<div class="linha"><button class="bt amarelo grande" id="pnCont">' + FAB.ico('play', 30) + 'Continuar</button>' +
         '<button class="bt verde grande" onclick="FAB.ui.vai(\'testar\')">' + FAB.ico('t_testar', 30) + 'Testar</button></div></div>' +
       '<div class="card pn-missao">' + (m ?
-        '<div class="linha"><button class="falar" id="pnFala">' + FAB.ico('falar', 22) + '</button><b>Missão ' + (FAB.MISSOES.indexOf(m) + 1) + ' de ' + tot + '</b></div>' +
+        '<div class="linha"><button class="falar" id="pnFala">' + FAB.ico('falar', 22) + '</button><b>' + FAB.trf('Missão {0} de {1}', [FAB.MISSOES.indexOf(m) + 1, tot]) + '</b></div>' +
         '<div class="fr">' + esc(m.frase) + '</div>' : '<div class="fr">Você fez todas as missões! Agora invente o que quiser.</div>') +
         '<div class="barra"><i style="width:' + Math.round(feitas / tot * 100) + '%"></i></div>' +
-        '<p class="mut" style="margin-top:6px">' + feitas + ' missões feitas · ' + FAB.xp() + ' XP · ' + FAB.nivel().nome + '</p>' +
+        '<p class="mut" style="margin-top:6px">' + FAB.trf('{0} missões feitas · {1} XP · {2}', [feitas, FAB.xp(), FAB.tr(FAB.nivel().nome)]) + '</p>' +
         (m ? '<button class="bt amarelo" style="margin-top:10px" id="pnIr">Ir para a missão</button>' : '') + '</div>' +
     '</div>' +
     '<div class="tit" style="margin-top:22px">' + FAB.ico('t_jogar', 28) + 'Meus jogos</div><div class="grade jogos" id="pnJogos"></div>' +
@@ -52,7 +52,7 @@ FAB.T.painel = { nome: 'Fábrica de Jogos', ajuda: 'Aqui você cria jogos. Apert
   if ($('pnFala')) $('pnFala').onclick = function () { FAB.fala(m.frase); };
   var h = '';
   FAB.E.jogos.forEach(function (j) {
-    h += '<div class="card jg' + (j.id === J.id ? ' on' : '') + '" data-j="' + j.id + '"><canvas class="pix"></canvas><b>' + esc(j.nome) + '</b><span class="mut">' + j.fases.length + ' fase(s) · ' + j.regras.length + ' regras</span>' +
+    h += '<div class="card jg' + (j.id === J.id ? ' on' : '') + '" data-j="' + j.id + '"><canvas class="pix"></canvas><b data-sem-traducao>' + esc(FAB.tr(j.nome)) + '</b><span class="mut">' + FAB.trf('{0} fase(s) · {1} regras', [j.fases.length, j.regras.length]) + '</span>' +
       (j.id !== J.id ? '<button class="ib" data-apaga="' + j.id + '" title="Apagar jogo" style="align-self:flex-end">' + FAB.ico('lixo', 20) + '</button>' : '') + '</div>';
   });
   h += '<button class="card jg" id="pnNovo" style="align-items:center;justify-content:center;min-height:150px">' + FAB.ico('mais', 48) + '<b>Jogo novo</b></button>';
@@ -62,7 +62,7 @@ FAB.T.painel = { nome: 'Fábrica de Jogos', ajuda: 'Aqui você cria jogos. Apert
     comJogo(j, function () { miniatura(el.querySelector('canvas'), j); });
     el.onclick = function (ev) {
       if (ev.target.closest('[data-apaga]')) {
-        ui.abre('<h2>Apagar o jogo "' + esc(j.nome) + '"?</h2><p class="mut" style="margin-bottom:14px">Não dá para desfazer.</p><div class="linha"><button class="bt rosa" id="apSim">Apagar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
+        ui.abre('<h2>' + FAB.tr('Apagar o jogo') + ' "<span data-sem-traducao>' + esc(FAB.tr(j.nome)) + '</span>"?</h2><p class="mut" style="margin-bottom:14px">Não dá para desfazer.</p><div class="linha"><button class="bt rosa" id="apSim">Apagar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
         $('apSim').onclick = function () { FAB.apagaJogo(j.id); ui.fecha(); ui.vai('painel'); };
         return;
       }
@@ -89,13 +89,13 @@ FAB.T.ideia = { nome: 'Ideia', ajuda: 'Conte como é o seu jogo antes de constru
   var J = FAB.jogo(), I = J.ideia = J.ideia || {};
   C.innerHTML = '<div class="grade" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">' +
     '<div class="card"><div class="tit">' + FAB.ico('t_ideia', 28) + 'Nome do jogo</div>' + ui.campo('idNome', 'Nome do jogo') + '</div>' +
-    '<div class="card"><div class="tit">' + FAB.ico('spr:' + FAB.skinDe('heroi'), 34) + 'Herói: ' + esc(FAB.nomeTipo('heroi') === 'heroi' ? FAB.spr(FAB.skinDe('heroi')).nome : ((J.nomes || {}).heroi || FAB.spr(FAB.skinDe('heroi')).nome)) + '</div><button class="bt" onclick="FAB.pixelPapel(\'heroi\');FAB.ui.vai(\'pixel\')">' + FAB.ico('t_pixel', 22) + 'Desenhar o herói</button></div>' +
+    '<div class="card"><div class="tit">' + FAB.ico('spr:' + FAB.skinDe('heroi'), 34) + FAB.tr('Herói:') + ' <span data-sem-traducao>' + esc(FAB.tr(FAB.nomeTipo('heroi') === 'heroi' ? FAB.spr(FAB.skinDe('heroi')).nome : ((J.nomes || {}).heroi || FAB.spr(FAB.skinDe('heroi')).nome))) + '</span></div><button class="bt" onclick="FAB.pixelPapel(\'heroi\');FAB.ui.vai(\'pixel\')">' + FAB.ico('t_pixel', 22) + 'Desenhar o herói</button></div>' +
     '<div class="card"><div class="tit">' + FAB.ico('trofeu', 28) + 'Como ganha?</div>' + chips('idObj', ['chegar na bandeira', 'pegar as estrelas', 'fugir dos inimigos', 'acertar as perguntas'], I.objetivo) + '</div>' +
     '<div class="card"><div class="tit">' + FAB.ico('t_jogar', 28) + 'Para quem?</div>' + chips('idQuem', ['papai', 'mamãe', 'amigas', 'eu mesma', 'todo mundo'], I.paraQuem) + '</div>' +
     '<div class="card" style="grid-column:1/-1"><div class="tit">' + FAB.ico('t_diario', 28) + 'A história do jogo</div>' + ui.campo('idHist', 'Era uma vez…', true) + '<p class="mut" style="margin-top:6px">Aparece na capa quando alguém for jogar.</p></div>' +
   '</div>';
   ui.ligaMic(C);
-  $('idNome').value = J.nome; $('idHist').value = I.historia || '';
+  $('idNome').value = FAB.tr(J.nome); $('idHist').value = I.historia || '';
   $('idNome').oninput = function () { J.nome = this.value.slice(0, 40) || 'Meu jogo'; FAB.mudou(); ui.topo(); };
   $('idHist').oninput = function () { I.historia = this.value.slice(0, 400); FAB.mudou(); };
   [['idObj', 'objetivo'], ['idQuem', 'paraQuem']].forEach(function (p) {
@@ -107,19 +107,19 @@ FAB.T.ideia = { nome: 'Ideia', ajuda: 'Conte como é o seu jogo antes de constru
 function abrePergunta(q, responde) {
   var ord = [0, 1, 2].slice(0, q.o.length).sort(function () { return Math.random() - .5; }), feito = false;
   var h = '<h2><button class="falar" id="pqFala">' + FAB.ico('falar', 22) + '</button>' + FAB.ico('pergunta', 30) + (q.fonte === 'minha' ? 'Minha pergunta' : 'Pergunta da prova') + '</h2>' +
-    '<div class="perg">' + esc(q.p) + '</div><div class="alts">' +
-    ord.map(function (i, k) { return '<button class="alt" data-i="' + i + '"><kbd>' + (k + 1) + '</kbd>' + esc(q.o[i]) + '</button>'; }).join('') + '</div>' +
+    '<div class="perg" data-sem-traducao>' + esc(q.p) + '</div><div class="alts">' +
+    ord.map(function (i, k) { return '<button class="alt" data-i="' + i + '"><kbd>' + (k + 1) + '</kbd><span data-sem-traducao>' + esc(q.o[i]) + '</span></button>'; }).join('') + '</div>' +
     '<div class="expl" id="pqEx"></div><div style="margin-top:12px;display:none" id="pqSeg"><button class="bt verde grande" id="pqOk">Continuar o jogo</button></div>';
   ui.abre(h); ui._preso = true; var fx = document.querySelector('#mbox .fecha'); if (fx) fx.remove();
-  function fala() { FAB.fala(q.p + '. ' + ord.map(function (i, k) { return (k + 1) + ': ' + q.o[i]; }).join('. ')); }
+  function fala() { var L = [q.p]; ord.forEach(function (i, k) { L.push(FAB.NUMEROS_FALA[k], q.o[i]); }); FAB.fala(L); }
   $('pqFala').onclick = fala; fala();
   function escolhe(i) {
     if (feito) return; feito = true;
     var certo = i === (q.c || 0);
     document.querySelectorAll('#mbox .alt').forEach(function (b) { var bi = +b.dataset.i; if (bi === (q.c || 0)) b.classList.add('certa'); else if (bi === i) b.classList.add('errada'); });
     var ex = $('pqEx'); ex.style.display = 'block';
-    ex.innerHTML = (certo ? '<b style="color:#8ff0a4">Acertou!</b> ' : '<b style="color:#ffb3b9">A certa é: ' + esc(q.o[q.c || 0]) + '.</b> ') + esc(q.ex || '');
-    FAB.fala(certo ? 'Acertou! ' + (q.ex || '') : 'A certa é: ' + q.o[q.c || 0] + '. ' + (q.ex || ''));
+    ex.innerHTML = (certo ? '<b style="color:#8ff0a4">Acertou!</b> ' : '<b style="color:#ffb3b9">' + FAB.tr('A certa é:') + ' <span data-sem-traducao>' + esc(q.o[q.c || 0]) + '</span>.</b> ') + '<span data-sem-traducao>' + esc(q.ex || '') + '</span>';   /* a pergunta da prova fica na língua da prova */
+    FAB.fala(certo ? ['Acertou!', q.ex || ''] : ['A certa é:', q.o[q.c || 0], q.ex || '']);
     $('pqSeg').style.display = 'block';
     $('pqOk').onclick = function () { document.removeEventListener('keydown', tecla); ui._preso = false; ui.fecha(); responde(certo); };
   }
@@ -128,9 +128,11 @@ function abrePergunta(q, responde) {
   document.querySelectorAll('#mbox .alt').forEach(function (b) { b.onclick = function () { escolhe(+b.dataset.i); }; });
 }
 
+FAB.abrePergunta = abrePergunta;   /* o portão do inglês abre a janela da Placa ? sem jogar */
+
 /* ============================ TESTAR ============================ */
 var lupaOn = false, dicaN = 0;
-var DICAS_QUEBRADO = [
+var DICAS_QUEBRADO = [   /* falado */
   'Bichinho 1: olhe a regra da moeda. Quantos pontos ela dá?',
   'Bichinho 2: tem uma regra desligada. Qual é? O que ela faz?',
   'Bichinho 3: tem um buraco largo demais para pular. Ponha uma mola ou um chão.'
@@ -170,12 +172,12 @@ function fimTeste(C, R, convidado) {
   sobre.innerHTML = '<div class="res card"><h2>' + (R.venceu ? 'Ganhou!' : 'Fim do teste') + '</h2>' +
     '<div class="nums"><div>' + R.pontos + '<small>pontos</small></div><div>' + R.segundos + 's<small>tempo</small></div><div>' + R.vidasPerdidas + '<small>vidas perdidas</small></div></div>' +
     (convidado ? '<p class="mut">Mostre para a criadora onde foi difícil.</p>' :
-      '<p class="mut">' + acordaram + ' regras acordaram. Ficou do jeito que você queria?</p><div class="caras">' +
+      '<p class="mut">' + FAB.trf('{0} regras acordaram. Ficou do jeito que você queria?', [acordaram]) + '</p><div class="caras">' +
       ['feliz', 'meio', 'triste'].map(function (k) { return '<button class="cara" data-c="' + k + '" title="' + FALA_CARA[k] + '">' + FAB.ico('cara_' + k, 56) + '</button>'; }).join('') + '</div><div id="tsMudar"></div>') +
     '<div class="linha" style="justify-content:center;margin-top:10px"><button class="bt verde grande" id="tsDeNovo">' + FAB.ico('play', 28) + 'De novo</button>' +
     (convidado ? '' : '<button class="bt" id="tsRegras">' + FAB.ico('t_regras', 22) + 'Regras</button><button class="bt" id="tsFases">' + FAB.ico('t_fases', 22) + 'Fases</button>') + '</div></div>';
   sobre.classList.add('on');
-  FAB.fala(R.venceu ? 'Ganhou! ' + R.pontos + ' pontos.' : 'Fim do teste. ' + R.pontos + ' pontos.');
+  FAB.fala([R.venceu ? 'Ganhou!' : 'Fim do teste.', R.pontos === 1 ? 'Um ponto.' : R.pontos + ' pontos.']);
   $('tsDeNovo').onclick = function () { rodaJogo(C, convidado); };
   if ($('tsRegras')) { $('tsRegras').onclick = function () { ui.vai('regras'); }; $('tsFases').onclick = function () { ui.vai('fases'); }; }
   sobre.querySelectorAll('.cara').forEach(function (b) {
@@ -184,15 +186,26 @@ function fimTeste(C, R, convidado) {
       var ent = { id: FAB.uid('d'), data: Date.now(), jogo: J.id, nomeJogo: J.nome, cara: b.dataset.c, pontos: R.pontos, venceu: R.venceu, segundos: R.segundos, vidasPerdidas: R.vidasPerdidas };
       FAB.E.diario.push(ent); FAB.fala(FALA_CARA[b.dataset.c] + '. O que você vai mudar?');
       $('tsMudar').innerHTML = '<p class="mut" style="margin:6px 0">O que você vai mudar?</p>' + chips('tsMudarC', MUDAR, null);
-      $('tsMudarC').querySelectorAll('.esc').forEach(function (c) { c.onclick = function () { ent.mudar = c.dataset.v; FAB.mudou(); $('tsMudar').innerHTML = '<p class="mut">Anotado no diário: mudar ' + esc(c.dataset.v) + '.</p>'; }; });
+      $('tsMudarC').querySelectorAll('.esc').forEach(function (c) { c.onclick = function () { ent.mudar = c.dataset.v; FAB.mudou(); $('tsMudar').innerHTML = '<p class="mut">' + FAB.trf('Anotado no diário: mudar {0}.', [esc(FAB.tr(c.dataset.v))]) + '</p>'; }; });
       FAB.salva();   /* a medalha do diário espera ela responder o que vai mudar */
     };
   });
 }
 function palcoHTML() {
-  return '<div class="palco"><canvas class="pix"></canvas><div class="hud"></div>' +
+  return '<div class="ts-area"><div class="palco"><canvas class="pix"></canvas><div class="hud"></div>' +
     '<div class="toques"><div class="gp"><button data-k="esq">◀</button><button data-k="dir">▶</button></div><div class="gp"><button data-k="X">X</button><button data-k="C">C</button><button data-k="V">V</button><button data-k="pulo">▲</button></div></div>' +
-    '<div class="sobre"></div></div>';
+    '<div class="sobre"></div></div></div>';
+}
+/* o palco cresce até onde dá, sem entortar: proporção entre 1,05 e 2,18 (a câmera do motor acompanha) */
+function encaixaPalco(area) {
+  var pc = area.querySelector('.palco'), W = area.clientWidth, H = area.clientHeight; if (!W || !H) return;
+  var asp = Math.max(1.05, Math.min(2.18, W / H)), w = W, h = W / asp; if (h > H) { h = H; w = H * asp; }
+  pc.style.width = (w / W * 100) + '%'; pc.style.height = (h / H * 100) + '%';
+}
+function vigiaPalco(C) {
+  var area = C.querySelector('.ts-area'); if (!area) return;
+  encaixaPalco(area);
+  if (window.ResizeObserver) new ResizeObserver(function () { encaixaPalco(area); }).observe(area);
 }
 function ligaToques(C) {
   C.querySelectorAll('.toques button').forEach(function (b) {
@@ -202,24 +215,33 @@ function ligaToques(C) {
   });
 }
 FAB.T.testar = { nome: 'Testar', ajuda: 'Jogue o seu jogo. Setas andam, espaço pula.', monta: function (C) {
-  var J = FAB.jogo();
-  C.innerHTML = '<div class="ts-wrap' + (lupaOn ? '' : ' sem-lupa') + '" id="tsWrap"><div>' + palcoHTML() +
-    '<div class="linha" style="margin-top:10px"><button class="bt verde" id="tsRec">' + FAB.ico('volta', 22) + 'Recomeçar</button>' +
-    '<button class="bt' + (lupaOn ? ' amarelo' : '') + '" id="tsLupa">' + FAB.ico('lupa', 22) + 'Lupa de bichinhos</button>' +
-    '<button class="bt cinza" id="tsPara">Parar</button>' +
-    (J.origem === 'quebrado' ? '<button class="bt rosa" id="tsDica">' + FAB.ico('lupa', 22) + 'Dica do detetive</button>' : '') +
-    '<span class="mut">Setas ou A/D andam · espaço pula · X, C e V são teclas de regra</span></div></div>' +
-    '<div class="log" id="tsLog"></div></div>';
-  ligaToques(C);
+  var J = FAB.jogo(), gr = ui.ehImersivo();
+  C.innerHTML = '<div class="ts-wrap' + (lupaOn ? ' log-on' : '') + '" id="tsWrap">' + palcoHTML() +
+    '<div class="ts-barra"><button class="bt verde" id="tsRec">' + FAB.ico('volta', 22) + '<span>Recomeçar</span></button>' +
+    '<button class="bt' + (lupaOn ? ' amarelo' : '') + '" id="tsLupa">' + FAB.ico('lupa', 22) + '<span>Lupa de bichinhos</span></button>' +
+    '<button class="bt cinza" id="tsPara">' + FAB.ico('errado', 22) + '<span>Parar</span></button>' +
+    (J.origem === 'quebrado' ? '<button class="bt rosa" id="tsDica">' + FAB.ico('lupa', 22) + '<span>Dica do detetive</span></button>' : '') +
+    '<span class="mut ts-teclas">Setas andam · espaço pula · X, C e V são teclas de regra</span>' +
+    '<button class="bt cinza" id="tsGrande" title="Esconder ou mostrar os menus">' + FAB.ico(gr ? 's_baixo' : 'telacheia', 22) + '<span>' + (gr ? 'Mostrar menus' : 'Tela grande') + '</span></button>' +
+    '<button class="bt cinza" id="tsCheia" title="Tela cheia de verdade">' + FAB.ico('telacheia', 22) + '</button></div>' +
+    '<aside class="log" id="tsLog"></aside>' +
+    '<button class="aba-log" id="tsAbaLog" title="Regras que acordaram">' + FAB.ico('s_esq', 18) + '<span>Regras</span></button></div>';
+  ligaToques(C); vigiaPalco(C);
   $('tsRec').onclick = function () { rodaJogo(C, false); };
   $('tsPara').onclick = function () { FAB.motor.termina(); };
   $('tsLupa').onclick = function () {
-    lupaOn = !lupaOn; FAB.motor.lupa(lupaOn); $('tsWrap').classList.toggle('sem-lupa', !lupaOn); this.classList.toggle('amarelo', lupaOn);
+    lupaOn = !lupaOn; FAB.motor.lupa(lupaOn); $('tsWrap').classList.toggle('log-on', lupaOn); this.classList.toggle('amarelo', lupaOn);
     if (lupaOn) { FAB.E.stats.lupa++; FAB.salva(); FAB.fala('Lupa ligada. Veja as caixas e as regras que acordam.'); }
   };
+  $('tsAbaLog').onclick = function () { $('tsWrap').classList.toggle('log-on'); };
+  $('tsGrande').onclick = function () { ui.imersivo(!ui.ehImersivo()); var g = ui.ehImersivo(); this.innerHTML = FAB.ico(g ? 's_baixo' : 'telacheia', 22) + '<span>' + (g ? 'Mostrar menus' : 'Tela grande') + '</span>'; };
+  $('tsCheia').onclick = telaCheia;
   if ($('tsDica')) $('tsDica').onclick = function () { var d = DICAS_QUEBRADO[dicaN++ % 3]; ui.toast(d, true); };
   rodaJogo(C, false);
 } };
+function telaCheia() {
+  try { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); } catch (e) {}
+}
 
 /* ============================ DIÁRIO ============================ */
 FAB.T.diario = { nome: 'Diário', ajuda: 'Veja como foram os testes e tire fotos do jogo.', monta: function (C) {
@@ -227,7 +249,7 @@ FAB.T.diario = { nome: 'Diário', ajuda: 'Veja como foram os testes e tire fotos
   var h = '<div class="linha" style="margin-bottom:14px"><button class="bt amarelo" id="dgFoto">' + FAB.ico('foto', 24) + 'Tirar foto do jogo</button><span class="mut">A foto guarda o jogo como está agora. Dá para voltar depois.</span></div>';
   if (J.versoes.length) {
     h += '<div class="tit">' + FAB.ico('foto', 26) + 'Fotos do jogo</div><div class="grade fotos" style="margin-bottom:20px">';
-    J.versoes.forEach(function (v, i) { h += '<div class="card jg"><canvas class="pix" data-v="' + i + '"></canvas><b>' + esc(v.nome) + '</b><span class="mut">' + quando(v.data) + '</span><button class="bt cinza" data-volta="' + i + '">Voltar para esta</button></div>'; });
+    J.versoes.forEach(function (v, i) { h += '<div class="card jg"><canvas class="pix" data-v="' + i + '"></canvas><b>' + esc(FAB.tr(v.nome)) + '</b><span class="mut">' + quando(v.data) + '</span><button class="bt cinza" data-volta="' + i + '">Voltar para esta</button></div>'; });
     h += '</div>';
   }
   var ents = (FAB.E.diario || []).filter(function (d) { return d.jogo === J.id; }).reverse();
@@ -235,14 +257,14 @@ FAB.T.diario = { nome: 'Diário', ajuda: 'Veja como foram os testes e tire fotos
   if (!ents.length) h += '<div class="card mut">Ainda vazio. Teste o jogo e escolha uma carinha no fim.</div>';
   ents.forEach(function (d) {
     h += '<div class="card dia">' + FAB.ico('cara_' + (d.cara || 'meio'), 44) + '<div class="q"><b>' + esc(FALA_CARA[d.cara] || '') + '</b>' +
-      '<div class="mut">' + (d.venceu ? 'ganhou' : 'não chegou no fim') + ' · ' + d.pontos + ' pontos · ' + d.segundos + 's · ' + d.vidasPerdidas + ' vidas perdidas' + (d.mudar ? ' · vou mudar: ' + esc(d.mudar) : '') + '</div><time>' + quando(d.data) + '</time></div></div>';
+      '<div class="mut">' + FAB.tr(d.venceu ? 'ganhou' : 'não chegou no fim') + ' · ' + FAB.trf('{0} pontos', [d.pontos]) + ' · ' + d.segundos + 's · ' + FAB.trf('{0} vidas perdidas', [d.vidasPerdidas]) + (d.mudar ? ' · ' + FAB.tr('vou mudar:') + ' ' + esc(FAB.tr(d.mudar)) : '') + '</div><time>' + quando(d.data) + '</time></div></div>';
   });
   C.innerHTML = h + '</div>';
   C.querySelectorAll('canvas[data-v]').forEach(function (cv) { var v = J.versoes[+cv.dataset.v]; FAB.desenhaMapa(cv, v.snap.fases[0], 1, false); });
   $('dgFoto').onclick = function () { FAB.tiraFoto('Foto ' + (J.versoes.length + 1)); FAB.motor.toca('magia'); ui.toast('Foto tirada!', true); FAB.T.diario.monta(C); };
   C.querySelectorAll('[data-volta]').forEach(function (b) {
     b.onclick = function () {
-      ui.abre('<h2>Voltar o jogo para a ' + esc(J.versoes[+b.dataset.volta].nome) + '?</h2><p class="mut" style="margin-bottom:14px">Antes, eu tiro uma foto do jogo de agora. Nada se perde.</p><div class="linha"><button class="bt verde" id="vtSim">Voltar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
+      ui.abre('<h2>' + FAB.trf('Voltar o jogo para a {0}?', [esc(FAB.tr(J.versoes[+b.dataset.volta].nome))]) + '</h2><p class="mut" style="margin-bottom:14px">Antes, eu tiro uma foto do jogo de agora. Nada se perde.</p><div class="linha"><button class="bt verde" id="vtSim">Voltar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
       $('vtSim').onclick = function () { FAB.voltaFoto(+b.dataset.volta); FAB.limpaCache(); ui.fecha(); ui.vai('diario'); ui.toast('Pronto! O jogo voltou.', true); };
     };
   });
@@ -265,7 +287,7 @@ FAB.T.robo = { nome: 'Robô', ajuda: 'Peça uma peça nova ao robô: o que é, c
     peds.forEach(function (p) {
       var pronto = FAB.ENTREGAS && FAB.ENTREGAS[p.id];
       h += '<div class="card ped">' + FAB.ico((TIPOS_PED.filter(function (t) { return t[0] === p.tipo; })[0] || [0, 0, 't_robo'])[2], 34) +
-        '<div><b>' + esc(p.nome || p.tipo) + '</b><div class="mut">' + esc(p.como) + ' · ' + esc(p.faz) + '</div>' + (pronto ? '<div style="color:#8ff0a4;font-weight:800">Robô: ' + esc(pronto) + '</div>' : '') + '</div>' +
+        '<div><b data-sem-traducao>' + esc(p.nome || FAB.tr((TIPOS_PED.filter(function (t) { return t[0] === p.tipo; })[0] || [0, p.tipo])[1])) + '</b><div class="mut" data-sem-traducao>' + esc(p.como) + ' · ' + esc(p.faz) + '</div>' + (pronto ? '<div style="color:#8ff0a4;font-weight:800">' + FAB.tr('Robô:') + ' <span data-sem-traducao>' + esc(pronto) + '</span></div>' : '') + '</div>' +
         '<span class="st ' + (pronto ? 'pronto' : 'enviado') + '">' + (pronto ? 'Pronto!' : 'O robô vai fazer') + '</span></div>';
     });
     h += '</div>';
@@ -293,7 +315,7 @@ FAB.T.missoes = { nome: 'Missões', ajuda: 'Escolha uma missão. Pode fazer na o
   var prox = FAB.proximaMissao(), h = '<div class="trilha">';
   FAB.MISSOES.forEach(function (m, i) {
     var feita = !!FAB.E.missoes[m.id], Cc = FAB.CONCEITOS[m.conceito] || {};
-    h += '<button class="card ms' + (feita ? ' feita' : '') + (prox === m ? ' prox' : '') + '" data-m="' + i + '"><span class="num">' + (feita ? '★' : i + 1) + '</span><span><span class="fr">' + esc(m.frase) + '</span><br><span class="mut">' + esc(Cc.nome || '') + ' · ' + m.xp + ' XP</span></span></button>';
+    h += '<button class="card ms' + (feita ? ' feita' : '') + (prox === m ? ' prox' : '') + '" data-m="' + i + '"><span class="num">' + (feita ? '★' : i + 1) + '</span><span><span class="fr">' + esc(m.frase) + '</span><br><span class="mut">' + esc(FAB.tr(Cc.nome || '')) + ' · ' + m.xp + ' XP</span></span></button>';
   });
   h += '</div><div class="tit" style="margin-top:24px">' + FAB.ico('t_ideia', 28) + 'Cartas do saber</div><div class="grade cartas">';
   Object.keys(FAB.CONCEITOS).forEach(function (k) {
@@ -304,7 +326,7 @@ FAB.T.missoes = { nome: 'Missões', ajuda: 'Escolha uma missão. Pode fazer na o
   C.querySelectorAll('[data-m]').forEach(function (b) {
     b.onclick = function () {
       var m = FAB.MISSOES[+b.dataset.m]; FAB.fala(m.frase);
-      ui.abre('<h2>' + FAB.ico('t_missoes', 32) + 'Missão ' + (+b.dataset.m + 1) + '</h2><p class="perg">' + esc(m.frase) + '</p><button class="bt amarelo grande" id="msIr">Ir</button>');
+      ui.abre('<h2>' + FAB.ico('t_missoes', 32) + FAB.trf('Missão {0}', [+b.dataset.m + 1]) + '</h2><p class="perg">' + esc(m.frase) + '</p><button class="bt amarelo grande" id="msIr">Ir</button>');
       $('msIr').onclick = function () { ui.fecha(); if (m.abre) { abreModelo(m.abre); ui.nav(); } ui.vai(m.onde); };
     };
   });
@@ -314,15 +336,17 @@ FAB.T.missoes = { nome: 'Missões', ajuda: 'Escolha uma missão. Pode fazer na o
 FAB.T.jogar = { nome: 'Mostrar', ajuda: 'Chame alguém para jogar o seu jogo.', monta: function (C) {
   var J = FAB.jogo(), I = J.ideia || {};
   C.innerHTML = '<div class="card" style="text-align:center;max-width:860px;margin:0 auto" id="jgCapa">' +
-    '<div>' + FAB.ico('spr:' + FAB.skinDe('heroi'), 120) + '</div><h1 style="font-size:36px;font-weight:900">' + esc(J.nome) + '</h1>' +
-    (FAB.compartilhado ? '<p class="mut">Jogo feito na Fábrica de Jogos por outra pessoa.</p>' : '<p class="mut">um jogo criado por ' + esc(FAB.E.criadora.nome) + (I.paraQuem ? ' · para ' + esc(I.paraQuem) : '') + '</p>') +
-    (I.historia ? '<p style="font-size:19px;font-weight:800;margin:12px auto;max-width:640px">' + esc(I.historia) + '</p>' : '') +
-    (I.objetivo ? '<p class="mut">Para ganhar: ' + esc(I.objetivo) + '</p>' : '') +
+    '<div>' + FAB.ico('spr:' + FAB.skinDe('heroi'), 120) + '</div><h1 style="font-size:36px;font-weight:900" data-sem-traducao>' + esc(FAB.tr(J.nome)) + '</h1>' +
+    (FAB.compartilhado ? '<p class="mut">Jogo feito na Fábrica de Jogos por outra pessoa.</p>' : '<p class="mut">' + FAB.tr('um jogo criado por') + ' <span data-sem-traducao>' + esc(FAB.E.criadora.nome) + '</span>' + (I.paraQuem ? ' · ' + FAB.tr('para') + ' ' + esc(FAB.tr(I.paraQuem)) : '') + '</p>') +
+    (I.historia ? '<p style="font-size:19px;font-weight:800;margin:12px auto;max-width:640px" data-sem-traducao>' + esc(I.historia) + '</p>' : '') +
+    (I.objetivo ? '<p class="mut">' + FAB.tr('Para ganhar:') + ' ' + esc(FAB.tr(I.objetivo)) + '</p>' : '') +
     '<div class="linha" style="justify-content:center;margin-top:16px"><button class="bt verde grande" id="jgPlay">' + FAB.ico('play', 30) + 'Jogar</button>' +
     (FAB.compartilhado ? '' : '<button class="bt" id="jgLink">' + FAB.ico('mais', 22) + 'Copiar link para mandar</button>') + '</div></div>' +
-    '<div id="jgPalco" style="display:none">' + palcoHTML() + '<div class="linha" style="margin-top:10px"><button class="bt cinza" id="jgSai">Voltar para a capa</button><span class="mut">Setas andam · espaço pula</span></div></div>';
+    '<div id="jgPalco" class="ts-wrap" style="display:none">' + palcoHTML() + '<div class="ts-barra"><button class="bt cinza" id="jgSai">Voltar para a capa</button><span class="mut ts-teclas">Setas andam · espaço pula</span>' +
+    '<button class="bt cinza" id="jgCheia" title="Tela cheia">' + FAB.ico('telacheia', 22) + '</button></div></div>';
   ligaToques(C);
-  $('jgPlay').onclick = function () { $('jgCapa').style.display = 'none'; $('jgPalco').style.display = 'block'; rodaJogo($('jgPalco'), true); };
+  $('jgCheia').onclick = telaCheia;
+  $('jgPlay').onclick = function () { $('jgCapa').style.display = 'none'; $('jgPalco').style.display = 'flex'; vigiaPalco($('jgPalco')); rodaJogo($('jgPalco'), true); };
   $('jgSai').onclick = function () { FAB.motor.para(); FAB.T.jogar.monta(C); };
   if ($('jgLink')) $('jgLink').onclick = function () {
     FAB.linkDoJogo(J).then(function (url) {
@@ -350,15 +374,20 @@ function abreCompartilhado(t) {
     var J = p.j; J.id = 'visita';
     J.nome = String(J.nome || 'Jogo').slice(0, 40); J.ideia = { objetivo: String((J.ideia || {}).objetivo || '').slice(0, 40), historia: String((J.ideia || {}).historia || '').slice(0, 200) }; J.nomes = {};
     if (!Array.isArray(J.fases) || !Array.isArray(J.regras)) throw new Error('link inválido'); J.versoes = []; J.testes = []; J.origem = 'link';
-    FAB.E = { v: 1, criadora: { nome: '' }, missoes: {}, jogos: [J], atual: 'visita', sprites: p.s || {}, perguntas: [], pedidos: [], diario: [], stats: { testes: 0, convidado: 0, lupa: 0 } };
+    var pr = FAB.prefsPadrao(); pr.navFechada = pr.topoFechado = true; pr.ajuda = false;
+    FAB.E = { v: 1, criadora: { nome: '' }, missoes: {}, jogos: [J], atual: 'visita', sprites: p.s || {}, perguntas: [], pedidos: [], diario: [], stats: { testes: 0, convidado: 0, lupa: 0 }, prefs: pr };
     document.body.classList.add('visita');
   });
 }
 
 /* ============================ PARTIDA ============================ */
 function parte() {
+  FAB.ligaIdioma();
   ui.nav(); FAB.confereMissoes(); ui.topo();
   if (FAB.compartilhado) { $('nav').style.display = 'none'; $('topo').style.display = 'none'; $('app').style.gridTemplateColumns = '1fr'; $('app').style.gridTemplateRows = '1fr'; ui.vai('jogar'); return; }
+  /* nuvem da família: trouxe trabalho de outro computador? / olha se tem coisa mais nova */
+  try { if (localStorage.getItem('fab_veio_da_nuvem')) { localStorage.removeItem('fab_veio_da_nuvem'); setTimeout(function () { ui.toast('Trouxe o trabalho da nuvem da família.'); }, 600); } } catch (e) {}
+  if (FAB.nuvem) FAB.nuvem.puxa();
   var t = 'painel'; try { t = localStorage.getItem('fab_tela') || 'painel'; } catch (e) {}
   if (t === 'testar' || t === 'jogar') t = 'painel';
   ui.vai(FAB.T[t] ? t : 'painel');

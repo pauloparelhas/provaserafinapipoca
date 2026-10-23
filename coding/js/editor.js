@@ -34,6 +34,13 @@ FAB.desenhaMapa = function (cv, f, z, grade) {
 };
 
 function redesenha() { var cv = FAB.$('fzCanvas'); if (cv) FAB.desenhaMapa(cv, F(), Z, true); }
+/* o mapa enche a altura que sobra (casinha com número inteiro de pixels); a lupa +/− dela ajusta */
+function zAuto() {
+  var sc = FAB.$('fzScroll'); if (!sc) return Z;
+  var H = sc.clientHeight - 16, base = Math.max(1.5, H / (12 * 16)), z = base * (1 + .25 * (FAB.E.prefs.zoomFase || 0));
+  return Math.max(16, Math.floor(16 * Math.min(6, z))) / 16;
+}
+function reZoom() { var z = zAuto(); if (z !== Z) { Z = z; redesenha(); } }
 function poe(i, j, t) {
   var f = F(); if (j < 0 || j > 11 || i < 0 || i >= f.mapa[0].length) return;
   var ch = letra(t);
@@ -47,7 +54,7 @@ function poe(i, j, t) {
 }
 var donoDesfaz = '';
 function snap() { var dono = FAB.E.atual + '|' + fase; if (dono !== donoDesfaz) { desfaz = []; donoDesfaz = dono; } desfaz.push(JSON.stringify(F().mapa)); if (desfaz.length > 60) desfaz.shift(); }
-function celula(ev) { var r = FAB.$('fzCanvas').getBoundingClientRect(); return [Math.floor((ev.clientX - r.left) / (16 * Z)), Math.floor((ev.clientY - r.top) / (16 * Z))]; }
+function celula(ev) { var r = FAB.$('fzCanvas').getBoundingClientRect(); return [Math.floor((ev.clientX - r.left) / r.width * F().mapa[0].length), Math.floor((ev.clientY - r.top) / r.height * 12)]; }
 
 function pecas() {
   var h = '';
@@ -63,8 +70,8 @@ function pecas() {
   return h;
 }
 function nomePeca() {
-  if (peca === '__apaga') return 'Borracha: apaga a casinha.';
-  var T = FAB.TIPOS[peca], extra = { inicio: ' Onde o herói começa.', bandeira: ' Onde a fase termina.', placa: ' Faz uma pergunta.', controle: ' Volta para cá se perder vida.', nuvem: ' Dá para subir por baixo.', gelo: ' Escorrega!', agua: ' Dá para nadar.', mola: ' Pula bem alto.' }[peca] || '';
+  if (peca === '__apaga') /* falado */ return 'Borracha: apaga a casinha.';
+  var T = FAB.TIPOS[peca], extra = {   /* falado */ inicio: ' Onde o herói começa.', bandeira: ' Onde a fase termina.', placa: ' Faz uma pergunta.', controle: ' Volta para cá se perder vida.', nuvem: ' Dá para subir por baixo.', gelo: ' Escorrega!', agua: ' Dá para nadar.', mola: ' Pula bem alto.' }[peca] || '';
   return FAB.nomeTipo(peca) + '.' + extra;
 }
 
@@ -75,17 +82,23 @@ function monta(C) {
     '<div class="fz-barra">' + abas +
       (J.fases.length < MAXF ? '<button class="aba" id="fzNova">' + FAB.ico('mais', 20) + ' Fase nova</button>' : '') +
       '<span style="flex:1"></span>' +
+      '<button class="bt cinza" id="fzZm" title="Mapa menor">' + FAB.ico('zoom_menos', 22) + '</button><button class="bt cinza" id="fzZp" title="Mapa maior">' + FAB.ico('zoom_mais', 22) + '</button>' +
       '<button class="bt cinza" id="fzEsq" title="Ver mais para trás">◀</button><button class="bt cinza" id="fzDir" title="Ver mais para frente">▶</button>' +
       '<button class="bt cinza" id="fzCen">' + FAB.ico('t_ideia', 22) + 'Cenário</button>' +
       '<button class="bt cinza" id="fzMenos" title="Fase mais curta">−</button><button class="bt cinza" id="fzMais" title="Fase mais comprida">+</button>' +
       '<button class="bt cinza" id="fzDesf">' + FAB.ico('desfazer', 22) + 'Desfazer</button>' +
       (J.fases.length > 1 ? '<button class="bt cinza" id="fzApaga" title="Apagar esta fase">' + FAB.ico('lixo', 22) + '</button>' : '') +
     '</div>' +
-    '<div class="fz-wrap"><div class="pecas" id="fzPecas">' + pecas() + '</div>' +
-      '<div><div id="fzScroll"><canvas id="fzCanvas"></canvas></div><div class="dica-peca" id="fzDica">' + FAB.esc(nomePeca()) + '</div></div></div>';
-  redesenha();
+    '<div class="fz-wrap' + (FAB.E.prefs.pecasFechadas ? ' fechadas' : '') + '" id="fzWrap"><div class="pecas" id="fzPecas">' + pecas() + '</div>' +
+      '<div class="fz-mapa"><div id="fzScroll"><canvas id="fzCanvas"></canvas></div>' +
+      '<div class="dica-peca"><button class="bt cinza fz-gaveta" id="fzGaveta" title="Mostrar ou esconder as peças">' + FAB.ico(FAB.E.prefs.pecasFechadas ? 's_dir' : 's_esq', 18) + '<span id="fzAtual">' + (peca === '__apaga' ? FAB.ico('lixo', 26) : FAB.icoTipo(peca, 26)) + '</span>Peças</button><span id="fzDica">' + FAB.esc(nomePeca()) + '</span></div></div></div>';
+  Z = zAuto(); redesenha();
+  if (window.ResizeObserver) new ResizeObserver(reZoom).observe(FAB.$('fzScroll'));
+  FAB.$('fzGaveta').onclick = function () { FAB.E.prefs.pecasFechadas = !FAB.E.prefs.pecasFechadas; FAB.salva(); FAB.$('fzWrap').classList.toggle('fechadas', FAB.E.prefs.pecasFechadas); this.querySelector('svg').outerHTML = FAB.ico(FAB.E.prefs.pecasFechadas ? 's_dir' : 's_esq', 18); };
+  FAB.$('fzZm').onclick = function () { FAB.E.prefs.zoomFase = Math.max(-2, (FAB.E.prefs.zoomFase || 0) - 1); FAB.salva(); reZoom(); };
+  FAB.$('fzZp').onclick = function () { FAB.E.prefs.zoomFase = Math.min(4, (FAB.E.prefs.zoomFase || 0) + 1); FAB.salva(); reZoom(); };
   C.querySelectorAll('[data-f]').forEach(function (b) { b.onclick = function () { fase = +b.dataset.f; desfaz = []; monta(C); }; });
-  C.querySelectorAll('.peca').forEach(function (b) { b.onclick = function () { peca = b.dataset.t; C.querySelectorAll('.peca').forEach(function (x) { x.classList.toggle('on', x === b); }); FAB.$('fzDica').textContent = nomePeca(); FAB.fala(nomePeca()); }; });
+  C.querySelectorAll('.peca').forEach(function (b) { b.onclick = function () { peca = b.dataset.t; C.querySelectorAll('.peca').forEach(function (x) { x.classList.toggle('on', x === b); }); FAB.$('fzDica').textContent = nomePeca(); FAB.$('fzAtual').innerHTML = peca === '__apaga' ? FAB.ico('lixo', 26) : FAB.icoTipo(peca, 26); FAB.fala(nomePeca()); }; });
   var nv = FAB.$('fzNova'); if (nv) nv.onclick = function () {
     var w = 40, rep = function (c, n) { return Array(n + 1).join(c); };
     var base = { nome: 'Fase ' + (J.fases.length + 1), cenario: ['dia', 'tarde', 'noite', 'caverna', 'mar', 'espaco', 'doce'][J.fases.length % 7], mapa: [] };
@@ -94,7 +107,7 @@ function monta(C) {
     J.fases.push(base); fase = J.fases.length - 1; desfaz = []; FAB.mudou(); monta(C); FAB.ui.toast('Fase nova! Ligue as fases chegando na bandeira.', true);
   };
   var ap = FAB.$('fzApaga'); if (ap) ap.onclick = function () {
-    FAB.ui.abre('<h2>Apagar a ' + FAB.esc(f.nome) + '?</h2><p class="mut" style="margin-bottom:14px">Dica: tire uma foto do jogo antes (no Diário).</p><div class="linha"><button class="bt rosa" id="apSim">Apagar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
+    FAB.ui.abre('<h2>' + FAB.trf('Apagar a {0}?', [FAB.esc(FAB.tr(f.nome))]) + '</h2><p class="mut" style="margin-bottom:14px">Dica: tire uma foto do jogo antes (no Diário).</p><div class="linha"><button class="bt rosa" id="apSim">Apagar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
     FAB.$('apSim').onclick = function () { J.fases.splice(fase, 1); fase = 0; desfaz = []; FAB.mudou(); FAB.ui.fecha(); monta(C); };
   };
   FAB.$('fzEsq').onclick = function () { FAB.$('fzScroll').scrollBy({ left: -320, behavior: 'smooth' }); };

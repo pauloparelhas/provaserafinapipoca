@@ -20,6 +20,14 @@ perdeu vida · Diário com carinhas e fotos do jogo (versões) · Robô (pedido 
 19 missões + 13 cartas do saber + 6 níveis · Mostrar (modo convidado + link com o jogo
 dentro) · Placa ? ligada ao banco da prova (HIS3) e às perguntas dela · ditado por voz.
 
+## v2 (23/10/2026) — entregue
+Tela grande (o jogo ocupa a tela; barras recolhem e voltam pela setinha) · mapa e grade de
+desenho crescem com a tela · Opções na engrenagem (idioma, voz, 5 temas de cor, 3 tamanhos,
+barra à esquerda/direita, com/sem nomes, quais telas aparecem, tela grande, botões de dedo) ·
+voz gravada Thalita/Antonio e Ava/Brian · Fábrica inteira em inglês · trava de segurança (CSP) ·
+4 heróis, 3 inimigos, cristal/relógio/cogumelo, ponto de volta, madeira/neve/areia, 4 cenários,
+2 jogos-modelo (neve, corrida), 5 blocos, 6 missões (25) e nível "Dona da Fábrica".
+
 ## Próximos degraus (ordem sugerida, cada um só quando ela pedir ou travar)
 - [ ] **"Dá para ganhar?"** — robô-jogador dentro da Fábrica que testa a fase dela e mostra onde travou (sugestão do pedagógico).
 - [ ] **Animação de 2 quadros editável** (hoje pinta nos dois ao mesmo tempo) — quando ela pedir pernas que mexem.
@@ -36,3 +44,8 @@ dentro) · Placa ? ligada ao banco da prova (HIS3) e às perguntas dela · ditad
   caixinha de número, de novo e de novo, bichinho do erro, foto do jogo), trilha de 18→19
   missões com conferência automática, regras-modelo que ela troca em vez de montar do zero,
   dicas em degrau no jogo quebrado, ficha do robô que só envia com as 3 partes.
+- 23/10/2026 — v2: pedido do pai (mais opções, voz não robótica com escolha, tela imersiva,
+  painéis que ela personaliza, inglês completo, segurança parental). "Meu primeiro jogo": espinhos
+  afastados da plataforma de cima (o herói batia a cabeça e caía neles). Robô-jogador passou a
+  morar dentro da página (a máquina de teste roda a menos de 30 quadros e o vaivém do Playwright
+  chegava atrasado).

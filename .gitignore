@@ -62,3 +62,6 @@ olimpiadas/_fontes_md/
 # --- Fábrica de Jogos: o que a Mariana exporta (dado da criança) e capturas do QA ---
 coding/_engenharia/entrada/
 coding/_engenharia/gate/capturas/
+
+# wrangler: cache local com dados da conta Cloudflare
+.wrangler/

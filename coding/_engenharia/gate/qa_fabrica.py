@@ -12,8 +12,8 @@ threading.Thread(target=_srv.serve_forever, daemon=True).start()
 URL = f'http://127.0.0.1:{_srv.server_address[1]}/coding/index.html'
 OUT = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else RAIZ / '_engenharia' / 'gate' / 'capturas'); OUT.mkdir(parents=True, exist_ok=True)
 MUDO = ("try{ speechSynthesis.speak=function(){}; speechSynthesis.cancel=function(){}; speechSynthesis.getVoices=function(){return [];}; }catch(e){}"
-        "window.SpeechSynthesisUtterance=function(){}; window.AudioContext=window.webkitAudioContext=function(){ throw new Error('audio off'); };")
-TELAS = ['painel', 'ideia', 'pixel', 'fases', 'regras', 'testar', 'diario', 'robo', 'missoes', 'jogar']
+        "window.SpeechSynthesisUtterance=function(){}; window.AudioContext=window.webkitAudioContext=function(){ throw new Error('audio off'); }; HTMLMediaElement.prototype.play=function(){ return Promise.resolve(); }; HTMLMediaElement.prototype.load=function(){};")
+TELAS = ['painel', 'ideia', 'pixel', 'fases', 'regras', 'testar', 'diario', 'robo', 'missoes', 'jogar', 'jeito']
 VIEW = [(1280, 800), (1024, 700), (740, 900), (390, 800)]
 erros = []
 with sync_playwright() as p:
