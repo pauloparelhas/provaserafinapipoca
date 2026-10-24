@@ -72,7 +72,7 @@ function monta(C) {
 
     '<div class="card"><div class="tit">' + FAB.ico('t_robo', 26) + 'Do que a Fábrica é feita</div>' +
       '<ul class="feita">' + FEITA.map(function (f) { return '<li><b>' + f[0] + '</b> ' + f[1] + '</li>'; }).join('') + '</ul></div>' +
-    '<div class="card papai"><div class="tit">' + FAB.ico('cadeado', 26) + 'Área do papai</div>' +
+    '<div class="card papai" id="jtPapai"><div class="tit">' + FAB.ico('cadeado', 26) + 'Área do papai</div>' +
       '<div class="mut">Nuvem da família: guarda o progresso fora deste computador e continua em outro.</div>' +
       '<div class="nv-st" id="jtNvSt"></div>' +
       (FAB.nuvem.chave() ?

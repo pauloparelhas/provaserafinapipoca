@@ -174,3 +174,96 @@ FAB.ICONES = {
   foto:     '<rect x="2" y="6" width="20" height="14" rx="3" fill="#3b9bff" stroke="#1a1c2c" stroke-width="1.6"/><circle cx="12" cy="13" r="4" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="1.6"/><path d="M8 6l1.5-3h5L16 6" fill="#3b9bff" stroke="#1a1c2c" stroke-width="1.6"/>',
   desfazer: '<path d="M9 7H15a5 5 0 0 1 0 10H8" stroke="#1a1c2c" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M10 3 6 7l4 4" stroke="#1a1c2c" stroke-width="2.2" fill="none" stroke-linecap="round"/>'
 };
+
+
+/* ================================================================
+   MUNDO (v3, frente B, 24/10/2026): blocos das peças novas.
+   requer = peça(s) que precisam existir em alguma fase para o bloco
+   aparecer na escolha ('@nada' = alguma fase de nadar). Bloco que ela
+   já usa numa regra aparece sempre. A fase reta continua vendo a
+   mesma lista de antes.
+   ================================================================ */
+FAB.OPCOES.objToca = FAB.OPCOES.objToca.concat(['bolha', 'peixe', 'pena', 'luva', 'cogroxo', 'cavalo']);
+FAB.OPCOES.objPisa = FAB.OPCOES.objPisa.concat(['peixe']);
+FAB.OPCOES.falas = FAB.OPCOES.falas.concat(['Pulo duplo!', 'Caí do cavalo!', 'Acabou o poder!']);
+FAB.OPCOES.poderes = ['duplo:fim', 'duplo:10', 'grudar:fim', 'grudar:10', 'pequeno:fim', 'pequeno:10'];
+FAB.OPCOES.poder1 = ['duplo', 'grudar', 'pequeno'];
+FAB.OPCOES.destinos = ['outro', 'proxima'];
+/* o nome de criança de cada opção que não é peça nem número */
+FAB.NOME_OPCAO = {
+  'duplo:fim': 'pulo duplo até o fim da fase', 'duplo:10': 'pulo duplo por 10 segundos',
+  'grudar:fim': 'grudar na parede até o fim da fase', 'grudar:10': 'grudar na parede por 10 segundos',
+  'pequeno:fim': 'ficar pequenino até o fim da fase', 'pequeno:10': 'ficar pequenino por 10 segundos',
+  duplo: 'pulo duplo', grudar: 'grudar na parede', pequeno: 'ficar pequenino',
+  outro: 'o outro cano', proxima: 'a próxima fase'
+};
+FAB.PODER_PECAS = ['pena', 'luva', 'cogroxo'];
+Object.assign(FAB.QUANDO, {
+  folego0:     { nome: 'o fôlego acabar',  fala: 'Quando o fôlego acabar embaixo da água', icone: 'semfolego', param: null, conceito: 'variavel', requer: ['bolha', '@nada'] },
+  cano:        { nome: 'entrar no cano',   fala: 'Quando o herói entrar no cano, apertando para baixo', icone: 'cano', param: null, conceito: 'evento', requer: ['cano'] },
+  poderacaba:  { nome: 'o poder acabar',   fala: 'Quando o tempo do poder acabar', icone: 'poderfim', param: null, conceito: 'evento', requer: FAB.PODER_PECAS }
+});
+Object.assign(FAB.SE, {
+  tempoder:    { nome: 'tiver o poder',     fala: 'Só se o herói tiver este poder', icone: 'poder', param: 'poder1', conceito: 'condicao', requer: FAB.PODER_PECAS },
+  montada:     { nome: 'estiver no cavalo', fala: 'Só se o herói estiver montado no cavalo', icone: 'cavalo', param: null, conceito: 'condicao', requer: ['cavalo'] },
+  naomontada:  { nome: 'NÃO estiver no cavalo', fala: 'Só se o herói não estiver no cavalo', icone: 'cavalo', param: null, conceito: 'condicao', requer: ['cavalo'] }
+});
+Object.assign(FAB.FACA, {
+  folego:      { nome: 'de fôlego',         fala: 'Encher o fôlego',            icone: 'folego',   param: 'num', prefixo: '+', conceito: 'variavel', requer: ['bolha', '@nada'] },
+  ligar:       { nome: 'ligar o poder',     fala: 'Ligar um poder no herói',    icone: 'poder',    param: 'poderes', conceito: 'sequencia', requer: FAB.PODER_PECAS },
+  desligar:    { nome: 'desligar o poder',  fala: 'Desligar um poder do herói', icone: 'poderfim', param: 'poder1', conceito: 'sequencia', requer: FAB.PODER_PECAS },
+  montar:      { nome: 'montar no cavalo',  fala: 'Montar no cavalo que ele tocou', icone: 'cavalo', param: null, conceito: 'sequencia', requer: ['cavalo'] },
+  desmontar:   { nome: 'descer do cavalo',  fala: 'Descer do cavalo, que volta para o lugar dele', icone: 'desmonta', param: null, conceito: 'sequencia', requer: ['cavalo'] },
+  iraoutro:    { nome: 'ir para',           fala: 'Ir para outro lugar pelo cano', icone: 'vaicano', param: 'destinos', conceito: 'sequencia', requer: ['cano'] }
+});
+Object.assign(FAB.ICONES, {
+  folego:    '<circle cx="9" cy="14" r="5.5" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="1.6"/><circle cx="16.5" cy="7.5" r="3.5" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="1.4"/><circle cx="17.5" cy="17.5" r="2.3" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="1.2"/><path d="M6.3 12.5a3 3 0 0 1 2.4-2.2" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>',
+  semfolego: '<circle cx="12" cy="12" r="8.5" fill="#d9dee6" stroke="#1a1c2c" stroke-width="1.6" stroke-dasharray="3 2"/><path d="M8 13.5h8" stroke="#1a1c2c" stroke-width="2.2" stroke-linecap="round"/><circle cx="9" cy="9.5" r="1.1" fill="#1a1c2c"/><circle cx="15" cy="9.5" r="1.1" fill="#1a1c2c"/>',
+  cano:      '<rect x="3" y="7" width="18" height="5" rx="1" fill="#63c74d" stroke="#1a1c2c" stroke-width="1.6"/><rect x="5" y="12" width="14" height="10" fill="#63c74d" stroke="#1a1c2c" stroke-width="1.6"/><path d="M8 13v8" stroke="#fff" stroke-width="1.6"/><path d="M12 .5v5m-2.5-2.5L12 5.5l2.5-2.5" stroke="#e43b44" stroke-width="2" fill="none" stroke-linecap="round"/>',
+  vaicano:   '<rect x="2" y="12" width="7" height="10" fill="#63c74d" stroke="#1a1c2c" stroke-width="1.4"/><rect x="15" y="12" width="7" height="10" fill="#63c74d" stroke="#1a1c2c" stroke-width="1.4"/><path d="M5.5 10C6 3 18 3 18.5 9" stroke="#3b9bff" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M15.8 7.5l2.7 2.3 2.3-2.7" stroke="#3b9bff" stroke-width="2" fill="none" stroke-linecap="round"/>',
+  poder:     '<path d="M12 2l2.6 5.6 6.1.6-4.6 4.1 1.3 6L12 15.3l-5.4 3 1.3-6-4.6-4.1 6.1-.6z" fill="#8b5cf6" stroke="#1a1c2c" stroke-width="1.5" stroke-linejoin="round"/><path d="M12.7 6.5 10.3 11h3.2l-1.6 4" stroke="#fee761" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+  poderfim:  '<path d="M12 2l2.6 5.6 6.1.6-4.6 4.1 1.3 6L12 15.3l-5.4 3 1.3-6-4.6-4.1 6.1-.6z" fill="#a7b0bd" stroke="#1a1c2c" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 21 20 5" stroke="#e43b44" stroke-width="2.4" stroke-linecap="round"/>',
+  cavalo:    '<path d="M6 22c0-6 1-9 4-12L9 4.5l3 2.2c4 0 7 2.3 8 6.3l-2 2-3-1-2 2V22z" fill="#b86f50" stroke="#1a1c2c" stroke-width="1.6" stroke-linejoin="round"/><circle cx="14.5" cy="9" r="1.1" fill="#1a1c2c"/><path d="M10 9.5c-1.6 2-2.2 4.5-2.2 7.5" stroke="#6b3a2e" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M11 16h4" stroke="#e43b44" stroke-width="2.4"/>',
+  desmonta:  '<path d="M9 22c0-5 .8-7.5 3.3-10l-.8-4.6 2.5 1.8c3.4 0 5.9 2 6.7 5.3l-1.7 1.7-2.5-.8-1.7 1.7V22z" fill="#b86f50" stroke="#1a1c2c" stroke-width="1.5" stroke-linejoin="round"/><circle cx="16.2" cy="11" r="1" fill="#1a1c2c"/><path d="M4 2v9m-3-3 3 3 3-3" stroke="#e43b44" stroke-width="2.2" fill="none" stroke-linecap="round"/>'
+});
+
+/* regras que nascem com a peça (na primeira vez que ela aparece no jogo).
+   antesDe = entra antes da primeira regra com este QUANDO (o cadeado do
+   cavalo precisa vir antes de "tocar em inimigo -> vidas -1"). */
+FAB.PACOTES = {
+  pena:    [{ quando: { t: 'toca', obj: 'pena' },    faca: [{ t: 'ligar', v: 'duplo:fim' }, { t: 'some' }, { t: 'fala', v: 'Pulo duplo!' }] }],
+  luva:    [{ quando: { t: 'toca', obj: 'luva' },    faca: [{ t: 'ligar', v: 'grudar:fim' }, { t: 'some' }, { t: 'fala', v: 'Uhuu!' }] }],
+  cogroxo: [{ quando: { t: 'toca', obj: 'cogroxo' }, faca: [{ t: 'ligar', v: 'pequeno:10' }, { t: 'some' }, { t: 'som', v: 'magia' }] }],
+  cavalo:  [{ quando: { t: 'toca', obj: 'cavalo' },  faca: [{ t: 'montar' }, { t: 'fala', v: 'Vamos lá!' }] },
+            { quando: { t: 'toca', obj: 'inimigo' }, se: { t: 'montada' }, faca: [{ t: 'desmontar' }, { t: 'som', v: 'ai' }, { t: 'fala', v: 'Caí do cavalo!' }], antesDe: 'toca:inimigo' }],
+  bolha:   [{ quando: { t: 'toca', obj: 'bolha' },   faca: [{ t: 'folego', n: 5 }, { t: 'some' }, { t: 'som', v: 'magia' }] }],
+  '@nada': [{ quando: { t: 'folego0' },              faca: [{ t: 'vida', n: -1 }, { t: 'volta' }] }],
+  cano:    [{ quando: { t: 'cano' },                 faca: [{ t: 'iraoutro', v: 'outro' }, { t: 'som', v: 'pulo' }] }]
+};
+/* a peça existe em alguma fase do jogo? ('@nada' = alguma fase de nadar) */
+FAB.temPeca = function (J, req) {
+  var fs = (J && J.fases) || [];
+  if (req === '@nada') return fs.some(function (f) { return !!f.nada; });
+  var T = FAB.TIPOS[req]; if (!T) return false;
+  return fs.some(function (f) { return (f.mapa || []).some(function (l) { return l.indexOf(T.letra) >= 0; }); });
+};
+/* põe as regras do pacote no jogo, uma vez por peça (se ela apagar, não volta) */
+FAB.pacoteNasce = function (J) {
+  if (!J || !Array.isArray(J.regras) || !FAB.novaRegra) return false;
+  var novo = false; J.pacotes = J.pacotes || {};
+  Object.keys(FAB.PACOTES).forEach(function (k) {
+    if (J.pacotes[k] || !FAB.temPeca(J, k)) return;
+    J.pacotes[k] = 1; novo = true;
+    FAB.PACOTES[k].forEach(function (m) {
+      var r = FAB.novaRegra({ quando: m.quando, se: m.se || null, faca: m.faca }), i = -1; r.pacote = k;
+      if (m.antesDe) { var p = m.antesDe.split(':'); for (var j = 0; j < J.regras.length; j++) if (J.regras[j].quando.t === p[0] && J.regras[j].quando.obj === p[1]) { i = j; break; } }
+      if (i >= 0) J.regras.splice(i, 0, r); else J.regras.push(r);
+    });
+  });
+  return novo;
+};
+/* o bloco aparece na escolha? (sem "requer" = sempre; em uso numa regra = sempre) */
+FAB.blocoAparece = function (def, J, usado) {
+  if (!def.requer || usado) return true;
+  return def.requer.some(function (q) { return FAB.temPeca(J, q); });
+};

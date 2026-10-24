@@ -15,15 +15,25 @@ function txtParam(b, v, blocoDef) {
   if (o === 'numSinal' || o === 'num') return (v > 0 ? (blocoDef.prefixo || '') : '') + v;
   if (o === 'sons') return '"' + FAB.tr(v) + '"';
   if (o === 'falas') return '"' + FAB.tr(v) + '"';
+  if (LISTAS.indexOf(o) >= 0) return FAB.tr((FAB.NOME_OPCAO || {})[v] || v);
   return String(v);
 }
+/* parâmetros que são uma lista de nomes (poder e duração, destino do cano) */
+var LISTAS = ['poderes', 'poder1', 'destinos'];
 function icoParam(blocoDef, v) {
   var o = blocoDef.param;
   if ((o === 'objToca' || o === 'objPisa' || o === 'objTem' || o === 'objCria') && v) return FAB.icoTipo(v === 'inimigo' ? 'gosma' : v, 30);
   return FAB.ico(blocoDef.icone, 30);
 }
 /* valor do parâmetro guardado no bloco: obj | n | v | tecla */
-function chaveParam(def) { var o = def.param; if (!o) return null; if (/^obj/.test(o)) return 'obj'; if (o === 'tecla') return 'tecla'; if (o === 'sons' || o === 'falas') return 'v'; return 'n'; }
+function chaveParam(def) { var o = def.param; if (!o) return null; if (/^obj/.test(o)) return 'obj'; if (o === 'tecla') return 'tecla'; if (o === 'sons' || o === 'falas' || LISTAS.indexOf(o) >= 0) return 'v'; return 'n'; }
+/* o bloco (ou a peça da lista) já está em uso numa regra do jogo? então nunca some da escolha */
+function emUso(J, tipo, k) {
+  return J.regras.some(function (r) { return tipo === 'q' ? r.quando.t === k : tipo === 's' ? r.se && r.se.t === k : r.faca.some(function (a) { return a.t === k; }); });
+}
+function pecaEmUso(J, t) {
+  return J.regras.some(function (r) { return r.quando.obj === t || (r.se && r.se.obj === t) || r.faca.some(function (a) { return a.obj === t; }); });
+}
 
 function cartao(cls, rotulo, def, b) {
   var k = chaveParam(def), v = k ? b[k] : null;
@@ -37,7 +47,10 @@ function cartao(cls, rotulo, def, b) {
 function escolheBloco(tipo, cb) {
   var D = tipo === 'q' ? FAB.QUANDO : tipo === 's' ? FAB.SE : FAB.FACA;
   var tit = tipo === 'q' ? 'Quando acontecer…' : tipo === 's' ? 'Só se…' : 'Então faça…';
-  var ops = Object.keys(D).map(function (k) { return { id: k, nome: FAB.tr(D[k].nome) + (D[k].sufixo && !D[k].param ? ' ' + FAB.tr(D[k].sufixo) : ''), ico: FAB.ico(D[k].icone, 40), sub: (FAB.CONCEITOS[D[k].conceito] || {}).nome }; });
+  var J = FAB.jogo();
+  /* bloco de peça nova só aparece quando a peça existe em alguma fase (a fase reta continua com a lista de sempre) */
+  var ops = Object.keys(D).filter(function (k) { return !FAB.blocoAparece || FAB.blocoAparece(D[k], J, emUso(J, tipo, k)); })
+    .map(function (k) { return { id: k, nome: FAB.tr(D[k].nome) + (D[k].sufixo && !D[k].param ? ' ' + FAB.tr(D[k].sufixo) : ''), ico: FAB.ico(D[k].icone, 40), sub: (FAB.CONCEITOS[D[k].conceito] || {}).nome }; });
   if (tipo === 's') ops.unshift({ id: '__nada', nome: 'sem cadeado', ico: FAB.ico('errado', 40), sub: 'a regra vale sempre' });
   if (tipo === 'f') ops.push({ id: '__tira', nome: 'tirar esta ação', ico: FAB.ico('lixo', 40) });
   FAB.ui.escolhe(tit, tit, ops, function (id) {
@@ -48,10 +61,12 @@ function escolheBloco(tipo, cb) {
   });
 }
 function escolheParam(def, cb) {
-  var lista = FAB.OPCOES[def.param] || [];
+  var J = FAB.jogo(), lista = FAB.OPCOES[def.param] || [];
+  /* peça nova (cipó, pena, cavalo…) só entra na lista se estiver em alguma fase ou já numa regra */
+  if (/^obj/.test(def.param)) lista = lista.filter(function (v) { var T = FAB.TIPOS[v]; return !T || !T.mundo || FAB.temPeca(J, v) || pecaEmUso(J, v); });
   var ops = lista.map(function (v) {
     var ico = /^obj/.test(def.param) ? FAB.icoTipo(v === 'inimigo' ? 'gosma' : v, 44) : FAB.ico(def.icone, 36);
-    var nome = /^obj/.test(def.param) ? FAB.tr(FAB.nomeTipo(v)) : def.param === 'sons' || def.param === 'falas' ? FAB.tr(v) : ((v > 0 && def.prefixo ? def.prefixo : '') + v + (def.sufixo ? ' ' + FAB.tr(def.sufixo) : ''));
+    var nome = /^obj/.test(def.param) ? FAB.tr(FAB.nomeTipo(v)) : def.param === 'sons' || def.param === 'falas' ? FAB.tr(v) : LISTAS.indexOf(def.param) >= 0 ? FAB.tr((FAB.NOME_OPCAO || {})[v] || v) : ((v > 0 && def.prefixo ? def.prefixo : '') + v + (def.sufixo ? ' ' + FAB.tr(def.sufixo) : ''));
     return { id: v, nome: nome, ico: ico };
   });
   FAB.ui.escolhe(FAB.tr(def.nome) + '…', def.fala, ops, function (v) { if (def.param === 'sons') FAB.motor.toca(v); cb(v); });
@@ -151,6 +166,7 @@ function montaPerguntas(C) {
 }
 
 function monta(C) {
+  if (FAB.pacoteNasce && FAB.pacoteNasce(FAB.jogo())) FAB.mudou();   /* peça de poder no mapa: a regra dela já aparece aqui */
   C.innerHTML = '<div class="fz-barra">' + [['regras', 'Regras', 't_regras'], ['ajustes', 'Ajustes', 'caixinha'], ['perguntas', 'Minhas perguntas', 'pergunta']].map(function (a) {
     return '<button class="aba' + (aba === a[0] ? ' on' : '') + '" data-aba="' + a[0] + '">' + FAB.ico(a[2], 22) + ' ' + a[1] + '</button>';
   }).join('') + '</div><div id="rgCorpo"></div>';

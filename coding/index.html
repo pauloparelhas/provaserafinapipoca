@@ -35,9 +35,9 @@ img.pix,canvas.pix{image-rendering:pixelated;image-rendering:crisp-edges}
 svg{flex:none}
 
 /* ---------- casca ---------- */
-#app{display:grid;grid-template-columns:var(--nav) 1fr;grid-template-rows:64px 1fr;height:calc(100vh / var(--z));height:calc(100dvh / var(--z))}
-#topo{grid-column:2;grid-row:1} #tela{grid-column:2;grid-row:2}
-#nav{grid-row:1/3;grid-column:1;background:linear-gradient(180deg,var(--nav1),var(--nav2));border-right:2px solid var(--linha);display:flex;flex-direction:column;align-items:center;padding:8px 6px;gap:4px;overflow-y:auto}
+#app{display:grid;grid-template-columns:var(--nav) 1fr;grid-template-rows:64px 1fr auto;height:calc(100vh / var(--z));height:calc(100dvh / var(--z))}
+#topo{grid-column:2;grid-row:1} #tela{grid-column:2;grid-row:2} #trilho{grid-column:2;grid-row:3}
+#nav{grid-row:1/4;grid-column:1;background:linear-gradient(180deg,var(--nav1),var(--nav2));border-right:2px solid var(--linha);display:flex;flex-direction:column;align-items:center;padding:8px 6px;gap:4px;overflow-y:auto}
 #nav .logo{width:64px;height:64px;margin-bottom:6px;border-radius:16px;background:linear-gradient(135deg,#ffd84a,#ff7ac6);display:grid;place-items:center;box-shadow:0 4px 0 #b4459a}
 .nb{position:relative;width:84px;min-height:70px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-weight:800;font-size:14px;color:var(--txt2);border:2px solid transparent;transition:.15s}
 .nb:hover{background:var(--card4);color:#fff}
@@ -47,6 +47,7 @@ svg{flex:none}
 .nb.peq{min-height:56px;font-size:13px}
 .nb .dot{position:absolute;top:5px;right:8px;width:14px;height:14px;border-radius:50%;background:var(--amarelo);border:2px solid #151135;display:none}
 .nb.tem-missao .dot{display:block;animation:pisca 1.2s infinite}
+.nb.tem-missao{box-shadow:0 0 0 3px #ffd84a}
 @keyframes pisca{50%{transform:scale(1.35)}}
 .nav-sep{width:60px;height:2px;background:var(--linha);margin:6px 0;border-radius:2px}
 
@@ -133,6 +134,7 @@ svg{flex:none}
 .fz-mapa{display:flex;flex-direction:column;min-height:0}
 .fz-gaveta{min-height:40px;padding:4px 10px;gap:6px;flex:none}
 .pecas{display:flex;flex-direction:column;gap:10px;overflow:auto;padding-right:4px;min-height:0}
+.jeito-tela{display:flex;gap:4px;margin-bottom:6px}.jeito-tela .bt{flex:1;padding:6px 4px;font-size:13px;min-height:0}.jeito-tela .bt.on{background:#ffd23f;color:#1a1c2c}
 .pecas h4{font-size:14px;color:var(--txt3);font-weight:900;margin:2px 0}
 .pecas .gp{display:grid;grid-template-columns:repeat(4,52px);gap:6px}
 .peca{width:52px;height:52px;border-radius:12px;background:var(--bg2);display:grid;place-items:center;border:3px solid transparent;position:relative}
@@ -271,14 +273,14 @@ body.nav-dir #abreNav{left:auto;right:0;border-radius:14px 0 0 14px}
 body.nav-fechada #abreNav,body.topo-fechado #abreTopo{display:grid}
 body.nav-dir #app{grid-template-columns:1fr var(--nav)}
 body.nav-dir #nav{grid-column:2;border-right:0;border-left:2px solid var(--linha)}
-body.nav-dir #topo,body.nav-dir #tela{grid-column:1}
+body.nav-dir #topo,body.nav-dir #tela,body.nav-dir #trilho{grid-column:1}
 body.nav-icones{--nav:74px}
 body.nav-icones .nbn{display:none}
 body.nav-icones .nb{width:62px;min-height:56px}
 body.nav-icones #nav .logo{width:52px;height:52px}
 body.nav-fechada{--nav:0px}
 body.nav-fechada #nav{display:none}
-body.topo-fechado #app{grid-template-rows:0 1fr}
+body.topo-fechado #app{grid-template-rows:0 1fr auto}
 body.topo-fechado #topo{display:none}
 .ib.mini{width:32px;height:32px;border-radius:10px;margin-left:auto;opacity:.75}
 .ib.mini:hover{opacity:1}
@@ -310,9 +312,85 @@ body.imersivo .toast{top:14px}
 .chave{display:block;font-size:18px;font-weight:900;letter-spacing:1px;background:var(--bg0);border-radius:10px;padding:8px 10px;user-select:all;word-break:break-all}
 .nv-st{font-weight:800;color:#ffe9a0}
 
+
+/* ---------- v3 navegação: selo, trilho, seta guia, Início, Missões, desejos ---------- */
+.selo{display:flex;align-items:center;gap:6px;min-height:48px;padding:0 12px 0 8px;border-radius:14px;background:var(--card);font-weight:900;font-size:14px;white-space:nowrap;flex:none;border:2px solid transparent}
+.selo.salvo{color:#c9ffd6}
+.selo.salvando{color:var(--txt3)}
+.selo.erro{background:#5e1d2a;color:#ffd0d4;border-color:#ff5a64}
+.selo.nuvem{color:#d2f1ff}
+#trilho{display:flex;align-items:center;gap:10px;padding:8px 14px;border-top:2px solid var(--linha);background:rgba(18,15,43,.88);min-width:0}
+body.visita #trilho{display:none}
+.tr-ant{min-height:52px;padding:6px 12px 6px 8px;flex:none}
+.tr-prox{min-height:58px;padding:6px 12px 6px 18px;flex:none;font-size:20px}
+.tr-nome{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05;text-align:left}
+.tr-nome small{font-size:12px;font-weight:800;opacity:.8}
+.tr-meio{flex:1;min-width:0;display:flex;align-items:center;gap:10px}
+.tr-meio .falar{width:40px;height:40px}
+.tr-txt{flex:1;min-width:0;font-weight:800;color:#ffe9a0;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tr-cont{display:inline-block;background:#3b2f10;color:#ffe9a0;border:2px solid #ffd84a;border-radius:10px;padding:0 8px;font-weight:900;white-space:nowrap}
+.tr-pontos{display:flex;gap:7px;align-items:center;flex:none}
+.tr-pontos i{width:12px;height:12px;border-radius:50%;background:var(--card3);display:block}
+.tr-pontos i.on{width:18px;height:18px;background:#fff}
+.tr-pontos i.missao{box-shadow:0 0 0 3px #ffd84a}
+#trSelo{display:none}
+body.topo-fechado #trSelo{display:flex}
+body.imersivo #trilho{padding:4px 10px;gap:8px}
+body.imersivo .tr-meio .falar,body.imersivo .tr-txt{display:none}
+body.imersivo .tr-meio{justify-content:center}
+body.imersivo .tr-ant,body.imersivo .tr-prox{min-height:52px}
+.guia{position:fixed;z-index:45;pointer-events:none;display:none;filter:drop-shadow(0 3px 0 rgba(0,0,0,.45))}
+.guia.on{display:block;animation:quica .8s ease-in-out infinite}
+.guia.cima{animation-name:quicaC}
+.guia.cima svg{transform:rotate(180deg)}
+@keyframes quica{50%{transform:translateY(-12px)}}
+@keyframes quicaC{50%{transform:translateY(12px)}}
+.pn-volta{display:flex;flex-direction:column;gap:12px;background:linear-gradient(150deg,#2f8a4a,#1d5e3a);border-color:#63c74d}
+.pn-onde{display:flex;align-items:center;gap:12px}
+.pn-onde-tx{font-size:22px;font-weight:900;line-height:1.2}
+.pn-onde .mut{color:#d6f5dd}
+.pn-cont-linha{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:16px;align-items:center}
+.pn-continuar{min-height:92px;font-size:27px;width:100%;line-height:1.1}
+.pn-tit{margin-top:20px}
+.passos{display:flex;align-items:stretch;gap:6px}
+.passo{position:relative;flex:1;min-width:0;min-height:98px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border-radius:16px;background:linear-gradient(160deg,var(--card2),var(--card));border:2px solid var(--borda);font-weight:900;font-size:16px}
+.passo:hover{border-color:#7d6ff0}
+.passo .pnum{position:absolute;top:4px;left:9px;font-size:13px;color:var(--txt3)}
+.passo .marca{position:absolute;top:4px;right:6px}
+.passo .marca.band{top:auto;bottom:4px}
+.passo.missao{border-color:#ffd84a;animation:pulsa 1.4s ease-in-out infinite}
+@keyframes pulsa{0%,100%{box-shadow:0 0 0 2px #ffd84a}50%{box-shadow:0 0 0 7px #ffd84a44}}
+.passo-seta{display:grid;place-items:center;opacity:.55;flex:none}
+.pn-missao-mini{display:flex;gap:12px;align-items:flex-start;margin-top:14px}
+.pn-mm{flex:1;min-width:0}
+.pn-mm .fr{font-weight:800;margin:4px 0 8px;line-height:1.25}
+.pn-robo{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px;background:linear-gradient(150deg,#1d5e3a,var(--card));border-color:#63c74d}
+.pn-robo b{font-size:20px}
+.pn-papai{margin-top:28px;display:flex;justify-content:flex-end}
+.link-papai{display:inline-flex;align-items:center;gap:6px;color:var(--txt3);font-weight:800;font-size:14px;min-height:44px;padding:4px 10px;border-radius:10px}
+.link-papai:hover{background:var(--card)}
+.jg.gd .bt{align-self:flex-start;min-height:44px}
+.desejos{margin-top:8px}
+.desejos .mut{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:6px}
+.falar.mini{width:32px;height:32px}
+.dsj{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.dsj-b{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:78px;padding:6px 4px;border-radius:14px;background:var(--bg2);border:2px solid var(--card3);font-weight:800;font-size:12px;line-height:1.1}
+.dsj-b.on{border-color:#ffd84a;background:var(--card3)}
+.ms-agora-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:18px}
+.ms-agora{border-color:#ffd84a;box-shadow:0 0 0 2px #ffd84a;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.ms-agora .fr{font-size:22px;font-weight:900;line-height:1.25}
+.ms-depois{display:flex;flex-direction:column;gap:10px}
+.ms.peq{opacity:.85}
+.ms-todas summary{cursor:pointer;font-weight:900;font-size:18px;display:flex;align-items:center;gap:8px;min-height:52px;list-style:none;padding:6px 14px;border-radius:14px;background:var(--card)}
+.ms-todas summary::-webkit-details-marker{display:none}
+.ms-todas[open] summary{margin-bottom:12px}
+.ms-todas[open] summary svg{transform:rotate(180deg)}
+
 /* ---------- telas estreitas (tablet em pé / celular) ---------- */
 @media (max-width:900px){
-  .pn-hero,.px-wrap,.fz-wrap,.ts-wrap,.robo-grid{grid-template-columns:1fr}
+  .pn-hero,.px-wrap,.fz-wrap,.ts-wrap,.robo-grid,.ms-agora-wrap{grid-template-columns:1fr}
+  .dsj{grid-template-columns:repeat(3,1fr)}
+  .tr-pontos{display:none}
   .papeis{flex-direction:row;overflow-x:auto;max-height:none}
   .papel{flex:none}
   .pecas{max-height:none;flex-direction:row;overflow-x:auto}
@@ -324,18 +402,24 @@ body.sem-ajuda #pxGrade{--cel:clamp(18px,calc((100dvh / var(--z) - 260px) / 16),
 @media (max-width:640px){
   .res h2{font-size:22px} .nums div{font-size:17px;padding:4px} .cara{width:56px;height:56px} .bt.grande{min-height:52px;font-size:18px}
   :root{--nav:0px}
-  #app{grid-template-columns:1fr;grid-template-rows:56px 1fr 74px}
-  #nav{grid-row:3;grid-column:1;flex-direction:row;overflow-x:auto;border-right:0;border-top:2px solid var(--linha);padding:4px}
+  #app{grid-template-columns:1fr;grid-template-rows:56px 1fr auto 74px}
+  #nav{grid-row:4;grid-column:1;flex-direction:row;overflow-x:auto;border-right:0;border-top:2px solid var(--linha);padding:4px}
   #nav .logo,.nav-sep,.recolhe{display:none}
-  body.nav-fechada #app{grid-template-rows:56px 1fr 0}
-  body.nav-fechada.topo-fechado #app{grid-template-rows:0 1fr 0}
+  body.nav-fechada #app{grid-template-rows:56px 1fr auto 0}
+  body.nav-fechada.topo-fechado #app{grid-template-rows:0 1fr auto 0}
   body.nav-dir #app{grid-template-columns:1fr}
   #topo,#tela,body.nav-dir #topo,body.nav-dir #tela{grid-column:1}
-  #topo{grid-row:1} #tela{grid-row:2}
+  #topo{grid-row:1} #tela{grid-row:2} #trilho,body.nav-dir #trilho{grid-row:3;grid-column:1}
   #nav,body.nav-dir #nav{grid-column:1;border-left:0}
   .ts-barra span:not(.mut){display:none}
   #btVoz span{display:none}
-  body.topo-fechado #app{grid-template-rows:0 1fr 74px}
+  body.topo-fechado #app{grid-template-rows:0 1fr auto 74px}
+  #selo span,#trSelo span{display:none} .selo{padding:0 8px}
+  #nivel{display:none} #topo{gap:8px;padding:6px 8px}
+  #trilho{padding:6px 8px;gap:6px} .tr-ant{padding:6px 8px;min-width:52px} .tr-ant .tr-nome{display:none}
+  .tr-prox{font-size:16px;padding:6px 8px 6px 12px} .tr-txt{font-size:14px} .tr-meio{gap:6px} .tr-meio .falar{width:36px;height:36px}
+  .pn-cont-linha{grid-template-columns:1fr} .pn-thumb{max-height:96px;object-fit:cover;object-position:left} .pn-continuar{min-height:64px;font-size:21px} .pn-onde-tx{font-size:19px}
+  .passos{gap:4px} .passo-seta{display:none} .passo{min-height:76px;font-size:12px} .passo svg{width:26px;height:26px} .passo .marca svg{width:16px;height:16px}
   .nb{width:64px;min-height:62px;flex:none;font-size:12px}
   .missao-chip,.nivel small{display:none}
   #tela{padding:12px 12px 30px}
@@ -348,6 +432,7 @@ body.sem-ajuda #pxGrade{--cel:clamp(18px,calc((100dvh / var(--z) - 260px) / 16),
   <nav id="nav" aria-label="Telas da Fábrica"></nav>
   <header id="topo">
     <input id="nomeJogo" aria-label="Nome do jogo" maxlength="40">
+    <button class="selo" id="selo" title="Salvo"></button>
     <button class="missao-chip" id="chipMissao"></button>
     <div class="nivel" id="nivel"></div>
     <button class="ib" id="btVoz" title="Trocar a voz"></button>
@@ -368,6 +453,7 @@ body.sem-ajuda #pxGrade{--cel:clamp(18px,calc((100dvh / var(--z) - 260px) / 16),
     <section class="tela" id="t-jogar"></section>
     <section class="tela" id="t-jeito"></section>
   </main>
+  <footer id="trilho" aria-label="Caminho"></footer>
 </div>
 <button class="aba-abre" id="abreNav" title="Mostrar a barra das telas"></button>
 <button class="aba-abre" id="abreTopo" title="Mostrar a barra de cima"></button>
@@ -386,6 +472,9 @@ body.sem-ajuda #pxGrade{--cel:clamp(18px,calc((100dvh / var(--z) - 260px) / 16),
 <script src="banco/audio_indice.js"></script>
 <script src="banco/ingles.js"></script>
 <script src="banco/ingles_dic.js"></script>
+<script src="banco/ingles_dic_nav.js"></script>
+<script src="banco/ingles_dic_mundo.js"></script>
+<script src="banco/fase_recheio.js"></script>
 <script src="js/estado.js"></script>
 <script src="js/voz.js"></script>
 <script src="js/idioma.js"></script>
@@ -396,6 +485,7 @@ body.sem-ajuda #pxGrade{--cel:clamp(18px,calc((100dvh / var(--z) - 260px) / 16),
 <script src="js/editor.js"></script>
 <script src="js/regras.js"></script>
 <script src="js/jeito.js"></script>
+<script src="js/guia.js"></script>
 <script src="js/telas.js"></script>
 </body>
 </html>

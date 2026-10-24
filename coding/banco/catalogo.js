@@ -1347,3 +1347,441 @@ FAB.MODELOS = {
     }]
   }
 };
+
+/* ================================================================
+   MUNDO (v3, frente B, 24/10/2026): fases que sobem, descem e nadam,
+   poderes e montaria. Mapa pode ter de 12 a 48 linhas (o chão fica
+   na última); a câmera do motor sobe e desce junto com o herói.
+   Peças novas:  Y cipó · H escada · U cano (em par, na ordem de
+   leitura: o 1º com o 2º, o 3º com o 4º) · q bolha de ar · i peixe ·
+   w pena (pulo duplo) · u luva grudenta · n cogumelo pequenino ·
+   R portinha de rato · K cavalo.
+   Cada peça de poder nasce com as regras dela ABERTAS (FAB.PACOTES,
+   em blocos.js): ela vê, troca e apaga como qualquer regra.
+   ================================================================ */
+FAB.SPRITES.cipo = { nome: 'Cipó', grupo: 'chao', quadros: [[
+"......kek.......",
+"......kelk..kk..",
+"..kk..kek..klek.",
+".klek.kek.kllek.",
+".kllekkelkkeek..",
+"..keek.kek.kk...",
+"...kk..kek......",
+"......klek......",
+"......kek..kk...",
+".......kekklek..",
+"..kk...kekllek..",
+".klekk.kelkeek..",
+".kllekkek..kk...",
+"..keek.kek......",
+"...kk..klek.....",
+"......kek......."]] };
+FAB.SPRITES.escada = { nome: 'Escada', grupo: 'chao', quadros: [[
+"..kNk......kNk..",
+"..kNd......kNd..",
+"..kNdkkkkkkkNd..",
+"..kNNNNNNNNNNd..",
+"..kNddddddddNd..",
+"..kNdkkkkkkkNd..",
+"..kNd......kNd..",
+"..kNd......kNd..",
+"..kNd......kNd..",
+"..kNd......kNd..",
+"..kNdkkkkkkkNd..",
+"..kNNNNNNNNNNd..",
+"..kNddddddddNd..",
+"..kNdkkkkkkkNd..",
+"..kNd......kNd..",
+"..kNd......kNd.."]] };
+FAB.SPRITES.cano = { nome: 'Cano', grupo: 'chao', quadros: [[
+"kkkkkkkkkkkkkkkk",
+"klwwlllllllleeek",
+"klwlllllllllleek",
+"klwlllllllllleek",
+"klllllllllllleek",
+"keeeeeeeeeeeeeek",
+"kkkkkkkkkkkkkkkk",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek."]] };
+FAB.SPRITES.canocorpo = { nome: 'Cano', grupo: 'interno', quadros: [[
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek.",
+".klwllllllleeek."]] };
+FAB.SPRITES.bolha = { nome: 'Bolha de ar', grupo: 'item', quadros: [[
+"................",
+"................",
+"......cccc......",
+"....cc....cc....",
+"...cww......c...",
+"...cw.......c...",
+"..cw.........c..",
+"..c..........c..",
+"..c..........c..",
+"..c.........bc..",
+"...c.......bc...",
+"...c......bbc...",
+"....cc..bbcc....",
+"......cccc......",
+"................",
+"................"]] };
+FAB.SPRITES.peixe = { nome: 'Peixe', grupo: 'inimigo', quadros: [[
+"................",
+"................",
+"................",
+".....kkkkk......",
+"...kkYooookk..kk",
+"..kooYoooooYkkok",
+".koowkooYoooYkok",
+"kooookooYoooYook",
+"koooooooYoooYook",
+".kRooooooYooYkok",
+"..kRRoooYoookkok",
+"...kkRRRRRkk..kk",
+".....kkkkk......",
+"................",
+"................",
+"................"],[
+"................",
+"................",
+"................",
+".....kkkkk......",
+"...kkYooookk....",
+"..kooYoooooYk.kk",
+".koowkooYoooYkok",
+"kooookooYoooYook",
+"koooooooYoooYook",
+".kRooooooYooYkok",
+"..kRRoooYoookkok",
+"...kkRRRRRkk.kkk",
+".....kkkkk......",
+"................",
+"................",
+"................"]] };
+FAB.SPRITES.pena = { nome: 'Pena', grupo: 'item', quadros: [[
+"................",
+"...........kk...",
+"..........kwck..",
+".........kwwcck.",
+"........kwwwcck.",
+".......kwwwcck..",
+"......kwwwccck..",
+".....kwwwccck...",
+"....kwwwccck....",
+"...kwwccck......",
+"...kwcccck......",
+"..kYkcckk.......",
+"..kYkkk.........",
+".kYk............",
+".kk.............",
+"................"]] };
+FAB.SPRITES.luva = { nome: 'Luva grudenta', grupo: 'item', quadros: [[
+"................",
+"....kk.kk.......",
+"...kvvkvvk.kk...",
+"...kvvkvvkkvvk..",
+"...kvvkvvkkvvk..",
+".kkkvvkvvkkvvk..",
+"kvvkvvvvvvvvvk..",
+"kvvvvvyvvvyvvk..",
+".kvvvvvvvvvvvk..",
+"..kvvvvyvvvvk...",
+"...kvvvvvvvvk...",
+"...kiiiiiiiik...",
+"...kiwiiwiiik...",
+"...kkkkkkkkkk...",
+"................",
+"................"]] };
+FAB.SPRITES.cogroxo = { nome: 'Cogumelo pequenino', grupo: 'item', quadros: [[
+"................",
+"................",
+".....kkkkkk.....",
+"...kkvvvvvvkk...",
+"..kvvwwvvvvvvk..",
+".kvvwwwvvvwwvvk.",
+".kvvvwvvvvwwwvk.",
+"kvvvvvvvvvvwvvvk",
+"kvwwvvvvvvvvvvvk",
+"kppppppppppppppk",
+".kkkkkkkkkkkkkk.",
+"....kwwwwwwk....",
+"....kwkwwkwk....",
+"....kwwwwwwk....",
+"....kgwwwwgk....",
+".....kkkkkk....."]] };
+FAB.SPRITES.portinha = { nome: 'Portinha de rato', grupo: 'chao', quadros: [[
+"kkkkkkkkkkkkkkkk",
+"krrrrrrkrrrrrrrk",
+"kRRRRRRkRRRRRRRk",
+"kkkkkkkkkkkkkkkk",
+"krrrkrrrrrrkrrrk",
+"kRRRkRRRRRRkRRRk",
+"kkkkkkkkkkkkkkkk",
+"krrrrkkkkkkrrrrk",
+"kRRRkNNNNNNkRRRk",
+"kkkkNNdNNdNNkkkk",
+"krrkNNdNNdNNkrrk",
+"kRRkNNdNNdYNkRRk",
+"kkkkNNdNNdNNkkkk",
+"krrkNNdNNdNNkrrk",
+"kRRkNNdNNdNNkRRk",
+"kkkkkkkkkkkkkkkk"]] };
+FAB.SPRITES.cavalo = { nome: 'Cavalo', grupo: 'item', quadros: [[
+"................",
+"...........kk...",
+"..........kwwk..",
+".........kYwwwk.",
+"........kYYwkwk.",
+"..kk...kYYwwwwwk",
+".kYYkkkYYwwwkkk.",
+"kYk.kwrrrrwwk...",
+"kk.kwwRRRRwwk...",
+"...kwwwwwwwwk...",
+"...kggggggggk...",
+"....kwkkkkwk....",
+"....kwk..kwk....",
+"....kwk..kwk....",
+"....kGk..kGk....",
+"....kkk..kkk...."],[
+"................",
+"...........kk...",
+"..........kwwk..",
+".........kYwwwk.",
+"........kYYwkwk.",
+"..kk...kYYwwwwwk",
+".kYYkkkYYwwwkkk.",
+"kYk.kwrrrrwwk...",
+"kk.kwwRRRRwwk...",
+"...kwwwwwwwwk...",
+"...kggggggggk...",
+"...kwkkkkkkwk...",
+"..kwk.....kwk...",
+"..kwk......kwk..",
+"..kGk......kGk..",
+"..kkk......kkk.."]] };
+
+FAB.SPRITES.aguafundo = { nome: 'Água', grupo: 'interno', quadros: [[
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbcbbbbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbbbbcbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbcbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbcbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbcbbbbbbbbbb",
+"bbbbbbbbbbbbbbcb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb"],[
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbcbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbcbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbbbbcbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbcbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb",
+"bbbbbbbbbbbcbbbb",
+"bbbbbbbbbbbbbbbb",
+"bcbbbbbbbbbbbbbb",
+"bbbbbbbbbbbbbbbb"]] };
+Object.assign(FAB.TIPOS, {
+  cipo:     { letra: 'Y', classe: 'escada',  skin: 'cipo',     nome: 'Cipó', mundo: true },
+  escada:   { letra: 'H', classe: 'escada',  skin: 'escada',   nome: 'Escada', mundo: true },
+  cano:     { letra: 'U', classe: 'solido',  skin: 'cano',     nome: 'Cano', cano: true, mundo: true },
+  portinha: { letra: 'R', classe: 'solido',  skin: 'portinha', nome: 'Portinha de rato', rato: true, mundo: true },
+  bolha:    { letra: 'q', classe: 'item',    skin: 'bolha',    nome: 'Bolha de ar', mundo: true },
+  peixe:    { letra: 'i', classe: 'inimigo', skin: 'peixe',    nome: 'Peixe', mover: 'nada', vel: 30, mundo: true },
+  pena:     { letra: 'w', classe: 'item',    skin: 'pena',     nome: 'Pena do pulo duplo', poder: 'duplo', mundo: true },
+  luva:     { letra: 'u', classe: 'item',    skin: 'luva',     nome: 'Luva grudenta', poder: 'grudar', mundo: true },
+  cogroxo:  { letra: 'n', classe: 'item',    skin: 'cogroxo',  nome: 'Cogumelo pequenino', poder: 'pequeno', mundo: true },
+  cavalo:   { letra: 'K', classe: 'montaria',skin: 'cavalo',   nome: 'Cavalo', mundo: true }
+});
+/* montaria: quanto ela muda o herói (o desenho do cavalo vai embaixo dele) */
+FAB.MONTARIAS = { cavalo: { vel: 1.5, pulo: 1.2 } };
+
+/* a água sai de Perigos e ganha grupo próprio; grupos novos no fim */
+FAB.GRUPOS_PECAS.forEach(function (g) { if (g.id === 'perigo') g.tipos = g.tipos.filter(function (t) { return t !== 'agua'; }); });
+FAB.GRUPOS_PECAS.push(
+  { id: 'caminho', nome: 'Subir e passar', tipos: ['cipo', 'escada', 'cano', 'portinha'] },
+  { id: 'agua',    nome: 'Água',           tipos: ['agua', 'bolha', 'peixe'] },
+  { id: 'poderes', nome: 'Poderes',        tipos: ['pena', 'luva', 'cogroxo', 'cavalo'] }
+);
+
+/* jogos-modelo novos (o robô-jogador do portão tem de ganhar cada um) */
+Object.assign(FAB.MODELOS, {
+  torre: {
+    nome: 'A torre que sobe',
+    descricao: 'Suba pelos cipós. A pena dá o pulo duplo para chegar lá no alto.',
+    fases: [{
+      nome: 'Fase 1', cenario: 'floresta', formato: 'torre',
+      mapa: [
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "....................F...",
+        "..................====..",
+        "........................",
+        "..........ooo*..........",
+        ".......Y########........",
+        ".......Y................",
+        ".......Y................",
+        ".......Y................",
+        ".......Y................",
+        ".......Y................",
+        ".......Y..v.............",
+        "......======............",
+        "........................",
+        "........................",
+        "........................",
+        "...............w..oo....",
+        "........##############Y.",
+        "......................Y.",
+        "......................Y.",
+        "......................Y.",
+        "......................Y.",
+        "......................Y.",
+        "..............ooo.....Y.",
+        "..........Y#############",
+        "..........Y.............",
+        "..........Y.............",
+        "..........Y.............",
+        "..........Y.............",
+        "..........Y.............",
+        ".@..ooo...Y.............",
+        "########################",
+        "TTTTTTTTTTTTTTTTTTTTTTTT"
+      ]
+    }]
+  },
+  poco: {
+    nome: 'O poço que desce',
+    descricao: 'Desça pelo cipó e entre no cano para chegar lá embaixo.',
+    fases: [{
+      nome: 'Fase 1', cenario: 'caverna', formato: 'poco',
+      mapa: [
+        "........................",
+        "........................",
+        ".@..ooo.................",
+        "#########Y..............",
+        ".........Y..............",
+        ".........Y..............",
+        ".........Y..............",
+        ".........Y.......P......",
+        ".........Y.......P......",
+        ".........Y.......P......",
+        ".........Y.ooo..UP......",
+        ".....#############......",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "........................",
+        "...U...................P",
+        "#########..............P",
+        ".......................P",
+        "...........ooo.........P",
+        "..........=====........P",
+        ".......................P",
+        ".......................P",
+        "^^...............*...F.P",
+        "########################",
+        "TTTTTTTTTTTTTTTTTTTTTTTT"
+      ]
+    }]
+  },
+  lago: {
+    nome: 'O lago das bolhas',
+    descricao: 'Nade até a bandeira. As bolhas enchem o fôlego.',
+    fases: [{
+      nome: 'Fase 1', cenario: 'mar', formato: 'lago', nada: true,
+      mapa: [
+        "..............................................",
+        "..............................................",
+        "..............................................",
+        ".@.........................................F..",
+        "#####~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#####",
+        "TTTTT~~~~~~~~~~~~i~~~~~~~~~~~~~~~~~~~~~~~TTTTT",
+        "TTTTT~~~~~~~~~~~~~~~~~~~~~~~i~~~~~~~~~~~~TTTTT",
+        "TTTTT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TTTTT",
+        "TTTTT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TTTTT",
+        "TTTTT~~~~~~~~~q~~~~~~~~~q~~~~~~~~q~~~~~~~TTTTT",
+        "TTTTT~~~~~o~~~~~~~~o~~~~~~~~~o~~~~~~~o~~~TTTTT",
+        "TTTTT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~TTTTT",
+        "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+      ]
+    }]
+  },
+  cavalo: {
+    nome: 'Passeio a cavalo',
+    descricao: 'Monte no cavalo para pular o buraco grande.',
+    fases: [{
+      nome: 'Fase 1', cenario: 'floresta', formato: 'reta',
+      mapa: [
+        "................................................",
+        "................................................",
+        "..............................................BB",
+        "..............................................BB",
+        "..............................................BB",
+        "..............................................BB",
+        ".............ooo..............................BB",
+        "..............................................BB",
+        "..............................................BB",
+        ".@..K..ooo..............g...ooo...b..h..oo...FBB",
+        "############.....###############################",
+        "TTTTTTTTTTTT.....TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+      ]
+    }]
+  }
+});
+
+/* formatos da "Fase nova": cada um já nasce jogável (Torre, Poço e Lago
+   são a fase do modelo de mesmo nome, que o robô do portão ganha) */
+FAB.FORMATOS = [
+  { id: 'reta',  nome: 'Reta',            fala: 'Anda para o lado até a bandeira.' },
+  { id: 'torre', nome: 'Torre que sobe',  fala: 'Sobe pelo cipó até a bandeira lá no alto.', modelo: 'torre' },
+  { id: 'poco',  nome: 'Poço que desce',  fala: 'Começa lá em cima e desce até a bandeira.', modelo: 'poco' },
+  { id: 'lago',  nome: 'Lago aquático',   fala: 'O herói nada. As bolhas enchem o fôlego.', modelo: 'lago' }
+];
+FAB.faseDoFormato = function (id, n) {
+  var F = FAB.FORMATOS.filter(function (f) { return f.id === id; })[0] || FAB.FORMATOS[0];
+  if (F.modelo) {
+    var f = JSON.parse(JSON.stringify(FAB.MODELOS[F.modelo].fases[0])); f.nome = 'Fase ' + n; return f;
+  }
+  var w = 40, rep = function (c, k) { return Array(k + 1).join(c); }, base = { nome: 'Fase ' + n, formato: 'reta', cenario: ['dia', 'tarde', 'noite', 'caverna', 'mar', 'espaco', 'doce'][(n - 1) % 7], mapa: [] };
+  for (var j = 0; j < 9; j++) base.mapa.push(rep('.', w));
+  base.mapa.push('.@' + rep('.', w - 4) + 'F.', rep('#', w), rep('T', w));
+  return base;
+};

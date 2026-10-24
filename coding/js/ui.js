@@ -12,6 +12,8 @@ var ORDEM = [['painel', 'Início'], ['pixel', 'Desenhar'], ['fases', 'Fases'], [
              ['ideia', 'Ideia'], ['diario', 'Diário'], ['robo', 'Robô'], ['missoes', 'Missões'], ['jogar', 'Mostrar'], ['jeito', 'Opções']];
 var ICO = { painel: 't_painel', pixel: 't_pixel', fases: 't_fases', regras: 't_regras', testar: 't_testar', ideia: 't_ideia', diario: 't_diario', robo: 't_robo', missoes: 't_missoes', jogar: 't_jogar', jeito: 'engrenagem' };
 FAB.ESCONDIVEIS = ['ideia', 'diario', 'robo', 'missoes', 'jogar'];
+FAB.NOME_TELA = {}; ORDEM.forEach(function (o) { if (o !== '-') FAB.NOME_TELA[o[0]] = o[1]; });
+FAB.ICO_TELA = ICO;
 var atual = null, imersivoAgora = false;
 var ui = FAB.ui = {};
 
@@ -27,6 +29,13 @@ Object.assign(FAB.ICONES, {
   zoom_mais: '<circle cx="10" cy="10" r="6.5" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="2"/><path d="M15 15l6 6" stroke="#1a1c2c" stroke-width="3" stroke-linecap="round"/><path d="M7 10h6M10 7v6" stroke="#1a1c2c" stroke-width="2" stroke-linecap="round"/>',
   zoom_menos: '<circle cx="10" cy="10" r="6.5" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="2"/><path d="M15 15l6 6" stroke="#1a1c2c" stroke-width="3" stroke-linecap="round"/><path d="M7 10h6" stroke="#1a1c2c" stroke-width="2" stroke-linecap="round"/>',
   voz_thalita: '<path d="M4 13c0-6 3.5-10 8-10s8 4 8 10v8h-3v-4H7v4H4z" fill="#8b4a2b" stroke="#1a1c2c" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="12" r="5.5" fill="#f2c39b" stroke="#1a1c2c" stroke-width="1.4"/><circle cx="10" cy="11.5" r=".9" fill="#1a1c2c"/><circle cx="14" cy="11.5" r=".9" fill="#1a1c2c"/><path d="M10 14.2a2.4 2.4 0 0 0 4 0" stroke="#c0392b" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M7 7c2 1.5 6 1.5 10-1" stroke="#1a1c2c" stroke-width="1.2" fill="none"/>',
+  s_dir_esc: '<path d="M9 4l8 8-8 8" stroke="#2a1d00" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+  nuvemico: '<path d="M7 18h10.5a4 4 0 0 0 .4-8 6 6 0 0 0-11.5 1.6A3.3 3.3 0 0 0 7 18z" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="1.6" stroke-linejoin="round"/>',
+  salvo: '<circle cx="12" cy="12" r="10" fill="#3fbf5a" stroke="#1a1c2c" stroke-width="1.6"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+  salvando: '<circle cx="12" cy="12" r="10" fill="#4b4a6e" stroke="#1a1c2c" stroke-width="1.6"/><path d="M12 6v6l4 2" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/>',
+  naosalvou: '<circle cx="12" cy="12" r="10" fill="#ff5a64" stroke="#1a1c2c" stroke-width="1.6"/><path d="M12 6.5v7" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.6" fill="#fff"/>',
+  bandeirinha: '<path d="M6 21V3" stroke="#1a1c2c" stroke-width="2.4" stroke-linecap="round"/><path d="M7 4h11l-3 4 3 4H7z" fill="#ff5a64" stroke="#1a1c2c" stroke-width="1.6" stroke-linejoin="round"/>',
+  estrelinha: '<path d="M12 2.5l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17l-5.9 3.3 1.3-6.5L2.5 9.3l6.6-.8z" fill="#ffd84a" stroke="#1a1c2c" stroke-width="1.5" stroke-linejoin="round"/>',
   voz_antonio: '<circle cx="12" cy="13" r="7" fill="#d9a07a" stroke="#1a1c2c" stroke-width="1.4"/><path d="M5 12c0-5 3-8 7-8s7 3 7 8c-2-2-4-3-7-3s-5 1-7 3z" fill="#2b2b3a" stroke="#1a1c2c" stroke-width="1.4" stroke-linejoin="round"/><circle cx="9.6" cy="13" r=".9" fill="#1a1c2c"/><circle cx="14.4" cy="13" r=".9" fill="#1a1c2c"/><path d="M9.6 16a3 3 0 0 0 4.8 0" stroke="#1a1c2c" stroke-width="1.3" fill="none" stroke-linecap="round"/>'
 });
 
@@ -73,6 +82,7 @@ ui.ehImersivo = function () { return atual === 'testar' && imersivoAgora; };
 
 ui.vai = function (id, semFala) {
   if (!FAB.T[id]) return;
+  try { if (document.activeElement && document.activeElement.blur && document.activeElement !== document.body) document.activeElement.blur(); } catch (e) {}   /* espaço no jogo não "aperta" o último botão */
   if (atual === 'testar' && id !== 'testar' && FAB.motor.rodando()) FAB.motor.termina();
   if (atual === 'jogar') FAB.motor.para();
   if (id === 'testar' && atual !== 'testar') imersivoAgora = !!P().imersivo;
@@ -89,6 +99,9 @@ ui.vai = function (id, semFala) {
   $('tela').scrollTop = 0;
   try { localStorage.setItem('fab_tela', id); } catch (e) {}
   ui.topo();
+  if (FAB.marcaOnde) FAB.marcaOnde(id);
+  ui.trilho();
+  if (FAB.guia) FAB.guia.novaTela();
 };
 ui.atual = function () { return atual; };
 
@@ -97,7 +110,7 @@ ui.topo = function () {
   if (document.activeElement !== n) n.value = FAB.tr(J.nome);   /* nome de modelo vira inglês; o que ela escreveu fica */
   var m = FAB.proximaMissao();
   $('chipMissao').innerHTML = m ? FAB.ico('t_missoes', 26) + '<span class="tx">' + esc(m.frase) + '</span>' : FAB.ico('trofeu', 26) + '<span class="tx">Todas as missões feitas! Crie o que quiser.</span>';
-  $('chipMissao').onclick = function () { if (m) { FAB.fala(m.frase); ui.vai(m.onde, true); } else ui.vai('missoes'); };
+  $('chipMissao').onclick = function () { if (m) { FAB.fala(m.frase); if (FAB.guia) FAB.guia.vaiMissao(m); else ui.vai(m.onde, true); } else ui.vai('missoes'); };
   var N = FAB.nivel();
   $('nivel').innerHTML = FAB.ico('t_missoes', 30) + '<div>' + FAB.xp() + ' XP<small>' + N.nome + '</small></div>';
   $('btSom').innerHTML = FAB.ico('som', 26); $('btSom').classList.toggle('off', !window.somLigado);
@@ -107,6 +120,49 @@ ui.topo = function () {
   ui.marcaMissao();
   var lg = document.querySelector('#nav .logo'); if (lg) lg.innerHTML = FAB.ico('spr:' + FAB.skinDe('heroi'), 48);
 };
+/* ---------------- selo "Salvo" (topo; e no trilho quando o topo está recolhido) ---------------- */
+var seloAntes = '';
+ui.selo = function () {
+  var st = FAB.estadoSalvo || 'salvo', N = FAB.nuvem;
+  if (st === 'salvo' && N && N.ligada() && N.estado === 'guardada') st = 'nuvem';
+  if (st === seloAntes && $('selo').innerHTML) return; seloAntes = st;
+  var S = { salvo: ['salvo', 'Salvo'], salvando: ['salvando', 'Salvando…'], erro: ['naosalvou', 'Não salvou'], nuvem: ['nuvemico', 'Na nuvem'] }[st];
+  ['selo', 'trSelo'].forEach(function (k) { var el = $(k); if (!el) return; el.className = 'selo ' + st; el.innerHTML = FAB.ico(S[0], 22) + '<span>' + S[1] + '</span>'; el.title = S[1]; });
+};
+ui.toqueSelo = function () {
+  if (FAB.estadoSalvo === 'erro') { FAB.fala('Não consegui guardar. Chame o papai.'); ui.vai('jeito'); return; }
+  FAB.fala('Seu jogo está guardado.');
+};
+
+/* ---------------- trilho: anterior · missão (contador vivo) · Próximo passo ---------------- */
+function passoIdx(t) { for (var i = 0; i < FAB.PASSOS.length; i++) if (FAB.PASSOS[i][0] === t) return i; return -1; }
+/* para onde vai o botão amarelo: a tela da missão (se é outra) ou o passo seguinte do caminho */
+ui.proximo = function () {
+  var m = FAB.proximaMissao(), tm = FAB.guia ? FAB.guia.telaDa(m) : (m && m.onde), i = passoIdx(atual);
+  if (m && tm && tm !== atual) return { tela: tm, missao: m };
+  if (i >= 0) return { tela: i + 1 < FAB.PASSOS.length ? FAB.PASSOS[i + 1][0] : 'painel' };
+  return { tela: tm && tm !== atual ? tm : 'pixel' };
+};
+ui.anterior = function () { var i = passoIdx(atual); return i > 0 ? FAB.PASSOS[i - 1][0] : 'painel'; };
+ui.trilho = function () {
+  var el = $('trilho'); if (!el || !atual) return;
+  var m = FAB.proximaMissao(), pr = ui.proximo(), an = ui.anterior(), tm = FAB.guia ? FAB.guia.telaDa(m) : null;
+  var c = m && FAB.guia ? FAB.guia.progresso(m) : null;
+  var pontos = FAB.PASSOS.map(function (p) {
+    return '<i class="' + (p[0] === atual ? 'on' : '') + (p[0] === tm ? ' missao' : '') + '" title="' + p[1] + '"></i>';
+  }).join('');
+  var fr = m ? '<span class="tr-fr">' + esc(m.frase) + '</span>' + (c ? ' <b class="tr-cont">' + FAB.trf('{0} de {1}', [c[0], c[1]]) + '</b>' : '')
+             : '<span class="tr-fr">Todas as missões feitas! Crie o que quiser.</span>';
+  el.innerHTML = '<button class="bt cinza tr-ant" id="trAnt" title="Voltar">' + FAB.ico('s_esq', 22) + '<span class="tr-nome"><small>Voltar</small>' + FAB.NOME_TELA[an] + '</span></button>' +
+    '<div class="tr-meio"><button class="falar" id="trFala" title="Ouvir">' + FAB.ico('falar', 20) + '</button><div class="tr-txt">' + fr + '</div><div class="tr-pontos">' + pontos + '</div></div>' +
+    '<button class="selo" id="trSelo" onclick="FAB.ui.toqueSelo()"></button>' +
+    '<button class="bt ' + (atual === 'painel' ? 'cinza' : 'amarelo') + ' tr-prox" id="trProx"><span class="tr-nome"><small>Próximo passo</small>' + FAB.NOME_TELA[pr.tela] + '</span>' + FAB.ico(atual === 'painel' ? 's_dir' : 's_dir_esc', 24) + '</button>';
+  seloAntes = ''; ui.selo();
+  $('trAnt').onclick = function () { this.blur(); ui.vai(an); };
+  $('trProx').onclick = function () { this.blur(); if (pr.missao && FAB.guia) { FAB.fala(pr.missao.frase); FAB.guia.vaiMissao(pr.missao); } else ui.vai(pr.tela); };
+  $('trFala').onclick = function () { this.blur(); FAB.fala(m ? m.frase : 'Todas as missões feitas! Crie o que quiser.'); };
+};
+
 ui.som = function () { window.toggleSom && window.toggleSom(); FAB.mudo = !window.somLigado; if (FAB.mudo) FAB.calaVoz(); ui.topo(); };
 /* a criança troca a voz com um clique: Thalita <-> Antonio */
 ui.trocaVoz = function (v) {
@@ -155,7 +211,7 @@ function mostraMedalha() {
     (C.nome ? '<div class="card" style="margin:14px auto;max-width:420px;text-align:left"><div class="tit">' + FAB.ico(C.icone, 28) + 'Você aprendeu: ' + esc(C.nome) + '</div><div>' + esc(C.frase) + '</div></div>' : '') +
     (prox ? '<p class="mut" style="margin-bottom:8px">' + FAB.tr('Próxima:') + ' ' + esc(FAB.tr(prox.frase)) + '</p>' : '') +
     '<button class="bt verde grande" onclick="FAB.ui.fecha()">Oba!</button></div>', function () {
-      filaMedalhas.shift(); ui.topo(); if (filaMedalhas.length) setTimeout(mostraMedalha, 200);
+      filaMedalhas.shift(); ui.topo(); ui.trilho(); if (filaMedalhas.length) setTimeout(mostraMedalha, 200);
     });
   FAB.fala('Missão cumprida! ' + (C.nome ? 'Você aprendeu: ' + C.nome + '.' : ''));
   if (window.confeteTela) window.confeteTela();
@@ -195,6 +251,9 @@ $('abreTopo').onclick = function () { P().topoFechado = false; imersivoAgora = f
 $('btRecolhe').onclick = function () { P().topoFechado = true; FAB.salva(); ui.layout(); };
 $('btVoz').onclick = function () { ui.trocaVoz(); };
 $('btJeito').onclick = function () { ui.vai('jeito'); };
+$('selo').onclick = function () { ui.toqueSelo(); };
+/* onde ela parou muda também dentro da tela (fase, aba, quem desenha) */
+document.addEventListener('click', function () { setTimeout(function () { if (FAB.marcaOnde && atual) FAB.marcaOnde(atual); }, 0); }, true);
 
 FAB.mudo = !window.somLigado;
 })();

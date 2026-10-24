@@ -18,7 +18,12 @@ window.FAB = window.FAB || {};
 (function () {
   function pecas(J, letra) {
     var n = 0;
-    (J.fases || []).forEach(function (f) { f.mapa.forEach(function (l) { for (var i = 0; i < l.length; i++) if (l[i] === letra) n++; }); });
+    function conta(m) { var k = 0; m.forEach(function (l) { for (var i = 0; i < l.length; i++) if (l[i] === letra) k++; }); return k; }
+    (J.fases || []).forEach(function (f) {
+      /* fase que nasceu recheada (banco/fase_recheio.js): só conta o que ela pôs a mais */
+      var R = f.recheio && (FAB.RECHEIOS || []).filter(function (x) { return x.id === f.recheio; })[0];
+      n += Math.max(0, conta(f.mapa) - (R ? conta(R.mapa) : 0));
+    });
     return n;
   }
   function regras(J, f) { return (J.regras || []).filter(function (r) { return r.liga !== false && f(r); }); }
@@ -189,7 +194,56 @@ window.FAB = window.FAB || {};
     { id: 'jeito', conceito: 'pixel', xp: 10,
       frase: 'Abra a engrenagem e deixe a Fábrica com a sua cor.',
       onde: 'jeito',
-      confere: function (E) { return !!E.prefs && E.prefs.tema !== 'noite'; } }
+      confere: function (E) { return !!E.prefs && E.prefs.tema !== 'noite'; } },
+
+    /* mundo (v3, 24/10/2026): cada peça nova vem com uma missão que obriga a MUDAR uma regra
+       dela (confere a regra mudada + que ela acordou no teste), nunca só por pôr a peça */
+    { id: 'penaestrela', conceito: 'evento', xp: 20, abre: 'torre',
+      frase: 'Faça a estrela dar o pulo duplo. Depois teste e pule duas vezes.',
+      onde: 'regras',
+      confere: function (E, J) {
+        return regras(J, function (r) { return r.quando.t === 'toca' && r.quando.obj === 'estrela' && temAcao(r, 'ligar', function (a) { return /^duplo/.test(a.v || ''); }); })
+          .some(function (r) { return disparou(J, r); });
+      } },
+
+    { id: 'folego', conceito: 'variavel', xp: 20, abre: 'lago',
+      frase: 'No lago, faça a bolha dar 10 de fôlego. Chegue na bandeira.',
+      onde: 'regras',
+      confere: function (E, J) {
+        return regras(J, function (r) { return r.quando.t === 'toca' && r.quando.obj === 'bolha' && temAcao(r, 'folego', function (a) { return a.n >= 10; }); })
+          .some(function (r) { return disparou(J, r); }) && !!T(J).venceu;
+      } },
+
+    { id: 'cavalo', conceito: 'condicao', xp: 25, abre: 'cavalo',
+      frase: 'Monte no cavalo e faça o inimigo dar pontos quando encostar. Teste!',
+      onde: 'regras',
+      confere: function (E, J) {
+        return regras(J, function (r) { return r.quando.t === 'toca' && r.se && r.se.t === 'montada' && temAcao(r, 'ponto', function (a) { return a.n > 0; }); })
+          .some(function (r) { return disparou(J, r); });
+      } },
+
+    { id: 'cano', conceito: 'sequencia', xp: 20, abre: 'poco',
+      frase: 'Faça o cano levar para a próxima fase. Depois teste.',
+      onde: 'regras',
+      confere: function (E, J) {
+        return regras(J, function (r) { return r.quando.t === 'cano' && temAcao(r, 'iraoutro', function (a) { return a.v === 'proxima'; }); })
+          .some(function (r) { return disparou(J, r); });
+      } },
+
+    { id: 'poderacaba', conceito: 'sequencia', xp: 20,
+      frase: 'Quando o poder acabar, mostre um balão. Pegue o cogumelo pequenino e teste.',
+      onde: 'regras',
+      confere: function (E, J) {
+        return regras(J, function (r) { return r.quando.t === 'poderacaba' && temAcao(r, 'fala'); }).some(function (r) { return disparou(J, r); });
+      } },
+
+    { id: 'luva', conceito: 'variavel', xp: 20,
+      frase: 'Ponha a luva grudenta e troque para grudar só 10 segundos. Teste!',
+      onde: 'regras',
+      confere: function (E, J) {
+        return regras(J, function (r) { return r.quando.t === 'toca' && r.quando.obj === 'luva' && temAcao(r, 'ligar', function (a) { return a.v === 'grudar:10'; }); })
+          .some(function (r) { return disparou(J, r); });
+      } }
   ];
 
   /* níveis da criadora (por missões cumpridas) */
