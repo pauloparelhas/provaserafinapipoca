@@ -11,12 +11,13 @@ var CHAVE = 'fab_mariana_v1';
 function novoEstado() {
   return { v: 1, criadora: { nome: 'Mariana' }, missoes: {}, jogos: [], atual: null,
     sprites: {}, perguntas: [], pedidos: [], diario: [],
-    stats: { testes: 0, convidado: 0, lupa: 0 }, prefs: prefsPadrao(), criado: Date.now() };
+    stats: { testes: 0, convidado: 0, lupa: 0 }, prefs: prefsPadrao(), criado: Date.now(),
+    onde: null, desejos: [] };   /* onde = o último lugar em que ela trabalhou (Continuar de onde parei) */
 }
 /* o jeito dela: voz, cores, tamanho, barra, tela grande (tela "Meu jeito") */
 function prefsPadrao() {
   return { voz: 'thalita', vel: 1, tema: 'noite', tam: 'm', navLado: 'esq', navNomes: true, navEsconde: [],
-    lingua: 'pt', imersivo: true, toques: 'auto', navFechada: false, topoFechado: false, ajuda: true, pecasFechadas: false, zoomFase: 0 };
+    lingua: 'pt', imersivo: true, toques: 'auto', navFechada: false, topoFechado: false, ajuda: true, pecasFechadas: false, zoomFase: 0, telaFase: 'pouca' };
 }
 FAB.prefsPadrao = prefsPadrao;
 function copia(o) { return JSON.parse(JSON.stringify(o)); }
@@ -33,6 +34,7 @@ function completa(n) {
   var pp = prefsPadrao(); if (typeof n.prefs !== 'object' || Array.isArray(n.prefs)) n.prefs = {};
   Object.keys(pp).forEach(function (k) { if (n.prefs[k] === undefined || n.prefs[k] === null) n.prefs[k] = pp[k]; });
   if (!Array.isArray(n.prefs.navEsconde)) n.prefs.navEsconde = [];
+  if (!Array.isArray(n.desejos)) n.desejos = [];
   n.jogos = n.jogos.filter(function (j) { return j && Array.isArray(j.fases) && j.fases.length && Array.isArray(j.regras); });
   n.jogos.forEach(function (j) { j.versoes = j.versoes || []; j.testes = j.testes || []; j.ajustes = j.ajustes || { vidas: 3, tempo: 0, perguntas: 'prova' }; j.skins = j.skins || { heroi: 'urso' }; j.ideia = j.ideia || {}; });
   return n;
@@ -41,12 +43,17 @@ E = completa(E) || novoEstado();
 FAB.E = E;
 
 var tSalva = null;
+/* selo do topo: 'salvo' | 'salvando' | 'erro' (o navegador não guardou) */
+FAB.estadoSalvo = 'salvo';
+function selo(st) { FAB.estadoSalvo = st; if (FAB.ui && FAB.ui.selo) FAB.ui.selo(); }
 FAB.salva = function () {
   clearTimeout(tSalva);
   FAB.E.salvoEm = Date.now();   /* a nuvem compara este carimbo para saber quem é mais novo */
+  selo('salvando');
   tSalva = setTimeout(function () {
     if (FAB.nuvem) FAB.nuvem.agenda();
-    try { localStorage.setItem(CHAVE, JSON.stringify(FAB.E)); } catch (e) { console.warn('não salvou', e); if (FAB.ui && FAB.ui.toast) FAB.ui.toast('O navegador está cheio! Peça ao papai: Guardar no computador.', true); }
+    try { localStorage.setItem(CHAVE, JSON.stringify(FAB.E)); selo('salvo'); }
+    catch (e) { console.warn('não salvou', e); selo('erro'); if (FAB.ui && FAB.ui.toast) FAB.ui.toast('O navegador está cheio! Peça ao papai: Guardar no computador.', true); }
   }, 250);
 };
 window.addEventListener('beforeunload', function () { if (FAB.compartilhado) return; try { localStorage.setItem(CHAVE, JSON.stringify(FAB.E)); } catch (e) {} });
@@ -75,7 +82,7 @@ FAB.jogo = function () {
   E.atual = J.id; return J;
 };
 FAB.abreJogo = function (id) { FAB.E.atual = id; FAB.salva(); };
-FAB.mudou = function () { var J = FAB.jogo(); J.mudado = Date.now(); FAB.salva(); FAB.confereMissoes(); };
+FAB.mudou = function () { var J = FAB.jogo(); J.mudado = Date.now(); FAB.salva(); FAB.confereMissoes(); if (FAB.ui && FAB.ui.trilho) FAB.ui.trilho(); };   /* contador vivo da missão */
 FAB.apagaJogo = function (id) {
   FAB.E.jogos = FAB.E.jogos.filter(function (j) { return j.id !== id; });
   if (FAB.E.atual === id) FAB.E.atual = FAB.E.jogos[0] ? FAB.E.jogos[0].id : null;
@@ -86,8 +93,43 @@ FAB.apagaJogo = function (id) {
 FAB.tiraFoto = function (nome) {
   var J = FAB.jogo(), s = copia(J); delete s.versoes; delete s.testes;
   J.versoes.push({ nome: nome || ('Foto ' + (J.versoes.length + 1)), data: Date.now(), snap: s });
-  if (J.versoes.length > 20) J.versoes.splice(0, J.versoes.length - 20);   /* cabe no navegador (5 MB) */
+  while (J.versoes.length > 20) {   /* cabe no navegador (5 MB); a que ela guardou com nome sai por último */
+    var k = 0; while (k < J.versoes.length - 1 && J.versoes[k].guardado) k++;
+    J.versoes.splice(k, 1);
+  }
   FAB.mudou();
+};
+/* "Guardar este jogo" com nome: é uma foto que ela batizou (aparece no Início) */
+FAB.guardaJogo = function (nome) {
+  var J = FAB.jogo(); nome = String(nome || '').trim().slice(0, 40) || J.nome;
+  FAB.tiraFoto(nome);
+  var v = J.versoes[J.versoes.length - 1]; v.guardado = true; FAB.salva();
+  return v;
+};
+FAB.guardados = function () {
+  var L = [];
+  FAB.E.jogos.forEach(function (j) { (j.versoes || []).forEach(function (v, i) { if (v.guardado) L.push({ jogo: j, i: i, v: v }); }); });
+  return L.sort(function (a, b) { return b.v.data - a.v.data; });
+};
+/* "Queria que tivesse…" no fim do teste: vai no .json para o papai e o robô */
+FAB.desejo = function (o) {
+  var J = FAB.jogo();
+  FAB.E.desejos.push({ id: FAB.uid('w'), data: Date.now(), jogo: J.id, nomeJogo: J.nome, o: o });
+  FAB.salva();
+};
+/* onde ela parou: tela + jogo + fase/aba/papel + quando (o Início lê, o Continuar volta) */
+var NAO_MARCA = { painel: 1, jeito: 1 };
+FAB.marcaOnde = function (tela) {
+  if (FAB.compartilhado || !tela || NAO_MARCA[tela]) return;
+  var o = { tela: tela, jogo: FAB.E.atual, quando: Date.now() };
+  try {
+    var f = document.querySelector('#t-fases .aba.on[data-f]'); if (tela === 'fases' && f) o.fase = +f.dataset.f;
+    var a = document.querySelector('#t-regras .aba.on[data-aba]'); if (tela === 'regras' && a) o.aba = a.dataset.aba;
+    var p = document.querySelector('#t-pixel .papel.on[data-p]'); if (tela === 'pixel' && p) o.papel = p.dataset.p;
+  } catch (e) {}
+  var v = FAB.E.onde;
+  if (v && v.tela === o.tela && v.jogo === o.jogo && v.fase === o.fase && v.aba === o.aba && v.papel === o.papel && o.quando - v.quando < 60000) return;
+  FAB.E.onde = o; FAB.salva();
 };
 FAB.voltaFoto = function (i) {
   var J = FAB.jogo(), v = J.versoes[i]; if (!v) return;

@@ -28,6 +28,16 @@ voz gravada Thalita/Antonio e Ava/Brian · Fábrica inteira em inglês · trava 
 4 heróis, 3 inimigos, cristal/relógio/cogumelo, ponto de volta, madeira/neve/areia, 4 cenários,
 2 jogos-modelo (neve, corrida), 5 blocos, 6 missões (25) e nível "Dona da Fábrica".
 
+## v3 (24/10/2026) — entregue
+- Navegação: "Continuar de onde parei", trilho com Voltar / missão / Próximo passo, seta guia
+  (js/guia.js), selo Salvo/Na nuvem, missões Agora/Depois, "Guardar este jogo", "Queria que tivesse…".
+- Mundo: mapa de 12 a 48 linhas com câmera vertical; fase nova por formato (Reta, Torre, Poço, Lago);
+  cipó/escada, cano em par, água com fôlego, bolha e peixe; poderes pena, luva, pequenino; cavalo.
+  Blocos novos só aparecem quando a peça existe; regras nascem com a peça (FAB.PACOTES).
+- Tela de criar fases menos poluída (banco/fase_recheio.js): jeitos Pouca coisa (padrão), Médio,
+  Tudo; peça que já está no mapa aparece sempre. Fase Reta nova começa Vazia, Algumas coisas ou
+  Cheia de ideias; o que já vem no recheio não cumpre missão sozinho (missoes.js desconta).
+
 ## Próximos degraus (ordem sugerida, cada um só quando ela pedir ou travar)
 - [ ] **"Dá para ganhar?"** — robô-jogador dentro da Fábrica que testa a fase dela e mostra onde travou (sugestão do pedagógico).
 - [ ] **Animação de 2 quadros editável** (hoje pinta nos dois ao mesmo tempo) — quando ela pedir pernas que mexem.
@@ -49,13 +59,3 @@ voz gravada Thalita/Antonio e Ava/Brian · Fábrica inteira em inglês · trava 
   afastados da plataforma de cima (o herói batia a cabeça e caía neles). Robô-jogador passou a
   morar dentro da página (a máquina de teste roda a menos de 30 quadros e o vaivém do Playwright
   chegava atrasado).
-
-## PAROU AQUI (23/10/2026, noite) — retomar daqui
-v2 commitada (f56b4f6) e publicada. v3 planejada em `painel/5_sintese.md` (painel: designer,
-pedagoga, navegação, engenharia). Os dois agentes da v3 foram parados antes de mexer em código.
-Para retomar: relançar as duas frentes em paralelo, cada uma só nos seus arquivos —
-- Frente A (navegação): ui.js, telas.js, estado.js, jeito.js, index.html, banco/ingles_dic_nav.js.
-- Frente B (mundo): motor.js, editor.js, regras.js (filtro), catalogo.js, blocos.js, missoes.js,
-  banco/ingles_dic_mundo.js, gate/jogador_robo.py, gate/valida_banco.js.
-Depois: `node _engenharia/frases.js && python _engenharia/gera_audio.py` (voz nova, precisa de
-internet), todos os portões (+ teste_nuvem.py), commit, `publicar_coding.sh`.

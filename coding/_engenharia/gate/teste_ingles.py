@@ -45,6 +45,13 @@ def passeio(pg, junta):
         pg.evaluate(f"FAB.ui.vai('{t}')"); pg.wait_for_timeout(350); junta(); fecha()
         if t == 'painel':
             pg.click('#pnNovo'); pg.wait_for_timeout(200); junta(); fecha()
+            # v3 navegação: Guardar este jogo, jogos guardados, cartão do robô, selo (salvando / não salvou)
+            pg.click('#pnGuardar'); pg.wait_for_timeout(200); junta(); pg.click('#gdOk'); pg.wait_for_timeout(300); junta(); fecha()
+            pg.evaluate("FAB.E.pedidos.push({id:'pIng',tipo:'inimigo',nome:'',como:'roxo',faz:'voa',estado:'pronto'}); FAB.ui.vai('painel')"); pg.wait_for_timeout(300); junta(); fecha()
+            el = pg.query_selector('[data-abreg]')
+            if el: el.click(); pg.wait_for_timeout(200); junta(); fecha()
+            pg.evaluate("FAB.estadoSalvo='erro'; FAB.ui.selo()"); junta(); pg.evaluate("FAB.estadoSalvo='salvando'; FAB.ui.selo()"); junta()
+            pg.evaluate("FAB.ui.vai('fases'); FAB.ui.vai('painel')"); pg.wait_for_timeout(300); junta()
         if t == 'fases':
             pg.click('#fzCen'); pg.wait_for_timeout(200); junta(); fecha()
             for b in pg.query_selector_all('.peca')[:40]: b.click(); junta()
@@ -71,13 +78,16 @@ def passeio(pg, junta):
             if c: c.click(); pg.wait_for_timeout(200); junta(); fecha()
             c = pg.query_selector('#tsMudarC .esc')
             if c: c.click(); pg.wait_for_timeout(200); junta(); fecha()
+            c = pg.query_selector('#tsDesejos [data-d]')   # "Queria que tivesse…"
+            if c: c.click(); pg.wait_for_timeout(200); junta(); fecha()
             pg.click('#tsLupa'); pg.wait_for_timeout(200); junta()
         if t == 'diario':
             pg.click('#dgFoto'); pg.wait_for_timeout(300); junta(); fecha()
             el = pg.query_selector('[data-volta]')
             if el: el.click(); pg.wait_for_timeout(150); junta(); fecha()
         if t == 'missoes':
-            el = pg.query_selector('[data-m]')
+            pg.evaluate("document.querySelector('.ms-todas').open = true"); pg.wait_for_timeout(150); junta()
+            el = pg.query_selector('button[data-m]')
             if el: el.click(); pg.wait_for_timeout(150); junta(); fecha()
         if t == 'robo':
             pg.click('#rbTipo .esc'); pg.wait_for_timeout(100); junta(); fecha()

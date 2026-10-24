@@ -15,48 +15,102 @@ var CARAS = {
 Object.keys(CARAS).forEach(function (k) { FAB.ICONES['cara_' + k] = CARAS[k]; });
 var FALA_CARA = {   /* falado */ feliz: 'Ficou do jeito que eu queria', meio: 'Quase do jeito que eu queria', triste: 'Não ficou do jeito que eu queria' };
 var MUDAR = ['o pulo', 'os inimigos', 'as moedas', 'o caminho', 'as regras', 'o desenho', 'nada, ficou ótimo'];
+/* "Queria que tivesse…": 6 figuras, 1 toque cada (vai no .json para o papai e o robô) */
+var DESEJOS = [['inimigos', 'Mais inimigos', 'spr:besouro'], ['pegar', 'Mais coisas para pegar', 'spr:estrela'], ['poder', 'Um poder', 'raio'],
+               ['agua', 'Água para nadar', 'spr:agua'], ['montar', 'Um bicho para montar', 'spr:dino'], ['alto', 'Fases bem altas', 'spr:nuvem']];
 
-function quando(t) { var d = new Date(t), L = FAB.lingua() === 'en' ? 'en-US' : 'pt-BR'; return d.toLocaleDateString(L) + ' ' + d.toLocaleTimeString(L, { hour: '2-digit', minute: '2-digit' }); }
+function quando(t) {
+  var d = new Date(t), L = FAB.lingua() === 'en' ? 'en-US' : 'pt-BR', h = d.toLocaleTimeString(L, { hour: '2-digit', minute: '2-digit' });
+  var dia = function (x) { return new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime(); }, dif = Math.round((dia(new Date()) - dia(d)) / 864e5);
+  return (dif === 0 ? FAB.tr('hoje') : dif === 1 ? FAB.tr('ontem') : d.toLocaleDateString(L)) + ' ' + h;   /* "hoje 16:40" lê melhor que a data */
+}
 function miniatura(cv, J) { try { FAB.desenhaMapa(cv, J.fases[0], 1, false); } catch (e) {} }
 function comJogo(J, f) { var a = FAB.E.atual; FAB.E.atual = J.id; try { return f(); } finally { FAB.E.atual = a; } }
 
 /* ============================ INÍCIO ============================ */
-function abreModelo(id) {
-  var J = FAB.E.jogos.filter(function (j) { return j.origem === id; })[0] || FAB.novoJogo(id);
-  FAB.abreJogo(J.id); return J;
+/* "você parou em…" falado: uma frase gravada por tela */
+var FALA_PAROU = {   /* falado */
+  pixel: 'Você parou no Desenhar.', fases: 'Você parou nas Fases.', regras: 'Você parou nas Regras.', testar: 'Você parou no Testar.',
+  jogar: 'Você parou no Mostrar.', ideia: 'Você parou na Ideia.', diario: 'Você parou no Diário.', robo: 'Você parou no Robô.', missoes: 'Você parou nas Missões.'
+};
+/* Continuar de onde parei: mesma tela, mesmo jogo, mesma fase/aba/desenho (inclusive o Testar) */
+FAB.continuar = function () {
+  var o = FAB.E.onde;
+  if (!o || !FAB.T[o.tela]) { var m = FAB.proximaMissao(); if (m && FAB.guia) FAB.guia.vaiMissao(m); else ui.vai('pixel'); return; }
+  if (o.jogo && FAB.E.jogos.some(function (j) { return j.id === o.jogo; })) FAB.abreJogo(o.jogo);
+  if (o.fase != null && FAB.faseEditor) FAB.faseEditor(Math.min(o.fase, FAB.jogo().fases.length - 1));
+  if (o.aba && FAB.regrasAba) FAB.regrasAba(o.aba);
+  if (o.papel && FAB.pixelPapel) FAB.pixelPapel(o.papel);
+  ui.nav(); ui.vai(o.tela);
+};
+function pedidosProntos() {
+  return (FAB.E.pedidos || []).filter(function (p) { return (p.estado === 'pronto' || (FAB.ENTREGAS && FAB.ENTREGAS[p.id])) && !p.visto; });
 }
 FAB.T.painel = { nome: 'Fábrica de Jogos', ajuda: 'Aqui você cria jogos. Aperte Continuar.', monta: function (C) {
-  var J = FAB.jogo(), m = FAB.proximaMissao(), feitas = FAB.feitas(), tot = FAB.MISSOES.length;
-  C.innerHTML =
-    '<div class="pn-hero">' +
-      '<div class="card pn-cont"><div class="tit">' + FAB.ico('spr:' + FAB.skinDe('heroi'), 36) + '<span data-sem-traducao>' + esc(FAB.tr(J.nome)) + '</span></div>' +
-        '<canvas class="pn-thumb pix" id="pnThumb"></canvas>' +
-        '<div class="linha"><button class="bt amarelo grande" id="pnCont">' + FAB.ico('play', 30) + 'Continuar</button>' +
-        '<button class="bt verde grande" onclick="FAB.ui.vai(\'testar\')">' + FAB.ico('t_testar', 30) + 'Testar</button></div></div>' +
-      '<div class="card pn-missao">' + (m ?
-        '<div class="linha"><button class="falar" id="pnFala">' + FAB.ico('falar', 22) + '</button><b>' + FAB.trf('Missão {0} de {1}', [FAB.MISSOES.indexOf(m) + 1, tot]) + '</b></div>' +
-        '<div class="fr">' + esc(m.frase) + '</div>' : '<div class="fr">Você fez todas as missões! Agora invente o que quiser.</div>') +
-        '<div class="barra"><i style="width:' + Math.round(feitas / tot * 100) + '%"></i></div>' +
-        '<p class="mut" style="margin-top:6px">' + FAB.trf('{0} missões feitas · {1} XP · {2}', [feitas, FAB.xp(), FAB.tr(FAB.nivel().nome)]) + '</p>' +
-        (m ? '<button class="bt amarelo" style="margin-top:10px" id="pnIr">Ir para a missão</button>' : '') + '</div>' +
+  var J = FAB.jogo(), m = FAB.proximaMissao(), feitas = FAB.feitas(), tot = FAB.MISSOES.length, o = FAB.E.onde;
+  var Jo = o && FAB.E.jogos.filter(function (j) { return j.id === o.jogo; })[0] || J;
+  var temOnde = !!(o && FAB.T[o.tela]);
+  var tm = FAB.guia ? FAB.guia.telaDa(m) : null;
+  var detalhe = temOnde ? ['<span data-sem-traducao>' + esc(FAB.tr(Jo.nome)) + '</span>'] : [];
+  if (temOnde && o.tela === 'fases' && o.fase != null) detalhe.unshift(FAB.trf('Fase {0}', [o.fase + 1]));
+  if (temOnde) detalhe.push(quando(o.quando));
+  var h = '<div class="card pn-volta">' +
+      '<div class="pn-onde"><button class="falar" id="pnFalaOnde" title="Ouvir">' + FAB.ico('falar', 22) + '</button><div>' +
+        (temOnde ? '<div class="pn-onde-tx">' + FAB.tr('Você parou em:') + ' <b>' + FAB.tr(FAB.NOME_TELA[o.tela]) + '</b></div><div class="mut">' + detalhe.join(' · ') + '</div>'
+                 : '<div class="pn-onde-tx">Vamos começar? Aperte o botão amarelo.</div>') +
+      '</div></div>' +
+      '<div class="pn-cont-linha"><canvas class="pn-thumb pix" id="pnThumb"></canvas>' +
+        '<button class="bt amarelo grande pn-continuar" id="pnCont">' + FAB.ico('play', 34) + '<span>' + (temOnde ? 'Continuar de onde parei' : 'Começar meu primeiro jogo') + '</span></button></div>' +
     '</div>' +
-    '<div class="tit" style="margin-top:22px">' + FAB.ico('t_jogar', 28) + 'Meus jogos</div><div class="grade jogos" id="pnJogos"></div>' +
-    '<div class="linha" style="margin-top:24px"><button class="bt cinza" id="pnExp">' + FAB.ico('foto', 22) + 'Guardar no computador</button>' +
-      '<label class="bt cinza">' + FAB.ico('desfazer', 22) + 'Abrir do computador<input type="file" accept=".json" id="pnImp" hidden></label>' +
-      '<span class="mut">Para o papai: o arquivo guarda tudo e é o mesmo que vai para o robô.</span></div>' +
-    '<div class="linha" style="margin-top:12px"><button class="bt cinza" id="pnMic">' + FAB.ico('microfone', 22) + (ui.micLigado() ? 'Desligar o microfone' : 'Ligar o microfone') + '</button>' +
-      '<span class="mut">Para o papai: o ditado por voz do Chrome envia a voz ao Google.</span></div>';
-  miniatura($('pnThumb'), J);
-  function vaiMissao() { if (!m) { ui.vai('fases'); return; } if (m.abre) abreModelo(m.abre); FAB.fala(m.frase); ui.nav(); ui.vai(m.onde); }
-  $('pnCont').onclick = vaiMissao; if ($('pnIr')) $('pnIr').onclick = vaiMissao;
+    '<div class="tit pn-tit">' + FAB.ico('bandeirinha', 26) + 'Seu caminho</div><div class="passos" id="pnPassos">' +
+      FAB.PASSOS.map(function (p, i) {
+        var feito = FAB.MISSOES.some(function (x) { return FAB.E.missoes[x.id] && (FAB.guia ? FAB.guia.telaDa(x) : x.onde) === p[0]; });
+        var parou = temOnde && o.tela === p[0];
+        return (i ? '<span class="passo-seta">' + FAB.ico('s_dir', 16) + '</span>' : '') +
+          '<button class="passo' + (p[0] === tm ? ' missao' : '') + (parou ? ' parou' : '') + '" data-passo="' + p[0] + '">' +
+          '<span class="pnum">' + (i + 1) + '</span>' + FAB.ico(p[2], 34) + '<b>' + p[1] + '</b>' +
+          (feito ? '<span class="marca">' + FAB.ico('estrelinha', 20) + '</span>' : '') +
+          (parou ? '<span class="marca band" title="Você parou aqui">' + FAB.ico('bandeirinha', 20) + '</span>' : '') + '</button>';
+      }).join('') + '</div>' +
+    '<div class="card pn-missao-mini">' + (m ?
+        '<button class="falar" id="pnFala" title="Ouvir">' + FAB.ico('falar', 22) + '</button><div class="pn-mm"><b>' + FAB.trf('Missão {0} de {1}', [FAB.MISSOES.indexOf(m) + 1, tot]) + '</b><div class="fr">' + esc(m.frase) + '</div>' :
+        '<div class="pn-mm"><div class="fr">Você fez todas as missões! Agora invente o que quiser.</div>') +
+        '<div class="barra"><i style="width:' + Math.round(feitas / tot * 100) + '%"></i></div>' +
+        '<p class="mut" style="margin-top:4px">' + FAB.trf('{0} missões feitas · {1} XP · {2}', [feitas, FAB.xp(), FAB.tr(FAB.nivel().nome)]) + '</p></div></div>';
+  pedidosProntos().slice(0, 2).forEach(function (p) {
+    var ent = FAB.ENTREGAS && FAB.ENTREGAS[p.id];
+    h += '<div class="card pn-robo" data-ped="' + p.id + '">' + FAB.ico('t_robo', 52) + '<div class="pn-mm"><b>Você pediu, o robô fez!</b>' +
+      '<div data-sem-traducao class="fr">' + esc(p.nome || p.como || '') + '</div>' + (ent ? '<div class="mut" data-sem-traducao>' + esc(ent) + '</div>' : '') + '</div>' +
+      '<div class="linha"><button class="bt verde" data-verped="' + p.id + '">' + FAB.ico('t_robo', 22) + 'Ver no Robô</button><button class="bt cinza" data-okped="' + p.id + '">Oba!</button></div></div>';
+  });
+  h += '<div class="tit pn-tit">' + FAB.ico('t_jogar', 28) + 'Meus jogos</div><div class="grade jogos" id="pnJogos"></div>' +
+    '<div class="linha" style="margin-top:12px"><button class="bt" id="pnGuardar">' + FAB.ico('foto', 24) + 'Guardar este jogo</button></div>';
+  var G = FAB.guardados();
+  if (G.length) {
+    h += '<div class="tit pn-tit">' + FAB.ico('foto', 26) + 'Jogos guardados</div><div class="grade jogos" id="pnGuard">';
+    G.slice(0, 12).forEach(function (g, k) {
+      h += '<div class="card jg gd" data-g="' + k + '"><canvas class="pix"></canvas><b data-sem-traducao>' + esc(FAB.tr(g.v.nome)) + '</b><span class="mut"><span data-sem-traducao>' + esc(FAB.tr(g.jogo.nome)) + '</span> · ' + quando(g.v.data) + '</span>' +
+        '<button class="bt cinza" data-abreg="' + k + '">' + FAB.ico('desfazer', 20) + 'Abrir</button></div>';
+    });
+    h += '</div>';
+  }
+  h += '<div class="pn-papai"><button class="link-papai" id="pnOpcoes">' + FAB.ico('engrenagem', 20) + 'Para o papai: Opções</button></div>';
+  C.innerHTML = h;
+  miniatura($('pnThumb'), Jo === J ? J : Jo);
+  $('pnCont').onclick = function () { FAB.continuar(); };
+  $('pnFalaOnde').onclick = function () { if (temOnde) FAB.fala([FALA_PAROU[o.tela] || 'Aperte Continuar.', 'Aperte Continuar.']); else FAB.fala('Vamos começar? Aperte o botão amarelo.'); };
   if ($('pnFala')) $('pnFala').onclick = function () { FAB.fala(m.frase); };
-  var h = '';
+  $('pnPassos').querySelectorAll('[data-passo]').forEach(function (b) { b.onclick = function () { ui.vai(b.dataset.passo); }; });
+  C.querySelectorAll('[data-verped]').forEach(function (b) { b.onclick = function () { var p = FAB.E.pedidos.filter(function (x) { return x.id === b.dataset.verped; })[0]; if (p) { p.visto = true; FAB.salva(); } ui.vai('robo'); }; });
+  C.querySelectorAll('[data-okped]').forEach(function (b) { b.onclick = function () { var p = FAB.E.pedidos.filter(function (x) { return x.id === b.dataset.okped; })[0]; if (p) { p.visto = true; FAB.salva(); } FAB.fala('Oba!'); FAB.T.painel.monta(C); }; });
+  if (pedidosProntos().length && !FAB.T.painel._robo) { FAB.T.painel._robo = true; FAB.fala('Você pediu, o robô fez!'); }
+  var hj = '';
   FAB.E.jogos.forEach(function (j) {
-    h += '<div class="card jg' + (j.id === J.id ? ' on' : '') + '" data-j="' + j.id + '"><canvas class="pix"></canvas><b data-sem-traducao>' + esc(FAB.tr(j.nome)) + '</b><span class="mut">' + FAB.trf('{0} fase(s) · {1} regras', [j.fases.length, j.regras.length]) + '</span>' +
+    hj += '<div class="card jg' + (j.id === J.id ? ' on' : '') + '" data-j="' + j.id + '"><canvas class="pix"></canvas><b data-sem-traducao>' + esc(FAB.tr(j.nome)) + '</b><span class="mut">' + FAB.trf('{0} fase(s) · {1} regras', [j.fases.length, j.regras.length]) + '</span>' +
       (j.id !== J.id ? '<button class="ib" data-apaga="' + j.id + '" title="Apagar jogo" style="align-self:flex-end">' + FAB.ico('lixo', 20) + '</button>' : '') + '</div>';
   });
-  h += '<button class="card jg" id="pnNovo" style="align-items:center;justify-content:center;min-height:150px">' + FAB.ico('mais', 48) + '<b>Jogo novo</b></button>';
-  $('pnJogos').innerHTML = h;
+  hj += '<button class="card jg" id="pnNovo" style="align-items:center;justify-content:center;min-height:150px">' + FAB.ico('mais', 48) + '<b>Jogo novo</b></button>';
+  $('pnJogos').innerHTML = hj;
   $('pnJogos').querySelectorAll('[data-j]').forEach(function (el) {
     var j = FAB.E.jogos.filter(function (x) { return x.id === el.dataset.j; })[0];
     comJogo(j, function () { miniatura(el.querySelector('canvas'), j); });
@@ -74,14 +128,36 @@ FAB.T.painel = { nome: 'Fábrica de Jogos', ajuda: 'Aqui você cria jogos. Apert
       return { id: k, nome: FAB.MODELOS[k].nome, sub: FAB.MODELOS[k].descricao, ico: FAB.ico(k === 'quebrado' ? 'lupa' : k === 'vazio' ? 'mais' : k === 'castelo' ? 'cadeado' : 'play', 40) };
     }), function (k) { FAB.novoJogo(k); ui.nav(); ui.vai(k === 'quebrado' ? 'testar' : 'painel'); });
   };
-  $('pnMic').onclick = function () {
-    if (ui.micLigado()) { try { localStorage.removeItem('fab_mic'); } catch (e) {} FAB.T.painel.monta(C); return; }
-    ui.abre('<h2>Ligar o microfone?</h2><p style="margin-bottom:14px">O ditado do Chrome envia a voz da criança ao Google para virar texto. Ligue só se você concordar.</p><div class="linha"><button class="bt verde" id="micSim">Concordo, ligar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
-    $('micSim').onclick = function () { try { localStorage.setItem('fab_mic', '1'); } catch (e) {} ui.fecha(); FAB.T.painel.monta(C); };
-  };
-  $('pnExp').onclick = function () { FAB.exporta(); ui.toast('Arquivo guardado na pasta Downloads.'); };
-  $('pnImp').onchange = function () { var f = this.files[0]; if (!f) return; FAB.importa(f, function (ok) { if (ok) location.reload(); else ui.toast('Esse arquivo não é da Fábrica.', true); }); };
+  $('pnGuardar').onclick = function () { abreGuardar(C); };
+  if ($('pnGuard')) $('pnGuard').querySelectorAll('[data-g]').forEach(function (el) {
+    var g = G[+el.dataset.g];
+    try { FAB.desenhaMapa(el.querySelector('canvas'), g.v.snap.fases[0], 1, false); } catch (e) {}
+    el.querySelector('[data-abreg]').onclick = function () {
+      ui.abre('<h2>' + FAB.ico('foto', 30) + FAB.tr('Abrir o jogo guardado') + ' "<span data-sem-traducao>' + esc(FAB.tr(g.v.nome)) + '</span>"?</h2><p class="mut" style="margin-bottom:14px">Antes, eu tiro uma foto do jogo de agora. Nada se perde.</p>' +
+        '<div class="linha"><button class="bt verde grande" id="gdAbre">' + FAB.ico('desfazer', 26) + 'Abrir</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
+      $('gdAbre').onclick = function () {
+        FAB.abreJogo(g.jogo.id); var i = g.jogo.versoes.indexOf(g.v); if (i >= 0) FAB.voltaFoto(i);
+        FAB.limpaCache(); ui.fecha(); ui.nav(); ui.vai('painel'); ui.toast('Pronto! O jogo voltou.', true);
+      };
+    };
+  });
+  $('pnOpcoes').onclick = function () { ui.vai('jeito'); setTimeout(function () { var a = $('jtPapai'); if (a) a.scrollIntoView({ block: 'start' }); }, 80); };
 } };
+/* "Guardar este jogo": uma foto com o nome que ela escolhe */
+function abreGuardar(C) {
+  var J = FAB.jogo();
+  ui.abre('<h2><button class="falar" id="gdFala">' + FAB.ico('falar', 22) + '</button>' + FAB.ico('foto', 30) + 'Guardar este jogo</h2>' +
+    '<p class="mut" style="margin-bottom:10px">Dê um nome para lembrar depois.</p>' + ui.campo('gdNome', 'Nome do jogo guardado') +
+    '<div class="linha" style="margin-top:14px"><button class="bt verde grande" id="gdOk">' + FAB.ico('foto', 28) + 'Guardar</button><button class="bt" onclick="FAB.ui.fecha()">Agora não</button></div>');
+  ui.ligaMic($('mbox'));
+  $('gdNome').value = FAB.tr(J.nome);
+  $('gdFala').onclick = function () { FAB.fala('Dê um nome para lembrar depois.'); };
+  $('gdOk').onclick = function () {
+    FAB.guardaJogo($('gdNome').value); FAB.motor.toca('magia'); ui.fecha();
+    ui.toast('Jogo guardado!', true); if (C) FAB.T.painel.monta(C);
+  };
+}
+FAB.abreGuardar = abreGuardar;
 
 /* ============================ IDEIA ============================ */
 function chips(id, ops, val) { return '<div class="escolhas" id="' + id + '">' + ops.map(function (o) { return '<button class="esc' + (val === o ? ' on' : '') + '" data-v="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') + '</div>'; }
@@ -173,12 +249,20 @@ function fimTeste(C, R, convidado) {
     '<div class="nums"><div>' + R.pontos + '<small>pontos</small></div><div>' + R.segundos + 's<small>tempo</small></div><div>' + R.vidasPerdidas + '<small>vidas perdidas</small></div></div>' +
     (convidado ? '<p class="mut">Mostre para a criadora onde foi difícil.</p>' :
       '<p class="mut">' + FAB.trf('{0} regras acordaram. Ficou do jeito que você queria?', [acordaram]) + '</p><div class="caras">' +
-      ['feliz', 'meio', 'triste'].map(function (k) { return '<button class="cara" data-c="' + k + '" title="' + FALA_CARA[k] + '">' + FAB.ico('cara_' + k, 56) + '</button>'; }).join('') + '</div><div id="tsMudar"></div>') +
+      ['feliz', 'meio', 'triste'].map(function (k) { return '<button class="cara" data-c="' + k + '" title="' + FALA_CARA[k] + '">' + FAB.ico('cara_' + k, 56) + '</button>'; }).join('') + '</div><div id="tsMudar"></div>' +
+      '<div class="desejos"><p class="mut"><button class="falar mini" id="tsDesFala" title="Ouvir">' + FAB.ico('falar', 18) + '</button>Queria que tivesse…</p><div class="dsj" id="tsDesejos">' +
+      DESEJOS.map(function (d) { return '<button class="dsj-b" data-d="' + d[0] + '" title="' + d[1] + '">' + FAB.ico(d[2], 34) + '<span>' + d[1] + '</span></button>'; }).join('') + '</div></div>') +
     '<div class="linha" style="justify-content:center;margin-top:10px"><button class="bt verde grande" id="tsDeNovo">' + FAB.ico('play', 28) + 'De novo</button>' +
     (convidado ? '' : '<button class="bt" id="tsRegras">' + FAB.ico('t_regras', 22) + 'Regras</button><button class="bt" id="tsFases">' + FAB.ico('t_fases', 22) + 'Fases</button>') + '</div></div>';
   sobre.classList.add('on');
   FAB.fala([R.venceu ? 'Ganhou!' : 'Fim do teste.', R.pontos === 1 ? 'Um ponto.' : R.pontos + ' pontos.']);
   $('tsDeNovo').onclick = function () { rodaJogo(C, convidado); };
+  if ($('tsDesejos')) {
+    $('tsDesFala').onclick = function () { FAB.fala('Queria que tivesse… Toque numa figura.'); };
+    $('tsDesejos').querySelectorAll('[data-d]').forEach(function (b) {
+      b.onclick = function () { if (b.classList.contains('on')) return; b.classList.add('on'); FAB.desejo(b.dataset.d); FAB.fala('Anotado! O papai vai ver.'); };
+    });
+  }
   if ($('tsRegras')) { $('tsRegras').onclick = function () { ui.vai('regras'); }; $('tsFases').onclick = function () { ui.vai('fases'); }; }
   sobre.querySelectorAll('.cara').forEach(function (b) {
     b.onclick = function () {
@@ -246,7 +330,7 @@ function telaCheia() {
 /* ============================ DIÁRIO ============================ */
 FAB.T.diario = { nome: 'Diário', ajuda: 'Veja como foram os testes e tire fotos do jogo.', monta: function (C) {
   var J = FAB.jogo();
-  var h = '<div class="linha" style="margin-bottom:14px"><button class="bt amarelo" id="dgFoto">' + FAB.ico('foto', 24) + 'Tirar foto do jogo</button><span class="mut">A foto guarda o jogo como está agora. Dá para voltar depois.</span></div>';
+  var h = '<div class="linha" style="margin-bottom:14px"><button class="bt verde" id="dgFoto">' + FAB.ico('foto', 24) + 'Tirar foto do jogo</button><span class="mut">A foto guarda o jogo como está agora. Dá para voltar depois.</span></div>';
   if (J.versoes.length) {
     h += '<div class="tit">' + FAB.ico('foto', 26) + 'Fotos do jogo</div><div class="grade fotos" style="margin-bottom:20px">';
     J.versoes.forEach(function (v, i) { h += '<div class="card jg"><canvas class="pix" data-v="' + i + '"></canvas><b>' + esc(FAB.tr(v.nome)) + '</b><span class="mut">' + quando(v.data) + '</span><button class="bt cinza" data-volta="' + i + '">Voltar para esta</button></div>'; });
@@ -311,23 +395,37 @@ FAB.T.robo = { nome: 'Robô', ajuda: 'Peça uma peça nova ao robô: o que é, c
 } };
 
 /* ============================ MISSÕES ============================ */
-FAB.T.missoes = { nome: 'Missões', ajuda: 'Escolha uma missão. Pode fazer na ordem que quiser.', monta: function (C) {
-  var prox = FAB.proximaMissao(), h = '<div class="trilha">';
-  FAB.MISSOES.forEach(function (m, i) {
-    var feita = !!FAB.E.missoes[m.id], Cc = FAB.CONCEITOS[m.conceito] || {};
-    h += '<button class="card ms' + (feita ? ' feita' : '') + (prox === m ? ' prox' : '') + '" data-m="' + i + '"><span class="num">' + (feita ? '★' : i + 1) + '</span><span><span class="fr">' + esc(m.frase) + '</span><br><span class="mut">' + esc(FAB.tr(Cc.nome || '')) + ' · ' + m.xp + ' XP</span></span></button>';
-  });
-  h += '</div><div class="tit" style="margin-top:24px">' + FAB.ico('t_ideia', 28) + 'Cartas do saber</div><div class="grade cartas">';
+FAB.T.missoes = { nome: 'Missões', ajuda: 'Faça a missão de agora. As outras esperam.', monta: function (C) {
+  var prox = FAB.proximaMissao(), resto = FAB.MISSOES.filter(function (m) { return !FAB.E.missoes[m.id] && m !== prox; });
+  function card(m, cls) {
+    var i = FAB.MISSOES.indexOf(m), Cc = FAB.CONCEITOS[m.conceito] || {}, feita = !!FAB.E.missoes[m.id];
+    return '<button class="card ms' + (feita ? ' feita' : '') + (cls ? ' ' + cls : '') + '" data-m="' + i + '"><span class="num">' + (feita ? FAB.ico('estrelinha', 24) : i + 1) + '</span><span><span class="fr">' + esc(m.frase) + '</span><br><span class="mut">' + esc(FAB.tr(Cc.nome || '')) + ' · ' + m.xp + ' XP</span></span></button>';
+  }
+  var h = '';
+  if (prox) {
+    var c = FAB.guia ? FAB.guia.progresso(prox) : null;
+    h += '<div class="ms-agora-wrap"><div><div class="tit">' + FAB.ico('t_missoes', 28) + 'Agora</div>' +
+      '<div class="card ms-agora" data-m="' + FAB.MISSOES.indexOf(prox) + '"><div class="linha"><button class="falar" id="msFala" title="Ouvir">' + FAB.ico('falar', 22) + '</button><b>' + FAB.trf('Missão {0} de {1}', [FAB.MISSOES.indexOf(prox) + 1, FAB.MISSOES.length]) + '</b></div>' +
+      '<p class="fr">' + esc(prox.frase) + '</p>' + (c ? '<p class="tr-cont">' + FAB.trf('{0} de {1}', [c[0], c[1]]) + '</p>' : '') +
+      '<button class="bt verde grande" id="msAgora">' + FAB.ico('play', 28) + 'Ir</button></div></div>' +
+      '<div><div class="tit">' + FAB.ico('relogio', 26) + 'Depois</div><div class="ms-depois">' + resto.slice(0, 2).map(function (m) { return card(m, 'peq'); }).join('') + '</div></div></div>';
+  } else h += '<div class="card"><div class="fr">Você fez todas as missões! Agora invente o que quiser.</div></div>';
+  h += '<details class="ms-todas"><summary>' + FAB.ico('s_baixo', 20) + 'Ver todas as missões</summary><div class="trilha">' + FAB.MISSOES.map(function (m) { return card(m, prox === m ? 'prox' : ''); }).join('') + '</div>' +
+    '<div class="tit" style="margin-top:24px">' + FAB.ico('t_ideia', 28) + 'Cartas do saber</div><div class="grade cartas">';
   Object.keys(FAB.CONCEITOS).forEach(function (k) {
-    var c = FAB.CONCEITOS[k], tem = FAB.MISSOES.some(function (m) { return m.conceito === k && FAB.E.missoes[m.id]; });
-    h += '<div class="card carta" style="' + (tem ? '' : 'opacity:.55') + '">' + FAB.ico(c.icone, 40) + '<b>' + esc(c.nome) + '</b><span>' + esc(c.frase) + '</span><small>' + esc(c.exemplo) + '</small></div>';
+    var cc = FAB.CONCEITOS[k], tem = FAB.MISSOES.some(function (m) { return m.conceito === k && FAB.E.missoes[m.id]; });
+    h += '<div class="card carta" style="' + (tem ? '' : 'opacity:.55') + '">' + FAB.ico(cc.icone, 40) + '<b>' + esc(cc.nome) + '</b><span>' + esc(cc.frase) + '</span><small>' + esc(cc.exemplo) + '</small></div>';
   });
-  C.innerHTML = h + '</div>';
-  C.querySelectorAll('[data-m]').forEach(function (b) {
+  C.innerHTML = h + '</div></details>';
+  if (prox) {
+    $('msFala').onclick = function (ev) { ev.stopPropagation(); FAB.fala(prox.frase); };
+    $('msAgora').onclick = function (ev) { ev.stopPropagation(); FAB.fala(prox.frase); FAB.guia.vaiMissao(prox); };
+  }
+  C.querySelectorAll('button[data-m]').forEach(function (b) {
     b.onclick = function () {
       var m = FAB.MISSOES[+b.dataset.m]; FAB.fala(m.frase);
-      ui.abre('<h2>' + FAB.ico('t_missoes', 32) + FAB.trf('Missão {0}', [+b.dataset.m + 1]) + '</h2><p class="perg">' + esc(m.frase) + '</p><button class="bt amarelo grande" id="msIr">Ir</button>');
-      $('msIr').onclick = function () { ui.fecha(); if (m.abre) { abreModelo(m.abre); ui.nav(); } ui.vai(m.onde); };
+      ui.abre('<h2>' + FAB.ico('t_missoes', 32) + FAB.trf('Missão {0}', [+b.dataset.m + 1]) + '</h2><p class="perg">' + esc(m.frase) + '</p><button class="bt verde grande" id="msIr">' + FAB.ico('play', 28) + 'Ir</button>');
+      $('msIr').onclick = function () { ui.fecha(); FAB.guia.vaiMissao(m); };
     };
   });
 } };
@@ -388,7 +486,10 @@ function parte() {
   /* nuvem da família: trouxe trabalho de outro computador? / olha se tem coisa mais nova */
   try { if (localStorage.getItem('fab_veio_da_nuvem')) { localStorage.removeItem('fab_veio_da_nuvem'); setTimeout(function () { ui.toast('Trouxe o trabalho da nuvem da família.'); }, 600); } } catch (e) {}
   if (FAB.nuvem) FAB.nuvem.puxa();
-  var t = 'painel'; try { t = localStorage.getItem('fab_tela') || 'painel'; } catch (e) {}
+  /* abrir a Fábrica = Início ("Você parou em…" + Continuar). Recarregar (trocar idioma, nuvem) volta à mesma tela */
+  var t = 'painel', recarga = false;
+  try { recarga = performance.getEntriesByType('navigation')[0].type === 'reload'; } catch (e) {}
+  if (recarga) { try { t = localStorage.getItem('fab_tela') || 'painel'; } catch (e) {} }
   if (t === 'testar' || t === 'jogar') t = 'painel';
   ui.vai(FAB.T[t] ? t : 'painel');
 }

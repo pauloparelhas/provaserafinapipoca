@@ -27,7 +27,11 @@ with sync_playwright() as p:
             pg.evaluate("document.querySelectorAll('.falar').forEach(b => b.click())")
             if t == 'fases': pg.evaluate("document.querySelectorAll('.peca').forEach(b => b.click())")
             if t == 'testar': pg.wait_for_timeout(600); pg.evaluate("FAB.motor.termina()"); pg.wait_for_timeout(300); pg.evaluate("var c=document.querySelector('.cara'); c && c.click()")
+            if t == 'testar': pg.evaluate("document.querySelectorAll('#tsDesejos [data-d], .falar').forEach(b => b.click())")
+            if t == 'painel': pg.evaluate("FAB.ui.toqueSelo(); FAB.estadoSalvo='erro'; FAB.ui.toqueSelo(); FAB.estadoSalvo='salvo'; FAB.abreGuardar(); document.querySelectorAll('#mbox .falar').forEach(b => b.click()); FAB.ui.fecha(); FAB.ui.vai('painel')")
             pg.evaluate("FAB.ui._preso=false; FAB.ui.fecha()")
+        pg.evaluate("FAB.ui.vai('fases'); FAB.ui.vai('painel'); document.querySelectorAll('.falar').forEach(b => b.click())")   # "Você parou em…"
+        pg.evaluate("FAB.E.pedidos.push({id:'pVoz',tipo:'inimigo',como:'roxo',faz:'voa',estado:'pronto'}); FAB.T.painel._robo=false; FAB.ui.vai('painel')")
         pg.evaluate("FAB.MISSOES.forEach(m => FAB.fala(m.frase)); FAB.ui.trocaVoz(); FAB.ui.trocaVoz(); FAB.ui.medalha(FAB.MISSOES[0])")
         pg.evaluate("FAB.perguntasDaProva().slice(0, 40).forEach(q => { FAB.fala([q.p].concat(q.o)); FAB.fala(['Acertou!', q.ex]); })")
         falta = pg.evaluate("FAB.semAudio")

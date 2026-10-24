@@ -1,6 +1,7 @@
 /* ============================================================
    motor.js — o MOTOR que roda o jogo da Mariana
-   Plataforma 2D em pixel art. Mapa de 12 linhas, casinha de 16 px.
+   Plataforma 2D em pixel art. Casinha de 16 px; mapa de 12 a 48
+   linhas (a janela mostra 12; em mapa alto a câmera sobe e desce).
    O motor sabe FÍSICA (chão, pulo, nuvem, gelo, água, inimigos);
    o que acontece quando o herói toca em algo vem das REGRAS dela.
 
@@ -9,6 +10,10 @@
         onHud(S), onLog(txt, idRegra, tipo), onFim(resumo),
         onPergunta(q, responde(certo)), onFase(nome)})
      FAB.motor.para() · pausa(bool) · tecla(nome, apertada) · lupa(bool)
+     FAB.motor.botoesExtras(palco)  põe o botão ▼ na mesa de toques
+   Mundo (v3): cipó/escada (▲ sobe, ▼ desce), cano em par (▼ em cima),
+   água como casinha de grade, fôlego nas fases de nadar, poderes
+   (pulo duplo, grudar na parede, pequenino de verdade) e o cavalo.
    ============================================================ */
 (function () {
 'use strict';
@@ -17,6 +22,8 @@ var GRAV = 900, PULO = 330, SUPER = 480, VEL = 90, MAXQ = 420;
 
 var M = {}, cv, cx, J, O, W, H, S, heroi, ents, parts, cam, raf, tAnt, pausado, rodando, LUPA;
 var geracao = 0, teclas = {}, tPulo = 0, tChao = 0, relogios = {}, pontosDisp = {}, falaB = null, treme = 0;
+var ALT = LINHAS;                 /* altura do mapa da fase (12 a 48 linhas) */
+var aguaDentro = {}, canos = [], corpoPeq = false, topoOk = true, tCano = 0, folegoTrava = false, avisoAr = false;
 var letraTipo = {};
 function montaLetras() { letraTipo = {}; Object.keys(FAB.TIPOS).forEach(function (t) { letraTipo[FAB.TIPOS[t].letra] = t; }); }
 
@@ -51,11 +58,23 @@ M.toca = toca;
 
 /* ---------------- montar a fase ---------------- */
 var grade;
-function tipoEm(tx, ty) { if (ty < 0 || ty >= LINHAS) return null; var L = grade[ty]; if (!L || tx < 0 || tx >= L.length) return null; return letraTipo[L[tx]] || null; }
+function tipoEm(tx, ty) { if (ty < 0 || ty >= ALT) return null; var L = grade[ty]; if (!L || tx < 0 || tx >= L.length) return null; return letraTipo[L[tx]] || null; }
 function solidoTile(tx, ty) {
   if (tx < 0 || tx >= W) return true;            /* paredes invisíveis nas pontas */
-  if (ty < 0 || ty >= LINHAS) return false;
-  var t = tipoEm(tx, ty); return !!(t && FAB.TIPOS[t].classe === 'solido');
+  if (ty < 0 || ty >= ALT) return false;
+  var t = tipoEm(tx, ty); if (!t) return false; var T = FAB.TIPOS[t];
+  if (T.classe !== 'solido') return false;
+  return !(T.rato && corpoPeq);                  /* portinha de rato: só o herói pequenino passa */
+}
+function classeTile(tx, ty) { var t = tipoEm(tx, ty); return t ? FAB.TIPOS[t].classe : null; }
+function aguaTile(tx, ty) { return classeTile(tx, ty) === 'agua'; }
+function escadaTile(tx, ty) { return classeTile(tx, ty) === 'escada'; }
+/* topo do cipó/escada: dá para ficar em pé em cima (como nuvem), menos quando está descendo */
+function topoEscada(tx, ty) { return escadaTile(tx, ty) && !escadaTile(tx, ty - 1); }
+function aguaNaCaixa(b) {
+  var x0 = Math.floor(b.x / TS), x1 = Math.floor((b.x + b.w - .01) / TS), y0 = Math.floor(b.y / TS), y1 = Math.floor((b.y + b.h - .01) / TS);
+  for (var ty = y0; ty <= y1; ty++) for (var tx = x0; tx <= x1; tx++) if (aguaTile(tx, ty)) return true;
+  return false;
 }
 function nuvemTile(tx, ty) { var t = tipoEm(tx, ty); return !!(t && FAB.TIPOS[t].classe === 'nuvem'); }
 function geloTile(tx, ty) { var t = tipoEm(tx, ty); return !!(t && FAB.TIPOS[t].escorrega); }
@@ -71,31 +90,62 @@ function novaEnt(tipo, x, y) {
     if (T.mover === 'voa' || T.mover === 'flutua') { e.oy = 2; e.h = 11; }
     if (tipo === 'fantasma') { e.oy = 1; e.h = 14; }
   }
+  if (T.mover === 'nada') { e.oy = 4; e.h = 9; }
   if (tipo === 'porta') e.solido = true;
+  if (T.classe === 'montaria') { e.x0 = x; e.y0 = y; e.ox = 1; e.oy = 2; e.w = 14; e.h = 14; }
   return e;
+}
+/* fase de nadar: peça desenhada no meio da água fica dentro da água (a casinha dela vira água por trás) */
+function molhaPecas(F) {
+  if (!F.nada) return;
+  for (var y = 1; y < ALT; y++) {
+    var L = grade[y], nova = '';
+    for (var x = 0; x < W; x++) {
+      var ch = L[x] || '.', t = letraTipo[ch], cl = t && FAB.TIPOS[t].classe;
+      var vira = t && cl !== 'solido' && cl !== 'nuvem' && cl !== 'agua' && cl !== 'escada' && cl !== 'inicio' &&
+        (aguaTile(x, y - 1) || (aguaTile(x - 1, y) && aguaTile(x + 1, y)));
+      nova += vira ? '~' : ch;
+    }
+    grade[y] = nova;
+  }
 }
 function carregaFase(i) {
   var F = J.fases[i]; S.fase = i; S.faseMax = Math.max(S.faseMax, i + 1);
   grade = F.mapa.slice(); W = 0; grade.forEach(function (l) { W = Math.max(W, l.length); });
-  ents = []; parts = []; relogios = {}; pontosDisp = {};
+  ALT = Math.max(LINHAS, grade.length);
+  for (var g = 0; g < ALT; g++) grade[g] = grade[g] || '';
+  ents = []; parts = []; relogios = {}; pontosDisp = {}; aguaDentro = {}; canos = []; tCano = 0; folegoTrava = false; avisoAr = false;
+  /* água e cipó/escada ficam na GRADE (como o chão); o resto vira peça viva */
+  var orig = grade.slice();
+  molhaPecas(F);
   var ini = null;
-  for (var y = 0; y < LINHAS; y++) {
-    var L = grade[y] || '', nova = '';
+  for (var y = 0; y < ALT; y++) {
+    var L = orig[y] || '', G = grade[y], nova = '';
     for (var x = 0; x < W; x++) {
-      var ch = L[x] || '.', t = letraTipo[ch];
-      if (t && FAB.TIPOS[t].classe !== 'solido' && FAB.TIPOS[t].classe !== 'nuvem') {
+      var ch = L[x] || '.', t = letraTipo[ch], cl = t && FAB.TIPOS[t].classe;
+      if (t && cl !== 'solido' && cl !== 'nuvem' && cl !== 'agua' && cl !== 'escada') {
         if (t === 'inicio') ini = { x: x * TS, y: y * TS };
         else ents.push(novaEnt(t, x * TS, y * TS));
-        nova += '.';
+        nova += G[x] === '~' ? '~' : '.';
       } else nova += ch;
     }
     grade[y] = nova;
   }
+  /* canos em par: a boca de cada cano (o de cima da pilha), na ordem de leitura; 1º com 2º, 3º com 4º */
+  for (var cy = 0; cy < ALT; cy++) for (var cx2 = 0; cx2 < W; cx2++) {
+    var tc = tipoEm(cx2, cy); if (!tc || !FAB.TIPOS[tc].cano) continue;
+    var tc0 = tipoEm(cx2, cy - 1); if (tc0 && FAB.TIPOS[tc0].cano) continue;
+    canos.push({ tx: cx2, ty: cy, par: null });
+  }
+  for (var k = 0; k + 1 < canos.length; k += 2) { canos[k].par = canos[k + 1]; canos[k + 1].par = canos[k]; }
   if (!ini) ini = { x: TS, y: 0 };
-  heroi = { x: ini.x + 3, y: ini.y + 2, w: 10, h: 14, vx: 0, vy: 0, noChao: false, dir: 1, q: 0, tq: 0, inv: 0, rapido: 0, naAgua: false, pulaAlto: 0, tam: 1, tTam: 0 };
+  heroi = { x: ini.x + 3, y: ini.y + 2, w: 10, h: 14, vx: 0, vy: 0, noChao: false, dir: 1, q: 0, tq: 0, inv: 0, rapido: 0, naAgua: false, pulaAlto: 0, tam: 1, tTam: 0,
+    escada: false, pod: {}, mont: null, pulosAr: 0, lockX: 0, grudado: 0, peq: false };
   S.cenario = null;
   S.controle = { x: heroi.x, y: heroi.y };
+  S.nada = !!F.nada; S.folegoMax = J.ajustes.folego || 30; S.folego = S.folegoMax;
   cam = { x: 0, y: 0 };
+  encaixaY();
   S.tempoFase = J.ajustes.tempo || 0; S.tempoRest = S.tempoFase;
   O.onFase && O.onFase(F.nome || ('Fase ' + (i + 1)), i);
   dispara('comeca', {});
@@ -113,12 +163,16 @@ function condicao(se) {
   if (se.t === 'naotem') return !(S.mochila[se.obj] || 0);
   if (se.t === 'pontosMin') return S.pontos >= (se.n || 0);
   if (se.t === 'sorte') return Math.random() < .5;
+  if (se.t === 'tempoder') return !!(heroi.pod && heroi.pod[se.v]);
+  if (se.t === 'montada') return !!heroi.mont;
+  if (se.t === 'naomontada') return !heroi.mont;
   return true;
 }
+function nomeOpcao(v) { var N = FAB.NOME_OPCAO && FAB.NOME_OPCAO[v]; return N ? ' ' + FAB.tr(N) : ' "' + FAB.tr(v) + '"'; }
 function nomeAcao(a) {
   var B = FAB.FACA[a.t]; if (!B) return a.t;
   var p = a.n !== undefined ? ((a.n > 0 ? '+' : '') + a.n + ' ') : '';
-  var o = a.obj ? ' ' + FAB.tr(FAB.nomeTipo(a.obj)) : (a.v ? ' "' + FAB.tr(a.v) + '"' : '');
+  var o = a.obj ? ' ' + FAB.tr(FAB.nomeTipo(a.obj)) : (a.v ? nomeOpcao(a.v) : '');
   return p + FAB.tr(B.nome) + o;
 }
 function dispara(ev, ctx) {
@@ -130,7 +184,7 @@ function dispara(ev, ctx) {
     if (ev === 'tecla' && q.tecla !== ctx.tecla) return;
     if (ev === 'cada' && r.id !== ctx.id) return;
     if (ev === 'pontos' && r.id !== ctx.id) return;
-    if (!condicao(r.se)) { log(FAB.trf('Regra {0}: o cadeado não abriu ({1})', [i + 1, FAB.tr(FAB.SE[r.se.t].nome) + (r.se.obj ? ' ' + FAB.tr(FAB.nomeTipo(r.se.obj)) : '')]), r.id, 'cadeado'); return; }
+    if (!condicao(r.se)) { log(FAB.trf('Regra {0}: o cadeado não abriu ({1})', [i + 1, FAB.tr(FAB.SE[r.se.t].nome) + (r.se.obj ? ' ' + FAB.tr(FAB.nomeTipo(r.se.obj)) : (r.se.v ? nomeOpcao(r.se.v) : ''))]), r.id, 'cadeado'); return; }
     algum = true;
     S.disparos[r.id] = (S.disparos[r.id] || 0) + 1;
     log(FAB.trf('Regra {0} acordou → {1}', [i + 1, r.faca.map(nomeAcao).join(', ')]), r.id, 'ok');
@@ -163,11 +217,11 @@ function faz(a, ctx) {
       if (S.vidas > 0) S.semVidas = false;
       if (S.vidas <= 0 && !S.semVidas) { S.semVidas = true; S.vidas = 0; (function (g0) { setTimeout(function () { if (g0 === geracao && !dispara('vidas0', {})) fim(false); }, 0); })(geracao); }
       break;
-    case 'some': if (e && e.vivo) { e.vivo = false; poeira(e.x + 8, e.y + 8, '#fee761'); if (e.tipo === 'porta') S.portas++; if (e.tipo === 'moeda') S.moedas++; if (e.tipo === 'cristal') S.cristais++; } break;
-    case 'guarda': if (e && e.vivo) { S.mochila[e.tipo] = (S.mochila[e.tipo] || 0) + 1; e.vivo = false; poeira(e.x + 8, e.y + 8, '#2ce8f5'); if (e.tipo === 'moeda') S.moedas++; if (e.tipo === 'cristal') S.cristais++; } break;
+    case 'some': if (e && e.vivo) { e.vivo = false; tiraDaGrade(e); poeira(e.x + 8, e.y + 8, '#fee761'); if (e.tipo === 'porta') S.portas++; if (e.tipo === 'moeda') S.moedas++; if (e.tipo === 'cristal') S.cristais++; } break;
+    case 'guarda': if (e && e.vivo) { S.mochila[e.tipo] = (S.mochila[e.tipo] || 0) + 1; e.vivo = false; tiraDaGrade(e); poeira(e.x + 8, e.y + 8, '#2ce8f5'); if (e.tipo === 'moeda') S.moedas++; if (e.tipo === 'cristal') S.cristais++; } break;
     case 'gasta': if (S.mochila[a.obj]) S.mochila[a.obj]--; break;
     case 'pulo': heroi.vy = -SUPER; heroi.noChao = false; break;
-    case 'volta': heroi.x = S.controle.x; heroi.y = S.controle.y; heroi.vx = heroi.vy = 0; break;
+    case 'volta': heroi.x = S.controle.x; heroi.y = S.controle.y; heroi.vx = heroi.vy = 0; heroi.escada = false; S.folego = S.folegoMax; folegoTrava = false; avisoAr = false; encaixaY(); break;
     case 'marca': if (e) { S.controle = { x: e.x + 3, y: e.y + 2 }; e.ativo = true; } else S.controle = { x: heroi.x, y: heroi.y }; break;
     case 'ganha': if (!S.ganhando) { S.ganhando = true; var g0 = geracao; setTimeout(function () { if (g0 === geracao) ganhaFase(); }, 0); } break;
     case 'perde': (function (g0) { setTimeout(function () { if (g0 === geracao) fim(false); }, 0); })(geracao); break;
@@ -182,11 +236,51 @@ function faz(a, ctx) {
     case 'pulaalto': heroi.pulaAlto = 8; poeira(heroi.x + 5, heroi.y + heroi.h, '#63c74d'); break;
     case 'gigante': heroi.tam = 1.6; heroi.tTam = 6; poeira(heroi.x + 5, heroi.y + 4, '#fee761'); break;
     case 'pequeno': heroi.tam = .6; heroi.tTam = 6; poeira(heroi.x + 5, heroi.y + 8, '#ff9ad5'); break;
+    /* mundo (v3) */
+    case 'folego': S.folego = Math.min(S.folegoMax, S.folego + (a.n || 0)); if (S.folego > 0) folegoTrava = false; if (S.folego > S.folegoMax * .25) avisoAr = false; if (e) solta(e.x + 8, e.y, '+' + (a.n || 0)); break;
+    case 'ligar': ligaPoder(a.v); break;
+    case 'desligar': if (heroi.pod[a.v]) { delete heroi.pod[a.v]; acabouPoder(a.v); } break;
+    case 'montar': if (e && e.vivo && e.classe === 'montaria' && !heroi.mont) { e.vivo = false; heroi.mont = { tipo: e.tipo, ent: e }; heroi.escada = false; poeira(heroi.x + 5, heroi.y + heroi.h, '#b86f50'); } break;
+    case 'desmontar': desmonta(); break;
+    case 'iraoutro': vaiPeloCano(a.v, ctx); break;
     case 'cenario': {
       var lista = Object.keys(FAB.CENARIOS), agora = S.cenario || J.fases[S.fase].cenario;
       S.cenario = lista[(lista.indexOf(agora) + 1) % lista.length]; break; }
   }
   hud();
+}
+
+/* casinha da grade (água) que a regra mandou sumir */
+function tiraDaGrade(e) { if (!e.grade) return; var L = grade[e.grade[1]]; grade[e.grade[1]] = L.slice(0, e.grade[0]) + '.' + L.slice(e.grade[0] + 1); }
+
+/* ---------------- poderes, cavalo e cano (mundo v3) ---------------- */
+function ligaPoder(v) {
+  var p = String(v || '').split(':'), nome = p[0]; if (!nome) return;
+  heroi.pod[nome] = p[1] === 'fim' || !p[1] ? Infinity : (+p[1] || 10);
+  poeira(heroi.x + heroi.w / 2, heroi.y + 4, '#8b5cf6');
+}
+function acabouPoder(nome) { dispara('poderacaba', { poder: nome }); }
+function desmonta() {
+  var m = heroi.mont; if (!m) return;
+  heroi.mont = null; heroi.inv = Math.max(heroi.inv, 1.3);
+  poeira(heroi.x + 5, heroi.y + heroi.h, '#b86f50');
+  var e = m.ent; e.x = e.x0; e.y = e.y0; e.vivo = true; e.dentro = cruza(caixa(heroi), caixa(e));
+  if (ents.indexOf(e) < 0) ents.push(e);
+}
+function encaixaY() {   /* câmera de cima a baixo encaixa no herói (nascer, voltar, cano) */
+  if (!cam || !heroi) return;
+  cam.y = ALT > LINHAS ? Math.max(0, Math.min(heroi.y + heroi.h / 2 - VH / 2, ALT * TS - VH)) : 0;
+}
+function vaiPeloCano(dest, ctx) {
+  if (dest === 'proxima') { if (!S.ganhando) { S.ganhando = true; var g0 = geracao; setTimeout(function () { if (g0 === geracao) ganhaFase(); }, 0); } return; }
+  var c = ctx.cano;
+  if (!c || !c.par) { log('Este cano não tem par: ponha outro cano na fase', null, 'cadeado'); return; }
+  var p = c.par, h = heroi;
+  h.x = p.tx * TS + 8 - h.w / 2; h.y = p.ty * TS - h.h; h.vx = h.vy = 0; h.escada = false;
+  for (var k = 0; k < 6 && bate(h.x, h.y, h.w, h.h); k++) h.y -= TS;   /* chegou embaixo de um teto: sobe até caber */
+  tCano = .5; poeira(h.x + h.w / 2, h.y + h.h, '#63c74d');
+  if (cv) cam.x = Math.max(0, Math.min(h.x + 5 - cv.width / 2, W * TS - cv.width));
+  encaixaY();
 }
 
 /* ---------------- Placa ? ---------------- */
@@ -211,7 +305,7 @@ function cria(tipo) {
   if (!FAB.TIPOS[tipo] || ents.filter(function (e) { return e.criada && e.vivo; }).length > 25) return;
   var vw = cv.width;
   for (var k = 0; k < 20; k++) {
-    var tx = Math.floor((cam.x + 16 + Math.random() * (vw - 32)) / TS), ty = 1 + Math.floor(Math.random() * 5);
+    var tx = Math.floor((cam.x + 16 + Math.random() * (vw - 32)) / TS), ty = Math.floor(cam.y / TS) + 1 + Math.floor(Math.random() * 5);
     if (!solidoTile(tx, ty)) { var e = novaEnt(tipo, tx * TS, ty * TS); e.criada = true; ents.push(e); poeira(tx * TS + 8, ty * TS + 8, '#ffffff'); return; }
   }
 }
@@ -264,18 +358,64 @@ function move(o, dt, nuvens) {
     if (nuvens && o.vy > 0) {
       var pe0 = o.y + by + o.h, pe1 = ny + by + o.h, ty = Math.floor(pe1 / TS);
       var x0 = Math.floor((o.x + bx) / TS), x1 = Math.floor((o.x + bx + o.w - .01) / TS);
-      for (var tx = x0; tx <= x1; tx++) if (nuvemTile(tx, ty) && pe0 <= ty * TS + .5) { o.y = ty * TS - o.h - by; o.vy = 0; r.chao = true; return r; }
+      for (var tx = x0; tx <= x1; tx++) if ((nuvemTile(tx, ty) || (topoOk && topoEscada(tx, ty))) && pe0 <= ty * TS + .5) { o.y = ty * TS - o.h - by; o.vy = 0; r.chao = true; return r; }
     }
     o.y = ny;
   }
   return r;
 }
 
+/* corpo do herói: muda a caixa mantendo os pés e o meio no lugar; só se couber */
+function setaCaixa(w, hh) {
+  var h = heroi, nx = h.x + h.w / 2 - w / 2, ny = h.y + h.h - hh, antes = corpoPeq;
+  corpoPeq = w < 10; var cabe = !bate(nx, ny, w, hh); corpoPeq = antes;
+  if (!cabe) return false;
+  h.x = nx; h.y = ny; h.w = w; h.h = hh; return true;
+}
+/* cipó e escada: ▲ segurado sobe, ▼ desce, seta para o lado sai; devolve true se o herói está nela */
+function passoEscada(h, dt, esq, dir) {
+  var cx0 = Math.floor((h.x + h.w / 2) / TS), cy0 = Math.floor((h.y + h.h / 2) / TS), pe = Math.floor((h.y + h.h - 1) / TS), sob = Math.floor((h.y + h.h + 1) / TS);
+  var aqui = escadaTile(cx0, cy0) || escadaTile(cx0, pe);
+  if (!h.escada) {
+    if (h.mont) return false;
+    var sobe = teclas.segura && aqui, desce = teclas.baixo && (aqui || (h.noChao && escadaTile(cx0, sob)));
+    if (!sobe && !desce) return false;
+    h.escada = true; tPulo = 0; h.vx = 0; h.vy = 0; h.pulosAr = 0; h.grudado = 0;
+    var nx = cx0 * TS + 8 - h.w / 2; if (!bate(nx, h.y, h.w, h.h)) h.x = nx;   /* encaixa no meio do cipó */
+  }
+  if (tPulo > 0 && (esq || dir)) {   /* pular para fora, de lado */
+    h.escada = false; h.vy = -PULO * .8; tPulo = 0; tChao = 0; S.pulos++; toca('pulo'); return false;
+  }
+  tPulo = 0;
+  var vy = teclas.segura ? -60 : teclas.baixo ? 60 : 0;
+  h.vy = vy; h.vx = (dir ? 1 : esq ? -1 : 0) * VEL * .4;
+  if (dir) h.dir = 1; if (esq) h.dir = -1;
+  topoOk = false; var r = move(h, dt, false); topoOk = true;
+  h.noChao = r.chao;
+  cx0 = Math.floor((h.x + h.w / 2) / TS); cy0 = Math.floor((h.y + h.h / 2) / TS); pe = Math.floor((h.y + h.h - 1) / TS);
+  if (!(escadaTile(cx0, cy0) || escadaTile(cx0, pe))) { h.escada = false; if (vy < 0) h.vy = -80; }   /* saiu por cima (empurrãozinho) ou pelo lado */
+  else if (r.chao && vy > 0) h.escada = false;                                                         /* desceu até o chão */
+  if (vy) { h.tq += dt; if (h.tq > .16) { h.tq = 0; h.q = 1 - h.q; } }
+  return true;
+}
 function passoHeroi(dt) {
   var h = heroi, esq = teclas.esq, dir = teclas.dir;
+  if (h.lockX > 0) { h.lockX -= dt; esq = dir = false; }          /* logo depois de pular da parede */
   var cx0 = Math.floor((h.x + h.w / 2) / TS), cy0 = Math.floor((h.y + h.h / 2) / TS);
-  h.naAgua = ents.some(function (e) { return e.vivo && e.tipo === 'agua' && cruza(caixa(h), e); });
-  var vel = VEL * (h.rapido > 0 ? 1.7 : 1) * (h.naAgua ? .6 : 1);
+  h.naAgua = aguaNaCaixa(caixa(h));
+  var MT = h.mont ? (FAB.MONTARIAS || {})[h.mont.tipo] || {} : null;
+  var vel = VEL * (h.rapido > 0 ? 1.7 : 1) * (h.naAgua ? .6 : 1) * (MT ? MT.vel || 1 : 1);
+  if (teclas.pulo) { tPulo = .13; teclas.pulo = false; }
+  if (tPulo > 0) tPulo -= dt;
+  if (tCano > 0) tCano -= dt;
+  corpoPeq = h.peq;
+  if (passoEscada(h, dt, esq, dir)) { corpoPeq = false; tChao = 0; fimPassoHeroi(h, dt); return; }
+  /* cano: ▼ com os pés em cima da boca do cano */
+  if (teclas.baixoNovo) {
+    teclas.baixoNovo = false;
+    var sobC = Math.floor((h.y + h.h + 1) / TS);
+    if (h.noChao && tCano <= 0) for (var c = 0; c < canos.length; c++) if (canos[c].tx === cx0 && canos[c].ty === sobC) { tCano = .5; dispara('cano', { cano: canos[c] }); break; }
+  }
   var gelo = h.noChao && geloTile(cx0, Math.floor((h.y + h.h + 1) / TS));
   var chaoT = h.noChao ? tipoEm(cx0, Math.floor((h.y + h.h + 1) / TS)) : null, CT = chaoT ? FAB.TIPOS[chaoT] : null;
   if (CT && CT.lento) vel *= CT.lento;                                  /* areia: anda mais devagar */
@@ -284,26 +424,45 @@ function passoHeroi(dt) {
   h.vx += (alvo - h.vx) * Math.min(1, ac * dt);
   if (dir) h.dir = 1; if (esq) h.dir = -1;
   /* pulo com folga (coyote + buffer): perdoa a criança */
-  if (teclas.pulo) { tPulo = .13; teclas.pulo = false; }
-  if (tPulo > 0) tPulo -= dt;
-  if (h.noChao) tChao = .1; else tChao -= dt;
+  if (h.noChao) { tChao = .1; h.pulosAr = 0; } else tChao -= dt;
   if (tPulo > 0 && (tChao > 0 || h.naAgua)) {
-    h.vy = h.naAgua ? -200 : -PULO * (h.pulaAlto > 0 ? 1.3 : 1); tPulo = 0; tChao = 0; S.pulos++; if (!h.naAgua) toca('pulo');
+    h.vy = h.naAgua ? (S.nada ? -120 : -200) : -PULO * (h.pulaAlto > 0 ? 1.3 : 1) * (MT ? MT.pulo || 1 : 1); tPulo = 0; tChao = 0; S.pulos++; if (!h.naAgua) toca('pulo');
+  } else if (tPulo > 0 && h.grudado && h.pod.grudar) {          /* pulo da parede: para o outro lado */
+    h.vy = -PULO * .95; h.vx = -h.grudado * 110; h.dir = -h.grudado; h.lockX = .18; h.grudado = 0; tPulo = 0; S.pulos++; toca('pulo');
+  } else if (tPulo > 0 && h.pod.duplo && h.pulosAr < 1 && tChao <= 0) {   /* pulo duplo, no ar */
+    h.vy = -PULO * .9; h.pulosAr++; tPulo = 0; S.pulos++; toca('pulo'); poeira(h.x + h.w / 2, h.y + h.h, '#ffffff');
   }
   if (!teclas.segura && h.vy < -120 && !h.naAgua) h.vy *= Math.pow(.02, dt);   /* soltou cedo = pulo baixo */
   h.vy += (h.naAgua ? 300 : GRAV) * dt;
+  if (S.nada && h.naAgua && teclas.segura && h.vy > -80) h.vy = Math.max(-80, h.vy - 900 * dt);   /* fase de nadar: ▲ segurado sobe */
   h.vy = Math.min(h.vy, h.naAgua ? 70 : MAXQ);
   var r = move(h, dt, true);
   h.noChao = r.chao;
+  /* luva grudenta: encostado na parede, caindo e empurrando contra ela = escorrega devagar */
+  h.grudado = 0;
+  if (h.pod.grudar && r.parede && !r.chao && !h.naAgua && h.vy > 0 && (dir || esq)) { h.grudado = dir ? 1 : -1; h.vy = Math.min(h.vy, 30); }
+  corpoPeq = false;
+  fimPassoHeroi(h, dt);
+}
+function fimPassoHeroi(h, dt) {
   if (h.inv > 0) h.inv -= dt;
   if (h.rapido > 0) h.rapido -= dt;
   if (h.pulaAlto > 0) h.pulaAlto -= dt;
   if (h.tTam > 0) { h.tTam -= dt; if (h.tTam <= 0) h.tam = 1; }
-  if (Math.abs(h.vx) > 8 && h.noChao) { h.tq += dt; if (h.tq > .14) { h.tq = 0; h.q = 1 - h.q; } } else h.q = 0;
+  if (!h.escada) { if (Math.abs(h.vx) > 8 && h.noChao) { h.tq += dt; if (h.tq > .14) { h.tq = 0; h.q = 1 - h.q; } } else h.q = 0; }
+  /* poderes com tempo: quando o relógio do poder chega no zero, a regra "o poder acabar" acorda */
+  Object.keys(h.pod).forEach(function (k) {
+    if (h.pod[k] === Infinity) return;
+    h.pod[k] -= dt; if (h.pod[k] <= 0) { delete h.pod[k]; acabouPoder(k); }
+  });
+  /* pequenino de verdade: a caixa encolhe; volta a crescer só onde couber (no túnel fica pequenino) */
+  if (h.pod.pequeno && !h.peq) { if (setaCaixa(6, 8)) h.peq = true; }
+  else if (!h.pod.pequeno && h.peq) { if (setaCaixa(10, 14)) h.peq = false; }
   /* caiu no buraco */
-  if (h.y > VH + 24) {
+  var fundo = ALT * TS + 24;
+  if (h.y > fundo) {
     var ok = dispara('cai', {});
-    if (h.y > VH + 24) { h.x = S.controle.x; h.y = S.controle.y; h.vx = h.vy = 0; if (!ok) log('O herói caiu e não tem regra para isso: voltou para o começo', null, 'vida'); }
+    if (h.y > fundo) { h.x = S.controle.x; h.y = S.controle.y; h.vx = h.vy = 0; encaixaY(); if (!ok) log('O herói caiu e não tem regra para isso: voltou para o começo', null, 'vida'); }
   }
 }
 
@@ -333,15 +492,27 @@ function passoInimigo(e, dt) {
     if (r3.chao) { e.vx = 0; e.cd = (e.cd || 1.4) - dt; if (e.cd <= 0) { e.cd = 1.6; e.vy = -260; e.dir = heroi.x > e.x ? 1 : -1; e.vx = e.dir * 30; } }
     if (r3.parede) e.dir *= -1;
     e.q = r3.chao ? 0 : 1;
+  } else if (m === 'nada') {   /* peixe: vai e volta dentro da água, balançando */
+    e.vx = e.dir * (T.vel || 30); e.vy = 0;
+    var r4 = move(e, dt, false), fx = e.dir > 0 ? e.x + e.ox + e.w + 1 : e.x + e.ox - 1;
+    if (r4.parede || !aguaTile(Math.floor(fx / TS), Math.floor((e.y0 + 8) / TS)) || e.dir * (e.x - e.x0) > 40) e.dir *= -1;
+    e.y = e.y0 + Math.sin(e.t * 2.2) * 3;
   }
-  if (e.y > VH + 40) e.vivo = false;
+  if (e.y > ALT * TS + 40) e.vivo = false;
 }
 
 /* contato herói × peças: dispara "toca" ao ENTRAR em contato (não a cada quadro) */
 function contatos() {
   var hb = caixa(heroi), largo = { x: hb.x - 1, y: hb.y - 1, w: hb.w + 2, h: hb.h + 2 };
+  /* água (casinha da grade): "tocar em água" acorda ao ENTRAR em cada casinha, como quando era peça */
+  var agora = {}, ax0 = Math.floor(hb.x / TS), ax1 = Math.floor((hb.x + hb.w - .01) / TS), ay0 = Math.floor(hb.y / TS), ay1 = Math.floor((hb.y + hb.h - .01) / TS);
+  for (var ay = ay0; ay <= ay1; ay++) for (var ax = ax0; ax <= ax1; ax++) if (aguaTile(ax, ay)) {
+    var ka = ax + ',' + ay; agora[ka] = 1;
+    if (!aguaDentro[ka]) dispara('toca', { ent: { tipo: 'agua', classe: 'agua', x: ax * TS, y: ay * TS, w: TS, h: TS, ox: 0, oy: 0, vivo: true, grade: [ax, ay] } });
+  }
+  aguaDentro = agora;
   ents.forEach(function (e) {
-    if (!e.vivo || e.tipo === 'agua') { if (e.tipo === 'agua') { var dentro = cruza(hb, caixa(e)); if (dentro && !e.dentro) dispara('toca', { ent: e }); e.dentro = dentro; } return; }
+    if (!e.vivo) return;
     var c = caixa(e), enc = cruza(e.solido ? largo : hb, c);
     if (enc && !e.dentro) {
       e.dentro = true;
@@ -361,7 +532,7 @@ function contatos() {
 /* ---------------- partículas ---------------- */
 function poeira(x, y, cor) { for (var i = 0; i < 10; i++) parts.push({ x: x, y: y, vx: (Math.random() - .5) * 120, vy: (Math.random() - .8) * 120, t: .5, cor: cor }); }
 function confete() { var cores = ['#e43b44', '#fee761', '#63c74d', '#3b9bff', '#ff9ad5', '#8b5cf6'];
-  for (var i = 0; i < 60; i++) parts.push({ x: cam.x + Math.random() * cv.width, y: -5, vx: (Math.random() - .5) * 60, vy: 40 + Math.random() * 80, t: 2.2, cor: cores[i % 6], conf: true }); }
+  for (var i = 0; i < 60; i++) parts.push({ x: cam.x + Math.random() * cv.width, y: cam.y - 5, vx: (Math.random() - .5) * 60, vy: 40 + Math.random() * 80, t: 2.2, cor: cores[i % 6], conf: true }); }
 function solta(x, y, txt) { parts.push({ x: x, y: y, vx: 0, vy: -40, t: .8, txt: FAB.tr(String(txt)) }); }
 
 /* ---------------- desenho ---------------- */
@@ -369,6 +540,7 @@ function fundo() {
   var C = FAB.CENARIOS[S.cenario || J.fases[S.fase].cenario] || FAB.CENARIOS.dia, w = cv.width;
   var g = cx.createLinearGradient(0, 0, 0, VH); g.addColorStop(0, C.ceu[0]); g.addColorStop(1, C.ceu[1]);
   cx.fillStyle = g; cx.fillRect(0, 0, w, VH);
+  if (ALT > LINHAS) cx.translate(0, Math.round((ALT * TS - VH - cam.y) * .3));   /* mapa alto: lá em cima, os morros ficam lá embaixo */
   var t = performance.now() / 1000;
   if (C.estrelas) { cx.fillStyle = '#fff'; for (var i = 0; i < 40; i++) { var sx = ((i * 97 - cam.x * .1) % (w + 10) + w + 10) % (w + 10), sy = (i * 53) % 110; if ((i + Math.floor(t * 2)) % 7) cx.fillRect(Math.round(sx), sy, 1, 1); } }
   if (C.planeta) { cx.fillStyle = '#8b5cf6'; cx.beginPath(); cx.arc(w * .75 - cam.x * .05, 50, 22, 0, 7); cx.fill(); cx.strokeStyle = '#fee761'; cx.lineWidth = 2; cx.beginPath(); cx.ellipse(w * .75 - cam.x * .05, 50, 34, 7, -.3, 0, 7); cx.stroke(); }
@@ -413,17 +585,20 @@ function desenha() {
   if (treme > 0) sx = (Math.random() - .5) * 4;
   cx.setTransform(1, 0, 0, 1, 0, 0);
   fundo();
-  cx.setTransform(1, 0, 0, 1, Math.round(-cam.x + sx), 0);
+  cx.setTransform(1, 0, 0, 1, Math.round(-cam.x + sx), Math.round(-cam.y));
   var t0 = Math.max(0, Math.floor(cam.x / TS) - 1), t1 = Math.min(W, Math.ceil((cam.x + w) / TS) + 1);
+  var r0 = Math.max(0, Math.floor(cam.y / TS) - 1), r1 = Math.min(ALT, Math.ceil((cam.y + VH) / TS) + 1);
   var fq = Math.floor(performance.now() / 300) % 2;
-  for (var ty = 0; ty < LINHAS; ty++) for (var tx = t0; tx < t1; tx++) {
+  for (var ty = r0; ty < r1; ty++) for (var tx = t0; tx < t1; tx++) {
     var tp = tipoEm(tx, ty); if (!tp) continue;
     var sk = FAB.skinDe(tp);
     if (tp === 'grama' && solidoTile(tx, ty - 1)) sk = FAB.skinDe('terra');
+    if (FAB.TIPOS[tp].cano) { var tc = tipoEm(tx, ty - 1); if (tc && FAB.TIPOS[tc].cano) sk = 'canocorpo'; }
+    if (tp === 'agua' && sk === 'agua' && aguaTile(tx, ty - 1)) sk = 'aguafundo';   /* água de baixo: sem a espuma de cima */
     cx.drawImage(FAB.sprCanvas(sk, fq), tx * TS, ty * TS);
   }
   ents.forEach(function (e) {
-    if (e.x + 16 < cam.x - 16 || e.x > cam.x + w + 16) return;
+    if (e.x + 16 < cam.x - 16 || e.x > cam.x + w + 16 || e.y + 16 < cam.y - 16 || e.y > cam.y + VH + 16) return;
     var im = FAB.sprCanvas(FAB.skinDe(e.tipo), e.classe === 'inimigo' ? e.q : (e.tipo === 'agua' || e.tipo === 'lava' || e.tipo === 'moeda' ? fq : 0));
     var by = (e.classe === 'item' ? Math.sin(performance.now() / 250 + e.x) * 1.5 : 0);
     cx.save();
@@ -434,16 +609,23 @@ function desenha() {
     else cx.drawImage(im, Math.round(e.x), Math.round(e.y + by));
     cx.restore();
   });
-  /* herói */
+  /* herói (meio e pés: com a caixa normal de 10x14 é o mesmo lugar de sempre) */
+  var hmx = heroi.x + heroi.w / 2, hpe = heroi.y + heroi.h, sobe = 0;
+  if (heroi.mont) { sobe = 8; hmx -= heroi.dir < 0 ? -1.5 : 1.5; }   /* montado: o herói (menorzinho) sentado na sela */
   if (!(heroi.inv > 0 && Math.floor(heroi.inv * 12) % 2)) {
-    var hi = FAB.sprCanvas(FAB.skinDe('heroi'), heroi.q);
+    var hi = FAB.sprCanvas(FAB.skinDe('heroi'), heroi.mont ? 0 : heroi.q), tam = heroi.peq ? .6 : heroi.mont ? .75 * (heroi.tam || 1) : heroi.tam;
     cx.save();
-    if (heroi.tam && heroi.tam !== 1) {   /* gigante / pequeno: só o desenho muda; os pés ficam no mesmo lugar */
-      cx.translate(Math.round(heroi.x + 5), Math.round(heroi.y + heroi.h)); cx.scale(heroi.dir < 0 ? -heroi.tam : heroi.tam, heroi.tam); cx.drawImage(hi, -8, -16);
-    } else if (heroi.dir < 0) { cx.translate(Math.round(heroi.x - 3) + 16, Math.round(heroi.y - 2)); cx.scale(-1, 1); cx.drawImage(hi, 0, 0); }
-    else cx.drawImage(hi, Math.round(heroi.x - 3), Math.round(heroi.y - 2));
+    if (tam && tam !== 1) {   /* gigante / pequeno: os pés ficam no mesmo lugar */
+      cx.translate(Math.round(hmx), Math.round(hpe - sobe)); cx.scale(heroi.dir < 0 ? -tam : tam, tam); cx.drawImage(hi, -8, -16);
+    } else if (heroi.dir < 0) { cx.translate(Math.round(hmx - 8) + 16, Math.round(hpe - 16 - sobe)); cx.scale(-1, 1); cx.drawImage(hi, 0, 0); }
+    else cx.drawImage(hi, Math.round(hmx - 8), Math.round(hpe - 16 - sobe));
     cx.restore();
   }
+  if (heroi.mont) {   /* o cavalo na frente das pernas do herói */
+    var cav = FAB.sprCanvas(FAB.skinDe(heroi.mont.tipo), Math.abs(heroi.vx) > 8 && heroi.noChao ? Math.floor(performance.now() / 140) % 2 : 0);
+    cx.save(); cx.translate(Math.round(heroi.x + heroi.w / 2), Math.round(hpe)); cx.scale(heroi.dir < 0 ? -1 : 1, 1); cx.drawImage(cav, -8, -16); cx.restore();
+  }
+  if (heroi.grudado) { cx.fillStyle = '#8b5cf6'; cx.fillRect(Math.round(heroi.grudado > 0 ? heroi.x + heroi.w : heroi.x - 2), Math.round(heroi.y + 4), 2, 3); }
   if (heroi.pulaAlto > 0 && Math.floor(performance.now() / 120) % 2) { cx.fillStyle = '#63c74d'; cx.fillRect(heroi.x - 1, heroi.y + heroi.h - 1, 2, 2); cx.fillRect(heroi.x + 9, heroi.y + heroi.h - 3, 2, 2); }
   if (heroi.rapido > 0) { cx.fillStyle = 'rgba(254,231,97,.7)'; cx.fillRect(heroi.x - heroi.dir * 8, heroi.y + 4, 4, 1); cx.fillRect(heroi.x - heroi.dir * 10, heroi.y + 9, 5, 1); }
   /* balão */
@@ -469,13 +651,43 @@ function desenha() {
     cx.moveTo(px, py); for (var s = 0; s < 40; s++) { px += vx / 60; vy += GRAV / 60; py += vy / 60; cx.lineTo(px, py); if (py > heroi.y + heroi.h + 30) break; }
     cx.stroke(); cx.setLineDash([]);
   }
+  hudTela();
+}
+/* barras no canto do palco (desenhadas, sem texto): fôlego nas fases de nadar e os poderes ligados */
+function hudTela() {
+  var w = cv.width, x = w - 6;
+  cx.setTransform(1, 0, 0, 1, 0, 0);
+  if (S.nada) {
+    var f = Math.max(0, S.folego / S.folegoMax), pisca = f < .25 && Math.floor(performance.now() / 250) % 2;
+    var bw = 46, bx = x - bw, by = 6;
+    cx.fillStyle = 'rgba(14,12,36,.7)'; cx.fillRect(bx - 14, by - 2, bw + 16, 10);
+    cx.strokeStyle = '#1a1c2c'; cx.fillStyle = '#bdf0ff'; cx.lineWidth = 1;
+    cx.beginPath(); cx.arc(bx - 7, by + 3, 3.5, 0, 7); cx.fill(); cx.stroke();
+    cx.beginPath(); cx.arc(bx - 3, by, 1.6, 0, 7); cx.fill();
+    cx.fillStyle = '#1e4fa8'; cx.fillRect(bx, by, bw, 6);
+    cx.fillStyle = pisca ? '#e43b44' : f < .25 ? '#feae34' : '#2ce8f5'; cx.fillRect(bx, by, Math.round(bw * f), 6);
+    cx.strokeStyle = '#ffffff'; cx.strokeRect(bx + .5, by + .5, bw - 1, 5);
+    x = bx - 20;
+  }
+  var y = S.nada ? 18 : 6;
+  var lista = Object.keys(heroi.pod).map(function (k) { return { k: k, t: heroi.pod[k] }; });
+  if (heroi.mont) lista.push({ k: 'cavalo', t: Infinity });
+  var px = w - 6;
+  lista.forEach(function (p) {
+    var pc = { duplo: 'pena', grudar: 'luva', pequeno: 'cogroxo', cavalo: 'cavalo' }[p.k] || 'pena';
+    px -= 16;
+    cx.fillStyle = 'rgba(14,12,36,.7)'; cx.fillRect(px - 1, y - 1, 15, 15);
+    cx.drawImage(FAB.sprCanvas(FAB.skinDe(pc), 0), px, y, 13, 13);
+    if (p.t !== Infinity) { cx.fillStyle = '#fee761'; cx.fillRect(px, y + 13, Math.max(1, Math.round(13 * Math.min(1, p.t / 10))), 1); }
+    px -= 2;
+  });
 }
 
 /* ---------------- laço principal ---------------- */
 function quadro(t) {
   if (!rodando) return;
   raf = requestAnimationFrame(quadro);
-  var dt = Math.min(1 / 30, (t - tAnt) / 1000 || 0); tAnt = t;
+  var dt = Math.max(0, Math.min(1 / 30, (t - tAnt) / 1000 || 0)); tAnt = t;   /* o 1º quadro pode vir com hora de antes do começo: nunca tempo negativo (o herói atravessava o chão) */
   if (pausado) { desenha(); return; }
   var n = 2, d = dt / n;
   for (var i = 0; i < n; i++) { passoHeroi(d); ents.forEach(function (e) { if (e.vivo && e.classe === 'inimigo') passoInimigo(e, d); }); }
@@ -490,10 +702,24 @@ function quadro(t) {
   parts.forEach(function (p) { p.x += p.vx * dt; p.y += p.vy * dt; if (!p.conf && !p.txt) p.vy += 300 * dt; p.t -= dt; }); parts = parts.filter(function (p) { return p.t > 0; });
   if (falaB) { falaB.t -= dt; if (falaB.t <= 0) falaB = null; }
   if (treme > 0) treme -= dt;
+  /* fôlego (só nas fases de nadar): gasta com a cabeça embaixo da água, enche fora dela */
+  if (S.nada) {
+    var cab = aguaTile(Math.floor((heroi.x + heroi.w / 2) / TS), Math.floor((heroi.y + 2) / TS));
+    S.folego = cab ? Math.max(0, S.folego - dt) : Math.min(S.folegoMax, S.folego + 8 * dt);
+    if (S.folego > 0) folegoTrava = false;
+    if (cab && !avisoAr && S.folego < S.folegoMax * .25 && S.folego > 0) { avisoAr = true; falaB = { txt: FAB.tr('Pegue uma bolha!'), t: 2.2 }; }
+    if (S.folego > S.folegoMax * .3) avisoAr = false;
+    if (S.folego <= 0 && !folegoTrava) { folegoTrava = true; dispara('folego0', {}); }
+  }
   /* câmera */
   var alvo = heroi.x + 5 - cv.width / 2 + heroi.dir * 20;
   cam.x += (alvo - cam.x) * Math.min(1, 6 * dt);
   cam.x = Math.max(0, Math.min(cam.x, W * TS - cv.width));
+  if (ALT > LINHAS) {   /* mapa alto: sobe e desce com folga (zona morta), olhando um pouco para baixo ao cair */
+    var ay = heroi.y + heroi.h / 2 - VH / 2 + (heroi.vy > 150 && !heroi.naAgua ? 24 : 0), dy = ay - cam.y;
+    if (Math.abs(dy) > 24) cam.y += (dy - (dy > 0 ? 24 : -24)) * Math.min(1, 8 * dt);
+    cam.y = Math.max(0, Math.min(cam.y, ALT * TS - VH));
+  } else cam.y = 0;
   desenha();
 }
 
@@ -512,6 +738,8 @@ M.inicia = function (canvas, jogo, opts) {
   S = { pontos: 0, vidas: J.ajustes.vidas || 3, mochila: {}, disparos: {}, pulos: 0, certas: 0, erradas: 0, certasProva: 0, minhas: 0, portas: 0, moedas: 0,
     vidasPerdidas: 0, mortes: [], usadas: [], faseMax: 1, fase: 0, t0: performance.now(), venceu: false, cristais: 0, pontosVolta: 0 };
   teclas = {}; pausado = false; rodando = true; treme = 0; falaB = null;
+  if (FAB.pacoteNasce) FAB.pacoteNasce(J);   /* peça de poder posta à mão no jogo antigo: a regra dela nasce aqui */
+  M.botoesExtras(cv.parentNode);
   carregaFase(O.fase || 0);
   tAnt = performance.now(); raf = requestAnimationFrame(quadro);
 };
@@ -523,24 +751,47 @@ M.rodando = function () { return rodando; };
 M.tecla = function (k, apertada) {
   if (k === 'pulo') { if (apertada && !teclas.segura) teclas.pulo = true; teclas.segura = apertada; return; }
   if (k === 'X' || k === 'C' || k === 'V') { if (apertada && rodando && !pausado) dispara('tecla', { tecla: k }); return; }
+  if (k === 'baixo' && apertada && !teclas.baixo) teclas.baixoNovo = true;   /* entrar no cano: só na hora que aperta */
   teclas[k] = apertada;
 };
-/* só LEITURA, para o jogador-robô do gate enxergar a tela como a criança enxerga */
+/* só LEITURA, para o jogador-robô do gate enxergar a tela como a criança enxerga
+   (olha para o lado em que o herói está virado; o resto é o que a tela mostra: escada, água, fôlego, poderes) */
 M.olha = function () {
   if (!rodando) return null;
-  var h = heroi, pe = Math.floor((h.y + h.h + 2) / TS), frente = Math.floor((h.x + h.w + 14) / TS);
-  return { x: h.x, y: h.y, noChao: h.noChao, buraco: !solidoTile(frente, pe) && !nuvemTile(frente, pe) && !solidoTile(frente, pe + 1),
-    parede: solidoTile(Math.floor((h.x + h.w + 6) / TS), Math.floor((h.y + 8) / TS)),
-    perigo: ents.some(function (e) { return e.vivo && (e.classe === 'inimigo' || e.classe === 'perigo') && e.x - h.x > -4 && e.x - h.x < 26 && Math.abs(e.y - h.y) < 30; }) };
+  var h = heroi, d = h.dir < 0 ? -1 : 1, pe = Math.floor((h.y + h.h + 2) / TS);
+  var frente = d > 0 ? Math.floor((h.x + h.w + 14) / TS) : Math.floor((h.x - 14) / TS), px = d > 0 ? Math.floor((h.x + h.w + 6) / TS) : Math.floor((h.x - 6) / TS);
+  return { x: h.x, y: h.y, w: h.w, h: h.h, vx: h.vx, vy: h.vy, dir: d, noChao: h.noChao,
+    buraco: !solidoTile(frente, pe) && !nuvemTile(frente, pe) && !topoEscada(frente, pe) && !solidoTile(frente, pe + 1),
+    parede: solidoTile(px, Math.floor((h.y + 8) / TS)),
+    perigo: ents.some(function (e) { var dx = (e.x - h.x) * d; return e.vivo && (e.classe === 'inimigo' || e.classe === 'perigo') && dx > -4 && dx < 26 && Math.abs(e.y - h.y) < 30; }),
+    escada: !!h.escada, naAgua: !!h.naAgua, nada: !!S.nada, folego: S.folego, folegoMax: S.folegoMax,
+    poderes: Object.keys(h.pod), montada: !!h.mont, pequeno: !!h.peq, fase: S.fase, ts: TS };
 };
 M.TS = TS; M.LINHAS = LINHAS; M.SONS = SONS;
+M.altura = function () { return ALT; };
 /* todo texto fixo que o motor desenha no canvas ou escreve no registro da lupa (o portão do inglês confere) */
 M.textos = function () {
   return ['Oba!', 'Acabaram as perguntas!', 'O herói perdeu vida aqui', 'O herói caiu e não tem regra para isso: voltou para o começo',
-    'Regra {0} acordou → {1}', 'Regra {0}: o cadeado não abriu ({1})'].concat(FAB.OPCOES.falas || []);
+    'Regra {0} acordou → {1}', 'Regra {0}: o cadeado não abriu ({1})', 'Pegue uma bolha!', 'Este cano não tem par: ponha outro cano na fase']
+    .concat(FAB.OPCOES.falas || []).concat(Object.keys(FAB.NOME_OPCAO || {}).map(function (k) { return FAB.NOME_OPCAO[k]; }));
+};
+/* botão ▼ (descer do cipó, entrar no cano) na mesa de toques do palco: só aparece se o jogo tem cipó, escada ou cano.
+   Pode ser chamado de fora (telas.js) a qualquer hora; não duplica. */
+M.botoesExtras = function (palco) {
+  var t = palco && palco.querySelector ? palco.querySelector('.toques') : null; if (!t) return;
+  var precisa = J && J.fases && J.fases.some(function (f) { return f.mapa.some(function (l) { return /[YHU]/.test(l); }); });
+  var b = t.querySelector('[data-k="baixo"]');
+  if (!precisa) { if (b) b.remove(); return; }
+  if (b) return;
+  var gp = t.querySelector('.gp'); if (!gp) return;
+  b = document.createElement('button'); b.dataset.k = 'baixo'; b.textContent = '▼'; b.title = 'Descer';
+  var dir = gp.querySelector('[data-k="dir"]'); gp.insertBefore(b, dir || null);
+  b.onpointerdown = function (e) { e.preventDefault(); M.tecla('baixo', true); };
+  b.onpointerup = b.onpointerleave = b.onpointercancel = function () { M.tecla('baixo', false); };
 };
 
-var MAPA_TECLAS = { ArrowLeft: 'esq', a: 'esq', A: 'esq', ArrowRight: 'dir', d: 'dir', D: 'dir', ArrowUp: 'pulo', w: 'pulo', W: 'pulo', ' ': 'pulo', x: 'X', X: 'X', c: 'C', C: 'C', v: 'V', V: 'V' };
+var MAPA_TECLAS = { ArrowLeft: 'esq', a: 'esq', A: 'esq', ArrowRight: 'dir', d: 'dir', D: 'dir', ArrowUp: 'pulo', w: 'pulo', W: 'pulo', ' ': 'pulo', x: 'X', X: 'X', c: 'C', C: 'C', v: 'V', V: 'V',
+  ArrowDown: 'baixo', s: 'baixo', S: 'baixo' };
 window.addEventListener('keydown', function (ev) {
   if (!rodando || /INPUT|TEXTAREA/.test((ev.target || {}).tagName)) return;
   var k = MAPA_TECLAS[ev.key]; if (!k) return;
