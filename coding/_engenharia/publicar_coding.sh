@@ -10,7 +10,7 @@ W="$(mktemp -d)/pub"
 git fetch -q origin em-construcao
 git worktree add -q --detach "$W" origin/em-construcao
 PROVA=$(node -e "var s={document:{write(){}}};s.window=s;require('vm').createContext(s);['catalogo','blocos','oficina','provas'].forEach(f=>require('vm').runInContext(require('fs').readFileSync('coding/banco/'+f+'.js','utf8'),s));console.log(s.FAB.PROVAS.lista[s.FAB.PROVAS.atual].arquivo.replace('../',''))")
-FILES=$(git ls-files coding | grep -v '^coding/_engenharia/')
+FILES=$(git ls-files coding | grep -v '^coding/_engenharia/' | grep -v '[.]bat$')
 FILES="$FILES ferramentas/serafina-core.js ferramentas/assets/fonts/nunito-latin.woff2 $PROVA"
 for f in $FILES; do mkdir -p "$W/$(dirname "$f")"; git show "HEAD:$f" > "$W/$f"; done
 # o cartão da Fábrica na home vem do index.html commitado (sem service worker neste ramo)
