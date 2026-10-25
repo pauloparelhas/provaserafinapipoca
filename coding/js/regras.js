@@ -6,14 +6,16 @@
    ============================================================ */
 (function () {
 'use strict';
-var aba = 'regras', pisca = null;
+var aba = 'regras', pisca = null, todas = false;
+/* nome mostrado de um som ('vitoria' -> 'vitória'); o id do som não muda */
+function nomeSom(v) { return (FAB.NOME_SOM || {})[v] || v; }
 
 function txtParam(b, v, blocoDef) {
   if (v === undefined || v === null) return '';
   var o = blocoDef.param;
   if (o === 'objToca' || o === 'objPisa' || o === 'objTem' || o === 'objCria') return FAB.tr(FAB.nomeTipo(v));
   if (o === 'numSinal' || o === 'num') return (v > 0 ? (blocoDef.prefixo || '') : '') + v;
-  if (o === 'sons') return '"' + FAB.tr(v) + '"';
+  if (o === 'sons') return '"' + FAB.tr(nomeSom(v)) + '"';
   if (o === 'falas') return '"' + FAB.tr(v) + '"';
   if (LISTAS.indexOf(o) >= 0) return FAB.tr((FAB.NOME_OPCAO || {})[v] || v);
   return String(v);
@@ -50,7 +52,7 @@ function escolheBloco(tipo, cb) {
   var J = FAB.jogo();
   /* bloco de peça nova só aparece quando a peça existe em alguma fase (a fase reta continua com a lista de sempre) */
   var ops = Object.keys(D).filter(function (k) { return !FAB.blocoAparece || FAB.blocoAparece(D[k], J, emUso(J, tipo, k)); })
-    .map(function (k) { return { id: k, nome: FAB.tr(D[k].nome) + (D[k].sufixo && !D[k].param ? ' ' + FAB.tr(D[k].sufixo) : ''), ico: FAB.ico(D[k].icone, 40), sub: (FAB.CONCEITOS[D[k].conceito] || {}).nome }; });
+    .map(function (k) { return { id: k, nome: FAB.tr(D[k].nome) + (D[k].sufixo && !D[k].param ? ' ' + FAB.tr(D[k].sufixo) : ''), ico: FAB.ico(D[k].icone, 40) }; });   /* sem subtítulo-jargão (auditoria A6) */
   if (tipo === 's') ops.unshift({ id: '__nada', nome: 'sem cadeado', ico: FAB.ico('errado', 40), sub: 'a regra vale sempre' });
   if (tipo === 'f') ops.push({ id: '__tira', nome: 'tirar esta ação', ico: FAB.ico('lixo', 40) });
   FAB.ui.escolhe(tit, tit, ops, function (id) {
@@ -60,23 +62,48 @@ function escolheBloco(tipo, cb) {
     escolheParam(def, function (v) { b[k] = v; cb(b); });
   });
 }
-function escolheParam(def, cb) {
+/* extras: cartões a mais no fim (ex.: "trocar a ação"); atual: o valor que já está no cartão (fica marcado) */
+function escolheParam(def, cb, extras, atual) {
   var J = FAB.jogo(), lista = FAB.OPCOES[def.param] || [];
   /* peça nova (cipó, pena, cavalo…) só entra na lista se estiver em alguma fase ou já numa regra */
   if (/^obj/.test(def.param)) lista = lista.filter(function (v) { var T = FAB.TIPOS[v]; return !T || !T.mundo || FAB.temPeca(J, v) || pecaEmUso(J, v); });
   var ops = lista.map(function (v) {
     var ico = /^obj/.test(def.param) ? FAB.icoTipo(v === 'inimigo' ? 'gosma' : v, 44) : FAB.ico(def.icone, 36);
-    var nome = /^obj/.test(def.param) ? FAB.tr(FAB.nomeTipo(v)) : def.param === 'sons' || def.param === 'falas' ? FAB.tr(v) : LISTAS.indexOf(def.param) >= 0 ? FAB.tr((FAB.NOME_OPCAO || {})[v] || v) : ((v > 0 && def.prefixo ? def.prefixo : '') + v + (def.sufixo ? ' ' + FAB.tr(def.sufixo) : ''));
-    return { id: v, nome: nome, ico: ico };
+    var nome = /^obj/.test(def.param) ? FAB.tr(FAB.nomeTipo(v)) : def.param === 'sons' ? FAB.tr(nomeSom(v)) : def.param === 'falas' ? FAB.tr(v) : LISTAS.indexOf(def.param) >= 0 ? FAB.tr((FAB.NOME_OPCAO || {})[v] || v) : ((v > 0 && def.prefixo ? def.prefixo : '') + v + (def.sufixo ? ' ' + FAB.tr(def.sufixo) : ''));
+    return { id: v, nome: nome, ico: ico, cls: atual !== undefined && v === atual ? 'atual' : '' };
   });
-  FAB.ui.escolhe(FAB.tr(def.nome) + '…', def.fala, ops, function (v) { if (def.param === 'sons') FAB.motor.toca(v); cb(v); });
+  (extras || []).forEach(function (x) { ops.push(x); });
+  FAB.ui.escolhe(FAB.tr(def.nome) + '…', def.fala, ops, function (v, o) {
+    if (o && o.extra) { o.extra(); return; }
+    if (def.param === 'sons') FAB.motor.toca(v); cb(v);
+  });
 }
 
+/* B10: jogo novo nasce com ~20 regras. Primeiro aparecem só as que importam: as das peças que
+   estão no mapa, a da moeda e a da bandeira, as que ela criou ou mudou, as desligadas, as das peças
+   novas e qualquer regra de tecla/relógio/pontos. As outras (cair no buraco, vidas acabarem…)
+   continuam valendo no jogo; "Ver todas as regras" mostra a lista inteira. */
+function essencial(J, r) {
+  if (todas || r.liga === false || r.dela || r.pacote || pisca === r.id) return true;
+  var q = r.quando || {}, tem = function (t) { return FAB.temPeca ? FAB.temPeca(J, t) : true; };
+  if (q.t === 'toca' || q.t === 'pisa') {
+    if (q.obj === 'moeda' || q.obj === 'bandeira') return true;
+    if (q.obj === 'inimigo') return (FAB.OPCOES.objPisa || []).some(function (t) { return t !== 'inimigo' && tem(t); });
+    return tem(q.obj);
+  }
+  if (q.t === 'acerta' || q.t === 'erra') return tem('placa');
+  if (q.t === 'passavolta') return tem('pontovolta');
+  if (q.t === 'cai' || q.t === 'vidas0' || q.t === 'tempo0') return false;
+  return true;
+}
+FAB.regraEssencial = essencial;
 function montaRegras(C) {
   var J = FAB.jogo(), T = J.ultimoTeste, h = '<div class="linha" style="margin-bottom:12px"><button class="bt verde" id="rgNova">' + FAB.ico('mais', 24) + 'Regra nova</button>' +
     '<span class="mut">' + (T ? 'O número amarelo = quantas vezes a regra acordou no último teste.' : 'Teste o jogo para ver quais regras acordam.') + '</span></div><div class="rg-lista">';
+  var escondidas = 0;
   J.regras.forEach(function (r, i) {
     var dq = FAB.QUANDO[r.quando.t]; if (!dq) return;
+    if (!essencial(J, r)) { escondidas++; return; }
     h += '<div class="regra' + (r.liga === false ? ' off' : '') + (pisca === r.id ? ' pisca' : '') + '" data-r="' + i + '">' +
       '<span class="rn">' + (i + 1) + '</span><button class="liga' + (r.liga !== false ? ' on' : '') + '" data-a="liga" title="Ligar / desligar"></button>' +
       '<button class="bloco q" data-a="q">' + cartao('q', 'QUANDO', dq, r.quando) + '</button>';
@@ -89,12 +116,16 @@ function montaRegras(C) {
     h += (n !== null ? '<span class="acordou" title="Vezes que acordou no último teste">' + FAB.ico('lupa', 16) + n + '</span>' : '<span style="margin-left:auto"></span>') +
       '<button class="ib" data-a="apaga" title="Apagar regra">' + FAB.ico('lixo', 22) + '</button></div>';
   });
-  C.innerHTML = h + '</div>';
+  h += '</div>';
+  if (escondidas || todas) h += '<div class="linha rg-todas"><button class="bt cinza" id="rgTodas">' + FAB.ico(todas ? 's_cima' : 's_baixo', 22) +
+    (todas ? FAB.tr('Ver só as principais') : FAB.trf('Ver todas as regras ({0} a mais)', [escondidas])) + '</button></div>';
+  C.innerHTML = h;
   pisca = null;
+  if (FAB.$('rgTodas')) FAB.$('rgTodas').onclick = function () { todas = !todas; montaRegras(C); };
   FAB.$('rgNova').onclick = function () {
     escolheBloco('q', function (q) {
       if (!q) return;
-      escolheBloco('f', function (f) { if (!f) return; J.regras.push(FAB.novaRegra({ quando: q, faca: [f] })); FAB.mudou(); montaRegras(C); FAB.ui.toast('Regra nova no fim da lista!', true); var l = C.querySelector('.rg-lista'); setTimeout(function () { l.lastElementChild && l.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 50); });
+      escolheBloco('f', function (f) { if (!f) return; var nv = FAB.novaRegra({ quando: q, faca: [f] }); nv.dela = true; J.regras.push(nv); FAB.mudou(); montaRegras(C); FAB.ui.toast('Regra nova no fim da lista!', true); var l = C.querySelector('.rg-lista'); setTimeout(function () { l.lastElementChild && l.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 50); });
     });
   };
   C.querySelectorAll('.regra').forEach(function (el) {
@@ -102,16 +133,23 @@ function montaRegras(C) {
     el.querySelectorAll('[data-a]').forEach(function (b) {
       b.onclick = function () {
         var a = b.dataset.a;
-        if (a === 'liga') { r.liga = r.liga === false; FAB.mudou(); montaRegras(C); FAB.fala(r.liga ? 'Regra ligada' : 'Regra desligada'); return; }
+        if (a === 'liga') { r.liga = r.liga === false; r.dela = true; FAB.mudou(); montaRegras(C); FAB.fala(r.liga ? 'Regra ligada' : 'Regra desligada'); return; }
         if (a === 'apaga') {
           FAB.ui.abre('<h2>' + FAB.trf('Apagar a regra {0}?', [+el.dataset.r + 1]) + '</h2><div class="linha"><button class="bt rosa" id="rgSim">Apagar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
           FAB.$('rgSim').onclick = function () { J.regras.splice(+el.dataset.r, 1); FAB.mudou(); FAB.ui.fecha(); montaRegras(C); };
           return;
         }
-        if (a === 'q') escolheBloco('q', function (q) { if (q) { r.quando = q; FAB.mudou(); montaRegras(C); } });
-        if (a === 's') escolheBloco('s', function (s) { r.se = s; FAB.mudou(); montaRegras(C); });
-        if (a === 'f') { var k = +b.dataset.k; escolheBloco('f', function (f) { if (f) r.faca[k] = f; else if (r.faca.length > 1) r.faca.splice(k, 1); else { FAB.ui.toast('A regra precisa de pelo menos uma ação.', true); return; } FAB.mudou(); montaRegras(C); }); }
-        if (a === 'mais') escolheBloco('f', function (f) { if (f) { r.faca.push(f); FAB.mudou(); montaRegras(C); } });
+        if (a === 'q') escolheBloco('q', function (q) { if (q) { r.quando = q; r.dela = true; FAB.mudou(); montaRegras(C); } });
+        if (a === 's') escolheBloco('s', function (s) { r.se = s; r.dela = true; FAB.mudou(); montaRegras(C); });
+        if (a === 'f') {
+          var k = +b.dataset.k, acao = r.faca[k], df = FAB.FACA[acao.t], ck = chaveParam(df);
+          var troca = function () { escolheBloco('f', function (f) { if (f) r.faca[k] = f; else if (r.faca.length > 1) r.faca.splice(k, 1); else { FAB.ui.toast('A regra precisa de pelo menos uma ação.', true); return; } r.dela = true; FAB.mudou(); montaRegras(C); }); };
+          /* A7: ação com número/som/frase abre direto a escolha do valor; trocar a ação é a opção de baixo */
+          if (ck) escolheParam(df, function (v) { acao[ck] = v; r.dela = true; FAB.mudou(); montaRegras(C); },
+            [{ id: '__troca', nome: 'trocar a ação', ico: FAB.ico('t_regras', 40), cls: 'secundaria', extra: function () { setTimeout(troca, 60); } }], acao[ck]);
+          else troca();
+        }
+        if (a === 'mais') escolheBloco('f', function (f) { if (f) { r.faca.push(f); r.dela = true; FAB.mudou(); montaRegras(C); } });
       };
     });
   });

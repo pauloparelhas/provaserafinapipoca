@@ -1780,7 +1780,8 @@ FAB.faseDoFormato = function (id, n) {
   if (F.modelo) {
     var f = JSON.parse(JSON.stringify(FAB.MODELOS[F.modelo].fases[0])); f.nome = 'Fase ' + n; return f;
   }
-  var w = 40, rep = function (c, k) { return Array(k + 1).join(c); }, base = { nome: 'Fase ' + n, formato: 'reta', cenario: ['dia', 'tarde', 'noite', 'caverna', 'mar', 'espaco', 'doce'][(n - 1) % 7], mapa: [] };
+  /* Reta nova: 120 colunas (uns 20 s de travessia), espaço para pedaços com respiro em vez de tudo numa tela */
+  var w = 120, rep = function (c, k) { return Array(k + 1).join(c); }, base = { nome: 'Fase ' + n, formato: 'reta', cenario: ['dia', 'tarde', 'noite', 'caverna', 'mar', 'espaco', 'doce'][(n - 1) % 7], mapa: [] };
   for (var j = 0; j < 9; j++) base.mapa.push(rep('.', w));
   base.mapa.push('.@' + rep('.', w - 4) + 'F.', rep('#', w), rep('T', w));
   return base;

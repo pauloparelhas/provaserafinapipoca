@@ -70,3 +70,37 @@ Object.assign(FAB.EN, {
   'Só o chão. Você põe tudo.': 'Just the ground. You add everything.', 'Moedas, um inimigo e uma mola.': 'Coins, an enemy and a spring.',
   'Gelo, lava, cipó, chave e porta. Mude o que quiser.': 'Ice, lava, a vine, a key and a door. Change anything you want.'
 });
+/* Ateliê: quadros da animação, misturar cor; música de fundo das fases (js/musica.js) */
+Object.assign(FAB.EN, {
+  'Todos': 'All', 'Quadros': 'Frames', 'Quadro {0}': 'Frame {0}', 'Pintar em todos os quadros': 'Paint on all frames',
+  'Quadro novo': 'New frame', 'Copiar do quadro anterior': 'Copy from the frame before', 'Tirar este quadro': 'Remove this frame',
+  'Misturar cor': 'Mix a color', 'Mais cores': 'More colors',
+  'Agora você pinta em todos os quadros.': 'Now you paint on all frames.',
+  'Agora você pinta só neste quadro.': 'Now you paint only on this frame.',
+  'Quadro novo! Ele começa igual ao de antes. Mude um pouquinho.': 'New frame! It starts just like the one before. Change it a little bit.',
+  'Quadro novo!': 'New frame!', 'Ele começa igual ao de antes.': 'It starts just like the one before.', 'Mude um pouquinho.': 'Change it a little bit.',
+  'Copiado do quadro anterior.': 'Copied from the frame before.',
+  'Este desenho já tem 9 cores misturadas. Apague uma do desenho para trocar.': 'This drawing already has 9 mixed colors. Erase one from the drawing to swap.',
+  'Este desenho já tem 9 cores misturadas.': 'This drawing already has 9 mixed colors.', 'Apague uma do desenho para trocar.': 'Erase one from the drawing to swap.',
+  'Cor nova nas cores do desenho!': 'New color in the drawing colors!',
+  'Escolha um tom. Ele entra nas cores do desenho.': 'Pick a shade. It goes into the drawing colors.',
+  'Escolha um tom.': 'Pick a shade.', 'Ele entra nas cores do desenho.': 'It goes into the drawing colors.',
+  'Música': 'Music', 'Música da fase': 'Level music', 'Que música toca nesta fase?': 'What music plays in this level?', 'Escolha a música': 'Pick the music',
+  'Alegre': 'Happy', 'Aventura': 'Adventure', 'Calma': 'Calm', 'Mistério': 'Mystery', 'Sem música': 'No music',
+  'Música sintetizada:': 'Synthesized music:',
+  'cada trilha é feita de notas calculadas pelo navegador, sem arquivo de som.': 'each song is made of notes the browser calculates, with no sound file.',
+  /* editor de fases: minimapa, "Ver a fase", avisos e recados curtos (24/10) */
+  'Não dá para chegar': "Can't get there", 'Buraco largo demais': 'Gap too wide', 'Parede alta demais': 'Wall too high', 'Alto demais': 'Too high',
+  'Porta sem chave': 'Door with no key', 'Não dá para passar': "Can't get past", 'O herói cai': 'The hero falls',
+  'Falta o começo': 'Start is missing', 'Dois começos': 'Two starts', 'Falta a bandeira': 'Flag is missing',
+  'Moeda presa': 'Stuck coin', 'Peça presa': 'Stuck piece', 'Inimigo preso': 'Stuck enemy', 'Não dá para pegar': "Can't reach it",
+  'Muita coisa aqui': 'Too much here', 'Muito inimigo junto': 'Too many enemies', 'Nada grave': 'All good',
+  'Ver a fase': 'Watch the level', 'Arraste para ver a fase': 'Drag to see the level', 'Avisos da fase': 'Level warnings',
+  'Voltar ao começo': 'Back to the start', 'Tocar': 'Play', 'Pausar': 'Pause', 'Mais devagar': 'Slower', 'Mais rápido': 'Faster',
+  'Onde a câmera está': 'Where the camera is', 'Mais': 'More', 'Menos': 'Less', 'Ver': 'See',
+  'Mostrar os avisos': 'Show the warnings', 'Esconder os avisos': 'Hide the warnings',
+  'Borracha.': 'Eraser.', 'Apaga a casinha.': 'It erases the square.', 'O começo não pode sumir.': "The start can't disappear.",
+  'Peça nova com regra!': 'New piece with a rule!', 'Já está no mais alto.': "It's already the tallest.", 'Já está no mais comprido.': "It's already the longest.",
+  'Ali tem começo ou bandeira.': 'The start or the flag is there.',
+  'Quadro novo! Mude um pouquinho.': 'New frame! Change it a little bit.', 'Cheio! Apague uma cor.': 'Full! Erase one color.', 'Cheio!': 'Full!', 'Apague uma cor.': 'Erase one color.'
+});

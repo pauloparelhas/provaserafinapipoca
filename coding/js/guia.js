@@ -101,7 +101,7 @@ G.alvo = function () {
   if (tela === 'testar' && FAB.motor && FAB.motor.rodando()) return null;   /* nunca em cima do jogo rodando */
   if (tela === 'painel') return document.getElementById('pnCont');
   if (!m) return null;
-  if (G.telaDa(m) !== tela) return document.getElementById('trProx');   /* outra tela: o Próximo passo leva lá */
+  if (G.telaDa(m) !== tela) { var pr = ui.proximo && ui.proximo(); return pr && pr.missao ? document.getElementById('trProx') : null; }   /* outra tela: o Próximo passo leva lá (no Mostrar ele fecha o ciclo: sem seta) */
   var g = GUIA[m.id]; if (!g) return null;
   var sel = typeof g.alvo === 'function' ? g.alvo(FAB.jogo()) : g.alvo;
   var el = sel && document.querySelector('#t-' + tela + ' ' + sel);

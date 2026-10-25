@@ -169,7 +169,7 @@ FAB.sprCanvas = function (id, q) {
   if (cache[k]) return cache[k];
   var c = document.createElement('canvas'); c.width = 16; c.height = 16;
   var x = c.getContext('2d');
-  for (var j = 0; j < 16; j++) { var L = Q[j] || ''; for (var i = 0; i < 16; i++) { var cor = FAB.PALETA[L[i]]; if (cor) { x.fillStyle = cor; x.fillRect(i, j, 1, 1); } } }
+  for (var j = 0; j < 16; j++) { var L = Q[j] || ''; for (var i = 0; i < 16; i++) { var cor = (s.cores && s.cores[L[i]]) || FAB.PALETA[L[i]]; if (cor) { x.fillStyle = cor; x.fillRect(i, j, 1, 1); } } }
   cache[k] = c; return c;
 };
 FAB.sprURL = function (id, q) { return FAB.sprCanvas(id, q).toDataURL(); };
@@ -204,7 +204,14 @@ FAB.nivel = function () {
 FAB.xp = function () {
   var t = 0; FAB.MISSOES.forEach(function (m) { if (FAB.E.missoes[m.id]) t += m.xp; }); return t;
 };
-FAB.proximaMissao = function () { return FAB.MISSOES.filter(function (m) { return !FAB.E.missoes[m.id]; })[0] || null; };
+/* a próxima missão PENDENTE depois da última que ela cumpriu (na ordem da trilha, dando a volta):
+   se ela fez a 8 antes da 1, o guia segue para a 9, e a 1 volta quando a trilha der a volta */
+FAB.proximaMissao = function () {
+  var L = FAB.MISSOES, E = FAB.E.missoes || {}, ult = -1, tmax = -Infinity;
+  L.forEach(function (m, i) { var t = E[m.id]; if (!t) return; t = typeof t === 'number' ? t : 0; if (t >= tmax) { tmax = t; ult = i; } });
+  for (var k = 1; k <= L.length; k++) { var m = L[(ult + k + L.length) % L.length]; if (!E[m.id]) return m; }
+  return null;
+};
 FAB.confereMissoes = function () {
   var E = FAB.E, J = FAB.jogo(), novas = [];
   FAB.MISSOES.forEach(function (m) {

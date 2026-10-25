@@ -25,6 +25,8 @@ var geracao = 0, teclas = {}, tPulo = 0, tChao = 0, relogios = {}, pontosDisp = 
 var ALT = LINHAS;                 /* altura do mapa da fase (12 a 48 linhas) */
 var aguaDentro = {}, canos = [], corpoPeq = false, topoOk = true, tCano = 0, folegoTrava = false, avisoAr = false;
 var letraTipo = {};
+/* quadros da animação: até 4 (Ateliê). Com 1 ou 2 quadros dá 2, a conta de sempre (0,1,0,1…) */
+function nQuadros(tp) { return Math.max(2, FAB.spr(FAB.skinDe(tp)).quadros.length); }
 function montaLetras() { letraTipo = {}; Object.keys(FAB.TIPOS).forEach(function (t) { letraTipo[FAB.TIPOS[t].letra] = t; }); }
 
 /* ---------------- som (sintetizado, sem arquivo) ---------------- */
@@ -111,6 +113,7 @@ function molhaPecas(F) {
 }
 function carregaFase(i) {
   var F = J.fases[i]; S.fase = i; S.faseMax = Math.max(S.faseMax, i + 1);
+  if (FAB.musica) FAB.musica.toca(F.musica);   /* música de fundo da fase (js/musica.js); sem escolha = silêncio */
   grade = F.mapa.slice(); W = 0; grade.forEach(function (l) { W = Math.max(W, l.length); });
   ALT = Math.max(LINHAS, grade.length);
   for (var g = 0; g < ALT; g++) grade[g] = grade[g] || '';
@@ -319,7 +322,7 @@ function ganhaFase() {
   else { S.venceu = true; setTimeout(function () { if (g0 === geracao) fim(true); }, 900); }
 }
 function fim(venceu) {
-  if (!rodando) return; rodando = false; cancelAnimationFrame(raf);
+  if (!rodando) return; rodando = false; cancelAnimationFrame(raf); if (FAB.musica) FAB.musica.para();
   S.venceu = !!venceu; S.segundos = Math.round((performance.now() - S.t0) / 1000);
   var R = { data: Date.now(), pontos: S.pontos, pulos: S.pulos, venceu: S.venceu, faseMax: S.faseMax, certas: S.certas, erradas: S.erradas,
     certasProva: S.certasProva, minhas: S.minhas, portas: S.portas, moedas: S.moedas, vidasPerdidas: S.vidasPerdidas, segundos: S.segundos,
@@ -395,7 +398,7 @@ function passoEscada(h, dt, esq, dir) {
   cx0 = Math.floor((h.x + h.w / 2) / TS); cy0 = Math.floor((h.y + h.h / 2) / TS); pe = Math.floor((h.y + h.h - 1) / TS);
   if (!(escadaTile(cx0, cy0) || escadaTile(cx0, pe))) { h.escada = false; if (vy < 0) h.vy = -80; }   /* saiu por cima (empurrãozinho) ou pelo lado */
   else if (r.chao && vy > 0) h.escada = false;                                                         /* desceu até o chão */
-  if (vy) { h.tq += dt; if (h.tq > .16) { h.tq = 0; h.q = 1 - h.q; } }
+  if (vy) { h.tq += dt; if (h.tq > .16) { h.tq = 0; h.q = (h.q + 1) % nQuadros('heroi'); } }
   return true;
 }
 function passoHeroi(dt) {
@@ -449,7 +452,7 @@ function fimPassoHeroi(h, dt) {
   if (h.rapido > 0) h.rapido -= dt;
   if (h.pulaAlto > 0) h.pulaAlto -= dt;
   if (h.tTam > 0) { h.tTam -= dt; if (h.tTam <= 0) h.tam = 1; }
-  if (!h.escada) { if (Math.abs(h.vx) > 8 && h.noChao) { h.tq += dt; if (h.tq > .14) { h.tq = 0; h.q = 1 - h.q; } } else h.q = 0; }
+  if (!h.escada) { if (Math.abs(h.vx) > 8 && h.noChao) { h.tq += dt; if (h.tq > .14) { h.tq = 0; h.q = (h.q + 1) % nQuadros('heroi'); } } else h.q = 0; }
   /* poderes com tempo: quando o relógio do poder chega no zero, a regra "o poder acabar" acorda */
   Object.keys(h.pod).forEach(function (k) {
     if (h.pod[k] === Infinity) return;
@@ -468,7 +471,7 @@ function fimPassoHeroi(h, dt) {
 
 function passoInimigo(e, dt) {
   var T = FAB.TIPOS[e.tipo], m = T.mover || 'anda';
-  e.t += dt; e.tq = (e.tq || 0) + dt; if (e.tq > .25) { e.tq = 0; e.q = 1 - e.q; }
+  e.t += dt; e.tq = (e.tq || 0) + dt; if (e.tq > .25) { e.tq = 0; e.q = (e.q + 1) % nQuadros(e.tipo); }
   if (m === 'anda') {
     e.vx = e.dir * (T.vel || (T.rapido ? 55 : 28)); e.vy = Math.min(e.vy + GRAV * dt, MAXQ);
     var r = move(e, dt, true);
@@ -588,7 +591,7 @@ function desenha() {
   cx.setTransform(1, 0, 0, 1, Math.round(-cam.x + sx), Math.round(-cam.y));
   var t0 = Math.max(0, Math.floor(cam.x / TS) - 1), t1 = Math.min(W, Math.ceil((cam.x + w) / TS) + 1);
   var r0 = Math.max(0, Math.floor(cam.y / TS) - 1), r1 = Math.min(ALT, Math.ceil((cam.y + VH) / TS) + 1);
-  var fq = Math.floor(performance.now() / 300) % 2;
+  var fq = Math.floor(performance.now() / 300) % 12;   /* 12 = serve para desenho de 1, 2, 3 ou 4 quadros (sprCanvas faz o resto) */
   for (var ty = r0; ty < r1; ty++) for (var tx = t0; tx < t1; tx++) {
     var tp = tipoEm(tx, ty); if (!tp) continue;
     var sk = FAB.skinDe(tp);
@@ -743,9 +746,9 @@ M.inicia = function (canvas, jogo, opts) {
   carregaFase(O.fase || 0);
   tAnt = performance.now(); raf = requestAnimationFrame(quadro);
 };
-M.para = function () { if (rodando) { rodando = false; cancelAnimationFrame(raf); } };
+M.para = function () { if (rodando) { rodando = false; cancelAnimationFrame(raf); } if (FAB.musica) FAB.musica.para(); };
 M.termina = function () { if (rodando) fim(false); };
-M.pausa = function (p) { pausado = p; tAnt = performance.now(); };
+M.pausa = function (p) { pausado = p; tAnt = performance.now(); if (FAB.musica) FAB.musica.pausa(p); };
 M.lupa = function (on) { LUPA = on; };
 M.rodando = function () { return rodando; };
 M.tecla = function (k, apertada) {

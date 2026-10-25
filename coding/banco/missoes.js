@@ -35,22 +35,22 @@ window.FAB = window.FAB || {};
 
   FAB.MISSOES = [
     { id: 'heroi', conceito: 'pixel', xp: 10,
-      frase: 'Deixe o herói do seu jeito: troque uma cor dele.',
+      frase: 'Troque uma cor do herói.',
       onde: 'pixel',
       confere: function (E, J) { return meu(J.skins && J.skins.heroi); } },
 
     { id: 'pular', conceito: 'teste', xp: 10,
-      frase: 'Aperte o botão verde e faça o herói pular.',
+      frase: 'Faça o herói pular no teste.',
       onde: 'testar',
       confere: function (E, J) { return (T(J).pulos || 0) >= 1; } },
 
     { id: 'moedas', conceito: 'fase', xp: 10,
-      frase: 'Espalhe moedas pela fase até ter 15.',
+      frase: 'Ponha 15 moedas na fase.',
       onde: 'fases',
       confere: function (E, J) { return pecas(J, 'o') >= 15; } },
 
     { id: 'som', conceito: 'evento', xp: 10,
-      frase: 'Troque o som que toca quando pega a moeda. Depois teste.',
+      frase: 'Troque o som da moeda. Depois teste.',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'toca' && r.quando.obj === 'moeda' && temAcao(r, 'som', function (a) { return a.v !== 'moeda'; }); })
@@ -58,7 +58,7 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'pontos', conceito: 'variavel', xp: 10,
-      frase: 'Faça cada moeda valer 5 pontos e faça 20 pontos jogando.',
+      frase: 'Faça a moeda valer 5 pontos. Jogue e faça 20.',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'toca' && r.quando.obj === 'moeda' && temAcao(r, 'ponto', function (a) { return a.n >= 5; }); }).length > 0
@@ -66,12 +66,12 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'diario', conceito: 'teste', xp: 10,
-      frase: 'Conte no diário como foi o seu teste.',
+      frase: 'Escolha uma carinha no fim do teste.',
       onde: 'diario',
       confere: function (E) { return (E.diario || []).some(function (d) { return d.cara; }); } },
 
     { id: 'inimigo', conceito: 'pixel', xp: 15,
-      frase: 'Desenhe o seu próprio inimigo e ponha ele na fase.',
+      frase: 'Desenhe um inimigo. Ponha ele na fase.',
       onde: 'pixel',
       confere: function (E, J) {
         var sk = J.skins || {};
@@ -79,14 +79,14 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'tecla', conceito: 'evento', xp: 15,
-      frase: 'Crie uma regra: quando apertar X, dar um super pulo.',
+      frase: 'Faça a tecla X dar um super pulo.',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'tecla' && temAcao(r, 'pulo'); }).some(function (r) { return disparou(J, r); });
       } },
 
     { id: 'bug1', conceito: 'bug', xp: 20, abre: 'quebrado',
-      frase: 'Abra o jogo quebrado e faça a moeda dar ponto.',
+      frase: 'Faça a moeda do jogo quebrado dar ponto.',
       onde: 'regras',
       confere: function (E) {
         return (E.jogos || []).some(function (J) {
@@ -95,19 +95,19 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'bug2', conceito: 'depuracao', xp: 25, abre: 'quebrado',
-      frase: 'Ache os outros bichinhos do jogo quebrado e chegue na bandeira.',
+      frase: 'Conserte o jogo quebrado. Chegue na bandeira.',
       onde: 'testar',
       confere: function (E) {
         return (E.jogos || []).some(function (J) { return J.origem === 'quebrado' && (J.ultimoTeste || {}).venceu; });
       } },
 
     { id: 'chaveporta', conceito: 'fase', xp: 10,
-      frase: 'Ponha uma chave e uma porta na sua fase.',
+      frase: 'Ponha uma chave e uma porta na fase.',
       onde: 'fases',
       confere: function (E, J) { return pecas(J, 'k') >= 1 && pecas(J, 'D') >= 1; } },
 
     { id: 'condicao', conceito: 'condicao', xp: 20,
-      frase: 'Faça a porta abrir SÓ SE tiver a chave. Passe por ela jogando.',
+      frase: 'Faça a porta abrir SÓ SE tiver a chave. Passe por ela.',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'toca' && r.quando.obj === 'porta' && r.se && r.se.t === 'tem' && r.se.obj === 'chave'; }).length > 0
@@ -115,7 +115,7 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'laco', conceito: 'laco', xp: 20,
-      frase: 'A cada 5 segundos, faça aparecer uma estrela.',
+      frase: 'Faça uma estrela aparecer a cada 5 segundos.',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'cada' && temAcao(r, 'cria', function (a) { return a.obj === 'estrela'; }); })
@@ -123,38 +123,38 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'fase2', conceito: 'sequencia', xp: 20,
-      frase: 'Crie a fase 2 e chegue nela jogando.',
+      frase: 'Crie a fase 2. Chegue nela jogando.',
       onde: 'fases',
       confere: function (E, J) { return (J.fases || []).length >= 2 && (T(J).faseMax || 1) >= 2; } },
 
     { id: 'convidado', conceito: 'teste', xp: 25,
-      frase: 'Chame alguém para jogar o seu jogo. Veja onde a pessoa errou.',
+      frase: 'Chame alguém para jogar o seu jogo.',
       onde: 'jogar',
       confere: function (E) { return (E.stats && E.stats.convidado || 0) >= 1; } },
 
     { id: 'versao', conceito: 'versao', xp: 15,
-      frase: 'Melhore o que ficou difícil e tire a foto do jogo.',
+      frase: 'Tire uma foto do jogo no Diário.',
       onde: 'diario',
       confere: function (E, J) { return (J.versoes || []).length >= 1; } },
 
     { id: 'prova', conceito: 'prova', xp: 20,
-      frase: 'Ponha uma Placa ? no caminho e acerte a pergunta da prova.',
+      frase: 'Ponha uma Placa ? na fase. Acerte a pergunta.',
       onde: 'fases',
       confere: function (E, J) { return pecas(J, '?') >= 1 && (T(J).certasProva || 0) >= 1; } },
 
     { id: 'minhapergunta', conceito: 'prova', xp: 25,
-      frase: 'Escreva a SUA pergunta e faça a placa perguntar ela.',
+      frase: 'Escreva uma pergunta sua. Responda na placa.',
       onde: 'regras',
       confere: function (E, J) { return (E.perguntas || []).length >= 1 && (T(J).minhas || 0) >= 1; } },
 
     { id: 'robo', conceito: 'especificacao', xp: 20,
-      frase: 'Peça uma peça nova ao robô: o que é, como é e o que faz.',
+      frase: 'Peça uma peça nova ao robô.',
       onde: 'robo',
       confere: function (E) { return (E.pedidos || []).length >= 1; } },
 
     /* missões novas (23/10/2026): peças, heróis e cenários novos */
     { id: 'pontovolta', conceito: 'fase', xp: 15,
-      frase: 'Ponha um ponto de volta na fase e passe por ele jogando.',
+      frase: 'Ponha um ponto de volta. Passe por ele jogando.',
       onde: 'fases',
       confere: function (E, J) { return pecas(J, 'v') >= 1 && (T(J).pontosVolta || 0) >= 1; } },
 
@@ -176,7 +176,7 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'pulaalto', conceito: 'evento', xp: 20,
-      frase: 'Crie uma regra nova que faça o herói pular mais alto. Teste!',
+      frase: 'Crie uma regra de pular mais alto. Teste!',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return temAcao(r, 'pulaalto') && !(r.quando.t === 'toca' && r.quando.obj === 'cogumelo'); })
@@ -184,7 +184,7 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'cenarionovo', conceito: 'fase', xp: 10,
-      frase: 'Mude o cenário da fase para neve, floresta, vulcão ou cidade.',
+      frase: 'Mude o cenário para neve, floresta, vulcão ou cidade.',
       onde: 'fases',
       confere: function (E, J) {
         return (J.fases || []).some(function (f) { return ['neve', 'floresta', 'vulcao', 'cidade'].indexOf(f.cenario) >= 0; });
@@ -192,14 +192,14 @@ window.FAB = window.FAB || {};
 
     /* Opções (a engrenagem): a Fábrica do jeito dela */
     { id: 'jeito', conceito: 'pixel', xp: 10,
-      frase: 'Abra a engrenagem e deixe a Fábrica com a sua cor.',
+      frase: 'Mude a cor da Fábrica na engrenagem.',
       onde: 'jeito',
       confere: function (E) { return !!E.prefs && E.prefs.tema !== 'noite'; } },
 
     /* mundo (v3, 24/10/2026): cada peça nova vem com uma missão que obriga a MUDAR uma regra
        dela (confere a regra mudada + que ela acordou no teste), nunca só por pôr a peça */
     { id: 'penaestrela', conceito: 'evento', xp: 20, abre: 'torre',
-      frase: 'Faça a estrela dar o pulo duplo. Depois teste e pule duas vezes.',
+      frase: 'Faça a estrela dar pulo duplo. Teste!',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'toca' && r.quando.obj === 'estrela' && temAcao(r, 'ligar', function (a) { return /^duplo/.test(a.v || ''); }); })
@@ -207,7 +207,7 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'folego', conceito: 'variavel', xp: 20, abre: 'lago',
-      frase: 'No lago, faça a bolha dar 10 de fôlego. Chegue na bandeira.',
+      frase: 'Faça a bolha dar 10 de fôlego. Chegue na bandeira.',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'toca' && r.quando.obj === 'bolha' && temAcao(r, 'folego', function (a) { return a.n >= 10; }); })
@@ -215,7 +215,7 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'cavalo', conceito: 'condicao', xp: 25, abre: 'cavalo',
-      frase: 'Monte no cavalo e faça o inimigo dar pontos quando encostar. Teste!',
+      frase: 'No cavalo, faça o inimigo dar pontos. Teste!',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'toca' && r.se && r.se.t === 'montada' && temAcao(r, 'ponto', function (a) { return a.n > 0; }); })
@@ -223,7 +223,7 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'cano', conceito: 'sequencia', xp: 20, abre: 'poco',
-      frase: 'Faça o cano levar para a próxima fase. Depois teste.',
+      frase: 'Faça o cano levar para a próxima fase. Teste!',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'cano' && temAcao(r, 'iraoutro', function (a) { return a.v === 'proxima'; }); })
@@ -231,14 +231,14 @@ window.FAB = window.FAB || {};
       } },
 
     { id: 'poderacaba', conceito: 'sequencia', xp: 20,
-      frase: 'Quando o poder acabar, mostre um balão. Pegue o cogumelo pequenino e teste.',
+      frase: 'Mostre um balão quando o poder acabar. Teste!',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'poderacaba' && temAcao(r, 'fala'); }).some(function (r) { return disparou(J, r); });
       } },
 
     { id: 'luva', conceito: 'variavel', xp: 20,
-      frase: 'Ponha a luva grudenta e troque para grudar só 10 segundos. Teste!',
+      frase: 'Faça a luva grudar só 10 segundos. Teste!',
       onde: 'regras',
       confere: function (E, J) {
         return regras(J, function (r) { return r.quando.t === 'toca' && r.quando.obj === 'luva' && temAcao(r, 'ligar', function (a) { return a.v === 'grudar:10'; }); })
