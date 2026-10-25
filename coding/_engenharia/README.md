@@ -12,6 +12,7 @@
 | `js/motor.js` | o jogo rodando: física, inimigos, regras, Placa ?, lupa, sons sintetizados | quando entra regra/comportamento novo |
 | `js/ui.js` | barra de telas, topo, janelas, medalha, ditado | raramente |
 | `js/pixel.js` · `editor.js` · `regras.js` · `telas.js` | as telas | ao melhorar uma tela |
+| `js/diagnostico.js` · `js/panorama.js` | avisos do editor (fase sem saída, peça presa ou inútil, coisa demais numa tela) · minimapa-régua e "Ver a fase" | ao criar peça que muda o alcance (pulo, subir, passar) |
 | `banco/catalogo.js` | paleta, sprites prontos, tipos de peça, cenários, jogos-modelo | ao criar modelo/peça base |
 | `banco/blocos.js` | QUANDO/SE/FAÇA, opções, regras-modelo, ícones | ao criar bloco |
 | `banco/missoes.js` | trilha de missões (com conferência) + cartas do saber + níveis | missão nova entra NO FIM |

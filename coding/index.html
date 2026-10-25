@@ -101,20 +101,37 @@ svg{flex:none}
 .jg b{font-size:16px}
 
 /* ---------- ateliê de pixel ---------- */
-.px-wrap{display:grid;grid-template-columns:220px auto 1fr;gap:16px;align-items:start}
+.px-wrap{display:grid;grid-template-columns:180px minmax(0,1fr) 220px;gap:16px;align-items:start}
+.px-centro{container-type:inline-size}
+.px-lado{grid-template-columns:minmax(0,1fr)}
+.px-lado .campo input{min-width:0;width:100%}
+.px-pintar{display:flex;gap:8px;align-items:stretch}
+.px-barra{display:flex;flex-direction:column;gap:4px;flex:none;width:56px}
+.pxb{width:56px;min-height:44px;max-height:76px;flex:1;border-radius:12px;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:800;font-size:10px;line-height:1.05;padding:3px 1px;color:#fff}
+.pxb:hover{background:var(--card4)}
+.pxb span{max-width:54px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pxb.on{background:#ffd84a;color:#2a1d00}
+.px-quadros{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.px-qs{display:flex;gap:6px;flex-wrap:wrap}
+.pxq{min-width:48px;height:48px;border-radius:10px;background:var(--card);border:2px solid transparent;display:grid;place-items:center;position:relative;padding:0 8px;font-weight:900;color:#fff}
+.pxq img{width:32px;height:32px}
+.pxq b{position:absolute;right:3px;bottom:1px;font-size:11px;text-shadow:0 0 3px #000}
+.pxq.on{border-color:#ffd84a;background:var(--card4)}
+.pxq.acao{background:var(--bg2);padding:0}
+.px-tons{display:grid;grid-template-columns:repeat(8,minmax(28px,44px));gap:6px;margin:12px 0 16px}
+.px-tons .cor{width:auto;height:auto;aspect-ratio:1}
+.px-livre input{width:44px;height:30px;border:0;padding:0;background:none;cursor:pointer}
+.cor.misturar{background:var(--card);display:grid;place-items:center;border-color:#ffd84a}
 .papeis{display:flex;flex-direction:column;gap:6px;max-height:70vh;overflow:auto;padding-right:4px}
 .papel{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:12px;background:var(--card);border:2px solid transparent;font-weight:800;text-align:left}
 .papel.on{border-color:#ffd84a;background:var(--card4)}
 .papel small{display:block;color:var(--txt3);font-size:12px}
-#pxGrade{--cel:clamp(18px,calc((100dvh / var(--z) - 330px) / 16),40px);display:grid;grid-template-columns:repeat(16,var(--cel));grid-template-rows:repeat(16,var(--cel));border:3px solid #1a1c2c;border-radius:6px;background-color:#e9e9f2;background-image:linear-gradient(45deg,#cfcfe0 25%,transparent 25%,transparent 75%,#cfcfe0 75%),linear-gradient(45deg,#cfcfe0 25%,transparent 25%,transparent 75%,#cfcfe0 75%);background-size:calc(var(--cel)*2) calc(var(--cel)*2);background-position:0 0,var(--cel) var(--cel);touch-action:none;user-select:none;width:max-content}
+#pxGrade{--cel:clamp(14px,min(calc((100dvh / var(--z) - 330px) / 16),calc((100cqw - 70px) / 16)),40px);display:grid;grid-template-columns:repeat(16,var(--cel));grid-template-rows:repeat(16,var(--cel));border:3px solid #1a1c2c;border-radius:6px;background-color:#e9e9f2;background-image:linear-gradient(45deg,#cfcfe0 25%,transparent 25%,transparent 75%,#cfcfe0 75%),linear-gradient(45deg,#cfcfe0 25%,transparent 25%,transparent 75%,#cfcfe0 75%);background-size:calc(var(--cel)*2) calc(var(--cel)*2);background-position:0 0,var(--cel) var(--cel);touch-action:none;user-select:none;width:max-content}
 #pxGrade div{width:var(--cel);height:var(--cel);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.12)}
-.paleta{display:grid;grid-template-columns:repeat(7,40px);gap:6px;margin-top:12px}
+.paleta{display:grid;grid-template-columns:repeat(auto-fill,40px);gap:6px;margin-top:12px}
 .cor{width:40px;height:40px;border-radius:10px;border:3px solid #1a1c2c}
 .cor.on{outline:3px solid #fff;outline-offset:2px}
 .cor.transp{background:repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0 0/12px 12px}
-.ferr{display:flex;flex-direction:column;gap:8px}
-.ferr .ib{width:auto;height:52px;padding:0 12px;display:flex;gap:8px;font-weight:800;justify-content:flex-start}
-.ferr .ib.on{background:#ffd84a;color:#2a1d00}
 .prev{display:flex;gap:12px;align-items:flex-end;background:var(--bg0);border-radius:12px;padding:10px}
 .galeria{display:flex;flex-wrap:wrap;gap:6px}
 .galeria button{width:52px;height:52px;border-radius:10px;background:var(--bg2);display:grid;place-items:center;border:2px solid transparent}
@@ -143,6 +160,8 @@ svg{flex:none}
 #fzScroll{overflow:auto;border-radius:12px;border:3px solid #1a1c2c;background:#000;flex:1;min-height:180px}
 #fzCanvas{display:block;image-rendering:pixelated;touch-action:none;cursor:crosshair}
 .dica-peca{margin-top:8px;font-weight:800;color:var(--txt2);min-height:24px;display:flex;align-items:center;gap:10px;flex:none}
+#fzDica{display:flex;align-items:center;gap:6px;min-width:0;white-space:nowrap;overflow:hidden}#fzDica>span{overflow:hidden;text-overflow:ellipsis}
+.fz-dica-bt{min-width:44px;min-height:44px;padding:0;flex:none}.fz-dica-mais{color:var(--txt3)}
 
 /* ---------- regras ---------- */
 .rg-lista{display:flex;flex-direction:column;gap:10px}
@@ -189,9 +208,39 @@ body.imersivo .ts-barra{justify-content:center}
 #tsWrap .aba-log{display:flex}
 .hud{position:absolute;top:8px;left:8px;right:8px;display:flex;gap:8px;pointer-events:none;flex-wrap:wrap}
 .hud span{display:flex;align-items:center;gap:6px;background:rgba(14,12,36,.78);border-radius:12px;padding:4px 10px;font-weight:900;font-size:18px}
-.toques{position:absolute;bottom:10px;left:10px;right:10px;display:none;justify-content:space-between;pointer-events:none}
-.toques .gp{display:flex;gap:10px;pointer-events:auto}
-.toques button{width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.22);border:3px solid rgba(255,255,255,.6);font-weight:900;font-size:24px;color:#fff;touch-action:none}
+/* mesa de toques (A1): andar à esquerda, PULAR grande à direita, X/C/V (só as da regra) menores em cima dele */
+.palco{container-type:inline-size}
+.toques{position:absolute;bottom:10px;left:10px;right:10px;display:none;justify-content:space-between;align-items:flex-end;gap:8px;pointer-events:none}
+.toques .gp{display:flex;gap:10px;pointer-events:auto;align-items:flex-end}
+.toques .acao{flex-direction:column;align-items:flex-end;gap:8px}
+.toques .gp-teclas{display:flex;gap:8px}
+.toques .gp-teclas:not(:has(button:not([hidden]))){display:none}
+.toques button{width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.22);border:3px solid rgba(255,255,255,.6);font-weight:900;font-size:24px;color:#fff;touch-action:none;flex:none}
+.toques button[hidden]{display:none}
+.toques .bt-pulo{width:84px;height:84px;font-size:30px;background:rgba(255,216,74,.32);border-color:#ffd84a}
+.toques .gp-teclas button{width:54px;height:54px;font-size:20px}
+@container (max-width:560px){
+  .toques{left:6px;right:6px;bottom:6px}
+  .toques .gp{gap:6px}
+  .toques .anda button{width:clamp(48px,17cqi,64px);height:clamp(48px,17cqi,64px);font-size:20px}
+  .toques .bt-pulo{width:clamp(60px,22cqi,80px);height:clamp(60px,22cqi,80px);font-size:26px}
+  .toques .gp-teclas button{width:44px;height:44px;font-size:17px;border-width:2px}
+}
+/* balão dos controles (A2): 1ª vez no Testar/Mostrar, uns 5 s */
+.balao-ctl{position:absolute;inset:0;pointer-events:none;z-index:4;animation:entra .3s}
+.balao-ctl.sai{opacity:0;transition:opacity .5s}
+.bc-teclado{position:absolute;left:50%;top:22%;transform:translateX(-50%);display:flex;flex-direction:column;gap:10px;background:rgba(14,12,36,.88);border:3px solid #ffd84a;border-radius:18px;padding:12px 18px;box-shadow:0 4px 0 rgba(0,0,0,.4)}
+.bc-lin{display:flex;align-items:center;gap:8px;font-weight:900;font-size:20px;white-space:nowrap}
+.bc-lin b{margin-left:6px;color:#ffe9a0}
+.kbd{display:inline-grid;place-items:center;min-width:44px;height:44px;padding:0 8px;border-radius:10px;background:linear-gradient(180deg,#fff,#d9d4ff);color:#1a1c2c;border:2px solid #1a1c2c;box-shadow:0 4px 0 #6b63b5;font-size:22px;font-weight:900}
+.kbd.larga{min-width:120px;font-size:16px;letter-spacing:1px}
+.bc-item{position:absolute;display:grid;grid-template-columns:auto auto;align-items:center;justify-items:center;column-gap:4px;background:rgba(14,12,36,.88);border:3px solid #ffd84a;border-radius:16px;padding:4px 10px 0;font-weight:900;font-size:17px;color:#ffe9a0}
+.bc-item .seta-b{grid-column:1/-1;margin-top:-4px}
+.bc-item .seta-b{animation:quica .8s ease-in-out infinite}
+.bc-anda{left:12px;bottom:clamp(64px,22cqi,84px)}
+.bc-pula{right:10px;bottom:clamp(76px,27cqi,100px)}
+.palco:has(.gp-teclas button:not([hidden])) .bc-pula{bottom:clamp(126px,40cqi,160px)}
+.palco:has(.sobre.on) .balao-ctl{display:none}
 body.toque .toques{display:flex}
 body.visita .aba-abre{display:none!important}
 .log{background:var(--bg0);border-radius:14px;border:2px solid var(--card3);padding:10px;overflow:auto;font-size:14px;font-weight:700;display:flex;flex-direction:column;gap:6px}
@@ -386,6 +435,40 @@ body.imersivo .tr-ant,body.imersivo .tr-prox{min-height:52px}
 .ms-todas[open] summary{margin-bottom:12px}
 .ms-todas[open] summary svg{transform:rotate(180deg)}
 
+/* ---------- auditoria de uso independente (24/10): Fases, Regras, janelas, topo ---------- */
+.jeito-bloco h4{margin-bottom:4px}
+.jeito-tela .bt{flex-direction:column;gap:2px;line-height:1.1}
+.fz-janela{position:relative;flex:1;min-height:180px;display:flex;flex-direction:column}
+.fz-janela #fzScroll{flex:1;min-height:0}
+.rola-dica{position:absolute;display:none;place-items:center;pointer-events:none;z-index:2}
+.rola-dica.esq,.rola-dica.dir{top:3px;bottom:3px;width:34px}
+.rola-dica.cima,.rola-dica.baixo{left:3px;right:3px;height:30px}
+.rola-dica.esq{left:3px;border-radius:10px 0 0 10px;background:linear-gradient(90deg,rgba(10,8,30,.75),transparent)}
+.rola-dica.dir{right:3px;border-radius:0 10px 10px 0;background:linear-gradient(270deg,rgba(10,8,30,.75),transparent)}
+.rola-dica.cima{top:3px;background:linear-gradient(180deg,rgba(10,8,30,.7),transparent)}
+.rola-dica.baixo{bottom:3px;background:linear-gradient(0deg,rgba(10,8,30,.7),transparent)}
+.rola-dica svg{animation:pisca 1.4s ease-in-out infinite;filter:drop-shadow(0 1px 0 #000)}
+.fz-janela.tem-esq .rola-dica.esq,.fz-janela.tem-dir .rola-dica.dir,.fz-janela.tem-cima .rola-dica.cima,.fz-janela.tem-baixo .rola-dica.baixo{display:grid}
+/* B2: desenho escuro some no fundo azul da janela de escolha: cada desenho ganha um fundo claro */
+.op>svg{background:#eceaff;border-radius:12px;padding:5px;box-sizing:content-box;box-shadow:inset 0 0 0 2px #1a1c2c22}
+.op.atual{border-color:#ffd84a;box-shadow:0 0 0 2px #ffd84a}
+.op.secundaria{border-style:dashed;background:transparent;min-height:72px}
+.gd-onde{display:flex;align-items:center;gap:6px;margin-top:8px}
+.rg-todas{margin-top:12px}
+@media (max-width:640px){
+  #selo{margin-right:auto}
+  #t-fases .ajuda p{display:none}   /* A5: no celular o mapa fica com a altura; a explicação continua no botão de ouvir */
+  #t-fases .fz-barra.tem-mais{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent)}
+  #nomeJogo{display:none}   /* B1: o nome cortado ("Meu prime") sai do topo do celular; ele continua em Ideia */
+  #t-fases .fz-barra{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;margin-bottom:6px;scrollbar-width:thin}
+  #t-fases .fz-barra>*{flex:none}
+  #fzPecas{flex:none;align-items:flex-end;gap:12px;padding-bottom:4px}
+  #fzPecas>div{flex:none}
+  #fzPecas .gp{grid-auto-flow:column;grid-template-columns:none;grid-template-rows:52px;grid-auto-columns:52px}
+  #fzPecas .jeito-tela{margin:0}
+  #fzPecas .jeito-tela .bt{flex:none;min-height:52px;padding:4px 8px}
+}
+
 /* ---------- telas estreitas (tablet em pé / celular) ---------- */
 @media (max-width:900px){
   .pn-hero,.px-wrap,.fz-wrap,.ts-wrap,.robo-grid,.ms-agora-wrap{grid-template-columns:1fr}
@@ -398,7 +481,7 @@ body.imersivo .tr-ant,body.imersivo .tr-prox{min-height:52px}
   .fz-wrap{grid-template-rows:auto 1fr}
   .fz-wrap.fechadas{grid-template-columns:1fr;grid-template-rows:0 1fr}
 }
-body.sem-ajuda #pxGrade{--cel:clamp(18px,calc((100dvh / var(--z) - 260px) / 16),44px)}
+body.sem-ajuda #pxGrade{--cel:clamp(14px,min(calc((100dvh / var(--z) - 260px) / 16),calc((100cqw - 70px) / 16)),44px)}
 @media (max-width:640px){
   .res h2{font-size:22px} .nums div{font-size:17px;padding:4px} .cara{width:56px;height:56px} .bt.grande{min-height:52px;font-size:18px}
   :root{--nav:0px}
@@ -423,7 +506,7 @@ body.sem-ajuda #pxGrade{--cel:clamp(18px,calc((100dvh / var(--z) - 260px) / 16),
   .nb{width:64px;min-height:62px;flex:none;font-size:12px}
   .missao-chip,.nivel small{display:none}
   #tela{padding:12px 12px 30px}
-  #pxGrade,body.sem-ajuda #pxGrade{--cel:19px}
+  #pxGrade,body.sem-ajuda #pxGrade{--cel:clamp(14px,calc((100cqw - 70px) / 16),26px)}   /* celular: a largura manda (ferramentas ao lado da grade) */
 }
 </style>
 </head>
@@ -480,9 +563,12 @@ body.sem-ajuda #pxGrade{--cel:clamp(18px,calc((100dvh / var(--z) - 260px) / 16),
 <script src="js/idioma.js"></script>
 <script src="js/nuvem.js"></script>
 <script src="js/motor.js"></script>
+<script src="js/musica.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/pixel.js"></script>
 <script src="js/editor.js"></script>
+<script src="js/diagnostico.js"></script>
+<script src="js/panorama.js"></script>
 <script src="js/regras.js"></script>
 <script src="js/jeito.js"></script>
 <script src="js/guia.js"></script>

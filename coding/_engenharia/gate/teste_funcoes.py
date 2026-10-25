@@ -188,6 +188,112 @@ with sync_playwright() as p:
     ok(not e5, 'sem erro de página (navegação): ' + '; '.join(e5))
     pg5.close()
 
+    # 6. Ateliê: quadros da animação, cor misturada, tela sem rolar de lado; música da fase
+    pg6 = ctx.new_page(); pg6.add_init_script(MUDO); e6 = []; pg6.on('pageerror', lambda e: e6.append(str(e)))
+    pg6.goto(URL); pg6.evaluate("localStorage.clear()"); pg6.reload(); pg6.wait_for_timeout(400)
+    # desenho antigo (2 quadros, só letras da paleta): abrir, trocar de quadro sem pintar -> guardado igualzinho, canvas igual ao de sempre
+    pg6.evaluate("""() => { const q0 = FAB.SPRITES.urso.quadros[0], q1 = FAB.SPRITES.urso.quadros[1] || q0;
+      FAB.E.sprites.meu_antigo = { nome: 'Antigo', grupo: 'heroi', base: 'urso', quadros: [q0.slice(), q1.slice()] };
+      window.__antigo = JSON.stringify(FAB.E.sprites.meu_antigo); FAB.jogo().skins.heroi = 'meu_antigo'; FAB.pixelPapel('heroi'); FAB.ui.vai('pixel'); }""")
+    pg6.wait_for_timeout(300); fecha_medalhas(pg6)
+    pg6.click('.pxq[data-q="1"]'); pg6.click('.pxq[data-q="-1"]'); pg6.wait_for_timeout(200)
+    ok(pg6.evaluate("JSON.stringify(FAB.E.sprites.meu_antigo) === window.__antigo"), 'desenho antigo continua idêntico (abrir e trocar de quadro não muda nada)')
+    COMPARA = """(id) => { const s = FAB.spr(id); let iguais = true;
+      s.quadros.forEach((Q, n) => { const d = FAB.sprCanvas(id, n).getContext('2d').getImageData(0, 0, 16, 16).data;
+        for (let j = 0; j < 16; j++) for (let i = 0; i < 16; i++) { const c = FAB.PALETA[(Q[j] || '')[i]], k = (j * 16 + i) * 4;
+          if (!c) { if (d[k + 3] !== 0) iguais = false; } else { const h = '#' + [d[k], d[k + 1], d[k + 2]].map(v => ('0' + v.toString(16)).slice(-2)).join(''); if (h !== c) iguais = false; } } });
+      return iguais; }"""
+    ok(pg6.evaluate(COMPARA, 'meu_antigo') and pg6.evaluate(COMPARA, 'urso') and pg6.evaluate(COMPARA, 'moeda'), 'desenho antigo e modelos desenham pixel a pixel como antes')
+    # no jogo, o herói de 2 quadros anda 0,1,0,1 (a conta de sempre)
+    pg6.evaluate("window.__qs = {}; const o = FAB.sprCanvas; FAB.sprCanvas = function (id, q) { if (id === FAB.jogo().skins.heroi) window.__qs[q || 0] = 1; return o.apply(this, arguments); }")
+    pg6.evaluate("FAB.ui.vai('testar')"); pg6.wait_for_timeout(400)
+    pg6.keyboard.down('ArrowRight'); pg6.wait_for_timeout(1300); pg6.keyboard.up('ArrowRight')
+    ok(sorted(pg6.evaluate("Object.keys(window.__qs)")) == ['0', '1'], 'herói antigo de 2 quadros anima 0,1 como antes')
+    pg6.evaluate("FAB.ui.vai('pixel')"); pg6.wait_for_timeout(300); fecha_medalhas(pg6)
+    # quadro 2 pintado diferente do 1
+    pg6.click('.pxq[data-q="1"]'); pg6.click('.cor[data-c="b"]'); pg6.click('#pxGrade div[data-i="0"]'); pg6.wait_for_timeout(200)
+    ok(pg6.evaluate("var s = FAB.E.sprites[FAB.jogo().skins.heroi]; s.quadros[1][0][0] === 'b' && s.quadros[0][0][0] !== 'b'"), 'escolhendo o quadro 2, pinta só nele')
+    pg6.click('#pxQNovo'); pg6.wait_for_timeout(200); pg6.click('.cor[data-c="r"]'); pg6.click('#pxGrade div[data-i="1"]'); pg6.wait_for_timeout(200)
+    ok(pg6.evaluate("var s = FAB.E.sprites[FAB.jogo().skins.heroi]; s.quadros.length === 3 && s.quadros[2][0][1] === 'r' && s.quadros[1][0][1] !== 'r'"), 'quadro novo (3) nasce e recebe pintura própria')
+    pg6.click('#pxQCopia'); pg6.wait_for_timeout(200)
+    ok(pg6.evaluate("var s = FAB.E.sprites[FAB.jogo().skins.heroi]; JSON.stringify(s.quadros[2]) === JSON.stringify(s.quadros[1])"), 'copiar do quadro anterior')
+    pg6.click('#pxGrade div[data-i="1"]'); pg6.wait_for_timeout(200)
+    pg6.evaluate("window.__qs = {}"); pg6.evaluate("FAB.ui.vai('testar')"); pg6.wait_for_timeout(400)
+    pg6.keyboard.down('ArrowRight'); pg6.wait_for_timeout(1500); pg6.keyboard.up('ArrowRight')
+    ok(sorted(pg6.evaluate("Object.keys(window.__qs)")) == ['0', '1', '2'], 'no jogo o herói passa pelos 3 quadros (o 2 pintado diferente do 1 aparece)')
+    ok(pg6.evaluate("var id = FAB.jogo().skins.heroi, a = FAB.sprCanvas(id, 0).getContext('2d').getImageData(0, 0, 1, 1).data, b = FAB.sprCanvas(id, 1).getContext('2d').getImageData(0, 0, 1, 1).data; a.join() !== b.join() && b[2] === 255"), 'o canvas do quadro 2 que o jogo usa tem a pintura do quadro 2')
+    # misturar cor vira cor da paleta do desenho
+    pg6.evaluate("FAB.ui.vai('pixel')"); pg6.wait_for_timeout(300); fecha_medalhas(pg6)
+    pg6.click('#pxMix'); pg6.wait_for_timeout(200)
+    mix = pg6.evaluate("document.querySelector('[data-mix]').dataset.mix")
+    pg6.click('[data-mix]'); pg6.wait_for_timeout(200); pg6.click('#pxGrade div[data-i="2"]'); pg6.wait_for_timeout(200)
+    ok(pg6.evaluate("(m) => { var s = FAB.E.sprites[FAB.jogo().skins.heroi], ch = s.quadros[2][0][2]; return /[1-9]/.test(ch) && s.cores && s.cores[ch] === m && !!document.querySelector('.cor.mix[data-c=\"' + ch + '\"]'); }", mix), 'cor misturada entra na paleta do desenho e fica guardada nele')
+    ok(pg6.evaluate("(m) => { var d = FAB.sprCanvas(FAB.jogo().skins.heroi, 2).getContext('2d').getImageData(2, 0, 1, 1).data; return '#' + [d[0], d[1], d[2]].map(v => ('0' + v.toString(16)).slice(-2)).join('') === m; }", mix), 'o jogo desenha a cor misturada')
+    # Desenhar sem rolar para o lado; no celular as ferramentas aparecem sem rolar
+    for (w, h) in [(1024, 768), (1280, 800), (390, 844)]:
+        pg6.set_viewport_size({'width': w, 'height': h}); pg6.evaluate("FAB.ui.vai('painel'); FAB.ui.vai('pixel')"); pg6.wait_for_timeout(350); fecha_medalhas(pg6)
+        ok(pg6.evaluate("var t = document.getElementById('t-pixel'), T = document.getElementById('tela'); t.scrollWidth <= t.clientWidth + 1 && T.scrollWidth <= T.clientWidth + 1 && document.documentElement.scrollWidth <= innerWidth + 1"), f'Desenhar sem rolagem horizontal em {w}x{h}')
+        ok(pg6.evaluate("var r = document.getElementById('pxDesf').getBoundingClientRect(), n = document.getElementById('pxNome').getBoundingClientRect(); r.bottom <= innerHeight && r.right <= innerWidth && n.right <= innerWidth"), f'ferramentas visíveis sem rolar em {w}x{h}')
+    pg6.set_viewport_size({'width': 1280, 'height': 800})
+    # música da fase
+    pg6.evaluate("FAB.ui.vai('testar')"); pg6.wait_for_timeout(400)
+    ok(pg6.evaluate("FAB.motor.rodando() && FAB.musica.atual() === null"), 'fase sem música escolhida continua em silêncio (jogo antigo igual)')
+    pg6.evaluate("FAB.ui.vai('fases')"); pg6.wait_for_timeout(400); fecha_medalhas(pg6)
+    pg6.click('#fzMus'); pg6.wait_for_timeout(200); pg6.click('.op:has-text("Aventura")'); pg6.wait_for_timeout(200)
+    ok(pg6.evaluate("FAB.jogo().fases[0].musica") == 'aventura', 'música escolhida entra na fase')
+    pg6.evaluate("FAB.salva()"); pg6.reload(); pg6.wait_for_timeout(500)
+    ok(pg6.evaluate("FAB.jogo().fases[0].musica") == 'aventura', 'música escolhida fica salva na fase')
+    pg6.evaluate("FAB.ui.vai('testar')"); pg6.wait_for_timeout(400)
+    ok(pg6.evaluate("FAB.musica.atual()") == 'aventura', 'no teste a música da fase toca (mudo no robô)')
+    pg6.evaluate("FAB.ui.vai('painel')"); pg6.wait_for_timeout(300)
+    ok(pg6.evaluate("FAB.musica.atual() === null"), 'saiu do teste: a música para')
+    ok(not e6, 'sem erro de página (Ateliê/música): ' + '; '.join(e6))
+    pg6.close()
+
+    # 10. auditoria de uso independente (24/10): A1 toques em 360 px, A3 missão fora de ordem, A7 chip da ação
+    ctx6 = b.new_context(viewport={'width': 360, 'height': 640}, has_touch=True, is_mobile=True)
+    pg6 = ctx6.new_page(); pg6.add_init_script(MUDO); e6 = []; pg6.on('pageerror', lambda e: e6.append(str(e)))
+    pg6.goto(URL); pg6.evaluate("localStorage.clear()"); pg6.reload(); pg6.wait_for_timeout(400)
+    pg6.evaluate("FAB.E.prefs.toques='sim'; FAB.ui.layout(); FAB.ui.vai('testar')"); pg6.wait_for_timeout(600)
+    DENTRO = "(s=>{const e=document.querySelector('#t-testar .toques '+s); if(!e||e.hidden) return false; const r=e.getBoundingClientRect(); return r.width>=44 && r.left>=0 && r.top>=0 && r.right<=innerWidth && r.bottom<=innerHeight;})"
+    ok(pg6.evaluate(DENTRO + "('[data-k=pulo]')") and pg6.evaluate(DENTRO + "('[data-k=esq]')") and pg6.evaluate(DENTRO + "('[data-k=dir]')"), 'A1: em 360 px ◀ ▶ e PULAR cabem inteiros na tela')
+    ok(pg6.evaluate("[...document.querySelectorAll('#t-testar .gp-teclas button')].every(b=>b.hidden)"), 'A1: sem regra de tecla, X/C/V não aparecem')
+    ok(pg6.evaluate("!!document.querySelector('#t-testar .palco .balao-ctl.toque .bc-pula')"), 'A2: 1ª vez no Testar mostra o balão dos controles (toque: andar e pular)')
+    pg6.evaluate("FAB.motor.termina(); FAB.ui.fecha(); FAB.jogo().regras.push(FAB.novaRegra({quando:{t:'tecla',tecla:'X'},faca:[{t:'pulo'}]})); FAB.ui.vai('regras'); FAB.ui.vai('testar')"); pg6.wait_for_timeout(600)
+    ok(pg6.evaluate(DENTRO + "('[data-k=X]')") and pg6.evaluate(DENTRO + "('[data-k=pulo]')") and pg6.evaluate("document.querySelector('#t-testar [data-k=C]').hidden"), 'A1: regra da tecla X: só o X aparece, dentro da tela, junto do PULAR')
+    # A3: cumpriu a missão 8 (tecla) antes da 1: o guia segue para a 9, não volta para a 1
+    pg6.evaluate("FAB.motor.termina(); FAB.ui.fecha(); FAB.E.missoes={tecla:Date.now()}; FAB.ui.vai('testar'); FAB.motor.termina(); FAB.ui.fecha()"); pg6.wait_for_timeout(400)
+    i8 = pg6.evaluate("FAB.MISSOES.findIndex(m=>m.id==='tecla')")
+    ok(pg6.evaluate("FAB.MISSOES.indexOf(FAB.proximaMissao())") == i8 + 1, 'A3: missão fora de ordem: a próxima é a pendente DEPOIS dela')
+    ok(pg6.evaluate("document.getElementById('chipMissao').textContent.indexOf(FAB.proximaMissao().frase)>=0"), 'A3: o chip do topo mostra essa missão')
+    ok(pg6.evaluate("var p=FAB.ui.proximo(); p.missao===FAB.proximaMissao() && p.tela===FAB.guia.telaDa(FAB.proximaMissao()) && p.tela!=='pixel'"), 'A3: no Testar o Próximo passo segue a missão pendente (não volta ao Desenhar)')
+    pg6.evaluate("FAB.ui.vai('jogar')"); pg6.wait_for_timeout(300)
+    ok('outro jogo' in pg6.inner_text('#trProx'), 'A3: no Mostrar o Próximo passo fecha o ciclo (Guardar e fazer outro jogo)')
+    pg6.click('#trProx'); pg6.wait_for_timeout(250)
+    ok('outro jogo' in pg6.inner_text('#mbox h2') and pg6.query_selector('#gdOnde') is not None, 'A3/A9: abre Guardar, dizendo onde fica guardado')
+    n_g = pg6.evaluate("FAB.guardados().length"); pg6.click('#gdOk'); pg6.wait_for_timeout(500)
+    ok(pg6.evaluate("FAB.guardados().length") == n_g + 1 and pg6.evaluate("FAB.ui.atual()") == 'painel' and pg6.evaluate("document.querySelectorAll('#mbox .op').length") >= 2, 'A3: guardou e já oferece o jogo novo')
+    pg6.evaluate("FAB.ui.fecha()")
+    # A7: clicar no chip "+1 pontos" abre direto os números; "trocar a ação" fica como opção de baixo
+    pg6.evaluate("FAB.ui.vai('regras')"); pg6.wait_for_timeout(300)
+    pg6.click('#t-regras .regra[data-r="0"] .bloco.f[data-k="0"]'); pg6.wait_for_timeout(250)
+    ok(pg6.evaluate("!!document.querySelector('#mbox .op.secundaria') && [...document.querySelectorAll('#mbox .op')].some(o=>o.querySelector('span').textContent.trim()==='+5') && ![...document.querySelectorAll('#mbox .op')].some(o=>/a peça some/.test(o.textContent))"), 'A7: chip de pontos abre o seletor de número, não a lista de ações')
+    pg6.click('#mbox .op:has-text("+5")'); pg6.wait_for_timeout(250)
+    ok(pg6.evaluate("FAB.jogo().regras[0].faca[0].t==='ponto' && FAB.jogo().regras[0].faca[0].n===5"), 'A7: escolher +5 muda só o número')
+    pg6.click('#t-regras .regra[data-r="0"] .bloco.f[data-k="2"]'); pg6.wait_for_timeout(250)
+    ok(pg6.evaluate("[...document.querySelectorAll('#mbox .op')].some(o=>/vitória/.test(o.textContent))"), 'B8: som "vitória" com acento na lista')
+    pg6.click('#mbox .op.secundaria'); pg6.wait_for_timeout(300)
+    ok(pg6.evaluate("[...document.querySelectorAll('#mbox .op')].some(o=>/a peça some/.test(o.textContent))"), 'A7: "trocar a ação" abre a lista inteira de ações')
+    pg6.evaluate("FAB.ui.fecha()"); pg6.wait_for_timeout(100)
+    # B10: poucas regras primeiro, todas com um botão; nenhuma deixa de valer
+    vis = pg6.evaluate("document.querySelectorAll('#t-regras .regra').length"); tot = pg6.evaluate("FAB.jogo().regras.length")
+    ok(vis < tot and pg6.query_selector('#rgTodas') is not None, f'B10: Regras mostra {vis} de {tot} e o botão "Ver todas"')
+    pg6.click('#rgTodas'); pg6.wait_for_timeout(200)
+    ok(pg6.evaluate("document.querySelectorAll('#t-regras .regra').length") == tot, 'B10: "Ver todas as regras" mostra a lista inteira')
+    pg6.click('#rgTodas'); pg6.wait_for_timeout(100)
+    ok(not e6, 'sem erro de página (auditoria): ' + '; '.join(e6))
+    ctx6.close()
+
     ok(not erros, 'sem erro de página: ' + '; '.join(erros))
     b.close()
 print('FUNÇÕES: ' + ('OK' if not falhas else 'FALHARAM ' + str(len(falhas))))

@@ -18,6 +18,7 @@ var FEITA = [
   ['HTML e JavaScript:', 'a mesma linguagem dos sites. Cada regra que você monta vira um pedacinho de programa.'],
   ['Canvas:', 'a tela de desenhar do navegador, onde o jogo roda 60 vezes por segundo.'],
   ['Pixel art 16 por 16:', 'cada personagem é uma grade de 256 quadradinhos coloridos.'],
+  ['Música sintetizada:', 'cada trilha é feita de notas calculadas pelo navegador, sem arquivo de som.'],
   ['Vozes gravadas:', 'Thalita, Antonio, Ava e Brian foram gravados antes. Nada do que você faz sai do computador para falar.'],
   ['Memória do navegador:', 'o seu trabalho fica guardado neste computador. Guardar no computador faz uma cópia.'],
   ['Sem conversa com estranhos:', 'a Fábrica não tem chat, não tem propaganda e não conversa com nenhum robô da internet.'],
@@ -44,7 +45,7 @@ function monta(C) {
       }).join('') + '</div><div class="mut">Tudo muda de idioma: telas, missões, regras e voz. As perguntas da prova continuam na língua da prova.</div></div>' +
     '<div class="card"><div class="tit">' + FAB.ico('falar', 26) + 'Quem fala com você</div><div class="vozes">' +
       ['thalita', 'antonio'].map(function (v) {
-        return '<button class="vozc' + (P.voz === v ? ' on' : '') + '" data-voz="' + v + '">' + FAB.ico('voz_' + v, 64) + '<span data-sem-traducao>' + FAB.VOZES[FAB.vozDe(v, FAB.lingua())].nome + '</span></button>';
+        return '<button class="vozc' + (P.voz === v ? ' on' : '') + '" data-voz="' + v + '">' + FAB.ico('voz_' + FAB.vozDe(v, FAB.lingua()), 64) + '<span data-sem-traducao>' + FAB.VOZES[FAB.vozDe(v, FAB.lingua())].nome + '</span></button>';
       }).join('') + '</div>' +
       '<div class="mut">Velocidade da voz</div>' + chips('vel', [[0.85, 'Devagar'], [1, 'Normal'], [1.15, 'Rápida']]) + '</div>' +
 

@@ -29,6 +29,9 @@ Object.assign(FAB.ICONES, {
   zoom_mais: '<circle cx="10" cy="10" r="6.5" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="2"/><path d="M15 15l6 6" stroke="#1a1c2c" stroke-width="3" stroke-linecap="round"/><path d="M7 10h6M10 7v6" stroke="#1a1c2c" stroke-width="2" stroke-linecap="round"/>',
   zoom_menos: '<circle cx="10" cy="10" r="6.5" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="2"/><path d="M15 15l6 6" stroke="#1a1c2c" stroke-width="3" stroke-linecap="round"/><path d="M7 10h6" stroke="#1a1c2c" stroke-width="2" stroke-linecap="round"/>',
   voz_thalita: '<path d="M4 13c0-6 3.5-10 8-10s8 4 8 10v8h-3v-4H7v4H4z" fill="#8b4a2b" stroke="#1a1c2c" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="12" r="5.5" fill="#f2c39b" stroke="#1a1c2c" stroke-width="1.4"/><circle cx="10" cy="11.5" r=".9" fill="#1a1c2c"/><circle cx="14" cy="11.5" r=".9" fill="#1a1c2c"/><path d="M10 14.2a2.4 2.4 0 0 0 4 0" stroke="#c0392b" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M7 7c2 1.5 6 1.5 10-1" stroke="#1a1c2c" stroke-width="1.2" fill="none"/>',
+  /* vozes do inglês: rostos próprios (não reaproveitam Thalita e Antonio) */
+  voz_ava: '<path d="M4.5 14c0-7 3.3-11 7.5-11s7.5 4 7.5 11c0 3-1 5-2 6l-1.5-6H8l-1.5 6c-1-1-2-3-2-6z" fill="#f4c542" stroke="#1a1c2c" stroke-width="1.4" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="5.3" fill="#ffe0c4" stroke="#1a1c2c" stroke-width="1.4"/><path d="M6.8 10.5C9 9.8 11 8 12 6.5c1 1.6 3 3.3 5.2 4" stroke="#1a1c2c" stroke-width="1.2" fill="#f4c542" stroke-linejoin="round"/><circle cx="10" cy="12.6" r=".9" fill="#1a1c2c"/><circle cx="14" cy="12.6" r=".9" fill="#1a1c2c"/><path d="M10.2 15a2.2 2.2 0 0 0 3.6 0" stroke="#c0392b" stroke-width="1.2" fill="none" stroke-linecap="round"/><circle cx="18.6" cy="5.2" r="2" fill="#3b9bff" stroke="#1a1c2c" stroke-width="1.1"/>',
+  voz_brian: '<circle cx="12" cy="13" r="7" fill="#f6cfa8" stroke="#1a1c2c" stroke-width="1.4"/><path d="M5 12.5C4.6 7 8 4 12 4s7.6 3 7 8.5c-1.4-2.4-3.2-3.6-5.6-3.6-.8 1-2.3 1.6-4 1.6-1.5 0-3 .6-4.4 2z" fill="#d9662b" stroke="#1a1c2c" stroke-width="1.4" stroke-linejoin="round"/><circle cx="9.5" cy="13.2" r="2" fill="#fff" stroke="#1a1c2c" stroke-width="1.1"/><circle cx="14.5" cy="13.2" r="2" fill="#fff" stroke="#1a1c2c" stroke-width="1.1"/><path d="M11.5 13.2h1" stroke="#1a1c2c" stroke-width="1.1"/><circle cx="9.5" cy="13.3" r=".7" fill="#1a1c2c"/><circle cx="14.5" cy="13.3" r=".7" fill="#1a1c2c"/><path d="M10 16.6a2.6 2.6 0 0 0 4 0" stroke="#1a1c2c" stroke-width="1.3" fill="none" stroke-linecap="round"/>',
   s_dir_esc: '<path d="M9 4l8 8-8 8" stroke="#2a1d00" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
   nuvemico: '<path d="M7 18h10.5a4 4 0 0 0 .4-8 6 6 0 0 0-11.5 1.6A3.3 3.3 0 0 0 7 18z" fill="#bdf0ff" stroke="#1a1c2c" stroke-width="1.6" stroke-linejoin="round"/>',
   salvo: '<circle cx="12" cy="12" r="10" fill="#3fbf5a" stroke="#1a1c2c" stroke-width="1.6"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
@@ -60,7 +63,7 @@ ui.nav = function () {
 /* bolinha amarela na tela onde a próxima missão acontece */
 ui.marcaMissao = function () {
   var m = FAB.proximaMissao();
-  document.querySelectorAll('.nb').forEach(function (b) { b.classList.toggle('tem-missao', !!m && b.id === 'nb-' + m.onde); });
+  document.querySelectorAll('.nb').forEach(function (b) { b.classList.toggle('tem-missao', !!m && b.id === 'nb-' + (FAB.guia ? FAB.guia.telaDa(m) : m.onde)); });
 };
 
 /* o jeito dela vira classes no <body>: cor, tamanho, lado e o que está recolhido */
@@ -115,7 +118,7 @@ ui.topo = function () {
   $('nivel').innerHTML = FAB.ico('t_missoes', 30) + '<div>' + FAB.xp() + ' XP<small>' + N.nome + '</small></div>';
   $('btSom').innerHTML = FAB.ico('som', 26); $('btSom').classList.toggle('off', !window.somLigado);
   var V = FAB.VOZES[FAB.vozDe(P().voz, P().lingua)];
-  $('btVoz').innerHTML = FAB.ico('voz_' + (P().voz === 'antonio' ? 'antonio' : 'thalita'), 30) + '<span>' + V.nome + '</span>'; $('btVoz').title = 'Trocar a voz';
+  $('btVoz').innerHTML = FAB.ico('voz_' + FAB.vozDe(P().voz, P().lingua), 30) + '<span>' + V.nome + '</span>'; $('btVoz').title = 'Trocar a voz';
   $('btJeito').innerHTML = FAB.ico('engrenagem', 28); $('btRecolhe').innerHTML = FAB.ico('s_cima', 20);
   ui.marcaMissao();
   var lg = document.querySelector('#nav .logo'); if (lg) lg.innerHTML = FAB.ico('spr:' + FAB.skinDe('heroi'), 48);
@@ -139,6 +142,7 @@ function passoIdx(t) { for (var i = 0; i < FAB.PASSOS.length; i++) if (FAB.PASSO
 /* para onde vai o botão amarelo: a tela da missão (se é outra) ou o passo seguinte do caminho */
 ui.proximo = function () {
   var m = FAB.proximaMissao(), tm = FAB.guia ? FAB.guia.telaDa(m) : (m && m.onde), i = passoIdx(atual);
+  if (atual === 'jogar') return { tela: 'painel', ciclo: true };   /* fim do caminho: guarda e começa outro jogo */
   if (m && tm && tm !== atual) return { tela: tm, missao: m };
   if (i >= 0) return { tela: i + 1 < FAB.PASSOS.length ? FAB.PASSOS[i + 1][0] : 'painel' };
   return { tela: tm && tm !== atual ? tm : 'pixel' };
@@ -156,10 +160,10 @@ ui.trilho = function () {
   el.innerHTML = '<button class="bt cinza tr-ant" id="trAnt" title="Voltar">' + FAB.ico('s_esq', 22) + '<span class="tr-nome"><small>Voltar</small>' + FAB.NOME_TELA[an] + '</span></button>' +
     '<div class="tr-meio"><button class="falar" id="trFala" title="Ouvir">' + FAB.ico('falar', 20) + '</button><div class="tr-txt">' + fr + '</div><div class="tr-pontos">' + pontos + '</div></div>' +
     '<button class="selo" id="trSelo" onclick="FAB.ui.toqueSelo()"></button>' +
-    '<button class="bt ' + (atual === 'painel' ? 'cinza' : 'amarelo') + ' tr-prox" id="trProx"><span class="tr-nome"><small>Próximo passo</small>' + FAB.NOME_TELA[pr.tela] + '</span>' + FAB.ico(atual === 'painel' ? 's_dir' : 's_dir_esc', 24) + '</button>';
+    '<button class="bt ' + (atual === 'painel' ? 'cinza' : 'amarelo') + ' tr-prox" id="trProx"' + (pr.ciclo ? ' title="Guardar e fazer outro jogo"' : '') + '><span class="tr-nome"><small>' + (pr.ciclo ? 'Guardar e' : 'Próximo passo') + '</small>' + (pr.ciclo ? 'fazer outro jogo' : FAB.NOME_TELA[pr.tela]) + '</span>' + FAB.ico(atual === 'painel' ? 's_dir' : 's_dir_esc', 24) + '</button>';
   seloAntes = ''; ui.selo();
   $('trAnt').onclick = function () { this.blur(); ui.vai(an); };
-  $('trProx').onclick = function () { this.blur(); if (pr.missao && FAB.guia) { FAB.fala(pr.missao.frase); FAB.guia.vaiMissao(pr.missao); } else ui.vai(pr.tela); };
+  $('trProx').onclick = function () { this.blur(); if (pr.ciclo && FAB.fechaCiclo) { FAB.fechaCiclo(); return; } if (pr.missao && FAB.guia) { FAB.fala(pr.missao.frase); FAB.guia.vaiMissao(pr.missao); } else ui.vai(pr.tela); };
   $('trFala').onclick = function () { this.blur(); FAB.fala(m ? m.frase : 'Todas as missões feitas! Crie o que quiser.'); };
 };
 
@@ -183,7 +187,7 @@ $('modal').addEventListener('click', function (e) { if (e.target.id === 'modal' 
 /* escolher de uma grade de cartões: opcoes = [{id, ico(html), nome, sub}] */
 ui.escolhe = function (titulo, fala, opcoes, cb) {
   var h = '<h2><button class="falar" onclick="FAB.fala(\'' + esc(fala).replace(/'/g, "\\'") + '\')">' + FAB.ico('falar', 22) + '</button>' + esc(titulo) + '</h2><div class="opcoes">';
-  opcoes.forEach(function (o, i) { h += '<button class="op" data-i="' + i + '">' + (o.ico || '') + '<span>' + esc(o.nome) + '</span>' + (o.sub ? '<small>' + esc(o.sub) + '</small>' : '') + '</button>'; });
+  opcoes.forEach(function (o, i) { h += '<button class="op' + (o.cls ? ' ' + o.cls : '') + '" data-i="' + i + '">' + (o.ico || '') + '<span>' + esc(o.nome) + '</span>' + (o.sub ? '<small>' + esc(o.sub) + '</small>' : '') + '</button>'; });
   ui.abre(h + '</div>');
   $('mbox').querySelectorAll('.op').forEach(function (b) {
     b.onclick = function () { var o = opcoes[+b.dataset.i]; ui.fecha(); cb(o.id, o); };

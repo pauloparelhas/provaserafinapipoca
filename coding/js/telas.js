@@ -144,19 +144,26 @@ FAB.T.painel = { nome: 'Fábrica de Jogos', ajuda: 'Aqui você cria jogos. Apert
   $('pnOpcoes').onclick = function () { ui.vai('jeito'); setTimeout(function () { var a = $('jtPapai'); if (a) a.scrollIntoView({ block: 'start' }); }, 80); };
 } };
 /* "Guardar este jogo": uma foto com o nome que ela escolhe */
-function abreGuardar(C) {
-  var J = FAB.jogo();
-  ui.abre('<h2><button class="falar" id="gdFala">' + FAB.ico('falar', 22) + '</button>' + FAB.ico('foto', 30) + 'Guardar este jogo</h2>' +
+/* depois (opcional): o que fazer depois de guardar — o fim do caminho (Mostrar) guarda e começa outro jogo */
+function abreGuardar(C, depois) {
+  var J = FAB.jogo(), nuvem = !!(FAB.nuvem && FAB.nuvem.ligada && FAB.nuvem.ligada());
+  ui.abre('<h2><button class="falar" id="gdFala">' + FAB.ico('falar', 22) + '</button>' + FAB.ico('foto', 30) + (depois ? 'Guardar e fazer outro jogo' : 'Guardar este jogo') + '</h2>' +
     '<p class="mut" style="margin-bottom:10px">Dê um nome para lembrar depois.</p>' + ui.campo('gdNome', 'Nome do jogo guardado') +
+    '<p class="mut gd-onde" id="gdOnde">' + FAB.ico(nuvem ? 'nuvemico' : 'salvo', 20) + (nuvem ? 'Fica guardado neste computador e na nuvem.' : 'Fica guardado neste computador.') + '</p>' +
     '<div class="linha" style="margin-top:14px"><button class="bt verde grande" id="gdOk">' + FAB.ico('foto', 28) + 'Guardar</button><button class="bt" onclick="FAB.ui.fecha()">Agora não</button></div>');
   ui.ligaMic($('mbox'));
   $('gdNome').value = FAB.tr(J.nome);
-  $('gdFala').onclick = function () { FAB.fala('Dê um nome para lembrar depois.'); };
+  $('gdFala').onclick = function () { FAB.fala(['Dê um nome para lembrar depois.', nuvem ? 'Fica guardado neste computador e na nuvem.' : 'Fica guardado neste computador.']); };
   $('gdOk').onclick = function () {
     FAB.guardaJogo($('gdNome').value); FAB.motor.toca('magia'); ui.fecha();
-    ui.toast('Jogo guardado!', true); if (C) FAB.T.painel.monta(C);
+    ui.toast('Jogo guardado!', true);
+    if (depois) depois(); else if (C) FAB.T.painel.monta(C);
   };
 }
+/* fim do caminho (Mostrar): guarda o jogo e escolhe como começa o próximo */
+FAB.fechaCiclo = function () {
+  abreGuardar(null, function () { ui.vai('painel'); setTimeout(function () { var n = $('pnNovo'); if (n) n.click(); }, 120); });
+};
 FAB.abreGuardar = abreGuardar;
 
 /* ============================ IDEIA ============================ */
@@ -216,6 +223,7 @@ var DICAS_QUEBRADO = [   /* falado */
 function rodaJogo(C, convidado) {
   var J = FAB.jogo(), cv = C.querySelector('canvas'), hud = C.querySelector('.hud'), log = $('tsLog'), sobre = C.querySelector('.sobre');
   sobre.classList.remove('on');
+  teclasDoJogo(C, J);
   if (log) log.innerHTML = '<div>Teste começou. Cada vez que uma regra acordar, aparece aqui.</div>';
   FAB.motor.inicia(cv, J, {
     convidado: convidado, lupa: lupaOn,
@@ -275,10 +283,36 @@ function fimTeste(C, R, convidado) {
     };
   });
 }
+/* mesa de toques: andar à esquerda (o motor põe o ▼ entre ◀ e ▶), PULAR grande à direita e,
+   em cima dele, só as teclas X/C/V que alguma regra ligada usa (cabe em 360 px) */
 function palcoHTML() {
   return '<div class="ts-area"><div class="palco"><canvas class="pix"></canvas><div class="hud"></div>' +
-    '<div class="toques"><div class="gp"><button data-k="esq">◀</button><button data-k="dir">▶</button></div><div class="gp"><button data-k="X">X</button><button data-k="C">C</button><button data-k="V">V</button><button data-k="pulo">▲</button></div></div>' +
+    '<div class="toques"><div class="gp anda"><button data-k="esq" title="Andar para trás">◀</button><button data-k="dir" title="Andar para frente">▶</button></div>' +
+    '<div class="gp acao"><div class="gp-teclas"><button data-k="X" hidden>X</button><button data-k="C" hidden>C</button><button data-k="V" hidden>V</button></div>' +
+    '<button data-k="pulo" class="bt-pulo" title="Pular">▲</button></div></div>' +
     '<div class="sobre"></div></div></div>';
+}
+/* X/C/V só aparecem se o jogo tem regra ligada "apertar a tecla" com aquela letra */
+function teclasDoJogo(C, J) {
+  var usa = {};
+  (J.regras || []).forEach(function (r) { if (r.liga !== false && r.quando && r.quando.t === 'tecla') usa[r.quando.tecla || 'X'] = 1; });
+  C.querySelectorAll('.gp-teclas [data-k]').forEach(function (b) { b.hidden = !usa[b.dataset.k]; });
+}
+/* balão dos controles: na 1ª vez de cada tela (por abertura da Fábrica), uns 5 s, com desenhos */
+var balaoVisto = {};
+function kbd(t, larga) { return '<span class="kbd' + (larga ? ' larga' : '') + '">' + t + '</span>'; }
+function balaoControles(C, onde) {
+  var pc = C.querySelector('.palco'); if (!pc || balaoVisto[onde]) return;
+  balaoVisto[onde] = true;
+  var b = document.createElement('div'), toque = document.body.classList.contains('toque');
+  b.className = 'balao-ctl' + (toque ? ' toque' : ''); b.setAttribute('aria-hidden', 'true');
+  var seta = '<svg class="seta-b" viewBox="0 0 24 24" width="30" height="30"><path d="M12 3v15M6 12l6 7 6-7" stroke="#ffd84a" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  b.innerHTML = toque ?
+    '<div class="bc-item bc-anda">' + FAB.ico('mao', 30) + '<b>andar</b>' + seta + '</div><div class="bc-item bc-pula">' + FAB.ico('mao', 30) + '<b>pular</b>' + seta + '</div>' :
+    '<div class="bc-teclado"><div class="bc-lin">' + kbd('←') + kbd('→') + '<b>andar</b></div><div class="bc-lin">' + kbd('ESPAÇO', true) + '<b>pular</b></div></div>';
+  pc.appendChild(b);
+  setTimeout(function () { b.classList.add('sai'); }, 5000);
+  setTimeout(function () { if (b.parentNode) b.remove(); }, 5600);
 }
 /* o palco cresce até onde dá, sem entortar: proporção entre 1,05 e 2,18 (a câmera do motor acompanha) */
 function encaixaPalco(area) {
@@ -322,6 +356,7 @@ FAB.T.testar = { nome: 'Testar', ajuda: 'Jogue o seu jogo. Setas andam, espaço 
   $('tsCheia').onclick = telaCheia;
   if ($('tsDica')) $('tsDica').onclick = function () { var d = DICAS_QUEBRADO[dicaN++ % 3]; ui.toast(d, true); };
   rodaJogo(C, false);
+  balaoControles(C, 'testar');
 } };
 function telaCheia() {
   try { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); } catch (e) {}
@@ -396,7 +431,9 @@ FAB.T.robo = { nome: 'Robô', ajuda: 'Peça uma peça nova ao robô: o que é, c
 
 /* ============================ MISSÕES ============================ */
 FAB.T.missoes = { nome: 'Missões', ajuda: 'Faça a missão de agora. As outras esperam.', monta: function (C) {
-  var prox = FAB.proximaMissao(), resto = FAB.MISSOES.filter(function (m) { return !FAB.E.missoes[m.id] && m !== prox; });
+  var prox = FAB.proximaMissao(), ip = Math.max(0, FAB.MISSOES.indexOf(prox));
+  /* "Depois": as pendentes que vêm DEPOIS da de agora, na ordem da trilha (dando a volta) */
+  var resto = FAB.MISSOES.slice(ip + 1).concat(FAB.MISSOES.slice(0, ip)).filter(function (m) { return !FAB.E.missoes[m.id] && m !== prox; });
   function card(m, cls) {
     var i = FAB.MISSOES.indexOf(m), Cc = FAB.CONCEITOS[m.conceito] || {}, feita = !!FAB.E.missoes[m.id];
     return '<button class="card ms' + (feita ? ' feita' : '') + (cls ? ' ' + cls : '') + '" data-m="' + i + '"><span class="num">' + (feita ? FAB.ico('estrelinha', 24) : i + 1) + '</span><span><span class="fr">' + esc(m.frase) + '</span><br><span class="mut">' + esc(FAB.tr(Cc.nome || '')) + ' · ' + m.xp + ' XP</span></span></button>';
@@ -444,7 +481,7 @@ FAB.T.jogar = { nome: 'Mostrar', ajuda: 'Chame alguém para jogar o seu jogo.', 
     '<button class="bt cinza" id="jgCheia" title="Tela cheia">' + FAB.ico('telacheia', 22) + '</button></div></div>';
   ligaToques(C);
   $('jgCheia').onclick = telaCheia;
-  $('jgPlay').onclick = function () { $('jgCapa').style.display = 'none'; $('jgPalco').style.display = 'flex'; vigiaPalco($('jgPalco')); rodaJogo($('jgPalco'), true); };
+  $('jgPlay').onclick = function () { $('jgCapa').style.display = 'none'; $('jgPalco').style.display = 'flex'; vigiaPalco($('jgPalco')); rodaJogo($('jgPalco'), true); balaoControles($('jgPalco'), 'jogar'); };
   $('jgSai').onclick = function () { FAB.motor.para(); FAB.T.jogar.monta(C); };
   if ($('jgLink')) $('jgLink').onclick = function () {
     FAB.linkDoJogo(J).then(function (url) {

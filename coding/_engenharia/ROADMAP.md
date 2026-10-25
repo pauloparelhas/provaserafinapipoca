@@ -38,6 +38,17 @@ voz gravada Thalita/Antonio e Ava/Brian · Fábrica inteira em inglês · trava 
   Tudo; peça que já está no mapa aparece sempre. Fase Reta nova começa Vazia, Algumas coisas ou
   Cheia de ideias; o que já vem no recheio não cumpre missão sozinho (missoes.js desconta).
 
+## v3.1 (25/10/2026) — entregue (auditoria de uso independente)
+- Auditoria de criança em 1ª visita (desktop, tablet, celular, inglês) e consertos: pular cabe no
+  celular, balão de controles no 1º teste, guia segue a missão pendente, Mostrar fecha o ciclo,
+  missões curtas, 6 regras principais + "Ver todas", chip de ação abre o valor, rótulos das Fases.
+- Desenhar cabe sem rolar; até 4 quadros de animação; cor livre; música de fundo por fase (js/musica.js).
+- Fase longa (Reta 120 colunas, recheios 120/150 em pedaços), minimapa-régua, "Ver a fase" com
+  play/pause/velocidade e avisos de problema (js/diagnostico.js, js/panorama.js); valida_banco
+  reprova aviso em modelo/recheio.
+- Fica para depois: tutorial com demonstração animada; galeria de jogos de outras crianças (fora
+  de propósito: sem contato externo); peça além do catálogo sem adulto.
+
 ## Próximos degraus (ordem sugerida, cada um só quando ela pedir ou travar)
 - [ ] **"Dá para ganhar?"** — robô-jogador dentro da Fábrica que testa a fase dela e mostra onde travou (sugestão do pedagógico).
 - [ ] **Animação de 2 quadros editável** (hoje pinta nos dois ao mesmo tempo) — quando ela pedir pernas que mexem.
@@ -59,3 +70,9 @@ voz gravada Thalita/Antonio e Ava/Brian · Fábrica inteira em inglês · trava 
   afastados da plataforma de cima (o herói batia a cabeça e caía neles). Robô-jogador passou a
   morar dentro da página (a máquina de teste roda a menos de 30 quadros e o vaivém do Playwright
   chegava atrasado).
+- 25/10/2026 — pedido do pai: fases curtas forçavam amontoar. Fase Reta nova com 120 colunas e recheios de 120 e 150
+  colunas em 3 a 5 pedaços com respiro (robô: 22 s e 32 s de travessia); largura máxima 160. Editor ganhou
+  minimapa-régua (arrastar move a cena), "Ver a fase" (câmera do começo à bandeira, com pausa, velocidade e barra)
+  e avisos curtos (fase sem saída, buraco largo, parede alta, peça presa, peça que não dá para pegar, coisa demais,
+  inimigos demais), com zero aviso nos jogos-modelo e recheios (valida_banco confere). Dica da peça: só o nome; o resto
+  atrás da setinha.

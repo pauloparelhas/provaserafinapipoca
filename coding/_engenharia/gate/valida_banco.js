@@ -1,6 +1,6 @@
 /* valida_banco.js — portão do banco da Fábrica (sem navegador).
    Confere: sprites 16×16 só com letras da paleta; letras de mapa únicas; mapas de 12 a 48 linhas
-   (largura 20 a 120, todas iguais) com 1 começo e ≥1 bandeira; os 6 modelos antigos com o mapa
+   (largura 20 a 160, todas iguais) com 1 começo e ≥1 bandeira; os 6 modelos antigos com o mapa
    idêntico ao de antes (impressão digital); bandeira ALCANÇÁVEL a partir do começo (busca na grade:
    andar, pular ~3 casinhas para cima e ~4 para o lado, cair, cipó, água, cano em par, pena e cavalo);
    regras-modelo e regras dos pacotes só com blocos e opções que existem; bloco novo com "requer"
@@ -9,7 +9,7 @@
 var vm = require('vm'), fs = require('fs'), path = require('path');
 var R = path.resolve(__dirname, '..', '..');
 var sb = { document: { write: function () {} } }; sb.window = sb; vm.createContext(sb);
-['banco/catalogo.js', 'banco/blocos.js', 'banco/missoes.js', 'banco/oficina.js', 'banco/provas.js'].forEach(function (f) {
+['banco/catalogo.js', 'banco/blocos.js', 'banco/missoes.js', 'banco/oficina.js', 'banco/provas.js', 'banco/fase_recheio.js', 'js/diagnostico.js'].forEach(function (f) {
   vm.runInContext(fs.readFileSync(path.join(R, f), 'utf8'), sb, { filename: f });
 });
 var F = sb.FAB, erros = [];
@@ -34,7 +34,7 @@ Object.keys(F.MODELOS).forEach(function (m) {
   F.MODELOS[m].fases.forEach(function (f, i) {
     if (f.mapa.length < 12 || f.mapa.length > 48) e(m + ' fase ' + i + ': ' + f.mapa.length + ' linhas (precisa de 12 a 48)');
     var w = f.mapa[0].length, txt = f.mapa.join('');
-    if (w < 20 || w > 120) e(m + ' fase ' + i + ': largura ' + w + ' (precisa de 20 a 120)');
+    if (w < 20 || w > 160) e(m + ' fase ' + i + ': largura ' + w + ' (precisa de 20 a 160)');
     if (f.formato && !(F.FORMATOS || []).some(function (x) { return x.id === f.formato; })) e(m + ' fase ' + i + ': formato desconhecido ' + f.formato);
     if (!F.MODELOS[m].bugs && !alcanca(f)) e(m + ' fase ' + i + ': a bandeira não dá para alcançar a partir do começo');
     f.mapa.forEach(function (l, j) { if (l.length !== w) e(m + ' fase ' + i + ' linha ' + j + ' com largura diferente');
@@ -111,6 +111,22 @@ function alcanca(f) {
   }
   return false;
 }
+/* fase Reta nova e recheios (24/10): 100 a 160 colunas, bandeira alcançável; e os AVISOS do editor
+   (js/diagnostico.js) não acusam nada nos jogos-modelo, nos recheios nem nos formatos (sem falso alarme) */
+(F.RECHEIOS || []).forEach(function (r) {
+  var w = r.mapa[0].length;
+  if (r.mapa.some(function (l) { return l.length !== w; })) e('recheio ' + r.id + ': linhas com largura diferente');
+  if ((r.mapa.join('').match(/@/g) || []).length !== 1 || !/F/.test(r.mapa.join(''))) e('recheio ' + r.id + ': precisa de 1 começo e bandeira');
+  if (r.antigo) return;
+  if (w < 100 || w > 160) e('recheio ' + r.id + ': largura ' + w + ' (fase nova tem de ter 100 a 160)');
+  if (!alcanca({ mapa: r.mapa })) e('recheio ' + r.id + ': a bandeira não dá para alcançar');
+});
+var reta = F.faseDoFormato('reta', 1); if (reta.mapa[0].length < 100 || reta.mapa[0].length > 160) e('fase Reta nova: largura ' + reta.mapa[0].length + ' (100 a 160)');
+var semAlarme = [];
+Object.keys(F.MODELOS).forEach(function (m) { if (!F.MODELOS[m].bugs) F.MODELOS[m].fases.forEach(function (f, i) { semAlarme.push(['modelo ' + m + ' fase ' + i, f]); }); });
+(F.RECHEIOS || []).forEach(function (r) { if (!r.antigo) semAlarme.push(['recheio ' + r.id, { mapa: r.mapa, cenario: 'dia' }]); });
+F.FORMATOS.forEach(function (fo) { semAlarme.push(['formato ' + fo.id, F.faseDoFormato(fo.id, 1)]); });
+semAlarme.forEach(function (x) { var d = F.diagnostico(x[1]); if (d.length) e('aviso falso no ' + x[0] + ': ' + d.map(function (s) { return s.curto + ' (' + s.i + ',' + s.j + ')'; }).join('; ')); });
 var ids = {};
 F.MISSOES.forEach(function (m) {
   if (ids[m.id]) e('missão repetida ' + m.id); ids[m.id] = 1;

@@ -54,7 +54,12 @@ def passeio(pg, junta):
             pg.evaluate("FAB.ui.vai('fases'); FAB.ui.vai('painel')"); pg.wait_for_timeout(300); junta()
         if t == 'fases':
             pg.click('#fzCen'); pg.wait_for_timeout(200); junta(); fecha()
-            for b in pg.query_selector_all('.peca')[:40]: b.click(); junta()
+            pg.click('#fzMus'); pg.wait_for_timeout(200); junta(); fecha()   # música da fase
+            for b in pg.query_selector_all('#t-fases .peca')[:40]: b.click(); junta()
+        if t == 'pixel':   # Ateliê: quadros e misturar cor
+            pg.click('.pxq[data-q="1"]'); pg.wait_for_timeout(150); junta()
+            pg.click('#pxQNovo'); pg.wait_for_timeout(150); junta(); fecha()   # o quadro novo pode cumprir missão (medalha)
+            pg.click('#pxMix'); pg.wait_for_timeout(200); junta(); fecha()
         if t == 'regras':
             for sel in ['.bloco.q', '.bloco.s', '.bloco.f']:
                 el = pg.query_selector(sel)

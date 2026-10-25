@@ -44,7 +44,7 @@ FAB.QUANDO = {
   acerta: { nome: 'acertar a pergunta', fala: 'Quando acertar a pergunta', icone: 'certo',   param: null,      conceito: 'evento' },
   erra:   { nome: 'errar a pergunta',   fala: 'Quando errar a pergunta',   icone: 'errado',  param: null,      conceito: 'evento' },
   vidas0: { nome: 'as vidas acabarem',  fala: 'Quando as vidas acabarem',  icone: 'semvida', param: null,      conceito: 'variavel' },
-  tempo0: { nome: 'o tempo acabar',     fala: 'Quando o relógio chegar no zero', icone: 'ampulheta', param: null, conceito: 'variavel' },
+  tempo0: { nome: 'o tempo acabar',     fala: 'Quando o relógio chegar no zero', icone: 'tempofim', param: null, conceito: 'variavel' },
   passavolta: { nome: 'passar no ponto de volta', fala: 'Quando o herói passar no ponto de volta', icone: 'pontovolta', param: null, conceito: 'evento' }
 };
 
@@ -71,7 +71,7 @@ FAB.FACA = {
   som:      { nome: 'tocar som',           fala: 'Tocar um som',              icone: 'som',      param: 'sons', conceito: 'sequencia' },
   rapido:   { nome: 'correr rápido',       fala: 'Correr rápido por 5 segundos', icone: 'raio',  param: null, conceito: 'sequencia' },
   cria:     { nome: 'fazer aparecer',      fala: 'Fazer aparecer uma peça',   icone: 'magica',   param: 'objCria', conceito: 'sequencia' },
-  tempo:    { nome: 'segundos no relógio', fala: 'Pôr mais segundos no relógio', icone: 'ampulheta', param: 'num', prefixo: '+', conceito: 'variavel' },
+  tempo:    { nome: 'segundos no relógio', fala: 'Pôr mais segundos no relógio', icone: 'maistempo', param: 'num', prefixo: '+', conceito: 'variavel' },
   treme:    { nome: 'tremer a tela',       fala: 'Tremer a tela',             icone: 'treme',    param: null, conceito: 'sequencia' },
   confete:  { nome: 'soltar confete',      fala: 'Soltar confete',            icone: 'confete',  param: null, conceito: 'sequencia' },
   pulaalto: { nome: 'pular mais alto',     fala: 'Pular mais alto por 8 segundos', icone: 'pulaalto', param: null, conceito: 'sequencia' },
@@ -267,3 +267,11 @@ FAB.blocoAparece = function (def, J, usado) {
   if (!def.requer || usado) return true;
   return def.requer.some(function (q) { return FAB.temPeca(J, q); });
 };
+
+/* nome que aparece para cada som (o id do som continua o mesmo nas regras salvas) */
+FAB.NOME_SOM = { vitoria: 'vitória' };
+/* B2: "o tempo acabar" e "segundos no relógio" com desenhos diferentes (antes os dois eram a ampulheta) */
+Object.assign(FAB.ICONES, {
+  tempofim:  '<path d="M5 3h11M5 21h11M6 3c0 5 9 5 9 9s-9 4-9 9M15 3c0 5-9 5-9 9s9 4 9 9" stroke="#1a1c2c" stroke-width="1.6" fill="#d9dee6"/><circle cx="18" cy="17" r="5" fill="#e43b44" stroke="#1a1c2c" stroke-width="1.4"/><path d="M16 15l4 4m0-4-4 4" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>',
+  maistempo: '<path d="M5 3h11M5 21h11M6 3c0 5 9 5 9 9s-9 4-9 9M15 3c0 5-9 5-9 9s9 4 9 9" stroke="#1a1c2c" stroke-width="1.6" fill="#fee761"/><circle cx="18" cy="17" r="5" fill="#3fbf5a" stroke="#1a1c2c" stroke-width="1.4"/><path d="M18 14.2v5.6M15.2 17h5.6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>'
+});
