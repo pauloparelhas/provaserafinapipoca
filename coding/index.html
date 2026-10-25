@@ -6,7 +6,7 @@
 <!-- segurança (pedido do pai, 23/10): a Fábrica não conversa com nada de fora. Só arquivos daqui,
      nenhum quadro de outro site, nenhum formulário; a ÚNICA conexão possível é a nuvem da família
      (js/nuvem.js, só quando o papai liga). Conferido por gate/seguranca.js -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self'; connect-src https://fabrica-mariana-nuvem.pauloparelhas.workers.dev; frame-src 'none'; child-src 'none'; worker-src 'none'; object-src 'none'; form-action 'none'; base-uri 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://fabrica-mariana-nuvem.pauloparelhas.workers.dev; frame-src 'none'; child-src 'none'; worker-src 'none'; object-src 'none'; form-action 'none'; base-uri 'none'">
 <title>Fábrica de Jogos da Mariana</title>
 <link rel="preload" href="../ferramentas/assets/fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -562,6 +562,7 @@ body.sem-ajuda #pxGrade{--cel:clamp(14px,min(calc((100dvh / var(--z) - 260px) / 
 <script src="js/voz.js"></script>
 <script src="js/idioma.js"></script>
 <script src="js/nuvem.js"></script>
+<script src="js/copias.js"></script>
 <script src="js/motor.js"></script>
 <script src="js/musica.js"></script>
 <script src="js/ui.js"></script>

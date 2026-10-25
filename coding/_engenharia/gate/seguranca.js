@@ -10,7 +10,7 @@ var html = fs.readFileSync(path.join(R, 'index.html'), 'utf8');
 var csp = (/http-equiv="Content-Security-Policy" content="([^"]+)"/.exec(html) || [])[1] || '';
 if (!csp) erros.push('index.html sem Content-Security-Policy');
 var NUVEM = 'https://fabrica-mariana-nuvem.pauloparelhas.workers.dev';
-if (!/connect-src ([^;]+);/.test(csp) || /connect-src ([^;]+);/.exec(csp)[1].trim() !== NUVEM) erros.push('CSP: connect-src tem de ser só a nuvem da família');
+if (!/connect-src ([^;]+);/.test(csp) || /connect-src ([^;]+);/.exec(csp)[1].trim() !== "'self' " + NUVEM) erros.push('CSP: connect-src tem de ser só a própria origem (servidor local) e a nuvem da família');
 ["frame-src 'none'", "object-src 'none'", "form-action 'none'", "default-src 'self'"].forEach(function (d) { if (csp.indexOf(d) < 0) erros.push('CSP sem ' + d); });
 if ((csp.match(/https?:\/\/[^\s;]+/g) || []).some(function (u) { return u !== NUVEM; })) erros.push('CSP libera endereço de fora');
 var arquivos = ['index.html', path.join('..', 'ferramentas', 'serafina-core.js')];
@@ -21,7 +21,9 @@ arquivos.forEach(function (f) {
   var s = fs.readFileSync(path.join(R, f), 'utf8').replace(/http:\/\/www\.w3\.org\/2000\/svg/g, '');
   var nuvem = f === path.join('js', 'nuvem.js');   /* o único arquivo que fala com a nuvem da família */
   (s.match(/https?:\/\/[^\s'"<>);]+/g) || []).forEach(function (u) { if (u !== NUVEM || (!nuvem && f !== 'index.html')) erros.push(f + ': endereço de fora ' + u); });
-  var p = PROIBIDO.exec(nuvem ? s.replace(/\bfetch\(URL_N/g, '') : s); if (p) erros.push(f + ': usa ' + p[0]);
+  var guard = f === path.join('js', 'copias.js');   /* o único que fala com o servidor local (mesma origem, /fabrica-salvos/) */
+  if (guard && !/var URL_G = '\/fabrica-salvos\/'/.test(s)) erros.push(f + ': URL_G tem de ser /fabrica-salvos/');
+  var p = PROIBIDO.exec(nuvem ? s.replace(/\bfetch\(URL_N/g, '') : guard ? s.replace(/\bfetch\(URL_G \+/g, '') : s); if (p) erros.push(f + ': usa ' + p[0]);
 });
 console.log(erros.length ? 'SEGURANÇA REPROVADA:\n- ' + erros.join('\n- ') : 'SEGURANÇA OK: ' + arquivos.length + ' arquivos, sem endereço de fora, sem canal de rede, conexões travadas (CSP)');
 process.exit(erros.length ? 1 : 0);

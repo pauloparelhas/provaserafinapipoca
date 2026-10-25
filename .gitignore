@@ -65,3 +65,6 @@ coding/_engenharia/gate/capturas/
 
 # wrangler: cache local com dados da conta Cloudflare
 .wrangler/
+
+# copias do trabalho da Mariana (servidor local da Fabrica)
+coding/guardados/

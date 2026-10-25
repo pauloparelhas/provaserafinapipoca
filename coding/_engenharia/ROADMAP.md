@@ -49,6 +49,11 @@ voz gravada Thalita/Antonio e Ava/Brian · Fábrica inteira em inglês · trava 
 - Fica para depois: tutorial com demonstração animada; galeria de jogos de outras crianças (fora
   de propósito: sem contato externo); peça além do catálogo sem adulto.
 
+## v3.2 (25/10/2026) — entregue
+- Uso local pelo atalho `Abrir a Fabrica.bat` (servidor_local.py só em 127.0.0.1). Área do papai:
+  Guardar e começar do zero (cópia em coding/guardados/), Abrir um guardado, Só começar do zero,
+  Voltar para antes do zero (js/copias.js; portão teste_guardados.py; CSP connect-src 'self').
+
 ## Próximos degraus (ordem sugerida, cada um só quando ela pedir ou travar)
 - [ ] **"Dá para ganhar?"** — robô-jogador dentro da Fábrica que testa a fase dela e mostra onde travou (sugestão do pedagógico).
 - [ ] **Animação de 2 quadros editável** (hoje pinta nos dois ao mesmo tempo) — quando ela pedir pernas que mexem.

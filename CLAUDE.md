@@ -68,6 +68,10 @@ aponta para `ferramentas/<MAT>_banco.js`). **A cada prova nova: trocar `atual` e
   `python coding/_engenharia/gate/teste_ingles.py` (no Windows: `PYTHONIOENCODING=utf-8`).
 - Publicar: `bash coding/_engenharia/publicar_coding.sh` (não toca na matéria que está no ar).
 - O .json que ela exporta é dado da criança: fica em `coding/_engenharia/entrada/`, fora do git.
+- **Uso local (25/10):** abrir pelo atalho `coding/Abrir a Fabrica.bat` (servidor `coding/_engenharia/servidor_local.py`,
+  http://127.0.0.1:8765). Opções > Área do papai: "Guardar e começar do zero" grava a cópia em
+  `coding/guardados/` (fora do git), "Abrir um guardado", "Só começar do zero" e "Voltar para antes do zero".
+  Portão: `python coding/_engenharia/gate/teste_guardados.py`.
 
 ## CICLO DE VIDA DOS PRODUTOS — POLITICA
 

@@ -83,6 +83,9 @@ function monta(C) {
       '<div class="mut">Arquivo de cópia (também leva os pedidos para o robô):</div>' +
       '<div class="linha"><button class="bt cinza" id="jtExp">' + FAB.ico('foto', 22) + 'Guardar no computador</button>' +
       '<label class="bt cinza">' + FAB.ico('desfazer', 22) + 'Abrir do computador<input type="file" accept=".json" id="jtImp" hidden></label></div>' +
+      '<div class="mut">Testes: guarde o que está aqui e comece do zero.</div>' +
+      '<div class="linha"><button class="bt amarelo" id="jtZeraG">' + FAB.ico('foto', 22) + 'Guardar e começar do zero</button><button class="bt cinza" id="jtAbreG">Abrir um guardado</button><button class="bt cinza" id="jtZera">Só começar do zero</button>' +
+        (FAB.copias.temDesfazer() ? '<button class="bt cinza" id="jtDesZera">' + FAB.ico('desfazer', 22) + 'Voltar para antes do zero</button>' : '') + '</div>' +
       '<div class="mut">Ditado por voz: o Chrome envia a voz da criança ao Google.</div>' +
       '<div class="linha"><button class="bt cinza" id="jtMic">' + FAB.ico('microfone', 22) + (FAB.ui.micLigado() ? 'Desligar o microfone' : 'Ligar o microfone') + '</button></div></div>' +
     '<div class="card"><div class="tit">' + FAB.ico('desfazer', 26) + 'Voltar ao começo</div>' +
@@ -143,6 +146,42 @@ function papai(C) {
     }).catch(function () { ui.toast('Sem internet agora.', true); });
   };
   $('jtExp').onclick = function () { FAB.exporta(); ui.toast('Arquivo guardado na pasta Downloads.'); };
+  /* guardar e começar do zero (js/copias.js) */
+  var G = FAB.copias, avisoNuvem = function () { return N.chave() ? '<p class="mut" style="margin-bottom:10px">' + FAB.tr('A nuvem está ligada: o começo do zero também vai para ela. As versões antigas continuam lá.') + '</p>' : ''; };
+  $('jtZeraG').onclick = function () {
+    G.pasta().then(function (temPasta) {
+      ui.abre('<h2>Guardar e começar do zero</h2>' +
+        '<p class="mut" style="margin-bottom:10px">' + FAB.tr(temPasta ? 'A cópia vai para a pasta coding/guardados.' : 'A cópia vai para a pasta Downloads.') + '</p>' + avisoNuvem() +
+        '<div class="campo"><input id="zgNome" maxlength="40" placeholder="Nome da cópia" value="' + FAB.esc(FAB.tr('teste')) + '"></div>' +
+        '<div class="linha" style="margin-top:10px"><button class="bt amarelo" id="zgSim">Guardar e começar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
+      $('zgSim').onclick = function () {
+        this.disabled = true;
+        G.guarda($('zgNome').value).then(function (arq) { ui.toast(FAB.tr('Guardado:') + ' ' + arq); setTimeout(G.zera, 900); })
+          .catch(function () { ui.fecha(); ui.toast('Não deu para guardar. Nada foi apagado.'); });
+      };
+    });
+  };
+  $('jtZera').onclick = function () {
+    ui.abre('<h2>Apagar e começar do zero?</h2><p class="mut" style="margin-bottom:10px">' + FAB.tr('Sem cópia. Dá para voltar uma vez com "Voltar para antes do zero".') + '</p>' + avisoNuvem() +
+      '<div class="linha"><button class="bt rosa" id="zrSim">Apagar e começar</button><button class="bt" onclick="FAB.ui.fecha()">Não</button></div>');
+    $('zrSim').onclick = function () { G.zera(); };
+  };
+  if ($('jtDesZera')) $('jtDesZera').onclick = function () { G.desfazZera(); };
+  $('jtAbreG').onclick = function () {
+    G.pasta().then(function (temPasta) {
+      if (!temPasta) { ui.toast('Abra a Fábrica pelo atalho do computador, ou use Abrir do computador.'); return; }
+      G.lista().then(function (L) {
+        var data = function (t) { return new Date(t).toLocaleString(FAB.lingua() === 'en' ? 'en-US' : 'pt-BR'); };
+        ui.abre('<h2>Guardados</h2><p class="mut" style="margin-bottom:10px">' + FAB.tr('O que está aqui agora fica como cópia no navegador.') + '</p>' +
+          (L.length ? '<div class="diario">' + L.map(function (g, i) {
+            return '<div class="card dia"><div class="q" data-sem-traducao>' + FAB.esc(g.nome) + '</div><div class="mut">' + data(g.quando) + '</div><button class="bt cinza" data-g="' + i + '">Abrir este</button></div>';
+          }).join('') + '</div>' : '<p class="mut">Ainda não tem nada guardado.</p>'));
+        document.querySelectorAll('#mbox [data-g]').forEach(function (b) {
+          b.onclick = function () { G.abre(L[+b.dataset.g].arquivo).catch(function () { ui.toast('Esse arquivo não é da Fábrica.'); }); };
+        });
+      }).catch(function () { ui.toast('Não deu para ler a pasta.'); });
+    });
+  };
   $('jtImp').onchange = function () { var f = this.files[0]; if (!f) return; FAB.importa(f, function (ok) { if (ok) location.reload(); else ui.toast('Esse arquivo não é da Fábrica.', true); }); };
   $('jtMic').onclick = function () {
     if (ui.micLigado()) { try { localStorage.removeItem('fab_mic'); } catch (e) {} monta(C); return; }

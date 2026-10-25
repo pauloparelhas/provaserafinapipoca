@@ -40,6 +40,8 @@ function completa(n) {
   return n;
 }
 E = completa(E) || novoEstado();
+/* acabou de "começar do zero" (js/copias.js): voz e idioma ficam; fica mais novo que a nuvem */
+try { var zerou = JSON.parse(localStorage.getItem('fab_zerou') || 'null'); if (zerou) { localStorage.removeItem('fab_zerou'); ['voz', 'vel', 'lingua'].forEach(function (k) { if (zerou[k] != null) E.prefs[k] = zerou[k]; }); E.salvoEm = Date.now(); } } catch (e) {}
 FAB.E = E;
 
 var tSalva = null;
