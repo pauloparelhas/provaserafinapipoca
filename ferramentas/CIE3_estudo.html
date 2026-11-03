@@ -361,6 +361,10 @@ body.voz-ok .ouvir,body.voz-ok #sombtn{display:inline-flex!important}
 .naprova{margin:6px 0 0;padding-left:22px;font-weight:800;line-height:1.35}.naprova li{margin:0 0 10px}.naprova .resp{color:#16a34a}body.light .naprova .resp{color:#15803d}.nptit{font-weight:900;margin:0 0 6px}
 .lw .fesc{display:block;width:100%;max-width:220px;margin:0 auto 6px;border-radius:10px;background:#fff}
 .lw{min-width:0;max-width:100%}.fesc{max-width:100%}
+b.ocl{display:inline-block;min-width:44px;min-height:30px;padding:1px 6px;margin:1px 0;border-radius:7px;text-align:center;cursor:pointer;background:rgba(251,191,36,.18);color:inherit;box-shadow:inset 0 0 0 1.5px rgba(251,191,36,.75)}
+b.ocl.fechado{color:transparent;background:repeating-linear-gradient(45deg,#f59e0b 0 6px,#92400e 6px 12px);box-shadow:none;user-select:none}
+body.light b.ocl.fechado{background:repeating-linear-gradient(45deg,#fbbf24 0 6px,#b45309 6px 12px)}
+.oclbtn{display:block;margin:10px auto 0;min-height:44px}.oclhint{font-weight:800;text-align:center;margin:0 0 8px}
 .fescb{display:block;width:100%;max-width:320px;margin:0 auto 8px;border-radius:10px;background:#fff}
 .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:6px 0 10px}.figs figure{margin:0;text-align:center;font-weight:800}.figs img{width:100%;border-radius:10px;background:#fff;display:block;margin-bottom:3px}
 @media(max-width:520px){.passos.vert{flex-direction:column;align-items:stretch}}
@@ -502,7 +506,22 @@ function volta(){
 
 /* ---------------- desenho de cada tipo de telinha ---------------- */
 var R={};
-R.texto=function(t){ return {html:t.html||''}; };
+/* oclusao: todo <b> da teoria vira termo hachurado; o toque revela (revisao ativa, ideia do Paulo 02/11) */
+function ocluir(el){
+  var bs=[].slice.call(el.querySelectorAll('b')).filter(function(b){ return !b.closest('.tr')&&!b.closest('h3')&&!b.closest('.tqnum'); });
+  if(!bs.length) return;
+  function pinta(){ var f=bs.filter(function(b){ return b.classList.contains('fechado'); }).length; if(tudo){ tudo.firstChild.nodeValue=f?'Show all':'Hide all'; } }
+  bs.forEach(function(b){ b.classList.add('ocl','fechado'); b.setAttribute('role','button'); b.tabIndex=0;
+    b.onclick=function(){ var abre=b.classList.toggle('fechado')===false; if(abre) fala(b.textContent); pinta(); try{ localStorage.setItem('cie3_ocl','1'); }catch(e){} var d=el.querySelector('.oclhint'); if(d) d.remove(); };
+    b.onkeydown=function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); b.onclick(); } }; });
+  var visto=false; try{ visto=localStorage.getItem('cie3_ocl')==='1'; }catch(e){}
+  if(!visto){ var h=document.createElement('p'); h.className='oclhint'; h.innerHTML='Tap the striped words.<span class="tr">Toque nas palavras listradas.</span>'; el.insertBefore(h,el.firstChild); }
+  var tudo=null;
+  if(bs.length>1){ tudo=document.createElement('button'); tudo.className='btn calmo oclbtn'; tudo.innerHTML='Show all<span class="tr">Mostrar / esconder tudo</span>';
+    tudo.onclick=function(){ var f=bs.some(function(b){ return b.classList.contains('fechado'); }); bs.forEach(function(b){ b.classList.toggle('fechado',f); }); pinta(); };
+    el.appendChild(tudo); }
+}
+R.texto=function(t){ return {html:t.html||'',init:ocluir}; };
 R.palavras=function(t){
   return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+
     '<div class="pals'+(t.grandes?' grandes':'')+'">'+t.pals.map(function(p){
