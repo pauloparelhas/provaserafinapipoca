@@ -23,7 +23,7 @@ var LISTA=[
    resumo:'Climb up. See it from every side.', resumo_pt:'Suba. Veja de todos os lados.'},
   {id:4, nome:'Wild River', nome_pt:'O Rio Bravo', cena:'recife', modo:'nado', tema:'forces', ids:['n03','n05','n07','n08','n11','n12','n16','n35'], moradores:['drop','drop','drop'],
    resumo:'Water: helpful or harmful?', resumo_pt:'Água: ajuda ou prejudica?'},
-  {id:5, nome:'Windy Fields', nome_pt:'Os Campos de Vento', cena:'nuvens', tema:'forces', ids:['n01','n09','n10','n13','n14','n19'], moradores:['breezy','breezy','breezy'],
+  {id:5, nome:'Windy Fields', nome_pt:'Os Campos de Vento', cena:'nuvens', modo:'voo', tema:'forces', ids:['n01','n09','n10','n13','n14','n19'], moradores:['breezy','breezy','breezy'],
    resumo:'Wind: helpful or harmful?', resumo_pt:'Vento: ajuda ou prejudica?'},
   {id:6, nome:'The Move Park', nome_pt:'O Parque do Movimento', cena:'ginasio', tema:'objects', moradores:['boing','boing','boing'],
    resumo:'Bounce, fly, roll, slide, spin, swing.', resumo_pt:'Quicar, voar, rolar, deslizar, girar, balançar.'},

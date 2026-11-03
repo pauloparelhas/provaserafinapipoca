@@ -22,26 +22,27 @@ var rr=A.rr, circ=A.circ, el=A.el, lin=A.lin;
 
 /* ---------- a tabela: um poder por reino (id da fase) ---------- */
 var TAB={
-  1:{id:'bolas', tiro:'bola', suporte:'rack', verbo:'Take!', verboPt:'Pegue!', nome:'soccer ball', nomePt:'bola de futebol', placa:'BALL',
-     tit:'A soccer ball!', titPt:'Uma bola de futebol!',
-     txt:'Press SPACE to kick it.', txtPt:'Aperte ESPAÇO para chutar.'},
-  2:{id:'botas', tiro:null, suporte:'barraca', verbo:'Put on!', verboPt:'Calce!', nome:'sneakers', nomePt:'tênis', placa:'SNEAKERS',
-     tit:'Sneakers!', titPt:'Tênis!',
-     txt:'Jump, then tap JUMP again in the air.', txtPt:'Pule e aperte PULAR de novo no ar.'},
-  3:{id:'botas', tiro:null, suporte:'barraca', verbo:'Take!', verboPt:'Pegue!', nome:'rope', nomePt:'corda', placa:'ROPE',
-     tit:'A rope!', titPt:'Uma corda!',
-     txt:'Jump, then tap JUMP again: pull yourself up!', txtPt:'Pule e aperte PULAR de novo: puxe-se para cima!'},
+  1:{id:'raquete', tiro:'tenis', suporte:'mochila', verbo:'Take!', verboPt:'Pegue!', nome:'tennis racket', nomePt:'raquete de tênis', placa:'RACKET',
+     tit:'A tennis racket!', titPt:'Uma raquete de tênis!',
+     txt:'Press SPACE: hit a tennis ball. It bounces!', txtPt:'Aperte ESPAÇO: rebata uma bola de tênis. Ela quica!'},
+  2:{id:'aviao', tiro:null, suporte:'carteira', verbo:'Take!', verboPt:'Pegue!', nome:'paper plane', nomePt:'avião de papel', placa:'PAPER PLANE',
+     tit:'A paper plane!', titPt:'Um avião de papel!',
+     txt:'It flies through the air. In the air, hold JUMP to glide.', txtPt:'Ele voa pelo ar. No ar, segure PULAR para planar.'},
+  3:{id:'botas', tiro:null, suporte:'barraca', verbo:'Put on!', verboPt:'Calce!', nome:'climbing shoes', nomePt:'tênis de escalada', placa:'CLIMBING SHOES',
+     tit:'Climbing shoes!', titPt:'Tênis de escalada!',
+     txt:'Jump, then tap JUMP again in the air. Climb up!', txtPt:'Pule e aperte PULAR de novo no ar. Suba!'},
   4:{id:'traje', tiro:'bolha', suporte:'arara', verbo:'Put on!', verboPt:'Vista!', nome:'swimsuit', nomePt:'roupa de banho', placa:'SWIMSUIT',
      tit:'A swimsuit!', titPt:'Uma roupa de banho!',
      txt:'Tap JUMP to swim up. SPACE blows bubbles at the Puddles.', txtPt:'Toque PULAR para nadar para cima. ESPAÇO solta bolhas nas Puddles.'},
   5:{id:'capa', tiro:null, suporte:'cabide', verbo:'Take!', verboPt:'Pegue!', nome:'kite', nomePt:'pipa', placa:'KITE',
      tit:'A kite!', titPt:'Uma pipa!',
-     txt:'In the air, hold JUMP: the wind holds you up.', txtPt:'No ar, segure PULAR: o vento segura você.'},
-  6:{desligado:true, id:'giz', tiro:null, suporte:'pedestal', verbo:'Take!', verboPt:'Pegue!', nome:'sneakers', nomePt:'tênis', placa:'SNEAKERS',
-     tit:'Sneakers!', titPt:'Tênis!', txt:'Hold on tight.', txtPt:'Segure firme.'},
-  8:{id:'bolas', tiro:'bola', suporte:'rack', verbo:'Take!', verboPt:'Pegue!', nome:'soccer balls', nomePt:'bolas de futebol', placa:'BALLS',
-     tit:'Soccer balls!', titPt:'Bolas de futebol!',
-     txt:'Press SPACE to kick. A kick is a PUSH!', txtPt:'Aperte ESPAÇO para chutar. Chute é EMPURRAR!'}
+     txt:'A kite flies with the wind. Hold JUMP to go up. Let go to float down.', txtPt:'A pipa voa com o vento. Segure PULAR para subir. Solte para descer devagar.'},
+  6:{id:'piao', tiro:'piao', suporte:'banco', verbo:'Take!', verboPt:'Pegue!', nome:'spinning top', nomePt:'pião', placa:'TOP',
+     tit:'A spinning top!', titPt:'Um pião!',
+     txt:'A top spins around and around. Press SPACE: it knocks over the rolling cans!', txtPt:'O pião gira e gira. Aperte ESPAÇO: ele derruba as latas que rolam!'},
+  8:{id:'pip', tiro:null, montado:true, nome:'bike', nomePt:'bicicleta',
+     tit:'A bike!', titPt:'Uma bicicleta!',
+     txt:'Riding a bike is a PUSH. Hold JUMP in the air for a long jump!', txtPt:'Andar de bicicleta é EMPURRAR. No ar, segure PULAR para um salto longo!'}
 };
 /* a história do ratinho: cada objeto no seu móvel, com o seu verbo */
 var HIST={};
@@ -99,6 +100,7 @@ function pega(it){
     if(P.id==='giz'){ u.poderes.giz=true; u.puloExtra=true; G.emite(14,function(){ return {x:u.x+(Math.random()-.5)*30,y:u.y-60,vx:(Math.random()-.5)*120,vy:-60-Math.random()*80,vida:.9,max:.9,tipo:'nevoa',r:5+Math.random()*5}; }); }
     if(P.id==='traje') u.poderes.traje=true;
     if(P.id==='capa') u.poderes.capa=true;
+    if(P.id==='aviao') u.poderes.guardanapo=true;
     if(P.tiro) u.poderes.tiro=P.tiro;
     hudPoder(); cartao(P.id,P); return true;
   }
@@ -129,13 +131,14 @@ function varre(dt){ var M=J.mundo; if(!J.varre||!M.paredes) return; J.varre.t+=d
   var viva=M.paredes.filter(function(p){ return p.viva&&p.x>u.x-100&&p.x<u.x+500; })[0]; if(viva) PERIGOS.quebraParede(M,viva); J.varre=null; }
 
 /* ---------- ação: o tiro do reino ---------- */
-var VEL={faisca:{vx:430,vy:0,g:0,alc:200},bolha:{vx:220,vy:-18,g:0,alc:240},vento:{vx:520,vy:0,g:0,alc:200},bola:{vx:470,vy:-200,g:1200,alc:520},biscoito:{vx:430,vy:-240,g:700,alc:420}};
+var VEL={tenis:{vx:430,vy:-160,g:1150,alc:620},piao:{vx:330,vy:0,g:900,alc:520},faisca:{vx:430,vy:0,g:0,alc:200},bolha:{vx:220,vy:-18,g:0,alc:240},vento:{vx:520,vy:0,g:0,alc:200},bola:{vx:470,vy:-200,g:1200,alc:520},biscoito:{vx:430,vy:-240,g:700,alc:420}};
 function tiroAtual(){ var u=J.urso; if(!u) return null; var P=poder(); if(fase()===-8) return u.poderes.tiro||null; if(!P||!P.tiro||!u.poderes.tiro) return null; if(P.montado&&!u.montado) return null; return P.tiro; }
 function atira(){
   var u=J.urso; if(fase()===9||!poder()) return false; if(J.estado!=='nivel'||!u) return true;
   var s=tiroAtual(); if(!s){ if(poder().montado&&u.poderes.tiro) ; return true; }
   if((J.recarga||0)>0) return true; J.recarga=.45;
   var v=VEL[s], s0=G.TAM[u.tam], n=s==='faisca'?3:1;
+  if(s==='piao'){ J.estrelas.push({x:u.x+u.dir*30*s0,y:u.y-16,vx:u.dir*v.vx,vy:0,g:v.g,alc:v.alc,dist:0,rot:0,skin:s,quiques:0}); SOM.fx('pulo'); log({ev:'tiro',skin:s}); return true; }
   if(s==='bola'){ u.chuteAte=J.t+.32; J.estrelas.push({x:u.x+u.dir*30*s0,y:u.y-12*s0,vx:u.dir*v.vx,vy:v.vy,g:v.g,alc:v.alc,dist:0,rot:0,skin:s,quiques:0}); SOM.fx('pisao'); log({ev:'tiro',skin:s}); return true; } /* sai do PÉ */
   for(var k=0;k<n;k++) J.estrelas.push({x:u.x+u.dir*24,y:u.y-46*s0+(k-1)*12,vx:u.dir*v.vx,vy:v.vy+(k-1)*(s==='faisca'?60:0),g:v.g,alc:v.alc,dist:0,rot:0,skin:s,quiques:0});
   SOM.fx(s==='bola'?'pisao':'pulo'); log({ev:'tiro',skin:s}); return true;
@@ -145,10 +148,11 @@ function moveTiro(e,dt,M){
   e.rot+=dt*10; if(e.g) e.vy+=e.g*dt; var ox=e.x, oy=e.y; e.x+=e.vx*dt; e.y+=(e.vy||0)*dt; e.dist+=Math.hypot(e.x-ox,e.y-oy);
   var fim=e.dist>e.alc||e.x<0||e.x>M.w||e.y>M.h;
   G.solidos(M).forEach(function(s){ if(fim) return; if(e.x>s.x&&e.x<s.x+s.w&&e.y>s.y&&e.y<s.y+s.h){
-    if(e.skin==='bola'&&oy<=s.y+2&&e.vy>0&&e.quiques<2){ e.y=s.y-1; e.vy=-e.vy*.6; e.quiques++; SOM.fx('aterra'); return; }
+    if(e.skin==='piao'&&oy<=s.y+2&&e.vy>=0){ e.y=s.y-1; e.vy=0; return; }
+    if((e.skin==='bola'||e.skin==='tenis')&&oy<=s.y+2&&e.vy>0&&e.quiques<(e.skin==='tenis'?5:2)){ e.y=s.y-1; e.vy=-e.vy*(e.skin==='tenis'?.78:.6); e.quiques++; SOM.fx('aterra'); return; }
     if(e.skin==='biscoito'){ G.emite(6,function(){ return {x:e.x,y:s.y,vx:(Math.random()-.5)*160,vy:-60-Math.random()*90,vida:.5,max:.5,tipo:'nevoa',r:4}; }); }
     fim=true; if(s.parede&&e.skin==='faisca') PERIGOS.quebraParede(M,s.parede); } });
-  if(e.skin==='bola'&&!fim) G.umaVia(M).forEach(function(p){ if(e.vy>0&&e.x>p.x&&e.x<p.x+p.w&&oy<=p.y&&e.y>=p.y&&e.quiques<2){ e.y=p.y-1; e.vy=-e.vy*.6; e.quiques++; } });
+  if((e.skin==='bola'||e.skin==='tenis')&&!fim) G.umaVia(M).forEach(function(p){ if(e.vy>0&&e.x>p.x&&e.x<p.x+p.w&&oy<=p.y&&e.y>=p.y&&e.quiques<2){ e.y=p.y-1; e.vy=-e.vy*.6; e.quiques++; } });
   return fim;
 }
 /* alvos que não são bichos: tempestade (vento acalma), máquina de bolas (bola desliga), Chef (leite) */
@@ -197,7 +201,7 @@ function atualiza(dt){
   atualizaChefs(dt); varre(dt); porteiras(dt); if(J.faixaHist) J.faixaHist.t+=dt;
   (M.tempestades||[]).forEach(function(z){ if(z.calmaT>0) z.calmaT-=dt; });
   /* céu: sem a capa, não se sai do chão (cair no vazio sem saber voar não ensina nada) */
-  if(M.modo==='voo'&&!u.poderes.capa){ var lim=26*T-G.URSO_W*G.TAM[u.tam]/2-4; if(u.x>lim){ u.x=lim; if(u.vx>0) u.vx=0; if(avisoCeu<=0){ avisoCeu=2; G.toast('Get the cape first!',1800,'Pegue a capa primeiro!'); } } }
+  if(M.modo==='voo'&&!u.poderes.capa){ var lim=26*T-G.URSO_W*G.TAM[u.tam]/2-4; if(u.x>lim){ u.x=lim; if(u.vx>0) u.vx=0; if(avisoCeu<=0){ avisoCeu=2; G.toast('Get the kite first!',1800,'Pegue a pipa primeiro!'); } } }
   if(avisoCeu>0) avisoCeu-=dt;
   /* giz: a cambalhota transforma o bicho que encostar */
   if(u.poderes.giz&&u.flip>0){ var R=G.ursoRet(); M.inimigos.forEach(function(e){ if(!e.morto&&!e.achatado&&G.colideRet(R.x,R.y,R.w,R.h,e.x-18,e.y-30,36,30)) PERIGOS.transforma(e); }); }
@@ -244,13 +248,14 @@ function desenhaPorteiras(c,t){ var M=J.mundo; if(!J.porteiras||M!==J.nivel||J.q
     c.restore(); }); }
 
 function hudPoder(){ if(!window.UI||!UI.poderHud) return; var u=J.urso, P=poder(); if(!u||!P){ UI.poderHud(null); return; }
-  var tem= P.id==='botas'?u.poderes.bota:(P.id==='giz'?u.poderes.giz:(P.id==='pip'?!!u.montado:(P.id==='traje'?u.poderes.traje:(P.id==='capa'?u.poderes.capa:!!u.poderes.tiro))));
+  var tem= P.id==='botas'?u.poderes.bota:(P.id==='giz'?u.poderes.giz:(P.id==='pip'?!!u.montado:(P.id==='traje'?u.poderes.traje:(P.id==='capa'?u.poderes.capa:(P.id==='aviao'?u.poderes.guardanapo:!!u.poderes.tiro)))));
   if(fase()===-8){ UI.poderHud(u.poderes.tiro?icone('biscoito'):null,'cookies','biscoitos'); return; }
   UI.poderHud(tem?icone(P.id):null,tem?P.nome:'',tem?P.nomePt:''); }
 
 /* ---------- ícones (desenhados no canvas, iguais no botão e no HUD) ---------- */
 var ICO={};
 function icone(k){ if(ICO[k]) return ICO[k]; var cv=document.createElement('canvas'); cv.width=cv.height=96; var c=cv.getContext('2d'); c.translate(48,52); c.scale(2.2,2.2); c.lineJoin='round'; c.lineCap='round';
+  if(window.CIE3X&&CIE3X.icone(c,k)){ ICO[k]=cv.toDataURL(); return ICO[k]; }
   switch(k){
     case 'faisca': c.fillStyle='#f97316'; for(var i=0;i<3;i++) A.estrela(c,-9+i*9,(i%2)*6-3,7,i===1?'#fde047':'#fb923c',i); break;
     case 'bolha': case 'traje': desBolha(c,0,0,13); break;
@@ -278,7 +283,7 @@ function bota(c,x,y,s){ c.save(); c.translate(x,y); c.scale(s,s); c.fillStyle='#
 function vassoura(c,x,y,s){ c.save(); c.translate(x,y); c.scale(s,s); c.strokeStyle='#92400e'; c.lineWidth=5; c.beginPath(); c.moveTo(8,-80); c.lineTo(0,-22); c.stroke();
   c.fillStyle='#facc15'; c.beginPath(); c.moveTo(-6,-24); c.lineTo(8,-22); c.lineTo(14,0); c.lineTo(-16,0); c.closePath(); c.fill(); c.strokeStyle='#ca8a04'; c.lineWidth=1.5; for(var k=0;k<5;k++){ c.beginPath(); c.moveTo(-3+k*2.5,-20); c.lineTo(-12+k*6,0); c.stroke(); } c.fillStyle='#dc2626'; rr(c,-6,-27,14,5,2); c.fill(); c.restore(); }
 function guardanapoIco(c){ c.fillStyle='#fff'; rr(c,-13,-13,26,26,3); c.fill(); c.strokeStyle='#3b82f6'; c.lineWidth=2.5; rr(c,-13,-13,26,26,3); c.stroke(); c.strokeStyle='rgba(59,130,246,.5)'; c.lineWidth=1.5; for(var i=-6;i<=6;i+=6){ c.beginPath(); c.moveTo(i,-13); c.lineTo(i,13); c.moveTo(-13,i); c.lineTo(13,i); c.stroke(); } }
-var PLACA_PT={'BALL':'Bola','BALLS':'Bolas','SNEAKERS':'Tênis','ROPE':'Corda','SWIMSUIT':'Roupa de banho','KITE':'Pipa'};
+var PLACA_PT={'RACKET':'Raquete','PAPER PLANE':'Avião de papel','CLIMBING SHOES':'Tênis de escalada','SWIMSUIT':'Roupa de banho','KITE':'Pipa','TOP':'Pião','BIKE':'Bicicleta'};
 function placa(c,x,y,txt){ if(J.tr&&PLACA_PT[txt]){ c.save(); c.font='700 11px "Nunito",Arial'; var wp=c.measureText(PLACA_PT[txt]).width+10; c.fillStyle='rgba(13,11,30,.82)'; rr(c,x-wp/2,y+10,wp,16,5); c.fill(); c.fillStyle='#fde68a'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(PLACA_PT[txt],x,y+18.5); c.restore(); } c.save(); c.font='900 12px "Nunito",Arial'; var w=c.measureText(txt).width+12; c.fillStyle='#fef3c7'; rr(c,x-w/2,y-9,w,18,5); c.fill(); c.strokeStyle='#92400e'; c.lineWidth=2; rr(c,x-w/2,y-9,w,18,5); c.stroke(); c.fillStyle='#78350f'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(txt,x,y+1); c.restore(); }
 function brilhoChao(c,x,y,t){ var a=.25+.15*Math.sin(t*4); var g=c.createRadialGradient(x,y,4,x,y,60); g.addColorStop(0,'rgba(253,224,71,'+a+')'); g.addColorStop(1,'rgba(253,224,71,0)'); c.fillStyle=g; el(c,x,y,60,18); c.fill(); }
 
@@ -293,7 +298,7 @@ function desenhaItem(c,it,t){
   c.restore(); return true;
 }
 function desenhaSuporte(c,it,t){
-  var P=poder(), id=P?P.id:it.tipo;
+  var P=poder(), id=P?P.id:it.tipo; if(window.CIE3X&&CIE3X.suporte(c,id,it,t,placa)) return;
   if(id==='botas'){ /* barraca do sapateiro (o toldo de cima é o telhado dela) */
     c.fillStyle='#78350f'; c.fillRect(-46,-120,6,120); c.fillRect(40,-120,6,120);
     c.fillStyle=lin(c,0,-44,0,0,'#b45309','#78350f'); rr(c,-50,-44,100,44,5); c.fill(); c.fillStyle='#fde68a'; c.fillRect(-50,-46,100,6);
@@ -357,7 +362,7 @@ function plataforma(c,p){ if(!p.fita) return false; c.fillStyle='rgba(231,229,22
 function ninho(c,x,y){ c.save(); c.translate(x,y); c.fillStyle='#78350f'; el(c,0,-4,34,10); c.fill(); c.strokeStyle='#a16207'; c.lineWidth=2; for(var i=0;i<7;i++){ c.beginPath(); c.moveTo(-32+i*9,-8); c.quadraticCurveTo(-26+i*9,-14,-20+i*9,-6); c.stroke(); } c.restore(); }
 
 /* ---------- herói: paraquedas do guardanapo e botas aladas ---------- */
-function antesHeroi(c,u,s,t){ if(u.poderes.capa&&fase()===5) CIE3X.pipaNoHeroi(c,u,s,t); if(J.poseHeroi!=='paraquedas') return; var hh=G.URSO_H*s;
+function antesHeroi(c,u,s,t){ if(u.poderes.capa&&fase()===5) CIE3X.pipaNoHeroi(c,u,s,t); if(J.poseHeroi!=='paraquedas') return; if(fase()===2){ CIE3X.aviaoNoHeroi(c,u,s,t); return; } var hh=G.URSO_H*s;
   c.save(); c.translate(u.x,u.y-hh-34); var bal=Math.sin(t*4)*.06; c.rotate(bal);
   c.strokeStyle='rgba(255,255,255,.9)'; c.lineWidth=1.5; c.beginPath(); c.moveTo(-34,0); c.lineTo(-8,30); c.moveTo(34,0); c.lineTo(8,30); c.moveTo(0,-4); c.lineTo(0,30); c.stroke();
   /* o guardanapo aberto, segurado pelas pontas: um quadrado branco de borda azul xadrez, inflado */
@@ -372,6 +377,7 @@ function depoisHeroi(c,u,s,t){ if(!u.poderes.bota||fase()!==1||u.montado) return
 function desenhaTiro(c,e,t){
   switch(e.skin){
     case 'faisca': c.save(); c.globalAlpha=.4; A.estrela(c,e.x-Math.sign(e.vx)*12,e.y,8,'#fdba74',e.rot); c.restore(); A.estrela(c,e.x,e.y,10,'#fb923c',e.rot); A.estrela(c,e.x,e.y,5,'#fde047',-e.rot); return true;
+    case 'tenis': case 'piao': return CIE3X.tiro(c,e,t);
     case 'bolha': desBolha(c,e.x,e.y,14); return true;
     case 'vento': c.save(); c.globalAlpha=.9; c.translate(e.x,e.y); c.scale(Math.sign(e.vx)||1,1); desVento(c,0,0,1.2); c.restore(); return true;
     case 'bola': desBola(c,e.x,e.y,11,e.rot); return true;
@@ -394,7 +400,7 @@ function desenhaFundo(c,t){
   var M=J.mundo; if(!M) return; var cena=M.cena, vx0=J.cam-200, vx1=J.cam+W+200;
   /* o que cai: telhado (vila), galho (floresta), torneira (cozinha) */
   grupos(M.pingentes.map(function(p){ return {x:p.x,y:p.y0}; }),160).forEach(function(gr){ if(gr.x1<vx0||gr.x0>vx1) return; var y=gr.n[0].y;
-    if(cena==='vila') telhado(c,gr.x0-60,gr.x1+60,y);
+    if(cena==='vila') CIE3X.estanteQueda(c,gr.x0-60,gr.x1+60,y); else if(cena==='ginasio') galho(c,gr.x0-50,gr.x1+40,y,t); else if(cena!=='bosque'&&cena!=='biscoito') CIE3X.nuvemChuva(c,gr.x0-40,gr.x1+40,y,t);
     else if(cena==='bosque') galho(c,gr.x0-50,gr.x1+40,y,t);
     else if(cena==='biscoito') gr.n.forEach(function(p){ torneira(c,p.x,y); }); });
   /* cipós: presos em galhos de verdade */
@@ -402,7 +408,7 @@ function desenhaFundo(c,t){
   /* argolas e barras: viga do teto do ginásio */
   if(cena==='ginasio') (M.pendulos||[]).forEach(function(p){ if(p.ax>vx0&&p.ax<vx1){ c.fillStyle='#475569'; c.fillRect(p.ax-60,p.ay-10,120,12); c.fillStyle='#334155'; c.fillRect(p.ax-4,0,8,p.ay-8); } });
   /* rolantes: pilha de toras / portão com barris */
-  M.troncos.forEach(function(g){ if(g.x<vx0||g.x>vx1) return; var tr=g.aviso>0?Math.sin(t*14)*1.5:0; if(cena==='bosque') pilhaToras(c,g.x,g.y,tr); else if(g.bola) maquina(c,g,t); else CIE3X.caixaLatas(c,g.x,g.y,tr); });
+  M.troncos.forEach(function(g){ if(g.x<vx0||g.x>vx1) return; var tr=g.aviso>0?Math.sin(t*14)*1.5:0; if(g.bola) maquina(c,g,t); else CIE3X.caixaLatas(c,g.x,g.y,tr); });
   M.canhoes.forEach(function(g){ if(g.x>vx0&&g.x<vx1) maquina(c,g,t); });
   /* voadores da floresta e da cozinha moram numa luz */
   if(cena==='bosque'||cena==='biscoito') M.inimigos.forEach(function(e){ if(e.tipo==='corvo'&&e.x0>vx0&&e.x0<vx1) luz(c,e.x0,e.y0-200,cena,t); });
@@ -500,12 +506,13 @@ function inimigo(c,e,t){
   c.restore(); return true; }
 
 /* explicaçãozinha do poder (passar o mouse ou tocar na pílula/no botão) */
-var DICA_PODER={1:['Soccer ball: press SPACE to kick.','Bola: aperte ESPAÇO para chutar.'],
-  2:['Sneakers: tap JUMP again in the air.','Tênis: aperte PULAR de novo no ar.'],
-  3:['Rope: tap JUMP again in the air to pull yourself up.','Corda: aperte PULAR de novo no ar para se puxar.'],
+var DICA_PODER={1:['Racket: press SPACE. The ball bounces!','Raquete: aperte ESPAÇO. A bola quica!'],
+  2:['Paper plane: hold JUMP in the air to glide.','Avião de papel: no ar, segure PULAR para planar.'],
+  3:['Climbing shoes: tap JUMP again in the air.','Tênis de escalada: aperte PULAR de novo no ar.'],
   4:['Swimsuit: tap JUMP to swim up. SPACE blows bubbles.','Roupa de banho: toque PULAR para nadar. ESPAÇO solta bolhas.'],
-  5:['Kite: hold JUMP in the air to float.','Pipa: segure PULAR no ar para planar.'],
-  8:['Soccer balls: press SPACE to kick.','Bolas: aperte ESPAÇO para chutar.']};
+  5:['Kite: hold JUMP to go up.','Pipa: segure PULAR para subir.'],
+  6:['Top: press SPACE. It knocks over rolling cans.','Pião: aperte ESPAÇO. Ele derruba as latas.'],
+  8:['Bike: hold JUMP in the air for a long jump.','Bicicleta: no ar, segure PULAR para um salto longo.']};
 function dicaPoder(){ var d=DICA_PODER[fase()]; return d?{en:d[0],pt:d[1]}:null; }
 return {peloQuiz:peloQuiz, dicaPoder:dicaPoder, solidos:solidos, desenhaPorteiras:desenhaPorteiras, desenhaTela:desenhaTela, TAB:TAB, poder:poder, pega:pega, interage:interage, toca:toca, dica:dica, alvo:alvo, atira:atira, moveTiro:moveTiro, acertaExtra:acertaExtra, atualiza:atualiza, reinicia:reinicia, segundoPulo:segundoPulo,
   desenhaItem:desenhaItem, plataforma:plataforma, ninho:ninho, antesHeroi:antesHeroi, depoisHeroi:depoisHeroi, desenhaTiro:desenhaTiro, desenhaRolante:desenhaRolante, desenhaFundo:desenhaFundo, desenhaFrente:desenhaFrente, mola:mola, inimigo:inimigo, icone:icone, hudPoder:hudPoder, tiroAtual:tiroAtual, cartao:cartao};

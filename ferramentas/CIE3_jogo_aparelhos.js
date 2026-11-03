@@ -96,7 +96,7 @@ function atualiza(dt){
 
 /* ---------- desenho ---------- */
 function desenha(c,t){
-  var M=J.mundo; if(!M) return;
+  var M=J.mundo; if(!M) return; if(window.CIE3P&&CIE3P.aparelhos(c,M,t)) return;
   (M.pendulos||[]).forEach(function(p){ var e=pontaPend(p);
     c.save(); c.strokeStyle=p.tipo==='cipo'?'#4d7c0f':'#e5e7eb'; c.lineWidth=p.tipo==='cipo'?6:4; c.beginPath(); c.moveTo(p.ax,p.ay); c.lineTo(e.x,e.y); c.stroke();
     if(p.tipo==='cipo'){ c.fillStyle='#65a30d'; for(var k=1;k<5;k++){ var fx=p.ax+(e.x-p.ax)*k/5, fy=p.ay+(e.y-p.ay)*k/5; A.el(c,fx+6,fy,7,3.5); c.fill(); } c.fillStyle='#3f6212'; A.circ(c,p.ax,p.ay,7); c.fill(); }
@@ -112,6 +112,7 @@ function desenha(c,t){
 /* trave e blocos do ritmo (no lugar do desenho da plataforma comum) */
 function plataforma(c,p,cena,t){
   if(window.CIE3X&&CIE3X.plataforma(c,p,t)) return true;
+  if(window.CIE3P&&CIE3P.plataforma(c,p,t)) return true;
   if(p.trave){ c.fillStyle='#a16207'; A.rr(c,p.x,p.y,p.w+1,p.h,4); c.fill(); c.fillStyle='#fde68a'; c.fillRect(p.x,p.y,p.w+1,3); c.fillStyle='#78716c'; if(Math.round(p.x/45)%6===0){ c.fillRect(p.x+18,p.y+p.h,6,450-p.y-p.h); } return true; }
   if(p.ritmo){ if(!p.visivel){ c.save(); c.globalAlpha=.18; c.strokeStyle='#fff'; c.setLineDash([5,5]); A.rr(c,p.x+2,p.y,p.w-4,p.h,6); c.stroke(); c.restore(); return true; }
     var a=p.pisca?(.5+.5*Math.abs(Math.sin(t*9))):1; c.save(); c.globalAlpha=a; c.fillStyle=p.ritmo==='t'?'#ec4899':'#22d3ee'; A.rr(c,p.x+2,p.y,p.w-4,p.h,6); c.fill(); c.fillStyle='rgba(255,255,255,.5)'; A.rr(c,p.x+5,p.y+2,p.w-10,5,3); c.fill(); c.restore(); return true; }

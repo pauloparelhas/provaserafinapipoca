@@ -83,7 +83,7 @@ function manchaTinta(c,e,t){
 function desenhaNivel(c){
   var M=J.mundo, u=J.urso, t=J.t; if(!M) return;
   var sub=/^sub_/.test(M.cena), cena=sub?'sub_caverna':(A.CENAS[M.cena]?M.cena:'floresta');
-  if(sub&&A.fundoSub){ A.ceu(c,cena,t); A.fundoSub(c,cena,J.cam*.2,t); } else { A.ceu(c,cena,t); c.save(); A.longe(c,cena,J.cam*.15,t); A.perto(c,cena,J.cam*.45,t); c.restore(); if(J.camY<-20&&M.modo!=='nado'&&A.CENAS[cena]){ c.fillStyle=A.CENAS[cena].chaoTop; c.fillRect(0,470,W,-J.camY); } } /* CIE3: o fundo tem 470 de altura; com a câmera acima do chão aparecia uma faixa vazia */
+  if(sub&&A.fundoSub){ A.ceu(c,cena,t); A.fundoSub(c,cena,J.cam*.2,t); } else { A.ceu(c,cena,t); c.save(); A.longe(c,cena,J.cam*.15,t); A.perto(c,cena,J.cam*.45,t); c.restore(); if(window.CIE3P) CIE3P.veu(c,cena,M); if(J.camY<-20&&M.modo!=='nado'&&A.CENAS[cena]){ c.fillStyle=A.CENAS[cena].chaoTop; c.fillRect(0,470,W,-J.camY); } } /* CIE3: o fundo tem 470 de altura; com a câmera acima do chão aparecia uma faixa vazia */
   if(M.modo==='nado'&&M.superficie>40){ if(A.ceuDoRio) A.ceuDoRio(c,M.superficie-J.camY,J.cam,t); else ceuDoMar(c,M,t); }
   c.save(); c.translate(-Math.round(J.cam),-Math.round(J.camY));
   var vx0=J.cam-120, vx1=J.cam+W+120, vis=function(o){ return o.x+(o.w||60)>vx0 && o.x-(o.w?0:60)<vx1; };
@@ -103,7 +103,7 @@ function desenhaNivel(c){
   M.tijolos.forEach(function(b){ if(vis(b)) A.tijolo(c,b,cena); });
   M.moedas.forEach(function(m){ if(m.x>vx0&&m.x<vx1) A.moeda(c,m,t); });
   M.itens.forEach(function(it){ if(it.x>vx0&&it.x<vx1&&!(window.PODERES&&PODERES.desenhaItem(c,it,t))&&!it.pego) item(c,it,t); }); /* o móvel fica depois que o objeto é pego */
-  M.ovos.forEach(function(o){ if(!o.chocado&&o.x>vx0&&o.x<vx1){ if(window.PODERES) PODERES.ninho(c,o.x,o.y); var bal=Math.sin(t*5)*.12; c.save(); c.translate(o.x,o.y); c.rotate(bal); pip(c,0,0,'egg',t,1,1); c.restore(); } });
+  M.ovos.forEach(function(o){ if(!o.chocado&&o.x>vx0&&o.x<vx1){ if(window.PODERES&&!(A.pip&&A.pip.fixo)) PODERES.ninho(c,o.x,o.y); var bal=(A.pip&&A.pip.fixo)?0:Math.sin(t*5)*.12; c.save(); c.translate(o.x,o.y); c.rotate(bal); pip(c,0,0,'egg',t,1,1); c.restore(); } });
   M.moradores.forEach(function(m){ if(m.x>vx0-100&&m.x<vx1+100) morador(c,m,t); });
   if(window.PERIGOS) PERIGOS.desenha(c,t,vx0,vx1);
   if(window.PODERES){ PODERES.desenhaFrente(c,t); PODERES.desenhaPorteiras(c,t); }
