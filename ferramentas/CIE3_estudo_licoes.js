@@ -145,16 +145,10 @@ return [
  {tipo:'texto', tit:'Harmful',
   fala:'Harmful: tsunami, heavy rain and floods, tornado, strong winds.',
   html:grade(2,[['harm-tsunami','tsunami','tsunami'],['harm-floods','heavy rain and floods','chuva forte e enchentes'],['harm-tornado','tornado','tornado'],['harm-winds','strong winds','ventos fortes']])},
- {tipo:'revela', tit:'What the video adds',
-  fala:'Wind is air in motion. Wind moves sand and makes dunes. Water is always moving. Wind and water help us. We need to protect our air and water.',
-  cartoes:[
-   {f:'Wind is air in motion'+tr('Vento é ar em movimento'), b:'A gentle breeze or a mighty gust. Blowing bubbles makes wind. A kite flies with the wind.'+tr('Uma brisa suave ou uma rajada forte. Soprar bolhas faz vento. A pipa voa com o vento.')},
-   {f:'What wind does'+tr('O que o vento faz'), b:'Wind moves sand and makes dunes. Wind and sand wear rock and make arches.'+tr('O vento move a areia e faz dunas. Vento e areia gastam a rocha e fazem arcos.')},
-   {f:'Water is always moving'+tr('A água está sempre em movimento'), b:'Rivers flow downhill. Water wears rock and makes valleys and canyons. Rain carries soil away.'+tr('Os rios descem. A água gasta a rocha e faz vales e cânions. A chuva leva a terra embora.')},
-   {f:'We use the wind'+tr('Usamos o vento'), b:'Sailing, turbines for electricity, kites. Wind also spreads seeds.'+tr('Velejar, turbinas para eletricidade, pipas. O vento também espalha sementes.')},
-   {f:'We use the water'+tr('Usamos a água'), b:'Hydroelectricity with dams, boats and ships, farmers water fields, drinking, cooking, washing. Rivers are home to fish and frogs.'+tr('Hidreletricidade com barragens, barcos e navios, irrigar os campos, beber, cozinhar, lavar. Os rios são a casa de peixes e sapos.')},
-   {f:'Our job'+tr('Nossa tarefa'), b:'We need to protect our air and water.'+tr('Precisamos proteger nosso ar e nossa água.')}
-  ]},
+ {tipo:'texto', tit:'What wind and water do',
+  fala:'Wind is air in motion. Wind moves sand and makes dunes. It fills the sails of boats and turns wind turbines. Water is always moving. Rivers flow downhill. Water wears rock away. Water makes energy, carries boats and waters the fields.',
+  html:caixa('Wind'+tr('Vento'),'<p>Wind is <b>air in motion</b>.'+tr('Vento é ar em movimento.')+'<br>It moves <b>sand</b> and makes <b>dunes</b>.'+tr('Move a areia e faz dunas.')+'<br>It fills <b>sails</b> and turns <b>wind turbines</b>.'+tr('Enche as velas e gira as turbinas.')+'</p>')+esp()+
+   caixa('Water'+tr('Água'),'<p>Water is <b>always moving</b>. Rivers flow <b>downhill</b>.'+tr('A água está sempre em movimento. Os rios descem.')+'<br>It wears <b>rock</b> away.'+tr('Desgasta a pedra.')+'<br>It makes <b>energy</b>, carries <b>boats</b> and waters the <b>fields</b>.'+tr('Faz energia, leva barcos e rega os campos.')+'</p>')},
  {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('harm-floods',[P('Wind and water are two ___ forces.','Vento e água são duas forças ___.','natural','naturais'),P('Look at the picture. Is it helpful or harmful?','Olhe a figura. Ajuda ou prejudica?','harmful','prejudica')])}
 ]},
 
@@ -207,7 +201,7 @@ return [
   fala:'Pull: tug of war with a rope, pulling a wagon, opening a drawer, fishing with a rod. They move closer to me.',
   html:grade(2,[['pull-rope','tug of war with a rope','cabo de guerra com corda'],['pull-wagon','pulling a wagon','puxar um carrinho'],['pull-drawer','opening a drawer','abrir uma gaveta'],['pull-fish','fishing with a rod','pescar com vara']])+
    R('<b>Pull</b>: closer to me.','Pull = puxar: para perto de mim.')},
- {tipo:'texto', tit:'Forces in the video',
+ {tipo:'texto', tit:'More examples',
   fala:'Force makes things move from one place to another. There are two types of force: push and pull. Push and pull are opposite forces. Push: a shopping trolley, a volleyball, playing the piano, the golfer hitting the ball. Pull: holding the rope of a kite, picking fruit and vegetables from the plant.',
   html:R('<b>Force</b> makes things move from one place to another.','A força faz as coisas irem de um lugar para outro.')+
    R('Two types of force: <b>push</b> and <b>pull</b>. They are <b>opposite</b> forces.','Dois tipos de força: push e pull. São forças opostas.')+
