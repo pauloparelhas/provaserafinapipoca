@@ -2,6 +2,8 @@
 const fs=require('fs'),path=require('path');
 const raiz=path.join(__dirname,'..'),dir=path.join(raiz,'banco'),out=path.join(raiz,'..','..','ferramentas','CIE3_banco.js');
 let I=[];fs.readdirSync(dir).filter(f=>f.endsWith('.json')&&/^T/.test(f)).sort().forEach(f=>{I=I.concat(JSON.parse(fs.readFileSync(path.join(dir,f),'utf8')));});
+// lente fino do Paulo (02/11): so entra o que esta em banco/_lente.json (max. 100); o resto fica guardado em banco/*.json
+{const lf=path.join(dir,'_lente.json');if(fs.existsSync(lf)){const k=new Set(Object.values(JSON.parse(fs.readFileSync(lf,'utf8'))).flat());I=I.filter(i=>k.has(i.id));}}
 const vis=new Set();I.forEach(i=>{i.c=0;if(vis.has(i.id))throw new Error('id repetido '+i.id);vis.add(i.id);
  if(i.o.length!==i.o_pt.length)throw new Error('o_pt '+i.id);
  if(i.img&&!fs.existsSync(path.join(raiz,'..','..','ferramentas',i.img)))throw new Error('img '+i.id+' '+i.img);});

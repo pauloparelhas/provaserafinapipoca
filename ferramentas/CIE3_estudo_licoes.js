@@ -69,17 +69,24 @@ function mov(k){
 var OP_MOV=['bounce','fly','roll','slide','spin','swing'];
 function ITM(k,i,d){ return {m:foto(MOV[k].ex[i][0]), c:k, d:d}; }
 
+function P(pede,pt,resp,rpt){ return '<li>'+pede+tr(pt)+'<br><b class="resp">'+resp+'</b>'+(rpt?tr(rpt):'')+'</li>'; }
+function naProva(fig_,itens){ return (fig_?'<img class="fescb" src="media/cie3/'+fig_+'.jpg" alt="">':'')+'<ol class="naprova">'+itens.join('')+'</ol>'; }
 return [
 
 /* ===================== 1. POSITION: IN, ON, UNDER, INSIDE ===================== */
 {k:'pos1', tema:'position', nome:'Position: in, on, under, inside', nome_pt:'Posição: dentro, sobre, embaixo', cor:'#f472b6', quem:'Pin',
- treino:[[['position'],3,'rapida'],[['position'],2,'conceito']], telas:[
+ treino:[[['position'],5]], telas:[
  {tipo:'texto', tit:'Where is it?',
   fala:'Pin, the red pin of the map, says: Twister the tornado blew everything away! To find it all, we start with where things are. In, on, under, inside.',
   html:fala('Pin, the red map pin','Twister the tornado blew everything away! Let’s start with <b>where</b> things are.'+tr('O tornado Twister espalhou tudo! Vamos começar por ONDE as coisas estão.'))+
    grade(2,[['prep-in','The teddy bear is <b>in</b> the box.','O ursinho está dentro da caixa.'],['prep-on','The apple is <b>on</b> the book.','A maçã está sobre o livro.'],['prep-under','The ball is <b>under</b> the table.','A bola está embaixo da mesa.'],['prep-inside','The fish is <b>inside</b> the bowl.','O peixe está dentro do aquário.']])},
- {tipo:'palavras', tit:'Say the words',
-  fala:'In. On. Under. Inside.', pals:['in'+tr('dentro'),'on'+tr('sobre'),'under'+tr('embaixo'),'inside'+tr('dentro')]},
+ {tipo:'completa', tit:'Read and complete', fala:'Read and complete.', regra:'in · on · under · inside',
+  itens:[
+   C('The bear is _ the box.','in',['on','under'],'O urso está … a caixa.','dentro d'),
+   C('The apple is _ the book.','on',['in','under'],'A maçã está … o livro.','sobre'),
+   C('The ball is _ the table.','under',['on','in'],'A bola está … a mesa.','embaixo d'),
+   C('The fish is _ the bowl.','inside',['on','under'],'O peixe está … o aquário.','dentro d')
+  ]},
  {tipo:'texto', tit:'Watch out!',
   fala:'In and inside are very close: the thing is within something. On: on top of it, touching it. Under: lower than it.',
   html:fala('Pin','Don’t mix them up!'+tr('Não confunda!'))+
@@ -91,12 +98,13 @@ return [
    Q('prep-on','The apple is _ the book.','on',['in','under'],'The apple is on the book.'+tr('A maçã está sobre o livro.'),'A maçã está … o livro.','sobre'),
    Q('prep-under','The ball is _ the table.','under',['on','in'],'The ball is under the table.'+tr('A bola está embaixo da mesa.'),'A bola está … a mesa.','embaixo d'),
    Q('prep-inside','The fish is _ the bowl.','inside',['on','under'],'The fish is inside the bowl.'+tr('O peixe está dentro do aquário.'),'O peixe está … o aquário.','dentro d')
-  ]}
+  ]},
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('prep-under',[P('Look at the picture. Where is the ball?','Olhe a figura. Onde está a bola?','under the table','embaixo da mesa'),P('Complete: The apple is ___ the book.','Complete: A maçã está ___ o livro.','on','sobre'),P('Which sentence is right? The fish is on the bowl. / The fish is inside the bowl.','Qual frase está certa?','The fish is inside the bowl.','O peixe está dentro do aquário.')])}
 ]},
 
 /* ===================== 2. POSITION: BEHIND, BETWEEN, ... E A CENA ===================== */
 {k:'pos2', tema:'position', nome:'Position: behind, between, near and more', nome_pt:'Posição: atrás, entre, perto e mais', cor:'#f472b6', quem:'Pin',
- treino:[[['position'],3,'rapida'],[['position'],2,'leitura']], telas:[
+ treino:[[['position'],5]], telas:[
  {tipo:'texto', tit:'Behind, in front of, between, next to',
   fala:'Pin says: The boy is behind the tree. The dog is in front of the chair. The teddy bear is between the two plants. The clock is next to the lamp.',
   html:fala('Pin','More words for <b>where</b>!'+tr('Mais palavras para ONDE!'))+
@@ -125,7 +133,7 @@ return [
   ]},
  {tipo:'texto', tit:'Look at the room',
   fala:'Look at the room. There are many things in it. Where is the pizza? Where is the guitar? Where are the two dogs? Let’s find out.',
-  html:fig('room')+fala('Pin','Look at everything in this room. Now tell me <b>where</b> each thing is!'+tr('Olhe tudo nesta sala. Agora me diga ONDE cada coisa está!'))},
+  html:fig('room')+fala('Pin','Look at everything in this room. <b>Where</b> is each thing?'+tr('Olhe tudo nesta sala. ONDE está cada coisa?'))},
  {tipo:'escolha', tit:'In the room', fala:'Look at the room and complete.', pergunta:'Look at the room. Which word completes it?'+tr('Olhe a sala. Qual palavra completa?'),
   frase:true, itens:[
    Q('room','The pizza is _ the box.','in',['under','behind'],'Pizza in the box.'+tr('A pizza está dentro da caixa.'),'A pizza está … a caixa.','dentro d'),
@@ -148,12 +156,13 @@ return [
    C('The bird does not touch the trees. It flies _ the trees.','over',['on'],'O pássaro não encosta nas árvores. Ele voa … as árvores.','por cima d'),
    C('The tree is not close to the house. It is _ the house.','far from',['near'],'A árvore não está perto da casa. Ela está … a casa.','longe d'),
    C('The window is at the back of the sofa. It is _ the sofa.','behind',['in front of'],'A janela está na parte de trás do sofá. Ela está … o sofá.','atrás d')
-  ]}
+  ]},
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('room',[P('Use the words in the box: behind, next to, in front of, over, in, on, between, under. There is a guitar ___ the lamp and the plant.','Use as palavras da caixa. Tem um violão ___ o abajur e a planta.','between','entre'),P('There is a racket ___ the bag.','Tem uma raquete ___ a mochila.','next to','ao lado de'),P('There is a picture ___ the wall.','Tem um quadro ___ a parede.','on','na')])}
 ]},
 
 /* ===================== 3. DIRECTIONS AND MAPS ===================== */
 {k:'dir', tema:'directions', nome:'Directions and maps', nome_pt:'Direções e mapas', cor:'#fb7185', quem:'Pin',
- treino:[[['directions'],3,'leitura'],[['directions'],2,'conceito']], telas:[
+ treino:[[['directions'],5]], telas:[
  {tipo:'texto', tit:'I mark a place',
   fala:'Pin says: I am the red pin. I mark a place on the map. There are many maps: a city map on a phone, a GPS route, a map of a city like São Paulo, and a map of the school.',
   html:fala('Pin','I am the <b>red pin</b>: I mark a place on the map!'+tr('Eu sou o pino vermelho: marco um lugar no mapa!'))+
@@ -185,12 +194,13 @@ return [
    C('When we read maps we need to pay a lot of _ to the details.','attention',['speed'],'Ao ler mapas, precisamos prestar muita … aos detalhes.','atenção'),
    C('We pay attention to the path, the _ we are going.','way',['map'],'Prestamos atenção ao caminho, o … que seguimos.','caminho'),
    C('The red pin marks a _ on the map.','place',['path'],'O pino vermelho marca um … no mapa.','lugar')
-  ]}
+  ]},
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('map-school',[P('Look at the map. What is between A section and B section?','Olhe o mapa. O que há entre a seção A e a B?','the Auditorium','o auditório'),P('Is B section on the left or on the right of the Auditorium?','A seção B fica à esquerda ou à direita do auditório?','on the right','à direita'),P('When we read maps, we need to pay attention to the details and the ___.','Ao ler mapas, prestamos atenção nos detalhes e no ___.','path','caminho'),P('True or false: we might get lost if we run.','Verdadeiro ou falso: podemos nos perder se corrermos.','True','Verdadeiro')])}
 ]},
 
 /* ===================== 4. CHANGING PERSPECTIVE ===================== */
 {k:'persp', tema:'perspective', nome:'Changing perspective', nome_pt:'Mudando a perspectiva', cor:'#fbbf24', quem:'Gigi',
- treino:[[['perspective'],3,'rapida'],[['perspective'],2,'conceito']], telas:[
+ treino:[[['perspective'],5]], telas:[
  {tipo:'texto', tit:'Where are you looking from?',
   fala:'Gigi, the giraffe painter, says: We can see many things from different positions, and our perspective changes depending on where we are looking from.',
   html:fala('Gigi, the giraffe painter','I am very tall. I see things from up here!'+tr('Sou muito alta. Vejo as coisas daqui de cima!'))+
@@ -223,12 +233,13 @@ return [
    C('We can see many things from _ positions.','different',['the same'],'Podemos ver muitas coisas de posições ….','diferentes'),
    C('People are not right or _.','wrong',['left'],'As pessoas não estão certas nem ….','erradas'),
    C('They just have a different _ of things.','view',['shadow'],'Elas só têm uma … diferente das coisas.','visão')
-  ]}
+  ]},
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('view-bottom',[P('Look at the picture. The tower is seen from the ___.','Olhe a figura. A torre é vista de ___.','bottom','baixo'),P('Our perspective changes depending on ___ we are looking from.','Nossa perspectiva muda dependendo de ___ estamos olhando.','where','onde'),P('Complete: People are not right or wrong. They just have a different ___ of things.','As pessoas não estão certas nem erradas; só têm outra ___ das coisas.','view','visão')])}
 ]},
 
 /* ===================== 5. WIND AND WATER ===================== */
 {k:'forcas', tema:'forces', nome:'Wind and water: helpful and harmful', nome_pt:'Vento e água: úteis e perigosos', cor:'#38bdf8', quem:'Breezy and Drop',
- treino:[[['forces'],3,'rapida'],[['forces'],2,'conceito']], telas:[
+ treino:[[['forces'],5]], telas:[
  {tipo:'texto', tit:'Two natural forces',
   fala:'Breezy and Drop say: Wind and water are two natural forces that exist in nature, and they can be helpful and harmful to us.',
   html:fala('Breezy, the breeze','I am the wind!'+tr('Eu sou o vento!'))+
@@ -280,12 +291,13 @@ return [
    C('A soft wind is a gentle _.','breeze',['gust'],'Um vento leve é uma … suave.','brisa'),
    C('Rain carries _ away.','soil',['air'],'A chuva leva a … embora.','terra'),
    C('We need to protect our air and _.','water',['sand'],'Precisamos proteger nosso ar e nossa ….','água')
-  ]}
+  ]},
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('harm-floods',[P('Wind and water are two ___ forces.','Vento e água são duas forças ___.','natural','naturais'),P('Look at the picture. Is it helpful or harmful?','Olhe a figura. Ajuda ou prejudica?','harmful','prejudica'),P('Write one way wind is helpful and one way water is helpful.','Escreva um jeito em que o vento ajuda e um em que a água ajuda.','wind: makes energy, spreads seeds · water: waters plants, makes energy','vento: faz energia, espalha sementes · água: rega plantas, faz energia'),P('Is a tsunami wind or water?','Tsunami é vento ou água?','water','água')])}
 ]},
 
 /* ===================== 6. MOVEMENT OF OBJECTS ===================== */
 {k:'objetos', tema:'objects', nome:'Movement of objects', nome_pt:'Movimento dos objetos', cor:'#a78bfa', quem:'Boing',
- treino:[[['objects'],3,'rapida'],[['objects'],3,'conceito']], telas:[
+ treino:[[['objects'],5]], telas:[
  {tipo:'texto', tit:'Bounce and fly',
   fala:'Boing says: Six Motion Stars, one for each movement! Bounce: to go up and down after hitting a surface. Fly: to move through the air.',
   html:fala('Boing, the bouncing ball','Twister blew away the 6 <b>Motion Stars</b>! One star for each movement.'+tr('O Twister levou as 6 Estrelas do Movimento! Uma estrela para cada movimento.'))+
@@ -336,20 +348,22 @@ return [
    C('Up and down, round and round: these are different _.','directions',['speeds'],'Para cima e para baixo, em voltas: são … diferentes.','direções'),
    C('A swing moves back and _.','forth',['down'],'O balanço vai para a frente e para ….','trás'),
    C('A ball that bounces goes up and _.','down',['forth'],'A bola que quica vai para cima e para ….','baixo')
-  ]}
+  ]},
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('obj-spin-top',[P('Look at the picture. How does the top move?','Olhe a figura. Como o pião se move?','It spins.','Ele gira.'),P('Complete: To ___ means to go up and down after hitting a surface.','Complete: ___ é subir e descer depois de bater numa superfície.','bounce','quicar'),P('Match: wheel, kite, door → roll, fly, swing.','Ligue: roda, pipa, porta → rolar, voar, balançar.','wheel: roll · kite: fly · door: swing','roda: rola · pipa: voa · porta: balança'),P('Things can move slow or ___.','As coisas podem se mover devagar ou ___.','fast','rápido')])}
 ]},
 
 /* ===================== 7. ANIMALS AND BODY ===================== */
 {k:'animais', tema:'animals', nome:'Movement of animals and of our body', nome_pt:'Movimento dos animais e do corpo', cor:'#34d399', quem:'Paws',
- treino:[[['animals'],3,'rapida'],[['animals'],2,'conceito']], telas:[
- {tipo:'palavras', tit:'Our body moves',
-  regra:fala('Paws, the vet','We move too! Our <b>body</b> can:'+tr('Nós também nos movemos! Nosso corpo pode:')),
-  fala:'Doctor Paws says: Our body can swim, climb, play, walk, pick and sit.',
-  pals:['swim'+tr('nadar'),'climb'+tr('escalar'),'play'+tr('brincar'),'walk'+tr('andar'),'pick'+tr('pegar'),'sit'+tr('sentar')]},
- {tipo:'palavras', tit:'Our hands move',
-  regra:'Our <b>hand</b> can:'+tr('Nossa mão pode:'),
-  fala:'Our hand can touch, lift, point, write, grab and push.',
-  pals:['touch'+tr('tocar'),'lift'+tr('levantar'),'point'+tr('apontar'),'write'+tr('escrever'),'grab'+tr('agarrar'),'push'+tr('empurrar')]},
+ treino:[[['animals'],5]], telas:[
+ {tipo:'texto', tit:'Movements of the body',
+  fala:'Make a list of movements you can do with your body. Swim, climb, play, walk, pick, sit.',
+  html:fala('Paws','This is the sheet from your class. We move too!'+tr('Esta é a folha da sua aula. Nós também nos movemos!'))+
+   '<img class="fescb" src="media/cie3/orig/corpo-mao.jpg" alt="">'+
+   caixa('My body'+tr('Meu corpo'),'<p><b>swim, climb, play, walk, pick, sit</b>'+tr('nadar, subir, brincar, andar, colher, sentar')+'</p>')},
+ {tipo:'texto', tit:'Movements of the hand',
+  fala:'Make a list of movements you can do with your hand. Touch, lift, point, write, grab, push.',
+  html:caixa('My hand'+tr('Minha mão'),'<p><b>touch, lift, point, write, grab, push</b>'+tr('tocar, levantar, apontar, escrever, agarrar, empurrar')+'</p>')+esp()+
+   R('Learn to <b>write</b> these words: the sheet asks you to make a list.','Aprenda a escrever estas palavras: a folha pede para fazer uma lista.')},
  {tipo:'texto', tit:'How animals move',
   fala:'A fish swims. A bird flies. A monkey climbs. A dog walks and runs. A kangaroo and a frog jump. A snake crawls on the ground.',
   html:fala('Paws','Each animal has its way to move!'+tr('Cada animal tem seu jeito de se mover!'))+
@@ -374,12 +388,13 @@ return [
    {m:'grab', c:'Hand', d:'Hand: touch, lift, point, write, grab, push.'+tr('Mão: tocar, levantar, apontar, escrever, agarrar, empurrar.')},
    {m:'sit', c:'Body', d:'Body: swim, climb, play, walk, pick, sit.'+tr('Corpo: nadar, escalar, brincar, andar, pegar, sentar.')},
    {m:'lift', c:'Hand', d:'Hand: touch, lift, point, write, grab, push.'+tr('Mão: tocar, levantar, apontar, escrever, agarrar, empurrar.')}
-  ]}
+  ]},
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva(null,[P('Make a list of movements you can do with your body.','Faça uma lista de movimentos que você faz com o corpo.','swim, climb, play, walk, pick, sit','nadar, subir, brincar, andar, colher, sentar'),P('Make a list of movements you can do with your hand.','Faça uma lista de movimentos que você faz com a mão.','touch, lift, point, write, grab, push','tocar, levantar, apontar, escrever, agarrar, empurrar'),P('How does a fish move? How does a bird move?','Como o peixe se move? E o pássaro?','A fish swims. A bird flies.','O peixe nada. O pássaro voa.')])}
 ]},
 
 /* ===================== 8. PUSH OR PULL ===================== */
 {k:'pushpull', tema:'pushpull', nome:'Push or pull', nome_pt:'Empurrar ou puxar', cor:'#f97316', quem:'Max',
- treino:[[['pushpull'],3,'rapida'],[['pushpull'],2,'conceito']], telas:[
+ treino:[[['pushpull'],5]], telas:[
  {tipo:'texto', tit:'Push or pull?',
   fala:'Max says: A push is when I use a force to move something away from me. A pull is when I use a force to move something closer to me.',
   html:R('<b>push</b> · <b>pull</b>','push = empurrar · pull = puxar')+
@@ -428,7 +443,8 @@ return [
    C('A pull moves something _ me.','closer to',['away from'],'Pull move algo … mim.','para perto de'),
    C('Push and pull are _ forces.','opposite',['equal'],'Push e pull são forças ….','opostas'),
    C('Force makes things move from one _ to another.','place',['speed'],'A força faz as coisas irem de um … para outro.','lugar')
-  ]}
+  ]},
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('pull-wagon',[P('Look at the picture. Is it a push or a pull?','Olhe a figura. É push ou pull?','a pull','puxar'),P('Complete: A push is when I use a force to move something ___ from me.','Complete: push é usar força para mover algo ___ de mim.','away','para longe'),P('Complete: A pull is when I use a force to move something ___ to me.','Complete: pull é usar força para mover algo ___ de mim.','closer','para perto'),P('Write one example of a push and one of a pull.','Escreva um exemplo de push e um de pull.','push: kicking a ball · pull: opening a drawer','push: chutar a bola · pull: abrir a gaveta')])}
 ]}
 
 ];
