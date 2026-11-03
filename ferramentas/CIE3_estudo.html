@@ -311,6 +311,15 @@ body.voz-ok .ouvir,body.voz-ok #sombtn{display:inline-flex!important}
 .arr-den{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
 .arr-den .arr-it{cursor:default;border-color:var(--ok);background:rgba(52,211,153,.16);min-height:0;padding:3px 7px;font-size:calc(.9rem*var(--fs))}
 .arr-den .arr-it img{width:46px;height:46px}
+/* frases: o banco de palavras gruda no topo enquanto rola */
+.arr-cx1 .arr-itens{position:sticky;top:60px;z-index:6;background:var(--card);padding:8px 4px;border-radius:12px;box-shadow:0 6px 14px rgba(0,0,0,.35)}
+body.light .arr-cx1 .arr-itens{background:#fff}
+.arr-fr{min-height:0;display:block;padding:8px 10px;border-style:solid;border-width:2px;font-weight:800;line-height:1.9}
+.arr-fr p{margin:0}
+.arr-vaga{display:inline-flex;vertical-align:middle;min-width:96px;min-height:40px;margin:0 3px;border:2px dashed var(--lc);border-radius:10px;align-items:center;justify-content:center}
+.arr-vaga:empty::after{content:'';padding:0}
+.arr-fr.cheia{border-color:var(--ok)}
+.arr-fr.cheia .arr-vaga{border:none;min-width:0}
 /* ---------- treininho ---------- */
 .tq .tqnum{font-size:calc(.74rem*var(--fs));font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:var(--lcx)}
 .tq .tqp{font-size:calc(1.18rem*var(--fs));font-weight:900;line-height:1.35;margin:6px 0 10px}
@@ -766,11 +775,12 @@ R.arrasta=function(t){
   function rot(x){ return (x.img?'<img src="media/cie3/'+x.img+'.jpg" alt="">':'')+(x.t?'<span>'+x.t+'</span>':''); }
   var itens=emb(t.itens.map(function(x,i){ return {x:x,i:i}; }));
   var cols=t.cols||Math.min(t.caixas.length,2);
-  return {html:'<div class="regra">'+(t.regra||'Drag each one to the right place.')+'<span class="tr">'+(t.regra_pt||'Arraste cada um para o lugar certo.')+'</span></div>'+
+  return {html:'<div class="'+(t.caixas[0].frase?'arr-cx1':'')+'">'+(t.fig?'<img class="fescb" src="media/cie3/'+t.fig+'.jpg" alt="">':'')+'<div class="regra">'+(t.regra||'Drag each one to the right place.')+'<span class="tr">'+(t.regra_pt||'Arraste cada um para o lugar certo.')+'</span></div>'+
     '<div class="arr-itens">'+itens.map(function(o){ return '<div class="arr-it" role="button" tabindex="0" data-i="'+o.i+'">'+rot(o.x)+'</div>'; }).join('')+'</div>'+
     '<div class="arr-cx" style="grid-template-columns:repeat('+cols+',1fr)">'+emb(t.caixas).map(function(c){
+      if(c.frase) return '<div class="arr-c arr-fr" data-k="'+c.k+'"><p>'+c.frase.replace('___','<span class="arr-den arr-vaga"></span>')+(c.pt?'<span class="tr">'+c.pt+'</span>':'')+'</p></div>';
       return '<div class="arr-c" data-k="'+c.k+'"'+(c.cor?' style="--cc:'+c.cor+'"':'')+'>'+(c.img?'<img src="media/cie3/'+c.img+'.jpg" alt="">':'')+(c.t?'<h4>'+c.t+'</h4>':'')+'<div class="arr-den"></div></div>'; }).join('')+'</div>'+
-    '<div class="ordmsg">'+(t.dica||'Drag, or tap one and then its place.')+'</div><button class="btn calmo" data-a="re">Start again</button>',
+    '<div class="ordmsg">'+(t.dica||'Drag, or tap one and then its place.')+'</div><button class="btn calmo" data-a="re">Start again</button></div>',
     init:function(el){
       var msg=el.querySelector('.ordmsg'), feitos=0, sel=null, total=t.itens.length;
       /* ima: vale a caixa sob o dedo ou a mais proxima ate 60 px */
@@ -778,10 +788,10 @@ R.arrasta=function(t){
       function caixa(k){ return t.caixas.filter(function(c){ return c.k===k; })[0]; }
       function solta(it,cx){
         var x=t.itens[+it.dataset.i];
-        if(x.c===cx.dataset.k){
+        if(x.c===cx.dataset.k && !(cx.classList.contains('arr-fr') && cx.querySelector('.arr-vaga .arr-it'))){
           it.classList.remove('sel'); it.removeAttribute('role'); it.tabIndex=-1; it.onpointerdown=null; it.onclick=null;
           cx.querySelector('.arr-den').appendChild(it); feitos++;
-          var c=caixa(x.c); fala((x.t||'')+(c.t?', '+c.t:''));
+          var c=caixa(x.c); fala(c.frase?c.frase.replace('___',x.t):(x.t||'')+(c.t?', '+c.t:'')); if(c.frase) cx.classList.add('cheia');
           msg.textContent=feitos===total?(t.fim||'Well done! Everything is in the right place.'):'Yes!';
         }else{
           it.classList.remove('erro'); void it.offsetWidth; it.classList.add('erro'); setTimeout(function(){ it.classList.remove('erro'); },450);
