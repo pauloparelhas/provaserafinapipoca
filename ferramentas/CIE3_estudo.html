@@ -512,6 +512,8 @@ body.show-tr #trbtn{outline:2px solid var(--accent,#f472b6);outline-offset:2px}
   .chegada{min-height:42px;margin:4px auto 0}
   .mc-placar{padding:2px 16px 8px}
 }
+.credito{display:block;margin:6px 0 0;font-size:calc(.72rem*var(--fs));font-weight:700;opacity:.62;text-align:right;font-style:italic}
+.lembra .credito{margin-top:4px}
 </style>
 </head>
 <body>
@@ -856,7 +858,7 @@ R.arrasta=function(t){
       if(c.frase) return '<div class="arr-c arr-fr" data-k="'+c.k+'"><p>'+c.frase.replace('___','<span class="arr-den arr-vaga"></span>')+(c.pt?'<span class="tr">'+c.pt+'</span>':'')+'</p></div>';
       return '<div class="arr-c" data-k="'+c.k+'"'+(c.cor?' style="--cc:'+c.cor+'"':'')+'>'+(c.img?'<img src="media/cie3/'+c.img+'.jpg" alt="">':'')+(c.t?'<h4>'+c.t+'</h4>':'')+'<div class="arr-den"></div></div>'; }).join('')+'</div>'+
     '<div class="arr-pe">'+(FR?'<div class="arr-prog">'+t.caixas.map(function(){ return '<i></i>'; }).join('')+'</div>':'')+
-    '<div class="ordmsg">'+(t.dica||'')+'</div><button class="arr-re" data-a="re">&#8634; Start again</button></div></div></div>',
+    '<div class="ordmsg">'+(t.dica||'')+'</div><button class="arr-re" data-a="re">&#8634; Start again</button></div>'+(t.credito?'<p class="credito">'+t.credito+'</p>':'')+'</div></div>',
     init:function(el){
       var msg=el.querySelector('.ordmsg'), feitos=0, sel=null, total=t.itens.length, K=FR?3:99;
       function janela(){ var n=0; el.querySelectorAll('.arr-c').forEach(function(c){ var ok=!c.classList.contains('feita') && n<K; if(ok) n++; c.classList.toggle('fora',!ok && !c.classList.contains('cheia')); }); }
@@ -996,7 +998,7 @@ function renderCapa(){
   document.body.style.setProperty('--lc','#f472b6');
   titulo.textContent='Motion Rangers · Study';
   var TRc=function(t){ return '<span class="tr">'+t+'</span>'; }; /* 18/10: a bandeira traduz também os cartões da capa */
-  var PARADAS=[['prep-in','In, on, under','Dentro, sobre, embaixo'],['prep-between','Behind, between, near','Atrás, entre, perto'],['map-school','Reading a map','Lendo um mapa'],['view-bottom','Seen from where?','Visto de onde?'],['harm-tornado','Wind and water','Vento e água'],['obj-spin-pinwheel','How things move','Como as coisas se movem'],['hand','Animals and my body','Animais e meu corpo'],['pull-rope','Push or pull?','Empurrar ou puxar?'],['obj-swing-swing','A story','Uma história']];
+  var PARADAS=[['prep-in','In, on, under','Dentro, sobre, embaixo'],['prep-between','Behind, between, near','Atrás, entre, perto'],['map-school','Reading a map','Lendo um mapa'],['view-bottom','Seen from where?','Visto de onde?'],['harm-tornado','Wind and water','Vento e água'],['obj-spin-pinwheel','How things move','Como as coisas se movem'],['hand','Animals and my body','Animais e meu corpo'],['pull-rope','Push or pull?','Empurrar ou puxar?'],['obj-spin-top','A story','Uma história']];
   var PIN='<svg class="aqui" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 39C8 27 2 21 2 14a13 13 0 0 1 26 0c0 7-6 13-13 25z" fill="#e11d2e" stroke="#7f1d1d" stroke-width="1.5"/><circle cx="15" cy="14" r="6" fill="#fff"/></svg>';
   var prox=-1; LICOES.some(function(l,i){ if(!f[l.k]){ prox=i; return true; } return false; });
   tela.innerHTML='<div class="mapa-capa"><div class="mc-top">'+
@@ -1035,6 +1037,7 @@ function encaixa(){
 addEventListener('resize',function(){ clearTimeout(window._encT); window._encT=setTimeout(function(){ if(est.lic>=0) encaixa(); },150); });
 function render(){
   try{ speechSynthesis.cancel(); }catch(e){}
+  document.querySelectorAll('.arr-it.demo').forEach(function(x){ x.remove(); }); /* a mao da tela anterior nao fica flutuando */
   if(est.lic<0){ renderCapa(); window.scrollTo(0,0); return; }
   var lic=LICOES[est.lic], t=sessao.telas[est.i], cor=corDe(lic);
   document.body.style.setProperty('--lc',cor);
