@@ -55,12 +55,12 @@ var nc=0;
 function C(frase,c,erradas,ptm,ptw){ var it=Q(null,frase,c,erradas,'',ptm,ptw); if(nc++%2) it.op=it.op.slice().reverse(); return it; }
 /* os 6 movimentos, com as cores fixas da bíblia e a definição exata do slide */
 var MOV={
- bounce:{cor:'#eab308',pt:'quicar',def:'to go up and down after hitting a surface',defp:'subir e descer depois de bater numa superfície',ex:[['obj-bounce-soccer-ball','soccer ball','bola de futebol'],['obj-bounce-tennis-ball','tennis ball','bola de tênis'],['obj-bounce-basketball','basketball','bola de basquete']]},
- fly:{cor:'#0ea5e9',pt:'voar',def:'to move through the air',defp:'mover-se pelo ar',ex:[['obj-fly-airplane','airplane','avião'],['obj-fly-balloon','hot air balloon','balão de ar quente'],['obj-fly-kite','kite','pipa']]},
- roll:{cor:'#ec4899',pt:'rolar',def:'to move by turning over and over',defp:'mover-se virando e virando',ex:[['obj-roll-wheel','wheel','roda'],['obj-roll-can','can','lata'],['obj-roll-beach-ball','beach ball','bola de praia']]},
- slide:{cor:'#8b5cf6',pt:'deslizar',def:'to move smoothly along a surface',defp:'mover-se suavemente sobre uma superfície',ex:[['obj-slide-slide','slide','escorregador'],['obj-slide-ice-cube','ice cube','cubo de gelo'],['obj-slide-book','book','livro']]},
- spin:{cor:'#f97316',pt:'girar',def:'to turn around and around',defp:'dar voltas e voltas',ex:[['obj-spin-pinwheel','pinwheel','cata-vento'],['obj-spin-fan','fan','ventilador'],['obj-spin-top','top','pião']]},
- swing:{cor:'#22c55e',pt:'balançar',def:'to move back and forth like a pendulum',defp:'ir e voltar como um pêndulo',ex:[['obj-swing-swing','swing','balanço'],['obj-swing-plant','hanging plant','planta pendurada'],['obj-swing-door','door','porta']]}
+ bounce:{cor:'#eab308',pt:'quicar',def:'to go <span class="dest">up and down</span> after hitting a <span class="dest">surface</span>',defp:'subir e descer depois de bater numa superfície',ex:[['obj-bounce-soccer-ball','soccer ball','bola de futebol'],['obj-bounce-tennis-ball','tennis ball','bola de tênis'],['obj-bounce-basketball','basketball','bola de basquete']]},
+ fly:{cor:'#0ea5e9',pt:'voar',def:'to move through the <span class="dest">air</span>',defp:'mover-se pelo ar',ex:[['obj-fly-airplane','airplane','avião'],['obj-fly-balloon','hot air balloon','balão de ar quente'],['obj-fly-kite','kite','pipa']]},
+ roll:{cor:'#ec4899',pt:'rolar',def:'to move by <span class="dest">turning over and over</span>',defp:'mover-se virando e virando',ex:[['obj-roll-wheel','wheel','roda'],['obj-roll-can','can','lata'],['obj-roll-beach-ball','beach ball','bola de praia']]},
+ slide:{cor:'#8b5cf6',pt:'deslizar',def:'to move <span class="dest">smoothly</span> along a <span class="dest">surface</span>',defp:'mover-se suavemente sobre uma superfície',ex:[['obj-slide-slide','slide','escorregador'],['obj-slide-ice-cube','ice cube','cubo de gelo'],['obj-slide-book','book','livro']]},
+ spin:{cor:'#f97316',pt:'girar',def:'to turn <span class="dest">around and around</span>',defp:'dar voltas e voltas',ex:[['obj-spin-pinwheel','pinwheel','cata-vento'],['obj-spin-fan','fan','ventilador'],['obj-spin-top','top','pião']]},
+ swing:{cor:'#22c55e',pt:'balançar',def:'to move <span class="dest">back and forth</span> like a <span class="dest">pendulum</span>',defp:'ir e voltar como um pêndulo',ex:[['obj-swing-swing','swing','balanço'],['obj-swing-plant','hanging plant','planta pendurada'],['obj-swing-door','door','porta']]}
 };
 function mov(k){
   var v=MOV[k];
@@ -101,13 +101,13 @@ return [
  treino:[], telas:[
  {tipo:'texto', tit:'Reading a map',
   fala:'When we read maps we need to pay a lot of attention to the details and to the path, the way we are going. We might get lost if we run or don’t pay attention.',
-  html:R('The red pin marks a place on the map.','O pino vermelho marca um lugar no mapa.')+R('When we read maps we need to pay a lot of attention to the details and to the path, the way we are going.','Quando lemos mapas, precisamos prestar muita atenção aos detalhes e ao caminho que estamos seguindo.')+
-   R('We might get lost if we run or don’t pay attention.','Podemos nos perder se corrermos ou não prestarmos atenção.')},
+  html:R('The red <span class="dest">pin</span> marks a <span class="dest">place</span> on the map.','O pino vermelho marca um lugar no mapa.')+R('When we read maps we need to <span class="dest">pay a lot of attention</span> to the <span class="dest">details</span> and to the <span class="dest">path</span>, the way we are going.','Quando lemos mapas, precisamos prestar muita atenção aos detalhes e ao caminho que estamos seguindo.')+
+   R('We might get <span class="dest">lost</span> if we <span class="dest">run</span> or <span class="dest">don’t pay attention</span>.','Podemos nos perder se corrermos ou não prestarmos atenção.')},
  {tipo:'texto', tit:'Left and right on the map',
   fala:'Look at the map of the school. Left and right are the sides of the person looking at the map. The Auditorium is between A section and B section. A section is on the left. B section is on the right.',
   html:fig('map-school')+
    passos([{t:'&larr; left'+tr('esquerda')},{t:'right &rarr;'+tr('direita')}])+
-   R('Left and right: the sides of the person looking at the map.','Esquerda e direita: os lados de quem olha o mapa.')+
+   R('Left and right: the sides of the <span class="dest">person looking at the map</span>.','Esquerda e direita: os lados de quem olha o mapa.')+
    R('The Auditorium is <b>between</b> A section and B section.','O Auditório fica entre a seção A e a seção B.')},
  {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('map-school',[P('Look at the map. What is between A section and B section?','Olhe o mapa. O que há entre a seção A e a B?','the Auditorium','o auditório'),P('Is B section on the left or on the right of the Auditorium?','A seção B fica à esquerda ou à direita do auditório?','on the right','à direita'),P('When we read maps, we need to pay attention to the details and the ___.','Ao ler mapas, prestamos atenção nos detalhes e no ___.','path','caminho'),P('True or false: we might get lost if we run.','Verdadeiro ou falso: podemos nos perder se corrermos.','True','Verdadeiro')])}
 ]},
@@ -117,7 +117,7 @@ return [
  treino:[], telas:[
  {tipo:'texto', tit:'Where are you looking from?',
   fala:'Gigi, the giraffe painter, says: We can see many things from different positions, and our perspective changes depending on where we are looking from.',
-  html:R('We can see many things from different positions, and our perspective changes depending on where we are looking from.','Podemos ver muitas coisas de posições diferentes, e nossa perspectiva muda dependendo de onde estamos olhando.')},
+  html:R('We can see many things from <span class="dest">different positions</span>, and our <span class="dest">perspective</span> changes depending on <span class="dest">where we are looking from</span>.','Podemos ver muitas coisas de posições diferentes, e nossa perspectiva muda dependendo de onde estamos olhando.')},
  {tipo:'texto', tit:'The Eiffel Tower',
   fala:'The Eiffel Tower, seen from the front, from the top, from the side and from the bottom. It is the same tower.',
   html:grade(2,[['view-front','seen from the <b>front</b>','vista de frente'],['view-top','seen from the <b>top</b>','vista de cima'],['view-side','seen from the <b>side</b>','vista de lado'],['view-bottom','seen from the <b>bottom</b>','vista de baixo']])+
@@ -128,7 +128,7 @@ return [
    R('One object. A different shadow on each side.','Um só objeto. Uma sombra diferente de cada lado.')+caixa('The shadows'+tr('As sombras'),'<p class="linhas">On the left wall: a <b>triangle</b>.'+tr('Na parede da esquerda: um triângulo.')+'<br>On the right wall: a <b>rectangle</b>.'+tr('Na parede da direita: um retângulo.')+'<br>On the floor: a <b>circle</b>.'+tr('No chão: um círculo.')+'</p>')},
  {tipo:'texto', tit:'A different view',
   fala:'The giraffe and the woman look at the painting from different positions. People are not right or wrong. They just have a different view of things.',
-  html:fig('view-giraffe',240)+R('The giraffe and the woman look at the painting from different positions.','A girafa e a mulher olham o quadro de posições diferentes.')+R('“People are not right or wrong. They just have a different view of things.”','As pessoas não estão certas nem erradas; elas só têm uma visão diferente das coisas.')},
+  html:fig('view-giraffe',240)+R('The giraffe and the woman look at the painting from <span class="dest">different positions</span>.','A girafa e a mulher olham o quadro de posições diferentes.')+R('“People are not right or wrong. They just have a <span class="dest">different view</span> of things.”','As pessoas não estão certas nem erradas; elas só têm uma visão diferente das coisas.')},
  {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('view-bottom',[P('Look at the picture. The tower is seen from the ___.','Olhe a figura. A torre é vista de ___.','bottom','baixo'),P('Our ___ changes depending on where we are looking from.','Nossa ___ muda dependendo de onde estamos olhando.','perspective','perspectiva'),P(fig('view-giraffe',200)+'The giraffe and the woman look at the painting from different positions. Complete: People are not right or wrong. They just have a different ___ of things.','A girafa e a mulher olham o quadro de posições diferentes. Complete: as pessoas não estão certas nem erradas; elas só têm uma ___ diferente das coisas.','view','visão')])}
 ]},
 
@@ -137,7 +137,7 @@ return [
  treino:[], telas:[
  {tipo:'texto', tit:'Two natural forces',
   fala:'Breezy and Drop say: Wind and water are two natural forces that exist in nature, and they can be helpful and harmful to us.',
-  html:R('Wind and water are two natural forces that exist in nature, and they can be helpful and harmful to us.','Vento e água são duas forças naturais que existem na natureza, e podem ser úteis e prejudiciais para nós.')},
+  html:R('Wind and water are two <span class="dest">natural forces</span> that exist in nature, and they can be <span class="dest">helpful</span> and <span class="dest">harmful</span> to us.','Vento e água são duas forças naturais que existem na natureza, e podem ser úteis e prejudiciais para nós.')},
  {tipo:'texto', tit:'Helpful',
   fala:'Helpful: water the plants, water to make energy, wind to make energy, wind that spreads the seeds.',
   html:grade(2,[['help-water-plants','water the plants','regar as plantas'],['help-water-energy','water to make energy','água para fazer energia'],['help-wind-energy','wind to make energy','vento para fazer energia'],['help-wind-seeds','wind that spreads the seeds','vento que espalha as sementes']])},
@@ -146,8 +146,8 @@ return [
   html:grade(2,[['harm-tsunami','tsunami','tsunami'],['harm-floods','heavy rain and floods','chuva forte e enchentes'],['harm-tornado','tornado','tornado'],['harm-winds','strong winds','ventos fortes']])},
  {tipo:'texto', tit:'What wind and water do',
   fala:'Wind is air in motion. It fills the sails of boats and turns wind turbines. Water makes energy, carries boats and waters the plants.',
-  html:caixa('Wind'+tr('Vento'),'<p>Wind is air in motion.'+tr('Vento é ar em movimento.')+'<br>It fills sails and turns wind turbines.'+tr('Enche as velas e gira as turbinas.')+'</p>')+esp()+
-   caixa('Water'+tr('Água'),'<p>Water makes energy, carries boats and waters the plants.'+tr('A água faz energia, leva barcos e rega as plantas.')+'</p>')},
+  html:caixa('Wind'+tr('Vento'),'<p>Wind is <span class="dest">air in motion</span>.'+tr('Vento é ar em movimento.')+'<br>It fills <span class="dest">sails</span> and turns <span class="dest">wind turbines</span>.'+tr('Enche as velas e gira as turbinas.')+'</p>')+esp()+
+   caixa('Water'+tr('Água'),'<p>Water makes <span class="dest">energy</span>, carries <span class="dest">boats</span> and waters the <span class="dest">plants</span>.'+tr('A água faz energia, leva barcos e rega as plantas.')+'</p>')},
  {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('harm-floods',[P('Wind and water are two ___ forces.','Vento e água são duas forças ___.','natural','naturais'),P('Look at the picture. Is it helpful or harmful?','Olhe a figura. Ajuda ou prejudica?','harmful','prejudica')])}
 ]},
 
@@ -165,9 +165,9 @@ return [
   html:mov('spin')+mov('swing')},
 {tipo:'texto', tit:'Directions and speed',
   fala:'Things move in different directions: back and forth, up and down, round and round. Things move at different speeds: slow or fast.',
-  html:R('Things move in different directions.','As coisas se movem em direções diferentes.')+
+  html:R('Things move in different <span class="dest">directions</span>.','As coisas se movem em direções diferentes.')+
    passos([{t:'back and forth'+tr('para a frente e para trás')},{t:'up and down'+tr('para cima e para baixo')},{t:'round and round'+tr('em voltas')}])+
-   R('Things move at different speeds: slow or fast.','As coisas se movem em velocidades diferentes: devagar ou rápido.')},
+   R('Things move at different <span class="dest">speeds</span>: <span class="dest">slow</span> or <span class="dest">fast</span>.','As coisas se movem em velocidades diferentes: devagar ou rápido.')},
  {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('obj-spin-top',[P('Look at the picture. How does the top move?','Olhe a figura. Como o pião se move?','It spins.','Ele gira.'),P('Complete: To ___ means to go up and down after hitting a surface.','Complete: ___ é subir e descer depois de bater numa superfície.','bounce','quicar'),P('Match: wheel, kite, door → roll, fly, swing.','Ligue: roda, pipa, porta → rolar, voar, balançar.','wheel: roll · kite: fly · door: swing','roda: rola · pipa: voa · porta: balança'),P('Things can move slow or ___.','As coisas podem se mover devagar ou ___.','fast','rápido')])}
 ]},
 
@@ -188,9 +188,9 @@ return [
 {k:'pushpull', tema:'pushpull', nome:'Push or pull', nome_pt:'Empurrar ou puxar', cor:'#f97316', quem:'Max',
  treino:[], telas:[
  {tipo:'texto', tit:'Push or pull?',
-  fala:'A push is when I use a force to move something away from me. A pull is when I use a force to move something closer to me.',
-  html:   R('A push is when I use a force to move something <b>away from me</b>.','Push é quando uso uma força para mover algo para longe de mim.')+
-   R('A pull is when I use a force to move something <b>closer to me</b>.','Pull é quando uso uma força para trazer algo para perto de mim.')},
+  fala:'A push is when I use a <span class="dest">force</span> to move something away from me. A pull is when I use a <span class="dest">force</span> to move something closer to me.',
+  html:   R('A push is when I use a <span class="dest">force</span> to move something <b>away from me</b>.','Push é quando uso uma força para mover algo para longe de mim.')+
+   R('A pull is when I use a <span class="dest">force</span> to move something <b>closer to me</b>.','Pull é quando uso uma força para trazer algo para perto de mim.')},
  {tipo:'texto', tit:'Push',
   fala:'Push: riding a bike, pushing a box, pushing a door, kicking a ball.',
   html:grade(2,[['push-bike','riding a bike','andar de bicicleta'],['push-box','pushing a box','empurrar uma caixa'],['push-door','pushing a door','empurrar uma porta'],['push-ball','kicking a ball','chutar uma bola']])+
@@ -201,11 +201,11 @@ return [
    R('Pull: <b>closer to me</b>.','Pull = puxar: para perto de mim.')},
  {tipo:'texto', tit:'More examples',
   fala:'A push or a pull can make things move from one place to another. There are two types of force: push and pull. Push and pull are opposite forces. Push: a shopping trolley, a volleyball, the golfer hitting the ball. Pull: pulling the rope of a kite, picking fruit and vegetables from the plant.',
-  html:R('A push or a pull can make things move from one place to another.','Empurrar ou puxar pode fazer as coisas irem de um lugar para outro.')+
-   R('Two types of force: push and pull. They are opposite forces.','Dois tipos de força: push e pull. São forças opostas.')+
+  html:R('A <span class="dest">push</span> or a <span class="dest">pull</span> can make things <span class="dest">move</span> from one place to another.','Empurrar ou puxar pode fazer as coisas irem de um lugar para outro.')+
+   R('Two types of force: <span class="dest">push</span> and <span class="dest">pull</span>. They are <span class="dest">opposite</span> forces.','Dois tipos de força: push e pull. São forças opostas.')+
    caixa('Push'+tr('Empurrar'),'<p>a shopping trolley'+tr('carrinho de compras')+'<br>a volleyball'+tr('bola de vôlei')+'<br>the golfer hitting the ball'+tr('o golfista batendo na bola')+'</p>','#f97316')+esp()+
    caixa('Pull'+tr('Puxar'),'<p>pulling the rope of a kite'+tr('puxar a linha da pipa')+'<br>picking fruit and vegetables from the plant'+tr('colher frutas e verduras da planta')+'</p>','#f97316')},
- {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('pull-wagon',[P('Look at the picture. Is it a push or a pull?','Olhe a figura. É push ou pull?','a pull','puxar'),P('Complete: A push is when I use a force to move something ___ from me.','Complete: push é usar força para mover algo ___ de mim.','away','para longe'),P('Complete: A pull is when I use a force to move something ___ to me.','Complete: pull é usar força para mover algo ___ de mim.','closer','para perto')])}
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('pull-wagon',[P('Look at the picture. Is it a push or a pull?','Olhe a figura. É push ou pull?','a pull','puxar'),P('Complete: A push is when I use a <span class="dest">force</span> to move something ___ from me.','Complete: push é usar força para mover algo ___ de mim.','away','para longe'),P('Complete: A pull is when I use a <span class="dest">force</span> to move something ___ to me.','Complete: pull é usar força para mover algo ___ de mim.','closer','para perto')])}
 ]}
 
 ];
