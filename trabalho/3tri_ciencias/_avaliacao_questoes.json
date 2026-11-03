@@ -1,0 +1,1408 @@
+{
+ "a01": {
+  "decisao": "APROVA",
+  "fp": "88ccc58b0f98"
+ },
+ "a02": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Mesma figura e mesma ideia de a01 (in the box); so muda o formato."
+ },
+ "a03": {
+  "decisao": "APROVA",
+  "fp": "7e53f4e9f9c8"
+ },
+ "a04": {
+  "decisao": "APROVA",
+  "fp": "629b3f990edd"
+ },
+ "a05": {
+  "decisao": "APROVA",
+  "fp": "5139eb1fbb05"
+ },
+ "a06": {
+  "decisao": "APROVA",
+  "fp": "eb1a0e63128f"
+ },
+ "a07": {
+  "decisao": "APROVA",
+  "fp": "d8f2631cc622"
+ },
+ "a08": {
+  "decisao": "APROVA",
+  "fp": "df5a11d9f003"
+ },
+ "a09": {
+  "decisao": "APROVA",
+  "fp": "56c0dd21430c"
+ },
+ "a10": {
+  "decisao": "APROVA",
+  "fp": "4c2b949390d3"
+ },
+ "a11": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplica a09 (mesma figura, resposta e quase os mesmos distratores)."
+ },
+ "a12": {
+  "decisao": "APROVA",
+  "fp": "f508b697dbb2"
+ },
+ "a13": {
+  "decisao": "APROVA",
+  "fp": "8368ba4f4811"
+ },
+ "a14": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplica a12 (mesma figura, resposta e quase os mesmos distratores)."
+ },
+ "a15": {
+  "decisao": "APROVA",
+  "fp": "e1637e86d718"
+ },
+ "a16": {
+  "decisao": "APROVA",
+  "fp": "1d8d5e7240c7"
+ },
+ "a17": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplica a16 (mesma figura, resposta e quase os mesmos distratores)."
+ },
+ "a18": {
+  "decisao": "APROVA",
+  "fp": "d07642d31ba6"
+ },
+ "a19": {
+  "decisao": "APROVA",
+  "fp": "13293a95461b"
+ },
+ "a20": {
+  "decisao": "APROVA",
+  "fp": "ef2a8c7e22b9"
+ },
+ "a21": {
+  "decisao": "APROVA",
+  "fp": "2d1e9c0d1f34"
+ },
+ "a22": {
+  "decisao": "APROVA",
+  "fp": "97a74fba2605"
+ },
+ "a23": {
+  "decisao": "APROVA",
+  "fp": "337de558c626"
+ },
+ "a24": {
+  "decisao": "APROVA",
+  "fp": "bf6a13e92f5d"
+ },
+ "a25": {
+  "decisao": "APROVA",
+  "fp": "680ab474e8db"
+ },
+ "a26": {
+  "decisao": "APROVA",
+  "fp": "067162f5e66a"
+ },
+ "a27": {
+  "decisao": "APROVA",
+  "fp": "0c6a24a383bc"
+ },
+ "a28": {
+  "decisao": "APROVA",
+  "fp": "2843c5106431"
+ },
+ "a29": {
+  "decisao": "APROVA",
+  "fp": "11d226e04a5e"
+ },
+ "a30": {
+  "decisao": "APROVA",
+  "fp": "b091ffe55f07"
+ },
+ "a31": {
+  "decisao": "APROVA",
+  "fp": "4321b46e9421"
+ },
+ "a32": {
+  "decisao": "APROVA",
+  "fp": "ad9b0a7253f9"
+ },
+ "a33": {
+  "decisao": "APROVA",
+  "fp": "463d31c82369"
+ },
+ "a34": {
+  "decisao": "APROVA",
+  "fp": "92cf24a44382"
+ },
+ "a35": {
+  "decisao": "APROVA",
+  "fp": "59e05644c652"
+ },
+ "a36": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplica a35 (mesma figura, resposta e quase os mesmos distratores)."
+ },
+ "a37": {
+  "decisao": "APROVA",
+  "fp": "3026d9d19ef3"
+ },
+ "a38": {
+  "decisao": "APROVA",
+  "fp": "e324e807c7f1"
+ },
+ "a39": {
+  "decisao": "APROVA",
+  "fp": "0caf16ccff42"
+ },
+ "a40": {
+  "decisao": "APROVA",
+  "fp": "43a45cebab70"
+ },
+ "a41": {
+  "decisao": "APROVA",
+  "fp": "489eb8af7ae4"
+ },
+ "a42": {
+  "decisao": "APROVA",
+  "fp": "8b9c4bb902b0"
+ },
+ "a43": {
+  "decisao": "APROVA",
+  "fp": "7b926577d68d"
+ },
+ "a44": {
+  "decisao": "APROVA",
+  "fp": "8d3688ce7b0f"
+ },
+ "a45": {
+  "decisao": "APROVA",
+  "fp": "3a3db4e2e4ce"
+ },
+ "a46": {
+  "decisao": "APROVA",
+  "fp": "7186df83b460"
+ },
+ "a47": {
+  "decisao": "APROVA",
+  "fp": "2fb86bac80c1"
+ },
+ "a48": {
+  "decisao": "APROVA",
+  "fp": "f8ac40f0ad78"
+ },
+ "a49": {
+  "decisao": "APROVA",
+  "fp": "2211547a537b"
+ },
+ "a50": {
+  "decisao": "APROVA",
+  "fp": "94b8d8ea25d7"
+ },
+ "a51": {
+  "decisao": "APROVA",
+  "fp": "c946c039b057"
+ },
+ "d01": {
+  "decisao": "APROVA",
+  "fp": "6cb158397425"
+ },
+ "d02": {
+  "decisao": "APROVA",
+  "fp": "2c4589df40c3"
+ },
+ "d03": {
+  "decisao": "APROVA",
+  "fp": "1a7f1c099851"
+ },
+ "d04": {
+  "decisao": "APROVA",
+  "fp": "1e5efba16d4c"
+ },
+ "d05": {
+  "decisao": "APROVA",
+  "fp": "24b3e0b3c5ea"
+ },
+ "d06": {
+  "decisao": "APROVA",
+  "fp": "9f6ca540155c"
+ },
+ "d07": {
+  "decisao": "APROVA",
+  "fp": "4db1a6645412"
+ },
+ "d08": {
+  "decisao": "APROVA",
+  "fp": "dce446314bbf"
+ },
+ "d09": {
+  "decisao": "APROVA",
+  "fp": "81616c08a831"
+ },
+ "d10": {
+  "decisao": "APROVA",
+  "fp": "6734287e73ed"
+ },
+ "d11": {
+  "decisao": "APROVA",
+  "fp": "5e9a8c3a069d"
+ },
+ "d12": {
+  "decisao": "APROVA",
+  "fp": "e973dc9a2880"
+ },
+ "d13": {
+  "decisao": "APROVA",
+  "fp": "3c0730016f79"
+ },
+ "d14": {
+  "decisao": "APROVA",
+  "fp": "aa0a76143fad"
+ },
+ "d15": {
+  "decisao": "APROVA",
+  "fp": "484492539f4a"
+ },
+ "d16": {
+  "decisao": "APROVA",
+  "fp": "7e7a3e229e24"
+ },
+ "d17": {
+  "decisao": "APROVA",
+  "fp": "e08c17601dc5"
+ },
+ "d18": {
+  "decisao": "APROVA",
+  "fp": "a9b65a07775b"
+ },
+ "d19": {
+  "decisao": "APROVA",
+  "fp": "d1332588fb38"
+ },
+ "d20": {
+  "decisao": "APROVA",
+  "fp": "dfaafc406855"
+ },
+ "d21": {
+  "decisao": "APROVA",
+  "fp": "912d87ec4733"
+ },
+ "d22": {
+  "decisao": "APROVA",
+  "fp": "e89112515206"
+ },
+ "d23": {
+  "decisao": "APROVA",
+  "fp": "d6ed6ff76ea8"
+ },
+ "p01": {
+  "decisao": "APROVA",
+  "fp": "4a62f1c62f33"
+ },
+ "p02": {
+  "decisao": "APROVA",
+  "fp": "72618a9a1a2e"
+ },
+ "p03": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplica p08 (mesma figura side, mesma resposta) e a vista aerea deixa top x side ambiguo."
+ },
+ "p04": {
+  "decisao": "APROVA",
+  "fp": "6cd9ab8fafe6"
+ },
+ "p05": {
+  "decisao": "APROVA",
+  "fp": "7e00c3bf71d5"
+ },
+ "p06": {
+  "decisao": "APROVA",
+  "fp": "d38d424df8f8"
+ },
+ "p07": {
+  "decisao": "APROVA",
+  "fp": "b51972282696"
+ },
+ "p08": {
+  "decisao": "APROVA",
+  "fp": "0c616a469fce"
+ },
+ "p09": {
+  "decisao": "APROVA",
+  "fp": "e70169729620"
+ },
+ "p10": {
+  "decisao": "APROVA",
+  "fp": "e3060ad41649"
+ },
+ "p11": {
+  "decisao": "APROVA",
+  "fp": "3571f9e2c667"
+ },
+ "p12": {
+  "decisao": "APROVA",
+  "fp": "42986492c9e9"
+ },
+ "p13": {
+  "decisao": "APROVA",
+  "fp": "9e87a522a9b1"
+ },
+ "p14": {
+  "decisao": "APROVA",
+  "fp": "ebd51f6c6d09"
+ },
+ "p15": {
+  "decisao": "APROVA",
+  "fp": "664dd196af80"
+ },
+ "p16": {
+  "decisao": "APROVA",
+  "fp": "de0df1afe603"
+ },
+ "p17": {
+  "decisao": "APROVA",
+  "fp": "bd1af786e5c8"
+ },
+ "p18": {
+  "decisao": "APROVA",
+  "fp": "addfc355ca01"
+ },
+ "p19": {
+  "decisao": "APROVA",
+  "fp": "94bd23e8bcd6"
+ },
+ "n01": {
+  "decisao": "APROVA",
+  "fp": "efec75ff81d9"
+ },
+ "n02": {
+  "decisao": "APROVA",
+  "fp": "e7685efdcee9"
+ },
+ "n03": {
+  "decisao": "APROVA",
+  "fp": "43d16833c537"
+ },
+ "n04": {
+  "decisao": "APROVA",
+  "fp": "512f4548044a"
+ },
+ "n05": {
+  "decisao": "APROVA",
+  "fp": "26841fabbc85"
+ },
+ "n06": {
+  "decisao": "APROVA",
+  "fp": "07aba436e1a9"
+ },
+ "n07": {
+  "decisao": "APROVA",
+  "fp": "0a88e6a4488c"
+ },
+ "n08": {
+  "decisao": "APROVA",
+  "fp": "0b43bc008d15"
+ },
+ "n09": {
+  "decisao": "APROVA",
+  "fp": "f5f86d7b79f9"
+ },
+ "n10": {
+  "decisao": "APROVA",
+  "fp": "1a7d557452f4"
+ },
+ "n11": {
+  "decisao": "APROVA",
+  "fp": "8cca2cc749a6"
+ },
+ "n12": {
+  "decisao": "APROVA",
+  "fp": "56290012348a"
+ },
+ "n13": {
+  "decisao": "APROVA",
+  "fp": "6e8e50fcf3f3"
+ },
+ "n14": {
+  "decisao": "APROVA",
+  "fp": "80017a78bcf4"
+ },
+ "n15": {
+  "decisao": "APROVA",
+  "fp": "93327810300c"
+ },
+ "n16": {
+  "decisao": "APROVA",
+  "fp": "911dd3c8f1d8"
+ },
+ "n17": {
+  "decisao": "APROVA",
+  "fp": "48d22d2efa99"
+ },
+ "n18": {
+  "decisao": "APROVA",
+  "fp": "9f15388a2535"
+ },
+ "n19": {
+  "decisao": "APROVA",
+  "fp": "757700f7470e"
+ },
+ "n20": {
+  "decisao": "APROVA",
+  "fp": "6882ea3d4245"
+ },
+ "n21": {
+  "decisao": "APROVA",
+  "fp": "d0860566a86a"
+ },
+ "n22": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Kite voa com vento é bom senso de vida diária."
+ },
+ "n23": {
+  "decisao": "APROVA",
+  "fp": "09d0effe0a38"
+ },
+ "n24": {
+  "decisao": "APROVA",
+  "fp": "e4324f0f8e17"
+ },
+ "n25": {
+  "decisao": "APROVA",
+  "fp": "225d88d3c154"
+ },
+ "n26": {
+  "decisao": "APROVA",
+  "fp": "95ca483885a1"
+ },
+ "n27": {
+  "decisao": "APROVA",
+  "fp": "689344ed6c92"
+ },
+ "n28": {
+  "decisao": "APROVA",
+  "fp": "81fc2d4e8eba"
+ },
+ "n29": {
+  "decisao": "APROVA",
+  "fp": "ef68acc9728a"
+ },
+ "n30": {
+  "decisao": "APROVA",
+  "fp": "9ffdc36d36ef"
+ },
+ "n31": {
+  "decisao": "APROVA",
+  "fp": "cd084f5ced2f"
+ },
+ "n32": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Beber/cozinhar/lavar = água é bom senso trivial."
+ },
+ "n33": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Navio viaja na água é bom senso trivial."
+ },
+ "n34": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Peixe mora no rio é bom senso; distratores com bichos que também vivem perto de rio."
+ },
+ "n35": {
+  "decisao": "APROVA",
+  "fp": "4e69778761e2"
+ },
+ "n36": {
+  "decisao": "APROVA",
+  "fp": "1c5b3f1cd336"
+ },
+ "o01": {
+  "decisao": "APROVA",
+  "fp": "6edce070c405"
+ },
+ "o02": {
+  "decisao": "APROVA",
+  "fp": "6edce070c405"
+ },
+ "o03": {
+  "decisao": "APROVA",
+  "fp": "6edce070c405"
+ },
+ "o04": {
+  "decisao": "APROVA",
+  "fp": "2506b37a517a"
+ },
+ "o05": {
+  "decisao": "APROVA",
+  "fp": "686684b96d35"
+ },
+ "o06": {
+  "decisao": "APROVA",
+  "fp": "686684b96d35"
+ },
+ "o07": {
+  "decisao": "APROVA",
+  "fp": "da646077cbe2"
+ },
+ "o08": {
+  "decisao": "APROVA",
+  "fp": "da646077cbe2"
+ },
+ "o09": {
+  "decisao": "APROVA",
+  "fp": "d5c15fe36ecf"
+ },
+ "o10": {
+  "decisao": "APROVA",
+  "fp": "cae5fa3cfde7"
+ },
+ "o11": {
+  "decisao": "APROVA",
+  "fp": "29a73a643251"
+ },
+ "o12": {
+  "decisao": "APROVA",
+  "fp": "29a73a643251"
+ },
+ "o13": {
+  "decisao": "APROVA",
+  "fp": "473d26ce5492"
+ },
+ "o14": {
+  "decisao": "APROVA",
+  "fp": "dd64b4be90b4"
+ },
+ "o15": {
+  "decisao": "APROVA",
+  "fp": "a1012825dc40"
+ },
+ "o16": {
+  "decisao": "APROVA",
+  "fp": "28c0a943cb0e"
+ },
+ "o17": {
+  "decisao": "APROVA",
+  "fp": "6fc51fc79a1e"
+ },
+ "o18": {
+  "decisao": "APROVA",
+  "fp": "889e6fd4ae3c"
+ },
+ "o19": {
+  "decisao": "APROVA",
+  "fp": "dcd52d42582b"
+ },
+ "o20": {
+  "decisao": "APROVA",
+  "fp": "25303d2e9f50"
+ },
+ "o21": {
+  "decisao": "APROVA",
+  "fp": "e29418624814"
+ },
+ "o22": {
+  "decisao": "APROVA",
+  "fp": "f385772a93a9"
+ },
+ "o23": {
+  "decisao": "APROVA",
+  "fp": "4fbf155b40e3"
+ },
+ "o24": {
+  "decisao": "APROVA",
+  "fp": "30263869c7f5"
+ },
+ "o25": {
+  "decisao": "APROVA",
+  "fp": "2d6924129e15"
+ },
+ "o26": {
+  "decisao": "APROVA",
+  "fp": "6554f7b50558"
+ },
+ "o27": {
+  "decisao": "APROVA",
+  "fp": "4c5177b694d3"
+ },
+ "o28": {
+  "decisao": "APROVA",
+  "fp": "808a7910bad1"
+ },
+ "o29": {
+  "decisao": "APROVA",
+  "fp": "76854b87dfa9"
+ },
+ "o30": {
+  "decisao": "APROVA",
+  "fp": "2f35f4bb22ec"
+ },
+ "o31": {
+  "decisao": "APROVA",
+  "fp": "e157477091e8"
+ },
+ "o32": {
+  "decisao": "APROVA",
+  "fp": "8111de0332cf"
+ },
+ "o33": {
+  "decisao": "APROVA",
+  "fp": "6f7b5819cdf7"
+ },
+ "o34": {
+  "decisao": "APROVA",
+  "fp": "89648e790cdc"
+ },
+ "o35": {
+  "decisao": "APROVA",
+  "fp": "a48391518073"
+ },
+ "o36": {
+  "decisao": "APROVA",
+  "fp": "4d046eacef37"
+ },
+ "o37": {
+  "decisao": "APROVA",
+  "fp": "6ce24529daaa"
+ },
+ "o38": {
+  "decisao": "APROVA",
+  "fp": "3ced476bbd1b"
+ },
+ "o39": {
+  "decisao": "APROVA",
+  "fp": "5c508b3942a5"
+ },
+ "o40": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Resposta obvia pelo enunciado ('so um pouco' = slow) e vento girando cata-vento nao esta no insumo."
+ },
+ "m01": {
+  "decisao": "APROVA",
+  "fp": "26da779eb066"
+ },
+ "m02": {
+  "decisao": "APROVA",
+  "fp": "7cef7a8cd3cf"
+ },
+ "m03": {
+  "decisao": "APROVA",
+  "fp": "a1c617ce5b54"
+ },
+ "m04": {
+  "decisao": "APROVA",
+  "fp": "6093f203d92c"
+ },
+ "m05": {
+  "decisao": "APROVA",
+  "fp": "bb010b6d7e3b"
+ },
+ "m06": {
+  "decisao": "APROVA",
+  "fp": "afcbd90fbf39"
+ },
+ "m07": {
+  "decisao": "APROVA",
+  "fp": "1eeb69e2af90"
+ },
+ "m08": {
+  "decisao": "APROVA",
+  "fp": "c95f0e67a831"
+ },
+ "m09": {
+  "decisao": "APROVA",
+  "fp": "8c0b49dc5341"
+ },
+ "m10": {
+  "decisao": "APROVA",
+  "fp": "3f66d9ad5648"
+ },
+ "m11": {
+  "decisao": "APROVA",
+  "fp": "2bf0ff02d4f6"
+ },
+ "m12": {
+  "decisao": "APROVA",
+  "fp": "1ad74ffeeda4"
+ },
+ "m13": {
+  "decisao": "APROVA",
+  "fp": "281f2f627032"
+ },
+ "m14": {
+  "decisao": "APROVA",
+  "fp": "6fd29369fa2e"
+ },
+ "m15": {
+  "decisao": "APROVA",
+  "fp": "0cfd73c867dc"
+ },
+ "m16": {
+  "decisao": "APROVA",
+  "fp": "9d0fd302f37d"
+ },
+ "m17": {
+  "decisao": "APROVA",
+  "fp": "ea0c3c4c490e"
+ },
+ "m18": {
+  "decisao": "APROVA",
+  "fp": "ba361fa7e8b3"
+ },
+ "m19": {
+  "decisao": "APROVA",
+  "fp": "0af479ed811d"
+ },
+ "m20": {
+  "decisao": "APROVA",
+  "fp": "c7cabe29c2df"
+ },
+ "f01": {
+  "decisao": "APROVA",
+  "fp": "b8dea24906cd"
+ },
+ "f02": {
+  "decisao": "APROVA",
+  "fp": "9c1c30c80a2d"
+ },
+ "f03": {
+  "decisao": "APROVA",
+  "fp": "bae28ddc1ba6"
+ },
+ "f04": {
+  "decisao": "APROVA",
+  "fp": "fb4110c216d6"
+ },
+ "f05": {
+  "decisao": "APROVA",
+  "fp": "61844da9cb88"
+ },
+ "f06": {
+  "decisao": "APROVA",
+  "fp": "81bdedb75d3b"
+ },
+ "f07": {
+  "decisao": "APROVA",
+  "fp": "78a819a92b83"
+ },
+ "f08": {
+  "decisao": "APROVA",
+  "fp": "e81f2ca9ce79"
+ },
+ "f09": {
+  "decisao": "APROVA",
+  "fp": "f30e1330bbb1"
+ },
+ "f10": {
+  "decisao": "APROVA",
+  "fp": "341f9a949fad"
+ },
+ "f11": {
+  "decisao": "APROVA",
+  "fp": "0c74d8a111a6"
+ },
+ "f12": {
+  "decisao": "APROVA",
+  "fp": "9e3c18e3fc2f"
+ },
+ "f13": {
+  "decisao": "APROVA",
+  "fp": "41a4ebbae040"
+ },
+ "f14": {
+  "decisao": "APROVA",
+  "fp": "054e0ccf1774"
+ },
+ "f15": {
+  "decisao": "APROVA",
+  "fp": "80fa3008eaf5"
+ },
+ "f16": {
+  "decisao": "APROVA",
+  "fp": "813f9a0618ba"
+ },
+ "f17": {
+  "decisao": "APROVA",
+  "fp": "ef8bc9b3e3a1"
+ },
+ "f18": {
+  "decisao": "APROVA",
+  "fp": "bd5233abb0b8"
+ },
+ "f19": {
+  "decisao": "APROVA",
+  "fp": "605ab2783e04"
+ },
+ "f20": {
+  "decisao": "APROVA",
+  "fp": "46aa1a814b27"
+ },
+ "f21": {
+  "decisao": "APROVA",
+  "fp": "b55ac2a533e0"
+ },
+ "f22": {
+  "decisao": "APROVA",
+  "fp": "185e35c5195e"
+ },
+ "f23": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Opcao 'stay in the same place' contradiz 'force'; resposta por bom senso."
+ },
+ "f24": {
+  "decisao": "APROVA",
+  "fp": "5bdaf6d1655c"
+ },
+ "f25": {
+  "decisao": "APROVA",
+  "fp": "62334c63cf73"
+ },
+ "f26": {
+  "decisao": "APROVA",
+  "fp": "640fed3226b6"
+ },
+ "f27": {
+  "decisao": "APROVA",
+  "fp": "d460ff5bcaf1"
+ },
+ "f28": {
+  "decisao": "APROVA",
+  "fp": "ca54a8f1528d"
+ },
+ "f29": {
+  "decisao": "APROVA",
+  "fp": "46745968af8d"
+ },
+ "f30": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplicata de f29 (mesma ideia e opcoes, so troca fruta por vegetal)."
+ },
+ "f31": {
+  "decisao": "APROVA",
+  "fp": "26c158a7f286"
+ },
+ "f32": {
+  "decisao": "APROVA",
+  "fp": "a088c83194f3"
+ },
+ "f33": {
+  "decisao": "APROVA",
+  "fp": "6c0ae0504f90"
+ },
+ "f34": {
+  "decisao": "APROVA",
+  "fp": "82731d67384b"
+ },
+ "f35": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Repete f17; distratores 'behind/above me' sao de preposicoes (outro atomo) e o enunciado entrega a resposta."
+ },
+ "L_pos1_3_0": {
+  "decisao": "APROVA",
+  "fp": "c1a530b0f397"
+ },
+ "L_pos1_3_1": {
+  "decisao": "APROVA",
+  "fp": "4bcc7f056e56"
+ },
+ "L_pos1_3_2": {
+  "decisao": "APROVA",
+  "fp": "a84fbcba0b3e"
+ },
+ "L_pos1_3_3": {
+  "decisao": "APROVA",
+  "fp": "0fb35b6fc874"
+ },
+ "L_pos2_3_0": {
+  "decisao": "APROVA",
+  "fp": "04f5397ca9d8"
+ },
+ "L_pos2_3_1": {
+  "decisao": "APROVA",
+  "fp": "297272045059"
+ },
+ "L_pos2_3_2": {
+  "decisao": "APROVA",
+  "fp": "dfb544da7c8d"
+ },
+ "L_pos2_3_3": {
+  "decisao": "APROVA",
+  "fp": "3fe88b95e9eb"
+ },
+ "L_pos2_3_4": {
+  "decisao": "APROVA",
+  "fp": "63e1c176a984"
+ },
+ "L_pos2_3_5": {
+  "decisao": "APROVA",
+  "fp": "75ea86e7eea2"
+ },
+ "L_pos2_3_6": {
+  "decisao": "APROVA",
+  "fp": "933bfed6030a"
+ },
+ "L_pos2_3_7": {
+  "decisao": "APROVA",
+  "fp": "ca4dc059b582"
+ },
+ "L_pos2_5_0": {
+  "decisao": "APROVA",
+  "fp": "86f2aa0d8852"
+ },
+ "L_pos2_5_1": {
+  "decisao": "APROVA",
+  "fp": "94662831dd2f"
+ },
+ "L_pos2_5_2": {
+  "decisao": "APROVA",
+  "fp": "c22c86fb7ea7"
+ },
+ "L_pos2_5_3": {
+  "decisao": "APROVA",
+  "fp": "3cb64bee7bb6"
+ },
+ "L_pos2_5_4": {
+  "decisao": "APROVA",
+  "fp": "80ca5b974879"
+ },
+ "L_pos2_5_5": {
+  "decisao": "APROVA",
+  "fp": "de43e1a596f7"
+ },
+ "L_pos2_5_6": {
+  "decisao": "APROVA",
+  "fp": "1b266da0ff3d"
+ },
+ "L_pos2_5_7": {
+  "decisao": "APROVA",
+  "fp": "701664fa0b02"
+ },
+ "L_pos2_5_8": {
+  "decisao": "APROVA",
+  "fp": "e9cd1e70fdde"
+ },
+ "L_pos2_5_9": {
+  "decisao": "APROVA",
+  "fp": "619b82edea0c"
+ },
+ "L_pos2_5_10": {
+  "decisao": "APROVA",
+  "fp": "c06de3a8c19b"
+ },
+ "L_pos2_5_11": {
+  "decisao": "APROVA",
+  "fp": "c0269b804562"
+ },
+ "L_dir_3_0": {
+  "decisao": "APROVA",
+  "fp": "4e499509702a"
+ },
+ "L_dir_3_1": {
+  "decisao": "APROVA",
+  "fp": "19d725396b5b"
+ },
+ "L_dir_3_2": {
+  "decisao": "APROVA",
+  "fp": "0c59f041ef56"
+ },
+ "L_dir_3_3": {
+  "decisao": "APROVA",
+  "fp": "ca4a9635dac2"
+ },
+ "L_dir_3_4": {
+  "decisao": "APROVA",
+  "fp": "a2c94f457926"
+ },
+ "L_dir_3_5": {
+  "decisao": "APROVA",
+  "fp": "71c3ca2da68a"
+ },
+ "L_dir_3_6": {
+  "decisao": "APROVA",
+  "fp": "094b4be94b6a"
+ },
+ "L_dir_3_7": {
+  "decisao": "APROVA",
+  "fp": "856bf32bbe67"
+ },
+ "L_persp_4_0": {
+  "decisao": "APROVA",
+  "fp": "03aea4aa9113"
+ },
+ "L_persp_4_1": {
+  "decisao": "APROVA",
+  "fp": "18323868b284"
+ },
+ "L_persp_4_2": {
+  "decisao": "APROVA",
+  "fp": "45ac2c8890c3"
+ },
+ "L_persp_4_3": {
+  "decisao": "APROVA",
+  "fp": "099cb63e67e4"
+ },
+ "L_persp_4_4": {
+  "decisao": "APROVA",
+  "fp": "5fb4c981211c"
+ },
+ "L_persp_4_5": {
+  "decisao": "APROVA",
+  "fp": "eed0f1335d09"
+ },
+ "L_persp_4_6": {
+  "decisao": "APROVA",
+  "fp": "b412e2a42948"
+ },
+ "L_forcas_3_0": {
+  "decisao": "APROVA",
+  "fp": "1b7fd58072eb"
+ },
+ "L_forcas_3_1": {
+  "decisao": "APROVA",
+  "fp": "661a28f65c99"
+ },
+ "L_forcas_3_2": {
+  "decisao": "APROVA",
+  "fp": "1b7fd58072eb"
+ },
+ "L_forcas_3_3": {
+  "decisao": "APROVA",
+  "fp": "661a28f65c99"
+ },
+ "L_forcas_3_4": {
+  "decisao": "APROVA",
+  "fp": "1b7fd58072eb"
+ },
+ "L_forcas_3_5": {
+  "decisao": "APROVA",
+  "fp": "661a28f65c99"
+ },
+ "L_forcas_3_6": {
+  "decisao": "APROVA",
+  "fp": "1b7fd58072eb"
+ },
+ "L_forcas_3_7": {
+  "decisao": "APROVA",
+  "fp": "661a28f65c99"
+ },
+ "L_forcas_5_0": {
+  "decisao": "APROVA",
+  "fp": "2697c613166c"
+ },
+ "L_forcas_5_1": {
+  "decisao": "APROVA",
+  "fp": "38edfecd9f03"
+ },
+ "L_forcas_5_2": {
+  "decisao": "APROVA",
+  "fp": "4ce971a6763e"
+ },
+ "L_forcas_5_3": {
+  "decisao": "APROVA",
+  "fp": "8e9c7e553544"
+ },
+ "L_forcas_5_4": {
+  "decisao": "APROVA",
+  "fp": "56ad075e90c3"
+ },
+ "L_forcas_5_5": {
+  "decisao": "APROVA",
+  "fp": "8bd5c6980777"
+ },
+ "L_forcas_5_6": {
+  "decisao": "APROVA",
+  "fp": "42761bb8bb56"
+ },
+ "L_forcas_5_7": {
+  "decisao": "APROVA",
+  "fp": "1780288117f1"
+ },
+ "L_objetos_6_0": {
+  "decisao": "APROVA",
+  "fp": "d2e5ff7b90bc"
+ },
+ "L_objetos_6_1": {
+  "decisao": "APROVA",
+  "fp": "d2e5ff7b90bc"
+ },
+ "L_objetos_6_2": {
+  "decisao": "APROVA",
+  "fp": "d2e5ff7b90bc"
+ },
+ "L_objetos_6_3": {
+  "decisao": "APROVA",
+  "fp": "5b1c6604fcf9"
+ },
+ "L_objetos_6_4": {
+  "decisao": "APROVA",
+  "fp": "5b1c6604fcf9"
+ },
+ "L_objetos_6_5": {
+  "decisao": "APROVA",
+  "fp": "5b1c6604fcf9"
+ },
+ "L_objetos_6_6": {
+  "decisao": "APROVA",
+  "fp": "c1a263764155"
+ },
+ "L_objetos_6_7": {
+  "decisao": "APROVA",
+  "fp": "c1a263764155"
+ },
+ "L_objetos_6_8": {
+  "decisao": "APROVA",
+  "fp": "c1a263764155"
+ },
+ "L_objetos_6_9": {
+  "decisao": "APROVA",
+  "fp": "b10c17c264d2"
+ },
+ "L_objetos_6_10": {
+  "decisao": "APROVA",
+  "fp": "b10c17c264d2"
+ },
+ "L_objetos_6_11": {
+  "decisao": "APROVA",
+  "fp": "b10c17c264d2"
+ },
+ "L_objetos_6_12": {
+  "decisao": "APROVA",
+  "fp": "1fd83859b170"
+ },
+ "L_objetos_6_13": {
+  "decisao": "APROVA",
+  "fp": "1fd83859b170"
+ },
+ "L_objetos_6_14": {
+  "decisao": "APROVA",
+  "fp": "1fd83859b170"
+ },
+ "L_objetos_6_15": {
+  "decisao": "APROVA",
+  "fp": "9bfe29be4e5e"
+ },
+ "L_objetos_6_16": {
+  "decisao": "APROVA",
+  "fp": "9bfe29be4e5e"
+ },
+ "L_objetos_6_17": {
+  "decisao": "APROVA",
+  "fp": "9bfe29be4e5e"
+ },
+ "L_animais_3_0": {
+  "decisao": "APROVA",
+  "fp": "878684b6c78b"
+ },
+ "L_animais_3_1": {
+  "decisao": "APROVA",
+  "fp": "78bc4546e87d"
+ },
+ "L_animais_3_2": {
+  "decisao": "APROVA",
+  "fp": "568356322509"
+ },
+ "L_animais_3_3": {
+  "decisao": "APROVA",
+  "fp": "7bba560e704b"
+ },
+ "L_animais_3_4": {
+  "decisao": "APROVA",
+  "fp": "1055bf637348"
+ },
+ "L_animais_3_5": {
+  "decisao": "APROVA",
+  "fp": "05404169e696"
+ },
+ "L_animais_3_6": {
+  "decisao": "APROVA",
+  "fp": "a5b9c0bed244"
+ },
+ "L_animais_4_0": {
+  "decisao": "APROVA",
+  "fp": "6603e21fb900"
+ },
+ "L_animais_4_1": {
+  "decisao": "APROVA",
+  "fp": "83658ba76430"
+ },
+ "L_animais_4_2": {
+  "decisao": "APROVA",
+  "fp": "cdfc93357a93"
+ },
+ "L_animais_4_3": {
+  "decisao": "APROVA",
+  "fp": "c07190f86478"
+ },
+ "L_animais_4_4": {
+  "decisao": "APROVA",
+  "fp": "425ecef2b3af"
+ },
+ "L_animais_4_5": {
+  "decisao": "APROVA",
+  "fp": "e061e22e1317"
+ },
+ "L_animais_4_6": {
+  "decisao": "APROVA",
+  "fp": "3160d8c3a30d"
+ },
+ "L_animais_4_7": {
+  "decisao": "APROVA",
+  "fp": "a534807349fa"
+ },
+ "L_pushpull_3_0": {
+  "decisao": "APROVA",
+  "fp": "3909a1426e38"
+ },
+ "L_pushpull_3_1": {
+  "decisao": "APROVA",
+  "fp": "3909a1426e38"
+ },
+ "L_pushpull_3_2": {
+  "decisao": "APROVA",
+  "fp": "3909a1426e38"
+ },
+ "L_pushpull_3_3": {
+  "decisao": "APROVA",
+  "fp": "e58b6fed7dc6"
+ },
+ "L_pushpull_3_4": {
+  "decisao": "APROVA",
+  "fp": "e58b6fed7dc6"
+ },
+ "L_pushpull_3_5": {
+  "decisao": "APROVA",
+  "fp": "e58b6fed7dc6"
+ },
+ "L_pushpull_3_6": {
+  "decisao": "APROVA",
+  "fp": "e58b6fed7dc6"
+ },
+ "L_pushpull_5_0": {
+  "decisao": "APROVA",
+  "fp": "06ae74a1af38"
+ },
+ "L_pushpull_5_1": {
+  "decisao": "APROVA",
+  "fp": "2504f8bf7ba8"
+ },
+ "L_pushpull_5_2": {
+  "decisao": "APROVA",
+  "fp": "f1a8dbdb8d66"
+ },
+ "L_pushpull_5_3": {
+  "decisao": "APROVA",
+  "fp": "46ceb394c2f1"
+ },
+ "L_pushpull_5_4": {
+  "decisao": "APROVA",
+  "fp": "41703a958f04"
+ },
+ "L_pushpull_5_5": {
+  "decisao": "APROVA",
+  "fp": "fce679a2a92a"
+ },
+ "L_pushpull_5_6": {
+  "decisao": "APROVA",
+  "fp": "c94a7fe46db2"
+ },
+ "L_pushpull_5_7": {
+  "decisao": "APROVA",
+  "fp": "1ef671615542"
+ },
+ "x01": {
+  "decisao": "APROVA",
+  "fp": "c29ab634ca30"
+ },
+ "x02": {
+  "decisao": "APROVA",
+  "fp": "60008be50ab7"
+ },
+ "x03": {
+  "decisao": "APROVA",
+  "fp": "ad6a930a0175"
+ },
+ "x04": {
+  "decisao": "APROVA",
+  "fp": "96ad2b041e8a"
+ },
+ "x05": {
+  "decisao": "APROVA",
+  "fp": "44c7e2ef6b02"
+ },
+ "x06": {
+  "decisao": "APROVA",
+  "fp": "24d380a66f5b"
+ },
+ "x07": {
+  "decisao": "APROVA",
+  "fp": "969330c77c45"
+ },
+ "x08": {
+  "decisao": "APROVA",
+  "fp": "163c135dc5c6"
+ },
+ "x09": {
+  "decisao": "APROVA",
+  "fp": "cac9e555d781"
+ },
+ "x10": {
+  "decisao": "APROVA",
+  "fp": "4e5e59bf3ec0"
+ },
+ "x11": {
+  "decisao": "APROVA",
+  "fp": "6355b6eadf4b"
+ },
+ "x12": {
+  "decisao": "APROVA",
+  "fp": "c02d7ebbae03"
+ },
+ "x13": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "F"
+  ],
+  "motivo": "resposta por bom senso (aviao e rapido); velocidade de aviao x pipa nao esta no roteiro (O8 so diz slow/fast) e pipa pode ser rapida; binario banal"
+ }
+}

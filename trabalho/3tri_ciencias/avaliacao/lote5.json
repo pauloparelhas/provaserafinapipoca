@@ -1,0 +1,1143 @@
+[
+ {
+  "id": "L_pos1_3_0",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-in.jpg]  The teddy bear is _ the box.",
+  "o": [
+   "in",
+   "on",
+   "under"
+  ],
+  "d": "The bear is in the box."
+ },
+ {
+  "id": "L_pos1_3_1",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-on.jpg]  The apple is _ the book.",
+  "o": [
+   "on",
+   "in",
+   "under"
+  ],
+  "d": "The apple is on the book."
+ },
+ {
+  "id": "L_pos1_3_2",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-under.jpg]  The ball is _ the table.",
+  "o": [
+   "under",
+   "on",
+   "in"
+  ],
+  "d": "The ball is under the table."
+ },
+ {
+  "id": "L_pos1_3_3",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-inside.jpg]  The fish is _ the bowl.",
+  "o": [
+   "inside",
+   "on",
+   "under"
+  ],
+  "d": "The fish is inside the bowl."
+ },
+ {
+  "id": "L_pos2_3_0",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-behind.jpg]  The boy is _ the tree.",
+  "o": [
+   "behind",
+   "in front of",
+   "above"
+  ],
+  "d": "He is at the back of the tree."
+ },
+ {
+  "id": "L_pos2_3_1",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-in-front-of.jpg]  The dog is _ the chair.",
+  "o": [
+   "in front of",
+   "behind",
+   "on"
+  ],
+  "d": "The dog is at the front of the chair."
+ },
+ {
+  "id": "L_pos2_3_2",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-between.jpg]  The teddy bear is _ the two plants.",
+  "o": [
+   "between",
+   "on",
+   "under"
+  ],
+  "d": "There is a plant on each side."
+ },
+ {
+  "id": "L_pos2_3_3",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-next-to.jpg]  The clock is _ the lamp.",
+  "o": [
+   "next to",
+   "far from",
+   "in"
+  ],
+  "d": "It is right beside the lamp."
+ },
+ {
+  "id": "L_pos2_3_4",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-near.jpg]  The tree is _ the house.",
+  "o": [
+   "near",
+   "far from",
+   "under"
+  ],
+  "d": "The tree is close to the house."
+ },
+ {
+  "id": "L_pos2_3_5",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-far-from.jpg]  The tree is _ the house.",
+  "o": [
+   "far from",
+   "near",
+   "next to"
+  ],
+  "d": "Look at the long arrow."
+ },
+ {
+  "id": "L_pos2_3_6",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-above.jpg]  The lamp is _ the table.",
+  "o": [
+   "above",
+   "on",
+   "under"
+  ],
+  "d": "It is higher and does not touch the table."
+ },
+ {
+  "id": "L_pos2_3_7",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/prep-below.jpg]  The cat is _ the shelf.",
+  "o": [
+   "below",
+   "on",
+   "above"
+  ],
+  "d": "The cat is lower than the shelf."
+ },
+ {
+  "id": "L_pos2_5_0",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The pizza is _ the box.",
+  "o": [
+   "in",
+   "under",
+   "behind"
+  ],
+  "d": "Pizza in the box."
+ },
+ {
+  "id": "L_pos2_5_1",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The guitar is _ the lamp and the plant.",
+  "o": [
+   "between",
+   "on",
+   "under"
+  ],
+  "d": "Lamp, guitar, plant."
+ },
+ {
+  "id": "L_pos2_5_2",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The two dogs are _ the table.",
+  "o": [
+   "under",
+   "on",
+   "behind"
+  ],
+  "d": "The two dogs are under the table."
+ },
+ {
+  "id": "L_pos2_5_3",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The window is _ the sofa.",
+  "o": [
+   "behind",
+   "on",
+   "under"
+  ],
+  "d": "The sofa is at the front; the window is at the back."
+ },
+ {
+  "id": "L_pos2_5_4",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The racket is _ the bag.",
+  "o": [
+   "next to",
+   "in",
+   "on"
+  ],
+  "d": "They are side by side."
+ },
+ {
+  "id": "L_pos2_5_5",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The cheese is _ the plate.",
+  "o": [
+   "on",
+   "under",
+   "behind"
+  ],
+  "d": "The cheese touches the plate."
+ },
+ {
+  "id": "L_pos2_5_6",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The rug is _ the sofa.",
+  "o": [
+   "in front of",
+   "behind",
+   "on"
+  ],
+  "d": "The rug is at the front of the sofa."
+ },
+ {
+  "id": "L_pos2_5_7",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The lamp is _ the shelf.",
+  "o": [
+   "under",
+   "on",
+   "in"
+  ],
+  "d": "The shelf is higher than the lamp."
+ },
+ {
+  "id": "L_pos2_5_8",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The trophy is _ the books.",
+  "o": [
+   "between",
+   "under",
+   "behind"
+  ],
+  "d": "There are books on each side."
+ },
+ {
+  "id": "L_pos2_5_9",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The picture is _ the wall.",
+  "o": [
+   "on",
+   "under",
+   "in"
+  ],
+  "d": "The picture touches the wall."
+ },
+ {
+  "id": "L_pos2_5_10",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The bird is flying _ the trees.",
+  "o": [
+   "over",
+   "under",
+   "in"
+  ],
+  "d": "It flies higher than the trees."
+ },
+ {
+  "id": "L_pos2_5_11",
+  "pergunta": "Look at the room. Which word completes it?",
+  "item": "[media/cie3/room.jpg]  The two fish are _ the bowl.",
+  "o": [
+   "in",
+   "on",
+   "under"
+  ],
+  "d": "The fish are in the water, in the bowl."
+ },
+ {
+  "id": "L_dir_3_0",
+  "pergunta": "Look at the map. Which word completes it?",
+  "item": "[media/cie3/map-school.jpg]  The Auditorium is _ A section and B section.",
+  "o": [
+   "between",
+   "under",
+   "behind"
+  ],
+  "d": "A section, Auditorium, B section."
+ },
+ {
+  "id": "L_dir_3_1",
+  "pergunta": "Look at the map. Which word completes it?",
+  "item": "[media/cie3/map-school.jpg]  A section is on the _ of the Auditorium.",
+  "o": [
+   "left",
+   "right"
+  ],
+  "d": "Look at the map: A section is on the left."
+ },
+ {
+  "id": "L_dir_3_2",
+  "pergunta": "Look at the map. Which word completes it?",
+  "item": "[media/cie3/map-school.jpg]  B section is on the _ of the Auditorium.",
+  "o": [
+   "right",
+   "left"
+  ],
+  "d": "Look at the map: B section is on the right."
+ },
+ {
+  "id": "L_dir_3_3",
+  "pergunta": "Look at the map. Which word completes it?",
+  "item": "[media/cie3/map-school.jpg]  At the top of the map, Gym/Court 1 is on the _.",
+  "o": [
+   "right",
+   "left"
+  ],
+  "d": "Gym/Court 1: top right."
+ },
+ {
+  "id": "L_dir_3_4",
+  "pergunta": "Look at the map. Which word completes it?",
+  "item": "[media/cie3/map-school.jpg]  At the top of the map, Gym/Court 2 is on the _.",
+  "o": [
+   "left",
+   "right"
+  ],
+  "d": "Gym/Court 2: top left."
+ },
+ {
+  "id": "L_dir_3_5",
+  "pergunta": "Look at the map. Which word completes it?",
+  "item": "[media/cie3/map-school.jpg]  C section is _ Gym/Court 2 and Gym/Court 1.",
+  "o": [
+   "between",
+   "under",
+   "behind"
+  ],
+  "d": "There is a gym on each side."
+ },
+ {
+  "id": "L_dir_3_6",
+  "pergunta": "Look at the map. Which word completes it?",
+  "item": "[media/cie3/map-school.jpg]  On the map, the Treehouse and Trix are _ the Patio.",
+  "o": [
+   "above",
+   "below"
+  ],
+  "d": "They are higher on the map."
+ },
+ {
+  "id": "L_dir_3_7",
+  "pergunta": "Look at the map. Which word completes it?",
+  "item": "[media/cie3/map-school.jpg]  On the map, the Drive is _ the Entrance.",
+  "o": [
+   "below",
+   "above"
+  ],
+  "d": "The Drive is at the bottom of everything."
+ },
+ {
+  "id": "L_persp_4_0",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/view-front.jpg]  Seen from the _.",
+  "o": [
+   "front",
+   "top",
+   "bottom"
+  ],
+  "d": "We stand on the grass and look at the tower."
+ },
+ {
+  "id": "L_persp_4_1",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/view-top.jpg]  Seen from the _.",
+  "o": [
+   "top",
+   "bottom",
+   "front"
+  ],
+  "d": "We look down from the tower."
+ },
+ {
+  "id": "L_persp_4_2",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/view-side.jpg]  Seen from the _.",
+  "o": [
+   "side",
+   "bottom"
+  ],
+  "d": "We see the whole tower from one side, with the city around it."
+ },
+ {
+  "id": "L_persp_4_3",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/view-bottom.jpg]  Seen from the _.",
+  "o": [
+   "bottom",
+   "top",
+   "side"
+  ],
+  "d": "We look up from under the tower."
+ },
+ {
+  "id": "L_persp_4_4",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/view-shadow.jpg]  The shadow on the left wall is a _.",
+  "o": [
+   "triangle",
+   "rectangle",
+   "circle"
+  ],
+  "d": "Left wall: a triangle."
+ },
+ {
+  "id": "L_persp_4_5",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/view-shadow.jpg]  The shadow on the right wall is a _.",
+  "o": [
+   "rectangle",
+   "triangle",
+   "circle"
+  ],
+  "d": "Right wall: a rectangle."
+ },
+ {
+  "id": "L_persp_4_6",
+  "pergunta": "Look at the picture. Which word completes it?",
+  "item": "[media/cie3/view-shadow.jpg]  The shadow on the floor is a _.",
+  "o": [
+   "circle",
+   "triangle",
+   "rectangle"
+  ],
+  "d": "Floor: a circle."
+ },
+ {
+  "id": "L_forcas_3_0",
+  "pergunta": "Is it helpful or harmful?",
+  "item": "[media/cie3/help-water-plants.jpg]",
+  "o": [
+   "Helpful",
+   "Harmful"
+  ],
+  "d": "Water the plants."
+ },
+ {
+  "id": "L_forcas_3_1",
+  "pergunta": "Is it helpful or harmful?",
+  "item": "[media/cie3/harm-tsunami.jpg]",
+  "o": [
+   "Harmful",
+   "Helpful"
+  ],
+  "d": "A tsunami."
+ },
+ {
+  "id": "L_forcas_3_2",
+  "pergunta": "Is it helpful or harmful?",
+  "item": "[media/cie3/help-wind-energy.jpg]",
+  "o": [
+   "Helpful",
+   "Harmful"
+  ],
+  "d": "Wind to make energy."
+ },
+ {
+  "id": "L_forcas_3_3",
+  "pergunta": "Is it helpful or harmful?",
+  "item": "[media/cie3/harm-floods.jpg]",
+  "o": [
+   "Harmful",
+   "Helpful"
+  ],
+  "d": "Heavy rain and floods."
+ },
+ {
+  "id": "L_forcas_3_4",
+  "pergunta": "Is it helpful or harmful?",
+  "item": "[media/cie3/help-water-energy.jpg]",
+  "o": [
+   "Helpful",
+   "Harmful"
+  ],
+  "d": "Water to make energy."
+ },
+ {
+  "id": "L_forcas_3_5",
+  "pergunta": "Is it helpful or harmful?",
+  "item": "[media/cie3/harm-tornado.jpg]",
+  "o": [
+   "Harmful",
+   "Helpful"
+  ],
+  "d": "A tornado."
+ },
+ {
+  "id": "L_forcas_3_6",
+  "pergunta": "Is it helpful or harmful?",
+  "item": "[media/cie3/help-wind-seeds.jpg]",
+  "o": [
+   "Helpful",
+   "Harmful"
+  ],
+  "d": "Wind that spreads the seeds."
+ },
+ {
+  "id": "L_forcas_3_7",
+  "pergunta": "Is it helpful or harmful?",
+  "item": "[media/cie3/harm-winds.jpg]",
+  "o": [
+   "Harmful",
+   "Helpful"
+  ],
+  "d": "Strong winds."
+ },
+ {
+  "id": "L_forcas_5_0",
+  "pergunta": "Which force is it?",
+  "item": "It makes sand dunes.",
+  "o": [
+   "Wind",
+   "Water"
+  ],
+  "d": "Wind moves sand and makes dunes."
+ },
+ {
+  "id": "L_forcas_5_1",
+  "pergunta": "Which force is it?",
+  "item": "It flows downhill in rivers.",
+  "o": [
+   "Water",
+   "Wind"
+  ],
+  "d": "Rivers flow downhill."
+ },
+ {
+  "id": "L_forcas_5_2",
+  "pergunta": "Which force is it?",
+  "item": "It makes valleys and canyons.",
+  "o": [
+   "Water",
+   "Wind"
+  ],
+  "d": "Water wears rock."
+ },
+ {
+  "id": "L_forcas_5_3",
+  "pergunta": "Which force is it?",
+  "item": "It turns the turbines.",
+  "o": [
+   "Wind",
+   "Water"
+  ],
+  "d": "Turbines make electricity with the wind."
+ },
+ {
+  "id": "L_forcas_5_4",
+  "pergunta": "Which force is it?",
+  "item": "Farmers use it in their fields.",
+  "o": [
+   "Water",
+   "Wind"
+  ],
+  "d": "Farmers water fields."
+ },
+ {
+  "id": "L_forcas_5_5",
+  "pergunta": "Which force is it?",
+  "item": "A kite flies with it.",
+  "o": [
+   "Wind",
+   "Water"
+  ],
+  "d": "A kite flies with the wind."
+ },
+ {
+  "id": "L_forcas_5_6",
+  "pergunta": "Which force is it?",
+  "item": "Dams use it to make electricity.",
+  "o": [
+   "Water",
+   "Wind"
+  ],
+  "d": "Hydroelectricity."
+ },
+ {
+  "id": "L_forcas_5_7",
+  "pergunta": "Which force is it?",
+  "item": "It spreads the seeds.",
+  "o": [
+   "Wind",
+   "Water"
+  ],
+  "d": "Wind spreads seeds."
+ },
+ {
+  "id": "L_objetos_6_0",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-bounce-soccer-ball.jpg]",
+  "o": [
+   "bounce",
+   "fly",
+   "roll",
+   "slide",
+   "spin",
+   "swing"
+  ],
+  "d": "It goes up and down."
+ },
+ {
+  "id": "L_objetos_6_1",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-bounce-tennis-ball.jpg]",
+  "o": [
+   "bounce",
+   "fly",
+   "roll",
+   "slide",
+   "spin",
+   "swing"
+  ],
+  "d": "It goes up and down."
+ },
+ {
+  "id": "L_objetos_6_2",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-bounce-basketball.jpg]",
+  "o": [
+   "bounce",
+   "fly",
+   "roll",
+   "slide",
+   "spin",
+   "swing"
+  ],
+  "d": "It goes up and down."
+ },
+ {
+  "id": "L_objetos_6_3",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-fly-airplane.jpg]",
+  "o": [
+   "fly",
+   "bounce",
+   "roll",
+   "slide",
+   "spin",
+   "swing"
+  ],
+  "d": "It moves through the air."
+ },
+ {
+  "id": "L_objetos_6_4",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-fly-balloon.jpg]",
+  "o": [
+   "fly",
+   "bounce",
+   "roll",
+   "slide",
+   "spin",
+   "swing"
+  ],
+  "d": "It moves through the air."
+ },
+ {
+  "id": "L_objetos_6_5",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-fly-kite.jpg]",
+  "o": [
+   "fly",
+   "bounce",
+   "roll",
+   "slide",
+   "spin",
+   "swing"
+  ],
+  "d": "It moves through the air."
+ },
+ {
+  "id": "L_objetos_6_6",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-roll-wheel.jpg]",
+  "o": [
+   "roll",
+   "bounce",
+   "fly",
+   "slide",
+   "spin",
+   "swing"
+  ],
+  "d": "It turns over and over."
+ },
+ {
+  "id": "L_objetos_6_7",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-roll-can.jpg]",
+  "o": [
+   "roll",
+   "bounce",
+   "fly",
+   "slide",
+   "spin",
+   "swing"
+  ],
+  "d": "It turns over and over."
+ },
+ {
+  "id": "L_objetos_6_8",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-roll-beach-ball.jpg]",
+  "o": [
+   "roll",
+   "bounce",
+   "fly",
+   "slide",
+   "spin",
+   "swing"
+  ],
+  "d": "It turns over and over."
+ },
+ {
+  "id": "L_objetos_6_9",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-slide-slide.jpg]",
+  "o": [
+   "slide",
+   "bounce",
+   "fly",
+   "roll",
+   "spin",
+   "swing"
+  ],
+  "d": "It moves smoothly along a surface."
+ },
+ {
+  "id": "L_objetos_6_10",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-slide-ice-cube.jpg]",
+  "o": [
+   "slide",
+   "bounce",
+   "fly",
+   "roll",
+   "spin",
+   "swing"
+  ],
+  "d": "It moves smoothly along a surface."
+ },
+ {
+  "id": "L_objetos_6_11",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-slide-book.jpg]",
+  "o": [
+   "slide",
+   "bounce",
+   "fly",
+   "roll",
+   "spin",
+   "swing"
+  ],
+  "d": "It moves smoothly along a surface."
+ },
+ {
+  "id": "L_objetos_6_12",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-spin-pinwheel.jpg]",
+  "o": [
+   "spin",
+   "bounce",
+   "fly",
+   "roll",
+   "slide",
+   "swing"
+  ],
+  "d": "It turns around and around."
+ },
+ {
+  "id": "L_objetos_6_13",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-spin-fan.jpg]",
+  "o": [
+   "spin",
+   "bounce",
+   "fly",
+   "roll",
+   "slide",
+   "swing"
+  ],
+  "d": "It turns around and around."
+ },
+ {
+  "id": "L_objetos_6_14",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-spin-top.jpg]",
+  "o": [
+   "spin",
+   "bounce",
+   "fly",
+   "roll",
+   "slide",
+   "swing"
+  ],
+  "d": "It turns around and around."
+ },
+ {
+  "id": "L_objetos_6_15",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-swing-swing.jpg]",
+  "o": [
+   "swing",
+   "bounce",
+   "fly",
+   "roll",
+   "slide",
+   "spin"
+  ],
+  "d": "It moves back and forth."
+ },
+ {
+  "id": "L_objetos_6_16",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-swing-plant.jpg]",
+  "o": [
+   "swing",
+   "bounce",
+   "fly",
+   "roll",
+   "slide",
+   "spin"
+  ],
+  "d": "It moves back and forth."
+ },
+ {
+  "id": "L_objetos_6_17",
+  "pergunta": "How does it move?",
+  "item": "[media/cie3/obj-swing-door.jpg]",
+  "o": [
+   "swing",
+   "bounce",
+   "fly",
+   "roll",
+   "slide",
+   "spin"
+  ],
+  "d": "It moves back and forth."
+ },
+ {
+  "id": "L_animais_3_0",
+  "pergunta": "Which word completes it?",
+  "item": "A fish _.",
+  "o": [
+   "swims",
+   "climbs",
+   "jumps"
+  ],
+  "d": "A fish swims."
+ },
+ {
+  "id": "L_animais_3_1",
+  "pergunta": "Which word completes it?",
+  "item": "A bird _.",
+  "o": [
+   "flies",
+   "swims",
+   "crawls"
+  ],
+  "d": "A bird flies."
+ },
+ {
+  "id": "L_animais_3_2",
+  "pergunta": "Which word completes it?",
+  "item": "A monkey _.",
+  "o": [
+   "climbs",
+   "swims",
+   "crawls"
+  ],
+  "d": "A monkey climbs."
+ },
+ {
+  "id": "L_animais_3_3",
+  "pergunta": "Which word completes it?",
+  "item": "A dog _.",
+  "o": [
+   "walks",
+   "flies",
+   "crawls"
+  ],
+  "d": "A dog walks and runs."
+ },
+ {
+  "id": "L_animais_3_4",
+  "pergunta": "Which word completes it?",
+  "item": "A kangaroo _.",
+  "o": [
+   "jumps",
+   "flies",
+   "swims"
+  ],
+  "d": "A kangaroo jumps."
+ },
+ {
+  "id": "L_animais_3_5",
+  "pergunta": "Which word completes it?",
+  "item": "A frog _.",
+  "o": [
+   "jumps",
+   "flies",
+   "climbs"
+  ],
+  "d": "A frog jumps."
+ },
+ {
+  "id": "L_animais_3_6",
+  "pergunta": "Which word completes it?",
+  "item": "A snake _ on the ground.",
+  "o": [
+   "crawls",
+   "flies",
+   "jumps"
+  ],
+  "d": "A snake crawls."
+ },
+ {
+  "id": "L_animais_4_0",
+  "pergunta": "Is it in the body list or in the hand list?",
+  "item": "swim",
+  "o": [
+   "Body",
+   "Hand"
+  ],
+  "d": "Body: swim, climb, play, walk, pick, sit."
+ },
+ {
+  "id": "L_animais_4_1",
+  "pergunta": "Is it in the body list or in the hand list?",
+  "item": "write",
+  "o": [
+   "Hand",
+   "Body"
+  ],
+  "d": "Hand: touch, lift, point, write, grab, push."
+ },
+ {
+  "id": "L_animais_4_2",
+  "pergunta": "Is it in the body list or in the hand list?",
+  "item": "climb",
+  "o": [
+   "Body",
+   "Hand"
+  ],
+  "d": "Body: swim, climb, play, walk, pick, sit."
+ },
+ {
+  "id": "L_animais_4_3",
+  "pergunta": "Is it in the body list or in the hand list?",
+  "item": "point",
+  "o": [
+   "Hand",
+   "Body"
+  ],
+  "d": "Hand: touch, lift, point, write, grab, push."
+ },
+ {
+  "id": "L_animais_4_4",
+  "pergunta": "Is it in the body list or in the hand list?",
+  "item": "walk",
+  "o": [
+   "Body",
+   "Hand"
+  ],
+  "d": "Body: swim, climb, play, walk, pick, sit."
+ },
+ {
+  "id": "L_animais_4_5",
+  "pergunta": "Is it in the body list or in the hand list?",
+  "item": "grab",
+  "o": [
+   "Hand",
+   "Body"
+  ],
+  "d": "Hand: touch, lift, point, write, grab, push."
+ },
+ {
+  "id": "L_animais_4_6",
+  "pergunta": "Is it in the body list or in the hand list?",
+  "item": "sit",
+  "o": [
+   "Body",
+   "Hand"
+  ],
+  "d": "Body: swim, climb, play, walk, pick, sit."
+ },
+ {
+  "id": "L_animais_4_7",
+  "pergunta": "Is it in the body list or in the hand list?",
+  "item": "lift",
+  "o": [
+   "Hand",
+   "Body"
+  ],
+  "d": "Hand: touch, lift, point, write, grab, push."
+ },
+ {
+  "id": "L_pushpull_3_0",
+  "pergunta": "Is it a push or a pull?",
+  "item": "[media/cie3/push-bike.jpg]",
+  "o": [
+   "Push",
+   "Pull"
+  ],
+  "d": "Riding a bike is a push."
+ },
+ {
+  "id": "L_pushpull_3_1",
+  "pergunta": "Is it a push or a pull?",
+  "item": "[media/cie3/push-box.jpg]",
+  "o": [
+   "Push",
+   "Pull"
+  ],
+  "d": "The box moves away from him."
+ },
+ {
+  "id": "L_pushpull_3_2",
+  "pergunta": "Is it a push or a pull?",
+  "item": "[media/cie3/push-ball.jpg]",
+  "o": [
+   "Push",
+   "Pull"
+  ],
+  "d": "The ball moves away from him."
+ },
+ {
+  "id": "L_pushpull_3_3",
+  "pergunta": "Is it a push or a pull?",
+  "item": "[media/cie3/pull-rope.jpg]",
+  "o": [
+   "Pull",
+   "Push"
+  ],
+  "d": "Each one brings the rope closer."
+ },
+ {
+  "id": "L_pushpull_3_4",
+  "pergunta": "Is it a push or a pull?",
+  "item": "[media/cie3/pull-wagon.jpg]",
+  "o": [
+   "Pull",
+   "Push"
+  ],
+  "d": "The wagon comes along with him."
+ },
+ {
+  "id": "L_pushpull_3_5",
+  "pergunta": "Is it a push or a pull?",
+  "item": "[media/cie3/pull-drawer.jpg]",
+  "o": [
+   "Pull",
+   "Push"
+  ],
+  "d": "The drawer comes closer to her."
+ },
+ {
+  "id": "L_pushpull_3_6",
+  "pergunta": "Is it a push or a pull?",
+  "item": "[media/cie3/pull-fish.jpg]",
+  "o": [
+   "Pull",
+   "Push"
+  ],
+  "d": "The fish comes closer to him."
+ },
+ {
+  "id": "L_pushpull_5_0",
+  "pergunta": "Is it a push or a pull?",
+  "item": "a shopping trolley",
+  "o": [
+   "Push",
+   "Pull"
+  ],
+  "d": "The trolley moves away from me."
+ },
+ {
+  "id": "L_pushpull_5_1",
+  "pergunta": "Is it a push or a pull?",
+  "item": "hitting a volleyball",
+  "o": [
+   "Push",
+   "Pull"
+  ],
+  "d": "The ball moves away from me."
+ },
+ {
+  "id": "L_pushpull_5_2",
+  "pergunta": "Is it a push or a pull?",
+  "item": "playing the piano",
+  "o": [
+   "Push",
+   "Pull"
+  ],
+  "d": "The fingers move the keys away."
+ },
+ {
+  "id": "L_pushpull_5_3",
+  "pergunta": "Is it a push or a pull?",
+  "item": "the golfer hitting the ball",
+  "o": [
+   "Push",
+   "Pull"
+  ],
+  "d": "The ball moves away from him."
+ },
+ {
+  "id": "L_pushpull_5_4",
+  "pergunta": "Is it a push or a pull?",
+  "item": "holding the rope of a kite",
+  "o": [
+   "Pull",
+   "Push"
+  ],
+  "d": "The rope brings the kite closer."
+ },
+ {
+  "id": "L_pushpull_5_5",
+  "pergunta": "Is it a push or a pull?",
+  "item": "picking fruit from the plant",
+  "o": [
+   "Pull",
+   "Push"
+  ],
+  "d": "The fruit comes closer to me."
+ },
+ {
+  "id": "L_pushpull_5_6",
+  "pergunta": "Is it a push or a pull?",
+  "item": "a door that moves away from me",
+  "o": [
+   "Push",
+   "Pull"
+  ],
+  "d": "Pushing a door."
+ },
+ {
+  "id": "L_pushpull_5_7",
+  "pergunta": "Is it a push or a pull?",
+  "item": "opening a drawer",
+  "o": [
+   "Pull",
+   "Push"
+  ],
+  "d": "The drawer comes closer to me."
+ }
+]

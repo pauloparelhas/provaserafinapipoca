@@ -1,0 +1,1046 @@
+[
+ {
+  "id": "o01",
+  "p": "How does it move?",
+  "o": [
+   "It bounces.",
+   "It swings.",
+   "It slides."
+  ],
+  "at": [
+   "O1"
+  ],
+  "img": "media/cie3/obj-bounce-soccer-ball.jpg",
+  "ex": "To bounce is to go up and down after hitting a surface. This ball bounces."
+ },
+ {
+  "id": "o02",
+  "p": "How does it move?",
+  "o": [
+   "It bounces.",
+   "It swings.",
+   "It slides."
+  ],
+  "at": [
+   "O1"
+  ],
+  "img": "media/cie3/obj-bounce-tennis-ball.jpg",
+  "ex": "The ball hits the ground, then goes up and down. That is to bounce."
+ },
+ {
+  "id": "o03",
+  "p": "How does it move?",
+  "o": [
+   "It bounces.",
+   "It swings.",
+   "It slides."
+  ],
+  "at": [
+   "O1"
+  ],
+  "img": "media/cie3/obj-bounce-basketball.jpg",
+  "ex": "The basketball goes up and down after hitting the floor. It bounces."
+ },
+ {
+  "id": "o04",
+  "p": "How does it move?",
+  "o": [
+   "It flies.",
+   "It bounces.",
+   "It swings."
+  ],
+  "at": [
+   "O2"
+  ],
+  "img": "media/cie3/obj-fly-airplane.jpg",
+  "ex": "To fly is to move through the air. The airplane moves through the air."
+ },
+ {
+  "id": "o05",
+  "p": "How does it move?",
+  "o": [
+   "It flies.",
+   "It rolls.",
+   "It bounces."
+  ],
+  "at": [
+   "O2"
+  ],
+  "img": "media/cie3/obj-fly-balloon.jpg",
+  "ex": "To fly is to move through the air. The hot air balloon flies."
+ },
+ {
+  "id": "o06",
+  "p": "How does it move?",
+  "o": [
+   "It flies.",
+   "It rolls.",
+   "It bounces."
+  ],
+  "at": [
+   "O2"
+  ],
+  "img": "media/cie3/obj-fly-kite.jpg",
+  "ex": "To fly is to move through the air. The kite is in the air, so it flies."
+ },
+ {
+  "id": "o07",
+  "p": "How does it move?",
+  "o": [
+   "It rolls.",
+   "It swings.",
+   "It flies."
+  ],
+  "at": [
+   "O3"
+  ],
+  "img": "media/cie3/obj-roll-wheel.jpg",
+  "ex": "To roll is to move by turning over and over. The wheel rolls."
+ },
+ {
+  "id": "o08",
+  "p": "How does it move?",
+  "o": [
+   "It rolls.",
+   "It swings.",
+   "It flies."
+  ],
+  "at": [
+   "O3"
+  ],
+  "img": "media/cie3/obj-roll-can.jpg",
+  "ex": "The can lies on its side and moves by turning over and over. It rolls."
+ },
+ {
+  "id": "o09",
+  "p": "How does it move?",
+  "o": [
+   "It rolls.",
+   "It swings.",
+   "It slides."
+  ],
+  "at": [
+   "O3"
+  ],
+  "img": "media/cie3/obj-roll-beach-ball.jpg",
+  "ex": "The lines show the ball turning over and over on the ground. It rolls."
+ },
+ {
+  "id": "o10",
+  "p": "A child goes down this toy. How does the child move?",
+  "o": [
+   "The child slides.",
+   "The child bounces.",
+   "The child spins."
+  ],
+  "at": [
+   "O4"
+  ],
+  "img": "media/cie3/obj-slide-slide.jpg",
+  "ex": "The toy is a slide. The child moves smoothly along it, so the child slides."
+ },
+ {
+  "id": "o11",
+  "p": "How does it move?",
+  "o": [
+   "It slides.",
+   "It rolls.",
+   "It swings."
+  ],
+  "at": [
+   "O4"
+  ],
+  "img": "media/cie3/obj-slide-ice-cube.jpg",
+  "ex": "To slide is to move smoothly along a surface. The ice cube slides."
+ },
+ {
+  "id": "o12",
+  "p": "How does it move?",
+  "o": [
+   "It slides.",
+   "It rolls.",
+   "It swings."
+  ],
+  "at": [
+   "O4"
+  ],
+  "img": "media/cie3/obj-slide-book.jpg",
+  "ex": "The book moves smoothly along the table. It slides."
+ },
+ {
+  "id": "o13",
+  "p": "How does it move?",
+  "o": [
+   "It spins.",
+   "It rolls.",
+   "It swings."
+  ],
+  "at": [
+   "O5"
+  ],
+  "img": "media/cie3/obj-spin-pinwheel.jpg",
+  "ex": "To spin is to turn around and around. The pinwheel spins."
+ },
+ {
+  "id": "o14",
+  "p": "How does it move?",
+  "o": [
+   "It spins.",
+   "It rolls.",
+   "It bounces."
+  ],
+  "at": [
+   "O5"
+  ],
+  "img": "media/cie3/obj-spin-fan.jpg",
+  "ex": "The fan stays in one place and turns around and around. It spins."
+ },
+ {
+  "id": "o15",
+  "p": "How does it move?",
+  "o": [
+   "It spins.",
+   "It swings.",
+   "It flies."
+  ],
+  "at": [
+   "O5"
+  ],
+  "img": "media/cie3/obj-spin-top.jpg",
+  "ex": "To spin is to turn around and around. The top spins."
+ },
+ {
+  "id": "o16",
+  "p": "How does it move?",
+  "o": [
+   "It swings.",
+   "It spins.",
+   "It bounces."
+  ],
+  "at": [
+   "O6"
+  ],
+  "img": "media/cie3/obj-swing-swing.jpg",
+  "ex": "To swing is to move back and forth like a pendulum. This toy swings."
+ },
+ {
+  "id": "o17",
+  "p": "How does it move?",
+  "o": [
+   "It swings.",
+   "It rolls.",
+   "It bounces."
+  ],
+  "at": [
+   "O6"
+  ],
+  "img": "media/cie3/obj-swing-plant.jpg",
+  "ex": "The hanging plant moves back and forth like a pendulum. It swings."
+ },
+ {
+  "id": "o18",
+  "p": "How does it move?",
+  "o": [
+   "It swings.",
+   "It bounces.",
+   "It flies."
+  ],
+  "at": [
+   "O6"
+  ],
+  "img": "media/cie3/obj-swing-door.jpg",
+  "ex": "The door moves back and forth. So the door swings."
+ },
+ {
+  "id": "o19",
+  "p": "To ___ means to go up and down after hitting a surface.",
+  "o": [
+   "bounce",
+   "fly",
+   "slide"
+  ],
+  "at": [
+   "O1"
+  ],
+  "img": null,
+  "ex": "To bounce means to go up and down after hitting a surface, like a basketball."
+ },
+ {
+  "id": "o20",
+  "p": "To ___ means to move through the air.",
+  "o": [
+   "fly",
+   "slide",
+   "roll"
+  ],
+  "at": [
+   "O2"
+  ],
+  "img": null,
+  "ex": "To fly means to move through the air, like an airplane."
+ },
+ {
+  "id": "o21",
+  "p": "To ___ means to move by turning over and over.",
+  "o": [
+   "roll",
+   "spin",
+   "swing"
+  ],
+  "at": [
+   "O3"
+  ],
+  "img": null,
+  "ex": "To roll means to move by turning over and over, like a wheel."
+ },
+ {
+  "id": "o22",
+  "p": "To ___ means to move smoothly along a surface.",
+  "o": [
+   "slide",
+   "roll",
+   "swing"
+  ],
+  "at": [
+   "O4"
+  ],
+  "img": null,
+  "ex": "To slide means to move smoothly along a surface, like an ice cube."
+ },
+ {
+  "id": "o23",
+  "p": "To ___ means to turn around and around.",
+  "o": [
+   "spin",
+   "roll",
+   "swing"
+  ],
+  "at": [
+   "O5"
+  ],
+  "img": null,
+  "ex": "To spin means to turn around and around, like a top."
+ },
+ {
+  "id": "o24",
+  "p": "To ___ means to move back and forth like a pendulum.",
+  "o": [
+   "swing",
+   "spin",
+   "bounce"
+  ],
+  "at": [
+   "O6"
+  ],
+  "img": null,
+  "ex": "To swing means to move back and forth like a pendulum, like a door."
+ },
+ {
+  "id": "o25",
+  "p": "To roll means to…",
+  "o": [
+   "move by turning over and over",
+   "turn around and around",
+   "move back and forth"
+  ],
+  "at": [
+   "O3",
+   "O5"
+  ],
+  "img": null,
+  "ex": "To roll is to move by turning over and over. To spin is to turn around and around."
+ },
+ {
+  "id": "o26",
+  "p": "To slide means to…",
+  "o": [
+   "move smoothly along a surface",
+   "move through the air",
+   "go up and down"
+  ],
+  "at": [
+   "O4"
+  ],
+  "img": null,
+  "ex": "To slide is to move smoothly along a surface. A book on a table can slide."
+ },
+ {
+  "id": "o27",
+  "p": "Which one bounces?",
+  "o": [
+   "a basketball",
+   "a kite",
+   "a fan"
+  ],
+  "at": [
+   "O1"
+  ],
+  "img": null,
+  "ex": "To bounce is to go up and down after hitting a surface. A basketball bounces."
+ },
+ {
+  "id": "o28",
+  "p": "Which one slides?",
+  "o": [
+   "an ice cube",
+   "a pinwheel",
+   "a kite"
+  ],
+  "at": [
+   "O4"
+  ],
+  "img": null,
+  "ex": "To slide is to move smoothly along a surface. An ice cube slides."
+ },
+ {
+  "id": "o29",
+  "p": "A swing, a hanging plant and a door all…",
+  "o": [
+   "swing",
+   "roll",
+   "fly"
+  ],
+  "at": [
+   "O6"
+  ],
+  "img": null,
+  "ex": "To swing is to move back and forth. All three move back and forth."
+ },
+ {
+  "id": "o30",
+  "p": "It turns around and around. It stays in one place. What does it do?",
+  "o": [
+   "It spins.",
+   "It rolls.",
+   "It slides."
+  ],
+  "at": [
+   "O5",
+   "O3"
+  ],
+  "img": null,
+  "ex": "To spin is to turn around and around. A spinning thing stays in one place."
+ },
+ {
+  "id": "o31",
+  "p": "It turns over and over. It goes to a new place. What does it do?",
+  "o": [
+   "It rolls.",
+   "It spins.",
+   "It swings."
+  ],
+  "at": [
+   "O3",
+   "O5"
+  ],
+  "img": null,
+  "ex": "To roll is to move by turning over and over. A rolling thing goes to a new place."
+ },
+ {
+  "id": "o32",
+  "p": "It moves back and forth like a pendulum. It does not turn around. What does it do?",
+  "o": [
+   "It swings.",
+   "It spins.",
+   "It rolls."
+  ],
+  "at": [
+   "O6",
+   "O5"
+  ],
+  "img": null,
+  "ex": "To swing is to move back and forth. To spin is to turn around and around."
+ },
+ {
+  "id": "o33",
+  "p": "Look at the lines. Which way does this ball move?",
+  "o": [
+   "up and down",
+   "back and forth",
+   "round and round"
+  ],
+  "at": [
+   "O7",
+   "O1"
+  ],
+  "img": "media/cie3/obj-bounce-basketball.jpg",
+  "ex": "Things move in different directions. A bouncing ball moves up and down."
+ },
+ {
+  "id": "o34",
+  "p": "Look at the arrow. Which way does this top move?",
+  "o": [
+   "round and round",
+   "up and down",
+   "back and forth"
+  ],
+  "at": [
+   "O7",
+   "O5"
+  ],
+  "img": "media/cie3/obj-spin-top.jpg",
+  "ex": "Things move in different directions. A spinning top moves round and round."
+ },
+ {
+  "id": "o35",
+  "p": "Look at the arrows. Which way does this swing move?",
+  "o": [
+   "back and forth",
+   "up and down",
+   "round and round"
+  ],
+  "at": [
+   "O7",
+   "O6"
+  ],
+  "img": "media/cie3/obj-swing-swing.jpg",
+  "ex": "Things move in different directions. A swing moves back and forth."
+ },
+ {
+  "id": "o36",
+  "p": "Look at the arrows. Which way does this plant move?",
+  "o": [
+   "back and forth",
+   "up and down",
+   "round and round"
+  ],
+  "at": [
+   "O7",
+   "O6"
+  ],
+  "img": "media/cie3/obj-swing-plant.jpg",
+  "ex": "Things move in different directions. A hanging plant moves back and forth."
+ },
+ {
+  "id": "o37",
+  "p": "Up and down, back and forth, round and round. These words tell us the…",
+  "o": [
+   "direction",
+   "speed",
+   "surface"
+  ],
+  "at": [
+   "O7"
+  ],
+  "img": null,
+  "ex": "Things move in different directions: back and forth, up and down, round and round."
+ },
+ {
+  "id": "o38",
+  "p": "Things can move at different speeds. They can move…",
+  "o": [
+   "slow or fast",
+   "up and down",
+   "back and forth"
+  ],
+  "at": [
+   "O8"
+  ],
+  "img": null,
+  "ex": "Speed is how quickly a thing moves. Things can move slow or fast."
+ },
+ {
+  "id": "o39",
+  "p": "Slow and fast tell us the… of a thing.",
+  "o": [
+   "speed",
+   "direction",
+   "surface"
+  ],
+  "at": [
+   "O8"
+  ],
+  "img": null,
+  "ex": "Things move at different speeds. Slow and fast are speeds."
+ },
+ {
+  "id": "o40",
+  "p": "There is very little wind. The pinwheel turns just a bit. How does it spin?",
+  "o": [
+   "slow",
+   "fast"
+  ],
+  "at": [
+   "O8",
+   "O5"
+  ],
+  "img": null,
+  "ex": "Things move at different speeds. With a little wind, the pinwheel spins slow."
+ },
+ {
+  "id": "f01",
+  "p": "Riding a bike. Is it a push or a pull?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "at": [
+   "F3"
+  ],
+  "img": "media/cie3/push-bike.jpg",
+  "ex": "In our lesson, riding a bike is a push. Push = empurrar, not puxar."
+ },
+ {
+  "id": "f02",
+  "p": "The boy moves the box. Is it a push or a pull?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "at": [
+   "F3"
+  ],
+  "img": "media/cie3/push-box.jpg",
+  "ex": "The hands move the box away from the boy. That is a push."
+ },
+ {
+  "id": "f03",
+  "p": "Is kicking a ball a push or a pull?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "at": [
+   "F3"
+  ],
+  "img": "media/cie3/push-ball.jpg",
+  "ex": "The foot moves the ball away from the boy. Kicking is a push."
+ },
+ {
+  "id": "f04",
+  "p": "A girl opens a door with her hands, moving it away from her. Is it a push or a pull?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "at": [
+   "F3"
+  ],
+  "img": null,
+  "ex": "The door moves away from the girl. That is a push."
+ },
+ {
+  "id": "f05",
+  "p": "Two children play tug of war. Is it a push or a pull?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "at": [
+   "F4"
+  ],
+  "img": "media/cie3/pull-rope.jpg",
+  "ex": "Each child brings the rope closer. Tug of war is a pull."
+ },
+ {
+  "id": "f06",
+  "p": "The boy moves the wagon. Is it a push or a pull?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "at": [
+   "F4"
+  ],
+  "img": "media/cie3/pull-wagon.jpg",
+  "ex": "The boy holds the handle and the wagon comes after him. That is a pull."
+ },
+ {
+  "id": "f07",
+  "p": "The girl opens the drawer. Is it a push or a pull?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "at": [
+   "F4"
+  ],
+  "img": "media/cie3/pull-drawer.jpg",
+  "ex": "The drawer comes closer to the girl. Opening a drawer is a pull."
+ },
+ {
+  "id": "f08",
+  "p": "The boy is fishing with a rod. Is it a push or a pull?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "at": [
+   "F4"
+  ],
+  "img": "media/cie3/pull-fish.jpg",
+  "ex": "The rod brings the fish closer to the boy. Fishing is a pull."
+ },
+ {
+  "id": "f09",
+  "p": "Look at the arrow. Where does the box go?",
+  "o": [
+   "away from him",
+   "closer to him"
+  ],
+  "at": [
+   "F1",
+   "F3"
+  ],
+  "img": "media/cie3/push-box.jpg",
+  "ex": "A push moves something away from me. The box goes away from the boy."
+ },
+ {
+  "id": "f10",
+  "p": "The door says PUSH. Where does the door go?",
+  "o": [
+   "away from her",
+   "closer to her"
+  ],
+  "at": [
+   "F1",
+   "F3"
+  ],
+  "img": "media/cie3/push-door.jpg",
+  "ex": "A push moves something away from me. The door goes away from the girl."
+ },
+ {
+  "id": "f11",
+  "p": "Look at the arrow. Where does the ball go?",
+  "o": [
+   "away from him",
+   "closer to him"
+  ],
+  "at": [
+   "F1",
+   "F3"
+  ],
+  "img": "media/cie3/push-ball.jpg",
+  "ex": "A kick is a push. It moves the ball away from the boy."
+ },
+ {
+  "id": "f12",
+  "p": "Look at the arrow. Where does the wagon go?",
+  "o": [
+   "closer to him",
+   "away from him"
+  ],
+  "at": [
+   "F2",
+   "F4"
+  ],
+  "img": "media/cie3/pull-wagon.jpg",
+  "ex": "A pull moves something closer to me. The wagon comes after the boy."
+ },
+ {
+  "id": "f13",
+  "p": "Look at the arrow. Where does the drawer go?",
+  "o": [
+   "closer to her",
+   "away from her"
+  ],
+  "at": [
+   "F2",
+   "F4"
+  ],
+  "img": "media/cie3/pull-drawer.jpg",
+  "ex": "A pull moves something closer to me. The drawer comes closer to the girl."
+ },
+ {
+  "id": "f14",
+  "p": "Look at the arrow. Where does the fish go?",
+  "o": [
+   "closer to him",
+   "away from him"
+  ],
+  "at": [
+   "F2",
+   "F4"
+  ],
+  "img": "media/cie3/pull-fish.jpg",
+  "ex": "A pull moves something closer to me. The fish comes closer to the boy."
+ },
+ {
+  "id": "f15",
+  "p": "The boy holds the rope. Where does he want the rope to go?",
+  "o": [
+   "closer to him",
+   "away from him"
+  ],
+  "at": [
+   "F2",
+   "F4"
+  ],
+  "img": "media/cie3/pull-rope.jpg",
+  "ex": "Tug of war is a pull. The boy brings the rope closer to him."
+ },
+ {
+  "id": "f16",
+  "p": "A push is when I use a force to move something…",
+  "o": [
+   "away from me",
+   "closer to me"
+  ],
+  "at": [
+   "F1"
+  ],
+  "img": null,
+  "ex": "A push moves something away from me. Push = empurrar."
+ },
+ {
+  "id": "f17",
+  "p": "A pull is when I use a force to move something…",
+  "o": [
+   "closer to me",
+   "away from me"
+  ],
+  "at": [
+   "F2"
+  ],
+  "img": null,
+  "ex": "A pull moves something closer to me. Pull = puxar."
+ },
+ {
+  "id": "f18",
+  "p": "I use a force to move something away from me. It is…",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "at": [
+   "F1"
+  ],
+  "img": null,
+  "ex": "Away from me is a push. Pushing a box moves it away."
+ },
+ {
+  "id": "f19",
+  "p": "I use a force to move something closer to me. It is…",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "at": [
+   "F2"
+  ],
+  "img": null,
+  "ex": "Closer to me is a pull. Pulling a drawer brings it closer."
+ },
+ {
+  "id": "f20",
+  "p": "A door has a sign: PULL. What do I do?",
+  "o": [
+   "I move it closer to me.",
+   "I move it away from me."
+  ],
+  "at": [
+   "F1",
+   "F2"
+  ],
+  "img": null,
+  "ex": "A pull moves something closer to me. So I bring the door closer."
+ },
+ {
+  "id": "f21",
+  "p": "What are the two types of force?",
+  "o": [
+   "push and pull",
+   "up and down",
+   "slow and fast"
+  ],
+  "at": [
+   "F5"
+  ],
+  "img": null,
+  "ex": "The two types of force are push and pull."
+ },
+ {
+  "id": "f22",
+  "p": "Push and pull are ___ forces.",
+  "o": [
+   "opposite",
+   "natural",
+   "helpful"
+  ],
+  "at": [
+   "F5"
+  ],
+  "img": null,
+  "ex": "Push and pull are opposite forces: away from me and closer to me."
+ },
+ {
+  "id": "f23",
+  "p": "A force makes things…",
+  "o": [
+   "move from place to place",
+   "stay in the same place"
+  ],
+  "at": [
+   "F5"
+  ],
+  "img": null,
+  "ex": "A force makes things move from one place to another."
+ },
+ {
+  "id": "f24",
+  "p": "I move a shopping trolley away from me. Is it a push or a pull?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "at": [
+   "F6"
+  ],
+  "img": null,
+  "ex": "The trolley moves away from me. That is a push."
+ },
+ {
+  "id": "f25",
+  "p": "In volleyball, the players hit the ball away from them. Is it a push or a pull?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "at": [
+   "F6"
+  ],
+  "img": null,
+  "ex": "The players move the ball away from them. Volleyball uses a push."
+ },
+ {
+  "id": "f26",
+  "p": "Playing the piano. Is it a push or a pull?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "at": [
+   "F6"
+  ],
+  "img": null,
+  "ex": "The fingers press the keys away from the hand. Playing the piano is a push."
+ },
+ {
+  "id": "f27",
+  "p": "A golfer hits the ball. Is it a push or a pull?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "at": [
+   "F6"
+  ],
+  "img": null,
+  "ex": "The golfer moves the ball away from him. That is a push."
+ },
+ {
+  "id": "f28",
+  "p": "I hold the rope of a kite so it does not fly away. Is it a push or a pull?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "at": [
+   "F7"
+  ],
+  "img": null,
+  "ex": "I bring the rope closer to me to keep the kite. That is a pull."
+ },
+ {
+  "id": "f29",
+  "p": "I pick a fruit from the plant. Is it a push or a pull?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "at": [
+   "F7"
+  ],
+  "img": null,
+  "ex": "I bring the fruit from the plant closer to me. That is a pull."
+ },
+ {
+  "id": "f30",
+  "p": "I pick a vegetable from the plant. Is it a push or a pull?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "at": [
+   "F7"
+  ],
+  "img": null,
+  "ex": "I bring the vegetable closer to me. Picking is a pull."
+ },
+ {
+  "id": "f31",
+  "p": "Which one is a push?",
+  "o": [
+   "kicking a ball",
+   "opening a drawer",
+   "fishing with a rod"
+  ],
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "img": null,
+  "ex": "Kicking moves the ball away from me, so it is a push."
+ },
+ {
+  "id": "f32",
+  "p": "Which one is a pull?",
+  "o": [
+   "holding a kite rope",
+   "playing the piano",
+   "riding a bike"
+  ],
+  "at": [
+   "F4",
+   "F7"
+  ],
+  "img": null,
+  "ex": "I bring the kite rope closer to me, so it is a pull."
+ },
+ {
+  "id": "f33",
+  "p": "Which one is a pull?",
+  "o": [
+   "opening a drawer",
+   "playing volleyball",
+   "hitting a golf ball"
+  ],
+  "at": [
+   "F4",
+   "F6"
+  ],
+  "img": null,
+  "ex": "An open drawer comes closer to me, so it is a pull."
+ },
+ {
+  "id": "f34",
+  "p": "Which one is a push?",
+  "o": [
+   "playing the piano",
+   "picking a fruit",
+   "tug of war"
+  ],
+  "at": [
+   "F3",
+   "F7"
+  ],
+  "img": null,
+  "ex": "The fingers press the piano keys away from the hand. That is a push."
+ },
+ {
+  "id": "f35",
+  "p": "Push is away from me. Pull is the opposite. Pull is…",
+  "o": [
+   "closer to me",
+   "behind me",
+   "above me"
+  ],
+  "at": [
+   "F1",
+   "F2",
+   "F5"
+  ],
+  "img": null,
+  "ex": "Push and pull are opposite forces. Pull moves something closer to me."
+ }
+]

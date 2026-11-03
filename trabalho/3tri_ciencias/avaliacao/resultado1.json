@@ -1,0 +1,280 @@
+[
+ {
+  "id": "a01",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a02",
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Mesma figura e mesma ideia de a01 (in the box); so muda o formato."
+ },
+ {
+  "id": "a03",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a04",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a05",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a06",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a07",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a08",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a09",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a10",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a11",
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplica a09 (mesma figura, resposta e quase os mesmos distratores)."
+ },
+ {
+  "id": "a12",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a13",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a14",
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplica a12 (mesma figura, resposta e quase os mesmos distratores)."
+ },
+ {
+  "id": "a15",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a16",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a17",
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplica a16 (mesma figura, resposta e quase os mesmos distratores)."
+ },
+ {
+  "id": "a18",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distrator 'a wall' fora do assunto (nao e erro de quem estudou).",
+  "p": "We say \"between\" when a thing is in the middle of…",
+  "p_pt": "Dizemos \"between\" quando uma coisa está no meio de…",
+  "o": [
+   "two things",
+   "one thing",
+   "four things"
+  ],
+  "o_pt": [
+   "duas coisas",
+   "uma coisa",
+   "quatro coisas"
+  ],
+  "ex": "Between needs two things, one on each side.",
+  "ex_pt": "Between pede duas coisas, uma de cada lado."
+ },
+ {
+  "id": "a19",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a20",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a21",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a22",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a23",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a24",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a25",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a26",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a27",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a28",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a29",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a30",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a31",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a32",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distrator 'next to the cat' nao e preposicao-erro plausivel para os livros; troca por under/behind.",
+  "p": "Where are the books?",
+  "p_pt": "Onde estão os livros?",
+  "o": [
+   "on the shelf",
+   "under the shelf",
+   "behind the shelf"
+  ],
+  "o_pt": [
+   "na prateleira (em cima)",
+   "embaixo da prateleira",
+   "atrás da prateleira"
+  ],
+  "ex": "The books touch the top of the shelf, so they are on the shelf.",
+  "ex_pt": "Os livros encostam em cima da prateleira: estão on the shelf."
+ },
+ {
+  "id": "a33",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a34",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a35",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a36",
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplica a35 (mesma figura, resposta e quase os mesmos distratores)."
+ },
+ {
+  "id": "a37",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a38",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a39",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a40",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a41",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a42",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a43",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a44",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a45",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a46",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a47",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a48",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a49",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "a50",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "'under/behind the wall' sao absurdos; usa outros lugares reais da mesma sala.",
+  "p": "Where is the picture?",
+  "p_pt": "Onde está o quadro?",
+  "o": [
+   "on the wall",
+   "on the shelf",
+   "on the sofa"
+  ],
+  "o_pt": [
+   "na parede",
+   "na prateleira",
+   "no sofá"
+  ],
+  "ex": "On also means touching a wall. The picture is on the wall.",
+  "ex_pt": "On também vale para parede. O quadro está on the wall."
+ },
+ {
+  "id": "a51",
+  "decisao": "APROVA"
+ }
+]

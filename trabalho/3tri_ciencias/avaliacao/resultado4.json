@@ -1,0 +1,430 @@
+[
+ {
+  "id": "o01",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o02",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o03",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o04",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distratores 'bounces/swings' para um aviao sao fora do mundo; usar outros movimentos do roteiro (aviao rolando na pista seria duplo movimento, evitado).",
+  "p": "How does it move?",
+  "p_pt": "Como ele se move?",
+  "o": [
+   "It flies.",
+   "It spins.",
+   "It swings."
+  ],
+  "o_pt": [
+   "Ele voa.",
+   "Ele gira.",
+   "Ele balança."
+  ],
+  "ex": "To fly is to move through the air. The airplane is in the air.",
+  "ex_pt": "Voar é se mover pelo ar. O avião está no ar."
+ },
+ {
+  "id": "o05",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o06",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o07",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o08",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o09",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o10",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o11",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o12",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o13",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o14",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o15",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o16",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o17",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o18",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "'It flies' para uma porta e distrator-piada; trocar por outros movimentos do roteiro com a porta de dobradica da figura.",
+  "p": "How does it move?",
+  "p_pt": "Como ela se move?",
+  "o": [
+   "It swings.",
+   "It spins.",
+   "It slides."
+  ],
+  "o_pt": [
+   "Ela balança (abre e fecha).",
+   "Ela gira.",
+   "Ela desliza."
+  ],
+  "ex": "The door moves back and forth. So the door swings.",
+  "ex_pt": "A porta vai e volta. Então ela balança."
+ },
+ {
+  "id": "o19",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o20",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o21",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o22",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o23",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o24",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o25",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o26",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o27",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o28",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o29",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "'roll/fly' sao absurdos para porta e planta pendurada; usar spin/slide.",
+  "p": "A swing, a hanging plant and a door all…",
+  "p_pt": "Um balanço, uma planta pendurada e uma porta todos…",
+  "o": [
+   "swing",
+   "spin",
+   "slide"
+  ],
+  "o_pt": [
+   "balançam",
+   "giram",
+   "deslizam"
+  ],
+  "ex": "To swing is to move back and forth. All three move back and forth.",
+  "ex_pt": "Balançar é ir e vir. Os três vão e vêm."
+ },
+ {
+  "id": "o30",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o31",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o32",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o33",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o34",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o35",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o36",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o37",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o38",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o39",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "o40",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Resposta obvia pelo enunciado ('so um pouco' = slow) e vento girando cata-vento nao esta no insumo."
+ },
+ {
+  "id": "f01",
+  "decisao": "ADAPTA",
+  "regras": [],
+  "motivo": "Ex traz portugues (tela inteira em ingles); resto ok.",
+  "p": "Riding a bike. Is it a push or a pull?",
+  "p_pt": "Andar de bicicleta. É empurrar ou puxar?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "empurrar",
+   "puxar"
+  ],
+  "ex": "In our lesson, riding a bike is a push: a force away from me.",
+  "ex_pt": "Na lição, andar de bicicleta é empurrar: uma força que afasta de mim."
+ },
+ {
+  "id": "f02",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f03",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f04",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f05",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f06",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f07",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f08",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f09",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f10",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f11",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f12",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f13",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f14",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f15",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f16",
+  "decisao": "ADAPTA",
+  "regras": [],
+  "motivo": "Ex com traducao PT dentro do texto EN.",
+  "p": "A push is when I use a force to move something…",
+  "p_pt": "Empurrar é quando uso uma força para mover algo…",
+  "o": [
+   "away from me",
+   "closer to me"
+  ],
+  "o_pt": [
+   "para longe de mim",
+   "para perto de mim"
+  ],
+  "ex": "A push moves something away from me.",
+  "ex_pt": "Empurrar move algo para longe de mim."
+ },
+ {
+  "id": "f17",
+  "decisao": "ADAPTA",
+  "regras": [],
+  "motivo": "Ex com traducao PT dentro do texto EN.",
+  "p": "A pull is when I use a force to move something…",
+  "p_pt": "Puxar é quando uso uma força para mover algo…",
+  "o": [
+   "closer to me",
+   "away from me"
+  ],
+  "o_pt": [
+   "para perto de mim",
+   "para longe de mim"
+  ],
+  "ex": "A pull moves something closer to me.",
+  "ex_pt": "Puxar move algo para perto de mim."
+ },
+ {
+  "id": "f18",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f19",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f20",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f21",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f22",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f23",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Opcao 'stay in the same place' contradiz 'force'; resposta por bom senso."
+ },
+ {
+  "id": "f24",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f25",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f26",
+  "decisao": "ADAPTA",
+  "regras": [
+   "F"
+  ],
+  "motivo": "Ex traz motivo fisico (dedos apertam teclas para longe da mao) que o insumo nao da; o insumo so diz que piano e push (V2).",
+  "p": "Playing the piano. Is it a push or a pull?",
+  "p_pt": "Tocar piano. É empurrar ou puxar?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "empurrar",
+   "puxar"
+  ],
+  "ex": "In our video, playing the piano is a push.",
+  "ex_pt": "No vídeo, tocar piano é empurrar."
+ },
+ {
+  "id": "f27",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f28",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f29",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f30",
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplicata de f29 (mesma ideia e opcoes, so troca fruta por vegetal)."
+ },
+ {
+  "id": "f31",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f32",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f33",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f34",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "f35",
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Repete f17; distratores 'behind/above me' sao de preposicoes (outro atomo) e o enunciado entrega a resposta."
+ }
+]

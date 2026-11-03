@@ -1,0 +1,608 @@
+[
+ {
+  "id": "d01",
+  "p": "Look at the map. Which section is on the left of the Auditorium?",
+  "o": [
+   "A section",
+   "B section",
+   "C section"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "Left is your left hand's side of the map. A section is left of the Auditorium."
+ },
+ {
+  "id": "d02",
+  "p": "The B section is on the ___ of the Auditorium.",
+  "o": [
+   "right",
+   "left",
+   "top"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "B section is on your right hand's side of the Auditorium: right."
+ },
+ {
+  "id": "d03",
+  "p": "What is between the A section and the B section?",
+  "o": [
+   "the Auditorium",
+   "the Trix",
+   "the Entrance"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "The Auditorium has A on one side and B on the other: it is between."
+ },
+ {
+  "id": "d04",
+  "p": "Where is the Auditorium?",
+  "o": [
+   "between the A and B sections",
+   "between the two gyms",
+   "next to the C section"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "The A section and the B section are on its sides, so it is between them."
+ },
+ {
+  "id": "d05",
+  "p": "Where is Gym/Court 1 on the map?",
+  "o": [
+   "at the top, on the right",
+   "at the top, on the left",
+   "at the bottom, on the right"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "Gym/Court 1 is at the top of the map, on the right side."
+ },
+ {
+  "id": "d06",
+  "p": "Where is Gym/Court 2 on the map?",
+  "o": [
+   "at the top, on the left",
+   "at the top, on the right",
+   "at the bottom, on the left"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "Gym/Court 2 is at the top of the map, on the left side."
+ },
+ {
+  "id": "d07",
+  "p": "What is between Gym/Court 2 and Gym/Court 1?",
+  "o": [
+   "C section",
+   "A section",
+   "the Auditorium"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "C section has a gym on each side, so it is between the two gyms."
+ },
+ {
+  "id": "d08",
+  "p": "Which two places are above the Patio?",
+  "o": [
+   "the Treehouse and the Trix",
+   "the Entrance and the Drive",
+   "the Auditorium and the Entrance"
+  ],
+  "at": [
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "On this map, the Treehouse and the Trix are above the Patio."
+ },
+ {
+  "id": "d09",
+  "p": "Where is the Entrance?",
+  "o": [
+   "under the Auditorium",
+   "above the C section",
+   "next to the Treehouse"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "The Entrance is low on the map, under the Auditorium."
+ },
+ {
+  "id": "d10",
+  "p": "Which place is under everything on the map?",
+  "o": [
+   "the Drive",
+   "the C section",
+   "the Trix"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "The Drive is at the very bottom of the map, under everything."
+ },
+ {
+  "id": "d11",
+  "p": "Look at the map. Which place is on your right-hand side?",
+  "o": [
+   "Gym/Court 1",
+   "Gym/Court 2",
+   "the Treehouse"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "Left and right are the sides of the person looking. Gym/Court 1 is on the right."
+ },
+ {
+  "id": "d12",
+  "p": "The Treehouse is on the ___ of the Trix.",
+  "o": [
+   "left",
+   "right",
+   "bottom"
+  ],
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "The Treehouse is on your left hand's side of the Trix: left."
+ },
+ {
+  "id": "d13",
+  "p": "The red pin marks a place on this map. Which place?",
+  "o": [
+   "a Year 2 classroom",
+   "the Auditorium",
+   "the Entrance"
+  ],
+  "at": [
+   "D5"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "A red pin marks a place. Here it marks a Year 2 classroom."
+ },
+ {
+  "id": "d14",
+  "p": "The red pin is near which section?",
+  "o": [
+   "B section",
+   "A section",
+   "C section"
+  ],
+  "at": [
+   "D5",
+   "D6"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "The red pin is at the top of B section, so it is near B section."
+ },
+ {
+  "id": "d15",
+  "p": "What does a red pin do on a map?",
+  "o": [
+   "It marks a place.",
+   "It draws a path.",
+   "It shows the left."
+  ],
+  "at": [
+   "D5"
+  ],
+  "img": null,
+  "ex": "A red pin marks a place on the map."
+ },
+ {
+  "id": "d16",
+  "p": "What kind of map is this?",
+  "o": [
+   "a map of the school",
+   "a map of a city",
+   "a GPS route"
+  ],
+  "at": [
+   "D4"
+  ],
+  "img": "media/cie3/map-school.jpg",
+  "ex": "It shows classrooms, gyms and the Auditorium, so it is a map of the school."
+ },
+ {
+  "id": "d17",
+  "p": "A blue line on the screen shows the way to go. What is it?",
+  "o": [
+   "a GPS route",
+   "a map of the school",
+   "a red pin"
+  ],
+  "at": [
+   "D4"
+  ],
+  "img": null,
+  "ex": "A GPS route shows the way to go with a line on the map."
+ },
+ {
+  "id": "d18",
+  "p": "You want to see all of São Paulo. Which one do you need?",
+  "o": [
+   "a map of a city",
+   "a map of the school",
+   "a red pin"
+  ],
+  "at": [
+   "D4"
+  ],
+  "img": null,
+  "ex": "São Paulo is a city, so we need a map of a city."
+ },
+ {
+  "id": "d19",
+  "p": "Which two are kinds of maps?",
+  "o": [
+   "a city map and a GPS route",
+   "a red pin and a city map",
+   "a red pin and a GPS route"
+  ],
+  "at": [
+   "D4",
+   "D5"
+  ],
+  "img": null,
+  "ex": "City maps and GPS routes are maps. A red pin only marks a place."
+ },
+ {
+  "id": "d20",
+  "p": "When we read maps, we need to pay a lot of attention to…",
+  "o": [
+   "the details and the path",
+   "the colors and the pictures",
+   "the paper and the pen"
+  ],
+  "at": [
+   "D2"
+  ],
+  "img": null,
+  "ex": "Map rule: pay a lot of attention to the details and the path."
+ },
+ {
+  "id": "d21",
+  "p": "On a map, the path is…",
+  "o": [
+   "the way we are going",
+   "the pin on the map",
+   "the name of a place"
+  ],
+  "at": [
+   "D2"
+  ],
+  "img": null,
+  "ex": "Path means way: it is the way we are going."
+ },
+ {
+  "id": "d22",
+  "p": "We might get ___ if we run or don't pay attention.",
+  "o": [
+   "lost",
+   "late",
+   "tired"
+  ],
+  "at": [
+   "D3"
+  ],
+  "img": null,
+  "ex": "If we run or don't pay attention to the map, we might get lost."
+ },
+ {
+  "id": "d23",
+  "p": "Why might we get lost?",
+  "o": [
+   "We run or don't pay attention.",
+   "We look at the map details.",
+   "We look at the path we take."
+  ],
+  "at": [
+   "D3"
+  ],
+  "img": null,
+  "ex": "We might get lost if we run or don't pay attention."
+ },
+ {
+  "id": "p01",
+  "p": "This tower is seen from the...",
+  "o": [
+   "front",
+   "top",
+   "bottom"
+  ],
+  "at": [
+   "P2"
+  ],
+  "img": "media/cie3/view-front.jpg",
+  "ex": "From the front, you stand on the ground and look straight. This photo shows that."
+ },
+ {
+  "id": "p02",
+  "p": "This tower is seen from the...",
+  "o": [
+   "top",
+   "front",
+   "side"
+  ],
+  "at": [
+   "P2"
+  ],
+  "img": "media/cie3/view-top.jpg",
+  "ex": "From the top, you look down and see the ground. This photo shows that."
+ },
+ {
+  "id": "p03",
+  "p": "This tower is seen from the...",
+  "o": [
+   "side",
+   "top",
+   "bottom"
+  ],
+  "at": [
+   "P2"
+  ],
+  "img": "media/cie3/view-side.jpg",
+  "ex": "From the side, you see the whole tower and what is next to it."
+ },
+ {
+  "id": "p04",
+  "p": "This tower is seen from the...",
+  "o": [
+   "bottom",
+   "top",
+   "side"
+  ],
+  "at": [
+   "P2"
+  ],
+  "img": "media/cie3/view-bottom.jpg",
+  "ex": "From the bottom, you look up and the tip is far away."
+ },
+ {
+  "id": "p05",
+  "p": "You stand under the tower and look up. You see it from the...",
+  "o": [
+   "bottom",
+   "top",
+   "front"
+  ],
+  "at": [
+   "P1",
+   "P2"
+  ],
+  "img": null,
+  "ex": "Under the tower and looking up means the view from the bottom."
+ },
+ {
+  "id": "p06",
+  "p": "You go up the tower and look down. You see it from the...",
+  "o": [
+   "top",
+   "bottom",
+   "side"
+  ],
+  "at": [
+   "P1",
+   "P2"
+  ],
+  "img": null,
+  "ex": "Up high and looking down means the view from the top."
+ },
+ {
+  "id": "p07",
+  "p": "You are on the grass. The tower is straight ahead of you. You see it from the...",
+  "o": [
+   "front",
+   "bottom",
+   "top"
+  ],
+  "at": [
+   "P1",
+   "P2"
+  ],
+  "img": null,
+  "ex": "Straight ahead of you, looking straight: that is the view from the front."
+ },
+ {
+  "id": "p08",
+  "p": "You can see the whole tower and the river near it. You see it from the...",
+  "o": [
+   "side",
+   "bottom",
+   "top"
+  ],
+  "at": [
+   "P2"
+  ],
+  "img": "media/cie3/view-side.jpg",
+  "ex": "The side view shows the whole tower and the river near it."
+ },
+ {
+  "id": "p09",
+  "p": "Complete: Our perspective changes depending on ___ we are looking from.",
+  "o": [
+   "where",
+   "when",
+   "why"
+  ],
+  "at": [
+   "P1"
+  ],
+  "img": null,
+  "ex": "Perspective changes depending on WHERE we look from: top, bottom, front or side."
+ },
+ {
+  "id": "p10",
+  "p": "Complete: We can see many things from different ___.",
+  "o": [
+   "positions",
+   "colours",
+   "numbers"
+  ],
+  "at": [
+   "P1"
+  ],
+  "img": null,
+  "ex": "We see things from different positions. Top, bottom, front and side are positions."
+ },
+ {
+  "id": "p11",
+  "p": "Ana looks at the tower from the top. Leo looks from the bottom. It is one tower. Why do they see different things?",
+  "o": [
+   "They look from different positions.",
+   "They look at two different towers.",
+   "They look at it on different days."
+  ],
+  "at": [
+   "P1"
+  ],
+  "img": null,
+  "ex": "Perspective depends on where we look from. Ana and Leo are in different positions."
+ },
+ {
+  "id": "p12",
+  "p": "One object makes these three shadows. What shapes are they?",
+  "o": [
+   "triangle, rectangle, circle",
+   "triangle, square, rectangle",
+   "circle, square, triangle"
+  ],
+  "at": [
+   "P3"
+  ],
+  "img": "media/cie3/view-shadow.jpg",
+  "ex": "One object, three shadows: a triangle, a rectangle and a circle."
+ },
+ {
+  "id": "p13",
+  "p": "What shape is the shadow on the floor?",
+  "o": [
+   "a circle",
+   "a triangle",
+   "a rectangle"
+  ],
+  "at": [
+   "P3"
+  ],
+  "img": "media/cie3/view-shadow.jpg",
+  "ex": "The floor shows the shadow from the bottom of the object: a circle."
+ },
+ {
+  "id": "p14",
+  "p": "What shape is the shadow on the left wall?",
+  "o": [
+   "a triangle",
+   "a circle",
+   "a rectangle"
+  ],
+  "at": [
+   "P3"
+  ],
+  "img": "media/cie3/view-shadow.jpg",
+  "ex": "The shadow on the left wall has three corners, so it is a triangle."
+ },
+ {
+  "id": "p15",
+  "p": "What shape is the shadow on the right wall?",
+  "o": [
+   "a rectangle",
+   "a triangle",
+   "a circle"
+  ],
+  "at": [
+   "P3"
+  ],
+  "img": "media/cie3/view-shadow.jpg",
+  "ex": "The shadow on the right wall has four corners, so it is a rectangle."
+ },
+ {
+  "id": "p16",
+  "p": "There is one object, but there are three different shadows. Why?",
+  "o": [
+   "Each side of it is different.",
+   "There are three objects there.",
+   "The object changes its shape."
+  ],
+  "at": [
+   "P3"
+  ],
+  "img": "media/cie3/view-shadow.jpg",
+  "ex": "The same object makes different shadows from each side. Each side gives another shape."
+ },
+ {
+  "id": "p17",
+  "p": "Complete: People are not right or wrong. They just have a different ___ of things.",
+  "o": [
+   "view",
+   "shape",
+   "colour"
+  ],
+  "at": [
+   "P4"
+  ],
+  "img": null,
+  "ex": "The giraffe sentence says people just have a different view of things."
+ },
+ {
+  "id": "p18",
+  "p": "The giraffe's head is up high. The woman is down low. Why do they see things differently?",
+  "o": [
+   "They look from different positions.",
+   "The giraffe is right about it.",
+   "The woman is right about it."
+  ],
+  "at": [
+   "P1",
+   "P4"
+  ],
+  "img": "media/cie3/view-giraffe.jpg",
+  "ex": "Nobody is wrong here. They look from different positions, so they have different views."
+ },
+ {
+  "id": "p19",
+  "p": "Ana sees a triangle shadow. Leo sees a circle shadow. It is the same object. What can we say?",
+  "o": [
+   "They have different views.",
+   "Ana is right, Leo is wrong.",
+   "Leo is right, Ana is wrong."
+  ],
+  "at": [
+   "P3",
+   "P4"
+  ],
+  "img": null,
+  "ex": "People are not right or wrong. Ana and Leo just have different views."
+ }
+]

@@ -1,0 +1,495 @@
+[
+ {
+  "id": "n01",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n02",
+  "decisao": "ADAPTA",
+  "regras": [
+   "C"
+  ],
+  "motivo": "Os dois distratores usam 'never' (absoluto).",
+  "p": "Which sentence is true about wind and water?",
+  "p_pt": "Qual frase é verdadeira sobre vento e água?",
+  "o": [
+   "Wind and water can both help us and harm us.",
+   "Wind can help us, but water can only harm us.",
+   "Water can help us, but wind can only harm us."
+  ],
+  "o_pt": [
+   "Vento e água podem nos ajudar e nos prejudicar.",
+   "O vento pode ajudar, mas a água só prejudica.",
+   "A água pode ajudar, mas o vento só prejudica."
+  ],
+  "ex": "Wind and water can be helpful and harmful.",
+  "ex_pt": "Vento e água podem ser úteis e prejudiciais."
+ },
+ {
+  "id": "n03",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n04",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n05",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n06",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n07",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n08",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n09",
+  "decisao": "ADAPTA",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Figura do tornado mostra árvores dobradas e folhas voando: 'strong winds' é defensável.",
+  "p": "What is this? Helpful or harmful?",
+  "p_pt": "O que é isto? Útil ou prejudicial?",
+  "o": [
+   "harmful: a tornado",
+   "harmful: a tsunami",
+   "harmful: a flood"
+  ],
+  "o_pt": [
+   "prejudicial: um tornado",
+   "prejudicial: um tsunami",
+   "prejudicial: uma enchente"
+  ],
+  "ex": "A tornado is wind that spins in a tall funnel. It is harmful.",
+  "ex_pt": "Tornado é vento girando num funil alto. É prejudicial."
+ },
+ {
+  "id": "n10",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n11",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n12",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n13",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n14",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n15",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n16",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n17",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distratores 'new seeds' e 'strong winds' fracos/fora do que turbina faz.",
+  "p": "What do these wind turbines make?",
+  "p_pt": "O que estas turbinas de vento produzem?",
+  "o": [
+   "electricity",
+   "sand dunes",
+   "rock arches"
+  ],
+  "o_pt": [
+   "eletricidade",
+   "dunas de areia",
+   "arcos de rocha"
+  ],
+  "ex": "Wind turns the turbines, and the turbines make electricity.",
+  "ex_pt": "O vento gira as turbinas e elas fazem eletricidade."
+ },
+ {
+  "id": "n18",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Areia não é força natural: distratores eliminados por sentido.",
+  "p": "Which natural force(s) can make energy?",
+  "p_pt": "Qual(is) força(s) natural(is) pode(m) fazer energia?",
+  "o": [
+   "wind and water",
+   "only wind",
+   "only water"
+  ],
+  "o_pt": [
+   "vento e água",
+   "só o vento",
+   "só a água"
+  ],
+  "ex": "Wind turbines and dams both make energy.",
+  "ex_pt": "Turbinas de vento e represas fazem energia."
+ },
+ {
+  "id": "n19",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n20",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n21",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distrator 'rain' é piada.",
+  "p": "You blow bubbles. What does your breath make?",
+  "p_pt": "Você sopra bolhas. O que o seu sopro faz?",
+  "o": [
+   "wind",
+   "water",
+   "a wave"
+  ],
+  "o_pt": [
+   "vento",
+   "água",
+   "uma onda"
+  ],
+  "ex": "Wind is air in motion. Blowing bubbles moves air.",
+  "ex_pt": "Vento é ar em movimento. Soprar bolhas move o ar."
+ },
+ {
+  "id": "n22",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Kite voa com vento é bom senso de vida diária."
+ },
+ {
+  "id": "n23",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n24",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n25",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n26",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n27",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n28",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distratores 'wind' e 'air' não são coisas carregadas.",
+  "p": "Rain falls on the ground. What can it carry away?",
+  "p_pt": "A chuva cai no chão. O que ela pode carregar?",
+  "o": [
+   "soil",
+   "dunes",
+   "canyons"
+  ],
+  "o_pt": [
+   "terra",
+   "dunas",
+   "cânions"
+  ],
+  "ex": "Rain is moving water. It can carry soil away.",
+  "ex_pt": "Chuva é água em movimento. Ela leva a terra."
+ },
+ {
+  "id": "n29",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "n30",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distratores 'sand dunes' e 'strong winds' piada.",
+  "p": "A dam uses moving water. What does it make?",
+  "p_pt": "Uma represa usa água em movimento. O que ela faz?",
+  "o": [
+   "electricity",
+   "valleys",
+   "canyons"
+  ],
+  "o_pt": [
+   "eletricidade",
+   "vales",
+   "cânions"
+  ],
+  "ex": "Dams use moving water to make electricity.",
+  "ex_pt": "Represas usam água em movimento para fazer eletricidade."
+ },
+ {
+  "id": "n31",
+  "decisao": "ADAPTA",
+  "regras": [
+   "G",
+   "A"
+  ],
+  "motivo": "Certa é a única com a palavra do enunciado (G); distrator dunas é piada.",
+  "p": "How do farmers use water?",
+  "p_pt": "Como os fazendeiros usam a água?",
+  "o": [
+   "to water their fields",
+   "to make electricity",
+   "to sail ships"
+  ],
+  "o_pt": [
+   "para regar os campos",
+   "para fazer eletricidade",
+   "para navegar navios"
+  ],
+  "ex": "Farmers use water to water their fields.",
+  "ex_pt": "Fazendeiros usam água para regar os campos."
+ },
+ {
+  "id": "n32",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Beber/cozinhar/lavar = água é bom senso trivial."
+ },
+ {
+  "id": "n33",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Navio viaja na água é bom senso trivial."
+ },
+ {
+  "id": "n34",
+  "decisao": "EXCLUI",
+  "regras": [
+   "B"
+  ],
+  "motivo": "Peixe mora no rio é bom senso; distratores com bichos que também vivem perto de rio."
+ },
+ {
+  "id": "n35",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distratores absurdos (areia e rocha, dunas e cânions).",
+  "p": "We need to protect our...",
+  "p_pt": "Precisamos proteger nosso(a)...",
+  "o": [
+   "air and water",
+   "only air",
+   "only water"
+  ],
+  "o_pt": [
+   "ar e água",
+   "só o ar",
+   "só a água"
+  ],
+  "ex": "Wind is moving air. We protect both air and water.",
+  "ex_pt": "Vento é ar em movimento. Protegemos ar e água."
+ },
+ {
+  "id": "n36",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m01",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m02",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m03",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m04",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m05",
+  "decisao": "ADAPTA",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Peixe também pula: bicho faz mais de uma das opções.",
+  "p": "Which animal jumps?",
+  "p_pt": "Qual animal pula?",
+  "o": [
+   "a kangaroo",
+   "a snake",
+   "a bird"
+  ],
+  "o_pt": [
+   "um canguru",
+   "uma cobra",
+   "um pássaro"
+  ],
+  "ex": "A kangaroo moves by jumping with strong back legs.",
+  "ex_pt": "O canguru pula com as fortes pernas de trás."
+ },
+ {
+  "id": "m06",
+  "decisao": "ADAPTA",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Rã também sobe/rasteja: 'crawls' ambíguo.",
+  "p": "How does a frog move on land?",
+  "p_pt": "Como a rã se move em terra?",
+  "o": [
+   "It jumps.",
+   "It flies.",
+   "It slides."
+  ],
+  "o_pt": [
+   "Ela pula.",
+   "Ela voa.",
+   "Ela desliza."
+  ],
+  "ex": "A frog and a kangaroo move the same way. They jump.",
+  "ex_pt": "Rã e canguru se movem igual: pulam."
+ },
+ {
+  "id": "m07",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m08",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m09",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m10",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m11",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m12",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m13",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m14",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m15",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m16",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "m17",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distratores absurdos (escalar/sentar na bola).",
+  "p": "My hand closes fast around the ball. I…",
+  "p_pt": "Minha mão fecha rápido em volta da bola. Eu…",
+  "o": [
+   "grab it",
+   "lift it",
+   "touch it"
+  ],
+  "o_pt": [
+   "agarro",
+   "levanto",
+   "toco"
+  ],
+  "ex": "Grab is a hand movement. The hand closes and holds.",
+  "ex_pt": "Agarrar é movimento de mão: a mão fecha e segura."
+ },
+ {
+  "id": "m18",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distratores absurdos (escalar/sentar na caixa).",
+  "p": "My hands move the box up. I…",
+  "p_pt": "Minhas mãos levam a caixa para cima. Eu…",
+  "o": [
+   "lift it",
+   "grab it",
+   "touch it"
+  ],
+  "o_pt": [
+   "levanto",
+   "agarro",
+   "toco"
+  ],
+  "ex": "Lift is a hand movement. Hands move a thing up.",
+  "ex_pt": "Levantar é movimento de mão: leva a coisa para cima."
+ },
+ {
+  "id": "m19",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distratores absurdos (escalar/sentar no gato).",
+  "p": "My fingers feel the soft cat. I…",
+  "p_pt": "Meus dedos sentem o gato macio. Eu…",
+  "o": [
+   "touch it",
+   "lift it",
+   "grab it"
+  ],
+  "o_pt": [
+   "toco",
+   "levanto",
+   "agarro"
+  ],
+  "ex": "Touch is a hand movement. We touch with our fingers.",
+  "ex_pt": "Tocar é movimento de mão: tocamos com os dedos."
+ },
+ {
+  "id": "m20",
+  "decisao": "APROVA"
+ }
+]

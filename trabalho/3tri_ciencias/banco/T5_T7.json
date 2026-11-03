@@ -1,0 +1,2191 @@
+[
+ {
+  "id": "o01",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O1"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It bounces.",
+   "It swings.",
+   "It slides."
+  ],
+  "o_pt": [
+   "Quica.",
+   "Balança.",
+   "Desliza."
+  ],
+  "dica": "Siga as linhas embaixo da bola: elas mostram o caminho.",
+  "dica_en": "Follow the lines under the ball. They show its path.",
+  "ex": "To bounce is to go up and down after hitting a surface. This ball bounces.",
+  "ex_pt": "Quicar é subir e descer depois de bater numa superfície. Esta bola quica.",
+  "img": "media/cie3/obj-bounce-soccer-ball.jpg"
+ },
+ {
+  "id": "o02",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O1"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It bounces.",
+   "It swings.",
+   "It slides."
+  ],
+  "o_pt": [
+   "Quica.",
+   "Balança.",
+   "Desliza."
+  ],
+  "dica": "A bola bateu no chão. O que ela fez depois?",
+  "dica_en": "The ball hit the ground. What did it do next?",
+  "ex": "The ball hits the ground, then goes up and down. That is to bounce.",
+  "ex_pt": "A bola bate no chão, depois sobe e desce. Isso é quicar.",
+  "img": "media/cie3/obj-bounce-tennis-ball.jpg"
+ },
+ {
+  "id": "o03",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O1"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It bounces.",
+   "It swings.",
+   "It slides."
+  ],
+  "o_pt": [
+   "Quica.",
+   "Balança.",
+   "Desliza."
+  ],
+  "dica": "As linhas sobem e descem. Qual palavra combina?",
+  "dica_en": "The lines go up and down. Which word matches?",
+  "ex": "The basketball goes up and down after hitting the floor. It bounces.",
+  "ex_pt": "A bola de basquete sobe e desce depois de bater no chão. Ela quica.",
+  "img": "media/cie3/obj-bounce-basketball.jpg"
+ },
+ {
+  "id": "o04",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O2"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como ele se move?",
+  "o": [
+   "It flies.",
+   "It spins.",
+   "It swings."
+  ],
+  "o_pt": [
+   "Ele voa.",
+   "Ele gira.",
+   "Ele balança."
+  ],
+  "dica": "Onde o avião está na figura?",
+  "dica_en": "Where is the airplane in the picture?",
+  "ex": "To fly is to move through the air. The airplane is in the air.",
+  "ex_pt": "Voar é se mover pelo ar. O avião está no ar.",
+  "img": "media/cie3/obj-fly-airplane.jpg"
+ },
+ {
+  "id": "o05",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O2"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It flies.",
+   "It rolls.",
+   "It bounces."
+  ],
+  "o_pt": [
+   "Voa.",
+   "Rola.",
+   "Quica."
+  ],
+  "dica": "Olhe em volta do balão: o que você vê?",
+  "dica_en": "Look around the balloon. What do you see?",
+  "ex": "To fly is to move through the air. The hot air balloon flies.",
+  "ex_pt": "Voar é se mover pelo ar. O balão de ar quente voa.",
+  "img": "media/cie3/obj-fly-balloon.jpg"
+ },
+ {
+  "id": "o06",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O2"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It flies.",
+   "It rolls.",
+   "It bounces."
+  ],
+  "o_pt": [
+   "Voa.",
+   "Rola.",
+   "Quica."
+  ],
+  "dica": "A pipa está no chão ou no céu?",
+  "dica_en": "Is the kite on the ground or in the sky?",
+  "ex": "To fly is to move through the air. The kite is in the air, so it flies.",
+  "ex_pt": "Voar é se mover pelo ar. A pipa está no ar, então voa.",
+  "img": "media/cie3/obj-fly-kite.jpg"
+ },
+ {
+  "id": "o07",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O3"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It rolls.",
+   "It swings.",
+   "It flies."
+  ],
+  "o_pt": [
+   "Rola.",
+   "Balança.",
+   "Voa."
+  ],
+  "dica": "Pense em como a roda anda pela rua.",
+  "dica_en": "Think about how a wheel goes along the road.",
+  "ex": "To roll is to move by turning over and over. The wheel rolls.",
+  "ex_pt": "Rolar é se mover virando e virando. A roda rola.",
+  "img": "media/cie3/obj-roll-wheel.jpg"
+ },
+ {
+  "id": "o08",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O3"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It rolls.",
+   "It swings.",
+   "It flies."
+  ],
+  "o_pt": [
+   "Rola.",
+   "Balança.",
+   "Voa."
+  ],
+  "dica": "A lata está deitada. As linhas mostram que ela vai virando.",
+  "dica_en": "The can is on its side. The lines show it is turning.",
+  "ex": "The can lies on its side and moves by turning over and over. It rolls.",
+  "ex_pt": "A lata fica deitada e se move virando e virando. Ela rola.",
+  "img": "media/cie3/obj-roll-can.jpg"
+ },
+ {
+  "id": "o09",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O3"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It rolls.",
+   "It swings.",
+   "It slides."
+  ],
+  "o_pt": [
+   "Rola.",
+   "Balança.",
+   "Desliza."
+  ],
+  "dica": "As linhas ficam ao lado da bola, não embaixo dela.",
+  "dica_en": "The lines are next to the ball, not under it.",
+  "ex": "The lines show the ball turning over and over on the ground. It rolls.",
+  "ex_pt": "As linhas mostram a bola virando e virando no chão. Ela rola.",
+  "img": "media/cie3/obj-roll-beach-ball.jpg"
+ },
+ {
+  "id": "o10",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O4"
+  ],
+  "p": "A child goes down this toy. How does the child move?",
+  "p_pt": "Uma criança desce neste brinquedo. Como a criança se move?",
+  "o": [
+   "The child slides.",
+   "The child bounces.",
+   "The child spins."
+  ],
+  "o_pt": [
+   "A criança desliza.",
+   "A criança quica.",
+   "A criança gira."
+  ],
+  "dica": "O brinquedo e o movimento têm o mesmo nome.",
+  "dica_en": "The toy and the movement have the same name.",
+  "ex": "The toy is a slide. The child moves smoothly along it, so the child slides.",
+  "ex_pt": "O brinquedo é o escorregador. A criança se move suave nele, então desliza.",
+  "img": "media/cie3/obj-slide-slide.jpg"
+ },
+ {
+  "id": "o11",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O4"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It slides.",
+   "It rolls.",
+   "It swings."
+  ],
+  "o_pt": [
+   "Desliza.",
+   "Rola.",
+   "Balança."
+  ],
+  "dica": "O cubo de gelo continua em pé, sem virar. A seta mostra o caminho.",
+  "dica_en": "The ice cube stays the same way up. The arrow shows the path.",
+  "ex": "To slide is to move smoothly along a surface. The ice cube slides.",
+  "ex_pt": "Deslizar é se mover suave sobre uma superfície. O cubo de gelo desliza.",
+  "img": "media/cie3/obj-slide-ice-cube.jpg"
+ },
+ {
+  "id": "o12",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O4"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It slides.",
+   "It rolls.",
+   "It swings."
+  ],
+  "o_pt": [
+   "Desliza.",
+   "Rola.",
+   "Balança."
+  ],
+  "dica": "O livro está sobre a mesa e a seta vai reto.",
+  "dica_en": "The book is on the table and the arrow goes straight.",
+  "ex": "The book moves smoothly along the table. It slides.",
+  "ex_pt": "O livro se move suave sobre a mesa. Ele desliza.",
+  "img": "media/cie3/obj-slide-book.jpg"
+ },
+ {
+  "id": "o13",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O5"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It spins.",
+   "It rolls.",
+   "It swings."
+  ],
+  "o_pt": [
+   "Gira.",
+   "Rola.",
+   "Balança."
+  ],
+  "dica": "A seta dá a volta no cabo. O catavento sai do lugar?",
+  "dica_en": "The arrow goes around the stick. Does the pinwheel leave its place?",
+  "ex": "To spin is to turn around and around. The pinwheel spins.",
+  "ex_pt": "Girar é dar voltas e voltas. O catavento gira.",
+  "img": "media/cie3/obj-spin-pinwheel.jpg"
+ },
+ {
+  "id": "o14",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O5"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It spins.",
+   "It rolls.",
+   "It bounces."
+  ],
+  "o_pt": [
+   "Gira.",
+   "Rola.",
+   "Quica."
+  ],
+  "dica": "O ventilador fica preso no teto. O que as pás fazem?",
+  "dica_en": "The fan stays on the ceiling. What do its blades do?",
+  "ex": "The fan stays in one place and turns around and around. It spins.",
+  "ex_pt": "O ventilador fica no mesmo lugar e dá voltas e voltas. Ele gira.",
+  "img": "media/cie3/obj-spin-fan.jpg"
+ },
+ {
+  "id": "o15",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O5"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It spins.",
+   "It swings.",
+   "It flies."
+  ],
+  "o_pt": [
+   "Gira.",
+   "Balança.",
+   "Voa."
+  ],
+  "dica": "Veja a seta em volta do pião.",
+  "dica_en": "See the arrow around the top.",
+  "ex": "To spin is to turn around and around. The top spins.",
+  "ex_pt": "Girar é dar voltas e voltas. O pião gira.",
+  "img": "media/cie3/obj-spin-top.jpg"
+ },
+ {
+  "id": "o16",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O6"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It swings.",
+   "It spins.",
+   "It bounces."
+  ],
+  "o_pt": [
+   "Balança.",
+   "Gira.",
+   "Quica."
+  ],
+  "dica": "As setas apontam para os dois lados: vai e volta.",
+  "dica_en": "The arrows point to both sides: it goes and comes back.",
+  "ex": "To swing is to move back and forth like a pendulum. This toy swings.",
+  "ex_pt": "Balançar é ir e voltar como um pêndulo. Este brinquedo balança.",
+  "img": "media/cie3/obj-swing-swing.jpg"
+ },
+ {
+  "id": "o17",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O6"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como isso se move?",
+  "o": [
+   "It swings.",
+   "It rolls.",
+   "It bounces."
+  ],
+  "o_pt": [
+   "Balança.",
+   "Rola.",
+   "Quica."
+  ],
+  "dica": "O vaso está pendurado. Para onde as setas apontam?",
+  "dica_en": "The pot is hanging. Where do the arrows point?",
+  "ex": "The hanging plant moves back and forth like a pendulum. It swings.",
+  "ex_pt": "O vaso pendurado vai e volta como um pêndulo. Ele balança.",
+  "img": "media/cie3/obj-swing-plant.jpg"
+ },
+ {
+  "id": "o18",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O6"
+  ],
+  "p": "How does it move?",
+  "p_pt": "Como ela se move?",
+  "o": [
+   "It swings.",
+   "It spins.",
+   "It slides."
+  ],
+  "o_pt": [
+   "Ela balança (abre e fecha).",
+   "Ela gira.",
+   "Ela desliza."
+  ],
+  "dica": "A porta abre e fecha: vai e volta.",
+  "dica_en": "The door opens and closes: it goes and comes back.",
+  "ex": "The door moves back and forth. So the door swings.",
+  "ex_pt": "A porta vai e volta. Então ela balança.",
+  "img": "media/cie3/obj-swing-door.jpg"
+ },
+ {
+  "id": "o19",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O1"
+  ],
+  "p": "To ___ means to go up and down after hitting a surface.",
+  "p_pt": "___ significa subir e descer depois de bater numa superfície.",
+  "o": [
+   "bounce",
+   "fly",
+   "slide"
+  ],
+  "o_pt": [
+   "quicar",
+   "voar",
+   "deslizar"
+  ],
+  "dica": "Pense na bola de basquete.",
+  "dica_en": "Think about a basketball.",
+  "ex": "To bounce means to go up and down after hitting a surface, like a basketball.",
+  "ex_pt": "Quicar é subir e descer depois de bater numa superfície, como a bola de basquete."
+ },
+ {
+  "id": "o20",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O2"
+  ],
+  "p": "To ___ means to move through the air.",
+  "p_pt": "___ significa se mover pelo ar.",
+  "o": [
+   "fly",
+   "slide",
+   "roll"
+  ],
+  "o_pt": [
+   "voar",
+   "deslizar",
+   "rolar"
+  ],
+  "dica": "Pense no avião e na pipa.",
+  "dica_en": "Think about an airplane and a kite.",
+  "ex": "To fly means to move through the air, like an airplane.",
+  "ex_pt": "Voar é se mover pelo ar, como o avião."
+ },
+ {
+  "id": "o21",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O3"
+  ],
+  "p": "To ___ means to move by turning over and over.",
+  "p_pt": "___ significa se mover virando e virando.",
+  "o": [
+   "roll",
+   "spin",
+   "swing"
+  ],
+  "o_pt": [
+   "rolar",
+   "girar",
+   "balançar"
+  ],
+  "dica": "Pense na roda indo pela rua, de um lugar para outro.",
+  "dica_en": "Think about a wheel going along the road, from one place to another.",
+  "ex": "To roll means to move by turning over and over, like a wheel.",
+  "ex_pt": "Rolar é se mover virando e virando, como a roda."
+ },
+ {
+  "id": "o22",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O4"
+  ],
+  "p": "To ___ means to move smoothly along a surface.",
+  "p_pt": "___ significa se mover suave sobre uma superfície.",
+  "o": [
+   "slide",
+   "roll",
+   "swing"
+  ],
+  "o_pt": [
+   "deslizar",
+   "rolar",
+   "balançar"
+  ],
+  "dica": "Pense no cubo de gelo.",
+  "dica_en": "Think about an ice cube.",
+  "ex": "To slide means to move smoothly along a surface, like an ice cube.",
+  "ex_pt": "Deslizar é se mover suave sobre uma superfície, como o cubo de gelo."
+ },
+ {
+  "id": "o23",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O5"
+  ],
+  "p": "To ___ means to turn around and around.",
+  "p_pt": "___ significa dar voltas e voltas.",
+  "o": [
+   "spin",
+   "roll",
+   "swing"
+  ],
+  "o_pt": [
+   "girar",
+   "rolar",
+   "balançar"
+  ],
+  "dica": "Pense no pião.",
+  "dica_en": "Think about a top.",
+  "ex": "To spin means to turn around and around, like a top.",
+  "ex_pt": "Girar é dar voltas e voltas, como o pião."
+ },
+ {
+  "id": "o24",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O6"
+  ],
+  "p": "To ___ means to move back and forth like a pendulum.",
+  "p_pt": "___ significa ir e voltar como um pêndulo.",
+  "o": [
+   "swing",
+   "spin",
+   "bounce"
+  ],
+  "o_pt": [
+   "balançar",
+   "girar",
+   "quicar"
+  ],
+  "dica": "Pense no brinquedo do parquinho que vai e volta.",
+  "dica_en": "Think about the park toy that goes and comes back.",
+  "ex": "To swing means to move back and forth like a pendulum, like a door.",
+  "ex_pt": "Balançar é ir e voltar como um pêndulo, como a porta."
+ },
+ {
+  "id": "o25",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O3",
+   "O5"
+  ],
+  "p": "To roll means to…",
+  "p_pt": "Rolar significa…",
+  "o": [
+   "move by turning over and over",
+   "turn around and around",
+   "move back and forth"
+  ],
+  "o_pt": [
+   "se mover virando e virando",
+   "dar voltas e voltas",
+   "ir e voltar"
+  ],
+  "dica": "Rolar faz a coisa chegar a outro lugar.",
+  "dica_en": "Rolling takes a thing to another place.",
+  "ex": "To roll is to move by turning over and over. To spin is to turn around and around.",
+  "ex_pt": "Rolar é se mover virando e virando. Girar é dar voltas e voltas."
+ },
+ {
+  "id": "o26",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O4"
+  ],
+  "p": "To slide means to…",
+  "p_pt": "Deslizar significa…",
+  "o": [
+   "move smoothly along a surface",
+   "move through the air",
+   "go up and down"
+  ],
+  "o_pt": [
+   "se mover suave sobre uma superfície",
+   "se mover pelo ar",
+   "subir e descer"
+  ],
+  "dica": "Slide também é o nome de um brinquedo. Como você desce nele?",
+  "dica_en": "Slide is also the name of a toy. How do you go down it?",
+  "ex": "To slide is to move smoothly along a surface. A book on a table can slide.",
+  "ex_pt": "Deslizar é se mover suave sobre uma superfície. Um livro na mesa pode deslizar."
+ },
+ {
+  "id": "o27",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O1"
+  ],
+  "p": "Which one bounces?",
+  "p_pt": "Qual destes quica?",
+  "o": [
+   "a basketball",
+   "a kite",
+   "a fan"
+  ],
+  "o_pt": [
+   "uma bola de basquete",
+   "uma pipa",
+   "um ventilador"
+  ],
+  "dica": "Qual sobe e desce depois de bater no chão?",
+  "dica_en": "Which one goes up and down after it hits the ground?",
+  "ex": "To bounce is to go up and down after hitting a surface. A basketball bounces.",
+  "ex_pt": "Quicar é subir e descer depois de bater numa superfície. A bola de basquete quica."
+ },
+ {
+  "id": "o28",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O4"
+  ],
+  "p": "Which one slides?",
+  "p_pt": "Qual destes desliza?",
+  "o": [
+   "an ice cube",
+   "a pinwheel",
+   "a kite"
+  ],
+  "o_pt": [
+   "um cubo de gelo",
+   "um catavento",
+   "uma pipa"
+  ],
+  "dica": "Qual se move suave sobre uma superfície?",
+  "dica_en": "Which one moves smoothly along a surface?",
+  "ex": "To slide is to move smoothly along a surface. An ice cube slides.",
+  "ex_pt": "Deslizar é se mover suave sobre uma superfície. O cubo de gelo desliza."
+ },
+ {
+  "id": "o29",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O6"
+  ],
+  "p": "A swing, a hanging plant and a door all…",
+  "p_pt": "Um balanço, uma planta pendurada e uma porta todos…",
+  "o": [
+   "swing",
+   "spin",
+   "slide"
+  ],
+  "o_pt": [
+   "balançam",
+   "giram",
+   "deslizam"
+  ],
+  "dica": "Os três vão e voltam.",
+  "dica_en": "All three go and come back.",
+  "ex": "To swing is to move back and forth. All three move back and forth.",
+  "ex_pt": "Balançar é ir e vir. Os três vão e vêm."
+ },
+ {
+  "id": "o30",
+  "tema": "objects",
+  "tipo": "leitura",
+  "at": [
+   "O5",
+   "O3"
+  ],
+  "p": "It turns around and around. It stays in one place. What does it do?",
+  "p_pt": "Dá voltas e voltas. Fica no mesmo lugar. O que ele faz?",
+  "o": [
+   "It spins.",
+   "It rolls.",
+   "It slides."
+  ],
+  "o_pt": [
+   "Gira.",
+   "Rola.",
+   "Desliza."
+  ],
+  "dica": "Se sai do lugar é uma palavra; se fica no lugar é outra.",
+  "dica_en": "If it leaves its place, it is one word. If it stays, it is another.",
+  "ex": "To spin is to turn around and around. A spinning thing stays in one place.",
+  "ex_pt": "Girar é dar voltas e voltas. O que gira fica no mesmo lugar."
+ },
+ {
+  "id": "o31",
+  "tema": "objects",
+  "tipo": "leitura",
+  "at": [
+   "O3",
+   "O5"
+  ],
+  "p": "It turns over and over. It goes to a new place. What does it do?",
+  "p_pt": "Vira e vira. Vai para um lugar novo. O que ele faz?",
+  "o": [
+   "It rolls.",
+   "It spins.",
+   "It swings."
+  ],
+  "o_pt": [
+   "Rola.",
+   "Gira.",
+   "Balança."
+  ],
+  "dica": "Pense na roda que vai embora pela rua.",
+  "dica_en": "Think about a wheel going away along the road.",
+  "ex": "To roll is to move by turning over and over. A rolling thing goes to a new place.",
+  "ex_pt": "Rolar é se mover virando e virando. O que rola vai para um lugar novo."
+ },
+ {
+  "id": "o32",
+  "tema": "objects",
+  "tipo": "leitura",
+  "at": [
+   "O6",
+   "O5"
+  ],
+  "p": "It moves back and forth like a pendulum. It does not turn around. What does it do?",
+  "p_pt": "Vai e volta como um pêndulo. Não dá voltas. O que ele faz?",
+  "o": [
+   "It swings.",
+   "It spins.",
+   "It rolls."
+  ],
+  "o_pt": [
+   "Balança.",
+   "Gira.",
+   "Rola."
+  ],
+  "dica": "Pense no brinquedo do parquinho que vai e volta.",
+  "dica_en": "Think about the park toy that goes and comes back.",
+  "ex": "To swing is to move back and forth. To spin is to turn around and around.",
+  "ex_pt": "Balançar é ir e voltar. Girar é dar voltas e voltas."
+ },
+ {
+  "id": "o33",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O7",
+   "O1"
+  ],
+  "p": "Look at the lines. Which way does this ball move?",
+  "p_pt": "Olhe as linhas. Em que direção esta bola se move?",
+  "o": [
+   "up and down",
+   "back and forth",
+   "round and round"
+  ],
+  "o_pt": [
+   "para cima e para baixo",
+   "para frente e para trás",
+   "em voltas e voltas"
+  ],
+  "dica": "Pense no que uma bola faz ao bater no chão.",
+  "dica_en": "Think about what a ball does when it hits the floor.",
+  "ex": "Things move in different directions. A bouncing ball moves up and down.",
+  "ex_pt": "As coisas se movem em direções diferentes. A bola que quica sobe e desce.",
+  "img": "media/cie3/obj-bounce-basketball.jpg"
+ },
+ {
+  "id": "o34",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O7",
+   "O5"
+  ],
+  "p": "Look at the arrow. Which way does this top move?",
+  "p_pt": "Olhe a seta. Em que direção este pião se move?",
+  "o": [
+   "round and round",
+   "up and down",
+   "back and forth"
+  ],
+  "o_pt": [
+   "em voltas e voltas",
+   "para cima e para baixo",
+   "para frente e para trás"
+  ],
+  "dica": "A seta dá a volta no pião.",
+  "dica_en": "The arrow goes around the top.",
+  "ex": "Things move in different directions. A spinning top moves round and round.",
+  "ex_pt": "As coisas se movem em direções diferentes. O pião que gira anda em voltas e voltas.",
+  "img": "media/cie3/obj-spin-top.jpg"
+ },
+ {
+  "id": "o35",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O7",
+   "O6"
+  ],
+  "p": "Look at the arrows. Which way does this swing move?",
+  "p_pt": "Olhe as setas. Em que direção este balanço se move?",
+  "o": [
+   "back and forth",
+   "up and down",
+   "round and round"
+  ],
+  "o_pt": [
+   "para frente e para trás",
+   "para cima e para baixo",
+   "em voltas e voltas"
+  ],
+  "dica": "Uma seta aponta para cada lado.",
+  "dica_en": "One arrow points to each side.",
+  "ex": "Things move in different directions. A swing moves back and forth.",
+  "ex_pt": "As coisas se movem em direções diferentes. O balanço vai para frente e para trás.",
+  "img": "media/cie3/obj-swing-swing.jpg"
+ },
+ {
+  "id": "o36",
+  "tema": "objects",
+  "tipo": "rapida",
+  "at": [
+   "O7",
+   "O6"
+  ],
+  "p": "Look at the arrows. Which way does this plant move?",
+  "p_pt": "Olhe as setas. Em que direção esta planta se move?",
+  "o": [
+   "back and forth",
+   "up and down",
+   "round and round"
+  ],
+  "o_pt": [
+   "para frente e para trás",
+   "para cima e para baixo",
+   "em voltas e voltas"
+  ],
+  "dica": "Ela está pendurada, como um pêndulo.",
+  "dica_en": "It is hanging, like a pendulum.",
+  "ex": "Things move in different directions. A hanging plant moves back and forth.",
+  "ex_pt": "As coisas se movem em direções diferentes. O vaso pendurado vai e volta.",
+  "img": "media/cie3/obj-swing-plant.jpg"
+ },
+ {
+  "id": "o37",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O7"
+  ],
+  "p": "Up and down, back and forth, round and round. These words tell us the…",
+  "p_pt": "Para cima e para baixo, para frente e para trás, em voltas. Essas palavras dizem a…",
+  "o": [
+   "direction",
+   "speed",
+   "surface"
+  ],
+  "o_pt": [
+   "direção",
+   "velocidade",
+   "superfície"
+  ],
+  "dica": "Eles dizem PARA ONDE a coisa vai.",
+  "dica_en": "They tell WHERE the thing goes.",
+  "ex": "Things move in different directions: back and forth, up and down, round and round.",
+  "ex_pt": "As coisas se movem em direções diferentes: frente e trás, cima e baixo, voltas e voltas."
+ },
+ {
+  "id": "o38",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O8"
+  ],
+  "p": "Things can move at different speeds. They can move…",
+  "p_pt": "As coisas podem se mover em velocidades diferentes. Elas podem se mover…",
+  "o": [
+   "slow or fast",
+   "up and down",
+   "back and forth"
+  ],
+  "o_pt": [
+   "devagar ou rápido",
+   "para cima e para baixo",
+   "para frente e para trás"
+  ],
+  "dica": "Velocidade diz se a coisa demora ou não.",
+  "dica_en": "Speed tells if the thing takes a long time or not.",
+  "ex": "Speed is how quickly a thing moves. Things can move slow or fast.",
+  "ex_pt": "Velocidade é a rapidez com que algo se move. As coisas podem ir devagar ou rápido."
+ },
+ {
+  "id": "o39",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O8"
+  ],
+  "p": "Slow and fast tell us the… of a thing.",
+  "p_pt": "Devagar e rápido dizem a… de uma coisa.",
+  "o": [
+   "speed",
+   "direction",
+   "surface"
+  ],
+  "o_pt": [
+   "velocidade",
+   "direção",
+   "superfície"
+  ],
+  "dica": "Diz com que rapidez a coisa vai, não para onde.",
+  "dica_en": "It tells how quickly the thing goes, not where.",
+  "ex": "Things move at different speeds. Slow and fast are speeds.",
+  "ex_pt": "As coisas se movem em velocidades diferentes. Devagar e rápido são velocidades."
+ },
+ {
+  "id": "m01",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M3"
+  ],
+  "p": "How does a fish move?",
+  "p_pt": "Como um peixe se move?",
+  "o": [
+   "It swims.",
+   "It climbs.",
+   "It walks."
+  ],
+  "o_pt": [
+   "Nada.",
+   "Escala.",
+   "Anda."
+  ],
+  "dica": "Pense onde o peixe vive.",
+  "dica_en": "Think about where a fish lives.",
+  "ex": "A fish lives in the water and moves by swimming. A fish swims.",
+  "ex_pt": "O peixe vive na água e se move nadando. O peixe nada."
+ },
+ {
+  "id": "m02",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M3"
+  ],
+  "p": "Which animal flies?",
+  "p_pt": "Qual animal voa?",
+  "o": [
+   "a bird",
+   "a fish",
+   "a frog"
+  ],
+  "o_pt": [
+   "um pássaro",
+   "um peixe",
+   "um sapo"
+  ],
+  "dica": "To fly é se mover pelo ar. Qual tem asas?",
+  "dica_en": "To fly is to move through the air. Which one has wings?",
+  "ex": "To fly is to move through the air. A bird flies.",
+  "ex_pt": "Voar é se mover pelo ar. O pássaro voa."
+ },
+ {
+  "id": "m03",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M3"
+  ],
+  "p": "A monkey goes up a tree. How does it move?",
+  "p_pt": "Um macaco sobe numa árvore. Como ele se move?",
+  "o": [
+   "It climbs.",
+   "It flies.",
+   "It crawls."
+  ],
+  "o_pt": [
+   "Escala.",
+   "Voa.",
+   "Rasteja."
+  ],
+  "dica": "Ele usa as mãos e os pés para subir.",
+  "dica_en": "It uses its hands and feet to go up.",
+  "ex": "A monkey goes up a tree with its hands and feet. It climbs.",
+  "ex_pt": "O macaco sobe na árvore com as mãos e os pés. Ele escala."
+ },
+ {
+  "id": "m04",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M3"
+  ],
+  "p": "How does a dog move?",
+  "p_pt": "Como um cachorro se move?",
+  "o": [
+   "It walks and runs.",
+   "It climbs and flies.",
+   "It crawls and flies."
+  ],
+  "o_pt": [
+   "Anda e corre.",
+   "Escala e voa.",
+   "Rasteja e voa."
+  ],
+  "dica": "Pense no cachorro no parque, com as quatro patas.",
+  "dica_en": "Think about a dog in the park, on four legs.",
+  "ex": "A dog moves on four legs. A dog walks and runs.",
+  "ex_pt": "O cachorro se move com quatro patas. Ele anda e corre."
+ },
+ {
+  "id": "m05",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M3"
+  ],
+  "p": "Which animal jumps?",
+  "p_pt": "Qual animal pula?",
+  "o": [
+   "a kangaroo",
+   "a snake",
+   "a bird"
+  ],
+  "o_pt": [
+   "um canguru",
+   "uma cobra",
+   "um pássaro"
+  ],
+  "dica": "Qual tem pernas de trás bem fortes?",
+  "dica_en": "Which one has very strong back legs?",
+  "ex": "A kangaroo moves by jumping with strong back legs.",
+  "ex_pt": "O canguru pula com as fortes pernas de trás."
+ },
+ {
+  "id": "m06",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M3"
+  ],
+  "p": "How does a frog move on land?",
+  "p_pt": "Como a rã se move em terra?",
+  "o": [
+   "It jumps.",
+   "It flies.",
+   "It slides."
+  ],
+  "o_pt": [
+   "Ela pula.",
+   "Ela voa.",
+   "Ela desliza."
+  ],
+  "dica": "Lembre do canguru: ele se move do mesmo jeito.",
+  "dica_en": "Remember the kangaroo: it moves the same way.",
+  "ex": "A frog and a kangaroo move the same way. They jump.",
+  "ex_pt": "Rã e canguru se movem igual: pulam."
+ },
+ {
+  "id": "m07",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M3"
+  ],
+  "p": "A snake has no legs. How does it move on the ground?",
+  "p_pt": "A cobra não tem pernas. Como ela se move no chão?",
+  "o": [
+   "It crawls.",
+   "It jumps.",
+   "It flies."
+  ],
+  "o_pt": [
+   "Rasteja.",
+   "Pula.",
+   "Voa."
+  ],
+  "dica": "Sem pernas, a barriga fica no chão.",
+  "dica_en": "With no legs, its belly stays on the ground.",
+  "ex": "A snake has no legs. It stays low and crawls on the ground.",
+  "ex_pt": "A cobra não tem pernas. Ela fica baixa e rasteja no chão."
+ },
+ {
+  "id": "m08",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M3",
+   "O4"
+  ],
+  "p": "A snake moves smoothly along the ground. Which word fits?",
+  "p_pt": "A cobra se move suave no chão. Qual palavra combina?",
+  "o": [
+   "It slides.",
+   "It jumps.",
+   "It flies."
+  ],
+  "o_pt": [
+   "Desliza.",
+   "Pula.",
+   "Voa."
+  ],
+  "dica": "Lembre: mover suave sobre uma superfície.",
+  "dica_en": "Remember: to move smoothly along a surface.",
+  "ex": "To slide is to move smoothly along a surface. A snake slides on the ground.",
+  "ex_pt": "Deslizar é se mover suave sobre uma superfície. A cobra desliza no chão."
+ },
+ {
+  "id": "m09",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M1"
+  ],
+  "p": "I go up a tree. I use my body. I…",
+  "p_pt": "Subo numa árvore. Uso o corpo. Eu…",
+  "o": [
+   "climb",
+   "write",
+   "point"
+  ],
+  "o_pt": [
+   "escalo",
+   "escrevo",
+   "aponto"
+  ],
+  "dica": "Braços e pernas trabalham juntos para subir.",
+  "dica_en": "Arms and legs work together to go up.",
+  "ex": "Climb is a body movement. We climb to go up a tree.",
+  "ex_pt": "Climb é movimento do corpo. Escalamos para subir numa árvore."
+ },
+ {
+  "id": "m10",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M1"
+  ],
+  "p": "I move in the pool with my whole body. I…",
+  "p_pt": "Eu me movo na piscina com o corpo todo. Eu…",
+  "o": [
+   "swim",
+   "grab",
+   "lift"
+  ],
+  "o_pt": [
+   "nado",
+   "agarro",
+   "levanto"
+  ],
+  "dica": "Lembre o que o peixe faz.",
+  "dica_en": "Remember what a fish does.",
+  "ex": "Swim is a body movement. We swim in the water, like a fish.",
+  "ex_pt": "Swim é movimento do corpo. Nadamos na água, como o peixe."
+ },
+ {
+  "id": "m11",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M1"
+  ],
+  "p": "I ___ on a chair.",
+  "p_pt": "Eu ___ em uma cadeira.",
+  "o": [
+   "sit",
+   "lift",
+   "point"
+  ],
+  "o_pt": [
+   "sento",
+   "levanto",
+   "aponto"
+  ],
+  "dica": "A palavra \"on\" diz que o corpo fica em cima da cadeira.",
+  "dica_en": "The word \"on\" tells you the body is on the chair.",
+  "ex": "Sit is a body movement. We sit on a chair.",
+  "ex_pt": "Sit é movimento do corpo. Sentamos na cadeira."
+ },
+ {
+  "id": "m12",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M1"
+  ],
+  "p": "My legs and feet take me to the door. I…",
+  "p_pt": "Minhas pernas e meus pés me levam até a porta. Eu…",
+  "o": [
+   "walk",
+   "touch",
+   "write"
+  ],
+  "o_pt": [
+   "ando",
+   "toco",
+   "escrevo"
+  ],
+  "dica": "Pense no que o cachorro também faz.",
+  "dica_en": "Think about what a dog does too.",
+  "ex": "Walk is a body movement. We use our legs and feet to walk.",
+  "ex_pt": "Walk é movimento do corpo. Usamos pernas e pés para andar."
+ },
+ {
+  "id": "m13",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M1"
+  ],
+  "p": "Which one is on the list of body movements?",
+  "p_pt": "Qual está na lista de movimentos do corpo?",
+  "o": [
+   "play",
+   "point",
+   "write"
+  ],
+  "o_pt": [
+   "brincar",
+   "apontar",
+   "escrever"
+  ],
+  "dica": "Os outros dois estão na lista da mão.",
+  "dica_en": "The other two are on the hand list.",
+  "ex": "Body list: swim, climb, play, walk, pick, sit. Play is on it.",
+  "ex_pt": "Lista do corpo: nadar, escalar, brincar, andar, colher, sentar. Brincar está nela."
+ },
+ {
+  "id": "m14",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M1"
+  ],
+  "p": "Body movements: swim, climb, play, walk, sit and…",
+  "p_pt": "Movimentos do corpo: nadar, escalar, brincar, andar, sentar e…",
+  "o": [
+   "pick",
+   "write",
+   "grab"
+  ],
+  "o_pt": [
+   "colher",
+   "escrever",
+   "agarrar"
+  ],
+  "dica": "Write e grab estão na lista da mão? Lembre as duas listas.",
+  "dica_en": "Are write and grab on the hand list? Remember both lists.",
+  "ex": "Body list: swim, climb, play, walk, pick, sit. Pick is on it.",
+  "ex_pt": "Lista do corpo: nadar, escalar, brincar, andar, colher, sentar. Colher está nela."
+ },
+ {
+  "id": "m15",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M2"
+  ],
+  "p": "I use my hand and a pencil. I…",
+  "p_pt": "Uso a mão e um lápis. Eu…",
+  "o": [
+   "write",
+   "walk",
+   "swim"
+  ],
+  "o_pt": [
+   "escrevo",
+   "ando",
+   "nado"
+  ],
+  "dica": "O que o lápis faz no caderno?",
+  "dica_en": "What does a pencil do in a notebook?",
+  "ex": "Write is a hand movement. We hold a pencil and write.",
+  "ex_pt": "Write é movimento da mão. Seguramos o lápis e escrevemos."
+ },
+ {
+  "id": "m16",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M2"
+  ],
+  "p": "I show a place on the map with my finger. I…",
+  "p_pt": "Mostro um lugar no mapa com o dedo. Eu…",
+  "o": [
+   "point",
+   "sit",
+   "climb"
+  ],
+  "o_pt": [
+   "aponto",
+   "sento",
+   "escalo"
+  ],
+  "dica": "O dedo mostra o lugar.",
+  "dica_en": "The finger shows the place.",
+  "ex": "Point is a hand movement. We point with a finger to show a place.",
+  "ex_pt": "Point é movimento da mão. Apontamos com o dedo para mostrar um lugar."
+ },
+ {
+  "id": "m17",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M2"
+  ],
+  "p": "My hand closes fast around the ball. I…",
+  "p_pt": "Minha mão fecha rápido em volta da bola. Eu…",
+  "o": [
+   "grab it",
+   "lift it",
+   "touch it"
+  ],
+  "o_pt": [
+   "agarro",
+   "levanto",
+   "toco"
+  ],
+  "dica": "A mão fecha e segura.",
+  "dica_en": "The hand closes and holds.",
+  "ex": "Grab is a hand movement. The hand closes and holds.",
+  "ex_pt": "Agarrar é movimento de mão: a mão fecha e segura."
+ },
+ {
+  "id": "m18",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M2"
+  ],
+  "p": "My hands move the box up. I…",
+  "p_pt": "Minhas mãos levam a caixa para cima. Eu…",
+  "o": [
+   "lift it",
+   "grab it",
+   "touch it"
+  ],
+  "o_pt": [
+   "levanto",
+   "agarro",
+   "toco"
+  ],
+  "dica": "A caixa sai da mesa e sobe.",
+  "dica_en": "The box leaves the table and goes up.",
+  "ex": "Lift is a hand movement. Hands move a thing up.",
+  "ex_pt": "Levantar é movimento de mão: leva a coisa para cima."
+ },
+ {
+  "id": "m19",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M2"
+  ],
+  "p": "My fingers feel the soft cat. I…",
+  "p_pt": "Meus dedos sentem o gato macio. Eu…",
+  "o": [
+   "touch it",
+   "lift it",
+   "grab it"
+  ],
+  "o_pt": [
+   "toco",
+   "levanto",
+   "agarro"
+  ],
+  "dica": "Os dedos encostam.",
+  "dica_en": "The fingers feel it.",
+  "ex": "Touch is a hand movement. We touch with our fingers.",
+  "ex_pt": "Tocar é movimento de mão: tocamos com os dedos."
+ },
+ {
+  "id": "m20",
+  "tema": "animals",
+  "tipo": "rapida",
+  "at": [
+   "M2"
+  ],
+  "p": "Which one is on the list of hand movements?",
+  "p_pt": "Qual está na lista de movimentos da mão?",
+  "o": [
+   "push",
+   "swim",
+   "sit"
+  ],
+  "o_pt": [
+   "empurrar",
+   "nadar",
+   "sentar"
+  ],
+  "dica": "Os outros dois estão na lista do corpo.",
+  "dica_en": "The other two are on the body list.",
+  "ex": "Hand list: touch, lift, point, write, grab, push. Push is on it.",
+  "ex_pt": "Lista da mão: tocar, levantar, apontar, escrever, agarrar, empurrar. Empurrar está nela."
+ },
+ {
+  "id": "f01",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F3"
+  ],
+  "p": "Riding a bike. Is it a push or a pull?",
+  "p_pt": "Andar de bicicleta. É empurrar ou puxar?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "empurrar",
+   "puxar"
+  ],
+  "dica": "Os pés empurram os pedais para longe. Push = empurrar, pull = puxar.",
+  "dica_en": "The feet move the pedals away from the body.",
+  "ex": "In our lesson, riding a bike is a push: a force away from me.",
+  "ex_pt": "Na lição, andar de bicicleta é empurrar: uma força que afasta de mim.",
+  "img": "media/cie3/push-bike.jpg"
+ },
+ {
+  "id": "f02",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F3"
+  ],
+  "p": "The boy moves the box. Is it a push or a pull?",
+  "p_pt": "O menino move a caixa. É um empurrão ou um puxão?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "um empurrão",
+   "um puxão"
+  ],
+  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "The hands move the box away from the boy. That is a push.",
+  "ex_pt": "As mãos levam a caixa para longe do menino. É push, empurrar.",
+  "img": "media/cie3/push-box.jpg"
+ },
+ {
+  "id": "f03",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F3"
+  ],
+  "p": "Is kicking a ball a push or a pull?",
+  "p_pt": "Chutar a bola é um empurrão ou um puxão?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "um empurrão",
+   "um puxão"
+  ],
+  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "The foot moves the ball away from the boy. Kicking is a push.",
+  "ex_pt": "O pé leva a bola para longe do menino. Chutar é push, empurrar.",
+  "img": "media/cie3/push-ball.jpg"
+ },
+ {
+  "id": "f04",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F3"
+  ],
+  "p": "A girl opens a door with her hands, moving it away from her. Is it a push or a pull?",
+  "p_pt": "Uma menina abre a porta com as mãos, levando-a para longe dela. É um empurrão ou um puxão?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "um empurrão",
+   "um puxão"
+  ],
+  "dica": "Para longe de mim: qual é a palavra? Push = empurrar, pull = puxar.",
+  "dica_en": "Away from me: which word is it?",
+  "ex": "The door moves away from the girl. That is a push.",
+  "ex_pt": "A porta vai para longe da menina. É push, empurrar."
+ },
+ {
+  "id": "f05",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F4"
+  ],
+  "p": "Two children play tug of war. Is it a push or a pull?",
+  "p_pt": "Duas crianças brincam de cabo de guerra. É um empurrão ou um puxão?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "o_pt": [
+   "um puxão",
+   "um empurrão"
+  ],
+  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "Each child brings the rope closer. Tug of war is a pull.",
+  "ex_pt": "Cada criança traz a corda para perto. Cabo de guerra é pull, puxar.",
+  "img": "media/cie3/pull-rope.jpg"
+ },
+ {
+  "id": "f06",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F4"
+  ],
+  "p": "The boy moves the wagon. Is it a push or a pull?",
+  "p_pt": "O menino move o carrinho. É um empurrão ou um puxão?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "o_pt": [
+   "um puxão",
+   "um empurrão"
+  ],
+  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "The boy holds the handle and the wagon comes after him. That is a pull.",
+  "ex_pt": "O menino segura a alça e o carrinho vem atrás. É pull, puxar.",
+  "img": "media/cie3/pull-wagon.jpg"
+ },
+ {
+  "id": "f07",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F4"
+  ],
+  "p": "The girl opens the drawer. Is it a push or a pull?",
+  "p_pt": "A menina abre a gaveta. É um empurrão ou um puxão?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "o_pt": [
+   "um puxão",
+   "um empurrão"
+  ],
+  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "The drawer comes closer to the girl. Opening a drawer is a pull.",
+  "ex_pt": "A gaveta vem para perto da menina. Abrir gaveta é pull, puxar.",
+  "img": "media/cie3/pull-drawer.jpg"
+ },
+ {
+  "id": "f08",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F4"
+  ],
+  "p": "The boy is fishing with a rod. Is it a push or a pull?",
+  "p_pt": "O menino pesca com uma vara. É um empurrão ou um puxão?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "o_pt": [
+   "um puxão",
+   "um empurrão"
+  ],
+  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "The rod brings the fish closer to the boy. Fishing is a pull.",
+  "ex_pt": "A vara traz o peixe para perto do menino. Pescar é pull, puxar.",
+  "img": "media/cie3/pull-fish.jpg"
+ },
+ {
+  "id": "f09",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F1",
+   "F3"
+  ],
+  "p": "Look at the arrow. Where does the box go?",
+  "p_pt": "Olhe a seta. Para onde a caixa vai?",
+  "o": [
+   "away from him",
+   "closer to him"
+  ],
+  "o_pt": [
+   "para longe dele",
+   "para perto dele"
+  ],
+  "dica": "A seta sai do menino ou vem para ele?",
+  "dica_en": "Does the arrow leave the boy or come to him?",
+  "ex": "A push moves something away from me. The box goes away from the boy.",
+  "ex_pt": "Empurrar leva algo para longe de mim. A caixa vai para longe do menino.",
+  "img": "media/cie3/push-box.jpg"
+ },
+ {
+  "id": "f10",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F1",
+   "F3"
+  ],
+  "p": "The door says PUSH. Where does the door go?",
+  "p_pt": "A porta diz PUSH. Para onde a porta vai?",
+  "o": [
+   "away from her",
+   "closer to her"
+  ],
+  "o_pt": [
+   "para longe dela",
+   "para perto dela"
+  ],
+  "dica": "Atenção à palavra PUSH: push = empurrar, pull = puxar.",
+  "dica_en": "Think about the word PUSH on the door.",
+  "ex": "A push moves something away from me. The door goes away from the girl.",
+  "ex_pt": "Push é empurrar: leva algo para longe de mim. A porta vai para longe da menina.",
+  "img": "media/cie3/push-door.jpg"
+ },
+ {
+  "id": "f11",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F1",
+   "F3"
+  ],
+  "p": "Look at the arrow. Where does the ball go?",
+  "p_pt": "Olhe a seta. Para onde a bola vai?",
+  "o": [
+   "away from him",
+   "closer to him"
+  ],
+  "o_pt": [
+   "para longe dele",
+   "para perto dele"
+  ],
+  "dica": "Depois do chute, a bola chega perto do pé?",
+  "dica_en": "After the kick, does the ball come near the foot?",
+  "ex": "A kick is a push. It moves the ball away from the boy.",
+  "ex_pt": "O chute é push, empurrar. Leva a bola para longe do menino.",
+  "img": "media/cie3/push-ball.jpg"
+ },
+ {
+  "id": "f12",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F2",
+   "F4"
+  ],
+  "p": "Look at the arrow. Where does the wagon go?",
+  "p_pt": "Olhe a seta. Para onde o carrinho vai?",
+  "o": [
+   "closer to him",
+   "away from him"
+  ],
+  "o_pt": [
+   "para perto dele",
+   "para longe dele"
+  ],
+  "dica": "A seta aponta para o menino.",
+  "dica_en": "The arrow points to the boy.",
+  "ex": "A pull moves something closer to me. The wagon comes after the boy.",
+  "ex_pt": "Puxar traz algo para perto de mim. O carrinho vem atrás do menino.",
+  "img": "media/cie3/pull-wagon.jpg"
+ },
+ {
+  "id": "f13",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F2",
+   "F4"
+  ],
+  "p": "Look at the arrow. Where does the drawer go?",
+  "p_pt": "Olhe a seta. Para onde a gaveta vai?",
+  "o": [
+   "closer to her",
+   "away from her"
+  ],
+  "o_pt": [
+   "para perto dela",
+   "para longe dela"
+  ],
+  "dica": "A seta aponta para a menina.",
+  "dica_en": "The arrow points to the girl.",
+  "ex": "A pull moves something closer to me. The drawer comes closer to the girl.",
+  "ex_pt": "Puxar traz algo para perto de mim. A gaveta vem para perto da menina.",
+  "img": "media/cie3/pull-drawer.jpg"
+ },
+ {
+  "id": "f14",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F2",
+   "F4"
+  ],
+  "p": "Look at the arrow. Where does the fish go?",
+  "p_pt": "Olhe a seta. Para onde o peixe vai?",
+  "o": [
+   "closer to him",
+   "away from him"
+  ],
+  "o_pt": [
+   "para perto dele",
+   "para longe dele"
+  ],
+  "dica": "A seta vai da água até o menino.",
+  "dica_en": "The arrow goes from the water to the boy.",
+  "ex": "A pull moves something closer to me. The fish comes closer to the boy.",
+  "ex_pt": "Puxar traz algo para perto de mim. O peixe vem para perto do menino.",
+  "img": "media/cie3/pull-fish.jpg"
+ },
+ {
+  "id": "f15",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F2",
+   "F4"
+  ],
+  "p": "The boy holds the rope. Where does he want the rope to go?",
+  "p_pt": "O menino segura a corda. Para onde ele quer que a corda vá?",
+  "o": [
+   "closer to him",
+   "away from him"
+  ],
+  "o_pt": [
+   "para perto dele",
+   "para longe dele"
+  ],
+  "dica": "No cabo de guerra, cada um traz a corda para si.",
+  "dica_en": "In tug of war, each child brings the rope to them.",
+  "ex": "Tug of war is a pull. The boy brings the rope closer to him.",
+  "ex_pt": "Cabo de guerra é pull, puxar. O menino traz a corda para perto.",
+  "img": "media/cie3/pull-rope.jpg"
+ },
+ {
+  "id": "f16",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F1"
+  ],
+  "p": "A push is when I use a force to move something…",
+  "p_pt": "Empurrar é quando uso uma força para mover algo…",
+  "o": [
+   "away from me",
+   "closer to me"
+  ],
+  "o_pt": [
+   "para longe de mim",
+   "para perto de mim"
+  ],
+  "dica": "Cuidado: push parece \"puxar\", mas push = empurrar, pull = puxar.",
+  "dica_en": "Careful: think of pushing a heavy box.",
+  "ex": "A push moves something away from me.",
+  "ex_pt": "Empurrar move algo para longe de mim."
+ },
+ {
+  "id": "f17",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F2"
+  ],
+  "p": "A pull is when I use a force to move something…",
+  "p_pt": "Puxar é quando uso uma força para mover algo…",
+  "o": [
+   "closer to me",
+   "away from me"
+  ],
+  "o_pt": [
+   "para perto de mim",
+   "para longe de mim"
+  ],
+  "dica": "Lembre: push = empurrar, pull = puxar.",
+  "dica_en": "Think of opening a drawer.",
+  "ex": "A pull moves something closer to me.",
+  "ex_pt": "Puxar move algo para perto de mim."
+ },
+ {
+  "id": "f18",
+  "tema": "pushpull",
+  "tipo": "conceito",
+  "at": [
+   "F1"
+  ],
+  "p": "I use a force to move something away from me. It is…",
+  "p_pt": "Uso uma força para mover algo para longe de mim. É…",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "um empurrão",
+   "um puxão"
+  ],
+  "dica": "Push = empurrar, pull = puxar. Qual leva para longe?",
+  "dica_en": "Think of a box going away from you. Which word is it?",
+  "ex": "Away from me is a push. Pushing a box moves it away.",
+  "ex_pt": "Para longe de mim é push, empurrar. Empurrar a caixa a leva para longe."
+ },
+ {
+  "id": "f19",
+  "tema": "pushpull",
+  "tipo": "conceito",
+  "at": [
+   "F2"
+  ],
+  "p": "I use a force to move something closer to me. It is…",
+  "p_pt": "Uso uma força para mover algo para perto de mim. É…",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "o_pt": [
+   "um puxão",
+   "um empurrão"
+  ],
+  "dica": "Push = empurrar, pull = puxar. Qual traz para perto?",
+  "dica_en": "Think of a drawer coming to you. Which word is it?",
+  "ex": "Closer to me is a pull. Pulling a drawer brings it closer.",
+  "ex_pt": "Para perto de mim é pull, puxar. Puxar a gaveta a traz para perto."
+ },
+ {
+  "id": "f20",
+  "tema": "pushpull",
+  "tipo": "leitura",
+  "at": [
+   "F1",
+   "F2"
+  ],
+  "p": "A door has a sign: PULL. What do I do?",
+  "p_pt": "Uma porta tem uma placa: PULL. O que eu faço?",
+  "o": [
+   "I move it closer to me.",
+   "I move it away from me."
+  ],
+  "o_pt": [
+   "Trago para perto de mim.",
+   "Levo para longe de mim."
+  ],
+  "dica": "Cuidado: push = empurrar, pull = puxar. O que a placa manda?",
+  "dica_en": "Think of the wagon and the drawer: they are pulls.",
+  "ex": "A pull moves something closer to me. So I bring the door closer.",
+  "ex_pt": "Pull é puxar: traz para perto de mim. Então trago a porta para perto."
+ },
+ {
+  "id": "f21",
+  "tema": "pushpull",
+  "tipo": "conceito",
+  "at": [
+   "F5"
+  ],
+  "p": "What are the two types of force?",
+  "p_pt": "Quais são os dois tipos de força?",
+  "o": [
+   "push and pull",
+   "up and down",
+   "slow and fast"
+  ],
+  "o_pt": [
+   "empurrar e puxar",
+   "para cima e para baixo",
+   "devagar e rápido"
+  ],
+  "dica": "Um leva para longe, o outro traz para perto.",
+  "dica_en": "One moves things away, the other brings them closer.",
+  "ex": "The two types of force are push and pull.",
+  "ex_pt": "Os dois tipos de força são push (empurrar) e pull (puxar)."
+ },
+ {
+  "id": "f22",
+  "tema": "pushpull",
+  "tipo": "conceito",
+  "at": [
+   "F5"
+  ],
+  "p": "Push and pull are ___ forces.",
+  "p_pt": "Push e pull são forças ___.",
+  "o": [
+   "opposite",
+   "natural",
+   "helpful"
+  ],
+  "o_pt": [
+   "opostas",
+   "naturais",
+   "úteis"
+  ],
+  "dica": "Um leva para longe, o outro traz para perto: são iguais?",
+  "dica_en": "One moves things away, the other brings them closer. Are they the same?",
+  "ex": "Push and pull are opposite forces: away from me and closer to me.",
+  "ex_pt": "Push e pull são forças opostas: para longe e para perto de mim."
+ },
+ {
+  "id": "f24",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F6"
+  ],
+  "p": "I move a shopping trolley away from me. Is it a push or a pull?",
+  "p_pt": "Levo o carrinho de compras para longe de mim. É um empurrão ou um puxão?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "um empurrão",
+   "um puxão"
+  ],
+  "dica": "Para longe de mim: push = empurrar, pull = puxar.",
+  "dica_en": "Away from me: which word is it?",
+  "ex": "The trolley moves away from me. That is a push.",
+  "ex_pt": "O carrinho vai para longe de mim. É push, empurrar."
+ },
+ {
+  "id": "f25",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F6"
+  ],
+  "p": "In volleyball, the players hit the ball away from them. Is it a push or a pull?",
+  "p_pt": "No vôlei, os jogadores batem na bola para longe. É um empurrão ou um puxão?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "um empurrão",
+   "um puxão"
+  ],
+  "dica": "A bola vai para longe dos jogadores. Push = empurrar, pull = puxar.",
+  "dica_en": "The ball goes away from the players. Which word is it?",
+  "ex": "The players move the ball away from them. Volleyball uses a push.",
+  "ex_pt": "Os jogadores levam a bola para longe. O vôlei usa push, empurrar."
+ },
+ {
+  "id": "f26",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F6"
+  ],
+  "p": "Playing the piano. Is it a push or a pull?",
+  "p_pt": "Tocar piano. É empurrar ou puxar?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "empurrar",
+   "puxar"
+  ],
+  "dica": "O que os dedos fazem com as teclas? Push = empurrar, pull = puxar.",
+  "dica_en": "What do the fingers do to the keys?",
+  "ex": "In our video, playing the piano is a push.",
+  "ex_pt": "No vídeo, tocar piano é empurrar."
+ },
+ {
+  "id": "f27",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F6"
+  ],
+  "p": "A golfer hits the ball. Is it a push or a pull?",
+  "p_pt": "Um jogador de golfe bate na bola. É um empurrão ou um puxão?",
+  "o": [
+   "a push",
+   "a pull"
+  ],
+  "o_pt": [
+   "um empurrão",
+   "um puxão"
+  ],
+  "dica": "Depois da batida, para onde a bola vai? Push = empurrar, pull = puxar.",
+  "dica_en": "After the hit, where does the ball go?",
+  "ex": "The golfer moves the ball away from him. That is a push.",
+  "ex_pt": "O jogador leva a bola para longe dele. É push, empurrar."
+ },
+ {
+  "id": "f28",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F7"
+  ],
+  "p": "I hold the rope of a kite so it does not fly away. Is it a push or a pull?",
+  "p_pt": "Seguro a corda da pipa para ela não ir embora. É um empurrão ou um puxão?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "o_pt": [
+   "um puxão",
+   "um empurrão"
+  ],
+  "dica": "A corda vem para você. Push = empurrar, pull = puxar.",
+  "dica_en": "The rope comes to you. Which word is it?",
+  "ex": "I bring the rope closer to me to keep the kite. That is a pull.",
+  "ex_pt": "Trago a corda para perto de mim para manter a pipa. É pull, puxar."
+ },
+ {
+  "id": "f29",
+  "tema": "pushpull",
+  "tipo": "rapida",
+  "at": [
+   "F7"
+  ],
+  "p": "I pick a fruit from the plant. Is it a push or a pull?",
+  "p_pt": "Colho uma fruta da planta. É um empurrão ou um puxão?",
+  "o": [
+   "a pull",
+   "a push"
+  ],
+  "o_pt": [
+   "um puxão",
+   "um empurrão"
+  ],
+  "dica": "A fruta sai da planta e vem para sua mão. Push = empurrar, pull = puxar.",
+  "dica_en": "The fruit leaves the plant and comes to your hand.",
+  "ex": "I bring the fruit from the plant closer to me. That is a pull.",
+  "ex_pt": "Trago a fruta da planta para perto de mim. É pull, puxar."
+ },
+ {
+  "id": "f31",
+  "tema": "pushpull",
+  "tipo": "conceito",
+  "at": [
+   "F3",
+   "F6"
+  ],
+  "p": "Which one is a push?",
+  "p_pt": "Qual destes é um empurrão?",
+  "o": [
+   "kicking a ball",
+   "opening a drawer",
+   "fishing with a rod"
+  ],
+  "o_pt": [
+   "chutar uma bola",
+   "abrir uma gaveta",
+   "pescar com uma vara"
+  ],
+  "dica": "Qual leva a coisa para longe? Push = empurrar, pull = puxar.",
+  "dica_en": "Which one moves the thing away?",
+  "ex": "Kicking moves the ball away from me, so it is a push.",
+  "ex_pt": "Chutar leva a bola para longe de mim, então é push, empurrar."
+ },
+ {
+  "id": "f32",
+  "tema": "pushpull",
+  "tipo": "conceito",
+  "at": [
+   "F4",
+   "F7"
+  ],
+  "p": "Which one is a pull?",
+  "p_pt": "Qual destes é um puxão?",
+  "o": [
+   "holding a kite rope",
+   "playing the piano",
+   "riding a bike"
+  ],
+  "o_pt": [
+   "segurar a corda da pipa",
+   "tocar piano",
+   "andar de bicicleta"
+  ],
+  "dica": "Qual traz a coisa para perto de você? Push = empurrar, pull = puxar.",
+  "dica_en": "Which one brings the thing closer to you?",
+  "ex": "I bring the kite rope closer to me, so it is a pull.",
+  "ex_pt": "Trago a corda da pipa para perto de mim, então é pull, puxar."
+ },
+ {
+  "id": "f33",
+  "tema": "pushpull",
+  "tipo": "conceito",
+  "at": [
+   "F4",
+   "F6"
+  ],
+  "p": "Which one is a pull?",
+  "p_pt": "Qual destes é um puxão?",
+  "o": [
+   "opening a drawer",
+   "playing volleyball",
+   "hitting a golf ball"
+  ],
+  "o_pt": [
+   "abrir uma gaveta",
+   "jogar vôlei",
+   "bater numa bola de golfe"
+  ],
+  "dica": "Qual vem para perto de você?",
+  "dica_en": "Which one comes closer to you?",
+  "ex": "An open drawer comes closer to me, so it is a pull.",
+  "ex_pt": "A gaveta aberta vem para perto de mim, então é pull, puxar."
+ },
+ {
+  "id": "f34",
+  "tema": "pushpull",
+  "tipo": "conceito",
+  "at": [
+   "F3",
+   "F7"
+  ],
+  "p": "Which one is a push?",
+  "p_pt": "Qual destes é um empurrão?",
+  "o": [
+   "playing the piano",
+   "picking a fruit",
+   "tug of war"
+  ],
+  "o_pt": [
+   "tocar piano",
+   "colher uma fruta",
+   "cabo de guerra"
+  ],
+  "dica": "Qual leva para longe? Push = empurrar, pull = puxar.",
+  "dica_en": "Which one moves the thing away?",
+  "ex": "The fingers press the piano keys away from the hand. That is a push.",
+  "ex_pt": "Os dedos apertam as teclas para longe da mão. É push, empurrar."
+ }
+]

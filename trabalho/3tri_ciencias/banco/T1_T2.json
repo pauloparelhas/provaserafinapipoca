@@ -1,0 +1,1756 @@
+[
+ {
+  "id": "a01",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A1"
+  ],
+  "p": "Where is the teddy bear?",
+  "p_pt": "Onde está o ursinho de pelúcia?",
+  "o": [
+   "in the box",
+   "on the box",
+   "under the box"
+  ],
+  "o_pt": [
+   "dentro da caixa",
+   "em cima da caixa",
+   "embaixo da caixa"
+  ],
+  "dica": "Olhe bem: a caixa está aberta. Onde fica o corpo do ursinho?",
+  "dica_en": "Look: the box is open. Where is the bear's body?",
+  "ex": "In: a thing has something around it. The bear is in the box.",
+  "ex_pt": "In: a coisa tem algo em volta. O ursinho está dentro da caixa.",
+  "img": "media/cie3/prep-in.jpg"
+ },
+ {
+  "id": "a03",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A1",
+   "A12"
+  ],
+  "p": "Which word means almost the same as \"in\"?",
+  "p_pt": "Qual palavra quer dizer quase o mesmo que \"in\"?",
+  "o": [
+   "inside",
+   "on",
+   "under"
+  ],
+  "o_pt": [
+   "dentro (inside)",
+   "em cima (on)",
+   "embaixo (under)"
+  ],
+  "dica": "Pense no peixe e no aquário.",
+  "dica_en": "Think of the fish and the bowl.",
+  "ex": "In and inside almost mean the same: the fish is in the bowl, inside the bowl.",
+  "ex_pt": "In e inside querem dizer quase o mesmo: o peixe está dentro do aquário."
+ },
+ {
+  "id": "a04",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A2",
+   "A10"
+  ],
+  "p": "Where is the apple?",
+  "p_pt": "Onde está a maçã?",
+  "o": [
+   "on the book",
+   "above the book",
+   "under the book"
+  ],
+  "o_pt": [
+   "em cima do livro (encostada)",
+   "acima do livro (sem encostar)",
+   "embaixo do livro"
+  ],
+  "dica": "A maçã está encostando no livro?",
+  "dica_en": "Is the apple touching the book?",
+  "ex": "On means touching the top. The apple touches the book, so it is on the book.",
+  "ex_pt": "On é encostado em cima. A maçã encosta no livro, então está on the book.",
+  "img": "media/cie3/prep-on.jpg"
+ },
+ {
+  "id": "a05",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A2",
+   "A3"
+  ],
+  "p": "The book is ___ the apple.",
+  "p_pt": "O livro está ___ a maçã.",
+  "o": [
+   "under",
+   "above",
+   "next to"
+  ],
+  "o_pt": [
+   "embaixo de",
+   "acima de",
+   "ao lado de"
+  ],
+  "dica": "Atenção: agora a frase começa pelo livro.",
+  "dica_en": "Careful: now the sentence starts with the book.",
+  "ex": "The apple is on the book, so the book is under the apple.",
+  "ex_pt": "A maçã está em cima do livro, então o livro está embaixo da maçã.",
+  "img": "media/cie3/prep-on.jpg"
+ },
+ {
+  "id": "a06",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A2",
+   "A10"
+  ],
+  "p": "The apple touches the book. The apple is ___ the book.",
+  "p_pt": "A maçã encosta no livro. A maçã está ___ o livro.",
+  "o": [
+   "on",
+   "above",
+   "below"
+  ],
+  "o_pt": [
+   "em cima de (encostada)",
+   "acima de (sem encostar)",
+   "abaixo de"
+  ],
+  "dica": "Qual palavra usamos quando as duas coisas se encostam?",
+  "dica_en": "Which word do we use when two things touch?",
+  "ex": "On = touching. Above = higher, not touching. The apple touches the book: on.",
+  "ex_pt": "On = encostado. Above = mais alto, sem encostar. A maçã encosta no livro: on."
+ },
+ {
+  "id": "a07",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A3"
+  ],
+  "p": "Where is the ball?",
+  "p_pt": "Onde está a bola?",
+  "o": [
+   "under the table",
+   "on the table",
+   "above the table"
+  ],
+  "o_pt": [
+   "embaixo da mesa",
+   "em cima da mesa",
+   "acima da mesa"
+  ],
+  "dica": "Olhe onde a bola está: no chão ou lá no alto?",
+  "dica_en": "Look at the ball: on the floor or up high?",
+  "ex": "Under means lower, with something on top of it. The ball is under the table.",
+  "ex_pt": "Under é mais baixo, com algo por cima. A bola está embaixo da mesa.",
+  "img": "media/cie3/prep-under.jpg"
+ },
+ {
+  "id": "a08",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A3",
+   "A10"
+  ],
+  "p": "The table is ___ the ball.",
+  "p_pt": "A mesa está ___ a bola.",
+  "o": [
+   "above",
+   "under",
+   "in"
+  ],
+  "o_pt": [
+   "acima de",
+   "embaixo de",
+   "dentro de"
+  ],
+  "dica": "Atenção: agora a frase começa pela mesa.",
+  "dica_en": "Careful: now the sentence starts with the table.",
+  "ex": "The ball is under the table, so the table is above the ball.",
+  "ex_pt": "A bola está embaixo da mesa, então a mesa está acima da bola.",
+  "img": "media/cie3/prep-under.jpg"
+ },
+ {
+  "id": "a09",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A4"
+  ],
+  "p": "Where is the boy?",
+  "p_pt": "Onde está o menino?",
+  "o": [
+   "behind the tree",
+   "in front of the tree",
+   "on the tree"
+  ],
+  "o_pt": [
+   "atrás da árvore",
+   "na frente da árvore",
+   "em cima da árvore"
+  ],
+  "dica": "A árvore esconde uma parte do menino?",
+  "dica_en": "Does the tree hide part of the boy?",
+  "ex": "Behind: the tree hides part of the boy. The boy is behind the tree.",
+  "ex_pt": "Behind: a árvore esconde parte do menino. Ele está atrás da árvore.",
+  "img": "media/cie3/prep-behind.jpg"
+ },
+ {
+  "id": "a10",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A4",
+   "A5"
+  ],
+  "p": "The tree is ___ the boy.",
+  "p_pt": "A árvore está ___ o menino.",
+  "o": [
+   "in front of",
+   "behind",
+   "far from"
+  ],
+  "o_pt": [
+   "na frente de",
+   "atrás de",
+   "longe de"
+  ],
+  "dica": "Atenção: agora a frase começa pela árvore.",
+  "dica_en": "Careful: now the sentence starts with the tree.",
+  "ex": "The boy is behind the tree, so the tree is in front of the boy.",
+  "ex_pt": "O menino está atrás da árvore, então a árvore está na frente dele.",
+  "img": "media/cie3/prep-behind.jpg"
+ },
+ {
+  "id": "a12",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A5"
+  ],
+  "p": "Where is the dog?",
+  "p_pt": "Onde está o cachorro?",
+  "o": [
+   "in front of the chair",
+   "behind the chair",
+   "on the chair"
+  ],
+  "o_pt": [
+   "na frente da cadeira",
+   "atrás da cadeira",
+   "em cima da cadeira"
+  ],
+  "dica": "Alguma coisa esconde o cachorro?",
+  "dica_en": "Is anything hiding the dog?",
+  "ex": "In front of: nothing hides the dog. The dog is in front of the chair.",
+  "ex_pt": "In front of: nada esconde o cachorro. Ele está na frente da cadeira.",
+  "img": "media/cie3/prep-in-front-of.jpg"
+ },
+ {
+  "id": "a13",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A5",
+   "A4"
+  ],
+  "p": "The chair is ___ the dog.",
+  "p_pt": "A cadeira está ___ o cachorro.",
+  "o": [
+   "behind",
+   "in front of",
+   "on"
+  ],
+  "o_pt": [
+   "atrás de",
+   "na frente de",
+   "em cima de"
+  ],
+  "dica": "Atenção: agora a frase começa pela cadeira.",
+  "dica_en": "Careful: now the sentence starts with the chair.",
+  "ex": "The dog is in front of the chair, so the chair is behind the dog.",
+  "ex_pt": "O cachorro está na frente da cadeira, então a cadeira está atrás dele.",
+  "img": "media/cie3/prep-in-front-of.jpg"
+ },
+ {
+  "id": "a15",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A4",
+   "A5"
+  ],
+  "p": "Which two words are opposites?",
+  "p_pt": "Quais duas palavras são opostas?",
+  "o": [
+   "behind and in front of",
+   "in and inside",
+   "near and next to"
+  ],
+  "o_pt": [
+   "atrás de e na frente de",
+   "dentro e dentro (in e inside)",
+   "perto e ao lado (near e next to)"
+  ],
+  "dica": "Procure as duas que dizem lugares contrários.",
+  "dica_en": "Look for two words that say opposite places.",
+  "ex": "Behind and in front of are opposites. In and inside almost mean the same.",
+  "ex_pt": "Behind e in front of são opostos. In e inside querem dizer quase o mesmo."
+ },
+ {
+  "id": "a16",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A6"
+  ],
+  "p": "Where is the teddy bear?",
+  "p_pt": "Onde está o ursinho de pelúcia?",
+  "o": [
+   "between the two plants",
+   "behind the two plants",
+   "on the two plants"
+  ],
+  "o_pt": [
+   "entre as duas plantas",
+   "atrás das duas plantas",
+   "em cima das duas plantas"
+  ],
+  "dica": "Quantas plantas há e onde fica o ursinho?",
+  "dica_en": "How many plants are there? Where is the bear?",
+  "ex": "Between means in the middle of two things. The bear is between the plants.",
+  "ex_pt": "Between é no meio de duas coisas. O ursinho está entre as plantas.",
+  "img": "media/cie3/prep-between.jpg"
+ },
+ {
+  "id": "a18",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A6"
+  ],
+  "p": "We say \"between\" when a thing is in the middle of…",
+  "p_pt": "Dizemos \"between\" quando uma coisa está no meio de…",
+  "o": [
+   "two things",
+   "one thing",
+   "four things"
+  ],
+  "o_pt": [
+   "duas coisas",
+   "uma coisa",
+   "quatro coisas"
+  ],
+  "dica": "Lembre do ursinho e das plantas.",
+  "dica_en": "Remember the bear and the plants.",
+  "ex": "Between needs two things, one on each side.",
+  "ex_pt": "Between pede duas coisas, uma de cada lado."
+ },
+ {
+  "id": "a19",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A7"
+  ],
+  "p": "Where is the clock?",
+  "p_pt": "Onde está o relógio?",
+  "o": [
+   "next to the lamp",
+   "on the lamp",
+   "far from the lamp"
+  ],
+  "o_pt": [
+   "ao lado do abajur",
+   "em cima do abajur",
+   "longe do abajur"
+  ],
+  "dica": "Veja a distância entre os dois.",
+  "dica_en": "Look at the space between them.",
+  "ex": "Next to means right at the side. The clock is next to the lamp.",
+  "ex_pt": "Next to é bem ao lado. O relógio está ao lado do abajur.",
+  "img": "media/cie3/prep-next-to.jpg"
+ },
+ {
+  "id": "a20",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A7"
+  ],
+  "p": "Which sentence is right?",
+  "p_pt": "Qual frase está certa?",
+  "o": [
+   "The lamp is next to the clock.",
+   "The lamp is under the clock.",
+   "The lamp is far from the clock."
+  ],
+  "o_pt": [
+   "O abajur está ao lado do relógio.",
+   "O abajur está embaixo do relógio.",
+   "O abajur está longe do relógio."
+  ],
+  "dica": "Atenção: agora a frase começa pelo abajur.",
+  "dica_en": "Careful: now the sentence starts with the lamp.",
+  "ex": "They are side by side, so the lamp is next to the clock too.",
+  "ex_pt": "Eles estão lado a lado, então o abajur também está ao lado do relógio.",
+  "img": "media/cie3/prep-next-to.jpg"
+ },
+ {
+  "id": "a21",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A7",
+   "A8"
+  ],
+  "p": "Which two words can finish the sentence? \"The clock is ___ the lamp.\"",
+  "p_pt": "Quais duas palavras completam a frase? \"O relógio está ___ o abajur.\"",
+  "o": [
+   "next to and near",
+   "near and far from",
+   "far from and above"
+  ],
+  "o_pt": [
+   "ao lado e perto (next to e near)",
+   "perto e longe (near e far from)",
+   "longe e acima (far from e above)"
+  ],
+  "dica": "As duas palavras têm de valer para a figura.",
+  "dica_en": "Both words must be true for the picture.",
+  "ex": "The clock is at the lamp's side and close to it: next to and near.",
+  "ex_pt": "O relógio está ao lado do abajur e perto dele: next to e near.",
+  "img": "media/cie3/prep-next-to.jpg"
+ },
+ {
+  "id": "a22",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A8"
+  ],
+  "p": "Where is the tree?",
+  "p_pt": "Onde está a árvore?",
+  "o": [
+   "near the house",
+   "far from the house",
+   "on the house"
+  ],
+  "o_pt": [
+   "perto da casa",
+   "longe da casa",
+   "em cima da casa"
+  ],
+  "dica": "Veja a distância da árvore até a casa.",
+  "dica_en": "Look at how much space is between the tree and the house.",
+  "ex": "Near means close. The tree is close to the house: near the house.",
+  "ex_pt": "Near é perto. A árvore está perto da casa.",
+  "img": "media/cie3/prep-near.jpg"
+ },
+ {
+  "id": "a23",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A8"
+  ],
+  "p": "The house is ___ the tree.",
+  "p_pt": "A casa está ___ a árvore.",
+  "o": [
+   "near",
+   "far from",
+   "under"
+  ],
+  "o_pt": [
+   "perto de",
+   "longe de",
+   "embaixo de"
+  ],
+  "dica": "Atenção: agora a frase começa pela casa.",
+  "dica_en": "Careful: now the sentence starts with the house.",
+  "ex": "The tree is near the house, so the house is near the tree too.",
+  "ex_pt": "A árvore está perto da casa, então a casa também está perto da árvore.",
+  "img": "media/cie3/prep-near.jpg"
+ },
+ {
+  "id": "a24",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A9"
+  ],
+  "p": "Where is the tree?",
+  "p_pt": "Onde está a árvore?",
+  "o": [
+   "far from the house",
+   "next to the house",
+   "near the house"
+  ],
+  "o_pt": [
+   "longe da casa",
+   "ao lado da casa",
+   "perto da casa"
+  ],
+  "dica": "Para que serve a seta comprida na figura?",
+  "dica_en": "What does the long arrow show?",
+  "ex": "Far from means not close. The long arrow shows the tree is far from the house.",
+  "ex_pt": "Far from é longe. A seta comprida mostra que a árvore está longe da casa.",
+  "img": "media/cie3/prep-far-from.jpg"
+ },
+ {
+  "id": "a25",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A9"
+  ],
+  "p": "The house is ___ the tree.",
+  "p_pt": "A casa está ___ a árvore.",
+  "o": [
+   "far from",
+   "next to",
+   "in"
+  ],
+  "o_pt": [
+   "longe de",
+   "ao lado de",
+   "dentro de"
+  ],
+  "dica": "Olhe a seta entre as duas coisas.",
+  "dica_en": "Look at the arrow between them.",
+  "ex": "There is a long way between them, so the house is far from the tree.",
+  "ex_pt": "Há um longo caminho entre elas, então a casa está longe da árvore.",
+  "img": "media/cie3/prep-far-from.jpg"
+ },
+ {
+  "id": "a26",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A8",
+   "A9"
+  ],
+  "p": "Which one is the opposite of \"near\"?",
+  "p_pt": "Qual é o oposto de \"near\"?",
+  "o": [
+   "far from",
+   "next to",
+   "between"
+  ],
+  "o_pt": [
+   "longe de",
+   "ao lado de",
+   "entre"
+  ],
+  "dica": "Lembre das duas figuras da casa e da árvore.",
+  "dica_en": "Remember the two pictures of the house and the tree.",
+  "ex": "Near means close. Far from means not close. They are opposites.",
+  "ex_pt": "Near é perto. Far from é longe. São opostos."
+ },
+ {
+  "id": "a27",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A7",
+   "A8",
+   "A9"
+  ],
+  "p": "Which two words tell that a thing is close?",
+  "p_pt": "Quais duas palavras dizem que uma coisa está perto?",
+  "o": [
+   "near and next to",
+   "near and far from",
+   "next to and far from"
+  ],
+  "o_pt": [
+   "near e next to",
+   "near e far from",
+   "next to e far from"
+  ],
+  "dica": "Uma destas palavras diz o contrário de perto. Ela fica de fora.",
+  "dica_en": "One of these words says the opposite of close. Leave it out.",
+  "ex": "Near and next to are close. Far from is not close.",
+  "ex_pt": "Near e next to indicam perto. Far from indica longe."
+ },
+ {
+  "id": "a28",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A10",
+   "A2"
+  ],
+  "p": "Where is the lamp?",
+  "p_pt": "Onde está a lâmpada?",
+  "o": [
+   "above the table",
+   "on the table",
+   "under the table"
+  ],
+  "o_pt": [
+   "acima da mesa (sem encostar)",
+   "em cima da mesa (encostada)",
+   "embaixo da mesa"
+  ],
+  "dica": "A lâmpada encosta na mesa?",
+  "dica_en": "Does the lamp touch the table?",
+  "ex": "Above means higher, not touching. The lamp does not touch the table: above.",
+  "ex_pt": "Above é mais alto, sem encostar. A lâmpada não encosta na mesa: acima.",
+  "img": "media/cie3/prep-above.jpg"
+ },
+ {
+  "id": "a29",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A10",
+   "A11"
+  ],
+  "p": "The table is ___ the lamp.",
+  "p_pt": "A mesa está ___ a lâmpada.",
+  "o": [
+   "below",
+   "above",
+   "on"
+  ],
+  "o_pt": [
+   "abaixo de",
+   "acima de",
+   "em cima de"
+  ],
+  "dica": "Atenção: agora a frase começa pela mesa.",
+  "dica_en": "Careful: now the sentence starts with the table.",
+  "ex": "The lamp is above the table, so the table is below the lamp.",
+  "ex_pt": "A lâmpada está acima da mesa, então a mesa está abaixo da lâmpada.",
+  "img": "media/cie3/prep-above.jpg"
+ },
+ {
+  "id": "a30",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A10",
+   "A2"
+  ],
+  "p": "The lamp is higher than the table and does not touch it. The lamp is ___ the table.",
+  "p_pt": "A lâmpada está mais alta que a mesa e não encosta nela. A lâmpada está ___ a mesa.",
+  "o": [
+   "above",
+   "on",
+   "below"
+  ],
+  "o_pt": [
+   "acima de (sem encostar)",
+   "em cima de (encostada)",
+   "abaixo de"
+  ],
+  "dica": "Qual palavra serve quando NÃO encosta?",
+  "dica_en": "Which word do we use when things do NOT touch?",
+  "ex": "Above = higher, not touching. On = touching. The lamp does not touch: above.",
+  "ex_pt": "Above = mais alto, sem encostar. On = encostado. A lâmpada não encosta: above."
+ },
+ {
+  "id": "a31",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A11"
+  ],
+  "p": "Where is the cat?",
+  "p_pt": "Onde está o gato?",
+  "o": [
+   "below the shelf",
+   "on the shelf",
+   "above the shelf"
+  ],
+  "o_pt": [
+   "abaixo da prateleira",
+   "em cima da prateleira",
+   "acima da prateleira"
+  ],
+  "dica": "O gato está mais alto ou mais baixo que a prateleira?",
+  "dica_en": "Is the cat higher or lower than the shelf?",
+  "ex": "Below means lower. The cat is lower than the shelf: below the shelf.",
+  "ex_pt": "Below é mais baixo. O gato está mais baixo que a prateleira: abaixo dela.",
+  "img": "media/cie3/prep-below.jpg"
+ },
+ {
+  "id": "a32",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A2",
+   "A11"
+  ],
+  "p": "Where are the books?",
+  "p_pt": "Onde estão os livros?",
+  "o": [
+   "on the shelf",
+   "under the shelf",
+   "behind the shelf"
+  ],
+  "o_pt": [
+   "na prateleira (em cima)",
+   "embaixo da prateleira",
+   "atrás da prateleira"
+  ],
+  "dica": "Os livros encostam na prateleira?",
+  "dica_en": "Do the books touch the shelf?",
+  "ex": "The books touch the top of the shelf, so they are on the shelf.",
+  "ex_pt": "Os livros encostam em cima da prateleira: estão on the shelf.",
+  "img": "media/cie3/prep-below.jpg"
+ },
+ {
+  "id": "a33",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A3",
+   "A11"
+  ],
+  "p": "Which two words can finish the sentence? \"The cat is ___ the shelf.\"",
+  "p_pt": "Quais duas palavras completam a frase? \"O gato está ___ a prateleira.\"",
+  "o": [
+   "under and below",
+   "on and above",
+   "in and inside"
+  ],
+  "o_pt": [
+   "under e below",
+   "on e above",
+   "in e inside"
+  ],
+  "dica": "As duas palavras têm de dizer que ele está mais baixo.",
+  "dica_en": "Both words must say he is lower.",
+  "ex": "Under and below both tell lower. The cat is under and below the shelf.",
+  "ex_pt": "Under e below dizem mais baixo. O gato está embaixo e abaixo da prateleira.",
+  "img": "media/cie3/prep-below.jpg"
+ },
+ {
+  "id": "a34",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A11"
+  ],
+  "p": "What is below the shelf?",
+  "p_pt": "O que está abaixo da prateleira?",
+  "o": [
+   "the cat",
+   "the plant",
+   "the books"
+  ],
+  "o_pt": [
+   "o gato",
+   "a planta",
+   "os livros"
+  ],
+  "dica": "Olhe só o que está mais baixo que a prateleira.",
+  "dica_en": "Look only at what is lower than the shelf.",
+  "ex": "The books and the plant are on the shelf. The cat is below it.",
+  "ex_pt": "Os livros e a planta estão em cima da prateleira. O gato está abaixo dela.",
+  "img": "media/cie3/prep-below.jpg"
+ },
+ {
+  "id": "a35",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A12"
+  ],
+  "p": "Where is the fish?",
+  "p_pt": "Onde está o peixe?",
+  "o": [
+   "inside the bowl",
+   "on the bowl",
+   "under the bowl"
+  ],
+  "o_pt": [
+   "dentro do aquário",
+   "em cima do aquário",
+   "embaixo do aquário"
+  ],
+  "dica": "Veja o que está em volta do peixe.",
+  "dica_en": "Look at what is around the fish.",
+  "ex": "Inside: the bowl is all around the fish. The fish is inside the bowl.",
+  "ex_pt": "Inside: o aquário está em volta do peixe. O peixe está dentro dele.",
+  "img": "media/cie3/prep-inside.jpg"
+ },
+ {
+  "id": "a37",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A1",
+   "A12"
+  ],
+  "p": "Which two words can finish the sentence? \"The fish is ___ the bowl.\"",
+  "p_pt": "Quais duas palavras completam a frase? \"O peixe está ___ o aquário.\"",
+  "o": [
+   "in and inside",
+   "on and inside",
+   "in and under"
+  ],
+  "o_pt": [
+   "in e inside",
+   "on e inside",
+   "in e under"
+  ],
+  "dica": "As duas palavras têm de valer para a figura.",
+  "dica_en": "Both words must be true for the picture.",
+  "ex": "In and inside almost mean the same: the fish is in and inside the bowl.",
+  "ex_pt": "In e inside querem dizer quase o mesmo: o peixe está dentro do aquário.",
+  "img": "media/cie3/prep-inside.jpg"
+ },
+ {
+  "id": "a38",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A13",
+   "A14"
+  ],
+  "p": "Look at the window. The bird is flying ___ the trees.",
+  "p_pt": "Olhe a janela. O pássaro está voando ___ as árvores.",
+  "o": [
+   "over",
+   "under",
+   "in"
+  ],
+  "o_pt": [
+   "por cima de",
+   "embaixo de",
+   "dentro de"
+  ],
+  "dica": "O pássaro encosta nas árvores? Ele está no alto?",
+  "dica_en": "Does the bird touch the trees? Is it up high?",
+  "ex": "Over means up in the air, higher than something. The bird flies over the trees.",
+  "ex_pt": "Over é pelo alto, por cima de algo. O pássaro voa por cima das árvores.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a39",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A13",
+   "A2"
+  ],
+  "p": "A bird stands on a branch and touches it. The bird is ___ the branch.",
+  "p_pt": "Um pássaro pousa num galho e encosta nele. O pássaro está ___ o galho.",
+  "o": [
+   "on",
+   "over",
+   "under"
+  ],
+  "o_pt": [
+   "em cima de (encostado)",
+   "por cima de (sem encostar)",
+   "embaixo de"
+  ],
+  "dica": "O pássaro está voando ou encostando?",
+  "dica_en": "Is the bird flying or touching?",
+  "ex": "On = touching. Over = up in the air, not touching. The bird touches: on.",
+  "ex_pt": "On = encostado. Over = pelo alto, sem encostar. O pássaro encosta: on."
+ },
+ {
+  "id": "a40",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A13",
+   "A10",
+   "A2"
+  ],
+  "p": "Which two words tell that a thing is higher and NOT touching?",
+  "p_pt": "Quais duas palavras dizem que uma coisa está mais alta e SEM encostar?",
+  "o": [
+   "above and over",
+   "on and above",
+   "on and over"
+  ],
+  "o_pt": [
+   "above e over",
+   "on e above",
+   "on e over"
+  ],
+  "dica": "Uma destas palavras sempre encosta. Ela fica de fora.",
+  "dica_en": "One of these words always touches. Leave it out.",
+  "ex": "Above and over do not touch. On touches.",
+  "ex_pt": "Above e over não encostam. On encosta."
+ },
+ {
+  "id": "a41",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A1"
+  ],
+  "p": "Look at the table. Where is the pizza?",
+  "p_pt": "Olhe a mesa. Onde está a pizza?",
+  "o": [
+   "in the box",
+   "under the box",
+   "next to the box"
+  ],
+  "o_pt": [
+   "dentro da caixa",
+   "embaixo da caixa",
+   "ao lado da caixa"
+  ],
+  "dica": "Procure a caixa aberta em cima da mesa.",
+  "dica_en": "Find the open box on the table.",
+  "ex": "The box is open and the pizza is in it: in the box.",
+  "ex_pt": "A caixa está aberta e a pizza está dentro dela: in the box.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a42",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A6"
+  ],
+  "p": "There is a guitar ___ the lamp and the plant.",
+  "p_pt": "Há um violão ___ o abajur e a planta.",
+  "o": [
+   "between",
+   "on",
+   "under"
+  ],
+  "o_pt": [
+   "entre",
+   "em cima de",
+   "embaixo de"
+  ],
+  "dica": "Olhe de um lado e do outro do violão.",
+  "dica_en": "Look at both sides of the guitar.",
+  "ex": "The lamp is on one side, the plant on the other: between.",
+  "ex_pt": "O abajur está de um lado, a planta do outro: entre.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a43",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A5"
+  ],
+  "p": "Where are the two dogs?",
+  "p_pt": "Onde estão os dois cachorros?",
+  "o": [
+   "under the table",
+   "behind the table",
+   "on the table"
+  ],
+  "o_pt": [
+   "debaixo da mesa",
+   "atrás da mesa",
+   "em cima da mesa"
+  ],
+  "dica": "Olhe embaixo do tampo da mesa.",
+  "dica_en": "Look below the table top.",
+  "ex": "The dogs are under the table, below the top, between its legs.",
+  "ex_pt": "Os cachorros estão debaixo da mesa, entre as pernas dela.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a44",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A4"
+  ],
+  "p": "The window is ___ the sofa.",
+  "p_pt": "A janela está ___ o sofá.",
+  "o": [
+   "behind",
+   "in front of",
+   "on"
+  ],
+  "o_pt": [
+   "atrás de",
+   "na frente de",
+   "em cima de"
+  ],
+  "dica": "O sofá esconde a parte de baixo da janela?",
+  "dica_en": "Does the sofa hide the bottom of the window?",
+  "ex": "The sofa hides part of the window, so the window is behind the sofa.",
+  "ex_pt": "O sofá esconde parte da janela, então a janela está atrás do sofá.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a45",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A7"
+  ],
+  "p": "The racket is ___ the bag.",
+  "p_pt": "A raquete está ___ a mochila.",
+  "o": [
+   "next to",
+   "under",
+   "far from"
+  ],
+  "o_pt": [
+   "ao lado de",
+   "embaixo de",
+   "longe de"
+  ],
+  "dica": "Procure a raquete vermelha e a mochila verde, lá no canto.",
+  "dica_en": "Find the red racket and the green bag in the corner.",
+  "ex": "They are side by side, so the racket is next to the bag.",
+  "ex_pt": "Elas estão lado a lado, então a raquete está ao lado da mochila.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a46",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A2"
+  ],
+  "p": "The cheese is ___ the plate.",
+  "p_pt": "O queijo está ___ o prato.",
+  "o": [
+   "on",
+   "above",
+   "under"
+  ],
+  "o_pt": [
+   "em cima de (encostado)",
+   "acima de (sem encostar)",
+   "embaixo de"
+  ],
+  "dica": "O queijo encosta no prato?",
+  "dica_en": "Does the cheese touch the plate?",
+  "ex": "The cheese touches the plate, so it is on the plate.",
+  "ex_pt": "O queijo encosta no prato, então está on the plate.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a47",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A5"
+  ],
+  "p": "The rug is ___ the sofa.",
+  "p_pt": "O tapete está ___ o sofá.",
+  "o": [
+   "in front of",
+   "behind",
+   "far from"
+  ],
+  "o_pt": [
+   "na frente de",
+   "atrás de",
+   "longe de"
+  ],
+  "dica": "Quem está mais perto de você: o tapete ou o sofá?",
+  "dica_en": "Which is closer to you: the rug or the sofa?",
+  "ex": "The rug is closer to us than the sofa: it is in front of the sofa.",
+  "ex_pt": "O tapete está mais perto de nós que o sofá: está na frente dele.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a48",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A3"
+  ],
+  "p": "Where is the lamp?",
+  "p_pt": "Onde está o abajur?",
+  "o": [
+   "under the shelf",
+   "on the shelf",
+   "above the shelf"
+  ],
+  "o_pt": [
+   "embaixo da prateleira",
+   "em cima da prateleira",
+   "acima da prateleira"
+  ],
+  "dica": "O abajur está mais alto ou mais baixo que a prateleira?",
+  "dica_en": "Is the lamp higher or lower than the shelf?",
+  "ex": "The lamp is lower than the shelf: it is under the shelf.",
+  "ex_pt": "O abajur está mais baixo que a prateleira: está embaixo dela.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a49",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A6"
+  ],
+  "p": "What is between the books?",
+  "p_pt": "O que está entre os livros?",
+  "o": [
+   "the trophy",
+   "the lamp",
+   "the guitar"
+  ],
+  "o_pt": [
+   "o troféu",
+   "o abajur",
+   "o violão"
+  ],
+  "dica": "Olhe em cima da prateleira.",
+  "dica_en": "Look on top of the shelf.",
+  "ex": "There are books on each side of the trophy: it is between the books.",
+  "ex_pt": "Há livros de cada lado do troféu: ele está entre os livros.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a50",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A2"
+  ],
+  "p": "Where is the picture?",
+  "p_pt": "Onde está o quadro?",
+  "o": [
+   "on the wall",
+   "on the shelf",
+   "on the sofa"
+  ],
+  "o_pt": [
+   "na parede",
+   "na prateleira",
+   "no sofá"
+  ],
+  "dica": "Olhe onde o quadro está pendurado.",
+  "dica_en": "Look at where the picture hangs.",
+  "ex": "On also means touching a wall. The picture is on the wall.",
+  "ex_pt": "On também vale para parede. O quadro está on the wall.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a51",
+  "tema": "position",
+  "tipo": "leitura",
+  "at": [
+   "A14",
+   "A1"
+  ],
+  "p": "The two fish are ___ the bowl.",
+  "p_pt": "Os dois peixes estão ___ o aquário.",
+  "o": [
+   "in",
+   "on",
+   "under"
+  ],
+  "o_pt": [
+   "dentro de",
+   "em cima de",
+   "embaixo de"
+  ],
+  "dica": "Procure os peixes laranja, perto da janela.",
+  "dica_en": "Find the orange fish near the window.",
+  "ex": "The water and the bowl are around the fish: they are in the bowl.",
+  "ex_pt": "A água e o aquário estão em volta dos peixes: estão dentro dele.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "d01",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "Look at the map. Which section is on the left of the Auditorium?",
+  "p_pt": "Olhe o mapa. Qual seção está à esquerda do Auditório?",
+  "o": [
+   "A section",
+   "B section",
+   "C section"
+  ],
+  "o_pt": [
+   "Seção A",
+   "Seção B",
+   "Seção C"
+  ],
+  "dica": "Lado de quem olha o mapa: qual é a sua mão esquerda?",
+  "dica_en": "Use your side as you look at the map. Which is your left hand?",
+  "ex": "Left is your left hand's side of the map. A section is left of the Auditorium.",
+  "ex_pt": "Esquerda é o lado da sua mão esquerda. A seção A está à esquerda do Auditório.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d02",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "The B section is on the ___ of the Auditorium.",
+  "p_pt": "A seção B está à ___ do Auditório.",
+  "o": [
+   "right",
+   "left",
+   "top"
+  ],
+  "o_pt": [
+   "direita",
+   "esquerda",
+   "parte de cima"
+  ],
+  "dica": "Primeiro ache o Auditório, depois a seção B.",
+  "dica_en": "First find the Auditorium, then find B section.",
+  "ex": "B section is on your right hand's side of the Auditorium: right.",
+  "ex_pt": "A seção B fica do lado da sua mão direita: direita.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d03",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "What is between the A section and the B section?",
+  "p_pt": "O que está entre a seção A e a seção B?",
+  "o": [
+   "the Auditorium",
+   "the Trix",
+   "the Entrance"
+  ],
+  "o_pt": [
+   "o Auditório",
+   "a Trix",
+   "a Entrada"
+  ],
+  "dica": "Coloque um dedo em cada seção e olhe o meio.",
+  "dica_en": "Put one finger on each section and look at the middle.",
+  "ex": "The Auditorium has A on one side and B on the other: it is between.",
+  "ex_pt": "O Auditório tem a seção A de um lado e a B do outro: está entre elas.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d04",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "Where is the Auditorium?",
+  "p_pt": "Onde está o Auditório?",
+  "o": [
+   "between the A and B sections",
+   "between the two gyms",
+   "next to the C section"
+  ],
+  "o_pt": [
+   "entre as seções A e B",
+   "entre os dois ginásios",
+   "ao lado da seção C"
+  ],
+  "dica": "Ache a palavra Auditorium e veja o que há dos dois lados.",
+  "dica_en": "Find the word Auditorium and look at both sides.",
+  "ex": "The A section and the B section are on its sides, so it is between them.",
+  "ex_pt": "As seções A e B ficam dos lados dele, então ele está entre elas.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d05",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "Where is Gym/Court 1 on the map?",
+  "p_pt": "Onde está o Ginásio/Quadra 1 no mapa?",
+  "o": [
+   "at the top, on the right",
+   "at the top, on the left",
+   "at the bottom, on the right"
+  ],
+  "o_pt": [
+   "em cima, à direita",
+   "em cima, à esquerda",
+   "embaixo, à direita"
+  ],
+  "dica": "Procure o número 1 e pense nas suas duas mãos.",
+  "dica_en": "Find the number 1 and think of your two hands.",
+  "ex": "Gym/Court 1 is at the top of the map, on the right side.",
+  "ex_pt": "O Ginásio/Quadra 1 fica no alto do mapa, do lado direito.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d06",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "Where is Gym/Court 2 on the map?",
+  "p_pt": "Onde está o Ginásio/Quadra 2 no mapa?",
+  "o": [
+   "at the top, on the left",
+   "at the top, on the right",
+   "at the bottom, on the left"
+  ],
+  "o_pt": [
+   "em cima, à esquerda",
+   "em cima, à direita",
+   "embaixo, à esquerda"
+  ],
+  "dica": "Procure o número 2 e pense nas suas duas mãos.",
+  "dica_en": "Find the number 2 and think of your two hands.",
+  "ex": "Gym/Court 2 is at the top of the map, on the left side.",
+  "ex_pt": "O Ginásio/Quadra 2 fica no alto do mapa, do lado esquerdo.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d07",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "What is between Gym/Court 2 and Gym/Court 1?",
+  "p_pt": "O que está entre o Ginásio/Quadra 2 e o Ginásio/Quadra 1?",
+  "o": [
+   "C section",
+   "A section",
+   "the Auditorium"
+  ],
+  "o_pt": [
+   "a seção C",
+   "a seção A",
+   "o Auditório"
+  ],
+  "dica": "Olhe o meio dos dois ginásios, lá no alto do mapa.",
+  "dica_en": "Look at the middle of the two gyms, at the top of the map.",
+  "ex": "C section has a gym on each side, so it is between the two gyms.",
+  "ex_pt": "A seção C tem um ginásio de cada lado: está entre os dois.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d08",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D6"
+  ],
+  "p": "Which place is above the Auditorium?",
+  "p_pt": "Qual lugar fica acima do Auditorium?",
+  "o": [
+   "the Trix",
+   "the A section",
+   "the Entrance"
+  ],
+  "o_pt": [
+   "o Trix",
+   "a A section",
+   "a Entrance"
+  ],
+  "dica": "Ache a palavra Patio e olhe para cima dela.",
+  "dica_en": "Find the word Patio and look higher up.",
+  "ex": "The Trix is at the top, right above the Auditorium.",
+  "ex_pt": "O Trix fica no alto, logo acima do Auditorium.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d09",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "Where is the Entrance?",
+  "p_pt": "Onde está a Entrada?",
+  "o": [
+   "under the Auditorium",
+   "above the C section",
+   "next to the Treehouse"
+  ],
+  "o_pt": [
+   "embaixo do Auditório",
+   "acima da seção C",
+   "ao lado da Casa na Árvore"
+  ],
+  "dica": "Ache a palavra Entrance. Ela está na parte alta ou baixa do mapa?",
+  "dica_en": "Find the word Entrance. Is it high or low on the map?",
+  "ex": "The Entrance is low on the map, under the Auditorium.",
+  "ex_pt": "A Entrada fica na parte baixa do mapa, embaixo do Auditório.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d10",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "Which place is under everything on the map?",
+  "p_pt": "Qual lugar está embaixo de tudo no mapa?",
+  "o": [
+   "the Drive",
+   "the C section",
+   "the Trix"
+  ],
+  "o_pt": [
+   "a Rua (Drive)",
+   "a seção C",
+   "a Trix"
+  ],
+  "dica": "Olhe a linha mais baixa do mapa.",
+  "dica_en": "Look at the lowest line of the map.",
+  "ex": "The Drive is at the very bottom of the map, under everything.",
+  "ex_pt": "O Drive fica bem na parte de baixo do mapa, embaixo de tudo.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d11",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "Look at the map. Which place is on your right-hand side?",
+  "p_pt": "Olhe o mapa. Qual lugar está do lado da sua mão direita?",
+  "o": [
+   "Gym/Court 1",
+   "Gym/Court 2",
+   "the Treehouse"
+  ],
+  "o_pt": [
+   "Ginásio/Quadra 1",
+   "Ginásio/Quadra 2",
+   "a Casa na Árvore"
+  ],
+  "dica": "Levante a mão direita e olhe para esse lado do mapa.",
+  "dica_en": "Raise your right hand and look at that side of the map.",
+  "ex": "Left and right are the sides of the person looking. Gym/Court 1 is on the right.",
+  "ex_pt": "Esquerda e direita são de quem olha o mapa. O Ginásio 1 está à direita.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d12",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D1",
+   "D6"
+  ],
+  "p": "The Treehouse is on the ___ of the Trix.",
+  "p_pt": "A Casa na Árvore está à ___ da Trix.",
+  "o": [
+   "left",
+   "right",
+   "bottom"
+  ],
+  "o_pt": [
+   "esquerda",
+   "direita",
+   "parte de baixo"
+  ],
+  "dica": "Primeiro ache a Trix, depois a árvore.",
+  "dica_en": "First find the Trix, then find the tree.",
+  "ex": "The Treehouse is on your left hand's side of the Trix: left.",
+  "ex_pt": "A Casa na Árvore fica do lado da sua mão esquerda em relação à Trix: esquerda.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d13",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D5"
+  ],
+  "p": "The red pin marks a place on this map. Which place?",
+  "p_pt": "O pino vermelho marca um lugar neste mapa. Qual lugar?",
+  "o": [
+   "a Year 2 classroom",
+   "the Auditorium",
+   "the Entrance"
+  ],
+  "o_pt": [
+   "uma sala do Year 2",
+   "o Auditório",
+   "a Entrada"
+  ],
+  "dica": "Procure o pino vermelho e leia o que está embaixo dele.",
+  "dica_en": "Find the red pin and read the words under it.",
+  "ex": "A red pin marks a place. Here it marks a Year 2 classroom.",
+  "ex_pt": "O pino vermelho marca um lugar. Aqui ele marca uma sala do Year 2.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d14",
+  "tema": "directions",
+  "tipo": "leitura",
+  "at": [
+   "D5",
+   "D6"
+  ],
+  "p": "The red pin is in which section?",
+  "p_pt": "O pino vermelho esta em qual secao?",
+  "o": [
+   "B section",
+   "A section",
+   "C section"
+  ],
+  "o_pt": [
+   "B section",
+   "A section",
+   "C section"
+  ],
+  "dica": "Ache o pino e procure a seção mais perto dele.",
+  "dica_en": "Find the pin and look for the closest section.",
+  "ex": "The red pin is on a Year 2 classroom, in B section.",
+  "ex_pt": "O pino esta numa sala do Year 2, na B section.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d15",
+  "tema": "directions",
+  "tipo": "conceito",
+  "at": [
+   "D5"
+  ],
+  "p": "What does a red pin do on a map?",
+  "p_pt": "O que um pino vermelho faz num mapa?",
+  "o": [
+   "It marks a place.",
+   "It shows the way to go.",
+   "It is a kind of map."
+  ],
+  "o_pt": [
+   "Ele marca um lugar.",
+   "Ele mostra o caminho a seguir.",
+   "Ele e um tipo de mapa."
+  ],
+  "dica": "Lembre do pino no mapa da escola.",
+  "dica_en": "Remember the pin on the school map.",
+  "ex": "A red pin marks a place on the map.",
+  "ex_pt": "Um pino vermelho marca um lugar no mapa."
+ },
+ {
+  "id": "d16",
+  "tema": "directions",
+  "tipo": "rapida",
+  "at": [
+   "D4"
+  ],
+  "p": "What kind of map is this?",
+  "p_pt": "Que tipo de mapa é este?",
+  "o": [
+   "a map of the school",
+   "a map of a city",
+   "a GPS route"
+  ],
+  "o_pt": [
+   "um mapa da escola",
+   "um mapa de uma cidade",
+   "uma rota de GPS"
+  ],
+  "dica": "Leia as palavras: que lugares aparecem nele?",
+  "dica_en": "Read the words: what places are on it?",
+  "ex": "It shows classrooms, gyms and the Auditorium, so it is a map of the school.",
+  "ex_pt": "Mostra salas, ginásios e o Auditório, então é um mapa da escola.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d17",
+  "tema": "directions",
+  "tipo": "conceito",
+  "at": [
+   "D4"
+  ],
+  "p": "A blue line on the screen shows the way to go. What is it?",
+  "p_pt": "Uma linha azul na tela mostra o caminho a seguir. O que é?",
+  "o": [
+   "a GPS route",
+   "a map of the school",
+   "a red pin"
+  ],
+  "o_pt": [
+   "uma rota de GPS",
+   "um mapa da escola",
+   "um pino vermelho"
+  ],
+  "dica": "Lembre dos mapas do slide Reading Map.",
+  "dica_en": "Remember the maps on the Reading Map slide.",
+  "ex": "A GPS route shows the way to go with a line on the map.",
+  "ex_pt": "A rota de GPS mostra o caminho com uma linha no mapa."
+ },
+ {
+  "id": "d18",
+  "tema": "directions",
+  "tipo": "conceito",
+  "at": [
+   "D4"
+  ],
+  "p": "You want to see all of São Paulo. Which one do you need?",
+  "p_pt": "Você quer ver São Paulo inteira. Do que você precisa?",
+  "o": [
+   "a map of a city",
+   "a map of the school",
+   "a red pin"
+  ],
+  "o_pt": [
+   "um mapa de uma cidade",
+   "um mapa da escola",
+   "um pino vermelho"
+  ],
+  "dica": "São Paulo é uma escola ou uma cidade?",
+  "dica_en": "Is São Paulo a school or a city?",
+  "ex": "São Paulo is a city, so we need a map of a city.",
+  "ex_pt": "São Paulo é uma cidade, então precisamos de um mapa de cidade."
+ },
+ {
+  "id": "d19",
+  "tema": "directions",
+  "tipo": "conceito",
+  "at": [
+   "D4",
+   "D5"
+  ],
+  "p": "Which two are kinds of maps?",
+  "p_pt": "Quais dois são tipos de mapa?",
+  "o": [
+   "a city map and a GPS route",
+   "a red pin and a city map",
+   "a red pin and a GPS route"
+  ],
+  "o_pt": [
+   "um mapa de cidade e uma rota de GPS",
+   "um pino vermelho e um mapa de cidade",
+   "um pino vermelho e uma rota de GPS"
+  ],
+  "dica": "Uma destas coisas só marca um lugar: não é mapa.",
+  "dica_en": "One of these only marks a place: it is not a map.",
+  "ex": "City maps and GPS routes are maps. A red pin only marks a place.",
+  "ex_pt": "Mapa de cidade e rota de GPS são mapas. O pino só marca um lugar."
+ },
+ {
+  "id": "d20",
+  "tema": "directions",
+  "tipo": "conceito",
+  "at": [
+   "D2"
+  ],
+  "p": "When we read maps, we need to pay a lot of attention to...",
+  "p_pt": "Quando lemos mapas, precisamos prestar muita atencao em...",
+  "o": [
+   "the details and the path",
+   "the red pin and the colours",
+   "the left and the right"
+  ],
+  "o_pt": [
+   "os detalhes e o caminho",
+   "o pino vermelho e as cores",
+   "a esquerda e a direita"
+  ],
+  "dica": "Lembre da frase em destaque no slide Reading Map.",
+  "dica_en": "Remember the big sentence on the Reading Map slide.",
+  "ex": "Map rule: pay attention to the details and the path.",
+  "ex_pt": "Regra do mapa: atencao aos detalhes e ao caminho."
+ },
+ {
+  "id": "d21",
+  "tema": "directions",
+  "tipo": "conceito",
+  "at": [
+   "D2"
+  ],
+  "p": "On a map, the path is…",
+  "p_pt": "Em um mapa, o caminho (path) é…",
+  "o": [
+   "the way we are going",
+   "the pin on the map",
+   "the name of a place"
+  ],
+  "o_pt": [
+   "o caminho por onde vamos",
+   "o pino no mapa",
+   "o nome de um lugar"
+  ],
+  "dica": "Lembre: path (way).",
+  "dica_en": "Remember: path (way).",
+  "ex": "Path means way: it is the way we are going.",
+  "ex_pt": "Path quer dizer way: é o caminho por onde vamos."
+ },
+ {
+  "id": "d22",
+  "tema": "directions",
+  "tipo": "rapida",
+  "at": [
+   "D3"
+  ],
+  "p": "We might get ___ if we run or don't pay attention.",
+  "p_pt": "Podemos ficar ___ se corrermos ou não prestarmos atenção.",
+  "o": [
+   "lost",
+   "late",
+   "tired"
+  ],
+  "o_pt": [
+   "perdidos",
+   "atrasados",
+   "cansados"
+  ],
+  "dica": "O que acontece quando não sabemos mais onde estamos?",
+  "dica_en": "What happens when we don't know where we are?",
+  "ex": "If we run or don't pay attention to the map, we might get lost.",
+  "ex_pt": "Se corremos ou não prestamos atenção no mapa, podemos nos perder."
+ },
+ {
+  "id": "d23",
+  "tema": "directions",
+  "tipo": "conceito",
+  "at": [
+   "D3"
+  ],
+  "p": "Why might we get lost?",
+  "p_pt": "Por que podemos nos perder?",
+  "o": [
+   "We run or don't pay attention.",
+   "We ask a friend about the map.",
+   "We use a GPS route."
+  ],
+  "o_pt": [
+   "Corremos ou nao prestamos atencao.",
+   "Perguntamos a um colega sobre o mapa.",
+   "Usamos uma rota de GPS."
+  ],
+  "dica": "Lembre do que o slide manda NÃO fazer.",
+  "dica_en": "Remember what the slide says NOT to do.",
+  "ex": "We might get lost if we run or don't pay attention.",
+  "ex_pt": "Podemos nos perder se corremos ou nao prestamos atencao."
+ }
+]

@@ -1,0 +1,749 @@
+[
+ {
+  "id": "a01",
+  "p": "Where is the teddy bear?",
+  "o": [
+   "in the box",
+   "on the box",
+   "under the box"
+  ],
+  "at": [
+   "A1"
+  ],
+  "img": "media/cie3/prep-in.jpg",
+  "ex": "In: a thing has something around it. The bear is in the box."
+ },
+ {
+  "id": "a02",
+  "p": "Which sentence is right?",
+  "o": [
+   "The teddy bear is in the box.",
+   "The teddy bear is behind the box.",
+   "The teddy bear is next to the box."
+  ],
+  "at": [
+   "A1"
+  ],
+  "img": "media/cie3/prep-in.jpg",
+  "ex": "The box is around the bear, so the bear is in the box."
+ },
+ {
+  "id": "a03",
+  "p": "Which word means almost the same as \"in\"?",
+  "o": [
+   "inside",
+   "on",
+   "under"
+  ],
+  "at": [
+   "A1",
+   "A12"
+  ],
+  "img": null,
+  "ex": "In and inside almost mean the same: the fish is in the bowl, inside the bowl."
+ },
+ {
+  "id": "a04",
+  "p": "Where is the apple?",
+  "o": [
+   "on the book",
+   "above the book",
+   "under the book"
+  ],
+  "at": [
+   "A2",
+   "A10"
+  ],
+  "img": "media/cie3/prep-on.jpg",
+  "ex": "On means touching the top. The apple touches the book, so it is on the book."
+ },
+ {
+  "id": "a05",
+  "p": "The book is ___ the apple.",
+  "o": [
+   "under",
+   "above",
+   "next to"
+  ],
+  "at": [
+   "A2",
+   "A3"
+  ],
+  "img": "media/cie3/prep-on.jpg",
+  "ex": "The apple is on the book, so the book is under the apple."
+ },
+ {
+  "id": "a06",
+  "p": "The apple touches the book. The apple is ___ the book.",
+  "o": [
+   "on",
+   "above",
+   "below"
+  ],
+  "at": [
+   "A2",
+   "A10"
+  ],
+  "img": null,
+  "ex": "On = touching. Above = higher, not touching. The apple touches the book: on."
+ },
+ {
+  "id": "a07",
+  "p": "Where is the ball?",
+  "o": [
+   "under the table",
+   "on the table",
+   "above the table"
+  ],
+  "at": [
+   "A3"
+  ],
+  "img": "media/cie3/prep-under.jpg",
+  "ex": "Under means lower, with something on top of it. The ball is under the table."
+ },
+ {
+  "id": "a08",
+  "p": "The table is ___ the ball.",
+  "o": [
+   "above",
+   "under",
+   "in"
+  ],
+  "at": [
+   "A3",
+   "A10"
+  ],
+  "img": "media/cie3/prep-under.jpg",
+  "ex": "The ball is under the table, so the table is above the ball."
+ },
+ {
+  "id": "a09",
+  "p": "Where is the boy?",
+  "o": [
+   "behind the tree",
+   "in front of the tree",
+   "on the tree"
+  ],
+  "at": [
+   "A4"
+  ],
+  "img": "media/cie3/prep-behind.jpg",
+  "ex": "Behind: the tree hides part of the boy. The boy is behind the tree."
+ },
+ {
+  "id": "a10",
+  "p": "The tree is ___ the boy.",
+  "o": [
+   "in front of",
+   "behind",
+   "far from"
+  ],
+  "at": [
+   "A4",
+   "A5"
+  ],
+  "img": "media/cie3/prep-behind.jpg",
+  "ex": "The boy is behind the tree, so the tree is in front of the boy."
+ },
+ {
+  "id": "a11",
+  "p": "Which sentence is right?",
+  "o": [
+   "The boy is behind the tree.",
+   "The boy is in front of the tree.",
+   "The boy is in the tree."
+  ],
+  "at": [
+   "A4"
+  ],
+  "img": "media/cie3/prep-behind.jpg",
+  "ex": "The tree is closer to us and hides the boy: he is behind it."
+ },
+ {
+  "id": "a12",
+  "p": "Where is the dog?",
+  "o": [
+   "in front of the chair",
+   "behind the chair",
+   "on the chair"
+  ],
+  "at": [
+   "A5"
+  ],
+  "img": "media/cie3/prep-in-front-of.jpg",
+  "ex": "In front of: nothing hides the dog. The dog is in front of the chair."
+ },
+ {
+  "id": "a13",
+  "p": "The chair is ___ the dog.",
+  "o": [
+   "behind",
+   "in front of",
+   "on"
+  ],
+  "at": [
+   "A5",
+   "A4"
+  ],
+  "img": "media/cie3/prep-in-front-of.jpg",
+  "ex": "The dog is in front of the chair, so the chair is behind the dog."
+ },
+ {
+  "id": "a14",
+  "p": "Which sentence is right?",
+  "o": [
+   "The dog is in front of the chair.",
+   "The dog is under the chair.",
+   "The dog is behind the chair."
+  ],
+  "at": [
+   "A5"
+  ],
+  "img": "media/cie3/prep-in-front-of.jpg",
+  "ex": "The dog is closer to us than the chair: it is in front of the chair."
+ },
+ {
+  "id": "a15",
+  "p": "Which two words are opposites?",
+  "o": [
+   "behind and in front of",
+   "in and inside",
+   "near and next to"
+  ],
+  "at": [
+   "A4",
+   "A5"
+  ],
+  "img": null,
+  "ex": "Behind and in front of are opposites. In and inside almost mean the same."
+ },
+ {
+  "id": "a16",
+  "p": "Where is the teddy bear?",
+  "o": [
+   "between the two plants",
+   "behind the two plants",
+   "on the two plants"
+  ],
+  "at": [
+   "A6"
+  ],
+  "img": "media/cie3/prep-between.jpg",
+  "ex": "Between means in the middle of two things. The bear is between the plants."
+ },
+ {
+  "id": "a17",
+  "p": "Which sentence is right?",
+  "o": [
+   "The teddy bear is between the two plants.",
+   "The teddy bear is under the two plants.",
+   "The teddy bear is far from the two plants."
+  ],
+  "at": [
+   "A6"
+  ],
+  "img": "media/cie3/prep-between.jpg",
+  "ex": "There is a plant on each side of the bear: it is between them."
+ },
+ {
+  "id": "a18",
+  "p": "We say \"between\" when a thing is in the middle of…",
+  "o": [
+   "two things",
+   "one thing",
+   "a wall"
+  ],
+  "at": [
+   "A6"
+  ],
+  "img": null,
+  "ex": "Between needs two things, one on each side: the bear is between two plants."
+ },
+ {
+  "id": "a19",
+  "p": "Where is the clock?",
+  "o": [
+   "next to the lamp",
+   "on the lamp",
+   "far from the lamp"
+  ],
+  "at": [
+   "A7"
+  ],
+  "img": "media/cie3/prep-next-to.jpg",
+  "ex": "Next to means right at the side. The clock is next to the lamp."
+ },
+ {
+  "id": "a20",
+  "p": "Which sentence is right?",
+  "o": [
+   "The lamp is next to the clock.",
+   "The lamp is under the clock.",
+   "The lamp is far from the clock."
+  ],
+  "at": [
+   "A7"
+  ],
+  "img": "media/cie3/prep-next-to.jpg",
+  "ex": "They are side by side, so the lamp is next to the clock too."
+ },
+ {
+  "id": "a21",
+  "p": "Which two words can finish the sentence? \"The clock is ___ the lamp.\"",
+  "o": [
+   "next to and near",
+   "near and far from",
+   "far from and above"
+  ],
+  "at": [
+   "A7",
+   "A8"
+  ],
+  "img": "media/cie3/prep-next-to.jpg",
+  "ex": "The clock is at the lamp's side and close to it: next to and near."
+ },
+ {
+  "id": "a22",
+  "p": "Where is the tree?",
+  "o": [
+   "near the house",
+   "far from the house",
+   "on the house"
+  ],
+  "at": [
+   "A8"
+  ],
+  "img": "media/cie3/prep-near.jpg",
+  "ex": "Near means close. The tree is close to the house: near the house."
+ },
+ {
+  "id": "a23",
+  "p": "The house is ___ the tree.",
+  "o": [
+   "near",
+   "far from",
+   "under"
+  ],
+  "at": [
+   "A8"
+  ],
+  "img": "media/cie3/prep-near.jpg",
+  "ex": "The tree is near the house, so the house is near the tree too."
+ },
+ {
+  "id": "a24",
+  "p": "Where is the tree?",
+  "o": [
+   "far from the house",
+   "next to the house",
+   "near the house"
+  ],
+  "at": [
+   "A9"
+  ],
+  "img": "media/cie3/prep-far-from.jpg",
+  "ex": "Far from means not close. The long arrow shows the tree is far from the house."
+ },
+ {
+  "id": "a25",
+  "p": "The house is ___ the tree.",
+  "o": [
+   "far from",
+   "next to",
+   "in"
+  ],
+  "at": [
+   "A9"
+  ],
+  "img": "media/cie3/prep-far-from.jpg",
+  "ex": "There is a long way between them, so the house is far from the tree."
+ },
+ {
+  "id": "a26",
+  "p": "Which one is the opposite of \"near\"?",
+  "o": [
+   "far from",
+   "next to",
+   "between"
+  ],
+  "at": [
+   "A8",
+   "A9"
+  ],
+  "img": null,
+  "ex": "Near means close. Far from means not close. They are opposites."
+ },
+ {
+  "id": "a27",
+  "p": "Which two words tell that a thing is close?",
+  "o": [
+   "near and next to",
+   "near and far from",
+   "next to and far from"
+  ],
+  "at": [
+   "A7",
+   "A8",
+   "A9"
+  ],
+  "img": null,
+  "ex": "Near and next to are close. Far from is not close."
+ },
+ {
+  "id": "a28",
+  "p": "Where is the lamp?",
+  "o": [
+   "above the table",
+   "on the table",
+   "under the table"
+  ],
+  "at": [
+   "A10",
+   "A2"
+  ],
+  "img": "media/cie3/prep-above.jpg",
+  "ex": "Above means higher, not touching. The lamp does not touch the table: above."
+ },
+ {
+  "id": "a29",
+  "p": "The table is ___ the lamp.",
+  "o": [
+   "below",
+   "above",
+   "on"
+  ],
+  "at": [
+   "A10",
+   "A11"
+  ],
+  "img": "media/cie3/prep-above.jpg",
+  "ex": "The lamp is above the table, so the table is below the lamp."
+ },
+ {
+  "id": "a30",
+  "p": "The lamp is higher than the table and does not touch it. The lamp is ___ the table.",
+  "o": [
+   "above",
+   "on",
+   "below"
+  ],
+  "at": [
+   "A10",
+   "A2"
+  ],
+  "img": null,
+  "ex": "Above = higher, not touching. On = touching. The lamp does not touch: above."
+ },
+ {
+  "id": "a31",
+  "p": "Where is the cat?",
+  "o": [
+   "below the shelf",
+   "on the shelf",
+   "above the shelf"
+  ],
+  "at": [
+   "A11"
+  ],
+  "img": "media/cie3/prep-below.jpg",
+  "ex": "Below means lower. The cat is lower than the shelf: below the shelf."
+ },
+ {
+  "id": "a32",
+  "p": "Where are the books?",
+  "o": [
+   "on the shelf",
+   "below the shelf",
+   "next to the cat"
+  ],
+  "at": [
+   "A2",
+   "A11"
+  ],
+  "img": "media/cie3/prep-below.jpg",
+  "ex": "The books touch the top of the shelf, so they are on the shelf."
+ },
+ {
+  "id": "a33",
+  "p": "Which two words can finish the sentence? \"The cat is ___ the shelf.\"",
+  "o": [
+   "under and below",
+   "on and above",
+   "in and inside"
+  ],
+  "at": [
+   "A3",
+   "A11"
+  ],
+  "img": "media/cie3/prep-below.jpg",
+  "ex": "Under and below both tell lower. The cat is under and below the shelf."
+ },
+ {
+  "id": "a34",
+  "p": "What is below the shelf?",
+  "o": [
+   "the cat",
+   "the plant",
+   "the books"
+  ],
+  "at": [
+   "A11"
+  ],
+  "img": "media/cie3/prep-below.jpg",
+  "ex": "The books and the plant are on the shelf. The cat is below it."
+ },
+ {
+  "id": "a35",
+  "p": "Where is the fish?",
+  "o": [
+   "inside the bowl",
+   "on the bowl",
+   "under the bowl"
+  ],
+  "at": [
+   "A12"
+  ],
+  "img": "media/cie3/prep-inside.jpg",
+  "ex": "Inside: the bowl is all around the fish. The fish is inside the bowl."
+ },
+ {
+  "id": "a36",
+  "p": "Which sentence is right?",
+  "o": [
+   "The fish is inside the bowl.",
+   "The fish is next to the bowl.",
+   "The fish is behind the bowl."
+  ],
+  "at": [
+   "A12"
+  ],
+  "img": "media/cie3/prep-inside.jpg",
+  "ex": "The fish swims in the water of the bowl: it is inside the bowl."
+ },
+ {
+  "id": "a37",
+  "p": "Which two words can finish the sentence? \"The fish is ___ the bowl.\"",
+  "o": [
+   "in and inside",
+   "on and inside",
+   "in and under"
+  ],
+  "at": [
+   "A1",
+   "A12"
+  ],
+  "img": "media/cie3/prep-inside.jpg",
+  "ex": "In and inside almost mean the same: the fish is in and inside the bowl."
+ },
+ {
+  "id": "a38",
+  "p": "Look at the window. The bird is flying ___ the trees.",
+  "o": [
+   "over",
+   "under",
+   "in"
+  ],
+  "at": [
+   "A13",
+   "A14"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "Over means up in the air, higher than something. The bird flies over the trees."
+ },
+ {
+  "id": "a39",
+  "p": "A bird stands on a branch and touches it. The bird is ___ the branch.",
+  "o": [
+   "on",
+   "over",
+   "under"
+  ],
+  "at": [
+   "A13",
+   "A2"
+  ],
+  "img": null,
+  "ex": "On = touching. Over = up in the air, not touching. The bird touches: on."
+ },
+ {
+  "id": "a40",
+  "p": "Which two words tell that a thing is higher and NOT touching?",
+  "o": [
+   "above and over",
+   "on and above",
+   "on and over"
+  ],
+  "at": [
+   "A13",
+   "A10",
+   "A2"
+  ],
+  "img": null,
+  "ex": "Above and over do not touch. On touches."
+ },
+ {
+  "id": "a41",
+  "p": "Look at the table. Where is the pizza?",
+  "o": [
+   "in the box",
+   "under the box",
+   "next to the box"
+  ],
+  "at": [
+   "A14",
+   "A1"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "The box is open and the pizza is in it: in the box."
+ },
+ {
+  "id": "a42",
+  "p": "There is a guitar ___ the lamp and the plant.",
+  "o": [
+   "between",
+   "on",
+   "under"
+  ],
+  "at": [
+   "A14",
+   "A6"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "The lamp is on one side, the plant on the other: between."
+ },
+ {
+  "id": "a43",
+  "p": "Where are the two dogs?",
+  "o": [
+   "under the table",
+   "behind the table",
+   "on the table"
+  ],
+  "at": [
+   "A14",
+   "A5"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "The dogs are under the table, below the top, between its legs."
+ },
+ {
+  "id": "a44",
+  "p": "The window is ___ the sofa.",
+  "o": [
+   "behind",
+   "in front of",
+   "on"
+  ],
+  "at": [
+   "A14",
+   "A4"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "The sofa hides part of the window, so the window is behind the sofa."
+ },
+ {
+  "id": "a45",
+  "p": "The racket is ___ the bag.",
+  "o": [
+   "next to",
+   "under",
+   "far from"
+  ],
+  "at": [
+   "A14",
+   "A7"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "They are side by side, so the racket is next to the bag."
+ },
+ {
+  "id": "a46",
+  "p": "The cheese is ___ the plate.",
+  "o": [
+   "on",
+   "above",
+   "under"
+  ],
+  "at": [
+   "A14",
+   "A2"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "The cheese touches the plate, so it is on the plate."
+ },
+ {
+  "id": "a47",
+  "p": "The rug is ___ the sofa.",
+  "o": [
+   "in front of",
+   "behind",
+   "far from"
+  ],
+  "at": [
+   "A14",
+   "A5"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "The rug is closer to us than the sofa: it is in front of the sofa."
+ },
+ {
+  "id": "a48",
+  "p": "Where is the lamp?",
+  "o": [
+   "under the shelf",
+   "on the shelf",
+   "above the shelf"
+  ],
+  "at": [
+   "A14",
+   "A3"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "The lamp is lower than the shelf: it is under the shelf."
+ },
+ {
+  "id": "a49",
+  "p": "What is between the books?",
+  "o": [
+   "the trophy",
+   "the lamp",
+   "the guitar"
+  ],
+  "at": [
+   "A14",
+   "A6"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "There are books on each side of the trophy: it is between the books."
+ },
+ {
+  "id": "a50",
+  "p": "Where is the picture?",
+  "o": [
+   "on the wall",
+   "under the wall",
+   "behind the wall"
+  ],
+  "at": [
+   "A14",
+   "A2"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "On also means touching a wall. The picture is on the wall."
+ },
+ {
+  "id": "a51",
+  "p": "The two fish are ___ the bowl.",
+  "o": [
+   "in",
+   "on",
+   "under"
+  ],
+  "at": [
+   "A14",
+   "A1"
+  ],
+  "img": "media/cie3/room.jpg",
+  "ex": "The water and the bowl are around the fish: they are in the bowl."
+ }
+]

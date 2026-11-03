@@ -1,0 +1,307 @@
+[
+ {
+  "id": "x01",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N7"
+  ],
+  "p": "What do farmers use river water for?",
+  "p_pt": "Para que os agricultores usam a água do rio?",
+  "o": [
+   "to water their fields",
+   "to make dunes",
+   "to spread seeds"
+  ],
+  "o_pt": [
+   "para regar os campos",
+   "para fazer dunas",
+   "para espalhar sementes"
+  ],
+  "dica": "Pense em como a comida cresce.",
+  "dica_en": "Think about how food grows.",
+  "ex": "Farmers use water from rivers and lakes to water their fields and grow food.",
+  "ex_pt": "Os agricultores usam água de rios e lagos para regar os campos e plantar comida."
+ },
+ {
+  "id": "x02",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N7"
+  ],
+  "p": "Which ones do we use WATER for? (it can be more than one)",
+  "p_pt": "Para quais destas coisas usamos a ÁGUA? (pode ser mais de uma)",
+  "o": [
+   "drinking, cooking and washing",
+   "drinking, cooking and flying kites",
+   "flying kites and spreading seeds"
+  ],
+  "o_pt": [
+   "beber, cozinhar e lavar",
+   "beber, cozinhar e empinar pipas",
+   "empinar pipas e espalhar sementes"
+  ],
+  "dica": "Marque TODOS os usos da água.",
+  "dica_en": "Choose ALL the uses of water.",
+  "ex": "We use water every day for drinking, cooking and washing.",
+  "ex_pt": "Usamos água todo dia para beber, cozinhar e lavar."
+ },
+ {
+  "id": "x03",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N7"
+  ],
+  "p": "Rivers help animals too. Which animals live in rivers?",
+  "p_pt": "Os rios ajudam os animais também. Quais animais vivem nos rios?",
+  "o": [
+   "fish and frogs",
+   "monkeys and kangaroos",
+   "birds and snakes"
+  ],
+  "o_pt": [
+   "peixes e sapos",
+   "macacos e cangurus",
+   "pássaros e cobras"
+  ],
+  "dica": "Lembre do vídeo do vento e da água.",
+  "dica_en": "Remember the wind and water video.",
+  "ex": "Rivers give fish and frogs a place to live.",
+  "ex_pt": "Os rios dão um lugar para peixes e sapos viverem."
+ },
+ {
+  "id": "x04",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N4",
+   "N7"
+  ],
+  "p": "Which natural force helps a kite stay up in the sky?",
+  "p_pt": "Qual força da natureza ajuda a pipa a ficar no céu?",
+  "o": [
+   "wind",
+   "water",
+   "rain"
+  ],
+  "o_pt": [
+   "vento",
+   "água",
+   "chuva"
+  ],
+  "dica": "É ar em movimento.",
+  "dica_en": "It is air in motion.",
+  "ex": "Wind is air in motion. It helps the kite dance in the sky.",
+  "ex_pt": "O vento é ar em movimento. Ele ajuda a pipa a dançar no céu."
+ },
+ {
+  "id": "x05",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N7",
+   "N2"
+  ],
+  "p": "Which ones does WIND help us with? (it can be more than one)",
+  "p_pt": "Em quais o VENTO nos ajuda? (pode ser mais de uma)",
+  "o": [
+   "making energy, sailing and spreading seeds",
+   "watering the plants, drinking and cooking",
+   "making energy in dams, washing and watering fields"
+  ],
+  "o_pt": [
+   "fazer energia, velejar e espalhar sementes",
+   "regar as plantas, beber e cozinhar",
+   "fazer energia em represas, lavar e regar campos"
+  ],
+  "dica": "Marque TODOS os do vento.",
+  "dica_en": "Choose ALL the wind ones.",
+  "ex": "Wind makes energy with turbines, fills sails and spreads seeds.",
+  "ex_pt": "O vento faz energia com turbinas, enche as velas e espalha sementes."
+ },
+ {
+  "id": "x06",
+  "tema": "directions",
+  "tipo": "conceito",
+  "at": [
+   "D3"
+  ],
+  "p": "True or false: we might get lost if we run or don't pay attention.",
+  "p_pt": "Verdadeiro ou falso: podemos nos perder se corrermos ou não prestarmos atenção.",
+  "o": [
+   "True",
+   "False"
+  ],
+  "o_pt": [
+   "Verdadeiro",
+   "Falso"
+  ],
+  "dica": "Lembre do slide do mapa.",
+  "dica_en": "Remember the map slide.",
+  "ex": "True. On a map, pay attention to the details and the path, or you might get lost.",
+  "ex_pt": "Verdadeiro. No mapa, preste atenção nos detalhes e no caminho, ou você pode se perder."
+ },
+ {
+  "id": "x07",
+  "tema": "directions",
+  "tipo": "conceito",
+  "at": [
+   "D2"
+  ],
+  "p": "When we read maps, what do we need to pay attention to?",
+  "p_pt": "Quando lemos mapas, a que precisamos prestar atenção?",
+  "o": [
+   "the details and the path",
+   "the color of the paper",
+   "the size of the map"
+  ],
+  "o_pt": [
+   "os detalhes e o caminho",
+   "a cor do papel",
+   "o tamanho do mapa"
+  ],
+  "dica": "Lembre em que devemos prestar atenção.",
+  "dica_en": "Remember what we must pay attention to.",
+  "ex": "We pay a lot of attention to the details and the path, the way we are going.",
+  "ex_pt": "Prestamos muita atenção nos detalhes e no caminho."
+ },
+ {
+  "id": "x08",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A14"
+  ],
+  "p": "Look at the words: behind, next to, in front of, over, in, on, between, under. There is a racket ___ the bag.",
+  "p_pt": "Olhe as palavras: atrás, ao lado, na frente, por cima, dentro, em cima, entre, embaixo. Tem uma raquete ___ a mochila.",
+  "o": [
+   "next to",
+   "over",
+   "between",
+   "behind",
+   "under"
+  ],
+  "o_pt": [
+   "ao lado de",
+   "por cima de",
+   "entre",
+   "atrás de",
+   "embaixo de"
+  ],
+  "dica": "Ache a raquete na sala.",
+  "dica_en": "Find the racket in the room.",
+  "ex": "The racket is right beside the bag: next to.",
+  "ex_pt": "A raquete está bem ao lado da mochila: ao lado de.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "x09",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A14"
+  ],
+  "p": "Look at the words: behind, next to, in front of, over, in, on, between, under. There is a trophy ___ the books.",
+  "p_pt": "Olhe as palavras: atrás, ao lado, na frente, por cima, dentro, em cima, entre, embaixo. Tem um troféu ___ os livros.",
+  "o": [
+   "between",
+   "in",
+   "under",
+   "in front of",
+   "over"
+  ],
+  "o_pt": [
+   "entre",
+   "dentro de",
+   "embaixo de",
+   "na frente de",
+   "por cima de"
+  ],
+  "dica": "Olhe a prateleira.",
+  "dica_en": "Look at the shelf.",
+  "ex": "There are books on each side of the trophy: between.",
+  "ex_pt": "Há livros de cada lado do troféu: entre.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "x10",
+  "tema": "position",
+  "tipo": "conceito",
+  "at": [
+   "A14"
+  ],
+  "p": "Look at the words: behind, next to, in front of, over, in, on, between, under. There is a window ___ the sofa.",
+  "p_pt": "Olhe as palavras: atrás, ao lado, na frente, por cima, dentro, em cima, entre, embaixo. Tem uma janela ___ o sofá.",
+  "o": [
+   "behind",
+   "in front of",
+   "under",
+   "on",
+   "in"
+  ],
+  "o_pt": [
+   "atrás de",
+   "na frente de",
+   "embaixo de",
+   "em cima de",
+   "dentro de"
+  ],
+  "dica": "O sofá está mais perto de você.",
+  "dica_en": "The sofa is closer to you.",
+  "ex": "The sofa is in front and the window is at the back: behind.",
+  "ex_pt": "O sofá está na frente e a janela lá atrás: atrás de.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "x11",
+  "tema": "pushpull",
+  "tipo": "conceito",
+  "at": [
+   "F3",
+   "F4"
+  ],
+  "p": "Which ones are a PUSH? (it can be more than one)",
+  "p_pt": "Quais são PUSH, empurrar? (pode ser mais de uma)",
+  "o": [
+   "pushing a box and kicking a ball",
+   "opening a drawer and fishing",
+   "pulling a wagon and tug of war"
+  ],
+  "o_pt": [
+   "empurrar a caixa e chutar a bola",
+   "abrir a gaveta e pescar",
+   "puxar o carrinho e cabo de guerra"
+  ],
+  "dica": "Push vai para longe de você.",
+  "dica_en": "A push goes away from you.",
+  "ex": "Pushing a box and kicking a ball send them away from me: push.",
+  "ex_pt": "Empurrar a caixa e chutar a bola mandam para longe de mim: push."
+ },
+ {
+  "id": "x12",
+  "tema": "objects",
+  "tipo": "conceito",
+  "at": [
+   "O1",
+   "O3"
+  ],
+  "p": "Which objects ROLL? (it can be more than one)",
+  "p_pt": "Quais objetos ROLAM? (pode ser mais de uma)",
+  "o": [
+   "wheel, can and beach ball",
+   "kite, airplane and hot air balloon",
+   "fan, pinwheel and top"
+  ],
+  "o_pt": [
+   "roda, lata e bola de praia",
+   "pipa, avião e balão",
+   "ventilador, cata-vento e pião"
+  ],
+  "dica": "Rolar é virar de novo e de novo, saindo do lugar.",
+  "dica_en": "To roll is to turn over and over.",
+  "ex": "A wheel, a can and a beach ball move by turning over and over.",
+  "ex_pt": "Roda, lata e bola de praia se movem virando de novo e de novo."
+ }
+]

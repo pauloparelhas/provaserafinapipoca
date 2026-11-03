@@ -1,0 +1,354 @@
+[
+ {
+  "id": "d01",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d02",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d03",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d04",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d05",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d06",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d07",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d08",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Treehouse e Trix ficam na altura do Patio sem area marcada: 'above the Patio' e ambiguo na figura; trocar por referencia nitida (Trix esta logo acima do Auditorium).",
+  "p": "Which place is above the Auditorium?",
+  "p_pt": "Qual lugar fica acima do Auditorium?",
+  "o": [
+   "the Trix",
+   "the A section",
+   "the Entrance"
+  ],
+  "o_pt": [
+   "o Trix",
+   "a A section",
+   "a Entrance"
+  ],
+  "ex": "The Trix is at the top, right above the Auditorium.",
+  "ex_pt": "O Trix fica no alto, logo acima do Auditorium."
+ },
+ {
+  "id": "d09",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d10",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d11",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d12",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d13",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d14",
+  "decisao": "ADAPTA",
+  "regras": [
+   "F"
+  ],
+  "motivo": "'near' e vago (C section tambem fica no alto); o roteiro diz que o pino esta na B section.",
+  "p": "The red pin is in which section?",
+  "p_pt": "O pino vermelho esta em qual secao?",
+  "o": [
+   "B section",
+   "A section",
+   "C section"
+  ],
+  "o_pt": [
+   "B section",
+   "A section",
+   "C section"
+  ],
+  "ex": "The red pin is on a Year 2 classroom, in B section.",
+  "ex_pt": "O pino esta numa sala do Year 2, na B section."
+ },
+ {
+  "id": "d15",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distrator 'It shows the left' e fora do mundo.",
+  "p": "What does a red pin do on a map?",
+  "p_pt": "O que um pino vermelho faz num mapa?",
+  "o": [
+   "It marks a place.",
+   "It shows the way to go.",
+   "It is a kind of map."
+  ],
+  "o_pt": [
+   "Ele marca um lugar.",
+   "Ele mostra o caminho a seguir.",
+   "Ele e um tipo de mapa."
+  ],
+  "ex": "A red pin marks a place on the map.",
+  "ex_pt": "Um pino vermelho marca um lugar no mapa."
+ },
+ {
+  "id": "d16",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d17",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d18",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d19",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d20",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distrator 'the paper and the pen' e piada; usar erros plausiveis do mesmo assunto.",
+  "p": "When we read maps, we need to pay a lot of attention to...",
+  "p_pt": "Quando lemos mapas, precisamos prestar muita atencao em...",
+  "o": [
+   "the details and the path",
+   "the red pin and the colours",
+   "the left and the right"
+  ],
+  "o_pt": [
+   "os detalhes e o caminho",
+   "o pino vermelho e as cores",
+   "a esquerda e a direita"
+  ],
+  "ex": "Map rule: pay attention to the details and the path.",
+  "ex_pt": "Regra do mapa: atencao aos detalhes e ao caminho."
+ },
+ {
+  "id": "d21",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d22",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "d23",
+  "decisao": "ADAPTA",
+  "regras": [
+   "G"
+  ],
+  "motivo": "Unica opcao negativa e a certa; as erradas sao o oposto da regra (eliminacao).",
+  "p": "Why might we get lost?",
+  "p_pt": "Por que podemos nos perder?",
+  "o": [
+   "We run or don't pay attention.",
+   "We ask a friend about the map.",
+   "We use a GPS route."
+  ],
+  "o_pt": [
+   "Corremos ou nao prestamos atencao.",
+   "Perguntamos a um colega sobre o mapa.",
+   "Usamos uma rota de GPS."
+  ],
+  "ex": "We might get lost if we run or don't pay attention.",
+  "ex_pt": "Podemos nos perder se corremos ou nao prestamos atencao."
+ },
+ {
+  "id": "p01",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p02",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Na figura top, 'side' compete (top x side); trocar por bottom, que a figura exclui.",
+  "p": "This tower is seen from the...",
+  "p_pt": "Esta torre e vista de...",
+  "o": [
+   "top",
+   "front",
+   "bottom"
+  ],
+  "o_pt": [
+   "cima (top)",
+   "frente (front)",
+   "baixo (bottom)"
+  ],
+  "ex": "From the top, you look down and see the ground.",
+  "ex_pt": "De cima, voce olha para baixo e ve o chao."
+ },
+ {
+  "id": "p03",
+  "decisao": "EXCLUI",
+  "regras": [
+   "E"
+  ],
+  "motivo": "Duplica p08 (mesma figura side, mesma resposta) e a vista aerea deixa top x side ambiguo."
+ },
+ {
+  "id": "p04",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p05",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p06",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p07",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p08",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "A vista side e aerea e top compete; trocar por front (a figura de front nao tem rio).",
+  "p": "You can see the whole tower and the river near it. You see it from the...",
+  "p_pt": "Voce ve a torre inteira e o rio perto dela. Voce a ve de...",
+  "o": [
+   "side",
+   "bottom",
+   "front"
+  ],
+  "o_pt": [
+   "lado (side)",
+   "baixo (bottom)",
+   "frente (front)"
+  ],
+  "ex": "The side view shows the whole tower and the river near it.",
+  "ex_pt": "A vista lateral mostra a torre inteira e o rio perto."
+ },
+ {
+  "id": "p09",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p10",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distrator 'numbers' e absurdo.",
+  "p": "Complete: We can see many things from different ___.",
+  "p_pt": "Complete: Podemos ver muitas coisas de ___ diferentes.",
+  "o": [
+   "positions",
+   "shadows",
+   "pictures"
+  ],
+  "o_pt": [
+   "posicoes",
+   "sombras",
+   "fotos"
+  ],
+  "ex": "We see things from different positions: top, bottom, front, side.",
+  "ex_pt": "Vemos de posicoes diferentes: cima, baixo, frente, lado."
+ },
+ {
+  "id": "p11",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distrator 'two different towers' contradiz o enunciado e 'different days' e sem nexo.",
+  "p": "Ana looks at the tower from the top. Leo looks from the bottom. It is one tower. Why do they see different things?",
+  "p_pt": "Ana ve a torre de cima, Leo de baixo. E uma torre so. Por que veem coisas diferentes?",
+  "o": [
+   "They look from different positions.",
+   "One of them is wrong.",
+   "They look at the shadow of it."
+  ],
+  "o_pt": [
+   "Olham de posicoes diferentes.",
+   "Um deles esta errado.",
+   "Olham a sombra dela."
+  ],
+  "ex": "Perspective depends on where we look from.",
+  "ex_pt": "A perspectiva depende de onde olhamos."
+ },
+ {
+  "id": "p12",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p13",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p14",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p15",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p16",
+  "decisao": "ADAPTA",
+  "regras": [
+   "A"
+  ],
+  "motivo": "Distratores contradizem o enunciado ('three objects') ou sao absurdos.",
+  "p": "There is one object, but there are three different shadows. Why?",
+  "p_pt": "Ha um objeto, mas tres sombras diferentes. Por que?",
+  "o": [
+   "Each side of it is different.",
+   "The shadows are different colours.",
+   "The walls are different sizes."
+  ],
+  "o_pt": [
+   "Cada lado dele e diferente.",
+   "As sombras tem cores diferentes.",
+   "As paredes tem tamanhos diferentes."
+  ],
+  "ex": "Each side of the object gives another shape.",
+  "ex_pt": "Cada lado do objeto da outra forma."
+ },
+ {
+  "id": "p17",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p18",
+  "decisao": "APROVA"
+ },
+ {
+  "id": "p19",
+  "decisao": "APROVA"
+ }
+]

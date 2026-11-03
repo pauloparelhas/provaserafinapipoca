@@ -1,0 +1,1235 @@
+[
+ {
+  "id": "p01",
+  "tema": "perspective",
+  "tipo": "rapida",
+  "at": [
+   "P2"
+  ],
+  "p": "This tower is seen from the...",
+  "p_pt": "Esta torre é vista de...",
+  "o": [
+   "front",
+   "top",
+   "bottom"
+  ],
+  "o_pt": [
+   "frente",
+   "cima",
+   "baixo"
+  ],
+  "dica": "Onde está quem tirou a foto: no gramado, olhando reto?",
+  "dica_en": "Where is the person with the camera: on the grass, looking straight?",
+  "ex": "From the front, you stand on the ground and look straight. This photo shows that.",
+  "ex_pt": "De frente, você fica no chão e olha reto. A foto mostra isso.",
+  "img": "media/cie3/view-front.jpg"
+ },
+ {
+  "id": "p02",
+  "tema": "perspective",
+  "tipo": "rapida",
+  "at": [
+   "P2"
+  ],
+  "p": "This tower is seen from the...",
+  "p_pt": "Esta torre e vista de...",
+  "o": [
+   "top",
+   "front",
+   "bottom"
+  ],
+  "o_pt": [
+   "cima (top)",
+   "frente (front)",
+   "baixo (bottom)"
+  ],
+  "dica": "Você vê o céu ou o chão nesta foto?",
+  "dica_en": "Do you see the sky or the ground in this photo?",
+  "ex": "From the top, you look down and see the ground.",
+  "ex_pt": "De cima, voce olha para baixo e ve o chao.",
+  "img": "media/cie3/view-top.jpg"
+ },
+ {
+  "id": "p04",
+  "tema": "perspective",
+  "tipo": "rapida",
+  "at": [
+   "P2"
+  ],
+  "p": "This tower is seen from the...",
+  "p_pt": "Esta torre é vista de...",
+  "o": [
+   "bottom",
+   "top",
+   "side"
+  ],
+  "o_pt": [
+   "baixo",
+   "cima",
+   "lado"
+  ],
+  "dica": "A ponta da torre está longe, lá no céu?",
+  "dica_en": "Is the tip of the tower far away, up in the sky?",
+  "ex": "From the bottom, you look up and the tip is far away.",
+  "ex_pt": "De baixo, você olha para cima e a ponta fica longe.",
+  "img": "media/cie3/view-bottom.jpg"
+ },
+ {
+  "id": "p05",
+  "tema": "perspective",
+  "tipo": "conceito",
+  "at": [
+   "P1",
+   "P2"
+  ],
+  "p": "You stand under the tower and look up. You see it from the...",
+  "p_pt": "Você fica embaixo da torre e olha para cima. Você a vê de...",
+  "o": [
+   "bottom",
+   "top",
+   "front"
+  ],
+  "o_pt": [
+   "baixo",
+   "cima",
+   "frente"
+  ],
+  "dica": "Sua posição é a mais baixa ou a mais alta?",
+  "dica_en": "Is your position the lowest or the highest?",
+  "ex": "Under the tower and looking up means the view from the bottom.",
+  "ex_pt": "Embaixo da torre, olhando para cima, é a vista de baixo."
+ },
+ {
+  "id": "p06",
+  "tema": "perspective",
+  "tipo": "conceito",
+  "at": [
+   "P1",
+   "P2"
+  ],
+  "p": "You go up the tower and look down. You see it from the...",
+  "p_pt": "Você sobe na torre e olha para baixo. Você a vê de...",
+  "o": [
+   "top",
+   "bottom",
+   "side"
+  ],
+  "o_pt": [
+   "cima",
+   "baixo",
+   "lado"
+  ],
+  "dica": "Onde você está depois de subir?",
+  "dica_en": "Where are you after you go up?",
+  "ex": "Up high and looking down means the view from the top.",
+  "ex_pt": "Lá no alto, olhando para baixo, é a vista de cima."
+ },
+ {
+  "id": "p07",
+  "tema": "perspective",
+  "tipo": "conceito",
+  "at": [
+   "P1",
+   "P2"
+  ],
+  "p": "You are on the grass. The tower is straight ahead of you. You see it from the...",
+  "p_pt": "Você está no gramado. A torre está bem à sua frente. Você a vê de...",
+  "o": [
+   "front",
+   "bottom",
+   "top"
+  ],
+  "o_pt": [
+   "frente",
+   "baixo",
+   "cima"
+  ],
+  "dica": "Você olha reto, para cima ou para baixo?",
+  "dica_en": "Do you look straight, up or down?",
+  "ex": "Straight ahead of you, looking straight: that is the view from the front.",
+  "ex_pt": "Bem à sua frente, olhando reto: é a vista de frente."
+ },
+ {
+  "id": "p08",
+  "tema": "perspective",
+  "tipo": "leitura",
+  "at": [
+   "P2"
+  ],
+  "p": "You can see the whole tower and the river near it. You see it from the...",
+  "p_pt": "Voce ve a torre inteira e o rio perto dela. Voce a ve de...",
+  "o": [
+   "side",
+   "bottom",
+   "front"
+  ],
+  "o_pt": [
+   "lado (side)",
+   "baixo (bottom)",
+   "frente (front)"
+  ],
+  "dica": "Compare com as outras fotos da torre: dá para ver a torre inteira?",
+  "dica_en": "Compare with the other tower photos: can you see the whole tower?",
+  "ex": "The side view shows the whole tower and the river near it.",
+  "ex_pt": "A vista lateral mostra a torre inteira e o rio perto.",
+  "img": "media/cie3/view-side.jpg"
+ },
+ {
+  "id": "p09",
+  "tema": "perspective",
+  "tipo": "conceito",
+  "at": [
+   "P1"
+  ],
+  "p": "Complete: Our perspective changes depending on ___ we are looking from.",
+  "p_pt": "Complete: Nossa perspectiva muda dependendo de ___ estamos olhando.",
+  "o": [
+   "where",
+   "when",
+   "why"
+  ],
+  "o_pt": [
+   "onde",
+   "quando",
+   "por que"
+  ],
+  "dica": "Pense em lugar, não em tempo.",
+  "dica_en": "Think about a place, not a time.",
+  "ex": "Perspective changes depending on WHERE we look from: top, bottom, front or side.",
+  "ex_pt": "A perspectiva muda conforme ONDE olhamos: de cima, de baixo, de frente ou de lado."
+ },
+ {
+  "id": "p10",
+  "tema": "perspective",
+  "tipo": "conceito",
+  "at": [
+   "P1"
+  ],
+  "p": "Complete: We can see many things from different ___.",
+  "p_pt": "Complete: Podemos ver muitas coisas de ___ diferentes.",
+  "o": [
+   "positions",
+   "shadows",
+   "pictures"
+  ],
+  "o_pt": [
+   "posicoes",
+   "sombras",
+   "fotos"
+  ],
+  "dica": "Lembre da torre: cima, baixo, frente, lado.",
+  "dica_en": "Remember the tower: top, bottom, front, side.",
+  "ex": "We see things from different positions: top, bottom, front, side.",
+  "ex_pt": "Vemos de posicoes diferentes: cima, baixo, frente, lado."
+ },
+ {
+  "id": "p11",
+  "tema": "perspective",
+  "tipo": "leitura",
+  "at": [
+   "P1"
+  ],
+  "p": "Ana looks at the tower from the top. Leo looks from the bottom. It is one tower. Why do they see different things?",
+  "p_pt": "Ana ve a torre de cima, Leo de baixo. E uma torre so. Por que veem coisas diferentes?",
+  "o": [
+   "They look from different positions.",
+   "One of them is wrong.",
+   "They look at the shadow of it."
+  ],
+  "o_pt": [
+   "Olham de posicoes diferentes.",
+   "Um deles esta errado.",
+   "Olham a sombra dela."
+  ],
+  "dica": "O que mudou: a torre ou o lugar de quem olha?",
+  "dica_en": "What changed: the tower or the place of the person looking?",
+  "ex": "Perspective depends on where we look from.",
+  "ex_pt": "A perspectiva depende de onde olhamos."
+ },
+ {
+  "id": "p12",
+  "tema": "perspective",
+  "tipo": "rapida",
+  "at": [
+   "P3"
+  ],
+  "p": "One object makes these three shadows. What shapes are they?",
+  "p_pt": "Um objeto faz estas três sombras. Que formas elas têm?",
+  "o": [
+   "triangle, rectangle, circle",
+   "triangle, square, rectangle",
+   "circle, square, triangle"
+  ],
+  "o_pt": [
+   "triângulo, retângulo, círculo",
+   "triângulo, quadrado, retângulo",
+   "círculo, quadrado, triângulo"
+  ],
+  "dica": "Olhe cada parede e o chão, um de cada vez.",
+  "dica_en": "Look at each wall and at the floor, one at a time.",
+  "ex": "One object, three shadows: a triangle, a rectangle and a circle.",
+  "ex_pt": "Um objeto, três sombras: um triângulo, um retângulo e um círculo.",
+  "img": "media/cie3/view-shadow.jpg"
+ },
+ {
+  "id": "p13",
+  "tema": "perspective",
+  "tipo": "rapida",
+  "at": [
+   "P3"
+  ],
+  "p": "What shape is the shadow on the floor?",
+  "p_pt": "Que forma tem a sombra no chão?",
+  "o": [
+   "a circle",
+   "a triangle",
+   "a rectangle"
+  ],
+  "o_pt": [
+   "um círculo",
+   "um triângulo",
+   "um retângulo"
+  ],
+  "dica": "Olhe só para baixo do objeto.",
+  "dica_en": "Look only below the object.",
+  "ex": "The floor shows the shadow from the bottom of the object: a circle.",
+  "ex_pt": "O chão mostra a sombra da parte de baixo do objeto: um círculo.",
+  "img": "media/cie3/view-shadow.jpg"
+ },
+ {
+  "id": "p14",
+  "tema": "perspective",
+  "tipo": "rapida",
+  "at": [
+   "P3"
+  ],
+  "p": "What shape is the shadow on the left wall?",
+  "p_pt": "Que forma tem a sombra na parede da esquerda?",
+  "o": [
+   "a triangle",
+   "a circle",
+   "a rectangle"
+  ],
+  "o_pt": [
+   "um triângulo",
+   "um círculo",
+   "um retângulo"
+  ],
+  "dica": "Conte as pontas da sombra.",
+  "dica_en": "Count the corners of the shadow.",
+  "ex": "The shadow on the left wall has three corners, so it is a triangle.",
+  "ex_pt": "A sombra da parede da esquerda tem três pontas: é um triângulo.",
+  "img": "media/cie3/view-shadow.jpg"
+ },
+ {
+  "id": "p15",
+  "tema": "perspective",
+  "tipo": "rapida",
+  "at": [
+   "P3"
+  ],
+  "p": "What shape is the shadow on the right wall?",
+  "p_pt": "Que forma tem a sombra na parede da direita?",
+  "o": [
+   "a rectangle",
+   "a triangle",
+   "a circle"
+  ],
+  "o_pt": [
+   "um retângulo",
+   "um triângulo",
+   "um círculo"
+  ],
+  "dica": "Conte as pontas da sombra.",
+  "dica_en": "Count the corners of the shadow.",
+  "ex": "The shadow on the right wall has four corners, so it is a rectangle.",
+  "ex_pt": "A sombra da parede da direita tem quatro pontas: é um retângulo.",
+  "img": "media/cie3/view-shadow.jpg"
+ },
+ {
+  "id": "p16",
+  "tema": "perspective",
+  "tipo": "conceito",
+  "at": [
+   "P3"
+  ],
+  "p": "There is one object, but there are three different shadows. Why?",
+  "p_pt": "Ha um objeto, mas tres sombras diferentes. Por que?",
+  "o": [
+   "Each side of it is different.",
+   "The shadows are different colours.",
+   "The walls are different sizes."
+  ],
+  "o_pt": [
+   "Cada lado dele e diferente.",
+   "As sombras tem cores diferentes.",
+   "As paredes tem tamanhos diferentes."
+  ],
+  "dica": "Olhe o objeto: quantos ele é? Ele se mexeu?",
+  "dica_en": "Look at the object: how many are there? Did it move?",
+  "ex": "Each side of the object gives another shape.",
+  "ex_pt": "Cada lado do objeto da outra forma.",
+  "img": "media/cie3/view-shadow.jpg"
+ },
+ {
+  "id": "p17",
+  "tema": "perspective",
+  "tipo": "conceito",
+  "at": [
+   "P4"
+  ],
+  "p": "Complete: People are not right or wrong. They just have a different ___ of things.",
+  "p_pt": "Complete: As pessoas não estão certas nem erradas. Elas só têm uma ___ diferente das coisas.",
+  "o": [
+   "view",
+   "shape",
+   "colour"
+  ],
+  "o_pt": [
+   "visão",
+   "forma",
+   "cor"
+  ],
+  "dica": "É a palavra da frase da girafa, ligada a olhar.",
+  "dica_en": "It is the word from the giraffe sentence, about looking.",
+  "ex": "The giraffe sentence says people just have a different view of things.",
+  "ex_pt": "A frase da girafa diz que as pessoas só têm uma visão diferente das coisas."
+ },
+ {
+  "id": "p18",
+  "tema": "perspective",
+  "tipo": "leitura",
+  "at": [
+   "P1",
+   "P4"
+  ],
+  "p": "The giraffe's head is up high. The woman is down low. Why do they see things differently?",
+  "p_pt": "A cabeça da girafa está lá no alto. A mulher está mais embaixo. Por que elas veem as coisas de um jeito diferente?",
+  "o": [
+   "They look from different positions.",
+   "The giraffe is right about it.",
+   "The woman is right about it."
+  ],
+  "o_pt": [
+   "Elas olham de posições diferentes.",
+   "A girafa está certa.",
+   "A mulher está certa."
+  ],
+  "dica": "Leia a frase no alto da figura.",
+  "dica_en": "Read the sentence at the top of the picture.",
+  "ex": "Nobody is wrong here. They look from different positions, so they have different views.",
+  "ex_pt": "Ninguém está errado. Elas olham de posições diferentes, por isso têm visões diferentes.",
+  "img": "media/cie3/view-giraffe.jpg"
+ },
+ {
+  "id": "p19",
+  "tema": "perspective",
+  "tipo": "leitura",
+  "at": [
+   "P3",
+   "P4"
+  ],
+  "p": "Ana sees a triangle shadow. Leo sees a circle shadow. It is the same object. What can we say?",
+  "p_pt": "Ana vê uma sombra de triângulo. Leo vê uma sombra de círculo. É o mesmo objeto. O que podemos dizer?",
+  "o": [
+   "They have different views.",
+   "Ana is right, Leo is wrong.",
+   "Leo is right, Ana is wrong."
+  ],
+  "o_pt": [
+   "Eles têm visões diferentes.",
+   "Ana está certa, Leo está errado.",
+   "Leo está certo, Ana está errada."
+  ],
+  "dica": "Lembre da frase da girafa.",
+  "dica_en": "Remember the giraffe sentence.",
+  "ex": "People are not right or wrong. Ana and Leo just have different views.",
+  "ex_pt": "As pessoas não estão certas nem erradas. Ana e Leo só têm visões diferentes."
+ },
+ {
+  "id": "n01",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N1"
+  ],
+  "p": "Complete: Wind and water are two ___ forces.",
+  "p_pt": "Complete: O vento e a água são duas forças ___.",
+  "o": [
+   "natural",
+   "pushing",
+   "pulling"
+  ],
+  "o_pt": [
+   "naturais",
+   "de empurrar",
+   "de puxar"
+  ],
+  "dica": "Elas existem na natureza.",
+  "dica_en": "They exist in nature.",
+  "ex": "Wind and water exist in nature, so they are natural forces.",
+  "ex_pt": "O vento e a água existem na natureza, então são forças naturais."
+ },
+ {
+  "id": "n02",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N1"
+  ],
+  "p": "Which sentence is true about wind and water?",
+  "p_pt": "Qual frase é verdadeira sobre vento e água?",
+  "o": [
+   "Wind and water can both help us and harm us.",
+   "Wind can help us, but water can only harm us.",
+   "Water can help us, but wind can only harm us."
+  ],
+  "o_pt": [
+   "Vento e água podem nos ajudar e nos prejudicar.",
+   "O vento pode ajudar, mas a água só prejudica.",
+   "A água pode ajudar, mas o vento só prejudica."
+  ],
+  "dica": "Lembre das duas colunas do slide.",
+  "dica_en": "Remember the two columns on the slide.",
+  "ex": "Wind and water can be helpful and harmful.",
+  "ex_pt": "Vento e água podem ser úteis e prejudiciais."
+ },
+ {
+  "id": "n03",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N2",
+   "N3"
+  ],
+  "p": "Which of these is HELPFUL water?",
+  "p_pt": "Qual destas é água ÚTIL?",
+  "o": [
+   "water the plants",
+   "water in a tsunami",
+   "water in a flood"
+  ],
+  "o_pt": [
+   "regar as plantas",
+   "a água de um tsunami",
+   "a água de uma enchente"
+  ],
+  "dica": "Qual destes ajuda algo a crescer?",
+  "dica_en": "Which of these helps something grow?",
+  "ex": "Helpful water: water the plants, water to make energy. A tsunami and floods are harmful.",
+  "ex_pt": "Água útil: regar as plantas, fazer energia. Tsunami e enchente são perigosos."
+ },
+ {
+  "id": "n04",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N2",
+   "N3"
+  ],
+  "p": "Which of these is HELPFUL wind?",
+  "p_pt": "Qual destes é vento ÚTIL?",
+  "o": [
+   "wind to make energy",
+   "wind in a tornado",
+   "very strong winds"
+  ],
+  "o_pt": [
+   "vento para fazer energia",
+   "o vento de um tornado",
+   "ventos muito fortes"
+  ],
+  "dica": "Qual está na coluna helpful do slide?",
+  "dica_en": "Which one is in the helpful column on the slide?",
+  "ex": "Helpful wind: makes energy and spreads the seeds. Tornadoes and strong winds are harmful.",
+  "ex_pt": "Vento útil: faz energia e espalha sementes. Tornado e ventos fortes são perigosos."
+ },
+ {
+  "id": "n05",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N2",
+   "N3"
+  ],
+  "p": "Which of these is HARMFUL water?",
+  "p_pt": "Qual destas é água PERIGOSA?",
+  "o": [
+   "heavy rain and floods",
+   "water to make energy",
+   "water for the plants"
+  ],
+  "o_pt": [
+   "chuva forte e enchentes",
+   "água para fazer energia",
+   "água para as plantas"
+  ],
+  "dica": "Qual está na coluna harmful do slide?",
+  "dica_en": "Which one is in the harmful column on the slide?",
+  "ex": "Harmful water: a tsunami, heavy rain and floods. Energy and plants are helpful uses.",
+  "ex_pt": "Água perigosa: tsunami, chuva forte e enchentes. Energia e plantas são usos úteis."
+ },
+ {
+  "id": "n06",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N2",
+   "N3"
+  ],
+  "p": "Which of these is HARMFUL wind?",
+  "p_pt": "Qual destes é vento PERIGOSO?",
+  "o": [
+   "wind in a tornado",
+   "wind that spreads seeds",
+   "wind to make energy"
+  ],
+  "o_pt": [
+   "o vento de um tornado",
+   "o vento que espalha sementes",
+   "o vento para fazer energia"
+  ],
+  "dica": "Dois destes estão na coluna helpful.",
+  "dica_en": "Two of these are in the helpful column.",
+  "ex": "Harmful wind: a tornado and strong winds. Seeds and energy are helpful uses.",
+  "ex_pt": "Vento perigoso: tornado e ventos fortes. Sementes e energia são usos úteis."
+ },
+ {
+  "id": "n07",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N3"
+  ],
+  "p": "What is this? Helpful or harmful?",
+  "p_pt": "O que é isto? Útil ou perigoso?",
+  "o": [
+   "harmful: a tsunami",
+   "harmful: a flood",
+   "helpful: makes energy"
+  ],
+  "o_pt": [
+   "perigoso: um tsunami",
+   "perigoso: uma enchente",
+   "útil: faz energia"
+  ],
+  "dica": "Olhe o tamanho da onda chegando às casas.",
+  "dica_en": "Look at the size of the wave coming to the houses.",
+  "ex": "A tsunami is a giant wave of water. It is harmful.",
+  "ex_pt": "O tsunami é uma onda gigante de água. Ele é perigoso.",
+  "img": "media/cie3/harm-tsunami.jpg"
+ },
+ {
+  "id": "n08",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N3"
+  ],
+  "p": "What is this? Helpful or harmful?",
+  "p_pt": "O que é isto? Útil ou perigoso?",
+  "o": [
+   "harmful: a flood",
+   "harmful: a tsunami",
+   "helpful: waters plants"
+  ],
+  "o_pt": [
+   "perigoso: uma enchente",
+   "perigoso: um tsunami",
+   "útil: rega as plantas"
+  ],
+  "dica": "Olhe a chuva e os carros na água. Há uma onda gigante?",
+  "dica_en": "Look at the rain and the cars in the water. Is there a giant wave?",
+  "ex": "Heavy rain can make floods. The water covers streets and cars. It is harmful.",
+  "ex_pt": "Chuva forte pode causar enchentes. A água cobre ruas e carros. É perigoso.",
+  "img": "media/cie3/harm-floods.jpg"
+ },
+ {
+  "id": "n09",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N3"
+  ],
+  "p": "What is this? Helpful or harmful?",
+  "p_pt": "O que é isto? Útil ou prejudicial?",
+  "o": [
+   "harmful: a tornado",
+   "harmful: a tsunami",
+   "harmful: a flood"
+  ],
+  "o_pt": [
+   "prejudicial: um tornado",
+   "prejudicial: um tsunami",
+   "prejudicial: uma enchente"
+  ],
+  "dica": "Olhe a forma do vento no meio da figura.",
+  "dica_en": "Look at the shape of the wind in the middle of the picture.",
+  "ex": "A tornado is wind that spins in a tall funnel. It is harmful.",
+  "ex_pt": "Tornado é vento girando num funil alto. É prejudicial.",
+  "img": "media/cie3/harm-tornado.jpg"
+ },
+ {
+  "id": "n10",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N3"
+  ],
+  "p": "What is this? Helpful or harmful?",
+  "p_pt": "O que é isto? Útil ou perigoso?",
+  "o": [
+   "harmful: strong winds",
+   "harmful: a tornado",
+   "helpful: spreads seeds"
+  ],
+  "o_pt": [
+   "perigoso: ventos fortes",
+   "perigoso: um tornado",
+   "útil: espalha sementes"
+  ],
+  "dica": "Há um funil no céu ou só as árvores se dobrando?",
+  "dica_en": "Is there a funnel in the sky, or only trees bending?",
+  "ex": "These strong winds bend the trees and blow the leaves. They are harmful.",
+  "ex_pt": "Estes ventos fortes dobram as árvores e levam as folhas. São perigosos.",
+  "img": "media/cie3/harm-winds.jpg"
+ },
+ {
+  "id": "n11",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N2"
+  ],
+  "p": "What is this? Helpful or harmful?",
+  "p_pt": "O que é isto? Útil ou perigoso?",
+  "o": [
+   "helpful: waters the plants",
+   "helpful: makes energy",
+   "harmful: heavy rain"
+  ],
+  "o_pt": [
+   "útil: rega as plantas",
+   "útil: faz energia",
+   "perigoso: chuva forte"
+  ],
+  "dica": "Olhe de onde a água está saindo.",
+  "dica_en": "Look at where the water is coming from.",
+  "ex": "Watering the plants is on the helpful list. Water helps plants live.",
+  "ex_pt": "Regar as plantas está na lista dos úteis. A água ajuda as plantas a viver.",
+  "img": "media/cie3/help-water-plants.jpg"
+ },
+ {
+  "id": "n12",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N2",
+   "N7"
+  ],
+  "p": "What is this? Helpful or harmful?",
+  "p_pt": "O que é isto? Útil ou perigoso?",
+  "o": [
+   "helpful: makes energy",
+   "helpful: waters plants",
+   "harmful: a flood"
+  ],
+  "o_pt": [
+   "útil: faz energia",
+   "útil: rega as plantas",
+   "perigoso: uma enchente"
+  ],
+  "dica": "É uma represa. Para que ela serve?",
+  "dica_en": "It is a dam. What is it for?",
+  "ex": "A dam uses moving water to make energy. It is helpful.",
+  "ex_pt": "A represa usa a água em movimento para fazer energia. É útil.",
+  "img": "media/cie3/help-water-energy.jpg"
+ },
+ {
+  "id": "n13",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N2",
+   "N7"
+  ],
+  "p": "Which natural force turns these blades?",
+  "p_pt": "Qual força natural gira estas pás?",
+  "o": [
+   "wind",
+   "water",
+   "wind and water"
+  ],
+  "o_pt": [
+   "vento",
+   "água",
+   "vento e água"
+  ],
+  "dica": "Lembre da coluna helpful do slide.",
+  "dica_en": "Remember the helpful column on the slide.",
+  "ex": "Wind turns the blades of a turbine. Wind is the force here.",
+  "ex_pt": "O vento gira as pás da turbina. A força aqui é o vento.",
+  "img": "media/cie3/help-wind-energy.jpg"
+ },
+ {
+  "id": "n14",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N2",
+   "N7"
+  ],
+  "p": "Which natural force spreads these seeds?",
+  "p_pt": "Qual força natural espalha estas sementes?",
+  "o": [
+   "wind",
+   "water",
+   "wind and water"
+  ],
+  "o_pt": [
+   "vento",
+   "água",
+   "vento e água"
+  ],
+  "dica": "As sementes estão no ar ou na água?",
+  "dica_en": "Are the seeds in the air or in water?",
+  "ex": "The seeds float in the air. Wind spreads the seeds, and that is helpful.",
+  "ex_pt": "As sementes flutuam no ar. O vento espalha as sementes, e isso é útil.",
+  "img": "media/cie3/help-wind-seeds.jpg"
+ },
+ {
+  "id": "n15",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N3"
+  ],
+  "p": "Which natural force is this?",
+  "p_pt": "Qual força natural é esta?",
+  "o": [
+   "wind",
+   "water",
+   "wind and water"
+  ],
+  "o_pt": [
+   "vento",
+   "água",
+   "vento e água"
+  ],
+  "dica": "O que está girando no céu?",
+  "dica_en": "What is spinning in the sky?",
+  "ex": "A tornado is spinning wind. So it is the force of wind.",
+  "ex_pt": "O tornado é vento girando. Então é a força do vento.",
+  "img": "media/cie3/harm-tornado.jpg"
+ },
+ {
+  "id": "n16",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N3"
+  ],
+  "p": "Which natural force is this?",
+  "p_pt": "Qual força natural é esta?",
+  "o": [
+   "water",
+   "wind",
+   "wind and water"
+  ],
+  "o_pt": [
+   "água",
+   "vento",
+   "vento e água"
+  ],
+  "dica": "Do que é feita esta onda?",
+  "dica_en": "What is this wave made of?",
+  "ex": "A tsunami is a giant wave. So it is the force of water.",
+  "ex_pt": "O tsunami é uma onda gigante. Então é a força da água.",
+  "img": "media/cie3/harm-tsunami.jpg"
+ },
+ {
+  "id": "n17",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N7"
+  ],
+  "p": "What do these wind turbines make?",
+  "p_pt": "O que estas turbinas de vento produzem?",
+  "o": [
+   "electricity",
+   "sand dunes",
+   "rock arches"
+  ],
+  "o_pt": [
+   "eletricidade",
+   "dunas de areia",
+   "arcos de rocha"
+  ],
+  "dica": "É a energia que acende as luzes da casa.",
+  "dica_en": "It is the energy that turns on the lights at home.",
+  "ex": "Wind turns the turbines, and the turbines make electricity.",
+  "ex_pt": "O vento gira as turbinas e elas fazem eletricidade.",
+  "img": "media/cie3/help-wind-energy.jpg"
+ },
+ {
+  "id": "n18",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N2"
+  ],
+  "p": "Which natural force(s) can make energy?",
+  "p_pt": "Qual(is) força(s) natural(is) pode(m) fazer energia?",
+  "o": [
+   "wind and water",
+   "only wind",
+   "only water"
+  ],
+  "o_pt": [
+   "vento e água",
+   "só o vento",
+   "só a água"
+  ],
+  "dica": "Lembre das duas figuras de energia do slide.",
+  "dica_en": "Remember the two energy pictures on the slide.",
+  "ex": "Wind turbines and dams both make energy.",
+  "ex_pt": "Turbinas de vento e represas fazem energia."
+ },
+ {
+  "id": "n19",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N4"
+  ],
+  "p": "Complete: Wind is ___ in motion.",
+  "p_pt": "Complete: O vento é ___ em movimento.",
+  "o": [
+   "air",
+   "water",
+   "sand"
+  ],
+  "o_pt": [
+   "ar",
+   "água",
+   "areia"
+  ],
+  "dica": "É o que você respira.",
+  "dica_en": "It is what you breathe.",
+  "ex": "Wind is air in motion. Moving air is wind.",
+  "ex_pt": "O vento é ar em movimento. Ar que se move é vento."
+ },
+ {
+  "id": "n20",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N4"
+  ],
+  "p": "Wind can be soft or strong. Which one is SOFT wind?",
+  "p_pt": "O vento pode ser suave ou forte. Qual é o vento SUAVE?",
+  "o": [
+   "a gentle breeze",
+   "a mighty gust",
+   "a tornado"
+  ],
+  "o_pt": [
+   "uma brisa suave",
+   "uma rajada forte",
+   "um tornado"
+  ],
+  "dica": "Lembre do vídeo: uma é fraquinha, a outra é poderosa.",
+  "dica_en": "Remember the video: one is weak, the other is powerful.",
+  "ex": "A gentle breeze is soft wind. A mighty gust is strong wind.",
+  "ex_pt": "A brisa suave é vento fraco. A rajada forte é vento forte."
+ },
+ {
+  "id": "n21",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N4"
+  ],
+  "p": "You blow bubbles. What does your breath make?",
+  "p_pt": "Você sopra bolhas. O que o seu sopro faz?",
+  "o": [
+   "wind",
+   "water",
+   "a wave"
+  ],
+  "o_pt": [
+   "vento",
+   "água",
+   "uma onda"
+  ],
+  "dica": "O sopro é ar se movendo.",
+  "dica_en": "Your breath is air that moves.",
+  "ex": "Wind is air in motion. Blowing bubbles moves air.",
+  "ex_pt": "Vento é ar em movimento. Soprar bolhas move o ar."
+ },
+ {
+  "id": "n23",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N5"
+  ],
+  "p": "Wind moves sand. What can it make?",
+  "p_pt": "O vento move a areia. O que ele pode fazer?",
+  "o": [
+   "dunes",
+   "canyons",
+   "valleys"
+  ],
+  "o_pt": [
+   "dunas",
+   "cânions",
+   "vales"
+  ],
+  "dica": "Pense em montes de areia.",
+  "dica_en": "Think about hills of sand.",
+  "ex": "Wind moves sand and makes dunes. Water makes valleys and canyons.",
+  "ex_pt": "O vento move a areia e faz dunas. A água faz vales e cânions."
+ },
+ {
+  "id": "n24",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N5"
+  ],
+  "p": "Wind and sand wear rock. What can they make?",
+  "p_pt": "O vento e a areia desgastam a rocha. O que eles podem fazer?",
+  "o": [
+   "arches",
+   "dams",
+   "valleys"
+  ],
+  "o_pt": [
+   "arcos",
+   "represas",
+   "vales"
+  ],
+  "dica": "Lembre da forma de rocha curva do vídeo.",
+  "dica_en": "Remember the curved rock shape in the video.",
+  "ex": "Wind and sand wear rock and make arches. Valleys come from water.",
+  "ex_pt": "O vento e a areia desgastam a rocha e fazem arcos. Os vales vêm da água."
+ },
+ {
+  "id": "n25",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N6"
+  ],
+  "p": "Complete: Water is always ___.",
+  "p_pt": "Complete: A água está sempre ___.",
+  "o": [
+   "moving",
+   "helpful",
+   "harmful"
+  ],
+  "o_pt": [
+   "em movimento",
+   "útil",
+   "perigosa"
+  ],
+  "dica": "Pense nos rios e na chuva.",
+  "dica_en": "Think about rivers and rain.",
+  "ex": "Water is always moving. It can be helpful or harmful.",
+  "ex_pt": "A água está sempre em movimento. Ela pode ser útil ou perigosa."
+ },
+ {
+  "id": "n26",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N6"
+  ],
+  "p": "Complete: Rivers flow ___.",
+  "p_pt": "Complete: Os rios correm ___.",
+  "o": [
+   "downhill",
+   "uphill",
+   "around hills"
+  ],
+  "o_pt": [
+   "morro abaixo",
+   "morro acima",
+   "em volta dos morros"
+  ],
+  "dica": "Para onde a água desce?",
+  "dica_en": "Where does water go down?",
+  "ex": "Rivers flow downhill. Water moves from high places to low places.",
+  "ex_pt": "Os rios correm morro abaixo. A água vai dos lugares altos para os baixos."
+ },
+ {
+  "id": "n27",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N6"
+  ],
+  "p": "Moving water wears rock. What can it make?",
+  "p_pt": "A água em movimento desgasta a rocha. O que ela pode fazer?",
+  "o": [
+   "valleys and canyons",
+   "dunes and arches",
+   "dams and turbines"
+  ],
+  "o_pt": [
+   "vales e cânions",
+   "dunas e arcos",
+   "represas e turbinas"
+  ],
+  "dica": "Dunas e arcos vêm de outra força.",
+  "dica_en": "Dunes and arches come from another force.",
+  "ex": "Water wears rock and makes valleys and canyons. Wind makes dunes and arches.",
+  "ex_pt": "A água desgasta a rocha e faz vales e cânions. O vento faz dunas e arcos."
+ },
+ {
+  "id": "n28",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N6"
+  ],
+  "p": "Rain falls on the ground. What can it carry away?",
+  "p_pt": "A chuva cai no chão. O que ela pode carregar?",
+  "o": [
+   "soil",
+   "dunes",
+   "canyons"
+  ],
+  "o_pt": [
+   "terra",
+   "dunas",
+   "cânions"
+  ],
+  "dica": "Está no chão, embaixo das plantas.",
+  "dica_en": "It is on the ground, under the plants.",
+  "ex": "Rain is moving water. It can carry soil away.",
+  "ex_pt": "Chuva é água em movimento. Ela leva a terra."
+ },
+ {
+  "id": "n29",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N7"
+  ],
+  "p": "A boat has a big sail. Which natural force fills the sail?",
+  "p_pt": "Um barco tem uma vela grande. Qual força natural enche a vela?",
+  "o": [
+   "wind",
+   "water",
+   "wind and water"
+  ],
+  "o_pt": [
+   "vento",
+   "água",
+   "vento e água"
+  ],
+  "dica": "A vela fica no alto, fora da água.",
+  "dica_en": "The sail is up high, out of the water.",
+  "ex": "Sailing uses wind. Wind fills the sail and moves the boat.",
+  "ex_pt": "Velejar usa o vento. O vento enche a vela e move o barco."
+ },
+ {
+  "id": "n30",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N7"
+  ],
+  "p": "A dam uses moving water. What does it make?",
+  "p_pt": "Uma represa usa água em movimento. O que ela faz?",
+  "o": [
+   "electricity",
+   "valleys",
+   "canyons"
+  ],
+  "o_pt": [
+   "eletricidade",
+   "vales",
+   "cânions"
+  ],
+  "dica": "É a energia que acende as luzes da casa.",
+  "dica_en": "It is the energy that turns on the lights at home.",
+  "ex": "Dams use moving water to make electricity.",
+  "ex_pt": "Represas usam água em movimento para fazer eletricidade."
+ },
+ {
+  "id": "n31",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N7"
+  ],
+  "p": "How do farmers use water?",
+  "p_pt": "Como os fazendeiros usam a água?",
+  "o": [
+   "to water their fields",
+   "to make electricity",
+   "to sail ships"
+  ],
+  "o_pt": [
+   "para regar os campos",
+   "para fazer eletricidade",
+   "para navegar navios"
+  ],
+  "dica": "Espalhar sementes e fazer dunas são coisas do vento.",
+  "dica_en": "Spreading seeds and making dunes are things wind does.",
+  "ex": "Farmers use water to water their fields.",
+  "ex_pt": "Fazendeiros usam água para regar os campos."
+ },
+ {
+  "id": "n35",
+  "tema": "forces",
+  "tipo": "conceito",
+  "at": [
+   "N8"
+  ],
+  "p": "We need to protect our...",
+  "p_pt": "Precisamos proteger nosso(a)...",
+  "o": [
+   "air and water",
+   "only air",
+   "only water"
+  ],
+  "o_pt": [
+   "ar e água",
+   "só o ar",
+   "só a água"
+  ],
+  "dica": "Lembre das duas forças da lição.",
+  "dica_en": "Remember the two forces in the lesson.",
+  "ex": "Wind is moving air. We protect both air and water.",
+  "ex_pt": "Vento é ar em movimento. Protegemos ar e água."
+ },
+ {
+  "id": "n36",
+  "tema": "forces",
+  "tipo": "rapida",
+  "at": [
+   "N2"
+  ],
+  "p": "Complete: The ___ spreads the seeds.",
+  "p_pt": "Complete: O ___ espalha as sementes.",
+  "o": [
+   "wind",
+   "window",
+   "water"
+  ],
+  "o_pt": [
+   "vento",
+   "janela",
+   "água"
+  ],
+  "dica": "Cuidado: duas palavras começam igual.",
+  "dica_en": "Be careful: two words start the same way.",
+  "ex": "Wind is the natural force that spreads the seeds. A window is part of a house.",
+  "ex_pt": "O vento é a força natural que espalha as sementes. A janela é parte da casa."
+ }
+]

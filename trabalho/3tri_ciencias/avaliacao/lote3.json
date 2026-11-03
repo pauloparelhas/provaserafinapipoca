@@ -1,0 +1,795 @@
+[
+ {
+  "id": "n01",
+  "p": "Complete: Wind and water are two ___ forces.",
+  "o": [
+   "natural",
+   "pushing",
+   "pulling"
+  ],
+  "at": [
+   "N1"
+  ],
+  "img": null,
+  "ex": "Wind and water exist in nature, so they are natural forces."
+ },
+ {
+  "id": "n02",
+  "p": "Complete: Wind and water can be ___ to us.",
+  "o": [
+   "helpful and harmful",
+   "helpful, never harmful",
+   "harmful, never helpful"
+  ],
+  "at": [
+   "N1"
+  ],
+  "img": null,
+  "ex": "Wind and water can help us and can harm us: helpful and harmful."
+ },
+ {
+  "id": "n03",
+  "p": "Which of these is HELPFUL water?",
+  "o": [
+   "water the plants",
+   "water in a tsunami",
+   "water in a flood"
+  ],
+  "at": [
+   "N2",
+   "N3"
+  ],
+  "img": null,
+  "ex": "Helpful water: water the plants, water to make energy. A tsunami and floods are harmful."
+ },
+ {
+  "id": "n04",
+  "p": "Which of these is HELPFUL wind?",
+  "o": [
+   "wind to make energy",
+   "wind in a tornado",
+   "very strong winds"
+  ],
+  "at": [
+   "N2",
+   "N3"
+  ],
+  "img": null,
+  "ex": "Helpful wind: makes energy and spreads the seeds. Tornadoes and strong winds are harmful."
+ },
+ {
+  "id": "n05",
+  "p": "Which of these is HARMFUL water?",
+  "o": [
+   "heavy rain and floods",
+   "water to make energy",
+   "water for the plants"
+  ],
+  "at": [
+   "N2",
+   "N3"
+  ],
+  "img": null,
+  "ex": "Harmful water: a tsunami, heavy rain and floods. Energy and plants are helpful uses."
+ },
+ {
+  "id": "n06",
+  "p": "Which of these is HARMFUL wind?",
+  "o": [
+   "wind in a tornado",
+   "wind that spreads seeds",
+   "wind to make energy"
+  ],
+  "at": [
+   "N2",
+   "N3"
+  ],
+  "img": null,
+  "ex": "Harmful wind: a tornado and strong winds. Seeds and energy are helpful uses."
+ },
+ {
+  "id": "n07",
+  "p": "What is this? Helpful or harmful?",
+  "o": [
+   "harmful: a tsunami",
+   "harmful: a flood",
+   "helpful: makes energy"
+  ],
+  "at": [
+   "N3"
+  ],
+  "img": "media/cie3/harm-tsunami.jpg",
+  "ex": "A tsunami is a giant wave of water. It is harmful."
+ },
+ {
+  "id": "n08",
+  "p": "What is this? Helpful or harmful?",
+  "o": [
+   "harmful: a flood",
+   "harmful: a tsunami",
+   "helpful: waters plants"
+  ],
+  "at": [
+   "N3"
+  ],
+  "img": "media/cie3/harm-floods.jpg",
+  "ex": "Heavy rain can make floods. The water covers streets and cars. It is harmful."
+ },
+ {
+  "id": "n09",
+  "p": "What is this? Helpful or harmful?",
+  "o": [
+   "harmful: a tornado",
+   "harmful: strong winds",
+   "helpful: makes energy"
+  ],
+  "at": [
+   "N3"
+  ],
+  "img": "media/cie3/harm-tornado.jpg",
+  "ex": "A tornado is wind that spins in a tall funnel. It is harmful."
+ },
+ {
+  "id": "n10",
+  "p": "What is this? Helpful or harmful?",
+  "o": [
+   "harmful: strong winds",
+   "harmful: a tornado",
+   "helpful: spreads seeds"
+  ],
+  "at": [
+   "N3"
+  ],
+  "img": "media/cie3/harm-winds.jpg",
+  "ex": "These strong winds bend the trees and blow the leaves. They are harmful."
+ },
+ {
+  "id": "n11",
+  "p": "What is this? Helpful or harmful?",
+  "o": [
+   "helpful: waters the plants",
+   "helpful: makes energy",
+   "harmful: heavy rain"
+  ],
+  "at": [
+   "N2"
+  ],
+  "img": "media/cie3/help-water-plants.jpg",
+  "ex": "Watering the plants is on the helpful list. Water helps plants live."
+ },
+ {
+  "id": "n12",
+  "p": "What is this? Helpful or harmful?",
+  "o": [
+   "helpful: makes energy",
+   "helpful: waters plants",
+   "harmful: a flood"
+  ],
+  "at": [
+   "N2",
+   "N7"
+  ],
+  "img": "media/cie3/help-water-energy.jpg",
+  "ex": "A dam uses moving water to make energy. It is helpful."
+ },
+ {
+  "id": "n13",
+  "p": "Which natural force turns these blades?",
+  "o": [
+   "wind",
+   "water",
+   "wind and water"
+  ],
+  "at": [
+   "N2",
+   "N7"
+  ],
+  "img": "media/cie3/help-wind-energy.jpg",
+  "ex": "Wind turns the blades of a turbine. Wind is the force here."
+ },
+ {
+  "id": "n14",
+  "p": "Which natural force spreads these seeds?",
+  "o": [
+   "wind",
+   "water",
+   "wind and water"
+  ],
+  "at": [
+   "N2",
+   "N7"
+  ],
+  "img": "media/cie3/help-wind-seeds.jpg",
+  "ex": "The seeds float in the air. Wind spreads the seeds, and that is helpful."
+ },
+ {
+  "id": "n15",
+  "p": "Which natural force is this?",
+  "o": [
+   "wind",
+   "water",
+   "wind and water"
+  ],
+  "at": [
+   "N3"
+  ],
+  "img": "media/cie3/harm-tornado.jpg",
+  "ex": "A tornado is spinning wind. So it is the force of wind."
+ },
+ {
+  "id": "n16",
+  "p": "Which natural force is this?",
+  "o": [
+   "water",
+   "wind",
+   "wind and water"
+  ],
+  "at": [
+   "N3"
+  ],
+  "img": "media/cie3/harm-tsunami.jpg",
+  "ex": "A tsunami is a giant wave. So it is the force of water."
+ },
+ {
+  "id": "n17",
+  "p": "What do these wind turbines make?",
+  "o": [
+   "electricity",
+   "new seeds",
+   "strong winds"
+  ],
+  "at": [
+   "N7"
+  ],
+  "img": "media/cie3/help-wind-energy.jpg",
+  "ex": "Wind turns the turbines, and the turbines make electricity."
+ },
+ {
+  "id": "n18",
+  "p": "Which natural forces can make energy?",
+  "o": [
+   "wind and water",
+   "wind and sand",
+   "water and sand"
+  ],
+  "at": [
+   "N2"
+  ],
+  "img": null,
+  "ex": "The slide shows water to make energy and wind to make energy. So both."
+ },
+ {
+  "id": "n19",
+  "p": "Complete: Wind is ___ in motion.",
+  "o": [
+   "air",
+   "water",
+   "sand"
+  ],
+  "at": [
+   "N4"
+  ],
+  "img": null,
+  "ex": "Wind is air in motion. Moving air is wind."
+ },
+ {
+  "id": "n20",
+  "p": "Wind can be soft or strong. Which one is SOFT wind?",
+  "o": [
+   "a gentle breeze",
+   "a mighty gust",
+   "a tornado"
+  ],
+  "at": [
+   "N4"
+  ],
+  "img": null,
+  "ex": "A gentle breeze is soft wind. A mighty gust is strong wind."
+ },
+ {
+  "id": "n21",
+  "p": "You blow bubbles. What does your breath make?",
+  "o": [
+   "wind",
+   "water",
+   "rain"
+  ],
+  "at": [
+   "N4"
+  ],
+  "img": null,
+  "ex": "Wind is air in motion. Blowing bubbles moves air, so it makes wind."
+ },
+ {
+  "id": "n22",
+  "p": "Which natural force makes a kite fly?",
+  "o": [
+   "wind",
+   "water",
+   "wind and water"
+  ],
+  "at": [
+   "N4",
+   "N7"
+  ],
+  "img": null,
+  "ex": "A kite flies with the wind. Moving air holds it up."
+ },
+ {
+  "id": "n23",
+  "p": "Wind moves sand. What can it make?",
+  "o": [
+   "dunes",
+   "canyons",
+   "valleys"
+  ],
+  "at": [
+   "N5"
+  ],
+  "img": null,
+  "ex": "Wind moves sand and makes dunes. Water makes valleys and canyons."
+ },
+ {
+  "id": "n24",
+  "p": "Wind and sand wear rock. What can they make?",
+  "o": [
+   "arches",
+   "dams",
+   "valleys"
+  ],
+  "at": [
+   "N5"
+  ],
+  "img": null,
+  "ex": "Wind and sand wear rock and make arches. Valleys come from water."
+ },
+ {
+  "id": "n25",
+  "p": "Complete: Water is always ___.",
+  "o": [
+   "moving",
+   "helpful",
+   "harmful"
+  ],
+  "at": [
+   "N6"
+  ],
+  "img": null,
+  "ex": "Water is always moving. It can be helpful or harmful."
+ },
+ {
+  "id": "n26",
+  "p": "Complete: Rivers flow ___.",
+  "o": [
+   "downhill",
+   "uphill",
+   "around hills"
+  ],
+  "at": [
+   "N6"
+  ],
+  "img": null,
+  "ex": "Rivers flow downhill. Water moves from high places to low places."
+ },
+ {
+  "id": "n27",
+  "p": "Moving water wears rock. What can it make?",
+  "o": [
+   "valleys and canyons",
+   "dunes and arches",
+   "dams and turbines"
+  ],
+  "at": [
+   "N6"
+  ],
+  "img": null,
+  "ex": "Water wears rock and makes valleys and canyons. Wind makes dunes and arches."
+ },
+ {
+  "id": "n28",
+  "p": "Rain falls on the ground. What can it carry away?",
+  "o": [
+   "soil",
+   "wind",
+   "air"
+  ],
+  "at": [
+   "N6"
+  ],
+  "img": null,
+  "ex": "Rain is moving water. It can carry soil away from the ground."
+ },
+ {
+  "id": "n29",
+  "p": "A boat has a big sail. Which natural force fills the sail?",
+  "o": [
+   "wind",
+   "water",
+   "wind and water"
+  ],
+  "at": [
+   "N7"
+  ],
+  "img": null,
+  "ex": "Sailing uses wind. Wind fills the sail and moves the boat."
+ },
+ {
+  "id": "n30",
+  "p": "A dam uses moving water. What does it make?",
+  "o": [
+   "electricity",
+   "sand dunes",
+   "strong winds"
+  ],
+  "at": [
+   "N7"
+  ],
+  "img": null,
+  "ex": "Dams use moving water to make electricity. This is called hydroelectricity."
+ },
+ {
+  "id": "n31",
+  "p": "How do farmers use water?",
+  "o": [
+   "to water their fields",
+   "to spread their seeds",
+   "to make sand dunes"
+  ],
+  "at": [
+   "N7"
+  ],
+  "img": null,
+  "ex": "Farmers use water to water their fields. Wind spreads seeds and makes dunes."
+ },
+ {
+  "id": "n32",
+  "p": "We drink with it. We cook with it. We wash with it. Which natural force is it?",
+  "o": [
+   "water",
+   "wind",
+   "wind and water"
+  ],
+  "at": [
+   "N7"
+  ],
+  "img": null,
+  "ex": "We use water for drinking, cooking and washing."
+ },
+ {
+  "id": "n33",
+  "p": "Ships and boats travel on...",
+  "o": [
+   "water",
+   "sand",
+   "rock"
+  ],
+  "at": [
+   "N7"
+  ],
+  "img": null,
+  "ex": "Boats and ships use water to travel. Water carries them."
+ },
+ {
+  "id": "n34",
+  "p": "Complete: Rivers are home to...",
+  "o": [
+   "fish and frogs",
+   "birds and monkeys",
+   "dogs and snakes"
+  ],
+  "at": [
+   "N7"
+  ],
+  "img": null,
+  "ex": "Rivers are home to fish and frogs. They live in and near the water."
+ },
+ {
+  "id": "n35",
+  "p": "Complete: We need to protect our...",
+  "o": [
+   "air and water",
+   "sand and rock",
+   "dunes and canyons"
+  ],
+  "at": [
+   "N8"
+  ],
+  "img": null,
+  "ex": "Wind is moving air, and water is the other force. We need to protect both."
+ },
+ {
+  "id": "n36",
+  "p": "Complete: The ___ spreads the seeds.",
+  "o": [
+   "wind",
+   "window",
+   "water"
+  ],
+  "at": [
+   "N2"
+  ],
+  "img": null,
+  "ex": "Wind is the natural force that spreads the seeds. A window is part of a house."
+ },
+ {
+  "id": "m01",
+  "p": "How does a fish move?",
+  "o": [
+   "It swims.",
+   "It climbs.",
+   "It walks."
+  ],
+  "at": [
+   "M3"
+  ],
+  "img": null,
+  "ex": "A fish lives in the water and moves by swimming. A fish swims."
+ },
+ {
+  "id": "m02",
+  "p": "Which animal flies?",
+  "o": [
+   "a bird",
+   "a fish",
+   "a frog"
+  ],
+  "at": [
+   "M3"
+  ],
+  "img": null,
+  "ex": "To fly is to move through the air. A bird flies."
+ },
+ {
+  "id": "m03",
+  "p": "A monkey goes up a tree. How does it move?",
+  "o": [
+   "It climbs.",
+   "It flies.",
+   "It crawls."
+  ],
+  "at": [
+   "M3"
+  ],
+  "img": null,
+  "ex": "A monkey goes up a tree with its hands and feet. It climbs."
+ },
+ {
+  "id": "m04",
+  "p": "How does a dog move?",
+  "o": [
+   "It walks and runs.",
+   "It climbs and flies.",
+   "It crawls and flies."
+  ],
+  "at": [
+   "M3"
+  ],
+  "img": null,
+  "ex": "A dog moves on four legs. A dog walks and runs."
+ },
+ {
+  "id": "m05",
+  "p": "Which animal jumps?",
+  "o": [
+   "a kangaroo",
+   "a fish",
+   "a snake"
+  ],
+  "at": [
+   "M3"
+  ],
+  "img": null,
+  "ex": "A kangaroo moves by jumping. It uses its strong back legs."
+ },
+ {
+  "id": "m06",
+  "p": "How does a frog move on land?",
+  "o": [
+   "It jumps.",
+   "It flies.",
+   "It crawls."
+  ],
+  "at": [
+   "M3"
+  ],
+  "img": null,
+  "ex": "A frog and a kangaroo move the same way. They jump."
+ },
+ {
+  "id": "m07",
+  "p": "A snake has no legs. How does it move on the ground?",
+  "o": [
+   "It crawls.",
+   "It jumps.",
+   "It flies."
+  ],
+  "at": [
+   "M3"
+  ],
+  "img": null,
+  "ex": "A snake has no legs. It stays low and crawls on the ground."
+ },
+ {
+  "id": "m08",
+  "p": "A snake moves smoothly along the ground. Which word fits?",
+  "o": [
+   "It slides.",
+   "It jumps.",
+   "It flies."
+  ],
+  "at": [
+   "M3",
+   "O4"
+  ],
+  "img": null,
+  "ex": "To slide is to move smoothly along a surface. A snake slides on the ground."
+ },
+ {
+  "id": "m09",
+  "p": "I go up a tree. I use my body. I…",
+  "o": [
+   "climb",
+   "write",
+   "point"
+  ],
+  "at": [
+   "M1"
+  ],
+  "img": null,
+  "ex": "Climb is a body movement. We climb to go up a tree."
+ },
+ {
+  "id": "m10",
+  "p": "I move in the pool with my whole body. I…",
+  "o": [
+   "swim",
+   "grab",
+   "lift"
+  ],
+  "at": [
+   "M1"
+  ],
+  "img": null,
+  "ex": "Swim is a body movement. We swim in the water, like a fish."
+ },
+ {
+  "id": "m11",
+  "p": "I ___ on a chair.",
+  "o": [
+   "sit",
+   "lift",
+   "point"
+  ],
+  "at": [
+   "M1"
+  ],
+  "img": null,
+  "ex": "Sit is a body movement. We sit on a chair."
+ },
+ {
+  "id": "m12",
+  "p": "My legs and feet take me to the door. I…",
+  "o": [
+   "walk",
+   "touch",
+   "write"
+  ],
+  "at": [
+   "M1"
+  ],
+  "img": null,
+  "ex": "Walk is a body movement. We use our legs and feet to walk."
+ },
+ {
+  "id": "m13",
+  "p": "Which one is on the list of body movements?",
+  "o": [
+   "play",
+   "point",
+   "write"
+  ],
+  "at": [
+   "M1"
+  ],
+  "img": null,
+  "ex": "Body list: swim, climb, play, walk, pick, sit. Play is on it."
+ },
+ {
+  "id": "m14",
+  "p": "Body movements: swim, climb, play, walk, sit and…",
+  "o": [
+   "pick",
+   "write",
+   "grab"
+  ],
+  "at": [
+   "M1"
+  ],
+  "img": null,
+  "ex": "Body list: swim, climb, play, walk, pick, sit. Pick is on it."
+ },
+ {
+  "id": "m15",
+  "p": "I use my hand and a pencil. I…",
+  "o": [
+   "write",
+   "walk",
+   "swim"
+  ],
+  "at": [
+   "M2"
+  ],
+  "img": null,
+  "ex": "Write is a hand movement. We hold a pencil and write."
+ },
+ {
+  "id": "m16",
+  "p": "I show a place on the map with my finger. I…",
+  "o": [
+   "point",
+   "sit",
+   "climb"
+  ],
+  "at": [
+   "M2"
+  ],
+  "img": null,
+  "ex": "Point is a hand movement. We point with a finger to show a place."
+ },
+ {
+  "id": "m17",
+  "p": "My hand closes fast around the ball. I…",
+  "o": [
+   "grab it",
+   "climb it",
+   "sit on it"
+  ],
+  "at": [
+   "M2"
+  ],
+  "img": null,
+  "ex": "Grab is a hand movement. The hand closes and holds the ball."
+ },
+ {
+  "id": "m18",
+  "p": "My hands move the box up. I…",
+  "o": [
+   "lift it",
+   "climb it",
+   "sit on it"
+  ],
+  "at": [
+   "M2"
+  ],
+  "img": null,
+  "ex": "Lift is a hand movement. Hands move a thing up."
+ },
+ {
+  "id": "m19",
+  "p": "My fingers feel the soft cat. I…",
+  "o": [
+   "touch it",
+   "climb it",
+   "sit on it"
+  ],
+  "at": [
+   "M2"
+  ],
+  "img": null,
+  "ex": "Touch is a hand movement. We touch things with our fingers."
+ },
+ {
+  "id": "m20",
+  "p": "Which one is on the list of hand movements?",
+  "o": [
+   "push",
+   "swim",
+   "sit"
+  ],
+  "at": [
+   "M2"
+  ],
+  "img": null,
+  "ex": "Hand list: touch, lift, point, write, grab, push. Push is on it."
+ }
+]

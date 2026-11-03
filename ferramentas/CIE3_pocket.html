@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c4a6e">
+<title>Science Pocket — 3rd term</title>
+<style>
+/* CIE3_pocket — a prova inteira numa folha A4 paisagem, para imprimir colorida.
+   Logica do ING3_pocket/HIS3_pocket; fonte unica trabalho/3tri_ciencias/_roteiro.md.
+   As figuras sao recortes dos slides da escola (media/cie3). */
+:root{--ink:#1e1b2e;--soft:#4b4763;--pt:#6b6580;--paper:#fffdf7;--tk:#c2410c}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:#475569;font-family:"Segoe UI","Trebuchet MS",system-ui,Roboto,Arial,sans-serif;color:var(--ink)}
+@page{size:A4 landscape;margin:0}
+.tela{position:sticky;top:0;z-index:5;display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;padding:8px 16px;background:#0c4a6e;color:#fff}
+.tela button,.tela a{min-height:44px;min-width:44px;padding:0 14px;border-radius:12px;border:2px solid #7dd3fc;background:#075985;color:#fff;font-weight:800;font-size:15px;font-family:inherit;display:inline-flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer}
+.tela button.on{background:#0284c7}
+.tela .dica{font-size:13px;font-weight:700;opacity:.9;flex-basis:100%;text-align:center}
+.palco{padding:14px 0 30px;overflow:hidden}
+.escala{transform-origin:top left;width:297mm}
+.sem-pt .pt{display:none!important}
+.page{width:297mm;height:210mm;background:var(--paper);padding:4mm 5mm 3.6mm;display:flex;flex-direction:column;gap:1.8mm;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.4);font-size:7.1pt;line-height:1.17}
+.pt{display:block;color:var(--pt);font-style:italic;font-weight:600;font-size:.86em;line-height:1.12}
+.pt.in{display:inline}
+b{font-weight:850}
+.topo{display:flex;align-items:center;gap:3mm;padding:1mm 3mm;border-radius:3mm;background:linear-gradient(100deg,#0c4a6e,#0284c7 45%,#f97316);color:#fff}
+.topo h1{font-size:12.5pt;font-weight:900;line-height:1}
+.topo h1 small{display:block;font-size:7.3pt;font-weight:700;opacity:.92;margin-top:.5mm}
+.topo .nome{margin-left:auto;font-weight:800;font-size:7.6pt;white-space:nowrap}
+.topo .nome i{display:inline-block;width:32mm;border-bottom:.3mm solid #fff;margin-left:1mm}
+.grade{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:.92fr 1.12fr 1.06fr;grid-template-rows:1.02fr 1fr;gap:2mm}
+.sec{border-radius:3mm;border:.55mm solid var(--c);background:var(--c2);padding:1.6mm 2.2mm;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:.9mm}
+.sec>h2{display:flex;align-items:center;gap:1.5mm;font-size:10pt;font-weight:900;color:var(--c);line-height:1}
+.sec>h2 .n{flex:0 0 auto;width:5.4mm;height:5.4mm;border-radius:50%;background:var(--c);color:#fff;font-size:8.4pt;display:flex;align-items:center;justify-content:center}
+.sec>h2 .pt{margin-left:auto;font-size:7.2pt;color:var(--c);opacity:.85}
+.def{background:#fff;border-radius:2mm;padding:.8mm 1.6mm;font-size:7.3pt;font-weight:700}
+.def b{color:var(--c)}
+.po{--c:#be185d;--c2:#fdf2f8;--c3:#fbcfe8;grid-row:1 / span 2}
+.ob{--c:#6d28d9;--c2:#f5f3ff;--c3:#ddd6fe}
+.pp{--c:#c2410c;--c2:#fff7ed;--c3:#fed7aa}
+.fo{--c:#0369a1;--c2:#f0f9ff;--c3:#bae6fd}
+.mi{--c:#0f766e;--c2:#f0fdfa;--c3:#99f6e4}
+.prep{display:grid;grid-template-columns:repeat(3,1fr);gap:1mm}
+.prep div{background:#fff;border:.3mm solid var(--c3);border-radius:1.6mm;text-align:center;font-size:6.5pt;font-weight:700;padding:.5mm .6mm;line-height:1.08}
+.prep img{display:block;width:100%;height:12.6mm;object-fit:contain}
+.prep b{display:block;color:var(--c);font-size:8pt;line-height:1.05}
+.sala{display:grid;grid-template-columns:37mm 1fr;gap:1.4mm;align-items:start}
+.sala img{width:100%;border-radius:1.5mm;display:block}
+.sala ul{list-style:none;font-size:6.5pt;font-weight:700;line-height:1.14}
+.sala b{color:var(--c)}
+.mov{display:grid;grid-template-columns:repeat(3,1fr);gap:1mm}
+.mov>div{background:#fff;border-radius:1.8mm;border:.45mm solid var(--k);padding:.4mm .9mm .6mm;font-size:6.25pt;font-weight:700;line-height:1.08}
+.mov h3{color:var(--k);font-size:8.6pt;font-weight:900;line-height:1}
+.mov .ex{display:flex;gap:.4mm;margin:.4mm 0}
+.mov .ex img{width:33.3%;height:15mm;object-fit:contain}
+.dv{display:flex;gap:1mm;flex-wrap:wrap}
+.dv span{background:var(--c3);border-radius:3mm;padding:.2mm 1.5mm;font-weight:800;font-size:6.6pt}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:1.2mm}
+.col{background:#fff;border-radius:1.8mm;border-top:1.2mm solid var(--k);padding:.7mm 1mm;font-size:6.9pt;font-weight:700;line-height:1.12}
+.col h3{color:var(--k);font-size:9.6pt;font-weight:900;line-height:1}
+.g4{display:grid;grid-template-columns:1fr 1fr;gap:.6mm;margin-top:.6mm}
+.g4 figure{text-align:center;font-size:5.9pt;font-weight:800;line-height:1.04}
+.g4 img{display:block;width:100%;height:14mm;object-fit:contain;background:#fff}
+.mi .tres{display:grid;grid-template-columns:1.25fr 1fr;gap:1.2mm;flex:1;min-height:0}
+.bx{background:#fff;border-radius:1.8mm;padding:.7mm 1.1mm;font-size:6.5pt;font-weight:700;line-height:1.13}
+.bx h3{font-size:8pt;color:var(--c);font-weight:900;line-height:1.05}
+.vw{display:grid;grid-template-columns:repeat(4,1fr);gap:.6mm;margin:.5mm 0}
+.vw figure{text-align:center;font-size:6.1pt;font-weight:800}
+.vw img{width:100%;height:9.6mm;object-fit:cover;display:block;border-radius:.8mm}
+.mapa{display:grid;grid-template-columns:23mm 1fr;gap:1mm;align-items:start}
+.mapa img{width:100%;display:block;border-radius:1mm}
+.baixo{display:grid;grid-template-columns:2.3fr 1fr;gap:2mm}
+.peg{border-radius:3mm;border:.55mm solid var(--tk);background:#fff7ed;padding:.9mm 1.8mm;display:flex;align-items:center;gap:1.8mm}
+.peg h2{font-size:9pt;font-weight:900;color:var(--tk);line-height:1.05;flex:0 0 auto}
+.peg h2 .pt{color:var(--tk)}
+.pares{display:grid;grid-template-columns:repeat(5,1fr);gap:1mm;flex:1}
+.pares div{background:#fff;border:.3mm solid #fdba74;border-radius:1.8mm;padding:.5mm 1mm;font-size:6.5pt;font-weight:700;line-height:1.14}
+.pares div b{display:block;color:var(--tk);font-size:7.4pt}
+.chk{border-radius:3mm;border:.55mm solid #334155;background:#f8fafc;padding:.7mm 2mm}
+.chk h2{font-size:8.6pt;font-weight:900;color:#334155}
+.chk ol{padding-left:3.6mm;font-size:6.6pt;font-weight:700;columns:2;column-gap:3mm}
+.chk .resp{font-size:6pt;font-weight:700;color:var(--soft);transform:rotate(180deg);text-align:right;margin-top:.3mm}
+@media print{body{background:none}.tela{display:none}.palco{padding:0;overflow:visible}.escala{transform:none!important;height:auto!important;margin-left:0!important}.page{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="tela">
+  <a href="../index.html" title="Home">&#127968; Home</a>
+  <button id="btPrint" onclick="window.print()">&#128424;&#65039; Print</button>
+  <button id="btPt" onclick="alternaPt()" aria-pressed="true">PT: on</button>
+  <span class="dica">Print in COLOR, A4, landscape.<span class="pt in" style="color:#fff"> · Imprima COLORIDO, A4, paisagem.</span></span>
+</div>
+<div class="palco"><div class="escala" id="escala">
+<div class="page">
+  <header class="topo">
+    <h1>Motion Rangers — My Science Pocket<small>Unit 3: Position and Motion · test on 11/04 <span class="pt in" style="color:#fff;opacity:.9">· tudo da prova numa folha</span></small></h1>
+    <span class="nome">Name:<i></i></span>
+  </header>
+  <main class="grade">
+    <section class="sec po">
+      <h2><span class="n">1</span>Position: where is it?<span class="pt">Posição: onde está?</span></h2>
+      <div class="prep" id="prep"></div>
+      <div class="def"><b>over</b>: a bird flying <b>over</b> the trees. <span class="pt in">por cima das árvores</span></div>
+      <div class="sala">
+        <img src="media/cie3/room.jpg" alt="">
+        <ul>
+          <li>pizza <b>in</b> the box</li><li>guitar <b>between</b> the lamp and the plant</li><li>two dogs <b>under</b> the table</li><li>window <b>behind</b> the sofa</li><li>racket <b>next to</b> the bag</li><li>cheese <b>on</b> the plate</li><li>rug <b>in front of</b> the sofa</li><li>lamp <b>under</b> the shelf</li><li>trophy <b>between</b> the books</li><li>picture <b>on</b> the wall</li><li>two fish <b>in</b> the bowl</li>
+        </ul>
+      </div>
+      <h2 style="margin-top:.4mm"><span class="n">2</span>Directions and maps<span class="pt">Direções e mapas</span></h2>
+      <div class="mapa">
+        <img src="media/cie3/map-school.jpg" alt="">
+        <div class="bx"><b>LEFT</b> ← → <b>RIGHT</b>. The Auditorium is <b>between</b> A section (left) and B section (right).<span class="pt">O auditório fica entre a seção A (esquerda) e a B (direita).</span>
+        Pay attention to the <b>details</b> and the <b>path (way)</b>. You might get <b>lost</b> if you run or don't pay attention.<span class="pt">Preste atenção nos detalhes e no caminho. Dá para se perder se correr ou não prestar atenção.</span></div>
+      </div>
+    </section>
+    <section class="sec ob">
+      <h2><span class="n">3</span>Movement of objects<span class="pt">Movimento dos objetos</span></h2>
+      <div class="mov" id="mov"></div>
+      <div class="dv"><span>back and forth</span><span>up and down</span><span>round and round</span><span>slow · fast</span></div>
+    </section>
+    <section class="sec pp">
+      <h2><span class="n">4</span>Push or pull? <span style="font-size:8pt">Forces</span><span class="pt">Forças</span></h2>
+      <div class="duas">
+        <div class="col" style="--k:#dc2626"><h3>PUSH <span class="pt in">empurrar</span></h3>I use a force to move something <b>away from me</b>.<span class="pt">para longe de mim</span>
+          <div class="g4"><figure><img src="media/cie3/push-bike.jpg" alt="">bike</figure><figure><img src="media/cie3/push-box.jpg" alt="">box</figure><figure><img src="media/cie3/push-door.jpg" alt="">door</figure><figure><img src="media/cie3/push-ball.jpg" alt="">kick a ball</figure></div>
+          trolley · volleyball · piano · golf</div>
+        <div class="col" style="--k:#2563eb"><h3>PULL <span class="pt in">puxar</span></h3>I use a force to move something <b>closer to me</b>.<span class="pt">para perto de mim</span>
+          <div class="g4"><figure><img src="media/cie3/pull-rope.jpg" alt="">rope</figure><figure><img src="media/cie3/pull-wagon.jpg" alt="">wagon</figure><figure><img src="media/cie3/pull-drawer.jpg" alt="">drawer</figure><figure><img src="media/cie3/pull-fish.jpg" alt="">fishing</figure></div>
+          kite rope · picking fruit</div>
+      </div>
+      <div class="def"><b>Push</b> and <b>pull</b> are <b>opposite</b> forces.<span class="pt">São forças opostas.</span></div>
+    </section>
+    <section class="sec fo">
+      <h2><span class="n">5</span>Wind and water<span class="pt">Vento e água</span></h2>
+      <div class="def">Two <b>natural forces</b>. They can be <b>helpful</b> and <b>harmful</b>. <span class="pt in">Forças da natureza: podem ajudar e podem prejudicar.</span></div>
+      <div class="duas">
+        <div class="col" style="--k:#16a34a"><h3>HELPFUL &#128578;</h3>
+          <div class="g4"><figure><img src="media/cie3/help-water-plants.jpg" alt="">water the plants</figure><figure><img src="media/cie3/help-water-energy.jpg" alt="">water: energy</figure><figure><img src="media/cie3/help-wind-energy.jpg" alt="">wind: energy</figure><figure><img src="media/cie3/help-wind-seeds.jpg" alt="">wind spreads seeds</figure></div></div>
+        <div class="col" style="--k:#dc2626"><h3>HARMFUL &#128577;</h3>
+          <div class="g4"><figure><img src="media/cie3/harm-tsunami.jpg" alt="">tsunami</figure><figure><img src="media/cie3/harm-floods.jpg" alt="">heavy rain, floods</figure><figure><img src="media/cie3/harm-tornado.jpg" alt="">tornado</figure><figure><img src="media/cie3/harm-winds.jpg" alt="">strong winds</figure></div></div>
+      </div>
+      <div class="bx"><b>Wind</b> = air in motion: breeze or gust. Moves sand (dunes), sails boats. <b>Water</b> flows downhill, wears rock (canyons), gives energy and carries boats.<span class="pt">Vento é ar em movimento. A água desce, desgasta a pedra, dá energia e leva barcos.</span></div>
+    </section>
+    <section class="sec mi">
+      <h2><span class="n">6</span>Perspective · animals<span class="pt">Perspectiva · animais</span></h2>
+      <div class="bx"><h3>Changing perspective</h3>What I see depends on <b>where I am looking from</b>.<span class="pt">O que vejo depende de onde estou olhando.</span>
+        <div class="vw"><figure><img src="media/cie3/view-front.jpg" alt="">front</figure><figure><img src="media/cie3/view-top.jpg" alt="">top</figure><figure><img src="media/cie3/view-side.jpg" alt="">side</figure><figure><img src="media/cie3/view-bottom.jpg" alt="">bottom</figure></div>
+        “People are not right or wrong. They just have a different view of things.”<span class="pt">As pessoas não estão certas nem erradas; só veem de outro jeito.</span></div>
+      <div class="duas">
+        <div class="bx"><h3>Animals</h3>fish <b>swims</b> · bird <b>flies</b> · monkey <b>climbs</b> · dog <b>walks, runs</b> · frog, kangaroo <b>jump</b> · snake <b>crawls</b></div>
+        <div class="bx"><h3>My body · hand</h3><b>Body:</b> swim, climb, play, walk, pick, sit<br><b>Hand:</b> touch, lift, point, write, grab, push</div>
+      </div>
+    </section>
+  </main>
+  <footer class="baixo">
+    <div class="peg">
+      <h2>&#9888;&#65039; Tricky<br>pairs<span class="pt">Pegadinhas</span></h2>
+      <div class="pares">
+        <div><b>PUSH ≠ puxar!</b>push = away · pull = closer<span class="pt">push é empurrar; pull é puxar</span></div>
+        <div><b>on ≠ above</b>on = touching · above = higher, not touching<span class="pt">encostado × acima</span></div>
+        <div><b>next to ≠ far from</b>next to = right beside<span class="pt">ao lado × longe</span></div>
+        <div><b>roll ≠ spin</b>roll = goes along · spin = stays in place<span class="pt">rola e anda × gira no lugar</span></div>
+        <div><b>helpful ≠ harmful</b>helps us × hurts us<span class="pt">ajuda × prejudica</span></div>
+      </div>
+    </div>
+    <div class="chk">
+      <h2>&#9989; Check yourself <span class="pt in">Teste-se</span></h2>
+      <ol><li>A top: spin or bounce?</li><li>A drawer opening: push or pull?</li><li>A tornado: helpful or harmful?</li><li>A ball ___ the table (under it).</li></ol>
+      <p class="resp">1 spin · 2 pull · 3 harmful · 4 under</p>
+    </div>
+  </footer>
+</div>
+</div></div>
+<script>
+var P=[['in','The bear is in the box.'],['on','The apple is on the book.'],['under','The ball is under the table.'],['behind','The boy is behind the tree.'],['in-front-of','The dog is in front of the chair.'],['between','The bear is between the plants.'],['next-to','The clock is next to the lamp.'],['near','The tree is near the house.'],['far-from','The tree is far from the house.'],['above','The lamp is above the table.'],['below','The cat is below the shelf.'],['inside','The fish is inside the bowl.']];
+document.getElementById('prep').innerHTML=P.map(function(p){return '<div><img src="media/cie3/prep-'+p[0]+'.jpg" alt=""><b>'+p[0].replace(/-/g,' ')+'</b>'+p[1]+'</div>';}).join('');
+var M=[['bounce','#ca8a04','go up and down after hitting a surface','quica',['bounce-soccer-ball','bounce-tennis-ball','bounce-basketball']],['fly','#0284c7','move through the air','voa',['fly-airplane','fly-balloon','fly-kite']],['roll','#db2777','move by turning over and over','rola',['roll-wheel','roll-can','roll-beach-ball']],['slide','#7c3aed','move smoothly along a surface','desliza',['slide-slide','slide-ice-cube','slide-book']],['spin','#ea580c','turn around and around','gira',['spin-pinwheel','spin-fan','spin-top']],['swing','#16a34a','move back and forth like a pendulum','balança',['swing-swing','swing-plant','swing-door']]];
+document.getElementById('mov').innerHTML=M.map(function(m){return '<div style="--k:'+m[1]+'"><h3>'+m[0]+' <span class="pt in">'+m[3]+'</span></h3><span class="ex">'+m[4].map(function(f){return '<img src="media/cie3/obj-'+f+'.jpg" alt="">';}).join('')+'</span>'+m[2]+'</div>';}).join('');
+function encaixa(){var e=document.getElementById('escala'),l=e.firstElementChild.offsetWidth,a=e.firstElementChild.offsetHeight,k=Math.min(1,(window.innerWidth-16)/l);e.style.transform='scale('+k+')';e.style.height=(a*k)+'px';e.style.marginLeft=Math.max(8,(window.innerWidth-l*k)/2)+'px';}
+window.addEventListener('resize',encaixa);window.addEventListener('load',encaixa);encaixa();
+function pintaPt(){var on=true;try{on=localStorage.getItem('cie3_pocket_pt')!=='0';}catch(e){}document.body.classList.toggle('sem-pt',!on);var b=document.getElementById('btPt');b.textContent='PT: '+(on?'on':'off');b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));}
+function alternaPt(){var on=document.body.classList.contains('sem-pt');try{localStorage.setItem('cie3_pocket_pt',on?'1':'0');}catch(e){}pintaPt();}
+pintaPt();
+</script>
+</body>
+</html>
