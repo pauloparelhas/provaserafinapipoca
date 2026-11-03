@@ -15,7 +15,7 @@ const COTA = { position: 3, directions: 2, perspective: 1, forces: 2, objects: 2
 const FAMILIAS = Object.keys(I.TEMAS).map(k => ({ k, nome: I.TEMAS[k].nome, cor: I.TEMAS[k].cor, cota: COTA[k], bloco: (k === 'position' || k === 'objects' || k === 'pushpull') ? 'A' : 'B' }));
 const ITENS = I.ITENS.map(it => {
   const q = { id: it.id, eixo: it.tema, origem: I.TEMAS[it.tema].nome, tipo: it.tipo };
-  if (it.img) q.quadro = '<img class="fotofonte" src="' + it.img + '" alt="">';
+  if (it.img) { q.quadro = '<img class="fotofonte" src="' + it.img + '" alt="">'; q.semSoPergunta = true; }
   if (it.texto) {
     q.quadro = (it.titulo || it.autor)
       ? poema(it.texto, it.titulo, it.autor) + '<div class="tr">' + poema(it.texto_pt || '', it.titulo_pt, '') + '</div>'

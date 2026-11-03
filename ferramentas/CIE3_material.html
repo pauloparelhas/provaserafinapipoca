@@ -64,7 +64,7 @@ document.getElementById('grade').innerHTML=S.map(function(s){return '<button cla
 var V=[['nIvePkFzaMw','How Things Move','Como as coisas se movem','1:47'],['sva0ZRfFx4k','Forces: Push and Pull','Forças: empurrar e puxar','4:47'],['uz1ggZN94xo','Wind and Water Wonders','As maravilhas do vento e da água','6:14']];
 document.getElementById('vids').innerHTML=V.map(function(v){return '<div class="vid"><b>'+v[1]+'<span class="tr">'+v[2]+'</span></b><small>'+v[3]+'</small><div class="caixa"><button class="play" data-id="'+v[0]+'">&#9654; Play<span class="tr">Assistir</span></button></div></div>';}).join('');
 /* o vídeo só carrega no toque, sem cookie e sem sugestões de outros canais no fim */
-[].forEach.call(document.querySelectorAll('.play'),function(b){b.onclick=function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.getAttribute('data-id')+'?rel=0&modestbranding=1&autoplay=1&playsinline=1';f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;f.title='video';b.parentNode.replaceChild(f,b);};});
+[].forEach.call(document.querySelectorAll('.play'),function(b){b.onclick=function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.getAttribute('data-id')+'?rel=0&modestbranding=1&autoplay=1&playsinline=1&iv_load_policy=3';f.setAttribute('sandbox','allow-scripts allow-same-origin allow-presentation');f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;f.title='video';b.parentNode.replaceChild(f,b);};});
 </script>
 <script>window.SERA_ACCENT={accent:'#f97316'};</script>
 <script src="sera_theme.js"></script>

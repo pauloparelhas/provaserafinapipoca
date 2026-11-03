@@ -134,7 +134,7 @@ function Questao(props){
      a cabeça já saber o que procurar; depois o texto; depois a pergunta de
      novo com as alternativas. Só aparece quando há texto para esconder. */
   var so=React.useState(false), soPergunta=so[0], setSoPergunta=so[1];
-  var temApoio = !!(item.texto || item.quadro || item.figura || item.enun);
+  var temApoio = !!(item.texto || item.quadro || item.figura || item.enun) && !item.semSoPergunta; /* figura é a própria pergunta: não se esconde */
 
   var feito = pick>=0;
   var acertou = feito && alt[pick].ok;

@@ -82,10 +82,10 @@ return [
    grade(2,[['prep-in','The teddy bear is <b>in</b> the box.','O ursinho está dentro da caixa.'],['prep-on','The apple is <b>on</b> the book.','A maçã está sobre o livro.'],['prep-under','The ball is <b>under</b> the table.','A bola está embaixo da mesa.'],['prep-inside','The fish is <b>inside</b> the bowl.','O peixe está dentro do aquário.']])},
  {tipo:'completa', tit:'Read and complete', fala:'Read and complete.', regra:'in · on · under · inside',
   itens:[
-   C('The bear is _ the box.','in',['on','under'],'O urso está … a caixa.','dentro d'),
-   C('The apple is _ the book.','on',['in','under'],'A maçã está … o livro.','sobre'),
-   C('The ball is _ the table.','under',['on','in'],'A bola está … a mesa.','embaixo d'),
-   C('The fish is _ the bowl.','inside',['on','under'],'O peixe está … o aquário.','dentro d')
+   Q('prep-in','The bear is _ the box.','in',['on','under'],'','O urso está … a caixa.','dentro d'),
+   Q('prep-on','The apple is _ the book.','on',['in','under'],'','A maçã está … o livro.','sobre'),
+   Q('prep-under','The ball is _ the table.','under',['on','in'],'','A bola está … a mesa.','embaixo d'),
+   Q('prep-inside','The fish is _ the bowl.','inside',['on','under'],'','O peixe está … o aquário.','dentro d')
   ]},
  {tipo:'texto', tit:'Watch out!',
   fala:'In and inside are very close: the thing is within something. On: on top of it, touching it. Under: lower than it.',
