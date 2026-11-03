@@ -1,0 +1,842 @@
+[
+ {
+  "id": "open.01",
+  "onde": "roteiro_frases.py:open.01",
+  "texto": "This video is about position and motion.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p01-p08 (conjunto): slides de position (p03/p04), maps (p01), objects motion (p05), push/pull (p06); abertura descritiva verdadeira",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "open.02",
+  "onde": "roteiro_frases.py:open.02",
+  "texto": "Position: where things are. Motion: how things move.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p01-p08 (conjunto): slides de position (p03/p04), maps (p01), objects motion (p05), push/pull (p06); abertura descritiva verdadeira",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.01",
+  "onde": "roteiro_frases.py:position.01",
+  "texto": "The teddy bear is in the box.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.02",
+  "onde": "roteiro_frases.py:position.02",
+  "texto": "The apple is on the book.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.03",
+  "onde": "roteiro_frases.py:position.03",
+  "texto": "The ball is under the table.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.04",
+  "onde": "roteiro_frases.py:position.04",
+  "texto": "The boy is behind the tree.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.05",
+  "onde": "roteiro_frases.py:position.05",
+  "texto": "The dog is in front of the chair.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.06",
+  "onde": "roteiro_frases.py:position.06",
+  "texto": "The teddy bear is between the two plants.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.07",
+  "onde": "roteiro_frases.py:position.07",
+  "texto": "The clock is next to the lamp.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.08",
+  "onde": "roteiro_frases.py:position.08",
+  "texto": "The tree is near the house.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.09",
+  "onde": "roteiro_frases.py:position.09",
+  "texto": "The tree is far from the house.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.10",
+  "onde": "roteiro_frases.py:position.10",
+  "texto": "The lamp is above the table.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.11",
+  "onde": "roteiro_frases.py:position.11",
+  "texto": "The cat is below the shelf.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: cartaz Prepositions of Place traz esta frase e esta imagem; prep-*.jpg e recorte do mesmo card",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "position.12",
+  "onde": "roteiro_frases.py:position.12",
+  "texto": "The fish is inside the bowl of water.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg: card INSIDE \"The fish is inside the bowl\", imagem do aquario com agua; \"of water\" descreve o que a figura prep-inside mostra. PT \"dentro do aquario, na agua\" fiel.",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.01",
+  "onde": "roteiro_frases.py:room.01",
+  "texto": "There is some pizza in the box.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg: worksheet Prepositions of Place, item correspondente; room.jpg confere a cena (conferido na figura)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.02",
+  "onde": "roteiro_frases.py:room.02",
+  "texto": "There is a guitar between the lamp and the plant.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg: worksheet Prepositions of Place, item correspondente; room.jpg confere a cena (conferido na figura)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.03",
+  "onde": "roteiro_frases.py:room.03",
+  "texto": "There are two dogs under the table.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg: worksheet Prepositions of Place, item correspondente; room.jpg confere a cena (conferido na figura)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.04",
+  "onde": "roteiro_frases.py:room.04",
+  "texto": "There is a window behind the sofa.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg: worksheet Prepositions of Place, item correspondente; room.jpg confere a cena (conferido na figura)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.05",
+  "onde": "roteiro_frases.py:room.05",
+  "texto": "There is a racket next to the bag.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg: worksheet Prepositions of Place, item correspondente; room.jpg confere a cena (conferido na figura)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.06",
+  "onde": "roteiro_frases.py:room.06",
+  "texto": "There is some cheese on the plate.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg: worksheet Prepositions of Place, item correspondente; room.jpg confere a cena (conferido na figura)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.07",
+  "onde": "roteiro_frases.py:room.07",
+  "texto": "There is a rug in front of the sofa.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg: worksheet Prepositions of Place, item correspondente; room.jpg confere a cena (conferido na figura)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.08",
+  "onde": "roteiro_frases.py:room.08",
+  "texto": "There is a lamp under the shelf.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p03.jpeg item 8; em room.jpg o abajur de pe fica abaixo da prateleira dos livros/trofeu",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.09",
+  "onde": "roteiro_frases.py:room.09",
+  "texto": "There is a trophy between the books.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg: worksheet Prepositions of Place, item correspondente; room.jpg confere a cena (conferido na figura)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.10",
+  "onde": "roteiro_frases.py:room.10",
+  "texto": "There is a picture on the wall.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg: worksheet Prepositions of Place, item correspondente; room.jpg confere a cena (conferido na figura)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.11",
+  "onde": "roteiro_frases.py:room.11",
+  "texto": "There is a bird flying over the trees.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p03.jpeg item 11 (frase da propria worksheet); room.jpg mostra passaro na janela acima das arvores",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "room.12",
+  "onde": "roteiro_frases.py:room.12",
+  "texto": "There are two fish in the bowl.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg: worksheet Prepositions of Place, item correspondente; room.jpg confere a cena (conferido na figura)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "maps.01",
+  "onde": "roteiro_frases.py:maps.01",
+  "texto": "When we read maps, we need to pay a lot of attention in the details",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg: Reading Map (texto do quadro e mapa da escola com A section, Auditorium, B section e pino vermelho no Year 2)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "maps.02",
+  "onde": "roteiro_frases.py:maps.02",
+  "texto": "and in the path (way) that we are going.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg: Reading Map (texto do quadro e mapa da escola com A section, Auditorium, B section e pino vermelho no Year 2)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "maps.03",
+  "onde": "roteiro_frases.py:maps.03",
+  "texto": "We might get lost if we run or don't pay attention!",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg: Reading Map (texto do quadro e mapa da escola com A section, Auditorium, B section e pino vermelho no Year 2)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "maps.04",
+  "onde": "roteiro_frases.py:maps.04",
+  "texto": "This is the map of the school. The red pin marks a place on the map.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg: Reading Map (texto do quadro e mapa da escola com A section, Auditorium, B section e pino vermelho no Year 2)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "maps.05",
+  "onde": "roteiro_frases.py:maps.05",
+  "texto": "A section is on the left of the Auditorium.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg: Reading Map (texto do quadro e mapa da escola com A section, Auditorium, B section e pino vermelho no Year 2)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "maps.06",
+  "onde": "roteiro_frases.py:maps.06",
+  "texto": "B section is on the right of the Auditorium.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg: Reading Map (texto do quadro e mapa da escola com A section, Auditorium, B section e pino vermelho no Year 2)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "maps.07",
+  "onde": "roteiro_frases.py:maps.07",
+  "texto": "The Auditorium is between A section and B section.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg: Reading Map (texto do quadro e mapa da escola com A section, Auditorium, B section e pino vermelho no Year 2)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "persp.01",
+  "onde": "roteiro_frases.py:persp.01",
+  "texto": "We can see many things from different positions,",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg: Changing Perspectives (texto do quadro, Eiffel front/top/side/bottom, solido com sombras, girafa e mulher com 'People are not right or wrong...')",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "persp.02",
+  "onde": "roteiro_frases.py:persp.02",
+  "texto": "and our perspective changes depending on where we are looking from.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg: Changing Perspectives (texto do quadro, Eiffel front/top/side/bottom, solido com sombras, girafa e mulher com 'People are not right or wrong...')",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "persp.03",
+  "onde": "roteiro_frases.py:persp.03",
+  "texto": "The Eiffel Tower seen from the front.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg: Changing Perspectives (texto do quadro, Eiffel front/top/side/bottom, solido com sombras, girafa e mulher com 'People are not right or wrong...')",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "persp.04",
+  "onde": "roteiro_frases.py:persp.04",
+  "texto": "The Eiffel Tower seen from the top.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg: Changing Perspectives (texto do quadro, Eiffel front/top/side/bottom, solido com sombras, girafa e mulher com 'People are not right or wrong...')",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "persp.05",
+  "onde": "roteiro_frases.py:persp.05",
+  "texto": "The Eiffel Tower seen from the side.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg: Changing Perspectives (texto do quadro, Eiffel front/top/side/bottom, solido com sombras, girafa e mulher com 'People are not right or wrong...')",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "persp.06",
+  "onde": "roteiro_frases.py:persp.06",
+  "texto": "The Eiffel Tower seen from the bottom.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg: Changing Perspectives (texto do quadro, Eiffel front/top/side/bottom, solido com sombras, girafa e mulher com 'People are not right or wrong...')",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "persp.07",
+  "onde": "roteiro_frases.py:persp.07",
+  "texto": "The same tower. A different view.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg: Changing Perspectives (texto do quadro, Eiffel front/top/side/bottom, solido com sombras, girafa e mulher com 'People are not right or wrong...')",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "persp.08",
+  "onde": "roteiro_frases.py:persp.08",
+  "texto": "The giraffe and the woman look at the painting from different positions.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p07.jpeg + view-giraffe.jpg: girafa e mulher diante do mesmo quadro, em alturas/posicoes diferentes; frase com o contexto exigido pelo dono",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "persp.09",
+  "onde": "roteiro_frases.py:persp.09",
+  "texto": "People are not right or wrong. They just have a different view of things.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg: Changing Perspectives (texto do quadro, Eiffel front/top/side/bottom, solido com sombras, girafa e mulher com 'People are not right or wrong...')",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "forces.01",
+  "onde": "roteiro_frases.py:forces.01",
+  "texto": "Wind and water are two natural forces that exist in nature, and they can be harmful and helpful to us.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg: Movement of Water and Wind (frase do quadro e os 8 cards Helpful/Harmful)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "forces.02",
+  "onde": "roteiro_frases.py:forces.02",
+  "texto": "Helpful: water the plants.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg: Movement of Water and Wind (frase do quadro e os 8 cards Helpful/Harmful)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "forces.03",
+  "onde": "roteiro_frases.py:forces.03",
+  "texto": "Helpful: water to make energy.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg: Movement of Water and Wind (frase do quadro e os 8 cards Helpful/Harmful)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "forces.04",
+  "onde": "roteiro_frases.py:forces.04",
+  "texto": "Helpful: wind to make energy.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg: Movement of Water and Wind (frase do quadro e os 8 cards Helpful/Harmful); fala \"Helpful: wind, to make energy.\" so muda pausa, sentido igual",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "forces.05",
+  "onde": "roteiro_frases.py:forces.05",
+  "texto": "Helpful: wind that spreads the seeds.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg: Movement of Water and Wind (frase do quadro e os 8 cards Helpful/Harmful)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "forces.06",
+  "onde": "roteiro_frases.py:forces.06",
+  "texto": "Harmful: a tsunami.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg: Movement of Water and Wind (frase do quadro e os 8 cards Helpful/Harmful)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "forces.07",
+  "onde": "roteiro_frases.py:forces.07",
+  "texto": "Harmful: heavy rain and floods.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg: Movement of Water and Wind (frase do quadro e os 8 cards Helpful/Harmful)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "forces.08",
+  "onde": "roteiro_frases.py:forces.08",
+  "texto": "Harmful: a tornado.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg: Movement of Water and Wind (frase do quadro e os 8 cards Helpful/Harmful)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "forces.09",
+  "onde": "roteiro_frases.py:forces.09",
+  "texto": "Harmful: strong winds.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg: Movement of Water and Wind (frase do quadro e os 8 cards Helpful/Harmful); fala agora igual a legenda",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.01",
+  "onde": "roteiro_frases.py:moves.01",
+  "texto": "To bounce means to go up and down after hitting a surface.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.02",
+  "onde": "roteiro_frases.py:moves.02",
+  "texto": "Bounce: a soccer ball, a tennis ball and a basketball.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.03",
+  "onde": "roteiro_frases.py:moves.03",
+  "texto": "To fly means to move through the air.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.04",
+  "onde": "roteiro_frases.py:moves.04",
+  "texto": "Fly: an airplane, a hot air balloon and a kite.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.05",
+  "onde": "roteiro_frases.py:moves.05",
+  "texto": "To roll means to move by turning over and over.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.06",
+  "onde": "roteiro_frases.py:moves.06",
+  "texto": "Roll: a wheel, a can and a beach ball.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.07",
+  "onde": "roteiro_frases.py:moves.07",
+  "texto": "To slide means to move smoothly along a surface.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.08",
+  "onde": "roteiro_frases.py:moves.08",
+  "texto": "Slide: a slide, an ice cube and a book.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.09",
+  "onde": "roteiro_frases.py:moves.09",
+  "texto": "To spin means to turn around and around.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.10",
+  "onde": "roteiro_frases.py:moves.10",
+  "texto": "Spin: a pinwheel, a fan and a top.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.11",
+  "onde": "roteiro_frases.py:moves.11",
+  "texto": "To swing means to move back and forth like a pendulum.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "moves.12",
+  "onde": "roteiro_frases.py:moves.12",
+  "texto": "Swing: a swing, a hanging plant and a door.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg: Movements of OBJECTS (definicao e os 3 exemplos de cada movimento)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "dirs.01",
+  "onde": "roteiro_frases.py:dirs.01",
+  "texto": "Things move in different directions: back and forth, up and down, round and round.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (swing back and forth, bounce up and down, spin around and around) + ferramentas/CIE3_estudo_licoes.js:167-171 e CIE3_pocket.html:125 (Directions and speed)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "dirs.02",
+  "onde": "roteiro_frases.py:dirs.02",
+  "texto": "Things move at different speeds: slow or fast.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (swing back and forth, bounce up and down, spin around and around) + ferramentas/CIE3_estudo_licoes.js:167-171 e CIE3_pocket.html:125 (Directions and speed)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "body.01",
+  "onde": "roteiro_frases.py:body.01",
+  "texto": "Movements you can do with your body: swim, climb, play, pick, walk, sit.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (listas de movimentos do corpo e da mao) + ferramentas/CIE3_estudo_licoes.js:183-184 e CIE3_pocket.html:166 (Animals)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "body.02",
+  "onde": "roteiro_frases.py:body.02",
+  "texto": "Movements you can do with your hand: touch, lift, point, write, grab, push.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (listas de movimentos do corpo e da mao) + ferramentas/CIE3_estudo_licoes.js:183-184 e CIE3_pocket.html:166 (Animals)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "body.03",
+  "onde": "roteiro_frases.py:body.03",
+  "texto": "A fish swims.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p02/p05 nao trazem animais; frase verdadeira e sem absoluto, ja no texto auditado CIE3_estudo_licoes.js:183",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "body.04",
+  "onde": "roteiro_frases.py:body.04",
+  "texto": "A bird flies.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (listas de movimentos do corpo e da mao) + ferramentas/CIE3_estudo_licoes.js:183-184 e CIE3_pocket.html:166 (Animals)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "body.05",
+  "onde": "roteiro_frases.py:body.05",
+  "texto": "A monkey climbs.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (listas de movimentos do corpo e da mao) + ferramentas/CIE3_estudo_licoes.js:183-184 e CIE3_pocket.html:166 (Animals)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "body.06",
+  "onde": "roteiro_frases.py:body.06",
+  "texto": "A dog walks and runs.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (listas de movimentos do corpo e da mao) + ferramentas/CIE3_estudo_licoes.js:183-184 e CIE3_pocket.html:166 (Animals)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "body.07",
+  "onde": "roteiro_frases.py:body.07",
+  "texto": "A kangaroo and a frog jump.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (listas de movimentos do corpo e da mao) + ferramentas/CIE3_estudo_licoes.js:183-184 e CIE3_pocket.html:166 (Animals)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "body.08",
+  "onde": "roteiro_frases.py:body.08",
+  "texto": "A snake crawls on the ground.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (listas de movimentos do corpo e da mao) + ferramentas/CIE3_estudo_licoes.js:183-184 e CIE3_pocket.html:166 (Animals)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "push.01",
+  "onde": "roteiro_frases.py:push.01",
+  "texto": "A push is when I use a force to move something away from me.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg: Push/Pull (definicoes e os 4 exemplos de cada lado)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "push.02",
+  "onde": "roteiro_frases.py:push.02",
+  "texto": "Push: riding a bike.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg: Push/Pull (definicoes e os 4 exemplos de cada lado)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "push.03",
+  "onde": "roteiro_frases.py:push.03",
+  "texto": "Push: pushing a box.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg: Push/Pull (definicoes e os 4 exemplos de cada lado)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "push.04",
+  "onde": "roteiro_frases.py:push.04",
+  "texto": "Push: pushing a door.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg: Push/Pull (definicoes e os 4 exemplos de cada lado)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "push.05",
+  "onde": "roteiro_frases.py:push.05",
+  "texto": "Push: kicking a ball.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg: Push/Pull (definicoes e os 4 exemplos de cada lado)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "push.06",
+  "onde": "roteiro_frases.py:push.06",
+  "texto": "A pull is when I use a force to move something closer to me.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg: Push/Pull (definicoes e os 4 exemplos de cada lado)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "push.07",
+  "onde": "roteiro_frases.py:push.07",
+  "texto": "Pull: tug of war with a rope.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg: Push/Pull (definicoes e os 4 exemplos de cada lado)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "push.08",
+  "onde": "roteiro_frases.py:push.08",
+  "texto": "Pull: pulling a wagon.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg: Push/Pull (definicoes e os 4 exemplos de cada lado)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "push.09",
+  "onde": "roteiro_frases.py:push.09",
+  "texto": "Pull: opening a drawer.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg: Push/Pull (definicoes e os 4 exemplos de cada lado)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "push.10",
+  "onde": "roteiro_frases.py:push.10",
+  "texto": "Pull: fishing with a rod.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg: Push/Pull (definicoes e os 4 exemplos de cada lado)",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ },
+ {
+  "id": "end.01",
+  "onde": "roteiro_frases.py:end.01",
+  "texto": "We saw position, maps, perspective, wind and water, movement, push and pull.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p01-p08: os temas listados sao exatamente os dos slides",
+  "contraexemplo": "nenhum: frase verdadeira, sem absoluto, PT fiel ao EN",
+  "correcao": ""
+ }
+]
