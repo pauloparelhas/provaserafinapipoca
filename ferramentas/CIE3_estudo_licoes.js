@@ -79,6 +79,13 @@ return [
  {tipo:'texto', tit:'Where is it?',
   fala:'Twister the tornado blew everything away! To find it all, we start with where things are. In, on, under, inside.',
   html:grade(2,[['prep-in','The teddy bear is <b>in</b> the box.','O ursinho está dentro da caixa.'],['prep-on','The apple is <b>on</b> the book.','A maçã está sobre o livro.'],['prep-under','The ball is <b>under</b> the table.','A bola está embaixo da mesa.'],['prep-inside','The fish is <b>inside</b> the bowl.','O peixe está dentro do aquário.']])},
+ {tipo:'escolha', tit:'Where is it?', fala:'Where is it? Look at the picture and complete.', pergunta:'Look at the picture. Which word completes it?'+tr('Olhe a figura. Qual palavra completa?'),
+  frase:true, itens:[
+   Q('prep-in','The teddy bear is _ the box.','in',['on','under'],'The bear is in the box.'+tr('O ursinho está dentro da caixa.'),'O ursinho está … a caixa.','dentro d'),
+   Q('prep-on','The apple is _ the book.','on',['in','under'],'The apple is on the book.'+tr('A maçã está sobre o livro.'),'A maçã está … o livro.','sobre'),
+   Q('prep-under','The ball is _ the table.','under',['on','in'],'The ball is under the table.'+tr('A bola está embaixo da mesa.'),'A bola está … a mesa.','embaixo d'),
+   Q('prep-inside','The fish is _ the bowl.','inside',['on','under'],'The fish is inside the bowl.'+tr('O peixe está dentro do aquário.'),'O peixe está … o aquário.','dentro d')
+  ]},
  {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('prep-under',[P('Look at the picture. Where is the ball?','Olhe a figura. Onde está a bola?','under the table','embaixo da mesa'),P('Complete: The apple is ___ the book.','Complete: A maçã está ___ o livro.','on','sobre'),P('Which sentence is right? The fish is on the bowl. / The fish is inside the bowl.','Qual frase está certa?','The fish is inside the bowl.','O peixe está dentro do aquário.')])}
 ]},
 
