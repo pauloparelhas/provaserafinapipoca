@@ -87,12 +87,7 @@ return [
    Q('prep-under','The ball is _ the table.','under',['on','in'],'','A bola está … a mesa.','embaixo d'),
    Q('prep-inside','The fish is _ the bowl.','inside',['on','under'],'','O peixe está … o aquário.','dentro d')
   ]},
- {tipo:'texto', tit:'Watch out!',
-  fala:'In and inside are very close: the thing is within something. On: on top of it, touching it. Under: lower than it.',
-  html:fala('Pin','Don’t mix them up!'+tr('Não confunda!'))+
-   caixa('in · inside','<p>Very close: the thing is within something.'+tr('Muito parecidos: a coisa está dentro de algo.')+'</p>')+esp()+
-   caixa('on × under','<p><b>on</b>: on top, touching it.'+tr('sobre: em cima, encostado.')+'<br><b>under</b>: lower than it.'+tr('embaixo: mais baixo que ele.')+'</p>')},
- {tipo:'escolha', tit:'Where is it?', fala:'Where is it? Look at the picture and complete.', pergunta:'Look at the picture. Which word completes it?'+tr('Olhe a figura. Qual palavra completa?'),
+{tipo:'escolha', tit:'Where is it?', fala:'Where is it? Look at the picture and complete.', pergunta:'Look at the picture. Which word completes it?'+tr('Olhe a figura. Qual palavra completa?'),
   frase:true, itens:[
    Q('prep-in','The teddy bear is _ the box.','in',['on','under'],'The bear is in the box.'+tr('O ursinho está dentro da caixa.'),'O ursinho está … a caixa.','dentro d'),
    Q('prep-on','The apple is _ the book.','on',['in','under'],'The apple is on the book.'+tr('A maçã está sobre o livro.'),'A maçã está … o livro.','sobre'),
@@ -113,14 +108,7 @@ return [
   fala:'The tree is near the house. The tree is far from the house. The lamp is above the table. The cat is below the shelf. A bird is flying over the trees.',
   html:grade(2,[['prep-near','The tree is <b>near</b> the house.','A árvore está perto da casa.'],['prep-far-from','The tree is <b>far from</b> the house.','A árvore está longe da casa.'],['prep-above','The lamp is <b>above</b> the table.','A luminária está acima da mesa.'],['prep-below','The cat is <b>below</b> the shelf.','O gato está abaixo da prateleira.']])+
    R('A bird is flying <b>over</b> the trees.','Um pássaro está voando por cima das árvores.')},
- {tipo:'texto', tit:'Watch out!',
-  fala:'On means touching. Above and over mean higher, not touching. Under the table, below the shelf: both are lower. Next to is right beside it. Near is close. Far from is not close. Behind is at the back. In front of is at the front.',
-  html:fala('Pin','These pairs trick us!'+tr('Estes pares enganam!'))+
-   caixa('on × above × over','<p><b>on</b>: touching.'+tr('sobre: encostado.')+'<br><b>above, over</b>: higher, not touching.'+tr('acima, por cima: mais alto, sem encostar.')+'</p>')+esp()+
-   caixa('under × below','<p>under the table · below the shelf: lower.'+tr('embaixo da mesa · abaixo da prateleira: mais baixo.')+'</p>')+esp()+
-   caixa('next to × near × far from','<p><b>next to</b>: right beside it. <b>near</b>: close. <b>far from</b>: not close.'+tr('ao lado: colado. perto: próximo. longe: não está próximo.')+'</p>')+esp()+
-   caixa('behind × in front of','<p>at the back × at the front'+tr('atrás × na frente')+'</p>')},
- {tipo:'escolha', tit:'Where is it?', fala:'Where is it? Look at the picture and complete.', pergunta:'Look at the picture. Which word completes it?'+tr('Olhe a figura. Qual palavra completa?'),
+{tipo:'escolha', tit:'Where is it?', fala:'Where is it? Look at the picture and complete.', pergunta:'Look at the picture. Which word completes it?'+tr('Olhe a figura. Qual palavra completa?'),
   frase:true, itens:[
    Q('prep-behind','The boy is _ the tree.','behind',['in front of','above'],'He is at the back of the tree.'+tr('Ele está atrás da árvore.'),'O menino está … a árvore.','atrás d'),
    Q('prep-in-front-of','The dog is _ the chair.','in front of',['behind','on'],'The dog is at the front of the chair.'+tr('O cachorro está na frente da cadeira.'),'O cachorro está … a cadeira.','na frente d'),
@@ -149,15 +137,7 @@ return [
    Q('room','The bird is flying _ the trees.','over',['under','in'],'It flies higher than the trees.'+tr('Voa mais alto que as árvores.'),'O pássaro está voando … as árvores.','por cima d'),
    Q('room','The two fish are _ the bowl.','in',['on','under'],'The fish are in the water, in the bowl.'+tr('Os peixes estão na água, no aquário.'),'Os dois peixes estão … o aquário.','dentro d')
   ]},
- {tipo:'completa', tit:'Touching or not?', fala:'Read and complete.', regra:'on × above × over · near × far from · behind × in front of',
-  itens:[
-   C('The lamp does not touch the table. It is _ the table.','above',['on'],'A luminária não encosta na mesa. Ela está … a mesa.','acima d'),
-   C('The apple touches the book. It is _ the book.','on',['above'],'A maçã encosta no livro. Ela está … o livro.','sobre'),
-   C('The bird does not touch the trees. It flies _ the trees.','over',['on'],'O pássaro não encosta nas árvores. Ele voa … as árvores.','por cima d'),
-   C('The tree is not close to the house. It is _ the house.','far from',['near'],'A árvore não está perto da casa. Ela está … a casa.','longe d'),
-   C('The window is at the back of the sofa. It is _ the sofa.','behind',['in front of'],'A janela está na parte de trás do sofá. Ela está … o sofá.','atrás d')
-  ]},
- {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('room',[P('Use the words in the box: behind, next to, in front of, over, in, on, between, under. There is a guitar ___ the lamp and the plant.','Use as palavras da caixa. Tem um violão ___ o abajur e a planta.','between','entre'),P('There is a racket ___ the bag.','Tem uma raquete ___ a mochila.','next to','ao lado de'),P('There is a picture ___ the wall.','Tem um quadro ___ a parede.','on','na')])}
+{tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('room',[P('Use the words in the box: behind, next to, in front of, over, in, on, between, under. There is a guitar ___ the lamp and the plant.','Use as palavras da caixa. Tem um violão ___ o abajur e a planta.','between','entre'),P('There is a racket ___ the bag.','Tem uma raquete ___ a mochila.','next to','ao lado de'),P('There is a picture ___ the wall.','Tem um quadro ___ a parede.','on','na')])}
 ]},
 
 /* ===================== 3. DIRECTIONS AND MAPS ===================== */
@@ -250,8 +230,7 @@ return [
   html:grade(2,[['help-water-plants','water the plants','regar as plantas'],['help-water-energy','water to make energy','água para fazer energia'],['help-wind-energy','wind to make energy','vento para fazer energia'],['help-wind-seeds','wind that spreads the seeds','vento que espalha as sementes']])},
  {tipo:'texto', tit:'Harmful',
   fala:'Harmful: tsunami, heavy rain and floods, tornado, strong winds.',
-  html:grade(2,[['harm-tsunami','tsunami','tsunami'],['harm-floods','heavy rain and floods','chuva forte e enchentes'],['harm-tornado','tornado','tornado'],['harm-winds','strong winds','ventos fortes']])+
-   caixa('Watch out!'+tr('Cuidado!'),'<p><b>helpful</b> × <b>harmful</b>: they look alike, but they are opposites.'+tr('útil × prejudicial: parecidas, mas são opostas.')+'<br><b>wind</b> × <b>window</b>: wind is air in motion.'+tr('vento × janela: vento é ar em movimento.')+'</p>')},
+  html:grade(2,[['harm-tsunami','tsunami','tsunami'],['harm-floods','heavy rain and floods','chuva forte e enchentes'],['harm-tornado','tornado','tornado'],['harm-winds','strong winds','ventos fortes']])},
  {tipo:'escolha', tit:'Helpful or harmful?', fala:'Helpful or harmful? Look at the picture.', pergunta:'Is it helpful or harmful?'+tr('É útil ou prejudicial?'),
   medio:true, op:['Helpful','Harmful'], itens:[
    {m:foto('help-water-plants'), c:'Helpful', d:'Water the plants.'+tr('Regar as plantas.')},
@@ -292,7 +271,7 @@ return [
    C('Rain carries _ away.','soil',['air'],'A chuva leva a … embora.','terra'),
    C('We need to protect our air and _.','water',['sand'],'Precisamos proteger nosso ar e nossa ….','água')
   ]},
- {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('harm-floods',[P('Wind and water are two ___ forces.','Vento e água são duas forças ___.','natural','naturais'),P('Look at the picture. Is it helpful or harmful?','Olhe a figura. Ajuda ou prejudica?','harmful','prejudica'),P('Write one way wind is helpful and one way water is helpful.','Escreva um jeito em que o vento ajuda e um em que a água ajuda.','wind: makes energy, spreads seeds · water: waters plants, makes energy','vento: faz energia, espalha sementes · água: rega plantas, faz energia'),P('Is a tsunami wind or water?','Tsunami é vento ou água?','water','água')])}
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('harm-floods',[P('Wind and water are two ___ forces.','Vento e água são duas forças ___.','natural','naturais'),P('Look at the picture. Is it helpful or harmful?','Olhe a figura. Ajuda ou prejudica?','harmful','prejudica')])}
 ]},
 
 /* ===================== 6. MOVEMENT OF OBJECTS ===================== */
@@ -308,13 +287,7 @@ return [
  {tipo:'texto', tit:'Spin and swing',
   fala:'Spin: to turn around and around. Swing: to move back and forth like a pendulum.',
   html:mov('spin')+mov('swing')},
- {tipo:'texto', tit:'Watch out!',
-  fala:'A wheel rolls and leaves its place. A top spins in its place. A swing goes back and forth. A slide is a toy. To slide is the movement.',
-  html:fala('Boing','Don’t mix them up!'+tr('Não confunda!'))+
-   caixa('roll × spin','<p><b>roll</b>: it leaves its place. <b>spin</b>: it stays in its place.'+tr('rolar: sai do lugar. girar: fica no lugar.')+'</p>')+esp()+
-   caixa('swing × spin','<p><b>swing</b>: back and forth. <b>spin</b>: around and around.'+tr('balançar: vai e volta. girar: dá voltas.')+'</p>')+esp()+
-   caixa('a slide × to slide','<p><b>a slide</b>: the toy. <b>to slide</b>: the movement.'+tr('o escorregador: o brinquedo. deslizar: o movimento.')+'</p>')},
- {tipo:'texto', tit:'Directions and speed',
+{tipo:'texto', tit:'Directions and speed',
   fala:'Things move in different directions: back and forth, up and down, round and round. Things move at different speeds: slow or fast.',
   html:R('Things move in different <b>directions</b>.','As coisas se movem em direções diferentes.')+
    passos([{t:'back and forth'+tr('para a frente e para trás')},{t:'up and down'+tr('para cima e para baixo')},{t:'round and round'+tr('em voltas')}])+
@@ -342,7 +315,7 @@ return [
    ITM('swing',1,'It moves back and forth.'+tr('Vai e volta.')),
    ITM('swing',2,'It moves back and forth.'+tr('Vai e volta.'))
   ]},
- {tipo:'completa', tit:'Direction or speed?', fala:'Read and complete.', regra:'directions × speeds'+tr('direções × velocidades'),
+ {tipo:'completa', tit:'Direction or speed?', fala:'Read and complete.', regra:'directions · speeds'+tr('direções · velocidades'),
   itens:[
    C('Slow or fast: these are different _.','speeds',['directions'],'Devagar ou rápido: são … diferentes.','velocidades'),
    C('Up and down, round and round: these are different _.','directions',['speeds'],'Para cima e para baixo, em voltas: são … diferentes.','direções'),
@@ -400,8 +373,7 @@ return [
   html:R('<b>push</b> · <b>pull</b>','push = empurrar · pull = puxar')+
    fala('Max, tug-of-war coach','Ready? Hold the rope!'+tr('Pronto? Segure a corda!'))+
    R('A <b>push</b> is when I use a force to move something <b>away from me</b>.','Push é quando uso uma força para mover algo para longe de mim.')+
-   R('A <b>pull</b> is when I use a force to move something <b>closer to me</b>.','Pull é quando uso uma força para trazer algo para perto de mim.')+
-   caixa('Watch out!'+tr('Cuidado!'),'<p><b>push</b>: away from me. <b>pull</b>: closer to me.'+tr('PUSH = empurrar, nunca “puxar”. PULL = puxar. Push parece puxar, mas é o contrário!')+'</p>','#f97316')},
+   R('A <b>pull</b> is when I use a force to move something <b>closer to me</b>.','Pull é quando uso uma força para trazer algo para perto de mim.')},
  {tipo:'texto', tit:'Push',
   fala:'Push: riding a bike, pushing a box, pushing a door, kicking a ball. They move away from me.',
   html:grade(2,[['push-bike','riding a bike','andar de bicicleta'],['push-box','pushing a box','empurrar uma caixa'],['push-door','pushing a door','empurrar uma porta'],['push-ball','kicking a ball','chutar uma bola']])+
@@ -444,7 +416,7 @@ return [
    C('Push and pull are _ forces.','opposite',['equal'],'Push e pull são forças ….','opostas'),
    C('Force makes things move from one _ to another.','place',['speed'],'A força faz as coisas irem de um … para outro.','lugar')
   ]},
- {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('pull-wagon',[P('Look at the picture. Is it a push or a pull?','Olhe a figura. É push ou pull?','a pull','puxar'),P('Complete: A push is when I use a force to move something ___ from me.','Complete: push é usar força para mover algo ___ de mim.','away','para longe'),P('Complete: A pull is when I use a force to move something ___ to me.','Complete: pull é usar força para mover algo ___ de mim.','closer','para perto'),P('Write one example of a push and one of a pull.','Escreva um exemplo de push e um de pull.','push: kicking a ball · pull: opening a drawer','push: chutar a bola · pull: abrir a gaveta')])}
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('pull-wagon',[P('Look at the picture. Is it a push or a pull?','Olhe a figura. É push ou pull?','a pull','puxar'),P('Complete: A push is when I use a force to move something ___ from me.','Complete: push é usar força para mover algo ___ de mim.','away','para longe'),P('Complete: A pull is when I use a force to move something ___ to me.','Complete: pull é usar força para mover algo ___ de mim.','closer','para perto')])}
 ]}
 
 ];
