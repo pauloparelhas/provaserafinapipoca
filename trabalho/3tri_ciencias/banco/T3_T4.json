@@ -1011,30 +1011,6 @@
   "ex_pt": "O vento e a areia desgastam a rocha e fazem arcos. Os vales vêm da água."
  },
  {
-  "id": "n25",
-  "tema": "forces",
-  "tipo": "conceito",
-  "at": [
-   "N6"
-  ],
-  "p": "Complete: Water is always ___.",
-  "p_pt": "Complete: A água está sempre ___.",
-  "o": [
-   "moving",
-   "helpful",
-   "harmful"
-  ],
-  "o_pt": [
-   "em movimento",
-   "útil",
-   "perigosa"
-  ],
-  "dica": "Pense nos rios e na chuva.",
-  "dica_en": "Think about rivers and rain.",
-  "ex": "Water is always moving. It can be helpful or harmful.",
-  "ex_pt": "A água está sempre em movimento. Ela pode ser útil ou perigosa."
- },
- {
   "id": "n26",
   "tema": "forces",
   "tipo": "conceito",

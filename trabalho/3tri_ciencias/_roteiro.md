@@ -30,7 +30,7 @@ Unit 3 — Position and Motion. Prova em INGLÊS: tela inteira em inglês, portu
 ### T4 · NATURAL FORCES: WIND AND WATER (L7; S8, V3)
 - N1 Wind and water are two natural forces that exist in nature, and they can be helpful and harmful to us.
 - N2 HELPFUL: water the plants; water to make energy; wind to make energy; wind that spreads the seeds. N3 HARMFUL: tsunami; heavy rain and floods; tornado; strong winds.
-- N4 (V3) Wind is air in motion: gentle breeze ou mighty gust. Blowing bubbles makes wind; a kite flies with the wind. N5 (V3) Wind moves sand and makes dunes; wind and sand wear rock (arches). N6 (V3) Water is always moving: rivers flow downhill; water wears rock and makes valleys and canyons; rain carries soil away. N7 (V3) Uses: wind = sailing, turbines (electricity), kites; water = hydroelectricity (dams), boats/ships, farmers water fields, drinking, cooking, washing; wind spreads seeds; rivers are home to fish and frogs. N8 (V3) We need to protect our air and water.
+- N4 (V3) Wind is air in motion: gentle breeze ou mighty gust. Blowing bubbles makes wind; a kite flies with the wind. N5 (V3) Wind moves sand and makes dunes; wind and sand wear rock (arches). N6 (V3) Rivers flow downhill; water wears rock and makes valleys and canyons; rain carries soil away. N7 (V3) Uses: wind = sailing, turbines (electricity), kites; water = hydroelectricity (dams), boats/ships, farmers water fields, drinking, cooking, washing; wind spreads seeds; rivers are home to fish and frogs. N8 (V3) We need to protect our air and water.
 - Curiosidades de V3 (Netuno, cometas, 60 % do corpo…) NÃO se cobram: ficam fora.
 
 ### T5 · MOVEMENT OF OBJECTS (L8; S5, V1)
