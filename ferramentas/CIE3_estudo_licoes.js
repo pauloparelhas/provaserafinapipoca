@@ -55,12 +55,12 @@ var nc=0;
 function C(frase,c,erradas,ptm,ptw){ var it=Q(null,frase,c,erradas,'',ptm,ptw); if(nc++%2) it.op=it.op.slice().reverse(); return it; }
 /* os 6 movimentos, com as cores fixas da bíblia e a definição exata do slide */
 var MOV={
- bounce:{cor:'#eab308',pt:'quicar',def:'to go up and down after hitting a surface',defp:'subir e descer depois de bater numa superfície',ex:[['obj-bounce-soccer-ball','soccer ball','bola de futebol'],['obj-bounce-tennis-ball','tennis ball','bola de tênis'],['obj-bounce-basketball','basketball','bola de basquete']]},
- fly:{cor:'#0ea5e9',pt:'voar',def:'to move through the air',defp:'mover-se pelo ar',ex:[['obj-fly-airplane','airplane','avião'],['obj-fly-balloon','hot air balloon','balão de ar quente'],['obj-fly-kite','kite','pipa']]},
- roll:{cor:'#ec4899',pt:'rolar',def:'to move by turning over and over',defp:'mover-se virando e virando',ex:[['obj-roll-wheel','wheel','roda'],['obj-roll-can','can','lata'],['obj-roll-beach-ball','beach ball','bola de praia']]},
- slide:{cor:'#8b5cf6',pt:'deslizar',def:'to move smoothly along a surface',defp:'mover-se suavemente sobre uma superfície',ex:[['obj-slide-slide','slide','escorregador'],['obj-slide-ice-cube','ice cube','cubo de gelo'],['obj-slide-book','book','livro']]},
- spin:{cor:'#f97316',pt:'girar',def:'to turn around and around',defp:'dar voltas e voltas',ex:[['obj-spin-pinwheel','pinwheel','cata-vento'],['obj-spin-fan','fan','ventilador'],['obj-spin-top','top','pião']]},
- swing:{cor:'#22c55e',pt:'balançar',def:'to move back and forth like a pendulum',defp:'ir e voltar como um pêndulo',ex:[['obj-swing-swing','swing','balanço'],['obj-swing-plant','hanging plant','planta pendurada'],['obj-swing-door','door','porta']]}
+ bounce:{cor:'#eab308',pt:'quicar',def:'to go <b>up and down</b> after hitting a <b>surface</b>',defp:'subir e descer depois de bater numa superfície',ex:[['obj-bounce-soccer-ball','soccer ball','bola de futebol'],['obj-bounce-tennis-ball','tennis ball','bola de tênis'],['obj-bounce-basketball','basketball','bola de basquete']]},
+ fly:{cor:'#0ea5e9',pt:'voar',def:'to move through the <b>air</b>',defp:'mover-se pelo ar',ex:[['obj-fly-airplane','airplane','avião'],['obj-fly-balloon','hot air balloon','balão de ar quente'],['obj-fly-kite','kite','pipa']]},
+ roll:{cor:'#ec4899',pt:'rolar',def:'to move by <b>turning over and over</b>',defp:'mover-se virando e virando',ex:[['obj-roll-wheel','wheel','roda'],['obj-roll-can','can','lata'],['obj-roll-beach-ball','beach ball','bola de praia']]},
+ slide:{cor:'#8b5cf6',pt:'deslizar',def:'to move <b>smoothly</b> along a <b>surface</b>',defp:'mover-se suavemente sobre uma superfície',ex:[['obj-slide-slide','slide','escorregador'],['obj-slide-ice-cube','ice cube','cubo de gelo'],['obj-slide-book','book','livro']]},
+ spin:{cor:'#f97316',pt:'girar',def:'to turn <b>around and around</b>',defp:'dar voltas e voltas',ex:[['obj-spin-pinwheel','pinwheel','cata-vento'],['obj-spin-fan','fan','ventilador'],['obj-spin-top','top','pião']]},
+ swing:{cor:'#22c55e',pt:'balançar',def:'to move <b>back and forth</b> like a pendulum',defp:'ir e voltar como um pêndulo',ex:[['obj-swing-swing','swing','balanço'],['obj-swing-plant','hanging plant','planta pendurada'],['obj-swing-door','door','porta']]}
 };
 function mov(k){
   var v=MOV[k];
@@ -85,10 +85,10 @@ return [
 /* ===================== 2. POSITION: BEHIND, BETWEEN, ... E A CENA ===================== */
 {k:'pos2', tema:'position', nome:'Position: behind, between, near and more', nome_pt:'Posição: atrás, entre, perto e mais', cor:'#f472b6', quem:'Pin',
  treino:[], telas:[
- {tipo:'texto', tit:'Behind, in front of, between, next to',
+ {tipo:'texto', tit:'Where is it?',
   fala:'The boy is behind the tree. The dog is in front of the chair. The teddy bear is between the two plants. The clock is next to the lamp.',
   html:grade(2,[['prep-behind','The boy is <b>behind</b> the tree.','O menino está atrás da árvore.'],['prep-in-front-of','The dog is <b>in front of</b> the chair.','O cachorro está na frente da cadeira.'],['prep-between','The teddy bear is <b>between</b> the two plants.','O ursinho está entre as duas plantas.'],['prep-next-to','The clock is <b>next to</b> the lamp.','O relógio está ao lado do abajur.']])},
- {tipo:'texto', tit:'Near, far from, above, below, over',
+ {tipo:'texto', tit:'Where is it?',
   fala:'The tree is near the house. The tree is far from the house. The lamp is above the table. The cat is below the shelf. A bird is flying over the trees.',
   html:grade(2,[['prep-near','The tree is <b>near</b> the house.','A árvore está perto da casa.'],['prep-far-from','The tree is <b>far from</b> the house.','A árvore está longe da casa.'],['prep-above','The lamp is <b>above</b> the table.','A luminária está acima da mesa.'],['prep-below','The cat is <b>below</b> the shelf.','O gato está abaixo da prateleira.']])+
    R('A bird is flying <b>over</b> the trees.','Um pássaro está voando por cima das árvores.')},
@@ -126,10 +126,10 @@ return [
  {tipo:'texto', tit:'One object, three shadows',
   fala:'This is one object. It makes a different shadow on each side: a triangle, a rectangle and a circle.',
   html:fig('view-shadow',300)+
-   R('<b>One</b> object. A different shadow on each side: <b>triangle</b>, <b>rectangle</b>, <b>circle</b>.','Um só objeto. Uma sombra diferente de cada lado: triângulo, retângulo, círculo.')},
+   R('One object. A different shadow on each side: <b>triangle</b>, <b>rectangle</b>, <b>circle</b>.','Um só objeto. Uma sombra diferente de cada lado: triângulo, retângulo, círculo.')},
  {tipo:'texto', tit:'A different view',
   fala:'People are not right or wrong. They just have a different view of things.',
-  html:fig('view-giraffe',240)+R('“People are not right or wrong. They just have a different view of things.”','As pessoas não estão certas nem erradas; elas só têm uma visão diferente das coisas.')},
+  html:fig('view-giraffe',240)+R('“People are not right or wrong. They just have a <b>different view</b> of things.”','As pessoas não estão certas nem erradas; elas só têm uma visão diferente das coisas.')},
  {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('view-bottom',[P('Look at the picture. The tower is seen from the ___.','Olhe a figura. A torre é vista de ___.','bottom','baixo'),P('Our perspective changes depending on ___ we are looking from.','Nossa perspectiva muda dependendo de ___ estamos olhando.','where','onde'),P('Complete: People are not right or wrong. They just have a different ___ of things.','As pessoas não estão certas nem erradas; só têm outra ___ das coisas.','view','visão')])}
 ]},
 
@@ -141,10 +141,10 @@ return [
   html:R('Wind and water are two <b>natural forces</b> that exist in nature, and they can be <b>helpful</b> and <b>harmful</b> to us.','Vento e água são duas forças naturais que existem na natureza, e podem ser úteis e prejudiciais para nós.')},
  {tipo:'texto', tit:'Helpful',
   fala:'Helpful: water the plants, water to make energy, wind to make energy, wind that spreads the seeds.',
-  html:grade(2,[['help-water-plants','water the plants','regar as plantas'],['help-water-energy','water to make energy','água para fazer energia'],['help-wind-energy','wind to make energy','vento para fazer energia'],['help-wind-seeds','wind that spreads the seeds','vento que espalha as sementes']])},
+  html:grade(2,[['help-water-plants','<b>water the plants</b>','regar as plantas'],['help-water-energy','<b>water to make energy</b>','água para fazer energia'],['help-wind-energy','<b>wind to make energy</b>','vento para fazer energia'],['help-wind-seeds','<b>wind that spreads the seeds</b>','vento que espalha as sementes']])},
  {tipo:'texto', tit:'Harmful',
   fala:'Harmful: tsunami, heavy rain and floods, tornado, strong winds.',
-  html:grade(2,[['harm-tsunami','tsunami','tsunami'],['harm-floods','heavy rain and floods','chuva forte e enchentes'],['harm-tornado','tornado','tornado'],['harm-winds','strong winds','ventos fortes']])},
+  html:grade(2,[['harm-tsunami','<b>tsunami</b>','tsunami'],['harm-floods','<b>heavy rain and floods</b>','chuva forte e enchentes'],['harm-tornado','<b>tornado</b>','tornado'],['harm-winds','<b>strong winds</b>','ventos fortes']])},
  {tipo:'texto', tit:'What wind and water do',
   fala:'Wind is air in motion. Wind moves sand and makes dunes. It fills the sails of boats and turns wind turbines. Water is always moving. Rivers flow downhill. Water wears rock away. Water makes energy, carries boats and waters the fields.',
   html:caixa('Wind'+tr('Vento'),'<p>Wind is <b>air in motion</b>.'+tr('Vento é ar em movimento.')+'<br>It moves <b>sand</b> and makes <b>dunes</b>.'+tr('Move a areia e faz dunas.')+'<br>It fills <b>sails</b> and turns <b>wind turbines</b>.'+tr('Enche as velas e gira as turbinas.')+'</p>')+esp()+
@@ -178,7 +178,7 @@ return [
  {tipo:'texto', tit:'Movements of the body and the hand',
   fala:'Body: swim, climb, play, walk, pick, sit. Hand: touch, lift, point, write, grab, push.',
   html:'<img class="fescb" src="media/cie3/orig/corpo-mao.jpg" alt="">'+
-   caixa('My body'+tr('Meu corpo'),'<p><b>swim, climb, play, walk, pick, sit</b>'+tr('nadar, subir, brincar, andar, colher, sentar')+'</p>')+esp()+caixa('My hand'+tr('Minha mão'),'<p><b>touch, lift, point, write, grab, push</b>'+tr('tocar, levantar, apontar, escrever, agarrar, empurrar')+'</p>')},
+   caixa('My body'+tr('Meu corpo'),'<p><b>swim</b>, <b>climb</b>, <b>play</b>, <b>walk</b>, <b>pick</b>, <b>sit</b>'+tr('nadar, subir, brincar, andar, colher, sentar')+'</p>')+esp()+caixa('My hand'+tr('Minha mão'),'<p><b>touch</b>, <b>lift</b>, <b>point</b>, <b>write</b>, <b>grab</b>, <b>push</b>'+tr('tocar, levantar, apontar, escrever, agarrar, empurrar')+'</p>')},
  {tipo:'texto', tit:'How animals move',
   fala:'A fish swims. A bird flies. A monkey climbs. A dog walks and runs. A kangaroo and a frog jump. A snake crawls on the ground.',
   html:caixa('Animals'+tr('Animais'),'<p>A fish <b>swims</b>.'+tr('O peixe nada.')+'<br>A bird <b>flies</b>.'+tr('O pássaro voa.')+'<br>A monkey <b>climbs</b>.'+tr('O macaco escala.')+'<br>A dog <b>walks</b> and <b>runs</b>.'+tr('O cachorro anda e corre.')+'<br>A kangaroo and a frog <b>jump</b>.'+tr('O canguru e o sapo pulam.')+'<br>A snake <b>crawls</b> on the ground.'+tr('A cobra rasteja no chão.')+'</p>')},
@@ -190,20 +190,20 @@ return [
  treino:[], telas:[
  {tipo:'texto', tit:'Push or pull?',
   fala:'A push is when I use a force to move something away from me. A pull is when I use a force to move something closer to me.',
-  html:R('<b>push</b> · <b>pull</b>','push = empurrar · pull = puxar')+
-   R('A <b>push</b> is when I use a force to move something <b>away from me</b>.','Push é quando uso uma força para mover algo para longe de mim.')+
-   R('A <b>pull</b> is when I use a force to move something <b>closer to me</b>.','Pull é quando uso uma força para trazer algo para perto de mim.')},
+  html:R('push · pull','push = empurrar · pull = puxar')+
+   R('A push is when I use a <b>force</b> to move something <b>away from me</b>.','Push é quando uso uma força para mover algo para longe de mim.')+
+   R('A pull is when I use a <b>force</b> to move something <b>closer to me</b>.','Pull é quando uso uma força para trazer algo para perto de mim.')},
  {tipo:'texto', tit:'Push',
   fala:'Push: riding a bike, pushing a box, pushing a door, kicking a ball. They move away from me.',
   html:grade(2,[['push-bike','riding a bike','andar de bicicleta'],['push-box','pushing a box','empurrar uma caixa'],['push-door','pushing a door','empurrar uma porta'],['push-ball','kicking a ball','chutar uma bola']])+
-   R('<b>Push</b>: away from me.','Push = empurrar: para longe de mim.')},
+   R('Push: <b>away from me</b>.','Push = empurrar: para longe de mim.')},
  {tipo:'texto', tit:'Pull',
   fala:'Pull: tug of war with a rope, pulling a wagon, opening a drawer, fishing with a rod. They move closer to me.',
   html:grade(2,[['pull-rope','tug of war with a rope','cabo de guerra com corda'],['pull-wagon','pulling a wagon','puxar um carrinho'],['pull-drawer','opening a drawer','abrir uma gaveta'],['pull-fish','fishing with a rod','pescar com vara']])+
-   R('<b>Pull</b>: closer to me.','Pull = puxar: para perto de mim.')},
+   R('Pull: <b>closer to me</b>.','Pull = puxar: para perto de mim.')},
  {tipo:'texto', tit:'More examples',
   fala:'Force makes things move from one place to another. There are two types of force: push and pull. Push and pull are opposite forces. Push: a shopping trolley, a volleyball, playing the piano, the golfer hitting the ball. Pull: holding the rope of a kite, picking fruit and vegetables from the plant.',
-  html:R('<b>Force</b> makes things move from one place to another.','A força faz as coisas irem de um lugar para outro.')+
+  html:R('Force makes things move from one place to another.','A força faz as coisas irem de um lugar para outro.')+
    R('Two types of force: <b>push</b> and <b>pull</b>. They are <b>opposite</b> forces.','Dois tipos de força: push e pull. São forças opostas.')+
    caixa('Push'+tr('Empurrar'),'<p>a shopping trolley'+tr('carrinho de compras')+'<br>a volleyball'+tr('bola de vôlei')+'<br>playing the piano'+tr('tocar piano')+'<br>the golfer hitting the ball'+tr('o golfista batendo na bola')+'</p>','#f97316')+esp()+
    caixa('Pull'+tr('Puxar'),'<p>holding the rope of a kite'+tr('segurar a linha da pipa')+'<br>picking fruit and vegetables from the plant'+tr('colher frutas e verduras da planta')+'</p>','#f97316')},
