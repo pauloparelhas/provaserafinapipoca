@@ -42,7 +42,7 @@ fork('ING3_estudo.html','CIE3_estudo.html',[
  ('<title>English · Study</title>','<title>Science · Study</title>'),
  ('TEORIA de Inglês (ELA, 3º tri)','TEORIA de Science (3º tri)'),
  ('/* ---- ING3: tradução atrás da bandeira, aviso, texto de leitura ---- */',fala+'.naprova{margin:6px 0 0;padding-left:22px;font-weight:800;line-height:1.35}.naprova li{margin:0 0 10px}.naprova .resp{color:#16a34a}body.light .naprova .resp{color:#15803d}.nptit{font-weight:900;margin:0 0 6px}\n.lw .fesc{display:block;width:100%;max-width:220px;margin:0 auto 6px;border-radius:10px;background:#fff}
-.fesc{max-width:100%}
+.lw{min-width:0;max-width:100%}.fesc{max-width:100%}
 .fescb{display:block;width:100%;max-width:320px;margin:0 auto 8px;border-radius:10px;background:#fff}\n.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:6px 0 10px}.figs figure{margin:0;text-align:center;font-weight:800}.figs img{width:100%;border-radius:10px;background:#fff;display:block;margin-bottom:3px}\n@media(max-width:520px){.passos.vert{flex-direction:column;align-items:stretch}}\n.ops.longas .op{flex-basis:120px}\n/* ---- tradução atrás da bandeira, aviso ---- */'),
  ('<span class="title" id="titulo">English · Study</span>','<span class="title" id="titulo">Motion Rangers · Study</span>'),
  (arte,novo),
