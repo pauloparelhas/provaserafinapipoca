@@ -19,6 +19,7 @@ Os agentes estao em `.claude/agents/`. Sao invocados com `Agent(subagent_type="n
 | Para retomar sessao ou checar prioridades | `gerente` | `Agent(subagent_type="gerente")` |
 | Antes de PUBLICAR qualquer jogo: portao rapido | `bash trabalho/3tri_ingles/gen/portao_jogo.sh` | criancas-robo jogam todos os reinos (~1 min) + regras de dificuldade; ver `_processo/jogos/PREPROMPTS.md` |
 | Antes de PUBLICAR qualquer banco/simulado/tela de escolha | `avaliador-questoes` + `node trabalho/<tri>_<mat>/gen/valida_questoes.js ferramentas` | identificador de questao absurda (`_processo/CRITERIO_QUESTOES.md`): so entra questao com nexo e conteudo cobravel; distrator-piada, bom senso, anacronismo, certa maior = ADAPTA ou EXCLUI. O simulado e a publicacao RECUSAM item sem APROVA com a impressao digital atual |
+| Antes de PUBLICAR qualquer texto que ensine ou cobre (banco, teoria, pocket, jogo, video) | `detector-alucinacao` | `Agent(subagent_type="detector-alucinacao")` — cada afirmacao VERDADEIRA e COERENTE com o material da escola (nao precisa ser literal; video sozinho nao prova), contraditor busca contraexemplo; sem LIBERA nao publica (02/11/2026: "water is always moving" foi ensinado e cobrado sem suporte) |
 | Seguranca / controle parental de jogo | `guardiao` | `Agent(subagent_type="guardiao")` — LIBERA obrigatorio antes de publicar |
 | Antes de PUBLICAR qualquer jogo (fases, chefao, corrida) | `jogador` | `Agent(subagent_type="jogador")` — joga cada fase do inicio ao fim SO com teclas, sem teletransporte; sem LIBERA dele nao publica |
 
@@ -26,6 +27,7 @@ Os agentes estao em `.claude/agents/`. Sao invocados com `Agent(subagent_type="n
 **NUNCA publicar um JOGO sem o agente `jogador` ter terminado TODAS as fases com controles reais (licao de 18/10: o chefao do castelo foi ao ar sem ninguem ter conseguido jogar).**
 **NUNCA comecar a codar sem ter rodado o agente `pedagogico` antes.**
 **NUNCA declarar a MATERIA pronta sem `auditor-cobertura` com veredito SIM (zero buracos de escopo).**
+**NUNCA publicar texto de conteudo sem `detector-alucinacao` com LIBERA: nada de verdade inventada, generalizacao, pegadinha ou dificuldade alem do material (02/11/2026).**
 
 Os agentes leeem os arquivos do projeto diretamente. Passar sempre o caminho do arquivo como contexto no prompt.
 
@@ -369,7 +371,7 @@ produto. Faltou conferencia insumo→produto.
    (nao dava para adivinhar a partir do insumo) e falseia a avaliacao do processo. O processo se julga
    por derivar do INSUMO, jamais por retrofit da prova. Item exclusivo da prova e imponderavel e fica
    FORA do material — aceita-se nao garanti-lo. So entra se/quando aparecer um insumo que o sustente.
-6. **Armadilhas de L2:** listar pares EN que confundem (take up space × take the shape; steam=gas
+6. **(SUSPENSA em 02/11/2026: o Paulo vetou pegadinha que o material nao traz; so treinar contraste se o PROPRIO material contrasta.)** Armadilhas de L2: listar pares EN que confundem (take up space × take the shape; steam=gas
    × water=liquid) e treina-los explicitamente.
 
 ---

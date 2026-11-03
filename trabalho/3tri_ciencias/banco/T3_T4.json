@@ -160,12 +160,10 @@
   "p_pt": "Esta torre é vista de...",
   "o": [
    "side",
-   "top",
    "bottom"
   ],
   "o_pt": [
    "lado (side)",
-   "cima (top)",
    "baixo (bottom)"
   ],
   "dica": "Olhe o rio e a cidade em volta da torre.",
@@ -378,8 +376,8 @@
   "at": [
    "P4"
   ],
-  "p": "Complete: People are not right or wrong. They just have a different ___ of things.",
-  "p_pt": "Complete: As pessoas não estão certas nem erradas. Elas só têm uma ___ diferente das coisas.",
+  "p": "The giraffe and the woman look at the painting from different positions. People are not right or wrong. They just have a different ___ of things.",
+  "p_pt": "A girafa e a mulher olham o quadro de posições diferentes. As pessoas não estão certas nem erradas. Elas só têm uma ___ diferente das coisas.",
   "o": [
    "view",
    "shape",
@@ -392,8 +390,9 @@
   ],
   "dica": "É a palavra da frase da girafa, ligada a olhar.",
   "dica_en": "It is the word from the giraffe sentence, about looking.",
-  "ex": "The giraffe sentence says people just have a different view of things.",
-  "ex_pt": "A frase da girafa diz que as pessoas só têm uma visão diferente das coisas."
+  "ex": "From a different position, each one has a different view of things.",
+  "ex_pt": "De uma posição diferente, cada um tem uma visão diferente das coisas.",
+  "img": "media/cie3/view-giraffe.jpg"
  },
  {
   "id": "p18",

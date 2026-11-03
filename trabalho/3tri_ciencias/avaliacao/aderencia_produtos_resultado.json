@@ -1,0 +1,779 @@
+[
+ {
+  "id": "L1-grade",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:81",
+  "texto": "The teddy bear is in the box / apple on the book / ball under the table / fish inside the bowl (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p04.jpeg (pôster Prepositions of Place): \"The teddy bear is in the box.\" \"The apple is on the book.\" \"The ball is under the table.\" \"The fish is inside the bowl.\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L1-test",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:82",
+  "texto": "On the test: ball under the table; apple ___ the book (on); fish on/inside the bowl",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p04.jpeg (pôster Prepositions of Place) (mesmas frases; on e inside são palavras distintas do pôster)",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L2-grade",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:89-94",
+  "texto": "behind/in front of/between/next to/near/far from/above/below + bird flying over the trees (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p04.jpeg (pôster Prepositions of Place) (frases literais) + p03.jpeg (worksheet Prepositions of Place, caixa: behind, next to, in front of, over, in, on, between, under) item 11 \"There is a bird flying ___ the trees\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L2-sala",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:96",
+  "texto": "pizza in the box ... lamp under the shelf ... two fish in the bowl (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p03.jpeg (worksheet Prepositions of Place, caixa: behind, next to, in front of, over, in, on, between, under); respostas conferidas na figura room.jpg: todas visíveis",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L2-testPT",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:97",
+  "texto": "PT: \"Tem um quadro ___ a parede.\" (resp. \"na\") / \"Tem uma raquete ___ a mochila.\" (resp. \"ao lado de\")",
+  "decisao": "REPROVA",
+  "regras": [
+   "T"
+  ],
+  "lastro": "p03.jpeg (worksheet Prepositions of Place, caixa: behind, next to, in front of, over, in, on, between, under) itens 6 e 10",
+  "contraexemplo": "preenchida, a bandeira lê \"na a parede\" e \"ao lado de a mochila\": português errado",
+  "correcao": "PT: \"Tem uma raquete ___ mochila.\" (resp. \"ao lado da\") e \"Tem um quadro ___ parede.\" (resp. \"na\"); inglês inalterado"
+ },
+ {
+  "id": "L3-mapa",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:104-106",
+  "texto": "When we read maps we need to pay a lot of attention to the details and to the path, the way we are going. We might get lost if we run or don't pay attention. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p01.jpeg: \"When we read maps, we need to pay a lot of attention in the details and in the path (way) that we are going. We might get lost if we run or don't pay attention!\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L3-pin",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:105",
+  "texto": "The red pin marks a place on the map. / O pino vermelho marca um lugar no mapa.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p01.jpeg: o pino vermelho aparece sobre os mapas (e no mapa da escola, na Year 2 Classroom). Verdadeiro e coerente.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L3-leftright-regra",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:108;111",
+  "texto": "Left and right are the sides of the person looking at the map. / Esquerda e direita: os lados de quem olha o mapa.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "informativo \"Directions (eg. left, right...)\" + mapa da escola em p01. Verdadeiro: no papel, esquerda/direita é a de quem olha.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L3-auditorio",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:112-113",
+  "texto": "The Auditorium is between A section and B section; B section on the right (+PT, test)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p01.jpeg (mapa da escola): Auditorium entre \"A section\" (esquerda) e \"B section\" (direita); informativo \"Directions (eg. left, right, between...)\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L4-p1",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:120-121",
+  "texto": "We can see many things from different positions, and our perspective changes depending on where we are looking from. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p07.jpeg: \"We can see many things from different positions, and our perspective changes depending on where we are looking from.\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L4-torre",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:123-125",
+  "texto": "Eiffel Tower seen from the front/top/side/bottom. The same tower. A different view!",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p07.jpeg: \"Eiffel Tower\" \"seen from the front\" \"seen from the top\" \"seen from the side\" \"seen from the bottom\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L4-sombras",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:127-129",
+  "texto": "One object. A different shadow on each side: triangle, rectangle, circle. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p07.jpeg: figura do objeto com sombra triangular, retangular e circular nas três faces. Formas de Y2; verdadeiro.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L4-girafa",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:131-133",
+  "texto": "People are not right or wrong. They just have a different view of things. (+PT, test)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p07.jpeg: \"People are not right or wrong. They just have a different view of things.\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L5-n1",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:140-141",
+  "texto": "Wind and water are two natural forces ... helpful and harmful to us. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p08.jpeg: \"Wind and water are two natural forces that exist in nature, and they can be harmful and helpful to us.\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L5-nomept",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:137",
+  "texto": "nome_pt: \"Vento e água: úteis e perigosos\"",
+  "decisao": "REPROVA",
+  "regras": [
+   "T"
+  ],
+  "lastro": "p08.jpeg: \"Wind and water are two natural forces that exist in nature, and they can be harmful and helpful to us.\" (harmful)",
+  "contraexemplo": "harmful = prejudicial; \"perigosos\" = dangerous, outro sentido (menor)",
+  "correcao": "nome_pt: \"Vento e água: úteis e prejudiciais\""
+ },
+ {
+  "id": "L5-help-harm",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:143-147",
+  "texto": "Helpful: water the plants, water to make energy, wind to make energy, wind that spreads the seeds. Harmful: tsunami, heavy rain and floods, tornado, strong winds.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p08.jpeg: \"Water the plants\" \"Water to make energy\" \"Wind to make energy\" \"Wind that spread the seeds\" | \"Tsunami\" \"Heavy rain and floods\" \"Tornado\" \"Strong winds\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L5-video",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:149-151",
+  "texto": "It moves sand and makes dunes. / Rivers flow downhill. / It wears rock away. (+PT)  [Wind is air in motion; sails, turbines, energy, boats, fields = OK]",
+  "decisao": "REPROVA",
+  "regras": [
+   "L"
+  ],
+  "lastro": "uz1ggZN94xo.en.vtt fala de dunas e erosão; p08 (slide) só trata de helpful/harmful",
+  "contraexemplo": "dunas, rio descendo e pedra gasta são curiosidade de vídeo fora do assunto do slide (helpful/harmful)",
+  "correcao": "Wind box: '<p>Wind is <b>air in motion</b>.'+tr('Vento é ar em movimento.')+'<br>It fills <b>sails</b> and turns <b>wind turbines</b>.'+tr('Enche as velas e gira as turbinas.')+'</p>' | Water box: '<p>Water makes <b>energy</b>, carries <b>boats</b> and waters the <b>plants</b>.'+tr('A água faz energia, leva barcos e rega as plantas.')+'</p>' | fala: \"Wind is air in motion. It fills the sails of boats and turns wind turbines. Water makes energy, carries boats and waters the plants.\""
+ },
+ {
+  "id": "L5-test",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:152",
+  "texto": "Wind and water are two ___ forces (natural); floods: harmful",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p08.jpeg: \"Wind and water are two natural forces that exist in nature, and they can be harmful and helpful to us.\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L6-mov",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:58-63;159-166",
+  "texto": "6 definições (bounce/fly/roll/slide/spin/swing) + 18 exemplos (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p05.jpeg (Movements of OBJECTS): \"To bounce means to go up and down after hitting a surface.\" ... \"To swing means to move back and forth like a pendulum.\" + 18 legendas",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L6-dir",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:168-171",
+  "texto": "Things move in different directions ... Things move at different speeds: slow or fast. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "nIvePkFzaMw.en.vtt: \"Things can move in different directions ... at different speeds\". Frase genérica verdadeira.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L6-test",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:172",
+  "texto": "How does the top move? It spins. / To ___ ... bounce / Match wheel-roll, kite-fly, door-swing / slow or fast",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p05.jpeg (Movements of OBJECTS)",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L7-corpo",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:179-181",
+  "texto": "Body: swim, climb, play, walk, pick, sit. Hand: touch, lift, point, write, grab, push. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p02.jpeg: \"1. Make a list of movements you can do with your body.\" swim climb play walk pick sit / \"2. ... with your hand.\" touch lift point write grab push",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L7-bichos-ok",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:183-184",
+  "texto": "A fish swims. A bird flies. A monkey climbs. A dog walks and runs. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "informativo: \"Lesson 10 - Movement of Animals\" (sem slide; lacuna declarada no roteiro); verbos do material: p02 swim/climb/walk, p05 fly, p01 run",
+  "contraexemplo": "regra 5 (mesmo átomo, verdade indiscutível); sem slide de animais, não endurecer a cobrança",
+  "correcao": ""
+ },
+ {
+  "id": "L7-bichos-novos",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:183-184",
+  "texto": "A kangaroo and a frog jump. A snake crawls on the ground. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "informativo \"Lesson 10 - Movement of Animals\". Exemplos verdadeiros e indiscutíveis no assunto.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L7-test",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:185",
+  "texto": "listas corpo/mão; How does a fish move? A bird? (fish swims, bird flies)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p02.jpeg (listas) + informativo L10",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L8-def",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:192-194;198;202;209",
+  "texto": "A push ... away from me. A pull ... closer to me. (+PT, test)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p06.jpeg: \"A push is when I use a force to move something away from me.\" / \"A pull is when I use a force to move something closer to me.\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L8-falas-push-pull",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:196;200",
+  "texto": "Push: riding a bike, pushing a box, pushing a door, kicking a ball. They move away from me. / Pull: ... They move closer to me.",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "lastro": "p06.jpeg: as 4 figuras sob Push e as 4 sob Pull, sem legenda",
+  "contraexemplo": "\"They move away from me\" aplicado à bicicleta é falso (andando de bicicleta nada se afasta de mim); no cabo de guerra a corda pode nem vir",
+  "correcao": "fala 196: \"Push: riding a bike, pushing a box, pushing a door, kicking a ball.\" | fala 200: \"Pull: tug of war with a rope, pulling a wagon, opening a drawer, fishing with a rod.\""
+ },
+ {
+  "id": "L8-grades",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:197;201",
+  "texto": "legendas riding a bike / pushing a box / ... / fishing with a rod (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p06.jpeg (figuras sob Push e sob Pull)",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L8-forca",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:204-205",
+  "texto": "Force makes things move from one place to another. / A força faz as coisas irem de um lugar para outro.",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "lastro": "sva0ZRfFx4k.en.vtt: \"when the force of push or pull is applied between objects it causes them to move from one place to another\"",
+  "contraexemplo": "empurro a parede com força e ela não sai do lugar: virou regra absoluta",
+  "correcao": "fala e R: \"A push or a pull can make things move from one place to another.\" / \"Empurrar ou puxar pode fazer as coisas irem de um lugar para outro.\""
+ },
+ {
+  "id": "L8-tipos",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:204;206",
+  "texto": "Two types of force: push and pull. They are opposite forces. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "sva0ZRfFx4k.en.vtt: \"two different types of forces push and pull\" \"push and pull are opposite forces\"",
+  "contraexemplo": "aviso: convive com \"two natural forces\" (wind and water) da lição 5; nunca cobrar \"only two forces\"",
+  "correcao": ""
+ },
+ {
+  "id": "L8-piano-golfe",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:204;207",
+  "texto": "Push: playing the piano (the golfer hitting the ball fica: verdadeiro, bola vai para longe)",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "lastro": "sva0ZRfFx4k.en.vtt: só PERGUNTA \"what force is being used when playing a piano\", sem resposta; vídeo não prova sozinho",
+  "contraexemplo": "tecla de piano desce, não vai \"away from me\" no sentido do slide: um pai contestaria",
+  "correcao": "EXCLUIR \"playing the piano\" da fala 204 e da caixa Push 207 (fica: a shopping trolley, a volleyball, the golfer hitting the ball)"
+ },
+ {
+  "id": "L8-trolley-volei",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:207",
+  "texto": "Push: a shopping trolley, a volleyball",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "sva0ZRfFx4k.en.vtt: \"you use a shopping trolley ... you are moving something away from you\" \"watch how the players push the ball away from them\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "L8-pipa",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:204;208",
+  "texto": "Pull: holding the rope of a kite / segurar a linha da pipa",
+  "decisao": "REPROVA",
+  "regras": [
+   "F",
+   "T"
+  ],
+  "lastro": "sva0ZRfFx4k.en.vtt: \"you need to pull on the Rope to keep it from flying away\"",
+  "contraexemplo": "segurar não é puxar: a criança pode só segurar a linha parada",
+  "correcao": "\"pulling the rope of a kite\" / \"puxar a linha da pipa\" (fala e caixa)"
+ },
+ {
+  "id": "L8-fruta",
+  "onde": "ferramentas/CIE3_estudo_licoes.js:208",
+  "texto": "Pull: picking fruit and vegetables from the plant",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "sva0ZRfFx4k.en.vtt: \"to pick the produce you have to pull the fruit or vegetable away from the mother plant and bring it towards you\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-prep",
+  "onde": "ferramentas/CIE3_pocket.html:106-108;182",
+  "texto": "12 frases do pôster + over: a bird flying over the trees",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p04.jpeg (pôster Prepositions of Place) + p03.jpeg (worksheet Prepositions of Place, caixa: behind, next to, in front of, over, in, on, between, under)",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-sala",
+  "onde": "ferramentas/CIE3_pocket.html:112",
+  "texto": "lista da sala (pizza in the box ... two fish in the bowl)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p03.jpeg (worksheet Prepositions of Place, caixa: behind, next to, in front of, over, in, on, between, under); conferido em room.jpg",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-mapa",
+  "onde": "ferramentas/CIE3_pocket.html:118-119",
+  "texto": "LEFT/RIGHT. The Auditorium is between A section (left) and B section (right). Pay attention to the details and the path (way). You might get lost ... (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p01.jpeg: \"When we read maps, we need to pay a lot of attention in the details and in the path (way) that we are going. We might get lost if we run or don't pay attention!\" + mapa da escola em p01",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-mov",
+  "onde": "ferramentas/CIE3_pocket.html:125;127;184",
+  "texto": "6 definições; back and forth / up and down / round and round / slow, fast; teste spin; match",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p05.jpeg (Movements of OBJECTS) + nIvePkFzaMw.en.vtt",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-pushpull-def",
+  "onde": "ferramentas/CIE3_pocket.html:133;136;140;142",
+  "texto": "away from me / closer to me; Push and pull are opposite forces",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p06.jpeg: \"A push is when I use a force to move something away from me.\" / \"A pull is when I use a force to move something closer to me.\" + sva0ZRfFx4k.en.vtt \"push and pull are opposite forces\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-piano-golfe",
+  "onde": "ferramentas/CIE3_pocket.html:135",
+  "texto": "trolley · volleyball · piano · golf (piano)",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "lastro": "sva0ZRfFx4k.en.vtt: piano e golfista só aparecem como PERGUNTA do quiz, sem resposta",
+  "contraexemplo": "piano como push é discutível e o vídeo não dá a resposta",
+  "correcao": "\"trolley · volleyball · golf\""
+ },
+ {
+  "id": "PK-pipa",
+  "onde": "ferramentas/CIE3_pocket.html:138",
+  "texto": "kite rope · picking fruit",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "sva0ZRfFx4k.en.vtt \"pull on the Rope\" \"pull the fruit ... towards you\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-forca",
+  "onde": "ferramentas/CIE3_pocket.html:144",
+  "texto": "Force makes things move from one place to another. The 2 forces are push and pull.",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "lastro": "sva0ZRfFx4k.en.vtt: \"the force of push or pull ... causes them to move from one place to another\"; \"two different types of forces push and pull\"",
+  "contraexemplo": "\"The 2 forces\" = só existem duas forças, e o mesmo pocket chama wind e water de \"Two natural forces\"; empurrar a parede não a move",
+  "correcao": "\"A push or a pull can make things move. Push and pull are two types of force.\" (PT, se houver: \"Empurrar ou puxar pode fazer as coisas se moverem. Push e pull são dois tipos de força.\")"
+ },
+ {
+  "id": "PK-n1",
+  "onde": "ferramentas/CIE3_pocket.html:148",
+  "texto": "Two natural forces. They can be helpful and harmful. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p08.jpeg: \"Wind and water are two natural forces that exist in nature, and they can be harmful and helpful to us.\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-video",
+  "onde": "ferramentas/CIE3_pocket.html:155",
+  "texto": "Moves sand (dunes) ... flows downhill, wears rock (canyons)",
+  "decisao": "REPROVA",
+  "regras": [
+   "L"
+  ],
+  "lastro": "uz1ggZN94xo.en.vtt; fora do assunto de p08",
+  "contraexemplo": "curiosidade de vídeo (erosão) fora do helpful/harmful",
+  "correcao": "\"<b>Wind</b> = air in motion: breeze or gust. It sails boats and turns turbines. <b>Water</b> gives energy, carries boats and waters plants.\" / PT \"Vento é ar em movimento. A água dá energia, leva barcos e rega as plantas.\""
+ },
+ {
+  "id": "PK-ventoagua",
+  "onde": "ferramentas/CIE3_pocket.html:157",
+  "texto": "tsunami = water, tornado = wind, floods = water",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p08.jpeg: cartões de cima com faixa azul (água): \"Tsunami\", \"Heavy rain and floods\"; de baixo com faixa amarela (vento): \"Tornado\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-persp",
+  "onde": "ferramentas/CIE3_pocket.html:162-164",
+  "texto": "What I see depends on where I am looking from. Eiffel front/top/side/bottom. Giraffe quote. (+PT)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p07.jpeg: \"We can see many things from different positions, and our perspective changes depending on where we are looking from.\" + \"People are not right or wrong. They just have a different view of things.\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-bichos",
+  "onde": "ferramentas/CIE3_pocket.html:166",
+  "texto": "fish swims · bird flies · monkey climbs · dog walks, runs · frog, kangaroo jump · snake crawls",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "informativo \"Lesson 10 - Movement of Animals\". Exemplos verdadeiros.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-corpo",
+  "onde": "ferramentas/CIE3_pocket.html:167;170",
+  "texto": "Body: swim, climb, play, walk, pick, sit · Hand: touch, lift, point, write, grab, push; How does a fish move? It swims.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p02.jpeg (listas) + informativo L10",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "PK-check",
+  "onde": "ferramentas/CIE3_pocket.html:176-177",
+  "texto": "Check yourself 1-6 (top spin, drawer pull, tornado harmful, ball under, between, bottom)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p05.jpeg (Movements of OBJECTS) / p06 (gaveta sob Pull) / p08.jpeg: \"Wind and water are two natural forces that exist in nature, and they can be harmful and helpful to us.\" / p04.jpeg (pôster Prepositions of Place) / p01 / p07",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "JF-resumo1-2",
+  "onde": "ferramentas/CIE3_jogo_fases.js:19;21",
+  "texto": "Where is it? In, on, under, behind, between... / Read the map. Left or right?",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p04.jpeg (pôster Prepositions of Place) + informativo \"Directions (eg. left, right, between, under...)\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "JF-resumo3",
+  "onde": "ferramentas/CIE3_jogo_fases.js:23",
+  "texto": "Climb up. See it from every side. / Suba. Veja de todos os lados.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p07.jpeg (4 vistas). Resumo lúdico de fase, não ensina nada falso.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "JF-resumo4-5",
+  "onde": "ferramentas/CIE3_jogo_fases.js:25;27",
+  "texto": "Water: helpful or harmful? / Wind: helpful or harmful? (PT \"ajuda ou atrapalha?\")",
+  "decisao": "REPROVA",
+  "regras": [
+   "T"
+  ],
+  "lastro": "p08.jpeg: \"Wind and water are two natural forces that exist in nature, and they can be harmful and helpful to us.\"",
+  "contraexemplo": "harmful = prejudicial; \"atrapalha\" suaviza (tsunami não \"atrapalha\")",
+  "correcao": "PT: \"Água: ajuda ou prejudica?\" / \"Vento: ajuda ou prejudica?\""
+ },
+ {
+  "id": "JF-resumo6-9",
+  "onde": "ferramentas/CIE3_jogo_fases.js:29;31;33;35",
+  "texto": "Bounce, fly, roll, slide, spin, swing. / How do animals move? / Push: away from me. Pull: closer to me. / Push and pull to stop Twister!",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p05.jpeg (Movements of OBJECTS) / informativo L10 / p06.jpeg: \"A push is when I use a force to move something away from me.\" / \"A pull is when I use a force to move something closer to me.\"",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "JF-fim3",
+  "onde": "ferramentas/CIE3_jogo_fases.js:38 (FINS 3)",
+  "texto": "People are not right or wrong. They just see differently!",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p07.jpeg: \"They just have a different view of things.\" Paráfrase verdadeira.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "JF-fim4-5",
+  "onde": "ferramentas/CIE3_jogo_fases.js:38 (FINS 4,5)",
+  "texto": "Water can help and water can harm! / Wind can help and wind can harm! (PT \"atrapalhar\")",
+  "decisao": "REPROVA",
+  "regras": [
+   "T"
+  ],
+  "lastro": "p08.jpeg: \"Wind and water are two natural forces that exist in nature, and they can be harmful and helpful to us.\"",
+  "contraexemplo": "harm não é atrapalhar",
+  "correcao": "PT: \"A água pode ajudar e pode prejudicar!\" / \"O vento pode ajudar e pode prejudicar!\""
+ },
+ {
+  "id": "JF-fim7",
+  "onde": "ferramentas/CIE3_jogo_fases.js:38 (FINS 7)",
+  "texto": "Every animal moves in its own way! / Cada bicho se move do seu jeito!",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "lastro": "nenhuma (Lesson 10 sem slide); nIvePkFzaMw.en.vtt diz só \"Things around us move in different ways.\"",
+  "contraexemplo": "\"every animal ... its own way\" é absoluto e inventado: cachorro e gato andam do mesmo jeito",
+  "correcao": "\"Animals move in different ways!\" / \"Os bichos se movem de jeitos diferentes!\""
+ },
+ {
+  "id": "JF-fim-outros",
+  "onde": "ferramentas/CIE3_jogo_fases.js:38 (FINS 1,2,6,8)",
+  "texto": "Everything in the room is in its place! / Now the class can read the map! / Six ways to move: all back! / Push away, pull closer!",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p05.jpeg (Movements of OBJECTS) (6 movimentos) + p06.jpeg: \"A push is when I use a force to move something away from me.\" / \"A pull is when I use a force to move something closer to me.\"; o resto é enredo",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "JP-cartoes",
+  "onde": "ferramentas/CIE3_jogo_poderes.js:25-45;495-500",
+  "texto": "cartões de poder (soccer ball, sneakers, rope \"pull yourself up\", swimsuit, kite \"the wind holds you up\", \"A kick is a PUSH!\")",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p06.jpeg: menino chutando bola sob Push; uz1ggZN94xo.en.vtt \"Fly a kite on a windy day ... The wind helps it dance in the sky\"",
+  "contraexemplo": "instrução de jogo, não conteúdo cobrado",
+  "correcao": ""
+ },
+ {
+  "id": "JU-fim",
+  "onde": "ferramentas/CIE3_jogo_ui.js:141",
+  "texto": "You found everything! Wind and water can help.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p08.jpeg: \"Wind and water are two natural forces that exist in nature, and they can be harmful and helpful to us.\" (\"can be ... helpful\")",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "JU-outros",
+  "onde": "ferramentas/CIE3_jogo_ui.js:107;109;124-131",
+  "texto": "A Motion Star is back! / How to play / menus",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "interface e enredo; não ensina conteúdo",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "JC-falas",
+  "onde": "ferramentas/CIE3_jogo_chefao.js:79-81;118-216;364",
+  "texto": "Here comes Twister! / \"WHOOSH! I spin it ALL away!\" / My spinning tops make my SHIELD! / demais falas",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "enredo; tornado = harmful em p08 e top = spin em p05, sem afirmação falsa",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "JX-corda",
+  "onde": "ferramentas/CIE3_jogo_cie.js:30-31",
+  "texto": "PULL! Right answer = pull / PUXE! Resposta certa = puxar",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p06.jpeg (tug of war sob Pull); regra de jogo",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "R-lacuna",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:10",
+  "texto": "LACUNA DECLARADA: L10 Movement of Animals sem slide",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "informativo lista Lesson 10; zip sem slide de animais (conferido nos 8)",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "R-D5",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:23",
+  "texto": "D5 Pino vermelho = marca um lugar no mapa.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p01.jpeg: pino sobre os mapas. Verdadeiro.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "R-D6",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:24;61",
+  "texto": "Auditorium between A/B; A à esquerda, B à direita; C section entre Gym/Court 2 e 1; pino na Year 2 Classroom",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p01.jpeg (mapa da escola), conferido na figura",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "R-D1",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:22",
+  "texto": "D1 left x right; between; under",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "informativo: \"Directions (eg. left, right, between, under...)\"",
+  "contraexemplo": "o roteiro não tem a regra \"lados de quem olha o mapa\"; o produto a inventou (ver L3-leftright-regra)",
+  "correcao": ""
+ },
+ {
+  "id": "R-P3",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:28",
+  "texto": "P3 O mesmo objeto projeta sombras diferentes de cada lado (triângulo, retângulo, círculo)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p07.jpeg (figura das três sombras). Verdadeiro.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "R-N4-N8",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:33",
+  "texto": "N5 dunes/arches; N6 rivers downhill, canyons, rain carries soil",
+  "decisao": "REPROVA",
+  "regras": [
+   "L"
+  ],
+  "lastro": "uz1ggZN94xo.en.vtt (frases ditas)",
+  "contraexemplo": "erosão e dunas: curiosidade de vídeo fora do assunto do slide p08",
+  "correcao": "\"N5/N6: curiosidade de V3, NÃO ensinar nem cobrar.\" (N4, N7, N8 ficam)"
+ },
+ {
+  "id": "R-M3",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:47",
+  "texto": "M3 ... a snake crawls/slides on the ground",
+  "decisao": "REPROVA",
+  "regras": [
+   "D"
+  ],
+  "lastro": "informativo L10; verbos verdadeiros",
+  "contraexemplo": "\"slides\" é verbo de OBJETO em p05: se crawl e slide virarem opções, há duas certas",
+  "correcao": "\"M3 Animais (sem slide): a fish swims; a bird flies; a monkey climbs; a dog walks and runs; a kangaroo and a frog jump; a snake crawls on the ground. Nunca pôr crawl e slide como opções juntas.\""
+ },
+ {
+  "id": "R-F5",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:52",
+  "texto": "F5 (V2) Force makes things move from one place to another",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "lastro": "sva0ZRfFx4k.en.vtt: \"when the force of push or pull is applied between objects it causes them to move from one place to another\"",
+  "contraexemplo": "absoluto: força na parede não a move",
+  "correcao": "\"F5 (V2) A push or a pull can make things move from one place to another; push and pull are OPPOSITE forces; os dois tipos de força do vídeo são push e pull.\""
+ },
+ {
+  "id": "R-F6",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:52",
+  "texto": "F6 push: ... playing the piano ...",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "lastro": "sva0ZRfFx4k.en.vtt: piano e golfista só aparecem como perguntas do quiz, sem resposta",
+  "contraexemplo": "piano como push é discutível; vídeo só pergunta",
+  "correcao": "\"F6 (V2) push: shopping trolley, volleyball, the golfer hitting the ball.\""
+ },
+ {
+  "id": "R-F7",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:52",
+  "texto": "F7 (V2) pull: holding the rope of a kite",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "lastro": "sva0ZRfFx4k.en.vtt: \"you need to pull on the Rope\"",
+  "contraexemplo": "segurar não é puxar",
+  "correcao": "\"F7 (V2) pull: pulling the rope of a kite, picking fruit and vegetables from the plant.\""
+ },
+ {
+  "id": "R-T1-T5",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:15-19;37-43",
+  "texto": "átomos T1 (preposições + sala) e T5 (6 movimentos, direções, velocidade)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p04.jpeg (pôster Prepositions of Place) / p03.jpeg (worksheet Prepositions of Place, caixa: behind, next to, in front of, over, in, on, between, under) / p05.jpeg (Movements of OBJECTS) / nIvePkFzaMw.en.vtt",
+  "contraexemplo": "O7/O8: o vídeo diz \"Things CAN move...\"; registrar o \"can\"",
+  "correcao": ""
+ },
+ {
+  "id": "R-S8",
+  "onde": "trabalho/3tri_ciencias/_roteiro.md:59",
+  "texto": "S8: linha de cima = WATER, linha de baixo = WIND",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "p08.jpeg (faixas azul/amarela)",
+  "contraexemplo": "",
+  "correcao": ""
+ }
+]

@@ -1,0 +1,1489 @@
+[
+ {
+  "id": "a01",
+  "p": "Where is the teddy bear?",
+  "certa": "in the box",
+  "erradas": [
+   "on the box",
+   "under the box"
+  ],
+  "dica": "Look: the box is open. Where is the bear's body?",
+  "ex": "The teddy bear is in the box.",
+  "p_pt": "Onde está o ursinho de pelúcia?",
+  "certa_pt": "dentro da caixa",
+  "ex_pt": "O ursinho está dentro da caixa.",
+  "img": "media/cie3/prep-in.jpg"
+ },
+ {
+  "id": "a04",
+  "p": "Where is the apple?",
+  "certa": "on the book",
+  "erradas": [
+   "under the book",
+   "next to the book"
+  ],
+  "dica": "Look at the apple and the book.",
+  "ex": "The apple is on the book.",
+  "p_pt": "Onde está a maçã?",
+  "certa_pt": "em cima do livro",
+  "ex_pt": "A maçã está em cima do livro.",
+  "img": "media/cie3/prep-on.jpg"
+ },
+ {
+  "id": "a07",
+  "p": "Where is the ball?",
+  "certa": "under the table",
+  "erradas": [
+   "on the table",
+   "next to the table"
+  ],
+  "dica": "Look at where the ball is.",
+  "ex": "The ball is under the table.",
+  "p_pt": "Onde está a bola?",
+  "certa_pt": "embaixo da mesa",
+  "ex_pt": "A bola está embaixo da mesa.",
+  "img": "media/cie3/prep-under.jpg"
+ },
+ {
+  "id": "a09",
+  "p": "Where is the boy?",
+  "certa": "behind the tree",
+  "erradas": [
+   "in front of the tree",
+   "on the tree"
+  ],
+  "dica": "Does the tree hide part of the boy?",
+  "ex": "Behind: the tree hides part of the boy. The boy is behind the tree.",
+  "p_pt": "Onde está o menino?",
+  "certa_pt": "atrás da árvore",
+  "ex_pt": "Behind: a árvore esconde parte do menino. Ele está atrás da árvore.",
+  "img": "media/cie3/prep-behind.jpg"
+ },
+ {
+  "id": "a12",
+  "p": "Where is the dog?",
+  "certa": "in front of the chair",
+  "erradas": [
+   "behind the chair",
+   "on the chair"
+  ],
+  "dica": "Is anything hiding the dog?",
+  "ex": "In front of: nothing hides the dog. The dog is in front of the chair.",
+  "p_pt": "Onde está o cachorro?",
+  "certa_pt": "na frente da cadeira",
+  "ex_pt": "In front of: nada esconde o cachorro. Ele está na frente da cadeira.",
+  "img": "media/cie3/prep-in-front-of.jpg"
+ },
+ {
+  "id": "a16",
+  "p": "Where is the teddy bear?",
+  "certa": "between the two plants",
+  "erradas": [
+   "behind the two plants",
+   "on the two plants"
+  ],
+  "dica": "How many plants are there? Where is the bear?",
+  "ex": "Between means in the middle of two things. The bear is between the plants.",
+  "p_pt": "Onde está o ursinho de pelúcia?",
+  "certa_pt": "entre as duas plantas",
+  "ex_pt": "Between é no meio de duas coisas. O ursinho está entre as plantas.",
+  "img": "media/cie3/prep-between.jpg"
+ },
+ {
+  "id": "a19",
+  "p": "Where is the clock?",
+  "certa": "next to the lamp",
+  "erradas": [
+   "on the lamp",
+   "far from the lamp"
+  ],
+  "dica": "Look at the space between them.",
+  "ex": "The clock is next to the lamp.",
+  "p_pt": "Onde está o relógio?",
+  "certa_pt": "ao lado do abajur",
+  "ex_pt": "O relógio está ao lado do abajur.",
+  "img": "media/cie3/prep-next-to.jpg"
+ },
+ {
+  "id": "a22",
+  "p": "Where is the tree?",
+  "certa": "near the house",
+  "erradas": [
+   "far from the house",
+   "on the house"
+  ],
+  "dica": "Look at how much space is between the tree and the house.",
+  "ex": "Near means close. The tree is close to the house: near the house.",
+  "p_pt": "Onde está a árvore?",
+  "certa_pt": "perto da casa",
+  "ex_pt": "Near é perto. A árvore está perto da casa.",
+  "img": "media/cie3/prep-near.jpg"
+ },
+ {
+  "id": "a24",
+  "p": "Where is the tree?",
+  "certa": "far from the house",
+  "erradas": [
+   "next to the house",
+   "near the house"
+  ],
+  "dica": "What does the long arrow show?",
+  "ex": "Far from means not close. The long arrow shows the tree is far from the house.",
+  "p_pt": "Onde está a árvore?",
+  "certa_pt": "longe da casa",
+  "ex_pt": "Far from é longe. A seta comprida mostra que a árvore está longe da casa.",
+  "img": "media/cie3/prep-far-from.jpg"
+ },
+ {
+  "id": "a28",
+  "p": "Where is the lamp?",
+  "certa": "above the table",
+  "erradas": [
+   "under the table",
+   "next to the table"
+  ],
+  "dica": "Look: is the lamp up high or down low?",
+  "ex": "The lamp is above the table.",
+  "p_pt": "Onde está a lâmpada?",
+  "certa_pt": "acima da mesa",
+  "ex_pt": "A lâmpada está acima da mesa.",
+  "img": "media/cie3/prep-above.jpg"
+ },
+ {
+  "id": "a31",
+  "p": "Where is the cat?",
+  "certa": "below the shelf",
+  "erradas": [
+   "on the shelf",
+   "above the shelf"
+  ],
+  "dica": "Is the cat higher or lower than the shelf?",
+  "ex": "The cat is below the shelf.",
+  "p_pt": "Onde está o gato?",
+  "certa_pt": "abaixo da prateleira",
+  "ex_pt": "O gato está abaixo da prateleira.",
+  "img": "media/cie3/prep-below.jpg"
+ },
+ {
+  "id": "a32",
+  "p": "Where are the books?",
+  "certa": "on the shelf",
+  "erradas": [
+   "under the shelf",
+   "behind the shelf"
+  ],
+  "dica": "Look at the top of the shelf.",
+  "ex": "The books are on the shelf.",
+  "p_pt": "Onde estão os livros?",
+  "certa_pt": "na prateleira (em cima)",
+  "ex_pt": "Os livros estão em cima da prateleira.",
+  "img": "media/cie3/prep-below.jpg"
+ },
+ {
+  "id": "a34",
+  "p": "What is below the shelf?",
+  "certa": "the cat",
+  "erradas": [
+   "the plant",
+   "the books"
+  ],
+  "dica": "Look only at what is lower than the shelf.",
+  "ex": "The books and the plant are on the shelf. The cat is below it.",
+  "p_pt": "O que está abaixo da prateleira?",
+  "certa_pt": "o gato",
+  "ex_pt": "Os livros e a planta estão em cima da prateleira. O gato está abaixo dela.",
+  "img": "media/cie3/prep-below.jpg"
+ },
+ {
+  "id": "a35",
+  "p": "Where is the fish?",
+  "certa": "inside the bowl",
+  "erradas": [
+   "on the bowl",
+   "under the bowl"
+  ],
+  "dica": "Look at what is around the fish.",
+  "ex": "The fish is inside the bowl.",
+  "p_pt": "Onde está o peixe?",
+  "certa_pt": "dentro do aquário",
+  "ex_pt": "O peixe está dentro do aquário.",
+  "img": "media/cie3/prep-inside.jpg"
+ },
+ {
+  "id": "a38",
+  "p": "Look at the window. The bird is flying ___ the trees.",
+  "certa": "over",
+  "erradas": [
+   "under",
+   "in"
+  ],
+  "dica": "Look at the bird: is it up high?",
+  "ex": "There is a bird flying over the trees.",
+  "p_pt": "Olhe a janela. O pássaro está voando ___ as árvores.",
+  "certa_pt": "por cima de",
+  "ex_pt": "Há um pássaro voando por cima das árvores.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a41",
+  "p": "Look at the table. Where is the pizza?",
+  "certa": "in the box",
+  "erradas": [
+   "under the box",
+   "next to the box"
+  ],
+  "dica": "Find the open box on the table.",
+  "ex": "The box is open and the pizza is in it: in the box.",
+  "p_pt": "Olhe a mesa. Onde está a pizza?",
+  "certa_pt": "dentro da caixa",
+  "ex_pt": "A caixa está aberta e a pizza está dentro dela: in the box.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a42",
+  "p": "There is a guitar ___ the lamp and the plant.",
+  "certa": "between",
+  "erradas": [
+   "on",
+   "under"
+  ],
+  "dica": "Look at both sides of the guitar.",
+  "ex": "The lamp is on one side, the plant on the other: between.",
+  "p_pt": "Há um violão ___ o abajur e a planta.",
+  "certa_pt": "entre",
+  "ex_pt": "O abajur está de um lado, a planta do outro: entre.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a43",
+  "p": "Where are the two dogs?",
+  "certa": "under the table",
+  "erradas": [
+   "behind the table",
+   "on the table"
+  ],
+  "dica": "Look below the table top.",
+  "ex": "The dogs are under the table, below the top, between its legs.",
+  "p_pt": "Onde estão os dois cachorros?",
+  "certa_pt": "debaixo da mesa",
+  "ex_pt": "Os cachorros estão debaixo da mesa, entre as pernas dela.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a46",
+  "p": "The cheese is ___ the plate.",
+  "certa": "on",
+  "erradas": [
+   "next to",
+   "under"
+  ],
+  "dica": "Find the plate on the table.",
+  "ex": "The cheese is on the plate.",
+  "p_pt": "O queijo está ___ o prato.",
+  "certa_pt": "em cima de",
+  "ex_pt": "O queijo está em cima do prato.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a47",
+  "p": "The rug is ___ the sofa.",
+  "certa": "in front of",
+  "erradas": [
+   "behind",
+   "far from"
+  ],
+  "dica": "Which is closer to you: the rug or the sofa?",
+  "ex": "The rug is closer to us than the sofa: it is in front of the sofa.",
+  "p_pt": "O tapete está ___ o sofá.",
+  "certa_pt": "na frente de",
+  "ex_pt": "O tapete está mais perto de nós que o sofá: está na frente dele.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a48",
+  "p": "Where is the lamp?",
+  "certa": "under the shelf",
+  "erradas": [
+   "on the shelf",
+   "above the shelf"
+  ],
+  "dica": "Is the lamp higher or lower than the shelf?",
+  "ex": "The lamp is lower than the shelf: it is under the shelf.",
+  "p_pt": "Onde está o abajur?",
+  "certa_pt": "embaixo da prateleira",
+  "ex_pt": "O abajur está mais baixo que a prateleira: está embaixo dela.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a50",
+  "p": "Where is the picture?",
+  "certa": "on the wall",
+  "erradas": [
+   "on the shelf",
+   "on the sofa"
+  ],
+  "dica": "Look at where the picture hangs.",
+  "ex": "The picture is on the wall.",
+  "p_pt": "Onde está o quadro?",
+  "certa_pt": "na parede",
+  "ex_pt": "O quadro está na parede.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "a51",
+  "p": "The two fish are ___ the bowl.",
+  "certa": "in",
+  "erradas": [
+   "on",
+   "under"
+  ],
+  "dica": "Find the orange fish near the window.",
+  "ex": "The water and the bowl are around the fish: they are in the bowl.",
+  "p_pt": "Os dois peixes estão ___ o aquário.",
+  "certa_pt": "dentro de",
+  "ex_pt": "A água e o aquário estão em volta dos peixes: estão dentro dele.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "d01",
+  "p": "Look at the map. Which section is on the left of the Auditorium?",
+  "certa": "A section",
+  "erradas": [
+   "B section",
+   "C section"
+  ],
+  "dica": "Use your side as you look at the map. Which is your left hand?",
+  "ex": "Left is your left hand's side of the map. A section is left of the Auditorium.",
+  "p_pt": "Olhe o mapa. Qual seção está à esquerda do Auditório?",
+  "certa_pt": "Seção A",
+  "ex_pt": "Esquerda é o lado da sua mão esquerda. A seção A está à esquerda do Auditório.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d02",
+  "p": "The B section is on the ___ of the Auditorium.",
+  "certa": "right",
+  "erradas": [
+   "left",
+   "top"
+  ],
+  "dica": "First find the Auditorium, then find B section.",
+  "ex": "B section is on your right hand's side of the Auditorium: right.",
+  "p_pt": "A seção B está à ___ do Auditório.",
+  "certa_pt": "direita",
+  "ex_pt": "A seção B fica do lado da sua mão direita: direita.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d03",
+  "p": "What is between the A section and the B section?",
+  "certa": "the Auditorium",
+  "erradas": [
+   "the Trix",
+   "the Entrance"
+  ],
+  "dica": "Put one finger on each section and look at the middle.",
+  "ex": "The Auditorium has A on one side and B on the other: it is between.",
+  "p_pt": "O que está entre a seção A e a seção B?",
+  "certa_pt": "o Auditório",
+  "ex_pt": "O Auditório tem a seção A de um lado e a B do outro: está entre elas.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d09",
+  "p": "Where is the Entrance?",
+  "certa": "under the Auditorium",
+  "erradas": [
+   "above the C section",
+   "next to the Treehouse"
+  ],
+  "dica": "Find the word Entrance. Is it high or low on the map?",
+  "ex": "The Entrance is low on the map, under the Auditorium.",
+  "p_pt": "Onde está a Entrada?",
+  "certa_pt": "embaixo do Auditório",
+  "ex_pt": "A Entrada fica na parte baixa do mapa, embaixo do Auditório.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d13",
+  "p": "The red pin marks a place on this map. Which place?",
+  "certa": "a Year 2 classroom",
+  "erradas": [
+   "the Auditorium",
+   "the Entrance"
+  ],
+  "dica": "Find the red pin and read the words under it.",
+  "ex": "A red pin marks a place. Here it marks a Year 2 classroom.",
+  "p_pt": "O pino vermelho marca um lugar neste mapa. Qual lugar?",
+  "certa_pt": "uma sala do Year 2",
+  "ex_pt": "O pino vermelho marca um lugar. Aqui ele marca uma sala do Year 2.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d14",
+  "p": "The red pin is in which section?",
+  "certa": "B section",
+  "erradas": [
+   "A section",
+   "C section"
+  ],
+  "dica": "Find the pin and look for the closest section.",
+  "ex": "The red pin is on a Year 2 classroom, in B section.",
+  "p_pt": "O pino vermelho esta em qual secao?",
+  "certa_pt": "B section",
+  "ex_pt": "O pino esta numa sala do Year 2, na B section.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d16",
+  "p": "What kind of map is this?",
+  "certa": "a map of the school",
+  "erradas": [
+   "a map of a city",
+   "a GPS route"
+  ],
+  "dica": "Read the words: what places are on it?",
+  "ex": "It shows classrooms, gyms and the Auditorium, so it is a map of the school.",
+  "p_pt": "Que tipo de mapa é este?",
+  "certa_pt": "um mapa da escola",
+  "ex_pt": "Mostra salas, ginásios e o Auditório, então é um mapa da escola.",
+  "img": "media/cie3/map-school.jpg"
+ },
+ {
+  "id": "d17",
+  "p": "A blue line on the screen shows the way to go. What is it?",
+  "certa": "a GPS route",
+  "erradas": [
+   "a map of the school",
+   "a red pin"
+  ],
+  "dica": "Remember the maps on the Reading Map slide.",
+  "ex": "A GPS route shows the way to go with a line on the map.",
+  "p_pt": "Uma linha azul na tela mostra o caminho a seguir. O que é?",
+  "certa_pt": "uma rota de GPS",
+  "ex_pt": "A rota de GPS mostra o caminho com uma linha no mapa.",
+  "img": null
+ },
+ {
+  "id": "d20",
+  "p": "When we read maps, we need to pay a lot of attention to...",
+  "certa": "the details and the path",
+  "erradas": [
+   "the red pin and the colours",
+   "the left and the right"
+  ],
+  "dica": "Remember the big sentence on the Reading Map slide.",
+  "ex": "Map rule: pay attention to the details and the path.",
+  "p_pt": "Quando lemos mapas, precisamos prestar muita atencao em...",
+  "certa_pt": "os detalhes e o caminho",
+  "ex_pt": "Regra do mapa: atencao aos detalhes e ao caminho.",
+  "img": null
+ },
+ {
+  "id": "d21",
+  "p": "On a map, the path is…",
+  "certa": "the way we are going",
+  "erradas": [
+   "the pin on the map",
+   "the name of a place"
+  ],
+  "dica": "Remember: path (way).",
+  "ex": "Path means way: it is the way we are going.",
+  "p_pt": "Em um mapa, o caminho (path) é…",
+  "certa_pt": "o caminho por onde vamos",
+  "ex_pt": "Path quer dizer way: é o caminho por onde vamos.",
+  "img": null
+ },
+ {
+  "id": "d22",
+  "p": "We might get ___ if we run or don't pay attention.",
+  "certa": "lost",
+  "erradas": [
+   "late",
+   "tired"
+  ],
+  "dica": "What happens when we don't know where we are?",
+  "ex": "If we run or don't pay attention to the map, we might get lost.",
+  "p_pt": "Podemos ficar ___ se corrermos ou não prestarmos atenção.",
+  "certa_pt": "perdidos",
+  "ex_pt": "Se corremos ou não prestamos atenção no mapa, podemos nos perder.",
+  "img": null
+ },
+ {
+  "id": "p01",
+  "p": "This tower is seen from the...",
+  "certa": "front",
+  "erradas": [
+   "top",
+   "bottom"
+  ],
+  "dica": "Where is the person with the camera: on the grass, looking straight?",
+  "ex": "From the front, you stand on the ground and look straight. This photo shows that.",
+  "p_pt": "Esta torre é vista de...",
+  "certa_pt": "frente",
+  "ex_pt": "De frente, você fica no chão e olha reto. A foto mostra isso.",
+  "img": "media/cie3/view-front.jpg"
+ },
+ {
+  "id": "p02",
+  "p": "This tower is seen from the...",
+  "certa": "top",
+  "erradas": [
+   "front",
+   "bottom"
+  ],
+  "dica": "Do you see the sky or the ground in this photo?",
+  "ex": "From the top, you look down and see the ground.",
+  "p_pt": "Esta torre e vista de...",
+  "certa_pt": "cima (top)",
+  "ex_pt": "De cima, voce olha para baixo e ve o chao.",
+  "img": "media/cie3/view-top.jpg"
+ },
+ {
+  "id": "p04",
+  "p": "This tower is seen from the...",
+  "certa": "bottom",
+  "erradas": [
+   "top",
+   "side"
+  ],
+  "dica": "Is the tip of the tower far away, up in the sky?",
+  "ex": "From the bottom, you look up and the tip is far away.",
+  "p_pt": "Esta torre é vista de...",
+  "certa_pt": "baixo",
+  "ex_pt": "De baixo, você olha para cima e a ponta fica longe.",
+  "img": "media/cie3/view-bottom.jpg"
+ },
+ {
+  "id": "p08",
+  "p": "This tower is seen from the...",
+  "certa": "side",
+  "erradas": [
+   "top",
+   "bottom"
+  ],
+  "dica": "Look at the river and the city around the tower.",
+  "ex": "This photo shows the tower seen from the side.",
+  "p_pt": "Esta torre é vista de...",
+  "certa_pt": "lado (side)",
+  "ex_pt": "Esta foto mostra a torre vista de lado.",
+  "img": "media/cie3/view-side.jpg"
+ },
+ {
+  "id": "p09",
+  "p": "Complete: Our perspective changes depending on ___ we are looking from.",
+  "certa": "where",
+  "erradas": [
+   "when",
+   "why"
+  ],
+  "dica": "Think about a place, not a time.",
+  "ex": "Perspective changes depending on WHERE we look from: top, bottom, front or side.",
+  "p_pt": "Complete: Nossa perspectiva muda dependendo de ___ estamos olhando.",
+  "certa_pt": "onde",
+  "ex_pt": "A perspectiva muda conforme ONDE olhamos: de cima, de baixo, de frente ou de lado.",
+  "img": null
+ },
+ {
+  "id": "p13",
+  "p": "What shape is the shadow on the floor?",
+  "certa": "a circle",
+  "erradas": [
+   "a triangle",
+   "a rectangle"
+  ],
+  "dica": "Look only below the object.",
+  "ex": "The floor shows the shadow from the bottom of the object: a circle.",
+  "p_pt": "Que forma tem a sombra no chão?",
+  "certa_pt": "um círculo",
+  "ex_pt": "O chão mostra a sombra da parte de baixo do objeto: um círculo.",
+  "img": "media/cie3/view-shadow.jpg"
+ },
+ {
+  "id": "p14",
+  "p": "What shape is the shadow on the left wall?",
+  "certa": "a triangle",
+  "erradas": [
+   "a circle",
+   "a rectangle"
+  ],
+  "dica": "Count the corners of the shadow.",
+  "ex": "The shadow on the left wall has three corners, so it is a triangle.",
+  "p_pt": "Que forma tem a sombra na parede da esquerda?",
+  "certa_pt": "um triângulo",
+  "ex_pt": "A sombra da parede da esquerda tem três pontas: é um triângulo.",
+  "img": "media/cie3/view-shadow.jpg"
+ },
+ {
+  "id": "p17",
+  "p": "Complete: People are not right or wrong. They just have a different ___ of things.",
+  "certa": "view",
+  "erradas": [
+   "shape",
+   "colour"
+  ],
+  "dica": "It is the word from the giraffe sentence, about looking.",
+  "ex": "The giraffe sentence says people just have a different view of things.",
+  "p_pt": "Complete: As pessoas não estão certas nem erradas. Elas só têm uma ___ diferente das coisas.",
+  "certa_pt": "visão",
+  "ex_pt": "A frase da girafa diz que as pessoas só têm uma visão diferente das coisas.",
+  "img": null
+ },
+ {
+  "id": "p18",
+  "p": "The giraffe's head is up high. The woman is down low. Why do they see things differently?",
+  "certa": "They look from different positions.",
+  "erradas": [
+   "The giraffe is right about it.",
+   "The woman is right about it."
+  ],
+  "dica": "Read the sentence at the top of the picture.",
+  "ex": "Nobody is wrong here. They look from different positions, so they have different views.",
+  "p_pt": "A cabeça da girafa está lá no alto. A mulher está mais embaixo. Por que elas veem as coisas de um jeito diferente?",
+  "certa_pt": "Elas olham de posições diferentes.",
+  "ex_pt": "Ninguém está errado. Elas olham de posições diferentes, por isso têm visões diferentes.",
+  "img": "media/cie3/view-giraffe.jpg"
+ },
+ {
+  "id": "n01",
+  "p": "Complete: Wind and water are two ___ forces.",
+  "certa": "natural",
+  "erradas": [
+   "pushing",
+   "pulling"
+  ],
+  "dica": "They exist in nature.",
+  "ex": "Wind and water exist in nature, so they are natural forces.",
+  "p_pt": "Complete: O vento e a água são duas forças ___.",
+  "certa_pt": "naturais",
+  "ex_pt": "O vento e a água existem na natureza, então são forças naturais.",
+  "img": null
+ },
+ {
+  "id": "n03",
+  "p": "Which of these is HELPFUL water?",
+  "certa": "water the plants",
+  "erradas": [
+   "water in a tsunami",
+   "water in a flood"
+  ],
+  "dica": "Which of these helps something grow?",
+  "ex": "Helpful water: water the plants, water to make energy. A tsunami and floods are harmful.",
+  "p_pt": "Qual destas é água ÚTIL?",
+  "certa_pt": "regar as plantas",
+  "ex_pt": "Água útil: regar as plantas, fazer energia. Tsunami e enchente são perigosos.",
+  "img": null
+ },
+ {
+  "id": "n05",
+  "p": "Which of these is HARMFUL water?",
+  "certa": "heavy rain and floods",
+  "erradas": [
+   "water to make energy",
+   "water for the plants"
+  ],
+  "dica": "Which one is in the harmful column on the slide?",
+  "ex": "Harmful water: a tsunami, heavy rain and floods. Energy and plants are helpful uses.",
+  "p_pt": "Qual destas é água PERIGOSA?",
+  "certa_pt": "chuva forte e enchentes",
+  "ex_pt": "Água perigosa: tsunami, chuva forte e enchentes. Energia e plantas são usos úteis.",
+  "img": null
+ },
+ {
+  "id": "n07",
+  "p": "What is this? Helpful or harmful?",
+  "certa": "harmful: a tsunami",
+  "erradas": [
+   "harmful: a tornado",
+   "helpful: makes energy"
+  ],
+  "dica": "Look at the size of the wave coming to the houses.",
+  "ex": "A tsunami is a giant wave of water. It is harmful.",
+  "p_pt": "O que é isto? Útil ou perigoso?",
+  "certa_pt": "perigoso: um tsunami",
+  "ex_pt": "O tsunami é uma onda gigante de água. Ele é perigoso.",
+  "img": "media/cie3/harm-tsunami.jpg"
+ },
+ {
+  "id": "n08",
+  "p": "What is this? Helpful or harmful?",
+  "certa": "harmful: a flood",
+  "erradas": [
+   "harmful: a tornado",
+   "helpful: waters plants"
+  ],
+  "dica": "Look at the rain and the cars in the water.",
+  "ex": "Heavy rain can make floods. The water covers streets and cars. It is harmful.",
+  "p_pt": "O que é isto? Útil ou perigoso?",
+  "certa_pt": "perigoso: uma enchente",
+  "ex_pt": "Chuva forte pode causar enchentes. A água cobre ruas e carros. É perigoso.",
+  "img": "media/cie3/harm-floods.jpg"
+ },
+ {
+  "id": "n09",
+  "p": "What is this? Helpful or harmful?",
+  "certa": "harmful: a tornado",
+  "erradas": [
+   "harmful: a tsunami",
+   "harmful: a flood"
+  ],
+  "dica": "Look at the shape of the wind in the middle of the picture.",
+  "ex": "A tornado is wind that spins in a tall funnel. It is harmful.",
+  "p_pt": "O que é isto? Útil ou prejudicial?",
+  "certa_pt": "prejudicial: um tornado",
+  "ex_pt": "Tornado é vento girando num funil alto. É prejudicial.",
+  "img": "media/cie3/harm-tornado.jpg"
+ },
+ {
+  "id": "n10",
+  "p": "What is this? Helpful or harmful?",
+  "certa": "harmful: strong winds",
+  "erradas": [
+   "harmful: a tsunami",
+   "helpful: spreads seeds"
+  ],
+  "dica": "Look at the trees and the leaves.",
+  "ex": "These strong winds bend the trees and blow the leaves. They are harmful.",
+  "p_pt": "O que é isto? Útil ou perigoso?",
+  "certa_pt": "perigoso: ventos fortes",
+  "ex_pt": "Estes ventos fortes dobram as árvores e levam as folhas. São perigosos.",
+  "img": "media/cie3/harm-winds.jpg"
+ },
+ {
+  "id": "n11",
+  "p": "What is this? Helpful or harmful?",
+  "certa": "helpful: waters the plants",
+  "erradas": [
+   "helpful: makes energy",
+   "harmful: heavy rain"
+  ],
+  "dica": "Look at where the water is coming from.",
+  "ex": "Watering the plants is on the helpful list. Water helps plants live.",
+  "p_pt": "O que é isto? Útil ou perigoso?",
+  "certa_pt": "útil: rega as plantas",
+  "ex_pt": "Regar as plantas está na lista dos úteis. A água ajuda as plantas a viver.",
+  "img": "media/cie3/help-water-plants.jpg"
+ },
+ {
+  "id": "n12",
+  "p": "What is this? Helpful or harmful?",
+  "certa": "helpful: makes energy",
+  "erradas": [
+   "helpful: waters plants",
+   "harmful: a flood"
+  ],
+  "dica": "It is a dam. What is it for?",
+  "ex": "A dam uses moving water to make energy. It is helpful.",
+  "p_pt": "O que é isto? Útil ou perigoso?",
+  "certa_pt": "útil: faz energia",
+  "ex_pt": "A represa usa a água em movimento para fazer energia. É útil.",
+  "img": "media/cie3/help-water-energy.jpg"
+ },
+ {
+  "id": "n13",
+  "p": "Which natural force turns these blades?",
+  "certa": "wind",
+  "erradas": [
+   "water"
+  ],
+  "dica": "Remember the helpful column on the slide.",
+  "ex": "Wind turns the blades of a turbine. Wind is the force here.",
+  "p_pt": "Qual força natural gira estas pás?",
+  "certa_pt": "vento",
+  "ex_pt": "O vento gira as pás da turbina. A força aqui é o vento.",
+  "img": "media/cie3/help-wind-energy.jpg"
+ },
+ {
+  "id": "n14",
+  "p": "Which natural force spreads these seeds?",
+  "certa": "wind",
+  "erradas": [
+   "water"
+  ],
+  "dica": "Are the seeds in the air or in water?",
+  "ex": "The seeds float in the air. Wind spreads the seeds, and that is helpful.",
+  "p_pt": "Qual força natural espalha estas sementes?",
+  "certa_pt": "vento",
+  "ex_pt": "As sementes flutuam no ar. O vento espalha as sementes, e isso é útil.",
+  "img": "media/cie3/help-wind-seeds.jpg"
+ },
+ {
+  "id": "n16",
+  "p": "Which natural force is this?",
+  "certa": "water",
+  "erradas": [
+   "wind"
+  ],
+  "dica": "What is this wave made of?",
+  "ex": "A tsunami is a giant wave. So it is the force of water.",
+  "p_pt": "Qual força natural é esta?",
+  "certa_pt": "água",
+  "ex_pt": "O tsunami é uma onda gigante. Então é a força da água.",
+  "img": "media/cie3/harm-tsunami.jpg"
+ },
+ {
+  "id": "n19",
+  "p": "Complete: Wind is ___ in motion.",
+  "certa": "air",
+  "erradas": [
+   "water",
+   "sand"
+  ],
+  "dica": "It is what you breathe.",
+  "ex": "Wind is air in motion. Moving air is wind.",
+  "p_pt": "Complete: O vento é ___ em movimento.",
+  "certa_pt": "ar",
+  "ex_pt": "O vento é ar em movimento. Ar que se move é vento.",
+  "img": null
+ },
+ {
+  "id": "n23",
+  "p": "Wind moves sand. What can it make?",
+  "certa": "dunes",
+  "erradas": [
+   "canyons",
+   "valleys"
+  ],
+  "dica": "Think about hills of sand.",
+  "ex": "Wind moves sand and makes dunes. Water makes valleys and canyons.",
+  "p_pt": "O vento move a areia. O que ele pode fazer?",
+  "certa_pt": "dunas",
+  "ex_pt": "O vento move a areia e faz dunas. A água faz vales e cânions.",
+  "img": null
+ },
+ {
+  "id": "n35",
+  "p": "We need to protect our...",
+  "certa": "air and water",
+  "erradas": [
+   "kites and balloons",
+   "balls and boxes"
+  ],
+  "dica": "Remember the two forces in the lesson.",
+  "ex": "Wind is moving air. We protect both air and water.",
+  "p_pt": "Precisamos proteger nosso(a)...",
+  "certa_pt": "ar e água",
+  "ex_pt": "Vento é ar em movimento. Protegemos ar e água.",
+  "img": null
+ },
+ {
+  "id": "o01",
+  "p": "How does it move?",
+  "certa": "It bounces.",
+  "erradas": [
+   "It swings.",
+   "It slides."
+  ],
+  "dica": "Follow the lines under the ball. They show its path.",
+  "ex": "To bounce is to go up and down after hitting a surface. This ball bounces.",
+  "p_pt": "Como isso se move?",
+  "certa_pt": "Quica.",
+  "ex_pt": "Quicar é subir e descer depois de bater numa superfície. Esta bola quica.",
+  "img": "media/cie3/obj-bounce-soccer-ball.jpg"
+ },
+ {
+  "id": "o06",
+  "p": "How does it move?",
+  "certa": "It flies.",
+  "erradas": [
+   "It rolls.",
+   "It bounces."
+  ],
+  "dica": "Is the kite on the ground or in the sky?",
+  "ex": "To fly is to move through the air. The kite is in the air, so it flies.",
+  "p_pt": "Como isso se move?",
+  "certa_pt": "Voa.",
+  "ex_pt": "Voar é se mover pelo ar. A pipa está no ar, então voa.",
+  "img": "media/cie3/obj-fly-kite.jpg"
+ },
+ {
+  "id": "o07",
+  "p": "How does it move?",
+  "certa": "It rolls.",
+  "erradas": [
+   "It swings.",
+   "It flies."
+  ],
+  "dica": "Think about how a wheel goes along the road.",
+  "ex": "To roll is to move by turning over and over. The wheel rolls.",
+  "p_pt": "Como isso se move?",
+  "certa_pt": "Rola.",
+  "ex_pt": "Rolar é se mover virando e virando. A roda rola.",
+  "img": "media/cie3/obj-roll-wheel.jpg"
+ },
+ {
+  "id": "o08",
+  "p": "How does it move?",
+  "certa": "It rolls.",
+  "erradas": [
+   "It swings.",
+   "It flies."
+  ],
+  "dica": "The can is on its side. The lines show it is turning.",
+  "ex": "The can lies on its side and moves by turning over and over. It rolls.",
+  "p_pt": "Como isso se move?",
+  "certa_pt": "Rola.",
+  "ex_pt": "A lata fica deitada e se move virando e virando. Ela rola.",
+  "img": "media/cie3/obj-roll-can.jpg"
+ },
+ {
+  "id": "o11",
+  "p": "How does it move?",
+  "certa": "It slides.",
+  "erradas": [
+   "It flies.",
+   "It bounces."
+  ],
+  "dica": "See the arrow: it shows the path.",
+  "ex": "To slide is to move smoothly along a surface. The ice cube slides.",
+  "p_pt": "Como isso se move?",
+  "certa_pt": "Desliza.",
+  "ex_pt": "Deslizar é se mover suave sobre uma superfície. O cubo de gelo desliza.",
+  "img": "media/cie3/obj-slide-ice-cube.jpg"
+ },
+ {
+  "id": "o14",
+  "p": "How does it move?",
+  "certa": "It spins.",
+  "erradas": [
+   "It flies.",
+   "It bounces."
+  ],
+  "dica": "Look at the arrows around the fan.",
+  "ex": "To spin means to turn around and around. The fan spins.",
+  "p_pt": "Como isso se move?",
+  "certa_pt": "Gira.",
+  "ex_pt": "Girar é dar voltas e voltas. O ventilador gira.",
+  "img": "media/cie3/obj-spin-fan.jpg"
+ },
+ {
+  "id": "o15",
+  "p": "How does it move?",
+  "certa": "It spins.",
+  "erradas": [
+   "It flies.",
+   "It bounces."
+  ],
+  "dica": "See the arrow around the top.",
+  "ex": "To spin is to turn around and around. The top spins.",
+  "p_pt": "Como isso se move?",
+  "certa_pt": "Gira.",
+  "ex_pt": "Girar é dar voltas e voltas. O pião gira.",
+  "img": "media/cie3/obj-spin-top.jpg"
+ },
+ {
+  "id": "o18",
+  "p": "How does it move?",
+  "certa": "It swings.",
+  "erradas": [
+   "It bounces.",
+   "It flies."
+  ],
+  "dica": "The door opens and closes: it goes and comes back.",
+  "ex": "The door moves back and forth. So the door swings.",
+  "p_pt": "Como ela se move?",
+  "certa_pt": "Ela balança (abre e fecha).",
+  "ex_pt": "A porta vai e volta. Então ela balança.",
+  "img": "media/cie3/obj-swing-door.jpg"
+ },
+ {
+  "id": "o19",
+  "p": "To ___ means to go up and down after hitting a surface.",
+  "certa": "bounce",
+  "erradas": [
+   "fly",
+   "slide"
+  ],
+  "dica": "Think about a basketball.",
+  "ex": "To bounce means to go up and down after hitting a surface, like a basketball.",
+  "p_pt": "___ significa subir e descer depois de bater numa superfície.",
+  "certa_pt": "quicar",
+  "ex_pt": "Quicar é subir e descer depois de bater numa superfície, como a bola de basquete.",
+  "img": null
+ },
+ {
+  "id": "o20",
+  "p": "To ___ means to move through the air.",
+  "certa": "fly",
+  "erradas": [
+   "slide",
+   "roll"
+  ],
+  "dica": "Think about an airplane and a kite.",
+  "ex": "To fly means to move through the air, like an airplane.",
+  "p_pt": "___ significa se mover pelo ar.",
+  "certa_pt": "voar",
+  "ex_pt": "Voar é se mover pelo ar, como o avião.",
+  "img": null
+ },
+ {
+  "id": "o21",
+  "p": "To ___ means to move by turning over and over.",
+  "certa": "roll",
+  "erradas": [
+   "fly",
+   "bounce"
+  ],
+  "dica": "Think about a wheel.",
+  "ex": "To roll means to move by turning over and over, like a wheel.",
+  "p_pt": "___ significa se mover virando e virando.",
+  "certa_pt": "rolar",
+  "ex_pt": "Rolar é se mover virando e virando, como a roda.",
+  "img": null
+ },
+ {
+  "id": "o22",
+  "p": "To ___ means to move smoothly along a surface.",
+  "certa": "slide",
+  "erradas": [
+   "roll",
+   "swing"
+  ],
+  "dica": "Think about an ice cube.",
+  "ex": "To slide means to move smoothly along a surface, like an ice cube.",
+  "p_pt": "___ significa se mover suave sobre uma superfície.",
+  "certa_pt": "deslizar",
+  "ex_pt": "Deslizar é se mover suave sobre uma superfície, como o cubo de gelo.",
+  "img": null
+ },
+ {
+  "id": "o23",
+  "p": "To ___ means to turn around and around.",
+  "certa": "spin",
+  "erradas": [
+   "fly",
+   "bounce"
+  ],
+  "dica": "Think about a top.",
+  "ex": "To spin means to turn around and around, like a top.",
+  "p_pt": "___ significa dar voltas e voltas.",
+  "certa_pt": "girar",
+  "ex_pt": "Girar é dar voltas e voltas, como o pião.",
+  "img": null
+ },
+ {
+  "id": "o24",
+  "p": "To ___ means to move back and forth like a pendulum.",
+  "certa": "swing",
+  "erradas": [
+   "fly",
+   "bounce"
+  ],
+  "dica": "Think about the park toy that goes and comes back.",
+  "ex": "To swing means to move back and forth like a pendulum, like a door.",
+  "p_pt": "___ significa ir e voltar como um pêndulo.",
+  "certa_pt": "balançar",
+  "ex_pt": "Balançar é ir e voltar como um pêndulo, como a porta.",
+  "img": null
+ },
+ {
+  "id": "o37",
+  "p": "Up and down, back and forth, round and round. These words tell us the…",
+  "certa": "direction",
+  "erradas": [
+   "speed",
+   "surface"
+  ],
+  "dica": "They tell WHERE the thing goes.",
+  "ex": "Things move in different directions: back and forth, up and down, round and round.",
+  "p_pt": "Para cima e para baixo, para frente e para trás, em voltas. Essas palavras dizem a…",
+  "certa_pt": "direção",
+  "ex_pt": "As coisas se movem em direções diferentes: frente e trás, cima e baixo, voltas e voltas.",
+  "img": null
+ },
+ {
+  "id": "o38",
+  "p": "Things can move at different speeds. They can move…",
+  "certa": "slow or fast",
+  "erradas": [
+   "up and down",
+   "back and forth"
+  ],
+  "dica": "Speed tells if the thing takes a long time or not.",
+  "ex": "Speed is how quickly a thing moves. Things can move slow or fast.",
+  "p_pt": "As coisas podem se mover em velocidades diferentes. Elas podem se mover…",
+  "certa_pt": "devagar ou rápido",
+  "ex_pt": "Velocidade é a rapidez com que algo se move. As coisas podem ir devagar ou rápido.",
+  "img": null
+ },
+ {
+  "id": "m01",
+  "p": "How does a fish move?",
+  "certa": "It swims.",
+  "erradas": [
+   "It climbs.",
+   "It walks."
+  ],
+  "dica": "Think about where a fish lives.",
+  "ex": "A fish lives in the water and moves by swimming. A fish swims.",
+  "p_pt": "Como um peixe se move?",
+  "certa_pt": "Nada.",
+  "ex_pt": "O peixe vive na água e se move nadando. O peixe nada.",
+  "img": null
+ },
+ {
+  "id": "m09",
+  "p": "I go up a tree. I use my body. I…",
+  "certa": "climb",
+  "erradas": [
+   "write",
+   "point"
+  ],
+  "dica": "Arms and legs work together to go up.",
+  "ex": "Climb is a body movement. We climb to go up a tree.",
+  "p_pt": "Subo numa árvore. Uso o corpo. Eu…",
+  "certa_pt": "escalo",
+  "ex_pt": "Climb é movimento do corpo. Escalamos para subir numa árvore.",
+  "img": null
+ },
+ {
+  "id": "m11",
+  "p": "I ___ on a chair.",
+  "certa": "sit",
+  "erradas": [
+   "lift",
+   "point"
+  ],
+  "dica": "The word \"on\" tells you the body is on the chair.",
+  "ex": "Sit is a body movement. We sit on a chair.",
+  "p_pt": "Eu ___ em uma cadeira.",
+  "certa_pt": "sento",
+  "ex_pt": "Sit é movimento do corpo. Sentamos na cadeira.",
+  "img": null
+ },
+ {
+  "id": "m12",
+  "p": "My legs and feet take me to the door. I…",
+  "certa": "walk",
+  "erradas": [
+   "touch",
+   "write"
+  ],
+  "dica": "Think about what a dog does too.",
+  "ex": "Walk is a body movement. We use our legs and feet to walk.",
+  "p_pt": "Minhas pernas e meus pés me levam até a porta. Eu…",
+  "certa_pt": "ando",
+  "ex_pt": "Walk é movimento do corpo. Usamos pernas e pés para andar.",
+  "img": null
+ },
+ {
+  "id": "m15",
+  "p": "I use my hand and a pencil. I…",
+  "certa": "write",
+  "erradas": [
+   "walk",
+   "swim"
+  ],
+  "dica": "What does a pencil do in a notebook?",
+  "ex": "Write is a hand movement. We hold a pencil and write.",
+  "p_pt": "Uso a mão e um lápis. Eu…",
+  "certa_pt": "escrevo",
+  "ex_pt": "Write é movimento da mão. Seguramos o lápis e escrevemos.",
+  "img": null
+ },
+ {
+  "id": "m20",
+  "p": "Which one is on the list of hand movements?",
+  "certa": "push",
+  "erradas": [
+   "swim",
+   "sit"
+  ],
+  "dica": "The other two are on the body list.",
+  "ex": "Hand list: touch, lift, point, write, grab, push. Push is on it.",
+  "p_pt": "Qual está na lista de movimentos da mão?",
+  "certa_pt": "empurrar",
+  "ex_pt": "Lista da mão: tocar, levantar, apontar, escrever, agarrar, empurrar. Empurrar está nela.",
+  "img": null
+ },
+ {
+  "id": "f01",
+  "p": "Riding a bike. Is it a push or a pull?",
+  "certa": "a push",
+  "erradas": [
+   "a pull"
+  ],
+  "dica": "The feet move the pedals away from the body.",
+  "ex": "In our lesson, riding a bike is a push: a force away from me.",
+  "p_pt": "Andar de bicicleta. É empurrar ou puxar?",
+  "certa_pt": "empurrar",
+  "ex_pt": "Na lição, andar de bicicleta é empurrar: uma força que afasta de mim.",
+  "img": "media/cie3/push-bike.jpg"
+ },
+ {
+  "id": "f02",
+  "p": "The boy moves the box. Is it a push or a pull?",
+  "certa": "a push",
+  "erradas": [
+   "a pull"
+  ],
+  "dica": "Push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "The hands move the box away from the boy. That is a push.",
+  "p_pt": "O menino move a caixa. É um empurrão ou um puxão?",
+  "certa_pt": "um empurrão",
+  "ex_pt": "As mãos levam a caixa para longe do menino. É push, empurrar.",
+  "img": "media/cie3/push-box.jpg"
+ },
+ {
+  "id": "f03",
+  "p": "Is kicking a ball a push or a pull?",
+  "certa": "a push",
+  "erradas": [
+   "a pull"
+  ],
+  "dica": "Push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "The foot moves the ball away from the boy. Kicking is a push.",
+  "p_pt": "Chutar a bola é um empurrão ou um puxão?",
+  "certa_pt": "um empurrão",
+  "ex_pt": "O pé leva a bola para longe do menino. Chutar é push, empurrar.",
+  "img": "media/cie3/push-ball.jpg"
+ },
+ {
+  "id": "f04",
+  "p": "A girl opens a door with her hands, moving it away from her. Is it a push or a pull?",
+  "certa": "a push",
+  "erradas": [
+   "a pull"
+  ],
+  "dica": "Away from me: which word is it?",
+  "ex": "The door moves away from the girl. That is a push.",
+  "p_pt": "Uma menina abre a porta com as mãos, levando-a para longe dela. É um empurrão ou um puxão?",
+  "certa_pt": "um empurrão",
+  "ex_pt": "A porta vai para longe da menina. É push, empurrar.",
+  "img": null
+ },
+ {
+  "id": "f05",
+  "p": "Two children play tug of war. Is it a push or a pull?",
+  "certa": "a pull",
+  "erradas": [
+   "a push"
+  ],
+  "dica": "Push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "Each child brings the rope closer. Tug of war is a pull.",
+  "p_pt": "Duas crianças brincam de cabo de guerra. É um empurrão ou um puxão?",
+  "certa_pt": "um puxão",
+  "ex_pt": "Cada criança traz a corda para perto. Cabo de guerra é pull, puxar.",
+  "img": "media/cie3/pull-rope.jpg"
+ },
+ {
+  "id": "f06",
+  "p": "The boy moves the wagon. Is it a push or a pull?",
+  "certa": "a pull",
+  "erradas": [
+   "a push"
+  ],
+  "dica": "Push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "The boy holds the handle and the wagon comes after him. That is a pull.",
+  "p_pt": "O menino move o carrinho. É um empurrão ou um puxão?",
+  "certa_pt": "um puxão",
+  "ex_pt": "O menino segura a alça e o carrinho vem atrás. É pull, puxar.",
+  "img": "media/cie3/pull-wagon.jpg"
+ },
+ {
+  "id": "f07",
+  "p": "The girl opens the drawer. Is it a push or a pull?",
+  "certa": "a pull",
+  "erradas": [
+   "a push"
+  ],
+  "dica": "Push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "The drawer comes closer to the girl. Opening a drawer is a pull.",
+  "p_pt": "A menina abre a gaveta. É um empurrão ou um puxão?",
+  "certa_pt": "um puxão",
+  "ex_pt": "A gaveta vem para perto da menina. Abrir gaveta é pull, puxar.",
+  "img": "media/cie3/pull-drawer.jpg"
+ },
+ {
+  "id": "f08",
+  "p": "The boy is fishing with a rod. Is it a push or a pull?",
+  "certa": "a pull",
+  "erradas": [
+   "a push"
+  ],
+  "dica": "Push moves things away, pull brings them closer. What does the picture show?",
+  "ex": "The rod brings the fish closer to the boy. Fishing is a pull.",
+  "p_pt": "O menino pesca com uma vara. É um empurrão ou um puxão?",
+  "certa_pt": "um puxão",
+  "ex_pt": "A vara traz o peixe para perto do menino. Pescar é pull, puxar.",
+  "img": "media/cie3/pull-fish.jpg"
+ },
+ {
+  "id": "f10",
+  "p": "The door says PUSH. Where does the door go?",
+  "certa": "away from her",
+  "erradas": [
+   "closer to her"
+  ],
+  "dica": "Think about the word PUSH on the door.",
+  "ex": "A push moves something away from me. The door goes away from the girl.",
+  "p_pt": "A porta diz PUSH. Para onde a porta vai?",
+  "certa_pt": "para longe dela",
+  "ex_pt": "Push é empurrar: leva algo para longe de mim. A porta vai para longe da menina.",
+  "img": "media/cie3/push-door.jpg"
+ },
+ {
+  "id": "f16",
+  "p": "A push is when I use a force to move something…",
+  "certa": "away from me",
+  "erradas": [
+   "closer to me"
+  ],
+  "dica": "Think of pushing a heavy box.",
+  "ex": "A push moves something away from me.",
+  "p_pt": "Empurrar é quando uso uma força para mover algo…",
+  "certa_pt": "para longe de mim",
+  "ex_pt": "Empurrar move algo para longe de mim.",
+  "img": null
+ },
+ {
+  "id": "f17",
+  "p": "A pull is when I use a force to move something…",
+  "certa": "closer to me",
+  "erradas": [
+   "away from me"
+  ],
+  "dica": "Think of opening a drawer.",
+  "ex": "A pull moves something closer to me.",
+  "p_pt": "Puxar é quando uso uma força para mover algo…",
+  "certa_pt": "para perto de mim",
+  "ex_pt": "Puxar move algo para perto de mim.",
+  "img": null
+ },
+ {
+  "id": "f18",
+  "p": "I use a force to move something away from me. It is…",
+  "certa": "a push",
+  "erradas": [
+   "a pull"
+  ],
+  "dica": "Think of a box going away from you. Which word is it?",
+  "ex": "Away from me is a push. Pushing a box moves it away.",
+  "p_pt": "Uso uma força para mover algo para longe de mim. É…",
+  "certa_pt": "um empurrão",
+  "ex_pt": "Para longe de mim é push, empurrar. Empurrar a caixa a leva para longe.",
+  "img": null
+ },
+ {
+  "id": "f19",
+  "p": "I use a force to move something closer to me. It is…",
+  "certa": "a pull",
+  "erradas": [
+   "a push"
+  ],
+  "dica": "Think of a drawer coming to you. Which word is it?",
+  "ex": "Closer to me is a pull. Pulling a drawer brings it closer.",
+  "p_pt": "Uso uma força para mover algo para perto de mim. É…",
+  "certa_pt": "um puxão",
+  "ex_pt": "Para perto de mim é pull, puxar. Puxar a gaveta a traz para perto.",
+  "img": null
+ },
+ {
+  "id": "f21",
+  "p": "What are the two types of force?",
+  "certa": "push and pull",
+  "erradas": [
+   "up and down",
+   "slow and fast"
+  ],
+  "dica": "One moves things away, the other brings them closer.",
+  "ex": "The two types of force are push and pull.",
+  "p_pt": "Quais são os dois tipos de força?",
+  "certa_pt": "empurrar e puxar",
+  "ex_pt": "Os dois tipos de força são push (empurrar) e pull (puxar).",
+  "img": null
+ },
+ {
+  "id": "f24",
+  "p": "I move a shopping trolley away from me. Is it a push or a pull?",
+  "certa": "a push",
+  "erradas": [
+   "a pull"
+  ],
+  "dica": "Away from me: which word is it?",
+  "ex": "The trolley moves away from me. That is a push.",
+  "p_pt": "Levo o carrinho de compras para longe de mim. É um empurrão ou um puxão?",
+  "certa_pt": "um empurrão",
+  "ex_pt": "O carrinho vai para longe de mim. É push, empurrar.",
+  "img": null
+ },
+ {
+  "id": "f29",
+  "p": "I pick a fruit from the plant. Is it a push or a pull?",
+  "certa": "a pull",
+  "erradas": [
+   "a push"
+  ],
+  "dica": "The fruit leaves the plant and comes to your hand.",
+  "ex": "I bring the fruit from the plant closer to me. That is a pull.",
+  "p_pt": "Colho uma fruta da planta. É um empurrão ou um puxão?",
+  "certa_pt": "um puxão",
+  "ex_pt": "Trago a fruta da planta para perto de mim. É pull, puxar.",
+  "img": null
+ },
+ {
+  "id": "x06",
+  "p": "True or false: we might get lost if we run or don't pay attention.",
+  "certa": "True",
+  "erradas": [
+   "False"
+  ],
+  "dica": "Remember the map slide.",
+  "ex": "True. On a map, pay attention to the details and the path, or you might get lost.",
+  "p_pt": "Verdadeiro ou falso: podemos nos perder se corrermos ou não prestarmos atenção.",
+  "certa_pt": "Verdadeiro",
+  "ex_pt": "Verdadeiro. No mapa, preste atenção nos detalhes e no caminho, ou você pode se perder.",
+  "img": null
+ },
+ {
+  "id": "x08",
+  "p": "Look at the words: behind, next to, in front of, over, in, on, between, under. There is a racket ___ the bag.",
+  "certa": "next to",
+  "erradas": [
+   "over",
+   "between",
+   "behind",
+   "under"
+  ],
+  "dica": "Find the racket in the room.",
+  "ex": "The racket is right beside the bag: next to.",
+  "p_pt": "Olhe as palavras: atrás, ao lado, na frente, por cima, dentro, em cima, entre, embaixo. Tem uma raquete ___ a mochila.",
+  "certa_pt": "ao lado de",
+  "ex_pt": "A raquete está bem ao lado da mochila: ao lado de.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "x09",
+  "p": "Look at the words: behind, next to, in front of, over, in, on, between, under. There is a trophy ___ the books.",
+  "certa": "between",
+  "erradas": [
+   "in",
+   "under",
+   "in front of",
+   "over"
+  ],
+  "dica": "Look at the shelf.",
+  "ex": "There are books on each side of the trophy: between.",
+  "p_pt": "Olhe as palavras: atrás, ao lado, na frente, por cima, dentro, em cima, entre, embaixo. Tem um troféu ___ os livros.",
+  "certa_pt": "entre",
+  "ex_pt": "Há livros de cada lado do troféu: entre.",
+  "img": "media/cie3/room.jpg"
+ },
+ {
+  "id": "x10",
+  "p": "Look at the words: behind, next to, in front of, over, in, on, between, under. There is a window ___ the sofa.",
+  "certa": "behind",
+  "erradas": [
+   "in front of",
+   "under",
+   "on",
+   "in"
+  ],
+  "dica": "The sofa is closer to you.",
+  "ex": "The sofa is in front and the window is at the back: behind.",
+  "p_pt": "Olhe as palavras: atrás, ao lado, na frente, por cima, dentro, em cima, entre, embaixo. Tem uma janela ___ o sofá.",
+  "certa_pt": "atrás de",
+  "ex_pt": "O sofá está na frente e a janela lá atrás: atrás de.",
+  "img": "media/cie3/room.jpg"
+ }
+]

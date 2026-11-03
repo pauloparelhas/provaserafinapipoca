@@ -94,7 +94,7 @@ return [
    R('A bird is flying <b>over</b> the trees.','Um pássaro está voando por cima das árvores.')},
 {tipo:'texto', tit:'In the room', fala:'There is some pizza in the box. There is a guitar between the lamp and the plant. There are two dogs under the table. There is a window behind the sofa.',
   html:fig('room')+caixa('In the room'+tr('Na sala'),'<p>pizza <b>in</b> the box · guitar <b>between</b> the lamp and the plant · two dogs <b>under</b> the table · window <b>behind</b> the sofa · racket <b>next to</b> the bag · cheese <b>on</b> the plate · rug <b>in front of</b> the sofa · lamp <b>under</b> the shelf · trophy <b>between</b> the books · picture <b>on</b> the wall · bird <b>over</b> the trees · two fish <b>in</b> the bowl'+tr('pizza dentro da caixa · violão entre o abajur e a planta · dois cachorros embaixo da mesa · janela atrás do sofá · raquete ao lado da mochila · queijo sobre o prato · tapete na frente do sofá · abajur embaixo da prateleira · troféu entre os livros · quadro na parede · pássaro por cima das árvores · dois peixes no aquário')+'</p>')},
- {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('room',[P('Use the words in the box: behind, next to, in front of, over, in, on, between, under. There is a guitar ___ the lamp and the plant.','Use as palavras da caixa. Tem um violão ___ o abajur e a planta.','between','entre'),P('There is a racket ___ the bag.','Tem uma raquete ___ a mochila.','next to','ao lado de'),P('There is a picture ___ the wall.','Tem um quadro ___ a parede.','on','na')])}
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('room',[P('Use the words in the box: behind, next to, in front of, over, in, on, between, under. There is a guitar ___ the lamp and the plant.','Use as palavras da caixa. Tem um violão ___ o abajur e a planta.','between','entre'),P('There is a racket ___ the bag.','Tem uma raquete ___ mochila.','next to','ao lado da'),P('There is a picture ___ the wall.','Tem um quadro ___ parede.','on','na')])}
 ]},
 
 /* ===================== 3. DIRECTIONS AND MAPS ===================== */
@@ -118,7 +118,7 @@ return [
  treino:[], telas:[
  {tipo:'texto', tit:'Where are you looking from?',
   fala:'Gigi, the giraffe painter, says: We can see many things from different positions, and our perspective changes depending on where we are looking from.',
-  html:R('We can see many things from <b>different</b> positions, and our perspective changes depending on <b>where</b> we are looking from.','Podemos ver muitas coisas de posições diferentes, e nossa perspectiva muda dependendo de ONDE estamos olhando.')},
+  html:R('We can see many things from <b>different</b> positions, and our <b>perspective</b> changes depending on where we are looking from.','Podemos ver muitas coisas de posições diferentes, e nossa perspectiva muda dependendo de onde estamos olhando.')},
  {tipo:'texto', tit:'The Eiffel Tower',
   fala:'The Eiffel Tower, seen from the front, from the top, from the side and from the bottom. It is the same tower.',
   html:grade(2,[['view-front','seen from the <b>front</b>','vista de frente'],['view-top','seen from the <b>top</b>','vista de cima'],['view-side','seen from the <b>side</b>','vista de lado'],['view-bottom','seen from the <b>bottom</b>','vista de baixo']])+
@@ -128,13 +128,13 @@ return [
   html:fig('view-shadow',300)+
    R('One object. A different shadow on each side: <b>triangle</b>, <b>rectangle</b>, <b>circle</b>.','Um só objeto. Uma sombra diferente de cada lado: triângulo, retângulo, círculo.')},
  {tipo:'texto', tit:'A different view',
-  fala:'People are not right or wrong. They just have a different view of things.',
-  html:fig('view-giraffe',240)+R('“People are not right or wrong. They just have a <b>different view</b> of things.”','As pessoas não estão certas nem erradas; elas só têm uma visão diferente das coisas.')},
- {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('view-bottom',[P('Look at the picture. The tower is seen from the ___.','Olhe a figura. A torre é vista de ___.','bottom','baixo'),P('Our perspective changes depending on ___ we are looking from.','Nossa perspectiva muda dependendo de ___ estamos olhando.','where','onde'),P('Complete: People are not right or wrong. They just have a different ___ of things.','As pessoas não estão certas nem erradas; só têm outra ___ das coisas.','view','visão')])}
+  fala:'The giraffe and the woman look at the painting from different positions. People are not right or wrong. They just have a different view of things.',
+  html:fig('view-giraffe',240)+R('The giraffe and the woman look at the painting from different positions.','A girafa e a mulher olham o quadro de posições diferentes.')+R('“People are not right or wrong. They just have a <b>different view</b> of things.”','As pessoas não estão certas nem erradas; elas só têm uma visão diferente das coisas.')},
+ {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('view-bottom',[P('Look at the picture. The tower is seen from the ___.','Olhe a figura. A torre é vista de ___.','bottom','baixo'),P('Our ___ changes depending on where we are looking from.','Nossa ___ muda dependendo de onde estamos olhando.','perspective','perspectiva'),P(fig('view-giraffe',200)+'The giraffe and the woman look at the painting from different positions. Complete: People are not right or wrong. They just have a different ___ of things.','A girafa e a mulher olham o quadro de posições diferentes. Complete: as pessoas não estão certas nem erradas; elas só têm uma ___ diferente das coisas.','view','visão')])}
 ]},
 
 /* ===================== 5. WIND AND WATER ===================== */
-{k:'forcas', tema:'forces', nome:'Wind and water: helpful and harmful', nome_pt:'Vento e água: úteis e perigosos', cor:'#38bdf8', quem:'Breezy and Drop',
+{k:'forcas', tema:'forces', nome:'Wind and water: helpful and harmful', nome_pt:'Vento e água: úteis e prejudiciais', cor:'#38bdf8', quem:'Breezy and Drop',
  treino:[], telas:[
  {tipo:'texto', tit:'Two natural forces',
   fala:'Breezy and Drop say: Wind and water are two natural forces that exist in nature, and they can be helpful and harmful to us.',
@@ -146,9 +146,9 @@ return [
   fala:'Harmful: tsunami, heavy rain and floods, tornado, strong winds.',
   html:grade(2,[['harm-tsunami','<b>tsunami</b>','tsunami'],['harm-floods','<b>heavy rain and floods</b>','chuva forte e enchentes'],['harm-tornado','<b>tornado</b>','tornado'],['harm-winds','<b>strong winds</b>','ventos fortes']])},
  {tipo:'texto', tit:'What wind and water do',
-  fala:'Wind is air in motion. Wind moves sand and makes dunes. It fills the sails of boats and turns wind turbines. Rivers flow downhill. Water wears rock away. Water makes energy, carries boats and waters the fields.',
-  html:caixa('Wind'+tr('Vento'),'<p>Wind is <b>air in motion</b>.'+tr('Vento é ar em movimento.')+'<br>It moves <b>sand</b> and makes <b>dunes</b>.'+tr('Move a areia e faz dunas.')+'<br>It fills <b>sails</b> and turns <b>wind turbines</b>.'+tr('Enche as velas e gira as turbinas.')+'</p>')+esp()+
-   caixa('Water'+tr('Água'),'<p>Rivers flow <b>downhill</b>.'+tr('Os rios descem.')+'<br>It wears <b>rock</b> away.'+tr('Desgasta a pedra.')+'<br>It makes <b>energy</b>, carries <b>boats</b> and waters the <b>fields</b>.'+tr('Faz energia, leva barcos e rega os campos.')+'</p>')},
+  fala:'Wind is air in motion. It fills the sails of boats and turns wind turbines. Water makes energy, carries boats and waters the plants.',
+  html:caixa('Wind'+tr('Vento'),'<p>Wind is <b>air in motion</b>.'+tr('Vento é ar em movimento.')+'<br>It fills <b>sails</b> and turns <b>wind turbines</b>.'+tr('Enche as velas e gira as turbinas.')+'</p>')+esp()+
+   caixa('Water'+tr('Água'),'<p>Water makes <b>energy</b>, carries <b>boats</b> and waters the <b>plants</b>.'+tr('A água faz energia, leva barcos e rega as plantas.')+'</p>')},
  {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('harm-floods',[P('Wind and water are two ___ forces.','Vento e água são duas forças ___.','natural','naturais'),P('Look at the picture. Is it helpful or harmful?','Olhe a figura. Ajuda ou prejudica?','harmful','prejudica')])}
 ]},
 
@@ -193,19 +193,19 @@ return [
   html:   R('A push is when I use a <b>force</b> to move something <b>away from me</b>.','Push é quando uso uma força para mover algo para longe de mim.')+
    R('A pull is when I use a <b>force</b> to move something <b>closer to me</b>.','Pull é quando uso uma força para trazer algo para perto de mim.')},
  {tipo:'texto', tit:'Push',
-  fala:'Push: riding a bike, pushing a box, pushing a door, kicking a ball. They move away from me.',
+  fala:'Push: riding a bike, pushing a box, pushing a door, kicking a ball.',
   html:grade(2,[['push-bike','riding a bike','andar de bicicleta'],['push-box','pushing a box','empurrar uma caixa'],['push-door','pushing a door','empurrar uma porta'],['push-ball','kicking a ball','chutar uma bola']])+
    R('Push: <b>away from me</b>.','Push = empurrar: para longe de mim.')},
  {tipo:'texto', tit:'Pull',
-  fala:'Pull: tug of war with a rope, pulling a wagon, opening a drawer, fishing with a rod. They move closer to me.',
+  fala:'Pull: tug of war with a rope, pulling a wagon, opening a drawer, fishing with a rod.',
   html:grade(2,[['pull-rope','tug of war with a rope','cabo de guerra com corda'],['pull-wagon','pulling a wagon','puxar um carrinho'],['pull-drawer','opening a drawer','abrir uma gaveta'],['pull-fish','fishing with a rod','pescar com vara']])+
    R('Pull: <b>closer to me</b>.','Pull = puxar: para perto de mim.')},
  {tipo:'texto', tit:'More examples',
-  fala:'Force makes things move from one place to another. There are two types of force: push and pull. Push and pull are opposite forces. Push: a shopping trolley, a volleyball, playing the piano, the golfer hitting the ball. Pull: holding the rope of a kite, picking fruit and vegetables from the plant.',
-  html:R('Force makes things move from one place to another.','A força faz as coisas irem de um lugar para outro.')+
+  fala:'A push or a pull can make things move from one place to another. There are two types of force: push and pull. Push and pull are opposite forces. Push: a shopping trolley, a volleyball, the golfer hitting the ball. Pull: pulling the rope of a kite, picking fruit and vegetables from the plant.',
+  html:R('A <b>push</b> or a <b>pull</b> can make things move from one place to another.','Empurrar ou puxar pode fazer as coisas irem de um lugar para outro.')+
    R('Two types of force: <b>push</b> and <b>pull</b>. They are <b>opposite</b> forces.','Dois tipos de força: push e pull. São forças opostas.')+
-   caixa('Push'+tr('Empurrar'),'<p>a shopping trolley'+tr('carrinho de compras')+'<br>a volleyball'+tr('bola de vôlei')+'<br>playing the piano'+tr('tocar piano')+'<br>the golfer hitting the ball'+tr('o golfista batendo na bola')+'</p>','#f97316')+esp()+
-   caixa('Pull'+tr('Puxar'),'<p>holding the rope of a kite'+tr('segurar a linha da pipa')+'<br>picking fruit and vegetables from the plant'+tr('colher frutas e verduras da planta')+'</p>','#f97316')},
+   caixa('Push'+tr('Empurrar'),'<p>a shopping trolley'+tr('carrinho de compras')+'<br>a volleyball'+tr('bola de vôlei')+'<br>the golfer hitting the ball'+tr('o golfista batendo na bola')+'</p>','#f97316')+esp()+
+   caixa('Pull'+tr('Puxar'),'<p>pulling the rope of a kite'+tr('puxar a linha da pipa')+'<br>picking fruit and vegetables from the plant'+tr('colher frutas e verduras da planta')+'</p>','#f97316')},
  {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('pull-wagon',[P('Look at the picture. Is it a push or a pull?','Olhe a figura. É push ou pull?','a pull','puxar'),P('Complete: A push is when I use a force to move something ___ from me.','Complete: push é usar força para mover algo ___ de mim.','away','para longe'),P('Complete: A pull is when I use a force to move something ___ to me.','Complete: pull é usar força para mover algo ___ de mim.','closer','para perto')])}
 ]}
 

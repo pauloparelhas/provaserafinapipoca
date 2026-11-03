@@ -1,0 +1,1082 @@
+[
+ {
+  "id": "a01",
+  "onde": "aderencia_banco.json:a01",
+  "texto": "Where is the teddy bear? => in the box",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The teddy bear is in the box.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a04",
+  "onde": "aderencia_banco.json:a04",
+  "texto": "Where is the apple? => on the book",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The apple is on the book.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a07",
+  "onde": "aderencia_banco.json:a07",
+  "texto": "Where is the ball? => under the table",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The ball is under the table.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a09",
+  "onde": "aderencia_banco.json:a09",
+  "texto": "Where is the boy? => behind the tree",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The boy is behind the tree.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a12",
+  "onde": "aderencia_banco.json:a12",
+  "texto": "Where is the dog? => in front of the chair",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The dog is in front of the chair.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a16",
+  "onde": "aderencia_banco.json:a16",
+  "texto": "Where is the teddy bear? => between the two plants",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The teddy bear is between the two plants.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a19",
+  "onde": "aderencia_banco.json:a19",
+  "texto": "Where is the clock? => next to the lamp",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The clock is next to the lamp.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a22",
+  "onde": "aderencia_banco.json:a22",
+  "texto": "Where is the tree? => near the house",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The tree is near the house.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a24",
+  "onde": "aderencia_banco.json:a24",
+  "texto": "Where is the tree? => far from the house",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The tree is far from the house.' (seta comprida)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a28",
+  "onde": "aderencia_banco.json:a28",
+  "texto": "Where is the lamp? => above the table",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The lamp is above the table.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a31",
+  "onde": "aderencia_banco.json:a31",
+  "texto": "Where is the cat? => below the shelf",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The cat is below the shelf.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a32",
+  "onde": "aderencia_banco.json:a32",
+  "texto": "Where are the books? => on the shelf",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): figura BELOW: livros e vaso em cima da prateleira; 'The apple is on the book.' (atomo on)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a34",
+  "onde": "aderencia_banco.json:a34",
+  "texto": "What is below the shelf? => the cat",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The cat is below the shelf.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a35",
+  "onde": "aderencia_banco.json:a35",
+  "texto": "Where is the fish? => inside the bowl",
+  "lastro": "fontes/3tri/CIE/zip/p04.jpeg (poster Prepositions of Place): 'The fish is inside the bowl.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a38",
+  "onde": "aderencia_banco.json:a38",
+  "texto": "Look at the window. The bird is flying ___ the trees. => over",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '11- There is a bird flying ___ the trees.' (box: over); figura: passaro acima das arvores",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a41",
+  "onde": "aderencia_banco.json:a41",
+  "texto": "Look at the table. Where is the pizza? => in the box",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '1- There is some pizza ___ the box.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a42",
+  "onde": "aderencia_banco.json:a42",
+  "texto": "There is a guitar ___ the lamp and the plant. => between",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '2- There is a guitar ___ the lamp and the plant.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a43",
+  "onde": "aderencia_banco.json:a43",
+  "texto": "Where are the two dogs? => under the table",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '3- There are two dogs ___ the table.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a46",
+  "onde": "aderencia_banco.json:a46",
+  "texto": "The cheese is ___ the plate. => on",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '7- There is some cheese ___ the plate.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a47",
+  "onde": "aderencia_banco.json:a47",
+  "texto": "The rug is ___ the sofa. => in front of",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '5- There is a rug ___ the sofa.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a48",
+  "onde": "aderencia_banco.json:a48",
+  "texto": "Where is the lamp? => under the shelf",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '8- There is a lamp ___ the shelf.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a50",
+  "onde": "aderencia_banco.json:a50",
+  "texto": "Where is the picture? => on the wall",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '10- There is a picture ___ the wall.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "a51",
+  "onde": "aderencia_banco.json:a51",
+  "texto": "The two fish are ___ the bowl. => in",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '12- There are two fish ___ the bowl.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "d01",
+  "onde": "aderencia_banco.json:d01",
+  "texto": "Look at the map. Which section is on the left of the Auditorium? => A section",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): mapa da escola (A section | Auditorium | B section; Entrance abaixo) + Conteudos das AFs - 3 Tri.pdf: 'Directions (eg. left, right, between, under...)'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "d02",
+  "onde": "aderencia_banco.json:d02",
+  "texto": "The B section is on the ___ of the Auditorium. => right",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): mapa da escola (A section | Auditorium | B section; Entrance abaixo) + Conteudos das AFs - 3 Tri.pdf: 'Directions (eg. left, right, between, under...)'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "d03",
+  "onde": "aderencia_banco.json:d03",
+  "texto": "What is between the A section and the B section? => the Auditorium",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): mapa da escola (A section | Auditorium | B section; Entrance abaixo) + Conteudos das AFs - 3 Tri.pdf: 'Directions (eg. left, right, between, under...)'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "d09",
+  "onde": "aderencia_banco.json:d09",
+  "texto": "Where is the Entrance? => under the Auditorium",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): mapa da escola (A section | Auditorium | B section; Entrance abaixo) + Conteudos das AFs - 3 Tri.pdf: 'Directions (eg. left, right, between, under...)'",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "contraexemplo": "No predio real a entrada nao fica debaixo do auditorio.",
+  "motivo": "'The Entrance is under the Auditorium': num predio, a entrada nao fica embaixo do auditorio; 'under' do slide e fisico (ball under the table). So vale como posicao na folha do mapa.",
+  "correcao": {
+   "p": "Look at the map. The word Entrance is ___ the Auditorium.",
+   "p_pt": "Olhe o mapa. A palavra Entrance está ___ o Auditório.",
+   "o": [
+    "below",
+    "above",
+    "between"
+   ],
+   "o_pt": [
+    "abaixo de",
+    "acima de",
+    "entre"
+   ],
+   "ex": "On the map, the Entrance is below the Auditorium.",
+   "ex_pt": "No mapa, a Entrada fica abaixo do Auditório.",
+   "dica_en": "Find the word Entrance. Is it higher or lower than the Auditorium on the map?",
+   "dica": "Ache a palavra Entrance. Ela está mais alta ou mais baixa que o Auditório no mapa?"
+  }
+ },
+ {
+  "id": "d13",
+  "onde": "aderencia_banco.json:d13",
+  "texto": "The red pin marks a place on this map. Which place? => a Year 2 classroom",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): mapa da escola com pino vermelho sobre 'Year 2 Classroom' junto a B section",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "d14",
+  "onde": "aderencia_banco.json:d14",
+  "texto": "The red pin is in which section? => B section",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): mapa da escola com pino vermelho sobre 'Year 2 Classroom' junto a B section",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "d16",
+  "onde": "aderencia_banco.json:d16",
+  "texto": "What kind of map is this? => a map of the school",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): mapa da escola com pino vermelho sobre 'Year 2 Classroom' junto a B section",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "d17",
+  "onde": "aderencia_banco.json:d17",
+  "texto": "A blue line on the screen shows the way to go. What is it? => a GPS route",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): print de mapa de celular com linha azul (sem rotulo); termo 'GPS route' nao aparece em nenhuma fonte",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "d20",
+  "onde": "aderencia_banco.json:d20",
+  "texto": "When we read maps, we need to pay a lot of attention to... => the details and the path",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): 'pay a lot of attention in the details and in the path (way) that we are going'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "d21",
+  "onde": "aderencia_banco.json:d21",
+  "texto": "On a map, the path is… => the way we are going",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): 'pay a lot of attention in the details and in the path (way) that we are going'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "d22",
+  "onde": "aderencia_banco.json:d22",
+  "texto": "We might get ___ if we run or don't pay attention. => lost",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): 'We might get lost if we run or don't pay attention!'",
+  "decisao": "REPROVA",
+  "regras": [
+   "D"
+  ],
+  "contraexemplo": "Correr cansa: 'We might get tired if we run' e verdade.",
+  "motivo": "Distrator 'tired' e verdadeiro: quem corre pode ficar cansado ('We might get tired if we run'). 'late' tambem e defensavel para quem nao presta atencao.",
+  "correcao": {
+   "p": "We might get ___ if we run or don't pay attention.",
+   "p_pt": "Podemos ficar ___ se corrermos ou não prestarmos atenção.",
+   "o": [
+    "lost",
+    "cold",
+    "wet"
+   ],
+   "o_pt": [
+    "perdidos",
+    "com frio",
+    "molhados"
+   ],
+   "ex": "If we run or don't pay attention to the map, we might get lost.",
+   "ex_pt": "Se corremos ou não prestamos atenção no mapa, podemos nos perder.",
+   "dica_en": "What happens when we don't know where we are?",
+   "dica": "O que acontece quando não sabemos mais onde estamos?"
+  }
+ },
+ {
+  "id": "p01",
+  "onde": "aderencia_banco.json:p01",
+  "texto": "This tower is seen from the... => front",
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg (Changing Perspectives): 'seen from the front'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "p02",
+  "onde": "aderencia_banco.json:p02",
+  "texto": "This tower is seen from the... => top",
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg (Changing Perspectives): 'seen from the top'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "p04",
+  "onde": "aderencia_banco.json:p04",
+  "texto": "This tower is seen from the... => bottom",
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg (Changing Perspectives): 'seen from the bottom'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "p08",
+  "onde": "aderencia_banco.json:p08",
+  "texto": "This tower is seen from the... => side",
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg (Changing Perspectives): 'seen from the side' (foto aerea, tirada do alto)",
+  "decisao": "REPROVA",
+  "regras": [
+   "D"
+  ],
+  "contraexemplo": "Foto aerea: quem olha diz 'from the top'.",
+  "motivo": "A foto 'seen from the side' e aerea, tirada do alto: o distrator 'top' e defensavel olhando a figura.",
+  "correcao": {
+   "p": "This tower is seen from the...",
+   "p_pt": "Esta torre é vista de...",
+   "o": [
+    "side",
+    "bottom"
+   ],
+   "o_pt": [
+    "lado (side)",
+    "baixo (bottom)"
+   ],
+   "ex": "This photo shows the tower seen from the side.",
+   "ex_pt": "Esta foto mostra a torre vista de lado.",
+   "dica_en": "Look at the river and the city around the tower.",
+   "dica": "Olhe o rio e a cidade em volta da torre."
+  }
+ },
+ {
+  "id": "p09",
+  "onde": "aderencia_banco.json:p09",
+  "texto": "Complete: Our perspective changes depending on ___ we are looking from. => where",
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg (Changing Perspectives): 'our perspective changes depending on where we are looking from.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "p13",
+  "onde": "aderencia_banco.json:p13",
+  "texto": "What shape is the shadow on the floor? => a circle",
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg (Changing Perspectives): figura do solido com sombras (chao: circulo; parede esq.: triangulo; parede dir.: retangulo)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "p14",
+  "onde": "aderencia_banco.json:p14",
+  "texto": "What shape is the shadow on the left wall? => a triangle",
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg (Changing Perspectives): figura do solido com sombras (chao: circulo; parede esq.: triangulo; parede dir.: retangulo)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "p17",
+  "onde": "aderencia_banco.json:p17",
+  "texto": "Complete: People are not right or wrong. They just have a different ___ of things. => view",
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg (Changing Perspectives): 'People are not right or wrong. They just have a different view of things.' + 'We can see many things from different positions'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "p18",
+  "onde": "aderencia_banco.json:p18",
+  "texto": "The giraffe's head is up high. The woman is down low. Why do they see things differently? => They look from different positions.",
+  "lastro": "fontes/3tri/CIE/zip/p07.jpeg (Changing Perspectives): 'People are not right or wrong. They just have a different view of things.' + 'We can see many things from different positions'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n01",
+  "onde": "aderencia_banco.json:n01",
+  "texto": "Complete: Wind and water are two ___ forces. => natural",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): 'Wind and water are two natural forces that exist in nature'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n03",
+  "onde": "aderencia_banco.json:n03",
+  "texto": "Which of these is HELPFUL water? => water the plants",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): Helpful: 'Water the plants', 'Water to make energy', 'Wind to make energy', 'Wind that spread the seeds'; Harmful: 'Tsunami', 'Heavy rain and floods', 'Tornado', 'Strong winds'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n05",
+  "onde": "aderencia_banco.json:n05",
+  "texto": "Which of these is HARMFUL water? => heavy rain and floods",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): Helpful: 'Water the plants', 'Water to make energy', 'Wind to make energy', 'Wind that spread the seeds'; Harmful: 'Tsunami', 'Heavy rain and floods', 'Tornado', 'Strong winds'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n07",
+  "onde": "aderencia_banco.json:n07",
+  "texto": "What is this? Helpful or harmful? => harmful: a tsunami",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): Helpful: 'Water the plants', 'Water to make energy', 'Wind to make energy', 'Wind that spread the seeds'; Harmful: 'Tsunami', 'Heavy rain and floods', 'Tornado', 'Strong winds'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n08",
+  "onde": "aderencia_banco.json:n08",
+  "texto": "What is this? Helpful or harmful? => harmful: a flood",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): Helpful: 'Water the plants', 'Water to make energy', 'Wind to make energy', 'Wind that spread the seeds'; Harmful: 'Tsunami', 'Heavy rain and floods', 'Tornado', 'Strong winds'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n09",
+  "onde": "aderencia_banco.json:n09",
+  "texto": "What is this? Helpful or harmful? => harmful: a tornado",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): Helpful: 'Water the plants', 'Water to make energy', 'Wind to make energy', 'Wind that spread the seeds'; Harmful: 'Tsunami', 'Heavy rain and floods', 'Tornado', 'Strong winds'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n10",
+  "onde": "aderencia_banco.json:n10",
+  "texto": "What is this? Helpful or harmful? => harmful: strong winds",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): Helpful: 'Water the plants', 'Water to make energy', 'Wind to make energy', 'Wind that spread the seeds'; Harmful: 'Tsunami', 'Heavy rain and floods', 'Tornado', 'Strong winds'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n11",
+  "onde": "aderencia_banco.json:n11",
+  "texto": "What is this? Helpful or harmful? => helpful: waters the plants",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): Helpful: 'Water the plants', 'Water to make energy', 'Wind to make energy', 'Wind that spread the seeds'; Harmful: 'Tsunami', 'Heavy rain and floods', 'Tornado', 'Strong winds'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n12",
+  "onde": "aderencia_banco.json:n12",
+  "texto": "What is this? Helpful or harmful? => helpful: makes energy",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): Helpful: 'Water the plants', 'Water to make energy', 'Wind to make energy', 'Wind that spread the seeds'; Harmful: 'Tsunami', 'Heavy rain and floods', 'Tornado', 'Strong winds'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n13",
+  "onde": "aderencia_banco.json:n13",
+  "texto": "Which natural force turns these blades? => wind",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): 'Wind to make energy' (turbinas) + videos/uz1ggZN94xo.en.vtt: 'Giant wind turbines spin in the breeze'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n14",
+  "onde": "aderencia_banco.json:n14",
+  "texto": "Which natural force spreads these seeds? => wind",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): 'Wind that spread the seeds'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n16",
+  "onde": "aderencia_banco.json:n16",
+  "texto": "Which natural force is this? => water",
+  "lastro": "fontes/3tri/CIE/zip/p08.jpeg (Movement of Water and Wind): 'Tsunami' na coluna da agua (icone gotas)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n19",
+  "onde": "aderencia_banco.json:n19",
+  "texto": "Complete: Wind is ___ in motion. => air",
+  "lastro": "videos/uz1ggZN94xo.en.vtt: 'Wind is just air in motion.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "n23",
+  "onde": "aderencia_banco.json:n23",
+  "texto": "Wind moves sand. What can it make? => dunes",
+  "lastro": "videos/uz1ggZN94xo.en.vtt: 'The wind blows the sand... mountains of sand called dunes' (trecho de curiosidade, sem slide)",
+  "decisao": "REPROVA",
+  "regras": [
+   "L",
+   "N"
+  ],
+  "contraexemplo": "Dunas/canions/vales sao curiosidade do video (nenhum slide, fora do informativo 'Helpful and Harmful examples'); curiosidade de video nao se cobra.",
+  "motivo": "Dunas/canions/vales sao curiosidade do video (nenhum slide, fora do informativo 'Helpful and Harmful examples'); curiosidade de video nao se cobra.",
+  "correcao": "EXCLUIR"
+ },
+ {
+  "id": "n35",
+  "onde": "aderencia_banco.json:n35",
+  "texto": "We need to protect our... => air and water",
+  "lastro": "videos/uz1ggZN94xo.en.vtt: 'We need to protect our air and water'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o01",
+  "onde": "aderencia_banco.json:o01",
+  "texto": "How does it move? => It bounces.",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): bounce - soccer ball",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o06",
+  "onde": "aderencia_banco.json:o06",
+  "texto": "How does it move? => It flies.",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): fly - kite",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o07",
+  "onde": "aderencia_banco.json:o07",
+  "texto": "How does it move? => It rolls.",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): roll - wheel",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o08",
+  "onde": "aderencia_banco.json:o08",
+  "texto": "How does it move? => It rolls.",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): roll - can",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o11",
+  "onde": "aderencia_banco.json:o11",
+  "texto": "How does it move? => It slides.",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): slide - ice cube",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o14",
+  "onde": "aderencia_banco.json:o14",
+  "texto": "How does it move? => It spins.",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): spin - fan",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o15",
+  "onde": "aderencia_banco.json:o15",
+  "texto": "How does it move? => It spins.",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): spin - top",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o18",
+  "onde": "aderencia_banco.json:o18",
+  "texto": "How does it move? => It swings.",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): swing - door",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o19",
+  "onde": "aderencia_banco.json:o19",
+  "texto": "To ___ means to go up and down after hitting a surface. => bounce",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): 'To bounce means to go up and down after hitting a surface.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o20",
+  "onde": "aderencia_banco.json:o20",
+  "texto": "To ___ means to move through the air. => fly",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): 'To fly means to move through the air.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o21",
+  "onde": "aderencia_banco.json:o21",
+  "texto": "To ___ means to move by turning over and over. => roll",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): 'To roll means to move by turning over and over.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o22",
+  "onde": "aderencia_banco.json:o22",
+  "texto": "To ___ means to move smoothly along a surface. => slide",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): 'To slide means to move smoothly along a surface.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o23",
+  "onde": "aderencia_banco.json:o23",
+  "texto": "To ___ means to turn around and around. => spin",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): 'To spin means to turn around and around.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o24",
+  "onde": "aderencia_banco.json:o24",
+  "texto": "To ___ means to move back and forth like a pendulum. => swing",
+  "lastro": "fontes/3tri/CIE/zip/p05.jpeg (Movements of OBJECTS): 'To swing means to move back and forth like a pendulum.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o37",
+  "onde": "aderencia_banco.json:o37",
+  "texto": "Up and down, back and forth, round and round. These words tell us the… => direction",
+  "lastro": "videos/nIvePkFzaMw.en.vtt: 'Things can move in different directions. They can move back and forth, up and down, or round and round.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "o38",
+  "onde": "aderencia_banco.json:o38",
+  "texto": "Things can move at different speeds. They can move… => slow or fast",
+  "lastro": "videos/nIvePkFzaMw.en.vtt: 'Things can move at different speeds. They can move slow or fast.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "m01",
+  "onde": "aderencia_banco.json:m01",
+  "texto": "How does a fish move? => It swims.",
+  "lastro": "Conteudos das AFs - 3 Tri.pdf: 'Lesson 10 - Movement of Animals' + fontes/3tri/CIE/zip/p02.jpeg (body/hand movements): 'swim'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "m09",
+  "onde": "aderencia_banco.json:m09",
+  "texto": "I go up a tree. I use my body. I… => climb",
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (body/hand movements): body list 'swim climb play pick walk sit'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "m11",
+  "onde": "aderencia_banco.json:m11",
+  "texto": "I ___ on a chair. => sit",
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (body/hand movements): body list 'swim climb play pick walk sit'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "m12",
+  "onde": "aderencia_banco.json:m12",
+  "texto": "My legs and feet take me to the door. I… => walk",
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (body/hand movements): body list 'swim climb play pick walk sit'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "m15",
+  "onde": "aderencia_banco.json:m15",
+  "texto": "I use my hand and a pencil. I… => write",
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (body/hand movements): hand list 'touch lift point write grab push'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "m20",
+  "onde": "aderencia_banco.json:m20",
+  "texto": "Which one is on the list of hand movements? => push",
+  "lastro": "fontes/3tri/CIE/zip/p02.jpeg (body/hand movements): hand list 'touch lift point write grab push'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f01",
+  "onde": "aderencia_banco.json:f01",
+  "texto": "Riding a bike. Is it a push or a pull? => a push",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A push is when I use a force to move something away from me.' (figuras: bicicleta, caixa, porta PUSH, chute)",
+  "decisao": "REPROVA",
+  "regras": [
+   "F"
+  ],
+  "contraexemplo": "Na bicicleta nada se afasta de mim: eu vou junto.",
+  "motivo": "Dica 'The feet move the pedals away from the body' inventa fisica (pedal gira, sobe e desce) e ex 'a force away from me' nao cabe na bicicleta, que vai junto comigo. O slide so poe a bicicleta na coluna Push.",
+  "correcao": {
+   "p": "Riding a bike. Is it a push or a pull?",
+   "p_pt": "Andar de bicicleta. É empurrar ou puxar?",
+   "o": [
+    "a push",
+    "a pull"
+   ],
+   "o_pt": [
+    "empurrar",
+    "puxar"
+   ],
+   "ex": "On the slide, riding a bike is a push.",
+   "ex_pt": "No slide, andar de bicicleta é push, empurrar.",
+   "dica_en": "Remember the Push pictures on the slide.",
+   "dica": "Lembre das figuras do lado Push no slide."
+  }
+ },
+ {
+  "id": "f02",
+  "onde": "aderencia_banco.json:f02",
+  "texto": "The boy moves the box. Is it a push or a pull? => a push",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A push is when I use a force to move something away from me.' (figuras: bicicleta, caixa, porta PUSH, chute)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f03",
+  "onde": "aderencia_banco.json:f03",
+  "texto": "Is kicking a ball a push or a pull? => a push",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A push is when I use a force to move something away from me.' (figuras: bicicleta, caixa, porta PUSH, chute)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f04",
+  "onde": "aderencia_banco.json:f04",
+  "texto": "A girl opens a door with her hands, moving it away from her. Is it a push or a pull? => a push",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A push is when I use a force to move something away from me.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f05",
+  "onde": "aderencia_banco.json:f05",
+  "texto": "Two children play tug of war. Is it a push or a pull? => a pull",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A pull is when I use a force to move something closer to me.' (figuras: cabo de guerra, carrinho, gaveta, pesca)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f06",
+  "onde": "aderencia_banco.json:f06",
+  "texto": "The boy moves the wagon. Is it a push or a pull? => a pull",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A pull is when I use a force to move something closer to me.' (figuras: cabo de guerra, carrinho, gaveta, pesca)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f07",
+  "onde": "aderencia_banco.json:f07",
+  "texto": "The girl opens the drawer. Is it a push or a pull? => a pull",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A pull is when I use a force to move something closer to me.' (figuras: cabo de guerra, carrinho, gaveta, pesca)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f08",
+  "onde": "aderencia_banco.json:f08",
+  "texto": "The boy is fishing with a rod. Is it a push or a pull? => a pull",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A pull is when I use a force to move something closer to me.' (figuras: cabo de guerra, carrinho, gaveta, pesca)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f10",
+  "onde": "aderencia_banco.json:f10",
+  "texto": "The door says PUSH. Where does the door go? => away from her",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A push is when I use a force to move something away from me.' (figuras: bicicleta, caixa, porta PUSH, chute)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f16",
+  "onde": "aderencia_banco.json:f16",
+  "texto": "A push is when I use a force to move something… => away from me",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A push is when I use a force to move something away from me.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f17",
+  "onde": "aderencia_banco.json:f17",
+  "texto": "A pull is when I use a force to move something… => closer to me",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A pull is when I use a force to move something closer to me.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f18",
+  "onde": "aderencia_banco.json:f18",
+  "texto": "I use a force to move something away from me. It is… => a push",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A push is when I use a force to move something away from me.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f19",
+  "onde": "aderencia_banco.json:f19",
+  "texto": "I use a force to move something closer to me. It is… => a pull",
+  "lastro": "fontes/3tri/CIE/zip/p06.jpeg (Push / Pull): 'A pull is when I use a force to move something closer to me.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f21",
+  "onde": "aderencia_banco.json:f21",
+  "texto": "What are the two types of force? => push and pull",
+  "lastro": "videos/sva0ZRfFx4k.en.vtt: 'force is a motion that is either a push or a pull' / quiz 'what are the two types of forces'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f24",
+  "onde": "aderencia_banco.json:f24",
+  "texto": "I move a shopping trolley away from me. Is it a push or a pull? => a push",
+  "lastro": "videos/sva0ZRfFx4k.en.vtt: 'shopping trolley... moving something away from you'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "f29",
+  "onde": "aderencia_banco.json:f29",
+  "texto": "I pick a fruit from the plant. Is it a push or a pull? => a pull",
+  "lastro": "videos/sva0ZRfFx4k.en.vtt: 'to pick the produce you have to pull the fruit... bring it towards you'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "x06",
+  "onde": "aderencia_banco.json:x06",
+  "texto": "True or false: we might get lost if we run or don't pay attention. => True",
+  "lastro": "fontes/3tri/CIE/zip/p01.jpeg (Activate - Reading Map): 'We might get lost if we run or don't pay attention!'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "x08",
+  "onde": "aderencia_banco.json:x08",
+  "texto": "Look at the words: behind, next to, in front of, over, in, on, between, under. There is a racket ___ the bag. => next to",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '6- There is a racket ___ the bag.' + box 'behind next to in front of over in on between under'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "x09",
+  "onde": "aderencia_banco.json:x09",
+  "texto": "Look at the words: behind, next to, in front of, over, in, on, between, under. There is a trophy ___ the books. => between",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '9- There is a trophy ___ the books.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "x10",
+  "onde": "aderencia_banco.json:x10",
+  "texto": "Look at the words: behind, next to, in front of, over, in, on, between, under. There is a window ___ the sofa. => behind",
+  "lastro": "fontes/3tri/CIE/zip/p03.jpeg (worksheet Prepositions of Place, quarto): '4- There is a window ___ the sofa.'",
+  "decisao": "LIBERA",
+  "regras": [],
+  "contraexemplo": "",
+  "correcao": ""
+ }
+]

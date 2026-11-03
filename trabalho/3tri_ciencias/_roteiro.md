@@ -30,7 +30,7 @@ Unit 3 — Position and Motion. Prova em INGLÊS: tela inteira em inglês, portu
 ### T4 · NATURAL FORCES: WIND AND WATER (L7; S8, V3)
 - N1 Wind and water are two natural forces that exist in nature, and they can be helpful and harmful to us.
 - N2 HELPFUL: water the plants; water to make energy; wind to make energy; wind that spreads the seeds. N3 HARMFUL: tsunami; heavy rain and floods; tornado; strong winds.
-- N4 (V3) Wind is air in motion: gentle breeze ou mighty gust. Blowing bubbles makes wind; a kite flies with the wind. N5 (V3) Wind moves sand and makes dunes; wind and sand wear rock (arches). N6 (V3) Rivers flow downhill; water wears rock and makes valleys and canyons; rain carries soil away. N7 (V3) Uses: wind = sailing, turbines (electricity), kites; water = hydroelectricity (dams), boats/ships, farmers water fields, drinking, cooking, washing; wind spreads seeds; rivers are home to fish and frogs. N8 (V3) We need to protect our air and water.
+- N4 (V3) Wind is air in motion: gentle breeze ou mighty gust. Blowing bubbles makes wind; a kite flies with the wind. N5/N6: curiosidade de V3, NÃO ensinar nem cobrar. N7 (V3) Uses: wind = sailing, turbines (electricity), kites; water = hydroelectricity (dams), boats/ships, farmers water fields, drinking, cooking, washing; wind spreads seeds; rivers are home to fish and frogs. N8 (V3) We need to protect our air and water.
 - Curiosidades de V3 (Netuno, cometas, 60 % do corpo…) NÃO se cobram: ficam fora.
 
 ### T5 · MOVEMENT OF OBJECTS (L8; S5, V1)
@@ -44,12 +44,12 @@ Unit 3 — Position and Motion. Prova em INGLÊS: tela inteira em inglês, portu
 
 ### T6 · MOVEMENT OF ANIMALS AND OF OUR BODY (L10; S2, V1) — ver LACUNA
 - M1 Body (S2): swim, climb, play, walk, pick, sit. M2 Hand (S2): touch, lift, point, write, grab, push.
-- M3 Animais (só exemplos sem ambiguidade): a fish swims; a bird flies; a monkey climbs; a dog walks and runs; a kangaroo and a frog jump; a snake crawls/slides on the ground. Regra: nunca perguntar bicho que faz várias coisas sem contexto (pato anda, nada e voa).
+- M3 Animais (sem slide): a fish swims; a bird flies; a monkey climbs; a dog walks and runs; a kangaroo and a frog jump; a snake crawls on the ground. Nunca pôr crawl e slide como opções juntas. Regra: nunca perguntar bicho que faz várias coisas sem contexto (pato anda, nada e voa).
 
 ### T7 · PUSH OR PULL (L11; S6, V2)
 - F1 A push is when I use a force to move something AWAY FROM ME. F2 A pull is when I use a force to move something CLOSER TO ME.
 - F3 S6 push: riding a bike, pushing a box, pushing a door, kicking a ball. F4 S6 pull: tug of war with a rope, pulling a wagon, opening a drawer, fishing with a rod.
-- F5 (V2) Force makes things move from one place to another; push and pull are OPPOSITE forces; os dois tipos de força são push e pull. F6 (V2) push: shopping trolley, volleyball, playing the piano, the golfer hitting the ball. F7 (V2) pull: holding the rope of a kite, picking fruit and vegetables from the plant.
+- F5 (V2) A push or a pull can make things move from one place to another; push and pull are OPPOSITE forces; os dois tipos de força do vídeo são push e pull. F6 (V2) push: shopping trolley, volleyball, the golfer hitting the ball. F7 (V2) pull: pulling the rope of a kite, picking fruit and vegetables from the plant.
 
 ## Nível (ordem do Paulo, 02/11)
 Nada de pares que enganam nem pegadinha: os slides mostram cada palavra com sua figura e nunca contrapõem palavras parecidas. A prova é de Y2: nível exigido pelo material, nada além. Distrator = outra palavra do slide, bem distinta.
