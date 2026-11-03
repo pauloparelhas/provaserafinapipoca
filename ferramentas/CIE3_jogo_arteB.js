@@ -207,22 +207,60 @@ function planta(c,comPino){
   [1085,1170,1254,1340,1424,1498].forEach(function(x,i){ rot(c,x,792,-.1,function(){ txt(c,'Drive',0,0,13,'#222',800); }); });
   if(comPino) pinoV(c,1447,486,.72);
 }
-A.CENAS.bosque={ceu:['#f2fbdf','#f6fce8','#eef8d8'], chaoTop:'#c2c6c2', chao:'#9aa09c', chaoBase:'#6c726e', plat:'#a2a6a4', platTop:'#d6d9d6', part:'', musica:'floresta'};
-function ceuBosque(c){ ceuG(c,[[0,'#f3fce2'],[1,'#ecf7d6']]); }
-function mapaCidade(c,x,y,w,h){ /* o mapa de ruas laranja + GPS do slide S1 */
-  box(c,x,y,w,h,'#e9e6dc',1,1.5); c.save(); rr(c,x,y,w,h,1); c.clip();
-  c.fillStyle='#bfe0a8'; poly(c,[[x+40,y+80],[x+150,y+40],[x+240,y+100],[x+160,y+170]]); c.fill();
-  c.strokeStyle='#ee8a3a'; c.lineWidth=3; for(var i=0;i<9;i++){ linha(c,x+i*50-30,y,x+i*40+50,y+h); linha(c,x,y+i*44,x+w,y+i*30+30); } c.lineWidth=1; c.strokeStyle='#d4cdbc'; for(i=0;i<24;i++){ linha(c,x+i*22,y,x+i*22,y+h); linha(c,x,y+i*20,x+w,y+i*20); }
-  c.fillStyle='#7ec8ea'; c.beginPath(); c.moveTo(x,y+h*.72); c.quadraticCurveTo(x+w*.4,y+h*.6,x+w*.6,y+h); c.lineTo(x,y+h); c.fill();
-  c.strokeStyle='#3a3ad4'; c.lineWidth=5; c.setLineDash([12,8]); c.beginPath(); c.moveTo(x+40,y+h-30); c.lineTo(x+120,y+h-90); c.lineTo(x+110,y+150); c.lineTo(x+220,y+110); c.lineTo(x+250,y+36); c.stroke(); c.setLineDash([]); c.restore();
-  pinoV(c,x+250,y+36,1.1);
-}
+A.CENAS.bosque={ceu:['#2f8fe6','#9fd6f7','#eaf7ff'], chaoTop:'#7cc548', chao:'#5c6670', chaoBase:'#343a42', plat:'#f0a93b', platTop:'#ffd166', part:'polen', musica:'floresta'};
+/* A escola de verdade, vista de frente (os lugares do slide mapa.jpg: Gym / Court 1 e 2, A/B/C section, Year 1 e Year 2,
+   Auditorium, Entrance, Treehouse, Trix, Patio, Drive), colorida e alegre. Nada de planta. */
+function ceuBosque(c,t){ ceuG(c,[[0,'#2b8ae6'],[.55,'#8fcdf4'],[1,'#eaf7ff']]); sol(c,820,84,30,'#fff3b0','rgba(255,240,170,.35)'); [[80,70,1.1],[400,124,.8],[650,60,1]].forEach(function(n,i){ nuvemF(c,mod(n[0]+t*(3+i),W+240)-120,n[1],n[2],'#fff','#dcebf7',.95); }); }
+function janela(c,x,y,w,h){ box(c,x-3,y-3,w+6,h+6,'#fff',3,2); box(c,x,y,w,h,lin(c,0,y,0,y+h,'#c4ecfc','#5fb6ea'),2,1.5); c.fillStyle='rgba(255,255,255,.6)'; c.fillRect(x+3,y+3,w*.32,h*.42); c.strokeStyle='#fff'; c.lineWidth=2; linha(c,x+w/2,y+1,x+w/2,y+h-1); linha(c,x+1,y+h/2,x+w-1,y+h/2); }
+function telhado(c,x0,x1,y,alt,cor,cor2){ poly(c,[[x0-16,y],[x1+16,y],[x1,y-alt],[x0,y-alt]]); fs(c,lin(c,0,y-alt,0,y,cor,cor2),2.5); c.strokeStyle='rgba(0,0,0,.16)'; c.lineWidth=1.5; for(var k=1;k<6;k++){ var u=k/6; linha(c,x0-16+(x1-x0+32)*u,y,x0+(x1-x0)*u,y-alt); } }
+function bloco(c,x,y,w,h,cor,cor2){ box(c,x,y-h,w,h,lin(c,0,y-h,0,y,cor,cor2),3,2.5); c.fillStyle='rgba(255,255,255,.28)'; c.fillRect(x+4,y-h+4,w-8,7); c.fillStyle='rgba(0,0,0,.08)'; c.fillRect(x+4,y-10,w-8,8); }
+function portaDupla(c,x,y,w,h,cor){ box(c,x-8,y-h-8,w+16,h+8,'#fff',3,2.5); box(c,x,y-h,w,h,lin(c,0,y-h,0,y,cor,'#8a3a2a'),2,2); c.strokeStyle='rgba(255,255,255,.5)'; c.lineWidth=2; linha(c,x+w/2,y-h+4,x+w/2,y-4); box(c,x+6,y-h+8,w/2-12,h*.4,'#c4ecfc',2,1.5); box(c,x+w/2+6,y-h+8,w/2-12,h*.4,'#c4ecfc',2,1.5); c.fillStyle='#f2c23a'; circ(c,x+w/2-6,y-h*.45,2.5); c.fill(); circ(c,x+w/2+6,y-h*.45,2.5); c.fill(); }
+function arbustoF(c,x,y,r,cor){ [[-r*.6,0,r*.75],[r*.6,0,r*.75],[0,-r*.3,r]].forEach(function(b){ circ(c,x+b[0],y+b[1],b[2]); fs(c,cor||'#4f9e45',1.6,'rgba(20,70,20,.6)'); }); c.fillStyle='#ff6fa3'; [[-r*.5,-r*.2],[r*.3,-r*.6],[r*.7,0]].forEach(function(p){ circ(c,x+p[0],y+p[1],r*.14); c.fill(); }); c.fillStyle='#fde047'; circ(c,x-r*.1,y-r*.9,r*.14); c.fill(); }
+function arvoreG(c,x,y,h,cor){ box(c,x-h*.06,y-h*.5,h*.12,h*.5,'#8a5a30',3,2); [[0,-h*.78,h*.3],[-h*.22,-h*.6,h*.24],[h*.22,-h*.6,h*.24],[0,-h*.5,h*.22]].forEach(function(b){ circ(c,x+b[0],y+b[1],b[2]); fs(c,cor||'#4f9e45',2,'rgba(20,70,20,.6)'); }); c.fillStyle='rgba(255,255,255,.18)'; circ(c,x-h*.1,y-h*.86,h*.12); c.fill(); }
 function escolaLonge(c){
-  c.fillStyle='#f3fce2'; c.fillRect(0,0,1500,470); c.fillStyle='rgba(120,170,90,.16)'; for(var y=30;y<470;y+=30) c.fillRect(0,y,1500,1); for(var x=30;x<1500;x+=30) c.fillRect(x,0,1,470);
-  c.save(); c.translate(36,0); c.scale(1.3,.95); c.translate(-992,-258); planta(c,true); c.restore();
-  c.strokeStyle='#111'; c.lineWidth=4; c.strokeRect(36,1,773,470);
-  mapaCidade(c,990,30,380,400);
-  rot(c,1430,200,-.05,function(){ pinoV(c,0,70,2.6); });
+  var P=1800, x, i;
+  /* colinas ao fundo */
+  c.fillStyle='#a9e06e'; c.beginPath(); c.moveTo(0,470); for(x=0;x<=P;x+=20) c.lineTo(x,330+Math.sin(x*TAU/900)*26+Math.sin(x*TAU/380)*8); c.lineTo(P,470); c.fill();
+  c.fillStyle='#84cc54'; c.beginPath(); c.moveTo(0,470); for(x=0;x<=P;x+=20) c.lineTo(x,386+Math.sin(x*TAU/700+2)*12); c.lineTo(P,470); c.fill();
+  for(i=0;i<18;i++){ x=hash(i*4.3)*P; var r=14+hash(i)*8; c.fillStyle='#8a5a30'; c.fillRect(x-3,418,6,32); circ(c,x,404,r); fs(c,i%2?'#4f9e45':'#3f8f3a',1.5,'rgba(20,70,20,.5)'); }
+  /* GYM / COURT 1: galpão azul de teto curvo */
+  c.beginPath(); c.moveTo(50,450); c.lineTo(50,300); c.quadraticCurveTo(170,196,290,300); c.lineTo(290,450); c.closePath(); fs(c,lin(c,0,230,0,450,'#a8d8f6','#4f9ad8'),2.5);
+  c.beginPath(); c.moveTo(50,300); c.quadraticCurveTo(170,196,290,300); c.lineTo(290,320); c.quadraticCurveTo(170,218,50,320); c.closePath(); fs(c,'#f05a45',2);
+  [64,118,206,260].forEach(function(xx){ janela(c,xx,336,36,30); }); portaDupla(c,140,450,60,66,'#2f4bb0');
+  circ(c,170,352,20); fs(c,'#f08a2a',2); c.strokeStyle='#222'; c.lineWidth=1.6; linha(c,150,352,190,352); linha(c,170,332,170,372); c.beginPath(); c.arc(156,352,14,-1,1); c.stroke(); c.beginPath(); c.arc(184,352,14,PI-1,PI+1); c.stroke();
+  placaTexto(c,170,282,'Gym / Court 1',16,'#2a2018','#fff7d8');
+  arvoreG(c,318,450,120); arvoreG(c,22,450,96,'#3f8f3a');
+  /* PRÉDIO PRINCIPAL: ala A (coral), bloco central (amarelo) com a C section em cima, ala B (azul) */
+  telhado(c,340,600,282,30,'#f26a52','#c8362a'); bloco(c,340,450,262,168,'#ffb59a','#f28a6a');
+  telhado(c,900,1160,282,30,'#f26a52','#c8362a'); bloco(c,898,450,262,168,'#a9dcf8','#6fbcee');
+  telhado(c,600,900,160,32,'#f26a52','#c8362a'); bloco(c,600,220,300,60,'#b9efc9','#7fd49c'); bloco(c,600,450,300,230,'#ffd34d','#f2a93b');
+  /* torre do sino e o pino no topo do centro */
+  box(c,724,96,52,36,'#fff7d8',3,2.5); poly(c,[[716,96],[750,70],[784,96]]); fs(c,'#c8362a',2.5); c.beginPath(); c.arc(750,120,9,PI,0); c.fillStyle='#f2c23a'; c.fill(); c.strokeStyle=OL; c.lineWidth=1.6; c.stroke(); box(c,740,120,20,4,'#d9a21e',1,1.4);
+  c.strokeStyle='#555'; c.lineWidth=2; linha(c,884,130,884,80); poly(c,[[884,80],[912,88],[884,96]]); fs(c,'#3fb04a',1.2);
+  /* janelas e portas das alas; Year 1 à esquerda, Year 2 à direita (como no slide) */
+  [362,416,470,524].forEach(function(xx){ janela(c,xx,310,42,34); janela(c,xx,380,42,34); }); placaTexto(c,470,262,'A section',16,'#2a2018','#fff7d8'); placaTexto(c,392,352,'Year 1',12,'#2a2018','#fff7d8');
+  [920,974,1028,1082].forEach(function(xx){ janela(c,xx,310,42,34); janela(c,xx,380,42,34); }); placaTexto(c,1030,262,'B section',16,'#2a2018','#fff7d8'); placaTexto(c,1108,352,'Year 2',12,'#2a2018','#fff7d8');
+  [614,668,800,854].forEach(function(xx){ janela(c,xx,176,36,28); }); placaTexto(c,750,190,'C section',16,'#2a2018','#fff7d8');
+  [624,678,828,882].forEach(function(xx){ janela(c,xx,262,36,30); });
+  /* relógio, entrada com escada e toldo */
+  circ(c,750,296,24); fs(c,'#fff',2.5); c.strokeStyle='#222'; c.lineWidth=2.5; linha(c,750,296,750,280); linha(c,750,296,762,302); c.fillStyle='#222'; circ(c,750,296,2); c.fill();
+  portaDupla(c,712,450,76,84,'#d64545'); placaTexto(c,750,348,'Entrance',14,'#2a2018','#fff7d8');
+  c.fillStyle='#f26a52'; for(i=0;i<7;i++){ poly(c,[[684+i*19,362],[703+i*19,362],[703+i*19,376],[684+i*19,376]]); c.fillStyle=i%2?'#fff':'#f26a52'; c.fill(); c.strokeStyle=OL; c.lineWidth=1.4; c.stroke(); }
+  box(c,690,436,120,7,'#d9c6a0',2,1.5); box(c,700,443,100,7,'#cdb892',2,1.5);
+  arbustoF(c,652,448,16); arbustoF(c,848,448,16); arbustoF(c,420,448,14,'#5fae3a'); arbustoF(c,1080,448,14,'#5fae3a');
+  pinoV(c,1136,250,1.6);
+  /* AUDITORIUM: cúpula roxa com marquise */
+  box(c,1200,300,240,150,lin(c,0,300,0,450,'#c9a8f0','#8a62c4'),4,2.5); c.beginPath(); c.arc(1320,300,120,PI,0); c.closePath(); fs(c,lin(c,1200,0,1440,0,'#e0cbfa','#a884dd'),2.5);
+  c.strokeStyle='rgba(255,255,255,.4)'; c.lineWidth=2; [-70,-35,0,35,70].forEach(function(d){ c.beginPath(); c.moveTo(1320+d,300); c.quadraticCurveTo(1320+d*.6,230,1320,182); c.stroke(); });
+  box(c,1314,160,12,24,'#f2c23a',2,1.5); A.estrela&&A.estrela(c,1320,156,10,'#fde047',0);
+  portaDupla(c,1290,450,60,70,'#5a3a8a'); [1222,1392].forEach(function(xx){ circ(c,xx+12,346,16); fs(c,'#c4ecfc',2); c.strokeStyle='#fff'; c.lineWidth=2; linha(c,xx+12,330,xx+12,362); });
+  box(c,1246,318,148,30,'#fff',4,2.5); txt(c,'Auditorium',1320,333,17,'#6b3ab0'); c.fillStyle='#fde047'; for(i=0;i<8;i++){ circ(c,1252+i*20,314,3); c.fill(); }
+  arvoreG(c,1178,450,110,'#3f8f3a'); arvoreG(c,1458,450,104);
+  /* GYM / COURT 2: quadra aberta com alambrado e tabela */
+  c.strokeStyle='#8c96a4'; c.lineWidth=1; for(i=0;i<30;i++){ linha(c,1490+i*10,306,1490+i*10,392); } for(i=0;i<9;i++){ linha(c,1490,306+i*10,1780,306+i*10); } c.strokeStyle='#5c6670'; c.lineWidth=4; [1490,1635,1780].forEach(function(xx){ linha(c,xx,300,xx,394); }); linha(c,1488,304,1782,304);
+  poly(c,[[1470,450],[1800,450],[1760,386],[1510,386]]); fs(c,lin(c,0,386,0,450,'#6fc24e','#4f9e45'),2); c.strokeStyle='#fff'; c.lineWidth=2.5; c.beginPath(); c.moveTo(1520,392); c.lineTo(1490,440); c.moveTo(1750,392); c.lineTo(1780,440); c.stroke(); c.beginPath(); c.ellipse(1635,418,34,12,0,0,TAU); c.stroke(); linha(c,1635,386,1635,450);
+  box(c,1632,330,8,120,'#6a7078',1,2); box(c,1606,300,60,42,'#fff',2,2.5); c.strokeStyle='#d94141'; c.lineWidth=2; c.strokeRect(1626,316,20,16); c.strokeStyle='#ef6a1a'; c.lineWidth=4; el(c,1636,344,14,4); c.stroke();
+  placaTexto(c,1636,270,'Gym / Court 2',16,'#2a2018','#fff7d8');
 }
 function ttPlaca(c,x,y,txtP,dir){ /* placa de direção em inglês */
   box(c,x-5,y-94,10,94,'#8a6230',1,2);
@@ -242,18 +280,25 @@ function escolaPerto(c){
   c.save(); c.translate(900,450); c.scale(.72,.72); c.translate(-800,-450);
   box(c,690,330,220,120,lin(c,0,330,0,450,'#fff4cf','#efd98e'),3,2.5); box(c,716,364,168,44,'#3f2c1a',2); c.fillStyle='#d94141'; for(i=0;i<8;i++){ poly(c,[[676+i*31,300],[707+i*31,300],[707+i*31,332],[676+i*31,332]]); c.fillStyle=i%2?'#fff':'#d94141'; c.fill(); c.strokeStyle=OL; c.lineWidth=1.5; c.stroke(); }
   box(c,740,230,120,68,'#ffe9a0',8,2.5); sanduiche(c,800,262,2); box(c,780,298,40,6,'#8a6230',1,1.5); placaTexto(c,800,216,'Trix',24,'#b0641e','#fff7d8'); c.restore();
-  /* quadra do Gym: tabela de basquete; banco do Patio */
-  box(c,1320,230,10,220,'#6a7078',1,2); box(c,1296,200,82,56,'#fff',2,2.5); c.strokeStyle='#d94141'; c.lineWidth=2; c.strokeRect(1324,222,26,22); c.strokeStyle='#ef6a1a'; c.lineWidth=4; el(c,1340,262,18,5); c.stroke(); placaTexto(c,1340,180,'Gym / Court',16,'#2a2018','#fff7d8');
+  /* canteiros de flores e o banco do Patio */
+  arbustoF(c,420,448,22); arbustoF(c,560,448,18,'#5fae3a'); arbustoF(c,1290,448,20); arbustoF(c,1860,448,22,'#5fae3a'); arbustoF(c,2290,448,18);
   box(c,1480,410,150,12,'#b9884a',3); [1494,1608].forEach(function(x){ box(c,x,422,10,28,'#8a6230',1,1.5); }); placaTexto(c,1555,394,'Patio',16,'#2a2018','#fff7d8');
+  /* cerquinha branca e árvores do pátio */
+  for(i=0;i<9;i++){ var fx=1980+i*26; poly(c,[[fx,450],[fx,414],[fx+7,406],[fx+14,414],[fx+14,450]]); fs(c,'#fff',1.5); } box(c,1976,426,236,6,'#fff',1,1.5);
   [1910,2330].forEach(function(x){ box(c,x-12,300,24,150,'#8a5428',3); [[0,-30,62],[-44,10,46],[44,10,46]].forEach(function(b){ circ(c,x+b[0],300+b[1],b[2]); fs(c,'#59a845'); }); });
 }
-function longeBosque(c,cam){ faixaP(c,camada('bosque','L',1500,470,1.25,escolaLonge),cam,0); }
+function longeBosque(c,cam){ faixaP(c,camada('bosque','L',1800,470,1.25,escolaLonge),cam,0); }
 function pertoBosque(c,cam){ faixaP(c,camada('bosque','P',2500,470,1,escolaPerto),cam,0); }
-function chaoBosque(c,s){ c.fillStyle=lin(c,0,s.y,0,s.y+s.h,'#c5c9c4','#8f9591'); c.fillRect(s.x,s.y,s.w,s.h); c.fillStyle='#5a9e3e'; c.fillRect(s.x,s.y,s.w,7); c.fillStyle='rgba(0,0,0,.4)'; c.fillRect(s.x,s.y+7,s.w,2);
-  c.strokeStyle='rgba(70,75,72,.35)'; c.lineWidth=1.5; for(var yy=s.y+28;yy<s.y+s.h;yy+=22) linha(c,s.x,yy,s.x+s.w,yy); for(var x=grade(s.x,44)+44;x<s.x+s.w;x+=44) linha(c,x,s.y+9,x,s.y+s.h);
-  for(x=grade(s.x,360)+360;x<s.x+s.w;x+=360){ if(s.h>60) txt(c,'Drive',x,s.y+40,17,'rgba(30,30,30,.65)',800); }
+function chaoBosque(c,s){ /* chão = a rua "Drive" do slide (asfalto, faixa amarela, meio-fio, grama); bloco alto = muro de tijolinhos da escola com grama em cima */
+  var x; if(s.y<440){ c.fillStyle=lin(c,0,s.y,0,s.y+s.h,'#f2c98a','#d9a05a'); c.fillRect(s.x,s.y,s.w,s.h); c.strokeStyle='rgba(120,70,20,.35)'; c.lineWidth=1.4; var k=0; for(var yy=s.y+22;yy<s.y+s.h-2;yy+=16,k++){ linha(c,s.x+2,yy,s.x+s.w-2,yy); for(x=grade(s.x,32)+(k%2)*16;x<s.x+s.w;x+=32){ if(x>s.x+2&&x<s.x+s.w-2) linha(c,x,yy,x,Math.min(yy+16,s.y+s.h-2)); } }
+    c.fillStyle='#7cc548'; c.fillRect(s.x,s.y,s.w,9); c.fillStyle='#b9e07a'; c.fillRect(s.x,s.y,s.w,3); c.fillStyle='rgba(0,0,0,.18)'; c.fillRect(s.x,s.y+9,s.w,2); c.strokeStyle=OL; c.lineWidth=2; c.strokeRect(s.x,s.y,s.w,s.h); return; }
+  c.fillStyle=lin(c,0,s.y,0,s.y+s.h,'#6b7682','#3a424c'); c.fillRect(s.x,s.y,s.w,s.h); c.fillStyle='#7cc548'; c.fillRect(s.x,s.y,s.w,9); c.fillStyle='#b9e07a'; c.fillRect(s.x,s.y,s.w,3); c.fillStyle='#dfe3e8'; c.fillRect(s.x,s.y+9,s.w,6); c.fillStyle='rgba(0,0,0,.25)'; c.fillRect(s.x,s.y+15,s.w,2);
+  if(s.h>40){ c.fillStyle='#ffd23a'; for(x=grade(s.x,64);x<s.x+s.w;x+=64){ if(x>=s.x&&x+32<=s.x+s.w) c.fillRect(x,s.y+Math.min(s.h-8,52),32,5); } }
+  for(x=grade(s.x,480)+240;x<s.x+s.w;x+=480){ if(s.h>60) txt(c,'Drive',x,s.y+34,18,'rgba(255,255,255,.85)',800); }
   c.strokeStyle=OL; c.lineWidth=2; c.strokeRect(s.x,s.y,s.w,s.h); }
-function platBosque(c,p){ box(c,p.x,p.y,p.w,p.h,lin(c,0,p.y,0,p.y+p.h,'#b4b8b5','#8d918e'),2,2.5); c.fillStyle='#f4f4ee'; c.fillRect(p.x+2,p.y+2,p.w-4,3); c.strokeStyle='rgba(30,30,30,.5)'; c.lineWidth=1; for(var x=p.x+24;x<p.x+p.w-6;x+=24){ linha(c,x,p.y+5,x-8,p.y+p.h-1); } }
+function platBosque(c,p){ /* armários da escola: caixas coloridas com divisórias */
+  var h=hash(p.x*.17+p.y), cs=h<.33?['#ffd166','#f0a93b']:(h<.66?['#a9dcf8','#4f9ad8']:['#ffb59a','#e8663f']);
+  box(c,p.x,p.y,p.w,p.h,lin(c,0,p.y,0,p.y+p.h,cs[0],cs[1]),4,2.5); c.fillStyle='rgba(255,255,255,.5)'; c.fillRect(p.x+5,p.y+2,p.w-10,3); c.strokeStyle='rgba(0,0,0,.2)'; c.lineWidth=1.3; for(var x=p.x+22;x<p.x+p.w-6;x+=22) linha(c,x,p.y+6,x,p.y+p.h-2); }
 
 /* ============================================================
    CASA = TOWER VIEW — treliça marrom, Paris e o Sena ao longe
@@ -370,7 +415,7 @@ function tronco(c,p,cor,cor2){ box(c,p.x+4,p.y,p.w-8,p.h,lin(c,0,p.y,0,p.y+p.h,c
 function platRecife(c,p){ tronco(c,p,'#a87444','#6a4424'); }
 
 /* ---------- exporta para o arteC ---------- */
-A.CB={OL:OL,FONTE:FONTE,fs:fs,poly:poly,box:box,txt:txt,rot:rot,mod:mod,fonteK:fonteK,camada:camada,faixaP:faixaP,JJ:JJ,altura:altura,vaso:vaso,bolaFut:bolaFut,caixaP:caixaP,livro:livro,livroDeitado:livroDeitado,planta:planta,pinoV:pinoV,casaArvore:casaArvore,sanduiche:sanduiche,mapaCidade:mapaCidade,octo:octo,placaTexto:placaTexto,tronco:tronco,almofada:almofada,prateleira:prateleira,vigaP:vigaP,regador:regador,trelica:trelica};
+A.CB={OL:OL,FONTE:FONTE,fs:fs,poly:poly,box:box,txt:txt,rot:rot,mod:mod,fonteK:fonteK,camada:camada,faixaP:faixaP,JJ:JJ,altura:altura,vaso:vaso,bolaFut:bolaFut,caixaP:caixaP,livro:livro,livroDeitado:livroDeitado,planta:planta,pinoV:pinoV,casaArvore:casaArvore,sanduiche:sanduiche,octo:octo,placaTexto:placaTexto,tronco:tronco,almofada:almofada,prateleira:prateleira,vigaP:vigaP,regador:regador,trelica:trelica};
 
 /* ---------- embrulho ---------- */
 var F={

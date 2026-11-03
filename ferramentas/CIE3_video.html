@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='ffd87ba2357';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>The video — Science: position and motion</title>
+<link rel="stylesheet" href="serafina-core.css?v=ffd87ba2357">
+<style>
+/* ============================================================
+   O VIDEO DE CIENCIAS (3o tri) — gerado por trabalho/3tri_ciencias/video/ (mesmo pipeline do CIE3),
+   com as figuras reais dos slides, narrado pela Thalita multilingue em ingles.
+   Imersao total: nada em portugues na tela; o portugues vive atras da bandeira
+   (<span class="tr"> + legenda PT numa faixa abaixo do player, sincronizada pelo timeupdate).
+   Sem autoplay: som so quando ela mandar (regra do projeto).
+   ============================================================ */
+:root{--fs:1;--bg:#0d0b1e;--bg2:#2a1736;--ink:#f2f7ff;--soft:rgba(255,255,255,.62);--dim:rgba(255,255,255,.42);
+  --card:#22152f;--line:rgba(255,255,255,.13);--accent:#f97316;--surf:rgba(255,255,255,.06)}
+body.light{--bg:#fdf0f6;--bg2:#f3e8ff;--ink:#2a1030;--soft:rgba(42,16,48,.66);--dim:rgba(42,16,48,.5);
+  --card:#fff;--line:rgba(42,16,48,.13);--accent:#c2410c;--surf:rgba(42,16,48,.05)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.9rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.02rem;font-weight:800;cursor:pointer;padding:0 8px;font-family:inherit}
+.iconbtn svg{width:22px;height:22px;display:block;margin:auto}
+#trbtn svg{width:26px;height:19px;border-radius:3px}
+body.show-tr #trbtn{outline:2px solid var(--accent);outline-offset:2px}
+.iconbtn:active{transform:scale(.9)}
+.stage{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:16px clamp(10px,3vw,26px) 40px}
+.card{width:100%;max-width:900px;background:var(--card);border-radius:24px;box-shadow:0 14px 40px rgba(0,0,0,.35);
+  padding:clamp(16px,4vw,28px);border:1px solid var(--line)}
+.aviso{margin:0 0 14px;padding:9px 12px;border-radius:12px;background:#fff3c4;border:2px solid #d19a00;color:#4a3000;font-weight:900;font-size:14px;text-align:center}
+.aviso .tr{color:#4a3000}
+h1{font-size:calc(clamp(1.25rem,4vw,1.65rem)*var(--fs));font-weight:900;line-height:1.2;margin-bottom:6px}
+.sub{font-size:calc(.95rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.55;margin-bottom:16px}
+.tr{display:none}
+body.show-tr .tr{display:block;font-size:.8em;font-weight:700;opacity:.8;margin-top:3px;line-height:1.3}
+video{width:100%;border-radius:16px;background:#000;display:block;border:1px solid var(--line);aspect-ratio:16/9}
+.ptcap{display:none;margin-top:8px;min-height:3.2em;padding:8px 14px;border-radius:12px;background:var(--surf);border:1px dashed var(--line);
+  font-weight:800;font-size:calc(1rem*var(--fs));line-height:1.4;color:var(--ink);text-align:center}
+body.show-tr .ptcap{display:flex;align-items:center;justify-content:center}
+h2{font-size:calc(1.02rem*var(--fs));font-weight:900;margin:20px 0 10px;color:var(--accent)}
+.caps{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.cap{width:100%;min-height:48px;display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);
+  border-radius:13px;background:var(--surf);color:var(--ink);font-family:inherit;font-weight:800;
+  font-size:calc(.92rem*var(--fs));padding:8px 12px;cursor:pointer}
+.cap:active{transform:scale(.98)}
+.cap .tm{flex:0 0 auto;min-width:46px;padding:3px 7px;border-radius:9px;background:var(--line);font-variant-numeric:tabular-nums;text-align:center;font-size:.85em}
+.cap .nm{min-width:0}
+.cap.on{border-color:var(--accent);background:rgba(249,115,22,.16)}
+.cap.on .tm{background:var(--accent);color:#2a1030}
+.acao{display:block;width:100%;min-height:56px;margin-top:18px;border:none;border-radius:16px;padding:8px 12px;
+  background:linear-gradient(90deg,var(--accent),#fb923c);color:#2a0618;font-family:inherit;font-weight:900;
+  font-size:calc(1.05rem*var(--fs));cursor:pointer}
+.acao:active{transform:translateY(1px)}
+.acao.pass{background:var(--surf);color:var(--ink);border:2px solid var(--line);margin-top:10px}
+@media(min-width:700px){:root{--fs:1.1} .card{padding:30px 34px}}
+@media(max-width:430px){
+  .topbar{flex-wrap:wrap;gap:4px}
+  .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px;font-size:.82rem}
+  .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
+  .caps{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" id="btnHome" title="Home" aria-label="Home" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button>
+    <span class="title">The video · Science</span>
+    <button class="iconbtn" id="trbtn" title="Portuguese" aria-label="Portuguese" onclick="toggleTr()"><svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rect width="28" height="20" rx="3" fill="#009c3b"/><path d="M14 3 25 10 14 17 3 10z" fill="#ffdf00"/><circle cx="14" cy="10" r="4.2" fill="#002776"/></svg></button>
+    <button class="iconbtn" id="btnFontDown" title="Smaller text" aria-label="Smaller text" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" id="btnFontUp" title="Bigger text" aria-label="Bigger text" onclick="fs(1)">A+</button>
+    <button class="iconbtn" id="themeBtn" title="Theme" aria-label="Theme">&#9788;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Full screen" aria-label="Full screen" onclick="toggleLock()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
+  </div>
+  <div class="stage">
+    <div class="card">
+      <h1>Position and motion<span class="tr">Posição e movimento</span></h1>
+      <video id="vid" controls playsinline preload="metadata" poster="media/video_cie3_poster.jpg?v=ffd87ba2357">
+        <source src="media/video_cie3.mp4?v=ffd87ba2357" type="video/mp4">
+        If the video does not open here, ask a grown-up to open the file <b>media/video_cie3.mp4?v=ffd87ba2357</b>.
+      </video>
+      <div class="ptcap" id="ptcap" aria-live="polite"></div>
+
+      <h2>The parts of the video<span class="tr">As partes do vídeo</span></h2>
+      <ul class="caps" id="caps">
+        <li><button class="cap" data-t="3.15"><span class="tm">0:03</span><span class="nm">Twister<span class="tr">Twister</span></span></button></li>
+        <li><button class="cap" data-t="13.85"><span class="tm">0:13</span><span class="nm">Position<span class="tr">Posição</span></span></button></li>
+        <li><button class="cap" data-t="48.93"><span class="tm">0:48</span><span class="nm">The room<span class="tr">A sala</span></span></button></li>
+        <li><button class="cap" data-t="85.78"><span class="tm">1:25</span><span class="nm">Maps<span class="tr">Mapas</span></span></button></li>
+        <li><button class="cap" data-t="117.61"><span class="tm">1:57</span><span class="nm">Changing perspective<span class="tr">Mudando a perspectiva</span></span></button></li>
+        <li><button class="cap" data-t="145.31"><span class="tm">2:25</span><span class="nm">Wind and water<span class="tr">Vento e água</span></span></button></li>
+        <li><button class="cap" data-t="181.05"><span class="tm">3:01</span><span class="nm">Six movements<span class="tr">Seis movimentos</span></span></button></li>
+        <li><button class="cap" data-t="231.63"><span class="tm">3:51</span><span class="nm">Directions and speed<span class="tr">Direções e velocidade</span></span></button></li>
+        <li><button class="cap" data-t="244.56"><span class="tm">4:04</span><span class="nm">Body, hand and animals<span class="tr">Corpo, mão e animais</span></span></button></li>
+        <li><button class="cap" data-t="275.89"><span class="tm">4:35</span><span class="nm">Push and pull<span class="tr">Empurrar e puxar</span></span></button></li>
+        <li><button class="cap" data-t="310.41"><span class="tm">5:10</span><span class="nm">The end<span class="tr">Fim</span></span></button></li>
+      </ul>
+
+      <button class="acao" onclick="location.href='CIE3_simulado.html?v=ffd87ba2357'">Now practise in the test &rarr;<span class="tr">Agora treinar no simulado</span></button>
+      <button class="acao pass" onclick="location.href='CIE3_estudo.html?v=ffd87ba2357'">Study the lessons<span class="tr">Estudar as lições</span></button>
+    </div>
+  </div>
+</div>
+<div class="unlockov" id="unlockov">
+  <div class="ulk-emo">&#128274;</div>
+  <h2>Unlock the screen?<small>Ask a grown-up</small></h2>
+  <button class="ulk-yes" onclick="doUnlock()">Unlock</button>
+  <button class="ulk-no" onclick="cancelUnlock()">Keep watching</button>
+</div>
+<script>window.SERA_CFG={trKey:'cie3_tr',lang:'en-US',home:'../index.html',stars:110,somKey:'cie3_som'};</script>
+<script src="serafina-core.js?v=ffd87ba2357"></script>
+<script>
+(function(){
+  var v=document.getElementById('vid'), bts=[].slice.call(document.querySelectorAll('.cap'));
+  bts.forEach(function(b){ b.addEventListener('click',function(){
+    var t=parseFloat(b.dataset.t);
+    try{ v.currentTime=t; }catch(e){}
+    var p=v.play(); if(p&&p.catch) p.catch(function(){});
+  }); });
+  v.addEventListener('timeupdate',function(){
+    var on=-1; bts.forEach(function(b,i){ if(v.currentTime+0.4>=parseFloat(b.dataset.t)) on=i; });
+    bts.forEach(function(b,i){ b.classList.toggle('on',i===on); });
+  });
+  /* legenda em portugues: so com a bandeira ligada; aparece na faixa abaixo do player */
+  /* mesmas falas e tempos de media/video_cie3_pt.vtt, embutidos (o file:// bloqueia <track>) */
+  var CUES=[[3.58, 9.28, "O Twister, o tornado, passou pela escola e espalhou tudo."], [9.29, 13.1, "Vamos ver onde as coisas estão e como elas se movem."], [14.28, 16.98, "O ursinho está na caixa."], [16.99, 19.5, "A maçã está sobre o livro."], [19.51, 22.15, "A bola está embaixo da mesa."], [22.16, 24.84, "O menino está atrás da árvore."], [24.85, 27.55, "O cachorro está na frente da cadeira."], [27.56, 30.94, "O ursinho está entre as duas plantas."], [30.95, 33.63, "O relógio está ao lado do abajur."], [33.64, 36.17, "A árvore está perto da casa."], [36.18, 38.96, "A árvore está longe da casa."], [38.97, 41.98, "A luminária está acima da mesa."], [41.99, 44.7, "O gato está abaixo da prateleira."], [44.71, 48.18, "O peixe está dentro do aquário."], [49.36, 52.49, "Tem pizza na caixa."], [52.5, 56.24, "Tem um violão entre o abajur e a planta."], [56.25, 59.26, "Tem dois cachorros embaixo da mesa."], [59.27, 62.15, "Tem uma janela atrás do sofá."], [62.16, 64.98, "Tem um tapete na frente do sofá."], [64.99, 67.77, "Tem uma raquete ao lado da mochila."], [67.78, 70.48, "Tem queijo no prato."], [70.49, 73.27, "Tem um abajur embaixo da prateleira."], [73.28, 76.27, "Tem um troféu entre os livros."], [76.28, 78.79, "Tem um quadro na parede."], [78.8, 81.98, "Tem um pássaro voando sobre as árvores."], [81.99, 85.03, "Tem dois peixes no aquário."], [86.21, 91.0, "Quando lemos mapas, precisamos prestar muita atenção nos detalhes"], [91.01, 95.04, "e no caminho que estamos seguindo."], [95.05, 99.12, "Podemos nos perder se corrermos ou não prestarmos atenção!"], [99.13, 103.8, "O pino vermelho está na sala do Year 2, na B section."], [103.81, 107.79, "A section fica à esquerda do Auditorium."], [107.8, 111.56, "B section fica à direita do Auditorium."], [111.57, 116.86, "O Auditorium fica entre a A section e a B section."], [118.04, 121.65, "Podemos ver muitas coisas de posições diferentes,"], [121.66, 126.74, "e nossa perspectiva muda dependendo de onde estamos olhando."], [126.75, 129.89, "A Torre Eiffel vista de frente."], [129.9, 132.89, "A Torre Eiffel vista de cima."], [132.9, 135.97, "A Torre Eiffel vista de lado."], [135.98, 139.09, "A Torre Eiffel vista de baixo."], [139.1, 144.56, "As pessoas não estão certas nem erradas. Só têm uma visão diferente das coisas."], [145.74, 152.98, "O vento e a água são duas forças naturais que existem na natureza, e podem ser prejudiciais e úteis para nós."], [152.99, 156.1, "Útil: regar as plantas."], [156.11, 159.56, "Útil: água para fazer energia."], [159.57, 163.14, "Útil: vento para fazer energia."], [163.15, 167.0, "Útil: vento que espalha as sementes."], [167.01, 169.93, "Prejudicial: um tsunami."], [169.94, 173.75, "Prejudicial: chuva forte e enchentes."], [173.76, 176.66, "Prejudicial: um tornado."], [176.67, 180.3, "Prejudicial: ventos fortes."], [181.48, 185.99, "Quicar é subir e descer depois de bater numa superfície."], [186.0, 190.6, "Uma bola de futebol, uma bola de tênis e uma bola de basquete quicam."], [190.61, 193.79, "Voar é se mover pelo ar."], [193.8, 198.16, "Um avião, um balão de ar quente e uma pipa voam."], [198.17, 202.39, "Rolar é se mover girando sem parar."], [202.4, 206.35, "Uma roda, uma lata e uma bola de praia rolam."], [206.36, 210.48, "Deslizar é se mover suavemente sobre uma superfície."], [210.49, 214.73, "Um escorregador, um cubo de gelo e um livro deslizam."], [214.74, 218.5, "Girar é dar voltas e voltas."], [218.51, 222.2, "Um cata-vento, um ventilador e um pião giram."], [222.21, 226.57, "Balançar é ir para a frente e para trás, como um pêndulo."], [226.58, 230.88, "Um balanço, uma planta pendurada e uma porta balançam."], [232.06, 238.82, "As coisas se movem em direções diferentes: para a frente e para trás, para cima e para baixo, em voltas."], [238.83, 243.81, "As coisas se movem em velocidades diferentes: devagar ou rápido."], [244.99, 251.66, "Movimentos do corpo: nadar, subir, brincar, colher, andar, sentar."], [251.67, 258.5, "Movimentos da mão: tocar, levantar, apontar, escrever, agarrar, empurrar."], [258.51, 261.02, "O peixe nada."], [261.03, 263.54, "O pássaro voa."], [263.55, 266.07, "O macaco sobe."], [266.08, 268.73, "O cachorro anda e corre."], [268.74, 271.95, "O canguru e o sapo pulam."], [271.96, 275.14, "A cobra rasteja no chão."], [276.32, 280.92, "Empurrar é quando uso uma força para mover algo para longe de mim."], [280.93, 283.87, "Empurrar: andar de bicicleta."], [283.88, 286.85, "Empurrar: empurrar uma caixa."], [286.86, 289.76, "Empurrar: empurrar uma porta."], [289.77, 292.57, "Empurrar: chutar uma bola."], [292.58, 296.94, "Puxar é quando uso uma força para trazer algo para perto de mim."], [296.95, 300.42, "Puxar: cabo de guerra com uma corda."], [300.43, 303.3, "Puxar: puxar um carrinho."], [303.31, 306.3, "Puxar: abrir uma gaveta."], [306.31, 309.66, "Puxar: pescar com uma vara."], [310.84, 317.81, "Agora você sabe posição, mapas, vento e água, movimento, empurrar e puxar."]];
+  var cap=document.getElementById('ptcap');
+  function mostra(){
+    var on=document.body.classList.contains('show-tr'), s='', t=v.currentTime;
+    if(on) for(var i=0;i<CUES.length;i++){ if(t>=CUES[i][0]&&t<CUES[i][1]){ s=CUES[i][2]; break; } }
+    if(cap.textContent!==s) cap.textContent=s;
+  }
+  v.addEventListener('timeupdate',mostra); v.addEventListener('seeked',mostra);
+  var orig=window.toggleTr; window.toggleTr=function(){ orig(); mostra(); };
+  mostra();
+})();
+</script>
+<script>window.SERA_EN=true; window.SERA_ACCENT={accent:'#f97316'};</script>
+<script src="sera_theme.js?v=ffd87ba2357"></script>
+</body>
+</html>

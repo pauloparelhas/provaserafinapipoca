@@ -21,10 +21,10 @@ var LISTA=[
    resumo:'Read the map. Left or right?', resumo_pt:'Leia o mapa. Esquerda ou direita?'},
   {id:3, nome:'Tower View', nome_pt:'A Vista da Torre', cena:'casa', tema:'perspective', moradores:['gigi','gigi','gigi'],
    resumo:'Climb up. See it from every side.', resumo_pt:'Suba. Veja de todos os lados.'},
-  {id:4, nome:'Wild River', nome_pt:'O Rio Bravo', cena:'recife', modo:'nado', tema:'forces', ids:['n05','n07','n08','n11','n12','n16','n25','n35'], moradores:['drop','drop','drop'],
-   resumo:'Water: helpful or harmful?', resumo_pt:'Água: ajuda ou atrapalha?'},
-  {id:5, nome:'Windy Fields', nome_pt:'Os Campos de Vento', cena:'nuvens', tema:'forces', ids:['n01','n09','n10','n13','n14','n19','n23'], moradores:['breezy','breezy','breezy'],
-   resumo:'Wind: helpful or harmful?', resumo_pt:'Vento: ajuda ou atrapalha?'},
+  {id:4, nome:'Wild River', nome_pt:'O Rio Bravo', cena:'recife', modo:'nado', tema:'forces', ids:['n03','n05','n07','n08','n11','n12','n16','n35'], moradores:['drop','drop','drop'],
+   resumo:'Water: helpful or harmful?', resumo_pt:'Água: ajuda ou prejudica?'},
+  {id:5, nome:'Windy Fields', nome_pt:'Os Campos de Vento', cena:'nuvens', tema:'forces', ids:['n01','n09','n10','n13','n14','n19'], moradores:['breezy','breezy','breezy'],
+   resumo:'Wind: helpful or harmful?', resumo_pt:'Vento: ajuda ou prejudica?'},
   {id:6, nome:'The Move Park', nome_pt:'O Parque do Movimento', cena:'ginasio', tema:'objects', moradores:['boing','boing','boing'],
    resumo:'Bounce, fly, roll, slide, spin, swing.', resumo_pt:'Quicar, voar, rolar, deslizar, girar, balançar.'},
   {id:7, nome:'Animal Rally', nome_pt:'O Rali dos Bichos', cena:'pista', modo:'corrida', tema:'animals', moradores:['paws','paws','paws'],
@@ -35,7 +35,7 @@ var LISTA=[
    resumo:'Push and pull to stop Twister!', resumo_pt:'Empurre e puxe para parar o Twister!'}
 ];
 /* a frase que cada fase devolve (aparece no fim da fase) */
-var FINS={1:['Everything in the room is in its place!','Tudo no quarto está no lugar!'],2:['Now the class can read the map!','Agora a turma sabe ler o mapa!'],3:['People are not right or wrong. They just see differently!','As pessoas não estão certas nem erradas. Só veem diferente!'],4:['Water can help and water can harm!','A água pode ajudar e pode atrapalhar!'],5:['Wind can help and wind can harm!','O vento pode ajudar e pode atrapalhar!'],6:['Six ways to move: all back!','Seis jeitos de mover: todos de volta!'],7:['Every animal moves in its own way!','Cada bicho se move do seu jeito!'],8:['Push away, pull closer!','Empurra para longe, puxa para perto!']};
+var FINS={1:['Everything in the room is in its place!','Tudo no quarto está no lugar!'],2:['Now the class can read the map!','Agora a turma sabe ler o mapa!'],3:['People are not right or wrong. They just see differently!','As pessoas não estão certas nem erradas. Só veem diferente!'],4:['Water can help and water can harm!','A água pode ajudar e pode prejudicar!'],5:['Wind can help and wind can harm!','O vento pode ajudar e pode prejudicar!'],6:['Six ways to move: all back!','Seis jeitos de mover: todos de volta!'],7:['Animals move in different ways!','Os bichos se movem de jeitos diferentes!'],8:['Push away, pull closer!','Empurra para longe, puxa para perto!']};
 LISTA.forEach(function(f){ if(FINS[f.id]){ f.fim=FINS[f.id][0]; f.fim_pt=FINS[f.id][1]; } });
 var PRONTOS={1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:true,9:true}; /* reinos já construídos (E1: vila e floresta; E2: recife e céu) */
 
