@@ -993,22 +993,6 @@
   ],
   "motivo": "resposta por bom senso (aviao e rapido); velocidade de aviao x pipa nao esta no roteiro (O8 so diz slow/fast) e pipa pode ser rapida; binario banal"
  },
- "L_pos1_2_0": {
-  "decisao": "APROVA",
-  "fp": "c1a530b0f397"
- },
- "L_pos1_2_1": {
-  "decisao": "APROVA",
-  "fp": "4bcc7f056e56"
- },
- "L_pos1_2_2": {
-  "decisao": "APROVA",
-  "fp": "a84fbcba0b3e"
- },
- "L_pos1_2_3": {
-  "decisao": "APROVA",
-  "fp": "0fb35b6fc874"
- },
  "L_pos2_2_0": {
   "decisao": "APROVA",
   "fp": "04f5397ca9d8"
@@ -1041,83 +1025,83 @@
   "decisao": "APROVA",
   "fp": "ca4dc059b582"
  },
- "L_pos2_4_0": {
+ "L_pos2_3_0": {
   "decisao": "APROVA",
   "fp": "86f2aa0d8852"
  },
- "L_pos2_4_1": {
+ "L_pos2_3_1": {
   "decisao": "APROVA",
   "fp": "94662831dd2f"
  },
- "L_pos2_4_2": {
+ "L_pos2_3_2": {
   "decisao": "APROVA",
   "fp": "c22c86fb7ea7"
  },
- "L_pos2_4_3": {
+ "L_pos2_3_3": {
   "decisao": "APROVA",
   "fp": "3cb64bee7bb6"
  },
- "L_pos2_4_4": {
+ "L_pos2_3_4": {
   "decisao": "APROVA",
   "fp": "80ca5b974879"
  },
- "L_pos2_4_5": {
+ "L_pos2_3_5": {
   "decisao": "APROVA",
   "fp": "de43e1a596f7"
  },
- "L_pos2_4_6": {
+ "L_pos2_3_6": {
   "decisao": "APROVA",
   "fp": "1b266da0ff3d"
  },
- "L_pos2_4_7": {
+ "L_pos2_3_7": {
   "decisao": "APROVA",
   "fp": "701664fa0b02"
  },
- "L_pos2_4_8": {
+ "L_pos2_3_8": {
   "decisao": "APROVA",
   "fp": "e9cd1e70fdde"
  },
- "L_pos2_4_9": {
+ "L_pos2_3_9": {
   "decisao": "APROVA",
   "fp": "619b82edea0c"
  },
- "L_pos2_4_10": {
+ "L_pos2_3_10": {
   "decisao": "APROVA",
   "fp": "c06de3a8c19b"
  },
- "L_pos2_4_11": {
+ "L_pos2_3_11": {
   "decisao": "APROVA",
   "fp": "c0269b804562"
  },
- "L_dir_3_0": {
+ "L_dir_2_0": {
   "decisao": "APROVA",
   "fp": "4e499509702a"
  },
- "L_dir_3_1": {
+ "L_dir_2_1": {
   "decisao": "APROVA",
   "fp": "19d725396b5b"
  },
- "L_dir_3_2": {
+ "L_dir_2_2": {
   "decisao": "APROVA",
   "fp": "0c59f041ef56"
  },
- "L_dir_3_3": {
+ "L_dir_2_3": {
   "decisao": "APROVA",
   "fp": "ca4a9635dac2"
  },
- "L_dir_3_4": {
+ "L_dir_2_4": {
   "decisao": "APROVA",
   "fp": "a2c94f457926"
  },
- "L_dir_3_5": {
+ "L_dir_2_5": {
   "decisao": "APROVA",
   "fp": "71c3ca2da68a"
  },
- "L_dir_3_6": {
+ "L_dir_2_6": {
   "decisao": "APROVA",
   "fp": "094b4be94b6a"
  },
- "L_dir_3_7": {
+ "L_dir_2_7": {
   "decisao": "APROVA",
   "fp": "856bf32bbe67"
  },
@@ -1285,63 +1269,63 @@
   "decisao": "APROVA",
   "fp": "9bfe29be4e5e"
  },
- "L_animais_3_0": {
+ "L_animais_2_0": {
   "decisao": "APROVA",
   "fp": "878684b6c78b"
  },
- "L_animais_3_1": {
+ "L_animais_2_1": {
   "decisao": "APROVA",
   "fp": "78bc4546e87d"
  },
- "L_animais_3_2": {
+ "L_animais_2_2": {
   "decisao": "APROVA",
   "fp": "568356322509"
  },
- "L_animais_3_3": {
+ "L_animais_2_3": {
   "decisao": "APROVA",
   "fp": "7bba560e704b"
  },
- "L_animais_3_4": {
+ "L_animais_2_4": {
   "decisao": "APROVA",
   "fp": "1055bf637348"
  },
- "L_animais_3_5": {
+ "L_animais_2_5": {
   "decisao": "APROVA",
   "fp": "05404169e696"
  },
- "L_animais_3_6": {
+ "L_animais_2_6": {
   "decisao": "APROVA",
   "fp": "a5b9c0bed244"
  },
- "L_animais_4_0": {
+ "L_animais_3_0": {
   "decisao": "APROVA",
   "fp": "6603e21fb900"
  },
- "L_animais_4_1": {
+ "L_animais_3_1": {
   "decisao": "APROVA",
   "fp": "83658ba76430"
  },
- "L_animais_4_2": {
+ "L_animais_3_2": {
   "decisao": "APROVA",
   "fp": "cdfc93357a93"
  },
- "L_animais_4_3": {
+ "L_animais_3_3": {
   "decisao": "APROVA",
   "fp": "c07190f86478"
  },
- "L_animais_4_4": {
+ "L_animais_3_4": {
   "decisao": "APROVA",
   "fp": "425ecef2b3af"
  },
- "L_animais_4_5": {
+ "L_animais_3_5": {
   "decisao": "APROVA",
   "fp": "e061e22e1317"
  },
- "L_animais_4_6": {
+ "L_animais_3_6": {
   "decisao": "APROVA",
   "fp": "3160d8c3a30d"
  },
- "L_animais_4_7": {
+ "L_animais_3_7": {
   "decisao": "APROVA",
   "fp": "a534807349fa"
  },
