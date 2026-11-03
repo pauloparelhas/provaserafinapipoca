@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='584b8522126';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School Material — Science</title>
+<link rel="stylesheet" href="serafina-core.css?v=584b8522126">
+<style>
+/* CIE3_material — o material ORIGINAL da escola, sem alteração: slides do zip e os 3 vídeos indicados. */
+:root{--fs:1;--bg:#0d0b1e;--txt:#f4f1ff;--sft:#c7c2e6;--crd:#1b1738;--lin:#3b3566;--trc:#fbbf24}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI",system-ui,Roboto,Arial,sans-serif;font-size:calc(16px*var(--fs))}
+body.light{--bg:#f5f3ff;--txt:#1e1b3a;--sft:#4b4763;--crd:#fff;--lin:#d8d2f0;--trc:#92400e}
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
+.top{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 12px;background:var(--crd);border-bottom:2px solid var(--lin)}
+.top .t{font-weight:900;margin-right:auto;font-size:1rem}
+@media(max-width:430px){.top .t{display:none}.top{justify-content:space-between}}
+.top button{min-width:44px;height:44px;border-radius:12px;border:2px solid var(--lin);background:transparent;color:var(--txt);font-weight:800;cursor:pointer}
+main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:14px 16px 40px}
+h1{font-size:1.5em;margin:6px 0 2px}
+h2{font-size:1.15em;margin:22px 0 8px}
+.tr{display:none;color:var(--trc);font-style:italic;font-weight:600;font-size:.86em}
+body.show-tr .tr{display:block}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.slide{background:var(--crd);border:2px solid var(--lin);border-radius:14px;overflow:hidden;cursor:zoom-in;padding:0;color:inherit;text-align:left;font:inherit;width:100%}
+.slide img{display:block;width:100%;background:#fff}
+.slide span.l{display:block;padding:8px 10px;font-weight:800}
+.vid{background:var(--crd);border:2px solid var(--lin);border-radius:14px;padding:12px;margin-bottom:12px}
+.vid b{display:block}
+.vid small{color:var(--sft);font-weight:700}
+.vid .caixa{position:relative;margin-top:8px;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .play{position:absolute;inset:0;width:100%;height:100%;background:#111;color:#fff;border:0;font-size:1.1em;font-weight:900;cursor:pointer}
+#zoom{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:10px}
+#zoom.on{display:flex}
+#zoom img{max-width:100%;max-height:100%;background:#fff;border-radius:8px}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="top">
+  <button class="sera-home" onclick="goHome()" title="Home" aria-label="Home">&#127968;</button>
+  <span class="t">School Material</span>
+  <button id="trbtn" title="Portuguese" aria-label="Portuguese" onclick="toggleTr()"><svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rect width="28" height="20" rx="2" fill="#16a34a"/><path d="M14 3 25 10 14 17 3 10z" fill="#facc15"/><circle cx="14" cy="10" r="4" fill="#1d4ed8"/></svg></button>
+  <button title="Smaller text" aria-label="Smaller text" onclick="fs(-1)">A-</button>
+  <button title="Bigger text" aria-label="Bigger text" onclick="fs(1)">A+</button>
+  <button title="Theme" aria-label="Theme" onclick="document.body.classList.toggle('light')">&#127769;</button>
+  <button id="lockbtn" class="lockbtn" title="Full screen" aria-label="Full screen" onclick="toggleLock()">&#128274;</button>
+</div>
+<main>
+  <h1>From your school<span class="tr">Da sua escola</span></h1>
+  <h2>Slides<span class="tr">Slides</span></h2>
+  <div class="grade" id="grade"></div>
+  <h2>Videos<span class="tr">Vídeos</span></h2>
+  <div id="vids"></div>
+</main>
+<div id="zoom" onclick="this.classList.remove('on')"><img id="zimg" alt=""></div>
+<div id="unlockov"></div>
+<script>window.SERA_CFG={trKey:'cie3_tr',lang:'en-US',voz:'thalitamultilingual',rate:.8,home:'../index.html',somKey:'cie3_som',stars:80};</script>
+<script src="serafina-core.js?v=584b8522126"></script>
+<script>
+var S=[['preposicoes','Prepositions of place','Preposições de lugar'],['sala','Prepositions of place: complete','Preposições de lugar: complete'],['mapa','Reading a map','Lendo um mapa'],['perspectiva','Changing perspectives','Mudando a perspectiva'],['agua-vento','Movement of water and wind','Movimento da água e do vento'],['objetos','Movements of objects','Movimentos dos objetos'],['corpo-mao','Movements of the body and the hand','Movimentos do corpo e da mão'],['push-pull','Push and pull','Empurrar e puxar']];
+document.getElementById('grade').innerHTML=S.map(function(s){return '<button class="slide" data-z="media/cie3/orig/'+s[0]+'.jpg"><img loading="lazy" src="media/cie3/orig/'+s[0]+'.jpg" alt="'+s[1]+'"><span class="l">'+s[1]+'<span class="tr">'+s[2]+'</span></span></button>';}).join('');
+[].forEach.call(document.querySelectorAll('.slide'),function(b){b.onclick=function(){document.getElementById('zimg').src=b.getAttribute('data-z');document.getElementById('zoom').classList.add('on');};});
+var V=[['nIvePkFzaMw','How Things Move','Como as coisas se movem','1:47'],['sva0ZRfFx4k','Forces: Push and Pull','Forças: empurrar e puxar','4:47'],['uz1ggZN94xo','Wind and Water Wonders','As maravilhas do vento e da água','6:14']];
+document.getElementById('vids').innerHTML=V.map(function(v){return '<div class="vid"><b>'+v[1]+'<span class="tr">'+v[2]+'</span></b><small>'+v[3]+'</small><div class="caixa"><button class="play" data-id="'+v[0]+'">&#9654; Play<span class="tr">Assistir</span></button></div></div>';}).join('');
+/* o vídeo só carrega no toque, sem cookie e sem sugestões de outros canais no fim */
+[].forEach.call(document.querySelectorAll('.play'),function(b){b.onclick=function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.getAttribute('data-id')+'?rel=0&modestbranding=1&autoplay=1&playsinline=1';f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;f.title='video';b.parentNode.replaceChild(f,b);};});
+</script>
+<script>window.SERA_ACCENT={accent:'#f97316'};</script>
+<script src="sera_theme.js?v=584b8522126"></script>
+</body>
+</html>
