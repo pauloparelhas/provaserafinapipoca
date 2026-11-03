@@ -9,7 +9,7 @@ LISTA = r"""var LISTA=[
    resumo:'Climb up. See it from every side.', resumo_pt:'Suba. Veja de todos os lados.'},
   {id:4, nome:'Wild River', nome_pt:'O Rio Bravo', cena:'recife', modo:'nado', tema:'forces', ids:['n03','n05','n07','n08','n11','n12','n16','n35'], moradores:['drop','drop','drop'],
    resumo:'Water: helpful or harmful?', resumo_pt:'Água: ajuda ou prejudica?'},
-  {id:5, nome:'Windy Fields', nome_pt:'Os Campos de Vento', cena:'nuvens', tema:'forces', ids:['n01','n09','n10','n13','n14','n19'], moradores:['breezy','breezy','breezy'],
+  {id:5, nome:'Windy Fields', nome_pt:'Os Campos de Vento', cena:'nuvens', modo:'voo', tema:'forces', ids:['n01','n09','n10','n13','n14','n19'], moradores:['breezy','breezy','breezy'],
    resumo:'Wind: helpful or harmful?', resumo_pt:'Vento: ajuda ou prejudica?'},
   {id:6, nome:'The Move Park', nome_pt:'O Parque do Movimento', cena:'ginasio', tema:'objects', moradores:['boing','boing','boing'],
    resumo:'Bounce, fly, roll, slide, spin, swing.', resumo_pt:'Quicar, voar, rolar, deslizar, girar, balançar.'},
@@ -71,8 +71,25 @@ T['html'] = [('<title>The Lost Endings — English</title>', '<title>Motion Rang
   ('The Lost Endings (Inglês 3º tri)', 'Motion Rangers (Ciências 3º tri)'),
   ('<div id="hudName">The Lost Endings</div>', '<div id="hudName">Motion Rangers</div>'),
   ('title="Pages"', 'title="Motion Stars"'),
-  ('<script src="ING3_jogo_arte5.js?v=20261018d"></script>', '<script src="ING3_jogo_arte5.js?v=20261018d"></script>\n<script src="CIE3_jogo_base.js"></script>\n<script src="CIE3_jogo_arteA.js"></script>\n<script src="CIE3_jogo_arteB.js"></script>\n<script src="CIE3_jogo_arteC.js"></script>\n<script src="CIE3_jogo_cie.js"></script>'),
+  ('<script src="ING3_jogo_arte5.js?v=20261018d"></script>', '<script src="ING3_jogo_arte5.js?v=20261018d"></script>\n<script src="CIE3_jogo_base.js"></script>\n<script src="CIE3_jogo_arteA.js"></script>\n<script src="CIE3_jogo_arteB.js"></script>\n<script src="CIE3_jogo_arteC.js"></script>\n<script src="CIE3_jogo_cie.js"></script>\n<script src="CIE3_jogo_pele.js"></script>'),
 ]
 
 # aviso pedido pelo Paulo (02/11): jogo inacabado
 T['html'] = T.get('html', []) + [("</body>", """<div id="aviso-dev" style="position:fixed;left:8px;bottom:8px;z-index:50;pointer-events:none;background:#fff3c4;color:#4a3000;border:2px solid #b45309;border-radius:12px;padding:2px 12px;font:900 13px Nunito,Arial,sans-serif;text-align:center;white-space:nowrap">In development<span class="tr" style="font-size:11px"> Em desenvolvimento</span></div></body>""")]
+# REFEITURA 03/11: poder montado da fase (a bicicleta do estádio) vem da TAB da fase, sem faísca
+T['motor'] += [("o.chocado=true; monta(); J.urso.poderes.tiro='faisca';", "o.chocado=true; monta(); J.urso.poderes.tiro=((window.PODERES&&PODERES.TAB[J.faseAtual&&J.faseAtual.id])||{}).tiro||null;"),
+  ("PODERES.cartao('pip',PODERES.TAB[2]);", "PODERES.cartao('pip',PODERES.TAB[J.faseAtual&&J.faseAtual.id]||PODERES.TAB[2]);")]
+# vento que SOBE ('}', CIE3_jogo_cie.js): as setas apontam para cima
+T['marceu'] += [("var x=v.x+20+i*v.w/5, y=v.y+((t*140+i*37)%v.h); c.beginPath(); c.moveTo(x,y); c.lineTo(x,y+22); c.lineTo(x-6,y+14); c.moveTo(x,y+22); c.lineTo(x+6,y+14); c.stroke();",
+  "var sb=v.vy<0?-1:1, x=v.x+20+i*v.w/5, y=sb>0?v.y+((t*140+i*37)%v.h):v.y+v.h-((t*140+i*37)%v.h); if(sb<0) c.strokeStyle='rgba(134,239,172,.8)'; c.beginPath(); c.moveTo(x,y); c.lineTo(x,y+22*sb); c.lineTo(x-6,y+14*sb); c.moveTo(x,y+22*sb); c.lineTo(x+6,y+14*sb); c.stroke();")]
+# REFEITURA 03/11: pele do parque (aparelhos = brinquedos) e trave = tronco (CIE3_jogo_pele.js)
+T['aparelhos'] += [("function desenha(c,t){\n  var M=J.mundo; if(!M) return;", "function desenha(c,t){\n  var M=J.mundo; if(!M) return; if(window.CIE3P&&CIE3P.aparelhos(c,M,t)) return;"),
+  ("  if(window.CIE3X&&CIE3X.plataforma(c,p,t)) return true;", "  if(window.CIE3X&&CIE3X.plataforma(c,p,t)) return true;\n  if(window.CIE3P&&CIE3P.plataforma(c,p,t)) return true;")]
+# REFEITURA 03/11: o que cai — livro no quarto, bolota no parque, gota de chuva no resto (o pingente de gelo herdado saiu)
+T['perigos'] += [("  if(cena==='bosque'){ c.fillStyle='#92400e';", "  if(cena==='bosque'||cena==='ginasio'){ c.fillStyle='#92400e';"),
+  ("  else if(cena==='biscoito'||cena==='recife'){", "  else if(cena!=='vila'){"),
+  ("  else if(cena==='vila'){ c.fillStyle='#b45309';", "  else if(cena==='vila'){ CIE3X.livroCai(c); } else if(0){ c.fillStyle='#b45309';")]
+
+T['perigos'] += [("c.fillStyle='rgba(191,219,254,.95)'; c.beginPath(); c.moveTo(0,4); c.quadraticCurveTo(12,26,0,34); c.quadraticCurveTo(-12,26,0,4); c.fill();", "c.fillStyle='#38bdf8'; c.strokeStyle='#075985'; c.lineWidth=2; c.beginPath(); c.moveTo(0,4); c.quadraticCurveTo(12,26,0,34); c.quadraticCurveTo(-12,26,0,4); c.fill(); c.stroke();")]
+T['perigos'] += [("function desenhaParede(c,p,cena,t){\n  c.save(); c.translate(p.x,p.y);", "function desenhaParede(c,p,cena,t){\n  if(window.CIE3X&&CIE3X.parede&&CIE3X.parede(c,p,cena,t)) return;\n  c.save(); c.translate(p.x,p.y);")]
+

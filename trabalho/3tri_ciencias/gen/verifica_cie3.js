@@ -121,6 +121,25 @@ F.LISTA.forEach(f=>{ if(f.chefao||f.modo) return; const mp=MAPAS[f.id]; if(!mp) 
   console.log('ok    partilha das forces: '+L.map(f=>f.nome+' '+f.ids.length).join(' + ')+' = '+B.length); }
 if(falhasDif) falhas+=falhasDif; else console.log('ok    regras de dificuldade para 7–8 anos (ilhas, inimigo antes do buraco, muros)');
 F.LISTA.forEach(f=>{ if(f.chefao||f.modo) return; const mp=MAPAS[f.id]; if(!mp){ console.log('--    '+f.id+' '+f.nome+' (sem mapa)'); return; } testaFase(f, mp.main, mp.sub, f.id+' '+f.nome); });
+/* ---------- MÉTRICAS v2 (GAME_DESIGN_v2.md:48; CRITICA_JOGO.md, refeitura 03/11) ----------
+   obstáculos ATIVOS (mundo + submundo) = buracos/água no chão + inimigos (anda, voa, espinhento, mini-chefe, Puddles)
+   + espinhos + o que cai do teto + rolantes/máquinas + plataformas móveis + plataformas que caem + tempestade + vento/correnteza CONTRA.
+   ≥18 no 1º reino, ≥22 do 2º em diante; ≥4 tipos de perigo; submundo em toda fase de plataforma/nado/voo. */
+const TIPOS={inimigo:'igesEbrkwjpq',espinho:'^',pingente:'v',rolante:'KTC',movel:'mnNz',tempestade:'Z',contra:'<~'};
+function contaObs(rows){ const out={}, t=rows.join('');
+  for(const k in TIPOS) out[k]=[...TIPOS[k]].reduce((a,ch)=>a+t.split(ch).length-1,0);
+  out.caem=rows.reduce((a,r)=>a+(r.match(/f+/g)||[]).length,0);
+  const chao=rows[rows.length-2]; let b=0,d=false; if(chao.split('#').length-1>chao.length*.4) for(const ch of chao){ const v=ch===' '||ch==='W'; if(v&&!d) b++; d=v; } out.buraco=b; return out; }
+let falhasMet=0;
+F.LISTA.forEach((f,i)=>{ if(f.chefao||f.modo==='corrida') return; const mp=MAPAS[f.id]; if(!mp) return;
+  const a=contaObs(mp.main), s=mp.sub?contaObs(mp.sub):{}; let tot=0, tipos=0; const det=[];
+  for(const k in a){ const n=(a[k]||0)+(s[k]||0); tot+=n; if(n){ tipos++; det.push(k+' '+n); } }
+  const min=i===0?18:22, prob=[];
+  if(tot<min) prob.push(tot+' obstáculos (mínimo '+min+')'); if(tipos<4) prob.push(tipos+' tipos de perigo (mínimo 4)'); if(!mp.sub) prob.push('sem submundo');
+  const dS=mp.sub?mp.sub.join('').split('D').length-1:0, dM=mp.main.join('').split('D').length-1; if(dM!==2||dS!==1) prob.push('portas '+dM+' no mundo + '+dS+' no submundo (quer 2 + 1)');
+  console.log((prob.length?'FALHA ':'ok    ')+('métricas '+f.id+' '+f.nome).padEnd(36)+tot+' obstáculos, '+tipos+' tipos, submundo '+(mp.sub?'sim':'NÃO')+'  ('+det.join(', ')+')');
+  prob.forEach(p=>console.log('   - '+p)); if(prob.length) falhasMet++; });
+falhas+=falhasMet;
 if(process.argv[3]==='mapa'){ MAPAS[+process.argv[4]].main.forEach(s=>console.log(s)); }
 if(process.argv[3]==='sub'){ MAPAS[+process.argv[4]].sub.forEach(s=>console.log(s)); }
 console.log(falhas?('FALHAS: '+falhas):'TODAS AS FASES COMPLETÁVEIS');

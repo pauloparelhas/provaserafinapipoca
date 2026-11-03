@@ -6,7 +6,7 @@ set -o pipefail
 cd "$(dirname "$0")"
 F=../../../ferramentas
 for f in $F/CIE3_jogo*.js; do node --check "$f"; done
-node verifica_cie3.js $F | tail -12
+node verifica_cie3.js $F | tail -20
 node verifica_corrida.js $F | tail -1
 node grep_tela.js $F
 PYTHONIOENCODING=utf-8 python testa_corrida.py 2 | tail -6

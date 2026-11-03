@@ -35,15 +35,19 @@ window.CRIANCA = (function(){
      a superfície acima mais perto (degrau sob o buraco da laje, ou a borda da laje ao lado do buraco) */
   function alvoVertical(){ var u=J.urso, M=J.mundo, al=null, d=function(x){ return Math.abs(x-u.x); };
     M.moradores.forEach(function(m){ if(!m.feito&&Math.abs(m.y-u.y)<50&&(!al||d(m.x)<d(al.x))) al={x:m.x}; }); if(al) return al;
+    /* refeitura 03/11: a 3ª porta da torre fica no submundo: vai ao cano do andar e sobe nele (a seta aponta para ele) */
+    if(J.nivel.sub&&M===J.nivel&&J.nivel.sub.moradores.some(function(m){ return !m.feito; })) M.canos.forEach(function(cn){ var cx=cn.x+cn.w/2; if(Math.abs(cn.y-u.y)<10) al={x:cx}; else if(Math.abs(cn.y+cn.h-u.y)<20) al={x:cx,sobe:true}; }); /* cano baixo (1 tile) no piso do andar: sobe nele e desce */ if(al) return al;
     M.itens.forEach(function(it){ if(!it.pego&&it.tipo==='poder'&&Math.abs(it.y+T/2-u.y)<60) al={x:it.x}; }); if(al) return al;
     if(M.mastro&&Math.abs(M.mastro.y-u.y)<50) return {x:M.mastro.x};
     G.umaVia(M).map(function(p){ return {x:p.x,y:p.y,w:p.w,fina:1}; }).concat(G.solidos(M)).forEach(function(p){ var dy=u.y-p.y; if(dy<80||dy>150||p.w>=M.w-T*3||(!p.fina&&p.w<3*T-2)) return;
       var xs=p.w<=T*4?[p.x+p.w/2]:[p.x+28,p.x+p.w-28]; xs.forEach(function(x){ var pen=function(z){ return d(z); }; if(!al||pen(x)<pen(al.x)) al={x:x,sobe:true}; }); }); /* subir sempre para a DIREITA do buraco (é o caminho do mapa) */
     return al; }
   function direcao(){ var u=J.urso, M=J.mundo, dir=1;
-    if(M.h>M.w*.6){ var av=alvoVertical()||st.alvoV; st.alvoV=av; if(av){ if(av.sobe){ st.espera=(st.espera||0)-DT; if(Math.abs(av.x-u.x)<3.2*T&&u.noChao&&st.pulo<=0&&st.espera<=0){ pula(.32); st.espera=.9; st.duplo=u.puloExtra?.12:0; } } return Math.abs(av.x-u.x)<10?0:(av.x>u.x?1:-1); } }
-    M.moradores.forEach(function(m){ if(!m.feito&&m.x<u.x-50&&u.x-m.x<500&&(M.modo||Math.abs(m.y-u.y)<60)) dir=-1; });
+    if(M.h>M.w*.6){ var av=(!J.urso.noChao&&st.alvoV&&st.alvoV.sobe)?st.alvoV:(alvoVertical()||st.alvoV); /* no ar mantém a mira do pulo */ st.alvoV=av; if(av){ if(av.sobe){ st.espera=(st.espera||0)-DT; if(Math.abs(av.x-u.x)<3.2*T&&u.noChao&&st.pulo<=0&&st.espera<=0){ pula(.32); st.espera=.9; st.duplo=u.puloExtra?.12:0; } } return Math.abs(av.x-u.x)<10?0:(av.x>u.x?1:-1); } }
+    M.moradores.forEach(function(m){ if(!m.feito&&m.x<u.x-50&&(u.x-m.x<500||M!==J.nivel)&&(M.modo||Math.abs(m.y-u.y)<60)) dir=-1; });
     M.itens.forEach(function(it){ if(!it.pego&&(it.tipo==='poder'||it.tipo==='traje'||it.tipo==='capa'||(it.tipo==='historia'&&(it.nome==='milk'||PODERES.peloQuiz(it))))&&it.x<u.x-40&&u.x-it.x<500) dir=-1; });
+    /* refeitura 03/11: portas do mundo feitas e a do submundo pendente: a seta aponta o cano de entrada; a criança vai até ele */
+    if(M===J.nivel&&!M.modo&&M.h<=M.w*.6&&J.nivel.sub&&J.nivel.sub.moradores.some(function(m){ return !m.feito; })&&!M.moradores.some(function(m){ return !m.feito; })){ var en=null; M.canos.forEach(function(cn){ if(cn.id==='1') en=cn; }); if(en){ var ex=en.x+en.w/2; if(Math.abs(u.x-ex)<14&&u.noChao&&Math.abs(u.y-en.y)<6) dir=0; else dir=u.x<ex?1:-1; } }
     if(st.recua>0) dir=-1;
     /* no submundo, depois da porta: vai até o cano de saída (a seta aponta para ele) e para em cima */
     if(M!==J.nivel&&!M.moradores.some(function(m){ return !m.feito; })){ var sai=null; M.canos.forEach(function(c){ if(!sai||c.x>sai.x) sai=c; }); if(sai){ var cx=sai.x+sai.w/2; if(Math.abs(u.x-cx)<14&&u.noChao) dir=0; else dir=u.x<cx?1:-1; } }
@@ -51,7 +55,7 @@ window.CRIANCA = (function(){
   function decideNivel(dt){
     var u=J.urso, M=J.mundo, inp=J.in; if(!u||!M) return;
     if(J.chefe) return decideChefe(dt);
-    var dir=direcao(); inp.left=dir<0; inp.right=dir>0; inp.down=false; if(dir===0&&M.h>M.w*.6){ dir=st.alvoV&&st.alvoV.x<J.urso.x?-1:1; } else if(dir===0){ dir=1; if(PERIGOS.canoSob()&&st.baixo<=0){ inp.down=true; J.downSolto=true; st.baixo=.8; } }
+    var dir=direcao(); inp.left=dir<0; inp.right=dir>0; inp.down=false; if(dir===0&&M.h>M.w*.6){ if(PERIGOS.canoSob()&&J.nivel.sub&&st.baixo<=0){ inp.down=true; J.downSolto=true; st.baixo=.8; } dir=st.alvoV&&st.alvoV.x<J.urso.x?-1:1; } else if(dir===0){ dir=1; if(PERIGOS.canoSob()&&st.baixo<=0){ inp.down=true; J.downSolto=true; st.baixo=.8; } }
     /* entrar em porta/baú, pegar item com ▼, descer no cano (quase sempre: a criança segue a seta) */
     if(J.dica&&J.dica.botao&&st.baixo<=0){ if(rnd()<.9){ inp.down=true; J.downSolto=true; st.baixo=.6; } else st.baixo=1.5; }
     if(!J.dica&&window.PERIGOS&&I.J.nivel.sub&&PERIGOS.canoSob()){ var outro=J.mundo===J.nivel?J.nivel.sub:J.nivel, pend=outro&&outro.moradores.some(function(m){ return !m.feito; }); if((pend||J.mundo!==J.nivel)&&st.baixo<=0){ inp.down=true; J.downSolto=true; st.baixo=.8; } }

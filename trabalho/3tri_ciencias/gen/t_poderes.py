@@ -1,26 +1,27 @@
 # tabela: poderes (um objeto do material por fase)
 T = {}; BLOCOS = {}
 TAB = r"""var TAB={
-  1:{id:'bolas', tiro:'bola', suporte:'rack', verbo:'Take!', verboPt:'Pegue!', nome:'soccer ball', nomePt:'bola de futebol', placa:'BALL',
-     tit:'A soccer ball!', titPt:'Uma bola de futebol!',
-     txt:'Press SPACE to kick it.', txtPt:'Aperte ESPAÇO para chutar.'},
-  2:{id:'botas', tiro:null, suporte:'barraca', verbo:'Put on!', verboPt:'Calce!', nome:'sneakers', nomePt:'tênis', placa:'SNEAKERS',
-     tit:'Sneakers!', titPt:'Tênis!',
-     txt:'Jump, then tap JUMP again in the air.', txtPt:'Pule e aperte PULAR de novo no ar.'},
-  3:{id:'botas', tiro:null, suporte:'barraca', verbo:'Take!', verboPt:'Pegue!', nome:'rope', nomePt:'corda', placa:'ROPE',
-     tit:'A rope!', titPt:'Uma corda!',
-     txt:'Jump, then tap JUMP again: pull yourself up!', txtPt:'Pule e aperte PULAR de novo: puxe-se para cima!'},
+  1:{id:'raquete', tiro:'tenis', suporte:'mochila', verbo:'Take!', verboPt:'Pegue!', nome:'tennis racket', nomePt:'raquete de tênis', placa:'RACKET',
+     tit:'A tennis racket!', titPt:'Uma raquete de tênis!',
+     txt:'Press SPACE: hit a tennis ball. It bounces!', txtPt:'Aperte ESPAÇO: rebata uma bola de tênis. Ela quica!'},
+  2:{id:'aviao', tiro:null, suporte:'carteira', verbo:'Take!', verboPt:'Pegue!', nome:'paper plane', nomePt:'avião de papel', placa:'PAPER PLANE',
+     tit:'A paper plane!', titPt:'Um avião de papel!',
+     txt:'It flies through the air. In the air, hold JUMP to glide.', txtPt:'Ele voa pelo ar. No ar, segure PULAR para planar.'},
+  3:{id:'botas', tiro:null, suporte:'barraca', verbo:'Put on!', verboPt:'Calce!', nome:'climbing shoes', nomePt:'tênis de escalada', placa:'CLIMBING SHOES',
+     tit:'Climbing shoes!', titPt:'Tênis de escalada!',
+     txt:'Jump, then tap JUMP again in the air. Climb up!', txtPt:'Pule e aperte PULAR de novo no ar. Suba!'},
   4:{id:'traje', tiro:'bolha', suporte:'arara', verbo:'Put on!', verboPt:'Vista!', nome:'swimsuit', nomePt:'roupa de banho', placa:'SWIMSUIT',
      tit:'A swimsuit!', titPt:'Uma roupa de banho!',
      txt:'Tap JUMP to swim up. SPACE blows bubbles at the Puddles.', txtPt:'Toque PULAR para nadar para cima. ESPAÇO solta bolhas nas Puddles.'},
   5:{id:'capa', tiro:null, suporte:'cabide', verbo:'Take!', verboPt:'Pegue!', nome:'kite', nomePt:'pipa', placa:'KITE',
      tit:'A kite!', titPt:'Uma pipa!',
-     txt:'In the air, hold JUMP: the wind holds you up.', txtPt:'No ar, segure PULAR: o vento segura você.'},
-  6:{desligado:true, id:'giz', tiro:null, suporte:'pedestal', verbo:'Take!', verboPt:'Pegue!', nome:'sneakers', nomePt:'tênis', placa:'SNEAKERS',
-     tit:'Sneakers!', titPt:'Tênis!', txt:'Hold on tight.', txtPt:'Segure firme.'},
-  8:{id:'bolas', tiro:'bola', suporte:'rack', verbo:'Take!', verboPt:'Pegue!', nome:'soccer balls', nomePt:'bolas de futebol', placa:'BALLS',
-     tit:'Soccer balls!', titPt:'Bolas de futebol!',
-     txt:'Press SPACE to kick. A kick is a PUSH!', txtPt:'Aperte ESPAÇO para chutar. Chute é EMPURRAR!'}
+     txt:'A kite flies with the wind. Hold JUMP to go up. Let go to float down.', txtPt:'A pipa voa com o vento. Segure PULAR para subir. Solte para descer devagar.'},
+  6:{id:'piao', tiro:'piao', suporte:'banco', verbo:'Take!', verboPt:'Pegue!', nome:'spinning top', nomePt:'pião', placa:'TOP',
+     tit:'A spinning top!', titPt:'Um pião!',
+     txt:'A top spins around and around. Press SPACE: it knocks over the rolling cans!', txtPt:'O pião gira e gira. Aperte ESPAÇO: ele derruba as latas que rolam!'},
+  8:{id:'pip', tiro:null, montado:true, nome:'bike', nomePt:'bicicleta',
+     tit:'A bike!', titPt:'Uma bicicleta!',
+     txt:'Riding a bike is a PUSH. Hold JUMP in the air for a long jump!', txtPt:'Andar de bicicleta é EMPURRAR. No ar, segure PULAR para um salto longo!'}
 };
 """
 BLOCOS['poderes'] = [
@@ -29,13 +30,14 @@ BLOCOS['poderes'] = [
   ('var QUIZ_ITEM={', 'function peloQuiz', "var QUIZ_ITEM={}, NOME_ITEM={};\n"),
   ('  setTimeout(function(){ G.toast(ajuda?', 'var CARTAO_GUARDANAPO', "}\n"),
   ('var CARTAO_GUARDANAPO=', 'function fase()', "var CARTAO_GUARDANAPO={tit:'',titPt:'',txt:'',txtPt:''};\n\n"),
-  ('var PLACA_PT={', 'function placa(c,x,y,txt)', "var PLACA_PT={'BALL':'Bola','BALLS':'Bolas','SNEAKERS':'Tênis','ROPE':'Corda','SWIMSUIT':'Roupa de banho','KITE':'Pipa'};\n"),
-  ('var DICA_PODER={', 'function dicaPoder()', r"""var DICA_PODER={1:['Soccer ball: press SPACE to kick.','Bola: aperte ESPAÇO para chutar.'],
-  2:['Sneakers: tap JUMP again in the air.','Tênis: aperte PULAR de novo no ar.'],
-  3:['Rope: tap JUMP again in the air to pull yourself up.','Corda: aperte PULAR de novo no ar para se puxar.'],
+  ('var PLACA_PT={', 'function placa(c,x,y,txt)', "var PLACA_PT={'RACKET':'Raquete','PAPER PLANE':'Avião de papel','CLIMBING SHOES':'Tênis de escalada','SWIMSUIT':'Roupa de banho','KITE':'Pipa','TOP':'Pião','BIKE':'Bicicleta'};\n"),
+  ('var DICA_PODER={', 'function dicaPoder()', r"""var DICA_PODER={1:['Racket: press SPACE. The ball bounces!','Raquete: aperte ESPAÇO. A bola quica!'],
+  2:['Paper plane: hold JUMP in the air to glide.','Avião de papel: no ar, segure PULAR para planar.'],
+  3:['Climbing shoes: tap JUMP again in the air.','Tênis de escalada: aperte PULAR de novo no ar.'],
   4:['Swimsuit: tap JUMP to swim up. SPACE blows bubbles.','Roupa de banho: toque PULAR para nadar. ESPAÇO solta bolhas.'],
-  5:['Kite: hold JUMP in the air to float.','Pipa: segure PULAR no ar para planar.'],
-  8:['Soccer balls: press SPACE to kick.','Bolas: aperte ESPAÇO para chutar.']};
+  5:['Kite: hold JUMP to go up.','Pipa: segure PULAR para subir.'],
+  6:['Top: press SPACE. It knocks over rolling cans.','Pião: aperte ESPAÇO. Ele derruba as latas.'],
+  8:['Bike: hold JUMP in the air for a long jump.','Bicicleta: no ar, segure PULAR para um salto longo.']};
 """),
 ]
 T['poderes'] = [
@@ -55,4 +57,19 @@ T['poderes'] = [
   ("if(e.tipo!=='corvo'||(cena!=='bosque'&&cena!=='biscoito')) return false;", "if(true) return false;"),
   ("function antesHeroi(c,u,s,t){ if(J.poseHeroi!=='paraquedas') return;", "function antesHeroi(c,u,s,t){ if(u.poderes.capa&&fase()===5) CIE3X.pipaNoHeroi(c,u,s,t); if(J.poseHeroi!=='paraquedas') return;"),
   ("G.toast('Go back! Answer the ? first ◀',2200,'Volte! Responda o ? primeiro ◀');", "G.toast('Go back! Answer the ? first ◀',2200,'Volte! Responda o ? primeiro ◀');"),
+  ("G.toast('Get the cape first!',1800,'Pegue a capa primeiro!');", "G.toast('Get the kite first!',1800,'Pegue a pipa primeiro!');"),
+  ("var P=poder(), id=P?P.id:it.tipo;", "var P=poder(), id=P?P.id:it.tipo; if(window.CIE3X&&CIE3X.suporte(c,id,it,t,placa)) return;"),
+  ("(P.id==='capa'?u.poderes.capa:!!u.poderes.tiro)", "(P.id==='capa'?u.poderes.capa:(P.id==='aviao'?u.poderes.guardanapo:!!u.poderes.tiro))"),
+  ("    if(P.id==='capa') u.poderes.capa=true;", "    if(P.id==='capa') u.poderes.capa=true;\n    if(P.id==='aviao') u.poderes.guardanapo=true;"),
+  ("var VEL={faisca:", "var VEL={tenis:{vx:430,vy:-160,g:1150,alc:620},piao:{vx:330,vy:0,g:900,alc:520},faisca:"),
+  ("  if(s==='bola'){ u.chuteAte=", "  if(s==='piao'){ J.estrelas.push({x:u.x+u.dir*30*s0,y:u.y-16,vx:u.dir*v.vx,vy:0,g:v.g,alc:v.alc,dist:0,rot:0,skin:s,quiques:0}); SOM.fx('pulo'); log({ev:'tiro',skin:s}); return true; }\n  if(s==='bola'){ u.chuteAte="),
+  ("    if(e.skin==='bola'&&oy<=s.y+2&&e.vy>0&&e.quiques<2){ e.y=s.y-1; e.vy=-e.vy*.6;", "    if(e.skin==='piao'&&oy<=s.y+2&&e.vy>=0){ e.y=s.y-1; e.vy=0; return; }\n    if((e.skin==='bola'||e.skin==='tenis')&&oy<=s.y+2&&e.vy>0&&e.quiques<(e.skin==='tenis'?5:2)){ e.y=s.y-1; e.vy=-e.vy*(e.skin==='tenis'?.78:.6);"),
+  ("  if(e.skin==='bola'&&!fim) G.umaVia(M)", "  if((e.skin==='bola'||e.skin==='tenis')&&!fim) G.umaVia(M)"),
+  ("    case 'bolha': desBolha(c,e.x,e.y,14); return true;", "    case 'tenis': case 'piao': return CIE3X.tiro(c,e,t);\n    case 'bolha': desBolha(c,e.x,e.y,14); return true;"),
+  ("  switch(k){\n    case 'faisca':", "  if(window.CIE3X&&CIE3X.icone(c,k)){ ICO[k]=cv.toDataURL(); return ICO[k]; }\n  switch(k){\n    case 'faisca':"),
+  ("if(J.poseHeroi!=='paraquedas') return; var hh=G.URSO_H*s;", "if(J.poseHeroi!=='paraquedas') return; if(fase()===2){ CIE3X.aviaoNoHeroi(c,u,s,t); return; } var hh=G.URSO_H*s;"),
 ]
+# REFEITURA 03/11: o que cai (Bíblia: nada de gelo) — livro da estante no quarto, chuva da nuvem na torre/rio/estádio, bolota no parque
+T['poderes'] += [("    if(cena==='vila') telhado(c,gr.x0-60,gr.x1+60,y);", "    if(cena==='vila') CIE3X.estanteQueda(c,gr.x0-60,gr.x1+60,y); else if(cena==='ginasio') galho(c,gr.x0-50,gr.x1+40,y,t); else if(cena!=='bosque'&&cena!=='biscoito') CIE3X.nuvemChuva(c,gr.x0-40,gr.x1+40,y,t);")]
+
+T['poderes'] += [("if(cena==='bosque') pilhaToras(c,g.x,g.y,tr); else if(g.bola) maquina(c,g,t);", "if(g.bola) maquina(c,g,t);")]

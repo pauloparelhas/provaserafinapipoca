@@ -75,3 +75,8 @@ T['penalti'] = [
   ("function ativo(){ var f=J.faseAtual; return !!(f&&f.cena==='estadio'&&!f.chefao&&!J.chefe); }", "function ativo(){ var f=J.faseAtual; return !!(f&&f.cena==='estadio'&&!f.chefao&&!J.chefe&&!(J.quiz&&J.quiz.corda)); }"),
   ("var bx=18, bw=590, by=60, fs=21, maxH=GOL.y0+14-by;", "var bx=18, bw=590, by=60, fs=21, maxH=GOL.y0+14-by;\n  if(it.img&&window.CIE3X){ if(!q.dica) CIE3X.figura(c,it.img,700,408,250,124); }"),
 ]
+# REFEITURA 03/11: a bicicleta parada (A.pip.fixo) não balança nem tem ninho
+T['cena'] += [("if(window.PODERES) PODERES.ninho(c,o.x,o.y); var bal=Math.sin(t*5)*.12;", "if(window.PODERES&&!(A.pip&&A.pip.fixo)) PODERES.ninho(c,o.x,o.y); var bal=(A.pip&&A.pip.fixo)?0:Math.sin(t*5)*.12;")]
+# REFEITURA 03/11: véu no fundo (CIE3_jogo_pele.js)
+T['cena'] += [("A.perto(c,cena,J.cam*.45,t); c.restore();", "A.perto(c,cena,J.cam*.45,t); c.restore(); if(window.CIE3P) CIE3P.veu(c,cena,M);")]
+

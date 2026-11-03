@@ -101,13 +101,14 @@ function desenha(c,t,vx0,vx1){
 /* o que cai, conforme o reino: telha (vila), bolota (floresta), gota (cozinha/recife), pingente (outros) */
 function desenhaQueda(c,x,y,cena,t){
   c.save(); c.translate(x,y);
-  if(cena==='bosque'){ c.fillStyle='#92400e'; A.el(c,0,22,10,13); c.fill(); c.fillStyle='#78350f'; A.rr(c,-11,4,22,9,4); c.fill(); c.strokeStyle='#451a03'; c.lineWidth=2; c.beginPath(); c.moveTo(0,4); c.lineTo(2,-2); c.stroke(); }
-  else if(cena==='biscoito'||cena==='recife'){ c.fillStyle='rgba(191,219,254,.95)'; c.beginPath(); c.moveTo(0,4); c.quadraticCurveTo(12,26,0,34); c.quadraticCurveTo(-12,26,0,4); c.fill(); c.fillStyle='rgba(255,255,255,.8)'; A.circ(c,-3,24,3); c.fill(); }
-  else if(cena==='vila'){ c.fillStyle='#b45309'; c.beginPath(); c.moveTo(-14,6); c.lineTo(14,6); c.lineTo(10,30); c.lineTo(-10,30); c.closePath(); c.fill(); c.strokeStyle='#7c2d12'; c.lineWidth=2; c.stroke(); }
+  if(cena==='bosque'||cena==='ginasio'){ c.fillStyle='#92400e'; A.el(c,0,22,10,13); c.fill(); c.fillStyle='#78350f'; A.rr(c,-11,4,22,9,4); c.fill(); c.strokeStyle='#451a03'; c.lineWidth=2; c.beginPath(); c.moveTo(0,4); c.lineTo(2,-2); c.stroke(); }
+  else if(cena!=='vila'){ c.fillStyle='#38bdf8'; c.strokeStyle='#075985'; c.lineWidth=2; c.beginPath(); c.moveTo(0,4); c.quadraticCurveTo(12,26,0,34); c.quadraticCurveTo(-12,26,0,4); c.fill(); c.stroke(); c.fillStyle='rgba(255,255,255,.8)'; A.circ(c,-3,24,3); c.fill(); }
+  else if(cena==='vila'){ CIE3X.livroCai(c); } else if(0){ c.fillStyle='#b45309'; c.beginPath(); c.moveTo(-14,6); c.lineTo(14,6); c.lineTo(10,30); c.lineTo(-10,30); c.closePath(); c.fill(); c.strokeStyle='#7c2d12'; c.lineWidth=2; c.stroke(); }
   else A.pingente(c,{x:0,y:0,estado:'preso'},t);
   c.restore();
 }
 function desenhaParede(c,p,cena,t){
+  if(window.CIE3X&&CIE3X.parede&&CIE3X.parede(c,p,cena,t)) return;
   c.save(); c.translate(p.x,p.y);
   var cor=cena==='bosque'?['#365314','#14532d']:(cena==='biscoito'?['#d6a15a','#92400e']:['#7c3aed','#4c1d95']);
   c.fillStyle=A.lin(c,0,0,0,45,cor[0],cor[1]); A.rr(c,1,1,43,43,6); c.fill();
