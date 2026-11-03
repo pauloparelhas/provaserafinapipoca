@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='107b6ce0814';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='75b75d41057';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,7 +14,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Science · Study</title>
-<link rel="stylesheet" href="serafina-core.css?v=107b6ce0814">
+<link rel="stylesheet" href="serafina-core.css?v=75b75d41057">
 <style>
 /* ============================================================
    CIE3_estudo — a TEORIA de Science (3º tri). Casca herdada do
@@ -329,6 +329,46 @@ body.light .arr-cx1 .arr-itens{background:#fff}
 .arr-vaga:empty::after{content:'';padding:0}
 .arr-fr.cheia{border-color:var(--ok)}
 .arr-fr.cheia .arr-vaga{border:none;min-width:0}
+/* sem rolagem (03/11): frases 3 por vez, figura ao lado; peca com pegador; mao que demonstra */
+.arr-c.fora,.arr-c.feita{display:none!important}
+.arr-itens .arr-it{box-shadow:0 4px 0 color-mix(in srgb,var(--line) 85%,#000),0 6px 12px rgba(0,0,0,.25);transition:transform .12s}
+.arr-itens .arr-it:hover{transform:translateY(-2px)}
+.arr-itens .arr-it::before{content:'';display:block;width:22px;height:8px;opacity:.55;background:radial-gradient(circle,currentColor 1.5px,transparent 1.8px) 0 0/7px 4px}
+.arr-it.demo{opacity:1;box-shadow:0 12px 26px rgba(0,0,0,.5)}
+.arr-it .mao{position:absolute;right:-16px;bottom:-26px;width:40px;height:40px;fill:#fff;stroke:#111;stroke-width:1.2;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.arr-prog{display:flex;gap:6px;justify-content:center;margin:10px 0 0}
+.arr-prog i{width:12px;height:12px;border-radius:50%;border:2px solid var(--lc);opacity:.6}
+.arr-prog i.ok{background:var(--ok);border-color:var(--ok);opacity:1}
+.arr-cx1 .arr-itens{position:static;box-shadow:none;padding:4px 0;background:none}
+body.light .arr-cx1 .arr-itens{background:none}
+.arr-fig .fescb{max-height:190px;width:auto;max-width:100%}
+@media (min-width:700px){
+  .comfig{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:14px;align-items:start}
+  .arr-fig{position:sticky;top:70px}
+  .arr-fig .fescb{max-height:none;width:100%;margin:0}
+}
+@media (max-width:480px){
+  .arr-c{min-height:86px}
+  .arr-c>img{max-height:92px}
+  .arr-itens .arr-it img{width:62px;height:62px}
+}
+.sec{display:inline-flex;align-items:center;justify-content:center;min-width:1.45em;height:1.45em;padding:0 .2em;margin:0 .1em;border:2px solid currentColor;border-radius:6px;font-weight:900;line-height:1;vertical-align:.05em}
+.naprova li.npf{display:grid;grid-template-columns:116px minmax(0,1fr);gap:12px;align-items:center;padding:8px;border:2px solid var(--line);border-radius:14px;background:var(--surf)}
+.naprova li.npf>img{width:116px;height:88px;object-fit:contain;margin:0;max-width:none;border-radius:10px;background:#fff}
+/* cabe na janela (03/11) */
+.arr-cx{grid-template-columns:repeat(var(--c,2),minmax(0,1fr))}
+@media (min-width:700px){ .arr-cx{grid-template-columns:repeat(var(--cw,2),minmax(0,1fr))} }
+.arr-pe{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+.arr-pe .arr-prog{margin:0}
+.arr-pe .ordmsg{margin:0;min-height:0}
+.arr-re{border:1px solid var(--line);background:none;color:inherit;opacity:.75;border-radius:999px;padding:6px 12px;font:inherit;font-weight:800;font-size:calc(.8rem*var(--fs));cursor:pointer;min-height:36px}
+.arr-den:empty::after{padding:6px 0}
+@media (max-width:480px){ .arr-itens{gap:6px;margin-bottom:8px} .arr-fig .fescb{max-height:160px} .arr-c>img{max-height:80px} .arr-c{min-height:78px} }
+/* encaixe sem rolagem (03/11) */
+.corpo.duas{display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:row dense;gap:12px;align-items:start}.corpo.duas>:not(.caixa){grid-column:1/-1}.corpo.duas>.caixa{margin:0}
+.linhas{line-height:1.75}
+
+.corpo.encx img{max-height:var(--imx)!important;width:auto!important;max-width:100%!important;object-fit:contain;margin-left:auto;margin-right:auto}
 /* ---------- treininho ---------- */
 .tq .tqnum{font-size:calc(.74rem*var(--fs));font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:var(--lcx)}
 .tq .tqp{font-size:calc(1.18rem*var(--fs));font-weight:900;line-height:1.35;margin:6px 0 10px}
@@ -483,9 +523,9 @@ body.show-tr #trbtn{outline:2px solid var(--accent,#f472b6);outline-offset:2px}
 </div>
 
 <script>window.SERA_CFG={trKey:'cie3_tr',lang:'en-US',voz:'thalitamultilingual',rate:.8,home:'../index.html',somKey:'cie3_som',stars:80};</script>
-<script src="serafina-core.js?v=107b6ce0814"></script>
-<script src="OP_voz.js?v=107b6ce0814"></script>
-<script src="CIE3_banco.js?v=107b6ce0814"></script>
+<script src="serafina-core.js?v=75b75d41057"></script>
+<script src="OP_voz.js?v=75b75d41057"></script>
+<script src="CIE3_banco.js?v=75b75d41057"></script>
 <script>
 /* ícones por tema (sem as figuras do LP3); cena = só a legenda */
 window.CIE3ARTE={icone:function(k){ var c={position:'#f472b6',directions:'#fb7185',perspective:'#fbbf24',forces:'#38bdf8',objects:'#a78bfa',animals:'#34d399',pushpull:'#f97316'}[k]||'#f472b6';
@@ -499,7 +539,7 @@ window.CIE3ARTE={icone:function(k){ var c={position:'#f472b6',directions:'#fb718
   return '<svg class="licic" viewBox="0 0 36 36" width="40" height="40" aria-hidden="true">'+d+'</svg>'; },
  figura:function(){ return ''; }, cena:function(){ return ''; }};
 </script>
-<script src="CIE3_estudo_licoes.js?v=107b6ce0814"></script>
+<script src="CIE3_estudo_licoes.js?v=75b75d41057"></script>
 <script>
 /* ============================================================
    MOTOR DO ESTUDO — navegação, telinhas e treininho.
@@ -784,14 +824,38 @@ R.arrasta=function(t){
   function rot(x){ return (x.img?'<img src="media/cie3/'+x.img+'.jpg" alt="">':'')+(x.t?'<span>'+x.t+'</span>':''); }
   var itens=emb(t.itens.map(function(x,i){ return {x:x,i:i}; }));
   var cols=t.cols||Math.min(t.caixas.length,2);
-  return {html:'<div class="'+(t.caixas[0].frase?'arr-cx1':'')+'">'+(t.fig?'<img class="fescb" src="media/cie3/'+t.fig+'.jpg" alt="">':'')+'<div class="regra">'+(t.regra||'Drag each one to the right place.')+'<span class="tr">'+(t.regra_pt||'Arraste cada um para o lugar certo.')+'</span></div>'+
+  var colsW=(t.caixas.every(function(c){ return c.img; }) && t.caixas.length<=4)?t.caixas.length:cols;
+  var FR=!!t.caixas[0].frase;
+  return {html:'<div class="'+(FR?'arr-cx1':'')+(t.fig?' comfig':'')+'">'+(t.fig?'<div class="arr-fig"><img class="fescb" src="media/cie3/'+t.fig+'.jpg" alt=""></div>':'')+'<div class="arr-col"><div class="regra">'+(t.regra||'Drag each one to the right place.')+'<span class="tr">'+(t.regra_pt||'Arraste cada um para o lugar certo.')+'</span></div>'+
     '<div class="arr-itens">'+itens.map(function(o){ return '<div class="arr-it" role="button" tabindex="0" data-i="'+o.i+'">'+rot(o.x)+'</div>'; }).join('')+'</div>'+
-    '<div class="arr-cx" style="grid-template-columns:repeat('+cols+',1fr)">'+emb(t.caixas).map(function(c){
+    '<div class="arr-cx" style="--c:'+cols+';--cw:'+colsW+'">'+emb(t.caixas).map(function(c){
       if(c.frase) return '<div class="arr-c arr-fr" data-k="'+c.k+'"><p>'+c.frase.replace('___','<span class="arr-den arr-vaga"></span>')+(c.pt?'<span class="tr">'+c.pt+'</span>':'')+'</p></div>';
       return '<div class="arr-c" data-k="'+c.k+'"'+(c.cor?' style="--cc:'+c.cor+'"':'')+'>'+(c.img?'<img src="media/cie3/'+c.img+'.jpg" alt="">':'')+(c.t?'<h4>'+c.t+'</h4>':'')+'<div class="arr-den"></div></div>'; }).join('')+'</div>'+
-    '<div class="ordmsg">'+(t.dica||'Drag, or tap one and then its place.')+'</div><button class="btn calmo" data-a="re">Start again</button></div>',
+    '<div class="arr-pe">'+(FR?'<div class="arr-prog">'+t.caixas.map(function(){ return '<i></i>'; }).join('')+'</div>':'')+
+    '<div class="ordmsg">'+(t.dica||'')+'</div><button class="arr-re" data-a="re">&#8634; Start again</button></div></div></div>',
     init:function(el){
-      var msg=el.querySelector('.ordmsg'), feitos=0, sel=null, total=t.itens.length;
+      var msg=el.querySelector('.ordmsg'), feitos=0, sel=null, total=t.itens.length, K=FR?3:99;
+      function janela(){ var n=0; el.querySelectorAll('.arr-c').forEach(function(c){ var ok=!c.classList.contains('feita') && n<K; if(ok) n++; c.classList.toggle('fora',!ok && !c.classList.contains('cheia')); }); }
+      janela();
+      /* tira frases ate a tela caber sem rolagem (minimo 1) */
+      function cabe(){ if(!FR||!el.isConnected) return; while(K>1 && document.documentElement.scrollHeight>innerHeight+2){ K--; janela(); } }
+      requestAnimationFrame(cabe); el.querySelectorAll('img').forEach(function(im){ if(!im.complete) im.addEventListener('load',cabe); });
+      function semtag(s){ return s.replace(/<[^>]+>/g,''); }
+      /* a mao mostra o gesto (arrastar) sem escrever nada; desce ate a borda das caixas e some: nao entrega resposta */
+      var demoT=window._arrOk?null:setTimeout(function(){
+        if(!el.isConnected||feitos||sel) return;
+        var it=el.querySelector('.arr-itens .arr-it'), cs=[].filter.call(el.querySelectorAll('.arr-c'),function(c){ return !c.classList.contains('fora'); });
+        if(!it||!cs.length||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+        var a=it.getBoundingClientRect(), z=el.querySelector('.arr-cx').getBoundingClientRect(), b={left:z.left+z.width/2-40,width:80,top:z.top+6,height:30};
+        if(a.bottom<0||a.top>innerHeight) return;
+        var g=it.cloneNode(true); g.classList.add('voa','demo'); g.style.left=a.left+'px'; g.style.top=a.top+'px'; g.style.width=a.width+'px';
+        g.insertAdjacentHTML('beforeend','<svg class="mao" viewBox="0 0 24 24"><path d="M10 7.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v6h1.76c.19 0 .37.04.54.11l4.54 2.26c.53.22.91.76.91 1.38 0 .06-.01.13-.02.2l-.75 5.27c-.11.73-.69 1.28-1.44 1.28h-6.79c-.41 0-.79-.17-1.06-.44L4.75 18.6l.79-.8c.2-.2.48-.33.79-.33.09 0 .16.02.24.03l3.43.72z"/></svg>');
+        document.body.appendChild(g);
+        var dx=(b.left+b.width/2)-(a.left+a.width/2), dy=(b.top+b.height/2)-(a.top+a.height/2);
+        var an=g.animate([{transform:'translate(0,0) scale(1)',opacity:0},{transform:'translate(0,0) scale(1)',opacity:1,offset:.12},{transform:'translate(0,0) scale(1.1)',offset:.28},{transform:'translate('+dx+'px,'+dy+'px) scale(1.1)',offset:.78},{transform:'translate('+dx+'px,'+dy+'px) scale(1)',opacity:0}],{duration:2300,easing:'ease-in-out'});
+        function fim(){ g.remove(); document.removeEventListener('pointerdown',fim,true); }
+        an.onfinish=fim; document.addEventListener('pointerdown',fim,true);
+      },700);
       /* ima: vale a caixa sob o dedo ou a mais proxima ate 60 px */
       function perto(x,y){ var m=null, dm=61; el.querySelectorAll('.arr-c').forEach(function(c){ var b=c.getBoundingClientRect(); var dx=Math.max(b.left-x,0,x-b.right), dy=Math.max(b.top-y,0,y-b.bottom), d=Math.hypot(dx,dy); if(d<dm){ dm=d; m=c; } }); return m; }
       function caixa(k){ return t.caixas.filter(function(c){ return c.k===k; })[0]; }
@@ -800,7 +864,10 @@ R.arrasta=function(t){
         if(x.c===cx.dataset.k && !(cx.classList.contains('arr-fr') && cx.querySelector('.arr-vaga .arr-it'))){
           it.classList.remove('sel'); it.removeAttribute('role'); it.tabIndex=-1; it.onpointerdown=null; it.onclick=null;
           cx.querySelector('.arr-den').appendChild(it); feitos++;
-          var c=caixa(x.c); fala(c.frase?c.frase.replace('___',x.t):(x.t||'')+(c.t?', '+c.t:'')); if(c.frase) cx.classList.add('cheia');
+          window._arrOk=1; clearTimeout(demoT);
+          var c=caixa(x.c); fala(semtag(c.frase?c.frase.replace('___',x.t):(x.t||'')+(c.t?', '+c.t:''))); if(c.frase){ cx.classList.add('cheia');
+            var pg=el.querySelectorAll('.arr-prog i')[feitos-1]; if(pg) pg.classList.add('ok');
+            setTimeout(function(){ cx.classList.add('feita'); cx.classList.remove('cheia'); janela(); },1100); }
           msg.textContent=feitos===total?(t.fim||'Well done! Everything is in the right place.'):'Yes!';
         }else{
           it.classList.remove('erro'); void it.offsetWidth; it.classList.add('erro'); setTimeout(function(){ it.classList.remove('erro'); },450);
@@ -880,7 +947,7 @@ R.fim=function(){
       '<h2>Lesson done!</h2><p>'+lic.nome+'</p>'+
       (tot?'<p>Practice: <b>'+ac+' of '+tot+'</b> correct.</p>':'')+
       '<div class="btnrow">'+(prox?'<button class="btn" data-a="prox">Next lesson: '+prox.nome+'</button>':'')+
-      '<a class="btn" href="CIE3_simulado.html?v=107b6ce0814" style="text-decoration:none;text-align:center">Practice Test &#8250;<span class="tr">Simulado</span></a><button class="btn calmo" data-a="capa">All lessons<span class="tr">Todas as lições</span></button></div></div>',
+      '<a class="btn" href="CIE3_simulado.html?v=75b75d41057" style="text-decoration:none;text-align:center">Practice Test &#8250;<span class="tr">Simulado</span></a><button class="btn calmo" data-a="capa">All lessons<span class="tr">Todas as lições</span></button></div></div>',
     fala:'Lesson done! '+puro(lic.nome),
     init:function(el){
       var p=el.querySelector('[data-a="prox"]'); if(p) p.onclick=function(){ abre(est.lic+1); };
@@ -915,7 +982,7 @@ function renderCapa(){
     LICOES.map(function(l,i){ var P=PARADAS[i]||['prep-in',l.nome,l.nome_pt||''];
       return '<button class="parada lic'+(i%2?' dir':'')+'" data-i="'+i+'" style="--lc:'+corDe(l)+'"><span class="foto" style="background-image:url(media/cie3/'+P[0]+'.jpg)"><span class="num">'+(i+1)+'</span>'+(f[l.k]?'<span class="ok" aria-label="done">&#10003;</span>':'')+(i===prox?PIN:'')+'</span><span class="nome">'+P[1]+TRc(P[2])+'</span></button>';
     }).join('')+
-    '<a class="chegada" href="CIE3_simulado.html?v=107b6ce0814">&#127937; Practice Test'+TRc('Simulado')+'</a></div>'+
+    '<a class="chegada" href="CIE3_simulado.html?v=75b75d41057">&#127937; Practice Test'+TRc('Simulado')+'</a></div>'+
     '<div class="mc-placar"><span>'+n+' / '+LICOES.length+TRc(n+' de '+LICOES.length+' feitas')+'</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div></div>';
   tela.querySelectorAll('.lic').forEach(function(b){ b.onclick=function(){ abre(+b.dataset.i); }; });
   desenhaRota();
@@ -925,6 +992,22 @@ function renderCapa(){
   navPos.textContent=n+'/'+LICOES.length;
 }
 
+/* sem rolagem: figuras encolhem (busca binaria na altura maxima) ate a tela caber */
+function encaixa(){
+  var c=tela.querySelector('.corpo'); if(!c||c.querySelector('.arr-itens')) return;
+  var ims=c.querySelectorAll('img'); if(!ims.length) return;
+  ims.forEach(function(im){ if(!im.complete && !im.dataset.enc){ im.dataset.enc=1; im.addEventListener('load',function(){ if(c.isConnected) encaixa(); }); } });
+  c.classList.remove('encx'); c.style.removeProperty('--imx');
+  function sobra(){ return document.documentElement.scrollHeight-innerHeight; }
+  if(sobra()<=2) return;
+  /* tela larga: dois quadros lado a lado antes de encolher figura */
+  var qs=c.querySelectorAll(':scope>.caixa'); c.classList.remove('duas');
+  if(innerWidth>=900 && qs.length===2){ c.classList.add('duas'); if(sobra()<=2) return; }
+  c.classList.add('encx'); var lo=innerWidth<600?150:90, hi=Math.max(64,Math.round(innerHeight*.6));
+  for(var k=0;k<9;k++){ var m=Math.round((lo+hi)/2); c.style.setProperty('--imx',m+'px'); if(sobra()<=2) lo=m; else hi=m-1; }
+  c.style.setProperty('--imx',lo+'px');
+}
+addEventListener('resize',function(){ clearTimeout(window._encT); window._encT=setTimeout(function(){ if(est.lic>=0) encaixa(); },150); });
 function render(){
   try{ speechSynthesis.cancel(); }catch(e){}
   if(est.lic<0){ renderCapa(); window.scrollTo(0,0); return; }
@@ -936,6 +1019,7 @@ function render(){
     '<h2>'+t.tit+'</h2></div><button class="ouvir" aria-label="Ouvir">'+OUVIR+'</button></div>'+
     '<div class="corpo">'+r.html+'</div>';
   if(r.init) r.init(tela.querySelector('.corpo'));
+  encaixa();
   /* toda palavra-exemplo é tocável: a Thalita lê */
   tela.querySelectorAll('.pal').forEach(function(b){ if(!b.onclick) b.onclick=function(){ fala((b.dataset.f||b.textContent).toLowerCase()); }; });
   tela.querySelector('.ouvir').onclick=function(){
@@ -977,6 +1061,6 @@ window.CIE3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic
 })();
 </script>
 <script>window.SERA_EN=true; window.SERA_ACCENT={accent:'#f472b6'};</script>
-<script src="sera_theme.js?v=107b6ce0814"></script>
+<script src="sera_theme.js?v=75b75d41057"></script>
 </body>
 </html>
