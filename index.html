@@ -202,6 +202,22 @@ details.more[open] summary .chev{transform:rotate(180deg);}
 body.show-tr .tr{display:block;font-size:.85em;font-weight:700;opacity:.85;margin-top:2px}
 #trBtn svg{display:block}
 body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
+/* 03/11: tablet e computador sem rolagem (o celular pode rolar) */
+@media (min-width:620px){
+  #app{padding-top:10px;padding-bottom:12px}
+  .ctrls{position:absolute;top:10px;right:clamp(12px,3vw,24px);margin:0}
+  #viewCie .header{margin-bottom:12px}
+  #viewCie .mascot{display:none}
+  #viewCie .badge{margin-bottom:6px}
+  #viewCie .geo-panel{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;padding:14px}
+  #viewCie .geo-panel>div:not(.picks){display:none}
+  #viewCie .hero2,#viewCie .hero{margin:0;min-height:0;padding:12px 16px}
+  #viewCie .picks{grid-column:1/-1;margin:0!important;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))!important;gap:10px}
+  #viewCie .pick{min-height:0;padding:12px 10px;gap:6px}
+  .footer{margin-top:6px;padding-top:8px;display:flex;align-items:center;justify-content:center;gap:14px}
+  .footer-logo{margin:0}
+  .refresh-btn{margin:0;padding:8px 16px}
+}
 .aviso{margin:4px 0 14px;padding:10px 14px;border-radius:14px;background:#fff3c4;border:2px solid #d19a00;color:#4a3000;font-weight:900;font-size:15px;text-align:center}
 .aviso .tr{color:#4a3000}
 </style>
