@@ -355,6 +355,13 @@ body.light .arr-cx1 .arr-itens{background:none}
 .arr-re{border:1px solid var(--line);background:none;color:inherit;opacity:.75;border-radius:999px;padding:6px 12px;font:inherit;font-weight:800;font-size:calc(.8rem*var(--fs));cursor:pointer;min-height:36px}
 .arr-den:empty::after{padding:6px 0}
 @media (max-width:480px){ .arr-itens{gap:6px;margin-bottom:8px} .arr-fig .fescb{max-height:160px} .arr-c>img{max-height:80px} .arr-c{min-height:78px} }
+/* pergunta-chave e historia (03/11) */
+.lembra{display:flex;gap:10px;align-items:center;margin:10px 0 0;padding:10px 12px;border-radius:14px;border:2px dashed var(--lc);background:color-mix(in srgb,var(--lc) 12%,transparent);font-weight:800;line-height:1.4}
+.lembra .lb-ic{flex:none;width:34px;height:34px;border-radius:50%;background:var(--lc);color:#111;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2em}
+.hist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.hist li{display:grid;grid-template-columns:84px minmax(0,1fr);gap:10px;align-items:center;font-weight:800;line-height:1.35}
+.hist li img{width:84px;height:64px;object-fit:cover;border-radius:10px;background:#fff}
+@media (min-width:900px){ .hist{grid-template-columns:1fr 1fr} }
 /* encaixe sem rolagem (03/11) */
 .corpo.duas{display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:row dense;gap:12px;align-items:start}.corpo.duas>:not(.caixa){grid-column:1/-1}.corpo.duas>.caixa{margin:0}
 .linhas{line-height:1.75}
@@ -819,7 +826,7 @@ R.arrasta=function(t){
   var FR=!!t.caixas[0].frase;
   return {html:'<div class="'+(FR?'arr-cx1':'')+(t.fig?' comfig':'')+'">'+(t.fig?'<div class="arr-fig"><img class="fescb" src="media/cie3/'+t.fig+'.jpg" alt=""></div>':'')+'<div class="arr-col"><div class="regra">'+(t.regra||'Drag each one to the right place.')+'<span class="tr">'+(t.regra_pt||'Arraste cada um para o lugar certo.')+'</span></div>'+
     '<div class="arr-itens">'+itens.map(function(o){ return '<div class="arr-it" role="button" tabindex="0" data-i="'+o.i+'">'+rot(o.x)+'</div>'; }).join('')+'</div>'+
-    '<div class="arr-cx" style="--c:'+cols+';--cw:'+colsW+'">'+emb(t.caixas).map(function(c){
+    '<div class="arr-cx" style="--c:'+cols+';--cw:'+colsW+'">'+(t.ordem?t.caixas:emb(t.caixas)).map(function(c){
       if(c.frase) return '<div class="arr-c arr-fr" data-k="'+c.k+'"><p>'+c.frase.replace('___','<span class="arr-den arr-vaga"></span>')+(c.pt?'<span class="tr">'+c.pt+'</span>':'')+'</p></div>';
       return '<div class="arr-c" data-k="'+c.k+'"'+(c.cor?' style="--cc:'+c.cor+'"':'')+'>'+(c.img?'<img src="media/cie3/'+c.img+'.jpg" alt="">':'')+(c.t?'<h4>'+c.t+'</h4>':'')+'<div class="arr-den"></div></div>'; }).join('')+'</div>'+
     '<div class="arr-pe">'+(FR?'<div class="arr-prog">'+t.caixas.map(function(){ return '<i></i>'; }).join('')+'</div>':'')+

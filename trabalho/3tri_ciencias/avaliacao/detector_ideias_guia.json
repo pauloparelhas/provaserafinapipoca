@@ -1,0 +1,192 @@
+[
+ {
+  "id": "A1",
+  "onde": "lembra pos2",
+  "texto": "Ask: \"Where is it?\" Answer with a position word: \"It is under the table.\"",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "preposicoes.jpg: UNDER, 'The ball is under the table'; sala.jpg 'two dogs under the table'. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "A2",
+  "onde": "lembra dir",
+  "texto": "Hold up your two hands, palms away from you. Your left hand makes the letter L.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "Verdadeiro: mao esquerda, palma para a frente, indicador para cima e polegar para a direita desenha L (a direita faz L espelhado). Coerente com a licao left/right (mapa.jpg). Truque de apoio, nao conteudo cobrado. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "A3",
+  "onde": "lembra persp",
+  "texto": "One thing, different positions, different views.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "perspectiva.jpg: 'We can see many things from different positions, and our perspective changes...'. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "A4",
+  "onde": "lembra forcas",
+  "texto": "The same force can help or hurt. Wind spreads the seeds: helpful. Strong winds: harmful.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "agua-vento.jpg: wind and water are natural forces, harmful and helpful; 'Wind that spread the seeds' helpful; 'Strong winds' harmful. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "A5",
+  "onde": "lembra objetos",
+  "texto": "How does it move? Say the movement (roll, spin...), the direction (up and down...) and the speed (slow or fast).",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "objetos.jpg (roll, spin, bounce=up and down); direcoes e velocidade (slow or fast) vem do video V1 (_roteiro O7/O8) e sao verdadeiras por si. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "A6",
+  "onde": "lembra pushpull",
+  "texto": "Ask: is it going away from me? It is a push. Is it coming closer to me? It is a pull.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "push-pull.jpg: push = away from me, pull = closer to me. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "B1",
+  "onde": "arrasta animais: A fish ___.",
+  "texto": "A fish ___ in the water.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "Contexto \"in the water\" fecha em swims (corpo-mao.jpg swim; V1). \"jumps in the water\" so valeria para quem salta PARA a agua, leitura forcada. PT \"O peixe nada na agua\" ok. Reavaliado apos correcao.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "B2",
+  "onde": "arrasta animais: A bird ___.",
+  "texto": "A bird ___ in the sky.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "\"in the sky\" so aceita flies; jumps/climbs/crawls/swims nao cabem no ceu. PT ok. Reavaliado.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "B3",
+  "onde": "arrasta animais: A monkey ___.",
+  "texto": "A monkey ___ up the tree.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "climbs e a colocacao natural (climb em corpo-mao.jpg). \"jumps up the tree\" e possivel mas forcado, e o canguru so aceita jumps, fechando a atribuicao. Ressalva baixa, nao bloqueia. PT \"sobe na arvore\" ok. Reavaliado.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "B4",
+  "onde": "arrasta animais: A kangaroo ___.",
+  "texto": "A kangaroo ___. (jumps)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "Unica do banco que serve (canguru nao voa, escala nem rasteja). PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "B5",
+  "onde": "arrasta animais: A snake ___ on the ground.",
+  "texto": "A snake ___ on the ground. (crawls)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "'on the ground' exclui swims/flies/jumps/climbs. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "C1",
+  "onde": "historia 1",
+  "texto": "Lia and her brother Theo are in a park near the Eiffel Tower.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "Figura view-front.jpg: Torre Eiffel de frente com parque e gente na grama, bate. 'near' em preposicoes.jpg. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "C2",
+  "onde": "historia 2",
+  "texto": "Lia stands under the tower and looks up. She sees it from the bottom.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "view-bottom.jpg = 'seen from the bottom' (perspectiva.jpg); under em preposicoes.jpg. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "C3",
+  "onde": "historia 3",
+  "texto": "Theo kicks his ball. A kick is a push: the ball goes away from him.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "push-ball.jpg: menino chuta, seta para longe; push-pull.jpg traz o chute como push. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "C4",
+  "onde": "historia 4",
+  "texto": "The ball rolls on the grass.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "roll = 'move by turning over and over' (objetos.jpg); bola chutada rolando na grama e verdadeiro. Sem figura. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "C5",
+  "onde": "historia 5",
+  "texto": "Theo pulls his wagon. It comes closer to him.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "pull-wagon.jpg (menino com carrinho) agora bate com Theo; push-pull.jpg pull=closer to me. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "C6",
+  "onde": "historia 6",
+  "texto": "Then Lia sits on the swing. It moves back and forth.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "obj-swing-swing.jpg e swing=back and forth (objetos.jpg). PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "C7",
+  "onde": "historia 7",
+  "texto": "The wind spreads the seeds. Today the wind is helpful.",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "agua-vento.jpg: 'Wind that spread the seeds' em Helpful; help-wind-seeds.jpg bate. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ },
+ {
+  "id": "D",
+  "onde": "arrasta historia",
+  "texto": "Theo brings his wagon closer to him. He ___ it. / Lia sits on the ___. (demais iguais)",
+  "decisao": "LIBERA",
+  "regras": [],
+  "lastro": "Sem ambiguidade no banco: \"He rolls it\" contradiz \"brings closer\"; demais lacunas inalteradas. PT ok.",
+  "contraexemplo": "",
+  "correcao": ""
+ }
+]
