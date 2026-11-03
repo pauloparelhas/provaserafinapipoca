@@ -733,7 +733,7 @@ R.fim=function(){
       '<h2>Lesson done!</h2><p>'+lic.nome+'</p>'+
       (tot?'<p>Practice: <b>'+ac+' of '+tot+'</b> correct.</p>':'')+
       '<div class="btnrow">'+(prox?'<button class="btn" data-a="prox">Next lesson: '+prox.nome+'</button>':'')+
-      '<button class="btn calmo" data-a="capa">All lessons</button></div></div>',
+      '<a class="btn" href="CIE3_simulado.html" style="text-decoration:none;text-align:center">Practice Test &#8250;<span class="tr">Simulado</span></a><button class="btn calmo" data-a="capa">All lessons<span class="tr">Todas as lições</span></button></div></div>',
     fala:'Lesson done! '+puro(lic.nome),
     init:function(el){
       var p=el.querySelector('[data-a="prox"]'); if(p) p.onclick=function(){ abre(est.lic+1); };
