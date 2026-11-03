@@ -16,7 +16,7 @@
  },
  "a04": {
   "decisao": "APROVA",
-  "fp": "629b3f990edd"
+  "fp": "641843a1a324"
  },
  "a05": {
   "decisao": "APROVA",
@@ -28,7 +28,7 @@
  },
  "a07": {
   "decisao": "APROVA",
-  "fp": "d8f2631cc622"
+  "fp": "ccfa55e331c2"
  },
  "a08": {
   "decisao": "APROVA",
@@ -121,7 +121,7 @@
  },
  "a28": {
   "decisao": "APROVA",
-  "fp": "2843c5106431"
+  "fp": "7a6e6aa87688"
  },
  "a29": {
   "decisao": "APROVA",
@@ -196,7 +196,7 @@
  },
  "a46": {
   "decisao": "APROVA",
-  "fp": "7186df83b460"
+  "fp": "c0ed5f58a383"
  },
  "a47": {
   "decisao": "APROVA",
@@ -343,7 +343,7 @@
  },
  "p08": {
   "decisao": "APROVA",
-  "fp": "0c616a469fce"
+  "fp": "2b6dde2729b3"
  },
  "p09": {
   "decisao": "APROVA",
@@ -415,11 +415,11 @@
  },
  "n07": {
   "decisao": "APROVA",
-  "fp": "0a88e6a4488c"
+  "fp": "0938a8ae4976"
  },
  "n08": {
   "decisao": "APROVA",
-  "fp": "0b43bc008d15"
+  "fp": "e4edf331a631"
  },
  "n09": {
   "decisao": "APROVA",
@@ -427,7 +427,7 @@
  },
  "n10": {
   "decisao": "APROVA",
-  "fp": "1a7d557452f4"
+  "fp": "9e7b4979f5df"
  },
  "n11": {
   "decisao": "APROVA",
@@ -439,11 +439,11 @@
  },
  "n13": {
   "decisao": "APROVA",
-  "fp": "6e8e50fcf3f3"
+  "fp": "23ad12e1e114"
  },
  "n14": {
   "decisao": "APROVA",
-  "fp": "80017a78bcf4"
+  "fp": "340c57bce8a9"
  },
  "n15": {
   "decisao": "APROVA",
@@ -451,7 +451,7 @@
  },
  "n16": {
   "decisao": "APROVA",
-  "fp": "911dd3c8f1d8"
+  "fp": "4469fcfd6ff3"
  },
  "n17": {
   "decisao": "APROVA",
@@ -539,7 +539,7 @@
  },
  "n35": {
   "decisao": "APROVA",
-  "fp": "4e69778761e2"
+  "fp": "6b4a46dcb4fa"
  },
  "n36": {
   "decisao": "APROVA",
@@ -587,7 +587,7 @@
  },
  "o11": {
   "decisao": "APROVA",
-  "fp": "29a73a643251"
+  "fp": "b30fda0ba98c"
  },
  "o12": {
   "decisao": "APROVA",
@@ -599,11 +599,11 @@
  },
  "o14": {
   "decisao": "APROVA",
-  "fp": "dd64b4be90b4"
+  "fp": "4f5e39c7957f"
  },
  "o15": {
   "decisao": "APROVA",
-  "fp": "a1012825dc40"
+  "fp": "4f5e39c7957f"
  },
  "o16": {
   "decisao": "APROVA",
@@ -615,7 +615,7 @@
  },
  "o18": {
   "decisao": "APROVA",
-  "fp": "889e6fd4ae3c"
+  "fp": "4d83d97eae82"
  },
  "o19": {
   "decisao": "APROVA",
@@ -627,7 +627,7 @@
  },
  "o21": {
   "decisao": "APROVA",
-  "fp": "e29418624814"
+  "fp": "72514c519f9b"
  },
  "o22": {
   "decisao": "APROVA",
@@ -635,11 +635,11 @@
  },
  "o23": {
   "decisao": "APROVA",
-  "fp": "4fbf155b40e3"
+  "fp": "b34d62a2912c"
  },
  "o24": {
   "decisao": "APROVA",
-  "fp": "30263869c7f5"
+  "fp": "8f659810917d"
  },
  "o25": {
   "decisao": "APROVA",
@@ -937,99 +937,155 @@
   ],
   "motivo": "Repete f17; distratores 'behind/above me' sao de preposicoes (outro atomo) e o enunciado entrega a resposta."
  },
- "L_pos1_3_0": {
+ "x01": {
+  "decisao": "APROVA",
+  "fp": "c29ab634ca30"
+ },
+ "x02": {
+  "decisao": "APROVA",
+  "fp": "60008be50ab7"
+ },
+ "x03": {
+  "decisao": "APROVA",
+  "fp": "ad6a930a0175"
+ },
+ "x04": {
+  "decisao": "APROVA",
+  "fp": "96ad2b041e8a"
+ },
+ "x05": {
+  "decisao": "APROVA",
+  "fp": "44c7e2ef6b02"
+ },
+ "x06": {
+  "decisao": "APROVA",
+  "fp": "24d380a66f5b"
+ },
+ "x07": {
+  "decisao": "APROVA",
+  "fp": "969330c77c45"
+ },
+ "x08": {
+  "decisao": "APROVA",
+  "fp": "163c135dc5c6"
+ },
+ "x09": {
+  "decisao": "APROVA",
+  "fp": "cac9e555d781"
+ },
+ "x10": {
+  "decisao": "APROVA",
+  "fp": "4e5e59bf3ec0"
+ },
+ "x11": {
+  "decisao": "APROVA",
+  "fp": "6355b6eadf4b"
+ },
+ "x12": {
+  "decisao": "APROVA",
+  "fp": "c02d7ebbae03"
+ },
+ "x13": {
+  "decisao": "EXCLUI",
+  "regras": [
+   "B",
+   "F"
+  ],
+  "motivo": "resposta por bom senso (aviao e rapido); velocidade de aviao x pipa nao esta no roteiro (O8 so diz slow/fast) e pipa pode ser rapida; binario banal"
+ },
+ "L_pos1_2_0": {
   "decisao": "APROVA",
   "fp": "c1a530b0f397"
  },
- "L_pos1_3_1": {
+ "L_pos1_2_1": {
   "decisao": "APROVA",
   "fp": "4bcc7f056e56"
  },
- "L_pos1_3_2": {
+ "L_pos1_2_2": {
   "decisao": "APROVA",
   "fp": "a84fbcba0b3e"
  },
- "L_pos1_3_3": {
+ "L_pos1_2_3": {
   "decisao": "APROVA",
   "fp": "0fb35b6fc874"
  },
- "L_pos2_3_0": {
+ "L_pos2_2_0": {
   "decisao": "APROVA",
   "fp": "04f5397ca9d8"
  },
- "L_pos2_3_1": {
+ "L_pos2_2_1": {
   "decisao": "APROVA",
   "fp": "297272045059"
  },
- "L_pos2_3_2": {
+ "L_pos2_2_2": {
   "decisao": "APROVA",
   "fp": "dfb544da7c8d"
  },
- "L_pos2_3_3": {
+ "L_pos2_2_3": {
   "decisao": "APROVA",
   "fp": "3fe88b95e9eb"
  },
- "L_pos2_3_4": {
+ "L_pos2_2_4": {
   "decisao": "APROVA",
   "fp": "63e1c176a984"
  },
- "L_pos2_3_5": {
+ "L_pos2_2_5": {
   "decisao": "APROVA",
   "fp": "75ea86e7eea2"
  },
- "L_pos2_3_6": {
+ "L_pos2_2_6": {
   "decisao": "APROVA",
   "fp": "933bfed6030a"
  },
- "L_pos2_3_7": {
+ "L_pos2_2_7": {
   "decisao": "APROVA",
   "fp": "ca4dc059b582"
  },
- "L_pos2_5_0": {
+ "L_pos2_4_0": {
   "decisao": "APROVA",
   "fp": "86f2aa0d8852"
  },
- "L_pos2_5_1": {
+ "L_pos2_4_1": {
   "decisao": "APROVA",
   "fp": "94662831dd2f"
  },
- "L_pos2_5_2": {
+ "L_pos2_4_2": {
   "decisao": "APROVA",
   "fp": "c22c86fb7ea7"
  },
- "L_pos2_5_3": {
+ "L_pos2_4_3": {
   "decisao": "APROVA",
   "fp": "3cb64bee7bb6"
  },
- "L_pos2_5_4": {
+ "L_pos2_4_4": {
   "decisao": "APROVA",
   "fp": "80ca5b974879"
  },
- "L_pos2_5_5": {
+ "L_pos2_4_5": {
   "decisao": "APROVA",
   "fp": "de43e1a596f7"
  },
- "L_pos2_5_6": {
+ "L_pos2_4_6": {
   "decisao": "APROVA",
   "fp": "1b266da0ff3d"
  },
- "L_pos2_5_7": {
+ "L_pos2_4_7": {
   "decisao": "APROVA",
   "fp": "701664fa0b02"
  },
- "L_pos2_5_8": {
+ "L_pos2_4_8": {
   "decisao": "APROVA",
   "fp": "e9cd1e70fdde"
  },
- "L_pos2_5_9": {
+ "L_pos2_4_9": {
   "decisao": "APROVA",
   "fp": "619b82edea0c"
  },
- "L_pos2_5_10": {
+ "L_pos2_4_10": {
   "decisao": "APROVA",
   "fp": "c06de3a8c19b"
  },
- "L_pos2_5_11": {
+ "L_pos2_4_11": {
   "decisao": "APROVA",
   "fp": "c0269b804562"
  },
@@ -1157,75 +1213,75 @@
   "decisao": "APROVA",
   "fp": "1780288117f1"
  },
- "L_objetos_6_0": {
+ "L_objetos_5_0": {
   "decisao": "APROVA",
   "fp": "d2e5ff7b90bc"
  },
- "L_objetos_6_1": {
+ "L_objetos_5_1": {
   "decisao": "APROVA",
   "fp": "d2e5ff7b90bc"
  },
- "L_objetos_6_2": {
+ "L_objetos_5_2": {
   "decisao": "APROVA",
   "fp": "d2e5ff7b90bc"
  },
- "L_objetos_6_3": {
+ "L_objetos_5_3": {
   "decisao": "APROVA",
   "fp": "5b1c6604fcf9"
  },
- "L_objetos_6_4": {
+ "L_objetos_5_4": {
   "decisao": "APROVA",
   "fp": "5b1c6604fcf9"
  },
- "L_objetos_6_5": {
+ "L_objetos_5_5": {
   "decisao": "APROVA",
   "fp": "5b1c6604fcf9"
  },
- "L_objetos_6_6": {
+ "L_objetos_5_6": {
   "decisao": "APROVA",
   "fp": "c1a263764155"
  },
- "L_objetos_6_7": {
+ "L_objetos_5_7": {
   "decisao": "APROVA",
   "fp": "c1a263764155"
  },
- "L_objetos_6_8": {
+ "L_objetos_5_8": {
   "decisao": "APROVA",
   "fp": "c1a263764155"
  },
- "L_objetos_6_9": {
+ "L_objetos_5_9": {
   "decisao": "APROVA",
   "fp": "b10c17c264d2"
  },
- "L_objetos_6_10": {
+ "L_objetos_5_10": {
   "decisao": "APROVA",
   "fp": "b10c17c264d2"
  },
- "L_objetos_6_11": {
+ "L_objetos_5_11": {
   "decisao": "APROVA",
   "fp": "b10c17c264d2"
  },
- "L_objetos_6_12": {
+ "L_objetos_5_12": {
   "decisao": "APROVA",
   "fp": "1fd83859b170"
  },
- "L_objetos_6_13": {
+ "L_objetos_5_13": {
   "decisao": "APROVA",
   "fp": "1fd83859b170"
  },
- "L_objetos_6_14": {
+ "L_objetos_5_14": {
   "decisao": "APROVA",
   "fp": "1fd83859b170"
  },
- "L_objetos_6_15": {
+ "L_objetos_5_15": {
   "decisao": "APROVA",
   "fp": "9bfe29be4e5e"
  },
- "L_objetos_6_16": {
+ "L_objetos_5_16": {
   "decisao": "APROVA",
   "fp": "9bfe29be4e5e"
  },
- "L_objetos_6_17": {
+ "L_objetos_5_17": {
   "decisao": "APROVA",
   "fp": "9bfe29be4e5e"
  },
@@ -1348,61 +1404,5 @@
  "L_pushpull_5_7": {
   "decisao": "APROVA",
   "fp": "1ef671615542"
- },
- "x01": {
-  "decisao": "APROVA",
-  "fp": "c29ab634ca30"
- },
- "x02": {
-  "decisao": "APROVA",
-  "fp": "60008be50ab7"
- },
- "x03": {
-  "decisao": "APROVA",
-  "fp": "ad6a930a0175"
- },
- "x04": {
-  "decisao": "APROVA",
-  "fp": "96ad2b041e8a"
- },
- "x05": {
-  "decisao": "APROVA",
-  "fp": "44c7e2ef6b02"
- },
- "x06": {
-  "decisao": "APROVA",
-  "fp": "24d380a66f5b"
- },
- "x07": {
-  "decisao": "APROVA",
-  "fp": "969330c77c45"
- },
- "x08": {
-  "decisao": "APROVA",
-  "fp": "163c135dc5c6"
- },
- "x09": {
-  "decisao": "APROVA",
-  "fp": "cac9e555d781"
- },
- "x10": {
-  "decisao": "APROVA",
-  "fp": "4e5e59bf3ec0"
- },
- "x11": {
-  "decisao": "APROVA",
-  "fp": "6355b6eadf4b"
- },
- "x12": {
-  "decisao": "APROVA",
-  "fp": "c02d7ebbae03"
- },
- "x13": {
-  "decisao": "EXCLUI",
-  "regras": [
-   "B",
-   "F"
-  ],
-  "motivo": "resposta por bom senso (aviao e rapido); velocidade de aviao x pipa nao esta no roteiro (O8 so diz slow/fast) e pipa pode ser rapida; binario banal"
  }
 }

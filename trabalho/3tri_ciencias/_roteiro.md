@@ -51,14 +51,8 @@ Unit 3 — Position and Motion. Prova em INGLÊS: tela inteira em inglês, portu
 - F3 S6 push: riding a bike, pushing a box, pushing a door, kicking a ball. F4 S6 pull: tug of war with a rope, pulling a wagon, opening a drawer, fishing with a rod.
 - F5 (V2) Force makes things move from one place to another; push and pull are OPPOSITE forces; os dois tipos de força são push e pull. F6 (V2) push: shopping trolley, volleyball, playing the piano, the golfer hitting the ball. F7 (V2) pull: holding the rope of a kite, picking fruit and vegetables from the plant.
 
-## Armadilhas de L2 (treinar explicitamente)
-- **PUSH = empurrar, nunca "puxar"** (falso amigo: push parece puxar; pull é que é puxar). A maior pegadinha da prova.
-- on × above (encostado × acima sem encostar) · under × below · in × inside · near × next to × far from · behind × in front of · over × on.
-- left × right (lado de quem olha o mapa) · top × bottom · front × side.
-- roll × spin (rola e sai do lugar × gira no lugar) · swing × spin · slide (o brinquedo) × to slide (deslizar).
-- helpful × harmful (mesma raiz, sentidos opostos). wind × window. lost.
-
-- right = direita × right = certo (S7) · top = pião (S5) × top = cima (S7) · water = regar × água · fan = ventilador × fã · can = lata · drawer = gaveta · pick = colher/pegar · bounce × jump · over × above · pull × pool.
+## Nível (ordem do Paulo, 02/11)
+Nada de pares que enganam nem pegadinha: os slides mostram cada palavra com sua figura e nunca contrapõem palavras parecidas. A prova é de Y2: nível exigido pelo material, nada além. Distrator = outra palavra do slide, bem distinta.
 
 ## Complementos da revisão pedagógica (02/11)
 - S3 tem caixa de palavras (behind, next to, in front of, over, in, on, between, under): treinar completar frase com essas opções.

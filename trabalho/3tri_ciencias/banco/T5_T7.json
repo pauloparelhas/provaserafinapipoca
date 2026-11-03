@@ -260,16 +260,16 @@
   "p_pt": "Como isso se move?",
   "o": [
    "It slides.",
-   "It rolls.",
-   "It swings."
+   "It flies.",
+   "It bounces."
   ],
   "o_pt": [
    "Desliza.",
-   "Rola.",
-   "Balança."
+   "Voa.",
+   "Quica."
   ],
-  "dica": "O cubo de gelo continua em pé, sem virar. A seta mostra o caminho.",
-  "dica_en": "The ice cube stays the same way up. The arrow shows the path.",
+  "dica": "Veja a seta: ela mostra o caminho.",
+  "dica_en": "See the arrow: it shows the path.",
   "ex": "To slide is to move smoothly along a surface. The ice cube slides.",
   "ex_pt": "Deslizar é se mover suave sobre uma superfície. O cubo de gelo desliza.",
   "img": "media/cie3/obj-slide-ice-cube.jpg"
@@ -335,18 +335,18 @@
   "p_pt": "Como isso se move?",
   "o": [
    "It spins.",
-   "It rolls.",
+   "It flies.",
    "It bounces."
   ],
   "o_pt": [
    "Gira.",
-   "Rola.",
+   "Voa.",
    "Quica."
   ],
-  "dica": "O ventilador fica preso no teto. O que as pás fazem?",
-  "dica_en": "The fan stays on the ceiling. What do its blades do?",
-  "ex": "The fan stays in one place and turns around and around. It spins.",
-  "ex_pt": "O ventilador fica no mesmo lugar e dá voltas e voltas. Ele gira.",
+  "dica": "Olhe as setas em volta do ventilador.",
+  "dica_en": "Look at the arrows around the fan.",
+  "ex": "To spin means to turn around and around. The fan spins.",
+  "ex_pt": "Girar é dar voltas e voltas. O ventilador gira.",
   "img": "media/cie3/obj-spin-fan.jpg"
  },
  {
@@ -360,13 +360,13 @@
   "p_pt": "Como isso se move?",
   "o": [
    "It spins.",
-   "It swings.",
-   "It flies."
+   "It flies.",
+   "It bounces."
   ],
   "o_pt": [
    "Gira.",
-   "Balança.",
-   "Voa."
+   "Voa.",
+   "Quica."
   ],
   "dica": "Veja a seta em volta do pião.",
   "dica_en": "See the arrow around the top.",
@@ -435,13 +435,13 @@
   "p_pt": "Como ela se move?",
   "o": [
    "It swings.",
-   "It spins.",
-   "It slides."
+   "It bounces.",
+   "It flies."
   ],
   "o_pt": [
    "Ela balança (abre e fecha).",
-   "Ela gira.",
-   "Ela desliza."
+   "Ela quica.",
+   "Ela voa."
   ],
   "dica": "A porta abre e fecha: vai e volta.",
   "dica_en": "The door opens and closes: it goes and comes back.",
@@ -508,16 +508,16 @@
   "p_pt": "___ significa se mover virando e virando.",
   "o": [
    "roll",
-   "spin",
-   "swing"
+   "fly",
+   "bounce"
   ],
   "o_pt": [
    "rolar",
-   "girar",
-   "balançar"
+   "voar",
+   "quicar"
   ],
-  "dica": "Pense na roda indo pela rua, de um lugar para outro.",
-  "dica_en": "Think about a wheel going along the road, from one place to another.",
+  "dica": "Pense na roda.",
+  "dica_en": "Think about a wheel.",
   "ex": "To roll means to move by turning over and over, like a wheel.",
   "ex_pt": "Rolar é se mover virando e virando, como a roda."
  },
@@ -556,13 +556,13 @@
   "p_pt": "___ significa dar voltas e voltas.",
   "o": [
    "spin",
-   "roll",
-   "swing"
+   "fly",
+   "bounce"
   ],
   "o_pt": [
    "girar",
-   "rolar",
-   "balançar"
+   "voar",
+   "quicar"
   ],
   "dica": "Pense no pião.",
   "dica_en": "Think about a top.",
@@ -580,12 +580,12 @@
   "p_pt": "___ significa ir e voltar como um pêndulo.",
   "o": [
    "swing",
-   "spin",
+   "fly",
    "bounce"
   ],
   "o_pt": [
    "balançar",
-   "girar",
+   "voar",
    "quicar"
   ],
   "dica": "Pense no brinquedo do parquinho que vai e volta.",
@@ -1486,8 +1486,8 @@
    "um empurrão",
    "um puxão"
   ],
-  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
-  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "dica": "Push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Push moves things away, pull brings them closer. What does the picture show?",
   "ex": "The hands move the box away from the boy. That is a push.",
   "ex_pt": "As mãos levam a caixa para longe do menino. É push, empurrar.",
   "img": "media/cie3/push-box.jpg"
@@ -1509,8 +1509,8 @@
    "um empurrão",
    "um puxão"
   ],
-  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
-  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "dica": "Push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Push moves things away, pull brings them closer. What does the picture show?",
   "ex": "The foot moves the ball away from the boy. Kicking is a push.",
   "ex_pt": "O pé leva a bola para longe do menino. Chutar é push, empurrar.",
   "img": "media/cie3/push-ball.jpg"
@@ -1554,8 +1554,8 @@
    "um puxão",
    "um empurrão"
   ],
-  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
-  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "dica": "Push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Push moves things away, pull brings them closer. What does the picture show?",
   "ex": "Each child brings the rope closer. Tug of war is a pull.",
   "ex_pt": "Cada criança traz a corda para perto. Cabo de guerra é pull, puxar.",
   "img": "media/cie3/pull-rope.jpg"
@@ -1577,8 +1577,8 @@
    "um puxão",
    "um empurrão"
   ],
-  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
-  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "dica": "Push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Push moves things away, pull brings them closer. What does the picture show?",
   "ex": "The boy holds the handle and the wagon comes after him. That is a pull.",
   "ex_pt": "O menino segura a alça e o carrinho vem atrás. É pull, puxar.",
   "img": "media/cie3/pull-wagon.jpg"
@@ -1600,8 +1600,8 @@
    "um puxão",
    "um empurrão"
   ],
-  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
-  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "dica": "Push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Push moves things away, pull brings them closer. What does the picture show?",
   "ex": "The drawer comes closer to the girl. Opening a drawer is a pull.",
   "ex_pt": "A gaveta vem para perto da menina. Abrir gaveta é pull, puxar.",
   "img": "media/cie3/pull-drawer.jpg"
@@ -1623,8 +1623,8 @@
    "um puxão",
    "um empurrão"
   ],
-  "dica": "Cuidado: push = empurrar, pull = puxar. O que a figura mostra?",
-  "dica_en": "Careful: push moves things away, pull brings them closer. What does the picture show?",
+  "dica": "Push = empurrar, pull = puxar. O que a figura mostra?",
+  "dica_en": "Push moves things away, pull brings them closer. What does the picture show?",
   "ex": "The rod brings the fish closer to the boy. Fishing is a pull.",
   "ex_pt": "A vara traz o peixe para perto do menino. Pescar é pull, puxar.",
   "img": "media/cie3/pull-fish.jpg"
@@ -1814,8 +1814,8 @@
    "para longe de mim",
    "para perto de mim"
   ],
-  "dica": "Cuidado: push parece \"puxar\", mas push = empurrar, pull = puxar.",
-  "dica_en": "Careful: think of pushing a heavy box.",
+  "dica": "Pense em empurrar uma caixa pesada.",
+  "dica_en": "Think of pushing a heavy box.",
   "ex": "A push moves something away from me.",
   "ex_pt": "Empurrar move algo para longe de mim."
  },

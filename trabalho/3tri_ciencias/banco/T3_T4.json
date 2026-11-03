@@ -156,22 +156,22 @@
   "at": [
    "P2"
   ],
-  "p": "You can see the whole tower and the river near it. You see it from the...",
-  "p_pt": "Voce ve a torre inteira e o rio perto dela. Voce a ve de...",
+  "p": "This tower is seen from the...",
+  "p_pt": "Esta torre é vista de...",
   "o": [
    "side",
-   "bottom",
-   "front"
+   "top",
+   "bottom"
   ],
   "o_pt": [
    "lado (side)",
-   "baixo (bottom)",
-   "frente (front)"
+   "cima (top)",
+   "baixo (bottom)"
   ],
-  "dica": "Compare com as outras fotos da torre: dá para ver a torre inteira?",
-  "dica_en": "Compare with the other tower photos: can you see the whole tower?",
-  "ex": "The side view shows the whole tower and the river near it.",
-  "ex_pt": "A vista lateral mostra a torre inteira e o rio perto.",
+  "dica": "Olhe o rio e a cidade em volta da torre.",
+  "dica_en": "Look at the river and the city around the tower.",
+  "ex": "This photo shows the tower seen from the side.",
+  "ex_pt": "Esta foto mostra a torre vista de lado.",
   "img": "media/cie3/view-side.jpg"
  },
  {
@@ -605,12 +605,12 @@
   "p_pt": "O que é isto? Útil ou perigoso?",
   "o": [
    "harmful: a tsunami",
-   "harmful: a flood",
+   "harmful: a tornado",
    "helpful: makes energy"
   ],
   "o_pt": [
    "perigoso: um tsunami",
-   "perigoso: uma enchente",
+   "perigoso: um tornado",
    "útil: faz energia"
   ],
   "dica": "Olhe o tamanho da onda chegando às casas.",
@@ -630,16 +630,16 @@
   "p_pt": "O que é isto? Útil ou perigoso?",
   "o": [
    "harmful: a flood",
-   "harmful: a tsunami",
+   "harmful: a tornado",
    "helpful: waters plants"
   ],
   "o_pt": [
    "perigoso: uma enchente",
-   "perigoso: um tsunami",
+   "perigoso: um tornado",
    "útil: rega as plantas"
   ],
-  "dica": "Olhe a chuva e os carros na água. Há uma onda gigante?",
-  "dica_en": "Look at the rain and the cars in the water. Is there a giant wave?",
+  "dica": "Olhe a chuva e os carros na água.",
+  "dica_en": "Look at the rain and the cars in the water.",
   "ex": "Heavy rain can make floods. The water covers streets and cars. It is harmful.",
   "ex_pt": "Chuva forte pode causar enchentes. A água cobre ruas e carros. É perigoso.",
   "img": "media/cie3/harm-floods.jpg"
@@ -680,16 +680,16 @@
   "p_pt": "O que é isto? Útil ou perigoso?",
   "o": [
    "harmful: strong winds",
-   "harmful: a tornado",
+   "harmful: a tsunami",
    "helpful: spreads seeds"
   ],
   "o_pt": [
    "perigoso: ventos fortes",
-   "perigoso: um tornado",
+   "perigoso: um tsunami",
    "útil: espalha sementes"
   ],
-  "dica": "Há um funil no céu ou só as árvores se dobrando?",
-  "dica_en": "Is there a funnel in the sky, or only trees bending?",
+  "dica": "Olhe as árvores e as folhas.",
+  "dica_en": "Look at the trees and the leaves.",
   "ex": "These strong winds bend the trees and blow the leaves. They are harmful.",
   "ex_pt": "Estes ventos fortes dobram as árvores e levam as folhas. São perigosos.",
   "img": "media/cie3/harm-winds.jpg"
@@ -757,13 +757,11 @@
   "p_pt": "Qual força natural gira estas pás?",
   "o": [
    "wind",
-   "water",
-   "wind and water"
+   "water"
   ],
   "o_pt": [
    "vento",
-   "água",
-   "vento e água"
+   "água"
   ],
   "dica": "Lembre da coluna helpful do slide.",
   "dica_en": "Remember the helpful column on the slide.",
@@ -783,13 +781,11 @@
   "p_pt": "Qual força natural espalha estas sementes?",
   "o": [
    "wind",
-   "water",
-   "wind and water"
+   "water"
   ],
   "o_pt": [
    "vento",
-   "água",
-   "vento e água"
+   "água"
   ],
   "dica": "As sementes estão no ar ou na água?",
   "dica_en": "Are the seeds in the air or in water?",
@@ -833,13 +829,11 @@
   "p_pt": "Qual força natural é esta?",
   "o": [
    "water",
-   "wind",
-   "wind and water"
+   "wind"
   ],
   "o_pt": [
    "água",
-   "vento",
-   "vento e água"
+   "vento"
   ],
   "dica": "Do que é feita esta onda?",
   "dica_en": "What is this wave made of?",
@@ -1195,13 +1189,13 @@
   "p_pt": "Precisamos proteger nosso(a)...",
   "o": [
    "air and water",
-   "only air",
-   "only water"
+   "kites and balloons",
+   "balls and boxes"
   ],
   "o_pt": [
    "ar e água",
-   "só o ar",
-   "só a água"
+   "pipas e balões",
+   "bolas e caixas"
   ],
   "dica": "Lembre das duas forças da lição.",
   "dica_en": "Remember the two forces in the lesson.",

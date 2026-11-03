@@ -20,8 +20,8 @@
   ],
   "dica": "Olhe bem: a caixa está aberta. Onde fica o corpo do ursinho?",
   "dica_en": "Look: the box is open. Where is the bear's body?",
-  "ex": "In: a thing has something around it. The bear is in the box.",
-  "ex_pt": "In: a coisa tem algo em volta. O ursinho está dentro da caixa.",
+  "ex": "The teddy bear is in the box.",
+  "ex_pt": "O ursinho está dentro da caixa.",
   "img": "media/cie3/prep-in.jpg"
  },
  {
@@ -61,18 +61,18 @@
   "p_pt": "Onde está a maçã?",
   "o": [
    "on the book",
-   "above the book",
-   "under the book"
+   "under the book",
+   "next to the book"
   ],
   "o_pt": [
-   "em cima do livro (encostada)",
-   "acima do livro (sem encostar)",
-   "embaixo do livro"
+   "em cima do livro",
+   "embaixo do livro",
+   "ao lado do livro"
   ],
-  "dica": "A maçã está encostando no livro?",
-  "dica_en": "Is the apple touching the book?",
-  "ex": "On means touching the top. The apple touches the book, so it is on the book.",
-  "ex_pt": "On é encostado em cima. A maçã encosta no livro, então está on the book.",
+  "dica": "Olhe a maçã e o livro.",
+  "dica_en": "Look at the apple and the book.",
+  "ex": "The apple is on the book.",
+  "ex_pt": "A maçã está em cima do livro.",
   "img": "media/cie3/prep-on.jpg"
  },
  {
@@ -138,17 +138,17 @@
   "o": [
    "under the table",
    "on the table",
-   "above the table"
+   "next to the table"
   ],
   "o_pt": [
    "embaixo da mesa",
    "em cima da mesa",
-   "acima da mesa"
+   "ao lado da mesa"
   ],
-  "dica": "Olhe onde a bola está: no chão ou lá no alto?",
-  "dica_en": "Look at the ball: on the floor or up high?",
-  "ex": "Under means lower, with something on top of it. The ball is under the table.",
-  "ex_pt": "Under é mais baixo, com algo por cima. A bola está embaixo da mesa.",
+  "dica": "Olhe onde a bola está.",
+  "dica_en": "Look at where the ball is.",
+  "ex": "The ball is under the table.",
+  "ex_pt": "A bola está embaixo da mesa.",
   "img": "media/cie3/prep-under.jpg"
  },
  {
@@ -374,8 +374,8 @@
   ],
   "dica": "Veja a distância entre os dois.",
   "dica_en": "Look at the space between them.",
-  "ex": "Next to means right at the side. The clock is next to the lamp.",
-  "ex_pt": "Next to é bem ao lado. O relógio está ao lado do abajur.",
+  "ex": "The clock is next to the lamp.",
+  "ex_pt": "O relógio está ao lado do abajur.",
   "img": "media/cie3/prep-next-to.jpg"
  },
  {
@@ -592,18 +592,18 @@
   "p_pt": "Onde está a lâmpada?",
   "o": [
    "above the table",
-   "on the table",
-   "under the table"
+   "under the table",
+   "next to the table"
   ],
   "o_pt": [
-   "acima da mesa (sem encostar)",
-   "em cima da mesa (encostada)",
-   "embaixo da mesa"
+   "acima da mesa",
+   "embaixo da mesa",
+   "ao lado da mesa"
   ],
-  "dica": "A lâmpada encosta na mesa?",
-  "dica_en": "Does the lamp touch the table?",
-  "ex": "Above means higher, not touching. The lamp does not touch the table: above.",
-  "ex_pt": "Above é mais alto, sem encostar. A lâmpada não encosta na mesa: acima.",
+  "dica": "Olhe: a lâmpada está lá no alto ou lá embaixo?",
+  "dica_en": "Look: is the lamp up high or down low?",
+  "ex": "The lamp is above the table.",
+  "ex_pt": "A lâmpada está acima da mesa.",
   "img": "media/cie3/prep-above.jpg"
  },
  {
@@ -678,8 +678,8 @@
   ],
   "dica": "O gato está mais alto ou mais baixo que a prateleira?",
   "dica_en": "Is the cat higher or lower than the shelf?",
-  "ex": "Below means lower. The cat is lower than the shelf: below the shelf.",
-  "ex_pt": "Below é mais baixo. O gato está mais baixo que a prateleira: abaixo dela.",
+  "ex": "The cat is below the shelf.",
+  "ex_pt": "O gato está abaixo da prateleira.",
   "img": "media/cie3/prep-below.jpg"
  },
  {
@@ -702,10 +702,10 @@
    "embaixo da prateleira",
    "atrás da prateleira"
   ],
-  "dica": "Os livros encostam na prateleira?",
-  "dica_en": "Do the books touch the shelf?",
-  "ex": "The books touch the top of the shelf, so they are on the shelf.",
-  "ex_pt": "Os livros encostam em cima da prateleira: estão on the shelf.",
+  "dica": "Olhe em cima da prateleira.",
+  "dica_en": "Look at the top of the shelf.",
+  "ex": "The books are on the shelf.",
+  "ex_pt": "Os livros estão em cima da prateleira.",
   "img": "media/cie3/prep-below.jpg"
  },
  {
@@ -780,8 +780,8 @@
   ],
   "dica": "Veja o que está em volta do peixe.",
   "dica_en": "Look at what is around the fish.",
-  "ex": "Inside: the bowl is all around the fish. The fish is inside the bowl.",
-  "ex_pt": "Inside: o aquário está em volta do peixe. O peixe está dentro dele.",
+  "ex": "The fish is inside the bowl.",
+  "ex_pt": "O peixe está dentro do aquário.",
   "img": "media/cie3/prep-inside.jpg"
  },
  {
@@ -830,10 +830,10 @@
    "embaixo de",
    "dentro de"
   ],
-  "dica": "O pássaro encosta nas árvores? Ele está no alto?",
-  "dica_en": "Does the bird touch the trees? Is it up high?",
-  "ex": "Over means up in the air, higher than something. The bird flies over the trees.",
-  "ex_pt": "Over é pelo alto, por cima de algo. O pássaro voa por cima das árvores.",
+  "dica": "Olhe o pássaro: ele está lá no alto?",
+  "dica_en": "Look at the bird: is it up high?",
+  "ex": "There is a bird flying over the trees.",
+  "ex_pt": "Há um pássaro voando por cima das árvores.",
   "img": "media/cie3/room.jpg"
  },
  {
@@ -1029,18 +1029,18 @@
   "p_pt": "O queijo está ___ o prato.",
   "o": [
    "on",
-   "above",
+   "next to",
    "under"
   ],
   "o_pt": [
-   "em cima de (encostado)",
-   "acima de (sem encostar)",
+   "em cima de",
+   "ao lado de",
    "embaixo de"
   ],
-  "dica": "O queijo encosta no prato?",
-  "dica_en": "Does the cheese touch the plate?",
-  "ex": "The cheese touches the plate, so it is on the plate.",
-  "ex_pt": "O queijo encosta no prato, então está on the plate.",
+  "dica": "Ache o prato na mesa.",
+  "dica_en": "Find the plate on the table.",
+  "ex": "The cheese is on the plate.",
+  "ex_pt": "O queijo está em cima do prato.",
   "img": "media/cie3/room.jpg"
  },
  {
@@ -1143,8 +1143,8 @@
   ],
   "dica": "Olhe onde o quadro está pendurado.",
   "dica_en": "Look at where the picture hangs.",
-  "ex": "On also means touching a wall. The picture is on the wall.",
-  "ex_pt": "On também vale para parede. O quadro está on the wall.",
+  "ex": "The picture is on the wall.",
+  "ex_pt": "O quadro está na parede.",
   "img": "media/cie3/room.jpg"
  },
  {
