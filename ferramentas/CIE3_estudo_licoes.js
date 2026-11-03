@@ -190,8 +190,7 @@ return [
  treino:[], telas:[
  {tipo:'texto', tit:'Push or pull?',
   fala:'A push is when I use a force to move something away from me. A pull is when I use a force to move something closer to me.',
-  html:R('push · pull','push = empurrar · pull = puxar')+
-   R('A push is when I use a <b>force</b> to move something <b>away from me</b>.','Push é quando uso uma força para mover algo para longe de mim.')+
+  html:   R('A push is when I use a <b>force</b> to move something <b>away from me</b>.','Push é quando uso uma força para mover algo para longe de mim.')+
    R('A pull is when I use a <b>force</b> to move something <b>closer to me</b>.','Pull é quando uso uma força para trazer algo para perto de mim.')},
  {tipo:'texto', tit:'Push',
   fala:'Push: riding a bike, pushing a box, pushing a door, kicking a ball. They move away from me.',
