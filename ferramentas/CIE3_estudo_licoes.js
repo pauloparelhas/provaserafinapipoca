@@ -146,9 +146,9 @@ return [
   fala:'Harmful: tsunami, heavy rain and floods, tornado, strong winds.',
   html:grade(2,[['harm-tsunami','<b>tsunami</b>','tsunami'],['harm-floods','<b>heavy rain and floods</b>','chuva forte e enchentes'],['harm-tornado','<b>tornado</b>','tornado'],['harm-winds','<b>strong winds</b>','ventos fortes']])},
  {tipo:'texto', tit:'What wind and water do',
-  fala:'Wind is air in motion. Wind moves sand and makes dunes. It fills the sails of boats and turns wind turbines. Water is always moving. Rivers flow downhill. Water wears rock away. Water makes energy, carries boats and waters the fields.',
+  fala:'Wind is air in motion. Wind moves sand and makes dunes. It fills the sails of boats and turns wind turbines. Rivers flow downhill. Water wears rock away. Water makes energy, carries boats and waters the fields.',
   html:caixa('Wind'+tr('Vento'),'<p>Wind is <b>air in motion</b>.'+tr('Vento é ar em movimento.')+'<br>It moves <b>sand</b> and makes <b>dunes</b>.'+tr('Move a areia e faz dunas.')+'<br>It fills <b>sails</b> and turns <b>wind turbines</b>.'+tr('Enche as velas e gira as turbinas.')+'</p>')+esp()+
-   caixa('Water'+tr('Água'),'<p>Water is <b>always moving</b>. Rivers flow <b>downhill</b>.'+tr('A água está sempre em movimento. Os rios descem.')+'<br>It wears <b>rock</b> away.'+tr('Desgasta a pedra.')+'<br>It makes <b>energy</b>, carries <b>boats</b> and waters the <b>fields</b>.'+tr('Faz energia, leva barcos e rega os campos.')+'</p>')},
+   caixa('Water'+tr('Água'),'<p>Rivers flow <b>downhill</b>.'+tr('Os rios descem.')+'<br>It wears <b>rock</b> away.'+tr('Desgasta a pedra.')+'<br>It makes <b>energy</b>, carries <b>boats</b> and waters the <b>fields</b>.'+tr('Faz energia, leva barcos e rega os campos.')+'</p>')},
  {tipo:'texto', tit:'On the test', fala:'This is how it can come on the test.', html:'<p class="nptit">This is how it can come on the test.'+tr('É assim que pode cair na prova.')+'</p>'+naProva('harm-floods',[P('Wind and water are two ___ forces.','Vento e água são duas forças ___.','natural','naturais'),P('Look at the picture. Is it helpful or harmful?','Olhe a figura. Ajuda ou prejudica?','harmful','prejudica')])}
 ]},
 
