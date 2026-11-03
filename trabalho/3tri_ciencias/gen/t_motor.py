@@ -73,3 +73,6 @@ T['html'] = [('<title>The Lost Endings — English</title>', '<title>Motion Rang
   ('title="Pages"', 'title="Motion Stars"'),
   ('<script src="ING3_jogo_arte5.js?v=20261018d"></script>', '<script src="ING3_jogo_arte5.js?v=20261018d"></script>\n<script src="CIE3_jogo_base.js"></script>\n<script src="CIE3_jogo_arteA.js"></script>\n<script src="CIE3_jogo_arteB.js"></script>\n<script src="CIE3_jogo_arteC.js"></script>\n<script src="CIE3_jogo_cie.js"></script>'),
 ]
+
+# aviso pedido pelo Paulo (02/11): jogo inacabado
+T['html'] = T.get('html', []) + [("</body>", """<div id="aviso-dev" style="position:fixed;left:50%;top:46px;transform:translateX(-50%);z-index:50;pointer-events:none;background:#fff3c4;color:#4a3000;border:2px solid #b45309;border-radius:12px;padding:2px 12px;font:900 13px Nunito,Arial,sans-serif;text-align:center;white-space:nowrap">In development<span class="tr" style="font-size:11px"> Em desenvolvimento</span></div></body>""")]
