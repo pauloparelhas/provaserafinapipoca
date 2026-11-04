@@ -29,9 +29,10 @@ const ITENS = I.ITENS.map(it => {
   q.truqueHtml = esc(it.ex) + tr(it.ex_pt);
   /* BLITZ (Paulo 03/11): so a questao que a crianca bate o olho e responde em ~10 s, para fazer muitos simulados
      no dia da prova. Regra fixa: sem texto para ler, enunciado + todas as alternativas somam ate 18 palavras,
-     nenhuma alternativa passa de 4 palavras. */
+     nenhuma alternativa passa de 4 palavras, ate 4 alternativas; fora a sala e o mapa da escola (figura cheia de detalhes,
+     nao se le de relance). */
   const pal = x => String(x || '').split(/\s+/).filter(Boolean).length;
-  q.blitz = !it.texto && pal(it.p) + it.o.reduce((n, o) => n + pal(o), 0) <= 18 && Math.max(...it.o.map(pal)) <= 4;
+  q.blitz = !it.texto && it.o.length <= 4 && !/room\.jpg|map-school/.test(it.img || '') && pal(it.p) + it.o.reduce((n, o) => n + pal(o), 0) <= 18 && Math.max(...it.o.map(pal)) <= 4;
   q.porque = '';
   q.visual = ''; q.proximo = '';
   return q;

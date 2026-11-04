@@ -203,7 +203,7 @@ function Questao(props){
       if(feito && o.ok) cls+=' ok';
       if(feito && i===pick && !o.ok) cls+=' no';
       return h('button',{key:i, className:cls, disabled:feito, onClick:function(){ responde(i); }},
-        h('span',{className:'let'},'ABCD'.charAt(i)),
+        h('span',{className:'let'},'ABCDEF'.charAt(i)),
         o.img
           ? h('span',{className:'oimg'}, h('img',{src:o.img, alt:textoPuro(o.t), loading:'lazy'}))
           : h('span',Object.assign({className:'oct'},html(o.t)))
