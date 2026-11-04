@@ -1,0 +1,198 @@
+{
+ "veredito_geral": "REPROVA (1 item: d03)",
+ "resumo": "LIBERA 20, REPROVA 1",
+ "itens": [
+  {
+   "id": "c01",
+   "texto": "Where is the ball? on the table",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "A2 on: figura mostra a bola sobre o tampo; distratores under/next to visivelmente falsos",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "c02",
+   "texto": "Where is the ball? under the table",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "A3 under: bola entre as pernas, abaixo do tampo",
+   "contraexemplo": "Opcional: ex diz 'table is over the ball'; trocar por 'above' (A10) para nao introduzir over em contexto novo, mas nao e falso (A13 over existe).",
+   "correcao": "Opcional: ex diz 'table is over the ball'; trocar por 'above' (A10) para nao introduzir over em contexto novo, mas nao e falso (A13 over existe)."
+  },
+  {
+   "id": "c03",
+   "texto": "Where is the ball? in the box",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "A1 in: bola dentro da caixa aberta",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "c04",
+   "texto": "Where is the ball? behind the box",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "A4 behind: caixa cobre parte da bola; in front of e in the box falsos",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "c05",
+   "texto": "Where is the ball? in front of the box",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "A5 in front of: bola inteira visivel cobrindo parte da caixa fechada; behind/in falsos",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "c06",
+   "texto": "Where is the ball? next to the box",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "A7 next to: bola ao lado, separada, nada a esconde; in/behind falsos",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "c07",
+   "texto": "Where is the ball? between the two boxes",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "A6 between: uma caixa de cada lado, centralizada",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "c08",
+   "texto": "Where is the bird? above the tree",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "A10 above: passaro acima da copa; under/in falsos",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "c09",
+   "texto": "Where is the ball? near the house",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "A8 near: bola encostada na casa; far from e in the house falsos (next to nao e opcao)",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "c10",
+   "texto": "Where is the ball? far from the house",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "A9 far from: bola no extremo oposto da cena",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "a38",
+   "texto": "bird flying over/under/in the trees (room-a38.jpg)",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "recorte mostra janela, passaro e arbustos abaixo; S3 A13 over",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "a42",
+   "texto": "guitar between the lamp and the plant (room-a42.jpg)",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "recorte mostra planta, violao e abajur lado a lado",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "a43",
+   "texto": "two dogs under the table (room-a43.jpg)",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "recorte mostra tampo, pernas e caes embaixo; behind/on falsos",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "a47",
+   "texto": "rug in front of the sofa (room-a47.jpg)",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "recorte mostra sofa inteiro, mesa e tapete a frente; behind/far from falsos",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "x08",
+   "texto": "racket next to the bag (room-x08.jpg)",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "recorte mostra raquete encostada ao lado da mochila",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "x09",
+   "texto": "trophy between the books (room-x09.jpg)",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "recorte mostra taca com livros nos dois lados na prateleira",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "d01",
+   "texto": "Which section is on the left of the Auditorium? A/B/C section (map-d01.jpg)",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "recorte mostra A section a esquerda, Auditorium, B a direita. C section fora do recorte: tudo bem, a resposta (A) esta visivel e C na planta inteira fica no alto, nao a esquerda, entao o distrator segue falso. Observacao: opcional trocar C section por 'the Entrance' (visivel no recorte).",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "d02",
+   "texto": "B section is on the ___ of the Auditorium (map-d02.jpg)",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "mesmo recorte, B a direita; left/top falsos",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "d03",
+   "texto": "What is between A section and B section? Auditorium/the Trix/the Entrance (map-d03.jpg)",
+   "decisao": "REPROVA",
+   "regras": [
+    "D"
+   ],
+   "lastro": "Trix nao aparece no recorte (distrator sem referente) e, na planta inteira, Trix (topo) e Entrance (base) tambem ficam horizontalmente entre A e B. Entrance aparece no recorte alinhado ao Auditorium: uma crianca pode ler como 'entre' (duas certas).",
+   "contraexemplo": "Entrance fica na linha entre A e B e abaixo do Auditorium",
+   "correcao": "o: ['the Auditorium','Year 3G Classroom','the Extra Classroom'] (ambos visiveis no recorte, claramente nao entre A e B); o_pt: ['o Auditorio','a sala do Year 3G','a sala Extra']; ex mantido."
+  },
+  {
+   "id": "d13",
+   "texto": "red pin marks which place? a Year 2 classroom/Auditorium/Entrance (map-d13.jpg)",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "recorte mostra pino sobre Year 2 Classroom e Auditorium parcial; Entrance fora do recorte mas e falso",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  },
+  {
+   "id": "d14",
+   "texto": "red pin is in which section? B/A/C section (map-d14.jpg)",
+   "decisao": "LIBERA",
+   "regras": [],
+   "lastro": "recorte mostra pino no anel da B section, A section e Auditorium visiveis; C fora do recorte mas falso",
+   "contraexemplo": "nenhum",
+   "correcao": "nenhuma"
+  }
+ ],
+ "correcao_aplicada_d03": "o trocado para [\"the Auditorium\",\"Year 3G Classroom\",\"the Extra Classroom\"] conforme a correcao exata pedida; avaliador APROVA (fp 0a1702b1e9e2)"
+}

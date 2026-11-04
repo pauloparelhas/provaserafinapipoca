@@ -194,7 +194,7 @@
   "dica_en": "Find the racket in the room.",
   "ex": "The racket is right beside the bag: next to.",
   "ex_pt": "A raquete está bem ao lado da mochila: ao lado de.",
-  "img": "media/cie3/room.jpg"
+  "img": "media/cie3/room-x08.jpg"
  },
  {
   "id": "x09",
@@ -223,7 +223,7 @@
   "dica_en": "Look at the shelf.",
   "ex": "There are books on each side of the trophy: between.",
   "ex_pt": "Há livros de cada lado do troféu: entre.",
-  "img": "media/cie3/room.jpg"
+  "img": "media/cie3/room-x09.jpg"
  },
  {
   "id": "x10",

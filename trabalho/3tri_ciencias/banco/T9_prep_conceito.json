@@ -1,0 +1,262 @@
+[
+ {
+  "id": "c01",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A2"
+  ],
+  "p": "Where is the ball?",
+  "p_pt": "Onde está a bola?",
+  "o": [
+   "on the table",
+   "under the table",
+   "next to the table"
+  ],
+  "o_pt": [
+   "sobre a mesa",
+   "embaixo da mesa",
+   "ao lado da mesa"
+  ],
+  "dica": "A bola está em cima ou embaixo?",
+  "dica_en": "Is the ball at the top or at the bottom?",
+  "ex": "The ball touches the top of the table: on.",
+  "ex_pt": "A bola encosta em cima da mesa: on.",
+  "img": "media/cie3/cena-on.png",
+  "c": 0
+ },
+ {
+  "id": "c02",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A3"
+  ],
+  "p": "Where is the ball?",
+  "p_pt": "Onde está a bola?",
+  "o": [
+   "under the table",
+   "on the table",
+   "next to the table"
+  ],
+  "o_pt": [
+   "embaixo da mesa",
+   "sobre a mesa",
+   "ao lado da mesa"
+  ],
+  "dica": "A bola está em cima ou embaixo?",
+  "dica_en": "Is the ball at the top or at the bottom?",
+  "ex": "The table top is above the ball: the ball is under the table.",
+  "ex_pt": "O tampo da mesa está acima da bola: a bola está embaixo da mesa.",
+  "img": "media/cie3/cena-under.png",
+  "c": 0
+ },
+ {
+  "id": "c03",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A1"
+  ],
+  "p": "Where is the ball?",
+  "p_pt": "Onde está a bola?",
+  "o": [
+   "in the box",
+   "under the box",
+   "next to the box"
+  ],
+  "o_pt": [
+   "dentro da caixa",
+   "embaixo da caixa",
+   "ao lado da caixa"
+  ],
+  "dica": "Olhe a caixa aberta.",
+  "dica_en": "Look at the open box.",
+  "ex": "The box is open and the ball is inside it: in.",
+  "ex_pt": "A caixa está aberta e a bola está dentro: in.",
+  "img": "media/cie3/cena-in.png",
+  "c": 0
+ },
+ {
+  "id": "c04",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A4"
+  ],
+  "p": "Where is the ball?",
+  "p_pt": "Onde está a bola?",
+  "o": [
+   "behind the box",
+   "in front of the box",
+   "in the box"
+  ],
+  "o_pt": [
+   "atrás da caixa",
+   "na frente da caixa",
+   "dentro da caixa"
+  ],
+  "dica": "Dá para ver a bola inteira?",
+  "dica_en": "Can you see all of the ball?",
+  "ex": "The box hides part of the ball: the ball is behind the box.",
+  "ex_pt": "A caixa esconde parte da bola: a bola está atrás.",
+  "img": "media/cie3/cena-behind.png",
+  "c": 0
+ },
+ {
+  "id": "c05",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A5"
+  ],
+  "p": "Where is the ball?",
+  "p_pt": "Onde está a bola?",
+  "o": [
+   "in front of the box",
+   "behind the box",
+   "in the box"
+  ],
+  "o_pt": [
+   "na frente da caixa",
+   "atrás da caixa",
+   "dentro da caixa"
+  ],
+  "dica": "Dá para ver a bola inteira?",
+  "dica_en": "Can you see all of the ball?",
+  "ex": "Nothing hides the ball. It covers part of the box: in front of.",
+  "ex_pt": "Nada esconde a bola; ela cobre parte da caixa: na frente.",
+  "img": "media/cie3/cena-front.png",
+  "c": 0
+ },
+ {
+  "id": "c06",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A7"
+  ],
+  "p": "Where is the ball?",
+  "p_pt": "Onde está a bola?",
+  "o": [
+   "next to the box",
+   "in the box",
+   "behind the box"
+  ],
+  "o_pt": [
+   "ao lado da caixa",
+   "dentro da caixa",
+   "atrás da caixa"
+  ],
+  "dica": "A bola está dentro, do lado ou escondida?",
+  "dica_en": "Is the ball inside, beside or hidden?",
+  "ex": "The ball is right beside the box: next to.",
+  "ex_pt": "A bola está bem do lado da caixa: next to.",
+  "img": "media/cie3/cena-next.png",
+  "c": 0
+ },
+ {
+  "id": "c07",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A6"
+  ],
+  "p": "Where is the ball?",
+  "p_pt": "Onde está a bola?",
+  "o": [
+   "between the two boxes",
+   "in the box",
+   "behind the boxes"
+  ],
+  "o_pt": [
+   "entre as duas caixas",
+   "dentro da caixa",
+   "atrás das caixas"
+  ],
+  "dica": "Quantas caixas estão do lado da bola?",
+  "dica_en": "How many boxes are next to the ball?",
+  "ex": "There is a box on each side of the ball: between.",
+  "ex_pt": "Tem uma caixa de cada lado da bola: between.",
+  "img": "media/cie3/cena-between.png",
+  "c": 0
+ },
+ {
+  "id": "c08",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A10"
+  ],
+  "p": "Where is the bird?",
+  "p_pt": "Onde está o pássaro?",
+  "o": [
+   "above the tree",
+   "under the tree",
+   "in the tree"
+  ],
+  "o_pt": [
+   "acima da árvore",
+   "embaixo da árvore",
+   "na árvore"
+  ],
+  "dica": "O pássaro está mais alto ou mais baixo que a árvore?",
+  "dica_en": "Is the bird higher or lower than the tree?",
+  "ex": "The bird is up in the sky, higher than the tree: above.",
+  "ex_pt": "O pássaro está no céu, mais alto que a árvore: above.",
+  "img": "media/cie3/cena-above.png",
+  "c": 0
+ },
+ {
+  "id": "c09",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A8"
+  ],
+  "p": "Where is the ball?",
+  "p_pt": "Onde está a bola?",
+  "o": [
+   "near the house",
+   "far from the house",
+   "in the house"
+  ],
+  "o_pt": [
+   "perto da casa",
+   "longe da casa",
+   "dentro da casa"
+  ],
+  "dica": "A bola está perto ou longe?",
+  "dica_en": "Is the ball close or far?",
+  "ex": "The ball is close to the house: near.",
+  "ex_pt": "A bola está pertinho da casa: near.",
+  "img": "media/cie3/cena-near.png",
+  "c": 0
+ },
+ {
+  "id": "c10",
+  "tema": "position",
+  "tipo": "rapida",
+  "at": [
+   "A9"
+  ],
+  "p": "Where is the ball?",
+  "p_pt": "Onde está a bola?",
+  "o": [
+   "far from the house",
+   "near the house",
+   "in the house"
+  ],
+  "o_pt": [
+   "longe da casa",
+   "perto da casa",
+   "dentro da casa"
+  ],
+  "dica": "A bola está perto ou longe?",
+  "dica_en": "Is the ball close or far?",
+  "ex": "The ball is a long way from the house: far from.",
+  "ex_pt": "A bola está bem longe da casa: far from.",
+  "img": "media/cie3/cena-far.png",
+  "c": 0
+ }
+]

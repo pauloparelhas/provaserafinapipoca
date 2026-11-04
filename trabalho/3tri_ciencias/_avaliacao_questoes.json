@@ -228,7 +228,7 @@
  },
  "d03": {
   "decisao": "APROVA",
-  "fp": "1a7f1c099851"
+  "fp": "0a1702b1e9e2"
  },
  "d04": {
   "decisao": "APROVA",
@@ -1404,5 +1404,45 @@
  "L_pushpull_5_7": {
   "decisao": "APROVA",
   "fp": "1ef671615542"
+ },
+ "c01": {
+  "decisao": "APROVA",
+  "fp": "0785c42e16eb"
+ },
+ "c02": {
+  "decisao": "APROVA",
+  "fp": "ccfa55e331c2"
+ },
+ "c03": {
+  "decisao": "APROVA",
+  "fp": "748801349b22"
+ },
+ "c04": {
+  "decisao": "APROVA",
+  "fp": "c95179686e8c"
+ },
+ "c05": {
+  "decisao": "APROVA",
+  "fp": "42f465afc6dd"
+ },
+ "c06": {
+  "decisao": "APROVA",
+  "fp": "5679d0908d92"
+ },
+ "c07": {
+  "decisao": "APROVA",
+  "fp": "94fb6ec82d40"
+ },
+ "c08": {
+  "decisao": "APROVA",
+  "fp": "ea07d489fbba"
+ },
+ "c09": {
+  "decisao": "APROVA",
+  "fp": "0c38b5065805"
+ },
+ "c10": {
+  "decisao": "APROVA",
+  "fp": "44b34469095b"
  }
 }

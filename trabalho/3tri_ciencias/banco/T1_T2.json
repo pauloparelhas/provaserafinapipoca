@@ -834,7 +834,7 @@
   "dica_en": "Look at the bird: is it up high?",
   "ex": "There is a bird flying over the trees.",
   "ex_pt": "Há um pássaro voando por cima das árvores.",
-  "img": "media/cie3/room.jpg"
+  "img": "media/cie3/room-a38.jpg"
  },
  {
   "id": "a39",
@@ -937,7 +937,7 @@
   "dica_en": "Look at both sides of the guitar.",
   "ex": "The lamp is on one side, the plant on the other: between.",
   "ex_pt": "O abajur está de um lado, a planta do outro: entre.",
-  "img": "media/cie3/room.jpg"
+  "img": "media/cie3/room-a42.jpg"
  },
  {
   "id": "a43",
@@ -963,7 +963,7 @@
   "dica_en": "Look below the table top.",
   "ex": "The dogs are under the table, below the top, between its legs.",
   "ex_pt": "Os cachorros estão debaixo da mesa, entre as pernas dela.",
-  "img": "media/cie3/room.jpg"
+  "img": "media/cie3/room-a43.jpg"
  },
  {
   "id": "a44",
@@ -1067,7 +1067,7 @@
   "dica_en": "Which is closer to you: the rug or the sofa?",
   "ex": "The rug is closer to us than the sofa: it is in front of the sofa.",
   "ex_pt": "O tapete está mais perto de nós que o sofá: está na frente dele.",
-  "img": "media/cie3/room.jpg"
+  "img": "media/cie3/room-a47.jpg"
  },
  {
   "id": "a48",
@@ -1197,7 +1197,7 @@
   "dica_en": "Use your side as you look at the map. Which is your left hand?",
   "ex": "Left is your left hand's side of the map. A section is left of the Auditorium.",
   "ex_pt": "Esquerda é o lado da sua mão esquerda. A seção A está à esquerda do Auditório.",
-  "img": "media/cie3/map-school.jpg"
+  "img": "media/cie3/map-d01.jpg"
  },
  {
   "id": "d02",
@@ -1223,7 +1223,7 @@
   "dica_en": "First find the Auditorium, then find B section.",
   "ex": "B section is on your right hand's side of the Auditorium: right.",
   "ex_pt": "A seção B fica do lado da sua mão direita: direita.",
-  "img": "media/cie3/map-school.jpg"
+  "img": "media/cie3/map-d02.jpg"
  },
  {
   "id": "d03",
@@ -1237,19 +1237,19 @@
   "p_pt": "O que está entre a seção A e a seção B?",
   "o": [
    "the Auditorium",
-   "the Trix",
-   "the Entrance"
+   "Year 3G Classroom",
+   "the Extra Classroom"
   ],
   "o_pt": [
    "o Auditório",
-   "a Trix",
-   "a Entrada"
+   "a sala do Year 3G",
+   "a sala Extra"
   ],
   "dica": "Coloque um dedo em cada seção e olhe o meio.",
   "dica_en": "Put one finger on each section and look at the middle.",
   "ex": "The Auditorium has A on one side and B on the other: it is between.",
   "ex_pt": "O Auditório tem a seção A de um lado e a B do outro: está entre elas.",
-  "img": "media/cie3/map-school.jpg"
+  "img": "media/cie3/map-d03.jpg"
  },
  {
   "id": "d04",
@@ -1507,7 +1507,7 @@
   "dica_en": "Find the red pin and read the words under it.",
   "ex": "A red pin marks a place. Here it marks a Year 2 classroom.",
   "ex_pt": "O pino vermelho marca um lugar. Aqui ele marca uma sala do Year 2.",
-  "img": "media/cie3/map-school.jpg"
+  "img": "media/cie3/map-d13.jpg"
  },
  {
   "id": "d14",
@@ -1533,7 +1533,7 @@
   "dica_en": "Find the pin and look for the closest section.",
   "ex": "The red pin is on a Year 2 classroom, in B section.",
   "ex_pt": "O pino esta numa sala do Year 2, na B section.",
-  "img": "media/cie3/map-school.jpg"
+  "img": "media/cie3/map-d14.jpg"
  },
  {
   "id": "d15",

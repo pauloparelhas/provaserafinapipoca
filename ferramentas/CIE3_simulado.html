@@ -154,6 +154,9 @@ body.blitz .opts{margin-top:6px}
   body.blitz .q:has(.quadro)>.quadro{grid-column:1;grid-row:2/span 12;margin:0}
   body.blitz .q:has(.quadro) .pede{margin-top:0}
 }
+.quadro .fotofonte{cursor:zoom-in}
+.zoomov{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.86);display:flex;align-items:center;justify-content:center;padding:12px;cursor:zoom-out}
+.zoomov img{max-width:100%;max-height:100%;border-radius:10px;background:#fff}
 </style>
 </head>
 <body>
@@ -267,6 +270,12 @@ function encaixaB(){
 addEventListener('resize',encaixaB);
 document.addEventListener('load',function(e){ if(e.target.tagName==='IMG') encaixaB(); },true);
 new MutationObserver(encaixaB).observe(document.getElementById('raiz')||document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','hidden']});
+/* toque na figura: abre grande na tela toda; toque de novo fecha */
+document.addEventListener('click',function(e){
+  var im=e.target.closest&&e.target.closest('.quadro .fotofonte'); if(!im) return;
+  var ov=document.createElement('div'); ov.className='zoomov'; ov.innerHTML='<img alt="" src="'+im.getAttribute('src')+'">';
+  ov.onclick=function(){ ov.remove(); }; document.body.appendChild(ov);
+});
 function mmss(ms){ var s=Math.round(ms/1000); return Math.floor(s/60)+':'+('0'+s%60).slice(-2); }
 
 function vistos(){ try{ return JSON.parse(localStorage.getItem(VISTOS)||'[]'); }catch(e){ return []; } }
