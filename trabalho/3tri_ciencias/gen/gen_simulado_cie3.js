@@ -27,10 +27,16 @@ const ITENS = I.ITENS.map(it => {
   q.dicaHtml = esc(it.dica_en || it.dica) + (it.dica_en ? tr(it.dica) : '');
   q.truque = it.ex;
   q.truqueHtml = esc(it.ex) + tr(it.ex_pt);
+  /* BLITZ (Paulo 03/11): so a questao que a crianca bate o olho e responde em ~10 s, para fazer muitos simulados
+     no dia da prova. Regra fixa: sem texto para ler, enunciado + todas as alternativas somam ate 18 palavras,
+     nenhuma alternativa passa de 4 palavras. */
+  const pal = x => String(x || '').split(/\s+/).filter(Boolean).length;
+  q.blitz = !it.texto && pal(it.p) + it.o.reduce((n, o) => n + pal(o), 0) <= 18 && Math.max(...it.o.map(pal)) <= 4;
   q.porque = '';
   q.visual = ''; q.proximo = '';
   return q;
 });
 const out = '/* CIE3_simulado_data.js — GERADO por trabalho/3tri_ciencias/gen/gen_simulado_cie3.js a partir de CIE3_banco.js. Não editar à mão. */\nwindow.CIE3S=' + JSON.stringify({ FAMILIAS, ITENS }) + ';\n';
 fs.writeFileSync(path.join(DIR, 'CIE3_simulado_data.js'), out);
+console.log('blitz', ITENS.filter(q => q.blitz).length, FAMILIAS.map(f => f.k + ':' + ITENS.filter(q => q.blitz && q.eixo === f.k).length).join(' '));
 console.log('itens', ITENS.length, 'familias', FAMILIAS.map(f => f.k + ':' + I.ITENS.filter(i => i.tema === f.k).length).join(' '));

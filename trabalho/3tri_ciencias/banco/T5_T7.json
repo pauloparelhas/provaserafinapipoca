@@ -1522,8 +1522,8 @@
   "at": [
    "F3"
   ],
-  "p": "A girl opens a door with her hands, moving it away from her. Is it a push or a pull?",
-  "p_pt": "Uma menina abre a porta com as mãos, levando-a para longe dela. É um empurrão ou um puxão?",
+  "p": "A girl moves a door away from her. Push or pull?",
+  "p_pt": "Uma menina leva a porta para longe dela. Empurrar ou puxar?",
   "o": [
    "a push",
    "a pull"

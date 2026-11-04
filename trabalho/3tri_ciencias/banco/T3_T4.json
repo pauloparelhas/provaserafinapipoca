@@ -376,8 +376,8 @@
   "at": [
    "P4"
   ],
-  "p": "The giraffe and the woman look at the painting from different positions. People are not right or wrong. They just have a different ___ of things.",
-  "p_pt": "A girafa e a mulher olham o quadro de posições diferentes. As pessoas não estão certas nem erradas. Elas só têm uma ___ diferente das coisas.",
+  "p": "Not right or wrong: they just have a different ___ of things.",
+  "p_pt": "Nem certo nem errado: elas só têm uma ___ diferente das coisas.",
   "o": [
    "view",
    "shape",
@@ -402,8 +402,8 @@
    "P1",
    "P4"
   ],
-  "p": "The giraffe's head is up high. The woman is down low. Why do they see things differently?",
-  "p_pt": "A cabeça da girafa está lá no alto. A mulher está mais embaixo. Por que elas veem as coisas de um jeito diferente?",
+  "p": "The giraffe is up high. The woman is down low. Why do they see differently?",
+  "p_pt": "A girafa está no alto. A mulher está embaixo. Por que veem diferente?",
   "o": [
    "They look from different positions.",
    "The giraffe is right about it.",
