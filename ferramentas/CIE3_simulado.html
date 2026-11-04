@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='11a7b121230';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='99812dd2248';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,8 +14,8 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Practice Test — Science</title>
-<link rel="stylesheet" href="serafina-core.css?v=11a7b121230">
-<link rel="stylesheet" href="OP_estilo.css?v=11a7b121230">
+<link rel="stylesheet" href="serafina-core.css?v=99812dd2248">
+<link rel="stylesheet" href="OP_estilo.css?v=99812dd2248">
 <style>
 /* só o que é exclusivo desta tela */
 .placar{font-size:calc(2.6rem*var(--fs));font-weight:900;line-height:1;color:var(--accent);text-align:center;margin:6px 0 2px}
@@ -139,6 +139,7 @@ body.papel .rev.ok{border-left-color:#2e7d32} body.papel .rev.no{border-left-col
 body.papel .revn{background:#e2e2e2}
 body.papel .estrelas{color:#ddd}
 body.papel .reva{color:#111}
+.blitzbtn{width:100%;margin-top:10px;border-color:#facc15!important;background:linear-gradient(135deg,rgba(250,204,21,.22),rgba(249,115,22,.16))!important}.blitzbtn .n{background:#facc15;color:#111}.blitztempo{font-size:1.4em;font-weight:900}
 </style>
 </head>
 <body>
@@ -172,8 +173,8 @@ body.papel .reva{color:#111}
 </div>
 
 <script>window.SERA_CFG={trKey:'cie3_tr',lang:'en-US',voz:'thalitamultilingual',rate:.8,home:'../index.html',somKey:'cie3_som',stars:90};</script>
-<script src="serafina-core.js?v=11a7b121230"></script>
-<script src="OP_voz.js?v=11a7b121230"></script>
+<script src="serafina-core.js?v=99812dd2248"></script>
+<script src="OP_voz.js?v=99812dd2248"></script>
 <script>
 /* MODO PAPEL — a folha da prova de verdade, com a interacao por cima.
    Ligado por padrao nesta tela: o objetivo e a crianca reconhecer no dia
@@ -201,11 +202,11 @@ body.papel .reva{color:#111}
   document.addEventListener('DOMContentLoaded',pinta);
 })();
 </script>
-<script src="assets/react.production.min.js?v=11a7b121230"></script>
-<script src="assets/react-dom.production.min.js?v=11a7b121230"></script>
-<script src="CIE3_simulado_data.js?v=11a7b121230"></script>
+<script src="assets/react.production.min.js?v=99812dd2248"></script>
+<script src="assets/react-dom.production.min.js?v=99812dd2248"></script>
+<script src="CIE3_simulado_data.js?v=99812dd2248"></script>
 <script>window.OPQ_TXT={pergunta:'Question',de:'of',soTit:'What is the question asking?',mostrarTexto:'Show the text',ouvir:'Listen',soPergunta:'Only the question',escDica:'Hide the hint',dica:'Hint',certo:'Correct! Here is why:',naProxima:'Next time',fechar:'Close',verMais:'Show me how',proxima:'Next',guiaOn:'Reading guide on',guiaOff:'Reading guide',guiaDica:'read the yellow line; tap the line below to go on',guiaFim:'this is the last line'};</script>
-<script src="OP_questao.js?v=11a7b121230"></script>
+<script src="OP_questao.js?v=99812dd2248"></script>
 <script>
 'use strict';
 /* ============================================================
@@ -223,6 +224,21 @@ var VISTOS='cie3_vistos';
 var BANCO=OP.ITENS;
 var RODADA=OP.FAMILIAS.reduce(function(s,f){ return s+(f.cota||0); },0);   /* 12 */
 var AQUECER=5, ESC_PROVA=4, ESC_SO=8;
+/* BLITZ: 10 questoes de bater o olho (q.blitz, regra no gen_simulado_cie3.js), as que ela ainda nao viu no Blitz
+   primeiro, um tema de cada vez; o resultado mostra o tempo para ela tentar bater o proprio recorde */
+var BLITZ=10, VBLITZ='cie3_blitz_vistos', POOLB=BANCO.filter(function(i){ return i.blitz; });
+function vistosB(){ try{ return JSON.parse(localStorage.getItem(VBLITZ)||'[]'); }catch(e){ return []; } }
+function montaBlitz(){
+  var v=vistosB(), por={};
+  if(POOLB.filter(function(i){ return v.indexOf(i.id)<0; }).length<BLITZ){ v=[]; try{ localStorage.removeItem(VBLITZ); }catch(e){} }
+  OPQ.embaralha(POOLB).forEach(function(i){ (por[i.eixo]=por[i.eixo]||[]).push(i); });
+  Object.keys(por).forEach(function(k){ por[k].sort(function(a,b){ return (v.indexOf(a.id)>=0)-(v.indexOf(b.id)>=0); }); });
+  var ks=OPQ.embaralha(Object.keys(por)), out=[];
+  while(out.length<BLITZ && ks.some(function(k){ return por[k].length; })) ks.forEach(function(k){ if(out.length<BLITZ && por[k].length) out.push(por[k].shift()); });
+  try{ localStorage.setItem(VBLITZ,JSON.stringify(v.concat(out.map(function(i){ return i.id; })))); }catch(e){}
+  return OPQ.embaralha(out);
+}
+function mmss(ms){ var s=Math.round(ms/1000); return Math.floor(s/60)+':'+('0'+s%60).slice(-2); }
 
 function vistos(){ try{ return JSON.parse(localStorage.getItem(VISTOS)||'[]'); }catch(e){ return []; } }
 function marcaVisto(ids){
@@ -286,13 +302,15 @@ function App(){
   var ids=BANCO.map(function(i){ return i.id; });
   var totalBanco=BANCO.length, jaVistas=vistos().filter(function(id){ return ids.indexOf(id)>=0; }).length;
 
-  function joga(q, md){ setModo(md); setFila(q); setCur(0); setResp({}); setVer('erros'); setTela('q'); marcaVisto(q.map(function(i){ return i.id; })); }
+  var t0=React.useRef(0), tf=React.useRef(0);
+  function joga(q, md){ t0.current=Date.now(); setModo(md); setFila(q); setCur(0); setResp({}); setVer('erros'); setTela('q'); marcaVisto(q.map(function(i){ return i.id; })); }
   function comeca(n){ setTam(n); joga(montaRodada(n), n>=RODADA?'prova':'aquecer'); }
   function responde(acertou,item,texto){
     if(resp[item.id]) return; /* voltou a uma questão já feita: vale a primeira resposta */
     var novo=copia(resp); novo[item.id]={ok:acertou,t:texto}; setResp(novo);
   }
-  function avanca(){ if(cur<fila.length-1) setCur(cur+1); else setTela('fim'); }
+  function avanca(){ if(cur<fila.length-1) setCur(cur+1); else { tf.current=Date.now()-t0.current; setTela('fim'); } }
+  function blitz(){ setTam(BLITZ); joga(montaBlitz(),'blitz'); }
   function volta(){ if(cur>0) setCur(cur-1); }
 
   /* barra de progresso e navegação de baixo, que vivem fora do React */
@@ -324,6 +342,9 @@ function App(){
           h('span',{className:'n'},String(RODADA)),
           h('span',null,h('b',null,'Full test'),h('small',null,RODADA+' questions, like the real test'))),
       ),
+      h('button',{className:'linha blitzbtn',onClick:blitz},
+        h('span',{className:'n'},'⚡'),
+        h('span',null,h('b',null,'Blitz'),h('small',null,BLITZ+' quick questions. Look and answer!',h('span',{className:'tr'},BLITZ+' questões rápidas. Olhe e responda!')))),
       h('div',{className:'bancobar'},
         h('div',{className:'bancofill',style:{width:Math.round(jaVistas/totalBanco*100)+'%'}})),
       h('p',{className:'progresso'},
@@ -343,7 +364,7 @@ function App(){
     return h(OPQ.Questao,{
       key:item.id+'-'+cur, item:item,
       numero:cur+1, total:fila.length,
-      etiqueta: modo==='refazer' ? 'try again' : modo==='parecidas' ? 'a similar one' : null,
+      etiqueta: modo==='refazer' ? 'try again' : modo==='parecidas' ? 'a similar one' : modo==='blitz' ? '⚡ Blitz' : null,
       respostaTexto: rr ? rr.t : null,
       aoResponder:responde, aoAvancar:avanca,
       rotuloAvancar: !ultima ? 'Next' : 'See my score'
@@ -369,11 +390,12 @@ function App(){
     return q;
   })();
   return h('div',{className:'resultado'},
-    h('h1',{className:'tt',style:{textAlign:'center'}}, modo==='refazer'?'Mistakes, one more time':modo==='parecidas'?'Similar questions':'My score', h('span',{className:'tr'},modo==='refazer'?'Os erros, de novo':modo==='parecidas'?'Questões parecidas':'Meu resultado')),
+    h('h1',{className:'tt',style:{textAlign:'center'}}, modo==='refazer'?'Mistakes, one more time':modo==='parecidas'?'Similar questions':modo==='blitz'?'⚡ Blitz score':'My score', h('span',{className:'tr'},modo==='blitz'?'Resultado do Blitz':modo==='refazer'?'Os erros, de novo':modo==='parecidas'?'Questões parecidas':'Meu resultado')),
     h('div',{className:'anel',style:{background:'conic-gradient(var(--ok) '+pct*3.6+'deg, var(--line) 0)'},'aria-label':pct+'% correct'},
       h('div',{className:'anelin'}, h('b',null,pct+'%'), h('small',null,certas.length+' of '+total))),
     h('div',{className:'estrelas','aria-label':est+' stars'}, [0,1,2].map(function(k){ return h('span',{key:k,className:k<est?'on':''},'★'); })),
     h('p',{className:'placarsub'},msg),
+    modo==='blitz' && h('p',{className:'placarsub blitztempo'},'⏱ '+mmss(tf.current),h('span',{className:'tr'},'seu tempo')),
     h('div',{className:'resnum'},
       h('div',{className:'rn ok'},h('b',null,certas.length),h('span',null,'correct',h('span',{className:'tr'},'certas'))),
       h('div',{className:'rn no'},h('b',null,erradas.length-pulou),h('span',null,'wrong',h('span',{className:'tr'},'erradas'))),
@@ -384,7 +406,8 @@ function App(){
         'Redo my mistakes ('+erradas.length+')', h('span',{className:'tr'},'Refazer os erros')),
       erradas.length>0 && parecidas.length>0 && h('button',{className:'avancar calmo',onClick:function(){ joga(parecidas,'parecidas'); }},
         'Practise with similar questions', h('span',{className:'tr'},'Treinar com questões parecidas')),
-      h('button',{className:'avancar'+(erradas.length?' calmo':''),onClick:function(){ comeca(tam); }},
+      modo==='blitz' && h('button',{className:'avancar',onClick:blitz},'⚡ Next Blitz', h('span',{className:'tr'},'Próximo Blitz')),
+      modo!=='blitz' && h('button',{className:'avancar'+(erradas.length?' calmo':''),onClick:function(){ comeca(tam); }},
         'Next test ('+tam+' new questions)', h('span',{className:'tr'},'Próximo simulado ('+tam+' questões novas)')),
       h('button',{className:'avancar calmo',onClick:function(){ setTela('inicio'); }},'Back to start', h('span',{className:'tr'},'Voltar ao início'))
     ),
@@ -438,6 +461,6 @@ document.getElementById('raiz').setAttribute('data-folha','Practice Test · Scie
 })();
 </script>
 <script>window.SERA_EN=true; window.SERA_ACCENT={accent:'#f472b6'};</script>
-<script src="sera_theme.js?v=11a7b121230"></script>
+<script src="sera_theme.js?v=99812dd2248"></script>
 </body>
 </html>

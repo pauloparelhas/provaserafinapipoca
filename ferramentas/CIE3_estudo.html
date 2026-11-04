@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='11a7b121230';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='99812dd2248';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,7 +14,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Science · Study</title>
-<link rel="stylesheet" href="serafina-core.css?v=11a7b121230">
+<link rel="stylesheet" href="serafina-core.css?v=99812dd2248">
 <style>
 /* ============================================================
    CIE3_estudo — a TEORIA de Science (3º tri). Casca herdada do
@@ -448,7 +448,12 @@ body.light .arr-cx1 .arr-itens{background:none}
 .lw{min-width:0;max-width:100%}.fesc{max-width:100%}
 b.ocl{display:inline-block;min-width:44px;min-height:28px;padding:0 6px;margin:1px 0;border-radius:7px;text-align:center;cursor:pointer;transition:background .2s,color .2s}
 b.ocl.fechado,b.ocl.fechado *{color:transparent!important;text-shadow:none!important;-webkit-text-fill-color:transparent}
-b.ocl.fechado{background:color-mix(in srgb,currentColor 0%,var(--ink) 18%);user-select:none}
+b.ocl.fechado{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--ink) 22%,transparent) 0 6px,color-mix(in srgb,var(--ink) 8%,transparent) 6px 12px);outline:2px dashed color-mix(in srgb,var(--ink) 45%,transparent);outline-offset:-2px;user-select:none}
+b.ocl.chama{animation:chama 1.1s ease-in-out infinite}
+@keyframes chama{50%{transform:scale(1.08)}}
+.maotoque{position:absolute;z-index:60;width:44px;height:44px;pointer-events:none;animation:toque 1.1s ease-in-out infinite}
+.maotoque svg{width:100%;height:100%;fill:#fff;stroke:#111;stroke-width:1.2;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+@keyframes toque{0%,100%{transform:translate(10px,14px)}50%{transform:translate(0,0) scale(.9)}}
 .oclbtn{display:block;margin:10px auto 0;min-height:44px}.oclhint{font-weight:800;text-align:center;margin:0 0 8px}
 /* capa: a trilha no mapa da escola (S1), com as figuras dos slides */
 .mapa-capa{position:relative;max-width:560px;margin:0 auto;border-radius:22px;overflow:hidden;color:#3b2a14;
@@ -521,8 +526,6 @@ body.show-tr #trbtn{outline:2px solid var(--accent,#f472b6);outline-offset:2px}
   .chegada{min-height:42px;margin:4px auto 0}
   .mc-placar{padding:2px 16px 8px}
 }
-.credito{display:block;margin:6px 0 0;font-size:calc(.72rem*var(--fs));font-weight:700;opacity:.62;text-align:right;font-style:italic}
-.lembra .credito{margin-top:4px}
 </style>
 </head>
 <body>
@@ -558,9 +561,9 @@ body.show-tr #trbtn{outline:2px solid var(--accent,#f472b6);outline-offset:2px}
 </div>
 
 <script>window.SERA_CFG={trKey:'cie3_tr',lang:'en-US',voz:'thalitamultilingual',rate:.8,home:'../index.html',somKey:'cie3_som',stars:80};</script>
-<script src="serafina-core.js?v=11a7b121230"></script>
-<script src="OP_voz.js?v=11a7b121230"></script>
-<script src="CIE3_banco.js?v=11a7b121230"></script>
+<script src="serafina-core.js?v=99812dd2248"></script>
+<script src="OP_voz.js?v=99812dd2248"></script>
+<script src="CIE3_banco.js?v=99812dd2248"></script>
 <script>
 /* ícones por tema (sem as figuras do LP3); cena = só a legenda */
 window.CIE3ARTE={icone:function(k){ var c={position:'#f472b6',directions:'#fb7185',perspective:'#fbbf24',forces:'#38bdf8',objects:'#a78bfa',animals:'#34d399',pushpull:'#f97316'}[k]||'#f472b6';
@@ -574,7 +577,7 @@ window.CIE3ARTE={icone:function(k){ var c={position:'#f472b6',directions:'#fb718
   return '<svg class="licic" viewBox="0 0 36 36" width="40" height="40" aria-hidden="true">'+d+'</svg>'; },
  figura:function(){ return ''; }, cena:function(){ return ''; }};
 </script>
-<script src="CIE3_estudo_licoes.js?v=11a7b121230"></script>
+<script src="CIE3_estudo_licoes.js?v=99812dd2248"></script>
 <script>
 /* ============================================================
    MOTOR DO ESTUDO — navegação, telinhas e treininho.
@@ -652,21 +655,30 @@ function volta(){
 /* ---------------- desenho de cada tipo de telinha ---------------- */
 var R={};
 /* oclusao: todo <b> da teoria vira termo hachurado; o toque revela (revisao ativa, ideia do Paulo 02/11) */
+function palavras(s){ return s.trim().split(/\s+/).filter(Boolean).length; }
 function ocluir(el){
-  var bs=[].slice.call(el.querySelectorAll('b')).filter(function(b){ return !b.closest('.tr')&&!b.closest('h3')&&!b.closest('.tqnum')&&!b.closest('.passo'); });
+  var bs=[].slice.call(el.querySelectorAll('b')).filter(function(b){ return !b.closest('.tr')&&!b.closest('h3')&&!b.closest('.tqnum')&&!b.closest('.passo')&&palavras(b.textContent)<=3; });
   if(!bs.length) return;
   function pinta(){ var f=bs.filter(function(b){ return b.classList.contains('fechado'); }).length; if(tudo){ tudo.firstChild.nodeValue=f?'Show all':'Hide all'; } }
   bs.forEach(function(b){ b.classList.add('ocl','fechado'); b.setAttribute('role','button'); b.tabIndex=0;
-    b.onclick=function(){ var abre=b.classList.toggle('fechado')===false; if(abre) fala(b.textContent); pinta(); try{ localStorage.setItem('cie3_ocl','1'); }catch(e){} var d=el.querySelector('.oclhint'); if(d) d.remove(); };
+    b.onclick=function(){ var abre=b.classList.toggle('fechado')===false; if(abre) fala(b.textContent); pinta(); window._oclOk=1; tiraMao(); };
     b.onkeydown=function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); b.onclick(); } }; });
-  var visto=false; try{ visto=localStorage.getItem('cie3_ocl')==='1'; }catch(e){}
-  if(!visto){ var h=document.createElement('p'); h.className='oclhint'; h.innerHTML='Tap the hidden words.<span class="tr">Toque nas palavras escondidas.</span>'; el.insertBefore(h,el.firstChild); }
+  /* a mao toca a primeira lacuna (sem escrever comando), ate a crianca tocar uma */
+  if(!window._oclOk && !(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)) setTimeout(function(){
+    if(!el.isConnected||window._oclOk) return; var b=bs.filter(function(x){ return x.classList.contains('fechado'); })[0]; if(!b) return;
+    var a=b.getBoundingClientRect(); if(a.bottom<0||a.top>innerHeight) return;
+    var m=document.createElement('div'); m.className='maotoque';
+    m.innerHTML='<svg viewBox="0 0 24 24"><path d="M10 7.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v6h1.76c.19 0 .37.04.54.11l4.54 2.26c.53.22.91.76.91 1.38 0 .06-.01.13-.02.2l-.75 5.27c-.11.73-.69 1.28-1.44 1.28h-6.79c-.41 0-.79-.17-1.06-.44L4.75 18.6l.79-.8c.2-.2.48-.33.79-.33.09 0 .16.02.24.03l3.43.72z"/></svg>';
+    m.style.left=(a.left+a.width/2-14+scrollX)+'px'; m.style.top=(a.top+a.height/2-4+scrollY)+'px'; document.body.appendChild(m); b.classList.add('chama');
+    document.addEventListener('pointerdown',tiraMao,true);
+  },650);
   var tudo=null;
   if(bs.length>1){ tudo=document.createElement('button'); tudo.className='btn calmo oclbtn'; tudo.innerHTML='Show all<span class="tr">Mostrar / esconder tudo</span>';
     tudo.onclick=function(){ var f=bs.some(function(b){ return b.classList.contains('fechado'); }); bs.forEach(function(b){ b.classList.toggle('fechado',f); }); pinta(); };
     el.appendChild(tudo); }
 }
-R.texto=function(t){ return {html:t.html||'',init:ocluir}; };
+function tiraMao(){ document.querySelectorAll('.maotoque').forEach(function(x){ x.remove(); }); document.querySelectorAll('b.ocl.chama').forEach(function(x){ x.classList.remove('chama'); }); document.removeEventListener('pointerdown',tiraMao,true); }
+R.texto=function(t){ return {html:t.html||'',init:t.ocl===false?null:ocluir}; };
 R.palavras=function(t){
   return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+
     '<div class="pals'+(t.grandes?' grandes':'')+'">'+t.pals.map(function(p){
@@ -867,7 +879,7 @@ R.arrasta=function(t){
       if(c.frase) return '<div class="arr-c arr-fr" data-k="'+c.k+'"><p>'+c.frase.replace('___','<span class="arr-den arr-vaga"></span>')+(c.pt?'<span class="tr">'+c.pt+'</span>':'')+'</p></div>';
       return '<div class="arr-c" data-k="'+c.k+'"'+(c.cor?' style="--cc:'+c.cor+'"':'')+'>'+(c.img?'<img src="media/cie3/'+c.img+'.jpg" alt="">':'')+(c.t?'<h4>'+c.t+'</h4>':'')+'<div class="arr-den"></div></div>'; }).join('')+'</div>'+
     '<div class="arr-pe">'+(FR?'<div class="arr-prog">'+t.caixas.map(function(){ return '<i></i>'; }).join('')+'</div>':'')+
-    '<div class="ordmsg">'+(t.dica||'')+'</div><button class="arr-re" data-a="re">&#8634; Start again</button></div>'+(t.credito?'<p class="credito">'+t.credito+'</p>':'')+'</div></div>',
+    '<div class="ordmsg">'+(t.dica||'')+'</div><button class="arr-re" data-a="re">&#8634; Start again</button></div>'+'</div></div>',
     init:function(el){
       var msg=el.querySelector('.ordmsg'), feitos=0, sel=null, total=t.itens.length, K=FR?3:99;
       function janela(){ var n=0; el.querySelectorAll('.arr-c').forEach(function(c){ var ok=!c.classList.contains('feita') && n<K; if(ok) n++; c.classList.toggle('fora',!ok && !c.classList.contains('cheia')); }); }
@@ -982,7 +994,7 @@ R.fim=function(){
       '<h2>Lesson done!</h2><p>'+lic.nome+'</p>'+
       (tot?'<p>Practice: <b>'+ac+' of '+tot+'</b> correct.</p>':'')+
       '<div class="btnrow">'+(prox?'<button class="btn" data-a="prox">Next lesson: '+prox.nome+'</button>':'')+
-      '<a class="btn" href="CIE3_simulado.html?v=11a7b121230" style="text-decoration:none;text-align:center">Practice Test &#8250;<span class="tr">Simulado</span></a><button class="btn calmo" data-a="capa">All lessons<span class="tr">Todas as lições</span></button></div></div>',
+      '<a class="btn" href="CIE3_simulado.html?v=99812dd2248" style="text-decoration:none;text-align:center">Practice Test &#8250;<span class="tr">Simulado</span></a><button class="btn calmo" data-a="capa">All lessons<span class="tr">Todas as lições</span></button></div></div>',
     fala:'Lesson done! '+puro(lic.nome),
     init:function(el){
       var p=el.querySelector('[data-a="prox"]'); if(p) p.onclick=function(){ abre(est.lic+1); };
@@ -1007,7 +1019,7 @@ function renderCapa(){
   document.body.style.setProperty('--lc','#f472b6');
   titulo.textContent='Motion Rangers · Study';
   var TRc=function(t){ return '<span class="tr">'+t+'</span>'; }; /* 18/10: a bandeira traduz também os cartões da capa */
-  var PARADAS=[['prep-in','In, on, under','Dentro, sobre, embaixo'],['prep-between','Behind, between, near','Atrás, entre, perto'],['map-school','Reading a map','Lendo um mapa'],['view-bottom','Seen from where?','Visto de onde?'],['harm-tornado','Wind and water','Vento e água'],['obj-spin-pinwheel','How things move','Como as coisas se movem'],['hand','Animals and my body','Animais e meu corpo'],['pull-rope','Push or pull?','Empurrar ou puxar?'],['obj-spin-top','A story','Uma história']];
+  var PARADAS=[['prep-in','In, on, under','Dentro, sobre, embaixo'],['prep-between','Behind, between, near','Atrás, entre, perto'],['map-school','Reading a map','Lendo um mapa'],['view-bottom','Seen from where?','Visto de onde?'],['harm-tornado','Wind and water','Vento e água'],['obj-spin-pinwheel','How things move','Como as coisas se movem'],['hand','Animals and my body','Animais e meu corpo'],['pull-rope','Push or pull?','Empurrar ou puxar?']];
   var PIN='<svg class="aqui" viewBox="0 0 30 40" aria-hidden="true"><path d="M15 39C8 27 2 21 2 14a13 13 0 0 1 26 0c0 7-6 13-13 25z" fill="#e11d2e" stroke="#7f1d1d" stroke-width="1.5"/><circle cx="15" cy="14" r="6" fill="#fff"/></svg>';
   var prox=-1; LICOES.some(function(l,i){ if(!f[l.k]){ prox=i; return true; } return false; });
   tela.innerHTML='<div class="mapa-capa"><div class="mc-top">'+
@@ -1018,7 +1030,7 @@ function renderCapa(){
       var r3=Math.floor(i/3), c3=r3%2?3-i%3:i%3+1, r5=Math.floor(i/5), c5=r5%2?5-i%5:i%5+1;
       return '<button class="parada lic'+(i%2?' dir':'')+'" data-i="'+i+'" style="--lc:'+corDe(l)+';--r3:'+(r3+1)+';--c3:'+c3+';--r5:'+(r5+1)+';--c5:'+c5+'"><span class="foto" style="background-image:url(media/cie3/'+P[0]+'.jpg)"><span class="num">'+(i+1)+'</span>'+(f[l.k]?'<span class="ok" aria-label="done">&#10003;</span>':'')+(i===prox?PIN:'')+'</span><span class="nome">'+P[1]+TRc(P[2])+'</span></button>';
     }).join('')+
-    '<a class="chegada" href="CIE3_simulado.html?v=11a7b121230">&#127937; Practice Test'+TRc('Simulado')+'</a></div>'+
+    '<a class="chegada" href="CIE3_simulado.html?v=99812dd2248">&#127937; Practice Test'+TRc('Simulado')+'</a></div>'+
     '<div class="mc-placar"><span>'+n+' / '+LICOES.length+TRc(n+' de '+LICOES.length+' feitas')+'</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div></div>';
   tela.querySelectorAll('.lic').forEach(function(b){ b.onclick=function(){ abre(+b.dataset.i); }; });
   desenhaRota();
@@ -1046,7 +1058,7 @@ function encaixa(){
 addEventListener('resize',function(){ clearTimeout(window._encT); window._encT=setTimeout(function(){ if(est.lic>=0) encaixa(); },150); });
 function render(){
   try{ speechSynthesis.cancel(); }catch(e){}
-  document.querySelectorAll('.arr-it.demo').forEach(function(x){ x.remove(); }); /* a mao da tela anterior nao fica flutuando */
+  document.querySelectorAll('.arr-it.demo').forEach(function(x){ x.remove(); }); tiraMao(); /* a mao da tela anterior nao fica flutuando */
   if(est.lic<0){ renderCapa(); window.scrollTo(0,0); return; }
   var lic=LICOES[est.lic], t=sessao.telas[est.i], cor=corDe(lic);
   document.body.style.setProperty('--lc',cor);
@@ -1098,6 +1110,6 @@ window.CIE3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic
 })();
 </script>
 <script>window.SERA_EN=true; window.SERA_ACCENT={accent:'#f472b6'};</script>
-<script src="sera_theme.js?v=11a7b121230"></script>
+<script src="sera_theme.js?v=99812dd2248"></script>
 </body>
 </html>
