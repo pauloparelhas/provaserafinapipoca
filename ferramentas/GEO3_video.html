@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c32d8510102';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>O vídeo — Geografia: Guardiões da Casa Maior</title>
+<link rel="stylesheet" href="serafina-core.css?v=c32d8510102">
+<style>
+/* ============================================================
+   O VIDEO DE GEOGRAFIA (3o tri) — gerado por trabalho/3tri_geografia/video/
+   (cenas desenhadas em canvas + recortes das figuras da escola), narrado pelo Antonio (pt-BR).
+   Legenda gravada na imagem; o .vtt vai como track desligada. Sem autoplay.
+   ============================================================ */
+:root{--fs:1;--bg:#0d0b1e;--bg2:#0f2a1c;--ink:#f2f7ff;--soft:rgba(255,255,255,.62);--dim:rgba(255,255,255,.42);
+  --card:#142a1f;--line:rgba(255,255,255,.13);--accent:#4ade80;--surf:rgba(255,255,255,.06)}
+body.light{--bg:#effdf4;--bg2:#e0f2fe;--ink:#0f2a1c;--soft:rgba(15,42,28,.66);--dim:rgba(15,42,28,.5);
+  --card:#fff;--line:rgba(15,42,28,.13);--accent:#15803d;--surf:rgba(15,42,28,.05)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Nunito','Segoe UI',system-ui,sans-serif;background:linear-gradient(160deg,var(--bg),var(--bg2));color:var(--ink);overflow-x:hidden}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh}
+.topbar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:var(--card);box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.topbar .title{font-weight:900;font-size:calc(.9rem*var(--fs));color:var(--accent);flex:1;line-height:1.1}
+.iconbtn{min-width:44px;height:44px;border:none;border-radius:13px;background:var(--line);color:var(--ink);font-size:1.02rem;font-weight:800;cursor:pointer;padding:0 8px;font-family:inherit}
+.iconbtn svg{width:22px;height:22px;display:block;margin:auto}
+.iconbtn:active{transform:scale(.9)}
+.stage{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:16px clamp(10px,3vw,26px) 40px}
+.card{width:100%;max-width:900px;background:var(--card);border-radius:24px;box-shadow:0 14px 40px rgba(0,0,0,.35);
+  padding:clamp(16px,4vw,28px);border:1px solid var(--line)}
+h1{font-size:calc(clamp(1.25rem,4vw,1.65rem)*var(--fs));font-weight:900;line-height:1.2;margin-bottom:6px}
+.sub{font-size:calc(.95rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.55;margin-bottom:16px}
+video{width:100%;border-radius:16px;background:#000;display:block;border:1px solid var(--line);aspect-ratio:16/9}
+h2{font-size:calc(1.02rem*var(--fs));font-weight:900;margin:20px 0 10px;color:var(--accent)}
+.caps{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.cap{width:100%;min-height:48px;display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);
+  border-radius:13px;background:var(--surf);color:var(--ink);font-family:inherit;font-weight:800;
+  font-size:calc(.92rem*var(--fs));padding:8px 12px;cursor:pointer}
+.cap:active{transform:scale(.98)}
+.cap .tm{flex:0 0 auto;min-width:46px;padding:3px 7px;border-radius:9px;background:var(--line);font-variant-numeric:tabular-nums;text-align:center;font-size:.85em}
+.cap .nm{min-width:0}
+.cap.on{border-color:var(--accent);background:rgba(74,222,128,.16)}
+.cap.on .tm{background:var(--accent);color:#052e16}
+.acao{display:block;width:100%;min-height:56px;margin-top:18px;border:none;border-radius:16px;padding:8px 12px;
+  background:linear-gradient(90deg,var(--accent),#22c55e);color:#052e16;font-family:inherit;font-weight:900;
+  font-size:calc(1.05rem*var(--fs));cursor:pointer}
+.acao:active{transform:translateY(1px)}
+.acao.pass{background:var(--surf);color:var(--ink);border:2px solid var(--line);margin-top:10px}
+@media(min-width:700px){:root{--fs:1.1} .card{padding:30px 34px}}
+@media(max-width:430px){
+  .topbar{flex-wrap:wrap;gap:4px}
+  .topbar .title{flex:0 0 100%;order:-1;margin-bottom:1px;font-size:.82rem}
+  .topbar .iconbtn{min-width:0;flex:1 1 0;padding:0 4px}
+  .caps{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" id="btnHome" title="Início" aria-label="Início" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button>
+    <span class="title">O vídeo · Geografia</span>
+    <button class="iconbtn" id="btnFontDown" title="Letra menor" aria-label="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" id="btnFontUp" title="Letra maior" aria-label="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" id="themeBtn" title="Tema" aria-label="Tema">&#9788;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" aria-label="Tela cheia" onclick="toggleLock()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
+  </div>
+  <div class="stage">
+    <div class="card">
+      <h1>Guardiões da Casa Maior</h1>
+      <p class="sub">Uns 6 minutos com a Mariana e o Bem-te-vi: a cidade, as ruas, os mapas, o meio ambiente e os biomas. Toque numa parte da lista para pular direto para ela.</p>
+
+      <video id="vid" controls playsinline preload="metadata" poster="media/geo3/video_geo3_poster.jpg?v=c32d8510102">
+        <source src="media/geo3/video_geo3.mp4?v=c32d8510102" type="video/mp4">
+        <track kind="captions" srclang="pt-BR" label="Português" src="media/geo3/video_geo3.vtt?v=20261108">
+        Se o vídeo não abrir aqui, peça a um adulto para abrir o arquivo <b>media/geo3/video_geo3.mp4</b>.
+      </video>
+
+      <h2>As partes do vídeo</h2>
+      <ul class="caps" id="caps">
+        <li><button class="cap" data-t="3.15"><span class="tm">0:03</span><span class="nm">Guardiões da Casa Maior</span></button></li>
+        <li><button class="cap" data-t="15.31"><span class="tm">0:15</span><span class="nm">O espaço urbano</span></button></li>
+        <li><button class="cap" data-t="45.57"><span class="tm">0:45</span><span class="nm">Atravessar com segurança</span></button></li>
+        <li><button class="cap" data-t="73.65"><span class="tm">1:13</span><span class="nm">Frente, atrás, direita e esquerda</span></button></li>
+        <li><button class="cap" data-t="91.52"><span class="tm">1:31</span><span class="nm">Pontos de referência</span></button></li>
+        <li><button class="cap" data-t="118.01"><span class="tm">1:58</span><span class="nm">Mapas, croqui e planta baixa</span></button></li>
+        <li><button class="cap" data-t="152.73"><span class="tm">2:32</span><span class="nm">Tipos de rua</span></button></li>
+        <li><button class="cap" data-t="201.48"><span class="tm">3:21</span><span class="nm">O bairro e a cidade</span></button></li>
+        <li><button class="cap" data-t="226.17"><span class="tm">3:46</span><span class="nm">Transportes e trabalhos</span></button></li>
+        <li><button class="cap" data-t="244.43"><span class="tm">4:04</span><span class="nm">Meio ambiente, a casa de todos</span></button></li>
+        <li><button class="cap" data-t="273.80"><span class="tm">4:33</span><span class="nm">Sons da natureza</span></button></li>
+        <li><button class="cap" data-t="284.45"><span class="tm">4:44</span><span class="nm">Fauna, flora e os biomas</span></button></li>
+        <li><button class="cap" data-t="343.65"><span class="tm">5:43</span><span class="nm">Preservar o meio ambiente</span></button></li>
+      </ul>
+
+      <button class="acao" onclick="location.href='GEO3_simulado.html?v=c32d8510102'">Agora treinar no simulado &rarr;</button>
+      <button class="acao pass" onclick="location.href='GEO3_estudo.html?v=c32d8510102'">Estudar a teoria</button>
+    </div>
+  </div>
+</div>
+<div class="unlockov" id="unlockov">
+  <div class="ulk-emo">&#128274;</div>
+  <h2>Desbloquear a tela?<small>Peça para um adulto</small></h2>
+  <button class="ulk-yes" onclick="doUnlock()">Desbloquear</button>
+  <button class="ulk-no" onclick="cancelUnlock()">Continuar assistindo</button>
+</div>
+<script>window.SERA_PT=true; window.SERA_CFG={trKey:null,lang:'pt-BR',home:'../index.html',stars:110,somKey:'geo3_som'};</script>
+<script src="serafina-core.js?v=c32d8510102"></script>
+<script>
+(function(){
+  var v=document.getElementById('vid'), bts=[].slice.call(document.querySelectorAll('.cap'));
+  bts.forEach(function(b){ b.addEventListener('click',function(){
+    var t=parseFloat(b.dataset.t);
+    try{ v.currentTime=t; }catch(e){}
+    var p=v.play(); if(p&&p.catch) p.catch(function(){});
+  }); });
+  v.addEventListener('timeupdate',function(){
+    var on=-1; bts.forEach(function(b,i){ if(v.currentTime+0.4>=parseFloat(b.dataset.t)) on=i; });
+    bts.forEach(function(b,i){ b.classList.toggle('on',i===on); });
+  });
+})();
+</script>
+<script>window.SERA_PT=true; window.SERA_ACCENT={accent:'#22c55e'};</script>
+<script src="sera_theme.js?v=c32d8510102"></script>
+</body>
+</html>
