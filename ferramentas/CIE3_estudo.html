@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='6c0019d1615';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='1e3e71b1645';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,7 +14,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Science · Study</title>
-<link rel="stylesheet" href="serafina-core.css?v=6c0019d1615">
+<link rel="stylesheet" href="serafina-core.css?v=1e3e71b1645">
 <style>
 /* ============================================================
    CIE3_estudo — a TEORIA de Science (3º tri). Casca herdada do
@@ -561,9 +561,9 @@ body.show-tr #trbtn{outline:2px solid var(--accent,#f472b6);outline-offset:2px}
 </div>
 
 <script>window.SERA_CFG={trKey:'cie3_tr',lang:'en-US',voz:'thalitamultilingual',rate:.8,home:'../index.html',somKey:'cie3_som',stars:80};</script>
-<script src="serafina-core.js?v=6c0019d1615"></script>
-<script src="OP_voz.js?v=6c0019d1615"></script>
-<script src="CIE3_banco.js?v=6c0019d1615"></script>
+<script src="serafina-core.js?v=1e3e71b1645"></script>
+<script src="OP_voz.js?v=1e3e71b1645"></script>
+<script src="CIE3_banco.js?v=1e3e71b1645"></script>
 <script>
 /* ícones por tema (sem as figuras do LP3); cena = só a legenda */
 window.CIE3ARTE={icone:function(k){ var c={position:'#f472b6',directions:'#fb7185',perspective:'#fbbf24',forces:'#38bdf8',objects:'#a78bfa',animals:'#34d399',pushpull:'#f97316'}[k]||'#f472b6';
@@ -577,7 +577,7 @@ window.CIE3ARTE={icone:function(k){ var c={position:'#f472b6',directions:'#fb718
   return '<svg class="licic" viewBox="0 0 36 36" width="40" height="40" aria-hidden="true">'+d+'</svg>'; },
  figura:function(){ return ''; }, cena:function(){ return ''; }};
 </script>
-<script src="CIE3_estudo_licoes.js?v=6c0019d1615"></script>
+<script src="CIE3_estudo_licoes.js?v=1e3e71b1645"></script>
 <script>
 /* ============================================================
    MOTOR DO ESTUDO — navegação, telinhas e treininho.
@@ -994,7 +994,7 @@ R.fim=function(){
       '<h2>Lesson done!</h2><p>'+lic.nome+'</p>'+
       (tot?'<p>Practice: <b>'+ac+' of '+tot+'</b> correct.</p>':'')+
       '<div class="btnrow">'+(prox?'<button class="btn" data-a="prox">Next lesson: '+prox.nome+'</button>':'')+
-      '<a class="btn" href="CIE3_simulado.html?v=6c0019d1615" style="text-decoration:none;text-align:center">Practice Test &#8250;<span class="tr">Simulado</span></a><button class="btn calmo" data-a="capa">All lessons<span class="tr">Todas as lições</span></button></div></div>',
+      '<a class="btn" href="CIE3_simulado.html?v=1e3e71b1645" style="text-decoration:none;text-align:center">Practice Test &#8250;<span class="tr">Simulado</span></a><button class="btn calmo" data-a="capa">All lessons<span class="tr">Todas as lições</span></button></div></div>',
     fala:'Lesson done! '+puro(lic.nome),
     init:function(el){
       var p=el.querySelector('[data-a="prox"]'); if(p) p.onclick=function(){ abre(est.lic+1); };
@@ -1030,7 +1030,7 @@ function renderCapa(){
       var r3=Math.floor(i/3), c3=r3%2?3-i%3:i%3+1, r5=Math.floor(i/5), c5=r5%2?5-i%5:i%5+1;
       return '<button class="parada lic'+(i%2?' dir':'')+'" data-i="'+i+'" style="--lc:'+corDe(l)+';--r3:'+(r3+1)+';--c3:'+c3+';--r5:'+(r5+1)+';--c5:'+c5+'"><span class="foto" style="background-image:url(media/cie3/'+P[0]+'.jpg)"><span class="num">'+(i+1)+'</span>'+(f[l.k]?'<span class="ok" aria-label="done">&#10003;</span>':'')+(i===prox?PIN:'')+'</span><span class="nome">'+P[1]+TRc(P[2])+'</span></button>';
     }).join('')+
-    '<a class="chegada" href="CIE3_simulado.html?v=6c0019d1615">&#127937; Practice Test'+TRc('Simulado')+'</a></div>'+
+    '<a class="chegada" href="CIE3_simulado.html?v=1e3e71b1645">&#127937; Practice Test'+TRc('Simulado')+'</a></div>'+
     '<div class="mc-placar"><span>'+n+' / '+LICOES.length+TRc(n+' de '+LICOES.length+' feitas')+'</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div></div>';
   tela.querySelectorAll('.lic').forEach(function(b){ b.onclick=function(){ abre(+b.dataset.i); }; });
   desenhaRota();
@@ -1110,6 +1110,6 @@ window.CIE3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic
 })();
 </script>
 <script>window.SERA_EN=true; window.SERA_ACCENT={accent:'#f472b6'};</script>
-<script src="sera_theme.js?v=6c0019d1615"></script>
+<script src="sera_theme.js?v=1e3e71b1645"></script>
 </body>
 </html>
