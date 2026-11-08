@@ -10,7 +10,7 @@
    - A.selaPampa(c): sela simples do cavalo crioulo (arteA2.js).
    - A.trajeItem(c,t): óculos de nadar (cena.js).
    - A.introMesa(c,it,t): a escrivaninha com o croqui, na abertura (cena.js).
-   - A.capaLivro(c,t): a capa — Mariana, João e o Bem-te-vi na rua do bairro.
+   - A.capaLivro(c,t): a capa — Serafina, Chapeuzinho Vermelho, Tistu, o Menino do Biscoito e o Bem-te-vi na rua do bairro.
    Sem imagem, sem emoji, nada pisca.
    ============================================================ */
 (function(){
@@ -91,7 +91,7 @@ A.trajeItem=function(c,t){
   c.restore();
 };
 
-/* ---------- abertura: a escrivaninha da Mariana com o croqui do bairro (no lugar do livro) ---------- */
+/* ---------- abertura: a escrivaninha de Serafina com o croqui do bairro (no lugar do livro) ---------- */
 A.introMesa=function(c,it,t){
   var abre=it.i>=1?1:Math.min(1,it.t/2), b=.5+.5*Math.sin(t*1.5);
   var g=c.createRadialGradient(0,-20,10,0,-20,200); g.addColorStop(0,'rgba(253,230,138,'+(.25+.2*b)+')'); g.addColorStop(1,'rgba(253,230,138,0)'); c.fillStyle=g; circ(c,0,-20,200); c.fill();
@@ -109,7 +109,7 @@ A.introMesa=function(c,it,t){
   if(it.i>=1){ c.fillStyle='rgba(30,27,75,.5)'; [[-80,-18,16],[60,-16,18]].forEach(function(s){ el(c,s[0],s[1],s[2],s[2]*.45); c.fill(); }); }
 };
 
-/* ---------- a capa: Mariana, João e o Bem-te-vi na rua do bairro ---------- */
+/* ---------- a capa: os 4 guardiões e o Bem-te-vi na rua do bairro ---------- */
 var capa0=A.capaLivro, LIVRE_Y=(capa0&&capa0.LIVRE_Y)||440;
 function titulo(c,s,x,y,fz){ c.save(); c.font=F(900,fz); c.textAlign='center'; c.textBaseline='middle'; c.lineJoin='round';
   var w=c.measureText(s).width; if(w>820){ fz=fz*820/w; c.font=F(900,fz); }
@@ -121,7 +121,7 @@ A.capaLivro=function(c,t,sel){
   A.ceu(c,'rua',t); A.longe(c,'rua',t*6,t); A.perto(c,'rua',t*14,t); A.chao(c,{x:0,y:450,w:W,h:90},'rua');
   c.fillStyle='rgba(13,11,30,.18)'; c.fillRect(0,0,W,H);
   var g=c.createRadialGradient(W/2,420,20,W/2,420,260); g.addColorStop(0,'rgba(253,224,71,.35)'); g.addColorStop(1,'rgba(253,224,71,0)'); c.fillStyle=g; circ(c,W/2,420,260); c.fill();
-  if(A.heroi){ A.heroi(c,400,452,'cheer',t,1,1.3,'lia'); A.heroi(c,560,452,'idle',t+1,-1,1.3,'theo'); }
+  if(A.heroi){ A.heroi(c,250,452,'idle',t+2,1,1.2,'bia'); A.heroi(c,390,452,'cheer',t,1,1.3,'lia'); A.heroi(c,560,452,'cheer',t+.9,-1,1.3,'leo'); A.heroi(c,700,452,'idle',t+1,-1,1.2,'theo'); } /* os 4 guardiões (08/11) */
   if(A.morador) A.morador(c,'tic',480,330+Math.sin(t*1.3)*6,t,1,false);
   titulo(c,'GUARDIÕES DA CASA MAIOR',W/2,80,66);
   var sub='Meio ambiente, nossa casa maior'; c.font=F(800,22); var sw=c.measureText(sub).width+56, sx=W/2-sw/2, sy=126, sh=34;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='50b98200634';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c4d84e01221';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,7 +14,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Geografia · Teoria</title>
-<link rel="stylesheet" href="serafina-core.css?v=50b98200634">
+<link rel="stylesheet" href="serafina-core.css?v=c4d84e01221">
 <style>
 /* ============================================================
    GEO3_estudo — a TEORIA de Geografia (3º tri, prova ESCRITA em português
@@ -578,6 +578,110 @@ body.light .bio>i{color:color-mix(in srgb,var(--bc) 55%,#000)}
   .arr-c>img{max-height:64px}.arr-itens .arr-it img{width:50px;height:50px}.arr-pe{margin-top:4px}
   .naprova li{margin-bottom:6px}.bio{padding:4px 8px;font-size:calc(.85rem*var(--fs))}
 }
+/* ================= v2 (08/11): destaque visível + mecânicas de atividade ================= */
+.card{--lch:color-mix(in srgb,var(--lc) 52%,#fff)}
+body.light .card{--lch:var(--lcx)}
+.corpo b:not(.ocl){color:var(--lch)}
+.corpo .regra b:not(.ocl),.corpo .caixa b:not(.ocl),.corpo .bio b:not(.ocl),.corpo figure b:not(.ocl){color:var(--lch)}
+.estrelas{display:inline-flex;gap:3px;vertical-align:middle}
+.est{width:22px;height:22px;fill:var(--line);stroke:none}
+.est.on{fill:#fbbf24;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.escfim .estrelas .est{width:40px;height:40px}
+.ordmsg .estrelas .est{width:18px;height:18px}.ordmsg{line-height:1.3}
+.arr-prog i.no{background:var(--no);border-color:var(--no);opacity:1}
+/* cartões que se viram (frente: figura + nome + pergunta; verso no mesmo lugar) */
+.revf{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (min-width:620px){ .revf{grid-template-columns:repeat(var(--rc,3),minmax(0,1fr))} }
+.rev.rf{gap:4px;min-height:0;padding:6px;border:2.5px solid var(--bc,var(--lc));background:linear-gradient(160deg,color-mix(in srgb,var(--bc,var(--lc)) 24%,var(--card)),var(--card));text-align:center;color:var(--ink);font:inherit}
+.rev.rf .rnome{font-weight:900;font-size:calc(.98rem*var(--fs));line-height:1.15;color:color-mix(in srgb,var(--bc,var(--lc)) 55%,#fff)}
+body.light .rev.rf .rnome{color:color-mix(in srgb,var(--bc,var(--lc)) 50%,#000)}
+.rpilha{display:grid;align-items:center;justify-items:center}
+.rpilha>*{grid-area:1/1}
+.rpilha img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px;background:#fff}
+.rsem{display:block;width:100%;min-height:60px}
+.rev.rf .tras{display:block;visibility:hidden;font-size:calc(.86rem*var(--fs));font-weight:800;line-height:1.3;padding:2px}
+.rev.rf.aberto .tras{visibility:visible}
+.rev.rf.aberto .rpilha img{visibility:hidden}
+.rev.rf .rq{font-size:calc(.74rem*var(--fs));font-weight:900;color:var(--soft);line-height:1.2}
+.rev.rf.aberto .rq{visibility:hidden}
+.rev.rf.aberto{border-style:solid;background:linear-gradient(160deg,color-mix(in srgb,var(--bc,var(--lc)) 34%,var(--card)),var(--card))}
+.revs+.ordmsg{margin-top:6px}
+/* classificar item a item */
+.esc{padding:10px;display:block}
+.esc .alvo{font-size:calc(1.5rem*var(--fs));letter-spacing:0;margin:4px 0 8px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.esc .alvo.frasealvo{font-size:calc(1.08rem*var(--fs));text-align:center}
+.esc .alvo img{display:block;max-width:100%;width:auto;height:150px;object-fit:contain;border-radius:10px;background:#fff}
+.esc .alvo.comimg span{font-size:calc(1.05rem*var(--fs))}
+.esc .perg{color:var(--ink)}
+.ops.muitas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:620px){ .ops.muitas{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.ops.longas .op,.ops.muitas .op{font-size:calc(.98rem*var(--fs));letter-spacing:0;min-width:0;padding:6px 8px}
+.op{color:var(--ink);font-weight:900;font-size:calc(1.05rem*var(--fs))}
+.ops.respondida .op:not(.certa):not(.errada){display:none}
+.ops.respondida{display:flex}
+.fbkrow{display:flex;gap:8px;align-items:stretch;margin-top:8px}
+.fbkrow .fbk{flex:1;margin:0;padding:7px 10px}
+.fbkrow .btn{width:auto;flex:0 0 auto;min-height:48px}
+.esc .arr-prog{margin-top:8px}
+.escfim{display:flex;flex-direction:column;align-items:center;gap:6px}
+@media (min-width:700px){
+  .esc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:14px;align-items:center}
+  .esc .escfim{grid-column:1/-1}
+}
+/* ordenar */
+.ord{grid-template-columns:repeat(var(--oc,2),minmax(0,1fr));gap:8px}
+.oq{color:var(--ink);font:inherit;min-height:56px;justify-content:center}
+.oq img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px;background:#fff}
+.oq span.cap{font-size:calc(.95rem*var(--fs));text-align:center;padding-right:30px;padding-left:30px}
+.ord.linha{grid-template-columns:1fr}
+.ord.linha .oq span.cap{text-align:left;padding-left:4px}
+/* ligar */
+.lg{color:var(--ink);font:inherit;font-weight:900;font-size:calc(.98rem*var(--fs));letter-spacing:0;display:flex;align-items:center;justify-content:center;gap:6px;text-align:center}
+.lg.lgimg{flex-direction:column;padding:4px}
+.lg img{display:block;height:64px;width:auto;max-width:100%;object-fit:cover;border-radius:8px;background:#fff}
+.lg.feito::before{content:none}
+.lg.feito{position:relative}
+.lg.feito::after{content:attr(data-n);position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--ok);color:#06251a;font-size:12px;display:flex;align-items:center;justify-content:center}
+.liga+.arr-pe,.ord+.arr-pe{margin-top:8px}
+/* figuras em grade ao lado do texto (Visto de cima) */
+.ladog .lfig .grd{margin:0}
+.ladog .lfig img{width:100%;max-width:100%;margin:0 auto 3px}
+@media (min-width:700px){ .lado.ladog{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)} }
+@media (max-height:520px) and (min-width:600px){ .lado.ladog{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)} .ladog .lfig img{width:auto;max-width:100%} .ladog .grd figure{font-size:calc(.74rem*var(--fs))} }
+/* pares de frase: o fim fica hachurado até o toque */
+.pares.fr{grid-template-columns:1fr}
+@media (min-width:900px){ .pares.fr{grid-template-columns:1fr 1fr} }
+.pares.fr .par{color:var(--ink);font:inherit;font-size:calc(1rem*var(--fs));font-weight:800;letter-spacing:0;line-height:1.35;justify-content:flex-start;text-align:left;flex-wrap:wrap;gap:4px 8px;min-height:52px}
+.pares.fr .par .depois{opacity:1;font-weight:900;color:var(--lch);border-radius:7px;padding:0 2px}
+.pares.fr .par:not(.aberto) .depois{display:inline-block;min-width:3.2em}
+.pares.fr .par:not(.aberto) .depois{color:transparent;background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--ink) 22%,transparent) 0 6px,color-mix(in srgb,var(--ink) 8%,transparent) 6px 12px);outline:2px dashed color-mix(in srgb,var(--ink) 45%,transparent);outline-offset:-2px}
+.pares+.ordmsg{margin-top:6px}
+@media (max-width:600px),(max-height:520px){ .revf.comregra .rq{display:none} }
+@media (max-width:600px){
+  .esc{padding:7px}.esc .alvo img{height:118px}.esc .alvo{font-size:calc(1.3rem*var(--fs));margin:2px 0 6px}
+  .op{min-height:48px}.fbkrow .fbk{font-size:calc(.9rem*var(--fs))}
+  .rev.rf{padding:4px;gap:3px}.rev.rf .tras{font-size:calc(.76rem*var(--fs));line-height:1.2}.rev.rf .rnome{font-size:calc(.84rem*var(--fs))}.revf{gap:6px}
+  .lg{min-height:46px;font-size:calc(.9rem*var(--fs))}.lg img{height:50px}
+  .pares.fr .par{min-height:46px;font-size:calc(.92rem*var(--fs));padding:5px 8px}
+  .oq span.cap{font-size:calc(.88rem*var(--fs))}
+  .oq{min-height:46px;padding:4px}.ord{gap:6px}.ord+.arr-pe{margin-top:5px}
+  .ordmsg{margin-top:6px;font-size:calc(.92rem*var(--fs))}
+}
+@media (max-height:520px) and (min-width:600px){
+  .esc{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:10px;padding:6px}
+  .esc .alvo img{height:104px}.esc .alvo{margin:2px 0}.esc .perg{margin:2px 0}
+  .fbkrow{margin-top:5px}.fbkrow .fbk{font-size:calc(.86rem*var(--fs));padding:5px 8px;line-height:1.3}.fbkrow .btn{min-height:44px}.esc .arr-prog{margin-top:5px}
+  .op{min-height:44px}
+  .revf{grid-template-columns:repeat(var(--rcl,3),minmax(0,1fr));gap:6px}
+  .ord.linha{grid-template-columns:1fr 1fr}.oq{min-height:40px;padding:3px 4px}.ord{gap:5px}
+  .corpo>.regra:has(+ .liga){display:none}
+  .rev.rf .tras{font-size:calc(.76rem*var(--fs));line-height:1.18}
+  .rpilha img{aspect-ratio:16/9}
+  .lg{min-height:40px;padding:3px 6px;font-size:calc(.84rem*var(--fs))}.lg img{height:40px}
+  .liga .col{gap:5px}
+  .pares.fr{grid-template-columns:1fr 1fr;gap:6px}.pares.fr .par{min-height:44px;font-size:calc(.86rem*var(--fs))}
+  .ordmsg{margin-top:4px}
+}
 </style>
 </head>
 <body>
@@ -612,8 +716,8 @@ body.light .bio>i{color:color-mix(in srgb,var(--bc) 55%,#000)}
 </div>
 
 <script>window.SERA_PT=true; /* antes do core: senão o cadeado injeta o aviso bilíngue */ window.SERA_CFG={trKey:null,lang:'pt-BR',voz:'antonio',rate:.9,home:'../index.html',somKey:'geo3_som',stars:80};</script>
-<script src="serafina-core.js?v=50b98200634"></script>
-<script src="OP_voz.js?v=50b98200634"></script>
+<script src="serafina-core.js?v=c4d84e01221"></script>
+<script src="OP_voz.js?v=c4d84e01221"></script>
 <script>
 /* ícones por tema (cores da BIBLIA_GEO3) */
 window.GEO3ARTE={icone:function(k){ var c={urbano:'#0ea5e9',sinal:'#ef4444',direcoes:'#f59e0b',referencia:'#a855f7',mapas:'#14b8a6',ruas:'#94a3b8',bairro:'#f97316',transporte:'#2563eb',ambiente:'#22c55e',sons:'#06b6d4',biomas:'#84cc16',preservacao:'#16a34a'}[k]||'#22c55e';
@@ -632,7 +736,7 @@ window.GEO3ARTE={icone:function(k){ var c={urbano:'#0ea5e9',sinal:'#ef4444',dire
   return '<svg class="licic" viewBox="0 0 36 36" width="40" height="40" aria-hidden="true">'+d+'</svg>'; },
  figura:function(){ return ''; }, cena:function(){ return ''; }};
 </script>
-<script src="GEO3_estudo_licoes.js?v=50b98200634"></script>
+<script src="GEO3_estudo_licoes.js?v=c4d84e01221"></script>
 <script>
 /* ============================================================
    MOTOR DO ESTUDO — navegação, telinhas e treininho.
@@ -709,10 +813,12 @@ function volta(){
 
 /* ---------------- desenho de cada tipo de telinha ---------------- */
 var R={};
-/* oclusao: todo <b> da teoria vira termo hachurado; o toque revela (revisao ativa, ideia do Paulo 02/11) */
+/* oclusao (v2, 08/11): so fica hachurado o que a crianca consegue ADIVINHAR na hora (marcado <b class="ocl"> nas licoes:
+   a figura mostra, a frase/titulo entrega, ou acabou de aparecer) e a resposta do "Na prova" (<b class="resp">).
+   O <b> comum e DESTAQUE colorido, sempre visivel. Teto de 3 palavras por lacuna. */
 function palavras(s){ return s.trim().split(/\s+/).filter(Boolean).length; }
 function ocluir(el){
-  var bs=[].slice.call(el.querySelectorAll('b')).filter(function(b){ return !b.closest('h3')&&!b.closest('.tqnum')&&!b.closest('.passo')&&palavras(b.textContent)<=3; });
+  var bs=[].slice.call(el.querySelectorAll('b.ocl,b.resp')).filter(function(b){ return !b.closest('h3')&&!b.closest('.tqnum')&&!b.closest('.passo')&&palavras(b.textContent)<=3; });
   if(!bs.length) return;
   function pinta(){ var f=bs.filter(function(b){ return b.classList.contains('fechado'); }).length; if(tudo){ tudo.firstChild.nodeValue=f?'Mostrar tudo':'Esconder tudo'; } }
   bs.forEach(function(b){ b.classList.add('ocl','fechado'); b.setAttribute('role','button'); b.tabIndex=0;
@@ -819,6 +925,138 @@ R.arrasta=function(t){
       el.querySelector('[data-a="re"]').onclick=function(){ render(); };
     }};
 };
+/* ---------- v2 (08/11): as mecânicas de atividade do Inglês, no visual do GEO3 ---------- */
+function IM(n){ return '<img src="media/geo3/'+n+'.jpg" alt="">'; }
+function estrelas(ac,n){ var e=ac>=n*.9?3:ac>=n*.6?2:1, s='';
+  for(var i=0;i<3;i++) s+='<svg class="est'+(i<e?' on':'')+'" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.2 1.3-6.6L2.5 9.3l6.6-.8z"/></svg>';
+  return s; }
+/* cartões que se viram: frente = figura + nome + a pergunta do cartão (contexto); verso = o conteúdo, no mesmo lugar */
+R.revela=function(t){
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="revs revf'+(t.regra?' comregra':'')+'" style="--rc:'+(t.cols||3)+';--rcl:'+t.cartoes.length+'">'+t.cartoes.map(function(c,i){
+      return '<button class="rev rf" data-i="'+i+'"'+(c.cor?' style="--bc:'+c.cor+'"':'')+'><span class="rnome">'+c.n+'</span>'+
+        '<span class="rpilha">'+(c.img?IM(c.img):'<span class="rsem"></span>')+'<span class="tras">'+c.b+'</span></span>'+
+        '<span class="rq">'+(c.q||t.q||'')+'</span></button>';
+    }).join('')+'</div><div class="ordmsg">0 de '+t.cartoes.length+' cartões</div>',
+    init:function(el){
+      var vistos={}, msg=el.querySelector('.ordmsg'), n=t.cartoes.length;
+      el.querySelectorAll('.rev').forEach(function(b){ b.onclick=function(){
+        var ab=b.classList.toggle('aberto'); if(!ab) return;
+        var c=t.cartoes[+b.dataset.i]; vistos[b.dataset.i]=1; fala(puro(c.n)+'. '+puro(c.b));
+        var k=Object.keys(vistos).length;
+        msg.innerHTML=k===n?'<span class="estrelas">'+estrelas(1,1)+'</span> '+(t.fim||'Você virou todos os cartões!'):(k+' de '+n+' cartões');
+      }; });
+    }};
+};
+/* classificar item a item, com placar (bolinhas) e estrelas no fim; nunca passa sozinho */
+R.escolha=function(t){
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="esc"></div>',
+    init:function(el){
+      var box=el.querySelector('.esc'), itens, k, acertos, marcas;
+      function novo(){ itens=emb(t.itens); k=0; acertos=0; marcas=[]; mostra(); }
+      function pontos(){ return '<div class="arr-prog">'+itens.map(function(x,j){ return '<i class="'+(marcas[j]||'')+'"></i>'; }).join('')+'</div>'; }
+      function mostra(){
+        if(k>=itens.length){
+          box.innerHTML='<div class="escfim"><div class="estrelas">'+estrelas(acertos,itens.length)+'</div><p class="fimesc">'+acertos+' de '+itens.length+' certos.</p>'+pontos()+
+            '<button class="arr-re" data-a="denovo">&#8634; De novo</button></div>';
+          fala(acertos+' de '+itens.length+' certos.');
+          box.querySelector('[data-a]').onclick=novo; return;
+        }
+        var it=itens[k], os=it.op||t.op;
+        box.innerHTML='<div class="esc-a"><div class="cont">'+(k+1)+' / '+itens.length+'</div>'+
+          (t.pergunta?'<div class="perg">'+t.pergunta+'</div>':'')+
+          '<div class="alvo'+(it.img?' comimg':'')+(it.m&&it.m.length>26?' frasealvo':'')+'">'+(it.img?IM(it.img):'')+(it.m?'<span>'+it.m+'</span>':'')+'</div></div>'+
+          '<div class="esc-b"><div class="ops'+(os.length>3?' muitas':'')+(os.some(function(o){ return o.length>9; })?' longas':'')+'">'+os.map(function(o){ return '<button class="op">'+o+'</button>'; }).join('')+'</div>'+
+          '<div class="fbkslot"></div>'+pontos()+'</div>';
+        box.querySelectorAll('.op').forEach(function(b){ b.onclick=function(){
+          var certo=b.textContent===it.c;
+          box.querySelectorAll('.op').forEach(function(x){ x.disabled=true; if(x.textContent===it.c) x.classList.add('certa'); });
+          if(!certo) b.classList.add('errada'); else acertos++;
+          box.querySelector('.ops').classList.add('respondida');
+          marcas[k]=certo?'ok':'no';
+          var pi=box.querySelectorAll('.arr-prog i')[k]; if(pi) pi.className=marcas[k];
+          box.querySelector('.fbkslot').innerHTML='<div class="fbkrow"><div class="fbk '+(certo?'ok':'no')+'"><b class="t">'+(certo?'Isso!':'Ainda não!')+'</b> '+(it.d||'')+'</div>'+
+            '<button class="btn" data-a="prox">'+(k<itens.length-1?'Próximo &#8250;':'Placar &#8250;')+'</button></div>';
+          box.querySelector('[data-a="prox"]').onclick=function(){ k++; mostra(); };
+          fala((certo?'Isso! ':'Ainda não! ')+puro(it.d||it.c));
+          encaixa();
+        }; });
+        encaixa();
+      }
+      novo();
+    }};
+};
+/* pôr na ordem: tocar nos cartões, do primeiro ao último */
+R.ordena=function(t){
+  var lista=t.quadros.map(function(q,i){ return {q:q,i:i}; }), mostra=emb(lista);
+  if(mostra.every(function(x,j){ return x.i===j; })) mostra.push(mostra.shift());
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="ord'+(t.linha?' linha':'')+'" style="--oc:'+(t.cols||2)+'">'+mostra.map(function(x){
+      return '<button class="oq" data-i="'+x.i+'">'+(x.q.img?IM(x.q.img):'')+'<span class="cap">'+x.q.cap+'</span><span class="ob"></span></button>';
+    }).join('')+'</div><div class="arr-pe"><div class="ordmsg">'+(t.dica||'Toque no primeiro.')+'</div><button class="arr-re" data-a="re">&#8634; Recomeçar</button></div>',
+    init:function(el){
+      var prox=0, msg=el.querySelector('.ordmsg');
+      el.querySelectorAll('.oq').forEach(function(b){ b.onclick=function(){
+        if(b.classList.contains('feito')) return;
+        var i=+b.dataset.i;
+        if(i===prox){
+          b.classList.add('feito'); b.querySelector('.ob').textContent=prox+1; prox++;
+          if(prox===t.quadros.length){ msg.innerHTML='<span class="estrelas">'+estrelas(1,1)+'</span> '+(t.fimMsg||'Muito bem! Tudo na ordem.'); fala(puro(t.fimMsg||'Muito bem! Tudo na ordem.')); }
+          else { msg.textContent='Isso! E depois?'; fala(puro(t.quadros[i].cap)); }
+        }else{
+          b.classList.remove('erro'); void b.offsetWidth; b.classList.add('erro');
+          msg.textContent='Ainda não. O que vem antes?';
+          setTimeout(function(){ b.classList.remove('erro'); },450);
+        }
+      }; });
+      el.querySelector('[data-a="re"]').onclick=function(){ render(); };
+    }};
+};
+/* ligar: toque num item e depois no par dele (o lado pode ser figura: {img,t,f}) */
+function lgRot(x){ return typeof x==='string'?x:((x.img?IM(x.img):'')+(x.t?'<span>'+x.t+'</span>':'')); }
+function lgFala(x){ return typeof x==='string'?puro(x):(x.f||x.t||''); }
+R.liga=function(t){
+  var esq=t.pares.map(function(p,i){ return {s:p[0],i:i}; }), dir=emb(t.pares.map(function(p,i){ return {s:p[1],i:i}; }));
+  if(dir.every(function(x,j){ return x.i===j; })) dir.push(dir.shift());
+  function bt(lado){ return function(x){ return '<button class="lg'+(typeof x.s==='string'?'':' lgimg')+'" data-l="'+lado+'" data-i="'+x.i+'">'+lgRot(x.s)+'</button>'; }; }
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+
+    '<div class="liga'+(t.figs?' ligafig':'')+'"><div class="col">'+esq.map(bt('e')).join('')+'</div><div class="col">'+dir.map(bt('d')).join('')+'</div></div>'+
+    '<div class="arr-pe"><div class="ordmsg">Toque num item e depois no par dele.</div><button class="arr-re" data-a="re">&#8634; Recomeçar</button></div>',
+    init:function(el){
+      var sel=null, feitos=0, msg=el.querySelector('.ordmsg');
+      el.querySelectorAll('.lg').forEach(function(b){ b.onclick=function(){
+        if(b.classList.contains('feito')) return;
+        if(!sel || sel.dataset.l===b.dataset.l){
+          if(sel) sel.classList.remove('sel');
+          sel=(sel===b)?null:b; if(sel){ sel.classList.add('sel'); msg.textContent='Agora toque no par.'; }
+          return;
+        }
+        var a=sel; sel=null; a.classList.remove('sel');
+        if(a.dataset.i===b.dataset.i){
+          feitos++; [a,b].forEach(function(x){ x.classList.add('feito'); x.dataset.n=feitos; });
+          var p=t.pares[+a.dataset.i];
+          if(feitos===t.pares.length) msg.innerHTML='<span class="estrelas">'+estrelas(1,1)+'</span> Muito bem! Tudo ligado.'; else msg.textContent='Isso!';
+          fala(lgFala(p[0])+', '+lgFala(p[1]));
+        }else{
+          [a,b].forEach(function(x){ x.classList.remove('erro'); void x.offsetWidth; x.classList.add('erro'); });
+          setTimeout(function(){ a.classList.remove('erro'); b.classList.remove('erro'); },450);
+          msg.textContent='Não é o par. Tente de novo.';
+        }
+      }; });
+      el.querySelector('[data-a="re"]').onclick=function(){ render(); };
+    }};
+};
+/* pares: o começo da frase à vista; o toque mostra o resto (revisão do que acabou de aparecer na tela anterior) */
+R.pares=function(t){
+  /* p = [frase com ___ , o pedaço escondido (até 3 palavras)] */
+  return {html:(t.regra?'<div class="regra">'+t.regra+'</div>':'')+'<div class="pares fr">'+t.pares.map(function(p,i){
+    var d='<span class="depois">'+p[1]+'</span>';
+    return '<button class="par" data-i="'+i+'"><span class="pfr">'+(p[0].indexOf('___')>=0?p[0].replace('___',d):p[0]+' '+d)+'</span></button>';
+  }).join('')+'</div><div class="ordmsg">0 de '+t.pares.length+'</div>',
+    init:function(el){ var k=0, msg=el.querySelector('.ordmsg');
+      el.querySelectorAll('.par').forEach(function(b){ b.onclick=function(){
+        if(!b.classList.contains('aberto')){ b.classList.add('aberto'); k++; }
+        msg.innerHTML=k===t.pares.length?'<span class="estrelas">'+estrelas(1,1)+'</span> Muito bem!':(k+' de '+t.pares.length);
+        var p=t.pares[+b.dataset.i]; fala(puro(p[0].replace('___',p[1]))); }; }); }};
+};
 R.fim=function(){
   var lic=LICOES[est.lic], ac=0, tot=0;
   for(var k in sessao.resp){ tot++; if(sessao.resp[k].ok) ac++; }
@@ -829,7 +1067,7 @@ R.fim=function(){
       '<h2>Lição concluída!</h2><p>'+lic.nome+'</p>'+
       
       '<div class="btnrow">'+(prox?'<button class="btn" data-a="prox">Próxima lição: '+prox.nome+'</button>':'')+
-      '<a class="btn" href="GEO3_simulado.html?v=50b98200634" style="text-decoration:none;text-align:center">Simulado &#8250;</a><button class="btn calmo" data-a="capa">Todas as lições</button></div></div>',
+      '<a class="btn" href="GEO3_simulado.html?v=c4d84e01221" style="text-decoration:none;text-align:center">Simulado &#8250;</a><button class="btn calmo" data-a="capa">Todas as lições</button></div></div>',
     fala:'Lição concluída! '+puro(lic.nome),
     init:function(el){
       var p=el.querySelector('[data-a="prox"]'); if(p) p.onclick=function(){ abre(est.lic+1); };
@@ -866,7 +1104,7 @@ function renderCapa(){
     '<div><h1>Guardiões da Casa Maior</h1><p>Teoria de Geografia · prova em 12/11</p></div></div>'+
     '<div class="trilha"><svg class="rota" aria-hidden="true"></svg>'+
     unidade(3,'Unidade 3 · Ruas, deslocamentos e transportes')+unidade(4,'Unidade 4 · Meio ambiente, nossa casa maior')+
-    '<div class="mc-pe"><a class="chegada" href="GEO3_simulado.html?v=50b98200634">Simulado &#8250;</a>'+
+    '<div class="mc-pe"><a class="chegada" href="GEO3_simulado.html?v=c4d84e01221">Simulado &#8250;</a>'+
     '<div class="mc-placar"><span>'+n+' de '+LICOES.length+' feitas</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div></div></div></div>';
   tela.querySelectorAll('.parada').forEach(function(b){ b.onclick=function(){ abre(+b.dataset.i); }; });
   desenhaRota();
@@ -887,7 +1125,7 @@ function encaixa(){
   /* tela larga: dois quadros lado a lado antes de encolher figura */
   var qs=c.querySelectorAll(':scope>.caixa'); c.classList.remove('duas');
   if(innerWidth>=900 && qs.length===2){ c.classList.add('duas'); if(sobra()<=2) return; }
-  c.classList.add('encx'); var lo=innerWidth<600?84:60, hi=Math.max(64,Math.round(innerHeight*.6));
+  c.classList.add('encx'); var lo=c.querySelector('.revf')?44:(innerWidth<600?84:60), hi=Math.max(64,Math.round(innerHeight*.6));
   for(var k=0;k<9;k++){ var m=Math.round((lo+hi)/2); c.style.setProperty('--imx',m+'px'); if(sobra()<=2) lo=m; else hi=m-1; }
   c.style.setProperty('--imx',lo+'px');
 }
@@ -907,7 +1145,12 @@ function render(){
   encaixa();
   tela.querySelectorAll('.pal').forEach(function(b){ if(!b.onclick) b.onclick=function(){ fala((b.dataset.f||b.textContent).toLowerCase()); }; });
   tela.querySelector('.ouvir').onclick=function(){
-    fala(r.fala || t.fala || (t.tit+'. '+tela.querySelector('.corpo').innerText));
+    /* v2: cada tela tem sua fala curta; sem ela, lê título + instrução, e nunca o que está hachurado */
+    if(r.fala || t.fala) return fala(r.fala || t.fala);
+    if(t.tipo!=='texto') return fala(t.tit+'. '+puro(t.regra||t.pergunta||''));
+    var cp=tela.querySelector('.corpo').cloneNode(true); cp.querySelectorAll('.fechado').forEach(function(b){ b.textContent='…'; });
+    cp.querySelectorAll('button').forEach(function(b){ b.remove(); });
+    fala(t.tit+'. '+cp.innerText);
   };
   var n=sessao.telas.length;
   bar.style.width=Math.round((est.i+1)/n*100)+'%';
@@ -945,6 +1188,6 @@ window.GEO3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic
 })();
 </script>
 <script>window.SERA_PT=true; window.SERA_ACCENT={accent:'#22c55e'};</script>
-<script src="sera_theme.js?v=50b98200634"></script>
+<script src="sera_theme.js?v=c4d84e01221"></script>
 </body>
 </html>

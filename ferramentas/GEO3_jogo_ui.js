@@ -62,7 +62,7 @@ function legenda(cena,acoes){ var d=$('legenda'); if(!cena){ d.classList.remove(
   $('lgNext').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); SOM.fx('clique'); if(acoes&&acoes.next){ acoes.next(); return; } JOGO.confirmar(); }); try{ say(cena.pt||cena.en); }catch(e){} }
 
 /* ---------- escolha do herói ---------- */
-var HEROIS=[{k:'lia',en:'Mariana',pt:'Mariana'},{k:'theo',en:'João',pt:'João'}]; /* GEO3: Mariana (poema "O meu bairro", U3 S12) e João (o vizinho, U3 S12/S18) */
+var HEROIS=[{k:'lia',en:'Serafina',pt:'Serafina'},{k:'bia',en:'Chapeuzinho Vermelho',pt:'Chapeuzinho Vermelho'},{k:'theo',en:'Tistu',pt:'Tistu'},{k:'leo',en:'Menino do Biscoito',pt:'Menino do Biscoito'}]; /* GEO3 (08/11, ordem do Paulo): 4 guardiões = personagens de livros lidos no ano, nenhum nome de criança da turma (chaves do motor lia/bia/theo/leo; desenho em GEO3_jogo_arteG.js) */
 var CORES=['#dc2626','#2563eb','#16a34a','#eab308','#9333ea','#ec4899','#f97316','#0d9488'];
 /* escolha do herói: os quatro ficam INTEIROS no canvas, em cima; aqui embaixo, o nome de cada um bem
    embaixo do seu herói (mesmas colunas), as cores e o "Let's go!". Tocar no herói também escolhe. */

@@ -154,7 +154,7 @@ function mapaHover(lx,ly){ if(J.estado!=='mapa'||J.mapaAnim) return; var i=noEm(
 
 /* ---------- intro: biblioteca → o livro abre → Conde → herói entra ---------- */
 var CENAS_INTRO=[
-  {en:'', pt:'Mariana mora numa cidade cheia de ruas, casas, comércios e escolas. A casa fica na rua, a rua fica no bairro e o bairro fica na cidade.', dur:5},
+  {en:'', pt:'Serafina mora numa cidade cheia de ruas, casas, comércios e escolas. A casa fica na rua, a rua fica no bairro e o bairro fica na cidade.', dur:5},
   {en:'', pt:'Mas o Rei Entulho, o monte de lixo da margem do rio, acordou! Derrubou as placas e soltou as Sacolinhas e as Fumacinhas.', dur:5.5},
   {en:'', pt:'"Bem-te-vi! Bem-te-vi!", cantou o passarinho da janela. "Precisamos de guardiões do meio ambiente!"', dur:4.5},
   {en:'', pt:'Atravesse a cidade com segurança, pegue a rodovia e cruze os biomas do Brasil. No fim, limpe a margem do rio!', dur:5}

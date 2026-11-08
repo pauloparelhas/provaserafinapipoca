@@ -8,7 +8,7 @@
    'margem' (fase 9, chefão, U4 S18/S20): margem do rio com lixo acumulado, mata
    ciliar derrubada de um lado (tocos, área marrom) e preservada do outro; quando o
    Rei Entulho é vencido (e no final), o rio fica limpo;
-   'janela' (abertura): o quarto da Mariana com a janela para a rua e o Bem-te-vi.
+   'janela' (abertura): o quarto de Serafina com a janela para a rua e o Bem-te-vi.
    Mesmo contrato de GEO3_jogo_arteH.js (A.TH). Sem imagem, sem emoji, nada pisca.
    ============================================================ */
 (function(){

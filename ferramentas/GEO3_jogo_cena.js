@@ -8,7 +8,7 @@
 window.CENA = (function(){
 'use strict';
 var G=window.JOGO, J=G.J, A=window.ARTE, F=window.FASES, W=G.W, H=G.H, TAM=G.TAM;
-var HEROIS=['lia','theo']; /* GEO3: Mariana e João */
+var HEROIS=['lia','bia','theo','leo']; /* GEO3 (08/11): Serafina, Chapeuzinho Vermelho, Tistu, Menino do Biscoito — 4 colunas, as mesmas de HX e dos botões .hsel */
 
 function desenha(){
   var c=G.ctx(), esc=G.escala(), dpr=G.dpr(); if(!c) return;
@@ -277,7 +277,7 @@ function desenhaIntro(c){
   var t=J.t, it=J.intro||{i:0,t:0}, cena=A.CENAS.museu?'museu':(A.CENAS.biblioteca?'biblioteca':'floresta');
   A.ceu(c,cena,t); A.longe(c,cena,0,t); A.perto(c,cena,0,t);
   var cx=W/2, cy=330;
-  /* GEO3: a escrivaninha da Mariana com o croqui do bairro (arteH5); o livro de antes fica de reserva */
+  /* GEO3: a escrivaninha de Serafina com o croqui do bairro (arteH5); o livro de antes fica de reserva */
   c.save(); c.translate(cx,cy);
   if(A.introMesa){ A.introMesa(c,it,t); }
   else { var abre=it.i>=1?1:Math.min(1,it.t/2), brilho=.5+.5*Math.sin(t*3);
@@ -286,7 +286,7 @@ function desenhaIntro(c){
   c.restore();
   if(it.i===1&&A.conde) A.conde(c,cx+250,450,it.t<2?'write':'laugh',t);
   if(it.i===2&&A.conde) A.conde(c,cx+300,450,'laugh',t);
-  if(it.i>=3){ var k=Math.min(1,it.t/1.5); HEROIS.forEach(function(q,i){ heroi(c,cx-180+i*180,450-k*20*Math.abs(Math.sin(t*3+i)),'cheer',t,1,1.25,q); }); if(A.morador) A.morador(c,'tic',cx+300,450,t,-1,true); }
+  if(it.i>=3){ var k=Math.min(1,it.t/1.5); HEROIS.forEach(function(q,i){ heroi(c,cx-330+i*160,450-k*20*Math.abs(Math.sin(t*3+i)),'cheer',t,1,1.25,q); }); if(A.morador) A.morador(c,'tic',cx+300,450,t,-1,true); }
   titulo(c,'Guardiões da Casa Maior',W/2,58,46);
 }
 /* ---------- final ---------- */
@@ -294,7 +294,7 @@ function desenhaFinal(c){
   var t=J.t, it=J.final||{i:3,t:0}, sc=JOGO.CENAS_FINAL[it.i]||JOGO.CENAS_FINAL[3], cena=A.CENAS[sc.cena]?sc.cena:'floresta';
   A.ceu(c,cena,t); A.longe(c,cena,0,t); A.perto(c,cena,0,t); if(cena!=='biblioteca') A.chao(c,{x:0,y:450,w:W,h:90},cena);
   if(it.i<=1){ if(A.conde) A.conde(c,620,450,it.i===0?'sad':'write',t); heroi(c,330,450,'idle',t,1,1.2); if(it.i===1){ for(var k=0;k<6;k++){ var a=t*1.2+k; if(A.paginaVoando) A.paginaVoando(c,480+Math.cos(a)*200,240+Math.sin(a*1.3)*60,a); } } }
-  else if(it.i===2){ ['lia','theo'].forEach(function(q,i){ heroi(c,400+i*160,450-Math.abs(Math.sin(t*3+i))*16,'cheer',t,1,1.2,q); }); if(A.morador) A.morador(c,'tic',800,450,t,-1,true); if(A.conde) A.conde(c,160,450,'sad',t); }
+  else if(it.i===2){ ['lia','bia','theo','leo'].forEach(function(q,i){ heroi(c,300+i*130,450-Math.abs(Math.sin(t*3+i))*16,'cheer',t,1,1.2,q); }); if(A.morador) A.morador(c,'tic',800,450,t,-1,true); if(A.conde) A.conde(c,160,450,'sad',t); }
   else { if(A.morador){ A.morador(c,'clio',600,450,t,-1,true); A.morador(c,'tic',720,450,t,-1,false); } heroi(c,330,450,'cheer',t,1,1.2); }
   titulo(c,it.i===2?'O rio está limpo!':'Guardiões da Casa Maior',W/2,58,40);
 }
@@ -305,7 +305,7 @@ function desenhaCapa(c){
   HEROIS.forEach(function(q,i){ heroi(c,240+i*160,400,'idle',t+i,1,1.2,q); });
 }
 /* ---------- escolha do herói (os cartões ficam no DOM; aqui só o palco) ---------- */
-var HX=[263,697], HY=318;
+var HX=[154,371,588,805], HY=318;
 function desenhaEscolha(c){
   var t=J.t, cena=A.CENAS.vila?'vila':'floresta'; A.ceu(c,cena,t); A.longe(c,cena,t*8,t); A.perto(c,cena,t*16,t); A.chao(c,{x:0,y:450,w:W,h:90},cena);
   c.fillStyle='rgba(13,11,30,.25)'; c.fillRect(0,0,W,H);

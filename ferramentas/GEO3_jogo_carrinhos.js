@@ -35,7 +35,7 @@ var LISTA={
   dragon:{nome:'Motorista de ônibus',cor:'#eab308'}, princess:{nome:'Professora',cor:'#16a34a'}, knight:{nome:'Seu José',cor:'#dc2626'},
   witch:{nome:'Dona Antônia',cor:'#a16207'}, wolf:{nome:'Médica',cor:'#0ea5e9'}, fairy:{nome:'Gari',cor:'#ec4899'},
   frog:{nome:'Pedreiro',cor:'#f97316'}, red:{nome:'Entregador',cor:'#b91c1c'}, pig:{nome:'Cozinheiro',cor:'#3b82f6'},
-  lia:{nome:'Mariana',cor:'#e11d48'}, theo:{nome:'João',cor:'#2563eb'}, bia:{nome:'Maria',cor:'#9333ea'}, leo:{nome:'Policial',cor:'#facc15'},
+  lia:{nome:'Serafina',cor:'#f97316'}, bia:{nome:'Chapeuzinho',cor:'#dc2626'}, theo:{nome:'Tistu',cor:'#16a34a'}, leo:{nome:'Menino do Biscoito',cor:'#2563eb'}, /* os 4 guardiões (08/11): personagens de livros */
   count:{nome:'Rei Entulho',cor:'#6d28d9'}
 };
 

@@ -130,7 +130,7 @@ var NIVEIS={easy:{k:.97,erro:1.1,nome:'EASY',pt:'FÁCIL',dica:'calm racers',dpt:
   hard:{k:1.10,erro:.4,nome:'HARD',pt:'DIFÍCIL',dica:'super racers',dpt:'superpilotos',cor:'#f87171'}};
 var ORDEM_N=['easy','medium','hard'];
 function nivelSalvo(){ try{ var n=localStorage.getItem('geo3_corrida_nivel'); if(NIVEIS[n]) return n; }catch(e){} return 'easy'; }
-var COR_HEROI={lia:'#e11d48',theo:'#2563eb',bia:'#9333ea',leo:'#facc15'};
+var COR_HEROI={lia:'#f97316',bia:'#dc2626',theo:'#16a34a',leo:'#2563eb'}; /* GEO3: Serafina, Chapeuzinho, Tistu, Menino do Biscoito */
 function corHeroi(){ return J.prog.cor||COR_HEROI[J.prog.heroi||'lia']||'#e11d48'; }
 var R=null;
 function novoCarro(id,z,x,eu){ return {id:id,z:z,x:x,v:0,eu:!!eu,aFrente:true,giro:0,wob:0,turbo:0,pad:0,box:0,pitFeito:[false,false,false],lane:-1,salto:0,tag:0,naTela:false,erroT:8+hash(z)*10,alvoX:x}; }
