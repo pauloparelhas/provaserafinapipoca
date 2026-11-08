@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='aa1c05a0026';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Material da escola — Geografia</title>
+<link rel="stylesheet" href="serafina-core.css?v=aa1c05a0026">
+<style>
+/* GEO3_material — o material ORIGINAL da escola, sem alteração: slides das unidades 3 e 4 (gerados por
+   trabalho/3tri_geografia/gen/material_geo3.py), os PDFs leves de cada unidade e os vídeos indicados nos slides. */
+:root{--fs:1;--bg:#0d0b1e;--txt:#f4f1ff;--sft:#c7c2e6;--crd:#1b1738;--lin:#3b3566;--ac:#4ade80}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI",system-ui,Roboto,Arial,sans-serif;font-size:calc(16px*var(--fs))}
+body.light{--bg:#f2faf4;--txt:#14261b;--sft:#3d5245;--crd:#fff;--lin:#cfe3d5;--ac:#15803d}
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
+.top{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 12px;background:var(--crd);border-bottom:2px solid var(--lin)}
+.top .t{font-weight:900;margin-right:auto;font-size:1rem}
+@media(max-width:430px){.top .t{display:none}.top{justify-content:space-between}}
+.top button{min-width:44px;height:44px;border-radius:12px;border:2px solid var(--lin);background:transparent;color:var(--txt);font-weight:800;cursor:pointer}
+main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:14px 16px 40px}
+h1{font-size:1.5em;margin:6px 0 2px}
+h2{font-size:1.15em;margin:26px 0 8px}
+.pdfs{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 4px}
+.pdf{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:8px 16px;border-radius:14px;border:2px solid var(--ac);color:var(--txt);text-decoration:none;font-weight:900;background:var(--crd)}
+.pdf small{color:var(--sft);font-weight:700}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,42vw),1fr));gap:12px}
+.slide{background:var(--crd);border:2px solid var(--lin);border-radius:14px;overflow:hidden;cursor:zoom-in;padding:0;color:inherit;text-align:left;font:inherit;width:100%}
+.slide img{display:block;width:100%;aspect-ratio:16/9;background:#fff}
+.slide span.l{display:block;padding:8px 10px;font-weight:800;font-size:.92em}
+.slide span.l i{font-style:normal;color:var(--sft);font-weight:700;margin-right:4px}
+.vid{background:var(--crd);border:2px solid var(--lin);border-radius:14px;padding:12px;margin-bottom:12px}
+.vid b{display:block}
+.vid small{color:var(--sft);font-weight:700}
+.vid .caixa{position:relative;margin-top:8px;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .play{position:absolute;inset:0;width:100%;height:100%;background:#111;color:#fff;border:0;font-size:1.1em;font-weight:900;cursor:pointer}
+.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+#zoom{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:10px}
+#zoom.on{display:flex}
+#zoom img{max-width:100%;max-height:100%;background:#fff;border-radius:8px}
+#zoom .nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#111;font-size:1.6em;font-weight:900;cursor:pointer}
+#zoom .ant{left:10px} #zoom .seg{right:10px}
+#zoom .fechar{position:absolute;top:10px;right:10px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.85);color:#111;font-size:1.3em;font-weight:900;cursor:pointer}
+#zoom .cont{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);color:#fff;font-weight:800;background:rgba(0,0,0,.6);padding:4px 12px;border-radius:12px}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="top">
+  <button class="sera-home" onclick="goHome()" title="Início" aria-label="Início">&#127968;</button>
+  <span class="t">Material da escola</span>
+  <button title="Letra menor" aria-label="Letra menor" onclick="fs(-1)">A-</button>
+  <button title="Letra maior" aria-label="Letra maior" onclick="fs(1)">A+</button>
+  <button title="Tema" aria-label="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+  <button id="lockbtn" class="lockbtn" title="Tela cheia" aria-label="Tela cheia" onclick="toggleLock()">&#128274;</button>
+</div>
+<main>
+  <h1>Da sua escola</h1>
+  <div class="pdfs">
+    <a class="pdf" href="media/geo3/orig/Geografia_U3_ruas.pdf" target="_blank" rel="noopener">&#128196; Unidade 3 <small>PDF</small></a>
+    <a class="pdf" href="media/geo3/orig/Geografia_U4_meio_ambiente.pdf" target="_blank" rel="noopener">&#128196; Unidade 4 <small>PDF</small></a>
+  </div>
+  <h2>Unidade 3 — Ruas, deslocamentos e transportes</h2>
+  <div class="grade" id="g3"></div>
+  <h2>Unidade 4 — Meio ambiente, nossa casa maior</h2>
+  <div class="grade" id="g4"></div>
+  <h2>Vídeos dos slides</h2>
+  <div class="vids" id="vids"></div>
+</main>
+<div id="zoom" role="dialog" aria-label="Slide ampliado">
+  <img id="zimg" alt="">
+  <button class="nav ant" aria-label="Slide anterior" onclick="passo(-1,event)">&#8249;</button>
+  <button class="nav seg" aria-label="Próximo slide" onclick="passo(1,event)">&#8250;</button>
+  <button class="fechar" aria-label="Fechar" onclick="fecha()">&#10005;</button>
+  <span class="cont" id="zcont"></span>
+</div>
+<div id="unlockov"></div>
+<script>window.SERA_CFG={trKey:null,lang:'pt-BR',voz:'antonio',rate:.9,home:'../index.html',somKey:'geo3_som',stars:80};</script>
+<script src="serafina-core.js?v=aa1c05a0026"></script>
+<script>
+var U3=['Capa: Ruas, deslocamentos e transportes','Sequência 1: o espaço urbano','Introdução','Observando a rua','Construindo uma planta baixa','Os tipos de rua','Tipos de rua','Tipos de rua (continuação)','Atividade: croqui da rua','Planta de uma casa','O bairro','O bairro: leitura','Ruas, bairros e cidade','As ruas, os bairros e a cidade','Livro: Tem pato no trânsito','A história de Brasília','Mapas de Brasília','Localização no espaço urbano','Como nos localizamos na cidade?','A escola vista do alto','O mapa do entorno da escola','Mapa de conclusão e autoavaliação','Sequência 2: deslocamento e trabalho','Meios de transporte: vamos fazer um cartaz?','Croqui da moradia e trajeto','Trabalho e deslocamento na cidade','O trabalho na cidade: fotos','O trabalho na cidade','Os trajetos até a escola','A cidade precisa ter ruas, calçadas…'];
+var U4=['Capa: Meio ambiente, nossa casa maior','Grandes ideias','Perguntas essenciais','Sequência 1: a fauna e a flora brasileiras','Introdução','A fauna e a flora brasileiras','Como cuidar do meio ambiente?','Mapa dos biomas brasileiros','Bioma Amazônia','Bioma Cerrado','Bioma Mata Atlântica','Bioma Caatinga','Bioma Pampa','Bioma Pantanal','Música sobre os biomas do Brasil','Vídeo sobre os biomas brasileiros','Cartazes sobre os biomas do Brasil','Meio ambiente: por que precisamos dele?','Reflexão final','A preservação do meio ambiente','A importância de uma única árvore','Mapa de conclusão e autoavaliação','Cartas da natureza','Sequência 2: a água em nossa vida'];
+var TODOS=[];
+function monta(id,u,L){document.getElementById(id).innerHTML=L.map(function(t,i){var n=(i<9?'0':'')+(i+1),k=TODOS.length;TODOS.push({src:'media/geo3/orig/'+u+'_s'+n+'.jpg',t:t,u:u==='u3'?'Unidade 3':'Unidade 4',n:i+1});
+  return '<button class="slide" data-k="'+k+'"><img loading="lazy" src="media/geo3/orig/mini/'+u+'_s'+n+'.jpg" alt="'+t+'"><span class="l"><i>'+(i+1)+'.</i>'+t+'</span></button>';}).join('');}
+monta('g3','u3',U3); monta('g4','u4',U4);
+var atual=0;
+function mostra(k){atual=(k+TODOS.length)%TODOS.length;var s=TODOS[atual];document.getElementById('zimg').src=s.src;document.getElementById('zimg').alt=s.t;document.getElementById('zcont').textContent=s.u+' · slide '+s.n;document.getElementById('zoom').classList.add('on');}
+function passo(d,e){if(e)e.stopPropagation();mostra(atual+d);}
+function fecha(){document.getElementById('zoom').classList.remove('on');}
+document.getElementById('zoom').onclick=function(e){if(e.target===this||e.target.id==='zimg')fecha();};
+document.addEventListener('keydown',function(e){if(!document.getElementById('zoom').classList.contains('on'))return;if(e.key==='Escape')fecha();if(e.key==='ArrowRight')passo(1);if(e.key==='ArrowLeft')passo(-1);});
+[].forEach.call(document.querySelectorAll('.slide'),function(b){b.onclick=function(){mostra(+b.getAttribute('data-k'));};});
+/* vídeos com link nos próprios slides da escola (pptx da Unidade 3 e da Unidade 4) */
+var V=[['nOm07DblV5g','O bairro','Unidade 3 · slide 12'],['9CKPjO3sn1s','A história de Brasília','Unidade 3 · slide 16'],['Ekbd_hSQOhc','Como cuidar do meio ambiente?','Unidade 4 · slide 7'],['Jw3MEReBjdY','Música sobre os biomas do Brasil','Unidade 4 · slide 15'],['uHYgh89B67w','Vídeo sobre os biomas brasileiros','Unidade 4 · slide 16'],['vs6ChftV-bs','A importância de uma única árvore','Unidade 4 · slide 21']];
+document.getElementById('vids').innerHTML=V.map(function(v){return '<div class="vid"><b>'+v[1]+'</b><small>'+v[2]+'</small><div class="caixa"><button class="play" data-id="'+v[0]+'">&#9654; Assistir</button></div></div>';}).join('');
+/* o vídeo só carrega no toque, sem cookie e sem sugestões de outros canais no fim */
+[].forEach.call(document.querySelectorAll('.play'),function(b){b.onclick=function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.getAttribute('data-id')+'?rel=0&modestbranding=1&autoplay=1&playsinline=1&iv_load_policy=3';f.setAttribute('sandbox','allow-scripts allow-same-origin allow-presentation');f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;f.title='vídeo';b.parentNode.replaceChild(f,b);};});
+</script>
+<script>window.SERA_ACCENT={accent:'#22c55e'};</script>
+<script src="sera_theme.js?v=aa1c05a0026"></script>
+</body>
+</html>
