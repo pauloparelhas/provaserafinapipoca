@@ -18,6 +18,10 @@
      nada de arrastar. A última tela é "Agora você!": só as perguntas e a
      resposta oculta. Nenhuma palavra sobre prova, simulado, questão ou lição.
    Figuras: recortes das figuras da escola em media/geo3/t_*.jpg.
+   v6 (08/11, Paulo: "teoria ancorada nas imagens reais da aula"): toda tela de ensino sobre um recorte da
+   ficha/slide da escola (t_*, t6_*), com legenda e linhas alinhadas ao que a foto mostra; o desenho do
+   "um dentro do outro" saiu (vale a ilustração da canção); entraram as fotos dos trabalhos de U3 S26–S27.
+   Inventário: trabalho/3tri_geografia/avaliacao/teoria_v6_imagens.md.
    ============================================================ */
 window.GEO3_LICOES = (function(){
 'use strict';
@@ -100,15 +104,15 @@ var LS=[
 /* T2. Segurança e sinalização para atravessar (U3 S3, S4, S30) */
 {k:'sinal', tema:'sinal', unid:3, nome:'Atravessar com segurança', curto:'Atravessar a rua', capa:'t_faixa', cor:'#ef4444', treino:[], telas:[
  {tipo:'texto', tit:'Atravessar na <em>faixa</em>',
-  fala:'Atravessar na faixa. É sempre na faixa de pedestre que atravessamos a rua, quando o sinal está verde para o pedestre. Ruas seguras são as sinalizadas e com faixa de pedestre.',
+  fala:'Atravessar na faixa. As pessoas precisam atravessar a rua sempre na faixa de pedestre, quando o sinal estiver verde para o pedestre. Ruas seguras são as sinalizadas e com faixa de pedestre.',
   html:M('t_faixa_v5','Crianças atravessando na faixa de pedestre',[
-   LN('Faixa de pedestre','é sempre nela que atravessamos a rua.'),
-   LN('Sinal verde','atravessamos quando o sinal está verde para o pedestre.'),
+   LN('Faixa de pedestre','as pessoas precisam atravessar a rua sempre na faixa.'),
+   LN('Sinal verde','atravessamos quando o sinal estiver verde para o pedestre.'),
    LN('Ruas seguras','são as sinalizadas e com faixa de pedestre.')],'larga')},
  {tipo:'texto', tit:'Olhar para os <em>dois lados</em>',
-  fala:'Olhar para os dois lados. Mesmo com o sinal de pedestre, olhamos para a esquerda e para a direita antes de atravessar. Para todos se deslocarem com segurança, a cidade precisa de ruas, calçadas, ciclovias, pontos de ônibus e sinais.',
-  html:M('t_olhar','O menino olha para a esquerda e para a direita',[
-   LN('Esquerda e direita','mesmo com o sinal de pedestre, olhamos para os dois lados antes de atravessar.'),
+  fala:'Olhar para os dois lados. Ao atravessar a rua, mesmo com sinal de pedestre, devemos sempre olhar para a esquerda e para a direita. Para todos se deslocarem com segurança, a cidade precisa de ruas, calçadas, ciclovias, pontos de ônibus e sinais.',
+  html:M('t_olhar','Antes de atravessar: olhar para a esquerda e para a direita',[
+   LN('Esquerda e direita','mesmo com sinal de pedestre, devemos sempre olhar para os dois lados.'),
    LN('Segurança','para todos se deslocarem com segurança, a cidade precisa de ruas, calçadas, ciclovias, pontos de ônibus e sinais.')])},
  liga('Ligue as duas partes',[['Atravesse a rua','sempre na faixa de pedestre.'],['Atravesse quando o sinal','estiver verde para o pedestre.'],['Mesmo com o sinal de pedestre,','olhe para a esquerda e para a direita.'],['Ruas seguras são as','sinalizadas e com faixa de pedestre.']]),
  DES([
@@ -144,7 +148,7 @@ var LS=[
 {k:'referencia', tema:'referencia', unid:3, nome:'Pontos de referência', curto:'Pontos de referência', capa:'t_padaria', cor:'#a855f7', treino:[], telas:[
  {tipo:'texto', tit:'Ponto de <em>referência</em>',
   fala:'Ponto de referência. Ponto de referência é um lugar que não muda na paisagem e nos ajuda a encontrar outros lugares. A padaria na esquina é um comércio e serve de ponto de referência. Outros exemplos: construção colorida, prédio alto, árvore, linha de transmissão de energia.',
-  html:M('t_padaria','Uma padaria na esquina',[
+  html:M('t_padaria','Uma padaria na esquina da rua',[
    LN('Ponto de referência','lugar que não muda na paisagem e nos ajuda a encontrar outros lugares.'),
    LN('Padaria na esquina','é um comércio e serve de ponto de referência.'),
    LN('Outros exemplos','construção colorida, prédio alto, árvore, linha de transmissão de energia.')])},
@@ -155,7 +159,7 @@ var LS=[
    LN('Antônia','vai ao trabalho pelo caminho mais tranquilo, porque a rua da escola é muito movimentada.')])},
  {tipo:'texto', tit:'Saber se <em>localizar</em>',
   fala:'Saber se localizar. Localização é saber onde estamos, para onde vamos e como chegaremos lá. Sem saber o caminho, usamos pontos de referência indicados por alguém que já conhece o trajeto. Saber se localizar é observar, pensar e se locomover com atenção; ajuda a andar com segurança e a ajudar outras pessoas.',
-  html:M('t_mapa_cel','',[
+  html:M('t_mapa_cel','Localização na cidade',[
    LN('Localização','saber onde estamos, para onde vamos e como chegaremos lá.'),
    LN('Sem saber o caminho','usamos pontos de referência indicados por alguém que já conhece o trajeto.'),
    LN('Saber se localizar','é observar, pensar e se locomover com atenção. Ajuda a andar com segurança e a ajudar outros.')])},
@@ -229,7 +233,6 @@ var LS=[
   fala:'O planejamento urbano. É o plano que organiza a cidade; por isso cada rua tem um jeito de ser usada. Entender as ruas ajuda a andar com segurança, cuidar do bairro e melhorar o lugar onde vivemos.',
   html:M('t_zoneamento','Campinas (SP), Lagoa Taquaral',[
    LN('Planejamento urbano','o plano que organiza a cidade: cada rua tem um jeito de ser usada.'),
-   
    LN('Entender as ruas','ajuda a andar com segurança, cuidar do bairro e melhorar o lugar onde vivemos.')])},
  {tipo:'texto', tit:'Do que a rua é <em>feita</em>',
   fala:'Do que a rua é feita. Paralelepípedo, como nesta foto de Paraty: usado em ruas de cidades mais antigas ou históricas. Terra batida: rua sem calçamento, mais comum em áreas rurais.',
@@ -251,28 +254,31 @@ var LS=[
  DES([
    P('Olhe a foto. É uma rua residencial ou comercial?','<b>comercial</b>','t_comercial'),
    P('Qual via liga uma cidade a outra?','a <b>rodovia</b>','t_rodovia'),
-   P('Ruas de cidades antigas ou históricas, como Paraty, usam ___.','paralelepípedo'),
+   P('Ruas de cidades antigas ou históricas, como Paraty, usam ___.','paralelepípedo','t_paraty'),
    P('Ligue: muitas lojas, muitas casas → residencial, comercial.','muitas lojas: <b>comercial</b> · muitas casas: <b>residencial</b>')])
 ]},
 
 /* T7. O bairro e a cidade (U3 S11, S12, S13, S14) */
 {k:'bairro', tema:'bairro', unid:3, nome:'O bairro e a cidade', curto:'O bairro e a cidade', capa:'t_bairro_sb', cor:'#f97316', treino:[], telas:[
  {tipo:'texto', tit:'O <em>bairro</em>',
-  fala:'O bairro. Uma cidade é composta por vários bairros. O bairro é um conjunto de ruas e quarteirões. No bairro há casas, prédios, escolas, praças, igrejas, hospitais, farmácias e pontos de ônibus. No bairro, as pessoas frequentam espaços de lazer, praticam esportes e convivem.',
-  html:M('t_bairro_sb','Santa Bárbara (BA), vista de cima',[
-   LN('Cidade','é composta por vários bairros.'),
-   LN('Bairro','conjunto de ruas e quarteirões.'),
-   LN('No bairro há','casas, prédios, escolas, praças, igrejas, hospitais, farmácias e pontos de ônibus.'),
-   LN('As pessoas','no bairro, frequentam espaços de lazer, praticam esportes e convivem.')])},
- {tipo:'texto', tit:'Tudo está <em>conectado</em>',
-  fala:'Tudo está conectado. Pela rua chegamos à escola, ao trabalho e aos lugares de lazer. Os veículos transportam pessoas e mercadorias. No poema O meu bairro há supermercado, sorveteria, hospital, banco, padaria, parquinho e rampas para quem é especial.',
+  fala:'O bairro. Bairro Cabo Branco, em João Pessoa. Uma cidade é composta por vários bairros. O bairro é um conjunto de ruas e quarteirões.',
   html:M('t_bairro_praia','Bairro Cabo Branco, em João Pessoa (PB)',[
+   LN('Cidade','é composta por vários bairros.'),
+   LN('Bairro','conjunto de ruas e quarteirões.')])},
+ {tipo:'texto', tit:'A vida no <em>bairro</em>',
+  fala:'A vida no bairro. Bairro em Santa Bárbara, na Bahia. No bairro há casas, prédios, escolas, praças, igrejas, hospitais, farmácias e pontos de ônibus. No bairro, as pessoas frequentam espaços de lazer, praticam esportes e convivem com amigos e familiares.',
+  html:M('t_bairro_sb','Bairro em Santa Bárbara (BA), visto de cima',[
+   LN('No bairro há','casas, prédios, escolas, praças, igrejas, hospitais, farmácias e pontos de ônibus.'),
+   LN('As pessoas','no bairro, frequentam espaços de lazer, praticam esportes e convivem com amigos e familiares.')])},
+ {tipo:'texto', tit:'Tudo está <em>conectado</em>',
+  fala:'Tudo está conectado. Pessoas circulando por uma rua de lojas. Pela rua chegamos à escola, ao trabalho e aos lugares de lazer. Os veículos transportam pessoas e mercadorias. No poema O meu bairro há supermercado, sorveteria, hospital, banco, padaria, parquinho e rampas para quem é especial.',
+  html:M('t6_25marco','Pessoas circulando por rua de lojas: a Rua 25 de Março',[
    LN('Pela rua','chegamos à escola, ao trabalho e aos lugares de lazer.'),
    LN('Os veículos','transportam pessoas e mercadorias.'),
    LN('No poema “O meu bairro”','há supermercado, sorveteria, hospital, banco, padaria, parquinho e rampas para quem é especial.')])},
  {tipo:'texto', tit:'Um <em>dentro</em> do outro',
   fala:'Um dentro do outro. Na canção Ora bolas, a casa tá na rua, a rua tá dentro da cidade. Do menor para o maior: casa, rua, bairro, cidade. A canção continua: a cidade tá do lado da floresta, a floresta é no Brasil, o Brasil tá na América do Sul.',
-  html:M(NINHO(),'',[
+  html:M('t6_orabolas_capa','Canção “Ora bolas”, da Palavra Cantada',[
    LN('Canção “Ora bolas”','a casa tá na rua, a rua tá dentro da cidade.'),
    LN('Do menor para o maior','casa, rua, bairro, cidade.'),
    LN('A canção continua','a cidade tá do lado da floresta, a floresta é no Brasil, o Brasil tá na América do Sul.')])},
@@ -297,11 +303,16 @@ var LS=[
    LN('Na rodovia','passam carros, motos, ônibus e caminhões.'),
    LN('Jogo da rota','“Sou professora, vou de ônibus até a escola.”')])},
  {tipo:'texto', tit:'O <em>trabalho</em> na cidade',
-  fala:'O trabalho na cidade. A professora, na sala de aula. O gari mantém as ruas limpas. O agente de trânsito. O motorista de ônibus. Também trabalham na cidade: cozinheiro, cientista, pedreiro, entregador, policiais e médica.',
+  fala:'O trabalho na cidade. A professora, em sala de aula. O gari mantém as ruas limpas. O agente de trânsito e o motorista de ônibus também trabalham na cidade.',
   html:M(QUAD([['t_professora','professora'],['t_gari','gari'],['t_agente','agente de trânsito'],['t_motorista','motorista de ônibus']]),'',[
-   LN('Professora','trabalha na sala de aula.'),
+   LN('Professora','trabalha em sala de aula.'),
    LN('Gari','mantém as ruas limpas.'),
-   LN('Também trabalham na cidade','o agente de trânsito, o motorista de ônibus, o cozinheiro, o cientista, o pedreiro, o entregador, os policiais e a médica.')],'larga')},
+   LN('Agente de trânsito e motorista de ônibus','também trabalham na cidade.')],'larga')},
+ {tipo:'texto', tit:'Mais <em>trabalhos</em> na cidade',
+  fala:'Mais trabalhos na cidade. Cozinheiro, cientista, pedreiro e médica trabalham na cidade. O entregador e os policiais também.',
+  html:M(QUAD([['t6_cozinheiro','cozinheiro'],['t6_cientista','cientista'],['t6_pedreiro','pedreiro'],['t6_medica','médica']]),'',[
+   LN('Cozinheiro, cientista, pedreiro e médica','trabalham na cidade.'),
+   LN('Entregador e policiais','também trabalham na cidade.')],'larga')},
  {tipo:'escolha', tit:'Transporte ou trabalho?', pergunta:'É um meio de transporte ou um trabalho na cidade?',
   fala:'Transporte ou trabalho? Toque na resposta certa.', op:['Meio de transporte','Trabalho'], itens:[
    {m:'a pé', c:'Meio de transporte', d:'Ir a pé também é um jeito de se deslocar.'},
@@ -311,10 +322,10 @@ var LS=[
    {m:'de moto', c:'Meio de transporte', d:'É um meio de transporte.'},
    {m:'professora', img:'t_professora', c:'Trabalho', d:'A professora trabalha na sala de aula.'},
    {m:'gari', img:'t_gari', c:'Trabalho', d:'O gari mantém as ruas limpas.'},
-   {m:'cozinheiro', c:'Trabalho', d:'Cozinheiro é um dos trabalhos na cidade.'},
-   {m:'pedreiro', c:'Trabalho', d:'Pedreiro é um dos trabalhos na cidade.'},
+   {m:'cozinheiro', img:'t6_cozinheiro', c:'Trabalho', d:'Cozinheiro é um dos trabalhos na cidade.'},
+   {m:'pedreiro', img:'t6_pedreiro', c:'Trabalho', d:'Pedreiro é um dos trabalhos na cidade.'},
    {m:'entregador', c:'Trabalho', d:'Entregador é um dos trabalhos na cidade.'},
-   {m:'médica', c:'Trabalho', d:'Médica é um dos trabalhos na cidade.'}]},
+   {m:'médica', img:'t6_medica', c:'Trabalho', d:'Médica é um dos trabalhos na cidade.'}]},
  DES([
    P('Quem mantém as ruas limpas?','o <b>gari</b>','t_gari'),
    P('Cite dois meios de transporte.','<b>ônibus</b>, <b>carro</b>, <b>bicicleta</b>, <b>moto</b>, <b>a pé</b>'),
@@ -327,19 +338,19 @@ var LS=[
 {k:'ambiente', tema:'ambiente', unid:4, nome:'Meio ambiente, a casa de todos', curto:'Meio ambiente', capa:'t_ilha', cor:'#22c55e', treino:[], telas:[
  {tipo:'texto', tit:'Uma casa <em>bem maior</em>',
   fala:'Uma casa bem maior. O lugar onde moramos é muito maior do que a nossa casa. Começa nas ruas e passa por parques, montanhas, mares, florestas e céus cheios de nuvens. Essa grande casa se chama meio ambiente.',
-  html:M('t_ilha','Mar, montanhas, florestas e céu com nuvens',[
+  html:M('t6_globo','Meio ambiente, a casa de todos os seres vivos',[
    LN('O lugar onde moramos','é muito maior do que a nossa casa.'),
    LN('Essa casa maior','começa nas ruas e passa por parques, montanhas, mares, florestas e céus cheios de nuvens.'),
    LN('Meio ambiente','é o nome da grande casa onde todos vivemos.')],'larga')},
  {tipo:'texto', tit:'O que faz <em>parte</em> dele',
   fala:'O que faz parte dele. Fazem parte do meio ambiente: árvores, animais, pedras, água, ar, solo, Sol e chuva. E nós também fazemos parte disso tudo! No dia a dia, ele está nas plantas do quintal, no passarinho que visita a janela, no cheirinho da terra molhada e no céu.',
-  html:M('t_janela','Janela aberta para as plantas',[
+  html:M('t_janela','Natureza vista da janela',[
    LN('Fazem parte do meio ambiente','árvores, animais, pedras, água, ar, solo, Sol e chuva.'),
    LN('Nós também','fazemos parte do meio ambiente!'),
    LN('No dia a dia','o meio ambiente está nas plantas do quintal, no passarinho que visita a janela, no cheirinho da terra molhada e no céu.')],'larga')},
  {tipo:'texto', tit:'A casa de <em>todos</em>',
   fala:'A casa de todos. O meio ambiente é a casa de todos os seres vivos. Quando cuidamos dessa casa maior, cuidamos de nós mesmos e de todos que vivem com a gente.',
-  html:M('t_araras_azuis','Araras-azuis nas árvores',[
+  html:M('t_ilha','Meio ambiente, a casa de todos os seres vivos',[
    LN('A casa de todos','o meio ambiente é a casa de todos os seres vivos.'),
    LN('Cuidar','quando cuidamos do meio ambiente, cuidamos de nós mesmos e de todos que vivem com a gente.')])},
  liga('Ligue as duas partes',[['A grande casa de todos se chama','meio ambiente.'],['O meio ambiente é a casa de todos os','seres vivos.'],['E nós também','fazemos parte do meio ambiente!'],['Seja um guardião','do meio ambiente!']]),
@@ -370,7 +381,7 @@ var LS=[
 {k:'biomas', tema:'biomas', unid:4, nome:'Fauna e flora: os biomas', curto:'Os 6 biomas', capa:'t_arara', cor:'#84cc16', treino:[], telas:[
  {tipo:'texto', tit:'<em>Fauna</em> e <em>flora</em>',
   fala:'Fauna e flora. Fauna: os animais de um lugar. Flora: as plantas, a vegetação de um lugar. Os biomas e os animais são a riqueza natural do país e precisam ser cuidados.',
-  html:MC([['t_arara','Araras',[LN('Fauna','os animais de um lugar.')]],['t_vitoria','Vitória-régia',[LN('Flora','as plantas, a vegetação de um lugar.')]]],
+  html:MC([['t_arara','Araras-vermelhas',[LN('Fauna','os animais de um lugar.')]],['t_vitoria','Vitória-régia',[LN('Flora','as plantas, a vegetação de um lugar.')]]],
    [LN('Riqueza natural','os biomas e os animais do Brasil precisam ser cuidados.')])},
  {tipo:'texto', tit:'Os 6 <em>biomas</em> do Brasil',
   fala:'Os 6 biomas do Brasil. Amazônia: Norte, árvores altas e muitas folhas. Cerrado: Centro, árvores tortas e grama. Caatinga: Nordeste, plantas com espinhos, os cactos. Pampa: Sul, campos com capim baixo. Pantanal: Mato Grosso e Mato Grosso do Sul, plantas que gostam de água. Mata Atlântica: Litoral, floresta úmida e densa.',
@@ -432,14 +443,14 @@ var LS=[
 {k:'preservacao', tema:'preservacao', unid:4, nome:'Preservação do meio ambiente', curto:'Preservação', capa:'t_araras_azuis', cor:'#16a34a', treino:[], telas:[
  {tipo:'texto', tit:'Por que as <em>plantas</em> importam',
   fala:'Por que as plantas importam. As plantas ajudam a manter o ar limpo, protegem o solo, servem de alimento e abrigo para muitos animais e deixam o meio ambiente mais bonito e equilibrado.',
-  html:M('t_araras_azuis','Araras-azuis nas árvores',[
+  html:M('t_araras_azuis','Araras-azuis no alto de árvore da floresta Amazônica preservada',[
    LN('Ar limpo','as plantas ajudam a manter o ar limpo.'),
    LN('Solo','as plantas protegem o solo.'),
    LN('Alimento e abrigo','as plantas servem de alimento e abrigo para muitos animais.'),
    LN('Bonito e equilibrado','as plantas deixam o meio ambiente mais bonito e equilibrado.')])},
  {tipo:'texto', tit:'O <em>desmatamento</em>',
   fala:'O desmatamento. Desmatamento é derrubar florestas para cultivos agrícolas, pastagens para gado e o crescimento das cidades. Ele causa a perda do hábitat dos animais. Outros impactos no meio ambiente: lixo nas margens dos rios, enchentes, ar e água poluídos, calor e ar seco.',
-  html:M('t_desmatamento','Floresta derrubada ao lado da mata',[
+  html:M('t_desmatamento','Desmatamento da floresta',[
    LN('Desmatamento','derrubar florestas para cultivos agrícolas, pastagens para gado e o crescimento das cidades.'),
    LN('Perda do hábitat','o desmatamento causa a perda do hábitat dos animais.'),
    LN('Outros impactos no meio ambiente','lixo nas margens dos rios, enchentes, ar e água poluídos, calor e ar seco.')])},
@@ -453,9 +464,10 @@ var LS=[
   fala:'Ajuda ou é impacto? Toque na resposta certa.', op:['As plantas ajudam','Impacto'], itens:[
    {m:'ar limpo', c:'As plantas ajudam', d:'As plantas ajudam a manter o ar limpo.'},
    {m:'protegem o solo', c:'As plantas ajudam', d:'As plantas protegem o solo.'},
-   {m:'alimento e abrigo para muitos animais', c:'As plantas ajudam', d:'As plantas servem de alimento e abrigo para muitos animais.'},
+   {m:'alimento e abrigo para muitos animais', img:'t_araras_azuis', c:'As plantas ajudam', d:'As plantas servem de alimento e abrigo para muitos animais.'},
    {m:'meio ambiente bonito e equilibrado', c:'As plantas ajudam', d:'As plantas deixam o meio ambiente mais bonito e equilibrado.'},
    {m:'desmatamento da mata das margens dos rios', c:'Impacto', d:'É um impacto no meio ambiente.'},
+   {m:'florestas derrubadas', img:'t_desmatamento', c:'Impacto', d:'Derrubar florestas é desmatamento: um impacto no meio ambiente.'},
    {m:'lixo nas margens dos rios', c:'Impacto', d:'É um impacto no meio ambiente.'},
    {m:'enchentes e ruas alagadas', c:'Impacto', d:'É um impacto no meio ambiente.'},
    {m:'ar e água poluídos', c:'Impacto', d:'É um impacto no meio ambiente.'},
