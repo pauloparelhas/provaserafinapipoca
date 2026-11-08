@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='defb3a61223';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='74914cd1344';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,7 +14,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Geografia · Teoria</title>
-<link rel="stylesheet" href="serafina-core.css?v=defb3a61223">
+<link rel="stylesheet" href="serafina-core.css?v=74914cd1344">
 <style>
 /* ============================================================
    GEO3_estudo — a TEORIA de Geografia (3º tri, prova ESCRITA em português
@@ -423,14 +423,19 @@ body.light .arr-cx1 .arr-itens{background:none}
 .linhas{line-height:1.9}
 .lw .fesc{display:block;width:100%;max-width:220px;margin:0 auto 6px;border-radius:10px;background:#fff}
 .lw{min-width:0;max-width:100%}.fesc{max-width:100%}
-b.ocl{display:inline-block;min-width:44px;min-height:28px;padding:0 6px;margin:1px 0;border-radius:7px;text-align:center;cursor:pointer;transition:background .2s,color .2s}
+b.ocl{display:inline-block;min-width:44px;min-height:28px;padding:0 6px;margin:1px 0;border-radius:8px;text-align:center;cursor:pointer;transition:background .35s ease,color .35s ease,-webkit-text-fill-color .35s ease}
 b.ocl.fechado,b.ocl.fechado *{color:transparent!important;text-shadow:none!important;-webkit-text-fill-color:transparent}
-b.ocl.fechado{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--ink) 22%,transparent) 0 6px,color-mix(in srgb,var(--ink) 8%,transparent) 6px 12px);outline:2px dashed color-mix(in srgb,var(--ink) 45%,transparent);outline-offset:-2px;user-select:none}
+/* v3 (08/11, Paulo): a lacuna e SO um retangulo da cor do fundo, um pouco mais escuro: sem listras, sem borda */
+b.ocl.fechado{background:rgba(0,0,0,.3);outline:none;border:none;user-select:none}
+body.light b.ocl.fechado{background:rgba(0,0,0,.14)}
 b.ocl.chama{animation:chama 1.1s ease-in-out infinite}
 @keyframes chama{50%{transform:scale(1.08)}}
 .maotoque{position:absolute;z-index:60;width:44px;height:44px;pointer-events:none;animation:toque 1.1s ease-in-out infinite}
 .maotoque svg{width:100%;height:100%;fill:#fff;stroke:#111;stroke-width:1.2;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
 @keyframes toque{0%,100%{transform:translate(10px,14px)}50%{transform:translate(0,0) scale(.9)}}
+.maotoque.ladoD{animation-name:toqueD}.maotoque.ladoE{animation-name:toqueE}
+@keyframes toqueD{0%,100%{transform:translate(10px,0)}50%{transform:translate(0,0) scale(.9)}}
+@keyframes toqueE{0%,100%{transform:translate(-10px,0)}50%{transform:translate(0,0) scale(.9)}}
 .oclbtn{display:block;margin:10px auto 0;min-height:44px}.oclhint{font-weight:800;text-align:center;margin:0 0 8px}
 /* capa: a trilha das 12 lições, Unidade 3 e Unidade 4, com o Bem-te-vi */
 .mapa-capa{position:relative;max-width:1000px;margin:0 auto;border-radius:20px;overflow:hidden;color:#173b2a;
@@ -654,7 +659,9 @@ body.light .rev.rf .rnome{color:color-mix(in srgb,var(--bc,var(--lc)) 50%,#000)}
 .pares.fr .par{color:var(--ink);font:inherit;font-size:calc(1rem*var(--fs));font-weight:800;letter-spacing:0;line-height:1.35;justify-content:flex-start;text-align:left;flex-wrap:wrap;gap:4px 8px;min-height:52px}
 .pares.fr .par .depois{opacity:1;font-weight:900;color:var(--lch);border-radius:7px;padding:0 2px}
 .pares.fr .par:not(.aberto) .depois{display:inline-block;min-width:3.2em}
-.pares.fr .par:not(.aberto) .depois{color:transparent;background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--ink) 22%,transparent) 0 6px,color-mix(in srgb,var(--ink) 8%,transparent) 6px 12px);outline:2px dashed color-mix(in srgb,var(--ink) 45%,transparent);outline-offset:-2px}
+.pares.fr .par:not(.aberto) .depois{color:transparent;background:rgba(0,0,0,.3);outline:none}
+body.light .pares.fr .par:not(.aberto) .depois{background:rgba(0,0,0,.14)}
+.pares.fr .par .depois{transition:background .35s ease,color .35s ease}
 .pares+.ordmsg{margin-top:6px}
 @media (max-width:600px),(max-height:520px){ .revf.comregra .rq{display:none} }
 @media (max-width:600px){
@@ -682,6 +689,192 @@ body.light .rev.rf .rnome{color:color-mix(in srgb,var(--bc,var(--lc)) 50%,#000)}
   .pares.fr{grid-template-columns:1fr 1fr;gap:6px}.pares.fr .par{min-height:44px;font-size:calc(.86rem*var(--fs))}
   .ordmsg{margin-top:4px}
 }
+/* v3-infografico */
+/* ================= v3 (08/11): a tela de ensino e um INFOGRAFICO ================= */
+.card{--lch:var(--ink)}
+.corpo b:not(.ocl):not(.resp){color:var(--lch)}
+.corpo .regra b:not(.ocl),.corpo .caixa b:not(.ocl),.corpo figure b:not(.ocl){color:var(--lch)}
+.ig{display:grid;gap:10px;align-items:center}
+.ig-fig{position:relative;display:flex;justify-content:center;align-items:center;min-width:0;justify-self:center;width:fit-content;max-width:100%}
+.ig-fig>img{display:block;width:100%;max-width:460px;border-radius:14px;background:#fff;object-fit:contain}
+.ig-tx{min-width:0;display:flex;flex-direction:column;gap:8px}
+@media (min-width:700px){ .ig.comfig{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:16px} }
+@media (max-height:520px) and (min-width:600px){ .ig.comfig{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:10px} }
+.fxs{display:grid;gap:8px}
+.fxs.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:700px){ .fxs.g3w{grid-template-columns:repeat(3,minmax(0,1fr))} .fxs.g2w{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.fx{--fc:var(--lc);--ft:var(--lct,#111);border-radius:14px;overflow:hidden;background:color-mix(in srgb,var(--fc) 16%,var(--card));display:flex;flex-direction:column;min-width:0;box-shadow:0 2px 0 color-mix(in srgb,var(--fc) 45%,transparent)}
+.fx-rot{display:flex;align-items:center;gap:7px;padding:6px 11px;background:var(--fc);color:var(--ft);font-weight:900;font-size:calc(.86rem*var(--fs));letter-spacing:.5px;text-transform:uppercase;line-height:1.15}
+.fx-rot .ic{width:1.35em;height:1.35em;flex:0 0 auto}
+.card .corpo .fx b.fx-rot,.card .corpo .fx-rot b:not(.ocl){color:var(--ft)}
+.fx-d b.ocl{min-width:5.5em;min-height:1.3em;vertical-align:middle;margin:-2px 0}
+.fx-ds{display:flex;flex-wrap:wrap;gap:6px;padding:7px 8px 8px}
+.fx-d{display:inline-block;padding:5px 11px;border-radius:999px;background:var(--card);color:var(--ink);font-weight:800;font-size:calc(1.02rem*var(--fs));line-height:1.2;min-height:32px}
+.fx-d .ic{width:1.25em;height:1.25em;color:var(--fc);vertical-align:-.28em;margin:0 5px 0 -2px}
+.fx-d .ic:last-child:not(:first-child){margin:0 -2px 0 5px}
+.fx-d b{font-weight:900}
+.ic{display:inline-block;vertical-align:middle}
+.ic.via{width:2em;height:1.5em;border-radius:4px}
+/* comparacao lado a lado */
+.vs{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:6px;align-items:stretch;margin:0 0 8px}
+.vs-x{align-self:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--card);font-weight:900;font-size:1.15rem;display:flex;align-items:center;justify-content:center}
+.vs-c>img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#fff}
+.vs-c .fx-ds{flex-direction:column;align-items:stretch}
+.vs-c .fx-d{justify-content:flex-start}
+.vs-cap{display:block;padding:5px 10px 0;font-weight:800;font-size:calc(.86rem*var(--fs));color:var(--ink)}
+/* icone + nome */
+.tls{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.tl{--fc:var(--lc);display:inline-flex;flex-direction:column;align-items:center;gap:3px;min-width:64px;padding:6px 6px 5px;border-radius:12px;background:color-mix(in srgb,var(--fc) 16%,var(--card))}
+.tl .ic{width:30px;height:30px;color:var(--fc)}
+.tl .rot{font-weight:900;font-size:calc(.82rem*var(--fs));line-height:1.1;text-align:center;color:var(--ink)}
+.fx .tls{padding:7px 8px 8px;justify-content:flex-start}
+.fx .tl{background:var(--card)}
+/* sequencia */
+.seq{display:flex;align-items:stretch;justify-content:center;gap:2px;flex-wrap:nowrap}
+.sq{--fc:var(--lc);flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px 5px;border-radius:12px;background:color-mix(in srgb,var(--fc) 16%,var(--card));text-align:center;font-weight:800;line-height:1.2;font-size:calc(.92rem*var(--fs))}
+.sq .ic{width:30px;height:30px;color:var(--fc)}
+.sq .rot{font-weight:900;text-transform:uppercase;font-size:calc(.8rem*var(--fs));letter-spacing:.4px}
+.sqa{align-self:center;flex:0 0 auto;color:var(--soft)}.sqa .ic{width:18px;height:18px}
+/* direcoes: o boneco de costas e as 4 setas */
+.dirs{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-areas:"f f f" "e b d" "a a a";gap:6px;align-items:center;justify-items:stretch;max-width:640px;margin:0 auto}
+.dirs .df{grid-area:f}.dirs .da{grid-area:a}.dirs .de{grid-area:e}.dirs .dd{grid-area:d}.dirs .db{grid-area:b;display:flex;justify-content:center}
+.dirs .df,.dirs .da{width:min(260px,100%);justify-self:center}
+.bon{width:150px;height:auto;display:block}
+@media (min-width:700px) and (min-height:700px){ .bon{width:210px} .dirs .fx-d{font-size:calc(1.1rem*var(--fs))} }
+@media (max-width:600px){ .bon{width:132px} .dirs{gap:4px;grid-template-columns:minmax(0,1fr) 132px minmax(0,1fr)} .dirs .dr .fx-d{font-size:calc(.84rem*var(--fs))} .dirs .fx-rot{letter-spacing:0} .dirs .dr .fx-d{padding:3px 7px} }
+@media (max-height:520px){ .bon{width:96px} .dirs{gap:3px} .dirs .fx-ds{padding:4px 6px 5px} }
+/* 6 biomas: mapa + cartoes */
+.mapa6 .bios{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0}
+.fxb .fx-rot{text-transform:none;letter-spacing:0;font-size:calc(.95rem*var(--fs))}
+.fxb .fx-ds{padding:5px 6px 6px;gap:4px}
+.fxb .fx-d{font-size:calc(.92rem*var(--fs));padding:3px 9px;min-height:28px}
+/* Bem-te-vi: guia discreto pousado na figura */
+.btv{position:absolute;right:-6px;top:-14px;width:46px;height:37px;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))}
+.btv svg{width:100%;height:100%}
+/* botao de escolha na cor da coluna que acabou de ser mostrada */
+.op.opc{border-color:var(--fc);background:color-mix(in srgb,var(--fc) 18%,var(--card));display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.op.opc::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--fc);flex:0 0 auto}
+.op.opc.certa{background:var(--ok);border-color:var(--ok)}
+/* a instrucao de 1 linha so na 1a vez de cada mecanica */
+.corpo.semregra>.regra,.corpo.semregra .arr-col>.regra{display:none}
+/* encaixe sem rolagem tambem para o desenho SVG */
+.corpo.encx .ig-svg{max-height:var(--imx)!important;width:auto!important}
+.corpo.encx .vs-c>img{width:100%!important;object-fit:cover}
+/* o infografico fica no meio da tela alta (nada de metade vazia embaixo) */
+.card:has(> .corpo > .ig),.card:has(> .corpo > .vs),.card:has(> .corpo > .dirs),.card:has(> .corpo > .fxs),.card:has(> .corpo > .fx),.card:has(> .corpo > .fots),.card:has(> .corpo > .fxis),.card:has(> .corpo > .seq){display:flex;flex-direction:column}
+.corpo:has(> .ig),.corpo:has(> .vs),.corpo:has(> .dirs),.corpo:has(> .fxs),.corpo:has(> .fx),.corpo:has(> .fots),.corpo:has(> .fxis),.corpo:has(> .seq){flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.corpo>.vs{margin:0}
+@media (max-height:520px) and (min-width:600px){ .mapa6 .bios{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px} .mapa6.ig.comfig{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr)} .mapa6 .fxs .fx-ds{flex-wrap:nowrap} .vs-c>img{max-height:110px} }
+@media (max-width:600px){
+  .fx-rot{padding:4px 9px;font-size:calc(.78rem*var(--fs))}
+  .fx-ds{padding:5px 6px 6px;gap:4px}
+  .fx-d{font-size:calc(.9rem*var(--fs));padding:3px 9px;min-height:28px}
+  .vs{gap:4px}.vs-x{width:26px;height:26px;font-size:.95rem}
+  .ig{gap:7px}.ig-tx{gap:6px}.fxs{gap:6px}
+  .btv{width:36px;height:29px;top:-10px}
+}
+@media (max-height:520px){
+  .fx-rot{padding:3px 9px;font-size:calc(.76rem*var(--fs))}
+  .fx-ds{padding:4px 6px 5px;gap:4px}
+  .fx-d{font-size:calc(.86rem*var(--fs));padding:2px 8px;min-height:26px}
+  .ig-tx{gap:5px}.fxs{gap:5px}
+  .vs-c>img{aspect-ratio:16/9}
+  .btv{width:34px;height:27px;top:-8px}
+}
+
+/* v3: variantes das fichas */
+.fx.col .fx-ds,.fx.passos .fx-ds{flex-direction:column;align-items:flex-start}
+.fx.passos .fx-ds{counter-reset:p}
+.fx.passos .fx-d{counter-increment:p}
+.fx.passos .fx-d::before{content:counter(p);vertical-align:.05em;display:inline-flex;align-items:center;justify-content:center;width:1.5em;height:1.5em;border-radius:50%;background:var(--fc);color:var(--ft);font-weight:900;font-size:.8em;margin-right:2px}
+.fx.linha .fx-ds{flex-wrap:nowrap;gap:3px}.fx.linha .fx-d{padding:4px 8px}.fx.linha .fx-d .ic{color:var(--soft);width:1em;margin-right:-4px}
+.fx.grande .fx-rot{font-size:calc(1rem*var(--fs));padding:9px 12px}
+.fx.grande .fx-d{font-size:calc(1.25rem*var(--fs))}
+.fx.nota .fx-rot{text-transform:none;letter-spacing:0;font-size:calc(.95rem*var(--fs))}
+.fxt .tls{padding:7px 8px 4px}
+.fxt .tls+.fx-ds{padding-top:0}
+.vs.semimg .vs-c .fx-ds{flex-direction:row}
+.ic.sv{width:1.1em;height:1.55em}
+/* foto com nome */
+.fots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (min-width:700px){ .fots{grid-template-columns:repeat(4,minmax(0,1fr))} .fots.f6{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.fot{--fc:var(--lc);--ft:var(--lct,#111);margin:0;border-radius:12px;overflow:hidden;background:color-mix(in srgb,var(--fc) 16%,var(--card));display:flex;flex-direction:column;min-width:0}
+.fot>img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#fff}
+.fot figcaption{display:flex;flex-direction:column;gap:2px;padding:5px 8px 7px;text-align:center;flex:1;justify-content:center}
+.fot .fot-r{font-weight:900;font-size:calc(1rem*var(--fs));line-height:1.15;color:var(--ink)}
+.fot .fot-d{font-weight:800;font-size:calc(.88rem*var(--fs));line-height:1.2;order:2}
+.card .corpo .fot b.fot-r{color:var(--ink)}
+.fots.tag .fot .fot-r{order:3;align-self:center;background:var(--fc);color:var(--ft);padding:2px 10px;border-radius:999px;font-size:calc(.86rem*var(--fs))}
+.fots.tag .fot .fot-d{order:1;font-size:calc(.95rem*var(--fs))}
+.card .corpo .fots.tag b.fot-r{color:var(--ft)}
+.corpo.encx .fot>img{width:100%!important;object-fit:cover}
+/* ficha com foto (cartazes) */
+.fxis{display:grid;gap:8px}
+.fxi{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr)}
+.fxi>img{display:block;width:100%;height:100%;min-height:84px;object-fit:cover;background:#fff}
+.fxi .fx-rot{text-transform:none;letter-spacing:0;font-size:calc(1rem*var(--fs))}
+.corpo.encx .fxi>img{width:100%!important;height:100%;object-fit:cover}
+/* sequencia com fotos (sala -> planta) */
+.seq.fotos .sq{padding:5px}.seq.fotos .sq img{display:block;width:100%;max-height:150px;object-fit:contain;border-radius:8px;background:#fff}
+.seq.fotos .sq .rot{text-transform:none;letter-spacing:0;font-size:calc(.92rem*var(--fs))}
+.ig.pequena .ig-fig>img{max-width:220px}
+/* um dentro do outro */
+.ninho{width:100%;max-width:320px;margin:0 auto}
+.nn{--ft:#111;border:4px solid var(--fc);border-radius:16px;padding:4px 6px 8px;background:color-mix(in srgb,var(--fc) 12%,var(--card));display:flex;flex-direction:column;align-items:center;gap:4px}
+.nn .nn{width:86%}
+.nn-r{display:inline-block;background:var(--fc);color:var(--ft);font-weight:900;text-transform:uppercase;font-size:calc(.82rem*var(--fs));padding:2px 10px;border-radius:999px;letter-spacing:.5px}
+.card .corpo b.nn-r{color:var(--ft)}
+.nn:not(:has(.nn)){min-height:40px;justify-content:center}
+@media (max-width:600px){
+  .tl{min-width:56px;padding:4px 4px 3px}.tl .ic{width:24px;height:24px}.tl .rot{font-size:calc(.78rem*var(--fs))}
+  .fxt .tls{padding:5px 6px 3px;gap:4px}
+  .fots{gap:6px}.fot .fot-r{font-size:calc(.88rem*var(--fs))}.fot .fot-d{font-size:calc(.78rem*var(--fs))}
+  .fx.grande .fx-d{font-size:calc(1.05rem*var(--fs))}
+  .ninho{max-width:250px}.nn{padding:3px 5px 5px;border-width:3px}
+}
+@media (max-height:520px){
+  .tl{min-width:52px;padding:3px 3px 2px;flex-direction:row;gap:4px}.tl .ic{width:20px;height:20px}.tl .rot{font-size:calc(.72rem*var(--fs))}
+  .fxt .tls{padding:4px 6px 2px;gap:3px}
+  .fots{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.fots.f6{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .fot>img{aspect-ratio:16/10}.fot figcaption{padding:3px 4px 4px}
+  .fxis{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.fxi{grid-template-columns:1fr}.fxi>img{height:auto;aspect-ratio:16/9;min-height:0}
+  .fx.grande .fx-rot{padding:5px 10px}.fx.grande .fx-d{font-size:calc(1rem*var(--fs))}
+  .ninho{max-width:200px}.nn{padding:2px 4px 4px;border-width:3px;gap:2px}.nn-r{font-size:calc(.7rem*var(--fs));padding:1px 8px}
+  .seq.fotos .sq img{max-height:90px}
+}
+/* celular deitado: as fichas do infografico em 2 colunas ao lado da figura */
+@media (max-height:520px) and (min-width:600px){
+  .ig.comfig{grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr)}
+  .ig-tx{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;align-items:start;grid-auto-flow:row dense}
+  .ig-tx>.fx:only-child,.ig-tx>.vs,.ig-tx>.fxs,.ig-tx>.bios,.ig-tx>.larga{grid-column:1/-1}
+  .larga .tls{flex-wrap:wrap}
+  .fx-rot{padding:2px 8px;font-size:calc(.72rem*var(--fs))}
+  .fx-ds{padding:3px 5px 4px;gap:3px}
+  .fx-d{font-size:calc(.8rem*var(--fs));padding:1px 7px;min-height:22px}
+  .corpo>.bios{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .corpo>.bios .fx-ds{flex-direction:column;align-items:stretch}
+  .tl .rot{font-size:calc(.68rem*var(--fs))}
+  .fx.passos .fx-ds,.fx.col .fx-ds{flex-direction:row;flex-wrap:wrap}
+  .bios{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+  .fxs.g2w,.fxs.g3w{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fxs.g3w{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .vs-c>img{max-height:96px}
+  .fot>img{max-height:96px}
+}
+
+/* tablet e notebook: o infografico cresce (letra e icones maiores) */
+@media (min-width:700px) and (min-height:700px){
+  .fx-rot{font-size:calc(.95rem*var(--fs));padding:7px 12px}
+  .fx-d{font-size:calc(1.12rem*var(--fs));padding:6px 13px}
+  .tl{min-width:76px;padding:8px 8px 6px}.tl .ic{width:38px;height:38px}.tl .rot{font-size:calc(.9rem*var(--fs))}
+  .ninho{max-width:400px}.nn{padding:6px 8px 12px;gap:6px}.nn-r{font-size:calc(1rem*var(--fs));padding:3px 14px}.nn:not(:has(.nn)){min-height:64px}
+  .fot .fot-r{font-size:calc(1.1rem*var(--fs))}.fot .fot-d{font-size:calc(.98rem*var(--fs))}
+  .fxi .fx-rot{font-size:calc(1.1rem*var(--fs))}
+  .vs-cap{font-size:calc(.98rem*var(--fs))}
+}
+
+.card .corpo .fot .fot-d b{color:var(--ink);font-weight:900}
+@media (max-height:520px) and (min-width:600px){ .liga .col:has(> .lg:nth-child(5)){display:grid;grid-template-columns:1fr 1fr;gap:5px} }
 </style>
 </head>
 <body>
@@ -716,11 +909,11 @@ body.light .rev.rf .rnome{color:color-mix(in srgb,var(--bc,var(--lc)) 50%,#000)}
 </div>
 
 <script>window.SERA_PT=true; /* antes do core: senão o cadeado injeta o aviso bilíngue */ window.SERA_CFG={trKey:null,lang:'pt-BR',voz:'antonio',rate:.9,home:'../index.html',somKey:'geo3_som',stars:80};</script>
-<script src="serafina-core.js?v=defb3a61223"></script>
-<script src="OP_voz.js?v=defb3a61223"></script>
+<script src="serafina-core.js?v=74914cd1344"></script>
+<script src="OP_voz.js?v=74914cd1344"></script>
 <script>
 /* ícones por tema (cores da BIBLIA_GEO3) */
-window.GEO3ARTE={icone:function(k){ var c={urbano:'#0ea5e9',sinal:'#ef4444',direcoes:'#f59e0b',referencia:'#a855f7',mapas:'#14b8a6',ruas:'#94a3b8',bairro:'#f97316',transporte:'#2563eb',ambiente:'#22c55e',sons:'#06b6d4',biomas:'#84cc16',preservacao:'#16a34a'}[k]||'#22c55e';
+window.GEO3ARTE={icone:function(k){ var c={urbano:'#0ea5e9',sinal:'#ef4444',direcoes:'#f59e0b',referencia:'#a855f7',mapas:'#14b8a6',ruas:'#6366f1',bairro:'#f97316',transporte:'#2563eb',ambiente:'#22c55e',sons:'#06b6d4',biomas:'#84cc16',preservacao:'#16a34a'}[k]||'#22c55e';
   var d={urbano:'<rect x="4" y="14" width="9" height="18" fill="'+c+'"/><rect x="14" y="5" width="9" height="27" fill="'+c+'"/><rect x="24" y="11" width="8" height="21" fill="'+c+'"/><path d="M17 9h3M17 14h3M17 19h3M7 18h3M7 23h3M27 15h2M27 20h2" stroke="#1e1b3a" stroke-width="2"/>',
          sinal:'<rect x="11" y="2" width="14" height="30" rx="5" fill="'+c+'"/><circle cx="18" cy="9" r="3.6" fill="#7f1d1d"/><circle cx="18" cy="17" r="3.6" fill="#fde047"/><circle cx="18" cy="25" r="3.6" fill="#86efac"/>',
          direcoes:'<path d="M18 3l6 7h-4v6h-4v-6h-4zM18 33l-6-7h4v-6h4v6h4zM3 18l7-6v4h6v4h-6v4zM33 18l-7 6v-4h-6v-4h6v-4z" fill="'+c+'"/>',
@@ -736,7 +929,7 @@ window.GEO3ARTE={icone:function(k){ var c={urbano:'#0ea5e9',sinal:'#ef4444',dire
   return '<svg class="licic" viewBox="0 0 36 36" width="40" height="40" aria-hidden="true">'+d+'</svg>'; },
  figura:function(){ return ''; }, cena:function(){ return ''; }};
 </script>
-<script src="GEO3_estudo_licoes.js?v=defb3a61223"></script>
+<script src="GEO3_estudo_licoes.js?v=74914cd1344"></script>
 <script>
 /* ============================================================
    MOTOR DO ESTUDO — navegação, telinhas e treininho.
@@ -830,12 +1023,19 @@ function ocluir(el){
     var a=b.getBoundingClientRect(); if(a.bottom<0||a.top>innerHeight) return;
     var m=document.createElement('div'); m.className='maotoque';
     m.innerHTML='<svg viewBox="0 0 24 24"><path d="M10 7.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v6h1.76c.19 0 .37.04.54.11l4.54 2.26c.53.22.91.76.91 1.38 0 .06-.01.13-.02.2l-.75 5.27c-.11.73-.69 1.28-1.44 1.28h-6.79c-.41 0-.79-.17-1.06-.44L4.75 18.6l.79-.8c.2-.2.48-.33.79-.33.09 0 .16.02.24.03l3.43.72z"/></svg>';
-    m.style.left=(a.left+a.width/2-14+scrollX)+'px'; m.style.top=(a.top+a.height/2-4+scrollY)+'px'; document.body.appendChild(m); b.classList.add('chama');
+    /* 08/11: a mao nao cobre texto. Tenta embaixo (centro, ponta direita, ponta esquerda), ao lado e em cima; fica na 1a posicao livre */
+    var txt=[], tw=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null), nd, cx=a.left+a.width/2, cy=a.top+a.height/2;
+    while((nd=tw.nextNode())){ if(!nd.nodeValue.trim()||b.contains(nd)||!nd.parentElement.offsetParent) continue; var rg=document.createRange(); rg.selectNodeContents(nd); [].push.apply(txt,[].slice.call(rg.getClientRects())); }
+    /* [left, top, giro, caixa do desenho da mao com o balanco: l, t, r, b relativos] ; de lado o balanco e horizontal */
+    var pos=[[cx-14,cy-4,0,0,0,54,58],[a.right-22,cy-4,0,0,0,54,58],[a.left-8,cy-4,0,0,0,54,58],[a.right-8,cy-22,-90,0,8,54,38],[a.left-36,cy-22,90,-10,8,44,38],[cx-30,a.top-58,180,0,0,54,58]].filter(function(q){ var l=q[0]+q[3],t=q[1]+q[4],r=q[0]+q[5],d=q[1]+q[6];
+      return l>=0&&t>=0&&r<=innerWidth&&d<=innerHeight&&!txt.some(function(x){ return x.right-2>l&&x.left+2<r&&x.bottom-2>t&&x.top+2<d; }); })[0]||[cx-14,cy-4,0]; /* 2 px: a caixa da linha inclui entrelinha */
+    if(pos[2]){ m.firstChild.style.transform='rotate('+pos[2]+'deg)'; if(pos[2]===-90) m.classList.add('ladoD'); if(pos[2]===90) m.classList.add('ladoE'); }
+    m.style.left=(pos[0]+scrollX)+'px'; m.style.top=(pos[1]+scrollY)+'px'; document.body.appendChild(m); b.classList.add('chama');
     document.addEventListener('pointerdown',tiraMao,true);
   },650);
   var tudo=null;
   if(bs.length>1){ tudo=document.createElement('button'); tudo.className='btn calmo oclbtn'; tudo.textContent='Mostrar tudo';
-    tudo.onclick=function(){ var f=bs.some(function(b){ return b.classList.contains('fechado'); }); bs.forEach(function(b){ b.classList.toggle('fechado',f); }); pinta(); };
+    tudo.onclick=function(){ var f=bs.some(function(b){ return b.classList.contains('fechado'); }); bs.forEach(function(b){ b.classList.toggle('fechado',!f); }); pinta(); }; /* v3: 1o toque REVELA tudo; o 2o esconde de novo (antes estava invertido) */
     var lh=tela.querySelector('.lh'); (lh||el).appendChild(tudo); }
 }
 function tiraMao(){ document.querySelectorAll('.maotoque').forEach(function(x){ x.remove(); }); document.querySelectorAll('b.ocl.chama').forEach(function(x){ x.classList.remove('chama'); }); document.removeEventListener('pointerdown',tiraMao,true); }
@@ -965,7 +1165,7 @@ R.escolha=function(t){
         box.innerHTML='<div class="esc-a"><div class="cont">'+(k+1)+' / '+itens.length+'</div>'+
           (t.pergunta?'<div class="perg">'+t.pergunta+'</div>':'')+
           '<div class="alvo'+(it.img?' comimg':'')+(it.m&&it.m.length>26?' frasealvo':'')+'">'+(it.img?IM(it.img):'')+(it.m?'<span>'+it.m+'</span>':'')+'</div></div>'+
-          '<div class="esc-b"><div class="ops'+(os.length>3?' muitas':'')+(os.some(function(o){ return o.length>9; })?' longas':'')+'">'+os.map(function(o){ return '<button class="op">'+o+'</button>'; }).join('')+'</div>'+
+          '<div class="esc-b"><div class="ops'+(os.length>3?' muitas':'')+(os.some(function(o){ return o.length>9; })?' longas':'')+'">'+os.map(function(o){ var oc=t.opc&&t.opc[o]; return '<button class="op'+(oc?' opc':'')+'"'+(oc?' style="--fc:'+oc+'"':'')+'>'+o+'</button>'; }).join('')+'</div>'+
           '<div class="fbkslot"></div>'+pontos()+'</div>';
         box.querySelectorAll('.op').forEach(function(b){ b.onclick=function(){
           var certo=b.textContent===it.c;
@@ -1067,7 +1267,7 @@ R.fim=function(){
       '<h2>Lição concluída!</h2><p>'+lic.nome+'</p>'+
       
       '<div class="btnrow">'+(prox?'<button class="btn" data-a="prox">Próxima lição: '+prox.nome+'</button>':'')+
-      '<a class="btn" href="GEO3_simulado.html?v=defb3a61223" style="text-decoration:none;text-align:center">Simulado &#8250;</a><button class="btn calmo" data-a="capa">Todas as lições</button></div></div>',
+      '<a class="btn" href="GEO3_simulado.html?v=74914cd1344" style="text-decoration:none;text-align:center">Simulado &#8250;</a><button class="btn calmo" data-a="capa">Todas as lições</button></div></div>',
     fala:'Lição concluída! '+puro(lic.nome),
     init:function(el){
       var p=el.querySelector('[data-a="prox"]'); if(p) p.onclick=function(){ abre(est.lic+1); };
@@ -1104,7 +1304,7 @@ function renderCapa(){
     '<div><h1>Guardiões da Casa Maior</h1><p>Teoria de Geografia · prova em 12/11</p></div></div>'+
     '<div class="trilha"><svg class="rota" aria-hidden="true"></svg>'+
     unidade(3,'Unidade 3 · Ruas, deslocamentos e transportes')+unidade(4,'Unidade 4 · Meio ambiente, nossa casa maior')+
-    '<div class="mc-pe"><a class="chegada" href="GEO3_simulado.html?v=defb3a61223">Simulado &#8250;</a>'+
+    '<div class="mc-pe"><a class="chegada" href="GEO3_simulado.html?v=74914cd1344">Simulado &#8250;</a>'+
     '<div class="mc-placar"><span>'+n+' de '+LICOES.length+' feitas</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div></div></div></div>';
   tela.querySelectorAll('.parada').forEach(function(b){ b.onclick=function(){ abre(+b.dataset.i); }; });
   desenhaRota();
@@ -1117,7 +1317,7 @@ function renderCapa(){
 /* sem rolagem: figuras encolhem (busca binaria na altura maxima) ate a tela caber */
 function encaixa(){
   var c=tela.querySelector('.corpo'); if(!c||c.querySelector('.arr-itens')) return;
-  var ims=c.querySelectorAll('img'); if(!ims.length) return;
+  var ims=c.querySelectorAll('img'); if(!ims.length && !c.querySelector('.ig-svg')) return;
   ims.forEach(function(im){ if(!im.complete && !im.dataset.enc){ im.dataset.enc=1; im.addEventListener('load',function(){ if(c.isConnected) encaixa(); }); } });
   c.classList.remove('encx'); c.style.removeProperty('--imx');
   function sobra(){ return document.documentElement.scrollHeight-innerHeight; }
@@ -1130,6 +1330,23 @@ function encaixa(){
   c.style.setProperty('--imx',lo+'px');
 }
 addEventListener('resize',function(){ clearTimeout(window._encT); window._encT=setTimeout(function(){ if(est.lic>=0) encaixa(); },150); });
+/* v3: rotulo com letra preta ou branca pelo contraste; destaque na cor da licao ajustada ate 4,5:1 sobre o cartao */
+var vistaRegra={};
+function rgbDe(s){ s=String(s); if(s.charAt(0)==='#'){ var h=s.slice(1); if(h.length===3) h=h.split('').map(function(x){ return x+x; }).join(''); return [0,2,4].map(function(i){ return parseInt(h.substr(i,2),16); }); }
+  var m=s.match(/[\d.]+/g).map(Number); return /^color\(/.test(s)?[m[0]*255,m[1]*255,m[2]*255]:[m[0],m[1],m[2]]; }
+function lumi(c){ return [0,1,2].reduce(function(a,i){ var v=c[i]/255; v=v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4); return a+v*[.2126,.7152,.0722][i]; },0); }
+function contr(a,b){ var x=lumi(a), y=lumi(b); return (Math.max(x,y)+.05)/(Math.min(x,y)+.05); }
+function pintaCor(){
+  var card=tela, lic=LICOES[est.lic]; if(!lic) return; var cor=rgbDe(corDe(lic)), fundo=rgbDe(getComputedStyle(card).backgroundColor);
+  document.body.style.setProperty('--lct', contr(cor,[255,255,255])>=contr(cor,[17,17,17])?'#fff':'#111');
+  function seguro(c){ var alvo=lumi(fundo)<.4?[255,255,255]:[0,0,0], m=c;
+    for(var k=0;k<=20;k++){ m=c.map(function(v,i){ return Math.round(v+(alvo[i]-v)*k/20); }); if(contr(m,fundo)>=5.2) break; }
+    return 'rgb('+m.join(',')+')'; }
+  card.style.setProperty('--lch',seguro(cor));
+  /* cada ficha/coluna com cor própria destaca na SUA cor (verde na residencial, laranja na comercial...) */
+  card.querySelectorAll('.corpo [style*="--fc"]').forEach(function(e){ var fc=e.style.getPropertyValue('--fc').trim(); if(fc.charAt(0)==='#') e.style.setProperty('--lch',seguro(rgbDe(fc))); });
+}
+new MutationObserver(function(){ if(est.lic>=0) pintaCor(); }).observe(document.body,{attributes:true,attributeFilter:['class']});
 function render(){
   try{ speechSynthesis.cancel(); }catch(e){}
   document.querySelectorAll('.arr-it.demo').forEach(function(x){ x.remove(); }); tiraMao(); /* a mao da tela anterior nao fica flutuando */
@@ -1141,7 +1358,13 @@ function render(){
   tela.innerHTML='<div class="lh">'+icDe(lic)+'<div class="lhtx"><small>Lição '+(est.lic+1)+' · '+lic.nome+'</small>'+
     '<h2>'+t.tit+'</h2></div><button class="ouvir" aria-label="Ouvir">'+OUVIR+'</button></div>'+
     '<div class="corpo">'+r.html+'</div>';
-  if(r.init) r.init(tela.querySelector('.corpo'));
+  var corpo=tela.querySelector('.corpo');
+  /* v3: instrução de 1 linha só na 1ª vez de cada mecânica (nesta visita) */
+  if(t.tipo!=='texto'){ if(vistaRegra[t.tipo]) corpo.classList.add('semregra'); vistaRegra[t.tipo]=1; }
+  /* v3: o Bem-te-vi, guia discreto, pousa na figura do infográfico */
+  var igf=corpo.querySelector('.ig-fig'); if(igf) igf.insertAdjacentHTML('beforeend','<span class="btv">'+BEMTEVI+'</span>');
+  if(r.init) r.init(corpo);
+  pintaCor();
   encaixa();
   tela.querySelectorAll('.pal').forEach(function(b){ if(!b.onclick) b.onclick=function(){ fala((b.dataset.f||b.textContent).toLowerCase()); }; });
   tela.querySelector('.ouvir').onclick=function(){
@@ -1188,6 +1411,6 @@ window.GEO3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic
 })();
 </script>
 <script>window.SERA_PT=true; window.SERA_ACCENT={accent:'#22c55e'};</script>
-<script src="sera_theme.js?v=defb3a61223"></script>
+<script src="sera_theme.js?v=74914cd1344"></script>
 </body>
 </html>
