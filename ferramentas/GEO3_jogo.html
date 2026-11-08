@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='df855021728';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='0db6c331741';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -17,7 +17,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <title>Guardiões da Casa Maior — Geografia</title>
 <!-- Nunito (SIL OFL 1.1, assets/fonts/OFL-Nunito.txt), servida daqui: nenhuma chamada a servidor de terceiros -->
 <style>@font-face{font-family:"Nunito";font-style:normal;font-weight:200 1000;font-display:swap;src:url(assets/fonts/nunito-latin.woff2) format("woff2")}</style>
-<link rel="stylesheet" href="serafina-core.css?v=df855021728">
+<link rel="stylesheet" href="serafina-core.css?v=0db6c331741">
 <style>
 /* ============================================================
    GEO3_jogo.html — The Lost Endings (Inglês 3º tri). Casca herdada do
@@ -49,6 +49,11 @@ svg{display:block}
 .ib.hold{animation:hold 2s linear forwards}
 @keyframes hold{from{box-shadow:inset 0 0 0 0 rgba(74,222,128,.6)}to{box-shadow:inset 0 -42px 0 0 rgba(74,222,128,.6)}}
 body.locked #btnHome{display:none}
+/* GEO3 (08/11): a casinha vive fora do HUD, por cima de qualquer menu; o HUD guarda o lugar dela */
+#hud{padding-left:60px}
+#btnHome{position:absolute;left:10px;top:6px;z-index:60}
+#casaConf{position:absolute;inset:0;z-index:55;display:none;align-items:center;justify-content:center;background:rgba(13,11,30,.6);backdrop-filter:blur(4px)}
+#casaConf.show{display:flex}
 body.globo #hud .pill,body.globo #hudName,body.globo #btnPause{display:none}
 #hudName{flex:1;text-align:center;font-weight:900;font-size:19px;text-shadow:0 2px 6px rgba(0,0,0,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pill{display:flex;align-items:center;gap:6px;font-weight:900;font-size:18px;text-shadow:0 2px 6px rgba(0,0,0,.7);background:rgba(13,11,30,.55);padding:5px 12px;border-radius:13px;border:2px solid rgba(255,255,255,.2);height:42px;white-space:nowrap}
@@ -323,7 +328,6 @@ body.show-tr .mcNome small.tr{display:inline;margin-left:6px}
   <canvas id="game" width="960" height="540"></canvas>
   <div id="ui">
     <div id="hud">
-      <button class="ib sera-home" id="btnHome" title="Home" aria-label="Home"></button>
       <button class="ib" id="btnLock" title="Tela cheia e cadeado" aria-label="Tela cheia e cadeado"></button>
       <button class="ib" id="btnHelp" title="Ajuda" aria-label="Ajuda"></button>
       <button class="ib" id="btnTr" title="Português" aria-label="Português" style="display:none"></button>
@@ -348,61 +352,63 @@ body.show-tr .mcNome small.tr{display:inline;margin-left:6px}
     <div id="legenda"></div>
     <div id="toast"></div>
     <div id="menu"><div class="mcard" id="mcard"></div></div>
+    <div id="casaConf"><div class="mcard" id="casaCard"></div></div>
+    <button class="ib sera-home" id="btnHome" title="Home" aria-label="Home"></button>
   </div>
 </div>
 <div id="rot"><span>Vire o celular de lado</span></div>
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.92,home:'../index.html',somKey:'geo3_som',stars:0,starfield:false};</script>
-<script src="serafina-core.js?v=df855021728"></script>
-<script src="GEO3_jogo_pt.js?v=df855021728"></script>
-<script src="OP_voz.js?v=df855021728"></script>
-<script src="GEO3_banco.js?v=df855021728"></script>
-<script>if(!window.GEO3) document.write('<script src="../trabalho/3tri_geografia/gen/_amostra_jogo_banco.js?v=df855021728"><\/script>');</script>
-<script src="LP3_jornada_partituras.js?v=df855021728"></script>
-<script src="GEO3_jogo_partituras.js?v=df855021728"></script>
-<script src="LP3_jornada_musica.js?v=df855021728"></script>
-<script src="LP3_jornada_som.js?v=df855021728"></script>
-<script src="LP3_jornada_arte.js?v=df855021728"></script>
-<script src="LP3_jornada_arte2.js?v=df855021728"></script>
-<script src="GEO3_jogo_arte.js?v=df855021728"></script>
-<script src="GEO3_jogo_arte2.js?v=df855021728"></script>
-<script src="GEO3_jogo_arte3.js?v=df855021728"></script>
-<script src="GEO3_jogo_arte4.js?v=df855021728"></script>
-<script src="GEO3_jogo_arte5.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteA.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteA2.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteB.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteB2.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteC.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteG.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteG2.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteG3.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteG4.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteG5.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteH.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteH2.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteH3.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteH4.js?v=df855021728"></script>
-<script src="GEO3_jogo_arteH5.js?v=df855021728"></script>
-<script src="GEO3_jogo_alias.js?v=df855021728"></script>
-<script src="GEO3_jogo_mapas.js?v=df855021728"></script>
-<script src="GEO3_jogo_fases.js?v=df855021728"></script>
-<script src="GEO3_jogo_motor.js?v=df855021728"></script>
-<script src="GEO3_jogo_motor2.js?v=df855021728"></script>
-<script src="GEO3_jogo_perigos.js?v=df855021728"></script>
-<script src="GEO3_jogo_poderes.js?v=df855021728"></script>
-<script src="GEO3_jogo_aparelhos.js?v=df855021728"></script>
-<script src="GEO3_jogo_marceu.js?v=df855021728"></script>
-<script src="GEO3_jogo_chefinho.js?v=df855021728"></script>
-<script src="GEO3_jogo_penalti.js?v=df855021728"></script>
-<script src="GEO3_jogo_quiz.js?v=df855021728"></script>
-<script src="GEO3_jogo_carrinhos.js?v=df855021728"></script>
-<script src="GEO3_jogo_corrida.js?v=df855021728"></script>
-<script src="GEO3_jogo_estadio.js?v=df855021728"></script>
-<script src="GEO3_jogo_chefao.js?v=df855021728"></script>
-<script src="GEO3_jogo_cena.js?v=df855021728"></script>
-<script src="GEO3_jogo_ui.js?v=df855021728"></script>
-<script src="GEO3_jogo_ambiente.js?v=df855021728"></script>
+<script src="serafina-core.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_pt.js?v=0db6c331741"></script>
+<script src="OP_voz.js?v=0db6c331741"></script>
+<script src="GEO3_banco.js?v=0db6c331741"></script>
+<script>if(!window.GEO3) document.write('<script src="../trabalho/3tri_geografia/gen/_amostra_jogo_banco.js?v=0db6c331741"><\/script>');</script>
+<script src="LP3_jornada_partituras.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_partituras.js?v=0db6c331741"></script>
+<script src="LP3_jornada_musica.js?v=0db6c331741"></script>
+<script src="LP3_jornada_som.js?v=0db6c331741"></script>
+<script src="LP3_jornada_arte.js?v=0db6c331741"></script>
+<script src="LP3_jornada_arte2.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arte.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arte2.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arte3.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arte4.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arte5.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteA.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteA2.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteB.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteB2.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteC.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteG.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteG2.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteG3.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteG4.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteG5.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteH.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteH2.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteH3.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteH4.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_arteH5.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_alias.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_mapas.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_fases.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_motor.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_motor2.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_perigos.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_poderes.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_aparelhos.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_marceu.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_chefinho.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_penalti.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_quiz.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_carrinhos.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_corrida.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_estadio.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_chefao.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_cena.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_ui.js?v=0db6c331741"></script>
+<script src="GEO3_jogo_ambiente.js?v=0db6c331741"></script>
 </body>
 </html>

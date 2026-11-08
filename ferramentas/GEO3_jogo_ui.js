@@ -145,17 +145,23 @@ function creditos(){
   menu(h,{mMapa:function(){ fechaMenu(); JOGO.irMapa(); }},'festa');
 }
 function saiParaMapa(){ JOGO.pausa(false); if(JOGO.J.quiz&&window.QUIZ) QUIZ.sai(); quizBotoes(false); legenda(null); if(window.CHEFAO&&CHEFAO.ativo()) CHEFAO.limpa(); JOGO.irMapa(); try{ speechSynthesis.cancel(); }catch(e){} }
+/* GEO3 (08/11): a casinha vale em TODAS as telas, também com menu aberto (escolha do herói, pausa, fim de fase,
+   como jogar): a confirmação abre na camada #casaConf, por cima, e "Ficar" devolve a tela de baixo como estava */
+var casaAberta=null;
+function fechaCasa(){ $('casaConf').classList.remove('show'); casaAberta=null; }
 function confirmaCasa(){
-  if(menuAberto) return; var estava=JOGO.J.pausado, st=JOGO.J.estado;
-  if(['nivel','quiz','corrida','estadio','cano','fimFase','chefeIntro'].indexOf(st)>=0){
-    JOGO.pausa(true);
-    menu('<h2>'+bi('Back to the map?','Voltar ao mapa?')+'</h2><p>'+bi('','Você pode voltar a esta fase quando quiser.')+'</p><div class="mrow"><button class="mbtn" id="mNao">'+bi('Stay','Ficar')+'</button><button class="mbtn pri" id="mSim">'+bi('Go to the map','Ir para o mapa')+'</button></div>',
-      {mNao:function(){ fechaMenu(); JOGO.pausa(estava); }, mSim:function(){ fechaMenu(); saiParaMapa(); }});
-    return;
-  }
-  JOGO.pausa(true);
-  menu('<h2>'+bi('Leave the game?','Sair do jogo?')+'</h2><p>'+bi('Your progress is saved.','Seu progresso fica salvo.')+'</p><div class="mrow"><button class="mbtn" id="mNao">'+bi('Stay','Ficar')+'</button><button class="mbtn danger" id="mSim">'+bi('Leave','Sair')+'</button></div>',
-    {mNao:function(){ fechaMenu(); JOGO.pausa(estava); }, mSim:function(){ goHome(); }});
+  if(casaAberta) return; var estava=JOGO.J.pausado, st=JOGO.J.estado;
+  var fase=['nivel','quiz','corrida','estadio','cano','fimFase','chefeIntro'].indexOf(st)>=0;
+  JOGO.pausa(true); escondeDicaPoder();
+  var c=$('casaCard');
+  c.innerHTML= fase
+    ? '<h2>'+bi('Back to the map?','Voltar ao mapa?')+'</h2><p>'+bi('','Você pode voltar a esta fase quando quiser.')+'</p><div class="mrow"><button class="mbtn" id="cNao">'+bi('Stay','Ficar')+'</button><button class="mbtn pri" id="cSim">'+bi('Go to the map','Ir para o mapa')+'</button></div>'
+    : '<h2>'+bi('Leave the game?','Sair do jogo?')+'</h2><p>'+bi('Your progress is saved.','Seu progresso fica salvo.')+'</p><div class="mrow"><button class="mbtn" id="cNao">'+bi('Stay','Ficar')+'</button><button class="mbtn danger" id="cSim">'+bi('Leave','Sair')+'</button></div>';
+  casaAberta={fase:fase, nao:function(){ fechaCasa(); JOGO.pausa(estava); },
+    sim: fase ? function(){ fechaCasa(); fechaMenu(); saiParaMapa(); } : function(){ fechaCasa(); goHome(); }};
+  $('cNao').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); if(casaAberta) casaAberta.nao(); });
+  $('cSim').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); if(casaAberta) casaAberta.sim(); });
+  $('casaConf').classList.add('show');
 }
 function confirmaRecomecar(){
   if(menuAberto) return;
@@ -180,6 +186,7 @@ function keydown(e){
   if(e.ctrlKey||e.metaKey||e.altKey) return;
   SOM.init(); document.body.classList.add('kbd'); fisico[e.key]=true;
   var k=e.key, J2=JOGO.J, m=menuAberto;
+  if(casaAberta){ e.preventDefault(); if(k==='Escape') casaAberta.nao(); else if(k==='Enter'&&casaAberta.fase) casaAberta.sim(); return; } /* GEO3 (08/11): confirmação da casinha por cima de tudo */
   if(k==='Escape'){ e.preventDefault(); if(J2.estado==='quiz'&&!m){ QUIZ.sai(); return; } if(m){ if(J2.estado==='nivel'||J2.estado==='quiz'){ fechaMenu(); JOGO.pausa(false); } } else pausa(); return; }
   if(m){ if(k==='Enter'){ var pri=$('mcard').querySelector('.mbtn.pri'); if(pri){ e.preventDefault(); pri.click(); } } return; }
   if(J2.estado==='intro'||J2.estado==='mapa'||J2.estado==='final'||J2.estado==='capa'||J2.estado==='chefeIntro'){
