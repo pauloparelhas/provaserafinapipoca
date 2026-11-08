@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='ae5c01a0418';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='80ade2a0601';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,7 +14,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Quiz das Portas — Geografia</title>
-<link rel="stylesheet" href="serafina-core.css?v=ae5c01a0418">
+<link rel="stylesheet" href="serafina-core.css?v=80ade2a0601">
 <style>
 /* ============================================================
    QUIZ DAS PORTAS — Geografia 3º tri (AF 12/11/2026), Y2, prova em PORTUGUÊS.
@@ -314,7 +314,7 @@ body.light .topbar .title{color:#15803d} /* verde da matéria no tema claro: con
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.88,home:'../index.html',somKey:'geo3_quiz_som',starfield:false,
   voicePrefs:['Antonio','Antônio','Francisca']};</script>
-<script src="serafina-core.js?v=ae5c01a0418"></script>
+<script src="serafina-core.js?v=80ade2a0601"></script>
 <script>
 'use strict';
 /* ============================================================
@@ -787,7 +787,7 @@ window.GEO3_QUIZ={estado:function(){ return {atual:atual,fase:fase,temas:ORDEM.s
 function arranca(){
   if(carregaBanco()){ renderInicio(); mostra('inicio'); return; }
   if(PARAMS.amostra){
-    var s=document.createElement('script'); s.src='../trabalho/3tri_geografia/gen/_amostra_quiz_banco.js?v=ae5c01a0418';
+    var s=document.createElement('script'); s.src='../trabalho/3tri_geografia/gen/_amostra_quiz_banco.js?v=80ade2a0601';
     s.onload=function(){ carregaBanco(); renderInicio(); mostra('inicio'); };
     s.onerror=function(){ renderInicio(); mostra('inicio'); };
     document.body.appendChild(s); return;
@@ -795,15 +795,15 @@ function arranca(){
   renderInicio(); mostra('inicio');
 }
 (function(){
-  var a=document.createElement('script'); a.src='GEO3_aprovados.js?v=ae5c01a0418';
+  var a=document.createElement('script'); a.src='GEO3_aprovados.js?v=80ade2a0601';
   a.onload=a.onerror=function(){
-    var s=document.createElement('script'); s.src='GEO3_banco.js?v=ae5c01a0418';
+    var s=document.createElement('script'); s.src='GEO3_banco.js?v=80ade2a0601';
     s.onload=arranca; s.onerror=arranca; document.body.appendChild(s);
   };
   document.body.appendChild(a);
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#22c55e',accent2:'#fbbf24'};</script>
-<script src="sera_theme.js?v=ae5c01a0418"></script>
+<script src="sera_theme.js?v=80ade2a0601"></script>
 </body>
 </html>

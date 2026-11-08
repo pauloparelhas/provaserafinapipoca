@@ -72,6 +72,9 @@ return [
  {tipo:'arrasta', tit:'Qual é a palavra?', cols:1, regra:'Arraste cada palavra para a sua frase.',
   caixas:[{k:'k0',frase:'___: a pessoa se movimenta de um lugar para outro.'},{k:'k1',frase:'___: via por onde as pessoas e os veículos se deslocam.'},{k:'k2',frase:'___: parte de uma cidade onde vivem várias pessoas.'},{k:'k3',frase:'___: placas, faixas e sinais que ajudam a se orientar.'},{k:'k4',frase:'A ___ é o lugar onde vivem muitas pessoas.'}],
   itens:[{c:'k0',t:'Deslocamento'},{c:'k1',t:'Rua'},{c:'k2',t:'Bairro'},{c:'k3',t:'Sinalização'},{c:'k4',t:'cidade'}]},
+ {tipo:'arrasta', tit:'O que a rua pode ter?', cols:1, regra:'Arraste cada palavra para a sua frase.',
+  caixas:[{k:'k0',frase:'A rua pode ter ___, asfalto e sinalização.'},{k:'k1',frase:'A rua pode ter calçada, ___ e sinalização.'},{k:'k2',frase:'A rua pode ter calçada, asfalto e ___.'}],
+  itens:[{c:'k0',t:'calçada'},{c:'k1',t:'asfalto'},{c:'k2',t:'sinalização'}]},
  {tipo:'texto', tit:NP, html:naProva([
    P('O que é deslocamento?','a pessoa se <b>movimenta</b> de um lugar para outro'),
    P('Cite dois jeitos de se deslocar.','<b>a pé</b>, de <b>bicicleta</b>, de <b>carro</b>, de <b>ônibus</b>'),
@@ -177,6 +180,9 @@ return [
  {tipo:'arrasta', tit:'Qual é o nome?', cols:3, regra:'Arraste cada nome para a sua figura.',
   caixas:[{k:'cro',t:'',img:'t_croqui_rua'},{k:'pla',t:'',img:'t_planta_ap'},{k:'map',t:'',img:'t_app'}],
   itens:[{c:'cro',t:'croqui da rua'},{c:'pla',t:'planta baixa'},{c:'map',t:'mapa digital'}]},
+ {tipo:'arrasta', tit:'Complete as frases', cols:1, regra:'Arraste cada palavra para a sua frase.',
+  caixas:[{k:'k0',frase:'O desenho da rua, com casas, calçada e postes, é um ___.'},{k:'k1',frase:'O desenho da sala vista de cima é uma ___.'},{k:'k2',frase:'O croqui ajuda a ler um ___.'}],
+  itens:[{c:'k0',t:'croqui'},{c:'k1',t:'planta baixa'},{c:'k2',t:'caminho'}]},
  {tipo:'texto', tit:NP, html:naProva([
    P('Este desenho da sala, visto de cima, é um croqui ou uma planta baixa?','uma <b>planta baixa</b>','t_planta_sala'),
    P('Este desenho da rua é um ___.','croqui','t_croqui_rua'),
@@ -186,8 +192,8 @@ return [
 /* T6. Tipos de rua e vias de circulação (U3 S6, S7, S8) */
 {k:'ruas', tema:'ruas', unid:3, nome:'Tipos de rua e vias', curto:'Tipos de rua', capa:'t_avenida', cor:'#94a3b8', treino:[], telas:[
  {tipo:'texto', tit:'As ruas não são iguais',
-  html:grade(2,[['t_residencial','Rua <b>residencial</b>: muitas <b>casas</b>, mais tranquila, pouco comércio.'],['t_comercial','Rua <b>comercial</b>: <b>muitas lojas</b>, muito movimentada.']])+
-   R('Algumas ruas são largas, outras estreitas.')},
+  html:grade(2,[['t_residencial','Rua <b>residencial</b>: muitas <b>casas</b>, mais <b>tranquila</b>, pouco comércio.'],['t_comercial','Rua <b>comercial</b>: <b>muitas lojas</b>, muito <b>movimentada</b>.']])+
+   R('Algumas ruas são <b>largas</b>, outras <b>estreitas</b>.')},
  {tipo:'texto', tit:'Dentro e entre as cidades',
   html:grade(2,[['t_avenida','<b>Avenida</b> Paulista, São Paulo'],['t_rodovia','<b>Rodovia</b> dos Imigrantes']])+
    R('<b>Nas cidades</b>: ruas e avenidas. <b>Entre as cidades</b>: rodovias e estradas de terra ou asfaltadas.')},
@@ -203,6 +209,9 @@ return [
  {tipo:'arrasta', tit:'Complete as frases', cols:1, regra:'Arraste cada palavra para a sua frase.',
   caixas:[{k:'k0',frase:'A ___ liga uma cidade a outra.'},{k:'k1',frase:'A ___ é mais larga e liga distâncias maiores dentro da cidade.'},{k:'k2',frase:'Na rua ___ há muitas lojas.'},{k:'k3',frase:'Na rua ___ predominam as moradias.'}],
   itens:[{c:'k0',t:'rodovia'},{c:'k1',t:'avenida'},{c:'k2',t:'comercial'},{c:'k3',t:'residencial'}]},
+ {tipo:'arrasta', tit:'Como é a rua?', cols:1, regra:'Arraste cada palavra para a sua frase.',
+  caixas:[{k:'k0',frase:'A rua residencial geralmente é mais ___.'},{k:'k1',frase:'A rua comercial é muito ___.'},{k:'k2',frase:'As ruas não são iguais: algumas são largas, outras ___.'}],
+  itens:[{c:'k0',t:'tranquila'},{c:'k1',t:'movimentada'},{c:'k2',t:'estreitas'}]},
  {tipo:'texto', tit:'Cada rua tem um jeito',
   html:lado('t_zoneamento',
    R('Cada rua tem um jeito de ser usada: faz parte do <b>planejamento urbano</b>.')+
@@ -234,6 +243,9 @@ return [
    R('Pela rua chegamos à <b>escola</b>, ao <b>trabalho</b> e aos lugares de lazer.')+
    R('Os veículos transportam <b>pessoas</b> e <b>mercadorias</b>.')+
    R('No poema "O meu bairro": supermercado, sorveteria, hospital, banco, padaria, parquinho e <b>rampas</b> para quem é especial.'))},
+ {tipo:'arrasta', tit:'Complete as frases', cols:1, fig:'t_bairro_sb', regra:'Arraste cada palavra para a sua frase.',
+  caixas:[{k:'k0',frase:'No bairro as pessoas frequentam espaços de ___.'},{k:'k1',frase:'No bairro as pessoas praticam ___ e convivem.'},{k:'k2',frase:'Pela rua chegamos à ___, ao trabalho e aos lugares de lazer.'},{k:'k3',frase:'Os veículos transportam pessoas e ___.'}],
+  itens:[{c:'k0',t:'lazer'},{c:'k1',t:'esportes'},{c:'k2',t:'escola'},{c:'k3',t:'mercadorias'}]},
  {tipo:'texto', tit:'Um dentro do outro',
   html:R('Na canção "Ora bolas": a casa <b>tá na rua</b>, a rua tá dentro da <b>cidade</b>.')+
    '<div class="passos"><div class="passo"><b>casa</b></div><span class="pseta" aria-hidden="true">&rsaquo;</span><div class="passo"><b>rua</b></div><span class="pseta" aria-hidden="true">&rsaquo;</span><div class="passo"><b>bairro</b></div><span class="pseta" aria-hidden="true">&rsaquo;</span><div class="passo"><b>cidade</b></div></div>'+
@@ -241,6 +253,9 @@ return [
  {tipo:'arrasta', tit:'Do menor para o maior', cols:4, ordem:true, regra:'Arraste cada palavra para o seu lugar, do menor para o maior.',
   caixas:[{k:'1',t:'1º'},{k:'2',t:'2º'},{k:'3',t:'3º'},{k:'4',t:'4º'}],
   itens:[{c:'1',t:'casa'},{c:'2',t:'rua'},{c:'3',t:'bairro'},{c:'4',t:'cidade'}]},
+ {tipo:'arrasta', tit:'A canção "Ora bolas"', cols:1, regra:'Arraste cada palavra para completar a canção.',
+  caixas:[{k:'k0',frase:'A casa tá na ___.'},{k:'k1',frase:'A rua tá dentro da ___.'},{k:'k2',frase:'A cidade tá do lado da ___.'},{k:'k3',frase:'A floresta é no ___.'},{k:'k4',frase:'O Brasil tá na ___.'}],
+  itens:[{c:'k0',t:'rua'},{c:'k1',t:'cidade'},{c:'k2',t:'floresta'},{c:'k3',t:'Brasil'},{c:'k4',t:'América do Sul'}]},
  {tipo:'texto', tit:NP, html:naProva([
    P('Uma cidade é formada por vários ___.','bairros'),
    P('Ordene do menor para o maior: cidade, casa, bairro, rua.','<b>casa</b> → <b>rua</b> → <b>bairro</b> → <b>cidade</b>'),
@@ -288,6 +303,9 @@ return [
  {tipo:'arrasta', tit:'Complete as frases', cols:1, fig:'t_ilha', regra:'Arraste cada palavra para a sua frase.',
   caixas:[{k:'k0',frase:'O lugar onde moramos é muito ___ do que a nossa casa.'},{k:'k1',frase:'Essa grande casa se chama ___.'},{k:'k2',frase:'O meio ambiente é a casa de todos os ___.'},{k:'k3',frase:'Quando cuidamos do meio ambiente, cuidamos de ___ mesmos.'}],
   itens:[{c:'k0',t:'maior'},{c:'k1',t:'meio ambiente'},{c:'k2',t:'seres vivos'},{c:'k3',t:'nós'}]},
+ {tipo:'arrasta', tit:'No nosso dia a dia', cols:1, fig:'t_janela', regra:'Arraste cada palavra para a sua frase.',
+  caixas:[{k:'k0',frase:'O meio ambiente está nas plantas do ___.'},{k:'k1',frase:'Também está no ___ que visita a janela.'},{k:'k2',frase:'Também está no cheirinho da terra ___.'},{k:'k3',frase:'Também está no ___ cheio de nuvens.'}],
+  itens:[{c:'k0',t:'quintal'},{c:'k1',t:'passarinho'},{c:'k2',t:'molhada'},{c:'k3',t:'céu'}]},
  {tipo:'texto', tit:NP, html:naProva([
    P('O que faz parte do meio ambiente?','<b>animais</b>, <b>plantas</b>, <b>água</b>, <b>ar</b>, <b>solo</b>… e <b>nós também</b>'),
    P('Verdadeiro ou falso: as pessoas fazem parte do meio ambiente.','<b>Verdadeiro</b>'),
@@ -337,10 +355,13 @@ return [
   caixas:[{k:'amz',t:NOME.amz,cor:COR.amz},{k:'cer',t:NOME.cer,cor:COR.cer},{k:'caa',t:NOME.caa,cor:COR.caa},{k:'pam',t:NOME.pam,cor:COR.pam}],
   itens:[{c:'amz',img:'t_vitoria'},{c:'cer',img:'t_sempreviva'},{c:'caa',img:'t_louro'},{c:'pam',img:'t_capim'}]},
  {tipo:'texto', tit:'Os cartazes dos biomas',
-  html:bios({amz:'o <b>maior bioma</b> do Brasil: quase metade do território',cer:'o segundo maior; a savana brasileira, de caules retorcidos',caa:'<b>só existe</b> no Brasil; clima semiárido, muitos <b>cactos</b>',pam:'só no Rio Grande do Sul; campos abertos',pan:'uma das maiores <b>áreas úmidas</b> do planeta; alagamentos',mat:'no litoral; muito rica, mas <b>muito reduzida</b>'})},
+  html:bios({amz:'o <b>maior bioma</b> do Brasil: quase metade do território',cer:'o <b>segundo maior</b>; a savana brasileira, de caules retorcidos',caa:'<b>só existe</b> no Brasil; clima semiárido, muitos <b>cactos</b>',pam:'só no <b>Rio Grande</b> do Sul; campos abertos',pan:'uma das maiores <b>áreas úmidas</b> do planeta; alagamentos',mat:'no litoral; muito rica, mas <b>muito reduzida</b>'})},
  {tipo:'arrasta', tit:'Qual é o bioma?', cols:1, regra:'Arraste cada bioma para a sua frase.',
   caixas:[{k:'amz',frase:'O maior bioma do Brasil: ___.'},{k:'caa',frase:'Só existe no Brasil e tem muitos cactos: ___.'},{k:'pan',frase:'Plantas que gostam de água: ___.'},{k:'cer',frase:'Árvores tortas e grama: ___.'},{k:'pam',frase:'Campos com capim baixo: ___.'},{k:'mat',frase:'Fica no litoral do Brasil: ___.'}],
   itens:[{c:'amz',t:'Amazônia'},{c:'caa',t:'Caatinga'},{c:'pan',t:'Pantanal'},{c:'cer',t:'Cerrado'},{c:'pam',t:'Pampa'},{c:'mat',t:'Mata Atlântica'}]},
+ {tipo:'arrasta', tit:'O que diz o cartaz?', cols:1, regra:'Arraste cada bioma para a sua frase.',
+  caixas:[{k:'amz',frase:'O maior bioma do Brasil: ___.'},{k:'cer',frase:'O segundo maior bioma do Brasil: ___.'},{k:'caa',frase:'Só existe no Brasil: ___.'},{k:'pam',frase:'Fica só no Rio Grande do Sul: ___.'},{k:'mat',frase:'Muito rica, mas muito reduzida: ___.'}],
+  itens:[{c:'amz',t:'Amazônia'},{c:'cer',t:'Cerrado'},{c:'caa',t:'Caatinga'},{c:'pam',t:'Pampa'},{c:'mat',t:'Mata Atlântica'}]},
  {tipo:'texto', tit:NP+' (1/2)', html:naProva([
    P('Fauna são os ___ e flora são as ___.','fauna: <b>animais</b> · flora: <b>plantas</b>'),
    P('Qual é o maior bioma do Brasil?','a <b>Amazônia</b>'),
@@ -367,6 +388,9 @@ return [
  {tipo:'arrasta', tit:'Ajuda ou é impacto?', cols:2, regra:'Arraste cada frase para o seu grupo.',
   caixas:[{k:'aj',t:'As plantas ajudam',cor:'#16a34a'},{k:'im',t:'Impactos no meio ambiente',cor:'#dc2626'}],
   itens:[{c:'aj',t:'ar limpo'},{c:'aj',t:'protegem o solo'},{c:'aj',t:'alimento e abrigo'},{c:'im',t:'lixo nas margens dos rios'},{c:'im',t:'ar e água poluídos'},{c:'im',t:'enchentes e ruas alagadas'}]},
+ {tipo:'arrasta', tit:'Os 6 impactos', cols:1, regra:'Arraste cada palavra para completar o impacto.',
+  caixas:[{k:'k0',frase:'___ da mata das margens dos rios.'},{k:'k1',frase:'Acúmulo de ___ nas margens dos rios.'},{k:'k2',frase:'___ e ruas alagadas depois da chuva na cidade.'},{k:'k3',frase:'Ar e água ___.'},{k:'k4',frase:'Sensação de ___ e ar seco.'},{k:'k5',frase:'Áreas agrícolas ___ e sem água.'}],
+  itens:[{c:'k0',t:'Desmatamento'},{c:'k1',t:'lixo'},{c:'k2',t:'Enchentes'},{c:'k3',t:'poluídos'},{c:'k4',t:'calor'},{c:'k5',t:'secas'}]},
  {tipo:'texto', tit:'Preservar',
   html:R('A preservação é <b>responsabilidade coletiva</b>, voltada para o <b>bem comum</b>.')+
    R('Ela ajuda a manter a <b>qualidade de vida</b> das futuras gerações.')+
