@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='0db6c331741';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='4ce975b1845';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -15,8 +15,9 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="theme-color" content="#14532d">
 <title>Geografia · Pocket Card</title>
 <style>
-/* GEO3_pocket — a prova inteira de Geografia (U3 + U4) numa folha A4 paisagem, para imprimir colorida.
-   Lógica do pocket de Ciências do 3º tri; fonte única trabalho/3tri_geografia/_roteiro.md; figuras = recortes da escola (media/geo3/t_*).
+/* GEO3_pocket — a prova de Geografia em DUAS folhas A4 paisagem, para imprimir frente e verso (08/11/2026):
+   FRENTE = Unidade 3 (blocos 1-8), VERSO = Unidade 4 (blocos 9-12).
+   Fonte única trabalho/3tri_geografia/_roteiro.md; figuras = recortes da escola (media/geo3/q_*, t_*, p_*; nunca redesenho).
    Cada tópico é um bloco <section class="sec" data-topico="T#" id="pk-T#">: o vídeo do pocket navega bloco a bloco. */
 :root{--ink:#1c2a22;--soft:#4b5a50;--paper:#fffdf7;--fundo:#dfe6e1;--sombra:0 8px 30px rgba(20,40,30,.22)}
 html[data-theme="dark"]{--fundo:#1f2a26;--sombra:0 10px 36px rgba(0,0,0,.5)}
@@ -28,58 +29,76 @@ body{background:var(--fundo);font-family:"Segoe UI","Trebuchet MS",system-ui,Rob
 .tela button,.tela a{min-height:44px;min-width:44px;padding:0 14px;border-radius:12px;border:2px solid #86efac;background:#166534;color:#fff;font-weight:800;font-size:15px;font-family:inherit;display:inline-flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer}
 .tela a[hidden]{display:none}
 .tela .dica{font-size:13px;font-weight:700;opacity:.9}
-/* a folha = área imprimível da A4 paisagem (287x200 mm, margem 5 mm no @page); na tela é escalada inteira por transform, proporção fixa; ver encaixa() */
+/* cada folha = área imprimível da A4 paisagem (287x200 mm, margem 5 mm no @page); na tela as duas folhas
+   são escaladas inteiras por transform (proporção fixa), uma embaixo da outra (lado a lado em tela muito larga); ver encaixa() */
 .palco{padding:12px 0;overflow:hidden}
-.escala{transform-origin:top left;width:287mm}
-.page{width:287mm;height:200mm;background:var(--paper);color:var(--ink);padding:.6mm;display:flex;flex-direction:column;gap:2mm;overflow:hidden;box-shadow:var(--sombra);font-size:11px;line-height:1.03}
+.escala{transform-origin:top left;width:287mm;display:flex;flex-direction:column;gap:10mm}
+.escala.lado{flex-direction:row;width:584mm}
+.page{flex:0 0 auto;width:287mm;height:200mm;background:var(--paper);color:var(--ink);padding:0;display:flex;flex-direction:column;gap:2.6mm;overflow:hidden;box-shadow:var(--sombra);font-size:11px;line-height:1.08}
 b{font-weight:850}
-.topo{display:flex;align-items:center;gap:3mm;padding:.5mm 3mm;border-radius:3mm;background:linear-gradient(100deg,#0c4a6e,#0ea5e9 40%,#22c55e 70%,#15803d);color:#fff}
-.topo h1{white-space:nowrap;font-size:16px;font-weight:900;line-height:1}
-.topo h1 small{font-size:11.5px;font-weight:700;opacity:.95;margin-left:2mm}
-.topo .un{margin-left:auto;display:flex;gap:1.5mm;font-size:11px;font-weight:800;white-space:nowrap}
-.topo .un span{background:rgba(255,255,255,.2);border-radius:2mm;padding:.4mm 1.6mm}
-.grade{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:repeat(96,minmax(0,1fr));grid-template-rows:1.068fr .952fr 1.2fr;gap:2.7mm}
-.sec{border-radius:2.6mm;border:1px solid var(--c3);background:var(--c2);padding:1.4mm 1.9mm;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:1.1mm}
-.sec>h2{display:flex;align-items:center;gap:1.3mm;font-size:13.5px;font-weight:900;color:var(--c);line-height:1}
-.sec>h2 .n{flex:0 0 auto;min-width:5.4mm;height:5.4mm;padding:0 .8mm;border-radius:2.7mm;background:var(--c);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center}
-.sec>h2 em{margin-left:auto;font-style:normal;font-size:11px;font-weight:800;opacity:.8}
-.def{background:#fff;border-radius:1.6mm;padding:.45mm 1.3mm;font-weight:650}
+.topo{flex:0 0 auto;display:flex;align-items:center;gap:3mm;padding:1mm 3mm;border-radius:3mm;color:#fff}
+.frente .topo{background:linear-gradient(100deg,#0c4a6e,#0369a1 35%,#b45309 75%,#ea580c)}
+.verso .topo{background:linear-gradient(100deg,#155e75,#0891b2 30%,#16a34a 65%,#15803d)}
+.topo h1{white-space:nowrap;font-size:17px;font-weight:900;line-height:1}
+.topo h1 small{font-size:12px;font-weight:700;opacity:.95;margin-left:2mm}
+.topo .un{margin-left:auto;display:flex;gap:1.5mm;font-size:12.5px;font-weight:800;white-space:nowrap;align-items:center}
+.topo .un span{background:rgba(255,255,255,.22);border-radius:2mm;padding:.5mm 2mm}
+.topo .un .lado{background:#fff;color:#14532d}
+.grade{flex:1 1 auto;min-height:0;display:grid;gap:3mm}
+.frente .grade{grid-template-columns:repeat(96,minmax(0,1fr));grid-template-rows:1.11fr .98fr 1.08fr}
+.verso .grade{grid-template-columns:minmax(0,36fr) minmax(0,21fr) minmax(0,43fr);grid-template-rows:minmax(0,1.85fr) minmax(0,1fr)}
+/* bloco isolado: borda 1,5 px na cor do tema, raio 3 mm, respiro interno */
+.sec{border-radius:3mm;border:1.5px solid var(--c);background:var(--c2);padding:1.3mm 2mm 1.5mm;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:1.1mm}
+.sec>h2{display:flex;align-items:center;gap:1.5mm;font-size:14px;font-weight:900;color:var(--c);line-height:1;padding-bottom:1.1mm;border-bottom:1px solid var(--c3)}
+.sec>h2 .n{flex:0 0 auto;min-width:6mm;height:6mm;padding:0 .9mm;border-radius:3mm;background:var(--c);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
+.sec>h2 em{margin-left:auto;font-style:normal;font-size:12px;font-weight:800;opacity:.85}
+.def{background:#fff;border-radius:1.8mm;padding:.6mm 1.4mm;font-weight:650}
 .def b{color:var(--c)}
-.lst{list-style:none;background:#fff;border-radius:1.6mm;padding:.45mm 1.3mm;font-weight:650}
-.lst li{padding-left:2.4mm;position:relative;margin:0}
-.lst li::before{content:'';position:absolute;left:.3mm;top:1.5mm;width:1.1mm;height:1.1mm;border-radius:50%;background:var(--c)}
+.lst{list-style:none;background:#fff;border-radius:1.8mm;padding:.6mm 1.4mm;font-weight:650;display:flex;flex-direction:column;gap:.2mm}
+.lst li{padding-left:2.7mm;position:relative}
+.lst li::before{content:'';position:absolute;left:.3mm;top:1.3mm;width:1.2mm;height:1.2mm;border-radius:50%;background:var(--c)}
 .lst b{color:var(--c)}
-.fl{display:grid;grid-template-columns:var(--fw,20mm) minmax(0,1fr);gap:1.2mm;align-items:start}
-.fl img{width:100%;border-radius:1.2mm;display:block;background:#fff}
-.figs{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:1.2mm}
-.figs figure{background:#fff;border-radius:1.4mm;padding:.5mm;text-align:center;font-size:11px;font-weight:700;line-height:1}
-.figs img{display:block;width:100%;height:var(--fh,13mm);object-fit:cover;border-radius:1mm;margin-bottom:.3mm}
-.figs figure b{display:block;color:var(--c);font-size:11.5px}
-.setas{display:grid;grid-template-columns:1fr 1fr;gap:1mm}
-.setas div{background:#fff;border-radius:1.6mm;border:.3mm solid var(--c3);padding:.5mm 1mm;font-weight:650;line-height:1.1}
-.setas b{display:block;color:var(--c);font-size:12px}
-.setas i{font-style:normal;font-size:13px;font-weight:900;color:var(--c);float:right;line-height:1}
-.ordem{display:flex;align-items:center;justify-content:space-between;gap:.6mm;background:#fff;border-radius:1.6mm;padding:.7mm 1mm;font-weight:900;color:var(--c);font-size:11.5px}
-.ordem span{background:var(--c3);border-radius:1.4mm;padding:.2mm 1.2mm;color:var(--ink)}
-.bioma{display:grid;grid-template-columns:var(--mw,38mm) minmax(0,1fr);gap:2mm;align-items:center;flex:1;min-height:0}
-.bioma>img{width:100%;border-radius:1.6mm;background:#fff;display:block}
-.bls{display:flex;flex-direction:column;gap:.4mm}
-.bl{display:grid;grid-template-columns:20mm .9fr 1.22fr 1.13fr;gap:1.2mm;align-items:center;background:#fff;border-radius:1.2mm;border-left:2.2mm solid var(--bc);padding:.1mm 1mm;font-weight:650;line-height:1.05}
-.bl .bn{font-weight:900}
-.bl .bn small{display:block;font-size:11px;font-weight:700;color:var(--soft)}
-.bl.bh{background:var(--c);color:#fff;border-left-color:var(--c);font-weight:850;padding:.4mm 1mm}
-.flt img{float:left;margin:0 1.4mm .4mm 0;border-radius:1.2mm}
-.flt::after{content:'';display:block;clear:both}
-.cruz{display:grid;grid-template-columns:1fr auto 1fr;grid-template-areas:"f f f" "e m d" "a a a";gap:.8mm;align-items:center;justify-items:center;text-align:center;font-weight:650;line-height:1.05}
-.cruz>div{background:#fff;border:1px solid var(--c3);border-radius:1.6mm;padding:.5mm .8mm}
-.cruz b{display:block;color:var(--c);font-size:12px}
-.cruz i{display:block;font-style:normal;font-size:15px;font-weight:900;color:var(--c);line-height:1}
-.cruz b i{display:inline}
+.lst.tres{display:grid;grid-template-columns:.8fr 1.1fr 1.1fr;gap:0 2mm}
+/* termo forte + explicação curta, em colunas alinhadas */
+.tl{display:grid;grid-template-columns:var(--tw,22mm) minmax(0,1fr);background:#fff;border-radius:1.8mm;padding:.6mm 1.4mm;gap:.3mm 1.6mm;font-weight:650;align-items:baseline}
+.tl>b{color:var(--c)}
+.fl{display:grid;grid-template-columns:var(--fw,20mm) minmax(0,1fr);gap:1.6mm;align-items:center}
+.fl>img,.fl>figure img{width:100%;border-radius:1.4mm;display:block;background:#fff}
+/* figura + legenda colada */
+.figs{display:grid;grid-template-columns:repeat(var(--n,2),minmax(0,1fr));gap:1.4mm}
+.figs figure,.fg{background:#fff;border-radius:1.6mm;padding:.6mm;text-align:center;font-size:11px;font-weight:700;line-height:1.04;display:block}
+.figs img,.fg img{display:block;width:100%;height:var(--fh,14mm);object-fit:cover;border-radius:1.1mm;margin-bottom:.5mm}
+.figs figure b,.fg b{display:block;color:var(--c);font-size:11.5px}
+.figs figure b.i,.fg b.i{display:inline;font-size:inherit}
+.figs .ct img,.fg.ct img{object-fit:contain}
+.ordem{display:flex;align-items:center;justify-content:space-between;gap:.8mm;background:#fff;border-radius:1.8mm;padding:.9mm 1.4mm;font-weight:900;color:var(--c);font-size:13px}
+.ordem span{background:var(--c3);border-radius:1.4mm;padding:.3mm 1.6mm;color:var(--ink)}
+.cruz{display:grid;grid-template-columns:1fr 26mm 1fr;grid-template-areas:"f f f" "e m d" "a a a";gap:1mm;align-items:center;justify-items:center;text-align:center;font-weight:650;line-height:1.08}
+.cruz>div{background:#fff;border:1px solid var(--c3);border-radius:1.8mm;padding:.7mm 1mm}
+.cruz b{display:block;color:var(--c);font-size:13px}
+.cruz i{display:inline;font-style:normal;font-size:15px;font-weight:900;color:var(--c);line-height:1}
 .cruz .cf{grid-area:f}.cruz .ca{grid-area:a}.cruz .ce{grid-area:e}.cruz .cd{grid-area:d}
-.cruz>img{grid-area:m;width:13mm;border-radius:1.2mm;display:block}
-.duas{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:1.6mm;align-items:start}
-.atencao{background:#fff7ed;border:.3mm dashed #ea580c;border-radius:1.6mm;padding:.5mm 1.2mm;font-weight:700}
+.cruz>img{grid-area:m;width:26mm;height:19mm;object-fit:cover;border-radius:1.4mm;display:block}
+.duas{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.6mm;align-items:stretch}
+.atencao{background:#fff7ed;border:.35mm dashed #ea580c;border-radius:1.8mm;padding:.8mm 1.6mm;font-weight:700}
 .atencao b{color:#c2410c}
+.lbl{font-weight:900;color:var(--c);font-size:12px;line-height:1}
+.col{display:flex;flex-direction:column;gap:1.4mm;min-height:0}
+/* biomas: mapa + 6 cartões, cada um com as 3 fotos da escola (bioma, bicho, planta) */
+.biomas{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:64mm minmax(0,1fr);gap:2.4mm}
+.mapa{display:flex;flex-direction:column;gap:1.4mm;justify-content:space-between}
+.mapa .fg img{height:auto;aspect-ratio:800/765;object-fit:contain}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:2mm}
+.bc{background:#fff;border-radius:2mm;border:1.5px solid var(--bc);display:flex;flex-direction:column;gap:.7mm;padding:.8mm 1.2mm 1mm;min-height:0;overflow:hidden}
+.bc h3{display:flex;align-items:baseline;gap:1.4mm;font-size:13.5px;font-weight:900;line-height:1;color:var(--ink)}
+.bc h3 .dot{width:3mm;height:3mm;border-radius:50%;background:var(--bc);flex:0 0 auto;align-self:center}
+.bc h3 small{font-size:11px;font-weight:700;color:var(--soft)}
+.bc h3 .fato{margin-left:auto;font-size:11px;font-weight:850;color:var(--c);background:var(--c2);border-radius:1.2mm;padding:.3mm 1.2mm;white-space:nowrap}
+.bc .fot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:minmax(0,1fr) auto;gap:.3mm 1mm;flex:1 1 auto;min-height:0}
+.bc .fot figure{display:grid;grid-template-rows:subgrid;grid-row:span 2;font-size:11px;font-weight:750;text-align:center;line-height:1.02;min-height:0}
+.bc .fot img{width:100%;height:100%;min-height:0;object-fit:cover;border-radius:1mm;display:block}
+.bc .tx{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 1.2mm;font-weight:650;line-height:1.08}
+.bc .tx b{color:var(--c)}
 /* cores dos temas (BIBLIA_GEO3) */
 .t1{--c:#0369a1;--c2:#f0f9ff;--c3:#bae6fd}
 .t2{--c:#dc2626;--c2:#fef2f2;--c3:#fecaca}
@@ -93,12 +112,15 @@ b{font-weight:850}
 .t10{--c:#0891b2;--c2:#ecfeff;--c3:#a5f3fc}
 .t11{--c:#4d7c0f;--c2:#f7fee7;--c3:#d9f99d}
 .t12{--c:#15803d;--c2:#f0fdf4;--c3:#bbf7d0}
-#pk-T1{grid-column:1/18;grid-row:1}#pk-T2{grid-column:18/34;grid-row:1}#pk-T3{grid-column:34/52;grid-row:1}#pk-T4{grid-column:52/73;grid-row:1}#pk-T5{grid-column:73/97;grid-row:1}
-#pk-T6{grid-column:1/53;grid-row:2}#pk-T7{grid-column:53/71;grid-row:2}#pk-T8{grid-column:71/97;grid-row:2}
-#pk-T9{grid-column:1/14;grid-row:3}#pk-T10{grid-column:14/25;grid-row:3}#pk-T11{grid-column:25/79;grid-row:3}#pk-T12{grid-column:79/97;grid-row:3}
+#pk-T1{grid-column:1/24;grid-row:1}#pk-T2{grid-column:24/45;grid-row:1}#pk-T3{grid-column:45/67;grid-row:1}#pk-T4{grid-column:67/97;grid-row:1}
+#pk-T5{grid-column:1/45;grid-row:2}#pk-T6{grid-column:45/97;grid-row:2}
+#pk-T7{grid-column:1/35;grid-row:3}#pk-T8{grid-column:35/97;grid-row:3}
+#pk-T11{grid-column:1/4;grid-row:1}#pk-T9{grid-column:1;grid-row:2}#pk-T10{grid-column:2;grid-row:2}#pk-T12{grid-column:3;grid-row:2}
 /* o vídeo realça o bloco da vez */
 .sec.foco{box-shadow:0 0 0 1.2mm color-mix(in srgb,var(--c) 45%,transparent)}
-@media print{body{background:none}.tela{display:none}.palco{padding:0;overflow:visible}.escala{transform:none!important;height:auto!important;margin:0!important}.page{box-shadow:none}}
+@media print{body{background:none}.tela{display:none}.palco{padding:0;overflow:visible}
+  .escala,.escala.lado{transform:none!important;height:auto!important;width:287mm!important;margin:0!important;display:block}
+  .page{box-shadow:none;break-inside:avoid}.page.frente{break-after:page}}
 </style>
 <script>
 /* tema do site (cie2_theme) ou do sistema: a folha fica sempre clara (papel), só o entorno escurece */
@@ -109,32 +131,35 @@ b{font-weight:850}
 </head>
 <body>
 <div class="tela">
-  <a href="../index.html?v=0db6c331741" title="Início" aria-label="Início">&#127968; Início</a>
-  <a id="btPdf" href="media/geo3/Pocket_Card_Geografia.pdf" target="_blank" rel="noopener" title="Abrir o PDF (A4 paisagem)" aria-label="Abrir PDF">&#128196; Abrir PDF</a>
+  <a href="../index.html?v=4ce975b1845" title="Início" aria-label="Início">&#127968; Início</a>
+  <a id="btPdf" href="media/geo3/Pocket_Card_Geografia.pdf" target="_blank" rel="noopener" title="Abrir o PDF (2 folhas A4 paisagem, frente e verso)" aria-label="Abrir PDF">&#128196; Abrir PDF</a>
   <a id="pk-video" hidden href="#" onclick="abreVideoPocket();return false" title="Vídeo do Pocket Card" aria-label="Vídeo do Pocket Card">&#9654; Vídeo do Pocket Card</a>
-  <span class="dica">PDF pronto para imprimir em A4.</span>
+  <span class="dica">PDF de 2 folhas A4: imprimir frente e verso.</span>
 </div>
 <div class="palco"><div class="escala" id="escala">
-<div class="page">
+
+<!-- ===================== FRENTE: UNIDADE 3 ===================== -->
+<div class="page frente">
   <header class="topo">
     <h1>Guardiões da Casa Maior — Pocket Card de Geografia<small>prova em 12/11</small></h1>
-    <div class="un"><span>U3 · ruas, deslocamentos e transportes</span><span>U4 · meio ambiente, nossa casa maior</span></div>
+    <div class="un"><span>Unidade 3 · ruas, deslocamentos e transportes</span><span class="lado">FRENTE</span></div>
   </header>
   <main class="grade">
 
     <section class="sec t1" data-topico="T1" id="pk-T1">
       <h2><span class="n">1</span>O espaço urbano</h2>
-      <div class="def flt"><img src="media/geo3/t_cidade.jpg?v=0db6c331741" alt="" style="width:22mm"><b>Cidade</b> (espaço urbano): onde vivem <b>muitas pessoas</b>; ruas, casas, comércios, escolas e prédios. Feita de caminhos, sons e movimentos.</div>
-      <ul class="lst">
-        <li><b>Deslocamento</b>: ir de um lugar para outro.</li>
-        <li><b>Rua</b>: via de pessoas e veículos; calçada, asfalto, sinalização.</li>
-        <li><b>Sinalização</b>: placas, faixas, sinais; ajudam a <b>se orientar</b>.</li>
-      </ul>
+      <div class="fl" style="--fw:24mm"><img src="media/geo3/t_cidade.jpg?v=4ce975b1845" alt="" style="height:20mm;object-fit:cover"><div class="def"><b>Cidade</b> (espaço urbano): onde vivem <b>muitas pessoas</b>; ruas, casas, comércios, escolas e prédios. Feita de <b>caminhos, sons e movimentos</b>.</div></div>
+      <div class="tl" style="--tw:20mm">
+        <b>Deslocamento</b><span>ir de um lugar para outro</span>
+        <b>Rua</b><span>via de pessoas e veículos; calçada, asfalto, sinalização</span>
+        <b>Bairro</b><span>parte da cidade; casas, ruas, comércios</span>
+        <b>Sinalização</b><span>placas, faixas, sinais; ajudam a <b>se orientar</b></span>
+      </div>
     </section>
 
     <section class="sec t2" data-topico="T2" id="pk-T2">
       <h2><span class="n">2</span>Atravessar a rua</h2>
-      <img src="media/geo3/t_faixa.jpg?v=0db6c331741" alt="" style="width:100%;height:8.5mm;object-fit:cover;border-radius:1.2mm">
+      <figure class="fg" style="--fh:11.5mm"><img src="media/geo3/q_faixa.jpg?v=4ce975b1845" alt="" style="object-position:center 70%"><span>crianças atravessando na <b class="i">faixa</b> de pedestre</span></figure>
       <ul class="lst">
         <li>Sempre <b>na faixa</b> de pedestre.</li>
         <li>Sinal <b>verde</b> para o pedestre.</li>
@@ -149,7 +174,7 @@ b{font-weight:850}
       <div class="cruz">
         <div class="cf"><b><i>&#8679;</i> Frente</b>para onde queremos ir</div>
         <div class="ce"><b><i>&#8678;</i> Esquerda</b>lado da mão esquerda</div>
-        <img src="media/geo3/t_olhar.jpg?v=0db6c331741" alt="">
+        <img src="media/geo3/q_semaforo_pedestre.jpg?v=4ce975b1845" alt="">
         <div class="cd"><b>Direita <i>&#8680;</i></b>lado da mão direita</div>
         <div class="ca"><b><i>&#8681;</i> Atrás</b>por onde já passamos</div>
       </div>
@@ -158,48 +183,60 @@ b{font-weight:850}
 
     <section class="sec t4" data-topico="T4" id="pk-T4">
       <h2><span class="n">4</span>Pontos de referência</h2>
-      <div class="def"><b>Localização</b>: onde estamos, para onde vamos, como chegaremos.</div>
-      <div class="def"><b>Ponto de referência</b>: lugar que <b>não muda</b> na paisagem e ajuda a <b>encontrar outros lugares</b>.</div>
-      <div class="fl" style="--fw:12mm"><img src="media/geo3/t_padaria.jpg?v=0db6c331741" alt=""><ul class="lst"><li>construção colorida, <b>prédio alto</b>, <b>árvore</b>, linha de transmissão</li><li><b>padaria</b> na esquina (comércio que serve de referência)</li></ul></div>
+      <div class="tl" style="--tw:20mm">
+        <b>Localização</b><span>onde estamos, para onde vamos, como chegaremos</span>
+        <b>Ponto de referência</b><span>lugar que <b>não muda</b> na paisagem e ajuda a <b>encontrar outros lugares</b></span>
+      </div>
+      <div class="duas" style="grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)">
+        <div class="figs" style="--n:2;--fh:11mm">
+          <figure><img src="media/geo3/t_padaria.jpg?v=4ce975b1845" alt=""><b>padaria</b>na esquina</figure>
+          <figure class="ct"><img src="media/geo3/t_croqui_jogo.jpg?v=4ce975b1845" alt=""><b>jogo de localização</b>croqui simples</figure>
+        </div>
+        <ul class="lst"><li>Exemplos: construção colorida, <b>prédio alto</b>, <b>árvore</b>, linha de transmissão</li><li><b>padaria</b> na esquina (comércio que serve de referência)</li></ul>
+      </div>
       <div class="def">Sem saber o caminho: pontos indicados por <b>quem conhece</b>. Antônia vai pelo caminho <b>mais tranquilo</b>: a rua da escola é movimentada.</div>
     </section>
 
     <section class="sec t5" data-topico="T5" id="pk-T5">
-      <h2><span class="n">5</span>Mapa, croqui e planta baixa</h2>
-      <div class="figs" style="--n:4;--fh:10mm">
-        <figure><img src="media/geo3/t_croqui_rua.jpg?v=0db6c331741" alt="" style="object-fit:contain"><b>croqui</b>desenho da rua</figure>
-        <figure><img src="media/geo3/t_sala3d.jpg?v=0db6c331741" alt="" style="object-fit:contain"><b>a sala</b>vista de frente</figure>
-        <figure><img src="media/geo3/t_planta_sala.jpg?v=0db6c331741" alt="" style="object-fit:contain"><b>planta baixa</b>a sala vista de cima</figure>
-        <figure><img src="media/geo3/t_app.jpg?v=0db6c331741" alt=""><b>mapa digital</b>aplicativo do celular</figure>
+      <h2><span class="n">5</span>Mapa, croqui e planta baixa<em>pontos de vista: de cima × de frente</em></h2>
+      <div class="figs" style="--n:5;--fh:18mm">
+        <figure class="ct"><img src="media/geo3/q_croqui_rua.jpg?v=4ce975b1845" alt=""><b>croqui</b>desenho da rua</figure>
+        <figure class="ct"><img src="media/geo3/q_sala_frente.jpg?v=4ce975b1845" alt=""><b>a sala</b>vista de frente</figure>
+        <figure class="ct"><img src="media/geo3/q_planta_sala.jpg?v=4ce975b1845" alt=""><b>planta baixa</b>a sala vista de cima</figure>
+        <figure class="ct"><img src="media/geo3/q_planta_apto.jpg?v=4ce975b1845" alt=""><b>planta do apartamento</b>vista de cima</figure>
+        <figure><img src="media/geo3/t_app.jpg?v=4ce975b1845" alt=""><b>mapa digital</b>aplicativo do celular</figure>
       </div>
-      <div class="def"><b>Mapas</b>: localizam e representam os espaços; ajudam a <b>entender os caminhos</b> e <b>planejar os trajetos</b>. De <b>papel</b> ou <b>digitais</b>.</div>
-      <div class="def">Planta do apartamento: sacada, quarto, sala, escritório, cozinha, banheiro. Imagens aéreas, mapas e fotos: pontos de vista diferentes (de cima × de frente).</div>
+      <div class="duas">
+        <div class="def"><b>Mapas</b>: localizam e representam os espaços; ajudam a <b>entender os caminhos</b> e <b>planejar os trajetos</b>. De <b>papel</b> ou <b>digitais</b>.</div>
+        <div class="def">Planta do apartamento: sacada, quarto, sala, escritório, cozinha, banheiro. Imagens aéreas, mapas e fotos: pontos de vista diferentes (de cima × de frente).</div>
+      </div>
     </section>
 
     <section class="sec t6" data-topico="T6" id="pk-T6">
       <h2><span class="n">6</span>Tipos de rua e vias de circulação<em>as ruas não são iguais</em></h2>
-      <div class="figs ruas" style="--n:4;--fh:12.5mm">
-        <figure><img src="media/geo3/t_residencial.jpg?v=0db6c331741" alt=""><b>rua residencial</b>moradias; mais tranquila, pouco comércio</figure>
-        <figure><img src="media/geo3/t_comercial.jpg?v=0db6c331741" alt=""><b>rua comercial</b><b style="display:inline;font-size:inherit">muitas lojas</b>, mercados; muito movimentada</figure>
-        <figure><img src="media/geo3/t_avenida.jpg?v=0db6c331741" alt=""><b>avenida</b>mais larga; liga distâncias maiores <b style="display:inline;font-size:inherit">dentro da cidade</b> (Av. Paulista)</figure>
-        <figure><img src="media/geo3/t_rodovia.jpg?v=0db6c331741" alt=""><b>rodovia</b><b style="display:inline;font-size:inherit">liga cidades</b> (Rod. dos Imigrantes)</figure>
+      <div class="figs ruas" style="--n:6;--fh:13.5mm">
+        <figure><img src="media/geo3/q_rua_residencial.jpg?v=4ce975b1845" alt=""><b>rua residencial</b>moradias; mais tranquila, pouco comércio</figure>
+        <figure><img src="media/geo3/q_rua_comercial.jpg?v=4ce975b1845" alt=""><b>rua comercial</b><b class="i">muitas lojas</b>, mercados; muito movimentada</figure>
+        <figure><img src="media/geo3/q_avenida.jpg?v=4ce975b1845" alt=""><b>avenida</b>mais larga; liga distâncias maiores <b class="i">dentro da cidade</b> (Av. Paulista)</figure>
+        <figure><img src="media/geo3/q_rodovia.jpg?v=4ce975b1845" alt=""><b>rodovia</b><b class="i">liga cidades</b> (Rod. dos Imigrantes)</figure>
+        <figure><img src="media/geo3/q_paralelepipedo.jpg?v=4ce975b1845" alt=""><b>paralelepípedo</b>cidades mais antigas ou históricas (Paraty, RJ)</figure>
+        <figure><img src="media/geo3/t_zoneamento.jpg?v=4ce975b1845" alt=""><b>planejamento urbano</b>plano que organiza a cidade: cada rua tem um jeito de ser usada</figure>
       </div>
-      <div class="duas">
-        <ul class="lst">
-          <li><b>Nas cidades</b>: ruas e avenidas.</li>
-          <li><b>Entre as cidades</b>: rodovias e estradas de terra ou asfaltadas.</li>
-          <li>Cada rua faz parte do <b>planejamento urbano</b> (Campinas: perto do lago, só casas).</li>
-        </ul>
-        <div class="fl" style="--fw:15mm"><img src="media/geo3/t_paraty.jpg?v=0db6c331741" alt=""><ul class="lst">
-          <li><b>paralelepípedo</b>: cidades mais antigas ou históricas (Paraty, RJ)</li>
-          
-          <li><b>terra batida</b>: sem calçamento, mais comum em áreas rurais</li></ul></div>
-      </div>
+      <ul class="lst tres">
+        <li><b>Nas cidades</b>: ruas e avenidas.</li>
+        <li><b>Entre as cidades</b>: rodovias e estradas de terra ou asfaltadas.</li>
+        <li><b>terra batida</b>: sem calçamento, mais comum em áreas rurais</li>
+      </ul>
     </section>
 
     <section class="sec t7" data-topico="T7" id="pk-T7">
       <h2><span class="n">7</span>Bairro e cidade</h2>
       <div class="ordem"><span>casa</span>&rsaquo;<span>rua</span>&rsaquo;<span>bairro</span>&rsaquo;<span>cidade</span></div>
+      <div class="figs" style="--n:3;--fh:10.5mm">
+        <figure><img src="media/geo3/t_bairro_praia.jpg?v=4ce975b1845" alt=""><b>Cabo Branco</b>João Pessoa (PB)</figure>
+        <figure><img src="media/geo3/t_bairro_sb.jpg?v=4ce975b1845" alt=""><b>Santa Bárbara</b>(BA)</figure>
+        <figure><img src="media/geo3/t_rua_lojas.jpg?v=4ce975b1845" alt=""><b>rua de lojas</b>pessoas circulando</figure>
+      </div>
       <ul class="lst">
         <li>A cidade tem <b>vários bairros</b>.</li>
         <li>Bairro = <b>conjunto de ruas</b> e quarteirões; nos bairros há escolas, praças, mercados, farmácias, hospitais, pontos de ônibus.</li>
@@ -211,19 +248,44 @@ b{font-weight:850}
 
     <section class="sec t8" data-topico="T8" id="pk-T8">
       <h2><span class="n">8</span>Transporte e trabalho na cidade</h2>
-      <div class="figs" style="--n:4;--fh:11mm">
-        <figure><img src="media/geo3/t_professora.jpg?v=0db6c331741" alt=""><b>professora</b></figure>
-        <figure><img src="media/geo3/t_gari.jpg?v=0db6c331741" alt=""><b>gari</b>mantém as ruas limpas</figure>
-        <figure><img src="media/geo3/t_agente.jpg?v=0db6c331741" alt=""><b>agente de trânsito</b></figure>
-        <figure><img src="media/geo3/t_motorista.jpg?v=0db6c331741" alt=""><b>motorista de ônibus</b></figure>
+      <div class="duas" style="grid-template-columns:minmax(0,1fr) 37mm;align-items:start">
+        <div class="col">
+          <div class="lbl">Trabalham na cidade:</div>
+          <div class="figs" style="--n:5;--fh:9mm">
+            <figure><img src="media/geo3/q_professora.jpg?v=4ce975b1845" alt=""><b>professora</b></figure>
+            <figure><img src="media/geo3/q_gari.jpg?v=4ce975b1845" alt=""><b>gari</b>mantém as ruas limpas</figure>
+            <figure><img src="media/geo3/t_agente.jpg?v=4ce975b1845" alt=""><b>agente de trânsito</b></figure>
+            <figure><img src="media/geo3/q_motorista.jpg?v=4ce975b1845" alt=""><b>motorista de ônibus</b></figure>
+            <figure><img src="media/geo3/p_cozinheiro.jpg?v=4ce975b1845" alt=""><b>cozinheiro</b></figure>
+            <figure><img src="media/geo3/p_cientista.jpg?v=4ce975b1845" alt=""><b>cientista</b></figure>
+            <figure><img src="media/geo3/p_pedreiro.jpg?v=4ce975b1845" alt=""><b>pedreiro</b></figure>
+            <figure><img src="media/geo3/p_entregador.jpg?v=4ce975b1845" alt=""><b>entregador</b></figure>
+            <figure><img src="media/geo3/p_policiais.jpg?v=4ce975b1845" alt=""><b>policiais</b></figure>
+            <figure><img src="media/geo3/p_medica.jpg?v=4ce975b1845" alt=""><b>médica</b></figure>
+          </div>
+        </div>
+        <figure class="fg ct" style="--fh:31mm"><img src="media/geo3/p_rota_transporte.jpg?v=4ce975b1845" alt=""><span>jogo da rota: casa → <b class="i">ponto de ônibus</b> → escola</span></figure>
       </div>
       <div class="def">Deslocar-se: <b>a pé</b>, <b>bicicleta</b>, <b>carro</b>, <b>ônibus</b>, <b>moto</b>; na rodovia também <b>caminhões</b>. O ônibus leva para <b>trabalhar ou estudar</b> em outro bairro: "Sou professora, vou de ônibus até a escola".</div>
-      <div class="def">Também trabalham na cidade: cozinheiro, cientista, pedreiro, entregador, policiais, médica.</div>
     </section>
+
+  </main>
+</div>
+
+<!-- ===================== VERSO: UNIDADE 4 ===================== -->
+<div class="page verso">
+  <header class="topo">
+    <h1>Guardiões da Casa Maior — Pocket Card de Geografia<small>prova em 12/11</small></h1>
+    <div class="un"><span>Unidade 4 · meio ambiente, nossa casa maior</span><span class="lado">VERSO</span></div>
+  </header>
+  <main class="grade">
 
     <section class="sec t9" data-topico="T9" id="pk-T9">
       <h2><span class="n">9</span>Meio ambiente</h2>
-      <img src="media/geo3/t_ilha.jpg?v=0db6c331741" alt="" style="width:100%;height:9mm;object-fit:cover;border-radius:1.2mm">
+      <div class="duas" style="grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)">
+        <figure class="fg" style="--fh:25mm"><img src="media/geo3/p_planeta.jpg?v=4ce975b1845" alt=""><b>meio ambiente</b>a casa de todos os seres vivos</figure>
+        <figure class="fg" style="--fh:25mm"><img src="media/geo3/t_ilha.jpg?v=4ce975b1845" alt=""><b>a casa é bem maior</b>mares, florestas, céus</figure>
+      </div>
       <div class="def">A casa é bem <b>maior</b>: ruas, parques, montanhas, mares, florestas, céus. Ela se chama <b>meio ambiente</b>.</div>
       <div class="def">Árvores, animais, pedras, água, ar, solo, Sol, chuva… e <b>nós também</b>!</div>
       <div class="def">A casa de <b>todos os seres vivos</b>: cuidar dela é cuidar de nós mesmos.</div>
@@ -231,59 +293,87 @@ b{font-weight:850}
 
     <section class="sec t10" data-topico="T10" id="pk-T10">
       <h2><span class="n">10</span>Sons da natureza</h2>
+      <img src="media/geo3/t_janela.jpg?v=4ce975b1845" alt="" style="width:100%;height:30mm;object-fit:cover;border-radius:1.4mm;display:block">
       <div class="def">Na grande casa moram juntos: pessoas, animais, plantas, rios, nuvens, ventos e até os <b>sons da natureza</b>. Eles <b>fazem parte</b> do meio ambiente.</div>
       <div class="def">A cidade também tem <b>sons</b>.</div>
-      <img src="media/geo3/t_janela.jpg?v=0db6c331741" alt="" style="width:100%;height:10mm;object-fit:cover;border-radius:1.2mm">
-    </section>
-
-    <section class="sec t11" data-topico="T11" id="pk-T11">
-      <h2><span class="n">11</span>Fauna e flora: os 6 biomas do Brasil<em><b>fauna</b> = animais · <b>flora</b> = plantas</em></h2>
-      <div class="bioma">
-        <img src="media/geo3/t_mapa_biomas.jpg?v=0db6c331741" alt="">
-        <div class="bls">
-          <div class="bl bh"><span>bioma</span><span>vegetação</span><span>animais</span><span>planta · cartaz</span></div>
-          <div class="bl" style="--bc:#9ccc3c"><span class="bn">Amazônia<small>Norte</small></span><span>árvores altas, muitas folhas</span><span>onça-pintada, macaco, arara</span><span>vitória-régia · <b>maior bioma</b></span></div>
-          <div class="bl" style="--bc:#f06fae"><span class="bn">Cerrado<small>Centro</small></span><span>árvores tortas e grama</span><span>lobo-guará, tamanduá-bandeira</span><span>sempre-viva · 2º maior bioma</span></div>
-          <div class="bl" style="--bc:#e8d44d"><span class="bn">Caatinga<small>Nordeste</small></span><span>plantas com espinhos (cactos)</span><span>tatu, veado-catingueiro, asa-branca</span><span>louro-preto · bioma que <b>só existe no Brasil</b></span></div>
-          <div class="bl" style="--bc:#f58b4c"><span class="bn">Pampa<small>Sul</small></span><span>campos com capim baixo</span><span>cavalo, ema, quero-quero, capivara</span><span>capim-dos-pampas · bioma só no RS</span></div>
-          <div class="bl" style="--bc:#d9a3d4"><span class="bn">Pantanal<small>MT e MS</small></span><span>plantas que gostam de água</span><span>jacaré, tuiuiú, sucuri, capivara</span><span>bromélias na área alagada · área úmida</span></div>
-          <div class="bl" style="--bc:#7cc0ea"><span class="bn">Mata Atlântica<small>Litoral</small></span><span>floresta úmida e densa</span><span>mico-leão-dourado, preguiça</span><span>bromélia · bioma muito reduzido</span></div>
-        </div>
-      </div>
-      <div class="atencao"><b>Pode ser mais de uma:</b> na tabela e nas fotos, a capivara aparece no Pampa e no Pantanal; a bromélia, na Mata Atlântica e no Pantanal. Os biomas são a riqueza natural do país e <b>precisam ser cuidados</b>.</div>
     </section>
 
     <section class="sec t12" data-topico="T12" id="pk-T12">
       <h2><span class="n">12</span>Preservação</h2>
-      <div class="def">As plantas: <b>ar limpo</b>, <b>protegem o solo</b>, <b>alimento e abrigo</b> para os animais; ambiente bonito e equilibrado.</div>
-      <div class="fl" style="--fw:13mm"><img src="media/geo3/t_desmatamento.jpg?v=0db6c331741" alt=""><div class="def"><b>Desmatamento</b> (agricultura, pasto para gado, cidades) → <b>perda do hábitat</b>.</div></div>
-      <ul class="lst"><li>lixo nas margens dos rios</li><li>enchentes e ruas alagadas</li><li>ar e água poluídos</li><li>calor, ar seco, áreas agrícolas secas</li></ul>
-      <div class="def">Responsabilidade <b>coletiva</b>, bem comum; ajuda a manter a <b>qualidade de vida</b> das futuras gerações.</div>
+      <div class="duas" style="grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);flex:1 1 auto;min-height:0">
+        <div class="col" style="justify-content:space-between">
+          <div class="figs" style="--n:2;--fh:23mm">
+            <figure><img src="media/geo3/q_floresta_preservada.jpg?v=4ce975b1845" alt=""><b>floresta</b>araras-azuis</figure>
+            <figure><img src="media/geo3/q_desmatamento.jpg?v=4ce975b1845" alt=""><b>desmatamento</b>floresta derrubada</figure>
+          </div>
+          <div class="def">As plantas: <b>ar limpo</b>, <b>protegem o solo</b>, <b>alimento e abrigo</b> para os animais; ambiente bonito e equilibrado.</div>
+        </div>
+        <div class="col" style="justify-content:space-between">
+          <div class="def"><b>Desmatamento</b> (agricultura, pasto para gado, cidades) → <b>perda do hábitat</b>.</div>
+          <ul class="lst"><li>lixo nas margens dos rios</li><li>enchentes e ruas alagadas</li><li>ar e água poluídos</li><li>calor, ar seco, áreas agrícolas secas</li></ul>
+          <div class="def">Responsabilidade <b>coletiva</b>, bem comum; ajuda a manter a <b>qualidade de vida</b> das futuras gerações.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec t11" data-topico="T11" id="pk-T11">
+      <h2><span class="n">11</span>Fauna e flora: os 6 biomas do Brasil<em>em cada bioma: o lugar · um animal · uma planta</em></h2>
+      <div class="biomas">
+        <div class="mapa">
+          <figure class="fg ct"><img src="media/geo3/q_mapa_biomas.jpg?v=4ce975b1845" alt=""><b>mapa dos biomas</b>os 6 biomas do Brasil</figure>
+          <div class="tl" style="--tw:11mm"><b>fauna</b><span>= animais</span><b>flora</b><span>= plantas</span></div>
+          <div class="atencao"><b>Pode ser mais de uma:</b> na tabela e nas fotos, a capivara aparece no Pampa e no Pantanal; a bromélia, na Mata Atlântica e no Pantanal.</div>
+          <div class="def">Os biomas são a riqueza natural do país e <b>precisam ser cuidados</b>.</div>
+        </div>
+        <div class="cards">
+          <div class="bc" style="--bc:#9ccc3c"><h3><span class="dot"></span>Amazônia<small>Norte</small><span class="fato">maior bioma</span></h3>
+            <div class="fot"><figure><img src="media/geo3/q_amazonia.jpg?v=4ce975b1845" alt="">Amazônia</figure><figure><img src="media/geo3/q_arara.jpg?v=4ce975b1845" alt="">arara</figure><figure><img src="media/geo3/q_vitoria_regia.jpg?v=4ce975b1845" alt="">vitória-régia</figure></div>
+            <div class="tx"><b>vegetação</b><span>árvores altas, muitas folhas</span><b>animais</b><span>onça-pintada, macaco, arara</span></div></div>
+          <div class="bc" style="--bc:#f06fae"><h3><span class="dot"></span>Cerrado<small>Centro</small><span class="fato">2º maior bioma</span></h3>
+            <div class="fot"><figure><img src="media/geo3/q_cerrado.jpg?v=4ce975b1845" alt="">Cerrado</figure><figure><img src="media/geo3/q_lobo_guara.jpg?v=4ce975b1845" alt="">lobo-guará</figure><figure><img src="media/geo3/q_sempre_viva.jpg?v=4ce975b1845" alt="">sempre-viva</figure></div>
+            <div class="tx"><b>vegetação</b><span>árvores tortas e grama</span><b>animais</b><span>lobo-guará, tamanduá-bandeira</span></div></div>
+          <div class="bc" style="--bc:#e8c43d"><h3><span class="dot"></span>Caatinga<small>Nordeste</small><span class="fato">só existe no Brasil</span></h3>
+            <div class="fot"><figure><img src="media/geo3/q_caatinga.jpg?v=4ce975b1845" alt="">Caatinga</figure><figure><img src="media/geo3/q_asa_branca.jpg?v=4ce975b1845" alt="">asa-branca</figure><figure><img src="media/geo3/q_louro_preto.jpg?v=4ce975b1845" alt="">louro-preto</figure></div>
+            <div class="tx"><b>vegetação</b><span>plantas com espinhos (cactos)</span><b>animais</b><span>tatu, veado-catingueiro, asa-branca</span></div></div>
+          <div class="bc" style="--bc:#f58b4c"><h3><span class="dot"></span>Pampa<small>Sul</small><span class="fato">bioma só no RS</span></h3>
+            <div class="fot"><figure><img src="media/geo3/q_pampa_gado.jpg?v=4ce975b1845" alt="">Pampa</figure><figure><img src="media/geo3/q_quero_quero.jpg?v=4ce975b1845" alt="">quero-quero</figure><figure><img src="media/geo3/q_capim_pampas.jpg?v=4ce975b1845" alt="">capim-dos-pampas</figure></div>
+            <div class="tx"><b>vegetação</b><span>campos com capim baixo</span><b>animais</b><span>cavalo, ema, quero-quero, capivara</span></div></div>
+          <div class="bc" style="--bc:#c98bc4"><h3><span class="dot"></span>Pantanal<small>MT e MS</small><span class="fato">área úmida</span></h3>
+            <div class="fot"><figure><img src="media/geo3/q_pantanal.jpg?v=4ce975b1845" alt="">Pantanal</figure><figure><img src="media/geo3/q_capivara.jpg?v=4ce975b1845" alt="">capivara</figure><figure><img src="media/geo3/q_bromelia_alagada.jpg?v=4ce975b1845" alt="">bromélias na área alagada</figure></div>
+            <div class="tx"><b>vegetação</b><span>plantas que gostam de água</span><b>animais</b><span>jacaré, tuiuiú, sucuri, capivara</span></div></div>
+          <div class="bc" style="--bc:#5fb0e0"><h3><span class="dot"></span>Mata Atlântica<small>Litoral</small><span class="fato">muito reduzido</span></h3>
+            <div class="fot"><figure><img src="media/geo3/q_mata_atlantica.jpg?v=4ce975b1845" alt="">Mata Atlântica</figure><figure><img src="media/geo3/q_mico.jpg?v=4ce975b1845" alt="">mico-leão-dourado</figure><figure><img src="media/geo3/q_bromelia.jpg?v=4ce975b1845" alt="">bromélia</figure></div>
+            <div class="tx"><b>vegetação</b><span>floresta úmida e densa</span><b>animais</b><span>mico-leão-dourado, preguiça</span></div></div>
+        </div>
+      </div>
     </section>
 
   </main>
 </div>
+
 </div></div>
 <script>
 function encaixa(){var e=document.getElementById('escala'),p=e.firstElementChild,l=p.offsetWidth,a=p.offsetHeight,
-  bar=document.querySelector('.tela'),bh=bar?bar.offsetHeight:0,g=window.innerWidth<600?8:16,
-  W=document.documentElement.clientWidth-2*g,H=window.innerHeight-bh-24,k=Math.min(W/l,H/a);
-  if(window.innerWidth<window.innerHeight&&window.innerWidth<1000)k=W/l; /* em pé (celular/tablet): folha inteira na largura; pinça amplia */
-  e.style.transform='scale('+k+')';e.style.height=(a*k)+'px';e.style.width=l+'px';e.style.marginLeft=Math.round((document.documentElement.clientWidth-l*k)/2)+'px';}
+  g=window.innerWidth<600?8:16,cw=document.documentElement.clientWidth,W=cw-2*g,
+  vao=parseFloat(getComputedStyle(e).gap)||0,lado=cw>=2200; /* tela muito larga: as duas folhas lado a lado */
+  e.classList.toggle('lado',lado);
+  var k=lado?(W-vao)/(2*l):W/l; /* cada folha escalada para a largura útil, proporção A4 fixa */
+  var ew=lado?2*l+vao:l, eh=lado?a:2*a+vao;
+  e.style.transform='scale('+k+')';e.style.height=(eh*k)+'px';e.style.width=ew+'px';e.style.marginLeft=Math.round((cw-ew*k)/2)+'px';}
 window.addEventListener('resize',encaixa);window.addEventListener('load',encaixa);encaixa();
 /* para o vídeo: GEO3_POCKET.foco('T3') realça e mostra o bloco */
 window.GEO3_POCKET={blocos:function(){return [].map.call(document.querySelectorAll('section.sec[data-topico]'),function(s){return s.id;});},
   foco:function(t){document.querySelectorAll('section.sec.foco').forEach(function(s){s.classList.remove('foco');});var s=document.getElementById('pk-'+t);if(s){s.classList.add('foco');s.scrollIntoView({block:'center'});}return !!s;}};
 </script>
 <div id="vpOv" hidden style="position:fixed;inset:0;z-index:99;background:rgba(5,10,20,.92);display:flex;align-items:center;justify-content:center;padding:12px">
-  <video id="vpVid" controls playsinline preload="none" poster="media/geo3/video_pocket_poster.jpg?v=0db6c331741" style="max-width:100%;max-height:calc(100vh - 80px);border-radius:12px;background:#000">
-    <source src="media/geo3/video_pocket.mp4?v=0db6c331741" type="video/mp4">
+  <video id="vpVid" controls playsinline preload="none" data-poster="media/geo3/video_pocket_poster.jpg?v=4ce975b1845" style="max-width:100%;max-height:calc(100vh - 80px);border-radius:12px;background:#000">
+    <source src="media/geo3/video_pocket.mp4?v=4ce975b1845" type="video/mp4">
     <track kind="captions" srclang="pt-BR" label="Legenda" src="media/geo3/video_pocket.vtt">
   </video>
   <button onclick="fechaVideoPocket()" aria-label="Fechar o vídeo" title="Fechar o vídeo" style="position:absolute;top:10px;right:10px;min-width:48px;min-height:48px;border-radius:14px;border:0;font-size:22px;font-weight:800;background:#fff;color:#0f172a;cursor:pointer">&#10005;</button>
 </div>
 <script>
-function abreVideoPocket(){ var o=document.getElementById('vpOv'); o.hidden=false; o.style.display='flex'; try{document.getElementById('vpVid').play();}catch(e){} }
+function abreVideoPocket(){ var o=document.getElementById('vpOv'), v=document.getElementById('vpVid'); if(!v.poster&&v.dataset.poster) v.poster=v.dataset.poster; /* poster só ao abrir: o vídeo está fora do ar */ o.hidden=false; o.style.display='flex'; try{document.getElementById('vpVid').play();}catch(e){} }
 function fechaVideoPocket(){ var o=document.getElementById('vpOv'), v=document.getElementById('vpVid'); try{v.pause();}catch(e){} o.hidden=true; o.style.display='none'; }
 document.getElementById('vpOv').style.display='none';
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') fechaVideoPocket(); });
