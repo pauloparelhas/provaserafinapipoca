@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='9322b221659';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='df855021728';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,7 +14,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f2eee3">
 <title>Geografia · Teoria</title>
-<link rel="stylesheet" href="serafina-core.css?v=9322b221659">
+<link rel="stylesheet" href="serafina-core.css?v=df855021728">
 <style>
 /* ============================================================
    GEO3_estudo — a TEORIA de Geografia (3º tri, prova ESCRITA em português
@@ -1288,6 +1288,59 @@ body:not(.light) .rev.rf .rnome{color:color-mix(in srgb,var(--bc,var(--lc)) 45%,
 @media (max-height:520px) and (min-width:600px){ .arr-cx:has(> .arr-c:nth-child(5)) .arr-c{min-height:44px;padding:4px} .arr-cx:has(> .arr-c:nth-child(5)) .arr-den:empty::after{padding:0;font-size:.7rem} }
 @media (max-height:520px) and (min-width:600px){ .arr-cx:has(> .arr-c:nth-child(5)){grid-template-columns:repeat(3,minmax(0,1fr))!important} }
 @media (max-height:520px) and (min-width:600px){ .arr-itens .arr-it{min-height:36px;padding:2px 10px} }
+
+/* =====================================================================
+   v5 (08/11, Paulo: "simplifique; a teoria deve ser extremamente simples e informativa").
+   UM molde: titulo (termo em cor) -> figura da escola GRANDE -> 2-4 linhas "termo — explicacao",
+   alinhadas a esquerda, sem caixa. Comparacao = colunas iguais com o mesmo molde.
+   ===================================================================== */
+.lh h2 em{font-style:normal;color:var(--lch,var(--lcd))}
+.m1{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:var(--g-grupo);align-items:center}
+.m1.larga{grid-template-columns:minmax(0,1.75fr) minmax(0,1fr)}
+.m1.topo{grid-template-columns:minmax(0,1fr)}
+.mq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4)}
+.mqf{margin:0;display:flex;flex-direction:column;gap:var(--s-1);min-width:0}
+.mqf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-chip)}
+.mqf figcaption{font-size:var(--t-1);font-weight:800;color:var(--k-tinta2)}
+.mfig{margin:0;display:flex;flex-direction:column;align-items:flex-start;gap:var(--s-2);min-width:0}
+.mfig>img{display:block;width:100%;height:auto;border-radius:var(--r-fig);object-fit:contain}
+.mfig>.ninho{display:flex;width:100%;max-width:none;margin:0;height:clamp(180px,54vh,500px);max-height:var(--imx,54vh)}
+.corpo.encx .mfig>.ninho{width:100%!important}
+.mfig .ninho .nn{flex:1;width:auto;padding:var(--s-3) var(--s-4) var(--s-4);gap:var(--s-3);border-width:3px}
+.mfig .ninho .nn .nn{width:88%;align-self:center}
+.mfig .ninho .nn-r{font-size:var(--t-3);padding:4px 18px}
+.mfig figcaption{font-size:var(--t-1);font-weight:700;color:var(--k-tinta2);text-align:left;line-height:1.3}
+.mlin{display:flex;flex-direction:column;gap:var(--s-5);min-width:0;text-align:left}
+.ml{margin:0;font-size:var(--t-3);line-height:1.45;color:var(--k-tinta);font-weight:600}
+.corpo .ml b.mt{color:var(--lch);font-family:var(--f-disp);font-weight:800;font-size:1.06em}
+.mg{display:grid;grid-template-columns:repeat(var(--mc),minmax(0,1fr));gap:var(--g-grupo);align-items:start}
+.mcol{display:flex;flex-direction:column;gap:var(--s-4);min-width:0}
+.mg .mfig>img{aspect-ratio:4/3;object-fit:cover}
+.mg.cont .mfig>img{aspect-ratio:auto;object-fit:contain;max-height:46vh;width:auto;max-width:100%;background:#fff}
+.mg.cont .mcol{align-items:center}.mg.cont .mfig{align-items:center}
+.corpo.encx .mfig img{height:var(--imx)!important;width:auto!important;max-height:none!important;max-width:100%!important;margin-left:0;margin-right:0}
+.corpo.encx .mg.cont .mfig>img{margin-left:auto;margin-right:auto}
+.mtab{border-collapse:separate;border-spacing:0 6px;width:100%;font-size:var(--t-2);line-height:1.3}
+.mtab th{text-align:left;font-family:var(--f-disp);font-weight:700;color:var(--k-tinta2);padding:0 10px 2px}
+.mtab td{padding:6px 10px;background:var(--k-papel);color:var(--k-tinta);vertical-align:middle}
+.mtab td:first-child{border-left:8px solid var(--bc);border-radius:10px 0 0 10px;white-space:nowrap}
+.mtab td:last-child{border-radius:0 10px 10px 0}
+.corpo .mtab b.rot{color:var(--k-tinta)}
+@media (max-width:699px){
+  .m1,.m1.larga,.mg{grid-template-columns:minmax(0,1fr)}
+  .mfig>img{max-height:var(--imx,40vh);width:auto;max-width:100%}
+  .mg .mfig>img{aspect-ratio:auto}
+  .ml{font-size:var(--t-2)}
+  .mtab{font-size:var(--t-1)}.mtab td{padding:4px 6px}.mtab td:first-child{white-space:normal}
+}
+@media (min-width:700px) and (max-width:1023px) and (orientation:portrait){ .m1,.m1.larga{grid-template-columns:minmax(0,1fr)} }
+@media (max-height:520px) and (min-width:600px){
+  .m1,.m1.larga{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+  .ml{font-size:var(--t-2);line-height:1.35}.mlin{gap:var(--s-3)}
+  .mtab{font-size:var(--t-1);border-spacing:0 3px;line-height:1.15}.mtab td{padding:2px 6px}.mtab th{padding:0 6px}
+  .m1:has(.mtab){grid-template-columns:minmax(0,.6fr) minmax(0,1.6fr)}
+}
+.chegada.marco{min-height:40px;padding:0 12px;background:var(--k-papel);color:var(--k-mata);box-shadow:none;border:2px solid var(--k-linha2);font-size:20px}
 </style>
 </head>
 <body>
@@ -1322,8 +1375,8 @@ body:not(.light) .rev.rf .rnome{color:color-mix(in srgb,var(--bc,var(--lc)) 45%,
 </div>
 
 <script>window.SERA_PT=true; /* antes do core: senão o cadeado injeta o aviso bilíngue */ window.SERA_CFG={trKey:null,lang:'pt-BR',voz:'antonio',rate:.9,home:'../index.html',somKey:'geo3_som',stars:80};</script>
-<script src="serafina-core.js?v=9322b221659"></script>
-<script src="OP_voz.js?v=9322b221659"></script>
+<script src="serafina-core.js?v=df855021728"></script>
+<script src="OP_voz.js?v=df855021728"></script>
 <script>
 /* ícones por tema (cores da BIBLIA_GEO3) */
 window.GEO3ARTE={icone:function(k){ var c={urbano:'#0ea5e9',sinal:'#ef4444',direcoes:'#f59e0b',referencia:'#a855f7',mapas:'#14b8a6',ruas:'#6366f1',bairro:'#f97316',transporte:'#2563eb',ambiente:'#22c55e',sons:'#06b6d4',biomas:'#84cc16',preservacao:'#16a34a'}[k]||'#22c55e';
@@ -1342,7 +1395,7 @@ window.GEO3ARTE={icone:function(k){ var c={urbano:'#0ea5e9',sinal:'#ef4444',dire
   return '<svg class="licic" viewBox="0 0 36 36" width="40" height="40" aria-hidden="true">'+d+'</svg>'; },
  figura:function(){ return ''; }, cena:function(){ return ''; }};
 </script>
-<script src="GEO3_estudo_licoes.js?v=9322b221659"></script>
+<script src="GEO3_estudo_licoes.js?v=df855021728"></script>
 <script>
 /* ============================================================
    MOTOR DO ESTUDO — navegação, telinhas e treininho.
@@ -1392,7 +1445,7 @@ function montaTelas(lic){
   banco.forEach(function(it,n){
     t.push({tipo:'treino', tit:'Treino', item:it, n:n+1, tot:banco.length});
   });
-  t.push({tipo:'fim', tit:'Lição concluída!'});
+  t.push({tipo:'fim', tit:'Pronto!'});
   return t;
 }
 function abre(n){
@@ -1679,11 +1732,11 @@ R.fim=function(){
   var prox=LICOES[est.lic+1];
   return {html:'<div class="fim"><svg class="selo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="var(--ok)"/>'+
       '<path d="M28 52l15 15 30-32" stroke="#06251a" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
-      '<h2>Lição concluída!</h2><p>'+lic.nome+'</p>'+
+      '<h2>Muito bem!</h2><p>'+lic.nome+'</p>'+
       
-      '<div class="btnrow">'+(prox?'<button class="btn" data-a="prox">Próxima lição: '+prox.nome+'</button>':'')+
-      '<a class="btn" href="GEO3_simulado.html?v=9322b221659" style="text-decoration:none;text-align:center">Simulado &#8250;</a><button class="btn calmo" data-a="capa">Todas as lições</button></div></div>',
-    fala:'Lição concluída! '+puro(lic.nome),
+      '<div class="btnrow">'+(prox?'<button class="btn" data-a="prox">Próxima lição &#8250;</button>':'')+
+      '<button class="btn calmo" data-a="capa">Início das lições</button></div></div>',
+    fala:'Muito bem! '+puro(lic.nome),
     init:function(el){
       var p=el.querySelector('[data-a="prox"]'); if(p) p.onclick=function(){ abre(est.lic+1); };
       el.querySelector('[data-a="capa"]').onclick=capa;
@@ -1716,10 +1769,10 @@ function renderCapa(){
     return '<div class="unid u'+u+'"><h2 class="utit">'+tit+'</h2><div class="uparadas">'+LICOES.map(function(l,i){ return l.unid===u?parada(l,i):''; }).join('')+'</div></div>';
   }
   tela.innerHTML='<div class="mapa-capa"><div class="mc-top">'+BEMTEVI+
-    '<div><h1>Guardiões da Casa Maior</h1><p>Teoria de Geografia · prova em 12/11</p></div></div>'+
+    '<div><h1>Guardiões da Casa Maior</h1><p>Teoria de Geografia</p></div></div>'+
     '<div class="trilha"><svg class="rota" aria-hidden="true"></svg>'+
     unidade(3,'Unidade 3 · Ruas, deslocamentos e transportes')+unidade(4,'Unidade 4 · Meio ambiente, nossa casa maior')+
-    '<div class="mc-pe"><a class="chegada" href="GEO3_simulado.html?v=9322b221659">Simulado &#8250;</a>'+
+    '<div class="mc-pe"><span class="chegada marco" aria-hidden="true">&#9873;</span>'+
     '<div class="mc-placar"><span>'+n+' de '+LICOES.length+' feitas</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div></div></div></div>';
   tela.querySelectorAll('.parada').forEach(function(b){ b.onclick=function(){ abre(+b.dataset.i); }; });
   desenhaRota();
@@ -1742,7 +1795,7 @@ function encaixa(){
   /* tela larga: dois quadros lado a lado antes de encolher figura */
   var qs=c.querySelectorAll(':scope>.caixa'); c.classList.remove('duas');
   if(innerWidth>=900 && qs.length===2){ c.classList.add('duas'); if(sobra()<=2) return; }
-  c.classList.add('encx'); var lo=c.querySelector('.revf')?(innerHeight<520?28:44):(innerWidth<600?84:60), hi=Math.max(64,Math.round(innerHeight*.6));
+  c.classList.add('encx'); var lo=c.querySelector('.revf')?(innerHeight<520?28:44):(innerWidth<600?84:60), hi=Math.max(64,Math.round(innerHeight*(c.querySelector('.m1,.mg')?.85:.6))); /* v5: a figura do molde pode crescer */
   for(var k=0;k<9;k++){ var m=Math.round((lo+hi)/2); c.style.setProperty('--imx',m+'px'); if(sobra()<=2) lo=m; else hi=m-1; }
   c.style.setProperty('--imx',lo+'px');
 }
@@ -1779,7 +1832,7 @@ function render(){
   /* v3: instrução de 1 linha só na 1ª vez de cada mecânica (nesta visita) */
   if(t.tipo!=='texto'){ if(vistaRegra[t.tipo]) corpo.classList.add('semregra'); vistaRegra[t.tipo]=1; }
   /* v3: o Bem-te-vi, guia discreto, pousa na figura do infográfico */
-  var igf=corpo.querySelector('.ig-fig'); if(igf) igf.insertAdjacentHTML('beforeend','<span class="btv">'+BEMTEVI+'</span>');
+  /* v5: sem passarinho pousado na figura (simplificar) */
   if(r.init) r.init(corpo);
   pintaCor();
   encaixa();
@@ -1826,8 +1879,9 @@ function pagina(){
   if(np) gs=[].slice.call(np.children);
   else if(d2) gs=[].filter.call(d2.children,function(e){ return !e.matches('.d2-g'); });
   else if(ig){ var tx=ig.querySelector(':scope>.ig-tx'); gs=tx?[].slice.call(tx.children):[]; fig=ig.querySelector(':scope>.ig-fig'); }
+  else if(c.querySelector(':scope>.m1')){ var m1=c.querySelector(':scope>.m1'); tx=m1.querySelector(':scope>.mlin'); gs=[].slice.call(tx.children); fig=m1.querySelector(':scope>.mfig'); }
   else gs=[].slice.call(c.children);
-  gs=[].concat.apply([],gs.map(function(g){ return g.matches('.fxs,.bios,.fots,.fxis')&&g.children.length>1?[].slice.call(g.children):[g]; }));
+  gs=[].concat.apply([],gs.map(function(g){ return g.matches('.fxs,.bios,.fots,.fxis,.mg')&&g.children.length>1?[].slice.call(g.children):[g]; }));
   if(gs.length===1 && gs[0].matches('.vs')) gs=[].filter.call(gs[0].children,function(e){ return !e.matches('.vs-x'); });
   /* figura EM CIMA das fichas (celular, tablet): ela abre a 1a parte; ao lado (computador): fica em todas */
   if(fig && tx){ var fr=fig.getBoundingClientRect(), tr=tx.getBoundingClientRect(); if(tr.left<fr.right-4) gs=[fig].concat(gs); }
@@ -1846,7 +1900,7 @@ function pagina(){
 function mostraParte(k){
   if(!parte.pags) return; parte.k=k;
   parte.pags.forEach(function(pg,j){ pg.forEach(function(g){ g.classList.toggle('pg-off',j!==k); }); });
-  var fg=tela.querySelector('.corpo .ig-fig'); if(fg && parte.pags[k].indexOf(fg)<0 && !parte.pags.some(function(pg){ return pg.indexOf(fg)>=0; })) fg.classList.remove('pg-off');
+  var fg=tela.querySelector('.corpo .ig-fig, .corpo .m1>.mfig'); if(fg && parte.pags[k].indexOf(fg)<0 && !parte.pags.some(function(pg){ return pg.indexOf(fg)>=0; })) fg.classList.remove('pg-off');
   encaixa();
   /* uma parte que ainda nao cabe com a figura ao lado: a parte segue sem a figura (ela ja apareceu na 1a) */
   if(k>0 && fg && !fg.classList.contains('pg-off') && sobraJ()>2){ fg.classList.add('pg-off'); encaixa(); }
@@ -1905,7 +1959,7 @@ window.GEO3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic
 <script>window.SERA_PT=true; window.SERA_ACCENT={accent:'#22c55e'};
 /* v4: sem tema escolhido, a teoria abre no CLARO (papel de mapa) sem gravar nada: as outras telas seguem com o padrão delas */
 window._geo3SemTema=(function(){ try{ return !localStorage.getItem('cie2_theme'); }catch(e){ return false; } })();</script>
-<script src="sera_theme.js?v=9322b221659"></script>
+<script src="sera_theme.js?v=df855021728"></script>
 <script>
 (function(){
   function v4(){
