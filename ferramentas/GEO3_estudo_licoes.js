@@ -41,7 +41,10 @@ function grade(cols,itens,larga){
 var COR={amz:'#9ccc3c',cer:'#f06fae',caa:'#e8d44d',pam:'#f58b4c',pan:'#d9a3d4',mat:'#7cc0ea'};
 var NOME={amz:'Amazônia',cer:'Cerrado',caa:'Caatinga',pam:'Pampa',pan:'Pantanal',mat:'Mata Atlântica'};
 var ORD=['amz','cer','caa','pam','pan','mat'];
-function bios(txt,so){ return '<div class="bios">'+(so||ORD).map(function(k){ var v=txt[k]; return FX(NOME[k],typeof v==='string'?[v]:v,{cor:COR[k],cl:'fxb'}); }).join('')+'</div>'; }
+/* v4: com fotos = cartao do bioma com a foto da escola + faixa na cor do mapa (referencia aprovada Biomas.dc) */
+var FOTO={amz:'t_amazonia',cer:'t_cerrado',caa:'t_caatinga',pam:'t_pampa',pan:'t_pantanal',mat:'t_mata'};
+function bios(txt,so,fotos){ return '<div class="bios">'+(so||ORD).map(function(k){ var v=txt[k], ds=typeof v==='string'?[v]:v;
+  return fotos?FXI(FOTO[k],NOME[k],ds,COR[k]).replace('class="fx fxi"','class="fx fxi fxb"'):FX(NOME[k],ds,{cor:COR[k],cl:'fxb'}); }).join('')+'</div>'; }
 function cxBio(){ return ORD.map(function(k){ return {k:k,t:NOME[k],cor:COR[k]}; }); }
 /* "Na prova": pergunta + resposta (oculta pela oclusão); f = figura opcional */
 function P(pede,resp,f){
@@ -134,20 +137,16 @@ function TEX(k){ var c={par:['#a8a29e','#78716c'],blo:['#94a3b8','#475569'],ter:
 /* rua larga × estreita, vista de cima */
 function LARG(k){ var w=k==='larga'?26:9, x=(32-w)/2; return '<svg class="ic via" viewBox="0 0 32 24" aria-hidden="true"><rect x="0" y="0" width="32" height="24" rx="4" fill="#86efac"/><rect x="'+x+'" y="0" width="'+w+'" height="24" fill="#475569"/><path d="M16 2v4M16 10v4M16 18v4" stroke="#fde047" stroke-width="2"/></svg>'; }
 /* o boneco de costas (como na figura do material) e as 4 direções */
+/* v4 (08/11, Paulo): nada de boneco inventado. A figura da ESCOLA (U3 S4: o menino de costas olhando
+   para a esquerda e para a direita) no centro, grande, e as 4 setas desenhadas em volta dela com rotulo forte. */
 function DIRS(){
-  var bon='<svg class="ig-svg bon" viewBox="0 0 140 160" aria-hidden="true">'+
-   '<path d="M70 26V4M60 14l10-10 10 10" stroke="#16a34a" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+
-   '<path d="M70 130v26M60 146l10 10 10-10" stroke="#9333ea" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+
-   '<path d="M26 84H3M13 74L3 84l10 10" stroke="#ea580c" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+
-   '<path d="M114 84h23M127 74l10 10-10 10" stroke="#2563eb" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+
-   '<path d="M52 100l-2 26M88 100l2 26" stroke="#334155" stroke-width="10" stroke-linecap="round"/>'+
-   '<path d="M50 62l-16 26M90 62l16 26" stroke="#7c5a2e" stroke-width="9" stroke-linecap="round"/>'+
-   '<circle cx="33" cy="90" r="7" fill="#ea580c" stroke="#fff" stroke-width="2"/><circle cx="107" cy="90" r="7" fill="#2563eb" stroke="#fff" stroke-width="2"/>'+
-   '<rect x="46" y="54" width="48" height="50" rx="14" fill="#7c5a2e"/>'+
-   '<circle cx="70" cy="40" r="15" fill="#3b2a1a"/><path d="M57 34c4-8 22-8 26 0" stroke="#5b4026" stroke-width="5" fill="none" stroke-linecap="round"/></svg>';
-  function d(cl,rot,cor,ic,det){ return '<div class="dr '+cl+'">'+FX(rot,[det],{cor:cor,ic:ic})+'</div>'; }
-  return '<div class="dirs">'+d('df','Frente','#16a34a','cima','para onde <b>queremos ir</b>')+d('de','Esquerda','#ea580c',null,'lado da mão <b>esquerda</b>')+
-    '<div class="dr db">'+bon+'</div>'+d('dd','Direita','#2563eb',null,'lado da mão <b>direita</b>')+d('da','Atrás','#9333ea',null,'por onde <b>já passamos</b>')+'</div>';
+  function seta(cl,rot,d,vb){ return '<span class="d2-s '+cl+'" aria-hidden="true"><svg viewBox="'+vb+'"><path d="'+d+'" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="rot">'+rot+'</span></span>'; }
+  var fig='<div class="d2-g"><img src="'+I('t_olhar')+'" alt="Menino de costas olhando para a esquerda e para a direita antes de atravessar">'+
+    seta('sf','frente','M22 48V8M8 22L22 8l14 14','0 0 44 52')+seta('sa','atrás','M22 4v40M8 30l14 14 14-14','0 0 44 52')+
+    seta('se','esquerda','M52 22H8M22 8L8 22l14 14','0 0 56 44')+seta('sd','direita','M4 22h44M34 8l14 14-14 14','0 0 56 44')+'</div>';
+  function d(cl,rot,cor,ic,det){ return '<div class="'+cl+'">'+FX(rot,[det],{cor:cor,ic:ic})+'</div>'; }
+  return '<div class="dirs2">'+d('d2-f','Frente','#16a34a','cima','para onde <b>queremos ir</b>')+d('d2-e','Esquerda','#ea580c','esq','lado da mão <b>esquerda</b>')+
+    fig+d('d2-d','Direita','#2563eb','seta','lado da mão <b>direita</b>')+d('d2-a','Atrás','#9333ea',null,'por onde <b>já passamos</b>')+'</div>';
 }
 var NP='Na prova';
 /* a tela "Na prova" fala só as perguntas: a resposta continua escondida */
@@ -543,7 +542,7 @@ var LS=[
    {m:'sempre-viva', img:'t_sempreviva', c:'Flora', d:'A sempre-viva é uma planta: flora.'}]},
  {tipo:'texto', tit:'Os 6 biomas do Brasil',
   fala:'Os 6 biomas do Brasil. Amazônia: Norte. Cerrado: Centro. Caatinga: Nordeste. Pampa: Sul. Pantanal: Mato Grosso e Mato Grosso do Sul. Mata Atlântica: Litoral. Os biomas e os animais são a riqueza natural do país e precisam ser cuidados.',
-  html:IG('t_mapa_biomas', bios({amz:['<b>Norte</b>'],cer:['<b>Centro</b>'],caa:['<b>Nordeste</b>'],pam:['<b>Sul</b>'],pan:['<b>Mato Grosso e Mato Grosso do Sul</b>'],mat:['<b>Litoral</b>']})+
+  html:IG('t_mapa_biomas', bios({amz:['<b>Norte</b>'],cer:['<b>Centro</b>'],caa:['<b>Nordeste</b>'],pam:['<b>Sul</b>'],pan:['<b>Mato Grosso e Mato Grosso do Sul</b>'],mat:['<b>Litoral</b>']},null,true)+
    FXS([FX('Riqueza natural do país',['os biomas e os animais',IC('coracao')+'precisam ser <b>cuidados</b>'],{ic:'escudo'})]),'mapa6')},
  {tipo:'revela', tit:'Como é a vegetação?', cols:3, regra:'Vire cada cartão para ver a vegetação.', q:'Vegetação?',
   fala:'Como é a vegetação? Vire cada cartão: Amazônia, Cerrado, Caatinga, Pampa, Pantanal e Mata Atlântica.',
