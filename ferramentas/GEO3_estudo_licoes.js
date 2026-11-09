@@ -35,6 +35,7 @@ function FIG(img,cap){ return '<figure class="mfig">'+(img.charAt(0)==='<'?img:'
 function M(img,cap,linhas,cl){ return '<div class="m1'+(cl?' '+cl:'')+'">'+FIG(img,cap)+'<div class="mlin">'+linhas.join('')+'</div></div>'; }
 /* quatro fotos da escola, cada uma com o seu nome (vai dentro da figura do molde 1) */
 function QUAD(fs){ return '<div class="mq">'+fs.map(function(f){ return '<figure class="mqf"><img src="'+I(f[0])+'" alt="'+f[1]+'"><figcaption>'+f[1]+'</figcaption></figure>'; }).join('')+'</div>'; }
+function TRIO(fs){ return QUAD(fs).replace('class="mq"','class="mq mq3"'); }
 function DUO(fs){ return QUAD(fs).replace('class="mq"','class="mq mq2"'); }
 /* molde 2: colunas iguais, cada uma figura + linhas; rodapé opcional (linhas embaixo) */
 function MC(cols,rod,o){ o=o||{};
@@ -268,22 +269,22 @@ var LS=[
   html:M('t_mapa_biomas','Os 6 biomas no mapa do Brasil',[LN('Os 6 biomas','Amazônia, Cerrado, Caatinga, Pampa, Pantanal e Mata Atlântica.')])},
  {tipo:'texto', tit:'<em>Amazônia</em>', bioma:'amz',
   fala:'Amazônia. Onde fica: Norte. Vegetação: árvores altas e muitas folhas. Animais: onça-pintada, macaco, arara. Planta: vitória-régia. O maior bioma do Brasil: quase metade do território.',
-  html:M(DUO([['t_amazonia','Amazônia'],['t_vitoria','vitória-régia']]),'',[LN('Onde fica','Norte.'),LN('Vegetação','árvores altas e muitas folhas.'),LN('Animais','onça-pintada, macaco, arara.'),LN('Planta','vitória-régia.'),LN('Tamanho','o maior bioma do Brasil: quase metade do território.')])},
+  html:M(TRIO([['t_amazonia','Amazônia'],['t_arara','arara'],['t_vitoria','vitória-régia']]),'',[LN('Onde fica','Norte.'),LN('Vegetação','árvores altas e muitas folhas.'),LN('Animais','onça-pintada, macaco, arara.'),LN('Planta','vitória-régia.'),LN('Tamanho','o maior bioma do Brasil: quase metade do território.')],'topo bio')},
  {tipo:'texto', tit:'<em>Cerrado</em>', bioma:'cer',
   fala:'Cerrado. Onde fica: Centro. Vegetação: árvores tortas, de caules retorcidos, e grama. Animais: lobo-guará, tamanduá-bandeira. Planta: sempre-viva. O segundo maior bioma do Brasil. É a savana brasileira.',
-  html:M(DUO([['t_cerrado','Cerrado'],['t_sempreviva','sempre-viva']]),'',[LN('Onde fica','Centro.'),LN('Vegetação','árvores tortas, de caules retorcidos, e grama.'),LN('Animais','lobo-guará, tamanduá-bandeira.'),LN('Planta','sempre-viva.'),LN('Tamanho','o segundo maior bioma do Brasil. É a savana brasileira.')])},
+  html:M(TRIO([['t_cerrado','Cerrado'],['t_loboguara','lobo-guará'],['t_sempreviva','sempre-viva']]),'',[LN('Onde fica','Centro.'),LN('Vegetação','árvores tortas, de caules retorcidos, e grama.'),LN('Animais','lobo-guará, tamanduá-bandeira.'),LN('Planta','sempre-viva.'),LN('Tamanho','o segundo maior bioma do Brasil. É a savana brasileira.')],'topo bio')},
  {tipo:'texto', tit:'<em>Caatinga</em>', bioma:'caa',
   fala:'Caatinga. Onde fica: Nordeste. Vegetação: plantas com espinhos (cactos). Animais: tatu, veado-catingueiro, asa-branca. Planta: louro-preto. Só existe no Brasil. Clima semiárido.',
-  html:M(DUO([['t_caatinga','Caatinga'],['t_louro','louro-preto']]),'',[LN('Onde fica','Nordeste.'),LN('Vegetação','plantas com espinhos (cactos).'),LN('Animais','tatu, veado-catingueiro, asa-branca.'),LN('Planta','louro-preto.'),LN('Só no Brasil','a Caatinga só existe no Brasil. Clima semiárido.')])},
+  html:M(TRIO([['t_caatinga','Caatinga'],['t_asabranca','asa-branca'],['t_louro','louro-preto']]),'',[LN('Onde fica','Nordeste.'),LN('Vegetação','plantas com espinhos (cactos).'),LN('Animais','tatu, veado-catingueiro, asa-branca.'),LN('Planta','louro-preto.'),LN('Só no Brasil','a Caatinga só existe no Brasil. Clima semiárido.')],'topo bio')},
  {tipo:'texto', tit:'<em>Pampa</em>', bioma:'pam',
   fala:'Pampa. Onde fica: Sul; no Brasil, só no Rio Grande do Sul. Vegetação: campos com capim baixo. Animais: cavalo, ema, quero-quero, capivara. Planta: capim-dos-pampas.',
-  html:M(DUO([['t_pampa','Pampa, com gado no campo'],['t_capim','capim-dos-pampas']]),'',[LN('Onde fica','Sul; no Brasil, só no Rio Grande do Sul.'),LN('Vegetação','campos com capim baixo.'),LN('Animais','cavalo, ema, quero-quero, capivara.'),LN('Planta','capim-dos-pampas.')])},
+  html:M(TRIO([['t_pampa','Pampa, com gado no campo'],['t_queroquero','quero-quero'],['t_capim','capim-dos-pampas']]),'',[LN('Onde fica','Sul; no Brasil, só no Rio Grande do Sul.'),LN('Vegetação','campos com capim baixo.'),LN('Animais','cavalo, ema, quero-quero, capivara.'),LN('Planta','capim-dos-pampas.')],'topo bio')},
  {tipo:'texto', tit:'<em>Pantanal</em>', bioma:'pan',
   fala:'Pantanal. Onde fica: Mato Grosso e Mato Grosso do Sul. Vegetação: plantas que gostam de água. Animais: jacaré, tuiuiú, sucuri, capivara. Planta: bromélias em área alagada. Uma das maiores áreas úmidas do planeta, com alagamentos.',
-  html:M(DUO([['t_pantanal','Pantanal'],['t_bromelia_agua','bromélias em área alagada']]),'',[LN('Onde fica','Mato Grosso e Mato Grosso do Sul.'),LN('Vegetação','plantas que gostam de água.'),LN('Animais','jacaré, tuiuiú, sucuri, capivara.'),LN('Planta','bromélias em área alagada.'),LN('Área úmida','uma das maiores áreas úmidas do planeta, com alagamentos.')])},
+  html:M(TRIO([['t_pantanal','Pantanal'],['t_capivara','capivara'],['t_bromelia_agua','bromélias em área alagada']]),'',[LN('Onde fica','Mato Grosso e Mato Grosso do Sul.'),LN('Vegetação','plantas que gostam de água.'),LN('Animais','jacaré, tuiuiú, sucuri, capivara.'),LN('Planta','bromélias em área alagada.'),LN('Área úmida','uma das maiores áreas úmidas do planeta, com alagamentos.')],'topo bio')},
  {tipo:'texto', tit:'<em>Mata Atlântica</em>', bioma:'mat',
   fala:'Mata Atlântica. Onde fica: Litoral. Vegetação: floresta úmida e densa. Animais: mico-leão-dourado, preguiça. Planta: bromélia. Muito rica, mas muito reduzida.',
-  html:M(DUO([['t_mata','Mata Atlântica'],['t_bromelia','bromélia']]),'',[LN('Onde fica','Litoral.'),LN('Vegetação','floresta úmida e densa.'),LN('Animais','mico-leão-dourado, preguiça.'),LN('Planta','bromélia.'),LN('Riqueza','muito rica, mas muito reduzida.')])}
+  html:M(TRIO([['t_mata','Mata Atlântica'],['t_mico','mico-leão-dourado'],['t_bromelia','bromélia']]),'',[LN('Onde fica','Litoral.'),LN('Vegetação','floresta úmida e densa.'),LN('Animais','mico-leão-dourado, preguiça.'),LN('Planta','bromélia.'),LN('Riqueza','muito rica, mas muito reduzida.')],'topo bio')}
 ]},
 
 /* T12. Preservação do meio ambiente (U4 S2, S3, S18–S22) */

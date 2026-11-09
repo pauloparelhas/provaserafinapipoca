@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='cf3381c0719';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='7100a4b0859';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,7 +14,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f2eee3">
 <title>Geografia · Teoria</title>
-<link rel="stylesheet" href="serafina-core.css?v=cf3381c0719">
+<link rel="stylesheet" href="serafina-core.css?v=7100a4b0859">
 <style>
 /* ============================================================
    GEO3_estudo — a TEORIA de Geografia (3º tri, prova ESCRITA em português
@@ -1303,6 +1303,23 @@ body:not(.light) .rev.rf .rnome{color:color-mix(in srgb,var(--bc,var(--lc)) 45%,
 .mqf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-chip)}
 .mqf figcaption{font-size:var(--t-1);font-weight:800;color:var(--k-tinta2)}
 @media (min-width:900px) and (min-height:600px){.mq2 .mqf img{aspect-ratio:4/5}}
+.secao{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:12px 16px;border-radius:18px;
+  background:color-mix(in srgb,var(--sc) 16%,var(--k-papel,#fff));border:2px solid color-mix(in srgb,var(--sc) 45%,transparent);
+  animation:secIn .45s ease-out}
+.secn{flex:0 0 auto;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--sc);color:#fff;
+  font:900 1.5rem/1 'Baloo 2',system-ui,sans-serif;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.sectx{display:flex;flex-direction:column;min-width:0}
+.sectx small{font-weight:800;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--k-tinta2,#4b5b58)}
+.sectx b{font:800 1.45rem/1.15 'Baloo 2',system-ui,sans-serif;color:var(--k-tinta,#1d2b29);text-wrap:balance}
+.mq3{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-3)}
+.mq3 .mqf img{aspect-ratio:4/3}
+@media (min-width:900px){.m1.bio .mlin{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--s-6);row-gap:var(--s-3)}}
+@media (max-width:600px){.mq3 .mqf img{aspect-ratio:1/1}}
+@media (max-height:420px){.secao{padding:3px 10px;margin-bottom:4px;gap:8px;border-width:1px}.secn{width:26px;height:26px;font-size:.95rem}.sectx small{display:none}.sectx b{font-size:1rem}}
+@keyframes secIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (max-height:520px){.secao{padding:6px 12px;margin-bottom:8px}.secn{width:36px;height:36px;font-size:1.15rem}.sectx b{font-size:1.15rem}}
+@media (prefers-reduced-motion:reduce){.secao{animation:none}}
+
 .mfig{margin:0;display:flex;flex-direction:column;align-items:flex-start;gap:var(--s-2);min-width:0}
 .mfig>img{display:block;width:100%;height:auto;border-radius:var(--r-fig);object-fit:contain}
 .mfig>.ninho{display:flex;width:100%;max-width:none;margin:0;height:clamp(180px,54vh,500px);max-height:var(--imx,54vh)}
@@ -1376,8 +1393,8 @@ body:not(.light) .rev.rf .rnome{color:color-mix(in srgb,var(--bc,var(--lc)) 45%,
 </div>
 
 <script>window.SERA_PT=true; /* antes do core: senão o cadeado injeta o aviso bilíngue */ window.SERA_CFG={trKey:null,lang:'pt-BR',voz:'antonio',rate:.9,home:'../index.html',somKey:'geo3_som',stars:80};</script>
-<script src="serafina-core.js?v=cf3381c0719"></script>
-<script src="OP_voz.js?v=cf3381c0719"></script>
+<script src="serafina-core.js?v=7100a4b0859"></script>
+<script src="OP_voz.js?v=7100a4b0859"></script>
 <script>
 /* ícones por tema (cores da BIBLIA_GEO3) */
 window.GEO3ARTE={icone:function(k){ var c={urbano:'#0ea5e9',sinal:'#ef4444',direcoes:'#f59e0b',referencia:'#a855f7',mapas:'#14b8a6',ruas:'#6366f1',bairro:'#f97316',transporte:'#2563eb',ambiente:'#22c55e',sons:'#06b6d4',biomas:'#84cc16',preservacao:'#16a34a'}[k]||'#22c55e';
@@ -1396,7 +1413,7 @@ window.GEO3ARTE={icone:function(k){ var c={urbano:'#0ea5e9',sinal:'#ef4444',dire
   return '<svg class="licic" viewBox="0 0 36 36" width="40" height="40" aria-hidden="true">'+d+'</svg>'; },
  figura:function(){ return ''; }, cena:function(){ return ''; }};
 </script>
-<script src="GEO3_estudo_licoes.js?v=cf3381c0719"></script>
+<script src="GEO3_estudo_licoes.js?v=7100a4b0859"></script>
 <script>
 /* ============================================================
    MOTOR DO ESTUDO — navegação, telinhas e treininho.
@@ -1446,7 +1463,7 @@ function montaTelas(lic){
   banco.forEach(function(it,n){
     t.push({tipo:'treino', tit:'Treino', item:it, n:n+1, tot:banco.length});
   });
-  t.push({tipo:'fim', tit:'Pronto!'});
+  /* 09/11 (Paulo): sem tela intermediaria de "Muito bem"; a lição seguinte abre com o cabeçalho de seção */
   return t;
 }
 function abre(n){
@@ -1826,7 +1843,10 @@ function render(){
   document.body.style.setProperty('--lc',cor);
   titulo.innerHTML='<small>Lição '+(est.lic+1)+' · Unidade '+lic.unid+'</small><span>'+lic.nome+'</span>';
   var r=(R[t.tipo]||R.texto)(t);
-  tela.innerHTML='<div class="lh">'+icDe(lic)+'<div class="lhtx"><small>Lição '+(est.lic+1)+' · '+lic.nome+'</small>'+
+  if(est.i===sessao.telas.length-1) marca(lic.k);
+  /* 09/11 (Paulo): no início de cada lição, cabeçalho de seção bem visível (mudou o assunto) */
+  var sec=est.i===0?'<div class="secao" style="--sc:'+cor+'"><span class="secn">'+(est.lic+1)+'</span><div class="sectx"><small>Unidade '+lic.unid+' · Lição '+(est.lic+1)+' de '+LICOES.length+'</small><b>'+lic.nome+'</b></div></div>':'';
+  tela.innerHTML=sec+'<div class="lh">'+icDe(lic)+'<div class="lhtx"><small>Lição '+(est.lic+1)+' · '+lic.nome+'</small>'+
     '<h2>'+t.tit+'</h2></div><button class="ouvir" aria-label="Ouvir">'+OUVIR+'</button></div>'+
     '<div class="corpo">'+r.html+'</div>';
   var corpo=tela.querySelector('.corpo');
@@ -1960,7 +1980,7 @@ window.GEO3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic
 <script>window.SERA_PT=true; window.SERA_ACCENT={accent:'#22c55e'};
 /* v4: sem tema escolhido, a teoria abre no CLARO (papel de mapa) sem gravar nada: as outras telas seguem com o padrão delas */
 window._geo3SemTema=(function(){ try{ return !localStorage.getItem('cie2_theme'); }catch(e){ return false; } })();</script>
-<script src="sera_theme.js?v=cf3381c0719"></script>
+<script src="sera_theme.js?v=7100a4b0859"></script>
 <script>
 (function(){
   function v4(){
