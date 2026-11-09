@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c3227a50917';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulado de Geografia (PDF)</title>
+<!-- Página de IMPRESSÃO de um simulado de 15 questões (GEO3). ?s=N escolhe o sorteio (o gen/pdf_geo3.py gera vários).
+     Questões = o MESMO GEO3_simulado_data.js do simulado (só itens aprovados); cotas por assunto do roteiro.
+     Última página: gabarito. A4 retrato. -->
+<style>
+@font-face{font-family:"Nunito";font-weight:200 1000;src:url(assets/fonts/nunito-latin.woff2) format("woff2")}
+@font-face{font-family:"Baloo 2";font-weight:400 800;src:url(assets/fonts/baloo2-latin.woff2) format("woff2")}
+@page{size:A4 portrait;margin:12mm 13mm 13mm}
+:root{--tinta:#1d2b29;--tinta2:#4b5b58;--linha:#cfd8d3}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--tinta);font:11pt/1.4 "Nunito",system-ui,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.cab{display:flex;align-items:center;gap:5mm;border-bottom:1.2pt solid var(--tinta);padding-bottom:3mm;margin-bottom:4mm}
+.cab h1{font:800 18pt/1.05 "Baloo 2",sans-serif;margin:0}
+.cab .nome{margin-top:2.5mm;font-weight:700;color:var(--tinta2)}
+.qr{display:flex;align-items:center;gap:2mm;font-size:7.5pt;font-weight:800;color:var(--tinta2);max-width:40mm}.qr img{width:18mm;height:18mm}
+ol.qs{list-style:none;margin:0;padding:0;columns:2;column-gap:8mm;column-rule:.5pt solid var(--linha)}
+.q{break-inside:avoid;margin:0 0 4.5mm}
+.q .n{display:inline-grid;place-items:center;width:6mm;height:6mm;border-radius:50%;background:var(--tinta);color:#fff;font:800 9pt/1 "Baloo 2",sans-serif;margin-right:1.6mm;vertical-align:.2mm}
+.q .p{font-weight:800}
+.q .obs{font-size:8.5pt;font-weight:800;color:var(--tinta2)}
+.q .fig{margin:1.6mm 0}.q .fig img{display:block;max-width:100%;max-height:42mm;border-radius:1.5mm}
+.q ul{list-style:none;margin:1.6mm 0 0;padding:0;display:flex;flex-direction:column;gap:1.2mm}
+.q li{display:flex;gap:2mm;align-items:baseline}
+.cx{flex:0 0 auto;width:3.6mm;height:3.6mm;border:1pt solid var(--tinta);border-radius:.8mm;transform:translateY(.5mm)}
+.cx.r{border-radius:50%}
+.gab{break-before:page}
+.gab h2{font:800 15pt/1.1 "Baloo 2",sans-serif;margin:0 0 3mm}
+.gab ol{margin:0;padding-left:6mm;columns:2;column-gap:8mm}
+.gab li{break-inside:avoid;margin:0 0 2mm}
+.gab .t{font-size:9pt;color:var(--tinta2)}
+</style>
+</head>
+<body>
+<div class="cab"><div style="flex:1"><h1 id="tit">Simulado de Geografia</h1><div class="nome">Nome: ______________________________ &nbsp; Data: ___/___</div></div>
+<div class="qr"><img src="media/geo3/qr_site.svg?v=c3227a50917" alt="QR do site"><span>Site: jogo, vídeos e simulado</span></div></div>
+<ol class="qs" id="qs"></ol>
+<section class="gab"><h2>Gabarito</h2><ol id="gab"></ol></section>
+<script src="GEO3_simulado_data.js?v=c3227a50917"></script>
+<script>
+(function(){
+  var S=window.GEO3S, m=/[?&]s=(\d+)/.exec(location.search), sem=m?+m[1]:1;
+  document.getElementById('tit').textContent='Simulado de Geografia nº '+sem;
+  var x=sem*9301+49297; function rnd(){ x=(x*233280+49297)%2147483647; return x/2147483647; }
+  function emb(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  /* cotas do roteiro (somam 16); para 15 sai 1 de um assunto com cota 2 ou mais, sorteado */
+  var cot={}; S.FAMILIAS.forEach(function(f){ cot[f.k]=f.cota||0; });
+  var grandes=S.FAMILIAS.filter(function(f){ return (f.cota||0)>=2; }); cot[emb(grandes)[0].k]--;
+  var esc=[]; S.FAMILIAS.forEach(function(f){
+    var it=emb(S.ITENS.filter(function(i){ return i.eixo===f.k; })); esc=esc.concat(it.slice(0,cot[f.k]));
+  });
+  /* ordem: unidade 3 e depois unidade 4, na ordem dos assuntos; questões de figura ficam como estão */
+  var qs='', gb='';
+  esc.forEach(function(it,n){
+    var ops=it.fixa?it.opts.slice():emb(it.opts), multi=!!it.multi;
+    var fig=it.quadro?'<div class="fig">'+it.quadro.replace(/class="[^"]*"/g,'')+'</div>':'';
+    qs+='<li class="q"><span class="n">'+(n+1)+'</span><span class="p">'+it.pede+'</span>'+(multi?' <span class="obs">(marque todas as certas)</span>':'')+fig+
+      '<ul>'+ops.map(function(o){ return '<li><span class="cx'+(multi?'':' r')+'"></span><span>'+o.t+'</span></li>'; }).join('')+'</ul></li>';
+    var certas=ops.filter(function(o){ return o.ok; }).map(function(o){ return o.t; });
+    gb+='<li><b>'+certas.join(', ')+'</b>'+(it.truque?'<div class="t">'+it.truque+'</div>':'')+'</li>';
+  });
+  document.getElementById('qs').innerHTML=qs; document.getElementById('gab').innerHTML=gb;
+  var imgs=[].slice.call(document.images), falta=imgs.length;
+  function pronto(){ document.body.setAttribute('data-pronto','1'); }
+  if(!falta) pronto(); else imgs.forEach(function(im){ if(im.complete){ if(--falta===0) pronto(); } else { im.onload=im.onerror=function(){ if(--falta===0) pronto(); }; } });
+})();
+</script>
+</body>
+</html>
