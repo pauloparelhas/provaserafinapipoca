@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c3227a50917';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='cd5ff9c0924';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -130,8 +130,15 @@ body{font-family:'Nunito','Arial Rounded MT Bold',Arial,sans-serif;
 /* ---------- DESTAQUES 2-4: vídeo · materiais · simulado ---------- */
 .pick.simu{border-color:color-mix(in srgb,var(--geo) 55%,transparent);} .pick.simu .em{background:color-mix(in srgb,var(--geo) 14%,transparent);} .pick.simu .tag{background:var(--geo);color:var(--geo-ink);}
 @media (min-width:900px){ .picks.geo5{grid-template-columns:repeat(5,1fr)} .picks.geo5 .escola{grid-column:1/-1;flex-direction:row;min-height:0;text-align:left;justify-content:center;padding:10px 16px} }
-.pdfbtn{display:block;width:100%;margin:0 0 12px;padding:14px 18px;border-radius:19px;border:2px solid var(--geo);background:color-mix(in srgb,var(--geo) 18%,transparent);color:inherit;font:900 clamp(17px,3.6vw,21px)/1.2 inherit;cursor:pointer;text-align:center}
-.pdfbtn[aria-expanded="true"]{background:var(--geo);color:var(--geo-ink)}
+.pdfbtn{display:flex;align-items:center;gap:14px;width:100%;margin:0 0 12px;padding:14px 18px;min-height:72px;border-radius:22px;
+  border:2px solid var(--geo);background:color-mix(in srgb,var(--geo) 16%,var(--card));color:var(--ink);font-family:inherit;text-align:left;cursor:pointer}
+.pdfic{width:34px;height:34px;flex:0 0 auto;color:var(--geo)}
+.pdftx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pdftt{font-size:clamp(20px,4.2vw,25px);font-weight:900;line-height:1.1}
+.pdfdd{font-size:clamp(13px,2.6vw,15px);font-weight:800;color:var(--soft);line-height:1.3}
+.pdfseta{width:26px;height:26px;flex:0 0 auto;color:var(--geo);transition:transform .2s}
+.pdfbtn[aria-expanded="true"] .pdfseta{transform:rotate(180deg)}
+.pdflista[hidden]{display:none}
 .pdflista{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:0 0 16px}
 .pdflista a{display:flex;flex-direction:column;gap:3px;padding:12px 14px;border-radius:15px;border:2px solid color-mix(in srgb,var(--geo) 45%,transparent);text-decoration:none;color:inherit;min-height:44px}
 .pdflista b{font-size:16px;font-weight:900}.pdflista span{font-size:13px;font-weight:700;color:var(--soft)}
@@ -229,6 +236,9 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
   #viewGeo .badge,#viewCie .badge{margin-bottom:6px}
   #viewGeo .geo-panel,#viewCie .geo-panel{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;padding:14px}
   #viewGeo .geo-panel>div:not(.picks),#viewCie .geo-panel>div:not(.picks){display:none}
+  #viewGeo .pdfbtn{grid-column:1/-1;margin:0}
+  #viewGeo .geo-panel>div.pdflista{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0}
+  #viewGeo .geo-panel>div.pdflista[hidden]{display:none}
   #viewGeo .hero2,#viewGeo .hero,#viewCie .hero2,#viewCie .hero{margin:0;min-height:0;padding:12px 16px}
   #viewGeo .picks{grid-column:1/-1;margin:0!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:10px}
   #viewGeo .geo-panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
@@ -285,7 +295,11 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
        Roteiro unico: trabalho/3tri_geografia/_roteiro.md. Banco unico: GEO3_banco.js. Prova em portugues: sem bandeira. -->
   <section class="geo-panel">
     <!-- 09/11 (Paulo): "Quero o PDF!" e a 1a opcao; abre a lista: teoria (com/sem imagens), pocket, simulado sorteado -->
-    <button class="pdfbtn" id="pdfBtn" aria-expanded="false" aria-controls="pdfLista" onclick="var l=document.getElementById('pdfLista');l.hidden=!l.hidden;this.setAttribute('aria-expanded',!l.hidden)">&#x1F4C4; Quero o PDF!</button>
+    <button class="pdfbtn" id="pdfBtn" aria-expanded="false" aria-controls="pdfLista" onclick="var l=document.getElementById('pdfLista');l.hidden=!l.hidden;this.setAttribute('aria-expanded',!l.hidden)">
+      <svg class="pdfic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor" opacity=".18"/><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 0v5h5M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <span class="pdftx"><span class="pdftt">Quero o PDF!</span><span class="pdfdd">Teoria, Pocket Card e simulado para imprimir</span></span>
+      <svg class="pdfseta" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
     <div class="pdflista" id="pdfLista" hidden>
       <a href="ferramentas/media/geo3/Teoria_Geografia.pdf" target="_blank" rel="noopener"><b>Teoria</b><span>com as fotos da aula · A4 em pé</span></a>
       <a href="ferramentas/media/geo3/Teoria_Geografia_sem_imagens.pdf" target="_blank" rel="noopener"><b>Teoria sem imagens</b><span>resumo só com texto · A4 em pé</span></a>
@@ -294,32 +308,32 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
     </div>
     <!-- 09/11 (Paulo): ordem de estudo — teoria, pocket (com video), video, simulado, jogo por ultimo -->
     <div class="picks geo5">
-      <a class="pick mat" href="ferramentas/GEO3_estudo.html?v=c3227a50917">
+      <a class="pick mat" href="ferramentas/GEO3_estudo.html?v=cd5ff9c0924">
         <span class="em">&#x1F4D6;</span>
         <span><span class="tt"><span class="ordem">1</span>Teoria</span><span class="dd">12 lições</span></span>
         <span class="tag">Estudar</span>
       </a>
-      <a class="pick slides" href="ferramentas/GEO3_pocket.html?v=c3227a50917">
+      <a class="pick slides" href="ferramentas/GEO3_pocket.html?v=cd5ff9c0924">
         <span class="em">&#x1F4C4;</span>
         <span><span class="tt"><span class="ordem">2</span>Pocket Card</span><span class="dd">Ficha de revisão em 2 páginas</span><span class="temvideo">&#x25B6;&#xFE0E; Tem vídeo</span></span>
         <span class="tag">Abrir</span>
       </a>
-      <a class="pick video" href="ferramentas/GEO3_video.html?v=c3227a50917">
+      <a class="pick video" href="ferramentas/GEO3_video.html?v=cd5ff9c0924">
         <span class="em">&#x1F3AC;</span>
         <span><span class="tt"><span class="ordem">3</span>O vídeo</span><span class="dd">Toda a matéria</span></span>
         <span class="tag">Assistir</span>
       </a>
-      <a class="pick simu" href="ferramentas/GEO3_simulado.html?v=c3227a50917">
+      <a class="pick simu" href="ferramentas/GEO3_simulado.html?v=cd5ff9c0924">
         <span class="em">&#x270F;&#xFE0F;</span>
         <span><span class="tt"><span class="ordem">4</span>Simulado</span><span class="dd">Questões de todos os assuntos e o Blitz</span></span>
         <span class="tag">Começar</span>
       </a>
-      <a class="pick quiz" href="ferramentas/GEO3_jogo.html?v=c3227a50917">
+      <a class="pick quiz" href="ferramentas/GEO3_jogo.html?v=cd5ff9c0924">
         <span class="em">&#x1F3AE;</span>
         <span><span class="tt"><span class="ordem">5</span>O jogo</span><span class="dd">Guardiões da Casa Maior</span></span>
         <span class="tag">Jogar</span>
       </a>
-      <a class="pick mat escola" href="ferramentas/GEO3_material.html?v=c3227a50917">
+      <a class="pick mat escola" href="ferramentas/GEO3_material.html?v=cd5ff9c0924">
         <span class="em">&#x1F3EB;</span>
         <span><span class="tt"><span class="ordem">+</span>Material da escola</span><span class="dd">Os slides e os vídeos das unidades 3 e 4</span></span>
         <span class="tag">Abrir</span>
@@ -336,34 +350,34 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
     <div class="subtitle">Motion Rangers: find everything!<span class="tr">Motion Rangers: encontre tudo!</span></div>
   </div>
   <section class="geo-panel">
-    <a class="hero2" href="ferramentas/CIE3_simulado.html?v=c3227a50917">
+    <a class="hero2" href="ferramentas/CIE3_simulado.html?v=cd5ff9c0924">
       <span class="em">&#x270F;&#xFE0F;</span>
       <span><span class="tt">Practice Test<span class="tr">Simulado</span></span><span class="dd">Just like the real test.<span class="tr">Igual à prova de verdade.</span></span></span>
       <span class="go">Start<span class="tr">Começar</span></span>
     </a>
     <div style="margin-top:16px"></div>
-    <a class="hero" href="ferramentas/CIE3_jogo.html?v=c3227a50917" style="border-radius:22px">
+    <a class="hero" href="ferramentas/CIE3_jogo.html?v=cd5ff9c0924" style="border-radius:22px">
       <span class="em">&#x1F32A;&#xFE0F;</span>
       <span><span class="tt">Motion Rangers</span><span class="dd"><b style="background:#fff3c4;color:#4a3000;border-radius:8px;padding:1px 8px">In development</b><span class="tr">Em desenvolvimento</span></span></span>
       <span class="go">Play<span class="tr">Jogar</span></span>
     </a>
     <div class="picks" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px">
-      <a class="pick mat" href="ferramentas/CIE3_estudo.html?v=c3227a50917">
+      <a class="pick mat" href="ferramentas/CIE3_estudo.html?v=cd5ff9c0924">
         <span class="em">&#x1F4D6;</span>
         <span><span class="tt">Study<span class="tr">Teoria</span></span><span class="dd">8 short lessons<span class="tr">8 lições curtas</span></span></span>
         <span class="tag">Study<span class="tr">Estudar</span></span>
       </a>
-      <a class="pick mat" href="ferramentas/CIE3_pocket.html?v=c3227a50917">
+      <a class="pick mat" href="ferramentas/CIE3_pocket.html?v=cd5ff9c0924">
         <span class="em">&#x1F5A8;&#xFE0F;</span>
         <span><span class="tt">Pocket: one page<span class="tr">Pocket: uma folha</span></span><span class="dd">The whole test on one page<span class="tr">A prova inteira numa folha</span></span></span>
         <span class="tag">Print<span class="tr">Imprimir</span></span>
       </a>
-      <a class="pick video" href="ferramentas/CIE3_video.html?v=c3227a50917">
+      <a class="pick video" href="ferramentas/CIE3_video.html?v=cd5ff9c0924">
         <span class="em">&#x1F3AC;</span>
         <span><span class="tt">The video<span class="tr">O vídeo</span></span><span class="dd">The whole test in 5 minutes<span class="tr">A prova inteira em 5 minutos</span></span></span>
         <span class="tag">Watch<span class="tr">Assistir</span></span>
       </a>
-      <a class="pick mat" href="ferramentas/CIE3_material.html?v=c3227a50917">
+      <a class="pick mat" href="ferramentas/CIE3_material.html?v=cd5ff9c0924">
         <span class="em">&#x1F3EB;</span>
         <span><span class="tt">School material<span class="tr">Material da escola</span></span><span class="dd">The slides and the 3 videos<span class="tr">Os slides e os 3 vídeos</span></span></span>
         <span class="tag">Open<span class="tr">Abrir</span></span>
@@ -388,7 +402,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
        Insumos: trabalho/3tri_historia (U3 Fontes históricas, U4 O mundo do trabalho, U1/U2 base).
        Roteiro único: trabalho/3tri_historia/_roteiro.md. Banco único: HIS3_banco.js. -->
   <section class="geo-panel">
-    <a class="hero2" href="ferramentas/HIS3_simulado.html?v=c3227a50917">
+    <a class="hero2" href="ferramentas/HIS3_simulado.html?v=cd5ff9c0924">
       <span class="em">&#x270F;&#xFE0F;</span>
       <span>
         <span class="tt">Simulado</span>
@@ -397,7 +411,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
       <span class="go">Começar</span>
     </a>
     <div style="margin-top:16px"></div>
-    <a class="hero" href="ferramentas/HIS3_jogo.html?v=c3227a50917" style="border-radius:22px">
+    <a class="hero" href="ferramentas/HIS3_jogo.html?v=cd5ff9c0924" style="border-radius:22px">
       <span class="em">&#x1F50D;</span>
       <span>
         <span class="tt">Detetives do Tempo</span>
@@ -406,7 +420,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
       <span class="go">Jogar</span>
     </a>
     <div class="picks" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px">
-      <a class="pick mat" href="ferramentas/HIS3_estudo.html?v=c3227a50917">
+      <a class="pick mat" href="ferramentas/HIS3_estudo.html?v=cd5ff9c0924">
         <span class="em">&#x1F4D6;</span>
         <span>
           <span class="tt">Caderno do Detetive</span>
@@ -414,7 +428,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
         </span>
         <span class="tag">Estudar</span>
       </a>
-      <a class="pick video" href="ferramentas/HIS3_video.html?v=c3227a50917">
+      <a class="pick video" href="ferramentas/HIS3_video.html?v=cd5ff9c0924">
         <span class="em">&#x1F3AC;</span>
         <span>
           <span class="tt">O vídeo</span>
@@ -422,7 +436,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
         </span>
         <span class="tag">Assistir</span>
       </a>
-      <a class="pick mat" href="ferramentas/HIS3_pocket.html?v=c3227a50917">
+      <a class="pick mat" href="ferramentas/HIS3_pocket.html?v=cd5ff9c0924">
         <span class="em">&#x1F5A8;&#xFE0F;</span>
         <span>
           <span class="tt">Pocket — uma folha</span>
