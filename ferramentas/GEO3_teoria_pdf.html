@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='d0fb5e91009';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='ed913511030';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -64,13 +64,15 @@ body.semimg .m1,body.semimg .mg{display:block}
 body.semimg .mcol{display:block}
 body.semimg .mlin{gap:1mm}
 body.semimg .m1.bio .mlin{display:flex}
-body.semimg .lic{break-inside:auto;margin-bottom:2mm}
+body.semimg .lic{break-inside:avoid;margin-bottom:3mm}
+/* com imagens: o cabeçalho da lição nunca fica sozinho no pé da página (vai junto com a 1ª tela) */
+.cab1{break-inside:avoid}
 </style>
 </head>
 <body>
-<div class="capa"><div style="flex:1"><h1>Geografia · Teoria</h1><p>Unidade 3: ruas, deslocamentos e transportes · Unidade 4: meio ambiente, nossa casa maior</p></div><img class="qr" src="media/geo3/qr_site.svg?v=d0fb5e91009" alt="QR do site"></div>
+<div class="capa"><div style="flex:1"><h1>Geografia · Teoria</h1><p>Unidade 3: ruas, deslocamentos e transportes · Unidade 4: meio ambiente, nossa casa maior</p></div><img class="qr" src="media/geo3/qr_site.svg?v=ed913511030" alt="QR do site"></div>
 <main id="doc"></main>
-<script src="GEO3_estudo_licoes.js?v=d0fb5e91009"></script>
+<script src="GEO3_estudo_licoes.js?v=ed913511030"></script>
 <script>
 (function(){
   var COM = !/[?&]img=0/.test(location.search);
@@ -87,11 +89,17 @@ body.semimg .lic{break-inside:auto;margin-bottom:2mm}
     out+='<section class="lic" style="--lc:'+cor+';--lcx:'+escurece(cor)+'"><div class="lich"><span class="n">'+(i+1)+'</span><div><small>Unidade '+l.unid+' · Lição '+(i+1)+' de '+GEO3_LICOES.length+'</small><b>'+esc(l.nome)+'</b></div></div><div class="licgrid">';
     l.telas.forEach(function(t){
       if(t.tipo!=='texto'||t.desafio) return;
-      out+='<div class="tela"><h3>'+t.tit+'</h3>'+t.html+'</div>';
+      var h=t.html;
+      /* sem as figuras, frase que aponta para a foto ("nesta foto", "esta sala") vira frase que se sustenta sozinha */
+      if(!COM) h=h.replace('este desenho simples da rua é um croqui.','desenho simples de um lugar, como a rua.')
+                 .replace(', como esta sala.','.').replace('como nesta foto: usado','usado');
+      out+='<div class="tela"><h3>'+t.tit+'</h3>'+h+'</div>';
     });
     out+='</div></section>';
   });
   doc.innerHTML=out;
+  if(COM) doc.querySelectorAll('.lic').forEach(function(l){ var h=l.querySelector('.lich'), t=l.querySelector('.tela');
+    if(h&&t){ var w=document.createElement('div'); w.className='cab1'; h.parentNode.insertBefore(w,h); w.appendChild(h); w.appendChild(t); } });
   if(!COM){
     doc.querySelectorAll('.mfig,.mq,figure,img').forEach(function(e){ e.remove(); });
   }
