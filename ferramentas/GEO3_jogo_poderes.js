@@ -65,10 +65,10 @@ var NOME_ITEM={milk:['a Semente da Amazônia','a Semente da Amazônia'],napkin:[
 var BIOMA_ITEM={milk:'Amazônia',napkin:'vitória-régia',mirror:'Cerrado',scissors:'Caatinga',broom:'Pampa',tape:'Pantanal'};
 /* GEO3: a pergunta de cada semente é do bioma dela (busca a palavra no enunciado ou na resposta certa, banco único GEO3);
    sem pergunta daquele bioma, vale qualquer uma de biomas. A 2ª tentativa repete a mesma (a criança acabou de ver a resposta). */
-function itemDoBioma(it){ if(it.q) return it.q; var B=(window.GEO3&&GEO3.ITENS)||[], kw=BIOMA_ITEM[it.nome]||'', ok=function(x){ return x.tipo!=='multi'&&!x.multi&&!x.texto; };
+function itemDoBioma(it){ if(it.q) return it.q; var B=(window.GEO3&&GEO3.ITENS)||[], kw=BIOMA_ITEM[it.nome]||'', ok=function(x){ return x.tipo!=='multi'&&!x.multi&&!x.texto&&!(x.tipo==='figura'&&/foto|figura|imagem|desenho|croqui|mapa|adulto|seta|parte da rua/i.test(x.p||'')); }; /* inequivoca_v2 (08/11): o jogo não mostra a foto; pergunta que aponta para ela fica fora */
   var pool=B.filter(function(x){ return ok(x)&&x.tema==='biomas'&&kw&&((x.p||'')+' '+((x.o||[])[0]||'')).indexOf(kw)>=0; });
   if(!pool.length) pool=B.filter(function(x){ return ok(x)&&x.tema==='biomas'; });
-  it.q=pool.length?pool[Math.floor(Math.random()*pool.length)]:null; return it.q; }
+  it.q=pool.length?pool[Math.floor(Math.random()*pool.length)]:null; if(it.q&&window.QUIZ&&QUIZ.paraJogo) it.q=QUIZ.paraJogo(it.q); return it.q; }
 
 function peloQuiz(it){ return it&&it.tipo==='historia'&&!it.fim&&!!QUIZ_ITEM[it.nome]; }
 function pedeItem(it){

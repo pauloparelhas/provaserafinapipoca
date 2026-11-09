@@ -202,5 +202,5 @@ function tecla(k){
 function alternaDica(){ var q=J.quiz; if(!q||q.fase!=='pergunta') return; q.dica=!q.dica; if(q.dica){ try{ say(q.item.dica||''); }catch(e){} } }
 function ouvir(){ var q=J.quiz; if(!q) return; var it=q.item; try{ say(q.fase==='resposta'?(it.ex||''):it.p+'. '+q.ordem.map(function(oi,k){ return (k+1)+': '+it.o[oi]; }).join('. ')); }catch(e){} }
 
-return {embaralha:embaralha, marca:marca, inicia:inicia, atualiza:atualiza, desenhaMundo:desenhaMundo, desenhaTela:desenhaTela, bate:bate, toque:toque, tecla:tecla, sai:sai, segue:segue, alternaDica:alternaDica, ouvir:ouvir, escolhe:escolhe};
+return {embaralha:embaralha, marca:marca, inicia:inicia, atualiza:atualiza, desenhaMundo:desenhaMundo, desenhaTela:desenhaTela, bate:bate, toque:toque, tecla:tecla, sai:sai, segue:segue, alternaDica:alternaDica, ouvir:ouvir, escolhe:escolhe, paraJogo:paraJogo}; /* inequivoca_v2: as sementes (poderes) usam o mesmo enunciado sem foto */
 })();
