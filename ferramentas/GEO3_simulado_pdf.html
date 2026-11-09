@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='cd5ff9c0924';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='d0fb5e91009';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -26,7 +26,7 @@ html,body{margin:0;background:#fff;color:var(--tinta);font:11pt/1.4 "Nunito",sys
 .cab{display:flex;align-items:center;gap:5mm;border-bottom:1.2pt solid var(--tinta);padding-bottom:3mm;margin-bottom:4mm}
 .cab h1{font:800 18pt/1.05 "Baloo 2",sans-serif;margin:0}
 .cab .nome{margin-top:2.5mm;font-weight:700;color:var(--tinta2)}
-.qr{display:flex;align-items:center;gap:2mm;font-size:7.5pt;font-weight:800;color:var(--tinta2);max-width:40mm}.qr img{width:18mm;height:18mm}
+.qr{width:13mm;height:13mm;flex:0 0 auto;align-self:flex-start;opacity:.85}
 ol.qs{list-style:none;margin:0;padding:0;columns:2;column-gap:8mm;column-rule:.5pt solid var(--linha)}
 .q{break-inside:avoid;margin:0 0 4.5mm}
 .q .n{display:inline-grid;place-items:center;width:6mm;height:6mm;border-radius:50%;background:var(--tinta);color:#fff;font:800 9pt/1 "Baloo 2",sans-serif;margin-right:1.6mm;vertical-align:.2mm}
@@ -46,10 +46,10 @@ ol.qs{list-style:none;margin:0;padding:0;columns:2;column-gap:8mm;column-rule:.5
 </head>
 <body>
 <div class="cab"><div style="flex:1"><h1 id="tit">Simulado de Geografia</h1><div class="nome">Nome: ______________________________ &nbsp; Data: ___/___</div></div>
-<div class="qr"><img src="media/geo3/qr_site.svg?v=cd5ff9c0924" alt="QR do site"><span>Site: jogo, vídeos e simulado</span></div></div>
+<img class="qr" src="media/geo3/qr_site.svg?v=d0fb5e91009" alt="QR do site"></div>
 <ol class="qs" id="qs"></ol>
 <section class="gab"><h2>Gabarito</h2><ol id="gab"></ol></section>
-<script src="GEO3_simulado_data.js?v=cd5ff9c0924"></script>
+<script src="GEO3_simulado_data.js?v=d0fb5e91009"></script>
 <script>
 (function(){
   var S=window.GEO3S, m=/[?&]s=(\d+)/.exec(location.search), sem=m?+m[1]:1;
