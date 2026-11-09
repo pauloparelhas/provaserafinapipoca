@@ -35,6 +35,7 @@ function FIG(img,cap){ return '<figure class="mfig">'+(img.charAt(0)==='<'?img:'
 function M(img,cap,linhas,cl){ return '<div class="m1'+(cl?' '+cl:'')+'">'+FIG(img,cap)+'<div class="mlin">'+linhas.join('')+'</div></div>'; }
 /* quatro fotos da escola, cada uma com o seu nome (vai dentro da figura do molde 1) */
 function QUAD(fs){ return '<div class="mq">'+fs.map(function(f){ return '<figure class="mqf"><img src="'+I(f[0])+'" alt="'+f[1]+'"><figcaption>'+f[1]+'</figcaption></figure>'; }).join('')+'</div>'; }
+function DUO(fs){ return QUAD(fs).replace('class="mq"','class="mq mq2"'); }
 /* molde 2: colunas iguais, cada uma figura + linhas; rodapé opcional (linhas embaixo) */
 function MC(cols,rod,o){ o=o||{};
   return '<div class="mg'+(o.cl?' '+o.cl:'')+'" style="--mc:'+(o.n||cols.length)+'">'+cols.map(function(c){
@@ -89,7 +90,7 @@ var LS=[
 {k:'sinal', tema:'sinal', unid:3, nome:'Atravessar com segurança', curto:'Atravessar a rua', capa:'t_faixa', cor:'#ef4444', treino:[], telas:[
  {tipo:'texto', tit:'Atravessar na <em>faixa</em>',
   fala:'Atravessar na faixa. As pessoas precisam atravessar a rua sempre na faixa de pedestre, quando o sinal estiver verde para o pedestre. Ruas seguras são as sinalizadas e com faixa de pedestre.',
-  html:M('t_faixa_v5','Crianças atravessando na faixa de pedestre',[
+  html:M('t_faixa_v5','Crianças atravessando na faixa; o adulto segura a placa de PARE (STOP)',[
    LN('Faixa de pedestre','as pessoas precisam atravessar a rua sempre na faixa.'),
    LN('Sinal verde','atravessamos quando o sinal estiver verde para o pedestre.'),
    LN('Ruas seguras','são as sinalizadas e com faixa de pedestre.')],'larga')},
@@ -110,10 +111,15 @@ var LS=[
    LN('Direita','o lado da nossa mão direita.'),
    LN('Esquerda','o lado da nossa mão esquerda.')])},
  {tipo:'texto', tit:'Descrever o <em>caminho</em>',
-  fala:'Descrever o caminho. Frente, atrás, direita e esquerda ajudam a descrever o caminho. Um exemplo: siga em frente por 200 metros e vire à direita na próxima esquina.',
+  fala:'Descrever o caminho. Frente, atrás, direita e esquerda ajudam a descrever o caminho. Um exemplo: siga em frente por 200 metros e vire à direita na próxima esquina. Do quarto até a sala, descrevemos o trajeto com direita, esquerda, em frente, atrás e pontos de referência fixos.',
   html:M('t_mapa_cel','Um caminho no mapa',[
    LN('Direções','frente, atrás, direita e esquerda ajudam a descrever o caminho.'),
-   LN('Um exemplo','“Siga em frente por 200 metros e vire à direita na próxima esquina.”')])}
+   LN('Um exemplo','“Siga em frente por 200 metros e vire à direita na próxima esquina.”'),
+   LN('Do quarto até a sala','descrevemos o trajeto com direita, esquerda, em frente, atrás e pontos de referência fixos.')])},
+ {tipo:'texto', retrato:true, tit:'Direções na <em>planta</em>',
+  fala:'Direções na planta. Na planta do apartamento, entrando pela seta e seguindo em frente, o banheiro e depois o escritório ficam à esquerda; a cozinha fica à direita.',
+  html:M('q_planta_apto','Planta do apartamento: a seta mostra a entrada',[
+   LN('Entrando pela seta','e seguindo em frente, o banheiro e depois o escritório ficam à esquerda; a cozinha fica à direita.')])}
 ]},
 
 /* T4. Pontos de referência e localização (U3 S3, S4, S14, S18, S19, S28, S29) */
@@ -146,7 +152,8 @@ var LS=[
   html:M('t_croqui_rua','',[
    LN('Croqui','este desenho simples da rua é um croqui.'),
    LN('Num croqui da rua','desenhamos rua, calçadas, casas, comércios, árvores, veículos, pessoas, postes de iluminação e placas.'),
-   LN('Para que serve','mostra os elementos da rua e ajuda a ler um caminho.')])},
+   LN('Para que serve','mostra os elementos da rua e ajuda a ler um caminho.'),
+   LN('Legenda','explica o que cada desenho representa.')])},
  {tipo:'texto', tit:'A <em>planta baixa</em>',
   fala:'A planta baixa. A sala de aula, de frente; a mesma sala, vista de cima; e a planta do apartamento, com sacada, quarto, sala, escritório, cozinha e banheiro. A planta baixa é o desenho de um lugar visto de cima, como a sala ou o apartamento, e mostra onde ficam as coisas. Podemos ver um lugar de frente ou de cima; imagens aéreas e mapas mostram os lugares vistos de cima.',
   html:MC([['t_sala3d','A sala, de frente',null],['t_planta_sala','A sala, vista de cima',null],['t_planta_ap','Planta do apartamento',null]],
@@ -162,11 +169,11 @@ var LS=[
            ['t_comercial','Rua comercial',[LN('Rua comercial','muitas lojas, mercados e padarias, e muitas pessoas circulando. É muito movimentada.')]]])},
  {tipo:'texto', tit:'<em>Avenida</em> e <em>rodovia</em>',
   fala:'Avenida e rodovia. A avenida é mais larga que a rua, com várias faixas para carros, e liga distâncias maiores dentro da cidade, como a Avenida Paulista, em São Paulo. A rodovia liga cidades e passa por áreas mais afastadas, como a Rodovia dos Imigrantes. Nas cidades há ruas e avenidas; entre as cidades, rodovias e estradas de terra ou asfaltadas.',
-  html:MC([['t_avenida','Avenida Paulista, em São Paulo',[LN('Avenida','mais larga que a rua, com várias faixas para carros. Liga distâncias maiores dentro da cidade.'),LN('Nas cidades','ruas e avenidas.')]],
-           ['t_rodovia','Rodovia dos Imigrantes',[LN('Rodovia','liga cidades e passa por áreas mais afastadas.'),LN('Entre as cidades','rodovias e estradas de terra ou asfaltadas.')]]])},
+  html:MC([['t_avenida','Avenida Paulista (SP)',[LN('Avenida','mais larga que a rua, com várias faixas para carros. Liga distâncias maiores dentro da cidade.')]],
+           ['t_rodovia','Rodovia dos Imigrantes: liga São Paulo ao litoral',[LN('Rodovia','liga cidades e passa por áreas mais afastadas.'),LN('Entre as cidades','rodovias e estradas de terra ou asfaltadas.')]]])},
  {tipo:'texto', tit:'O <em>planejamento urbano</em>',
   fala:'O planejamento urbano. É o plano que organiza a cidade; por isso cada rua tem um jeito de ser usada. Entender as ruas ajuda a andar com segurança, cuidar do bairro e melhorar o lugar onde vivemos.',
-  html:M('t_zoneamento','Campinas (SP), Lagoa Taquaral',[
+  html:M('t_bairro_sb','Ruas de um bairro, vistas de cima',[
    LN('Planejamento urbano','o plano que organiza a cidade: cada rua tem um jeito de ser usada.'),
    LN('Entender as ruas','ajuda a andar com segurança, cuidar do bairro e melhorar o lugar onde vivemos.')])},
  {tipo:'texto', tit:'Do que a rua é <em>feita</em>',
@@ -179,10 +186,10 @@ var LS=[
 /* T7. O bairro e a cidade (U3 S11, S12, S13, S14) */
 {k:'bairro', tema:'bairro', unid:3, nome:'O bairro e a cidade', curto:'O bairro e a cidade', capa:'t_bairro_sb', cor:'#f97316', treino:[], telas:[
  {tipo:'texto', tit:'O <em>bairro</em>',
-  fala:'O bairro. Bairro Cabo Branco, em João Pessoa. Uma cidade é composta por vários bairros. O bairro é um conjunto de ruas e quarteirões.',
+  fala:'O bairro. Bairro Cabo Branco, em João Pessoa. Uma cidade é composta por vários bairros. O bairro é a parte de uma cidade onde vivem várias pessoas, com casas, ruas e comércios; é um conjunto de ruas e quarteirões.',
   html:M('t_bairro_praia','Bairro Cabo Branco, em João Pessoa (PB)',[
    LN('Cidade','é composta por vários bairros.'),
-   LN('Bairro','conjunto de ruas e quarteirões.')])},
+   LN('Bairro','parte de uma cidade onde vivem várias pessoas, com casas, ruas e comércios. É um conjunto de ruas e quarteirões.')])},
  {tipo:'texto', tit:'A vida no <em>bairro</em>',
   fala:'A vida no bairro. Bairro em Santa Bárbara, na Bahia. No bairro há casas, prédios, escolas, praças, igrejas, hospitais, farmácias e pontos de ônibus. No bairro, as pessoas frequentam espaços de lazer, praticam esportes e convivem com amigos e familiares.',
   html:M('t_bairro_sb','Bairro em Santa Bárbara (BA), visto de cima',[
@@ -208,6 +215,7 @@ var LS=[
   fala:'Meios de transporte. Muitas pessoas usam o ônibus para trabalhar ou estudar em outro bairro. Na rodovia passam carros, motos, ônibus e caminhões.',
   html:M('t_motorista','Motorista de ônibus',[
    LN('Ônibus','muitas pessoas usam para trabalhar ou estudar em outro bairro.'),
+   LN('De ônibus','“Sou professora, vou de ônibus até a escola.”'),
    LN('Na rodovia','passam carros, motos, ônibus e caminhões.')])},
  {tipo:'texto', tit:'O <em>trabalho</em> na cidade',
   fala:'O trabalho na cidade. A professora, em sala de aula. O gari mantém as ruas limpas. O agente de trânsito e o motorista de ônibus também trabalham na cidade.',
@@ -233,11 +241,11 @@ var LS=[
    LN('Meio ambiente','é o nome dessa grande casa, a casa de todos os seres vivos.'),
    LN('Cuidar','cuidando do meio ambiente, cuidamos de nós e de todos.')],'larga')},
  {tipo:'texto', tit:'O que faz <em>parte</em> dele',
-  fala:'O que faz parte dele. Fazem parte do meio ambiente: árvores, animais, pedras, água, ar, solo, Sol e chuva. E nós também fazemos parte disso tudo! No dia a dia, ele está nas plantas do quintal, no passarinho que visita a janela, no cheirinho da terra molhada e no céu.',
+  fala:'O que faz parte dele. Fazem parte do meio ambiente: árvores, animais, pedras, água, ar, solo, Sol, chuva e até o vento. E nós também fazemos parte disso tudo! No dia a dia, ele está nas plantas do quintal, no passarinho que visita a janela, no cheirinho da terra molhada e no céu.',
   html:M('t_janela','Natureza vista da janela',[
-   LN('Fazem parte do meio ambiente','árvores, animais, pedras, água, ar, solo, Sol e chuva.'),
+   LN('Fazem parte do meio ambiente','árvores, animais, pedras, terra, água, ar, solo, Sol, chuva e até o vento.'),
    LN('Nós também','fazemos parte do meio ambiente!'),
-   LN('No dia a dia','o meio ambiente está nas plantas do quintal, no passarinho que visita a janela, no cheirinho da terra molhada e no céu.')],'larga')}
+   LN('No dia a dia','está nas plantas do quintal, no passarinho da janela, no cheirinho da terra molhada e no céu.')],'larga')}
 ]},
 
 /* T10. Sons da natureza (U4 S6; U3 S3) — só o átomo cobrável */
@@ -256,31 +264,26 @@ var LS=[
   html:MC([['t_arara','Araras-vermelhas',[LN('Fauna','os animais de um lugar.')]],['t_vitoria','Vitória-régia',[LN('Flora','as plantas, a vegetação de um lugar.')]]],
    [LN('Riqueza natural','os biomas e os animais do Brasil precisam ser cuidados.')])},
  {tipo:'texto', tit:'Os 6 <em>biomas</em> do Brasil',
-  fala:'Os 6 biomas do Brasil. Amazônia: Norte, árvores altas e muitas folhas. Cerrado: Centro, árvores tortas e grama. Caatinga: Nordeste, plantas com espinhos, os cactos. Pampa: Sul, campos com capim baixo. Pantanal: Mato Grosso e Mato Grosso do Sul, plantas que gostam de água. Mata Atlântica: Litoral, floresta úmida e densa.',
-  html:M('t_mapa_biomas','',[
-   TAB(['Bioma','Onde fica','Vegetação'],[[COR.amz,NOME.amz,'Norte','árvores altas e muitas folhas'],[COR.cer,NOME.cer,'Centro','árvores tortas e grama'],[COR.caa,NOME.caa,'Nordeste','plantas com espinhos (cactos)'],
-     [COR.pam,NOME.pam,'Sul','campos com capim baixo'],[COR.pan,NOME.pan,'Mato Grosso e Mato Grosso do Sul','plantas que gostam de água'],[COR.mat,NOME.mat,'Litoral','floresta úmida e densa']])])},
- {tipo:'texto', tit:'Os <em>animais</em> de cada bioma',
-  fala:'Os animais de cada bioma. Amazônia: onça-pintada, macaco, arara. Cerrado: lobo-guará, tamanduá-bandeira. Caatinga: tatu, veado-catingueiro, asa-branca. Pampa: cavalo, ema, quero-quero, capivara. Pantanal: jacaré, tuiuiú, sucuri, capivara. Mata Atlântica: mico-leão-dourado, preguiça. A capivara aparece no Pampa e no Pantanal.',
-  html:M('t_mapa_biomas','',[
-   TAB(['Bioma','Animais (fauna)'],[[COR.amz,NOME.amz,'onça-pintada, macaco, arara'],[COR.cer,NOME.cer,'lobo-guará, tamanduá-bandeira'],[COR.caa,NOME.caa,'tatu, veado-catingueiro, asa-branca'],
-     [COR.pam,NOME.pam,'cavalo, ema, quero-quero, capivara'],[COR.pan,NOME.pan,'jacaré, tuiuiú, sucuri, capivara'],[COR.mat,NOME.mat,'mico-leão-dourado, preguiça']]),
-   LN('Capivara','aparece no Pampa e no Pantanal.')])},
- {tipo:'texto', tit:'As <em>plantas</em> das fotos',
-  fala:'As plantas das fotos. Vitória-régia: Amazônia. Sempre-viva: Cerrado. Louro-preto: Caatinga. Capim-dos-pampas: Pampa. Bromélias em área alagada: Pantanal. Bromélia: Mata Atlântica.',
-  html:MC([['t_vitoria','',[LN(NOME.amz,'vitória-régia')]],['t_sempreviva','',[LN(NOME.cer,'sempre-viva')]],['t_louro','',[LN(NOME.caa,'louro-preto')]],
-           ['t_capim','',[LN(NOME.pam,'capim-dos-pampas')]],['t_bromelia_agua','',[LN(NOME.pan,'bromélias em área alagada')]],['t_bromelia','',[LN(NOME.mat,'bromélia')]]],
-   null,{n:3})},
- {tipo:'texto', tit:'Cada <em>bioma</em> (1)',
-  fala:'Cada bioma. Amazônia: o maior bioma do Brasil, quase metade do território. Cerrado: o segundo maior, a savana brasileira. Caatinga: só existe no Brasil; clima semiárido.',
-  html:MC([['t_amazonia','Amazônia',[LN('Amazônia','o maior bioma do Brasil: quase metade do território.')]],
-           ['t_cerrado','Cerrado',[LN('Cerrado','o segundo maior bioma do Brasil. É a savana brasileira.')]],
-           ['t_caatinga','Caatinga',[LN('Caatinga','só existe no Brasil. Clima semiárido.')]]])},
- {tipo:'texto', tit:'Cada <em>bioma</em> (2)',
-  fala:'Cada bioma. Pampa: no Brasil, só no Rio Grande do Sul. Pantanal: uma das maiores áreas úmidas do planeta, com alagamentos. Mata Atlântica: muito rica, mas muito reduzida.',
-  html:MC([['t_pampa','Pampa, com gado no campo',[LN('Pampa','no Brasil, só existe no Rio Grande do Sul.')]],
-           ['t_pantanal','Pantanal',[LN('Pantanal','uma das maiores áreas úmidas do planeta, com alagamentos.')]],
-           ['t_mata','Mata Atlântica',[LN('Mata Atlântica','é muito rica, mas muito reduzida.')]]])}
+  fala:'Os 6 biomas do Brasil: Amazônia, Cerrado, Caatinga, Pampa, Pantanal e Mata Atlântica.',
+  html:M('t_mapa_biomas','Os 6 biomas no mapa do Brasil',[LN('Os 6 biomas','Amazônia, Cerrado, Caatinga, Pampa, Pantanal e Mata Atlântica.')])},
+ {tipo:'texto', tit:'<em>Amazônia</em>', bioma:'amz',
+  fala:'Amazônia. Onde fica: Norte. Vegetação: árvores altas e muitas folhas. Animais: onça-pintada, macaco, arara. Planta: vitória-régia. O maior bioma do Brasil: quase metade do território.',
+  html:M(DUO([['t_amazonia','Amazônia'],['t_vitoria','vitória-régia']]),'',[LN('Onde fica','Norte.'),LN('Vegetação','árvores altas e muitas folhas.'),LN('Animais','onça-pintada, macaco, arara.'),LN('Planta','vitória-régia.'),LN('Tamanho','o maior bioma do Brasil: quase metade do território.')])},
+ {tipo:'texto', tit:'<em>Cerrado</em>', bioma:'cer',
+  fala:'Cerrado. Onde fica: Centro. Vegetação: árvores tortas, de caules retorcidos, e grama. Animais: lobo-guará, tamanduá-bandeira. Planta: sempre-viva. O segundo maior bioma do Brasil. É a savana brasileira.',
+  html:M(DUO([['t_cerrado','Cerrado'],['t_sempreviva','sempre-viva']]),'',[LN('Onde fica','Centro.'),LN('Vegetação','árvores tortas, de caules retorcidos, e grama.'),LN('Animais','lobo-guará, tamanduá-bandeira.'),LN('Planta','sempre-viva.'),LN('Tamanho','o segundo maior bioma do Brasil. É a savana brasileira.')])},
+ {tipo:'texto', tit:'<em>Caatinga</em>', bioma:'caa',
+  fala:'Caatinga. Onde fica: Nordeste. Vegetação: plantas com espinhos (cactos). Animais: tatu, veado-catingueiro, asa-branca. Planta: louro-preto. Só existe no Brasil. Clima semiárido.',
+  html:M(DUO([['t_caatinga','Caatinga'],['t_louro','louro-preto']]),'',[LN('Onde fica','Nordeste.'),LN('Vegetação','plantas com espinhos (cactos).'),LN('Animais','tatu, veado-catingueiro, asa-branca.'),LN('Planta','louro-preto.'),LN('Só no Brasil','a Caatinga só existe no Brasil. Clima semiárido.')])},
+ {tipo:'texto', tit:'<em>Pampa</em>', bioma:'pam',
+  fala:'Pampa. Onde fica: Sul; no Brasil, só no Rio Grande do Sul. Vegetação: campos com capim baixo. Animais: cavalo, ema, quero-quero, capivara. Planta: capim-dos-pampas.',
+  html:M(DUO([['t_pampa','Pampa, com gado no campo'],['t_capim','capim-dos-pampas']]),'',[LN('Onde fica','Sul; no Brasil, só no Rio Grande do Sul.'),LN('Vegetação','campos com capim baixo.'),LN('Animais','cavalo, ema, quero-quero, capivara.'),LN('Planta','capim-dos-pampas.')])},
+ {tipo:'texto', tit:'<em>Pantanal</em>', bioma:'pan',
+  fala:'Pantanal. Onde fica: Mato Grosso e Mato Grosso do Sul. Vegetação: plantas que gostam de água. Animais: jacaré, tuiuiú, sucuri, capivara. Planta: bromélias em área alagada. Uma das maiores áreas úmidas do planeta, com alagamentos.',
+  html:M(DUO([['t_pantanal','Pantanal'],['t_bromelia_agua','bromélias em área alagada']]),'',[LN('Onde fica','Mato Grosso e Mato Grosso do Sul.'),LN('Vegetação','plantas que gostam de água.'),LN('Animais','jacaré, tuiuiú, sucuri, capivara.'),LN('Planta','bromélias em área alagada.'),LN('Área úmida','uma das maiores áreas úmidas do planeta, com alagamentos.')])},
+ {tipo:'texto', tit:'<em>Mata Atlântica</em>', bioma:'mat',
+  fala:'Mata Atlântica. Onde fica: Litoral. Vegetação: floresta úmida e densa. Animais: mico-leão-dourado, preguiça. Planta: bromélia. Muito rica, mas muito reduzida.',
+  html:M(DUO([['t_mata','Mata Atlântica'],['t_bromelia','bromélia']]),'',[LN('Onde fica','Litoral.'),LN('Vegetação','floresta úmida e densa.'),LN('Animais','mico-leão-dourado, preguiça.'),LN('Planta','bromélia.'),LN('Riqueza','muito rica, mas muito reduzida.')])}
 ]},
 
 /* T12. Preservação do meio ambiente (U4 S2, S3, S18–S22) */
@@ -288,22 +291,30 @@ var LS=[
  {tipo:'texto', tit:'Por que as <em>plantas</em> importam',
   fala:'Por que as plantas importam. As plantas ajudam a manter o ar limpo, protegem o solo, servem de alimento e abrigo para muitos animais e deixam o meio ambiente mais bonito e equilibrado.',
   html:M('t_araras_azuis','Araras-azuis no alto de árvore da floresta Amazônica preservada',[
-   LN('Ar limpo','as plantas ajudam a manter o ar limpo.'),
-   LN('Solo','as plantas protegem o solo.'),
-   LN('Alimento e abrigo','as plantas servem de alimento e abrigo para muitos animais.'),
-   LN('Bonito e equilibrado','as plantas deixam o meio ambiente mais bonito e equilibrado.')])},
+   LN('Ar limpo e solo','as plantas limpam o ar e protegem o solo.'),
+   LN('Alimento e abrigo','para muitos animais.'),
+   LN('Bonito e equilibrado','as plantas deixam o meio ambiente mais bonito e equilibrado.'),
+   LN('Mais árvores no bairro','ar mais limpo, solo protegido e abrigo para os animais.')])},
  {tipo:'texto', tit:'O <em>desmatamento</em>',
-  fala:'O desmatamento. Desmatamento é derrubar florestas para cultivos agrícolas, pastagens para gado e o crescimento das cidades. Ele causa a perda do hábitat dos animais. Outros impactos no meio ambiente: lixo nas margens dos rios, enchentes, ar e água poluídos, calor e ar seco.',
+  fala:'O desmatamento. Desmatamento é derrubar florestas para cultivos agrícolas, pastagens para gado e o crescimento das cidades. Ele causa a perda do hábitat dos animais.',
   html:M('t_desmatamento','Desmatamento da floresta',[
    LN('Desmatamento','derrubar florestas para cultivos agrícolas, pastagens para gado e o crescimento das cidades.'),
-   LN('Perda do hábitat','o desmatamento causa a perda do hábitat dos animais.'),
-   LN('Outros impactos no meio ambiente','lixo nas margens dos rios, enchentes, ar e água poluídos, calor e ar seco.')])},
+   LN('Perda do hábitat','o desmatamento causa a perda do hábitat dos animais.')],'larga')},
+ {tipo:'texto', tit:'<em>Impactos</em> no meio ambiente',
+  fala:'Impactos no meio ambiente. Nos rios: desmatamento da mata das margens e acúmulo de lixo nas margens. Na cidade: enchentes e ruas alagadas após uma chuva. Ar e água poluídos. Sensação de calor e ar seco. No campo: áreas agrícolas secas e sem água.',
+  html:M('t7_impactos','Impactos no meio ambiente',[
+   LN('Margens dos rios','desmatamento da mata das margens e acúmulo de lixo.'),
+   LN('Na cidade','enchentes e ruas alagadas após uma chuva.'),
+   LN('Poluição','ar e água poluídos.'),
+   LN('Calor','sensação de calor e ar seco.'),
+   LN('No campo','áreas agrícolas secas e sem água.')],'larga')},
  {tipo:'texto', tit:'<em>Preservar</em>',
-  fala:'Preservar. Preservar é responsabilidade coletiva, para o bem comum. Preservar a natureza garante a qualidade de vida das futuras gerações. Ter atenção com a vegetação e respeitar as áreas de preservação ajudam as plantas a continuarem vivas.',
+  fala:'Preservar. Preservar é responsabilidade coletiva, para o bem comum. Preservar a natureza garante a qualidade de vida das futuras gerações. Ter atenção com a vegetação e respeitar as áreas de preservação ajudam as plantas a continuarem vivas. Todos nós podemos ser um guardião do meio ambiente.',
   html:M('t_amazonia','Floresta vista de cima',[
    LN('Responsabilidade coletiva','preservar é de todos, para o bem comum.'),
    LN('Futuras gerações','preservar a natureza garante a qualidade de vida das futuras gerações.'),
-   LN('Áreas de preservação','ter atenção com a vegetação e respeitar as áreas de preservação ajudam as plantas a continuarem vivas.')],'larga')}
+   LN('Áreas de preservação','respeitá-las e ter atenção com a vegetação ajudam as plantas a continuarem vivas.'),
+   LN('Guardião do meio ambiente','todos nós podemos ser um.')],'larga')}
 ]}
 ];
 return LS;
