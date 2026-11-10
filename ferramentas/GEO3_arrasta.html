@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='ce75a311103';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='666f4a31151';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,8 +14,8 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Arrasta e solta — Biomas</title>
-<link rel="stylesheet" href="serafina-core.css?v=ce75a311103">
-<link rel="stylesheet" href="OP_estilo.css?v=ce75a311103">
+<link rel="stylesheet" href="serafina-core.css?v=666f4a31151">
+<link rel="stylesheet" href="OP_estilo.css?v=666f4a31151">
 <style>
 /* GEO3_arrasta v2 (10/11/2026, pedido do Paulo): fauna e flora dos 6 biomas.
    Fonte unica: trabalho/3tri_geografia/_roteiro.md T11 (tabela S8 + fotos S9-S14). Fotos = recortes da aula (media/geo3/t_*).
@@ -189,7 +189,7 @@ button{touch-action:manipulation}
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',home:'../index.html',somKey:'geo3_som',stars:90,unlock:true,starfield:true};</script>
-<script src="serafina-core.js?v=ce75a311103"></script>
+<script src="serafina-core.js?v=666f4a31151"></script>
 <script>
 /* ===== DADOS — _roteiro.md T11 (tabela S8 + fotos S9-S14). Nada inventado. ===== */
 var M='media/geo3/';
@@ -227,13 +227,13 @@ var ITENS=[
   {n:'Capim-dos-pampas',t:'p',b:['pam'],f:['t_capim.jpg']},
   {n:'Bromélia',t:'p',b:['mat','pan'],f:['t_bromelia.jpg','t_bromelia_agua.jpg'],
     por:{mat:{f:['t_bromelia.jpg']},pan:{sub:'em área alagada',f:['t_bromelia_agua.jpg']}}},
-  {n:'Árvores altas e muitas folhas',t:'v',b:['amz']},
   {n:'Árvores tortas e grama',t:'v',b:['cer']},
   {n:'Plantas com espinhos (cactos)',t:'v',b:['caa']},
   {n:'Campos com capim baixo',t:'v',b:['pam']},
-  {n:'Plantas que gostam de água',t:'v',b:['pan']},
-  {n:'Floresta úmida e densa',t:'v',b:['mat']}
+  {n:'Plantas que gostam de água',t:'v',b:['pan']}
 ];
+/* fora (Paulo 10/11): "Floresta úmida e densa" (Mata Atlantica) e "Arvores altas e muitas folhas" (Amazonia)
+   servem para os dois biomas aos olhos da crianca; nao entram em nada que tenha Amazonia e Mata Atlantica como escolhas */
 /* pares que se parecem: nao entram como distrator um do outro no modo B */
 var PARES={'Floresta úmida e densa':['Árvores altas e muitas folhas'],'Árvores altas e muitas folhas':['Floresta úmida e densa'],
   'Árvores tortas e grama':['Campos com capim baixo'],'Campos com capim baixo':['Árvores tortas e grama'],
@@ -557,7 +557,7 @@ function modoB(k,novo){
         if(Object.keys(B.feitos).length===BIOMAS.length) setTimeout(function(){
           fim('Muito bem!','Você achou tudo dos 6 biomas'+(B.erros? ' e errou '+B.erros+(B.erros>1?' vezes.':' vez.') : ' sem errar nenhum!'), function(){ modoB(0,true); });
         },600);
-      } else aviso('Isso!','ok');
+      } else { var f=certos.length-achou; aviso('Isso! '+(f===1?'Falta 1.':'Faltam '+f+'.'),'ok'); }
     } else {
       B.erros++; C.estado[i]='no'; desenha();
       var el=$('grade').querySelector('.it[data-i="'+i+'"]'); if(el) el.classList.add('erro');
@@ -565,7 +565,7 @@ function modoB(k,novo){
     }
   }
   desenha();
-  aviso('Toque em tudo o que é '+b.de+' '+esc(b.nome)+'.','');
+  aviso('São '+certos.length+' cartões '+b.de+' '+esc(b.nome)+'. Toque neles!','');
 }
 
 var tm=null;
@@ -577,6 +577,6 @@ inicio();
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#22c55e',accent2:'#fbbf24'};</script>
-<script src="sera_theme.js?v=ce75a311103"></script>
+<script src="sera_theme.js?v=666f4a31151"></script>
 </body>
 </html>
