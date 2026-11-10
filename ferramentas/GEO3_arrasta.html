@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='4256ab20843';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='ce75a311103';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,97 +14,123 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Arrasta e solta — Biomas</title>
-<link rel="stylesheet" href="serafina-core.css?v=4256ab20843">
-<link rel="stylesheet" href="OP_estilo.css?v=4256ab20843">
+<link rel="stylesheet" href="serafina-core.css?v=ce75a311103">
+<link rel="stylesheet" href="OP_estilo.css?v=ce75a311103">
 <style>
-/* GEO3_arrasta — subproduto extra (10/11/2026): fauna e flora dos 6 biomas.
+/* GEO3_arrasta v2 (10/11/2026, pedido do Paulo): fauna e flora dos 6 biomas.
    Fonte unica: trabalho/3tri_geografia/_roteiro.md T11 (tabela S8 + fotos S9-S14). Fotos = recortes da aula (media/geo3/t_*).
-   Modo A "Todos os biomas": arrastar (ou tocar e tocar) cada cartao para a caixa do bioma.
-   Modo B "Um bioma por vez": tocar em todos os cartoes do bioma que aparece.
-   Sem rolagem: a tela inteira cabe na janela (celular em pe/deitado, tablet, computador). */
+   Modo A "Todos os biomas": TODOS os cartoes a vista desde o inicio; as caixas comecam pequenas e crescem com o que entra.
+     Botao Dicas: cada cartao ganha a cor da caixa do seu bioma. Botao Fotos: cartao com foto grande ou so o nome.
+   Modo B "Um bioma por vez": tocar em tudo o que e do bioma que aparece.
+   Itens em 2 biomas (capivara, bromelia): o cartao fica ate entrar nos 2; a bromelia aparece com a foto de cada bioma
+   (Mata Atlantica: "Bromelia"; Pantanal: "Bromelias em area alagada", S14). */
 html,body{height:100%;overflow:hidden}
 button{touch-action:manipulation}
 .app{height:100vh;height:100dvh;min-height:0}
-.palco{flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 10px calc(8px + env(safe-area-inset-bottom));gap:8px;max-width:1100px;width:100%;margin:0 auto}
+.palco{flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 10px calc(8px + env(safe-area-inset-bottom));gap:7px;max-width:1180px;width:100%;margin:0 auto}
 /* ---------- inicio ---------- */
-.ini{margin:auto;width:100%;max-width:560px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;
-  box-shadow:0 8px 26px rgba(0,0,0,.28);display:flex;flex-direction:column;gap:12px;max-height:100%;overflow:auto}
+.ini{margin:auto;width:100%;max-width:520px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,.28);display:flex;flex-direction:column;gap:11px;max-height:100%;overflow:auto}
 .ini h1{font-size:calc(1.25rem*var(--fs));font-weight:900;text-align:center;color:var(--accent)}
-.ini h2{font-size:calc(.9rem*var(--fs));font-weight:900;color:var(--soft);text-align:center}
+.ini h2{font-size:calc(.85rem*var(--fs));font-weight:900;color:var(--soft);text-align:center;margin-top:2px}
 .filtros{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.chip{min-height:48px;padding:0 16px;border-radius:24px;border:2px solid var(--line);background:var(--surf);color:var(--ink);
-  font-family:inherit;font-weight:900;font-size:calc(.95rem*var(--fs));cursor:pointer}
+.chip{min-height:46px;padding:0 15px;border-radius:23px;border:2px solid var(--line);background:var(--surf);color:var(--ink);
+  font-family:inherit;font-weight:900;font-size:calc(.92rem*var(--fs));cursor:pointer}
 .chip.on{border-color:var(--accent);background:rgba(34,197,94,.18)}
 .chip small{font-weight:800;color:var(--soft);margin-left:4px}
-.modos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
 @media (max-width:420px){.modos{grid-template-columns:1fr}}
 .modo{border:2px solid var(--line);border-radius:16px;background:linear-gradient(150deg,rgba(74,222,128,.16),rgba(251,191,36,.10));
-  color:var(--ink);font-family:inherit;cursor:pointer;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:118px;text-align:center}
+  color:var(--ink);font-family:inherit;cursor:pointer;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:84px;text-align:center}
 .modo:active{transform:scale(.97)}
 .modo b{font-size:calc(1.05rem*var(--fs));font-weight:900}
-.modo span{font-size:calc(.82rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.3}
-.modo svg{width:42px;height:42px}
-/* ---------- cartao de item (bandeja, caixa e modo B) ---------- */
-.it{display:flex;align-items:center;gap:7px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);
-  font-family:inherit;font-weight:900;font-size:calc(.86rem*var(--fs));line-height:1.12;padding:5px 9px 5px 5px;min-height:52px;
-  cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;position:relative;text-align:left;box-shadow:var(--press)}
-.it img{width:46px;height:40px;object-fit:cover;border-radius:8px;flex:0 0 46px;pointer-events:none;background:#fff}
-.it.semfoto{padding-left:11px}
-.it.v{font-style:italic;font-weight:800;border-style:dashed;border-color:rgba(74,222,128,.55);background:linear-gradient(150deg,rgba(74,222,128,.14),var(--card))}
-.it .dois{position:absolute;top:-8px;right:-6px;background:#f59e0b;color:#1a1200;font-size:11px;font-weight:900;font-style:normal;
-  border-radius:9px;padding:1px 6px;line-height:16px;white-space:nowrap}
-.it.sel{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(251,191,36,.45)}
+.modo span{font-size:calc(.8rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.3}
+/* ---------- cartao ---------- */
+.it{position:relative;display:flex;align-items:center;justify-content:center;border-radius:12px;border:2px solid var(--line);
+  background:var(--card);color:var(--ink);font-family:inherit;font-weight:900;line-height:1.12;text-align:center;
+  cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;box-shadow:var(--press)}
+.it .nm{display:block;font-size:calc(.86rem*var(--fs)*var(--k,1))}
+.it .nm small{display:block;font-size:calc(.7rem*var(--fs));font-weight:800;color:var(--soft);margin-top:1px}
+.it.txt{min-height:44px;padding:5px 11px;max-width:172px}
+.it.foto{flex-direction:column;justify-content:flex-start;width:var(--tw,108px);padding:4px;gap:3px;font-size:calc(.8rem*var(--fs)*var(--k,1))}
+.it.foto .nm{font-size:1em}
+.it.foto .ft{display:flex;gap:2px;width:100%;height:var(--th,74px);border-radius:8px;overflow:hidden;flex:0 0 auto}
+.it.foto .ft img{flex:1;min-width:0;height:100%;object-fit:cover;pointer-events:none;background:#fff}
+.it.foto .nm{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:2.3em}
+.it.foto.semimg{justify-content:center}
+.it.foto.semimg .nm{min-height:calc(var(--th,74px) + 2.3em);font-size:1.15em}
+.it .dois{position:absolute;top:-9px;right:-5px;z-index:2;background:#f59e0b;color:#1a1200;font-size:11px;font-weight:900;
+  border-radius:9px;padding:1px 7px;line-height:17px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.it.sel{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(251,191,36,.5)}
 .it.erro{animation:treme .38s;border-color:var(--no)}
 @keyframes treme{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
-.fantasma{position:fixed;z-index:80;pointer-events:none;opacity:.94;transform:translate(-50%,-50%) scale(1.06);box-shadow:0 10px 24px rgba(0,0,0,.4)}
+/* dicas: o cartao fica com a cor da caixa do bioma (2 biomas = metade de cada cor) */
+.it.dica{border-color:var(--c1);border-width:3px;background:var(--card);
+  background:linear-gradient(100deg,color-mix(in srgb,var(--c1) 38%,var(--card)) 50%,color-mix(in srgb,var(--c2) 38%,var(--card)) 50%)}
+.fantasma{position:fixed;z-index:80;pointer-events:none;opacity:.95;transform:translate(-50%,-50%) scale(1.06);box-shadow:0 10px 24px rgba(0,0,0,.45)}
 .it.vazio{visibility:hidden}
-/* ---------- modo A: caixas ---------- */
-.caixas{flex:1;min-height:0;display:grid;gap:7px;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}
-.cx{touch-action:manipulation;min-height:0;border-radius:14px;border:2px solid var(--cor);background:var(--surf);background:linear-gradient(160deg,color-mix(in srgb,var(--cor) 26%,transparent),var(--surf));
-  display:flex;flex-direction:column;overflow:hidden;position:relative;transition:transform .12s}
-.cx .cab{display:flex;align-items:center;gap:7px;padding:5px;flex:0 0 auto}
-.cx .cab img{width:52px;height:38px;object-fit:cover;border-radius:8px;flex:0 0 52px}
-.cx .cab b{font-size:calc(.95rem*var(--fs));font-weight:900;line-height:1.05;flex:1;min-width:0}
-.cx .cab .cnt{flex:0 0 auto;font-size:calc(.78rem*var(--fs));font-weight:900;border-radius:10px;padding:2px 7px;background:var(--line)}
-.cx.cheia .cab .cnt{background:var(--ok);color:#06281a}
-.cx .dentro{flex:1;min-height:0;display:flex;flex-wrap:wrap;align-content:flex-start;gap:4px;padding:0 5px 5px;overflow:hidden}
-.cx .dentro span{font-size:calc(.72rem*var(--fs));font-weight:800;border-radius:8px;padding:2px 7px;background:var(--card);border:1px solid var(--line);line-height:1.2;max-width:100%}
+/* ---------- modo A ---------- */
+.caixas{flex:0 0 auto;overflow:hidden;display:grid;gap:6px;grid-template-columns:repeat(var(--cc,3),minmax(0,1fr));grid-auto-rows:max-content;align-content:start}
+.palco.acabou .caixas{max-height:none;flex:1;overflow-y:auto}
+.cx{touch-action:manipulation;border-radius:13px;border:3px solid var(--cor);background:var(--surf);
+  background:color-mix(in srgb,var(--cor) 13%,var(--card));overflow:hidden;transition:transform .12s;display:flex;flex-direction:column}
+.cx .cab{display:flex;align-items:center;gap:6px;padding:3px 6px;min-height:40px;background:var(--cor);color:#10131a}
+.cx .cab img{width:38px;height:28px;object-fit:cover;border-radius:6px;flex:0 0 38px}
+.cx .cab b{font-size:calc(.92rem*var(--fs));font-weight:900;line-height:1.05;flex:1;min-width:0}
+.cx .cab .cnt{flex:0 0 auto;font-size:calc(.76rem*var(--fs));font-weight:900;border-radius:10px;padding:2px 7px;background:rgba(255,255,255,.72);color:#10131a}
+.cx.cheia .cab .cnt{background:#065f46;color:#fff}
+.cx .dentro{display:flex;flex-wrap:wrap;align-content:flex-start;gap:3px;padding:4px 5px;max-height:var(--mx,none);overflow:hidden}
+.cx .dentro:empty{padding:0}
+.cx .dentro span{font-size:calc(.72rem*var(--fs));font-weight:800;border-radius:8px;padding:1px 6px;background:var(--card);border:1px solid var(--line);line-height:1.2;max-width:100%}
 .cx .dentro span.novo{animation:entra .5s}
-@keyframes entra{from{transform:scale(1.5);background:var(--ok)}}
+@keyframes entra{from{transform:scale(1.4);background:var(--ok)}}
 .cx .dentro .mais{background:transparent;border:none;color:var(--soft)}
 .cx.alvo{transform:scale(1.03);box-shadow:0 0 0 4px var(--accent2)}
 .cx.certa{animation:pisca 1.6s}
 @keyframes pisca{0%,50%,100%{box-shadow:0 0 0 0 transparent}25%,75%{box-shadow:0 0 0 5px var(--ok)}}
 .cx.errada{animation:treme .38s}
-.cx.selecionando{cursor:pointer}
-/* ---------- modo A: bandeja ---------- */
-.rodape{flex:0 0 auto;display:flex;flex-direction:column;gap:6px}
-.aviso{min-height:28px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:calc(.9rem*var(--fs));
-  border-radius:10px;padding:2px 10px;line-height:1.2}
+.meio{flex:0 0 auto;display:flex;align-items:center;gap:6px}
+.aviso{flex:1;min-width:0;min-height:30px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:calc(.86rem*var(--fs));
+  border-radius:10px;padding:2px 8px;line-height:1.2}
 .aviso.ok{color:var(--ok)}
-.aviso.no{background:rgba(248,113,113,.14);color:var(--ink)}
+.aviso.no{background:rgba(248,113,113,.14)}
 .aviso.no b{color:var(--no)}
-.bandeja{display:flex;gap:8px;justify-content:center;align-items:stretch;padding:8px;border-radius:14px;background:var(--surf);border:2px dashed var(--line);min-height:70px}
-.bandeja .it{flex:1 1 0;max-width:210px;min-width:0}
-.bandeja .resto{align-self:center;flex:0 0 auto;font-weight:900;font-size:calc(.8rem*var(--fs));color:var(--soft);white-space:nowrap}
+.tog{flex:0 0 auto;min-height:44px;min-width:44px;padding:0 11px;border-radius:12px;border:2px solid var(--line);background:var(--surf);color:var(--ink);
+  font-family:inherit;font-weight:900;font-size:calc(.82rem*var(--fs));cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.tog.on{border-color:var(--accent2);background:rgba(251,191,36,.2)}
+.tog svg{width:18px;height:18px}
+.bandeja{flex:1;min-height:0;padding:9px 6px 6px;border-radius:14px;background:var(--surf);border:2px dashed var(--line)}
+.bandeja.linhas{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-content:flex-start;overflow:hidden}
+/* nao cabe tudo: colunas que deslizam para o lado (o dedo desliza a bandeja na horizontal e arrasta o cartao para cima) */
+.bandeja.colunas{display:grid;grid-auto-flow:column;grid-template-rows:repeat(var(--rows,4),max-content);gap:8px;align-content:start;overflow-x:auto;overflow-y:hidden;justify-content:start}
+.bandeja.colunas .it{touch-action:pan-x}
+.bandeja.colunas .it.txt{width:150px;max-width:none;height:58px}
+.bandeja.colunas .it.txt .nm{font-size:calc(.82rem*var(--fs))}
+.bandeja.linhas .it.txt{width:var(--tw,auto);max-width:none;min-height:max(44px,calc(44px*var(--k,1)))}
+.bandeja .it.foto{height:calc(var(--th,74px) + 2.9em + 13px)}
+.bandeja .it.foto .nm{overflow:hidden}
+.palco.acabou .bandeja{display:none}
 /* ---------- modo B ---------- */
-.bcab{flex:0 0 auto;display:flex;gap:10px;align-items:center;border-radius:14px;border:2px solid var(--cor);padding:6px;
-  background:var(--surf);background:linear-gradient(160deg,color-mix(in srgb,var(--cor) 26%,transparent),var(--surf))}
-.bcab img{width:110px;height:72px;object-fit:cover;border-radius:10px;flex:0 0 110px}
+.bcab{flex:0 0 auto;display:flex;gap:10px;align-items:center;border-radius:14px;border:3px solid var(--cor);overflow:hidden;
+  background:var(--surf);background:color-mix(in srgb,var(--cor) 16%,var(--card))}
+.bcab img{width:118px;height:76px;object-fit:cover;flex:0 0 118px}
+.bcab .tx{flex:1;min-width:0;padding:4px 0 4px 8px}
+.bcab img+.tx{padding-left:0}
 .bcab h1{font-size:calc(1.2rem*var(--fs));font-weight:900;line-height:1.05}
-.bcab p{font-size:calc(.82rem*var(--fs));font-weight:800;color:var(--soft);margin-top:2px}
-.bcab .cnt{margin-left:auto;font-weight:900;font-size:calc(.9rem*var(--fs));border-radius:12px;padding:6px 10px;background:var(--line);white-space:nowrap;align-self:center}
+.bcab p{font-size:calc(.8rem*var(--fs));font-weight:800;color:var(--soft);margin-top:2px}
+.bcab .cnt{margin:0 10px 0 auto;font-weight:900;font-size:calc(.9rem*var(--fs));border-radius:12px;padding:6px 10px;background:var(--line);white-space:nowrap}
 .bcab .cnt.ok{background:var(--ok);color:#06281a}
-.grade{flex:1;min-height:0;display:grid;gap:7px;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));align-content:safe center;overflow:hidden}
-.grade.compacta .it{min-height:44px;padding-top:3px;padding-bottom:3px;font-size:calc(.8rem*var(--fs))}
-.grade.compacta .it img{height:34px;width:40px;flex-basis:40px}
-.grade .it{cursor:pointer;touch-action:manipulation;width:100%}
-.grade .it.acertou{border-color:var(--ok);background:rgba(52,211,153,.22);background:color-mix(in srgb,var(--ok) 22%,var(--card))}
-.grade .it.acertou::after{content:'\2713';position:absolute;right:6px;top:4px;color:var(--ok);font-weight:900}
-.grade .it.errou{border-color:var(--no);opacity:.75}
-.grade .it .de{display:block;font-size:calc(.7rem*var(--fs));font-weight:900;color:var(--no);font-style:normal}
+.grade{flex:1;min-height:0;overflow-y:auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-content:flex-start;padding:8px 2px 4px}
+.grade .it{cursor:pointer}
+.grade.aperto .it .ft{display:none}
+.grade .it.txt{flex:0 0 var(--tw,calc(50% - 4px));max-width:240px}
+.grade .it.acertou{border-color:var(--ok);border-width:3px;background:rgba(52,211,153,.2)}
+.grade .it.acertou::after{content:'\2713';position:absolute;right:5px;top:2px;color:var(--ok);font-weight:900;font-size:16px}
+.grade .it.errou{border-color:var(--no);opacity:.8}
+.grade .it .de{display:block;font-size:calc(.7rem*var(--fs));font-weight:900;color:var(--no)}
+.grade .it .tb{display:block;font-size:calc(.7rem*var(--fs));font-weight:900;color:var(--ok)}
 .navb{flex:0 0 auto;display:flex;gap:8px;justify-content:space-between;align-items:center}
-.navb button{white-space:nowrap;min-height:48px;padding:0 16px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.95rem*var(--fs));cursor:pointer}
+.navb button{white-space:nowrap;min-height:46px;padding:0 15px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.92rem*var(--fs));cursor:pointer}
 .navb button.forte{border-color:var(--accent);background:linear-gradient(135deg,rgba(74,222,128,.32),rgba(251,191,36,.2))}
 .navb button[disabled]{opacity:.4;cursor:default}
 .navb .pts{display:flex;gap:5px}
@@ -120,37 +146,28 @@ button{touch-action:manipulation}
 .fimbox button{min-height:48px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer}
 .fimbox button.forte{border-color:var(--accent);background:linear-gradient(135deg,rgba(74,222,128,.32),rgba(251,191,36,.2))}
 /* ---------- telas pequenas ---------- */
-@media (max-width:430px){.topbar{gap:3px;padding:6px}.topbar .title{display:none}}
-/* celular em pe: 2 colunas x 3 linhas de caixas */
-@media (max-aspect-ratio:4/5){.caixas{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}}
-/* tela baixa (celular deitado): caixas e bandeja lado a lado */
+@media (max-width:430px){.topbar{gap:3px;padding:6px}.topbar .title{display:none}.tog .rt{display:none}}
 @media (max-height:500px) and (min-aspect-ratio:5/4){
-  .palco.modoA{flex-direction:row}
-  .palco.modoA .rodape{width:34%;max-width:300px;justify-content:center}
-  .palco.modoA .bandeja{flex-direction:column;flex:1;min-height:0;justify-content:flex-start}
-  .palco.modoA .bandeja .it{flex:0 0 auto;max-width:none}
-  .cx .cab img{display:none}
-  /* modo B deitado: bioma, aviso e setas na coluna da esquerda; cartoes ocupam a altura toda na direita */
-  .palco.modoB{display:grid;grid-template-columns:minmax(200px,32%) 1fr;grid-template-rows:auto 1fr auto;column-gap:10px}
+  .palco.modoA{display:grid;grid-template-columns:56% 1fr;grid-template-rows:auto 1fr;column-gap:8px;row-gap:6px}
+  .palco.modoA .caixas{grid-column:1;grid-row:1/3;max-height:none;min-height:0}
+  .palco.modoA .meio{grid-column:2;grid-row:1}
+  .palco.modoA .aviso{font-size:calc(.8rem*var(--fs))}
+  .palco.modoA .bandeja{grid-column:2;grid-row:2}
+  .palco.modoA.acabou{grid-template-columns:1fr}
+  .palco.modoA.acabou .meio{display:none}
+  .palco.modoB .bcab img{width:100%;height:58px;flex-basis:100%}
+  .palco.modoB{display:grid;grid-template-columns:minmax(210px,32%) 1fr;grid-template-rows:auto 1fr auto;column-gap:10px}
   .palco.modoB .bcab{grid-column:1;grid-row:1;flex-wrap:wrap}
-  .palco.modoB .aviso{grid-column:1;grid-row:2;align-self:center}
+  .palco.modoB .bcab .cnt{margin:0 0 6px 8px}
+  .palco.modoB .meio{grid-column:1;grid-row:2;flex-direction:column;justify-content:center}
+  .palco.modoB .aviso{flex:0 0 auto}
   .palco.modoB .navb{grid-column:1;grid-row:3}
-  .palco.modoB .navb button{padding:0 10px;white-space:nowrap}
   .palco.modoB .navb .pts{display:none}
-  .palco.modoB .grade{grid-column:2;grid-row:1/4;height:100%}
-  .bcab img{width:76px;height:50px;flex-basis:76px}
-  .bcab .cnt{margin-left:0}
-  .bcab{padding:4px}
-  .it{min-height:44px}
-  .it img{height:34px}
+  .palco.modoB .navb button{padding:0 10px}
+  .palco.modoB .grade{grid-column:2;grid-row:1/4}
 }
-@media (max-width:430px) and (max-aspect-ratio:4/5){
-  .cx .cab{gap:5px;padding:4px}
-  .cx .cab img{width:32px;height:26px;flex-basis:32px}
-  .cx .cab b{font-size:calc(.82rem*var(--fs))}
-  .cx .cab .cnt{padding:2px 5px}
-  .bcab img{width:84px;height:58px;flex-basis:84px}
-}
+@media (max-height:500px){.bcab img{width:84px;height:54px;flex-basis:84px}.cx .cab{min-height:36px}.cx .cab img{display:none}
+  .ini{gap:6px;padding:10px 14px}.ini h1{font-size:calc(1.05rem*var(--fs))}.chip{min-height:44px}.modo{min-height:56px;padding:6px}.modo span{display:none}}
 </style>
 </head>
 <body>
@@ -172,7 +189,7 @@ button{touch-action:manipulation}
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',home:'../index.html',somKey:'geo3_som',stars:90,unlock:true,starfield:true};</script>
-<script src="serafina-core.js?v=4256ab20843"></script>
+<script src="serafina-core.js?v=ce75a311103"></script>
 <script>
 /* ===== DADOS — _roteiro.md T11 (tabela S8 + fotos S9-S14). Nada inventado. ===== */
 var M='media/geo3/';
@@ -184,30 +201,32 @@ var BIOMAS=[
   {id:'pan',de:'do',nome:'Pantanal',onde:'Mato Grosso e Mato Grosso do Sul',foto:'t_pantanal.jpg',cor:'#c084fc'},
   {id:'mat',de:'da',nome:'Mata Atlântica',onde:'Litoral do Brasil',foto:'t_mata.jpg',cor:'#60a5fa'}
 ];
-/* t: a = animal (fauna) · p = planta (flora) · v = vegetacao (frase da tabela, entra em "Plantas") */
+/* t: a = animal (fauna) · p = planta (flora) · v = vegetacao (frase da tabela, entra em "Plantas")
+   f = foto da aula; por = como o item aparece em cada bioma quando o material mostra diferente */
 var ITENS=[
   {n:'Onça-pintada',t:'a',b:['amz']},
   {n:'Macaco',t:'a',b:['amz']},
-  {n:'Arara',t:'a',b:['amz'],f:'t_arara.jpg'},
-  {n:'Lobo-guará',t:'a',b:['cer'],f:'t_loboguara.jpg'},
+  {n:'Arara',t:'a',b:['amz'],f:['t_arara.jpg']},
+  {n:'Lobo-guará',t:'a',b:['cer'],f:['t_loboguara.jpg']},
   {n:'Tamanduá-bandeira',t:'a',b:['cer']},
   {n:'Tatu',t:'a',b:['caa']},
   {n:'Veado-catingueiro',t:'a',b:['caa']},
-  {n:'Asa-branca',t:'a',b:['caa'],f:'t_asabranca.jpg'},
+  {n:'Asa-branca',t:'a',b:['caa'],f:['t_asabranca.jpg']},
   {n:'Cavalo',t:'a',b:['pam']},
   {n:'Ema',t:'a',b:['pam']},
-  {n:'Quero-quero',t:'a',b:['pam'],f:'t_queroquero.jpg'},
-  {n:'Capivara',t:'a',b:['pam','pan']} /* sem foto: a da aula e do Pantanal e entregaria um bioma so */,
+  {n:'Quero-quero',t:'a',b:['pam'],f:['t_queroquero.jpg']},
+  {n:'Capivara',t:'a',b:['pam','pan'],f:['t_capivara.jpg']},
   {n:'Jacaré',t:'a',b:['pan']},
   {n:'Tuiuiú',t:'a',b:['pan']},
   {n:'Sucuri',t:'a',b:['pan']},
-  {n:'Mico-leão-dourado',t:'a',b:['mat'],f:'t_mico.jpg'},
+  {n:'Mico-leão-dourado',t:'a',b:['mat'],f:['t_mico.jpg']},
   {n:'Preguiça',t:'a',b:['mat']},
-  {n:'Vitória-régia',t:'p',b:['amz'],f:'t_vitoria.jpg'},
-  {n:'Sempre-viva',t:'p',b:['cer'],f:'t_sempreviva.jpg'},
-  {n:'Louro-preto',t:'p',b:['caa'],f:'t_louro.jpg'},
-  {n:'Capim-dos-pampas',t:'p',b:['pam'],f:'t_capim.jpg'},
-  {n:'Bromélia',t:'p',b:['mat','pan']} /* idem: cada foto da aula e de um bioma */,
+  {n:'Vitória-régia',t:'p',b:['amz'],f:['t_vitoria.jpg']},
+  {n:'Sempre-viva',t:'p',b:['cer'],f:['t_sempreviva.jpg']},
+  {n:'Louro-preto',t:'p',b:['caa'],f:['t_louro.jpg']},
+  {n:'Capim-dos-pampas',t:'p',b:['pam'],f:['t_capim.jpg']},
+  {n:'Bromélia',t:'p',b:['mat','pan'],f:['t_bromelia.jpg','t_bromelia_agua.jpg'],
+    por:{mat:{f:['t_bromelia.jpg']},pan:{sub:'em área alagada',f:['t_bromelia_agua.jpg']}}},
   {n:'Árvores altas e muitas folhas',t:'v',b:['amz']},
   {n:'Árvores tortas e grama',t:'v',b:['cer']},
   {n:'Plantas com espinhos (cactos)',t:'v',b:['caa']},
@@ -224,48 +243,82 @@ var PARES={'Floresta úmida e densa':['Árvores altas e muitas folhas'],'Árvore
 (function(){
 'use strict';
 var $=function(id){return document.getElementById(id);};
-var palco=$('palco'), K='geo3_arrasta_filtro';
-var filtro='tudo'; try{ filtro=localStorage.getItem(K)||'tudo'; }catch(e){}
+var palco=$('palco');
+function pega(k,d){ try{ var v=localStorage.getItem(k); return v===null?d:v; }catch(e){ return d; } }
+function guarda(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+var filtro=pega('geo3_arrasta_filtro','tudo');
+var comFoto=pega('geo3_arrasta_fotos','1')==='1';
+var dicas=pega('geo3_arrasta_dicas','0')==='1';
 function bio(id){ for(var i=0;i<BIOMAS.length;i++) if(BIOMAS[i].id===id) return BIOMAS[i]; }
 function filtrados(){ return ITENS.filter(function(it){ return filtro==='tudo' || (filtro==='a' ? it.t==='a' : it.t!=='a'); }); }
 function emb(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
 function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 function barra(p){ $('bar').style.width=Math.round(p*100)+'%'; }
-function cartao(it,extra){
-  var h='<div class="it'+(it.f?'':' semfoto')+(it.t==='v'?' v':'')+(extra||'')+'">';
-  if(it.f) h+='<img src="'+M+it.f+'" alt="">';
-  h+='<span class="nm">'+esc(it.n)+'</span></div>';
-  return h;
-}
 function nomes(bs){ return bs.map(function(id){return bio(id).nome;}).join(' e '); }
+function noBioma(b){ return (b.de==='da'?'na ':'no ')+b.nome; }
+/* nome como aparece na caixa do bioma (bromelia no Pantanal = "em area alagada") */
+function rotulo(it,bId){ var v=it.por&&it.por[bId]; return it.n+(v&&v.sub?' ('+v.sub+')':''); }
+/* um cartao. o: {tag, attrs, bioma (mostra a versao daquele bioma), cores (dicas), selo, cls, extra} */
+function cartao(it,o){
+  o=o||{};
+  var v=(o.bioma&&it.por&&it.por[o.bioma])||{};
+  var fotos=v.f||it.f, sub=v.sub||'';
+  var cls='it '+(comFoto?'foto'+(fotos?'':' semimg'):'txt')+(o.cls?' '+o.cls:'');
+  var st='';
+  if(o.cores&&o.cores.length){ cls+=' dica'; st=' style="--c1:'+bio(o.cores[0]).cor+';--c2:'+bio(o.cores[o.cores.length-1]).cor+'"'; }
+  var tag=o.tag||'div';
+  var h='<'+tag+(tag==='button'?' type="button"':'')+' class="'+cls+'"'+st+(o.attrs||'')+'>';
+  if(comFoto&&fotos){ h+='<span class="ft">'; fotos.forEach(function(f){ h+='<img src="'+M+f+'" alt="">'; }); h+='</span>'; }
+  h+='<span class="nm">'+esc(it.n)+(sub?'<small>'+esc(sub)+'</small>':'')+(o.extra||'')+'</span>';
+  if(o.selo) h+='<span class="dois">'+o.selo+'</span>';
+  return h+'</'+tag+'>';
+}
+function togs(){
+  return (palco.classList.contains('modoA')?'<button class="tog'+(dicas?' on':'')+'" id="tDicas" title="Dicas: cada cartão com a cor do seu bioma"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="rt">Dicas</span></button>':'')
+   +'<button class="tog'+(comFoto?' on':'')+'" id="tFotos" title="Mostrar fotos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M3 16l5-5 4 4 3-3 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.6" fill="currentColor"/></svg><span class="rt">Fotos</span></button>';
+}
+function ligaTogs(redesenha){
+  var d=$('tDicas'), f=$('tFotos');
+  if(d) d.onclick=function(){ dicas=!dicas; guarda('geo3_arrasta_dicas',dicas?'1':'0'); d.classList.toggle('on',dicas);
+    aviso(dicas?'Cada cartão está com a cor do seu bioma.':'Dicas desligadas.',''); redesenha(); };
+  if(f) f.onclick=function(){ comFoto=!comFoto; guarda('geo3_arrasta_fotos',comFoto?'1':'0'); f.classList.toggle('on',comFoto); redesenha(); };
+}
+function aviso(html,cl){ var a=$('aviso'); if(!a) return; a.className='aviso'+(cl?' '+cl:''); a.innerHTML=html; }
 
 /* ================= INICIO ================= */
 window.inicio=function(){
-  fechaFim(); palco.className='palco'; barra(0);
+  fechaFim(); palco.className='palco'; barra(0); A=null;
   var cont={tudo:ITENS.length,a:0,p:0}; ITENS.forEach(function(it){ if(it.t==='a') cont.a++; else cont.p++; });
   palco.innerHTML='<div class="ini">'
    +'<h1>Arrasta e solta: biomas</h1>'
    +'<h2>O que vamos colocar?</h2>'
-   +'<div class="filtros">'
+   +'<div class="filtros" id="fF">'
    +'<button class="chip" data-f="tudo">Tudo<small>'+cont.tudo+'</small></button>'
    +'<button class="chip" data-f="a">Animais (fauna)<small>'+cont.a+'</small></button>'
    +'<button class="chip" data-f="p">Plantas (flora)<small>'+cont.p+'</small></button></div>'
+   +'<h2>Cartões</h2>'
+   +'<div class="filtros" id="fV"><button class="chip" data-v="1">Com fotos</button><button class="chip" data-v="0">Sem fotos</button></div>'
    +'<div class="modos">'
-   +'<button class="modo" id="mA"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="4" y="5" width="17" height="13" rx="3"/><rect x="27" y="5" width="17" height="13" rx="3"/><rect x="4" y="22" width="17" height="13" rx="3"/><rect x="27" y="22" width="17" height="13" rx="3" stroke-dasharray="4 3"/><path d="M14 44l10-6 3 4" stroke-linecap="round"/></g></svg><b>Todos os biomas</b><span>Arraste cada cartão para o bioma certo</span></button>'
-   +'<button class="modo" id="mB"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="6" y="4" width="36" height="14" rx="3"/><rect x="6" y="23" width="10" height="9" rx="2"/><rect x="19" y="23" width="10" height="9" rx="2"/><rect x="32" y="23" width="10" height="9" rx="2"/><rect x="6" y="35" width="10" height="9" rx="2"/><rect x="19" y="35" width="10" height="9" rx="2"/><path d="M34 38l3 3 5-6" stroke-linecap="round"/></g></svg><b>Um bioma por vez</b><span>Toque em tudo o que é do bioma</span></button>'
+   +'<button class="modo" id="mA"><b>Todos os biomas</b><span>Arraste cada cartão para o bioma certo</span></button>'
+   +'<button class="modo" id="mB"><b>Um bioma por vez</b><span>Toque em tudo o que é do bioma</span></button>'
    +'</div></div>';
-  function pinta(){ palco.querySelectorAll('.chip').forEach(function(c){ c.classList.toggle('on',c.getAttribute('data-f')===filtro); }); }
-  palco.querySelectorAll('.chip').forEach(function(c){ c.onclick=function(){ filtro=c.getAttribute('data-f'); try{localStorage.setItem(K,filtro);}catch(e){} pinta(); }; });
+  function pinta(){
+    palco.querySelectorAll('#fF .chip').forEach(function(c){ c.classList.toggle('on',c.getAttribute('data-f')===filtro); });
+    palco.querySelectorAll('#fV .chip').forEach(function(c){ c.classList.toggle('on',(c.getAttribute('data-v')==='1')===comFoto); });
+  }
+  palco.querySelectorAll('#fF .chip').forEach(function(c){ c.onclick=function(){ filtro=c.getAttribute('data-f'); guarda('geo3_arrasta_filtro',filtro); pinta(); }; });
+  palco.querySelectorAll('#fV .chip').forEach(function(c){ c.onclick=function(){ comFoto=c.getAttribute('data-v')==='1'; guarda('geo3_arrasta_fotos',comFoto?'1':'0'); pinta(); }; });
   pinta();
   $('mA').onclick=modoA; $('mB').onclick=function(){ modoB(0,true); };
 };
 
 /* ================= FIM ================= */
-function fim(titulo,txt,deNovo,rotulo){
-  $('fimbox').innerHTML='<h2>'+titulo+'</h2><p>'+txt+'</p><button class="forte" id="fimDeNovo">'+(rotulo||'Jogar de novo')+'</button><button id="fimMenu">Escolher outro jeito</button>';
+function fim(titulo,txt,deNovo,rot){
+  $('fimbox').innerHTML='<h2>'+titulo+'</h2><p>'+txt+'</p><button class="forte" id="fimDeNovo">'+(rot||'Jogar de novo')+'</button><button id="fimMenu">Escolher outro jeito</button><button id="fimVer">Ver os biomas</button>';
   $('fimov').classList.add('show');
   $('fimDeNovo').onclick=function(){ fechaFim(); deNovo(); };
   $('fimMenu').onclick=inicio;
+  $('fimVer').onclick=fechaFim;
 }
 function fechaFim(){ $('fimov').classList.remove('show'); }
 
@@ -282,87 +335,131 @@ function modoA(){
   BIOMAS.forEach(function(b){
     h+='<div class="cx" data-b="'+b.id+'" style="--cor:'+b.cor+'"><div class="cab"><img src="'+M+b.foto+'" alt=""><b>'+b.nome+'</b><span class="cnt"></span></div><div class="dentro"></div></div>';
   });
-  h+='</div><div class="rodape"><div class="aviso" id="aviso"></div><div class="bandeja" id="bandeja"></div></div>';
+  h+='</div><div class="meio"><div class="aviso" id="aviso"></div>'+togs()+'</div><div class="bandeja" id="bandeja"></div>';
   palco.innerHTML=h;
-  palco.querySelectorAll('.cx').forEach(function(cx){ cx.onclick=function(){ if(A.sel!==null) solta(A.sel, cx.getAttribute('data-b')); }; });
-  aviso('Arraste um cartão para o bioma dele.','');
+  palco.querySelectorAll('.cx').forEach(function(cx){ cx.onclick=function(){ if(A&&A.sel!==null) solta(A.sel, cx.getAttribute('data-b')); }; });
+  ligaTogs(desenhaA);
+  aviso(dicas?'Cada cartão está com a cor do seu bioma.':'Arraste cada cartão para o bioma dele.','');
   desenhaA();
 }
-function quantosNaBandeja(){
-  var band=$('bandeja'); if(!band) return 3;
-  var vert=getComputedStyle(band).flexDirection==='column';
-  if(vert) return Math.max(2,Math.min(5,Math.floor((band.clientHeight-16)/60)));
-  return Math.max(2,Math.min(5,Math.floor((band.clientWidth-16)/150)));
-}
 function desenhaA(){
-  var band=$('bandeja'), n=quantosNaBandeja(), h='';
-  var vis=A.fila.slice(0,n);
-  vis.forEach(function(x,i){
-    var extra=''; var html=cartao(x.it,'');
-    if(x.it.b.length>1){
-      var put=x.it.b.length-x.falta.length;
-      html=html.replace('</div>','<span class="dois">'+(put?'falta 1 bioma':'vai em 2 biomas')+'</span></div>');
-    }
-    h+=html.replace('<div class="it','<div data-i="'+i+'" class="it'+(A.sel===i?' sel':''));
+  if(!A) return;
+  var band=$('bandeja'), h='';
+  palco.classList.toggle('acabou',!A.fila.length);
+  A.fila.forEach(function(x,i){
+    var selo='';
+    if(x.it.b.length>1) selo=(x.falta.length<x.it.b.length)?'falta 1':'vai em 2';
+    h+=cartao(x.it,{attrs:' data-i="'+i+'"', cls:(A.sel===i?'sel':''), cores:dicas?x.falta:null, selo:selo});
   });
-  var resto=A.fila.length-vis.length;
-  if(resto>0) h+='<span class="resto">+'+resto+'</span>';
   band.innerHTML=h;
+  arrumaBandeja();
   band.querySelectorAll('.it').forEach(function(el){ arrastavel(el, +el.getAttribute('data-i')); });
   /* caixas: contagem e o que ja entrou */
   var porB={}; filtrados().forEach(function(it){ it.b.forEach(function(b){ porB[b]=(porB[b]||0)+1; }); });
+  var cxs=$('caixas'), cc=cxs.clientWidth<520?2:3, deitado=matchMedia('(max-height:500px) and (min-aspect-ratio:5/4)').matches;
+  cxs.style.setProperty('--cc',cc);
+  palco.querySelectorAll('.cx .cab img').forEach(function(im){ im.style.display=(comFoto&&cc>2)?'':'none'; });
+  /* altura maxima de cada caixa: as caixas crescem, mas a bandeja nunca some enquanto houver cartao */
+  var cx0=palco.querySelector('.cx'), linhas=Math.ceil(6/cc), cab=cx0.querySelector('.cab').offsetHeight+6, cap=deitado?palco.clientHeight-20:palco.clientHeight-20-$('aviso').parentNode.offsetHeight-(comFoto?140:76)-14,
+      lim=A.fila.length?(cap-(linhas-1)*6)/linhas-cab:9999;
+  cxs.style.maxHeight=A.fila.length&&!deitado?cap+'px':'';
   palco.querySelectorAll('.cx').forEach(function(cx){
     var id=cx.getAttribute('data-b'), d=A.dentro[id], tot=porB[id]||0;
     cx.querySelector('.cnt').textContent=d.length+'/'+tot;
     cx.classList.toggle('cheia',d.length===tot);
-    cx.classList.toggle('selecionando',A.sel!==null);
-    encaixa(cx.querySelector('.dentro'), d);
+    var box=cx.querySelector('.dentro'); box.style.setProperty('--mx',Math.max(24,Math.floor(lim))+'px');
+    encaixa(box, d);
   });
+  arrumaBandeja();
   barra(A.feitos/A.total);
 }
-/* mostra o que ja entrou; se nao cabe, os mais recentes ficam e o resto vira "+n" */
+/* todos os cartoes a vista; se nao cabem em linhas, viram colunas que deslizam para o lado */
+function arrumaBandeja(){
+  var band=$('bandeja');
+  band.className='bandeja linhas'; ['--th','--tw','--k'].forEach(function(v){ band.style.removeProperty(v); });
+  var tams=comFoto?[180,160,142,126,108]:[220,196,176,158,140];
+  for(var t=0;t<tams.length;t++){
+    var tw=tams[t];
+    band.style.setProperty('--tw',tw+'px');
+    band.style.setProperty('--k',Math.min(1.35,comFoto?tw/108:tw/150).toFixed(3));
+    if(comFoto) band.style.setProperty('--th',Math.round(tw*.68)+'px');
+    if(band.scrollHeight<=band.clientHeight+1) return;
+  }
+  ['--th','--tw','--k'].forEach(function(v){ band.style.removeProperty(v); });
+  band.className='bandeja colunas';
+  var it=band.querySelector('.it'); if(!it) return;
+  var H=band.clientHeight-15, alt=it.offsetHeight;
+  if(comFoto){
+    /* foto ajustada para encher linhas inteiras (sem faixa vazia embaixo) */
+    var rows=Math.max(1,Math.round((H+8)/(alt+8)));
+    var sobra=(rows*alt+(rows-1)*8-H)/rows;
+    if(sobra>0 && 74-sobra<44 && rows>1){ rows--; sobra=(rows*alt+(rows-1)*8-H)/rows; }
+    band.style.setProperty('--th',Math.max(44,Math.min(110,Math.floor(74-sobra)))+'px');
+    alt=it.offsetHeight;
+  }
+  band.style.setProperty('--rows',Math.max(1,Math.floor((H+8)/(alt+8))));
+}
+/* modo B: o maior cartao que deixa todos a vista sem rolar */
+function ajustaGrade(){
+  var g=$('grade'); if(!g) return;
+  var W=g.clientWidth-4, n=g.children.length, tent=[];
+  if(comFoto){
+    for(var c=2;c<=8;c++){ var tw=Math.min(170,Math.floor((W-(c-1)*8)/c)); if(tw<78) break; tent.push({tw:tw,th:Math.round(tw*.62)}); }
+    var u=tent[tent.length-1]||{tw:78,th:48};
+    [40,32,26].forEach(function(t){ if(t<u.th) tent.push({tw:u.tw,th:t}); });
+  } else {
+    for(var c2=2;c2<=5;c2++){ var t2=Math.floor((W-(c2-1)*8)/c2); if(t2<112) break; tent.push({tw:t2}); }
+  }
+  g.classList.remove('aperto');
+  for(var i=0;i<tent.length;i++){
+    g.style.setProperty('--tw',tent[i].tw+'px');
+    if(tent[i].th) g.style.setProperty('--th',tent[i].th+'px');
+    if(g.scrollHeight<=g.clientHeight+1) return;
+  }
+  /* ultimo recurso (tela muito baixa): so a foto do cartao sai, o nome fica */
+  if(comFoto) g.classList.add('aperto');
+}
+/* o que ja entrou na caixa; se nao cabe, os mais recentes ficam e o resto vira "+n" */
 function encaixa(box, d){
-  var spans=d.map(function(x){ return '<span'+(x.novo?' class="novo"':'')+'>'+esc(x.n)+'</span>'; });
-  d.forEach(function(x){ x.novo=false; });
+  var spans=d.map(function(x){ return '<span>'+esc(x.n)+'</span>'; });
   box.innerHTML=spans.join('');
   var k=0;
   while(box.scrollHeight>box.clientHeight+1 && k<d.length){
     k++;
     box.innerHTML='<span class="mais">+'+k+'</span>'+spans.slice(k).join('');
   }
+  var sp=box.querySelectorAll('span:not(.mais)'), base=d.length-sp.length;
+  d.forEach(function(x,j){ if(x.novo && j>=base) sp[j-base].classList.add('novo'); x.novo=false; });
 }
-function aviso(html,cl){ var a=$('aviso'); if(!a) return; a.className='aviso'+(cl?' '+cl:''); a.innerHTML=html; }
 function solta(i, bId){
   var x=A.fila[i]; if(!x) return;
   var cx=palco.querySelector('.cx[data-b="'+bId+'"]');
   A.sel=null;
   if(x.falta.indexOf(bId)>=0){
     x.falta.splice(x.falta.indexOf(bId),1);
-    A.dentro[bId].push({n:x.it.n,novo:true}); A.feitos++;
+    A.dentro[bId].push({n:rotulo(x.it,bId),novo:true}); A.feitos++;
     if(!x.falta.length) A.fila.splice(i,1);
-    else { A.fila.splice(i,1); A.fila.splice(Math.min(1,A.fila.length),0,x); }
-    aviso(x.falta.length ? esc(x.it.n)+' também está em outro bioma.' : 'Isso!','ok');
+    aviso(x.falta.length ? '<b>'+esc(x.it.n)+'</b>&nbsp;está em 2 biomas. Falta 1!' : 'Isso!','ok');
     desenhaA();
     if(!A.fila.length) setTimeout(function(){
       fim('Muito bem!', 'Você colocou os '+A.total+' cartões'+(A.erros? ' e errou '+A.erros+(A.erros>1?' vezes.':' vez.') : ' sem errar nenhum!'), modoA);
     },500);
     return;
   }
-  if(x.it.b.indexOf(bId)>=0){ aviso(esc(x.it.n)+' já está '+(bio(bId).de==='da'?'na ':'no ')+esc(bio(bId).nome)+'.',''); desenhaA(); return; }
+  if(x.it.b.indexOf(bId)>=0){ aviso(esc(x.it.n)+' já está '+esc(noBioma(bio(bId)))+'.',''); desenhaA(); return; }
   A.erros++;
   if(cx){ cx.classList.remove('errada'); void cx.offsetWidth; cx.classList.add('errada'); }
   x.falta.forEach(function(b){ var c=palco.querySelector('.cx[data-b="'+b+'"]'); if(c){ c.classList.remove('certa'); void c.offsetWidth; c.classList.add('certa'); } });
   aviso('<b>'+esc(x.it.n)+'</b>&nbsp;&rarr; '+esc(nomes(x.falta)),'no');
   desenhaA();
-  var el=$('bandeja').querySelector('.it[data-i="'+i+'"]'); if(el){ el.classList.add('erro'); }
+  var el=$('bandeja').querySelector('.it[data-i="'+i+'"]'); if(el) el.classList.add('erro');
 }
 /* arrastar com o dedo/mouse; toque sem arrastar = selecionar e depois tocar na caixa */
 function arrastavel(el, i){
   el.addEventListener('pointerdown', function(ev){
     if(ev.button>0||!ev.isPrimary||arrastando) return;
     arrastando=true;
-    ev.preventDefault();
-    var x0=ev.clientX, y0=ev.clientY, fant=null, alvo=null;
+    var x0=ev.clientX, y0=ev.clientY, fant=null, alvo=null, feito=false;
     try{ el.setPointerCapture(ev.pointerId); }catch(e){}
     function caixaEm(x,y){
       if(fant) fant.style.display='none';
@@ -380,7 +477,6 @@ function arrastavel(el, i){
       var c=caixaEm(e.clientX,e.clientY);
       if(c!==alvo){ if(alvo) alvo.classList.remove('alvo'); alvo=c; if(alvo) alvo.classList.add('alvo'); }
     }
-    var feito=false;
     function up(e){
       if(feito) return; feito=true; arrastando=false;
       el.removeEventListener('pointermove',move); el.removeEventListener('pointerup',up); el.removeEventListener('pointercancel',up); el.removeEventListener('lostpointercapture',up);
@@ -390,11 +486,11 @@ function arrastavel(el, i){
         fant.remove(); el.classList.remove('vazio');
         if(c && e.type==='pointerup') solta(i, c.getAttribute('data-b')); else desenhaA();
         return;
-      } else {
-        A.sel=(A.sel===i)?null:i;
-        if(A.sel!==null) aviso('Agora toque no bioma de <b>'+esc(A.fila[i].it.n)+'</b>.','');
-        desenhaA();
       }
+      if(e.type!=='pointerup') return;
+      A.sel=(A.sel===i)?null:i;
+      if(A.sel!==null) aviso('Agora toque no bioma de <b>'+esc(A.fila[i].it.n)+'</b>.','');
+      desenhaA();
     }
     el.addEventListener('pointermove',move); el.addEventListener('pointerup',up); el.addEventListener('pointercancel',up); el.addEventListener('lostpointercapture',up);
   });
@@ -403,87 +499,84 @@ function arrastavel(el, i){
 /* ================= MODO B — um bioma por vez ================= */
 var B=null;
 function modoB(k,novo){
-  fechaFim();
-  if(novo||!B) B={erros:0,feitos:{},k:0};
+  fechaFim(); A=null;
+  if(novo||!B) B={erros:0,feitos:{},k:0,cartas:{}};
   B.k=k;
   var b=BIOMAS[k], pool=filtrados();
   var certos=pool.filter(function(it){ return it.b.indexOf(b.id)>=0; });
-  /* nunca distrator (pedagogico 10/11): vitoria-regia no Pantanal (roteiro), e os pares parecidos um do outro */
-  var veta={}; certos.forEach(function(it){ (PARES[it.n]||[]).forEach(function(n){ veta[n]=1; }); });
-  if(b.id==='pan'){ veta['Vitória-régia']=1; veta['Onça-pintada']=1; } /* onca: fora do material ela tambem e do Pantanal */
-  if(b.id==='amz') veta['Plantas que gostam de água']=1; /* a Amazonia tem rio e vitoria-regia: a crianca defenderia */
-  var outros=emb(pool.filter(function(it){ return it.b.indexOf(b.id)<0 && !veta[it.n]; }));
-  /* distratores do mesmo tipo que os certos, para nao dar pista pelo formato */
-  var nDis=Math.min(outros.length, Math.max(3, certos.length));
-  var tipos={}; certos.forEach(function(it){ tipos[it.t]=(tipos[it.t]||0)+1; });
-  var dis=[];
-  Object.keys(tipos).forEach(function(t){ outros.filter(function(o){return o.t===t;}).slice(0,Math.ceil(nDis*tipos[t]/certos.length)).forEach(function(o){ if(dis.indexOf(o)<0) dis.push(o); }); });
-  outros.forEach(function(o){ if(dis.length<nDis && dis.indexOf(o)<0) dis.push(o); });
-  dis=dis.slice(0,nDis);
-  var cartas=emb(certos.concat(dis));
-  var st={achou:0, total:certos.length};
+  if(!B.cartas[k]){
+    /* nunca distrator (pedagogico e detector, 10/11): pares parecidos; vitoria-regia e onca no Pantanal; agua na Amazonia */
+    var veta={}; certos.forEach(function(it){ (PARES[it.n]||[]).forEach(function(n){ veta[n]=1; }); });
+    if(b.id==='pan'){ veta['Vitória-régia']=1; veta['Onça-pintada']=1; }
+    if(b.id==='amz') veta['Plantas que gostam de água']=1;
+    var outros=emb(pool.filter(function(it){ return it.b.indexOf(b.id)<0 && !veta[it.n]; }));
+    var nDis=Math.min(outros.length, Math.max(3, certos.length));
+    /* distratores do mesmo tipo que os certos, na mesma proporcao (nada de pista pelo formato) */
+    var tipos={}; certos.forEach(function(it){ tipos[it.t]=(tipos[it.t]||0)+1; });
+    var dis=[];
+    Object.keys(tipos).forEach(function(t){ outros.filter(function(o){return o.t===t;}).slice(0,Math.ceil(nDis*tipos[t]/certos.length)).forEach(function(o){ if(dis.indexOf(o)<0) dis.push(o); }); });
+    outros.forEach(function(o){ if(dis.length<nDis && dis.indexOf(o)<0) dis.push(o); });
+    B.cartas[k]={lista:emb(certos.concat(dis.slice(0,nDis))), estado:{}};
+  }
+  var C=B.cartas[k];
   palco.className='palco modoB';
-  var h='<div class="bcab" style="--cor:'+b.cor+'"><img src="'+M+b.foto+'" alt=""><div><h1>'+b.nome+'</h1><p>'+esc(b.onde)+'</p></div><span class="cnt" id="bcnt"></span></div>';
-  h+='<div class="aviso" id="aviso"></div>';
-  h+='<div class="grade" id="grade">';
-  cartas.forEach(function(it,i){ h+=cartao(it,'').replace('<div class="it','<button type="button" data-i="'+i+'" class="it').replace(/<\/div>$/,'</button>'); });
-  h+='</div><div class="navb"><button id="bPrev">&#8249; Voltar</button><span class="pts">';
-  BIOMAS.forEach(function(x,i){ h+='<i class="'+(i===k?'on':(B.feitos[i]?'ok':''))+'"></i>'; });
-  h+='</span><button id="bNext" class="forte">Próximo &#8250;</button></div>';
-  palco.innerHTML=h;
-  colunas(cartas.length);
-  function conta(){
-    var c=$('bcnt'); c.textContent=st.achou+' de '+st.total; c.classList.toggle('ok',st.achou===st.total);
-    barra((k+st.achou/st.total)/BIOMAS.length);
-  }
-  conta();
-  aviso('Toque em tudo o que é '+b.de+' '+esc(b.nome)+'.','');
-  $('grade').querySelectorAll('.it').forEach(function(el){
-    el.onclick=function(){
-      var it=cartas[+el.getAttribute('data-i')];
-      if(el.classList.contains('acertou')||el.classList.contains('errou')) return;
-      if(it.b.indexOf(b.id)>=0){
-        el.classList.add('acertou'); st.achou++; conta();
-        if(st.achou===st.total){
-          B.feitos[k]=true; aviso('Achou tudo '+b.de+' '+esc(b.nome)+'!','ok');
-          if(Object.keys(B.feitos).length===BIOMAS.length) setTimeout(function(){
-            fim('Muito bem!','Você achou tudo dos 6 biomas'+(B.erros? ' e errou '+B.erros+(B.erros>1?' vezes.':' vez.') : ' sem errar nenhum!'), function(){ modoB(0,true); });
-          },600);
-        } else aviso('Isso!','ok');
-      } else {
-        B.erros++; el.classList.add('errou','erro');
-        el.querySelector('.nm').insertAdjacentHTML('beforeend','<span class="de">'+esc(nomes(it.b))+'</span>');
-        aviso('<b>'+esc(it.n)+'</b>&nbsp;&rarr; '+esc(nomes(it.b)),'no');
-      }
+  function desenha(){
+    var achou=0; C.lista.forEach(function(it,i){ if(C.estado[i]==='ok') achou++; });
+    var h='<div class="bcab" style="--cor:'+b.cor+'">'+(comFoto?'<img src="'+M+b.foto+'" alt="">':'')+'<div class="tx"><h1>'+b.nome+'</h1><p>'+esc(b.onde)+'</p></div><span class="cnt'+(achou===certos.length?' ok':'')+'" id="bcnt">'+achou+' de '+certos.length+'</span></div>';
+    h+='<div class="meio"><div class="aviso" id="aviso"></div>'+togs()+'</div><div class="grade" id="grade">';
+    C.lista.forEach(function(it,i){
+      var e=C.estado[i], extra='', cls='';
+      if(e==='ok'){ cls='acertou'; var outro=it.b.filter(function(x){return x!==b.id;}); if(outro.length) extra='<span class="tb">também '+esc(noBioma(bio(outro[0])))+'</span>'; }
+      if(e==='no'){ cls='errou'; extra='<span class="de">'+esc(nomes(it.b))+'</span>'; }
+      h+=cartao(it,{tag:'button', attrs:' data-i="'+i+'"', bioma:it.b.indexOf(b.id)>=0?b.id:null, cls:cls, extra:extra});
+    });
+    h+='</div><div class="navb"><button id="bPrev">&#8249; Voltar</button><span class="pts">';
+    BIOMAS.forEach(function(x,j){ h+='<i class="'+(j===k?'on':(B.feitos[j]?'ok':''))+'"></i>'; });
+    h+='</span><button id="bNext" class="forte">Próximo &#8250;</button></div>';
+    palco.innerHTML=h;
+    barra((k+achou/certos.length)/BIOMAS.length);
+    ligaTogs(function(){ var a=$('aviso').innerHTML, c=$('aviso').className; desenha(); $('aviso').innerHTML=a; $('aviso').className=c; });
+    ajustaGrade();
+    $('grade').querySelectorAll('.it').forEach(function(el){ el.onclick=function(){ toca(+el.getAttribute('data-i')); }; });
+    $('bPrev').disabled=(k===0);
+    $('bPrev').onclick=function(){ if(k>0) modoB(k-1); };
+    $('bNext').onclick=function(){
+      if(k<BIOMAS.length-1){ modoB(k+1); return; }
+      var falta=BIOMAS.filter(function(x,j){ return !B.feitos[j]; });
+      if(falta.length) fim('Faltou um pouco','Ainda falta achar tudo em: '+esc(falta.map(function(x){return x.nome;}).join(', '))+'.',function(){ modoB(BIOMAS.indexOf(falta[0])); },'Ir para o que falta');
+      else fim('Muito bem!','Você achou tudo dos 6 biomas.',function(){ modoB(0,true); });
     };
-  });
-  $('bPrev').disabled=(k===0);
-  $('bPrev').onclick=function(){ if(k>0) modoB(k-1); };
-  $('bNext').onclick=function(){ if(k<BIOMAS.length-1) modoB(k+1); else { var falta=BIOMAS.filter(function(x,i){ return !B.feitos[i]; }).map(function(x){ return x.nome; });
-    if(falta.length) fim('Faltou um pouco','Ainda falta achar tudo em: '+esc(falta.join(', '))+'.',function(){ modoB(BIOMAS.indexOf(BIOMAS.filter(function(x,i){return !B.feitos[i];})[0])); },'Ir para o que falta');
-    else fim('Muito bem!','Você achou tudo dos 6 biomas.',function(){ modoB(0,true); }); } };
-}
-/* quantas colunas fazem os cartoes caberem sem rolar */
-function colunas(n){
-  var g=$('grade'); if(!g) return;
-  g.classList.remove('compacta');
-  var w=g.clientWidth, max=Math.max(2,Math.min(4,Math.floor(w/120)));
-  /* menos colunas = cartoes mais largos; so aumenta se nao couber; ultimo recurso: cartao compacto */
-  for(var pass=0;pass<2;pass++){
-    for(var c=2;c<=max;c++){ g.style.setProperty('--cols',c); if(g.scrollHeight<=g.clientHeight+1) return; }
-    g.classList.add('compacta');
+    return achou;
   }
+  function toca(i){
+    var it=C.lista[i]; if(C.estado[i]) return;
+    if(it.b.indexOf(b.id)>=0){
+      C.estado[i]='ok'; var achou=desenha();
+      if(achou===certos.length){
+        B.feitos[k]=true; aviso('Achou tudo '+b.de+' '+esc(b.nome)+'!','ok');
+        if(Object.keys(B.feitos).length===BIOMAS.length) setTimeout(function(){
+          fim('Muito bem!','Você achou tudo dos 6 biomas'+(B.erros? ' e errou '+B.erros+(B.erros>1?' vezes.':' vez.') : ' sem errar nenhum!'), function(){ modoB(0,true); });
+        },600);
+      } else aviso('Isso!','ok');
+    } else {
+      B.erros++; C.estado[i]='no'; desenha();
+      var el=$('grade').querySelector('.it[data-i="'+i+'"]'); if(el) el.classList.add('erro');
+      aviso('<b>'+esc(it.n)+'</b>&nbsp;&rarr; '+esc(nomes(it.b)),'no');
+    }
+  }
+  desenha();
+  aviso('Toque em tudo o que é '+b.de+' '+esc(b.nome)+'.','');
 }
 
 var tm=null;
 addEventListener('resize',function(){ clearTimeout(tm); tm=setTimeout(function(){
   if(palco.classList.contains('modoA')&&A&&!arrastando) desenhaA();
-  else if(palco.classList.contains('modoB')){ var g=$('grade'); if(g) colunas(g.children.length); }
+  if(palco.classList.contains('modoB')) ajustaGrade();
 },120); });
 inicio();
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#22c55e',accent2:'#fbbf24'};</script>
-<script src="sera_theme.js?v=4256ab20843"></script>
+<script src="sera_theme.js?v=ce75a311103"></script>
 </body>
 </html>
