@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='666f4a31151';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='abbb8071215';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,8 +14,8 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Arrasta e solta — Biomas</title>
-<link rel="stylesheet" href="serafina-core.css?v=666f4a31151">
-<link rel="stylesheet" href="OP_estilo.css?v=666f4a31151">
+<link rel="stylesheet" href="serafina-core.css?v=abbb8071215">
+<link rel="stylesheet" href="OP_estilo.css?v=abbb8071215">
 <style>
 /* GEO3_arrasta v2 (10/11/2026, pedido do Paulo): fauna e flora dos 6 biomas.
    Fonte unica: trabalho/3tri_geografia/_roteiro.md T11 (tabela S8 + fotos S9-S14). Fotos = recortes da aula (media/geo3/t_*).
@@ -143,6 +143,10 @@ button{touch-action:manipulation}
 .fimbox{width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 16px;text-align:center;display:flex;flex-direction:column;gap:10px}
 .fimbox h2{font-size:calc(1.3rem*var(--fs));font-weight:900;color:var(--accent)}
 .fimbox p{font-weight:800;color:var(--soft)}
+.fimbox{max-height:100%;overflow-y:auto}
+.mais{list-style:none;display:flex;flex-direction:column;gap:5px;text-align:left}
+.mais li{border-left:6px solid var(--cor);background:var(--surf);border-radius:8px;padding:5px 8px;font-size:calc(.8rem*var(--fs));font-weight:700;line-height:1.3}
+.mais li b{display:block;font-weight:900}
 .fimbox button{min-height:48px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer}
 .fimbox button.forte{border-color:var(--accent);background:linear-gradient(135deg,rgba(74,222,128,.32),rgba(251,191,36,.2))}
 /* ---------- telas pequenas ---------- */
@@ -189,17 +193,17 @@ button{touch-action:manipulation}
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',home:'../index.html',somKey:'geo3_som',stars:90,unlock:true,starfield:true};</script>
-<script src="serafina-core.js?v=666f4a31151"></script>
+<script src="serafina-core.js?v=abbb8071215"></script>
 <script>
 /* ===== DADOS — _roteiro.md T11 (tabela S8 + fotos S9-S14). Nada inventado. ===== */
 var M='media/geo3/';
 var BIOMAS=[
-  {id:'amz',de:'da',nome:'Amazônia',onde:'Norte do Brasil',foto:'t_amazonia.jpg',cor:'#84cc16'},
-  {id:'cer',de:'do',nome:'Cerrado',onde:'Centro do Brasil',foto:'t_cerrado.jpg',cor:'#f472b6'},
-  {id:'caa',de:'da',nome:'Caatinga',onde:'Nordeste do Brasil',foto:'t_caatinga.jpg',cor:'#facc15'},
-  {id:'pam',de:'do',nome:'Pampa',onde:'Sul do Brasil',foto:'t_pampa.jpg',cor:'#fb923c'},
-  {id:'pan',de:'do',nome:'Pantanal',onde:'Mato Grosso e Mato Grosso do Sul',foto:'t_pantanal.jpg',cor:'#c084fc'},
-  {id:'mat',de:'da',nome:'Mata Atlântica',onde:'Litoral do Brasil',foto:'t_mata.jpg',cor:'#60a5fa'}
+  {id:'amz',mais:'Árvores altas e muitas folhas. É o maior bioma do Brasil.',de:'da',nome:'Amazônia',onde:'Norte do Brasil',foto:'t_amazonia.jpg',cor:'#84cc16'},
+  {id:'cer',mais:'Árvores tortas e grama. É o segundo maior bioma do Brasil.',de:'do',nome:'Cerrado',onde:'Centro do Brasil',foto:'t_cerrado.jpg',cor:'#f472b6'},
+  {id:'caa',mais:'Plantas com espinhos (cactos). Só existe no Brasil.',de:'da',nome:'Caatinga',onde:'Nordeste do Brasil',foto:'t_caatinga.jpg',cor:'#facc15'},
+  {id:'pam',mais:'Campos com capim baixo. Só existe no Rio Grande do Sul.',de:'do',nome:'Pampa',onde:'Sul do Brasil',foto:'t_pampa.jpg',cor:'#fb923c'},
+  {id:'pan',mais:'Plantas que gostam de água. Tem alagamentos.',de:'do',nome:'Pantanal',onde:'Mato Grosso e Mato Grosso do Sul',foto:'t_pantanal.jpg',cor:'#c084fc'},
+  {id:'mat',mais:'Floresta úmida e densa, no litoral. Está muito reduzida.',de:'da',nome:'Mata Atlântica',onde:'Litoral do Brasil',foto:'t_mata.jpg',cor:'#60a5fa'}
 ];
 /* t: a = animal (fauna) · p = planta (flora) · v = vegetacao (frase da tabela, entra em "Plantas")
    f = foto da aula; por = como o item aparece em cada bioma quando o material mostra diferente */
@@ -232,7 +236,8 @@ var ITENS=[
   {n:'Campos com capim baixo',t:'v',b:['pam']},
   {n:'Plantas que gostam de água',t:'v',b:['pan']}
 ];
-/* fora (Paulo 10/11): "Floresta úmida e densa" (Mata Atlantica) e "Arvores altas e muitas folhas" (Amazonia)
+/* MAIS (Paulo 10/11): o que o material diz de cada bioma (tabela S8 + cartazes S17) aparece DEPOIS que a crianca
+   completa o bioma, como informacao, nao como cartao. Fora dos cartoes (Paulo 10/11): "Floresta úmida e densa" (Mata Atlantica) e "Arvores altas e muitas folhas" (Amazonia)
    servem para os dois biomas aos olhos da crianca; nao entram em nada que tenha Amazonia e Mata Atlantica como escolhas */
 /* pares que se parecem: nao entram como distrator um do outro no modo B */
 var PARES={'Floresta úmida e densa':['Árvores altas e muitas folhas'],'Árvores altas e muitas folhas':['Floresta úmida e densa'],
@@ -314,7 +319,8 @@ window.inicio=function(){
 
 /* ================= FIM ================= */
 function fim(titulo,txt,deNovo,rot){
-  $('fimbox').innerHTML='<h2>'+titulo+'</h2><p>'+txt+'</p><button class="forte" id="fimDeNovo">'+(rot||'Jogar de novo')+'</button><button id="fimMenu">Escolher outro jeito</button><button id="fimVer">Ver os biomas</button>';
+  var lista='<ul class="mais">'+BIOMAS.map(function(b){ return '<li style="--cor:'+b.cor+'"><b>'+b.nome+'</b>'+esc(b.mais)+'</li>'; }).join('')+'</ul>';
+  $('fimbox').innerHTML='<h2>'+titulo+'</h2><p>'+txt+'</p>'+lista+'<button class="forte" id="fimDeNovo">'+(rot||'Jogar de novo')+'</button><button id="fimMenu">Escolher outro jeito</button><button id="fimVer">Ver os biomas</button>';
   $('fimov').classList.add('show');
   $('fimDeNovo').onclick=function(){ fechaFim(); deNovo(); };
   $('fimMenu').onclick=inicio;
@@ -439,7 +445,9 @@ function solta(i, bId){
     x.falta.splice(x.falta.indexOf(bId),1);
     A.dentro[bId].push({n:rotulo(x.it,bId),novo:true}); A.feitos++;
     if(!x.falta.length) A.fila.splice(i,1);
-    aviso(x.falta.length ? '<b>'+esc(x.it.n)+'</b>&nbsp;está em 2 biomas. Falta 1!' : 'Isso!','ok');
+    var tot=filtrados().filter(function(it){ return it.b.indexOf(bId)>=0; }).length, bb=bio(bId);
+    if(A.dentro[bId].length===tot) aviso('<b>'+esc(bb.nome)+'</b>&nbsp;completo! '+esc(bb.mais),'ok');
+    else aviso(x.falta.length ? '<b>'+esc(x.it.n)+'</b>&nbsp;está em 2 biomas. Falta 1!' : 'Isso!','ok');
     desenhaA();
     if(!A.fila.length) setTimeout(function(){
       fim('Muito bem!', 'Você colocou os '+A.total+' cartões'+(A.erros? ' e errou '+A.erros+(A.erros>1?' vezes.':' vez.') : ' sem errar nenhum!'), modoA);
@@ -553,7 +561,7 @@ function modoB(k,novo){
     if(it.b.indexOf(b.id)>=0){
       C.estado[i]='ok'; var achou=desenha();
       if(achou===certos.length){
-        B.feitos[k]=true; aviso('Achou tudo '+b.de+' '+esc(b.nome)+'!','ok');
+        B.feitos[k]=true; aviso('Achou tudo! '+esc(b.mais),'ok'); ajustaGrade();
         if(Object.keys(B.feitos).length===BIOMAS.length) setTimeout(function(){
           fim('Muito bem!','Você achou tudo dos 6 biomas'+(B.erros? ' e errou '+B.erros+(B.erros>1?' vezes.':' vez.') : ' sem errar nenhum!'), function(){ modoB(0,true); });
         },600);
@@ -577,6 +585,6 @@ inicio();
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#22c55e',accent2:'#fbbf24'};</script>
-<script src="sera_theme.js?v=666f4a31151"></script>
+<script src="sera_theme.js?v=abbb8071215"></script>
 </body>
 </html>
