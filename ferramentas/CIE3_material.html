@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c32f5491041';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='4256ab20843';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -13,7 +13,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>School Material — Science</title>
-<link rel="stylesheet" href="serafina-core.css?v=c32f5491041">
+<link rel="stylesheet" href="serafina-core.css?v=4256ab20843">
 <style>
 /* CIE3_material — o material ORIGINAL da escola, sem alteração: slides do zip e os 3 vídeos indicados. */
 :root{--fs:1;--bg:#0d0b1e;--txt:#f4f1ff;--sft:#c7c2e6;--crd:#1b1738;--lin:#3b3566;--trc:#fbbf24}
@@ -65,7 +65,7 @@ body.show-tr .tr{display:block}
 <div id="zoom" onclick="this.classList.remove('on')"><img id="zimg" alt=""></div>
 <div id="unlockov"></div>
 <script>window.SERA_CFG={trKey:'cie3_tr',lang:'en-US',voz:'thalitamultilingual',rate:.8,home:'../index.html',somKey:'cie3_som',stars:80};</script>
-<script src="serafina-core.js?v=c32f5491041"></script>
+<script src="serafina-core.js?v=4256ab20843"></script>
 <script>
 var S=[['preposicoes','Prepositions of place','Preposições de lugar'],['sala','Prepositions of place: complete','Preposições de lugar: complete'],['mapa','Reading a map','Lendo um mapa'],['perspectiva','Changing perspectives','Mudando a perspectiva'],['agua-vento','Movement of water and wind','Movimento da água e do vento'],['objetos','Movements of objects','Movimentos dos objetos'],['corpo-mao','Movements of the body and the hand','Movimentos do corpo e da mão'],['push-pull','Push and pull','Empurrar e puxar']];
 document.getElementById('grade').innerHTML=S.map(function(s){return '<button class="slide" data-z="media/cie3/orig/'+s[0]+'.jpg"><img loading="lazy" src="media/cie3/orig/'+s[0]+'.jpg" alt="'+s[1]+'"><span class="l">'+s[1]+'<span class="tr">'+s[2]+'</span></span></button>';}).join('');
@@ -76,6 +76,6 @@ document.getElementById('vids').innerHTML=V.map(function(v){return '<div class="
 [].forEach.call(document.querySelectorAll('.play'),function(b){b.onclick=function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.getAttribute('data-id')+'?rel=0&modestbranding=1&autoplay=1&playsinline=1&iv_load_policy=3';f.setAttribute('sandbox','allow-scripts allow-same-origin allow-presentation');f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;f.title='video';b.parentNode.replaceChild(f,b);};});
 </script>
 <script>window.SERA_ACCENT={accent:'#f97316'};</script>
-<script src="sera_theme.js?v=c32f5491041"></script>
+<script src="sera_theme.js?v=4256ab20843"></script>
 </body>
 </html>

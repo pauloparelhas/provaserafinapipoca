@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='4256ab20843';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Arrasta e solta — Biomas</title>
+<link rel="stylesheet" href="serafina-core.css?v=4256ab20843">
+<link rel="stylesheet" href="OP_estilo.css?v=4256ab20843">
+<style>
+/* GEO3_arrasta — subproduto extra (10/11/2026): fauna e flora dos 6 biomas.
+   Fonte unica: trabalho/3tri_geografia/_roteiro.md T11 (tabela S8 + fotos S9-S14). Fotos = recortes da aula (media/geo3/t_*).
+   Modo A "Todos os biomas": arrastar (ou tocar e tocar) cada cartao para a caixa do bioma.
+   Modo B "Um bioma por vez": tocar em todos os cartoes do bioma que aparece.
+   Sem rolagem: a tela inteira cabe na janela (celular em pe/deitado, tablet, computador). */
+html,body{height:100%;overflow:hidden}
+button{touch-action:manipulation}
+.app{height:100vh;height:100dvh;min-height:0}
+.palco{flex:1;min-height:0;display:flex;flex-direction:column;padding:8px 10px calc(8px + env(safe-area-inset-bottom));gap:8px;max-width:1100px;width:100%;margin:0 auto}
+/* ---------- inicio ---------- */
+.ini{margin:auto;width:100%;max-width:560px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,.28);display:flex;flex-direction:column;gap:12px;max-height:100%;overflow:auto}
+.ini h1{font-size:calc(1.25rem*var(--fs));font-weight:900;text-align:center;color:var(--accent)}
+.ini h2{font-size:calc(.9rem*var(--fs));font-weight:900;color:var(--soft);text-align:center}
+.filtros{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.chip{min-height:48px;padding:0 16px;border-radius:24px;border:2px solid var(--line);background:var(--surf);color:var(--ink);
+  font-family:inherit;font-weight:900;font-size:calc(.95rem*var(--fs));cursor:pointer}
+.chip.on{border-color:var(--accent);background:rgba(34,197,94,.18)}
+.chip small{font-weight:800;color:var(--soft);margin-left:4px}
+.modos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.modos{grid-template-columns:1fr}}
+.modo{border:2px solid var(--line);border-radius:16px;background:linear-gradient(150deg,rgba(74,222,128,.16),rgba(251,191,36,.10));
+  color:var(--ink);font-family:inherit;cursor:pointer;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:118px;text-align:center}
+.modo:active{transform:scale(.97)}
+.modo b{font-size:calc(1.05rem*var(--fs));font-weight:900}
+.modo span{font-size:calc(.82rem*var(--fs));font-weight:800;color:var(--soft);line-height:1.3}
+.modo svg{width:42px;height:42px}
+/* ---------- cartao de item (bandeja, caixa e modo B) ---------- */
+.it{display:flex;align-items:center;gap:7px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);
+  font-family:inherit;font-weight:900;font-size:calc(.86rem*var(--fs));line-height:1.12;padding:5px 9px 5px 5px;min-height:52px;
+  cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;position:relative;text-align:left;box-shadow:var(--press)}
+.it img{width:46px;height:40px;object-fit:cover;border-radius:8px;flex:0 0 46px;pointer-events:none;background:#fff}
+.it.semfoto{padding-left:11px}
+.it.v{font-style:italic;font-weight:800;border-style:dashed;border-color:rgba(74,222,128,.55);background:linear-gradient(150deg,rgba(74,222,128,.14),var(--card))}
+.it .dois{position:absolute;top:-8px;right:-6px;background:#f59e0b;color:#1a1200;font-size:11px;font-weight:900;font-style:normal;
+  border-radius:9px;padding:1px 6px;line-height:16px;white-space:nowrap}
+.it.sel{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(251,191,36,.45)}
+.it.erro{animation:treme .38s;border-color:var(--no)}
+@keyframes treme{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.fantasma{position:fixed;z-index:80;pointer-events:none;opacity:.94;transform:translate(-50%,-50%) scale(1.06);box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.it.vazio{visibility:hidden}
+/* ---------- modo A: caixas ---------- */
+.caixas{flex:1;min-height:0;display:grid;gap:7px;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr))}
+.cx{touch-action:manipulation;min-height:0;border-radius:14px;border:2px solid var(--cor);background:var(--surf);background:linear-gradient(160deg,color-mix(in srgb,var(--cor) 26%,transparent),var(--surf));
+  display:flex;flex-direction:column;overflow:hidden;position:relative;transition:transform .12s}
+.cx .cab{display:flex;align-items:center;gap:7px;padding:5px;flex:0 0 auto}
+.cx .cab img{width:52px;height:38px;object-fit:cover;border-radius:8px;flex:0 0 52px}
+.cx .cab b{font-size:calc(.95rem*var(--fs));font-weight:900;line-height:1.05;flex:1;min-width:0}
+.cx .cab .cnt{flex:0 0 auto;font-size:calc(.78rem*var(--fs));font-weight:900;border-radius:10px;padding:2px 7px;background:var(--line)}
+.cx.cheia .cab .cnt{background:var(--ok);color:#06281a}
+.cx .dentro{flex:1;min-height:0;display:flex;flex-wrap:wrap;align-content:flex-start;gap:4px;padding:0 5px 5px;overflow:hidden}
+.cx .dentro span{font-size:calc(.72rem*var(--fs));font-weight:800;border-radius:8px;padding:2px 7px;background:var(--card);border:1px solid var(--line);line-height:1.2;max-width:100%}
+.cx .dentro span.novo{animation:entra .5s}
+@keyframes entra{from{transform:scale(1.5);background:var(--ok)}}
+.cx .dentro .mais{background:transparent;border:none;color:var(--soft)}
+.cx.alvo{transform:scale(1.03);box-shadow:0 0 0 4px var(--accent2)}
+.cx.certa{animation:pisca 1.6s}
+@keyframes pisca{0%,50%,100%{box-shadow:0 0 0 0 transparent}25%,75%{box-shadow:0 0 0 5px var(--ok)}}
+.cx.errada{animation:treme .38s}
+.cx.selecionando{cursor:pointer}
+/* ---------- modo A: bandeja ---------- */
+.rodape{flex:0 0 auto;display:flex;flex-direction:column;gap:6px}
+.aviso{min-height:28px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:calc(.9rem*var(--fs));
+  border-radius:10px;padding:2px 10px;line-height:1.2}
+.aviso.ok{color:var(--ok)}
+.aviso.no{background:rgba(248,113,113,.14);color:var(--ink)}
+.aviso.no b{color:var(--no)}
+.bandeja{display:flex;gap:8px;justify-content:center;align-items:stretch;padding:8px;border-radius:14px;background:var(--surf);border:2px dashed var(--line);min-height:70px}
+.bandeja .it{flex:1 1 0;max-width:210px;min-width:0}
+.bandeja .resto{align-self:center;flex:0 0 auto;font-weight:900;font-size:calc(.8rem*var(--fs));color:var(--soft);white-space:nowrap}
+/* ---------- modo B ---------- */
+.bcab{flex:0 0 auto;display:flex;gap:10px;align-items:center;border-radius:14px;border:2px solid var(--cor);padding:6px;
+  background:var(--surf);background:linear-gradient(160deg,color-mix(in srgb,var(--cor) 26%,transparent),var(--surf))}
+.bcab img{width:110px;height:72px;object-fit:cover;border-radius:10px;flex:0 0 110px}
+.bcab h1{font-size:calc(1.2rem*var(--fs));font-weight:900;line-height:1.05}
+.bcab p{font-size:calc(.82rem*var(--fs));font-weight:800;color:var(--soft);margin-top:2px}
+.bcab .cnt{margin-left:auto;font-weight:900;font-size:calc(.9rem*var(--fs));border-radius:12px;padding:6px 10px;background:var(--line);white-space:nowrap;align-self:center}
+.bcab .cnt.ok{background:var(--ok);color:#06281a}
+.grade{flex:1;min-height:0;display:grid;gap:7px;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));align-content:safe center;overflow:hidden}
+.grade.compacta .it{min-height:44px;padding-top:3px;padding-bottom:3px;font-size:calc(.8rem*var(--fs))}
+.grade.compacta .it img{height:34px;width:40px;flex-basis:40px}
+.grade .it{cursor:pointer;touch-action:manipulation;width:100%}
+.grade .it.acertou{border-color:var(--ok);background:rgba(52,211,153,.22);background:color-mix(in srgb,var(--ok) 22%,var(--card))}
+.grade .it.acertou::after{content:'\2713';position:absolute;right:6px;top:4px;color:var(--ok);font-weight:900}
+.grade .it.errou{border-color:var(--no);opacity:.75}
+.grade .it .de{display:block;font-size:calc(.7rem*var(--fs));font-weight:900;color:var(--no);font-style:normal}
+.navb{flex:0 0 auto;display:flex;gap:8px;justify-content:space-between;align-items:center}
+.navb button{white-space:nowrap;min-height:48px;padding:0 16px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.95rem*var(--fs));cursor:pointer}
+.navb button.forte{border-color:var(--accent);background:linear-gradient(135deg,rgba(74,222,128,.32),rgba(251,191,36,.2))}
+.navb button[disabled]{opacity:.4;cursor:default}
+.navb .pts{display:flex;gap:5px}
+.navb .pts i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.navb .pts i.on{background:var(--accent2)}
+.navb .pts i.ok{background:var(--ok)}
+/* ---------- fim ---------- */
+.fimov{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(5,7,18,.72)}
+.fimov.show{display:flex}
+.fimbox{width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 16px;text-align:center;display:flex;flex-direction:column;gap:10px}
+.fimbox h2{font-size:calc(1.3rem*var(--fs));font-weight:900;color:var(--accent)}
+.fimbox p{font-weight:800;color:var(--soft)}
+.fimbox button{min-height:48px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer}
+.fimbox button.forte{border-color:var(--accent);background:linear-gradient(135deg,rgba(74,222,128,.32),rgba(251,191,36,.2))}
+/* ---------- telas pequenas ---------- */
+@media (max-width:430px){.topbar{gap:3px;padding:6px}.topbar .title{display:none}}
+/* celular em pe: 2 colunas x 3 linhas de caixas */
+@media (max-aspect-ratio:4/5){.caixas{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}}
+/* tela baixa (celular deitado): caixas e bandeja lado a lado */
+@media (max-height:500px) and (min-aspect-ratio:5/4){
+  .palco.modoA{flex-direction:row}
+  .palco.modoA .rodape{width:34%;max-width:300px;justify-content:center}
+  .palco.modoA .bandeja{flex-direction:column;flex:1;min-height:0;justify-content:flex-start}
+  .palco.modoA .bandeja .it{flex:0 0 auto;max-width:none}
+  .cx .cab img{display:none}
+  /* modo B deitado: bioma, aviso e setas na coluna da esquerda; cartoes ocupam a altura toda na direita */
+  .palco.modoB{display:grid;grid-template-columns:minmax(200px,32%) 1fr;grid-template-rows:auto 1fr auto;column-gap:10px}
+  .palco.modoB .bcab{grid-column:1;grid-row:1;flex-wrap:wrap}
+  .palco.modoB .aviso{grid-column:1;grid-row:2;align-self:center}
+  .palco.modoB .navb{grid-column:1;grid-row:3}
+  .palco.modoB .navb button{padding:0 10px;white-space:nowrap}
+  .palco.modoB .navb .pts{display:none}
+  .palco.modoB .grade{grid-column:2;grid-row:1/4;height:100%}
+  .bcab img{width:76px;height:50px;flex-basis:76px}
+  .bcab .cnt{margin-left:0}
+  .bcab{padding:4px}
+  .it{min-height:44px}
+  .it img{height:34px}
+}
+@media (max-width:430px) and (max-aspect-ratio:4/5){
+  .cx .cab{gap:5px;padding:4px}
+  .cx .cab img{width:32px;height:26px;flex-basis:32px}
+  .cx .cab b{font-size:calc(.82rem*var(--fs))}
+  .cx .cab .cnt{padding:2px 5px}
+  .bcab img{width:84px;height:58px;flex-basis:84px}
+}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" id="btnHome" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Arrasta e solta: biomas</span>
+    <button class="iconbtn" id="btnMenu" title="Escolher de novo" onclick="inicio()">&#8634;</button>
+    <button class="iconbtn" id="btnFontDown" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" id="btnFontUp" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" id="themeBtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="bar"><span id="bar"></span></div>
+  <div class="palco" id="palco"></div>
+</div>
+<div class="fimov" id="fimov" role="dialog" aria-modal="true"><div class="fimbox" id="fimbox"></div></div>
+
+<script>window.SERA_PT=true;</script>
+<script>window.SERA_CFG={trKey:null,lang:'pt-BR',home:'../index.html',somKey:'geo3_som',stars:90,unlock:true,starfield:true};</script>
+<script src="serafina-core.js?v=4256ab20843"></script>
+<script>
+/* ===== DADOS — _roteiro.md T11 (tabela S8 + fotos S9-S14). Nada inventado. ===== */
+var M='media/geo3/';
+var BIOMAS=[
+  {id:'amz',de:'da',nome:'Amazônia',onde:'Norte do Brasil',foto:'t_amazonia.jpg',cor:'#84cc16'},
+  {id:'cer',de:'do',nome:'Cerrado',onde:'Centro do Brasil',foto:'t_cerrado.jpg',cor:'#f472b6'},
+  {id:'caa',de:'da',nome:'Caatinga',onde:'Nordeste do Brasil',foto:'t_caatinga.jpg',cor:'#facc15'},
+  {id:'pam',de:'do',nome:'Pampa',onde:'Sul do Brasil',foto:'t_pampa.jpg',cor:'#fb923c'},
+  {id:'pan',de:'do',nome:'Pantanal',onde:'Mato Grosso e Mato Grosso do Sul',foto:'t_pantanal.jpg',cor:'#c084fc'},
+  {id:'mat',de:'da',nome:'Mata Atlântica',onde:'Litoral do Brasil',foto:'t_mata.jpg',cor:'#60a5fa'}
+];
+/* t: a = animal (fauna) · p = planta (flora) · v = vegetacao (frase da tabela, entra em "Plantas") */
+var ITENS=[
+  {n:'Onça-pintada',t:'a',b:['amz']},
+  {n:'Macaco',t:'a',b:['amz']},
+  {n:'Arara',t:'a',b:['amz'],f:'t_arara.jpg'},
+  {n:'Lobo-guará',t:'a',b:['cer'],f:'t_loboguara.jpg'},
+  {n:'Tamanduá-bandeira',t:'a',b:['cer']},
+  {n:'Tatu',t:'a',b:['caa']},
+  {n:'Veado-catingueiro',t:'a',b:['caa']},
+  {n:'Asa-branca',t:'a',b:['caa'],f:'t_asabranca.jpg'},
+  {n:'Cavalo',t:'a',b:['pam']},
+  {n:'Ema',t:'a',b:['pam']},
+  {n:'Quero-quero',t:'a',b:['pam'],f:'t_queroquero.jpg'},
+  {n:'Capivara',t:'a',b:['pam','pan']} /* sem foto: a da aula e do Pantanal e entregaria um bioma so */,
+  {n:'Jacaré',t:'a',b:['pan']},
+  {n:'Tuiuiú',t:'a',b:['pan']},
+  {n:'Sucuri',t:'a',b:['pan']},
+  {n:'Mico-leão-dourado',t:'a',b:['mat'],f:'t_mico.jpg'},
+  {n:'Preguiça',t:'a',b:['mat']},
+  {n:'Vitória-régia',t:'p',b:['amz'],f:'t_vitoria.jpg'},
+  {n:'Sempre-viva',t:'p',b:['cer'],f:'t_sempreviva.jpg'},
+  {n:'Louro-preto',t:'p',b:['caa'],f:'t_louro.jpg'},
+  {n:'Capim-dos-pampas',t:'p',b:['pam'],f:'t_capim.jpg'},
+  {n:'Bromélia',t:'p',b:['mat','pan']} /* idem: cada foto da aula e de um bioma */,
+  {n:'Árvores altas e muitas folhas',t:'v',b:['amz']},
+  {n:'Árvores tortas e grama',t:'v',b:['cer']},
+  {n:'Plantas com espinhos (cactos)',t:'v',b:['caa']},
+  {n:'Campos com capim baixo',t:'v',b:['pam']},
+  {n:'Plantas que gostam de água',t:'v',b:['pan']},
+  {n:'Floresta úmida e densa',t:'v',b:['mat']}
+];
+/* pares que se parecem: nao entram como distrator um do outro no modo B */
+var PARES={'Floresta úmida e densa':['Árvores altas e muitas folhas'],'Árvores altas e muitas folhas':['Floresta úmida e densa'],
+  'Árvores tortas e grama':['Campos com capim baixo'],'Campos com capim baixo':['Árvores tortas e grama'],
+  'Macaco':['Mico-leão-dourado'],'Mico-leão-dourado':['Macaco']};
+</script>
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id);};
+var palco=$('palco'), K='geo3_arrasta_filtro';
+var filtro='tudo'; try{ filtro=localStorage.getItem(K)||'tudo'; }catch(e){}
+function bio(id){ for(var i=0;i<BIOMAS.length;i++) if(BIOMAS[i].id===id) return BIOMAS[i]; }
+function filtrados(){ return ITENS.filter(function(it){ return filtro==='tudo' || (filtro==='a' ? it.t==='a' : it.t!=='a'); }); }
+function emb(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function barra(p){ $('bar').style.width=Math.round(p*100)+'%'; }
+function cartao(it,extra){
+  var h='<div class="it'+(it.f?'':' semfoto')+(it.t==='v'?' v':'')+(extra||'')+'">';
+  if(it.f) h+='<img src="'+M+it.f+'" alt="">';
+  h+='<span class="nm">'+esc(it.n)+'</span></div>';
+  return h;
+}
+function nomes(bs){ return bs.map(function(id){return bio(id).nome;}).join(' e '); }
+
+/* ================= INICIO ================= */
+window.inicio=function(){
+  fechaFim(); palco.className='palco'; barra(0);
+  var cont={tudo:ITENS.length,a:0,p:0}; ITENS.forEach(function(it){ if(it.t==='a') cont.a++; else cont.p++; });
+  palco.innerHTML='<div class="ini">'
+   +'<h1>Arrasta e solta: biomas</h1>'
+   +'<h2>O que vamos colocar?</h2>'
+   +'<div class="filtros">'
+   +'<button class="chip" data-f="tudo">Tudo<small>'+cont.tudo+'</small></button>'
+   +'<button class="chip" data-f="a">Animais (fauna)<small>'+cont.a+'</small></button>'
+   +'<button class="chip" data-f="p">Plantas (flora)<small>'+cont.p+'</small></button></div>'
+   +'<div class="modos">'
+   +'<button class="modo" id="mA"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="4" y="5" width="17" height="13" rx="3"/><rect x="27" y="5" width="17" height="13" rx="3"/><rect x="4" y="22" width="17" height="13" rx="3"/><rect x="27" y="22" width="17" height="13" rx="3" stroke-dasharray="4 3"/><path d="M14 44l10-6 3 4" stroke-linecap="round"/></g></svg><b>Todos os biomas</b><span>Arraste cada cartão para o bioma certo</span></button>'
+   +'<button class="modo" id="mB"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="6" y="4" width="36" height="14" rx="3"/><rect x="6" y="23" width="10" height="9" rx="2"/><rect x="19" y="23" width="10" height="9" rx="2"/><rect x="32" y="23" width="10" height="9" rx="2"/><rect x="6" y="35" width="10" height="9" rx="2"/><rect x="19" y="35" width="10" height="9" rx="2"/><path d="M34 38l3 3 5-6" stroke-linecap="round"/></g></svg><b>Um bioma por vez</b><span>Toque em tudo o que é do bioma</span></button>'
+   +'</div></div>';
+  function pinta(){ palco.querySelectorAll('.chip').forEach(function(c){ c.classList.toggle('on',c.getAttribute('data-f')===filtro); }); }
+  palco.querySelectorAll('.chip').forEach(function(c){ c.onclick=function(){ filtro=c.getAttribute('data-f'); try{localStorage.setItem(K,filtro);}catch(e){} pinta(); }; });
+  pinta();
+  $('mA').onclick=modoA; $('mB').onclick=function(){ modoB(0,true); };
+};
+
+/* ================= FIM ================= */
+function fim(titulo,txt,deNovo,rotulo){
+  $('fimbox').innerHTML='<h2>'+titulo+'</h2><p>'+txt+'</p><button class="forte" id="fimDeNovo">'+(rotulo||'Jogar de novo')+'</button><button id="fimMenu">Escolher outro jeito</button>';
+  $('fimov').classList.add('show');
+  $('fimDeNovo').onclick=function(){ fechaFim(); deNovo(); };
+  $('fimMenu').onclick=inicio;
+}
+function fechaFim(){ $('fimov').classList.remove('show'); }
+
+/* ================= MODO A — todos os biomas ================= */
+var A=null, arrastando=false;
+function modoA(){
+  fechaFim();
+  var fila=emb(filtrados()).map(function(it){ return {it:it, falta:it.b.slice()}; });
+  var total=0; fila.forEach(function(x){ total+=x.falta.length; });
+  A={fila:fila, total:total, feitos:0, erros:0, dentro:{}, sel:null};
+  BIOMAS.forEach(function(b){ A.dentro[b.id]=[]; });
+  palco.className='palco modoA';
+  var h='<div class="caixas" id="caixas">';
+  BIOMAS.forEach(function(b){
+    h+='<div class="cx" data-b="'+b.id+'" style="--cor:'+b.cor+'"><div class="cab"><img src="'+M+b.foto+'" alt=""><b>'+b.nome+'</b><span class="cnt"></span></div><div class="dentro"></div></div>';
+  });
+  h+='</div><div class="rodape"><div class="aviso" id="aviso"></div><div class="bandeja" id="bandeja"></div></div>';
+  palco.innerHTML=h;
+  palco.querySelectorAll('.cx').forEach(function(cx){ cx.onclick=function(){ if(A.sel!==null) solta(A.sel, cx.getAttribute('data-b')); }; });
+  aviso('Arraste um cartão para o bioma dele.','');
+  desenhaA();
+}
+function quantosNaBandeja(){
+  var band=$('bandeja'); if(!band) return 3;
+  var vert=getComputedStyle(band).flexDirection==='column';
+  if(vert) return Math.max(2,Math.min(5,Math.floor((band.clientHeight-16)/60)));
+  return Math.max(2,Math.min(5,Math.floor((band.clientWidth-16)/150)));
+}
+function desenhaA(){
+  var band=$('bandeja'), n=quantosNaBandeja(), h='';
+  var vis=A.fila.slice(0,n);
+  vis.forEach(function(x,i){
+    var extra=''; var html=cartao(x.it,'');
+    if(x.it.b.length>1){
+      var put=x.it.b.length-x.falta.length;
+      html=html.replace('</div>','<span class="dois">'+(put?'falta 1 bioma':'vai em 2 biomas')+'</span></div>');
+    }
+    h+=html.replace('<div class="it','<div data-i="'+i+'" class="it'+(A.sel===i?' sel':''));
+  });
+  var resto=A.fila.length-vis.length;
+  if(resto>0) h+='<span class="resto">+'+resto+'</span>';
+  band.innerHTML=h;
+  band.querySelectorAll('.it').forEach(function(el){ arrastavel(el, +el.getAttribute('data-i')); });
+  /* caixas: contagem e o que ja entrou */
+  var porB={}; filtrados().forEach(function(it){ it.b.forEach(function(b){ porB[b]=(porB[b]||0)+1; }); });
+  palco.querySelectorAll('.cx').forEach(function(cx){
+    var id=cx.getAttribute('data-b'), d=A.dentro[id], tot=porB[id]||0;
+    cx.querySelector('.cnt').textContent=d.length+'/'+tot;
+    cx.classList.toggle('cheia',d.length===tot);
+    cx.classList.toggle('selecionando',A.sel!==null);
+    encaixa(cx.querySelector('.dentro'), d);
+  });
+  barra(A.feitos/A.total);
+}
+/* mostra o que ja entrou; se nao cabe, os mais recentes ficam e o resto vira "+n" */
+function encaixa(box, d){
+  var spans=d.map(function(x){ return '<span'+(x.novo?' class="novo"':'')+'>'+esc(x.n)+'</span>'; });
+  d.forEach(function(x){ x.novo=false; });
+  box.innerHTML=spans.join('');
+  var k=0;
+  while(box.scrollHeight>box.clientHeight+1 && k<d.length){
+    k++;
+    box.innerHTML='<span class="mais">+'+k+'</span>'+spans.slice(k).join('');
+  }
+}
+function aviso(html,cl){ var a=$('aviso'); if(!a) return; a.className='aviso'+(cl?' '+cl:''); a.innerHTML=html; }
+function solta(i, bId){
+  var x=A.fila[i]; if(!x) return;
+  var cx=palco.querySelector('.cx[data-b="'+bId+'"]');
+  A.sel=null;
+  if(x.falta.indexOf(bId)>=0){
+    x.falta.splice(x.falta.indexOf(bId),1);
+    A.dentro[bId].push({n:x.it.n,novo:true}); A.feitos++;
+    if(!x.falta.length) A.fila.splice(i,1);
+    else { A.fila.splice(i,1); A.fila.splice(Math.min(1,A.fila.length),0,x); }
+    aviso(x.falta.length ? esc(x.it.n)+' também está em outro bioma.' : 'Isso!','ok');
+    desenhaA();
+    if(!A.fila.length) setTimeout(function(){
+      fim('Muito bem!', 'Você colocou os '+A.total+' cartões'+(A.erros? ' e errou '+A.erros+(A.erros>1?' vezes.':' vez.') : ' sem errar nenhum!'), modoA);
+    },500);
+    return;
+  }
+  if(x.it.b.indexOf(bId)>=0){ aviso(esc(x.it.n)+' já está '+(bio(bId).de==='da'?'na ':'no ')+esc(bio(bId).nome)+'.',''); desenhaA(); return; }
+  A.erros++;
+  if(cx){ cx.classList.remove('errada'); void cx.offsetWidth; cx.classList.add('errada'); }
+  x.falta.forEach(function(b){ var c=palco.querySelector('.cx[data-b="'+b+'"]'); if(c){ c.classList.remove('certa'); void c.offsetWidth; c.classList.add('certa'); } });
+  aviso('<b>'+esc(x.it.n)+'</b>&nbsp;&rarr; '+esc(nomes(x.falta)),'no');
+  desenhaA();
+  var el=$('bandeja').querySelector('.it[data-i="'+i+'"]'); if(el){ el.classList.add('erro'); }
+}
+/* arrastar com o dedo/mouse; toque sem arrastar = selecionar e depois tocar na caixa */
+function arrastavel(el, i){
+  el.addEventListener('pointerdown', function(ev){
+    if(ev.button>0||!ev.isPrimary||arrastando) return;
+    arrastando=true;
+    ev.preventDefault();
+    var x0=ev.clientX, y0=ev.clientY, fant=null, alvo=null;
+    try{ el.setPointerCapture(ev.pointerId); }catch(e){}
+    function caixaEm(x,y){
+      if(fant) fant.style.display='none';
+      var e=document.elementFromPoint(x,y);
+      if(fant) fant.style.display='';
+      return e && e.closest ? e.closest('.cx') : null;
+    }
+    function move(e){
+      if(!fant && Math.hypot(e.clientX-x0,e.clientY-y0)>8){
+        fant=el.cloneNode(true); fant.classList.add('fantasma'); fant.classList.remove('sel','erro');
+        fant.style.width=el.offsetWidth+'px'; document.body.appendChild(fant); el.classList.add('vazio');
+      }
+      if(!fant) return;
+      fant.style.left=e.clientX+'px'; fant.style.top=e.clientY+'px';
+      var c=caixaEm(e.clientX,e.clientY);
+      if(c!==alvo){ if(alvo) alvo.classList.remove('alvo'); alvo=c; if(alvo) alvo.classList.add('alvo'); }
+    }
+    var feito=false;
+    function up(e){
+      if(feito) return; feito=true; arrastando=false;
+      el.removeEventListener('pointermove',move); el.removeEventListener('pointerup',up); el.removeEventListener('pointercancel',up); el.removeEventListener('lostpointercapture',up);
+      if(alvo) alvo.classList.remove('alvo');
+      if(fant){
+        var c=caixaEm(e.clientX,e.clientY);
+        fant.remove(); el.classList.remove('vazio');
+        if(c && e.type==='pointerup') solta(i, c.getAttribute('data-b')); else desenhaA();
+        return;
+      } else {
+        A.sel=(A.sel===i)?null:i;
+        if(A.sel!==null) aviso('Agora toque no bioma de <b>'+esc(A.fila[i].it.n)+'</b>.','');
+        desenhaA();
+      }
+    }
+    el.addEventListener('pointermove',move); el.addEventListener('pointerup',up); el.addEventListener('pointercancel',up); el.addEventListener('lostpointercapture',up);
+  });
+}
+
+/* ================= MODO B — um bioma por vez ================= */
+var B=null;
+function modoB(k,novo){
+  fechaFim();
+  if(novo||!B) B={erros:0,feitos:{},k:0};
+  B.k=k;
+  var b=BIOMAS[k], pool=filtrados();
+  var certos=pool.filter(function(it){ return it.b.indexOf(b.id)>=0; });
+  /* nunca distrator (pedagogico 10/11): vitoria-regia no Pantanal (roteiro), e os pares parecidos um do outro */
+  var veta={}; certos.forEach(function(it){ (PARES[it.n]||[]).forEach(function(n){ veta[n]=1; }); });
+  if(b.id==='pan'){ veta['Vitória-régia']=1; veta['Onça-pintada']=1; } /* onca: fora do material ela tambem e do Pantanal */
+  if(b.id==='amz') veta['Plantas que gostam de água']=1; /* a Amazonia tem rio e vitoria-regia: a crianca defenderia */
+  var outros=emb(pool.filter(function(it){ return it.b.indexOf(b.id)<0 && !veta[it.n]; }));
+  /* distratores do mesmo tipo que os certos, para nao dar pista pelo formato */
+  var nDis=Math.min(outros.length, Math.max(3, certos.length));
+  var tipos={}; certos.forEach(function(it){ tipos[it.t]=(tipos[it.t]||0)+1; });
+  var dis=[];
+  Object.keys(tipos).forEach(function(t){ outros.filter(function(o){return o.t===t;}).slice(0,Math.ceil(nDis*tipos[t]/certos.length)).forEach(function(o){ if(dis.indexOf(o)<0) dis.push(o); }); });
+  outros.forEach(function(o){ if(dis.length<nDis && dis.indexOf(o)<0) dis.push(o); });
+  dis=dis.slice(0,nDis);
+  var cartas=emb(certos.concat(dis));
+  var st={achou:0, total:certos.length};
+  palco.className='palco modoB';
+  var h='<div class="bcab" style="--cor:'+b.cor+'"><img src="'+M+b.foto+'" alt=""><div><h1>'+b.nome+'</h1><p>'+esc(b.onde)+'</p></div><span class="cnt" id="bcnt"></span></div>';
+  h+='<div class="aviso" id="aviso"></div>';
+  h+='<div class="grade" id="grade">';
+  cartas.forEach(function(it,i){ h+=cartao(it,'').replace('<div class="it','<button type="button" data-i="'+i+'" class="it').replace(/<\/div>$/,'</button>'); });
+  h+='</div><div class="navb"><button id="bPrev">&#8249; Voltar</button><span class="pts">';
+  BIOMAS.forEach(function(x,i){ h+='<i class="'+(i===k?'on':(B.feitos[i]?'ok':''))+'"></i>'; });
+  h+='</span><button id="bNext" class="forte">Próximo &#8250;</button></div>';
+  palco.innerHTML=h;
+  colunas(cartas.length);
+  function conta(){
+    var c=$('bcnt'); c.textContent=st.achou+' de '+st.total; c.classList.toggle('ok',st.achou===st.total);
+    barra((k+st.achou/st.total)/BIOMAS.length);
+  }
+  conta();
+  aviso('Toque em tudo o que é '+b.de+' '+esc(b.nome)+'.','');
+  $('grade').querySelectorAll('.it').forEach(function(el){
+    el.onclick=function(){
+      var it=cartas[+el.getAttribute('data-i')];
+      if(el.classList.contains('acertou')||el.classList.contains('errou')) return;
+      if(it.b.indexOf(b.id)>=0){
+        el.classList.add('acertou'); st.achou++; conta();
+        if(st.achou===st.total){
+          B.feitos[k]=true; aviso('Achou tudo '+b.de+' '+esc(b.nome)+'!','ok');
+          if(Object.keys(B.feitos).length===BIOMAS.length) setTimeout(function(){
+            fim('Muito bem!','Você achou tudo dos 6 biomas'+(B.erros? ' e errou '+B.erros+(B.erros>1?' vezes.':' vez.') : ' sem errar nenhum!'), function(){ modoB(0,true); });
+          },600);
+        } else aviso('Isso!','ok');
+      } else {
+        B.erros++; el.classList.add('errou','erro');
+        el.querySelector('.nm').insertAdjacentHTML('beforeend','<span class="de">'+esc(nomes(it.b))+'</span>');
+        aviso('<b>'+esc(it.n)+'</b>&nbsp;&rarr; '+esc(nomes(it.b)),'no');
+      }
+    };
+  });
+  $('bPrev').disabled=(k===0);
+  $('bPrev').onclick=function(){ if(k>0) modoB(k-1); };
+  $('bNext').onclick=function(){ if(k<BIOMAS.length-1) modoB(k+1); else { var falta=BIOMAS.filter(function(x,i){ return !B.feitos[i]; }).map(function(x){ return x.nome; });
+    if(falta.length) fim('Faltou um pouco','Ainda falta achar tudo em: '+esc(falta.join(', '))+'.',function(){ modoB(BIOMAS.indexOf(BIOMAS.filter(function(x,i){return !B.feitos[i];})[0])); },'Ir para o que falta');
+    else fim('Muito bem!','Você achou tudo dos 6 biomas.',function(){ modoB(0,true); }); } };
+}
+/* quantas colunas fazem os cartoes caberem sem rolar */
+function colunas(n){
+  var g=$('grade'); if(!g) return;
+  g.classList.remove('compacta');
+  var w=g.clientWidth, max=Math.max(2,Math.min(4,Math.floor(w/120)));
+  /* menos colunas = cartoes mais largos; so aumenta se nao couber; ultimo recurso: cartao compacto */
+  for(var pass=0;pass<2;pass++){
+    for(var c=2;c<=max;c++){ g.style.setProperty('--cols',c); if(g.scrollHeight<=g.clientHeight+1) return; }
+    g.classList.add('compacta');
+  }
+}
+
+var tm=null;
+addEventListener('resize',function(){ clearTimeout(tm); tm=setTimeout(function(){
+  if(palco.classList.contains('modoA')&&A&&!arrastando) desenhaA();
+  else if(palco.classList.contains('modoB')){ var g=$('grade'); if(g) colunas(g.children.length); }
+},120); });
+inicio();
+})();
+</script>
+<script>window.SERA_ACCENT={accent:'#22c55e',accent2:'#fbbf24'};</script>
+<script src="sera_theme.js?v=4256ab20843"></script>
+</body>
+</html>
