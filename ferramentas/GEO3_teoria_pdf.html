@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='924b12d0908';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='71e91c71109';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -45,7 +45,7 @@ html,body{margin:0;background:var(--papel);color:var(--tinta);font:10.5pt/1.38 "
 .mfig{margin:0;min-width:0}
 .mfig>img{display:block;width:100%;max-height:50mm;object-fit:contain;border-radius:2mm;background:#f3f5f2}
 .mg .mfig>img{max-height:40mm}
-figcaption{font-size:8pt;font-weight:700;color:var(--tinta2);margin-top:1mm}
+figcaption{text-align:justify;text-align-last:center;hyphens:auto;-webkit-hyphens:auto;font-size:8pt;font-weight:700;color:var(--tinta2);margin-top:1mm}
 .mq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5mm}
 .mq3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .mqf{margin:0;min-width:0}
@@ -65,14 +65,23 @@ body.semimg .mcol{display:block}
 body.semimg .mlin{gap:1mm}
 body.semimg .m1.bio .mlin{display:flex}
 body.semimg .lic{break-inside:avoid;margin-bottom:3mm}
+/* MANDAMENTO TIPOGRÁFICO (12/11): texto corrido justificado; itens apertados separados por linha fina na cor da lição */
+.ml{text-align:justify;text-align-last:left;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+.mlin{gap:1mm}
+.mlin>.ml+.ml{padding-top:1mm;border-top:.5pt solid color-mix(in srgb,var(--lc) 25%,transparent)}
+.m1.bio .mlin{row-gap:1mm}
+.m1.bio .mlin>.ml:nth-child(2){padding-top:0;border-top:none}
+body.semimg .mlin{gap:.8mm}
+body.semimg .mlin>.ml+.ml{padding-top:.8mm}
+body.semimg .m1.bio .mlin>.ml:nth-child(2){padding-top:.8mm;border-top:.5pt solid color-mix(in srgb,var(--lc) 25%,transparent)}
 /* com imagens: o cabeçalho da lição nunca fica sozinho no pé da página (vai junto com a 1ª tela) */
 .cab1{break-inside:avoid}
 </style>
 </head>
 <body>
-<div class="capa"><div style="flex:1"><h1>Geografia · Teoria</h1><p>Unidade 3: ruas, deslocamentos e transportes · Unidade 4: meio ambiente, nossa casa maior</p></div><img class="qr" src="media/geo3/qr_site.svg?v=924b12d0908" alt="QR do site"></div>
+<div class="capa"><div style="flex:1"><h1>Geografia · Teoria</h1><p data-tipo="rotulo">Unidade 3: ruas, deslocamentos e transportes · Unidade 4: meio ambiente, nossa casa maior</p></div><img class="qr" src="media/geo3/qr_site.svg?v=71e91c71109" alt="QR do site"></div>
 <main id="doc"></main>
-<script src="GEO3_estudo_licoes.js?v=924b12d0908"></script>
+<script src="GEO3_estudo_licoes.js?v=71e91c71109"></script>
 <script>
 (function(){
   var COM = !/[?&]img=0/.test(location.search);

@@ -176,7 +176,7 @@ var LS=[
 {k:'ruas', tema:'ruas', unid:3, nome:'Tipos de rua e vias', curto:'Tipos de rua', capa:'t_avenida', cor:'#6366f1', treino:[], telas:[
  {tipo:'texto', tit:'As ruas <em>não são iguais</em>',
   fala:'As ruas não são iguais. Rua residencial: predominam as moradias, isto é, a maior parte são casas onde as pessoas moram; geralmente é mais tranquila, com pouco comércio. Rua comercial: muitas lojas, mercados e padarias, e muitas pessoas circulando; é muito movimentada.',
-  html:MC([['t_residencial','Rua residencial, vista de cima',[LN('Rua residencial','predominam as moradias: a maior parte são casas onde as pessoas moram. Geralmente é mais tranquila, com pouco comércio.')]],
+  html:MC([['t_residencial','Rua residencial, vista de cima',[LN('Rua residencial','predominam as moradias (casas onde as pessoas moram). Geralmente é mais tranquila, com pouco comércio.')]],
            ['t_comercial','Rua comercial',[LN('Rua comercial','muitas lojas, mercados e padarias, e muitas pessoas circulando. É muito movimentada.')]]])},
  {tipo:'texto', tit:'<em>Avenida</em> e <em>rodovia</em>',
   fala:'Avenida e rodovia. A avenida é mais larga que a rua, com várias pistas para carros, e liga distâncias maiores dentro da cidade, como a Avenida Paulista, em São Paulo. A rodovia liga cidades e passa por áreas mais afastadas, como a Rodovia dos Imigrantes, que liga São Paulo ao litoral. Litoral é a terra perto do mar. Nas cidades há ruas e avenidas; entre as cidades, rodovias e estradas de terra ou asfaltadas.',
