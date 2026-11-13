@@ -22,11 +22,12 @@ function I(n){ return 'media/mat3/teoria/'+n+'.jpg'; }
 function LN(t,e,pt){ return '<p class="ml" lang="en"><b class="mt rot">'+t+'</b>'+(e?' — '+e:'')+tr(pt)+'</p>'; }
 /* definição de conceito-base: frase inteira "Termo é ..." (casa com o "def" do conceitos_base.json) */
 function D(t,e,pt){ return '<p class="ml" lang="en"><b class="mt rot">'+t+'</b> '+e+tr(pt)+'</p>'; }
-/* figura da aula (jpg) ou desenho SVG, com legenda curta */
+/* figura da aula (jpg) ou desenho SVG, com legenda curta. A foto leva data-leve=<recorte>: no PDF "sem imagens"
+   ela vira o desenho leve MAT3F.leve(<recorte>) — a frase que manda olhar nunca fica sem figura (revisor-sentido 13/11). */
 function FIG(img,cap,cpt){
   var corpo = img.charAt(0)==='<' ? (img.indexOf('esc5')>=0||img.indexOf('tabgraf')>=0 ? img : '<div class="fsvg">'+img+'</div>')
             : '<img src="'+I(img)+'" alt="'+(cap||'').replace(/"/g,'')+'">';
-  return '<figure class="mfig">'+corpo+(cap?'<figcaption lang="en">'+cap+tr(cpt)+'</figcaption>':'')+'</figure>';
+  return '<figure class="mfig"'+(img.charAt(0)==='<'?'':' data-leve="'+img+'"')+'>'+corpo+(cap?'<figcaption lang="en">'+cap+tr(cpt)+'</figcaption>':'')+'</figure>';
 }
 /* molde 1: figura + linhas */
 function M(img,cap,cpt,linhas,cl){ return '<div class="m1'+(cl?' '+cl:'')+'">'+FIG(img,cap,cpt)+'<div class="mlin">'+linhas.join('')+'</div></div>'; }
@@ -51,29 +52,29 @@ var LS=[
 {k:'medir', tema:'medir', unid:8, nome:'Words to compare and measure', nome_pt:'Palavras para comparar e medir',
  curto:'Length', curto_pt:'Comprimento', capa:'t1_long', cor:'#d97706', treino:[], telas:[
  T('What is <em>length</em>?'+tr('O que é comprimento?'),
-  'What is length? Length is how long something is, from one end to the other. Long means how much something measures from one end to the other. This pencil is long. We measure length in centimetres, metres and kilometres.',
-  M('t1_long','A long pencil','Um lápis comprido',[
+  'What is length? Length is how long something is, from one end to the other. Long means how much something measures from one end to the other. The top pencil is long. We measure length in centimetres, metres and kilometres.',
+  M('t1_long','Two pencils','Dois lápis',[
    D('Length','is how long something is, from one end to the other.','Comprimento (length) é o quanto algo é comprido, de uma ponta à outra.'),
-   D('Long','means how much something measures from one end to the other: “This pencil is long.”','Long (comprido) quer dizer quanto algo mede de uma ponta à outra: “Este lápis é comprido.”'),
+   D('Long','means how much something measures from one end to the other: “The top pencil is long.”','Long (comprido) quer dizer quanto algo mede de uma ponta à outra: “O lápis de cima é comprido.”'),
    LN('Units','we measure length in centimetres (cm), metres (m) and kilometres (km).','Unidades: medimos o comprimento em centímetros (cm), metros (m) e quilômetros (km).')])),
  T('<em>Short</em>, longer and shorter'+tr('Curto, mais comprido e mais curto'),
-  'Short means not as long. It measures a smaller length from one end to the other. This pencil is short. The top pencil is longer. The bottom pencil is shorter.',
+  'Short means not as long. It measures a smaller length from one end to the other. The bottom pencil is short. The top pencil is longer. The bottom pencil is shorter.',
   M('t1_short','Longer and shorter','Mais comprido e mais curto',[
-   D('Short','means not as long: it measures a smaller length from one end to the other. “This pencil is short.”','Short (curto) quer dizer não tão comprido: mede menos de uma ponta à outra. “Este lápis é curto.”'),
+   D('Short','means not as long: it measures a smaller length from one end to the other. “The bottom pencil is short.”','Short (curto) quer dizer não tão comprido: mede menos de uma ponta à outra. “O lápis de baixo é curto.”'),
    LN('Longer','the top pencil is longer.','Longer (mais comprido): o lápis de cima é mais comprido.'),
    LN('Shorter','the bottom pencil is shorter.','Shorter (mais curto): o lápis de baixo é mais curto.')])),
  T('<em>Wide</em> and narrow'+tr('Largo e estreito'),
-  'Wide means how much something measures across. This book is wide. Narrow means not wide. The thin book is narrow. The big book is wider.',
+  'Wide means how much something measures across. The big book is wide. Narrow means not wide. The thin book is narrow. The big book is wider.',
   M('t1_wide','A narrow book and a wide book','Um livro estreito e um livro largo',[
-   D('Wide','means how much something measures across: “This book is wide.”','Wide (largo) quer dizer quanto algo mede de lado a lado: “Este livro é largo.”'),
+   D('Wide','means how much something measures across: “The big book is wide.”','Wide (largo) quer dizer quanto algo mede de lado a lado: “O livro grande é largo.”'),
    D('Narrow','means not wide: the thin book is narrow.','Narrow (estreito) quer dizer não largo: o livro fino é estreito.'),
    LN('Wider','the big book is wider.','Wider (mais largo): o livro grande é mais largo.')])),
  T('<em>Tall</em> and height'+tr('Alto e altura'),
-  'Tall means how high something is, from the bottom to the top. This tree is tall. The big tree is taller. The small tree is shorter. Height is how tall someone or something is. We also use tall to talk about the height of people. This girl is tall.',
+  'Tall means how high something is, from the bottom to the top. The big tree is tall. The big tree is taller than the small tree. The small tree is shorter. Height is how tall someone or something is. We also use tall to talk about the height of people. The girl is tall.',
   M('t1_tall','Trees and children','Árvores e crianças',[
-   D('Tall','means how high something is, from the bottom to the top: “This tree is tall.”','Tall (alto) quer dizer quanto algo é alto, de baixo até em cima: “Esta árvore é alta.”'),
+   D('Tall','means how high something is, from the bottom to the top: “The big tree is tall.”','Tall (alto) é quanto algo é alto, de baixo até em cima: “A árvore grande é alta.”'),
    LN('Taller and shorter','the big tree is taller; the small tree is shorter.','Taller (mais alta) e shorter (mais baixa): a árvore grande é mais alta; a pequena é mais baixa.'),
-   D('Height','is how tall someone or something is. We also use tall to talk about the height of people: “This girl is tall.”','Height (altura) é o quanto alguém ou algo é alto. Também usamos tall para a altura das pessoas: “Esta menina é alta.”')]))
+   D('Height','is how tall someone or something is. We also use tall to talk about the height of people: “The girl is tall.”','Height (altura) é o quanto alguém ou algo é alto. Também usamos tall para a altura das pessoas: “A menina é alta.”')]))
 ]},
 
 /* ===================== T2 · Perimeter (U8) ===================== */
@@ -91,7 +92,7 @@ var LS=[
    LN('Top and bottom','6 cm + 6 cm.','Em cima e embaixo: 6 cm + 6 cm.'),
    LN('Left side and right side','4 cm + 4 cm.','Lado esquerdo e lado direito: 4 cm + 4 cm.'),
    LN('Perimeter','6 + 6 + 4 + 4 = 20 cm.','Perímetro: 6 + 6 + 4 + 4 = 20 cm.'),
-   LN('The unit','always write the number and the unit: 20 cm.','A unidade: escreva sempre o número e a unidade: 20 cm.')])),
+   LN('The unit','always write the number and the unit: 20&nbsp;cm.','A unidade: escreva sempre o número e a unidade: 20 cm.')])),
  T('More <em>shapes</em>'+tr('Outras formas'),
   'Other examples. Square: 5 plus 5 plus 5 plus 5 equals 20 centimetres. Rectangle: 8 plus 8 plus 3 plus 3 equals 22 centimetres. Triangle: 6 plus 6 plus 6 equals 18 centimetres.',
   MC([['t2_sq','square','quadrado',[LN('Square','5 + 5 + 5 + 5 = 20 cm.','Quadrado: 5 + 5 + 5 + 5 = 20 cm.')]],

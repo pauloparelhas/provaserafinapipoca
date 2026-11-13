@@ -167,6 +167,39 @@
     return svg(W, 122, s, 'maos');
   }
 
+  /* ---- desenhos LEVES no lugar das fotos da aula (PDF "sem imagens", 13/11/2026, revisor-sentido):
+     o "sem imagens" economiza a tinta das FOTOS, mas a frase que manda olhar/comparar continua com a figura.
+     Mesmo conteúdo da foto (mesmas quantidades e rótulos), traço fino e pouca cor. Chave = nome do recorte em media/mat3/teoria/. */
+  OBJ.button = function (x, y) { return '<circle cx="' + x + '" cy="' + y + '" r="10" fill="#ffe08a" stroke="' + K + '"/>' +
+    [[-3, -3], [3, -3], [-3, 3], [3, 3]].map(function (d) { return '<circle cx="' + (x + d[0]) + '" cy="' + (y + d[1]) + '" r="1.6" fill="' + K + '"/>'; }).join(''); };
+  OBJ.flower = function (x, y) { var s = ''; for (var i = 0; i < 5; i++) { var a = i * 2 * Math.PI / 5;
+      s += '<circle cx="' + (x + 6 * Math.sin(a)).toFixed(1) + '" cy="' + (y - 6 * Math.cos(a)).toFixed(1) + '" r="4.6" fill="#f8bbd0" stroke="' + K + '" stroke-width=".8"/>'; }
+    return s + '<circle cx="' + x + '" cy="' + y + '" r="3.6" fill="#ffd54f" stroke="' + K + '" stroke-width=".8"/>'; };
+  function pessoa(cx, base, alt, menina) {
+    var hr = alt * 0.11, cab = base - alt + hr, corpo = base - alt + 2 * hr, s = '';
+    if (menina) s += '<path d="M' + (cx - hr - 2) + ',' + (cab + hr * 2.2) + ' Q' + cx + ',' + (cab - hr * 1.9) + ' ' + (cx + hr + 2) + ',' + (cab + hr * 2.2) + 'Z" fill="#6d4c41" stroke="' + K + '"/>';
+    s += '<circle cx="' + cx + '" cy="' + cab + '" r="' + hr + '" fill="#ffd9b8" stroke="' + K + '"/>';
+    var tr = (base - corpo) * 0.45;
+    s += menina ? '<polygon points="' + (cx - hr * .9) + ',' + corpo + ' ' + (cx + hr * .9) + ',' + corpo + ' ' + (cx + hr * 1.5) + ',' + (corpo + tr) + ' ' + (cx - hr * 1.5) + ',' + (corpo + tr) + '" fill="#f8bbd0" stroke="' + K + '"/>'
+                : '<rect x="' + (cx - hr) + '" y="' + corpo + '" width="' + (2 * hr) + '" height="' + tr + '" rx="2" fill="#90caf9" stroke="' + K + '"/>';
+    s += '<line x1="' + (cx - hr * .45) + '" y1="' + (corpo + tr) + '" x2="' + (cx - hr * .45) + '" y2="' + base + '" stroke="' + K + '" stroke-width="3"/>' +
+         '<line x1="' + (cx + hr * .45) + '" y1="' + (corpo + tr) + '" x2="' + (cx + hr * .45) + '" y2="' + base + '" stroke="' + K + '" stroke-width="3"/>';
+    return s + t(cx, base + 18, menina ? 'girl' : 'boy', 14, 'font-weight="bold"');
+  }
+  function rot(x, y, s) { return '<rect x="' + (x - 38) + '" y="' + (y - 15) + '" width="76" height="22" rx="6" fill="#fff" stroke="' + K + '"/>' + t(x, y + 1, s, 14, 'font-weight="bold"'); }
+  function lapisPar() { return svg(380, 90, lapis(10, 14, 260) + rot(325, 26, 'longer') + lapis(10, 56, 140) + rot(205, 68, 'shorter')); }
+  function pizza(vals) {
+    var tot = vals.reduce(function (a, b) { return a + b; }, 0), a0 = -Math.PI / 2, s = '', cores = ['#9e9e9e', '#ef9a9a', '#f5e6b8', '#dddddd', '#9fd3e6'];
+    vals.forEach(function (v, i) { var a1 = a0 + v / tot * 2 * Math.PI, g = (a1 - a0) > Math.PI ? 1 : 0;
+      s += '<path d="M70,70 L' + (70 + 60 * Math.cos(a0)).toFixed(1) + ',' + (70 + 60 * Math.sin(a0)).toFixed(1) + ' A60,60 0 ' + g + ' 1 ' + (70 + 60 * Math.cos(a1)).toFixed(1) + ',' + (70 + 60 * Math.sin(a1)).toFixed(1) + 'Z" fill="' + cores[i % 5] + '" stroke="' + K + '"/>'; a0 = a1; });
+    return svg(140, 140, s, 'pizza');
+  }
+  function escalaSeta() {
+    var P = ['certain', 'likely', 'possible', 'unlikely', 'impossible'], s = '';
+    P.forEach(function (p, i) { s += t(78, 30 + i * 34, p, 16, 'font-weight="bold" fill="#701a75"'); });
+    s += '<rect x="160" y="34" width="12" height="150" fill="#a21caf"/><polygon points="150,36 182,36 166,8" fill="#a21caf"/>';
+    return svg(200, 192, s, 'escala');
+  }
   /* escala com as 5 caixas vazias e "?" na caixa q (0 = topo): pergunta do banco sem entregar as palavras */
   function escalaVazia(q) {
     var s = '';
@@ -177,7 +210,30 @@
     s += '<rect x="160" y="34" width="12" height="150" fill="#a21caf"/><polygon points="150,36 182,36 166,8" fill="#a21caf"/>';
     return svg(200, 192, s, 'escala');
   }
+  var PETS = [['Hamsters', 'Rabbits', 'Dogs', 'Cats'], [4, 2, 6, 3]];
+  var LEVE = {
+    t1_long: lapisPar, t1_short: lapisPar,
+    t1_wide: function () { return svg(330, 110, livro(30, 6, 34, '') + rot(47, 100, 'narrow') + livro(140, 6, 150, '') + rot(215, 100, 'wider')); },
+    t1_tall: function () { return svg(400, 200, arvore(55, 160, 80, '') + rot(55, 186, 'shorter') + arvore(160, 160, 150, '') + rot(160, 186, 'taller') +
+      '<line x1="222" y1="10" x2="222" y2="190" stroke="#999" stroke-dasharray="4 4"/>' + pessoa(275, 160, 95, false) + pessoa(350, 160, 140, true)); },
+    t2_add: function () { return retangulo(180, 100, 6, 4); },
+    t2_sq: function () { return retangulo(100, 100, 5, 5, '#ffd6e7'); },
+    t2_rect: function () { return retangulo(170, 60, 8, 3); },
+    t2_tri: function () { return triangulo(6); },
+    t3_def: function () { return solido('cube'); }, t3_fev: function () { return solido('cube'); },
+    t4_data: function () { return barras(PETS[0], PETS[1], 6, '') + pizza([20, 3, 12, 9, 56]); },  /* a pizza do slide (cores), sem rotulo: a aula so pede reconhecer que e um chart */
+    t4_bar: function () { return barras(PETS[0], PETS[1], 6, ''); },
+    t5_scale: escalaSeta,
+    t6_ex1: function () { return grupos(4, 3, 'button'); },
+    t6_ex2: function () { return grupos(3, 5, 'flower'); },
+    t6_ex3: function () { return grupos(5, 2, 'cookie'); },
+    t7_ex1: function () { return grupos(2, 5, 'orange'); },
+    t7_ex2: function () { return grupos(2, 4, 'apple'); },
+    t7_ex3: function () { return grupos(3, 4, 'cookie'); }
+  };
+
   window.MAT3F = {
+    leve: function (nome) { return LEVE[nome] ? LEVE[nome]() : ''; },
     maos: maos,
     escalaVazia: escalaVazia,
     svg: svg,
