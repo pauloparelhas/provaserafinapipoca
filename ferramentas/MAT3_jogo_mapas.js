@@ -1,5 +1,5 @@
 /* MAT3_jogo_mapas.js — GERADO por trabalho/3tri_matematica/gen/gen_mapas_mat3.py. Não editar à mão.
-   Grades do CIE3 (testadas) + portões de matemática "|" (coluna do chão ao teto): {"1": [32, 75], "2": [38, 110], "3": [8], "6": [49, 90], "8": [45, 89]} */
+   Grades do CIE3 (testadas) + portões de matemática "|" (coluna do chão ao teto): {"1": [32, 75], "2": [65, 125], "3": [8], "6": [49, 92], "8": [45, 89]} */
 window.MAPAS = {
  "1": {
   "main": [
@@ -33,16 +33,16 @@ window.MAPAS = {
  },
  "2": {
   "main": [
-   "                                      |                                                                       |                       ",
-   "                                      |                                                                       |                       ",
-   "                       l           l  |  l                                o                                l  |  l                    ",
-   "                              v v     |                                 ====                                  |                       ",
-   "                                      |                            O                                          |                       ",
-   "                                      |                           ===                                         |                       ",
-   "         oooo                         |                                         g                             |                       ",
-   "         ====                         |                       ===                         m                   |                       ",
-   "                                      |              %%                                        fff  1122      |    %%                 ",
-   "    U  *       D   c        i         |        e  c  %%  D  T         S       i    e  c                 c     |    %%   E         F   ",
+   "                                                                 |                                                           |        ",
+   "                                                                 |                                                           |        ",
+   "                       l           l     l                       |        o                                l     l           |        ",
+   "                              v v                                |      ====                                                 |        ",
+   "                                                                 | O                                                         |        ",
+   "                                                                 |===                                                        |        ",
+   "         oooo                                                    |              g                                            |        ",
+   "         ====                                                 ===|                        m                                  |        ",
+   "                                                     %%          |                             fff  1122           %%        |        ",
+   "    U  *       D   c        i                  e  c  %%  D  T    |    S       i    e  c                 c          %%   E    |    F   ",
    "######################   #########   ###   ##############################################   ###   ########   ###   ###################",
    "######################   #########   ###   ##############################################   ###   ########   ###   ###################"
   ],
@@ -180,12 +180,12 @@ window.MAPAS = {
  },
  "6": {
   "main": [
-   "                                                 |                                        |                                             ",
-   "                                                 |                                        |                                             ",
-   "                               v            R   R|  R                                     |                                             ",
-   "             oooo                                |                    oooooo              |                     g             v         ",
-   "             ====                                |                X   ======              |       g                                     ",
-   "                                                 |                                        |O                                            ",
+   "                                                 |                                          |                                           ",
+   "                                                 |                                          |                                           ",
+   "                               v            R   R|  R                                       |                                           ",
+   "             oooo                                |                    oooooo                |                   g             v         ",
+   "             ====                                |                X   ======                |     g                                     ",
+   "                                                 |                                         O|                                           ",
    "                              o i o              |    fff      X                    g    #####         o  o  o  o  o                    ",
    "                          LLLLLLLLLLLL           |                                       #####         tt uu tt uu tt                   ",
    "      oooo                                       |                                       ##### 1122                                     ",

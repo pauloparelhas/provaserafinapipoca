@@ -61,7 +61,7 @@ function tocaEntrada(lx,ly){ /* toque no tablet: tocar na porta/baú quando o he
 function atualizaNivel(dt){
   var L=J.nivel, M=J.mundo, u=J.urso;
   if(u.cheerT>0){ u.cheerT-=dt; u.estado='cheer'; u.anim+=dt; }
-  M.checkpoints.forEach(function(cp){ if(!cp.acesa&&u.x>cp.x&&u.x<cp.x+160&&Math.abs(u.y-cp.y)<180){ cp.acesa=true; J.respawn={x:cp.x,y:cp.y,mundo:M.mundo}; SOM.fx('checkpoint'); G.brilho(cp.x,cp.y-80,12); } });
+  M.checkpoints.forEach(function(cp){ if(!cp.acesa&&u.x>cp.x&&u.x<cp.x+160&&(Math.abs(u.y-cp.y)<180||M.modo==='voo')){ cp.acesa=true; J.respawn={x:cp.x,y:cp.y,mundo:M.mundo}; SOM.fx('checkpoint'); G.brilho(cp.x,cp.y-80,12); } });
   inimigos(dt); G.perigos(dt); if(window.MAT3X) MAT3X.atualiza(dt,J,G); if(window.PODERES) PODERES.interage(); moradores(dt); if(window.CHEFINHO) CHEFINHO.atualiza(dt); if(J.chefe&&window.CHEFAO) CHEFAO.atualiza(dt);
   if(M.mastro && Math.abs(u.x-M.mastro.x)<30 && Math.abs(u.y-M.mastro.y)<(M.modo?400:70) && J.estado==='nivel') fimDeFase(); /* nadando/voando, passar por cima do livro também vale */
   if(J.tut) atualizaTutorial(dt);
