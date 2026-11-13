@@ -167,8 +167,19 @@
     return svg(W, 122, s, 'maos');
   }
 
+  /* escala com as 5 caixas vazias e "?" na caixa q (0 = topo): pergunta do banco sem entregar as palavras */
+  function escalaVazia(q) {
+    var s = '';
+    for (var i = 0; i < 5; i++) {
+      s += '<rect x="22" y="' + (12 + i * 34) + '" width="112" height="26" rx="6" fill="#fff" stroke="#701a75" stroke-width="2"/>';
+      if (i === q) s += t(78, 31 + i * 34, '?', 20, 'font-weight="bold" fill="#701a75"');
+    }
+    s += '<rect x="160" y="34" width="12" height="150" fill="#a21caf"/><polygon points="150,36 182,36 166,8" fill="#a21caf"/>';
+    return svg(200, 192, s, 'escala');
+  }
   window.MAT3F = {
     maos: maos,
+    escalaVazia: escalaVazia,
     svg: svg,
     lapis2: function () { return svg(330, 90, lapis(30, 14, 280, 'A') + lapis(30, 56, 150, 'B')); },
     arvores2: function () { return svg(260, 190, arvore(70, 160, 70, 'A') + arvore(190, 160, 140, 'B')); },

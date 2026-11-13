@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='ae601ed1257';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School Material — Math</title>
+<link rel="stylesheet" href="serafina-core.css?v=ae601ed1257">
+<style>
+/* MAT3_material (13/11/2026) — o material ORIGINAL da escola, sem alteração, organizado por tema na ordem de estudo:
+   o que cai na prova (informativo), slides do professor (zip), os 2 vídeos e o Canva indicados. Molde: CIE3_material. */
+:root{--fs:1;--bg:#0d0b1e;--txt:#f4f1ff;--sft:#c7c2e6;--crd:#1b1738;--lin:#3b3566;--trc:#fbbf24;--ac:#ec4899}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI",system-ui,Roboto,Arial,sans-serif;font-size:calc(16px*var(--fs))}
+body.light{--bg:#f5f3ff;--txt:#1e1b3a;--sft:#4b4763;--crd:#fff;--lin:#d8d2f0;--trc:#92400e}
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
+.top{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 12px;background:var(--crd);border-bottom:2px solid var(--lin)}
+.top .t{font-weight:900;margin-right:auto;font-size:1rem}
+@media(max-width:430px){.top .t{display:none}.top{justify-content:space-between}}
+.top button{min-width:44px;height:44px;border-radius:12px;border:2px solid var(--lin);background:transparent;color:var(--txt);font-weight:800;cursor:pointer}
+main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:14px 16px 40px;hyphens:manual}
+h1{font-size:1.5em;margin:6px 0 2px}
+h2{font-size:1.15em;margin:24px 0 8px}
+.sub{color:var(--sft);font-weight:700;margin:0 0 6px}
+.tr{display:none;color:var(--trc);font-style:italic;font-weight:600;font-size:.86em}
+body.show-tr .tr{display:block}
+.indice{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+.indice a{min-height:44px;display:inline-flex;align-items:center;padding:0 14px;border-radius:999px;border:2px solid var(--lin);background:var(--crd);color:var(--txt);text-decoration:none;font-weight:800;font-size:.9em}
+.prova{background:var(--crd);border:2px solid color-mix(in srgb,var(--ac) 45%,transparent);border-radius:14px;padding:10px 14px}
+.prova ul{margin:4px 0 0;padding-left:20px}
+.prova li+li{margin-top:6px}
+.prova small{color:var(--sft);font-weight:700}
+.tema{margin-top:18px;padding-top:6px;border-top:1px solid color-mix(in srgb,var(--ac) 18%,transparent)}
+.tema h3{margin:4px 0 8px;font-size:1.02em}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.slide{background:var(--crd);border:2px solid var(--lin);border-radius:14px;overflow:hidden;cursor:zoom-in;padding:0;color:inherit;text-align:left;font:inherit;width:100%}
+.slide img{display:block;width:100%;background:#fff}
+.slide span.l{display:block;padding:8px 10px;font-weight:800}
+.vid{background:var(--crd);border:2px solid var(--lin);border-radius:14px;padding:12px;margin-bottom:12px}
+.vid b{display:block}
+.vid small{color:var(--sft);font-weight:700}
+.vid .caixa{position:relative;margin-top:8px;aspect-ratio:16/9;background:#000;border-radius:10px;overflow:hidden}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .play{position:absolute;inset:0;width:100%;height:100%;background:#111;color:#fff;border:0;font-size:1.1em;font-weight:900;cursor:pointer}
+.link{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 14px;border-radius:14px;border:2px solid var(--lin);background:var(--crd);color:var(--txt);text-decoration:none;font-weight:800}
+.link small{display:block;color:var(--sft);font-weight:700}
+#zoom{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:10px}
+#zoom.on{display:flex}
+#zoom img{max-width:100%;max-height:100%;background:#fff;border-radius:8px}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="top">
+  <button class="sera-home" onclick="goHome()" title="Home" aria-label="Home">&#127968;</button>
+  <span class="t">School Material · Math</span>
+  <button id="trbtn" title="Portuguese" aria-label="Portuguese" onclick="toggleTr()"><svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rect width="28" height="20" rx="2" fill="#16a34a"/><path d="M14 3 25 10 14 17 3 10z" fill="#facc15"/><circle cx="14" cy="10" r="4" fill="#1d4ed8"/></svg></button>
+  <button title="Smaller text" aria-label="Smaller text" onclick="fs(-1)">A-</button>
+  <button title="Bigger text" aria-label="Bigger text" onclick="fs(1)">A+</button>
+  <button title="Theme" aria-label="Theme" onclick="document.body.classList.toggle('light')">&#127769;</button>
+  <button id="lockbtn" class="lockbtn" title="Full screen" aria-label="Full screen" onclick="toggleLock()">&#128274;</button>
+</div>
+<main lang="en">
+  <h1 data-tipo="rotulo">From your school<span class="tr" lang="pt-BR">Da sua escola</span></h1>
+  <p class="sub" data-tipo="rotulo">The teacher's material, just as it came.<span class="tr" lang="pt-BR">O material da professora, do jeito que chegou.</span></p>
+  <nav class="indice" aria-label="Sections">
+    <a href="#prova">On the test<span class="tr" lang="pt-BR">&nbsp;· Na prova</span></a>
+    <a href="#slides">Slides</a>
+    <a href="#videos">Videos<span class="tr" lang="pt-BR">&nbsp;· Vídeos</span></a>
+    <a href="#canva">Canva</a>
+  </nav>
+
+  <h2 id="prova" data-tipo="rotulo">What is on the test (18 November)<span class="tr" lang="pt-BR">O que cai na prova (18 de novembro)</span></h2>
+  <div class="prova">
+    <ul>
+      <li data-tipo="rotulo"><b>Unit 6 · 3-D Geometry</b>: 3-D shapes (solids) properties; edges, vertices and faces.<span class="tr" lang="pt-BR">Unidade 6 · Geometria 3D: propriedades dos sólidos; arestas, vértices e faces.</span></li>
+      <li data-tipo="rotulo"><b>Unit 5 · Data Management and Probability</b>: reading and creating bar graphs; likely and unlikely.<span class="tr" lang="pt-BR">Unidade 5 · Dados e probabilidade: ler e criar gráficos de barras; provável e improvável.</span></li>
+      <li data-tipo="rotulo"><b>Unit 8 · Linear Measurement, Area, and Perimeter</b>: length (centimetres, metres and kilometres); shorter or longer.<span class="tr" lang="pt-BR">Unidade 8 · Medidas, área e perímetro: comprimento (centímetros, metros e quilômetros); mais curto ou mais comprido.</span></li>
+      <li data-tipo="rotulo"><b>Unit 10 · Multiplication, Division, and Fractions</b>: multiplication, making groups.<span class="tr" lang="pt-BR">Unidade 10 · Multiplicação, divisão e frações: multiplicação, formando grupos.</span></li>
+    </ul>
+    <small data-tipo="rotulo">Study materials: Math Book and the class drive (Toddle). From the school's notice of 23 September.<span class="tr" lang="pt-BR">Para estudar: Math Book e o drive da turma (Toddle). Do informativo da escola de 23/09.</span></small>
+  </div>
+
+  <h2 id="slides" data-tipo="rotulo">Slides<span class="tr" lang="pt-BR">Slides (toque para ampliar)</span></h2>
+  <div id="temas"></div>
+
+  <h2 id="videos" data-tipo="rotulo">Videos the teacher sent<span class="tr" lang="pt-BR">Vídeos que a professora mandou</span></h2>
+  <div id="vids"></div>
+
+  <h2 id="canva" data-tipo="rotulo">The teacher's slides on Canva<span class="tr" lang="pt-BR">Os slides da professora no Canva</span></h2>
+  <a class="link" href="https://www.canva.com/design/DAHY_A_pjfI/fIzpLLo8-Eo57AD0b6xqmw/view" target="_blank" rel="noopener noreferrer">
+    <span style="font-size:1.6em">&#x1F4D1;</span>
+    <span data-tipo="rotulo">Math Unit 10 · Multiplication, Division, and Fractions<small>Opens Canva in a new tab (31 pages).<span class="tr" lang="pt-BR">Abre o Canva em outra aba (31 páginas).</span></small></span>
+  </a>
+</main>
+<div id="zoom" onclick="this.classList.remove('on')"><img id="zimg" alt=""></div>
+<div id="unlockov"></div>
+<script>window.SERA_CFG={trKey:'cie3_tr',lang:'en-US',voz:'thalitamultilingual',rate:.8,home:'../index.html',somKey:'mat3_som',stars:80};</script>
+<script src="serafina-core.js?v=ae601ed1257"></script>
+<script>
+/* temas na ordem de estudo do roteiro (T1..T7); cada slide e o arquivo original do professor */
+var T=[
+ ['Length and perimeter','Comprimento e perímetro',[['u08_words_compare_measure','Words to compare and measure','Palavras para comparar e medir'],['u08_perimeter','Perimeter','Perímetro']]],
+ ['3D solids','Sólidos geométricos',[['u06_3d_solids','3D solids: faces, edges and vertices','Sólidos: faces, arestas e vértices']]],
+ ['Data and probability','Dados e probabilidade',[['u05_data_graphs','What is data?','O que são dados?'],['u05_likely_unlikely','Likely and unlikely','Provável e improvável']]],
+ ['Multiplication and division','Multiplicação e divisão',[['u10_multiplication','Multiplication','Multiplicação'],['u10_division','Division','Divisão']]]
+];
+document.getElementById('temas').innerHTML=T.map(function(t){
+  return '<section class="tema"><h3 data-tipo="rotulo">'+t[0]+'<span class="tr" lang="pt-BR">'+t[1]+'</span></h3><div class="grade">'+
+    t[2].map(function(s){return '<button class="slide" data-z="media/mat3/aula/'+s[0]+'.jpeg"><img loading="lazy" src="media/mat3/aula/'+s[0]+'.jpeg" alt="'+s[1]+'"><span class="l" data-tipo="rotulo">'+s[1]+'<span class="tr" lang="pt-BR">'+s[2]+'</span></span></button>';}).join('')+
+  '</div></section>';}).join('');
+[].forEach.call(document.querySelectorAll('.slide'),function(b){b.onclick=function(){document.getElementById('zimg').src=b.getAttribute('data-z');document.getElementById('zoom').classList.add('on');};});
+var V=[['CYVmmTaqIPU','Faces, Edges and Vertices: 3D Shapes','Faces, arestas e vértices: sólidos','3D solids · Noodle Kidz'],['7XuNVVlD98g','Probability!','Probabilidade!','certain · possible · impossible · Scratch Garden']];
+document.getElementById('vids').innerHTML=V.map(function(v){return '<div class="vid"><b data-tipo="rotulo">'+v[1]+'<span class="tr" lang="pt-BR">'+v[2]+'</span></b><small data-tipo="rotulo">'+v[3]+'</small><div class="caixa"><button class="play" data-id="'+v[0]+'">&#9654; Play<span class="tr" lang="pt-BR">Assistir</span></button></div></div>';}).join('');
+/* o vídeo só carrega no toque, sem cookie e sem sugestões de outros canais no fim */
+[].forEach.call(document.querySelectorAll('.play'),function(b){b.onclick=function(){var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.getAttribute('data-id')+'?rel=0&modestbranding=1&autoplay=1&playsinline=1&iv_load_policy=3';f.setAttribute('sandbox','allow-scripts allow-same-origin allow-presentation');f.allow='autoplay; encrypted-media; picture-in-picture';f.allowFullscreen=true;f.title='video';b.parentNode.replaceChild(f,b);};});
+</script>
+<script>window.SERA_ACCENT={accent:'#ec4899'};</script>
+<script src="sera_theme.js?v=ae601ed1257"></script>
+</body>
+</html>
