@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='cfa45721047';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Math 3º tri · Guia do responsável · Respostas escritas</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  :root { --c: #c62828; --ink: #1d1d1f; --soft: #555b6e; --ok: #2e7d32; --warn: #b26a00; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #ece9f3; color: var(--ink); font: 15px/1.5 "Segoe UI", Arial, sans-serif; }
+  .tools { position: sticky; top: 0; z-index: 5; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+           padding: 10px 16px; background: #2b2540; }
+  .tools a, .tools button { font: 600 15px Arial, sans-serif; color: #fff; background: #4a3f72; border: 0; border-radius: 10px;
+           min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; text-decoration: none; cursor: pointer; }
+  .tools button.pri { background: var(--c); }
+  main { max-width: 186mm; margin: 16px auto 40px; background: #fff; padding: 12mm; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+  p, li, .campo { text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
+  h1 { margin: 0 0 2px; font-size: 23px; color: var(--c); }
+  .sub { color: var(--soft); margin: 0 0 12px; }
+  h2 { font-size: 18px; color: #fff; background: var(--c); border-radius: 10px; padding: 5px 12px; margin: 20px 0 8px; break-after: avoid; }
+  h3 { font-size: 16px; margin: 14px 0 4px; color: #2b2540; }
+  .quadro { border: 1.5px solid color-mix(in srgb, var(--c) 35%, transparent); border-radius: 12px; padding: 8px 14px; margin: 8px 0; }
+  .quadro ol, .quadro ul { margin: 4px 0; padding-left: 22px; }
+  .quadro li + li { margin-top: 6px; }
+  .aviso { background: #fff6e5; border-color: #f0c070; }
+  .palavras { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+  .palavras span { border: 1px solid #c9c3dd; border-radius: 999px; padding: 1px 10px; font-weight: 600; }
+  .q { break-inside: avoid; page-break-inside: avoid; padding: 8px 0 10px; border-top: 1px solid color-mix(in srgb, var(--c) 18%, transparent); }
+  .q .top { display: flex; gap: 10px; align-items: flex-start; }
+  .q .n { flex: 0 0 auto; min-width: 28px; height: 28px; border-radius: 50%; background: #2b2540; color: #fff;
+          font: 700 14px Arial, sans-serif; display: inline-flex; align-items: center; justify-content: center; }
+  .q .en { font-weight: 600; flex: 1; }
+  .q .figs { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: flex-end; margin: 4px 0 2px 38px; }
+  .q .figs svg { height: auto; max-width: 44%; max-height: 110px; width: auto; }
+  .q .figs .tabela { font-size: 12px; }
+  .campo { margin: 7px 0 0 38px; }
+  .campo b { display: inline-block; min-width: 0; }
+  .campo.m b { color: var(--ok); }
+  .campo.o b { color: var(--warn); }
+  .tabela { border-collapse: collapse; } .tabela td, .tabela th { border: 1px solid #555; padding: 1px 8px; }
+  .wbox { font-weight: 600; }
+  @media (max-width: 720px) { main { margin: 0; padding: 16px; box-shadow: none; } .q .figs, .campo { margin-left: 0; } }
+  @media print { body { background: #fff; } .tools { display: none; } main { margin: 0; padding: 0; max-width: none; box-shadow: none; } }
+</style>
+</head>
+<body>
+<div class="tools">
+  <span style="color:#ffd54f;font:700 14px Arial,sans-serif;align-self:center" data-tipo="rotulo">&#x1F6A7; Under construction</span>
+  <a href="../index.html?v=cfa45721047" class="sera-home">Home</a>
+  <a href="MAT3_discursivas.html?v=cfa45721047">Folha da criança (EN)</a>
+  <button class="pri" onclick="window.print()">Imprimir</button>
+</div>
+<main id="guia"></main>
+<script src="MAT3_figuras.js?v=cfa45721047"></script>
+<script src="MAT3_discursivas_data.js?v=cfa45721047"></script>
+<script>
+(function () {
+  var D = window.MAT3D, h = '';
+  h += '<h1>Math 3º tri · Guia do responsável</h1><div class="sub" data-tipo="rotulo">Respostas escritas · AF de 18/11/2026 · acompanha a folha "Math · Written answers"</div>';
+  h += '<div class="quadro"><h3 data-tipo="rotulo">Por que esta folha</h3><p>A prova sempre traz questões em que a criança <b>escreve</b> a resposta: uma frase, uma conta, um nome, ' +
+       'um desenho, uma barra pintada no gráfico. Marcar alternativa não treina isso. Em Matemática é ainda mais forte: vêm figuras ' +
+       '(sólidos, gráficos, grupos de objetos) e pedidos como "write the addition sentence" e "write a multiplication sentence", que ' +
+       'é o formato da atividade da página 240 do livro, marcada pela professora como AP.</p></div>';
+  h += '<div class="quadro"><h3 data-tipo="rotulo">Como aplicar</h3><ol>' +
+       '<li>Em <b>duas sessões</b> de uns 15 minutos: na primeira, os temas 1 e 2 (medidas, perímetro e sólidos); na segunda, os temas 3 a 5 (gráficos, probabilidade, multiplicação e divisão).</li>' +
+       '<li>Ela lê sozinha o enunciado em inglês. Se travar, leia em voz alta em inglês; só depois, se ainda precisar, diga em português o que a pergunta pede, sem dar a resposta.</li>' +
+       '<li>Lápis e borracha; nada de régua ou calculadora (o material desta prova não ensina medir com régua).</li>' +
+       '<li>Corrija junto, questão por questão, com este guia: primeiro elogie o que está certo, depois faça a pergunta de conversa.</li>' +
+       '<li>Também funciona <b>sem imprimir</b>, como conversa: você lê a pergunta e ela responde em voz alta, em frase inteira, e escreve só as contas.</li></ol></div>';
+  h += '<div class="quadro"><h3 data-tipo="rotulo">A receita da resposta escrita (vale para todas as matérias)</h3><ol>' +
+       D.receita.pt.map(function (p) { return '<li>' + p + '</li>'; }).join('') + '</ol>' +
+       '<p>No alto da folha dela está a mesma receita, em inglês.</p></div>';
+  h += '<div class="quadro"><h3 data-tipo="rotulo">Palavras para saber escrever</h3><p>No treino, erro de ortografia não tira ponto, mas estas palavras-chave se corrigem na hora:</p>' +
+       '<div class="palavras">' + D.palavras.map(function (p) { return '<span lang="en">' + p + '</span>'; }).join('') + '</div></div>';
+  h += '<div class="quadro aviso"><h3 data-tipo="rotulo">Dois avisos de conteúdo</h3><ul>' +
+       '<li><b>Divisão e números ímpares.</b> O slide da professora diz que números ímpares "cannot be divided equally". Isso vale para repartir entre <b>2</b>; por isso, na folha, toda questão de par/ímpar fala em "between 2 friends". Se a prova perguntar "Can odd numbers be divided equally?", a resposta que a escola espera é <b>"No"</b>.</li>' +
+       '<li><b>Cone e cilindro.</b> Livros diferentes contam de jeitos diferentes os vértices do cone e as arestas do cilindro; o vídeo indicado pela professora diz que não têm nenhum. Não cobramos esses números. O que é certo em qualquer livro: a <b>esfera</b> não tem face plana, nem aresta, nem vértice.</li></ul></div>';
+  D.blocos.forEach(function (b) {
+    h += '<h2 data-tipo="rotulo">' + b.titulo.replace(/^\d+ · /, function (m) { return m; }) + ' <span style="font-weight:400">· ' + b.pt + '</span></h2>';
+    b.questoes.forEach(function (q) {
+      h += '<div class="q"><div class="top"><span class="n">' + q.n + '</span><span class="en" lang="en" data-tipo="rotulo">' + q.en + '</span></div>';
+      if (q.fig) h += '<div class="figs" lang="en">' + q.fig + '</div>';
+      h += '<div class="campo m"><b>Resposta-modelo:</b> <span lang="en">' + q.modelo + '</span></div>';
+      h += '<div class="campo"><b>Aceite também:</b> ' + q.aceitar + '</div>';
+      h += '<div class="campo o"><b>O que observar:</b> ' + q.observar + '</div>';
+      h += '<div class="campo"><b>Pergunta de conversa:</b> ' + q.conversa + '</div>';
+      h += '<div class="campo"><b>Conceito-base:</b> <span lang="en">' + q.conceito + '</span></div></div>';
+    });
+  });
+  document.getElementById('guia').innerHTML = h;
+})();
+</script>
+</body>
+</html>

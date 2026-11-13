@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='71e91c71109';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='cfa45721047';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -9,6 +9,7 @@ function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).th
 if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
 var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
 confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -49,10 +50,10 @@ ol.qs{list-style:none;margin:0;padding:0;columns:2;column-gap:8mm;column-rule:.5
 </head>
 <body>
 <div class="cab"><div style="flex:1"><h1 id="tit">Simulado de Geografia</h1><div class="nome">Nome: ______________________________ &nbsp; Data: ___/___</div></div>
-<img class="qr" src="media/geo3/qr_site.svg?v=71e91c71109" alt="QR do site"></div>
+<img class="qr" src="media/geo3/qr_site.svg?v=cfa45721047" alt="QR do site"></div>
 <ol class="qs" id="qs"></ol>
 <section class="gab"><h2>Gabarito</h2><ol id="gab"></ol></section>
-<script src="GEO3_simulado_data.js?v=71e91c71109"></script>
+<script src="GEO3_simulado_data.js?v=cfa45721047"></script>
 <script>
 (function(){
   var S=window.GEO3S, m=/[?&]s=(\d+)/.exec(location.search), sem=m?+m[1]:1;
