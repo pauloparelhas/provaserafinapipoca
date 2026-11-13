@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='55561f21431';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='d01988c1506';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -16,8 +16,8 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <!-- Página de IMPRESSÃO de um simulado de Math 3º tri (fork de GEO3_simulado_pdf.html). ?s=N escolhe o sorteio
      (trabalho/3tri_matematica/gen/pdf_mat3.py gera ferramentas/media/mat3/Simulado_Math_NN.pdf).
      15 questões de escolha = o MESMO MAT3_simulado_data.js do simulado (só itens aprovados), 2 por tema + 1 sorteado;
-     depois 3 questões DISCURSIVAS sorteadas de MAT3_discursivas_data.js (window.MAT3D, só leitura);
-     última página: answer key (gabarito; discursiva = campo modelo). A4 retrato, em inglês (a prova é em inglês). -->
+     SÓ DE MARCAR (13/11 tarde, ordem do Paulo: as 3 discursivas saíram; questão de escrever mora só na folha
+     MAT3_discursivas.html). Última página: answer key. A4 retrato, em inglês (a prova é em inglês). -->
 <style>
 @font-face{font-family:"Nunito";font-weight:200 1000;src:url(assets/fonts/nunito-latin.woff2) format("woff2")}
 @font-face{font-family:"Baloo 2";font-weight:400 800;src:url(assets/fonts/baloo2-latin.woff2) format("woff2")}
@@ -42,45 +42,25 @@ ol.qs{list-style:none;margin:0;padding:0;columns:2;column-gap:8mm;column-rule:.5
 .q li{display:flex;gap:2mm;align-items:baseline}
 .cx{flex:0 0 auto;width:3.6mm;height:3.6mm;border:1pt solid var(--tinta);border-radius:.8mm;transform:translateY(.5mm)}
 .cx.r{border-radius:50%}
-/* discursivas (mesma área de resposta da folha MAT3_discursivas.html) */
-.disc{break-before:page}
-.disc h2,.gab h2{font:800 15pt/1.1 "Baloo 2",sans-serif;margin:0 0 3mm}
-.disc .sub{color:var(--tinta2);font-weight:700;margin:-1.5mm 0 3mm}
-.d{break-inside:avoid;padding:2mm 0 4mm;border-top:.6pt solid color-mix(in srgb,var(--c) 18%,transparent)}
-.d .en{display:flex;gap:2mm;align-items:flex-start;font-weight:800}
-.d .figs{display:flex;flex-wrap:wrap;gap:2mm 6mm;align-items:flex-end;justify-content:center;margin:2mm 0 1mm}
-.d svg{max-width:100%;height:auto;max-height:46mm}
-.linha{height:10mm;border-bottom:1pt solid #9aa0b4;margin:0 1mm}
-.lab{font-size:10pt;color:var(--tinta2);margin:2mm 1mm 0}
-.caixa{border:1.2pt dashed #9aa0b4;border-radius:3mm;min-height:30mm;margin:2mm 1mm 0}
-.blanks{display:flex;flex-wrap:wrap;gap:2mm 6mm;margin:2.5mm 1mm 0}
-.blanks span i{display:inline-block;min-width:14mm;border-bottom:1pt solid var(--tinta)}
-.item{display:flex;gap:2.5mm;align-items:flex-end;margin:2.5mm 1mm 0}
-.item .w{flex:1;border-bottom:1pt solid #9aa0b4;height:8mm}
-.wbox{border:1.2pt solid var(--tinta);border-radius:2mm;padding:1mm 4mm;font-weight:800;text-align:center}
 .gab{break-before:page}
 .gab ol{margin:0;padding-left:6mm;columns:2;column-gap:8mm}
 .gab li{break-inside:avoid;margin:0 0 2mm}
 .gab .t{font-size:9pt;color:var(--tinta2)}
-.gab .dm{margin-top:4mm}
-.gab .dm p{margin:0 0 2mm}
 .tr{display:none}
 /* MANDAMENTO TIPOGRÁFICO (12/11): enunciado e explicação do gabarito justificados (última linha à esquerda) */
-.q,.gab li,.d .en,.gab .dm p{text-align:justify;text-align-last:left;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+.q,.gab li{text-align:justify;text-align-last:left;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
 .q ul li{text-align:left}
 </style>
 </head>
 <body>
 <div class="cab"><div style="flex:1"><h1 id="tit">Math Practice Test</h1><div class="nome" data-tipo="rotulo">Year 2 · 3rd term &nbsp;·&nbsp; Name: ______________________________ &nbsp; Date: ___/___</div></div></div>
 <ol class="qs" id="qs"></ol>
-<section class="disc"><h2>Written answers</h2><p class="sub" data-tipo="rotulo">Write your answer. Show your work.</p><div id="disc"></div></section>
-<section class="gab"><h2>Answer key</h2><ol id="gab"></ol><div class="dm" id="gabd"></div></section>
-<script src="MAT3_figuras.js?v=55561f21431"></script>
-<script src="MAT3_simulado_data.js?v=55561f21431"></script>
-<script src="MAT3_discursivas_data.js?v=55561f21431"></script>
+<section class="gab"><h2>Answer key</h2><ol id="gab"></ol></section>
+<script src="MAT3_figuras.js?v=d01988c1506"></script>
+<script src="MAT3_simulado_data.js?v=d01988c1506"></script>
 <script>
 (function(){
-  var S=window.MAT3S, F=window.MAT3F, D=window.MAT3D, m=/[?&]s=(\d+)/.exec(location.search), sem=m?+m[1]:1;
+  var S=window.MAT3S, F=window.MAT3F, m=/[?&]s=(\d+)/.exec(location.search), sem=m?+m[1]:1;
   document.getElementById('tit').textContent='Math Practice Test No. '+sem;
   var x=sem*9301+49297; function rnd(){ x=(x*233280+49297)%2147483647; return x/2147483647; }
   function emb(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
@@ -103,37 +83,6 @@ ol.qs{list-style:none;margin:0;padding:0;columns:2;column-gap:8mm;column-rule:.5
     gb+='<li><b>'+certas.join(' · ')+'</b>'+(it.truque?'<div class="t">'+it.truque.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</div>':'')+'</li>';
   });
   document.getElementById('qs').innerHTML=qs; document.getElementById('gab').innerHTML=gb;
-  /* 3 discursivas sorteadas (de blocos diferentes quando dá), na ordem da folha */
-  /* o campo modelo de 3 questões de desenho descreve o desenho em português (é do guia do responsável): aqui vai a mesma
-     descrição em inglês; questão cujo modelo tenha português e não esteja aqui fica fora do sorteio */
-  var MODELO_EN={D06:'One face (a whole square) colored; one vertex (a corner) circled; one edge (a straight line between two corners) traced.',
-    D11:'Bars painted up to: Cats 3, Dogs 5, Fish 1, Birds 4.', D19:'4 circles with 3 buttons in each. 4 × 3 = 12.',
-    D12:'Data is all the information we collect and find out. About me: "My favorite color is blue." / "I have 2 pets." (any true fact about the child)'};
-  function modelo(q){ return MODELO_EN[q.id] || q.modelo; }
-  var todas=[]; D.blocos.forEach(function(b,bi){ b.questoes.forEach(function(q){ if(!/[ãõçáéíóúâêôà]|(um|uma|sobre|ela|ele|com|cada|criança)/i.test(modelo(q))) todas.push({q:q,b:bi}); }); });
-  var pick=[], usados={};
-  emb(todas).forEach(function(e){ if(pick.length<3 && !usados[e.b]){ pick.push(e); usados[e.b]=1; } });
-  emb(todas).forEach(function(e){ if(pick.length<3 && pick.indexOf(e)<0) pick.push(e); });
-  pick.sort(function(a,b){ return todas.indexOf(a)-todas.indexOf(b); });
-  function area(r){
-    if(!r) return ''; var s='';
-    (r.partes||[r]).forEach(function(p){
-      if(p.lab) s+='<div class="lab" data-tipo="rotulo">'+p.lab+'</div>';
-      if(p.tipo==='linhas') for(var i=0;i<p.n;i++) s+='<div class="linha"></div>';
-      if(p.tipo==='caixa') s+='<div class="caixa" style="min-height:'+Math.round((p.alt||120)*0.26)+'mm"></div>';
-      if(p.tipo==='blanks') s+='<div class="blanks" data-tipo="rotulo">'+p.itens.map(function(b){ return '<span>'+b.replace('___','<i></i>')+'</span>'; }).join('')+'</div>';
-      if(p.tipo==='itens') s+=p.itens.map(function(b){ return '<div class="item" data-tipo="rotulo"><span>'+b+'</span><span class="w"></span></div>'; }).join('');
-    });
-    return s;
-  }
-  var dh='', dg='';
-  pick.forEach(function(e,k){
-    var q=e.q, n=esc.length+k+1;
-    dh+='<div class="d"><div class="en"><span class="n">'+n+'</span><span>'+q.en+'</span></div>'+(q.fig?'<div class="figs" data-tipo="rotulo">'+q.fig+'</div>':'')+area(q.resp)+'</div>';
-    dg+='<p><b>'+n+'.</b> '+modelo(q)+'</p>';
-  });
-  document.getElementById('disc').innerHTML=dh; document.getElementById('gabd').innerHTML='<h2>Written answers: model answers</h2>'+dg;
-  document.body.setAttribute('data-disc',pick.map(function(e){ return e.q.id; }).join(','));
   document.body.setAttribute('data-pronto','1');
 })();
 </script>

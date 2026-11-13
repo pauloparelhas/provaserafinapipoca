@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='55561f21431';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='d01988c1506';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -9,6 +9,7 @@ function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).th
 if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
 var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
 confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
 
 
 
@@ -131,7 +132,7 @@ b{font-weight:850}
 </head>
 <body>
 <div class="tela">
-  <a href="../index.html?v=55561f21431" title="Início">&#127968; Início</a>
+  <a href="../index.html?v=d01988c1506" title="Início">&#127968; Início</a>
   <button onclick="window.print()">&#128424;&#65039; Imprimir</button>
   <span class="dica">Imprima COLORIDO, A4, paisagem. Uma folha com tudo para a prova de História.</span>
 </div>

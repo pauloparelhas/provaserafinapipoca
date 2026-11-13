@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='55561f21431';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='d01988c1506';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -16,10 +16,10 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <!-- Página de IMPRESSÃO da teoria de Math (MAT3, prova em inglês 18/11/2026), molde do GEO3_teoria_pdf.html.
      trabalho/3tri_matematica/gen/pdf_teoria_mat3.py imprime com o Chrome em A4 retrato.
      ?img=1 → com as figuras da aula; ?img=0 → resumo estruturado só com texto.
-     Conteúdo = o MESMO window.MAT3_LICOES da teoria (nada de conteúdo escrito aqui). No fim de cada tema,
-     o quadro "Write it!" traz 1 questão discursiva do tema, lida de MAT3_discursivas_data.js (window.MAT3D).
-     ?img=0 corta só as FOTOS: cada foto vira o desenho leve MAT3F.leve(<recorte>) e os desenhos SVG ficam (frase que manda
-     olhar nunca fica sem figura); a última página traz o gabarito dos 7 "Write it!" para os pais (revisor-sentido 13/11/2026). -->
+     Conteúdo = o MESMO window.MAT3_LICOES da teoria (nada de conteúdo escrito aqui). SÓ TEORIA: sem perguntas
+     (ordem do Paulo 13/11 tarde: os quadros "Write it!" e o gabarito deles saíram; questão de escrever mora só na folha
+     MAT3_discursivas.html). ?img=0 corta só as FOTOS: cada foto vira o desenho leve MAT3F.leve(<recorte>) e os desenhos
+     SVG ficam (frase que manda olhar nunca fica sem figura; revisor-sentido 13/11/2026). -->
 <style>
 @font-face{font-family:"Nunito";font-weight:200 1000;src:url(assets/fonts/nunito-latin.woff2) format("woff2")}
 @font-face{font-family:"Baloo 2";font-weight:400 800;src:url(assets/fonts/baloo2-latin.woff2) format("woff2")}
@@ -68,23 +68,6 @@ figcaption{text-align:center;font-size:8pt;font-weight:700;color:var(--tinta2);m
 .ml{text-align:justify;text-align-last:left;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
 [lang="en"]{-webkit-hyphenate-limit-before:4;-webkit-hyphenate-limit-after:4;hyphenate-limit-chars:10 4 4}
 .mlin>.ml+.ml{padding-top:1mm;border-top:.5pt solid color-mix(in srgb,var(--lc) 25%,transparent)}
-/* quadro "Write it!" (discursiva do tema, de MAT3_discursivas_data.js) */
-.escreva{break-inside:avoid;border:1.4pt solid var(--lc);border-radius:3mm;padding:2.6mm 4mm 3.4mm;margin:1mm 0 6mm}
-.escreva .et{display:flex;align-items:baseline;gap:2.5mm;font:800 12.5pt/1.1 "Baloo 2",sans-serif;color:var(--lcx);margin-bottom:1.6mm}
-.escreva .et small{font:700 8.5pt "Nunito",sans-serif;color:var(--tinta2)}
-.escreva .en{font-weight:800;font-size:11pt;margin:0 0 1.5mm}
-.escreva .figs{display:flex;flex-wrap:wrap;gap:2mm 6mm;justify-content:center;align-items:flex-end;margin:1mm 0 1.5mm}
-.escreva .figs svg{height:30mm;width:auto;max-width:100%}
-.escreva .tabela{border-collapse:collapse}.escreva .tabela td,.escreva .tabela th{border:.6pt solid var(--tinta);padding:.6mm 3mm}
-.escreva .wbox{border:1pt solid var(--tinta);border-radius:2mm;padding:1mm 4mm;font-weight:800;text-align:center}
-.escreva .linha{height:10mm;border-bottom:1pt solid var(--risco)}
-.escreva .lab{font-size:9.5pt;color:var(--tinta2);margin:1.6mm 0 0}
-.escreva .caixa{border:1pt dashed var(--risco);border-radius:2mm;min-height:30mm;margin-top:1.5mm}
-.escreva .blanks{display:flex;flex-wrap:wrap;gap:2mm 6mm;margin:2.4mm 0 0;font-size:10.5pt}
-.escreva .blanks span i{display:inline-block;min-width:13mm;border-bottom:1pt solid var(--tinta)}
-.escreva .item{display:flex;gap:3mm;align-items:flex-end;margin:2.2mm 0 0}
-.escreva .item .s{flex:0 0 auto}
-.escreva .item .w{flex:1;border-bottom:1pt solid var(--risco);height:8mm}
 /* sem imagens: resumo estruturado em 2 colunas */
 body.semimg .licgrid{column-count:2;column-gap:7mm;column-rule:.5pt solid var(--linha)}
 body.semimg .tela{margin:0 0 2.6mm;padding:0 0 2.2mm}
@@ -100,48 +83,18 @@ body.semimg .mfig{margin:0 0 1mm}
 body.semimg .tabgraf svg.fig{height:34mm}
 body.semimg .mg .mcol+.mcol .mlin{padding-top:.8mm;border-top:.5pt solid color-mix(in srgb,var(--lc) 25%,transparent)}
 .cab1{break-inside:avoid}
-/* gabarito dos "Write it!" (última página) */
-.gab{break-before:page}
-.gab h2{font:800 16pt/1.1 "Baloo 2",sans-serif;margin:0 0 1mm}
-.gab .sub{margin:0 0 4mm;color:var(--tinta2);font-weight:700}
-.gab ol{list-style:none;margin:0;padding:0}
-.gab li{break-inside:avoid;padding:2.4mm 0 2.6mm;border-bottom:.6pt solid var(--linha)}
-.gab li b.t{display:block;font:800 11.5pt/1.15 "Baloo 2",sans-serif;color:var(--lcx);margin-bottom:1.6mm}
-.gab li .q{margin:.6mm 0 .8mm;color:var(--tinta2);font-size:9.5pt}
-.gab li .a{font-weight:800;margin:0;text-align:justify;text-align-last:left;-webkit-hyphens:auto;hyphens:auto}
 </style>
 </head>
 <body>
 <div class="capa"><div style="flex:1"><h1>Math · Theory</h1><p data-tipo="rotulo">Year 2 · 3rd term · Length, perimeter, 3D solids, data, probability, multiplication and division</p></div></div>
 <main id="doc" lang="en"></main>
-<script src="MAT3_figuras.js?v=55561f21431"></script>
-<script src="MAT3_estudo_licoes.js?v=55561f21431"></script>
-<script src="MAT3_discursivas_data.js?v=55561f21431"></script>
+<script src="MAT3_figuras.js?v=d01988c1506"></script>
+<script src="MAT3_estudo_licoes.js?v=d01988c1506"></script>
 <script>
 (function(){
   var COM = !/[?&]img=0/.test(location.search);
   document.body.classList.toggle('semimg', !COM);
   if(!COM) document.title='Math · Theory (summary, no pictures)';
-  /* 1 questão discursiva por tema (ids de MAT3_discursivas_data.js) */
-  var ESCREVA={medir:'D01', perimetro:'D03', solidos:'D07', dados:'D10', prob:'D13', mult:'D15', div:'D20'};
-  var Q={}; (window.MAT3D?MAT3D.blocos:[]).forEach(function(b){ b.questoes.forEach(function(q){ Q[q.id]=q; }); });
-  function area(r){
-    if(!r) return '';
-    var s='';
-    (r.partes||[r]).forEach(function(p){
-      if(p.lab) s+='<div class="lab" data-tipo="rotulo">'+p.lab+'</div>';
-      if(p.tipo==='linhas') for(var i=0;i<p.n;i++) s+='<div class="linha"></div>';
-      if(p.tipo==='caixa') s+='<div class="caixa"></div>';
-      if(p.tipo==='blanks') s+='<div class="blanks">'+p.itens.map(function(b){ return '<span data-tipo="rotulo">'+b.replace(/___/g,'<i></i>')+'</span>'; }).join('')+'</div>';
-      if(p.tipo==='itens') s+=p.itens.map(function(b){ return '<div class="item"><span class="s" data-tipo="rotulo">'+b+'</span><span class="w"></span></div>'; }).join('');
-    });
-    return s;
-  }
-  function escreva(l){
-    var q=Q[ESCREVA[l.k]]; if(!q) return '';
-    return '<div class="escreva"><div class="et">Write it!<small>Escreva</small></div><p class="en" data-tipo="rotulo">'+q.en+'</p>'+
-      (q.fig?'<div class="figs">'+q.fig+'</div>':'')+area(q.resp)+'</div>';
-  }
   function escurece(h){ h=h.replace('#',''); var c=[0,2,4].map(function(i){ return parseInt(h.substr(i,2),16); });
     var l=(0.299*c[0]+0.587*c[1]+0.114*c[2]); var f=l>120?120/l:1; f=Math.min(f,.78);
     return 'rgb('+c.map(function(v){ return Math.round(v*f); }).join(',')+')'; }
@@ -150,12 +103,8 @@ body.semimg .mg .mcol+.mcol .mlin{padding-top:.8mm;border-top:.5pt solid color-m
     var cor=l.cor||'#7c3aed';
     out+='<section class="lic" style="--lc:'+cor+';--lcx:'+escurece(cor)+'"><div class="lich"><span class="n">'+(i+1)+'</span><div><small>Unit '+l.unid+' · Lesson '+(i+1)+' of '+MAT3_LICOES.length+'</small><b>'+l.nome+'</b></div></div><div class="licgrid">';
     l.telas.forEach(function(t){ out+='<div class="tela"><h3>'+t.tit+'</h3>'+t.html+'</div>'; });
-    out+='</div>'+escreva(l)+'</section>';
+    out+='</div></section>';
   });
-  /* gabarito dos quadros "Write it!" (resposta-modelo de MAT3_discursivas_data.js), para guiar os pais */
-  out+='<section class="gab"><h2>Answers · Write it!</h2><p class="sub" data-tipo="rotulo">Model answers for grown-ups (Gabarito para os pais)</p><ol>'+
-    MAT3_LICOES.map(function(l,i){ var q=Q[ESCREVA[l.k]]; if(!q) return '';
-      return '<li style="--lc:'+(l.cor||'#7c3aed')+';--lcx:'+escurece(l.cor||'#7c3aed')+'"><b class="t">'+(i+1)+' · '+l.nome+'</b><p class="a">'+q.modelo+'</p></li>'; }).join('')+'</ol></section>';
   doc.innerHTML=out;
   doc.querySelectorAll('.tr').forEach(function(e){ e.remove(); });
   if(COM) doc.querySelectorAll('.lic').forEach(function(l){ var h=l.querySelector('.lich'), t=l.querySelector('.tela');

@@ -4,7 +4,9 @@
    Alimenta MAT3_discursivas.html (folha da criança, EN) e
    MAT3_guia_responsavel.html (guia do pai/mãe, PT).
    Conteúdo: trabalho/3tri_matematica/_roteiro.md (pedagógico 13/11 aplicado).
-   Campos por questão: id, n, top (T1..T7), en (enunciado), fig (SVG),
+   FOLHA CURTA (13/11 tarde, ordem do Paulo): só as questões com kit:1 são renderizadas (folha, guia e
+   Kit_Math.pdf), numeradas n = 1..10 nessa ordem; as demais (n: 0) ficam guardadas aqui, sem uso.
+   Campos por questão: id, kit, n, top (T1..T7), en (enunciado), fig (SVG),
    resp (área de resposta), modelo (EN), aceitar, observar, conversa,
    conceito (pergunta de conceito-base) — os 5 últimos em PT, só no guia.
    ============================================================ */
@@ -37,7 +39,7 @@
       'possible', 'unlikely', 'impossible', 'multiplication', 'division', 'equally', 'groups'],
     blocos: [
       { top: 'T1-T2', titulo: '1 · Length and perimeter', pt: 'Comprimento e perímetro', questoes: [
-        { id: 'D01', n: 1, curta: 'Pencil A is longer.', en: 'Look at the pencils. Which pencil is longer? Write a sentence.',
+        { id: 'D01', kit: 1, n: 1, curta: 'Pencil A is longer.', en: 'Look at the pencils. Which pencil is longer? Write a sentence.',
           pt: 'Olhe os lápis. Qual lápis é mais comprido (longer)? Escreva uma frase.',
           fig: F.lapis2(), resp: { partes: [{ tipo: 'itens', itens: ['Pencil ____ is'] }, linhas(1)] },
           modelo: 'Pencil A is longer. / Pencil A is longer than pencil B.',
@@ -45,7 +47,7 @@
           observar: 'Troca de long/longer (adjetivo × comparação) não é erro grave aqui; o importante é apontar o lápis certo e usar a palavra de medida.',
           conversa: 'Como você sabe que o A é mais comprido? (resposta esperada: começam no mesmo lugar e o A vai mais longe)',
           conceito: 'What does long mean? → how much something measures from one end to the other.' },
-        { id: 'D02', n: 2, curta: 'a) Book B is wider. b) Tree B is taller.', en: 'Write a sentence about each picture. Use <b>wider</b> and <b>taller</b>.',
+        { id: 'D02', n: 0, curta: 'a) Book B is wider. b) Tree B is taller.', en: 'Write a sentence about each picture. Use <b>wider</b> and <b>taller</b>.',
           pt: 'Escreva uma frase sobre cada figura. Use <b>wider</b> (mais largo) e <b>taller</b> (mais alto).',
           fig: F.livros2() + F.arvores2(),
           resp: { partes: [{ tipo: 'itens', itens: ['a) The books: Book ____ is'] }, { tipo: 'itens', itens: ['b) The trees: Tree ____ is'] }] },
@@ -54,7 +56,7 @@
           observar: 'Confundir wide (largura, de um lado ao outro) com tall (altura, de baixo para cima) — é a confusão mais provável.',
           conversa: 'Mostre com a mão: onde a gente mede o "wide" do livro? E o "tall" da árvore?',
           conceito: 'What does tall mean? → how high something is, from the bottom to the top.' },
-        { id: 'D03', meia: 1, n: 3, curta: 'The total distance around a shape. 7 + 7 + 2 + 2 = 18 cm.', en: 'What is perimeter? Find the perimeter of the rectangle. Show your work.',
+        { id: 'D03', kit: 1, meia: 1, n: 2, curta: 'The total distance around a shape. 7 + 7 + 2 + 2 = 18 cm.', en: 'What is perimeter? Find the perimeter of the rectangle. Show your work.',
           pt: 'O que é perímetro? Calcule o perímetro do retângulo. Mostre a conta.',
           fig: F.retangulo(210, 70, 7, 2),
           resp: { partes: [linhas(1, 'Perimeter is'), { tipo: 'linhas', n: 1, lab: 'My work:' }, { tipo: 'blanks', itens: ['The perimeter is ___ cm.'] }] },
@@ -63,7 +65,7 @@
           observar: 'Erro típico: somar só os dois números escritos (7 + 2 = 9) — esquece que o retângulo tem 4 lados. Esquecer o "cm".',
           conversa: 'Quantos lados tem o retângulo? Passe o dedo em volta dele contando os lados.',
           conceito: 'What is perimeter? → the total distance around a shape. Add all the sides!' },
-        { id: 'D04', meia: 1, n: 4, curta: '4 + 4 + 4 + 4 = 16 cm.', en: 'Find the perimeter of the square. Show your work.',
+        { id: 'D04', meia: 1, n: 0, curta: '4 + 4 + 4 + 4 = 16 cm.', en: 'Find the perimeter of the square. Show your work.',
           pt: 'Calcule o perímetro do quadrado. Mostre a conta.',
           fig: F.quadrado(4),
           resp: { partes: [{ tipo: 'linhas', n: 1, lab: 'My work:' }, { tipo: 'blanks', itens: ['The perimeter is ___ cm.'] }] },
@@ -72,7 +74,7 @@
           observar: 'No quadrado os 4 lados são iguais; se ela escrever só 4 + 4, pergunte quantos lados faltam.',
           conversa: 'Por que basta saber um lado do quadrado?',
           conceito: 'How many sides does a square have? → 4.' },
-        { id: 'D05', n: 5, curta: '5 + 5 + 5 = 15 cm. The rectangle (18 cm).', en: 'Find the perimeter of the triangle. Show your work. Which shape has the biggest perimeter: the rectangle (question 3), the square (question 4) or the triangle?',
+        { id: 'D05', n: 0, curta: '5 + 5 + 5 = 15 cm. The rectangle (18 cm).', en: 'Find the perimeter of the triangle. Show your work. Which shape has the biggest perimeter: the rectangle (question 3), the square (question 4) or the triangle?',
           pt: 'Calcule o perímetro do triângulo. Mostre a conta. Qual forma tem o maior perímetro: o retângulo (questão 3), o quadrado (questão 4) ou o triângulo?',
           fig: F.triangulo(5),
           resp: { partes: [{ tipo: 'linhas', n: 1, lab: 'My work:' }, { tipo: 'blanks', itens: ['The perimeter is ___ cm.'] }, { tipo: 'itens', itens: ['The ________ has the biggest perimeter.'] }] },
@@ -83,7 +85,7 @@
           conceito: 'How many sides does a triangle have? → 3.' }
       ]},
       { top: 'T3', titulo: '2 · 3D solids', pt: 'Sólidos geométricos', questoes: [
-        { id: 'D06', meia: 1, n: 6, curta: 'A whole square colored, a corner circled, a straight line traced.', en: 'Look at the cube. <b>Color</b> one face. <b>Circle</b> one vertex. <b>Trace</b> one edge.',
+        { id: 'D06', meia: 1, n: 0, curta: 'A whole square colored, a corner circled, a straight line traced.', en: 'Look at the cube. <b>Color</b> one face. <b>Circle</b> one vertex. <b>Trace</b> one edge.',
           pt: 'Olhe o cubo. <b>Pinte</b> uma face. <b>Circule</b> um vértice. <b>Cubra</b> uma aresta com o lápis.',
           fig: F.svg(170, 150, '<g transform="translate(5,5) scale(1.3)">' + F.solido('cube').replace(/^<svg[^>]*>|<\/svg>$/g, '') + '</g>'),
           resp: null,
@@ -92,7 +94,7 @@
           observar: 'Pintar uma aresta achando que é face, ou circular o meio de uma face achando que é vértice. As linhas tracejadas são arestas escondidas (atrás).',
           conversa: 'Aponte no cubo: onde duas faces se encontram? (aresta) E onde as arestas se encontram? (vértice)',
           conceito: 'What is a vertex? → a corner where two or more edges meet.' },
-        { id: 'D07', meia: 1, n: 7, curta: 'Cube: 6, 12, 8. Pyramid: 5, 8, 5.', en: 'Count and complete the sentences.',
+        { id: 'D07', kit: 1, meia: 1, n: 3, curta: 'Cube: 6, 12, 8. Pyramid: 5, 8, 5.', en: 'Count and complete the sentences.',
           pt: 'Conte e complete as frases.',
           fig: F.solido('cube', 'cube') + F.solido('pyramid', 'pyramid'),
           resp: { partes: [{ tipo: 'blanks', itens: ['The cube has ___ faces, ___ edges and ___ vertices.'] }, { tipo: 'blanks', itens: ['The pyramid has ___ faces, ___ edges and ___ vertices.'] }] },
@@ -101,7 +103,7 @@
           observar: 'Contar só as faces que aparecem (3) e esquecer as de trás. As linhas tracejadas ajudam a "ver" o que está escondido. Na pirâmide, a face de baixo (o quadrado) também conta: 4 triângulos + 1 quadrado = 5 faces.',
           conversa: 'O cuboid (a caixa comprida) tem os mesmos números do cubo: 6, 12 e 8. Qual é a diferença entre eles? (no cubo todas as arestas têm o mesmo tamanho)',
           conceito: 'What is an edge? → a straight line where two faces meet.' },
-        { id: 'D08', n: 8, curta: 'The sphere, because it has a curved surface. 0 edges.', en: 'Which solid can roll? Write why. How many edges does the sphere have?',
+        { id: 'D08', kit: 1, n: 4, curta: 'The sphere, because it has a curved surface. 0 edges.', en: 'Which solid can roll? Write why. How many edges does the sphere have?',
           pt: 'Qual sólido consegue rolar? Escreva por quê. Quantas arestas a esfera tem?',
           fig: F.solido('sphere', 'sphere') + F.solido('cube', 'cube'),
           resp: { partes: [{ tipo: 'itens', itens: ['The ________ can roll because'] }, linhas(1), { tipo: 'blanks', itens: ['The sphere has ___ edges.'] }] },
@@ -110,7 +112,7 @@
           observar: 'Responder sem o "because". A palavra-chave é curved (curva) × flat (plana).',
           conversa: 'O que acontece se você empurrar o cubo? E a bola?',
           conceito: 'Does a sphere have edges or vertices? → No. No flat face, no edges, no vertices.' },
-        { id: 'D09', n: 9, curta: 'cube, cuboid, pyramid, cylinder, cone, sphere', en: 'Write the name of each solid.',
+        { id: 'D09', n: 0, curta: 'cube, cuboid, pyramid, cylinder, cone, sphere', en: 'Write the name of each solid.',
           pt: 'Escreva o nome de cada sólido.',
           fig: ['cube', 'cuboid', 'pyramid', 'cylinder', 'cone', 'sphere'].map(function (s, i) { return F.solido(s, String.fromCharCode(97 + i) + ')'); }).join(''),
           resp: { tipo: 'blanks', larga: 1, itens: ['a) ___', 'b) ___', 'c) ___', 'd) ___', 'e) ___', 'f) ___'] },
@@ -121,16 +123,16 @@
           conceito: 'What is a 3D solid? → a solid shape that has faces, edges and vertices. A sphere, a cylinder and a cone also have a curved surface.' }
       ]},
       { top: 'T4', titulo: '3 · Data and bar graphs', pt: 'Dados e gráfico de barras', questoes: [
-        { id: 'D10', meia: 1, n: 10, curta: 'a) grapes b) orange c) 3', en: 'Look at the bar graph and answer with a sentence.',
+        { id: 'D10', kit: 1, meia: 1, n: 5, curta: 'a) Grapes. b) Orange has the shortest bar. c) 3', en: 'Look at the bar graph and answer with a sentence.',
           pt: 'Olhe o gráfico de barras e responda com uma frase.',
           fig: F.barras(['Apple', 'Banana', 'Grapes', 'Orange'], [5, 3, 6, 2], 6, 'Our favorite fruit'),
-          resp: { partes: [{ tipo: 'itens', lab: 'a) Which fruit do the most children like?', itens: ['The most children like'] }, { tipo: 'itens', lab: 'b) Which fruit has the shortest bar?', itens: ['The shortest bar is'] }, { tipo: 'itens', lab: 'c) How many children like bananas?', itens: ['___ children like bananas.'] }] },
-          modelo: 'a) The most children like grapes (6). b) The shortest bar is orange (Orange has the shortest bar). c) 3 children like bananas.',
+          resp: { partes: [{ tipo: 'itens', lab: 'a) Which fruit do the most children like?', itens: ['The most children like'] }, { tipo: 'itens', lab: 'b) Which fruit has the shortest bar?', itens: ['____ has the shortest bar.'] }, { tipo: 'itens', lab: 'c) How many children like bananas?', itens: ['___ children like bananas.'] }] },
+          modelo: 'a) The most children like grapes (6). b) Orange has the shortest bar. c) 3 children like bananas.',
           aceitar: 'Só o nome ("Grapes") vale como resposta certa, mas peça a frase inteira: é o que a prova espera.',
           observar: 'Ler a barra pelo topo e ir até o número do lado esquerdo. Erro típico: contar os quadradinhos da grade errado.',
           conversa: 'Como você descobre qual é a mais escolhida sem contar? (a barra mais alta)',
           conceito: 'What is data? → all the information we collect and find out.' },
-        { id: 'D11', meia: 1, n: 11, curta: 'Cats 3, Dogs 5, Fish 1, Birds 4.', en: 'Color the bars to show the table.',
+        { id: 'D11', meia: 1, n: 0, curta: 'Cats 3, Dogs 5, Fish 1, Birds 4.', en: 'Color the bars to show the table.',
           pt: 'Pinte as barras para mostrar a tabela.',
           fig: '<table class="tabela"><tr><th>Pet</th><th>Cats</th><th>Dogs</th><th>Fish</th><th>Birds</th></tr><tr><th>How many</th><td>3</td><td>5</td><td>1</td><td>4</td></tr></table>' +
             F.barras(['Cats', 'Dogs', 'Fish', 'Birds'], [3, 5, 1, 4], 6, 'Pets in our class', true),
@@ -140,7 +142,7 @@
           observar: 'Começar a pintar do número 1 e não do chão (0); pintar a barra na coluna errada.',
           conversa: 'Depois de pintar: qual bicho tem mais? Dá para ver mais rápido no gráfico ou na tabela?',
           conceito: 'What does a bar graph show? → data, with bars; the taller the bar, the more there are.' },
-        { id: 'D12', n: 12, curta: 'All the information we collect and find out. One true fact about you.', en: 'What is data? Write one piece of data about you.',
+        { id: 'D12', n: 0, curta: 'All the information we collect and find out. One true fact about you.', en: 'What is data? Write one piece of data about you.',
           pt: 'O que é data (dados)? Escreva um dado sobre você.',
           fig: '', resp: { partes: [linhas(1, 'Data is'), linhas(1, 'About me:')] },
           modelo: 'Data is all the information we collect and find out. About me: "My favorite color is blue." / "I have 2 pets." (um fato verdadeiro sobre ela)',
@@ -150,7 +152,7 @@
           conceito: 'What is a piece of data? → one simple fact.' }
       ]},
       { top: 'T5', titulo: '4 · Probability', pt: 'Probabilidade', questoes: [
-        { id: 'D13', n: 13, curta: 'certain, likely, possible, unlikely, impossible', en: 'Write <b>certain</b>, <b>likely</b>, <b>possible</b>, <b>unlikely</b> or <b>impossible</b>.',
+        { id: 'D13', kit: 1, n: 6, curta: 'a) certain b) likely c) possible d) unlikely e) impossible', en: 'Write <b>certain</b>, <b>likely</b>, <b>possible</b>, <b>unlikely</b> or <b>impossible</b>.',
           pt: 'Escreva <b>certain</b> (certo), <b>likely</b> (provável), <b>possible</b> (possível), <b>unlikely</b> (improvável) ou <b>impossible</b> (impossível).',
           fig: '<div class="wbox" data-tipo="rotulo">certain · likely · possible · unlikely · impossible</div>',
           resp: { tipo: 'itens', itens: ['a) You will eat dinner tonight.', 'b) You will find students in the school.', 'c) You will eat spaghetti for dinner.', 'd) You will see a penguin in the desert.', 'e) A cat will fly to the moon.'] },
@@ -159,7 +161,7 @@
           observar: 'Confundir unlikely (chance pequena) com impossible (não vai acontecer nunca).',
           conversa: 'Ponha as 5 palavras em ordem, da que mais acontece para a que nunca acontece. (certain, likely, possible, unlikely, impossible)',
           conceito: 'Certain → we know it will happen (I will eat dinner tonight). Likely → big chance to happen. Possible → it will maybe happen (I will eat spaghetti for dinner). Unlikely → small chance to happen. Impossible → we know it won\'t happen (a cat will fly to the moon).' },
-        { id: 'D14', n: 14, curta: 'We know it won\'t happen. Ex.: I will eat rocks for dinner.', en: 'What does <b>impossible</b> mean? Write one thing that is impossible.',
+        { id: 'D14', n: 0, curta: 'We know it won\'t happen. Ex.: I will eat rocks for dinner.', en: 'What does <b>impossible</b> mean? Write one thing that is impossible.',
           pt: 'O que <b>impossible</b> quer dizer? Escreva uma coisa que é impossível.',
           fig: '', resp: { partes: [linhas(1, 'Impossible means'), linhas(1, 'It is impossible that')] },
           modelo: 'Impossible means we know it won\'t happen. It is impossible that I will eat rocks for dinner.',
@@ -169,7 +171,7 @@
           conceito: 'What is probability? → thinking about if something will happen, won\'t happen, or will maybe happen.' }
       ]},
       { top: 'T6-T7', titulo: '5 · Multiplication and division', pt: 'Multiplicação e divisão', questoes: [
-        { id: 'D15', meia: 1, n: 15, curta: '4. 4 + 4 + 4 = 12. 3 × 4 = 12. A shorter way to show repeated addition.', en: 'How many cherries are in each group? Write the addition sentence. Write a multiplication sentence. What is multiplication?',
+        { id: 'D15', kit: 1, meia: 1, n: 7, curta: '4. 4 + 4 + 4 = 12. 3 × 4 = 12. A shorter way to show repeated addition.', en: 'How many cherries are in each group? Write the addition sentence. Write a multiplication sentence. What is multiplication?',
           pt: 'Quantas cerejas há em cada grupo? Escreva a soma repetida (addition sentence). Escreva a multiplicação (multiplication sentence). O que é multiplicação?',
           fig: F.grupos(3, 4, 'cherry'),
           resp: { partes: [{ tipo: 'blanks', itens: ['In each group: ___'] }, linhas(1, 'Addition sentence:'), linhas(1, 'Multiplication sentence:'), linhas(1, 'Multiplication is')] },
@@ -178,7 +180,7 @@
           observar: 'Erro típico: somar o número de grupos com o de itens (3 + 4 = 7). A soma repetida repete o "em cada grupo" tantas vezes quantos são os grupos.',
           conversa: 'Quantos grupos? Quantos em cada grupo? Qual número vem primeiro na multiplicação?',
           conceito: 'What is multiplication? → a shorter way to show repeated addition, with equal groups.' },
-        { id: 'D16', meia: 1, n: 16, curta: '5. 5 + 5 = 10. 2 × 5 = 10.', en: 'How many fingers are on each hand? Write the addition sentence. Write a multiplication sentence.',
+        { id: 'D16', kit: 1, meia: 1, n: 8, curta: '5. 5 + 5 = 10. 2 × 5 = 10.', en: 'How many fingers are on each hand? Write the addition sentence. Write a multiplication sentence.',
           pt: 'Quantos dedos há em cada mão? Escreva a soma repetida. Escreva a multiplicação.',
           fig: F.maos(2),
           resp: { partes: [{ tipo: 'blanks', itens: ['On each hand: ___'] }, linhas(1, 'Addition sentence:'), linhas(1, 'Multiplication sentence:')] },
@@ -187,7 +189,7 @@
           observar: 'É o mesmo formato da atividade do livro (p. 240), marcada pela professora como AP.',
           conversa: 'E se fossem 3 mãos? (5 + 5 + 5 = 15, 3 × 5 = 15)',
           conceito: 'What are equal groups? → groups with the same amount.' },
-        { id: 'D19', meia: 1, n: 17, curta: '4 circles with 3 buttons each. 4 × 3 = 12.', en: 'Draw 4 groups of 3 buttons. Write the multiplication sentence.',
+        { id: 'D19', meia: 1, n: 0, curta: '4 circles with 3 buttons each. 4 × 3 = 12.', en: 'Draw 4 groups of 3 buttons. Write the multiplication sentence.',
           pt: 'Desenhe 4 grupos de 3 botões. Escreva a multiplicação.',
           fig: '', resp: { partes: [{ tipo: 'caixa', alt: 130 }, linhas(1, 'Multiplication sentence:')] },
           modelo: '4 círculos com 3 botões em cada. 4 × 3 = 12.',
@@ -195,7 +197,7 @@
           observar: 'Desenhar 3 grupos de 4 (troca o papel dos números). É o caminho inverso da questão anterior: da sentença para o desenho.',
           conversa: 'Qual número diz quantos grupos? E qual diz quantos em cada grupo?',
           conceito: '4 groups of 3 buttons are 12 buttons altogether.' },
-        { id: 'D20', meia: 1, n: 18, curta: '10 ÷ 2 = 5. Each one gets 5.', en: 'Mike and Laura share 10 oranges equally. How many oranges does each one get? Write the division sentence.',
+        { id: 'D20', kit: 1, meia: 1, n: 9, curta: '10 ÷ 2 = 5. Each one gets 5.', en: 'Mike and Laura share 10 oranges equally. How many oranges does each one get? Write the division sentence.',
           pt: 'Mike e Laura dividem 10 laranjas igualmente. Quantas laranjas cada um ganha? Escreva a divisão (division sentence).',
           fig: F.soltos(10, 'orange'), resp: { partes: [linhas(1, 'Division sentence:'), { tipo: 'blanks', itens: ['Each one gets ___ oranges.'] }] },
           modelo: '10 ÷ 2 = 5. Each one gets 5 oranges.',
@@ -203,7 +205,7 @@
           observar: 'É o exemplo do próprio slide da professora: se ela lembrar a resposta de cor, peça para mostrar a conta.',
           conversa: '10 é par ou ímpar? Sobrou alguma laranja?',
           conceito: 'Division is a way to make equal groups.' },
-        { id: 'D17', n: 19, curta: '12 ÷ 3 = 4. 4 in each box. A way to make equal groups.', en: 'Share 12 cookies equally into 3 boxes. Draw the cookies in the boxes. Write the division sentence. What is division?',
+        { id: 'D17', n: 0, curta: '12 ÷ 3 = 4. 4 in each box. A way to make equal groups.', en: 'Share 12 cookies equally into 3 boxes. Draw the cookies in the boxes. Write the division sentence. What is division?',
           pt: 'Divida 12 biscoitos igualmente em 3 caixas. Desenhe os biscoitos nas caixas. Escreva a divisão. O que é divisão?',
           fig: F.soltos(12, 'cookie') + F.vazios(3, 'box'),
           resp: { partes: [linhas(1, 'Division sentence:'), { tipo: 'blanks', itens: ['There are ___ cookies in each box.'] }, linhas(1, 'Division is')] },
@@ -212,7 +214,7 @@
           observar: 'Caixas com quantidades diferentes (5, 4, 3): lembrar que dividir é deixar todos com a mesma quantidade. Pode riscar os cookies de cima conforme desenha.',
           conversa: 'Confira com a multiplicação: 3 caixas de 4 dá quanto? (3 × 4 = 12)',
           conceito: 'What is division? → a way to make equal groups; we share a total into groups with the same amount.' },
-        { id: 'D18', n: 20, curta: 'No. 7 is odd: 3 each and 1 is left.', en: 'Can 7 cookies be shared equally between 2 friends? Write why.',
+        { id: 'D18', kit: 1, n: 10, curta: 'No. 7 is odd: 3 each and 1 is left.', en: 'Can 7 cookies be shared equally between 2 friends? Write why.',
           pt: 'Dá para dividir 7 biscoitos igualmente entre 2 amigos? Escreva por quê.',
           fig: F.soltos(7, 'cookie'),
           resp: { partes: [{ tipo: 'itens', itens: ['Yes / No:'] }, linhas(2, 'Because')] },

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='55561f21431';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='d01988c1506';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -57,13 +57,13 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <body>
 <div class="tools">
   <span style="color:#ffd54f;font:700 14px Arial,sans-serif;align-self:center" data-tipo="rotulo">&#x1F6A7; Under construction</span>
-  <a href="../index.html?v=55561f21431" class="sera-home">Home</a>
-  <a href="MAT3_discursivas.html?v=55561f21431">Folha da criança (EN)</a>
+  <a href="../index.html?v=d01988c1506" class="sera-home">Home</a>
+  <a href="MAT3_discursivas.html?v=d01988c1506">Folha da criança (EN)</a>
   <button class="pri" onclick="window.print()">Imprimir</button>
 </div>
 <main id="guia"></main>
-<script src="MAT3_figuras.js?v=55561f21431"></script>
-<script src="MAT3_discursivas_data.js?v=55561f21431"></script>
+<script src="MAT3_figuras.js?v=d01988c1506"></script>
+<script src="MAT3_discursivas_data.js?v=d01988c1506"></script>
 <script>
 (function () {
   var D = window.MAT3D, h = '';
@@ -73,7 +73,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
        '(sólidos, gráficos, grupos de objetos) e pedidos como "write the addition sentence" e "write a multiplication sentence", que ' +
        'é o formato da atividade da página 240 do livro, marcada pela professora como AP.</p></div>';
   h += '<div class="quadro"><h3 data-tipo="rotulo">Como aplicar</h3><ol>' +
-       '<li>Em <b>duas sessões</b> de uns 15 minutos: na primeira, os temas 1 e 2 (medidas, perímetro e sólidos); na segunda, os temas 3 a 5 (gráficos, probabilidade, multiplicação e divisão).</li>' +
+       '<li>São <b>10 questões</b> numa folha frente e verso: uma sessão de uns 20 minutos, ou a frente num dia e o verso no outro. As respostas curtas estão de cabeça para baixo no fim do verso; dobre ou cubra antes de começar.</li>' +
        '<li>Ela lê sozinha o enunciado em inglês. Se travar, leia em voz alta em inglês; só depois, se ainda precisar, diga em português o que a pergunta pede, sem dar a resposta.</li>' +
        '<li>Lápis e borracha; nada de régua ou calculadora (o material desta prova não ensina medir com régua).</li>' +
        '<li>Corrija junto, questão por questão, com este guia: primeiro elogie o que está certo, depois faça a pergunta de conversa.</li>' +
@@ -86,9 +86,11 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   h += '<div class="quadro aviso"><h3 data-tipo="rotulo">Dois avisos de conteúdo</h3><ul>' +
        '<li><b>Divisão e números ímpares.</b> O slide da professora diz que números ímpares "cannot be divided equally". Isso vale para repartir entre <b>2</b>; por isso, na folha, toda questão de par/ímpar fala em "between 2 friends". Se a prova perguntar "Can odd numbers be divided equally?", a resposta que a escola espera é <b>"No"</b>.</li>' +
        '<li><b>Cone e cilindro.</b> Livros diferentes contam de jeitos diferentes os vértices do cone e as arestas do cilindro; o vídeo indicado pela professora diz que não têm nenhum. Não cobramos esses números. O que é certo em qualquer livro: a <b>esfera</b> não tem face plana, nem aresta, nem vértice.</li></ul></div>';
+  /* só as questões da folha curta (kit:1), 13/11 tarde */
   D.blocos.forEach(function (b) {
-    h += '<h2 data-tipo="rotulo">' + b.titulo.replace(/^\d+ · /, function (m) { return m; }) + ' <span style="font-weight:400">· ' + b.pt + '</span></h2>';
-    b.questoes.forEach(function (q) {
+    var qs = b.questoes.filter(function (q) { return q.kit; }); if (!qs.length) return;
+    h += '<h2 data-tipo="rotulo">' + b.titulo + ' <span style="font-weight:400">· ' + b.pt + '</span></h2>';
+    qs.forEach(function (q) {
       h += '<div class="q"><div class="top"><span class="n">' + q.n + '</span><span class="en" lang="en" data-tipo="rotulo">' + q.en + '</span></div>';
       if (q.fig) h += '<div class="figs" lang="en">' + q.fig + '</div>';
       h += '<div class="campo m"><b>Resposta-modelo:</b> <span lang="en">' + q.modelo + '</span></div>';

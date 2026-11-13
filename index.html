@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='55561f21431';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='d01988c1506';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -244,6 +244,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
   #viewMat .geo-panel>div:not(.picks),#viewCie .geo-panel>div:not(.picks){display:none}
   #viewMat .pdfbtn{grid-column:1/-1;margin:0}
   #viewMat .geo-panel>div.aviso,#viewMat .geo-panel>div.pais{grid-column:1/-1;display:block;margin:0}
+  #viewMat .geo-panel>.maispdf{grid-column:1/-1}
   #viewMat .geo-panel>div.pdflista{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0}
   #viewMat .geo-panel>div.pdflista[hidden]{display:none}
   #viewMat .geo-panel>div.extras{grid-column:1/-1;display:grid;margin:0 auto;width:100%;max-width:520px}
@@ -278,6 +279,10 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
 @media(min-width:620px){ .pais ol{columns:2;column-gap:28px} .pais li{break-inside:avoid} .pais li+li{margin-top:0} .pais{padding:8px 14px} }
 .pais p{margin:6px 0 0;font-size:13px;font-weight:700;color:var(--soft);text-align:justify;text-align-last:left;hyphens:auto;-webkit-hyphens:auto}
 .pick.off{opacity:.55;pointer-events:none}
+a.pdfbtn.kit{text-decoration:none;color:inherit}
+.pdfbtn.kit .kitgo{margin-left:auto;font-size:26px}
+.maispdf{display:block;margin:4px auto 10px;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--soft);font:inherit;font-weight:800;font-size:14px;cursor:pointer}
+.maispdf[aria-expanded="true"]{color:var(--ink)}
 .emc{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:999px;background:#b45309;color:#fff;font-size:.62em;font-weight:800;letter-spacing:.02em;vertical-align:middle;white-space:nowrap}
 </style>
 </head>
@@ -309,60 +314,58 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
   </div>
   <section class="geo-panel">
     <div class="aviso">&#x1F6A7; Under construction: more activities are coming soon!<span class="tr">Em construção: mais atividades em breve!</span></div>
-    <!-- 13/11 (Paulo): "organizar o visual do site pra situar os pais" -->
+    <!-- 13/11 tarde (Paulo): "os pais se perdem, ja tem uns 8 produtos a imprimir; faz um so sugerindo que e o principal".
+         Principal impresso = KIT (pocket + respostas escritas, 4 paginas). O resto fica em "Other PDFs", recolhido. -->
     <div class="pais" lang="pt-BR">
-      <b class="t" data-tipo="rotulo">Para os pais: como estudar</b>
+      <b class="t" data-tipo="rotulo">Para os pais: o caminho mais curto</b>
       <ol>
-        <li data-tipo="rotulo">Teoria: ler junto, um tema por vez.</li>
-        <li data-tipo="rotulo">Pocket Card: a matéria toda em 2 páginas, para revisar.</li>
-        <li data-tipo="rotulo">Simulado na tela: questões de marcar, como na prova.</li>
-        <li data-tipo="rotulo">Respostas escritas no papel, corrigidas com o Guia do responsável.</li>
+        <li data-tipo="rotulo">Imprima o Kit (4 páginas): resumo da matéria + respostas escritas.</li>
+        <li data-tipo="rotulo">No celular ou computador: Teoria, depois Simulado.</li>
+        <li data-tipo="rotulo">As respostas do Kit estão de cabeça para baixo no fim: é treino.</li>
+        <li data-tipo="rotulo">O resto é extra, para quando sobrar tempo.</li>
       </ol>
-      <p>A prova é em inglês, e todo o material também. A bandeira do Brasil, no alto, mostra a tradução. Tudo tem versão em PDF para imprimir no botão logo abaixo. O material original da professora (slides, vídeos e Canva) fica em "Material da escola", no fim da página.</p>
+      <p>A prova é em inglês, e todo o material também. A bandeira do Brasil, no alto, mostra a tradução. O material original da professora (slides, vídeos e Canva) fica em "Material da escola", no fim da página.</p>
     </div>
-    <button class="pdfbtn" id="pdfBtnMat" aria-expanded="false" aria-controls="pdfListaMat" onclick="var l=document.getElementById('pdfListaMat');l.hidden=!l.hidden;this.setAttribute('aria-expanded',!l.hidden)">
+    <a class="pdfbtn kit" href="ferramentas/media/mat3/Kit_Math.pdf" target="_blank" rel="noopener">
       <svg class="pdfic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor" opacity=".18"/><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 0v5h5M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
-      <span class="pdftx"><span class="pdftt">Get the PDFs<span class="tr">Quero o PDF!</span></span><span class="pdfdd">Theory, Pocket Card, practice test and written answers<span class="tr">Teoria, Pocket Card, simulado e respostas escritas</span></span></span>
-      <svg class="pdfseta" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <div class="pdflista" id="pdfListaMat" hidden>
-      <a href="ferramentas/media/mat3/Teoria_Math.pdf" target="_blank" rel="noopener"><b>Theory<span class="tr">Teoria</span></b><span>with the class pictures<span class="tr">com as figuras da aula</span></span></a>
-      <a href="ferramentas/media/mat3/Teoria_Math_sem_imagens.pdf" target="_blank" rel="noopener"><b>Theory, text only<span class="tr">Teoria sem imagens</span></b><span>to save ink<span class="tr">para economizar tinta</span></span></a>
-      <a href="ferramentas/media/mat3/Pocket_Card_Math.pdf" target="_blank" rel="noopener"><b>Pocket Card</b><span>front and back<span class="tr">frente e verso</span></span></a>
-      <a href="ferramentas/media/mat3/Simulado_Math_01.pdf" target="_blank" rel="noopener" onclick="this.href='ferramentas/media/mat3/Simulado_Math_'+('0'+(1+Math.floor(Math.random()*10))).slice(-2)+'.pdf'"><b>Practice test<span class="tr">Simulado</span></b><span>random questions + answers<span class="tr">questões sorteadas, com gabarito</span></span></a>
-      <a href="ferramentas/media/mat3/MAT3_discursivas.pdf" target="_blank" rel="noopener"><b>Written answers<span class="tr">Respostas escritas</span></b><span>write and draw, like the test<span class="tr">escrever e desenhar, como na prova</span></span></a>
-      <a href="ferramentas/media/mat3/MAT3_guia_responsavel.pdf" target="_blank" rel="noopener"><b>Guia do responsável</b><span>respostas e como corrigir (em português)</span></a>
-    </div>
+      <span class="pdftx"><span class="pdftt">Print the Math kit<span class="tr">Imprimir o Kit de Math</span></span><span class="pdfdd">4 pages: Pocket Card + written answers<span class="tr">4 páginas: Pocket Card + respostas escritas</span></span></span>
+      <span class="kitgo" aria-hidden="true">&#x1F5A8;&#xFE0F;</span>
+    </a>
     <div class="picks geo5">
-      <a class="pick mat" href="ferramentas/MAT3_estudo.html?v=55561f21431">
+      <a class="pick mat" href="ferramentas/MAT3_estudo.html?v=d01988c1506">
         <span class="em">&#x1F4D6;</span>
         <span><span class="tt"><span class="ordem">1</span>Theory<span class="tr">Teoria</span></span><span class="dd">7 topics<span class="tr">7 temas</span></span></span>
         <span class="tag">Study<span class="tr">Estudar</span></span>
       </a>
-      <a class="pick slides" href="ferramentas/MAT3_pocket.html?v=55561f21431">
+      <a class="pick slides" href="ferramentas/MAT3_pocket.html?v=d01988c1506">
         <span class="em">&#x1F4C4;</span>
         <span><span class="tt"><span class="ordem">2</span>Pocket Card</span><span class="dd">Everything in 2 pages<span class="tr">Tudo em 2 páginas</span></span></span>
         <span class="tag">Open<span class="tr">Abrir</span></span>
       </a>
-      <a class="pick simu" href="ferramentas/MAT3_simulado.html?v=55561f21431">
+      <a class="pick simu" href="ferramentas/MAT3_simulado.html?v=d01988c1506">
         <span class="em">&#x270F;&#xFE0F;</span>
         <span><span class="tt"><span class="ordem">3</span>Practice test<span class="tr">Simulado</span></span><span class="dd">Like the real test<span class="tr">Igual à prova</span></span></span>
         <span class="tag">Start<span class="tr">Começar</span></span>
       </a>
-      <a class="pick video" href="ferramentas/MAT3_discursivas.html?v=55561f21431">
+      <a class="pick video" href="ferramentas/MAT3_discursivas.html?v=d01988c1506">
         <span class="em">&#x270D;&#xFE0F;</span>
-        <span><span class="tt"><span class="ordem">4</span>Written answers<span class="tr">Respostas escritas</span></span><span class="dd">Print, write and draw<span class="tr">Imprimir, escrever e desenhar</span></span></span>
-        <span class="tag">Print<span class="tr">Imprimir</span></span>
+        <span><span class="tt"><span class="ordem">4</span>Written answers<span class="tr">Respostas escritas</span></span><span class="dd">With "Show answer"<span class="tr">Com "Mostrar resposta"</span></span></span>
+        <span class="tag">Write<span class="tr">Escrever</span></span>
       </a>
-      <a class="pick quiz off" aria-disabled="true">
+      <a class="pick quiz" href="ferramentas/MAT3_jogo.html?v=d01988c1506">
         <span class="em">&#x1F3AE;</span>
-        <span><span class="tt"><span class="ordem">5</span>The game<span class="tr">O jogo</span></span><span class="dd">Coming later<span class="tr">Mais tarde</span></span></span>
-        <span class="tag">Soon<span class="tr">Em breve</span></span>
+        <span><span class="tt"><span class="ordem">5</span>The game<span class="tr">O jogo</span></span><span class="dd">Math Stars<span class="tr">Math Stars</span></span></span>
+        <span class="tag">Play<span class="tr">Jogar</span></span>
       </a>
     </div>
-    <div class="extras">
-      <a class="extra2" href="ferramentas/MAT3_guia_responsavel.html?v=55561f21431"><span class="ic">&#x1F468;&#x200D;&#x1F467;</span><span><b>Guia do responsável</b><small>Respostas e como corrigir</small></span></a>
-      <a class="extra2" href="ferramentas/MAT3_material.html?v=55561f21431"><span class="ic">&#x1F3EB;</span><span><b>School material<span class="tr">Material da escola</span></b><small>Slides, videos, Canva<span class="tr">Slides, vídeos e Canva</span></small></span></a>
+    <button class="maispdf" id="pdfBtnMat" aria-expanded="false" aria-controls="pdfListaMat" onclick="var l=document.getElementById('pdfListaMat');l.hidden=!l.hidden;this.setAttribute('aria-expanded',!l.hidden)">Other PDFs (extra)<span class="tr">Outros PDFs (extras)</span></button>
+    <div class="pdflista" id="pdfListaMat" hidden>
+      <a href="ferramentas/media/mat3/Teoria_Math_sem_imagens.pdf" target="_blank" rel="noopener"><b>Theory<span class="tr">Teoria</span></b><span>to read together<span class="tr">para ler junto</span></span></a>
+      <a href="ferramentas/media/mat3/Simulado_Math_01.pdf" target="_blank" rel="noopener" onclick="this.href='ferramentas/media/mat3/Simulado_Math_'+('0'+(1+Math.floor(Math.random()*10))).slice(-2)+'.pdf'"><b>Practice test<span class="tr">Simulado</span></b><span>15 questions + answers<span class="tr">15 questões + gabarito</span></span></a>
+      <a href="ferramentas/MAT3_guia_responsavel.html?v=d01988c1506"><b>Guia do responsável</b><span>como corrigir as respostas escritas (detalhado)</span></a>
+    </div>
+    <div class="extras" style="grid-template-columns:1fr;max-width:300px">
+      <a class="extra2" href="ferramentas/MAT3_material.html?v=d01988c1506"><span class="ic">&#x1F3EB;</span><span><b>School material<span class="tr">Material da escola</span></b><small>Slides, videos, Canva<span class="tr">Slides, vídeos e Canva</span></small></span></a>
     </div>
   </section>
   </div>
@@ -381,7 +384,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
        Insumos: trabalho/3tri_historia (U3 Fontes históricas, U4 O mundo do trabalho, U1/U2 base).
        Roteiro único: trabalho/3tri_historia/_roteiro.md. Banco único: HIS3_banco.js. -->
   <section class="geo-panel">
-    <a class="hero2" href="ferramentas/HIS3_simulado.html?v=55561f21431">
+    <a class="hero2" href="ferramentas/HIS3_simulado.html?v=d01988c1506">
       <span class="em">&#x270F;&#xFE0F;</span>
       <span>
         <span class="tt">Simulado</span>
@@ -390,7 +393,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
       <span class="go">Começar</span>
     </a>
     <div style="margin-top:16px"></div>
-    <a class="hero" href="ferramentas/HIS3_jogo.html?v=55561f21431" style="border-radius:22px">
+    <a class="hero" href="ferramentas/HIS3_jogo.html?v=d01988c1506" style="border-radius:22px">
       <span class="em">&#x1F50D;</span>
       <span>
         <span class="tt">Detetives do Tempo</span>
@@ -399,7 +402,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
       <span class="go">Jogar</span>
     </a>
     <div class="picks" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px">
-      <a class="pick mat" href="ferramentas/HIS3_estudo.html?v=55561f21431">
+      <a class="pick mat" href="ferramentas/HIS3_estudo.html?v=d01988c1506">
         <span class="em">&#x1F4D6;</span>
         <span>
           <span class="tt">Caderno do Detetive</span>
@@ -407,7 +410,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
         </span>
         <span class="tag">Estudar</span>
       </a>
-      <a class="pick video" href="ferramentas/HIS3_video.html?v=55561f21431">
+      <a class="pick video" href="ferramentas/HIS3_video.html?v=d01988c1506">
         <span class="em">&#x1F3AC;</span>
         <span>
           <span class="tt">O vídeo</span>
@@ -415,7 +418,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
         </span>
         <span class="tag">Assistir</span>
       </a>
-      <a class="pick mat" href="ferramentas/HIS3_pocket.html?v=55561f21431">
+      <a class="pick mat" href="ferramentas/HIS3_pocket.html?v=d01988c1506">
         <span class="em">&#x1F5A8;&#xFE0F;</span>
         <span>
           <span class="tt">Pocket — uma folha</span>
@@ -512,7 +515,7 @@ function hardRefresh(){ window.location.href=window.location.pathname+'?v='+Date
 <script>
 /* cartao de produto que ainda nao foi ao ar (publicacao em etapas): vira "em breve" em vez de levar a um 404 */
 (function(){ try{
-  document.querySelectorAll('a.pick[href^="ferramentas/MAT3_"],a.extra2[href^="ferramentas/M"],.pdflista a[href^="ferramentas/media/mat3/"]').forEach(function(a){
+  document.querySelectorAll('a.pick[href^="ferramentas/MAT3_"],a.extra2[href^="ferramentas/M"],.pdflista a[href^="ferramentas/media/mat3/"],a.pdfbtn.kit').forEach(function(a){
     fetch(a.getAttribute('href'),{method:'HEAD',cache:'no-store'}).then(function(r){
       if(!r.ok){ a.removeAttribute('href'); a.style.opacity='.55'; a.style.pointerEvents='none';
         var t=document.createElement('small'); t.textContent=' (coming soon)'; a.appendChild(t); }
