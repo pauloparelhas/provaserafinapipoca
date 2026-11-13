@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c0855961205';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math · Theory (PDF)</title>
+<!-- Página de IMPRESSÃO da teoria de Math (MAT3, prova em inglês 18/11/2026), molde do GEO3_teoria_pdf.html.
+     trabalho/3tri_matematica/gen/pdf_teoria_mat3.py imprime com o Chrome em A4 retrato.
+     ?img=1 → com as figuras da aula; ?img=0 → resumo estruturado só com texto.
+     Conteúdo = o MESMO window.MAT3_LICOES da teoria (nada de conteúdo escrito aqui). No fim de cada tema,
+     o quadro "Write it!" traz 1 questão discursiva do tema, lida de MAT3_discursivas_data.js (window.MAT3D). -->
+<style>
+@font-face{font-family:"Nunito";font-weight:200 1000;src:url(assets/fonts/nunito-latin.woff2) format("woff2")}
+@font-face{font-family:"Baloo 2";font-weight:400 800;src:url(assets/fonts/baloo2-latin.woff2) format("woff2")}
+@page{size:A4 portrait;margin:12mm 12mm 13mm}
+:root{--tinta:#1d2b29;--tinta2:#4b5b58;--linha:#d5ddd8;--papel:#fff;--risco:#9aa0b4}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--papel);color:var(--tinta);font:10.5pt/1.38 "Nunito",system-ui,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.capa{display:flex;align-items:center;gap:5mm;padding:0 0 4mm;border-bottom:1.2pt solid var(--tinta);margin-bottom:5mm}
+.capa h1{font:800 20pt/1.05 "Baloo 2",sans-serif;margin:0}
+.capa p{margin:1mm 0 0;font-weight:700;color:var(--tinta2)}
+.lich{display:flex;align-items:center;gap:3.5mm;padding:2.6mm 4mm;border-radius:3.5mm;margin:0 0 3.5mm;
+  background:color-mix(in srgb,var(--lc) 15%,#fff);border:1pt solid color-mix(in srgb,var(--lc) 55%,#fff);break-after:avoid}
+.lich .n{flex:0 0 auto;width:9mm;height:9mm;border-radius:50%;display:grid;place-items:center;background:var(--lc);color:#fff;font:800 13pt/1 "Baloo 2",sans-serif}
+.lich small{display:block;font-weight:800;font-size:7.5pt;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta2)}
+.lich b{font:800 14pt/1.1 "Baloo 2",sans-serif}
+.tela{break-inside:avoid;margin:0 0 4mm;padding:0 0 3.5mm;border-bottom:.6pt solid var(--linha)}
+.tela h3{font:800 12pt/1.15 "Baloo 2",sans-serif;margin:0 0 2mm;color:var(--lcx)}
+.tela h3 em{font-style:normal}
+.tr{display:none}
+/* conteúdo vindo do MAT3_LICOES */
+.m1{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:4mm;align-items:center}
+.m1.topo{grid-template-columns:1fr}
+.mg{display:grid;grid-template-columns:repeat(var(--mc),minmax(0,1fr));gap:4mm;align-items:start;margin-top:2mm}
+.mcol{display:flex;flex-direction:column;gap:2mm;min-width:0}
+.mfig{margin:0;min-width:0;display:flex;flex-direction:column;align-items:center}
+.mfig>img{display:block;width:100%;max-height:52mm;object-fit:contain;border-radius:2mm}
+.mg .mfig>img{max-height:32mm}
+.fsvg{display:flex;flex-wrap:wrap;gap:2mm 4mm;justify-content:center;align-items:flex-end}
+.fsvg svg.fig{height:30mm;width:auto;max-width:100%}
+.m1 .fsvg svg.fig{height:44mm}
+.mg .fsvg{flex-wrap:nowrap}.fsvg svg.fig{min-width:0}.fsvg svg.soltos{height:12mm}
+.tabgraf{display:flex;flex-direction:column;align-items:center}
+.tabgraf svg.fig{height:38mm;width:auto}
+.mtab2{border-collapse:collapse;margin:0 auto 2mm;font-weight:800;font-size:9pt}
+.mtab2 th,.mtab2 td{border:.6pt solid var(--tinta2);padding:.8mm 2.5mm;text-align:center}
+.esc5{display:flex;flex-direction:column;gap:1.4mm;padding:2mm 10mm 2mm 3mm;position:relative;width:46mm;border:.6pt solid var(--linha);border-radius:2mm}
+.esc5 span{font:800 12pt/1.1 "Baloo 2",sans-serif;padding:.6mm 2.5mm;border-radius:2mm;color:#c4a3c9;min-height:5mm}
+.esc5 span.on{color:#701a75;background:#fae8ff;box-shadow:inset 0 0 0 .8pt #c026d3}
+.esc5 i{position:absolute;right:3.5mm;top:5mm;bottom:2mm;width:2.6mm;border-radius:1.3mm;background:linear-gradient(#a21caf,#f0abfc)}
+.esc5 i::before{content:"";position:absolute;left:-2mm;top:-3.4mm;border:3.3mm solid transparent;border-top:0;border-bottom:3.6mm solid #a21caf}
+figcaption{text-align:center;font-size:8pt;font-weight:700;color:var(--tinta2);margin-top:1mm}
+.mlin{display:flex;flex-direction:column;gap:1mm;min-width:0}
+.ml{margin:0}
+.ml .mt,.mt{font-weight:900;color:var(--lcx)}
+/* MANDAMENTO TIPOGRÁFICO: texto corrido justificado; itens apertados separados por linha fina na cor da lição */
+.ml{text-align:justify;text-align-last:left;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+[lang="en"]{-webkit-hyphenate-limit-before:4;-webkit-hyphenate-limit-after:4;hyphenate-limit-chars:10 4 4}
+.mlin>.ml+.ml{padding-top:1mm;border-top:.5pt solid color-mix(in srgb,var(--lc) 25%,transparent)}
+/* quadro "Write it!" (discursiva do tema, de MAT3_discursivas_data.js) */
+.escreva{break-inside:avoid;border:1.4pt solid var(--lc);border-radius:3mm;padding:2.6mm 4mm 3.4mm;margin:1mm 0 6mm}
+.escreva .et{display:flex;align-items:baseline;gap:2.5mm;font:800 12.5pt/1.1 "Baloo 2",sans-serif;color:var(--lcx);margin-bottom:1.6mm}
+.escreva .et small{font:700 8.5pt "Nunito",sans-serif;color:var(--tinta2)}
+.escreva .en{font-weight:800;font-size:11pt;margin:0 0 1.5mm}
+.escreva .figs{display:flex;flex-wrap:wrap;gap:2mm 6mm;justify-content:center;align-items:flex-end;margin:1mm 0 1.5mm}
+.escreva .figs svg{height:30mm;width:auto;max-width:100%}
+.escreva .tabela{border-collapse:collapse}.escreva .tabela td,.escreva .tabela th{border:.6pt solid var(--tinta);padding:.6mm 3mm}
+.escreva .wbox{border:1pt solid var(--tinta);border-radius:2mm;padding:1mm 4mm;font-weight:800;text-align:center}
+.escreva .linha{height:10mm;border-bottom:1pt solid var(--risco)}
+.escreva .lab{font-size:9.5pt;color:var(--tinta2);margin:1.6mm 0 0}
+.escreva .caixa{border:1pt dashed var(--risco);border-radius:2mm;min-height:30mm;margin-top:1.5mm}
+.escreva .blanks{display:flex;flex-wrap:wrap;gap:2mm 6mm;margin:2.4mm 0 0;font-size:10.5pt}
+.escreva .blanks span i{display:inline-block;min-width:13mm;border-bottom:1pt solid var(--tinta)}
+.escreva .item{display:flex;gap:3mm;align-items:flex-end;margin:2.2mm 0 0}
+.escreva .item .s{flex:0 0 auto}
+.escreva .item .w{flex:1;border-bottom:1pt solid var(--risco);height:8mm}
+/* sem imagens: resumo estruturado em 2 colunas */
+body.semimg .licgrid{column-count:2;column-gap:7mm;column-rule:.5pt solid var(--linha)}
+body.semimg .tela{margin:0 0 2.6mm;padding:0 0 2.2mm}
+body.semimg .tela h3{font-size:11pt;margin-bottom:1.2mm}
+body.semimg .m1,body.semimg .mg{display:block}
+body.semimg .mcol{display:block}
+body.semimg .mlin{gap:.8mm}
+body.semimg .mlin>.ml+.ml,body.semimg .mlin+.mlin{padding-top:.8mm}
+body.semimg .mg .mcol+.mcol .mlin{padding-top:.8mm;border-top:.5pt solid color-mix(in srgb,var(--lc) 25%,transparent)}
+.cab1{break-inside:avoid}
+</style>
+</head>
+<body>
+<div class="capa"><div style="flex:1"><h1>Math · Theory</h1><p data-tipo="rotulo">Year 2 · 3rd term · Length, perimeter, 3D solids, data, probability, multiplication and division</p></div></div>
+<main id="doc" lang="en"></main>
+<script src="MAT3_figuras.js?v=c0855961205"></script>
+<script src="MAT3_estudo_licoes.js?v=c0855961205"></script>
+<script src="MAT3_discursivas_data.js?v=c0855961205"></script>
+<script>
+(function(){
+  var COM = !/[?&]img=0/.test(location.search);
+  document.body.classList.toggle('semimg', !COM);
+  if(!COM) document.title='Math · Theory (summary, no pictures)';
+  /* 1 questão discursiva por tema (ids de MAT3_discursivas_data.js) */
+  var ESCREVA={medir:'D01', perimetro:'D03', solidos:'D07', dados:'D10', prob:'D13', mult:'D15', div:'D20'};
+  var Q={}; (window.MAT3D?MAT3D.blocos:[]).forEach(function(b){ b.questoes.forEach(function(q){ Q[q.id]=q; }); });
+  function area(r){
+    if(!r) return '';
+    var s='';
+    (r.partes||[r]).forEach(function(p){
+      if(p.lab) s+='<div class="lab" data-tipo="rotulo">'+p.lab+'</div>';
+      if(p.tipo==='linhas') for(var i=0;i<p.n;i++) s+='<div class="linha"></div>';
+      if(p.tipo==='caixa') s+='<div class="caixa"></div>';
+      if(p.tipo==='blanks') s+='<div class="blanks">'+p.itens.map(function(b){ return '<span data-tipo="rotulo">'+b.replace(/___/g,'<i></i>')+'</span>'; }).join('')+'</div>';
+      if(p.tipo==='itens') s+=p.itens.map(function(b){ return '<div class="item"><span class="s" data-tipo="rotulo">'+b+'</span><span class="w"></span></div>'; }).join('');
+    });
+    return s;
+  }
+  function escreva(l){
+    var q=Q[ESCREVA[l.k]]; if(!q) return '';
+    return '<div class="escreva"><div class="et">Write it!<small>Escreva</small></div><p class="en" data-tipo="rotulo">'+q.en+'</p>'+
+      (COM&&q.fig?'<div class="figs">'+q.fig+'</div>':'')+area(q.resp)+'</div>';
+  }
+  function escurece(h){ h=h.replace('#',''); var c=[0,2,4].map(function(i){ return parseInt(h.substr(i,2),16); });
+    var l=(0.299*c[0]+0.587*c[1]+0.114*c[2]); var f=l>120?120/l:1; f=Math.min(f,.78);
+    return 'rgb('+c.map(function(v){ return Math.round(v*f); }).join(',')+')'; }
+  var doc=document.getElementById('doc'), out='';
+  MAT3_LICOES.forEach(function(l,i){
+    var cor=l.cor||'#7c3aed';
+    out+='<section class="lic" style="--lc:'+cor+';--lcx:'+escurece(cor)+'"><div class="lich"><span class="n">'+(i+1)+'</span><div><small>Unit '+l.unid+' · Lesson '+(i+1)+' of '+MAT3_LICOES.length+'</small><b>'+l.nome+'</b></div></div><div class="licgrid">';
+    l.telas.forEach(function(t){ out+='<div class="tela"><h3>'+t.tit+'</h3>'+t.html+'</div>'; });
+    out+='</div>'+escreva(l)+'</section>';
+  });
+  doc.innerHTML=out;
+  doc.querySelectorAll('.tr').forEach(function(e){ e.remove(); });
+  if(COM) doc.querySelectorAll('.lic').forEach(function(l){ var h=l.querySelector('.lich'), t=l.querySelector('.tela');
+    if(h&&t){ var w=document.createElement('div'); w.className='cab1'; h.parentNode.insertBefore(w,h); w.appendChild(h); w.appendChild(t); } });
+  if(!COM){
+    doc.querySelectorAll('.licgrid .mfig,.licgrid figure,.licgrid img').forEach(function(e){ e.remove(); });
+  }
+  var imgs=[].slice.call(document.images), falta=imgs.length;
+  function pronto(){ document.body.setAttribute('data-pronto','1'); }
+  if(!falta) pronto(); else imgs.forEach(function(im){ if(im.complete){ if(--falta===0) pronto(); } else { im.onload=im.onerror=function(){ if(--falta===0) pronto(); }; } });
+})();
+</script>
+</body>
+</html>

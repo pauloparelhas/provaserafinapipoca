@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c0855961205';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Math Practice Test (PDF)</title>
+<!-- Página de IMPRESSÃO de um simulado de Math 3º tri (fork de GEO3_simulado_pdf.html). ?s=N escolhe o sorteio
+     (trabalho/3tri_matematica/gen/pdf_mat3.py gera ferramentas/media/mat3/Simulado_Math_NN.pdf).
+     15 questões de escolha = o MESMO MAT3_simulado_data.js do simulado (só itens aprovados), 2 por tema + 1 sorteado;
+     depois 3 questões DISCURSIVAS sorteadas de MAT3_discursivas_data.js (window.MAT3D, só leitura);
+     última página: answer key (gabarito; discursiva = campo modelo). A4 retrato, em inglês (a prova é em inglês). -->
+<style>
+@font-face{font-family:"Nunito";font-weight:200 1000;src:url(assets/fonts/nunito-latin.woff2) format("woff2")}
+@font-face{font-family:"Baloo 2";font-weight:400 800;src:url(assets/fonts/baloo2-latin.woff2) format("woff2")}
+@page{size:A4 portrait;margin:12mm 13mm 13mm}
+:root{--tinta:#1d2b29;--tinta2:#4b5b58;--linha:#cfd8d3;--c:#b45309}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--tinta);font:11pt/1.4 "Nunito",system-ui,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.cab{display:flex;align-items:center;gap:5mm;border-bottom:1.2pt solid var(--tinta);padding-bottom:3mm;margin-bottom:4mm}
+.cab h1{font:800 18pt/1.05 "Baloo 2",sans-serif;margin:0}
+.cab .nome{margin-top:2.5mm;font-weight:700;color:var(--tinta2)}
+ol.qs{list-style:none;margin:0;padding:0;columns:2;column-gap:8mm;column-rule:.5pt solid var(--linha)}
+.q{break-inside:avoid;margin:0 0 4.5mm}
+.n{display:inline-grid;place-items:center;width:6mm;height:6mm;border-radius:50%;background:var(--tinta);color:#fff;font:800 9pt/1 "Baloo 2",sans-serif;margin-right:1.6mm;vertical-align:.2mm}
+.q .p{font-weight:800}
+.q .obs{font-size:8.5pt;font-weight:800;color:var(--tinta2)}
+.q .fig{margin:1.6mm 0;text-align:center}
+.q .fig svg{max-width:100%;max-height:38mm;width:auto;height:auto}
+.q .fig .solido{max-height:30mm}
+.tabela{border-collapse:collapse;margin:0 auto 1.5mm;font-weight:800}
+.tabela td{border:.8pt solid var(--tinta);padding:.6mm 4mm;text-align:center}
+.q ul{list-style:none;margin:1.6mm 0 0;padding:0;display:flex;flex-direction:column;gap:1.2mm}
+.q li{display:flex;gap:2mm;align-items:baseline}
+.cx{flex:0 0 auto;width:3.6mm;height:3.6mm;border:1pt solid var(--tinta);border-radius:.8mm;transform:translateY(.5mm)}
+.cx.r{border-radius:50%}
+/* discursivas (mesma área de resposta da folha MAT3_discursivas.html) */
+.disc{break-before:page}
+.disc h2,.gab h2{font:800 15pt/1.1 "Baloo 2",sans-serif;margin:0 0 3mm}
+.disc .sub{color:var(--tinta2);font-weight:700;margin:-1.5mm 0 3mm}
+.d{break-inside:avoid;padding:2mm 0 4mm;border-top:.6pt solid color-mix(in srgb,var(--c) 18%,transparent)}
+.d .en{display:flex;gap:2mm;align-items:flex-start;font-weight:800}
+.d .figs{display:flex;flex-wrap:wrap;gap:2mm 6mm;align-items:flex-end;justify-content:center;margin:2mm 0 1mm}
+.d svg{max-width:100%;height:auto;max-height:46mm}
+.linha{height:10mm;border-bottom:1pt solid #9aa0b4;margin:0 1mm}
+.lab{font-size:10pt;color:var(--tinta2);margin:2mm 1mm 0}
+.caixa{border:1.2pt dashed #9aa0b4;border-radius:3mm;min-height:30mm;margin:2mm 1mm 0}
+.blanks{display:flex;flex-wrap:wrap;gap:2mm 6mm;margin:2.5mm 1mm 0}
+.blanks span i{display:inline-block;min-width:14mm;border-bottom:1pt solid var(--tinta)}
+.item{display:flex;gap:2.5mm;align-items:flex-end;margin:2.5mm 1mm 0}
+.item .w{flex:1;border-bottom:1pt solid #9aa0b4;height:8mm}
+.wbox{border:1.2pt solid var(--tinta);border-radius:2mm;padding:1mm 4mm;font-weight:800;text-align:center}
+.gab{break-before:page}
+.gab ol{margin:0;padding-left:6mm;columns:2;column-gap:8mm}
+.gab li{break-inside:avoid;margin:0 0 2mm}
+.gab .t{font-size:9pt;color:var(--tinta2)}
+.gab .dm{margin-top:4mm}
+.gab .dm p{margin:0 0 2mm}
+.tr{display:none}
+/* MANDAMENTO TIPOGRÁFICO (12/11): enunciado e explicação do gabarito justificados (última linha à esquerda) */
+.q,.gab li,.d .en,.gab .dm p{text-align:justify;text-align-last:left;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+.q ul li{text-align:left}
+</style>
+</head>
+<body>
+<div class="cab"><div style="flex:1"><h1 id="tit">Math Practice Test</h1><div class="nome" data-tipo="rotulo">Year 2 · 3rd term &nbsp;·&nbsp; Name: ______________________________ &nbsp; Date: ___/___</div></div></div>
+<ol class="qs" id="qs"></ol>
+<section class="disc"><h2>Written answers</h2><p class="sub" data-tipo="rotulo">Write your answer. Show your work.</p><div id="disc"></div></section>
+<section class="gab"><h2>Answer key</h2><ol id="gab"></ol><div class="dm" id="gabd"></div></section>
+<script src="MAT3_figuras.js?v=c0855961205"></script>
+<script src="MAT3_simulado_data.js?v=c0855961205"></script>
+<script src="MAT3_discursivas_data.js?v=c0855961205"></script>
+<script>
+(function(){
+  var S=window.MAT3S, F=window.MAT3F, D=window.MAT3D, m=/[?&]s=(\d+)/.exec(location.search), sem=m?+m[1]:1;
+  document.getElementById('tit').textContent='Math Practice Test No. '+sem;
+  var x=sem*9301+49297; function rnd(){ x=(x*233280+49297)%2147483647; return x/2147483647; }
+  function emb(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  function semTr(s){ return String(s||'').replace(/\s*<span class="tr">[\s\S]*?<\/span>/g,''); }
+  /* cotas do simulado (2 por tema = 14); para 15 entra mais 1 de um tema sorteado */
+  var cot={}; S.FAMILIAS.forEach(function(f){ cot[f.k]=f.cota||0; });
+  cot[emb(S.FAMILIAS)[0].k]++;
+  var esc=[]; S.FAMILIAS.forEach(function(f){ esc=esc.concat(emb(S.ITENS.filter(function(i){ return i.eixo===f.k; })).slice(0,cot[f.k])); });
+  function figura(it){
+    if(!it.fig) return '';
+    var s=it.tabela?'<table class="tabela"><tbody>'+it.tabela.map(function(r){ return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'; }).join('')+'</tbody></table>':'';
+    return '<div class="fig" data-tipo="rotulo">'+s+F[it.fig[0]].apply(null,it.fig.slice(1))+'</div>';
+  }
+  var qs='', gb='';
+  esc.forEach(function(it,n){
+    var ops=emb(it.opts), multi=!!it.multi;
+    qs+='<li class="q"><span class="n">'+(n+1)+'</span><span class="p">'+semTr(it.pede)+'</span>'+(multi?' <span class="obs">(tick all the right answers)</span>':'')+figura(it)+
+      '<ul>'+ops.map(function(o){ return '<li data-tipo="rotulo"><span class="cx'+(multi?'':' r')+'"></span><span>'+semTr(o.t)+'</span></li>'; }).join('')+'</ul></li>';
+    var certas=ops.filter(function(o){ return o.ok; }).map(function(o){ return semTr(o.t); });
+    gb+='<li><b>'+certas.join(' · ')+'</b>'+(it.truque?'<div class="t">'+it.truque.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</div>':'')+'</li>';
+  });
+  document.getElementById('qs').innerHTML=qs; document.getElementById('gab').innerHTML=gb;
+  /* 3 discursivas sorteadas (de blocos diferentes quando dá), na ordem da folha */
+  /* o campo modelo de 3 questões de desenho descreve o desenho em português (é do guia do responsável): aqui vai a mesma
+     descrição em inglês; questão cujo modelo tenha português e não esteja aqui fica fora do sorteio */
+  var MODELO_EN={D06:'One face (a whole square) colored; one vertex (a corner) circled; one edge (a straight line between two corners) traced.',
+    D11:'Bars painted up to: Cats 3, Dogs 5, Fish 1, Birds 4.', D19:'4 circles with 3 buttons in each. 4 × 3 = 12.',
+    D12:'Data is all the information we collect and find out. About me: "My favorite color is blue." / "I have 2 pets." (any true fact about the child)'};
+  function modelo(q){ return MODELO_EN[q.id] || q.modelo; }
+  var todas=[]; D.blocos.forEach(function(b,bi){ b.questoes.forEach(function(q){ if(!/[ãõçáéíóúâêôà]|(um|uma|sobre|ela|ele|com|cada|criança)/i.test(modelo(q))) todas.push({q:q,b:bi}); }); });
+  var pick=[], usados={};
+  emb(todas).forEach(function(e){ if(pick.length<3 && !usados[e.b]){ pick.push(e); usados[e.b]=1; } });
+  emb(todas).forEach(function(e){ if(pick.length<3 && pick.indexOf(e)<0) pick.push(e); });
+  pick.sort(function(a,b){ return todas.indexOf(a)-todas.indexOf(b); });
+  function area(r){
+    if(!r) return ''; var s='';
+    (r.partes||[r]).forEach(function(p){
+      if(p.lab) s+='<div class="lab" data-tipo="rotulo">'+p.lab+'</div>';
+      if(p.tipo==='linhas') for(var i=0;i<p.n;i++) s+='<div class="linha"></div>';
+      if(p.tipo==='caixa') s+='<div class="caixa" style="min-height:'+Math.round((p.alt||120)*0.26)+'mm"></div>';
+      if(p.tipo==='blanks') s+='<div class="blanks" data-tipo="rotulo">'+p.itens.map(function(b){ return '<span>'+b.replace('___','<i></i>')+'</span>'; }).join('')+'</div>';
+      if(p.tipo==='itens') s+=p.itens.map(function(b){ return '<div class="item" data-tipo="rotulo"><span>'+b+'</span><span class="w"></span></div>'; }).join('');
+    });
+    return s;
+  }
+  var dh='', dg='';
+  pick.forEach(function(e,k){
+    var q=e.q, n=esc.length+k+1;
+    dh+='<div class="d"><div class="en"><span class="n">'+n+'</span><span>'+q.en+'</span></div>'+(q.fig?'<div class="figs" data-tipo="rotulo">'+q.fig+'</div>':'')+area(q.resp)+'</div>';
+    dg+='<p><b>'+n+'.</b> '+modelo(q)+'</p>';
+  });
+  document.getElementById('disc').innerHTML=dh; document.getElementById('gabd').innerHTML='<h2>Written answers: model answers</h2>'+dg;
+  document.body.setAttribute('data-disc',pick.map(function(e){ return e.q.id; }).join(','));
+  document.body.setAttribute('data-pronto','1');
+})();
+</script>
+</body>
+</html>

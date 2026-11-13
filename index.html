@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='dc579d01052';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c0855961205';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -237,21 +237,22 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
 @media (min-width:620px){
   #app{padding-top:10px;padding-bottom:12px}
   .ctrls{position:absolute;top:10px;right:clamp(12px,3vw,24px);margin:0}
-  #viewGeo .header,#viewCie .header{margin-bottom:12px}
-  #viewGeo .mascot,#viewCie .mascot{display:none}
-  #viewGeo .badge,#viewCie .badge{margin-bottom:6px}
-  #viewGeo .geo-panel,#viewCie .geo-panel{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;padding:14px}
-  #viewGeo .geo-panel>div:not(.picks),#viewCie .geo-panel>div:not(.picks){display:none}
-  #viewGeo .pdfbtn{grid-column:1/-1;margin:0}
-  #viewGeo .geo-panel>div.pdflista{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0}
-  #viewGeo .geo-panel>div.pdflista[hidden]{display:none}
-  #viewGeo .geo-panel>div.extras{grid-column:1/-1;display:grid;margin:0 auto;width:100%;max-width:520px}
-  #viewGeo .hero2,#viewGeo .hero,#viewCie .hero2,#viewCie .hero{margin:0;min-height:0;padding:12px 16px}
-  #viewGeo .picks{grid-column:1/-1;margin:0!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:10px}
-  #viewGeo .geo-panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  #viewGeo .hero2>span:nth-child(2),#viewGeo .hero>span:nth-child(2){min-width:0}
+  #viewMat .header,#viewCie .header{margin-bottom:12px}
+  #viewMat .mascot,#viewCie .mascot{display:none}
+  #viewMat .badge,#viewCie .badge{margin-bottom:6px}
+  #viewMat .geo-panel,#viewCie .geo-panel{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;padding:14px}
+  #viewMat .geo-panel>div:not(.picks),#viewCie .geo-panel>div:not(.picks){display:none}
+  #viewMat .pdfbtn{grid-column:1/-1;margin:0}
+  #viewMat .geo-panel>div.aviso,#viewMat .geo-panel>div.pais{grid-column:1/-1;display:block;margin:0}
+  #viewMat .geo-panel>div.pdflista{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0}
+  #viewMat .geo-panel>div.pdflista[hidden]{display:none}
+  #viewMat .geo-panel>div.extras{grid-column:1/-1;display:grid;margin:0 auto;width:100%;max-width:520px}
+  #viewMat .hero2,#viewMat .hero,#viewCie .hero2,#viewCie .hero{margin:0;min-height:0;padding:12px 16px}
+  #viewMat .picks{grid-column:1/-1;margin:0!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:10px}
+  #viewMat .geo-panel{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  #viewMat .hero2>span:nth-child(2),#viewMat .hero>span:nth-child(2){min-width:0}
   #viewCie .picks{grid-column:1/-1;margin:0!important;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))!important;gap:10px}
-  #viewGeo .pick,#viewCie .pick{min-height:0;padding:12px 10px;gap:6px}
+  #viewMat .pick,#viewCie .pick{min-height:0;padding:12px 10px;gap:6px}
   .footer{margin-top:6px;padding-top:8px;display:flex;align-items:center;justify-content:center;gap:14px}
   .footer-logo{margin:0}
   .refresh-btn{margin:0;padding:8px 16px}
@@ -265,11 +266,18 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
 .menu button[aria-current=true]{border:2px solid var(--geo);}
 .menu button small{display:block;font-weight:800;font-size:.75rem;color:var(--soft);}
 .hero2 .novo{display:inline-block;vertical-align:middle;position:relative;top:-2px;margin-left:4px;font-size:10px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:#fff;background:#b91c1c;border-radius:20px;padding:4px 10px;white-space:nowrap;}
-@media(orientation:landscape) and (max-height:500px){ #viewGeo .hero2 .dd{display:none} #viewGeo .hero2 .em,#viewGeo .hero .em{font-size:30px} }
+@media(orientation:landscape) and (max-height:500px){ #viewMat .hero2 .dd{display:none} #viewMat .hero2 .em,#viewMat .hero .em{font-size:30px} }
 /* tablet: os controles descem para a propria linha, senao cobrem o selo da data */
 @media (min-width:620px) and (max-width:1000px) and (min-height:501px){ .ctrls{position:relative!important;top:auto!important;right:auto!important;margin:0 0 6px!important} }
 .aviso{margin:4px 0 14px;padding:10px 14px;border-radius:14px;background:#fff3c4;border:2px solid #d19a00;color:#4a3000;font-weight:900;font-size:15px;text-align:center}
 .aviso .tr{color:#4a3000}
+.pais{margin:0 0 14px;padding:10px 14px;border-radius:16px;background:var(--card);border:1.5px solid var(--line)}
+.pais b.t{display:block;font-size:15px;font-weight:900;margin-bottom:4px}
+.pais ol{margin:0;padding-left:20px;font-size:13.5px;font-weight:700;color:var(--soft)}
+.pais li+li{margin-top:3px}
+@media(min-width:620px){ .pais ol{columns:2;column-gap:28px} .pais li{break-inside:avoid} .pais li+li{margin-top:0} .pais{padding:8px 14px} }
+.pais p{margin:6px 0 0;font-size:13px;font-weight:700;color:var(--soft);text-align:justify;text-align-last:left;hyphens:auto;-webkit-hyphens:auto}
+.pick.off{opacity:.55;pointer-events:none}
 .emc{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:999px;background:#b45309;color:#fff;font-size:.62em;font-weight:800;letter-spacing:.02em;vertical-align:middle;white-space:nowrap}
 </style>
 </head>
@@ -301,14 +309,60 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
   </div>
   <section class="geo-panel">
     <div class="aviso">&#x1F6A7; Under construction: more activities are coming soon!<span class="tr">Em construção: mais atividades em breve!</span></div>
-    <a class="hero2" href="ferramentas/media/mat3/MAT3_discursivas.pdf" target="_blank" rel="noopener">
-      <span class="em">&#x270D;&#xFE0F;</span>
-      <span><span class="tt">Written answers<span class="tr">Respostas escritas</span></span><span class="dd">Print, write and draw, just like the test.<span class="tr">Imprima, escreva e desenhe, como na prova.</span></span></span>
-      <span class="go">Print<span class="tr">Imprimir</span></span>
-    </a>
-    <div class="extras" style="margin-top:14px">
-      <a class="extra2" href="ferramentas/MAT3_guia_responsavel.html?v=dc579d01052"><span class="ic">&#x1F468;&#x200D;&#x1F467;</span><span><b>Guia do responsável</b><small>Respostas e como corrigir</small></span></a>
-      <a class="extra2" href="ferramentas/MAT3_discursivas.html?v=dc579d01052"><span class="ic">&#x1F4C4;</span><span><b>See the sheet<span class="tr">Ver a folha</span></b><small>On screen<span class="tr">Na tela</span></small></span></a>
+    <!-- 13/11 (Paulo): "organizar o visual do site pra situar os pais" -->
+    <div class="pais" lang="pt-BR">
+      <b class="t" data-tipo="rotulo">Para os pais: como estudar</b>
+      <ol>
+        <li data-tipo="rotulo">Teoria: ler junto, um tema por vez.</li>
+        <li data-tipo="rotulo">Pocket Card: a matéria toda em 2 páginas, para revisar.</li>
+        <li data-tipo="rotulo">Simulado na tela: questões de marcar, como na prova.</li>
+        <li data-tipo="rotulo">Respostas escritas no papel, corrigidas com o Guia do responsável.</li>
+      </ol>
+      <p>A prova é em inglês, e todo o material também. A bandeira do Brasil, no alto, mostra a tradução. Tudo tem versão em PDF para imprimir no botão logo abaixo.</p>
+    </div>
+    <button class="pdfbtn" id="pdfBtnMat" aria-expanded="false" aria-controls="pdfListaMat" onclick="var l=document.getElementById('pdfListaMat');l.hidden=!l.hidden;this.setAttribute('aria-expanded',!l.hidden)">
+      <svg class="pdfic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor" opacity=".18"/><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 0v5h5M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      <span class="pdftx"><span class="pdftt">Get the PDFs<span class="tr">Quero o PDF!</span></span><span class="pdfdd">Theory, Pocket Card, practice test and written answers<span class="tr">Teoria, Pocket Card, simulado e respostas escritas</span></span></span>
+      <svg class="pdfseta" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="pdflista" id="pdfListaMat" hidden>
+      <a href="ferramentas/media/mat3/Teoria_Math.pdf" target="_blank" rel="noopener"><b>Theory<span class="tr">Teoria</span></b><span>with the class pictures<span class="tr">com as figuras da aula</span></span></a>
+      <a href="ferramentas/media/mat3/Teoria_Math_sem_imagens.pdf" target="_blank" rel="noopener"><b>Theory, text only<span class="tr">Teoria sem imagens</span></b><span>to save ink<span class="tr">para economizar tinta</span></span></a>
+      <a href="ferramentas/media/mat3/Pocket_Card_Math.pdf" target="_blank" rel="noopener"><b>Pocket Card</b><span>front and back<span class="tr">frente e verso</span></span></a>
+      <a href="ferramentas/media/mat3/Simulado_Math_01.pdf" target="_blank" rel="noopener" onclick="this.href='ferramentas/media/mat3/Simulado_Math_'+('0'+(1+Math.floor(Math.random()*10))).slice(-2)+'.pdf'"><b>Practice test<span class="tr">Simulado</span></b><span>random questions + answers<span class="tr">questões sorteadas, com gabarito</span></span></a>
+      <a href="ferramentas/media/mat3/MAT3_discursivas.pdf" target="_blank" rel="noopener"><b>Written answers<span class="tr">Respostas escritas</span></b><span>write and draw, like the test<span class="tr">escrever e desenhar, como na prova</span></span></a>
+      <a href="ferramentas/media/mat3/MAT3_guia_responsavel.pdf" target="_blank" rel="noopener"><b>Guia do responsável</b><span>respostas e como corrigir (em português)</span></a>
+    </div>
+    <div class="picks geo5">
+      <a class="pick mat" href="ferramentas/MAT3_estudo.html?v=c0855961205">
+        <span class="em">&#x1F4D6;</span>
+        <span><span class="tt"><span class="ordem">1</span>Theory<span class="tr">Teoria</span></span><span class="dd">7 topics<span class="tr">7 temas</span></span></span>
+        <span class="tag">Study<span class="tr">Estudar</span></span>
+      </a>
+      <a class="pick slides" href="ferramentas/MAT3_pocket.html?v=c0855961205">
+        <span class="em">&#x1F4C4;</span>
+        <span><span class="tt"><span class="ordem">2</span>Pocket Card</span><span class="dd">Everything in 2 pages<span class="tr">Tudo em 2 páginas</span></span></span>
+        <span class="tag">Open<span class="tr">Abrir</span></span>
+      </a>
+      <a class="pick simu" href="ferramentas/MAT3_simulado.html?v=c0855961205">
+        <span class="em">&#x270F;&#xFE0F;</span>
+        <span><span class="tt"><span class="ordem">3</span>Practice test<span class="tr">Simulado</span></span><span class="dd">Like the real test<span class="tr">Igual à prova</span></span></span>
+        <span class="tag">Start<span class="tr">Começar</span></span>
+      </a>
+      <a class="pick video" href="ferramentas/MAT3_discursivas.html?v=c0855961205">
+        <span class="em">&#x270D;&#xFE0F;</span>
+        <span><span class="tt"><span class="ordem">4</span>Written answers<span class="tr">Respostas escritas</span></span><span class="dd">Print, write and draw<span class="tr">Imprimir, escrever e desenhar</span></span></span>
+        <span class="tag">Print<span class="tr">Imprimir</span></span>
+      </a>
+      <a class="pick quiz off" aria-disabled="true">
+        <span class="em">&#x1F3AE;</span>
+        <span><span class="tt"><span class="ordem">5</span>The game<span class="tr">O jogo</span></span><span class="dd">Coming later<span class="tr">Mais tarde</span></span></span>
+        <span class="tag">Soon<span class="tr">Em breve</span></span>
+      </a>
+    </div>
+    <div class="extras">
+      <a class="extra2" href="ferramentas/MAT3_guia_responsavel.html?v=c0855961205"><span class="ic">&#x1F468;&#x200D;&#x1F467;</span><span><b>Guia do responsável</b><small>Respostas e como corrigir</small></span></a>
+      <a class="extra2" href="ferramentas/media/mat3/MAT3_discursivas.pdf" target="_blank" rel="noopener"><span class="ic">&#x1F5A8;&#xFE0F;</span><span><b>Print the sheet<span class="tr">Imprimir a folha</span></b><small>Written answers (PDF)<span class="tr">Respostas escritas (PDF)</span></small></span></a>
     </div>
   </section>
   </div>
@@ -327,7 +381,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
        Insumos: trabalho/3tri_historia (U3 Fontes históricas, U4 O mundo do trabalho, U1/U2 base).
        Roteiro único: trabalho/3tri_historia/_roteiro.md. Banco único: HIS3_banco.js. -->
   <section class="geo-panel">
-    <a class="hero2" href="ferramentas/HIS3_simulado.html?v=dc579d01052">
+    <a class="hero2" href="ferramentas/HIS3_simulado.html?v=c0855961205">
       <span class="em">&#x270F;&#xFE0F;</span>
       <span>
         <span class="tt">Simulado</span>
@@ -336,7 +390,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
       <span class="go">Começar</span>
     </a>
     <div style="margin-top:16px"></div>
-    <a class="hero" href="ferramentas/HIS3_jogo.html?v=dc579d01052" style="border-radius:22px">
+    <a class="hero" href="ferramentas/HIS3_jogo.html?v=c0855961205" style="border-radius:22px">
       <span class="em">&#x1F50D;</span>
       <span>
         <span class="tt">Detetives do Tempo</span>
@@ -345,7 +399,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
       <span class="go">Jogar</span>
     </a>
     <div class="picks" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px">
-      <a class="pick mat" href="ferramentas/HIS3_estudo.html?v=dc579d01052">
+      <a class="pick mat" href="ferramentas/HIS3_estudo.html?v=c0855961205">
         <span class="em">&#x1F4D6;</span>
         <span>
           <span class="tt">Caderno do Detetive</span>
@@ -353,7 +407,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
         </span>
         <span class="tag">Estudar</span>
       </a>
-      <a class="pick video" href="ferramentas/HIS3_video.html?v=dc579d01052">
+      <a class="pick video" href="ferramentas/HIS3_video.html?v=c0855961205">
         <span class="em">&#x1F3AC;</span>
         <span>
           <span class="tt">O vídeo</span>
@@ -361,7 +415,7 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
         </span>
         <span class="tag">Assistir</span>
       </a>
-      <a class="pick mat" href="ferramentas/HIS3_pocket.html?v=dc579d01052">
+      <a class="pick mat" href="ferramentas/HIS3_pocket.html?v=c0855961205">
         <span class="em">&#x1F5A8;&#xFE0F;</span>
         <span>
           <span class="tt">Pocket — uma folha</span>
@@ -458,10 +512,10 @@ function hardRefresh(){ window.location.href=window.location.pathname+'?v='+Date
 <script>
 /* cartao de produto que ainda nao foi ao ar (publicacao em etapas): vira "em breve" em vez de levar a um 404 */
 (function(){ try{
-  document.querySelectorAll('a.pick[href^="ferramentas/GEO3_"],a.extra2[href^="ferramentas/GEO3_"],a.hero[href^="ferramentas/GEO3_"],a.hero2[href^="ferramentas/GEO3_"]').forEach(function(a){
+  document.querySelectorAll('a.pick[href^="ferramentas/MAT3_"],a.extra2[href^="ferramentas/M"],.pdflista a[href^="ferramentas/media/mat3/"]').forEach(function(a){
     fetch(a.getAttribute('href'),{method:'HEAD',cache:'no-store'}).then(function(r){
       if(!r.ok){ a.removeAttribute('href'); a.style.opacity='.55'; a.style.pointerEvents='none';
-        var t=document.createElement('small'); t.textContent=' (em breve)'; a.appendChild(t); }
+        var t=document.createElement('small'); t.textContent=' (coming soon)'; a.appendChild(t); }
     }).catch(function(){});
   });
 }catch(e){} })();

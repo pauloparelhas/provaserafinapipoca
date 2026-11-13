@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c0855961205';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1e3a8a">
+<title>Math Pocket Card — 3rd term</title>
+<link rel="icon" href="data:,">
+<style>
+/* MAT3_pocket — a prova de Math (Y2, AF 18/11/2026) em DUAS folhas A4 paisagem, frente e verso (13/11/2026).
+   FRENTE = T1 medidas, T2 perimetro, T3 solidos 3D, T4 dados; VERSO = T5 probabilidade, T6 multiplicacao, T7 divisao +
+   faixa "How to write a good answer" (receita de MAT3_discursivas_data.js) e numeros-chave.
+   Fonte unica: trabalho/3tri_matematica/_roteiro.md (NAO COBRAR e INFERIDO ficam fora); conceitos-base em avaliacao/conceitos_base.json.
+   Figuras: recortes dos slides da escola (media/mat3/aula/*.jpeg, recorte por data-rc, nunca redesenho) + SVG de MAT3_figuras.js.
+   Tela inteira em INGLES; o portugues mora so em .tr e aparece pela bandeira (chave cie3_tr, a mesma da home): com a bandeira
+   ligada a frase em PT TROCA de lugar com a inglesa (.en some), assim a folha nao estoura.
+   Mecanica de tela (visao das 2 folhas, toque abre a folha, setas, teclas, deslizar) = GEO3_pocket (validado 08/11). */
+:root{--ink:#1c2233;--soft:#4b5468;--paper:#fffdf7;--fundo:#dfe3ec;--sombra:0 8px 30px rgba(20,30,60,.22)}
+html[data-theme="dark"]{--fundo:#1d2233;--sombra:0 10px 36px rgba(0,0,0,.5)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{background:var(--fundo);font-family:"Segoe UI","Trebuchet MS",system-ui,Roboto,Arial,sans-serif;color:var(--ink)}
+@page{size:A4 landscape;margin:5mm}
+/* bandeira: .tr escondido; ligada, a traducao entra no lugar do ingles */
+.tr{display:none}
+body.show-tr .tr{display:inline}
+body.show-tr .en{display:none}
+.tela{position:sticky;top:0;z-index:5;display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;padding:6px 16px;background:#1e3a8a;color:#fff}
+.tela button,.tela a{min-height:44px;min-width:44px;padding:0 14px;border-radius:12px;border:2px solid #93c5fd;background:#1d4ed8;color:#fff;font-weight:800;font-size:15px;font-family:inherit;display:inline-flex;align-items:center;gap:6px;text-decoration:none;cursor:pointer}
+.tela .flag{background:#14532d;border-color:#86efac;padding:0 10px}
+body.show-tr .tela .flag{outline:3px solid #fde047;outline-offset:2px}
+.tela .dica{font-size:13px;font-weight:700;opacity:.9}
+.palco{padding:12px 0;overflow:hidden}
+.escala{display:flex;flex-direction:row;justify-content:center;align-items:flex-start;gap:16px}
+.escala.empilha{flex-direction:column;align-items:center;gap:10px}
+.fx{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:zoom-in;outline:none}
+.fx .rot{min-height:34px;display:flex;align-items:center;gap:6px;padding:0 14px;border-radius:12px;background:#1e3a8a;color:#fff;font-weight:900;font-size:15px;white-space:nowrap}
+.fx .rot small{font-weight:700;font-size:13px;opacity:.85}
+.fx .cx{position:relative;overflow:hidden;border-radius:2px;box-shadow:var(--sombra)}
+.fx .cx>.page{transform-origin:top left;box-shadow:none}
+.fx:hover .cx,.fx:focus-visible .cx{box-shadow:0 0 0 4px #93c5fd,var(--sombra)}
+body.modo-pagina .fx{cursor:default}
+body.modo-pagina .fx:not(.on){display:none}
+body.modo-pagina .fx .rot{display:none}
+body.modo-pagina .fx:hover .cx{box-shadow:var(--sombra)}
+.seta{position:fixed;top:50%;z-index:6;width:56px;height:56px;margin-top:-28px;border-radius:50%;border:3px solid #93c5fd;background:#1d4ed8;color:#fff;font-size:34px;font-weight:900;line-height:1;display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.3);font-family:inherit;padding:0 0 4px}
+.seta.esq{left:8px}.seta.dir{right:8px}
+body.modo-pagina .seta{display:flex}
+.tela .so-pagina{display:none}
+body.modo-pagina .tela .so-pagina{display:inline-flex}
+.tela #pgInd{font-weight:900;font-size:15px;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+@media (max-width:599px){.seta{width:48px;height:48px;margin-top:-24px;font-size:28px}.seta.esq{left:4px}.seta.dir{right:4px}.tela .dica{display:none}.fx .rot small{display:none}}
+
+/* ---------- a folha ---------- */
+.page{flex:0 0 auto;width:287mm;height:200mm;background:var(--paper);color:var(--ink);display:flex;flex-direction:column;gap:2.4mm;overflow:hidden;box-shadow:var(--sombra);font-size:11.5px;line-height:1.12}
+b{font-weight:850}
+.topo{flex:0 0 auto;display:flex;align-items:center;gap:3mm;padding:1mm 3mm;border-radius:3mm;color:#fff}
+.frente .topo{background:linear-gradient(100deg,#1e3a8a,#0369a1 35%,#7c3aed 70%,#ea580c)}
+.verso .topo{background:linear-gradient(100deg,#86198f,#c026d3 30%,#b91c1c 62%,#0f766e)}
+.topo h1{white-space:nowrap;font-size:17px;font-weight:900;line-height:1}
+.topo h1 small{font-size:12px;font-weight:700;opacity:.95;margin-left:2mm}
+.topo .un{margin-left:auto;display:flex;gap:1.5mm;font-size:12px;font-weight:800;white-space:nowrap;align-items:center}
+.topo .un span.c{background:rgba(255,255,255,.22);border-radius:2mm;padding:.5mm 2mm}
+.topo .un .lado{background:#fff;color:#1e3a8a;border-radius:2mm;padding:.5mm 2mm}
+.grade{flex:1 1 auto;min-height:0;display:grid;gap:3mm;column-gap:0} /* 100 colunas: o vão horizontal vai na margem do bloco */
+#pk-T1,#pk-T3,#pk-T5{margin-right:3mm}
+.frente .grade{grid-template-columns:repeat(100,minmax(0,1fr));grid-template-rows:minmax(0,.94fr) minmax(0,1.06fr)}
+.verso .grade{grid-template-columns:repeat(100,minmax(0,1fr));grid-template-rows:minmax(0,1.56fr) minmax(0,1fr) auto}
+#pk-T1{grid-column:1/56;grid-row:1}#pk-T2{grid-column:56/101;grid-row:1}
+#pk-T3{grid-column:1/60;grid-row:2}#pk-T4{grid-column:60/101;grid-row:2}
+#pk-T5{grid-column:1/41;grid-row:1}#pk-T6{grid-column:41/101;grid-row:1}
+#pk-T7{grid-column:1/101;grid-row:2}#pk-R{grid-column:1/101;grid-row:3}
+.sec{border-radius:3mm;border:1.5px solid var(--c);background:var(--c2);padding:1.3mm 2mm 1.5mm;min-height:0;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:1.2mm}
+.sec>h2{display:flex;align-items:center;gap:1.5mm;font-size:14px;font-weight:900;color:var(--c);line-height:1;padding-bottom:1.1mm;border-bottom:1px solid var(--c3)}
+.sec>h2 .n{flex:0 0 auto;min-width:6mm;height:6mm;padding:0 .9mm;border-radius:3mm;background:var(--c);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
+.sec>h2 em{margin-left:auto;font-style:normal;font-size:12px;font-weight:800;opacity:.9}
+.def{background:#fff;border-radius:1.8mm;padding:.7mm 1.5mm;font-weight:650}
+.def:has(.ex),.cd:has(.ex){line-height:1.2}.nv>span,.soma:has(.ex){line-height:1.24} /* o fundo do exemplo nao encobre a descendente da linha de cima */
+.def b,.tl>b,.lst b,.cd b,.x b{color:var(--c)}
+.def.abre{font-size:12.5px}
+.tl{display:grid;grid-template-columns:var(--tw,20mm) minmax(0,1fr);background:#fff;border-radius:1.8mm;padding:.7mm 1.5mm;gap:0 1.6mm;font-weight:650;align-items:baseline}
+.tl>.lin{grid-column:1/-1}.tl>.lin b{color:var(--c)}
+.tl>*:nth-child(n+3){border-top:1px solid color-mix(in srgb,var(--c) 18%,transparent);padding-top:.4mm;margin-top:.3mm}
+.lst{list-style:none;background:#fff;border-radius:1.8mm;padding:.7mm 1.5mm;font-weight:650;display:flex;flex-direction:column}
+.lst li{padding-left:2.7mm;position:relative}
+.lst li::before{content:'';position:absolute;left:.3mm;top:1.3mm;width:1.2mm;height:1.2mm;border-radius:50%;background:var(--c)}
+.lst li+li{border-top:1px solid color-mix(in srgb,var(--c) 18%,transparent);padding-top:.4mm;margin-top:.2mm}
+.lst li+li::before{top:calc(1.3mm + .6mm + 1px)}
+.duas{display:grid;grid-template-columns:var(--dc,minmax(0,1fr) minmax(0,1fr));gap:1.8mm;align-items:stretch}
+.col>.def+.def{border-top:1px solid color-mix(in srgb,var(--c) 18%,transparent)}
+.col{display:flex;flex-direction:column;gap:1.2mm;min-height:0;justify-content:space-between}
+/* recorte de slide da escola: <div class="rc" data-rc="arquivo,x,y,w,h"> (px do original) */
+.rc{position:relative;overflow:hidden;border-radius:1.4mm;background:#fff;width:100%;flex-shrink:0;min-height:0}
+.duas>.rc{align-self:center}
+.pie{background:#fff;border-radius:1.8mm;padding:.8mm 1.2mm;display:flex;flex-direction:column;align-items:center;gap:.6mm;font-weight:700;text-align:center}
+.pie .rc{width:27mm}.pie b{color:var(--c)}
+.rc img{position:absolute;display:block;max-width:none}
+/* cartoes (termo + figura + explicacao) */
+.cards{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:1.3mm}
+.cd{background:#fff;border-radius:2mm;border:1px solid var(--c3);padding:.9mm 1mm 1mm;display:flex;flex-direction:column;gap:.8mm;font-weight:650;min-width:0}
+.cd h3{font-size:13.5px;font-weight:900;color:var(--c);line-height:1}
+.cd h3 small{font-size:11px;color:var(--soft);font-weight:750}
+.cd p+p{border-top:1px solid color-mix(in srgb,var(--c) 18%,transparent);padding-top:.5mm}
+.ex{text-align:left;hyphens:manual;-webkit-hyphens:manual;display:inline;background:var(--c2);border-radius:1.2mm;padding:0 .9mm;font-weight:800;font-style:italic;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.conta{font-weight:900;font-size:13px;color:var(--ink);white-space:nowrap}
+.conta big{font-size:15px;color:var(--c)}
+.cd .conta{white-space:normal;font-size:12.5px}.cd .conta big{font-size:14px;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:1mm 1.4mm;align-items:center}
+.chips>span{background:var(--c3);border-radius:1.4mm;padding:.3mm 1.6mm;font-weight:850}
+/* T2 somar os lados */
+.soma{background:#fff;border-radius:1.8mm;padding:1mm 1.6mm;font-weight:700;display:flex;flex-direction:column;gap:.5mm;justify-content:center}
+.soma .t{font-weight:900;color:var(--c);font-size:13.5px}
+.soma .l{display:grid;grid-template-columns:auto 1fr;gap:0 2mm}
+.soma .l>*:nth-child(n+3){border-top:1px solid color-mix(in srgb,var(--c) 18%,transparent)}
+.soma .r{font-size:16px;font-weight:900;border-top:1.5px solid var(--c3);padding-top:.6mm}
+.soma .r big{font-size:19px;color:var(--c)}
+/* T3 solidos */
+.sol{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1.2mm}
+.so{background:#fff;border-radius:1.8mm;border:1px solid var(--c3);padding:.6mm .8mm .8mm;text-align:center;font-weight:700;line-height:1.08;display:flex;flex-direction:column;gap:.4mm}
+.so svg{display:block;width:100%;height:11mm}
+.so h3{font-size:12.5px;font-weight:900;color:var(--c);line-height:1}
+.so .k{display:flex;flex-direction:column;gap:.2mm}
+.so .k span+span{border-top:1px solid color-mix(in srgb,var(--c) 18%,transparent);padding-top:.2mm}
+.so .k b{color:var(--c);font-size:13px}
+.so .k small{font-size:11px;color:var(--soft);font-weight:700}
+/* T4 tabela */
+.tab{border-collapse:collapse;background:#fff;font-weight:750;width:100%}
+.tab td,.tab th{border:1px solid var(--c3);padding:.3mm 1.2mm;text-align:center}
+.tab th{color:var(--c);font-weight:900}
+/* T5 escala */
+.escala5{display:grid;grid-template-columns:7mm minmax(0,1fr);gap:1.4mm;flex:1 1 auto;min-height:0}
+.flecha{position:relative;background:linear-gradient(180deg,#86198f,#c026d3 50%,#f0abfc);clip-path:polygon(50% 0,100% 6mm,68% 6mm,68% 100%,32% 100%,32% 6mm,0 6mm);border-radius:0 0 1mm 1mm}
+.nivel{display:grid;grid-template-rows:repeat(5,minmax(0,1fr));gap:1mm}
+.nv{background:#fff;border-radius:1.8mm;border:1px solid var(--c3);padding:.6mm 1.4mm;display:grid;grid-template-columns:19mm minmax(0,1fr);gap:0 1.6mm;align-items:center;font-weight:650}
+.nv>b{font-size:13.5px;color:var(--c);font-weight:900}
+.nv .ex{margin-top:.3mm}
+/* T7 */
+.div4{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(0,1.05fr) minmax(0,1.35fr);gap:1.8mm;flex:1 1 auto;min-height:0}
+.x{background:#fff;border-radius:2mm;border:1px solid var(--c3);padding:.9mm 1.2mm;display:flex;flex-direction:column;gap:.8mm;font-weight:650;justify-content:space-between;min-height:0}
+.x .conta{font-size:14px}.x .conta big{font-size:17px}
+.parimpar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.2mm}
+.parimpar>div{display:flex;flex-direction:column;gap:.5mm;align-items:center;text-align:center;font-weight:750}
+.parimpar svg{display:block;width:100%;height:9.5mm}
+/* faixa da receita */
+.rec{--c:#334155;--c2:#f8fafc;--c3:#cbd5e1}
+.rec .gr{display:grid;grid-template-columns:minmax(0,2.05fr) minmax(0,1fr);gap:2.4mm}
+.rec ol{align-content:space-around;list-style:none;counter-reset:p;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-flow:row;gap:.6mm 2.4mm;background:#fff;border-radius:1.8mm;padding:.8mm 1.6mm;font-weight:700}
+.rec ol li{counter-increment:p;padding-left:5mm;position:relative}
+.rec ol li::before{content:counter(p);position:absolute;left:0;top:0;width:3.8mm;height:3.8mm;border-radius:50%;background:#334155;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.rec ol li:nth-child(n+4){border-top:1px solid color-mix(in srgb,var(--c) 18%,transparent);padding-top:.5mm}
+.rec ol li:nth-child(n+4)::before{top:.5mm}
+.chave{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8mm;background:#fff;border-radius:1.8mm;padding:.8mm 1.2mm}
+.chave>div{border-radius:1.4mm;padding:.4mm 1mm;font-weight:700;text-align:center;line-height:1.05;display:flex;flex-direction:column;justify-content:center}
+.chave b{display:block;font-size:12.5px;font-weight:900}
+.chave b+b{border-top:1px solid color-mix(in srgb,var(--c) 18%,transparent);padding-top:.4mm;margin-top:.3mm}
+/* MANDAMENTO TIPOGRAFICO: texto corrido justificado, hifenizado (lang en no conteudo, pt-BR na traducao), ultima linha a esquerda */
+.def,.lst li,.tl>span,.cd p,.nv>span,.x p,.rec ol li,.soma .l span{text-align:justify;text-align-last:left;hyphens:auto;-webkit-hyphens:auto}
+/* cores dos temas */
+.t1{--c:#0369a1;--c2:#f0f9ff;--c3:#bae6fd}
+.t2{--c:#dc2626;--c2:#fef2f2;--c3:#fecaca}
+.t3{--c:#7c3aed;--c2:#f5f3ff;--c3:#ddd6fe}
+.t4{--c:#c2410c;--c2:#fff7ed;--c3:#fed7aa}
+.t5{--c:#a21caf;--c2:#fdf4ff;--c3:#f5d0fe}
+.t6{--c:#b91c1c;--c2:#fff1f2;--c3:#fecdd3}
+.t7{--c:#0f766e;--c2:#f0fdfa;--c3:#99f6e4}
+@media print{body{background:none}.tela{display:none}.palco{padding:0;overflow:visible}
+  .escala{display:block!important;margin:0!important}.fx{display:block!important}.fx .rot,.seta{display:none!important}
+  .fx .cx{width:auto!important;height:auto!important;overflow:visible;box-shadow:none!important;border-radius:0}.fx .cx>.page{transform:none!important}
+  .page{box-shadow:none;break-inside:avoid}.page.frente{break-after:page}}
+</style>
+<script>
+/* tema do site (cie2_theme) ou do sistema: a folha fica sempre clara (papel), so o entorno escurece */
+(function(){var t=null;try{t=localStorage.getItem('cie2_theme');}catch(e){}
+  var dark=(t==='night'||t==='castle')?true:(t?false:(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches));
+  document.documentElement.setAttribute('data-theme',dark?'dark':'light');})();
+</script>
+</head>
+<body>
+<div class="tela" lang="en">
+  <a href="../index.html?v=c0855961205" title="Home" aria-label="Home">&#127968; Home</a>
+  <a id="btPdf" href="media/mat3/Pocket_Card_Math.pdf" target="_blank" rel="noopener" title="Open the PDF (2 A4 pages, front and back)" aria-label="Open PDF">&#128196; <span class="en">Open PDF</span><span class="tr" lang="pt-BR">Abrir o PDF</span></a>
+  <button class="flag" id="trBtn" type="button" onclick="alternaTr()" aria-pressed="false" title="Portuguese" aria-label="Portuguese"><svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rect width="28" height="20" rx="2" fill="#16a34a"/><path d="M14 3 25 10 14 17 3 10z" fill="#facc15"/><circle cx="14" cy="10" r="4" fill="#1d4ed8"/></svg></button>
+  <button id="btGeral" class="so-pagina" type="button" onclick="geral()" title="See both pages" aria-label="See both pages">&#9638; <span class="en">See both pages</span><span class="tr" lang="pt-BR">Ver as 2 páginas</span></button>
+  <span id="pgInd" class="so-pagina" aria-live="polite">1/2</span>
+  <span class="dica"><span class="en">Tap a page to zoom in. PDF: 2 A4 pages, print front and back.</span><span class="tr" lang="pt-BR">Toque numa folha para ampliar. PDF de 2 folhas A4: imprimir frente e verso.</span></span>
+</div>
+<div class="palco"><div class="escala" id="escala">
+
+<!-- ===================== FRONT: T1-T4 ===================== -->
+<div class="fx" data-i="0" tabindex="0" role="button" aria-label="Open the front page"><div class="rot"><span class="en">Front</span><span class="tr" lang="pt-BR">Frente</span> <small data-cb="fora"><span class="en">measures, perimeter, 3D solids, data</span><span class="tr" lang="pt-BR">medidas, perímetro, sólidos, dados</span></small></div><div class="cx">
+<div class="page frente" lang="en">
+  <header class="topo">
+    <h1>My Math Pocket Card<small><span class="en">Y2 · 3rd term · test on 18 November</span><span class="tr" lang="pt-BR">Y2 · 3º tri · prova em 18/11</span></small></h1>
+    <div class="un"><span class="c" data-cb="fora">1 Measures · 2 Perimeter · 3 3D solids · 4 Data</span><span class="lado" data-cb="fora"><span class="en">FRONT</span><span class="tr" lang="pt-BR">FRENTE</span></span></div>
+  </header>
+  <main class="grade">
+
+    <section class="sec t1" data-topico="T1" id="pk-T1">
+      <h2><span class="n">1</span>Words to compare and measure</h2>
+      <div class="def abre"><span class="en"><b>Length</b> is how long something is, from one end to the other. A pencil has a length.</span><span class="tr" lang="pt-BR"><b>Length</b> (comprimento) é o quanto uma coisa é comprida, de uma ponta à outra. Um lápis tem comprimento.</span></div>
+      <div class="cards" style="--n:3">
+        <div class="cd"><h3>long · short</h3>
+          <div class="rc" data-rc="u08_words_compare_measure,100,195,470,128"></div>
+          <p><span class="en"><b>Long</b> means how much something measures from one end to the other.</span><span class="tr" lang="pt-BR"><b>Long</b> (comprido) é quanto uma coisa mede de uma ponta à outra.</span></p>
+          <p><span class="en"><b>Short</b> means not as long.</span><span class="tr" lang="pt-BR"><b>Short</b> (curto) é menos comprido.</span></p>
+          <span class="ex" data-tipo="rotulo"><span class="en">This pencil is long. This pencil is short.</span><span class="tr" lang="pt-BR">Este lápis é comprido. Este é curto.</span></span></div>
+        <div class="cd"><h3>wide · narrow</h3>
+          <div class="rc" data-rc="u08_words_compare_measure,130,498,420,152"></div>
+          <p><span class="en"><b>Wide</b> means how much something measures across.</span><span class="tr" lang="pt-BR"><b>Wide</b> (largo) é quanto uma coisa mede de lado a lado (across).</span></p>
+          <p><span class="en"><b>Narrow</b> means not wide.</span><span class="tr" lang="pt-BR"><b>Narrow</b> (estreito) é não ser largo.</span></p>
+          <span class="ex" data-tipo="rotulo"><span class="en">This book is wide.</span><span class="tr" lang="pt-BR">Este livro é largo.</span></span></div>
+        <div class="cd"><h3>tall · height</h3>
+          <div class="rc" data-rc="u08_words_compare_measure,665,498,590,157"></div>
+          <p><span class="en"><b>Tall</b> means how high something is, from the bottom to the top.</span><span class="tr" lang="pt-BR"><b>Tall</b> (alto) é quanto uma coisa é alta, de baixo até em cima.</span></p>
+          <p><span class="en"><b>Height</b> is how tall someone or something is. We also use tall for people.</span><span class="tr" lang="pt-BR"><b>Height</b> (altura) é o quanto alguém ou algo é alto. Tall serve também para pessoas.</span></p>
+          <span class="ex" data-tipo="rotulo"><span class="en">This tree is tall. This girl is tall.</span><span class="tr" lang="pt-BR">Esta árvore é alta. Esta menina é alta.</span></span></div>
+      </div>
+      <div class="col" style="gap:.6mm">
+        <div class="def"><span class="en"><b>Compare two things</b>: longer · shorter · wider · taller. <span class="ex" data-tipo="rotulo">Pencil A is longer than pencil B.</span></span><span class="tr" lang="pt-BR"><b>Comparar duas coisas</b>: longer (mais comprido) · shorter (mais curto) · wider (mais largo) · taller (mais alto). O lápis A é mais comprido que o lápis B.</span></div>
+        <div class="def"><span class="en">We measure length in <b>centimetres (cm)</b>, <b>metres (m)</b> and <b>kilometres (km)</b>.</span><span class="tr" lang="pt-BR">Medimos o comprimento em <b>centímetros (cm)</b>, <b>metros (m)</b> e <b>quilômetros (km)</b>.</span></div>
+      </div>
+    </section>
+
+    <section class="sec t2" data-topico="T2" id="pk-T2">
+      <h2><span class="n">2</span>Perimeter<em data-cb="fora"><span class="en">distance around</span><span class="tr" lang="pt-BR">a distância em volta</span></em></h2>
+      <div class="def abre"><span class="en"><b>Perimeter</b> is the total distance around a shape. <b>Around</b> means along all the sides of the shape. A <b>side</b> is one of the straight lines that make the outline of a flat shape.</span><span class="tr" lang="pt-BR"><b>Perimeter</b> (perímetro) é a distância total em volta de uma figura. <b>Around</b> (em volta) é por todos os lados da figura. <b>Side</b> (lado) é uma das linhas retas do contorno de uma figura plana.</span></div>
+      <div class="duas" style="--dc:minmax(0,.6fr) minmax(0,1fr);align-items:center">
+        <div class="rc" data-rc="u08_perimeter,400,128,530,385"></div>
+        <div class="soma"><span class="t"><span class="en">Add all the sides!</span><span class="tr" lang="pt-BR">Some todos os lados!</span></span>
+          <div class="l"><b><span class="en">Top</span><span class="tr" lang="pt-BR">Em cima</span></b><span>6 cm</span><b><span class="en">Bottom</span><span class="tr" lang="pt-BR">Embaixo</span></b><span>6 cm</span><b><span class="en">Left side</span><span class="tr" lang="pt-BR">Lado esquerdo</span></b><span>4 cm</span><b><span class="en">Right side</span><span class="tr" lang="pt-BR">Lado direito</span></b><span>4 cm</span></div>
+          <div class="r">6 + 6 + 4 + 4 = <big>20 cm</big></div></div>
+      </div>
+      <div class="rc" data-rc="u08_perimeter,25,578,1235,122"></div>
+      <ul class="lst">
+        <li><span class="en">Always write the number <b>and</b> the unit: <b>20 cm</b>.</span><span class="tr" lang="pt-BR">Escreva sempre o número <b>e</b> a unidade: <b>20 cm</b>.</span></li>
+        <li><span class="en"><b>Show your work</b>: write the sum, like 6 + 6 + 6 = 18 cm.</span><span class="tr" lang="pt-BR"><b>Show your work</b> (mostre a conta): escreva a soma, como 6 + 6 + 6 = 18 cm.</span></li>
+      </ul>
+    </section>
+
+    <section class="sec t3" data-topico="T3" id="pk-T3">
+      <h2><span class="n">3</span>3D solids<em data-cb="fora"><span class="en">faces · edges · vertices</span><span class="tr" lang="pt-BR">faces · arestas · vértices</span></em></h2>
+      <div class="def abre"><span class="en">A <b>3D solid</b> is a solid shape that has faces, edges and vertices.</span><span class="tr" lang="pt-BR">Um <b>3D solid</b> (sólido) é uma forma sólida que tem faces, arestas e vértices.</span></div>
+      <div class="duas" style="--dc:36mm minmax(0,1fr);align-items:center">
+        <div class="rc" data-rc="u06_3d_solids,55,250,475,330"></div>
+        <div class="tl" style="--tw:14mm">
+          <b>face:</b><span><span class="en">a flat (straight) surface of a 3D solid. A cube has 6 faces.</span><span class="tr" lang="pt-BR">uma superfície plana (reta) do sólido. O cubo tem 6 faces.</span></span>
+          <b>edge:</b><span><span class="en">a straight line where two faces meet. A cube has 12 edges.</span><span class="tr" lang="pt-BR">(aresta) uma linha reta onde duas faces se encontram. O cubo tem 12 arestas.</span></span>
+          <b>vertex:</b><span><span class="en">a corner where two or more edges meet. More than one vertex: <b>vertices</b>. A cube has 8 vertices.</span><span class="tr" lang="pt-BR">(vértice) um canto onde duas ou mais arestas se encontram. Mais de um: <b>vertices</b>. O cubo tem 8 vértices.</span></span>
+          <span class="lin"><span class="en">Some solids, like the sphere, the cylinder and the cone, have a <b>curved surface</b>: a curved surface is round, not flat.</span><span class="tr" lang="pt-BR">Alguns sólidos, como a esfera, o cilindro e o cone, têm uma <b>superfície curva</b>: uma superfície curva é redonda, não é plana.</span></span>
+        </div>
+      </div>
+      <div class="sol">
+        <div class="so"><span class="fig" data-f="solido:cube"></span><h3>cube</h3><div class="k"><span><b>6</b> faces</span><span><b>12</b> edges</span><span><b>8</b> vertices</span></div></div>
+        <div class="so"><span class="fig" data-f="solido:cuboid"></span><h3>cuboid</h3><div class="k"><span><b>6</b> faces · <b>12</b> edges</span><span><b>8</b> vertices</span><span><small><span class="en">like a cube, but the edges are not all the same length</span><span class="tr" lang="pt-BR">parece o cubo, mas as arestas não têm todas o mesmo tamanho</span></small></span></div></div>
+        <div class="so"><span class="fig" data-f="solido:pyramid"></span><h3>pyramid</h3><div class="k"><span><b>5</b> faces</span><span><b>8</b> edges</span><span><b>5</b> vertices</span></div></div>
+        <div class="so"><span class="fig" data-f="solido:cylinder"></span><h3>cylinder</h3><div class="k"><span><b>2</b> <span class="en">flat faces</span><span class="tr" lang="pt-BR">faces planas</span></span><span><b>1</b> <span class="en">curved surface</span><span class="tr" lang="pt-BR">superfície curva</span></span></div></div>
+        <div class="so"><span class="fig" data-f="solido:cone"></span><h3>cone</h3><div class="k"><span><b>1</b> <span class="en">flat face</span><span class="tr" lang="pt-BR">face plana</span></span><span><b>1</b> <span class="en">curved surface</span><span class="tr" lang="pt-BR">superfície curva</span></span></div></div>
+        <div class="so"><span class="fig" data-f="solido:sphere"></span><h3>sphere</h3><div class="k"><span><b>1</b> <span class="en">curved surface</span><span class="tr" lang="pt-BR">superfície curva</span></span><span><small><span class="en">no flat face, no edges, no vertices</span><span class="tr" lang="pt-BR">nenhuma face plana, nenhuma aresta, nenhum vértice</span></small></span></div></div>
+      </div>
+      <div class="def"><span class="en"><b>Roll</b> means turn over and over and move away, like a ball. A solid with a curved surface can roll: the sphere rolls. A cube has only flat faces: it cannot roll.</span><span class="tr" lang="pt-BR"><b>Roll</b> (rolar) é virar e virar e ir embora, como uma bola. Sólido com superfície curva rola: a esfera rola. O cubo só tem faces planas: não rola.</span></div>
+    </section>
+
+    <section class="sec t4" data-topico="T4" id="pk-T4">
+      <h2><span class="n">4</span>Data and bar graphs</h2>
+      <div class="def abre"><span class="en"><b>Data</b> is all the information we collect and find out. We organize it using charts and graphs. A <b>piece of data</b> is one simple fact: <span class="ex" data-tipo="rotulo">My favorite color is blue.</span> <span class="ex" data-tipo="rotulo">I have 2 pets.</span></span><span class="tr" lang="pt-BR"><b>Data</b> (dados) são todas as informações que juntamos e descobrimos. Organizamos com charts e graphs (gráficos). <b>A piece of data</b> (um dado) é um fato simples: <i>Minha cor favorita é azul.</i> <i>Tenho 2 bichos de estimação.</i></span></div>
+      <div class="def"><span class="en">A <b>bar graph</b> shows data with bars. The taller the bar, the more there are. Look at the top of the bar and read the number on the side.</span><span class="tr" lang="pt-BR">O <b>bar graph</b> (gráfico de barras) mostra dados com barras. Quanto mais alta a barra, mais tem. Olhe o topo da barra e leia o número do lado.</span></div>
+      <div class="duas" style="--dc:minmax(0,1.2fr) minmax(0,1fr)">
+        <div class="col" style="justify-content:center">
+          <div class="rc" data-rc="u05_data_graphs,30,290,630,410"></div>
+          <table class="tab"><tr><th>Hamsters</th><th>Rabbits</th><th>Dogs</th><th>Cats</th></tr><tr><td>4</td><td>2</td><td>6</td><td>3</td></tr></table>
+        </div>
+        <div class="col">
+          <ul class="lst">
+            <li><span class="en">The most: <b>Dogs (6)</b>.</span><span class="tr" lang="pt-BR">O que tem mais: <b>Dogs (6)</b>.</span></li>
+            <li><span class="en">The least: <b>Rabbits (2)</b>.</span><span class="tr" lang="pt-BR">O que tem menos: <b>Rabbits (2)</b>.</span></li>
+            <li><span class="en">How many cats? <b>3</b>.</span><span class="tr" lang="pt-BR">Quantos gatos? <b>3</b>.</span></li>
+          </ul>
+          <figure class="pie"><div class="rc" data-rc="u05_data_graphs,710,280,510,425"></div><figcaption><span class="en">The round picture is a <b>chart</b> too: it also shows data.</span><span class="tr" lang="pt-BR">A figura redonda também é um <b>chart</b> (gráfico): também mostra dados.</span></figcaption></figure>
+        </div>
+      </div>
+      <div class="def"><span class="en"><b>Make a bar graph</b>: look at the table with numbers and colour each bar up to the right number.</span><span class="tr" lang="pt-BR"><b>Fazer um gráfico de barras</b>: olhe a tabela com os números e pinte cada barra até o número certo.</span></div>
+    </section>
+
+  </main>
+</div>
+</div></div>
+
+<!-- ===================== BACK: T5-T7 + receita ===================== -->
+<div class="fx" data-i="1" tabindex="0" role="button" aria-label="Open the back page"><div class="rot"><span class="en">Back</span><span class="tr" lang="pt-BR">Verso</span> <small data-cb="fora"><span class="en">probability, multiplication, division</span><span class="tr" lang="pt-BR">probabilidade, multiplicação, divisão</span></small></div><div class="cx">
+<div class="page verso" lang="en">
+  <header class="topo">
+    <h1>My Math Pocket Card<small><span class="en">Y2 · 3rd term · test on 18 November</span><span class="tr" lang="pt-BR">Y2 · 3º tri · prova em 18/11</span></small></h1>
+    <div class="un"><span class="c" data-cb="fora">5 Probability · 6 Multiplication · 7 Division</span><span class="lado" data-cb="fora"><span class="en">BACK</span><span class="tr" lang="pt-BR">VERSO</span></span></div>
+  </header>
+  <main class="grade">
+
+    <section class="sec t5" data-topico="T5" id="pk-T5">
+      <h2><span class="n">5</span>Probability<em data-cb="fora">likely · unlikely</em></h2>
+      <div class="def abre"><span class="en"><b>Probability</b> is thinking about if something will happen, won't happen, or will maybe happen.</span><span class="tr" lang="pt-BR"><b>Probability</b> (probabilidade) é pensar se uma coisa vai acontecer, não vai acontecer ou talvez aconteça.</span></div>
+      <div class="escala5">
+        <div class="flecha" aria-hidden="true"></div>
+        <div class="nivel">
+          <div class="nv"><b>certain</b><span><span class="en">We know it will happen.</span><span class="tr" lang="pt-BR">Sabemos que vai acontecer.</span><br><span class="ex" data-tipo="rotulo"><span class="en">I will eat dinner tonight.</span><span class="tr" lang="pt-BR">Vou jantar hoje à noite.</span></span></span></div>
+          <div class="nv"><b>likely</b><span><span class="en">Big chance to happen.</span><span class="tr" lang="pt-BR">Grande chance de acontecer.</span><br><span class="ex" data-tipo="rotulo"><span class="en">You will find students in the school.</span><span class="tr" lang="pt-BR">Você vai achar alunos na escola.</span></span></span></div>
+          <div class="nv"><b>possible</b><span><span class="en">It will maybe happen.</span><span class="tr" lang="pt-BR">Talvez aconteça.</span><br><span class="ex" data-tipo="rotulo"><span class="en">I will eat spaghetti for dinner.</span><span class="tr" lang="pt-BR">Vou comer espaguete no jantar.</span></span></span></div>
+          <div class="nv"><b>unlikely</b><span><span class="en">Small chance to happen.</span><span class="tr" lang="pt-BR">Pequena chance de acontecer.</span><br><span class="ex" data-tipo="rotulo"><span class="en">You will see a penguin in the desert.</span><span class="tr" lang="pt-BR">Você vai ver um pinguim no deserto.</span></span></span></div>
+          <div class="nv"><b>impossible</b><span><span class="en">We know it won't happen.</span><span class="tr" lang="pt-BR">Sabemos que não vai acontecer.</span><br><span class="ex" data-tipo="rotulo"><span class="en">I will eat rocks for dinner.</span><span class="tr" lang="pt-BR">Vou comer pedras no jantar.</span></span></span></div>
+        </div>
+      </div>
+      <div class="def"><span class="en"><b>Say why</b> with <b>because</b>: “It is impossible because …”</span><span class="tr" lang="pt-BR"><b>Diga o porquê</b> com <b>because</b> (porque): “It is impossible because …”</span></div>
+    </section>
+
+    <section class="sec t6" data-topico="T6" id="pk-T6">
+      <h2><span class="n">6</span>Multiplication<em data-cb="fora"><span class="en">making equal groups</span><span class="tr" lang="pt-BR">fazendo grupos iguais</span></em></h2>
+      <div class="def abre"><span class="en"><b>Multiplication</b> is a shorter way to show repeated addition. We use it to find the total when we have <b>equal groups</b>.</span><span class="tr" lang="pt-BR"><b>Multiplication</b> (multiplicação) é um jeito mais curto de mostrar a adição repetida. Serve para achar o total quando temos <b>grupos iguais</b>.</span></div>
+      <div class="tl" style="--tw:33mm">
+        <b>equal groups</b><span><span class="en">have the same amount in each group.</span><span class="tr" lang="pt-BR">(grupos iguais) têm a mesma quantidade em cada grupo.</span></span>
+        <b>repeated addition</b><span><span class="en">is adding the same number again and again: 5 + 5 + 5.</span><span class="tr" lang="pt-BR">(adição repetida) é somar o mesmo número de novo e de novo: 5 + 5 + 5.</span></span>
+        <b>multiplication sentence</b><span><span class="en">is the math written with numbers and signs: 4 × 3 = 12.</span><span class="tr" lang="pt-BR">(sentença de multiplicação) é a conta escrita com números e sinais: 4 × 3 = 12.</span></span>
+      </div>
+      <div class="duas" style="--dc:minmax(0,.68fr) minmax(0,1fr);align-items:center">
+        <div class="rc" data-rc="u10_multiplication,458,180,499,150"></div>
+        <div class="soma"><span class="conta">3 + 3 + 3 + 3 = 12 &rarr; <big>4 × 3 = 12</big></span>
+          <div class="l"><b>4</b><span><span class="en">how many groups</span><span class="tr" lang="pt-BR">quantos grupos</span></span><b>3</b><span><span class="en">how many in each group</span><span class="tr" lang="pt-BR">quantos em cada grupo</span></span></div>
+          <span class="ex" data-tipo="rotulo"><span class="en">4 groups of 3 buttons are 12 buttons altogether (in total).</span><span class="tr" lang="pt-BR">4 grupos de 3 botões são 12 botões ao todo.</span></span></div>
+      </div>
+      <div class="cards" style="--n:3">
+        <div class="cd"><div class="rc" data-rc="u10_multiplication,95,450,470,117"></div><span class="conta">5 + 5 + 5 = 15 &rarr; <big>3 × 5 = 15</big></span><p><span class="en">3 groups of 5 flowers</span><span class="tr" lang="pt-BR">3 grupos de 5 flores</span></p></div>
+        <div class="cd"><div class="rc" data-rc="u10_multiplication,665,448,580,115"></div><span class="conta">2 + 2 + 2 + 2 + 2 = 10 &rarr; <big>5 × 2 = 10</big></span><p><span class="en">5 groups of 2 cookies</span><span class="tr" lang="pt-BR">5 grupos de 2 biscoitos</span></p></div>
+        <div class="cd"><span class="fig" data-f="maos:2" style="display:block;height:11mm"></span><span class="conta">5 + 5 = 10 &rarr; <big>2 × 5 = 10</big></span><p><span class="en">2 hands, 5 fingers on each hand</span><span class="tr" lang="pt-BR">2 mãos, 5 dedos em cada mão</span></p></div>
+      </div>
+    </section>
+
+    <section class="sec t7" data-topico="T7" id="pk-T7">
+      <h2><span class="n">7</span>Division<em data-cb="fora"><span class="en">equal sharing</span><span class="tr" lang="pt-BR">repartir igualmente</span></em></h2>
+      <div class="def abre"><span class="en"><b>Division</b> is a way to make equal groups of a number. We share a total into groups that have the same amount. <b>Share equally</b> means everybody gets the same amount. A <b>division sentence</b>: 10 ÷ 2 = 5.</span><span class="tr" lang="pt-BR"><b>Division</b> (divisão) é um jeito de fazer grupos iguais com um número. Repartimos um total em grupos com a mesma quantidade. <b>Share equally</b> (repartir igualmente) é todo mundo ganhar a mesma quantidade. <b>Division sentence</b> (sentença de divisão): 10 ÷ 2 = 5.</span></div>
+      <div class="div4">
+        <div class="x"><div class="rc" data-rc="u10_division,400,200,590,130"></div><span class="conta"><big>10 ÷ 2 = 5</big></span><p><span class="en">Mike and Laura share 10 oranges equally: 10 oranges shared into 2 equal groups is 5 oranges in each group.</span><span class="tr" lang="pt-BR">Mike e Laura repartem 10 laranjas igualmente: 10 laranjas em 2 grupos iguais dão 5 laranjas em cada grupo.</span></p></div>
+        <div class="x"><div class="rc" data-rc="u10_division,42,378,560,99"></div><span class="conta"><big>8 ÷ 2 = 4</big></span><p><span class="en">8 apples shared into 2 equal groups is 4 apples in each group.</span><span class="tr" lang="pt-BR">8 maçãs em 2 grupos iguais dão 4 maçãs em cada grupo.</span></p></div>
+        <div class="x"><div class="rc" data-rc="u10_division,650,378,610,96"></div><span class="conta"><big>12 ÷ 3 = 4</big></span><p><span class="en">12 cookies shared into 3 equal groups is 4 cookies in each group.</span><span class="tr" lang="pt-BR">12 biscoitos em 3 grupos iguais dão 4 biscoitos em cada grupo.</span></p></div>
+        <div class="x">
+          <p><span class="en"><b>Even numbers</b> (0, 2, 4, 6, 8, 10, 12…) can be shared equally into <b>2 groups</b>. <b>Odd numbers</b> (1, 3, 5, 7, 9…): when we share them between 2, <b>1 is left</b>.</span><span class="tr" lang="pt-BR"><b>Even numbers</b> (pares: 0, 2, 4, 6, 8, 10, 12…) se repartem igualmente em <b>2 grupos</b>. <b>Odd numbers</b> (ímpares: 1, 3, 5, 7, 9…): repartindo entre 2, <b>sobra 1</b>.</span></p>
+          <div class="parimpar" data-tipo="rotulo">
+            <div><span class="fig" data-f="par"></span><span><span class="en">8 between 2: 4 each</span><span class="tr" lang="pt-BR">8 entre 2: 4 para cada</span></span></div>
+            <div><span class="fig" data-f="impar"></span><span><span class="en">7 between 2: 3 each, 1 is left</span><span class="tr" lang="pt-BR">7 entre 2: 3 para cada, sobra 1</span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec rec" data-topico="R" id="pk-R">
+      <h2><span class="n">&#9998;</span><span id="recTit">How to write a good answer</span><em data-cb="fora"><span class="en">key numbers</span><span class="tr" lang="pt-BR">números-chave</span></em></h2>
+      <div class="gr">
+        <ol id="receita"></ol>
+        <div class="chave" data-tipo="rotulo">
+          <div class="t3" style="background:var(--c2);color:var(--c)"><b>cube<br>6 · 12 · 8</b><span><span class="en">faces · edges · vertices</span><span class="tr" lang="pt-BR">faces · arestas · vértices</span></span></div>
+          <div class="t3" style="background:var(--c2);color:var(--c)"><b>pyramid<br>5 · 8 · 5</b><span><span class="en">faces · edges · vertices</span><span class="tr" lang="pt-BR">faces · arestas · vértices</span></span></div>
+          <div class="t2" style="background:var(--c2);color:var(--c)"><b>perimeter</b><span><span class="en">add all the sides</span><span class="tr" lang="pt-BR">some todos os lados</span></span></div>
+          <div class="t5" style="background:var(--c2);color:var(--c);grid-column:span 2"><b>certain › likely › possible › unlikely › impossible</b></div>
+          <div class="t6" style="background:var(--c2);color:var(--c)"><b>4 × 3 = 12</b><b>12 ÷ 3 = 4</b></div>
+          <div class="t7" style="background:var(--c2);color:var(--c);grid-column:span 3"><b><span class="en">even: shared equally into 2 groups · odd: 1 is left</span><span class="tr" lang="pt-BR">par: reparte igual em 2 grupos · ímpar: sobra 1</span></b></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+</div></div>
+
+</div></div>
+<button class="seta esq" id="setaEsq" type="button" onclick="vai(-1)" aria-label="Previous page" title="Previous page">&#8249;</button>
+<button class="seta dir" id="setaDir" type="button" onclick="vai(1)" aria-label="Next page" title="Next page">&#8250;</button>
+<script src="MAT3_figuras.js?v=c0855961205"></script>
+<script src="MAT3_discursivas_data.js?v=c0855961205"></script>
+<script>
+/* figuras SVG (MAT3_figuras.js) e recortes dos slides da escola */
+(function(){var F=window.MAT3F;
+  function linha(n,obj,sobra){/* 2 grupos de n + (sobra) solto */
+    var g=F.grupos(2,n,obj);if(!sobra)return g;
+    var solto=F.soltos(1,obj);return '<span style="display:flex;align-items:center;gap:1mm;height:100%">'+g.replace('class="fig grupos"','class="fig grupos" style="flex:1 1 auto;min-width:0"')+solto.replace('class="fig soltos"','class="fig soltos" style="flex:0 0 auto;width:5mm"')+'</span>';}
+  [].forEach.call(document.querySelectorAll('.fig[data-f]'),function(el){var f=el.dataset.f.split(':'),h='';
+    if(f[0]==='solido')h=F.solido(f[1]);else if(f[0]==='maos')h=F.maos(+f[1]);
+    else if(f[0]==='par')h=F.grupos(2,4,'apple');else if(f[0]==='impar')h=linha(3,'apple',1);
+    el.innerHTML=h;var s=el.querySelector('svg');if(s){s.removeAttribute('width');s.removeAttribute('height');s.setAttribute('preserveAspectRatio','xMidYMid meet');}
+    if(f[0]==='maos'&&s){s.style.width='100%';s.style.height='100%';}
+    el.style.display='block';});
+  var T={u06_3d_solids:[1074,1280],u05_data_graphs:[1280,720],u05_likely_unlikely:[1280,720],u08_perimeter:[1280,722],
+    u08_words_compare_measure:[1280,720],u10_division:[1280,720],u10_multiplication:[1280,721]};
+  [].forEach.call(document.querySelectorAll('.rc[data-rc]'),function(el){var a=el.dataset.rc.split(','),f=a[0],x=+a[1],y=+a[2],w=+a[3],h=+a[4],N=T[f];
+    el.style.aspectRatio=w+' / '+h;var im=new Image();im.alt='';im.src='media/mat3/aula/'+f+'.jpeg';
+    im.style.width=(N[0]/w*100)+'%';im.style.left=(-x/w*100)+'%';im.style.top=(-y/h*100)+'%';el.appendChild(im);});
+  /* receita da resposta escrita: fonte unica MAT3_discursivas_data.js */
+  var R=window.MAT3D&&window.MAT3D.receita;
+  if(R){document.getElementById('recTit').textContent=R.titulo;
+    document.getElementById('receita').innerHTML=R.passos.map(function(p,i){return '<li><span class="en">'+p.replace(/(\d) cm/g,'$1&nbsp;cm')+'</span><span class="tr" lang="pt-BR">'+R.pt[i]+'</span></li>';}).join('');}
+})();
+</script>
+<script>
+/* hifenizacao de verdade (mandamento tipografico): o Chrome sem dicionario (headless do PDF, perfil novo) ignora hyphens:auto
+   e o justificado em coluna estreita abria "rios". Aqui so se marcam pontos de quebra opcionais (U+00AD, invisiveis quando a
+   palavra nao quebra) nas palavras do texto corrido, ingles (S) e portugues da bandeira (PT), divisao conferida a mao; o texto nao muda. */
+(function(){var S={adding:'add-ing',addition:'ad-di-tion',altogether:'al-to-geth-er',always:'al-ways',answer:'an-swer',apples:'ap-ples',
+  because:'be-cause',between:'be-tween',bottom:'bot-tom',buttons:'but-tons',cannot:'can-not',centimetres:'cen-ti-me-tres',certain:'cer-tain',
+  collect:'col-lect',colour:'col-our',compare:'com-pare',cookies:'cook-ies',corner:'cor-ner',cuboid:'cu-boid',cylinder:'cyl-in-der',
+  desert:'des-ert',dinner:'din-ner',distance:'dis-tance',division:'di-vi-sion',equally:'equal-ly',everybody:'ev-ery-body',
+  favorite:'fa-vor-ite',fingers:'fin-gers',flowers:'flow-ers',hamsters:'ham-sters',happen:'hap-pen',impossible:'im-pos-si-ble',
+  information:'in-for-ma-tion',kilometres:'kil-o-me-tres',likely:'like-ly',longer:'lon-ger',making:'mak-ing',measure:'mea-sure',
+  measures:'mea-sures',metres:'me-tres',multiplication:'mul-ti-pli-ca-tion',narrow:'nar-row',number:'num-ber',numbers:'num-bers',
+  oranges:'or-anges',organize:'or-ga-nize',outline:'out-line',pencil:'pen-cil',penguin:'pen-guin',people:'peo-ple',perimeter:'pe-rim-e-ter',
+  picture:'pic-ture',possible:'pos-si-ble',probability:'prob-a-bil-i-ty',pyramid:'pyr-a-mid',rabbits:'rab-bits',repeated:'re-peat-ed',
+  sentence:'sen-tence',sharing:'shar-ing',shorter:'short-er',simple:'sim-ple',solids:'sol-ids',someone:'some-one',something:'some-thing',
+  spaghetti:'spa-ghet-ti',students:'stu-dents',surface:'sur-face',taller:'tall-er',thinking:'think-ing',tonight:'to-night',
+  unlikely:'un-like-ly',vertex:'ver-tex',vertices:'ver-ti-ces',written:'writ-ten',capital:'cap-i-tal',letter:'let-ter',question:'ques-tion',
+  together:'to-geth-er',fingers:'fin-gers',everything:'ev-ery-thing',another:'an-oth-er',shape:'shape'},SH='­',JUS='.def,.lst li,.tl>span,.cd p,.nv>span,.x p,.rec ol li,.soma .l span',EX='.ex';
+  function hif(w){var m=S[w.toLowerCase()];if(!m)return w;var out='',k=0;for(var i=0;i<m.length;i++){if(m[i]==='-')out+=SH;else out+=w[k++];}return k===w.length?out:w;}
+  var PT={'acontecer':'acon-te-cer','aconteça':'acon-te-ça','arestas':'ares-tas','biscoitos':'bis-coi-tos','centímetros':'cen-tí-me-tros','cilindro':'ci-lin-dro','começar':'co-me-çar','comparar':'com-pa-rar','comprida':'com-pri-da','comprido':'com-pri-do','comprimento':'com-pri-men-to','contorno':'con-tor-no','descobrimos':'des-co-bri-mos','deserto':'de-ser-to','direito':'di-rei-to','distância':'dis-tân-cia','divisão':'di-vi-são','embaixo':'em-bai-xo','encontram':'en-con-tram','escreva':'es-cre-va','escrita':'es-cri-ta','espaguete':'es-pa-gue-te','esquerdo':'es-quer-do','estimação':'es-ti-ma-ção','estreito':'es-trei-to','favorita':'fa-vo-ri-ta','fazendo':'fa-zen-do','gráfico':'grá-fi-co','gráficos':'grá-fi-cos','igualmente':'igual-men-te','informações':'in-for-ma-ções','juntamos':'jun-ta-mos','laranjas':'la-ran-jas','maiúscula':'mai-ús-cu-la','medimos':'me-di-mos','mostrar':'mos-trar','multiplicação':'mul-ti-pli-ca-ção','nenhuma':'ne-nhu-ma','números':'nú-me-ros','organizamos':'or-ga-ni-za-mos','palavras':'pa-la-vras','pequena':'pe-que-na','pergunta':'per-gun-ta','perímetro':'pe-rí-me-tro','pessoas':'pes-soas','pinguim':'pin-guim','probabilidade':'pro-ba-bi-li-da-de','quantidade':'quan-ti-da-de','quantos':'quan-tos','quilômetros':'qui-lô-me-tros','redonda':'re-don-da','reparte':'re-par-te','repartem':'re-par-tem','repartimos':'re-par-ti-mos','repartindo':'re-par-tin-do','repartir':'re-par-tir','repetida':'re-pe-ti-da','responder':'res-pon-der','resposta':'res-pos-ta','sabemos':'sa-be-mos','sentença':'sen-ten-ça','simples':'sim-ples','superfície':'su-per-fí-cie','sólidos':'só-li-dos','tamanho':'ta-ma-nho','unidade':'uni-da-de','vértice':'vér-ti-ce','vértices':'vér-ti-ces','ímpares':'ím-pa-res','alguém':'al-guém','quanto':'quan-to','coisa':'coi-sa','menos':'me-nos','largo':'lar-go','altura':'al-tu-ra','árvore':'ár-vo-re','grupos':'gru-pos','menina':'me-ni-na','outra':'ou-tra','ponta':'pon-ta','começo':'co-me-ço','pedras':'pe-dras','jantar':'jan-tar','escola':'es-co-la','alunos':'alu-nos','chance':'chan-ce','grande':'gran-de','pensar':'pen-sar','talvez':'tal-vez','sólido':'só-li-do','forma':'for-ma','sólida':'só-li-da','esfera':'es-fe-ra','também':'tam-bém','figura':'fi-gu-ra','plana':'pla-na','linhas':'li-nhas','retas':'re-tas','lados':'la-dos','volta':'vol-ta','sempre':'sem-pre','número':'nú-me-ro','conta':'con-ta','barras':'bar-ras','barra':'bar-ra','mostra':'mos-tra','todas':'to-das','tabela':'ta-be-la','pinte':'pin-te','certo':'cer-to','mesma':'mes-ma','mesmo':'mes-mo','grupo':'gru-po','botões':'bo-tões','flores':'flo-res','dedos':'de-dos','jeito':'jei-to','curto':'cur-to','adição':'adi-ção','somar':'so-mar','sinais':'si-nais','ganhar':'ga-nhar','mundo':'mun-do','bichos':'bi-chos','maçãs':'ma-çãs','dizer':'di-zer','capital':'ca-pi-tal','questão':'ques-tão','parada':'pa-ra-da','duas':'du-as','vezes':'ve-zes','começar':'co-me-çar','ponto':'pon-to','final':'fi-nal'};
+  function hifpt(w){var m=PT[w.toLowerCase()];if(!m)return w;var out='',k=0;for(var i=0;i<m.length;i++){if(m[i]==='-')out+=SH;else out+=w[k++];}return k===w.length?out:w;}
+  window.MAT3_HIF=function(raiz){[].forEach.call((raiz||document).querySelectorAll('.page'),function(pg){
+    var tw=document.createTreeWalker(pg,NodeFilter.SHOW_TEXT),n;while(n=tw.nextNode()){if(!n.parentElement.closest(JUS)||n.parentElement.closest(EX))continue; /* frase-exemplo inteira, sem partir palavra */
+      n.nodeValue=n.parentElement.closest('.tr')?n.nodeValue.replace(/[A-Za-zÀ-ÿ]+/g,hifpt):n.nodeValue.replace(/[A-Za-z]+/g,hif);}});};})();
+</script>
+<script>MAT3_HIF();</script>
+<script>
+/* modo: visao geral (as 2 folhas) ou pagina (i 0 = frente, 1 = verso) — mecanica do GEO3_pocket */
+var PK={modo:'geral',i:0};
+function fxs(){return [].slice.call(document.querySelectorAll('.fx'));}
+function encaixa(){var e=document.getElementById('escala'),fs=fxs(),p=fs[0].querySelector('.page'),l=p.offsetWidth,a=p.offsetHeight,
+  cw=document.documentElement.clientWidth,vh=window.innerHeight,bar=document.querySelector('.tela'),bh=bar?bar.offsetHeight:0,
+  g=cw<600?8:16,H=vh-bh-24,k,empilha=false;
+  if(PK.modo==='pagina'){var sw=cw<600?52:72;k=Math.min((cw-2*sw)/l,H/a);}
+  else{empilha=cw<vh&&cw<1000;var rh=40,vao=empilha?10:16;
+    k=empilha?Math.min((cw-2*g)/l,(H-2*rh-vao)/(2*a)):Math.min((cw-2*g-vao)/(2*l),(H-rh)/a);}
+  e.classList.toggle('empilha',empilha);
+  fs.forEach(function(f){var c=f.querySelector('.cx'),pg=c.firstElementChild;c.style.width=(l*k)+'px';c.style.height=(a*k)+'px';pg.style.transform='scale('+k+')';});
+  if(PK.modo==='pagina'){var on=document.querySelector('.fx.on .cx');if(on){var r=on.getBoundingClientRect(),y=Math.round(r.top+r.height/2);
+    [].forEach.call(document.querySelectorAll('.seta'),function(b){b.style.top=y+'px';});}}}
+function mostra(){document.body.classList.toggle('modo-pagina',PK.modo==='pagina');
+  fxs().forEach(function(f,j){f.classList.toggle('on',j===PK.i);f.setAttribute('aria-hidden',PK.modo==='pagina'&&j!==PK.i?'true':'false');});
+  var ind=document.getElementById('pgInd');if(ind)ind.textContent=(PK.i+1)+'/2';encaixa();}
+function abre(i){PK.modo='pagina';PK.i=i;mostra();window.scrollTo(0,0);}
+function vai(d){if(PK.modo!=='pagina')return;PK.i=(PK.i+d+2)%2;mostra();}
+function geral(){PK.modo='geral';mostra();}
+fxs().forEach(function(f){var i=+f.dataset.i;f.addEventListener('click',function(){if(PK.modo==='geral')abre(i);});
+  f.addEventListener('keydown',function(ev){if(PK.modo==='geral'&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();abre(i);}});});
+document.addEventListener('keydown',function(ev){if(PK.modo!=='pagina')return;if(ev.key==='ArrowRight')vai(1);else if(ev.key==='ArrowLeft')vai(-1);else if(ev.key==='Escape')geral();});
+(function(){var x0=null,y0=0;document.addEventListener('touchstart',function(ev){if(ev.touches.length===1){x0=ev.touches[0].clientX;y0=ev.touches[0].clientY;}else x0=null;},{passive:true});
+  document.addEventListener('touchend',function(ev){if(x0===null||PK.modo!=='pagina')return;var t=ev.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;
+    if(Math.abs(dx)>50&&Math.abs(dx)>1.5*Math.abs(dy))vai(dx<0?1:-1);},{passive:true});})();
+/* bandeira: mesma chave da home (cie3_tr) */
+function pintaTr(){var on=false;try{on=localStorage.getItem('cie3_tr')==='1';}catch(e){}document.body.classList.toggle('show-tr',on);document.getElementById('trBtn').setAttribute('aria-pressed',String(on));}
+function alternaTr(){var on=!document.body.classList.contains('show-tr');try{localStorage.setItem('cie3_tr',on?'1':'0');}catch(e){}pintaTr();}
+pintaTr();
+window.addEventListener('resize',encaixa);window.addEventListener('load',encaixa);mostra();
+</script>
+</body>
+</html>
