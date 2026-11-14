@@ -10,7 +10,7 @@
        o portão desce e abre: incentiva, nunca trava (PREPROMPTS v4). "Leave" também abre.
      · CORRIDA: os rivais são os sólidos e os bichos do gráfico (vistos de costas).
      · PODERES: esferas (rolam), livro largo (plana), cubos (não rolam: param os cilindros), balão.
-   Perguntas: SEMPRE do window.MAT3 em tempo de execução (o banco é revisado à parte). Sem rede.
+   Perguntas: window.MAT3J (MAT3_jogo_perguntas.js: itens curtos do banco + versões curtas do jogo), em tempo de execução. Sem rede.
    ============================================================ */
 window.MATM=(function(){
 'use strict';
@@ -36,7 +36,7 @@ X.figura=function(c,src,x,y,w,h){
   c.save(); c.fillStyle='#fff'; rr(c,x,y,w,h,14); c.fill();
   if(im.complete&&im.naturalWidth){ var k=Math.min((w-16)/im.naturalWidth,(h-16)/im.naturalHeight,2.2), iw=im.naturalWidth*k, ih=im.naturalHeight*k; c.drawImage(im,x+(w-iw)/2,y+(h-ih)/2,iw,ih); }
   c.strokeStyle=cor; c.lineWidth=4; rr(c,x,y,w,h,14); c.stroke(); c.restore(); };
-function preCarrega(){ try{ (window.MAT3&&MAT3.ITENS||[]).forEach(function(it){ if(it.fig) figImg(it.fig); }); }catch(e){} }
+function preCarrega(){ try{ ((window.MAT3J&&MAT3J.ITENS)||(window.MAT3&&MAT3.ITENS)||[]).forEach(function(it){ if(it.fig) figImg(it.fig); }); }catch(e){} }
 
 /* ---------------------------------------------------------- portões de matemática */
 var parse0=X.parse;
@@ -48,7 +48,7 @@ X.parse=function(ch,x,y,L){
   var p={x:x,y:y,w:T,h:n*T,portao:true,aberto:false,anim:0,i:(L.portoes||[]).length,feito:false,visto:false,falando:0};
   L.segs.push(p); (L.portoes=L.portoes||[]).push(p); return true; };
 function escolheItem(f,L){
-  var ja=L.quizIds||(L.quizIds=[]), it0=(window.MAT3&&MAT3.ITENS)||[];
+  var ja=L.quizIds||(L.quizIds=[]), it0=(window.MAT3J&&MAT3J.ITENS)||(window.MAT3&&MAT3.ITENS)||[]; /* Paulo 14/11: só as perguntas curtas do jogo (MAT3_jogo_perguntas.js) */
   var ok=function(it){ return it.tema===f.tema&&!Array.isArray(it.c)&&!it.tabela&&ja.indexOf(it.id)<0; };
   var pool=it0.filter(function(it){ return ok(it)&&it.fig; }); if(!pool.length) pool=it0.filter(ok);
   if(!pool.length) return null; return pool[Math.floor(Math.random()*pool.length)]; } /* o QUIZ.inicia registra o id em L.quizIds */
