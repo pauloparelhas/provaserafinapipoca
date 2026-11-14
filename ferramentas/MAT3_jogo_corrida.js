@@ -143,8 +143,8 @@ var FALAS={
   rampa:['A ramp! Jump!','Uma rampa! Pule!'],
   pit:['PIT STOP! Every lap, every racer stops. Right answer = TURBO!','PIT STOP! A cada volta, todos param. Resposta certa = TURBO!'],
   ponte:['A bridge!','Uma ponte!'],
-  lama:['Eraser crumbs! Watch out!','Farelos de borracha! Cuidado!'],
-  conde:['The Big Eraser! Pass her!','A Grande Borracha! Passe por ela!'],
+  lama:['Pencil chips! Watch out!','Lascas de lápis! Cuidado!'],
+  conde:['Octavio! Pass him!','O Octávio! Passe por ele!'],
   fim:['The finish line! Use your turbos!','A chegada! Use os turbos!']};
 function inicia(f){
   if(!segs.length) montaPista(); instalaCena();
@@ -335,7 +335,7 @@ function eventos(){ var me=R.me, s=segDe(me.z+PLAYER_Z*3), n=Math.floor(me.z/SEG
 /* o Conde: anda na frente e solta poças de tinta do tinteiro (a origem é ele) */
 function dirigeConde(dt){ var C=R.conde, me=R.me, zh=me.z+PLAYER_Z; var vm=VMAX*(C.z>zh+SEG*60?.7:.9); C.v+=(vm-C.v)*Math.min(1,dt*2); C.z+=C.v*dt; C.x+=(Math.sin(R.t*.7)*.6-C.x)*Math.min(1,dt);
   C.tiro-=dt; if(C.tiro<=0&&C.z>zh+SEG*6&&C.z<FIM_SEG*SEG-SEG*60){ C.tiro=2.2; OBJ.poças.push({n:Math.floor(C.z/SEG)-2,x:C.x,nova:.6}); SOM.fx('folha'); }
-  if(!C.passado&&zh>C.z+COMPR){ C.passado=true; fala('You passed the Big Eraser!','Você passou a Grande Borracha!'); G.pontua(150); } }
+  if(!C.passado&&zh>C.z+COMPR){ C.passado=true; fala('You passed Octavio!','Você passou o Octávio!'); G.pontua(150); } }
 function turboFinal(dt){ if(R.fase!=='corre'||R.latas<=0) return; var falta=(FIM_SEG*SEG-R.me.z-PLAYER_Z)/VMAX;
   if(falta<2.6*R.latas+6&&!R.avisoFinal){ R.avisoFinal=true; fala('USE YOUR TURBOS! Press SPACE or ⚡!','USE OS TURBOS! Aperte ESPAÇO ou ⚡!'); } } /* 16/10: o turbo é da criança — nada se usa sozinho */
 function usaTurbo(auto){
@@ -499,7 +499,7 @@ function carrosNoSeg(c,sg,t){
     var arR=r.salto>0?Math.sin((1-r.salto/.8)*PI)*k*70:0; if(arR){ c.fillStyle='rgba(0,0,0,.25)'; A.el(c,sx,sy,k*60,k*12); c.fill(); }
     c.save(); c.translate(sx,sy-arR); c.scale(k,k); CR.desenhaTras(c,r.id,{cor:r.cor,t:t+r.z*.001,inc:cl((r.alvoX-r.x)*2,-1,1),giro:r.giro>0?1-r.giro/1.2:0,turbo:false}); c.restore();
     r.scr={x:sx,y:sy-k*110,k:k};
-    if(k>.25&&k<1.3&&R.fase!=='largada'&&!(Math.abs(sx-W/2)<120&&sy>H-200)){ var nm=r.nome||'Big Eraser'; c.font=F(900,Math.round(11+k*4)); var tw=c.measureText(nm).width+12; c.fillStyle=r.id==='count'?'rgba(76,29,149,.9)':'rgba(13,11,30,.7)'; rr(c,sx-tw/2,sy-k*120-22,tw,18,9); c.fill(); c.fillStyle=r.id==='count'?'#fde68a':'#fff'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(nm,sx,sy-k*120-13); }
+    if(k>.25&&k<1.3&&R.fase!=='largada'&&!(Math.abs(sx-W/2)<120&&sy>H-200)){ var nm=r.nome||'Octavio'; c.font=F(900,Math.round(11+k*4)); var tw=c.measureText(nm).width+12; c.fillStyle=r.id==='count'?'rgba(76,29,149,.9)':'rgba(13,11,30,.7)'; rr(c,sx-tw/2,sy-k*120-22,tw,18,9); c.fill(); c.fillStyle=r.id==='count'?'#fde68a':'#fff'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(nm,sx,sy-k*120-13); }
   });
   /* raios deste segmento (3 = 1 turbo) */
   OBJ.raios.forEach(function(m){ if(!m.vivo||m.n!==sg.i) return; var sc=sg.p1.screen.scale, sx=sg.p1.screen.x+sc*m.x*ROAD*W/2, sy=sg.p1.screen.y, r=Math.max(3,sc*W/2*110), yy=sy-r*(m.alto?4.2:1.6)+Math.sin(t*2.5+m.n)*r*.12;

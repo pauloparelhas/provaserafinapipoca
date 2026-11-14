@@ -154,9 +154,9 @@ function mapaHover(lx,ly){ if(J.estado!=='mapa'||J.mapaAnim) return; var i=noEm(
 
 /* ---------- intro: biblioteca → o livro abre → Conde → herói entra ---------- */
 var CENAS_INTRO=[
-  {en:'Oh no! The Big Eraser erased the numbers at school!', pt:'Ah, não! A Grande Borracha apagou os números da escola!', dur:5},
-  {en:'Mike and Laura want the numbers back. Find the Math Stars!', pt:'Mike e Laura querem os números de volta. Achem as Math Stars!', dur:5},
-  {en:'Measure, add, count, read, share. Let\'s go!', pt:'Medir, somar, contar, ler, repartir. Vamos!', dur:5}
+  {en:'Oh no! Octavio the octopus broke all the pencils at school!', pt:'Ah, não! O polvo Octávio quebrou todos os lápis da escola!', dur:5, voz:'intro_1'},
+  {en:'Nobody can measure or write the sums. Mike and Laura can fix it!', pt:'Ninguém consegue medir nem escrever as contas. Mike e Laura podem consertar!', dur:5, voz:'intro_2'},
+  {en:'Measure, add, count, read, share. Find the Math Stars!', pt:'Medir, somar, contar, ler, repartir. Achem as Math Stars!', dur:5, voz:'intro_3'}
 ];
 function iniciaIntro(){ J.estado='intro'; J.t=0; J.intro={i:0,t:0}; SOM.musica('mapa'); if(window.UI){ UI.modoNivel(false); UI.modoMapa(false); UI.cartaoMapa(null); UI.legenda(CENAS_INTRO[0]); } }
 function atualizaIntro(dt){ J.intro.t+=dt; } /* nunca avança sozinha (Paulo): só Next ▶ ou ENTER */
@@ -164,8 +164,8 @@ function avancaIntro(){ var it=J.intro; if(!it) return; it.i++; it.t=0; if(it.i>
 function fimIntro(){ J.intro=null; if(window.UI) UI.legenda(null); J.prog.introVista=true; G.salva(); if(!J.prog.heroi) iniciaEscolha(); else iniciaCapa(); }
 /* ---------- final: o Conde, o final feliz e a volta à biblioteca (circle story) ---------- */
 var CENAS_FINAL=[
-  {en:'The Big Eraser is tired. "I only wanted to clean!"', pt:'A Grande Borracha cansou. "Eu só queria limpar!"', dur:5, cena:'tinta'},
-  {en:'All the numbers are back on the board!', pt:'Todos os números voltaram para o quadro!', dur:5, cena:'bosque'},
+  {en:'Octavio says: "OK, OK! I will share my 8 pencils!"', pt:'O Octávio diz: "Tá bom, tá bom! Vou repartir meus 8 lápis!"', dur:5, cena:'tinta'},
+  {en:'The pencils are fixed: 8 pencils, 2 equal groups of 4!', pt:'Os lápis foram consertados: 8 lápis, 2 grupos iguais de 4!', dur:5, cena:'bosque'},
   {en:'Thank you, Mike and Laura! You did it!', pt:'Obrigado, Mike e Laura! Vocês conseguiram!', dur:5, cena:'vila'}
 ];
 function iniciaFinal(){

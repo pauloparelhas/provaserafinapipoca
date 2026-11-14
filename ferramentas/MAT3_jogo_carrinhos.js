@@ -28,7 +28,7 @@ var LISTA={
   witch:{nome:'Cube',cor:'#ef4444'}, wolf:{nome:'Pyramid',cor:'#22c55e'}, fairy:{nome:'Cuboid',cor:'#8b5cf6'},
   frog:{nome:'Hamster',cor:'#d97706'}, red:{nome:'Rabbit',cor:'#ec4899'}, pig:{nome:'Cat',cor:'#a8a29e'},
   helmet:{nome:'You',cor:'#2563eb'}, pony:{nome:'You',cor:'#c026d3'}, yellow:{nome:'You',cor:'#eab308'}, fisher:{nome:'You',cor:'#16a34a'},
-  count:{nome:'Big Eraser',cor:'#f9a8d4'}
+  count:{nome:'Octavio',cor:'#873fe0'}
 };
 
 /* rodinhas: traseiras fixas, dianteiras giram com o esterço */
@@ -156,7 +156,7 @@ function cabeca(c,id,o,t){
     case 'knight': c.fillStyle='#cbd5e1'; circ(c,0,-4,16); c.fill(); c.fillStyle='#94a3b8'; c.fillRect(-16,-4,32,4); var w=Math.sin(t*10)*3; c.fillStyle='#dc2626'; c.beginPath(); c.moveTo(0,-20); c.quadraticCurveTo(8+w,-34,-2+w,-40); c.quadraticCurveTo(4,-28,-2,-18); c.fill(); return;
     case 'dragon': c.fillStyle='#ea580c'; circ(c,0,-4,16); c.fill(); c.fillStyle='#fde047'; c.beginPath(); c.moveTo(-10,-14); c.lineTo(-14,-30); c.lineTo(-4,-17); c.fill(); c.beginPath(); c.moveTo(10,-14); c.lineTo(14,-30); c.lineTo(4,-17); c.fill(); for(var k=0;k<3;k++){ c.beginPath(); c.moveTo(-3,-18+k*9); c.lineTo(0,-24+k*9); c.lineTo(3,-18+k*9); c.fill(); } return;
     case 'fairy': cabelo('#fcd34d',false); c.fillStyle='#fcd34d'; circ(c,0,-20,7); c.fill(); var bat=Math.abs(Math.sin(t*14)); c.fillStyle='rgba(224,231,255,.75)'; [-1,1].forEach(function(l){ el(c,l*(22+bat*4),-2,14,22,l*.4); c.fill(); }); A.estrela(c,0,-30,5,'#f0abfc',t); return;
-    case 'count': c.fillStyle='#1c1917'; circ(c,0,-4,15); c.fill(); c.fillStyle='#0b0b0f'; rr(c,-11,-34,22,24,3); c.fill(); el(c,0,-11,20,4); c.fill(); c.fillStyle='#7c3aed'; c.fillRect(-11,-16,22,4); return;
+    case 'count': /* MAT3: a cabeça redonda do Octávio, de costas */ var gh=c.createRadialGradient(-6,-24,4,0,-14,26); gh.addColorStop(0,'#b77aff'); gh.addColorStop(1,'#6325ac'); c.fillStyle=gh; el(c,0,-14,24,26); c.fill(); c.fillStyle='rgba(99,37,172,.7)'; circ(c,-9,-22,4); c.fill(); circ(c,8,-10,3); c.fill(); return;
     case 'lia': cabelo('#8d5530',true); c.fillStyle=o.cor||'#e11d48'; rr(c,-16,10,32,14,4); c.fill(); return;
     case 'theo': cabelo('#2c1a10',false); c.fillStyle='#1d4ed8'; c.beginPath(); c.moveTo(-15,-10); c.lineTo(4,-46); c.lineTo(15,-10); c.closePath(); c.fill(); A.estrela(c,2,-24,4,'#fde047',0); return;
     case 'bia': cabelo('#3d2416',false); c.fillStyle='#3d2416'; circ(c,0,-22,8); c.fill(); c.fillStyle='#ec4899'; el(c,0,-15,8,3); c.fill(); return;
@@ -181,7 +181,7 @@ function corpoTras(c,id,o,t){
     case 'theo': c.fillStyle='#1e3a8a'; rr(c,-50,-60,100,56,6); c.fill(); c.fillStyle='#fffbeb'; c.beginPath(); c.moveTo(-46,-56); c.lineTo(0,-46); c.lineTo(46,-56); c.lineTo(46,-12); c.lineTo(0,-6); c.lineTo(-46,-12); c.closePath(); c.fill(); c.strokeStyle='rgba(120,113,108,.6)'; c.lineWidth=1.5; for(var l2=0;l2<4;l2++){ c.beginPath(); c.moveTo(-40,-48+l2*9); c.lineTo(-6,-42+l2*9); c.moveTo(6,-42+l2*9); c.lineTo(40,-48+l2*9); c.stroke(); } return -54;
     case 'bia': c.fillStyle='#1f2937'; el(c,0,-30,50,26); c.fill(); c.strokeStyle='#cbd5e1'; c.lineWidth=2; for(k=0;k<20;k++){ var a2=k/20*Math.PI*2; c.beginPath(); c.moveTo(Math.cos(a2)*42,-30+Math.sin(a2)*20); c.lineTo(Math.cos(a2)*50,-30+Math.sin(a2)*26); c.stroke(); } c.fillStyle='#38bdf8'; el(c,0,-30,40,19); c.fill(); c.strokeStyle='#ec4899'; c.lineWidth=4; c.beginPath(); for(x=0;x<60;x+=3) c.lineTo(-30+x,-4+Math.sin(x*.2+t*8)*6); c.stroke(); return -50;
     case 'leo': c.fillStyle='#fff'; circ(c,0,-42,40); c.fill(); c.strokeStyle='#111'; c.lineWidth=2; circ(c,0,-42,40); c.stroke(); c.fillStyle='#111'; c.beginPath(); for(i=0;i<5;i++){ var b=i/5*Math.PI*2+t; c.lineTo(Math.cos(b)*12,-42+Math.sin(b)*12); } c.fill(); for(var j2=0;j2<5;j2++){ var b2=j2/5*Math.PI*2+t+.6; circ(c,Math.cos(b2)*32,-42+Math.sin(b2)*32,8); c.fill(); } return -78;
-    case 'count': c.fillStyle='#0f0a2e'; rr(c,-40,-80,80,76,16); c.fill(); c.fillStyle='#312e81'; rr(c,-16,-96,32,20,4); c.fill(); c.fillStyle='rgba(129,140,248,.45)'; el(c,-16,-50,10,22); c.fill(); return -80;
+    case 'count': /* MAT3: Octávio de costas: carrinho roxo e 2 tentáculos com lápis de ponta quebrada */ c.fillStyle=A.lin(c,0,-60,0,-4,'#a66af0','#6325ac'); rr(c,-46,-58,92,54,12); c.fill(); [-1,1].forEach(function(l){ var w=Math.sin(t*2.2+l)*6; c.strokeStyle='#873fe0'; c.lineWidth=9; c.lineCap='round'; c.beginPath(); c.moveTo(l*38,-44); c.quadraticCurveTo(l*62,-60,l*64,-88+w); c.stroke(); c.save(); c.translate(l*64,-88+w); c.fillStyle='#ffc928'; c.fillRect(-5,-22,10,22); c.fillStyle='#d9a16a'; c.beginPath(); c.moveTo(-5,-22); c.lineTo(-2,-29); c.lineTo(1,-24); c.lineTo(5,-30); c.lineTo(5,-22); c.closePath(); c.fill(); c.fillStyle='#353535'; c.beginPath(); c.moveTo(-1.5,-26); c.lineTo(0,-30); c.lineTo(2,-26); c.closePath(); c.fill(); c.restore(); }); return -60;
   }
   c.fillStyle=cor; rr(c,-44,-56,88,52,10); c.fill(); return -56;
 }

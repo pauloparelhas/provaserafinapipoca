@@ -33,7 +33,7 @@ var TAB={
      txt:'Jump, then tap JUMP again in the air. Go up the tower!', txtPt:'Pule e aperte PULAR de novo no ar. Suba a torre!'},
   4:{id:'traje', tiro:'bolha', suporte:'arara', verbo:'Put on!', verboPt:'Vista!', nome:'swimsuit', nomePt:'roupa de banho', placa:'SWIMSUIT',
      tit:'A swimsuit!', titPt:'Uma roupa de banho!',
-     txt:'Tap JUMP to swim up. SPACE blows bubbles at the Crumbs.', txtPt:'Toque PULAR para nadar para cima. ESPAÇO solta bolhas nos Farelos.'},
+     txt:'Tap JUMP to swim up. SPACE blows bubbles at the Chips.', txtPt:'Toque PULAR para nadar para cima. ESPAÇO solta bolhas nas Lascas.'},
   5:{id:'capa', tiro:null, suporte:'cabide', verbo:'Take!', verboPt:'Pegue!', nome:'balloon', nomePt:'balão', placa:'BALLOON',
      tit:'A big balloon!', titPt:'Um balão grande!',
      txt:'Hold JUMP to go up. Let go to float down.', txtPt:'Segure PULAR para subir. Solte para descer devagar.'},

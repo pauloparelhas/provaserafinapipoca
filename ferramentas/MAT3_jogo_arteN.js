@@ -10,7 +10,7 @@
      nuvens  = Chance Sky          : a seta da probabilidade (certain…impossible), a escola, o deserto
      ginasio = Equal Groups Garden : 3 grupos de 5 flores, 4 grupos de 3 botões, 5 saquinhos de 2 cookies
      estadio = Sharing Picnic      : 10 laranjas em 2 pratos iguais, maçãs, cookies
-     tinta   = The Big Eraser      : a sala de aula com o quadro de números meio apagado
+     tinta   = Octavio the Octopus : a sala de aula; as contas do quadro ficaram pela metade (os lápis quebraram)
    Contrato: A.ceu/longe/perto/chao/plataforma/platMovel/platCaindo/tijolo/espinhos/cano/fundoSub,
    A.ceuDoRio, A.mapaLivro, A.MAPA_NOS, A.capaLivro. Sem aleatório por quadro (hash da posição).
    ============================================================ */
@@ -53,7 +53,7 @@ var CEN={
   ginasio:{ceu:['#86d0ff','#d3f0ff','#f3fbff'], chaoTop:'#4ade80', chao:'#7a5a2c', chaoBase:'#523a1a', plat:'#10b981', platTop:'#6ee7b7', part:'', musica:'floresta'},
   pista:{ceu:['#7cc8f5','#c9ecff','#eefaff'], chaoTop:'#6fc04b', chao:'#64748b', chaoBase:'#334155', plat:'#f59e0b', platTop:'#fde68a', part:'', musica:'mapa'},
   estadio:{ceu:['#8fd3ff','#d8f1ff','#fff7e6'], chaoTop:'#65c14a', chao:'#9a6b3a', chaoBase:'#64431f', plat:'#14b8a6', platTop:'#99f6e4', part:'', musica:'floresta'},
-  tinta:{ceu:['#fef3c7','#fde68a','#fcd34d'], chaoTop:'#d6a756', chao:'#a16207', chaoBase:'#713f12', plat:'#f472b6', platTop:'#fbcfe8', part:'', musica:'chefao'}
+  tinta:{ceu:['#fef3c7','#fde68a','#fcd34d'], chaoTop:'#d6a756', chao:'#a16207', chaoBase:'#713f12', plat:'#f59e0b', platTop:'#ffc928', part:'', musica:'chefao'}
 };
 Object.keys(CEN).forEach(function(k){ var o=A.CENAS[k]||(A.CENAS[k]={}); Object.keys(CEN[k]).forEach(function(q){ if(q==='musica'&&o.musica) return; o[q]=CEN[k][q]; }); });
 var MEUS=CEN;
@@ -85,11 +85,11 @@ var LONGE={
     [0,1,2,3].forEach(function(g){ var cx=560+g*96, cy=350; circ(c,cx,cy,38); fs(c,'rgba(255,255,255,.6)','#2563eb',2.4); botaoD(c,cx,cy-14,11); botaoD(c,cx-14,cy+10,11); botaoD(c,cx+14,cy+10,11); }); }); },
   pista:function(c,cam,t){ faixa(c,cam,function(){ c.fillStyle='#b8e0b0'; c.fillRect(0,400,W,70); }); },
   estadio:function(c,cam,t){ faixa(c,cam,function(){ c.fillStyle='#c6efc4'; c.fillRect(0,395,W,75); [[160,140],[520,180],[820,120]].forEach(function(p){ arvore(c,p[0],440,p[1],'#8fd18a'); for(var i=0;i<4;i++) laranja(c,p[0]-20+i*13,440-p[1]*.6+(i%2)*14,6); }); }); },
-  tinta:function(c,cam,t){ /* o quadro da sala, com os números que a Borracha apagou pela metade */ c.save(); rr(c,90,70,780,300,14); fs(c,'#1f5135','#7c4a1e',12);
+  tinta:function(c,cam,t){ /* o quadro da sala: as contas pela metade, porque o Octávio quebrou os lápis */ c.save(); rr(c,90,70,780,300,14); fs(c,'#1f5135','#7c4a1e',12);
     var fr=['4 × 3 = 12','10 ÷ 2 = 5','6 + 6 + 4 + 4 = 20','cube: 6 faces'], k=(Math.sin(t*.7)+1)/2;
     /* durante a pergunta o quadro fica sem as contas: "6 + 6 + 4 + 4 = 20" aparecia atrás da pergunta do perímetro (revisor-sentido r2) */
     if(!(window.JOGO&&JOGO.J&&JOGO.J.quiz)) fr.forEach(function(s,i){ c.globalAlpha=i%2?.35+.25*k:.95; txt(c,s,260+(i%2)*400,150+Math.floor(i/2)*110,34,'#f8fafc',800); }); c.globalAlpha=1;
-    c.fillStyle='rgba(249,168,212,.55)'; for(var i=0;i<5;i++) el(c,520+i*40,180+(i%2)*16,24,10); c.fill(); c.restore(); }
+    for(var i=0;i<4;i++){ c.save(); c.translate(560+i*70,384); c.rotate(-.12+i*.08); c.fillStyle='#ffc928'; c.fillRect(-26,-5,44,10); c.strokeStyle='#8a5a14'; c.lineWidth=1.4; c.strokeRect(-26,-5,44,10); c.fillStyle='#d9a16a'; c.beginPath(); c.moveTo(18,-5); c.lineTo(24,-6); c.lineTo(21,-1); c.lineTo(26,2); c.lineTo(20,5); c.lineTo(18,5); c.closePath(); c.fill(); c.fillStyle='#353535'; c.fillRect(20,-1.5,4,3); c.restore(); } /* os lápis de ponta quebrada na calha do quadro */ c.restore(); }
 };
 var PERTO={
   vila:function(c,cam,t){ faixa(c,cam,function(){ /* os pares do slide: comprido × curto, largo × estreito, alta × baixa */
@@ -124,7 +124,7 @@ var BLOCO={
   nuvens:function(c,s){ rr(c,s.x,s.y,s.w,s.h,10); fs(c,lin(c,0,s.y,0,s.y+s.h,'#fbcfe8','#ec4899'),'#831843',2); },
   ginasio:function(c,s){ rr(c,s.x,s.y,s.w,s.h,8); fs(c,lin(c,0,s.y,0,s.y+s.h,'#4ade80','#15803d'),'#14532d',2); for(var x=s.x+22;x<s.x+s.w-10;x+=45) for(var y=s.y+22;y<s.y+s.h-10;y+=45) flor(c,x,y,5); },
   estadio:function(c,s){ for(var y=s.y;y<s.y+s.h;y+=45) for(var x=s.x;x<s.x+s.w;x+=45){ rr(c,x+1,y+1,43,43,4); fs(c,'#d6a756','#7c4a1e',1.6); c.strokeStyle='rgba(124,74,30,.5)'; c.lineWidth=1.4; c.beginPath(); c.moveTo(x+4,y+15); c.lineTo(x+41,y+15); c.moveTo(x+4,y+30); c.lineTo(x+41,y+30); c.stroke(); if(hs(x+y)>.6) laranja(c,x+22,y+8,7); } },
-  tinta:function(c,s){ rr(c,s.x,s.y,s.w,s.h,6); fs(c,lin(c,0,s.y,0,s.y+s.h,'#fbcfe8','#f472b6'),'#831843',2); c.fillStyle='rgba(37,99,235,.85)'; c.fillRect(s.x+2,s.y+s.h*.55,s.w-4,s.h*.45-2); },
+  tinta:function(c,s){ rr(c,s.x,s.y,s.w,s.h,6); fs(c,lin(c,0,s.y,0,s.y+s.h,'#ffe08a','#f5b81c'),'#8a5a14',2); c.fillStyle='rgba(224,168,0,.75)'; c.fillRect(s.x+2,s.y+s.h*.32,s.w-4,3); c.fillRect(s.x+2,s.y+s.h*.66,s.w-4,3); }, /* Octávio: o bloco é um LÁPIS deitado (amarelo, com as faces), não mais a borracha rosa e azul */
   pista:function(c,s){ chaoPadrao(c,s,CEN.pista); }
 };
 var PLAT={
@@ -135,7 +135,7 @@ var PLAT={
   nuvens:function(c,p){ rr(c,p.x,p.y,p.w,p.h,9); fs(c,'#fff','#94a3b8',2); },
   ginasio:function(c,p){ rr(c,p.x,p.y,p.w,p.h,9); fs(c,'#86efac','#14532d',2); for(var x=p.x+14;x<p.x+p.w-6;x+=30) botaoD(c,x,p.y+9,6); },
   estadio:function(c,p){ rr(c,p.x,p.y,p.w,p.h,4); fs(c,'#99f6e4','#115e59',2); },
-  tinta:function(c,p){ rr(c,p.x,p.y,p.w,p.h,5); fs(c,'#fbcfe8','#831843',2); },
+  tinta:function(c,p){ rr(c,p.x,p.y,p.w,p.h,5); fs(c,'#ffc928','#8a5a14',2); },
   pista:function(c,p){ rr(c,p.x,p.y,p.w,p.h,5); fs(c,'#fde68a','#92400e',2); }
 };
 function sub(cena){ return /^sub_/.test(cena||''); }
@@ -167,7 +167,7 @@ var ICONE=[
   function(c){ botaoD(c,-10,-6,9); botaoD(c,10,-6,9); botaoD(c,0,10,9); },
   function(c){ c.fillStyle='#1f2937'; c.fillRect(-2,-20,4,40); for(var i=0;i<4;i++) for(var j=0;j<3;j++){ c.fillStyle=(i+j)%2?'#fff':'#1f2937'; c.fillRect(2+i*6,-20+j*6,6,6); } },
   function(c){ prato(c,0,6,22); laranja(c,-8,2,7); laranja(c,8,2,7); },
-  function(c){ rr(c,-16,-18,32,34,6); fs(c,'#f9a8d4','#831843',2); c.fillStyle='#2563eb'; c.fillRect(-15,2,30,13); }
+  function(c){ /* o Octávio, mini */ c.strokeStyle='#6325ac'; c.lineWidth=4; c.lineCap='round'; [-1,1].forEach(function(l){ [0,1].forEach(function(k){ c.beginPath(); c.moveTo(l*6,4); c.quadraticCurveTo(l*(14+k*4),8+k*6,l*(20+k*2),k?16:2); c.stroke(); c.fillStyle='#ffc928'; c.fillRect(l*(20+k*2)-2,(k?16:2)-6,4,6); }); }); circ(c,0,-6,13); fs(c,'#873fe0','#3b1470',1.6); c.fillStyle='#fff'; circ(c,-5,-7,4); c.fill(); circ(c,5,-7,4); c.fill(); c.fillStyle='#282039'; circ(c,-4,-6,2); c.fill(); circ(c,6,-6,2); c.fill(); }
 ];
 A.mapaLivro=function(c,t){ t=t||0; c.fillStyle='#fefcf3'; c.fillRect(0,0,W,H); c.strokeStyle='rgba(59,130,246,.22)'; c.lineWidth=1; for(var y=40;y<H;y+=30){ c.beginPath(); c.moveTo(0,y); c.lineTo(W,y); c.stroke(); } c.strokeStyle='rgba(239,68,68,.35)'; c.lineWidth=2; c.beginPath(); c.moveTo(48,0); c.lineTo(48,H); c.stroke();
   c.save(); c.setLineDash([10,9]); c.strokeStyle='#f59e0b'; c.lineWidth=5; c.beginPath(); A.PARADAS_MAPA.forEach(function(p,i){ if(i) c.lineTo(p[0],p[1]); else c.moveTo(p[0],p[1]); }); c.stroke(); c.restore();
@@ -179,5 +179,5 @@ A.capaLivro=function(c,t,sel){ t=t||0; ceuG(c,'#8fd3ff','#d8f1ff','#f1fbff'); nu
   txt(c,'Mike and Laura',W/2,166,30,'#1e3a8a');
   if(A.MAT_MOR){ [['cubo',140,430],['esfera',250,436],['cone',710,432],['cilindro',820,434]].forEach(function(q,i){ A.morador(c,q[0],q[1],q[2],t+i,i<2?1:-1,false); }); }
   if(A.heroi){ A.heroi(c,400,436,'cheer',t,1,1.35,'yellow'); A.heroi(c,560,436,'cheer',t+.5,-1,1.35,'pony'); }
-  if(A.conde){ c.save(); c.globalAlpha=.9; A.conde(c,880,300,'laugh',t); c.restore(); } };
+  if(A.conde){ c.save(); c.translate(850,318); c.scale(.8,.8); A.conde(c,0,0,'laugh',t); c.restore(); } }; /* o Octávio é mais largo que a Borracha: entra inteiro na capa */
 })();

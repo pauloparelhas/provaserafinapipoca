@@ -31,11 +31,11 @@ var LISTA=[
    resumo:'Race! Answer at the pit stop.', resumo_pt:'Corrida! Responda no pit stop.'},
   {id:8, nome:'Sharing Picnic', nome_pt:'O Piquenique da Divisão', cena:'estadio', tema:'division', moradores:['amigo','amigo','amigo'],
    resumo:'Share equally: 10 ÷ 2 = 5.', resumo_pt:'Repartir igualmente: 10 ÷ 2 = 5.'},
-  {id:9, nome:'The Big Eraser!', nome_pt:'A Grande Borracha!', cena:'tinta', tema:'todos', chefao:true, moradores:[],
-   resumo:'Write the numbers back!', resumo_pt:'Escreva os números de volta!'}
+  {id:9, nome:'Octavio the Octopus!', nome_pt:'Octávio, o Polvo!', cena:'tinta', tema:'todos', chefao:true, moradores:[],
+   resumo:'Make equal groups!', resumo_pt:'Faça grupos iguais!'}
 ];
 /* a frase que cada fase devolve (aparece no fim da fase) */
-var FINS={1:['Now we can say long, short, wide and tall!','Agora sabemos dizer comprido, curto, largo e alto!'],2:['Perimeter: we add all the sides!','Perímetro: somamos todos os lados!'],3:['A cube has 6 faces, 12 edges and 8 vertices!','O cubo tem 6 faces, 12 arestas e 8 vértices!'],4:['The tallest bar has the most!','A barra mais alta tem mais!'],5:['Certain, likely, possible, unlikely, impossible!','Certo, provável, possível, improvável, impossível!'],6:['4 groups of 3 buttons are 12 buttons!','4 grupos de 3 botões são 12 botões!'],7:['A sphere and a cylinder can roll!','A esfera e o cilindro podem rolar!'],8:['10 oranges shared into 2 equal groups is 5 in each group!','10 laranjas repartidas em 2 grupos iguais dão 5 em cada grupo!'],9:['All the numbers are back!','Todos os números voltaram!']};
+var FINS={1:['Now we can say long, short, wide and tall!','Agora sabemos dizer comprido, curto, largo e alto!'],2:['Perimeter: we add all the sides!','Perímetro: somamos todos os lados!'],3:['A cube has 6 faces, 12 edges and 8 vertices!','O cubo tem 6 faces, 12 arestas e 8 vértices!'],4:['The tallest bar has the most!','A barra mais alta tem mais!'],5:['Certain, likely, possible, unlikely, impossible!','Certo, provável, possível, improvável, impossível!'],6:['4 groups of 3 buttons are 12 buttons!','4 grupos de 3 botões são 12 botões!'],7:['A sphere and a cylinder can roll!','A esfera e o cilindro podem rolar!'],8:['10 oranges shared into 2 equal groups is 5 in each group!','10 laranjas repartidas em 2 grupos iguais dão 5 em cada grupo!'],9:['The pencils are fixed! Equal groups for everyone!','Os lápis foram consertados! Grupos iguais para todos!']};
 LISTA.forEach(function(f){ if(FINS[f.id]){ f.fim=FINS[f.id][0]; f.fim_pt=FINS[f.id][1]; } });
 var PRONTOS={1:true,2:true,3:true,4:true,5:true,6:true,7:true,8:true,9:true}; /* reinos já construídos (E1: vila e floresta; E2: recife e céu) */
 

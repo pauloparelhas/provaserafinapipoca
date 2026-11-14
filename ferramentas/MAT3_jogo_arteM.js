@@ -2,12 +2,12 @@
    MAT3_jogo_arteM.js — elenco de "Math Stars" (escrito à mão; o fork não toca).
    Carrega DEPOIS de MAT3_jogo_pele.js. Os heróis Mike (chave interna 'yellow') e Laura ('pony')
    vêm do arteA herdado, recoloridos pelo fork (cachos castanhos e camisa vermelha; laço rosa).
-   Aqui: QUEM PERGUNTA (A.morador), a VILÃ (A.conde = a Grande Borracha) e os PERIGOS.
+   Aqui: QUEM PERGUNTA (A.morador), o VILÃO (A.conde = OCTÁVIO, the broken-pencil octopus; 3D em MAT3_jogo_octavio.js) e os PERIGOS.
    Origem no material (fontes/3tri/MATH): lápis (u08 words), quadrado 5 cm (u08 perimeter), os sólidos
    que falam (vídeo faces/edges: cube, cone, sphere, cylinder, pyramid, cuboid), hamster/coelho/cão/gato
    (gráfico u05), pinguim ("a penguin in the desert", u05 likely), botão vermelho (u10 multiplication),
-   Mike e Laura (u10 division). A Borracha é a ponta rosa do lápis do slide; os Farelos e as Manchinhas
-   são o que ela deixa. Sem aleatório por quadro, sem pisca (oscilação <= 1,5 Hz), nada assustador.
+   Mike e Laura (u10 division). O Octávio (personagem do Paulo, 14/11) quebra a ponta dos lápis da escola; as Lascas (Chips:
+   pontas de lápis quebradas) e as Manchinhas (Smudges: grafite) são o que ele deixa. Sem aleatório por quadro, sem pisca (oscilação <= 1,5 Hz), nada assustador.
    ============================================================ */
 (function(){
 'use strict';
@@ -79,24 +79,35 @@ A.morador=function(c,tipo,x,y,t,dir,falando){ t=t||0; tipo=VELHO[tipo]||tipo;
 A.MORADORES=Object.keys(MOR).concat(['amigo']);
 A.MAT_MOR=MOR;
 
-/* ---------------- a Grande Borracha ---------------- */
-function borracha(c,estado,t,alt){ var s=alt/150, sd=estado==='sad'||estado==='hit', ri=estado==='laugh', bal=Math.sin(t*1.3)*.04;
-  c.save(); c.scale(s,s); c.rotate(bal); sombra(c,60);
-  /* bracinhos */ var bw=Math.sin(t*2)*8; c.strokeStyle='#831843'; c.lineWidth=7; c.lineCap='round'; c.beginPath(); c.moveTo(-52,-78); c.lineTo(-84,-60-bw); c.moveTo(52,-78); c.lineTo(84,-96+bw); c.stroke(); c.fillStyle='#f9a8d4'; circ(c,-86,-58-bw,9); c.fill(); circ(c,86,-98+bw,9); c.fill();
-  /* pernas */ c.strokeStyle='#1f2937'; c.lineWidth=7; c.beginPath(); c.moveTo(-22,-10); c.lineTo(-24,0); c.moveTo(22,-10); c.lineTo(24,0); c.stroke(); c.fillStyle='#1f2937'; el(c,-28,0,11,5); c.fill(); el(c,28,0,11,5); c.fill();
-  /* bloco: metade rosa, metade azul, com a capinha de papel */
-  rr(c,-56,-150,112,142,16); fs(c,lin(c,0,-150,0,-8,'#fbcfe8','#f472b6'),'#831843',3.4);
-  c.save(); rr(c,-56,-150,112,142,16); c.clip(); c.fillStyle=lin(c,0,-70,0,-8,'#93c5fd','#2563eb'); c.fillRect(-56,-60,112,60);
-  c.fillStyle='rgba(255,255,255,.92)'; c.fillRect(-56,-104,112,36); c.fillStyle='#2563eb'; c.font='900 15px "Nunito",Arial'; c.textAlign='center'; c.textBaseline='middle'; var mt=c.getTransform?c.getTransform():null; if(mt&&mt.a<0){ c.save(); c.translate(0,-86); c.scale(-1,1); c.fillText(ri?'HA HA':'ERASER',0,0); c.restore(); } else c.fillText(ri?'HA HA':'ERASER',0,-86); /* jogador D5: o rótulo nunca sai espelhado quando o chefão vira */ c.restore();
-  rr(c,-56,-150,112,142,16); c.strokeStyle='#831843'; c.lineWidth=3.4; c.stroke();
-  /* rosto */ olhos(c,0,-126,16,8,t); c.strokeStyle='#831843'; c.lineWidth=3.4; c.beginPath(); if(sd){ c.moveTo(-26,-142); c.lineTo(-8,-138); c.moveTo(26,-142); c.lineTo(8,-138); } else { c.moveTo(-26,-138); c.lineTo(-8,-142); c.moveTo(26,-138); c.lineTo(8,-142); } c.stroke();
-  c.strokeStyle='#1f2937'; c.lineWidth=3; c.beginPath(); if(sd) c.arc(0,-104,10,1.15*PI,1.85*PI); else c.arc(0,-116,12,.15*PI,.85*PI); c.stroke();
-  if(estado==='hit'){ c.fillStyle='#fde047'; [[-70,-150],[70,-160],[0,-178]].forEach(function(p){ c.beginPath(); for(var i=0;i<10;i++){ var a=i*PI/5, r=i%2?5:11; c.lineTo(p[0]+Math.cos(a)*r,p[1]+Math.sin(a)*r); } c.closePath(); c.fill(); }); }
-  /* farelinhos que caem (posição fixa, só balançam) */ c.fillStyle='#f472b6'; [[-40,-2],[38,-4],[-8,-1]].forEach(function(p,i){ el(c,p[0],p[1]+Math.sin(t*1.2+i)*1.5,5,3); c.fill(); });
+/* ---------------- o vilão: OCTÁVIO, the broken-pencil octopus ---------------- */
+/* 3D: window.OCTAVIO (MAT3_jogo_octavio.js, módulo ES com three.js local) pré-renderiza uma folha de quadros por estado;
+   aqui o quadro do momento é desenhado com drawImage no lugar da antiga Borracha (âncora = os pés, em (0,0)).
+   Sem WebGL / antes de o módulo carregar: o mesmo polvo em 2D (cabeça roxa, rosto, 8 tentáculos, 8 lápis de ponta quebrada). */
+var OCT_FY=.87, OCT_FX=.485; /* onde caem os "pés" do modelo dentro do quadro (frações, medidas na vitrine) */
+function lapisQ(c,x,y,ang,s){ c.save(); c.translate(x,y); c.rotate(ang); c.scale(s,s);
+  rr(c,-5,-24,10,24,1.5); fs(c,'#ffc928','#8a5a14',1.4); c.fillStyle='#e0a800'; c.fillRect(-5,-17,10,2);
+  c.beginPath(); c.moveTo(-5,-24); c.lineTo(-4,-30); c.lineTo(-2,-26); c.lineTo(0,-31); c.lineTo(2,-26); c.lineTo(4,-30); c.lineTo(5,-24); c.closePath(); fs(c,'#d9a16a','#8a5a14',1.2);
+  c.fillStyle='#353535'; c.beginPath(); c.moveTo(-2,-26); c.lineTo(-1,-30); c.lineTo(1,-28); c.lineTo(2,-26); c.closePath(); c.fill(); c.restore(); }
+function octavio2D(c,estado,t,alt){ var s=alt/160, sd=estado==='sad'||estado==='hit', ri=estado==='laugh', bob=Math.sin(t*2.2)*2;
+  c.save(); c.scale(s,s); sombra(c,70); c.translate(0,bob);
+  var PONTA=[152,182,210,238,302,330,358,28];
+  PONTA.forEach(function(g,i){ var a=g*PI/180, L=92, ox=0, oy=-58, tx=ox+Math.cos(a)*L, ty=oy-Math.sin(a)*L*.85, w=Math.sin(t*2+i*.8)*4+(estado==='hit'?Math.sin(t*15+i)*1.5:0); /* treme só no hit, ~2,4 Hz */
+    c.strokeStyle='#6325ac'; c.lineWidth=13; c.lineCap='round'; c.beginPath(); c.moveTo(ox*.3,-70); c.quadraticCurveTo((ox+tx)/2+(i<4?-10:10),(oy+ty)/2+14+w,tx,ty+w); c.stroke();
+    c.strokeStyle='#873fe0'; c.lineWidth=9; c.stroke(); lapisQ(c,tx,ty+w,Math.atan2(ty-oy,tx-ox)+PI/2,1); });
+  circ(c,0,-108,54); fs(c,(function(){ var g=c.createRadialGradient(-18,-130,8,0,-108,58); g.addColorStop(0,'#b77aff'); g.addColorStop(1,'#6325ac'); return g; })(),'#3b1470',2.6);
+  c.fillStyle='rgba(99,37,172,.8)'; circ(c,-26,-142,8); c.fill(); circ(c,24,-148,6); c.fill();
+  olhos(c,0,-112,19,sd&&estado==='hit'?6:11,t); c.strokeStyle='#3b1470'; c.lineWidth=4; c.beginPath(); if(sd){ c.moveTo(-30,-132); c.lineTo(-10,-128); c.moveTo(30,-132); c.lineTo(10,-128); } else { c.moveTo(-30,-130); c.lineTo(-10,-136); c.moveTo(28,-132); c.lineTo(10,-132); } c.stroke();
+  if(sd){ c.strokeStyle='#4a1030'; c.lineWidth=3.4; c.beginPath(); c.arc(0,-76,12,1.15*PI,1.85*PI); c.stroke(); }
+  else { c.beginPath(); c.moveTo(-20,-92); c.quadraticCurveTo(0,-88,20,-92); c.quadraticCurveTo(16,ri?-70:-76,0,ri?-68:-75); c.quadraticCurveTo(-16,ri?-70:-76,-20,-92); fs(c,'#4a1030','#4a1030',1); c.fillStyle='#f472b6'; el(c,0,ri?-74:-79,7,4); c.fill(); }
   c.restore(); }
-A.conde=function(c,x,y,estado,t){ t=t||0; c.save(); c.translate(x,y); c.lineJoin='round'; c.lineCap='round'; borracha(c,estado||'idle',t,156); c.restore(); };
+function octavio(c,estado,t,alt){ var O=window.OCTAVIO, D=alt*1.56;
+  if(!(O&&O.pronto&&O.desenha)){ octavio2D(c,estado,t,alt); return; }
+  var dx=0; try{ var m=c.getTransform(), sx=Math.abs(m.a)||1, cx=m.e, w=c.canvas.width, meia=D*.5*sx+10, pass=0; /* os 8 tentáculos sempre inteiros na tela (o chefão fica na beirada) */
+    if(cx+meia>w) pass=cx+meia-w; else if(cx-meia<0) pass=cx-meia; if(pass) dx=-pass/(m.a||1); }catch(e){}
+  sombra(c,alt*.42); if(!O.desenha(c,estado||'idle',t||0,dx-D*OCT_FX,-D*OCT_FY,D,D)) octavio2D(c,estado,t,alt); }
+A.conde=function(c,x,y,estado,t){ t=t||0; c.save(); c.translate(x,y); c.lineJoin='round'; c.lineCap='round'; octavio(c,estado||'idle',t,160); c.restore(); };
 A.tracona=function(c,x,y,t,hp,max2){ t=t||0; max2=max2||3; hp=hp==null?max2:hp; c.save(); c.translate(x,y); c.lineJoin='round'; c.lineCap='round';
-  borracha(c,hp<=1&&hp<max2?'hit':'idle',t,98); for(var h=0;h<max2;h++){ var hx=(h-(max2-1)/2)*14; circ(c,hx,-118,5); fs(c,h<hp?'#f472b6':'rgba(255,255,255,.3)','#334155',1.2); } c.restore(); };
+  octavio(c,hp<=1&&hp<max2?'hit':'idle',t,100); for(var h=0;h<max2;h++){ var hx=(h-(max2-1)/2)*16; circ(c,hx,-150,6); fs(c,h<hp?'#fde047':'rgba(255,255,255,.35)','#1f2937',1.6); } /* jogador D2: vida em amarelo, acima da cabeça */ c.restore(); };
 
 /* ---------------- perigos (mesmas chaves do motor) ---------------- */
 var INI=A.INIMIGOS_CIE||{};
@@ -106,15 +117,19 @@ function bravo(c,x,y,r,w){ olhos(c,x+w/2,y,w/2,r,0); c.strokeStyle='#1f2937'; c.
 INI.gust=function(c,x,y,t,dir,ach){ ini(c,x,y,dir,function(){ var b=Math.sin(t*2.4)*3; c.save(); c.globalAlpha=.14; c.fillStyle='#000'; el(c,0,1,16,3); c.fill(); c.restore(); c.translate(0,-28+b); if(ach) c.scale(1.1,.45);
   c.beginPath(); for(var i=0;i<=16;i++){ var a=i/16*TAU, r=17+Math.sin(a*5+t*1.2)*3; c.lineTo(Math.cos(a)*r,Math.sin(a)*r*.85); } c.closePath(); fs(c,'#94a3b8','#334155',2);
   c.strokeStyle='rgba(51,65,85,.55)'; c.lineWidth=1.6; c.beginPath(); c.moveTo(-12,8); c.quadraticCurveTo(-4,-10,4,6); c.quadraticCurveTo(10,-8,14,4); c.stroke(); bravo(c,-8,-4,3.8,14); }); };
-/* Farelo: montinho de farelo rosa de borracha (no lugar da poça) */
+/* Lasca (Chips): montinho de pontas de lápis quebradas, com carinha (no lugar da poça) */
 INI.puddle=function(c,x,y,t,dir,ach){ ini(c,x,y,dir,function(){ var w=Math.sin(t*2.6), sq=ach?.35:1; c.save(); c.scale(1,sq);
-  [[-16,-8,10],[0,-14,13],[16,-8,10],[-8,-3,8],[9,-3,8]].forEach(function(p,i){ el(c,p[0],p[1]+(i%2?w:-w),p[2],p[2]*.8); fs(c,i%2?'#f9a8d4':'#f472b6','#9d174d',1.6); }); c.restore();
-  if(!ach){ bravo(c,-8,-15,3.8,14); c.strokeStyle='#831843'; c.lineWidth=1.5; c.beginPath(); c.arc(-1,-7,3,.15*PI,.85*PI); c.stroke(); } }); };
+  [[-15,-4,-.5],[15,-4,.5],[0,-10,0]].forEach(function(p,i){ c.save(); c.translate(p[0],p[1]+(i%2?w:-w)); c.rotate(p[2]);
+    c.beginPath(); c.moveTo(-9,6); c.lineTo(9,6); c.lineTo(3,-14); c.lineTo(-3,-14); c.closePath(); fs(c,'#d9a16a','#8a5a14',1.5); /* a madeira da ponta */
+    c.beginPath(); c.moveTo(-3,-14); c.lineTo(3,-14); c.lineTo(0,-22); c.closePath(); fs(c,'#353535','#1f1f1f',1); /* o grafite */
+    c.fillStyle='#ffc928'; c.beginPath(); c.moveTo(-9,6); c.lineTo(-6,10); c.lineTo(-2,6); c.lineTo(2,11); c.lineTo(6,6); c.lineTo(9,10); c.lineTo(9,6); c.closePath(); c.fill(); c.strokeStyle='#8a5a14'; c.lineWidth=1.2; c.stroke(); /* a quebra, em zigue-zague */
+    c.restore(); }); c.restore();
+  if(!ach){ bravo(c,-7,-11,3.4,14); c.strokeStyle='#5b3714'; c.lineWidth=1.5; c.beginPath(); c.arc(0,-3,3,.15*PI,.85*PI); c.stroke(); } }); };
 /* cilindro que ROLA (superfície curva) */
 INI.can=function(c,x,y,t,dir,ach){ ini(c,x,y,dir,function(){ sombra(c,22); c.translate(0,-17); if(ach) c.scale(1.1,.55); circ(c,0,0,17); fs(c,'#f472b6','#831843',2.2); circ(c,0,0,10.5); fs(c,'#fbcfe8','#831843',1.4); c.save(); c.rotate(t*3); c.strokeStyle='#831843'; c.lineWidth=2; c.beginPath(); c.moveTo(-9,0); c.lineTo(9,0); c.stroke(); c.restore(); bravo(c,-7,-3,3,10); }); };
 /* esfera que ROLA */
 INI.ball=function(c,x,y,t,dir,ach){ ini(c,x,y,dir,function(){ sombra(c,19); c.translate(0,-18); if(ach) c.scale(1.12,.6); circ(c,0,0,18); var g=c.createRadialGradient(-6,-6,2,0,0,18); g.addColorStop(0,'#e0f2fe'); g.addColorStop(1,'#0284c7'); fs(c,g,'#0c4a6e',2); bravo(c,-6,-3,4,12); c.strokeStyle='#0c4a6e'; c.lineWidth=1.4; c.beginPath(); c.arc(0,6,3.2,.15*PI,.85*PI); c.stroke(); }); };
-/* cone (o escudo da Borracha: derrube os cones) */
+/* cone (o escudo do Octávio: derrube os cones) */
 INI.top=function(c,x,y,t,dir,ach){ ini(c,x,y,dir,function(){ var a=Math.sin(t*1.4)*.06; c.rotate(a); if(ach) c.scale(1.05,.6); c.beginPath(); c.moveTo(0,-46); c.lineTo(20,-4); c.lineTo(-20,-4); c.closePath(); fs(c,lin(c,-20,0,20,0,'#fde68a','#f59e0b'),'#92400e',2); el(c,0,-4,20,5); fs(c,'#fbbf24','#92400e',1.6); bravo(c,-6,-22,3.4,12); }); };
 A.bolaRolando=function(c,b,t){ c.save(); c.translate(b.x,b.y+(b.r||18)); var s=(b.r||18)/18; c.scale(s,s); INI.ball(c,0,0,t||0,b.vx<0?-1:1); c.restore(); };
 A.piao=function(c,e,t){ INI.top(c,e.x,e.y,t||0,e.dir||1,e.achatado); };

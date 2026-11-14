@@ -56,9 +56,9 @@ function quizBotoes(on){ $('quizBtns').classList.toggle('show',!!on); }
 function modoCorrida(on){ document.body.classList.toggle('corrida',!!on); $('tJump').innerHTML=on?'&#9650;':'JUMP'; }
 
 /* ---------- legenda da intro ---------- */
-function legenda(cena,acoes){ var d=$('legenda'); if(!cena){ d.classList.remove('show'); return; } d.innerHTML='<p>'+bi(cena.en,cena.pt)+'</p><div class="lgrow"><button class="mini" id="lgPula">Skip</button><button class="lgnext" id="lgNext">'+(cena.botao||'Next ▶')+'</button></div>'; d.classList.add('show');
+function legenda(cena,acoes){ var d=$('legenda'); if(!cena){ if(window.MAT3VOZ) MAT3VOZ.para(); d.classList.remove('show'); return; } d.innerHTML='<p>'+bi(cena.en,cena.pt)+'</p><div class="lgrow"><button class="mini" id="lgPula">Skip</button><button class="lgnext" id="lgNext">'+(cena.botao||'Next ▶')+'</button></div>'; d.classList.add('show');
   $('lgPula').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); if(acoes&&acoes.pula){ acoes.pula(); return; } if(JOGO.J.estado==='final') JOGO.pulaFinal(); else JOGO.pulaIntro(); });
-  $('lgNext').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); SOM.fx('clique'); if(acoes&&acoes.next){ acoes.next(); return; } JOGO.confirmar(); }); try{ say(cena.en); }catch(e){} }
+  $('lgNext').addEventListener('click',function(e){ e.stopPropagation(); SOM.init(); SOM.fx('clique'); if(acoes&&acoes.next){ acoes.next(); return; } JOGO.confirmar(); }); if(window.MAT3VOZ) MAT3VOZ.liga(d,cena); if(!(window.MAT3VOZ&&MAT3VOZ.fala(cena))){ try{ say(cena.en); }catch(e){} } }
 
 /* ---------- escolha do herói ---------- */
 var HEROIS=[{k:'yellow',en:'Mike',pt:'Mike'},{k:'pony',en:'Laura',pt:'Laura'}]; /* MAT3: as duas crianças do slide de divisão */
@@ -138,7 +138,7 @@ function historia(){
   menu(h,{mOk:fechaMenu, mVer:function(){ fechaMenu(); modoMapa(false); cartaoMapa(null); JOGO.iniciaIntro(); }});
 }
 function creditos(){
-  var P=JOGO.J.prog, h='<h2>'+bi('The End','Fim')+'</h2><p>'+bi('You did it! All the numbers are back.','Vocês conseguiram! Todos os números voltaram.')+'</p><div class="lista">';
+  var P=JOGO.J.prog, h='<h2>'+bi('The End','Fim')+'</h2><p>'+bi('You did it! The pencils are fixed.','Vocês conseguiram! Os lápis foram consertados.')+'</p><div class="lista">';
   FASES.LISTA.forEach(function(f){ var p=P.fases[f.id]||{}; h+='<div><span>'+esc(f.nome)+'</span><span class="st">'+'★'.repeat(p.estrelas||0)+'</span></div>'; });
   h+='</div><button class="mbtn pri" id="mMapa">'+bi('Back to the map','Voltar ao mapa')+'</button>';
   menu(h,{mMapa:function(){ fechaMenu(); JOGO.irMapa(); }},'festa');

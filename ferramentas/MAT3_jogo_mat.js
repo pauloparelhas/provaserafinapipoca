@@ -141,13 +141,13 @@ X.pipaNoHeroi=function(c,u,s,t){ var hh=88*s; c.save(); c.strokeStyle='#475569';
 X.pipa=function(c,t){ balao(c,0,-120,1,t); };
 X.lata=function(c,b){ cilindro(c,b.x,b.y,b.r,b.rot); };
 X.caixaLatas=function(c,x,y,tr){ c.save(); c.translate(x,y); rr(c,-14,-36,62,36,4); fs(c,'#a16207','#78350f',3); [[0,-50],[28,-50],[14+tr,-72]].forEach(function(p){ cilindro(c,p[0],p[1],11,0); }); c.restore(); };
-X.nuvemChuva=function(c,x0,x1,y,t){ var cx=(x0+x1)/2; c.save(); c.translate(cx,y-10); rr(c,-46,-22,92,40,10); fs(c,'#f9a8d4','#831843',2.4); c.fillStyle='#60a5fa'; rr(c,-46,2,92,16,6); c.fill(); c.fillStyle='#831843'; circ(c,-12,-6,3); c.fill(); circ(c,12,-6,3); c.fill(); c.strokeStyle='#831843'; c.lineWidth=2; c.beginPath(); c.arc(0,4,6,1.15*PI,1.85*PI); c.stroke(); c.restore(); };
+X.nuvemChuva=function(c,x0,x1,y,t){ var cx=(x0+x1)/2; c.save(); c.translate(cx,y-10); /* Octávio (14/11): a nuvem que ronca é uma MANCHA de grafite (Smudge), não mais uma borrachinha */ c.beginPath(); for(var i=0;i<=18;i++){ var a=i/18*TAU, r=1+Math.sin(a*6+t*1.2)*.07; c.lineTo(Math.cos(a)*48*r,Math.sin(a)*24*r); } c.closePath(); fs(c,'#9ca3af','#374151',2.4); c.strokeStyle='rgba(55,65,81,.55)'; c.lineWidth=2; c.beginPath(); c.moveTo(-30,10); c.quadraticCurveTo(-14,-12,0,8); c.quadraticCurveTo(14,-12,30,8); c.stroke(); c.fillStyle='#1f2937'; circ(c,-12,-6,3); c.fill(); circ(c,12,-6,3); c.fill(); c.strokeStyle='#1f2937'; c.lineWidth=2; c.beginPath(); c.arc(0,4,6,1.15*PI,1.85*PI); c.stroke(); c.restore(); };
 
 /* ---------------------------------------------------------- quem pergunta não disputa o referente com a figura
    (revisor-sentido, rodada 2): um cone falante não pergunta "What is the name of this solid?" ao lado de um cilindro,
    e o quadrado "5 cm" não pergunta o perímetro de um quadrado de 3 cm. Sólido: quem pergunta é o próprio sólido da
    figura (sem figura, o lápis). Perímetro: o lápis (o que mede). Gráfico: um bicho que não está na pergunta nem nas
-   alternativas (o cão não pergunta "Which animal has the most? Dogs…"). A Borracha (chefão) continua sendo ela. */
+   alternativas (o cão não pergunta "Which animal has the most? Dogs…"). O Octávio (chefão) continua sendo ele. */
 var SOLMOR={cube:'cubo',cuboid:'cuboide',pyramid:'piramide',cylinder:'cilindro',cone:'cone',sphere:'esfera'};
 var BICHO={hamster:'hamster',coelho:'rabbit',cao:'dog',gato:'cat'};
 function quemPergunta(q){ var it=q&&q.item, m=q&&q.m; if(!it||!m) return null;
@@ -180,7 +180,7 @@ function aparelhosJardim(c,M,t){
   (M.saltos||[]).forEach(function(s){ var sq=s.t>0?.6:1; c.save(); c.translate(s.x+s.w/2,s.y+s.h); c.scale(1,sq); botaoG(c,0,-14,24); c.restore(); });
   return true; }
 if(window.MAT3P&&MAT3P.aparelhos){ var ap0=MAT3P.aparelhos; MAT3P.aparelhos=function(c,M,t){ if(M&&M.cena==='ginasio') return aparelhosJardim(c,M,t); return ap0(c,M,t); }; }
-/* jogador r2: o 'zagueiro' herdado (jogador de futebol que agacha) vira um FARELO grande de borracha (mesmo comportamento) */
+/* jogador r2: o 'zagueiro' herdado (jogador de futebol que agacha) vira uma LASCA grande de lápis (mesmo comportamento) */
 function farelao(c,e,t){ if(e.tipo!=='zagueiro') return false; var ag=e.est==='agacha', dz=e.est==='desliza'; c.save(); c.translate(e.x,e.y); c.scale(dz?1.9:1.5,ag?1.05:(dz?.8:1.5));
   if(A.INIMIGOS_CIE&&A.INIMIGOS_CIE.puddle) A.INIMIGOS_CIE.puddle(c,0,0,t,e.dir||-1,false); c.restore();
   if(ag){ c.save(); c.fillStyle='#fde047'; c.font='900 22px "Nunito",Arial'; c.textAlign='center'; c.fillText('!',e.x,e.y-44); c.restore(); } return true; }

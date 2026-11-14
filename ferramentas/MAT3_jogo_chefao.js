@@ -76,9 +76,9 @@ var C=null;
 
 /* 18/10 (Paulo: "5 frases grandes, difícil de ler"): 3 telas, frases curtas */
 var ABERTURA=[
-  {en:'Here comes the Big Eraser!', pt:'Lá vem a Grande Borracha!', fx:'trovao'},
-  {en:'"SCRUB, SCRUB! I erase ALL the numbers!"', pt:'"APAGA, APAGA! Eu apago TODOS os números!"', fx:'conde'},
-  {en:'Answer to win stars. Hit the Big Eraser to get the letters!', pt:'Responda para ganhar estrelas. Acerte a Grande Borracha para pegar as letras!', fx:'tinteiros', botao:"Let's go! ▶"}
+  {en:'Here comes Octavio!', pt:'Lá vem o Octávio!', fx:'trovao'},
+  {en:'"SNAP, SNAP! I break ALL the pencils!"', pt:'"CREC, CREC! Eu quebro TODOS os lápis!"', fx:'conde'},
+  {en:'Answer to win stars. Toss ★ to Octavio to get the letters!', pt:'Responda para ganhar estrelas. Jogue ★ no Octávio para pegar as letras!', fx:'tinteiros', botao:"Let's go! ▶"}
 ];
 
 function falaC(en,pt,dur){ if(!C) return; C.fala={en:en,pt:pt,t:0,dur:dur||3.2}; try{ say(en); }catch(e){} }
@@ -156,7 +156,7 @@ function acertaConde(p){
   C.letrasOk=ate; SOM.fx('faisca');
   var ultimo=C.letrasOk>=CORTES[CORTES.length-2]&&C.letrasOk<NLET;
   if(ultimo){ falaC('NO, NO, NO! One more and I lose!','NÃO, NÃO, NÃO! Mais uma e eu perco!',2.6); setTimeout(function(){ if(!C||C.fadaOn||!/^p/.test(C.fase)) return; C.fadaOn=true; C.fadaT=0; C.fadaSai=3; falaF('One more star! You can do it!','Só mais uma estrela! Você consegue!',2.6); },1400); }
-  else { C.nAcertos=(C.nAcertos||0)+1; var r=[['OUCH! I am dizzy!','AI! Estou tonta!'],['Stop that, little star!','Pare com isso, estrelinha!'],['Oh no! My letters!','Ah, não! Minhas letras!']][C.nAcertos%3]; falaC(r[0],r[1],2.2); }
+  else { C.nAcertos=(C.nAcertos||0)+1; var r=[['OUCH! I am dizzy!','AI! Estou tonto!'],['Stop that, little star!','Pare com isso, estrelinha!'],['Oh no! My letters!','Ah, não! Minhas letras!']][C.nAcertos%3]; falaC(r[0],r[1],2.2); }
   if(C.letrasOk>=METAS[C.ronda]){ if(C.ronda>=2) vitoria(); else transicao(C.ronda+2); }
   else if(C.letrasOk===6||C.letrasOk===9||C.letrasOk===11) mudaLado((C.lado||1)>0?-1:1); /* 3 mudanças de lado antes do clímax */
 }
@@ -180,7 +180,7 @@ function quebraEscudo(){ if(!C.escudo) return; C.escudo=false; SOM.fx('quebra');
 function morreu(){ if(!C||C.fase==='abertura'||C.fase==='derrota') return; C.mortes++;
   J.respawn.x=(C.lado<0)?12*T:2*T; /* 16/10 (jogador): renasce LONGE do Conde (do lado esquerdo ele derrama manchas no canto do início) */
   J.mundo.inimigos.forEach(function(e){ if(e.doConde&&!e.morto&&!e.achatado&&Math.abs(e.x-J.respawn.x)<140) e.x+=e.x<J.respawn.x?-140:140; }); /* tira as manchas de cima do ponto de volta */
-  if(C.mortes===4) falaC('HA HA! Is that all, little star?','RÁ RÁ! Só isso, estrelinha?',2.6); C.animaF=1;
+  if(C.mortes===4) falaC('Hee hee! My tentacles are all tangled!','Rí rí! Meus tentáculos deram um nó!',2.6); /* guardião 14/11: o Octávio ri de si, nunca da criança */ C.animaF=1;
   if(C.mortes>=7){ C.mortes=0; C.letrasOk=0; C.ronda=0; C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; });
     J.urso.poderes.estrelas=0; estrelasHUD(); banner('TRY AGAIN!','TENTE DE NOVO!'); comecaFase(1); } }
 function comecaFase(n){
@@ -188,7 +188,7 @@ function comecaFase(n){
   C.letrasOk=Math.min(C.letrasOk,n>1?METAS[n-2]:0);
   if(n===1){ C.lado=1; C.cansado=false; C.muda=null; C.yOff=0; C.alvo=0; C.tinteiros.forEach(function(q){ q.caido=false; }); falaC('My cones make my SHIELD!','Meus cones fazem o meu ESCUDO!'); }
   if(n===2){ C.convertidas=0; C.ondas=0; J.mundo.inimigos=J.mundo.inimigos.filter(function(e){ return !e.doConde; }); falaC('New shield! Smudges, GO!','Escudo novo! Manchinhas, VÃO!'); }
-  if(n===3){ C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); C.nLetra=0; C.tLetra=2.6; if((C.lado||1)<0) mudaLado(1,true); else { C.cansado=true; falaC('Huff… puff… I am TIRED… but I still erase!','Arf… arf… estou CANSADA… mas ainda apago!',3.2); } }
+  if(n===3){ C.blocos=[]; C.alt=C.alt.map(function(){ return 0; }); C.nLetra=0; C.tLetra=2.6; if((C.lado||1)<0) mudaLado(1,true); else { C.cansado=true; falaC('Huff… puff… I am TIRED… but I still snap!','Arf… arf… estou CANSADO… mas ainda quebro!',3.2); } }
   C.fadaDepois=n===1?2.6:3.0; /* a fada chega logo depois da fala do Conde */
 }
 function banner(en,pt){ C.banner={en:en,pt:pt,t:0}; SOM.fx('chefao'); J.shake=6; }
@@ -205,14 +205,14 @@ function vitoria(){ derrota(); C.vitoria={t:0}; try{ say('You are a super player
 function derrota(){
   try{ SOM.tensao(0); }catch(e){}
   C.fase='derrota'; C.t=0; C.estado='sad'; C.gotas=[]; C.letras=[]; C.tiros=[]; SOM.musica(''); SOM.fx('vitoria');
-  falaC('Oh no… you won! The numbers are back!','Ah, não… você venceu! Os números voltaram!',4);
+  falaC('Oh no… you won! The pencils are fixed!','Ah, não… você venceu! Os lápis foram consertados!',4);
 }
 /* a pena do Conde: de onde sai tudo que ele joga */
 function pena(){ return {x:C.x-46*(C.lado||1), y:C.y-170}; }
 /* o Conde vira TINTA e voa para o outro lado da sala (nenhum golpe pega nesse instante) */
 var LADO_X={'1':19.2*T,'-1':3.4*T};
 function mudaLado(novo,cansado){ if(!C||C.muda) return; C.muda={t:0,de:C.x,para:LADO_X[String(novo)],novo:novo,cansado:!!cansado}; C.gotas=[]; C.letras=[]; SOM.fx('cano'); SOM.fx('risada');
-  if(cansado) falaC('Huff… puff… I am TIRED… but I still erase!','Arf… arf… estou CANSADA… mas ainda apago!',3.2);
+  if(cansado) falaC('Huff… puff… I am TIRED… but I still snap!','Arf… arf… estou CANSADO… mas ainda quebro!',3.2);
   else falaC(novo<0?'You can\'t catch me! Over here!':'HA! Now I am over HERE!',novo<0?'Você não me pega! Aqui!':'RÁ! Agora estou AQUI!',2.4); }
 function moveConde(dt){ var M=C.muda; if(!M) return false; M.t+=dt; var k=Math.min(1,M.t/1.5);
   C.x=M.de+(M.para-M.de)*suaveK(k); C.yOff=-Math.sin(k*Math.PI)*150;
@@ -224,7 +224,7 @@ var ESCADA=[14,15,15,16,16,16]; /* 18/10: o último degrau encosta na sacada (co
 function novaLetra(){
   var u=J.urso, p=pena(), deg=C.nLetra%2===1&&C.nLetra>>1<ESCADA.length, alvo;
   if(deg){ var col=ESCADA[C.nLetra>>1]; alvo=col*T+T/2; } else alvo=Math.max(40,Math.min(12*T,u.x+(Math.random()<.5?-1:1)*(80+Math.random()*80)));
-  C.letras.push({x0:p.x,y0:p.y,alvo:alvo,t:0,dur:1.1,x:p.x,y:p.y,ch:'ERASER'.charAt(C.nLetra%6),degrau:deg,col:deg?ESCADA[C.nLetra>>1]:-1});
+  C.letras.push({x0:p.x,y0:p.y,alvo:alvo,t:0,dur:1.1,x:p.x,y:p.y,ch:'OCTAVIO'.charAt(C.nLetra%7),degrau:deg,col:deg?ESCADA[C.nLetra>>1]:-1});
   C.nLetra++; C.estado='write'; C.et=0; SOM.fx('arremesso');
 }
 function solidos(s){ if(!C) return; C.blocos.forEach(function(b){ s.push({x:b.x,y:b.y,w:b.w,h:b.h,letra:b}); }); }
@@ -305,8 +305,8 @@ function desenha(c,t){
     if(Mv){ c.save(); c.fillStyle='rgba(49,46,129,.55)'; for(var tr2=0;tr2<6;tr2++){ var kk=Math.max(0,km-tr2*.04); A.circ(c,Mv.de+(Mv.para-Mv.de)*suaveK(kk),C.y-60-Math.sin(kk*Math.PI)*150,22-tr2*3); c.fill(); } c.restore(); } /* rastro de tinta do voo */
     c.save(); c.translate(C.x+(dor?Math.sin((1-dor)*Math.PI*3)*6:0),C.y+(C.yOff||0)); c.scale((.6+.4*k)*enc*((C.lado||1)<0?-1:1),k*enc); if(C.cansado&&!Mv) c.rotate(Math.sin(t*1.3)*.04-.05); c.globalAlpha=Math.min(1,k*1.5)*(Mv?.85:1);
     if(C.cansado&&C.fase!=='derrota'){ var au=.18+.06*Math.sin(t*1.5); var gA=c.createRadialGradient(0,-110,20,0,-110,150); gA.addColorStop(0,'rgba(88,28,135,'+au+')'); gA.addColorStop(1,'rgba(88,28,135,0)'); c.fillStyle=gA; A.circ(c,0,-110,150); c.fill(); } /* aura escura, pulsando devagar */
-    A.conde(c,0,0,C.estado,t);
-    if(C.cansado){ /* abatido mas bravo: sobrancelhas franzidas, curativo, suor, manchas na capa, bufando */
+    A.conde(c,0,0,C.cansado&&C.estado==='idle'?'sad':C.estado,t);
+    if(false&&C.cansado){ /* MAT3: desligado para o Octávio */ /* abatido mas bravo: sobrancelhas franzidas, curativo, suor, manchas na capa, bufando */
       c.strokeStyle='#1e1b4b'; c.lineWidth=4; c.lineCap='round'; c.beginPath(); c.moveTo(-20,-131); c.lineTo(-5,-125); c.moveTo(20,-131); c.lineTo(5,-125); c.stroke(); /* sobrancelhas bravas */
       c.fillStyle='#3b0764'; A.rr(c,-9,-104,18,8,4); c.fill(); c.fillStyle='#fff'; c.fillRect(-6,-102,12,3); /* dentes cerrados (no lugar do sorriso) */
       for(var tz=0;tz<3;tz++){ var at=t*1.6+tz*2.1; A.estrela(c,Math.cos(at)*34,-176+Math.sin(at)*8,5,'#fde047',at); } /* estrelinhas de tontura em volta do chapéu (abatido, não ferido) */
@@ -361,12 +361,12 @@ function desenhaTela(c,t){
     var y=58;
     frase(c,t);
     var vencidas=C.convertidas||0;
-    var obj=!/^p/.test(C.fase)?null:(!C.escudo?['★ on the Big Eraser! Get the letters!','Jogue ★ na Grande Borracha! Pegue as letras!']:(C.fase==='p1'?['Break the shield: knock over the cones!  '+C.alvo+' / 3','Quebre o escudo: derrube os cones!']:(C.fase==='p2'?['Break the shield: jump on the Smudges!  '+Math.min(3,vencidas)+' / 3','Quebre o escudo: pule nas manchinhas!']:['Climb the letters to the Big Eraser!','Suba nas letras até a Grande Borracha!'])));
+    var obj=!/^p/.test(C.fase)?null:(!C.escudo?['★ on Octavio! Get the letters!','Jogue ★ no Octávio! Pegue as letras!']:(C.fase==='p1'?['Break the shield: knock over the cones!  '+C.alvo+' / 3','Quebre o escudo: derrube os cones!']:(C.fase==='p2'?['Break the shield: jump on the Smudges!  '+Math.min(3,vencidas)+' / 3','Quebre o escudo: pule nas manchinhas!']:['Climb the letters to Octavio!','Suba nas letras até o Octávio!'])));
     if(obj){ c.font='900 17px "Nunito",Arial'; var tw=c.measureText(obj[0]).width+30; c.fillStyle='rgba(76,29,149,.8)'; A.rr(c,W/2-tw/2,y+54,tw,J.tr?44:28,14); c.fill(); c.fillStyle='#fde68a'; c.textAlign='center'; c.textBaseline='top'; c.fillText(obj[0],W/2,y+59); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#fff'; c.fillText(obj[1],W/2,y+79); }
       /* como jogar a estrela: sempre à vista, no canto de baixo */
       var dica=J.tr?'★ = ESPAÇO ou ▼':'★ = SPACE or ▼'; c.font='900 16px "Nunito",Arial'; var tw4=c.measureText(dica).width+28; c.fillStyle='rgba(13,11,30,.75)'; A.rr(c,W/2-tw4/2,H-44,tw4,32,16); c.fill(); c.fillStyle='#fde047'; c.textAlign='center'; c.textBaseline='middle'; c.fillText(dica,W/2,H-28); }
   }
-  if(C.fala&&!J.quiz&&!C.vitoria&&C.fala.t<C.fala.dur&&C.fase!=='abertura'){ c.font='900 19px "Nunito",Arial'; var tw2=Math.min(560,c.measureText(C.fala.en).width)+36, bx=Math.max(20,Math.min(W-tw2-20,(C.x-J.cam<W/2)?C.x-J.cam+80:C.x-J.cam-tw2-30)), by=150;
+  if(C.fala&&!J.quiz&&!C.vitoria&&C.fala.t<C.fala.dur&&C.fase!=='abertura'){ c.font='900 19px "Nunito",Arial'; var tw2=Math.min(560,c.measureText(C.fala.en).width)+36, bx=Math.max(20,Math.min(W-tw2-20,(C.x-J.cam<W/2)?C.x-J.cam+150:C.x-J.cam-tw2-150)), by=150;
     by=C.cansado?168:158; c.fillStyle='#ede9fe'; A.rr(c,bx,by,tw2,J.tr?62:44,16); c.fill(); var esqC=C.x-J.cam<W/2, bt=by+(J.tr?60:42); c.beginPath(); if(esqC){ c.moveTo(bx+30,bt); c.lineTo(bx,bt+18); c.lineTo(bx+60,bt); } else { c.moveTo(bx+tw2-30,bt); c.lineTo(bx+tw2,bt+18); c.lineTo(bx+tw2-60,bt); } c.fill(); /* o rabinho aponta para o Conde, do lado em que ele está */
     c.fillStyle='#2e1065'; c.textAlign='left'; c.textBaseline='top'; c.fillText(C.fala.en,bx+18,by+12); if(J.tr){ c.font='700 13px "Nunito",Arial'; c.fillStyle='#6d28d9'; c.fillText(C.fala.pt,bx+18,by+38); } }
   var ff=C.fada.fala; if(ff&&!J.quiz&&ff.t<ff.dur){ c.font='900 17px "Nunito",Arial'; var tw5=Math.min(440,c.measureText(ff.en).width)+30, bx5=Math.max(12,Math.min(W-tw5-12,(C.lado<0)?C.fada.x-J.cam-tw5-48:C.fada.x-J.cam+48)), by5=236; /* ao lado da fada, abaixo da fala do Conde e longe dos botões de toque */

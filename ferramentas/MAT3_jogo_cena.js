@@ -286,7 +286,7 @@ function desenhaIntro(c){
 function desenhaFinal(c){
   var t=J.t, it=J.final||{i:2,t:0}, sc=JOGO.CENAS_FINAL[it.i]||JOGO.CENAS_FINAL[2], cena=A.CENAS[sc.cena]?sc.cena:'floresta';
   A.ceu(c,cena,t); A.longe(c,cena,0,t); A.perto(c,cena,0,t); A.chao(c,{x:0,y:450,w:W,h:90},cena);
-  if(it.i===0){ if(A.conde) A.conde(c,620,450,'sad',t); heroi(c,330,450,'idle',t,1,1.2); }
+  if(it.i===0){ if(A.conde) A.conde(c,620,450,'idle',t); heroi(c,330,450,'idle',t,1,1.2); }
   else { HEROIS.forEach(function(q,i){ heroi(c,180+i*140,450-Math.abs(Math.sin(t*3+i))*16,'cheer',t,1,1.15,q); }); if(A.morador){ A.morador(c,it.i===1?'cubo':'lapis',780,450,t,-1,true); if(it.i===1) A.morador(c,'esfera',870,450,t,-1,false); } }
   titulo(c,it.i===2?'You did it!':'Math Stars',W/2,58,40);
 }

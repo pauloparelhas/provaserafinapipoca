@@ -102,7 +102,7 @@ function desenha(c,t,vx0,vx1){
 function desenhaQueda(c,x,y,cena,t){
   c.save(); c.translate(x,y);
   if(cena==='bosque'||cena==='ginasio'){ c.fillStyle='#92400e'; A.el(c,0,22,10,13); c.fill(); c.fillStyle='#78350f'; A.rr(c,-11,4,22,9,4); c.fill(); c.strokeStyle='#451a03'; c.lineWidth=2; c.beginPath(); c.moveTo(0,4); c.lineTo(2,-2); c.stroke(); }
-  else if(cena!=='vila'){ c.fillStyle='#f472b6'; c.strokeStyle='#831843'; /* MAT3: farelo rosa da Borracha (nada de água) */ c.lineWidth=2; c.beginPath(); c.moveTo(0,4); c.quadraticCurveTo(12,26,0,34); c.quadraticCurveTo(-12,26,0,4); c.fill(); c.stroke(); c.fillStyle='rgba(255,255,255,.8)'; A.circ(c,-3,24,3); c.fill(); }
+  else if(cena!=='vila'){ c.fillStyle='#ffc928'; c.strokeStyle='#8a5a14'; /* MAT3: lasca de lápis do Octávio (nada de água) */ c.lineWidth=2; c.beginPath(); c.moveTo(0,4); c.quadraticCurveTo(12,26,0,34); c.quadraticCurveTo(-12,26,0,4); c.fill(); c.stroke(); c.fillStyle='rgba(255,255,255,.8)'; A.circ(c,-3,24,3); c.fill(); }
   else if(cena==='vila'){ MAT3X.livroCai(c); } else if(0){ c.fillStyle='#b45309'; c.beginPath(); c.moveTo(-14,6); c.lineTo(14,6); c.lineTo(10,30); c.lineTo(-10,30); c.closePath(); c.fill(); c.strokeStyle='#7c2d12'; c.lineWidth=2; c.stroke(); }
   else A.pingente(c,{x:0,y:0,estado:'preso'},t);
   c.restore();
