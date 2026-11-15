@@ -115,8 +115,8 @@ function pausa(){
   JOGO.pausa(true);
   var h='<h2>'+bi('Paused','Pausa')+'</h2><button class="mbtn pri" id="mCont">'+bi('Continue','Continuar')+'</button><div class="mrow"><button class="mbtn" id="mSfx">Sounds: '+(SOM.sfx?'on':'off')+'</button><button class="mbtn" id="mMus">Music: '+(SOM.mus?'on':'off')+'</button></div>';
   if(!document.body.classList.contains('sem-voz')) h+='<button class="mbtn" id="mVoz">Voice: '+(window.somLigado?'on':'off')+'</button>';
-  h+='<button class="mbtn" id="mMapa">'+bi('Leave to the map','Sair para o mapa')+'</button>';
-  menu(h,{mCont:function(){ fechaMenu(); JOGO.pausa(false); }, mSfx:function(){ SOM.setSfx(!SOM.sfx); $('mSfx').textContent='Sounds: '+(SOM.sfx?'on':'off'); }, mMus:function(){ try{ localStorage.setItem('mat3_mus_escolheu','1'); }catch(e){} SOM.setMus(!SOM.mus); $('mMus').textContent='Music: '+(SOM.mus?'on':'off'); },
+  h+='<div class="mrow"><button class="mbtn" id="mMapa">'+bi('Leave to the map','Sair para o mapa')+'</button><button class="mbtn" id="mInicio">'+bi('Home page','Página inicial')+'</button></div>';
+  menu(h,{mInicio:function(){ paginaInicial(); }, mCont:function(){ fechaMenu(); JOGO.pausa(false); }, mSfx:function(){ SOM.setSfx(!SOM.sfx); $('mSfx').textContent='Sounds: '+(SOM.sfx?'on':'off'); }, mMus:function(){ try{ localStorage.setItem('mat3_mus_escolheu','1'); }catch(e){} SOM.setMus(!SOM.mus); $('mMus').textContent='Music: '+(SOM.mus?'on':'off'); },
     mVoz:function(){ try{ toggleSom(); }catch(e){} $('mVoz').textContent='Voice: '+(window.somLigado?'on':'off'); },
     mMapa:function(){ fechaMenu(); saiParaMapa(); }});
 }
@@ -144,17 +144,20 @@ function creditos(){
   menu(h,{mMapa:function(){ fechaMenu(); JOGO.irMapa(); }},'festa');
 }
 function saiParaMapa(){ JOGO.pausa(false); if(JOGO.J.quiz&&window.QUIZ) QUIZ.sai(); quizBotoes(false); legenda(null); if(window.CHEFAO&&CHEFAO.ativo()) CHEFAO.limpa(); JOGO.irMapa(); try{ speechSynthesis.cancel(); }catch(e){} }
+/* 15/11 (feedback da família): a página inicial do site se alcança de dentro do jogo (casinha e pausa).
+   Saída escolhida no menu do jogo destrava a tela: o cadeado protege de gesto acidental, não de escolha. */
+function paginaInicial(){ try{ speechSynthesis.cancel(); }catch(e){} window.screenLocked=false; document.body.classList.remove('locked'); try{ if(document.fullscreenElement&&document.exitFullscreen) document.exitFullscreen().catch(function(){}); }catch(e){} location.href=(window.SERA_CFG&&SERA_CFG.home)||'../index.html'; }
 function confirmaCasa(){
   if(menuAberto) return; var estava=JOGO.J.pausado, st=JOGO.J.estado;
   if(['nivel','quiz','corrida','estadio','cano','fimFase','chefeIntro'].indexOf(st)>=0){
     JOGO.pausa(true);
-    menu('<h2>'+bi('Back to the map?','Voltar ao mapa?')+'</h2><p>'+bi('You can come back any time.','Você pode voltar quando quiser.')+'</p><div class="mrow"><button class="mbtn" id="mNao">'+bi('Stay','Ficar')+'</button><button class="mbtn pri" id="mSim">'+bi('Go to the map','Ir para o mapa')+'</button></div>',
-      {mNao:function(){ fechaMenu(); JOGO.pausa(estava); }, mSim:function(){ fechaMenu(); saiParaMapa(); }});
+    menu('<h2>'+bi('Back to the map?','Voltar ao mapa?')+'</h2><p>'+bi('You can come back any time.','Você pode voltar quando quiser.')+'</p><div class="mrow"><button class="mbtn" id="mNao">'+bi('Stay','Ficar')+'</button><button class="mbtn pri" id="mSim">'+bi('Go to the map','Ir para o mapa')+'</button></div><button class="mbtn" id="mInicio">'+bi('Home page','Página inicial')+'</button>',
+      {mNao:function(){ fechaMenu(); JOGO.pausa(estava); }, mSim:function(){ fechaMenu(); saiParaMapa(); }, mInicio:function(){ paginaInicial(); }});
     return;
   }
   JOGO.pausa(true);
   menu('<h2>'+bi('Leave the game?','Sair do jogo?')+'</h2><p>'+bi('Your progress is saved.','Seu progresso fica salvo.')+'</p><div class="mrow"><button class="mbtn" id="mNao">'+bi('Stay','Ficar')+'</button><button class="mbtn danger" id="mSim">'+bi('Leave','Sair')+'</button></div>',
-    {mNao:function(){ fechaMenu(); JOGO.pausa(estava); }, mSim:function(){ goHome(); }});
+    {mNao:function(){ fechaMenu(); JOGO.pausa(estava); }, mSim:function(){ paginaInicial(); }});
 }
 function confirmaRecomecar(){
   if(menuAberto) return;
@@ -214,6 +217,10 @@ function initLock(){
   function comeca(e){ if(!window.screenLocked) return; e.preventDefault(); b.classList.add('hold'); segurando=setTimeout(function(){ b.classList.remove('hold'); try{ $('unlockov').classList.add('show'); }catch(x){} },2000); }
   function solta(){ clearTimeout(segurando); b.classList.remove('hold'); }
   b.addEventListener('pointerdown',comeca); b.addEventListener('pointerup',solta); b.addEventListener('pointerleave',solta); b.addEventListener('pointercancel',solta);
+  /* 15/11 (feedback da família): TRAVADO POR PADRÃO. O primeiro toque já tranca (tela cheia exige gesto).
+     Se um adulto destravar, fica destravado até fechar a aba. */
+  var DESTR='mat3_jogo_destravou', du=window.doUnlock; window.doUnlock=function(){ try{ sessionStorage.setItem(DESTR,'1'); }catch(e){} du(); pintaLock(); };
+  document.addEventListener('pointerdown',function(){ if(window.screenLocked) return; var d=null; try{ d=sessionStorage.getItem(DESTR); }catch(e){} if(d==='1') return; try{ doLock(); }catch(e){} pintaLock(); },true);
   document.addEventListener('pointerdown',function(){ if(window.screenLocked && !document.fullscreenElement){ var el=document.documentElement; if(el.requestFullscreen){ try{ el.requestFullscreen().catch(function(){}); }catch(e){} } } },true);
   document.addEventListener('fullscreenchange',pintaLock);
   var ov=$('unlockov'); if(ov){ ov.addEventListener('click',function(){ setTimeout(pintaLock,50); }); }
@@ -231,7 +238,7 @@ function init(){
   try{ if(localStorage.getItem(TRK)==='1') document.body.classList.add('show-tr'); }catch(e){}
   pintaTr();
   $('btnTr').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); alternaTr(); });
-  $('btnHome').addEventListener('click',function(){ SOM.init(); if(window.screenLocked) return; confirmaCasa(); });
+  $('btnHome').addEventListener('click',function(){ SOM.init(); confirmaCasa(); });
   $('btnHelp').addEventListener('click',function(){ SOM.init(); SOM.fx('clique'); if(menuAberto) return; var J=JOGO.J, p=(J.estado==='nivel'||J.estado==='quiz'); if(p) JOGO.pausa(true); comoJogar(function(){ if(p) JOGO.pausa(false); }); });
   $('btnPause').addEventListener('click',function(){ SOM.init(); if(menuAberto){ if(JOGO.J.estado==='fimFase') return; fechaMenu(); JOGO.pausa(false); } else pausa(); });
   $('qSair').addEventListener('click',function(){ SOM.init(); QUIZ.sai(); });
