@@ -4,10 +4,10 @@
    e o jogo muda de clima: a fase fica esmaecida atrás de uma moldura
    escura, toca a música de suspense, um relógio de 30 s corre, o
    personagem que pergunta aparece grande e a criança TOCA no cartão
-   numerado da resposta (ou aperta 1/2/3). Errou: ESPERA e tenta de novo
-   (15/11, feedback da família: 1º erro = 5 s, 2º erro = 10 s; no 3º erro
-   ou com o tempo esgotado o cartão certo acende e o personagem explica).
-   Acerto só conta na 1ª tentativa; acerto depois da espera vale menos pontos. ▶ segue.
+   numerado da resposta (ou aperta 1/2/3). Errou ou o tempo acabou: o
+   cartão certo acende e o personagem explica (curto), com a pergunta na tela.
+   PEDÁGIO (15/11, feedback da família): no erro, Next e Leave ficam travados
+   5 s no 1º erro da fase e 10 s nos seguintes — a criança lê a explicação. ▶ segue.
    3 perguntas por entrada = 1 página do livro; depois volta à fase.
    "✕ Leave" sai a qualquer hora. Perguntas: MAT3_banco.js filtradas
    pelo tema/átomos do reino, sem repetir (localStorage).
@@ -15,7 +15,7 @@
 window.QUIZ = (function(){
 'use strict';
 var G=window.JOGO, J=G.J, A=window.ARTE, W=G.W, H=G.H;
-var ESPERAS=[5,10], /* 15/11: espera depois do 1º e do 2º erro */ N_POR_MORADOR=3, TEMPO=30, /* regra do Paulo (16/10): 30 s por pergunta */ USADAS='mat3_jogo_usadas';
+var PEDAGIO=[5,10], /* 15/11: segundos travados no 1º erro da fase e nos seguintes */ N_POR_MORADOR=3, TEMPO=30, /* regra do Paulo (16/10): 30 s por pergunta */ USADAS='mat3_jogo_usadas';
 
 /* ---------- escolha das perguntas ---------- */
 function usadas(){ try{ return JSON.parse(localStorage.getItem(USADAS)||'[]'); }catch(e){ return []; } }
@@ -48,28 +48,21 @@ function inicia(m,op){
 }
 function montaPergunta(){
   var q=J.quiz, it=q.itens[q.i], ordem=embaralha(it.o.map(function(_,i){ return i; }));
-  q.item=it; q.ordem=ordem; q.certa=ordem.indexOf(it.c); q.escolha=-1; q.minT=0; q.fase=q.i?'pergunta':'entra'; q.t=0; q.tempo=TEMPO; q.dica=false; q.lay=null; q.next=null; q.erros=0; q.espera=0;
+  q.item=it; q.ordem=ordem; q.certa=ordem.indexOf(it.c); q.escolha=-1; q.minT=0; q.fase=q.i?'pergunta':'entra'; q.t=0; q.tempo=TEMPO; q.dica=false; q.lay=null; q.next=null;
   q.cartoes=ordem.map(function(oi,k){ return {k:k, txt:it.o[oi], pt:(it.o_pt||[])[oi]||'', estado:'normal', bump:0}; });
   try{ say(it.p); }catch(e){}
 }
 function responde(k){
   var q=J.quiz; if(!q||q.fase!=='pergunta') return;
-  if(k>=0&&k!==q.certa&&q.erros<ESPERAS.length){ /* errou: espera e tenta de novo; a resposta certa não aparece */
-    q.espera=ESPERAS[q.erros]; q.erros++; q.fase='espera'; q.t=0; q.dica=false;
-    q.cartoes.forEach(function(c){ c.estado=c.k===k?'errada':'normal'; }); q.cartoes[k].bump=10;
-    SOM.fx('erro'); J.shake=4; try{ say('Not quite. Think again.'); }catch(e){}
-    return;
-  }
-  var ok=k===q.certa, primeira=ok&&!q.erros; q.escolha=k; q.fase='resposta'; q.t=0; q.auto=0; /* 15/10 (Paulo): não avança sozinho — a criança lê o comentário e toca no Next, que respira suave para chamar */
+  var ok=k===q.certa; q.escolha=k; q.fase='resposta'; q.t=0; q.auto=0; /* 15/10 (Paulo): não avança sozinho — a criança lê o comentário e toca no Next, que respira suave para chamar */
   J.stats.perguntas++; marca(q.item.id);
   q.cartoes.forEach(function(c){ c.estado= c.k===q.certa?'certa':(c.k===k?'errada':'apagada'); });
   if(k>=0) q.cartoes[k].bump=10;
   if(penalti()) PENALTI.chute(q,k,ok,J.t); /* reino 7: a resposta vira um pênalti (só a animação) */
-  if(primeira){ q.acertos++; J.stats.acertos++; G.pontua(100); SOM.fx('acerto'); }
-  else if(ok){ G.pontua(q.erros===1?50:25); SOM.fx('acerto'); }
-  else { SOM.fx('erro'); J.shake=4; }
+  if(ok){ q.acertos++; J.stats.acertos++; G.pontua(100); SOM.fx('acerto'); }
+  else { SOM.fx('erro'); J.shake=4; var L=J.nivel||J; L.errosPedagio=(L.errosPedagio||0)+1; q.minT=PEDAGIO[Math.min(L.errosPedagio,PEDAGIO.length)-1]; }
   try{ say((ok?'Yes! ':'Not quite. ')+(q.item.ex||'')); }catch(e){}
-  if(q.op&&q.op.aoResponder) q.op.aoResponder(primeira); /* chefão, corrida e poderes: só a 1ª tentativa vale, como antes */
+  if(q.op&&q.op.aoResponder) q.op.aoResponder(ok);
 }
 function segue(){
   var q=J.quiz; if(!q||q.fase!=='resposta'||q.t<(q.minT||.5)) return;
@@ -79,7 +72,8 @@ function segue(){
   if(!q.op){ q.m.feito=true; var E=J.nivel.todasEntradas||J.nivel.moradores, n=E.filter(function(mm){ return mm.feito; }).length;
     G.toast('You found a Math Star! ('+n+' of '+E.length+')',2600,'Você achou uma Math Star! ('+n+' de '+E.length+')'); G.pontua(150); SOM.fx('vitoria'); }
 }
-function sai(){ var q=J.quiz; if(!q) return; if(q.op) q.op.aoTerminar=null; termina(); if(q.op&&q.op.aoSair) q.op.aoSair(); }
+function travado(){ var q=J.quiz; return !!(q&&q.fase==='resposta'&&q.minT>.5&&q.t<q.minT); }
+function sai(){ var q=J.quiz; if(!q||travado()) return; if(q.op) q.op.aoTerminar=null; termina(); if(q.op&&q.op.aoSair) q.op.aoSair(); }
 function termina(){
   var q=J.quiz; J.quiz=null; J.estado='nivel'; if(window.UI) UI.quizBotoes(false); G.hud(); try{ speechSynthesis.cancel(); }catch(e){}
   if(q){ q.m.esperaT=1.2; if(!q.op){ var cn=J.nivel.cena; SOM.musica(window.PARTITURAS&&PARTITURAS.CENAS[cn]?cn:'floresta'); } }
@@ -92,8 +86,8 @@ function atualiza(dt){
   if(q.fase==='entra'&&q.t>.7){ q.fase='pergunta'; q.t=0; }
   else if(q.fase==='pergunta'){ var antes=Math.ceil(q.tempo); var lendo=false; try{ lendo=speechSynthesis.speaking; }catch(e){} if(!lendo&&q.item.tipo!=='leitura') q.tempo=Math.max(0,q.tempo-dt); /* guardiao: sem pressa para ler */ var agora=Math.ceil(q.tempo); if(agora!==antes&&agora<=5&&agora>0) SOM.fx('clique'); if(q.tempo<=0) responde(-1); }
   
-  else if(q.fase==='espera'&&q.t>=q.espera){ q.fase='pergunta'; q.t=0; q.tempo=TEMPO; q.cartoes.forEach(function(c){ c.estado='normal'; }); try{ say(q.item.p); }catch(e){} }
   else if(q.fase==='pagina'&&q.t>1.6) termina();
+  var bs=document.getElementById('qSair'); if(bs){ var tv=travado(); if(bs.disabled!==tv){ bs.disabled=tv; bs.style.opacity=tv?'.35':''; } }
 }
 
 /* ---------- texto ---------- */
@@ -132,25 +126,19 @@ function desenhaTela(c,t){
   balao(c,q,it); if(q.corda&&window.MAT3X) MAT3X.corda(c,t,q,F);
   q.cartoes.forEach(function(cd){ cartao(c,cd); });
   if(q.fase==='resposta'&&q.t>.5) botaoNext(c,q,t,ent);
-  if(q.fase==='espera') painelEspera(c,q,t);
-  c.restore();
-}
-/* 15/11: espera depois do erro — cobre os cartões (não dá para tocar) e conta os segundos */
-function painelEspera(c,q,t){
-  var falta=Math.max(0,q.espera-q.t), seg=Math.ceil(falta), x0=24, w=W-48, y0=CART_Y-8, h=CART_H+16;
-  c.save(); c.fillStyle='rgba(10,8,26,.62)'; A.rr(c,x0,y0,w,h,20); c.fill();
-  var pw=470, ph=100, px=W/2-pw/2, py=y0+(h-ph)/2;
-  c.fillStyle='#fef3c7'; A.rr(c,px,py,pw,ph,20); c.fill(); c.strokeStyle='#f59e0b'; c.lineWidth=4; A.rr(c,px,py,pw,ph,20); c.stroke();
-  var cx=px+56, cy=py+ph/2, r=34; c.lineWidth=8; c.strokeStyle='rgba(245,158,11,.25)'; c.beginPath(); c.arc(cx,cy,r,0,Math.PI*2); c.stroke();
-  c.strokeStyle='#f59e0b'; c.beginPath(); c.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+Math.PI*2*(falta/q.espera)); c.stroke();
-  c.fillStyle='#78350f'; c.font=F(900,30); c.textAlign='center'; c.textBaseline='middle'; c.fillText(String(seg),cx,cy+1);
-  c.textAlign='left'; c.font=F(900,24); c.fillText('Not quite! Think again.',px+108,py+(J.tr?30:38));
-  c.font=F(800,17); c.fillStyle='#92400e'; c.fillText('You can try again in '+seg+' s.',px+108,py+(J.tr?56:68));
-  if(J.tr){ c.font=F(700,13); c.fillStyle='#6b5d4f'; c.fillText('Quase! Pense de novo. Você tenta outra vez em '+seg+' s.',px+108,py+80); }
   c.restore();
 }
 /* Next: grande, amarelo, "respirando" devagar (escala e brilho suaves, ~1 vez por segundo — nada de piscar) */
 function botaoNext(c,q,t,ent){ var bw=190, bh=66, bx=W-bw-26, by=CART_Y-bh-12, k=.5+.5*Math.sin(t*3.2), s=1+.05*k;
+  if(travado()){ /* pedágio: botão cinza com os segundos que faltam; anel âmbar esvaziando */
+    var falta=q.minT-q.t, seg=Math.ceil(falta); c.save(); c.globalAlpha=ent*Math.min(1,(q.t-.5)/.3);
+    c.fillStyle='rgba(30,27,58,.82)'; A.rr(c,bx,by,bw,bh,22); c.fill(); c.strokeStyle='rgba(255,255,255,.35)'; c.lineWidth=3; A.rr(c,bx,by,bw,bh,22); c.stroke();
+    var cx=bx+38, cy=by+bh/2; c.lineWidth=5; c.strokeStyle='rgba(245,158,11,.25)'; c.beginPath(); c.arc(cx,cy,20,0,Math.PI*2); c.stroke();
+    c.strokeStyle='#f59e0b'; c.beginPath(); c.arc(cx,cy,20,-Math.PI/2,-Math.PI/2+Math.PI*2*(falta/q.minT)); c.stroke();
+    c.fillStyle='#fde68a'; c.font=F(900,18); c.textAlign='center'; c.textBaseline='middle'; c.fillText(String(seg),cx,cy+1);
+    c.fillStyle='#fff'; c.font=F(900,19); c.textAlign='left'; c.fillText('Read it!',bx+68,cy-(J.tr?7:0)+1);
+    if(J.tr){ c.font=F(700,12); c.fillStyle='rgba(255,255,255,.75)'; c.fillText('Leia a explicação',bx+68,cy+13); }
+    c.restore(); q.next={x:bx,y:by,w:bw,h:bh}; return; }
   c.save(); c.globalAlpha=ent*Math.min(1,(q.t-.5)/.3); c.translate(bx+bw/2,by+bh/2); c.scale(s,s);
   c.shadowColor='rgba(253,224,71,'+(.35+.4*k)+')'; c.shadowBlur=14+12*k; c.fillStyle=A.lin?A.lin(c,0,-bh/2,0,bh/2,'#fde68a','#f59e0b'):'#fbbf24'; A.rr(c,-bw/2,-bh/2,bw,bh,22); c.fill(); c.shadowBlur=0;
   c.strokeStyle='#b45309'; c.lineWidth=3; A.rr(c,-bw/2,-bh/2,bw,bh,22); c.stroke();
@@ -234,7 +222,7 @@ function bate(){}
 function toque(lx,ly){
   var q=J.quiz; if(!q) return false;
   if(q.fase==='resposta'){ var nb=q.next; if(!nb||(lx>nb.x-12&&lx<nb.x+nb.w+12&&ly>nb.y-12&&ly<nb.y+nb.h+12)) segue(); return true; } /* só o botão Next avança: tocar no cartão não pula o comentário */
-  if(q.fase!=='pergunta') return true; /* na espera, nada responde */
+  if(q.fase!=='pergunta') return true;
   for(var i=0;i<q.cartoes.length;i++){ var cd=q.cartoes[i]; if(lx>cd.x&&lx<cd.x+cd.w&&ly>cd.y&&ly<cd.y+cd.h){ responde(i); return true; } }
   return true;
 }
