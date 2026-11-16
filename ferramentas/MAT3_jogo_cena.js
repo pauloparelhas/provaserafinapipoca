@@ -83,7 +83,7 @@ function manchaTinta(c,e,t){
 function desenhaNivel(c){
   var M=J.mundo, u=J.urso, t=J.t; if(!M) return;
   var sub=/^sub_/.test(M.cena), cena=sub?'sub_caverna':(A.CENAS[M.cena]?M.cena:'floresta');
-  if(sub&&A.fundoSub){ A.ceu(c,cena,t); A.fundoSub(c,cena,J.cam*.2,t); } else { A.ceu(c,cena,t); c.save(); A.longe(c,cena,J.cam*.15,t); A.perto(c,cena,J.cam*.45,t); c.restore(); if(window.MAT3P) MAT3P.veu(c,cena,M); if(J.camY<-20&&M.modo!=='nado'&&A.CENAS[cena]){ c.fillStyle=A.CENAS[cena].chaoTop; c.fillRect(0,470,W,-J.camY); } } /* MAT3: o fundo tem 470 de altura; com a câmera acima do chão aparecia uma faixa vazia */
+  if(sub&&A.fundoSub){ A.ceu(c,cena,t); A.fundoSub(c,cena,J.cam*.2,t); } else { A.ceu(c,cena,t); c.save(); A.longe(c,cena,J.cam*.15,t); A.perto(c,cena,J.cam*.45,t); if(window.ESPIAO) ESPIAO.desenhaFundo(c,t); /* 16/11: o Octávio figurante, no cenário de fundo */ c.restore(); if(window.MAT3P) MAT3P.veu(c,cena,M); if(J.camY<-20&&M.modo!=='nado'&&A.CENAS[cena]){ c.fillStyle=A.CENAS[cena].chaoTop; c.fillRect(0,470,W,-J.camY); } } /* MAT3: o fundo tem 470 de altura; com a câmera acima do chão aparecia uma faixa vazia */
   if(M.modo==='nado'&&M.superficie>40){ if(A.ceuDoRio) A.ceuDoRio(c,M.superficie-J.camY,J.cam,t); else ceuDoMar(c,M,t); }
   c.save(); c.translate(-Math.round(J.cam),-Math.round(J.camY));
   var vx0=J.cam-120, vx1=J.cam+W+120, vis=function(o){ return o.x+(o.w||60)>vx0 && o.x-(o.w?0:60)<vx1; };

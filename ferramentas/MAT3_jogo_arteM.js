@@ -106,8 +106,42 @@ function octavio(c,estado,t,alt){ var O=window.OCTAVIO, D=alt*1.56;
     if(cx+meia>w) pass=cx+meia-w; else if(cx-meia<0) pass=cx-meia; if(pass) dx=-pass/(m.a||1); }catch(e){}
   sombra(c,alt*.42); if(!O.desenha(c,estado||'idle',t||0,dx-D*OCT_FX,-D*OCT_FY,D,D)) octavio2D(c,estado,t,alt); }
 A.conde=function(c,x,y,estado,t){ t=t||0; c.save(); c.translate(x,y); c.lineJoin='round'; c.lineCap='round'; octavio(c,estado||'idle',t,160); c.restore(); };
-A.tracona=function(c,x,y,t,hp,max2){ t=t||0; max2=max2||3; hp=hp==null?max2:hp; c.save(); c.translate(x,y); c.lineJoin='round'; c.lineCap='round';
-  octavio(c,hp<=1&&hp<max2?'hit':'idle',t,100); for(var h=0;h<max2;h++){ var hx=(h-(max2-1)/2)*16; circ(c,hx,-150,6); fs(c,h<hp?'#fde047':'rgba(255,255,255,.35)','#1f2937',1.6); } /* jogador D2: vida em amarelo, acima da cabeça */ c.restore(); };
+/* 16/11 (Paulo: "o Octávio aparece em todas as fases como inimigo que não se alcança; não era a ideia"): o mini-chefe do
+   fim de cada reino NÃO é mais o Octávio. É o capanga dele, o BIG SMUDGE (a mancha de grafite grandona, de boné roxo da
+   turma do Octávio e um lápis de ponta quebrada na mão) — como os filhos do Bowser nos castelos intermediários.
+   O Octávio só aparece DE FATO no chefão; nas fases ele é figurante escondido (A.octavioEspia). */
+A.tracona=function(c,x,y,t,hp,max2){ t=t||0; max2=max2||3; hp=hp==null?max2:hp; var dor=hp<=1&&hp<max2, s=1.25;
+  c.save(); c.translate(x,y); c.scale(s,s); c.lineJoin='round'; c.lineCap='round'; sombra(c,40);
+  /* corpo de grafite: gota larga, borda ondulada embaixo */
+  c.beginPath(); c.moveTo(-40,0); c.quadraticCurveTo(-52,-44,-26,-66); c.quadraticCurveTo(0,-80,26,-66); c.quadraticCurveTo(52,-44,40,0);
+  for(var i=0;i<5;i++) c.quadraticCurveTo(30-i*16,9+(i%2)*5,24-i*16,0); c.closePath();
+  var g=c.createRadialGradient(-12,-50,6,0,-34,58); g.addColorStop(0,'#9ca3af'); g.addColorStop(.55,'#4b5563'); g.addColorStop(1,'#1f2937'); fs(c,g,'#111827',2.4);
+  c.fillStyle='rgba(255,255,255,.28)'; el(c,-16,-52,10,6); c.fill();
+  /* boné roxo da turma do Octávio, com 8 pontinhos (os 8 tentáculos) */
+  c.beginPath(); c.moveTo(-30,-62); c.quadraticCurveTo(0,-92,30,-62); c.closePath(); fs(c,'#873fe0','#3b1470',2);
+  c.beginPath(); c.moveTo(4,-64); c.quadraticCurveTo(30,-66,42,-58); c.lineTo(26,-58); c.closePath(); fs(c,'#6325ac','#3b1470',1.6);
+  c.fillStyle='#fde68a'; for(var k=0;k<8;k++){ circ(c,-14+k*4,-74+Math.abs(k-3.5)*.9,1.4); c.fill(); }
+  /* olhos e cara: bravinho-cômico; atingido = tonto */
+  if(dor){ c.strokeStyle='#f9fafb'; c.lineWidth=3; [-12,12].forEach(function(ox){ c.beginPath(); c.moveTo(ox-5,-46); c.lineTo(ox+5,-38); c.moveTo(ox+5,-46); c.lineTo(ox-5,-38); c.stroke(); }); }
+  else { olhos(c,0,-42,12,8,t); c.strokeStyle='#111827'; c.lineWidth=3.4; c.beginPath(); c.moveTo(-20,-54); c.lineTo(-5,-50); c.moveTo(20,-54); c.lineTo(5,-50); c.stroke(); }
+  c.strokeStyle='#e5e7eb'; c.lineWidth=3; c.beginPath(); if(dor) c.arc(0,-14,8,1.15*PI,1.85*PI); else c.arc(0,-24,9,.15*PI,.85*PI); c.stroke();
+  /* bracinho com o lápis de ponta quebrada (o "uniforme" do Octávio) */
+  var bal=Math.sin(t*2.4)*.25; c.strokeStyle='#374151'; c.lineWidth=7; c.beginPath(); c.moveTo(34,-26); c.quadraticCurveTo(48,-30,52,-44); c.stroke();
+  lapisQ(c,52,-44,.35+bal,.9);
+  c.restore();
+  for(var h=0;h<max2;h++){ var hx=x+(h-(max2-1)/2)*16; circ(c,hx,y-128,6); fs(c,h<hp?'#fde047':'rgba(255,255,255,.35)','#1f2937',1.6); } };
+/* O OCTÁVIO FIGURANTE (16/11, Paulo: "coadjuvante meio escondido, como o Corujito ou o Wally"): só a cabeça e os olhos
+   aparecem atrás de uma moita (ou pedra/nuvem); quando o herói chega perto, ele se abaixa e some. Sem ação, sem dano.
+   sobe = 0..1 (quanto da cabeça aparece); fundo = 'moita' | 'coral' | 'nuvem' | 'torcida'. */
+A.octavioEspia=function(c,x,y,t,sobe,fundo,olha){ sobe=Math.max(0,Math.min(1,sobe||0)); var alt=78;
+  c.save(); c.translate(x,y);
+  if(sobe>.02){ c.save(); c.beginPath(); c.rect(-80,-200,160,174); c.clip(); /* tudo abaixo da borda da moita fica escondido */
+    c.translate(Math.sin(t*1.1)*2,-52+(1-sobe)*110); octavio(c,olha?'laugh':'idle',t,alt); c.restore(); }
+  /* o que o esconde, NA FRENTE */
+  if(fundo==='coral'){ c.fillStyle='#c2410c'; [[-34,-24,16],[-12,-34,20],[14,-30,18],[34,-20,14]].forEach(function(b){ circ(c,b[0],b[1],b[2]); c.fill(); }); c.fillStyle='#fb923c'; [[-20,-36,8],[18,-40,9]].forEach(function(b){ circ(c,b[0],b[1],b[2]); c.fill(); }); c.fillRect(-46,-24,92,24); }
+  else if(fundo==='nuvem'){ c.fillStyle='#f8fafc'; [[-36,-22,20],[-12,-34,26],[16,-30,24],[38,-20,18]].forEach(function(b){ circ(c,b[0],b[1],b[2]); c.fill(); }); c.fillRect(-52,-24,104,24); c.fillStyle='rgba(148,163,184,.35)'; c.fillRect(-52,-8,104,8); }
+  else { c.fillStyle='#15803d'; [[-36,-20,20],[-12,-32,25],[16,-30,23],[38,-18,18]].forEach(function(b){ circ(c,b[0],b[1],b[2]); c.fill(); }); c.fillRect(-54,-22,108,22); c.fillStyle='#22c55e'; [[-20,-36,10],[14,-40,11],[36,-26,8]].forEach(function(b){ circ(c,b[0],b[1],b[2]); c.fill(); }); }
+  c.restore(); };
 
 /* ---------------- perigos (mesmas chaves do motor) ---------------- */
 var INI=A.INIMIGOS_CIE||{};

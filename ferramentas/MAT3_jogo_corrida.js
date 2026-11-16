@@ -100,6 +100,7 @@ function montaSprites(){
     if(hash(n*7)<.35) spr(n,-x*1.1,t==='floresta'?'arvore':'arbusto'); }
   segs.forEach(function(s,n){
     if(s.tag.arq&&n%14===0){ spr(n,-2.3,'arquibancada'); spr(n,2.3,'arquibancada'); }
+    if(s.tag.conde&&n===CONDE_SEG+40) spr(n,-2.6,'octavio_espia'); /* 16/11: o Octávio espiando atrás da torcida (figurante, sem ação) */
     if(!s.tag.arq&&!s.tag.pit&&!s.tag.ponte&&n>60&&n%95===50&&!PITS.some(function(P){ return n>P.ini-40&&n<P.fim+10; })) spr(n,hash(n*41)<.5?-2.4:2.4,'torcida_magica',{k:Math.floor(hash(n*43)*5)}); /* 16/10: a torcida é o povo dos reinos */
     if(s.tag.ponte&&n%6===0){ spr(n,-1.15,'corrimao'); spr(n,1.15,'corrimao'); }
     if(Math.abs(s.curva)>1.5&&n%10===0) spr(n,s.curva>0?-1.25:1.25,'placa_curva',{dir:s.curva>0?1:-1});
@@ -111,8 +112,8 @@ function montaSprites(){
     if(s.tag.moedas&&n%90===45) OBJ.raios.push({n:n,x:[-.55,0,.55][Math.floor(hash(n*13)*3)],vivo:true}); /* um raio por vez, trocando de faixa: é preciso dirigir para pegar */
     if((s.tag.rampa&&n%60===30)||(!s.tag.pit&&!s.tag.ponte&&!s.tag.largada&&n>40&&n<FIM_SEG-40&&n%110===70&&!PITS.some(function(P){ return n>P.ini-70&&n<P.fim+15; }))){ var rx=[-.55,0,.55][Math.floor(hash(n*17)*3)]; OBJ.rampas.push({n:n,x:rx}); OBJ.raios.push({n:n+6,x:rx,vivo:true,alto:true}); } /* 16/10 (Paulo: "a rampa ficou boa, quero mais"): rampa com um raio no ar */
     if(s.tag.pad&&n%80===20) OBJ.pads.push({n:n,x:[-.5,.5][Math.floor(hash(n*2)*2)]});
-    if(s.tag.tinta&&n%30===5) OBJ.poças.push({n:n,x:[-.55,0,.55][Math.floor(hash(n*5)*3)]});
-    if(s.tag.lama&&n%26===13) OBJ.poças.push({n:n,x:[-.6,.6][Math.floor(hash(n*9)*2)],lama:true}); });
+    if(s.tag.tinta&&n%45===5) OBJ.poças.push({n:n,x:[-.55,0,.55][Math.floor(hash(n*5)*3)]});
+    if(s.tag.lama&&n%39===13) OBJ.poças.push({n:n,x:[-.6,.6][Math.floor(hash(n*9)*2)],lama:true}); });
 }
 
 /* ============================================================
@@ -123,9 +124,9 @@ var RIVAIS_DEF=[
   {id:'dragon', v:.97, lider:1},{id:'knight', v:.96, lider:1},{id:'fairy', v:.95, lider:1},
   {id:'witch', v:.93},{id:'frog', v:.92},{id:'wolf', v:.91},{id:'red', v:.90},{id:'princess', v:.89},{id:'pig', v:.88}];
 /* os 3 níveis: quem escolhe é a criança (o handicap dos adversários) */
-var NIVEIS={easy:{k:.97,erro:1.1,nome:'EASY',pt:'FÁCIL',dica:'calm racers',dpt:'pilotos calmos',cor:'#4ade80'},
-  medium:{k:1.06,erro:.6,nome:'MEDIUM',pt:'MÉDIO',dica:'good racers',dpt:'bons pilotos',cor:'#fde047'},
-  hard:{k:1.10,erro:.4,nome:'HARD',pt:'DIFÍCIL',dica:'super racers',dpt:'superpilotos',cor:'#f87171'}};
+var NIVEIS={easy:{k:.97,ult:.93,erro:1.1,nome:'EASY',pt:'FÁCIL',dica:'calm racers',dpt:'pilotos calmos',cor:'#4ade80'},
+  medium:{k:1.06,ult:.95,erro:.6,nome:'MEDIUM',pt:'MÉDIO',dica:'good racers',dpt:'bons pilotos',cor:'#fde047'},
+  hard:{k:1.10,ult:.98,erro:.4,nome:'HARD',pt:'DIFÍCIL',dica:'super racers',dpt:'superpilotos',cor:'#f87171'}};
 var ORDEM_N=['easy','medium','hard'];
 function nivelSalvo(){ try{ var n=localStorage.getItem('mat3_corrida_nivel'); if(NIVEIS[n]) return n; }catch(e){} return 'easy'; }
 var COR_HEROI={helmet:'#2563eb',pony:'#c026d3',yellow:'#eab308',fisher:'#16a34a'};
@@ -176,7 +177,7 @@ function botoes(on){
     if(ba){ ba.classList.remove('turbo0'); ba.classList.remove('turboOn'); } if(window.UI) UI.acao(false,0); }
 }
 var SVG_RAIO='<svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M14 2 4 14h7l-2 8 11-13h-7z" fill="#fde047" stroke="#92400e" stroke-width="1.6" stroke-linejoin="round"/></svg>';
-function pintaTurbo(){ if(!R) return; var n=R.latas, b=el('tAct'); if(!b) return; b.classList.add('show'); b.classList.add('turboOn'); b.innerHTML=SVG_RAIO+'<small style="display:block;font-size:13px;line-height:1">TURBO '+n+'</small>'; b.dataset.poder='turbo'; b.setAttribute('aria-label','Turbo'); b.classList.toggle('turbo0',n<=0); }
+function pintaTurbo(){ if(!R) return; var n=R.latas, b=el('tAct'); if(!b) return; b.classList.add('show'); b.classList.add('turboOn'); b.innerHTML=SVG_RAIO+'<small style="display:block;font-size:13px;line-height:1">TURBO '+n+'</small>'; b.dataset.poder='turbo'; b.setAttribute('aria-label','Turbo'); b.classList.toggle('turbo0',n<=0||(R.me&&R.me.turbo>0)); }
 function limpa(){ try{ SOM.motor(-1); }catch(e){} botoes(false); document.body.classList.remove('nacapa'); document.body.classList.remove('emcorrida'); R=null; J.corrida=null; }
 
 /* ============================================================
@@ -227,7 +228,7 @@ function volta(){ return voltaDe(R.me.z+PLAYER_Z); }
 /* o ritmo do rival depende só DELE: o nível escolhido, a volta em que ELE está (na 2ª todos apertam um pouco)
    e a curva (rival tira o pé; o herói que vira bem não precisa). Nada olha para a posição do herói. */
 function ritmoRivais(r){ var N=NIVEIS[R.nivel], v=voltaDe(r.z), s=segDe(r.z);
-  return N.k*(v===2?1.03:1)*(1-Math.min(.06,Math.abs(s.curva)*.02)); }
+  return N.k*(v===2?1.015:(v===3?N.ult:1))*(1-Math.min(.06,Math.abs(s.curva)*.02)); }
 /* 16/10 (Paulo: "no box perde várias quando erra, mas logo ao largar recupera todas"): o herói tinha a 1ª garagem —
    quem passava por ele parava nas garagens da frente e era devolvido na saída. Agora a garagem do herói é a ÚLTIMA:
    quem passa por ele no box já fez a própria parada, e a posição perdida é de verdade. */
@@ -237,8 +238,9 @@ function limitePit(falta){ return Math.max(VMAX*.1,Math.min(VMAX*.5,VMAX*.5*falt
 /* o herói: ▲ acelera, ▼ freia, ◀ ▶ dirigem; a curva empurra para fora (quem vira bem não perde nada) */
 function dirigeHeroi(me,dt,chegando){
   var zh=me.z+PLAYER_Z, s=segDe(zh), n=Math.floor(zh/SEG), pz=pitDe(zh), vm=VMAX;
-  if(me.turbo>0){ me.turbo-=dt; vm*=1.6; } if(me.pad>0){ me.pad-=dt; vm*=1.4; } if(me.wob>0) me.wob-=dt; if(me.salto>0) me.salto-=dt;
+  if(me.turbo>0){ me.turbo-=dt; vm*=1.75; if(me.turbo<=0) pintaTurbo(); } if(me.pad>0){ me.pad-=dt; vm*=1.4; } if(me.wob>0) me.wob-=dt; if(me.salto>0) me.salto-=dt;
   if(me.giro>0){ me.giro-=dt; vm*=.45; }
+  if(me.escorrega>0){ me.escorrega-=dt; me.x+=me.escDir*dt*.7; }
   var inp=0;
   if(R.auto){ inp=pilotoAuto(me); }
   else { inp=(J.in.right?1:0)-(J.in.left?1:0); }
@@ -269,7 +271,9 @@ function dirigeHeroi(me,dt,chegando){
   }
   if(me.lane<0&&!(pz&&!me.pitFeito[pz.pi])){ if(Math.abs(me.x)>1.17) vm*=.55; else if(Math.abs(me.x)>1.0) vm*=.85; } /* zebra freia um pouco; grama, bastante (nunca para) */
   /* encostou atrás de um rival na mesma faixa: não bate nem machuca, só não atravessa — é preciso trocar de faixa */
-  if(me.lane<0) R.rivais.forEach(function(r){ if(r.lane>=0||r.box>0) return; var dz=r.z-zh; if(dz>0&&dz<COMPR&&Math.abs(r.x-me.x)<.42) vm=Math.min(vm,Math.max(r.v*1.01,VMAX*.2)); });
+  if(me.lane<0) R.rivais.forEach(function(r){ if(r.lane>=0||r.box>0) return; var dz=r.z-zh;
+    if(me.turbo>0&&dz>0&&dz<SEG*14&&Math.abs(r.x-me.x)<.5){ var ld=r.x>=me.x?1:-1; if(Math.abs(r.x+ld*.75)>.85) ld=-ld; r.alvoX=cl(me.x+ld*.75,-.85,.85); r.x+=(r.alvoX-r.x)*Math.min(1,dt*6); return; } /* 16/11: no turbo, o da frente abre caminho */
+    if(dz>0&&dz<COMPR&&Math.abs(r.x-me.x)<.42) vm=Math.min(vm,Math.max(r.v*1.01,VMAX*.2)); });
   if(me.lane<0) me.x=cl(me.x,-1.55,1.6); else me.x=cl(me.x,-1.55,1.85); /* jogador: na grama o carrinho atravessava a torcida e as arquibancadas */
   if(!gas&&me.turbo<=0&&me.pad<=0) vm=0;
   if(me.v<vm) me.v=Math.min(vm,me.v+ACEL*dt*(me.turbo>0||me.pad>0?2.5:1));
@@ -323,15 +327,18 @@ function coletas(dt){ var me=R.me, n=Math.floor((me.z+PLAYER_Z)/SEG);
     if(R.carga>=3){ R.carga=0; R.latas=Math.min(9,R.latas+1); pintaTurbo(); SOM.fx('moedaG'); R.anunc={txt:'+1 TURBO',pt:'+1 turbo',cor:'#fde047',t:0}; } } });
   OBJ.rampas.forEach(function(rp){ if(Math.abs(rp.n-n)<1&&Math.abs(rp.x-me.x)<.45&&me.salto<=0&&me.lane<0){ me.salto=.9; me.pad=Math.max(me.pad,1.1); SOM.fx('rampa'); SOM.fx('torcida'); falaUma('rampa'); } });
   OBJ.pads.forEach(function(p){ if(Math.abs(p.n-n)<1&&Math.abs(p.x-me.x)<.4&&me.pad<=0){ me.pad=1; SOM.fx('turbo'); texto(me,'BOOST!'); } });
-  OBJ.poças.forEach(function(p){ if(Math.abs(p.n-n)<1&&Math.abs(p.x-me.x)<.38&&me.giro<=0&&me.salto<=0){ me.giro=1.0; me.v*=.4; SOM.fx('splash'); SOM.fx('tonto'); } }); /* 15/10: poça faz RODAR e perder muito */
-  OBJ.pneus.forEach(function(p){ if(Math.abs(p.n-n)<1&&Math.abs(p.x-me.x)<.36&&me.giro<=0&&me.salto<=0&&me.turbo<=0){ me.giro=1.1; me.v*=.3; SOM.fx('pisao'); J.shake=4; falaUma('bate'); } });
+  OBJ.poças.forEach(function(p){ if(p.usada||!(Math.abs(p.n-n)<1&&Math.abs(p.x-me.x)<.38&&me.giro<=0&&me.salto<=0)) return; p.usada=true; SOM.fx('splash');
+    /* 16/11 (Paulo: "muitas poças que atrapalham muito; algumas devem só lateralizar"): lascas e 2 de cada 3 poças só ESCORREGAM de lado; a 3ª roda de leve */
+    if(p.lama||hash(p.n*1.7)<.67){ me.escorrega=.45; me.escDir=me.x>=p.x?1:-1; me.v*=.92; }
+    else { me.giro=.55; me.v*=.7; SOM.fx('tonto'); } });
+  OBJ.pneus.forEach(function(p){ if(Math.abs(p.n-n)<1&&Math.abs(p.x-me.x)<.36&&me.giro<=0&&me.salto<=0&&me.turbo<=0){ me.giro=.8; me.v*=.5; SOM.fx('pisao'); J.shake=4; falaUma('bate'); } });
   R.rivais.forEach(function(r){ var rn=Math.floor(r.z/SEG); OBJ.poças.forEach(function(p){ if(Math.abs(p.n-rn)<1&&Math.abs(p.x-r.x)<.4&&r.giro<=0&&!p.lama&&r.salto<=0){ r.giro=1.2; R.erros++; if(Math.abs(r.z-me.z-PLAYER_Z)<SEG*60) R.errosVistos++; } }); }); }
 function texto(c,txt){ R.pt.push({c:c,txt:txt,vida:1,max:1}); }
 function eventos(){ var me=R.me, s=segDe(me.z+PLAYER_Z*3), n=Math.floor(me.z/SEG);
   var vv=volta(); if(vv!==R.volta){ R.volta=vv; if(vv>1){ falaUma('volta'+vv); R.anunc={txt:'LAP '+vv+' / 3',pt:'VOLTA '+vv+' / 3',cor:vv===2?'#f87171':'#4ade80',t:0}; SOM.fx('chefao'); } }
   if(s.tag.pad) falaUma('pad'); if(s.tag.arq) SOM.ambVolume&&SOM.ambVolume(1); else SOM.ambVolume&&SOM.ambVolume(0); if(s.tag.ponte) falaUma('ponte'); if(s.tag.lama) falaUma('lama'); if(R.conde) falaUma('conde'); if(n>FIM_SEG-160) falaUma('fim');
   PITS.forEach(function(P,i){ if(n>P.ini-90&&n<P.ini-40&&!R.falou['pit'+i]){ R.falou['pit'+i]=true; fala(FALAS.pit[0],FALAS.pit[1]); } });
-  if(!R.conde&&n>CONDE_SEG){ R.conde=novoCarro('count',me.z+PLAYER_Z+SEG*40,0,false); R.conde.v=VMAX*.85; R.conde.tiro=1.5; SOM.fx('risada'); SOM.musica('chefao'); } }
+  /* 16/11 (Paulo): o Octávio NÃO corre — vilão só aparece de fato no chefão; aqui ele é só figurante escondido na torcida do castelo */ }
 /* o Conde: anda na frente e solta poças de tinta do tinteiro (a origem é ele) */
 function dirigeConde(dt){ var C=R.conde, me=R.me, zh=me.z+PLAYER_Z; var vm=VMAX*(C.z>zh+SEG*60?.7:.9); C.v+=(vm-C.v)*Math.min(1,dt*2); C.z+=C.v*dt; C.x+=(Math.sin(R.t*.7)*.6-C.x)*Math.min(1,dt);
   C.tiro-=dt; if(C.tiro<=0&&C.z>zh+SEG*6&&C.z<FIM_SEG*SEG-SEG*60){ C.tiro=2.2; OBJ.poças.push({n:Math.floor(C.z/SEG)-2,x:C.x,nova:.6}); SOM.fx('folha'); }
@@ -342,7 +349,8 @@ function usaTurbo(auto){
   if(!R||R.acabou||(R.fase!=='corre'&&R.fase!=='saida')) return false;
   if(R.latas<=0){ if(!auto&&(!R.avisoSem||R.t-R.avisoSem>4)){ R.avisoSem=R.t; fala('No turbos yet! Answer right at the pit stop.','Ainda sem turbo! Acerte no pit stop.'); } return false; }
   if(R.me.box>0||R.me.lane>=0) return false;
-  R.latas--; R.me.turbo=R.me.turbo>0?R.me.turbo+2:2; R.turbosUsados=(R.turbosUsados||0)+1; SOM.fx('turbo'); pintaTurbo(); if(!auto) fala('TURBO!','TURBO!'); return true; }
+  if(R.me.turbo>0) return false; /* 16/11 (Paulo): um turbo por vez — disparar outro junto era desperdício */
+  R.latas--; R.me.turbo=3; R.turbosUsados=(R.turbosUsados||0)+1; SOM.fx('turbo'); pintaTurbo(); if(!auto) fala('TURBO!','TURBO!'); return true; }
 
 /* ============================================================
    PIT STOP: só perguntas (conceito + historinha + rápida)
@@ -526,6 +534,7 @@ function desenhaSprite(c,sp,x,y,k,t,clip){
     case 'placa_pit': c.scale(s*800/100,s*800/100); c.fillStyle='#57534e'; c.fillRect(-4,-50,8,50); c.fillStyle='#fde047'; rr(c,-46,-92,92,44,8); c.fill(); c.strokeStyle='#1c1917'; c.lineWidth=3; rr(c,-46,-92,92,44,8); c.stroke(); c.fillStyle='#1c1917'; c.font=F(900,22); c.textAlign='center'; c.textBaseline='middle'; c.fillText('PIT ▶',0,-70); break;
     case 'garagem': c.scale(s*900/100,s*900/100); c.fillStyle='#57534e'; c.fillRect(-50,-80,100,80); c.fillStyle=['#3b82f6','#16a34a','#f59e0b','#8b5cf6','#0ea5e9','#ef4444','#14b8a6','#a855f7','#f97316','#eab308'][sp.k]; c.fillRect(-44,-74,88,74); c.fillStyle='rgba(255,255,255,.25)'; for(var g2=0;g2<5;g2++) c.fillRect(-44,-68+g2*14,88,6); c.fillStyle='#fff'; c.font=F(900,20); c.textAlign='center'; c.textBaseline='middle'; c.fillText(sp.k===9?(J.tr?'VOCÊ':'YOU'):String(sp.k+1),0,-40); break;
     case 'caixa_box': break;
+    case 'octavio_espia': if(A.octavioEspia){ c.scale(s*1100/100,s*1100/100); A.octavioEspia(c,0,0,t,.5+.5*Math.sin(t*.9),'moita',false); } break; /* 16/11: figurante na beira, sobe e desce devagar */
     case 'torcida_magica': { c.scale(s*2000/300,s*2000/300);
       c.fillStyle='#7c3aed'; c.fillRect(-150,-78,300,78); c.fillStyle='#a78bfa'; c.fillRect(-150,-82,300,8);
       var GR=[['pin','paws','gigi','breezy'],['pin','drop','boing','paws'],['gigi','breezy','paws','boing'],['paws','pin','max','gigi'],['breezy','drop','pin','paws']][sp.k||0];
