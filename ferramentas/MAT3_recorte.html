@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='ebfa5100803';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='4b783e30821';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -15,7 +15,8 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <title>Math · Cut and study · Year 2 · 3rd term</title>
 <style>
   /* Folha de RECORTE (17/11/2026): palavras e expressões da prova em fichas para imprimir, recortar e montar frases.
-     Conteúdo só do _roteiro.md (trabalho/3tri_matematica). Uma cor por tema; a cor vai dentro da ficha recortada. */
+     Conteúdo só do _roteiro.md (trabalho/3tri_matematica). v2 (Paulo, 17/11): sem fundo colorido, sem contas prontas,
+     frases-modelo partidas (This pencil + is + long), definições curtas; última página = roteiro do pai com o gabarito. */
   @page { size: A4; margin: 9mm 9mm 10mm; }
   :root { --ink: #1d1d1f; --soft: #5b5b66; --corte: #7a7f92; }
   * { box-sizing: border-box; }
@@ -26,90 +27,150 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   .tools a, .tools button { font: 600 15px Arial, sans-serif; color: #fff; background: #4a3f72; border: 0; border-radius: 10px;
            min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; text-decoration: none; cursor: pointer; }
   .tools button.pri { background: #c62828; }
-  main { max-width: 192mm; margin: 16px auto 40px; background: #fff; padding: 9mm; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
-  .topo { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4mm; }
+  .folha { max-width: 192mm; margin: 16px auto 24px; background: #fff; padding: 9mm; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+  .topo { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 3mm; }
   h1 { margin: 0; font-size: 22pt; }
   .como { margin: 0; font: 600 10.5pt Arial, sans-serif; color: var(--soft); }
   section { margin-top: 5mm; }
-  section h2 { margin: 0 0 2mm; font: 700 13pt Arial, sans-serif; color: #fff; background: var(--c); border-radius: 6px;
-               padding: 1.2mm 4mm; break-after: avoid; page-break-after: avoid; }
+  section h2 { margin: 0 0 2mm; font: 700 13pt Arial, sans-serif; color: var(--c); border-bottom: 1.5px solid var(--c);
+               padding-bottom: 1mm; break-after: avoid; page-break-after: avoid; }
   .fichas { display: flex; flex-wrap: wrap; gap: 2mm; align-items: stretch; }
   .f { break-inside: avoid; page-break-inside: avoid; display: inline-flex; align-items: center; justify-content: center; text-align: center;
-       background: var(--t); border: 1.4px dashed var(--corte); padding: 2.6mm 4mm; min-height: 15mm; font-size: 20pt; line-height: 1.12;
+       border: 1.4px dashed var(--corte); padding: 2.6mm 4mm; min-height: 15mm; font-size: 20pt; line-height: 1.12; color: var(--c);
        max-width: 100%; }
-  .f.k { font-weight: 700; color: var(--d); }                 /* palavra-chave do tema */
-  .f.x { font-size: 17pt; }                                  /* expressão / pedaço de frase */
-  .f.s { font-size: 24pt; font-weight: 700; min-width: 15mm; } /* sinal ou conta */
-  .f.p { padding: 1.5mm 2mm; background: #fff; }             /* figura */
+  .f.k { font-weight: 700; }                                  /* palavra-chave do tema */
+  .f.x { font-size: 17pt; }                                   /* expressão curta */
+  .f.s { font-size: 26pt; font-weight: 700; min-width: 15mm; } /* sinal */
+  .f.p { padding: 1.5mm 2mm; }                                /* figura */
   .f.p svg { width: 30mm; height: 30mm; display: block; }
-  .f.p .lb { display: none; }
+  /* roteiro do pai */
+  .pai { break-before: page; page-break-before: always; font-family: Arial, sans-serif; font-size: 10.5pt; line-height: 1.38; }
+  .pai h1 { font-size: 17pt; margin-bottom: 1mm; }
+  .pai .sub { color: var(--soft); margin: 0 0 3mm; }
+  .pai h3 { margin: 3.2mm 0 1mm; font-size: 11pt; color: var(--c); }
+  .pai ol { margin: 0; padding-left: 5mm; }
+  .pai li { margin: .6mm 0; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
+  .pai li + li { border-top: 1px solid color-mix(in srgb, var(--c) 18%, transparent); padding-top: .6mm; }
+  .pai b { color: var(--ink); }
+  .pai em { font-style: normal; font-family: "Comic Sans MS", "Comic Neue", Arial, sans-serif; color: var(--c); }
   @media print {
     body { background: #fff; } .tools { display: none !important; }
-    main { margin: 0; padding: 0; max-width: none; box-shadow: none; }
+    .folha { margin: 0; padding: 0; max-width: none; box-shadow: none; }
   }
-  @media (max-width: 600px) { main { padding: 4mm; margin: 8px 0 24px; } }
+  @media (max-width: 600px) { .folha { padding: 4mm; margin: 8px 0 16px; } }
 </style>
 </head>
 <body>
 <div class="tools">
-  <a href="../index.html?v=ebfa5100803" class="sera-home">Home</a>
+  <a href="../index.html?v=4b783e30821" class="sera-home">Home</a>
   <a href="media/mat3/Recorte_Math.pdf" target="_blank" rel="noopener">PDF</a>
   <button class="pri" onclick="window.print()">Print / Imprimir</button>
 </div>
-<main lang="en" id="folha">
+<main class="folha" lang="en" id="folha">
   <div class="topo">
     <h1>Cut and study</h1>
-    <p class="como" lang="pt-BR" data-tipo="rotulo">Recorte nas linhas tracejadas &middot; cada cor é um tema &middot; monte as frases: <b>length</b> + <b>means</b> + <b>from one end to the other</b></p>
+    <p class="como" lang="pt-BR" data-tipo="rotulo">Recorte nas linhas tracejadas &middot; cada cor de letra é um tema &middot; roteiro do pai na última página</p>
   </div>
   <div id="temas"></div>
 </main>
-<script src="MAT3_figuras.js?v=ebfa5100803"></script>
+<div class="folha pai" lang="pt-BR" id="pai">
+  <h1>Roteiro do pai &middot; Cut and study</h1>
+  <p class="sub" data-tipo="rotulo">Um tema por vez. Espalhe só as fichas da cor do tema. A criança monta, lê em voz alta, você confere.</p>
+
+  <h3 style="--c:#1565c0">1 &middot; Measure (azul)</h3>
+  <ol style="--c:#1565c0">
+    <li>Monte: <em>length + means + from one end to the other</em>.</li>
+    <li><em>wide + means + from one side to the other</em> &middot; <em>tall + means + from the bottom to the top</em> &middot; <em>height + means + how tall something is</em>.</li>
+    <li>Frases: <em>This pencil + is + long / short</em> &middot; <em>This book + is + wide / narrow</em> &middot; <em>This tree + is + tall</em>. Troque o objeto e a palavra.</li>
+    <li>Dois objetos de casa: <em>This pencil + is + longer than</em> o outro (ou <em>shorter than</em>).</li>
+    <li>Ligue o nome à sigla: <em>centimetres = cm</em>, <em>metres = m</em>, <em>kilometres = km</em>.</li>
+  </ol>
+
+  <h3 style="--c:#e65100">2 &middot; Perimeter (laranja)</h3>
+  <ol style="--c:#e65100">
+    <li>Monte: <em>perimeter + means + the distance around a shape</em> e <em>Add all the sides!</em></li>
+    <li>Desenhe um retângulo com um número em cada lado. A criança aponta <em>top, bottom, left side, right side</em> e escreve a soma usando as fichas <em>+</em> e <em>=</em>.</li>
+    <li>Repita com <em>square</em> e <em>triangle</em>. Resposta sempre com <b>cm</b>.</li>
+  </ol>
+
+  <h3 style="--c:#2e7d32">3 &middot; 3-D solids (verde)</h3>
+  <ol style="--c:#2e7d32">
+    <li>Ligue cada nome ao desenho: <em>cube, cuboid, pyramid, cylinder, cone, sphere</em>.</li>
+    <li>Monte: <em>face = a flat surface</em> &middot; <em>edge = where two faces meet</em> &middot; <em>vertex = a corner</em> (dois ou mais: <em>vertices</em>).</li>
+    <li>No cubo: <em>6 faces, 12 edges, 8 vertices</em>. Na esfera: <em>no edges, no vertices</em>.</li>
+    <li>Separe em dois montes: <em>roll</em> = <b>sphere, cylinder</b> (têm <em>curved surface</em>) &middot; <em>stay still</em> = <b>cube, cuboid, pyramid</b>.</li>
+  </ol>
+
+  <h3 style="--c:#6a1b9a">4 &middot; Data and bar graphs (roxo)</h3>
+  <ol style="--c:#6a1b9a">
+    <li>Monte: <em>data + means + information we collect</em> &middot; <em>a piece of data = one fact</em>.</li>
+    <li>Desenhe 3 barras de alturas diferentes. A criança põe <em>the tallest bar = the most</em> e <em>the shortest bar = the least</em> na barra certa.</li>
+  </ol>
+
+  <h3 style="--c:#ad1457">5 &middot; Probability (rosa)</h3>
+  <ol style="--c:#ad1457">
+    <li>Monte: <em>probability + means + Will it happen?</em></li>
+    <li>Coloque em ordem, de cima para baixo: <b>certain &rarr; likely &rarr; possible &rarr; unlikely &rarr; impossible</b>.</li>
+    <li>Ao lado de cada uma: <em>it will happen</em> &middot; <em>big chance</em> &middot; <em>maybe</em> &middot; <em>small chance</em> &middot; <em>it won&rsquo;t happen</em>.</li>
+    <li>Diga uma frase e a criança mostra a ficha: comer pedras (<b>impossible</b>), ver um pinguim no deserto (<b>unlikely</b>), achar alunos na escola (<b>likely</b>), jantar amanhã (<b>certain</b>). Ela completa com <em>I know this because&hellip;</em></li>
+  </ol>
+
+  <h3 style="--c:#c62828">6 &middot; Multiplication (vermelho)</h3>
+  <ol style="--c:#c62828">
+    <li>Monte: <em>multiplication + means + repeated addition</em> &middot; só com <em>equal groups</em>.</li>
+    <li>Faça 4 grupos de 3 objetos na mesa. A criança diz com as fichas: <em>4 groups of 3</em>, <em>3 in each group</em>, <em>12 altogether</em>.</li>
+    <li>Você escreve os números à mão; ela encaixa <em>+</em>, <em>&times;</em> e <em>=</em>: primeiro a <em>addition sentence</em> (3 + 3 + 3 + 3 = 12), depois a <em>multiplication sentence</em> (4 &times; 3 = 12).</li>
+  </ol>
+
+  <h3 style="--c:#00796b">7 &middot; Division (verde-água)</h3>
+  <ol style="--c:#00796b">
+    <li>Monte: <em>division + means + sharing into equal groups</em>.</li>
+    <li>12 objetos, 3 pratos: a criança reparte e diz <em>share equally</em>, <em>4 in each group</em>. Você escreve os números; ela encaixa <em>&divide;</em> e <em>=</em> (12 &divide; 3 = 4).</li>
+    <li>Par e ímpar: reparta entre 2 pratos. <em>even numbers</em> &rarr; <em>nothing is left</em> &middot; <em>odd numbers</em> &rarr; <em>1 is left</em>.</li>
+  </ol>
+</div>
+<script src="MAT3_figuras.js?v=4b783e30821"></script>
 <script>
-/* k = palavra-chave · x = expressão · s = sinal/conta · p:nome = figura do sólido (MAT3_figuras.js) · demais = palavra comum */
+/* k = palavra-chave · x = expressão · s = sinal · p:nome = figura do sólido (MAT3_figuras.js) · demais = palavra comum */
 var TEMAS = [
-  { t: '1 · Measure and compare', c: '#1565c0', tint: '#e3efff', d: '#0d47a1', f: [
+  { t: '1 · Measure and compare', c: '#1565c0', f: [
     'k:measure', 'k:length', 'means', 'x:how long something is', 'x:from one end to the other',
-    'k:long', 'k:short', 'k:longer', 'k:shorter', 'x:longer than', 'x:shorter than',
-    'k:wide', 'k:narrow', 'k:wider', 'x:across', 'x:from one side to the other',
-    'k:tall', 'k:taller', 'k:height', 'high', 'x:how tall someone or something is', 'x:from the bottom to the top',
-    'x:This pencil is long.', 'x:This book is wide.', 'x:This tree is tall.',
+    'k:long', 'k:short', 'k:longer than', 'k:shorter than',
+    'k:wide', 'k:narrow', 'k:wider', 'x:from one side to the other',
+    'k:tall', 'k:taller', 'k:height', 'x:how tall something is', 'x:from the bottom to the top',
+    'This pencil', 'This book', 'This tree', 'This girl', 'is',
     'k:centimetres', 's:cm', 'k:metres', 's:m', 'k:kilometres', 's:km' ] },
-  { t: '2 · Perimeter', c: '#e65100', tint: '#fff0e0', d: '#bf360c', f: [
-    'k:perimeter', 'means', 'x:the total distance around a shape', 'x:Add all the sides!',
-    'k:sides', 'top', 'bottom', 'x:left side', 'x:right side',
-    'rectangle', 'square', 'triangle', 'x:Show your work.', 's:+', 's:=', 's:6 + 6 + 4 + 4 = 20 cm', 's:5 + 5 + 5 + 5 = 20 cm' ] },
-  { t: '3 · 3-D solids', c: '#2e7d32', tint: '#e6f5e6', d: '#1b5e20', f: [
-    'k:3D solid', 'means', 'x:a solid shape that has faces, edges and vertices',
-    'k:face', 'x:a flat surface', 'k:edge', 'x:a straight line where two faces meet',
-    'k:vertex', 'k:vertices', 'x:a corner where two or more edges meet',
-    'k:flat', 'k:curved', 'k:curved surface', 'k:roll', 'x:stay still',
+  { t: '2 · Perimeter', c: '#e65100', f: [
+    'k:perimeter', 'means', 'x:the distance around a shape', 'x:Add all the sides!',
+    'k:sides', 'top', 'bottom', 'left side', 'right side',
+    'rectangle', 'square', 'triangle', 's:+', 's:+', 's:+', 's:=', 's:cm' ] },
+  { t: '3 · 3-D solids', c: '#2e7d32', f: [
+    'k:3D solid', 'means', 'x:has faces, edges and vertices', 's:=', 's:=', 's:=',
+    'k:face', 'x:a flat surface', 'k:edge', 'x:where two faces meet', 'k:vertex', 'k:vertices', 'x:a corner',
+    'k:flat', 'k:curved surface', 'k:roll', 'k:stay still',
     'k:cube', 'p:cube', 'k:cuboid', 'p:cuboid', 'k:pyramid', 'p:pyramid',
     'k:cylinder', 'p:cylinder', 'k:cone', 'p:cone', 'k:sphere', 'p:sphere',
     'x:6 faces', 'x:12 edges', 'x:8 vertices', 'x:no edges', 'x:no vertices' ] },
-  { t: '4 · Data and bar graphs', c: '#6a1b9a', tint: '#f3e6fa', d: '#4a148c', f: [
-    'k:data', 'means', 'x:all the information we collect and find out', 'x:we organize it using charts and graphs',
-    'k:a piece of data', 'x:one simple fact', 'k:bar graph', 'k:bar', 'k:chart', 'k:table',
-    'x:How many?', 'x:the most', 'x:the least', 'x:the tallest bar', 'x:the shortest bar' ] },
-  { t: '5 · Probability', c: '#ad1457', tint: '#fde6ef', d: '#880e4f', f: [
-    'k:probability', 'means', 'x:thinking about if something will happen, won\u2019t happen, or will maybe happen',
-    'k:certain', 'x:we know it will happen', 'k:likely', 'x:big chance to happen', 'k:possible', 'x:it will maybe happen',
-    'k:unlikely', 'x:small chance to happen', 'k:impossible', 'x:we know it won\u2019t happen',
-    'x:I know this because\u2026' ] },
-  { t: '6 · Multiplication', c: '#c62828', tint: '#fde8e8', d: '#b71c1c', f: [
-    'k:multiplication', 'means', 'x:a shorter way to show repeated addition',
-    'k:equal groups', 'k:repeated addition', 'x:groups of', 'x:in each group', 'k:altogether', 'k:total',
-    'k:addition sentence', 'k:multiplication sentence', 'times', 's:\u00d7', 's:=',
-    's:3 + 3 + 3 + 3 = 12', 's:4 \u00d7 3 = 12', 'x:4 groups of 3 are 12 altogether' ] },
-  { t: '7 · Division', c: '#00796b', tint: '#e0f4f1', d: '#004d40', f: [
-    'k:division', 'means', 'x:a way to make equal groups of a number', 'k:share', 'k:equally', 'x:shared into 3 equal groups',
-    'x:in each group', 'k:division sentence', 's:\u00f7', 's:=', 's:12 \u00f7 3 = 4', 's:10 \u00f7 2 = 5',
-    'k:even numbers', 'x:0, 2, 4, 6, 8, 10, 12', 'k:odd numbers', 'x:1, 3, 5, 7, 9', 'x:between 2', 'x:1 is left' ] }
+  { t: '4 · Data and bar graphs', c: '#6a1b9a', f: [
+    'k:data', 'means', 'x:information we collect', 'k:a piece of data', 'x:one fact', 's:=', 's:=', 's:=',
+    'k:bar graph', 'k:chart', 'k:table', 'x:How many?', 'x:the tallest bar', 'x:the most', 'x:the shortest bar', 'x:the least' ] },
+  { t: '5 · Probability', c: '#ad1457', f: [
+    'k:probability', 'means', 'x:Will it happen?',
+    'k:certain', 'x:it will happen', 'k:likely', 'x:big chance', 'k:possible', 'x:maybe',
+    'k:unlikely', 'x:small chance', 'k:impossible', 'x:it won\u2019t happen', 'x:I know this because\u2026' ] },
+  { t: '6 · Multiplication', c: '#c62828', f: [
+    'k:multiplication', 'means', 'x:repeated addition', 'k:equal groups', 'x:groups of', 'x:in each group', 'k:altogether',
+    'k:addition sentence', 'k:multiplication sentence', 's:+', 's:+', 's:+', 's:\u00d7', 's:=', 's:=' ] },
+  { t: '7 · Division', c: '#00796b', f: [
+    'k:division', 'means', 'x:sharing into equal groups', 'k:share', 'k:equally', 'x:in each group',
+    'k:division sentence', 's:\u00f7', 's:=',
+    'k:even numbers', 'x:0, 2, 4, 6, 8, 10, 12', 'x:nothing is left', 'k:odd numbers', 'x:1, 3, 5, 7, 9', 'x:1 is left' ] }
 ];
 (function () {
   var box = document.getElementById('temas'), h = '';
   function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
   TEMAS.forEach(function (T) {
-    h += '<section style="--c:' + T.c + ';--t:' + T.tint + ';--d:' + T.d + '"><h2 data-tipo="rotulo">' + esc(T.t) + '</h2><div class="fichas">';
+    h += '<section style="--c:' + T.c + '"><h2 data-tipo="rotulo">' + esc(T.t) + '</h2><div class="fichas">';
     T.f.forEach(function (it) {
       var m = /^(k|x|s|p):(.*)$/.exec(it), tipo = m ? m[1] : '', txt = m ? m[2] : it;
       if (tipo === 'p') h += '<span class="f p" role="img" aria-label="' + txt + '">' + MAT3F.solido(txt) + '</span>';
