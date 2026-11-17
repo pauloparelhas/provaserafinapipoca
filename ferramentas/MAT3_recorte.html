@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='4b783e30821';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='a1fbb2c0831';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -44,13 +44,17 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   .f.p { padding: 1.5mm 2mm; }                                /* figura */
   .f.p svg { width: 30mm; height: 30mm; display: block; }
   /* roteiro do pai */
-  .pai { break-before: page; page-break-before: always; font-family: Arial, sans-serif; font-size: 10.5pt; line-height: 1.38; }
+  .pai { break-before: page; page-break-before: always; font-family: Arial, sans-serif; font-size: 10pt; line-height: 1.3; }
   .pai h1 { font-size: 17pt; margin-bottom: 1mm; }
   .pai .sub { color: var(--soft); margin: 0 0 3mm; }
-  .pai h3 { margin: 3.2mm 0 1mm; font-size: 11pt; color: var(--c); }
+  .pai h3 { margin: 2.4mm 0 .6mm; font-size: 11pt; color: var(--c); }
   .pai ol { margin: 0; padding-left: 5mm; }
-  .pai li { margin: .6mm 0; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
+  .pai li { margin: .3mm 0; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
   .pai li + li { border-top: 1px solid color-mix(in srgb, var(--c) 18%, transparent); padding-top: .6mm; }
+  .pai .comfig { display: flex; gap: 4mm; align-items: center; }
+  .pai .comfig ol { flex: 1; }
+  .pai .fg { flex: 0 0 auto; }
+  .pai .fg svg { display: block; height: auto; }
   .pai b { color: var(--ink); }
   .pai em { font-style: normal; font-family: "Comic Sans MS", "Comic Neue", Arial, sans-serif; color: var(--c); }
   @media print {
@@ -62,7 +66,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 </head>
 <body>
 <div class="tools">
-  <a href="../index.html?v=4b783e30821" class="sera-home">Home</a>
+  <a href="../index.html?v=a1fbb2c0831" class="sera-home">Home</a>
   <a href="media/mat3/Recorte_Math.pdf" target="_blank" rel="noopener">PDF</a>
   <button class="pri" onclick="window.print()">Print / Imprimir</button>
 </div>
@@ -87,11 +91,11 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   </ol>
 
   <h3 style="--c:#e65100">2 &middot; Perimeter (laranja)</h3>
-  <ol style="--c:#e65100">
+  <div class="comfig"><ol style="--c:#e65100">
     <li>Monte: <em>perimeter + means + the distance around a shape</em> e <em>Add all the sides!</em></li>
-    <li>Desenhe um retângulo com um número em cada lado. A criança aponta <em>top, bottom, left side, right side</em> e escreve a soma usando as fichas <em>+</em> e <em>=</em>.</li>
-    <li>Repita com <em>square</em> e <em>triangle</em>. Resposta sempre com <b>cm</b>.</li>
-  </ol>
+    <li>Copie num papel o retângulo ao lado, com a medida em cada lado. A criança aponta <em>top, bottom, left side, right side</em>; você escreve os números e ela encaixa <em>+</em>, <em>=</em> e <em>cm</em>: 6 + 6 + 4 + 4 = 20 cm.</li>
+    <li>Repita com um <em>square</em> (5 cm cada lado) e um <em>triangle</em> (6 cm cada lado). Resposta sempre com <b>cm</b>.</li>
+  </ol><div class="fg" id="figPer"></div></div>
 
   <h3 style="--c:#2e7d32">3 &middot; 3-D solids (verde)</h3>
   <ol style="--c:#2e7d32">
@@ -102,10 +106,11 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   </ol>
 
   <h3 style="--c:#6a1b9a">4 &middot; Data and bar graphs (roxo)</h3>
-  <ol style="--c:#6a1b9a">
+  <div class="comfig"><ol style="--c:#6a1b9a">
     <li>Monte: <em>data + means + information we collect</em> &middot; <em>a piece of data = one fact</em>.</li>
-    <li>Desenhe 3 barras de alturas diferentes. A criança põe <em>the tallest bar = the most</em> e <em>the shortest bar = the least</em> na barra certa.</li>
-  </ol>
+    <li>Copie num papel o <em>bar graph</em> ao lado. A criança põe <em>the tallest bar = the most</em> em Dogs e <em>the shortest bar = the least</em> em Rabbits.</li>
+    <li>Aponte uma barra e use a ficha <em>How many?</em>: ela lê o número na lateral (Hamsters 4, Rabbits 2, Dogs 6, Cats 3).</li>
+  </ol><div class="fg" id="figBar"></div></div>
 
   <h3 style="--c:#ad1457">5 &middot; Probability (rosa)</h3>
   <ol style="--c:#ad1457">
@@ -129,7 +134,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
     <li>Par e ímpar: reparta entre 2 pratos. <em>even numbers</em> &rarr; <em>nothing is left</em> &middot; <em>odd numbers</em> &rarr; <em>1 is left</em>.</li>
   </ol>
 </div>
-<script src="MAT3_figuras.js?v=4b783e30821"></script>
+<script src="MAT3_figuras.js?v=a1fbb2c0831"></script>
 <script>
 /* k = palavra-chave · x = expressão · s = sinal · p:nome = figura do sólido (MAT3_figuras.js) · demais = palavra comum */
 var TEMAS = [
@@ -179,6 +184,9 @@ var TEMAS = [
     h += '</div></section>';
   });
   box.innerHTML = h;
+  function fig(id, svg, mm) { var d = document.getElementById(id); d.innerHTML = svg; d.firstChild.style.width = mm + 'mm'; }
+  fig('figPer', MAT3F.retangulo(150, 90, 6, 4, '#fff'), 40);
+  fig('figBar', MAT3F.barras(['Hamsters', 'Rabbits', 'Dogs', 'Cats'], [4, 2, 6, 3], 6, ''), 46);
 })();
 </script>
 </body>
