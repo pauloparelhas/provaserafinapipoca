@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='b46c5f40833';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='a30d1ec0836';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -44,10 +44,10 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   .f.p { padding: 1.5mm 2mm; }                                /* figura */
   .f.p svg { width: 30mm; height: 30mm; display: block; }
   /* roteiro do pai */
-  .pai { break-before: page; page-break-before: always; font-family: Arial, sans-serif; font-size: 10pt; line-height: 1.3; }
-  .pai h1 { font-size: 17pt; margin-bottom: 1mm; }
+  .pai { break-before: page; page-break-before: always; font-family: Arial, sans-serif; font-size: 10pt; line-height: 1.25; }
+  .pai h1 { font-size: 16pt; margin-bottom: .5mm; }
   .pai .sub { color: var(--soft); margin: 0 0 3mm; }
-  .pai h3 { margin: 2.4mm 0 .6mm; font-size: 11pt; color: var(--c); }
+  .pai h3 { margin: 2mm 0 .4mm; font-size: 11pt; color: var(--c); }
   .pai ol { margin: 0; padding-left: 5mm; }
   .pai li { margin: .3mm 0; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
   .pai li + li { border-top: 1px solid color-mix(in srgb, var(--c) 18%, transparent); padding-top: .6mm; }
@@ -56,6 +56,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   .pai .fg { flex: 0 0 auto; }
   .pai .fg svg { display: block; height: auto; }
   .pai b { color: var(--ink); }
+  .pai .dica { margin: 0 0 2mm; padding: 1.6mm 3mm; border: 1px solid #c9cbd6; border-radius: 6px; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
   .pai em { font-style: normal; font-family: "Comic Sans MS", "Comic Neue", Arial, sans-serif; color: var(--c); }
   @media print {
     body { background: #fff; } .tools { display: none !important; }
@@ -66,7 +67,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 </head>
 <body>
 <div class="tools">
-  <a href="../index.html?v=b46c5f40833" class="sera-home">Home</a>
+  <a href="../index.html?v=a30d1ec0836" class="sera-home">Home</a>
   <a href="media/mat3/Recorte_Math.pdf" target="_blank" rel="noopener">PDF</a>
   <button class="pri" onclick="window.print()">Print / Imprimir</button>
 </div>
@@ -80,6 +81,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <div class="folha pai" lang="pt-BR" id="pai">
   <h1>Roteiro do pai &middot; Cut and study</h1>
   <p class="sub" data-tipo="rotulo">Um tema por vez. Espalhe só as fichas da cor do tema. A criança monta, lê em voz alta, você confere.</p>
+  <p class="dica"><b>Dica:</b> depois de montar, ela copia a frase no caderno, com a própria letra. Escrever ajuda a guardar a ligação entre a palavra e o que ela quer dizer, e a prova também pede respostas escritas.</p>
 
   <h3 style="--c:#1565c0">1 &middot; Measure (azul)</h3>
   <ol style="--c:#1565c0">
@@ -134,7 +136,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
     <li>Par e ímpar: reparta entre 2 pratos. <em>even numbers</em> &rarr; <em>nothing is left</em> &middot; <em>odd numbers</em> &rarr; <em>1 is left</em>.</li>
   </ol>
 </div>
-<script src="MAT3_figuras.js?v=b46c5f40833"></script>
+<script src="MAT3_figuras.js?v=a30d1ec0836"></script>
 <script>
 /* k = palavra-chave · x = expressão · s = sinal · p:nome = figura do sólido (MAT3_figuras.js) · demais = palavra comum */
 var TEMAS = [
