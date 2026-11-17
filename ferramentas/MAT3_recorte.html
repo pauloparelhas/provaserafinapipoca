@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='ebfa5100803';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Math · Cut and study · Year 2 · 3rd term</title>
+<style>
+  /* Folha de RECORTE (17/11/2026): palavras e expressões da prova em fichas para imprimir, recortar e montar frases.
+     Conteúdo só do _roteiro.md (trabalho/3tri_matematica). Uma cor por tema; a cor vai dentro da ficha recortada. */
+  @page { size: A4; margin: 9mm 9mm 10mm; }
+  :root { --ink: #1d1d1f; --soft: #5b5b66; --corte: #7a7f92; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #e9e6f2; color: var(--ink); font-family: "Comic Sans MS", "Comic Neue", "Trebuchet MS", Arial, sans-serif; }
+  .tools { position: sticky; top: 0; z-index: 5; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+           padding: 10px 16px; background: #2b2540; }
+  .tools a, .tools button { font: 600 15px Arial, sans-serif; color: #fff; background: #4a3f72; border: 0; border-radius: 10px;
+           min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; text-decoration: none; cursor: pointer; }
+  .tools button.pri { background: #c62828; }
+  main { max-width: 192mm; margin: 16px auto 40px; background: #fff; padding: 9mm; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+  .topo { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4mm; }
+  h1 { margin: 0; font-size: 22pt; }
+  .como { margin: 0; font: 600 10.5pt Arial, sans-serif; color: var(--soft); }
+  section { margin-top: 5mm; }
+  section h2 { margin: 0 0 2mm; font: 700 13pt Arial, sans-serif; color: #fff; background: var(--c); border-radius: 6px;
+               padding: 1.2mm 4mm; break-after: avoid; page-break-after: avoid; }
+  .fichas { display: flex; flex-wrap: wrap; gap: 2mm; align-items: stretch; }
+  .f { break-inside: avoid; page-break-inside: avoid; display: inline-flex; align-items: center; justify-content: center; text-align: center;
+       background: var(--t); border: 1.4px dashed var(--corte); padding: 2.6mm 4mm; min-height: 15mm; font-size: 20pt; line-height: 1.12;
+       max-width: 100%; }
+  .f.k { font-weight: 700; color: var(--d); }                 /* palavra-chave do tema */
+  .f.x { font-size: 17pt; }                                  /* expressão / pedaço de frase */
+  .f.s { font-size: 24pt; font-weight: 700; min-width: 15mm; } /* sinal ou conta */
+  .f.p { padding: 1.5mm 2mm; background: #fff; }             /* figura */
+  .f.p svg { width: 30mm; height: 30mm; display: block; }
+  .f.p .lb { display: none; }
+  @media print {
+    body { background: #fff; } .tools { display: none !important; }
+    main { margin: 0; padding: 0; max-width: none; box-shadow: none; }
+  }
+  @media (max-width: 600px) { main { padding: 4mm; margin: 8px 0 24px; } }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="../index.html?v=ebfa5100803" class="sera-home">Home</a>
+  <a href="media/mat3/Recorte_Math.pdf" target="_blank" rel="noopener">PDF</a>
+  <button class="pri" onclick="window.print()">Print / Imprimir</button>
+</div>
+<main lang="en" id="folha">
+  <div class="topo">
+    <h1>Cut and study</h1>
+    <p class="como" lang="pt-BR" data-tipo="rotulo">Recorte nas linhas tracejadas &middot; cada cor é um tema &middot; monte as frases: <b>length</b> + <b>means</b> + <b>from one end to the other</b></p>
+  </div>
+  <div id="temas"></div>
+</main>
+<script src="MAT3_figuras.js?v=ebfa5100803"></script>
+<script>
+/* k = palavra-chave · x = expressão · s = sinal/conta · p:nome = figura do sólido (MAT3_figuras.js) · demais = palavra comum */
+var TEMAS = [
+  { t: '1 · Measure and compare', c: '#1565c0', tint: '#e3efff', d: '#0d47a1', f: [
+    'k:measure', 'k:length', 'means', 'x:how long something is', 'x:from one end to the other',
+    'k:long', 'k:short', 'k:longer', 'k:shorter', 'x:longer than', 'x:shorter than',
+    'k:wide', 'k:narrow', 'k:wider', 'x:across', 'x:from one side to the other',
+    'k:tall', 'k:taller', 'k:height', 'high', 'x:how tall someone or something is', 'x:from the bottom to the top',
+    'x:This pencil is long.', 'x:This book is wide.', 'x:This tree is tall.',
+    'k:centimetres', 's:cm', 'k:metres', 's:m', 'k:kilometres', 's:km' ] },
+  { t: '2 · Perimeter', c: '#e65100', tint: '#fff0e0', d: '#bf360c', f: [
+    'k:perimeter', 'means', 'x:the total distance around a shape', 'x:Add all the sides!',
+    'k:sides', 'top', 'bottom', 'x:left side', 'x:right side',
+    'rectangle', 'square', 'triangle', 'x:Show your work.', 's:+', 's:=', 's:6 + 6 + 4 + 4 = 20 cm', 's:5 + 5 + 5 + 5 = 20 cm' ] },
+  { t: '3 · 3-D solids', c: '#2e7d32', tint: '#e6f5e6', d: '#1b5e20', f: [
+    'k:3D solid', 'means', 'x:a solid shape that has faces, edges and vertices',
+    'k:face', 'x:a flat surface', 'k:edge', 'x:a straight line where two faces meet',
+    'k:vertex', 'k:vertices', 'x:a corner where two or more edges meet',
+    'k:flat', 'k:curved', 'k:curved surface', 'k:roll', 'x:stay still',
+    'k:cube', 'p:cube', 'k:cuboid', 'p:cuboid', 'k:pyramid', 'p:pyramid',
+    'k:cylinder', 'p:cylinder', 'k:cone', 'p:cone', 'k:sphere', 'p:sphere',
+    'x:6 faces', 'x:12 edges', 'x:8 vertices', 'x:no edges', 'x:no vertices' ] },
+  { t: '4 · Data and bar graphs', c: '#6a1b9a', tint: '#f3e6fa', d: '#4a148c', f: [
+    'k:data', 'means', 'x:all the information we collect and find out', 'x:we organize it using charts and graphs',
+    'k:a piece of data', 'x:one simple fact', 'k:bar graph', 'k:bar', 'k:chart', 'k:table',
+    'x:How many?', 'x:the most', 'x:the least', 'x:the tallest bar', 'x:the shortest bar' ] },
+  { t: '5 · Probability', c: '#ad1457', tint: '#fde6ef', d: '#880e4f', f: [
+    'k:probability', 'means', 'x:thinking about if something will happen, won\u2019t happen, or will maybe happen',
+    'k:certain', 'x:we know it will happen', 'k:likely', 'x:big chance to happen', 'k:possible', 'x:it will maybe happen',
+    'k:unlikely', 'x:small chance to happen', 'k:impossible', 'x:we know it won\u2019t happen',
+    'x:I know this because\u2026' ] },
+  { t: '6 · Multiplication', c: '#c62828', tint: '#fde8e8', d: '#b71c1c', f: [
+    'k:multiplication', 'means', 'x:a shorter way to show repeated addition',
+    'k:equal groups', 'k:repeated addition', 'x:groups of', 'x:in each group', 'k:altogether', 'k:total',
+    'k:addition sentence', 'k:multiplication sentence', 'times', 's:\u00d7', 's:=',
+    's:3 + 3 + 3 + 3 = 12', 's:4 \u00d7 3 = 12', 'x:4 groups of 3 are 12 altogether' ] },
+  { t: '7 · Division', c: '#00796b', tint: '#e0f4f1', d: '#004d40', f: [
+    'k:division', 'means', 'x:a way to make equal groups of a number', 'k:share', 'k:equally', 'x:shared into 3 equal groups',
+    'x:in each group', 'k:division sentence', 's:\u00f7', 's:=', 's:12 \u00f7 3 = 4', 's:10 \u00f7 2 = 5',
+    'k:even numbers', 'x:0, 2, 4, 6, 8, 10, 12', 'k:odd numbers', 'x:1, 3, 5, 7, 9', 'x:between 2', 'x:1 is left' ] }
+];
+(function () {
+  var box = document.getElementById('temas'), h = '';
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  TEMAS.forEach(function (T) {
+    h += '<section style="--c:' + T.c + ';--t:' + T.tint + ';--d:' + T.d + '"><h2 data-tipo="rotulo">' + esc(T.t) + '</h2><div class="fichas">';
+    T.f.forEach(function (it) {
+      var m = /^(k|x|s|p):(.*)$/.exec(it), tipo = m ? m[1] : '', txt = m ? m[2] : it;
+      if (tipo === 'p') h += '<span class="f p" role="img" aria-label="' + txt + '">' + MAT3F.solido(txt) + '</span>';
+      else h += '<span class="f ' + tipo + '" data-tipo="rotulo">' + esc(txt) + '</span>';
+    });
+    h += '</div></section>';
+  });
+  box.innerHTML = h;
+})();
+</script>
+</body>
+</html>
