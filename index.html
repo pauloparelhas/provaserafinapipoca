@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='a30d1ec0836';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='f5cd2e52206';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -188,9 +188,6 @@ details.more[open] summary .chev{transform:rotate(180deg);}
 .footer-note{font-size:11.5px;color:var(--dim);font-weight:700;line-height:1.65;}
 .refresh-btn{margin-top:15px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:12px 22px;min-height:44px;color:var(--soft);font-size:12px;font-weight:900;cursor:pointer;letter-spacing:1px;font-family:inherit;}
 .refresh-btn:active{transform:scale(.96);}
-.tesoura{display:inline-flex;align-items:center;gap:10px;margin:4px auto 6px;padding:10px 18px;min-height:48px;border-radius:22px;border:1.5px dashed var(--line);color:var(--soft);text-decoration:none;font-size:13px;font-weight:900;}
-.tesoura .ic{font-size:26px;line-height:1;}
-.tesoura:hover{border-color:var(--geo);}
 
 /* ============ RESPONSIVO ============ */
 @media(min-width:620px){
@@ -263,10 +260,6 @@ body.show-tr #trBtn{outline:3px solid #fde047;outline-offset:2px}
 }
 /* 14/11: Math com 6 cartoes (video entrou depois da teoria): 3 colunas no tablet/paisagem, 6 no computador */
 @media (min-width:1100px){ #viewMat .picks{grid-template-columns:repeat(6,minmax(0,1fr))!important} }
-/* 17/11: 7o cartao (Cut and study, com "new" discreto): faixa baixa na linha de baixo no tablet; 7 colunas no computador */
-.novo{display:inline-block;margin-left:.45em;padding:1px 6px;border-radius:8px;border:1px solid currentColor;font-size:.62em;font-weight:800;letter-spacing:.4px;text-transform:uppercase;vertical-align:.2em;opacity:.6}
-@media (min-width:620px) and (max-width:1099px){ #viewMat .pick.recorte{grid-column:1/-1;flex-direction:row;justify-content:center;text-align:left;padding:8px 14px} #viewMat .pick.recorte .tag{margin-top:0} }
-@media (min-width:1100px){ #viewMat .picks{grid-template-columns:repeat(7,minmax(0,1fr))!important} }
 /* 08/11: Geografia (prova em portugues) e a materia principal; Ciencias e Historia ficam atras de "Provas anteriores" */
 .ctrls{position:relative;}
 .cbtn[hidden]{display:none;}
@@ -346,50 +339,45 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
       <span class="kitgo" aria-hidden="true">&#x1F5A8;&#xFE0F;</span>
     </a>
     <div class="picks geo5">
-      <a class="pick mat" href="ferramentas/MAT3_estudo.html?v=a30d1ec0836">
+      <a class="pick mat" href="ferramentas/MAT3_estudo.html?v=f5cd2e52206">
         <span class="em">&#x1F4D6;</span>
         <span><span class="tt"><span class="ordem">1</span>Theory<span class="tr">Teoria</span></span><span class="dd">7 topics<span class="tr">7 temas</span></span></span>
         <span class="tag">Study<span class="tr">Estudar</span></span>
       </a>
-      <a class="pick video" href="ferramentas/MAT3_video.html?v=a30d1ec0836">
+      <a class="pick video" href="ferramentas/MAT3_video.html?v=f5cd2e52206">
         <span class="em">&#x1F3AC;</span>
         <span><span class="tt"><span class="ordem">2</span>The video<span class="tr">O vídeo</span></span><span class="dd">In English, with subtitles<span class="tr">Em inglês, com legenda</span></span></span>
         <span class="tag">Watch<span class="tr">Assistir</span></span>
       </a>
-      <a class="pick slides" href="ferramentas/MAT3_pocket.html?v=a30d1ec0836">
+      <a class="pick slides" href="ferramentas/MAT3_pocket.html?v=f5cd2e52206">
         <span class="em">&#x1F4C4;</span>
         <span><span class="tt"><span class="ordem">3</span>Pocket Card</span><span class="dd">Everything in 2 pages<span class="tr">Tudo em 2 páginas</span></span></span>
         <span class="tag">Open<span class="tr">Abrir</span></span>
       </a>
-      <a class="pick simu" href="ferramentas/MAT3_simulado.html?v=a30d1ec0836">
+      <a class="pick simu" href="ferramentas/MAT3_simulado.html?v=f5cd2e52206">
         <span class="em">&#x270F;&#xFE0F;</span>
         <span><span class="tt"><span class="ordem">4</span>Practice test<span class="tr">Simulado</span></span><span class="dd">Like the real test<span class="tr">Igual à prova</span></span></span>
         <span class="tag">Start<span class="tr">Começar</span></span>
       </a>
-      <a class="pick video" href="ferramentas/MAT3_discursivas.html?v=a30d1ec0836">
+      <a class="pick video" href="ferramentas/MAT3_discursivas.html?v=f5cd2e52206">
         <span class="em">&#x270D;&#xFE0F;</span>
         <span><span class="tt"><span class="ordem">5</span>Written answers<span class="tr">Respostas escritas</span></span><span class="dd">With "Show answer"<span class="tr">Com "Mostrar resposta"</span></span></span>
         <span class="tag">Write<span class="tr">Escrever</span></span>
       </a>
-      <a class="pick quiz" href="ferramentas/MAT3_jogo.html?v=a30d1ec0836">
+      <a class="pick quiz" href="ferramentas/MAT3_jogo.html?v=f5cd2e52206">
         <span class="em">&#x1F3AE;</span>
         <span><span class="tt"><span class="ordem">6</span>The game<span class="tr">O jogo</span></span><span class="dd">Math Stars<span class="tr">Math Stars</span></span></span>
         <span class="tag">Play<span class="tr">Jogar</span></span>
-      </a>
-      <a class="pick slides recorte" href="ferramentas/MAT3_recorte.html?v=a30d1ec0836">
-        <span class="em">&#x2702;&#xFE0F;</span>
-        <span><span class="tt"><span class="ordem">7</span>Cut and study<span class="tr">Recorte e estude</span><span class="novo">new</span></span><span class="dd">Print, cut, build the sentences<span class="tr">Imprima, recorte, monte as frases</span></span></span>
-        <span class="tag">Cut<span class="tr">Recortar</span></span>
       </a>
     </div>
     <button class="maispdf" id="pdfBtnMat" aria-expanded="false" aria-controls="pdfListaMat" onclick="var l=document.getElementById('pdfListaMat');l.hidden=!l.hidden;this.setAttribute('aria-expanded',!l.hidden)">Other PDFs (extra)<span class="tr">Outros PDFs (extras)</span></button>
     <div class="pdflista" id="pdfListaMat" hidden>
       <a href="ferramentas/media/mat3/Teoria_Math_sem_imagens.pdf" target="_blank" rel="noopener"><b>Theory<span class="tr">Teoria</span></b><span>to read together<span class="tr">para ler junto</span></span></a>
       <a href="ferramentas/media/mat3/Simulado_Math_01.pdf" target="_blank" rel="noopener" onclick="this.href='ferramentas/media/mat3/Simulado_Math_'+('0'+(1+Math.floor(Math.random()*10))).slice(-2)+'.pdf'"><b>Practice test<span class="tr">Simulado</span></b><span>15 questions + answers<span class="tr">15 questões + gabarito</span></span></a>
-      <a href="ferramentas/MAT3_guia_responsavel.html?v=a30d1ec0836"><b>Guia do responsável</b><span>como corrigir as respostas escritas (detalhado)</span></a>
+      <a href="ferramentas/MAT3_guia_responsavel.html?v=f5cd2e52206"><b>Guia do responsável</b><span>como corrigir as respostas escritas (detalhado)</span></a>
     </div>
     <div class="extras" style="grid-template-columns:1fr;max-width:300px">
-      <a class="extra2" href="ferramentas/MAT3_material.html?v=a30d1ec0836"><span class="ic">&#x1F3EB;</span><span><b>School material<span class="tr">Material da escola</span></b><small>Slides, videos, Canva<span class="tr">Slides, vídeos e Canva</span></small></span></a>
+      <a class="extra2" href="ferramentas/MAT3_material.html?v=f5cd2e52206"><span class="ic">&#x1F3EB;</span><span><b>School material<span class="tr">Material da escola</span></b><small>Slides, videos, Canva<span class="tr">Slides, vídeos e Canva</span></small></span></a>
     </div>
   </section>
   </div>
@@ -408,7 +396,7 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
        Insumos: trabalho/3tri_historia (U3 Fontes históricas, U4 O mundo do trabalho, U1/U2 base).
        Roteiro único: trabalho/3tri_historia/_roteiro.md. Banco único: HIS3_banco.js. -->
   <section class="geo-panel">
-    <a class="hero2" href="ferramentas/HIS3_simulado.html?v=a30d1ec0836">
+    <a class="hero2" href="ferramentas/HIS3_simulado.html?v=f5cd2e52206">
       <span class="em">&#x270F;&#xFE0F;</span>
       <span>
         <span class="tt">Simulado</span>
@@ -417,7 +405,7 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
       <span class="go">Começar</span>
     </a>
     <div style="margin-top:16px"></div>
-    <a class="hero" href="ferramentas/HIS3_jogo.html?v=a30d1ec0836" style="border-radius:22px">
+    <a class="hero" href="ferramentas/HIS3_jogo.html?v=f5cd2e52206" style="border-radius:22px">
       <span class="em">&#x1F50D;</span>
       <span>
         <span class="tt">Detetives do Tempo</span>
@@ -426,7 +414,7 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
       <span class="go">Jogar</span>
     </a>
     <div class="picks" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px">
-      <a class="pick mat" href="ferramentas/HIS3_estudo.html?v=a30d1ec0836">
+      <a class="pick mat" href="ferramentas/HIS3_estudo.html?v=f5cd2e52206">
         <span class="em">&#x1F4D6;</span>
         <span>
           <span class="tt">Caderno do Detetive</span>
@@ -434,7 +422,7 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
         </span>
         <span class="tag">Estudar</span>
       </a>
-      <a class="pick video" href="ferramentas/HIS3_video.html?v=a30d1ec0836">
+      <a class="pick video" href="ferramentas/HIS3_video.html?v=f5cd2e52206">
         <span class="em">&#x1F3AC;</span>
         <span>
           <span class="tt">O vídeo</span>
@@ -442,7 +430,7 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
         </span>
         <span class="tag">Assistir</span>
       </a>
-      <a class="pick mat" href="ferramentas/HIS3_pocket.html?v=a30d1ec0836">
+      <a class="pick mat" href="ferramentas/HIS3_pocket.html?v=f5cd2e52206">
         <span class="em">&#x1F5A8;&#xFE0F;</span>
         <span>
           <span class="tt">Pocket — uma folha</span>
@@ -456,7 +444,6 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
 
   <div class="footer">
     <div class="footer-logo">2º ano &middot; 3º trimestre</div>
-    <div><a class="tesoura" id="btnRecorte" href="ferramentas/MAT3_recorte.html?v=a30d1ec0836" title="Cut and study (Math)"><span class="ic" aria-hidden="true">&#x2702;&#xFE0E;</span><span>Cut and study<span class="tr">Recorte e estude</span></span></a></div>
     
     <button class="refresh-btn" onclick="hardRefresh()">&#x21BA; Atualizar o site</button>
   </div>
@@ -540,7 +527,7 @@ function hardRefresh(){ window.location.href=window.location.pathname+'?v='+Date
 <script>
 /* cartao de produto que ainda nao foi ao ar (publicacao em etapas): vira "em breve" em vez de levar a um 404 */
 (function(){ try{
-  document.querySelectorAll('a.pick[href^="ferramentas/MAT3_"],a.extra2[href^="ferramentas/M"],.pdflista a[href^="ferramentas/media/mat3/"],a.pdfbtn.kit,a#btnRecorte').forEach(function(a){
+  document.querySelectorAll('a.pick[href^="ferramentas/MAT3_"],a.extra2[href^="ferramentas/M"],.pdflista a[href^="ferramentas/media/mat3/"],a.pdfbtn.kit').forEach(function(a){
     fetch(a.getAttribute('href'),{method:'HEAD',cache:'no-store'}).then(function(r){
       if(!r.ok){ a.removeAttribute('href'); a.style.opacity='.55'; a.style.pointerEvents='none';
         var t=document.createElement('small'); t.textContent=' (coming soon)'; a.appendChild(t); }
