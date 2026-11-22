@@ -28,6 +28,11 @@ CE('escola','v10',['S1','F7'],'Um uniforme antigo mostra quais lições os aluno
 CE('olhar','v11',['I5'],'Duas pessoas podem contar histórias diferentes sobre a mesma foto.',true,'Cada pessoa olha de um jeito.','Cada pessoa olha com a sua experiência e o seu ponto de vista.');
 CE('olhar','v12',['I3'],'Uma suposição sobre uma foto está sempre certa.',false,'Suposição é o que a gente imagina.','A suposição nem sempre está certa. O historiador compara várias fontes.');
 
+CE('profissoes','v22',['P11'],'Trabalhos que passam despercebidos não são importantes.',false,'Pense em quem trabalha sem aparecer.','Há trabalhos que passam despercebidos, mas são muito importantes.');
+CE('profissoes','v23',['P12'],'Alguns trabalhos ajudam o meio ambiente.',true,'Pense em quem cuida da natureza.','Alguns trabalhos cuidam da natureza; outros causam problemas e precisam mudar.');
+CE('fontes','v24',['F9'],'A legenda conta o que a imagem mostra.',true,'A legenda fica junto da imagem.','A legenda diz o que a imagem mostra, que tipo de fonte é e o que ela conta do passado.');
+CE('fontes','v25',['F8'],'Um objeto antigo pode fazer a gente lembrar de uma pessoa da família.',true,'Pense num objeto guardado em casa.','Um objeto pode lembrar uma pessoa da família, algo que aconteceu ou um lugar.');
+
 /* ---- certo ou errado com imagens de antes e hoje ---- */
 CE('profissoes','v13',['P8'],'As imagens mostram que o jeito de entregar mudou.',true,'Compare o carrinho e o drone.','Antes, o carrinho de mão; hoje existe até entrega com drone.',F('entrega'));
 CE('profissoes','v14',['P8'],'As duas imagens mostram a mesma ferramenta de entrega.',false,'Compare o que leva as caixas em cada imagem.','Na primeira imagem há um carrinho de mão; na segunda, um drone.',F('entrega'));

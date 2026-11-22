@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='5a06a1f1220';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c09a7731304';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -28,7 +28,7 @@ header{display:flex;align-items:center;gap:14px;border-radius:10px;padding:5px 1
 .verso header{background:linear-gradient(90deg,#15803d,#0d9488 50%,#b45309)}
 header b{font-size:20px;font-weight:900} header i{font-style:normal;margin-left:auto;font-size:13px;font-weight:800} header u{text-decoration:none;background:#fff;color:#312e81;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:900}
 .g{flex:1;min-height:0;display:grid;gap:9px}
-.frente .g{grid-template-columns:1.32fr 1fr;grid-template-rows:.94fr 1fr}
+.frente .g{grid-template-columns:1.32fr 1fr;grid-template-rows:1.06fr 1fr}
 .frente .s1{grid-row:1/3}
 .verso .g{grid-template-columns:1.16fr 1fr;grid-template-rows:.82fr 1.05fr 1.18fr}.verso.page{padding:13px 22px;gap:7px}.verso .g{gap:7px}.verso .sec{padding:6px 11px 7px;gap:5px}.verso .s5 .cx,.verso .s6 .cx{padding:5px 6px}
 .sec{--c:#6d28d9;border:2px solid var(--c);border-radius:13px;padding:8px 11px 9px;min-width:0;min-height:0;display:flex;flex-direction:column;gap:7px;justify-content:space-between;background:color-mix(in srgb,var(--c) 4%,#fff);overflow:hidden}
@@ -50,60 +50,64 @@ img.ct{object-fit:contain;background:#fff}
 .lado>.im{position:relative} .lado>.im img{position:absolute;inset:0}
 .ls{display:flex;flex-direction:column;justify-content:space-evenly;gap:4px} .ls p+p{border-top:1px solid color-mix(in srgb,var(--c) 18%,transparent);padding-top:4px}
 .seq{display:flex;align-items:stretch;gap:5px} .seq div{flex:1;background:#fff;border:1.4px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:9px;padding:5px 5px;text-align:center;font-weight:800;display:flex;flex-direction:column;justify-content:center} .seq em{align-self:center;font-style:normal;color:var(--c);font-weight:900}
-body.pb .sec,body.pb .cx{--c:#222!important}body.pb svg{filter:grayscale(1)}body.pb{--ink:#000}
+body.pb .sec,body.pb .cx{--c:#222!important}body.pb svg{filter:grayscale(1)}body.pb svg>rect{fill:#e8e8e8}body.pb{--ink:#000}
 body.pb header{background:#fff!important;color:#000;border:2px solid #000}body.pb header u{border:1.5px solid #000;color:#000}
 body.pb .bl p>b{color:#000!important}body.pb .sec{background:#fff;border-color:#333}body.pb .cx{border-color:#999}body.pb .sec h2,body.pb .k,body.pb .cx h3{color:#000!important}body.pb .sec h2 span{background:#000}
 body.pb u.a,body.pb u.b,body.pb u.d,body.pb u.e{background:none;color:#000;border-radius:0;padding:0;text-decoration:underline;text-decoration-thickness:1.6px;text-underline-offset:2px}body.pb u.b{text-decoration-style:dotted}body.pb u.d{text-decoration-style:double}
-@media print{body{background:none}.tela{display:none}.folha{margin:0;box-shadow:none;width:297mm;height:210mm;break-after:page}.folha:last-child{break-after:auto}.page{transform:none!important}}
+@media screen and (max-width:759px){main.rola{overflow-x:auto;-webkit-overflow-scrolling:touch}.folha{margin:10px 6px}}
+@media print{main.rola{overflow:visible}body{background:none}.tela{display:none}.folha{margin:0;box-shadow:none;width:297mm;height:210mm;break-after:page}.folha:last-child{break-after:auto}.page{transform:none!important}}
 .bl{gap:3px} .bl p+p:not(.leg){border-top:1px solid color-mix(in srgb,var(--c) 18%,transparent);padding-top:3px} u{text-decoration:none;border-radius:4px;padding:0 3px;font-weight:900} u.a{background:#dbeafe;color:#1e3a8a} u.b{background:#ffedd5;color:#9a3412} u.d{background:#dcfce7;color:#14532d} u.e{background:#ede9fe;color:#5b21b6}
 .leg{display:flex;gap:8px;font-size:11px;flex-wrap:wrap} header u{font-weight:900}
 </style>
 </head>
 <body>
-<div class="tela"><a href="../index.html?v=5a06a1f1220">Início</a><a class="pri" href="media/his3/Pocket_Card_Historia.pdf" target="_blank" rel="noopener">PDF colorido</a><a href="media/his3/Pocket_Card_Historia_pb.pdf" target="_blank" rel="noopener">PDF preto e branco</a><button onclick="window.print()">Imprimir</button></div>
+<div class="tela"><a href="../index.html?v=c09a7731304">Início</a><a class="pri" href="media/his3/Pocket_Card_Historia.pdf" target="_blank" rel="noopener">PDF colorido</a><a href="media/his3/Pocket_Card_Historia_pb.pdf" target="_blank" rel="noopener">PDF preto e branco</a><button onclick="window.print()">Imprimir</button></div>
 
+<main class="rola">
 <div class="folha"><div class="page frente">
-<header><b>História · Pocket Card</b><i>Fontes históricas · A escola · Pontos de vista</i><u>FRENTE</u></header>
+<header><b>História · Pocket Card</b><i>Fontes históricas · A escola · Cada um vê de um jeito</i><u>FRENTE</u></header>
 <div class="g">
 
 <section class="sec s1" style="--c:#6d28d9"><h2><span>1</span>Fontes históricas</h2>
  <p class="def"><b class="k">Fonte histórica</b> é aquilo que a gente pode <b>ver, ouvir, tocar ou ler</b> para aprender sobre outras épocas. As fontes são <b>pistas do passado</b>.</p>
  <div class="n2 cresce" style="--gr:3.3;grid-auto-rows:minmax(0,1fr)">
-  <div class="cx" style="--c:#9333ea"><h3>Oral · alguém conta</h3><div class="ph"><img src="media/his3/fonte-entrevista.jpg?v=5a06a1f1220" alt=""><img src="media/his3/fonte-roda.jpg?v=5a06a1f1220" alt=""></div><p>Relato da avó, entrevista, cantigas. Passa de geração em geração pela fala.</p></div>
-  <div class="cx" style="--c:#2563eb"><h3>Escrita · alguém escreveu</h3><div class="ph"><img src="media/his3/fonte-carta.jpg?v=5a06a1f1220" alt=""><img src="media/his3/fonte-certidao.jpg?v=5a06a1f1220" alt=""></div><p>Carta, diário, jornal, lei, bilhete, receita, certidão de nascimento.</p></div>
-  <div class="cx" style="--c:#c2410c"><h3>Visual · a gente vê uma imagem</h3><div class="ph"><img src="media/his3/fonte-album.jpg?v=5a06a1f1220" alt=""><img src="media/his3/fonte-mapa.jpg?v=5a06a1f1220" alt=""></div><p>Fotografia, pintura, mapa, escultura.</p></div>
-  <div class="cx" style="--c:#15803d"><h3>Material · a gente toca um objeto</h3><div class="ph"><img src="media/his3/fonte-sofa.jpg?v=5a06a1f1220" alt=""><img src="media/his3/fonte-castelo.jpg?v=5a06a1f1220" alt=""></div><p>Brinquedo, roupa, móvel, panela, construção.</p></div>
+  <div class="cx" style="--c:#9333ea"><h3>Oral · alguém conta</h3><div class="ph"><img src="media/his3/fonte-entrevista.jpg?v=c09a7731304" alt=""><img src="media/his3/fonte-roda.jpg?v=c09a7731304" alt=""></div><p>Relato da avó, entrevista, cantigas. Passa de geração em geração pela fala.</p></div>
+  <div class="cx" style="--c:#2563eb"><h3>Escrita · alguém escreveu</h3><div class="ph"><img src="media/his3/fonte-carta.jpg?v=c09a7731304" alt=""><img src="media/his3/fonte-certidao.jpg?v=c09a7731304" alt=""></div><p>Carta, diário, jornal, lei, bilhete, receita, certidão de nascimento.</p></div>
+  <div class="cx" style="--c:#c2410c"><h3>Visual · a gente vê uma imagem</h3><div class="ph"><img src="media/his3/fonte-album.jpg?v=c09a7731304" alt=""><img src="media/his3/fonte-mapa.jpg?v=c09a7731304" alt=""></div><p>Fotografia, pintura, mapa, escultura.</p></div>
+  <div class="cx" style="--c:#15803d"><h3>Material · a gente toca um objeto</h3><div class="ph"><img src="media/his3/fonte-sofa.jpg?v=c09a7731304" alt=""><img src="media/his3/fonte-castelo.jpg?v=c09a7731304" alt=""></div><p>Brinquedo, roupa, móvel, panela, construção: o próprio objeto.</p></div>
  </div>
  <div class="n3 cresce" style="--gr:1.35">
-  <div class="cx"><div class="im"><img src="media/his3/fonte-bonecas.jpg?v=5a06a1f1220" alt=""></div><p><b class="k">A boneca</b> é material. <b class="k">A foto</b> da boneca é visual.</p></div>
-  <div class="cx"><div class="im"><img class="ct" src="media/his3/fonte-livros.jpg?v=5a06a1f1220" alt=""></div><p><b class="k">O livro fechado</b> é material. <b class="k">O texto</b> do livro é escrita.</p></div>
-  <div class="cx"><div class="im"><img src="media/his3/trem.jpg?v=5a06a1f1220" alt=""></div><p><b class="k">Legenda:</b> foto de um trem antigo. Fonte visual. Mostra como viajavam.</p></div>
+  <div class="cx"><div class="im"><img src="media/his3/fonte-bonecas.jpg?v=c09a7731304" alt=""></div><p><b class="k">A boneca</b> é material. <b class="k">A foto</b> da boneca é visual.</p></div>
+  <div class="cx"><div class="im"><img class="ct" src="media/his3/fonte-livros.jpg?v=c09a7731304" alt=""></div><p><b class="k">O livro fechado</b> é material. <b class="k">O texto</b> do livro é escrita.</p></div>
+  <div class="cx"><div class="im"><img src="media/his3/trem.jpg?v=c09a7731304" alt=""></div><p><b class="k">Legenda:</b> foto de um trem antigo. Fonte visual. Mostra como viajavam.</p></div>
  </div>
  <div class="lado cresce" style="grid-template-columns:1.1fr 2fr;--gr:.95">
-  <div class="im"><img src="media/his3/fonte-quadros.jpg?v=5a06a1f1220" alt=""></div>
+  <div class="im"><img src="media/his3/fonte-quadros.jpg?v=c09a7731304" alt=""></div>
   <div class="ls"><p><b class="k">Por que são importantes?</b> Mostram como as pessoas viviam, se vestiam, brincavam e se comunicavam. Preservam a memória.</p><p><b class="k">O detetive da história</b> observa, pergunta e compara as pistas.</p><p><b class="k">Você também:</b> o que você faz hoje será a fonte histórica de amanhã.</p></div>
  </div>
 </section>
 
 <section class="sec" style="--c:#0369a1"><h2><span>2</span>A escola tem história</h2>
+ <p>A escola guarda pistas dos <b class="k">4 tipos de fonte</b>:</p>
  <div class="n4">
   <div class="cx" style="--c:#c2410c;text-align:center"><b class="k">visual</b>fotos das turmas</div><div class="cx" style="--c:#2563eb;text-align:center"><b class="k">escrita</b>cadernos, boletins</div><div class="cx" style="--c:#15803d;text-align:center"><b class="k">material</b>uniformes, troféus</div><div class="cx" style="--c:#9333ea;text-align:center"><b class="k">oral</b>lembranças contadas</div>
  </div>
- <div class="lado cresce" style="grid-template-columns:1fr 2.1fr"><div class="im"><img src="media/his3/p-professora-antiga.jpg?v=5a06a1f1220" alt="" style="object-position:50% 35%"></div>
+ <div class="lado cresce" style="grid-template-columns:1fr 2.1fr"><div class="im"><img src="media/his3/p-professora-antiga.jpg?v=c09a7731304" alt="" style="object-position:50% 35%"></div>
   <div class="ls"><p><b class="k">Documentos da vida escolar</b> são cadernos, boletins, bilhetes e registros. Mostram o ensino, as regras e o dia a dia.</p><p><b class="k">Por que guardar?</b> Para preservar a memória e contar a história da escola.</p><p><b class="k">Memórias diferentes:</b> cada um viveu a escola do seu jeito.</p></div></div>
+ <p>Comparando as pistas, vemos o que mudou e o que continuou:</p>
  <div class="n2"><div class="cx" style="--c:#b45309"><p><b class="k">Mudança</b> é o que ficou diferente: do quadro de giz para a lousa digital.</p></div><div class="cx" style="--c:#15803d"><p><b class="k">Permanência</b> é o que continuou igual: conversar com os alunos.</p></div></div>
 </section>
 
 <section class="sec" style="--c:#c2410c"><h2><span>3</span>Cada um vê de um jeito</h2>
- <div class="lado cresce" style="grid-template-columns:1fr 1.5fr"><div class="im"><img src="media/his3/aniversario.jpg?v=5a06a1f1220" alt=""></div>
+ <div class="lado cresce" style="grid-template-columns:1fr 1.5fr"><div class="im"><img src="media/his3/aniversario.jpg?v=c09a7731304" alt=""></div>
   <div class="ls"><p>Na mesma imagem, <b class="k">cada pessoa</b> repara em coisas diferentes. Esse é o <b class="k">ponto de vista</b>.</p><p>Olhando de novo, a gente percebe coisas novas.</p></div></div>
+ <p><b class="k">Toda fonte</b> foi feita por alguém, para alguém, com um objetivo:</p>
  <div class="n3 cresce" style="--gr:1.35">
-  <div class="cx"><div class="im"><img class="ct" src="media/his3/postal-frente.jpg?v=5a06a1f1220" alt=""></div><p><b class="k">Cartão-postal:</b> contar a viagem aos amigos.</p></div>
-  <div class="cx"><div class="im"><img class="ct" src="media/his3/anuncio.jpg?v=5a06a1f1220" alt=""></div><p><b class="k">Anúncio de jornal:</b> vender leite.</p></div>
-  <div class="cx"><div class="im"><img class="ct" src="media/his3/propaganda.jpg?v=5a06a1f1220" alt=""></div><p><b class="k">Propaganda:</b> vender alimento.</p></div>
+  <div class="cx"><div class="im"><img class="ct" src="media/his3/postal-frente.jpg?v=c09a7731304" alt=""></div><p><b class="k">Cartão-postal:</b> para contar a viagem.</p></div>
+  <div class="cx"><div class="im"><img class="ct" src="media/his3/anuncio.jpg?v=c09a7731304" alt=""></div><p><b class="k">Anúncio:</b> para vender leite.</p></div>
+  <div class="cx"><div class="im"><img class="ct" src="media/his3/propaganda.jpg?v=c09a7731304" alt=""></div><p><b class="k">Propaganda:</b> para vender alimento.</p></div>
  </div>
- <p class="def" style="font-size:12.4px"><b class="k">Toda fonte</b> foi feita por alguém, para alguém, com um objetivo.</p>
- <div class="n2"><div class="cx"><p><b class="k">Suposição</b> é o que a gente imagina quando não sabe tudo. Nem sempre está certa.</p></div><div class="cx"><p><b class="k">Historiador</b> estuda o passado: reúne várias fontes e compara.</p></div></div>
+ <div class="n2"><div class="cx"><p><b class="k">Suposição</b> é o que a gente imagina quando não sabe tudo. Nem sempre está certa.</p></div><div class="cx"><p>O <b class="k">historiador</b> estuda o passado: por isso reúne várias fontes e compara.</p></div></div>
 </section>
 </div></div></div>
 
@@ -114,31 +118,32 @@ body.pb u.a,body.pb u.b,body.pb u.d,body.pb u.e{background:none;color:#000;borde
 <section class="sec s4" style="--c:#15803d;grid-column:1/3"><div style="display:flex;gap:18px;align-items:center"><h2 style="white-space:nowrap"><span>4</span>Profissões que mudaram</h2>
  <p class="def" style="font-size:12.4px">Surgiram máquinas, tecnologias e jeitos de se comunicar. O trabalho ficou <b class="k">mais rápido</b> ou <b class="k">mais confortável</b>. Elas <b class="k">continuam existindo</b>.</p></div>
  <div class="n4 cresce">
-  <div class="lado cx" style="display:grid;grid-template-columns:.62fr 1.5fr;--c:#a16207"><div class="im"><img class="ct" src="media/his3/p-carteiro.jpg?v=5a06a1f1220" alt=""></div><div class="ls"><h3>Carteiro</h3><p data-tipo="rotulo"><b class="k">Antes:</b> a pé, com bolsa de couro. Depois, bicicleta e moto.</p><p data-tipo="rotulo"><b class="k">Hoje:</b> aparelho com tela, compras da internet.</p><p data-tipo="rotulo"><b class="k">Continua:</b> entregar.</p></div></div>
-  <div class="lado cx" style="display:grid;grid-template-columns:.62fr 1.5fr;--c:#7e22ce"><div class="im"><img class="ct" src="media/his3/p-professora.jpg?v=5a06a1f1220" alt=""></div><div class="ls"><h3>Professora</h3><p data-tipo="rotulo"><b class="k">Antes:</b> quadro de giz, livros pesados, biblioteca.</p><p data-tipo="rotulo"><b class="k">Hoje:</b> computador, vídeos, internet.</p><p data-tipo="rotulo"><b class="k">Continua:</b> ouvir os alunos.</p></div></div>
-  <div class="lado cx" style="display:grid;grid-template-columns:.62fr 1.5fr;--c:#4d7c0f"><div class="im"><img class="ct" src="media/his3/p-fazendeiro.jpg?v=5a06a1f1220" alt=""></div><div class="ls"><h3>Fazendeiro</h3><p data-tipo="rotulo"><b class="k">Antes:</b> com as mãos e arado puxado por bois.</p><p data-tipo="rotulo"><b class="k">Hoje:</b> trator, máquinas, celular para ver a chuva.</p><p data-tipo="rotulo"><b class="k">Continua:</b> cuidar da natureza.</p></div></div>
-  <div class="lado cx" style="display:grid;grid-template-columns:.62fr 1.5fr;--c:#0369a1"><div class="im"><img class="ct" src="media/his3/p-medico.jpg?v=5a06a1f1220" alt=""></div><div class="ls"><h3>Médico</h3><p data-tipo="rotulo"><b class="k">Antes:</b> papel e caneta; os exames demoravam dias.</p><p data-tipo="rotulo"><b class="k">Hoje:</b> computador, exames pelo celular, vídeo.</p><p data-tipo="rotulo"><b class="k">Continua:</b> cuidar do paciente.</p></div></div>
+  <div class="lado cx" style="display:grid;grid-template-columns:.62fr 1.5fr;--c:#a16207"><div class="im"><img class="ct" src="media/his3/p-carteiro.jpg?v=c09a7731304" alt=""></div><div class="ls"><h3>Carteiro</h3><p data-tipo="rotulo"><b class="k">Antes:</b> a pé, com bolsa de couro. Depois, bicicleta e moto.</p><p data-tipo="rotulo"><b class="k">Hoje:</b> aparelho com tela, compras da internet.</p><p data-tipo="rotulo"><b class="k">Continua:</b> entregar.</p></div></div>
+  <div class="lado cx" style="display:grid;grid-template-columns:.62fr 1.5fr;--c:#7e22ce"><div class="im"><img class="ct" src="media/his3/p-professora.jpg?v=c09a7731304" alt=""></div><div class="ls"><h3>Professora</h3><p data-tipo="rotulo"><b class="k">Antes:</b> quadro de giz, livros pesados, biblioteca.</p><p data-tipo="rotulo"><b class="k">Hoje:</b> computador, vídeos, internet.</p><p data-tipo="rotulo"><b class="k">Continua:</b> ouvir os alunos.</p></div></div>
+  <div class="lado cx" style="display:grid;grid-template-columns:.62fr 1.5fr;--c:#4d7c0f"><div class="im"><img class="ct" src="media/his3/p-fazendeiro.jpg?v=c09a7731304" alt=""></div><div class="ls"><h3>Fazendeiro</h3><p data-tipo="rotulo"><b class="k">Antes:</b> com as mãos e arado puxado por bois.</p><p data-tipo="rotulo"><b class="k">Hoje:</b> trator, máquinas, celular para ver a chuva.</p><p data-tipo="rotulo"><b class="k">Continua:</b> cuidar da natureza.</p></div></div>
+  <div class="lado cx" style="display:grid;grid-template-columns:.62fr 1.5fr;--c:#0369a1"><div class="im"><img class="ct" src="media/his3/p-medico.jpg?v=c09a7731304" alt=""></div><div class="ls"><h3>Médico</h3><p data-tipo="rotulo"><b class="k">Antes:</b> papel e caneta; os exames demoravam dias.</p><p data-tipo="rotulo"><b class="k">Hoje:</b> computador, exames pelo celular, vídeo.</p><p data-tipo="rotulo"><b class="k">Continua:</b> cuidar do paciente.</p></div></div>
  </div>
 </section>
 
-<section class="sec s5" style="--c:#0f766e"><h2><span>5</span>Antes e hoje</h2>
+<section class="sec s5" style="--c:#0f766e"><div style="display:flex;gap:14px;align-items:center"><h2 style="white-space:nowrap"><span>5</span>Antes e hoje</h2><p style="text-align:left">A tecnologia mudou as ferramentas e o jeito de trabalhar.</p></div>
  <div class="n2 cresce" style="grid-auto-rows:minmax(0,1fr)">
-  <div class="cx"><div class="ph"><img src="media/his3/campo-antes.jpg?v=5a06a1f1220" alt=""><img src="media/his3/campo-hoje.jpg?v=5a06a1f1220" alt=""></div><p><b class="k">Campo:</b> antes, os bois ajudavam; hoje, há máquinas.</p></div>
-  <div class="cx"><div class="ph"><img src="media/his3/cirurgia-antes.jpg?v=5a06a1f1220" alt=""><img src="media/his3/cirurgia-hoje.jpg?v=5a06a1f1220" alt=""></div><p><b class="k">Cirurgia:</b> antes, não havia robô; hoje, há robô que ajuda.</p></div>
-  <div class="cx"><div class="ph"><img src="media/his3/entrega-antes.jpg?v=5a06a1f1220" alt="" style="object-position:50% 62%"><img src="media/his3/entrega-hoje.jpg?v=5a06a1f1220" alt=""></div><p><b class="k">Entrega:</b> antes, carrinho de mão; hoje, existe até drone.</p></div>
-  <div class="cx"><div class="ph"><img src="media/his3/engenharia-antes.jpg?v=5a06a1f1220" alt=""><img src="media/his3/engenharia-hoje.jpg?v=5a06a1f1220" alt=""></div><p><b class="k">Engenharia:</b> antes, desenhos no papel; hoje, também computador e robô.</p></div>
+  <div class="cx"><div class="ph"><img src="media/his3/campo-antes.jpg?v=c09a7731304" alt=""><img src="media/his3/campo-hoje.jpg?v=c09a7731304" alt=""></div><p><b class="k">Campo:</b> antes, os bois ajudavam; hoje, há máquinas.</p></div>
+  <div class="cx"><div class="ph"><img src="media/his3/cirurgia-antes.jpg?v=c09a7731304" alt=""><img src="media/his3/cirurgia-hoje.jpg?v=c09a7731304" alt=""></div><p><b class="k">Cirurgia:</b> antes, não havia robô; hoje, há robô que ajuda.</p></div>
+  <div class="cx"><div class="ph"><img src="media/his3/entrega-antes.jpg?v=c09a7731304" alt="" style="object-position:50% 62%"><img src="media/his3/entrega-hoje.jpg?v=c09a7731304" alt=""></div><p><b class="k">Entrega:</b> antes, carrinho de mão; hoje, existe até drone.</p></div>
+  <div class="cx"><div class="ph"><img src="media/his3/engenharia-antes.jpg?v=c09a7731304" alt=""><img src="media/his3/engenharia-hoje.jpg?v=c09a7731304" alt=""></div><p><b class="k">Engenharia:</b> antes, desenhos no papel; hoje, também computador e robô.</p></div>
  </div>
 </section>
 
-<section class="sec s6" style="--c:#b45309"><h2><span>6</span>Profissões antigas e novas</h2>
+<section class="sec s6" style="--c:#b45309"><div style="display:flex;gap:12px;align-items:center"><h2 style="white-space:nowrap"><span>6</span>Profissões antigas e novas</h2><p style="text-align:left;line-height:1.1">Estas desapareceram ou ficaram raras:</p></div>
+
  <div class="n4 cresce">
   <div class="cx"><div class="im"><svg viewBox="0 0 120 130" width="100%" height="100%" aria-hidden="true"><rect width="120" height="130" rx="8" fill="#1e293b"/><circle cx="60" cy="50" r="40" fill="#fde047" opacity=".22"/><path d="M60 130V78M44 128h32" stroke="#94a3b8" stroke-width="8"/><path d="M42 32h36l-8 46H50z" fill="#fde047" stroke="#cbd5e1" stroke-width="5" stroke-linejoin="round"/><path d="M37 32 60 13l23 19z" fill="#cbd5e1"/><path d="M60 71c-9-7-7-14 0-24 7 10 9 17 0 24z" fill="#f97316"/></svg></div><p class="cap" data-tipo="rotulo"><b class="k">Acendedor de lampião</b><br>acendia os postes</p></div>
-  <div class="cx"><div class="im"><img src="media/his3/prof-leiteiro.jpg?v=5a06a1f1220" alt=""></div><p class="cap" data-tipo="rotulo"><b class="k">Leiteiro</b><br>deixava leite na porta</p></div>
-  <div class="cx"><div class="im"><img src="media/his3/prof-datilografa.jpg?v=5a06a1f1220" alt=""></div><p class="cap" data-tipo="rotulo"><b class="k">Datilógrafa</b><br>máquina de escrever</p></div>
-  <div class="cx"><div class="im"><img src="media/his3/prof-vendedor-frutas.jpg?v=5a06a1f1220" alt=""></div><p class="cap" data-tipo="rotulo"><b class="k">Vendedor com cestos</b><br>frutas pelas ruas</p></div>
+  <div class="cx"><div class="im"><img src="media/his3/prof-leiteiro.jpg?v=c09a7731304" alt=""></div><p class="cap" data-tipo="rotulo"><b class="k">Leiteiro</b><br>deixava leite na porta</p></div>
+  <div class="cx"><div class="im"><img src="media/his3/prof-datilografa.jpg?v=c09a7731304" alt=""></div><p class="cap" data-tipo="rotulo"><b class="k">Datilógrafa</b><br>máquina de escrever</p></div>
+  <div class="cx"><div class="im"><img src="media/his3/prof-vendedor-frutas.jpg?v=c09a7731304" alt=""></div><p class="cap" data-tipo="rotulo"><b class="k">Vendedor com cestos</b><br>frutas pelas ruas</p></div>
  </div>
- <div class="ls"><p><b class="k">Por que acabaram ou ficaram raras?</b> Novas tecnologias passaram a fazer coisas que antes eram feitas por pessoas. A energia elétrica acende os postes.</p>
- <p><b class="k">Novas:</b> designer gráfico, desenvolvedor de aplicativos, cientista de dados.</p></div>
+ <div class="ls"><p><b class="k">Por quê?</b> Novas tecnologias passaram a fazer o que antes as pessoas faziam. O acendedor de lampião acabou porque a energia elétrica acende os postes.</p>
+ <p><b class="k">Novas, criadas pela tecnologia:</b> designer gráfico, desenvolvedor de aplicativos, cientista de dados.</p></div>
 </section>
 
 <section class="sec" style="--c:#a16207"><h2><span>7</span>O passado deixou pistas no mundo</h2>
@@ -160,9 +165,10 @@ body.pb u.a,body.pb u.b,body.pb u.d,body.pb u.e{background:none;color:#000;borde
   <p><b style="color:#15803d">Completa:</b> “<u class="e">Antigamente</u>, o médico anotava tudo no papel. <u class="e">Hoje</u>, ele usa computador.” Para contar uma mudança, a resposta precisa dos <u class="e">dois tempos</u>.</p></div>
 </section>
 </div></div></div></div>
+</main>
 <script>
 if(/[?&]pb=1/.test(location.search)){ document.body.classList.add('pb'); document.querySelectorAll('.page img').forEach(function(e){ e.src=e.getAttribute('src').replace('media/his3/','media/his3/pb/'); }); }
-function encaixa(){ var w=Math.min(1123,innerWidth-12), k=w/1123; document.querySelectorAll('.folha').forEach(function(f){ if(matchMedia('print').matches) return; f.style.width=w+'px'; f.style.height=Math.round(794*k)+'px'; f.firstElementChild.style.transform='scale('+k+')'; }); }
+function encaixa(){ var w=Math.max(innerWidth<760?840:0,Math.min(1123,innerWidth-12)), k=w/1123; document.querySelectorAll('.folha').forEach(function(f){ if(matchMedia('print').matches) return; f.style.width=w+'px'; f.style.height=Math.round(794*k)+'px'; f.firstElementChild.style.transform='scale('+k+')'; }); }
 addEventListener('resize',encaixa); encaixa();
 addEventListener('beforeprint',function(){ document.querySelectorAll('.folha').forEach(function(f){ f.style.width=f.style.height=''; }); }); addEventListener('afterprint',encaixa);
 </script>

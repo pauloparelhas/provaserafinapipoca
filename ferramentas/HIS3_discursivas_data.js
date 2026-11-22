@@ -58,7 +58,7 @@
       { n: 7, pts: '1,2', pag: 3, tipo: 'ce', figs2: par('campo'), pede: '<b>Observe</b> as imagens do trabalho no campo em duas épocas. <b>Escreva</b> (C) para as alternativas <u>corretas</u> e (E) para as <u>erradas</u>.',
         ops: ['Na imagem de antes, os animais ajudam no trabalho.', 'A ferramenta de trabalho é a mesma nas duas imagens.', 'Com as máquinas, o trabalho ficou mais rápido.', 'O fazendeiro deixou de cuidar da terra por causa das máquinas.'], gab: ['C', 'E', 'C', 'E'] },
       { n: 8, pts: '0,8', pag: 4, tipo: 'linhas', linhas: 2, figs2: par('engenharia'), pede: '<b>Observe</b> as imagens da engenharia (criar e construir máquinas). <b>Escreva</b> uma frase sobre a diferença entre o trabalho de antes e o de hoje.',
-        curta: 'Antigamente, os engenheiros usavam desenhos no papel. Hoje, usam também computador e robô.' },
+        curta: 'Antigamente, os engenheiros usavam desenhos no papel. Hoje, usam também computador e robô. Vale citar só o computador.' },
       { n: 9, pts: '1,2', pag: 4, tipo: 'texto', pede: '<b>Leia</b> o texto e <b>responda</b>.', tit: 'A história do Doutor João, o médico',
         texto: 'No começo da carreira, Doutor João trabalhava num consultório simples. Ele usava estetoscópio, papel e caneta. Os exames demoravam dias para ficar prontos, e as fichas dos pacientes ficavam em grandes arquivos de papel. Com o tempo, tudo foi mudando. Hoje, Doutor João usa o computador e recebe os exames pelo celular. Ele também faz consultas por vídeo com pessoas que moram longe. Mesmo com tanta tecnologia, o cuidado com cada paciente não mudou.',
         subs: [['Qual é a profissão do Doutor João?', 1], ['Onde ficavam as fichas dos pacientes antigamente?', 1], ['Como a tecnologia ajuda o Doutor João hoje?', 1]],

@@ -49,6 +49,10 @@ return [
   D('Fonte oral','é um relato ou uma história contada por alguém.'),
   LN('Exemplos','a avó contando a infância, entrevista, cantigas.'),
   LN('Passa pela fala','de geração em geração: dos avós para os pais, dos pais para os filhos.')])),
+ T('Ouvir um <em>relato</em>', M('fonte-entrevista','Uma moça conta a vida dela',[
+  D('Relato','é o que alguém conta sobre o que viveu.'),
+  LN('Pergunte','quem contou? O que contou? De que época lembrava? O que eu aprendi?'),
+  LN('Vídeo','de alguém contando uma história continua sendo fonte oral.')])),
  T('Fonte <em>escrita</em>', M(QUAD([['fonte-carta','Uma carta'],['fonte-certidao','Certidão de nascimento']]),'',[
   D('Fonte escrita','é um texto que alguém escreveu.'),
   LN('Exemplos','diário, lei, jornal, carta, bilhete, receita, certidão de nascimento.')])),
@@ -67,7 +71,7 @@ return [
   ['fonte-livros','',[LN('O livro fechado','é um objeto: material.'),LN('O que está escrito nele','é um texto: escrita.')]],
   ['fonte-carta','',[LN('A avó escreveu','a carta é escrita.'),LN('A avó contou','o relato é oral.')]]])),
  T('A <em>legenda</em> de uma fonte', M('trem','Trem a vapor antigo',[
-  LN('O que a imagem mostra?','um trem a vapor antigo.'),
+  LN('O que a imagem mostra?','por exemplo, um trem a vapor antigo.'),
   LN('Que tipo de fonte é?','a foto do trem é visual.'),
   LN('O que pode contar?','como as pessoas viajavam antigamente.')]))
 ]},
@@ -75,11 +79,13 @@ return [
 {k:'escola', tema:'escola', unid:3, nome:'A escola tem história', curto:'A escola tem história', capa:'f-lousa', cor:'#0284c7', treino:[], telas:[
  T('A escola <em>guarda pistas</em>', M(TAB(['Na escola','Tipo de fonte'],[[C.visual,'Fotos antigas das turmas','visual'],[C.escrita,'Cadernos, boletins, bilhetes','escrita'],[C.material,'Uniformes e troféus','material'],[C.oral,'Lembranças contadas','oral']]),'',[
   LN('A escola','tem uma história cheia de acontecimentos, pessoas e mudanças.'),
+  LN('Objetos, documentos e festas','guardam lembranças e contam o passado.'),
   LN('Memórias diferentes','alunos, professores e funcionários lembram da mesma escola de jeitos diferentes.')])),
  T('Documentos da <em>vida escolar</em>', M('p-professora-antiga','Uma aula antigamente',[
   D('Documentos da vida escolar','são cadernos, boletins, bilhetes e registros de eventos. São fontes escritas.'),
   LN('Mostram','como era o ensino, as regras e o dia a dia.'),
-  LN('Por que guardar?','para preservar a memória e contar a história da escola.')])),
+  LN('Por que guardar?','para preservar a memória e contar a história da escola.'),
+  LN('Pergunte à família','que documento da época de escola era importante? Para que servia? Ainda guardam?')])),
  T('<em>Mudança</em> e <em>permanência</em>', MC([
   ['f-lousa','',[D('Mudança','é o que ficou diferente com o tempo.'),LN('Na escola','do quadro de giz para a lousa digital; da biblioteca para a internet.')]],
   ['p-professora','',[D('Permanência','é o que continuou igual.'),LN('Na escola','conversar com os alunos e ouvir as ideias deles.')]]]))
@@ -87,11 +93,14 @@ return [
 
 {k:'olhar', tema:'olhar', unid:3, nome:'Cada um vê de um jeito', curto:'Cada um vê de um jeito', capa:'aniversario', cor:'#ea580c', treino:[], telas:[
  T('A mesma imagem, <em>histórias diferentes</em>', M('aniversario','Uma festa de aniversário',[
-  LN('Cada pessoa','repara em coisas diferentes na mesma imagem.'),
+  LN('Cada pessoa','repara em coisas diferentes na mesma imagem, como numa foto de festa.'),
   LN('Olhando de novo','a gente percebe coisas novas.'),
   D('Ponto de vista','é o jeito de cada um ver uma história.')])),
- T('<em>Quem fez</em> e por quê?', MC([
-  ['postal-frente','',[LN('Cartão-postal','quem viajou escreveu para contar a viagem aos amigos.')]],
+ T('<em>Quem fez</em> e por quê?', M('postal-frente','Cartão-postal de Salvador',[
+  LN('Toda fonte','foi feita por alguém, num tempo e lugar, com um objetivo.'),
+  LN('Pergunte','quem fez? Para quem? Para quê?'),
+  LN('Cartão-postal','quem viajou escreveu aos amigos para contar a viagem.')])),
+ T('Feitos para <em>vender</em>', MC([
   ['anuncio','',[LN('Anúncio de jornal','foi feito para vender leite.')]],
   ['propaganda','',[LN('Propaganda','foi feita para vender um alimento às famílias.')]]])),
  T('O que é <em>suposição</em>?', M('navio','Pessoas num navio, antigamente',[
@@ -107,10 +116,14 @@ return [
   LN('Continuam existindo','o que muda é o jeito de trabalhar.')])),
  T('O <em>carteiro</em>, Seu Francisco', M('p-carteiro','',[
   LN('Antes','ia a pé, com bolsa de couro, levando cartas escritas à mão.'),
-  LN('Depois','ganhou bicicleta e, mais tarde, vieram as motos.'),
-  LN('Hoje','os carteiros usam aparelho com tela e entregam compras da internet.'),
+  LN('Depois','bicicleta e, mais tarde, motos, para ir mais longe e levar mais encomendas.'),
+  LN('Hoje','com menos cartas, entregam contas, revistas e compras da internet, com um aparelho com tela.'),
   LN('Continua','a profissão existe, de um jeito diferente.')])),
+ T('As <em>mensagens</em>', M('fonte-carta','Cartas antigas',[
+  LN('Antes','as pessoas escreviam cartas à mão, e o carteiro levava.'),
+  LN('Hoje','as mensagens chegam em segundos, pelo celular.')])),
  T('A <em>professora</em>, Dona Lúcia', M('p-professora','',[
+  LN('Quando criança','brincava de dar aula para as bonecas, numa lousinha de papelão.'),
   LN('Antes','quadro de giz, livros grandes e pesados, tudo escrito à mão, pesquisa na biblioteca.'),
   LN('Hoje','computador, vídeos, lousa digital, internet.'),
   LN('Continua','conversar com os alunos e ajudá-los a aprender com alegria.')])),
@@ -120,7 +133,7 @@ return [
   LN('Futuro','plantar em cima de prédios ou com robôs.'),
   LN('Continua','amar a terra e cuidar da natureza.')])),
  T('O <em>médico</em>, Doutor João', M('p-medico','',[
-  LN('Antes','poucos aparelhos, papel e caneta; os exames demoravam dias.'),
+  LN('Antes','estetoscópio, termômetro de mercúrio, papel e caneta. Os exames demoravam dias, e as fichas ficavam em arquivos de papel.'),
   LN('Hoje','computador, exames pelo celular, consulta por vídeo.'),
   LN('Continua','o cuidado e a atenção com cada paciente.')]))
 ]},
@@ -131,7 +144,7 @@ return [
  T('A <em>entrega</em>', M(QUAD([['entrega-antes','Antes'],['entrega-hoje','Hoje']]),'',[LN('Antes','carrinho de mão.'),LN('Hoje','existe até entrega com drone.'),LN('Numa frase','“Antigamente, usavam carrinho de mão. Hoje, existe até drone.”')])),
  T('A <em>engenharia</em>', M(QUAD([['engenharia-antes','Antes'],['engenharia-hoje','Hoje']]),'',[LN('Antes','desenhos no papel.'),LN('Hoje','também computador e robô.'),LN('Numa frase','“Antigamente, usavam desenhos no papel. Hoje, usam também computador e robô.”')])),
  T('<em>Ferramentas</em> de antigamente', MC([
-  ['f-maleta','',[LN('Médico','maleta, termômetro de mercúrio, seringa.')]],['f-camera','',[LN('Fotógrafo','câmera grande de tripé.')]],
+  ['f-maleta','',[LN('Médico','maleta, estetoscópio, termômetro de mercúrio, seringa.')]],['f-camera','',[LN('Fotógrafo','câmera grande de tripé.')]],
   ['f-globo','',[LN('Professora','lousa, livros, globo.')]],['f-colher','',[LN('Construtor','marreta, colher de pedreiro, pincel.')]]]))
 ]},
 
@@ -147,7 +160,8 @@ return [
   LN('Atenção','o carteiro mudou, mas continua existindo.')])),
  T('Profissões <em>novas</em>', M('engenharia-hoje','Trabalho com computador e robô',[
   LN('Criadas pela tecnologia','designer gráfico, desenvolvedor de aplicativos, cientista de dados.'),
-  LN('No tempo dos avós','elas não existiam, porque ainda não havia essa tecnologia.')])),
+  LN('No tempo dos avós','muitas profissões de hoje não existiam, porque ainda não havia essa tecnologia.'),
+  LN('Numa entrevista','pergunte a profissão, as ferramentas, o lugar de trabalho e o que a tecnologia mudou.')])),
  T('<em>Todo trabalho</em> é importante', M('p-construtor-antigo','Um construtor, antigamente',[
   LN('Em todo lugar','na escola, em casa, nas ruas, nas fazendas, nos hospitais.'),
   LN('Pouco notados','alguns trabalhos passam despercebidos, mas são muito importantes.'),
@@ -164,11 +178,11 @@ return [
   LN('Sem os rios','a vida não seria possível nessas regiões.')])),
  T('O que é <em>patrimônio</em>?', M(TAB(['Patrimônio','Exemplos'],[['#a16207','Material','museu, praça, estátua'],['#9333ea','Imaterial','capoeira, festa junina, receita de família']]),'',[
   D('Patrimônio','é tudo o que é importante para a memória de um povo.'),
-  LN('Sua família','também carrega tradições.')])),
- T('O <em>tempo</em>', M(TAB(null,[['#db2777','Relógio','marca igual para todos'],['#16a34a','Rápido','brincar, festa, jogo'],['#ea580c','Devagar','fila, esperar o recreio'],['#2563eb','Medir','ampulheta, calendário, relógio']]),'',[
+  LN('Sua família','também carrega tradições. Um objeto guardado há muito tempo conta a história dela.')])),
+ T('O <em>tempo</em>', M(TAB(null,[['#db2777','Relógio','marca igual para todos'],['#16a34a','Rápido','brincar, festa, jogo'],['#ea580c','Devagar','fila, esperar o recreio'],['#2563eb','Medir','ampulheta, calendário, relógio de sol, relógio de água (clepsidra)']]),'',[
   LN('Sentir o tempo','cada pessoa pode sentir o tempo de um jeito.'),
   LN('A natureza','dia e noite, as estações e as pessoas envelhecendo mostram o tempo passar.'),
-  LN('A árvore generosa','o menino cresceu, e o que ele queria mudou.')])),
+  LN('A árvore generosa','o menino cresceu e quis coisas diferentes: brincar, dinheiro, casa, barco e, no fim, descansar.')])),
  T('Registros na <em>linha do tempo</em>', M(TAB(null,[['#a16207','1','jornal'],['#b45309','2','carta'],['#ea580c','3','diário'],['#db2777','4','álbum de fotos'],['#9333ea','5','foto digital'],['#2563eb','6','redes sociais']]),'',[
   D('Registro','é um jeito de guardar o que aconteceu.'),
   LN('Documentos pessoais','como a certidão de nascimento, registram a nossa história.'),
@@ -178,7 +192,8 @@ return [
 {k:'resposta', tema:'fontes', unid:4, nome:'A resposta completa', curto:'Resposta completa', capa:'f-livros', cor:'#7c3aed', treino:[], telas:[
  T('Como <em>escrever</em>', M(TAB(null,[['#7c3aed','1','Use as palavras da pergunta.'],['#2563eb','2','Diga quem: as pessoas, o médico.'],['#16a34a','3','Compare: antigamente e hoje.'],['#ea580c','4','Letra maiúscula e ponto final.']]),'',[
   LN('Incompleta','“Para saber como eles viviam.” Eles quem?'),
-  LN('Completa','“As fontes mostram como as pessoas viviam antigamente.”')])),
+  LN('Completa','“As fontes mostram como as pessoas viviam antigamente.”'),
+  LN('Dois pedidos','se a pergunta pede duas coisas, responda as duas.')])),
  T('Como era <em>no passado</em>?', M(TAB(['Profissão','No passado'],[['#ca8a04','Carteiro','entregava as cartas a pé'],['#0284c7','Professora','usava quadro de giz'],['#65a30d','Fazendeiro','usava arado puxado por bois'],['#0d9488','Médico','anotava tudo no papel'],['#ea580c','Fotógrafo','usava câmera grande de tripé']]),'',[
   LN('Numa frase','“No passado, o carteiro entregava as cartas a pé.”')]))
 ]}
