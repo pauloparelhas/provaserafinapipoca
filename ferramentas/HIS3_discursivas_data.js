@@ -35,9 +35,9 @@
         texto: 'Quando era criança, Dona Lúcia brincava de dar aula para as bonecas. Ao se tornar professora, ela escrevia no quadro de giz e usava livros grandes e pesados. Os alunos pesquisavam na biblioteca. Com o tempo, chegaram novos recursos à escola. Hoje, Dona Lúcia usa o computador e mostra vídeos para a turma. Mesmo com as mudanças, ela continua conversando com os alunos e ouvindo as ideias deles.',
         subs: [['Qual é a profissão de Dona Lúcia?', 1], ['Onde os alunos pesquisavam antigamente?', 1], ['Que recursos a tecnologia trouxe para as aulas de Dona Lúcia?', 1]],
         curta: 'a) Professora. b) Na biblioteca. c) O computador e os vídeos.' },
-      { n: 10, pts: '1,2', pag: 4, tipo: 'campos', pede: '<b>Escolha</b> uma profissão que continua existindo. <b>Escreva</b> o nome dela, o que mudou e o que continuou igual.',
-        campos: [['Profissão:', 1], ['O que mudou:', 1], ['O que continuou igual:', 1]],
-        curta: 'Exemplo: médico. Mudou: antes, papel e caneta; hoje, computador. Continuou: o cuidado com o paciente.' }
+      { n: 10, pts: '1,2', pag: 4, tipo: 'campos', pede: 'Pense numa profissão que você conhece. <b>Escreva</b> o nome dela e <b>conte</b> como era esse trabalho antigamente.',
+        campos: [['Profissão:', 1], ['Antigamente:', 2]],
+        curta: 'Exemplo: médico, anotava tudo no papel. Vale qualquer profissão das aulas, com uma coisa de antigamente.' }
     ] },
     { id: 'B', nome: 'Prova de treino 2', questoes: [
       { n: 1, pts: '0,8', pag: 1, tipo: 'marca', pede: 'Permanência é aquilo que continuou igual com o passar do tempo. <b>Assinale</b> com um <b>X</b> a alternativa que mostra uma <b>permanência</b> na história da professora Dona Lúcia.',
@@ -53,8 +53,8 @@
         ops: ['Duas pessoas podem contar histórias diferentes sobre a mesma fotografia.', 'Uma suposição está sempre certa.', 'O historiador compara várias fontes.', 'Uma carta antiga mostra como as pessoas se comunicavam.'], gab: ['C', 'E', 'C', 'C'] },
       { n: 5, pts: '0,8', pag: 3, tipo: 'linhas', linhas: 4, pede: 'O que são <b>fontes históricas</b>? Escreva também <b>um exemplo</b>.',
         curta: 'São pistas que ajudam a conhecer o passado. Exemplo: uma carta antiga. São dois pedidos: o que são e um exemplo.' },
-      { n: 6, pts: '1,2', pag: 3, tipo: 'desenho', pede: 'Nas aulas, vimos ferramentas antigas de várias profissões. <b>Desenhe</b> e <b>escreva</b> o nome de <b>três</b> ferramentas do <b>médico</b> de antigamente.',
-        curta: 'Estetoscópio, termômetro de mercúrio, maleta. Vale também seringa antiga, papel e caneta.' },
+      { n: 6, pts: '1,2', pag: 3, tipo: 'desenho', pede: 'Objetos antigos podem ser fontes históricas. <b>Desenhe</b> e <b>escreva</b> o nome de <b>três</b> objetos antigos.',
+        curta: 'Resposta livre: brinquedo, roupa, chapéu, móvel, panela, livro, relógio, câmera. O nome pode ter erro de escrita se o desenho estiver claro.' },
       { n: 7, pts: '1,2', pag: 3, tipo: 'ce', figs2: par('campo'), pede: '<b>Observe</b> as imagens do trabalho no campo em duas épocas. <b>Escreva</b> (C) para as alternativas <u>corretas</u> e (E) para as <u>erradas</u>.',
         ops: ['Na imagem de antes, os animais ajudam no trabalho.', 'A ferramenta de trabalho é a mesma nas duas imagens.', 'Com as máquinas, o trabalho ficou mais rápido.', 'O fazendeiro deixou de cuidar da terra por causa das máquinas.'], gab: ['C', 'E', 'C', 'E'] },
       { n: 8, pts: '0,8', pag: 4, tipo: 'linhas', linhas: 2, figs2: par('engenharia'), pede: '<b>Observe</b> as imagens da engenharia (criar e construir máquinas). <b>Escreva</b> uma frase sobre a diferença entre o trabalho de antes e o de hoje.',
@@ -63,9 +63,9 @@
         texto: 'No começo da carreira, Doutor João trabalhava num consultório simples. Ele usava estetoscópio, papel e caneta. Os exames demoravam dias para ficar prontos, e as fichas dos pacientes ficavam em grandes arquivos de papel. Com o tempo, tudo foi mudando. Hoje, Doutor João usa o computador e recebe os exames pelo celular. Ele também faz consultas por vídeo com pessoas que moram longe. Mesmo com tanta tecnologia, o cuidado com cada paciente não mudou.',
         subs: [['Qual é a profissão do Doutor João?', 1], ['Onde ficavam as fichas dos pacientes antigamente?', 1], ['Como a tecnologia ajuda o Doutor João hoje?', 1]],
         curta: 'a) Médico. b) Em grandes arquivos de papel. c) Exames pelo celular, consultas por vídeo ou computador.' },
-      { n: 10, pts: '1,2', pag: 4, tipo: 'campos', pede: '<b>Escolha</b> uma profissão nova, criada por causa da tecnologia. <b>Escreva</b> o nome dela e <b>explique</b> por que ela não existia no tempo dos nossos avós.',
-        campos: [['Profissão nova:', 1], ['Por que não existia:', 2]],
-        curta: 'Exemplo: desenvolvedor de aplicativos, porque ainda não havia essa tecnologia. Vale também designer gráfico ou cientista de dados.' }
+      { n: 10, pts: '1,2', pag: 4, tipo: 'campos', pede: '<b>Escolha</b> uma profissão antiga que desapareceu ou ficou rara. <b>Escreva</b> o nome dela e <b>conte</b> o que essa pessoa fazia.',
+        campos: [['Profissão antiga:', 1], ['O que fazia:', 2]],
+        curta: 'Exemplo: leiteiro, entregava leite na porta das casas. Vale acendedor de lampião, datilógrafa, vendedor com cestos.' }
     ] }
   ] };
 })();

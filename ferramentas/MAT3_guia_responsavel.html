@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='a959e051028';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='0caeaf11107';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -9,6 +9,7 @@ function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).th
 if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
 var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
 confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
 
 
 
@@ -59,13 +60,13 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <body>
 <div class="tools">
   <span style="color:#ffd54f;font:700 14px Arial,sans-serif;align-self:center" data-tipo="rotulo">&#x1F6A7; Under construction</span>
-  <a href="../index.html?v=a959e051028" class="sera-home">Home</a>
-  <a href="MAT3_discursivas.html?v=a959e051028">Folha da criança (EN)</a>
+  <a href="../index.html?v=0caeaf11107" class="sera-home">Home</a>
+  <a href="MAT3_discursivas.html?v=0caeaf11107">Folha da criança (EN)</a>
   <button class="pri" onclick="window.print()">Imprimir</button>
 </div>
 <main id="guia"></main>
-<script src="MAT3_figuras.js?v=a959e051028"></script>
-<script src="MAT3_discursivas_data.js?v=a959e051028"></script>
+<script src="MAT3_figuras.js?v=0caeaf11107"></script>
+<script src="MAT3_discursivas_data.js?v=0caeaf11107"></script>
 <script>
 (function () {
   var D = window.MAT3D, h = '';
