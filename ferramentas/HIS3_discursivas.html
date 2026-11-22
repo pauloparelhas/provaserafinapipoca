@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c0db6d51019';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='a959e051028';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -49,8 +49,6 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   .des { display: grid; grid-template-columns: repeat(3, 1fr); border: 1.4px solid var(--ink); } .des div { height: 39mm; border-bottom: 1.4px solid var(--ink); } .des span { height: 9.5mm; } .des > * + * { border-left: 1.4px solid var(--ink); } .des > :nth-child(4) { border-left: 0; }
   .txt { border: 1px solid #bbb; border-radius: 8px; padding: 8px 14px; margin: 2px 0 8px; } .txt b { display: block; margin-bottom: 3px; } .txt p { margin: 0; text-indent: 8mm; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
   .sub { margin: 5px 0 0; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; } .cp { display: flex; align-items: flex-end; gap: 8px; } .cp .ln { flex: 1; }
-  .gab h2 { margin: 0 0 6px; font-size: 18px; color: var(--c); } .gab ol { margin: 0 0 14px; padding: 0; list-style: none; } .gab li { margin: 0; padding: 5px 0; border-top: 1px solid color-mix(in srgb, var(--c) 18%, transparent); text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
-  .gab .mold { justify-content: flex-start; }
   .pg { text-align: right; font-size: 13px; color: var(--soft); }
   @media screen and (max-width: 800px) {
     .fl { width: auto; height: auto; margin: 10px 0; padding: 8px; } .mold { padding: 14px 12px; }
@@ -62,14 +60,14 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 </head>
 <body data-prova="A">
 <div class="tools">
-  <a href="../index.html?v=c0db6d51019" class="sera-home">Início</a>
+  <a href="../index.html?v=a959e051028" class="sera-home">Início</a>
   <button id="bA" aria-pressed="true" onclick="prova('A')">Prova 1</button>
   <button id="bB" aria-pressed="false" onclick="prova('B')">Prova 2</button>
-  <a href="HIS3_guia_responsavel.html?v=c0db6d51019">Guia do responsável</a>
+  <a href="HIS3_guia_responsavel.html?v=a959e051028">Respostas (1 página)</a>
   <button class="pri" onclick="window.print()">Imprimir</button>
 </div>
 <main id="folha"></main>
-<script src="HIS3_discursivas_data.js?v=c0db6d51019"></script>
+<script src="HIS3_discursivas_data.js?v=a959e051028"></script>
 <script>
 function prova(p){ document.body.setAttribute('data-prova',p); document.getElementById('bA').setAttribute('aria-pressed',String(p==='A')); document.getElementById('bB').setAttribute('aria-pressed',String(p==='B')); window.scrollTo(0,0); }
 (function(){
@@ -89,7 +87,6 @@ function prova(p){ document.body.setAttribute('data-prova',p); document.getEleme
     if(q.tipo==='campos') s+=q.campos.map(function(c){ return '<div class="cp"><span>'+c[0]+'</span><div class="ln"></div></div>'+ln(c[1]-1); }).join('');
     return s;
   }
-  function curta(q){ return q.curta || (q.gab?q.gab.map(function(g,i){ return L[i]+') '+g; }).join(' · '):q.itens.map(function(i){ return i[1]+': '+i[2]; }).join(' · ')); }
   HIS3D.provas.forEach(function(p){
     for(var pag=1;pag<=4;pag++){
       h+='<section class="fl" data-p="'+p.id+'"><div class="mold">';
@@ -97,7 +94,6 @@ function prova(p){ document.body.setAttribute('data-prova',p); document.getEleme
       p.questoes.filter(function(q){ return q.pag===pag; }).forEach(function(q){ h+='<div class="q" id="'+p.id+q.n+'"><div class="qt"><span>Questão '+q.n+'</span><span>Pontuação: '+q.pts+' / ______</span></div>'+corpo(q)+'</div>'; });
       h+='<div class="pg">'+pag+'</div></div></section>';
     }
-    h+='<section class="fl gab" data-p="'+p.id+'"><div class="mold"><div><h2>Respostas · '+p.nome+'</h2><ol>'+p.questoes.map(function(q){ return '<li><b>'+q.n+'.</b> '+curta(q)+'</li>'; }).join('')+'</ol></div></div></section>';
   });
   document.getElementById('folha').innerHTML=h;
   if(/prova=2/.test(location.search)) prova('B');
