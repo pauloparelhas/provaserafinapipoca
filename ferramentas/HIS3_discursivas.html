@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='0caeaf11107';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='e6a51511216';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -23,15 +23,11 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   .tools a, .tools button { font: 600 15px Arial, sans-serif; color: #fff; background: #6b5328; border: 0; border-radius: 10px; min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; text-decoration: none; cursor: pointer; }
   .tools button.pri { background: #b45309; }
   .tools button[aria-pressed="true"] { outline: 3px solid #fde047; outline-offset: 1px; }
-  .fl { width: 210mm; height: 297mm; margin: 16px auto; background: #fff; padding: 10mm 12mm 8mm; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
-  /* marca de treino: faixa no alto de toda folha + cruzado no canto + marca d'água na página */
+  .fl { width: 210mm; height: 297mm; margin: 16px auto; background: #fff; padding: 19mm 12mm 8mm; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+  /* marca: SIMULADO em cinza claro, estilo marca d'água, só na parte superior (22/11, Paulo); impressão em preto e branco */
   .fl { position: relative; overflow: hidden; }
-  .faixa { position: absolute; left: 0; right: 0; top: 3.2mm; text-align: center; font: 800 15px/1.1 Arial, sans-serif; letter-spacing: 2px; color: #b91c1c; }
-  .dagua { position: absolute; inset: 0; pointer-events: none; display: flex; flex-direction: column; justify-content: space-around; align-items: center; z-index: 3; }
-  .dagua span { font: 900 96px/1 Arial, sans-serif; letter-spacing: 10px; color: rgba(185, 28, 28, .17); transform: rotate(-32deg); white-space: nowrap; }
-  .cruz { position: absolute; z-index: 4; top: 9mm; right: -25mm; width: 78mm; transform: rotate(38deg); border-top: 2.2px solid #b91c1c; border-bottom: 2.2px solid #b91c1c; background: rgba(255, 255, 255, .86); color: #b91c1c; text-align: center; font: 900 16px/1 Arial, sans-serif; letter-spacing: 4px; padding: 5px 0; }
-  .fl .mold { padding-top: 11mm; }
-  .mold { border: 1.4px solid var(--ink); height: 100%; padding: 6mm 8mm 5mm; display: flex; flex-direction: column; justify-content: space-between; gap: 4mm; }
+  .marca { position: absolute; left: 0; right: 0; top: 4mm; text-align: center; font: 900 50px/1 Arial, sans-serif; letter-spacing: 26px; text-indent: 26px; color: #c6c6c6; }
+  .mold { border: 1.4px solid var(--ink); height: 100%; padding: 5mm 8mm 4mm; display: flex; flex-direction: column; justify-content: space-between; gap: 4mm; }
   body[data-prova="A"] .fl[data-p="B"], body[data-prova="B"] .fl[data-p="A"] { display: none; }
   table.cab { width: 100%; border-collapse: collapse; text-align: center; }
   table.cab td { border: 1.3px solid var(--ink); padding: 5px 8px; }
@@ -48,7 +44,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   .figs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 4px 0 8px; }
   .figs img, .f2 img, .g9 img { display: block; width: 100%; object-fit: cover; border-radius: 6px; border: 1px solid #999; }
   .figs img { height: 27mm; }
-  .f2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 78%; margin: 2px auto 8px; } .f2 figure { margin: 0; text-align: center; } .f2 img { height: 33mm; object-fit: contain; background: #f3f1ec; }
+  .f2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 78%; margin: 2px auto 8px; } .f2 figure { margin: 0; text-align: center; } .f2 img { height: 30mm; object-fit: contain; background: #fff; }
   .f2 figcaption { font-weight: 700; font-size: 13.5px; margin-top: 2px; }
   .g9 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm 7mm; } .g9 div { text-align: center; } .g9 img { height: 31mm; } .g9 small { display: block; font-size: 13px; color: var(--soft); margin-top: 3px; }
   .g9 i { display: block; height: 9mm; border-bottom: 1.3px solid var(--line); font-style: normal; }
@@ -58,23 +54,23 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
   .sub { margin: 5px 0 0; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; } .cp { display: flex; align-items: flex-end; gap: 8px; } .cp .ln { flex: 1; }
   .pg { text-align: right; font-size: 13px; color: var(--soft); }
   @media screen and (max-width: 800px) {
-    .fl { width: auto; height: auto; margin: 10px 0; padding: 30px 8px 8px; } .dagua span { font-size: 54px; } .cruz { display: none; } .faixa { font-size: 13px; letter-spacing: 0; top: 8px; } .mold { padding: 14px 12px; }
+    .fl { width: auto; height: auto; margin: 10px 0; padding: 46px 8px 8px; } .marca { font-size: 34px; letter-spacing: 10px; text-indent: 10px; top: 7px; } .mold { padding: 14px 12px; }
     .g9 { gap: 12px 8px; } .g9 img { height: 22vw; } .figs { grid-template-columns: 1fr 1fr; } .figs img { height: 26vw; } .f2 { width: 100%; } .f2 img { height: 28vw; } .des div { height: 30vw; }
     .cp { display: block; } .nome { display: block; } .nome span { display: block; }
   }
-  @media print { body { background: #fff; } .tools { display: none; } .fl { margin: 0; box-shadow: none; break-after: page; width: 210mm; height: 297mm; padding: 10mm 11mm 8mm; } .fl:last-child { break-after: auto; } }
+  @media print { body { background: #fff; } .tools { display: none; } .fl { margin: 0; box-shadow: none; break-after: page; width: 210mm; height: 297mm; padding: 19mm 11mm 8mm; } .fl:last-child { break-after: auto; } }
 </style>
 </head>
 <body data-prova="A">
 <div class="tools">
-  <a href="../index.html?v=0caeaf11107" class="sera-home">Início</a>
+  <a href="../index.html?v=e6a51511216" class="sera-home">Início</a>
   <button id="bA" aria-pressed="true" onclick="prova('A')">Prova 1</button>
   <button id="bB" aria-pressed="false" onclick="prova('B')">Prova 2</button>
-  <a href="HIS3_guia_responsavel.html?v=0caeaf11107">Respostas (1 página)</a>
+  <a href="HIS3_guia_responsavel.html?v=e6a51511216">Respostas (1 página)</a>
   <button class="pri" onclick="window.print()">Imprimir</button>
 </div>
 <main id="folha"></main>
-<script src="HIS3_discursivas_data.js?v=0caeaf11107"></script>
+<script src="HIS3_discursivas_data.js?v=e6a51511216"></script>
 <script>
 function prova(p){ document.body.setAttribute('data-prova',p); document.getElementById('bA').setAttribute('aria-pressed',String(p==='A')); document.getElementById('bB').setAttribute('aria-pressed',String(p==='B')); window.scrollTo(0,0); }
 (function(){
@@ -96,7 +92,7 @@ function prova(p){ document.body.setAttribute('data-prova',p); document.getEleme
   }
   HIS3D.provas.forEach(function(p){
     for(var pag=1;pag<=4;pag++){
-      h+='<section class="fl" data-p="'+p.id+'"><div class="faixa" data-tipo="rotulo">TREINO · NÃO É A PROVA DA ESCOLA</div><div class="cruz" aria-hidden="true">TREINO</div><div class="dagua" aria-hidden="true"><span>TREINO</span><span>TREINO</span></div><div class="mold">';
+      h+='<section class="fl" data-p="'+p.id+'"><div class="marca" data-tipo="rotulo">SIMULADO</div><div class="mold">';
       if(pag===1) h+='<div><table class="cab"><tr><td><b>História</b></td><td><b>'+p.nome+'</b></td><td>Year 2 · 3º trimestre</td><td>Valor: 10,0</td></tr></table><div class="nome"><span>Nome:</span><span class="d">Data:</span></div><div class="inst"><b>INSTRUÇÕES</b><ul><li>Leia cada questão duas vezes.</li><li>Escreva com letra legível e confira a ortografia.</li><li>Dê respostas completas: diga de quem você está falando.</li><li>Não deixe questão em branco.</li><li>No fim, revise a prova inteira.</li></ul></div></div>';
       p.questoes.filter(function(q){ return q.pag===pag; }).forEach(function(q){ h+='<div class="q" id="'+p.id+q.n+'"><div class="qt"><span>Questão '+q.n+'</span><span>Pontuação: '+q.pts+' / ______</span></div>'+corpo(q)+'</div>'; });
       h+='<div class="pg">'+pag+'</div></div></section>';

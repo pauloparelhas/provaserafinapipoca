@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='e6a51511216';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>História · Simulado</title>
+<!-- Impressão de um simulado de 16 questões (HIS3), preto e branco, SEM respostas. ?s=N escolhe o sorteio; ?gab=10 imprime
+     o gabarito dos 10 numa página. Questões = o MESMO HIS3_simulado_data.js (só itens aprovados). gen/pdf_his3.py gera os PDFs. -->
+<style>
+@font-face{font-family:"Nunito";font-weight:200 1000;src:url(assets/fonts/nunito-latin.woff2) format("woff2")}
+@page{size:A4 portrait;margin:11mm 13mm 12mm}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:#111;font:11pt/1.38 "Nunito",system-ui,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.marca{text-align:center;font:900 34pt/1 Arial,sans-serif;letter-spacing:16pt;text-indent:16pt;color:#c6c6c6;margin-bottom:3mm}
+.cab{border-bottom:1.2pt solid #111;padding-bottom:3mm;margin-bottom:4mm}.cab h1{font-size:16pt;font-weight:900;line-height:1.1;margin:0}.cab .nome{margin-top:2.5mm;font-weight:700}
+ol.qs{list-style:none;margin:0;padding:0;columns:2;column-gap:8mm;column-rule:.5pt solid #bbb}
+.q{break-inside:avoid;margin:0 0 5mm;text-align:justify;text-align-last:left;hyphens:auto;-webkit-hyphens:auto}
+.n{display:inline-grid;place-items:center;width:6mm;height:6mm;border-radius:50%;background:#111;color:#fff;font-weight:800;font-size:9pt;line-height:1;margin-right:1.6mm}
+.p{font-weight:800}
+.fig{margin:1.6mm 0}.fig img{display:block;max-width:100%;max-height:36mm;margin:0 auto;border-radius:1.5mm}
+.fig .parf{display:grid;grid-template-columns:1fr 1fr;gap:3mm}.fig .parf img{width:100%;height:27mm;object-fit:contain}.fig small{display:block;text-align:center;text-align-last:center;font-weight:800;font-size:8.5pt}
+.tx{border:.8pt solid #999;border-radius:1.5mm;padding:1.6mm 2.6mm;margin:1.6mm 0}
+.q ul{list-style:none;margin:1.6mm 0 0;padding:0}.q li{display:flex;gap:2mm;margin:1mm 0;text-align:left;hyphens:none}.q li b{flex:0 0 auto}
+.gabt{width:100%;border-collapse:collapse;font-size:10.5pt}.gabt td,.gabt th{border:.6pt solid #999;padding:1.6mm 1.2mm;text-align:center}.gabt th{background:#eee}
+</style>
+</head>
+<body>
+<div id="doc"></div>
+<script src="HIS3_simulado_data.js?v=e6a51511216"></script>
+<script>
+(function(){
+  var S=window.HIS3S;
+  function monta(sem){
+    var x=sem*9301+49297; function rnd(){ x=(x*233280+49297)%2147483647; return x/2147483647; }
+    function emb(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    var esc=[];
+    function pega(k,n,prova){ emb(S.ITENS.filter(function(i){ return i.eixo===k && (prova===undefined||!!i.prova===prova); })).forEach(function(i){
+      if(n>0 && esc.indexOf(i)<0 && !(i.grupo && esc.some(function(e){ return e.grupo===i.grupo; }))){ esc.push(i); n--; } }); }
+    S.FAMILIAS.forEach(function(f){ if(!f.cota) return; if(f.prova) pega(f.k,f.prova,true); pega(f.k,f.cota-(f.prova||0),f.prova?false:undefined); });
+    return esc.map(function(it){ return {it:it,ops:/^CERTO OU ERRADO/.test(it.pede)?it.opts.slice().sort(function(a,b){ return a.t<b.t?-1:1; }):emb(it.opts)}; });
+  }
+  /* enunciado em caixa alta cansa no papel: usa o texto em letra normal guardado em p */
+  function frase(s){ return s; }
+  var g=/[?&]gab=(\d+)/.exec(location.search), L='abcdef', d=document.getElementById('doc'), h='';
+  if(g){
+    var N=+g[1]; h='<div class="cab"><h1>História · Gabarito dos simulados</h1></div><table class="gabt"><tr><th>Simulado</th>'; for(var c=1;c<=16;c++) h+='<th>'+c+'</th>'; h+='</tr>';
+    for(var s=1;s<=N;s++){ h+='<tr><th>'+s+'</th>'+monta(s).map(function(q){ var k=q.ops.map(function(o){ return !!o.ok; }).indexOf(true); return '<td>'+L[k]+'</td>'; }).join('')+'</tr>'; }
+    h+='</table>';
+  } else {
+    var m=/[?&]s=(\d+)/.exec(location.search), sem=m?+m[1]:1;
+    h='<div class="marca" data-tipo="rotulo">SIMULADO</div><div class="cab"><h1>História · Simulado '+sem+'</h1><div class="nome" data-tipo="rotulo">Nome: ______________________________________ &nbsp; Data: ___/___</div></div><ol class="qs">'+
+      monta(sem).map(function(q,n){ var it=q.it;
+        return '<li class="q"><span class="n">'+(n+1)+'</span><span class="p">'+frase(it.pn||it.pede)+'</span>'+(it.quadro?'<div class="fig">'+it.quadro.replace(/media\/his3\//g,'media/his3/pb/')+'</div>':'')+
+          (it.texto?'<div class="tx">'+it.texto.join(' ')+'</div>':'')+'<ul>'+q.ops.map(function(o,k){ return '<li data-tipo="rotulo"><b>'+L[k]+')</b><span>'+(o.tn||o.t)+'</span></li>'; }).join('')+'</ul></li>'; }).join('')+'</ol>';
+  }
+  d.innerHTML=h;
+})();
+</script>
+</body>
+</html>

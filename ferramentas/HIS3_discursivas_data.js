@@ -8,8 +8,8 @@
    ============================================================ */
 (function () {
   var M = 'media/his3/';
-  var F = function (k) { return M + 'fonte-' + k + '.jpg'; };
-  var par = function (k) { return [[M + k + '-antes.jpg', 'Antes'], [M + k + '-hoje.jpg', 'Hoje']]; };
+  var F = function (k) { return M + 'pb/fonte-' + k + '.jpg'; };
+  var par = function (k) { return [[M + 'pb/' + k + '-antes.jpg', 'Antes'], [M + 'pb/' + k + '-hoje.jpg', 'Hoje']]; };
   window.HIS3D = { provas: [
     { id: 'A', nome: 'Prova de treino 1', questoes: [
       { n: 1, pts: '0,8', pag: 1, tipo: 'marca', pede: 'As fontes históricas podem ser de tipos diferentes. <b>Assinale</b> com um <b>X</b> a alternativa que explica o que é uma fonte <b>oral</b>.',
