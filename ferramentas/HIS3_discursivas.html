@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c0db6d51019';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>História · Prova de treino · Year 2 · 3º trimestre</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --ink: #1d1d1f; --soft: #55555f; --line: #8d8d99; --c: #7a4b00; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #e7e4dc; color: var(--ink); font: 15px/1.5 "Century Gothic", "Questrial", "Trebuchet MS", Arial, sans-serif; }
+  .tools { position: sticky; top: 0; z-index: 5; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 10px 16px; background: #3a2c14; }
+  .tools a, .tools button { font: 600 15px Arial, sans-serif; color: #fff; background: #6b5328; border: 0; border-radius: 10px; min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; text-decoration: none; cursor: pointer; }
+  .tools button.pri { background: #b45309; }
+  .tools button[aria-pressed="true"] { outline: 3px solid #fde047; outline-offset: 1px; }
+  .fl { width: 210mm; height: 297mm; margin: 16px auto; background: #fff; padding: 10mm 12mm; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+  .mold { border: 1.4px solid var(--ink); height: 100%; padding: 6mm 8mm 5mm; display: flex; flex-direction: column; justify-content: space-between; gap: 4mm; }
+  body[data-prova="A"] .fl[data-p="B"], body[data-prova="B"] .fl[data-p="A"] { display: none; }
+  table.cab { width: 100%; border-collapse: collapse; text-align: center; }
+  table.cab td { border: 1.3px solid var(--ink); padding: 5px 8px; }
+  table.cab b { font-size: 17px; }
+  .nome { display: flex; gap: 14px; margin-top: 6px; } .nome span { flex: 1; border-bottom: 1.3px solid var(--ink); padding: 8px 0 2px; } .nome span.d { flex: .4; }
+  .inst { border: 1.3px solid var(--ink); margin-top: 10px; } .inst b { display: block; background: #ddd; text-align: center; padding: 3px; border-bottom: 1.3px solid var(--ink); }
+  .inst ul { margin: 6px 0 8px; padding-left: 28px; } .inst li { margin: 6px 0; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
+  .q { break-inside: avoid; }
+  .qt { display: flex; justify-content: space-between; border: 1.4px solid var(--ink); border-radius: 7px; padding: 4px 14px; margin-bottom: 7px; }
+  .pede { text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; margin: 0 0 6px; }
+  .ops { list-style: none; margin: 0; padding: 0; } .ops li { display: flex; gap: 6px; margin: 5px 0; }
+  .ops li > b { flex: 0 0 auto; } .ops li .p { flex: 0 0 auto; white-space: pre; }
+  .ops li .tx { flex: 1; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
+  .figs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 4px 0 8px; }
+  .figs img, .f2 img, .g9 img { display: block; width: 100%; object-fit: cover; border-radius: 6px; border: 1px solid #999; }
+  .figs img { height: 27mm; }
+  .f2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 78%; margin: 2px auto 8px; } .f2 figure { margin: 0; text-align: center; } .f2 img { height: 33mm; object-fit: contain; background: #f3f1ec; }
+  .f2 figcaption { font-weight: 700; font-size: 13.5px; margin-top: 2px; }
+  .g9 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm 7mm; } .g9 div { text-align: center; } .g9 img { height: 31mm; } .g9 small { display: block; font-size: 13px; color: var(--soft); margin-top: 3px; }
+  .g9 i { display: block; height: 9mm; border-bottom: 1.3px solid var(--line); font-style: normal; }
+  .ln { height: 9mm; border-bottom: 1.3px solid var(--line); }
+  .des { display: grid; grid-template-columns: repeat(3, 1fr); border: 1.4px solid var(--ink); } .des div { height: 39mm; border-bottom: 1.4px solid var(--ink); } .des span { height: 9.5mm; } .des > * + * { border-left: 1.4px solid var(--ink); } .des > :nth-child(4) { border-left: 0; }
+  .txt { border: 1px solid #bbb; border-radius: 8px; padding: 8px 14px; margin: 2px 0 8px; } .txt b { display: block; margin-bottom: 3px; } .txt p { margin: 0; text-indent: 8mm; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
+  .sub { margin: 5px 0 0; text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; } .cp { display: flex; align-items: flex-end; gap: 8px; } .cp .ln { flex: 1; }
+  .gab h2 { margin: 0 0 6px; font-size: 18px; color: var(--c); } .gab ol { margin: 0 0 14px; padding: 0; list-style: none; } .gab li { margin: 0; padding: 5px 0; border-top: 1px solid color-mix(in srgb, var(--c) 18%, transparent); text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
+  .gab .mold { justify-content: flex-start; }
+  .pg { text-align: right; font-size: 13px; color: var(--soft); }
+  @media screen and (max-width: 800px) {
+    .fl { width: auto; height: auto; margin: 10px 0; padding: 8px; } .mold { padding: 14px 12px; }
+    .g9 { gap: 12px 8px; } .g9 img { height: 22vw; } .figs { grid-template-columns: 1fr 1fr; } .figs img { height: 26vw; } .f2 { width: 100%; } .f2 img { height: 28vw; } .des div { height: 30vw; }
+    .cp { display: block; } .nome { display: block; } .nome span { display: block; }
+  }
+  @media print { body { background: #fff; } .tools { display: none; } .fl { margin: 0; box-shadow: none; break-after: page; width: 210mm; height: 297mm; padding: 9mm 11mm; } .fl:last-child { break-after: auto; } }
+</style>
+</head>
+<body data-prova="A">
+<div class="tools">
+  <a href="../index.html?v=c0db6d51019" class="sera-home">Início</a>
+  <button id="bA" aria-pressed="true" onclick="prova('A')">Prova 1</button>
+  <button id="bB" aria-pressed="false" onclick="prova('B')">Prova 2</button>
+  <a href="HIS3_guia_responsavel.html?v=c0db6d51019">Guia do responsável</a>
+  <button class="pri" onclick="window.print()">Imprimir</button>
+</div>
+<main id="folha"></main>
+<script src="HIS3_discursivas_data.js?v=c0db6d51019"></script>
+<script>
+function prova(p){ document.body.setAttribute('data-prova',p); document.getElementById('bA').setAttribute('aria-pressed',String(p==='A')); document.getElementById('bB').setAttribute('aria-pressed',String(p==='B')); window.scrollTo(0,0); }
+(function(){
+  var L='abcdef', h='';
+  function ln(n){ var s=''; for(var i=0;i<n;i++) s+='<div class="ln"></div>'; return s; }
+  function ops(q,ce){ return '<ul class="ops">'+q.ops.map(function(o,i){ return '<li><b>'+L[i]+')</b><span class="p">('+(ce?'     ':'     ')+')</span><span class="tx">'+o+'</span></li>'; }).join('')+'</ul>'; }
+  function corpo(q){
+    var s='<p class="pede">'+q.pede+'</p>';
+    if(q.figs) s+='<div class="figs">'+q.figs.map(function(f){ return '<img src="'+f+'" alt="">'; }).join('')+'</div>';
+    if(q.figs2) s+='<div class="f2">'+q.figs2.map(function(f){ return '<figure><img src="'+f[0]+'" alt="'+f[1]+'"><figcaption>'+f[1]+'</figcaption></figure>'; }).join('')+'</div>';
+    if(q.tipo==='marca') s+=ops(q);
+    if(q.tipo==='ce') s+=ops(q,true);
+    if(q.tipo==='classifica') s+='<div class="g9">'+q.itens.map(function(i){ return '<div><img src="'+i[0]+'" alt="'+i[1]+'"><small>'+i[1]+'</small><i></i></div>'; }).join('')+'</div>';
+    if(q.tipo==='linhas') s+=ln(q.linhas);
+    if(q.tipo==='desenho') s+='<div class="des"><div></div><div></div><div></div><span></span><span></span><span></span></div>';
+    if(q.tipo==='texto') s+='<div class="txt"><b>'+q.tit+'</b><p>'+q.texto+'</p></div>'+q.subs.map(function(x,i){ return '<p class="sub"><b>'+L[i]+')</b> '+x[0]+'</p>'+ln(x[1]); }).join('');
+    if(q.tipo==='campos') s+=q.campos.map(function(c){ return '<div class="cp"><span>'+c[0]+'</span><div class="ln"></div></div>'+ln(c[1]-1); }).join('');
+    return s;
+  }
+  function curta(q){ return q.curta || (q.gab?q.gab.map(function(g,i){ return L[i]+') '+g; }).join(' · '):q.itens.map(function(i){ return i[1]+': '+i[2]; }).join(' · ')); }
+  HIS3D.provas.forEach(function(p){
+    for(var pag=1;pag<=4;pag++){
+      h+='<section class="fl" data-p="'+p.id+'"><div class="mold">';
+      if(pag===1) h+='<div><table class="cab"><tr><td><b>História</b></td><td><b>'+p.nome+'</b></td><td>Year 2 · 3º trimestre</td><td>Valor: 10,0</td></tr></table><div class="nome"><span>Nome:</span><span class="d">Data:</span></div><div class="inst"><b>INSTRUÇÕES</b><ul><li>Leia cada questão duas vezes.</li><li>Escreva com letra legível e confira a ortografia.</li><li>Dê respostas completas: diga de quem você está falando.</li><li>Não deixe questão em branco.</li><li>No fim, revise a prova inteira.</li></ul></div></div>';
+      p.questoes.filter(function(q){ return q.pag===pag; }).forEach(function(q){ h+='<div class="q" id="'+p.id+q.n+'"><div class="qt"><span>Questão '+q.n+'</span><span>Pontuação: '+q.pts+' / ______</span></div>'+corpo(q)+'</div>'; });
+      h+='<div class="pg">'+pag+'</div></div></section>';
+    }
+    h+='<section class="fl gab" data-p="'+p.id+'"><div class="mold"><div><h2>Respostas · '+p.nome+'</h2><ol>'+p.questoes.map(function(q){ return '<li><b>'+q.n+'.</b> '+curta(q)+'</li>'; }).join('')+'</ol></div></div></section>';
+  });
+  document.getElementById('folha').innerHTML=h;
+  if(/prova=2/.test(location.search)) prova('B');
+})();
+</script>
+</body>
+</html>

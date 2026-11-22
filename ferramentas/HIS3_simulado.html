@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='f5cd2e52206';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c0db6d51019';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -10,36 +10,12 @@ if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.ge
 var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
 confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Simulado — História</title>
-<link rel="stylesheet" href="serafina-core.css?v=f5cd2e52206">
-<link rel="stylesheet" href="OP_estilo.css?v=f5cd2e52206">
+<link rel="stylesheet" href="serafina-core.css?v=c0db6d51019">
+<link rel="stylesheet" href="OP_estilo.css?v=c0db6d51019">
 <style>
 /* só o que é exclusivo desta tela */
 .placar{font-size:calc(2.6rem*var(--fs));font-weight:900;line-height:1;color:var(--accent);text-align:center;margin:6px 0 2px}
@@ -117,6 +93,9 @@ body.papel .escbar.n-ok b{color:#1b5e20} body.papel .escbar.n-quase b{color:#8a5
 /* ---- HIS3: foto da fonte (aula 3 da U3) ---- */
 .quadro .fotofonte{display:block;width:100%;max-width:420px;margin:0 auto;border-radius:10px;border:2px solid var(--line)}
 body.papel .quadro .fotofonte{border-color:#bbb}
+.quadro .parf{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quadro .parf img{display:block;width:100%;aspect-ratio:3/2;object-fit:contain;background:rgba(127,127,127,.14);border-radius:10px;border:2px solid var(--line)}
+.quadro .parf small{display:block;text-align:center;font-weight:900;margin-top:4px}
 .tr{display:none}
 body.show-tr .tr{display:block;font-size:.82em;font-weight:700;color:var(--soft);margin-top:3px;text-transform:none;letter-spacing:0}
 body.show-tr .opt .tr{display:block}
@@ -195,8 +174,8 @@ body.papel .reva{color:#111}
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'his3_som',stars:90};</script>
-<script src="serafina-core.js?v=f5cd2e52206"></script>
-<script src="OP_voz.js?v=f5cd2e52206"></script>
+<script src="serafina-core.js?v=c0db6d51019"></script>
+<script src="OP_voz.js?v=c0db6d51019"></script>
 <script>
 /* MODO PAPEL — a folha da prova de verdade, com a interacao por cima.
    Ligado por padrao nesta tela: o objetivo e a crianca reconhecer no dia
@@ -224,11 +203,11 @@ body.papel .reva{color:#111}
   document.addEventListener('DOMContentLoaded',pinta);
 })();
 </script>
-<script src="assets/react.production.min.js?v=f5cd2e52206"></script>
-<script src="assets/react-dom.production.min.js?v=f5cd2e52206"></script>
-<script src="HIS3_simulado_data.js?v=f5cd2e52206"></script>
+<script src="assets/react.production.min.js?v=c0db6d51019"></script>
+<script src="assets/react-dom.production.min.js?v=c0db6d51019"></script>
+<script src="HIS3_simulado_data.js?v=c0db6d51019"></script>
 <script>window.OPQ_TXT={};</script>
-<script src="OP_questao.js?v=f5cd2e52206"></script>
+<script src="OP_questao.js?v=c0db6d51019"></script>
 <script>
 'use strict';
 /* ============================================================
@@ -258,11 +237,13 @@ function zeraVistos(){ try{ localStorage.removeItem(VISTOS); }catch(e){} }
    ao que ela ainda não viu */
 function montaRodada(n){
   var jaVi=vistos(), escolhidas=[];
-  function pegaDe(k, quantas){
-    var pool=BANCO.filter(function(i){ return i.eixo===k && escolhidas.indexOf(i)<0; });
+  /* 22/11: uma questão por grupo (mesmas fotos, mesmo texto) em cada rodada; soProva separa o banco no formato da prova */
+  function livre(i){ return !i.grupo || !escolhidas.some(function(e){ return e.grupo===i.grupo; }); }
+  function pegaDe(k, quantas, soProva){
+    var pool=BANCO.filter(function(i){ return i.eixo===k && escolhidas.indexOf(i)<0 && (soProva===undefined || !!i.prova===soProva); });
     var novas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)<0; }));
     var velhas=OPQ.embaralha(pool.filter(function(i){ return jaVi.indexOf(i.id)>=0; }));
-    escolhidas=escolhidas.concat(novas.concat(velhas).slice(0,quantas));
+    novas.concat(velhas).forEach(function(i){ if(quantas>0 && livre(i)){ escolhidas.push(i); quantas--; } });
   }
   function menosVistas(filtro){
     return OPQ.embaralha(OP.FAMILIAS.filter(filtro)).map(function(f){
@@ -270,7 +251,7 @@ function montaRodada(n){
     }).sort(function(a,b){ return b.novas-a.novas; });
   }
   if(n>=RODADA){
-    OP.FAMILIAS.forEach(function(f){ if(f.cota) pegaDe(f.k,f.cota); });
+    OP.FAMILIAS.forEach(function(f){ if(!f.cota) return; if(f.prova) pegaDe(f.k,f.prova,true); pegaDe(f.k,f.cota-(f.prova||0),f.prova?false:undefined); });
   } else {
     /* aquecer: o mesmo peso em miniatura — 3 do bloco A, 2 dos blocos B/C */
     var a=Math.round(n*0.6);
@@ -461,6 +442,6 @@ document.getElementById('raiz').setAttribute('data-folha','Simulado de História
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#f59e0b'};</script>
-<script src="sera_theme.js?v=f5cd2e52206"></script>
+<script src="sera_theme.js?v=c0db6d51019"></script>
 </body>
 </html>

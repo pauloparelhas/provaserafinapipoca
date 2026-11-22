@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='f5cd2e52206';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c0db6d51019';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -13,7 +13,7 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
-<title>Geografia — 3º trimestre</title>
+<title>História — 3º trimestre</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
@@ -300,8 +300,8 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
     <button class="cbtn" id="trBtn" hidden onclick="alternaTr()" aria-pressed="false" title="Portuguese" aria-label="Portuguese"><svg viewBox="0 0 28 20" width="26" height="19" aria-hidden="true"><rect width="28" height="20" rx="2" fill="#16a34a"/><path d="M14 3 25 10 14 17 3 10z" fill="#facc15"/><circle cx="14" cy="10" r="4" fill="#1d4ed8"/></svg></button>
     <button class="cbtn" id="matBtn" onclick="abreMenu()" aria-expanded="false" aria-controls="menuMat"><span id="matTxt">Provas anteriores</span></button>
     <div class="menu" id="menuMat" hidden>
-      <button onclick="mostraVista('mat')" data-v="mat">Math (Matemática)<small>prova em 18/11</small></button>
-      <button onclick="mostraVista('his')" data-v="his">História<small>prova de 27/10</small></button>
+      <button onclick="mostraVista('his')" data-v="his">História<small>3º trimestre</small></button>
+      <button onclick="mostraVista('mat')" data-v="mat">Math (Matemática)<small>prova de 18/11</small></button>
     </div>
     <button class="cbtn" id="themeBtn" onclick="toggleTema()" aria-pressed="false" title="Claro ou escuro">
       <span class="ce" id="themeEmo">&#9728;&#65039;</span><span id="themeTxt">Claro</span>
@@ -311,7 +311,7 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
   <!-- ================= MATH 3o TRI (13/11) =================
        Roteiro: trabalho/3tri_matematica/_roteiro.md. Prova em INGLES: tela em EN, PT na bandeira.
        Publicacao em etapas: por enquanto so as questoes discursivas (folha + guia). Aviso "Under construction". -->
-  <div id="viewMat">
+  <div id="viewMat" hidden>
   <div class="header">
     <div class="badge">&#x1F4DA; 3rd term &middot; Year 2 &middot; test on 11/18<span class="tr">3º trimestre · prova em 18/11</span></div>
     <div class="mascot">&#x1F4D0;</div>
@@ -339,32 +339,32 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
       <span class="kitgo" aria-hidden="true">&#x1F5A8;&#xFE0F;</span>
     </a>
     <div class="picks geo5">
-      <a class="pick mat" href="ferramentas/MAT3_estudo.html?v=f5cd2e52206">
+      <a class="pick mat" href="ferramentas/MAT3_estudo.html?v=c0db6d51019">
         <span class="em">&#x1F4D6;</span>
         <span><span class="tt"><span class="ordem">1</span>Theory<span class="tr">Teoria</span></span><span class="dd">7 topics<span class="tr">7 temas</span></span></span>
         <span class="tag">Study<span class="tr">Estudar</span></span>
       </a>
-      <a class="pick video" href="ferramentas/MAT3_video.html?v=f5cd2e52206">
+      <a class="pick video" href="ferramentas/MAT3_video.html?v=c0db6d51019">
         <span class="em">&#x1F3AC;</span>
         <span><span class="tt"><span class="ordem">2</span>The video<span class="tr">O vídeo</span></span><span class="dd">In English, with subtitles<span class="tr">Em inglês, com legenda</span></span></span>
         <span class="tag">Watch<span class="tr">Assistir</span></span>
       </a>
-      <a class="pick slides" href="ferramentas/MAT3_pocket.html?v=f5cd2e52206">
+      <a class="pick slides" href="ferramentas/MAT3_pocket.html?v=c0db6d51019">
         <span class="em">&#x1F4C4;</span>
         <span><span class="tt"><span class="ordem">3</span>Pocket Card</span><span class="dd">Everything in 2 pages<span class="tr">Tudo em 2 páginas</span></span></span>
         <span class="tag">Open<span class="tr">Abrir</span></span>
       </a>
-      <a class="pick simu" href="ferramentas/MAT3_simulado.html?v=f5cd2e52206">
+      <a class="pick simu" href="ferramentas/MAT3_simulado.html?v=c0db6d51019">
         <span class="em">&#x270F;&#xFE0F;</span>
         <span><span class="tt"><span class="ordem">4</span>Practice test<span class="tr">Simulado</span></span><span class="dd">Like the real test<span class="tr">Igual à prova</span></span></span>
         <span class="tag">Start<span class="tr">Começar</span></span>
       </a>
-      <a class="pick video" href="ferramentas/MAT3_discursivas.html?v=f5cd2e52206">
+      <a class="pick video" href="ferramentas/MAT3_discursivas.html?v=c0db6d51019">
         <span class="em">&#x270D;&#xFE0F;</span>
         <span><span class="tt"><span class="ordem">5</span>Written answers<span class="tr">Respostas escritas</span></span><span class="dd">With "Show answer"<span class="tr">Com "Mostrar resposta"</span></span></span>
         <span class="tag">Write<span class="tr">Escrever</span></span>
       </a>
-      <a class="pick quiz" href="ferramentas/MAT3_jogo.html?v=f5cd2e52206">
+      <a class="pick quiz" href="ferramentas/MAT3_jogo.html?v=c0db6d51019">
         <span class="em">&#x1F3AE;</span>
         <span><span class="tt"><span class="ordem">6</span>The game<span class="tr">O jogo</span></span><span class="dd">Math Stars<span class="tr">Math Stars</span></span></span>
         <span class="tag">Play<span class="tr">Jogar</span></span>
@@ -374,19 +374,19 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
     <div class="pdflista" id="pdfListaMat" hidden>
       <a href="ferramentas/media/mat3/Teoria_Math_sem_imagens.pdf" target="_blank" rel="noopener"><b>Theory<span class="tr">Teoria</span></b><span>to read together<span class="tr">para ler junto</span></span></a>
       <a href="ferramentas/media/mat3/Simulado_Math_01.pdf" target="_blank" rel="noopener" onclick="this.href='ferramentas/media/mat3/Simulado_Math_'+('0'+(1+Math.floor(Math.random()*10))).slice(-2)+'.pdf'"><b>Practice test<span class="tr">Simulado</span></b><span>15 questions + answers<span class="tr">15 questões + gabarito</span></span></a>
-      <a href="ferramentas/MAT3_guia_responsavel.html?v=f5cd2e52206"><b>Guia do responsável</b><span>como corrigir as respostas escritas (detalhado)</span></a>
+      <a href="ferramentas/MAT3_guia_responsavel.html?v=c0db6d51019"><b>Guia do responsável</b><span>como corrigir as respostas escritas (detalhado)</span></a>
     </div>
     <div class="extras" style="grid-template-columns:1fr;max-width:300px">
-      <a class="extra2" href="ferramentas/MAT3_material.html?v=f5cd2e52206"><span class="ic">&#x1F3EB;</span><span><b>School material<span class="tr">Material da escola</span></b><small>Slides, videos, Canva<span class="tr">Slides, vídeos e Canva</span></small></span></a>
+      <a class="extra2" href="ferramentas/MAT3_material.html?v=c0db6d51019"><span class="ic">&#x1F3EB;</span><span><b>School material<span class="tr">Material da escola</span></b><small>Slides, videos, Canva<span class="tr">Slides, vídeos e Canva</span></small></span></a>
     </div>
   </section>
   </div>
 
   <!-- 13/11 (Paulo): Geografia e Ciencias sairam do ar; em Provas anteriores fica so Historia.
        O HTML antigo esta no historico do git (commit anterior a esta mudanca). -->
-<div id="viewHis" hidden>
+<div id="viewHis">
   <div class="header">
-    <div class="badge">&#x1F4DA; 3º trimestre &middot; Year 2 &middot; prova 27/10</div>
+    <div class="badge">&#x1F4DA; 3º trimestre &middot; Year 2</div>
     <div class="mascot">&#x1F50E;</div>
     <div class="title">História</div>
     <div class="subtitle">Detetives do Tempo: fontes históricas &middot; a escola tem história &middot; profissões que mudaram e que continuaram</div>
@@ -396,7 +396,7 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
        Insumos: trabalho/3tri_historia (U3 Fontes históricas, U4 O mundo do trabalho, U1/U2 base).
        Roteiro único: trabalho/3tri_historia/_roteiro.md. Banco único: HIS3_banco.js. -->
   <section class="geo-panel">
-    <a class="hero2" href="ferramentas/HIS3_simulado.html?v=f5cd2e52206">
+    <a class="hero2" href="ferramentas/HIS3_simulado.html?v=c0db6d51019">
       <span class="em">&#x270F;&#xFE0F;</span>
       <span>
         <span class="tt">Simulado</span>
@@ -405,7 +405,7 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
       <span class="go">Começar</span>
     </a>
     <div style="margin-top:16px"></div>
-    <a class="hero" href="ferramentas/HIS3_jogo.html?v=f5cd2e52206" style="border-radius:22px">
+    <a class="hero" href="ferramentas/HIS3_jogo.html?v=c0db6d51019" style="border-radius:22px">
       <span class="em">&#x1F50D;</span>
       <span>
         <span class="tt">Detetives do Tempo</span>
@@ -413,8 +413,8 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
       </span>
       <span class="go">Jogar</span>
     </a>
-    <div class="picks" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:16px">
-      <a class="pick mat" href="ferramentas/HIS3_estudo.html?v=f5cd2e52206">
+    <div class="picks" style="grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-top:16px">
+      <a class="pick mat" href="ferramentas/HIS3_estudo.html?v=c0db6d51019">
         <span class="em">&#x1F4D6;</span>
         <span>
           <span class="tt">Caderno do Detetive</span>
@@ -422,7 +422,7 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
         </span>
         <span class="tag">Estudar</span>
       </a>
-      <a class="pick video" href="ferramentas/HIS3_video.html?v=f5cd2e52206">
+      <a class="pick video" href="ferramentas/HIS3_video.html?v=c0db6d51019">
         <span class="em">&#x1F3AC;</span>
         <span>
           <span class="tt">O vídeo</span>
@@ -430,7 +430,7 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
         </span>
         <span class="tag">Assistir</span>
       </a>
-      <a class="pick mat" href="ferramentas/HIS3_pocket.html?v=f5cd2e52206">
+      <a class="pick mat" href="ferramentas/HIS3_pocket.html?v=c0db6d51019">
         <span class="em">&#x1F5A8;&#xFE0F;</span>
         <span>
           <span class="tt">Pocket — uma folha</span>
@@ -438,6 +438,20 @@ a.pdfbtn.kit{text-decoration:none;color:inherit}
         </span>
         <span class="tag">Imprimir</span>
       </a>
+      <a class="pick video" href="ferramentas/HIS3_discursivas.html?v=c0db6d51019">
+        <span class="em">&#x270D;&#xFE0F;</span>
+        <span>
+          <span class="tt">Provas de treino</span>
+          <span class="dd">Duas provas para imprimir e escrever</span>
+        </span>
+        <span class="tag">Abrir</span>
+      </a>
+    </div>
+    <button class="maispdf" id="pdfBtnHis" aria-expanded="false" aria-controls="pdfListaHis" onclick="var l=document.getElementById('pdfListaHis');l.hidden=!l.hidden;this.setAttribute('aria-expanded',!l.hidden)">PDFs para imprimir</button>
+    <div class="pdflista" id="pdfListaHis" hidden>
+      <a href="ferramentas/media/his3/Prova_treino_1.pdf" target="_blank" rel="noopener"><b>Prova de treino 1</b><span>4 páginas + respostas</span></a>
+      <a href="ferramentas/media/his3/Prova_treino_2.pdf" target="_blank" rel="noopener"><b>Prova de treino 2</b><span>4 páginas + respostas</span></a>
+      <a href="ferramentas/HIS3_guia_responsavel.html?v=c0db6d51019"><b>Guia do responsável</b><span>como corrigir as respostas</span></a>
     </div>
   </section>
 </div>
@@ -476,22 +490,22 @@ function toggleTema(){
 pintaTema();
 
 /* bandeira do Brasil: liga/desliga o português em todo o site (mesma chave das ferramentas) */
-var vista='mat';
+var vista='his';
 function pintaTr(){ var on=false; try{ on=localStorage.getItem('cie3_tr')==='1'; }catch(e){} document.body.classList.toggle('show-tr',on&&(vista==='cie'||vista==='mat')); var b=document.getElementById('trBtn'); if(b) b.setAttribute('aria-pressed',String(on)); }
 function alternaTr(){ var on=!document.body.classList.contains('show-tr'); try{ localStorage.setItem('cie3_tr',on?'1':'0'); }catch(e){} pintaTr(); }
 pintaTr();
-/* Geografia e a principal (prova em portugues, SEM bandeira): abre sempre nela.
+/* 22/11: História é a principal (prova em português, sem bandeira): abre sempre nela.
    "Provas anteriores" leva a Ciencias (ingles, com bandeira) e a Historia nesta visita. */
 var TITULOS={mat:'Math — 3rd term',geo:'Geografia — 3º trimestre',cie:'Science — 3rd term',his:'História — 3º trimestre'};
 function abreMenu(f){ var m=document.getElementById('menuMat'), ab=(f===undefined)?m.hidden:f; m.hidden=!ab; document.getElementById('matBtn').setAttribute('aria-expanded',String(ab)); }
 function mostraVista(v){ vista=v; document.getElementById('viewMat').hidden=v!=='mat'; document.getElementById('viewHis').hidden=v!=='his';
   document.getElementById('trBtn').hidden=v!=='mat';
-  document.getElementById('matTxt').textContent=v==='mat'?'Provas anteriores':'Trocar de matéria';
+  document.getElementById('matTxt').textContent=v==='his'?'Provas anteriores':'Trocar de matéria';
   [].forEach.call(document.querySelectorAll('#menuMat button'),function(b){ b.setAttribute('aria-current',String(b.getAttribute('data-v')===v)); });
   document.title=TITULOS[v]; pintaTr(); abreMenu(false); window.scrollTo(0,0); }
 document.addEventListener('click',function(e){ var m=document.getElementById('menuMat'); if(!m.hidden&&!e.target.closest('#menuMat')&&!e.target.closest('#matBtn')) abreMenu(false); });
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') abreMenu(false); });
-mostraVista('mat');
+mostraVista('his');
 function hardRefresh(){ window.location.href=window.location.pathname+'?v='+Date.now(); }
 
 </script>

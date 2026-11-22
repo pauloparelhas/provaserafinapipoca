@@ -21,7 +21,7 @@
 window.HIS3_LICOES = (function(){
 'use strict';
 /* REVISÃO do avaliador de questões (_processo/CRITERIO_QUESTOES.md), aplicada nas telas de escolha */
-/*REVISAO-INICIO*/var REVISAO_L={"L_missao_3_0":{"m":"uma carta antiga da bisavó","o":["como as pessoas se comunicavam","como as crianças brincavam","como as pessoas se vestiam"],"q":"O que esta pista pode nos ensinar sobre o passado?"},"L_missao_3_1":{"m":"uma boneca antiga","o":["Material","Visual","Escrita"],"q":"Que tipo de fonte é?","d":"A boneca é um objeto, um brinquedo antigo: fonte material. Ela conta como as crianças brincavam."},"L_missao_3_2":{"m":"o chapéu e o casaco antigos","o":["Material","Visual","Oral"],"q":"Que tipo de fonte é?","d":"Chapéu e casaco são roupas, objetos que a gente pode tocar: fonte material. Mostram como as pessoas se vestiam."},"L_missao_3_3":null,"L_missao_3_4":null,"L_quatro_2_4":{"m":"[foto]  o texto dos livros antigos","o":["Escrita","Oral","Visual","Material"]},"L_pegadinhas_1_3":{"m":"a carta que a vovó mandou","o":["Escrita","Oral","Visual","Material"]},"L_pegadinhas_4_6":{"m":"o recado no verso do cartão-postal","o":["Sim","Não"]},"L_mudou_2_0":{"m":"Na história da Dona Lúcia: o quadro onde ela escreve a lição","o":["Mudança","Permanência"]},"L_mudou_2_1":{"m":"Na história da Dona Lúcia: conversar com os alunos e ouvir as ideias deles","o":["Permanência","Mudança"]},"L_mudou_2_2":{"m":"Na história do Seu Francisco: o que ele usa para levar as entregas","o":["Mudança","Permanência"]},"L_mudou_2_3":{"m":"Na história do Doutor João: o cuidado e a atenção com cada paciente","o":["Permanência","Mudança"]},"L_mudou_2_4":{"m":"Na história do Seu Pedro: o que ele usa para preparar a terra","o":["Mudança","Permanência"]},"L_mudou_2_5":{"m":"Na história do Seu Pedro: amar a terra e cuidar da natureza","o":["Permanência","Mudança"]},"L_olhar_3_0":{"m":"o cartão-postal de Salvador","o":["Contar uma viagem aos amigos","Vender um produto","Registrar as regras da escola"]},"L_olhar_3_1":{"m":"um anúncio de jornal antigo","o":["Vender um produto","Contar uma viagem aos amigos","Registrar as regras da escola"]},"L_olhar_3_2":{"m":"uma propaganda antiga de um alimento","o":["Vender um produto","Contar uma viagem aos amigos","Registrar as regras da escola"]},"L_profissoes_2_0":{"m":"carteiro, do Seu Francisco","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_1":{"m":"professora, da Dona Lúcia","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_2":{"m":"fazendeiro, do Seu Pedro","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_3":{"m":"médico, do Doutor João","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_4":{"m":"acendedor de lampião","o":["Deixou de existir","Continua, mas o jeito mudou","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_luciajoao_2_0":{"m":"Doutor João: o resultado do exame leva dias","o":["Antes","Hoje"]},"L_luciajoao_2_3":{"m":"Dona Lúcia: pesquisar na biblioteca","o":["Antes","Hoje"],"q":"Na história, isto era ANTES ou é HOJE?","d":"Antes, os alunos da Dona Lúcia pesquisavam na biblioteca; hoje pesquisam na internet."},"L_ferramentas_3_2":null};/*REVISAO-FIM*/
+/*REVISAO-INICIO*/var REVISAO_L={"L_missao_3_0":{"m":"uma carta antiga da bisavó","o":["como as pessoas se comunicavam","como as crianças brincavam","como as pessoas se vestiam"],"q":"O que esta pista pode nos ensinar sobre o passado?"},"L_missao_3_1":{"m":"uma boneca antiga","o":["Material","Visual","Escrita"],"q":"Que tipo de fonte é?","d":"A boneca é um objeto, um brinquedo antigo: fonte material. Ela conta como as crianças brincavam."},"L_missao_3_2":{"m":"o chapéu e o casaco antigos","o":["Material","Visual","Oral"],"q":"Que tipo de fonte é?","d":"Chapéu e casaco são roupas, objetos que a gente pode tocar: fonte material. Mostram como as pessoas se vestiam."},"L_missao_3_3":null,"L_missao_3_4":null,"L_quatro_2_4":{"m":"[foto]  o texto dos livros antigos","o":["Escrita","Oral","Visual","Material"]},"L_pegadinhas_1_3":{"m":"a carta que a vovó mandou","o":["Escrita","Oral","Visual","Material"]},"L_pegadinhas_4_6":{"m":"o recado no verso do cartão-postal","o":["Sim","Não"]},"L_mudou_2_0":{"m":"Na história da Dona Lúcia: o quadro onde ela escreve a lição","o":["Mudança","Permanência"]},"L_mudou_2_1":{"m":"Na história da Dona Lúcia: conversar com os alunos e ouvir as ideias deles","o":["Permanência","Mudança"]},"L_mudou_2_2":{"m":"Na história do Seu Francisco: o que ele usa para levar as entregas","o":["Mudança","Permanência"]},"L_mudou_2_3":{"m":"Na história do Doutor João: o cuidado e a atenção com cada paciente","o":["Permanência","Mudança"]},"L_mudou_2_4":{"m":"Na história do Seu Pedro: o que ele usa para preparar a terra","o":["Mudança","Permanência"]},"L_mudou_2_5":{"m":"Na história do Seu Pedro: amar a terra e cuidar da natureza","o":["Permanência","Mudança"]},"L_olhar_3_0":{"m":"o cartão-postal de Salvador","o":["Contar uma viagem aos amigos","Vender um produto","Registrar as regras da escola"]},"L_olhar_3_1":{"m":"um anúncio de jornal antigo","o":["Vender um produto","Contar uma viagem aos amigos","Registrar as regras da escola"]},"L_olhar_3_2":{"m":"uma propaganda antiga de um alimento","o":["Vender um produto","Contar uma viagem aos amigos","Registrar as regras da escola"]},"L_profissoes_2_0":{"m":"carteiro, do Seu Francisco","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_1":{"m":"professora, da Dona Lúcia","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_2":{"m":"fazendeiro, do Seu Pedro","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_3":{"m":"médico, do Doutor João","o":["Continua, mas o jeito mudou","Deixou de existir","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_profissoes_2_4":{"m":"acendedor de lampião","o":["Deixou de existir","Continua, mas o jeito mudou","Continua do mesmo jeito"],"q":"Na história, o que aconteceu com esta profissão?"},"L_luciajoao_2_0":{"m":"Doutor João: o resultado do exame leva dias","o":["Antes","Hoje"]},"L_luciajoao_2_3":{"m":"Dona Lúcia: pesquisar na biblioteca","o":["Antes","Hoje"],"q":"Na história, isto era ANTES ou é HOJE?","d":"Antes, os alunos da Dona Lúcia pesquisavam na biblioteca; hoje pesquisam na internet."},"L_ferramentas_3_2":null,"L_pegadinhas_4_5":null};/*REVISAO-FIM*/
 /* (aplicada em REVISA_L) */
 function REVISA_L(l){ l.telas.forEach(function(t,ti){ if(t.tipo!=="escolha") return; t.itens=t.itens.map(function(it,k){ var id="L_"+l.k+"_"+ti+"_"+k, r=REVISAO_L[id]; if(r===null) return null; it=Object.assign({},it,{_id:id}); if(r){ it.m=r.m||it.m; it.c=r.o[0]; it.op=r.o.slice(); if(r.q) t.pergunta=r.q; } return it; }).filter(Boolean); }); return true; }
 function R(t){ return '<div class="regra">'+t+'</div>'; }
@@ -45,6 +45,9 @@ var COR={oral:'#a855f7',escrita:'#3b82f6',visual:'#f97316',material:'#22c55e'};
 function carta(k,nome,frase,ex){
   return '<div class="cartaf" style="--cf:'+COR[k]+'"><span class="cfic cf-'+k+'"></span><b>'+nome+'</b><i>'+frase+'</i><span>'+ex+'</span></div>';
 }
+/* fotos da aula: par antes × hoje e profissão antiga */
+function parFotos(k,area){ return '<span class="parf"><span><img src="media/his3/'+k+'-antes.jpg" alt="'+area+' antes"><small>antes</small></span><span><img src="media/his3/'+k+'-hoje.jpg" alt="'+area+' hoje"><small>hoje</small></span></span>'; }
+function profAntiga(k,nome,o){ return '<div class="pant">'+(k?'<img src="media/his3/prof-'+k+'.jpg" alt="'+nome+'">':'<svg viewBox="0 0 80 100" aria-hidden="true"><path d="M40 98V52M26 98h28" stroke="#9ca3af" stroke-width="7" stroke-linecap="round"/><path d="M24 16h32l-6 36H30z" fill="#fde047" stroke="#9ca3af" stroke-width="5" stroke-linejoin="round"/><path d="M20 16 40 3l20 13z" fill="#9ca3af"/><path d="M40 46c-7-5-5-12 0-19 5 7 7 14 0 19z" fill="#f97316"/></svg>')+'<b>'+nome+'</b><span>'+o+'</span></div>'; }
 function foto(n,leg){ return '<img class="fesc" src="media/his3/fonte-'+n+'.jpg" alt="'+leg+'"> '+leg; }
 
 return [
@@ -84,7 +87,7 @@ return [
   fala:'Oral: relatos e histórias contadas por pessoas. Escrita: diários, leis, jornais e cartas. Visual: pinturas, fotografias e mapas. Material: brinquedos, roupas, construções e utensílios.',
   html:'<div class="cartas4">'+
    carta('oral','ORAL','alguém CONTA','relatos e histórias contadas por pessoas: o vovô contando, entrevista, cantigas')+
-   carta('escrita','ESCRITA','alguém ESCREVEU','diários, leis, jornais e cartas; bilhete, receita, certidão, livro antigo')+
+   carta('escrita','ESCRITA','alguém ESCREVEU','diários, leis, jornais e cartas; bilhete, receita, certidão, texto de livro antigo')+
    carta('visual','VISUAL','a gente VÊ uma imagem','pinturas, fotografias e mapas; escultura')+
    carta('material','MATERIAL','a gente TOCA um objeto','brinquedos, roupas, construções e utensílios')+'</div>'},
  {tipo:'revela', tit:'Fonte falada, história guardada', regra:'Toque em cada cartão.',
@@ -115,11 +118,12 @@ return [
 {k:'pegadinhas', tema:'fontes', nome:'Pegadinhas do detetive, ficha e legenda', cor:'#f97316', quem:'Tic',
  treino:[[['fontes'],3,'rapida'],[['fontes'],2,'conceito']], telas:[
  {tipo:'texto', tit:'Cuidado com as pegadinhas!',
-  fala:'A foto de um objeto é fonte visual. O objeto é fonte material. Vídeo de alguém contando é fonte oral. Se a vovó escreveu, é escrita. Se a vovó falou, é oral. Mapa e pintura são visuais.',
+  fala:'A foto de um objeto é fonte visual. O objeto é fonte material. Vídeo de alguém contando é fonte oral. Se a vovó escreveu, é escrita. Se a vovó falou, é oral. Mapa e pintura são visuais. O que está escrito num livro é fonte escrita. O livro fechado, o objeto, é fonte material.',
   html:caixa('Foto × objeto','<p>A <b>FOTO</b> da boneca = <b>visual</b>. A <b>boneca</b> de verdade = <b>material</b>.</p>','#f97316')+esp()+
    caixa('Vídeo de relato','<p>Um vídeo de alguém <b>contando</b> uma história continua sendo fonte <b>oral</b>.</p>','#a855f7')+esp()+
    caixa('Escreveu × falou','<p>A vovó <b>escreveu</b> uma carta = <b>escrita</b>. A vovó <b>falou</b> = <b>oral</b>.</p>','#3b82f6')+esp()+
-   caixa('Mapa e pintura','<p>São imagens: <b>visual</b> (mesmo com letras no mapa).</p>','#f97316')},
+   caixa('Mapa e pintura','<p>São imagens: <b>visual</b>.</p>','#f97316')+esp()+
+   caixa('Livro antigo','<p>O que está <b>escrito</b> nele = <b>escrita</b>. O <b>livro fechado</b>, o objeto = <b>material</b>.</p>','#22c55e')},
  {tipo:'escolha', tit:'Pegadinha ou não?', fala:'Que tipo de fonte é?', pergunta:'Que tipo de fonte é?',
   rotulo:'Pista', proxRot:'Próxima', medio:true, op:['Oral','Escrita','Visual','Material'], itens:[
    {m:'a FOTO de uma boneca antiga', c:'Visual', d:'É a foto, não a boneca: visual.'},
@@ -244,12 +248,12 @@ return [
    R('Algumas <b>continuam existindo</b>, mas o <b>jeito de trabalhar</b> mudou, porque surgiram <b>novas máquinas, tecnologias e formas de se comunicar</b>.')+
    R('As pessoas passaram a trabalhar <b>mais rápido</b> ou com <b>mais conforto</b>.')+
    R('O trabalho está em todo lugar: na escola, em casa, nas ruas, nas fazendas, nos hospitais.')},
- {tipo:'texto', tit:'Uma profissão que desapareceu',
-  fala:'O acendedor de lampião caminhava pelas ruas acendendo os postes um a um. Com a chegada da energia elétrica, esse trabalho deixou de ser necessário. Novas tecnologias passaram a fazer coisas que antes eram feitas por pessoas.',
-  html:caixa('O acendedor de lampião','<p>Caminhava pelas ruas acendendo os <b>postes um a um</b>. Com a <b>energia elétrica</b>, esse trabalho <b>deixou de existir</b>.</p>','#eab308')+esp()+
+ {tipo:'texto', tit:'Profissões que desapareceram ou ficaram raras',
+  fala:'O acendedor de lampião caminhava pelas ruas acendendo os postes um a um. Com a chegada da energia elétrica, esse trabalho deixou de ser necessário. O leiteiro entregava garrafas de leite na porta das casas. A datilógrafa trabalhava com a máquina de escrever. Vendedores de rua levavam cestos de frutas. Novas tecnologias passaram a fazer coisas que antes eram feitas por pessoas.',
+  html:'<div class="pants">'+profAntiga('','Acendedor de lampião','acendia os postes das ruas, um a um')+profAntiga('leiteiro','Leiteiro','entregava garrafas de leite na porta das casas')+profAntiga('datilografa','Datilógrafa','trabalhava com a máquina de escrever')+profAntiga('vendedor-frutas','Vendedor com cestos','levava cestos de frutas pelas ruas')+'</div>'+
+   R('Com a <b>energia elétrica</b>, o acendedor de lampião <b>deixou de existir</b>.')+
    R('Novas tecnologias passaram a fazer coisas que antes eram feitas por pessoas.')+
-   R('<b>Desapareceu</b> × <b>mudou</b>: o acendedor de lampião desapareceu; o carteiro mudou, mas continua existindo.')+
-   caixa('Nas fotos antigas da aula','<p>• o <b>leiteiro</b> entregava garrafas de leite na porta das casas<br>• a <b>datilógrafa</b> escrevia numa máquina de escrever<br>• vendedores de rua levavam cestos de frutas e vassouras</p>')},
+   R('<b>Desapareceu</b> × <b>mudou</b>: o acendedor de lampião desapareceu; o carteiro mudou, mas continua existindo.')},
  {tipo:'escolha', tit:'Pode ser mais de uma: continua existindo?', fala:'Esta profissão das histórias continua existindo hoje?', pergunta:'Esta profissão continua existindo hoje? (pode ser mais de uma)',
   rotulo:'Profissão', proxRot:'Próxima', op:['Sim','Não'], itens:[
    {m:'carteiro, do Seu Francisco', c:'Sim', d:'Continua, de um jeito diferente.'},{m:'professora, da Dona Lúcia', c:'Sim', d:'Continua, com computador e lousa digital.'},
@@ -403,9 +407,25 @@ return [
 /* ===================== 14. RESPOSTAS DE DETETIVE (perguntas abertas) ===================== */
 {k:'respostas', tema:'fontes', nome:'Respostas de detetive (com as suas palavras)', cor:'#7c3aed', quem:'Dra. Clio',
  treino:[[['fontes','escola','profissoes','olhar'],4,'conceito']], telas:[
- {tipo:'texto', tit:'Na prova pode ter pergunta aberta',
-  fala:'Na prova pode ter pergunta para responder com as suas palavras. Leia a pergunta, pense e depois toque para ver um jeito de responder.',
-  html:fala('Dra. Clio','Pergunta aberta = responder com as suas palavras. Pense primeiro, depois toque no cartão e compare com o modelo!')},
+ {tipo:'texto', tit:'A resposta completa',
+  fala:'Comece a resposta com as palavras da pergunta. Diga de quem você está falando: as pessoas, o médico, o carteiro. Para comparar, use antigamente e hoje. Comece com letra maiúscula e termine com ponto final.',
+  html:passos([{t:'Use as palavras',s:'da pergunta'},{t:'Diga QUEM',s:'as pessoas, o médico…'},{t:'Compare',s:'Antigamente… Hoje…'},{t:'Confira',s:'maiúscula e ponto final'}])+
+   caixa('Por que as fontes históricas são importantes?','<p>Falta dizer quem: <i>“Para saber como eles viviam.”</i></p><p>Completa: <b>“As fontes históricas são importantes porque mostram como as pessoas viviam antigamente.”</b></p>')},
+ {tipo:'revela', tit:'Antes e hoje numa frase', regra:'Pense numa frase. Depois toque para ver o modelo.', fala:'Conte a diferença entre as imagens numa frase.',
+  cartoes:[
+   {f:parFotos('campo','campo'), b:'Antigamente, os bois ajudavam no trabalho do campo. Hoje, há máquinas.'},
+   {f:parFotos('cirurgia','cirurgia'), b:'Antigamente, a cirurgia não tinha robô. Hoje, há até robô que ajuda.'},
+   {f:parFotos('entrega','entrega'), b:'Antigamente, as entregas eram levadas no carrinho de mão. Hoje, existe até drone.'},
+   {f:parFotos('engenharia','engenharia'), b:'Antigamente, a engenharia usava desenhos no papel. Hoje, usa também computador e robô.'}
+  ]},
+ {tipo:'revela', tit:'Como era no passado?', regra:'Pense na resposta. Depois toque para ver o modelo.', fala:'Como cada profissão era realizada no passado?',
+  cartoes:[
+   {f:'Carteiro', b:'No passado, o carteiro entregava as cartas a pé, com uma bolsa de couro.'},
+   {f:'Professora', b:'No passado, a professora usava quadro de giz e livros grandes e pesados.'},
+   {f:'Fazendeiro', b:'No passado, o fazendeiro plantava com as mãos e usava um arado puxado por bois.'},
+   {f:'Médico', b:'No passado, o médico usava papel e caneta, e os exames demoravam dias.'},
+   {f:'Fotógrafo', b:'No passado, o fotógrafo usava uma câmera grande, apoiada num tripé.'}
+  ]},
  {tipo:'revela', tit:'Fontes e escola', regra:'Pense na resposta. Depois toque para ver o modelo.', fala:'Respostas de detetive sobre fontes e escola.',
   cartoes:[
    {f:'Como registramos o passado?', b:'Com fontes históricas: relatos contados (oral), textos (escrita), imagens (visual) e objetos (material).'},

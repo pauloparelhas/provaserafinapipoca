@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c0db6d51019';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>História 3º tri · Guia do responsável · Provas de treino</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  :root { --c: #9a5a00; --ink: #1d1d1f; --soft: #555b6e; --ok: #2e7d32; --warn: #b26a00; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #ece7dd; color: var(--ink); font: 15px/1.5 "Segoe UI", Arial, sans-serif; }
+  .tools { position: sticky; top: 0; z-index: 5; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 10px 16px; background: #3a2c14; }
+  .tools a, .tools button { font: 600 15px Arial, sans-serif; color: #fff; background: #6b5328; border: 0; border-radius: 10px; min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; text-decoration: none; cursor: pointer; }
+  .tools button { background: #b45309; }
+  main { max-width: 186mm; margin: 16px auto 40px; background: #fff; padding: 12mm; box-shadow: 0 6px 24px rgba(0,0,0,.15); }
+  p, li, .campo { text-align: justify; text-align-last: left; hyphens: auto; -webkit-hyphens: auto; }
+  h1 { margin: 0 0 2px; font-size: 23px; color: var(--c); } .sub { color: var(--soft); margin: 0 0 12px; }
+  h2 { font-size: 18px; color: #fff; background: var(--c); border-radius: 10px; padding: 5px 12px; margin: 22px 0 8px; break-after: avoid; }
+  h3 { font-size: 16px; margin: 4px 0; color: #3a2c14; }
+  .quadro { border: 1.5px solid color-mix(in srgb, var(--c) 35%, transparent); border-radius: 12px; padding: 8px 14px; margin: 10px 0; break-inside: avoid; }
+  .quadro ol, .quadro ul { margin: 4px 0; padding-left: 22px; } .quadro li + li { margin-top: 6px; }
+  .q { break-inside: avoid; padding: 9px 0 10px; border-top: 1px solid color-mix(in srgb, var(--c) 18%, transparent); } h2 + .q { border-top: 0; }
+  .top { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; } .n { flex: 0 0 auto; min-width: 28px; height: 28px; border-radius: 50%; background: #3a2c14; color: #fff; font: 700 14px Arial, sans-serif; display: inline-flex; align-items: center; justify-content: center; }
+  .top .pede { flex: 1; font-weight: 600; } .campo { margin: 7px 0 0 38px; } .campo.m b { color: var(--ok); } .campo.o b { color: var(--warn); }
+  @media (max-width: 720px) { main { margin: 0; padding: 16px; box-shadow: none; } .campo { margin-left: 0; } }
+  @media print { body { background: #fff; } .tools { display: none; } main { margin: 0; padding: 0; max-width: none; box-shadow: none; } }
+</style>
+</head>
+<body>
+<div class="tools"><a href="../index.html?v=c0db6d51019" class="sera-home">Início</a><a href="HIS3_discursivas.html?v=c0db6d51019">Provas de treino</a><button onclick="window.print()">Imprimir</button></div>
+<main id="guia"></main>
+<script src="HIS3_discursivas_data.js?v=c0db6d51019"></script>
+<script>
+(function(){
+  var L='abcdef', h='<h1>História · Guia do responsável</h1><div class="sub" data-tipo="rotulo">Duas provas de treino · Year 2 · 3º trimestre</div>';
+  h+='<div class="quadro"><h3 data-tipo="rotulo">Como são as provas</h3><p>Cada prova tem 10 questões e vale 10 pontos: 5 sobre fontes históricas e 5 sobre profissões e mudanças no tempo. Mais da metade dos pontos depende de escrever: classificar imagens, desenhar e nomear, comparar antes e hoje, ler um texto e explicar.</p></div>';
+  h+='<div class="quadro"><h3 data-tipo="rotulo">Como aplicar</h3><ol><li>Uma prova por dia, de uma vez só, com lápis e borracha. Reserve uns 50 minutos, sem pressa.</li><li>A criança lê sozinha. Se travar, leia o enunciado em voz alta, sem explicar a resposta.</li><li>As respostas saem na última folha impressa: guarde antes de começar.</li><li>Corrija junto no mesmo dia. O que errou na Prova 1 volta na Prova 2 com outras imagens.</li></ol></div>';
+  h+='<div class="quadro"><h3 data-tipo="rotulo">O que mais tira pontos na resposta escrita</h3><ul><li><b>Não dizer de quem se fala.</b> “Para saber como eles viviam”: eles quem? Melhor: “como as pessoas viviam”.</li><li><b>Contar só um dos tempos.</b> Quando a pergunta pede a diferença, a frase precisa de “Antigamente…” e “Hoje…”.</li><li><b>Responder metade.</b> “Escreva e explique”, “desenhe e escreva”, “as alternativas”: são dois pedidos.</li><li><b>Ortografia das palavras-chave:</b> visual, escrita, tecnologia, avançou, antigamente, profissão.</li></ul></div>';
+  h+='<div class="quadro"><h3 data-tipo="rotulo">Dois casos que confundem</h3><ul><li><b>Livro.</b> Livros fechados, como objeto, são fonte material; o que está escrito neles é fonte escrita.</li><li><b>Mapa.</b> É imagem: fonte visual. As palavras escritas nele podem ser consideradas escrita. Se a pergunta aceitar só uma resposta, comece por visual.</li></ul></div>';
+  HIS3D.provas.forEach(function(p){
+    h+='<h2 data-tipo="rotulo">'+p.nome+'</h2>';
+    p.questoes.forEach(function(q){
+      h+='<div class="q"><div class="top"><span class="n">'+q.n+'</span><span class="pede" data-tipo="rotulo">'+q.pede+' <small>('+q.pts+')</small></span></div>';
+      if(q.ops&&q.tipo==='ce') h+='<div class="campo">'+q.ops.map(function(o,i){ return '<b>'+L[i]+')</b> '+o; }).join(' ')+'</div>';
+      if(q.subs) h+='<div class="campo">'+q.subs.map(function(o,i){ return '<b>'+L[i]+')</b> '+o[0]; }).join(' ')+'</div>';
+      h+='<div class="campo m"><b>Resposta-modelo:</b> '+q.modelo+'</div><div class="campo"><b>Aceite também:</b> '+q.aceitar+'</div><div class="campo o"><b>O que observar:</b> '+q.observar+'</div><div class="campo"><b>Pergunta de conversa:</b> '+q.conversa+'</div></div>';
+    });
+  });
+  document.getElementById('guia').innerHTML=h;
+})();
+</script>
+</body>
+</html>

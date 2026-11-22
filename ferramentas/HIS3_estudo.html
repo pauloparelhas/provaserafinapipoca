@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='f5cd2e52206';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='c0db6d51019';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -10,35 +10,11 @@ if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.ge
 var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
 confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>História · Caderno do Detetive</title>
-<link rel="stylesheet" href="serafina-core.css?v=f5cd2e52206">
+<link rel="stylesheet" href="serafina-core.css?v=c0db6d51019">
 <style>
 /* ============================================================
    ING3_estudo — a TEORIA de Inglês (ELA, 3º tri). Casca herdada do
@@ -390,6 +366,17 @@ body.voz-ok .ouvir,body.voz-ok #sombtn{display:inline-flex!important}
 .rios span{display:block;font-size:calc(.8rem*var(--fs));color:var(--soft);margin-top:4px}
 .alvo .fesc{display:block;width:100%;max-width:300px;margin:0 auto 6px;border-radius:10px}
 .tqimg{display:block;width:100%;max-width:320px;margin:4px auto 10px;border-radius:10px}
+/* 22/11: fotos antes × hoje e profissões antigas */
+.parf{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.parf img{display:block;width:100%;aspect-ratio:3/2;object-fit:contain;background:rgba(127,127,127,.14);border-radius:9px}
+.parf small{display:block;text-align:center;font-weight:900;font-size:calc(.8rem*var(--fs));margin-top:3px}
+.revs:has(.parf){grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}
+.pants{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:2px 0 10px}
+.pant{border:2px solid var(--line);border-radius:14px;padding:8px;background:var(--surf,var(--card));text-align:center;display:flex;flex-direction:column;gap:3px;align-items:center}
+.pant img,.pant svg{width:100%;height:120px;object-fit:contain;border-radius:9px}
+.pant b{font-size:calc(.95rem*var(--fs));font-weight:900;line-height:1.15}
+.pant span{font-size:calc(.84rem*var(--fs));font-weight:700;line-height:1.3;color:var(--soft)}
+@media (max-width:640px){.pants{grid-template-columns:1fr 1fr}}
 @media (max-width:380px){.cartas4,.ah{grid-template-columns:1fr}.rios{grid-template-columns:1fr}}
 /* ---- herdado do ING3 ---- */
 .tr{display:none}
@@ -436,9 +423,9 @@ body.show-tr #trbtn{outline:2px solid var(--accent,#f472b6);outline-offset:2px}
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'his3_som',stars:80};</script>
-<script src="serafina-core.js?v=f5cd2e52206"></script>
-<script src="OP_voz.js?v=f5cd2e52206"></script>
-<script src="HIS3_banco.js?v=f5cd2e52206"></script>
+<script src="serafina-core.js?v=c0db6d51019"></script>
+<script src="OP_voz.js?v=c0db6d51019"></script>
+<script src="HIS3_banco.js?v=c0db6d51019"></script>
 <script>
 /* ícones por tema (sem as figuras do LP3); cena = só a legenda */
 window.ING3ARTE={icone:function(k){ var c={fontes:'#a855f7',escola:'#0ea5e9',olhar:'#f97316',mundo:'#eab308',profissoes:'#22c55e',tempo:'#ec4899'}[k]||'#a855f7';
@@ -456,7 +443,7 @@ window.ING3ARTE={icone:function(k){ var c={fontes:'#a855f7',escola:'#0ea5e9',olh
   return '<svg class="licic" viewBox="0 0 36 36" width="40" height="40" aria-hidden="true">'+d+'</svg>'; },
  figura:function(){ return ''; }, cena:function(){ return ''; }};
 </script>
-<script src="HIS3_estudo_licoes.js?v=f5cd2e52206"></script>
+<script src="HIS3_estudo_licoes.js?v=c0db6d51019"></script>
 <script>
 /* ============================================================
    MOTOR DO ESTUDO — navegação, telinhas e treininho.
@@ -786,7 +773,7 @@ function renderCapa(){
         icDe(l)+'<b>'+l.nome+(l.nome_pt?TRc(l.nome_pt):'')+'</b></button>';
     }).join('')+'</div>'+
     '<div class="placarcapa"><span>'+n+' de '+LICOES.length+' feitas</span><span class="trilho"><i style="width:'+Math.round(n/LICOES.length*100)+'%"></i></span></div>'+
-    '<a class="linkbtn" href="HIS3_simulado.html?v=f5cd2e52206">Simulado &#8250;</a></div>';
+    '<a class="linkbtn" href="HIS3_simulado.html?v=c0db6d51019">Simulado &#8250;</a></div>';
   tela.querySelectorAll('.lic').forEach(function(b){ b.onclick=function(){ abre(+b.dataset.i); }; });
   bar.style.width=Math.round(n/LICOES.length*100)+'%';
   navPrev.disabled=true; navNext.disabled=false;
@@ -846,6 +833,6 @@ window.HIS3_ESTUDO={abre:abre, capa:capa, estado:function(){ return {lic:est.lic
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#a855f7'};</script>
-<script src="sera_theme.js?v=f5cd2e52206"></script>
+<script src="sera_theme.js?v=c0db6d51019"></script>
 </body>
 </html>
