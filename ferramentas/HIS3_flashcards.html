@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='7321ca31605';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='ff2b7601625';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,8 +14,8 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Flashcards — História</title>
-<link rel="stylesheet" href="serafina-core.css?v=7321ca31605">
-<link rel="stylesheet" href="OP_estilo.css?v=7321ca31605">
+<link rel="stylesheet" href="serafina-core.css?v=ff2b7601625">
+<link rel="stylesheet" href="OP_estilo.css?v=ff2b7601625">
 <style>
 /* HIS3_flashcards (24/11/2026, pedidos do Paulo): FRENTE COMPLETA + 2 OPCOES (certa e um distrator plausivel);
    a crianca toca numa e a carta vira. VERSO: no alto o enunciado em letra menor; "Acertou!" ou "Errou" e a resposta
@@ -66,6 +66,30 @@ button{touch-action:manipulation}
 .back .a{border:3px solid var(--ok);border-radius:16px;padding:6px 18px;background:color-mix(in srgb,var(--ok) 14%,transparent)}
 .back .tua{font-weight:800;font-size:calc(.85rem*var(--fs));color:var(--soft)}
 .back .tua s{color:#f87171}
+/* ---- tema Detetives do Tempo (Paulo 24/11): carta de pista em papel antigo, tinta escura (leitura), opcoes lado a lado,
+   carimbo de Acertou/Errou e resposta com marca-texto ---- */
+.face{border:2px solid #b9925a;color:#2a1f14;
+  background:radial-gradient(circle at 12% 8%,rgba(255,255,255,.6),transparent 38%),radial-gradient(circle at 92% 96%,rgba(140,96,40,.2),transparent 42%),#f5e8cb;
+  box-shadow:inset 0 0 0 7px #f5e8cb,inset 0 0 0 9px rgba(150,108,55,.38),0 14px 34px rgba(0,0,0,.38)}
+.face .tarja{margin-bottom:auto;display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 8px;border-radius:20px;background:var(--dc);color:#1f1a12;
+  font-weight:900;font-size:calc(.74rem*var(--fs));letter-spacing:.02em;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.face .tarja svg{width:18px;height:18px;flex:0 0 18px}
+.face::after{content:"";margin-top:auto}
+.face .q{color:#2a1f14}
+.front{gap:20px}
+.ops{flex-direction:row;gap:10px;max-width:520px}
+.op{flex:1 1 0;min-width:0;background:#fffaf0;color:#2a1f14;border:3px solid var(--dc);border-bottom-width:6px;border-radius:16px;overflow-wrap:break-word;hyphens:auto}
+.op:active{transform:translateY(2px);border-bottom-width:4px}
+.back,.back.ok,.back.err{border-color:#b9925a;background:radial-gradient(circle at 12% 8%,rgba(255,255,255,.6),transparent 38%),radial-gradient(circle at 92% 96%,rgba(140,96,40,.2),transparent 42%),#f5e8cb}
+.back .qq{margin-bottom:0;color:#6b5a45}
+.back::after{display:block}
+.ver{display:inline-block;padding:2px 16px;border:4px solid currentColor;border-radius:12px;transform:rotate(-5deg);text-transform:uppercase;letter-spacing:.06em;margin:4px 0}
+.back.ok .ver{color:#15803d}
+.back.err .ver{color:#b91c1c}
+.back .rot{color:#6b5a45}
+.back .a{color:#2a1f14;border:none;border-radius:4px;padding:0 10px;background:linear-gradient(transparent 52%,#fde047 52%,#fde047 92%,transparent 92%)}
+.back .tua{color:#6b5a45}
+.back .tua s{color:#b91c1c}
 .volta{flex:0 0 auto;min-height:44px;padding:0 13px;border-radius:13px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.86rem*var(--fs));cursor:pointer}
 .nav{flex:0 0 auto;display:flex;gap:10px}
 .nav button{flex:1;min-height:52px;border-radius:15px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.98rem*var(--fs));cursor:pointer}
@@ -78,7 +102,7 @@ button{touch-action:manipulation}
 .fim button{min-height:50px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer}
 .fim button.forte{border-color:var(--accent);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 34%,transparent),rgba(251,191,36,.18))}
 @media (max-width:430px){.topbar{gap:3px;padding:6px}.topbar .title{display:none}}
-@media (max-height:500px){.face{flex-direction:row;gap:16px}.face img{max-height:80%;max-width:42%}.face .tx{display:flex;flex-direction:column;gap:8px;align-items:center}.front{flex-direction:column;gap:8px}.ops{flex-direction:row;max-width:none}.op{flex:1;min-height:48px}.back .qq{margin-bottom:0}.back::after{display:none}.back{flex-direction:column;gap:4px;padding:10px 14px}.back .rot{display:none}.ver{font-size:calc(1.2rem*var(--fs))}.back .a{font-size:calc(1.35rem*var(--fs));padding:3px 14px}.front .q{font-size:calc(1.05rem*var(--fs))}.front{padding:10px 14px}.nav button{min-height:46px}.palco{gap:6px;padding-top:6px}}
+@media (max-height:500px){.face{flex-direction:row;gap:16px}.face img{max-height:80%;max-width:42%}.face .tx{display:flex;flex-direction:column;gap:8px;align-items:center}.front{flex-direction:column;gap:8px}.ops{flex-direction:row;max-width:none}.op{flex:1;min-height:48px}.back .qq{margin-bottom:0}.back::after{display:none}.back{flex-direction:column;gap:4px;padding:10px 14px}.back .rot{display:none}.ver{font-size:calc(1.2rem*var(--fs))}.back .a{font-size:calc(1.35rem*var(--fs));padding:3px 14px}.front .q{font-size:calc(1.05rem*var(--fs))}.face .tarja{padding:2px 10px 2px 6px}.face::after{display:none}.face .tarja{margin-bottom:0}.front{padding:10px 14px}.nav button{min-height:46px}.palco{gap:6px;padding-top:6px}}
 </style>
 </head>
 <body>
@@ -99,7 +123,7 @@ button{touch-action:manipulation}
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'his3_som',stars:90,unlock:true,starfield:true};</script>
-<script src="serafina-core.js?v=7321ca31605"></script>
+<script src="serafina-core.js?v=ff2b7601625"></script>
 <script>
 /* ===== DADOS — trabalho/3tri_historia/_roteiro.md. Verso curto e inequivoco. f = foto da aula (media/his3/). ===== */
 var M='media/his3/';
@@ -166,9 +190,10 @@ function abre(lista,mistura){
 function carta(){
   var x=S.cartas[S.i], c=x.c, d=x.d, n=S.cartas.length;
   barra((S.i+1)/n);
+  var tarja='<div class="tarja"><svg viewBox="0 0 24 24" fill="none" stroke="#1f1a12" stroke-width="2.6" stroke-linecap="round"><circle cx="10" cy="10" r="6.5" fill="rgba(255,255,255,.55)"/><path d="M15 15l6 6"/></svg>Detetives do Tempo · pista '+(S.i+1)+'</div>';
   palco.innerHTML='<div class="topo" style="--dc:'+d.cor+'"><button class="volta" id="volta">&#8249; Baralhos</button><b>'+esc(d.titulo)+'</b><span>'+(S.i+1)+' de '+n+'</span></div>'
    +'<div class="flip" style="--dc:'+d.cor+'"><div class="fc" id="fc">'
-   +'<div class="face front">'+(c.f?'<img src="'+M+c.f+'" alt="">':'')+'<div class="q">'+esc(c.q)+'</div><div class="ops">'
+   +'<div class="face front">'+tarja+(c.f?'<img src="'+M+c.f+'" alt="">':'')+'<div class="q">'+esc(c.q)+'</div><div class="ops">'
    +x.ops.map(function(o,k){ return '<button class="op" data-k="'+k+'">'+esc(o)+'</button>'; }).join('')+'</div></div>'
    +'<div class="face back" id="bk"></div>'
    +'</div></div>'
@@ -177,7 +202,7 @@ function carta(){
   function mostra(esc_){
     var ok=esc_===c.a, bk=$('bk');
     bk.className='face back '+(ok?'ok':'err');
-    bk.innerHTML='<div class="qq">'+esc(c.q)+'</div><div class="ver">'+(ok?'Acertou!':'Errou')+'</div>'
+    bk.innerHTML=tarja+'<div class="qq">'+esc(c.q)+'</div><div class="ver">'+(ok?'Acertou!':'Errou')+'</div>'
       +'<div class="rot">'+(ok?'A resposta é':'A resposta certa é')+'</div><div class="a">'+esc(c.a)+'</div>'
       +(ok?'':'<div class="tua">Você tocou em <s>'+esc(esc_)+'</s></div>');
     fc.classList.add('on');
@@ -214,6 +239,6 @@ inicio();
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#f59e0b',accent2:'#fbbf24'};</script>
-<script src="sera_theme.js?v=7321ca31605"></script>
+<script src="sera_theme.js?v=ff2b7601625"></script>
 </body>
 </html>
