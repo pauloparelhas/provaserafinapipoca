@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='b64329b1137';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='8fdc1241210';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,11 +14,12 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Flashcards — História</title>
-<link rel="stylesheet" href="serafina-core.css?v=b64329b1137">
-<link rel="stylesheet" href="OP_estilo.css?v=b64329b1137">
+<link rel="stylesheet" href="serafina-core.css?v=8fdc1241210">
+<link rel="stylesheet" href="OP_estilo.css?v=8fdc1241210">
 <style>
-/* HIS3_flashcards (24/11/2026, pedido do Paulo): frente = pergunta curta (com foto da aula quando ajuda),
-   verso = resposta curta e inequivoca. Toque vira a carta; sem "acertei/errei" (deixa lento). Fonte: _roteiro.md. */
+/* HIS3_flashcards (24/11/2026, pedido do Paulo): FRENTE COMPLETA (traz a descricao inteira), VERSO CURTISSIMO
+   (1 ou 2 palavras), adivinhavel so pela frente; carta que nao passa nao entra. Sem som. Botao Baralhos e o voltar do
+   celular levam aos baralhos. Toque vira a carta; sem "acertei/errei" (deixa lento). Fonte: _roteiro.md. */
 html,body{height:100%;overflow:hidden}
 button{touch-action:manipulation}
 .app{height:100vh;height:100dvh;min-height:0}
@@ -52,7 +53,7 @@ button{touch-action:manipulation}
 .back .qq{font-weight:800;font-size:calc(.85rem*var(--fs));color:var(--soft);line-height:1.25}
 .vira{font-weight:900;font-size:calc(.78rem*var(--fs));color:var(--accent);border:2px dashed var(--accent);border-radius:18px;padding:5px 13px;animation:pulsa 1.6s ease-in-out infinite}
 @keyframes pulsa{0%,100%{opacity:.75}50%{opacity:1}}
-.fala{position:absolute;top:8px;right:8px;width:44px;height:44px;border-radius:12px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-size:1.1rem;cursor:pointer}
+.volta{flex:0 0 auto;min-height:44px;padding:0 13px;border-radius:13px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.86rem*var(--fs));cursor:pointer}
 .nav{flex:0 0 auto;display:flex;gap:10px}
 .nav button{flex:1;min-height:52px;border-radius:15px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.98rem*var(--fs));cursor:pointer}
 .nav button.forte{border-color:var(--accent);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 34%,transparent),rgba(251,191,36,.18))}
@@ -77,7 +78,6 @@ button{touch-action:manipulation}
     <button class="iconbtn" id="btnFontDown" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" id="btnFontUp" title="Letra maior" onclick="fs(1)">A+</button>
     <button class="iconbtn" id="themeBtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
-    <button class="iconbtn" id="soundBtn" title="Som" onclick="toggleSom()">&#128264;</button>
     <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" onclick="toggleLock()">&#128274;</button>
   </div>
   <div class="bar"><span id="bar"></span></div>
@@ -86,86 +86,69 @@ button{touch-action:manipulation}
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'his3_som',stars:90,unlock:true,starfield:true};</script>
-<script src="serafina-core.js?v=b64329b1137"></script>
+<script src="serafina-core.js?v=8fdc1241210"></script>
 <script>
 /* ===== DADOS — trabalho/3tri_historia/_roteiro.md. Verso curto e inequivoco. f = foto da aula (media/his3/). ===== */
 var M='media/his3/';
 var BARALHOS=[
  {id:'fonte',titulo:'O que é fonte histórica',cor:'#f472b6',cartas:[
-  {q:'O que é uma fonte histórica?',a:'Uma pista do passado.'},
-  {q:'Fonte oral é…',a:'Um relato contado por alguém.'},
-  {q:'Fonte escrita é…',a:'Um texto: carta, diário, jornal.'},
-  {q:'Fonte visual é…',a:'Uma imagem: foto, pintura, mapa.'},
-  {q:'Fonte material é…',a:'Um objeto: brinquedo, roupa, construção.'},
-  {q:'O que pode contar uma história do passado?',a:'Tudo ao nosso redor.'},
-  {q:'As fontes ajudam a guardar a…',a:'Memória.'}]},
+  {q:'Uma pista do passado, que ajuda a aprender sobre outras épocas, é uma fonte…',a:'Histórica'},
+  {q:'Relatos e histórias contadas por pessoas são fonte…',a:'Oral'},
+  {q:'Diários, leis, jornais e cartas são fonte…',a:'Escrita'},
+  {q:'Pinturas, fotografias e mapas são fonte…',a:'Visual'},
+  {q:'Brinquedos, roupas, construções e utensílios são fonte…',a:'Material'},
+  {q:'Tudo ao nosso redor pode contar uma…',a:'História'}]},
  {id:'tipo',titulo:'Que tipo de fonte é?',cor:'#60a5fa',cartas:[
-  {q:'Carta antiga',f:'fonte-carta.jpg',a:'Escrita'},
-  {q:'Chapéu e casaco antigos',f:'fonte-chapeu.jpg',a:'Material'},
-  {q:'Álbum de fotos',f:'fonte-album.jpg',a:'Visual'},
-  {q:'Mapa antigo',f:'fonte-mapa.jpg',a:'Visual'},
-  {q:'Entrevista gravada',f:'fonte-entrevista.jpg',a:'Oral'},
-  {q:'Sofá antigo',f:'fonte-sofa.jpg',a:'Material'},
-  {q:'Certidão de nascimento',f:'fonte-certidao.jpg',a:'Escrita'},
-  {q:'Quadros com fotos na parede',f:'fonte-quadros.jpg',a:'Visual'},
-  {q:'Bonecas antigas',f:'fonte-bonecas.jpg',a:'Material'},
-  {q:'O castelo (a construção)',f:'fonte-castelo.jpg',a:'Material'},
-  {q:'A vovó contando uma história',a:'Oral'},
-  {q:'A vovó escrevendo uma carta',a:'Escrita'},
-  {q:'Vídeo de alguém contando uma história',a:'Oral'},
-  {q:'A foto de um castelo',a:'Visual'},
-  {q:'Um livro antigo fechado (o objeto)',a:'Material'},
-  {q:'O que está escrito num livro antigo',a:'Escrita'}]},
+  {q:'Uma carta antiga é fonte…',f:'fonte-carta.jpg',a:'Escrita'},
+  {q:'Chapéu e casaco antigos são fonte…',f:'fonte-chapeu.jpg',a:'Material'},
+  {q:'Um álbum de fotos é fonte…',f:'fonte-album.jpg',a:'Visual'},
+  {q:'Um mapa antigo é fonte…',f:'fonte-mapa.jpg',a:'Visual'},
+  {q:'Uma entrevista gravada é fonte…',f:'fonte-entrevista.jpg',a:'Oral'},
+  {q:'Um sofá antigo é fonte…',f:'fonte-sofa.jpg',a:'Material'},
+  {q:'A certidão de nascimento é fonte…',f:'fonte-certidao.jpg',a:'Escrita'},
+  {q:'As fotos dos quadros na parede são fonte…',f:'fonte-quadros.jpg',a:'Visual'},
+  {q:'Bonecas antigas são fonte…',f:'fonte-bonecas.jpg',a:'Material'},
+  {q:'O castelo, a construção, é fonte…',f:'fonte-castelo.jpg',a:'Material'},
+  {q:'A vovó contando uma história é fonte…',a:'Oral'},
+  {q:'A vovó escrevendo uma carta é fonte…',a:'Escrita'},
+  {q:'Um vídeo de alguém contando uma história é fonte…',a:'Oral'},
+  {q:'A foto de um castelo é fonte…',a:'Visual'},
+  {q:'Um livro antigo fechado, como objeto, é fonte…',a:'Material'},
+  {q:'O que está escrito num livro antigo é fonte…',a:'Escrita'}]},
  {id:'escola',titulo:'A escola tem história',cor:'#facc15',cartas:[
-  {q:'Boletim e bilhete são fontes…',a:'Escritas.'},
-  {q:'O que os documentos da escola mostram?',a:'Como era o ensino e as regras.'},
-  {q:'Foto antiga da turma é fonte…',a:'Visual'},
-  {q:'Por que guardar documentos da escola?',a:'Para guardar memórias.'},
-  {q:'Na escola da Dona Lúcia, antes havia quadro de giz. Hoje há…',a:'Lousa digital.'},
-  {q:'Dona Lúcia pesquisava na biblioteca. Hoje os alunos pesquisam na…',a:'Internet.'},
-  {q:'Todos têm as mesmas memórias da escola?',a:'Não. Cada um lembra de um jeito.'}]},
+  {q:'Um boletim da escola é fonte…',a:'Escrita'},
+  {q:'Uma foto antiga da turma é fonte…',a:'Visual'},
+  {q:'Na escola da Dona Lúcia, antes havia quadro de giz. Hoje há lousa…',a:'Digital'},
+  {q:'Dona Lúcia pesquisava na biblioteca. Hoje os alunos também pesquisam na…',a:'Internet'},
+  {q:'Alunos, professores e funcionários têm memórias iguais ou diferentes da mesma escola?',a:'Diferentes'}]},
  {id:'quem',titulo:'Quem fez? Para quê?',cor:'#c084fc',cartas:[
-  {q:'Três perguntas para fazer a uma fonte',a:'Quem fez? Para quem? Para quê?'},
-  {q:'Para que servia este anúncio de jornal?',f:'anuncio.jpg',a:'Para vender leite.'},
-  {q:'Para que servia esta propaganda?',f:'propaganda.jpg',a:'Para vender o alimento.'},
-  {q:'Quem escreveu a mensagem do cartão-postal de Salvador?',a:'Quem viajou, para os amigos.'},
-  {q:'Suposição é sempre certa?',a:'Não. Pode estar errada.'},
-  {q:'O que o historiador faz?',a:'Compara várias fontes.'},
-  {q:'Por que a mesma foto gera histórias diferentes?',a:'Cada pessoa vê de um jeito.'}]},
+  {q:'Anúncios e propagandas servem para…',a:'Vender'},
+  {q:'Para chegar mais perto da verdade, o historiador compara várias…',a:'Fontes'},
+  {q:'Olhando a mesma foto, as pessoas veem do mesmo jeito ou de jeitos diferentes?',a:'Diferentes'}]},
  {id:'prof',titulo:'Profissões no tempo',cor:'#22d3ee',cartas:[
-  {q:'Por que as profissões mudaram?',a:'Novas máquinas e tecnologias.'},
-  {q:'Por que o acendedor de lampião sumiu?',a:'Chegou a energia elétrica.'},
-  {q:'Como Seu Francisco, o carteiro, entregava cartas antigamente?',a:'A pé, com bolsa de couro.'},
-  {q:'A profissão de carteiro acabou?',a:'Não. Mudou o jeito.'},
-  {q:'O que o carteiro usa hoje para registrar as entregas?',a:'Aparelho com tela.'},
-  {q:'Na escola de antigamente, os alunos copiavam do…',a:'Quadro de giz.'},
-  {q:'O que continua igual no trabalho de Dona Lúcia?',a:'Ajudar a aprender com alegria.'},
-  {q:'Na fazenda do Seu Pedro, quem puxava o arado?',f:'campo-antes.jpg',a:'Os bois.'},
-  {q:'Para que Seu Pedro usa o celular?',a:'Para saber se vai chover.'},
-  {q:'Antigamente, o termômetro do Doutor João era de…',a:'Mercúrio.'},
-  {q:'Como o Doutor João pode atender hoje, de longe?',a:'Por vídeo.'},
-  {q:'O que continua igual no trabalho do Doutor João?',a:'O cuidado com cada paciente.'},
-  {q:'Antes, entrega com carrinho de mão. Hoje…',f:'entrega-antes.jpg',a:'Com drone.'},
-  {q:'Designer gráfico e cientista de dados são profissões…',a:'Novas.'},
-  {q:'Com a energia elétrica, qual profissão deixou de ser necessária?',a:'Acendedor de lampião.'}]},
+  {q:'As profissões mudaram porque surgiram novas máquinas e…',a:'Tecnologias'},
+  {q:'O acendedor de lampião deixou de ser necessário com a chegada da…',a:'Energia elétrica'},
+  {q:'No começo da história, Seu Francisco entregava as cartas a pé ou de moto?',a:'A pé'},
+  {q:'A profissão de carteiro acabou ou continua existindo?',a:'Continua'},
+  {q:'Qual animal puxava o arado na fazenda antiga do Seu Pedro?',a:'Bois'},
+  {q:'Hoje, Seu Pedro usa o celular para saber se vai…',a:'Chover'},
+  {q:'Acendedor de lampião, leiteiro e datilógrafa são profissões antigas ou novas?',a:'Antigas'},
+  {q:'Designer gráfico e cientista de dados são profissões antigas ou novas?',a:'Novas'}]},
  {id:'mundo',titulo:'Pistas do passado no mundo',cor:'#fb923c',cartas:[
-  {q:'Nômade é quem…',a:'Viaja em busca de comida.'},
-  {q:'Com a agricultura, surgiram…',a:'Os acampamentos fixos e as cidades.'},
-  {q:'Rio do Egito',a:'Nilo'},
-  {q:'Rios da Mesopotâmia',a:'Tigre e Eufrates'},
-  {q:'Rio da China',a:'Rio Amarelo'},
-  {q:'Patrimônio é…',a:'O que é importante para a memória de um povo.'},
+  {q:'Quem viajava de um lugar para outro em busca de comida era…',a:'Nômade'},
+  {q:'Cultivar a terra se chama…',a:'Agricultura'},
+  {q:'O grande rio do Egito é o rio…',a:'Nilo'},
+  {q:'Os rios da Mesopotâmia são o Tigre e o…',a:'Eufrates'},
+  {q:'O grande rio da China é o rio…',a:'Amarelo'},
+  {q:'Tudo o que é importante para a memória de um povo é…',a:'Patrimônio'},
+  {q:'Museus, praças e estátuas são patrimônio…',a:'Material'},
   {q:'Capoeira, festa junina e receita de família são patrimônio…',a:'Imaterial'},
-  {q:'Uma estátua é patrimônio…',a:'Material'},
-  {q:'O que você faz hoje será…',a:'Fonte histórica de amanhã.'}]},
+  {q:'O que você faz hoje será fonte histórica de…',a:'Amanhã'}]},
  {id:'tempo',titulo:'Tempo e memória',cor:'#84cc16',cartas:[
-  {q:'O relógio marca o tempo…',a:'Igual para todos.'},
-  {q:'Quando o tempo parece passar rápido?',a:'Quando a gente brinca.'},
-  {q:'Quando o tempo parece passar devagar?',a:'Quando a gente espera.'},
-  {q:'Relógio de areia se chama…',a:'Ampulheta.'},
-  {q:'Na árvore generosa, o menino cresceu e mudou o que ele…',a:'Queria.'},
-  {q:'O que os museus guardam?',a:'Memórias.'},
-  {q:'Certidão de nascimento é um…',a:'Documento pessoal.'}]}
+  {q:'O relógio marca o tempo igual ou diferente para todos?',a:'Igual'},
+  {q:'Brincando com os amigos, o tempo parece passar rápido ou devagar?',a:'Rápido'},
+  {q:'Esperando na fila, o tempo parece passar rápido ou devagar?',a:'Devagar'},
+  {q:'O relógio de areia se chama…',a:'Ampulheta'}]}
 ];
 </script>
 <script>
@@ -179,7 +162,6 @@ var vistos={}; try{ vistos=JSON.parse(pega('his3_flash_vistos','{}'))||{}; }catc
 function emb(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
 function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
 function barra(p){ $('bar').style.width=Math.round(p*100)+'%'; }
-function fala(t){ if(window.say) say(t); }
 var S=null;
 
 window.inicio=function(){
@@ -197,21 +179,21 @@ function abre(lista,mistura){
   var cartas=[];
   lista.forEach(function(d){ d.cartas.forEach(function(c){ cartas.push({c:c,d:d}); }); });
   S={lista:lista, cartas:emb(cartas), i:0, mistura:!!mistura};
+  try{ history.pushState({his3:'carta'},''); }catch(e){}
   carta();
 }
 function carta(){
   var x=S.cartas[S.i], c=x.c, d=x.d, n=S.cartas.length;
   barra((S.i+1)/n);
-  palco.innerHTML='<div class="topo" style="--dc:'+d.cor+'"><b>'+esc(d.titulo)+'</b><span>'+(S.i+1)+' de '+n+'</span></div>'
+  palco.innerHTML='<div class="topo" style="--dc:'+d.cor+'"><button class="volta" id="volta">&#8249; Baralhos</button><b>'+esc(d.titulo)+'</b><span>'+(S.i+1)+' de '+n+'</span></div>'
    +'<div class="flip" style="--dc:'+d.cor+'"><div class="fc" id="fc">'
-   +'<div class="face front">'+(c.f?'<img src="'+M+c.f+'" alt="">':'')+'<div class="tx"><div class="q">'+esc(c.q)+'</div><div class="vira">Toque para virar</div></div><button class="fala" id="f1" title="Ouvir">&#128266;</button></div>'
-   +'<div class="face back"><div class="tx"><div class="qq">'+esc(c.q)+'</div><div class="a">'+esc(c.a)+'</div></div><button class="fala" id="f2" title="Ouvir">&#128266;</button></div>'
+   +'<div class="face front">'+(c.f?'<img src="'+M+c.f+'" alt="">':'')+'<div class="tx"><div class="q">'+esc(c.q)+'</div><div class="vira">Toque para virar</div></div></div>'
+   +'<div class="face back"><div class="tx"><div class="qq">'+esc(c.q)+'</div><div class="a">'+esc(c.a)+'</div></div></div>'
    +'</div></div>'
    +'<div class="nav"><button id="ant">&#8249; Anterior</button><button class="forte" id="prox">'+(S.i===n-1?'Terminar':'Próxima &#8250;')+'</button></div>';
   var fc=$('fc');
-  fc.onclick=function(e){ if(e.target.closest('.fala')) return; fc.classList.toggle('on'); if(fc.classList.contains('on')) fala(c.a); };
-  $('f1').onclick=function(){ fala(c.q); };
-  $('f2').onclick=function(){ fala(c.a); };
+  fc.onclick=function(){ fc.classList.toggle('on'); };
+  $('volta').onclick=function(){ history.back(); };
   $('ant').disabled=S.i===0;
   $('ant').onclick=function(){ if(S.i>0){ S.i--; carta(); } };
   $('prox').onclick=avanca;
@@ -228,7 +210,7 @@ function avanca(){
    +'<button class="forte" id="dn">Ver de novo, em outra ordem</button><button id="ob">Outro baralho</button></div>';
   var l=S.lista, m=S.mistura;
   $('dn').onclick=function(){ abre(l,m); };
-  $('ob').onclick=inicio;
+  $('ob').onclick=function(){ history.back(); };
 }
 addEventListener('keydown',function(e){
   if(!S||!$('fc')) return;
@@ -236,10 +218,11 @@ addEventListener('keydown',function(e){
   if(e.key==='ArrowRight') avanca();
   if(e.key==='ArrowLeft'&&S.i>0){ S.i--; carta(); }
 });
+addEventListener('popstate',function(){ if(S) inicio(); });
 inicio();
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#f59e0b',accent2:'#fbbf24'};</script>
-<script src="sera_theme.js?v=b64329b1137"></script>
+<script src="sera_theme.js?v=8fdc1241210"></script>
 </body>
 </html>

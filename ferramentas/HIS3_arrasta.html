@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='b64329b1137';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='8fdc1241210';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,8 +14,8 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Arrasta e solta — História</title>
-<link rel="stylesheet" href="serafina-core.css?v=b64329b1137">
-<link rel="stylesheet" href="OP_estilo.css?v=b64329b1137">
+<link rel="stylesheet" href="serafina-core.css?v=8fdc1241210">
+<link rel="stylesheet" href="OP_estilo.css?v=8fdc1241210">
 <style>
 /* HIS3_arrasta (24/11/2026, pedido do Paulo): fork do GEO3_arrasta v3 (aprovado), generalizado para GRUPOS.
    Fonte unica: trabalho/3tri_historia/_roteiro.md (blocos F, S, I, M, P, B e armadilhas). Fotos = recortes da aula (media/his3/).
@@ -94,6 +94,7 @@ button{touch-action:manipulation}
   font-family:inherit;font-weight:900;font-size:calc(.82rem*var(--fs));cursor:pointer;display:inline-flex;align-items:center;gap:5px}
 .tog.on{border-color:var(--accent2);background:rgba(251,191,36,.2)}
 .tog svg{width:18px;height:18px}
+.tog.volta{font-size:calc(.9rem*var(--fs))}
 .bandeja{flex:1;min-height:0;padding:9px 6px 6px;border-radius:14px;background:var(--surf);border:2px dashed var(--line)}
 .bandeja.linhas{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-content:flex-start;overflow:hidden}
 .bandeja.colunas{display:grid;grid-auto-flow:column;grid-template-rows:repeat(var(--rows,4),max-content);gap:8px;align-content:start;overflow-x:auto;overflow-y:hidden;justify-content:start}
@@ -173,7 +174,7 @@ button{touch-action:manipulation}
   <div class="topbar">
     <button class="iconbtn sera-home" id="btnHome" title="Início" onclick="goHome()">&#127968;</button>
     <span class="title">Arrasta e solta: História</span>
-    <button class="iconbtn" id="btnMenu" title="Escolher outro grupo" onclick="inicio()">&#8634;</button>
+    <button class="iconbtn" id="btnMenu" title="Escolher outro grupo" onclick="voltaGrupos()">&#8634;</button>
     <button class="iconbtn" id="btnFontDown" title="Letra menor" onclick="fs(-1)">A-</button>
     <button class="iconbtn" id="btnFontUp" title="Letra maior" onclick="fs(1)">A+</button>
     <button class="iconbtn" id="themeBtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
@@ -186,7 +187,7 @@ button{touch-action:manipulation}
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'his3_som',stars:90,unlock:true,starfield:true};</script>
-<script src="serafina-core.js?v=b64329b1137"></script>
+<script src="serafina-core.js?v=8fdc1241210"></script>
 <script>
 /* ===== DADOS — trabalho/3tri_historia/_roteiro.md. Nada inventado. =====
    Cada cartao cai em UMA caixa so (inequivoco). sub = de quem se fala (historias da U4).
@@ -367,11 +368,12 @@ function cartao(it,o){
   return h+'</'+tag+'>';
 }
 function togs(){
-  return (palco.classList.contains('modoA')?'<button class="tog'+(dicas?' on':'')+'" id="tDicas" title="Dicas: cada cartão com a cor da sua caixa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="rt">Dicas</span></button>':'')
+  return '<button class="tog volta" id="tVolta" title="Voltar aos grupos">&#8249;<span class="rt">&nbsp;Grupos</span></button>'+(palco.classList.contains('modoA')?'<button class="tog'+(dicas?' on':'')+'" id="tDicas" title="Dicas: cada cartão com a cor da sua caixa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="rt">Dicas</span></button>':'')
    +(temFoto()?'<button class="tog'+(comFoto?' on':'')+'" id="tFotos" title="Mostrar fotos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M3 16l5-5 4 4 3-3 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="16" cy="9.5" r="1.6" fill="currentColor"/></svg><span class="rt">Fotos</span></button>':'');
 }
 function ligaTogs(redesenha){
-  var d=$('tDicas'), f=$('tFotos');
+  var d=$('tDicas'), f=$('tFotos'), v=$('tVolta');
+  if(v) v.onclick=voltaGrupos;
   if(d) d.onclick=function(){ dicas=!dicas; guarda('his3_arrasta_dicas',dicas?'1':'0'); d.classList.toggle('on',dicas);
     aviso(dicas?'Cada cartão está com a cor da sua caixa.':'Dicas desligadas.',''); redesenha(); };
   if(f) f.onclick=function(){ comFoto=!comFoto; guarda('his3_arrasta_fotos',comFoto?'1':'0'); f.classList.toggle('on',comFoto); redesenha(); };
@@ -391,7 +393,7 @@ window.inicio=function(){
   function pinta(){ palco.querySelectorAll('#fJ .chip').forEach(function(c){ c.classList.toggle('on',c.getAttribute('data-j')===jeito); }); }
   palco.querySelectorAll('#fJ .chip').forEach(function(c){ c.onclick=function(){ jeito=c.getAttribute('data-j'); guarda('his3_arrasta_jeito',jeito); pinta(); }; });
   pinta();
-  palco.querySelectorAll('.gru').forEach(function(b){ b.onclick=function(){ G=GRUPOS[+b.getAttribute('data-g')]; if(jeito==='b') modoB(0,true); else modoA(); }; });
+  palco.querySelectorAll('.gru').forEach(function(b){ b.onclick=function(){ G=GRUPOS[+b.getAttribute('data-g')]; try{ history.pushState({his3:'grupo'},''); }catch(e){} if(jeito==='b') modoB(0,true); else modoA(); }; });
 };
 
 /* ================= FIM ================= */
@@ -400,7 +402,7 @@ function fim(titulo,txt,deNovo,rot){
   $('fimbox').innerHTML='<h2>'+titulo+'</h2><p>'+txt+'</p>'+lista+'<button class="forte" id="fimDeNovo">'+(rot||'De novo')+'</button><button id="fimMenu">Outro grupo</button><button id="fimVer">Ver as caixas</button>';
   $('fimov').classList.add('show');
   $('fimDeNovo').onclick=function(){ fechaFim(); deNovo(); };
-  $('fimMenu').onclick=inicio;
+  $('fimMenu').onclick=voltaGrupos;
   $('fimVer').onclick=fechaFim;
 }
 function fechaFim(){ $('fimov').classList.remove('show'); }
@@ -625,6 +627,9 @@ function modoB(k,novo){
   aviso('Toque nos '+certos.length+' cartões de <b>'+esc(c.nome)+'</b>.','');
 }
 
+function voltaGrupos(){ if(G){ try{ history.back(); }catch(e){ inicio(); } } else inicio(); }
+window.voltaGrupos=voltaGrupos;
+addEventListener('popstate',function(){ if(G) inicio(); });
 var tm=null;
 addEventListener('resize',function(){ clearTimeout(tm); tm=setTimeout(function(){
   if(palco.classList.contains('modoA')&&A&&!arrastando) desenhaA();
@@ -634,6 +639,6 @@ inicio();
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#f59e0b',accent2:'#fbbf24'};</script>
-<script src="sera_theme.js?v=b64329b1137"></script>
+<script src="sera_theme.js?v=8fdc1241210"></script>
 </body>
 </html>
