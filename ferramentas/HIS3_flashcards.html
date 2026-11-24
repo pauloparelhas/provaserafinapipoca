@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='b64329b1137';
+try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
+if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
+var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
+function confere(){fetch(raiz+'versao.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+if(!j||!j.v||j.v===B)return;var k='lp3_recarregou_'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1');}catch(e){}
+var u=new URL(location.href);u.searchParams.set('v',j.v);location.replace(u.toString());}).catch(function(){});}
+confere();document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')confere();});})();</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1e">
+<title>Flashcards — História</title>
+<link rel="stylesheet" href="serafina-core.css?v=b64329b1137">
+<link rel="stylesheet" href="OP_estilo.css?v=b64329b1137">
+<style>
+/* HIS3_flashcards (24/11/2026, pedido do Paulo): frente = pergunta curta (com foto da aula quando ajuda),
+   verso = resposta curta e inequivoca. Toque vira a carta; sem "acertei/errei" (deixa lento). Fonte: _roteiro.md. */
+html,body{height:100%;overflow:hidden}
+button{touch-action:manipulation}
+.app{height:100vh;height:100dvh;min-height:0}
+.palco{flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 12px calc(10px + env(safe-area-inset-bottom));gap:10px;max-width:640px;width:100%;margin:0 auto}
+/* ---- baralhos ---- */
+.ini{margin:auto 0;width:100%;display:flex;flex-direction:column;gap:9px;max-height:100%;overflow:auto;padding:2px}
+.ini h1{font-size:calc(1.2rem*var(--fs));font-weight:900;text-align:center;color:var(--accent)}
+.ini p{font-size:calc(.86rem*var(--fs));font-weight:800;color:var(--soft);text-align:center}
+.decks{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media (max-width:420px){.decks{grid-template-columns:1fr}}
+.deck{display:flex;align-items:center;gap:10px;min-height:58px;padding:8px 12px;border:2px solid var(--line);border-radius:15px;color:var(--ink);font-family:inherit;cursor:pointer;text-align:left;
+  background:linear-gradient(150deg,color-mix(in srgb,var(--dc) 22%,var(--card)),var(--card))}
+.deck:active{transform:scale(.97)}
+.deck b{flex:1;font-size:calc(.98rem*var(--fs));font-weight:900;line-height:1.15}
+.deck i{font-style:normal;font-size:calc(.74rem*var(--fs));font-weight:900;border-radius:12px;padding:3px 9px;border:1.5px solid var(--dc)}
+.deck.feito i{background:var(--ok);border-color:var(--ok);color:#06281a}
+.todos{min-height:52px;border:none;border-radius:15px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#241500;font-family:inherit;font-weight:900;font-size:calc(1rem*var(--fs));cursor:pointer}
+/* ---- carta ---- */
+.topo{flex:0 0 auto;display:flex;align-items:center;gap:8px}
+.topo b{flex:1;min-width:0;font-weight:900;font-size:calc(.92rem*var(--fs));color:var(--dc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topo span{font-weight:900;font-size:calc(.8rem*var(--fs));color:var(--soft);background:var(--line);border-radius:12px;padding:4px 10px;white-space:nowrap}
+.flip{flex:1;min-height:0;perspective:1400px}
+.fc{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,.2,.2,1);cursor:pointer}
+.fc.on{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  text-align:center;padding:16px;border-radius:22px;border:3px solid var(--dc);background:linear-gradient(140deg,var(--card),color-mix(in srgb,var(--dc) 10%,var(--card)));box-shadow:0 14px 34px rgba(0,0,0,.32);overflow:hidden}
+.face img{max-width:100%;max-height:44%;min-height:0;object-fit:contain;border-radius:12px;background:#fff;flex:0 1 auto}
+.face .q{font-weight:900;font-size:calc(clamp(1.15rem,3.2vmin + .6rem,1.6rem)*var(--fs));line-height:1.25}
+.back{transform:rotateY(180deg);border-color:var(--ok);background:linear-gradient(140deg,color-mix(in srgb,var(--ok) 16%,var(--card)),var(--card))}
+.back .a{font-weight:900;font-size:calc(clamp(1.4rem,4.2vmin + .7rem,2.1rem)*var(--fs));line-height:1.2;color:var(--ink)}
+.back .qq{font-weight:800;font-size:calc(.85rem*var(--fs));color:var(--soft);line-height:1.25}
+.vira{font-weight:900;font-size:calc(.78rem*var(--fs));color:var(--accent);border:2px dashed var(--accent);border-radius:18px;padding:5px 13px;animation:pulsa 1.6s ease-in-out infinite}
+@keyframes pulsa{0%,100%{opacity:.75}50%{opacity:1}}
+.fala{position:absolute;top:8px;right:8px;width:44px;height:44px;border-radius:12px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-size:1.1rem;cursor:pointer}
+.nav{flex:0 0 auto;display:flex;gap:10px}
+.nav button{flex:1;min-height:52px;border-radius:15px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.98rem*var(--fs));cursor:pointer}
+.nav button.forte{border-color:var(--accent);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 34%,transparent),rgba(251,191,36,.18))}
+.nav button[disabled]{opacity:.4;cursor:default}
+/* ---- fim ---- */
+.fim{margin:auto;width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 16px;text-align:center;display:flex;flex-direction:column;gap:10px}
+.fim h2{font-size:calc(1.3rem*var(--fs));font-weight:900;color:var(--accent)}
+.fim p{font-weight:800;color:var(--soft)}
+.fim button{min-height:50px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer}
+.fim button.forte{border-color:var(--accent);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 34%,transparent),rgba(251,191,36,.18))}
+@media (max-width:430px){.topbar{gap:3px;padding:6px}.topbar .title{display:none}}
+@media (max-height:500px){.face{flex-direction:row;gap:16px}.face img{max-height:80%;max-width:42%}.face .tx{display:flex;flex-direction:column;gap:8px;align-items:center}.nav button{min-height:46px}.palco{gap:6px;padding-top:6px}}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+<div class="app">
+  <div class="topbar">
+    <button class="iconbtn sera-home" id="btnHome" title="Início" onclick="goHome()">&#127968;</button>
+    <span class="title">Flashcards: História</span>
+    <button class="iconbtn" id="btnMenu" title="Escolher outro baralho" onclick="inicio()">&#8634;</button>
+    <button class="iconbtn" id="btnFontDown" title="Letra menor" onclick="fs(-1)">A-</button>
+    <button class="iconbtn" id="btnFontUp" title="Letra maior" onclick="fs(1)">A+</button>
+    <button class="iconbtn" id="themeBtn" title="Tema" onclick="document.body.classList.toggle('light')">&#127769;</button>
+    <button class="iconbtn" id="soundBtn" title="Som" onclick="toggleSom()">&#128264;</button>
+    <button class="iconbtn lockbtn" id="lockbtn" title="Tela cheia" onclick="toggleLock()">&#128274;</button>
+  </div>
+  <div class="bar"><span id="bar"></span></div>
+  <div class="palco" id="palco"></div>
+</div>
+
+<script>window.SERA_PT=true;</script>
+<script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'his3_som',stars:90,unlock:true,starfield:true};</script>
+<script src="serafina-core.js?v=b64329b1137"></script>
+<script>
+/* ===== DADOS — trabalho/3tri_historia/_roteiro.md. Verso curto e inequivoco. f = foto da aula (media/his3/). ===== */
+var M='media/his3/';
+var BARALHOS=[
+ {id:'fonte',titulo:'O que é fonte histórica',cor:'#f472b6',cartas:[
+  {q:'O que é uma fonte histórica?',a:'Uma pista do passado.'},
+  {q:'Fonte oral é…',a:'Um relato contado por alguém.'},
+  {q:'Fonte escrita é…',a:'Um texto: carta, diário, jornal.'},
+  {q:'Fonte visual é…',a:'Uma imagem: foto, pintura, mapa.'},
+  {q:'Fonte material é…',a:'Um objeto: brinquedo, roupa, construção.'},
+  {q:'O que pode contar uma história do passado?',a:'Tudo ao nosso redor.'},
+  {q:'As fontes ajudam a guardar a…',a:'Memória.'}]},
+ {id:'tipo',titulo:'Que tipo de fonte é?',cor:'#60a5fa',cartas:[
+  {q:'Carta antiga',f:'fonte-carta.jpg',a:'Escrita'},
+  {q:'Chapéu e casaco antigos',f:'fonte-chapeu.jpg',a:'Material'},
+  {q:'Álbum de fotos',f:'fonte-album.jpg',a:'Visual'},
+  {q:'Mapa antigo',f:'fonte-mapa.jpg',a:'Visual'},
+  {q:'Entrevista gravada',f:'fonte-entrevista.jpg',a:'Oral'},
+  {q:'Sofá antigo',f:'fonte-sofa.jpg',a:'Material'},
+  {q:'Certidão de nascimento',f:'fonte-certidao.jpg',a:'Escrita'},
+  {q:'Quadros com fotos na parede',f:'fonte-quadros.jpg',a:'Visual'},
+  {q:'Bonecas antigas',f:'fonte-bonecas.jpg',a:'Material'},
+  {q:'O castelo (a construção)',f:'fonte-castelo.jpg',a:'Material'},
+  {q:'A vovó contando uma história',a:'Oral'},
+  {q:'A vovó escrevendo uma carta',a:'Escrita'},
+  {q:'Vídeo de alguém contando uma história',a:'Oral'},
+  {q:'A foto de um castelo',a:'Visual'},
+  {q:'Um livro antigo fechado (o objeto)',a:'Material'},
+  {q:'O que está escrito num livro antigo',a:'Escrita'}]},
+ {id:'escola',titulo:'A escola tem história',cor:'#facc15',cartas:[
+  {q:'Boletim e bilhete são fontes…',a:'Escritas.'},
+  {q:'O que os documentos da escola mostram?',a:'Como era o ensino e as regras.'},
+  {q:'Foto antiga da turma é fonte…',a:'Visual'},
+  {q:'Por que guardar documentos da escola?',a:'Para guardar memórias.'},
+  {q:'Na escola da Dona Lúcia, antes havia quadro de giz. Hoje há…',a:'Lousa digital.'},
+  {q:'Dona Lúcia pesquisava na biblioteca. Hoje os alunos pesquisam na…',a:'Internet.'},
+  {q:'Todos têm as mesmas memórias da escola?',a:'Não. Cada um lembra de um jeito.'}]},
+ {id:'quem',titulo:'Quem fez? Para quê?',cor:'#c084fc',cartas:[
+  {q:'Três perguntas para fazer a uma fonte',a:'Quem fez? Para quem? Para quê?'},
+  {q:'Para que servia este anúncio de jornal?',f:'anuncio.jpg',a:'Para vender leite.'},
+  {q:'Para que servia esta propaganda?',f:'propaganda.jpg',a:'Para vender o alimento.'},
+  {q:'Quem escreveu a mensagem do cartão-postal de Salvador?',a:'Quem viajou, para os amigos.'},
+  {q:'Suposição é sempre certa?',a:'Não. Pode estar errada.'},
+  {q:'O que o historiador faz?',a:'Compara várias fontes.'},
+  {q:'Por que a mesma foto gera histórias diferentes?',a:'Cada pessoa vê de um jeito.'}]},
+ {id:'prof',titulo:'Profissões no tempo',cor:'#22d3ee',cartas:[
+  {q:'Por que as profissões mudaram?',a:'Novas máquinas e tecnologias.'},
+  {q:'Por que o acendedor de lampião sumiu?',a:'Chegou a energia elétrica.'},
+  {q:'Como Seu Francisco, o carteiro, entregava cartas antigamente?',a:'A pé, com bolsa de couro.'},
+  {q:'A profissão de carteiro acabou?',a:'Não. Mudou o jeito.'},
+  {q:'O que o carteiro usa hoje para registrar as entregas?',a:'Aparelho com tela.'},
+  {q:'Na escola de antigamente, os alunos copiavam do…',a:'Quadro de giz.'},
+  {q:'O que continua igual no trabalho de Dona Lúcia?',a:'Ajudar a aprender com alegria.'},
+  {q:'Na fazenda do Seu Pedro, quem puxava o arado?',f:'campo-antes.jpg',a:'Os bois.'},
+  {q:'Para que Seu Pedro usa o celular?',a:'Para saber se vai chover.'},
+  {q:'Antigamente, o termômetro do Doutor João era de…',a:'Mercúrio.'},
+  {q:'Como o Doutor João pode atender hoje, de longe?',a:'Por vídeo.'},
+  {q:'O que continua igual no trabalho do Doutor João?',a:'O cuidado com cada paciente.'},
+  {q:'Antes, entrega com carrinho de mão. Hoje…',f:'entrega-antes.jpg',a:'Com drone.'},
+  {q:'Designer gráfico e cientista de dados são profissões…',a:'Novas.'},
+  {q:'Com a energia elétrica, qual profissão deixou de ser necessária?',a:'Acendedor de lampião.'}]},
+ {id:'mundo',titulo:'Pistas do passado no mundo',cor:'#fb923c',cartas:[
+  {q:'Nômade é quem…',a:'Viaja em busca de comida.'},
+  {q:'Com a agricultura, surgiram…',a:'Os acampamentos fixos e as cidades.'},
+  {q:'Rio do Egito',a:'Nilo'},
+  {q:'Rios da Mesopotâmia',a:'Tigre e Eufrates'},
+  {q:'Rio da China',a:'Rio Amarelo'},
+  {q:'Patrimônio é…',a:'O que é importante para a memória de um povo.'},
+  {q:'Capoeira, festa junina e receita de família são patrimônio…',a:'Imaterial'},
+  {q:'Uma estátua é patrimônio…',a:'Material'},
+  {q:'O que você faz hoje será…',a:'Fonte histórica de amanhã.'}]},
+ {id:'tempo',titulo:'Tempo e memória',cor:'#84cc16',cartas:[
+  {q:'O relógio marca o tempo…',a:'Igual para todos.'},
+  {q:'Quando o tempo parece passar rápido?',a:'Quando a gente brinca.'},
+  {q:'Quando o tempo parece passar devagar?',a:'Quando a gente espera.'},
+  {q:'Relógio de areia se chama…',a:'Ampulheta.'},
+  {q:'Na árvore generosa, o menino cresceu e mudou o que ele…',a:'Queria.'},
+  {q:'O que os museus guardam?',a:'Memórias.'},
+  {q:'Certidão de nascimento é um…',a:'Documento pessoal.'}]}
+];
+</script>
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id);};
+var palco=$('palco');
+function pega(k,d){ try{ var v=localStorage.getItem(k); return v===null?d:v; }catch(e){ return d; } }
+function guarda(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+var vistos={}; try{ vistos=JSON.parse(pega('his3_flash_vistos','{}'))||{}; }catch(e){ vistos={}; }
+function emb(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function barra(p){ $('bar').style.width=Math.round(p*100)+'%'; }
+function fala(t){ if(window.say) say(t); }
+var S=null;
+
+window.inicio=function(){
+  S=null; barra(0);
+  var h='<div class="ini"><h1>Flashcards: História</h1><p>Leia a pergunta, pense na resposta e toque na carta para ver.</p><div class="decks">';
+  BARALHOS.forEach(function(d,i){
+    h+='<button class="deck'+(vistos[d.id]?' feito':'')+'" data-d="'+i+'" style="--dc:'+d.cor+'"><b>'+esc(d.titulo)+'</b><i>'+(vistos[d.id]?'visto':d.cartas.length)+'</i></button>';
+  });
+  h+='</div><button class="todos" id="todos">Todas misturadas</button></div>';
+  palco.innerHTML=h;
+  palco.querySelectorAll('.deck').forEach(function(b){ b.onclick=function(){ abre([BARALHOS[+b.getAttribute('data-d')]]); }; });
+  $('todos').onclick=function(){ abre(BARALHOS,true); };
+};
+function abre(lista,mistura){
+  var cartas=[];
+  lista.forEach(function(d){ d.cartas.forEach(function(c){ cartas.push({c:c,d:d}); }); });
+  S={lista:lista, cartas:emb(cartas), i:0, mistura:!!mistura};
+  carta();
+}
+function carta(){
+  var x=S.cartas[S.i], c=x.c, d=x.d, n=S.cartas.length;
+  barra((S.i+1)/n);
+  palco.innerHTML='<div class="topo" style="--dc:'+d.cor+'"><b>'+esc(d.titulo)+'</b><span>'+(S.i+1)+' de '+n+'</span></div>'
+   +'<div class="flip" style="--dc:'+d.cor+'"><div class="fc" id="fc">'
+   +'<div class="face front">'+(c.f?'<img src="'+M+c.f+'" alt="">':'')+'<div class="tx"><div class="q">'+esc(c.q)+'</div><div class="vira">Toque para virar</div></div><button class="fala" id="f1" title="Ouvir">&#128266;</button></div>'
+   +'<div class="face back"><div class="tx"><div class="qq">'+esc(c.q)+'</div><div class="a">'+esc(c.a)+'</div></div><button class="fala" id="f2" title="Ouvir">&#128266;</button></div>'
+   +'</div></div>'
+   +'<div class="nav"><button id="ant">&#8249; Anterior</button><button class="forte" id="prox">'+(S.i===n-1?'Terminar':'Próxima &#8250;')+'</button></div>';
+  var fc=$('fc');
+  fc.onclick=function(e){ if(e.target.closest('.fala')) return; fc.classList.toggle('on'); if(fc.classList.contains('on')) fala(c.a); };
+  $('f1').onclick=function(){ fala(c.q); };
+  $('f2').onclick=function(){ fala(c.a); };
+  $('ant').disabled=S.i===0;
+  $('ant').onclick=function(){ if(S.i>0){ S.i--; carta(); } };
+  $('prox').onclick=avanca;
+  /* deslizar para o lado tambem passa a carta */
+  var x0=null, y0=null;
+  fc.addEventListener('pointerdown',function(e){ x0=e.clientX; y0=e.clientY; });
+  fc.addEventListener('pointerup',function(e){ if(x0===null) return; var dx=e.clientX-x0, dy=e.clientY-y0; x0=null;
+    if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.5){ e.stopPropagation(); fc.onclick=null; setTimeout(function(){ if(dx<0) avanca(); else if(S.i>0){ S.i--; carta(); } },0); } });
+}
+function avanca(){
+  if(S.i<S.cartas.length-1){ S.i++; carta(); return; }
+  S.lista.forEach(function(d){ vistos[d.id]=1; }); guarda('his3_flash_vistos',JSON.stringify(vistos));
+  palco.innerHTML='<div class="fim"><h2>Muito bem!</h2><p>Você viu as '+S.cartas.length+' cartas.</p>'
+   +'<button class="forte" id="dn">Ver de novo, em outra ordem</button><button id="ob">Outro baralho</button></div>';
+  var l=S.lista, m=S.mistura;
+  $('dn').onclick=function(){ abre(l,m); };
+  $('ob').onclick=inicio;
+}
+addEventListener('keydown',function(e){
+  if(!S||!$('fc')) return;
+  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); $('fc').classList.toggle('on'); }
+  if(e.key==='ArrowRight') avanca();
+  if(e.key==='ArrowLeft'&&S.i>0){ S.i--; carta(); }
+});
+inicio();
+})();
+</script>
+<script>window.SERA_ACCENT={accent:'#f59e0b',accent2:'#fbbf24'};</script>
+<script src="sera_theme.js?v=b64329b1137"></script>
+</body>
+</html>
