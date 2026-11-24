@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='8fdc1241210';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='7321ca31605';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,8 +14,8 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Arrasta e solta — História</title>
-<link rel="stylesheet" href="serafina-core.css?v=8fdc1241210">
-<link rel="stylesheet" href="OP_estilo.css?v=8fdc1241210">
+<link rel="stylesheet" href="serafina-core.css?v=7321ca31605">
+<link rel="stylesheet" href="OP_estilo.css?v=7321ca31605">
 <style>
 /* HIS3_arrasta (24/11/2026, pedido do Paulo): fork do GEO3_arrasta v3 (aprovado), generalizado para GRUPOS.
    Fonte unica: trabalho/3tri_historia/_roteiro.md (blocos F, S, I, M, P, B e armadilhas). Fotos = recortes da aula (media/his3/).
@@ -145,6 +145,7 @@ button{touch-action:manipulation}
 .fimbox button.forte{border-color:var(--accent);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 34%,transparent),rgba(251,191,36,.2))}
 /* ---------- telas pequenas ---------- */
 @media (max-width:430px){.topbar{gap:3px;padding:6px}.topbar .title{display:none}.tog .rt{display:none}}
+@media (max-height:500px) and (max-width:900px){.tog .rt{display:none}}
 @media (max-height:500px) and (min-aspect-ratio:5/4){
   .palco.modoA{display:grid;grid-template-columns:56% 1fr;grid-template-rows:auto 1fr;column-gap:8px;row-gap:6px}
   .palco.modoA .caixas{grid-column:1;grid-row:1/3;max-height:none;min-height:0;overflow-y:auto}
@@ -187,13 +188,16 @@ button{touch-action:manipulation}
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'his3_som',stars:90,unlock:true,starfield:true};</script>
-<script src="serafina-core.js?v=8fdc1241210"></script>
+<script src="serafina-core.js?v=7321ca31605"></script>
 <script>
 /* ===== DADOS — trabalho/3tri_historia/_roteiro.md. Nada inventado. =====
    Cada cartao cai em UMA caixa so (inequivoco). sub = de quem se fala (historias da U4).
    Armadilhas respeitadas: foto x objeto (castelo = a construcao), vovo contando = oral, video de relato = oral,
    mapa = visual, livro so com a parte nomeada, antes/hoje ancorado na historia, robo e fazenda em predio (futuro) fora,
-   vendedor de rua fora, pincel so na caixa do pedreiro junto com marreta e colher. */
+   vendedor de rua fora.
+   Rodada 3 (Paulo 24/11 tarde): TODO cartao tem imagem (foto da aula ou ilustracao SVG em media/his3/ilu/); so entra
+   cartao com nota >= 9,5 do porteiro e com desafio (nome que entrega a caixa, como "Cirurgia antiga", foi cortado).
+   Fora: grupos "Mudou ou continuou" (abstrato) e "Tempo que a gente sente" (obvio), maleta, pincel. */
 var M='media/his3/';
 var GRUPOS=[
  {id:'tipos',titulo:'Tipos de fonte',resumo:'Oral, escrita, visual ou material?',cor:'#f472b6',
@@ -205,135 +209,89 @@ var GRUPOS=[
   itens:[
    {n:'Carta antiga',b:'e',f:'fonte-carta.jpg'},
    {n:'Certidão de nascimento',b:'e',f:'fonte-certidao.jpg'},
-   {n:'Diário',b:'e'},
-   {n:'Jornal antigo',b:'e'},
-   {n:'Bilhete',b:'e'},
-   {n:'Receita escrita num caderno',b:'e'},
+   {n:'Diário',b:'e',f:'ilu/diario.svg'},
+   {n:'Jornal antigo',b:'e',f:'ilu/jornal.svg'},
    {n:'Álbum de fotos',b:'v',f:'fonte-album.jpg'},
    {n:'Mapa antigo',b:'v',f:'fonte-mapa.jpg'},
-   {n:'Quadros com fotos na parede',b:'v',f:'fonte-quadros.jpg'},
-   {n:'Pintura',b:'v'},
-   {n:'Fotografia antiga',b:'v'},
+   {n:'Fotos nos quadros da parede',b:'v',f:'fonte-quadros.jpg'},
+   {n:'Pintura',b:'v',f:'ilu/pintura.svg'},
    {n:'Entrevista gravada',b:'o',f:'fonte-entrevista.jpg'},
-   {n:'Cantigas que a vovó ensinou cantando',b:'o'},
-   {n:'A vovó contando como era a infância dela',b:'o'},
-   {n:'Vídeo de alguém contando uma história',b:'o'},
+   {n:'Vovó contando a infância dela',b:'o',f:'ilu/vovo-contando.svg'},
+   {n:'Vovó ensinando cantigas',b:'o',f:'ilu/vovo-cantando.svg'},
    {n:'Chapéu e casaco antigos',b:'m',f:'fonte-chapeu.jpg'},
    {n:'Sofá antigo',b:'m',f:'fonte-sofa.jpg'},
    {n:'Bonecas antigas',b:'m',f:'fonte-bonecas.jpg'},
-   {n:'Castelo',sub:'a construção',b:'m',f:'fonte-castelo.jpg'},
-   {n:'Brinquedo antigo',b:'m'}]},
+   {n:'Castelo',sub:'a construção',b:'m',f:'fonte-castelo.jpg'}]},
  {id:'escola',titulo:'Fontes da escola',resumo:'A escola também tem história',cor:'#60a5fa',
   caixas:[
    {id:'e',nome:'Escrita',cor:'#60a5fa',mais:'Os documentos da escola registram fatos e decisões e mostram como era o ensino e as regras.'},
    {id:'v',nome:'Visual',cor:'#facc15',mais:'Fotos antigas de turmas.'},
    {id:'m',nome:'Material',cor:'#fb923c',mais:'Objetos guardados na escola, como uniformes antigos e troféus.'}],
   itens:[
-   {n:'O que está escrito num caderno antigo',b:'e'},
-   {n:'Boletim',b:'e'},
-   {n:'Registro de um evento da escola',b:'e'},
-   {n:'Bilhete de um professor',b:'e'},
-   {n:'Foto antiga da turma',b:'v'},
-   {n:'Uniforme antigo',b:'m'},
-   {n:'Troféu',b:'m'}]},
+   {n:'Boletim',b:'e',f:'ilu/boletim.svg'},
+   {n:'Bilhete de um professor',b:'e',f:'ilu/bilhete-prof.svg'},
+   {n:'Foto antiga da turma',b:'v',f:'ilu/foto-turma.svg'},
+   {n:'Uniforme antigo',b:'m',f:'ilu/uniforme.svg'},
+   {n:'Troféu',b:'m',f:'ilu/trofeu.svg'}]},
  {id:'tempo2',titulo:'Antigamente e hoje',resumo:'As profissões mudaram com o tempo',cor:'#c084fc',
   caixas:[
    {id:'a',nome:'Antigamente',cor:'#c084fc',mais:'Muita coisa era feita a pé, à mão e no papel.'},
    {id:'h',nome:'Hoje',cor:'#22d3ee',mais:'Surgiram novas máquinas e tecnologias: o trabalho ficou mais rápido ou com mais conforto.'}],
   itens:[
-   {n:'Entregava cartas a pé, com bolsa de couro',sub:'Seu Francisco, o carteiro',b:'a'},
-   {n:'Aparelho com tela para registrar as entregas',sub:'Seu Francisco, o carteiro',b:'h'},
-   {n:'Entrega compras feitas pela internet',sub:'Seu Francisco, o carteiro',b:'h'},
-   {n:'Quadro de giz e tudo escrito à mão',sub:'Dona Lúcia, a professora',b:'a'},
-   {n:'Pesquisa na biblioteca',sub:'Dona Lúcia, a professora',b:'a'},
-   {n:'Lousa digital e tablet',sub:'Dona Lúcia, a professora',b:'h'},
-   {n:'Pesquisa na internet',sub:'Dona Lúcia, a professora',b:'h'},
-   {n:'Arado puxado por bois',sub:'Seu Pedro, o fazendeiro',b:'a',f:'campo-antes.jpg'},
-   {n:'Colheita feita com as mãos',sub:'Seu Pedro, o fazendeiro',b:'a'},
-   {n:'Máquina que planta e colhe',sub:'Seu Pedro, o fazendeiro',b:'h',f:'campo-hoje.jpg'},
-   {n:'Celular para saber se vai chover',sub:'Seu Pedro, o fazendeiro',b:'h'},
-   {n:'Termômetro de mercúrio',sub:'Doutor João, o médico',b:'a'},
-   {n:'Fichas em arquivos de papel',sub:'Doutor João, o médico',b:'a'},
-   {n:'Exames que demoravam dias',sub:'Doutor João, o médico',b:'a'},
-   {n:'Consulta por vídeo',sub:'Doutor João, o médico',b:'h'},
-   {n:'Exames pelo celular',sub:'Doutor João, o médico',b:'h'},
-   {n:'Entrega com carrinho de mão',b:'a',f:'entrega-antes.jpg'},
-   {n:'Entrega com drone',b:'h',f:'entrega-hoje.jpg'},
-   {n:'Cirurgia antiga',b:'a',f:'cirurgia-antes.jpg'},
-   {n:'Cirurgia com robô',b:'h',f:'cirurgia-hoje.jpg'},
-   {n:'Desenho de engrenagens no papel',b:'a',f:'engenharia-antes.jpg'},
-   {n:'Engenheira com robô e computador',b:'h',f:'engenharia-hoje.jpg'},
-   {n:'Carta escrita à mão',b:'a'},
-   {n:'Mensagem que chega em segundos',b:'h'}]},
- {id:'mudou',titulo:'Mudou ou continuou igual?',resumo:'O jeito muda, o cuidado continua',cor:'#84cc16',
-  caixas:[
-   {id:'x',nome:'Mudou',cor:'#fb923c',mais:'O jeito de trabalhar mudou com as novas máquinas e tecnologias.'},
-   {id:'c',nome:'Continuou igual',cor:'#84cc16',mais:'Continuam: ouvir os alunos, amar a terra e cuidar de cada paciente.'}],
-  itens:[
-   {n:'O jeito de entregar as cartas',sub:'Seu Francisco',b:'x'},
-   {n:'A profissão de carteiro existe até hoje',sub:'Seu Francisco',b:'c'},
-   {n:'Os materiais da sala de aula',sub:'Dona Lúcia',b:'x'},
-   {n:'Conversar com os alunos e ouvir as ideias deles',sub:'Dona Lúcia',b:'c'},
-   {n:'Ajudar os alunos a aprender com alegria',sub:'Dona Lúcia',b:'c'},
-   {n:'As máquinas da fazenda',sub:'Seu Pedro',b:'x'},
-   {n:'Amar a terra e cuidar da natureza',sub:'Seu Pedro',b:'c'},
-   {n:'Produzir alimentos saudáveis',sub:'Seu Pedro',b:'c'},
-   {n:'Os aparelhos do consultório',sub:'Doutor João',b:'x'},
-   {n:'O tempo para ficar pronto um exame',sub:'Doutor João',b:'x'},
-   {n:'O cuidado e a atenção com cada paciente',sub:'Doutor João',b:'c'}]},
+   {n:'Cartas levadas a pé',sub:'Seu Francisco',b:'a',f:'ilu/carteiro-pe.svg'},
+   {n:'Aparelho que registra as entregas',sub:'Seu Francisco',b:'h',f:'ilu/carteiro-aparelho.svg'},
+   {n:'Quadro de giz',sub:'Dona Lúcia',b:'a',f:'ilu/quadro-giz.svg'},
+   {n:'Lousa digital e tablet',sub:'Dona Lúcia',b:'h',f:'ilu/lousa-digital.svg'},
+   {n:'Pesquisa na biblioteca',sub:'Dona Lúcia',b:'a',f:'ilu/biblioteca.svg'},
+   {n:'Pesquisa na internet',sub:'Dona Lúcia',b:'h',f:'ilu/internet.svg'},
+   {n:'Arado puxado por bois',sub:'Seu Pedro',b:'a',f:'campo-antes.jpg'},
+   {n:'Colheita feita com as mãos',sub:'Seu Pedro',b:'a',f:'ilu/colheita-maos.svg'},
+   {n:'Máquina que planta e colhe',sub:'Seu Pedro',b:'h',f:'campo-hoje.jpg'},
+   {n:'Celular mostra se vai chover',sub:'Seu Pedro',b:'h',f:'ilu/celular-chuva.svg'},
+   {n:'Termômetro de mercúrio',sub:'Doutor João',b:'a',f:'ilu/termometro-mercurio.svg'},
+   {n:'Fichas de papel',sub:'Doutor João',b:'a',f:'ilu/fichas-papel.svg'},
+   {n:'Consulta por vídeo',sub:'Doutor João',b:'h',f:'ilu/consulta-video.svg'},
+   {n:'Entrega com carrinho',b:'a',f:'entrega-antes.jpg'},
+   {n:'Entrega com drone',b:'h',f:'entrega-hoje.jpg'}]},
  {id:'ferr',titulo:'Profissão e ferramenta',resumo:'Quem usa cada coisa?',cor:'#facc15',
   caixas:[
-   {id:'med',nome:'Médico',cor:'#f472b6',foto:'p-medico.jpg',mais:'Maleta, seringa antiga, termômetro e estetoscópio.'},
+   {id:'med',nome:'Médico',cor:'#f472b6',foto:'p-medico.jpg',mais:'Seringa antiga, termômetro e estetoscópio.'},
    {id:'fot',nome:'Fotógrafo',cor:'#facc15',mais:'Câmera antiga de tripé e fotografias.'},
    {id:'pro',nome:'Professora',cor:'#60a5fa',foto:'p-professora.jpg',mais:'Lousa, livros e globo.'},
-   {id:'ped',nome:'Pedreiro',cor:'#fb923c',foto:'p-construtor-antigo.jpg',mais:'Marreta, colher de pedreiro e pincel.'}],
+   {id:'ped',nome:'Pedreiro',cor:'#fb923c',foto:'p-construtor-antigo.jpg',mais:'Marreta e colher de pedreiro.'}],
   itens:[
-   {n:'Maleta',b:'med',f:'f-maleta.jpg'},
-   {n:'Seringa antiga',b:'med'},
-   {n:'Termômetro',b:'med'},
-   {n:'Estetoscópio',b:'med'},
+   {n:'Seringa antiga',b:'med',f:'ilu/seringa.svg'},
+   {n:'Termômetro',b:'med',f:'ilu/termometro.svg'},
+   {n:'Estetoscópio',b:'med',f:'ilu/estetoscopio.svg'},
    {n:'Câmera antiga de tripé',b:'fot',f:'f-camera.jpg'},
-   {n:'Fotografias',b:'fot'},
+   {n:'Fotografias',b:'fot',f:'ilu/fotografias.svg'},
    {n:'Lousa',b:'pro',f:'f-lousa.jpg'},
    {n:'Livros',b:'pro',f:'f-livros.jpg'},
    {n:'Globo',b:'pro',f:'f-globo.jpg'},
-   {n:'Marreta',b:'ped'},
-   {n:'Colher de pedreiro',b:'ped',f:'f-colher.jpg'},
-   {n:'Pincel',b:'ped'}]},
+   {n:'Marreta',b:'ped',f:'ilu/marreta.svg'},
+   {n:'Colher',b:'ped',f:'f-colher.jpg'}]},
  {id:'prof',titulo:'Profissões antigas e novas',resumo:'Umas sumiram, outras nasceram',cor:'#22d3ee',
   caixas:[
    {id:'ant',nome:'Sumiram ou ficaram raras',cor:'#c084fc',mais:'O acendedor de lampião acendia os postes um a um. Com a energia elétrica, deixou de ser necessário.'},
    {id:'nov',nome:'Novas',cor:'#22d3ee',mais:'A tecnologia criou profissões com computador, internet e redes sociais.'}],
   itens:[
-   {n:'Acendedor de lampião',b:'ant'},
-   {n:'Leiteiro',sub:'entregava garrafas de leite na porta',b:'ant',f:'prof-leiteiro.jpg'},
-   {n:'Datilógrafa',sub:'usava máquina de escrever',b:'ant',f:'prof-datilografa.jpg'},
-   {n:'Designer gráfico',b:'nov'},
-   {n:'Desenvolvedor de aplicativos',b:'nov'},
-   {n:'Cientista de dados',b:'nov'}]},
+   {n:'Acendedor de lampião',b:'ant',f:'ilu/acendedor.svg'},
+   {n:'Leiteiro',sub:'leite na porta',b:'ant',f:'prof-leiteiro.jpg'},
+   {n:'Datilógrafa',sub:'máquina de escrever',b:'ant',f:'prof-datilografa.jpg'},
+   {n:'Designer gráfico',b:'nov',f:'ilu/designer.svg'},
+   {n:'Desenvolvedor de aplicativos',b:'nov',f:'ilu/dev-app.svg'},
+   {n:'Cientista de dados',b:'nov',f:'ilu/cientista-dados.svg'}]},
  {id:'patr',titulo:'Patrimônio',resumo:'O que é importante para a memória de um povo',cor:'#fb923c',
   caixas:[
    {id:'mat',nome:'Material',cor:'#fb923c',mais:'Museus, praças e estátuas.'},
    {id:'ima',nome:'Imaterial',cor:'#f472b6',mais:'Capoeira, festas juninas e receitas de família.'}],
   itens:[
-   {n:'Museu',b:'mat'},
-   {n:'Praça',b:'mat'},
-   {n:'Estátua',b:'mat'},
-   {n:'Capoeira',b:'ima'},
-   {n:'Festa junina',b:'ima'},
-   {n:'Receita de família',b:'ima'}]},
- {id:'sentir',titulo:'O tempo que a gente sente',resumo:'O relógio marca igual; a gente sente diferente',cor:'#a3e635',
-  caixas:[
-   {id:'r',nome:'Parece passar rápido',cor:'#84cc16',mais:'Quando a gente se diverte, o tempo parece voar.'},
-   {id:'d',nome:'Parece passar devagar',cor:'#60a5fa',mais:'Quando a gente espera, o tempo parece não passar.'}],
-  itens:[
-   {n:'Brincar com os amigos',b:'r'},
-   {n:'Uma festa',b:'r'},
-   {n:'Um jogo divertido',b:'r'},
-   {n:'Esperar na fila',b:'d'},
-   {n:'Esperar o recreio',b:'d'},
-   {n:'Esperar o aniversário',b:'d'},
-   {n:'Esperar a consulta',b:'d'}]}
+   {n:'Museu',b:'mat',f:'ilu/museu.svg'},
+   {n:'Praça',b:'mat',f:'ilu/praca.svg'},
+   {n:'Estátua',b:'mat',f:'ilu/estatua.svg'},
+   {n:'Capoeira',b:'ima',f:'ilu/capoeira.svg'},
+   {n:'Festa junina',b:'ima',f:'ilu/festa-junina.svg'},
+   {n:'Receita de família',b:'ima',f:'ilu/receita-familia.svg'}]}
 ];
 </script>
 <script>
@@ -639,6 +597,6 @@ inicio();
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#f59e0b',accent2:'#fbbf24'};</script>
-<script src="sera_theme.js?v=8fdc1241210"></script>
+<script src="sera_theme.js?v=7321ca31605"></script>
 </body>
 </html>

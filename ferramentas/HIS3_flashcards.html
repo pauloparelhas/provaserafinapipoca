@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='8fdc1241210';
+<script>/* vigia de versao (carimbo_versao.py) */(function(){var B='7321ca31605';
 try{if(navigator.serviceWorker&&navigator.serviceWorker.getRegistrations){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});}
 if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});}}catch(e){}
 var raiz=location.pathname.indexOf('/ferramentas/')>=0?'../':'';
@@ -14,12 +14,13 @@ confere();document.addEventListener('visibilitychange',function(){if(document.vi
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0b1e">
 <title>Flashcards — História</title>
-<link rel="stylesheet" href="serafina-core.css?v=8fdc1241210">
-<link rel="stylesheet" href="OP_estilo.css?v=8fdc1241210">
+<link rel="stylesheet" href="serafina-core.css?v=7321ca31605">
+<link rel="stylesheet" href="OP_estilo.css?v=7321ca31605">
 <style>
-/* HIS3_flashcards (24/11/2026, pedido do Paulo): FRENTE COMPLETA (traz a descricao inteira), VERSO CURTISSIMO
-   (1 ou 2 palavras), adivinhavel so pela frente; carta que nao passa nao entra. Sem som. Botao Baralhos e o voltar do
-   celular levam aos baralhos. Toque vira a carta; sem "acertei/errei" (deixa lento). Fonte: _roteiro.md. */
+/* HIS3_flashcards (24/11/2026, pedidos do Paulo): FRENTE COMPLETA + 2 OPCOES (certa e um distrator plausivel);
+   a crianca toca numa e a carta vira. VERSO: no alto o enunciado em letra menor; "Acertou!" ou "Errou" e a resposta
+   certa em destaque. So entra carta com cara real de flashcard e nota >= 9,5 do porteiro. Sem som. Botao Baralhos e o
+   voltar do celular levam aos baralhos. Fonte: _roteiro.md. */
 html,body{height:100%;overflow:hidden}
 button{touch-action:manipulation}
 .app{height:100vh;height:100dvh;min-height:0}
@@ -51,8 +52,20 @@ button{touch-action:manipulation}
 .back{transform:rotateY(180deg);border-color:var(--ok);background:linear-gradient(140deg,color-mix(in srgb,var(--ok) 16%,var(--card)),var(--card))}
 .back .a{font-weight:900;font-size:calc(clamp(1.4rem,4.2vmin + .7rem,2.1rem)*var(--fs));line-height:1.2;color:var(--ink)}
 .back .qq{font-weight:800;font-size:calc(.85rem*var(--fs));color:var(--soft);line-height:1.25}
-.vira{font-weight:900;font-size:calc(.78rem*var(--fs));color:var(--accent);border:2px dashed var(--accent);border-radius:18px;padding:5px 13px;animation:pulsa 1.6s ease-in-out infinite}
-@keyframes pulsa{0%,100%{opacity:.75}50%{opacity:1}}
+.ops{display:flex;flex-direction:column;gap:10px;width:100%;max-width:420px}
+.op{min-height:56px;padding:8px 14px;border-radius:16px;border:3px solid var(--dc);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(clamp(1.05rem,2.6vmin + .55rem,1.4rem)*var(--fs));cursor:pointer;line-height:1.15}
+.op:active{transform:scale(.97)}
+.back.ok{border-color:var(--ok);background:linear-gradient(140deg,color-mix(in srgb,var(--ok) 18%,var(--card)),var(--card))}
+.back.err{border-color:#f87171;background:linear-gradient(140deg,color-mix(in srgb,#f87171 16%,var(--card)),var(--card))}
+.back .qq{margin-bottom:auto}
+.back::after{content:"";margin-top:auto}
+.ver{font-weight:900;font-size:calc(clamp(1.3rem,3.6vmin + .6rem,1.9rem)*var(--fs))}
+.back.ok .ver{color:var(--ok)}
+.back.err .ver{color:#f87171}
+.back .rot{font-weight:800;font-size:calc(.85rem*var(--fs));color:var(--soft)}
+.back .a{border:3px solid var(--ok);border-radius:16px;padding:6px 18px;background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.back .tua{font-weight:800;font-size:calc(.85rem*var(--fs));color:var(--soft)}
+.back .tua s{color:#f87171}
 .volta{flex:0 0 auto;min-height:44px;padding:0 13px;border-radius:13px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.86rem*var(--fs));cursor:pointer}
 .nav{flex:0 0 auto;display:flex;gap:10px}
 .nav button{flex:1;min-height:52px;border-radius:15px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:calc(.98rem*var(--fs));cursor:pointer}
@@ -65,7 +78,7 @@ button{touch-action:manipulation}
 .fim button{min-height:50px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font-family:inherit;font-weight:900;font-size:1rem;cursor:pointer}
 .fim button.forte{border-color:var(--accent);background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 34%,transparent),rgba(251,191,36,.18))}
 @media (max-width:430px){.topbar{gap:3px;padding:6px}.topbar .title{display:none}}
-@media (max-height:500px){.face{flex-direction:row;gap:16px}.face img{max-height:80%;max-width:42%}.face .tx{display:flex;flex-direction:column;gap:8px;align-items:center}.nav button{min-height:46px}.palco{gap:6px;padding-top:6px}}
+@media (max-height:500px){.face{flex-direction:row;gap:16px}.face img{max-height:80%;max-width:42%}.face .tx{display:flex;flex-direction:column;gap:8px;align-items:center}.front{flex-direction:column;gap:8px}.ops{flex-direction:row;max-width:none}.op{flex:1;min-height:48px}.back .qq{margin-bottom:0}.back::after{display:none}.back{flex-direction:column;gap:4px;padding:10px 14px}.back .rot{display:none}.ver{font-size:calc(1.2rem*var(--fs))}.back .a{font-size:calc(1.35rem*var(--fs));padding:3px 14px}.front .q{font-size:calc(1.05rem*var(--fs))}.front{padding:10px 14px}.nav button{min-height:46px}.palco{gap:6px;padding-top:6px}}
 </style>
 </head>
 <body>
@@ -86,69 +99,37 @@ button{touch-action:manipulation}
 
 <script>window.SERA_PT=true;</script>
 <script>window.SERA_CFG={trKey:null,lang:'pt-BR',rate:.86,home:'../index.html',somKey:'his3_som',stars:90,unlock:true,starfield:true};</script>
-<script src="serafina-core.js?v=8fdc1241210"></script>
+<script src="serafina-core.js?v=7321ca31605"></script>
 <script>
 /* ===== DADOS — trabalho/3tri_historia/_roteiro.md. Verso curto e inequivoco. f = foto da aula (media/his3/). ===== */
 var M='media/his3/';
 var BARALHOS=[
- {id:'fonte',titulo:'O que é fonte histórica',cor:'#f472b6',cartas:[
-  {q:'Uma pista do passado, que ajuda a aprender sobre outras épocas, é uma fonte…',a:'Histórica'},
-  {q:'Relatos e histórias contadas por pessoas são fonte…',a:'Oral'},
-  {q:'Diários, leis, jornais e cartas são fonte…',a:'Escrita'},
-  {q:'Pinturas, fotografias e mapas são fonte…',a:'Visual'},
-  {q:'Brinquedos, roupas, construções e utensílios são fonte…',a:'Material'},
-  {q:'Tudo ao nosso redor pode contar uma…',a:'História'}]},
- {id:'tipo',titulo:'Que tipo de fonte é?',cor:'#60a5fa',cartas:[
-  {q:'Uma carta antiga é fonte…',f:'fonte-carta.jpg',a:'Escrita'},
-  {q:'Chapéu e casaco antigos são fonte…',f:'fonte-chapeu.jpg',a:'Material'},
-  {q:'Um álbum de fotos é fonte…',f:'fonte-album.jpg',a:'Visual'},
-  {q:'Um mapa antigo é fonte…',f:'fonte-mapa.jpg',a:'Visual'},
-  {q:'Uma entrevista gravada é fonte…',f:'fonte-entrevista.jpg',a:'Oral'},
-  {q:'Um sofá antigo é fonte…',f:'fonte-sofa.jpg',a:'Material'},
-  {q:'A certidão de nascimento é fonte…',f:'fonte-certidao.jpg',a:'Escrita'},
-  {q:'As fotos dos quadros na parede são fonte…',f:'fonte-quadros.jpg',a:'Visual'},
-  {q:'Bonecas antigas são fonte…',f:'fonte-bonecas.jpg',a:'Material'},
-  {q:'O castelo, a construção, é fonte…',f:'fonte-castelo.jpg',a:'Material'},
-  {q:'A vovó contando uma história é fonte…',a:'Oral'},
-  {q:'A vovó escrevendo uma carta é fonte…',a:'Escrita'},
-  {q:'Um vídeo de alguém contando uma história é fonte…',a:'Oral'},
-  {q:'A foto de um castelo é fonte…',a:'Visual'},
-  {q:'Um livro antigo fechado, como objeto, é fonte…',a:'Material'},
-  {q:'O que está escrito num livro antigo é fonte…',a:'Escrita'}]},
- {id:'escola',titulo:'A escola tem história',cor:'#facc15',cartas:[
-  {q:'Um boletim da escola é fonte…',a:'Escrita'},
-  {q:'Uma foto antiga da turma é fonte…',a:'Visual'},
-  {q:'Na escola da Dona Lúcia, antes havia quadro de giz. Hoje há lousa…',a:'Digital'},
-  {q:'Dona Lúcia pesquisava na biblioteca. Hoje os alunos também pesquisam na…',a:'Internet'},
-  {q:'Alunos, professores e funcionários têm memórias iguais ou diferentes da mesma escola?',a:'Diferentes'}]},
- {id:'quem',titulo:'Quem fez? Para quê?',cor:'#c084fc',cartas:[
-  {q:'Anúncios e propagandas servem para…',a:'Vender'},
-  {q:'Para chegar mais perto da verdade, o historiador compara várias…',a:'Fontes'},
-  {q:'Olhando a mesma foto, as pessoas veem do mesmo jeito ou de jeitos diferentes?',a:'Diferentes'}]},
- {id:'prof',titulo:'Profissões no tempo',cor:'#22d3ee',cartas:[
-  {q:'As profissões mudaram porque surgiram novas máquinas e…',a:'Tecnologias'},
-  {q:'O acendedor de lampião deixou de ser necessário com a chegada da…',a:'Energia elétrica'},
-  {q:'No começo da história, Seu Francisco entregava as cartas a pé ou de moto?',a:'A pé'},
-  {q:'A profissão de carteiro acabou ou continua existindo?',a:'Continua'},
-  {q:'Qual animal puxava o arado na fazenda antiga do Seu Pedro?',a:'Bois'},
-  {q:'Hoje, Seu Pedro usa o celular para saber se vai…',a:'Chover'},
-  {q:'Acendedor de lampião, leiteiro e datilógrafa são profissões antigas ou novas?',a:'Antigas'},
-  {q:'Designer gráfico e cientista de dados são profissões antigas ou novas?',a:'Novas'}]},
- {id:'mundo',titulo:'Pistas do passado no mundo',cor:'#fb923c',cartas:[
-  {q:'Quem viajava de um lugar para outro em busca de comida era…',a:'Nômade'},
-  {q:'Cultivar a terra se chama…',a:'Agricultura'},
-  {q:'O grande rio do Egito é o rio…',a:'Nilo'},
-  {q:'Os rios da Mesopotâmia são o Tigre e o…',a:'Eufrates'},
-  {q:'O grande rio da China é o rio…',a:'Amarelo'},
-  {q:'Tudo o que é importante para a memória de um povo é…',a:'Patrimônio'},
-  {q:'Museus, praças e estátuas são patrimônio…',a:'Material'},
-  {q:'Capoeira, festa junina e receita de família são patrimônio…',a:'Imaterial'},
-  {q:'O que você faz hoje será fonte histórica de…',a:'Amanhã'}]},
- {id:'tempo',titulo:'Tempo e memória',cor:'#84cc16',cartas:[
-  {q:'O relógio marca o tempo igual ou diferente para todos?',a:'Igual'},
-  {q:'Brincando com os amigos, o tempo parece passar rápido ou devagar?',a:'Rápido'},
-  {q:'Esperando na fila, o tempo parece passar rápido ou devagar?',a:'Devagar'},
-  {q:'O relógio de areia se chama…',a:'Ampulheta'}]}
+ {id:'tipos',titulo:'Tipos de fonte',cor:'#f472b6',cartas:[
+  {q:'Relatos e histórias contadas por pessoas são fonte…',a:'Oral',x:'Escrita'},
+  {q:'Diários, leis, jornais e cartas são fonte…',a:'Escrita',x:'Material'},
+  {q:'Pinturas, fotografias e mapas são fonte…',a:'Visual',x:'Material'},
+  {q:'Brinquedos, roupas, construções e utensílios são fonte…',a:'Material',x:'Visual'},
+  {q:'Uma pessoa contando uma história num vídeo é fonte…',a:'Oral',x:'Visual'},
+  {q:'A foto de um castelo é fonte…',a:'Visual',x:'Material'}]},
+ {id:'historiador',titulo:'Pensar como historiador',cor:'#60a5fa',cartas:[
+  {q:'As pistas do passado se chamam…',a:'Fontes históricas',x:'Linhas do tempo'},
+  {q:'Para chegar mais perto da verdade, o historiador usa…',a:'Várias fontes',x:'Uma fonte só'},
+  {q:'Olhando a mesma foto, as pessoas veem do mesmo jeito ou de jeitos diferentes?',a:'Jeitos diferentes',x:'Mesmo jeito'},
+  {q:'Alunos, professores e funcionários têm memórias iguais ou diferentes da mesma escola?',a:'Diferentes',x:'Iguais'},
+  {q:'Anúncios e propagandas de jornal foram feitos para…',a:'Vender',x:'Ensinar'},
+  {q:'Quando não temos todas as informações sobre uma foto, fazemos…',a:'Suposições',x:'Certezas'}]},
+ {id:'prof',titulo:'Profissões e tempo',cor:'#22d3ee',cartas:[
+  {q:'O acendedor de lampião deixou de ser necessário com a chegada da…',a:'Energia elétrica',x:'Internet'},
+  {q:'A profissão de carteiro acabou ou continua existindo?',a:'Continua',x:'Acabou'},
+  {q:'Na história do Doutor João, o cuidado com o paciente mudou ou continuou igual?',a:'Continuou igual',x:'Mudou'},
+  {q:'O relógio marca o tempo igual ou diferente para todos?',a:'Igual',x:'Diferente'},
+  {q:'O relógio de areia se chama…',a:'Ampulheta',x:'Calendário'}]},
+ {id:'mundo',titulo:'Povos antigos',cor:'#fb923c',cartas:[
+  {q:'Quem viajava de um lugar para outro em busca de comida era…',a:'Nômade',x:'Agricultor'},
+  {q:'Cultivar a terra se chama…',a:'Agricultura',x:'Caça'},
+  {q:'O grande rio do Egito é o rio…',a:'Nilo',x:'Amarelo'},
+  {q:'Os rios da Mesopotâmia são o Tigre e o…',a:'Eufrates',x:'Nilo'},
+  {q:'O grande rio da China é o rio…',a:'Amarelo',x:'Nilo'}]}
 ];
 </script>
 <script>
@@ -166,7 +147,7 @@ var S=null;
 
 window.inicio=function(){
   S=null; barra(0);
-  var h='<div class="ini"><h1>Flashcards: História</h1><p>Leia a pergunta, pense na resposta e toque na carta para ver.</p><div class="decks">';
+  var h='<div class="ini"><h1>Flashcards: História</h1><p>Leia a frase e toque na resposta certa.</p><div class="decks">';
   BARALHOS.forEach(function(d,i){
     h+='<button class="deck'+(vistos[d.id]?' feito':'')+'" data-d="'+i+'" style="--dc:'+d.cor+'"><b>'+esc(d.titulo)+'</b><i>'+(vistos[d.id]?'visto':d.cartas.length)+'</i></button>';
   });
@@ -177,7 +158,7 @@ window.inicio=function(){
 };
 function abre(lista,mistura){
   var cartas=[];
-  lista.forEach(function(d){ d.cartas.forEach(function(c){ cartas.push({c:c,d:d}); }); });
+  lista.forEach(function(d){ d.cartas.forEach(function(c){ cartas.push({c:c,d:d,ops:emb([c.a,c.x])}); }); });
   S={lista:lista, cartas:emb(cartas), i:0, mistura:!!mistura};
   try{ history.pushState({his3:'carta'},''); }catch(e){}
   carta();
@@ -187,12 +168,22 @@ function carta(){
   barra((S.i+1)/n);
   palco.innerHTML='<div class="topo" style="--dc:'+d.cor+'"><button class="volta" id="volta">&#8249; Baralhos</button><b>'+esc(d.titulo)+'</b><span>'+(S.i+1)+' de '+n+'</span></div>'
    +'<div class="flip" style="--dc:'+d.cor+'"><div class="fc" id="fc">'
-   +'<div class="face front">'+(c.f?'<img src="'+M+c.f+'" alt="">':'')+'<div class="tx"><div class="q">'+esc(c.q)+'</div><div class="vira">Toque para virar</div></div></div>'
-   +'<div class="face back"><div class="tx"><div class="qq">'+esc(c.q)+'</div><div class="a">'+esc(c.a)+'</div></div></div>'
+   +'<div class="face front">'+(c.f?'<img src="'+M+c.f+'" alt="">':'')+'<div class="q">'+esc(c.q)+'</div><div class="ops">'
+   +x.ops.map(function(o,k){ return '<button class="op" data-k="'+k+'">'+esc(o)+'</button>'; }).join('')+'</div></div>'
+   +'<div class="face back" id="bk"></div>'
    +'</div></div>'
    +'<div class="nav"><button id="ant">&#8249; Anterior</button><button class="forte" id="prox">'+(S.i===n-1?'Terminar':'Próxima &#8250;')+'</button></div>';
   var fc=$('fc');
-  fc.onclick=function(){ fc.classList.toggle('on'); };
+  function mostra(esc_){
+    var ok=esc_===c.a, bk=$('bk');
+    bk.className='face back '+(ok?'ok':'err');
+    bk.innerHTML='<div class="qq">'+esc(c.q)+'</div><div class="ver">'+(ok?'Acertou!':'Errou')+'</div>'
+      +'<div class="rot">'+(ok?'A resposta é':'A resposta certa é')+'</div><div class="a">'+esc(c.a)+'</div>'
+      +(ok?'':'<div class="tua">Você tocou em <s>'+esc(esc_)+'</s></div>');
+    fc.classList.add('on');
+  }
+  if(x.r!==undefined){ mostra(x.r); }
+  fc.querySelectorAll('.op').forEach(function(b){ b.onclick=function(e){ e.stopPropagation(); if(x.r!==undefined) return; x.r=x.ops[+b.getAttribute('data-k')]; mostra(x.r); }; });
   $('volta').onclick=function(){ history.back(); };
   $('ant').disabled=S.i===0;
   $('ant').onclick=function(){ if(S.i>0){ S.i--; carta(); } };
@@ -206,7 +197,8 @@ function carta(){
 function avanca(){
   if(S.i<S.cartas.length-1){ S.i++; carta(); return; }
   S.lista.forEach(function(d){ vistos[d.id]=1; }); guarda('his3_flash_vistos',JSON.stringify(vistos));
-  palco.innerHTML='<div class="fim"><h2>Muito bem!</h2><p>Você viu as '+S.cartas.length+' cartas.</p>'
+  var ac=S.cartas.filter(function(y){ return y.r===y.c.a; }).length;
+  palco.innerHTML='<div class="fim"><h2>Muito bem!</h2><p>Você acertou '+ac+' de '+S.cartas.length+'.</p>'
    +'<button class="forte" id="dn">Ver de novo, em outra ordem</button><button id="ob">Outro baralho</button></div>';
   var l=S.lista, m=S.mistura;
   $('dn').onclick=function(){ abre(l,m); };
@@ -214,7 +206,6 @@ function avanca(){
 }
 addEventListener('keydown',function(e){
   if(!S||!$('fc')) return;
-  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); $('fc').classList.toggle('on'); }
   if(e.key==='ArrowRight') avanca();
   if(e.key==='ArrowLeft'&&S.i>0){ S.i--; carta(); }
 });
@@ -223,6 +214,6 @@ inicio();
 })();
 </script>
 <script>window.SERA_ACCENT={accent:'#f59e0b',accent2:'#fbbf24'};</script>
-<script src="sera_theme.js?v=8fdc1241210"></script>
+<script src="sera_theme.js?v=7321ca31605"></script>
 </body>
 </html>
